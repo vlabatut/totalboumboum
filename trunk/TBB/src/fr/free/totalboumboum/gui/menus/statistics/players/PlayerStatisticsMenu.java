@@ -27,7 +27,9 @@ import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JToggleButton;
 
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -38,12 +40,9 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class PlayerStatisticsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	@SuppressWarnings("unused")
-	private JButton buttonGlicko2;
-	@SuppressWarnings("unused")
-	private JButton buttonScores;
-	@SuppressWarnings("unused")
-	private JButton buttonConfrontations;
+	private JToggleButton buttonGlicko2;
+	private JToggleButton buttonScores;
+	private JToggleButton buttonConfrontations;
 	@SuppressWarnings("unused")
 	private JButton buttonBack;
 
@@ -67,12 +66,17 @@ public class PlayerStatisticsMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonGlicko2 = GuiTools.createButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2,buttonWidth,buttonHeight,fontSize,this);
-		buttonScores = GuiTools.createButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES,buttonWidth,buttonHeight,fontSize,this);
-		buttonConfrontations = GuiTools.createButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS,buttonWidth,buttonHeight,fontSize,this);
+	    ButtonGroup group = new ButtonGroup();
+	    buttonGlicko2 = GuiTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2,buttonWidth,buttonHeight,fontSize,this);
+	    buttonGlicko2.setSelected(true);
+	    group.add(buttonGlicko2);
+		buttonScores = GuiTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES,buttonWidth,buttonHeight,fontSize,this);
+	    group.add(buttonScores);
+		buttonConfrontations = GuiTools.createToggleButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS,buttonWidth,buttonHeight,fontSize,this);
+	    group.add(buttonConfrontations);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_AI_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createVerticalGlue());		
+		add(Box.createVerticalGlue());
 
 		// panels
 		statsData = new PlayerStatisticsData(container);

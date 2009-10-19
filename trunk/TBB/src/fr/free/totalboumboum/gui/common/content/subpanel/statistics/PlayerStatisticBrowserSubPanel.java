@@ -93,7 +93,7 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 		
 		// buttons
 		{	// buttons panel
-			JPanel buttonsPanel = new JPanel();
+			buttonsPanel = new JPanel();
 			buttonsPanel.setOpaque(false);
 			Dimension dimension = new Dimension(getDataWidth(),buttonHeight);
 			buttonsPanel.setMinimumSize(dimension);
@@ -153,6 +153,7 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 	private int pageCount;	
 	private int lines;
 	private JPanel mainPanel;
+	private JPanel buttonsPanel;
 	
 	public List<Integer> getPlayersIds()
 	{	return playersIds;	
@@ -195,6 +196,19 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 			// build the panel			
 			int mainPanelHeight = mainPanel.getPreferredSize().height;
 			PlayerStatisticsSubPanel panel = new PlayerStatisticsSubPanel(getDataWidth(),mainPanelHeight);
+			panel.setShowPortrait(showPortrait);
+			panel.setShowType(showType);
+			panel.setShowMean(showMean);
+			panel.setShowStdev(showStdev);
+			panel.setShowVolatility(showVolatility);
+			panel.setShowRoundcount(showRoundcount);
+			panel.setShowScores(showScores);
+			panel.setShowRoundsPlayed(showRoundsPlayed);
+			panel.setShowRoundsWon(showRoundsWon);
+			panel.setShowRoundsLost(showRoundsLost);
+			panel.setShowRoundsDrawn(showRoundsDrawn);
+			panel.setShowTimePlayed(showTimePlayed);
+
 			try
 			{	panel.setPlayerIds(idList,lines);
 			}
@@ -274,17 +288,27 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 					PlayerRating playerRating1 = rankingService.getPlayerRating(playerId1);
 					PlayerRating playerRating2 = rankingService.getPlayerRating(playerId2);
 					double value1 = 0;
+					double stdev1 = 0;
 					if(playerRating1!=null)
-						value1 = playerRating1.getRating();
+					{	value1 = playerRating1.getRating();
+						stdev1 = playerRating1.getRatingDeviation();
+					}
 					double value2 = 0;
+					double stdev2 = 0;
 					if(playerRating2!=null)
-						value2 = playerRating2.getRating();
+					{	value2 = playerRating2.getRating();
+						stdev2 = playerRating2.getRatingDeviation();
+					}
 					if(value1>value2)
 						result = 1;
 					else if(value1<value2)
 						result = -1;
+					else if(stdev1<stdev2)
+						result = 1;
+					else if(stdev1>stdev2)
+						result = -1;
 					else
-						result = 0;
+						result = playerId1-playerId2;
 					return result;
 				}
 			};			
@@ -558,7 +582,7 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
-		int pos = GuiTools.indexOfComponent(mainPanel,label);
+		int pos = GuiTools.indexOfComponent(buttonsPanel,label);
 		
 		// previous page
 		if(pos==COL_PREVIOUS)
@@ -608,63 +632,88 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY								/////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private boolean showPortrait = true;
+	private boolean showType = true;
+	private boolean showMean = true;
+	private boolean showStdev = true;
+	private boolean showVolatility = true;
+	private boolean showRoundcount = true;
+	private boolean showScores = true;
+	private boolean showRoundsPlayed = true;
+	private boolean showRoundsWon = true;
+	private boolean showRoundsLost = true;
+	private boolean showRoundsDrawn = true;
+	private boolean showTimePlayed = true;
+
 	public void setShowPortrait(boolean showPortrait)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showPortrait = showPortrait;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowPortrait(showPortrait);
 	}
 
 	public void setShowType(boolean showType)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showType = showType;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowType(showType);
 	}
 
 	public void setShowMean(boolean showMean)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showMean = showMean;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowMean(showMean);
 	}
 
 	public void setShowStdev(boolean showStdev)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showStdev = showStdev;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowStdev(showStdev);
 	}
 
 	public void setShowVolatility(boolean showVolatility)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showVolatility = showVolatility;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowVolatility(showVolatility);
 	}
 
 	public void setShowRoundcount(boolean showRoundcount)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showRoundcount = showRoundcount;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowRoundcount(showRoundcount);
 	}
 
 	public void setShowScores(boolean showScores)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showScores = showScores;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowScores(showScores);
 	}
 
 	public void setShowRoundsPlayed(boolean showRoundsPlayed)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showRoundsPlayed = showRoundsPlayed;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowRoundsPlayed(showRoundsPlayed);
 	}
 
 	public void setShowRoundsWon(boolean showRoundsWon)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showRoundsWon = showRoundsWon;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowRoundsWon(showRoundsWon);
 	}
 
 	public void setShowRoundsLost(boolean showRoundsLost)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showRoundsLost = showRoundsLost;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowRoundsLost(showRoundsLost);
 	}
 
 	public void setShowRoundsDrawn(boolean showRoundsDrawn)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showRoundsDrawn = showRoundsDrawn;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowRoundsDrawn(showRoundsDrawn);
 	}
 
 	public void setShowTimePlayed(boolean showTimePlayed)
-	{	for(PlayerStatisticsSubPanel panel: listPanels)
+	{	this.showTimePlayed = showTimePlayed;
+		for(PlayerStatisticsSubPanel panel: listPanels)
 			panel.setShowTimePlayed(showTimePlayed);
 	}
 }

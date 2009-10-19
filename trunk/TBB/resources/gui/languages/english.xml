@@ -939,6 +939,8 @@
 						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
 						<text name="Human" value="Human"  tooltip="Human player" />
 						<text name="NoRank" value="-"  tooltip="This player is not ranked" />
+						<text name="Mean" value="Mean"  />
+						<text name="Total" value="Total"  />
 					</group>
 					<group name="Button">
 						<text name="Register" value="Register"  tooltip="Register the player to the ranking system" />
@@ -951,7 +953,7 @@
 				<group name="Glicko2">
 					<group name="Header">
 						<text name="Mean" value="Mean"  tooltip="Mean level" />
-						<text name="Roundcount" value="Played"  tooltip="Number of rounds played since the last update" />
+						<text name="RoundCount" value="Played"  tooltip="Number of rounds played since the last update" />
 						<text name="StandardDeviation" value="Standard-deviation"  tooltip="Standard-deviation" />
 						<text name="Volatility" value="Volatility"  tooltip="Player volatility" />
 					</group>

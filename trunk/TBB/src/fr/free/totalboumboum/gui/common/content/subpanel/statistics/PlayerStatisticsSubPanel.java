@@ -256,11 +256,6 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 		{	// init
 			RankingService rankingService = GameStatistics.getRankingService();
 			HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-			NumberFormat nfText = NumberFormat.getInstance();
-			nfText.setMaximumFractionDigits(2);
-			nfText.setMinimumFractionDigits(2);
-			NumberFormat nfTooltip = NumberFormat.getInstance();
-			nfTooltip.setMaximumFractionDigits(6);
 			// process each playerId
 			int line = 1;
 			while(line<lines && line<=playerIds.size())
@@ -287,7 +282,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 					col++;
 				}
 				// rank
-				{	if(playerRating==null)
+				{	if(playerRating!=null)
 					{	String text = Integer.toString(rankingService.getPlayerRank(playerId));
 						String tooltip = text;
 						setLabelText(line,col,text,tooltip);
@@ -328,7 +323,11 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				// mean
 				if(showMean)
 				{	double mean = playerRating.getRating();
+					NumberFormat nfText = NumberFormat.getInstance();
+					nfText.setMaximumFractionDigits(0);
 					String text = nfText.format(mean);
+					NumberFormat nfTooltip = NumberFormat.getInstance();
+					nfTooltip.setMaximumFractionDigits(6);
 					String tooltip = nfTooltip.format(mean);
 					setLabelText(line,col,text,tooltip);
 					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
@@ -339,7 +338,11 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				// standard-deviation
 				if(showStdev)
 				{	double stdev = playerRating.getRatingDeviation();
+					NumberFormat nfText = NumberFormat.getInstance();
+					nfText.setMaximumFractionDigits(0);
 					String text = nfText.format(stdev);
+					NumberFormat nfTooltip = NumberFormat.getInstance();
+					nfTooltip.setMaximumFractionDigits(6);
 					String tooltip = nfTooltip.format(stdev);
 					setLabelText(line,col,text,tooltip);
 					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
@@ -350,7 +353,12 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				// variability
 				if(showVolatility)
 				{	double variability = playerRating.getRatingVolatility();
+					NumberFormat nfText = NumberFormat.getInstance();
+					nfText.setMaximumFractionDigits(2);
+					nfText.setMinimumFractionDigits(2);
 					String text = nfText.format(variability);
+					NumberFormat nfTooltip = NumberFormat.getInstance();
+					nfTooltip.setMaximumFractionDigits(6);
 					String tooltip = nfTooltip.format(variability);
 					setLabelText(line,col,text,tooltip);
 					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
@@ -366,7 +374,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 					setLabelText(line,col,text,tooltip);
 					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>roundcountWidth)
-						volatilityWidth = temp;
+						roundcountWidth = temp;
 					col++;
 				}
 				// scores
@@ -570,6 +578,17 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				setColSubPrefWidth(colName,nameWidth);
 				setColSubMaxWidth(colName,nameWidth);
 			}
+			
+/*			if(roundcountCol!=-1)
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_ROUND_COUNT;
+				String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+				String avrgStr = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_MEAN);
+				float avrgRoundcount = totalRoundcount/(float)normRoundcount;
+				tooltip = tooltip+" ("+avrgStr+":"+avrgRoundcount+")";
+				setLabelText(0,roundcountCol,text,tooltip);
+			}
+*/
 		}		
 	}
 	
