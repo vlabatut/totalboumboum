@@ -1031,20 +1031,22 @@ public class Launcher
 	 * 		- sons
 	 * 		- BM'83
 	 * 		- réseau
+	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
 	 * 
-	 * 	- créer un log des commandes (désactivable)
-	 *  - faire une option qui enchaîne automatiquement les rounds/matches d'un match/tournoi
-	 *  - considérer le fait de séparer les suicide des bombeds-bombings
-	 *  - possibilité d'avance-rapide sur les matches à IA only
-	 *  - possibilité de configurer l'UPS des IA dans la GUI 
-	 *  - est-ce que le quick mode gère les stats ??
+	 * 	- créer un log des commandes (désactivable ds options advanced)
+	 *  - écran options stats
+	 *  	- faire une option qui enchaîne automatiquement les rounds/matches d'un match/tournoi
+	 *  	- possibilité d'avance-rapide sur les matches à IA only
+	 *  	- possibilité de configurer l'UPS des IA dans la GUI 
 	 *  - écran stats
 	 *  	- boutons suppression marchent pas non plus >> deregisterPlayer pas implémentée
 	 *  	- accélérer encore l'affichage des données ?
-	 *  	- options pour les stats ?
-	 *  		- bouton pour réinitialiser les stats
-	 *  		- paramètres de glicko2
-	 *  	- mettre en plus clair les exclus du classement glicko
+	 *  	- mettre en plus clair les exclus du classement glicko (aplha)
+	 *  - options pour les stats ?
+	 *  	- est-ce que le quick mode gère les stats ??
+	 *  	- bouton pour réinitialiser les stats
+	 *  	- paramètres de glicko2
+	 *  	- considérer le fait de séparer les suicide des bombeds-bombings
 	 */
 }
