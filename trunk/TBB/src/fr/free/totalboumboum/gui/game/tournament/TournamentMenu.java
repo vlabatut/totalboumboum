@@ -68,22 +68,7 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel
 {	private static final long serialVersionUID = 1L;
-	
-	private MenuPanel matchPanel;
-	private TournamentDescription<?> tournamentDescription;
-	private TournamentResults<?> tournamentResults;
-	private TournamentStatistics tournamentStatistics;
 		
-	@SuppressWarnings("unused")
-	private JButton buttonQuit;
-	@SuppressWarnings("unused")
-	private JButton buttonSave;
-	private JButton buttonMenu;
-	private JToggleButton buttonDescription;
-	private JToggleButton  buttonResults;
-	private JToggleButton  buttonStatistics;
-	private JButton buttonMatch;
-	
 	public TournamentMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
 	
@@ -123,7 +108,8 @@ buttonStatistics.setEnabled(false);
 
 	public void setTournament(AbstractTournament tournament)
 	{	buttonDescription.setSelected(true);
-	
+		matchPanel = null;
+		
 		// tournament
 		this.tournament = tournament;
 		if(tournament==null)
@@ -226,8 +212,20 @@ buttonStatistics.setEnabled(false);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// REFRESH	/////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
+	private JButton buttonQuit;
+	@SuppressWarnings("unused")
+	private JButton buttonSave;
+	private JButton buttonMenu;
+	private JToggleButton buttonDescription;
+	private JToggleButton  buttonResults;
+	private JToggleButton  buttonStatistics;
+	private JButton buttonMatch;
+	
+	private Thread thread = null;
+
 	private void refreshButtons()
 	{	if(tournament!=null)
 		{	
@@ -268,6 +266,38 @@ buttonStatistics.setEnabled(false);
 		}
 	}
 	
+	public void autoAdvance()
+	{	if(Configuration.getAisConfiguration().getAutoAdvance())
+		{	// go to match
+			if(buttonMatch.isEnabled())
+			{	thread = new Thread()
+				{	public void run()
+					{	try
+						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
+							SwingUtilities.invokeLater(new Runnable()
+							{	public void run()
+								{	buttonMatch.doClick();
+								}
+							});				
+						}
+						catch (InterruptedException e)
+						{	//e.printStackTrace();
+						}
+					}			
+				};
+				thread.start();
+			}
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private MenuPanel matchPanel;
+	private TournamentDescription<?> tournamentDescription;
+	private TournamentResults<?> tournamentResults;
+	private TournamentStatistics tournamentStatistics;
+
 	private void refreshPanels()
 	{	tournamentDescription.refresh();
 		tournamentResults.refresh();
@@ -279,7 +309,12 @@ buttonStatistics.setEnabled(false);
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT))
+	{	// possibly interrupt any pending button-related thread first
+		if(thread!=null && thread.isAlive())
+			thread.interrupt();
+		
+		// process the event
+		if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT))
 		{	tournament.cancel();
 			getFrame().setMainMenuPanel();
 	    }
@@ -292,9 +327,7 @@ buttonStatistics.setEnabled(false);
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH))
-		{	
-			
-			tournament.finish();
+		{	tournament.finish();
 			parent.refresh();
 			replaceWith(parent);
 	    }
@@ -332,6 +365,7 @@ buttonStatistics.setEnabled(false);
 			matchPanel = mPanel;
 			Match match = tournament.getCurrentMatch();		
 			mPanel.setMatch(match);
+			mPanel.autoAdvance();
 			replaceWith(matchPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
@@ -367,6 +401,7 @@ buttonStatistics.setEnabled(false);
 			matchPanel = rPanel;
 			Round round = match.getCurrentRound();
 			rPanel.setRound(round);
+			rPanel.autoAdvance();
 			replaceWith(matchPanel);
 	    }
 	}

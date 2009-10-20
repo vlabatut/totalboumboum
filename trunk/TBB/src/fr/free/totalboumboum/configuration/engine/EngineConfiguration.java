@@ -44,10 +44,6 @@ public class EngineConfiguration
 	private long nanoPeriod;
 	/** speed coefficient */
 	private double speedCoeff; //NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
-	/** ai updates per second */
-	private int aiUps = 50;
-	/** ai update period */
-	private long aiPeriod = (long)(1000.0/aiUps);
 
 	public void setAutoFps(boolean autoFps)
 	{	this.autoFps = autoFps;		
@@ -71,13 +67,6 @@ public class EngineConfiguration
 	{	return nanoPeriod;
 	}
 	
-	public int getAiUps()
-	{	return aiUps;
-	}
-	public long getAiPeriod()
-	{	return aiPeriod;
-	}
-
 	public double getSpeedCoeff()
 	{	return speedCoeff;
 	}

@@ -824,10 +824,20 @@ public class Launcher
 	 * - API IA : A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
 	 * - API IA : accès à la taille des cases
 	 * - ajout du système Glicko2
-	 * - adaptation de Glicko2 (serializable, généricité, nouvelles méthodes...)
+	 * - adaptation de Glicko2 :
+	 * 		- serializable
+	 * 		- utilisation d'une clé entière pour représenter les joueurs
+	 * 		- utilisation de la généricité
+	 * 		- nouvelles méthodes pour obtenir le classement des joueurs 
+	 *    	- suivi du nombre de matchs joués depuis la dernière mise à jour
+	 *    	- implémentation de la fonction permettant de dé-registrer un joueur
 	 * - ajout du rang dans les panels affichant la liste des joueurs d'un tournoi/match
 	 * - nouvelles classes pour gérer les statistiques globales du jeu : nombre de rounds joués par joueur, nombre de bombes posées, etc.
 	 * - quelques bugs corrigés dans l'interface graphique, notamment en ce qui concerne le calcul des largeurs de colonnes dans certaines tables
+	 * - GUI : affichage des statistiques : classement glicko2, confrontations, scores
+	 * - GUI : possibilité de changer le critère de classement dans l'écran de stats
+	 * - GUI : possibilité d'enregistrer/déregistrer des joueurs dans l'écran de stats
+	 * - enchaînement automatique des matches d'un tournoi, par ex. pour faire tourner des IA sur tout un tournoi automatiquement
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -845,6 +855,10 @@ public class Launcher
 	 * - quand on balance une bombe, puis une autre, puis fait péter la première et enfin la seconde 
 	 *   juste à la fin des flammes de la première, alors l'explosion de la 2nde est circonsrite à la
 	 *   case où elle atterrit.
+	 *   
+	 * - pb de réinitialisation : 
+	 * 		- jouer un tournoi single (par ex supercup) en entier
+	 * 		- jouer un tournoi de type cup en suivant : il y a un pb sur le MatchPanel, qui semble n'avoir pas été réinit à null 
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1035,14 +1049,11 @@ public class Launcher
 	 * 		- sortir de bêta
 	 * 
 	 * 	- créer un log des commandes (désactivable ds options advanced)
-	 *  - écran options stats
-	 *  	- faire une option qui enchaîne automatiquement les rounds/matches d'un match/tournoi
+	 *  - écran options IA
+	 *  	- faire l'écran GUI
 	 *  	- possibilité d'avance-rapide sur les matches à IA only
-	 *  	- possibilité de configurer l'UPS des IA dans la GUI 
 	 *  - écran stats
-	 *  	- boutons suppression marchent pas non plus >> deregisterPlayer pas implémentée
 	 *  	- accélérer encore l'affichage des données ?
-	 *  	- mettre en plus clair les exclus du classement glicko (aplha)
 	 *  - options pour les stats ?
 	 *  	- est-ce que le quick mode gère les stats ??
 	 *  	- bouton pour réinitialiser les stats

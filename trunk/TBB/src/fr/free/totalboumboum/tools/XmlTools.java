@@ -60,10 +60,12 @@ public class XmlTools
 	public static final String ELT_ADJUST = "adjust";
 	public static final String ELT_ANIMES = "animes";
 	public static final String ELT_AI = "ai";
+	public static final String ELT_AIS = "ais";
 	public static final String ELT_ALL_LEVELS = "all-levels";
 	public static final String ELT_ARCHIVE = "archive";
 	public static final String ELT_AUTHOR = "author";
 	public static final String ELT_AUTHORS = "authors";
+	public static final String ELT_AUTO_ADVANCE = "autoAdvance";
 	public static final String ELT_BIGWALL = "bigwall";
 	public static final String ELT_BIGWALLS = "bigwalls";
 	public static final String ELT_BLOCK = "block";
@@ -119,6 +121,7 @@ public class XmlTools
 	public static final String ELT_HARDWALLS = "hardwalls";
 	public static final String ELT_HERO = "hero";
 	public static final String ELT_HEROES = "heroes";
+	public static final String ELT_HIDE_ALLAIS = "hideAllAis";
 	public static final String ELT_INGAME = "ingame";
 	public static final String ELT_INSTANCE = "instance";
 	public static final String ELT_ITEM = "item";
@@ -216,6 +219,7 @@ public class XmlTools
 	public static final String ELT_TOURNAMENT = "tournament";
 	public static final String ELT_TRAJECTORIES = "trajectories";
 	public static final String ELT_TRAJECTORY = "trajectory";
+	public static final String ELT_UPS = "ups";
 	public static final String ELT_VALUE = "value";
 	public static final String ELT_VALUES = "values";
 	public static final String ELT_VARIABLE_ITEM = "variable-item";
@@ -246,6 +250,7 @@ public class XmlTools
 	public static final String ATT_CONTROLS = "controls";
 	public static final String ATT_COUNT = "count";
 	public static final String ATT_DEFAULT = "default";
+	public static final String ATT_DELAY = "delay";
 	public static final String ATT_DIRECTION = "direction";
 	public static final String ATT_DRAW = "draw";
 	public static final String ATT_DURATION = "duration";

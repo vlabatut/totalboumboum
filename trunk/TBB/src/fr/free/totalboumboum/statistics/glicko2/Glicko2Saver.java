@@ -40,7 +40,7 @@ import fr.free.totalboumboum.statistics.glicko2.jrs.ResultsBasedRankingService;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class Glicko2Saver
-{	private static final boolean verbose = true;
+{	private static final boolean verbose = false;
 
 	public static void saveStatistics(RankingService rankingService) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init files

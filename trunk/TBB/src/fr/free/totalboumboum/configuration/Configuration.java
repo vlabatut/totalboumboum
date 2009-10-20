@@ -27,6 +27,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.ai.AisConfigurationLoader;
+import fr.free.totalboumboum.configuration.ai.AisConfigurationSaver;
+import fr.free.totalboumboum.configuration.ai.AisConfiguration;
 import fr.free.totalboumboum.configuration.controls.ControlsConfiguration;
 import fr.free.totalboumboum.configuration.controls.ControlsConfigurationLoader;
 import fr.free.totalboumboum.configuration.controls.ControlsConfigurationSaver;
@@ -55,6 +58,7 @@ public class Configuration
 		gameConfiguration = GameConfigurationLoader.loadGameConfiguration();
 		profilesConfiguration = ProfilesConfigurationLoader.loadProfilesConfiguration();
 		videoConfiguration = VideoConfigurationLoader.loadVideoConfiguration();
+		aisConfiguration = AisConfigurationLoader.loadAisConfiguration();
 	}
 	
 	public static void saveConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
@@ -63,6 +67,7 @@ public class Configuration
 		GameConfigurationSaver.saveGameConfiguration(gameConfiguration);
 		ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfiguration);
 		VideoConfigurationSaver.saveVideoConfiguration(videoConfiguration);
+		AisConfigurationSaver.saveAisConfiguration(aisConfiguration);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -125,4 +130,15 @@ public class Configuration
 	{	return profilesConfiguration;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// AI			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static AisConfiguration aisConfiguration;
+
+	public static void setAisConfiguration(AisConfiguration aisConfiguration)
+	{	Configuration.aisConfiguration = aisConfiguration;
+	}
+	public static AisConfiguration getAisConfiguration()
+	{	return aisConfiguration;
+	}
 }

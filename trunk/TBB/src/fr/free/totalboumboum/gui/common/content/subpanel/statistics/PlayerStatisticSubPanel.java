@@ -27,6 +27,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +40,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
@@ -351,6 +355,8 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					// color
 					Color clr = profile.getSpriteColor().getColor();
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+					if(playerRating==null)
+						alpha = alpha/3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					panel.setLineBackground(line,bg);
 					// button
@@ -405,59 +411,67 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					}
 					// mean
 					if(showMean)
-					{	double mean = playerRating.getRating();
-						NumberFormat nfText = NumberFormat.getInstance();
-						nfText.setMaximumFractionDigits(0);
-						String text = nfText.format(mean);
-						NumberFormat nfTooltip = NumberFormat.getInstance();
-						nfTooltip.setMaximumFractionDigits(6);
-						String tooltip = nfTooltip.format(mean);
-						panel.setLabelText(line,col,text,tooltip);
-						int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-						if(temp>colWidths.get(col))
-							colWidths.set(col,temp);
+					{	if(playerRating!=null)
+						{	double mean = playerRating.getRating();
+							NumberFormat nfText = NumberFormat.getInstance();
+							nfText.setMaximumFractionDigits(0);
+							String text = nfText.format(mean);
+							NumberFormat nfTooltip = NumberFormat.getInstance();
+							nfTooltip.setMaximumFractionDigits(6);
+							String tooltip = nfTooltip.format(mean);
+							panel.setLabelText(line,col,text,tooltip);
+							int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+							if(temp>colWidths.get(col))
+								colWidths.set(col,temp);
+						}
 						col++;
 					}
 					// standard-deviation
 					if(showStdev)
-					{	double stdev = playerRating.getRatingDeviation();
-						NumberFormat nfText = NumberFormat.getInstance();
-						nfText.setMaximumFractionDigits(0);
-						String text = nfText.format(stdev);
-						NumberFormat nfTooltip = NumberFormat.getInstance();
-						nfTooltip.setMaximumFractionDigits(6);
-						String tooltip = nfTooltip.format(stdev);
-						panel.setLabelText(line,col,text,tooltip);
-						int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-						if(temp>colWidths.get(col))
-							colWidths.set(col,temp);
+					{	if(playerRating!=null)
+						{	double stdev = playerRating.getRatingDeviation();
+							NumberFormat nfText = NumberFormat.getInstance();
+							nfText.setMaximumFractionDigits(0);
+							String text = nfText.format(stdev);
+							NumberFormat nfTooltip = NumberFormat.getInstance();
+							nfTooltip.setMaximumFractionDigits(6);
+							String tooltip = nfTooltip.format(stdev);
+							panel.setLabelText(line,col,text,tooltip);
+							int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+							if(temp>colWidths.get(col))
+								colWidths.set(col,temp);
+						}
 						col++;
 					}
 					// variability
 					if(showVolatility)
-					{	double variability = playerRating.getRatingVolatility();
-						NumberFormat nfText = NumberFormat.getInstance();
-						nfText.setMaximumFractionDigits(2);
-						nfText.setMinimumFractionDigits(2);
-						String text = nfText.format(variability);
-						NumberFormat nfTooltip = NumberFormat.getInstance();
-						nfTooltip.setMaximumFractionDigits(6);
-						String tooltip = nfTooltip.format(variability);
-						panel.setLabelText(line,col,text,tooltip);
-						int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-						if(temp>colWidths.get(col))
-							colWidths.set(col,temp);
+					{	if(playerRating!=null)
+						{	double variability = playerRating.getRatingVolatility();
+							NumberFormat nfText = NumberFormat.getInstance();
+							nfText.setMaximumFractionDigits(2);
+							nfText.setMinimumFractionDigits(2);
+							String text = nfText.format(variability);
+							NumberFormat nfTooltip = NumberFormat.getInstance();
+							nfTooltip.setMaximumFractionDigits(6);
+							String tooltip = nfTooltip.format(variability);
+							panel.setLabelText(line,col,text,tooltip);
+							int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+							if(temp>colWidths.get(col))
+								colWidths.set(col,temp);
+						}
 						col++;
 					}
 					// roundcount
 					if(showRoundcount)
-					{	int roundcount = playerRating.getRoundcount();
-						String text = Integer.toString(roundcount);
-						String tooltip = text;
-						panel.setLabelText(line,col,text,tooltip);
-						int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-						if(temp>colWidths.get(col))
-							colWidths.set(col,temp);
+					{	if(playerRating!=null)
+						{	int roundcount = playerRating.getRoundcount();
+							String text = Integer.toString(roundcount);
+							String tooltip = text;
+							panel.setLabelText(line,col,text,tooltip);
+							int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+							if(temp>colWidths.get(col))
+								colWidths.set(col,temp);
+						}
 						col++;
 					}
 					// scores
@@ -943,6 +957,34 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					GameStatistics.getRankingService().deregisterPlayer(playerId);
 				else
 					GameStatistics.getRankingService().registerPlayer(playerId);
+				// save the new rankings
+				try
+				{	GameStatistics.saveStatistics();
+				}
+				catch (IllegalArgumentException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SecurityException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IllegalAccessException e1)
+				{	e1.printStackTrace();
+				}
+				catch (NoSuchFieldException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ClassNotFoundException e1)
+				{	e1.printStackTrace();
+				}
 				refresh();
 			}
 		}
