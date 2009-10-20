@@ -46,6 +46,7 @@ import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.game.round.RoundSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -184,9 +185,10 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		{	public void run()
 			{	//System.out.println("the round is over.");
 				parent.refresh();
+				((RoundSplitPanel)parent).autoAdvance();
 				replaceWith(parent);
 			}
-		});				
+		});
 	}
 	
 	/////////////////////////////////////////////////////////////////

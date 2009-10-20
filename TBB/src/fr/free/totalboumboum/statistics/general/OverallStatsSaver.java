@@ -37,7 +37,7 @@ import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class OverallStatsSaver
-{	private static final boolean verbose = true;
+{	private static final boolean verbose = false;
 
 	public static void saveStatistics(HashMap<Integer,PlayerStats> playersStats) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init files

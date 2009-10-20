@@ -24,7 +24,6 @@ package fr.free.totalboumboum.statistics.glicko2.jrs;
  */
 
 import java.util.Iterator;
-import java.util.List;
 
 /** A subclass of <code>RankingService</code> that updates players' ratings
   * after a specified number of results has been posted.
@@ -60,7 +59,7 @@ public class ResultsBasedRankingService extends RankingService {
         super.postResults(gameResults);
         
         int numResultsThisPeriod = 0;
-        Iterator<List<PairWiseGameResult>> iter = currentPeriodGameResults.values().iterator();
+        Iterator<PairWiseGameResultsList> iter = currentPeriodGameResults.values().iterator();
         while (iter.hasNext()) {
             int numPlayerResults = iter.next().size();
             numResultsThisPeriod += numPlayerResults;

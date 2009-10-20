@@ -3,9 +3,9 @@
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
 	<tournament name="GsuSuperCup200809" />
 	<players>
-		<player file="12" color="PURPLE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="4" color="BLUE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="59" color="BROWN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="2" color="BROWN" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="59" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="53" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="1" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 </gameTournament>

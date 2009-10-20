@@ -24,6 +24,7 @@ package fr.free.totalboumboum.statistics;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -156,7 +157,7 @@ public class GameStatistics
 	{	
 		// create the game results objects
 		GameResults gameResults = new GameResults();
-		/*		if(isTeamGame())
+		/*		if(isTeamGame()) NOTE to be adapted
 		{	Iterator teamNames = teamScores.keySet().iterator();
 			while (teamNames.hasNext())
 			{	String teamName = (String)teamNames.next();
@@ -173,10 +174,14 @@ public class GameStatistics
 		else*/
 		{	float[] points = stats.getPoints();
 			ArrayList<String> players = stats.getPlayers();
+			Set<Integer> registeredPlayers = rankingService.getPlayers();
 			for(int index=0;index<points.length;index++)
 			{	int playerId = Integer.parseInt(players.get(index));
-				double playerScore = points[index];
-				gameResults.addPlayerResults(playerId,playerScore);
+				// only consider the registered players
+				if(registeredPlayers.contains(playerId))
+				{	double playerScore = points[index];
+					gameResults.addPlayerResults(playerId,playerScore);
+				}
 			}
 		}
 		

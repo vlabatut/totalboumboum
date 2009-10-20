@@ -69,7 +69,7 @@ public class RankingService implements Serializable {
       * period, indexed by player id.
       * (ie. <code>Map&lt;Object, List&lt;PairWiseGameResult&gt;&gt;</code>)
       */
-    HashMap<Integer,List<PairWiseGameResult>> currentPeriodGameResults;
+    HashMap<Integer,PairWiseGameResultsList> currentPeriodGameResults;
         
     /** List of RankingServiceListeners to notify when rating periods begin
       * and end.
@@ -87,7 +87,7 @@ public class RankingService implements Serializable {
       */
     public RankingService() {
         playerRatings = new HashMap<Integer, PlayerRating>();
-        currentPeriodGameResults = new HashMap<Integer, List<PairWiseGameResult>>();
+        currentPeriodGameResults = new HashMap<Integer, PairWiseGameResultsList>();
         listeners = new ArrayList<RankingServiceListener>();
         periodCount = 0;
     }
@@ -169,10 +169,31 @@ public class RankingService implements Serializable {
       * @param playerId 
       *     A unique identifier for the player.
       *
-      * @todo
-      *     To be implemented.
+      * @author
+      *     Vincent
       */
-    public void deregisterPlayer(Integer playerId) {
+    public void deregisterPlayer(Integer playerId)
+    {	// get the list of opponents
+    	Set<Integer> set = new HashSet<Integer>();
+    	PairWiseGameResultsList results = currentPeriodGameResults.get(playerId);
+    	for(PairWiseGameResult result: results)
+    	{	Integer opponentId = result.getOpponentId();
+    		set.add(opponentId);
+    	}
+    	// remove the player in the opponentss' results
+    	for(Integer opponentId: set)
+    	{	PairWiseGameResultsList opponentResults = currentPeriodGameResults.get(opponentId);
+    		Iterator<PairWiseGameResult> it = opponentResults.iterator();
+    		while(it.hasNext())
+    		{	PairWiseGameResult opponentResult = it.next();
+    			if(opponentResult.getOpponentId().equals(playerId))
+    				it.remove();
+    		}
+    	}
+    	// remove the player's ratings
+    	playerRatings.remove(playerId);
+    	// remove the player's results
+    	currentPeriodGameResults.remove(playerId);
     }
     
     /** Get a list of the ids of the players registered with the service.
@@ -219,10 +240,11 @@ public class RankingService implements Serializable {
                     Integer teamMemberId = teamMemberIds.next();
 
                     // NOTE added by Vincent to keep track of the rounds played since last update
-                	PlayerRating playerRating = getPlayerRating(teamMemberId);
-                	playerRating.incrementRoundcount();
+                	{	PlayerRating playerRating = getPlayerRating(teamMemberId);
+                		playerRating.incrementRoundcount();
+                	}
                     
-                    List<PairWiseGameResult> teamMemberCurrentPeriodResults = currentPeriodGameResults.get(teamMemberId);
+                    PairWiseGameResultsList teamMemberCurrentPeriodResults = currentPeriodGameResults.get(teamMemberId);
                     ((PairWiseGameResultsList)teamMemberCurrentPeriodResults).incrementNumberOfGamesPlayed();
                     Iterator<Integer> opposingTeamIds = gameResults.getTeams().iterator();
                     while (opposingTeamIds.hasNext()) {
@@ -253,8 +275,9 @@ public class RankingService implements Serializable {
             	Integer playerId = playerIds.next();
             	
             	// NOTE added by Vincent to keep track of the rounds played since last update
-            	PlayerRating playerRating = getPlayerRating(playerId);
-            	playerRating.incrementRoundcount();
+            	{	PlayerRating playerRating = getPlayerRating(playerId);
+            		playerRating.incrementRoundcount();
+            	}
             	
                 double playerScore = gameResults.getPlayerResults(playerId);
                 
@@ -266,7 +289,7 @@ public class RankingService implements Serializable {
                 // within the value of the rs.drawThreshhold property), add the
                 // draw result to the player's results list.
                 
-                List<PairWiseGameResult> playersCurrentPeriodResults = currentPeriodGameResults.get(playerId);
+                PairWiseGameResultsList playersCurrentPeriodResults = currentPeriodGameResults.get(playerId);
                 ((PairWiseGameResultsList)playersCurrentPeriodResults).incrementNumberOfGamesPlayed();
                 Iterator<Integer> opponentIds = gameResults.getPlayers().iterator();
                 while (opponentIds.hasNext()) {
@@ -311,7 +334,7 @@ public class RankingService implements Serializable {
       *     try calculating the values once and caching them, and see if there
       *     is much improvement in execution time.
       */
-    HashMap<Integer,PlayerRating> computePlayerRatings(Map<Integer,PlayerRating> prePeriodRatings, Map<Integer,List<PairWiseGameResult>> periodGameResults) {
+    HashMap<Integer,PlayerRating> computePlayerRatings(Map<Integer,PlayerRating> prePeriodRatings, Map<Integer,PairWiseGameResultsList> periodGameResults) {
         
         long start = System.currentTimeMillis();
         

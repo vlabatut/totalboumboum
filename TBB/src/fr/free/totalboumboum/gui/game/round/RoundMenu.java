@@ -37,6 +37,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -44,30 +45,17 @@ import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.loop.LoopPanel;
+import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.game.round.results.RoundResults;
 import fr.free.totalboumboum.gui.game.round.statistics.RoundStatistics;
 import fr.free.totalboumboum.gui.game.save.SaveSplitPanel;
+import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 {	private static final long serialVersionUID = 1L;
-	
-	private LoopPanel loopPanel;
-	private RoundDescription roundDescription;
-	private RoundResults roundResults;
-	private RoundStatistics roundStatistics;
-		
-	private JButton buttonQuit;
-	private JButton buttonSave;
-	private JButton buttonMatch;
-	private JToggleButton buttonDescription;
-	private JToggleButton buttonResults;
-	private JToggleButton buttonStatistics;
-	private JButton buttonPlay;
-	
-	private JProgressBar loadProgressBar;
 	
 	public RoundMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
@@ -110,6 +98,83 @@ buttonStatistics.setEnabled(false);
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private JButton buttonQuit;
+	private JButton buttonSave;
+	private JButton buttonMatch;
+	private JToggleButton buttonDescription;
+	private JToggleButton buttonResults;
+	private JToggleButton buttonStatistics;
+	private JButton buttonPlay;
+	
+	private Thread thread = null;
+	
+	private void refreshButtons()
+	{	if(round!=null)
+		{	if(round.isOver())
+			{	// play
+				buttonPlay.setEnabled(false);
+				// finish
+				GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_FINISH, buttonMatch);
+			}
+			else
+			{	// play
+				buttonPlay.setEnabled(true);
+				// match
+				GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
+			}
+		}
+		else
+		{	// play
+			buttonPlay.setEnabled(false);
+		}
+	}
+	
+	public void autoAdvance()
+	{	if(Configuration.getAisConfiguration().getAutoAdvance())
+		{	// play round
+			if(buttonPlay.isEnabled())
+			{	thread = new Thread()
+				{	public void run()
+					{	try
+						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
+							SwingUtilities.invokeLater(new Runnable()
+							{	public void run()
+								{	buttonPlay.doClick();
+								}
+							});				
+						}
+						catch (InterruptedException e)
+						{	//e.printStackTrace();
+						}
+					}			
+				};
+				thread.start();
+			}
+			// go back to match
+			else if(buttonMatch.isEnabled())
+			{	thread = new Thread()
+				{	public void run()
+					{	try
+						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
+							SwingUtilities.invokeLater(new Runnable()
+							{	public void run()
+								{	buttonMatch.doClick();
+								}
+							});				
+						}
+						catch (InterruptedException e)
+						{	//e.printStackTrace();
+						}
+					}			
+				};
+				thread.start();
+			}
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Round round;
@@ -133,29 +198,13 @@ buttonStatistics.setEnabled(false);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// REFRESH	/////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void refreshButtons()
-	{	if(round!=null)
-		{	if(round.isOver())
-			{	// play
-				buttonPlay.setEnabled(false);
-				// finish
-				GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_FINISH, buttonMatch);
-			}
-			else
-			{	// play
-				buttonPlay.setEnabled(true);
-				// match
-				GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
-			}
-		}
-		else
-		{	// play
-			buttonPlay.setEnabled(false);
-		}
-	}
-	
+	private LoopPanel loopPanel;
+	private RoundDescription roundDescription;
+	private RoundResults roundResults;
+	private RoundStatistics roundStatistics;
+
 	private void refreshPanels()
 	{	roundDescription.refresh();
 		roundResults.refresh();
@@ -167,7 +216,12 @@ buttonStatistics.setEnabled(false);
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_QUIT))
+	{	// possibly interrupt any pending button-related thread first
+		if(thread!=null && thread.isAlive())
+			thread.interrupt();
+		
+		// process the event
+		if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_QUIT))
 		{	round.cancel();
 			getFrame().setMainMenuPanel();
 	    }
@@ -183,6 +237,10 @@ buttonStatistics.setEnabled(false);
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_FINISH))
 		{	round.finish();
 			parent.refresh();
+			if(parent instanceof MatchSplitPanel)
+				((MatchSplitPanel)parent).autoAdvance();
+			else
+				((TournamentSplitPanel)parent).autoAdvance();
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION))
@@ -257,6 +315,8 @@ buttonStatistics.setEnabled(false);
 	/////////////////////////////////////////////////////////////////
 	// ROUND RENDER PANEL	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private JProgressBar loadProgressBar;
+	
 	@Override
 	public void roundOver()
 	{	SwingUtilities.invokeLater(new Runnable()
@@ -271,7 +331,7 @@ buttonStatistics.setEnabled(false);
 				roundResults.refresh();
 				buttonResults.doClick();
 			}
-		});	
+		});
 	}
 
 	@Override

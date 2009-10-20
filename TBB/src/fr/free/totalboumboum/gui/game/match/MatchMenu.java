@@ -37,6 +37,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchRenderPanel;
@@ -49,27 +50,13 @@ import fr.free.totalboumboum.gui.game.match.results.MatchResults;
 import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
 import fr.free.totalboumboum.gui.game.round.RoundSplitPanel;
 import fr.free.totalboumboum.gui.game.save.SaveSplitPanel;
+import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 {	private static final long serialVersionUID = 1L;
-	
-	private RoundSplitPanel roundPanel;
-	private MatchDescription matchDescription;
-	private MatchResults matchResults;
-	private MatchStatistics matchStatistics;
 		
-	@SuppressWarnings("unused")
-	private JButton buttonQuit;
-	@SuppressWarnings("unused")
-	private JButton buttonSave;
-	private JButton buttonTournament;
-	private JToggleButton buttonDescription;
-	private JToggleButton buttonResults;
-	private JToggleButton buttonStatistics;
-	private JButton buttonRound;
-	
 	public MatchMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
 	
@@ -183,8 +170,20 @@ buttonStatistics.setEnabled(false);
 	}
 */
 	/////////////////////////////////////////////////////////////////
-	// REFRESH	/////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
+	private JButton buttonQuit;
+	@SuppressWarnings("unused")
+	private JButton buttonSave;
+	private JButton buttonTournament;
+	private JToggleButton buttonDescription;
+	private JToggleButton buttonResults;
+	private JToggleButton buttonStatistics;
+	private JButton buttonRound;
+	
+	private Thread thread = null;
+	
 	private void refreshButtons()
 	{	if(match!=null)
 		{	if(match.isOver())
@@ -211,6 +210,57 @@ buttonStatistics.setEnabled(false);
 		}
 	}
 	
+	public void autoAdvance()
+	{	if(Configuration.getAisConfiguration().getAutoAdvance())
+		{	// go to round
+			if(buttonRound.isEnabled())
+			{	thread = new Thread()
+				{	public void run()
+					{	try
+						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
+							SwingUtilities.invokeLater(new Runnable()
+							{	public void run()
+								{	buttonRound.doClick();
+								}
+							});				
+						}
+						catch (InterruptedException e)
+						{	//e.printStackTrace();
+						}
+					}			
+				};
+				thread.start();
+			}
+			// go back to tournament
+			else if(buttonTournament.isEnabled())
+			{	thread = new Thread()
+				{	public void run()
+					{	try
+						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
+							SwingUtilities.invokeLater(new Runnable()
+							{	public void run()
+								{	buttonTournament.doClick();
+								}
+							});				
+						}
+						catch (InterruptedException e)
+						{	//e.printStackTrace();
+						}
+					}			
+				};
+				thread.start();
+			}
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private RoundSplitPanel roundPanel;
+	private MatchDescription matchDescription;
+	private MatchResults matchResults;
+	private MatchStatistics matchStatistics;
+		
 	private void refreshPanels()
 	{	matchDescription.refresh();
 		matchResults.refresh();
@@ -222,7 +272,12 @@ buttonStatistics.setEnabled(false);
 	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_QUIT))
+	{	// possibly interrupt any pending button-related thread first
+		if(thread!=null && thread.isAlive())
+			thread.interrupt();
+		
+		// process the event
+		if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_QUIT))
 		{	match.cancel();
 			getFrame().setMainMenuPanel();
 	    }
@@ -238,6 +293,7 @@ buttonStatistics.setEnabled(false);
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_FINISH))
 		{	match.finish();
 			parent.refresh();
+			((TournamentSplitPanel)parent).autoAdvance();
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_DESCRIPTION))
@@ -288,6 +344,7 @@ buttonStatistics.setEnabled(false);
 			roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 			Round round = match.getCurrentRound();		
 			roundPanel.setRound(round);
+			roundPanel.autoAdvance();
 			replaceWith(roundPanel);
 	    }
 	} 
