@@ -108,6 +108,7 @@
 		<group name="Options">
 			<group name="Button">
 				<text name="Advanced" value="Advanced" tooltip="Modify the advanced settings" />
+				<text name="Ais" value="AI" tooltip="Modify the artificial intelligence settings" />
 				<text name="Back" value="Back" tooltip="Go back to the main menu" />
 				<text name="Cancel" value="Cancel" tooltip="Cancel the last modifications and go back to the options menu" />
 				<text name="Confirm" value="Confirm" tooltip="Confirm the last modifications and go back to the options menu" />
@@ -122,6 +123,32 @@
 			<group name="Confirm">
 				<text name="Question" value="Warning : these modifications will cause the game to restart" tooltip="These modifications will cause the game to restart" />
 				<text name="Title" value="Warning" tooltip="Game restart needed" />
+			</group>
+			
+			<group name="Ais">
+				<text name="Title" value="Artificial intelligence settings" tooltip="Modify AI settings" />
+				<group name="Line">
+					<group name="AutoAdvance">
+						<text name="Title" value="Auto-advance" tooltip="Automatically advances to the next round (for large-scale AIs testing)" />
+						<text name="Disabled" value="Disabled" tooltip="Automatic advance is disabled" />
+						<text name="Enabled" value="Enabled" tooltip="Automatic advance is enabled" />
+					</group>
+					<group name="AutoAdvanceDelay">
+						<text name="Title" value="Auto-advance delay" tooltip="Delay (in seconds) before auto-advance" />
+						<text name="Plus" value="Plus" tooltip="Increase the delay before auto-advance" />
+						<text name="Minus" value="Minus" tooltip="Decrease the delay before auto-advance" />
+					</group>
+					<group name="Ups">
+						<text name="Title" value="UPS" tooltip="AI udates per second rate" />
+						<text name="Plus" value="Plus" tooltip="Increase the updates per second rate" />
+						<text name="Minus" value="Minus" tooltip="Decrease the updates per second rate" />
+					</group>
+					<group name="HideAllAis">
+						<text name="Title" value="Simule all-AIs" tooltip="Simulate AIs-only rounds (they don't even show on-screen)" />
+						<text name="Disabled" value="Disabled" tooltip="Simule all-AIs is disabled" />
+						<text name="Enabled" value="Enabled" tooltip="Simule all-AIs is enabled" />
+					</group>
+				</group>
 			</group>
 			
 			<group name="Advanced">

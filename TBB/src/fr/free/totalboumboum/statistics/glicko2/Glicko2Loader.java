@@ -35,6 +35,9 @@ public class Glicko2Loader
 	{	// init path
 		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 		
+		// init properties
+		System.setProperty("jrs.aveGamesPerPeriod", "5");
+		
 		// read the rankings
 		File file = new File(path);
 		FileInputStream fileOut = new FileInputStream(file);

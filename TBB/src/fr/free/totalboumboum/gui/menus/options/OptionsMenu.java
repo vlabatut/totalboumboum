@@ -38,6 +38,7 @@ import fr.free.totalboumboum.gui.common.structure.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.options.advanced.AdvancedSplitPanel;
+import fr.free.totalboumboum.gui.menus.options.ais.AisSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.controls.ControlsSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.GameSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.gui.GuiSplitPanel;
@@ -60,6 +61,8 @@ public class OptionsMenu extends InnerMenuPanel
 	private JButton buttonBack;
 	@SuppressWarnings("unused")
 	private JButton buttonGui;
+	@SuppressWarnings("unused")
+	private JButton buttonAis;
 
 	private InnerDataPanel optionsData;
 
@@ -85,6 +88,7 @@ public class OptionsMenu extends InnerMenuPanel
 		buttonGameplay = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GAME,buttonWidth,buttonHeight,fontSize,this);
 		buttonVideo = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO,buttonWidth,buttonHeight,fontSize,this);
 		buttonGui = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GUI,buttonWidth,buttonHeight,fontSize,this);
+		buttonAis = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_AIS,buttonWidth,buttonHeight,fontSize,this);
 		buttonAdvanced = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonBack = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
@@ -100,6 +104,33 @@ public class OptionsMenu extends InnerMenuPanel
 		{	try
 			{	AdvancedSplitPanel advancedPanel = new AdvancedSplitPanel(container.getMenuContainer(),container);
 				replaceWith(advancedPanel);
+			}
+			catch (IllegalArgumentException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SecurityException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IllegalAccessException e1)
+			{	e1.printStackTrace();
+			}
+			catch (NoSuchFieldException e1)
+			{	e1.printStackTrace();
+			}
+		}
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_AIS))
+		{	try
+			{	AisSplitPanel guiPanel = new AisSplitPanel(container.getMenuContainer(),container);
+				replaceWith(guiPanel);
 			}
 			catch (IllegalArgumentException e1)
 			{	e1.printStackTrace();
