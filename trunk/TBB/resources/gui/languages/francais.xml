@@ -108,6 +108,7 @@
 		<group name="Options">
 			<group name="Button">
 				<text name="Advanced" value="Avancé" tooltip="Options avancées" />
+				<text name="Ais" value="IA" tooltip="Modifier les options des intelligences artificielles" />
 				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
 				<text name="Cancel" value="Annuler" tooltip="Annuler les dernières modifications et revenir au menu des options" />
 				<text name="Confirm" value="Confirmer" tooltip="Confirmer les dernières modifications et revenir au menu des options" />
@@ -122,6 +123,32 @@
 			<group name="Confirm">
 				<text name="Question" value="Attention : ces changements vont entraîner un redémarrage du jeu" tooltip="Ces changements vont entraîner un redémarrage du jeu" />
 				<text name="Title" value="Avertissement" tooltip="Redémarrage du jeu nécessaire" />
+			</group>
+			
+			<group name="Ais">
+				<text name="Title" value="Intelligences artificielles" tooltip="Modifier les paramètres des IA" />
+				<group name="Line">
+					<group name="AutoAdvance">
+						<text name="Title" value="Enchaînement automatique" tooltip="Enchaîne automatiquement les manches (permet de tester les IA intensément)" />
+						<text name="Disabled" value="Désactivé" tooltip="Enchaînement automatique désactivé" />
+						<text name="Enabled" value="Activé" tooltip="Enchaînement automatique activé" />
+					</group>
+					<group name="AutoAdvanceDelay">
+						<text name="Title" value="Délai d'enchaînement" tooltip="Délai (en secondes) avant l'enchaînement automatique" />
+						<text name="Plus" value="Plus" tooltip="Augmente le délai d'enchaînement" />
+						<text name="Minus" value="Moins" tooltip="Diminue le délai d'enchaînement" />
+					</group>
+					<group name="Ups">
+						<text name="Title" value="UPS" tooltip="Taux de mise à jour des IA, par seconde" />
+						<text name="Plus" value="Plus" tooltip="Augmente le taux de mise à jour des IA" />
+						<text name="Minus" value="Moins" tooltip="Diminue le taux de mise à jour des IA" />
+					</group>
+					<group name="HideAllAis">
+						<text name="Title" value="Simulation" tooltip="Simule les manches auxquelles seules des IA participent (la manche n'est pas jouée en direct)" />
+						<text name="Disabled" value="Disabled" tooltip="Simulation désactivée" />
+						<text name="Enabled" value="Enabled" tooltip="Simulation activée" />
+					</group>
+				</group>
 			</group>
 			
 			<group name="Advanced">

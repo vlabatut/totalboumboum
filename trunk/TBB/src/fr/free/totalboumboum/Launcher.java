@@ -838,6 +838,7 @@ public class Launcher
 	 * - GUI : possibilité de changer le critère de classement dans l'écran de stats
 	 * - GUI : possibilité d'enregistrer/déregistrer des joueurs dans l'écran de stats
 	 * - enchaînement automatique des matches d'un tournoi, par ex. pour faire tourner des IA sur tout un tournoi automatiquement
+	 * - GUI : nouvel écran d'options dédié à la configuration de la gestion des IA 
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1050,14 +1051,15 @@ public class Launcher
 	 * 
 	 * 	- créer un log des commandes (désactivable ds options advanced)
 	 *  - écran options IA
-	 *  	- faire l'écran GUI
 	 *  	- possibilité d'avance-rapide sur les matches à IA only
 	 *  - écran stats
 	 *  	- accélérer encore l'affichage des données ?
+	 *  	- switcher entre totaux et moyennes ? (un bouton sup entre haut et bas ?)
 	 *  - options pour les stats ?
 	 *  	- est-ce que le quick mode gère les stats ??
 	 *  	- bouton pour réinitialiser les stats
 	 *  	- paramètres de glicko2
 	 *  	- considérer le fait de séparer les suicide des bombeds-bombings
+	 *  	- inclure les résultats simulés dans les stats
 	 */
 }

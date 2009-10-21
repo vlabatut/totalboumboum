@@ -34,12 +34,17 @@ public class GuiKeys
 	/////////////////////////////////////////////////////////////////
 	public static final String ABOUT = "About";
 	public static final String ADD = "Add";
+	public static final String ADJUST = "Adjust";
+	public static final String ADVANCE = "Advance";
 	public static final String ADVANCED = "Advanced";
 	public static final String AFTER = "After";
 	public static final String AI = "Ai";
+	public static final String AIS = "Ais";
+	public static final String ALL = "All";
 	public static final String ALLOWED = "Allowed";
 	public static final String ARCHIVE = "Archive";
 	public static final String AUTHOR = "Author";
+	public static final String AUTO = "Auto";
 	public static final String AUTOKILL = "Autokill";
 	public static final String AUTOLOAD = "Autoload";
 	public static final String AUTOSAVE = "Autosave";
@@ -77,16 +82,19 @@ public class GuiKeys
 	public static final String CYAN = "Cyan";
 	public static final String CUSTOM = "Custom";
 	public static final String DATA = "Data";
+	public static final String DELAY = "Delay";
 	public static final String DELETE = "Delete";
 	public static final String DESCRIPTION = "Description";
 	public static final String DEVIATION = "Deviation";
 	public static final String DIALOG = "Dialog";
 	public static final String DIMENSION = "Dimension";
+	public static final String DISABLED = "Disabled";
 	public static final String DISCRETIZE = "Discretize";
 	public static final String DOWN = "Down";
 	public static final String DRAW = "Draw";
 	public static final String DRAWN = "Drawn";
 	public static final String EDIT = "Edit";
+	public static final String ENABLED = "Enabled";
 	public static final String FALSE = "False";
 	public static final String FILE = "File";
 	public static final String FINISH = "Finish";
@@ -94,9 +102,12 @@ public class GuiKeys
 	public static final String FIXED = "Fixed";
 	public static final String FOLDER = "Folder";
 	public static final String FONT = "Font";
+	public static final String FPS = "Fps";
+	public static final String FULL = "Full";
 	public static final String GAME = "Game";
 	public static final String GLICKO2 = "Glicko2";
 	public static final String GO = "Go";
+	public static final String GRAPHICS = "Graphics";
 	public static final String GRASS = "Grass";
 	public static final String GREEN = "Green";
 	public static final String GREY = "Grey";
@@ -104,6 +115,7 @@ public class GuiKeys
 	public static final String HEADER = "Header";
 	public static final String HERO = "Hero";
 	public static final String HEROES = "Heroes";
+	public static final String HIDE = "Hide";
 	public static final String HUMAN = "Human";
 	public static final String IMAGE = "Image";
 	public static final String INDIGO = "Indigo";
@@ -148,6 +160,7 @@ public class GuiKeys
 	public static final String PAGEDOWN = "PageDown";
 	public static final String PAGEUP = "PageUp";
 	public static final String PAINTINGS = "Paintings";
+	public static final String PANEL = "Panel";
 	public static final String PARENT = "Parent";
 	public static final String PART = "Part";
 	public static final String PARTIAL = "Partial";
@@ -176,8 +189,7 @@ public class GuiKeys
 	public static final String RANKPOINTS = "Rankpoints";
 	public static final String READY = "Ready";
 	public static final String RED = "Red";
-	public static final String 
-REGISTER = "Register";
+	public static final String REGISTER = "Register";
 	public static final String REGULAR = "Regular";
 	public static final String RESET = "Reset";
 	public static final String RESOURCES = "Resources";
@@ -189,6 +201,7 @@ REGISTER = "Register";
 	public static final String SAVE = "Save";
 	public static final String SCORE = "Score";
 	public static final String SCORES = "Scores";
+	public static final String SCREEN = "Screen";
 	public static final String SELECT = "Select";
 	public static final String SELECTION = "Selection";
 	public static final String SEQUENCE = "Sequence";
@@ -197,7 +210,9 @@ REGISTER = "Register";
 	public static final String SHARE = "Share";
 	public static final String SINGLE = "Single";
 	public static final String SIZE = "Size";
+	public static final String SMOOTH = "Smooth";
 	public static final String SOURCE = "Source";
+	public static final String SPEED = "Speed";
 	public static final String SPRITE = "Sprite";
 	public static final String STANDARD = "Standard";
 	public static final String START = "Start";
@@ -217,6 +232,7 @@ REGISTER = "Register";
 	public static final String UNDECIDED = "Undecided";
 	public static final String UNREGISTER = "Unregister";
 	public static final String UP = "Up";
+	public static final String UPS = "Ups";
 	public static final String USE = "Use";
 	public static final String VALUE = "Value";
 	public static final String VALUES = "Values";
@@ -303,26 +319,30 @@ REGISTER = "Register";
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+SOURCE;
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_THEME = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+THEME;
 		/* MATCH */
-		public static final String MENU_RESOURCES_MATCH_TITLE = "MenuResourcesMatchTitle";
+		public static final String MENU_RESOURCES_MATCH = MENU_RESOURCES+MATCH;
+		public static final String MENU_RESOURCES_MATCH_TITLE = MENU_RESOURCES_MATCH+TITLE;
 			/* BUTTON */
-			public static final String MENU_RESOURCES_MATCH_BUTTON = "MenuResourcesMatchButton";	
-			public static final String MENU_RESOURCES_MATCH_BUTTON_BACK = MENU_RESOURCES_MATCH_BUTTON+"Back";	
+			public static final String MENU_RESOURCES_MATCH_BUTTON = MENU_RESOURCES_MATCH+BUTTON;	
+			public static final String MENU_RESOURCES_MATCH_BUTTON_BACK = MENU_RESOURCES_MATCH_BUTTON+BACK;	
 		/* ROUND */
-		public static final String MENU_RESOURCES_ROUND_TITLE = "MenuResourcesRoundTitle";
+		public static final String MENU_RESOURCES_ROUND = MENU_RESOURCES+ROUND;
+		public static final String MENU_RESOURCES_ROUND_TITLE = MENU_RESOURCES_ROUND+TITLE;
 			/* BUTTON */
-			public static final String MENU_RESOURCES_ROUND_BUTTON = "MenuResourcesRoundButton";	
-			public static final String MENU_RESOURCES_ROUND_BUTTON_BACK = MENU_RESOURCES_ROUND_BUTTON+"Back";	
+			public static final String MENU_RESOURCES_ROUND_BUTTON = MENU_RESOURCES_ROUND+BUTTON;	
+			public static final String MENU_RESOURCES_ROUND_BUTTON_BACK = MENU_RESOURCES_ROUND_BUTTON+BACK;	
 		/* TOURNAMENT */
-		public static final String MENU_RESOURCES_TOURNAMENT_TITLE = "MenuResourcesTournamentTitle";
+		public static final String MENU_RESOURCES_TOURNAMENT = MENU_RESOURCES+TOURNAMENT;
+		public static final String MENU_RESOURCES_TOURNAMENT_TITLE = MENU_RESOURCES_TOURNAMENT+TITLE;
 			/* BUTTON */
-			public static final String MENU_RESOURCES_TOURNAMENT_BUTTON = "MenuResourcesTournamentButton";	
-			public static final String MENU_RESOURCES_TOURNAMENT_BUTTON_BACK = MENU_RESOURCES_TOURNAMENT_BUTTON+"Back";	
+			public static final String MENU_RESOURCES_TOURNAMENT_BUTTON = MENU_RESOURCES_TOURNAMENT+BUTTON;	
+			public static final String MENU_RESOURCES_TOURNAMENT_BUTTON_BACK = MENU_RESOURCES_TOURNAMENT_BUTTON+BACK;	
 			
 	/* OPTIONS */
 	public static final String MENU_OPTIONS = MENU+OPTIONS;
 		/* BUTTON */
-		public static final String MENU_OPTIONS_BUTTON = "MenuOptionsButton";
+		public static final String MENU_OPTIONS_BUTTON = MENU_OPTIONS+BUTTON;
 		public static final String MENU_OPTIONS_BUTTON_ADVANCED = MENU_OPTIONS_BUTTON+ADVANCED;
+		public static final String MENU_OPTIONS_BUTTON_AIS = MENU_OPTIONS_BUTTON+AIS;
 		public static final String MENU_OPTIONS_BUTTON_BACK = MENU_OPTIONS_BUTTON+BACK;
 		public static final String MENU_OPTIONS_BUTTON_CANCEL = MENU_OPTIONS_BUTTON+CANCEL;
 		public static final String MENU_OPTIONS_BUTTON_CONFIRM = MENU_OPTIONS_BUTTON+CONFIRM;
@@ -338,20 +358,50 @@ REGISTER = "Register";
 		public static final String MENU_OPTIONS_CONFIRM_TITLE = MENU_OPTIONS_CONFIRM+TITLE;
 		
 		/* ADVANCED */
-		public static final String MENU_OPTIONS_ADVANCED_TITLE = "MenuOptionsAdvancedTitle";
+		public static final String MENU_OPTIONS_ADVANCED = MENU_OPTIONS+ADVANCED;
+		public static final String MENU_OPTIONS_ADVANCED_TITLE = MENU_OPTIONS_ADVANCED+TITLE;
 			/* LINE */
+			public static final String MENU_OPTIONS_ADVANCED_LINE = MENU_OPTIONS_ADVANCED+LINE;
 				/* ADJUST FPS */
-				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_TITLE = "MenuOptionsAdvancedLineAdjustTitle";
-				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_DISABLED = "MenuOptionsAdvancedLineAdjustDisabled";
-				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_ENABLED = "MenuOptionsAdvancedLineAdjustEnabled";
+				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST = MENU_OPTIONS_ADVANCED_LINE+ADJUST;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_TITLE = MENU_OPTIONS_ADVANCED_LINE_ADJUST+TITLE;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_DISABLED = MENU_OPTIONS_ADVANCED_LINE_ADJUST+DISABLED;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_ENABLED = MENU_OPTIONS_ADVANCED_LINE_ADJUST+ENABLED;
 				/* FPS */
-				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE = "MenuOptionsAdvancedLineFpsTitle";
-				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS = "MenuOptionsAdvancedLineFpsMinus";
-				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS = "MenuOptionsAdvancedLineFpsPlus";
+				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS = MENU_OPTIONS_ADVANCED_LINE+FPS;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE = MENU_OPTIONS_ADVANCED_LINE_FPS+TITLE;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS = MENU_OPTIONS_ADVANCED_LINE_FPS+MINUS;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS = MENU_OPTIONS_ADVANCED_LINE_FPS+PLUS;
 				/* SPEED */
-				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE = "MenuOptionsAdvancedLineSpeedTitle";
-				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS = "MenuOptionsAdvancedLineSpeedMinus";
-				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS = "MenuOptionsAdvancedLineSpeedPlus";
+				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED = MENU_OPTIONS_ADVANCED_LINE+SPEED;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE = MENU_OPTIONS_ADVANCED_LINE_SPEED+TITLE;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS = MENU_OPTIONS_ADVANCED_LINE_SPEED+MINUS;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS = MENU_OPTIONS_ADVANCED_LINE_SPEED+PLUS;
+		/* AIS */
+		public static final String MENU_OPTIONS_AIS = MENU_OPTIONS+AIS;
+		public static final String MENU_OPTIONS_AIS_TITLE = MENU_OPTIONS_AIS+TITLE;
+			/* LINE */
+			public static final String MENU_OPTIONS_AIS_LINE = MENU_OPTIONS_AIS+LINE;
+				/* AUTO ADVANCE */
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE = MENU_OPTIONS_AIS_LINE+AUTO+ADVANCE;
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_TITLE = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+TITLE;
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DISABLED = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+DISABLED;
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_ENABLED = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE+ENABLED;
+				/* AUTO ADVANCE DELAY */
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY = MENU_OPTIONS_AIS_LINE+AUTO+ADVANCE+DELAY;
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY_TITLE = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY+TITLE;
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY_MINUS = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY+MINUS;
+				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY_PLUS = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY+PLUS;
+				/* FPS */
+				public static final String MENU_OPTIONS_AIS_LINE_UPS = MENU_OPTIONS_AIS_LINE+UPS;
+				public static final String MENU_OPTIONS_AIS_LINE_UPS_TITLE = MENU_OPTIONS_AIS_LINE_UPS+TITLE;
+				public static final String MENU_OPTIONS_AIS_LINE_UPS_MINUS = MENU_OPTIONS_AIS_LINE_UPS+MINUS;
+				public static final String MENU_OPTIONS_AIS_LINE_UPS_PLUS = MENU_OPTIONS_AIS_LINE_UPS+PLUS;
+				/* HIDE ALL AIS */
+				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS = MENU_OPTIONS_AIS_LINE+HIDE+ALL+AIS;
+				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_TITLE = MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS+TITLE;
+				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_DISABLED = MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS+DISABLED;
+				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_ENABLED = MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS+ENABLED;
 		/* CONTROLS */
 		public static final String MENU_OPTIONS_CONTROLS_TITLE = "MenuOptionsControlsTitle";
 			/* HEADER */
@@ -445,15 +495,17 @@ REGISTER = "Register";
 				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT = MENU_OPTIONS_GUI_LINE_BACKGROUND+NEXT;
 				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS = MENU_OPTIONS_GUI_LINE_BACKGROUND+PREVIOUS;
 		/* VIDEO */
-		public static final String MENU_OPTIONS_VIDEO_TITLE = "MenuOptionsVideoTitle";
+		public static final String MENU_OPTIONS_VIDEO = MENU_OPTIONS+VIDEO;
+		public static final String MENU_OPTIONS_VIDEO_TITLE = MENU_OPTIONS_VIDEO+TITLE;
 			/* LINE */
-			public static final String MENU_OPTIONS_VIDEO_LINE_DISABLED = "MenuOptionsVideoLineDisabled";
-			public static final String MENU_OPTIONS_VIDEO_LINE_ENABLED = "MenuOptionsVideoLineEnabled";
-			public static final String MENU_OPTIONS_VIDEO_LINE_FULL_SCREEN = "MenuOptionsVideoLineFullScreen";
-			public static final String MENU_OPTIONS_VIDEO_LINE_MINUS = "MenuOptionsVideoLineMinus";
-			public static final String MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION = "MenuOptionsVideoLinePanelDimension";
-			public static final String MENU_OPTIONS_VIDEO_LINE_PLUS = "MenuOptionsVideoLinePlus";
-			public static final String MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS = "MenuOptionsVideoLineSmoothGraphics";
+			public static final String MENU_OPTIONS_VIDEO_LINE = MENU_OPTIONS_VIDEO+LINE;
+			public static final String MENU_OPTIONS_VIDEO_LINE_DISABLED = MENU_OPTIONS_VIDEO_LINE+DISABLED;
+			public static final String MENU_OPTIONS_VIDEO_LINE_ENABLED = MENU_OPTIONS_VIDEO_LINE+ENABLED;
+			public static final String MENU_OPTIONS_VIDEO_LINE_FULL_SCREEN = MENU_OPTIONS_VIDEO_LINE+FULL+SCREEN;
+			public static final String MENU_OPTIONS_VIDEO_LINE_MINUS = MENU_OPTIONS_VIDEO_LINE+MINUS;
+			public static final String MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION = MENU_OPTIONS_VIDEO_LINE+PANEL+DIMENSION;
+			public static final String MENU_OPTIONS_VIDEO_LINE_PLUS = MENU_OPTIONS_VIDEO_LINE+PLUS;
+			public static final String MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS = MENU_OPTIONS_VIDEO_LINE+SMOOTH+GRAPHICS;
 				/* COLOR */
 			public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR = "MenuOptionsVideoLineBorderColor";
 				public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_BLACK = MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+BLACK;

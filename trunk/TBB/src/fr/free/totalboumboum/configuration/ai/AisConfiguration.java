@@ -26,7 +26,13 @@ public class AisConfiguration
 
 	public AisConfiguration copy()
 	{	AisConfiguration result = new AisConfiguration();
-		result.setAiUps(aiUps); 
+
+		result.setAiUps(aiUps);
+		
+		result.setAutoAdvance(autoAdvance);
+		result.setAutoAdvanceDelay(autoAdvanceDelay);
+		result.setHideAllAis(hideAllAis);
+		
 		return result;
 	}
 
