@@ -30,14 +30,14 @@ This product includes softwares developed by:
     Copyright 1995-2008 Sun Microsystems Inc.
     http://www.sun.com
   + JDOM Project:
-  	JDOM library
-  	Copyright 2000-2007 JDOM Project - Apache-based license
-  	http://www.jdom.org
+    JDOM library
+    Copyright 2000-2007 JDOM Project - Apache-based license
+    http://www.jdom.org
   + JRS - Java Ranking Service
-  	Classes in the fr.free.totalboumboum.game.statistics.glicko2.jrs package
-  	Copyright 2005-2006 JRS project - BSD License
-  	https://jrs.dev.java.net
-  	These classes were modified by Vincent Labatut
+    Classes in the fr.free.totalboumboum.game.statistics.glicko2.jrs package
+    Copyright 2005-2006 JRS project - BSD License
+    https://jrs.dev.java.net
+    These classes were modified by Vincent Labatut
   + Various AI students from Galatasaray University:
     Most classes in resources/ai (see classes for details)
     Copyright 2007-2009 their respective authors

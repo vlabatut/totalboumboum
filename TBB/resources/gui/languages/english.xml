@@ -117,6 +117,7 @@
 				<text name="Gui" value="Interface" tooltip="Modify graphical interface settings" />
 				<text name="Next" value="Next" tooltip="Next settings" />
 				<text name="Previous" value="Previous" tooltip="Previous settings" />
+				<text name="Statistics" value="Statistics" tooltip="Modify the statistics settings" />
 				<text name="Video" value="Video" tooltip="Modify the video settings" />
 			</group>
 			
@@ -274,6 +275,46 @@
 				</group>
 			</group>
 			
+			<group name="Statistics">
+				<text name="Title" value="Statistics" tooltip="Modify statistics settings" />
+				<group name="Line">
+					<group name="Include">
+						<group name="Quickstart">
+							<text name="Title" value="Include quick starts" tooltip="Include quick starts rounds in statistics" />
+							<text name="Disabled" value="Désactivé" tooltip="Quick starts excluded" />
+							<text name="Enabled" value="Activé" tooltip="Quick starts included" />
+						</group>
+						<group name="Simulation">
+							<text name="Title" value="Include simulations" tooltip="Include simulated rounds in statistics" />
+							<text name="Disabled" value="Désactivé" tooltip="Simulations excluded" />
+							<text name="Enabled" value="Activé" tooltip="Simulations included" />
+						</group>
+					</group>
+					<group name="Glicko2">
+						<group name="DefaultRating">
+							<text name="Title" value="Glicko-2: Default rating" tooltip="Rating for a player entering the Glicko-2 ranking" />
+							<text name="Minus" value="Moins" tooltip="Decrease the default rating" />
+							<text name="Plus" value="Plus" tooltip="Increase the default rating" />
+						</group>
+						<group name="DefaultRatingDeviation">
+							<text name="Title" value="Glicko-2: Default deviation" tooltip="Deviation for a player entering the Glicko-2 ranking" />
+							<text name="Minus" value="Moins" tooltip="Decrease the default deviation" />
+							<text name="Plus" value="Plus" tooltip="Increase the default deviation" />
+						</group>
+						<group name="DefaultRatingVolatility">
+							<text name="Title" value="Glicko-2: Default volatility" tooltip="Volatility for a player entering the Glicko-2 ranking" />
+							<text name="Minus" value="Moins" tooltip="Decrease the default volatility" />
+							<text name="Plus" value="Plus" tooltip="Increase the default volatility" />
+						</group>
+						<group name="GamesPerPeriod">
+							<text name="Title" value="Glicko-2: Games per period" tooltip="Average number of rounds needed to close the current statistical period" />
+							<text name="Minus" value="Moins" tooltip="Decrease the number of games per period" />
+							<text name="Plus" value="Plus" tooltip="Increase the number of games per period" />
+						</group>
+					</group>
+				</group>
+			</group>
+
 			<group name="Video">
 				<text name="Title" value="Video" tooltip="Modify video settings" />
 				<group name="Line">

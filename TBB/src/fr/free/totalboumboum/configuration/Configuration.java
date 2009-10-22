@@ -42,6 +42,9 @@ import fr.free.totalboumboum.configuration.game.GameConfigurationSaver;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationSaver;
+import fr.free.totalboumboum.configuration.statistics.StatisticsConfiguration;
+import fr.free.totalboumboum.configuration.statistics.StatisticsConfigurationLoader;
+import fr.free.totalboumboum.configuration.statistics.StatisticsConfigurationSaver;
 import fr.free.totalboumboum.configuration.video.VideoConfiguration;
 import fr.free.totalboumboum.configuration.video.VideoConfigurationLoader;
 import fr.free.totalboumboum.configuration.video.VideoConfigurationSaver;
@@ -59,6 +62,7 @@ public class Configuration
 		profilesConfiguration = ProfilesConfigurationLoader.loadProfilesConfiguration();
 		videoConfiguration = VideoConfigurationLoader.loadVideoConfiguration();
 		aisConfiguration = AisConfigurationLoader.loadAisConfiguration();
+		statisticsConfiguration = StatisticsConfigurationLoader.loadStatisticsConfiguration();
 	}
 	
 	public static void saveConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
@@ -68,6 +72,7 @@ public class Configuration
 		ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfiguration);
 		VideoConfigurationSaver.saveVideoConfiguration(videoConfiguration);
 		AisConfigurationSaver.saveAisConfiguration(aisConfiguration);
+		StatisticsConfigurationSaver.saveStatisticsConfiguration(statisticsConfiguration);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -131,7 +136,7 @@ public class Configuration
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// AI			/////////////////////////////////////////////
+	// AI				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private static AisConfiguration aisConfiguration;
 
@@ -140,5 +145,17 @@ public class Configuration
 	}
 	public static AisConfiguration getAisConfiguration()
 	{	return aisConfiguration;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STATISTICS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static StatisticsConfiguration statisticsConfiguration;
+
+	public static void setStatisticsConfiguration(StatisticsConfiguration statisticsConfiguration)
+	{	Configuration.statisticsConfiguration = statisticsConfiguration;
+	}
+	public static StatisticsConfiguration getStatisticsConfiguration()
+	{	return statisticsConfiguration;
 	}
 }

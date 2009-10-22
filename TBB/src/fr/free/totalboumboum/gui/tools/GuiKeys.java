@@ -82,6 +82,7 @@ public class GuiKeys
 	public static final String CYAN = "Cyan";
 	public static final String CUSTOM = "Custom";
 	public static final String DATA = "Data";
+	public static final String DEFAULT = "Default";
 	public static final String DELAY = "Delay";
 	public static final String DELETE = "Delete";
 	public static final String DESCRIPTION = "Description";
@@ -105,6 +106,7 @@ public class GuiKeys
 	public static final String FPS = "Fps";
 	public static final String FULL = "Full";
 	public static final String GAME = "Game";
+	public static final String GAMES = "Games";
 	public static final String GLICKO2 = "Glicko2";
 	public static final String GO = "Go";
 	public static final String GRAPHICS = "Graphics";
@@ -118,6 +120,7 @@ public class GuiKeys
 	public static final String HIDE = "Hide";
 	public static final String HUMAN = "Human";
 	public static final String IMAGE = "Image";
+	public static final String INCLUDE = "Include";
 	public static final String INDIGO = "Indigo";
 	public static final String INITIAL = "Initial";
 	public static final String INSTANCE = "Instance";
@@ -164,6 +167,8 @@ public class GuiKeys
 	public static final String PARENT = "Parent";
 	public static final String PART = "Part";
 	public static final String PARTIAL = "Partial";
+	public static final String PER = "Per";
+	public static final String PERIOD = "Period";
 	public static final String PINK = "Pink";
 	public static final String PLAY = "Play";
 	public static final String PLAYED = "Played";
@@ -187,6 +192,7 @@ public class GuiKeys
 	public static final String RANKS = "Ranks";
 	public static final String RANKINGS = "Rankings";
 	public static final String RANKPOINTS = "Rankpoints";
+	public static final String RATING = "Rating";
 	public static final String READY = "Ready";
 	public static final String RED = "Red";
 	public static final String REGISTER = "Register";
@@ -208,6 +214,7 @@ public class GuiKeys
 	public static final String SET = "Set";
 	public static final String SETTINGS = "Settings";
 	public static final String SHARE = "Share";
+	public static final String SIMULATION = "Simulation";
 	public static final String SINGLE = "Single";
 	public static final String SIZE = "Size";
 	public static final String SMOOTH = "Smooth";
@@ -351,6 +358,7 @@ public class GuiKeys
 		public static final String MENU_OPTIONS_BUTTON_GUI = MENU_OPTIONS_BUTTON+GUI;
 		public static final String MENU_OPTIONS_BUTTON_NEXT = MENU_OPTIONS_BUTTON+NEXT;
 		public static final String MENU_OPTIONS_BUTTON_PREVIOUS = MENU_OPTIONS_BUTTON+PREVIOUS;
+		public static final String MENU_OPTIONS_BUTTON_STATISTICS = MENU_OPTIONS_BUTTON+STATISTICS;
 		public static final String MENU_OPTIONS_BUTTON_VIDEO = MENU_OPTIONS_BUTTON+VIDEO;
 		/* CONFIRM */
 		public static final String MENU_OPTIONS_CONFIRM = MENU_OPTIONS+CONFIRM;
@@ -494,6 +502,45 @@ public class GuiKeys
 				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_TITLE = MENU_OPTIONS_GUI_LINE_BACKGROUND+TITLE;
 				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT = MENU_OPTIONS_GUI_LINE_BACKGROUND+NEXT;
 				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS = MENU_OPTIONS_GUI_LINE_BACKGROUND+PREVIOUS;
+		/* STATISTICS */
+		public static final String MENU_OPTIONS_STATISTICS = MENU_OPTIONS+STATISTICS;
+		public static final String MENU_OPTIONS_STATISTICS_TITLE = MENU_OPTIONS_STATISTICS+TITLE;
+			/* LINE */
+			public static final String MENU_OPTIONS_STATISTICS_LINE = MENU_OPTIONS_STATISTICS+LINE;
+				/* INCLUDE */
+				public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE = MENU_OPTIONS_STATISTICS_LINE+INCLUDE;
+					/* QUICKSTARTS */
+					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART = MENU_OPTIONS_STATISTICS_LINE_INCLUDE+QUICKSTART;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART_TITLE = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART+TITLE;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART_DISABLED = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART+DISABLED;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART_ENABLED = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART+ENABLED;
+					/* SIMULATIONS */
+					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION = MENU_OPTIONS_STATISTICS_LINE_INCLUDE+SIMULATION;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION_TITLE = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION+TITLE;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION_DISABLED = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION+DISABLED;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION_ENABLED = MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION+ENABLED;
+				/* GLICKO-2 */
+				public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2 = MENU_OPTIONS_STATISTICS_LINE+GLICKO2;
+					/* DEFAULT RATING */
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING = MENU_OPTIONS_STATISTICS_LINE_GLICKO2+DEFAULT+RATING;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_TITLE = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING+TITLE;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_MINUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING+MINUS;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_PLUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING+PLUS;
+					/* DEFAULT RATING DEVIATION */
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING+DEVIATION;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION_TITLE = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION+TITLE;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION_MINUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION+MINUS;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION_PLUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_DEVIATION+PLUS;
+					/* DEFAULT RATING VOLATILITY */
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING+VOLATILITY;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY_TITLE = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY+TITLE;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY_MINUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY+MINUS;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY_PLUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_DEFAULT_RATING_VOLATILITY+PLUS;
+					/* GAMES PER PERIOD */
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD = MENU_OPTIONS_STATISTICS_LINE_GLICKO2+GAMES+PER+PERIOD;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD_TITLE = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD+TITLE;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD_MINUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD+MINUS;
+					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD_PLUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD+PLUS;
 		/* VIDEO */
 		public static final String MENU_OPTIONS_VIDEO = MENU_OPTIONS+VIDEO;
 		public static final String MENU_OPTIONS_VIDEO_TITLE = MENU_OPTIONS_VIDEO+TITLE;
