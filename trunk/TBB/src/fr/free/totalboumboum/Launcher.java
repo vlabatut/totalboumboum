@@ -838,7 +838,8 @@ public class Launcher
 	 * - GUI : possibilité de changer le critère de classement dans l'écran de stats
 	 * - GUI : possibilité d'enregistrer/déregistrer des joueurs dans l'écran de stats
 	 * - enchaînement automatique des matches d'un tournoi, par ex. pour faire tourner des IA sur tout un tournoi automatiquement
-	 * - GUI : nouvel écran d'options dédié à la configuration de la gestion des IA 
+	 * - GUI : nouvel écran d'options dédié à la configuration de la gestion des IA
+	 * - GUI : nouvel écran d'options pour configurer le traitement des stats 
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1035,6 +1036,11 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
+	 * - site :
+	 * 		- parler de l'écran de classement
+	 * 		- parler des options des stats
+	 * 		- parler des options des IA
+	 * 
 	 * - percepts à rajouter
 	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
 	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
@@ -1057,9 +1063,11 @@ public class Launcher
 	 *  	- switcher entre totaux et moyennes ? (un bouton sup entre haut et bas ?)
 	 *  - options pour les stats ?
 	 *  	- est-ce que le quick mode gère les stats ??
+	 *  	- inclure les résultats simulés dans les stats
 	 *  	- bouton pour réinitialiser les stats
 	 *  	- paramètres de glicko2
 	 *  	- considérer le fait de séparer les suicide des bombeds-bombings
-	 *  	- inclure les résultats simulés dans les stats
+	 *  	- affichage : bouton pour passer de moyennes à totaux
+	 *  	- affichage : possibilité de masquer les joueurs pas enregistrés ou IA/humains
 	 */
 }

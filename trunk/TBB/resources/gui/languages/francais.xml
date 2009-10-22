@@ -117,6 +117,7 @@
 				<text name="Gui" value="Interface" tooltip="Modifier les paramètres de l'interface graphique" />
 				<text name="Next" value="Suivant" tooltip="Accéder aux réglages suivants" />
 				<text name="Previous" value="Précédent" tooltip="Accéder aux réglages précédents" />
+				<text name="Statistics" value="Statistiques" tooltip="Accéder aux réglages des statistiques" />
 				<text name="Video" value="Vidéo" tooltip="Modifier les paramètres graphiques" />
 			</group>
 
@@ -274,6 +275,46 @@
 				</group>
 			</group>
 			
+			<group name="Statistics">
+				<text name="Title" value="Statistiques" tooltip="Modifier les paramètres des statistiques" />
+				<group name="Line">
+					<group name="Include">
+						<group name="Quickstart">
+							<text name="Title" value="Inclure les démarrages rapides" tooltip="Inclure les démarrages rapides dans les statistiques" />
+							<text name="Disabled" value="Désactivé" tooltip="Démarrages rapides exclus des statistiques" />
+							<text name="Enabled" value="Activé" tooltip="Démarrages rapides inclus dans les statistiques" />
+						</group>
+						<group name="Simulation">
+							<text name="Title" value="Inclure les manches simulées" tooltip="Inclure les manches simulées dans les statistiques" />
+							<text name="Disabled" value="Désactivé" tooltip="Manches simulées exclues des statistiques" />
+							<text name="Enabled" value="Activé" tooltip="Manches simulées incluses dans les statistiques" />
+						</group>
+					</group>
+					<group name="Glicko2">
+						<group name="DefaultRating">
+							<text name="Title" value="Glicko-2 : Moyenne de départ" tooltip="Moyenne associée à un joueur qui démarre dans le classement" />
+							<text name="Minus" value="Moins" tooltip="Diminuer la moyenne de départ" />
+							<text name="Plus" value="Plus" tooltip="Augmenter la moyenne de départ" />
+						</group>
+						<group name="DefaultRatingDeviation">
+							<text name="Title" value="Glicko-2 : Déviation de départ" tooltip="Déviation associée à un joueur qui démarre dans le classement" />
+							<text name="Minus" value="Moins" tooltip="Diminuer la déviation de départ" />
+							<text name="Plus" value="Plus" tooltip="Augmenter la déviation de départ" />
+						</group>
+						<group name="DefaultRatingVolatility">
+							<text name="Title" value="Glicko-2 : Volatilité de départ" tooltip="Volatilité associée à un joueur qui démarre dans le classement" />
+							<text name="Minus" value="Moins" tooltip="Diminuer la volatilité de départ" />
+							<text name="Plus" value="Plus" tooltip="Augmenter la volatilité de départ" />
+						</group>
+						<group name="GamesPerPeriod">
+							<text name="Title" value="Glicko-2 : Manches par période" tooltip="Nombre moyen de manches devant être jouées avant de cloturer une période statistique" />
+							<text name="Minus" value="Moins" tooltip="Diminuer le nombre de manches par période" />
+							<text name="Plus" value="Plus" tooltip="Augmenter le nombre de manches par période" />
+						</group>
+					</group>
+				</group>
+			</group>
+
 			<group name="Video">
 				<text name="Title" value="Vidéo" tooltip="Modifier les paramètres graphiques" />
 				<group name="Line">

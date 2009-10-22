@@ -115,6 +115,7 @@ public class XmlTools
 	public static final String ELT_GENERAL = "general";
 	public static final String ELT_GESTURES = "gestures";
 	public static final String ELT_GESTURE = "gesture";
+	public static final String ELT_GLICKO2 = "glicko2";
 	public static final String ELT_GLOBAL_DIMENSION = "globalDimension";
 	public static final String ELT_GROUP = "group";
 	public static final String ELT_HARDWALL = "hardwall";
@@ -122,6 +123,8 @@ public class XmlTools
 	public static final String ELT_HERO = "hero";
 	public static final String ELT_HEROES = "heroes";
 	public static final String ELT_HIDE_ALLAIS = "hideAllAis";
+	public static final String ELT_INCLUDE_QUICKSTARTS = "includeQuickStarts";
+	public static final String ELT_INCLUDE_SIMULATIONS = "includeSimulations";
 	public static final String ELT_INGAME = "ingame";
 	public static final String ELT_INSTANCE = "instance";
 	public static final String ELT_ITEM = "item";
@@ -198,6 +201,7 @@ public class XmlTools
 	public static final String ELT_SPEED = "speed";
 	public static final String ELT_SPRITE = "sprite";
 	public static final String ELT_START = "start";
+	public static final String ELT_STATISTICS = "statistics";
 	public static final String ELT_STEP = "step";
 	public static final String ELT_STEPS = "steps";
 	public static final String ELT_SUBTRACTION = "subtraction";
@@ -250,6 +254,9 @@ public class XmlTools
 	public static final String ATT_CONTROLS = "controls";
 	public static final String ATT_COUNT = "count";
 	public static final String ATT_DEFAULT = "default";
+	public static final String ATT_DEFAULT_RATING = "defaultRating";
+	public static final String ATT_DEFAULT_RATING_DEVIATION = "defaultRatingDeviation";
+	public static final String ATT_DEFAULT_RATING_VOLATILITY = "defaultRatingVolatility";
 	public static final String ATT_DELAY = "delay";
 	public static final String ATT_DIRECTION = "direction";
 	public static final String ATT_DRAW = "draw";
@@ -259,6 +266,7 @@ public class XmlTools
 	public static final String ATT_FOLDER = "folder";
 	public static final String ATT_FORCE_ALL = "forceAll";
 	public static final String ATT_FRAME = "frame";
+	public static final String ATT_GAMES_PER_PERIOD = "gamesPerPeriod";
 	public static final String ATT_GREEN = "green";
 	public static final String ATT_GROUP = "group";
 	public static final String ATT_HEIGHT = "height";
