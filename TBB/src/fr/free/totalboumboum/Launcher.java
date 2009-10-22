@@ -1069,5 +1069,6 @@ public class Launcher
 	 *  	- considérer le fait de séparer les suicide des bombeds-bombings
 	 *  	- affichage : bouton pour passer de moyennes à totaux
 	 *  	- affichage : possibilité de masquer les joueurs pas enregistrés ou IA/humains
+	 *  	- affichage : évolution (A, V, -) par rapport au classement précédent (i.e. besoin du classement précédent)
 	 */
 }
