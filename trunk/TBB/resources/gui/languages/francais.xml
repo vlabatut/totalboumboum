@@ -1023,6 +1023,8 @@
 						<text name="Unregister" value="Supprimer"  tooltip="Supprimer le joueur du classement" />
 						<text name="Next" value="Page suivante"  tooltip="Aller à la page suivante du classement" />
 						<text name="Previous" value="Page précédente"  tooltip="Aller à la page précédente du classement" />
+						<text name="Mean" value="Moyennes"  tooltip="Afficher les valeurs moyennes" />
+						<text name="Sum" value="Sommes"  tooltip="Afficher les totaux" />
 					</group>
 				</group>
 

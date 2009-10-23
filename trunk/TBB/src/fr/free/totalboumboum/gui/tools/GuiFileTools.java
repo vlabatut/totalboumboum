@@ -31,6 +31,7 @@ public class GuiFileTools
 	// files
 	public final static String FILE_AUTHOR = "author.png";
 	public final static String FILE_AUTOFIRE = "autofire.png";
+	public final static String FILE_AVERAGE = "average.png";
 	public final static String FILE_BOMBS = "bombs.png";
 	public final static String FILE_COLOR = "color.png";
 	public final static String FILE_COMMAND = "command.png";

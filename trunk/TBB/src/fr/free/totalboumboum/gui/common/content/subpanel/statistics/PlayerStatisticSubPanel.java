@@ -35,6 +35,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -63,7 +64,8 @@ import fr.free.totalboumboum.tools.StringTools.TimeUnit;
 public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	private final static int COL_PREVIOUS = 0;
-	private final static int COL_NEXT = 2;
+	private final static int COL_SUM_MEAN = 2;
+	private final static int COL_NEXT = 4;
 
 	public PlayerStatisticSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER);
@@ -84,8 +86,9 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		
 		// sizes
 		int buttonHeight = GuiTools.subPanelTitleHeight;
-		int upWidth = (getDataWidth() - GuiTools.subPanelMargin)/2;
-		int downWidth = getDataWidth()- upWidth - GuiTools.subPanelMargin;
+		int upWidth = (getDataWidth() - GuiTools.subPanelMargin)/3;
+		int downWidth = upWidth;
+		int centerWidth = getDataWidth()- upWidth - downWidth - 2*GuiTools.subPanelMargin;
 		int mainPanelHeight = getDataHeight() - buttonHeight - GuiTools.subPanelMargin;
 		
 		// main panel
@@ -124,6 +127,22 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				buttonsPanel.add(label);
 			}
 			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			// sum/mean
+			{	JLabel label = new JLabel();
+				label.setOpaque(true);
+				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				Dimension dim = new Dimension(centerWidth,buttonHeight);
+				label.setMinimumSize(dim);
+				label.setPreferredSize(dim);
+				label.setMaximumSize(dim);
+				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_MEAN;
+				GuiTools.setLabelKey(label,key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
+				label.addMouseListener(this);
+				buttonsPanel.add(label);
+			}
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// down
 			{	JLabel label = new JLabel();
 				label.setOpaque(true);
@@ -145,7 +164,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		// pages
 		currentPage = 0;
 		setPlayersIds(null,16);
-		setSort(RankCriterion.MEAN);
+		rankCriterion = RankCriterion.MEAN;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -153,6 +172,8 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	/////////////////////////////////////////////////////////////////
 	private List<Integer> playersIds;
 	private HashMap<Integer,Profile> profilesMap;
+	@SuppressWarnings("unchecked")
+	private HashMap<Integer,List<Comparable>> playersScores = new HashMap<Integer, List<Comparable>>();
 	private int currentPage = 0;
 	private final ArrayList<TableSubPanel> listPanels = new ArrayList<TableSubPanel>();
 	private int pageCount;	
@@ -178,9 +199,26 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		listPanels.clear();
 		
 		// sorting players
+		updateScores();
 		playersIds = new ArrayList<Integer>(profilesMap.keySet());
-		Collections.sort(playersIds,comparator);
-		if(inverted)
+		Collections.sort(playersIds,new Comparator<Integer>()
+		{	@SuppressWarnings("unchecked")
+			@Override
+			public int compare(Integer playerId1, Integer playerId2)
+			{	int result = 0;
+				List<Comparable> list1 = playersScores.get(playerId1);
+				List<Comparable> list2 = playersScores.get(playerId2);
+				int index = 0;
+				while(result==0 && index<list1.size())
+				{	Comparable o1 = list1.get(index);
+					Comparable o2 = list2.get(index);
+					result = o1.compareTo(o2);
+					index++;
+				}
+				return result;
+			}
+		});
+		if(!inverted)
 		{	List<Integer> temp = playersIds;
 			playersIds = new ArrayList<Integer>();
 			for(Integer i: temp)
@@ -225,7 +263,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		}
 		// name
 		{	headerKeys.add(GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_NAME);
-			rankCriterions.add(null);
+			rankCriterions.add(RankCriterion.NAME);
 			colWidths.add(0);
 			colName = cols;
 			cols++;
@@ -352,6 +390,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					Profile profile = profilesMap.get(playerId);
 					PlayerRating playerRating = rankingService.getPlayerRating(playerId);
 					PlayerStats playerStats = playersStats.get(playerId);
+					long roundsPlayed = playerStats.getRoundsPlayed();
 					// color
 					Color clr = profile.getSpriteColor().getColor();
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
@@ -476,15 +515,31 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					}
 					// scores
 					if(showScores)
-					{	String[] scores = 
-						{	Long.toString(playerStats.getScore(Score.BOMBS)),
-							Long.toString(playerStats.getScore(Score.ITEMS)),
-							Long.toString(playerStats.getScore(Score.BOMBEDS)),
-							Long.toString(playerStats.getScore(Score.BOMBINGS)),
+					{	long[] scores = 
+						{	playerStats.getScore(Score.BOMBS),
+							playerStats.getScore(Score.ITEMS),
+							playerStats.getScore(Score.BOMBEDS),
+							playerStats.getScore(Score.BOMBINGS)
 						};
+						String[] strScores = new String[scores.length];
+						if(mean)
+						{	NumberFormat nf = NumberFormat.getInstance();
+							nf.setMaximumFractionDigits(2);
+							nf.setMinimumFractionDigits(2);
+							for(int j=0;j<scores.length;j++)
+							{	double value = 0;
+								if(roundsPlayed>0)
+									value = scores[j] / (double)roundsPlayed;
+								strScores[j] = nf.format(value);
+							}
+						}
+						else
+						{	for(int j=0;j<scores.length;j++)
+								strScores[j] = Long.toString(scores[j]);
+						}
 						for(int j=0;j<scores.length;j++)
-						{	String text = scores[j];
-							String tooltip = scores[j];
+						{	String text = strScores[j];
+							String tooltip = strScores[j];
 							panel.setLabelText(line,col,text,tooltip);
 							int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 							if(temp>colWidths.get(col))
@@ -494,9 +549,19 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					}			
 					// rounds played
 					if(showRoundsPlayed)
-					{	long roundsPlayed = playerStats.getRoundsPlayed();
-						String text = Long.toString(roundsPlayed);
+					{	String text = Long.toString(roundsPlayed);
 						String tooltip = text;
+						if(mean)
+						{	double value = 0;
+							if(roundsPlayed>0)
+								value = 100 * roundsPlayed / (double)roundsPlayed;
+							NumberFormat nfText = NumberFormat.getInstance();
+							nfText.setMaximumFractionDigits(0);
+							text = nfText.format(value)+"%";
+							NumberFormat nfTooltip = NumberFormat.getInstance();
+							nfTooltip.setMaximumFractionDigits(4);
+							tooltip = nfTooltip.format(value)+"%";
+						}
 						panel.setLabelText(line,col,text,tooltip);
 						int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 						if(temp>colWidths.get(col))
@@ -508,6 +573,17 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					{	long roundsWon = playerStats.getRoundsWon();
 						String text = Long.toString(roundsWon);
 						String tooltip = text;
+						if(mean)
+						{	double value = 0;
+							if(roundsPlayed>0)
+								value = 100 * roundsWon / (double)roundsPlayed;
+							NumberFormat nfText = NumberFormat.getInstance();
+							nfText.setMaximumFractionDigits(0);
+							text = nfText.format(value)+"%";
+							NumberFormat nfTooltip = NumberFormat.getInstance();
+							nfTooltip.setMaximumFractionDigits(4);
+							tooltip = nfTooltip.format(value)+"%";
+						}
 						panel.setLabelText(line,col,text,tooltip);
 						int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 						if(temp>colWidths.get(col))
@@ -519,6 +595,17 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					{	long roundsDrawn = playerStats.getRoundsDrawn();
 						String text = Long.toString(roundsDrawn);
 						String tooltip = text;
+						if(mean)
+						{	double value = 0;
+							if(roundsPlayed>0)
+								value = 100 * roundsDrawn / (double)roundsPlayed;
+							NumberFormat nfText = NumberFormat.getInstance();
+							nfText.setMaximumFractionDigits(0);
+							text = nfText.format(value)+"%";
+							NumberFormat nfTooltip = NumberFormat.getInstance();
+							nfTooltip.setMaximumFractionDigits(4);
+							tooltip = nfTooltip.format(value)+"%";
+						}
 						panel.setLabelText(line,col,text,tooltip);
 						int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 						if(temp>colWidths.get(col))
@@ -530,6 +617,17 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					{	long roundsLost = playerStats.getRoundsLost();
 						String text = Long.toString(roundsLost);
 						String tooltip = text;
+						if(mean)
+						{	double value = 0;
+							if(roundsPlayed>0)
+								value = 100 * roundsLost / (double)roundsPlayed;
+							NumberFormat nfText = NumberFormat.getInstance();
+							nfText.setMaximumFractionDigits(0);
+							text = nfText.format(value)+"%";
+							NumberFormat nfTooltip = NumberFormat.getInstance();
+							nfTooltip.setMaximumFractionDigits(4);
+							tooltip = nfTooltip.format(value)+"%";
+						}
 						panel.setLabelText(line,col,text,tooltip);
 						int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 						if(temp>colWidths.get(col))
@@ -541,6 +639,13 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					{	long timePlayed = playerStats.getScore(Score.TIME);
 						String text = StringTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MINUTE);
 						String tooltip = StringTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MILLISECOND);
+						if(mean)
+						{	long value = 0;
+							if(roundsPlayed>0)
+								value = timePlayed / roundsPlayed;
+							text = StringTools.formatTime(value,TimeUnit.MINUTE,TimeUnit.SECOND);
+							tooltip = StringTools.formatTime(value,TimeUnit.HOUR,TimeUnit.MILLISECOND);							
+						}
 						panel.setLabelText(line,col,text,tooltip);
 						int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 						if(temp>colWidths.get(col))
@@ -612,281 +717,115 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	/////////////////////////////////////////////////////////////////
 	private final List<RankCriterion> rankCriterions = new ArrayList<RankCriterion>();
 	private RankCriterion rankCriterion = null;
-	private Comparator<Integer> comparator;
 	private boolean inverted = false;
+	private boolean mean = false;
+	
+	@SuppressWarnings("unchecked")
+	private void updateScores()
+	{	playersScores.clear();
+		RankingService rankingService = GameStatistics.getRankingService();
+		for(Entry<Integer,Profile> entry: profilesMap.entrySet())
+		{	Profile profile = entry.getValue();
+			Integer playerId = entry.getKey();
+			PlayerRating playerRating = rankingService.getPlayerRating(playerId);
+			HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+			List<Comparable> list = new ArrayList<Comparable>();
+			if(rankCriterion==RankCriterion.MEAN)
+			{	double mean = 0;
+				double stdev = 0;
+				if(playerRating!=null)
+				{	mean = playerRating.getRating();
+					stdev = playerRating.getRatingDeviation();
+				}
+				list.add(mean);
+				list.add(stdev);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.ROUNDCOUNT)
+			{	int roundcount = 0;
+				if(playerRating!=null)
+					roundcount = playerRating.getRoundcount();
+				list.add(roundcount);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.NAME)
+			{	String name = profile.getName();
+				list.add(name);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.BOMBS)
+			{	double bombs = playersStats.get(playerId).getScore(Score.BOMBS);
+				list.add(bombs);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.ITEMS)
+			{	double items = playersStats.get(playerId).getScore(Score.ITEMS);
+				list.add(items);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.BOMBEDS)
+			{	double bombeds = playersStats.get(playerId).getScore(Score.BOMBEDS);
+				list.add(bombeds);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.BOMBINGS)
+			{	double bombings = playersStats.get(playerId).getScore(Score.BOMBINGS);
+				list.add(bombings);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.CROWNS)
+			{	double crowns = playersStats.get(playerId).getScore(Score.CROWNS);
+				list.add(crowns);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.PAINTINGS)
+			{	double paintings = playersStats.get(playerId).getScore(Score.CROWNS);
+				list.add(paintings);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.TIME_PLAYED)
+			{	long time = playersStats.get(playerId).getScore(Score.TIME);
+				list.add(time);
+				list.add(time);
+			}
+			else if(rankCriterion==RankCriterion.ROUNDS_PLAYED)
+			{	long roundsPlayed = playersStats.get(playerId).getRoundsPlayed();
+				list.add(roundsPlayed);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.ROUNDS_WON)
+			{	long roundsWon = playersStats.get(playerId).getRoundsWon();
+				list.add(roundsWon);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.ROUNDS_DRAWN)
+			{	long roundsDrawn = playersStats.get(playerId).getRoundsDrawn();
+				list.add(roundsDrawn);
+				list.add(playerId);
+			}
+			else if(rankCriterion==RankCriterion.ROUNDS_LOST)
+			{	long roundsLost = playersStats.get(playerId).getRoundsLost();
+				list.add(roundsLost);
+				list.add(playerId);
+			}
+			playersScores.put(playerId,list);
+		}
+	}
 	
 	public void setSort(RankCriterion sort)
 	{	if(rankCriterion==sort)
-			inverted = !inverted;
-		else if(sort==RankCriterion.MEAN)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					RankingService rankingService = GameStatistics.getRankingService();
-					PlayerRating playerRating1 = rankingService.getPlayerRating(playerId1);
-					PlayerRating playerRating2 = rankingService.getPlayerRating(playerId2);
-					double value1 = 0;
-					double stdev1 = 0;
-					if(playerRating1!=null)
-					{	value1 = playerRating1.getRating();
-						stdev1 = playerRating1.getRatingDeviation();
-					}
-					double value2 = 0;
-					double stdev2 = 0;
-					if(playerRating2!=null)
-					{	value2 = playerRating2.getRating();
-						stdev2 = playerRating2.getRatingDeviation();
-					}
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else if(stdev1<stdev2)
-						result = -1;
-					else if(stdev1>stdev2)
-						result = 1;
-					else
-						result = playerId1-playerId2;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.ROUNDCOUNT)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					RankingService rankingService = GameStatistics.getRankingService();
-					PlayerRating playerRating1 = rankingService.getPlayerRating(playerId1);
-					PlayerRating playerRating2 = rankingService.getPlayerRating(playerId2);
-					double value1 = 0;
-					if(playerRating1!=null)
-						value1 = playerRating1.getRoundcount();
-					double value2 = 0;
-					if(playerRating2!=null)
-						value2 = playerRating2.getRoundcount();
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.BOMBS)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-					double value1 = playersStats.get(playerId1).getScore(Score.BOMBS);
-					double value2 = playersStats.get(playerId2).getScore(Score.BOMBS);
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.ITEMS)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-					double value1 = playersStats.get(playerId1).getScore(Score.ITEMS);
-					double value2 = playersStats.get(playerId2).getScore(Score.ITEMS);
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.BOMBEDS)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-					double value1 = playersStats.get(playerId1).getScore(Score.BOMBEDS);
-					double value2 = playersStats.get(playerId2).getScore(Score.BOMBEDS);
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.BOMBINGS)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-					double value1 = playersStats.get(playerId1).getScore(Score.BOMBINGS);
-					double value2 = playersStats.get(playerId2).getScore(Score.BOMBINGS);
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.CROWNS)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-					double value1 = playersStats.get(playerId1).getScore(Score.CROWNS);
-					double value2 = playersStats.get(playerId2).getScore(Score.CROWNS);
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.PAINTINGS)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-					double value1 = playersStats.get(playerId1).getScore(Score.CROWNS);
-					double value2 = playersStats.get(playerId2).getScore(Score.CROWNS);
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.TIME_PLAYED)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-					double value1 = playersStats.get(playerId1).getScore(Score.TIME);
-					double value2 = playersStats.get(playerId2).getScore(Score.TIME);
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.ROUNDS_PLAYED)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-					double value1 = playersStats.get(playerId1).getRoundsPlayed();
-					double value2 = playersStats.get(playerId2).getRoundsPlayed();
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.ROUNDS_WON)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-					double value1 = playersStats.get(playerId1).getRoundsWon();
-					double value2 = playersStats.get(playerId2).getRoundsWon();
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.ROUNDS_DRAWN)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-					double value1 = playersStats.get(playerId1).getRoundsDrawn();
-					double value2 = playersStats.get(playerId2).getRoundsDrawn();
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-		else if(sort==RankCriterion.ROUNDS_LOST)
-		{	comparator = new Comparator<Integer>()
-			{	@Override
-				public int compare(Integer playerId1, Integer playerId2)
-				{	int result;
-					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-					double value1 = playersStats.get(playerId1).getRoundsLost();
-					double value2 = playersStats.get(playerId2).getRoundsLost();
-					if(value1>value2)
-						result = -1;
-					else if(value1<value2)
-						result = 1;
-					else
-						result = 0;
-					return result;
-				}
-			};			
-		}
-	
-		if(rankCriterion!=null)
-		{	rankCriterion = sort;
-			refresh();
-		}
+			inverted = !inverted;		
 		else
-		{	rankCriterion = sort;
+		{	inverted = false;
+			rankCriterion = sort;
 		}
+		refresh();
 	}
 	
 	public enum RankCriterion
 	{	MEAN,
 		ROUNDCOUNT,
+		NAME,
 		BOMBS,
 		BOMBINGS,
 		BOMBEDS,
@@ -930,6 +869,18 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				{	currentPage--;
 					refreshList();
 				}
+			}
+			// mean/sum
+			else if(pos==COL_SUM_MEAN)
+			{	String key;
+				if(mean)
+					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_MEAN;
+				else
+					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_SUM;
+				JLabel lbl = (JLabel)buttonsPanel.getComponent(COL_SUM_MEAN);
+				GuiTools.setLabelKey(lbl,key,true);
+				mean = !mean;
+				refresh();
 			}
 			// next page
 			else if(pos==COL_NEXT)

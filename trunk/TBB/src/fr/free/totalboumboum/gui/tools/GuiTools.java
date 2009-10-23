@@ -757,6 +757,13 @@ public class GuiTools
 	
 	private static void initDataImages()
 	{	String baseFolder = GuiFileTools.getDataPath()+File.separator;
+		// average
+		{	String folder = baseFolder+GuiFileTools.FILE_AVERAGE;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_MEAN
+			};
+			loadTableImages(folder,uses);
+		}
 		// bombs
 		{	String folder = baseFolder+GuiFileTools.FILE_BOMBS;
 			String[] uses =
@@ -1009,6 +1016,13 @@ public class GuiTools
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_TIME,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_TIME,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_TIME
+			};
+			loadTableImages(folder,uses);
+		}
+		// total
+		{	String folder = baseFolder+GuiFileTools.FILE_TOTAL;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_SUM
 			};
 			loadTableImages(folder,uses);
 		}

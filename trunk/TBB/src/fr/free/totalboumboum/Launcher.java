@@ -1065,10 +1065,9 @@ public class Launcher
 	 *  	- est-ce que le quick mode gère les stats ??
 	 *  	- inclure les résultats simulés dans les stats
 	 *  	- bouton pour réinitialiser les stats
-	 *  	- paramètres de glicko2
 	 *  	- considérer le fait de séparer les suicide des bombeds-bombings
-	 *  	- affichage : bouton pour passer de moyennes à totaux
 	 *  	- affichage : possibilité de masquer les joueurs pas enregistrés ou IA/humains
 	 *  	- affichage : évolution (A, V, -) par rapport au classement précédent (i.e. besoin du classement précédent)
+	 *  	- passer à la classe en paramètre une liste des colonnes à afficher, dans l'ordre d'affichage
 	 */
 }

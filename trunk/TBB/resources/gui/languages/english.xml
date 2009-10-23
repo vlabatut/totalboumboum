@@ -1015,6 +1015,8 @@
 						<text name="Unregister" value="Unregister"  tooltip="Unregister the player from the ranking system" />
 						<text name="Next" value="Next page"  tooltip="Go to the next ranking page" />
 						<text name="Previous" value="Previous page"  tooltip="Go to the previous ranking page" />
+						<text name="Mean" value="Mean"  tooltip="Switch to means view" />
+						<text name="Sum" value="Sum"  tooltip="Switch to counts view" />
 					</group>
 				</group>
 
