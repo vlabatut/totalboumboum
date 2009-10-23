@@ -224,6 +224,7 @@ public class GuiKeys
 	public static final String STANDARD = "Standard";
 	public static final String START = "Start";
 	public static final String STATISTICS = "Statistics";
+	public static final String SUM = "Sum";
 	public static final String THEME = "Theme";
 	public static final String TIME = "Time";
 	public static final String TITLE = "Title";
@@ -1206,6 +1207,8 @@ public class GuiKeys
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+UNREGISTER;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_NEXT = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+NEXT;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_PREVIOUS = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+PREVIOUS;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_SUM = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+SUM;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_MEAN = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+MEAN;
 			/* GLICKO2 */
 			public static final String COMMON_STATISTICS_PLAYER_GLICKO2 = COMMON_STATISTICS_PLAYER+GLICKO2;
 			public static final String COMMON_STATISTICS_PLAYER_GLICKO2_TITLE = COMMON_STATISTICS_PLAYER_GLICKO2+TITLE;

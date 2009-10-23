@@ -105,7 +105,7 @@ public class PlayerStatisticsData extends EntitledDataPanel
 			mainPanel.setShowType(true);
 			mainPanel.setShowMean(true);
 			mainPanel.setShowStdev(true);
-			mainPanel.setShowVolatility(true);
+			mainPanel.setShowVolatility(false);
 			mainPanel.setShowRoundcount(true);
 			mainPanel.setShowRoundsPlayed(false);
 			mainPanel.setShowRoundsWon(false);
