@@ -2,24 +2,24 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Coupe de test" type="CUP" />
 	<played matches="12" rounds="5" />
-	<dates start="2009-10-23T00:10:24" save="2009-10-23T01:16:42" />
+	<dates start="2009-10-23T16:01:59" save="2009-10-23T17:06:45" />
 	<players>
+		<player name="0708.Şahin+Yıldırım" />
 		<player name="0708.Göksay+Köse" />
-		<player name="0708.Bingöl+Ketenci" />
+		<player name="0708.Okan+Yüksel" />
+		<player name="0708.Cirit+Mutlu" />
+		<player name="0708.Kurtuluş+Özsoy" />
+		<player name="0708.Hanci+Toprak" />
+		<player name="0708.Eren+Gökçe" />
+		<player name="0708.Baydar+Camcı" />
 		<player name="0708.Göksel+Mengeş" />
+		<player name="0708.Bingöl+Ketenci" />
+		<player name="0708.Çağlayan+Elmas" />
+		<player name="0708.Başman+Sandallı" />
+		<player name="0708.Demirkol+Doğan" />
+		<player name="0708.Kılıç+Pala" />
 		<player name="0708.Keçer+Yaman" />
 		<player name="0708.Çamaş+Demirbaş" />
-		<player name="0708.Başman+Sandallı" />
-		<player name="0708.Hanci+Toprak" />
-		<player name="0708.Kurtuluş+Özsoy" />
-		<player name="0708.Baydar+Camcı" />
-		<player name="0708.Kılıç+Pala" />
-		<player name="0708.Demirkol+Doğan" />
-		<player name="0708.Şahin+Yıldırım" />
-		<player name="0708.Eren+Gökçe" />
-		<player name="0708.Okan+Yüksel" />
-		<player name="0708.Çağlayan+Elmas" />
-		<player name="0708.Cirit+Mutlu" />
 	</players>
 </archive>
 
