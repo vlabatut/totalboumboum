@@ -1055,6 +1055,10 @@ public class Launcher
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
 	 * 
+	 *  - sélection des joueurs : pouvoir faire une sélection 
+	 *  	- aléatoire
+	 *  	- en fonction du rang
+	 *  	- faire apparaitre le rang des joueurs lors de leur sélection ? leur couleur ?
 	 * 	- créer un log des commandes (désactivable ds options advanced)
 	 *  - écran options IA
 	 *  	- possibilité d'avance-rapide sur les matches à IA only
