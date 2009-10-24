@@ -80,11 +80,11 @@ public class Glicko2Saver
 		}
 	}
 
-	public static void init() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static ResultsBasedRankingService init() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// change ranking properties
 		
 		// create ranking service
-		ResultsBasedRankingService rankingService = new ResultsBasedRankingService();
+		ResultsBasedRankingService result = new ResultsBasedRankingService();
 		
 		// get ids list
 	    List<Integer> idsList = ProfileLoader.getIdsList();
@@ -92,10 +92,11 @@ public class Glicko2Saver
 		// register all existing players
 		for(Integer id: idsList)
 		{	System.out.println(id);
-			rankingService.registerPlayer(id);
+			result.registerPlayer(id);
 		}
 		
 		// save the rankings
-		saveStatistics(rankingService);
+		saveStatistics(result);
+		return result;
 	}
 }

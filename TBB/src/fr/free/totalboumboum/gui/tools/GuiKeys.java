@@ -91,6 +91,8 @@ public class GuiKeys
 	public static final String DIMENSION = "Dimension";
 	public static final String DISABLED = "Disabled";
 	public static final String DISCRETIZE = "Discretize";
+	public static final String DO = "Do";
+	public static final String DONE = "Done";
 	public static final String DOWN = "Down";
 	public static final String DRAW = "Draw";
 	public static final String DRAWN = "Drawn";
@@ -197,6 +199,7 @@ public class GuiKeys
 	public static final String RED = "Red";
 	public static final String REGISTER = "Register";
 	public static final String REGULAR = "Regular";
+	public static final String REINIT = "Reinit";
 	public static final String RESET = "Reset";
 	public static final String RESOURCES = "Resources";
 	public static final String RESULTS = "Results";
@@ -542,6 +545,11 @@ public class GuiKeys
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD_TITLE = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD+TITLE;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD_MINUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD+MINUS;
 					public static final String MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD_PLUS = MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD+PLUS;
+				/* REINIT */
+				public static final String MENU_OPTIONS_STATISTICS_LINE_REINIT = MENU_OPTIONS_STATISTICS_LINE+REINIT;
+				public static final String MENU_OPTIONS_STATISTICS_LINE_REINIT_TITLE = MENU_OPTIONS_STATISTICS_LINE_REINIT+TITLE;
+				public static final String MENU_OPTIONS_STATISTICS_LINE_REINIT_DO = MENU_OPTIONS_STATISTICS_LINE_REINIT+DO;
+				public static final String MENU_OPTIONS_STATISTICS_LINE_REINIT_DONE = MENU_OPTIONS_STATISTICS_LINE_REINIT+DONE;
 		/* VIDEO */
 		public static final String MENU_OPTIONS_VIDEO = MENU_OPTIONS+VIDEO;
 		public static final String MENU_OPTIONS_VIDEO_TITLE = MENU_OPTIONS_VIDEO+TITLE;

@@ -68,9 +68,9 @@ public class OverallStatsSaver
 		}
 	}
 
-	public static void init() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static HashMap<Integer,PlayerStats> init() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// create stats map
-		HashMap<Integer,PlayerStats> playersStats = new HashMap<Integer, PlayerStats>();
+		HashMap<Integer,PlayerStats> result = new HashMap<Integer, PlayerStats>();
 		
 		// get ids list
 	    List<Integer> idsList = ProfileLoader.getIdsList();
@@ -79,10 +79,11 @@ public class OverallStatsSaver
 		for(Integer id: idsList)
 		{	System.out.println(id);
 			PlayerStats playerStats = new PlayerStats(id);
-			playersStats.put(id,playerStats);
+			result.put(id,playerStats);
 		}
 		
 		// save the rankings
-		saveStatistics(playersStats);
+		saveStatistics(result);
+		return result;
 	}
 }

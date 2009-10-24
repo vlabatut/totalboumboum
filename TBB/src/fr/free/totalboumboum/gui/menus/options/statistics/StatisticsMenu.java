@@ -36,13 +36,17 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.statistics.StatisticsConfiguration;
 import fr.free.totalboumboum.configuration.statistics.StatisticsConfigurationSaver;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.QuestionModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.statistics.GameStatistics;
 
-public class StatisticsMenu extends InnerMenuPanel
+public class StatisticsMenu extends InnerMenuPanel implements ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
@@ -83,27 +87,17 @@ public class StatisticsMenu extends InnerMenuPanel
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
 		{	StatisticsConfiguration statisticsConfiguration = statsData.getStatisticsConfiguration();
-			Configuration.setStatisticsConfiguration(statisticsConfiguration);
-			try
-			{	StatisticsConfigurationSaver.saveStatisticsConfiguration(Configuration.getStatisticsConfiguration());
+			boolean reinit = statisticsConfiguration.getReinit();
+			if(reinit)
+			{	String key = GuiKeys.MENU_OPTIONS_CONFIRM_TITLE;
+				ArrayList<String> text = new ArrayList<String>();
+				text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_CONFIRM_QUESTION));
+				questionModal = new QuestionModalDialogPanel(getMenuParent(),key,text);
+				questionModal.addListener(this);
+				getFrame().setModalDialog(questionModal);
 			}
-			catch (IllegalArgumentException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SecurityException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
-			replaceWith(parent);
+			else
+				confirm(reinit);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL))
 		{	replaceWith(parent);
@@ -112,5 +106,80 @@ public class StatisticsMenu extends InnerMenuPanel
 	
 	public void refresh()
 	{	//
+	}
+
+	private void confirm(boolean reinit)
+	{	// set stats
+		StatisticsConfiguration statisticsConfiguration = statsData.getStatisticsConfiguration();
+		Configuration.setStatisticsConfiguration(statisticsConfiguration);
+		
+		// possibly reinit stats
+		if(reinit)
+		{	try
+			{	GameStatistics.reset();
+			}
+			catch (IllegalArgumentException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SecurityException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IllegalAccessException e1)
+			{	e1.printStackTrace();
+			}
+			catch (NoSuchFieldException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ClassNotFoundException e1)
+			{	e1.printStackTrace();
+			}
+		}
+		// save stats
+		try
+		{	StatisticsConfigurationSaver.saveStatisticsConfiguration(Configuration.getStatisticsConfiguration());
+		}
+		catch (IllegalArgumentException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SecurityException e1)
+		{	e1.printStackTrace();
+		}
+		catch (ParserConfigurationException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SAXException e1)
+		{	e1.printStackTrace();
+		}
+		catch (IOException e1)
+		{	e1.printStackTrace();
+		}
+		
+//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
+		replaceWith(parent);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private QuestionModalDialogPanel questionModal = null;
+	
+	@Override
+	public void modalDialogButtonClicked(String buttonCode)
+	{	getFrame().unsetModalDialog();
+		if(questionModal!=null)
+		{	questionModal = null;
+			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+			{	confirm(true);			
+			}
+		}
 	}
 }

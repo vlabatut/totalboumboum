@@ -1064,11 +1064,10 @@ public class Launcher
 	 *  	- possibilité d'avance-rapide sur les matches à IA only
 	 *  - écran stats
 	 *  	- accélérer encore l'affichage des données ?
-	 *  	- switcher entre totaux et moyennes ? (un bouton sup entre haut et bas ?)
 	 *  - options pour les stats ?
+	 *  	- mettre une confirmation sur le bouton de reset des stats
 	 *  	- est-ce que le quick mode gère les stats ??
 	 *  	- inclure les résultats simulés dans les stats
-	 *  	- bouton pour réinitialiser les stats
 	 *  	- considérer le fait de séparer les suicide des bombeds-bombings
 	 *  	- affichage : possibilité de masquer les joueurs pas enregistrés ou IA/humains
 	 *  	- affichage : évolution (A, V, -) par rapport au classement précédent (i.e. besoin du classement précédent)

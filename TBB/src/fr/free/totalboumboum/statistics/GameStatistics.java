@@ -98,11 +98,21 @@ public class GameStatistics
 		}
 	}	
 	
+	public static void reset() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	resetPlayersStats();
+		resetRankingService();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS STATISTICS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private static HashMap<Integer,PlayerStats> playersStats = new HashMap<Integer, PlayerStats>();
 
+	public static void resetPlayersStats() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	HashMap<Integer,PlayerStats> playersStats = OverallStatsSaver.init();
+		GameStatistics.playersStats = playersStats;
+	}
+	
 	public static HashMap<Integer,PlayerStats> getPlayersStats()
 	{	return playersStats;	
 	}
@@ -149,6 +159,11 @@ public class GameStatistics
 	/////////////////////////////////////////////////////////////////
 	private static RankingService rankingService;
 
+	public static void resetRankingService() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	RankingService rankingService = Glicko2Saver.init();
+		GameStatistics.rankingService = rankingService;
+	}
+	
 	public static RankingService getRankingService()
 	{	return rankingService;
 	}
