@@ -312,6 +312,11 @@
 							<text name="Plus" value="Plus" tooltip="Increase the number of games per period" />
 						</group>
 					</group>
+					<group name="Reinit">
+						<text name="Title" value="Reset stats" tooltip="Reset all statistics (cannot be canceled)" />
+						<text name="Do" value="Reset stats" tooltip="Reset all statistics (cannot be canceled)" />
+						<text name="Done" value="Stats reseted" tooltip="Statistics have been reseted" />
+					</group>
 				</group>
 			</group>
 

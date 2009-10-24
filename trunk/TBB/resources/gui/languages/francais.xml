@@ -312,6 +312,11 @@
 							<text name="Plus" value="Plus" tooltip="Augmenter le nombre de manches par période" />
 						</group>
 					</group>
+					<group name="Reinit">
+						<text name="Title" value="Réinitialisation" tooltip="Réinitialiser les statistiques (ne peut pas être annulé)" />
+						<text name="Do" value="Réinitialisation" tooltip="Réinitialiser les statistiques (ne peut pas être annulé)" />
+						<text name="Done" value="Réinitialisé" tooltip="Les statistiques ont été réinitialisées" />
+					</group>
 				</group>
 			</group>
 

@@ -50,6 +50,7 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 	private static final int LINE_DEFAULT_RATING_DEVIATION = 3;
 	private static final int LINE_DEFAULT_RATING_VOLATILITY = 4;
 	private static final int LINE_GAMES_PER_PERIOD = 5;
+	private static final int LINE_REINIT = 6;
 
 	private LinesSubPanel optionsPanel;
 	private StatisticsConfiguration statisticsConfiguration;
@@ -69,7 +70,9 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 			int iconWidth = optionsPanel.getLineHeight();
 			
 			// data
-			{	statisticsConfiguration = Configuration.getStatisticsConfiguration().copy();;
+			{	StatisticsConfiguration original = Configuration.getStatisticsConfiguration();
+				original.setReinit(false);
+				statisticsConfiguration = original.copy();;
 				
 				// #0 INCLUDE QUICKSTARTS
 				{	Line ln = optionsPanel.getLine(LINE_INCLUDE_QUICKSTARTS);
@@ -283,8 +286,32 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 
+				// #0 REINIT STATS
+				{	Line ln = optionsPanel.getLine(LINE_REINIT);
+					ln.addLabel(0);
+					int col = 0;
+					// name
+					{	ln.setLabelMinWidth(col,titleWidth);
+						ln.setLabelPrefWidth(col,titleWidth);
+						ln.setLabelMaxWidth(col,titleWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_STATISTICS_LINE_REINIT_TITLE,false);
+						col++;
+					}
+					// value
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+						ln.setLabelMinWidth(col,valueWidth);
+						ln.setLabelPrefWidth(col,valueWidth);
+						ln.setLabelMaxWidth(col,valueWidth);
+						setReinit();
+						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
+				}
+				
 				// EMPTY
-				{	for(int line=LINE_GAMES_PER_PERIOD+1;line<LINE_COUNT;line++)
+				{	for(int line=LINE_REINIT+1;line<LINE_COUNT;line++)
 					{	Line ln = optionsPanel.getLine(line);
 						int col = 0;
 						int maxWidth = ln.getWidth();
@@ -349,6 +376,16 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 		String text = Integer.toString(gamesPerPeriod);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_STATISTICS_LINE_GLICKO2_GAMES_PER_PERIOD_TITLE+GuiKeys.TOOLTIP); 
 		optionsPanel.getLine(LINE_GAMES_PER_PERIOD).setLabelText(2,text,tooltip);
+	}
+	
+	private void setReinit()
+	{	boolean reinit = statisticsConfiguration.getReinit();
+		String key;
+		if(reinit)
+			key = GuiKeys.MENU_OPTIONS_STATISTICS_LINE_REINIT_DONE;
+		else
+			key = GuiKeys.MENU_OPTIONS_STATISTICS_LINE_REINIT_DO;
+		optionsPanel.getLine(LINE_REINIT).setLabelKey(1,key,true);
 	}
 	
 	@Override
@@ -463,6 +500,12 @@ public class StatisticsData extends EntitledDataPanel implements MouseListener
 				// common
 				statisticsConfiguration.setGamesPerPeriod(gamesPerPeriod);
 				setGamesPerPeriod();
+				break;
+			// reinit
+			case LINE_REINIT:
+				boolean reinit = !statisticsConfiguration.getReinit();
+				statisticsConfiguration.setReinit(reinit);
+				setReinit();
 				break;
 		}
 

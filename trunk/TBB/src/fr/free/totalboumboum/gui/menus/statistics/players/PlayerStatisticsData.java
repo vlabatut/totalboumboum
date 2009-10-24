@@ -22,6 +22,7 @@ package fr.free.totalboumboum.gui.menus.statistics.players;
  */
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,6 +33,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.gui.common.content.subpanel.statistics.PlayerStatisticSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.statistics.StatisticColumn;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -98,50 +100,29 @@ public class PlayerStatisticsData extends EntitledDataPanel
 	// MENU INTERACTION				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void setView(String view)
-	{	HashMap<Integer,Profile> profiles = mainPanel.getPlayersProfiles();
-		mainPanel.setPlayersIds(null,LINES);
+	{	List<StatisticColumn> columns = new ArrayList<StatisticColumn>();
+		columns.add(StatisticColumn.GENERAL_BUTTON);
+		columns.add(StatisticColumn.GENERAL_RANK);
+		columns.add(StatisticColumn.GENERAL_TYPE);
+		columns.add(StatisticColumn.GENERAL_NAME);
 		if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2))
-		{	mainPanel.setShowPortrait(false);
-			mainPanel.setShowType(true);
-			mainPanel.setShowMean(true);
-			mainPanel.setShowStdev(true);
-			mainPanel.setShowVolatility(false);
-			mainPanel.setShowRoundcount(true);
-			mainPanel.setShowRoundsPlayed(false);
-			mainPanel.setShowRoundsWon(false);
-			mainPanel.setShowRoundsDrawn(false);
-			mainPanel.setShowRoundsLost(false);
-			mainPanel.setShowTimePlayed(false);
-			mainPanel.setShowScores(false);			
+		{	columns.add(StatisticColumn.GLICKO_MEAN);
+			columns.add(StatisticColumn.GLICKO_DEVIATION);
+			columns.add(StatisticColumn.GLICKO_ROUNDCOUNT);
 		}
 		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES))
-		{	mainPanel.setShowPortrait(false);
-			mainPanel.setShowType(true);
-			mainPanel.setShowMean(false);
-			mainPanel.setShowStdev(false);
-			mainPanel.setShowVolatility(false);
-			mainPanel.setShowRoundcount(false);
-			mainPanel.setShowRoundsPlayed(false);
-			mainPanel.setShowRoundsWon(false);
-			mainPanel.setShowRoundsDrawn(false);
-			mainPanel.setShowRoundsLost(false);
-			mainPanel.setShowTimePlayed(false);
-			mainPanel.setShowScores(true);		
+		{	columns.add(StatisticColumn.SCORE_BOMBS);
+			columns.add(StatisticColumn.SCORE_ITEMS);
+			columns.add(StatisticColumn.SCORE_BOMBEDS);
+			columns.add(StatisticColumn.SCORE_BOMBINGS);
 		}
 		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS))
-		{	mainPanel.setShowPortrait(false);
-			mainPanel.setShowType(true);
-			mainPanel.setShowMean(false);
-			mainPanel.setShowStdev(false);
-			mainPanel.setShowVolatility(false);
-			mainPanel.setShowRoundcount(false);
-			mainPanel.setShowRoundsPlayed(true);
-			mainPanel.setShowRoundsWon(true);
-			mainPanel.setShowRoundsDrawn(true);
-			mainPanel.setShowRoundsLost(true);
-			mainPanel.setShowTimePlayed(true);
-			mainPanel.setShowScores(false);		
+		{	columns.add(StatisticColumn.ROUNDS_PLAYED);
+			columns.add(StatisticColumn.ROUNDS_WON);
+			columns.add(StatisticColumn.ROUNDS_DRAWN);
+			columns.add(StatisticColumn.ROUNDS_LOST);
+			columns.add(StatisticColumn.SCORE_TIME);
 		}
-		mainPanel.setPlayersIds(profiles,LINES);		
+		mainPanel.setColumns(columns);
 	}
 }

@@ -23,10 +23,11 @@ package fr.free.totalboumboum.configuration.statistics;
 
 public class StatisticsConfiguration
 {
-
 	public StatisticsConfiguration copy()
 	{	StatisticsConfiguration result = new StatisticsConfiguration();
 
+		result.setReinit(reinit);
+	
 		result.setDefaultRating(defaultRating);
 		result.setDefaultRatingDeviation(defaultRatingDeviation);
 		result.setDefaultRatingVolatility(defaultRatingVolatility);
@@ -38,6 +39,19 @@ public class StatisticsConfiguration
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// REINIT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean reinit;
+	
+	public boolean getReinit()
+	{	return reinit;	
+	}
+	
+	public void setReinit(boolean reinit)
+	{	this.reinit = reinit;	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// GLICKO-2			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -56,6 +70,7 @@ public class StatisticsConfiguration
 
 	public void setDefaultRating(int defaultRating)
 	{	this.defaultRating = defaultRating;
+		System.setProperty("jrs.defaultRating",Integer.toString(defaultRating));
 	}
 
 	public int getDefaultRatingDeviation()
@@ -64,6 +79,7 @@ public class StatisticsConfiguration
 
 	public void setDefaultRatingDeviation(int defaultRatingDeviation)
 	{	this.defaultRatingDeviation = defaultRatingDeviation;
+		System.setProperty("jrs.defaultRatingDeviation",Integer.toString(defaultRatingDeviation));
 	}
 
 	public float getDefaultRatingVolatility()
@@ -72,6 +88,7 @@ public class StatisticsConfiguration
 
 	public void setDefaultRatingVolatility(float defaultRatingVolatility)
 	{	this.defaultRatingVolatility = defaultRatingVolatility;
+		System.setProperty("jrs.defaultRatingVolatility",Float.toString(defaultRatingVolatility));
 	}
 
 	public int getGamesPerPeriod()
@@ -80,6 +97,7 @@ public class StatisticsConfiguration
 
 	public void setGamesPerPeriod(int gamesPerPeriod)
 	{	this.gamesPerPeriod = gamesPerPeriod;
+		System.setProperty("jrs.aveGamesPerPeriod",Float.toString(defaultRatingVolatility));
 	}
 
 	/////////////////////////////////////////////////////////////////
