@@ -77,7 +77,8 @@ public class OverallStatsSaver
 
 		// register all existing players
 		for(Integer id: idsList)
-		{	System.out.println(id);
+		{	if(verbose)
+				System.out.println(id);
 			PlayerStats playerStats = new PlayerStats(id);
 			result.put(id,playerStats);
 		}
