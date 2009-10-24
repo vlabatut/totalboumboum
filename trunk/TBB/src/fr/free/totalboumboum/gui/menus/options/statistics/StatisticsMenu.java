@@ -89,9 +89,9 @@ public class StatisticsMenu extends InnerMenuPanel implements ModalDialogPanelLi
 		{	StatisticsConfiguration statisticsConfiguration = statsData.getStatisticsConfiguration();
 			boolean reinit = statisticsConfiguration.getReinit();
 			if(reinit)
-			{	String key = GuiKeys.MENU_OPTIONS_CONFIRM_TITLE;
+			{	String key = GuiKeys.MENU_OPTIONS_STATISTICS_DIALOG_TITLE;
 				ArrayList<String> text = new ArrayList<String>();
-				text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_CONFIRM_QUESTION));
+				text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_STATISTICS_DIALOG_QUESTION));
 				questionModal = new QuestionModalDialogPanel(getMenuParent(),key,text);
 				questionModal.addListener(this);
 				getFrame().setModalDialog(questionModal);

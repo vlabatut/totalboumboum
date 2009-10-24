@@ -313,10 +313,14 @@
 						</group>
 					</group>
 					<group name="Reinit">
-						<text name="Title" value="Reset stats" tooltip="Reset all statistics (cannot be canceled)" />
-						<text name="Do" value="Reset stats" tooltip="Reset all statistics (cannot be canceled)" />
+						<text name="Title" value="Reset stats" tooltip="Reset all statistics" />
+						<text name="Do" value="Reset stats" tooltip="Reset all statistics" />
 						<text name="Done" value="Stats reseted" tooltip="Statistics have been reseted" />
 					</group>
+				</group>
+				<group name="Dialog">
+					<text name="Title" value="Statistics reset" tooltip="Reset all statistics" />
+					<text name="Question" value="Do you really want to reset all statistics? (This action cannot be canceled)" tooltip="Do you really want to reset all statistics? (This action cannot be canceled)" />
 				</group>
 			</group>
 
