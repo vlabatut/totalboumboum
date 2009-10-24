@@ -91,7 +91,8 @@ public class Glicko2Saver
 
 		// register all existing players
 		for(Integer id: idsList)
-		{	System.out.println(id);
+		{	if(verbose)
+				System.out.println(id);
 			result.registerPlayer(id);
 		}
 		
