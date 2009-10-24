@@ -318,6 +318,10 @@
 						<text name="Done" value="Réinitialisé" tooltip="Les statistiques ont été réinitialisées" />
 					</group>
 				</group>
+				<group name="Dialog">
+					<text name="Title" value="Réinitialisation" tooltip="Réinitialisation des statistiques" />
+					<text name="Question" value="Êtes-vous sûr(e) de vouloir réinitialiser les statistiques ? (cette action ne peut pas être annulée)" />
+				</group>
 			</group>
 
 			<group name="Video">
