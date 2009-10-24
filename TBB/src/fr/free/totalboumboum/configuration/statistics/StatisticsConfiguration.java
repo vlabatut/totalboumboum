@@ -97,7 +97,7 @@ public class StatisticsConfiguration
 
 	public void setGamesPerPeriod(int gamesPerPeriod)
 	{	this.gamesPerPeriod = gamesPerPeriod;
-		System.setProperty("jrs.aveGamesPerPeriod",Float.toString(defaultRatingVolatility));
+		System.setProperty("jrs.aveGamesPerPeriod",Integer.toString(gamesPerPeriod));
 	}
 
 	/////////////////////////////////////////////////////////////////
