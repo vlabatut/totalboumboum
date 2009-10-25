@@ -235,4 +235,18 @@ public class CalculusTools
 				result.add(i);
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FUNCTIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * process the value of a sigmoid function for x.
+	 * The lambda parameter defines the slope (the higher, the sloping)
+	 * and the theta parameter defines the center of symmetry. 
+	 */
+	public static double sigmoid(double lambda, double theta, double x)
+	{	double result;
+		result = 1/(1+Math.exp(-lambda*(x-theta)));
+		return result;
+	}
 }

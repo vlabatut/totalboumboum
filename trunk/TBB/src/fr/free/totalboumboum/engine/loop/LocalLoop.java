@@ -631,7 +631,7 @@ System.out.println();
 			
 			if(!isPaused)
 			{	totalTime = totalTime + (afterTime-lastTime);
-				round.updateTime(totalTime);				
+				round.updateTime(totalTime);
 			}
 			
 			if(isCanceled())
