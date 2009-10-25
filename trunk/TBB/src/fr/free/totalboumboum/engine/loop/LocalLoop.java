@@ -1127,7 +1127,7 @@ System.out.println();
 	
 	public void finish()
 	{	if(!finished)
-		{	finished = true;	
+		{	super.finish();
 			// system listener
 			panel.removeKeyListener(systemControl);
 			// players
@@ -1144,9 +1144,7 @@ System.out.println();
 			// level
 			level.finish();
 			level = null;
-			// round
-			round = null;
-			// controm
+			// control
 			systemControl.finish();
 			systemControl = null;
 		}		

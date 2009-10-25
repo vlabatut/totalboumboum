@@ -1,17 +1,5 @@
 package fr.free.totalboumboum.game.round;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.io.File;
-
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.loop.LocalLoop;
-import fr.free.totalboumboum.game.GameData;
-import fr.free.totalboumboum.gui.tools.MessageDisplayer;
-import fr.free.totalboumboum.tools.FileTools;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -32,6 +20,18 @@ import fr.free.totalboumboum.tools.FileTools;
  * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.io.File;
+
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.loop.LocalLoop;
+import fr.free.totalboumboum.game.GameData;
+import fr.free.totalboumboum.gui.tools.MessageDisplayer;
+import fr.free.totalboumboum.tools.FileTools;
 
 public class RoundVariables
 {

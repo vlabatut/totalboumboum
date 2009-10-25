@@ -1,14 +1,5 @@
 package fr.free.totalboumboum.statistics;
 
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.statistics.general.OverallStatsSaver;
-import fr.free.totalboumboum.statistics.glicko2.Glicko2Saver;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -29,6 +20,16 @@ import fr.free.totalboumboum.statistics.glicko2.Glicko2Saver;
  * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
+
+
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.statistics.general.OverallStatsSaver;
+import fr.free.totalboumboum.statistics.glicko2.Glicko2Saver;
 
 public class InitStatistics
 {	
