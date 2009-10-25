@@ -1018,6 +1018,7 @@
 						<text name="Name" value="Nom"  tooltip="Nom du joueur" />
 						<text name="Portrait" value="Personnage"  tooltip="Personnage choisi par le joueur" />
 						<text name="Rank" value="n°"  tooltip="Classement du joueur" />
+						<text name="Evolution" value="Évolution"  tooltip="Évolution par rapport au classement précédent" />
 						<text name="Type" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
 					</group>
 					<group name="Data">
@@ -1026,6 +1027,11 @@
 						<text name="NoRank" value="-"  tooltip="Ce joueur n'est pas classé" />
 						<text name="Mean" value="Moy."  />
 						<text name="Total" value="Total"  />
+						<text name="Enter" value="Entrée"  tooltip="Ce joueur vient d'intégrer le classement" />
+						<text name="Exit" value="Sortie"  tooltip="Ce joueur vient de sortir du classement" />
+						<text name="Down" value="Descente"  tooltip="Ce joueur est déscendu dans le classement" />
+						<text name="Up" value="Sortie"  tooltip="Ce joueur est monté dans le classement" />
+						<text name="Same" value="Inchangé"  tooltip="Le classement de ce joueur n'a pas changé" />
 					</group>
 					<group name="Button">
 						<text name="Register" value="Ajouter"  tooltip="Ajouter le joueur dans le classement" />

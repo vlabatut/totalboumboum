@@ -98,6 +98,7 @@ public class GuiKeys
 	public static final String DRAWN = "Drawn";
 	public static final String EDIT = "Edit";
 	public static final String ENABLED = "Enabled";
+	public static final String EVOLUTION = "Evolution";
 	public static final String FALSE = "False";
 	public static final String FILE = "File";
 	public static final String FINISH = "Finish";
@@ -207,6 +208,7 @@ public class GuiKeys
 	public static final String ROUND = "Round";
 	public static final String ROUNDS = "Rounds";
 	public static final String RUST = "Rust";
+	public static final String SAME = "Same";
 	public static final String SAVE = "Save";
 	public static final String SCORE = "Score";
 	public static final String SCORES = "Scores";
@@ -1205,6 +1207,7 @@ public class GuiKeys
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_NAME = COMMON_STATISTICS_PLAYER_COMMON_HEADER+NAME;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_PORTRAIT = COMMON_STATISTICS_PLAYER_COMMON_HEADER+PORTRAIT;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK = COMMON_STATISTICS_PLAYER_COMMON_HEADER+RANK;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_EVOLUTION= COMMON_STATISTICS_PLAYER_COMMON_HEADER+EVOLUTION;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_HEADER_TYPE = COMMON_STATISTICS_PLAYER_COMMON_HEADER+TYPE;
 				/* DATA */
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA = COMMON_STATISTICS_PLAYER_COMMON+DATA;
@@ -1213,6 +1216,11 @@ public class GuiKeys
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_NO_RANK = COMMON_STATISTICS_PLAYER_COMMON_DATA+NO+RANK;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_MEAN = COMMON_STATISTICS_PLAYER_COMMON_DATA+MEAN;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_TOTAL = COMMON_STATISTICS_PLAYER_COMMON_DATA+TOTAL;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_ENTER = COMMON_STATISTICS_PLAYER_COMMON_DATA+SAME;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_EXIT = COMMON_STATISTICS_PLAYER_COMMON_DATA+SAME;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_SAME = COMMON_STATISTICS_PLAYER_COMMON_DATA+SAME;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_UP = COMMON_STATISTICS_PLAYER_COMMON_DATA+UP;
+				public static final String COMMON_STATISTICS_PLAYER_COMMON_DATA_DOWN = COMMON_STATISTICS_PLAYER_COMMON_DATA+DOWN;
 				/* BUTTON */
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON = COMMON_STATISTICS_PLAYER_COMMON+BUTTON;
 				public static final String COMMON_STATISTICS_PLAYER_COMMON_BUTTON_REGISTER = COMMON_STATISTICS_PLAYER_COMMON_BUTTON+REGISTER;
