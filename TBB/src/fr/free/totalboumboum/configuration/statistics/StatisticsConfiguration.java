@@ -32,6 +32,7 @@ public class StatisticsConfiguration
 		result.setDefaultRatingDeviation(defaultRatingDeviation);
 		result.setDefaultRatingVolatility(defaultRatingVolatility);
 		result.setGamesPerPeriod(gamesPerPeriod);
+        System.setProperty("jrs.performanceVarianceAroundPlayerSkill", "50");
 		
 		result.setIncludeSimulations(includeSimulations);
 		result.setIncludeQuickStarts(includeQuickStarts);

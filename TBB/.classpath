@@ -8,6 +8,5 @@
 			<attribute name="javadoc_location" value="http://www.jdom.org/docs/apidocs"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="resources/lib/commons-math-2.0.jar" sourcepath="resources/lib/commons-math-2.0-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

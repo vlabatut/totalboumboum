@@ -38,14 +38,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Map.Entry;
 
-import org.apache.commons.math.ConvergenceException;
-import org.apache.commons.math.FunctionEvaluationException;
-import org.apache.commons.math.analysis.UnivariateRealFunction;
-import org.apache.commons.math.analysis.integration.LegendreGaussIntegrator;
-import org.apache.commons.math.analysis.integration.RombergIntegrator;
-import org.apache.commons.math.analysis.integration.SimpsonIntegrator;
-import org.apache.commons.math.analysis.integration.TrapezoidIntegrator;
-
 import fr.free.totalboumboum.statistics.GameStatistics;
 
 /** The ranking service.
@@ -848,58 +840,68 @@ public class RankingService implements Serializable {
 
         return p;
     }
-    
+
+    /**
+     * process the probability of draw between two players 
+     * depending on their ratings and deviations,
+     * and relatively to a specified tolerance interval
+     * @param 
+     * 		pr1
+     * @param 
+     * 		pr2
+     * @return
+     * 		a probability of draw
+     * @author 
+     * 		Vincent
+     */
+    public double calculateProbabilityOfDraw(PlayerRating pr1, PlayerRating pr2)
+    {	double m1 = pr1.getRating();
+		double m2 = pr2.getRating();
+		double s1 = pr1.getRatingDeviation();
+		double s2 = pr2.getRatingDeviation();
+		double result = calculateProbabilityOfDraw(m1,s1,m2,s2);
+    	return result;
+    }
+
+    /**
+     * process the probability for player 1 to win against player 2 
+     * depending on their ratings and deviations,
+     * and relatively to a specified tolerance interval
+     * @param 
+     * 		pr1
+     * @param 
+     * 		pr2
+     * @return
+     * 		a probability of win
+     * @author 
+     * 		Vincent
+     */
     public double calculateProbabilityOfWin(PlayerRating pr1, PlayerRating pr2)
-    {	double result = 0;
-    
-    	UnivariateRealFunction f = new CumulativeDistributionFunction(pr1,pr2);
-    	double min = 0; //we consider the rating can't be negative
-    	double max = 10000; // seems like a reasonable upper limit
-    	LegendreGaussIntegrator i1 = new LegendreGaussIntegrator(5,10000);
-    	RombergIntegrator i2 = new RombergIntegrator();
-    	SimpsonIntegrator i3 = new SimpsonIntegrator();
-    	TrapezoidIntegrator i4 = new TrapezoidIntegrator();
-    	try
-    	{	
-long time = System.currentTimeMillis();    	
-    		result = i1.integrate(f,min,max);
-long time2 = System.currentTimeMillis();
-System.out.println("LegendreGaussIntegrator ("+(time2-time)+"): "+result);
-time = time2;
-    		i2.integrate(f,min,max);
-time2 = System.currentTimeMillis();
-System.out.println("RombergIntegrator ("+(time2-time)+"): "+result);    	
-time = time2;
-    		i3.integrate(f,min,max);
-time2 = System.currentTimeMillis();
-System.out.println("SimpsonIntegrator ("+(time2-time)+"): "+result);    	
-time = time2;
-    		i4.integrate(f,min,max);
-time2 = System.currentTimeMillis();
-System.out.println("TrapezoidIntegrator ("+(time2-time)+"): "+result);    	
-		}
-    	catch (ConvergenceException e)
-    	{	e.printStackTrace();
-		}
-    	catch (FunctionEvaluationException e)
-    	{	e.printStackTrace();
-		}
-    	catch (IllegalArgumentException e)
-    	{	e.printStackTrace();
-		}
-    	
-    	
-    	
-    	double m = pr1.getRating()-pr2.getRating();
-    	double s = Math.sqrt(Math.pow(pr1.getRatingDeviation(),2)+Math.pow(pr2.getRatingDeviation(),2));
+    {	double m1 = pr1.getRating();
+    	double m2 = pr2.getRating();
+    	double s1 = pr1.getRatingDeviation();
+    	double s2 = pr2.getRatingDeviation();
+   	
+    	//double drawProba = calculateProbabilityOfDraw(m1,s1,m2,s2);
+    	double m = m1-m2;
+    	double s = Math.sqrt(s1*s1+s2*s2);
     	double temp = -m/(s*Math.sqrt(2));
-    	result = 0.5*(1+CumulativeDistributionFunction.erf(temp));
-System.out.println("New: "+result);
-  	
-result = calculateProbabilityOfDraw(pr1.getRating(),pr1.getRatingDeviation(),pr2.getRating(),pr2.getRatingDeviation());    	
-System.out.println("New: "+result);
-    	
-    	
+    	double t = 1/(1+0.5*Math.abs(temp));
+    	double tab[] = {0.17087277,-0.82215223,1.48851587,-1.13520398,0.27886807,-0.18628806,0.09678418,0.37409196,1.00002368,-1.26551223};
+    	double temp2 = 0;
+    	for(Double d: tab)
+    		temp2 = t*temp2 + d;    		
+    	double temp3 = 1-t*Math.exp(-temp*temp+temp2);
+    	double erf;
+    	if(temp>=0)
+    		erf = temp3;
+    	else
+    		erf = -temp3;
+    	double rawLostProba = 0.5*(1+erf);
+    	double result = 1 - rawLostProba;
+    	//System.out.println("drawProba: "+drawProba);
+    	//System.out.println("rawLostProba: "+rawLostProba);
+    	//System.out.println("result: "+result);
     	return result;
     }
 }

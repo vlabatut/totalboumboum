@@ -21,68 +21,21 @@ package fr.free.totalboumboum.engine.loop;
  * 
  */
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Stroke;
-import java.awt.geom.Path2D;
-import java.awt.geom.Rectangle2D;
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.ai.AbstractAiManager;
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
-import fr.free.totalboumboum.engine.container.itemset.Itemset;
-import fr.free.totalboumboum.engine.container.level.HollowLevel;
-import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.container.level.Players;
-import fr.free.totalboumboum.engine.container.tile.Tile;
-import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.Role;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
-import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.action.gather.SpecificGather;
-import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
-import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
-import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactory;
-import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactoryLoader;
-import fr.free.totalboumboum.engine.content.sprite.item.Item;
-import fr.free.totalboumboum.engine.control.SystemControl;
 import fr.free.totalboumboum.engine.player.Player;
-import fr.free.totalboumboum.engine.player.PlayerLocation;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.round.RoundVariables;
+import fr.free.totalboumboum.statistics.GameStatistics;
+import fr.free.totalboumboum.statistics.detailed.Score;
 import fr.free.totalboumboum.statistics.detailed.StatisticEvent;
-import fr.free.totalboumboum.tools.CalculusTools;
-import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.StringTools;
-import fr.free.totalboumboum.tools.StringTools.TimeUnit;
+import fr.free.totalboumboum.statistics.general.PlayerStats;
+import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
+import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 
 public class SimulationLoop extends Loop
 {	private static final long serialVersionUID = 1L;
@@ -96,12 +49,104 @@ public class SimulationLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	public void run()
 	{	List<Profile> profiles = round.getProfiles();
+		HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		
-		// process the final results
-	
+		// process the final results		
+		List<List<Profile>> metalist = new ArrayList<List<Profile>>();
+		List<Profile> temp = new ArrayList<Profile>(profiles);
+		metalist.add(temp);
+		List<Boolean> flags = new ArrayList<Boolean>();
+		flags.add(false);
+		processOrder(metalist,flags);
+		
 		// process the total statistics
-	
+		HashMap<Integer,HashMap<Score,Long>> playersScores = new HashMap<Integer,HashMap<Score,Long>>();
+		double stdev = 1; //TODO would be better with the actual standard-deviation
+		Score scores[] = Score.values();
+		for(Profile profile: profiles)
+		{	int playerId = profile.getId();
+			HashMap<Score,Long> playerScores = new HashMap<Score,Long>();
+			playersScores.put(playerId,playerScores);
+			PlayerStats playerStats = playersStats.get(playerId);
+			for(int i=0;i<scores.length;i++)
+			{	Score score = scores[i];
+				long total = playerStats.getScore(score);
+				Random generator = new Random();
+				double z = generator.nextGaussian();
+				long value = Math.round(z*stdev + total);
+				if(value<0)
+					value = 0;
+				playerScores.put(score,value);
+			}			
+		}
+		
+		// verify consistancy between scores
+		long previousTime = Long.MAX_VALUE;
+		long totalKills = 0;
+		for(int i=0;i<metalist.size();i++)
+		{	List<Profile> list = metalist.get(i);
+			long groupTime = -1;
+			for(int j=0;j<list.size();j++)
+			{	Profile profile = list.get(i);
+				int playerId = profile.getId();
+				HashMap<Score,Long> playerScores = playersScores.get(playerId);
+				// death
+				long deaths = playerScores.get(Score.BOMBEDS);
+				if(i==0)
+					deaths = 0;
+				else
+					deaths = 1;
+				playerScores.put(Score.BOMBEDS,deaths);
+				// kills
+				long kills = playerScores.get(Score.BOMBINGS);
+				if(totalKills+kills>profiles.size())
+				{	kills = profiles.size() - totalKills;
+					playerScores.put(Score.BOMBINGS,kills);
+				}
+				//bombs
+				long bombs = playerScores.get(Score.BOMBS);
+				if(bombs<kills)
+					playerScores.put(Score.BOMBS,kills);
+				// time
+				long time = playerScores.get(Score.TIME); //NOTE should be generalized for other points systems
+				if(groupTime<0)
+				{	if(time>previousTime)
+					{	time = previousTime-1;
+						playerScores.put(Score.TIME,time);
+					}
+					groupTime = time;
+					previousTime = time;
+				}
+				else
+					playerScores.put(Score.TIME,groupTime);
+				// other scores
+				playerScores.put(Score.CROWNS,0l);//NOTE temporary;
+				playerScores.put(Score.PAINTINGS,0l);//NOTE temporary;
+			}
+		}
+		
 		// process the round events
+		for(Profile profile: profiles)
+		{	int playerId = profile.getId();
+			HashMap<Score,Long> playerScores = playersScores.get(playerId);
+			// Score.BOMBS
+			long playerScore = playerScores.get(Score.BOMBS);
+			// Score.ITEMS
+			// Score.BOMBEDS
+			// Score.BOMBINGS
+			// Score.TIME
+			// Score.PAINTINGS
+			// Score.CROWNS
+			
+			for(Score score: Score.values())
+			{	long playerScore = playerScores.get(score);
+				
+			}			
+		}
+		
+		StatisticEvent event;
+		
+		round.addStatisticEvent(event)
 	}
 
 	public void playerOut(Player player)
@@ -111,6 +156,58 @@ public class SimulationLoop extends Loop
 		panel.playerOut(index);	
 	}
 
+	private void processOrder(List<List<Profile>> metalist, List<Boolean> flags)
+	{	// find a list to process
+		int index = flags.indexOf(false);
+		List<Profile> list = metalist.get(index);
+		flags.set(index,true);
+		
+		// process the list
+		if(list.size()>1)
+		{	RankingService rankingService = GameStatistics.getRankingService();
+			Iterator<Profile> it = list.iterator();
+			Profile p1 = it.next();
+			int id1 = p1.getId();
+			PlayerRating pr1 = rankingService.getPlayerRating(id1);
+			List<Profile> before = new ArrayList<Profile>();
+			List<Profile> after = new ArrayList<Profile>();
+			while(it.hasNext())
+			{	Profile p2 = it.next();
+				it.remove();
+				int id2 = p2.getId();
+				PlayerRating pr2 = rankingService.getPlayerRating(id2);
+				// draw ?
+				double threshold = rankingService.calculateProbabilityOfDraw(pr1,pr2);
+				double proba = Math.random();
+				if(proba>threshold)
+				{	// win ?
+					threshold = rankingService.calculateProbabilityOfWin(pr1,pr2);
+					proba = Math.random();
+					if(proba<=threshold)
+						after.add(p2);
+					else
+						before.add(p2);
+				}
+			}
+			if(before.size()>0)
+			{	metalist.add(index,before);
+				flags.add(index,false);
+				index++;
+			}
+			if(after.size()>0)
+			{	index++;
+				if(index<metalist.size())
+				{	metalist.add(index,after);
+					flags.add(index,false);
+				}
+				else
+				{	metalist.add(after);
+					flags.add(false);
+				}
+			}
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
