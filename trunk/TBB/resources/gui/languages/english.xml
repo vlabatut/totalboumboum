@@ -1010,6 +1010,7 @@
 						<text name="Name" value="Name"  tooltip="Player name" />
 						<text name="Portrait" value="Character"  tooltip="Player character" />
 						<text name="Rank" value="#"  tooltip="Player ranking" />
+						<text name="Evolution" value="Evolution"  tooltip="Change compared to last rating" />
 						<text name="Type" value="Human/Computer"  tooltip="Human or computer-controlled" />
 					</group>
 					<group name="Data">
@@ -1018,6 +1019,11 @@
 						<text name="NoRank" value="-"  tooltip="This player is not ranked" />
 						<text name="Mean" value="Mean"  />
 						<text name="Total" value="Total"  />
+						<text name="Enter" value="Enter"  tooltip="This player has just entered the ranking" />
+						<text name="Exit" value="Exit"  tooltip="This player has just left the ranking" />
+						<text name="Down" value="Down"  tooltip="This player's ranking decreased" />
+						<text name="Up" value="Up"  tooltip="This player's ranking increased" />
+						<text name="Same" value="Same"  tooltip="This player's ranking stayed the same" />
 					</group>
 					<group name="Button">
 						<text name="Register" value="Register"  tooltip="Register the player to the ranking system" />

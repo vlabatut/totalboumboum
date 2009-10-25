@@ -426,6 +426,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// evolution
+		{	String folder = baseFolder+GuiFileTools.FILE_EVOLUTION;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_EVOLUTION
+			};
+			loadTableImages(folder,uses);
+		}
 		// false
 		{	String folder = baseFolder+GuiFileTools.FILE_FALSE;
 			String[] uses =
@@ -803,6 +810,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// down
+		{	String folder = baseFolder+GuiFileTools.FILE_DOWN;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_DOWN
+			};
+			loadTableImages(folder,uses);
+		}
 		// edit
 		{	String folder = baseFolder+GuiFileTools.FILE_EDIT;
 			String[] uses =
@@ -812,6 +826,13 @@ public class GuiTools
 				GuiKeys.COMMON_PLAYERS_SELECTION_DATA_ADD,
 				GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_ROUND_BROWSE,
 				GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_SELECT
+			};
+			loadTableImages(folder,uses);
+		}
+		// equal
+		{	String folder = baseFolder+GuiFileTools.FILE_EQUAL;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_SAME
 			};
 			loadTableImages(folder,uses);
 		}
@@ -874,6 +895,13 @@ public class GuiTools
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_BOMBINGS,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_BOMBINGS,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_BOMBINGS
+			};
+			loadTableImages(folder,uses);
+		}
+		// left
+		{	String folder = baseFolder+GuiFileTools.FILE_LEFT;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_EXIT
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1002,6 +1030,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// right
+		{	String folder = baseFolder+GuiFileTools.FILE_RIGHT;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_ENTER
+			};
+			loadTableImages(folder,uses);
+		}
 		// share
 		{	String folder = baseFolder+GuiFileTools.FILE_SHARE;
 			String[] uses =
@@ -1045,6 +1080,13 @@ public class GuiTools
 				GuiKeys.MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART_ENABLED,
 				GuiKeys.MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION_ENABLED,
 				GuiKeys.MENU_OPTIONS_STATISTICS_LINE_REINIT_DONE
+			};
+			loadTableImages(folder,uses);
+		}
+		// up
+		{	String folder = baseFolder+GuiFileTools.FILE_UP;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_UP
 			};
 			loadTableImages(folder,uses);
 		}

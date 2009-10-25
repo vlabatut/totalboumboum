@@ -101,23 +101,32 @@ public class PlayerStatisticsData extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	public void setView(String view)
 	{	List<StatisticColumn> columns = new ArrayList<StatisticColumn>();
-		columns.add(StatisticColumn.GENERAL_BUTTON);
-		columns.add(StatisticColumn.GENERAL_RANK);
-		columns.add(StatisticColumn.GENERAL_TYPE);
-		columns.add(StatisticColumn.GENERAL_NAME);
 		if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2))
-		{	columns.add(StatisticColumn.GLICKO_MEAN);
+		{	columns.add(StatisticColumn.GENERAL_BUTTON);
+			columns.add(StatisticColumn.GENERAL_RANK);
+			columns.add(StatisticColumn.GENERAL_EVOLUTION);
+			columns.add(StatisticColumn.GENERAL_TYPE);
+			columns.add(StatisticColumn.GENERAL_NAME);
+			columns.add(StatisticColumn.GLICKO_MEAN);
 			columns.add(StatisticColumn.GLICKO_DEVIATION);
 			columns.add(StatisticColumn.GLICKO_ROUNDCOUNT);
 		}
 		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES))
-		{	columns.add(StatisticColumn.SCORE_BOMBS);
+		{	columns.add(StatisticColumn.GENERAL_BUTTON);
+			columns.add(StatisticColumn.GENERAL_RANK);
+			columns.add(StatisticColumn.GENERAL_TYPE);
+			columns.add(StatisticColumn.GENERAL_NAME);
+			columns.add(StatisticColumn.SCORE_BOMBS);
 			columns.add(StatisticColumn.SCORE_ITEMS);
 			columns.add(StatisticColumn.SCORE_BOMBEDS);
 			columns.add(StatisticColumn.SCORE_BOMBINGS);
 		}
 		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS))
-		{	columns.add(StatisticColumn.ROUNDS_PLAYED);
+		{	columns.add(StatisticColumn.GENERAL_BUTTON);
+			columns.add(StatisticColumn.GENERAL_RANK);
+			columns.add(StatisticColumn.GENERAL_TYPE);
+			columns.add(StatisticColumn.GENERAL_NAME);
+			columns.add(StatisticColumn.ROUNDS_PLAYED);
 			columns.add(StatisticColumn.ROUNDS_WON);
 			columns.add(StatisticColumn.ROUNDS_DRAWN);
 			columns.add(StatisticColumn.ROUNDS_LOST);

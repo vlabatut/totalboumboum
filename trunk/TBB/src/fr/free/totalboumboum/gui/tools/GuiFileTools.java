@@ -41,10 +41,13 @@ public class GuiFileTools
 	public final static String FILE_CROWNS = "crowns.png";
 	public final static String FILE_CUSTOM = "custom.png";
 	public final static String FILE_DEATHS = "deaths.png";
+	public final static String FILE_DOWN = "down.png";
 	public final static String FILE_DIMENSION = "dimension.png";
 	public final static String FILE_DISCRETIZE = "discretize.png";
 	public final static String FILE_DRAW = "draw.png";
 	public final static String FILE_EDIT = "edit.png";
+	public final static String FILE_EQUAL = "equal.png";
+	public final static String FILE_EVOLUTION = "evolution.png";
 	public final static String FILE_FALSE = "false.png";
 	public final static String FILE_FRAGS = "frags.png";
 	public final static String FILE_FRAME = "frame.png";
@@ -57,6 +60,7 @@ public class GuiFileTools
 	public final static String FILE_ITEMS = "items.png";
 	public final static String FILE_KEY = "key.png";
 	public final static String FILE_KILLS = "kills.png";
+	public final static String FILE_LEFT = "left.png";
 	public final static String FILE_LEVEL = "level.png";
 	public final static String FILE_LIMITS = "limits.png";
 	public final static String FILE_LOSE = "lose.png";
@@ -78,6 +82,7 @@ public class GuiFileTools
 	public final static String FILE_PROFILE = "profile.png";
 	public final static String FILE_RANK = "rank.png";
 	public final static String FILE_REGULAR = "regular.png";
+	public final static String FILE_RIGHT = "right.png";
 	public final static String FILE_SAVE = "save.png";
 	public final static String FILE_SCORE = "score.png";
 	public final static String FILE_SHARE = "share.png";
@@ -88,6 +93,7 @@ public class GuiFileTools
 	public final static String FILE_TITLE = "title.png";
 	public final static String FILE_TOTAL = "total.png";
 	public final static String FILE_TRUE = "true.png";
+	public final static String FILE_UP = "up.png";
 	public final static String FILE_VOLATILITY = "volatility.png";
 	public final static String FILE_WIN = "win.png";
 

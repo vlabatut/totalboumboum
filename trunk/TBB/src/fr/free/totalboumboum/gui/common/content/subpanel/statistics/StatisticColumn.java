@@ -1,28 +1,5 @@
 package fr.free.totalboumboum.gui.common.content.subpanel.statistics;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
-
-import javax.swing.JLabel;
-
-import fr.free.totalboumboum.configuration.profile.Portraits;
-import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
-import fr.free.totalboumboum.gui.tools.GuiKeys;
-import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.statistics.GameStatistics;
-import fr.free.totalboumboum.statistics.detailed.Score;
-import fr.free.totalboumboum.statistics.general.PlayerStats;
-import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
-import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
-import fr.free.totalboumboum.tools.StringTools;
-import fr.free.totalboumboum.tools.StringTools.TimeUnit;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -44,10 +21,35 @@ import fr.free.totalboumboum.tools.StringTools.TimeUnit;
  * 
  */
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+
+import javax.swing.JLabel;
+
+import fr.free.totalboumboum.configuration.profile.Portraits;
+import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
+import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.statistics.GameStatistics;
+import fr.free.totalboumboum.statistics.detailed.Score;
+import fr.free.totalboumboum.statistics.general.PlayerStats;
+import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
+import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
+import fr.free.totalboumboum.tools.StringTools;
+import fr.free.totalboumboum.tools.StringTools.TimeUnit;
+
 public enum StatisticColumn
 {	// general
 	GENERAL_BUTTON,
 	GENERAL_RANK,
+	GENERAL_EVOLUTION,
 	GENERAL_PORTRAIT,
 	GENERAL_TYPE,
 	GENERAL_NAME,
@@ -75,7 +77,9 @@ public enum StatisticColumn
 		// general
 		if(this==GENERAL_BUTTON || this==GENERAL_RANK)
 			result = false;
-		if(this==GENERAL_PORTRAIT)
+		else if(this==GENERAL_EVOLUTION)
+			result = false;
+		else if(this==GENERAL_PORTRAIT)
 			result = false;
 		else if(this==GENERAL_TYPE)
 			result = false;
@@ -123,9 +127,11 @@ public enum StatisticColumn
 		// general
 		if(this==GENERAL_BUTTON)
 			result = null;
-		if(this==GENERAL_RANK)
+		else if(this==GENERAL_RANK)
 			result = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK;
-		if(this==GENERAL_PORTRAIT)
+		else if(this==GENERAL_EVOLUTION)
+			result = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_EVOLUTION;
+		else if(this==GENERAL_PORTRAIT)
 			result = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_PORTRAIT;
 		else if(this==GENERAL_TYPE)
 			result = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_TYPE;
@@ -180,7 +186,7 @@ public enum StatisticColumn
 			JLabel label = panel.getLabel(line,col);
 			label.addMouseListener(container);
 		}
-		if(this==GENERAL_RANK)
+		else if(this==GENERAL_RANK)
 		{	if(playerRating!=null)
 			{	String text = Integer.toString(playerRank);
 				String tooltip = text;
@@ -193,6 +199,42 @@ public enum StatisticColumn
 			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_NO_RANK;
 				panel.setLabelKey(line,col,key,false);
 			}
+		}
+		else if(this==GENERAL_EVOLUTION)
+		{	int previousRank = playerStats.getPreviousRank();
+			String key = null;
+			String tooltip = "";
+			if(playerRating!=null)
+			{	if(previousRank==-1)
+				{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_ENTER;
+					tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);				
+				}
+				else if(previousRank<playerRank)
+				{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_DOWN;
+					tooltip = Integer.toString(previousRank-playerRank);
+				}
+				else if(previousRank>playerRank)
+				{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_UP;
+					tooltip = "+"+Integer.toString(previousRank-playerRank);				
+				}
+				else
+				{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_SAME;
+					tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);;				
+				}
+			}
+			else if(previousRank!=-1)
+			{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_EXIT;
+				tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);			
+			}
+			if(key!=null)
+			{	BufferedImage icon = GuiTools.getIcon(key);
+				panel.setLabelIcon(line,col,icon,tooltip);	
+			}
+/*
+ * TODO 
+ * éventuellement regénérer les stats pour compléter le nouveau champ
+ * 			
+ */
 		}
 		else if(this==GENERAL_PORTRAIT)
 		{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
@@ -386,6 +428,9 @@ public enum StatisticColumn
 			PlayerRating playerRating = rankingService.getPlayerRating(playerId);
 			HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 			PlayerStats playerStats = playersStats.get(playerId);
+			int playerRank = rankingService.getPlayerRank(playerId);
+			int playersCount = rankingService.getPlayers().size();
+			int previousRank = playerStats.getPreviousRank();
 			long totalRoundsPlayed = playerStats.getRoundsPlayed();
 			List<Comparable> list = new ArrayList<Comparable>();
 			// process
@@ -396,7 +441,26 @@ public enum StatisticColumn
 				list.add(rank);
 				list.add(playerId);
 			}
-			if(this==GENERAL_PORTRAIT)
+			else if(this==GENERAL_EVOLUTION)
+			{	int evolution;
+				if(playerRating!=null)
+				{	if(previousRank==-1)
+						evolution = playersCount-playerRank+1;
+					else if(previousRank<playerRank)
+						evolution = playerRank-previousRank;
+					else if(previousRank>playerRank)
+						evolution = playerRank-previousRank;
+					else
+						evolution = playerRank-previousRank;
+				}
+				else if(previousRank!=-1)
+					evolution = playerRank-playersCount-1;
+				else
+					evolution = Integer.MIN_VALUE;
+				list.add(evolution);
+				list.add(playerId);
+			}
+			else if(this==GENERAL_PORTRAIT)
 			{	String spriteName = profile.getSpritePack()+File.separator+profile.getSpriteFolder();
 				list.add(spriteName);
 				list.add(playerId);
