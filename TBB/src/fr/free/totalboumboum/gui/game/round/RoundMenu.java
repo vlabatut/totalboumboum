@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -38,6 +39,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.ai.AisConfiguration;
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -253,52 +256,78 @@ buttonStatistics.setEnabled(false);
 		{	container.setDataPart(roundStatistics);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_PLAY))
-		{	buttonPlay.setEnabled(false);
+		{	// init
+			List<Profile> profiles = round.getProfiles();
+		
+			// common
+			buttonPlay.setEnabled(false);
 			buttonQuit.setEnabled(false);
 			buttonSave.setEnabled(false);
 			buttonMatch.setEnabled(false);
-			int limit = round.getProfiles().size()+4;
-			loadProgressBar = new JProgressBar(0,limit);
 			int fontSize = GuiTools.getFontSize(getHeight()*0.6);
 			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
-			loadProgressBar.setFont(font);
-			loadProgressBar.setStringPainted(true); 
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_FIRESETMAP);
-			loadProgressBar.setString(text);
 			int width = Integer.MAX_VALUE;
 			int height = getHeight();
 			Dimension dim = new Dimension(width,height);
-			loadProgressBar.setMaximumSize(dim);
-			remove(2);
-			add(loadProgressBar,2);
-			validate();
-			repaint();
-			try
-			{	round.progress();
+			
+			// simulation
+			if(round.isSimulated())
+			{	// create progress bar
+				progressBar = new JProgressBar();
+				progressBar.setFont(font);
+				progressBar.setStringPainted(true); 
+				String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_SIMULATION);
+				progressBar.setString(text);
+				progressBar.setMaximumSize(dim);
+				remove(2);
+				add(progressBar,2);
+				validate();
+				repaint();
+				// start simulation
+				round.simulate();
 			}
-			catch (IllegalArgumentException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SecurityException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ClassNotFoundException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IllegalAccessException e1)
-			{	e1.printStackTrace();
-			}
-			catch (NoSuchFieldException e1)
-			{	e1.printStackTrace();
+			// actual game
+			else
+			{	// create progress bar
+				int limit = profiles.size()+4;
+				progressBar = new JProgressBar(0,limit);
+				progressBar.setFont(font);
+				progressBar.setStringPainted(true); 
+				String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_FIRESETMAP);
+				progressBar.setString(text);
+				progressBar.setMaximumSize(dim);
+				remove(2);
+				add(progressBar,2);
+				validate();
+				repaint();
+				// round advance
+				try
+				{	round.progress();
+				}
+				catch (IllegalArgumentException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SecurityException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ClassNotFoundException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IllegalAccessException e1)
+				{	e1.printStackTrace();
+				}
+				catch (NoSuchFieldException e1)
+				{	e1.printStackTrace();
+				}
 			}
 	    }
 	} 
@@ -315,7 +344,7 @@ buttonStatistics.setEnabled(false);
 	/////////////////////////////////////////////////////////////////
 	// ROUND RENDER PANEL	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private JProgressBar loadProgressBar;
+	private JProgressBar progressBar;
 	
 	@Override
 	public void roundOver()
@@ -336,44 +365,50 @@ buttonStatistics.setEnabled(false);
 
 	@Override
 	public void loadStepOver()
-	{	int val = loadProgressBar.getValue();
+	{	int val = progressBar.getValue();
 		String text;
 		switch(val)
 		{	// firesetmap
 			case 0:
 				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_BOMBSET);
-				loadProgressBar.setString(text);
-				loadProgressBar.repaint();
+				progressBar.setString(text);
+				progressBar.repaint();
 				break;
 			// itemset
 			case 1:
 				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_ITEMSET);
-				loadProgressBar.setString(text);
-				loadProgressBar.repaint();
+				progressBar.setString(text);
+				progressBar.repaint();
 				break;
 			// theme
 			case 2:
 				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_THEME);
-				loadProgressBar.setString(text);
-				loadProgressBar.repaint();
+				progressBar.setString(text);
+				progressBar.repaint();
 				break;
 			// players
 			default:
 				if(val==round.getProfiles().size()+3)
 				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_COMPLETE);
-					loadProgressBar.setString(text);
-					loadProgressBar.repaint();
+					progressBar.setString(text);
+					progressBar.repaint();
 					loopPanel = new LoopPanel(container.getMenuContainer(),container,round.getLoop());
 					replaceWith(loopPanel);
 					loopPanel.start();
 				}
 				else
 				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_PLAYER)+" "+(val-2);
-					loadProgressBar.setString(text);
-					loadProgressBar.repaint();
+					progressBar.setString(text);
+					progressBar.repaint();
 				}
 				break;
 		}
-		loadProgressBar.setValue(val+1);
+		progressBar.setValue(val+1);
+	}
+
+	@Override
+	public void simulationStepOver()
+	{	
+		
 	}
 }

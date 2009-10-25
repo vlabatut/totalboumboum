@@ -7,7 +7,7 @@ import java.io.File;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.tools.MessageDisplayer;
 import fr.free.totalboumboum.tools.FileTools;
@@ -50,9 +50,9 @@ public class RoundVariables
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static Level level;
-	public static Loop loop;
+	public static LocalLoop loop;
 	
-	public static void setLoop(Loop loop)
+	public static void setLoop(LocalLoop loop)
 	{	RoundVariables.loop = loop;
 		RoundVariables.level = loop.getLevel();		
 	}

@@ -429,7 +429,7 @@ public enum StatisticColumn
 			HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 			PlayerStats playerStats = playersStats.get(playerId);
 			int playerRank = rankingService.getPlayerRank(playerId);
-			int playersCount = rankingService.getPlayers().size();
+			//int playersCount = rankingService.getPlayers().size();
 			int previousRank = playerStats.getPreviousRank();
 			long totalRoundsPlayed = playerStats.getRoundsPlayed();
 			List<Comparable> list = new ArrayList<Comparable>();
@@ -445,7 +445,7 @@ public enum StatisticColumn
 			{	int evolution;
 				if(playerRating!=null)
 				{	if(previousRank==-1)
-						evolution = playersCount-playerRank+1;
+						evolution = Integer.MIN_VALUE-2;
 					else if(previousRank<playerRank)
 						evolution = playerRank-previousRank;
 					else if(previousRank>playerRank)
@@ -454,7 +454,7 @@ public enum StatisticColumn
 						evolution = playerRank-previousRank;
 				}
 				else if(previousRank!=-1)
-					evolution = playerRank-playersCount-1;
+					evolution = Integer.MIN_VALUE-1;
 				else
 					evolution = Integer.MIN_VALUE;
 				list.add(evolution);

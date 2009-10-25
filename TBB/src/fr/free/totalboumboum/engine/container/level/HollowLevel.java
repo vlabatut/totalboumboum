@@ -48,7 +48,7 @@ import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
-import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
@@ -79,7 +79,7 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// INIT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void initLevel(Loop loop)
+	public void initLevel(LocalLoop loop)
 	{	// init
     	level = new Level(loop);
     	RoundVariables.setInstanceName(instanceName);

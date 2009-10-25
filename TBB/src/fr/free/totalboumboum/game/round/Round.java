@@ -26,6 +26,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeSet;
 import java.util.Map.Entry;
 
@@ -33,9 +34,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.ai.AisConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
-import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.limit.Limits;
@@ -98,7 +101,7 @@ public class Round implements StatisticHolder, Serializable
 	
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
-		{	loop = new Loop(this);
+		{	loop = new LocalLoop(this);
 			Thread animator = new Thread(loop);
 			animator.start();
 //			loop.init();
@@ -127,9 +130,9 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// LOOP 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	transient private Loop loop = null;
+	transient private LocalLoop loop = null;
 	
-	public Loop getLoop()
+	public LocalLoop getLoop()
 	{	return loop;
 	}	
 	
@@ -239,7 +242,6 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();
 		// points
@@ -378,5 +380,28 @@ public class Round implements StatisticHolder, Serializable
 	
 	public void setMatch(Match match)
 	{	this.match = match;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SIMULATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public boolean isSimulated()
+	{	AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
+		boolean result = aisConfiguration.getHideAllAis();
+		Iterator<Profile> it = getProfiles().iterator();
+		while(it.hasNext() && result)
+		{	Profile profile = it.next();
+			result = profile.hasAi();
+		}
+		return result;
+	}
+	
+	public void simulate()
+	{	if(!isOver())
+		{	loop = new LocalLoop(this);
+			Thread animator = new Thread(loop);
+			animator.start();
+	//		loop.init();
+		}
 	}
 }

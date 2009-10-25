@@ -25,6 +25,5 @@ public interface RoundRenderPanel
 {
 	public void roundOver();
 	public void loadStepOver();
-	
-
+	public void simulationStepOver();
 }

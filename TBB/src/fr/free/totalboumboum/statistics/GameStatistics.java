@@ -24,7 +24,9 @@ package fr.free.totalboumboum.statistics;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
+import java.util.SortedSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -38,6 +40,7 @@ import fr.free.totalboumboum.statistics.general.PlayerStats;
 import fr.free.totalboumboum.statistics.glicko2.Glicko2Loader;
 import fr.free.totalboumboum.statistics.glicko2.Glicko2Saver;
 import fr.free.totalboumboum.statistics.glicko2.jrs.GameResults;
+import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.tools.CalculusTools;
 
@@ -151,7 +154,23 @@ public class GameStatistics
 				playerStats.setRoundsLost(roundsLost+1);
 			}
 		}
+	}
+	
+	public static void updatePreviousRankings()
+	{	// put all values to -1 (to handle non-registered players)
+		for(PlayerStats playerStats: playersStats.values())
+			playerStats.setPreviousRank(-1);
 		
+		// update ranks according to the actual ranking service values
+    	SortedSet<PlayerRating> sortedRatings = rankingService.getSortedPlayerRatings();
+    	int rank = 0;
+    	Iterator<PlayerRating> it = sortedRatings.iterator();
+		while(it.hasNext())
+		{	PlayerRating playerRating = it.next();
+			rank++;
+			int playerId = playerRating.getPlayerId();
+			playersStats.get(playerId).setPreviousRank(rank);
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
