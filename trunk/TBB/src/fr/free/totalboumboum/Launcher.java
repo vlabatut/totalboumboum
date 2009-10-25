@@ -1062,13 +1062,11 @@ public class Launcher
 	 * 	- créer un log des commandes (désactivable ds options advanced)
 	 *  - écran options IA
 	 *  	- possibilité d'avance-rapide sur les matches à IA only
-	 *  - écran stats
-	 *  	- accélérer encore l'affichage des données ?
 	 *  - options pour les stats ?
 	 *  	- mettre une confirmation sur le bouton de reset des stats
 	 *  	- est-ce que le quick mode gère les stats ??
 	 *  	- inclure les résultats simulés dans les stats
-	 *  	- considérer le fait de séparer les suicide des bombeds-bombings
+	 *  	- considérer le fait de séparer les suicides des bombeds-bombings
 	 *  	- affichage : possibilité de masquer les joueurs pas enregistrés ou IA/humains
 	 *  	- affichage : évolution (A, V, -) par rapport au classement précédent (i.e. besoin du classement précédent)
 	 *  	- passer à la classe en paramètre une liste des colonnes à afficher, dans l'ordre d'affichage

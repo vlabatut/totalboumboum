@@ -33,7 +33,7 @@ import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfigurati
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
-import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.engine.loop.LoopRenderPanel;
 import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.match.Match;
@@ -62,7 +62,7 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 {	private static final long serialVersionUID = 1L;
 
 	private BufferStrategy bufferStrategy;
-	private Loop loop;
+	private LocalLoop loop;
 	private JProgressBar loadProgressBar;
 	private Canvas canvas;
 	

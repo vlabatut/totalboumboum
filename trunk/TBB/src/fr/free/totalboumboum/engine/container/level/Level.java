@@ -41,22 +41,22 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.manager.trajectory.MoveZone;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.gui.tools.MessageDisplayer;
 import fr.free.totalboumboum.tools.CalculusTools;
 
 public class Level
-{	public Level(Loop loop)				
+{	public Level(LocalLoop loop)				
 	{	this.loop = loop;
 	}
 	
      /////////////////////////////////////////////////////////////////
 	// LOOP					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Loop loop;
+	private LocalLoop loop;
 
-	public Loop getLoop()
+	public LocalLoop getLoop()
 	{	return loop;	
 	}
 	

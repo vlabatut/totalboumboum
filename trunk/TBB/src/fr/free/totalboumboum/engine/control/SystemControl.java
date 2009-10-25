@@ -26,15 +26,15 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.engine.loop.LocalLoop;
 
 public class SystemControl implements KeyListener
 {	
-	private Loop loop;
+	private LocalLoop loop;
 	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
 	private HashMap<Integer,Boolean> keysPressed;
 	
-	public SystemControl(Loop loop)
+	public SystemControl(LocalLoop loop)
 	{	this.loop = loop;
 		keysPressed = new HashMap<Integer,Boolean>();
 	}

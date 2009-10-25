@@ -104,16 +104,8 @@ public class RankingService implements Serializable {
     public void endPeriod() {
             
     	// TODO added by Vincent to save the previous rankings
-    	SortedSet<PlayerRating> sortedRatings = getSortedPlayerRatings();
-    	int rank = 0;
-    	Iterator<PlayerRating> it = sortedRatings.iterator();
-		while(it.hasNext())
-		{	PlayerRating playerRating = it.next();
-			rank++;
-			int playerId = playerRating.getPlayerId();
-			GameStatistics.getPlayersStats().get(playerId).setPreviousRank(rank);
-		}
-		
+    	GameStatistics.updatePreviousRankings();
+    	
         // End the current rating period
         playerRatings = computePlayerRatings(playerRatings, currentPeriodGameResults);
         clearResults();
