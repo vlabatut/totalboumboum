@@ -27,8 +27,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.player.Player;
+import fr.free.totalboumboum.game.limit.Limits;
+import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.statistics.GameStatistics;
 import fr.free.totalboumboum.statistics.detailed.Score;
@@ -47,6 +50,45 @@ public class SimulationLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public void temp()
+	{	// init
+		List<Profile> profiles = round.getProfiles();
+		HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+		List<Profile> currentPlayers = new ArrayList<Profile>(profiles);
+		HashMap<Integer,HashMap<Score,Long>> currentScores = new HashMap<Integer, HashMap<Score,Long>>();
+		
+		// process theoretical duration
+		long theoreticalDuration = 0;
+		for(Profile profile: profiles)
+		{	int playerId = profile.getId();
+			PlayerStats playerStats = playersStats.get(playerId);
+			double totalTime = playerStats.getScore(Score.TIME);
+			double roundsPlayed = playerStats.getRoundsPlayed();
+			long averageTime = Math.round(totalTime/roundsPlayed);
+			theoreticalDuration = theoreticalDuration + averageTime;
+		}
+		theoreticalDuration = Math.round(theoreticalDuration/(double)profiles.size());
+		
+		// start the simulation
+		long currentTime = 0;
+		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
+		while(!isOver())
+		{	currentTime = currentTime + milliPeriod;
+			for(Profile profile: currentPlayers)
+			{	if(profile!=null)
+				{	
+					
+				}
+			}
+			
+			
+			round.updateTime(currentTime);
+		}
+		round.loopOver();
+	}
+	
+	
+	
 	public void run()
 	{	List<Profile> profiles = round.getProfiles();
 		HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
