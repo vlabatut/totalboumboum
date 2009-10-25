@@ -53,7 +53,7 @@ public class GameStatistics
 	{	// overall statistics
 		playersStats = OverallStatsLoader.loadStatistics();
 		// glicko2 ranking service
-		rankingService = Glicko2Loader.loadStatistics();		
+		rankingService = Glicko2Loader.loadStatistics();
 	}
 	
 	public static void saveStatistics() throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
