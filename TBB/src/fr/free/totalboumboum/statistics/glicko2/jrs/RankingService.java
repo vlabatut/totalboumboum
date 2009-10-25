@@ -38,6 +38,14 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Map.Entry;
 
+import org.apache.commons.math.ConvergenceException;
+import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.UnivariateRealFunction;
+import org.apache.commons.math.analysis.integration.LegendreGaussIntegrator;
+import org.apache.commons.math.analysis.integration.RombergIntegrator;
+import org.apache.commons.math.analysis.integration.SimpsonIntegrator;
+import org.apache.commons.math.analysis.integration.TrapezoidIntegrator;
+
 import fr.free.totalboumboum.statistics.GameStatistics;
 
 /** The ranking service.
@@ -839,5 +847,59 @@ public class RankingService implements Serializable {
         double p = Math.exp( -((m1-m2)*(m1-m2)) / (2*(c*c)) ) * Math.sqrt(d);
 
         return p;
+    }
+    
+    public double calculateProbabilityOfWin(PlayerRating pr1, PlayerRating pr2)
+    {	double result = 0;
+    
+    	UnivariateRealFunction f = new CumulativeDistributionFunction(pr1,pr2);
+    	double min = 0; //we consider the rating can't be negative
+    	double max = 10000; // seems like a reasonable upper limit
+    	LegendreGaussIntegrator i1 = new LegendreGaussIntegrator(5,10000);
+    	RombergIntegrator i2 = new RombergIntegrator();
+    	SimpsonIntegrator i3 = new SimpsonIntegrator();
+    	TrapezoidIntegrator i4 = new TrapezoidIntegrator();
+    	try
+    	{	
+long time = System.currentTimeMillis();    	
+    		result = i1.integrate(f,min,max);
+long time2 = System.currentTimeMillis();
+System.out.println("LegendreGaussIntegrator ("+(time2-time)+"): "+result);
+time = time2;
+    		i2.integrate(f,min,max);
+time2 = System.currentTimeMillis();
+System.out.println("RombergIntegrator ("+(time2-time)+"): "+result);    	
+time = time2;
+    		i3.integrate(f,min,max);
+time2 = System.currentTimeMillis();
+System.out.println("SimpsonIntegrator ("+(time2-time)+"): "+result);    	
+time = time2;
+    		i4.integrate(f,min,max);
+time2 = System.currentTimeMillis();
+System.out.println("TrapezoidIntegrator ("+(time2-time)+"): "+result);    	
+		}
+    	catch (ConvergenceException e)
+    	{	e.printStackTrace();
+		}
+    	catch (FunctionEvaluationException e)
+    	{	e.printStackTrace();
+		}
+    	catch (IllegalArgumentException e)
+    	{	e.printStackTrace();
+		}
+    	
+    	
+    	
+    	double m = pr1.getRating()-pr2.getRating();
+    	double s = Math.sqrt(Math.pow(pr1.getRatingDeviation(),2)+Math.pow(pr2.getRatingDeviation(),2));
+    	double temp = -m/(s*Math.sqrt(2));
+    	result = 0.5*(1+CumulativeDistributionFunction.erf(temp));
+System.out.println("New: "+result);
+  	
+result = calculateProbabilityOfDraw(pr1.getRating(),pr1.getRatingDeviation(),pr2.getRating(),pr2.getRatingDeviation());    	
+System.out.println("New: "+result);
+    	
+    	
+    	return result;
     }
 }

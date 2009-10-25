@@ -607,12 +607,13 @@
 				<text name="Statistics" value="Statistics" tooltip="See the detailed statistics of the current round" />
 			</group>
 			<group name="Progressbar">
-				<text name="Bombset" value="Loading bombs"  />
-				<text name="Firesetmap" value="Loading fires"  />
-				<text name="Itemset" value="Loading items"  />
-				<text name="Theme" value="Loading theme"  />
-				<text name="Player" value="Loading player"  />
-				<text name="Complete" value="Loading complete"  />
+				<text name="Bombset" value="Loading bombs" tooltip="Loading bombs" />
+				<text name="Firesetmap" value="Loading fires" tooltip="Loading fires and explosions" />
+				<text name="Itemset" value="Loading items" tooltip="Loading bonuses and maluses" />
+				<text name="Theme" value="Loading theme" tooltip="Loading the graphical theme" />
+				<text name="Player" value="Loading player" tooltip="Loading players" />
+				<text name="Complete" value="Loading complete" tooltip="Loading completed" />
+				<text name="Simulation" value="Simulation" tooltip="Performing round simulation" />
 			</group>
 			<group name="Description">
 				<text name="Title" value="Round description"  tooltip="Round description" />

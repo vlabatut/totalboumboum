@@ -91,15 +91,17 @@ public class SimulationLoop extends Loop
 	{	super(round);
 	}	
 
-	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
-	{	
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void run()
-	{	
+	{	List<Profile> profiles = round.getProfiles();
+		
+		// process the final results
+	
+		// process the total statistics
+	
+		// process the round events
 	}
 
 	public void playerOut(Player player)
@@ -116,28 +118,7 @@ public class SimulationLoop extends Loop
 	
 	public void finish()
 	{	if(!finished)
-		{	finished = true;	
-			// system listener
-			panel.removeKeyListener(systemControl);
-			// players
-			Iterator<Player> i = players.iterator();
-			while(i.hasNext())
-			{	Player temp = i.next();
-				panel.removeKeyListener(temp.getSpriteControl());
-				temp.finish();
-				i.remove();
-			}
-			// panel
-//			panel.finish();
-			panel = null;
-			// level
-			level.finish();
-			level = null;
-			// round
-			round = null;
-			// controm
-			systemControl.finish();
-			systemControl = null;
+		{	super.finish();
 		}		
 	}	
 }

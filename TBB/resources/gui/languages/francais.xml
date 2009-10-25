@@ -607,12 +607,13 @@
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques détaillées de la manche courante" />
 			</group>
 			<group name="Progressbar">
-				<text name="Bombset" value="Bombes"  />
-				<text name="Firesetmap" value="Feux"  />
-				<text name="Itemset" value="Items"  />
-				<text name="Theme" value="Thème"  />
-				<text name="Player" value="Personnage"  />
-				<text name="Complete" value="Fini"  />
+				<text name="Bombset" value="Bombes"  tooltip="Chargement des bombes" />
+				<text name="Firesetmap" value="Feux"  tooltip="Chargement des flammes et explosions" />
+				<text name="Itemset" value="Items"  tooltip="Chargement des bonus et malus" />
+				<text name="Theme" value="Thème"  tooltip="Chargement du thème graphique" />
+				<text name="Player" value="Personnage"  tooltip="Chargement des personnages" />
+				<text name="Complete" value="Fini"  tooltip="Chargement terminé" />
+				<text name="Simulation" value="Simulation" tooltip="Simulation en cours" />
 			</group>
 			<group name="Description">
 				<text name="Title" value="Description de la manche"  tooltip="Description de la manche" />
