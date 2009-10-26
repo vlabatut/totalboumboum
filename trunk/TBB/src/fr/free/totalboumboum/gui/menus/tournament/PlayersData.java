@@ -144,13 +144,13 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void playerSelectionRandomSelection()
-	{	
-		// remove players already selected
+	{	// remove players already selected
 		List<Integer> playersIds = ProfileLoader.getIdsList();
 		for(Profile profile: players)
 		{	Integer playerId = profile.getId();
 			playersIds.remove(playerId);
 		}
+		
 		// randomly complete selection
 		ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
 		for(int i=players.size();i<GameData.MAX_PROFILES_COUNT;i++)

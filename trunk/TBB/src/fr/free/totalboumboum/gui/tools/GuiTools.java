@@ -437,6 +437,7 @@ public class GuiTools
 		{	String folder = baseFolder+GuiFileTools.FILE_FALSE;
 			String[] uses =
 			{	GuiKeys.COMMON_DIALOG_CANCEL,
+					GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_DELETE,
 			};
 			loadTableImages(folder,uses);
 		}
@@ -657,7 +658,8 @@ public class GuiTools
 				GuiKeys.COMMON_POINTS_MATCH_HEADER_RANKPOINTS,
 				GuiKeys.COMMON_POINTS_ROUND_HEADER_RANKPOINTS,
 				GuiKeys.COMMON_PART_RANK,
-				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK
+				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK,
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_RANK
 			};
 			loadTableImages(folder,uses);
 		}

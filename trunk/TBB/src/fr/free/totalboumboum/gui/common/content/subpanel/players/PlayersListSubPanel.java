@@ -37,6 +37,7 @@ import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiStringTools;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -161,11 +162,19 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 					nf.setMinimumFractionDigits(0);
 					int playerId = profile.getId();
 					int playerRank = rankingService.getPlayerRank(playerId);
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),Integer.toString(playerRank));
+					String text,tooltip;
+					if(playerRank<0)
+					{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_NO_RANK;
+						text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+						tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+					}
+					else
+					{	text = Integer.toString(playerRank);
+						tooltip = text;
+					}
+					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>rankWidth)
 						rankWidth = temp;
-					String text = Integer.toString(playerRank);
-					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					col++;
 				}

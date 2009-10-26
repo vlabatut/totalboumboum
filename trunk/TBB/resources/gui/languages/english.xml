@@ -818,8 +818,10 @@
 				<group name="Header" >
 					<text name="Color" value="Color" tooltip="Selected color" />
 					<text name="Controls" value="Controls" tooltip="Selected controls" />
+					<text name="Delete" value="Unselect all" tooltip="Unselect all profiles" />
 					<text name="Hero" value="Hero" tooltip="Selected character" />
 					<text name="Profile" value="Profile" tooltip="Selected profile" />
+					<text name="Rank" value="#"  tooltip="Rank of the player in the general game statistics" />
 					<text name="Type" value="Type" tooltip="Profile type" />
 				</group>
 				<group name="Data" >
