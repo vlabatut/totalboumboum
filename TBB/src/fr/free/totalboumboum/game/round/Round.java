@@ -38,6 +38,8 @@ import fr.free.totalboumboum.configuration.ai.AisConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.loop.LocalLoop;
+import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.engine.loop.SimulationLoop;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.limit.Limits;
@@ -78,6 +80,11 @@ public class Round implements StatisticHolder, Serializable
 	public void loadStepOver()
 	{	if(panel!=null)
 			panel.loadStepOver();		
+	}
+	
+	public void simulationStepOver()
+	{	if(panel!=null)
+			panel.simulationStepOver();		
 	}
 	
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
@@ -129,16 +136,16 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// LOOP 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	transient private LocalLoop loop = null;
+	transient private Loop loop = null;
 	
-	public LocalLoop getLoop()
+	public Loop getLoop()
 	{	return loop;
 	}	
 	
 	public void loopOver()
 	{	match.roundOver();
 		stats.initEndDate();
-		if(!GameData.quickMode)
+		if(!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts())
 			GameStatistics.update(stats);
 		if(panel!=null)
 		{	panel.roundOver();
@@ -152,6 +159,13 @@ public class Round implements StatisticHolder, Serializable
 
 	public StatisticRound getStats()
 	{	return stats;
+	}
+
+	public void addStatisticEvent(StatisticEvent event)
+	{	if(!isOver())
+		{	stats.addStatisticEvent(event);
+			//stats.computePoints(getPointProcessor());
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -219,13 +233,14 @@ public class Round implements StatisticHolder, Serializable
 		}
 	}
 	
-	public void closeGame()
+	private void closeGame()
 	{	roundOver = true;
 		stats.finalizeTime(this);
 		float[] points = limits.processPoints(this);
 		stats.setPoints(points);
 		celebrate();		
 	}
+	
 	private void celebrate()
 	{	loop.initCelebrationDuration();
 		ArrayList<Integer> winners = getWinners();
@@ -309,13 +324,6 @@ public class Round implements StatisticHolder, Serializable
 	{	return panel;	
 	}
 	
-	public void addStatisticEvent(StatisticEvent event)
-	{	if(!isOver())
-		{	stats.addStatisticEvent(event);
-			//stats.computePoints(getPointProcessor());
-		}
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// NOTES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -397,7 +405,7 @@ public class Round implements StatisticHolder, Serializable
 	
 	public void simulate()
 	{	if(!isOver())
-		{	loop = new LocalLoop(this);
+		{	loop = new SimulationLoop(this);
 			Thread animator = new Thread(loop);
 			animator.start();
 		}

@@ -39,8 +39,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.ai.AisConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -392,7 +392,7 @@ buttonStatistics.setEnabled(false);
 				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_COMPLETE);
 					progressBar.setString(text);
 					progressBar.repaint();
-					loopPanel = new LoopPanel(container.getMenuContainer(),container,round.getLoop());
+					loopPanel = new LoopPanel(container.getMenuContainer(),container,(LocalLoop)round.getLoop());
 					replaceWith(loopPanel);
 					loopPanel.start();
 				}
@@ -408,7 +408,8 @@ buttonStatistics.setEnabled(false);
 
 	@Override
 	public void simulationStepOver()
-	{	
-		
+	{	int val = progressBar.getValue();
+		val++;
+		progressBar.setValue(val);
 	}
 }

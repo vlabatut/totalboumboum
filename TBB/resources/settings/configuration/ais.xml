@@ -2,5 +2,6 @@
 <ais xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\ais.xsd">
 	<ups value="50" />
 	<autoAdvance value="true" delay="2000" />
-	<hideAllAis value="false" />
+	<hideAllAis value="true" />
 </ais>
+

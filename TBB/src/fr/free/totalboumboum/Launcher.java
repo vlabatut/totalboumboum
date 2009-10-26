@@ -1037,7 +1037,6 @@ public class Launcher
 
 	/**
 	 * - site :
-	 * 		- parler de l'écran de classement
 	 * 		- parler des options des stats
 	 * 		- parler des options des IA
 	 * 
@@ -1055,15 +1054,13 @@ public class Launcher
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
 	 * 
+	 *  - corriger affichage du temps
 	 *  - sélection des joueurs : pouvoir faire une sélection 
 	 *  	- aléatoire
 	 *  	- en fonction du rang
-	 *  	- faire apparaitre le rang des joueurs lors de leur sélection ? leur couleur ?
+	 *  	- faire apparaitre le rang des joueurs lors de leur sélection ? (>> ds écran liste des joueurs, y a la place pour le rang) leur couleur ? (difficile dans l'écran file browser)
 	 * 	- créer un log des commandes (désactivable ds options advanced)
-	 *  - écran options IA
-	 *  	- possibilité d'avance-rapide sur les matches à IA only
 	 *  - options pour les stats ?
-	 *  	- mettre une confirmation sur le bouton de reset des stats
 	 *  	- est-ce que le quick mode gère les stats ??
 	 *  	- inclure les résultats simulés dans les stats
 	 *  	- considérer le fait de séparer les suicides des bombeds-bombings
