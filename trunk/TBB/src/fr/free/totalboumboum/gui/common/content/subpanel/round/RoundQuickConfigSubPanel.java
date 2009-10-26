@@ -380,7 +380,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 		if(time<=0)
 			text = new Character('\u221E').toString();
 		else 
-			text = StringTools.formatTime(time,TimeUnit.SECOND,TimeUnit.MILLISECOND);
+			text = StringTools.formatTime(time,TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
 		String tooltip = text;
 		getLine(LINE_TIME_LIMIT).setLabelText(2,text,tooltip);
 	}

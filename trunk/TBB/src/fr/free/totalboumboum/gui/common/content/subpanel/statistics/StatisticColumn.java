@@ -335,15 +335,15 @@ public enum StatisticColumn
 		}			
 		else if(this==SCORE_TIME)
 		{	long timePlayed = playerStats.getScore(Score.TIME);
-			String text = StringTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MINUTE);
-			String tooltip = StringTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MILLISECOND);
+			String text = StringTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MINUTE,false);
+			String tooltip = StringTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MILLISECOND,true);
 			if(container.hasMean())
 			{	long value = 0;
 				long roundsPlayed = playerStats.getRoundsPlayed();
 				if(roundsPlayed>0)
 					value = timePlayed / roundsPlayed;
-				text = StringTools.formatTime(value,TimeUnit.MINUTE,TimeUnit.SECOND);
-				tooltip = StringTools.formatTime(value,TimeUnit.HOUR,TimeUnit.MILLISECOND);							
+				text = StringTools.formatTime(value,TimeUnit.MINUTE,TimeUnit.SECOND,false);
+				tooltip = StringTools.formatTime(value,TimeUnit.HOUR,TimeUnit.MILLISECOND,true);							
 			}
 			panel.setLabelText(line,col,text,tooltip);
 			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);

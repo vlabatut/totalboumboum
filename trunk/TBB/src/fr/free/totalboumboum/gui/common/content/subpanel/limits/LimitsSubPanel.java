@@ -111,7 +111,7 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 				else if(limit instanceof LimitTime)
 				{	LimitTime l = (LimitTime)limit;
 					iconName = headerPrefix+GuiKeys.TIME;
-					value = StringTools.formatTime(l.getThreshold(),TimeUnit.SECOND,TimeUnit.MILLISECOND);
+					value = StringTools.formatTime(l.getThreshold(),TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
 				}
 				else if(limit instanceof LimitPoints)
 				{	LimitPoints l = (LimitPoints)limit;

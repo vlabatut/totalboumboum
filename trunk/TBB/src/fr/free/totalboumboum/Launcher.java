@@ -1058,7 +1058,8 @@ public class Launcher
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
 	 * 
-	 *  - corriger affichage du temps
+	 *  - définir un changement de couleur quand le curseur de la souris passe sur des labels cliquables
+	 *  - corriger affichage du temps ("'" pour secondes, ":" pr minutes, etc)
 	 *  - ne pas relacher systématiquement les items dans la simulation
 	 *  - dans les stats, remplacer le string du joueur par un entier (pr items et bombs c inutile de connaitre le type)
 	 *  - faire apparaitre le rang des joueurs lors de leur sélection ? et leur couleur ?
@@ -1068,5 +1069,8 @@ public class Launcher
 	 *  	- inclure les résultats simulés dans les stats
 	 *  	- considérer le fait de séparer les suicides des bombeds-bombings
 	 *  	- affichage : possibilité de masquer les joueurs pas enregistrés ou IA/humains
+	 *  - sélection des joueurs :
+	 *  	- cliquer sur un rang complète avec les joueurs les plus proches du rang cliqué
+	 *  	- si on clique sur un "-", ça supprime tous les joueurs de rang "-"
 	 */
 }

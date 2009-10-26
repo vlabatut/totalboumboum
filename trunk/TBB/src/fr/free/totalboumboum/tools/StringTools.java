@@ -31,7 +31,7 @@ import fr.free.totalboumboum.game.GameData;
 
 public class StringTools
 {
-	public static String formatTime(long time, TimeUnit biggest, TimeUnit smallest)
+	public static String formatTime(long time, TimeUnit biggest, TimeUnit smallest, boolean letter)
 	{	String result = null;
 		if(biggest.compareTo(smallest)>0)
 		{	result = "";
@@ -41,28 +41,28 @@ public class StringTools
 			if(biggest==TimeUnit.HOUR)
 			{	String hours = nf.format(time/3600000);
 				time = time%3600000;			
-				result = result + hours+"h";
+				result = result + hours+TimeUnit.HOUR.getText(letter);
 			}
 			if(biggest==TimeUnit.MINUTE || smallest==TimeUnit.MINUTE || (biggest.compareTo(TimeUnit.MINUTE)>0 && smallest.compareTo(TimeUnit.MINUTE)<0))
 			{	String minutes = nf.format(time/60000);
 				time = time%60000;
 				result = result + minutes;
 				if(biggest==TimeUnit.MINUTE || smallest!=TimeUnit.MINUTE)
-					result = result+"m";
+					result = result+TimeUnit.MINUTE.getText(letter);
 			}
 			if(biggest==TimeUnit.SECOND || smallest==TimeUnit.SECOND || (biggest.compareTo(TimeUnit.SECOND)>0 && smallest.compareTo(TimeUnit.SECOND)<0))
 			{	String seconds = nf.format(time/1000);
 				time = time%1000;
 				result = result + seconds;
 				if(biggest==TimeUnit.SECOND || smallest!=TimeUnit.SECOND)
-					result = result+"s";
+					result = result+TimeUnit.SECOND.getText(letter);
 			}
 			if(smallest==TimeUnit.MILLISECOND)
 			{	nf.setMinimumIntegerDigits(3);
 				String milliseconds = nf.format(time);
 				result = result + milliseconds;
 				if(biggest==TimeUnit.MILLISECOND)
-					result = result+"ms";
+					result = result+TimeUnit.MILLISECOND.getText(letter);
 			}
 		}
 		return result;
@@ -73,6 +73,41 @@ public class StringTools
 		SECOND,
 		MINUTE,
 		HOUR;
+	
+		public String getLetter()
+		{	String result = null;
+			if(this==MILLISECOND)
+				result = "ms";
+			else if(this==SECOND)
+				result = "s";
+			else if(this==MINUTE)
+				result = "min";
+			else if(this==HOUR)
+				result = "h";
+			return result;
+		}
+	
+		public String getSymbol()
+		{	String result = null;
+			if(this==MILLISECOND)
+				result = "";
+			else if(this==SECOND)
+				result = "''";
+			else if(this==MINUTE)
+				result = "'";
+			else if(this==HOUR)
+				result = ":";
+			return result;
+		}
+		
+		public String getText(boolean letter)
+		{	String result;
+			if(letter)
+				result = getLetter();
+			else
+				result = getSymbol();
+			return result;
+		}
 	}
 	
 	public static String formatAllowedPlayerNumbers(Set<Integer> playerNumbers)

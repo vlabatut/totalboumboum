@@ -159,13 +159,13 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 				int playerId = playersIds.get(index);
 				playersIds.remove(index);
 				Profile profile = ProfileLoader.loadProfile(playerId);
-				players.add(profile);
 				// check if color is free
 				PredefinedColor selectedColor = profile.getSpriteColor();
 				while(!profilesConfiguration.isFreeColor(players,selectedColor))
 					selectedColor = profilesConfiguration.getNextFreeColor(players,profile,selectedColor);
 				profile.getSelectedSprite().setColor(selectedColor);
 				ProfileLoader.reloadPortraits(profile);
+				players.add(profile);
 			}
 			catch (ParserConfigurationException e1)
 			{	e1.printStackTrace();

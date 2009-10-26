@@ -174,7 +174,7 @@ sc = "Time";
 							break;
 					}
 */					
-sc = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SECOND,TimeUnit.MILLISECOND);
+sc = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
 					String[] scores = 
 					{	nf.format(stats.getScores(Score.BOMBS)[profileIndex]),
 						nf.format(stats.getScores(Score.ITEMS)[profileIndex]),
