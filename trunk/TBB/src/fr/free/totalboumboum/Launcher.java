@@ -1055,6 +1055,8 @@ public class Launcher
 	 * 		- sortir de bêta
 	 * 
 	 *  - corriger affichage du temps
+	 *  - ne pas relacher systématiquement les items dans la simulation
+	 *  - dans les stats, remplacer le string du joueur par un entier (pr items et bombs c inutile de connaitre le type)
 	 *  - sélection des joueurs : pouvoir faire une sélection 
 	 *  	- aléatoire
 	 *  	- en fonction du rang
