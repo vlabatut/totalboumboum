@@ -23,18 +23,14 @@ package fr.free.totalboumboum.engine.loop;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.engine.player.Player;
-import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.statistics.GameStatistics;
 import fr.free.totalboumboum.statistics.detailed.Score;
+import fr.free.totalboumboum.statistics.detailed.StatisticAction;
 import fr.free.totalboumboum.statistics.detailed.StatisticEvent;
 import fr.free.totalboumboum.statistics.general.PlayerStats;
 import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
@@ -42,7 +38,8 @@ import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 
 public class SimulationLoop extends Loop
 {	private static final long serialVersionUID = 1L;
-
+	private boolean verbose = false;
+	
 	public SimulationLoop(Round round)
 	{	super(round);
 	}	
@@ -50,45 +47,138 @@ public class SimulationLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void temp()
+	public void run()
 	{	// init
+		RankingService rankingService = GameStatistics.getRankingService();
 		List<Profile> profiles = round.getProfiles();
 		HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		List<Profile> currentPlayers = new ArrayList<Profile>(profiles);
+		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		HashMap<Integer,HashMap<Score,Long>> currentScores = new HashMap<Integer, HashMap<Score,Long>>();
 		
-		// process theoretical duration
+		// process probabilities and estimate duration
 		long theoreticalDuration = 0;
+		HashMap<Integer,HashMap<Score,Double>> probabilities = new HashMap<Integer, HashMap<Score,Double>>();
 		for(Profile profile: profiles)
 		{	int playerId = profile.getId();
 			PlayerStats playerStats = playersStats.get(playerId);
+			// init scores
+			HashMap<Score,Long> playerScores = new HashMap<Score, Long>();
+			currentScores.put(playerId,playerScores);
+			// estimate duration
 			double totalTime = playerStats.getScore(Score.TIME);
 			double roundsPlayed = playerStats.getRoundsPlayed();
-			long averageTime = Math.round(totalTime/roundsPlayed);
-			theoreticalDuration = theoreticalDuration + averageTime;
+			double averageTime = totalTime/roundsPlayed;
+			if(averageTime==0)
+				averageTime = 60000;
+			theoreticalDuration = Math.max(theoreticalDuration,Math.round(averageTime));
+			averageTime = averageTime/milliPeriod;
+			// init probas
+			HashMap<Score,Double> playerProbas = new HashMap<Score, Double>();
+			probabilities.put(playerId,playerProbas);
+			for(Score score: Score.values())
+			{	double totalScore = playerStats.getScore(score);
+				double averageScore = totalScore/roundsPlayed;
+				double proba = averageScore/averageTime;
+				playerProbas.put(score,proba);
+				playerScores.put(score,0l);
+			}
 		}
-		theoreticalDuration = Math.round(theoreticalDuration/(double)profiles.size());
+		long updatePeriod = theoreticalDuration/100;
+		// the meeting probabilities grows non-linearly with time
+		double a = 1.0/(theoreticalDuration*theoreticalDuration);
 		
 		// start the simulation
 		long currentTime = 0;
-		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
+		long previousUpdate = 0;
 		while(!isOver())
 		{	currentTime = currentTime + milliPeriod;
+			if(verbose)
+				System.out.println("-------------- "+currentTime+" --------------");			
+			if(currentTime>=previousUpdate+updatePeriod)
+			{	previousUpdate = previousUpdate+updatePeriod;
+				round.simulationStepOver();
+				try
+				{	Thread.sleep(10);
+				}
+				catch (InterruptedException e)
+				{	e.printStackTrace();
+				}				
+			}
+			double meetingProba = Math.min(1,currentTime*currentTime*a)/100;
+			List<Profile> deadPlayers = new ArrayList<Profile>();
 			for(Profile profile: currentPlayers)
-			{	if(profile!=null)
-				{	
-					
+			{	if(!deadPlayers.contains(profile))
+				{	int playerId = profile.getId();
+					PlayerRating playerRating = rankingService.getPlayerRating(playerId);
+					HashMap<Score,Double> playerProbas = probabilities.get(playerId);
+					double p,threshold;
+					// items
+					p = Math.random();
+					threshold = playerProbas.get(Score.ITEMS);
+					if(verbose)
+						System.out.println("items:"+p+" vs "+threshold);			
+					if(p<=threshold)
+					{	StatisticEvent event = new StatisticEvent(Integer.toString(playerId),StatisticAction.GATHER_ITEM,null,currentTime);
+						round.addStatisticEvent(event);
+					}
+					// bombs
+					p = Math.random();
+					threshold = playerProbas.get(Score.BOMBS);
+					if(verbose)
+						System.out.println("bombs:"+p+" vs "+threshold);			
+					if(p<=threshold)
+					{	StatisticEvent event = new StatisticEvent(Integer.toString(playerId),StatisticAction.DROP_BOMB,null,currentTime);
+						round.addStatisticEvent(event);
+					}
+					// meeting
+					p = Math.random();
+					if(verbose)
+						System.out.println("meeting:"+p+" vs "+meetingProba);			
+					if(p<=meetingProba)
+					{	List<Profile> temp = new ArrayList<Profile>(currentPlayers);
+						temp.remove(profile);
+						if(temp.size()>0)
+						{	int index = (int)(Math.random()*temp.size());
+							Profile profile2 = temp.get(index);
+							int playerId2 = profile2.getId();
+							PlayerRating playerRating2 = rankingService.getPlayerRating(playerId2);
+							// draw
+							p = Math.random();
+							threshold = rankingService.calculateProbabilityOfDraw(playerRating,playerRating2,100);
+							if(verbose)
+								System.out.println("draw:"+p+" vs "+threshold);			
+							if(p>threshold)
+							{	// win
+								p = Math.random();
+								threshold = rankingService.calculateProbabilityOfWin(playerRating,playerRating2);
+								if(verbose)
+									System.out.println("win:"+p+" vs "+threshold);			
+								if(p<=threshold)
+								{	StatisticEvent event = new StatisticEvent(Integer.toString(playerId),StatisticAction.BOMB_PLAYER,Integer.toString(playerId2),currentTime);
+									round.addStatisticEvent(event);
+									deadPlayers.add(profile2);
+									round.playerOut(profiles.indexOf(profile2));
+									long items = currentScores.get(playerId2).get(Score.ITEMS);
+									for(int i=0;i<items;i++)
+									{	event = new StatisticEvent(Integer.toString(playerId),StatisticAction.LOSE_ITEM,null,currentTime);
+										round.addStatisticEvent(event);
+									}
+								}
+							}
+						}
+					}
 				}
 			}
-			
-			
+			// remove dead players
+			currentPlayers.removeAll(deadPlayers);
+			// update round time
 			round.updateTime(currentTime);
 		}
 		round.loopOver();
 	}
-	
-	
-	
+		
+/*	
 	public void run()
 	{	List<Profile> profiles = round.getProfiles();
 		HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
@@ -190,14 +280,8 @@ public class SimulationLoop extends Loop
 		
 		round.addStatisticEvent(event)
 	}
-
-	public void playerOut(Player player)
-	{	// TODO reuse this stuff VV
-		int index = players.indexOf(player);
-		round.playerOut(index);
-		panel.playerOut(index);	
-	}
-
+*/
+/*	
 	private void processOrder(List<List<Profile>> metalist, List<Boolean> flags)
 	{	// find a list to process
 		int index = flags.indexOf(false);
@@ -249,7 +333,23 @@ public class SimulationLoop extends Loop
 			}
 		}
 	}
+*/	
+
+	/////////////////////////////////////////////////////////////////
+	// CELEBRATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void initCelebrationDuration()
+	{	setOver(true);
+	}
+
+	public void reportVictory(int index)
+	{	// useless here		
+	}
 	
+	public void reportDefeat(int index)
+	{	// useless here		
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

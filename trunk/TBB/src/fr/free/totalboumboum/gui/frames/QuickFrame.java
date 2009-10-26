@@ -189,7 +189,7 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 					repaint();
 				    // loop
 			        requestFocus();					
-				    loop = round.getLoop();
+				    loop = (LocalLoop)round.getLoop();
 				    loop.setPanel(this);
 					// init the BufferStrategy
 					canvas.createBufferStrategy(2);
@@ -200,6 +200,11 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 				}
 				break;
 		}
+	}
+
+	@Override
+	public void simulationStepOver()
+	{	//useless here
 	}
 
 	@Override

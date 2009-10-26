@@ -812,6 +812,7 @@ public class RankingService implements Serializable {
     }
     
     /** Calculate the probability of a draw between two players.
+     * (modified by Vincent so that the considered variance can be change by specifying a parameter)
       * 
       * @param m1 
       *     The first player's rating
@@ -825,22 +826,25 @@ public class RankingService implements Serializable {
       *     A number between 0 and 1 indicating the probability that a game
       *     between the two players would result in a draw.
       */
-    private double calculateProbabilityOfDraw(double m1, double s1, double m2, double s2) {
-        
-        double B = Double.parseDouble(System.getProperty("jrs.performanceVarianceAroundPlayerSkill", "50"));
-        
+    private double calculateProbabilityOfDraw(double m1, double s1, double m2, double s2, double v){
+                
         // c**2 = 2(B**2) + s1**2 + s2**2
-        double c = Math.sqrt(2*(B*B) + (s1*s1) + (s2*s2));
+        double c = Math.sqrt(2*(v*v) + (s1*s1) + (s2*s2));
         
         // d = 2(B**2)/(c**2)
-        double d = 2 * (B*B) / (c*c);
+        double d = 2 * (v*v) / (c*c);
         
         // p = exp( -((m1-m2)**2) / (2*(c**2)) ) * sqrt(d)
         double p = Math.exp( -((m1-m2)*(m1-m2)) / (2*(c*c)) ) * Math.sqrt(d);
 
         return p;
     }
-
+    private double calculateProbabilityOfDraw(double m1, double s1, double m2, double s2)
+    {	double variance = Double.parseDouble(System.getProperty("jrs.performanceVarianceAroundPlayerSkill", "50"));
+    	double result = calculateProbabilityOfDraw(m1,s1,m2,s2,variance);
+    	return result;
+    }
+    
     /**
      * process the probability of draw between two players 
      * depending on their ratings and deviations,
@@ -854,12 +858,12 @@ public class RankingService implements Serializable {
      * @author 
      * 		Vincent
      */
-    public double calculateProbabilityOfDraw(PlayerRating pr1, PlayerRating pr2)
+    public double calculateProbabilityOfDraw(PlayerRating pr1, PlayerRating pr2, double variance)
     {	double m1 = pr1.getRating();
 		double m2 = pr2.getRating();
 		double s1 = pr1.getRatingDeviation();
 		double s2 = pr2.getRatingDeviation();
-		double result = calculateProbabilityOfDraw(m1,s1,m2,s2);
+		double result = calculateProbabilityOfDraw(m1,s1,m2,s2,variance);
     	return result;
     }
 

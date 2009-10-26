@@ -22,6 +22,7 @@ package fr.free.totalboumboum.engine.loop;
  */
 
 import java.io.Serializable;
+
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.statistics.detailed.StatisticEvent;
 
@@ -53,6 +54,15 @@ public abstract class Loop implements Runnable, Serializable
 	public boolean isOver()
 	{	return isOver;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// CELEBRATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract void initCelebrationDuration();
+
+	public abstract void reportVictory(int index);
+	
+	public abstract void reportDefeat(int index);
 
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
