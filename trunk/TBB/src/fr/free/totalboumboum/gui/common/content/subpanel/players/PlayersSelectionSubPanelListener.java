@@ -27,4 +27,5 @@ public interface PlayersSelectionSubPanelListener
 	public void playerSelectionPlayerRemoved(int index);
 	public void playerSelectionProfileSet(int index);
 	public void playerSelectionHeroSet(int index);
+	public void playerSelectionRandomSelection();
 }

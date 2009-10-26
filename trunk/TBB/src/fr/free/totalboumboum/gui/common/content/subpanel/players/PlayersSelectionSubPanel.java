@@ -119,6 +119,9 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					setLabelBackground(0,col,bg);
 				}
 			}
+			// random selection button
+			JLabel lbl = getLabel(0,COL_DELETE);
+			lbl.addMouseListener(this);			
 		}
 		
 		// data
@@ -308,16 +311,23 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		int[] pos = getLabelPositionMultiple(label);
 		switch(pos[2])
 		{	case COL_DELETE:
-				{	int index = pos[0]-1;
-					// add a profile
-					if(index==players.size())
-					{	firePlayerAdded(index);
+				{	// random selection
+					if(pos[0]==0)
+					{	fireRandomSelection();
 					}
-					// or remove a profile
-					else if(index<players.size())
-					{	players.remove(index);
-						refresh();
-						firePlayerRemoved(index);
+					// delete player
+					else
+					{	int index = pos[0]-1;
+						// add a profile
+						if(index==players.size())
+						{	firePlayerAdded(index);
+						}
+						// or remove a profile
+						else if(index<players.size())
+						{	players.remove(index);
+							refresh();
+							firePlayerRemoved(index);
+						}
 					}
 				}
 				break;
@@ -389,4 +399,10 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionHeroSet(index);
 	}
+	
+	public void fireRandomSelection()
+	{	for(PlayersSelectionSubPanelListener listener: listeners)
+			listener.playerSelectionRandomSelection();
+	}
+
 }

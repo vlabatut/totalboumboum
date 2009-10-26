@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -130,10 +131,10 @@ public class ProfilesConfiguration
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public int getNextFreeControls(ArrayList<Profile> profiles, int start)
+	public int getNextFreeControls(List<Profile> profiles, int start)
 	{	/// init
 		Iterator<Profile> it = profiles.iterator();
-		ArrayList<Integer> occupied = new ArrayList<Integer>();
+		List<Integer> occupied = new ArrayList<Integer>();
 		while(it.hasNext())
 		{	Profile profile = it.next();
 			int index = profile.getControlSettingsIndex();
@@ -158,16 +159,16 @@ public class ProfilesConfiguration
 		return result;
 	}
 
-	public PredefinedColor getNextFreeColor(ArrayList<Profile> profiles, Profile profile, PredefinedColor color)
+	public PredefinedColor getNextFreeColor(List<Profile> profiles, Profile profile, PredefinedColor color)
 	{	PredefinedColor result = null;
 		// used colors
-		ArrayList<PredefinedColor> usedColors = new ArrayList<PredefinedColor>();
+		List<PredefinedColor> usedColors = new ArrayList<PredefinedColor>();
 		for(Profile p: profiles)
 		{	PredefinedColor clr = p.getSpriteColor();
 			usedColors.add(clr);
 		}
 		// preferred colors
-		ArrayList<PredefinedColor> preferredColors = new ArrayList<PredefinedColor>();
+		List<PredefinedColor> preferredColors = new ArrayList<PredefinedColor>();
 		for(PredefinedColor c: PredefinedColor.values())
 		{	if(c==color || (!usedColors.contains(c) && !preferredColors.contains(c)))
 				preferredColors.add(c);
@@ -180,9 +181,9 @@ public class ProfilesConfiguration
 		return result;
 	}
 
-	public boolean isFreeColor(ArrayList<Profile> profiles, PredefinedColor color)
+	public boolean isFreeColor(List<Profile> profiles, PredefinedColor color)
 	{	// used colors
-		ArrayList<PredefinedColor> usedColors = new ArrayList<PredefinedColor>();
+		List<PredefinedColor> usedColors = new ArrayList<PredefinedColor>();
 		for(Profile p: profiles)
 		{	PredefinedColor clr = p.getSpriteColor();
 			usedColors.add(clr);
