@@ -568,6 +568,8 @@ public class RankingService implements Serializable {
 			if(playerRating.getPlayerId().equals(playerId))
 				done = true;
 		}
+		if(!done)
+			result = -1;
 		return result;
     }
     

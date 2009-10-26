@@ -839,7 +839,11 @@ public class Launcher
 	 * - GUI : possibilité d'enregistrer/déregistrer des joueurs dans l'écran de stats
 	 * - enchaînement automatique des matches d'un tournoi, par ex. pour faire tourner des IA sur tout un tournoi automatiquement
 	 * - GUI : nouvel écran d'options dédié à la configuration de la gestion des IA
-	 * - GUI : nouvel écran d'options pour configurer le traitement des stats 
+	 * - GUI : nouvel écran d'options pour configurer le traitement des stats
+	 * - possibilité de sélectionner les joueurs aléatoirement avant un tournoi/partie rapide/quick start
+	 * - possibilité de désélectionner tous les joueurs d'un seul clic (avant un tournoi/partie rapide/quick start)
+	 * - possibilité de simuler les rounds qui n'impliquent que des IA
+	 * - affichage du rang dans l'écran récapitulant les joueurs sélectionnés avant le début d'une partie
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1057,17 +1061,12 @@ public class Launcher
 	 *  - corriger affichage du temps
 	 *  - ne pas relacher systématiquement les items dans la simulation
 	 *  - dans les stats, remplacer le string du joueur par un entier (pr items et bombs c inutile de connaitre le type)
-	 *  - sélection des joueurs : pouvoir faire une sélection 
-	 *  	- aléatoire
-	 *  	- en fonction du rang
-	 *  	- faire apparaitre le rang des joueurs lors de leur sélection ? (>> ds écran liste des joueurs, y a la place pour le rang) leur couleur ? (difficile dans l'écran file browser)
+	 *  - faire apparaitre le rang des joueurs lors de leur sélection ? et leur couleur ?
 	 * 	- créer un log des commandes (désactivable ds options advanced)
 	 *  - options pour les stats ?
 	 *  	- est-ce que le quick mode gère les stats ??
 	 *  	- inclure les résultats simulés dans les stats
 	 *  	- considérer le fait de séparer les suicides des bombeds-bombings
 	 *  	- affichage : possibilité de masquer les joueurs pas enregistrés ou IA/humains
-	 *  	- affichage : évolution (A, V, -) par rapport au classement précédent (i.e. besoin du classement précédent)
-	 *  	- passer à la classe en paramètre une liste des colonnes à afficher, dans l'ordre d'affichage
 	 */
 }

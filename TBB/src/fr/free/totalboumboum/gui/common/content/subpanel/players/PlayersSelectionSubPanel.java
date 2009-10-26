@@ -40,14 +40,17 @@ import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiStringTools;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.statistics.GameStatistics;
+import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 
 public class PlayersSelectionSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 16+1;
-	private static final int COLS = 6;
+	private static final int COLS = 7;
 
 	public PlayersSelectionSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,COLS,true);
@@ -83,21 +86,23 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		// sizes
 		reinit(LINES,COLS);
 		int headerHeight = getHeaderHeight();
-		int lineHeight = getLineHeight();
-		int deleteWidth = lineHeight;
+		//int lineHeight = getLineHeight();
+		int deleteWidth = headerHeight;
 		int controlWidth = GuiStringTools.initControlsTexts(getLineFontSize(),controlTexts,controlTooltips);
 		int colorWidth = GuiStringTools.initColorTexts(getLineFontSize(),colorTexts,colorTooltips,colorBackgrounds);
 		int typeWidth = headerHeight;
 		int heroWidth = headerHeight;
-		int fixedSum = GuiTools.subPanelMargin*(COLS-1) + deleteWidth + heroWidth + controlWidth + colorWidth + typeWidth;
+		int rankWidth = headerHeight;
+		int fixedSum = GuiTools.subPanelMargin*(COLS-1) + deleteWidth + heroWidth + rankWidth + controlWidth + colorWidth + typeWidth;
 		int nameWidth = getDataWidth() - fixedSum;
 		
 		// headers
 		{	String keys[] = 
-			{	null,
+			{	GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_DELETE,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_PROFILE,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_TYPE,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_HERO,
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_RANK,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_COLOR,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_CONTROLS				
 			};
@@ -106,6 +111,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				nameWidth,
 				typeWidth,
 				heroWidth,
+				rankWidth,
 				colorWidth,
 				controlWidth
 			};
@@ -119,8 +125,11 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					setLabelBackground(0,col,bg);
 				}
 			}
-			// random selection button
+			// delete all button
 			JLabel lbl = getLabel(0,COL_DELETE);
+			lbl.addMouseListener(this);
+			// random selection button
+			lbl = getLabel(0,COL_PROFILE);
 			lbl.addMouseListener(this);			
 		}
 		
@@ -188,6 +197,30 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				setLabelBackground(line,COL_HERO,bg);
 				// mouse listener
 				JLabel lbl = getLabel(line,COL_HERO);
+				lbl.removeMouseListener(this); //just in case
+				lbl.addMouseListener(this);
+			}
+			// rank
+			{	// content
+				RankingService rankingService = GameStatistics.getRankingService();
+				int playerId = profile.getId();
+				int rank = rankingService.getPlayerRank(playerId);
+				String text,tooltip;
+				if(rank<0)
+				{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_NO_RANK;
+					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+					tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+				}
+				else
+				{	text = Integer.toString(rank);
+					tooltip = text;
+				}
+				setLabelText(line,COL_RANK,text,tooltip);
+				// color
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+				setLabelBackground(line,COL_RANK,bg);
+				// mouse listener
+				JLabel lbl = getLabel(line,COL_RANK);
 				lbl.removeMouseListener(this); //just in case
 				lbl.addMouseListener(this);
 			}
@@ -284,8 +317,9 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	private static final int COL_PROFILE = 1;
 	private static final int COL_TYPE = 2;
 	private static final int COL_HERO = 3;
-	private static final int COL_COLOR = 4;
-	private static final int COL_CONTROLS = 5;
+	private static final int COL_RANK = 4;
+	private static final int COL_COLOR = 5;
+	private static final int COL_CONTROLS = 6;
 		
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
@@ -311,9 +345,13 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		int[] pos = getLabelPositionMultiple(label);
 		switch(pos[2])
 		{	case COL_DELETE:
-				{	// random selection
+				{	// delete all
 					if(pos[0]==0)
-					{	fireRandomSelection();
+					{	while(players.size()>0)
+						{	players.remove(0);
+							refresh();
+							firePlayerRemoved(0);
+						}
 					}
 					// delete player
 					else
@@ -332,8 +370,14 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				}
 				break;
 			case COL_PROFILE:
-				{	int index = pos[0]-1;
-					fireProfileSet(index);
+				{	// random selection
+					if(pos[0]==0)
+					{	fireRandomSelection();
+					}
+					else
+					{	int index = pos[0]-1;
+						fireProfileSet(index);
+					}
 				}
 				break;
 			case COL_HERO:
@@ -404,5 +448,4 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionRandomSelection();
 	}
-
 }
