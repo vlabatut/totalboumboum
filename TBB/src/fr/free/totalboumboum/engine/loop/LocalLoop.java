@@ -919,7 +919,7 @@ System.out.println();
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			long time = getTotalTime();
-			String text = "Time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND);
+			String text = "Time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);

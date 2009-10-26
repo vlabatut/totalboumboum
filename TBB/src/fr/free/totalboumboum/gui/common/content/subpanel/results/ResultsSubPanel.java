@@ -233,7 +233,7 @@ public class ResultsSubPanel extends TableSubPanel
 				}			
 				// time
 				if(showTime)
-				{	String text = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SECOND,TimeUnit.MILLISECOND);
+				{	String text = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;

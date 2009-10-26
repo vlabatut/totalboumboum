@@ -138,7 +138,7 @@ public class PlayerStats implements Serializable
 		for(Score score: Score.values())
 		{	String text = Long.toString(scores.get(score));
 			if(score==Score.TIME)
-				text = StringTools.formatTime(scores.get(score),TimeUnit.HOUR,TimeUnit.MILLISECOND);
+				text = StringTools.formatTime(scores.get(score),TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			result = result+" "+score.toString()+": "+text;
 		}
 		return result;
