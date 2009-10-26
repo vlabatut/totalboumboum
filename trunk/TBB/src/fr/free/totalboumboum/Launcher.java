@@ -1059,7 +1059,6 @@ public class Launcher
 	 * 		- sortir de bêta
 	 * 
 	 *  - définir un changement de couleur quand le curseur de la souris passe sur des labels cliquables
-	 *  - corriger affichage du temps ("'" pour secondes, ":" pr minutes, etc)
 	 *  - ne pas relacher systématiquement les items dans la simulation
 	 *  - dans les stats, remplacer le string du joueur par un entier (pr items et bombs c inutile de connaitre le type)
 	 *  - faire apparaitre le rang des joueurs lors de leur sélection ? et leur couleur ?
@@ -1072,5 +1071,6 @@ public class Launcher
 	 *  - sélection des joueurs :
 	 *  	- cliquer sur un rang complète avec les joueurs les plus proches du rang cliqué
 	 *  	- si on clique sur un "-", ça supprime tous les joueurs de rang "-"
+	 *  	- mieux définir la sélection aléatoire, de manière à gaspiller le moins possible de couleurs
 	 */
 }
