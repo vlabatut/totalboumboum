@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 import javax.swing.Box;
@@ -35,11 +36,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -293,5 +297,58 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	{	ArrayList<Profile> players = playersPanel.getPlayers();
 		SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,players);
 		getMenuContainer().replaceWith(selectProfilePanel);
+	}
+
+	@Override
+	public void playerSelectionRandomSelection()
+	{	List<Profile> players = playersPanel.getPlayers();
+		// remove players already selected
+		List<Integer> playersIds = ProfileLoader.getIdsList();
+		for(Profile profile: players)
+		{	Integer playerId = profile.getId();
+			playersIds.remove(playerId);
+		}
+		// randomly complete selection
+		ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
+		for(int i=players.size();i<GameData.MAX_PROFILES_COUNT;i++)
+		{	try
+			{	int index = (int)(Math.random()*playersIds.size());
+				int playerId = playersIds.get(index);
+				playersIds.remove(index);
+				Profile profile = ProfileLoader.loadProfile(playerId);
+				players.add(profile);
+				// check if color is free
+				PredefinedColor selectedColor = profile.getSpriteColor();
+				while(!profilesConfiguration.isFreeColor(players,selectedColor))
+					selectedColor = profilesConfiguration.getNextFreeColor(players,profile,selectedColor);
+				profile.getSelectedSprite().setColor(selectedColor);
+				ProfileLoader.reloadPortraits(profile);
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ClassNotFoundException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IllegalArgumentException e)
+			{	e.printStackTrace();
+			} 
+			catch (SecurityException e)
+			{	e.printStackTrace();
+			}
+			catch (IllegalAccessException e)
+			{	e.printStackTrace();
+			}
+			catch (NoSuchFieldException e)
+			{	e.printStackTrace();
+			}
+			refresh();
+		}
 	}
 }
