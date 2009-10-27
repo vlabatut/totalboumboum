@@ -194,6 +194,7 @@ public class LocalLoop extends Loop
 	private boolean showSpeed = false;
 	private boolean showTime = false;
 	private boolean showFPS = false;
+	private boolean showNames = false;
 	private boolean pauseEngine = false;
 	private boolean stepEngine = false;
 	private final ArrayList<Boolean> pauseAis = new ArrayList<Boolean>();
@@ -250,6 +251,19 @@ public class LocalLoop extends Loop
 	{	boolean result;
 		debugLock.lock();
 		result = showTime;
+		debugLock.unlock();
+		return result;
+	}
+
+	public void switchShowNames()
+	{	debugLock.lock();
+		showNames = !showNames;		
+		debugLock.unlock();
+	}
+	public boolean getShowNames()
+	{	boolean result;
+		debugLock.lock();
+		result = showNames;
 		debugLock.unlock();
 		return result;
 	}
@@ -885,7 +899,10 @@ System.out.println();
 	/////////////////////////////////////////////////////////////////
 	public void draw(Graphics g)
 	{	level.draw(g);
-	
+		
+		if(getShowNames())
+			drawPlayersNames(g);
+
 		drawAisInfo(g);
 	
 		if(getShowSpeed())
@@ -1118,6 +1135,26 @@ System.out.println();
 				g.drawString(text, x, y);
 			}
 		}
+	}
+
+	private void drawPlayersNames(Graphics g)
+	{	Font font = new Font("Dialog", Font.BOLD, 12);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		for(Player player: players)
+		{	if(!player.isOut())
+			{	String text = player.getName();
+				Sprite s = player.getSprite();
+				Rectangle2D box = metrics.getStringBounds(text, g);
+				int x = (int)Math.round(s.getCurrentPosX()-box.getWidth()/2);
+				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
+				g.setColor(Color.BLACK);
+				g.drawString(text,x+1,y+1);
+				Color color = player.getColor().getColor();
+				g.setColor(color);
+				g.drawString(text,x,y);				
+			}
+		}		
 	}
 
 	/////////////////////////////////////////////////////////////////
