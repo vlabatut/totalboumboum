@@ -841,7 +841,9 @@ public class Launcher
 	 * - GUI : nouvel écran d'options dédié à la configuration de la gestion des IA
 	 * - GUI : nouvel écran d'options pour configurer le traitement des stats
 	 * - possibilité de sélectionner les joueurs aléatoirement avant un tournoi/partie rapide/quick start
+	 * - possibilité de sélectionner les joueurs les plus proches d'un joueur donné
 	 * - possibilité de désélectionner tous les joueurs d'un seul clic (avant un tournoi/partie rapide/quick start)
+	 * - possibilité de désélectionner tous les joueurs sans classement en cliquant sur "-"
 	 * - possibilité de simuler les rounds qui n'impliquent que des IA
 	 * - affichage du rang dans l'écran récapitulant les joueurs sélectionnés avant le début d'une partie
 	 * - affichage du nom des joueurs par dessus les sprites en mode débug
@@ -1044,6 +1046,8 @@ public class Launcher
 	 * - site :
 	 * 		- parler des options des stats
 	 * 		- parler des options des IA
+	 * 			- affichage du nom des joueurs pendant le jeu en surimpression
+	 * 			- simulations des matches all-ias
 	 * 
 	 * - percepts à rajouter
 	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
@@ -1059,6 +1063,7 @@ public class Launcher
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
 	 * 
+	 *  - corriger le fait que la largeur du rang n'est pas calculée convenablement dans l'écran de sélection des joueurs 
 	 *  - définir un changement de couleur quand le curseur de la souris passe sur des labels cliquables
 	 *  - ne pas relacher systématiquement les items dans la simulation
 	 *  - dans les stats, remplacer le string du joueur par un entier (pr items et bombs c inutile de connaitre le type)
@@ -1066,13 +1071,9 @@ public class Launcher
 	 * 	- créer un log des commandes (désactivable ds options advanced)
 	 *  - options pour les stats ?
 	 *  	- est-ce que le quick mode gère les stats ??
-	 *  	- inclure les résultats simulés dans les stats
+	 *  	- inclure les résultats simulés dans les stats (rajouter un flag "simulated" dans les stats détaillées des rounds... p-ê des autres aussi ?)
 	 *  	- considérer le fait de séparer les suicides des bombeds-bombings
 	 *  	- affichage : possibilité de masquer les joueurs pas enregistrés ou IA/humains
-	 *  - sélection des joueurs :
-	 *  	- cliquer sur un rang complète avec les joueurs les plus proches du rang cliqué
-	 *  	- si on clique sur un "-", ça supprime tous les joueurs de rang "-"
-	 *  	- mieux définir la sélection aléatoire, de manière à gaspiller le moins possible de couleurs
 	 *  - enregistrer l'évolution des stats
 	 *  
 	 *  - IA : 
