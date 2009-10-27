@@ -27,14 +27,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.statistics.GameStatistics;
+import fr.free.totalboumboum.statistics.glicko2.jrs.Match;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.tools.FileTools;
 
@@ -192,7 +195,7 @@ public class ProfilesConfiguration
 		return result;
 	}
 	
-	public static ProfilesSelection getSelection(ArrayList<Profile> profiles)
+	public static ProfilesSelection getSelection(List<Profile> profiles)
 	{	ProfilesSelection result = new ProfilesSelection();
 		for(Profile p: profiles)
 		{	int id = p.getId();
@@ -203,4 +206,91 @@ public class ProfilesConfiguration
 		}
 		return result;
 	}
+	
+	public static void randomlyCompleteProfiles(List<Profile> profiles, int number) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
+	{	// list of ids minus already selected players 
+		List<Integer> playersIds = ProfileLoader.getIdsList();
+		for(Profile profile: profiles)
+		{	Integer playerId = profile.getId();
+			playersIds.remove(playerId);
+		}
+		
+		// randomly select players
+		List<Profile> additionalProfiles = new ArrayList<Profile>();
+		for(int i=profiles.size();i<number;i++)
+		{	int index = (int)(Math.random()*playersIds.size());
+			int playerId = playersIds.get(index);
+			playersIds.remove(index);
+			Profile profile = ProfileLoader.loadProfile(playerId);
+			additionalProfiles.add(profile);
+		}
+		
+		// add additional profiles the original selection
+		addAllProfiles(profiles,additionalProfiles);
+	}
+	
+	private static void addAllProfiles(List<Profile> profiles, List<Profile> additionalProfiles) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
+
+		// complete selection with free colored players
+		Iterator<Profile> it = additionalProfiles.iterator();
+		while(it.hasNext())
+		{	Profile profile = it.next();
+			// check if color is free
+			PredefinedColor selectedColor = profile.getSpriteColor();
+			if(profilesConfiguration.isFreeColor(profiles,selectedColor))
+			{	profiles.add(profile);
+				it.remove();
+			}
+		}
+
+		// change color and add remaining players
+		it = additionalProfiles.iterator();
+		while(it.hasNext())
+		{	Profile profile = it.next();
+			// find another color
+			PredefinedColor selectedColor = profile.getSpriteColor();
+			while(!profilesConfiguration.isFreeColor(profiles,selectedColor))
+				selectedColor = profilesConfiguration.getNextFreeColor(profiles,profile,selectedColor);
+			profile.getSelectedSprite().setColor(selectedColor);
+			ProfileLoader.reloadPortraits(profile);
+			profiles.add(profile);
+		}			
+	}
+
+	public static void rankCompleteProfiles(List<Profile> profiles, int number, Profile reference) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
+	{	// list of previously selected players
+		List<Integer> profilesIds = new ArrayList<Integer>();
+		for(Profile profile: profiles)
+			profilesIds.add(profile.getId());
+		
+		// list of ids minus already selected players 
+		List<Integer> playersIds = ProfileLoader.getIdsList();
+		for(Profile profile: profiles)
+		{	Integer playerId = profile.getId();
+			playersIds.remove(playerId);
+		}
+
+		// process a list of related players
+		RankingService rankingService = GameStatistics.getRankingService();
+		int referenceId = reference.getId();
+		Set<Match> matches = rankingService.getMatches(referenceId);
+		List<Profile> additionalProfiles = new ArrayList<Profile>();
+		int n = number - profiles.size();
+		int i = 0;
+		Iterator<Match> it = matches.iterator();
+		while(it.hasNext() && i<n)
+		{	Match match = it.next();
+			int opponentId = match.getPlayerId();
+			if(!profilesIds.contains(opponentId))
+			{	Profile profile = ProfileLoader.loadProfile(opponentId);
+				additionalProfiles.add(profile);			
+				i++;
+			}
+		}
+		
+		// add additional profiles the original selection
+		addAllProfiles(profiles,additionalProfiles);
+	}
+	
 }

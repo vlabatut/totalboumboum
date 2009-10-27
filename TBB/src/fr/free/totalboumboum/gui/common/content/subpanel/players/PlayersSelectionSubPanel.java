@@ -27,6 +27,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JLabel;
 import javax.xml.parsers.ParserConfigurationException;
@@ -38,6 +39,7 @@ import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -45,6 +47,7 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiStringTools;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.statistics.GameStatistics;
+import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 
 public class PlayersSelectionSubPanel extends TableSubPanel implements MouseListener
@@ -372,7 +375,34 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			case COL_PROFILE:
 				{	// random selection
 					if(pos[0]==0)
-					{	fireRandomSelection();
+					{	try
+						{	ProfilesConfiguration.randomlyCompleteProfiles(players,LINES-1);
+							refresh();
+						}
+						catch (ParserConfigurationException e1)
+						{	e1.printStackTrace();
+						}
+						catch (SAXException e1)
+						{	e1.printStackTrace();
+						}
+						catch (IOException e1)
+						{	e1.printStackTrace();
+						}
+						catch (ClassNotFoundException e1)
+						{	e1.printStackTrace();
+						}
+						catch (IllegalArgumentException e1)
+						{	e1.printStackTrace();
+						} 
+						catch (SecurityException e1)
+						{	e1.printStackTrace();
+						}
+						catch (IllegalAccessException e1)
+						{	e1.printStackTrace();
+						}
+						catch (NoSuchFieldException e1)
+						{	e1.printStackTrace();
+						}
 					}
 					else
 					{	int index = pos[0]-1;
@@ -383,6 +413,57 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			case COL_HERO:
 				{	int index = pos[0]-1;
 					fireHeroSet(index);
+				}
+				break;
+			case COL_RANK:
+				{	int index = pos[0]-1;
+					Iterator<Profile> it = players.iterator();
+					RankingService rankingService = GameStatistics.getRankingService();
+					Profile profile = players.get(index);
+					int playerId = profile.getId();
+					PlayerRating playerRating = rankingService.getPlayerRating(playerId);
+					if(playerRating==null)
+					{	while(it.hasNext())
+						{	profile = it.next();
+							playerId = profile.getId();
+							playerRating = rankingService.getPlayerRating(playerId);
+							if(playerRating==null)
+							{	it.remove();
+								refresh();
+								firePlayerRemoved(index);
+							}
+						}
+					}
+					else
+					{	try
+						{	ProfilesConfiguration.rankCompleteProfiles(players,LINES-1,profile);
+							refresh();
+						}
+						catch (IllegalArgumentException e1)
+						{	e1.printStackTrace();
+						}
+						catch (SecurityException e1)
+						{	e1.printStackTrace();
+						}
+						catch (ParserConfigurationException e1)
+						{	e1.printStackTrace();
+						}
+						catch (SAXException e1)
+						{	e1.printStackTrace();
+						}
+						catch (IOException e1)
+						{	e1.printStackTrace();
+						}
+						catch (ClassNotFoundException e1)
+						{	e1.printStackTrace();
+						}
+						catch (IllegalAccessException e1)
+						{	e1.printStackTrace();
+						}
+						catch (NoSuchFieldException e1)
+						{	e1.printStackTrace();
+						}
+					}
 				}
 				break;
 			case COL_COLOR:
@@ -442,10 +523,5 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	public void fireHeroSet(int index)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionHeroSet(index);
-	}
-	
-	public void fireRandomSelection()
-	{	for(PlayersSelectionSubPanelListener listener: listeners)
-			listener.playerSelectionRandomSelection();
 	}
 }
