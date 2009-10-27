@@ -92,6 +92,10 @@ public class SystemControl implements KeyListener
 			else if(keyCode == KeyEvent.VK_F6)
 			{	loop.switchShowTime();
 			}
+			// debug : names
+			else if(keyCode == KeyEvent.VK_F7)
+			{	loop.switchShowNames();
+			}
 			
 			// debug : engine pause
 			else if(keyCode == KeyEvent.VK_END)

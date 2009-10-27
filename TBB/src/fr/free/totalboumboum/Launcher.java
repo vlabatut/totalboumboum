@@ -844,6 +844,7 @@ public class Launcher
 	 * - possibilité de désélectionner tous les joueurs d'un seul clic (avant un tournoi/partie rapide/quick start)
 	 * - possibilité de simuler les rounds qui n'impliquent que des IA
 	 * - affichage du rang dans l'écran récapitulant les joueurs sélectionnés avant le début d'une partie
+	 * - affichage du nom des joueurs par dessus les sprites en mode débug
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1072,5 +1073,10 @@ public class Launcher
 	 *  	- cliquer sur un rang complète avec les joueurs les plus proches du rang cliqué
 	 *  	- si on clique sur un "-", ça supprime tous les joueurs de rang "-"
 	 *  	- mieux définir la sélection aléatoire, de manière à gaspiller le moins possible de couleurs
+	 *  - enregistrer l'évolution des stats
+	 *  
+	 *  - IA : 
+	 *  	- calculer la sureté d'une case en fonction du nombre de sorties possibles, de leur distance, de leur nature zig-zagante
+	 *  	- peut-on toujours ramasser un item ? ben non: si y a un joueur qui a le temps d'y arriver plus vite, ou qu'il va se faire exploser (avant qu'on ne puisse l'atteindre), ou autre...
 	 */
 }
