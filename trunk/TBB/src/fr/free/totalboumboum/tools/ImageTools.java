@@ -37,7 +37,9 @@ import java.awt.image.ConvolveOp;
 import java.awt.image.IndexColorModel;
 import java.awt.image.Kernel;
 import java.awt.image.WritableRaster;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -112,8 +114,10 @@ public class ImageTools
 	
     public static BufferedImage loadImage(String path, Colormap colormap) throws IOException
     {	BufferedImage image;
+    	FileInputStream in = new FileInputStream(path);
+    	BufferedInputStream inBuff = new BufferedInputStream(in);
 		try
-		{	image = ImageIO.read(new File(path));
+		{	image = ImageIO.read(inBuff);
 		}
 		catch (IOException e)
 		{	System.out.println(path);

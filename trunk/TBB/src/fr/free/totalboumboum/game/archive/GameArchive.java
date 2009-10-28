@@ -21,6 +21,8 @@ package fr.free.totalboumboum.game.archive;
  * 
  */
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -90,7 +92,8 @@ public class GameArchive
 		String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
 		File file = new File(path+File.separator+fileName);
 		FileOutputStream out = new FileOutputStream(file);
-		ObjectOutputStream oOut = new ObjectOutputStream(out);
+		BufferedOutputStream outBuff = new BufferedOutputStream(out);
+		ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
 		oOut.writeObject(tournament);
 		oOut.close();
 	}
@@ -100,7 +103,8 @@ public class GameArchive
 		String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
 		File file = new File(path+File.separator+fileName);
 		FileInputStream in = new FileInputStream(file);
-		ObjectInputStream oIn = new ObjectInputStream(in);
+		BufferedInputStream inBuff = new BufferedInputStream(in);
+		ObjectInputStream oIn = new ObjectInputStream(inBuff);
 		AbstractTournament result = (AbstractTournament)oIn.readObject();
 		oIn.close();
 		result.reloadPortraits();

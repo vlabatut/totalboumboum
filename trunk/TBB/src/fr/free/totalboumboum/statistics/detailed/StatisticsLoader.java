@@ -21,6 +21,8 @@ package fr.free.totalboumboum.statistics.detailed;
  * 
  */
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -41,7 +43,8 @@ public class StatisticsLoader
 		String individualFolder = statisticsFolder+File.separator+FileTools.FILE_STATISTICS;
 		File file = new File(individualFolder);
 		InputStream in = new FileInputStream(file);
-		ObjectInputStream ois = new ObjectInputStream(in);
+		BufferedInputStream inBuf = new BufferedInputStream(in);
+		ObjectInputStream ois = new ObjectInputStream(inBuf);
 		result = (Statistics)ois.readObject();
 		return result;
 	}
@@ -51,7 +54,8 @@ public class StatisticsLoader
 		String individualFolder = statisticsFolder+File.separator+FileTools.FILE_STATISTICS;
 		File file = new File(individualFolder);
 		OutputStream out = new FileOutputStream(file);
-		ObjectOutputStream oos = new ObjectOutputStream(out);
+		BufferedOutputStream outBuf = new BufferedOutputStream(out);
+		ObjectOutputStream oos = new ObjectOutputStream(outBuf);
 		oos.writeObject(stats);
 	}
 }

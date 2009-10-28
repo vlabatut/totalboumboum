@@ -21,7 +21,10 @@ package fr.free.totalboumboum.tools;
  * 
  */
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -369,6 +372,7 @@ public class XmlTools
 	    	{   throw e;
 	    	}
 	    });
+	    
 	    // loading all schemas
 //	    System.setProperty("javax.xml.parsers.DocumentBuilderFactory", "org.apache.xerces.parsers.SAXParser");
 //	    System.setProperty("javax.xml.parsers.SAXParserFactory", "org.apache.xerces.jaxp.SAXParserFactoryImpl");
@@ -401,11 +405,13 @@ public class XmlTools
 	}
 	
 	public static Element getRootFromFile(File dataFile, File schemaFile) throws SAXException, IOException
-	{	// JAXP
+	{	FileInputStream in = new FileInputStream(dataFile);
+		BufferedInputStream inBuff = new BufferedInputStream(in);
+		// JAXP
 		DocumentBuilder bldr = documentBuilders.get(schemaFile.getName());
 		org.w3c.dom.Document doc;
 		try
-		{	doc = bldr.parse(dataFile);
+		{	doc = bldr.parse(inBuff);
 		}
 		catch (SAXException e)
 		{	System.out.println(dataFile+" : "+schemaFile);
@@ -426,6 +432,7 @@ public class XmlTools
 	public static void makeFileFromRoot(File dataFile, File schemaFile, Element root) throws IOException
 	{	// open file stream
 		FileOutputStream out = new FileOutputStream(dataFile);
+		BufferedOutputStream outBuf = new BufferedOutputStream(out);
 		// create document
 		Document document = new Document(root);
 		// schema
@@ -446,8 +453,8 @@ public class XmlTools
 		// create outputter
 		XMLOutputter outputter = new XMLOutputter(format);
 		// write in the stream
-	    outputter.output(document,out);       
+	    outputter.output(document,outBuf);       
 	    // close the stream
-	    out.close();
+	    outBuf.close();
 	}
 }
