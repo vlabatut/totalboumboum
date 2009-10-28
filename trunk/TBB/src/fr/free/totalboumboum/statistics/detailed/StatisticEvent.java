@@ -27,22 +27,22 @@ public class StatisticEvent implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
-	private int actorId;
+	private Integer actorId;
 	private StatisticAction action;
-	private int targetId;
+	private Integer targetId;
 	private long time;
 	
-	public StatisticEvent(int actorId, StatisticAction action, int targetId, long time)
+	public StatisticEvent(Integer actorId, StatisticAction action, Integer targetId, long time)
 	{	this.actorId = actorId;
 		this.action = action;
 		this.targetId = targetId;
 		this.time = time;
 	}
 
-	public int getActorId()
+	public Integer getActorId()
 	{	return actorId;
 	}
-	public void setActorId(int actorId)
+	public void setActorId(Integer actorId)
 	{	this.actorId = actorId;
 	}
 
@@ -53,10 +53,10 @@ public class StatisticEvent implements Serializable
 	{	this.action = action;
 	}
 
-	public int getTargetId()
+	public Integer getTargetId()
 	{	return targetId;
 	}
-	public void setTargetId(int targetId)
+	public void setTargetId(Integer targetId)
 	{	this.targetId = targetId;
 	}
 	

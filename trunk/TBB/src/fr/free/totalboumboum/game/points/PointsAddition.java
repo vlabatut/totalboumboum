@@ -57,8 +57,8 @@ public class PointsAddition extends PointsProcessor implements PPSecondaryOperat
 	public float[] process(StatisticHolder holder)
 	{	// init
 		StatisticBase stats = holder.getStats();
-		ArrayList<String> players = stats.getPlayers();
-		float[] result = new float[players.size()];
+		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		float[] result = new float[playersIds.size()];
 		float[] leftTemp = leftSource.process(holder);
 		float[] rightTemp = rightSource.process(holder);
 		// process

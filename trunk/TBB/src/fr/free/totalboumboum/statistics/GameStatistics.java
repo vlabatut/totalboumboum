@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -124,10 +125,9 @@ public class GameStatistics
 	{	float[] points = stats.getPoints();
 		ArrayList<Integer> winners = CalculusTools.getWinners(points);
 		
-		for(int index=0;index<stats.getPlayers().size();index++)
+		for(int index=0;index<stats.getPlayersIds().size();index++)
 		{	// init
-			String idStr = stats.getPlayers().get(index);
-			int id = Integer.parseInt(idStr);
+			Integer id = stats.getPlayersIds().get(index);
 			PlayerStats playerStats = playersStats.get(id);
 			
 			// scores
@@ -207,10 +207,10 @@ public class GameStatistics
 		}
 		else*/
 		{	float[] points = stats.getPoints();
-			ArrayList<String> players = stats.getPlayers();
+			List<Integer> players = stats.getPlayersIds();
 			Set<Integer> registeredPlayers = rankingService.getPlayers();
 			for(int index=0;index<points.length;index++)
-			{	int playerId = Integer.parseInt(players.get(index));
+			{	int playerId = players.get(index);
 				// only consider the registered players
 				if(registeredPlayers.contains(playerId))
 				{	double playerScore = points[index];

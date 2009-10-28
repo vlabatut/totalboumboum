@@ -58,7 +58,7 @@ public class PointsScores extends PointsProcessor implements PPConstant
 	public float[] process(StatisticHolder holder)
 	{	StatisticBase stats = holder.getStats();
 		long[] temp = stats.getScores(score);
-		float result[] = new float[stats.getPlayers().size()];
+		float result[] = new float[stats.getPlayersIds().size()];
 		for(int i=0;i<result.length;i++)
 			result[i] = temp[i];
 		return result;

@@ -61,7 +61,7 @@ public class HeroEventManager extends EventManager
 	/** current interactive move direction*/
 	protected Direction controlDirection;
 	
-	protected String explosedBy = null;
+	protected Integer explosedBy = null;
 
 	public HeroEventManager(Hero sprite)
 	{	super(sprite);		
@@ -102,7 +102,7 @@ public class HeroEventManager extends EventManager
 					}
 					if(spr instanceof Hero)
 					{	Hero temp = (Hero)spr;
-						explosedBy = Integer.toString(temp.getPlayer().getId());
+						explosedBy = temp.getPlayer().getId();
 					}
 //if(explosedBy==null)
 //	System.out.println();
@@ -110,8 +110,8 @@ public class HeroEventManager extends EventManager
 				// stats
 				StatisticAction statAction = StatisticAction.BOMB_PLAYER;
 				long statTime = sprite.getLoopTime();
-				String statActor = explosedBy;
-				String statTarget = Integer.toString(sprite.getPlayer().getId());
+				Integer statActor = explosedBy;
+				Integer statTarget = sprite.getPlayer().getId();
 				StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 				sprite.addStatisticEvent(statEvent);
 				// other lifes remaining?

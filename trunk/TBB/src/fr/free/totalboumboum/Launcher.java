@@ -848,6 +848,7 @@ public class Launcher
 	 * - possibilité de simuler les rounds qui n'impliquent que des IA
 	 * - affichage du rang dans l'écran récapitulant les joueurs sélectionnés avant le début d'une partie
 	 * - affichage du nom des joueurs par dessus les sprites en mode débug
+	 * - joueurs identifiés par un entier unique (au lieu d'une chaine de caractères) dans les stats détaillées
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1067,7 +1068,6 @@ public class Launcher
 	 *  - utiliser la lecture de fichiers bufferisée pour accélérer les chargements/sauvegardes 
 	 *  - définir un changement de couleur quand le curseur de la souris passe sur des labels cliquables
 	 *  - ne pas relacher systématiquement les items dans la simulation
-	 *  - dans les stats, remplacer le string du joueur par un entier (pr items et bombs c inutile de connaitre le type)
 	 *  - faire apparaitre le rang des joueurs lors de leur sélection ? et leur couleur ?
 	 * 	- créer un log des commandes (désactivable ds options advanced)
 	 *  - options pour les stats ?
