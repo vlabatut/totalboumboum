@@ -849,6 +849,7 @@ public class Launcher
 	 * - affichage du rang dans l'écran récapitulant les joueurs sélectionnés avant le début d'une partie
 	 * - affichage du nom des joueurs par dessus les sprites en mode débug
 	 * - joueurs identifiés par un entier unique (au lieu d'une chaine de caractères) dans les stats détaillées
+	 * - bufferisation de tous les accès au fichiers avec l'utilisation de BufferedInput et BufferedOutput
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
