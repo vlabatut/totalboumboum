@@ -21,6 +21,7 @@ package fr.free.totalboumboum.statistics.general;
  * 
  */
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -38,8 +39,9 @@ public class OverallStatsLoader
 		
 		// read the rankings
 		File file = new File(path);
-		FileInputStream fileOut = new FileInputStream(file);
-		ObjectInputStream in = new ObjectInputStream(fileOut);
+		FileInputStream filein = new FileInputStream(file);
+		BufferedInputStream inBuff = new BufferedInputStream(filein);
+		ObjectInputStream in = new ObjectInputStream(inBuff);
 		HashMap<Integer,PlayerStats> result = (HashMap<Integer,PlayerStats>) in.readObject();
 		return result;		
 		// TODO: if problem while reading the file, should restaure and use the backup 

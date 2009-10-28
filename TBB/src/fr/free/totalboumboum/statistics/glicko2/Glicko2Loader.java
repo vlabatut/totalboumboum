@@ -21,6 +21,7 @@ package fr.free.totalboumboum.statistics.glicko2;
  * 
  */
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -37,8 +38,9 @@ public class Glicko2Loader
 		
 		// read the rankings
 		File file = new File(path);
-		FileInputStream fileOut = new FileInputStream(file);
-		ObjectInputStream in = new ObjectInputStream(fileOut);
+		FileInputStream filein = new FileInputStream(file);
+		BufferedInputStream inBuff = new BufferedInputStream(filein);
+		ObjectInputStream in = new ObjectInputStream(inBuff);
 		RankingService result = (RankingService) in.readObject();
 		return result;		
 		// TODO: if problem while reading the file, should restaure and use the backup 

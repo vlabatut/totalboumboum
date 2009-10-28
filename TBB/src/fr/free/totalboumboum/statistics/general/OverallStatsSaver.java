@@ -21,6 +21,7 @@ package fr.free.totalboumboum.statistics.general;
  * 
  */
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -53,7 +54,8 @@ public class OverallStatsSaver
 		// write the rankings
 		File file = new File(path);
 		FileOutputStream fileOut = new FileOutputStream(file);
-		ObjectOutputStream out = new ObjectOutputStream(fileOut);
+		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
+		ObjectOutputStream out = new ObjectOutputStream(outBuff);
 		out.writeObject(playersStats);
 		
 		// display written data (debug)

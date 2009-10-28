@@ -1069,8 +1069,7 @@ public class Launcher
 	 * 
 	 *  - utiliser la lecture de fichiers bufferisée pour accélérer les chargements/sauvegardes 
 	 *  - définir un changement de couleur quand le curseur de la souris passe sur des labels cliquables
-	 *  - ne pas relacher systématiquement les items dans la simulation
-	 *  - faire apparaitre le rang des joueurs lors de leur sélection ? et leur couleur ?
+	 *  - faire apparaitre le rang des joueurs lors de leur sélection ? (>> oui, dans les propriétés, col de droite) et leur couleur ?
 	 * 	- créer un log des commandes (désactivable ds options advanced)
 	 *  - options pour les stats ?
 	 *  	- est-ce que le quick mode gère les stats ??
