@@ -1054,6 +1054,8 @@ public class Launcher
 	 * - percepts à rajouter
 	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
 	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
+	 * 			>> méthode prenant une position et un joueur en paramètres et calculant le blast et le temps de détonation d'une bombe posée là (voire donnant un objet bombe)
+	 * 			>> définir une classe bombe virtuelle ? destinée à ce seul effet ?
 	 * 		- il faut savoir quels items sont distribués dans le niveau, et les autres infos accessibles aux joueurs comme le temps de la partie, etc
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
