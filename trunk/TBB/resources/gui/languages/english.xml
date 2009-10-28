@@ -1035,6 +1035,12 @@
 						<text name="Previous" value="Previous page"  tooltip="Go to the previous ranking page" />
 						<text name="Mean" value="Mean"  tooltip="Switch to means view" />
 						<text name="Sum" value="Sum"  tooltip="Switch to counts view" />
+						<text name="Ai" value="Ais only"  tooltip="Display only AIs" />
+						<text name="Human" value="Humans only"  tooltip="Display only human players" />
+						<text name="Both" value="Both"  tooltip="Display all players" />
+						<text name="AllRanks" value="Ranked players"  tooltip="Display only ranked players" />
+						<text name="NoRanks" value="Non-ranked players"  tooltip="Display only non-ranked players" />
+						<text name="All" value="All players"  tooltip="Display all players" />
 					</group>
 				</group>
 

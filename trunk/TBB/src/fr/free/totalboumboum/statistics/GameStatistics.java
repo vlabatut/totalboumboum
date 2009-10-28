@@ -188,9 +188,8 @@ public class GameStatistics
 	}
 	
 	public static void updateRankingService(StatisticRound stats)
-	{	
-		// create the game results objects
-		GameResults gameResults = new GameResults();
+	{	// create the game results objects
+		GameResults gameResults = null;
 		/*		if(isTeamGame()) NOTE to be adapted
 		{	Iterator teamNames = teamScores.keySet().iterator();
 			while (teamNames.hasNext())
@@ -206,20 +205,25 @@ public class GameStatistics
 			}
 		}
 		else*/
-		{	float[] points = stats.getPoints();
-			List<Integer> players = stats.getPlayersIds();
-			Set<Integer> registeredPlayers = rankingService.getPlayers();
-			for(int index=0;index<points.length;index++)
-			{	int playerId = players.get(index);
-				// only consider the registered players
-				if(registeredPlayers.contains(playerId))
-				{	double playerScore = points[index];
-					gameResults.addPlayerResults(playerId,playerScore);
+		{	List<Integer> players = stats.getPlayersIds();
+			// ignore rounds with only one player
+			if(players.size()>1)
+			{	gameResults = new GameResults();
+				float[] points = stats.getPoints();
+				Set<Integer> registeredPlayers = rankingService.getPlayers();
+				for(int index=0;index<points.length;index++)
+				{	int playerId = players.get(index);
+					// only consider the registered players
+					if(registeredPlayers.contains(playerId))
+					{	double playerScore = points[index];
+						gameResults.addPlayerResults(playerId,playerScore);
+					}
 				}
 			}
 		}
 		
 		// update rankings
-		rankingService.postResults(gameResults);
+		if(gameResults!=null)
+			rankingService.postResults(gameResults);
 	}
 }

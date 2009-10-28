@@ -130,6 +130,7 @@ public class ImageTools
     	{	// optimizing : using a model adapted to the graphical environment
     		image =  getCompatibleImage(image);
     	}
+		inBuff.close();
     	return image;
     }
     

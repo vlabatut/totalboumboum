@@ -60,6 +60,7 @@ public class Glicko2Saver
 		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
 		ObjectOutputStream out = new ObjectOutputStream(outBuff);
 		out.writeObject(rankingService);
+		out.close();
 		
 		// display rankings (debug)
 		if(verbose)

@@ -43,6 +43,7 @@ public class OverallStatsLoader
 		BufferedInputStream inBuff = new BufferedInputStream(filein);
 		ObjectInputStream in = new ObjectInputStream(inBuff);
 		HashMap<Integer,PlayerStats> result = (HashMap<Integer,PlayerStats>) in.readObject();
+		in.close();
 		return result;		
 		// TODO: if problem while reading the file, should restaure and use the backup 
 	}
