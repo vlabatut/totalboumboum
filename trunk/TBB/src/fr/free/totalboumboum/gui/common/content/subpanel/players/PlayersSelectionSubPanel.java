@@ -66,6 +66,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private ArrayList<Profile> players;
+	private int rankWidth;
 
 	public ArrayList<Profile> getPlayers()
 	{	return players;	
@@ -95,7 +96,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		int colorWidth = GuiStringTools.initColorTexts(getLineFontSize(),colorTexts,colorTooltips,colorBackgrounds);
 		int typeWidth = headerHeight;
 		int heroWidth = headerHeight;
-		int rankWidth = headerHeight;
+		rankWidth = headerHeight;
 		int fixedSum = GuiTools.subPanelMargin*(COLS-1) + deleteWidth + heroWidth + rankWidth + controlWidth + colorWidth + typeWidth;
 		int nameWidth = getDataWidth() - fixedSum;
 		
@@ -219,6 +220,14 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					tooltip = text;
 				}
 				setLabelText(line,COL_RANK,text,tooltip);
+				// size
+				int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+				if(temp>rankWidth)
+				{	rankWidth = temp;
+					setColSubMinWidth(COL_RANK,rankWidth);
+					setColSubPrefWidth(COL_RANK,rankWidth);
+					setColSubMaxWidth(COL_RANK,rankWidth);
+				}
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				setLabelBackground(line,COL_RANK,bg);

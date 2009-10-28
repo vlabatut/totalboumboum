@@ -57,6 +57,7 @@ public class Launcher
 {	
 	public static void main(String args[]) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	List<String> argList = Arrays.asList(args); 
+
 		if(argList.contains(GuiTools.OPTIONS[GuiTools.OPTION_HELP]))
 			displayHelp();
 		else
@@ -1063,7 +1064,9 @@ public class Launcher
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
 	 * 
-	 *  - corriger le fait que la largeur du rang n'est pas calculée convenablement dans l'écran de sélection des joueurs 
+	 *  - corriger le fait que la largeur du rang n'est pas calculée convenablement dans l'écran de sélection des joueurs
+	 *  	>> utiliser un champ pour représenter globalement la largeur et la mettre à jour à chaque modif de joueur
+	 *  - utiliser la lecture de fichiers bufferisée pour accélérer les chargements/sauvegardes 
 	 *  - définir un changement de couleur quand le curseur de la souris passe sur des labels cliquables
 	 *  - ne pas relacher systématiquement les items dans la simulation
 	 *  - dans les stats, remplacer le string du joueur par un entier (pr items et bombs c inutile de connaitre le type)
