@@ -1043,6 +1043,12 @@
 						<text name="Previous" value="Page précédente"  tooltip="Aller à la page précédente du classement" />
 						<text name="Mean" value="Moyennes"  tooltip="Afficher les valeurs moyennes" />
 						<text name="Sum" value="Sommes"  tooltip="Afficher les totaux" />
+						<text name="Ai" value="Seulement les IA"  tooltip="Afficher seulement les intelligences artificielles" />
+						<text name="Human" value="Seulement les humains"  tooltip="Afficher seulement les joueurs humains" />
+						<text name="Both" value="Les deux"  tooltip="Afficher tous les joueurs" />
+						<text name="AllRanks" value="Joueurs classés"  tooltip="Afficher seulement les joueurs classés" />
+						<text name="NoRanks" value="Joueurs non-classés"  tooltip="Afficher seulement les joueurs non-classés" />
+						<text name="All" value="Tous les joueurs"  tooltip="Afficher tous les joueurs" />
 					</group>
 				</group>
 

@@ -426,6 +426,7 @@ public class XmlTools
         Document document = builder.build(doc);
 		// root
 		Element result = document.getRootElement();
+		inBuff.close();
 		return result;
 	}
 

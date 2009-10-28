@@ -57,8 +57,10 @@ import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	private final static int COL_PREVIOUS = 0;
-	private final static int COL_SUM_MEAN = 2;
-	private final static int COL_NEXT = 4;
+	private final static int COL_TYPE = 2;
+	private final static int COL_RANKS = 4;
+	private final static int COL_SUM_MEAN = 6;
+	private final static int COL_NEXT = 8;
 
 	public PlayerStatisticSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER);
@@ -79,9 +81,8 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		
 		// sizes
 		int buttonHeight = GuiTools.subPanelTitleHeight;
-		int upWidth = (getDataWidth() - GuiTools.subPanelMargin)/3;
-		int downWidth = upWidth;
-		int centerWidth = getDataWidth()- upWidth - downWidth - 2*GuiTools.subPanelMargin;
+		int regularButtonWidth = (getDataWidth() - 4*GuiTools.subPanelMargin)/5;
+		int centerButtonWidth = getDataWidth()- 4*regularButtonWidth - 4*GuiTools.subPanelMargin;
 		int mainPanelHeight = getDataHeight() - buttonHeight - GuiTools.subPanelMargin;
 		
 		// main panel
@@ -108,7 +109,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			{	JLabel label = new JLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-				Dimension dim = new Dimension(upWidth,buttonHeight);
+				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
@@ -120,11 +121,43 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				buttonsPanel.add(label);
 			}
 			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			// type
+			{	JLabel label = new JLabel();
+				label.setOpaque(true);
+				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
+				label.setMinimumSize(dim);
+				label.setPreferredSize(dim);
+				label.setMaximumSize(dim);
+				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_HUMAN;
+				GuiTools.setLabelKey(label,key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
+				label.addMouseListener(this);
+				buttonsPanel.add(label);
+			}
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			// ranks
+			{	JLabel label = new JLabel();
+				label.setOpaque(true);
+				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
+				label.setMinimumSize(dim);
+				label.setPreferredSize(dim);
+				label.setMaximumSize(dim);
+				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALLRANKS;
+				GuiTools.setLabelKey(label,key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
+				label.addMouseListener(this);
+				buttonsPanel.add(label);
+			}
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// sum/mean
 			{	JLabel label = new JLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-				Dimension dim = new Dimension(centerWidth,buttonHeight);
+				Dimension dim = new Dimension(centerButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
@@ -140,7 +173,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			{	JLabel label = new JLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-				Dimension dim = new Dimension(downWidth,buttonHeight);
+				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
@@ -269,20 +302,23 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				PlayerRating playerRating = rankingService.getPlayerRating(playerId);
 				PlayerStats playerStats = playersStats.get(playerId);
 				int playerRank = rankingService.getPlayerRank(playerId);
-				// color
-				Color clr = profile.getSpriteColor().getColor();
-				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-				if(playerRating==null)
-					alpha = alpha/3;
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				panel.setLineBackground(line,bg);
-				// columns
-				for(int col=0;col<cols;col++)
-				{	StatisticColumn column = columns.get(col);
-					column.setLabelContent(this,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats);
+				if(((type==Type.AI && profile.hasAi()) || (type==Type.HUMAN && !profile.hasAi()) || type==Type.BOTH)
+					&& ((ranks==Ranks.ALL_RANKS && playerRating!=null) || (ranks==Ranks.NO_RANKS && playerRating==null) || ranks==Ranks.ALL))
+				{	// color
+					Color clr = profile.getSpriteColor().getColor();
+					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+					if(playerRating==null)
+						alpha = alpha/3;
+					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+					panel.setLineBackground(line,bg);
+					// columns
+					for(int col=0;col<cols;col++)
+					{	StatisticColumn column = columns.get(col);
+						column.setLabelContent(this,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats);
+					}
+					// next line
+					line++;
 				}
-				// next line
-				line++;
 			}
 						
 			// add panel to list
@@ -360,6 +396,8 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	private StatisticColumn sortCriterion = null;
 	private boolean inverted = false;
 	private boolean mean = false;
+	private Type type = Type.BOTH;
+	private Ranks ranks = Ranks.ALL;
 	
 	public boolean hasMean()
 	{	return mean;
@@ -373,6 +411,32 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			sortCriterion = sort;
 		}
 		refresh();
+	}
+	
+	private enum Type
+	{	HUMAN,
+		AI,
+		BOTH;
+	
+		public Type getNext()
+		{	Type[] values = Type.values();
+			int index = (this.ordinal()+1)%values.length;
+			Type result = values[index];
+			return result;
+		}
+	}
+	
+	private enum Ranks
+	{	ALL,
+		ALL_RANKS,
+		NO_RANKS;
+	
+		public Ranks getNext()
+		{	Ranks[] values = Ranks.values();
+			int index = (this.ordinal()+1)%values.length;
+			Ranks result = values[index];
+			return result;
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -405,6 +469,34 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				{	currentPage--;
 					refreshList();
 				}
+			}
+			// switch type
+			else if(pos==COL_TYPE)
+			{	type = type.getNext();
+				String key;
+				if(type==Type.HUMAN)
+					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_AI;
+				else if(type==Type.AI)
+					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_BOTH;
+				else
+					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_HUMAN;
+				JLabel lbl = (JLabel)buttonsPanel.getComponent(COL_TYPE);
+				GuiTools.setLabelKey(lbl,key,true);
+				refresh();
+			}
+			// ranks
+			else if(pos==COL_RANKS)
+			{	ranks = ranks.getNext();
+				String key;
+				if(ranks==Ranks.ALL)
+					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALLRANKS;
+				else if(ranks==Ranks.ALL_RANKS)
+					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_NORANKS;
+				else
+					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALL;
+				JLabel lbl = (JLabel)buttonsPanel.getComponent(COL_RANKS);
+				GuiTools.setLabelKey(lbl,key,true);
+				refresh();
 			}
 			// mean/sum
 			else if(pos==COL_SUM_MEAN)

@@ -57,6 +57,7 @@ public class OverallStatsSaver
 		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
 		ObjectOutputStream out = new ObjectOutputStream(outBuff);
 		out.writeObject(playersStats);
+		out.close();
 		
 		// display written data (debug)
 		if(verbose)

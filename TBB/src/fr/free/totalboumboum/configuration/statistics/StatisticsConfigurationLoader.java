@@ -70,7 +70,7 @@ public class StatisticsConfigurationLoader
 	private static void loadIncludeSimulationsElement(Element root, StatisticsConfiguration result)
 	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
 		boolean includeSimulations = Boolean.valueOf(value);
-		result.setIncludeQuickStarts(includeSimulations);
+		result.setIncludeSimulations(includeSimulations);
 	}
 
 	private static void loadGlicko2Element(Element root, StatisticsConfiguration result)

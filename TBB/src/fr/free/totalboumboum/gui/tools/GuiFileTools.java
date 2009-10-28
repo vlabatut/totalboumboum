@@ -88,6 +88,9 @@ public class GuiFileTools
 	public final static String FILE_SHARE = "share.png";
 	public final static String FILE_SOURCE = "source.png";
 	public final static String FILE_STDEV = "stdev.png";
+	public final static String FILE_TABLE = "table.png";
+	public final static String FILE_TABLE_BIS = "tablebis.png";
+	public final static String FILE_TABLE_TRIS = "tabletris.png";
 	public final static String FILE_THEME = "theme.png";
 	public final static String FILE_TIME = "time.png";
 	public final static String FILE_TITLE = "title.png";

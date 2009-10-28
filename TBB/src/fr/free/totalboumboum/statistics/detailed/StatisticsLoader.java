@@ -46,6 +46,7 @@ public class StatisticsLoader
 		BufferedInputStream inBuf = new BufferedInputStream(in);
 		ObjectInputStream ois = new ObjectInputStream(inBuf);
 		result = (Statistics)ois.readObject();
+		ois.close();
 		return result;
 	}
 	
@@ -57,5 +58,6 @@ public class StatisticsLoader
 		BufferedOutputStream outBuf = new BufferedOutputStream(out);
 		ObjectOutputStream oos = new ObjectOutputStream(outBuf);
 		oos.writeObject(stats);
+		oos.close();
 	}
 }

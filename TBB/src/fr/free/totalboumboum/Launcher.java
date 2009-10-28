@@ -185,7 +185,10 @@ public class Launcher
 		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_INIT]);
 		GuiTools.quickInit();
 		// load engine stats
+		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_STATS]);
 		LogstatsLoader.loadLogstats();
+		if(Configuration.getStatisticsConfiguration().getIncludeQuickStarts())
+			GameStatistics.loadStatistics();
 		// done
 		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_DONE]);
 		GameData.quickMode = true;
@@ -850,6 +853,7 @@ public class Launcher
 	 * - affichage du nom des joueurs par dessus les sprites en mode débug
 	 * - joueurs identifiés par un entier unique (au lieu d'une chaine de caractères) dans les stats détaillées
 	 * - bufferisation de tous les accès au fichiers avec l'utilisation de BufferedInput et BufferedOutput
+	 * - affichage des stats : possibilité de masquer en fonction du type de profil (IA/humain) et du rang (classé/pas classé)
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1048,6 +1052,7 @@ public class Launcher
 	/**
 	 * - site :
 	 * 		- parler des options des stats
+	 * 			- possibilité de masquer les ia/humains dans le classement
 	 * 		- parler des options des IA
 	 * 			- affichage du nom des joueurs pendant le jeu en surimpression
 	 * 			- simulations des matches all-ias
@@ -1068,19 +1073,18 @@ public class Launcher
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
 	 * 
-	 *  - utiliser la lecture de fichiers bufferisée pour accélérer les chargements/sauvegardes 
 	 *  - définir un changement de couleur quand le curseur de la souris passe sur des labels cliquables
 	 *  - faire apparaitre le rang des joueurs lors de leur sélection ? (>> oui, dans les propriétés, col de droite) et leur couleur ?
 	 * 	- créer un log des commandes (désactivable ds options advanced)
 	 *  - options pour les stats ?
-	 *  	- est-ce que le quick mode gère les stats ??
 	 *  	- inclure les résultats simulés dans les stats (rajouter un flag "simulated" dans les stats détaillées des rounds... p-ê des autres aussi ?)
 	 *  	- considérer le fait de séparer les suicides des bombeds-bombings
-	 *  	- affichage : possibilité de masquer les joueurs pas enregistrés ou IA/humains
+	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  - enregistrer l'évolution des stats
-	 *  
+	 *  1870 - 1916
 	 *  - IA : 
 	 *  	- calculer la sureté d'une case en fonction du nombre de sorties possibles, de leur distance, de leur nature zig-zagante
 	 *  	- peut-on toujours ramasser un item ? ben non: si y a un joueur qui a le temps d'y arriver plus vite, ou qu'il va se faire exploser (avant qu'on ne puisse l'atteindre), ou autre...
-	 */
+	 *  - affichage des stats : bugs sur l'ordre des valeurs moyennes et pourcents
+	 */ 
 }

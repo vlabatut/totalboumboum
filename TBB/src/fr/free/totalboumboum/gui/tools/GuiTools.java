@@ -790,7 +790,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_MATCH_DATA_COMPUTER,
 				GuiKeys.COMMON_RESULTS_ROUND_DATA_COMPUTER,
 				GuiKeys.COMMON_PLAYERS_SELECTION_DATA_COMPUTER,
-				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_COMPUTER
+				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_COMPUTER,
+				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_AI
 			};
 			loadTableImages(folder,uses);
 		}
@@ -869,7 +870,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_MATCH_DATA_HUMAN,
 				GuiKeys.COMMON_RESULTS_ROUND_DATA_HUMAN,
 				GuiKeys.COMMON_PLAYERS_SELECTION_DATA_HUMAN,
-				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_HUMAN
+				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_HUMAN,
+				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_HUMAN
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1023,6 +1025,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// profile
+		{	String folder = baseFolder+GuiFileTools.FILE_PROFILE;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_BOTH
+			};
+			loadTableImages(folder,uses);
+		}
 		// regular order
 		{	String folder = baseFolder+GuiFileTools.FILE_REGULAR;
 			String[] uses =
@@ -1045,6 +1054,27 @@ public class GuiTools
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_SHARE,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_SHARE,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_SHARE
+			};
+			loadTableImages(folder,uses);
+		}
+		// table
+		{	String folder = baseFolder+GuiFileTools.FILE_TABLE;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALLRANKS
+			};
+			loadTableImages(folder,uses);
+		}
+		// table bis
+		{	String folder = baseFolder+GuiFileTools.FILE_TABLE_BIS;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALL
+			};
+			loadTableImages(folder,uses);
+		}
+		// table tris
+		{	String folder = baseFolder+GuiFileTools.FILE_TABLE_TRIS;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_NORANKS
 			};
 			loadTableImages(folder,uses);
 		}
