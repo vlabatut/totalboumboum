@@ -27,23 +27,23 @@ public class StatisticEvent implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
-	private String actor;
+	private int actorId;
 	private StatisticAction action;
-	private String target;
+	private int targetId;
 	private long time;
 	
-	public StatisticEvent(String actor, StatisticAction action, String target, long time)
-	{	this.actor = actor;
+	public StatisticEvent(int actorId, StatisticAction action, int targetId, long time)
+	{	this.actorId = actorId;
 		this.action = action;
-		this.target = target;
+		this.targetId = targetId;
 		this.time = time;
 	}
 
-	public String getActor()
-	{	return actor;
+	public int getActorId()
+	{	return actorId;
 	}
-	public void setActor(String actor)
-	{	this.actor = actor;
+	public void setActorId(int actorId)
+	{	this.actorId = actorId;
 	}
 
 	public StatisticAction getAction()
@@ -53,11 +53,11 @@ public class StatisticEvent implements Serializable
 	{	this.action = action;
 	}
 
-	public String getTarget()
-	{	return target;
+	public int getTargetId()
+	{	return targetId;
 	}
-	public void setTarget(String target)
-	{	this.target = target;
+	public void setTargetId(int targetId)
+	{	this.targetId = targetId;
 	}
 	
 	public long getTime()
