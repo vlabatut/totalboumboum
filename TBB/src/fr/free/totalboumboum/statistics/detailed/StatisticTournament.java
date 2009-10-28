@@ -49,16 +49,16 @@ public class StatisticTournament extends StatisticBase
 		{	long[] currentScores = getScores(score);
 			long[] matchScores = match.getScores(score);
 			for(int i=0;i<matchScores.length;i++)
-			{	String playerName = match.getPlayers().get(i);
-				int index = getPlayers().indexOf(playerName);
+			{	Integer playerId = match.getPlayersIds().get(i);
+				int index = getPlayersIds().indexOf(playerId);
 				currentScores[index] = currentScores[index] + matchScores[i];			
 			}
 		}
 		// total
 		float[] matchPoints = match.getPoints();
 		for(int i=0;i<matchPoints.length;i++)
-		{	String playerName = match.getPlayers().get(i);
-			int index = getPlayers().indexOf(playerName);
+		{	Integer playerId = match.getPlayersIds().get(i);
+			int index = getPlayersIds().indexOf(playerId);
 			getTotal()[index] = getTotal()[index] + matchPoints[i];
 		}
 		// time

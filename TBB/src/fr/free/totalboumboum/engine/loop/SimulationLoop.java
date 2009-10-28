@@ -119,7 +119,7 @@ public class SimulationLoop extends Loop
 					if(verbose)
 						System.out.println("items:"+p+" vs "+threshold);			
 					if(p<=threshold)
-					{	StatisticEvent event = new StatisticEvent(Integer.toString(playerId),StatisticAction.GATHER_ITEM,null,currentTime);
+					{	StatisticEvent event = new StatisticEvent(playerId,StatisticAction.GATHER_ITEM,null,currentTime);
 						round.addStatisticEvent(event);
 					}
 					// bombs
@@ -128,7 +128,7 @@ public class SimulationLoop extends Loop
 					if(verbose)
 						System.out.println("bombs:"+p+" vs "+threshold);			
 					if(p<=threshold)
-					{	StatisticEvent event = new StatisticEvent(Integer.toString(playerId),StatisticAction.DROP_BOMB,null,currentTime);
+					{	StatisticEvent event = new StatisticEvent(playerId,StatisticAction.DROP_BOMB,null,currentTime);
 						round.addStatisticEvent(event);
 					}
 					// meeting
@@ -155,13 +155,13 @@ public class SimulationLoop extends Loop
 								if(verbose)
 									System.out.println("win:"+p+" vs "+threshold);			
 								if(p<=threshold)
-								{	StatisticEvent event = new StatisticEvent(Integer.toString(playerId),StatisticAction.BOMB_PLAYER,Integer.toString(playerId2),currentTime);
+								{	StatisticEvent event = new StatisticEvent(playerId,StatisticAction.BOMB_PLAYER,playerId2,currentTime);
 									round.addStatisticEvent(event);
 									deadPlayers.add(profile2);
 									round.playerOut(profiles.indexOf(profile2));
 									long items = currentScores.get(playerId2).get(Score.ITEMS);
 									for(int i=0;i<items;i++)
-									{	event = new StatisticEvent(Integer.toString(playerId),StatisticAction.LOSE_ITEM,null,currentTime);
+									{	event = new StatisticEvent(playerId,StatisticAction.LOSE_ITEM,null,currentTime);
 										round.addStatisticEvent(event);
 									}
 								}

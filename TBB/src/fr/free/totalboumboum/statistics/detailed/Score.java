@@ -28,7 +28,7 @@ public enum Score
 {	BOMBS, CROWNS, BOMBEDS, ITEMS, BOMBINGS, PAINTINGS, TIME;
 	
 	public long[] process(StatisticRound stats, StatisticEvent event)
-	{	long[] result = new long[stats.getPlayers().size()];
+	{	long[] result = new long[stats.getPlayersIds().size()];
 		switch(this)
 		{	case BOMBS:
 				result = processBombs(stats,event);
@@ -57,11 +57,11 @@ public enum Score
 
 	public long[] processBombs(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<String> players = stats.getPlayers();
+		ArrayList<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.DROP_BOMB)
-		{	int index = players.indexOf(event.getActor());
+		{	int index = playersIds.indexOf(event.getActorId());
 			result[index] = result[index] + 1;
 		}
 		return result;
@@ -69,15 +69,15 @@ public enum Score
 
 	public long[] processCrowns(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<String> players = stats.getPlayers();
+		ArrayList<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.GATHER_CROWN)
-		{	int index = players.indexOf(event.getActor());
+		{	int index = playersIds.indexOf(event.getActorId());
 			result[index] = result[index] + 1;
 		}
 		else if(event.getAction() == StatisticAction.LOSE_CROWN)
-		{	int index = players.indexOf(event.getActor());
+		{	int index = playersIds.indexOf(event.getActorId());
 			result[index] = result[index] - 1;
 		}
 		return result;
@@ -85,12 +85,12 @@ public enum Score
 
 	public long[] processBombeds(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<String> players = stats.getPlayers();
+		ArrayList<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.BOMB_PLAYER)
 		{	//target
-			int index = players.indexOf(event.getTarget());
+			int index = playersIds.indexOf(event.getTargetId());
 			result[index] = result[index] + 1;
 		}
 		return result;
@@ -98,11 +98,11 @@ public enum Score
 
 	public long[] processItems(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<String> players = stats.getPlayers();
+		ArrayList<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.GATHER_ITEM)
-		{	int index = players.indexOf(event.getActor());
+		{	int index = playersIds.indexOf(event.getActorId());
 			result[index] = result[index] + 1;
 		}
 		return result;
@@ -110,13 +110,13 @@ public enum Score
 
 	public long[] processBombings(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<String> players = stats.getPlayers();
+		ArrayList<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.BOMB_PLAYER)
 		{	// actor (can be null, ie: level)
-			if(event.getActor()!=null)
-			{	int index = players.indexOf(event.getActor());
+			if(event.getActorId()!=null)
+			{	int index = playersIds.indexOf(event.getActorId());
 				result[index] = result[index] + 1;
 			}
 		}
@@ -125,17 +125,17 @@ public enum Score
 
 	public long[] processPaintings(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<String> players = stats.getPlayers();
+		ArrayList<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.WIN_TILE)
 		{	// actor
-			{	int index = players.indexOf(event.getActor());
+			{	int index = playersIds.indexOf(event.getActorId());
 				result[index] = result[index] + 1;
 			}
 			// target (can be null if the tile was neutral)
-			if(event.getTarget()!=null)
-			{	int index = players.indexOf(event.getTarget());
+			if(event.getTargetId()!=null)
+			{	int index = playersIds.indexOf(event.getTargetId());
 				result[index] = result[index] - 1;
 			}
 		}

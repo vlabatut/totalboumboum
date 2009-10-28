@@ -81,8 +81,8 @@ public class PointsRankings extends PointsProcessor implements PPFunction
 		}
 		
 		// result
-		ArrayList<String> players = stats.getPlayers();
-		float[] result = new float[players.size()];
+		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		float[] result = new float[playersIds.size()];
 		for(int i=0;i<result.length;i++)
 			result[i] = 1;
 		
