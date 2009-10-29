@@ -56,7 +56,7 @@ public class AisData extends EntitledDataPanel implements MouseListener
 	{	super(container);
 
 		// title
-		{	setTitleKey(GuiKeys.MENU_OPTIONS_ADVANCED_TITLE);
+		{	setTitleKey(GuiKeys.MENU_OPTIONS_AIS_TITLE);
 		}
 	
 		// data
