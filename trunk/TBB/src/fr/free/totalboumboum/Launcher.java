@@ -1067,6 +1067,7 @@ public class Launcher
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
 	 * 		- stats
+	 * 		- instance TBB
 	 * 		- sons
 	 * 		- BM'83
 	 * 		- réseau
@@ -1085,6 +1086,5 @@ public class Launcher
 	 *  - IA : 
 	 *  	- calculer la sureté d'une case en fonction du nombre de sorties possibles, de leur distance, de leur nature zig-zagante
 	 *  	- peut-on toujours ramasser un item ? ben non: si y a un joueur qui a le temps d'y arriver plus vite, ou qu'il va se faire exploser (avant qu'on ne puisse l'atteindre), ou autre...
-	 *  - affichage des stats : bugs sur l'ordre des valeurs moyennes et pourcents
 	 */ 
 }
