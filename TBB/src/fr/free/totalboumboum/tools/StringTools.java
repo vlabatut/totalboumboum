@@ -37,9 +37,8 @@ public class StringTools
 		{	result = "";
 			NumberFormat nf = NumberFormat.getInstance();
 			nf.setMinimumIntegerDigits(2);
-			nf = NumberFormat.getInstance();
 			if(biggest==TimeUnit.HOUR)
-			{	String hours = nf.format(time/3600000);
+			{	String hours = Long.toString(time/3600000);
 				time = time%3600000;			
 				result = result + hours+TimeUnit.HOUR.getText(letter);
 			}

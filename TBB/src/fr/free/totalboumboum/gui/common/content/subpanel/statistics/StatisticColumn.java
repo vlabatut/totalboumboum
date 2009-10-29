@@ -592,7 +592,7 @@ public enum StatisticColumn
 				list.add(-playerId);
 			}
 			else if(this==ROUNDS_DRAWN)
-			{	long roundsDrawn = playerStats.getRoundsDrawn();
+			{	double roundsDrawn = playerStats.getRoundsDrawn();
 				if(container.hasMean())
 				{	if(totalRoundsPlayed>0)
 						roundsDrawn = roundsDrawn / totalRoundsPlayed;
@@ -601,7 +601,7 @@ public enum StatisticColumn
 				list.add(-playerId);
 			}
 			else if(this==ROUNDS_LOST)
-			{	long roundsLost = playerStats.getRoundsLost();
+			{	double roundsLost = playerStats.getRoundsLost();
 				if(container.hasMean())
 				{	if(totalRoundsPlayed>0)
 						roundsLost = roundsLost / totalRoundsPlayed;

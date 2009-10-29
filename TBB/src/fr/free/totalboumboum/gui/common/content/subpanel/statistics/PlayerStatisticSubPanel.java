@@ -253,11 +253,6 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				playersIds.add(0,i);
 		}
 		
-		// pages
-		pageCount = getPageCount();
-		if(currentPage>=pageCount)
-			currentPage = pageCount-1;
-		
 		// cols
 		int cols = columns.size();
 		String headerKeys[] = new String[cols];
@@ -269,10 +264,11 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		}
 		
 		// building all pages
+		pageCount = 0;
 		int headerHeight = 0;
 		HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		int idIndex = 0;
-		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
+		do
 		{	// build the panel			
 			int mainPanelWidth = mainPanel.getWidth();
 			int mainPanelHeight = mainPanel.getHeight();
@@ -280,7 +276,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			panel.setOpaque(false);
 			
 			// headers
-			if(panelIndex==0)
+			if(pageCount==0)
 				headerHeight = panel.getHeaderHeight();
 			for(int h=0;h<cols;h++)
 			{	String key = headerKeys[h];
@@ -322,8 +318,12 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			}
 						
 			// add panel to list
-			listPanels.add(panel);
+			if(line>1 || pageCount==0)
+			{	listPanels.add(panel);
+				pageCount++;
+			}
 		}
+		while(idIndex<playersIds.size());
 		
 		// col widths
 		{	int colName = columns.indexOf(StatisticColumn.GENERAL_NAME);
@@ -346,18 +346,12 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				}
 			}
 		}
-		
+
+		if(currentPage>=pageCount)
+			currentPage = pageCount-1;
+
 		refreshList();
 	}
-	
-	private int getPageCount()
-	{	int result = playersIds.size()/lines;
-		if(playersIds.size()%lines>0)
-			result++;
-		else if(result==0)
-			result = 1;
-		return result;
-	}		
 	
 	private void refreshList()
 	{	EmptyContentPanel dataPanel = getDataPanel();
@@ -512,7 +506,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			}
 			// next page
 			else if(pos==COL_NEXT)
-			{	if(currentPage<getPageCount()-1)
+			{	if(currentPage<pageCount-1)
 				{	currentPage++;
 					refreshList();
 				}
