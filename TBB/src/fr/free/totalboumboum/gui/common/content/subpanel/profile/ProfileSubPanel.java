@@ -30,6 +30,9 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPan
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.statistics.GameStatistics;
+import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
+import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 
 public class ProfileSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
@@ -72,9 +75,12 @@ public class ProfileSubPanel extends TableSubPanel
 			keys.add(GuiKeys.COMMON_PROFILES_HERO_PACK);
 		if(showColor)
 			keys.add(GuiKeys.COMMON_PROFILES_COLOR);
+		if(showRank)
+			keys.add(GuiKeys.COMMON_PROFILES_RANK);
 		
 		if(profile!=null)
-		{	// text
+		{	int playerId = profile.getId();
+			// text
 			ArrayList<String> values = new ArrayList<String>();
 			if(showName)
 				values.add(profile.getName());
@@ -95,6 +101,16 @@ public class ProfileSubPanel extends TableSubPanel
 				Color clr = profile.getSpriteColor().getColor();
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				colorBg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+			}
+			if(showRank)
+			{	RankingService rankingService = GameStatistics.getRankingService();
+				PlayerRating playerRating = rankingService.getPlayerRating(playerId);
+				String text;
+				if(playerRating==null)
+					text = "-";//GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_PROFILES_NORANK);				
+				else
+					text = Integer.toString(rankingService.getPlayerRank(playerId));
+				values.add(text);
 			}
 			
 			// content
@@ -168,6 +184,7 @@ public class ProfileSubPanel extends TableSubPanel
 	private boolean showHeroName = true;
 	private boolean showHeroPack = true;
 	private boolean showColor = true;
+	private boolean showRank = true;
 
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
@@ -191,5 +208,9 @@ public class ProfileSubPanel extends TableSubPanel
 
 	public void setShowColor(boolean showColor)
 	{	this.showColor = showColor;
+	}
+	
+	public void setShowRank(boolean showRank)
+	{	this.showRank = showRank;
 	}
 }

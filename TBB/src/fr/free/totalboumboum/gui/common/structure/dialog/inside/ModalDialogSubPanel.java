@@ -84,12 +84,14 @@ public abstract class ModalDialogSubPanel extends EmptySubPanel implements Mouse
 
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseEntered(component);
 	}
-
+	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseExited(component);
 	}
 
 	@Override

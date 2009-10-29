@@ -390,12 +390,14 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseEntered(component);
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseExited(component);
 	}
 	
 	@Override

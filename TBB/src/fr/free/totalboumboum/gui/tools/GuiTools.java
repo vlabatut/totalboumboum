@@ -659,7 +659,8 @@ public class GuiTools
 				GuiKeys.COMMON_POINTS_ROUND_HEADER_RANKPOINTS,
 				GuiKeys.COMMON_PART_RANK,
 				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK,
-				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_RANK
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_RANK,
+				GuiKeys.COMMON_PROFILES_RANK
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1334,6 +1335,33 @@ public class GuiTools
 	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1 = 80; //scores
 	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2 = 140; // rounds/matches
 	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3 = 200; //portrait/name/total/points
+	
+	public static Color changeColorAlpha(Color color, int delta)
+	{	Color result = color;
+		int r = color.getRed();
+		int g = color.getGreen();
+		int b = color.getBlue();
+		int a = color.getAlpha();
+		int newAlpha = a + delta;
+		if(newAlpha>0 && newAlpha<255)
+			result = new Color(r,g,b,newAlpha);
+		return result;
+	}
+	
+	public static void changeColorMouseEntered(Component component)
+	{	Color oldColor = component.getBackground();
+		Color newColor = changeColorAlpha(oldColor,+54);
+		component.setBackground(newColor);
+	}
+	
+	public static void changeColorMouseExited(Component component)
+	{	Color oldColor = component.getBackground();
+		int a = oldColor.getAlpha();
+		if(a>0 && a<255)
+		{	Color newColor = changeColorAlpha(oldColor,-54);
+			component.setBackground(newColor);
+		}
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////

@@ -924,6 +924,7 @@
 			<text name="HeroName" value="Hero name" tooltip="Name of the character" />
 			<text name="HeroPack" value="Hero package" tooltip="Name of the character package" />
 			<text name="Name" value="Player name" tooltip="Name of the player" />
+			<text name="Rank" value="Player rank" tooltip="Glicko-2 rank of the player" />
 		</group>
 							
 <!-- RESULTS -->

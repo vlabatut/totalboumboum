@@ -22,6 +22,7 @@ package fr.free.totalboumboum.gui.common.content.subpanel.file;
  */
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.Collator;
@@ -249,12 +250,14 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseEntered(component);
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseExited(component);
 	}
 	
 	@Override
@@ -272,7 +275,8 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 		}
 		// parent
 		else if(pos[0]==lineParent && showParent)
-		{	selectName(-1);
+		{	GuiTools.changeColorMouseExited(label);
+			selectName(-1);
 			refreshList();
 			fireFileBrowserParentClicked();
 		}
@@ -286,7 +290,9 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 		}
 		// select a name
 		else if(pos[0]>=0)
-		{	selectName(pos[0]);
+		{	GuiTools.changeColorMouseExited(label);
+			selectName(pos[0]);
+			GuiTools.changeColorMouseEntered(label);			
 		}
 	}
 	
