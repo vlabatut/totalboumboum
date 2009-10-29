@@ -22,6 +22,7 @@ package fr.free.totalboumboum.gui.common.content.subpanel.limits;
  */
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.NumberFormat;
@@ -233,12 +234,14 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseEntered(component);
 	}
-
+	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseExited(component);
 	}
 
 	@Override

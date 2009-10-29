@@ -1116,6 +1116,7 @@ public class GuiKeys
 	public static final String COMMON_PROFILES_HERO_NAME = COMMON_PROFILES+HERO+NAME;
 	public static final String COMMON_PROFILES_HERO_PACK = COMMON_PROFILES+HERO+PACK;
 	public static final String COMMON_PROFILES_NAME = COMMON_PROFILES+NAME;
+	public static final String COMMON_PROFILES_RANK = COMMON_PROFILES+RANK;
 			
 	/* RESULTS */
 	public static final String COMMON_RESULTS = COMMON+RESULTS;

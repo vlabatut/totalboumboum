@@ -363,14 +363,19 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	public void mouseClicked(MouseEvent e)
 	{	
 	}
+	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseEntered(component);
 	}
+	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseExited(component);
 	}
+	
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();

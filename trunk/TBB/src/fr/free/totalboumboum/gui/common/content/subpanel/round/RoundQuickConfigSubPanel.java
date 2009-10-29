@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.common.content.subpanel.round;
  * 
  */
 
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -428,12 +429,14 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseEntered(component);
 	}
-
+	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseExited(component);
 	}
 
 	@Override

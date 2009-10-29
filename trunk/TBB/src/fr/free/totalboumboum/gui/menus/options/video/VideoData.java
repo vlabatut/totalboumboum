@@ -22,6 +22,7 @@ package fr.free.totalboumboum.gui.menus.options.video;
  */
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -288,12 +289,14 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseEntered(component);
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	Component component = e.getComponent();
+		GuiTools.changeColorMouseExited(component);
 	}
 	
 	@SuppressWarnings("unchecked")

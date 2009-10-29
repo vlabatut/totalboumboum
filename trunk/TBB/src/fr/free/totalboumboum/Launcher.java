@@ -854,6 +854,8 @@ public class Launcher
 	 * - joueurs identifiés par un entier unique (au lieu d'une chaine de caractères) dans les stats détaillées
 	 * - bufferisation de tous les accès au fichiers avec l'utilisation de BufferedInput et BufferedOutput
 	 * - affichage des stats : possibilité de masquer en fonction du type de profil (IA/humain) et du rang (classé/pas classé)
+	 * - GUI : changement de couleur de type "mouse over" pour les boutons de la GUI
+	 * - GUI : le rang des joueurs apparait maintenant dans l'écran de sélection des profils
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1052,10 +1054,9 @@ public class Launcher
 	/**
 	 * - site :
 	 * 		- parler des options des stats
-	 * 			- possibilité de masquer les ia/humains dans le classement
-	 * 		- parler des options des IA
-	 * 			- affichage du nom des joueurs pendant le jeu en surimpression
-	 * 			- simulations des matches all-ias
+	 * 		- stats : possibilité de masquer les ia/humains dans le classement, et non-classés
+	 * 		- affichage du nom des joueurs pendant le jeu en surimpression
+	 * 		- GUI : soulignage des labels cliquables
 	 * 
 	 * - percepts à rajouter
 	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
@@ -1074,17 +1075,11 @@ public class Launcher
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
 	 * 
-	 *  - définir un changement de couleur quand le curseur de la souris passe sur des labels cliquables
-	 *  - faire apparaitre le rang des joueurs lors de leur sélection ? (>> oui, dans les propriétés, col de droite) et leur couleur ?
 	 * 	- créer un log des commandes (désactivable ds options advanced)
 	 *  - options pour les stats ?
 	 *  	- inclure les résultats simulés dans les stats (rajouter un flag "simulated" dans les stats détaillées des rounds... p-ê des autres aussi ?)
 	 *  	- considérer le fait de séparer les suicides des bombeds-bombings
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
-	 *  - enregistrer l'évolution des stats
-	 *  1870 - 1916
-	 *  - IA : 
-	 *  	- calculer la sureté d'une case en fonction du nombre de sorties possibles, de leur distance, de leur nature zig-zagante
-	 *  	- peut-on toujours ramasser un item ? ben non: si y a un joueur qui a le temps d'y arriver plus vite, ou qu'il va se faire exploser (avant qu'on ne puisse l'atteindre), ou autre...
+	 *  	- enregistrer l'évolution des stats
 	 */ 
 }

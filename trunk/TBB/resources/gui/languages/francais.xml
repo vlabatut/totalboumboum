@@ -921,7 +921,8 @@
 			<text name="Color" value="Couleur" tooltip="Couleur par défaut du personnage" />
 			<text name="HeroName" value="Nom du personnage" tooltip="Nom du personnage contrôlé par le joueur" />
 			<text name="HeroPack" value="Paquet du personnage" tooltip="Nom du paquet contenant le personnage contrôlé par le joueur" />
-			<text name="Name" value="Nom du joueur" tooltip="Nom du joueur correspondant à ce profil" />
+			<text name="Name" value="Nom du joueur" tooltip="Nom du joueur correspondant" />
+			<text name="Rank" value="Classement du joueur" tooltip="Classement du joueur" />
 		</group>
 				
 <!-- RESULTS -->
