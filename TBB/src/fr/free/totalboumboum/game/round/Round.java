@@ -145,7 +145,10 @@ public class Round implements StatisticHolder, Serializable
 	public void loopOver()
 	{	match.roundOver();
 		stats.initEndDate();
-		if(!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts())
+		 // possibly not record simulated stats
+		if((!loop.isSimulated() || Configuration.getStatisticsConfiguration().getIncludeSimulations())
+		// possible not record quick mode stats
+			&& (!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts()))
 			GameStatistics.update(stats);
 		if(panel!=null)
 		{	panel.roundOver();

@@ -27,44 +27,80 @@ public class StatisticEvent implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
-	private Integer actorId;
-	private StatisticAction action;
-	private Integer targetId;
-	private long time;
-	
 	public StatisticEvent(Integer actorId, StatisticAction action, Integer targetId, long time)
+	{	this(actorId,action,targetId,time,false);
+		
+	}
+	public StatisticEvent(Integer actorId, StatisticAction action, Integer targetId, long time, boolean simulated)
 	{	this.actorId = actorId;
 		this.action = action;
 		this.targetId = targetId;
 		this.time = time;
+		this.simulated = simulated;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// ACTOR				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Integer actorId;
 
 	public Integer getActorId()
 	{	return actorId;
 	}
+	
 	public void setActorId(Integer actorId)
 	{	this.actorId = actorId;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// ACTION				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private StatisticAction action;
+	
 	public StatisticAction getAction()
 	{	return action;
 	}
+	
 	public void setAction(StatisticAction action)
 	{	this.action = action;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TARGET				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Integer targetId;
+	
 	public Integer getTargetId()
 	{	return targetId;
 	}
+	
 	public void setTargetId(Integer targetId)
 	{	this.targetId = targetId;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// TIME					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private long time;
+
 	public long getTime()
 	{	return time;
 	}
+	
 	public void setTime(long time)
 	{	this.time = time;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// SIMULATED			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean simulated;
+
+	public boolean getSimulated()
+	{	return simulated;
+	}
+
+	public void setSimulated(boolean simulated)
+	{	this.simulated = simulated;
+	}
 }
