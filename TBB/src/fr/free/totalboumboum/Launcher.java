@@ -1058,6 +1058,7 @@ public class Launcher
 	 * 		- stats : possibilité de masquer les ia/humains dans le classement, et non-classés
 	 * 		- affichage du nom des joueurs pendant le jeu en surimpression
 	 * 		- GUI : soulignage des labels cliquables
+	 * 		- séparation des auto-bombages
 	 * 
 	 * - percepts à rajouter
 	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
@@ -1080,7 +1081,9 @@ public class Launcher
 	 * 		- sortir de bêta
 	 * 
 	 * 	- créer un log des commandes (désactivable ds options advanced)
-	 *  - créer le tournoi de type championnat (pratique pour classer les IA de façon plus homogène)
+	 *  - tournois :
+	 *  	- créer le tournoi de type championnat (pratique pour classer les IA de façon plus homogène)
+	 *  	- rajouter une option "tête de série" dans le tournoi de type coupe
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats
