@@ -1064,6 +1064,9 @@ public class Launcher
 	 * 			>> méthode prenant une position et un joueur en paramètres et calculant le blast et le temps de détonation d'une bombe posée là (voire donnant un objet bombe)
 	 * 			>> définir une classe bombe virtuelle ? destinée à ce seul effet ?
 	 * 		- il faut savoir quels items sont distribués dans le niveau, et les autres infos accessibles aux joueurs comme le temps de la partie, etc
+	 * 		- pour faire un suivi d'une ia à travers plusieurs rounds :
+	 * 			- chemin permettant d'écrire dans le package de l'IA, afin de lui permettre de faire des sauvegardes ?
+	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
