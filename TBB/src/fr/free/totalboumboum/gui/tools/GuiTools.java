@@ -696,6 +696,19 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// suicides
+		{	String folder = baseFolder+GuiFileTools.FILE_SUICIDES;
+			String[] uses =
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_SCORES_HEADER_SELF_BOMBINGS,
+				GuiKeys.COMMON_LIMIT_MATCH_HEADER_SELF_BOMBINGS,
+				GuiKeys.COMMON_LIMIT_ROUND_HEADER_SELF_BOMBINGS,
+				GuiKeys.COMMON_LIMIT_TOURNAMENT_HEADER_SELF_BOMBINGS,
+				GuiKeys.COMMON_RESULTS_MATCH_HEADER_SELF_BOMBINGS,
+				GuiKeys.COMMON_RESULTS_TOURNAMENT_HEADER_SELF_BOMBINGS,
+				GuiKeys.COMMON_RESULTS_ROUND_HEADER_SELF_BOMBINGS
+			};
+			loadTableImages(folder,uses);
+		}
 		// theme
 		{	String folder = baseFolder+GuiFileTools.FILE_THEME;
 			String[] uses =
@@ -1055,6 +1068,15 @@ public class GuiTools
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_SHARE,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_SHARE,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_SHARE
+			};
+			loadTableImages(folder,uses);
+		}
+		// suicides
+		{	String folder = baseFolder+GuiFileTools.FILE_SUICIDES;
+			String[] uses =
+			{	GuiKeys.COMMON_POINTS_MATCH_DATA_SELF_BOMBINGS,
+				GuiKeys.COMMON_POINTS_ROUND_DATA_SELF_BOMBINGS,
+				GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_SELF_BOMBINGS
 			};
 			loadTableImages(folder,uses);
 		}

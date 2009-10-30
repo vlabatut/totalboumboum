@@ -122,6 +122,7 @@ sc = "Time";
 				"Bombs",
 				"Items",
 				"Bombeds",
+				"Self-bombings",
 				"Bombings",
 				sc,
 				"Points"
@@ -179,6 +180,7 @@ sc = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.S
 					{	nf.format(stats.getScores(Score.BOMBS)[profileIndex]),
 						nf.format(stats.getScores(Score.ITEMS)[profileIndex]),
 						nf.format(stats.getScores(Score.BOMBEDS)[profileIndex]),
+						nf.format(stats.getScores(Score.SELF_BOMBINGS)[profileIndex]),
 						nf.format(stats.getScores(Score.BOMBINGS)[profileIndex]),
 						sc
 					};
