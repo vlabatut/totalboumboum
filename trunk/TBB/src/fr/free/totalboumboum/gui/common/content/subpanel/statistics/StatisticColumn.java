@@ -65,6 +65,7 @@ public enum StatisticColumn
 	SCORE_ITEMS,
 	SCORE_CROWNS,
 	SCORE_PAINTINGS,
+	SCORE_SELF_BOMBINGS,
 	SCORE_TIME,
 	// confrontations
 	ROUNDS_PLAYED,
@@ -106,6 +107,8 @@ public enum StatisticColumn
 		else if(this==SCORE_CROWNS)
 			result = true;
 		else if(this==SCORE_PAINTINGS)
+			result = true;
+		else if(this==SCORE_SELF_BOMBINGS)
 			result = true;
 		else if(this==SCORE_TIME)
 			result = true;
@@ -159,6 +162,8 @@ public enum StatisticColumn
 			result = GuiKeys.COMMON_STATISTICS_PLAYER_SCORES_HEADER_CROWNS;
 		else if(this==SCORE_PAINTINGS)
 			result = GuiKeys.COMMON_STATISTICS_PLAYER_SCORES_HEADER_PAINTINGS;
+		else if(this==SCORE_SELF_BOMBINGS)
+			result = GuiKeys.COMMON_STATISTICS_PLAYER_SCORES_HEADER_SELF_BOMBINGS;
 		else if(this==SCORE_TIME)
 			result = GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_TIME_PLAYED;
 		// confrontations
@@ -320,6 +325,9 @@ public enum StatisticColumn
 		}			
 		else if(this==SCORE_BOMBINGS)
 		{	setScoreLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,Score.BOMBINGS);
+		}			
+		else if(this==SCORE_SELF_BOMBINGS)
+		{	setScoreLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,Score.SELF_BOMBINGS);
 		}			
 		else if(this==SCORE_BOMBEDS)
 		{	setScoreLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,Score.BOMBEDS);
@@ -561,6 +569,15 @@ public enum StatisticColumn
 						paintings = paintings / totalRoundsPlayed;
 				}
 				list.add(paintings);
+				list.add(-playerId);
+			}
+			else if(this==SCORE_SELF_BOMBINGS)
+			{	double selfBombings = playerStats.getScore(Score.SELF_BOMBINGS);
+				if(container.hasMean())
+				{	if(totalRoundsPlayed>0)
+						selfBombings = selfBombings / totalRoundsPlayed;
+				}
+				list.add(selfBombings);
 				list.add(-playerId);
 			}
 			else if(this==SCORE_TIME)

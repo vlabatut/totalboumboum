@@ -117,7 +117,9 @@ public class PlayerStats implements Serializable
 	private final HashMap<Score,Long> scores = new HashMap<Score, Long>();
 
 	public long getScore(Score score)
-	{	return scores.get(score);
+	{	if(scores.get(score)==null)
+			scores.put(score,0l);
+		return scores.get(score);
 	}
 
 	public void setScore(Score score, long value)

@@ -402,6 +402,9 @@ public class PointsSubPanel extends TableSubPanel
 			case PAINTINGS:
 				name = prefix+GuiKeys.DATA+GuiKeys.PAINTINGS;
 				break;					
+			case SELF_BOMBINGS:
+				name = prefix+GuiKeys.DATA+GuiKeys.SELF+GuiKeys.BOMBINGS;
+				break;					
 			case TIME:
 				name = prefix+GuiKeys.DATA+GuiKeys.TIME;
 				break;					

@@ -856,6 +856,7 @@ public class Launcher
 	 * - affichage des stats : possibilité de masquer en fonction du type de profil (IA/humain) et du rang (classé/pas classé)
 	 * - GUI : changement de couleur de type "mouse over" pour les boutons de la GUI
 	 * - GUI : le rang des joueurs apparait maintenant dans l'écran de sélection des profils
+	 * - scores : les suicides sont maintenant séparés des bombeurs/bombés
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1079,9 +1080,8 @@ public class Launcher
 	 * 		- sortir de bêta
 	 * 
 	 * 	- créer un log des commandes (désactivable ds options advanced)
+	 *  - créer le tournoi de type championnat (pratique pour classer les IA de façon plus homogène)
 	 *  - options pour les stats ?
-	 *  	- inclure les résultats simulés dans les stats (rajouter un flag "simulated" dans les stats détaillées des rounds... p-ê des autres aussi ?)
-	 *  	- considérer le fait de séparer les suicides des bombeds-bombings
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats
 	 */ 

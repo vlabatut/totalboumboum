@@ -119,6 +119,7 @@ public class PlayerStatisticsData extends EntitledDataPanel
 			columns.add(StatisticColumn.SCORE_BOMBS);
 			columns.add(StatisticColumn.SCORE_ITEMS);
 			columns.add(StatisticColumn.SCORE_BOMBEDS);
+			columns.add(StatisticColumn.SCORE_SELF_BOMBINGS);
 			columns.add(StatisticColumn.SCORE_BOMBINGS);
 		}
 		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS))

@@ -151,6 +151,10 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 							iconName = headerPrefix+GuiKeys.PAINTINGS;
 							value = nf.format(l.getThreshold());
 							break;
+						case SELF_BOMBINGS:
+							iconName = headerPrefix+GuiKeys.SELF+GuiKeys.BOMBINGS;
+							value = nf.format(l.getThreshold());
+							break;
 						case TIME:
 							iconName = headerPrefix+GuiKeys.TIME;
 							value = nf.format(l.getThreshold());
@@ -211,8 +215,12 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 	private void selectLimit(int row)
 	{	// paint line
 		selectedRow = row;
+		GuiTools.changeColorMouseExited(getLabel(selectedRow,0));
+		GuiTools.changeColorMouseExited(getLabel(selectedRow,1));
 		setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
 		setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+		GuiTools.changeColorMouseEntered(getLabel(selectedRow,0));
+		GuiTools.changeColorMouseEntered(getLabel(selectedRow,1));
 		// update listeners
 		fireLimitSelectionChange();
 	}

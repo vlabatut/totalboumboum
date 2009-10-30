@@ -78,7 +78,7 @@ public class ResultsSubPanel extends TableSubPanel
 			if(showName) 
 				cols++;
 			if(showScores) 
-				cols = cols+4;
+				cols = cols+5;
 			if(showTime) 
 				cols++;
 			int confrontationsCount = statisticHolder.getStats().getConfrontationCount();
@@ -104,7 +104,7 @@ public class ResultsSubPanel extends TableSubPanel
 			int headerHeight = getHeaderHeight();
 			int portraitWidth = headerHeight;
 			int nameWidth = headerHeight;
-			int scoresWidth[] = {headerHeight,headerHeight,headerHeight,headerHeight};
+			int scoresWidth[] = {headerHeight,headerHeight,headerHeight,headerHeight,headerHeight};
 			int timeWidth = headerHeight;
 			int confrontationsWidth[] = new int[confrontationsCount];
 			Arrays.fill(confrontationsWidth,headerHeight);
@@ -129,6 +129,7 @@ public class ResultsSubPanel extends TableSubPanel
 					{	headerPrefix+GuiKeys.BOMBS,
 						headerPrefix+GuiKeys.ITEMS,
 						headerPrefix+GuiKeys.BOMBEDS,
+						headerPrefix+GuiKeys.SELF+GuiKeys.BOMBINGS,
 						headerPrefix+GuiKeys.BOMBINGS
 					};
 					for(int c=0;c<keys.length;c++)
@@ -216,6 +217,7 @@ public class ResultsSubPanel extends TableSubPanel
 					{	nf.format(stats.getScores(Score.BOMBS)[profileIndex]),
 						nf.format(stats.getScores(Score.ITEMS)[profileIndex]),
 						nf.format(stats.getScores(Score.BOMBEDS)[profileIndex]),
+						nf.format(stats.getScores(Score.SELF_BOMBINGS)[profileIndex]),
 						nf.format(stats.getScores(Score.BOMBINGS)[profileIndex]),
 					};
 					for(int j=0;j<scores.length;j++)

@@ -25,7 +25,22 @@ import java.util.ArrayList;
 
 
 public enum Score
-{	BOMBS, CROWNS, BOMBEDS, ITEMS, BOMBINGS, PAINTINGS, TIME;
+{	/** number of bombs dropped */
+	BOMBS, 
+	/** number of crowns picked up */
+	CROWNS, 
+	/** number of times bombed by other players */
+	BOMBEDS,
+	/** number of items picked up */
+	ITEMS, 
+	/** number of other players bombed */
+	BOMBINGS,
+	/** number of tiles painted */
+	PAINTINGS, 
+	/** number of times the player bombed himself */
+	SELF_BOMBINGS, 
+	/** time played */
+	TIME;
 	
 	public long[] process(StatisticRound stats, StatisticEvent event)
 	{	long[] result = new long[stats.getPlayersIds().size()];
@@ -47,6 +62,9 @@ public enum Score
 				break;
 			case PAINTINGS:
 				result = processPaintings(stats,event);
+				break;
+			case SELF_BOMBINGS:
+				result = processSelfBombings(stats,event);
 				break;
 			case TIME:
 				result = processTime(stats,event);
@@ -89,9 +107,10 @@ public enum Score
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.BOMB_PLAYER)
-		{	//target
-			int index = playersIds.indexOf(event.getTargetId());
-			result[index] = result[index] + 1;
+		{	Integer indexActor = playersIds.indexOf(event.getActorId());
+			Integer indexTarget = playersIds.indexOf(event.getTargetId());
+			if(indexActor==null || !indexActor.equals(indexTarget))
+				result[indexTarget] = result[indexTarget] + 1;
 		}
 		return result;
 	}
@@ -114,11 +133,24 @@ public enum Score
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.BOMB_PLAYER)
-		{	// actor (can be null, ie: level)
-			if(event.getActorId()!=null)
-			{	int index = playersIds.indexOf(event.getActorId());
-				result[index] = result[index] + 1;
-			}
+		{	Integer indexActor = playersIds.indexOf(event.getActorId());
+			Integer indexTarget = playersIds.indexOf(event.getTargetId());
+			if(indexActor!=null && !indexActor.equals(indexTarget))
+				result[indexActor] = result[indexActor] + 1;
+		}
+		return result;
+	}
+
+	public long[] processSelfBombings(StatisticRound stats, StatisticEvent event)
+	{	// init
+		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		long result[] = stats.getScores(this);
+		// processing
+		if(event.getAction() == StatisticAction.BOMB_PLAYER)
+		{	Integer indexActor = playersIds.indexOf(event.getActorId());
+			Integer indexTarget = playersIds.indexOf(event.getTargetId());
+			if(indexActor!=null && indexActor.equals(indexTarget))
+				result[indexActor] = result[indexActor] + 1;
 		}
 		return result;
 	}
