@@ -1087,5 +1087,6 @@ public class Launcher
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats
+	 *  - utiliser l'icone podium pour le classement des résultats et une couronne de lauriers pour le classement glicko
 	 */ 
 }
