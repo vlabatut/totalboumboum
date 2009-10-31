@@ -61,7 +61,7 @@ public class FloorsetLoader
 	private static void loadFloorsetElement(Element root, String folder, Theme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// abstract floors
     	HashMap<String,FloorFactory> abstractFloors = new HashMap<String,FloorFactory>();
-    	Element abstractFloorsElt = root.getChild(XmlTools.ELT_ABSTRACT_FLOORS);
+    	Element abstractFloorsElt = root.getChild(XmlTools.ABSTRACT_FLOORS);
     	if(abstractFloorsElt!=null)
     		loadFloorsElement(abstractFloorsElt,folder,result,abstractFloors,Type.ABSTRACT);
     	

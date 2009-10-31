@@ -126,7 +126,7 @@ public class PointsProcessorLoader
 		else if(type.equals(XmlTools.ELT_RANKPOINTS))
 			result = loadRankpointsElement(root);
 		
-		else if(type.equals(XmlTools.ELT_ADDITION))
+		else if(type.equals(XmlTools.ADDITION))
 			result = loadAdditionElement(root);
 		else if(type.equals(XmlTools.ELT_SUBTRACTION))
 			result = loadSubtractionElement(root);

@@ -67,7 +67,7 @@ public class AbilityLoader
 		}
 		// or action ?
 		else
-		{	temp = root.getChild(XmlTools.ELT_ACTION);
+		{	temp = root.getChild(XmlTools.ACTION);
 			GeneralAction action = GeneralActionLoader.loadActionElement(temp);
 			result = new ActionAbility(action);				
 		}
@@ -81,7 +81,7 @@ public class AbilityLoader
     @SuppressWarnings("unchecked")
 	public static ArrayList<AbstractAbility> loadAbilitiesElement(Element root) throws ClassNotFoundException
     {	ArrayList<AbstractAbility> result = new ArrayList<AbstractAbility>();
-    	List<Element> abilitiesElts = root.getChildren(XmlTools.ELT_ABILITY);
+    	List<Element> abilitiesElts = root.getChildren(XmlTools.ABILITY);
 		Iterator<Element> i = abilitiesElts.iterator();
 		while(i.hasNext())
 		{	Element elt = i.next();

@@ -857,6 +857,7 @@ public class Launcher
 	 * - GUI : changement de couleur de type "mouse over" pour les boutons de la GUI
 	 * - GUI : le rang des joueurs apparait maintenant dans l'écran de sélection des profils
 	 * - scores : les suicides sont maintenant séparés des bombeurs/bombés
+	 * - système de log : log des controles, que ce soit pour les humains ou les IA
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1080,7 +1081,6 @@ public class Launcher
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
 	 * 
-	 * 	- créer un log des commandes (désactivable ds options advanced)
 	 *  - tournois :
 	 *  	- créer le tournoi de type championnat (pratique pour classer les IA de façon plus homogène)
 	 *  	- rajouter une option "tête de série" dans le tournoi de type coupe
@@ -1088,5 +1088,8 @@ public class Launcher
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats
 	 *  - utiliser l'icone podium pour le classement des résultats et une couronne de lauriers pour le classement glicko
+	 *  - xml :
+	 *  	- renommer les constantes éléments/attributs
+	 *  	- virer les "-" dans les constantes et les fichiers xml/xsd
 	 */ 
 }

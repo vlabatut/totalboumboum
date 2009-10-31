@@ -70,7 +70,7 @@ public class BombsetLoader
 
     	// abstract bombs
     	HashMap<String,BombFactory> abstractBombs = new HashMap<String,BombFactory>();
-    	Element abstractBombsElt = root.getChild(XmlTools.ELT_ABSTRACT_BOMBS);
+    	Element abstractBombsElt = root.getChild(XmlTools.ABSTRACT_BOMBS);
     	if(abstractBombsElt!=null)
     		loadBombsElement(abstractBombsElt,folder,result,abstractBombs,Type.ABSTRACT);
     	
@@ -143,7 +143,7 @@ public class BombsetLoader
 	private static void loadBombsetElement(Element root, String folder, PredefinedColor color, Bombset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// abstract bombs
     	HashMap<String,String> abstractBombs = new HashMap<String,String>();
-    	Element abstractBombsElt = root.getChild(XmlTools.ELT_ABSTRACT_BOMBS);
+    	Element abstractBombsElt = root.getChild(XmlTools.ABSTRACT_BOMBS);
     	if(abstractBombsElt!=null)
     		loadBombsElement(abstractBombsElt,folder,color,result,abstractBombs,Type.ABSTRACT);
     	

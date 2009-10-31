@@ -65,7 +65,7 @@ public class FiresetLoader
 		HashMap<String,FireFactory> abstractFires = new HashMap<String, FireFactory>();
 		
     	// abstract fires
-    	Element abstractFiresElt = root.getChild(XmlTools.ELT_ABSTRACT_FIRES);
+    	Element abstractFiresElt = root.getChild(XmlTools.ABSTRACT_FIRES);
     	if(abstractFiresElt!=null)
     		loadFiresElement(folder,abstractFiresElt,null,abstractFires,Type.ABSTRACT);
 
@@ -116,7 +116,7 @@ public class FiresetLoader
 	{	Fireset result = new Fireset();
 		
     	// abstract fires
-    	Element abstractFiresElt = root.getChild(XmlTools.ELT_ABSTRACT_FIRES);
+    	Element abstractFiresElt = root.getChild(XmlTools.ABSTRACT_FIRES);
     	if(abstractFiresElt!=null)
     		loadFiresElement(folder,abstractFiresElt,result,abstractFires,Type.ABSTRACT);
 

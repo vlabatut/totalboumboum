@@ -1,5 +1,14 @@
 package fr.free.totalboumboum.configuration.engine;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import fr.free.totalboumboum.tools.FileTools;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -29,6 +38,7 @@ public class EngineConfiguration
 		result.setAutoFps(autoFps);
 		result.setSpeedCoeff(speedCoeff);
 		result.setFps(fps); 
+		result.setLogControls(logControls); 
 		return result;
 	}
 
@@ -72,5 +82,32 @@ public class EngineConfiguration
 	}
 	public void setSpeedCoeff(double speedCoeff)
 	{	this.speedCoeff = speedCoeff;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CONTROLS LOG		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean logControls = false;
+	private OutputStream controlsLogStream;
+
+	public boolean getLogControls()
+	{	return logControls;
+	}
+	public void setLogControls(boolean logControls)
+	{	this.logControls = logControls;
+	}
+	public void initControlsLogStream() throws FileNotFoundException
+	{	String path = FileTools.getLogsPath()+File.separator+FileTools.FILE_CONTROLS+FileTools.EXTENSION_LOG;
+		File logFile = new File(path);
+		if(logFile.exists())
+			logFile.delete();
+		FileOutputStream fileOut = new FileOutputStream(logFile);
+		controlsLogStream = new BufferedOutputStream(fileOut);
+	}
+	public void closeControlsLogStream() throws IOException
+	{	controlsLogStream.close();		
+	}
+	public OutputStream getControlsLogOutput()
+	{	return controlsLogStream;
 	}
 }

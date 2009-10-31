@@ -48,20 +48,20 @@ import org.xml.sax.SAXParseException;
 
 public class XmlTools
 {	// Elements names
-	public static final String ELT_ABILITY = "ability";
-	public static final String ELT_ABILITIES = "abilities";
-	public static final String ELT_ABSTRACT_BLOCKS = "abstract-blocks";
-	public static final String ELT_ABSTRACT_BOMBS = "abstract-bombs";
-	public static final String ELT_ABSTRACT_FIRES = "abstract-fires";
-	public static final String ELT_ABSTRACT_FLOORS = "abstract-floors";
-	public static final String ELT_ABSTRACT_ITEMS = "abstract-items";
-	public static final String ELT_ACTION = "action";
-	public static final String ELT_ACTOR_CIRCUMSTANCES = "actor-circumstances";
-	public static final String ELT_ACTOR_MODULATIONS = "actor-modulations";
-	public static final String ELT_ACTOR_RESTRICTIONS = "actor-restrictions";
-	public static final String ELT_ADDITION = "addition";
-	public static final String ELT_ADJUST = "adjust";
-	public static final String ELT_ANIMES = "animes";
+	public static final String ABILITY = "ability";
+	public static final String ABILITIES = "abilities";
+	public static final String ABSTRACT_BLOCKS = "abstract-blocks";
+	public static final String ABSTRACT_BOMBS = "abstract-bombs";
+	public static final String ABSTRACT_FIRES = "abstract-fires";
+	public static final String ABSTRACT_FLOORS = "abstract-floors";
+	public static final String ABSTRACT_ITEMS = "abstract-items";
+	public static final String ACTION = "action";
+	public static final String ACTOR_CIRCUMSTANCES = "actor-circumstances";
+	public static final String ACTOR_MODULATIONS = "actor-modulations";
+	public static final String ACTOR_RESTRICTIONS = "actor-restrictions";
+	public static final String ADDITION = "addition";
+	public static final String ADJUST = "adjust";
+	public static final String ANIMES = "animes";
 	public static final String ELT_AI = "ai";
 	public static final String ELT_AIS = "ais";
 	public static final String ELT_ALL_LEVELS = "all-levels";
@@ -146,6 +146,7 @@ public class XmlTools
 	public static final String ELT_LOCAL = "local";
 	public static final String ELT_LOCATION = "location";
 	public static final String ELT_LOCATIONS = "locations";
+	public static final String ELT_LOG = "log";
 	public static final String ELT_LOGSTATS = "logstats";
 	public static final String ELT_MATCH = "match";
 	public static final String ELT_MATCHES = "matches";
@@ -221,6 +222,7 @@ public class XmlTools
 	public static final String ELT_TIE_BREAK = "tieBreak";
 	public static final String ELT_TILE = "tile";
 	public static final String ELT_TIME = "time";
+	public static final String ELT_TIMING = "timing";
 	public static final String ELT_TITLE = "title";
 	public static final String ELT_TOTAL = "total";
 	public static final String ELT_TOURNAMENT = "tournament";
@@ -240,6 +242,7 @@ public class XmlTools
 	public static final String ATT_ACTOR = "actor";
 	public static final String ATT_ACTOR_CONTACT = "actor-contact";
 	public static final String ATT_ACTOR_TILE_POSITION = "actor-tile-position";
+	public static final String ATT_ADJUST = "adjust";
 	public static final String ATT_AI = "ai";
 	public static final String ATT_ALLOWED_PLAYERS = "allowedPlayers";
 	public static final String ATT_AUTOFIRE = "autofire";
@@ -268,6 +271,7 @@ public class XmlTools
 	public static final String ATT_FILE = "file";
 	public static final String ATT_FOLDER = "folder";
 	public static final String ATT_FORCE_ALL = "forceAll";
+	public static final String ATT_FPS = "fps";
 	public static final String ATT_FRAME = "frame";
 	public static final String ATT_GAMES_PER_PERIOD = "gamesPerPeriod";
 	public static final String ATT_GREEN = "green";
@@ -282,6 +286,7 @@ public class XmlTools
 	public static final String ATT_LEFTCOL = "leftCol";
 	public static final String ATT_LEVEL_ORDER = "levelOrder";
 	public static final String ATT_LINE = "line";
+	public static final String ATT_LOG = "log";
 	public static final String ATT_LOCAL = "local";
 	public static final String ATT_MARGIN = "margin";
 	public static final String ATT_MATCH_LIMIT = "matchLimit";
@@ -321,6 +326,7 @@ public class XmlTools
 	public static final String ATT_SHADOW_XSHIFT = "shadowXShift";
 	public static final String ATT_SHADOW_YSHIFT = "shadowYShift";
 	public static final String ATT_SHARE = "share";
+	public static final String ATT_SPEED = "speed";
 	public static final String ATT_SPRITE_FOLDER = "spriteFolder";
 	public static final String ATT_SPRITE_PACK = "spritePack";
 	public static final String ATT_START = "start";
