@@ -67,7 +67,7 @@ public class ItemsetLoader
 
 		// abstract items
     	HashMap<String,ItemFactory> abstractItems = new HashMap<String,ItemFactory>();
-    	Element abstractItemsElt = root.getChild(XmlTools.ELT_ABSTRACT_ITEMS);
+    	Element abstractItemsElt = root.getChild(XmlTools.ABSTRACT_ITEMS);
     	if(abstractItemsElt!=null)
     		loadItemsElement(abstractItemsElt,folder,result,abstractItems,Type.ABSTRACT);
     	
@@ -99,7 +99,7 @@ public class ItemsetLoader
 		// abilities
 		ArrayList<ArrayList<AbstractAbility>> abilities = new ArrayList<ArrayList<AbstractAbility>>();
 		ArrayList<Float> probabilities = new ArrayList<Float>();
-		List<Element> elements = root.getChildren(XmlTools.ELT_ABILITIES);
+		List<Element> elements = root.getChildren(XmlTools.ABILITIES);
 		for(Element e: elements)
 			loadAbilitiesElement(e,abilities,probabilities);
 		// normalize probas

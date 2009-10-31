@@ -47,32 +47,35 @@ public class EngineConfigurationLoader
 
 	private static void loadEngineElement(Element root, EngineConfiguration result)
 	{	Element element; 
-		// auto fps
-		element = root.getChild(XmlTools.ELT_ADJUST);
-		loadAdjustElement(element,result);
-		// fps
-		element = root.getChild(XmlTools.ELT_FPS);
-		loadFpsElement(element,result);
-		// speed
-		element = root.getChild(XmlTools.ELT_SPEED);
-		loadSpeedElement(element,result);
+		// timing
+		element = root.getChild(XmlTools.ELT_TIMING);
+		loadTimingElement(element,result);
+		// logs
+		element = root.getChild(XmlTools.ELT_LOG);
+		loadLogElement(element,result);
 	}
 	
-	private static void loadAdjustElement(Element root, EngineConfiguration result)
-	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
-		boolean autoFps = Boolean.valueOf(value);
+	private static void loadTimingElement(Element root, EngineConfiguration result)
+	{	// auto fps
+		String autoFpsStr = root.getAttribute(XmlTools.ATT_ADJUST).getValue().trim();
+		boolean autoFps = Boolean.valueOf(autoFpsStr);
 		result.setAutoFps(autoFps);
-	}
-	
-	private static void loadFpsElement(Element root, EngineConfiguration result)
-	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
-		int fps = Integer.valueOf(value);
+
+		// fps
+		String fpsStr = root.getAttribute(XmlTools.ATT_FPS).getValue().trim();
+		int fps = Integer.valueOf(fpsStr);
 		result.setFps(fps);
+
+		// speed
+		String speedStr = root.getAttribute(XmlTools.ATT_SPEED).getValue().trim();
+		float speed = Float.valueOf(speedStr);
+		result.setSpeedCoeff(speed);
 	}
 	
-	private static void loadSpeedElement(Element root, EngineConfiguration result)
-	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
-		float speedCoeff = Float.valueOf(value);
-		result.setSpeedCoeff(speedCoeff);
-	}	
+	private static void loadLogElement(Element root, EngineConfiguration result)
+	{	// controls
+		String controlsStr = root.getAttribute(XmlTools.ATT_CONTROLS).getValue().trim();
+		boolean controls = Boolean.valueOf(controlsStr);
+		result.setLogControls(controls);
+	}
 }

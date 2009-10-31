@@ -65,7 +65,7 @@ public class ItemsetPreviewLoader
 
 		// abstract items
     	HashMap<String,SpritePreview> abstractItems = new HashMap<String,SpritePreview>();
-    	Element abstractItemsElt = root.getChild(XmlTools.ELT_ABSTRACT_ITEMS);
+    	Element abstractItemsElt = root.getChild(XmlTools.ABSTRACT_ITEMS);
     	if(abstractItemsElt!=null)
     		loadItemsElement(abstractItemsElt,folder,result,abstractItems,Type.ABSTRACT);
     	

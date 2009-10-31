@@ -31,12 +31,17 @@ import java.awt.Stroke;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
@@ -51,6 +56,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
@@ -167,6 +173,9 @@ public class LocalLoop extends Loop
 			j++;
 		}
 		
+		// init logs
+		initLogs();
+		// init entries
 		initEntries();
 	}
 	
@@ -185,6 +194,58 @@ public class LocalLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	private SystemControl systemControl;
 
+	/////////////////////////////////////////////////////////////////
+	// LOGS				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
+	
+	private void initLogs()
+	{	if(engineConfiguration.getLogControls())
+		{	try
+			{	engineConfiguration.initControlsLogStream();
+				OutputStream out = engineConfiguration.getControlsLogOutput();
+				PrintWriter printWriter = new PrintWriter(out,true);
+				// start date/time
+				Calendar cal = new GregorianCalendar();
+				Date startDate = cal.getTime();
+				DateFormat dateFormat = DateFormat.getDateInstance();
+				printWriter.println("Start: "+dateFormat.format(startDate));
+				// players
+				printWriter.println("Players: ");
+				for(Player player: players)
+				{	int id = player.getId();
+					String name = player.getName();
+					String color = player.getColor().toString();
+					String type = "Human player";
+					if(player.hasAi())
+						type = "AI player";
+					printWriter.println("\t("+id+") "+name+" ["+color+"] - "+type);
+				}
+			}
+			catch (FileNotFoundException e)
+			{	e.printStackTrace();
+			}			
+		}		
+	}
+	
+	private void updateLogs()
+	{	if(engineConfiguration.getLogControls())
+		{	OutputStream out = engineConfiguration.getControlsLogOutput();
+			PrintWriter printWriter = new PrintWriter(out,true);
+			printWriter.println("--"+totalTime+"ms --------------------------");
+		}	
+	}
+	
+	private void closeLogs()
+	{	if(engineConfiguration.getLogControls())
+		try
+		{	engineConfiguration.closeControlsLogStream();
+		}
+		catch(IOException e)
+		{	e.printStackTrace();
+		}		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// DEBUG			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -653,6 +714,10 @@ System.out.println();
 				setCanceled(false);
 			}
 		}
+		
+		// logs
+		closeLogs();
+		
 		round.loopOver();
 		panel.loopOver();
 	}
@@ -661,7 +726,10 @@ System.out.println();
 	{	if(!isPaused() && (!getEnginePause() || getEngineStep()))
 		{	switchEngineStep(false);
 			
-			// celebration ?
+			// logs
+			updateLogs();
+			
+			// celebrations
 			if(celebrationDuration>0)
 			{	celebrationDuration = celebrationDuration - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 				if(celebrationDuration<=0)
@@ -1138,21 +1206,34 @@ System.out.println();
 	}
 
 	private void drawPlayersNames(Graphics g)
-	{	Font font = new Font("Dialog", Font.BOLD, 12);
+	{	//Graphics2D g2 = (Graphics2D) g;
+		Font font = new Font("Dialog",Font.BOLD,12);
 		g.setFont(font);
 		FontMetrics metrics = g.getFontMetrics(font);
 		for(Player player: players)
 		{	if(!player.isOut())
 			{	String text = player.getName();
 				Sprite s = player.getSprite();
-				Rectangle2D box = metrics.getStringBounds(text, g);
-				int x = (int)Math.round(s.getCurrentPosX()-box.getWidth()/2);
-				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
+				Rectangle2D box = metrics.getStringBounds(text,g);
+				double boxWidth = box.getWidth();
+				double boxHeight = box.getHeight();
+				int x = (int)Math.round(s.getCurrentPosX()-boxWidth/2);
+				int y = (int)Math.round(s.getCurrentPosY()+boxHeight/2-metrics.getDescent());
+				Color rectangleColor = new Color(255,255,255,100);
+				g.setColor(rectangleColor);
+				int arcDim = (int)Math.round(boxWidth/10);
+				double xMargin = boxWidth/15;
+				double yMargin = boxHeight/5;
+				int rectangleWidth = (int)Math.round(boxWidth+2*xMargin);
+				int rectangleHeight = (int)Math.round(boxHeight+2*yMargin);
+				int rx = (int)Math.round(s.getCurrentPosX()-rectangleWidth/2);
+				int ry = (int)Math.round(s.getCurrentPosY()-rectangleHeight/2);
+				g.fillRoundRect(rx,ry,rectangleWidth,rectangleHeight,arcDim,arcDim);
 				g.setColor(Color.BLACK);
 				g.drawString(text,x+1,y+1);
 				Color color = player.getColor().getColor();
 				g.setColor(color);
-				g.drawString(text,x,y);				
+				g.drawString(text,x,y);
 			}
 		}		
 	}

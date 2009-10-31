@@ -21,11 +21,15 @@ package fr.free.totalboumboum.engine.content.manager.control;
  * 
  */
 
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
+import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.control.ControlCode;
@@ -42,6 +46,7 @@ public class ControlManager
 	
 	protected ControlSettings controlSettings;
 	
+	private EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 	
 	protected int compte=0;
 	
@@ -64,7 +69,7 @@ public class ControlManager
 	}
 
 	public synchronized void putControlCode(ControlCode controlCode)
-	{	controlCodes.offer(controlCode);	
+	{	controlCodes.offer(controlCode);
 	}
 
 	public synchronized void putControlEvent(ControlEvent controlEvent)
@@ -83,6 +88,16 @@ public class ControlManager
 //if(sprite instanceof Sprite)
 //for(ControlEvent c: controlEvents)
 //	System.out.print(c+" ; ");
+		
+		if(engineConfiguration.getLogControls())
+		{	OutputStream out = engineConfiguration.getControlsLogOutput();
+			PrintWriter printWriter = new PrintWriter(out,true);
+			int id = sprite.getPlayer().getId();
+			printWriter.print("\t"+id+": [");
+			for(ControlEvent event: controlEvents)
+				printWriter.print(event.getName()+"/"+event.getMode()+" ");
+			printWriter.println(" ]");			
+		}
 
 		// transmiting the events to the event manager
 		Iterator<ControlEvent> i = controlEvents.iterator();
@@ -173,7 +188,17 @@ public class ControlManager
 				System.out.print(temp.getName()+"/"+temp.getMode()+" ");
 			}		
 			System.out.println(" ]");
-		}		
+		}
+		
+		if(engineConfiguration.getLogControls())
+		{	OutputStream out = engineConfiguration.getControlsLogOutput();
+			PrintWriter printWriter = new PrintWriter(out,true);
+			int id = sprite.getPlayer().getId();
+			printWriter.print("\t"+id+": [");
+			for(ControlEvent event: eventsList)
+				printWriter.print(event.getName()+"/"+event.getMode()+" ");
+			printWriter.println(" ]");			
+		}
 	}
 	
 //	protected abstract void processEvent();

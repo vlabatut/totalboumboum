@@ -103,7 +103,7 @@ public class ModulationsLoader
 		loadModulationsElement(otherElt,ModType.OTHER,gesture,role);
     	
 		// actor modulations
-		Element actorElt = root.getChild(XmlTools.ELT_ACTOR_MODULATIONS);
+		Element actorElt = root.getChild(XmlTools.ACTOR_MODULATIONS);
 		loadModulationsElement(actorElt,ModType.ACTOR,gesture,role);
 		
 		// target modulations
@@ -188,7 +188,7 @@ public class ModulationsLoader
 		boolean frame = Boolean.parseBoolean(root.getAttribute(XmlTools.ATT_FRAME).getValue());
 		
 		// action
-		Element actionElt = root.getChild(XmlTools.ELT_ACTION);
+		Element actionElt = root.getChild(XmlTools.ACTION);
 		GeneralAction action = GeneralActionLoader.loadActionElement(actionElt);
 		if(type==ModType.ACTOR)
 			action.addActor(role);
@@ -197,7 +197,7 @@ public class ModulationsLoader
     	
 		// actor restrictions
 		ArrayList<AbstractAbility> actorRestrictions = new ArrayList<AbstractAbility>();
-		Element actorRestrElt = root.getChild(XmlTools.ELT_ACTOR_RESTRICTIONS);
+		Element actorRestrElt = root.getChild(XmlTools.ACTOR_RESTRICTIONS);
 		if(actorRestrElt!=null)
 			actorRestrictions = AbilityLoader.loadAbilitiesElement(actorRestrElt);
     	
@@ -216,7 +216,7 @@ public class ModulationsLoader
 		else //if(type.equals(ModType.THIRD))
 		{	result = new ThirdModulation(action);
 			// actor circumstance
-			Element actorCircElt = root.getChild(XmlTools.ELT_ACTOR_CIRCUMSTANCES);
+			Element actorCircElt = root.getChild(XmlTools.ACTOR_CIRCUMSTANCES);
 			Circumstance actorCircumstance = ((ThirdModulation)result).getActorCircumstance();
 			CircumstanceLoader.loadCircumstanceElement(actorCircElt,actorCircumstance);
 			// target circumstance

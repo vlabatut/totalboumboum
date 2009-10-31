@@ -60,7 +60,7 @@ public class BlocksetLoader
 	private static void loadBlocksetElement(Element root, String folder, Theme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// abstract blocks
     	HashMap<String,BlockFactory> abstractItems = new HashMap<String,BlockFactory>();
-    	Element abstractBlocksElt = root.getChild(XmlTools.ELT_ABSTRACT_BLOCKS);
+    	Element abstractBlocksElt = root.getChild(XmlTools.ABSTRACT_BLOCKS);
     	if(abstractBlocksElt!=null)
     		loadBlocksElement(abstractBlocksElt,folder,result,abstractItems,Type.ABSTRACT);
     	

@@ -47,37 +47,43 @@ public class EngineConfigurationSaver
 
 	private static Element saveEngineElement(EngineConfiguration engineConfiguration)
 	{	Element result = new Element(XmlTools.ELT_ENGINE); 
+
+		// timing
+		Element timingElement = saveTimingElement(engineConfiguration);
+		result.addContent(timingElement);
+		
+		// logs
+		Element logElement = saveLogElement(engineConfiguration);
+		result.addContent(logElement);
+		
+		return result;
+	}
+	
+	private static Element saveTimingElement(EngineConfiguration engineConfiguration)
+	{	Element result = new Element(XmlTools.ELT_TIMING);
+		
 		// adjust
-		Element adjustElement = saveAdjustElement(engineConfiguration);
-		result.addContent(adjustElement);
+		String adjust = Boolean.toString(engineConfiguration.getAutoFps());
+		result.setAttribute(XmlTools.ATT_ADJUST,adjust);
+		
 		// fps
-		Element fpsElement = saveFpsElement(engineConfiguration);
-		result.addContent(fpsElement);
-		// speed
-		Element speedElement = saveSpeedElement(engineConfiguration);
-		result.addContent(speedElement);
-		//
-		return result;
-	}
-	
-	private static Element saveAdjustElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlTools.ELT_ADJUST);
-		String fps = Boolean.toString(engineConfiguration.getAutoFps());
-		result.setAttribute(XmlTools.ATT_VALUE,fps);
-		return result;
-	}
-	
-	private static Element saveFpsElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlTools.ELT_FPS);
 		String fps = Integer.toString(engineConfiguration.getFps());
-		result.setAttribute(XmlTools.ATT_VALUE,fps);
+		result.setAttribute(XmlTools.ATT_FPS,fps);
+		
+		// speed
+		String speed = Double.toString(engineConfiguration.getSpeedCoeff());
+		result.setAttribute(XmlTools.ATT_SPEED,speed);
+				
 		return result;
 	}
-	
-	private static Element saveSpeedElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlTools.ELT_SPEED);
-		String fps = Double.toString(engineConfiguration.getSpeedCoeff());
-		result.setAttribute(XmlTools.ATT_VALUE,fps);
+
+	private static Element saveLogElement(EngineConfiguration engineConfiguration)
+	{	Element result = new Element(XmlTools.ELT_LOG);
+		
+		// controls
+		String controls = Boolean.toString(engineConfiguration.getLogControls());
+		result.setAttribute(XmlTools.ATT_CONTROLS,controls);
+				
 		return result;
 	}
 }
