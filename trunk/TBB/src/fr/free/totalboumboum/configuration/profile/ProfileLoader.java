@@ -95,7 +95,7 @@ public class ProfileLoader
 		loadGeneralElement(general,result);
 		
 		// artificial intelligence
-		Element ai = root.getChild(XmlTools.ELT_AI);
+		Element ai = root.getChild(XmlTools.AI);
 		if(ai!=null)
 			loadAiElement(ai,result);
 		

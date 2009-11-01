@@ -48,7 +48,7 @@ public class AiPreviewSaver
 	}
 
 	private static Element saveAiElement(AiPreview aiPreview)
-	{	Element result = new Element(XmlTools.ELT_AI); 
+	{	Element result = new Element(XmlTools.AI); 
 		// notes
 		Element notesElement = saveNotesElement(aiPreview);
 		result.addContent(notesElement);

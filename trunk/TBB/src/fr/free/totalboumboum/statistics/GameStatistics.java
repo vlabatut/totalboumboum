@@ -141,13 +141,13 @@ public class GameStatistics
 			// rounds
 			long roundsPlayed = playerStats.getRoundsPlayed();
 			playerStats.setRoundsPlayed(roundsPlayed+1);
-			if(winners.contains(index))
-			{	long roundsWon = playerStats.getRoundsWon();
-				playerStats.setRoundsWon(roundsWon+1);
-			}
-			else if(winners.size()==0)
+			if(winners.size()==0 || winners.size()==points.length)
 			{	long roundsDrawn = playerStats.getRoundsDrawn();
 				playerStats.setRoundsDrawn(roundsDrawn+1);
+			}
+			else if(winners.contains(index))
+			{	long roundsWon = playerStats.getRoundsWon();
+				playerStats.setRoundsWon(roundsWon+1);
 			}
 			else
 			{	long roundsLost = playerStats.getRoundsLost();

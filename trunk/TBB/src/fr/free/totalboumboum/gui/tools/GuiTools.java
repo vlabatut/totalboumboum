@@ -508,6 +508,19 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// laurels
+		{	String folder = baseFolder+GuiFileTools.FILE_LAURELS;
+			String[] uses =
+			{	GuiKeys.COMMON_POINTS_TOURNAMENT_HEADER_RANKINGS,
+				GuiKeys.COMMON_POINTS_MATCH_HEADER_RANKINGS,
+				GuiKeys.COMMON_POINTS_ROUND_HEADER_RANKINGS,
+				GuiKeys.COMMON_POINTS_TOURNAMENT_HEADER_RANKPOINTS,
+				GuiKeys.COMMON_POINTS_MATCH_HEADER_RANKPOINTS,
+				GuiKeys.COMMON_POINTS_ROUND_HEADER_RANKPOINTS,
+				GuiKeys.COMMON_PART_RANK
+			};
+			loadTableImages(folder,uses);
+		}
 		// level
 		{	String folder = baseFolder+GuiFileTools.FILE_LEVEL;
 			String[] uses =
@@ -651,13 +664,6 @@ public class GuiTools
 		{	String folder = baseFolder+GuiFileTools.FILE_RANK;
 			String[] uses =
 			{	GuiKeys.COMMON_PLAYERS_LIST_HEADER_RANK,
-				GuiKeys.COMMON_POINTS_TOURNAMENT_HEADER_RANKINGS,
-				GuiKeys.COMMON_POINTS_MATCH_HEADER_RANKINGS,
-				GuiKeys.COMMON_POINTS_ROUND_HEADER_RANKINGS,
-				GuiKeys.COMMON_POINTS_TOURNAMENT_HEADER_RANKPOINTS,
-				GuiKeys.COMMON_POINTS_MATCH_HEADER_RANKPOINTS,
-				GuiKeys.COMMON_POINTS_ROUND_HEADER_RANKPOINTS,
-				GuiKeys.COMMON_PART_RANK,
 				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_RANK,
 				GuiKeys.COMMON_PROFILES_RANK

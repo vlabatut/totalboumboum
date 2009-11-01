@@ -42,11 +42,19 @@
 		<xsd:attribute name="randomizeParts" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
+	<xsd:simpleType name="tSortTypes">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="none" />
+			<xsd:enumeration value="random" />
+			<xsd:enumeration value="seeds" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
 	<xsd:complexType name="tCup">
 		<xsd:sequence>
 			<xsd:element name="leg" type="tLeg" maxOccurs="unbounded"/>
 		</xsd:sequence>
-		<xsd:attribute name="randomizePlayers" type="xsd:boolean" use="optional" default="false" />
+		<xsd:attribute name="sortPlayers" type="tSortTypes" use="optional" default="random" />
 	</xsd:complexType>
 
 <!-- LEAGUE -->

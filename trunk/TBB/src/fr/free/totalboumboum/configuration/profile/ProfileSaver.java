@@ -70,7 +70,7 @@ public class ProfileSaver
 	}
 
 	private static Element saveAiElement(Profile profile)
-	{	Element result = new Element(XmlTools.ELT_AI);
+	{	Element result = new Element(XmlTools.AI);
 		// name
 		String name = profile.getAiName();
 		result.setAttribute(XmlTools.ATT_NAME,name);
