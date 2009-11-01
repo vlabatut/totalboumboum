@@ -2,16 +2,16 @@
 <zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd" >
 	
-	<variable-tiles>
-		<variable-tile name="itemTile">
+	<variableTiles>
+		<variableTile name="itemTile">
 			<value proba="0.4" >
 				<item name="extrabomb" />
 			</value>
 			<value proba="0.6" >
 				<item name="extraflame" />
 			</value>
-		</variable-tile>
-		<variable-tile name="blockTile">
+		</variableTile>
+		<variableTile name="blockTile">
 			<value proba="0.5" >
 				<block name="softwall" />
 				<item name="extrabomb" />
@@ -20,8 +20,8 @@
 				<block name="softwall" />
 				<item name="extraflame" />
 			</value>
-		</variable-tile>
-	</variable-tiles>
+		</variableTile>
+	</variableTiles>
 	
 	<matrix>
 		<line pos="0">

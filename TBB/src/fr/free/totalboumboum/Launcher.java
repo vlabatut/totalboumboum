@@ -870,7 +870,7 @@ public class Launcher
 	/* TODO
 	 * 
 	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
-	 * 	 et la vie était foncionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
+	 * 	 et la vie était fonctionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
 	 *   >> pas réussi à reproduire ça...
 	 * 
 	 * - la pause d'IA reste même si le joueur est mort, et je ne sais pas pq : au débug le moteur n'exécute pas le code affichant le texte !

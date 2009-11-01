@@ -33,8 +33,8 @@
 
 	<xsd:complexType name="tBlockset">
 		<xsd:sequence>
-			<xsd:element name="abstract-blocks" type="tBlocks" minOccurs="0"/>
-			<xsd:element name="concrete-blocks" type="tBlocks" />
+			<xsd:element name="abstractBlocks" type="tBlocks" minOccurs="0"/>
+			<xsd:element name="concreteBlocks" type="tBlocks" />
 		</xsd:sequence>
 	</xsd:complexType>
 

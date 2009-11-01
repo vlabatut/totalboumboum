@@ -38,8 +38,8 @@
 
 	<xsd:complexType name="tItemset">
 		<xsd:sequence>
-			<xsd:element name="abstract-items" type="tAbstractItems" minOccurs="0"/>
-			<xsd:element name="concrete-items" type="tConcreteItems" />
+			<xsd:element name="abstractItems" type="tAbstractItems" minOccurs="0"/>
+			<xsd:element name="concreteItems" type="tConcreteItems" />
 		</xsd:sequence>
 	</xsd:complexType>
 

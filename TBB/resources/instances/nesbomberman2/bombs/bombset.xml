@@ -3,11 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../schemas/bombset.xsd">
 
-	<abstract-bombs>
+	<abstractBombs>
 		<bomb name="common" folder="_common" />
-	</abstract-bombs>
+	</abstractBombs>
 
-	<concrete-bombs>
+	<concreteBombs>
 		<bomb name="remotecontrol" folder="remotecontrol" >
 			<ability >
 				<name value="CUSTOM_BOMB_TYPE_REMOTECONTROL" />
@@ -15,6 +15,6 @@
 		</bomb>
 		
 		<bomb name="normal" folder="normal" />
-	</concrete-bombs>
+	</concreteBombs>
 	
 </bombset>

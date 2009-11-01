@@ -2,13 +2,13 @@
 <blockset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/blockset.xsd" >
 	
-	<abstract-blocks >
+	<abstractBlocks >
 		<block name="common" folder="_common" />
-	</abstract-blocks>
+	</abstractBlocks>
 	
-	<concrete-blocks>
+	<concreteBlocks>
 		<block folder="hardwall" name="hardwall" />
 		<block folder="softwall" name="softwall" />
-	</concrete-blocks>
+	</concreteBlocks>
 	
 </blockset>

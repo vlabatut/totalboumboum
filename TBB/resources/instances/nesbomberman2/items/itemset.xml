@@ -3,11 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../schemas/itemset.xsd">
 
-	<abstract-items>
+	<abstractItems>
 		<item name="common" folder="_common" />	
-	</abstract-items>
+	</abstractItems>
 	
-	<concrete-items>	
+	<concreteItems>	
 		<item name="extrabomb" folder="extrabomb">	
 			<abilities>
 				<ability >
@@ -306,7 +306,7 @@
 				</ability>
 			</abilities>
 		</item>
-	</concrete-items>
+	</concreteItems>
 
 
 </itemset>

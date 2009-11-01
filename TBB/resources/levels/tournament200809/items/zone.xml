@@ -2,23 +2,23 @@
 <zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd" >
 	
-	<variable-tiles>
-		<variable-tile name="blockTile">
+	<variableTiles>
+		<variableTile name="blockTile">
 			<value proba="0.6" >
 				<block name="softwall" />
 			</value>
 			<value proba="0.4" >
 			</value>
-		</variable-tile>
-		<variable-tile name="itemTile">
+		</variableTile>
+		<variableTile name="itemTile">
 			<value proba="0.5" >
 				<item name="extrabomb" />
 			</value>
 			<value proba="0.5" >
 				<item name="extraflame" />
 			</value>
-		</variable-tile>
-	</variable-tiles>
+		</variableTile>
+	</variableTiles>
 	
 	<matrix>
 		<line pos="0">

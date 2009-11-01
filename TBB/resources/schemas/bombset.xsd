@@ -31,8 +31,8 @@
 
 	<xsd:complexType name="tBombset">
 		<xsd:sequence>
-			<xsd:element name="abstract-bombs" type="tAbstractBombs" minOccurs="0"/>
-			<xsd:element name="concrete-bombs" type="tConcreteBombs" />
+			<xsd:element name="abstractBombs" type="tAbstractBombs" minOccurs="0"/>
+			<xsd:element name="concreteBombs" type="tConcreteBombs" />
 		</xsd:sequence>
 	</xsd:complexType>
 

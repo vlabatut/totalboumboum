@@ -25,7 +25,7 @@
 
 	<xsd:complexType name="tFiresetmap">
 		<xsd:sequence>
-			<xsd:element name="abstract-fires" type="tFires" minOccurs="0"/>
+			<xsd:element name="abstractFires" type="tFires" minOccurs="0"/>
 			<xsd:element name="firesets" type="tFiresets" />
 		</xsd:sequence>
 	</xsd:complexType>

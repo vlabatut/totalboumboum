@@ -14,8 +14,8 @@
 
 	<xsd:complexType name="tFloorset">
 		<xsd:sequence>
-			<xsd:element name="abstract-floors" type="tFloors" minOccurs="0"/>
-			<xsd:element name="concrete-floors" type="tFloors" />
+			<xsd:element name="abstractFloors" type="tFloors" minOccurs="0"/>
+			<xsd:element name="concreteFloors" type="tFloors" />
 		</xsd:sequence>
 	</xsd:complexType>
 

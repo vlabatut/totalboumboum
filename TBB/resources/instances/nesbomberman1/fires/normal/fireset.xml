@@ -3,13 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../schemas/fireset.xsd">
 
-	<abstract-fires>
+	<abstractFires>
 		<fire name="common" folder="_common" />
-	</abstract-fires>
+	</abstractFires>
 
-	<concrete-fires>
+	<concreteFires>
 		<fire name="inside" folder="inside" />
 		<fire name="outside" folder="outside" />
-	</concrete-fires>
+	</concreteFires>
 	
 </fireset>

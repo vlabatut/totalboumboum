@@ -14,8 +14,8 @@
 
 	<xsd:complexType name="tFireset">
 		<xsd:sequence>
-			<xsd:element name="abstract-fires" type="tFires" minOccurs="0"/>
-			<xsd:element name="concrete-fires" type="tFires" />
+			<xsd:element name="abstractFires" type="tFires" minOccurs="0"/>
+			<xsd:element name="concreteFires" type="tFires" />
 		</xsd:sequence>
 	</xsd:complexType>
 
