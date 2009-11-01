@@ -1,7 +1,5 @@
 package fr.free.totalboumboum.game.tournament.cup;
 
-import java.io.Serializable;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -23,6 +21,7 @@ import java.io.Serializable;
  * 
  */
 
+import java.io.Serializable;
 
 public class CupPlayer implements Serializable
 {	private static final long serialVersionUID = 1L;

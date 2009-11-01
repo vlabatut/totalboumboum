@@ -859,6 +859,7 @@ public class Launcher
 	 * - scores : les suicides sont maintenant séparés des bombeurs/bombés
 	 * - système de log : log des controles, que ce soit pour les humains ou les IA
 	 * - un nouvel icone couronne de laurier a été défini pour distinguer le classement Glicko-2=podium et le classement local (tournoi/match/round)=lauriers
+	 * - nouvelle option "tête de série" pour les tournois de type coupe : utilise le classement Glicko-2 pour éviter que les meilleurs joueurs se rencontrent trop tôt
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -888,10 +889,7 @@ public class Launcher
 
 	/* TODO PRIORITÉ HAUTE
 	 * 
-	 * - faire un log automatique energistrant toutes les commandes et positions, histoire d'avoir une trace des bugs
-	 * 
-	 * - rajouter dans le logstat :
-	 * 		- nombre de bombes posées (ça sera dans les stats de toute façon)
+	 * - faire un log automatique energistrant toutes positions, histoire d'avoir une trace des bugs
 	 * 
 	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
 	 * 
@@ -1053,6 +1051,9 @@ public class Launcher
 	 *	- GUI : 
 	 *		- soulignage des labels cliquables (quelques bugs)
 	 *		- icone lauriers
+	 *  - tournois :
+	 *  	- têtes de séries
+	 *  	- championat
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1082,7 +1083,6 @@ public class Launcher
 	 * 
 	 *  - tournois :
 	 *  	- créer le tournoi de type championnat (pratique pour classer les IA de façon plus homogène)
-	 *  	- rajouter une option "tête de série" dans le tournoi de type coupe
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats

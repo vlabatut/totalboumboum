@@ -284,6 +284,10 @@ public class CupPart implements Serializable
 	{	return players;
 	}
 	
+	public CupPlayer getPlayer(int index)
+	{	return players.get(index);
+	}
+	
 	public void addPlayer(CupPlayer player)
 	{	players.add(player);
 	}
