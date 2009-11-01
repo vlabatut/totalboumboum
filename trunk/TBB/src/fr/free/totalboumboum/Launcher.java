@@ -860,6 +860,7 @@ public class Launcher
 	 * - système de log : log des controles, que ce soit pour les humains ou les IA
 	 * - un nouvel icone couronne de laurier a été défini pour distinguer le classement Glicko-2=podium et le classement local (tournoi/match/round)=lauriers
 	 * - nouvelle option "tête de série" pour les tournois de type coupe : utilise le classement Glicko-2 pour éviter que les meilleurs joueurs se rencontrent trop tôt
+	 * - les constantes éléments/attributs ont été renommées de manière à supprimer les préfixes ATT_ et ELT_ (pr éviter les répétitions)
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1087,7 +1088,6 @@ public class Launcher
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats
 	 *  - xml :
-	 *  	- renommer les constantes éléments/attributs
 	 *  	- virer les "-" dans les constantes et les fichiers xml/xsd
 	 *  - gui : 
 	 *  	- bugs dans les browsers, sur les boutons de page next/previous >> surcharger label avec un indicateur de survol que l'on teste sur exit/enter (utiliser JLabel.isShowin() ?)

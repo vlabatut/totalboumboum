@@ -50,23 +50,23 @@ public class QuickStartConfigurationLoader
 
 	private static void loadGameQuickStartElement(Element root, QuickStartConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// round
-		Element roundElement = root.getChild(XmlTools.ELT_ROUND);
+		Element roundElement = root.getChild(XmlTools.ROUND);
 		loadRoundElement(roundElement,result);
 		
 		// players
-		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
+		Element playersElement = root.getChild(XmlTools.PLAYERS);
 		ProfilesSelection quickStartSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
 		result.setProfilesSelection(quickStartSelected);
 	}
 	
 	private static void loadRoundElement(Element root, QuickStartConfiguration result)
 	{	// name
-		String quickStartName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String quickStartName = root.getAttribute(XmlTools.NAME).getValue().trim();
 		result.setRoundName(new StringBuffer(quickStartName));
 		
 		// allowed players
 		TreeSet<Integer> allowedPlayers = new TreeSet<Integer>();
-		String apStr = root.getAttributeValue(XmlTools.ATT_ALLOWED_PLAYERS);
+		String apStr = root.getAttributeValue(XmlTools.ALLOWED_PLAYERS);
 		String[] split = apStr.split(" ");
 		for(String s: split)
 		{	int value = Integer.parseInt(s);

@@ -43,7 +43,7 @@ public class LogstatsSaver
 	}
 
 	private static Element saveLogstatsElement()
-	{	Element result = new Element(XmlTools.ELT_LOGSTATS); 
+	{	Element result = new Element(XmlTools.LOGSTATS); 
 			
 		// regular launch
 		Element regularLaunchElement = saveRegularLaunchELement();
@@ -57,29 +57,29 @@ public class LogstatsSaver
 	}
 	
 	private static Element saveRegularLaunchELement()
-	{	Element result = new Element(XmlTools.ELT_REGULAR_LAUNCH); 
+	{	Element result = new Element(XmlTools.REGULAR_LAUNCH); 
 	
 		// count
 		String countStr = Long.toString(Logstats.getRegularLaunchCount());
-		result.setAttribute(XmlTools.ATT_COUNT,countStr);
+		result.setAttribute(XmlTools.COUNT,countStr);
 
 		// time
 		String timeStr = Long.toString(Logstats.getRegularLaunchTime());
-		result.setAttribute(XmlTools.ATT_TIME,timeStr);
+		result.setAttribute(XmlTools.TIME,timeStr);
 		
 		return result;
 	}
 
 	private static Element saveQuickLaunchELement()
-	{	Element result = new Element(XmlTools.ELT_QUICK_LAUNCH); 
+	{	Element result = new Element(XmlTools.QUICK_LAUNCH); 
 	
 		// count
 		String countStr = Long.toString(Logstats.getQuickLaunchCount());
-		result.setAttribute(XmlTools.ATT_COUNT,countStr);
+		result.setAttribute(XmlTools.COUNT,countStr);
 
 		// time
 		String timeStr = Long.toString(Logstats.getQuickLaunchTime());
-		result.setAttribute(XmlTools.ATT_TIME,timeStr);
+		result.setAttribute(XmlTools.TIME,timeStr);
 		
 		return result;
 	}

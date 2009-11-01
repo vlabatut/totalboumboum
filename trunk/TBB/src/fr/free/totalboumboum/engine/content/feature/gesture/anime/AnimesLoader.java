@@ -78,13 +78,13 @@ public class AnimesLoader
 		
     	// local folder
     	String localFilePath = individualFolder;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
 		
 		// scale
 		double scale = 1;
-		attribute = root.getAttribute(XmlTools.ATT_SCALE);
+		attribute = root.getAttribute(XmlTools.SCALE);
 		if(attribute!=null)
 			scale = Double.parseDouble(attribute.getValue());
 		pack.setScale(scale);
@@ -92,7 +92,7 @@ public class AnimesLoader
 		// bound height
 		double boundHeight = 0;
 		double zoomFactor = RoundVariables.zoomFactor;
-		attribute = root.getAttribute(XmlTools.ATT_BOUND_HEIGHT);
+		attribute = root.getAttribute(XmlTools.BOUND_HEIGHT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			boundHeight = zoomFactor*temp/scale;
@@ -101,7 +101,7 @@ public class AnimesLoader
 		// colors ?
 		pack.setColor(color);
 		Object obj;
-		Element elt = root.getChild(XmlTools.ELT_COLORS);
+		Element elt = root.getChild(XmlTools.COLORS);
 		if(elt!=null && color!=null)
 		{	obj = ImageTools.loadColorsElement(elt,localFilePath,color);
 			if(obj instanceof Colormap)
@@ -114,12 +114,12 @@ public class AnimesLoader
 			localFilePath = localFilePath+File.separator + colorFolder;
 		
 		// shadows ?
-		elt = root.getChild(XmlTools.ELT_SHADOWS);
+		elt = root.getChild(XmlTools.SHADOWS);
 		if(elt!=null)
 			loadShadowsElement(elt,localFilePath,pack,images,shadows,colormap,zoomFactor,scale);
 		
 		// gestures
-		Element gestures = root.getChild(XmlTools.ELT_GESTURES);
+		Element gestures = root.getChild(XmlTools.GESTURES);
 		loadGesturesElement(gestures,boundHeight,localFilePath,pack,images,shadows,colormap,zoomFactor,scale);
 	}
     
@@ -129,12 +129,12 @@ public class AnimesLoader
     		double zoomFactor, double scale) throws IOException
     {	// folder
     	String localFilePath = individualFolder;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
 		
 		// shadows
-    	List<Element> shdws = root.getChildren(XmlTools.ELT_SHADOW);
+    	List<Element> shdws = root.getChildren(XmlTools.SHADOW);
     	Iterator<Element> i = shdws.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
@@ -147,11 +147,11 @@ public class AnimesLoader
     		double zoomFactor, double scale) throws IOException
     {	// file
     	String localPath = individualFolder+File.separator;
-    	localPath = localPath + root.getAttribute(XmlTools.ATT_FILE).getValue().trim();
+    	localPath = localPath + root.getAttribute(XmlTools.FILE).getValue().trim();
     	BufferedImage shadow = loadImage(localPath,images,colormap,zoomFactor,scale);
     	
     	// name
-    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+    	String name = root.getAttribute(XmlTools.NAME).getValue().trim();
 		
     	// result
     	shadows.put(name,shadow);
@@ -163,7 +163,7 @@ public class AnimesLoader
     		double zoomFactor, double scale) throws IOException
     {	// folder
     	String localFilePath = filePath;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
 		
@@ -184,38 +184,38 @@ public class AnimesLoader
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
     {	// name
-    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().toUpperCase(Locale.ENGLISH);
+    	String name = root.getAttribute(XmlTools.NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);
     	Gesture gesture = pack.getGesture(gestureName);
     	
     	// images folder
     	String localFilePath = filePath;
-    	Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+    	Attribute attribute = root.getAttribute(XmlTools.FOLDER);
     	if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
 		
     	// repeat flag
-		String repeatStr = root.getAttribute(XmlTools.ATT_REPEAT).getValue();
+		String repeatStr = root.getAttribute(XmlTools.REPEAT).getValue();
 		boolean repeat = false;
 		if(!repeatStr.equals(""))
 			repeat = Boolean.parseBoolean(repeatStr);
 		
 		// proportional flag
 		boolean proportional = false;
-		attribute = root.getAttribute(XmlTools.ATT_PROPORTIONAL);
+		attribute = root.getAttribute(XmlTools.PROPORTIONAL);
 		if(attribute!=null)
 			proportional = Boolean.parseBoolean(attribute.getValue());
 		
 		// horizontal shift
 		double xShift = 0;
-		attribute = root.getAttribute(XmlTools.ATT_XSHIFT);
+		attribute = root.getAttribute(XmlTools.XSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			xShift = zoomFactor*temp/scale;
 		}
 		// vertical shift
 		double yShift = 0;
-		attribute = root.getAttribute(XmlTools.ATT_YSHIFT);
+		attribute = root.getAttribute(XmlTools.YSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			yShift = zoomFactor*temp/scale;
@@ -223,18 +223,18 @@ public class AnimesLoader
 		
 		// shadow
 		BufferedImage shadow = null;
-		attribute = root.getAttribute(XmlTools.ATT_SHADOW);
+		attribute = root.getAttribute(XmlTools.SHADOW);
 		if(attribute!=null)
 		{	shadow = shadows.get(attribute.getValue().trim());
 			if(shadow==null)
-			{	String imgPath = localFilePath+File.separator+root.getAttribute(XmlTools.ATT_SHADOW).getValue().trim();
+			{	String imgPath = localFilePath+File.separator+root.getAttribute(XmlTools.SHADOW).getValue().trim();
 				shadow = loadImage(imgPath,images,colormap,zoomFactor,scale);
 			}
 		}
 		
 		// shadow horizontal shift
 		double shadowXShift = 0;
-		attribute = root.getAttribute(XmlTools.ATT_SHADOW_XSHIFT);
+		attribute = root.getAttribute(XmlTools.SHADOW_XSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowXShift = zoomFactor*temp/scale;
@@ -242,7 +242,7 @@ public class AnimesLoader
 		
 		// shadow vertical shift
 		double shadowYShift = 0;
-		attribute = root.getAttribute(XmlTools.ATT_SHADOW_YSHIFT);
+		attribute = root.getAttribute(XmlTools.SHADOW_YSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowYShift = zoomFactor*temp/scale;
@@ -250,12 +250,12 @@ public class AnimesLoader
 		
 		// bound shift
 		ImageShift boundYShift = ImageShift.DOWN;
-		attribute = root.getAttribute(XmlTools.ATT_BOUND_YSHIFT);
+		attribute = root.getAttribute(XmlTools.BOUND_YSHIFT);
 		if(attribute!=null)
 			boundYShift = ImageShift.valueOf(attribute.getValue().trim().toUpperCase(Locale.ENGLISH));
 		
 		// directions
-		List<Element> directionsList = root.getChildren(XmlTools.ELT_DIRECTION);
+		List<Element> directionsList = root.getChildren(XmlTools.DIRECTION);
     	Iterator<Element> i = directionsList.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
@@ -280,7 +280,7 @@ public class AnimesLoader
     {	AnimeDirection result = new AnimeDirection();
 		
     	// direction
-		String strDirection = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String strDirection = root.getAttribute(XmlTools.NAME).getValue().trim();
 		Direction direction = Direction.NONE;
 		if(!strDirection.equals(""))
 			direction = Direction.valueOf(strDirection.toUpperCase(Locale.ENGLISH));
@@ -292,55 +292,55 @@ public class AnimesLoader
 		
     	// folder
     	String localFilePath = filePath;
-    	Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+    	Attribute attribute = root.getAttribute(XmlTools.FOLDER);
     	if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
 		
     	// horizontal shift
-		attribute = root.getAttribute(XmlTools.ATT_XSHIFT);
+		attribute = root.getAttribute(XmlTools.XSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			xShift = zoomFactor*temp/scale;
 		}
 		
 		// vertical shift
-		attribute = root.getAttribute(XmlTools.ATT_YSHIFT);
+		attribute = root.getAttribute(XmlTools.YSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			yShift = zoomFactor*temp/scale;
 		}
 		
 		// shadow
-		attribute = root.getAttribute(XmlTools.ATT_SHADOW);
+		attribute = root.getAttribute(XmlTools.SHADOW);
 		if(attribute!=null)
 		{	shadow = shadows.get(attribute.getValue().trim());
 			if(shadow==null)
-			{	String imgPath = localFilePath+File.separator+root.getAttribute(XmlTools.ATT_SHADOW).getValue().trim();
+			{	String imgPath = localFilePath+File.separator+root.getAttribute(XmlTools.SHADOW).getValue().trim();
 				shadow = loadImage(imgPath,images,colormap,zoomFactor,scale);
 			}
 		}
 		
 		// shadow horizontal shift
-		attribute = root.getAttribute(XmlTools.ATT_SHADOW_XSHIFT);
+		attribute = root.getAttribute(XmlTools.SHADOW_XSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowXShift = zoomFactor*temp/scale;
 		}
 		
 		// shadow vertical shift
-		attribute = root.getAttribute(XmlTools.ATT_SHADOW_YSHIFT);
+		attribute = root.getAttribute(XmlTools.SHADOW_YSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowYShift = zoomFactor*temp/scale;
 		}
 		
 		// bound shift
-		attribute = root.getAttribute(XmlTools.ATT_BOUND_YSHIFT);
+		attribute = root.getAttribute(XmlTools.BOUND_YSHIFT);
 		if(attribute!=null)
 			boundYShift = ImageShift.valueOf(attribute.getValue().trim());
     	
 		// steps
-	    List<Element> stepsList = root.getChildren(XmlTools.ELT_STEP);
+	    List<Element> stepsList = root.getChildren(XmlTools.STEP);
     	Iterator<Element> i = stepsList.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
@@ -362,13 +362,13 @@ public class AnimesLoader
     	
     	// duration
     	int duration = 0;
-    	Attribute attribute = root.getAttribute(XmlTools.ATT_DURATION);
+    	Attribute attribute = root.getAttribute(XmlTools.DURATION);
     	if(attribute!=null)
     		duration = Integer.parseInt(attribute.getValue());
     	
     	// image
     	BufferedImage img = null;    	
-    	attribute = root.getAttribute(XmlTools.ATT_FILE);
+    	attribute = root.getAttribute(XmlTools.FILE);
     	if(attribute!=null)
     	{	String strImage = attribute.getValue().trim();
     		String imgPath = filePath+File.separator+strImage;
@@ -376,21 +376,21 @@ public class AnimesLoader
     	}
 		
     	// horizontal shift
-		attribute = root.getAttribute(XmlTools.ATT_XSHIFT);
+		attribute = root.getAttribute(XmlTools.XSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			xShift = zoomFactor*temp/scale;
 		}
 		
 		// vertical shift
-		attribute = root.getAttribute(XmlTools.ATT_YSHIFT);
+		attribute = root.getAttribute(XmlTools.YSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			yShift = zoomFactor*temp/scale;
 		}
 		
 		// shadow
-		attribute = root.getAttribute(XmlTools.ATT_SHADOW);
+		attribute = root.getAttribute(XmlTools.SHADOW);
 		if(attribute!=null)
 		{	shadow = shadows.get(attribute.getValue().trim());
 			if(shadow==null)
@@ -400,21 +400,21 @@ public class AnimesLoader
 		}
 		
 		// shadow horizontal shift
-		attribute = root.getAttribute(XmlTools.ATT_SHADOW_XSHIFT);
+		attribute = root.getAttribute(XmlTools.SHADOW_XSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowXShift = zoomFactor*temp/scale;
 		}
 		
 		// shadow vertical shift
-		attribute = root.getAttribute(XmlTools.ATT_SHADOW_YSHIFT);
+		attribute = root.getAttribute(XmlTools.SHADOW_YSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowYShift = zoomFactor*temp/scale;
 		}
 		
 		// bound shift
-		attribute = root.getAttribute(XmlTools.ATT_BOUND_YSHIFT);
+		attribute = root.getAttribute(XmlTools.BOUND_YSHIFT);
 		if(attribute!=null)
 			boundYShift = ImageShift.valueOf(attribute.getValue().trim());
 		

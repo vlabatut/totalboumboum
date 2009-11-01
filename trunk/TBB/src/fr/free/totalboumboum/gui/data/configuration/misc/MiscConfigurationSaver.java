@@ -65,21 +65,21 @@ public class MiscConfigurationSaver
 	private static Element saveLanguageElement(MiscConfiguration miscConfiguration)
 	{	Element result = new Element(GuiXmlTools.ELT_LANGUAGE);
 		String language = miscConfiguration.getLanguageName();
-		result.setAttribute(XmlTools.ATT_VALUE,language);
+		result.setAttribute(XmlTools.VALUE,language);
 		return result;
 	}
 	
 	private static Element saveFontElement(MiscConfiguration miscConfiguration)
 	{	Element result = new Element(GuiXmlTools.ELT_FONT);
 		String font = miscConfiguration.getFontName();
-		result.setAttribute(XmlTools.ATT_VALUE,font);
+		result.setAttribute(XmlTools.VALUE,font);
 		return result;
 	}
 	
 	private static Element saveBackgroundElement(MiscConfiguration miscConfiguration)
 	{	Element result = new Element(GuiXmlTools.ELT_BACKGROUND);
 		String background = miscConfiguration.getBackgroundName();
-		result.setAttribute(XmlTools.ATT_FILE,background);
+		result.setAttribute(XmlTools.FILE,background);
 		return result;
 	}
 }

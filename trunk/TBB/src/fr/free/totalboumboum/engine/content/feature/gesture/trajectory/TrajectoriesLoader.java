@@ -78,35 +78,35 @@ public class TrajectoriesLoader
 	private static void loadGestureElement(Element root, GesturePack pack) throws IOException
     {	double zoomFactor = RoundVariables.zoomFactor;
     	// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().toUpperCase(Locale.ENGLISH);
+		String name = root.getAttribute(XmlTools.NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);
 		Gesture gesture = pack.getGesture(gestureName);
     	// repeat flag
-		String repeatStr = root.getAttribute(XmlTools.ATT_REPEAT).getValue();
+		String repeatStr = root.getAttribute(XmlTools.REPEAT).getValue();
 		boolean repeat = false;
 		if(!repeatStr.equals(""))
 			repeat = Boolean.parseBoolean(repeatStr);
 		// X interaction coefficient
 		double xInteraction = 0;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_XINTERACTION);
+		Attribute attribute = root.getAttribute(XmlTools.XINTERACTION);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue().trim());
 			xInteraction = zoomFactor*temp;
 		}
 		// Y interaction coefficient
 		double yInteraction = 0;
-		attribute = root.getAttribute(XmlTools.ATT_YINTERACTION);
+		attribute = root.getAttribute(XmlTools.YINTERACTION);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue().trim());
 			yInteraction = zoomFactor*temp;
 		}
 		// proportional flag
 		boolean proportional = false;
-		attribute = root.getAttribute(XmlTools.ATT_PROPORTIONAL);
+		attribute = root.getAttribute(XmlTools.PROPORTIONAL);
 		if(attribute!=null)
 			proportional = Boolean.parseBoolean(attribute.getValue());
 		// list of directions
-		List<Element> directionsList = root.getChildren(XmlTools.ELT_DIRECTION);
+		List<Element> directionsList = root.getChildren(XmlTools.DIRECTION);
 		Iterator<Element> i = directionsList.iterator();
 		while(i.hasNext())
 		{	Element tp = i.next();
@@ -127,7 +127,7 @@ public class TrajectoriesLoader
  		result.setProportional(proportional);
     	
 		// direction
-    	String strDirection = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+    	String strDirection = root.getAttribute(XmlTools.NAME).getValue().trim();
     	Direction direction = Direction.NONE;
 		if(!strDirection.equals(""))
 			direction = Direction.valueOf(strDirection.toUpperCase(Locale.ENGLISH));
@@ -135,14 +135,14 @@ public class TrajectoriesLoader
 		
 		// interaction coefficients
 		{	// X interaction coefficient
-			Attribute attribute = root.getAttribute(XmlTools.ATT_XINTERACTION);
+			Attribute attribute = root.getAttribute(XmlTools.XINTERACTION);
 			if(attribute!=null)
 			{	double temp = Double.parseDouble(attribute.getValue().trim());
 				xInteraction = zoomFactor*temp;
 			}
 		   	result.setXInteraction(xInteraction);
 			// Y interaction coefficient
-			attribute = root.getAttribute(XmlTools.ATT_YINTERACTION);
+			attribute = root.getAttribute(XmlTools.YINTERACTION);
 			if(attribute!=null)
 			{	double temp = Double.parseDouble(attribute.getValue().trim());
 				yInteraction = zoomFactor*temp;
@@ -151,28 +151,28 @@ public class TrajectoriesLoader
 		}
 
 		// forced position
-		Element forcePosition = root.getChild(XmlTools.ELT_FORCE_POSITION);
+		Element forcePosition = root.getChild(XmlTools.FORCE_POSITION);
 		if(forcePosition!=null)
 		{	// time
-			String strTime = forcePosition.getAttribute(XmlTools.ATT_TIME).getValue().trim();
+			String strTime = forcePosition.getAttribute(XmlTools.TIME).getValue().trim();
 			// direction
 			result.setForcedPositionTime(Long.parseLong(strTime));
 			// X position
-			Attribute attribute = forcePosition.getAttribute(XmlTools.ATT_XPOSITION);
+			Attribute attribute = forcePosition.getAttribute(XmlTools.XPOSITION);
 			if(attribute!=null)
 			{	result.setForceXPosition(true);
 				double temp = Double.parseDouble(attribute.getValue().trim());
 				result.setForcedXPosition(zoomFactor*temp);
 			}
 			// Y position
-			attribute = forcePosition.getAttribute(XmlTools.ATT_YPOSITION);
+			attribute = forcePosition.getAttribute(XmlTools.YPOSITION);
 			if(attribute!=null)
 			{	result.setForceYPosition(true);
 				double temp = Double.parseDouble(attribute.getValue().trim());
 				result.setForcedYPosition(zoomFactor*temp);
 			}
 			// Z position
-			attribute = forcePosition.getAttribute(XmlTools.ATT_ZPOSITION);
+			attribute = forcePosition.getAttribute(XmlTools.ZPOSITION);
 			if(attribute!=null)
 			{	result.setForceZPosition(true);
 				double temp = Double.parseDouble(attribute.getValue().trim());
@@ -186,9 +186,9 @@ public class TrajectoriesLoader
 		}
 		
 		// steps
-		Element steps = root.getChild(XmlTools.ELT_STEPS);
+		Element steps = root.getChild(XmlTools.STEPS);
 		if(steps!=null)
-		{	List<Element> stepsList = steps.getChildren(XmlTools.ELT_STEP);
+		{	List<Element> stepsList = steps.getChildren(XmlTools.STEP);
 			Iterator<Element> i = stepsList.iterator();
 			while(i.hasNext())
 			{	Element tp = i.next();
@@ -205,32 +205,32 @@ public class TrajectoriesLoader
      */
     private static TrajectoryStep loadStepElement(Element root, double zoomFactor) throws IOException
     {	TrajectoryStep result = new TrajectoryStep();
-    	String strDuration = root.getAttribute(XmlTools.ATT_DURATION).getValue();
+    	String strDuration = root.getAttribute(XmlTools.DURATION).getValue();
     	int duration = Integer.parseInt(strDuration);
 	    //
     	double xShift = 0;
-	    Attribute attribute = root.getAttribute(XmlTools.ATT_XSHIFT);
+	    Attribute attribute = root.getAttribute(XmlTools.XSHIFT);
 	    if(attribute!=null)
 	    {	double temp = Double.parseDouble(attribute.getValue().trim());
 			xShift = zoomFactor*temp;
 	    }
 	    //
 	    double yShift = 0;
-	    attribute = root.getAttribute(XmlTools.ATT_YSHIFT);
+	    attribute = root.getAttribute(XmlTools.YSHIFT);
 	    if(attribute!=null)
 	    {	double temp = Double.parseDouble(attribute.getValue().trim());
 			yShift = zoomFactor*temp;
 	    }
 	    //
 	    double zShift = 0;
-	    attribute = root.getAttribute(XmlTools.ATT_ZSHIFT);
+	    attribute = root.getAttribute(XmlTools.ZSHIFT);
 	    if(attribute!=null)
 	    {	double temp = Double.parseDouble(attribute.getValue().trim());
 	    	zShift = zoomFactor*temp;
 	    }
 	    // bound shift
 		ImageShift boundZShift = ImageShift.DOWN;
-		attribute = root.getAttribute(XmlTools.ATT_BOUND_ZSHIFT);
+		attribute = root.getAttribute(XmlTools.BOUND_ZSHIFT);
 	    if(attribute!=null)
 			boundZShift = ImageShift.valueOf(attribute.getValue().trim().toUpperCase(Locale.ENGLISH));
 	    //

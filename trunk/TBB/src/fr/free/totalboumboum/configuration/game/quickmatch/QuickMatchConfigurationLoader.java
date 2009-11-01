@@ -53,75 +53,75 @@ public class QuickMatchConfigurationLoader
 
 	private static void loadGameQuickMatchElement(Element root, QuickMatchConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// options
-		Element optionsElement = root.getChild(XmlTools.ELT_OPTIONS);
+		Element optionsElement = root.getChild(XmlTools.OPTIONS);
 		// use last players
-		String att = optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_PLAYERS);
+		String att = optionsElement.getAttributeValue(XmlTools.USE_LAST_PLAYERS);
 		boolean useLastPlayers = Boolean.parseBoolean(att);
 		result.setUseLastPlayers(useLastPlayers);
 		// use last levels
-		att = optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_LEVELS);
+		att = optionsElement.getAttributeValue(XmlTools.USE_LAST_LEVELS);
 		boolean useLastLevels = Boolean.parseBoolean(att);
 		result.setUseLastLevels(useLastLevels);
 		// use last settings
-		att = optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_SETTINGS);
+		att = optionsElement.getAttributeValue(XmlTools.USE_LAST_SETTINGS);
 		boolean useLastSettings = Boolean.parseBoolean(att);
 		result.setUseLastSettings(useLastSettings);
 		
 		// settings
-		Element settingsElement = root.getChild(XmlTools.ELT_SETTINGS);
+		Element settingsElement = root.getChild(XmlTools.SETTINGS);
 		loadSettingsElement(settingsElement,result);
 		
 		// players
-		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
+		Element playersElement = root.getChild(XmlTools.PLAYERS);
 		ProfilesSelection quickMatchProfiles = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
 		result.setProfilesSelection(quickMatchProfiles);
 
 		// levels
-		Element levelsElement = root.getChild(XmlTools.ELT_LEVELS);
+		Element levelsElement = root.getChild(XmlTools.LEVELS);
 		LevelsSelection quickMatchLevels = LevelsSelectionLoader.loadLevelsSelection(levelsElement);
 		result.setLevelsSelection(quickMatchLevels);
 	}
 
 	private static void loadSettingsElement(Element root, QuickMatchConfiguration result)
 	{	// levels 
-		Element levelsElement = root.getChild(XmlTools.ELT_LEVELS);
+		Element levelsElement = root.getChild(XmlTools.LEVELS);
 		loadLevelsElement(levelsElement,result);
 		// players 
-		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
+		Element playersElement = root.getChild(XmlTools.PLAYERS);
 		loadPlayersElement(playersElement,result);
 		// limits 
-		Element limitsElement = root.getChild(XmlTools.ELT_LIMITS);
+		Element limitsElement = root.getChild(XmlTools.LIMITS);
 		loadLimitsElement(limitsElement,result);
 		// points
-		Element pointsElement = root.getChild(XmlTools.ELT_POINTS);
+		Element pointsElement = root.getChild(XmlTools.POINTS);
 		loadPointsElement(pointsElement,result);
 	}
 
 	private static void loadLevelsElement(Element root, QuickMatchConfiguration result)
 	{	// random order
-		String att = root.getAttributeValue(XmlTools.ATT_RANDOM_ORDER);
+		String att = root.getAttributeValue(XmlTools.RANDOM_ORDER);
 		boolean levelsRandomOrder = Boolean.parseBoolean(att);
 		result.setLevelsRandomOrder(levelsRandomOrder);
 	}
 	
 	private static void loadPlayersElement(Element root, QuickMatchConfiguration result)
 	{	// random location
-		String att = root.getAttributeValue(XmlTools.ATT_RANDOM_LOCATION);
+		String att = root.getAttributeValue(XmlTools.RANDOM_LOCATION);
 		boolean playersRandomLocation = Boolean.parseBoolean(att);
 		result.setPlayersRandomLocation(playersRandomLocation);
 	}
 	
 	private static void loadLimitsElement(Element root, QuickMatchConfiguration result)
 	{	// points limit
-		String att = root.getAttributeValue(XmlTools.ATT_POINTS);
+		String att = root.getAttributeValue(XmlTools.POINTS);
 		int limitPoints = Integer.parseInt(att);
 		result.setLimitPoints(limitPoints);
 		// rounds limit
-		att = root.getAttributeValue(XmlTools.ATT_ROUNDS);
+		att = root.getAttributeValue(XmlTools.ROUNDS);
 		int limitRounds = Integer.parseInt(att);
 		result.setLimitRounds(limitRounds);
 		// time limit
-		att = root.getAttributeValue(XmlTools.ATT_TIME);
+		att = root.getAttributeValue(XmlTools.TIME);
 		int limitTime = Integer.parseInt(att);
 		result.setLimitTime(limitTime);
 	}
@@ -132,21 +132,21 @@ public class QuickMatchConfigurationLoader
 		ArrayList<Integer> points = new ArrayList<Integer>();
 		for(int i=0;i<GameData.CONTROL_COUNT;i++)
 			points.add(0);
-		List<Element> list = root.getChildren(XmlTools.ELT_VALUE);
+		List<Element> list = root.getChildren(XmlTools.VALUE);
 		for(Element e:list)
-		{	String rankStr = e.getAttributeValue(XmlTools.ATT_RANK);
+		{	String rankStr = e.getAttributeValue(XmlTools.RANK);
 			int rank = Integer.parseInt(rankStr);
-			String pointsStr = e.getAttributeValue(XmlTools.ATT_POINTS);
+			String pointsStr = e.getAttributeValue(XmlTools.POINTS);
 			int pts = Integer.parseInt(pointsStr);
 			points.set(rank-1,pts);
 		}
 		result.setPoints(points);
 		// share
-		String att = root.getAttributeValue(XmlTools.ATT_SHARE);
+		String att = root.getAttributeValue(XmlTools.SHARE);
 		boolean pointsShare = Boolean.parseBoolean(att);
 		result.setPointsShare(pointsShare);
 		// points draw
-		att = root.getAttributeValue(XmlTools.ATT_DRAW);
+		att = root.getAttributeValue(XmlTools.DRAW);
 		QuickMatchDraw pointsDraw = QuickMatchDraw.valueOf(att.toUpperCase(Locale.ENGLISH));
 		result.setPointsDraw(pointsDraw);		
 	}

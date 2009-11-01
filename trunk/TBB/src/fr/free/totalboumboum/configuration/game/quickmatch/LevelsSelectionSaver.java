@@ -36,13 +36,13 @@ public class LevelsSelectionSaver
 	}
 	
 	private static Element saveLevelElement(int index, LevelsSelection levelsSelection)
-	{	Element result = new Element(XmlTools.ELT_LEVEL);
+	{	Element result = new Element(XmlTools.LEVEL);
 		// folder pack
 		String packName = levelsSelection.getPackName(index);
-		result.setAttribute(XmlTools.ATT_PACK,packName);
+		result.setAttribute(XmlTools.PACK,packName);
 		// folder name
 		String folderName = levelsSelection.getFolderName(index);
-		result.setAttribute(XmlTools.ATT_FOLDER,folderName);
+		result.setAttribute(XmlTools.FOLDER,folderName);
 		//
 		return result;
 	}

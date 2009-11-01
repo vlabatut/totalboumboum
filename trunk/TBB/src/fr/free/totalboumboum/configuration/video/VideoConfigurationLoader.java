@@ -49,27 +49,27 @@ public class VideoConfigurationLoader
 	private static void loadVideoElement(Element root, VideoConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Element element; 
 		// full screen
-		element = root.getChild(XmlTools.ELT_FULL_SCREEN);
+		element = root.getChild(XmlTools.FULL_SCREEN);
 		loadFullScreenElement(element,result);
 		// smoothing
-		element = root.getChild(XmlTools.ELT_SMOOTH_GRAPHICS);
+		element = root.getChild(XmlTools.SMOOTH_GRAPHICS);
 		loadSmoothGraphicsElement(element,result);
 		// border
-		element = root.getChild(XmlTools.ELT_BORDER);
+		element = root.getChild(XmlTools.BORDER);
 		loadBorderElement(element,result);
 		// panel
-		element = root.getChild(XmlTools.ELT_PANEL_DIMENSION);
+		element = root.getChild(XmlTools.PANEL_DIMENSION);
 		loadPanelDimensionElement(element,result);
 	}
 	
 	private static void loadFullScreenElement(Element root, VideoConfiguration result)
-	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean fullScreen = Boolean.valueOf(value);
 		result.setFullScreen(fullScreen);
 	}
 	
 	private static void loadSmoothGraphicsElement(Element root, VideoConfiguration result)
-	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean smoothGraphics = Boolean.valueOf(value);
 		result.setSmoothGraphics(smoothGraphics);
 	}
@@ -87,16 +87,16 @@ public class VideoConfigurationLoader
 		result.setBorderColor(borderColor);
 */		
 		Color borderColor = null;
-		String value = root.getAttributeValue(XmlTools.ATT_VALUE);
+		String value = root.getAttributeValue(XmlTools.VALUE);
 		if(value!=null)
 			borderColor = Color.BLACK;
 		result.setBorderColor(borderColor);
 	}
 	
 	private static void loadPanelDimensionElement(Element root, VideoConfiguration result)
-	{	String valueH = root.getAttribute(XmlTools.ATT_HEIGHT).getValue().trim();
+	{	String valueH = root.getAttribute(XmlTools.HEIGHT).getValue().trim();
 		int height = Integer.valueOf(valueH);
-		String valueW = root.getAttribute(XmlTools.ATT_WIDTH).getValue().trim();
+		String valueW = root.getAttribute(XmlTools.WIDTH).getValue().trim();
 		int width = Integer.valueOf(valueW);
 		result.setPanelDimension(width, height);
 	}

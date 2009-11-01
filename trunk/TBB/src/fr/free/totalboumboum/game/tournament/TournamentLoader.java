@@ -71,8 +71,8 @@ public class TournamentLoader
 		Element element;
 		
 		// name
-		element = root.getChild(XmlTools.ELT_GENERAL);
-		String name = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		element = root.getChild(XmlTools.GENERAL);
+		String name = element.getAttribute(XmlTools.NAME).getValue().trim();
 		
 		// content
 		List<Element> elements = root.getChildren();
@@ -88,14 +88,14 @@ public class TournamentLoader
 			result = SingleTournamentLoader.loadTournamentElement(path,element);
 		
 		// notes
-		element = root.getChild(XmlTools.ELT_NOTES);
+		element = root.getChild(XmlTools.NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		
 		// author
-		element = root.getChild(XmlTools.ELT_AUTHOR);
+		element = root.getChild(XmlTools.AUTHOR);
 		if(element!=null)
-		{	String author = element.getAttributeValue(XmlTools.ATT_VALUE);
+		{	String author = element.getAttributeValue(XmlTools.VALUE);
 			result.setAuthor(author);
 		}
 		
@@ -108,11 +108,11 @@ public class TournamentLoader
 	{	Match result;
 		
 		// local
-		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
+		String localStr = root.getAttribute(XmlTools.LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
 		
 		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+		String name = root.getAttribute(XmlTools.NAME).getValue();
 		
 		// loading
 		if(local)

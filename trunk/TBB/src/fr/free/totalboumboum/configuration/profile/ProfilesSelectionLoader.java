@@ -33,7 +33,7 @@ public class ProfilesSelectionLoader
 	@SuppressWarnings("unchecked")
 	public static ProfilesSelection loadProfilesSelection(Element root)
 	{	ProfilesSelection result = new ProfilesSelection();
-		List<Element> playersElt = root.getChildren(XmlTools.ELT_PLAYER);
+		List<Element> playersElt = root.getChildren(XmlTools.PLAYER);
 		for(Element elt: playersElt)
 			loadPlayerElement(elt,result);
 		return result;
@@ -41,20 +41,20 @@ public class ProfilesSelectionLoader
 
 	private static void loadPlayerElement(Element root, ProfilesSelection result)
 	{	// file
-		String idStr = root.getAttributeValue(XmlTools.ATT_FILE);
+		String idStr = root.getAttributeValue(XmlTools.FILE);
 		int id = Integer.parseInt(idStr);
 		
 		// color
-		String colorStr = root.getAttributeValue(XmlTools.ATT_COLOR);
+		String colorStr = root.getAttributeValue(XmlTools.COLOR);
 		PredefinedColor color = PredefinedColor.valueOf(colorStr.toUpperCase(Locale.ENGLISH));
 		
 		// controls
-		String controlsStr = root.getAttributeValue(XmlTools.ATT_CONTROLS);
+		String controlsStr = root.getAttributeValue(XmlTools.CONTROLS);
 		int controlsIndex = Integer.parseInt(controlsStr);
 
 		// sprite
-		String spriteFolder = root.getAttributeValue(XmlTools.ATT_SPRITE_FOLDER);
-		String spritePack = root.getAttributeValue(XmlTools.ATT_SPRITE_PACK);
+		String spriteFolder = root.getAttributeValue(XmlTools.SPRITE_FOLDER);
+		String spritePack = root.getAttributeValue(XmlTools.SPRITE_PACK);
 		String[] hero = {spritePack,spriteFolder};
 		
 		result.addProfile(id,color,controlsIndex,hero);

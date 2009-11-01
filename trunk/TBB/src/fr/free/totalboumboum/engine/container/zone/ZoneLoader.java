@@ -55,12 +55,12 @@ public class ZoneLoader
 		root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// tiles random variable
-		Element variables = root.getChild(XmlTools.ELT_VARIABLE_TILES);
+		Element variables = root.getChild(XmlTools.VARIABLE_TILES);
 		HashMap<String,VariableTile> variableTiles = VariableTilesLoader.loadVariableTilesElement(variables);
 		result.setVariableTiles(variableTiles);
 		
 		// matrix
-		Element matrx = root.getChild(XmlTools.ELT_MATRIX);
+		Element matrx = root.getChild(XmlTools.MATRIX);
 		loadMatrixElement(matrx,globalHeight,globalWidth,result);
 		return result;
     }
@@ -69,17 +69,17 @@ public class ZoneLoader
     private static void loadMatrixElement(Element root, int globalHeight, int globalWidth, Zone result)
     {	// matrix
     	HashMap<String,VariableTile> variableTiles = result.getVariableTiles();
-    	List<Element> elements = root.getChildren(XmlTools.ELT_LINE);
+    	List<Element> elements = root.getChildren(XmlTools.LINE);
     	Iterator<Element> i = elements.iterator();
     	while(i.hasNext())
     	{	Element line = i.next();
-    		int posL = Integer.parseInt(line.getAttribute(XmlTools.ATT_POSITION).getValue().trim());
-    		List<Element> elementsL = line.getChildren(XmlTools.ELT_TILE);
+    		int posL = Integer.parseInt(line.getAttribute(XmlTools.POSITION).getValue().trim());
+    		List<Element> elementsL = line.getChildren(XmlTools.TILE);
         	Iterator<Element> iL = elementsL.iterator();
         	while(iL.hasNext())
         	{	String[] content = {null,null,null,null};
         		Element tile = iL.next();
-        		int posT = Integer.parseInt(tile.getAttribute(XmlTools.ATT_POSITION).getValue().trim());
+        		int posT = Integer.parseInt(tile.getAttribute(XmlTools.POSITION).getValue().trim());
         		ZoneTile zt = new ZoneTile(posL,posT);
         		// constant parts
         		content = loadBasicTileElement(tile);
@@ -96,9 +96,9 @@ public class ZoneLoader
     			if(content[3]!=null)
     				zt.setBomb(content[3]);        		
         		// variable part
-        		Element elt = tile.getChild(XmlTools.ELT_REFERENCE);
+        		Element elt = tile.getChild(XmlTools.REFERENCE);
         		if(elt!=null)
-        		{	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue();
+        		{	String name = elt.getAttribute(XmlTools.NAME).getValue();
         			zt.setVariable(name);
         			VariableTile vt = variableTiles.get(name);
         			vt.incrementOccurrencesCount();
@@ -113,18 +113,18 @@ public class ZoneLoader
     {	String[] result = new String[4];
 		
     	// floor
-		List<Element> elementsT = root.getChildren(XmlTools.ELT_FLOOR);
+		List<Element> elementsT = root.getChildren(XmlTools.FLOOR);
 		if(elementsT.size()>0)
-		{	String name = elementsT.get(0).getAttribute(XmlTools.ATT_NAME).getValue();
+		{	String name = elementsT.get(0).getAttribute(XmlTools.NAME).getValue();
 			result[0] = name;
 		}
 		
 		// block
-		elementsT = root.getChildren(XmlTools.ELT_BLOCK);
+		elementsT = root.getChildren(XmlTools.BLOCK);
 		if(elementsT.size()>0)
-		{	String name = elementsT.get(0).getAttribute(XmlTools.ATT_NAME).getValue();
+		{	String name = elementsT.get(0).getAttribute(XmlTools.NAME).getValue();
 			String group;
-			Attribute attribute = elementsT.get(0).getAttribute(XmlTools.ATT_GROUP);
+			Attribute attribute = elementsT.get(0).getAttribute(XmlTools.GROUP);
 			if(attribute!=null)
 				group = attribute.getValue();
 			else
@@ -133,17 +133,17 @@ public class ZoneLoader
 		}
 		
 		// item
-		elementsT = root.getChildren(XmlTools.ELT_ITEM);
+		elementsT = root.getChildren(XmlTools.ITEM);
 		if(elementsT.size()>0)
-		{	String name = elementsT.get(0).getAttribute(XmlTools.ATT_NAME).getValue();
+		{	String name = elementsT.get(0).getAttribute(XmlTools.NAME).getValue();
 			result[2] = name;
 		}
 
 		// bomb
-		elementsT = root.getChildren(XmlTools.ELT_BOMB);
+		elementsT = root.getChildren(XmlTools.BOMB);
 		if(elementsT.size()>0)
-		{	String name = elementsT.get(0).getAttribute(XmlTools.ATT_NAME).getValue();
-			String range = elementsT.get(0).getAttribute(XmlTools.ATT_RANGE).getValue();
+		{	String name = elementsT.get(0).getAttribute(XmlTools.NAME).getValue();
+			String range = elementsT.get(0).getAttribute(XmlTools.RANGE).getValue();
 			result[3] = name+":"+range;
 		}
 

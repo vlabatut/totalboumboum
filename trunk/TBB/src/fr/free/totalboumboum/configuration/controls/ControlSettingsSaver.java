@@ -52,7 +52,7 @@ public class ControlSettingsSaver
 	}
 
 	private static Element saveControlElement(ControlSettings controlSettings)
-	{	Element result = new Element(XmlTools.ELT_CONTROLS);
+	{	Element result = new Element(XmlTools.CONTROLS);
 		HashMap<String,Integer> onEvents = controlSettings.getOnEvents();
 		Iterator<Entry<String,Integer>> onIt = onEvents.entrySet().iterator();
 		while(onIt.hasNext())
@@ -65,21 +65,21 @@ public class ControlSettingsSaver
 			// main element
 			Element eventElement;
 			{	String autofireText = Boolean.toString(autofire);
-				eventElement = new Element(XmlTools.ELT_EVENT);
-				eventElement.setAttribute(XmlTools.ATT_NAME,event);
-				eventElement.setAttribute(XmlTools.ATT_AUTOFIRE,autofireText);
+				eventElement = new Element(XmlTools.EVENT);
+				eventElement.setAttribute(XmlTools.NAME,event);
+				eventElement.setAttribute(XmlTools.AUTOFIRE,autofireText);
 				result.addContent(eventElement);
 			}
 			// on element
 			{	String onText = getKeyName(onKey);
-				Element onElement = new Element(XmlTools.ELT_ON);
-				onElement.setAttribute(XmlTools.ATT_KEY,onText);
+				Element onElement = new Element(XmlTools.ON);
+				onElement.setAttribute(XmlTools.KEY,onText);
 				eventElement.addContent(onElement);
 			}
 			// off element
 			{	String offText = getKeyName(offKey);
-				Element offElement = new Element(XmlTools.ELT_OFF);
-				offElement.setAttribute(XmlTools.ATT_KEY,offText);
+				Element offElement = new Element(XmlTools.OFF);
+				offElement.setAttribute(XmlTools.KEY,offText);
 				eventElement.addContent(offElement);
 			}
 		}

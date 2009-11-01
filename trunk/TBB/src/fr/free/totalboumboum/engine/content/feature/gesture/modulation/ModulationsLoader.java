@@ -65,7 +65,7 @@ public class ModulationsLoader
 	
     @SuppressWarnings("unchecked")
 	private static void loadModulationsElement(Element root, String individualFolder, GesturePack pack, Role role) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
-	{	List<Element> gesturesList = root.getChildren(XmlTools.ELT_GESTURE);
+	{	List<Element> gesturesList = root.getChildren(XmlTools.GESTURE);
 		Iterator<Element> i = gesturesList.iterator();
 		while(i.hasNext())
 		{	Element tp = i.next();
@@ -75,12 +75,12 @@ public class ModulationsLoader
     
     private static void loadGestureElement(Element root, String individualFolder, GesturePack pack, Role role) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
-    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().toUpperCase(Locale.ENGLISH);
+    	String name = root.getAttribute(XmlTools.NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);
     	Gesture gesture = pack.getGesture(gestureName);
     	
     	// file
-    	String fileName = root.getAttribute(XmlTools.ATT_FILE).getValue();
+    	String fileName = root.getAttribute(XmlTools.FILE).getValue();
     	String localFilePath = individualFolder+File.separator+fileName;
     	
     	// opening
@@ -95,11 +95,11 @@ public class ModulationsLoader
     
     private static void loadGestureModulations(Element root, Gesture gesture, Role role) throws IOException, ClassNotFoundException
     {	// self modulations
-		Element selfElt = root.getChild(XmlTools.ELT_SELF_MODULATIONS);
+		Element selfElt = root.getChild(XmlTools.SELF_MODULATIONS);
 		loadModulationsElement(selfElt,ModType.SELF,gesture,role);
     	
 		// other modulations
-		Element otherElt = root.getChild(XmlTools.ELT_OTHER_MODULATIONS);
+		Element otherElt = root.getChild(XmlTools.OTHER_MODULATIONS);
 		loadModulationsElement(otherElt,ModType.OTHER,gesture,role);
     	
 		// actor modulations
@@ -107,17 +107,17 @@ public class ModulationsLoader
 		loadModulationsElement(actorElt,ModType.ACTOR,gesture,role);
 		
 		// target modulations
-		Element targetElt = root.getChild(XmlTools.ELT_TARGET_MODULATIONS);
+		Element targetElt = root.getChild(XmlTools.TARGET_MODULATIONS);
 		loadModulationsElement(targetElt,ModType.TARGET,gesture,role);
 		
 		// third modulations
-		Element thirdElt = root.getChild(XmlTools.ELT_THIRD_MODULATIONS);
+		Element thirdElt = root.getChild(XmlTools.THIRD_MODULATIONS);
 		loadModulationsElement(thirdElt,ModType.THIRD,gesture,role);
     }
     
     @SuppressWarnings("unchecked")
 	private static void loadModulationsElement(Element root, ModType type, Gesture gesture, Role role) throws IOException, ClassNotFoundException
-    {	List<Element> modulationsList = root.getChildren(XmlTools.ELT_MODULATION);
+    {	List<Element> modulationsList = root.getChildren(XmlTools.MODULATION);
 		Iterator<Element> i = modulationsList.iterator();
 		if(type==ModType.SELF || type==ModType.OTHER)
 		{	while(i.hasNext())
@@ -137,7 +137,7 @@ public class ModulationsLoader
     
     private static AbstractStateModulation loadStateModulationElement(ModType type, GestureName gestureName, Element root) throws IOException, ClassNotFoundException
     {	// strength
-		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim();
+		String strengthStr = root.getAttribute(XmlTools.STRENGTH).getValue().trim();
 		float strength;
 		if(strengthStr.equals(XmlTools.VAL_MAX))
 			strength = Float.MAX_VALUE;
@@ -145,11 +145,11 @@ public class ModulationsLoader
 			strength = Float.parseFloat(strengthStr);
 		
 		// frame
-		boolean frame = Boolean.parseBoolean(root.getAttribute(XmlTools.ATT_FRAME).getValue());
+		boolean frame = Boolean.parseBoolean(root.getAttribute(XmlTools.FRAME).getValue());
 		
 		// name
-		Element nameElt = root.getChild(XmlTools.ELT_NAME);
-		String name = nameElt.getAttribute(XmlTools.ATT_VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
+		Element nameElt = root.getChild(XmlTools.NAME);
+		String name = nameElt.getAttribute(XmlTools.VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
 		
 		// result
 		AbstractStateModulation result;
@@ -158,11 +158,11 @@ public class ModulationsLoader
 		else //if(type.equals(ModType.OTHER))
 		{	result = new OtherModulation(name);
 			// contacts
-			ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlTools.ATT_CONTACT);
+			ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlTools.CONTACT);
 			for(Contact contact: contacts)
 				((OtherModulation)result).addContact(contact);
 			// tilePositions
-			ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.ATT_TILE_POSITION);
+			ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.TILE_POSITION);
 			for(TilePosition tilePosition: tilePositions)
 				((OtherModulation)result).addTilePosition(tilePosition);
 		}
@@ -177,7 +177,7 @@ public class ModulationsLoader
 		
     private static AbstractActionModulation loadActionModulationElement(ModType type, GestureName gestureName, Element root, Role role) throws IOException, ClassNotFoundException
     {	// strength
-		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim();
+		String strengthStr = root.getAttribute(XmlTools.STRENGTH).getValue().trim();
 		float strength;
 		if(strengthStr.equals(XmlTools.VAL_MAX))
 			strength = Float.MAX_VALUE;
@@ -185,7 +185,7 @@ public class ModulationsLoader
 			strength = Float.parseFloat(strengthStr);
 		
 		// frame
-		boolean frame = Boolean.parseBoolean(root.getAttribute(XmlTools.ATT_FRAME).getValue());
+		boolean frame = Boolean.parseBoolean(root.getAttribute(XmlTools.FRAME).getValue());
 		
 		// action
 		Element actionElt = root.getChild(XmlTools.ACTION);
@@ -203,7 +203,7 @@ public class ModulationsLoader
     	
 		// target restrictions
 		ArrayList<AbstractAbility> targetRestrictions = new ArrayList<AbstractAbility>();
-		Element targetRestrElt = root.getChild(XmlTools.ELT_TARGET_RESTRICTIONS);
+		Element targetRestrElt = root.getChild(XmlTools.TARGET_RESTRICTIONS);
 		if(targetRestrElt!=null)
 			targetRestrictions = AbilityLoader.loadAbilitiesElement(targetRestrElt);
 		
@@ -220,7 +220,7 @@ public class ModulationsLoader
 			Circumstance actorCircumstance = ((ThirdModulation)result).getActorCircumstance();
 			CircumstanceLoader.loadCircumstanceElement(actorCircElt,actorCircumstance);
 			// target circumstance
-			Element targetCircElt = root.getChild(XmlTools.ELT_TARGET_CIRCUMSTANCES);
+			Element targetCircElt = root.getChild(XmlTools.TARGET_CIRCUMSTANCES);
 			Circumstance targetCircumstance = ((ThirdModulation)result).getTargetCircumstance();
 			CircumstanceLoader.loadCircumstanceElement(targetCircElt,targetCircumstance);
 		}

@@ -34,19 +34,19 @@ public class CircumstanceLoader
 {		
 	public static void loadCircumstanceElement(Element root, Circumstance result) throws ClassNotFoundException
     {	// contacts
-		{	ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlTools.ATT_CONTACT);
+		{	ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlTools.CONTACT);
 			for(Contact contact: contacts)
 				result.addContact(contact);
 		}
 		
 		// tilePositions
-		{	ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.ATT_TILE_POSITION);
+		{	ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.TILE_POSITION);
 			for(TilePosition tilePosition: tilePositions)
 				result.addTilePosition(tilePosition);
 		}
 		
 		// orientations
-		{	ArrayList<Orientation> orientations = Orientation.loadOrientationsAttribute(root,XmlTools.ATT_ORIENTATION);
+		{	ArrayList<Orientation> orientations = Orientation.loadOrientationsAttribute(root,XmlTools.ORIENTATION);
 			for(Orientation orientation: orientations)
 				result.addOrientation(orientation);
 		}

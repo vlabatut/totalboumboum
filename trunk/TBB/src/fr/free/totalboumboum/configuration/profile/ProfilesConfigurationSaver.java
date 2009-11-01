@@ -50,7 +50,7 @@ public class ProfilesConfigurationSaver
 	}
 
 	private static Element saveProfilesElement(ProfilesConfiguration profilesConfiguration)
-	{	Element result = new Element(XmlTools.ELT_PROFILES);
+	{	Element result = new Element(XmlTools.PROFILES);
 		
 		// general
 		Element generalElement = saveGeneralElement(profilesConfiguration);
@@ -64,25 +64,25 @@ public class ProfilesConfigurationSaver
 	}
 	
 	private static Element saveListElement(ProfilesConfiguration profilesConfiguration)
-	{	Element result = new Element(XmlTools.ELT_LIST);
+	{	Element result = new Element(XmlTools.LIST);
 		HashMap<String,String> profiles = profilesConfiguration.getProfiles();
 		Iterator<Entry<String,String>> it = profiles.entrySet().iterator();
 		while(it.hasNext())
 		{	Entry<String,String> entry = it.next();
 			String file = entry.getKey();
 			String name = entry.getValue();
-			Element element = new Element(XmlTools.ELT_PROFILE);
-			element.setAttribute(XmlTools.ATT_FILE,file);
-			element.setAttribute(XmlTools.ATT_NAME,name);
+			Element element = new Element(XmlTools.PROFILE);
+			element.setAttribute(XmlTools.FILE,file);
+			element.setAttribute(XmlTools.NAME,name);
 			result.addContent(element);
 		}
 		return result;
 	}	
 
 	private static Element saveGeneralElement(ProfilesConfiguration profilesConfiguration)
-	{	Element result = new Element(XmlTools.ELT_GENERAL);
+	{	Element result = new Element(XmlTools.GENERAL);
 		String lastProfile = Integer.toString(profilesConfiguration.getLastProfileIndex());
-		result.setAttribute(XmlTools.ATT_LAST,lastProfile);
+		result.setAttribute(XmlTools.LAST,lastProfile);
 		return result;
 	}
 }

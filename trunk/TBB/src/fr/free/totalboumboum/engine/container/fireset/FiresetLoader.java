@@ -70,7 +70,7 @@ public class FiresetLoader
     		loadFiresElement(folder,abstractFiresElt,null,abstractFires,Type.ABSTRACT);
 
     	// firesets
-    	Element firesetsElt = root.getChild(XmlTools.ELT_FIRESETS);
+    	Element firesetsElt = root.getChild(XmlTools.FIRESETS);
     	loadFiresetsElement(folder,firesetsElt,result,abstractFires);
     	
     	return result;
@@ -78,12 +78,12 @@ public class FiresetLoader
 	
 	@SuppressWarnings("unchecked")
 	private static void loadFiresetsElement(String folder, Element root, FiresetMap result, HashMap<String,FireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	List<Element> elts = root.getChildren(XmlTools.ELT_FIRESET);
+	{	List<Element> elts = root.getChildren(XmlTools.FIRESET);
     	Iterator<Element> i = elts.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
-    		String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-			Attribute attribute = temp.getAttribute(XmlTools.ATT_FOLDER);
+    		String name = temp.getAttribute(XmlTools.NAME).getValue().trim();
+			Attribute attribute = temp.getAttribute(XmlTools.FOLDER);
 			String individualFolder = folder+File.separator+attribute.getValue().trim();
 			Fireset fireset = loadFireset(individualFolder,abstractFires);
 			fireset.setName(name);
@@ -121,7 +121,7 @@ public class FiresetLoader
     		loadFiresElement(folder,abstractFiresElt,result,abstractFires,Type.ABSTRACT);
 
     	// concrete fires
-    	Element concreteFiresElt = root.getChild(XmlTools.ELT_CONCRETE_FIRES);
+    	Element concreteFiresElt = root.getChild(XmlTools.CONCRETE_FIRES);
 		loadFiresElement(folder,concreteFiresElt,result,abstractFires,Type.CONCRETE);
     	
     	return result;
@@ -130,7 +130,7 @@ public class FiresetLoader
 	@SuppressWarnings("unchecked")
 	private static void loadFiresElement(String folder, Element root, Fireset result, HashMap<String,FireFactory> abstractFires, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
-		List<Element> elts = root.getChildren(XmlTools.ELT_FIRE);
+		List<Element> elts = root.getChildren(XmlTools.FIRE);
     	Iterator<Element> i = elts.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
@@ -140,11 +140,11 @@ public class FiresetLoader
     
     private static void loadFireElement(String folder, Element root, Fireset result, HashMap<String,FireFactory> abstractFires, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// fire factory

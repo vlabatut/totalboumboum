@@ -49,14 +49,14 @@ public class QuickStartConfigurationSaver
 	}
 
 	private static Element saveGameQuickStartElement(QuickStartConfiguration quickStartConfiguration)
-	{	Element result = new Element(XmlTools.ELT_GAME_QUICKSTART); 
+	{	Element result = new Element(XmlTools.GAME_QUICKSTART); 
 			
 		// round
 		Element roundElement = saveRoundELement(quickStartConfiguration);
 		result.addContent(roundElement);
 	
 		// players
-		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
+		Element playersElement = new Element(XmlTools.PLAYERS);
 		ProfilesSelection quickStartSelected = quickStartConfiguration.getProfilesSelection();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,quickStartSelected);
 		result.addContent(playersElement);
@@ -65,11 +65,11 @@ public class QuickStartConfigurationSaver
 	}
 	
 	private static Element saveRoundELement(QuickStartConfiguration quickStartConfiguration)
-	{	Element result = new Element(XmlTools.ELT_ROUND); 
+	{	Element result = new Element(XmlTools.ROUND); 
 	
 		// name
 		String roundName = quickStartConfiguration.getRoundName().toString();
-		result.setAttribute(XmlTools.ATT_NAME,roundName);
+		result.setAttribute(XmlTools.NAME,roundName);
 
 		// allowed players
 		TreeSet<Integer> allowedPlayers = quickStartConfiguration.getAllowedPlayers();
@@ -80,7 +80,7 @@ public class QuickStartConfigurationSaver
 		}
 		if(allowedPlayers.size()>0)
 			allowedPlayersStr = allowedPlayersStr.substring(0,allowedPlayersStr.length()-1);
-		result.setAttribute(XmlTools.ATT_ALLOWED_PLAYERS,allowedPlayersStr);
+		result.setAttribute(XmlTools.ALLOWED_PLAYERS,allowedPlayersStr);
 		
 		return result;
 	}

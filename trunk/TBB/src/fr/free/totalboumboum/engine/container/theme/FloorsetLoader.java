@@ -66,14 +66,14 @@ public class FloorsetLoader
     		loadFloorsElement(abstractFloorsElt,folder,result,abstractFloors,Type.ABSTRACT);
     	
     	// concrete floors
-    	Element concreteFloorsElt = root.getChild(XmlTools.ELT_CONCRETE_FLOORS);
+    	Element concreteFloorsElt = root.getChild(XmlTools.CONCRETE_FLOORS);
 		loadFloorsElement(concreteFloorsElt,folder,result,abstractFloors,Type.CONCRETE);
 	}
     
 	@SuppressWarnings("unchecked")
 	private static void loadFloorsElement(Element root, String folder, Theme result, HashMap<String,FloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
-    	List<Element> floors = root.getChildren(XmlTools.ELT_FLOOR);
+    	List<Element> floors = root.getChildren(XmlTools.FLOOR);
     	Iterator<Element> i = floors.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
@@ -83,11 +83,11 @@ public class FloorsetLoader
     
 	private static void loadFloorElement(Element root, String folder, Theme result, HashMap<String,FloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 
 		// factory

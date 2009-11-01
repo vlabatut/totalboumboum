@@ -49,38 +49,38 @@ public class TournamentConfigurationLoader
 
 	private static void loadGameTournamentElement(Element root, TournamentConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// options
-		Element optionsElement = root.getChild(XmlTools.ELT_OPTIONS);
+		Element optionsElement = root.getChild(XmlTools.OPTIONS);
 		loadOptionsElement(optionsElement,result);
 		
 		// name
-		Element tournamentElement = root.getChild(XmlTools.ELT_TOURNAMENT);
-		String tournamentName = tournamentElement.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		Element tournamentElement = root.getChild(XmlTools.TOURNAMENT);
+		String tournamentName = tournamentElement.getAttribute(XmlTools.NAME).getValue().trim();
 		result.setTournamentName(new StringBuffer(tournamentName));
 		
 		// players
-		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
+		Element playersElement = root.getChild(XmlTools.PLAYERS);
 		ProfilesSelection tournamentSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
 		result.setProfilesSelection(tournamentSelected);
 	}
 	
 	private static void loadOptionsElement(Element root, TournamentConfiguration result)
 	{	// use last players
-		String useLastPlayersStr = root.getAttributeValue(XmlTools.ATT_USE_LAST_PLAYERS);
+		String useLastPlayersStr = root.getAttributeValue(XmlTools.USE_LAST_PLAYERS);
 		boolean useLastPlayers = Boolean.parseBoolean(useLastPlayersStr);
 		result.setUseLastPlayers(useLastPlayers);
 		
 		// use last tournament
-		String useLastTournamentStr = root.getAttributeValue(XmlTools.ATT_USE_LAST_TOURNAMENT);
+		String useLastTournamentStr = root.getAttributeValue(XmlTools.USE_LAST_TOURNAMENT);
 		boolean useLastTournament = Boolean.parseBoolean(useLastTournamentStr);
 		result.setUseLastTournament(useLastTournament);
 		
 		// autoload
-		String autoLoadStr = root.getAttributeValue(XmlTools.ATT_AUTOLOAD);
+		String autoLoadStr = root.getAttributeValue(XmlTools.AUTOLOAD);
 		boolean autoLoad = Boolean.parseBoolean(autoLoadStr);
 		result.setAutoLoad(autoLoad);
 		
 		// autosave
-		String autoSaveStr = root.getAttributeValue(XmlTools.ATT_AUTOSAVE);
+		String autoSaveStr = root.getAttributeValue(XmlTools.AUTOSAVE);
 		boolean autoSave = Boolean.parseBoolean(autoSaveStr);
 		result.setAutoSave(autoSave);
 	}

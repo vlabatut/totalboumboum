@@ -56,8 +56,8 @@ public class ExplosionLoader
     {	Explosion result = new Explosion();
     	
     	// fire
-    	Element elt = root.getChild(XmlTools.ELT_FIRESET);
-    	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+    	Element elt = root.getChild(XmlTools.FIRESET);
+    	String name = elt.getAttribute(XmlTools.NAME).getValue().trim();
 		Fireset fireset = RoundVariables.level.getFiresetMap().getFireset(name);
     	
 		//

@@ -49,16 +49,16 @@ public class ProfilesConfigurationLoader
 
 	private static void loadProfilesElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// general
-		Element generalElement = root.getChild(XmlTools.ELT_GENERAL);
+		Element generalElement = root.getChild(XmlTools.GENERAL);
 		loadGeneralElement(generalElement,result);
 		// list
-		Element listElement = root.getChild(XmlTools.ELT_LIST);
+		Element listElement = root.getChild(XmlTools.LIST);
 		loadListElement(listElement,result);
 	}
 
 	@SuppressWarnings("unchecked")
 	private static void loadListElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	List<Element> elements = root.getChildren(XmlTools.ELT_PROFILE);
+	{	List<Element> elements = root.getChildren(XmlTools.PROFILE);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -67,13 +67,13 @@ public class ProfilesConfigurationLoader
 	}
 		
 	private static void loadProfileElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	String file = root.getAttribute(XmlTools.ATT_FILE).getValue().trim();
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+	{	String file = root.getAttribute(XmlTools.FILE).getValue().trim();
+		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
 		result.addProfile(file,name);	
 	}
 
 	private static void loadGeneralElement(Element root, ProfilesConfiguration result)
-	{	String lastProfileStr = root.getAttribute(XmlTools.ATT_LAST).getValue().trim();
+	{	String lastProfileStr = root.getAttribute(XmlTools.LAST).getValue().trim();
 		int lastProfile = Integer.parseInt(lastProfileStr);
 		result.setLastProfileIndex(lastProfile);
 	}

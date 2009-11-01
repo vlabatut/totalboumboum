@@ -49,48 +49,48 @@ public class StatisticsConfigurationLoader
 	{	Element element; 
 		
 		// include quick starts
-		element = root.getChild(XmlTools.ELT_INCLUDE_QUICKSTARTS);
+		element = root.getChild(XmlTools.INCLUDE_QUICKSTARTS);
 		loadIncludeQuickStartsElement(element,result);
 		
 		// include simulations
-		element = root.getChild(XmlTools.ELT_INCLUDE_SIMULATIONS);
+		element = root.getChild(XmlTools.INCLUDE_SIMULATIONS);
 		loadIncludeSimulationsElement(element,result);
 		
 		// glicko-2
-		element = root.getChild(XmlTools.ELT_GLICKO2);
+		element = root.getChild(XmlTools.GLICKO2);
 		loadGlicko2Element(element,result);
 	}
 
 	private static void loadIncludeQuickStartsElement(Element root, StatisticsConfiguration result)
-	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean includeQuickStarts = Boolean.valueOf(value);
 		result.setIncludeQuickStarts(includeQuickStarts);
 	}
 
 	private static void loadIncludeSimulationsElement(Element root, StatisticsConfiguration result)
-	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean includeSimulations = Boolean.valueOf(value);
 		result.setIncludeSimulations(includeSimulations);
 	}
 
 	private static void loadGlicko2Element(Element root, StatisticsConfiguration result)
 	{	// default rating
-		{	String value = root.getAttribute(XmlTools.ATT_DEFAULT_RATING).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.DEFAULT_RATING).getValue().trim();
 			int defaultRating = Integer.valueOf(value);
 			result.setDefaultRating(defaultRating);
 		}
 		// default rating deviation
-		{	String value = root.getAttribute(XmlTools.ATT_DEFAULT_RATING_DEVIATION).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.DEFAULT_RATING_DEVIATION).getValue().trim();
 			int defaultRatingDeviation = Integer.valueOf(value);
 			result.setDefaultRatingDeviation(defaultRatingDeviation);
 		}
 		// default rating volatility
-		{	String value = root.getAttribute(XmlTools.ATT_DEFAULT_RATING_VOLATILITY).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.DEFAULT_RATING_VOLATILITY).getValue().trim();
 			float defaultRatingVolatility = Float.valueOf(value);
 			result.setDefaultRatingVolatility(defaultRatingVolatility);
 		}
 		// games per period
-		{	String value = root.getAttribute(XmlTools.ATT_GAMES_PER_PERIOD).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.GAMES_PER_PERIOD).getValue().trim();
 			int gamesPerPeriod = Integer.parseInt(value);
 			result.setGamesPerPeriod(gamesPerPeriod);
 		}		

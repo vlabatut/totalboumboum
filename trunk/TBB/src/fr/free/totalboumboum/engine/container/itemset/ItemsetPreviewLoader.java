@@ -70,7 +70,7 @@ public class ItemsetPreviewLoader
     		loadItemsElement(abstractItemsElt,folder,result,abstractItems,Type.ABSTRACT);
     	
     	// concrete items
-    	Element concreteItemsElt = root.getChild(XmlTools.ELT_CONCRETE_ITEMS);
+    	Element concreteItemsElt = root.getChild(XmlTools.CONCRETE_ITEMS);
 		loadItemsElement(concreteItemsElt,folder,result,abstractItems,Type.CONCRETE);
 		
 		return result;
@@ -79,7 +79,7 @@ public class ItemsetPreviewLoader
     @SuppressWarnings("unchecked")
     private static void loadItemsElement(Element root, String folder, ItemsetPreview result, HashMap<String,SpritePreview> abstractItems, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	String individualFolder = folder;
-		List<Element> items = root.getChildren(XmlTools.ELT_ITEM);	
+		List<Element> items = root.getChildren(XmlTools.ITEM);	
 		Iterator<Element> i = items.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -89,11 +89,11 @@ public class ItemsetPreviewLoader
     
     private static void loadItemElement(Element root, String folder, ItemsetPreview result, HashMap<String,SpritePreview> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		if(attribute!=null)
 			individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		

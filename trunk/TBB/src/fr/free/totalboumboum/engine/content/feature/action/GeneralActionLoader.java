@@ -34,24 +34,24 @@ public class GeneralActionLoader
 {		
 	public static GeneralAction loadActionElement(Element root) throws ClassNotFoundException
     {	// name
-		String strName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
+		String strName = root.getAttribute(XmlTools.NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
 		ActionName name = ActionName.valueOf(strName);
 		GeneralAction result = name.createGeneralAction();
 		
 		// actors
-		{	ArrayList<Role> actors = Role.loadRolesAttribute(root,XmlTools.ATT_ACTOR);
+		{	ArrayList<Role> actors = Role.loadRolesAttribute(root,XmlTools.ACTOR);
 			for(Role actor: actors)
 				result.addActor(actor);
 		}
 		
 		// targets
-		{	ArrayList<Role> targets = Role.loadRolesAttribute(root,XmlTools.ATT_TARGET);
+		{	ArrayList<Role> targets = Role.loadRolesAttribute(root,XmlTools.TARGET);
 			for(Role target: targets)
 				result.addTarget(target);
 		}
 		
 		// directions
-		{	ArrayList<Direction> directions = Direction.loadDirectionsAttribute(root,XmlTools.ATT_DIRECTION);
+		{	ArrayList<Direction> directions = Direction.loadDirectionsAttribute(root,XmlTools.DIRECTION);
 			for(Direction direction: directions)
 				result.addDirection(direction);
 		}
