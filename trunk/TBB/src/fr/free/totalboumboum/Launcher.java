@@ -1087,10 +1087,12 @@ public class Launcher
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats
-	 *  - xml :
-	 *  	- virer les "-" dans les constantes et les fichiers xml/xsd
 	 *  - gui : 
 	 *  	- bugs dans les browsers, sur les boutons de page next/previous >> surcharger label avec un indicateur de survol que l'on teste sur exit/enter (utiliser JLabel.isShowin() ?)
+	 *  - instance TBB
+	 *  	- bombe télécommandée tombe en panne : le circuit grille
+	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
+	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
 	 *  	
 	 */ 
 }
