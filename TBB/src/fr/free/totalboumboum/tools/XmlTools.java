@@ -62,8 +62,8 @@ public class XmlTools
 	public static final String ADDITION = "addition";
 	public static final String ADJUST = "adjust";
 	public static final String ANIMES = "animes";
-	public static final String ELT_AI = "ai";
-	public static final String ELT_AIS = "ais";
+	public static final String AI = "ai";
+	public static final String AIS = "ais";
 	public static final String ELT_ALL_LEVELS = "all-levels";
 	public static final String ELT_ARCHIVE = "archive";
 	public static final String ELT_AUTHOR = "author";
@@ -312,7 +312,6 @@ public class XmlTools
 	public static final String ATT_RANDOM_ORDER = "randomOrder"; 
 	public static final String ATT_RANDOMIZE_LEGS = "randomizeLegs"; 
 	public static final String ATT_RANDOMIZE_PARTS = "randomizeParts"; 
-	public static final String ATT_RANDOMIZE_PLAYERS = "randomizePlayers"; 
 	public static final String ATT_RANGE = "range";
 	public static final String ATT_RANK = "rank";
 	public static final String ATT_RANKING = "ranking";
@@ -326,6 +325,7 @@ public class XmlTools
 	public static final String ATT_SHADOW_XSHIFT = "shadowXShift";
 	public static final String ATT_SHADOW_YSHIFT = "shadowYShift";
 	public static final String ATT_SHARE = "share";
+	public static final String ATT_SORT_PLAYERS = "sortPlayers"; 
 	public static final String ATT_SPEED = "speed";
 	public static final String ATT_SPRITE_FOLDER = "spriteFolder";
 	public static final String ATT_SPRITE_PACK = "spritePack";

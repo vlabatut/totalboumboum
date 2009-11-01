@@ -12,7 +12,7 @@
  	
 	<author value="Vincent Labatut" />
 
-	<cup randomizePlayers="true">
+	<cup sortPlayers="random" >
 		<leg number="0" randomizeParts="false" >
 			<part name="Quart-de-finale 1" number="0">
 				<match local="true" name="regular" />

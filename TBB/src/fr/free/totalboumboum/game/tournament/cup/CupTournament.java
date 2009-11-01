@@ -52,10 +52,6 @@ public class CupTournament extends AbstractTournament
 	public void init()
 	{	begun = true;
 	
-		// are players in random order ?
-		if(randomizePlayers)
-			randomizePlayers();
-		
 		// players distribution
 		int playerCount = profiles.size();
 		HashMap<Integer,ArrayList<ArrayList<Integer>>> distris = processPlayerDistribution(playerCount);
@@ -64,6 +60,9 @@ public class CupTournament extends AbstractTournament
 		int index = (int)(Math.random()*distri.size());
 		firstLegPlayersdistribution = distri.get(index);
 //firstLegPlayersdistribution = distri.get(0);			
+		
+		// sort players (as is, random or seeds)
+		sortPlayers();
 		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		currentIndex = 0;
@@ -96,22 +95,82 @@ public class CupTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean randomizePlayers;
+	private CupPlayerSort sortPlayers;
 	private ArrayList<Integer> firstLegPlayersdistribution;
 
-	public boolean isRandomizePlayers()
-	{	return randomizePlayers;
+	public CupPlayerSort getSortPlayers()
+	{	return sortPlayers;
 	}
 
-	public void setRandomizePlayers(boolean randomizePlayers)
-	{	this.randomizePlayers = randomizePlayers;
+	public void setSortPlayers(CupPlayerSort sortPlayers)
+	{	this.sortPlayers = sortPlayers;
 	}
 
-	private void randomizePlayers()
-	{	Calendar cal = new GregorianCalendar();
-		long seed = cal.getTimeInMillis();
-		Random random = new Random(seed);
-		Collections.shuffle(profiles,random);
+	private void sortPlayers()
+	{	if(sortPlayers==CupPlayerSort.RANDOM)
+		{	Calendar cal = new GregorianCalendar();
+			long seed = cal.getTimeInMillis();
+			Random random = new Random(seed);
+			Collections.shuffle(profiles,random);
+		}
+		else if(sortPlayers==CupPlayerSort.SEEDS)
+		{	CupLeg lastLeg = legs.get(legs.size()-1);
+
+
+		
+		
+		
+		
+		{	Ranks result = new Ranks();		
+		ArrayList<Profile> ranked = new ArrayList<Profile>();
+		CupLeg leg = legs.get(legs.size()-1);
+		int partRank = 1;
+		int countPlayers = 0;
+		while(countPlayers<profiles.size())
+		{	CupPart part = leg.getPartFromRank(partRank);
+			// the part exists
+			if(part!=null)
+			{	int baseRank = countPlayers;
+				Ranks orderedPlayers = part.getOrderedPlayers();
+				for(Entry<Integer,ArrayList<Profile>> entry: orderedPlayers.getRanks().entrySet())
+				{	ArrayList<Profile> list = entry.getValue();
+					int r = entry.getKey()+baseRank;
+					for(Profile p: list)
+					{	result.addProfile(r,p);
+						countPlayers ++;
+						ranked.add(p);
+					}
+				}				
+				partRank++;
+			}
+			// the part doesn't exist >> draw for all the remaining players
+			else
+			{	int r = countPlayers+1;
+				for(Profile p: profiles)
+				{	if(!ranked.contains(p))
+					{	result.addProfile(r,p);
+						countPlayers++;
+					}
+				}
+			}				
+		}
+		
+		return result;
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		}
 	}
 
 	@Override
@@ -222,7 +281,7 @@ for(ArrayList<Integer> list: permutations)
 	 * the method result is -1. If it is, it's the maximal rank
 	 * of a non-player at the end of the tournament. This value
 	 * allows ranking all the possible distributions in order
-	 * to peak the best one (i.e. the one with lower value)
+	 * to pick the best one (i.e. the one with lower value)
 	 * @param distribution
 	 * @return
 	 */

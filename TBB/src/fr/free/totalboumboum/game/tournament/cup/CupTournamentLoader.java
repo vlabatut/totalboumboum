@@ -44,10 +44,10 @@ public class CupTournamentLoader
 	{	CupTournament result = new CupTournament();
 		Element element;
 		
-		// randomize players
-		String randomizePlayersStr = root.getAttribute(XmlTools.ATT_RANDOMIZE_PLAYERS).getValue().trim();
-		boolean randomizePlayers = Boolean.valueOf(randomizePlayersStr);
-    	result.setRandomizePlayers(randomizePlayers);
+		// sort players
+		String sortPlayersStr = root.getAttribute(XmlTools.ATT_SORT_PLAYERS).getValue().trim();
+		CupPlayerSort sortPlayers = CupPlayerSort.valueOf(sortPlayersStr);
+    	result.setSortPlayers(sortPlayers);
     	
 		// legs
 		element = root;

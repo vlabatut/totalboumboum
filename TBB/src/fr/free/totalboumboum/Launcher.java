@@ -858,6 +858,7 @@ public class Launcher
 	 * - GUI : le rang des joueurs apparait maintenant dans l'écran de sélection des profils
 	 * - scores : les suicides sont maintenant séparés des bombeurs/bombés
 	 * - système de log : log des controles, que ce soit pour les humains ou les IA
+	 * - un nouvel icone couronne de laurier a été défini pour distinguer le classement Glicko-2=podium et le classement local (tournoi/match/round)=lauriers
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1045,8 +1046,13 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
-	 * - possibilité de définir des items indestructibles (sont juste déplacés)
-	 * - blocs laissant passer le feu mais pas les joueurs, comme dans le niveau story/custom de SBM1
+	 *	- parler des options des stats
+	 *	- stats : possibilité de masquer les ia/humains dans le classement, et non-classés
+	 *	- séparation des auto-bombages
+	 *	- affichage du nom des joueurs pendant le jeu en surimpression
+	 *	- GUI : 
+	 *		- soulignage des labels cliquables (quelques bugs)
+	 *		- icone lauriers
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1054,13 +1060,6 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * - site :
-	 * 		- parler des options des stats
-	 * 		- stats : possibilité de masquer les ia/humains dans le classement, et non-classés
-	 * 		- affichage du nom des joueurs pendant le jeu en surimpression
-	 * 		- GUI : soulignage des labels cliquables
-	 * 		- séparation des auto-bombages
-	 * 
 	 * - percepts à rajouter
 	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
 	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
@@ -1073,10 +1072,10 @@ public class Launcher
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
-	 * 		- stats
 	 * 		- instance TBB
 	 * 		- sons
 	 * 		- BM'83
+	 * 		- shrink (?)
 	 * 		- réseau
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
@@ -1087,9 +1086,11 @@ public class Launcher
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats
-	 *  - utiliser l'icone podium pour le classement des résultats et une couronne de lauriers pour le classement glicko
 	 *  - xml :
 	 *  	- renommer les constantes éléments/attributs
 	 *  	- virer les "-" dans les constantes et les fichiers xml/xsd
+	 *  - gui : 
+	 *  	- bugs dans les browsers, sur les boutons de page next/previous >> surcharger label avec un indicateur de survol que l'on teste sur exit/enter (utiliser JLabel.isShowin() ?)
+	 *  	
 	 */ 
 }

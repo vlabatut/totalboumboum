@@ -46,7 +46,7 @@ public class AisConfigurationSaver
 	}
 
 	private static Element saveAisElement(AisConfiguration aisConfiguration)
-	{	Element result = new Element(XmlTools.ELT_AIS); 
+	{	Element result = new Element(XmlTools.AIS); 
 		// ups
 		Element upsElement = saveUpsElement(aisConfiguration);
 		result.addContent(upsElement);
