@@ -2,28 +2,28 @@
 <gesture-modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../../schemas/gesture_modulations.xsd" >
 
-	<self-modulations>
-	</self-modulations>
+	<selfModulations>
+	</selfModulations>
 	
-	<other-modulations>
-	</other-modulations>
+	<otherModulations>
+	</otherModulations>
 	
-	<actor-modulations>
-	</actor-modulations>
+	<actorModulations>
+	</actorModulations>
 	
-	<target-modulations>
-	</target-modulations>
+	<targetModulations>
+	</targetModulations>
 	
-	<third-modulations>
+	<thirdModulations>
 <!--  	APPEAR --> 
 		<modulation frame="true" strength="0" >
 			<action name="APPEAR" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="BLOCK FLOOR HERO ITEM" target="ANY" />
-			<actor-restrictions />
-			<target-restrictions />
-			<actor-circumstances contact="ANY" tilePosition="SAME" orientation="ANY" />
-			<target-circumstances  />
+			<actorRestrictions />
+			<targetRestrictions />
+			<actorCircumstances contact="ANY" tilePosition="SAME" orientation="ANY" />
+			<targetCircumstances  />
 		</modulation>
-	</third-modulations>
+	</thirdModulations>
 
 </gesture-modulations>

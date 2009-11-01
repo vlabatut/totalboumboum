@@ -2,11 +2,11 @@
 <floorset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/floorset.xsd" >
 
-	<abstract-floors>
+	<abstractFloors>
 		<floor name="common" folder="_common" />
-	</abstract-floors>
+	</abstractFloors>
 	
-	<concrete-floors>
+	<concreteFloors>
 		<floor name="regular" folder="regular" />
 
 		<floor name="00_01" folder="00_01"/>
@@ -93,6 +93,6 @@
 		<floor name="12_06" folder="12_06"/>
 		<floor name="12_07" folder="12_07"/>
 		<floor name="12_08" folder="12_08"/>
-	</concrete-floors>
+	</concreteFloors>
 
 </floorset>

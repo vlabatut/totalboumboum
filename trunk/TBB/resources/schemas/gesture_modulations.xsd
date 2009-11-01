@@ -47,8 +47,8 @@
 			<xsd:extension base="tModulation">
 				<xsd:sequence>
 					<xsd:element name="action" type="tActionActor" />
-					<xsd:element name="actor-restrictions" type="tRestrictions" minOccurs="0" />
-					<xsd:element name="target-restrictions" type="tRestrictions" minOccurs="0" />
+					<xsd:element name="actorRestrictions" type="tRestrictions" minOccurs="0" />
+					<xsd:element name="targetRestrictions" type="tRestrictions" minOccurs="0" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -59,8 +59,8 @@
 			<xsd:extension base="tModulation">
 				<xsd:sequence>
 					<xsd:element name="action" type="tActionTarget" />
-					<xsd:element name="actor-restrictions" type="tRestrictions" minOccurs="0" />
-					<xsd:element name="target-restrictions" type="tRestrictions" minOccurs="0" />
+					<xsd:element name="actorRestrictions" type="tRestrictions" minOccurs="0" />
+					<xsd:element name="targetRestrictions" type="tRestrictions" minOccurs="0" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -77,10 +77,10 @@
 			<xsd:extension base="tExtendedModulation">
 				<xsd:sequence>
 					<xsd:element name="action" type="tActionThird" />
-					<xsd:element name="actor-restrictions" type="tRestrictions" minOccurs="0" />
-					<xsd:element name="target-restrictions" type="tRestrictions" minOccurs="0" />
-					<xsd:element name="actor-circumstances" type="tCircumstances" />
-					<xsd:element name="target-circumstances" type="tCircumstances" />
+					<xsd:element name="actorRestrictions" type="tRestrictions" minOccurs="0" />
+					<xsd:element name="targetRestrictions" type="tRestrictions" minOccurs="0" />
+					<xsd:element name="actorCircumstances" type="tCircumstances" />
+					<xsd:element name="targetCircumstances" type="tCircumstances" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -118,11 +118,11 @@
 
 	<xsd:complexType name="tGestureModulations">
 		<xsd:sequence>
-			<xsd:element name="self-modulations" type="tSelfModulations" />
-			<xsd:element name="other-modulations" type="tOtherModulations" />
-			<xsd:element name="actor-modulations" type="tActorModulations" />
-			<xsd:element name="target-modulations" type="tTargetModulations" />
-			<xsd:element name="third-modulations" type="tThirdModulations" />
+			<xsd:element name="selfModulations" type="tSelfModulations" />
+			<xsd:element name="otherModulations" type="tOtherModulations" />
+			<xsd:element name="actorModulations" type="tActorModulations" />
+			<xsd:element name="targetModulations" type="tTargetModulations" />
+			<xsd:element name="thirdModulations" type="tThirdModulations" />
 		</xsd:sequence>
 	</xsd:complexType>
 

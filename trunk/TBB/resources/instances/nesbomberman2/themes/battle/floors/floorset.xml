@@ -2,13 +2,13 @@
 <floorset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/floorset.xsd" >
 
-	<abstract-floors>
+	<abstractFloors>
 		<floor name="common" folder="_common" />
-	</abstract-floors>
+	</abstractFloors>
 
-	<concrete-floors>
+	<concreteFloors>
 		<floor name="marked" folder="marked" />
 		<floor name="regular" folder="regular" />
-	</concrete-floors>
+	</concreteFloors>
 
 </floorset>

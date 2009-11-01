@@ -2,7 +2,7 @@
 <blockset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/blockset.xsd" >
 	
-	<abstract-blocks >
+	<abstractBlocks >
 		<block name="common" folder="_common" />
 		
 		<group name="softwalls" folder="softwalls">
@@ -12,9 +12,9 @@
 		<group name="hardwalls" folder="hardwalls">
 			<block name="common_hard" folder="_common"/>
 		</group>
-	</abstract-blocks>
+	</abstractBlocks>
 	
-	<concrete-blocks>
+	<concreteBlocks>
 		<group name="softwalls" folder="softwalls">
 			<block name="regular" folder="regular"/>
 			<block name="spawn" folder="spawn"/>
@@ -41,6 +41,6 @@
 			<block name="outsideupleft" folder="outsideupleft"/>
 			<block name="outsideupright" folder="outsideupright"/>
 		</group>
-	</concrete-blocks>
+	</concreteBlocks>
 	
 </blockset>

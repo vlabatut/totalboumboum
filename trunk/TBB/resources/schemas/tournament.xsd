@@ -44,9 +44,9 @@
 
 	<xsd:simpleType name="tSortTypes">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="none" />
-			<xsd:enumeration value="random" />
-			<xsd:enumeration value="seeds" />
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="RANDOM" />
+			<xsd:enumeration value="SEEDS" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
@@ -54,7 +54,7 @@
 		<xsd:sequence>
 			<xsd:element name="leg" type="tLeg" maxOccurs="unbounded"/>
 		</xsd:sequence>
-		<xsd:attribute name="sortPlayers" type="tSortTypes" use="optional" default="random" />
+		<xsd:attribute name="sortPlayers" type="tSortTypes" use="optional" default="RANDOM" />
 	</xsd:complexType>
 
 <!-- LEAGUE -->

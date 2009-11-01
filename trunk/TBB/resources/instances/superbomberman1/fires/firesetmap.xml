@@ -3,9 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../schemas/firesetmap.xsd">
 
-	<abstract-fires>
+	<abstractFires>
 		<fire name="common" folder="_common" />
-	</abstract-fires>
+	</abstractFires>
 
 	<firesets>
 		<fireset name="normal" folder="normal" />

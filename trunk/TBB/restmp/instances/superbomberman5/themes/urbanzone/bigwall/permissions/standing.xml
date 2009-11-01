@@ -2,7 +2,7 @@
 <gesture-modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../xml/schemas/gesture_modulations.xsd" >
 
-	<self-modulations>
+	<selfModulations>
 <!--  	sprite-flat --> 
 <!--  	sprite-above --> 
 <!--	sprite-traverse-bomb --> 
@@ -22,9 +22,9 @@
 <!--  	bomb-range --> 
 <!--  	hero-punch-duration --> 
 <!--  	hero-wait-duration --> 
-	</self-modulations>
+	</selfModulations>
 	
-	<actor-modulations>
+	<actorModulations>
 <!--  	appear --> 
 <!--  	consume --> 
 <!--  	detonate --> 
@@ -37,9 +37,9 @@
 <!--  	punch --> 
 <!--  	push --> 
 <!--  	trigger --> 
-	</actor-modulations>
+	</actorModulations>
 	
-	<target-modulations>
+	<targetModulations>
 <!--  	appear --> 
 <!--  	consume --> 
 <!--  	drop --> 
@@ -47,9 +47,9 @@
 <!--  	punch --> 
 <!--  	push --> 
 <!--  	trigger --> 
-	</target-modulations>
+	</targetModulations>
 	
-	<third-modulations>
+	<thirdModulations>
 <!--  	appear --> 
 <!--  	consume --> 
 <!--  	detonate --> 
@@ -59,8 +59,8 @@
 		<modulation frame="true" strength="1" >
 			<action name="jump" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" />
-			<actor-restrictions />
-			<target-restrictions />
+			<actorRestrictions />
+			<targetRestrictions />
 		</modulation>
 <!--  	land --> 
 <!--  	movehigh --> 
@@ -69,23 +69,23 @@
 		<modulation frame="true" strength="1" >
 			<action name="punch" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" target="all" />
-			<actor-restrictions />
-			<target-restrictions />
+			<actorRestrictions />
+			<targetRestrictions />
 		</modulation>
 <!--  	push --> 
 		<modulation frame="true" strength="1" >
 			<action name="push" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" target="all" />
-			<actor-restrictions />
-			<target-restrictions />
+			<actorRestrictions />
+			<targetRestrictions />
 		</modulation>
 <!--  	trigger --> 
 		<modulation frame="true" strength="1" >
 			<action name="trigger" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" target="all" />
-			<actor-restrictions />
-			<target-restrictions />
+			<actorRestrictions />
+			<targetRestrictions />
 		</modulation>
-	</third-modulations>
+	</thirdModulations>
 
 </gesture-modulations>
