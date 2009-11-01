@@ -48,37 +48,37 @@ public class AisConfigurationLoader
 	private static void loadAisElement(Element root, AisConfiguration result)
 	{	Element element; 
 		// ups
-		element = root.getChild(XmlTools.ELT_UPS);
+		element = root.getChild(XmlTools.UPS);
 		loadUpsElement(element,result);
 		// auto advance
-		element = root.getChild(XmlTools.ELT_AUTO_ADVANCE);
+		element = root.getChild(XmlTools.AUTO_ADVANCE);
 		loadAutoAdvanceElement(element,result);
 		// hide all-ais rounds
-		element = root.getChild(XmlTools.ELT_HIDE_ALLAIS);
+		element = root.getChild(XmlTools.HIDE_ALLAIS);
 		loadHideAllAisElement(element,result);
 	}
 	
 	private static void loadUpsElement(Element root, AisConfiguration result)
-	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		int ups = Integer.valueOf(value);
 		result.setAiUps(ups);
 	}
 	
 	private static void loadAutoAdvanceElement(Element root, AisConfiguration result)
 	{	// switch
-		{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 			boolean autoAdvance = Boolean.valueOf(value);
 			result.setAutoAdvance(autoAdvance);
 		}
 		// delay
-		{	String value = root.getAttribute(XmlTools.ATT_DELAY).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.DELAY).getValue().trim();
 			long autoAdvanceDelay = Long.parseLong(value);
 			result.setAutoAdvanceDelay(autoAdvanceDelay);
 		}		
 	}
 	
 	private static void loadHideAllAisElement(Element root, AisConfiguration result)
-	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean hideAllAis = Boolean.valueOf(value);
 		result.setHideAllAis(hideAllAis);
 	}

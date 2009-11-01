@@ -202,7 +202,7 @@ public class ImageTools
     {	Object result=null;
     	// folder
     	String localFilePath = individualFolder;
-    	Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+    	Attribute attribute = root.getAttribute(XmlTools.FOLDER);
     	if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
 		// colormaps
@@ -210,13 +210,13 @@ public class ImageTools
     	int i=0;
 		while(result==null && i<clrs.size())
     	{	Element temp = clrs.get(i);
-    		String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+    		String name = temp.getAttribute(XmlTools.NAME).getValue().trim();
     		if(name.equalsIgnoreCase(color.toString()))
     		{	// colormap
-    			if(temp.getName().equals(XmlTools.ELT_COLORMAP))
+    			if(temp.getName().equals(XmlTools.COLORMAP))
     				result = loadColormapElement(temp,localFilePath);
     			// colorsprite
-    			else if(temp.getName().equals(XmlTools.ELT_COLORSPRITE))
+    			else if(temp.getName().equals(XmlTools.COLORSPRITE))
     				result = loadColorspriteElement(temp);
     		}
     		else
@@ -230,7 +230,7 @@ public class ImageTools
     private static Colormap loadColormapElement(Element root, String individualFolder) throws IOException, ParserConfigurationException, SAXException
     {	// file
     	String localPath = individualFolder+File.separator;
-    	localPath = localPath + root.getAttribute(XmlTools.ATT_FILE).getValue().trim();
+    	localPath = localPath + root.getAttribute(XmlTools.FILE).getValue().trim();
     	// colormap
     	Colormap colormap = ColormapLoader.loadColormap(localPath);
     	return colormap;
@@ -238,7 +238,7 @@ public class ImageTools
     
     private static String loadColorspriteElement(Element root) throws IOException, ParserConfigurationException, SAXException
     {	// folder
-    	String colorFolder = root.getAttribute(XmlTools.ATT_FOLDER).getValue().trim();
+    	String colorFolder = root.getAttribute(XmlTools.FOLDER).getValue().trim();
     	return colorFolder;
     } 
     

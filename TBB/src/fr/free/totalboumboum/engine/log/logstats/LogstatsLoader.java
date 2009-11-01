@@ -43,34 +43,34 @@ public class LogstatsLoader
 
 	private static void loadLogstatsElement(Element root)
 	{	// regular launch
-		Element regularLaunchElement = root.getChild(XmlTools.ELT_REGULAR_LAUNCH);
+		Element regularLaunchElement = root.getChild(XmlTools.REGULAR_LAUNCH);
 		loadRegularLaunchElement(regularLaunchElement);
 		
 		// quick launch
-		Element quickLaunchElement = root.getChild(XmlTools.ELT_QUICK_LAUNCH);
+		Element quickLaunchElement = root.getChild(XmlTools.QUICK_LAUNCH);
 		loadQuickLaunchElement(quickLaunchElement);
 	}
 	
 	private static void loadRegularLaunchElement(Element root)
 	{	// count
-		String strCount = root.getAttribute(XmlTools.ATT_COUNT).getValue().trim();
+		String strCount = root.getAttribute(XmlTools.COUNT).getValue().trim();
 		int count = Integer.parseInt(strCount);
 		Logstats.setRegularLaunchCount(count);
 		
 		// time
-		String strTime = root.getAttribute(XmlTools.ATT_TIME).getValue().trim();
+		String strTime = root.getAttribute(XmlTools.TIME).getValue().trim();
 		int time = Integer.parseInt(strTime);
 		Logstats.setRegularLaunchTime(time);
 	}
 	
 	private static void loadQuickLaunchElement(Element root)
 	{	// count
-		String strCount = root.getAttribute(XmlTools.ATT_COUNT).getValue().trim();
+		String strCount = root.getAttribute(XmlTools.COUNT).getValue().trim();
 		int count = Integer.parseInt(strCount);
 		Logstats.setQuickLaunchCount(count);
 		
 		// time
-		String strTime = root.getAttribute(XmlTools.ATT_TIME).getValue().trim();
+		String strTime = root.getAttribute(XmlTools.TIME).getValue().trim();
 		int time = Integer.parseInt(strTime);
 		Logstats.setQuickLaunchTime(time);
 	}

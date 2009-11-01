@@ -65,19 +65,19 @@ public class BlocksetLoader
     		loadBlocksElement(abstractBlocksElt,folder,result,abstractItems,Type.ABSTRACT);
     	
     	// concrete blocks
-    	Element concreteBlocksElt = root.getChild(XmlTools.ELT_CONCRETE_BLOCKS);
+    	Element concreteBlocksElt = root.getChild(XmlTools.CONCRETE_BLOCKS);
 		loadBlocksElement(concreteBlocksElt,folder,result,abstractItems,Type.CONCRETE);
 	}
 
 	@SuppressWarnings("unchecked")
 	private static void loadBlocksElement(Element root, String folder, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// blocks
-		List<Element> blcksCmpnts = root.getChildren(XmlTools.ELT_BLOCK);
+		List<Element> blcksCmpnts = root.getChildren(XmlTools.BLOCK);
 		for(Element temp: blcksCmpnts)
 			loadBlockElement(temp,folder,Theme.DEFAULT_GROUP,result,abstractBlocks,type);
 
 		// groups
-		List<Element> grpsCmpnts = root.getChildren(XmlTools.ELT_GROUP);
+		List<Element> grpsCmpnts = root.getChildren(XmlTools.GROUP);
 		for(Element temp: grpsCmpnts)
 			loadGroupElement(temp,folder,result,abstractBlocks,type);
 	}
@@ -85,26 +85,26 @@ public class BlocksetLoader
     @SuppressWarnings("unchecked")
     private static void loadGroupElement(Element root, String individualFolder, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+		String name = root.getAttribute(XmlTools.NAME).getValue();
 		
 		// folder
     	String localFilePath = individualFolder;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		localFilePath = localFilePath+File.separator+attribute.getValue();
 		
 		// blocks
-		List<Element> components = root.getChildren(XmlTools.ELT_BLOCK);
+		List<Element> components = root.getChildren(XmlTools.BLOCK);
 		for(Element temp: components)
 			loadBlockElement(temp,localFilePath,name,result,abstractBlocks,type);
     }
     
     private static void loadBlockElement(Element root, String individualFolder, String groupName, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+		String name = root.getAttribute(XmlTools.NAME).getValue();
 		
 		// folder
     	String localFilePath = individualFolder;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		localFilePath = localFilePath+File.separator+attribute.getValue();
 		
 		// components

@@ -31,21 +31,21 @@ public class AiPreviewLoader
 	private static void loadAiElement(Element root, AiPreview result)
 	{	Element element; 
 		// notes
-		element = root.getChild(XmlTools.ELT_NOTES);
+		element = root.getChild(XmlTools.NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		// authors
-		element = root.getChild(XmlTools.ELT_AUTHORS);
+		element = root.getChild(XmlTools.AUTHORS);
 		loadAuthorsElement(element,result);
 	}
 	
 	@SuppressWarnings("unchecked")
 	private static void loadAuthorsElement(Element root, AiPreview result)
-	{	List<Element> authors = root.getChildren(XmlTools.ELT_AUTHOR);
+	{	List<Element> authors = root.getChildren(XmlTools.AUTHOR);
 		Iterator<Element> it = authors.iterator();
 		while(it.hasNext())
 		{	Element element = it.next();
-			String author = element.getAttributeValue(XmlTools.ATT_NAME);
+			String author = element.getAttributeValue(XmlTools.NAME);
 			result.addAuthor(author);
 		}
 	}

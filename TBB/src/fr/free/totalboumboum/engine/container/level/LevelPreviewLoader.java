@@ -111,33 +111,33 @@ public class LevelPreviewLoader
 	private static void loadLevelElement(String folder, Element root, LevelPreview result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	if(previewBasics)
 		{	// title
-			Element titleElement = root.getChild(XmlTools.ELT_TITLE);
+			Element titleElement = root.getChild(XmlTools.TITLE);
 			loadTitleElement(titleElement,result);
 			
 			// author
-			Element authorElement = root.getChild(XmlTools.ELT_AUTHOR);
+			Element authorElement = root.getChild(XmlTools.AUTHOR);
 			loadAuthorElement(authorElement,result);
 			
 			// source
-			Element sourceElement = root.getChild(XmlTools.ELT_SOURCE);
+			Element sourceElement = root.getChild(XmlTools.SOURCE);
 			loadSourceElement(sourceElement,result);
 			
 			// visible size
-			Element visibleDimensionElement = root.getChild(XmlTools.ELT_VISIBLE_DIMENSION);
+			Element visibleDimensionElement = root.getChild(XmlTools.VISIBLE_DIMENSION);
 			loadVisibleDimensionElement(visibleDimensionElement,result);
 	
 			// instance
-			Element instanceElement = root.getChild(XmlTools.ELT_INSTANCE);
+			Element instanceElement = root.getChild(XmlTools.INSTANCE);
 			loadInstanceElement(instanceElement,result);
 
 			// theme
-			Element themeElement = root.getChild(XmlTools.ELT_THEME);
+			Element themeElement = root.getChild(XmlTools.THEME);
 			loadThemeElement(themeElement,result);
 		}
 		
 		// visual preview
 		if(previewImage)
-		{	Element previewElement = root.getChild(XmlTools.ELT_PREVIEW);
+		{	Element previewElement = root.getChild(XmlTools.PREVIEW);
 			loadPreviewElement(previewElement,folder,result);
 		}
 	
@@ -166,45 +166,45 @@ public class LevelPreviewLoader
 	}
     
     private static void loadTitleElement(Element root, LevelPreview result)
-    {	String title = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+    {	String title = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		result.setTitle(title);    	
     }
 
     private static void loadAuthorElement(Element root, LevelPreview result)
-    {	String author = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+    {	String author = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		result.setAuthor(author);		   	
     }
     
     private static void loadSourceElement(Element root, LevelPreview result)
-    {	String source = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+    {	String source = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		result.setSource(source);
     }
     
 	private static void loadVisibleDimensionElement(Element root, LevelPreview result)
 	{	// height
-    	String visibleHeightStr = root.getAttribute(XmlTools.ATT_HEIGHT).getValue().trim();
+    	String visibleHeightStr = root.getAttribute(XmlTools.HEIGHT).getValue().trim();
 		int visibleHeight = Integer.parseInt(visibleHeightStr);
 		result.setVisibleHeight(visibleHeight);
 		// width
-		String visibleWidthStr = root.getAttribute(XmlTools.ATT_WIDTH).getValue().trim();
+		String visibleWidthStr = root.getAttribute(XmlTools.WIDTH).getValue().trim();
 		int visibleWidth = Integer.parseInt(visibleWidthStr);
 		result.setVisibleWidth(visibleWidth);
     }
 	
 	private static void loadPreviewElement(Element root, String folder, LevelPreview result) throws IOException
-	{	String filePath = folder+File.separator+root.getAttribute(XmlTools.ATT_FILE).getValue().trim();
+	{	String filePath = folder+File.separator+root.getAttribute(XmlTools.FILE).getValue().trim();
 		BufferedImage image = ImageTools.loadImage(filePath,null);
     	result.setVisualPreview(image);				
 	}
 	
 	private static void loadInstanceElement(Element root, LevelPreview result)
-	{	String instanceName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+	{	String instanceName = root.getAttribute(XmlTools.NAME).getValue().trim();
 		result.setInstanceName(instanceName);
 	}
 	
 	private static void loadThemeElement(Element root, LevelPreview result)
 	{	String instanceFolder = FileTools.getInstancesPath()+File.separator+result.getInstanceName();		
-		String themeName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String themeName = root.getAttribute(XmlTools.NAME).getValue().trim();
 		result.setThemeName(themeName);
 		String themeFolder = instanceFolder + File.separator + FileTools.FOLDER_THEMES;
 		@SuppressWarnings("unused")

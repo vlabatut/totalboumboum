@@ -74,37 +74,37 @@ public class RoundLoader
     	Element element;
 		
 		// notes
-		element = root.getChild(XmlTools.ELT_NOTES);
+		element = root.getChild(XmlTools.NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		
 		// author
-		element = root.getChild(XmlTools.ELT_AUTHOR);
+		element = root.getChild(XmlTools.AUTHOR);
 		if(element!=null)
-		{	String author = element.getAttributeValue(XmlTools.ATT_VALUE);
+		{	String author = element.getAttributeValue(XmlTools.VALUE);
 			result.setAuthor(author);
 		}
 		
 		// limits
-		element = root.getChild(XmlTools.ELT_LIMITS);
+		element = root.getChild(XmlTools.LIMITS);
 		Limits<RoundLimit> limits = loadLimitsElement(element,folderPath);
 		result.setLimits(limits);
 		
 		// level
-		element = root.getChild(XmlTools.ELT_LEVEL);
+		element = root.getChild(XmlTools.LEVEL);
 		loadLevelElement(element,result);
 	}		
 		
     private static void loadLevelElement(Element root, Round result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// random locations
-    	String randomLocationStr = root.getAttributeValue(XmlTools.ATT_RANDOM_LOCATION).trim();
+    	String randomLocationStr = root.getAttributeValue(XmlTools.RANDOM_LOCATION).trim();
     	boolean randomLocation = Boolean.parseBoolean(randomLocationStr);
     	result.setRandomLocation(randomLocation);
     	
     	// name
-    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+    	String name = root.getAttribute(XmlTools.NAME).getValue().trim();
     	// packname
-    	String packname = root.getAttribute(XmlTools.ATT_PACKNAME).getValue().trim();
+    	String packname = root.getAttribute(XmlTools.PACKNAME).getValue().trim();
     	// load
     	String folder = packname+File.separator+name;
     	HollowLevel hollowLevel = new HollowLevel(folder); 

@@ -48,33 +48,33 @@ public class EngineConfigurationLoader
 	private static void loadEngineElement(Element root, EngineConfiguration result)
 	{	Element element; 
 		// timing
-		element = root.getChild(XmlTools.ELT_TIMING);
+		element = root.getChild(XmlTools.TIMING);
 		loadTimingElement(element,result);
 		// logs
-		element = root.getChild(XmlTools.ELT_LOG);
+		element = root.getChild(XmlTools.LOG);
 		loadLogElement(element,result);
 	}
 	
 	private static void loadTimingElement(Element root, EngineConfiguration result)
 	{	// auto fps
-		String autoFpsStr = root.getAttribute(XmlTools.ATT_ADJUST).getValue().trim();
+		String autoFpsStr = root.getAttribute(XmlTools.ADJUST).getValue().trim();
 		boolean autoFps = Boolean.valueOf(autoFpsStr);
 		result.setAutoFps(autoFps);
 
 		// fps
-		String fpsStr = root.getAttribute(XmlTools.ATT_FPS).getValue().trim();
+		String fpsStr = root.getAttribute(XmlTools.FPS).getValue().trim();
 		int fps = Integer.valueOf(fpsStr);
 		result.setFps(fps);
 
 		// speed
-		String speedStr = root.getAttribute(XmlTools.ATT_SPEED).getValue().trim();
+		String speedStr = root.getAttribute(XmlTools.SPEED).getValue().trim();
 		float speed = Float.valueOf(speedStr);
 		result.setSpeedCoeff(speed);
 	}
 	
 	private static void loadLogElement(Element root, EngineConfiguration result)
 	{	// controls
-		String controlsStr = root.getAttribute(XmlTools.ATT_CONTROLS).getValue().trim();
+		String controlsStr = root.getAttribute(XmlTools.CONTROLS).getValue().trim();
 		boolean controls = Boolean.valueOf(controlsStr);
 		result.setLogControls(controls);
 	}

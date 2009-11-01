@@ -46,7 +46,7 @@ public class EngineConfigurationSaver
 	}
 
 	private static Element saveEngineElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlTools.ELT_ENGINE); 
+	{	Element result = new Element(XmlTools.ENGINE); 
 
 		// timing
 		Element timingElement = saveTimingElement(engineConfiguration);
@@ -60,29 +60,29 @@ public class EngineConfigurationSaver
 	}
 	
 	private static Element saveTimingElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlTools.ELT_TIMING);
+	{	Element result = new Element(XmlTools.TIMING);
 		
 		// adjust
 		String adjust = Boolean.toString(engineConfiguration.getAutoFps());
-		result.setAttribute(XmlTools.ATT_ADJUST,adjust);
+		result.setAttribute(XmlTools.ADJUST,adjust);
 		
 		// fps
 		String fps = Integer.toString(engineConfiguration.getFps());
-		result.setAttribute(XmlTools.ATT_FPS,fps);
+		result.setAttribute(XmlTools.FPS,fps);
 		
 		// speed
 		String speed = Double.toString(engineConfiguration.getSpeedCoeff());
-		result.setAttribute(XmlTools.ATT_SPEED,speed);
+		result.setAttribute(XmlTools.SPEED,speed);
 				
 		return result;
 	}
 
 	private static Element saveLogElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlTools.ELT_LOG);
+	{	Element result = new Element(XmlTools.LOG);
 		
 		// controls
 		String controls = Boolean.toString(engineConfiguration.getLogControls());
-		result.setAttribute(XmlTools.ATT_CONTROLS,controls);
+		result.setAttribute(XmlTools.CONTROLS,controls);
 				
 		return result;
 	}

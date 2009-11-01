@@ -168,34 +168,34 @@ public class HollowLevel implements Serializable
 		String content;
 		
 		// display
-		element = root.getChild(XmlTools.ELT_DISPLAY);
-		content = element.getAttribute(XmlTools.ATT_FORCE_ALL).getValue().trim();
+		element = root.getChild(XmlTools.DISPLAY);
+		content = element.getAttribute(XmlTools.FORCE_ALL).getValue().trim();
 		displayForceAll = Boolean.parseBoolean(content);
-		content = element.getAttribute(XmlTools.ATT_MAXIMIZE).getValue().trim();
+		content = element.getAttribute(XmlTools.MAXIMIZE).getValue().trim();
 		displayMaximize = Boolean.parseBoolean(content);
 		
 		// global size
-		element = root.getChild(XmlTools.ELT_GLOBAL_DIMENSION);
-		content = element.getAttribute(XmlTools.ATT_HEIGHT).getValue().trim();
+		element = root.getChild(XmlTools.GLOBAL_DIMENSION);
+		content = element.getAttribute(XmlTools.HEIGHT).getValue().trim();
 		globalHeight = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.ATT_WIDTH).getValue().trim();
+		content = element.getAttribute(XmlTools.WIDTH).getValue().trim();
 		globalWidth = Integer.parseInt(content);
 		// visible size
-		element = root.getChild(XmlTools.ELT_VISIBLE_DIMENSION);
-		content = element.getAttribute(XmlTools.ATT_HEIGHT).getValue().trim();
+		element = root.getChild(XmlTools.VISIBLE_DIMENSION);
+		content = element.getAttribute(XmlTools.HEIGHT).getValue().trim();
 		visibleHeight = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.ATT_WIDTH).getValue().trim();
+		content = element.getAttribute(XmlTools.WIDTH).getValue().trim();
 		visibleWidth = Integer.parseInt(content);
 		// visible position
-		element = root.getChild(XmlTools.ELT_VISIBLE_POSITION);
-		content = element.getAttribute(XmlTools.ATT_UPLINE).getValue().trim();
+		element = root.getChild(XmlTools.VISIBLE_POSITION);
+		content = element.getAttribute(XmlTools.UPLINE).getValue().trim();
 		visibleUpLine = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.ATT_LEFTCOL).getValue().trim();
+		content = element.getAttribute(XmlTools.LEFTCOL).getValue().trim();
 		visibleLeftCol = Integer.parseInt(content);
 		
 		// instance
-		element = root.getChild(XmlTools.ELT_INSTANCE);
-		instanceName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		element = root.getChild(XmlTools.INSTANCE);
+		instanceName = element.getAttribute(XmlTools.NAME).getValue().trim();
 		instancePath = FileTools.getInstancesPath()+File.separator+instanceName;
 
 		// players locations
@@ -211,8 +211,8 @@ public class HollowLevel implements Serializable
 		itemPath = instancePath + File.separator+FileTools.FOLDER_ITEMS;
 
 		// theme
-		element = root.getChild(XmlTools.ELT_THEME);
-		themeName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		element = root.getChild(XmlTools.THEME);
+		themeName = element.getAttribute(XmlTools.NAME).getValue().trim();
 		String themeFolder = instancePath + File.separator + FileTools.FOLDER_THEMES;
 		themePath = themeFolder + File.separator+themeName;
 

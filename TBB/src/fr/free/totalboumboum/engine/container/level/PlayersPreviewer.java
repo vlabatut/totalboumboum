@@ -73,11 +73,11 @@ public class PlayersPreviewer
     {	// init
     	Element element;
     	// locations
-    	element = root.getChild(XmlTools.ELT_LOCATIONS);
+    	element = root.getChild(XmlTools.LOCATIONS);
     	loadLocationsElement(element,result);
     	// items
     	if(!onlyAllowedPlayers)
-    	{	element = root.getChild(XmlTools.ELT_ITEMS);
+    	{	element = root.getChild(XmlTools.ITEMS);
     		loadItemsElement(element,result);
     	}
     }
@@ -85,11 +85,11 @@ public class PlayersPreviewer
     @SuppressWarnings("unchecked")
 	private static void loadLocationsElement(Element root, LevelPreview result)
     {	Set<Integer> allowedPlayersNumber = new TreeSet<Integer>();
-    	List<Element> elements = root.getChildren(XmlTools.ELT_CASE);
+    	List<Element> elements = root.getChildren(XmlTools.CASE);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			String valStr = temp.getAttribute(XmlTools.ATT_PLAYERS).getValue().trim();
+			String valStr = temp.getAttribute(XmlTools.PLAYERS).getValue().trim();
 			int value = Integer.valueOf(valStr);
 			allowedPlayersNumber.add(value);
 		}
@@ -99,12 +99,12 @@ public class PlayersPreviewer
     @SuppressWarnings("unchecked")
     private static void loadItemsElement(Element root, LevelPreview result)
     {	HashMap<String,Integer> initialItems = new HashMap<String, Integer>();
-    	List<Element> elements = root.getChildren(XmlTools.ELT_ITEM);
+    	List<Element> elements = root.getChildren(XmlTools.ITEM);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			String str = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-			String nbrStr = temp.getAttribute(XmlTools.ATT_NUMBER).getValue().trim();
+			String str = temp.getAttribute(XmlTools.NAME).getValue().trim();
+			String nbrStr = temp.getAttribute(XmlTools.NUMBER).getValue().trim();
 			int number = Integer.valueOf(nbrStr);
 			initialItems.put(str,number);
 		}

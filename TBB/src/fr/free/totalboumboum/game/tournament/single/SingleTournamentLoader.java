@@ -38,7 +38,7 @@ public class SingleTournamentLoader
 	{	SingleTournament result = new SingleTournament();
 		Element element;
 		// match
-		element = root.getChild(XmlTools.ELT_MATCH);
+		element = root.getChild(XmlTools.MATCH);
 		loadMatchElement(element,folder,result);
 		return result;
 	}

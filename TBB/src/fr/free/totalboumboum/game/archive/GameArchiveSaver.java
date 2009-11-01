@@ -50,7 +50,7 @@ public class GameArchiveSaver
 	}
 
 	private static Element saveArchiveElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlTools.ELT_ARCHIVE); 
+	{	Element result = new Element(XmlTools.ARCHIVE); 
 		
 		// tournament
 		Element tournamentElement = saveTournamentElement(gameArchive);
@@ -72,52 +72,52 @@ public class GameArchiveSaver
 	}
 
 	private static Element saveTournamentElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlTools.ELT_TOURNAMENT);
+	{	Element result = new Element(XmlTools.TOURNAMENT);
 		
 		// name
 		String name = gameArchive.getName();
-		result.setAttribute(XmlTools.ATT_NAME,name);
+		result.setAttribute(XmlTools.NAME,name);
 
 		// type
 		TournamentType type = gameArchive.getType();
 		String typeStr = type.toString();
-		result.setAttribute(XmlTools.ATT_TYPE,typeStr);
+		result.setAttribute(XmlTools.TYPE,typeStr);
 		
 		return result;
 	}
 
 	private static Element savePlayedElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlTools.ELT_PLAYED);
+	{	Element result = new Element(XmlTools.PLAYED);
 		
 		// matches
 		String matches = Integer.toString(gameArchive.getPlayedMatches());
-		result.setAttribute(XmlTools.ATT_MATCHES,matches);
+		result.setAttribute(XmlTools.MATCHES,matches);
 
 		// rounds
 		String rounds = Integer.toString(gameArchive.getPlayedRounds());
-		result.setAttribute(XmlTools.ATT_ROUNDS,rounds);
+		result.setAttribute(XmlTools.ROUNDS,rounds);
 		
 		return result;
 	}
 
 	private static Element saveDatesElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlTools.ELT_DATES);
+	{	Element result = new Element(XmlTools.DATES);
 		
 		// start
 		Date start = gameArchive.getStartDate();
 		String startStr = StringTools.dateJavaToXml(start);
-		result.setAttribute(XmlTools.ATT_START,startStr);
+		result.setAttribute(XmlTools.START,startStr);
 
 		// save
 		Date save = gameArchive.getSaveDate();
 		String saveStr = StringTools.dateJavaToXml(save);
-		result.setAttribute(XmlTools.ATT_SAVE,saveStr);
+		result.setAttribute(XmlTools.SAVE,saveStr);
 		
 		return result;
 	}
 
 	private static Element savePlayersElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlTools.ELT_PLAYERS);
+	{	Element result = new Element(XmlTools.PLAYERS);
 		ArrayList<String> players = gameArchive.getPlayers();
 		for(String player: players)
 		{	Element playerElement = savePlayerElement(player);
@@ -127,10 +127,10 @@ public class GameArchiveSaver
 	}
 	
 	private static Element savePlayerElement(String player)
-	{	Element result = new Element(XmlTools.ELT_PLAYER);
+	{	Element result = new Element(XmlTools.PLAYER);
 		
 		// name
-		result.setAttribute(XmlTools.ATT_NAME,player);
+		result.setAttribute(XmlTools.NAME,player);
 		
 		return result;
 	}

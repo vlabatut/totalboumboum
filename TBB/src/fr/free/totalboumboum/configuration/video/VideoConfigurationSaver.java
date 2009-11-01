@@ -48,7 +48,7 @@ public class VideoConfigurationSaver
 	}
 
 	private static Element saveVideoElement(VideoConfiguration videoConfiguration)
-	{	Element result = new Element(XmlTools.ELT_VIDEO); 
+	{	Element result = new Element(XmlTools.VIDEO); 
 		// full screen
 		Element fullScreenElement = saveFullScreenElement(videoConfiguration);
 		result.addContent(fullScreenElement);
@@ -66,22 +66,22 @@ public class VideoConfigurationSaver
 	}
 	
 	private static Element saveFullScreenElement(VideoConfiguration videoConfiguration)
-	{	Element result = new Element(XmlTools.ELT_FULL_SCREEN);
+	{	Element result = new Element(XmlTools.FULL_SCREEN);
 		String fullScreen = Boolean.toString(videoConfiguration.getFullScreen());
-		result.setAttribute(XmlTools.ATT_VALUE,fullScreen);
+		result.setAttribute(XmlTools.VALUE,fullScreen);
 		return result;
 	}
 	
 	private static Element saveSmoothGraphicsElement(VideoConfiguration videoConfiguration)
-	{	Element result = new Element(XmlTools.ELT_SMOOTH_GRAPHICS);
+	{	Element result = new Element(XmlTools.SMOOTH_GRAPHICS);
 		String smoothing = Boolean.toString(videoConfiguration.getSmoothGraphics());
-		result.setAttribute(XmlTools.ATT_VALUE,smoothing);
+		result.setAttribute(XmlTools.VALUE,smoothing);
 		return result;
 	}
 	
 	private static Element saveBorderElement(VideoConfiguration videoConfiguration)
 	{	// init
-		Element result = new Element(XmlTools.ELT_BORDER);
+		Element result = new Element(XmlTools.BORDER);
 		Color color = videoConfiguration.getBorderColor();
 /*		
 		// red
@@ -95,21 +95,21 @@ public class VideoConfigurationSaver
 		result.setAttribute(XmlTools.ATT_BLUE,blue);
 */
 		if(color!=null)
-			result.setAttribute(XmlTools.ATT_VALUE,"black");
+			result.setAttribute(XmlTools.VALUE,"black");
 		//
 		return result;
 	}
 
 	private static Element savePanelDimensionElement(VideoConfiguration videoConfiguration)
 	{	// init
-		Element result = new Element(XmlTools.ELT_PANEL_DIMENSION);
+		Element result = new Element(XmlTools.PANEL_DIMENSION);
 		Dimension dim = videoConfiguration.getPanelDimension();
 		// width
 		String width = Integer.toString(dim.width);
-		result.setAttribute(XmlTools.ATT_WIDTH,width);
+		result.setAttribute(XmlTools.WIDTH,width);
 		// height
 		String height = Integer.toString(dim.height);
-		result.setAttribute(XmlTools.ATT_HEIGHT,height);
+		result.setAttribute(XmlTools.HEIGHT,height);
 		//
 		return result;
 	}

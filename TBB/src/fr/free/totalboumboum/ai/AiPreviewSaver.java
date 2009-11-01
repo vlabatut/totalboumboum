@@ -60,24 +60,24 @@ public class AiPreviewSaver
 	}
 	
 	private static Element saveNotesElement(AiPreview aiPreview)
-	{	Element result = new Element(XmlTools.ELT_NOTES);
+	{	Element result = new Element(XmlTools.NOTES);
 		Iterator<String> it = aiPreview.getNotes().iterator();
 		while(it.hasNext())
 		{	String temp = it.next();
-			Element elt = new Element(XmlTools.ELT_LINE);
-			elt.setAttribute(XmlTools.ATT_VALUE,temp);
+			Element elt = new Element(XmlTools.LINE);
+			elt.setAttribute(XmlTools.VALUE,temp);
 			result.addContent(elt);
 		}
 		return result;
 	}
 	
 	private static Element saveAuthorsElement(AiPreview aiPreview)
-	{	Element result = new Element(XmlTools.ELT_AUTHORS);
+	{	Element result = new Element(XmlTools.AUTHORS);
 		Iterator<String> it = aiPreview.getAuthors().iterator();
 		while(it.hasNext())
 		{	String temp = it.next();
-			Element elt = new Element(XmlTools.ELT_AUTHOR);
-			elt.setAttribute(XmlTools.ATT_NAME,temp);
+			Element elt = new Element(XmlTools.AUTHOR);
+			elt.setAttribute(XmlTools.NAME,temp);
 			result.addContent(elt);
 		}
 		return result;

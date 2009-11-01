@@ -48,20 +48,20 @@ public class TournamentConfigurationSaver
 	}
 
 	private static Element saveGameTournamentElement(TournamentConfiguration tournamentConfiguration)
-	{	Element result = new Element(XmlTools.ELT_GAME_TOURNAMENT); 
+	{	Element result = new Element(XmlTools.GAME_TOURNAMENT); 
 		
 		// options
 		Element optionsElement = saveTournamentOptionsElement(tournamentConfiguration);
 		result.addContent(optionsElement);
 	
 		// name
-		Element tournamentElement = new Element(XmlTools.ELT_TOURNAMENT);
+		Element tournamentElement = new Element(XmlTools.TOURNAMENT);
 		String tournament = tournamentConfiguration.getTournamentName().toString();
-		tournamentElement.setAttribute(XmlTools.ATT_NAME,tournament);
+		tournamentElement.setAttribute(XmlTools.NAME,tournament);
 		result.addContent(tournamentElement);
 		
 		// players
-		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
+		Element playersElement = new Element(XmlTools.PLAYERS);
 		ProfilesSelection tournamentSelected = tournamentConfiguration.getProfilesSelection();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,tournamentSelected);
 		result.addContent(playersElement);
@@ -70,23 +70,23 @@ public class TournamentConfigurationSaver
 	}
 
 	private static Element saveTournamentOptionsElement(TournamentConfiguration tournamentConfiguration)
-	{	Element result = new Element(XmlTools.ELT_OPTIONS);
+	{	Element result = new Element(XmlTools.OPTIONS);
 		
 		// use last players
 		String useLastPlayers = Boolean.toString(tournamentConfiguration.getUseLastPlayers());
-		result.setAttribute(XmlTools.ATT_USE_LAST_PLAYERS,useLastPlayers);
+		result.setAttribute(XmlTools.USE_LAST_PLAYERS,useLastPlayers);
 
 		// use last settings
 		String useLastTournament = Boolean.toString(tournamentConfiguration.getUseLastTournament());
-		result.setAttribute(XmlTools.ATT_USE_LAST_TOURNAMENT,useLastTournament);
+		result.setAttribute(XmlTools.USE_LAST_TOURNAMENT,useLastTournament);
 
 		// auto load
 		String autoLoad = Boolean.toString(tournamentConfiguration.getAutoLoad());
-		result.setAttribute(XmlTools.ATT_AUTOLOAD,autoLoad);
+		result.setAttribute(XmlTools.AUTOLOAD,autoLoad);
 
 		// auto save
 		String autoSave = Boolean.toString(tournamentConfiguration.getAutoSave());
-		result.setAttribute(XmlTools.ATT_AUTOSAVE,autoSave);
+		result.setAttribute(XmlTools.AUTOSAVE,autoSave);
 		
 		return result;
 	}

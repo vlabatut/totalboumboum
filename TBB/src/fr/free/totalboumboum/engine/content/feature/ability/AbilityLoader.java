@@ -44,25 +44,25 @@ public class AbilityLoader
     private static AbstractAbility loadAbilityElement(Element root) throws ClassNotFoundException
     {	AbstractAbility result = null;
 		// strength
-		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim().toUpperCase(Locale.ENGLISH);
+		String strengthStr = root.getAttribute(XmlTools.STRENGTH).getValue().trim().toUpperCase(Locale.ENGLISH);
 		float strength;
 		if(strengthStr.equals(XmlTools.VAL_MAX))
 			strength = Float.MAX_VALUE; //NOTE format de données à inclure dans le XSD (>> actually I removed it)
 		else
 			strength = Float.parseFloat(strengthStr);
     	// frame
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FRAME);
+		Attribute attribute = root.getAttribute(XmlTools.FRAME);
 		boolean frame = Boolean.parseBoolean(attribute.getValue());
     	// uses
-		attribute = root.getAttribute(XmlTools.ATT_USES);
+		attribute = root.getAttribute(XmlTools.USES);
 		int uses = Integer.parseInt(attribute.getValue());
     	// time
-		attribute = root.getAttribute(XmlTools.ATT_TIME);
+		attribute = root.getAttribute(XmlTools.TIME);
 		int time = Integer.parseInt(attribute.getValue());
 		// state ?
-		Element temp = root.getChild(XmlTools.ELT_NAME);
+		Element temp = root.getChild(XmlTools.NAME);
 		if(temp!=null)
-		{	String name = temp.getAttribute(XmlTools.ATT_VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
+		{	String name = temp.getAttribute(XmlTools.VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
 			result = new StateAbility(name);
 		}
 		// or action ?

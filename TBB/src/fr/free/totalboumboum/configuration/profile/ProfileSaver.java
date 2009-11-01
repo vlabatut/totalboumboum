@@ -43,7 +43,7 @@ public class ProfileSaver
 	}
 
 	private static Element saveProfileElement(Profile profile)
-	{	Element result = new Element(XmlTools.ELT_PROFILE);
+	{	Element result = new Element(XmlTools.PROFILE);
 		
 		// general properties
 		Element generalElement = saveGeneralElement(profile);
@@ -63,9 +63,9 @@ public class ProfileSaver
 	}
 	
 	private static Element saveGeneralElement(Profile profile)
-	{	Element result = new Element(XmlTools.ELT_GENERAL);
+	{	Element result = new Element(XmlTools.GENERAL);
 		String name = profile.getName();
-		result.setAttribute(XmlTools.ATT_NAME,name);
+		result.setAttribute(XmlTools.NAME,name);
 		return result;
 	}
 
@@ -73,25 +73,25 @@ public class ProfileSaver
 	{	Element result = new Element(XmlTools.AI);
 		// name
 		String name = profile.getAiName();
-		result.setAttribute(XmlTools.ATT_NAME,name);
+		result.setAttribute(XmlTools.NAME,name);
 		// pack
 		String packname = profile.getAiPackname();
-		result.setAttribute(XmlTools.ATT_PACK,packname);
+		result.setAttribute(XmlTools.PACK,packname);
 		//
 		return result;
 	}
 	
 	private static Element saveCharacterElement(Profile profile)
-	{	Element result = new Element(XmlTools.ELT_CHARACTER);
+	{	Element result = new Element(XmlTools.CHARACTER);
 		// name
 		String name = profile.getSpriteFolder();
-		result.setAttribute(XmlTools.ATT_NAME,name);
+		result.setAttribute(XmlTools.NAME,name);
 		// pack
 		String packname = profile.getSpritePack();
-		result.setAttribute(XmlTools.ATT_PACKNAME,packname);
+		result.setAttribute(XmlTools.PACKNAME,packname);
 		// colors
 		String defaultColor = profile.getDefaultSprite().getColor().toString();
-		result.setAttribute(XmlTools.ATT_COLOR,defaultColor);
+		result.setAttribute(XmlTools.COLOR,defaultColor);
 		//
 		return result;
 	}

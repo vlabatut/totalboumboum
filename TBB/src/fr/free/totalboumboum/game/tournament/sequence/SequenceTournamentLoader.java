@@ -44,12 +44,12 @@ public class SequenceTournamentLoader
 		Element element;
 		
 		// limits
-		element = root.getChild(XmlTools.ELT_LIMITS);
+		element = root.getChild(XmlTools.LIMITS);
 		Limits<TournamentLimit> limits = loadLimitsElement(element,folder);
 		result.setLimits(limits);
 		
 		// matches
-		element = root.getChild(XmlTools.ELT_MATCHES);
+		element = root.getChild(XmlTools.MATCHES);
 		loadMatchesElement(element,folder,result);
 		return result;
 	}
@@ -57,11 +57,11 @@ public class SequenceTournamentLoader
 	@SuppressWarnings("unchecked")
 	private static void loadMatchesElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// matches order
-    	String str = root.getAttribute(XmlTools.ATT_RANDOM_ORDER).getValue().trim();
+    	String str = root.getAttribute(XmlTools.RANDOM_ORDER).getValue().trim();
     	boolean randomOrder = Boolean.valueOf(str);
     	result.setRandomizeMatches(randomOrder);
     	// matches
-    	List<Element> matches = root.getChildren(XmlTools.ELT_MATCH);
+    	List<Element> matches = root.getChildren(XmlTools.MATCH);
 		Iterator<Element> i = matches.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();

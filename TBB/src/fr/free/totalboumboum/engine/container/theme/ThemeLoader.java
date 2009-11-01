@@ -77,25 +77,25 @@ public class ThemeLoader
     
 	private static void loadGeneralElement(Element root, Theme result)
 	{	// name
-		Element nameElt = root.getChild(XmlTools.ELT_GENERAL);
-		String name = nameElt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		Element nameElt = root.getChild(XmlTools.GENERAL);
+		String name = nameElt.getAttribute(XmlTools.NAME).getValue().trim();
 		result.setName(name);
 		
 		// version
-		Element versionElt = root.getChild(XmlTools.ELT_GENERAL);
-		String version = versionElt.getAttribute(XmlTools.ATT_VERSION).getValue().trim();
+		Element versionElt = root.getChild(XmlTools.GENERAL);
+		String version = versionElt.getAttribute(XmlTools.VERSION).getValue().trim();
 		result.setVersion(version);
 	}
 	
 	private static void loadAuthorElement(Element root, Theme result)
-	{	Element elt = root.getChild(XmlTools.ELT_AUTHOR);
-		String name = elt.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+	{	Element elt = root.getChild(XmlTools.AUTHOR);
+		String name = elt.getAttribute(XmlTools.VALUE).getValue().trim();
 		result.setAuthor(name);		
 	}
 	
 	private static void loadSourceElement(Element root, Theme result)
-	{	Element elt = root.getChild(XmlTools.ELT_SOURCE);
-		String name = elt.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+	{	Element elt = root.getChild(XmlTools.SOURCE);
+		String name = elt.getAttribute(XmlTools.VALUE).getValue().trim();
 		result.setSource(name);		
 	}
     

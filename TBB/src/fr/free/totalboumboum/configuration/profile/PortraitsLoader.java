@@ -63,7 +63,7 @@ public class PortraitsLoader
     	Colormap colormap = null;
     	String colorFolder = null;
 		Object obj;
-		Element elt = root.getChild(XmlTools.ELT_COLORS);;
+		Element elt = root.getChild(XmlTools.COLORS);;
 		if(elt!=null && color!=null)
 		{	obj = ImageTools.loadColorsElement(elt,localFilePath,color);
 			if(obj instanceof Colormap)
@@ -75,11 +75,11 @@ public class PortraitsLoader
 			localFilePath = localFilePath+File.separator + colorFolder;
 		
 		// ingame
-		Element ingame = root.getChild(XmlTools.ELT_INGAME);
+		Element ingame = root.getChild(XmlTools.INGAME);
 		loadIngameElement(ingame,localFilePath,colormap,result);
 		
 		// outgame
-		Element outgame = root.getChild(XmlTools.ELT_OUTGAME);
+		Element outgame = root.getChild(XmlTools.OUTGAME);
 		loadOutgameElement(outgame,localFilePath,colormap,result);
 	}
 	
@@ -87,18 +87,18 @@ public class PortraitsLoader
 	private static void loadIngameElement(Element root, String folderPath, Colormap colormap, Portraits result) throws IOException, ParserConfigurationException, SAXException
 	{	// folder
 		String folder = folderPath;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		if(attribute!=null)
 		{	String f = attribute.getValue().trim();
 			folder = folder + File.separator + f;			
 		}
 		// portraits
-		List<Element> elements = root.getChildren(XmlTools.ELT_PORTRAIT);
+		List<Element> elements = root.getChildren(XmlTools.PORTRAIT);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
-			String file = temp.getAttribute(XmlTools.ATT_FILE).getValue().trim();
+			String name = temp.getAttribute(XmlTools.NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
+			String file = temp.getAttribute(XmlTools.FILE).getValue().trim();
 			String imagePath = folder + File.separator + file;
 			BufferedImage image = ImageTools.loadImage(imagePath,colormap);
 			result.addIngamePortrait(name, image);
@@ -109,18 +109,18 @@ public class PortraitsLoader
 	private static void loadOutgameElement(Element root, String folderPath, Colormap colormap, Portraits result) throws IOException, ParserConfigurationException, SAXException
 	{	// folder
 		String folder = folderPath;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		if(attribute!=null)
 		{	String f = attribute.getValue().trim();
 			folder = folder + File.separator + f;			
 		}
 		// portraits
-		List<Element> elements = root.getChildren(XmlTools.ELT_PORTRAIT);
+		List<Element> elements = root.getChildren(XmlTools.PORTRAIT);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
-			String file = temp.getAttribute(XmlTools.ATT_FILE).getValue().trim();
+			String name = temp.getAttribute(XmlTools.NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
+			String file = temp.getAttribute(XmlTools.FILE).getValue().trim();
 			String imagePath = folder + File.separator + file;
 			BufferedImage image = ImageTools.loadImage(imagePath,colormap);
 			result.addOutgamePortrait(name,image);

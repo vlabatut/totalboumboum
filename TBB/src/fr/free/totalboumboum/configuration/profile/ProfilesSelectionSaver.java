@@ -36,25 +36,25 @@ public class ProfilesSelectionSaver
 	}
 	
 	private static Element savePlayerElement(int index, ProfilesSelection profilesSelection)
-	{	Element result = new Element(XmlTools.ELT_PLAYER);
+	{	Element result = new Element(XmlTools.PLAYER);
 		
 		// file name
 		int id = profilesSelection.getIds(index);
 		String idStr = Integer.toString(id);
-		result.setAttribute(XmlTools.ATT_FILE,idStr);
+		result.setAttribute(XmlTools.FILE,idStr);
 		
 		// color
 		String color = profilesSelection.getColor(index).toString();
-		result.setAttribute(XmlTools.ATT_COLOR,color);
+		result.setAttribute(XmlTools.COLOR,color);
 		
 		// controls
 		String controlsIndex = Integer.toString(profilesSelection.getControlsIndex(index));
-		result.setAttribute(XmlTools.ATT_CONTROLS,controlsIndex);
+		result.setAttribute(XmlTools.CONTROLS,controlsIndex);
 		
 		// sprite
 		String hero[] = profilesSelection.getHero(index);
-		result.setAttribute(XmlTools.ATT_SPRITE_PACK,hero[0]);
-		result.setAttribute(XmlTools.ATT_SPRITE_FOLDER,hero[1]);
+		result.setAttribute(XmlTools.SPRITE_PACK,hero[0]);
+		result.setAttribute(XmlTools.SPRITE_FOLDER,hero[1]);
 		
 		return result;
 	}

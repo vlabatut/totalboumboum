@@ -69,16 +69,16 @@ public abstract class SpriteFactoryLoader
 	// GENERAL ELEMENT LOADING		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected static <T extends Sprite, U extends SpriteFactory<T>> void loadGeneralElement(Element root, SpriteFactory<T> result, HashMap<String,U> abstractSprites)
-	{	Element elt = root.getChild(XmlTools.ELT_GENERAL);
+	{	Element elt = root.getChild(XmlTools.GENERAL);
 		
 		// name
-		String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String name = elt.getAttribute(XmlTools.NAME).getValue().trim();
 		result.setName(name);
 //if(name==null)
 //	System.out.println();
 
 		// base
-		String baseStr = elt.getAttributeValue(XmlTools.ATT_BASE);
+		String baseStr = elt.getAttributeValue(XmlTools.BASE);
 		result.setBase(baseStr);
 		
 		// init
@@ -105,10 +105,10 @@ public abstract class SpriteFactoryLoader
 	}
 	
 	protected static <T extends Sprite> void loadGeneralElement(Element root, SpriteFactory<T> result, SpriteFactory<T> base)
-	{	Element elt = root.getChild(XmlTools.ELT_GENERAL);
+	{	Element elt = root.getChild(XmlTools.GENERAL);
 	
 		// name
-		String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String name = elt.getAttribute(XmlTools.NAME).getValue().trim();
 		result.setName(name);
 		
 		loadGeneralElement(result,base);
@@ -268,9 +268,9 @@ public abstract class SpriteFactoryLoader
 	/////////////////////////////////////////////////////////////////
 	protected static <T extends Sprite> Explosion loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Explosion explosion = null;
-		Element elt = root.getChild(XmlTools.ELT_EXPLOSION);
+		Element elt = root.getChild(XmlTools.EXPLOSION);
 		if(elt!=null)
-		{	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		{	String name = elt.getAttribute(XmlTools.NAME).getValue().trim();
 			String folder = RoundVariables.instancePath+File.separator+FileTools.FOLDER_EXPLOSIONS;
 			folder = folder + File.separator+name;
 			explosion = ExplosionLoader.loadExplosion(folder);

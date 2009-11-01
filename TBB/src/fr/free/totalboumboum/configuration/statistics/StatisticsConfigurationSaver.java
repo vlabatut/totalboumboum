@@ -46,7 +46,7 @@ public class StatisticsConfigurationSaver
 	}
 
 	private static Element saveStatisticsElement(StatisticsConfiguration statisticsConfiguration)
-	{	Element result = new Element(XmlTools.ELT_STATISTICS); 
+	{	Element result = new Element(XmlTools.STATISTICS); 
 		
 		// include quick starts
 		Element includeQuickStartsElement = saveIncludeQuickStartsElement(statisticsConfiguration);
@@ -64,37 +64,37 @@ public class StatisticsConfigurationSaver
 	}
 	
 	private static Element saveIncludeQuickStartsElement(StatisticsConfiguration statisticsConfiguration)
-	{	Element result = new Element(XmlTools.ELT_INCLUDE_QUICKSTARTS);
+	{	Element result = new Element(XmlTools.INCLUDE_QUICKSTARTS);
 		String includeQuickStart = Boolean.toString(statisticsConfiguration.getIncludeQuickStarts());
-		result.setAttribute(XmlTools.ATT_VALUE,includeQuickStart);
+		result.setAttribute(XmlTools.VALUE,includeQuickStart);
 		return result;
 	}
 
 	private static Element saveIncludeSimulationsElement(StatisticsConfiguration statisticsConfiguration)
-	{	Element result = new Element(XmlTools.ELT_INCLUDE_SIMULATIONS);
+	{	Element result = new Element(XmlTools.INCLUDE_SIMULATIONS);
 		String includeSimulations = Boolean.toString(statisticsConfiguration.getIncludeSimulations());
-		result.setAttribute(XmlTools.ATT_VALUE,includeSimulations);
+		result.setAttribute(XmlTools.VALUE,includeSimulations);
 		return result;
 	}
 	
 	private static Element saveGlicko2Element(StatisticsConfiguration statisticsConfiguration)
-	{	Element result = new Element(XmlTools.ELT_GLICKO2);
+	{	Element result = new Element(XmlTools.GLICKO2);
 		
 		// default rating
 		String defaultRating = Integer.toString(statisticsConfiguration.getDefaultRating());
-		result.setAttribute(XmlTools.ATT_DEFAULT_RATING,defaultRating);
+		result.setAttribute(XmlTools.DEFAULT_RATING,defaultRating);
 		
 		// default rating deviation
 		String defaultRatingDeviation = Integer.toString(statisticsConfiguration.getDefaultRatingDeviation());
-		result.setAttribute(XmlTools.ATT_DEFAULT_RATING_DEVIATION,defaultRatingDeviation);
+		result.setAttribute(XmlTools.DEFAULT_RATING_DEVIATION,defaultRatingDeviation);
 		
 		// default rating volatility
 		String defaultRatingVolatility = Float.toString(statisticsConfiguration.getDefaultRatingVolatility());
-		result.setAttribute(XmlTools.ATT_DEFAULT_RATING_VOLATILITY,defaultRatingVolatility);
+		result.setAttribute(XmlTools.DEFAULT_RATING_VOLATILITY,defaultRatingVolatility);
 		
 		// games per period
 		String gamesPerPeriod = Integer.toString(statisticsConfiguration.getGamesPerPeriod());
-		result.setAttribute(XmlTools.ATT_GAMES_PER_PERIOD,gamesPerPeriod);
+		result.setAttribute(XmlTools.GAMES_PER_PERIOD,gamesPerPeriod);
 		
 		return result;
 	}

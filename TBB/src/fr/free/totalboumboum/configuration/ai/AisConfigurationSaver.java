@@ -61,28 +61,28 @@ public class AisConfigurationSaver
 	}
 	
 	private static Element saveUpsElement(AisConfiguration aisConfiguration)
-	{	Element result = new Element(XmlTools.ELT_UPS);
+	{	Element result = new Element(XmlTools.UPS);
 		String ups = Integer.toString(aisConfiguration.getAiUps());
-		result.setAttribute(XmlTools.ATT_VALUE,ups);
+		result.setAttribute(XmlTools.VALUE,ups);
 		return result;
 	}
 
 	private static Element saveAutoAdvanceElement(AisConfiguration aisConfiguration)
-	{	Element result = new Element(XmlTools.ELT_AUTO_ADVANCE);
+	{	Element result = new Element(XmlTools.AUTO_ADVANCE);
 		// switch
 		String autoAdvance = Boolean.toString(aisConfiguration.getAutoAdvance());
-		result.setAttribute(XmlTools.ATT_VALUE,autoAdvance);
+		result.setAttribute(XmlTools.VALUE,autoAdvance);
 		// delay
 		String autoAdvanceDelay = Long.toString(aisConfiguration.getAutoAdvanceDelay());
-		result.setAttribute(XmlTools.ATT_DELAY,autoAdvanceDelay);
+		result.setAttribute(XmlTools.DELAY,autoAdvanceDelay);
 		//
 		return result;
 	}
 	
 	private static Element saveHideAllAisElement(AisConfiguration aisConfiguration)
-	{	Element result = new Element(XmlTools.ELT_HIDE_ALLAIS);
+	{	Element result = new Element(XmlTools.HIDE_ALLAIS);
 		String hideAllAis = Boolean.toString(aisConfiguration.getHideAllAis());
-		result.setAttribute(XmlTools.ATT_VALUE,hideAllAis);
+		result.setAttribute(XmlTools.VALUE,hideAllAis);
 		return result;
 	}
 }

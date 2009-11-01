@@ -71,10 +71,10 @@ public class PlayersLoader
     	Players result = new Players();
     	Element element;
     	// locations
-    	element = root.getChild(XmlTools.ELT_LOCATIONS);
+    	element = root.getChild(XmlTools.LOCATIONS);
     	loadLocationsElement(element,result);
     	// items
-    	element = root.getChild(XmlTools.ELT_ITEMS);
+    	element = root.getChild(XmlTools.ITEMS);
     	loadItemsElement(element,result);
     	// result
     	return result;
@@ -82,7 +82,7 @@ public class PlayersLoader
     
     @SuppressWarnings("unchecked")
 	private static void loadLocationsElement(Element root, Players result)
-    {	List<Element> elements = root.getChildren(XmlTools.ELT_CASE);
+    {	List<Element> elements = root.getChildren(XmlTools.CASE);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -92,10 +92,10 @@ public class PlayersLoader
     
     @SuppressWarnings("unchecked")
     private static void loadCaseElement(Element root, Players result)
-    {	String valStr = root.getAttribute(XmlTools.ATT_PLAYERS).getValue().trim();
+    {	String valStr = root.getAttribute(XmlTools.PLAYERS).getValue().trim();
 		int value = Integer.valueOf(valStr);
 		PlayerLocation[] locations = new PlayerLocation[value];
-		List<Element> elements = root.getChildren(XmlTools.ELT_LOCATION);
+		List<Element> elements = root.getChildren(XmlTools.LOCATION);
 		Iterator<Element> i = elements.iterator();
 		int index = 0;
 		while(i.hasNext())
@@ -109,20 +109,20 @@ public class PlayersLoader
     }
     	
     private static void loadLocationElement(Element root, PlayerLocation result)
-    {	String str = root.getAttribute(XmlTools.ATT_PLAYER).getValue().trim();
+    {	String str = root.getAttribute(XmlTools.PLAYER).getValue().trim();
 		int number = Integer.valueOf(str);
 		result.setNumber(number);
-		str = root.getAttribute(XmlTools.ATT_COL).getValue().trim();
+		str = root.getAttribute(XmlTools.COL).getValue().trim();
 		int col = Integer.valueOf(str);
 		result.setCol(col);
-		str = root.getAttribute(XmlTools.ATT_LINE).getValue().trim();
+		str = root.getAttribute(XmlTools.LINE).getValue().trim();
 		int line = Integer.valueOf(str);
 		result.setLine(line);
     }
     
     @SuppressWarnings("unchecked")
     private static void loadItemsElement(Element root, Players result)
-    {	List<Element> elements = root.getChildren(XmlTools.ELT_ITEM);
+    {	List<Element> elements = root.getChildren(XmlTools.ITEM);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -131,8 +131,8 @@ public class PlayersLoader
     }
     
     private static void loadItemElement(Element root, Players result)
-    {	String str = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-    	String nbrStr = root.getAttribute(XmlTools.ATT_NUMBER).getValue().trim();
+    {	String str = root.getAttribute(XmlTools.NAME).getValue().trim();
+    	String nbrStr = root.getAttribute(XmlTools.NUMBER).getValue().trim();
     	int number = Integer.valueOf(nbrStr);
     	for(int i=0;i<number;i++)
     		result.addInitialItem(str);

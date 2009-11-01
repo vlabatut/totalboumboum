@@ -71,24 +71,24 @@ public class MatchLoader
     	Element element;
 		
 		// notes
-		element = root.getChild(XmlTools.ELT_NOTES);
+		element = root.getChild(XmlTools.NOTES);
 		ArrayList<String> notes = loadNotesElement(element);
 		result.setNotes(notes);
 		
 		// author
-		element = root.getChild(XmlTools.ELT_AUTHOR);
+		element = root.getChild(XmlTools.AUTHOR);
 		if(element!=null)
-		{	String author = element.getAttributeValue(XmlTools.ATT_VALUE);
+		{	String author = element.getAttributeValue(XmlTools.VALUE);
 			result.setAuthor(author);
 		}
 		
 		// limits
-		element = root.getChild(XmlTools.ELT_LIMITS);
+		element = root.getChild(XmlTools.LIMITS);
 		Limits<MatchLimit> limits = loadLimitsElement(element,folderPath);
 		result.setLimits(limits);
 		
 		// rounds
-		element = root.getChild(XmlTools.ELT_ROUNDS);
+		element = root.getChild(XmlTools.ROUNDS);
 		loadRoundsElement(element,folderPath,result);
 	}		
 		
@@ -96,11 +96,11 @@ public class MatchLoader
 	public static ArrayList<String> loadNotesElement(Element root)
     {	ArrayList<String> result = new ArrayList<String>();
     	if(root!=null)
-    	{	List<Element> lines = root.getChildren(XmlTools.ELT_LINE);
+    	{	List<Element> lines = root.getChildren(XmlTools.LINE);
 	    	Iterator<Element> i = lines.iterator();
 	    	while(i.hasNext())
 	    	{	Element temp = i.next();
-	    		String line = temp.getAttributeValue(XmlTools.ATT_VALUE).trim();
+	    		String line = temp.getAttributeValue(XmlTools.VALUE).trim();
 	    		result.add(line);
 	    	}
     	}
@@ -110,11 +110,11 @@ public class MatchLoader
     @SuppressWarnings("unchecked")
 	private static void loadRoundsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// rounds order
-    	String str = root.getAttribute(XmlTools.ATT_RANDOM_ORDER).getValue().trim();
+    	String str = root.getAttribute(XmlTools.RANDOM_ORDER).getValue().trim();
     	boolean randomOrder = Boolean.valueOf(str);
     	result.setRandomOrder(randomOrder);
     	// rounds
-		List<Element> elements = root.getChildren(XmlTools.ELT_ROUND);
+		List<Element> elements = root.getChildren(XmlTools.ROUND);
     	Iterator<Element> i = elements.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
@@ -125,10 +125,10 @@ public class MatchLoader
     private static void loadRoundElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Round round;
 		// local
-		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
+		String localStr = root.getAttribute(XmlTools.LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
 		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+		String name = root.getAttribute(XmlTools.NAME).getValue();
 		// loading
 		if(local)
 		{	folder = folder+File.separator+name;

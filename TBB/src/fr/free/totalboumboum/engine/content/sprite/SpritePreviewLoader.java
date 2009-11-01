@@ -73,8 +73,8 @@ public class SpritePreviewLoader
 
 	private static SpritePreview loadSpriteElement(Element root, String folder, HashMap<String,SpritePreview> abstractPreviews) throws IOException, ParserConfigurationException, SAXException
 	{	// init
-		Element elt = root.getChild(XmlTools.ELT_GENERAL);
-		String baseStr = elt.getAttributeValue(XmlTools.ATT_BASE);
+		Element elt = root.getChild(XmlTools.GENERAL);
+		String baseStr = elt.getAttributeValue(XmlTools.BASE);
 		SpritePreview result = abstractPreviews.get(baseStr);
 		if(result==null)
 			result = new SpritePreview();
@@ -94,24 +94,24 @@ public class SpritePreviewLoader
 	}
 	
 	private static void loadNameElement(Element root, SpritePreview result)
-	{	Element elt = root.getChild(XmlTools.ELT_GENERAL);
-		String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+	{	Element elt = root.getChild(XmlTools.GENERAL);
+		String name = elt.getAttribute(XmlTools.NAME).getValue().trim();
 		result.setName(name);		
 	}
 	
 	private static void loadAuthorElement(Element root, SpritePreview result)
-	{	Element elt = root.getChild(XmlTools.ELT_AUTHOR);
+	{	Element elt = root.getChild(XmlTools.AUTHOR);
 		String name = null; 
 		if(elt!=null)
-			name = elt.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+			name = elt.getAttribute(XmlTools.VALUE).getValue().trim();
 		result.setAuthor(name);		
 	}
 	
 	private static void loadSourceElement(Element root, SpritePreview result)
-	{	Element elt = root.getChild(XmlTools.ELT_SOURCE);
+	{	Element elt = root.getChild(XmlTools.SOURCE);
 		String name = null; 
 		if(elt!=null)
-			name = elt.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+			name = elt.getAttribute(XmlTools.VALUE).getValue().trim();
 		result.setSource(name);		
 	}
 	
@@ -127,8 +127,8 @@ public class SpritePreviewLoader
 			
 			// init
 	    	GestureName defaultGesture = GestureName.STANDING;
-	    	Element gesturesElement = root.getChild(XmlTools.ELT_GESTURES);
-	    	Attribute gesturesFolderAtt = gesturesElement.getAttribute(XmlTools.ATT_FOLDER);
+	    	Element gesturesElement = root.getChild(XmlTools.GESTURES);
+	    	Attribute gesturesFolderAtt = gesturesElement.getAttribute(XmlTools.FOLDER);
 	    	String gesturesFolder = "";
 	    	String gestureFolder = "";
 	    	String directionFolder = "";
@@ -137,20 +137,20 @@ public class SpritePreviewLoader
 	    		gesturesFolder = File.separator+gesturesFolderAtt.getValue();
 	    	
 	    	// look for the gesture
-    		List<Element> gestureList = gesturesElement.getChildren(XmlTools.ELT_GESTURE);
+    		List<Element> gestureList = gesturesElement.getChildren(XmlTools.GESTURE);
 	    	Iterator<Element> it = gestureList.iterator();
 	    	boolean found = false;
 	    	while(it.hasNext() && !found)
 	    	{	Element gestureElt = it.next();
-	    		String name = gestureElt.getAttributeValue(XmlTools.ATT_NAME);
+	    		String name = gestureElt.getAttributeValue(XmlTools.NAME);
 	    		if(name.equalsIgnoreCase(defaultGesture.toString()))
 	    		{	found = true;
-    				Attribute f = gestureElt.getAttribute(XmlTools.ATT_FOLDER);
+    				Attribute f = gestureElt.getAttribute(XmlTools.FOLDER);
     				if(f!=null)
     					gestureFolder = File.separator+f.getValue();
     				
     				// look for the direction
-	    			List<Element> directionList = gestureElt.getChildren(XmlTools.ELT_DIRECTION);
+	    			List<Element> directionList = gestureElt.getChildren(XmlTools.DIRECTION);
 	    			String defaultDirection;
 	    			if(directionList.size()==1)
 	    				defaultDirection = Direction.NONE.toString();
@@ -160,16 +160,16 @@ public class SpritePreviewLoader
 	    			boolean found2 = false;
 	    			while(it2.hasNext() && !found2)
 	    			{	Element directionElt = it2.next();
-	    				String name2 = directionElt.getAttributeValue(XmlTools.ATT_NAME);
+	    				String name2 = directionElt.getAttributeValue(XmlTools.NAME);
 	    				if(name2.equalsIgnoreCase(defaultDirection))
 	    				{	found2 = true;
-		    				Attribute fold = directionElt.getAttribute(XmlTools.ATT_FOLDER);
+		    				Attribute fold = directionElt.getAttribute(XmlTools.FOLDER);
 		    				if(fold!=null)
 		    					directionFolder = File.separator+fold.getValue();
 		    				// take the first step
-		    				List<Element> stepList = directionElt.getChildren(XmlTools.ELT_STEP);
+		    				List<Element> stepList = directionElt.getChildren(XmlTools.STEP);
 		    				Element stepElt = stepList.get(0);
-			    			stepFile = stepElt.getAttributeValue(XmlTools.ATT_FILE);
+			    			stepFile = stepElt.getAttributeValue(XmlTools.FILE);
 	    				}
 	    			}
 	    		}
@@ -182,14 +182,14 @@ public class SpritePreviewLoader
 				result.setImage(null,image);			
 				
 				// get the colors
-				Element elt = root.getChild(XmlTools.ELT_COLORS);
+				Element elt = root.getChild(XmlTools.COLORS);
 				if(elt!=null)
 				{	List<Element> clrs = elt.getChildren();
 					Iterator<Element> iter = clrs.iterator();
 			    	while(iter.hasNext())
 			    	{	BufferedImage img;
 			    		Element temp = iter.next();
-			    		String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+			    		String name = temp.getAttribute(XmlTools.NAME).getValue().trim();
 			    		name = name.toUpperCase(Locale.ENGLISH);
 			    		PredefinedColor color = PredefinedColor.valueOf(name);
 			    		Object obj = ImageTools.loadColorsElement(elt,folderPath,color);

@@ -91,7 +91,7 @@ public class ProfileLoader
 	
 	private static void loadProfileElement(Element root, Profile result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// general properties
-    	Element general = root.getChild(XmlTools.ELT_GENERAL);
+    	Element general = root.getChild(XmlTools.GENERAL);
 		loadGeneralElement(general,result);
 		
 		// artificial intelligence
@@ -100,33 +100,33 @@ public class ProfileLoader
 			loadAiElement(ai,result);
 		
 		// sprite info
-		Element character = root.getChild(XmlTools.ELT_CHARACTER);
+		Element character = root.getChild(XmlTools.CHARACTER);
 		loadSpriteElement(character,result);
 	}
     
     private static void loadGeneralElement(Element root, Profile result)
     {	// name
-    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+    	String name = root.getAttribute(XmlTools.NAME).getValue();
     	result.setName(name);
     }
     
     private static void loadAiElement(Element root, Profile result)
     {	// name
-    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+    	String name = root.getAttribute(XmlTools.NAME).getValue();
     	result.setAiName(name.trim());
     	
     	// pack
-    	String packname = root.getAttribute(XmlTools.ATT_PACK).getValue();
+    	String packname = root.getAttribute(XmlTools.PACK).getValue();
     	result.setAiPackname(packname.trim());
     }
     
     private static void loadSpriteElement(Element root, Profile result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// packname
-    	String spritePackname = root.getAttribute(XmlTools.ATT_PACKNAME).getValue();
+    	String spritePackname = root.getAttribute(XmlTools.PACKNAME).getValue();
     	result.getDefaultSprite().setPack(spritePackname);
     	
     	// folder
-    	String spriteFolder = root.getAttribute(XmlTools.ATT_NAME).getValue();
+    	String spriteFolder = root.getAttribute(XmlTools.NAME).getValue();
     	result.getDefaultSprite().setFolder(spriteFolder);
     	
     	// name
@@ -136,7 +136,7 @@ public class ProfileLoader
 		result.getDefaultSprite().setName(spriteName);
     	
 		// color
-		String spriteDefaultColorStr = root.getAttribute(XmlTools.ATT_COLOR).getValue().trim().toUpperCase(Locale.ENGLISH);
+		String spriteDefaultColorStr = root.getAttribute(XmlTools.COLOR).getValue().trim().toUpperCase(Locale.ENGLISH);
     	PredefinedColor spriteDefaultColor = PredefinedColor.valueOf(spriteDefaultColorStr);
     	result.getDefaultSprite().setColor(spriteDefaultColor);
 		

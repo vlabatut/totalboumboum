@@ -50,21 +50,21 @@ public class ColormapLoader
     @SuppressWarnings("unchecked")
 	private static void loadColorsElement(Element root, Colormap colormap) throws IOException
     {	// colors
-    	List<Element> colorsList = root.getChildren(XmlTools.ELT_COLOR);
+    	List<Element> colorsList = root.getChildren(XmlTools.COLOR);
 		for(int i=0;i<colorsList.size();i++)
 			loadColorElement(colorsList.get(i),colormap);    	
     }
 	
     private static void loadColorElement(Element root, Colormap colormap) throws IOException
     {	// index
-		int index = Integer.parseInt(root.getAttribute(XmlTools.ATT_INDEX).getValue());
+		int index = Integer.parseInt(root.getAttribute(XmlTools.INDEX).getValue());
 		// RGB
 		byte colors[] = new byte[3];
-		colors[0] = (byte)Integer.parseInt(root.getAttribute(XmlTools.ATT_RED).getValue());
+		colors[0] = (byte)Integer.parseInt(root.getAttribute(XmlTools.RED).getValue());
 		// green
-		colors[1] = (byte)Integer.parseInt(root.getAttribute(XmlTools.ATT_GREEN).getValue());
+		colors[1] = (byte)Integer.parseInt(root.getAttribute(XmlTools.GREEN).getValue());
 		// blue
-		colors[2] = (byte)Integer.parseInt(root.getAttribute(XmlTools.ATT_BLUE).getValue());
+		colors[2] = (byte)Integer.parseInt(root.getAttribute(XmlTools.BLUE).getValue());
 		// colormap
 		colormap.put(index,colors);
     }

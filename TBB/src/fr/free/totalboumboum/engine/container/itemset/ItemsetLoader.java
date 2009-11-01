@@ -72,7 +72,7 @@ public class ItemsetLoader
     		loadItemsElement(abstractItemsElt,folder,result,abstractItems,Type.ABSTRACT);
     	
     	// concrete items
-    	Element concreteItemsElt = root.getChild(XmlTools.ELT_CONCRETE_ITEMS);
+    	Element concreteItemsElt = root.getChild(XmlTools.CONCRETE_ITEMS);
 		loadItemsElement(concreteItemsElt,folder,result,abstractItems,Type.CONCRETE);
 		
 		return result;
@@ -81,7 +81,7 @@ public class ItemsetLoader
 	@SuppressWarnings("unchecked")
 	private static void loadItemsElement(Element root, String folder, Itemset result, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
-    	List<Element> items = root.getChildren(XmlTools.ELT_ITEM);
+    	List<Element> items = root.getChildren(XmlTools.ITEM);
 		for(Element temp: items)
     		loadItemElement(temp,individualFolder,result,abstractItems,type);
 	}
@@ -89,11 +89,11 @@ public class ItemsetLoader
 	@SuppressWarnings("unchecked")
 	private static void loadItemElement(Element root, String folder, Itemset result, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// abilities
@@ -126,7 +126,7 @@ public class ItemsetLoader
 		abilities.add(list);
 		
 		// probabilities
-		String probaStr = root.getAttributeValue(XmlTools.ATT_PROBA).trim();
+		String probaStr = root.getAttributeValue(XmlTools.PROBA).trim();
 		float proba = Float.parseFloat(probaStr);
 		probabilities.add(proba);
 	}
