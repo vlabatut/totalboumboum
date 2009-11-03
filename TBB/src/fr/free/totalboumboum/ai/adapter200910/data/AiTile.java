@@ -85,7 +85,7 @@ public class AiTile
 	/** case du jeu que cette classe représente */
 	private Tile tile;
 	
-	public Tile getTile()
+	Tile getTile()
 	{	return tile;
 	}
 	
