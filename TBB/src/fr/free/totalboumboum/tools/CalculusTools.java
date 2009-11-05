@@ -209,7 +209,7 @@ public class CalculusTools
 	}
 
 	public static void main(String[] args)
-	{	processChampionship(16,4);
+	{	processChampionship(15,3);
 			  
 	}
 /*	public static void processChampionship(int totalPlayers, int matchPlayers)
@@ -302,106 +302,104 @@ public class CalculusTools
 		}
 	}*/
 	public static void processChampionship(int totalPlayers, int matchPlayers)
-	{	// init matches set
-		Set<Set<Integer>> matches = new TreeSet<Set<Integer>>(new Comparator<Set<Integer>>()
-		{	@Override
-			public int compare(Set<Integer> s1, Set<Integer> s2)
-			{	Iterator<Integer> i1 = s1.iterator();
-				Iterator<Integer> i2 = s2.iterator();
-				int result = 0;
-				boolean done;
-				do
-				{	int v1 = i1.next();
-					int v2 = i2.next();
-					result = v1-v2;
-					if(result==0)
-						done = !i1.hasNext();
-					else
-						done = true;
-				}
-				while(!done);
-				return result;
-			}			
-		});
-
-		
-		
-		// init combinations
-		int maxSpaces = totalPlayers - matchPlayers;
-		int spacesPositions = matchPlayers - 1;
-		List<Integer> values = new ArrayList<Integer>();
-		for(int i=1;i<matchPlayers;i++)
-		{	
-			for(int pos=0;pos<(matchPlayers-1);pos++)
-			{	
-				
+	{	
+		// set patterns
+		int centralPlayer = 0;//(totalPlayers-1)/2;
+		int matchOpponents = matchPlayers - 1;
+		int totalOpponents = totalPlayers - 1;
+		int combinationCount = totalOpponents/matchOpponents;
+		List<Set<Integer>> patterns = new ArrayList<Set<Integer>>();
+/*		Set<Integer> set;
+		set = new TreeSet<Integer>(Arrays.asList(0,1,2,7,8));patterns.add(set);
+		set = new TreeSet<Integer>(Arrays.asList(0,2,3,6,7));patterns.add(set);
+		set = new TreeSet<Integer>(Arrays.asList(0,3,4,5,6));patterns.add(set);
+		set = new TreeSet<Integer>(Arrays.asList(0,1,3,6,8));patterns.add(set);
+		set = new TreeSet<Integer>(Arrays.asList(0,2,4,5,7));patterns.add(set);
+		set = new TreeSet<Integer>(Arrays.asList(0,1,4,5,8));patterns.add(set);
+		set = new TreeSet<Integer>(Arrays.asList(0,2,4,6,8));patterns.add(set);
+		set = new TreeSet<Integer>(Arrays.asList(0,1,3,5,7));patterns.add(set);*/
+		for(int i=0;i<combinationCount;i++)
+		{	TreeSet<Integer> pattern = new TreeSet<Integer>();
+			pattern.add(centralPlayer);
+			int leftBase = (centralPlayer - i*matchOpponents + totalPlayers) % totalPlayers;
+			int rightBase = (centralPlayer + i*matchOpponents) % totalPlayers;
+			for(int j=1;j<=(matchOpponents/2);j++)
+			{	int leftIndex = (leftBase-j+totalPlayers) % totalPlayers;
+if(pattern.contains(leftIndex))
+	System.out.println("pattern already contains "+leftIndex);
+else
+				pattern.add(leftIndex);
+				int rightIndex = (rightBase+j) % totalPlayers;
+if(pattern.contains(rightIndex))
+	System.out.println("pattern already contains "+rightIndex);
+else
+				pattern.add(rightIndex);				
 			}
-				
+			patterns.add(pattern);
 		}
-		List<List<Integer>> permuts = processPermutations(values);
-	
-	
-		for(int i=0;i<totalPlayers;i++)
-		{	int index = i;
-			for(int j=0;j<rep;j++)
+		
+/*		
+System.out.println("------------");
+for(Set<Integer> set: patterns)
+{	System.out.print("[ ");
+	for(Integer integer: set)
+		System.out.print(integer+" ");
+	System.out.println("]");
+}
+*/		
+		// process matches
+		List<List<Set<Integer>>> matches = new ArrayList<List<Set<Integer>>>();
+		for(Set<Integer> pattern: patterns)
+		{	List<Set<Integer>> list = new ArrayList<Set<Integer>>();
+			for(int i=0;i<totalPlayers;i++)
 			{	Set<Integer> match = new TreeSet<Integer>();
-				match.add(i);
-				for(int k=0;k<(matchPlayers-1);k++)
-				{	index = (index+1)%totalPlayers;
-					match.add(index);
-				}
-				matches.add(match);
-				uniqueMatches.add(match);
+				for(Integer p: pattern)
+					match.add((p+i)%totalPlayers);
+				list.add(match);
 			}
+			matches.add(list);
 		}
+		
+System.out.println("------------");
+for(int i=0;i<patterns.size();i++)
+{	// pattern
+	Set<Integer> pattern = patterns.get(i);
+	System.out.print("[ ");
+	for(Integer integer: pattern)
+		System.out.print(integer+" ");
+	System.out.println("]");
+	// matches for this pattern
+	List<Set<Integer>> list = matches.get(i);
+	for(Set<Integer> match: list)
+	{	System.out.print("\t[ ");
+		for(Integer integer: match)
+			System.out.print(integer+" ");
+		System.out.println("]");
+	}
+	System.out.println();
+}
 
-		// display matches
-		System.out.println("total number of matches: "+matches.size());
-		for(Set<Integer> match: matches)
-		{	System.out.print("[ ");
-			for(Integer player: match)
-				System.out.print(player+" ");
-			System.out.println("]");
+System.out.println("------------");
+centralPlayer = (totalPlayers-1)/2;
+for(int i=0;i<totalPlayers;i++)
+	System.out.print("\t"+i);
+System.out.println();
+System.out.println("--------------------------------------------------------------------------------");
+for(List<Set<Integer>> list: matches)
+{	int count[] = new int[totalPlayers];
+	Arrays.fill(count,0);
+	for(Set<Integer> match: list)
+	{	if(match.contains(centralPlayer))
+		{	for(Integer p: match)
+				count[p]++;
 		}
-		System.out.println();
-
-		// display unique matches
-		System.out.println("total number of unique matches: "+uniqueMatches.size());
-		for(Set<Integer> match: uniqueMatches)
-		{	System.out.print("[ ");
-			for(Integer player: match)
-				System.out.print(player+" ");
-			System.out.println("]");
-		}
-		System.out.println();
-
-		// counts for player 0
-		int counts[] = new int[totalPlayers];
-		for(Set<Integer> match: matches)
-		{	if(match.contains(0))
-			{	for(Integer player: match)
-					counts[player]++;
-			}
-		}
-		System.out.println("Counts for player 0:");
-		for(int i=0;i<counts.length;i++)
-		{	System.out.println(i+"\t: "+counts[i]);
-		}
-		System.out.println();
-
-		// unique counts for player 0
-		Arrays.fill(counts,0);
-		for(Set<Integer> match: uniqueMatches)
-		{	if(match.contains(0))
-			{	for(Integer player: match)
-					counts[player]++;
-			}
-		}
-		System.out.println("Unique counts for player 0:");
-		for(int i=0;i<counts.length;i++)
-		{	System.out.println(i+"\t: "+counts[i]);
-		}
-		System.out.println();
+	}
+	for(int i=0;i<count.length;i++)
+		System.out.print("\t"+count[i]);
+	System.out.println();
+}
+	
+	
 	}
 	
 	/////////////////////////////////////////////////////////////////
