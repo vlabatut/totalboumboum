@@ -324,6 +324,8 @@ public class CalculusTools
 			}			
 		});
 
+		
+		
 		// init combinations
 		int maxSpaces = totalPlayers - matchPlayers;
 		int spacesPositions = matchPlayers - 1;
