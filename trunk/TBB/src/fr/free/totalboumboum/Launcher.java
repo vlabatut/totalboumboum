@@ -1071,6 +1071,7 @@ public class Launcher
 	 * 		- pour faire un suivi d'une ia à travers plusieurs rounds :
 	 * 			- chemin permettant d'écrire dans le package de l'IA, afin de lui permettre de faire des sauvegardes ?
 	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
+	 * 		- classement des joueurs dans le round et dans le match
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
