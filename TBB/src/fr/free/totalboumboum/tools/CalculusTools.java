@@ -402,6 +402,31 @@ for(List<Set<Integer>> list: matches)
 	
 	}
 	
+	private List<Set<Integer>> processCombinations(int n, int k)
+	{	List<Set<Integer>> result = new ArrayList<Set<Integer>>();
+		processCombinations(n,k,result);
+		return result;
+	}
+	private List<Set<Integer>> processCombination(int n, int k, Set<Integer> current)
+	{	List<Set<Integer>> result = new ArrayList<Set<Integer>>();
+		if(result.size()>k)
+		{	Set<Integer> empty = new TreeSet<Integer>();
+			result.add(empty);
+		}
+		else
+		{	for(int i=0;i<n;i++)
+			{	if(!current.contains(i))
+				{	Set<Integer> copy = new TreeSet<Integer>(current);
+					copy.add(i);
+					List<Set<Integer>> temp = processCombination(n,k,copy);
+					for()
+				}
+			}
+		}
+		return result;
+	}
+	
+	
 	/////////////////////////////////////////////////////////////////
 	// ORDERING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
