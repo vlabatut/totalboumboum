@@ -994,7 +994,9 @@ public class Launcher
 
 	/* TODO
 	 * 
-	 * - options pour enchainer tous les rounds d'un tournoi automatiquement sans avoir à appuyer sur les touches "suivant"
+	 * - 1ère exécution
+	 * 		- définir un popup d'informations
+	 * 		- guider l'utilisateur pas à pas pour créer son profile et commencer sa partie
 	 * 
 	 * - pour les tournois, le chargement/sélection du tournoi doit précéder le choix des joueurs
 	 * 
@@ -1072,6 +1074,7 @@ public class Launcher
 	 * 			- chemin permettant d'écrire dans le package de l'IA, afin de lui permettre de faire des sauvegardes ?
 	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
 	 * 		- classement des joueurs dans le round et dans le match
+	 * 		- renommer les packages des ia en fr.free.totalboumboum.ai.???? (faudra peut être renommer aussi les classes adapter)
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
