@@ -148,7 +148,6 @@ public class CalculusTools
 	 * @param values
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public static List<List<Integer>> processPermutations(List<Integer> values)
 	{	List<List<Integer>> result = new ArrayList<List<Integer>>();
 		List<Integer> clone = new ArrayList<Integer>(values);
@@ -209,9 +208,18 @@ public class CalculusTools
 	}
 
 	public static void main(String[] args)
-	{	processChampionship(15,3);
-			  
+	{	//processChampionship(15,3);
+		
+//		Set<Set<Integer>> result = processCombinations(5,3);
+		List<Set<Integer>> result = truc(7,3);
+		for(Set<Integer> set: result)
+		{	System.out.print("[ ");
+			for(Integer integer: set)
+				System.out.print(integer+" ");
+			System.out.println("]");
+		}
 	}
+	
 /*	public static void processChampionship(int totalPlayers, int matchPlayers)
 	{	List<Set<Integer>> matches = new ArrayList<Set<Integer>>();
 		Set<Set<Integer>> uniqueMatches = new TreeSet<Set<Integer>>(new Comparator<Set<Integer>>()
@@ -402,30 +410,99 @@ for(List<Set<Integer>> list: matches)
 	
 	}
 	
-	private List<Set<Integer>> processCombinations(int n, int k)
-	{	List<Set<Integer>> result = new ArrayList<Set<Integer>>();
-		processCombinations(n,k,result);
-		return result;
-	}
-	private List<Set<Integer>> processCombination(int n, int k, Set<Integer> current)
-	{	List<Set<Integer>> result = new ArrayList<Set<Integer>>();
-		if(result.size()>k)
-		{	Set<Integer> empty = new TreeSet<Integer>();
-			result.add(empty);
+	private static Set<Set<Integer>> processCombinations(int n, int k)
+	{	Set<Set<Integer>> result = new TreeSet<Set<Integer>>(new IntegerSetComparator());
+		
+		if(k==1)
+		{	for(int i=0;i<n;i++)
+			{	Set<Integer> set = new TreeSet<Integer>();
+				set.add(new Integer(i));
+				result.add(set);
+			}			
 		}
 		else
-		{	for(int i=0;i<n;i++)
-			{	if(!current.contains(i))
-				{	Set<Integer> copy = new TreeSet<Integer>(current);
-					copy.add(i);
-					List<Set<Integer>> temp = processCombination(n,k,copy);
-					for()
+		{	Set<Set<Integer>> combis = processCombinations(n,k-1);
+			for(int i=0;i<n;i++)
+			{	for(Set<Integer> set: combis)
+				{	if(!set.contains(i))
+					{	Set<Integer> copy = new TreeSet<Integer>(set);
+						copy.add(i);
+						if(!result.contains(copy))
+							result.add(copy);
+					}
 				}
 			}
 		}
 		return result;
+	}	
+	private static List<Set<Integer>> truc(int n, int k)
+	{	List<Set<Integer>> result = new ArrayList<Set<Integer>>();
+		// process all possible rounds
+		List<Set<Integer>> rounds = new ArrayList<Set<Integer>>(processCombinations(n,k));
+		
+		// process all possible combinations of rounds
+		int i=1;
+		while(i<=rounds.size() && result.isEmpty())
+		{	System.out.println("combinations of "+i+" rounds");
+			System.gc();
+			List<Set<Integer>> combis = new ArrayList<Set<Integer>>(processCombinations(rounds.size(),i));
+			int j=0;
+			while(j<combis.size() && result.isEmpty())
+			{	System.out.print("\tcombination "+(j+1)+" of "+combis.size());
+				Set<Integer> combi = combis.get(j);
+				// build rounds list
+				List<Set<Integer>> list = new ArrayList<Set<Integer>>();
+				for(Integer r: combi)
+					list.add(rounds.get(r));
+				// process confrontations distributions
+				int counts[][] = new int[n][n];
+				for(int l=0;l<n;l++)
+				{	for(int m=0;m<n;m++)
+						counts[l][m] = 0;
+				}
+				for(Set<Integer> round: list)
+				{	for(int p=0;p<n;p++)
+					{	if(round.contains(p))
+						{	for(Integer q: round)
+								counts[p][q]++;
+						}
+					}	
+				}
+				// test for stop condition
+				boolean correct = true;
+				int self = counts[0][0];
+				int others = counts[0][1];
+				int p = 0;
+				while(correct && p<n)
+				{	int q = 0;
+					while(correct && q<n)
+					{	if(p==q)
+							correct = counts[p][q]==self;
+						else
+							correct = counts[p][q]==others;
+						q++;
+					}
+					p++;
+				}
+				if(correct)
+				{	System.out.println(" >> done");
+					for(p=0;p<n;p++)
+					{	System.out.print("\t\t");
+						for(int q=0;q<n;q++)
+							System.out.print(" "+counts[p][q]);
+						System.out.println();
+					}
+					result = list;
+				}
+				else
+					System.out.println(" >> doesn't work");
+				
+				j++;
+			}
+			i++;
+		}
+		return result;
 	}
-	
 	
 	/////////////////////////////////////////////////////////////////
 	// ORDERING			/////////////////////////////////////////////
