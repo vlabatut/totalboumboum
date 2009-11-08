@@ -88,12 +88,18 @@ public class Round implements StatisticHolder, Serializable
 	}
 	
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
-	{	stats = new StatisticRound(this);
+	{	//stats
+		stats = new StatisticRound(this);
 		stats.initStartDate();
+		// players
 		remainingPlayers = getProfiles().size();
 		for(int i=0;i<remainingPlayers;i++)
 			playersStatus.add(new Boolean(true));
+		// level
 		hollowLevel.getZone().makeMatrix();
+		// current points
+		currentPoints = new float[getProfiles().size()];
+		Arrays.fill(currentPoints,0);
 	}
 	
 	public boolean isOver()
@@ -224,8 +230,8 @@ public class Round implements StatisticHolder, Serializable
 		{	stats.updateTime(time,this);			
 			if(getLimits().testLimit(this))
 				closeGame();
-//			else TODO à voir quand on s'occupera d'afficher les points en temps réel dans la GUI
-//				stats.computePoints(getPointProcessor());
+			else
+				currentPoints = limits.processPoints(this);
 		}
 	}
 	
@@ -259,6 +265,12 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private float[] currentPoints;
+	
+	public float[] getCurrentPoints()
+	{	return currentPoints;		
+	}
+	
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();
 		// points
@@ -272,7 +284,7 @@ public class Round implements StatisticHolder, Serializable
 			ranks2 = CalculusTools.getRanks(total);
 		}
 		else
-		{	ranks = CalculusTools.getRanks(total);
+		{	ranks = CalculusTools.getRanks(currentPoints);
 			ranks2 = new int[ranks.length];
 			Arrays.fill(ranks2,0);
 		}

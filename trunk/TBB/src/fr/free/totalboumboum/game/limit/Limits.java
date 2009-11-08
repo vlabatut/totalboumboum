@@ -55,7 +55,13 @@ public class Limits<T extends Limit> implements Serializable
 	}
 
 	public float[] processPoints(StatisticHolder holder)
-	{	Limit limit = limits.get(index);
+	{	Limit limit;
+		// confrontation over
+		if(index>-1)
+			limit = limits.get(index);
+		// not over : use the first available limit
+		else
+			limit = limits.get(0);
 		float[] result = limit.processPoints(holder);
 		return result;
 	}

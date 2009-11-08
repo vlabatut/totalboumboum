@@ -39,6 +39,8 @@ import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.player.Player;
+import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.CalculusTools;
 
@@ -81,19 +83,32 @@ public class AiZone
 	 * met à jour cette représentation ainsi que tous ses constituants.
 	 */
 	public void update(long elapsedTime)
-	{	updateTime(elapsedTime);
+	{	updateTimes(elapsedTime);
 		updateMatrix();
 		updateSpriteLists();
+		updateMeta();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis la mise à jour précédente */
+	/** temps écoulé depuis le début du jeu */
+	private long totalTime = 0;
+	/** temps écoulé depuis la mise à jour précédente de l'IA considérée */
 	private long elapsedTime = 0;
 	
 	/**
+	 * renvoie le temps total écoulé depuis le début du jeu
+	 * 
+	 * @return	le temps total écoulé exprimé en millisecondes
+	 */
+	public long getTotalTime()
+	{	return totalTime;		
+	}
+	
+	/**
 	 * renvoie le temps écoulé depuis la mise à jour précédente
+	 * de l'IA considérée.
 	 * 
 	 * @return	le temps écoulé exprimé en millisecondes
 	 */
@@ -102,14 +117,59 @@ public class AiZone
 	}
 	
 	/**
-	 * met à jour le temps écoulé depuis la dernière mise à jour
+	 * met à jour les données temporelles
 	 * 
 	 * @param elapsedTime
 	 */
-	private void updateTime(long elapsedTime)
-	{	this.elapsedTime = elapsedTime;		
+	private void updateTimes(long elapsedTime)
+	{	this.totalTime = level.getLoop().getTotalGameTime();
+		this.elapsedTime = elapsedTime;		
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// META DATA		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final HashMap<AiHero,Integer> roundRanks = new HashMap<AiHero, Integer>();
+	private final HashMap<AiHero,Integer> matchRanks = new HashMap<AiHero, Integer>();
+	
+	/** 
+	 * met à jour des données qui ne sont pas directement reliées
+	 * à l'action en cours, telles que l'évolution du classement des joueurs
+	 */
+	private void updateMeta()
+	{	List<Player> players = level.getLoop().getPlayers();
+		// round
+		roundRanks.clear();
+		Round round = level.getLoop().getRound();
+		float points[] = round.getCurrentPoints();
+		int ranks[] = CalculusTools.getRanks(points);
+		for(int i=0;i<players.size();i++)
+		{	Hero hero = (Hero)players.get(i).getSprite();
+			AiHero aiHero = heroMap.get(hero);
+			int rank = ranks[i];
+			roundRanks.put(aiHero,rank);
+		}
+		// match
+		matchRanks.clear();
+		Match match = round.getMatch();
+		points = match.getStats().getTotal();
+		ranks = CalculusTools.getRanks(points);
+		for(int i=0;i<players.size();i++)
+		{	Hero hero = (Hero)players.get(i).getSprite();
+			AiHero aiHero = heroMap.get(hero);
+			int rank = ranks[i];
+			matchRanks.put(aiHero,rank);
+		}
+	}
+	
+	public int getMatchRank(AiHero hero)
+	{	return matchRanks.get(hero);
+	}
+	
+	public int getRoundRank(AiHero hero)
+	{	return roundRanks.get(hero);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LEVEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

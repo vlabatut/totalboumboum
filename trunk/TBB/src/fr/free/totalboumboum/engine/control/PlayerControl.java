@@ -64,7 +64,7 @@ public class PlayerControl implements KeyListener
 //System.out.println(player.getName()+":"+e.getKeyChar());	
 		if(!pressedKeys.containsKey(keyCode) || !pressedKeys.get(keyCode))
 		{	pressedKeys.put(keyCode, true);
-			if (!RoundVariables.loop.isPaused() && getControlSettings().containsOnKey(keyCode))
+			if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOnKey(keyCode))
 		    {	ControlCode controlCode = new ControlCode(keyCode,true);
 				getSprite().putControlCode(controlCode);				
 		    }
@@ -79,7 +79,7 @@ public class PlayerControl implements KeyListener
 	public void keyReleased(KeyEvent e)
 	{	int keyCode = e.getKeyCode();
 		pressedKeys.put(keyCode,false);	
-		if (!RoundVariables.loop.isPaused() && getControlSettings().containsOffKey(keyCode))
+		if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOffKey(keyCode))
 	    {	ControlCode controlCode = new ControlCode(keyCode,false);
 			getSprite().putControlCode(controlCode);				
 	    }

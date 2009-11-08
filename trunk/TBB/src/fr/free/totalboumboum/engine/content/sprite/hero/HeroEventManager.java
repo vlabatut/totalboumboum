@@ -231,7 +231,7 @@ public class HeroEventManager extends EventManager
 				|| gesture.equals(GestureName.HIDING) || gesture.equals(GestureName.WAITING))
 			{	// enforcing drop bomb latency
 				StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_DROP_LATENCY);
-				double currentTime = RoundVariables.loop.getTotalTime();
+				double currentTime = RoundVariables.loop.getTotalGameTime();
 				double elapsedTime = currentTime - lastDropTime;
 				if(elapsedTime>ablt.getStrength())
 				{	ablt = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_CONSTIPATION);

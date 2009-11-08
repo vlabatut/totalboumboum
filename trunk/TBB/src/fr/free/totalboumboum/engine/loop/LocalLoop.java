@@ -232,7 +232,7 @@ public class LocalLoop extends Loop
 	{	if(engineConfiguration.getLogControls())
 		{	OutputStream out = engineConfiguration.getControlsLogOutput();
 			PrintWriter printWriter = new PrintWriter(out,true);
-			printWriter.println("--"+totalTime+"ms --------------------------");
+			printWriter.println("--"+totalGameTime+"ms --------------------------");
 		}	
 	}
 	
@@ -253,7 +253,7 @@ public class LocalLoop extends Loop
 	private int showTilesPositions = 0;
 	private int showSpritesPositions = 0;
 	private boolean showSpeed = false;
-	private boolean showTime = false;
+	private int showTime = 0;
 	private boolean showFPS = false;
 	private boolean showNames = false;
 	private boolean pauseEngine = false;
@@ -305,11 +305,11 @@ public class LocalLoop extends Loop
 
 	public void switchShowTime()
 	{	debugLock.lock();
-		showTime = !showTime;		
+		showTime = (showTime+1)%4;
 		debugLock.unlock();
 	}
-	public boolean getShowTime()
-	{	boolean result;
+	public int getShowTime()
+	{	int result;
 		debugLock.lock();
 		result = showTime;
 		debugLock.unlock();
@@ -331,7 +331,7 @@ public class LocalLoop extends Loop
 
 	public void switchShowTilesPositions()
 	{	debugLock.lock();
-		this.showTilesPositions = (showTilesPositions+1)%3;
+		showTilesPositions = (showTilesPositions+1)%3;
 		debugLock.unlock();
 	}
 	public int getShowTilesPositions()
@@ -482,7 +482,11 @@ public class LocalLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private long totalTime = 0;
+	/** total game time elapsed since the players took control */
+	private long totalGameTime = 0;
+	/** total real time elapsed since the level started appearing */
+	private long totalEngineTime = 0;
+	/** AIs current time, used to inforce AIs period defined in the game options */
 	private long aiTime = 0;
 	/** 
 	 * Number of frames with a delay of 0 ms before the animation thread yields
@@ -495,39 +499,11 @@ public class LocalLoop extends Loop
 	 */ 
 	@SuppressWarnings("unused")
 	private static int MAX_FRAME_SKIPS = 5;
+	/** game period expressed un milliseconds */
 	private long milliPeriod;
-//	private long nanoPeriod;
-	private boolean isPaused = false;
 	private Lock loopLock = new ReentrantLock();
+	/** indicates if the game has been canceled */
 	private boolean isCanceled = false;
-/*
-	private boolean isLooping = false;
-	
-	public void setLooping(boolean isLooping)
-	{	loopLock.lock();
-		this.isLooping = isLooping;
-		loopLock.unlock();
-	}
-	public boolean isLooping()
-	{	boolean result;
-		loopLock.lock();
-		result = isLooping;
-		loopLock.unlock();
-		return result;
-	}
-*/
-	public void setPause(boolean isPaused)
-	{	loopLock.lock();
-		this.isPaused = isPaused;
-		loopLock.unlock();
-	}
-	public boolean isPaused()
-	{	boolean result;
-		loopLock.lock();
-		result = isPaused;
-		loopLock.unlock();
-		return result;
-	}
 
 	public void setCanceled(boolean isCanceled)
 	{	loopLock.lock();
@@ -542,8 +518,12 @@ public class LocalLoop extends Loop
 		return result;
 	}
 
-	public long getTotalTime()
-	{	return totalTime;	
+	public long getTotalGameTime()
+	{	return totalGameTime;	
+	}
+	
+	public long getTotalEngineTime()
+	{	return totalEngineTime;	
 	}
 	
 	public void run()
@@ -596,12 +576,6 @@ public class LocalLoop extends Loop
 		loadLock.unlock();
 	}
 	
-//long totalUpdateTime=0;
-//long totalDrawTime=0;
-//long totalMakeupTime=0;
-//long totalTtime=0;
-//float nbrUpdates=0;
-	
 	public void process()
 	{	long beforeTime,afterTime,timeDiff,sleepTime,lastTime;
 		long overSleepTime = 0L;
@@ -617,20 +591,17 @@ public class LocalLoop extends Loop
 		prevStatsTime = gameStartTime;
 		beforeTime = gameStartTime;
 		afterTime = gameStartTime;
-		totalTime = 0;
+		totalGameTime = 0;
+		totalEngineTime = 0;
 		aiTime = 0;
 
-//		setLooping(true);
-		while(/*isLooping() && */!isOver())
+		while(!isOver())
 		{	
 			milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 			
 			// cycle
-//long a = System.currentTimeMillis();
 			update();
-//long b = System.currentTimeMillis();
 			panel.paintScreen();
-//long c = System.currentTimeMillis();
 			// time process
 			lastTime = afterTime;
 			afterTime = System.currentTimeMillis();
@@ -673,40 +644,15 @@ public class LocalLoop extends Loop
 				update(); 
 				skips++;
 			}
-//System.out.println(skips);
 			
 			framesSkipped = framesSkipped + skips;
 			storeStats( );
 			
-//long d = System.currentTimeMillis();
-			
-//long updateTime = b-a;
-//long drawTime = c-b;
-//long makeupTime = d-c;
-//long ttime = d-a;
-//totalUpdateTime = totalUpdateTime+updateTime; 
-//totalDrawTime = totalDrawTime+drawTime; 
-//totalMakeupTime = totalMakeupTime+makeupTime; 
-//totalTtime = totalTtime+ttime; 
-//nbrUpdates++;
-/*
-System.out.println("update: "+updateTime+"("+(totalUpdateTime/nbrUpdates)+")");
-System.out.println("draw: "+drawTime+"("+(totalDrawTime/nbrUpdates)+")");
-System.out.println("makeup: "+makeupTime+"("+(totalMakeupTime/nbrUpdates)+")");
-System.out.println("---------------");
-System.out.println("total: "+ttime+"("+(totalTtime/nbrUpdates)+")");
-//System.out.println("\t"+a);
-//System.out.println("\t"+b);
-//System.out.println("\t"+c);
-//System.out.println("\t"+d);
-System.out.println();
-*/
-
-			
-			
-			if(!isPaused)
-			{	totalTime = totalTime + (afterTime-lastTime);
-				round.updateTime(totalTime);
+			long delta = afterTime-lastTime;
+			totalEngineTime = totalEngineTime + delta;
+			if(!getEnginePause() && hasStarted && celebrationDuration<0)
+			{	totalGameTime = totalGameTime + delta;
+				round.updateTime(totalGameTime);
 			}
 			
 			if(isCanceled())
@@ -723,8 +669,11 @@ System.out.println();
 	}
 
 	private void update()
-	{	if(!isPaused() && (!getEnginePause() || getEngineStep()))
-		{	switchEngineStep(false);
+	{	if(!getEnginePause() || getEngineStep())
+		{	if(getEngineStep())
+			{	totalGameTime = totalGameTime + milliPeriod;
+				switchEngineStep(false);
+			}
 			
 			// logs
 			updateLogs();
@@ -966,19 +915,22 @@ System.out.println();
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void draw(Graphics g)
-	{	level.draw(g);
-		
+	{	// level
+		level.draw(g);
+		// players names
 		if(getShowNames())
 			drawPlayersNames(g);
-
+		// ais data
 		drawAisInfo(g);
-	
+		// speed
 		if(getShowSpeed())
 			drawSpeed(g);
-		if(getShowTime())
-			drawTime(g);
+		// time
+		drawTime(g);
+		// FPS
 		if(getShowFPS())
 			drawFPS(g);
+		// pause
 		if(getEnginePause())
 			drawEnginePause(g);
 
@@ -998,43 +950,46 @@ System.out.println();
 	}
 	
 	private void drawTime(Graphics g)
-	{	// loop time
+	{	int st = getShowTime();
+		// loop time
+		if(st==1)
 		{	g.setColor(Color.CYAN);
 			Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
-			long time = getTotalTime();
-			String text = "Time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
+			long time = getTotalGameTime();
+			String text = "Game time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);
 			g.drawString(text, x, y);
 		}
-/*		
 		// engine time
-		{	g.setColor(Color.GREEN);
+		else if(st==2)
+		{	g.setColor(Color.CYAN);
 			Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Time: "+StringTools.formatTimeWithHours(time);
+			long time = getTotalEngineTime();
+			String text = "Engine time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
-			int y = (int)Math.round(50+box.getHeight()/2);
+			int y = (int)Math.round(30+box.getHeight()/2);
 			g.drawString(text, x, y);
 		}
-		// actual time
-		{	g.setColor(Color.MAGENTA);
+		// real time
+		else if(st==3)
+		{	g.setColor(Color.CYAN);
 			Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
-			long time = System.currentTimeMillis()-startTime;
-			String text = "Time: "+StringTools.formatTimeWithHours(time);
+			long time = System.currentTimeMillis()-gameStartTime;
+			String text = "Real time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
-			int y = (int)Math.round(70+box.getHeight()/2);
+			int y = (int)Math.round(30+box.getHeight()/2);
 			g.drawString(text, x, y);
 		}
-*/		
 	}
 
 	private void drawFPS(Graphics g)

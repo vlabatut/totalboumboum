@@ -829,7 +829,8 @@ public class Launcher
 	 * - API IA : accès à la taille des cases
 	 * - API IA : AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir et le temps de latence de la bombe
 	 * - API IA : AiPath a une fonction renvoyant la distance totale en pixels 
-	 * - API IA : AiPath a une fonction renvoyant la temps nécessare à joueur pour le parcourir 
+	 * - API IA : AiPath a une fonction renvoyant la temps nécessare à joueur pour le parcourir
+	 * - API IA : AiZone permet de récupérer le classement courant de tous les joueurs, pour le round et le match en cours 
 	 * - ajout du système Glicko2
 	 * - adaptation de Glicko2 :
 	 * 		- serializable
@@ -864,6 +865,8 @@ public class Launcher
 	 * - un nouvel icone couronne de laurier a été défini pour distinguer le classement Glicko-2=podium et le classement local (tournoi/match/round)=lauriers
 	 * - nouvelle option "tête de série" pour les tournois de type coupe : utilise le classement Glicko-2 pour éviter que les meilleurs joueurs se rencontrent trop tôt
 	 * - les constantes éléments/attributs ont été renommées de manière à supprimer les préfixes ATT_ et ELT_ (pr éviter les répétitions)
+	 * - moteur : mise à jour des points en temps réel, en prenant la première limite disponible (utile pour les rounds)
+	 * - amélioration du décompte du temps : le temps du jeu est arrêté s'il est en pause, et le temps réel est décompté séparément
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1089,11 +1092,11 @@ public class Launcher
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
 	 * 
-	 *  - tournois :
+	 *  - tournoi :
 	 *  	- créer le tournoi de type championnat (pratique pour classer les IA de façon plus homogène)
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
-	 *  	- enregistrer l'évolution des stats
+	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
 	 *  - gui : 
 	 *  	- bugs dans les browsers, sur les boutons de page next/previous >> surcharger label avec un indicateur de survol que l'on teste sur exit/enter (utiliser JLabel.isShowin() ?)
 	 *  - instance TBB
