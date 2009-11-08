@@ -39,6 +39,7 @@ import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
 import fr.free.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
 /**
@@ -60,7 +61,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 */
 	AiBomb(AiTile tile, Bomb sprite)
 	{	super(tile,sprite);
-		initFuse();
+		initDurations();
 		initRange();
 		initColor();
 		updateWorking();
@@ -91,6 +92,10 @@ public class AiBomb extends AiSprite<Bomb>
 	private boolean explosionTrigger;
 	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
+	/** durée de l'explosion (entre l'apparition et la disparition des flammes) */
+	private long explosionDuration;
+	/** latence de la bombe quand son explosion est déclenchée par une autre bombe */
+	private long latencyDuration;
 	
 	/**
 	 * indique si l'explosion de la bombe dépend d'un compte à rebours
@@ -117,12 +122,12 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 	
 	/**
-	 * initialisation des paramètres liés à l'explosion de la bombe
+	 * initialisation des délais liés à l'explosion de la bombe
 	 */
-	private void initFuse()
+	private void initDurations()
 	{	Bomb bomb = getSprite();
 	
-		// theoretic delay before explosion 
+		// délai normal avant l'explosion 
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 			normalDuration = (long)ability.getStrength();		
 		}	
@@ -138,6 +143,14 @@ public class AiBomb extends AiSprite<Bomb>
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_COMBUSTION);
 			explosionTrigger = ability.isActive();
 		}
+		// latence de la bombe en cas de détonation déclenchée par explosion
+		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
+			latencyDuration = (long)ability.getStrength();
+		}
+		// durée de l'explosion
+		{	ExplosionManager explosionManager = bomb.getExplosionManager();
+			explosionDuration = explosionManager.getExplosionDuration();
+		}
 	}
 
 
@@ -152,6 +165,30 @@ public class AiBomb extends AiSprite<Bomb>
 	{	return normalDuration;
 	}
 
+	/**
+	 * renvoie la durée de l'explosion de cette bombe.
+	 * Cette durée comprend l'apparition des flammes,
+	 * la durée de vie des flammes, et leur disparition.
+	 * Cette valeur n'est pas forcément constante, et peut varier d'une bombe à l'autre.
+	 * 
+	 * @return	la durée de l'explosion
+	 */
+	public long getExplosionDuration()
+	{	return explosionDuration;
+	}
+
+	/**
+	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclenchée par
+	 * une explosion. Cette latence représente le temps entre le moment où
+	 * la bombe est touchée par l'explosion, et le moment où elle commence effectivement
+	 * à exploser.
+	 * 
+	 * @return	la latence de la bombe pour une détonation déclenchée par une autre explosion
+	 */
+	public long getLatencyDuration()
+	{	return latencyDuration;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

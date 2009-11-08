@@ -24,7 +24,9 @@ package fr.free.totalboumboum.ai.adapter200910.path;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
+import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 
 public class AiPath
 {	
@@ -129,6 +131,72 @@ public class AiPath
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// DISTANCE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * renvoie la distance de Manhattan, exprimée en cases, correspondant à ce chemin
+	 * 
+	 * @return	un entier correspondant à la distance totale du chemin en cases
+	 */
+	public int getTileDistance()
+	{	int result = 0;
+		if(tiles.size()>1)
+			result = tiles.size()-1;
+		return result;	
+	}
+
+	/**
+	 * renvoie la distance de Manhattan, exprimée en pixels, correspondant à ce chemin
+	 * 
+	 * @return	un réel correspondant à la distance totale du chemin en pixels
+	 */
+	public double getPixelDistance()
+	{	double result = 0;
+		Iterator<AiTile> it = tiles.iterator();
+		if(it.hasNext())
+		{	AiTile tile = it.next();
+			AiZone zone = tile.getZone();
+			while(it.hasNext())
+			{	AiTile temp = it.next();
+				double x1 = tile.getPosX();
+				double y1 = tile.getPosY();
+				double x2 = temp.getPosX();
+				double y2 = temp.getPosY();
+				double dist = zone.getPixelDistance(x1,y1,x2,y2);
+				result = result + dist;
+				tile = temp;
+			}
+		}
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * calcule le temps approximatif nécessaire au personnage passé en paramètre
+	 * pour parcourir ce chemin. Le temps est exprimé en millisecondes, et 
+	 * on suppose qu'il n'y a pas d'obstacle sur le chemin et que la vitesse
+	 * de déplacement du joueur est constante. C'est donc une estimation du temps
+	 * qui sera réellement nécessaire au joueur, puisque différents facteurs peuvent
+	 * venir invalider ces hypothèses.
+	 *   
+	 * @param hero	le personnage qui parcourt le chemin
+	 * @return	le temps nécessaire au personnage pour parcourir ce chemin
+	 */
+	public long getDuration(AiHero hero)
+	{	long result = 0;
+		if(tiles.size()>1)
+		{	double speed = hero.getWalkingSpeed();
+			int tileDist = getTileDistance();
+			double tilePixelSize = tiles.get(0).getSize();
+			double pixelDist = tileDist*tilePixelSize;
+			result = Math.round(pixelDist/speed * 1000);
+		}
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
@@ -152,7 +220,7 @@ public class AiPath
 	 * @param object	le chemin à comparer
 	 * @return	vrai ssi ce chemin est plus court que celui passé en paramètre
 	 */
-	public boolean isShortestThan(AiPath path)
+	public boolean isShorterThan(AiPath path)
 	{	int l1 = tiles.size();
 		int l2 = path.getLength();
 		boolean result = l1<l2;

@@ -32,6 +32,9 @@ import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear
 import fr.free.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
+import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.game.round.RoundVariables;
@@ -76,6 +79,16 @@ public class ExplosionManager
 	
 	public Explosion getExplosion()
 	{	return explosion;	
+	}
+	
+	public long getExplosionDuration()
+	{	long result;
+		Tile tile = sprite.getTile();
+		Fire fire = explosion.makeFire(null,tile);
+		Gesture gesture = fire.getGesturePack().getGesture(GestureName.BURNING);
+		AnimeDirection anime = gesture.getAnimeDirection(Direction.LEFT);
+		result = anime.getTotalDuration();
+		return result;
 	}
 	
 	/**

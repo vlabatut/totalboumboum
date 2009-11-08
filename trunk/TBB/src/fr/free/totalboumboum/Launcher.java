@@ -827,6 +827,9 @@ public class Launcher
 	 * - 2 nouveaux niveaux pour illustrer l'instance NBM1
 	 * - API IA : A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
 	 * - API IA : accès à la taille des cases
+	 * - API IA : AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir et le temps de latence de la bombe
+	 * - API IA : AiPath a une fonction renvoyant la distance totale en pixels 
+	 * - API IA : AiPath a une fonction renvoyant la temps nécessare à joueur pour le parcourir 
 	 * - ajout du système Glicko2
 	 * - adaptation de Glicko2 :
 	 * 		- serializable

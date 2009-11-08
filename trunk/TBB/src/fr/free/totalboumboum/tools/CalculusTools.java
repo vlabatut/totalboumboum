@@ -21,6 +21,14 @@ package fr.free.totalboumboum.tools;
  * 
  */
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -210,8 +218,8 @@ public class CalculusTools
 	public static void main(String[] args)
 	{	//processChampionship(15,3);
 		
-//		Set<Set<Integer>> result = processCombinations(5,3);
-		List<Set<Integer>> result = truc(7,3);
+//		Set<Set<Integer>> result = processCombinationsIter(23,23);
+		List<Set<Integer>> result = truc(7,4);
 		for(Set<Integer> set: result)
 		{	System.out.print("[ ");
 			for(Integer integer: set)
@@ -410,7 +418,7 @@ for(List<Set<Integer>> list: matches)
 	
 	}
 	
-	private static Set<Set<Integer>> processCombinations(int n, int k)
+	private static Set<Set<Integer>> processCombinationsRec(int n, int k)
 	{	Set<Set<Integer>> result = new TreeSet<Set<Integer>>(new IntegerSetComparator());
 		
 		if(k==1)
@@ -421,7 +429,7 @@ for(List<Set<Integer>> list: matches)
 			}			
 		}
 		else
-		{	Set<Set<Integer>> combis = processCombinations(n,k-1);
+		{	Set<Set<Integer>> combis = processCombinationsRec(n,k-1);
 			for(int i=0;i<n;i++)
 			{	for(Set<Integer> set: combis)
 				{	if(!set.contains(i))
@@ -434,18 +442,83 @@ for(List<Set<Integer>> list: matches)
 			}
 		}
 		return result;
-	}	
+	}
+
+	private static Set<Set<Integer>> processCombinationsIter(int n, int k, List<Set<Integer>> previous)
+	{	System.out.println("\tprocess C("+n+","+k+")");
+		Set<Set<Integer>> result = new TreeSet<Set<Integer>>(new IntegerSetComparator());
+		
+		if(previous!=null)
+		{	result.addAll(previous);
+			Set<Set<Integer>> temp = new TreeSet<Set<Integer>>(new IntegerSetComparator());
+			for(int i=0;i<n;i++)
+			{	for(Set<Integer> set: result)
+				{	boolean test;
+					int l = 0;
+					do
+					{	test = !set.contains(l);
+						l++;
+					}
+					while(test && l<=i);
+					if(test)
+					{	Set<Integer> tempSet = new TreeSet<Integer>(set);
+						tempSet.add(i);
+						temp.add(tempSet);
+					}
+				}
+			}
+			result = temp;
+		}
+		else
+		{	// init
+			System.out.println("\t\tprocess C("+n+",1)");
+			for(int i=0;i<n;i++)
+			{	Set<Integer> set = new TreeSet<Integer>();
+				set.add(new Integer(i));
+				result.add(set);
+			}
+			System.out.println("\t\tdone");
+			
+			for(int m=2;m<=k;m++)
+			{	System.out.println("\t\tprocess C("+n+","+m+")");
+				Set<Set<Integer>> temp = new TreeSet<Set<Integer>>(new IntegerSetComparator());
+				for(int i=0;i<n;i++)
+				{	for(Set<Integer> set: result)
+					{	boolean test;
+						int l = 0;
+						do
+						{	test = !set.contains(l);
+							l++;
+						}
+						while(test && l<=i);
+						if(test)
+						{	Set<Integer> tempSet = new TreeSet<Integer>(set);
+							tempSet.add(i);
+							temp.add(tempSet);
+						}
+					}
+				}
+				System.out.println("\t\tdone");
+				result = temp;
+			}
+		}		
+		
+		System.out.println("\tdone");
+		return result;
+	}
+	
 	private static List<Set<Integer>> truc(int n, int k)
 	{	List<Set<Integer>> result = new ArrayList<Set<Integer>>();
+		List<Set<Integer>> combis = null;
 		// process all possible rounds
-		List<Set<Integer>> rounds = new ArrayList<Set<Integer>>(processCombinations(n,k));
+		List<Set<Integer>> rounds = new ArrayList<Set<Integer>>(processCombinationsIter(n,k,null));
 		
 		// process all possible combinations of rounds
 		int i=1;
 		while(i<=rounds.size() && result.isEmpty())
 		{	System.out.println("combinations of "+i+" rounds");
 			System.gc();
-			List<Set<Integer>> combis = new ArrayList<Set<Integer>>(processCombinations(rounds.size(),i));
+			combis = new ArrayList<Set<Integer>>(processCombinationsIter(rounds.size(),i,combis));
 			int j=0;
 			while(j<combis.size() && result.isEmpty())
 			{	System.out.print("\tcombination "+(j+1)+" of "+combis.size());
