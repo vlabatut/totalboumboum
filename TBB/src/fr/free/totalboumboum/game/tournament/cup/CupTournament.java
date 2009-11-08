@@ -57,9 +57,9 @@ public class CupTournament extends AbstractTournament
 	
 		// players distribution
 		int playerCount = profiles.size();
-		HashMap<Integer,ArrayList<ArrayList<Integer>>> distris = processPlayerDistribution(playerCount);
+		HashMap<Integer,List<List<Integer>>> distris = processPlayerDistribution(playerCount);
 		highestEmptyRank = Collections.max(distris.keySet());
-		ArrayList<ArrayList<Integer>> distri = distris.get(highestEmptyRank);
+		List<List<Integer>> distri = distris.get(highestEmptyRank);
 		int index = (int)(Math.random()*distri.size());
 		firstLegPlayersdistribution = distri.get(index);
 //firstLegPlayersdistribution = distri.get(0);			
@@ -99,7 +99,7 @@ public class CupTournament extends AbstractTournament
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private CupPlayerSort sortPlayers;
-	private ArrayList<Integer> firstLegPlayersdistribution;
+	private List<Integer> firstLegPlayersdistribution;
 	private int highestEmptyRank;
 	
 	public CupPlayerSort getSortPlayers()
@@ -222,28 +222,28 @@ public class CupTournament extends AbstractTournament
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	Set<Integer> result = new TreeSet<Integer>();
 		for(int i=0;i<=GameData.MAX_PROFILES_COUNT;i++)
-		{	HashMap<Integer,ArrayList<ArrayList<Integer>>> distri = processPlayerDistribution(i);
+		{	HashMap<Integer,List<List<Integer>>> distri = processPlayerDistribution(i);
 			if(distri.size()>0)
 				result.add(i);
 		}
 		return result;
 	}
 	
-	public 	ArrayList<Integer> getFirstLegPlayersdistribution()
+	public List<Integer> getFirstLegPlayersdistribution()
 	{	return firstLegPlayersdistribution;		
 	}
 
 	
-	private HashMap<Integer,ArrayList<ArrayList<Integer>>> processPlayerDistribution(int playerCount)
+	private HashMap<Integer,List<List<Integer>>> processPlayerDistribution(int playerCount)
 	{	int matches = legs.get(0).getParts().size();
 
 		// get the distributions
 		ArrayList<ArrayList<Integer>> distributions = CalculusTools.processDistributions(playerCount,matches);
 		
 		// permute them
-		TreeSet<ArrayList<Integer>> permutations = new TreeSet<ArrayList<Integer>>(new Comparator<ArrayList<Integer>>()
+		TreeSet<List<Integer>> permutations = new TreeSet<List<Integer>>(new Comparator<List<Integer>>()
 		{	@Override
-			public int compare(ArrayList<Integer> o1, ArrayList<Integer> o2)
+			public int compare(List<Integer> o1, List<Integer> o2)
 			{	int result = 0;
 				// size
 				int size1 = o1.size();
@@ -267,8 +267,8 @@ for(ArrayList<Integer> list: distributions)
 	System.out.println();
 }
 */		
-		for(ArrayList<Integer> distrib: distributions)
-		{	ArrayList<ArrayList<Integer>> perms = CalculusTools.processPermutations(distrib);
+		for(List<Integer> distrib: distributions)
+		{	List<List<Integer>> perms = CalculusTools.processPermutations(distrib);
 /*		
 System.out.println();
 System.out.println("PERMUTATIONS");
@@ -291,13 +291,13 @@ for(ArrayList<Integer> list: permutations)
 }
 */	
 		// keep only the working distributions
-		HashMap<Integer,ArrayList<ArrayList<Integer>>> result = new HashMap<Integer,ArrayList<ArrayList<Integer>>>();
-		for(ArrayList<Integer> list: permutations)
+		HashMap<Integer,List<List<Integer>>> result = new HashMap<Integer,List<List<Integer>>>();
+		for(List<Integer> list: permutations)
 		{	int value = checkPlayerDistribution(list);
 			if(value>-1)
-			{	ArrayList<ArrayList<Integer>> l = result.get(value);
+			{	List<List<Integer>> l = result.get(value);
 				if(l==null)
-				{	l = new ArrayList<ArrayList<Integer>>();
+				{	l = new ArrayList<List<Integer>>();
 					result.put(value,l);					
 				}
 				l.add(list);			
@@ -330,7 +330,7 @@ for(ArrayList<Integer> list: permutations)
 	 * @param distribution
 	 * @return
 	 */
-	private int checkPlayerDistribution(ArrayList<Integer> distribution)
+	private int checkPlayerDistribution(List<Integer> distribution)
 	{	// init
 		List<List<Integer>> progression = new ArrayList<List<Integer>>(); // list of qualified players for each part
 		HashMap<Integer,int[]> finalRanking = new HashMap<Integer, int[]>();
@@ -379,7 +379,7 @@ for(ArrayList<Integer> list: permutations)
 	 * @param finalRanking
 	 * @return
 	 */
-	private int simulatePlayerProgression(ArrayList<Integer> distribution, List<List<Integer>> progression, HashMap<Integer,int[]> finalRanking)
+	private int simulatePlayerProgression(List<Integer> distribution, List<List<Integer>> progression, HashMap<Integer,int[]> finalRanking)
 	{	int result = profiles.size();
 		
 		// check compatibility with matches

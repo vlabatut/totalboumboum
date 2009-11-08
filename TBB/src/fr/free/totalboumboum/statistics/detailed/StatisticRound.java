@@ -76,6 +76,6 @@ public class StatisticRound extends StatisticBase
 	}
 
 	public void finalizeTime(Round round)
-	{	updateTime(getTotalTime()+1, round);
+	{	updateTime(getTotalTime()+1,round);
 	}
 }

@@ -99,8 +99,8 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 
 	@Override
 	public void updatePercepts()
-	{	long elapsedTime = loop.getTotalTime() - lastUpdateTime;
-		lastUpdateTime = loop.getTotalTime();
+	{	long elapsedTime = loop.getTotalGameTime() - lastUpdateTime;
+		lastUpdateTime = loop.getTotalGameTime();
 		percepts.update(elapsedTime);
 	}
 	

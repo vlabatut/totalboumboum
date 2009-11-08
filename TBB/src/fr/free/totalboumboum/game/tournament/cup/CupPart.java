@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.GameData;
@@ -328,7 +329,7 @@ public class CupPart implements Serializable
 		}
 		// first leg
 		else
-		{	ArrayList<Integer> firstLegPlayersdistribution = getTournament().getFirstLegPlayersdistribution();
+		{	List<Integer> firstLegPlayersdistribution = getTournament().getFirstLegPlayersdistribution();
 			if(firstLegPlayersdistribution.get(number)>index)
 			{	int count = 0;
 				for(int i=0;i<number;i++)
