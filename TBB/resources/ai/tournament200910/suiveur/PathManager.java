@@ -322,6 +322,15 @@ public class PathManager
 		// mise à jour de la sortie
 		updateOutput();
 		
+		
+System.out.println(path.getLength());
+if(path.getLength()>0)
+	System.out.println(path.getTile(0).getSize());
+System.out.println(path.getPixelDistance());		
+System.out.println(ai.getOwnHero().getWalkingSpeed());		
+System.out.println(path.getDuration(ai.getOwnHero()));		
+System.out.println("--------------------------------------");
+		
 		if(verbose)
 		{	System.out.println(">>>>>>>>>> PATH MANAGER <<<<<<<<<<");
 			System.out.println("path: "+path);

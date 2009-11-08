@@ -47,6 +47,8 @@ public class Fireset
 	
 	public Fire makeFire(String name, Tile tile)
 	{	Fire result = null;
+		if(name==null)
+			name = fireFactories.keySet().iterator().next();
 		FireFactory fireFactory = fireFactories.get(name);
 if(fireFactory==null)
 	System.out.println(name);
