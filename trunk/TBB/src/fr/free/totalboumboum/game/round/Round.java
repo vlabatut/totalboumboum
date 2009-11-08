@@ -42,6 +42,7 @@ import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.loop.SimulationLoop;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.GameData;
+import fr.free.totalboumboum.game.limit.LimitTime;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
@@ -231,7 +232,12 @@ public class Round implements StatisticHolder, Serializable
 			if(getLimits().testLimit(this))
 				closeGame();
 			else
-				currentPoints = limits.processPoints(this);
+			{	LimitTime limit = limits.getTimeLimit();
+				if(limit!=null)
+					currentPoints = limit.processPoints(this);
+				else
+					limits.getLimit(0).processPoints(this);			
+			}
 		}
 	}
 	

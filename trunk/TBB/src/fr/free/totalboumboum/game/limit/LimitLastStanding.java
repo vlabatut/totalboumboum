@@ -56,11 +56,11 @@ public class LimitLastStanding implements RoundLimit
 	{	this.threshold = threshold;
 	}
 
-	public Comparisons getSupLimit()
+	public Comparisons getComparatorCode()
 	{	return comparatorCode;
 	}
 	
-	public void setsupLimit(Comparisons comparatorCode)
+	public void setComparatorCode(Comparisons comparatorCode)
 	{	this.comparatorCode = comparatorCode;
 	}
 

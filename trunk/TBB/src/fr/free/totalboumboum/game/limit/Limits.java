@@ -55,14 +55,19 @@ public class Limits<T extends Limit> implements Serializable
 	}
 
 	public float[] processPoints(StatisticHolder holder)
-	{	Limit limit;
-		// confrontation over
-		if(index>-1)
-			limit = limits.get(index);
-		// not over : use the first available limit
-		else
-			limit = limits.get(0);
+	{	Limit limit = limits.get(index);
 		float[] result = limit.processPoints(holder);
+		return result;
+	}
+	
+	public LimitTime getTimeLimit()
+	{	LimitTime result = null;
+		Iterator<T> it = limits.iterator();
+		while(it.hasNext() && result==null)
+		{	T limit = it.next();
+			if(limit instanceof LimitTime)
+				result = (LimitTime)limit;
+		}
 		return result;
 	}
 	

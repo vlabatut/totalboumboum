@@ -1053,9 +1053,16 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
-	 *	- parler des options des stats
-	 *	- stats : possibilité de masquer les ia/humains dans le classement, et non-classés
-	 *	- séparation des auto-bombages
+	 *	- IA :
+	 * 		- A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
+	 * 		- accès à la taille des cases
+	 * 		- AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir et le temps de latence de la bombe
+	 * 		- AiPath a une fonction renvoyant la distance totale en pixels 
+	 * 		- AiPath a une fonction renvoyant la temps nécessare à joueur pour le parcourir
+	 * 		- AiZone permet de récupérer le classement courant de tous les joueurs, pour le round et le match en cours 
+	 *	- stats
+	 *		- possibilité de masquer les ia/humains dans le classement, et non-classés
+	 *		- séparation des auto-bombages
 	 *	- affichage du nom des joueurs pendant le jeu en surimpression
 	 *	- GUI : 
 	 *		- soulignage des labels cliquables (quelques bugs)
@@ -1079,7 +1086,6 @@ public class Launcher
 	 * 		- pour faire un suivi d'une ia à travers plusieurs rounds :
 	 * 			- chemin permettant d'écrire dans le package de l'IA, afin de lui permettre de faire des sauvegardes ?
 	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
-	 * 		- classement des joueurs dans le round et dans le match
 	 * 		- renommer les packages des ia en fr.free.totalboumboum.ai.???? (faudra peut être renommer aussi les classes adapter)
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case

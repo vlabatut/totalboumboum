@@ -38,6 +38,7 @@ import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
+import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
@@ -96,6 +97,8 @@ public class AiZone
 	private long totalTime = 0;
 	/** temps écoulé depuis la mise à jour précédente de l'IA considérée */
 	private long elapsedTime = 0;
+	/** durée maximale de la partie */
+	private long limitTime = 0;
 	
 	/**
 	 * renvoie le temps total écoulé depuis le début du jeu
@@ -117,13 +120,25 @@ public class AiZone
 	}
 	
 	/**
+	 * renvoie la durée maximale de la partie
+	 * (elle peut éventuellement durer moins longtemps)
+	 * 
+	 * @return	la durée maximale de la partie
+	 */
+	public long getLimitTime()
+	{	return limitTime;		
+	}
+	
+	/**
 	 * met à jour les données temporelles
 	 * 
 	 * @param elapsedTime
 	 */
 	private void updateTimes(long elapsedTime)
-	{	this.totalTime = level.getLoop().getTotalGameTime();
-		this.elapsedTime = elapsedTime;		
+	{	LocalLoop loop = level.getLoop();
+		this.totalTime = loop.getTotalGameTime();
+		this.elapsedTime = elapsedTime;
+		this.limitTime = loop.getRound().getLimits().getTimeLimit().getThreshold();
 	}
 
 	/////////////////////////////////////////////////////////////////
