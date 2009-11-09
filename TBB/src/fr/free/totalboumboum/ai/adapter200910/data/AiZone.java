@@ -232,7 +232,8 @@ public class AiZone
 	 * met à jour la matrice en fonction de l'évolution du jeu
 	 */
 	private void updateMatrix()
-	{	// démarque tous les sprites
+	{	hiddenItemsCount = 0;
+		// démarque tous les sprites
 		uncheckAll(blockMap);
 		uncheckAll(bombMap);
 		uncheckAll(fireMap);
@@ -617,6 +618,8 @@ public class AiZone
 	private final HashMap<Item,AiItem> itemMap = new HashMap<Item,AiItem>();
 	/** liste externe des items contenus dans cette zone */
 	private final List<AiItem> itemList = new ArrayList<AiItem>();
+	/** nombre d'items cachés, i.e. pas encore ramassés */
+	private int hiddenItemsCount;
 	
 	/** 
 	 * renvoie la liste des items apparents contenus dans cette zone 
@@ -657,6 +660,28 @@ public class AiZone
 	 */
 	void addItem(AiItem item)
 	{	itemMap.put(item.getSprite(),item);	
+	}
+	
+	/**
+	 * permet de modifier le nombre d'items encore cachés dans ce niveau
+	 * 
+	 * @param hiddenItemsCount	le nouveau nombre d'items cachés dans le niveau
+	 */
+	void setHiddenItemsCount(int hiddenItemsCount)
+	{	this.hiddenItemsCount = hiddenItemsCount;	
+	}
+	
+	/**
+	 * renvoie le nombre d'items cachés restant dans le niveau.
+	 * Il s'agit des items qui sont encore cachés dans des blocs, 
+	 * et qui n'ont pas été ramassés. Cette information permet de
+	 * savoir s'il est encore nécessaire de faire exploser des blocs 
+	 * pour trouver des items, ou pas.
+	 * 
+	 * @return	le nombre d'items restant à découvrir
+	 */
+	public int getHiddenItemsCount()
+	{	return hiddenItemsCount;		
 	}
 	
 	/////////////////////////////////////////////////////////////////

@@ -345,8 +345,12 @@ public class AiTile
 			while(it.hasNext())
 			{	Item i = it.next();
 				GestureName gesture = i.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE
-					|| gesture==GestureName.HIDING
+				if(gesture==GestureName.NONE)
+				{	int hiddenItemsCount = zone.getHiddenItemsCount();
+					hiddenItemsCount++;
+					zone.setHiddenItemsCount(hiddenItemsCount);
+				}
+				else if(!(gesture==GestureName.HIDING
 					|| gesture==GestureName.ENDED))
 				{	AiItem item = zone.getItem(i);
 					if(item==null)
