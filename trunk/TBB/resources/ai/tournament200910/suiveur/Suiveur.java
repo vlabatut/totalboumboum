@@ -58,10 +58,7 @@ public class Suiveur extends ArtificialIntelligence
 			updateLocation();
 			if(verbose)
 				System.out.println(ownHero.getColor()+": ("+currentTile.getLine()+","+currentTile.getCol()+") ("+currentX+","+currentY+")");
-			Direction moveDir = Direction.NONE;
-			
-System.out.println(zone.getHiddenItemsCount());			
-			
+			Direction moveDir = Direction.NONE;			
 			
 			// on met à jour le gestionnaire de sécurité
 			safetyManager.update();
