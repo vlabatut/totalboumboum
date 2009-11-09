@@ -825,12 +825,14 @@ public class Launcher
 	 * - nouvelle version de shirobon issu de NBM1
 	 * - nouvelle instance : NES Bomberman 1
 	 * - 2 nouveaux niveaux pour illustrer l'instance NBM1
-	 * - API IA : A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
-	 * - API IA : accès à la taille des cases
-	 * - API IA : AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir et le temps de latence de la bombe
-	 * - API IA : AiPath a une fonction renvoyant la distance totale en pixels 
-	 * - API IA : AiPath a une fonction renvoyant la temps nécessare à joueur pour le parcourir
-	 * - API IA : AiZone permet de récupérer le classement courant de tous les joueurs, pour le round et le match en cours 
+	 * - API IA : 
+	 * 		- A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
+	 * 		- accès à la taille des cases
+	 * 		- AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir et le temps de latence de la bombe
+	 * 		- AiPath a une fonction renvoyant la distance totale en pixels 
+	 * 		- AiPath a une fonction renvoyant la temps nécessare à joueur pour le parcourir
+	 * 		- AiZone permet de récupérer le classement courant de tous les joueurs, pour le round et le match en cours
+	 * 		- AiZone permet maintenant de savoir combien il reste d'items planqués sous les blocs destructibles 
 	 * - ajout du système Glicko2
 	 * - adaptation de Glicko2 :
 	 * 		- serializable
@@ -1059,7 +1061,8 @@ public class Launcher
 	 * 		- AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir et le temps de latence de la bombe
 	 * 		- AiPath a une fonction renvoyant la distance totale en pixels 
 	 * 		- AiPath a une fonction renvoyant la temps nécessare à joueur pour le parcourir
-	 * 		- AiZone permet de récupérer le classement courant de tous les joueurs, pour le round et le match en cours 
+	 * 		- AiZone permet de récupérer le classement courant de tous les joueurs, pour le round et le match en cours
+	 * 		- AiZone permet de savoir combien d'items il reste, planqués sous les murs 
 	 *	- stats
 	 *		- possibilité de masquer les ia/humains dans le classement, et non-classés
 	 *		- séparation des auto-bombages
@@ -1078,7 +1081,6 @@ public class Launcher
 
 	/**
 	 * - percepts à rajouter
-	 * 		- il faut savoir quels items sont distribués dans le niveau
 	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
 	 * 			>> méthode prenant une position et un joueur en paramètres et calculant le blast et le temps de détonation d'une bombe posée là (voire donnant un objet bombe)
 	 * 			>> définir une classe bombe virtuelle ? destinée à ce seul effet ?

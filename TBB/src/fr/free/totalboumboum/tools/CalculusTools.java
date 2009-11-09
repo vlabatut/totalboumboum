@@ -21,18 +21,8 @@ package fr.free.totalboumboum.tools;
  * 
  */
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -215,19 +205,6 @@ public class CalculusTools
 		return result;
 	}
 
-	public static void main(String[] args)
-	{	//processChampionship(15,3);
-		
-//		Set<Set<Integer>> result = processCombinationsIter(23,23);
-		List<Set<Integer>> result = truc(7,4);
-		for(Set<Integer> set: result)
-		{	System.out.print("[ ");
-			for(Integer integer: set)
-				System.out.print(integer+" ");
-			System.out.println("]");
-		}
-	}
-	
 /*	public static void processChampionship(int totalPlayers, int matchPlayers)
 	{	List<Set<Integer>> matches = new ArrayList<Set<Integer>>();
 		Set<Set<Integer>> uniqueMatches = new TreeSet<Set<Integer>>(new Comparator<Set<Integer>>()
@@ -418,7 +395,7 @@ for(List<Set<Integer>> list: matches)
 	
 	}
 	
-	private static Set<Set<Integer>> processCombinationsRec(int n, int k)
+	public static Set<Set<Integer>> processCombinationsRec(int n, int k)
 	{	Set<Set<Integer>> result = new TreeSet<Set<Integer>>(new IntegerSetComparator());
 		
 		if(k==1)
@@ -444,7 +421,7 @@ for(List<Set<Integer>> list: matches)
 		return result;
 	}
 
-	private static Set<Set<Integer>> processCombinationsIter(int n, int k, List<Set<Integer>> previous)
+	public static Set<Set<Integer>> processCombinationsIter(int n, int k, List<Set<Integer>> previous)
 	{	System.out.println("\tprocess C("+n+","+k+")");
 		Set<Set<Integer>> result = new TreeSet<Set<Integer>>(new IntegerSetComparator());
 		
@@ -506,77 +483,7 @@ for(List<Set<Integer>> list: matches)
 		System.out.println("\tdone");
 		return result;
 	}
-	
-	private static List<Set<Integer>> truc(int n, int k)
-	{	List<Set<Integer>> result = new ArrayList<Set<Integer>>();
-		List<Set<Integer>> combis = null;
-		// process all possible rounds
-		List<Set<Integer>> rounds = new ArrayList<Set<Integer>>(processCombinationsIter(n,k,null));
 		
-		// process all possible combinations of rounds
-		int i=1;
-		while(i<=rounds.size() && result.isEmpty())
-		{	System.out.println("combinations of "+i+" rounds");
-			System.gc();
-			combis = new ArrayList<Set<Integer>>(processCombinationsIter(rounds.size(),i,combis));
-			int j=0;
-			while(j<combis.size() && result.isEmpty())
-			{	System.out.print("\tcombination "+(j+1)+" of "+combis.size());
-				Set<Integer> combi = combis.get(j);
-				// build rounds list
-				List<Set<Integer>> list = new ArrayList<Set<Integer>>();
-				for(Integer r: combi)
-					list.add(rounds.get(r));
-				// process confrontations distributions
-				int counts[][] = new int[n][n];
-				for(int l=0;l<n;l++)
-				{	for(int m=0;m<n;m++)
-						counts[l][m] = 0;
-				}
-				for(Set<Integer> round: list)
-				{	for(int p=0;p<n;p++)
-					{	if(round.contains(p))
-						{	for(Integer q: round)
-								counts[p][q]++;
-						}
-					}	
-				}
-				// test for stop condition
-				boolean correct = true;
-				int self = counts[0][0];
-				int others = counts[0][1];
-				int p = 0;
-				while(correct && p<n)
-				{	int q = 0;
-					while(correct && q<n)
-					{	if(p==q)
-							correct = counts[p][q]==self;
-						else
-							correct = counts[p][q]==others;
-						q++;
-					}
-					p++;
-				}
-				if(correct)
-				{	System.out.println(" >> done");
-					for(p=0;p<n;p++)
-					{	System.out.print("\t\t");
-						for(int q=0;q<n;q++)
-							System.out.print(" "+counts[p][q]);
-						System.out.println();
-					}
-					result = list;
-				}
-				else
-					System.out.println(" >> doesn't work");
-				
-				j++;
-			}
-			i++;
-		}
-		return result;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// ORDERING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
