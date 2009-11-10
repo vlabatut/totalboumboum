@@ -14,7 +14,6 @@
 	<author value="Vincent Labatut" />
 
 	<sequence>
-
  		<limits>
 			<confrontation>
 				<points local="false" name="TournamentBasic" />
@@ -25,7 +24,6 @@
 		<matches randomOrder="false">
 			<match local="true" name="match" />
 		</matches>
-
 	</sequence>
 		
 		

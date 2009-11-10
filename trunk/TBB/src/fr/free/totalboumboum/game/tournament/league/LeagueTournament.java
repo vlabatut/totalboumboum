@@ -21,62 +21,262 @@ package fr.free.totalboumboum.game.tournament.league;
  * 
  */
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
 
+import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.statistics.detailed.StatisticMatch;
+import fr.free.totalboumboum.statistics.detailed.StatisticTournament;
+import fr.free.totalboumboum.tools.CalculusTools;
 
 public class LeagueTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
 
-	@Override
-	public void matchOver() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void roundOver() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void finish() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Match getCurrentMatch() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/////////////////////////////////////////////////////////////////
+	// GAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void init()
-	{
-		// TODO Auto-generated method stub
-		
+	{	begun = true;
+		// matches
+		initMatches();
+		// stats
+		stats = new StatisticTournament(this);
+		stats.initStartDate();
 	}
 
 	@Override
-	public void progress() {
-		// TODO Auto-generated method stub
-		
+	public void progress()
+	{	if(!isOver())
+		{	// confrontations
+			Set<Integer> players = confrontations.get(matchCount);
+			matchCount++;
+			List<Profile> prof = new ArrayList<Profile>();
+			for(Integer idx: players)
+			{	Profile profile = profiles.get(idx);
+				prof.add(profile);
+			}
+			
+			// match
+			Match match = matches.get(currentIndex);
+			currentIndex++;
+			currentMatch = match.copy();
+			currentMatch.init(prof);
+		}
 	}
 
+	@Override
+	public void finish()
+	{	// points
+		pointsProcessor = null;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// POINTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsProcessor pointsProcessor;
+		
+	public PointsProcessor getPointsProcessor()
+	{	return pointsProcessor;
+	}
+
+	public void setPointsProcessor(PointsProcessor pointsProcessor)
+	{	this.pointsProcessor = pointsProcessor;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
-	{	// TODO Auto-generated method stub
-		return null;			
+	{	TreeSet<Integer> result = new TreeSet<Integer>();
+		for(int i=0;i<=GameData.MAX_PROFILES_COUNT;i++)
+			result.add(i);
+		for(Match m:matches)
+		{	Set<Integer> temp = m.getAllowedPlayerNumbers();
+			result.retainAll(temp);			
+		}
+		return result;			
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// RESULTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int[] getRanks(float[] pts)
+	{	int[] result = new int[getProfiles().size()];
+		for(int i=0;i<result.length;i++)
+			result[i] = 1;
+
+		for(int i=0;i<result.length-1;i++)
+		{	for(int j=i+1;j<result.length;j++)
+			{	if(pts[i]<pts[j])
+					result[i] = result[i] + 1;
+				else if(pts[i]>pts[j])
+					result[j] = result[j] + 1;
+			}
+		}	
+
+		return result;
 	}
 
 	@Override
-	public Ranks getOrderedPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+	public Ranks getOrderedPlayers()
+	{	Ranks result = new Ranks();
+		// points
+		float[] points = stats.getPoints();
+		float[] total = stats.getTotal();
+		// ranks
+		int ranks[];
+		int ranks2[];
+		if(isOver())
+		{	ranks = getRanks(points);
+			ranks2 = getRanks(total);
+		}
+		else
+		{	ranks = getRanks(total);
+			ranks2 = new int[ranks.length];
+			Arrays.fill(ranks2,0);
+		}
+		// result
+		for(int i=0;i<ranks.length;i++)
+		{	int rank = ranks[i];
+			int rank2 = ranks2[i];
+			Profile profile = getProfiles().get(i);
+			ArrayList<Profile> list = result.getProfilesFromRank(rank);
+			int index = -1;
+			// if no list yet : regular insertion
+			if(list==null)
+			{	result.addProfile(rank,profile);
+				index = 0;
+			}
+			// if list : insert at right place considering total points
+			else
+			{	int j = 0;
+				while(j<list.size() && index==-1)
+				{	Profile profileB = list.get(j);
+					int plrIdx = getProfiles().indexOf(profileB);
+					int rank2B = ranks2[plrIdx];
+					if(rank2<rank2B)
+						index = j;
+					else
+						j++;
+				}				
+				if(index==-1)
+					index = j;
+				list.add(index,profile);
+			}			
+		}
+			
+		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MATCHES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean randomizeMatches;
+	private boolean minimizeConfrontations;
+	private ArrayList<Match> matches = new ArrayList<Match>();
+	private Match currentMatch;
+	private int currentIndex;
+	private int matchCount;
+	private List<Set<Integer>> confrontations;
+
+	private void initMatches()
+	{	// matches
+		if(randomizeMatches)
+			randomizeMatches();
+		currentIndex = 0;
+		
+		// confrontations
+		int n = profiles.size();
+		List<Integer> ks = new ArrayList<Integer>(getAllowedPlayerNumbers());
+		confrontations = null;
+		// try to minimize the number of matches
+		if(minimizeConfrontations)
+		{	for(Integer k: ks)
+			{	List<Set<Integer>> conf = new ArrayList<Set<Integer>>(CalculusTools.processCombinationsRec/*processMinimalCombinations*/(n,k));
+				if(confrontations==null || conf.size()<confrontations.size())
+					confrontations = conf;
+			}			
+		}
+		// or choose all possible combinations (might be quite long)
+		else
+		{	for(Integer k: ks)
+			{	List<Set<Integer>> conf = new ArrayList<Set<Integer>>(CalculusTools.processCombinationsRec(n,k));
+				if(confrontations==null || conf.size()<confrontations.size())
+					confrontations = conf;
+			}
+		}
+		matchCount = 0;
+	}
+
+	public boolean getRandomizeMatches()
+	{	return randomizeMatches;
+	}
+	public void setRandomizeMatches(boolean randomOrder)
+	{	this.randomizeMatches = randomOrder;
+	}
+
+	public boolean getMinimizeConfrontations()
+	{	return minimizeConfrontations;
+	}
+	public void setMinimizeConfrontations(boolean minimizeConfrontations)
+	{	this.minimizeConfrontations = minimizeConfrontations;
+	}
+
+	public void addMatch(Match match)
+	{	matches.add(match);
+	}
+
+	private void randomizeMatches()
+	{	Calendar cal = new GregorianCalendar();
+		long seed = cal.getTimeInMillis();
+		Random random = new Random(seed);
+		Collections.shuffle(matches,random);
+	}
+
+	@Override
+	public Match getCurrentMatch()
+	{	return currentMatch;	
+	}
+
+	@Override
+	public void matchOver()
+	{	// stats
+		StatisticMatch statsMatch = currentMatch.getStats();
+		stats.addStatisticMatch(statsMatch);
+		// iterator
+		if(currentIndex>=matches.size())
+		{	if(randomizeMatches)
+				randomizeMatches();
+			currentIndex = 0;
+		}
+		// limits
+		if(matchCount==confrontations.size()-1)
+		{	float[] points = pointsProcessor.process(this);
+			stats.setPoints(points);
+			setOver(true);
+			panel.tournamentOver();
+			stats.initEndDate();
+		}
+		else
+		{	panel.matchOver();		
+		}
+	}
+	
+	public void roundOver()
+	{	panel.roundOver();
+	}
 }

@@ -16,15 +16,12 @@
 	<author value="Vincent Labatut" />
 
 	<sequence>
-
-
  		<limits>
 			<confrontation>
 				<points local="false" name="TournamentBasic" />
 				<threshold value="4" />
 			</confrontation>
  		</limits>
-
 	 	
 		<matches randomOrder="false">
 			<match local="false" name="SBM1custom" />
@@ -32,7 +29,6 @@
 			<match local="false" name="NBM2custom" />
 			<match local="false" name="NBM2official" />
 		</matches>
-
 	</sequence>
 		
 		

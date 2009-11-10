@@ -21,13 +21,33 @@ package fr.free.totalboumboum.game.tournament.league;
  * 
  */
 
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.jdom.Element;
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.game.tournament.cup.CupPlayerSort;
+import fr.free.totalboumboum.game.tournament.cup.CupTournament;
+import fr.free.totalboumboum.tools.XmlTools;
 
 public class LeagueTournamentLoader
 {
 
 	public static LeagueTournament loadTournamentElement(String folder, Element root)
-	{
-		return null;
+	{	LeagueTournament result = new LeagueTournament();
+		Element element;
+		
+		// sort players
+		String sortPlayersStr = root.getAttribute(XmlTools.SORT_PLAYERS).getValue().trim();
+		CupPlayerSort sortPlayers = CupPlayerSort.valueOf(sortPlayersStr);
+    	result.setSortPlayers(sortPlayers);
+    	
+		// legs
+		element = root;
+		loadLegsElement(element,folder,result);
+
+		return result;
 	}
 }

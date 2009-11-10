@@ -5,5 +5,4 @@ public enum CupPlayerSort
 	NONE,
 	RANDOM,
 	SEEDS;
-
 }
