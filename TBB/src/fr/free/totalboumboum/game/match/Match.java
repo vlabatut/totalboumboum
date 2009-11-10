@@ -29,6 +29,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -83,7 +84,7 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	private boolean matchOver = false;
 	
-	public void init(ArrayList<Profile> profiles)
+	public void init(List<Profile> profiles)
 	{	// are rounds in random order ?
     	if(randomOrder)
     		randomizeRounds();

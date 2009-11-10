@@ -60,17 +60,14 @@
 <!-- LEAGUE -->
 	<xsd:complexType name="tLeague">
 		<xsd:sequence>
+			<xsd:element name="points" type="tPointProcessor" />
+			<xsd:element name="matches" type="tMatches" maxOccurs="unbounded"/>
 		</xsd:sequence>
+		<xsd:attribute name="randomizePlayers" type="xsd:boolean" use="optional" default="false" />
+		<xsd:attribute name="minimizeConfrontations" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
 <!-- SEQUENCE -->
-	<xsd:complexType name="tMatches">
-		<xsd:sequence>
-			<xsd:element name="match" type="tMatch" maxOccurs="unbounded"/>
-		</xsd:sequence>
-		<xsd:attribute name="randomOrder" type="xsd:boolean" use="optional" default="false" />
-	</xsd:complexType>
-
 	<xsd:complexType name="tSequence">
 		<xsd:sequence>
 			<xsd:element name="limits" type="tTournamentLimits"  />
@@ -89,6 +86,13 @@
 	<xsd:complexType name="tMatch">
 		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
 		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tMatches">
+		<xsd:sequence>
+			<xsd:element name="match" type="tMatch" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="randomOrder" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tAuthor">

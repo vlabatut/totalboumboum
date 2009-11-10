@@ -51,6 +51,7 @@ public class SequenceTournament extends AbstractTournament
 	public Limits<TournamentLimit> getLimits()
 	{	return limits;
 	}
+	
 	public void setLimits(Limits<TournamentLimit> limits)
 	{	this.limits = limits;
 	}
@@ -61,13 +62,9 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public void init()
 	{	begun = true;
-		
-		// are matches in random order ?
-		if(randomizeMatches)
-			randomizeMatches();
-		
-		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
-		currentIndex = 0;
+		// matches
+		initMatches();
+		// stats
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}
@@ -84,8 +81,7 @@ public class SequenceTournament extends AbstractTournament
 
 	@Override
 	public void finish()
-	{	
-		// limits
+	{	// limits
 		limits.finish();
 		limits = null;
 	}
@@ -98,6 +94,15 @@ public class SequenceTournament extends AbstractTournament
 	private Match currentMatch;
 	private int currentIndex;
 
+	private void initMatches()
+	{	// are matches in random order ?
+		if(randomizeMatches)
+			randomizeMatches();
+		
+		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+		currentIndex = 0;
+	}
+	
 	public boolean getRandomizeMatches()
 	{	return randomizeMatches;
 	}
@@ -167,7 +172,6 @@ public class SequenceTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	private int[] getRanks(float[] pts)
 	{	int[] result = new int[getProfiles().size()];
 		for(int i=0;i<result.length;i++)
@@ -185,6 +189,7 @@ public class SequenceTournament extends AbstractTournament
 		return result;
 	}
 	
+	@Override
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();
 		// points
