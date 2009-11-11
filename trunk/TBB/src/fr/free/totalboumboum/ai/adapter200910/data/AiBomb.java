@@ -221,12 +221,13 @@ public class AiBomb extends AiSprite<Bomb>
 	 * ne donne que les cases qui seront touchées si la bombe devait exploser
 	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
 	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
-	 * alors le souffle peut changer.
+	 * alors le souffle peut changer, il faut ré-exécuter cette méthode pour avoir le
+	 * nouveau souffle de la bombe dans ce nouvel environnement.
 	 * 
 	 * @return	une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
 	 */
 	public List<AiTile> getBlast()
-	{	return blast;	
+	{	return blast;
 	}
 
 	/**
