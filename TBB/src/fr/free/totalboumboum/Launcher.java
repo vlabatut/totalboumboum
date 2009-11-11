@@ -1084,6 +1084,11 @@ public class Launcher
 	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
 	 * 			>> méthode prenant une position et un joueur en paramètres et calculant le blast et le temps de détonation d'une bombe posée là (voire donnant un objet bombe)
 	 * 			>> définir une classe bombe virtuelle ? destinée à ce seul effet ?
+	 * 		- donner les probas de panne d'une bombe
+	 * 		- la notion de blast peut être imprécise quand plusieurs bombes sont concernées
+	 * 			>> ça empêche de calculer des réaction en chaine
+	 * 			>> faudrait associer le temps
+	 * 			>> ça permettrait d'implémenter une fonction calculant l'état des explosions dans le futur, utilisable à la fois pour les bombes normales et pour les bombes virtuelles
 	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
 	 * 		- pour faire un suivi d'une ia à travers plusieurs rounds :
 	 * 			- chemin permettant d'écrire dans le package de l'IA, afin de lui permettre de faire des sauvegardes ?
