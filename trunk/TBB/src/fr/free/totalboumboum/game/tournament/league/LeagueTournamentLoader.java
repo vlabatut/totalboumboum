@@ -22,32 +22,65 @@ package fr.free.totalboumboum.game.tournament.league;
  */
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.game.tournament.cup.CupPlayerSort;
-import fr.free.totalboumboum.game.tournament.cup.CupTournament;
+import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.points.PointsProcessorLoader;
+import fr.free.totalboumboum.game.tournament.TournamentLoader;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class LeagueTournamentLoader
 {
-
-	public static LeagueTournament loadTournamentElement(String folder, Element root)
+	public static LeagueTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	LeagueTournament result = new LeagueTournament();
 		Element element;
 		
-		// sort players
-		String sortPlayersStr = root.getAttribute(XmlTools.SORT_PLAYERS).getValue().trim();
-		CupPlayerSort sortPlayers = CupPlayerSort.valueOf(sortPlayersStr);
-    	result.setSortPlayers(sortPlayers);
+		// randomize players
+		String randomizePlayersStr = root.getAttribute(XmlTools.RANDOMIZE_PLAYERS).getValue().trim();
+		boolean randomizePlayers = Boolean.parseBoolean(randomizePlayersStr);
+    	result.setRandomizePlayers(randomizePlayers);
     	
-		// legs
-		element = root;
-		loadLegsElement(element,folder,result);
+    	// minimize confrontations
+		String minimizeConfrontationsStr = root.getAttribute(XmlTools.MINIMIZE_CONFRONTATIONS).getValue().trim();
+		boolean minimizeConfrontations = Boolean.parseBoolean(minimizeConfrontationsStr);
+    	result.setMinimizeConfrontations(minimizeConfrontations);
+    	
+		// point processor
+    	Element pointsProcessorElt = root.getChild(XmlTools.SOURCE);
+		PointsProcessor pointsProcessor = PointsProcessorLoader.loadPointProcessorFromElement(pointsProcessorElt,folder);
+		result.setPointsProcessor(pointsProcessor);
+		
+		// matches
+		element = root.getChild(XmlTools.MATCHES);
+		loadMatchesElement(element,folder,result);
 
 		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	private static void loadMatchesElement(Element root, String folder, LeagueTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	// matches order
+    	String str = root.getAttribute(XmlTools.RANDOM_ORDER).getValue().trim();
+    	boolean randomOrder = Boolean.valueOf(str);
+    	result.setRandomizeMatches(randomOrder);
+    	// matches
+    	List<Element> matches = root.getChildren(XmlTools.MATCH);
+		Iterator<Element> i = matches.iterator();
+		while(i.hasNext())
+		{	Element temp = i.next();
+			loadMatchElement(temp,folder,result);
+		}
+	}
+		
+	private static void loadMatchElement(Element root, String folder, LeagueTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	Match match = TournamentLoader.loadMatchElement(root,folder,result);
+		result.addMatch(match);
 	}
 }

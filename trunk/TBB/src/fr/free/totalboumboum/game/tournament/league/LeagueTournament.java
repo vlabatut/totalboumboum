@@ -50,8 +50,14 @@ public class LeagueTournament extends AbstractTournament
 	@Override
 	public void init()
 	{	begun = true;
+	
+		// players
+		if(randomizePlayers)
+			Collections.shuffle(profiles);
+	
 		// matches
 		initMatches();
+		
 		// stats
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
@@ -99,6 +105,16 @@ public class LeagueTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private boolean randomizePlayers;
+	
+	public boolean getRandomizePlayers()
+	{	return randomizePlayers;
+	}
+
+	public void setRandomizePlayers(boolean randomizePlayers)
+	{	this.randomizePlayers = randomizePlayers;
+	}
+
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	TreeSet<Integer> result = new TreeSet<Integer>();

@@ -197,6 +197,7 @@ public class XmlTools
 	public static final String MAXIMUM = "maximum";
 	public static final String MAXPLAYERS = "maxPlayers";
 	public static final String MIN = "min";
+	public static final String MINIMIZE_CONFRONTATIONS = "minimizeConfrontations"; 
 	public static final String MINIMUM = "minimum";
 	public static final String MISC = "misc";
 	public static final String MODULATION = "modulation";
