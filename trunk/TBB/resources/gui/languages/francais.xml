@@ -996,6 +996,10 @@
 					<text name="SelfBombings" value="Auto-bombage"  tooltip="Nombre total d'auto-bombages réalisés au cours de ce tournoi" />
 					<text name="Time" value="Temps"  tooltip="Nombre total cumulé au cours du tournoi" />
 					<text name="Total" value="Total"  tooltip="Nombre total de points marqués au cours des rencontres" />
+					<text name="Played" value="Jouées"  tooltip="Nombre total de rencontres jouées" />
+					<text name="Won" value="Gagnées"  tooltip="Nombre total de rencontres gagnées" />
+					<text name="Drawn" value="Nulles"  tooltip="Nombre total de rencontres nulles" />
+					<text name="Lost" value="Perdues"  tooltip="Nombre total de rencontres perdues" />
 				</group>
 				<group name="Data">
 						<text name="Computer" value="Ordinateur"  tooltip="Ce joueur est contrôlé par l'ordinateur" />

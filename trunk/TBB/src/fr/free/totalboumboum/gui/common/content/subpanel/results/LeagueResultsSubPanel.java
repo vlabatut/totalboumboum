@@ -134,18 +134,15 @@ public class LeagueResultsSubPanel extends TableSubPanel
 					col++;
 				}
 				if(showConfrontations)
-				{	String key = headerPrefix+GuiKeys.CONFRONTATION;
-					String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
-					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
-					for(int c=0;c<confrontationsCount;c++)
-					{	String tempText = text+(c+1);
-						String tempTooltip = tooltip+" "+(c+1);
-						setLabelText(0,col+c,tempText,tempTooltip);
-						int temp = GuiTools.getPixelWidth(getLineFontSize(),tempText); 
-						if(temp>confrontationsWidth[c])
-							confrontationsWidth[c] = temp;
-					}
-					col = col+confrontationsCount;
+				{	String keys[] = 
+					{	headerPrefix+GuiKeys.PLAYED,
+						headerPrefix+GuiKeys.WON,
+						headerPrefix+GuiKeys.DRAWN,
+						headerPrefix+GuiKeys.LOST
+					};
+					for(int c=0;c<keys.length;c++)
+						setLabelKey(0,col+c,keys[c],true);
+					col = col+keys.length;
 				}
 				if(showTotal)
 				{	String key = headerPrefix+GuiKeys.TOTAL;
@@ -155,7 +152,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 			}
 			
 			// init
-			StatisticBase stats = statisticHolder.getStats();
+			StatisticBase stats = leagueTournament.getStats();
 			ArrayList<StatisticBase> confrontationStats = stats.getConfrontationStats();
 			ArrayList<Profile> players = statisticHolder.getProfiles();
 			Ranks orderedPlayers = statisticHolder.getOrderedPlayers();

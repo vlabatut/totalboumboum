@@ -998,6 +998,10 @@
 					<text name="SelfBombings" value="Self-bombings"  tooltip="Total number of times the player exploded himself in this tournament" />
 					<text name="Time" value="Time"  tooltip="Total time spend in the tournament" />
 					<text name="Total" value="Total"  tooltip="Total number of points scored for all the matches" />
+					<text name="Played" value="Played"  tooltip="Total number of matches played" />
+					<text name="Won" value="Won"  tooltip="Total number of matches won" />
+					<text name="Drawn" value="Drawn"  tooltip="Total number of matches drawn" />
+					<text name="Lost" value="Lost"  tooltip="Total number of matches lost" />
 				</group>
 				<group name="Data">
 						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
