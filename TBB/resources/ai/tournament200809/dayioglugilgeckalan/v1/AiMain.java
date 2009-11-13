@@ -27,7 +27,7 @@ public class AiMain extends AiManager
 {
 
 	public AiMain()
-	{	super(new CoremenKucukkarakurt());
+	{	super(new DayioglugilGeckalan());
 	}
 
 }
