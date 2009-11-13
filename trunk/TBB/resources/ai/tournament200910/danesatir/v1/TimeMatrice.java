@@ -1,4 +1,4 @@
-package tournament200910.danesatir;
+package tournament200910.danesatir.v1;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,9 +13,9 @@ public class TimeMatrice {
 	private double[][] matrice;
 	private AiZone zone;
 	private List<AiBomb> bombs;
-	private MonIA ai;
+	private DaneSatir ai;
 	
-	public TimeMatrice(MonIA ai) {
+	public TimeMatrice(DaneSatir ai) {
 		this.ai=ai;
 		this.zone=ai.getPercepts();
 		matrice = new double[this.zone.getHeigh()][this.zone.getWidth()];

@@ -1,4 +1,4 @@
-package tournament200910.danesatir;
+package tournament200910.danesatir.v1;
 
 import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
@@ -9,10 +9,10 @@ import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException
  */
 public class MonTraitement
 {	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
-	private MonIA monIa;
+	private DaneSatir monIa;
 	
 	/** une méthode bidon pour l'exemple */
-	public MonTraitement(MonIA monIa) throws StopRequestException
+	public MonTraitement(DaneSatir monIa) throws StopRequestException
 	{	// avant tout : test d'interruption
 		monIa.checkInterruption();
 		

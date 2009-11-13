@@ -1,5 +1,6 @@
 package tournament200910.danesatir;
 
+import tournament200910.danesatir.v1.DaneSatir;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**
@@ -11,6 +12,6 @@ public class AiMain extends AiManager
 	 * constructeur utilisé pour créer une instance de l'IA
 	 */
 	public AiMain()
-	{	super(new MonIA());		
+	{	super(new DaneSatir());		
 	}
 }
