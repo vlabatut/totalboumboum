@@ -21,6 +21,7 @@ package tournament200809.tirtiltomruk;
  * 
  */
 
+import tournament200809.tirtiltomruk.v2.TirtilTomruk;
 import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager
