@@ -21,6 +21,7 @@ package tournament200809.caliskancapdoganer;
  * 
  */
 
+import tournament200809.caliskancapdoganer.v1.CaliskanCapDoganer;
 import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager

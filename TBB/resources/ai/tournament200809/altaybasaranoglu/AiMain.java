@@ -21,6 +21,7 @@ package tournament200809.altaybasaranoglu;
  * 
  */
 
+import tournament200809.altaybasaranoglu.v2.AltayBasaranoglu;
 import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager

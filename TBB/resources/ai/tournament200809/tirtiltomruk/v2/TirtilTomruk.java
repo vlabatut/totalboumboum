@@ -7,13 +7,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Vector;
 
-import tournament200809.tirtiltomruk.astaralgorithm.PathFinder;
-import tournament200809.tirtiltomruk.astaralgorithm.SearchModeEnum;
-import tournament200809.tirtiltomruk.zone.TimedBomb;
-import tournament200809.tirtiltomruk.zone.TimedBombComparator;
-import tournament200809.tirtiltomruk.zone.Zone;
-import tournament200809.tirtiltomruk.zone.ZoneDanger;
-import tournament200809.tirtiltomruk.zone.ZoneEnum;
+import tournament200809.tirtiltomruk.v2.astaralgorithm.PathFinder;
+import tournament200809.tirtiltomruk.v2.astaralgorithm.SearchModeEnum;
+import tournament200809.tirtiltomruk.v2.zone.TimedBomb;
+import tournament200809.tirtiltomruk.v2.zone.TimedBombComparator;
+import tournament200809.tirtiltomruk.v2.zone.Zone;
+import tournament200809.tirtiltomruk.v2.zone.ZoneDanger;
+import tournament200809.tirtiltomruk.v2.zone.ZoneEnum;
 import fr.free.totalboumboum.ai.adapter200809.AiAction;
 import fr.free.totalboumboum.ai.adapter200809.AiActionName;
 

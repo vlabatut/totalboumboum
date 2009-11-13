@@ -21,6 +21,7 @@ package tournament200809.erisikpektas;
  * 
  */
 
+import tournament200809.erisikpektas.v2.ErisikPektas;
 import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager

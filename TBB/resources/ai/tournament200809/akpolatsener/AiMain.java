@@ -21,6 +21,7 @@ package tournament200809.akpolatsener;
  * 
  */
 
+import tournament200809.akpolatsener.v2.AkpolatSener;
 import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager
