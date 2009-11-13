@@ -13,7 +13,7 @@
  	
 	<author value="Vincent Labatut" />
 
-	<league randomizePlayers="true" minimizeConfrontations="true" >
+	<league randomizePlayers="false" minimizeConfrontations="false" >
 		<points local="false" name="TournamentBasic" />
 		<matches randomOrder="true">
 			<match local="true" name="matchA" />

@@ -53,7 +53,7 @@ public class LeagueTournamentLoader
     	result.setMinimizeConfrontations(minimizeConfrontations);
     	
 		// point processor
-    	Element pointsProcessorElt = root.getChild(XmlTools.SOURCE);
+    	Element pointsProcessorElt = root.getChild(XmlTools.POINTS);
 		PointsProcessor pointsProcessor = PointsProcessorLoader.loadPointProcessorFromElement(pointsProcessorElt,folder);
 		result.setPointsProcessor(pointsProcessor);
 		

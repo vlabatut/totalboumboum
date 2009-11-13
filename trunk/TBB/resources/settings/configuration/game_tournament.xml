@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gameTournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_tournament.xsd">
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
-	<tournament name="ClassicCup" />
+	<tournament name="LeagueTest" />
 	<players>
 		<player file="65" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 		<player file="57" color="RUST" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />

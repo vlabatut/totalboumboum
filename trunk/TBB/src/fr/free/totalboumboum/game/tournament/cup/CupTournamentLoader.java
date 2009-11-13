@@ -45,7 +45,7 @@ public class CupTournamentLoader
 		Element element;
 		
 		// randomize players
-		String sortPlayersStr = root.getAttribute(XmlTools.RANDOMIZE_PLAYERS).getValue().trim();
+		String sortPlayersStr = root.getAttribute(XmlTools.SORT_PLAYERS).getValue().trim();
 		CupPlayerSort sortPlayers = CupPlayerSort.valueOf(sortPlayersStr);
     	result.setSortPlayers(sortPlayers);
     	

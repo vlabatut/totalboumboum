@@ -45,7 +45,7 @@ import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
 import fr.free.totalboumboum.tools.StringTools;
 import fr.free.totalboumboum.tools.StringTools.TimeUnit;
 
-public class ResultsSubPanel extends TableSubPanel
+public class HomogenResultsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 16+1;
 	private static final int COLS = 0;
@@ -53,7 +53,7 @@ public class ResultsSubPanel extends TableSubPanel
 
 	private String prefix;
 
-	public ResultsSubPanel(int width, int height)
+	public HomogenResultsSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,true);
 		
 		setStatisticHolder(null);

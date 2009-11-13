@@ -941,6 +941,7 @@ public class Launcher
 	 * 		- faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatibles avec le tournoi 2007-08
 	 * 		- besoin d'une méthode permettant d'exporter un tournoi/match/round, 
 	 * 		  ie de l'écrire entièrement en local (pas de référence à des composants existants)
+	 * 		- dans les fichiers xml, pour les points, plutot que local (vrai ou faux), utiliser round/match/tournament/game (permet de mieux mutualiser les fichiers)
 	 * 
 	 * - Items :
 	 * 		- définir des noms "human readable" pour les items, histoire de ne pas afficher ces codes internes dans la GUI, en profiter pour introduire une decription, le tout en plusieurs langues. utiliser le code ISO comme paramètre de langue, et l'introduire dans le fichier de langue

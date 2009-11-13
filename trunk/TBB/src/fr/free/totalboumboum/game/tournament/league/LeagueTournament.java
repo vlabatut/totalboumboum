@@ -115,15 +115,25 @@ public class LeagueTournament extends AbstractTournament
 	{	this.randomizePlayers = randomizePlayers;
 	}
 
-	@Override
-	public Set<Integer> getAllowedPlayerNumbers()
-	{	TreeSet<Integer> result = new TreeSet<Integer>();
-		for(int i=0;i<=GameData.MAX_PROFILES_COUNT;i++)
+	public Set<Integer> getMatchesAllowedPlayerNumbers()
+	{	Set<Integer> result = new TreeSet<Integer>();
+		for(int i=2;i<=GameData.MAX_PROFILES_COUNT;i++)
 			result.add(i);
 		for(Match m:matches)
 		{	Set<Integer> temp = m.getAllowedPlayerNumbers();
 			result.retainAll(temp);			
 		}
+		return result;			
+	}
+
+	@Override
+	public Set<Integer> getAllowedPlayerNumbers()
+	{	Set<Integer> result = getMatchesAllowedPlayerNumbers();
+		int min = Collections.min(result);
+		min = Math.max(min,2);
+		result = new TreeSet<Integer>();
+		for(int i=min;i<=GameData.MAX_PROFILES_COUNT;i++)
+			result.add(i);
 		return result;			
 	}
 
@@ -217,7 +227,7 @@ public class LeagueTournament extends AbstractTournament
 		
 		// confrontations
 		int n = profiles.size();
-		List<Integer> ks = new ArrayList<Integer>(getAllowedPlayerNumbers());
+		List<Integer> ks = new ArrayList<Integer>(getMatchesAllowedPlayerNumbers());
 		confrontations = null;
 		// try to minimize the number of matches
 		if(minimizeConfrontations)
