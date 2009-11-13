@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Vector;
 
-import tournament200809.tirtiltomruk.TirtilTomruk;
+import tournament200809.tirtiltomruk.v2.TirtilTomruk;
 import fr.free.totalboumboum.ai.adapter200809.AiBlock;
 import fr.free.totalboumboum.ai.adapter200809.AiBomb;
 import fr.free.totalboumboum.ai.adapter200809.AiFire;

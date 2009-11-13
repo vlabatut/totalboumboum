@@ -1,4 +1,4 @@
-package tournament200809.tirtiltomruk;
+package tournament200809.tirtiltomruk.v2;
 
 
 import java.util.Collection;
