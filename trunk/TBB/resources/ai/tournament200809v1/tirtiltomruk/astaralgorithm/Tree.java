@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
 
-import tournament200809v1.tirtiltomruk.TirtilTomruk;
+import tournament200809.tirtiltomruk.v1.TirtilTomruk;
 import tournament200809v1.tirtiltomruk.zone.ZoneEnum;
 
 /**
