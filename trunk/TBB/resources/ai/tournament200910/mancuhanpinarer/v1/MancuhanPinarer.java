@@ -1,4 +1,4 @@
-package tournament200910.mancuhanpinarer;
+package tournament200910.mancuhanpinarer.v1;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,10 +26,15 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 /**
  * 
  * Cette classe implemente l'AI du groupe rouge. Actuellement, la strategie
- * de defense est implemente. Heureusement, nous avons trouve notre erreur.
- * :-)
+ * de defense est implemente. Malheureusement, notre hero rouge ne se deplace
+ * pas sur la zone quand la methode processAction() est sollicite par le moteur
+ * du jeu. Apres l'operation debug, nous avons remarque que notre methode 
+ * calculateShortestPath renvoie un objet AiPath qui se compose d'un seul AiTile.
+ * De plus, cette AiTile possede les memes coordonnes que la position initiale de l'hero.
+ * A chaque appel par le moteur, nous avons la meme probleme. Alors, le hero ne se
+ * deplace pas.
  * 
- * Pourriez-vous nous evaluer celui-ci? 
+ * Pourriez-vous nous aider pour notre probleme? 
  *   
  * @author Koray Mancuhan/Ozgun Pinarer
  *
@@ -38,7 +43,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	private final int CASE_SUR = 0;
 	private final int CASE_INACCESSIBLE = 1;
 	private final int CASE_SCOPE = 2;
-	private AiPath nextMove=null;
+	private AiPath nextMove;
 	private AiHero ourHero;
 
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
@@ -48,15 +53,13 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		//La perception instantanement de l'environnement
 		AiZone gameZone = getPercepts();
 		//Le resultat du traitement indiquant l'action suivante
-		AiAction result=new AiAction(AiActionName.NONE);
+		AiAction result;
 		//Notre hero dans cette zone
 		this.ourHero = gameZone.getOwnHero();
-		this.defenseAlgorithm(gameZone);
 		//On implemente la strategie de defense
-		
-		result=this.newAction();
-		
+		this.defenseAlgorithm(gameZone);
 		//On assigne la nouvelle action
+		result = this.newAction();
 		return result;
 	}
 
@@ -100,10 +103,10 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 			matriceDefense[bomb.getLine()][bomb.getCol()] = CASE_INACCESSIBLE;
 			Collection<AiTile> inScopeTiles = bomb.getBlast();
 			Iterator<AiTile> iteratorScope = inScopeTiles.iterator();
-			
 			while (iteratorScope.hasNext()) {
 				checkInterruption();
-				matriceDefense[iteratorScope.next().getLine()][iteratorScope.next().getCol()] = CASE_SCOPE;
+				matriceDefense[iteratorScope.next().getLine()][iteratorScope
+						.next().getCol()] = CASE_SCOPE;
 			}
 		}
 	}
@@ -168,8 +171,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 			for (int j = 0; j < width; j++) {
 				checkInterruption();
 				if (matriceDefense[i][j] == CASE_SUR || matriceDefense[i][j] == CASE_SCOPE) {
-					if(i!=this.ourHero.getLine() && j!=this.ourHero.getCol())
-						endPoints.add(gameZone.getTile(i, j));
+					endPoints.add(gameZone.getTile(i, j));
 				}
 			}
 		}
@@ -184,11 +186,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 */
 	private void defenseAlgorithm(AiZone gameZone)throws StopRequestException {
 		checkInterruption();
-		//la longueur de la zone
 		int width = gameZone.getWidth();
-		//la largeur de la zone
 		int height = gameZone.getHeigh();
-		//la matrice de defense
 		int[][] matriceDefense = new int[height][width];
 		
 		//initialisation de matrice de defense
@@ -202,26 +201,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		AiTile startPoint = ourHero.getTile();
 		//Les positions finales possibles de notre hero calcule par la methode calculateEndPoints
 		List<AiTile> endPoints = this.calculateEndPoints(matriceDefense, gameZone);
-		//Si c'est le premier appel par le moteur ou l'agent a complete son objectif
-		if(this.nextMove==null){
-			//Le nouveau chemin le plus court est calcule utilisant la methode 
-			//calculateShortestPath
-			this.nextMove = this.calculateShortestPath(ourHero,startPoint,endPoints);
-		}
-		//Si non 
-		else{
-			//Si le joueur est arrive au case suivant
-			if((this.ourHero.getLine()==this.nextMove.getTile(0).getLine()) &&
-					(this.ourHero.getCol()==this.nextMove.getTile(0).getCol())){
-				//On enleve cette cases da la liste des cases suivantes nextMove
-				this.nextMove.getTiles().remove(0);
-				//Si la liste est vide, alors l'objectif est obtenu et
-				//il n'y a pas plus de cases a suivre
-				if(this.nextMove.getTiles().isEmpty())
-					this.nextMove=null;
-			}
-		}
-			
+		//Le chemin le plus court est calcule utilisant la methode calculateShortestPath
+		this.nextMove = this.calculateShortestPath(ourHero,startPoint,endPoints);
 	}
 
 	/**
@@ -258,41 +239,39 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 */
 	private AiAction newAction() throws StopRequestException {
 		checkInterruption();
-		//les cases suivant pour le deplacement.
 		ArrayList<AiTile> tiles = this.nextMove.getTiles();
 		//deplacement sur l'abcisse
-		int dx;
+		double dx;
 		//deplacement sur l'ordonne
 		double dy;
 		
 		//calcul de deplacement sur l'abcisse par rapport a la position de l'hero et la premiere 
 		//case du chemin le plus court. 
-		dx = (tiles.get(0).getLine())-(this.ourHero.getLine());
+		dx = (this.ourHero.getPosX()) - (tiles.get(0).getPosX());
 		//calcul de deplacement sur l'ordonne par rapport a la position de l'hero et la premiere 
 		//case du chemin le plus court. 
-		dy = (tiles.get(0).getCol())-(this.ourHero.getCol());
+		dy = (this.ourHero.getPosY()) - (tiles.get(0).getPosY());
 		
 		//Determine la direction ou le hero va se deplacer.
 		if (dx < 0 && dy == 0) {
-			return new AiAction(AiActionName.MOVE, Direction.UP);
+			return new AiAction(AiActionName.MOVE, Direction.LEFT);
 		} else if (dx < 0 && dy < 0) {
 			return new AiAction(AiActionName.MOVE, Direction.UPLEFT);
 		} else if (dx == 0 && dy < 0) {
-			return new AiAction(AiActionName.MOVE, Direction.LEFT);
+			return new AiAction(AiActionName.MOVE, Direction.UP);
 		} else if (dx > 0 && dy == 0) {
-			return new AiAction(AiActionName.MOVE, Direction.DOWN);
+			return new AiAction(AiActionName.MOVE, Direction.RIGHT);
 		} else if (dx > 0 && dy > 0) {
 			return new AiAction(AiActionName.MOVE, Direction.DOWNRIGHT);
 		} else if (dx == 0 && dy > 0) {
-			return new AiAction(AiActionName.MOVE, Direction.RIGHT);
+			return new AiAction(AiActionName.MOVE, Direction.DOWN);
 		} else if (dx > 0 && dy < 0) {
-			return new AiAction(AiActionName.MOVE, Direction.DOWNLEFT);
-		} else if (dx < 0 && dy > 0) {
 			return new AiAction(AiActionName.MOVE, Direction.UPRIGHT);
+		} else if (dx < 0 && dy > 0) {
+			return new AiAction(AiActionName.MOVE, Direction.DOWNLEFT);
 		} else {
 			return new AiAction(AiActionName.NONE);
 		}
-		
-		
+
 	}
 }
