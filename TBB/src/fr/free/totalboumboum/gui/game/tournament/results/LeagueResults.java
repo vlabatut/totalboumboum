@@ -22,20 +22,20 @@ package fr.free.totalboumboum.gui.game.tournament.results;
  */
 
 import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
-import fr.free.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.results.LeagueResultsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 
 public class LeagueResults extends TournamentResults<LeagueTournament>
 {	
 	private static final long serialVersionUID = 1L;
 
-	private HomogenResultsSubPanel resultsPanel;
+	private LeagueResultsSubPanel resultsPanel;
 	
 	public LeagueResults(SplitMenuPanel container)
 	{	super(container);
 		
 		// data
-		{	resultsPanel = new HomogenResultsSubPanel(dataWidth,dataHeight);
+		{	resultsPanel = new LeagueResultsSubPanel(dataWidth,dataHeight);
 			resultsPanel.setShowTime(false);
 			setDataPart(resultsPanel);
 		}
@@ -47,7 +47,7 @@ public class LeagueResults extends TournamentResults<LeagueTournament>
 	@Override
 	public void setTournament(LeagueTournament tournament)
 	{	this.tournament = tournament;
-		resultsPanel.setStatisticHolder(tournament);
+		resultsPanel.setLeagueTournament(tournament);
 	}
 	
 	/////////////////////////////////////////////////////////////////

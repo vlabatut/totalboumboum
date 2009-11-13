@@ -25,24 +25,17 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
-import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.statistics.detailed.Score;
-import fr.free.totalboumboum.statistics.detailed.StatisticBase;
-import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
+import fr.free.totalboumboum.statistics.detailed.StatisticTournament;
 import fr.free.totalboumboum.tools.StringTools;
 import fr.free.totalboumboum.tools.StringTools.TimeUnit;
 
@@ -101,7 +94,6 @@ public class LeagueResultsSubPanel extends TableSubPanel
 			int timeWidth = headerHeight;
 			int confrontationsWidth[] = {headerHeight,headerHeight,headerHeight,headerHeight};
 			int totalWidth = headerHeight;
-			int pointsWidth = headerHeight;
 			
 			// headers
 			int col = 0;
@@ -152,17 +144,16 @@ public class LeagueResultsSubPanel extends TableSubPanel
 			}
 			
 			// init
-			StatisticBase stats = leagueTournament.getStats();
-			ArrayList<StatisticBase> confrontationStats = stats.getConfrontationStats();
-			ArrayList<Profile> players = statisticHolder.getProfiles();
-			Ranks orderedPlayers = statisticHolder.getOrderedPlayers();
-			float[] points = stats.getPoints();
-			float[] partialPoints = stats.getTotal();
+			StatisticTournament stats = leagueTournament.getStats();
+			//ArrayList<StatisticBase> confrontationStats = stats.getConfrontationStats();
+			ArrayList<Profile> players = leagueTournament.getProfiles();
+			Ranks orderedPlayers = leagueTournament.getOrderedPlayers();
+			float[] total = stats.getTotal();
 	
 			// display the ranking
 			col = 0;
 			int line = 0;
-			for(int i=0;i<points.length;i++)
+			for(int i=0;i<total.length;i++)
 			{	// init
 				col = 0;
 				line++;
@@ -231,31 +222,29 @@ public class LeagueResultsSubPanel extends TableSubPanel
 					col++;
 				}
 				// confrontations
-				if(showConfrontations && !(statisticHolder instanceof Round))
-				{	Iterator<StatisticBase> r = confrontationStats.iterator();
-					int cfrt = 0;
-					while(r.hasNext())
-					{	StatisticBase statB = r.next();
-						float pts = statB.getPoints()[profileIndex];
-						NumberFormat nf = NumberFormat.getInstance();
-						nf.setMaximumFractionDigits(2);
-						nf.setMinimumFractionDigits(0);
-						String text = nf.format(pts);
-						String tooltip = nf.format(pts);
+				if(showConfrontations)
+				{	String[] confs = 
+					{	Integer.toString(stats.getPlayed()[profileIndex]),
+						Integer.toString(stats.getWon()[profileIndex]),
+						Integer.toString(stats.getDrawn()[profileIndex]),
+						Integer.toString(stats.getLost()[profileIndex]),
+					};
+					for(int j=0;j<confs.length;j++)
+					{	String text = confs[j];
+						String tooltip = confs[j];
 						setLabelText(line,col,text,tooltip);
-						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2;
+						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-						setLabelBackground(line,col,bg);			
+						setLabelBackground(line,col,bg);
 						int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
-						if(temp>confrontationsWidth[cfrt])
-							confrontationsWidth[cfrt] = temp;
-						cfrt++;
+						if(temp>confrontationsWidth[j])
+							confrontationsWidth[j] = temp;
 						col++;
 					}
-				}
+				}			
 				// total
-				if(showTotal && !(statisticHolder instanceof Round))
-				{	float pts = partialPoints[profileIndex];
+				if(showTotal)
+				{	float pts = total[profileIndex];
 					NumberFormat nf = NumberFormat.getInstance();
 					nf.setMaximumFractionDigits(2);
 					nf.setMinimumFractionDigits(0);
@@ -269,23 +258,6 @@ public class LeagueResultsSubPanel extends TableSubPanel
 					if(temp>totalWidth)
 						totalWidth = temp;
 					col++;
-				}
-				// points
-				if(showPoints)
-				{	double pts = points[profileIndex];
-					NumberFormat nf = NumberFormat.getInstance();
-					nf.setMaximumFractionDigits(2);
-					nf.setMinimumFractionDigits(0);
-					String text = nf.format(pts);
-					String tooltip = nf.format(pts);
-					setLabelText(line,col,text,tooltip);
-					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-					setLabelBackground(line,col,bg);			
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
-					if(temp>pointsWidth)
-						pointsWidth = temp;
-					col++;;
 				}
 			}
 			
@@ -318,7 +290,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 				nameWidth = nameWidth - timeWidth;
 				col++;
 			}
-			if(showConfrontations && !(statisticHolder instanceof Round))
+			if(showConfrontations)
 			{	for(int i=0;i<confrontationsWidth.length;i++)
 				{	setColSubMinWidth(col,confrontationsWidth[i]);
 					setColSubPrefWidth(col,confrontationsWidth[i]);
@@ -327,18 +299,11 @@ public class LeagueResultsSubPanel extends TableSubPanel
 					col++;
 				}
 			}
-			if(showTotal && !(statisticHolder instanceof Round))
+			if(showTotal)
 			{	setColSubMinWidth(col,totalWidth);
 				setColSubPrefWidth(col,totalWidth);
 				setColSubMaxWidth(col,totalWidth);
 				nameWidth = nameWidth - totalWidth;
-				col++;
-			}
-			if(showPoints) 
-			{	setColSubMinWidth(col,pointsWidth);
-				setColSubPrefWidth(col,pointsWidth);
-				setColSubMaxWidth(col,pointsWidth);
-				nameWidth = nameWidth - pointsWidth;
 				col++;
 			}
 			if(showName) 
@@ -365,36 +330,36 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	
 	public void setShowPortrait(boolean showPortrait)
 	{	this.showPortrait = showPortrait;
-		setStatisticHolder(statisticHolder);
+		setLeagueTournament(leagueTournament);
 	}
 
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
-		setStatisticHolder(statisticHolder);
+		setLeagueTournament(leagueTournament);
 	}
 
 	public void setShowConfrontations(boolean showConfrontations)
 	{	this.showConfrontations = showConfrontations;
-		setStatisticHolder(statisticHolder);
+		setLeagueTournament(leagueTournament);
 	}
 
 	public void setShowTotal(boolean showTotal)
 	{	this.showTotal = showTotal;
-		setStatisticHolder(statisticHolder);
+		setLeagueTournament(leagueTournament);
 	}
 
 	public void setShowPoints(boolean showPoints)
 	{	this.showPoints = showPoints;
-		setStatisticHolder(statisticHolder);
+		setLeagueTournament(leagueTournament);
 	}
 
 	public void setShowScores(boolean showScores)
 	{	this.showScores = showScores;
-		setStatisticHolder(statisticHolder);
+		setLeagueTournament(leagueTournament);
 	}
 
 	public void setShowTime(boolean showTime)
 	{	this.showTime = showTime;
-		setStatisticHolder(statisticHolder);
+		setLeagueTournament(leagueTournament);
 	}
 }

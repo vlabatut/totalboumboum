@@ -351,7 +351,8 @@ public class GuiTools
 				GuiKeys.COMMON_MATCH_ROUND_COUNT,
 				GuiKeys.COMMON_ARCHIVE_CONFRONTATIONS,
 				GuiKeys.COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_ROUND_COUNT,
-				GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_PLAYED
+				GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_PLAYED,
+				GuiKeys.COMMON_RESULTS_TOURNAMENT_HEADER_PLAYED
 			};
 			loadTableImages(folder,uses);
 		}
@@ -422,7 +423,8 @@ public class GuiTools
 		// draw
 		{	String folder = baseFolder+GuiFileTools.FILE_DRAW;
 			String[] uses =
-			{	GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_DRAWN
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_DRAWN,
+				GuiKeys.COMMON_RESULTS_TOURNAMENT_HEADER_DRAWN
 			};
 			loadTableImages(folder,uses);
 		}
@@ -541,7 +543,8 @@ public class GuiTools
 		// lose
 		{	String folder = baseFolder+GuiFileTools.FILE_LOSE;
 			String[] uses =
-			{	GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_LOST
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_LOST,
+				GuiKeys.COMMON_RESULTS_TOURNAMENT_HEADER_LOST
 			};
 			loadTableImages(folder,uses);
 		}
@@ -778,7 +781,8 @@ public class GuiTools
 		// win
 		{	String folder = baseFolder+GuiFileTools.FILE_WIN;
 			String[] uses =
-			{	GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_WON
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_WON,
+				GuiKeys.COMMON_RESULTS_TOURNAMENT_HEADER_WON
 			};
 			loadTableImages(folder,uses);
 		}
