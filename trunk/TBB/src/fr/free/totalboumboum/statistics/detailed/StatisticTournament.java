@@ -22,7 +22,10 @@ package fr.free.totalboumboum.statistics.detailed;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.tools.CalculusTools;
 
 public class StatisticTournament extends StatisticBase
 {
@@ -30,13 +33,39 @@ public class StatisticTournament extends StatisticBase
 	
 	public StatisticTournament(AbstractTournament tournament)
 	{	super(tournament);
+		// confrontations
+		played = new int[getPlayersIds().size()];
+		Arrays.fill(played,0);
+		won = new int[getPlayersIds().size()];
+		Arrays.fill(won,0);
+		drawn = new int[getPlayersIds().size()];
+		Arrays.fill(drawn,0);
+		lost = new int[getPlayersIds().size()];
+		Arrays.fill(lost,0);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC MATCHES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final ArrayList<StatisticMatch> matches = new ArrayList<StatisticMatch>();
-	
+	private int played[];
+	private int won[];
+	private int drawn[];
+	private int lost[];
+		
+	public int[] getPlayed()
+	{	return played;
+	}
+	public int[] getWon()
+	{	return won;
+	}
+	public int[] getDrawn()
+	{	return drawn;
+	}
+	public int[] getLost()
+	{	return lost;
+	}
+
 	public ArrayList<StatisticMatch> getStatisticMatches()
 	{	return matches;
 	}
@@ -44,6 +73,26 @@ public class StatisticTournament extends StatisticBase
 	public void addStatisticMatch(StatisticMatch match)
 	{	// matches stats
 		matches.add(match);
+		
+		// confrontations
+		int[] matchRanks = CalculusTools.getRanks(match.getPoints());
+		int count = 0;
+		for(int i=0;i<matchRanks.length;i++)
+			if(matchRanks[i]==1)
+				count++;
+		boolean draw = count==1;
+		for(int i=0;i<matchRanks.length;i++)
+		{	Integer playerId = match.getPlayersIds().get(i);
+			int index = getPlayersIds().indexOf(playerId);
+			played[index]++;
+			if(matchRanks[i]>1)
+				lost[index]++;
+			else if(draw)
+				drawn[index]++;
+			else
+				won[index]++;
+		}
+		
 		// scores
 		for (Score score : Score.values())
 		{	long[] currentScores = getScores(score);
@@ -54,6 +103,7 @@ public class StatisticTournament extends StatisticBase
 				currentScores[index] = currentScores[index] + matchScores[i];			
 			}
 		}
+		
 		// total
 		float[] matchPoints = match.getPoints();
 		for(int i=0;i<matchPoints.length;i++)
@@ -61,6 +111,7 @@ public class StatisticTournament extends StatisticBase
 			int index = getPlayersIds().indexOf(playerId);
 			getTotal()[index] = getTotal()[index] + matchPoints[i];
 		}
+		
 		// time
 		long time = getTotalTime() + match.getTotalTime();
 		setTotalTime(time);
