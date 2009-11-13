@@ -1,4 +1,4 @@
-package tournament200809.coremenkucukkarakurt.v1;
+package tournament200809.caliskancapdoganer;
 
 /*
  * Total Boum Boum
@@ -27,7 +27,7 @@ public class AiMain extends AiManager
 {
 
 	public AiMain()
-	{	super(new CoremenKucukkarakurt());
+	{	super(new CaliskanCapDoganer());
 	}
 
 }

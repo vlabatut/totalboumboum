@@ -1,4 +1,4 @@
-package tournament200809.coremenkucukkarakurt.v1;
+package tournament200809.caliskancapdoganer;
 
 import java.util.ArrayList;
 import java.util.Collection;
