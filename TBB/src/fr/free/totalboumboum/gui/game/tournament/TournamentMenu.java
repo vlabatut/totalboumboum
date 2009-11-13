@@ -54,10 +54,12 @@ import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.game.round.RoundSplitPanel;
 import fr.free.totalboumboum.gui.game.save.SaveSplitPanel;
 import fr.free.totalboumboum.gui.game.tournament.description.CupDescription;
+import fr.free.totalboumboum.gui.game.tournament.description.LeagueDescription;
 import fr.free.totalboumboum.gui.game.tournament.description.SequenceDescription;
 import fr.free.totalboumboum.gui.game.tournament.description.SingleDescription;
 import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
 import fr.free.totalboumboum.gui.game.tournament.results.CupResults;
+import fr.free.totalboumboum.gui.game.tournament.results.LeagueResults;
 import fr.free.totalboumboum.gui.game.tournament.results.SequenceResults;
 import fr.free.totalboumboum.gui.game.tournament.results.SingleResults;
 import fr.free.totalboumboum.gui.game.tournament.results.TournamentResults;
@@ -148,8 +150,18 @@ buttonStatistics.setEnabled(false);
 				tournamentStatistics.setTournament(trnmt);	
 			}
 			else if(tournament instanceof LeagueTournament)
-			{
-				// NOTE à compléter
+			{	LeagueTournament trnmt = (LeagueTournament) tournament;
+				// create
+				LeagueDescription trnmtDescription = new LeagueDescription(container);
+				tournamentDescription = trnmtDescription;
+				container.setDataPart(tournamentDescription);
+				LeagueResults trnmtResults = new LeagueResults(container);
+				tournamentResults = trnmtResults;
+				tournamentStatistics = new TournamentStatistics(container);
+				// set tournament
+				trnmtDescription.setTournament(trnmt);
+				trnmtResults.setTournament(trnmt);
+				tournamentStatistics.setTournament(trnmt);	
 			}
 			else if(tournament instanceof SingleTournament)
 			{	tournament.progress();

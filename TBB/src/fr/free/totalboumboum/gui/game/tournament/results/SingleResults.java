@@ -23,7 +23,7 @@ package fr.free.totalboumboum.gui.game.tournament.results;
 
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.gui.common.content.subpanel.results.ResultsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 
@@ -31,7 +31,7 @@ public class SingleResults extends TournamentResults<SingleTournament>
 {	
 	private static final long serialVersionUID = 1L;
 
-	private ResultsSubPanel resultsPanel;
+	private HomogenResultsSubPanel resultsPanel;
 	
 	public SingleResults(SplitMenuPanel container)
 	{	super(container);
@@ -41,7 +41,7 @@ public class SingleResults extends TournamentResults<SingleTournament>
 		setTitleKey(key);
 		
 		// data
-		{	resultsPanel = new ResultsSubPanel(dataWidth,dataHeight);
+		{	resultsPanel = new HomogenResultsSubPanel(dataWidth,dataHeight);
 			resultsPanel.setShowTime(false);
 			setDataPart(resultsPanel);
 		}

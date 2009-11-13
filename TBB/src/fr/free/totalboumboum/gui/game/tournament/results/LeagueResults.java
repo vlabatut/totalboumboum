@@ -21,17 +21,17 @@ package fr.free.totalboumboum.gui.game.tournament.results;
  * 
  */
 
-import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
+import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
 import fr.free.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 
-public class SequenceResults extends TournamentResults<SequenceTournament>
+public class LeagueResults extends TournamentResults<LeagueTournament>
 {	
 	private static final long serialVersionUID = 1L;
 
 	private HomogenResultsSubPanel resultsPanel;
 	
-	public SequenceResults(SplitMenuPanel container)
+	public LeagueResults(SplitMenuPanel container)
 	{	super(container);
 		
 		// data
@@ -45,7 +45,7 @@ public class SequenceResults extends TournamentResults<SequenceTournament>
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void setTournament(SequenceTournament tournament)
+	public void setTournament(LeagueTournament tournament)
 	{	this.tournament = tournament;
 		resultsPanel.setStatisticHolder(tournament);
 	}
