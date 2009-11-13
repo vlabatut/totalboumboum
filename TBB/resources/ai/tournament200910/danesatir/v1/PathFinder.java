@@ -1,4 +1,4 @@
-package tournament200910.danesatir;
+package tournament200910.danesatir.v1;
 
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
@@ -11,10 +11,10 @@ public class PathFinder {
 	
 	private AiTile source;
 	private AiTile target;
-	private MonIA ai;
+	private DaneSatir ai;
 	private Astar astar;
 	
-	public PathFinder(MonIA ai, AiTile source, AiTile target) throws StopRequestException {
+	public PathFinder(DaneSatir ai, AiTile source, AiTile target) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai=ai;
 		this.source = source;

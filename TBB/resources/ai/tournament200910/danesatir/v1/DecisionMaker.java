@@ -1,4 +1,4 @@
-package tournament200910.danesatir;
+package tournament200910.danesatir.v1;
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;

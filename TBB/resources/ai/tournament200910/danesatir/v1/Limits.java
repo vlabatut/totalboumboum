@@ -1,4 +1,4 @@
-package tournament200910.danesatir;
+package tournament200910.danesatir.v1;
 
 public class Limits {
 	public static double expandBombTime = 200;
