@@ -1,6 +1,6 @@
 package tournament200910.mancuhanpinarer;
 
-import tournament200910.mancuhanpinarer.v1.MancuhanPinarer;
+import tournament200910.mancuhanpinarer.v0.MancuhanPinarer;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**
