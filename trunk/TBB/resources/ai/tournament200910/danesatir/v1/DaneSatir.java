@@ -17,7 +17,7 @@ import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
  * plus votre programme est modulaire et plus il sera facile à
  * débugger, modifier, relire, comprendre, etc.
  */
-public class MonIA extends ArtificialIntelligence
+public class DaneSatir extends ArtificialIntelligence
 {
 	private AiZone zone;
 	private AiHero myHero;

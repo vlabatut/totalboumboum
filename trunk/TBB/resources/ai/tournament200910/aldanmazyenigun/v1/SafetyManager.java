@@ -1,4 +1,4 @@
-package tournament200910.aldanmazyenigun;
+package tournament200910.aldanmazyenigun.v1;
 
 /*
  * Total Boum Boum

@@ -75,7 +75,6 @@ public class BektasMazilyah extends ArtificialIntelligence
 		}
 		
 		AiAction result = new AiAction(AiActionName.NONE);
-		uneMethode();
 		return result;
 	}
 	
@@ -314,17 +313,5 @@ public class BektasMazilyah extends ArtificialIntelligence
 	public AiZone getZone() throws StopRequestException{
 		checkInterruption();//Appel Obligatoire
 		return zone;
-	}
-
-	/** une méthode bidon pour l'exemple */
-	private AiAction uneMethode() throws StopRequestException
-	{	// avant tout : test d'interruption
-		checkInterruption();
-		
-		// je crée un objet implémentant mon traitement
-		MonTraitement mt = new MonTraitement(this);
-		// j'appelle la méthode qui effectue le traitement
-		AiAction result = mt.gagneRound();
-		return result;
 	}
 }

@@ -1,4 +1,4 @@
-package tournament200910.demirciduzokergok;
+package tournament200910.demirciduzokergok.v1;
 
 import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;

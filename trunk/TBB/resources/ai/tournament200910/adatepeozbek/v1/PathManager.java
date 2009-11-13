@@ -1,4 +1,4 @@
-package tournament200910.aldanmazyenigun;
+package tournament200910.adatepeozbek.v1;
 
 /*
  * Total Boum Boum
@@ -38,18 +38,19 @@ import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalc
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
 /**
- * classe chargée d'implémenter un déplacement, 
+ * Classe chargée d'implémenter un déplacement,
  * en respectant un chemin donné
  */
 public class PathManager
 {
-
+	/** Interrupteur permettant d'afficher la trace du traitement */
+	private boolean verbose = false;
 
 	/**
-	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
+	 * Crée un PathManager chargé d'amener le personnage à la position (x,y)
 	 * exprimée en pixels
 	 */
-	public PathManager(AldanmazYenigun ai, double x, double y) throws StopRequestException
+	public PathManager(Senacan ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		init(ai);
@@ -57,10 +58,10 @@ public class PathManager
 	}
 	
 	/**
-	 * crée un PathManager chargé d'amener le personnage au centre de la case
+	 * Crée un PathManager chargé d'amener le personnage au centre de la case
 	 * passée en paramètre
 	 */
-	public PathManager(AldanmazYenigun ai, AiTile destination) throws StopRequestException
+	public PathManager(Senacan ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		init(ai);
@@ -68,9 +69,9 @@ public class PathManager
 	}
 	
 	/**
-	 * initialise ce PathManager
+	 * Initialise ce PathManager
 	 */
-	private void init(AldanmazYenigun ai) throws StopRequestException
+	private void init(Senacan ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		this.ai = ai;
@@ -85,7 +86,7 @@ public class PathManager
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** l'IA concernée par ce gestionnaire de chemin */
-	private AldanmazYenigun ai;
+	private Senacan ai;
 	/** zone de jeu */
 	private AiZone zone;
 	
@@ -319,6 +320,11 @@ public class PathManager
 		// mise à jour de la sortie
 		updateOutput();
 		
+		if(verbose)
+		{	System.out.println(">>>>>>>>>> PATH MANAGER <<<<<<<<<<");
+			System.out.println("path: "+path);
+			System.out.println("direction: "+result);
+		}
 		return result;
 	}
 

@@ -1,4 +1,4 @@
-package tournament200910.demirciduzokergok;
+package tournament200910.demirciduzokergok.v1;
 
 import java.util.Collection;
 import java.util.Iterator;

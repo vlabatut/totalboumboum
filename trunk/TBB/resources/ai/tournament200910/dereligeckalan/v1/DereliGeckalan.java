@@ -82,8 +82,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		
 
 		// AiAction result = new AiAction(AiActionName.MOVE);
-}
-		uneMethode();
+		}
 		return result;
 	}
 
@@ -190,18 +189,6 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		//System.out.println(safeZone);
 		return safeZone;
 
-	}
-
-	private AiAction uneMethode() throws StopRequestException { // avant tout :
-		// test
-		// d'interruption
-		checkInterruption();
-
-		// je crée un objet implémentant mon traitement
-		MonTraitement mt = new MonTraitement(this);
-		// j'appelle la méthode qui effectue le traitement
-		AiAction result = mt.gagneRound();
-		return result;
 	}
 
 	@SuppressWarnings("unused")

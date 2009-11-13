@@ -1,4 +1,4 @@
-package tournament200910.aldanmazyenigun;
+package tournament200910.findiksirin.v1;
 
 /*
  * Total Boum Boum
@@ -49,7 +49,7 @@ public class EscapeManager
 	/**
 	 * crée un EscapeManager chargé d'amener le personnage au centre d'une case sûre
 	 */
-	public EscapeManager(AldanmazYenigun ai) throws StopRequestException
+	public EscapeManager(SirinFindik ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		this.ai = ai;
@@ -73,7 +73,7 @@ public class EscapeManager
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** l'IA concernée par ce gestionnaire de chemin */
-	private AldanmazYenigun ai;
+	private SirinFindik ai;
 	/** zone de jeu */
 	private AiZone zone;	
 	
@@ -179,7 +179,7 @@ public class EscapeManager
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-				double cost = safetyMatrix[line][col];
+				double cost = -safetyMatrix[line][col];
 				costCalculator.setCost(line,col,cost);
 			}
 		}
