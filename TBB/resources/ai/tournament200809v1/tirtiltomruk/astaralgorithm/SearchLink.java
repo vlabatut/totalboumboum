@@ -1,7 +1,7 @@
 package tournament200809v1.tirtiltomruk.astaralgorithm;
 
 import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
-import tournament200809v1.tirtiltomruk.TirtilTomruk;
+import tournament200809.tirtiltomruk.v1.TirtilTomruk;
 
 
 /**

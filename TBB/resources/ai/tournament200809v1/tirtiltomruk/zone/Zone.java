@@ -3,7 +3,7 @@ package tournament200809v1.tirtiltomruk.zone;
 import java.util.Collection;
 import java.util.Iterator;
 
-import tournament200809v1.tirtiltomruk.TirtilTomruk;
+import tournament200809.tirtiltomruk.v1.TirtilTomruk;
 
 import fr.free.totalboumboum.ai.adapter200809.AiBlock;
 import fr.free.totalboumboum.ai.adapter200809.AiBomb;
