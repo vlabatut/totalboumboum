@@ -1,4 +1,4 @@
-package tournament200910.adatepeozbek;
+package tournament200910.adatepeozbek.v1;
 
 import java.util.Iterator;
 import java.util.List;

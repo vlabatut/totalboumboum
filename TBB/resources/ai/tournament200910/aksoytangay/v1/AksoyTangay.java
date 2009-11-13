@@ -1,4 +1,4 @@
-package tournament200910.aksoytangay;
+package tournament200910.aksoytangay.v1;
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;

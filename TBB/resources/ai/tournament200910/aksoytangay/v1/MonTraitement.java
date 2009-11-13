@@ -1,4 +1,4 @@
-package tournament200910.dereligeckalan.v1;
+package tournament200910.aksoytangay.v1;
 
 import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
@@ -9,10 +9,10 @@ import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException
  */
 public class MonTraitement
 {	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
-	private DereliGeckalan monIa;
+	private AksoyTangay monIa;
 	
 	/** une méthode bidon pour l'exemple */
-	public MonTraitement(DereliGeckalan monIa) throws StopRequestException
+	public MonTraitement(AksoyTangay monIa) throws StopRequestException
 	{	// avant tout : test d'interruption
 		monIa.checkInterruption();
 		

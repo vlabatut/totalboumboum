@@ -1,4 +1,4 @@
-package tournament200910.aldanmazyenigun;
+package tournament200910.aldanmazyenigun.v1;
 
 import java.util.Collection;
 import java.util.Iterator;

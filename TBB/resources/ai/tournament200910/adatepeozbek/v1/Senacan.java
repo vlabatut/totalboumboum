@@ -1,4 +1,4 @@
-package tournament200910.aldanmazyenigun;
+package tournament200910.adatepeozbek.v1;
 
 /*
  * Total Boum Boum
@@ -21,65 +21,43 @@ package tournament200910.aldanmazyenigun;
  * 
  */
 
-import java.util.ArrayList;
-
 import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiItem;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
-public class AldanmazYenigun extends ArtificialIntelligence 
+/**
+ * Cette classe implémente une IA relativement stupide, qui choisit une cible
+ * (un autre joueur), puis essaie de la rejoindre, et enfin se contente de la
+ * suivre partout où elle va.
+ */
+public class Senacan extends ArtificialIntelligence 
 {	
-
 	@Override
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
-
-		// premier appel : on initialise		
+		
 		if(ownHero == null)
 			init();
 	
 		AiAction result = new AiAction(AiActionName.NONE);
 		
-		// si le personnage controlé a été éliminé, inutile de continuer
 		if(!ownHero.hasEnded())
-		{	// on met à jour la position de l'ia dans la zone
+		{	
 			updateLocation();
-			/*
-			if(verbose)
-				System.out.println(ownHero.getColor()+": ("+currentTile.getLine()+","+currentTile.getCol()+") ("+currentX+","+currentY+")");*/
+			
 			Direction moveDir = Direction.NONE;
 			
 			
-			// on met à jour le gestionnaire de sécurité
 			safetyManager.update();
 			// si on est en train de fuir : on continue
-			if(escapeManager!=null)
-			{	if(escapeManager.hasArrived())
-					escapeManager = null;
-				else
-					moveDir = escapeManager.update();
-			}
-			
-			// sinon si on est en danger : on commence à fuir
-			else if(!safetyManager.isSafe(currentTile))
-			{	escapeManager = new EscapeManager(this);
+			if(!safetyManager.isSafe(currentTile))
+			{	
 				moveDir = escapeManager.update();
-			}
-			
-			// sinon on se déplace vers la cible
-			else
-			{	updateTarget();
-				if(targetItem!=null)
-					moveDir = targetManager.update();
-				else if(targetWall != null)
-					moveDir = targetManager.update();
 			}
 			
 			// on met à jour la direction renvoyée au moteur du jeu
@@ -101,14 +79,14 @@ public class AldanmazYenigun extends ArtificialIntelligence
 		updateLocation();
 		
 		safetyManager = new SafetyManager(this);
-		targetManager = new PathManager(this,currentTile);
+		escapeManager = new EscapeManager(this);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// PATH MANAGERS			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** classe chargée du déplacement vers la cible */
-	private PathManager targetManager = null;
+//	private PathManager targetManager = null;
 	/** classe chargée de la fuite du personnage */
 	private EscapeManager escapeManager = null;
 	
@@ -224,96 +202,4 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	
 		return zone;
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// TARGET					/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** la cible à suivre (ou null si aucune cible n'existe) */
-	private AiItem targetItem;
-	/** case précédente de la cible */
-	private AiTile targetPreviousTile;
-	
-	private AiBlock targetWall;
-
-	/**
-	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
-	 */
-	private void updateTarget() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		if(targetItem==null || targetItem.hasEnded())
-		{	chooseBonusWay();
-			if(targetItem!=null)
-			{	AiTile targetCurrentTile = targetItem.getTile();
-				targetManager.setDestination(targetCurrentTile);
-				targetPreviousTile = targetCurrentTile; 
-			}
-		}
-		/*
-		else if(targetWall==null && targetWall.hasEnded())
-		{	
-			chooseWallWay();
-			if(targetWall!=null)
-			{	AiTile targetCurrentTile = targetWall.getTile();
-				targetManager.setDestination(targetCurrentTile);
-				targetPreviousTile = targetCurrentTile;
-			}
-		}
-		*/
-		else
-		{
-			
-			AiTile targetCurrentTile = targetItem.getTile();
-			if(targetCurrentTile==currentTile)
-			{	double targetX = targetItem.getPosX();
-				double targetY = targetItem.getPosY();
-				targetManager.setDestination(targetX,targetY);				
-			}
-			else if(targetCurrentTile!=targetPreviousTile)
-			{	targetManager.setDestination(targetCurrentTile);
-				targetPreviousTile = targetCurrentTile;				
-			}
-			
-		}
-	}
-	
-	private void chooseBonusWay() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		targetItem = null;
-		ArrayList<AiItem> items = new ArrayList<AiItem>(zone.getItems());
-
-		if(!items.isEmpty())
-		{
-		int index = (int)Math.random()*items.size();
-			targetItem = items.get(index);
-		}
-	}
-	
-	/*
-	private void chooseWallWay() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		targetWall = null;
-		List<AiBlock> walls = zone.getBlocks();
-
-		if(!walls.isEmpty()){
-			int index = (int)Math.random()*walls.size();
-			targetWall = walls.get(index);
-	}
-	}
-	*/
-	
-	
-//	@SuppressWarnings("static-access")
-	public AiAction laisser() throws StopRequestException {
-		checkInterruption(); // APPEL OBLIGATOIRE
-		AiAction bombe = null;
-		if (isSafe(currentTile)) 
-			
-		bombe = new AiAction(AiActionName.DROP_BOMB);
-		
-		return bombe;
-	}
-	
 }
