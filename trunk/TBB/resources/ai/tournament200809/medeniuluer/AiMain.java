@@ -21,6 +21,7 @@ package tournament200809.medeniuluer;
  * 
  */
 
+import tournament200809.medeniuluer.v2.MedeniUluer;
 import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager

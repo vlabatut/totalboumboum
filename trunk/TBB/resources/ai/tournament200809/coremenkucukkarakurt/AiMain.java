@@ -21,6 +21,7 @@ package tournament200809.coremenkucukkarakurt;
  * 
  */
 
+import tournament200809.coremenkucukkarakurt.v2.CoremenKucukkarakurt;
 import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager
