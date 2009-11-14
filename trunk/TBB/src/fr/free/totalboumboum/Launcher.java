@@ -869,6 +869,7 @@ public class Launcher
 	 * - les constantes éléments/attributs ont été renommées de manière à supprimer les préfixes ATT_ et ELT_ (pr éviter les répétitions)
 	 * - moteur : mise à jour des points en temps réel, en prenant la première limite disponible (utile pour les rounds)
 	 * - amélioration du décompte du temps : le temps du jeu est arrêté s'il est en pause, et le temps réel est décompté séparément
+	 * - tournoi de type championnat implémenté
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1098,6 +1099,7 @@ public class Launcher
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
+	 * 		- league
 	 * 		- instance TBB
 	 * 		- sons
 	 * 		- BM'83
@@ -1106,13 +1108,19 @@ public class Launcher
 	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
 	 * 
-	 *  - tournoi :
-	 *  	- créer le tournoi de type championnat (pratique pour classer les IA de façon plus homogène)
+	 *  - tournoi league :
+	 *  	- finir GUI
+	 *  	- finir sélection des matches
+	 *  	- ordonner les matches
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
 	 *  - gui : 
 	 *  	- bugs dans les browsers, sur les boutons de page next/previous >> surcharger label avec un indicateur de survol que l'on teste sur exit/enter (utiliser JLabel.isShowin() ?)
+	 *  		>> surcharger label avec une couleur de base, in bool de survol et une couleur foncée.
+	 *  		>> pas idéal car il va rester foncé si on revient à l'écran sans toutefois survoler le label
+	 *  		>> faudrait capter l'évènement 'masquage' et 'affichage'
+	 *  	- pb quand on crée un profil et qu'on veut l'éditer (première fois du moins)
 	 *  - instance TBB
 	 *  	- bombe télécommandée tombe en panne : le circuit grille
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques

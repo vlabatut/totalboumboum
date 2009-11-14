@@ -106,6 +106,31 @@ public class GameStatistics
 	{	resetPlayersStats();
 		resetRankingService();
 	}
+
+	/**
+	 * used when a new profile is created
+	 * @param playerId
+	 */
+	public static void addPlayer(int playerId) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	if(!playersStats.containsKey(playerId))
+		{	PlayerStats playerStats = new PlayerStats(playerId);
+			playersStats.put(playerId,playerStats);
+			rankingService.registerPlayer(playerId);
+			saveStatistics();
+		}		
+	}
+
+	/**
+	 * used when a profile is definitely removed
+	 * @param playerId
+	 */
+	public static void deletePlayer(int playerId) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	if(playersStats.containsKey(playerId))
+		{	playersStats.remove(playerId);
+			rankingService.deregisterPlayer(playerId);
+			saveStatistics();
+		}
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS STATISTICS	/////////////////////////////////////////

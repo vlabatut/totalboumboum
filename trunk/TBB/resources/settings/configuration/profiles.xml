@@ -1,27 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profiles.xsd">
-	<general last="77" />
+	<general last="80" />
 	<list>
-		<profile file="32" name="0809.Çalışkan+Cap+Doğaner" />
-		<profile file="27" name="0809.Adatepe" />
 		<profile file="77" name="0910.Mançuhan+Pınarer" />
-		<profile file="69" name="0910.Adatape+Özbek" />
-		<profile file="3"  name="0708.Baydar+Camcı" />
-		<profile file="2"  name="0708.Başman+Sandallı" />
-		<profile file="1"  name="Joueur Humain" />
-		<profile file="7"  name="0708.Cirit+Mutlu" />
-		<profile file="6"  name="0708.Çamaş+Demirbaş" />
-		<profile file="5"  name="0708.Çağlayan+Elmas" />
-		<profile file="4"  name="0708.Bingöl+Ketenci" />
-		<profile file="70" name="0910.Aksoy+Tangay" />
-		<profile file="71" name="0910.Aldanmaz+Yenigün" />
-		<profile file="9"  name="0708.Eren+Gökçe" />
-		<profile file="72" name="0910.Bektaş+Mazilyah" />
-		<profile file="8"  name="0708.Demirkol+Doğan" />
-		<profile file="73" name="0910.Dane+Şatır" />
-		<profile file="74" name="0910.Demirci+Düzok+Ergök" />
-		<profile file="75" name="0910.Dereli+Geçkalan" />
-		<profile file="76" name="0910.Fındık+Şırın" />
 		<profile file="59" name="0809.Erişik+Pektaş" />
 		<profile file="58" name="0809.Devecioğlu+Korkmaz" />
 		<profile file="57" name="0809.Demirağ+Şagar" />
@@ -42,12 +23,31 @@
 		<profile file="60" name="0809.Günalp+Yürtsever" />
 		<profile file="61" name="0809.Kökciyan+Mazmanoğlu" />
 		<profile file="49" name="Promeneur 2" />
+		<profile file="69" name="0910.Adatape+Özbek" />
+		<profile file="27" name="0809.Adatepe" />
+		<profile file="3" name="0708.Baydar+Camcı" />
+		<profile file="2" name="0708.Başman+Sandallı" />
 		<profile file="10" name="0708.Göksay+Köse" />
+		<profile file="1" name="Joueur Humain" />
+		<profile file="7" name="0708.Cirit+Mutlu" />
+		<profile file="6" name="0708.Çamaş+Demirbaş" />
+		<profile file="5" name="0708.Çağlayan+Elmas" />
+		<profile file="32" name="0809.Çalışkan+Cap+Doğaner" />
+		<profile file="4" name="0708.Bingöl+Ketenci" />
 		<profile file="51" name="0809.Akkaya+Danacioğlu" />
 		<profile file="52" name="0809.Akpolat+Şener" />
+		<profile file="70" name="0910.Aksoy+Tangay" />
 		<profile file="53" name="0809.Altay+Basaranoğlu" />
+		<profile file="9" name="0708.Eren+Gökçe" />
+		<profile file="71" name="0910.Aldanmaz+Yenigün" />
 		<profile file="54" name="0809.Bilgin+Karabağ" />
+		<profile file="8" name="0708.Demirkol+Doğan" />
+		<profile file="72" name="0910.Bektaş+Mazilyah" />
+		<profile file="73" name="0910.Dane+Şatır" />
+		<profile file="74" name="0910.Demirci+Düzok+Ergök" />
+		<profile file="75" name="0910.Dereli+Geçkalan" />
 		<profile file="50" name="Promeneur 3" />
+		<profile file="76" name="0910.Fındık+Şırın" />
 	</list>
 </profiles>
 

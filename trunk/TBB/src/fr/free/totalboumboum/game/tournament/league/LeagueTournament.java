@@ -86,7 +86,7 @@ public class LeagueTournament extends AbstractTournament
 	@Override
 	public void finish()
 	{	// points
-		pointsProcessor = null;
+//		pointsProcessor = null;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -212,6 +212,7 @@ public class LeagueTournament extends AbstractTournament
 	// MATCHES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean randomizeMatches;
+	private ConfrontationOrder confrontationOrder;
 	private boolean minimizeConfrontations;
 	private ArrayList<Match> matches = new ArrayList<Match>();
 	private Match currentMatch;
@@ -245,14 +246,25 @@ public class LeagueTournament extends AbstractTournament
 					confrontations = conf;
 			}
 		}
+		if(confrontationOrder==ConfrontationOrder.RANDOM)
+			randomizeConfrontations();
+		else if(confrontationOrder==ConfrontationOrder.UNIFORM)
+			heterogenizeConfrontations();
 		matchCount = 0;
 	}
 
 	public boolean getRandomizeMatches()
 	{	return randomizeMatches;
 	}
-	public void setRandomizeMatches(boolean randomOrder)
-	{	this.randomizeMatches = randomOrder;
+	public void setRandomizeMatches(boolean randomizeMatches)
+	{	this.randomizeMatches = randomizeMatches;
+	}
+
+	public ConfrontationOrder getConfrontationOrder()
+	{	return confrontationOrder;
+	}
+	public void setConfrontationOrder(ConfrontationOrder confrontationOrder)
+	{	this.confrontationOrder = confrontationOrder;
 	}
 
 	public boolean getMinimizeConfrontations()
@@ -273,6 +285,23 @@ public class LeagueTournament extends AbstractTournament
 		Collections.shuffle(matches,random);
 	}
 
+	private void randomizeConfrontations()
+	{	Calendar cal = new GregorianCalendar();
+		long seed = cal.getTimeInMillis();
+		Random random = new Random(seed);
+		Collections.shuffle(confrontations,random);
+	}
+
+	private void heterogenizeConfrontations()
+	{	// TODO		
+	}
+	
+	public enum ConfrontationOrder
+	{	AS_IS,
+		RANDOM,
+		UNIFORM		
+	}
+	
 	@Override
 	public Match getCurrentMatch()
 	{	return currentMatch;	
@@ -291,7 +320,11 @@ public class LeagueTournament extends AbstractTournament
 		}
 		// limits
 		if(matchCount==confrontations.size()-1)
-		{	float[] points = pointsProcessor.process(this);
+		{	float[] points;
+			if(pointsProcessor!=null)
+				points = pointsProcessor.process(this);
+			else
+				points = stats.getTotal();
 			stats.setPoints(points);
 			setOver(true);
 			panel.tournamentOver();

@@ -58,13 +58,22 @@
 	</xsd:complexType>
 
 <!-- LEAGUE -->
+	<xsd:simpleType name="tConfrontationsOrder">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="RANDOM" />
+			<xsd:enumeration value="UNIFORM" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
 	<xsd:complexType name="tLeague">
 		<xsd:sequence>
-			<xsd:element name="points" type="tPointProcessor" />
+<!-- 			<xsd:element name="points" type="tPointProcessor" />  -->
 			<xsd:element name="matches" type="tMatches" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="randomizePlayers" type="xsd:boolean" use="optional" default="false" />
 		<xsd:attribute name="minimizeConfrontations" type="xsd:boolean" use="optional" default="false" />
+		<xsd:attribute name="confrontationsOrder" type="tConfrontationsOrder" use="optional" default="RANDOM" />
 	</xsd:complexType>
 
 <!-- SEQUENCE -->

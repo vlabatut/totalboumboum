@@ -187,7 +187,8 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 		int index = 0;
 		while(it.hasNext() && !found)
 		{	Entry<String,String> entry = it.next();
-			if(entry.getKey().equalsIgnoreCase(fileName))
+			String key = entry.getKey();
+			if(key.equalsIgnoreCase(fileName))
 				found = true;
 			else
 				index++;
