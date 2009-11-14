@@ -872,6 +872,8 @@ public class Launcher
 	 * - tournoi de type championnat implémenté
 	 * - correction d'un bug lors de la création/suppression de profil, à la fois dans la GUI et le moteur
 	 * - modification de l'identifiant des joueurs dans le moteur : c'est maintenant un entier et non plus une chaine de caractères contenant un entier
+	 * - création d'une classe spécifique pour les labels, implémentant le rollover
+	 * - correction du bug concernant le rollover des labels
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1072,7 +1074,7 @@ public class Launcher
 	 *		- séparation des auto-bombages
 	 *	- affichage du nom des joueurs pendant le jeu en surimpression
 	 *	- GUI : 
-	 *		- soulignage des labels cliquables (quelques bugs)
+	 *		- soulignage des labels cliquables
 	 *		- icone lauriers
 	 *  - tournois :
 	 *  	- têtes de séries
@@ -1114,14 +1116,10 @@ public class Launcher
 	 *  	- finir GUI
 	 *  	- finir sélection des matches
 	 *  	- ordonner les matches
+	 *  - tournoi coupe : possiblité de définir un tie-break random
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
-	 *  - gui : 
-	 *  	- bugs dans les browsers, sur les boutons de page next/previous >> surcharger label avec un indicateur de survol que l'on teste sur exit/enter (utiliser JLabel.isShowin() ?)
-	 *  		>> surcharger label avec une couleur de base, in bool de survol et une couleur foncée.
-	 *  		>> pas idéal car il va rester foncé si on revient à l'écran sans toutefois survoler le label
-	 *  		>> faudrait capter l'évènement 'masquage' et 'affichage'
 	 *  - instance TBB
 	 *  	- bombe télécommandée tombe en panne : le circuit grille
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques

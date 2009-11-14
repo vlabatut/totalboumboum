@@ -30,5 +30,4 @@ public class EmptyContentPanel extends ContentPanel
 	{	super(width, height);
 		setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 	}
-	
 }

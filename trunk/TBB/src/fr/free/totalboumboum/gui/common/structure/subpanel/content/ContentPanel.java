@@ -27,6 +27,6 @@ public abstract class ContentPanel extends BasicPanel
 {	private static final long serialVersionUID = 1L;
 
 	public ContentPanel(int width, int height)
-	{	super(width, height);
+	{	super(width, height); 
 	}
 }

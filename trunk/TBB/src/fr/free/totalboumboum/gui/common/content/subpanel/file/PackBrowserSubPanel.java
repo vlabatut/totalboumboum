@@ -239,11 +239,13 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 	}
 
 	private void refreshList()
-	{	TableContentPanel panel; 
+	{	getDataPanel().switchDisplay(false);
+		TableContentPanel panel; 
 		if(filePanel == null)
 			panel = listPanels.get(currentPage);
 		else
 			panel = filePanel.getDataPanel();
+		panel.switchDisplay(true);
 		setDataPanel(panel);
 		validate();
 		repaint();

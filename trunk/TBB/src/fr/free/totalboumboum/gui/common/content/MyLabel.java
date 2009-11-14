@@ -22,8 +22,6 @@ package fr.free.totalboumboum.gui.common.content;
  */
 
 import java.awt.Color;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -37,21 +35,34 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public class MyLabel extends JLabel implements MouseListener, MouseMotionListener, ComponentListener
+public class MyLabel extends JLabel implements MouseListener, MouseMotionListener
 {	private static final long serialVersionUID = 1L;
 
 	public MyLabel()
 	{	super();
 		addMouseListener(this);
-		addComponentListener(this);
+		addMouseMotionListener(this);
 	}
 
 	public MyLabel(String text)
 	{	super(text);
 		addMouseListener(this);
-		addComponentListener(this);
+		addMouseMotionListener(this);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// DISPLAY			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean hiddenFlag = false;
+
+	public void switchDisplay(boolean display)
+	{	if(display)
+		{	hiddenFlag = true;
+			if(mouseSensitive)
+				switchBackground(false);
+		}
+	}	
+	
 	/////////////////////////////////////////////////////////////////
 	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -151,32 +162,6 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COMPONENT LISTENER	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean hiddenFlag = false;
-	@Override
-	public void componentHidden(ComponentEvent e)
-	{	hiddenFlag = true;
-		if(mouseSensitive)
-			switchBackground(false);
-	}
-
-	@Override
-	public void componentMoved(ComponentEvent e)
-	{	
-	}
-
-	@Override
-	public void componentResized(ComponentEvent e)
-	{	
-	}
-
-	@Override
-	public void componentShown(ComponentEvent e)
 	{	
 	}
 
