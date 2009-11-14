@@ -31,11 +31,11 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class ProfileSaver
 {	
-	public static void saveProfile(Profile profile, String fileName) throws IOException
+	public static void saveProfile(Profile profile, Integer id) throws IOException
 	{	// build document
 		Element root = saveProfileElement(profile);	
 		// save file
-		String file = FileTools.getProfilesPath()+File.separator+fileName+FileTools.EXTENSION_XML;
+		String file = FileTools.getProfilesPath()+File.separator+Integer.toString(id)+FileTools.EXTENSION_XML;
 		File dataFile = new File(file);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PROFILE+FileTools.EXTENSION_SCHEMA);

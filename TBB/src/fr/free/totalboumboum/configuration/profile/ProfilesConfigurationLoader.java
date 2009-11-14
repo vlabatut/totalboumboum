@@ -67,9 +67,10 @@ public class ProfilesConfigurationLoader
 	}
 		
 	private static void loadProfileElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	String file = root.getAttribute(XmlTools.FILE).getValue().trim();
+	{	String idStr = root.getAttribute(XmlTools.FILE).getValue().trim();
+		Integer id = Integer.parseInt(idStr);
 		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
-		result.addProfile(file,name);	
+		result.addProfile(id,name);	
 	}
 
 	private static void loadGeneralElement(Element root, ProfilesConfiguration result)

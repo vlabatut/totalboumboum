@@ -46,11 +46,11 @@ public class ProfilesConfiguration
 	public ProfilesConfiguration copy()
 	{	ProfilesConfiguration result = new ProfilesConfiguration();
 		// loaded profiles
-		Iterator<Entry<String,String>> it = profiles.entrySet().iterator();
+		Iterator<Entry<Integer,String>> it = profiles.entrySet().iterator();
 		while(it.hasNext())
-		{	Entry<String,String> entry = it.next();
+		{	Entry<Integer,String> entry = it.next();
 			String value = entry.getValue();
-			String key = entry.getKey();
+			Integer key = entry.getKey();
 			result.addProfile(key,value);			
 		}
 		//
@@ -60,14 +60,14 @@ public class ProfilesConfiguration
 	/////////////////////////////////////////////////////////////////
 	// PROFILES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,String> profiles = new HashMap<String,String>();
+	private HashMap<Integer,String> profiles = new HashMap<Integer,String>();
 	private int lastProfileIndex = 0;
 
-	public HashMap<String,String> getProfiles()
+	public HashMap<Integer,String> getProfiles()
 	{	return profiles;	
 	}
 	
-	public void addProfile(String file, String name)
+	public void addProfile(Integer file, String name)
 	{	profiles.put(file,name);
 	}
 	
@@ -83,7 +83,7 @@ public class ProfilesConfiguration
 	{	this.lastProfileIndex = lastProfileIndex;
 	}
 	
-	public String createProfile(String name) throws IOException, ParserConfigurationException, SAXException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public Integer createProfile(String name) throws IOException, ParserConfigurationException, SAXException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// refresh counter
 		int lastProfile = getLastProfileIndex();
 		int nextProfile = lastProfile+1;
@@ -101,17 +101,17 @@ public class ProfilesConfiguration
 		spriteInfo.setColor(spriteColor);
 		
 		// create file
-		String fileName = Integer.toString(nextProfile)/*+FileTools.EXTENSION_DATA*/;			
-		ProfileSaver.saveProfile(newProfile, fileName);
+		Integer id = nextProfile/*+FileTools.EXTENSION_DATA*/;			
+		ProfileSaver.saveProfile(newProfile,id);
 		
 		// add/save in config
-		addProfile(fileName,name);
+		addProfile(id,name);
 		ProfilesConfigurationSaver.saveProfilesConfiguration(this);
 		
 		// register in stats
 		GameStatistics.addPlayer(nextProfile);
 		
-		return fileName;
+		return id;
 	}
 	
 	public void deleteProfile(Profile profile) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
