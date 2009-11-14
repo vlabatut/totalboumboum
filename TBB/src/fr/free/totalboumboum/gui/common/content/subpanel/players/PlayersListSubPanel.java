@@ -22,7 +22,6 @@ package fr.free.totalboumboum.gui.common.content.subpanel.players;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -30,12 +29,11 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.JLabel;
-
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.GameData;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -148,8 +146,9 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 				if(showControls)
 				{	int index = profile.getControlSettingsIndex();
 					setLabelText(line,col,controlTexts.get(index),controlTooltips.get(index));
-					JLabel label = getLabel(line,col);
+					MyLabel label = getLabel(line,col);
 					label.addMouseListener(this);
+					label.setMouseSensitive(true);
 					col++;
 				}
 				// name
@@ -244,19 +243,17 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = getLabelPositionSimple(label);
 		// controls
 		if(pos[1]==2)

@@ -31,9 +31,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -50,8 +50,8 @@ public abstract class ModalDialogSubPanel extends EmptySubPanel implements Mouse
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 
-	protected JLabel initButton(String key, Font font, int buttonsHeight)
-	{	JLabel result = new JLabel();
+	protected MyLabel initButton(String key, Font font, int buttonsHeight)
+	{	MyLabel result = new MyLabel();
 		result.setFont(font);
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		result.setHorizontalAlignment(SwingConstants.CENTER);
@@ -71,6 +71,7 @@ public abstract class ModalDialogSubPanel extends EmptySubPanel implements Mouse
 		result.setToolTipText(tooltip);
 		result.setMaximumSize(new Dimension(Integer.MAX_VALUE,buttonsHeight));
 		result.addMouseListener(this);
+		result.setMouseSensitive(true);
 		return result;
 	}
 	
@@ -84,14 +85,12 @@ public abstract class ModalDialogSubPanel extends EmptySubPanel implements Mouse
 
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 
 	@Override

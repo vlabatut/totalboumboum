@@ -37,6 +37,7 @@ import javax.swing.JPanel;
 import fr.free.totalboumboum.game.tournament.cup.CupLeg;
 import fr.free.totalboumboum.game.tournament.cup.CupPart;
 import fr.free.totalboumboum.game.tournament.cup.CupTournament;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
@@ -91,7 +92,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 			}
 			
 			// left
-			{	JLabel label = new JLabel();
+			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(bg);
 				Dimension dim = new Dimension(externalButtonsWidth,buttonsHeight);
@@ -99,15 +100,16 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_LEFT;
-				GuiTools.setLabelKey(label,key,true);
+				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				upPanel.add(label);
 			}
 			upPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// up
-			{	JLabel label = new JLabel();
+			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(bg);
 				Dimension dim = new Dimension(centralButtonWidth,buttonsHeight);
@@ -115,15 +117,16 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_UP;
-				GuiTools.setLabelKey(label,key,true);
+				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				upPanel.add(label);
 			}
 			upPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// right
-			{	JLabel label = new JLabel();
+			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(bg);
 				Dimension dim = new Dimension(externalButtonsWidth,buttonsHeight);
@@ -131,10 +134,11 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_RIGHT;
-				GuiTools.setLabelKey(label,key,true);
+				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				upPanel.add(label);
 			}
 			
@@ -177,7 +181,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 			}
 			
 			// left
-			{	JLabel label = new JLabel();
+			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(bg);
 				Dimension dim = new Dimension(externalButtonsWidth,buttonsHeight);
@@ -185,15 +189,16 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_LEFT;
-				GuiTools.setLabelKey(label,key,true);
+				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				downPanel.add(label);
 			}
 			downPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// up
-			{	JLabel label = new JLabel();
+			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(bg);
 				Dimension dim = new Dimension(centralButtonWidth,buttonsHeight);
@@ -201,15 +206,16 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_DOWN;
-				GuiTools.setLabelKey(label,key,true);
+				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				downPanel.add(label);
 			}
 			downPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// right
-			{	JLabel label = new JLabel();
+			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(bg);
 				Dimension dim = new Dimension(externalButtonsWidth,buttonsHeight);
@@ -217,10 +223,11 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_RIGHT;
-				GuiTools.setLabelKey(label,key,true);
+				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				downPanel.add(label);
 			}
 			
@@ -390,20 +397,18 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	// init
-		JLabel label = (JLabel)e.getComponent();
+		MyLabel label = (MyLabel)e.getComponent();
 		boolean up = true;
 		int index = GuiTools.indexOfComponent(upPanel,label);
 		if(index<0)

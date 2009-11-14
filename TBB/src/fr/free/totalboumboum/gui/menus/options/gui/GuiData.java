@@ -22,7 +22,6 @@ package fr.free.totalboumboum.gui.menus.options.gui;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -32,8 +31,7 @@ import java.io.FileFilter;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-import javax.swing.JLabel;
-
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
@@ -264,19 +262,17 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = optionsPanel.getLabelPosition(label);
 		int index;
 		switch(pos[0])

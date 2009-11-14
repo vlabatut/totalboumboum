@@ -22,13 +22,11 @@ package fr.free.totalboumboum.gui.common.content.subpanel.transfer;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -89,8 +87,9 @@ public class TransferSubPanel extends TableSubPanel implements MouseListener
 				else
 					bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				setLabelBackground(line,col,bg);
-				JLabel label = getLabel(line,col);
+				MyLabel label = getLabel(line,col);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				col++;
 			}
 		}
@@ -138,19 +137,17 @@ public class TransferSubPanel extends TableSubPanel implements MouseListener
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = getLabelPositionMultiple(label);
 		
 		// left

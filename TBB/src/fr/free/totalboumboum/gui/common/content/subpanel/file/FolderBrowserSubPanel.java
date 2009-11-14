@@ -22,7 +22,6 @@ package fr.free.totalboumboum.gui.common.content.subpanel.file;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -36,8 +35,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import javax.swing.JLabel;
-
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
@@ -122,7 +120,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 				String name = names.get(nameIndex);
 				listPanel.setLabelBackground(line,0,bg);
 				listPanel.setLabelText(line,0,name,name);
-				JLabel label = listPanel.getLabel(line,0);
+				MyLabel label = listPanel.getLabel(line,0);
 				label.addMouseListener(this);
 				nameIndex++;
 				line++;
@@ -132,7 +130,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 				listPanel.setLabelBackground(linePrevious,0,bg);
 				String key = GuiKeys.COMMON_BROWSER_FILE_PAGEUP;
 				listPanel.setLabelKey(linePrevious,0,key,true);
-				JLabel label = listPanel.getLabel(linePrevious,0);
+				MyLabel label = listPanel.getLabel(linePrevious,0);
 				label.addMouseListener(this);
 			}
 			// parent
@@ -141,7 +139,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 				listPanel.setLabelBackground(lineParent,0,bg);
 				String key = GuiKeys.COMMON_BROWSER_FILE_PARENT;
 				listPanel.setLabelKey(lineParent,0,key,false);
-				JLabel label = listPanel.getLabel(lineParent,0);
+				MyLabel label = listPanel.getLabel(lineParent,0);
 				label.addMouseListener(this);
 			}
 			// page down
@@ -149,7 +147,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 				listPanel.setLabelBackground(lineNext,0,bg);
 				String key = GuiKeys.COMMON_BROWSER_FILE_PAGEDOWN;
 				listPanel.setLabelKey(lineNext,0,key,true);
-				JLabel label = listPanel.getLabel(lineNext,0);
+				MyLabel label = listPanel.getLabel(lineNext,0);
 				label.addMouseListener(this);
 			}
 			listPanels.add(listPanel);
@@ -262,19 +260,17 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = listPanels.get(currentPage).getLabelPosition(label);
 		
 		// previous page
@@ -287,8 +283,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 		}
 		// parent
 		else if(pos[0]==lineParent && showParent)
-		{	GuiTools.changeColorMouseExited(label);
-			selectName(-1);
+		{	selectName(-1);
 			refreshList();
 			fireFolderBrowserParentClicked();
 		}
@@ -302,9 +297,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 		}
 		// select a name
 		else if(pos[0]>=0)
-		{	GuiTools.changeColorMouseExited(label);
-			selectName(pos[0]);
-			GuiTools.changeColorMouseEntered(label);			
+		{	selectName(pos[0]);
 		}
 	}
 	

@@ -22,7 +22,6 @@ package fr.free.totalboumboum.gui.menus.options.controls;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -30,11 +29,10 @@ import java.awt.event.MouseListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
@@ -112,14 +110,16 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 					// key
 					{	int key = controlSettings.getOnKeyFromEvent(actions[line-1]);
 						setKey(line,COL_KEY,key);
-						JLabel label = keysPanel.getLabel(line,COL_KEY);
+						MyLabel label = keysPanel.getLabel(line,COL_KEY);
 						label.addMouseListener(this);
+						label.setMouseSensitive(true);
 					}
 					// autofire
 					{	boolean auto = controlSettings.isAutofire(actions[line-1]);
 						setAuto(line,COL_AUTO,auto);
-						JLabel label = keysPanel.getLabel(line,COL_AUTO);
+						MyLabel label = keysPanel.getLabel(line,COL_AUTO);
 						label.addMouseListener(this);
+						label.setMouseSensitive(true);
 					}
 				}
 			}
@@ -196,19 +196,17 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = keysPanel.getLabelPositionSimple(label);
 		switch(pos[1])
 		{	// key

@@ -26,9 +26,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class TableContentPanel extends LinesContentPanel
@@ -134,13 +134,13 @@ public class TableContentPanel extends LinesContentPanel
 		}
 	}	
 
-	public ArrayList<JLabel> getColumn(int col)
+	public ArrayList<MyLabel> getColumn(int col)
 	{	return getColSub(0,col);		
 	}
-	public ArrayList<JLabel> getColSub(int colGroup, int colSub)
-	{	ArrayList<JLabel> result = new ArrayList<JLabel>();
+	public ArrayList<MyLabel> getColSub(int colGroup, int colSub)
+	{	ArrayList<MyLabel> result = new ArrayList<MyLabel>();
 		for(int line=0;line<getLineCount();line++)
-		{	JLabel label = getLabel(line,colGroup,colSub);
+		{	MyLabel label = getLabel(line,colGroup,colSub);
 			result.add(label);
 		}
 		return result;
@@ -169,7 +169,7 @@ public class TableContentPanel extends LinesContentPanel
 		{	for(int grp=0;grp<colGroups;grp++)
 			{	int index = subIndex+grp*colSubs;
 				addLabel(start,index);
-				JLabel lbl = getLabel(start,index);
+				MyLabel lbl = getLabel(start,index);
 				String txt = null;
 				lbl.setText(txt);
 				lbl.setFont(getHeaderFont());
@@ -192,7 +192,7 @@ public class TableContentPanel extends LinesContentPanel
 		{	for(int grp=0;grp<colGroups;grp++)
 			{	int index = subIndex+grp*colSubs;
 				addLabel(line,index);
-				JLabel lbl = getLabel(line,index);
+				MyLabel lbl = getLabel(line,index);
 				String txt = null;
 				lbl.setText(txt);
 				lbl.setFont(getLineFont());
@@ -219,7 +219,7 @@ public class TableContentPanel extends LinesContentPanel
 		{	for(int sub=0;sub<colSubs;sub++)
 			{	int index = sub+groupIndex*colSubs;
 				addLabel(start,index);
-				JLabel lbl = getLabel(start,index);
+				MyLabel lbl = getLabel(start,index);
 				String txt = null;
 				lbl.setText(txt);
 				lbl.setFont(getHeaderFont());
@@ -242,7 +242,7 @@ public class TableContentPanel extends LinesContentPanel
 		{	for(int sub=0;sub<colSubs;sub++)
 			{	int index = sub+groupIndex*colSubs;
 				addLabel(line,index);
-				JLabel lbl = getLabel(line,index);
+				MyLabel lbl = getLabel(line,index);
 				String txt = null;
 				lbl.setText(txt);
 				lbl.setFont(getLineFont());
@@ -310,7 +310,7 @@ public class TableContentPanel extends LinesContentPanel
 	}
 	public void setColumnBackground(int colGroup, int colSub, Color bg)
 	{	for(int line=0;line<getLineCount();line++)
-		{	JLabel label = getLabel(line,colGroup,colSub);
+		{	MyLabel label = getLabel(line,colGroup,colSub);
 			label.setBackground(bg);
 		}
 	}
@@ -320,7 +320,7 @@ public class TableContentPanel extends LinesContentPanel
 	}
 	public void setColumnForeground(int colGroup, int colSub, Color fg)
 	{	for(int line=0;line<getLineCount();line++)
-		{	JLabel label = getLabel(line,colGroup,colSub);
+		{	MyLabel label = getLabel(line,colGroup,colSub);
 			label.setForeground(fg);
 		}
 	}
@@ -328,7 +328,7 @@ public class TableContentPanel extends LinesContentPanel
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public JLabel getLabel(int line, int colGroup, int colSub)
+	public MyLabel getLabel(int line, int colGroup, int colSub)
 	{	int col = colSub+colGroup*colSubs;
 		return getLabel(line,col);
 	}
@@ -358,11 +358,11 @@ public class TableContentPanel extends LinesContentPanel
 		setLabelForeground(line,col,fg);
 	}
 
-	public int[] getLabelPositionSimple(JLabel label)
+	public int[] getLabelPositionSimple(MyLabel label)
 	{	return super.getLabelPosition(label);
 	}
 
-	public int[] getLabelPositionMultiple(JLabel label)
+	public int[] getLabelPositionMultiple(MyLabel label)
 	{	int[] result = {-1,-1,-1};
 		int line = 0;
 		while(line<getLineCount() && result[0]==-1)
@@ -370,7 +370,7 @@ public class TableContentPanel extends LinesContentPanel
 			while(colGroup<colGroups && result[0]==-1)
 			{	int colSub = 0;
 				while(colSub<colSubs && result[0]==-1)
-				{	JLabel l = getLabel(line,colGroup,colSub);
+				{	MyLabel l = getLabel(line,colGroup,colSub);
 					if(label == l)
 					{	result[0] = line;
 						result[1] = colGroup;

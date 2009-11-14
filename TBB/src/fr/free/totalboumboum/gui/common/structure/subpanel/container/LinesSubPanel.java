@@ -26,8 +26,7 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.content.Line;
 import fr.free.totalboumboum.gui.common.structure.subpanel.content.LinesContentPanel;
 
@@ -128,11 +127,11 @@ public class LinesSubPanel extends SubPanel<LinesContentPanel>
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public int[] getLabelPosition(JLabel label)
+	public int[] getLabelPosition(MyLabel label)
 	{	return getDataPanel().getLabelPosition(label);
 	}
 	
-	public JLabel getLabel(int line, int col)
+	public MyLabel getLabel(int line, int col)
 	{	return getDataPanel().getLabel(line,col);
 	}
 	
@@ -160,7 +159,7 @@ public class LinesSubPanel extends SubPanel<LinesContentPanel>
 	{	getDataPanel().setLabelForeground(line,col,fg);
 	}
 
-	public int getLabelColumn(int line, JLabel label)
+	public int getLabelColumn(int line, MyLabel label)
 	{	return getDataPanel().getLabelColumn(line,label);
 	}
 	

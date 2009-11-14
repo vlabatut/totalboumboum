@@ -22,7 +22,6 @@ package fr.free.totalboumboum.gui.common.content.subpanel.file;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -36,8 +35,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import javax.swing.JLabel;
-
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
@@ -120,8 +118,9 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 				String name = names.get(nameIndex);
 				listPanel.setLabelBackground(line,0,bg);
 				listPanel.setLabelText(line,0,name,name);
-				JLabel label = listPanel.getLabel(line,0);
+				MyLabel label = listPanel.getLabel(line,0);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				nameIndex++;
 				line++;
 			}			
@@ -130,16 +129,18 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 				listPanel.setLabelBackground(linePrevious,0,bg);
 				String key = GuiKeys.COMMON_BROWSER_PACK_PAGEUP;
 				listPanel.setLabelKey(linePrevious,0,key,true);
-				JLabel label = listPanel.getLabel(linePrevious,0);
+				MyLabel label = listPanel.getLabel(linePrevious,0);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 			}
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(lineNext,0,bg);
 				String key = GuiKeys.COMMON_BROWSER_PACK_PAGEDOWN;
 				listPanel.setLabelKey(lineNext,0,key,true);
-				JLabel label = listPanel.getLabel(lineNext,0);
+				MyLabel label = listPanel.getLabel(lineNext,0);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 			}
 			listPanels.add(listPanel);
 		}
@@ -263,19 +264,17 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = listPanels.get(currentPage).getLabelPosition(label);
 		
 		// previous page
@@ -294,8 +293,7 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 		}
 		// select a name
 		else if(pos[0]>=0)
-		{	GuiTools.changeColorMouseExited(label);
-			selectPack(pos[0]);
+		{	selectPack(pos[0]);
 		}
 	}
 	

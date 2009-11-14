@@ -33,6 +33,7 @@ import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -188,8 +189,9 @@ public enum StatisticColumn
 			else
 				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER;
 			panel.setLabelKey(line,col,key,true);
-			JLabel label = panel.getLabel(line,col);
+			MyLabel label = panel.getLabel(line,col);
 			label.addMouseListener(container);
+			label.setMouseSensitive(true);
 		}
 		else if(this==GENERAL_RANK)
 		{	if(playerRating!=null)

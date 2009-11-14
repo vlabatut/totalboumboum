@@ -22,17 +22,16 @@ package fr.free.totalboumboum.gui.common.content.subpanel.sprite;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.ColumnsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.content.Column;
@@ -93,8 +92,9 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 				cl.setLabelMinHeight(line,h);
 				cl.setLabelPreferredHeight(line,h);
 				cl.setLabelMaxHeight(line,h);
-				JLabel label = cl.getLabel(line);
+				MyLabel label = cl.getLabel(line);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 			}
 			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
@@ -113,8 +113,9 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 				cl.setLabelMinHeight(line,h);
 				cl.setLabelPreferredHeight(line,h);
 				cl.setLabelMaxHeight(line,h);
-				JLabel label = cl.getLabel(line);
+				MyLabel label = cl.getLabel(line);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 			}
 			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
@@ -128,8 +129,9 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 			cl.setLabelMinHeight(line,getDataHeight());
 			cl.setLabelPreferredHeight(line,getDataHeight());
 			cl.setLabelMaxHeight(line,getDataHeight());
-			JLabel label = cl.getLabel(line);
+			MyLabel label = cl.getLabel(line);
 			label.addMouseListener(this);
+			label.setMouseSensitive(true);
 			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
 			col++;
@@ -183,7 +185,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 				line++;
 			}
 		}
-		JLabel label = getLabel(0,2);
+		MyLabel label = getLabel(0,2);
 		Dimension prefDim = label.getPreferredSize();
 		int imgWidth = (int)(prefDim.width*0.9);
 		int imgHeight = (int)(prefDim.height*0.9);
@@ -233,19 +235,17 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		// colors
 		int[] pos = getLabelPosition(label);
 		PredefinedColor color = null;

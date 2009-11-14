@@ -31,9 +31,9 @@ import java.util.Iterator;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -71,7 +71,7 @@ public class Line extends ContentPanel
 	
 	private void updateLabelsHeights()
 	{	for(int col=0;col<columns;col++)
-		{	JLabel lbl = getLabel(col);
+		{	MyLabel lbl = getLabel(col);
 			lbl.setFont(lineFont);
 			// minimum size
 			Dimension min = lbl.getMinimumSize();
@@ -157,8 +157,8 @@ public class Line extends ContentPanel
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	
-	public JLabel getLabel(int col)
-	{	return (JLabel)getComponent(col*2);
+	public MyLabel getLabel(int col)
+	{	return (MyLabel)getComponent(col*2);
 	}
 	
 	public void addLabel(int col)
@@ -171,7 +171,7 @@ public class Line extends ContentPanel
 //			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*col);
 		// new label
 		String txt = null;
-		JLabel lbl = new JLabel(txt);
+		MyLabel lbl = new MyLabel(txt);
 		lbl.setFont(lineFont);
 		lbl.setAlignmentX(CENTER_ALIGNMENT);
 		lbl.setAlignmentY(CENTER_ALIGNMENT);
@@ -201,7 +201,7 @@ public class Line extends ContentPanel
 	}
 
 	public void setLabelIcon(int col, BufferedImage icon, String tooltip)
-	{	JLabel label = getLabel(col);
+	{	MyLabel label = getLabel(col);
 		double zoom = getHeight()/(double)icon.getHeight();
 		icon = ImageTools.resize(icon,zoom,true);
 		ImageIcon icn = new ImageIcon(icon);
@@ -211,27 +211,27 @@ public class Line extends ContentPanel
 	}
 
 	public void setLabelText(int col, String text, String tooltip)
-	{	JLabel label = getLabel(col);
+	{	MyLabel label = getLabel(col);
 		label.setIcon(null);
 		label.setText(text);
 		label.setToolTipText(tooltip);
 	}
 	
 	public void setLabelBackground(int col, Color bg)
-	{	JLabel label = getLabel(col);
+	{	MyLabel label = getLabel(col);
 		label.setBackground(bg);
 	}
 	
 	public void setLabelForeground(int col, Color fg)
-	{	JLabel label = getLabel(col);
+	{	MyLabel label = getLabel(col);
 		label.setForeground(fg);
 	}
 
-	public int getLabelColumn(JLabel label)
+	public int getLabelColumn(MyLabel label)
 	{	int result = -1;
 		int col = 0;
 		while(col<columns && result==-1)
-		{	JLabel l = getLabel(col);
+		{	MyLabel l = getLabel(col);
 			if(label == l)
 				result = col;
 			else
@@ -251,7 +251,7 @@ public class Line extends ContentPanel
 	}
 	public void setLabelWidth(int col, int width, int mode)
 	{	Dimension lineDim = new Dimension(width,getHeight());
-		JLabel label = getLabel(col);
+		MyLabel label = getLabel(col);
 		switch(mode)
 		{	case 0:
 				label.setMinimumSize(lineDim);
@@ -275,7 +275,7 @@ public class Line extends ContentPanel
 	{	unsetLabelWidth(colSub,2);		
 	}
 	public void unsetLabelWidth(int col, int mode)
-	{	JLabel label = getLabel(col);
+	{	MyLabel label = getLabel(col);
 		switch(mode)
 		{	case 0:
 				label.setMinimumSize(null);
@@ -289,11 +289,11 @@ public class Line extends ContentPanel
 		}
 	}
 	
-	public int getLabelPosition(JLabel label)
+	public int getLabelPosition(MyLabel label)
 	{	int result = -1;
 		int col = 0;
 		while(col<columns && result==-1)
-		{	JLabel l = getLabel(col);
+		{	MyLabel l = getLabel(col);
 			if(l==label)
 				result = col;
 			else

@@ -27,7 +27,6 @@ import java.awt.Font;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
@@ -35,6 +34,7 @@ import javax.swing.SwingConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -129,7 +129,7 @@ sc = "Time";
 			};
 			for(int i=0;i<names.length;i++)
 			{	String text = names[i]; 
-				JLabel lbl = getLabel(0,i);
+				MyLabel lbl = getLabel(0,i);
 				lbl.setText(text);
 			}
 		}
@@ -145,7 +145,7 @@ sc = "Time";
 				// color
 				Color clr = profile.getSpriteColor().getColor();
 				// name
-				{	JLabel nameLabel = getLabel(line, col++);
+				{	MyLabel nameLabel = getLabel(line, col++);
 					String playerName = profile.getName();
 					nameLabel.setText(playerName);
 					nameLabel.setToolTipText(playerName);
@@ -185,7 +185,7 @@ sc = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.S
 						sc
 					};
 					for(int j=0;j<scores.length;j++)
-					{	JLabel pointsLabel = getLabel(line, col++);
+					{	MyLabel pointsLabel = getLabel(line, col++);
 						pointsLabel.setText(scores[j]);
 						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
@@ -193,7 +193,7 @@ sc = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.S
 					}
 				}			
 				// points
-				{	JLabel pointsLabel = getLabel(line, col++);
+				{	MyLabel pointsLabel = getLabel(line, col++);
 					double pts = points[profileIndex];
 					NumberFormat nf = NumberFormat.getInstance();
 					nf.setMaximumFractionDigits(2);
@@ -215,7 +215,7 @@ sc = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.S
 		// header
 		{	start = 1;
 			String txt = null;
-			JLabel lbl = new JLabel(txt);
+			MyLabel lbl = new MyLabel(txt);
 			lbl.setFont(headerFont);
 			lbl.setHorizontalAlignment(SwingConstants.CENTER);
 			lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
@@ -227,7 +227,7 @@ sc = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.S
 		// data
 		for(int line=0+start;line<lines;line++)
 		{	String txt = null;
-			JLabel lbl = new JLabel(txt);
+			MyLabel lbl = new MyLabel(txt);
 			lbl.setFont(regularFont);
 			lbl.setHorizontalAlignment(SwingConstants.CENTER);
 			lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
@@ -242,8 +242,8 @@ sc = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.S
 		SpringUtilities.makeCompactGrid(this,lines,columns,tableMargin,tableMargin,tableMargin,tableMargin);
 	}
 
-	public JLabel getLabel(int line, int col)
-	{	JLabel result = (JLabel)getComponent(col+line*columns);;
+	public MyLabel getLabel(int line, int col)
+	{	MyLabel result = (MyLabel)getComponent(col+line*columns);;
 		return result;
 	}
 }
