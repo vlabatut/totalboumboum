@@ -126,8 +126,8 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_MODIFY))
 		{	Profile profile = profileData.getSelectedProfile();
 			if(profile!=null)
-			{	String profileFile = profileData.getSelectedProfileFile();
-				EditProfileSplitPanel editPanel = new EditProfileSplitPanel(container.getMenuContainer(),container,profile,profileFile);
+			{	Integer profileId = profileData.getSelectedProfileId();
+				EditProfileSplitPanel editPanel = new EditProfileSplitPanel(container.getMenuContainer(),container,profile,profileId);
 				replaceWith(editPanel);
 			}
 	    }
@@ -173,11 +173,13 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 				try
 				{	// create profile
 					ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
-					String fileName = profilesConfig.createProfile(input);
+					Integer id = profilesConfig.createProfile(input);
 					// rebuild panel
-					profileData = new SelectedProfileData(container);
+					profileData.removeListener(this);
+					profileData = new SelectedProfileData(container);					
 					container.setDataPart(profileData);
-					profileData.setSelectedProfile(fileName);
+					profileData.addListener(this);
+					profileData.setSelectedProfile(id);
 				}
 				catch (ParserConfigurationException e1)
 				{	e1.printStackTrace();
@@ -214,8 +216,10 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 					ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
 					profilesConfig.deleteProfile(profile);	
 					// rebuild panel
+					profileData.removeListener(this);
 					profileData = new SelectedProfileData(container);
 					container.setDataPart(profileData);
+					profileData.addListener(this);
 				}
 				catch (ParserConfigurationException e1)
 				{	e1.printStackTrace();
