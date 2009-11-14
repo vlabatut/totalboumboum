@@ -65,14 +65,14 @@ public class ProfilesConfigurationSaver
 	
 	private static Element saveListElement(ProfilesConfiguration profilesConfiguration)
 	{	Element result = new Element(XmlTools.LIST);
-		HashMap<String,String> profiles = profilesConfiguration.getProfiles();
-		Iterator<Entry<String,String>> it = profiles.entrySet().iterator();
+		HashMap<Integer,String> profiles = profilesConfiguration.getProfiles();
+		Iterator<Entry<Integer,String>> it = profiles.entrySet().iterator();
 		while(it.hasNext())
-		{	Entry<String,String> entry = it.next();
-			String file = entry.getKey();
+		{	Entry<Integer,String> entry = it.next();
+			String idStr = entry.getKey().toString();
 			String name = entry.getValue();
 			Element element = new Element(XmlTools.PROFILE);
-			element.setAttribute(XmlTools.FILE,file);
+			element.setAttribute(XmlTools.FILE,idStr);
 			element.setAttribute(XmlTools.NAME,name);
 			result.addContent(element);
 		}
