@@ -103,6 +103,7 @@ public class XmlTools
 	public static final String CONCRETE_FLOORS = "concreteFloors";
 	public static final String CONCRETE_ITEMS = "concreteItems";
 	public static final String CONFRONTATION = "confrontation";
+	public static final String CONFRONTATIONS_ORDER = "confrontationsOrder"; 
 	public static final String CONSTANT = "constant";
 	public static final String CONTACT = "contact";
 	public static final String CONTROL = "control";
@@ -203,6 +204,7 @@ public class XmlTools
 	public static final String MODULATION = "modulation";
 	public static final String MULTIPLICATION = "multiplication";
 	public static final String NAME = "name";
+	public static final String NONE = "none";
 	public static final String NOTES = "notes";
 	public static final String NUMBER = "number";
 	public static final String ON = "on";
@@ -235,6 +237,7 @@ public class XmlTools
 	public static final String QUICKMATCH = "quickmatch";
 	public static final String QUICKSTART = "quickstart";
 	public static final String QUICK_LAUNCH = "quickLaunch";
+	public static final String RANDOM = "random"; 
 	public static final String RANDOM_LOCATION = "randomLocation"; 
 	public static final String RANDOM_ORDER = "randomOrder"; 
 	public static final String RANDOMIZE_LEGS = "randomizeLegs"; 
@@ -306,6 +309,7 @@ public class XmlTools
 	public static final String TRAJECTORIES = "trajectories";
 	public static final String TRAJECTORY = "trajectory";
 	public static final String TYPE = "type";
+	public static final String UNIFORM = "uniform";
 	public static final String UPLINE = "upLine";
 	public static final String UPS = "ups";
 	public static final String USE_LAST_PLAYERS = "useLastPlayers";

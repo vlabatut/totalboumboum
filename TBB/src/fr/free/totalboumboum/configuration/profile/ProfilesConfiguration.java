@@ -83,7 +83,7 @@ public class ProfilesConfiguration
 	{	this.lastProfileIndex = lastProfileIndex;
 	}
 	
-	public String createProfile(String name) throws IOException, ParserConfigurationException, SAXException
+	public String createProfile(String name) throws IOException, ParserConfigurationException, SAXException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// refresh counter
 		int lastProfile = getLastProfileIndex();
 		int nextProfile = lastProfile+1;
@@ -108,14 +108,13 @@ public class ProfilesConfiguration
 		addProfile(fileName,name);
 		ProfilesConfigurationSaver.saveProfilesConfiguration(this);
 		
-		// register in ranking service
-		RankingService rankingService = GameStatistics.getRankingService();
-		rankingService.registerPlayer(nextProfile);
+		// register in stats
+		GameStatistics.addPlayer(nextProfile);
 		
 		return fileName;
 	}
 	
-	public void deleteProfile(Profile profile) throws ParserConfigurationException, SAXException, IOException
+	public void deleteProfile(Profile profile) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// delete file
 		int id = profile.getId();
 		String path = FileTools.getProfilesPath()+File.separator+id+FileTools.EXTENSION_XML;
@@ -127,8 +126,7 @@ public class ProfilesConfiguration
 		ProfilesConfigurationSaver.saveProfilesConfiguration(this);
 		
 		// remove from ranking service
-		RankingService rankingService = GameStatistics.getRankingService();
-		rankingService.deregisterPlayer(id);
+		GameStatistics.deletePlayer(id);
 	}
 	
 	/////////////////////////////////////////////////////////////////

@@ -31,9 +31,8 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.points.PointsProcessorLoader;
 import fr.free.totalboumboum.game.tournament.TournamentLoader;
+import fr.free.totalboumboum.game.tournament.league.LeagueTournament.ConfrontationOrder;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class LeagueTournamentLoader
@@ -52,11 +51,17 @@ public class LeagueTournamentLoader
 		boolean minimizeConfrontations = Boolean.parseBoolean(minimizeConfrontationsStr);
     	result.setMinimizeConfrontations(minimizeConfrontations);
     	
-		// point processor
+    	// confrontations Order
+		String confrontationOrderStr = root.getAttribute(XmlTools.CONFRONTATIONS_ORDER).getValue().trim();
+		ConfrontationOrder confrontationOrder = ConfrontationOrder.valueOf(confrontationOrderStr);
+    	result.setConfrontationOrder(confrontationOrder);
+    	
+    	
+/*		// point processor
     	Element pointsProcessorElt = root.getChild(XmlTools.POINTS);
 		PointsProcessor pointsProcessor = PointsProcessorLoader.loadPointProcessorFromElement(pointsProcessorElt,folder);
 		result.setPointsProcessor(pointsProcessor);
-		
+*/		
 		// matches
 		element = root.getChild(XmlTools.MATCHES);
 		loadMatchesElement(element,folder,result);

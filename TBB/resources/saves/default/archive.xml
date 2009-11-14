@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Tournoi simple de test" type="LEAGUE" />
-	<played matches="119" rounds="3" />
-	<dates start="2009-11-13T23:47:30" save="2009-11-14T03:43:47" />
+	<tournament name="Coupe de test" type="CUP" />
+	<played matches="4" rounds="4" />
+	<dates start="2009-11-14T08:50:07" save="2009-11-14T09:20:42" />
 	<players>
-		<player name="0708.Başman+Sandallı" />
 		<player name="0809.Devecioğlu+Korkmaz" />
-		<player name="0809.Çalışkan+Cap+Doğaner" />
-		<player name="0708.Bingöl+Ketenci" />
-		<player name="0809.Akkaya+Danacioğlu" />
-		<player name="0809.Günalp+Yürtsever" />
-		<player name="0708.Kılıç+Pala" />
-		<player name="0708.Hanci+Toprak" />
-		<player name="0809.Demirağ+Şagar" />
+		<player name="0708.Göksel+Mengeş" />
+		<player name="0809.Altay+Basaranoğlu" />
 		<player name="0708.Çamaş+Demirbaş" />
+		<player name="0708.Bingöl+Ketenci" />
+		<player name="0708.Cirit+Mutlu" />
+		<player name="0809.Bilgin+Karabağ" />
 		<player name="0708.Çağlayan+Elmas" />
-		<player name="0708.Okan+Yüksel" />
-		<player name="0809.Çöremen+Küçükkarakürt" />
-		<player name="0809.Akpolat+Şener" />
-		<player name="0708.Şahin+Yıldırım" />
-		<player name="0809.Kökciyan+Mazmanoğlu" />
+		<player name="0708.Başman+Sandallı" />
+		<player name="0809.Adatepe" />
+		<player name="0809.Dayioğlugil+Geçkalan" />
+		<player name="0708.Kılıç+Pala" />
+		<player name="0708.Baydar+Camcı" />
+		<player name="0708.Keçer+Yaman" />
+		<player name="0809.Medeni+Uluer" />
+		<player name="0809.Demirağ+Şagar" />
 	</players>
 </archive>
 

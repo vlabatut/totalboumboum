@@ -188,6 +188,21 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 				catch (IOException e1)
 				{	e1.printStackTrace();
 				}
+				catch (IllegalArgumentException e)
+				{	e.printStackTrace();
+				}
+				catch (SecurityException e)
+				{	e.printStackTrace();
+				}
+				catch (IllegalAccessException e)
+				{	e.printStackTrace();
+				}
+				catch (NoSuchFieldException e)
+				{	e.printStackTrace();
+				}
+				catch (ClassNotFoundException e)
+				{	e.printStackTrace();
+				}
 			}
 		}
 		else if(questionPanel!=null)
@@ -210,6 +225,21 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 				}
 				catch (IOException e1)
 				{	e1.printStackTrace();
+				}
+				catch (IllegalArgumentException e)
+				{	e.printStackTrace();
+				}
+				catch (SecurityException e)
+				{	e.printStackTrace();
+				}
+				catch (IllegalAccessException e)
+				{	e.printStackTrace();
+				}
+				catch (NoSuchFieldException e)
+				{	e.printStackTrace();
+				}
+				catch (ClassNotFoundException e)
+				{	e.printStackTrace();
 				}
 			}
 		}
