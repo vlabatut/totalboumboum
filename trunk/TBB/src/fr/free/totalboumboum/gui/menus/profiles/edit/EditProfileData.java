@@ -35,7 +35,6 @@ import java.awt.image.BufferedImage;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.event.DocumentEvent;
@@ -48,6 +47,7 @@ import javax.swing.text.StyledDocument;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
@@ -114,7 +114,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				}
 				namePanel.add(Box.createGlue());
 				// icon
-				{	JLabel label = new JLabel();
+				{	MyLabel label = new MyLabel();
 					Dimension dim = new Dimension(nameHeight,nameHeight);
 					label.setMinimumSize(dim);
 					label.setPreferredSize(dim);
@@ -214,8 +214,9 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI_RESET,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
-					JLabel label = editPanel.getLabel(LINE_AI,col);
+					MyLabel label = editPanel.getLabel(LINE_AI,col);
 					label.addMouseListener(this);
+					label.setMouseSensitive(true);
 					col++;
 				}
 				// change
@@ -225,8 +226,9 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI_CHANGE,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
-					JLabel label = editPanel.getLabel(LINE_AI,col);
+					MyLabel label = editPanel.getLabel(LINE_AI,col);
 					label.addMouseListener(this);
+					label.setMouseSensitive(true);
 					col++;
 				}
 			}
@@ -272,8 +274,9 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_HERO_CHANGE,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
-					JLabel label = editPanel.getLabel(LINE_HERO,col);
+					MyLabel label = editPanel.getLabel(LINE_HERO,col);
 					label.addMouseListener(this);
+					label.setMouseSensitive(true);
 					col++;
 				}
 			}
@@ -310,8 +313,9 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelKey(col,key,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
-					JLabel label = editPanel.getLabel(line,col);
+					MyLabel label = editPanel.getLabel(line,col);
 					label.addMouseListener(this);
+					label.setMouseSensitive(true);
 					col++;
 				}
 				// next
@@ -322,8 +326,9 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					ln.setLabelKey(col,key,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
-					JLabel label = editPanel.getLabel(line,col);
+					MyLabel label = editPanel.getLabel(line,col);
 					label.addMouseListener(this);
+					label.setMouseSensitive(true);
 					col++;
 				}
 			}
@@ -366,19 +371,17 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = editPanel.getLabelPosition(label);
 		switch(pos[0])
 		{	// AI

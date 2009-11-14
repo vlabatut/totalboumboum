@@ -22,14 +22,11 @@ package fr.free.totalboumboum.gui.common.content.subpanel.limits;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import javax.swing.JLabel;
 
 import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
@@ -38,6 +35,7 @@ import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
 import fr.free.totalboumboum.game.limit.LimitTime;
 import fr.free.totalboumboum.game.limit.Limits;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -168,8 +166,9 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 					setLabelForeground(line,colGroup,colSub,fg);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
-					JLabel lbl = getLabel(line,colGroup,colSub);
+					MyLabel lbl = getLabel(line,colGroup,colSub);
 					lbl.addMouseListener(this);
+					lbl.setMouseSensitive(true);
 					colSub++;
 				}
 				{	String text = value;
@@ -177,8 +176,9 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 					setLabelText(line,colGroup,colSub,text,tooltip);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colGroup,colSub,bg);
-					JLabel lbl = getLabel(line,colGroup,colSub);
+					MyLabel lbl = getLabel(line,colGroup,colSub);
 					lbl.addMouseListener(this);
+					lbl.setMouseSensitive(true);
 					colSub++;
 				}
 				line++;
@@ -215,12 +215,8 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 	private void selectLimit(int row)
 	{	// paint line
 		selectedRow = row;
-		GuiTools.changeColorMouseExited(getLabel(selectedRow,0));
-		GuiTools.changeColorMouseExited(getLabel(selectedRow,1));
 		setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
 		setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-		GuiTools.changeColorMouseEntered(getLabel(selectedRow,0));
-		GuiTools.changeColorMouseEntered(getLabel(selectedRow,1));
 		// update listeners
 		fireLimitSelectionChange();
 	}
@@ -242,20 +238,18 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	// init
-		JLabel label = (JLabel)e.getComponent();
+		MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = getLabelPositionMultiple(label);
 		// unselect
 		if(selectedRow!=-1)

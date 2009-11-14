@@ -28,8 +28,8 @@ import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -257,7 +257,7 @@ public class LinesContentPanel extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public int[] getLabelPosition(JLabel label)
+	public int[] getLabelPosition(MyLabel label)
 	{	int result[] = {-1, -1};
 		int line = 0;
 		while(line<lines && result[0]==-1)
@@ -274,7 +274,7 @@ public class LinesContentPanel extends ContentPanel
 		return result;
 	}
 	
-	public JLabel getLabel(int line, int col)
+	public MyLabel getLabel(int line, int col)
 	{	Line l = getLine(line);
 		return l.getLabel(col);
 	}
@@ -315,7 +315,7 @@ public class LinesContentPanel extends ContentPanel
 		l.setLabelForeground(col,fg);
 	}
 
-	public int getLabelColumn(int line, JLabel label)
+	public int getLabelColumn(int line, MyLabel label)
 	{	int result = -1;
 		Line l = getLine(line);
 		result = l.getLabelColumn(label);

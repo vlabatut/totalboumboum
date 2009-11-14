@@ -26,8 +26,7 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.content.Line;
 import fr.free.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
 
@@ -157,17 +156,17 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public int[] getLabelPositionSimple(JLabel label)
+	public int[] getLabelPositionSimple(MyLabel label)
 	{	return getDataPanel().getLabelPositionSimple(label);
 	}
-	public int[] getLabelPositionMultiple(JLabel label)
+	public int[] getLabelPositionMultiple(MyLabel label)
 	{	return getDataPanel().getLabelPositionMultiple(label);
 	}
 	
-	public JLabel getLabel(int line, int col)
+	public MyLabel getLabel(int line, int col)
 	{	return getLabel(line,0,col);
 	}
-	public JLabel getLabel(int line, int colGroup, int colSub)
+	public MyLabel getLabel(int line, int colGroup, int colSub)
 	{	return getDataPanel().getLabel(line,colGroup,colSub);
 	}
 	
@@ -235,10 +234,10 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	{	getDataPanel().unsetColSubWidth(colSub,mode);
 	}
 	
-	public ArrayList<JLabel> getColumn(int col)
+	public ArrayList<MyLabel> getColumn(int col)
 	{	return getDataPanel().getColumn(col);
 	}
-	public ArrayList<JLabel> getColSub(int colGroup, int colSub)
+	public ArrayList<MyLabel> getColSub(int colGroup, int colSub)
 	{	return getDataPanel().getColSub(colGroup,colSub);
 	}
 	

@@ -25,8 +25,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.content.Column;
 import fr.free.totalboumboum.gui.common.structure.subpanel.content.ColumnsContentPanel;
 
@@ -92,11 +91,11 @@ public class ColumnsSubPanel extends SubPanel<ColumnsContentPanel>
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public int[] getLabelPosition(JLabel label)
+	public int[] getLabelPosition(MyLabel label)
 	{	return getDataPanel().getLabelPosition(label);
 	}
 	
-	public JLabel getLabel(int line, int col)
+	public MyLabel getLabel(int line, int col)
 	{	return getDataPanel().getLabel(line,col);
 	}
 	
@@ -124,7 +123,7 @@ public class ColumnsSubPanel extends SubPanel<ColumnsContentPanel>
 	{	getDataPanel().setLabelForeground(line,col,fg);
 	}
 
-	public int getLabelColumn(int col, JLabel label)
+	public int getLabelColumn(int col, MyLabel label)
 	{	return getDataPanel().getLabelColumn(col,label);
 	}
 	

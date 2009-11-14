@@ -22,14 +22,12 @@ package fr.free.totalboumboum.gui.menus.options.ais;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JLabel;
-
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.ai.AisConfiguration;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
@@ -270,19 +268,17 @@ public class AisData extends EntitledDataPanel implements MouseListener
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = optionsPanel.getLabelPosition(label);
 		switch(pos[0])
 		{	// UPS

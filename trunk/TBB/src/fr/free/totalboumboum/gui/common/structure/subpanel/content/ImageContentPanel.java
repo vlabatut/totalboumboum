@@ -28,9 +28,9 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
@@ -46,7 +46,7 @@ public class ImageContentPanel extends ContentPanel
 		setLayout(layout);
 
 		// inner label
-		imageLabel = new JLabel();
+		imageLabel = new MyLabel();
 		imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		imageLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
 		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -80,7 +80,7 @@ public class ImageContentPanel extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	// IMAGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private JLabel imageLabel;
+	private MyLabel imageLabel;
 	private BufferedImage image;
 
 	public void setImage(BufferedImage newImage, String tooltip)

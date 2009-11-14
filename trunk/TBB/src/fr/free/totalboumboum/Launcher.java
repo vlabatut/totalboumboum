@@ -870,6 +870,8 @@ public class Launcher
 	 * - moteur : mise à jour des points en temps réel, en prenant la première limite disponible (utile pour les rounds)
 	 * - amélioration du décompte du temps : le temps du jeu est arrêté s'il est en pause, et le temps réel est décompté séparément
 	 * - tournoi de type championnat implémenté
+	 * - correction d'un bug lors de la création/suppression de profil, à la fois dans la GUI et le moteur
+	 * - modification de l'identifiant des joueurs dans le moteur : c'est maintenant un entier et non plus une chaine de caractères contenant un entier
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1120,7 +1122,6 @@ public class Launcher
 	 *  		>> surcharger label avec une couleur de base, in bool de survol et une couleur foncée.
 	 *  		>> pas idéal car il va rester foncé si on revient à l'écran sans toutefois survoler le label
 	 *  		>> faudrait capter l'évènement 'masquage' et 'affichage'
-	 *  	- pb quand on crée un profil et qu'on veut l'éditer (première fois du moins)
 	 *  - instance TBB
 	 *  	- bombe télécommandée tombe en panne : le circuit grille
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques

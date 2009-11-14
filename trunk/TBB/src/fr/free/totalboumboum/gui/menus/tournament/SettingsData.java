@@ -22,17 +22,16 @@ package fr.free.totalboumboum.gui.menus.tournament;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.content.subpanel.tournament.TournamentMiscSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
@@ -111,14 +110,12 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
@@ -193,8 +190,9 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// listener
-				JLabel lbl = result.getLabel(line,col);
+				MyLabel lbl = result.getLabel(line,col);
 				lbl.addMouseListener(this);
+				lbl.setMouseSensitive(true);
 				// next
 				col++;
 			}

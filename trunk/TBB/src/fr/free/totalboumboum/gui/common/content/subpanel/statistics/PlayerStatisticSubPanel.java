@@ -43,6 +43,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
@@ -106,7 +107,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			buttonsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 			
 			// up button
-			{	JLabel label = new JLabel();
+			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
@@ -114,15 +115,16 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_PREVIOUS;
-				GuiTools.setLabelKey(label,key,true);
+				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				buttonsPanel.add(label);
 			}
 			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// type
-			{	JLabel label = new JLabel();
+			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
@@ -130,15 +132,16 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_HUMAN;
-				GuiTools.setLabelKey(label,key,true);
+				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				buttonsPanel.add(label);
 			}
 			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// ranks
-			{	JLabel label = new JLabel();
+			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
@@ -146,15 +149,16 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALLRANKS;
-				GuiTools.setLabelKey(label,key,true);
+				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				buttonsPanel.add(label);
 			}
 			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// sum/mean
-			{	JLabel label = new JLabel();
+			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(centerButtonWidth,buttonHeight);
@@ -162,15 +166,16 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_MEAN;
-				GuiTools.setLabelKey(label,key,true);
+				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				buttonsPanel.add(label);
 			}
 			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// down
-			{	JLabel label = new JLabel();
+			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
@@ -178,10 +183,11 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_NEXT;
-				GuiTools.setLabelKey(label,key,true);
+				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				buttonsPanel.add(label);
 			}
 			dataPanel.add(buttonsPanel);
@@ -282,8 +288,9 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			{	String key = headerKeys[h];
 				if(key!=null)
 					panel.setLabelKey(0,h,key,true);
-				JLabel label = panel.getLabel(0,h);
+				MyLabel label = panel.getLabel(0,h);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				if(headerHeight>colWidths[h])
 					colWidths[h] = headerHeight;
 			}
@@ -443,19 +450,17 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		int pos = GuiTools.indexOfComponent(buttonsPanel,label);
 		// bottom buttons
 		if(pos!=-1)
@@ -476,8 +481,8 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_BOTH;
 				else
 					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_HUMAN;
-				JLabel lbl = (JLabel)buttonsPanel.getComponent(COL_TYPE);
-				GuiTools.setLabelKey(lbl,key,true);
+				MyLabel lbl = (MyLabel)buttonsPanel.getComponent(COL_TYPE);
+				lbl.setKey(key,true);
 				refresh();
 			}
 			// ranks
@@ -490,8 +495,8 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_NORANKS;
 				else
 					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALL;
-				JLabel lbl = (JLabel)buttonsPanel.getComponent(COL_RANKS);
-				GuiTools.setLabelKey(lbl,key,true);
+				MyLabel lbl = (MyLabel)buttonsPanel.getComponent(COL_RANKS);
+				lbl.setKey(key,true);
 				refresh();
 			}
 			// mean/sum
@@ -501,8 +506,8 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_MEAN;
 				else
 					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_SUM;
-				JLabel lbl = (JLabel)buttonsPanel.getComponent(COL_SUM_MEAN);
-				GuiTools.setLabelKey(lbl,key,true);
+				MyLabel lbl = (MyLabel)buttonsPanel.getComponent(COL_SUM_MEAN);
+				lbl.setKey(key,true);
 				mean = !mean;
 				refresh();
 			}

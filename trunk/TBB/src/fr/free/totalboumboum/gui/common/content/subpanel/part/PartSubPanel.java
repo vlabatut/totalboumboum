@@ -22,18 +22,16 @@ package fr.free.totalboumboum.gui.common.content.subpanel.part;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
-import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.tournament.cup.CupLeg;
 import fr.free.totalboumboum.game.tournament.cup.CupPart;
 import fr.free.totalboumboum.game.tournament.cup.CupPlayer;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.content.Line;
@@ -333,19 +331,17 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = getLabelPosition(label);
 		if(pos==null)
 			fireTitleClicked(part);

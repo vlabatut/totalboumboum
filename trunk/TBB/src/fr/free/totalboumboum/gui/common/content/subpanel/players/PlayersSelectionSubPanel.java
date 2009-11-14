@@ -22,7 +22,6 @@ package fr.free.totalboumboum.gui.common.content.subpanel.players;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -30,7 +29,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.JLabel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -41,6 +39,7 @@ import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
+import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -131,11 +130,13 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				}
 			}
 			// delete all button
-			JLabel lbl = getLabel(0,COL_DELETE);
+			MyLabel lbl = getLabel(0,COL_DELETE);
 			lbl.addMouseListener(this);
+			lbl.setMouseSensitive(true);
 			// random selection button
 			lbl = getLabel(0,COL_PROFILE);
 			lbl.addMouseListener(this);			
+			lbl.setMouseSensitive(true);
 		}
 		
 		// data
@@ -163,9 +164,10 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
 				setLabelBackground(line,COL_DELETE,bg);
 				// listener
-				JLabel lbl = getLabel(line,COL_DELETE);
+				MyLabel lbl = getLabel(line,COL_DELETE);
 				lbl.removeMouseListener(this); //just in case
 				lbl.addMouseListener(this);
+				lbl.setMouseSensitive(true);
 			}
 			// name
 			{	// content
@@ -176,9 +178,10 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				setLabelBackground(line,COL_PROFILE,bg);
 				// mouse listener
-				JLabel lbl = getLabel(line,COL_PROFILE);
+				MyLabel lbl = getLabel(line,COL_PROFILE);
 				lbl.removeMouseListener(this); //just in case
 				lbl.addMouseListener(this);
+				lbl.setMouseSensitive(true);
 			}
 			// type
 			{	// content
@@ -201,9 +204,10 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				setLabelBackground(line,COL_HERO,bg);
 				// mouse listener
-				JLabel lbl = getLabel(line,COL_HERO);
+				MyLabel lbl = getLabel(line,COL_HERO);
 				lbl.removeMouseListener(this); //just in case
 				lbl.addMouseListener(this);
+				lbl.setMouseSensitive(true);
 			}
 			// rank
 			{	// content
@@ -233,9 +237,10 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				setLabelBackground(line,COL_RANK,bg);
 				// mouse listener
-				JLabel lbl = getLabel(line,COL_RANK);
+				MyLabel lbl = getLabel(line,COL_RANK);
 				lbl.removeMouseListener(this); //just in case
 				lbl.addMouseListener(this);
+				lbl.setMouseSensitive(true);
 			}
 			// color
 			{	// content
@@ -247,9 +252,10 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
 				setLabelBackground(line,COL_COLOR,bg);
 				// mouse listener
-				JLabel lbl = getLabel(line,COL_COLOR);
+				MyLabel lbl = getLabel(line,COL_COLOR);
 				lbl.removeMouseListener(this); //just in case
 				lbl.addMouseListener(this);
+				lbl.setMouseSensitive(true);
 			}
 			// controls
 			{	// content
@@ -261,15 +267,16 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
 				setLabelBackground(line,COL_CONTROLS,bg);
 				// mouse listener
-				JLabel lbl = getLabel(line,COL_CONTROLS);
+				MyLabel lbl = getLabel(line,COL_CONTROLS);
 				lbl.removeMouseListener(this); //just in case
 				lbl.addMouseListener(this);
+				lbl.setMouseSensitive(true);
 			}
 		}
 		// if there's no player on this line
 		else if(line<LINES)
 		{	for(int col=0;col<COLS;col++)
-			{	JLabel lbl = getLabel(line,col);
+			{	MyLabel lbl = getLabel(line,col);
 				lbl.setText(null);
 				lbl.setToolTipText(null);
 				lbl.setIcon(null);
@@ -283,9 +290,10 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				setLabelKey(line,col,key,true);
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				setLabelBackground(line,col,bg);
-				JLabel lbl = getLabel(line,col);
+				MyLabel lbl = getLabel(line,col);
 				lbl.removeMouseListener(this); //just in case
 				lbl.addMouseListener(this);			
+				lbl.setMouseSensitive(true);
 			}
 		}
 	}
@@ -344,19 +352,17 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseEntered(component);
+	{	
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	Component component = e.getComponent();
-		GuiTools.changeColorMouseExited(component);
+	{	
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = getLabelPositionMultiple(label);
 		switch(pos[2])
 		{	case COL_DELETE:
