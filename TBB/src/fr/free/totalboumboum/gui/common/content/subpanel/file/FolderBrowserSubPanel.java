@@ -226,7 +226,9 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 	}
 
 	private void refreshList()
-	{	TableContentPanel table = listPanels.get(currentPage);
+	{	getDataPanel().switchDisplay(false);
+		TableContentPanel table = listPanels.get(currentPage);
+		table.switchDisplay(true);
 		setDataPanel(table);
 		validate();
 		repaint();

@@ -40,7 +40,7 @@ public class AiSubPanel extends TableSubPanel
 	public AiSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,COL_GROUPS,COL_SUBS,true);
 		
-	setAiPreview(null);
+		setAiPreview(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
