@@ -47,10 +47,10 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class EditProfileMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, String profileFile)
+	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, Integer profileId)
 	{	super(container, parent);
 		this.profile = profile;
-		this.profileFile = profileFile;
+		this.profileId = profileId;
 	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -94,7 +94,7 @@ public class EditProfileMenu extends InnerMenuPanel
 	// PROFILE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Profile profile;
-	private String profileFile;
+	private Integer profileId;
 
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER	/////////////////////////////////////////////
@@ -104,11 +104,11 @@ public class EditProfileMenu extends InnerMenuPanel
 		{	Profile newProfile = profileData.getProfile();
 			if(!profile.isTheSame(newProfile))
 			{	try
-				{	ProfileSaver.saveProfile(newProfile,profileFile);
+				{	ProfileSaver.saveProfile(newProfile,profileId);
 					if(!profile.getName().equals(newProfile.getName()))
 					{	//ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
 						ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
-						profilesConfiguration.addProfile(profileFile,newProfile.getName());
+						profilesConfiguration.addProfile(profileId,newProfile.getName());
 						ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfiguration);
 					}
 				}
