@@ -23,6 +23,7 @@ package fr.free.totalboumboum.gui.menus.profiles.select;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -70,7 +71,13 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 			// list panel
 			{	filePanel = new FileBrowserSubPanel(leftWidth,dataHeight);
 				filePanel.setShowParent(false);
-				HashMap<String,String> fileNames = profilesConfiguration.getProfiles();
+				HashMap<Integer,String> ids = profilesConfiguration.getProfiles();
+				HashMap<String,String> fileNames = new HashMap<String, String>();
+				for(Entry<Integer,String> entry: ids.entrySet())
+				{	String key = entry.getKey().toString();
+					String value = entry.getValue();
+					fileNames.put(key,value);
+				}
 				filePanel.setFileNames(fileNames);
 				filePanel.addListener(this);
 				mainPanel.add(filePanel);
@@ -112,12 +119,15 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 	{	return selectedProfile;
 	}
 
-	public String getSelectedProfileFile()
-	{	return filePanel.getSelectedFileName();
+	public Integer getSelectedProfileId()
+	{	String fileName = filePanel.getSelectedFileName();
+		Integer result = Integer.parseInt(fileName);
+		return result;
 	}
 	
-	public void setSelectedProfile(String fileName)
-	{	filePanel.setSelectedFileName(fileName);
+	public void setSelectedProfile(Integer id)
+	{	String fileName = id.toString();
+		filePanel.setSelectedFileName(fileName);
 	}
 
 	/////////////////////////////////////////////////////////////////
