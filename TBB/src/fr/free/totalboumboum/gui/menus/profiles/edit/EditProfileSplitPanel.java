@@ -37,14 +37,14 @@ public class EditProfileSplitPanel extends SplitMenuPanel
 
 	private BufferedImage image;
 
-	public EditProfileSplitPanel(MenuContainer container, MenuPanel parent, Profile profile, String profileFile)
+	public EditProfileSplitPanel(MenuContainer container, MenuPanel parent, Profile profile, Integer profileId)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new EditProfileMenu(this,parent,profile,profileFile));
+		setMenuPart(new EditProfileMenu(this,parent,profile,profileId));
 	}
 	
 	@Override
