@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <sprite
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../xml/schemas/sprites.xsd">
+	xsi:noNamespaceSchemaLocation="../../../schemas/sprite.xsd">
 
-	<animes folder="graphics" />
-	<bombset packname="superbomberman1" name="normal" />
-	<abilities  />
+	<general name="Prognathe" />
+	<source value="Total Boum Boum" />
 
 </sprite>
