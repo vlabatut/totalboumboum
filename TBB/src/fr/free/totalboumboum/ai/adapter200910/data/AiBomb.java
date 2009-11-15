@@ -61,7 +61,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 */
 	AiBomb(AiTile tile, Bomb sprite)
 	{	super(tile,sprite);
-		initDurations();
+		initFuseParameters();
 		initRange();
 		initColor();
 		updateWorking();
@@ -96,6 +96,16 @@ public class AiBomb extends AiSprite<Bomb>
 	private long explosionDuration;
 	/** latence de la bombe quand son explosion est déclenchée par une autre bombe */
 	private long latencyDuration;
+	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
+	private float failureProbability;
+	
+	/**
+	 * renvoie la probabilité que la bombe tombe en panne quand elle devrait exploser
+	 * @return	une mesure de probabilité
+	 */
+	public float getFailureProbability()
+	{	return failureProbability;	
+	}
 	
 	/**
 	 * indique si l'explosion de la bombe dépend d'un compte à rebours
@@ -124,7 +134,7 @@ public class AiBomb extends AiSprite<Bomb>
 	/**
 	 * initialisation des délais liés à l'explosion de la bombe
 	 */
-	private void initDurations()
+	private void initFuseParameters()
 	{	Bomb bomb = getSprite();
 	
 		// délai normal avant l'explosion 
@@ -150,6 +160,10 @@ public class AiBomb extends AiSprite<Bomb>
 		// durée de l'explosion
 		{	ExplosionManager explosionManager = bomb.getExplosionManager();
 			explosionDuration = explosionManager.getExplosionDuration();
+		}
+		// probabilité de panne
+		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_FAILURE_PROBABILITY);
+			failureProbability = ability.getStrength();
 		}
 	}
 
