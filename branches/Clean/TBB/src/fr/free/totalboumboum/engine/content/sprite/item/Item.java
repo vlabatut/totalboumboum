@@ -1,0 +1,188 @@
+package fr.free.totalboumboum.engine.content.sprite.item;
+
+/*
+ * Total Boum Boum
+ * Copyright 2008-2009 Vincent Labatut 
+ * 
+ * This file is part of Total Boum Boum.
+ * 
+ * Total Boum Boum is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Total Boum Boum is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import fr.free.totalboumboum.engine.content.feature.Role;
+import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
+import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;
+import fr.free.totalboumboum.engine.content.manager.bombset.BombsetManager;
+import fr.free.totalboumboum.engine.content.manager.control.ControlManager;
+import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
+import fr.free.totalboumboum.engine.content.manager.event.EventManager;
+import fr.free.totalboumboum.engine.content.manager.explosion.ExplosionManager;
+import fr.free.totalboumboum.engine.content.manager.item.ItemManager;
+import fr.free.totalboumboum.engine.content.manager.modulation.ModulationManager;
+import fr.free.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
+
+public class Item extends Sprite
+{	
+	public Item()
+	{	super();
+		itemAbilities = new ArrayList<AbstractAbility>();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ROLE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Role getRole()
+	{	return Role.ITEM;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ITEM ABILITIES	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** original abilities given by this item */
+	private ArrayList<AbstractAbility> originalItemAbilities;
+	/** working abilities given by this item */
+	private ArrayList<AbstractAbility> itemAbilities;
+	
+	public ArrayList<AbstractAbility> getItemAbilities()
+	{	return itemAbilities;
+	}
+	
+	public void initItemAbilities(ArrayList<AbstractAbility> abilities)
+	{	originalItemAbilities = abilities;
+		Iterator<AbstractAbility> i = abilities.iterator();
+		while(i.hasNext())
+			addItemAbility(i.next());
+	}
+
+	private void addItemAbility(AbstractAbility ability)
+	{	AbstractAbility copy = ability.copy();
+		itemAbilities.add(copy);
+	}
+
+	public void reinitItemAbilities()
+	{	//  maybe the old abilities should be killed?
+		itemAbilities.clear();
+		initItemAbilities(originalItemAbilities);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ITEM NAME		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String itemName;
+	
+	public String getItemName()
+	{	return itemName;
+	}
+	
+	public void setItemName(String itemName)
+	{	this.itemName = itemName;
+	}	
+
+	/////////////////////////////////////////////////////////////////
+	// EXECUTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * copy this item, which is supposed to be hidden (or to have no gesture),
+	 * have no delay, no items, etc.
+	 *  
+	 */
+	public Item copy()
+	{	Item result = new Item();
+	
+		// gesture pack
+		result.setGesturePack(gesturePack);
+		
+		// anime
+		AnimeManager animeManager = new AnimeManager(result);
+		result.setAnimeManager(animeManager);
+		
+		// trajectory
+		TrajectoryManager trajectoryManager = new TrajectoryManager(result);
+		result.setTrajectoryManager(trajectoryManager);
+		
+		// bombset
+		BombsetManager bombsetManager = new BombsetManager(result);
+		bombsetManager.setBombset(getBombsetManager().getBombset());
+		result.setBombsetManager(bombsetManager);
+		
+		// explosion
+		ExplosionManager explosionManager = new ExplosionManager(result);
+		explosionManager.setExplosion(getExplosionManager().getExplosion());
+		result.setExplosionManager(explosionManager);
+		
+		// modulations
+		ModulationManager permissionManager = new ModulationManager(result);
+		result.setModulationManager(permissionManager);
+		
+		// item
+		ItemManager itemManager = new ItemManager(result);
+		result.setItemManager(itemManager);
+		
+		// ability
+		AbilityManager abilityManager = new AbilityManager(result);
+		abilityManager.addDirectAbilities(getDirectAbilities());
+		result.setAbilityManager(abilityManager);
+		
+		// delay
+		DelayManager delayManager = new DelayManager(result);
+		result.setDelayManager(delayManager);
+		
+		// control
+		ControlManager controlManager = new ControlManager(result);
+		result.setControlManager(controlManager);
+		
+		// item abilities
+		result.originalItemAbilities = originalItemAbilities;
+		for(AbstractAbility ability: itemAbilities)
+			result.addItemAbility(ability);
+		
+		// event
+		EventManager eventManager = new ItemEventManager(result);
+		result.setEventManager(eventManager);
+		
+		// misc
+		result.setItemName(itemName);
+		result.initSprite(tile);
+
+		return result;		
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			// item abilities
+			{	Iterator<AbstractAbility> it = itemAbilities.iterator();
+				while(it.hasNext())
+				{	AbstractAbility temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+		}
+	}
+
+}
