@@ -104,7 +104,7 @@ public class BombEventManager extends EventManager
 	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING) 
 			|| gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.SLIDING_FAILING) 
 			|| gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.STANDING_FAILING))
-		{	long r = Math.round(Math.random()*101);
+		{	long r = Math.round(Math.random());
 			StateAbility b = sprite.modulateStateAbility(StateAbilityName.BOMB_FAILURE_PROBABILITY);
 			if(b.isActive())
 			{	double value = b.getStrength();
@@ -297,7 +297,7 @@ public class BombEventManager extends EventManager
 							|| gesture.equals(GestureName.STANDING) 
 							|| gesture.equals(GestureName.OSCILLATING))
 					{	// is there a failure ?
-						long r = Math.round(Math.random()*101);
+						long r = Math.round(Math.random());
 						StateAbility b = sprite.modulateStateAbility(StateAbilityName.BOMB_FAILURE_PROBABILITY);
 						double value = b.getStrength();
 						// if there's a failure :  no explosion
