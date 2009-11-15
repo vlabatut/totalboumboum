@@ -828,7 +828,7 @@ public class Launcher
 	 * - API IA : 
 	 * 		- A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
 	 * 		- accès à la taille des cases
-	 * 		- AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir et le temps de latence de la bombe
+	 * 		- AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir, le temps de latence de la bombe et sa proba de panne
 	 * 		- AiPath a une fonction renvoyant la distance totale en pixels 
 	 * 		- AiPath a une fonction renvoyant la temps nécessare à joueur pour le parcourir
 	 * 		- AiZone permet de récupérer le classement courant de tous les joueurs, pour le round et le match en cours
@@ -1078,7 +1078,7 @@ public class Launcher
 	 *	- IA :
 	 * 		- A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
 	 * 		- accès à la taille des cases
-	 * 		- AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir et le temps de latence de la bombe
+	 * 		- AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir et le temps de latence de la bombe et sa proba de panne
 	 * 		- AiPath a une fonction renvoyant la distance totale en pixels 
 	 * 		- AiPath a une fonction renvoyant la temps nécessare à joueur pour le parcourir
 	 * 		- AiZone permet de récupérer le classement courant de tous les joueurs, pour le round et le match en cours
