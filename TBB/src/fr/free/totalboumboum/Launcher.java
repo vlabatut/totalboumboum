@@ -1078,6 +1078,7 @@ public class Launcher
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
+	 *  	- forcer la fin de la période (now)
 	 *  - instance TBB
 	 *  	- bombe télécommandée tombe en panne : le circuit grille
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
