@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_quickmatch.xsd">
+	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
+	<settings>
+		<levels randomOrder="false" />
+		<players randomLocation="true" />
+		<limits points="0" rounds="5" time="120000" />
+		<points share="true" draw="NONE">
+			<value rank="1" points="8" />
+			<value rank="2" points="4" />
+			<value rank="3" points="2" />
+			<value rank="4" points="1" />
+			<value rank="5" points="0" />
+		</points>
+	</settings>
+	<players>
+		<player file="1" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="65" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+	</players>
+	<levels>
+		<level pack="tournament200809" folder="part1" />
+	</levels>
+</gameQuickmatch>
+

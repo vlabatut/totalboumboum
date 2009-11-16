@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<match
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../schemas/match.xsd">
+	
+ 	<notes>
+ 		<line value="Here goes a short description of the match." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 25-09-2008" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<limits>
+		<confrontation>
+			<points local="true" name="points" />
+			<threshold value="5" />
+		</confrontation>
+	</limits>
+
+ 	<rounds randomOrder="false" >
+  		<round local="true" name="round" />
+  		<round local="true" name="round" />
+  		<round local="true" name="round" />
+  	</rounds>
+	
+</match>

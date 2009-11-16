@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blockset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/blockset.xsd" >
+	
+	<abstractBlocks >
+		<block name="common" folder="_common" />
+		
+		<group name="hardwalls" folder="hardwalls">
+			<block name="common_hard" folder="_common"/>
+		</group>
+	</abstractBlocks>
+	
+	<concreteBlocks>
+		<block folder="softwall" name="softwall" />
+		
+		<group name="hardwalls" folder="hardwalls">
+			<block name="regular" folder="regular"/>
+			
+			<block name="down1" folder="down1"/>
+			<block name="down2" folder="down2"/>
+			<block name="down3" folder="down3"/>
+			<block name="insideleft1" folder="insideleft1"/>
+			<block name="insideleft2" folder="insideleft2"/>
+			<block name="insideright1" folder="insideright1"/>
+			<block name="insideright2" folder="insideright2"/>
+			<block name="insideupleft" folder="insideupleft"/>
+			<block name="insideupright" folder="insideupright"/>
+			<block name="outsideleft1A" folder="outsideleft1A"/>
+			<block name="outsideleft1B" folder="outsideleft1B"/>
+			<block name="outsideleft2" folder="outsideleft2"/>
+			<block name="outsideright1A" folder="outsideright1A"/>
+			<block name="outsideright1B" folder="outsideright1B"/>
+			<block name="outsideright2" folder="outsideright2"/>
+			<block name="outsideupleft" folder="outsideupleft"/>
+			<block name="outsideupright" folder="outsideupright"/>
+			<block name="up" folder="up"/>
+			<block name="welcome1" folder="welcome1"/>
+			<block name="welcome2" folder="welcome2"/>
+			<block name="welcome3" folder="welcome3"/>
+			<block name="welcome4" folder="welcome4"/>
+			<block name="welcome5" folder="welcome5"/>
+			<block name="welcome6" folder="welcome6"/>
+		</group>
+	</concreteBlocks>
+	
+</blockset>
