@@ -36,13 +36,13 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.controls.ControlsConfigurationSaver;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.options.controls.ControlsData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.GameData;
 
 public class ControlsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;

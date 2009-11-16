@@ -44,13 +44,13 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.log.logstats.LogstatsLoader;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import fr.free.totalboumboum.gui.frames.NormalFrame;
 import fr.free.totalboumboum.gui.frames.QuickFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.statistics.GameStatistics;
+import fr.free.totalboumboum.tools.GameData;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class Launcher
@@ -1013,6 +1013,7 @@ public class Launcher
 	 * 		- supprimer zgraphics
 	 * 		- supprimer tous les commentaires TODO et NOTE
 	 * 		- effacer le changelog
+	 * 		- virer les classes contenant un main()
 	 * - ressources :
 	 * 		- supprimer restmp
 	 * 		- réinitialiser les logstats

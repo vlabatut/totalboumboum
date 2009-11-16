@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.tools.GameData;
 
 public class GuiStringTools
 {

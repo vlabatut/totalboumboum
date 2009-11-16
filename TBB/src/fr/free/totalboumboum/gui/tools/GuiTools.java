@@ -44,9 +44,9 @@ import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.common.structure.ButtonAware;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.tools.GameData;
 import fr.free.totalboumboum.tools.ImageTools;
 
 public class GuiTools
