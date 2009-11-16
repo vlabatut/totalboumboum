@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Coupe de test" type="CUP" />
-	<played matches="4" rounds="3" />
-	<dates start="2009-11-16T07:25:30" save="2009-11-16T07:56:02" />
+	<played matches="12" rounds="5" />
+	<dates start="2009-11-16T07:25:30" save="2009-11-16T08:37:35" />
 	<players>
 		<player name="0809.Erişik+Pektaş" />
 		<player name="0809.Devecioğlu+Korkmaz" />
