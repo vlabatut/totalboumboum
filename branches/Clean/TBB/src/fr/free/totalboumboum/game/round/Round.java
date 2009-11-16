@@ -41,7 +41,6 @@ import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.loop.SimulationLoop;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.limit.LimitTime;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
@@ -52,6 +51,7 @@ import fr.free.totalboumboum.statistics.detailed.StatisticEvent;
 import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
 import fr.free.totalboumboum.statistics.detailed.StatisticRound;
 import fr.free.totalboumboum.tools.CalculusTools;
+import fr.free.totalboumboum.tools.GameData;
 
 public class Round implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;

@@ -27,7 +27,6 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
@@ -35,6 +34,7 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.content.Line;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.GameData;
 import fr.free.totalboumboum.tools.StringTools;
 import fr.free.totalboumboum.tools.StringTools.TimeUnit;
 

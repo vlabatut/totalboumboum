@@ -34,8 +34,8 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelectionLoader;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.GameData;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class QuickMatchConfigurationLoader

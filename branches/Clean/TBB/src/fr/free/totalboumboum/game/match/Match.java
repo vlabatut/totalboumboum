@@ -39,7 +39,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.rank.Ranks;
@@ -49,6 +48,7 @@ import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
 import fr.free.totalboumboum.statistics.detailed.StatisticMatch;
 import fr.free.totalboumboum.statistics.detailed.StatisticRound;
 import fr.free.totalboumboum.tools.CalculusTools;
+import fr.free.totalboumboum.tools.GameData;
 
 public class Match implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;

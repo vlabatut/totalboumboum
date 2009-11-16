@@ -29,9 +29,9 @@ import java.io.File;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.loop.LocalLoop;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.tools.MessageDisplayer;
 import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.GameData;
 
 public class RoundVariables
 {

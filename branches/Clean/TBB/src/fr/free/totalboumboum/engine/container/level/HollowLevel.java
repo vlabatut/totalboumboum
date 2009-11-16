@@ -49,9 +49,9 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.loop.LocalLoop;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.GameData;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class HollowLevel implements Serializable

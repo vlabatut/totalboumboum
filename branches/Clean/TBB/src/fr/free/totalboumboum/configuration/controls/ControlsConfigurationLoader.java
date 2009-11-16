@@ -30,7 +30,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.controls.ControlSettingsLoader;
-import fr.free.totalboumboum.game.GameData;
+import fr.free.totalboumboum.tools.GameData;
 
 public class ControlsConfigurationLoader
 {	
