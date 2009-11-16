@@ -15,7 +15,7 @@
 	</settings>
 	<players>
 		<player file="1" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="65" color="INDIGO" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="65" color="INDIGO" controls="2" spritePack="totalboumboum" spriteFolder="prognathe" />
 	</players>
 	<levels>
 		<level pack="tournament200809" folder="part1" />
