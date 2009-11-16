@@ -7,9 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
+import fr.free.totalboumboum.tools.GameData;
 
 /*
  * Total Boum Boum

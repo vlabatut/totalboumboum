@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Coupe de test" type="CUP" />
-	<played matches="12" rounds="5" />
-	<dates start="2009-11-16T01:04:35" save="2009-11-16T02:25:12" />
+	<played matches="4" rounds="3" />
+	<dates start="2009-11-16T07:25:30" save="2009-11-16T07:56:02" />
 	<players>
-		<player name="0809.Günalp+Yürtsever" />
-		<player name="0708.Demirkol+Doğan" />
-		<player name="0708.Başman+Sandallı" />
-		<player name="Promeneur" />
-		<player name="0708.Bingöl+Ketenci" />
-		<player name="0708.Kurtuluş+Özsoy" />
-		<player name="0809.Akkaya+Danacioğlu" />
-		<player name="0809.Demirağ+Şagar" />
+		<player name="0809.Erişik+Pektaş" />
 		<player name="0809.Devecioğlu+Korkmaz" />
 		<player name="0809.Akpolat+Şener" />
-		<player name="0708.Çağlayan+Elmas" />
-		<player name="0809.Adatepe" />
-		<player name="0809.Tırtıl+Tomruk" />
+		<player name="0809.Demirağ+Şagar" />
+		<player name="0809.Altay+Basaranoğlu" />
+		<player name="0708.Bingöl+Ketenci" />
 		<player name="0809.Çöremen+Küçükkarakürt" />
+		<player name="0708.Başman+Sandallı" />
+		<player name="0809.Günalp+Yürtsever" />
+		<player name="0708.Kurtuluş+Özsoy" />
+		<player name="0708.Demirkol+Doğan" />
+		<player name="0708.Çağlayan+Elmas" />
+		<player name="Suiveur" />
+		<player name="0809.Tırtıl+Tomruk" />
+		<player name="0809.Akkaya+Danacioğlu" />
 		<player name="0708.Kılıç+Pala" />
-		<player name="0708.Keçer+Yaman" />
 	</players>
 </archive>
 

@@ -32,7 +32,6 @@ import java.util.Iterator;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
@@ -42,6 +41,7 @@ import fr.free.totalboumboum.gui.tools.GuiStringTools;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.statistics.GameStatistics;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
+import fr.free.totalboumboum.tools.GameData;
 
 public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;

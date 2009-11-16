@@ -24,12 +24,12 @@ package fr.free.totalboumboum.gui.common.content.subpanel.archive;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.GameData;
 
 public class ArchivePlayersSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;

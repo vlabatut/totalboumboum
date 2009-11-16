@@ -35,13 +35,13 @@ import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.engine.loop.LoopRenderPanel;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.round.results.QuickResults;
+import fr.free.totalboumboum.tools.GameData;
 
 
 import java.awt.BorderLayout;

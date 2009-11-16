@@ -35,11 +35,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.statistics.GameStatistics;
 import fr.free.totalboumboum.statistics.glicko2.jrs.Match;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.GameData;
 
 public class ProfilesConfiguration
 {
