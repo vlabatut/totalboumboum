@@ -822,7 +822,9 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* TODO
 	 * + beta.015
-	 * - 
+	 * - correction d'un bug dans SpritePreviewLoader, lors du chargement de sprites sans colormap (de type Prognathe)
+	 * - API IA :
+	 * 		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1083,10 +1085,10 @@ public class Launcher
 	 *  	- bombe télécommandée tombe en panne : le circuit grille
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
 	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
-	 *  	
-	 *  - pb avec les bombes, qui tombent en panne plus souvent (!)
-	 *  	- faut donner accès au coeff de vitesse, c'est tout !
+	 *  
+	 *  - finir de tenir compte du coeff de vitesse	
 	 *  - preview de sprite : est-ce qu'il ne vaudrait pas mieux utiliser le protrait body ?
 	 *  	> c'est moins général, tous les sprites n'ont pas forcément de portraits, que les persos
+	 *  - affichage des percepts des IA : faudrait afficher les couleurs des cases après les persos, histoire de les voir quand les couleurs sont opaques
 	 */ 
 }
