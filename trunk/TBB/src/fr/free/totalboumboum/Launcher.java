@@ -821,59 +821,8 @@ public class Launcher
 // CHANGE LOG	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* TODO
-	 * + beta.014
-	 * - nouvelle version de shirobon issu de NBM1
-	 * - nouvelle instance : NES Bomberman 1
-	 * - 2 nouveaux niveaux pour illustrer l'instance NBM1
-	 * - API IA : 
-	 * 		- A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
-	 * 		- accès à la taille des cases
-	 * 		- AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir, le temps de latence de la bombe et sa proba de panne
-	 * 		- AiPath a une fonction renvoyant la distance totale en pixels 
-	 * 		- AiPath a une fonction renvoyant la temps nécessare à joueur pour le parcourir
-	 * 		- AiZone permet de récupérer le classement courant de tous les joueurs, pour le round et le match en cours
-	 * 		- AiZone permet maintenant de savoir combien il reste d'items planqués sous les blocs destructibles 
-	 * - ajout du système Glicko2
-	 * - adaptation de Glicko2 :
-	 * 		- serializable
-	 * 		- utilisation d'une clé entière pour représenter les joueurs
-	 * 		- utilisation de la généricité
-	 * 		- nouvelles méthodes pour obtenir le classement des joueurs 
-	 *    	- suivi du nombre de matchs joués depuis la dernière mise à jour
-	 *    	- implémentation de la fonction permettant de dé-registrer un joueur
-	 * - ajout du rang dans les panels affichant la liste des joueurs d'un tournoi/match
-	 * - nouvelles classes pour gérer les statistiques globales du jeu : nombre de rounds joués par joueur, nombre de bombes posées, etc.
-	 * - quelques bugs corrigés dans l'interface graphique, notamment en ce qui concerne le calcul des largeurs de colonnes dans certaines tables
-	 * - GUI : affichage des statistiques : classement glicko2, confrontations, scores
-	 * - GUI : possibilité de changer le critère de classement dans l'écran de stats
-	 * - GUI : possibilité d'enregistrer/déregistrer des joueurs dans l'écran de stats
-	 * - enchaînement automatique des matches d'un tournoi, par ex. pour faire tourner des IA sur tout un tournoi automatiquement
-	 * - GUI : nouvel écran d'options dédié à la configuration de la gestion des IA
-	 * - GUI : nouvel écran d'options pour configurer le traitement des stats
-	 * - possibilité de sélectionner les joueurs aléatoirement avant un tournoi/partie rapide/quick start
-	 * - possibilité de sélectionner les joueurs les plus proches d'un joueur donné
-	 * - possibilité de désélectionner tous les joueurs d'un seul clic (avant un tournoi/partie rapide/quick start)
-	 * - possibilité de désélectionner tous les joueurs sans classement en cliquant sur "-"
-	 * - possibilité de simuler les rounds qui n'impliquent que des IA
-	 * - affichage du rang dans l'écran récapitulant les joueurs sélectionnés avant le début d'une partie
-	 * - affichage du nom des joueurs par dessus les sprites en mode débug
-	 * - joueurs identifiés par un entier unique (au lieu d'une chaine de caractères) dans les stats détaillées
-	 * - bufferisation de tous les accès au fichiers avec l'utilisation de BufferedInput et BufferedOutput
-	 * - affichage des stats : possibilité de masquer en fonction du type de profil (IA/humain) et du rang (classé/pas classé)
-	 * - GUI : changement de couleur de type "mouse over" pour les boutons de la GUI
-	 * - GUI : le rang des joueurs apparait maintenant dans l'écran de sélection des profils
-	 * - scores : les suicides sont maintenant séparés des bombeurs/bombés
-	 * - système de log : log des controles, que ce soit pour les humains ou les IA
-	 * - un nouvel icone couronne de laurier a été défini pour distinguer le classement Glicko-2=podium et le classement local (tournoi/match/round)=lauriers
-	 * - nouvelle option "tête de série" pour les tournois de type coupe : utilise le classement Glicko-2 pour éviter que les meilleurs joueurs se rencontrent trop tôt
-	 * - les constantes éléments/attributs ont été renommées de manière à supprimer les préfixes ATT_ et ELT_ (pr éviter les répétitions)
-	 * - moteur : mise à jour des points en temps réel, en prenant la première limite disponible (utile pour les rounds)
-	 * - amélioration du décompte du temps : le temps du jeu est arrêté s'il est en pause, et le temps réel est décompté séparément
-	 * - tournoi de type championnat implémenté
-	 * - correction d'un bug lors de la création/suppression de profil, à la fois dans la GUI et le moteur
-	 * - modification de l'identifiant des joueurs dans le moteur : c'est maintenant un entier et non plus une chaine de caractères contenant un entier
-	 * - création d'une classe spécifique pour les labels, implémentant le rollover
-	 * - correction du bug concernant le rollover des labels
+	 * + beta.015
+	 * - 
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1063,9 +1012,11 @@ public class Launcher
 	 * - source : 
 	 * 		- supprimer zgraphics
 	 * 		- supprimer tous les commentaires TODO et NOTE
+	 * 		- effacer le changelog
 	 * - ressources :
 	 * 		- supprimer restmp
 	 * 		- réinitialiser les logstats
+	 * 		- recopier les stats (éventuellement)
 	 * - options :
 	 * 		- réinitialiser le joueur humain
 	 * 		- virer l'enchainement automatique
@@ -1075,21 +1026,13 @@ public class Launcher
 // A FAIRE SITE		//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	/**
-	 *	- IA :
-	 * 		- A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
-	 * 		- accès à la taille des cases
-	 * 		- AiBomb contient une méthode permettant de savoir la durée de l'explosion à venir et le temps de latence de la bombe et sa proba de panne
-	 * 		- AiPath a une fonction renvoyant la distance totale en pixels 
-	 * 		- AiPath a une fonction renvoyant la temps nécessare à joueur pour le parcourir
-	 * 		- AiZone permet de récupérer le classement courant de tous les joueurs, pour le round et le match en cours
-	 * 		- AiZone permet de savoir combien d'items il reste, planqués sous les murs 
 	 *	- stats
 	 *		- possibilité de masquer les ia/humains dans le classement, et non-classés
 	 *		- séparation des auto-bombages
-	 *	- affichage du nom des joueurs pendant le jeu en surimpression
 	 *	- GUI : 
 	 *		- soulignage des labels cliquables
 	 *		- icone lauriers
+	 *		- affichage du nom des joueurs pendant le jeu en surimpression
 	 *  - tournois :
 	 *  	- têtes de séries
 	 *  	- championat
@@ -1113,6 +1056,7 @@ public class Launcher
 	 * 			- chemin permettant d'écrire dans le package de l'IA, afin de lui permettre de faire des sauvegardes ?
 	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
 	 * 		- renommer les packages des ia en fr.free.totalboumboum.ai.???? (faudra peut être renommer aussi les classes adapter)
+	 * 		- pb avec le temps : lorsque le temps est ralenti, les percepts n'en tiennent pas compte...
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
@@ -1138,5 +1082,7 @@ public class Launcher
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
 	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
 	 *  	
+	 *  - pb avec les bombes, qui tombent en panne plus souvent (!)
+	 *  	- faut donner accès au coeff de vitesse, c'est tout !
 	 */ 
 }
