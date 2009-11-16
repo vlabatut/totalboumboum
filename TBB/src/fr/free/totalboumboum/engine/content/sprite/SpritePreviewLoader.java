@@ -176,14 +176,11 @@ public class SpritePreviewLoader
 	    	}
 	    	
 	    	if(found)
-	    	{	// get the preview picture
-				String imgPath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
-				BufferedImage image = ImageTools.loadImage(imgPath,null);
-				result.setImage(null,image);			
-				
-				// get the colors
-				Element elt = root.getChild(XmlTools.COLORS);
-				if(elt!=null)
+	    	{	Element elt = root.getChild(XmlTools.COLORS);
+	    		
+	    		// get the color pictures
+	    		String colorFold = null;
+	    		if(elt!=null)
 				{	List<Element> clrs = elt.getChildren();
 					Iterator<Element> iter = clrs.iterator();
 			    	while(iter.hasNext())
@@ -195,17 +192,29 @@ public class SpritePreviewLoader
 			    		Object obj = ImageTools.loadColorsElement(elt,folderPath,color);
 						if(obj instanceof Colormap)
 						{	Colormap colormap = (Colormap)obj;
-							img = ImageTools.loadImage(imgPath, colormap);
+							String imagePath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
+							img = ImageTools.loadImage(imagePath, colormap);
 						}
 						else
 						{	String colorFolder = File.separator+(String)obj;
+							if(colorFold==null)
+								colorFold = colorFolder;
 							String imagePath = folderPath+gesturesFolder+colorFolder+gestureFolder+directionFolder+File.separator+stepFile;
 							img = ImageTools.loadImage(imagePath,null);
 						}
 			    		result.setImage(color,img);
 			    	}				
-				}	    		
-	    	}
+				}
+	    		
+	    		// get the colorless picture
+	    		String imgPath;
+	    		if(colorFold==null)
+	    			imgPath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
+	    		else
+					imgPath = folderPath+gesturesFolder+colorFold+gestureFolder+directionFolder+File.separator+stepFile;
+	    		BufferedImage image = ImageTools.loadImage(imgPath,null);
+				result.setImage(null,image);
+			}
 		}
 	}
 }

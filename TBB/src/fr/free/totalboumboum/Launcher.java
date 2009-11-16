@@ -1086,5 +1086,7 @@ public class Launcher
 	 *  	
 	 *  - pb avec les bombes, qui tombent en panne plus souvent (!)
 	 *  	- faut donner accès au coeff de vitesse, c'est tout !
+	 *  - preview de sprite : est-ce qu'il ne vaudrait pas mieux utiliser le protrait body ?
+	 *  	> c'est moins général, tous les sprites n'ont pas forcément de portraits, que les persos
 	 */ 
 }
