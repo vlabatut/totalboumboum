@@ -1086,9 +1086,5 @@ public class Launcher
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
 	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
 	 *  
-	 *  - finir de tenir compte du coeff de vitesse	
-	 *  - preview de sprite : est-ce qu'il ne vaudrait pas mieux utiliser le protrait body ?
-	 *  	> c'est moins général, tous les sprites n'ont pas forcément de portraits, que les persos
-	 *  - affichage des percepts des IA : faudrait afficher les couleurs des cases après les persos, histoire de les voir quand les couleurs sont opaques
 	 */ 
 }

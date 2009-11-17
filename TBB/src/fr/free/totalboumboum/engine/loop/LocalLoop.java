@@ -651,7 +651,7 @@ public class LocalLoop extends Loop
 			long delta = afterTime-lastTime;
 			totalEngineTime = totalEngineTime + delta;
 			if(!getEnginePause() && hasStarted && celebrationDuration<0)
-			{	totalGameTime = totalGameTime + delta;
+			{	totalGameTime = totalGameTime + (long)(delta*Configuration.getEngineConfiguration().getSpeedCoeff());
 				round.updateTime(totalGameTime);
 			}
 			
@@ -671,7 +671,7 @@ public class LocalLoop extends Loop
 	private void update()
 	{	if(!getEnginePause() || getEngineStep())
 		{	if(getEngineStep())
-			{	totalGameTime = totalGameTime + milliPeriod;
+			{	totalGameTime = totalGameTime + (long)(milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 				switchEngineStep(false);
 			}
 			
