@@ -1165,9 +1165,10 @@ public class LocalLoop extends Loop
 		Font font = new Font("Dialog",Font.BOLD,12);
 		g.setFont(font);
 		FontMetrics metrics = g.getFontMetrics(font);
-		for(Player player: players)
-		{	if(!player.isOut())
-			{	String text = player.getName();
+		for(int i=0;i<players.size();i++)
+		{	Player player = players.get(i);
+			if(!player.isOut())
+			{	String text = "["+(i+1)+"] "+player.getName();
 				Sprite s = player.getSprite();
 				Rectangle2D box = metrics.getStringBounds(text,g);
 				double boxWidth = box.getWidth();
