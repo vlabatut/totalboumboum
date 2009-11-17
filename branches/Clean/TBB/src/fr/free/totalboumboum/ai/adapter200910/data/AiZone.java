@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
@@ -100,18 +99,6 @@ public class AiZone
 	private long elapsedTime = 0;
 	/** durée maximale de la partie */
 	private long limitTime = 0;
-	/** coefficient de vitesse actuel du jeu */
-	private double speedCoefficient = 1;
-	
-	/**
-	 * renvoie le coefficient de vitesse actuel du jeu
-	 * (cette valeur peut changer n'importe quand)
-	 * 
-	 * @return	un réel correspondant à un coefficient multiplicateur de la vitesse du moteur
-	 */
-	double getSpeedCoefficient()
-	{	return speedCoefficient;
-	}
 		
 	/**
 	 * renvoie le temps total écoulé depuis le début du jeu
@@ -149,7 +136,6 @@ public class AiZone
 	 */
 	private void updateTimes(long elapsedTime)
 	{	LocalLoop loop = level.getLoop();
-		this.speedCoefficient = Configuration.getEngineConfiguration().getSpeedCoeff();
 		this.totalTime = loop.getTotalGameTime();
 		this.elapsedTime = elapsedTime;
 		this.limitTime = loop.getRound().getLimits().getTimeLimit().getThreshold();
