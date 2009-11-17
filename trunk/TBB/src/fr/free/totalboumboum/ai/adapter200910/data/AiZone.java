@@ -43,6 +43,8 @@ import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundVariables;
+import fr.free.totalboumboum.statistics.GameStatistics;
+import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.tools.CalculusTools;
 
 /**
@@ -144,15 +146,30 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// META DATA		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** rangs des joueurs pour la manche en cours (ces rangs peuvent évoluer) */
 	private final HashMap<AiHero,Integer> roundRanks = new HashMap<AiHero, Integer>();
+	/** rangs des joueurs pour la rencontre en cours (ces rangs n'évoluent pas pendant la manche) */
 	private final HashMap<AiHero,Integer> matchRanks = new HashMap<AiHero, Integer>();
-	
+	/** rangs des joueurs au classement global du jeu (ces rangs n'évoluent pas pendant la manche) */
+	private final HashMap<AiHero,Integer> statsRanks = new HashMap<AiHero, Integer>();
+
 	/** 
 	 * met à jour des données qui ne sont pas directement reliées
 	 * à l'action en cours, telles que l'évolution du classement des joueurs
 	 */
 	private void updateMeta()
 	{	List<Player> players = level.getLoop().getPlayers();
+		// stats
+		statsRanks.clear();
+		RankingService rankingService = GameStatistics.getRankingService();
+		for(int i=0;i<players.size();i++)
+		{	Player player = players.get(i);
+			Hero hero = (Hero)player.getSprite();
+			AiHero aiHero = heroMap.get(hero);
+			int playerId = player.getId();
+			int rank = rankingService.getPlayerRank(playerId);
+			statsRanks.put(aiHero,rank);
+		}
 		// round
 		roundRanks.clear();
 		Round round = level.getLoop().getRound();
@@ -177,12 +194,38 @@ public class AiZone
 		}
 	}
 	
-	public int getMatchRank(AiHero hero)
+	/**
+	 * Renvoie le classement du personnage passé en paramètre, pour la manche en cours.
+	 * Ce classement est susceptible d'évoluer d'ici la fin de la manche actuellement jouée, 
+	 * par exemple si ce joueur est éliminé.
+	 * 
+	 * @param hero	le personnage considéré
+	 * @return	son classement dans la manche en cours
+	 */
+	int getRoundRank(AiHero hero)
+	{	return roundRanks.get(hero);
+	}
+	
+	/**
+	 * Renvoie le classement du personnage passé en paramètre, pour la rencontre en cours.
+	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
+	 * 
+	 * @param hero	le personnage considéré
+	 * @return	son classement dans la rencontre en cours
+	 */
+	int getMatchRank(AiHero hero)
 	{	return matchRanks.get(hero);
 	}
 	
-	public int getRoundRank(AiHero hero)
-	{	return roundRanks.get(hero);
+	/**
+	 * Renvoie le classement du personnage passé en paramètre, dans le classement général du jeu (Glicko-2)
+	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
+	 * 
+	 * @param hero	le personnage considéré
+	 * @return	son classement général (Glicko-2)
+	 */
+	int getStatsRank(AiHero hero)
+	{	return statsRanks.get(hero);
 	}
 	
 	/////////////////////////////////////////////////////////////////
