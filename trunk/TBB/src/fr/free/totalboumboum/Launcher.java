@@ -1049,7 +1049,6 @@ public class Launcher
 	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
 	 * 			>> méthode prenant une position et un joueur en paramètres et calculant le blast et le temps de détonation d'une bombe posée là (voire donnant un objet bombe)
 	 * 			>> définir une classe bombe virtuelle ? destinée à ce seul effet ?
-	 * 		- donner les probas de panne d'une bombe
 	 * 		- la notion de blast peut être imprécise quand plusieurs bombes sont concernées
 	 * 			>> ça empêche de calculer des réaction en chaine
 	 * 			>> faudrait associer le temps
@@ -1059,7 +1058,7 @@ public class Launcher
 	 * 			- chemin permettant d'écrire dans le package de l'IA, afin de lui permettre de faire des sauvegardes ?
 	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
 	 * 		- renommer les packages des ia en fr.free.totalboumboum.ai.???? (faudra peut être renommer aussi les classes adapter)
-	 * 		- pb avec le temps : lorsque le temps est ralenti, les percepts n'en tiennent pas compte...
+	 * 		- il faut gérer les chemins au niveau des pixels. les cases, c'est pas assez précis.
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
