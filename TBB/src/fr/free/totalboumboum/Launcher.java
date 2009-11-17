@@ -825,6 +825,7 @@ public class Launcher
 	 * - correction d'un bug dans SpritePreviewLoader, lors du chargement de sprites sans colormap (de type Prognathe)
 	 * - API IA :
 	 * 		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
+	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1029,6 +1030,8 @@ public class Launcher
 // A FAIRE SITE		//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	/**
+	 *	- IA :
+	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)	 
 	 *	- stats
 	 *		- possibilité de masquer les ia/humains dans le classement, et non-classés
 	 *		- séparation des auto-bombages
