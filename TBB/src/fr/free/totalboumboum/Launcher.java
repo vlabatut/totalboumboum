@@ -536,7 +536,8 @@ public class Launcher
 	
 	/*
 	 * TODO
-	 * item spécial permettant de manger les bombes des autres, comme certains ennemis du jeu original en mode histoire 
+	 * item spécial permettant de manger les bombes des autres, comme certains ennemis du jeu original en mode histoire
+	 * item spécial qui, quand un héros meurt, déclence automatiquement une explosion, éventuellement avec un effet de zone  
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1034,7 +1035,7 @@ public class Launcher
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)	 
 	 *	- stats
 	 *		- possibilité de masquer les ia/humains dans le classement, et non-classés
-	 *		- séparation des auto-bombages
+	 *		- séparation des auto-bombages, changement des icones
 	 *	- GUI : 
 	 *		- soulignage des labels cliquables
 	 *		- icone lauriers
@@ -1079,10 +1080,18 @@ public class Launcher
 	 *  	- finir sélection des matches
 	 *  	- ordonner les matches
 	 *  - tournoi coupe : possiblité de définir un tie-break random
+	 *  - tournoi AI : détourner le logo CL
+	 *  	- fond bleuté
+	 *  	- ballon étoilé >> bombe étoilée
+	 *  	- UEFA >> GSU
+	 *  
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
 	 *  	- forcer la fin de la période (now)
+	 *  - optimisation du chargement :
+	 *  	- pas la peine de charger un niveau déjà en mémoire
+	 *  	- sprites ds persos à charger une seule fois lors du premier round d'un match	
 	 *  - instance TBB
 	 *  	- bombe télécommandée tombe en panne : le circuit grille
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
