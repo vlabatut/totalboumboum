@@ -1037,9 +1037,6 @@ public class Launcher
 	 *		- possibilité de masquer les ia/humains dans le classement, et non-classés
 	 *		- séparation des auto-bombages, changement des icones
 	 *	- GUI : 
-	 *		- soulignage des labels cliquables
-	 *		- icone lauriers
-	 *		- affichage du nom des joueurs pendant le jeu en surimpression
 	 *  - tournois :
 	 *  	- têtes de séries
 	 *  	- championat
