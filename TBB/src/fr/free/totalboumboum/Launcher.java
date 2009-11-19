@@ -1033,9 +1033,7 @@ public class Launcher
 	/**
 	 *	- IA :
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)	 
-	 *	- stats
-	 *		- possibilité de masquer les ia/humains dans le classement, et non-classés
-	 *		- séparation des auto-bombages, changement des icones
+	 *	- stats :
 	 *	- GUI : 
 	 *  - tournois :
 	 *  	- têtes de séries
