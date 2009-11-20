@@ -98,15 +98,19 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 				leftPanel.setMaximumSize(dim);
 				
 				// image panel
-				{	int innerHeight = leftWidth;
-					imagePanel = new ImageSubPanel(leftWidth,innerHeight,Mode.BORDER);
+				int imageHeight = leftWidth;
+				if(leftWidth>(2*dataHeight/3))
+					imageHeight = 2*dataHeight/3;
+				else
+					imageHeight = leftWidth;
+				{	imagePanel = new ImageSubPanel(leftWidth,imageHeight,Mode.BORDER);
 					leftPanel.add(imagePanel);
 				}
 
 				leftPanel.add(Box.createVerticalGlue());
 				
 				// available itemset panel
-				{	int innerHeight = dataHeight - leftWidth - margin;
+				{	int innerHeight = dataHeight - imageHeight - margin;
 					availableItemsPanel = new AvailableItemsSubPanel(leftWidth,innerHeight);
 					leftPanel.add(availableItemsPanel);
 				}

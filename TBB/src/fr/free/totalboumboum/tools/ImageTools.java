@@ -246,6 +246,8 @@ public class ImageTools
     {	int xDim = (int)(imgOld.getWidth()*zoom);
 		int yDim = (int)(imgOld.getHeight()*zoom);
 //		double actualZoom = xDim/imgOld.getWidth();
+if(xDim<0 || yDim<0)
+	System.out.println("ImageTools.resize(): Zoom Error");
 		BufferedImage imgNew = new BufferedImage(xDim, yDim, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = imgNew.createGraphics();
 		g.setComposite(AlphaComposite.Src);
