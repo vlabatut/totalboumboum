@@ -30,6 +30,7 @@
 	<gestures>
 		<gesture name="APPEARING" folder="appearing" shadow="dark" proportional="true">
 			<direction name="NONE" >
+				<step duration="100" />
 				<step duration="100" file="01.png" />
 				<step duration="100" file="02.png" />
 				<step duration="100" file="03.png" />
@@ -42,6 +43,7 @@
 				<step duration="100" file="10.png" />
 				<step duration="100" file="11.png" />
 				<step duration="100" file="12.png" />
+				<step duration="100" file="13.png" />
 			</direction>
 		</gesture>
 
@@ -59,6 +61,25 @@
 				<step duration="50" file="10.png" />
 				<step duration="50" file="11.png" />
 				<step duration="500" file="12.png" />
+			</direction>
+		</gesture>
+
+		<gesture name="DISAPPEARING" folder="disappearing" shadow="dark" proportional="true">
+			<direction name="NONE" >
+				<step duration="100" file="01.png" />
+				<step duration="100" file="02.png" />
+				<step duration="100" file="03.png" />
+				<step duration="100" file="04.png" />
+				<step duration="100" file="05.png" />
+				<step duration="100" file="06.png" />
+				<step duration="100" file="07.png" />
+				<step duration="100" file="08.png" />
+				<step duration="100" file="09.png" />
+				<step duration="100" file="10.png" />
+				<step duration="100" file="11.png" />
+				<step duration="100" file="12.png" />
+				<step duration="100" file="13.png" />
+				<step duration="100" />
 			</direction>
 		</gesture>
 
