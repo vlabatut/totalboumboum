@@ -823,7 +823,10 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* TODO
 	 * + beta.015
-	 * - correction d'un bug dans SpritePreviewLoader, lors du chargement de sprites sans colormap (de type Prognathe)
+	 * - Moteur :
+	 * 		- correction d'un bug dans SpritePreviewLoader, lors du chargement de sprites sans colormap (de type Prognathe)
+	 * - GUI :
+	 * 		- correction d'un bug concernant les proportions des panels dans l'écran de présentation d'une manche
 	 * - API IA :
 	 * 		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
