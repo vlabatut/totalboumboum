@@ -49,7 +49,7 @@ public class EscapeManager
 	/**
 	 * crée un EscapeManager chargé d'amener le personnage au centre d'une case sûre
 	 */
-	public EscapeManager(SirinFindik ai) throws StopRequestException
+	public EscapeManager(FindikSirin ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		this.ai = ai;
@@ -73,7 +73,7 @@ public class EscapeManager
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** l'IA concernée par ce gestionnaire de chemin */
-	private SirinFindik ai;
+	private FindikSirin ai;
 	/** zone de jeu */
 	private AiZone zone;	
 	

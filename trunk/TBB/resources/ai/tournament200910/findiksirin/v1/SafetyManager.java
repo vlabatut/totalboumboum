@@ -32,11 +32,11 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
  */
 public class SafetyManager
 {	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
-	private SirinFindik ai;
+	private FindikSirin ai;
 	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;
 	
-	public SafetyManager(SirinFindik ai) throws StopRequestException
+	public SafetyManager(FindikSirin ai) throws StopRequestException
 	{	// avant tout : test d'interruption
 		ai.checkInterruption();
 		// initialisation du champ permettant d'appeler checkInterruption 		
