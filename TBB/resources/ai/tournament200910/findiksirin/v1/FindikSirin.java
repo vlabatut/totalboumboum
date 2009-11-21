@@ -17,7 +17,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
  * plus votre programme est modulaire et plus il sera facile à
  * débugger, modifier, relire, comprendre, etc.
  */
-public class SirinFindik extends ArtificialIntelligence
+public class FindikSirin extends ArtificialIntelligence
 {	
 	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;	
