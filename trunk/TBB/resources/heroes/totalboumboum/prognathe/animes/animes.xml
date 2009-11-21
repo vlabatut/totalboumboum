@@ -64,6 +64,48 @@
 			</direction>
 		</gesture>
 
+		<gesture name="CRYING" folder="crying" shadow="00">
+			<direction name="NONE" >
+				<step duration="300" file="01.png" />
+				<step duration="300" file="02.png" />
+				<step duration="300" file="03.png" />
+					<step duration="200" file="04.png" />
+					<step duration="200" file="05.png" />
+					<step duration="200" file="04.png" />
+					<step duration="200" file="05.png" />
+					<step duration="150" file="04.png" />
+					<step duration="150" file="05.png" />
+					<step duration="100" file="04.png" />
+					<step duration="100" file="05.png" />
+					<step duration="100" file="04.png" />
+					<step duration="100" file="05.png" />
+				<step duration="100" file="06.png" />
+				<step duration="100" file="07.png" />
+					<step duration="100" file="08.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+			</direction>
+		</gesture>
+
 		<gesture name="DISAPPEARING" folder="disappearing" shadow="dark" proportional="true">
 			<direction name="NONE" >
 				<step duration="100" file="01.png" />
