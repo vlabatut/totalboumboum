@@ -5,7 +5,7 @@
 		<levels randomOrder="false" />
 		<players randomLocation="true" />
 		<limits points="0" rounds="5" time="120000" />
-		<points share="true" draw="BOTH">
+		<points share="true" draw="NONE">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
 			<value rank="3" points="2" />
