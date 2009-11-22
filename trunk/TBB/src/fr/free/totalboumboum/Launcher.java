@@ -527,6 +527,33 @@ public class Launcher
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MULTIPLAYER		//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * TODO
+	 * y a un mode de tournoi plus adapté pour le multijoueur, défini chaiplus trop où (mails?)
+	 * avec une espèce de tournante : n joueurs, matches de k joueurs, les n-k derniers sont remplacés
+	 * par ceux qui attendent
+	 */
+	
+	/*
+	 * TODO
+	 * - pour faciliter la communication lors des parties réseaux :
+	 *   systèmes de bulles pour communiquer. le joueur affecte un message
+	 *   à une touche, et quand il appuie dessus, une bulle apparait à côté
+	 *   de son joueur pour signifier ce message aux autres joueurs (vraisemblablement
+	 *   distants)
+	 * - p-ê que pour rendre ça plus facile à utiliser, faudrait prédéfinir
+	 *   un certain nombre de messages et permettre au joueur d'en définir certains custom
+	 * - donner aussi la possibilité de cibler des joueurs en particulier
+	 * - exemple d'utilisation :
+	 * 		- appuyer sur la touche du joueur ciblé
+	 * 		- appuyer sur la touche de message
+	 * 		- appuyer sur la touche du joueur mentionné dans le message
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ITEMS		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1062,6 +1089,9 @@ public class Launcher
 	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
 	 * 		- renommer les packages des ia en fr.free.totalboumboum.ai.???? (faudra peut être renommer aussi les classes adapter)
 	 * 		- il faut gérer les chemins au niveau des pixels. les cases, c'est pas assez précis.
+	 * - qualification :
+	 * 		- plusieurs IA en même temps
+	 * 		- niveau avec plein de blocs contenant des bonus, pour voir s'ils perdent du temps à les ramasser
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
