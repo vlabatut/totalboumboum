@@ -69,6 +69,105 @@
 			</direction>
 		</gesture>
 
+		<gesture name="CARRYING" folder="carrying" shadow="00" repeat="true">
+			<direction name="DOWN" folder="down">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="DOWNLEFT" folder="downleft">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="DOWNRIGHT" folder="downright">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UPLEFT" folder="upleft">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UPRIGHT" folder="upright">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+		</gesture>
+
 		<gesture name="CRYING" folder="crying" shadow="00">
 			<direction name="NONE" >
 				<step duration="300" file="01.png" />
@@ -216,6 +315,21 @@
 			</direction>
 		</gesture>
 
+		<gesture name="HOLDING" folder="holding" shadow="00">
+			<direction name="DOWN">
+				<step file="down.png" />
+			</direction>
+			<direction name="LEFT">
+				<step file="left.png" />
+			</direction>
+			<direction name="RIGHT">
+				<step file="right.png" />
+			</direction>
+			<direction name="UP">
+				<step file="up.png" />
+			</direction>
+		</gesture>
+		
 		<gesture name="PUNCHING" folder="punching" shadow="00" repeat="false">
 			<direction name="DOWN" folder="down">
 				<step duration="50" file="1.png" />
@@ -399,7 +513,8 @@
 				<step duration="100" file="4.png" />
 				<step duration="100" file="9.png" />
 			</direction>
-	</gesture>
+		</gesture>
+		
 		<gesture name="WALKING" folder="walking" shadow="00" repeat="true">
 			<direction name="DOWN" folder="down">
 				<step duration="50" file="lf1.png" />
