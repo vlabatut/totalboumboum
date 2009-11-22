@@ -408,62 +408,89 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="EXULTING" folder="winning" shadow="00" repeat="true">
+		<gesture name="EXULTING" folder="exulting" shadow="00">
 			<direction name="NONE">
-				<step duration="200" file="1.png" shadow="shadow1.png" />
-
-				<step duration="200" file="2.png" shadow="shadow2.png" />
-				<step duration="200" file="3.png" shadow="shadow3.png" />
-				<step duration="200" file="4.png" shadow="shadow4.png" />
-				<step duration="200" file="3.png" shadow="shadow3.png" />
-				<step duration="200" file="2.png" shadow="shadow2.png" />
-				<step duration="200" file="3.png" shadow="shadow3.png" />
-				<step duration="200" file="4.png" shadow="shadow4.png" />
-				<step duration="200" file="3.png" shadow="shadow3.png" />
-				<step duration="200" file="2.png" shadow="shadow2.png" />
-				<step duration="200" file="3.png" shadow="shadow3.png" />
-				<step duration="200" file="4.png" shadow="shadow4.png" />
-				<step duration="200" file="3.png" shadow="shadow3.png" />
-				<step duration="200" file="2.png" shadow="shadow2.png" />
-				<step duration="200" file="3.png" shadow="shadow3.png" />
-				<step duration="200" file="4.png" shadow="shadow4.png" />
-				<step duration="200" file="3.png" shadow="shadow3.png" />
-
-				<step duration="200" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-				<step duration="50" file="5.png" shadow="shadow1.png" />
-				<step duration="50" file="6.png" shadow="shadow1.png" />
-
-				<step duration="100" file="1.png" shadow="shadow1.png" />
-				<step duration="1000" file="7.png" shadow="shadow1.png" />
+				<step duration="100" file="00.png"/>
+				<step duration="50" file="01.png"/>
+				<step duration="50" file="02.png"/>
+				<step duration="50" file="03.png"/>
+				<step duration="50" file="04.png"/>
+					<step duration="25" file="05.png" />
+					<step duration="25" file="06.png" />
+					<step duration="25" file="05.png" />
+					<step duration="25" file="06.png" />
+					<step duration="25" file="05.png" />
+					<step duration="25" file="07.png" />
+					<step duration="25" file="06.png" />
+					<step duration="25" file="07.png" />
+					<step duration="25" file="05.png" />
+					<step duration="25" file="07.png" />
+					<step duration="25" file="06.png" />
+				<step duration="300" file="07.png" />
+				<step duration="200" file="08.png"/>
+				<step duration="100" file="09.png"/>
+				<step duration="100" file="10.png"/>
+				<step duration="200" file="11.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
 			</direction>
 		</gesture>
 		
