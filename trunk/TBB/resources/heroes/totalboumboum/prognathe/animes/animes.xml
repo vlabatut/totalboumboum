@@ -53,7 +53,7 @@
 				<step duration="100" file="02.png" />
 				<step duration="100" file="03.png" />
 				<step duration="800" file="04.png" />
-				<step duration="500" file="05.png" />
+				<step duration="300" file="05.png" />
 				<step duration="125" file="06.png" />
 				<step duration="100" file="07.png" />
 				<step duration="75" file="08.png" />
@@ -65,7 +65,7 @@
 				<step duration="50" file="13.png" />
 				<step duration="50" file="14.png" />
 				<step duration="50" file="15.png" />
-				<step duration="50" file="16.png" />
+				<step duration="500" file="16.png" />
 			</direction>
 		</gesture>
 
