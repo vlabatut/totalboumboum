@@ -1092,6 +1092,9 @@ public class Launcher
 	 * - qualification :
 	 * 		- plusieurs IA en même temps
 	 * 		- niveau avec plein de blocs contenant des bonus, pour voir s'ils perdent du temps à les ramasser
+	 * - définir une mesure factuelle (reposant sur des faits de jeu) évaluant l'agressivité des joueurs
+	 * 		- cible des bombes: rien, mur ou IA
+	 * 		- à pondérer avec le nombre de bombes posées par seconde (par ex)
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
@@ -1108,7 +1111,8 @@ public class Launcher
 	 *  	- finir GUI
 	 *  	- finir sélection des matches
 	 *  	- ordonner les matches
-	 *  - tournoi coupe : possiblité de définir un tie-break random
+	 *  - tournoi coupe : 
+	 *  	- possiblité de définir un tie-break random
 	 *  - tournoi AI : détourner le logo CL
 	 *  	- fond bleuté
 	 *  	- ballon étoilé >> bombe étoilée
@@ -1120,7 +1124,10 @@ public class Launcher
 	 *  	- forcer la fin de la période (now)
 	 *  - optimisation du chargement :
 	 *  	- pas la peine de charger un niveau déjà en mémoire
-	 *  	- sprites ds persos à charger une seule fois lors du premier round d'un match	
+	 *  	- sprites ds persos à charger une seule fois lors du premier round d'un match
+	 *  	>> ouais mais pb d'échelle ! et charger en taille originale risque d'occuper trop de mémoire
+	 *  	>> p-ê charger et enregistrer dans fichier temp comme des objets java ? chargement devrait être plus rapide, à voir !
+	 *  	   mettre une option dans les options avancées pour forcer le rechargement ("cache sprites"), pour le débug	
 	 *  - instance TBB
 	 *  	- bombe télécommandée tombe en panne : le circuit grille
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
