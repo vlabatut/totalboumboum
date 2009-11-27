@@ -1,6 +1,5 @@
-package tournament200910.dereligeckalan;
+package tournament200910.bektasmazilyah.v2;
 
-import tournament200910.dereligeckalan.v2.DereliGeckalan;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**
@@ -12,6 +11,6 @@ public class AiMain extends AiManager
 	 * constructeur utilisé pour créer une instance de l'IA
 	 */
 	public AiMain()
-	{	super(new DereliGeckalan());		
+	{	super(new BektasMazilyah());		
 	}
 }

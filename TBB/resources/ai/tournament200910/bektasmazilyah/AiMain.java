@@ -1,6 +1,6 @@
 package tournament200910.bektasmazilyah;
 
-import tournament200910.bektasmazilyah.v1.BektasMazilyah;
+import tournament200910.bektasmazilyah.v2.BektasMazilyah;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**

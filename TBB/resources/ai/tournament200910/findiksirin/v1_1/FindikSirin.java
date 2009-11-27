@@ -1,4 +1,4 @@
-package tournament200910.findiksirin.v1;
+package tournament200910.findiksirin.v1_1;
 
 import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
