@@ -1,4 +1,4 @@
-package tournament200910.findiksirin.v1;
+package tournament200910.findiksirin.v1_1;
 
 import java.awt.Color;
 import java.text.NumberFormat;
