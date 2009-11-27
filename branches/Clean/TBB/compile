@@ -2,9 +2,31 @@
 # -------------------------------------------------------------------
 #
 # This is a BASH (Bourne-Again SHell) script, 
-# it should work on most Linux, Unix, and Mac OS.
-# It (re)compiles the whole TBB game and the dependant AI classes
+# it should work on most Linux, Unix, and Mac OS systems.
+# It (re)compiles the whole TBB game and the dependant AI classes.
 #
+# v.0.2
+#
+# -------------------------------------------------------------------
+#
+# Total Boum Boum
+# Copyright 2008-2009 Vincent Labatut 
+# 
+# This file is part of Total Boum Boum.
+# 
+# Total Boum Boum is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+# 
+# Total Boum Boum is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+# 
 # -------------------------------------------------------------------
 #
 # define path variables
@@ -29,8 +51,11 @@
 # (re)compile the AI classes located in the game
 	echo "compiling the AI classes inside the game..."
 	for i in $(ls -d ${aig}/*/); do 
-		echo -e "\t${i}"	
-		javac -nowarn -sourcepath $sp -classpath $cp $i/*.java -d $bin
+		echo -e "\t${i}"
+		for j in $(find $i -name "*.java" -print -type f); do 
+			echo -e "\t\t${j}"
+			javac -nowarn -sourcepath $sp -classpath $cp $j -d $bin
+		done
 	done
 #
 # (re)compile the AI classes located in resources/ai
@@ -44,3 +69,4 @@
 	done
 #
 #
+
