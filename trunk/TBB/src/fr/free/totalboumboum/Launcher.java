@@ -857,6 +857,8 @@ public class Launcher
 	 * - API IA :
 	 * 		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
+	 * - Divers :
+	 * 		- correction d'un bug dans les scripts de compilation (classes non référencées dans les adaptateurs d'IA)
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1055,6 +1057,18 @@ public class Launcher
 	 * - options :
 	 * 		- réinitialiser le joueur humain
 	 * 		- virer l'enchainement automatique
+	 * 
+	 * - pour diffusion publique:
+	 * 		- fichiers :
+	 * 			- recompiler le jeu	
+	 * 			- virer les fichiers sources
+	 * 			- virer les IA pas finies (source+profils)
+	 * 		- options :
+	 * 			- simulation des matches AI-only
+	 * 		- prérégler la partie rapide sur : 
+	 * 			- les meilleures IA 
+	 * 			- des niveaux compatibles
+	 * 			- les règles classiques
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1133,5 +1147,6 @@ public class Launcher
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
 	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
 	 *  
+	 *  pb avec la suppression de profil : pas de raffraichissement...
 	 */ 
 }
