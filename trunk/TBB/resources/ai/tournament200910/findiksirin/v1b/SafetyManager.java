@@ -1,4 +1,4 @@
-package tournament200910.findiksirin.v2;
+package tournament200910.findiksirin.v1b;
 
 import java.util.ArrayList;
 import java.util.Collection;
