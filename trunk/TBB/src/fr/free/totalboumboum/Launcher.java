@@ -854,6 +854,8 @@ public class Launcher
 	 * 		- correction d'un bug dans SpritePreviewLoader, lors du chargement de sprites sans colormap (de type Prognathe)
 	 * - GUI :
 	 * 		- correction d'un bug concernant les proportions des panels dans l'écran de présentation d'une manche
+	 * 		- correction d'un bug concernant l'édition de profil en général
+	 * 		- correction d'un bug lors du choix de la couleur (l'option "pas de couleur" était restée de la première version de la GUI)
 	 * - API IA :
 	 * 		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
@@ -1148,8 +1150,8 @@ public class Launcher
 	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
 	 *  
 	 *  pb avec la suppression de profil : pas de raffraichissement...
-	 *  profil: pb avec la sélection de couleur, quand on fait défiler y en a une avec rien du tout
 	 *  bug dans l'initilisation des joueurs avant le niveau, on dirait que les propriétés restent
 	 *  	>quand g modif le niveau pour donner moins de bombes initiales, le niveau est bien chargé mais l'init reste celle des 3 bombes au lieu de passer à 1
+	 *  quand un joueur est supprimé, il doit être viré des options où il apparait (matches rapides et cie)
 	 */ 
 }
