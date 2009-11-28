@@ -467,6 +467,23 @@
 			</direction>
 		</gesture>
 		
+		<gesture name="STAGGERING" folder="staggering" repeat="true" shadow="00">
+			<direction name="NONE">
+				<step duration="100" file="01.png" />
+				<step duration="100" file="02.png" />
+				<step duration="100" file="03.png" />
+				<step duration="100" file="04.png" />
+				<step duration="100" file="05.png" />
+				<step duration="100" file="06.png" />
+				<step duration="100" file="07.png" />
+				<step duration="100" file="08.png" />
+				<step duration="100" file="09.png" />
+				<step duration="100" file="10.png" />
+				<step duration="100" file="11.png" />
+				<step duration="100" file="12.png" />
+			</direction>
+		</gesture>
+		
 		<gesture name="STANDING" folder="standing" shadow="00">
 			<direction name="DOWN">
 				<step file="down.png" />
