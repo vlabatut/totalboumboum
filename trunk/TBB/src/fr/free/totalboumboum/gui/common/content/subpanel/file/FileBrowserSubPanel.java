@@ -183,6 +183,22 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 		return result;
 	}
 	
+	public String getReplacementFileName()
+	{	String result = null;
+		if(selectedRow!=-1)
+		{	int replacementIndex = (selectedRow-controlUpCount-1)+currentPage*(LINES-controlTotalCount);
+			if(replacementIndex==-1)
+			{	if(names.size()>1)
+					replacementIndex = 1;			
+			}
+			if(replacementIndex!=-1)
+			{	Entry<String,String> entry = names.get(replacementIndex);
+				result = entry.getKey();
+			}
+		}
+		return result;
+	}
+	
 	public void setSelectedFileName(String fileName)
 	{	Iterator<Entry<String,String>> it = names.iterator();
 		boolean found = false;
