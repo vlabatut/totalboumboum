@@ -55,17 +55,30 @@ public class ProfilesSelection
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// GENERAL				/////////////////////////////////////////
+	// PROFILES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public int getProfileCount()
 	{	return ids.size();
 	}
 
-	public void addProfile(int id, PredefinedColor color, int controlsIndex, String hero[])
+	public void addProfile(Integer id, PredefinedColor color, int controlsIndex, String hero[])
 	{	ids.add(id);
 		colors.add(color);
 		controls.add(controlsIndex);
 		heroes.add(hero);
+	}
+	
+	public void removeProfile(Integer id)
+	{	int index = ids.indexOf(id);
+		ids.remove(index);
+		colors.remove(index);
+		controls.remove(index);
+		heroes.remove(index);
+	}
+	
+	public boolean containsProfile(Integer id)
+	{	boolean result = ids.contains(id);
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
