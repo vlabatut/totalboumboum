@@ -130,6 +130,14 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 		filePanel.setSelectedFileName(fileName);
 	}
 
+	public Integer getReplacementProfileId()
+	{	Integer result = null;
+		String fileName = filePanel.getReplacementFileName();
+		if(fileName!=null)
+			result = Integer.parseInt(fileName);
+		return result;	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FILE BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////

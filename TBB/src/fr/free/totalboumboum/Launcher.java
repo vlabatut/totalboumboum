@@ -867,6 +867,7 @@ public class Launcher
 	 * 		- correction d'un bug concernant les proportions des panels dans l'écran de présentation d'une manche
 	 * 		- correction d'un bug concernant l'édition de profil en général
 	 * 		- correction d'un bug lors du choix de la couleur (l'option "pas de couleur" était restée de la première version de la GUI)
+	 * 		- correction d'un bug apparaissant lors de la suppression d'un joueur pas enregistré dans Glicko-2
 	 * - API IA :
 	 * 		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
@@ -1163,7 +1164,6 @@ public class Launcher
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
 	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
 	 *  
-	 *  pb avec la suppression de profil : pas de raffraichissement...
 	 *  faut aussi raffraichir en cas de renommage
 	 *  quand un joueur est supprimé, il doit être viré des options où il apparait (matches rapides et cie)
 	 */ 
