@@ -50,7 +50,7 @@ public class PathManager
 	 * Crée un PathManager chargé d'amener le personnage à la position (x,y)
 	 * exprimée en pixels
 	 */
-	public PathManager(Senacan ai, double x, double y) throws StopRequestException
+	public PathManager(AdatepeOzbek ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		init(ai);
@@ -61,7 +61,7 @@ public class PathManager
 	 * Crée un PathManager chargé d'amener le personnage au centre de la case
 	 * passée en paramètre
 	 */
-	public PathManager(Senacan ai, AiTile destination) throws StopRequestException
+	public PathManager(AdatepeOzbek ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		init(ai);
@@ -71,7 +71,7 @@ public class PathManager
 	/**
 	 * Initialise ce PathManager
 	 */
-	private void init(Senacan ai) throws StopRequestException
+	private void init(AdatepeOzbek ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		this.ai = ai;
@@ -86,7 +86,7 @@ public class PathManager
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** l'IA concernée par ce gestionnaire de chemin */
-	private Senacan ai;
+	private AdatepeOzbek ai;
 	/** zone de jeu */
 	private AiZone zone;
 	

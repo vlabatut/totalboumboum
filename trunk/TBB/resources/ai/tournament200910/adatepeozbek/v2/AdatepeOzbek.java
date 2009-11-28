@@ -12,7 +12,7 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.ai.adapter200910.path.*;
 
-public class Senacan extends ArtificialIntelligence 
+public class AdatepeOzbek extends ArtificialIntelligence 
 {	
 	private AiHero ownHero = null;
 	private AiZone zone = null;

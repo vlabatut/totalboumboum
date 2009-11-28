@@ -21,7 +21,7 @@ public class EscapeManager
 	/*
 	 * Initalise costMatrix, heuristicCalculator, astar et les cases secures dans possibleDest
 	 */
-	public EscapeManager(Senacan ai) throws StopRequestException
+	public EscapeManager(AdatepeOzbek ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		this.ai = ai;
@@ -36,7 +36,7 @@ public class EscapeManager
 		updatePath();
 	}
 	
-	private Senacan ai;
+	private AdatepeOzbek ai;
 	
 	private AiZone zone;	
 	

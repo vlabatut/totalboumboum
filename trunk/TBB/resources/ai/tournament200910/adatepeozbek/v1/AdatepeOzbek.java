@@ -35,7 +35,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
  * (un autre joueur), puis essaie de la rejoindre, et enfin se contente de la
  * suivre partout où elle va.
  */
-public class Senacan extends ArtificialIntelligence 
+public class AdatepeOzbek extends ArtificialIntelligence 
 {	
 	@Override
 	public AiAction processAction() throws StopRequestException
