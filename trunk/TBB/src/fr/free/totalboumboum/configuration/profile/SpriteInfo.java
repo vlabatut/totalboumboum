@@ -38,13 +38,13 @@ public class SpriteInfo implements Serializable
 	
 	public boolean hasChanged(SpriteInfo spriteInfo)
 	{	boolean result = false;
-		if(!result)
+		if(!result && pack!=null && spriteInfo.getPack()!=null)
 			result = pack.equals(spriteInfo.getPack());
-		if(!result)
+		if(!result && folder!=null && spriteInfo.getFolder()!=null)
 			result = folder.equals(spriteInfo.getFolder());
-//		if(!result)
+//		if(!result && name!=null && spriteInfo.getName()!=null)
 //			result = name.equals(spriteInfo.getName());
-		if(!result)
+		if(!result && color!=null && spriteInfo.getColor()!=null)
 			result = color==spriteInfo.getColor();
 		return result;
 	}
