@@ -5,7 +5,6 @@ import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiItem;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 
