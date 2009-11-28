@@ -51,7 +51,7 @@ public class ProfilesConfiguration
 		{	Entry<Integer,String> entry = it.next();
 			String value = entry.getValue();
 			Integer key = entry.getKey();
-			result.addProfile(key,value);			
+			result.addProfile(key,value);
 		}
 		//
 		return result;
