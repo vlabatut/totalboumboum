@@ -35,6 +35,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfigurationSaver;
+import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
+import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfigurationSaver;
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfigurationSaver;
 import fr.free.totalboumboum.statistics.GameStatistics;
 import fr.free.totalboumboum.statistics.glicko2.jrs.Match;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
@@ -72,7 +78,7 @@ public class ProfilesConfiguration
 	}
 	
 	public void removeProfile(int id)
-	{	profiles.remove(id);		
+	{	profiles.remove(id);
 	}
 	
 	public int getLastProfileIndex()
@@ -121,7 +127,31 @@ public class ProfilesConfiguration
 		File file = new File(path);
 		file.delete();
 		
-		// delete entry in config
+		// delete entry in quickstart
+		QuickStartConfiguration quickStartConfiguration = Configuration.getGameConfiguration().getQuickStartConfiguration();
+		ProfilesSelection profilesSelection = quickStartConfiguration.getProfilesSelection();
+		if(profilesSelection.containsProfile(id))
+		{	profilesSelection.removeProfile(id);
+			QuickStartConfigurationSaver.saveQuickStartConfiguration(quickStartConfiguration);
+		}
+		
+		// delete entry in quickmatch
+		QuickMatchConfiguration quickMatchConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration();
+		profilesSelection = quickMatchConfiguration.getProfilesSelection();
+		if(profilesSelection.containsProfile(id))
+		{	profilesSelection.removeProfile(id);
+			QuickMatchConfigurationSaver.saveQuickMatchConfiguration(quickMatchConfiguration);
+		}
+		
+		// delete entry in tournament
+		TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration();
+		profilesSelection = tournamentConfiguration.getProfilesSelection();
+		if(profilesSelection.containsProfile(id))
+		{	profilesSelection.removeProfile(id);
+			TournamentConfigurationSaver.saveTournamentConfiguration(tournamentConfiguration);
+		}
+			
+		// delete entry in profiles
 		removeProfile(id);
 		ProfilesConfigurationSaver.saveProfilesConfiguration(this);
 		
