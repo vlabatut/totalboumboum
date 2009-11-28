@@ -1148,5 +1148,6 @@ public class Launcher
 	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
 	 *  
 	 *  pb avec la suppression de profil : pas de raffraichissement...
+	 *  profil: pb avec la sélection de couleur, quand on fait défiler y en a une avec rien du tout
 	 */ 
 }
