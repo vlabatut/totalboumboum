@@ -47,9 +47,12 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		matris = new int[getPercepts().getHeigh()][getPercepts().getWidth()];
 		AiZone zone = getPercepts();
 
+		@SuppressWarnings("unused")
 		AiHero ownHero = zone.getOwnHero();
 		currentTile = zone.getOwnHero().getTile();
+		@SuppressWarnings("unused")
 		int line = currentTile.getLine();
+		@SuppressWarnings("unused")
 		int col = currentTile.getCol();
 
 		targetTile = currentTile;
@@ -95,6 +98,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	 * 
 	 * @throws StopRequestException
 	 */
+	@SuppressWarnings("unused")
 	private String toTileString(AiTile tile) {
 		String res = "";
 		int x = tile.getLine();
@@ -296,6 +300,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return targetTile;
 	}
 
+	@SuppressWarnings("unused")
 	private AiTile escapeTile() throws StopRequestException {
 		AiTile resultat = currentTile;
 		ArrayList<Integer> times = new ArrayList<Integer>();
@@ -317,6 +322,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return resultat;
 	}
 
+	@SuppressWarnings("unused")
 	private LinkedList<AiTile> bombRange(AiBomb bomb)
 			throws StopRequestException {
 		LinkedList<AiTile> resultat = new LinkedList<AiTile>();
@@ -357,6 +363,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	}
 
+	@SuppressWarnings("unused")
 	private ArrayList<Double> bombTimes() throws StopRequestException {
 		ArrayList<Double> bombTimes = new ArrayList<Double>();
 		Collection<AiBomb> bombs = getPercepts().getBombs();
@@ -410,6 +417,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return result;
 	}
 
+	@SuppressWarnings("unused")
 	private boolean isSur(AiTile tile) throws StopRequestException {
 		boolean res = true;
 		AiZone zone = getPercepts();
@@ -439,6 +447,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return res;
 	}
 
+	@SuppressWarnings("unused")
 	private boolean isSafe(AiTile tile) throws StopRequestException {
 		checkInterruption();
 
@@ -452,7 +461,6 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		return x;
 	}
 
-	@SuppressWarnings("null")
 	private LinkedList<AiTile> dangerZone() throws StopRequestException {
 
 		checkInterruption();
@@ -569,6 +577,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	}
 
+	@SuppressWarnings("unused")
 	private AiTile findNextbon() throws StopRequestException {
 		checkInterruption();
 		LinkedList<AiTile> bonusTile = new LinkedList<AiTile>();

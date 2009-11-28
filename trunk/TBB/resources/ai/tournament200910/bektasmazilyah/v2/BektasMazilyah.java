@@ -3,13 +3,10 @@ package tournament200910.bektasmazilyah.v2;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import fr.free.totalboumboum.ai.adapter200809.AiFloor;
-import fr.free.totalboumboum.ai.adapter200809.AiItem;
 import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
@@ -20,15 +17,7 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiFire;
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
-import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.sprite.block.Block;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
-import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
-import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
 /**
  * >> ce texte est à remplacer par votre propre description de votre IA
@@ -46,6 +35,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	//la prochaine action que l'IA veut réaliser
 	private AiAction action;
 	// la dernière case par laquelle on est passé 
+	@SuppressWarnings("unused")
 	private AiTile previousTile;
 	// la case occupée actuellement par le personnage
 	private AiTile currentTile;
@@ -486,6 +476,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	}
 
 	//Si on met un bombe, est-ce qu'on peut fuire
+	@SuppressWarnings("unused")
 	private boolean checkSafety(int[][][] matriceDefence, AiZone zone) throws StopRequestException {
 		checkInterruption();
 		boolean result=false;
