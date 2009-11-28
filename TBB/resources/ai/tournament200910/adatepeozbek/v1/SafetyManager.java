@@ -20,7 +20,7 @@ public class SafetyManager
 {		
 
 	// Initialise la zone, l'IA, et la matrice
-	public SafetyManager(Senacan ai) throws StopRequestException
+	public SafetyManager(AdatepeOzbek ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		this.ai = ai;
@@ -29,7 +29,7 @@ public class SafetyManager
 	}
 	
 	// La variable d'IA de notre caractère
-	private Senacan ai;
+	private AdatepeOzbek ai;
 	
 	// Le feu est caracterisé par la valeur 0 et les cases secures avec MAX_VALUE
 	public static double SAFE = Double.MAX_VALUE;	

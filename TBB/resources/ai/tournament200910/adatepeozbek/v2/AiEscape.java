@@ -22,7 +22,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 
 public class AiEscape
 {		
-	private Senacan ownAi;
+	private AdatepeOzbek ownAi;
 	private AiZone zone;
 	private List<AiBomb> bombs;
 	private List<AiFire> fires;
@@ -44,7 +44,7 @@ public class AiEscape
 	private static AiTile currentTile;
 	private AiPath path;
 	
-	public AiEscape(Senacan ai) throws StopRequestException
+	public AiEscape(AdatepeOzbek ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		actionToDo = new AiAction(AiActionName.NONE);
