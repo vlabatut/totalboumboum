@@ -210,16 +210,19 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 		else if(questionPanel!=null)
 		{	questionPanel = null;				
 			Profile profile = profileData.getSelectedProfile();
+			Integer id = profileData.getReplacementProfileId();
 			if(profile!=null)
 			{	try
 				{	// delete profile
 					ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
-					profilesConfig.deleteProfile(profile);	
+					profilesConfig.deleteProfile(profile);
 					// rebuild panel
 					profileData.removeListener(this);
 					profileData = new SelectedProfileData(container);
 					container.setDataPart(profileData);
 					profileData.addListener(this);
+					if(id!=null)
+						profileData.setSelectedProfile(id);
 				}
 				catch (ParserConfigurationException e1)
 				{	e1.printStackTrace();
