@@ -765,6 +765,17 @@ public class Launcher
 	 * certaines actions comme gather sont automatiques. certaines actions ont un effet de zone 
 	 * (pr gather : la case).
 	 */
+	
+	/*
+	 * TODO chargement des niveaux
+	 * 	- commencer une partie rapide avec un seul niveau
+	 * 	- jouer un round
+	 * 	- changer les items par défaut pour ce niveau, directement dans le fichier XML
+	 * 	- joueur le round suivant: 
+	 * 		- la gui affiche la modif
+	 *		- mais la hollow level n'a pas été rechargé (mutualisation)
+	 *		- et donc la modif n'est pas prise en compte dans l'initialisation des joueurs 
+	 */
 
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1143,15 +1154,17 @@ public class Launcher
 	 *  	- sprites ds persos à charger une seule fois lors du premier round d'un match
 	 *  	>> ouais mais pb d'échelle ! et charger en taille originale risque d'occuper trop de mémoire
 	 *  	>> p-ê charger et enregistrer dans fichier temp comme des objets java ? chargement devrait être plus rapide, à voir !
-	 *  	   mettre une option dans les options avancées pour forcer le rechargement ("cache sprites"), pour le débug	
+	 *  	   mettre une option dans les options avancées pour forcer le rechargement ("cache sprites"), pour le débug
+	 *  	>> deux types de caches, en fait : (les deux sont indépendents)
+	 *  		- cache DD avec des objets java sérialisés
+	 *  		- cache mémoire avec les objets déjà chargés et à taille réelle. y a juste à les mettre à l'échelle
 	 *  - instance TBB
 	 *  	- bombe télécommandée tombe en panne : le circuit grille
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
 	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
 	 *  
 	 *  pb avec la suppression de profil : pas de raffraichissement...
-	 *  bug dans l'initilisation des joueurs avant le niveau, on dirait que les propriétés restent
-	 *  	>quand g modif le niveau pour donner moins de bombes initiales, le niveau est bien chargé mais l'init reste celle des 3 bombes au lieu de passer à 1
+	 *  faut aussi raffraichir en cas de renommage
 	 *  quand un joueur est supprimé, il doit être viré des options où il apparait (matches rapides et cie)
 	 */ 
 }

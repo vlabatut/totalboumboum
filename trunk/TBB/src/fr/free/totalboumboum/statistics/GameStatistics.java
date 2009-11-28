@@ -112,12 +112,19 @@ public class GameStatistics
 	 * @param playerId
 	 */
 	public static void addPlayer(int playerId) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	if(!playersStats.containsKey(playerId))
-		{	PlayerStats playerStats = new PlayerStats(playerId);
+	{	boolean changed = false;
+		if(!playersStats.containsKey(playerId))
+		{	changed = true;
+			PlayerStats playerStats = new PlayerStats(playerId);
 			playersStats.put(playerId,playerStats);
+		}
+		if(!rankingService.getPlayers().contains(playerId))
+		{	changed = true;
 			rankingService.registerPlayer(playerId);
+		}
+		if(changed)
 			saveStatistics();
-		}		
+		
 	}
 
 	/**
@@ -125,11 +132,17 @@ public class GameStatistics
 	 * @param playerId
 	 */
 	public static void deletePlayer(int playerId) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	if(playersStats.containsKey(playerId))
-		{	playersStats.remove(playerId);
-			rankingService.deregisterPlayer(playerId);
-			saveStatistics();
+	{	boolean changed = false;
+		if(playersStats.containsKey(playerId))
+		{	changed = true;
+			playersStats.remove(playerId);
 		}
+		if(rankingService.getPlayers().contains(playerId))
+		{	changed = true;
+			rankingService.deregisterPlayer(playerId);
+		}
+		if(changed)
+			saveStatistics();
 	}
 	
 	/////////////////////////////////////////////////////////////////
