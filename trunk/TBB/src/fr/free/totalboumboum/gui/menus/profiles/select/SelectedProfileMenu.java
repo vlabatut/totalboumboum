@@ -145,7 +145,10 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void refresh()
-	{	//
+	{	profileData.removeListener(this);
+		profileData = new SelectedProfileData(container);
+		container.setDataPart(profileData);
+		profileData.addListener(this);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -175,10 +178,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 					ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
 					Integer id = profilesConfig.createProfile(input);
 					// rebuild panel
-					profileData.removeListener(this);
-					profileData = new SelectedProfileData(container);					
-					container.setDataPart(profileData);
-					profileData.addListener(this);
+					refresh();
 					profileData.setSelectedProfile(id);
 				}
 				catch (ParserConfigurationException e1)
@@ -217,10 +217,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 					ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
 					profilesConfig.deleteProfile(profile);
 					// rebuild panel
-					profileData.removeListener(this);
-					profileData = new SelectedProfileData(container);
-					container.setDataPart(profileData);
-					profileData.addListener(this);
+					refresh();
 					if(id!=null)
 						profileData.setSelectedProfile(id);
 				}
