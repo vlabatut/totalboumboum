@@ -411,10 +411,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					{	while(i>=0 && allColors[i]!=color)
 							i--;
 					}
-					if(i==0)
-						color = null;
-					else
-						color = allColors[i-1];
+					color = allColors[(i-1+allColors.length)%allColors.length];
 				}
 				else //if(pos{1==3)
 				{	int i = 0;
@@ -422,10 +419,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					{	while(i<allColors.length && allColors[i]!=color)
 							i++;
 					}
-					if(i==allColors.length-1)
-						color = null;
-					else
-						color = allColors[i+1];
+					color = allColors[(i+1)%allColors.length];
 				}
 				profile.getDefaultSprite().setColor(color);
 				refreshColor();
