@@ -50,4 +50,8 @@ public class SelectedProfileSplitPanel extends SplitMenuPanel
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);
 	}
+	
+	public void setSelectedProfile(Integer id)
+	{	((SelectedProfileData)getDataPart()).setSelectedProfile(id);		
+	}
 }
