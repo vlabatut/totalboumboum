@@ -868,11 +868,15 @@ public class Launcher
 	 * 		- correction d'un bug concernant l'édition de profil en général
 	 * 		- correction d'un bug lors du choix de la couleur (l'option "pas de couleur" était restée de la première version de la GUI)
 	 * 		- correction d'un bug apparaissant lors de la suppression d'un joueur pas enregistré dans Glicko-2
+	 * 		- amélioration de la suppression de profil : c'est le profil précédent qui est alors sélectionné (au lieu de revenir au début)
+	 * 		- la liste de noms est raffraichie quand un profil est modifié
+	 * 		- les 3 configurations de jeu sont éventuellement mises à jour quand un profil est supprimé
 	 * - API IA :
 	 * 		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
 	 * - Divers :
 	 * 		- correction d'un bug dans les scripts de compilation (classes non référencées dans les adaptateurs d'IA)
+	 * 		- mise à jour du perso Prognathe
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1163,8 +1167,5 @@ public class Launcher
 	 *  	- bombe télécommandée tombe en panne : le circuit grille
 	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
 	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
-	 *  
-	 *  faut aussi raffraichir en cas de renommage
-	 *  quand un joueur est supprimé, il doit être viré des options où il apparait (matches rapides et cie)
 	 */ 
 }
