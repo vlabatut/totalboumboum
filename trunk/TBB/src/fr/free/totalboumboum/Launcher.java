@@ -1149,5 +1149,7 @@ public class Launcher
 	 *  
 	 *  pb avec la suppression de profil : pas de raffraichissement...
 	 *  profil: pb avec la sélection de couleur, quand on fait défiler y en a une avec rien du tout
+	 *  bug dans l'initilisation des joueurs avant le niveau, on dirait que les propriétés restent
+	 *  	>quand g modif le niveau pour donner moins de bombes initiales, le niveau est bien chargé mais l'init reste celle des 3 bombes au lieu de passer à 1
 	 */ 
 }
