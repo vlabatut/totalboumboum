@@ -1,4 +1,4 @@
-package tournament200910.mancuhanpinarer.v1;
+package tournament200910.mancuhanpinarer.v1_2;
 
 import java.util.ArrayList;
 import java.util.Collection;
