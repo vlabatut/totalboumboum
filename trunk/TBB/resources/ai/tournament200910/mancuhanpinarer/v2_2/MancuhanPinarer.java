@@ -1,4 +1,4 @@
-package tournament200910.mancuhanpinarer.v2;
+package tournament200910.mancuhanpinarer.v2_2;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,25 +33,25 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
  * 
  */
 public class MancuhanPinarer extends ArtificialIntelligence {
-	//la case accessible et qui n'est pas dans la portee de la bombe est represente dans la matrice da la zone.
+	// la case accessible et qui n'est pas dans la portee de la bombe est
+	// represente dans la matrice da la zone.
 	private final int CASE_SUR = 0;
-	//le mur non-destructible represente dans la matrice de la zone
+	// le mur non-destructible represente dans la matrice de la zone
 	private final int CASE_INACCESSIBLE = 1;
-	//la portee d'une bombe represente dans la matrice de la zone
+	// la portee d'une bombe represente dans la matrice de la zone
 	private final int CASE_SCOPE = 2;
-	//la mur destructible represente dans la matrice de la zone
+	// la mur destructible represente dans la matrice de la zone
 	private final int MUR_DESTRUCTIBLE = 3;
-	//l'item represente dans la matrice de la zone
+	// l'item represente dans la matrice de la zone
 	private final int ITEM = 4;
-	//chemin a suivre pour l'algo defense
+	// chemin a suivre pour l'algo defense
 	private AiPath nextMove = null;
-	//chemin a suivre pour ramasser le bonus
+	// chemin a suivre pour ramasser le bonus
 	private AiPath nextMoveBonus = null;
-	//notre hero sur la zone
+	// notre hero sur la zone
 	private AiHero ourHero;
-	//le booleen pour determiner s'il est necessaire d'entrer dans l'algo de bonus.
-	private boolean searchBonus = true;
-
+	// le booleen pour determiner s'il est necessaire d'entrer dans l'algo de
+	// bonus.
 
 
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
@@ -63,7 +63,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		// Le resultat du traitement indiquant l'action suivante
 		// par defaut, il ne fait rien.
 		AiAction result = new AiAction(AiActionName.NONE);
-		
+		boolean searchBonus = true;
 		// la longueur de la zone
 		int width = gameZone.getWidth();
 		// la largeur de la zone
@@ -77,42 +77,62 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		this.fillBlocksMatrice(matrice, gameZone);
 		this.fillFiresMatrice(matrice, gameZone);
 		this.fillItemsBonus(matrice, gameZone);
-		
-		
+
 		// initialisation de notre hero dans cette zone
 		this.ourHero = gameZone.getOwnHero();
-		
+
+		int destructibleBlocks = 0;
+
+		for (int i = 0; i < gameZone.getHeigh(); i++) {
+			checkInterruption();
+			for (int j = 0; j < gameZone.getWidth(); j++) {
+				checkInterruption();
+				if (matrice[i][j] == MUR_DESTRUCTIBLE)
+					destructibleBlocks++;
+			}
+		}
+
 		// On actualise la critere pour entrer dans l'algo recherche de bonus
 		// Tant qu'on ne peut pas poser simultanement 6 bombes et que la portee
 		// n'est pas 6 cases, on entre dans l'algo.
-		if (ourHero.getBombNumber() == 6 && ourHero.getBombRange() == 6)
+		if ((ourHero.getBombNumber() == 7 && ourHero.getBombRange() == 7)
+				|| destructibleBlocks == 0)
 			searchBonus = false;
-		
-		// Si le joueur est dans la portee d'une bombe, il entre dans l'algo. de defense   
+
+		// Si le joueur est dans la portee d'une bombe, il entre dans l'algo. de
+		// defense
 		if (matrice[ourHero.getLine()][ourHero.getCol()] == CASE_SCOPE) {
 			this.nextMoveBonus = null;
 			this.defenseAlgorithm(gameZone, matrice);
 			if (nextMove != null)
-				result = this.newAction(nextMove);
+				if(nextMove.getLength()!=0)
+					result = this.newAction(nextMove);
+				else
+					nextMove=null;
 		} else {
-			// Si le critere est vrai, il entre dans l'algo de la recherhe de bonus.
+			// Si le critere est vrai, il entre dans l'algo de la recherhe de
+			// bonus.
 			if (searchBonus) {
 				this.nextMove = null;
-				//l'algo de bonus
+				// l'algo de bonus
 				bonusAlgorithm(gameZone, matrice);
-				//le teste pour deposer la bombe commence
+				// le teste pour deposer la bombe commence
 				boolean dropBomb = false;
-				// On commence a trouver si le hero est arrive au voisinage d'une case mur.
+				// On commence a trouver si le hero est arrive au voisinage
+				// d'une case mur.
 				List<AiTile> neighboors = ourHero.getTile().getNeighbors();
 				for (int i = 0; i < neighboors.size(); i++) {
 					checkInterruption();
-					// Si la case est au voisinage d'une mure destructible, alors il pose la bombe
+					// Si la case est au voisinage d'une mure destructible,
+					// alors il pose la bombe
 					if (matrice[neighboors.get(i).getLine()][neighboors.get(i)
 							.getCol()] == MUR_DESTRUCTIBLE) {
 						dropBomb = true;
 					}
-					// Au cas de trouver une case dans la portee d'une bombe au voisinage,
-					// le hero annule de poser une bombe et s'arrete pour ne pas etre tue
+					// Au cas de trouver une case dans la portee d'une bombe au
+					// voisinage,
+					// le hero annule de poser une bombe et s'arrete pour ne pas
+					// etre tue
 					// quand il s'enfuit.
 					else if (matrice[neighboors.get(i).getLine()][neighboors
 							.get(i).getCol()] == CASE_SCOPE) {
@@ -120,17 +140,20 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 						break;
 					}
 				}
-				//Il pose la bombe 
+				// Il pose la bombe
 				if (dropBomb) {
 					result = new AiAction(AiActionName.DROP_BOMB);
-				}//Si non il fait une nouvelle action.
+				}// Si non il fait une nouvelle action.
 				else if (nextMoveBonus != null) {
-					result = this.newAction(nextMoveBonus);
+					if(nextMoveBonus.getLength()!=0)
+						result = this.newAction(nextMoveBonus);
+					else
+						nextMoveBonus=null;
 				}
 			}
-			//L'attaque, pas encore implemente.
-			else{
-			// Attack
+			// L'attaque, pas encore implemente.
+			else {
+				// Attack
 			}
 		}
 		// On assigne la nouvelle action
@@ -138,8 +161,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Methode initialisant notre matrice de zone avant la remplissage.
-	 * Chaque case est initialement considere comme CASE_SUR
+	 * Methode initialisant notre matrice de zone avant la remplissage. Chaque
+	 * case est initialement considere comme CASE_SUR
 	 * 
 	 * @param matrice
 	 *            La Matrice de Zone
@@ -191,8 +214,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Methode remplissant les cases de notre matrice de zone possedant une
-	 * mur. Les cases des mures non-destructibles sont representees par 
+	 * Methode remplissant les cases de notre matrice de zone possedant une mur.
+	 * Les cases des mures non-destructibles sont representees par
 	 * CASE_INACCESSIBLE et destructibles par MUR_DESTRUCTIBLE.
 	 * 
 	 * @param matrice
@@ -237,15 +260,15 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 			matrice[fire.getLine()][fire.getCol()] = CASE_INACCESSIBLE;
 		}
 	}
-	
+
 	/**
 	 * Methode remplissant les cases de notre matrice de zone possedant une
 	 * item. Les cases des items sont represente par ITEM.
 	 * 
 	 * @param matrice
-	 * 				La Matrice de Zone
+	 *            La Matrice de Zone
 	 * @param gameZone
-	 * 				la zone du jeu
+	 *            la zone du jeu
 	 * @throws StopRequestException
 	 */
 	private void fillItemsBonus(int[][] matrice, AiZone gameZone)
@@ -262,9 +285,9 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 
 	/**
 	 * Methode calculant la liste des cases ou le hero peut aller. On prend
-	 * aussi en compte les cases qui sont dans la portee des bombes et les
-	 * deux sous-parties de la zone. Notre hero peut se deplacer en traversant 
-	 * ces cases.
+	 * aussi en compte les cases qui sont dans la portee des bombes et les deux
+	 * sous-parties de la zone. Notre hero peut se deplacer en traversant ces
+	 * cases.
 	 * 
 	 * @param matrice
 	 *            La Matrice de Zone
@@ -273,43 +296,56 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * @return la liste des points finaux.
 	 * @throws StopRequestException
 	 */
-	private List<AiTile> calculateEndPoints(int[][] matrice, AiZone gameZone)
-			throws StopRequestException {
+	/*
+	 * private List<AiTile> calculateEndPoints(int[][] matrice, AiZone gameZone)
+	 * throws StopRequestException { checkInterruption(); // Liste des CASE_SURs
+	 * terminaux. List<AiTile> endPoints = new ArrayList<AiTile>(); // la limite
+	 * verticale divisant la zone en 2 parties. int verticalBound =
+	 * gameZone.getWidth() / 2; //Si le hero a droite de cette limite, on
+	 * remplit dans la liste //des CASE_SURs dans cette partie de la zone. if
+	 * (ourHero.getCol() > verticalBound) { for (int i = 0; i <
+	 * gameZone.getHeigh(); i++) { checkInterruption(); for (int j =
+	 * verticalBound; j < gameZone.getWidth(); j++) { checkInterruption(); if
+	 * (matrice[i][j] == CASE_SUR) { if (i != this.ourHero.getLine() && j !=
+	 * this.ourHero.getCol()) endPoints.add(gameZone.getTile(i, j)); } } } }
+	 * //Si le hero a gauche de cette limite, on remplit dans la liste //des
+	 * CASE_SURs dans cette partie de la zone. else if (ourHero.getCol() <=
+	 * verticalBound) { for (int i = 0; i < gameZone.getHeigh(); i++) {
+	 * checkInterruption(); for (int j = 0; j <= verticalBound; j++) {
+	 * checkInterruption(); if (matrice[i][j] == CASE_SUR) { if (i !=
+	 * this.ourHero.getLine() && j != this.ourHero.getCol())
+	 * endPoints.add(gameZone.getTile(i, j)); } } } } return endPoints; }
+	 */
+
+	private List<AiTile> calculateDefenseEndPoints(int[][] matrice,
+			AiZone gameZone) throws StopRequestException {
 		checkInterruption();
-		// Liste des CASE_SURs terminaux.
 		List<AiTile> endPoints = new ArrayList<AiTile>();
-		// la limite verticale divisant la zone en 2 parties.
-		int verticalBound = gameZone.getWidth() / 2;
-		//Si le hero a droite de cette limite, on remplit dans la liste 
-		//des CASE_SURs dans cette partie de la zone.
-		if (ourHero.getCol() > verticalBound) {
-			for (int i = 0; i < gameZone.getHeigh(); i++) {
+		int heroLine = ourHero.getLine();
+		int heroCol = ourHero.getCol();
+		int leftBound = heroCol - 3, rightBound = heroCol + 3;
+		int upperBound = heroLine - 3, lowerBound = heroLine + 3;
+		if (leftBound < 5)
+			leftBound = 5;
+		if (rightBound > 17)
+			rightBound = 17;
+		if (upperBound < 1)
+			upperBound = 1;
+		if (lowerBound > 13)
+			lowerBound = 13;
+
+		for (int i = upperBound; i < lowerBound; i++) {
+			checkInterruption();
+			for (int j = leftBound; j < rightBound; j++) {
 				checkInterruption();
-				for (int j = verticalBound; j < gameZone.getWidth(); j++) {
-					checkInterruption();
-					if (matrice[i][j] == CASE_SUR) {
-						if (i != this.ourHero.getLine()
-								&& j != this.ourHero.getCol())
-							endPoints.add(gameZone.getTile(i, j));
-					}
-				}
-			}
-		} 
-		//Si le hero a gauche de cette limite, on remplit dans la liste 
-		//des CASE_SURs dans cette partie de la zone.
-		else if (ourHero.getCol() <= verticalBound) {
-			for (int i = 0; i < gameZone.getHeigh(); i++) {
-				checkInterruption();
-				for (int j = 0; j <= verticalBound; j++) {
-					checkInterruption();
-					if (matrice[i][j] == CASE_SUR) {
-						if (i != this.ourHero.getLine()
-								&& j != this.ourHero.getCol())
-							endPoints.add(gameZone.getTile(i, j));
-					}
+				if (matrice[i][j] == CASE_SUR) {
+					if (i != this.ourHero.getLine()
+							&& j != this.ourHero.getCol())
+						endPoints.add(gameZone.getTile(i, j));
 				}
 			}
 		}
+
 		return endPoints;
 	}
 
@@ -317,15 +353,15 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * Methode implementant l'algo. de bonus.
 	 * 
 	 * @param gameZone
-	 * 				La zone du jeu
+	 *            La zone du jeu
 	 * @param matrice
-	 * 				La matrice de zone
+	 *            La matrice de zone
 	 * @throws StopRequestException
 	 */
 	private void bonusAlgorithm(AiZone gameZone, int[][] matrice)
 			throws StopRequestException {
 		checkInterruption();
-		//Si le prochaine action n'est pas determine, elle va etre calculee ici
+		// Si le prochaine action n'est pas determine, elle va etre calculee ici
 		if (nextMoveBonus == null) {
 			List<AiItem> itemList = gameZone.getItems();
 			if (itemList.size() != 0) {
@@ -361,32 +397,30 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 
 					}
 				}
-				if (destructibleBlocks.size() != 0) {
-					if (findSecurePath(gameZone, matrice, ourHero.getTile(),
-							destructibleTiles))
-						nextMoveBonus = nextMove;
-					
-				} else {
-					searchBonus = false;
-				}
 
-				nextMove = null;
+				if (findSecurePath(gameZone, matrice, ourHero.getTile(),
+						destructibleTiles))
+					nextMoveBonus = nextMove;
+
+				
 			}
-			
-		} 
-		//Si non, il continue a son mouvement. 
+			nextMove = null;
+
+		}
+		// Si non, il continue a son mouvement.
 		else {
-			
+
 			if (nextMoveBonus.getLength() == 0)
 				nextMoveBonus = null;
 			else {
 				boolean adapt = false;
-					List<AiTile> nextTiles = nextMoveBonus.getTiles();
-					for (int i = 0; i < nextTiles.size(); i++) {
-						if (!nextTiles.get(i).isCrossableBy(ourHero)||
-								matrice[nextTiles.get(i).getLine()][nextTiles.get(i).getCol()] == CASE_SCOPE)
-							adapt = true;
-				
+				List<AiTile> nextTiles = nextMoveBonus.getTiles();
+				for (int i = 0; i < nextTiles.size(); i++) {
+					if (!nextTiles.get(i).isCrossableBy(ourHero)
+							|| matrice[nextTiles.get(i).getLine()][nextTiles
+									.get(i).getCol()] == CASE_SCOPE)
+						adapt = true;
+
 					if (adapt)
 						nextMoveBonus = null;
 					else {
@@ -421,15 +455,12 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		AiTile startPoint = ourHero.getTile();
 		// Les positions finales possibles de notre hero calcule par la methode
 		// calculateEndPoints
-		List<AiTile> endPoints = this.calculateEndPoints(matrice, gameZone);
-		//Si le prochaine action n'est pas determine, elle va etre calculee ici
+		List<AiTile> endPoints = this.calculateDefenseEndPoints(matrice,
+				gameZone);
+		// Si le prochaine action n'est pas determine, elle va etre calculee ici
 		if (this.nextMove == null) {
-			boolean securePath = findSecurePath(gameZone, matrice, startPoint,
-					endPoints);
-			if (!securePath) {
-				endPoints = this.calculateEndPoints(matrice, gameZone);
-				leastDangerousPath(matrice, startPoint, endPoints);
-			}
+			endPoints = this.calculateDefenseEndPoints(matrice, gameZone);
+			leastDangerousPath(matrice, startPoint, endPoints);
 		}
 		// Si non, il continue a son mouvement.
 		else {
@@ -466,17 +497,17 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	}
 
 	/**
-	 * La methode qui trouve un chemin qui n'a pas une case de la
-	 * portee d'une bombe.
+	 * La methode qui trouve un chemin qui n'a pas une case de la portee d'une
+	 * bombe.
 	 * 
 	 * @param gameZone
-	 * 			La zone du jeu
+	 *            La zone du jeu
 	 * @param matrice
-	 * 			La matrice de zone
+	 *            La matrice de zone
 	 * @param startPoint
-	 * 			La position de l'hero
+	 *            La position de l'hero
 	 * @param endPoints
-	 * 			Les cases finaux
+	 *            Les cases finaux
 	 * @return vrai s'il existe un chemin sans la portee d'une bombe
 	 * 
 	 * @throws StopRequestException
@@ -511,21 +542,19 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * portee d'une bombe.
 	 * 
 	 * @param matrice
-	 * 			La matrice de zone
+	 *            La matrice de zone
 	 * @param startPoint
-	 * 			La position de l'hero
+	 *            La position de l'hero
 	 * @param endPoints
-	 * 			Les cases finaux
+	 *            Les cases finaux
 	 * @throws StopRequestException
 	 */
 	private void leastDangerousPath(int[][] matrice, AiTile startPoint,
 			List<AiTile> endPoints) throws StopRequestException {
 		checkInterruption();
+		System.out.println("Yeni Giris");
 		int[] numberScopes = new int[endPoints.size()];
-		for (int m = 0; m < numberScopes.length; m++) {
-			checkInterruption();
-			numberScopes[m] = 0;
-		}
+				
 		AiPath[] alternativePaths = new AiPath[endPoints.size()];
 		for (int i = 0; i < endPoints.size(); i++) {
 			checkInterruption();
@@ -534,6 +563,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 			AiPath tempPath = this.calculateShortestPath(ourHero, startPoint,
 					tempElement);
 			alternativePaths[i] = tempPath;
+			System.out.println("Alternatif Yol: "+alternativePaths[i].toString());
 			for (int j = 0; j < tempPath.getLength(); j++) {
 				checkInterruption();
 				int x = tempPath.getTile(j).getLine(), y = tempPath.getTile(j)
@@ -541,23 +571,24 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 				if (matrice[x][y] == CASE_SCOPE)
 					numberScopes[i]++;
 			}
+			System.out.println("Scope Miktari: "+numberScopes[i]);
 			tempElement.clear();
 		}
 		int min = Integer.MAX_VALUE, indexMin = 0;
-		for (int m = 0; m < (numberScopes.length) / 2; m++) {
+		for (int m = 0; m < numberScopes.length; m++) {
 			checkInterruption();
-			if ((numberScopes[m] < min) && (numberScopes[m] != 0)) {
+			if ((numberScopes[m] < min) && (alternativePaths[m].getLength()!=0)) {
 				min = numberScopes[m];
 				indexMin = m;
-				if (alternativePaths[m].getLength() < 5)
+				if(min==3)
 					break;
 			}
 
 		}
 		this.nextMove = alternativePaths[indexMin];
+		System.out.println("Secilen Yol: "+nextMove.toString());
 	}
 
-	
 	/**
 	 * 
 	 * Methode calculant le chemin le plus court que l'hero peut suivre.
@@ -601,10 +632,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		int dx;
 		// deplacement sur l'ordonne
 		double dy;
-
-		// calcul de deplacement sur l'abcisse par rapport a la position de
-		// l'hero et la premiere
-		// case du chemin le plus court.
+		
+		
 		dx = (tiles.get(0).getLine()) - (this.ourHero.getLine());
 		// calcul de deplacement sur l'ordonne par rapport a la position de
 		// l'hero et la premiere
