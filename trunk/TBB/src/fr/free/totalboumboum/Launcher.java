@@ -422,11 +422,6 @@ public class Launcher
 	 */						
 	
 	/*
-	 * TODO lorsqu'une bombe est touchée par une flamme, elle bloque la flamme.
-	 * ce qu'on voit passer est la flamme résultant de l'explosion de la bombe.
-	 */
-
-	/*
 	 * TODO dans l'eventMgr de la bombe, quand elle oscille, il faut gérer les sprites
 	 * qui sont en train de la pousser, et non pas en simple contact.
 	 * de plus, il faut que les sprites aient le pouvoir de pousser, sinon ils ne comptent pas.
@@ -1165,7 +1160,9 @@ public class Launcher
 	 *  		- cache mémoire avec les objets déjà chargés et à taille réelle. y a juste à les mettre à l'échelle
 	 *  - instance TBB
 	 *  	- bombe télécommandée tombe en panne : le circuit grille
-	 *  	- mèche à la pénétration >> pas besoin de faire bouger les piques
 	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
+	 *  	- bombe sensible aux chocs : en forme d'oeuf
+	 *  	- bombe en fer, résiste aux autres explosions
+	 *  	- le feu passe-muraille doit être d'une autre couleur et/ou forme
 	 */ 
 }
