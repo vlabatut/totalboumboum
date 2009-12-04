@@ -1,6 +1,6 @@
 package tournament200910.demirciduzokergok;
 
-import tournament200910.demirciduzokergok.v1.DemirciDuzokErgok;
+import tournament200910.demirciduzokergok.v3.DemirciDuzokErgok;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**

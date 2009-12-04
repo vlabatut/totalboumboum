@@ -21,7 +21,7 @@ package tournament200910.aldanmazyenigun;
  * 
  */
 
-import tournament200910.aldanmazyenigun.v1.AldanmazYenigun;
+import tournament200910.aldanmazyenigun.v3.AldanmazYenigun;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**

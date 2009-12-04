@@ -1,6 +1,6 @@
 package tournament200910.dereligeckalan;
 
-import tournament200910.dereligeckalan.v2.DereliGeckalan;
+import tournament200910.dereligeckalan.v3.DereliGeckalan;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**

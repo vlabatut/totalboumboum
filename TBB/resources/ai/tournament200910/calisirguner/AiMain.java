@@ -1,6 +1,6 @@
 package tournament200910.calisirguner;
 
-import tournament200910.calisirguner.v2.CalisirGuner;
+import tournament200910.calisirguner.v3.CalisirGuner;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**
