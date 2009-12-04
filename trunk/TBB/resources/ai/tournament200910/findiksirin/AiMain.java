@@ -1,6 +1,6 @@
 package tournament200910.findiksirin;
 
-import tournament200910.findiksirin.v2.FindikSirin;
+import tournament200910.findiksirin.v3.FindikSirin;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**

@@ -1,6 +1,6 @@
 package tournament200910.danesatir;
 
-import tournament200910.danesatir.v2.DaneSatir;
+import tournament200910.danesatir.v3.DaneSatir;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**

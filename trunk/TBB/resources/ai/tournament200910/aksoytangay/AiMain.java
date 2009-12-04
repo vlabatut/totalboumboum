@@ -1,6 +1,6 @@
 package tournament200910.aksoytangay;
 
-import tournament200910.aksoytangay.v1.AksoyTangay;
+import tournament200910.aksoytangay.v3.AksoyTangay;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**
