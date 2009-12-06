@@ -1,7 +1,5 @@
 package tournament200910.aksoytangay.v3;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
@@ -23,6 +21,7 @@ public class AksoyTangay extends ArtificialIntelligence
 	
 	private Zone zone;
 	
+	@SuppressWarnings("unused")
 	private AiHero ownHero;
 	
 	private AiAction result;
@@ -56,6 +55,7 @@ public class AksoyTangay extends ArtificialIntelligence
 	 *  
 	 *  @throws StopRequestException
 	 */
+	@SuppressWarnings("unused")
 	private boolean isDangerous(AiTile tile) throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();
