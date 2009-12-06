@@ -1,13 +1,7 @@
 package tournament200910.bektasmazilyah.v3;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Vector;
-
-import tournament200809.tirtiltomruk.v2.zone.ZoneDanger;
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
@@ -35,18 +29,22 @@ public class BektasMazilyah extends ArtificialIntelligence
 
 
 	//les adversaires
+	@SuppressWarnings("unused")
 	private Vector<AiHero> others;
 	//la prochaine action que l'IA veut réaliser
-	@SuppressWarnings("unused")
 	private AiAction action;
 	private AiTile targetDeplacement;
+	@SuppressWarnings("unused")
 	private AiTile previousTile;
 	private AiTile currentTile;
+	@SuppressWarnings("unused")
 	private AiTile nextTile;
 	@SuppressWarnings("unused")
 	private LinkedList <AiTile> path;
 	boolean isDanger = false;
+	@SuppressWarnings("unused")
 	private boolean initial=false;
+	@SuppressWarnings("unused")
 	private AiTile matrix[][];
 	private long time;
 	private DangerZone dangerZone;

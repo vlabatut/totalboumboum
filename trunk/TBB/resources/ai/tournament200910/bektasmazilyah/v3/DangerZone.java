@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import tournament200809.erisikpektas.v2.Etat;
 import fr.free.totalboumboum.ai.adapter200910.data.AiItemType;
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
 import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;

@@ -1165,5 +1165,7 @@ public class Launcher
 	 *  	- bombe en fer, résiste aux autres explosions
 	 *  	- le feu passe-muraille doit être d'une autre couleur et/ou forme
 	 *  		- style électrique ?
+	 *  - niveau : possibilité de régler individuellement la puissance de chaque bombe
+	 *  - projet : donner une niveau avec de la vitessse aux étudiants comme example pour la qualification
 	 */ 
 }
