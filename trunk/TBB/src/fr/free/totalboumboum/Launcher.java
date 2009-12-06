@@ -1161,11 +1161,13 @@ public class Launcher
 	 *  		- cache DD avec des objets java sérialisés
 	 *  		- cache mémoire avec les objets déjà chargés et à taille réelle. y a juste à les mettre à l'échelle
 	 *  - instance TBB
+	 *  	- autoriser un burning player à poser une dernière bombe...
 	 *  	- bombe sensible aux chocs : en forme d'oeuf
 	 *  	- bombe en fer, résiste aux autres explosions
 	 *  	- le feu passe-muraille doit être d'une autre couleur et/ou forme
 	 *  		- style électrique ?
 	 *  - niveau : possibilité de régler individuellement la puissance de chaque bombe
 	 *  - projet : donner une niveau avec de la vitessse aux étudiants comme example pour la qualification
+	 *  - inclure un niveau à la xblast : tout le monde démarre à gauche, y a des murs au centre, et des bonus apparents à droite. permet de tester agressivité versus collecte
 	 */ 
 }
