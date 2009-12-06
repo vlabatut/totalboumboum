@@ -15,10 +15,11 @@
 	</settings>
 	<players>
 		<player file="1" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="88" color="GREY" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="77" color="RED" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="sbm1Custom" folder="simple" />
+		<level pack="tournament200809" folder="pasaj" />
 	</levels>
 </gameQuickmatch>
 
