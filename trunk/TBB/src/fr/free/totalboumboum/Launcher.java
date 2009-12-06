@@ -1145,6 +1145,8 @@ public class Launcher
 	 *  	- ballon étoilé >> bombe étoilée
 	 *  	- UEFA >> GSU
 	 *  
+	 *  - charger directement le format AI depuis le jeu permettrait de ne pas avoir à générer 50 images de couleurs différentes
+	 *  
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
@@ -1159,10 +1161,9 @@ public class Launcher
 	 *  		- cache DD avec des objets java sérialisés
 	 *  		- cache mémoire avec les objets déjà chargés et à taille réelle. y a juste à les mettre à l'échelle
 	 *  - instance TBB
-	 *  	- bombe télécommandée tombe en panne : le circuit grille
-	 *  	- mèche + télécommande : bombe normale avec un circuit tout bricolé
 	 *  	- bombe sensible aux chocs : en forme d'oeuf
 	 *  	- bombe en fer, résiste aux autres explosions
 	 *  	- le feu passe-muraille doit être d'une autre couleur et/ou forme
+	 *  		- style électrique ?
 	 */ 
 }

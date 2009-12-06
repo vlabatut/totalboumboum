@@ -23,6 +23,7 @@ public class PathManager {
 	@SuppressWarnings("unused")
 	private AksoyTangay myAI;
 	
+	@SuppressWarnings("unused")
 	private AiZone percepts;
 	
 	public PathManager() {
@@ -74,6 +75,7 @@ public class PathManager {
 	{
 		myAI.checkInterruption();
 		List<AiTile> availibleTiles = new ArrayList<AiTile>();
+		@SuppressWarnings("unused")
 		List<AiTile> tempTiles = new ArrayList<AiTile>();
 		
 		
