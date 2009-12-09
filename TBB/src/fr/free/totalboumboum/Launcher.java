@@ -1165,7 +1165,13 @@ public class Launcher
 	 *  	- bombe sensible aux chocs : en forme d'oeuf
 	 *  	- bombe en fer, résiste aux autres explosions
 	 *  	- le feu passe-muraille doit être d'une autre couleur et/ou forme
-	 *  		- style électrique ?
+	 *  	- feu électrique : tente d'atteindre un adversaire dans la mesure de sa portée (prend des virages et tout)
+	 *  	- feu d'amour : 
+	 *  		- plein de petits coeurs qui contaminent ceux qu'ils touchent. 
+	 *  		- les bombes qu'ils posent sont alors aussi des bombes à coeurs. 
+	 *  		- elles ne tuent pas, elles contaminent. 
+	 *  		- le contaminateur initial est résistant
+	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
 	 *  - niveau : possibilité de régler individuellement la puissance de chaque bombe
 	 *  - projet : donner une niveau avec de la vitessse aux étudiants comme example pour la qualification
 	 *  - inclure un niveau à la xblast : tout le monde démarre à gauche, y a des murs au centre, et des bonus apparents à droite. permet de tester agressivité versus collecte
