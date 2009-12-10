@@ -1147,6 +1147,9 @@ public class Launcher
 	 *  
 	 *  - charger directement le format AI depuis le jeu permettrait de ne pas avoir à générer 50 images de couleurs différentes
 	 *  
+	 *  - définir un système permettant de charger uniquement les sprites nécessaires (zone, items, bombes)
+	 *  	> n'est ce pas incompatible avec la mise en cache ?
+	 *  
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
