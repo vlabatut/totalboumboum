@@ -10,9 +10,9 @@
 	<instance name="nesbomberman2" />
 	<theme name="mountain"/>
 
-	<globalDimension width="17" height="13" />
-	<visibleDimension width="15" height="13" />
-	<visiblePosition leftCol="1" upLine="0" />
+	<globalDimension height="13" width="17" />
+	<visibleDimension height="13" width="15" />
+	<visiblePosition upLine="0" leftCol="1" />
 	<display forceAll="false" maximize="true" />
 		
 </level>

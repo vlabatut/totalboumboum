@@ -10,9 +10,9 @@
 	<instance name="nesbomberman2" />
 	<theme name="battle"/>
 
-	<globalDimension width="9" height="7" />
-	<visibleDimension width="9" height="7" />
-	<visiblePosition leftCol="0" upLine="0" />
+	<globalDimension height="7" width="9" />
+	<visibleDimension height="7" width="9" />
+	<visiblePosition upLine="0" leftCol="0" />
 	<display forceAll="false" maximize="true" />
 		
 </level>
