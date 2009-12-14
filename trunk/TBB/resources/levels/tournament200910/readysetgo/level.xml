@@ -2,17 +2,17 @@
 <level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd" >
 
-	<title value="Carrefour Zone" />
+	<title value="Battle Zone #1" />
 	<author value="Vincent Labatut" />
-	<source value="Original" />
+	<source value="Super Bomberman 1" />
 	<preview file="preview.jpg" />
 
 	<instance name="superbomberman1" />
-	<theme name="tournament2"/>
+	<theme name="normal"/>
 
-	<globalDimension height="11" width="11" />
-	<visibleDimension height="11" width="11" />
-	<visiblePosition upLine="0" leftCol="0" />
+	<globalDimension height="13" width="17" />
+	<visibleDimension height="13" width="15" />
+	<visiblePosition upLine="0" leftCol="1" />
 	<display forceAll="false" maximize="true" />
-	
+		
 </level>
