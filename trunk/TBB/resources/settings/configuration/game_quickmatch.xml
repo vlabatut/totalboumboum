@@ -20,7 +20,7 @@
 		<player file="1" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
-		<level pack="tournament200910" folder="readysetgo" />
+		<level pack="tournament200910" folder="horizontal" />
 	</levels>
 </gameQuickmatch>
 

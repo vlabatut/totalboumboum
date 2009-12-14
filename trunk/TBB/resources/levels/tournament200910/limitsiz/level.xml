@@ -10,9 +10,9 @@
 	<instance name="superbomberman1" />
 	<theme name="normal"/>
 
-	<globalDimension height="11" width="13" />
-	<visibleDimension height="7" width="13" />
-	<visiblePosition upLine="2" leftCol="0" />
+	<globalDimension height="6" width="8" />
+	<visibleDimension height="6" width="8" />
+	<visiblePosition upLine="0" leftCol="0" />
 	<display forceAll="false" maximize="true" />
 	
 </level>
