@@ -33,14 +33,26 @@ import fr.free.totalboumboum.engine.container.tile.VariableTile;
 public class Zone implements Serializable
 {	private static final long serialVersionUID = 1L;
 
-	private int globalWidth;
-	private int globalHeight;
 	
 	public Zone(int globalWidth, int globalHeight)
 	{	this.globalWidth = globalWidth;
 		this.globalHeight = globalHeight;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// DIMENSIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int globalWidth;
+	private int globalHeight;
+	
+	public int getGlobalWidth()
+	{	return globalWidth;
+	}
+
+	public int getGlobalHeight()
+	{	return globalHeight;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// VARIABLES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -67,6 +79,13 @@ public class Zone implements Serializable
 	/////////////////////////////////////////////////////////////////
 	private ArrayList<String[][]> matrices;
 	
+	/**
+	 * 0: floors
+	 * 1: blocks
+	 * 2: items
+	 * 3: bombs
+	 * @return
+	 */
 	public ArrayList<String[][]> getMatrices()
 	{	return matrices;		
 	}
