@@ -23,20 +23,47 @@ package fr.free.totalboumboum.statistics;
 
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.statistics.general.OverallStatsSaver;
 import fr.free.totalboumboum.statistics.glicko2.Glicko2Saver;
+import fr.free.totalboumboum.statistics.overall.OverallStatsLoader;
+import fr.free.totalboumboum.statistics.overall.OverallStatsSaver;
+import fr.free.totalboumboum.statistics.overall.PlayerStats;
 
 public class InitStatistics
 {	
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	//if(false)
-			Glicko2Saver.init();
-		//else
-			OverallStatsSaver.init(); 
+	{	 //initAllStats();
+		reinitOverallStatsForPlayer(0);
+	}
+	
+	/**
+	 * initializes both glicko-2 rankings and overall stats, for all profiles
+	 */
+	public static void initAllStats() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	Glicko2Saver.init();
+		OverallStatsSaver.init();		
+	}
+	
+	/**
+	 * reinit overall stats only for the specified profile.
+	 * does not change the glicko-2 ranking 
+	 * (which can be manually reinitialized from the game GUI anyway)
+	 * @param id	the player to reinitialize
+	 */
+	public static void reinitOverallStatsForPlayer(int id) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
+	{	// load
+		HashMap<Integer,PlayerStats> playersStats = OverallStatsLoader.loadStatistics();
+
+		// change
+		PlayerStats playerStat = playersStats.get(id);
+		playerStat.reset();
+		
+		// save
+		OverallStatsSaver.saveStatistics(playersStats);
 	}
 }

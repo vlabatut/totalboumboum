@@ -144,7 +144,7 @@ public class ZoneLoader
 		if(elementsT.size()>0)
 		{	String name = elementsT.get(0).getAttribute(XmlTools.NAME).getValue();
 			String range = elementsT.get(0).getAttribute(XmlTools.RANGE).getValue();
-			result[3] = name+":"+range;
+			result[3] = name+Theme.PROPERTY_SEPARATOR+range;
 		}
 
 		return result;

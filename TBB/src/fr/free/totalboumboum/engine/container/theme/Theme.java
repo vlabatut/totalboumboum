@@ -34,7 +34,8 @@ import fr.free.totalboumboum.engine.content.sprite.floor.FloorFactory;
 public class Theme
 {	
 	public static final String DEFAULT_GROUP = "default";
-	public static final String GROUP_SEPARATOR = ".";
+	public static final String GROUP_SEPARATOR = "-";
+	public static final String PROPERTY_SEPARATOR = ":";
 
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

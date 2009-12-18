@@ -51,9 +51,9 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.content.EmptyContentP
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.statistics.GameStatistics;
-import fr.free.totalboumboum.statistics.general.PlayerStats;
 import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
+import fr.free.totalboumboum.statistics.overall.PlayerStats;
 
 public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;

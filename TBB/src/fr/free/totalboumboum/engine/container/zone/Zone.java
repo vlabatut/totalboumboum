@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.container.tile.ValueTile;
@@ -56,7 +57,7 @@ public class Zone implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// VARIABLES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,VariableTile> variableTiles;
+	private HashMap<String,VariableTile> variableTiles = new HashMap<String, VariableTile>();
 	
 	public void setVariableTiles(HashMap<String,VariableTile> variables)
 	{	this.variableTiles = variables;		
@@ -72,7 +73,11 @@ public class Zone implements Serializable
 	
 	public void addTile(ZoneTile tile)
 	{	tiles.add(tile);
-	}	
+	}
+	
+	public List<ZoneTile> getTiles()
+	{	return tiles;
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ZONE			/////////////////////////////////////////////
