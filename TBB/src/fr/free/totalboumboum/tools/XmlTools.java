@@ -335,6 +335,7 @@ public class XmlTools
 	public static final String YINTERACTION = "yInteraction";
 	public static final String YPOSITION = "yPosition";
 	public static final String YSHIFT = "yShift";
+	public static final String ZONE = "zone";
 	public static final String ZSHIFT = "zShift";
 	public static final String ZPOSITION = "zPosition";
 
