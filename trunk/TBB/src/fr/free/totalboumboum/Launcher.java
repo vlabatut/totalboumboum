@@ -858,6 +858,7 @@ public class Launcher
 	 * + beta.015
 	 * - Moteur :
 	 * 		- correction d'un bug dans SpritePreviewLoader, lors du chargement de sprites sans colormap (de type Prognathe)
+	 * 		- possibilité d'enregistrer automatiquement un objet Zone, via une méthode s'appelant hors du jeu (pour faciliter la cration de niveaux)
 	 * - GUI :
 	 * 		- correction d'un bug concernant les proportions des panels dans l'écran de présentation d'une manche
 	 * 		- correction d'un bug concernant l'édition de profil en général
@@ -869,6 +870,9 @@ public class Launcher
 	 * - API IA :
 	 * 		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
+	 * - stats :
+	 * 		- classe spécifique pour réinitialiser toutes les stats en dehors du jeu
+	 * 		- méthode pour réinitialiser les stats générales d'un joueur en particulier (appelée hors du jeu)
 	 * - Divers :
 	 * 		- correction d'un bug dans les scripts de compilation (classes non référencées dans les adaptateurs d'IA)
 	 * 		- mise à jour du perso Prognathe

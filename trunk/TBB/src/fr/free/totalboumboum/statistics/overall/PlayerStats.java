@@ -33,8 +33,18 @@ public class PlayerStats implements Serializable
 
 	public PlayerStats(int playerID)
 	{	this.playerId = playerID;
+		reset();
+	}
+	
+	public void reset()
+	{	// scores
 		for(Score score: Score.values())
 			setScore(score,0);
+		previousRank = -1;
+		roundsPlayed = 0;
+		roundsWon = 0;
+		roundsDrawn = 0;
+		roundsLost = 0;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -49,7 +59,7 @@ public class PlayerStats implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PREVIOUS RANK	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int previousRank = -1;
+	private int previousRank;
 
 	public int getPreviousRank()
 	{	return previousRank;
@@ -62,7 +72,7 @@ public class PlayerStats implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ROUNDS PLAYED	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private long roundsPlayed = 0;
+	private long roundsPlayed;
 
 	public long getRoundsPlayed()
 	{	return roundsPlayed;
@@ -75,7 +85,7 @@ public class PlayerStats implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ROUNDS WON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private long roundsWon = 0;
+	private long roundsWon;
 
 	public long getRoundsWon()
 	{	return roundsWon;
@@ -88,7 +98,7 @@ public class PlayerStats implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ROUNDS DRAWN		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private long roundsDrawn = 0;
+	private long roundsDrawn;
 
 	public long getRoundsDrawn()
 	{	return roundsDrawn;
@@ -101,7 +111,7 @@ public class PlayerStats implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ROUNDS LOST		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private long roundsLost = 0;
+	private long roundsLost;
 
 	public long getRoundsLost()
 	{	return roundsLost;
@@ -132,6 +142,7 @@ public class PlayerStats implements Serializable
 	public String toString()
 	{	String result = "";
 		// rounds
+		result = result+" prevrk: "+previousRank;
 		result = result+" played: "+roundsPlayed;
 		result = result+" won: "+roundsWon;
 		result = result+" drawn: "+roundsDrawn;

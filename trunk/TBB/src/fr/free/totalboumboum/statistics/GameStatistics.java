@@ -35,14 +35,14 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.statistics.detailed.Score;
 import fr.free.totalboumboum.statistics.detailed.StatisticRound;
-import fr.free.totalboumboum.statistics.general.OverallStatsLoader;
-import fr.free.totalboumboum.statistics.general.OverallStatsSaver;
-import fr.free.totalboumboum.statistics.general.PlayerStats;
 import fr.free.totalboumboum.statistics.glicko2.Glicko2Loader;
 import fr.free.totalboumboum.statistics.glicko2.Glicko2Saver;
 import fr.free.totalboumboum.statistics.glicko2.jrs.GameResults;
 import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
+import fr.free.totalboumboum.statistics.overall.OverallStatsLoader;
+import fr.free.totalboumboum.statistics.overall.OverallStatsSaver;
+import fr.free.totalboumboum.statistics.overall.PlayerStats;
 import fr.free.totalboumboum.tools.CalculusTools;
 
 public class GameStatistics

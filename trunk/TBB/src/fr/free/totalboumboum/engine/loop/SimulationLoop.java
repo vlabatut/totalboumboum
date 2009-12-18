@@ -32,9 +32,9 @@ import fr.free.totalboumboum.statistics.GameStatistics;
 import fr.free.totalboumboum.statistics.detailed.Score;
 import fr.free.totalboumboum.statistics.detailed.StatisticAction;
 import fr.free.totalboumboum.statistics.detailed.StatisticEvent;
-import fr.free.totalboumboum.statistics.general.PlayerStats;
 import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
+import fr.free.totalboumboum.statistics.overall.PlayerStats;
 
 public class SimulationLoop extends Loop
 {	private static final long serialVersionUID = 1L;

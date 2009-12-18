@@ -301,7 +301,7 @@ public class HollowLevel implements Serializable
 					level.insertSpriteTile(item);				
 				}
 				if(mBombs[line][col]!=null)
-				{	String temp[] = mBombs[line][col].split(":");
+				{	String temp[] = mBombs[line][col].split(Theme.PROPERTY_SEPARATOR);
 					int range = Integer.parseInt(temp[temp.length-1]);
 					String name = "";
 					for(int i=0;i<temp.length-1;i++)
