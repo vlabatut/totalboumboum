@@ -23,6 +23,7 @@ package fr.free.totalboumboum.engine.container.level;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -93,18 +94,20 @@ public class PlayersSaver
     
 	private static Element saveLocationElement(PlayerLocation location)
 	{	Element result = new Element(XmlTools.LOCATION);
-		
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumIntegerDigits(2);
+			
 		// number of players
 		int player = location.getNumber();
-		result.setAttribute(XmlTools.PLAYER,Integer.toString(player));
+		result.setAttribute(XmlTools.PLAYER,nf.format(player));
 		
 		// line
 		int line = location.getLine();
-		result.setAttribute(XmlTools.LINE,Integer.toString(line));
+		result.setAttribute(XmlTools.LINE,nf.format(line));
 
 		// column
 		int col = location.getCol();
-		result.setAttribute(XmlTools.COL,Integer.toString(col));
+		result.setAttribute(XmlTools.COL,nf.format(col));
 	
 		return result;
 	}

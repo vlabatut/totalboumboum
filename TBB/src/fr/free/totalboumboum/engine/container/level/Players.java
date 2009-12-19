@@ -34,8 +34,8 @@ public class Players implements Serializable
 	/////////////////////////////////////////////////////////////////
 	private HashMap<Integer, PlayerLocation[]> locations = new HashMap<Integer, PlayerLocation[]>();
 
-	public void addLocation(Integer key, PlayerLocation[] value)
-	{	locations.put(key, value);		
+	public void addLocation(PlayerLocation[] loc)
+	{	locations.put(loc.length,loc);		
 	}
 
 	public HashMap<Integer, PlayerLocation[]> getLocations()
