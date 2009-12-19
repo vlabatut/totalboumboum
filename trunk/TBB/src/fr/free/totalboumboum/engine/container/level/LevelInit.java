@@ -52,6 +52,34 @@ public class LevelInit
 		folderFile.mkdirs();
 		
 		// level file
+		LevelPreview levelPreview = new LevelPreview();
+		levelPreview.setAuthor("Vincent Labatut");
+		levelPreview.setForceAll(true);
+		levelPreview.setGlobalHeight(height);
+		levelPreview.setGlobalWidth(width);
+		levelPreview.setInstanceName("superbomberman1");
+		levelPreview.setMaximize(true);
+		levelPreview.setPreviewFile("preview.jpg");
+		levelPreview.setSource("original");
+		levelPreview.setThemeName("normal");
+		levelPreview.setTitle("New level");
+		int visibleHeight = height;
+		if(border>0)
+			visibleHeight = height - 2*(border-1);
+		levelPreview.setVisibleHeight(visibleHeight);
+		int visibleWidth = width;
+		if(border>0)
+			visibleWidth = width - 2*(border-1);
+		levelPreview.setVisibleWidth(visibleWidth);
+		int visiblePositionLeftCol = 0;
+		if(border>0)
+			visiblePositionLeftCol = border - 1;
+		levelPreview.setVisiblePositionLeftCol(visiblePositionLeftCol);
+		int visiblePositionUpLine = 0;
+		if(border>0)
+			visiblePositionUpLine = border - 1;
+		levelPreview.setVisiblePositionUpLine(visiblePositionUpLine);
+		LevelPreviewSaver.saveLevelPreview(folder,levelPreview);
 		
 		// fill zone
 		Zone zone = new Zone(width,height);
@@ -70,6 +98,9 @@ public class LevelInit
 				else if((col-border)%2==1 && (line-border)%2==1)
 					// put a block if it fits the regular pattern
 					tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");				
+				else
+					// else put a softwall
+					tile.setBlock(Theme.DEFAULT_GROUP+Theme.GROUP_SEPARATOR+"softwall");
 				// add to zone	
 				zone.addTile(tile);
 			}
