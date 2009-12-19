@@ -112,7 +112,7 @@ public class PlayersLoader
 			locations[index] = pl;
 			index++;
 		}
-		result.addLocation(value,locations);
+		result.addLocation(locations);
     }
     	
     private static void loadLocationElement(Element root, PlayerLocation result)

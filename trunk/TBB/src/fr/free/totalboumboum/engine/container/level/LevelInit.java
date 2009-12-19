@@ -32,6 +32,7 @@ import fr.free.totalboumboum.engine.container.theme.Theme;
 import fr.free.totalboumboum.engine.container.zone.Zone;
 import fr.free.totalboumboum.engine.container.zone.ZoneSaver;
 import fr.free.totalboumboum.engine.container.zone.ZoneTile;
+import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class LevelInit
@@ -77,6 +78,45 @@ public class LevelInit
 		ZoneSaver.saveZone(folder,zone);
 		
 		// players file
+		Players players = new Players();
+		// locations
+		for(int i=1;i<=4;i++)
+		{	PlayerLocation[] loc = new PlayerLocation[i];
+			for(int j=0;j<i;j++)
+			{	int col = 0;
+				int line = 0;
+				switch(j)
+				{	case 0: 
+						col = border + 1;
+						line = border + 1;
+						break;
+					case 1: 
+						col = width - border - 1;
+						line = border + 1;
+						break;
+					case 2: 
+						col = border + 1;
+						line = height - border - 1;
+						break;
+					case 3: 
+						col = width - border - 1;
+						line = height - border - 1;
+						break;
+				}
+				loc[j] = new PlayerLocation();
+				loc[j].setLine(line);
+				loc[j].setCol(col);
+				loc[j].setNumber(j);
+			}
+			players.addLocation(loc);
+		}
+		// items
+		for(int i=0;i<3;i++)
+			players.addInitialItem("extrabomb");
+		for(int i=0;i<3;i++)
+			players.addInitialItem("extraflame");
+		// save players file
+		PlayersSaver.savePlayers(folder,players);
 		
 		// create image
 	}
