@@ -859,6 +859,7 @@ public class Launcher
 	 * - Moteur :
 	 * 		- correction d'un bug dans SpritePreviewLoader, lors du chargement de sprites sans colormap (de type Prognathe)
 	 * 		- possibilité d'enregistrer automatiquement un objet Zone, via une méthode s'appelant hors du jeu (pour faciliter la cration de niveaux)
+	 * 		- pareil avec les fichiers level et players, ce qui permet de définir automatiquement des niveaux (basiques, à compléter manuellement)
 	 * - GUI :
 	 * 		- correction d'un bug concernant les proportions des panels dans l'écran de présentation d'une manche
 	 * 		- correction d'un bug concernant l'édition de profil en général
