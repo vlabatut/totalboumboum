@@ -38,8 +38,6 @@ public class LevelPreview
 	private String author;
 	private String title;
 	private String source;
-	private int visibleHeight;
-	private int visibleWidth;
 	
 	public String getInstanceName()
 	{	return instanceName;
@@ -75,6 +73,31 @@ public class LevelPreview
 	public void setSource(String source)
 	{	this.source = source;
 	}
+			
+	/////////////////////////////////////////////////////////////////
+	// DIMENSIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int globalHeight;
+	private int globalWidth;
+	private int visibleHeight;
+	private int visibleWidth;
+	private int visiblePositionUpLine;
+	private int visiblePositionLeftCol;
+	private boolean forceAll;
+	private boolean maximize;
+	
+	public int getGlobalHeight()
+	{	return globalHeight;
+	}
+	public void setGlobalHeight(int globalHeight)
+	{	this.globalHeight = globalHeight;
+	}
+	public int getGlobalWidth()
+	{	return globalWidth;
+	}
+	public void setGlobalWidth(int globalWidth)
+	{	this.globalWidth = globalWidth;
+	}
 	
 	public int getVisibleHeight()
 	{	return visibleHeight;
@@ -82,7 +105,6 @@ public class LevelPreview
 	public void setVisibleHeight(int visibleHeight)
 	{	this.visibleHeight = visibleHeight;
 	}
-	
 	public int getVisibleWidth()
 	{	return visibleWidth;
 	}
@@ -90,16 +112,52 @@ public class LevelPreview
 	{	this.visibleWidth = visibleWidth;
 	}
 	
+	public int getVisiblePositionUpLine()
+	{	return visiblePositionUpLine;
+	}
+	public void setVisiblePositionUpLine(int visiblePositionUpLine)
+	{	this.visiblePositionUpLine = visiblePositionUpLine;
+	}
+	public int getVisiblePositionLeftCol()
+	{	return visiblePositionLeftCol;
+	}
+	public void setVisiblePositionLeftCol(int visiblePositionLeftCol)
+	{	this.visiblePositionLeftCol = visiblePositionLeftCol;
+	}
+
+	public boolean getForceAll()
+	{	return forceAll;
+	}
+	public void setForceAll(boolean forceAll)
+	{	this.forceAll = forceAll;
+	}
+	public boolean getMaximize()
+	{	return maximize;
+	}
+	public void setMaximize(boolean maximize)
+	{	this.maximize = maximize;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// VISUAL PREVIEW	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private BufferedImage visualPreview = null;
+	private String previewFile = null;
 	
 	public BufferedImage getVisualPreview()
 	{	return visualPreview;
 	}
+	
 	public void setVisualPreview(BufferedImage visualPreview)
 	{	this.visualPreview = visualPreview;
+	}
+	
+	public String getPreviewFile()
+	{	return previewFile;
+	}
+	
+	public void setPreviewFile(String previewFile)
+	{	this.previewFile = previewFile;
 	}
 	
 	/////////////////////////////////////////////////////////////////

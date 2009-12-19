@@ -96,15 +96,18 @@ public class LevelPreviewLoader
    		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = FileTools.getLevelsPath()+File.separator+pack+File.separator+folder;
 		File schemaFile,dataFile;
+		
 		// opening
 		dataFile = new File(individualFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		
 		// loading
 		LevelPreview result = new LevelPreview();
 		result.setPack(pack);
 		result.setFolder(folder);
 		loadLevelElement(individualFolder,root,result);
+		
 		return result;
 	}
    
@@ -192,9 +195,13 @@ public class LevelPreviewLoader
     }
 	
 	private static void loadPreviewElement(Element root, String folder, LevelPreview result) throws IOException
-	{	String filePath = folder+File.separator+root.getAttribute(XmlTools.FILE).getValue().trim();
+	{	// name
+		String filename = root.getAttribute(XmlTools.FILE).getValue().trim();
+    	result.setPreviewFile(filename);
+		// image
+    	String filePath = folder+File.separator+filename;
 		BufferedImage image = ImageTools.loadImage(filePath,null);
-    	result.setVisualPreview(image);				
+    	result.setVisualPreview(image);
 	}
 	
 	private static void loadInstanceElement(Element root, LevelPreview result)
