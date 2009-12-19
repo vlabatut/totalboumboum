@@ -652,17 +652,8 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/*
-	 * TODO dans le thème belt, le small pipe laisse passer les flames 
-	 * (sans être détruit et sans protéger ce qui est sous lui)
-	 */
-	
-	/*
 	 * TODO rajouter des niveaux inédits en utilisant au maximum les parties inutilisées
 	 * des autres thèmes
-	 */
-	
-	/*
-	 * TODO rajouter un niveau immeeeeeense (comme dans le gif animé sur le blog)
 	 */
 	
 	/*
@@ -1180,8 +1171,6 @@ public class Launcher
 	 *  		- elles ne tuent pas, elles contaminent. 
 	 *  		- le contaminateur initial est résistant
 	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
-	 *  - niveau : possibilité de régler individuellement la puissance de chaque bombe
-	 *  - projet : donner une niveau avec de la vitessse aux étudiants comme example pour la qualification
-	 *  - inclure un niveau à la xblast : tout le monde démarre à gauche, y a des murs au centre, et des bonus apparents à droite. permet de tester agressivité versus collecte
+	 *  - projet : donner une niveau avec de la vitesse aux étudiants comme example pour la qualification
 	 */ 
 }
