@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.container.zone;
+package fr.free.totalboumboum.engine.container.level;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.container.theme.Theme;
+import fr.free.totalboumboum.engine.container.zone.Zone;
+import fr.free.totalboumboum.engine.container.zone.ZoneSaver;
+import fr.free.totalboumboum.engine.container.zone.ZoneTile;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class ZoneInit {
