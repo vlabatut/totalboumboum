@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.container.level;
  */
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import fr.free.totalboumboum.engine.player.PlayerLocation;
@@ -30,20 +29,34 @@ import fr.free.totalboumboum.engine.player.PlayerLocation;
 public class Players implements Serializable
 {	private static final long serialVersionUID = 1L;
 
+	/////////////////////////////////////////////////////////////////
+	// LOCATIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private HashMap<Integer, PlayerLocation[]> locations = new HashMap<Integer, PlayerLocation[]>();
-	private ArrayList<String> initialItems = new ArrayList<String>();
-		
+
 	public void addLocation(Integer key, PlayerLocation[] value)
 	{	locations.put(key, value);		
 	}
+
 	public HashMap<Integer, PlayerLocation[]> getLocations()
 	{	return locations;	
 	}
 
-	public void addInitialItem(String value)
-	{	initialItems.add(value);		
+	/////////////////////////////////////////////////////////////////
+	// INITIAL ITEMS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<String,Integer> initialItems = new HashMap<String,Integer>();
+		
+	public void addInitialItem(String item)
+	{	Integer nbr = initialItems.get(item);
+		if(nbr==null)
+			nbr = 1;
+		else
+			nbr++;
+		initialItems.put(item,nbr);		
 	}
-	public ArrayList<String> getInitialItems()
+
+	public HashMap<String,Integer> getInitialItems()
 	{	return initialItems;	
 	}
 }

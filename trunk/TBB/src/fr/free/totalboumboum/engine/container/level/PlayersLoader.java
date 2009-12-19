@@ -57,10 +57,12 @@ public class PlayersLoader
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folder;
 		File schemaFile,dataFile;
+		
 		// opening
 		dataFile = new File(individualFolder+File.separator+FileTools.FILE_PLAYERS+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PLAYERS+FileTools.EXTENSION_SCHEMA);
 		root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		
 		// reading
 		Players result = loadPlayersElement(root);
 		return result;
@@ -70,13 +72,15 @@ public class PlayersLoader
     {	// init
     	Players result = new Players();
     	Element element;
+    	
     	// locations
     	element = root.getChild(XmlTools.LOCATIONS);
     	loadLocationsElement(element,result);
+    	
     	// items
     	element = root.getChild(XmlTools.ITEMS);
     	loadItemsElement(element,result);
-    	// result
+
     	return result;
     }
     
@@ -92,9 +96,12 @@ public class PlayersLoader
     
     @SuppressWarnings("unchecked")
     private static void loadCaseElement(Element root, Players result)
-    {	String valStr = root.getAttribute(XmlTools.PLAYERS).getValue().trim();
+    {	// player count
+    	String valStr = root.getAttribute(XmlTools.PLAYERS).getValue().trim();
 		int value = Integer.valueOf(valStr);
 		PlayerLocation[] locations = new PlayerLocation[value];
+		
+		// location
 		List<Element> elements = root.getChildren(XmlTools.LOCATION);
 		Iterator<Element> i = elements.iterator();
 		int index = 0;
@@ -109,12 +116,17 @@ public class PlayersLoader
     }
     	
     private static void loadLocationElement(Element root, PlayerLocation result)
-    {	String str = root.getAttribute(XmlTools.PLAYER).getValue().trim();
+    {	// player number
+    	String str = root.getAttribute(XmlTools.PLAYER).getValue().trim();
 		int number = Integer.valueOf(str);
 		result.setNumber(number);
+		
+		// column
 		str = root.getAttribute(XmlTools.COL).getValue().trim();
 		int col = Integer.valueOf(str);
 		result.setCol(col);
+		
+		// line
 		str = root.getAttribute(XmlTools.LINE).getValue().trim();
 		int line = Integer.valueOf(str);
 		result.setLine(line);
@@ -131,11 +143,15 @@ public class PlayersLoader
     }
     
     private static void loadItemElement(Element root, Players result)
-    {	String str = root.getAttribute(XmlTools.NAME).getValue().trim();
+    {	// name
+    	String str = root.getAttribute(XmlTools.NAME).getValue().trim();
+    	
+    	// number
     	String nbrStr = root.getAttribute(XmlTools.NUMBER).getValue().trim();
     	int number = Integer.valueOf(nbrStr);
+    	
+    	// create items
     	for(int i=0;i<number;i++)
     		result.addInitialItem(str);
     }
-    
 }

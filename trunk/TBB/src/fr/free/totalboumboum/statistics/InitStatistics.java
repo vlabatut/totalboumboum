@@ -21,7 +21,6 @@ package fr.free.totalboumboum.statistics;
  * 
  */
 
-
 import java.io.IOException;
 import java.util.HashMap;
 
