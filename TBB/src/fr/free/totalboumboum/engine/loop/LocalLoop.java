@@ -43,9 +43,11 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Map.Entry;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -134,7 +136,7 @@ public class LocalLoop extends Loop
 			for(int i=0;i<initialPositions.length;i++)
 				initialPositions[i] = loc.get(i);
 		}
-		ArrayList<String> items = plyrs.getInitialItems();
+		HashMap<String,Integer> items = plyrs.getInitialItems();
 		Itemset itemset = level.getItemset();
 		Iterator<Profile> i = profiles.iterator();
 		int j=0;
@@ -154,17 +156,19 @@ public class LocalLoop extends Loop
 			Hero hero = (Hero)player.getSprite();
 //			level.addHero(hero,pl.getLine(),pl.getCol());
 			// initial items
-			Iterator<String> it = items.iterator();
-			while(it.hasNext())
-			{	// create item
-				String name = it.next();
-				Item item = itemset.makeItem(name,tile);
-				// add item
-				hero.addInitialItem(item);
-				// hide item
-				SpecificAction action = new SpecificGather(hero,item);
-				ActionEvent evt = new ActionEvent(action);
-				item.processEvent(evt);				
+			for(Entry<String,Integer> entry: items.entrySet())
+			{	String name = entry.getKey();
+				int number = entry.getValue();
+				for(int k=0;k<number;k++)
+				{	// create item
+					Item item = itemset.makeItem(name,tile);
+					// add item
+					hero.addInitialItem(item);
+					// hide item
+					SpecificAction action = new SpecificGather(hero,item);
+					ActionEvent evt = new ActionEvent(action);
+					item.processEvent(evt);
+				}
 			}
 			// ai
 			player.initAi();
