@@ -1175,5 +1175,6 @@ public class Launcher
 	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
 	 *  - projet : donner une niveau avec de la vitesse aux étudiants comme example pour la qualification
 	 *  - IA : option permettant de logger les exceptions
+	 *  - mettre les stats de log dans un des fichier de config
 	 */ 
 }

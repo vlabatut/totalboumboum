@@ -146,8 +146,13 @@
 					</group>
 					<group name="HideAllAis">
 						<text name="Title" value="Simulation" tooltip="Simule les manches auxquelles seules des IA participent (la manche n'est pas jouée en direct)" />
-						<text name="Disabled" value="Disabled" tooltip="Simulation désactivée" />
-						<text name="Enabled" value="Enabled" tooltip="Simulation activée" />
+						<text name="Disabled" value="Désactivée" tooltip="Simulation désactivée" />
+						<text name="Enabled" value="Activée" tooltip="Simulation activée" />
+					</group>
+					<group name="DisplayExceptions">
+						<text name="Title" value="Afficher les exceptions" tooltip="Affiche dans la console les exceptions provoquées par les IA au cours de la partie" />
+						<text name="Disabled" value="Désactivé" tooltip="Affichage des exceptions désactivé" />
+						<text name="Enabled" value="Activé" tooltip="Affichage des exceptions activé" />
 					</group>
 				</group>
 			</group>
