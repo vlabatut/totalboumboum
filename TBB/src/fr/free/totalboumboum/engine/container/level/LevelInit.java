@@ -54,7 +54,7 @@ public class LevelInit
 		// level file
 		LevelPreview levelPreview = new LevelPreview();
 		levelPreview.setAuthor("Vincent Labatut");
-		levelPreview.setForceAll(true);
+		levelPreview.setForceAll(false);
 		levelPreview.setGlobalHeight(height);
 		levelPreview.setGlobalWidth(width);
 		levelPreview.setInstanceName("superbomberman1");

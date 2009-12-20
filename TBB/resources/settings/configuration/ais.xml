@@ -3,5 +3,6 @@
 	<ups value="50" />
 	<autoAdvance value="true" delay="2000" />
 	<hideAllAis value="false" />
+	<displayExceptions value="false" />
 </ais>
 

@@ -149,6 +149,11 @@
 						<text name="Disabled" value="Disabled" tooltip="Simule all-AIs is disabled" />
 						<text name="Enabled" value="Enabled" tooltip="Simule all-AIs is enabled" />
 					</group>
+					<group name="DisplayExceptions">
+						<text name="Title" value="Display exceptions" tooltip="Display on the console ingame exceptions caused by AIs" />
+						<text name="Disabled" value="Disabled" tooltip="AIs-caused exceptions display is disabled" />
+						<text name="Enabled" value="Enabled" tooltip="AIs-caused exceptions display is enabled" />
+					</group>
 				</group>
 			</group>
 			
