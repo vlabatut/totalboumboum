@@ -47,16 +47,23 @@ public class AisConfigurationLoader
 
 	private static void loadAisElement(Element root, AisConfiguration result)
 	{	Element element; 
+	
 		// ups
 		element = root.getChild(XmlTools.UPS);
 		loadUpsElement(element,result);
+		
 		// auto advance
 		element = root.getChild(XmlTools.AUTO_ADVANCE);
 		loadAutoAdvanceElement(element,result);
+		
 		// hide all-ais rounds
 		element = root.getChild(XmlTools.HIDE_ALLAIS);
 		loadHideAllAisElement(element,result);
-	}
+
+		// display exceptions onscreen during game
+		element = root.getChild(XmlTools.DISPLAY_EXCEPTIONS);
+		loadDisplayExceptionsElement(element,result);
+}
 	
 	private static void loadUpsElement(Element root, AisConfiguration result)
 	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
@@ -81,5 +88,11 @@ public class AisConfigurationLoader
 	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean hideAllAis = Boolean.valueOf(value);
 		result.setHideAllAis(hideAllAis);
+	}
+
+	private static void loadDisplayExceptionsElement(Element root, AisConfiguration result)
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
+		boolean displayExceptions = Boolean.valueOf(value);
+		result.setDisplayExceptions(displayExceptions);
 	}
 }

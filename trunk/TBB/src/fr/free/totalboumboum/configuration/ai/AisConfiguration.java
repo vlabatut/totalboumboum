@@ -31,8 +31,11 @@ public class AisConfiguration
 		
 		result.setAutoAdvance(autoAdvance);
 		result.setAutoAdvanceDelay(autoAdvanceDelay);
+		
 		result.setHideAllAis(hideAllAis);
 		
+		result.setDisplayExceptions(displayExceptions);
+
 		return result;
 	}
 
@@ -58,14 +61,12 @@ public class AisConfiguration
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// GAME				/////////////////////////////////////////////
+	// AUTO ADVANCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** during a tournament/match, automatically advances to the next match/round */
 	private boolean autoAdvance = false;
 	/** delay (in ms) before the auto system advances to the next round */
 	private long autoAdvanceDelay = 1000;
-	/** during a tournament/match, only show rounds with at least a human player */
-	private boolean hideAllAis = false;
 	
 	public long getAutoAdvanceDelay()
 	{	return autoAdvanceDelay;
@@ -83,11 +84,31 @@ public class AisConfiguration
 	{	this.autoAdvance = autoAdvance;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// GAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** during a tournament/match, only show rounds with at least a human player */
+	private boolean hideAllAis = false;
+	
 	public boolean getHideAllAis()
 	{	return hideAllAis;
 	}
 
 	public void setHideAllAis(boolean hideAllAis)
 	{	this.hideAllAis = hideAllAis;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LOG				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** show exceptions onscren during game */
+	private boolean displayExceptions = true;
+	
+	public boolean getDisplayExceptions()
+	{	return displayExceptions;
+	}
+
+	public void setDisplayExceptions(boolean displayExceptions)
+	{	this.displayExceptions = displayExceptions;
 	}
 }

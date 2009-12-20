@@ -34,6 +34,7 @@ import java.util.concurrent.ThreadFactory;
 
 
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -150,10 +151,12 @@ public abstract class AbstractAiManager<V>
     				updateOutput();
 				}
     			catch (InterruptedException e)
-    			{	e.printStackTrace();
+    			{	if(Configuration.getAisConfiguration().getDisplayExceptions())
+    					e.printStackTrace();
 				}
     			catch (ExecutionException e)
-    			{	e.printStackTrace();
+    			{	if(Configuration.getAisConfiguration().getDisplayExceptions())
+    					e.printStackTrace();
 				}    			
     			// on lance le calcul pour le prochain coup
     			makeCall();

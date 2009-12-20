@@ -91,6 +91,7 @@ public class GuiKeys
 	public static final String DIMENSION = "Dimension";
 	public static final String DISABLED = "Disabled";
 	public static final String DISCRETIZE = "Discretize";
+	public static final String DISPLAY = "Display";
 	public static final String DO = "Do";
 	public static final String DONE = "Done";
 	public static final String DOWN = "Down";
@@ -100,6 +101,7 @@ public class GuiKeys
 	public static final String ENABLED = "Enabled";
 	public static final String ENTER = "Enter";
 	public static final String EVOLUTION = "Evolution";
+	public static final String EXCEPTIONS = "Exceptions";
 	public static final String EXIT = "Exit";
 	public static final String FALSE = "False";
 	public static final String FILE = "File";
@@ -419,6 +421,11 @@ public class GuiKeys
 				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_TITLE = MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS+TITLE;
 				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_DISABLED = MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS+DISABLED;
 				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_ENABLED = MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS+ENABLED;
+				/* DISPLAY EXCEPTIONS */
+				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS = MENU_OPTIONS_AIS_LINE+DISPLAY+EXCEPTIONS;
+				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS_TITLE = MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS+TITLE;
+				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS_DISABLED = MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS+DISABLED;
+				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS_ENABLED = MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS+ENABLED;
 		/* CONTROLS */
 		public static final String MENU_OPTIONS_CONTROLS_TITLE = "MenuOptionsControlsTitle";
 			/* HEADER */

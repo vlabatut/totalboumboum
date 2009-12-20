@@ -47,16 +47,23 @@ public class AisConfigurationSaver
 
 	private static Element saveAisElement(AisConfiguration aisConfiguration)
 	{	Element result = new Element(XmlTools.AIS); 
+	
 		// ups
 		Element upsElement = saveUpsElement(aisConfiguration);
 		result.addContent(upsElement);
+		
 		// auto advance
 		Element autoAdvanceElement = saveAutoAdvanceElement(aisConfiguration);
 		result.addContent(autoAdvanceElement);
+		
 		// hide all-ais
 		Element hideAllAisElement = saveHideAllAisElement(aisConfiguration);
 		result.addContent(hideAllAisElement);
-		//
+
+		// display exceptions onscreen during game
+		Element displayExceptionsElement = saveDisplayExceptionsElement(aisConfiguration);
+		result.addContent(displayExceptionsElement);
+
 		return result;
 	}
 	
@@ -69,13 +76,15 @@ public class AisConfigurationSaver
 
 	private static Element saveAutoAdvanceElement(AisConfiguration aisConfiguration)
 	{	Element result = new Element(XmlTools.AUTO_ADVANCE);
+	
 		// switch
 		String autoAdvance = Boolean.toString(aisConfiguration.getAutoAdvance());
 		result.setAttribute(XmlTools.VALUE,autoAdvance);
+		
 		// delay
 		String autoAdvanceDelay = Long.toString(aisConfiguration.getAutoAdvanceDelay());
 		result.setAttribute(XmlTools.DELAY,autoAdvanceDelay);
-		//
+
 		return result;
 	}
 	
@@ -83,6 +92,13 @@ public class AisConfigurationSaver
 	{	Element result = new Element(XmlTools.HIDE_ALLAIS);
 		String hideAllAis = Boolean.toString(aisConfiguration.getHideAllAis());
 		result.setAttribute(XmlTools.VALUE,hideAllAis);
+		return result;
+	}
+
+	private static Element saveDisplayExceptionsElement(AisConfiguration aisConfiguration)
+	{	Element result = new Element(XmlTools.DISPLAY_EXCEPTIONS);
+		String displayExceptions = Boolean.toString(aisConfiguration.getDisplayExceptions());
+		result.setAttribute(XmlTools.VALUE,displayExceptions);
 		return result;
 	}
 }
