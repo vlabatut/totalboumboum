@@ -859,9 +859,10 @@ public class Launcher
 	 * 		- amélioration de la suppression de profil : c'est le profil précédent qui est alors sélectionné (au lieu de revenir au début)
 	 * 		- la liste de noms est raffraichie quand un profil est modifié
 	 * 		- les 3 configurations de jeu sont éventuellement mises à jour quand un profil est supprimé
-	 * - API IA :
+	 * - IA :
 	 * 		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
+	 * 		- nouvelle option du jeu permettant de masquer les exceptions provoquées par les IA  
 	 * - stats :
 	 * 		- classe spécifique pour réinitialiser toutes les stats en dehors du jeu
 	 * 		- méthode pour réinitialiser les stats générales d'un joueur en particulier (appelée hors du jeu)
@@ -1085,12 +1086,13 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	/**
 	 *	- IA :
-	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)	 
+	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
+	 * 		- masquage des exceptions provoquées par les IA	 
 	 *	- stats :
 	 *	- GUI : 
 	 *  - tournois :
 	 *  	- têtes de séries
-	 *  	- championat
+	 *  	- championnat
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1172,5 +1174,6 @@ public class Launcher
 	 *  		- le contaminateur initial est résistant
 	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
 	 *  - projet : donner une niveau avec de la vitesse aux étudiants comme example pour la qualification
+	 *  - IA : option permettant de logger les exceptions
 	 */ 
 }

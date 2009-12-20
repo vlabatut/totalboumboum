@@ -118,6 +118,7 @@ public class XmlTools
 	public static final String DIRECTION = "direction";
 	public static final String DISCRETIZE = "discretize";
 	public static final String DISPLAY = "display";
+	public static final String DISPLAY_EXCEPTIONS = "displayExceptions";
 	public static final String DIVISION = "division";
 	public static final String DRAW = "draw";
 	public static final String DURATION = "duration";
