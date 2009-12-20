@@ -2,9 +2,9 @@
 <level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd" >
 
-	<title value="Qualification" />
+	<title value="Qualif'2" />
 	<author value="Vincent Labatut" />
-	<source value="Super Bomberman 1" />
+	<source value="Original" />
 	<preview file="preview.jpg" />
 
 	<instance name="superbomberman1" />
