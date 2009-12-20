@@ -6,10 +6,10 @@
 <!-- 	
 		<case players="0">
 		</case>
+-->	
 		<case players="1">
 			<location player="0" line="05" col="01" />
-		</case>
--->		
+		</case>	
 		<case players="2">
 			<location player="0" line="05" col="01" />
 			<location player="1" line="05" col="11" />
