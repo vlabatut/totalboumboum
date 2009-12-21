@@ -99,7 +99,6 @@ public class Launcher
 		GuiTools.init();
 		// load engine stats
 		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_STATS]);
-		LogstatsLoader.loadLogstats();
 		GameStatistics.loadStatistics();
 		// startup finished
 		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_DONE]);
@@ -185,7 +184,6 @@ public class Launcher
 		GuiTools.quickInit();
 		// load engine stats
 		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_STATS]);
-		LogstatsLoader.loadLogstats();
 		if(Configuration.getStatisticsConfiguration().getIncludeQuickStarts())
 			GameStatistics.loadStatistics();
 		// done
