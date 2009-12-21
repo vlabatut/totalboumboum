@@ -27,8 +27,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.statistics.StatisticsConfiguration;
+import fr.free.totalboumboum.configuration.statistics.StatisticsConfigurationSaver;
 import fr.free.totalboumboum.engine.log.logstats.Logstats;
-import fr.free.totalboumboum.engine.log.logstats.LogstatsSaver;
 import fr.free.totalboumboum.gui.tools.GuiFileTools;
 
 import java.awt.Dimension;
@@ -147,13 +149,20 @@ public abstract class AbstractFrame extends JFrame implements WindowListener
 	public void exit(boolean quicklaunch)
 	{	// cancel fullscreen
 		revertFullScreen();
-		// save engine logstats
+		// save engine stats
 		Logstats.update(quicklaunch);
 		try
-		{	LogstatsSaver.saveLogstats();
+		{	StatisticsConfiguration statConfig =  Configuration.getStatisticsConfiguration();
+			StatisticsConfigurationSaver.saveStatisticsConfiguration(statConfig);
 		}
 		catch (IOException e1)
 		{	e1.printStackTrace();
+		}
+		catch (ParserConfigurationException e)
+		{	e.printStackTrace();
+		}
+		catch (SAXException e)
+		{	e.printStackTrace();
 		}		
 		// end process
 		System.exit(0);		

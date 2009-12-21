@@ -124,4 +124,44 @@ public class StatisticsConfiguration
 	public void setIncludeSimulations(boolean includeSimulations)
 	{	this.includeSimulations = includeSimulations;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// REGULAR LAUNCHES	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private long regularLaunchCount = 0;
+	private long regularLaunchTime = 0;
+	
+	public long getRegularLaunchCount()
+	{	return regularLaunchCount;
+	}
+	public void setRegularLaunchCount(long regularLaunchCount)
+	{	this.regularLaunchCount = regularLaunchCount;
+	}
+
+	public long getRegularLaunchTime()
+	{	return regularLaunchTime;
+	}
+	public void setRegularLaunchTime(long regularLaunchTime)
+	{	this.regularLaunchTime = regularLaunchTime;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// QUICK LAUNCHES	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private long quickLaunchCount = 0;
+	private long quickLaunchTime = 0;
+	
+	public long getQuickLaunchCount()
+	{	return quickLaunchCount;
+	}
+	public void setQuickLaunchCount(long quickLaunchCount)
+	{	this.quickLaunchCount = quickLaunchCount;
+	}
+
+	public long getQuickLaunchTime()
+	{	return quickLaunchTime;
+	}
+	public void setQuickLaunchTime(long quickLaunchTime)
+	{	this.quickLaunchTime = quickLaunchTime;
+	}
 }

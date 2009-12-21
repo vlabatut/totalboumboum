@@ -59,6 +59,14 @@ public class StatisticsConfigurationLoader
 		// glicko-2
 		element = root.getChild(XmlTools.GLICKO2);
 		loadGlicko2Element(element,result);
+
+		// regular launch
+		Element regularLaunchElement = root.getChild(XmlTools.REGULAR_LAUNCH);
+		loadRegularLaunchElement(regularLaunchElement,result);
+		
+		// quick launch
+		Element quickLaunchElement = root.getChild(XmlTools.QUICK_LAUNCH);
+		loadQuickLaunchElement(quickLaunchElement,result);
 	}
 
 	private static void loadIncludeQuickStartsElement(Element root, StatisticsConfiguration result)
@@ -94,5 +102,29 @@ public class StatisticsConfigurationLoader
 			int gamesPerPeriod = Integer.parseInt(value);
 			result.setGamesPerPeriod(gamesPerPeriod);
 		}		
+	}
+	
+	private static void loadRegularLaunchElement(Element root, StatisticsConfiguration result)
+	{	// count
+		String strCount = root.getAttribute(XmlTools.COUNT).getValue().trim();
+		int count = Integer.parseInt(strCount);
+		result.setRegularLaunchCount(count);
+		
+		// time
+		String strTime = root.getAttribute(XmlTools.TIME).getValue().trim();
+		int time = Integer.parseInt(strTime);
+		result.setRegularLaunchTime(time);
+	}
+	
+	private static void loadQuickLaunchElement(Element root, StatisticsConfiguration result)
+	{	// count
+		String strCount = root.getAttribute(XmlTools.COUNT).getValue().trim();
+		int count = Integer.parseInt(strCount);
+		result.setQuickLaunchCount(count);
+		
+		// time
+		String strTime = root.getAttribute(XmlTools.TIME).getValue().trim();
+		int time = Integer.parseInt(strTime);
+		result.setQuickLaunchTime(time);
 	}
 }

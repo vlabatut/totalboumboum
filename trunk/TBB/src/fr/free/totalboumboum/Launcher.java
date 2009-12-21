@@ -43,7 +43,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.engine.log.logstats.LogstatsLoader;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import fr.free.totalboumboum.gui.frames.NormalFrame;

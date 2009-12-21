@@ -29,6 +29,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.engine.log.logstats.Logstats;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -59,6 +60,14 @@ public class StatisticsConfigurationSaver
 		// glicko-2
 		Element glicko2Element = saveGlicko2Element(statisticsConfiguration);
 		result.addContent(glicko2Element);
+
+		// regular launch
+		Element regularLaunchElement = saveRegularLaunchELement(statisticsConfiguration);
+		result.addContent(regularLaunchElement);
+	
+		// quick launch
+		Element quickLaunchElement = saveQuickLaunchELement(statisticsConfiguration);
+		result.addContent(quickLaunchElement);
 
 		return result;
 	}
@@ -95,6 +104,34 @@ public class StatisticsConfigurationSaver
 		// games per period
 		String gamesPerPeriod = Integer.toString(statisticsConfiguration.getGamesPerPeriod());
 		result.setAttribute(XmlTools.GAMES_PER_PERIOD,gamesPerPeriod);
+		
+		return result;
+	}
+
+	private static Element saveRegularLaunchELement(StatisticsConfiguration statisticsConfiguration)
+	{	Element result = new Element(XmlTools.REGULAR_LAUNCH); 
+	
+		// count
+		String countStr = Long.toString(statisticsConfiguration.getRegularLaunchCount());
+		result.setAttribute(XmlTools.COUNT,countStr);
+
+		// time
+		String timeStr = Long.toString(Logstats.getRegularLaunchTime());
+		result.setAttribute(XmlTools.TIME,timeStr);
+		
+		return result;
+	}
+
+	private static Element saveQuickLaunchELement(StatisticsConfiguration statisticsConfiguration)
+	{	Element result = new Element(XmlTools.QUICK_LAUNCH); 
+	
+		// count
+		String countStr = Long.toString(statisticsConfiguration.getQuickLaunchCount());
+		result.setAttribute(XmlTools.COUNT,countStr);
+
+		// time
+		String timeStr = Long.toString(statisticsConfiguration.getQuickLaunchTime());
+		result.setAttribute(XmlTools.TIME,timeStr);
 		
 		return result;
 	}
