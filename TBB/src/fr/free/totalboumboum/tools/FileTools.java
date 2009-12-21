@@ -79,7 +79,6 @@ public class FileTools
 	public static final String FILE_LEVEL = "level";
 	public static final String FILE_LANGUAGE = "language";
 	public static final String FILE_LEVELS = "levels";
-	public static final String FILE_LOGSTATS = "logstats";
 	public static final String FILE_MATCH = "match";
 	public static final String FILE_MATCHES = "matches";
 	public static final String FILE_MATRICES = "matrices";
