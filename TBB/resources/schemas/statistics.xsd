@@ -16,11 +16,18 @@
 		<xsd:attribute name="gamesPerPeriod" type="xsd:integer" use="required" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tLaunch">
+		<xsd:attribute name="count" type="xsd:long" use="required" />
+		<xsd:attribute name="time" type="xsd:long" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tStatistics">
 		<xsd:sequence>
 			<xsd:element name="includeQuickStarts" type="tIncludeQuickStarts" />
 			<xsd:element name="includeSimulations" type="tIncludeSimulations" />
 			<xsd:element name="glicko2" type="tGlicko2" />
+			<xsd:element name="regularLaunch" type="tLaunch"/>
+			<xsd:element name="quickLaunch" type="tLaunch"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
