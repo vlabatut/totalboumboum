@@ -60,6 +60,9 @@ public class StatisticsConfigurationLoader
 		element = root.getChild(XmlTools.GLICKO2);
 		loadGlicko2Element(element,result);
 
+		// launch time
+		result.initLaunchTime();
+		
 		// regular launch
 		Element regularLaunchElement = root.getChild(XmlTools.REGULAR_LAUNCH);
 		loadRegularLaunchElement(regularLaunchElement,result);

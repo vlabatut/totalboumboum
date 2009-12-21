@@ -29,7 +29,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.log.logstats.Logstats;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -116,7 +115,7 @@ public class StatisticsConfigurationSaver
 		result.setAttribute(XmlTools.COUNT,countStr);
 
 		// time
-		String timeStr = Long.toString(Logstats.getRegularLaunchTime());
+		String timeStr = Long.toString(statisticsConfiguration.getRegularLaunchTime());
 		result.setAttribute(XmlTools.TIME,timeStr);
 		
 		return result;

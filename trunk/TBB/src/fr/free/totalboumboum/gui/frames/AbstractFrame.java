@@ -30,7 +30,6 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.statistics.StatisticsConfiguration;
 import fr.free.totalboumboum.configuration.statistics.StatisticsConfigurationSaver;
-import fr.free.totalboumboum.engine.log.logstats.Logstats;
 import fr.free.totalboumboum.gui.tools.GuiFileTools;
 
 import java.awt.Dimension;
