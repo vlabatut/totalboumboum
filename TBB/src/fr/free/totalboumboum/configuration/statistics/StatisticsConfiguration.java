@@ -164,4 +164,17 @@ public class StatisticsConfiguration
 	public void setQuickLaunchTime(long quickLaunchTime)
 	{	this.quickLaunchTime = quickLaunchTime;
 	}
+	
+	public void update(boolean quicklaunch)
+	{	long currentTime = System.currentTimeMillis();
+		long elapsedTime = (currentTime - launchTime)/1000;
+		if(quicklaunch)
+		{	quickLaunchCount++;
+			quickLaunchTime = quickLaunchTime + elapsedTime;
+		}
+		else // regular launch
+		{	regularLaunchCount++;
+			regularLaunchTime = regularLaunchTime + elapsedTime;
+		}
+	}
 }
