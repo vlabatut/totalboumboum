@@ -149,10 +149,10 @@ public abstract class AbstractFrame extends JFrame implements WindowListener
 	public void exit(boolean quicklaunch)
 	{	// cancel fullscreen
 		revertFullScreen();
-		// save engine stats
-		Logstats.update(quicklaunch);
+		// save engine stats		
 		try
 		{	StatisticsConfiguration statConfig =  Configuration.getStatisticsConfiguration();
+			statConfig.updateLaunchStats(quicklaunch);
 			StatisticsConfigurationSaver.saveStatisticsConfiguration(statConfig);
 		}
 		catch (IOException e1)
