@@ -148,8 +148,13 @@ public class StatisticsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// QUICK LAUNCHES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private long launchTime;
 	private long quickLaunchCount = 0;
 	private long quickLaunchTime = 0;
+	
+	public void initLaunchTime()
+	{	launchTime = System.currentTimeMillis();
+	}
 	
 	public long getQuickLaunchCount()
 	{	return quickLaunchCount;
@@ -165,7 +170,7 @@ public class StatisticsConfiguration
 	{	this.quickLaunchTime = quickLaunchTime;
 	}
 	
-	public void update(boolean quicklaunch)
+	public void updateLaunchStats(boolean quicklaunch)
 	{	long currentTime = System.currentTimeMillis();
 		long elapsedTime = (currentTime - launchTime)/1000;
 		if(quicklaunch)

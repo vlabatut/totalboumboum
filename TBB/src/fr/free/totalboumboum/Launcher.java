@@ -863,6 +863,7 @@ public class Launcher
 	 * - stats :
 	 * 		- classe spécifique pour réinitialiser toutes les stats en dehors du jeu
 	 * 		- méthode pour réinitialiser les stats générales d'un joueur en particulier (appelée hors du jeu)
+	 * 		- les stats de lancement qui n'étaient pas à leur place dans les logs ont été mises dans le fichier de config des stats
 	 * - Divers :
 	 * 		- correction d'un bug dans les scripts de compilation (classes non référencées dans les adaptateurs d'IA)
 	 * 		- mise à jour du perso Prognathe
@@ -1170,8 +1171,6 @@ public class Launcher
 	 *  		- elles ne tuent pas, elles contaminent. 
 	 *  		- le contaminateur initial est résistant
 	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
-	 *  - projet : donner une niveau avec de la vitesse aux étudiants comme example pour la qualification
 	 *  - IA : option permettant de logger les exceptions
-	 *  - mettre les stats de log dans un des fichier de config
 	 */ 
 }
