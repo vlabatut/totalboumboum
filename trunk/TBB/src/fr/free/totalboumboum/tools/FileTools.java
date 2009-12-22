@@ -46,6 +46,7 @@ public class FileTools
 	public static final String FILE_ABILITIES = "abilities";
 	public static final String FILE_ABOUT = "about";
 	public static final String FILE_AI = "ai";
+	public static final String FILE_AI_EXCEPTIONS = "aiexceptions";
 	public static final String FILE_AIS = "ais";
 	public static final String FILE_AI_MAIN_CLASS = "AiMain";
 	public static final String FILE_ANIMES = "animes";
@@ -60,7 +61,6 @@ public class FileTools
 	public static final String FILE_CONFIGURATION = "configuration";
 	public static final String FILE_CONTROLS = "controls";
 	public static final String FILE_ENGINE = "engine";
-	public static final String FILE_EXCEPTIONS = "exceptions";
 	public static final String FILE_EXPLOSIONS = "explosions";
 	public static final String FILE_EXPLOSION = "explosion";
 	public static final String FILE_FIRE = "fire";
@@ -293,7 +293,7 @@ public class FileTools
 	public static String getFilenameCompatibleCurrentTime()
 	{	Calendar cal = new GregorianCalendar();
 		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMinimumFractionDigits(2);
+		nf.setMinimumIntegerDigits(2);
 		int sec = cal.get(Calendar.SECOND);
 		String secStr = nf.format(sec);
 		int min = cal.get(Calendar.MINUTE);

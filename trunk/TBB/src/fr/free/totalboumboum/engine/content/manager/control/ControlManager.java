@@ -21,8 +21,9 @@ package fr.free.totalboumboum.engine.content.manager.control;
  * 
  */
 
-import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -90,13 +91,18 @@ public class ControlManager
 //	System.out.print(c+" ; ");
 		
 		if(engineConfiguration.getLogControls())
-		{	OutputStream out = engineConfiguration.getControlsLogOutput();
-			PrintWriter printWriter = new PrintWriter(out,true);
-			int id = sprite.getPlayer().getId();
-			printWriter.print("\t"+id+": [");
-			for(ControlEvent event: controlEvents)
-				printWriter.print(event.getName()+"/"+event.getMode()+" ");
-			printWriter.println(" ]");			
+		{	try
+			{	OutputStreamWriter out = new OutputStreamWriter(engineConfiguration.getControlsLogOutput(),"UTF8");
+				PrintWriter printWriter = new PrintWriter(out,true);
+				int id = sprite.getPlayer().getId();
+				printWriter.print("\t"+id+": [");
+				for(ControlEvent event: controlEvents)
+					printWriter.print(event.getName()+"/"+event.getMode()+" ");
+				printWriter.println(" ]");			
+			}
+			catch (UnsupportedEncodingException e)
+			{	e.printStackTrace();
+			}
 		}
 
 		// transmiting the events to the event manager
@@ -191,13 +197,18 @@ public class ControlManager
 		}
 		
 		if(engineConfiguration.getLogControls())
-		{	OutputStream out = engineConfiguration.getControlsLogOutput();
-			PrintWriter printWriter = new PrintWriter(out,true);
-			int id = sprite.getPlayer().getId();
-			printWriter.print("\t"+id+": [");
-			for(ControlEvent event: eventsList)
-				printWriter.print(event.getName()+"/"+event.getMode()+" ");
-			printWriter.println(" ]");			
+		{	try
+			{	OutputStreamWriter out = new OutputStreamWriter(engineConfiguration.getControlsLogOutput(),"UTF8");
+				PrintWriter printWriter = new PrintWriter(out,true);
+				int id = sprite.getPlayer().getId();
+				printWriter.print("\t"+id+": [");
+				for(ControlEvent event: eventsList)
+					printWriter.print(event.getName()+"/"+event.getMode()+" ");
+				printWriter.println(" ]");			
+			}
+			catch (UnsupportedEncodingException e)
+			{	e.printStackTrace();
+			}
 		}
 	}
 	

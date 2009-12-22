@@ -193,7 +193,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 				
-				// #5 LOG CONTROLS
+				// #3 LOG CONTROLS
 				{	Line ln = optionsPanel.getLine(LINE_LOG_CONTROLS);
 					ln.addLabel(0);
 					int col = 0;
@@ -217,9 +217,8 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 				
-				
 				// EMPTY
-				{	for(int line=LINE_SPEED+1;line<LINE_COUNT;line++)
+				{	for(int line=LINE_LOG_CONTROLS+1;line<LINE_COUNT;line++)
 					{	Line ln = optionsPanel.getLine(line);
 						int col = 0;
 						int maxWidth = ln.getWidth();

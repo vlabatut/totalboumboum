@@ -34,8 +34,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadFactory;
 
-
-
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.ai.AisConfiguration;
 import fr.free.totalboumboum.engine.container.level.Level;
@@ -163,8 +161,8 @@ public abstract class AbstractAiManager<V>
     			catch (InterruptedException e)
     			{	if(aisConfiguration.getLogExceptions())
     				{	OutputStream out = aisConfiguration.getExceptionsLogOutput();
-    					PrintWriter printWriter = new PrintWriter(out,true);
-    					e.printStackTrace(printWriter);
+	    				PrintWriter printWriter = new PrintWriter(out,true);
+	    				e.printStackTrace(printWriter);
     				}
     				if(Configuration.getAisConfiguration().getDisplayExceptions())
     					e.printStackTrace();

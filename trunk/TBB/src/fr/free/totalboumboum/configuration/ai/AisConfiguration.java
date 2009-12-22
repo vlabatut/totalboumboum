@@ -128,8 +128,8 @@ public class AisConfiguration
 	// EXCEPTIONS LOG	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean logExceptions = false;
+	private boolean logExceptionsSeparately = false;
 	private OutputStream exceptionsLogStream;
-	private boolean logExceptionsSeparately = true;
 
 	public boolean getLogExceptions()
 	{	return logExceptions;
@@ -145,12 +145,12 @@ public class AisConfiguration
 	
 	public void initExceptionsLogStream() throws FileNotFoundException
 	{	// init path
-		String path = FileTools.getLogsPath()+File.separator+FileTools.FILE_EXCEPTIONS;
+		String path = FileTools.getLogsPath()+File.separator;
 		// put the date
 		if(logExceptionsSeparately)
-			path = path + FileTools.getFilenameCompatibleCurrentTime();
-		// put extension
-		path = path+FileTools.EXTENSION_LOG;
+			path = path + FileTools.getFilenameCompatibleCurrentTime() + "_";
+		// put name and extension
+		path = path + FileTools.FILE_AI_EXCEPTIONS + FileTools.EXTENSION_LOG;
 		// open file
 		File logFile = new File(path);
 		if(logFile.exists())

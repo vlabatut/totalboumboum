@@ -34,7 +34,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -209,7 +211,7 @@ public class LocalLoop extends Loop
 	{	if(engineConfiguration.getLogControls())
 		{	try
 			{	engineConfiguration.initControlsLogStream();
-				OutputStream out = engineConfiguration.getControlsLogOutput();
+				OutputStreamWriter out = new OutputStreamWriter(engineConfiguration.getControlsLogOutput(),"UTF8");
 				PrintWriter printWriter = new PrintWriter(out,true);
 				// start date/time
 				Calendar cal = new GregorianCalendar();
@@ -229,6 +231,9 @@ public class LocalLoop extends Loop
 				}
 			}
 			catch (FileNotFoundException e)
+			{	e.printStackTrace();
+			}
+			catch (UnsupportedEncodingException e)
 			{	e.printStackTrace();
 			}			
 		}
@@ -262,10 +267,20 @@ public class LocalLoop extends Loop
 	
 	private void updateLogs()
 	{	if(engineConfiguration.getLogControls())
-		{	OutputStream out = engineConfiguration.getControlsLogOutput();
+		{	try
+			{	OutputStreamWriter out = new OutputStreamWriter(engineConfiguration.getControlsLogOutput(),"UTF8");
+				PrintWriter printWriter = new PrintWriter(out,true);
+				printWriter.println("--"+totalGameTime+"ms --------------------------");
+			}
+			catch (UnsupportedEncodingException e)
+			{	e.printStackTrace();
+			}
+		}
+		if(aisConfiguration.getLogExceptions())
+		{	OutputStream out = aisConfiguration.getExceptionsLogOutput();
 			PrintWriter printWriter = new PrintWriter(out,true);
 			printWriter.println("--"+totalGameTime+"ms --------------------------");
-		}	
+		}
 	}
 	
 	private void closeLogs()
