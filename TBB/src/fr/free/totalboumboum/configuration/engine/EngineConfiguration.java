@@ -109,12 +109,12 @@ public class EngineConfiguration
 	
 	public void initControlsLogStream() throws FileNotFoundException
 	{	// init path
-		String path = FileTools.getLogsPath()+File.separator+FileTools.FILE_CONTROLS;
+		String path = FileTools.getLogsPath()+File.separator;
 		// put the date
 		if(logControlsSeparately)
-			path = path + FileTools.getFilenameCompatibleCurrentTime();
-		// put extension
-		path = path+FileTools.EXTENSION_LOG;
+			path = path + FileTools.getFilenameCompatibleCurrentTime() + "_";
+		// put name and extension
+		path = path + FileTools.FILE_CONTROLS + FileTools.EXTENSION_LOG;
 		// open file
 		File logFile = new File(path);
 		if(logFile.exists())
