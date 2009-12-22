@@ -859,7 +859,8 @@ public class Launcher
 	 * - IA :
 	 * 		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
-	 * 		- nouvelle option du jeu permettant de masquer les exceptions provoquées par les IA  
+	 * 		- nouvelle option du jeu permettant de masquer les exceptions provoquées par les IA
+	 * 		- option pour logger les exceptions des IA  
 	 * - stats :
 	 * 		- classe spécifique pour réinitialiser toutes les stats en dehors du jeu
 	 * 		- méthode pour réinitialiser les stats générales d'un joueur en particulier (appelée hors du jeu)
@@ -867,6 +868,7 @@ public class Launcher
 	 * - Divers :
 	 * 		- correction d'un bug dans les scripts de compilation (classes non référencées dans les adaptateurs d'IA)
 	 * 		- mise à jour du perso Prognathe
+	 * 		- mise à jour du système de log pour permettre de ne pas écraser toujours le même fichier, mais de créer à chaque fois un fichier différent et daté
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1085,7 +1087,8 @@ public class Launcher
 	/**
 	 *	- IA :
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
-	 * 		- masquage des exceptions provoquées par les IA	 
+	 * 		- masquage des exceptions provoquées par les IA
+	 * 		- log de ces mêmes exceptions	 
 	 *	- stats :
 	 *	- GUI : 
 	 *  - tournois :

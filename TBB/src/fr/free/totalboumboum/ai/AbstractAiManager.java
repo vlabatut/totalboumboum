@@ -22,6 +22,8 @@ package fr.free.totalboumboum.ai;
  */
 
 import java.awt.Color;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,6 +37,7 @@ import java.util.concurrent.ThreadFactory;
 
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.ai.AisConfiguration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -62,9 +65,16 @@ public abstract class AbstractAiManager<V>
      */
 	public AbstractAiManager(Callable<V> ai)
     {	this.ai = ai;
+    	
 	}
 
     /////////////////////////////////////////////////////////////////
+	// EXCEPTIONS LOG	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
+	
+	
+	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
     /** objet implementant le comportement de l'IA */
@@ -151,11 +161,21 @@ public abstract class AbstractAiManager<V>
     				updateOutput();
 				}
     			catch (InterruptedException e)
-    			{	if(Configuration.getAisConfiguration().getDisplayExceptions())
+    			{	if(aisConfiguration.getLogExceptions())
+    				{	OutputStream out = aisConfiguration.getExceptionsLogOutput();
+    					PrintWriter printWriter = new PrintWriter(out,true);
+    					e.printStackTrace(printWriter);
+    				}
+    				if(Configuration.getAisConfiguration().getDisplayExceptions())
     					e.printStackTrace();
 				}
     			catch (ExecutionException e)
-    			{	if(Configuration.getAisConfiguration().getDisplayExceptions())
+    			{	if(aisConfiguration.getLogExceptions())
+					{	OutputStream out = aisConfiguration.getExceptionsLogOutput();
+						PrintWriter printWriter = new PrintWriter(out,true);
+						e.printStackTrace(printWriter);
+					}
+					if(Configuration.getAisConfiguration().getDisplayExceptions())
     					e.printStackTrace();
 				}    			
     			// on lance le calcul pour le prochain coup

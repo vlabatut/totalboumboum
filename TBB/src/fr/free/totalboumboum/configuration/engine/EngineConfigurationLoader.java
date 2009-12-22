@@ -50,6 +50,7 @@ public class EngineConfigurationLoader
 		// timing
 		element = root.getChild(XmlTools.TIMING);
 		loadTimingElement(element,result);
+		
 		// logs
 		element = root.getChild(XmlTools.LOG);
 		loadLogElement(element,result);

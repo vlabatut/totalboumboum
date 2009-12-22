@@ -46,6 +46,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 	private static final int LINE_FPS = 0;
 	private static final int LINE_ADJUST = 1;
 	private static final int LINE_SPEED = 2;
+	private static final int LINE_LOG_CONTROLS = 3;
 
 	private LinesSubPanel optionsPanel;
 	private EngineConfiguration engineConfiguration;
@@ -191,7 +192,32 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setBackgroundColor(bg);
 				}
-
+				
+				// #5 LOG CONTROLS
+				{	Line ln = optionsPanel.getLine(LINE_LOG_CONTROLS);
+					ln.addLabel(0);
+					int col = 0;
+					// name
+					{	ln.setLabelMinWidth(col,titleWidth);
+						ln.setLabelPrefWidth(col,titleWidth);
+						ln.setLabelMaxWidth(col,titleWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_LOG_CONTROLS_TITLE,false);
+						col++;
+					}
+					// value
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+						ln.setLabelMinWidth(col,valueWidth);
+						ln.setLabelPrefWidth(col,valueWidth);
+						ln.setLabelMaxWidth(col,valueWidth);
+						setLogControls();
+						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
+				}
+				
+				
 				// EMPTY
 				{	for(int line=LINE_SPEED+1;line<LINE_COUNT;line++)
 					{	Line ln = optionsPanel.getLine(line);
@@ -244,6 +270,16 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 		}
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE+GuiKeys.TOOLTIP); 
 		optionsPanel.getLine(LINE_SPEED).setLabelText(2,text,tooltip);
+	}
+	
+	private void setLogControls()
+	{	boolean logControls = engineConfiguration.getLogControls();
+		String key;
+		if(logControls)
+			key = GuiKeys.MENU_OPTIONS_ADVANCED_LINE_LOG_CONTROLS_ENABLED;
+		else
+			key = GuiKeys.MENU_OPTIONS_ADVANCED_LINE_LOG_CONTROLS_DISABLED;
+		optionsPanel.getLine(LINE_LOG_CONTROLS).setLabelKey(1,key,true);
 	}
 	
 	@Override
@@ -326,9 +362,15 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 				// common
 				engineConfiguration.setSpeedCoeff(speedValues[index]);
 				setGameSpeed();
+			// log controls
+			case LINE_LOG_CONTROLS:
+				boolean logControls = !engineConfiguration.getLogControls();
+				engineConfiguration.setLogControls(logControls);
+				setLogControls();
+				break;
 		}
-
 	}
+	
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	

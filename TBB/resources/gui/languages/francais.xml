@@ -154,6 +154,11 @@
 						<text name="Disabled" value="Désactivé" tooltip="Affichage des exceptions désactivé" />
 						<text name="Enabled" value="Activé" tooltip="Affichage des exceptions activé" />
 					</group>
+					<group name="LogExceptions">
+						<text name="Title" value="Enregistrer les exceptions" tooltip="Enregistre dans un fichier les exceptions provoquées par les IA au cours de la partie" />
+						<text name="Disabled" value="Désactivé" tooltip="Enregistrement des exceptions désactivé" />
+						<text name="Enabled" value="Activé" tooltip="Enregistrement des exceptions activé" />
+					</group>
 				</group>
 			</group>
 			
@@ -174,6 +179,11 @@
 						<text name="Title" value="Vitesse" tooltip="Vitesse du jeu" />
 						<text name="Plus" value="Plus" tooltip="Augmenter la vitesse du jeu" />
 						<text name="Minus" value="Moins" tooltip="Diminuer la vitesse du jeu" />
+					</group>
+					<group name="LogControls">
+						<text name="Title" value="Enregistrer les commandes" tooltip="Enregistre dans un fichier les commandes activés en cours de la partie" />
+						<text name="Disabled" value="Désactivé" tooltip="Enregistrement des commandes désactivé" />
+						<text name="Enabled" value="Activé" tooltip="Enregistrement des commandes activé" />
 					</group>
 				</group>
 			</group>

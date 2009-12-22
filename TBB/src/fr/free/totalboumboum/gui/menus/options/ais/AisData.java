@@ -47,6 +47,7 @@ public class AisData extends EntitledDataPanel implements MouseListener
 	private static final int LINE_AUTO_ADVANCE_DELAY = 2;
 	private static final int LINE_HIDE_ALLAIS = 3;
 	private static final int LINE_DISPLAY_EXCPTIONS = 4;
+	private static final int LINE_LOG_EXCPTIONS = 5;
 
 	private LinesSubPanel optionsPanel;
 	private AisConfiguration aisConfiguration;
@@ -222,8 +223,32 @@ public class AisData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 				
+				// #5 LOG EXCEPTIONS
+				{	Line ln = optionsPanel.getLine(LINE_LOG_EXCPTIONS);
+					ln.addLabel(0);
+					int col = 0;
+					// name
+					{	ln.setLabelMinWidth(col,titleWidth);
+						ln.setLabelPrefWidth(col,titleWidth);
+						ln.setLabelMaxWidth(col,titleWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS_TITLE,false);
+						col++;
+					}
+					// value
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+						ln.setLabelMinWidth(col,valueWidth);
+						ln.setLabelPrefWidth(col,valueWidth);
+						ln.setLabelMaxWidth(col,valueWidth);
+						setLogExceptions();
+						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
+				}
+				
 				// EMPTY
-				{	for(int line=LINE_DISPLAY_EXCPTIONS+1;line<LINE_COUNT;line++)
+				{	for(int line=LINE_LOG_EXCPTIONS+1;line<LINE_COUNT;line++)
 					{	Line ln = optionsPanel.getLine(line);
 						int col = 0;
 						int maxWidth = ln.getWidth();
@@ -281,6 +306,16 @@ public class AisData extends EntitledDataPanel implements MouseListener
 		else
 			key = GuiKeys.MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS_DISABLED;
 		optionsPanel.getLine(LINE_DISPLAY_EXCPTIONS).setLabelKey(1,key,true);
+	}
+	
+	private void setLogExceptions()
+	{	boolean logExceptions = aisConfiguration.getLogExceptions();
+		String key;
+		if(logExceptions)
+			key = GuiKeys.MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS_ENABLED;
+		else
+			key = GuiKeys.MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS_DISABLED;
+		optionsPanel.getLine(LINE_LOG_EXCPTIONS).setLabelKey(1,key,true);
 	}
 	
 	@Override
@@ -364,11 +399,17 @@ public class AisData extends EntitledDataPanel implements MouseListener
 				aisConfiguration.setHideAllAis(hideAllais);
 				setHideAllais();
 				break;
-			// hide all-ais
+			// display exceptions
 			case LINE_DISPLAY_EXCPTIONS:
 				boolean displayExceptions = !aisConfiguration.getDisplayExceptions();
 				aisConfiguration.setDisplayExceptions(displayExceptions);
 				setDisplayExceptions();
+				break;
+			// log exceptions
+			case LINE_LOG_EXCPTIONS:
+				boolean logExceptions = !aisConfiguration.getLogExceptions();
+				aisConfiguration.setLogExceptions(logExceptions);
+				setLogExceptions();
 				break;
 		}
 

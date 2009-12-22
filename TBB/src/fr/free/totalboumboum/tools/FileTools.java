@@ -25,6 +25,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 
@@ -57,6 +60,7 @@ public class FileTools
 	public static final String FILE_CONFIGURATION = "configuration";
 	public static final String FILE_CONTROLS = "controls";
 	public static final String FILE_ENGINE = "engine";
+	public static final String FILE_EXCEPTIONS = "exceptions";
 	public static final String FILE_EXPLOSIONS = "explosions";
 	public static final String FILE_EXPLOSION = "explosion";
 	public static final String FILE_FIRE = "fire";
@@ -284,5 +288,25 @@ public class FileTools
             in.close();
             out.close();
         }
+	}
+	
+	public static String getFilenameCompatibleCurrentTime()
+	{	Calendar cal = new GregorianCalendar();
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumFractionDigits(2);
+		int sec = cal.get(Calendar.SECOND);
+		String secStr = nf.format(sec);
+		int min = cal.get(Calendar.MINUTE);
+		String minStr = nf.format(min);
+		int hour = cal.get(Calendar.HOUR_OF_DAY);
+		String hourStr = nf.format(hour);
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		String dayStr = nf.format(day);
+		int month = cal.get(Calendar.MONTH);
+		String monthStr = nf.format(month);
+		int year = cal.get(Calendar.YEAR);
+		String yearStr = Integer.toString(year);
+		String result = yearStr+"."+monthStr+"."+dayStr+"_"+hourStr+"."+minStr+"."+secStr;
+		return result;
 	}
 }

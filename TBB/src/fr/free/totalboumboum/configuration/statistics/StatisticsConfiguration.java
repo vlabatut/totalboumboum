@@ -20,7 +20,7 @@ package fr.free.totalboumboum.configuration.statistics;
  * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-
+ 
 public class StatisticsConfiguration
 {
 	public StatisticsConfiguration copy()
