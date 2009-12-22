@@ -186,6 +186,7 @@ public class XmlTools
 	public static final String LOCATION = "location";
 	public static final String LOCATIONS = "locations";
 	public static final String LOG = "log";
+	public static final String LOG_EXCEPTIONS = "logExceptions";
 	public static final String LOGSTATS = "logstats";
 	public static final String MARGIN = "margin";
 	public static final String MATCH = "match";

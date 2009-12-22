@@ -58,6 +58,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.ai.AisConfiguration;
 import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
@@ -202,6 +203,7 @@ public class LocalLoop extends Loop
 	// LOGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
+	private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
 	
 	private void initLogs()
 	{	if(engineConfiguration.getLogControls())
@@ -212,7 +214,7 @@ public class LocalLoop extends Loop
 				// start date/time
 				Calendar cal = new GregorianCalendar();
 				Date startDate = cal.getTime();
-				DateFormat dateFormat = DateFormat.getDateInstance();
+				DateFormat dateFormat = DateFormat.getDateTimeInstance();
 				printWriter.println("Start: "+dateFormat.format(startDate));
 				// players
 				printWriter.println("Players: ");
@@ -229,7 +231,33 @@ public class LocalLoop extends Loop
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
 			}			
-		}		
+		}
+		if(aisConfiguration.getLogExceptions())
+		{	try
+			{	aisConfiguration.initExceptionsLogStream();
+				OutputStream out = aisConfiguration.getExceptionsLogOutput();
+				PrintWriter printWriter = new PrintWriter(out,true);
+				// start date/time
+				Calendar cal = new GregorianCalendar();
+				Date startDate = cal.getTime();
+				DateFormat dateFormat = DateFormat.getDateTimeInstance();
+				printWriter.println("Start: "+dateFormat.format(startDate));
+				// players
+				printWriter.println("Players: ");
+				for(Player player: players)
+				{	int id = player.getId();
+					String name = player.getName();
+					String color = player.getColor().toString();
+					String type = "Human player";
+					if(player.hasAi())
+						type = "AI player";
+					printWriter.println("\t("+id+") "+name+" ["+color+"] - "+type);
+				}
+			}
+			catch (FileNotFoundException e)
+			{	e.printStackTrace();
+			}			
+		}
 	}
 	
 	private void updateLogs()
@@ -242,12 +270,21 @@ public class LocalLoop extends Loop
 	
 	private void closeLogs()
 	{	if(engineConfiguration.getLogControls())
-		try
-		{	engineConfiguration.closeControlsLogStream();
+		{	try
+			{	engineConfiguration.closeControlsLogStream();
+			}
+			catch(IOException e)
+			{	e.printStackTrace();
+			}
 		}
-		catch(IOException e)
-		{	e.printStackTrace();
-		}		
+		if(aisConfiguration.getLogExceptions())
+		{	try
+			{	aisConfiguration.closeExceptionsLogStream();
+			}
+			catch(IOException e)
+			{	e.printStackTrace();
+			}
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////

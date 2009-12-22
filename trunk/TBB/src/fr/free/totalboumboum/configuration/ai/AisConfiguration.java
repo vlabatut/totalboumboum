@@ -21,6 +21,15 @@ package fr.free.totalboumboum.configuration.ai;
  * 
  */
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import fr.free.totalboumboum.tools.FileTools;
+
 public class AisConfiguration
 {
 
@@ -35,6 +44,9 @@ public class AisConfiguration
 		result.setHideAllAis(hideAllAis);
 		
 		result.setDisplayExceptions(displayExceptions);
+
+		result.setLogExceptions(logExceptions);
+		result.setLogExceptionsSeparately(logExceptionsSeparately);
 
 		return result;
 	}
@@ -99,7 +111,7 @@ public class AisConfiguration
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LOG				/////////////////////////////////////////////
+	// DISPLAY EXCEPTIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** show exceptions onscren during game */
 	private boolean displayExceptions = true;
@@ -110,5 +122,48 @@ public class AisConfiguration
 
 	public void setDisplayExceptions(boolean displayExceptions)
 	{	this.displayExceptions = displayExceptions;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EXCEPTIONS LOG	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean logExceptions = false;
+	private OutputStream exceptionsLogStream;
+	private boolean logExceptionsSeparately = true;
+
+	public boolean getLogExceptions()
+	{	return logExceptions;
+	}
+	
+	public void setLogExceptions(boolean logExceptions)
+	{	this.logExceptions = logExceptions;
+	}
+	
+	public void setLogExceptionsSeparately(boolean logExceptionsSeparately)
+	{	this.logExceptionsSeparately = logExceptionsSeparately;
+	}
+	
+	public void initExceptionsLogStream() throws FileNotFoundException
+	{	// init path
+		String path = FileTools.getLogsPath()+File.separator+FileTools.FILE_EXCEPTIONS;
+		// put the date
+		if(logExceptionsSeparately)
+			path = path + FileTools.getFilenameCompatibleCurrentTime();
+		// put extension
+		path = path+FileTools.EXTENSION_LOG;
+		// open file
+		File logFile = new File(path);
+		if(logFile.exists())
+			logFile.delete();
+		FileOutputStream fileOut = new FileOutputStream(logFile);
+		exceptionsLogStream = new BufferedOutputStream(fileOut);
+	}
+	
+	public void closeExceptionsLogStream() throws IOException
+	{	exceptionsLogStream.close();		
+	}
+	
+	public OutputStream getExceptionsLogOutput()
+	{	return exceptionsLogStream;
 	}
 }

@@ -63,7 +63,11 @@ public class AisConfigurationLoader
 		// display exceptions onscreen during game
 		element = root.getChild(XmlTools.DISPLAY_EXCEPTIONS);
 		loadDisplayExceptionsElement(element,result);
-}
+
+		// log exceptions during game
+		element = root.getChild(XmlTools.LOG_EXCEPTIONS);
+		loadLogExceptionsElement(element,result);
+	}
 	
 	private static void loadUpsElement(Element root, AisConfiguration result)
 	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
@@ -94,5 +98,11 @@ public class AisConfigurationLoader
 	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean displayExceptions = Boolean.valueOf(value);
 		result.setDisplayExceptions(displayExceptions);
+	}
+
+	private static void loadLogExceptionsElement(Element root, AisConfiguration result)
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
+		boolean logExceptions = Boolean.valueOf(value);
+		result.setLogExceptions(logExceptions);
 	}
 }

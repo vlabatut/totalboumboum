@@ -18,12 +18,17 @@
 		<xsd:attribute name="value" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tLogExceptions">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tAis">
 		<xsd:sequence>
 			<xsd:element name="ups" type="tUps" />
 			<xsd:element name="autoAdvance" type="tAutoAdvance" />
 			<xsd:element name="hideAllAis" type="tHideAllAis" />
 			<xsd:element name="displayExceptions" type="tDisplayExceptions" />
+			<xsd:element name="logExceptions" type="tLogExceptions" />
 		</xsd:sequence>
 	</xsd:complexType>
 

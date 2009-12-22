@@ -64,6 +64,10 @@ public class AisConfigurationSaver
 		Element displayExceptionsElement = saveDisplayExceptionsElement(aisConfiguration);
 		result.addContent(displayExceptionsElement);
 
+		// log exceptions during game
+		Element logExceptionsElement = saveLogExceptionsElement(aisConfiguration);
+		result.addContent(logExceptionsElement);
+
 		return result;
 	}
 	
@@ -99,6 +103,13 @@ public class AisConfigurationSaver
 	{	Element result = new Element(XmlTools.DISPLAY_EXCEPTIONS);
 		String displayExceptions = Boolean.toString(aisConfiguration.getDisplayExceptions());
 		result.setAttribute(XmlTools.VALUE,displayExceptions);
+		return result;
+	}
+
+	private static Element saveLogExceptionsElement(AisConfiguration aisConfiguration)
+	{	Element result = new Element(XmlTools.LOG_EXCEPTIONS);
+		String logExceptions = Boolean.toString(aisConfiguration.getLogExceptions());
+		result.setAttribute(XmlTools.VALUE,logExceptions);
 		return result;
 	}
 }
