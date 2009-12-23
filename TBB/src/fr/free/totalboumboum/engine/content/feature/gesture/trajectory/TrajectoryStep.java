@@ -21,11 +21,14 @@ package fr.free.totalboumboum.engine.content.feature.gesture.trajectory;
  * 
  */
 
+import java.io.Serializable;
+
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
-public class TrajectoryStep
-{
+public class TrajectoryStep implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	private double xShift;
 	private double yShift;
 	private double zShift;

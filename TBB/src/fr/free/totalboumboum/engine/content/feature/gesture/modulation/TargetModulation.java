@@ -28,7 +28,8 @@ import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 
 public class TargetModulation extends AbstractActionModulation
-{
+{	private static final long serialVersionUID = 1L;
+
 	public TargetModulation(GeneralAction action)
 	{	super(action);
 	}

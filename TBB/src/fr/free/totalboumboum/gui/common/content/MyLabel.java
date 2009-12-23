@@ -33,7 +33,7 @@ import javax.swing.JLabel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
+import fr.free.totalboumboum.tools.image.ImageTools;
 
 public class MyLabel extends JLabel implements MouseListener, MouseMotionListener
 {	private static final long serialVersionUID = 1L;

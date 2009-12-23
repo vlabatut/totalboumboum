@@ -28,7 +28,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import fr.free.totalboumboum.gui.data.language.Language;
-import fr.free.totalboumboum.tools.ImageTools;
+import fr.free.totalboumboum.tools.image.ImageTools;
 
 public class MiscConfiguration
 {

@@ -22,8 +22,9 @@ package fr.free.totalboumboum.configuration.profile;
  */
 
 import java.awt.Color;
+import java.io.Serializable;
 
-public enum PredefinedColor
+public enum PredefinedColor implements Serializable
 {
 	BLACK,
 	BLUE,

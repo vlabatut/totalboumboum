@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.container.theme;
  * 
  */
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -31,8 +32,9 @@ import fr.free.totalboumboum.engine.content.sprite.block.BlockFactory;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.floor.FloorFactory;
 
-public class Theme
-{	
+public class Theme implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public static final String DEFAULT_GROUP = "default";
 	public static final String GROUP_SEPARATOR = "-";
 	public static final String PROPERTY_SEPARATOR = ":";

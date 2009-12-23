@@ -44,7 +44,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.gui.tools.MessageDisplayer;
-import fr.free.totalboumboum.tools.CalculusTools;
+import fr.free.totalboumboum.tools.calculus.CalculusTools;
 
 public class Level
 {	public Level(LocalLoop loop)				

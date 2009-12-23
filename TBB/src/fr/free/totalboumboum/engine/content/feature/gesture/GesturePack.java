@@ -21,13 +21,15 @@ package fr.free.totalboumboum.engine.content.feature.gesture;
  * 
  */
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 
-public class GesturePack
-{	
+public class GesturePack implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public GesturePack()
 	{	// init the gesture pack with all possible gestures
 		for(GestureName name: GestureName.values())

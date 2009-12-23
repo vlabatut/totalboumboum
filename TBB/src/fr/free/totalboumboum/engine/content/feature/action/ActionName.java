@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.action;
 
+import java.io.Serializable;
+
 import fr.free.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
 import fr.free.totalboumboum.engine.content.feature.action.consume.GeneralConsume;
 import fr.free.totalboumboum.engine.content.feature.action.cry.GeneralCry;
@@ -17,7 +19,7 @@ import fr.free.totalboumboum.engine.content.feature.action.release.GeneralReleas
 import fr.free.totalboumboum.engine.content.feature.action.transmit.GeneralTransmit;
 import fr.free.totalboumboum.engine.content.feature.action.trigger.GeneralTrigger;
 
-public enum ActionName
+public enum ActionName implements Serializable
 {
 	/** appearing in a tile, coming from nowhere (after a teleport, a drop, at the begining of a round, etc) */
 	APPEAR,

@@ -33,8 +33,8 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.engine.container.itemset.ItemsetPreview;
 import fr.free.totalboumboum.engine.container.itemset.ItemsetPreviewLoader;
 import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.XmlTools;
+import fr.free.totalboumboum.tools.image.ImageTools;
 
 public class LevelPreviewLoader
 {	private static boolean previewBasics;

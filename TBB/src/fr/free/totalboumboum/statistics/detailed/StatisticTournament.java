@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.tools.CalculusTools;
+import fr.free.totalboumboum.tools.calculus.CalculusTools;
 
 public class StatisticTournament extends StatisticBase
 {

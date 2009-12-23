@@ -28,7 +28,8 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 
 public class OtherModulation extends AbstractStateModulation
-{		
+{	private static final long serialVersionUID = 1L;
+
 	public OtherModulation(String name)
 	{	super(name);
 	}

@@ -21,14 +21,16 @@ package fr.free.totalboumboum.engine.content.feature.gesture.anime;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 
-public class AnimeDirection
-{
+public class AnimeDirection implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public AnimeDirection()
 	{	gestureName= null;
 		steps = new ArrayList<AnimeStep>(0);

@@ -22,7 +22,8 @@ package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
  */
 
 public class SelfModulation extends AbstractStateModulation
-{		
+{	private static final long serialVersionUID = 1L;
+
 	public SelfModulation(String name)
 	{	super(name);
 	}

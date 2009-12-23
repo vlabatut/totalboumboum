@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.container.fireset;
  * 
  */
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -29,8 +30,9 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.fire.FireFactory;
 
-public class Fireset
-{	
+public class Fireset implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public Fireset()
 	{	fireFactories = new HashMap<String,FireFactory>();
 	}

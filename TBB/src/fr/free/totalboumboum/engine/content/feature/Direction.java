@@ -21,16 +21,17 @@ package fr.free.totalboumboum.engine.content.feature;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Locale;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
 
-import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.XmlTools;
+import fr.free.totalboumboum.tools.calculus.CalculusTools;
 
-public enum Direction
+public enum Direction implements Serializable
 {
 	/////////////////////////////////////////////////////////////////
 	// VALUES			/////////////////////////////////////////////

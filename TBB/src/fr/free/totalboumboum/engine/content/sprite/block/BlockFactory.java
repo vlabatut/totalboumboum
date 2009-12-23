@@ -29,7 +29,8 @@ import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
 public class BlockFactory extends SpriteFactory<Block>
-{	
+{	private static final long serialVersionUID = 1L;
+	
 	/////////////////////////////////////////////////////////////////
 	// GESTURE PACK		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

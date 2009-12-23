@@ -43,7 +43,7 @@ import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.statistics.overall.OverallStatsLoader;
 import fr.free.totalboumboum.statistics.overall.OverallStatsSaver;
 import fr.free.totalboumboum.statistics.overall.PlayerStats;
-import fr.free.totalboumboum.tools.CalculusTools;
+import fr.free.totalboumboum.tools.calculus.CalculusTools;
 
 public class GameStatistics
 {

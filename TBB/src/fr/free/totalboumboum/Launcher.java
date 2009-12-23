@@ -1174,6 +1174,11 @@ public class Launcher
 	 *  		- elles ne tuent pas, elles contaminent. 
 	 *  		- le contaminateur initial est résistant
 	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
-	 *  - IA : option permettant de logger les exceptions
+	 *  
+	 *  cache :
+	 *  	- pb de mise à l'échelle
+	 *  	- pb de ralentissement sur la mise en cache
+	 *  	- pas plus rapide que normal (clairement !)
+	 *  	>> mise en cache mémoire au moins pour les joueurs ?
 	 */ 
 }

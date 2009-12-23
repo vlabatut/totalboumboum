@@ -32,7 +32,7 @@ import fr.free.totalboumboum.engine.content.feature.action.movehigh.SpecificMove
 import fr.free.totalboumboum.engine.content.feature.action.movelow.SpecificMoveLow;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.game.round.RoundVariables;
-import fr.free.totalboumboum.tools.CalculusTools;
+import fr.free.totalboumboum.tools.calculus.CalculusTools;
 
 public class PotentialObstacle
 {	private MoveZone moveZone;

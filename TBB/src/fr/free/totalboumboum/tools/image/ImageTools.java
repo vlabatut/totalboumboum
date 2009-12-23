@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.tools;
+package fr.free.totalboumboum.tools.image;
 
 /*
  * Total Boum Boum
@@ -56,6 +56,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.Colormap;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.ColormapLoader;
+import fr.free.totalboumboum.tools.XmlTools;
 
 public class ImageTools
 {

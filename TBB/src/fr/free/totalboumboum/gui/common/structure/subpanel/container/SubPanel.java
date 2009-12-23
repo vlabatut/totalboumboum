@@ -39,7 +39,7 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.content.ContentPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
+import fr.free.totalboumboum.tools.image.ImageTools;
 
 public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 {	private static final long serialVersionUID = 1L;

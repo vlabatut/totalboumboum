@@ -32,7 +32,7 @@ import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.common.content.MyLabel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
+import fr.free.totalboumboum.tools.image.ImageTools;
 
 public class ImageContentPanel extends ContentPanel
 {	private static final long serialVersionUID = 1L;

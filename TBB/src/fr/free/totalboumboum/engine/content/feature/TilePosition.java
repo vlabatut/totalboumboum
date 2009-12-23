@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.engine.content.feature;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -34,8 +35,9 @@ import fr.free.totalboumboum.tools.XmlTools;
 /**
  * relative positions of the actor and the target, expressed in terms of tiles.
  */
-public enum TilePosition
-{	/** no position can be defined: there's no target */
+public enum TilePosition implements Serializable
+{	
+	/** no position can be defined: there's no target */
 	NONE,
 	/** the actor and target are together in the same tile */
 	SAME,

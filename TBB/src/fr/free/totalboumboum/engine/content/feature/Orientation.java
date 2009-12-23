@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.engine.content.feature;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -36,7 +37,7 @@ import fr.free.totalboumboum.tools.XmlTools;
  * represents the compared directions of the action and of the target
  * (the levels is closed, so the target direction has to be considered in terms of shortest distance)  
  */ 
-public enum Orientation
+public enum Orientation implements Serializable
 {	/** no target or no action direction */
 	NONE,
 	/** the action is performed facing the target, or the action and the target are exactly on the same spot */

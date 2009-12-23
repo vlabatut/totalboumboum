@@ -21,9 +21,11 @@ package fr.free.totalboumboum.engine.content.feature;
  * 
  */
 
+import java.io.Serializable;
+
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
-public enum ImageShift
+public enum ImageShift implements Serializable
 {
 	DOWN,BOUNDHEIGHT;
 	

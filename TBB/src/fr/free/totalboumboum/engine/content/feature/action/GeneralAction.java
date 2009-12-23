@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.engine.content.feature.action;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.engine.content.feature.Contact;
@@ -37,8 +38,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * usually user-defined to be used in abilities and modulations.
  * SpecificActions represent in-game specific situations. 
  */
-public abstract class GeneralAction
-{	
+public abstract class GeneralAction implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	
 	/* NOTE in tile position: 
 	 * 	- FAR was changed into REMOTE, 
