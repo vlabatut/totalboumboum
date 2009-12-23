@@ -38,7 +38,7 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.content.Column;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
+import fr.free.totalboumboum.tools.image.ImageTools;
 
 public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;

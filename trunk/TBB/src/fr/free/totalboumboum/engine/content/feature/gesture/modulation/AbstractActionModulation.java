@@ -32,7 +32,7 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class AbstractActionModulation extends AbstractModulation
-{	
+{	private static final long serialVersionUID = 1L;
 	
 	public AbstractActionModulation(GeneralAction action)
 	{	super();

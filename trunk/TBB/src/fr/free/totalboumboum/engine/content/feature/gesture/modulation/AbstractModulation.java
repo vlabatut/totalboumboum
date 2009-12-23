@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
 
+import java.io.Serializable;
+
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 
 /*
@@ -23,8 +25,9 @@ import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
  * 
  */
 
-public abstract class AbstractModulation
-{	
+public abstract class AbstractModulation implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public AbstractModulation()
 	{	strength = 0;
 		frame = false;

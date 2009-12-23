@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.engine.content.feature;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -32,7 +33,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 /**
  * represents the role of the actor or the target during an action.
  */
-public enum Role
+public enum Role implements Serializable
 {	/** no object required (likely: no target) */
 	NONE,
 	/** the actor or target is a block sprite */

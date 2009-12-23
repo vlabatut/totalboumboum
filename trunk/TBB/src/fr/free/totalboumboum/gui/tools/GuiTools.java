@@ -47,7 +47,7 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.gui.common.structure.ButtonAware;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.tools.GameData;
-import fr.free.totalboumboum.tools.ImageTools;
+import fr.free.totalboumboum.tools.image.ImageTools;
 
 public class GuiTools
 {	

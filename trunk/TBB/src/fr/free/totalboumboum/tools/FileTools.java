@@ -116,6 +116,7 @@ public class FileTools
 	public static final String FOLDER_AI = "ai";
 	public static final String FOLDER_BLOCKS = "blocks";
 	public static final String FOLDER_BOMBS = "bombs";
+	public static final String FOLDER_CACHE = "cache";
 	public static final String FOLDER_CHARACTERS = "characters";
 	public static final String FOLDER_CONFIGURATION = "configuration";
 	public static final String FOLDER_CONTROLS = "controls";
@@ -170,6 +171,16 @@ public class FileTools
 	{	return getResourcesPath()+File.separator+FOLDER_AI;		
 	}
 	
+	public static String getCachePath()
+	{	return getResourcesPath()+File.separator+FOLDER_CACHE;		
+	}
+	public static String getCacheThemesPath()
+	{	return getCachePath()+File.separator+FOLDER_THEMES;		
+	}
+	public static String getCacheHeroesPath()
+	{	return getCachePath()+File.separator+FOLDER_HEROES;		
+	}
+
 	public static String getHeroesPath()
 	{	return getResourcesPath()+File.separator+FOLDER_HEROES;		
 	}
@@ -238,6 +249,9 @@ public class FileTools
 
 
 
+	
+	
+	
 	public static File getFile(String fileName, File[] list)
 	{	File result = null;
 		int i = 0;

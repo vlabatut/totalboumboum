@@ -29,7 +29,7 @@ import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class SpecificAction
-{
+{	
 	protected SpecificAction(ActionName name, Sprite actor)
 	{	this.name = name;
 		this.actor = actor;

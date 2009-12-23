@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.tools;
+package fr.free.totalboumboum.tools.calculus;
 
 /*
  * Total Boum Boum

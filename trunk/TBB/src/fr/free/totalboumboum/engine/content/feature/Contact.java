@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.engine.content.feature;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -34,7 +35,7 @@ import fr.free.totalboumboum.tools.XmlTools;
  * represents the kind of contact between the actor and the target during an action:
  * 
  */
-public enum Contact
+public enum Contact implements Serializable
 {	
 	/** absolutely no contact, or contact undefined (because there's no target) */
 	NONE,

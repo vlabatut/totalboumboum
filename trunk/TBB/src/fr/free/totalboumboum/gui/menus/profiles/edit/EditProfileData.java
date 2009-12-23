@@ -60,7 +60,7 @@ import fr.free.totalboumboum.gui.menus.profiles.ais.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.menus.profiles.heroes.SelectedHeroSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
+import fr.free.totalboumboum.tools.image.ImageTools;
 
 public class EditProfileData extends EntitledDataPanel implements MouseListener, DocumentListener
 {	

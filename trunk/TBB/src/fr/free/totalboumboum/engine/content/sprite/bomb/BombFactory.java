@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.sprite.bomb;
  * 
  */
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
@@ -29,7 +28,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
-public class BombFactory extends SpriteFactory<Bomb> implements Serializable
+public class BombFactory extends SpriteFactory<Bomb>
 {	private static final long serialVersionUID = 1L;
 
 	public BombFactory(String bombName)

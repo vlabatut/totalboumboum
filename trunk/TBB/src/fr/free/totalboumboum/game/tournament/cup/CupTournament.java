@@ -42,8 +42,8 @@ import fr.free.totalboumboum.statistics.GameStatistics;
 import fr.free.totalboumboum.statistics.detailed.StatisticMatch;
 import fr.free.totalboumboum.statistics.detailed.StatisticTournament;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
-import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.GameData;
+import fr.free.totalboumboum.tools.calculus.CalculusTools;
 
 public class CupTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;

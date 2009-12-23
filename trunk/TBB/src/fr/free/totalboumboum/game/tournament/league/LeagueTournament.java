@@ -38,8 +38,8 @@ import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.statistics.detailed.StatisticMatch;
 import fr.free.totalboumboum.statistics.detailed.StatisticTournament;
-import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.GameData;
+import fr.free.totalboumboum.tools.calculus.CalculusTools;
 
 public class LeagueTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;

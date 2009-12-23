@@ -33,7 +33,8 @@ import fr.free.totalboumboum.engine.content.feature.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 
 public class GeneralRelease extends GeneralAction
-{
+{	private static final long serialVersionUID = 1L;
+
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

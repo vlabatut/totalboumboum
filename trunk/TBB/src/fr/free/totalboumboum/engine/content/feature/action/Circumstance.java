@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.engine.content.feature.action;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.engine.content.feature.Contact;
@@ -28,8 +29,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 
  */
 
-public class Circumstance
-{	
+public class Circumstance implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public Circumstance()
 	{			
 	}

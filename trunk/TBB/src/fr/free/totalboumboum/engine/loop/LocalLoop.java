@@ -87,11 +87,11 @@ import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundVariables;
-import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.GameData;
 import fr.free.totalboumboum.tools.StringTools;
 import fr.free.totalboumboum.tools.StringTools.TimeUnit;
+import fr.free.totalboumboum.tools.calculus.CalculusTools;
 
 public class LocalLoop extends Loop
 {	private static final long serialVersionUID = 1L;

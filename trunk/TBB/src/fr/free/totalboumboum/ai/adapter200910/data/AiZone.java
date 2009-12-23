@@ -45,7 +45,7 @@ import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.statistics.GameStatistics;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
-import fr.free.totalboumboum.tools.CalculusTools;
+import fr.free.totalboumboum.tools.calculus.CalculusTools;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.

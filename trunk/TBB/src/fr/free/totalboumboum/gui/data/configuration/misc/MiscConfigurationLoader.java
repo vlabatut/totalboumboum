@@ -40,8 +40,8 @@ import fr.free.totalboumboum.gui.data.language.LanguageLoader;
 import fr.free.totalboumboum.gui.tools.GuiFileTools;
 import fr.free.totalboumboum.gui.tools.GuiXmlTools;
 import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.XmlTools;
+import fr.free.totalboumboum.tools.image.ImageTools;
 
 public class MiscConfigurationLoader
 {	

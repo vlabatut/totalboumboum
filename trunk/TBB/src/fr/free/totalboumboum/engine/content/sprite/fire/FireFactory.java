@@ -30,7 +30,8 @@ import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
 public class FireFactory extends SpriteFactory<Fire>
-{	
+{	private static final long serialVersionUID = 1L;
+
 /*	public FireFactory(String name)
 	{	this.name = name;
 		

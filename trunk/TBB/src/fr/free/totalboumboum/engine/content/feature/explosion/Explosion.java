@@ -21,12 +21,14 @@ package fr.free.totalboumboum.engine.content.feature.explosion;
  * 
  */
 
+import java.io.Serializable;
+
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
-public class Explosion
-{
+public class Explosion implements Serializable
+{	private static final long serialVersionUID = 1L;
 	
 	public Explosion()
 	{	

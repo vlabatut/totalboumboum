@@ -22,11 +22,17 @@ package fr.free.totalboumboum.engine.content.feature.gesture.anime;
  */
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
+import fr.free.totalboumboum.tools.image.BufferedImageWrapper;
 
-public class AnimeStep
-{
+public class AnimeStep implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public AnimeStep()
 	{	image = null;
 		duration = 0;
@@ -41,7 +47,7 @@ public class AnimeStep
 	/////////////////////////////////////////////////////////////////
 	// IMAGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private BufferedImage image;
+	private transient BufferedImage image;
 
 	public BufferedImage getImage()
 	{	return image;
@@ -89,7 +95,7 @@ public class AnimeStep
 	/////////////////////////////////////////////////////////////////
 	// SHADOW			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private BufferedImage shadow;
+	private transient BufferedImage shadow;
 
 	public boolean hasShadow()
 	{	return shadow != null;
@@ -205,4 +211,49 @@ public class AnimeStep
 			shadow = null;
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// I/O				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void writeObject(ObjectOutputStream out) throws IOException
+	{	// all fields except images
+		out.defaultWriteObject();
+		
+		// image
+		if(this.image != null)
+		{	BufferedImageWrapper cp = new BufferedImageWrapper(image);
+			out.writeObject(new Boolean(true));
+			out.writeObject(cp);
+		}
+		else
+			out.writeObject(new Boolean(false));
+		
+		// shadow
+		if(this.shadow != null)
+		{	BufferedImageWrapper cp = new BufferedImageWrapper(shadow);
+			out.writeObject(new Boolean(true));
+			out.writeObject(cp);
+		}
+		else
+			out.writeObject(new Boolean(false));
+	}
+
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+	{	// all fields except images
+		in.defaultReadObject();
+		
+		// image
+		Boolean flag = (Boolean)in.readObject();
+		if(flag)
+		{	BufferedImageWrapper cp = (BufferedImageWrapper) in.readObject();
+			image = cp.getIm();
+		}
+
+		// image
+		flag = (Boolean)in.readObject();
+		if(flag)
+		{	BufferedImageWrapper cp = (BufferedImageWrapper) in.readObject();
+			shadow = cp.getIm();
+		}
+}
 }

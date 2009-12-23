@@ -24,7 +24,8 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
  */
 
 public class AbstractStateModulation extends AbstractModulation
-{		
+{	private static final long serialVersionUID = 1L;
+
 	public AbstractStateModulation(String name)
 	{	super();
 		this.name = name;

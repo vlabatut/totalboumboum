@@ -21,14 +21,22 @@ package fr.free.totalboumboum.engine.container.theme;
  * 
  */
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -37,23 +45,56 @@ public class ThemeLoader
 	/////////////////////////////////////////////////////////////////
 	// GENERAL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static Theme loadTheme(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static Theme loadTheme(String folderPath) throws SAXException, IOException, ParserConfigurationException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folderPath;
-		String filename = individualFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_XML;
-		File schemaFile,dataFile;	
+		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_SCHEMA);
+		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_XML);
+		Theme result = null;
 		
-		// cache
+		// caching
+		String cachePath = FileTools.getCacheThemesPath()+ File.separator;
+		File objectFile = dataFile.getParentFile();
+		String objectName = objectFile.getName();
+		File packFile = objectFile.getParentFile().getParentFile();
+		String packName = packFile.getName();
+		cachePath = cachePath + packName+"_"+objectName+FileTools.EXTENSION_DATA;
+		File cacheFile = new File(cachePath);
+		if(Configuration.getEngineConfiguration().getFileCache() && cacheFile.exists())
+		{	try
+			{	FileInputStream in = new FileInputStream(cacheFile);
+				BufferedInputStream inBuff = new BufferedInputStream(in);
+				ObjectInputStream oIn = new ObjectInputStream(inBuff);
+				result = (Theme)oIn.readObject();
+				oIn.close();
+			}
+			catch (FileNotFoundException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
 		
+		if(result==null)
+		{	// opening
+			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+			// loading
+			result = loadThemeElement(root,individualFolder);
+			// caching
+			if(Configuration.getEngineConfiguration().getFileCache())
+			{	FileOutputStream out = new FileOutputStream(cacheFile);
+				BufferedOutputStream outBuff = new BufferedOutputStream(out);
+				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
+				oOut.writeObject(result);
+				oOut.close();
+			}
+		}
 		
-		// opening
-		dataFile = new File(filename);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_SCHEMA);
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		
-		// theme
-		Theme result = loadThemeElement(root,individualFolder);
 		return result;
     }
     

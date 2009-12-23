@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.trajectory;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -28,8 +29,9 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
-public class TrajectoryDirection
-{
+public class TrajectoryDirection implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	private ArrayList<TrajectoryStep> steps;
 	private boolean repeat;
 	private double xInteraction;

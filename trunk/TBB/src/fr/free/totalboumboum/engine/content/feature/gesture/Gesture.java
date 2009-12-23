@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,8 +42,9 @@ import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModu
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
-public class Gesture
-{	
+public class Gesture implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public Gesture()
 	{	
 	}
@@ -296,8 +298,7 @@ public class Gesture
 				temp.finish();
 			}
 			animes.clear();
-			
-			
+						
 			// trajectories
 			for(Entry<Direction,TrajectoryDirection> e: trajectories.entrySet())
 			{	TrajectoryDirection temp = e.getValue();

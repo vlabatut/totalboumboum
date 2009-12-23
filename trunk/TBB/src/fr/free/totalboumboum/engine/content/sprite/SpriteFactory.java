@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.content.sprite;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -39,8 +40,9 @@ import fr.free.totalboumboum.engine.content.manager.item.ItemManager;
 import fr.free.totalboumboum.engine.content.manager.modulation.ModulationManager;
 import fr.free.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 
-public abstract class SpriteFactory<T extends Sprite>
-{	
+public abstract class SpriteFactory<T extends Sprite> implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
