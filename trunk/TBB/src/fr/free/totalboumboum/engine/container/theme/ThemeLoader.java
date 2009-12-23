@@ -41,10 +41,14 @@ public class ThemeLoader
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folderPath;
+		String filename = individualFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_XML;
 		File schemaFile,dataFile;	
 		
+		// cache
+		
+		
 		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_XML);
+		dataFile = new File(filename);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
