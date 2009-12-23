@@ -25,6 +25,10 @@ This product includes softwares developed by:
     Class fr.free.totalboumboum.gui.tools.MessageDisplayer
     Copyright 2005 Adam Walker
     http://www.walkersoftware.net/articles/text-effects-in-java
+  + Juneym:
+    Class fr.free.totalboumboum.tools.image.BufferedImageWrapper
+    Copyright 2006 Juneym
+    http://forums.sun.com/thread.jspa?threadID=301424
   + Sun Microsystems Inc: 
     Class fr.free.totalboumboum.gui.tools.SpringUtilities
     Copyright 1995-2008 Sun Microsystems Inc.
