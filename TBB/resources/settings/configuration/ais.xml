@@ -4,6 +4,6 @@
 	<autoAdvance value="true" delay="2000" />
 	<hideAllAis value="false" />
 	<displayExceptions value="false" />
-	<logExceptions value="false" />
+	<logExceptions value="true" />
 </ais>
 
