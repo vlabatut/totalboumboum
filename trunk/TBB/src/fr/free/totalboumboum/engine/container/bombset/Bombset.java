@@ -144,7 +144,7 @@ public class Bombset implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public Bombset copy()
+	public Bombset copy(double zoomFactor)
 	{	Bombset result = new Bombset();
 		for(int i=0;i<bombFactories.size();i++)
 		{	BombFactory bf = bombFactories.get(i).copy();

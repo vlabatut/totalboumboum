@@ -37,6 +37,8 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
+import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -55,13 +57,22 @@ public class ThemeLoader
 		
 		// caching
 		String cachePath = FileTools.getCacheThemesPath()+ File.separator;
+		File cacheFolder = new File(cachePath);
+		cacheFolder.mkdirs();
 		File objectFile = dataFile.getParentFile();
 		String objectName = objectFile.getName();
 		File packFile = objectFile.getParentFile().getParentFile();
 		String packName = packFile.getName();
-		cachePath = cachePath + packName+"_"+objectName+FileTools.EXTENSION_DATA;
+		String cacheName = packName+"_"+objectName;
+		cachePath = cachePath + cacheName +FileTools.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
-		if(Configuration.getEngineConfiguration().getFileCache() && cacheFile.exists())
+		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
+		if(engineConfiguration.getFileCache())
+		{	Object o = engineConfiguration.getMemoryCache(cacheName);
+			double zoomFactor = RoundVariables.zoomFactor;
+			result = ((Theme)o).copy(zoomFactor);
+		}
+		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
@@ -86,18 +97,38 @@ public class ThemeLoader
 			// loading
 			result = loadThemeElement(root,individualFolder);
 			// caching
-			if(Configuration.getEngineConfiguration().getFileCache())
+			boolean cached = false;
+			if(engineConfiguration.getMemoryCache())
+			{	engineConfiguration.addMemoryCache(cacheName,result);
+				cached = true;
+			}
+			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
 				oOut.writeObject(result);
 				oOut.close();
+				cached = true;
+			}
+			if(cached)
+			{	double zoomFactor = RoundVariables.zoomFactor;
+				result = result.copy(zoomFactor);
 			}
 		}
 		
 		return result;
     }
-    
+
+/*
+ * TODO
+ * 	- renommer copy en cacheCopy
+ * 	- passer tous les trucs qui ne se copient qu'une fois (bombset/feu?)
+ * 
+ * 	- ou alors p-ê qu'il faut traiter le cache mémoire avant le loader
+ * 
+ *  - ou alors se comporter exactement comme le loader...	
+ */
+	
     private static Theme loadThemeElement(Element root, String individualFolder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// init
     	Theme result = new Theme();
