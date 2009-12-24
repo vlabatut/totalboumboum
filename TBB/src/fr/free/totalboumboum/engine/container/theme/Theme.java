@@ -163,5 +163,34 @@ if(bf==null)
 			}
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Theme copy(double zoomFactor)
+	{	Theme result = new Theme();
+	
+		// misc
+		result.author = author;
+		result.name = name;
+		result.source = source;
+		result.version = version;
+		
+		// blocks
+		for(Entry<String,BlockFactory> entry: blocks.entrySet())
+		{	String key = entry.getKey();
+			BlockFactory blocFactory = entry.getValue().copy(zoomFactor);
+			result.addBlockFactory(key,blocFactory);
+		}
+		
+		// items
+		for(Entry<String,FloorFactory> entry: floors.entrySet())
+		{	String key = entry.getKey();
+			FloorFactory floorFactory = entry.getValue().copy(zoomFactor);
+			result.addFloorFactory(key,floorFactory);
+		}
+		
+		return result;
+	}
 }
 

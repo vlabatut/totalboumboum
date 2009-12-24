@@ -21,8 +21,15 @@ package fr.free.totalboumboum.engine.container.fireset;
  * 
  */
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -33,8 +40,13 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
+import fr.free.totalboumboum.engine.container.bombset.Bombset;
+import fr.free.totalboumboum.engine.container.theme.Theme;
 import fr.free.totalboumboum.engine.content.sprite.fire.FireFactory;
 import fr.free.totalboumboum.engine.content.sprite.fire.FireFactoryLoader;
+import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -47,15 +59,70 @@ public class FiresetLoader
 	{	// init
 		String individualFolder = folderPath;
 		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile,dataFile;
+		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_FIRESETMAP+FileTools.EXTENSION_SCHEMA);
+		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_FIRESETMAP+FileTools.EXTENSION_XML);
+		FiresetMap result = null;
 		
-		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_FIRESETMAP+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_FIRESETMAP+FileTools.EXTENSION_SCHEMA);
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		// caching
+		String cachePath = FileTools.getCacheFiresPath()+ File.separator;
+		File cacheFolder = new File(cachePath);
+		cacheFolder.mkdirs();
+		File objectFile = dataFile.getParentFile();
+		String objectName = objectFile.getName();
+		File packFile = objectFile.getParentFile().getParentFile();
+		String packName = packFile.getName();
+		String cacheName = packName+"_"+objectName;
+		cachePath = cachePath + cacheName +FileTools.EXTENSION_DATA;
+		File cacheFile = new File(cachePath);
+		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
+		if(engineConfiguration.getFileCache())
+		{	Object o = engineConfiguration.getMemoryCache(cacheName);
+			double zoomFactor = RoundVariables.zoomFactor;
+			result = ((FiresetMap)o).copy(zoomFactor);
+		}
+		else if(engineConfiguration.getFileCache() && cacheFile.exists())
+		{	try
+			{	FileInputStream in = new FileInputStream(cacheFile);
+				BufferedInputStream inBuff = new BufferedInputStream(in);
+				ObjectInputStream oIn = new ObjectInputStream(inBuff);
+				result = (FiresetMap)oIn.readObject();
+				oIn.close();
+			}
+			catch (FileNotFoundException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
 		
-		// loading
-		FiresetMap result = loadFiresetmapElement(individualFolder,root);
+		if(result==null)
+		{	// opening
+			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+			// loading
+			result = loadFiresetmapElement(individualFolder,root);
+			// caching
+			boolean cached = false;
+			if(engineConfiguration.getMemoryCache())
+			{	engineConfiguration.addMemoryCache(cacheName,result);
+				cached = true;
+			}
+			if(engineConfiguration.getFileCache())
+			{	FileOutputStream out = new FileOutputStream(cacheFile);
+				BufferedOutputStream outBuff = new BufferedOutputStream(out);
+				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
+				oOut.writeObject(result);
+				oOut.close();
+				cached = true;
+			}
+			if(cached)
+			{	double zoomFactor = RoundVariables.zoomFactor;
+				result = result.copy(zoomFactor);
+			}
+		}
 
 		return result;
 	}

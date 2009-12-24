@@ -114,4 +114,5 @@ public class FireFactory extends SpriteFactory<Fire>
 			fireset = null;
 		}
 	}
+
 }

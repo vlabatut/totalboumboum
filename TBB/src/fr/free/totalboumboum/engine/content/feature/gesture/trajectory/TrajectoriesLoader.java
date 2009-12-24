@@ -34,6 +34,8 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
@@ -76,16 +78,23 @@ public class TrajectoriesLoader
      */
     @SuppressWarnings("unchecked")
 	private static void loadGestureElement(Element root, GesturePack pack) throws IOException
-    {	double zoomFactor = RoundVariables.zoomFactor;
+    {	// zoom
+    	double zoomFactor = RoundVariables.zoomFactor;
+		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
+		if(engineConfiguration.getMemoryCache() || engineConfiguration.getFileCache())
+			zoomFactor = 1;
+    
     	// name
 		String name = root.getAttribute(XmlTools.NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);
 		Gesture gesture = pack.getGesture(gestureName);
+		
     	// repeat flag
 		String repeatStr = root.getAttribute(XmlTools.REPEAT).getValue();
 		boolean repeat = false;
 		if(!repeatStr.equals(""))
 			repeat = Boolean.parseBoolean(repeatStr);
+		
 		// X interaction coefficient
 		double xInteraction = 0;
 		Attribute attribute = root.getAttribute(XmlTools.XINTERACTION);
@@ -93,6 +102,7 @@ public class TrajectoriesLoader
 		{	double temp = Double.parseDouble(attribute.getValue().trim());
 			xInteraction = zoomFactor*temp;
 		}
+		
 		// Y interaction coefficient
 		double yInteraction = 0;
 		attribute = root.getAttribute(XmlTools.YINTERACTION);
@@ -100,11 +110,13 @@ public class TrajectoriesLoader
 		{	double temp = Double.parseDouble(attribute.getValue().trim());
 			yInteraction = zoomFactor*temp;
 		}
+		
 		// proportional flag
 		boolean proportional = false;
 		attribute = root.getAttribute(XmlTools.PROPORTIONAL);
 		if(attribute!=null)
 			proportional = Boolean.parseBoolean(attribute.getValue());
+		
 		// list of directions
 		List<Element> directionsList = root.getChildren(XmlTools.DIRECTION);
 		Iterator<Element> i = directionsList.iterator();

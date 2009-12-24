@@ -174,11 +174,20 @@ public class FileTools
 	public static String getCachePath()
 	{	return getResourcesPath()+File.separator+FOLDER_CACHE;		
 	}
-	public static String getCacheThemesPath()
-	{	return getCachePath()+File.separator+FOLDER_THEMES;		
+	public static String getCacheBombsPath()
+	{	return getCachePath()+File.separator+FOLDER_BOMBS;		
+	}
+	public static String getCacheFiresPath()
+	{	return getCachePath()+File.separator+FOLDER_FIRES;		
 	}
 	public static String getCacheHeroesPath()
 	{	return getCachePath()+File.separator+FOLDER_HEROES;		
+	}
+	public static String getCacheItemsPath()
+	{	return getCachePath()+File.separator+FOLDER_ITEMS;		
+	}
+	public static String getCacheThemesPath()
+	{	return getCachePath()+File.separator+FOLDER_THEMES;		
 	}
 
 	public static String getHeroesPath()

@@ -111,12 +111,23 @@ public class BombFactory extends SpriteFactory<Bomb>
 	/////////////////////////////////////////////////////////////////
 	public BombFactory copy()
 	{	BombFactory result = new BombFactory(bombName);
-		result.setAbilities(abilities);
-		result.setBase(base);
-		result.setBombset(null); //TODO to be completed later (?)
-		result.setExplosion(explosion);
-		result.setGesturePack(gesturePack.copy());
+
+		// misc
 		result.setName(name);
+		result.setBase(base);
+		
+		// abilities
+		result.setAbilities(abilities);
+		
+		// bombset
+		result.setBombset(null); //TODO to be completed later (?)
+		
+		// explosion
+		result.setExplosion(explosion);
+		
+		// gestures
+		result.setGesturePack(gesturePack.copy());
+		
 		return result;
 	}
 	

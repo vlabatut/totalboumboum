@@ -27,6 +27,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 
 import fr.free.totalboumboum.tools.FileTools;
 
@@ -92,13 +93,27 @@ public class EngineConfiguration
 	// CACHING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean fileCache = false;
+	private boolean memoryCache = false;
+	private HashMap<String,Object> cache = new HashMap<String,Object>();
 	
 	public boolean getFileCache()
 	{	return fileCache;
 	}
-	
 	public void setFileCache(boolean fileCache)
 	{	this.fileCache = fileCache;
+	}
+
+	public boolean getMemoryCache()
+	{	return memoryCache;
+	}
+	public void setMemoryCache(boolean memoryCache)
+	{	this.memoryCache = memoryCache;
+	}
+	public void addMemoryCache(String key, Object value)
+	{	cache.put(key,value);		
+	}
+	public Object getMemoryCache(String key)
+	{	return cache.get(key);	
 	}
 
 	/////////////////////////////////////////////////////////////////
