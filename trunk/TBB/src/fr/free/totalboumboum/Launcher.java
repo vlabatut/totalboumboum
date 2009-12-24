@@ -1178,7 +1178,7 @@ public class Launcher
 	 *  cache :
 	 *  	- pb de mise à l'échelle
 	 *  	- pb de ralentissement sur la mise en cache
-	 *  	- pas plus rapide que normal (clairement !)
+	 *  	- pas plus rapide que normal (clairement ! mais à mesurer avec jprofiler)
 	 *  	>> mise en cache mémoire au moins pour les joueurs ?
 	 */ 
 }
