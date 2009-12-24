@@ -42,7 +42,7 @@ public class LevelInit
 	 * in order to help designing new levels
 	 */
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	createClassicLevel(15,21,"temp","level",1);
+	{	createClassicLevel(15,15,"temp","level",1);
 	}
 
 	private static void createClassicLevel(int height, int width, String pack, String level, int border) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
