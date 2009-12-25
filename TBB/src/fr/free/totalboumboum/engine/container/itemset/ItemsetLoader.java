@@ -42,8 +42,6 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.theme.Theme;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
@@ -80,7 +78,7 @@ public class ItemsetLoader
 		if(engineConfiguration.getFileCache())
 		{	Object o = engineConfiguration.getMemoryCache(cacheName);
 			double zoomFactor = RoundVariables.zoomFactor;
-			result = ((Itemset)o).copy(zoomFactor);
+			result = ((Itemset)o).cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
@@ -122,7 +120,7 @@ public class ItemsetLoader
 			}
 			if(cached)
 			{	double zoomFactor = RoundVariables.zoomFactor;
-				result = result.copy(zoomFactor);
+				result = result.cacheCopy(zoomFactor);
 			}
 		}
 		

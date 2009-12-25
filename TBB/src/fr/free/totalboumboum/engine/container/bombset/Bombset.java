@@ -31,6 +31,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
+import fr.free.totalboumboum.game.round.RoundVariables;
 
 public class Bombset implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -144,10 +145,30 @@ public class Bombset implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public Bombset copy(double zoomFactor)
+	public Bombset copy()
 	{	Bombset result = new Bombset();
 		for(int i=0;i<bombFactories.size();i++)
 		{	BombFactory bf = bombFactories.get(i).copy();
+			ArrayList<StateAbility> ra = requiredAbilities.get(i);
+			result.addBombFactory(bf,ra);
+		}
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/*
+	 * the Bombset has already been copied/loaded, so it is taken from the level
+	 */
+	public Bombset cacheCopy()
+	{	Bombset result = RoundVariables.level.getBombset();
+		return result;
+	}
+	public Bombset cacheCopy(double zoomFactor)
+	{	Bombset result = new Bombset();
+		for(int i=0;i<bombFactories.size();i++)
+		{	BombFactory bf = bombFactories.get(i).cacheCopy(zoomFactor);
 			ArrayList<StateAbility> ra = requiredAbilities.get(i);
 			result.addBombFactory(bf,ra);
 		}

@@ -31,50 +31,71 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class TrajectoryDirection implements Serializable
 {	private static final long serialVersionUID = 1L;
-
-	private ArrayList<TrajectoryStep> steps;
-	private boolean repeat;
-	private double xInteraction;
-	private double yInteraction;
-	private GestureName gestureName; //debug
-	private Direction direction; //debug
-	//
-	private boolean forceXPosition;
-	private boolean forceYPosition;
-	private boolean forceZPosition;
-	private double forcedXPosition;
-	private double forcedYPosition;
-	private double forcedZPosition;
-	private long forcedPositionTime;
-	private boolean proportional;
 	
 	public TrajectoryDirection()
 	{	gestureName = null;
 		steps = new ArrayList<TrajectoryStep>(0);
 		repeat = false;
+		
 		xInteraction = 0;
 		yInteraction = 0;
-		//
+
 		forceXPosition = false;
 		forceYPosition = false;
 		forceZPosition = false;
+		
 		forcedXPosition = 0;
 		forcedYPosition = 0;
 		forcedZPosition = 0;
 		forcedPositionTime = 0;
+		
 		proportional = false;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private GestureName gestureName; //debug
+
+	public String getName()
+	{	return gestureName+","+direction;
+	}
+	public void setGestureName(GestureName gestureName)
+	{	this.gestureName = gestureName;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DIRECTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Direction direction; //debug
+
+	public void setDirection(Direction direction)
+	{	this.direction = direction;
+	}
+	public Direction getDirection()
+	{	return direction;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// STEPS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<TrajectoryStep> steps;
+
 	public Iterator<TrajectoryStep> getIterator()
 	{	return steps.iterator();		
 	}
+	
 	public void add(TrajectoryStep trajectoryStep)
 	{	steps.add(trajectoryStep);		
 	}
+	
 	public void addAll(ArrayList<TrajectoryStep> trajectorySteps)
 	{	steps.addAll(trajectorySteps);		
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// DURATION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Compute the total duration of the animation.
 	 * The result is 0 if there is no time limit. 
@@ -87,6 +108,10 @@ public class TrajectoryDirection implements Serializable
 			result = result + i.next().getDuration();
 		return result;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SHIFTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public double getTotalXShift()
 	{	double result = 0;
 		Iterator<TrajectoryStep> i = steps.iterator();
@@ -94,6 +119,7 @@ public class TrajectoryDirection implements Serializable
 			result = result + i.next().getXShift();
 		return result;
 	}
+	
 	public double getTotalYShift()
 	{	double result = 0;
 		Iterator<TrajectoryStep> i = steps.iterator();
@@ -101,6 +127,7 @@ public class TrajectoryDirection implements Serializable
 			result = result + i.next().getYShift();
 		return result;
 	}
+	
 	public double getTotalZShift(Sprite boundToSprite)
 	{	double result = 0;
 		Iterator<TrajectoryStep> i = steps.iterator();
@@ -109,12 +136,24 @@ public class TrajectoryDirection implements Serializable
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// REPEAT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean repeat;
+
 	public boolean getRepeat()
 	{	return repeat;
 	}
+	
 	public void setRepeat(boolean repeat)
 	{	this.repeat = repeat;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// INTERACTIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private double xInteraction;
+	private double yInteraction;
 
 	public double getXInteraction()
 	{	return xInteraction;
@@ -129,6 +168,13 @@ public class TrajectoryDirection implements Serializable
 	public void setYInteraction(double interaction)
 	{	yInteraction = interaction;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FORCE POSITION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean forceXPosition;
+	private boolean forceYPosition;
+	private boolean forceZPosition;
 
 	public boolean isForceXPosition()
 	{	return forceXPosition;
@@ -150,6 +196,14 @@ public class TrajectoryDirection implements Serializable
 	public void setForceZPosition(boolean forceZPosition)
 	{	this.forceZPosition = forceZPosition;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FORCED POSITION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private double forcedXPosition;
+	private double forcedYPosition;
+	private double forcedZPosition;
+	private long forcedPositionTime;
 
 	public double getForcedXPosition()
 	{	return forcedXPosition;
@@ -179,19 +233,11 @@ public class TrajectoryDirection implements Serializable
 	{	this.forcedPositionTime = forcedTime;
 	}
 
-	public String getName()
-	{	return gestureName+","+direction;
-	}
-	public void setGestureName(GestureName gestureName)
-	{	this.gestureName = gestureName;
-	}
-	public void setDirection(Direction direction)
-	{	this.direction = direction;
-	}
-	public Direction getDirection()
-	{	return direction;
-	}
-	
+	/////////////////////////////////////////////////////////////////
+	// PROPORTIONAL		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean proportional;
+
 	public boolean getProportional()
 	{	return proportional;
 	}
@@ -199,10 +245,16 @@ public class TrajectoryDirection implements Serializable
 	{	this.proportional = proportional;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public String toString()
 	{	return getName();
 	}	
 	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()
@@ -245,4 +297,38 @@ public class TrajectoryDirection implements Serializable
 		return result;
 	}
 */	
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public TrajectoryDirection cacheCopy(double zoomFactor)
+	{	TrajectoryDirection result = new TrajectoryDirection();
+		Iterator<TrajectoryStep> it = steps.iterator();
+		while(it.hasNext())
+		{	TrajectoryStep temp = it.next().cacheCopy(zoomFactor);
+			result.add(temp);
+		}
+		result.gestureName = gestureName;
+		result.direction = direction;
+
+		result.forcedPositionTime = forcedPositionTime;
+		result.forcedXPosition = forcedXPosition*zoomFactor;
+		result.forcedYPosition = forcedYPosition*zoomFactor;
+		result.forcedZPosition = forcedZPosition*zoomFactor;
+		
+		result.forceXPosition = forceXPosition;
+		result.forceYPosition = forceYPosition;
+		result.forceZPosition = forceZPosition;
+		
+		result.proportional = proportional;
+		
+		result.repeat = repeat;
+		
+		result.xInteraction = xInteraction*zoomFactor;
+		result.yInteraction = yInteraction*zoomFactor;
+		
+		result.finished = finished;
+		
+		return result;
+	}
 }

@@ -90,4 +90,23 @@ if(fireFactory==null)
 			}
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Fireset cacheCopy(double zoomFactor)
+	{	Fireset result = new Fireset();
+	
+		// name
+		result.name = name;
+	
+		// items
+		for(Entry<String,FireFactory> entry: fireFactories.entrySet())
+		{	String key = entry.getKey();
+			FireFactory fireFactory = entry.getValue().cacheCopy(zoomFactor);
+			result.addFireFactory(key,fireFactory);
+		}
+		
+		return result;
+	}
 }

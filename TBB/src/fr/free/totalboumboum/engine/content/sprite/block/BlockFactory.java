@@ -21,13 +21,10 @@ package fr.free.totalboumboum.engine.content.sprite.block;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.theme.Theme;
 import fr.free.totalboumboum.engine.container.tile.Tile;
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
@@ -101,9 +98,9 @@ public class BlockFactory extends SpriteFactory<Block>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public BlockFactory copy(double zoomFactor)
+	public BlockFactory cacheCopy(double zoomFactor)
 	{	BlockFactory result = new BlockFactory();
 		
 		// misc
@@ -111,24 +108,18 @@ public class BlockFactory extends SpriteFactory<Block>
 		result.name = name;
 		
 		// abilities
-//		ArrayList<AbstractAbility> abs = new ArrayList<AbstractAbility>();
-//		for(AbstractAbility ability: abilities)
-//		{	AbstractAbility copy = ability.copy();
-//			abs.add(copy);
-//		}
-//		result.setAbilities(abs);
 		result.setAbilities(abilities);
 		
 		// bombset
-		Bombset bombsetCopy = bombset.copy(zoomFactor);
+		Bombset bombsetCopy = bombset.cacheCopy();
 		result.setBombset(bombsetCopy);
 		
 		// explosion
-		Explosion explosionCopy = explosion.copy(zoomFactor);
+		Explosion explosionCopy = explosion.cacheCopy();
 		result.setExplosion(explosionCopy);
 		
 		// gestures
-		GesturePack gesturePackCopy = gesturePack.copy(zoomFactor);
+		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
 		result.setGesturePack(gesturePackCopy);
 
 		return result;

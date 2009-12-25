@@ -42,8 +42,6 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.theme.Theme;
 import fr.free.totalboumboum.engine.content.sprite.fire.FireFactory;
 import fr.free.totalboumboum.engine.content.sprite.fire.FireFactoryLoader;
 import fr.free.totalboumboum.game.round.RoundVariables;
@@ -78,7 +76,7 @@ public class FiresetLoader
 		if(engineConfiguration.getFileCache())
 		{	Object o = engineConfiguration.getMemoryCache(cacheName);
 			double zoomFactor = RoundVariables.zoomFactor;
-			result = ((FiresetMap)o).copy(zoomFactor);
+			result = ((FiresetMap)o).cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
@@ -120,7 +118,7 @@ public class FiresetLoader
 			}
 			if(cached)
 			{	double zoomFactor = RoundVariables.zoomFactor;
-				result = result.copy(zoomFactor);
+				result = result.cacheCopy(zoomFactor);
 			}
 		}
 

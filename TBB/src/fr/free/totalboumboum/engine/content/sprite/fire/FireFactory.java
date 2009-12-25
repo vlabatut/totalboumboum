@@ -23,11 +23,16 @@ package fr.free.totalboumboum.engine.content.sprite.fire;
 
 import java.util.HashMap;
 
+import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
+import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
 import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
+import fr.free.totalboumboum.game.round.RoundVariables;
 
 public class FireFactory extends SpriteFactory<Fire>
 {	private static final long serialVersionUID = 1L;
@@ -115,4 +120,36 @@ public class FireFactory extends SpriteFactory<Fire>
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public FireFactory cacheCopy(double zoomFactor)
+	{	FireFactory result = new FireFactory();
+		
+		// misc
+		result.base = base;
+		result.name = name;
+		
+		// fireset
+		FiresetMap fsm = RoundVariables.level.getFiresetMap();
+		Fireset fs = fsm.getFireset(fireset.getName());
+		result.fireset = fs;
+		
+		// abilities
+		result.setAbilities(abilities);
+		
+		// bombset
+		Bombset bombsetCopy = bombset.cacheCopy();
+		result.setBombset(bombsetCopy);
+		
+		// explosion
+		Explosion explosionCopy = explosion.cacheCopy();
+		result.setExplosion(explosionCopy);
+		
+		// gestures
+		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		result.setGesturePack(gesturePackCopy);
+
+		return result;
+	}
 }

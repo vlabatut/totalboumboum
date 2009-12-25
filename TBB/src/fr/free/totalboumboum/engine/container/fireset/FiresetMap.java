@@ -51,4 +51,20 @@ public class FiresetMap
 			firesets.clear();
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public FiresetMap cacheCopy(double zoomFactor)
+	{	FiresetMap result = new FiresetMap();
+	
+		// firesets
+		for(Entry<String,Fireset> entry: firesets.entrySet())
+		{	String key = entry.getKey();
+			Fireset fireset = entry.getValue().cacheCopy(zoomFactor);
+			result.addFireset(key,fireset);
+		}
+		
+		return result;
+	}
 }

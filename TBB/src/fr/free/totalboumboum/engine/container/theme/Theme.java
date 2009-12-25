@@ -165,9 +165,9 @@ if(bf==null)
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public Theme copy(double zoomFactor)
+	public Theme cacheCopy(double zoomFactor)
 	{	Theme result = new Theme();
 	
 		// misc
@@ -179,18 +179,17 @@ if(bf==null)
 		// blocks
 		for(Entry<String,BlockFactory> entry: blocks.entrySet())
 		{	String key = entry.getKey();
-			BlockFactory blocFactory = entry.getValue().copy(zoomFactor);
+			BlockFactory blocFactory = entry.getValue().cacheCopy(zoomFactor);
 			result.addBlockFactory(key,blocFactory);
 		}
 		
-		// items
+		// floors
 		for(Entry<String,FloorFactory> entry: floors.entrySet())
 		{	String key = entry.getKey();
-			FloorFactory floorFactory = entry.getValue().copy(zoomFactor);
+			FloorFactory floorFactory = entry.getValue().cacheCopy(zoomFactor);
 			result.addFloorFactory(key,floorFactory);
 		}
 		
 		return result;
 	}
 }
-
