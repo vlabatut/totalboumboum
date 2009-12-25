@@ -24,8 +24,10 @@ package fr.free.totalboumboum.engine.content.feature.explosion;
 import java.io.Serializable;
 
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
+import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
+import fr.free.totalboumboum.game.round.RoundVariables;
 
 public class Explosion implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -63,5 +65,20 @@ public class Explosion implements Serializable
 				fireset = null;
 			}
 		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/*
+	 * the fireset has already been copied/loaded, so it is taken from the current level
+	 * the rest of the explosion is copied normally
+	 */
+	public Explosion cacheCopy()
+	{	Explosion result = new Explosion();
+		FiresetMap fsm = RoundVariables.level.getFiresetMap();
+		Fireset fs = fsm.getFireset(fireset.getName());
+		result.setFireset(fs);		
+		return result;
 	}
 }

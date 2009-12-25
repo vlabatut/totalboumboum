@@ -26,9 +26,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
 import fr.free.totalboumboum.tools.image.BufferedImageWrapper;
+import fr.free.totalboumboum.tools.image.ImageTools;
 
 public class AnimeStep implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -255,5 +258,46 @@ public class AnimeStep implements Serializable
 		{	BufferedImageWrapper cp = (BufferedImageWrapper) in.readObject();
 			shadow = cp.getIm();
 		}
-}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public AnimeStep cacheCopy(double zoom, HashMap<BufferedImage,BufferedImage> imgs)
+	{	AnimeStep result = new AnimeStep();
+		
+		// image
+		if(image!=null)
+		{	BufferedImage copyImg = imgs.get(image);
+			if(copyImg==null)
+			{	copyImg = ImageTools.resize(image,zoom,Configuration.getVideoConfiguration().getSmoothGraphics());
+				imgs.put(image,copyImg);
+			}
+			result.setImage(copyImg);
+		}
+		
+		// duration
+		result.duration = duration;
+		
+		// shifts
+		result.xShift = xShift*zoom;
+		result.yShift =  yShift*zoom;
+		
+		// shadow
+		if(shadow!=null)
+		{	BufferedImage copyImg = imgs.get(shadow);
+			if(copyImg==null)
+			{	copyImg = ImageTools.resize(shadow,zoom,Configuration.getVideoConfiguration().getSmoothGraphics());
+				imgs.put(shadow,copyImg);
+			}
+			result.setShadow(copyImg);
+		}
+		result.shadowXShift = shadowXShift*zoom;
+		result.shadowYShift = shadowYShift*zoom;
+		
+		// bound
+		result.boundYShift = boundYShift;
+
+		return result;
+	}
 }

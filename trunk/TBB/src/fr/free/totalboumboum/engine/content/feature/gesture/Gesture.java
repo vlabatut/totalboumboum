@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture;
  * 
  */
 
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -246,8 +247,16 @@ public class Gesture implements Serializable
 			TrajectoryDirection temp = e.getValue();
 			result.addTrajectoryDirection(temp);
 		}
+
+		// modulations
+		copyModulations(result);
 		
-		// self modulations
+		result.finished = finished;
+		return result;
+	}
+	
+	private void copyModulations(Gesture result)
+	{	// self modulations
 		for(SelfModulation e: selfModulations)
 		{	//SelfModulation temp = e.copy();
 			SelfModulation temp = e;
@@ -277,7 +286,35 @@ public class Gesture implements Serializable
 		{	//ThirdModulation temp = e.copy();
 			ThirdModulation temp = e;
 			result.addModulation(temp);
+		}		
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Gesture cacheCopy(double zoomFactor, double scale)
+	{	Gesture result = new Gesture();
+		double zoom = zoomFactor/scale;
+	
+		// name
+		result.setName(name);
+		
+		// animes
+		HashMap<BufferedImage,BufferedImage> imgs = new HashMap<BufferedImage, BufferedImage>();
+		for(Entry<Direction,AnimeDirection> e: animes.entrySet())
+		{	AnimeDirection temp = e.getValue().cacheCopy(zoom,imgs);
+			Direction direction = e.getKey();
+			result.addAnimeDirection(temp,direction);
 		}
+		
+		// trajectories
+		for(Entry<Direction,TrajectoryDirection> e: trajectories.entrySet())
+		{	TrajectoryDirection temp = e.getValue().cacheCopy(zoomFactor);
+			result.addTrajectoryDirection(temp);
+		}
+	
+		// modulations
+		copyModulations(result);
 		
 		result.finished = finished;
 		return result;

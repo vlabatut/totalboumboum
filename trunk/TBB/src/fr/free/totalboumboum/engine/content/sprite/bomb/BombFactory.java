@@ -23,8 +23,11 @@ package fr.free.totalboumboum.engine.content.sprite.bomb;
 
 import java.util.HashMap;
 
+import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
@@ -138,5 +141,33 @@ public class BombFactory extends SpriteFactory<Bomb>
 	{	if(!finished)
 		{	super.finish();
 		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public BombFactory cacheCopy(double zoomFactor)
+	{	BombFactory result = new BombFactory(bombName);
+		
+		// misc
+		result.base = base;
+		result.name = name;
+		
+		// abilities
+		result.setAbilities(abilities);
+		
+		// bombset
+		Bombset bombsetCopy = bombset.cacheCopy();
+		result.setBombset(bombsetCopy);
+		
+		// explosion
+		Explosion explosionCopy = explosion.cacheCopy();
+		result.setExplosion(explosionCopy);
+		
+		// gestures
+		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		result.setGesturePack(gesturePackCopy);
+
+		return result;
 	}
 }

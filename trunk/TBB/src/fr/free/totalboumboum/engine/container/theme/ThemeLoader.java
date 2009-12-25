@@ -70,7 +70,7 @@ public class ThemeLoader
 		if(engineConfiguration.getFileCache())
 		{	Object o = engineConfiguration.getMemoryCache(cacheName);
 			double zoomFactor = RoundVariables.zoomFactor;
-			result = ((Theme)o).copy(zoomFactor);
+			result = ((Theme)o).cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
@@ -112,7 +112,7 @@ public class ThemeLoader
 			}
 			if(cached)
 			{	double zoomFactor = RoundVariables.zoomFactor;
-				result = result.copy(zoomFactor);
+				result = result.cacheCopy(zoomFactor);
 			}
 		}
 		

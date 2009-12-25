@@ -44,7 +44,6 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
-import fr.free.totalboumboum.engine.container.theme.Theme;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -80,7 +79,7 @@ public class BombsetLoader
 		if(engineConfiguration.getFileCache())
 		{	Object o = engineConfiguration.getMemoryCache(cacheName);
 			double zoomFactor = RoundVariables.zoomFactor;
-			result = ((Bombset)o).copy(zoomFactor);
+			result = ((Bombset)o).cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
@@ -122,7 +121,7 @@ public class BombsetLoader
 			}
 			if(cached)
 			{	double zoomFactor = RoundVariables.zoomFactor;
-				result = result.copy(zoomFactor);
+				result = result.cacheCopy(zoomFactor);
 			}
 		}
 

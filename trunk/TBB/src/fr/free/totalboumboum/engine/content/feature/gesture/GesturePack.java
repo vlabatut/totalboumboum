@@ -102,6 +102,7 @@ public class GesturePack implements Serializable
 		}
 		// misc
 		result.scale = scale;
+		result.color = color;
 		return result;
 	}
 	
@@ -119,6 +120,7 @@ public class GesturePack implements Serializable
 		}		
 	}
 */	
+
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -134,5 +136,24 @@ public class GesturePack implements Serializable
 			}
 			gestures.clear();
 		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public GesturePack cacheCopy(double zoomFactor)
+	{	GesturePack result = new GesturePack();
+		
+		// gestures
+		for(Entry<GestureName,Gesture> e: gestures.entrySet())
+		{	Gesture cp = e.getValue().cacheCopy(zoomFactor,scale);
+			GestureName nm = e.getKey();
+			result.addGesture(cp,nm);
+		}
+		
+		// misc
+		result.scale = scale;
+		result.color = color;
+		return result;
 	}
 }

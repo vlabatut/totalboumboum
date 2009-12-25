@@ -21,14 +21,9 @@ package fr.free.totalboumboum.engine.container.itemset;
  * 
  */
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
@@ -37,7 +32,7 @@ import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
 
 public class Itemset
 {	
-	public Itemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public Itemset()
 	{	
 	}
 	
@@ -79,5 +74,20 @@ if(itemFactory==null)
 			}
 		}
 	}
-}
 
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Itemset cacheCopy(double zoomFactor)
+	{	Itemset result = new Itemset();
+	
+		// items
+		for(Entry<String,ItemFactory> entry: itemFactories.entrySet())
+		{	String key = entry.getKey();
+			ItemFactory itemFactory = entry.getValue().cacheCopy(zoomFactor);
+			result.addItemFactory(key,itemFactory);
+		}
+		
+		return result;
+	}
+}

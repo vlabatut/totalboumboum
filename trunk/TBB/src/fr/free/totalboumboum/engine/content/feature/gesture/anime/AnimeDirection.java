@@ -21,8 +21,10 @@ package fr.free.totalboumboum.engine.content.feature.gesture.anime;
  * 
  */
 
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -200,5 +202,47 @@ public class AnimeDirection implements Serializable
 			// misc
 			direction = null;
 		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+/*
+	public AnimeDirection copy(ArrayList<BufferedImage> images, ArrayList<BufferedImage> copyImages)
+	{	AnimeDirection result = new AnimeDirection();
+		// steps
+		Iterator<AnimeStep> i = getIterator();
+		while(i.hasNext())
+		{	AnimeStep copyStep = i.next().copy(images,copyImages); 
+			result.add(copyStep);		
+		}
+		// various fields
+		result.setGestureName(gestureName);
+		result.setDirection(direction);
+		result.setRepeat(repeat);
+		result.setProportional(proportional);
+		result.setBoundHeight(boundHeight);
+		//
+		return result;
+	}
+*/
+	public AnimeDirection cacheCopy(double zoom, HashMap<BufferedImage,BufferedImage> imgs)
+	{	AnimeDirection result = new AnimeDirection();
+		
+		// steps
+		Iterator<AnimeStep> i = getIterator();
+		while(i.hasNext())
+		{	AnimeStep copyStep = i.next().cacheCopy(zoom,imgs); 
+			result.add(copyStep);		
+		}
+		
+		// various fields
+		result.gestureName = gestureName;
+		result.direction = direction;
+		result.repeat = repeat;
+		result.proportional = proportional;
+		result.boundHeight = boundHeight*zoom;
+
+		return result;
 	}
 }

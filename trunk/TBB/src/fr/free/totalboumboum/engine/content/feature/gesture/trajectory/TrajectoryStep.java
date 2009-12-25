@@ -29,11 +29,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 public class TrajectoryStep implements Serializable
 {	private static final long serialVersionUID = 1L;
 
-	private double xShift;
-	private double yShift;
-	private double zShift;
 	private long duration;
-	private ImageShift boundZShift;
 	
 	public TrajectoryStep()
 	{	xShift = 0;
@@ -43,6 +39,13 @@ public class TrajectoryStep implements Serializable
 		boundZShift = ImageShift.DOWN;
 	}	
 	
+	/////////////////////////////////////////////////////////////////
+	// LOCATION SHIFTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private double xShift;
+	private double yShift;
+	private double zShift;
+
 	public double getXShift()
 	{	return xShift;
 	}
@@ -67,6 +70,22 @@ public class TrajectoryStep implements Serializable
 	{	zShift = shift;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// IMAGE SHIFT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ImageShift boundZShift;
+
+	public ImageShift getBoundZShift()
+	{	return boundZShift;
+	}
+	
+	public void setBoundZShift(ImageShift boundZShift)
+	{	this.boundZShift = boundZShift;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DURATION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public long getDuration()
 	{	return duration;
 	}
@@ -74,13 +93,9 @@ public class TrajectoryStep implements Serializable
 	{	this.duration = duration;
 	}	
 	
-	public ImageShift getBoundZShift()
-	{	return boundZShift;
-	}
-	public void setBoundZShift(ImageShift boundZShift)
-	{	this.boundZShift = boundZShift;
-	}
-	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()
@@ -102,4 +117,23 @@ public class TrajectoryStep implements Serializable
 		return result;
 	}
 */	
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public TrajectoryStep cacheCopy(double zoomFactor)
+	{	TrajectoryStep result = new TrajectoryStep();
+		
+		// location shifts
+		result.xShift = xShift*zoomFactor;
+		result.yShift = yShift*zoomFactor;
+		result.zShift = zShift*zoomFactor;
+
+		result.boundZShift = boundZShift;
+		result.duration = duration;
+		
+		result.finished = finished;
+
+		return result;
+	}
 }
