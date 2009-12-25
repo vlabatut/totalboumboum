@@ -3,22 +3,22 @@
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
 	<tournament name="ClassicCup" />
 	<players>
-		<player file="59" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="52" color="PURPLE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="15" color="ULTRAMARINE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="55" color="YELLOW" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="62" color="CYAN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="18" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="14" color="RED" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="11" color="GREEN" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="6" color="CYAN" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="63" color="BLACK" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="54" color="WHITE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="3" color="GRASS" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="65" color="PINK" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="4" color="BROWN" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="9" color="INDIGO" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="8" color="BLACK" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="12" color="RUST" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="2" color="GREY" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="57" color="ULTRAMARINE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="57" color="RUST" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="52" color="PURPLE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="9" color="ORANGE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="12" color="RED" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="11" color="GREY" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="61" color="GREEN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="27" color="BROWN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="16" color="BLUE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="32" color="GRASS" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="2" color="INDIGO" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="8" color="PINK" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 
