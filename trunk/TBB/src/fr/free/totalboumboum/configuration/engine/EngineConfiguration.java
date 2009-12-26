@@ -93,7 +93,7 @@ public class EngineConfiguration
 	// CACHING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean fileCache = false;
-	private boolean memoryCache = false;
+	private boolean memoryCache = true;
 	private HashMap<String,Object> cache = new HashMap<String,Object>();
 	
 	public boolean getFileCache()

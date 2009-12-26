@@ -103,7 +103,7 @@ if(fireFactory==null)
 		// items
 		for(Entry<String,FireFactory> entry: fireFactories.entrySet())
 		{	String key = entry.getKey();
-			FireFactory fireFactory = entry.getValue().cacheCopy(zoomFactor);
+			FireFactory fireFactory = entry.getValue().cacheCopy(zoomFactor,result);
 			result.addFireFactory(key,fireFactory);
 		}
 		

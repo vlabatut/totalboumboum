@@ -60,8 +60,8 @@ public class ExplosionLoader
     	String name = elt.getAttribute(XmlTools.NAME).getValue().trim();
 		Fireset fireset = RoundVariables.level.getFiresetMap().getFireset(name);
     	
-		//
     	result.setFireset(fireset);
+    	
     	return result;
     }
 }

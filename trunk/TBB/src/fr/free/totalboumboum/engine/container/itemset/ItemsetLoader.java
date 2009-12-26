@@ -75,9 +75,9 @@ public class ItemsetLoader
 		cachePath = cachePath + cacheName +FileTools.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		if(engineConfiguration.getFileCache())
-		{	Object o = engineConfiguration.getMemoryCache(cacheName);
-			double zoomFactor = RoundVariables.zoomFactor;
+		Object o = engineConfiguration.getMemoryCache(cacheName);
+		if(engineConfiguration.getFileCache() && o!=null)
+		{	double zoomFactor = RoundVariables.zoomFactor;
 			result = ((Itemset)o).cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
