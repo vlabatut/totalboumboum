@@ -1,4 +1,4 @@
-package tournament200910.enhoskarapazar.v4;
+package tournament200910.enhoskarapazar.v4_2;
 
 public enum ZoneEnum {
 	CARACTERE,INDESTRUCTIBLES,FEU,FLAMMES,BOMBE,DESTRUCTIBLES,LIBRE,ADVERSAIRE,BONUSBOMBE,BONUSRANGE

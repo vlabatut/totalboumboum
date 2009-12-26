@@ -1,4 +1,4 @@
-package tournament200910.enhoskarapazar.v4;
+package tournament200910.enhoskarapazar.v4_2;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -95,20 +95,24 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	 * renvoi l'Action a faire en cas de danger 
 	 */
 	private returnAction dangerAction() throws StopRequestException {
+		
 		if (debug)
 			System.out.println("dangerAction()");
 		updateLocation();
+		
+		AiTile closestClear=findClosestClearTile();
+		
 		PathManagement pM = null;
 		returnAction ret = new returnAction();
 		if (debug)
 			System.out.println("Tehlike Var");
 		dropBombAction = false;
 		if (leftBomb == Direction.NONE) {
-			if (findClosestClearTile() != null) {
-				pM = new PathManagement(this, findClosestClearTile());
+			if (closestClear != null) {
+				pM = new PathManagement(this, closestClear);
 				if (debug)
 					System.out.println("Tehlikesiz Bolge : "
-							+ findClosestClearTile().toString());
+							+ closestClear.toString());
 				if (debug)
 					System.out.println("Yol : " + pM.getPathList().toString()
 							+ "/n Uzunluk : " + pM.getLength());
@@ -121,32 +125,30 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 				}
 			}
 		} else {
-			System.out
-					.println("------------------------------------------------danger action--------------------------------------------------------"
-							+ leftBomb);
+			if (debug)
+			System.out.println("------------------------------------------------danger action--------------------------------------------------------"+ leftBomb);
 			ret.move = leftBomb;
 			leftBomb = Direction.NONE;
 			ret.actionName = AiActionName.MOVE;
 		}
-
 		endTile = null;
 		endTileAttack = null;
 		return ret;
 	}
 
 	/**
-	 * renvoie l'Action a faire en cas d'attaque
+	 * renvoie drop Bomb Action pour tuer adversaire
 	 */
 	private returnAction attackAction() throws StopRequestException {
 		if (debug)
 			System.out.println("attackAction()");
 		updateLocation();
 		returnAction ret = new returnAction();
-		if (inAttackRange(endTileAttack)) {
-			Direction lefttoDrirection = isCleanDirection(ownHero
-					.getBombRange() + 1, ownHero.getTile());
-			if (isSafe(ownHero.getTile().getLine(), ownHero.getTile().getCol())
-					&& lefttoDrirection != Direction.NONE) {
+		AiTile temp = findRivalToAttack(false);
+		if(temp!=null)
+		if (inAttackRange(temp)) {
+			Direction lefttoDrirection = isCleanDirection(ownHero.getBombRange() + 1, ownHero.getTile());
+			if (!inDanger(ownHero.getTile().getLine(), ownHero.getTile().getCol()) && isRangeClean(ownHero.getBombRange() + 1, currentTile)	) {
 				if (debug)
 					System.out.println("attack bomb");
 				ret.actionName = AiActionName.DROP_BOMB;
@@ -159,15 +161,14 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	}
 
 	/**
-	 * renvoie drop Bomb Action
+	 * renvoie drop Bomb Action pour destruct des murs
 	 */
-	private returnAction dropBombAction() throws StopRequestException {
+	private returnAction dropBombDestructWallAction() throws StopRequestException {
 		if (debug)
 			System.out.println("dropBombAction()");
 		updateLocation();
 		returnAction ret = new returnAction();
-		if (findTileForDestructible() != null
-				&& isRangeClean(ownHero.getBombRange() + 1, currentTile)) {
+		if (findTileForDestructible() != null && isRangeClean(ownHero.getBombRange() + 1, currentTile)) {
 			if (debug)
 				System.out.println("Defanse bomb");
 			ret.actionName = AiActionName.DROP_BOMB;
@@ -216,17 +217,20 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return ret;
 	}
 
-	
+	/**
+	 * renvoie l'action a faire en cas de destruction des murs
+	 */
 	private returnAction wallDestructAction() throws StopRequestException {
 		if (debug)
 			System.out.println("wallDestructAction()");
 		updateLocation();
+		AiTile toDestruct = findTileForDestructible();
 		returnAction ret = new returnAction();
-		PathManagement pM = new PathManagement(this, findTileForDestructible());
+		PathManagement pM = new PathManagement(this, toDestruct);
 		endTile = null;
 		if (!pathInDanger(pM.getPathList())) {
 			goTroughPath(pM.getPathList());
-			endTile = findTileForDestructible();
+			endTile = toDestruct;
 			if (nextTile != null) {
 				ret.move = zone.getDirection(currentTile, nextTile);
 				ret.actionName = AiActionName.MOVE;
@@ -234,19 +238,22 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		}
 		return ret;
 	}
-
+	
+	/**
+	 * renvoie l'action a faire en cas d'attaque
+	 */
 	private returnAction moveattackAction(boolean rangeControl)
 			throws StopRequestException {
 		if (debug)
 			System.out.println("moveattackAction()");
 		updateLocation();
+		AiTile toAttack=findRivalToAttack(rangeControl);
 		returnAction ret = new returnAction();
 		endTileAttack = null;
-		PathManagement pM = new PathManagement(this,
-				findTileToAttack(rangeControl));
+		PathManagement pM = new PathManagement(this,toAttack);
 		if (!pathInDanger(pM.getPathList())) {
 			goTroughPath(pM.getPathList());
-			endTileAttack = findTileToAttack(rangeControl);
+			endTileAttack = toAttack;
 			if (nextTile != null) {
 				ret.move = zone.getDirection(currentTile, nextTile);
 				ret.actionName = AiActionName.MOVE;
@@ -275,31 +282,26 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 				if (inDanger(ownHero.getLine(), ownHero.getCol())) {
 					ret = dangerAction();
 				} else
-					ret = dropBombAction();
+					ret = dropBombDestructWallAction();
 
 			} else {
-				if (findClosestBONUSRANGE() != null
-						&& ownHero.getBombRange() < 8) {
+				if (findClosestBONUSRANGE() != null	&& ownHero.getBombRange() < 8) {
 					if (inDanger(ownHero.getLine(), ownHero.getCol())) {
 						ret = dangerAction();
 					} else
 						ret = getBonusRangeAction();
-				} else if (findClosestBONUSBOMBE() != null
-						&& ownHero.getBombNumber() < 5) {
+				} else if (findClosestBONUSBOMBE() != null	&& ownHero.getBombNumber() < 5) {
 					if (inDanger(ownHero.getLine(), ownHero.getCol())) {
 						ret = dangerAction();
 					} else
 						ret = getBonusBombeAction();
 				} else {
-					if ((findTileForDestructible() != null)
-							&& (findTileToAttack(true) == null
-									|| ownHero.getBombNumber() < 4 || ownHero
-									.getBombRange() < 7)) {
+					if ((findTileForDestructible() != null)	&& (findRivalToAttack(true) == null	|| ownHero.getBombNumber() < 4 || ownHero.getBombRange() < 7)) {
 						if (inDanger(ownHero.getLine(), ownHero.getCol())) {
 							ret = dangerAction();
 						} else
 							ret = wallDestructAction();
-					} else if (findTileToAttack(true) != null) {
+					} else if (findRivalToAttack(true) != null) {
 						if (inDanger(ownHero.getLine(), ownHero.getCol())) {
 							ret = dangerAction();
 						} else
@@ -313,7 +315,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 							&& ret.move == Direction.NONE) {
 						if (findTileForDestructible() != null) {
 							ret = wallDestructAction();
-						} else if (findTileToAttack(false) != null) {
+						} else if (findRivalToAttack(false) != null) {
 							if (inDanger(ownHero.getLine(), ownHero.getCol())) {
 								ret = dangerAction();
 							} else
@@ -338,10 +340,13 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	}
 
+	/**
+	 * control si la rival est assez proche et il est possible que le bombe peut effectuer la rival 
+	 */
 	private boolean inAttackRange(AiTile rival) throws StopRequestException {
 		checkInterruption();
 		updateLocation();
-		boolean result = true;
+		boolean result = false;
 		dZone = new DangerZone(zone, this);
 		int ownHeroLine = ownHero.getLine();
 		int ownHeroCol = ownHero.getCol();
@@ -349,6 +354,11 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		int rivalCol = rival.getCol();
 
 		boolean UP = false, DOWN = false, LEFT = false, RIGHT = false;
+		
+		if(ownHero.getTile()==rival)
+		{	return true;
+		}
+		else{
 		if (ownHeroLine == rivalLine && Math.abs(rivalCol - ownHeroCol) < ownHero.getBombRange() - 1) {
 			if (rivalCol - ownHeroCol < 0) {
 				for (int i = rivalCol + 1; i < ownHeroCol; i++) {
@@ -363,14 +373,14 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladý dýþþþþþ................................................................"
+									.println("attak range patladý dýþþþþþ................................................................UP"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}
 					}
 				}
 			} else {
-				for (int i = rivalCol - 1; i < ownHeroCol; i--) {
+				for (int i = rivalCol-1 ; i < ownHeroCol; i--) {
 					try {
 						if (dZone.getEnum(ownHeroLine, i) == ZoneEnum.BONUSBOMBE
 								|| dZone.getEnum(ownHeroLine, i) == ZoneEnum.BONUSRANGE
@@ -382,7 +392,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladý dýþþþþþ................................................................"
+									.println("attak range patladý dýþþþþþ................................................................DOWN"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}
@@ -406,14 +416,14 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladý dýþþþþþ................................................................"
+									.println("attak range patladý dýþþþþþ................................................................LEFT"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}
 					}
 				}
 			} else {
-				for (int i = rivalLine - 1; i < ownHeroLine; i--) {
+				for (int i = rivalLine ; i < ownHeroLine; i--) {
 					try {
 						if (dZone.getEnum(ownHeroCol, i) == ZoneEnum.BONUSBOMBE
 								|| dZone.getEnum(i, ownHeroCol) == ZoneEnum.BONUSRANGE
@@ -425,7 +435,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladý dýþþþþþ................................................................"
+									.println("attak range patladý dýþþþþþ................................................................RIGHT"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}
@@ -438,9 +448,12 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 			result = true;
 
 		return result;
-
+		}
 	}
 
+	/**
+	 * control la Danger de la Direction ce qu'on va prendre
+	 */
 	private returnAction isDirectionSafe(returnAction move)
 			throws StopRequestException {
 		int heroLine = ownHero.getLine();
@@ -518,6 +531,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return move;
 	}
 
+	/**
+	 * Initialise
+	 */
 	private void init() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		if (ownHero == null) {
@@ -530,6 +546,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 	}
 
+	/**
+	 * Control la Tile , si elle est mur
+	 */
 	public boolean isWall(int line, int col) throws StopRequestException {
 		checkInterruption();
 		updateLocation();
@@ -539,6 +558,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * Control la Danger 
+	 */
 	public boolean inDanger(int line, int col) throws StopRequestException {
 		checkInterruption();
 		updateLocation();
@@ -548,6 +570,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return ret;
 	}
 
+	/**
+	 * Control la Danger en utilisant temps d'explosion
+	 */
 	public boolean inDangerLevel2(int line, int col)
 			throws StopRequestException {
 
@@ -579,7 +604,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return ret;
 	}
 
-	// Tout cas sauf les bombs, flammes, feu et murs sont Safe
+	/**
+	 * Tout cas sauf les bombs, flammes, feu et murs sont Safe
+	 */
 	private boolean isSafe(int line, int col) throws StopRequestException {
 		checkInterruption();
 		updateLocation();
@@ -589,7 +616,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 				&& zone != ZoneEnum.FEU && zone != ZoneEnum.DESTRUCTIBLES && zone != ZoneEnum.INDESTRUCTIBLES);
 
 	}
-
+	
+	/**
+	 * renvoie la Tile de la plus proche Bonus Range
+	 */
 	private AiTile findClosestBONUSRANGE() throws StopRequestException {
 		checkInterruption();
 		updateLocation();
@@ -625,6 +655,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return temp;
 	}
 
+	/**
+	 * renvoie la Tile de la plus proche Bonus Bombe
+	 */
 	private AiTile findClosestBONUSBOMBE() throws StopRequestException {
 		checkInterruption();
 		updateLocation();
@@ -660,6 +693,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return temp;
 	}
 
+	/**
+	 * renvoie la Tile plus proche et Safe
+	 */
 	private AiTile findClosestClearTile() throws StopRequestException {
 		checkInterruption();
 		updateLocation();
@@ -691,7 +727,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		pathManager = null;
 		return temp;
 	}
-
+	
+	/**
+	 * renvoie une Tile ou on peut detruir plus de murs destructible
+	 */
 	public AiTile findTileForDestructible() throws StopRequestException {
 		checkInterruption();
 		updateLocation();
@@ -750,7 +789,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return temp;
 	}
 
-	private AiTile findTileToAttack(boolean rangeLimit)
+	/**
+	 * renvoie la Tile de la plus proche adversaire
+	 */
+	private AiTile findRivalToAttack(boolean rangeLimit)
 			throws StopRequestException {
 		checkInterruption();
 		updateLocation();
@@ -758,16 +800,17 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		int tempLength = 100;
 		for (AiHero rival : zone.getHeroes()) {
 			AiTile tile = rival.getTile();
+			
 			if (rival != ownHero) {
 				pathManager = new PathManagement(this, tile);
 				if (pathManager.isWalkable()) {
-					if (pathManager.getLength() < tempLength) {
-
-						int range = ownHero.getBombRange();
-						if (isRangeClean(range + 1, tile)) {
+					if (pathManager.getLength()>=0 &&pathManager.getLength() < tempLength) {
+					//if(zone.getTileDistance(ownHero.getTile(), tile)<tempLength){
+						
 							temp = tile;
+							//tempLength = zone.getTileDistance(ownHero.getTile(), tile);
 							tempLength = pathManager.getLength();
-						}
+						
 					}
 				}
 			}
@@ -778,6 +821,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return temp;
 	}
 
+	/**
+	 * renvoie le nombre de voisins qui vont detruire si on pose une bombe a cette Tile
+	 */
 	public int countDestructibleVoisins(int line, int col)
 			throws StopRequestException {
 		checkInterruption();
@@ -833,6 +879,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return count;
 	}
 
+	/**
+	 * renvoi la nextTile ce qu'on va prendre
+	 */
 	public void goTroughPath(ArrayList<AiTile> a) throws StopRequestException {
 		checkInterruption();
 		updateLocation();
@@ -844,6 +893,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 			nextTile = currentTile;
 	}
 
+	/**
+	 * controle si la direction ce qu'on va prendre n'est pas en danger
+	 */
 	private Direction isCleanDirection(int range, AiTile bomb)
 			throws StopRequestException {
 		checkInterruption();
@@ -851,7 +903,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		dZone = new DangerZone(zone, this);
 		return dZone.rangeControl(range, bomb.getLine(), bomb.getCol());
 	}
-
+	
+	/**
+	 * controle s'il y a une tile a fuir
+	 */
 	public boolean isRangeClean(int range, AiTile bomb)
 			throws StopRequestException {
 		checkInterruption();
@@ -864,6 +919,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return result;
 	}
 
+	/**
+	 * controle la path s'il y a un danger
+	 */
 	public boolean pathInDanger(ArrayList<AiTile> array)
 			throws StopRequestException {
 		checkInterruption();
