@@ -848,6 +848,7 @@ public class Launcher
 	 * 		- correction d'un bug dans SpritePreviewLoader, lors du chargement de sprites sans colormap (de type Prognathe)
 	 * 		- possibilité d'enregistrer automatiquement un objet Zone, via une méthode s'appelant hors du jeu (pour faciliter la cration de niveaux)
 	 * 		- pareil avec les fichiers level et players, ce qui permet de définir automatiquement des niveaux (basiques, à compléter manuellement)
+	 * 		- bug corrigé dans la gestion des tournois de type coupe
 	 * - GUI :
 	 * 		- correction d'un bug concernant les proportions des panels dans l'écran de présentation d'une manche
 	 * 		- correction d'un bug concernant l'édition de profil en général
@@ -1139,6 +1140,8 @@ public class Launcher
 	 *  	- ordonner les matches
 	 *  - tournoi coupe : 
 	 *  	- possiblité de définir un tie-break random
+	 *  	- possibilité de définir un tie-break classement stats
+	 *  	- possibilité de définir des matches de classement optionnels (?)
 	 *  - tournoi AI : détourner le logo CL
 	 *  	- fond bleuté
 	 *  	- ballon étoilé >> bombe étoilée
@@ -1192,5 +1195,6 @@ public class Launcher
 	 *  	- sinon on charge et on stocke dans l'accès statique
 	 */
 		
-
+	// transformer les fonctions d'édition/génération de niveau en un utilitaire basique
+	// rajouter des fonction pour insérer/supprimer des lignes
 }

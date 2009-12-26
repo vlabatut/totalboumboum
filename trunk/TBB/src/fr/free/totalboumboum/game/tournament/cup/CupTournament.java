@@ -179,10 +179,12 @@ public class CupTournament extends AbstractTournament
 					for(int k=0;k<playersList.size();k++)
 					{	Integer playerRank = playersList.get(k);
 						CupPlayer player = part.getPlayer(k);
-						int previousPartId = player.getPart();
-						int previousRank = player.getRank();
-						List<Integer> previousPlayersList = previousPartsList.get(previousPartId);
-						previousPlayersList.set(previousRank-1,playerRank);
+						if(player.getUsed())
+						{	int previousPartId = player.getPart();
+							int previousRank = player.getRank();
+							List<Integer> previousPlayersList = previousPartsList.get(previousPartId);
+							previousPlayersList.set(previousRank-1,playerRank);
+						}
 					}
 				}
 			}
@@ -382,60 +384,67 @@ for(ArrayList<Integer> list: permutations)
 	private int simulatePlayerProgression(List<Integer> distribution, List<List<Integer>> progression, HashMap<Integer,int[]> finalRanking)
 	{	int result = profiles.size();
 		
-		// check compatibility with matches
-		{	Iterator<CupLeg> itLeg = legs.iterator();
-			while(itLeg.hasNext() && result>=0)
-			{	CupLeg leg = itLeg.next();
-				int legNumber = leg.getNumber();
-//				int prevLeg = legNumber-1;
-				ArrayList<Integer> list = new ArrayList<Integer>(); //list of qualified players counts (one for each part)
-				progression.add(list);
-				Iterator<CupPart> itPart = leg.getParts().iterator();
-				while(itPart.hasNext() && result>=0)
-				{	list.add(new Integer(0));
-					CupPart part = itPart.next();
-					int partNumber = part.getNumber(); // id of the part in this leg
-					Set<Integer> matchAllowed = part.getMatch().getAllowedPlayerNumbers(); //allowed numbers of players
-					int qualifiedCount = 0;
-					ArrayList<CupPlayer> players = part.getPlayers();
-					// first leg only
-					if(legNumber==0)
-					{	qualifiedCount = distribution.get(partNumber); //use the initial distribution
-						if(!matchAllowed.contains(qualifiedCount))
-							result = -1;
-						else
-						{	list.set(partNumber,qualifiedCount);
-							//
-							int partRank = part.getRank(); // is the part final?
-							if(partRank>0)
-							{	int tp[] = {qualifiedCount,players.size(),partNumber};
-								finalRanking.put(partRank,tp);
-							}
-						}
-					}
-					// other legs
+		Iterator<CupLeg> itLeg = legs.iterator();
+		while(itLeg.hasNext() && result>=0)
+		{	CupLeg leg = itLeg.next();
+			int legNumber = leg.getNumber();
+//			int prevLeg = legNumber-1;
+			ArrayList<Integer> list = new ArrayList<Integer>(); //list of qualified players counts (one for each part)
+			progression.add(list);
+			Iterator<CupPart> itPart = leg.getParts().iterator();
+			while(itPart.hasNext() && result>=0)
+			{	list.add(new Integer(0));
+				CupPart part = itPart.next();
+				int partNumber = part.getNumber(); // id of the part in this leg
+				Set<Integer> matchAllowed = part.getMatch().getAllowedPlayerNumbers(); //allowed numbers of players
+				int qualifiedCount = 0;
+				ArrayList<CupPlayer> players = part.getPlayers();
+				
+				// first leg only
+				if(legNumber==0)
+				{	qualifiedCount = distribution.get(partNumber); //use the initial distribution
+					if(!matchAllowed.contains(qualifiedCount))
+						result = -1;
 					else
-					{	for(CupPlayer player: players)
-						{	int prevPart = player.getPart();
-							int prevInvolved = progression.get(legNumber-1).get(prevPart);
-							int prevRank = player.getRank();
-							if(prevRank<=prevInvolved)
-								qualifiedCount++;						
-						}
-						if(!matchAllowed.contains(qualifiedCount))
-							result = -1;					
-						else
-						{	list.set(partNumber,qualifiedCount);
-							//
-							int partRank = part.getRank();
-							if(partRank>0)
-							{	int tp[] = {qualifiedCount,players.size(),partNumber};
-								finalRanking.put(partRank,tp);
-							}
+					{	list.set(partNumber,qualifiedCount);
+						// mark players
+						for(int i=0;i<players.size();i++)
+							players.get(i).setUsed(i<qualifiedCount);
+						// is the part final?
+						int partRank = part.getRank();
+						if(partRank>0)
+						{	int tp[] = {qualifiedCount,players.size(),partNumber};
+							finalRanking.put(partRank,tp);
 						}
 					}
-				}	
-			}
+				}
+				
+				// other legs
+				else
+				{	for(CupPlayer player: players)
+					{	int prevPart = player.getPart();
+						int prevInvolved = progression.get(legNumber-1).get(prevPart);
+						int prevRank = player.getRank();
+						if(prevRank<=prevInvolved)
+						{	qualifiedCount++;
+							player.setUsed(true);
+						}
+						else
+							player.setUsed(false);
+					}
+					if(!matchAllowed.contains(qualifiedCount))
+						result = -1;					
+					else
+					{	list.set(partNumber,qualifiedCount);
+						// is the part final?
+						int partRank = part.getRank();
+						if(partRank>0)
+						{	int tp[] = {qualifiedCount,players.size(),partNumber};
+							finalRanking.put(partRank,tp);
+						}
+					}
+				}
+			}	
 		}
 		
 		return result;

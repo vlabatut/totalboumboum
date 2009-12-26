@@ -14,8 +14,8 @@
 		</points>
 	</settings>
 	<players>
-		<player file="77" color="RED" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="18" color="ORANGE" controls="2" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="77" color="RED" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="65" color="INDIGO" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="tournament200910" folder="qualif1" />
