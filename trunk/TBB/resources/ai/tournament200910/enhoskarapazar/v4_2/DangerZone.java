@@ -1,4 +1,4 @@
-package tournament200910.enhoskarapazar.v4;
+package tournament200910.enhoskarapazar.v4_2;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -221,7 +221,8 @@ public class DangerZone {
 					if (canGo(line +1, col + i)
 							&&(zone == ZoneEnum.BONUSBOMBE
 							|| zone == ZoneEnum.BONUSRANGE
-							|| zone == ZoneEnum.LIBRE||zone==ZoneEnum.ADVERSAIRE))
+							|| zone == ZoneEnum.LIBRE
+							||zone==ZoneEnum.ADVERSAIRE))
 						upLine = true;
 				}
 			}
@@ -231,7 +232,8 @@ public class DangerZone {
 					if (canGo(line - 1, col + i)
 							&&(zone == ZoneEnum.BONUSBOMBE
 									|| zone == ZoneEnum.BONUSRANGE
-									|| zone == ZoneEnum.LIBRE||zone==ZoneEnum.ADVERSAIRE))
+									|| zone == ZoneEnum.LIBRE
+									||zone==ZoneEnum.ADVERSAIRE))
 						downLine = true;
 				}
 			}
@@ -242,7 +244,8 @@ public class DangerZone {
 					if (canGo(line + i, col + 1)
 							&&(zone == ZoneEnum.BONUSBOMBE
 									|| zone == ZoneEnum.BONUSRANGE
-									|| zone == ZoneEnum.LIBRE||zone==ZoneEnum.ADVERSAIRE))
+									|| zone == ZoneEnum.LIBRE
+									||zone==ZoneEnum.ADVERSAIRE))
 						rightCol = true;
 				}
 			}
@@ -252,7 +255,8 @@ public class DangerZone {
 					if (canGo(line + i, col - 1)
 							&&(zone == ZoneEnum.BONUSBOMBE
 									|| zone == ZoneEnum.BONUSRANGE
-									|| zone == ZoneEnum.LIBRE||zone==ZoneEnum.ADVERSAIRE))
+									|| zone == ZoneEnum.LIBRE
+									||zone==ZoneEnum.ADVERSAIRE))
 						leftCol = true;
 				}
 			}
@@ -263,7 +267,8 @@ public class DangerZone {
 					if (canGo(line + 1, col - i)
 							&&(zone == ZoneEnum.BONUSBOMBE
 									|| zone == ZoneEnum.BONUSRANGE
-									|| zone == ZoneEnum.LIBRE||zone==ZoneEnum.ADVERSAIRE))
+									|| zone == ZoneEnum.LIBRE
+									||zone==ZoneEnum.ADVERSAIRE))
 						upLine2 = true;
 				}
 			}
@@ -273,7 +278,8 @@ public class DangerZone {
 					if (canGo(line - 1, col - i)
 							&&(zone == ZoneEnum.BONUSBOMBE
 									|| zone == ZoneEnum.BONUSRANGE
-									|| zone == ZoneEnum.LIBRE||zone==ZoneEnum.ADVERSAIRE))
+									|| zone == ZoneEnum.LIBRE
+									||zone==ZoneEnum.ADVERSAIRE))
 						downLine2 = true;
 				}
 			}
@@ -284,7 +290,8 @@ public class DangerZone {
 					if (canGo(line - i, col + 1)
 							&&(zone == ZoneEnum.BONUSBOMBE
 									|| zone == ZoneEnum.BONUSRANGE
-									|| zone == ZoneEnum.LIBRE||zone==ZoneEnum.ADVERSAIRE))
+									|| zone == ZoneEnum.LIBRE
+									||zone==ZoneEnum.ADVERSAIRE))
 						rightCol2 = true;
 				}
 			}
@@ -294,7 +301,8 @@ public class DangerZone {
 					if (canGo(line - i, col - 1)
 							&&(zone == ZoneEnum.BONUSBOMBE
 									|| zone == ZoneEnum.BONUSRANGE
-									|| zone == ZoneEnum.LIBRE||zone==ZoneEnum.ADVERSAIRE))
+									|| zone == ZoneEnum.LIBRE
+									||zone==ZoneEnum.ADVERSAIRE))
 						leftCol2 = true;
 				}
 			}
@@ -330,7 +338,7 @@ public class DangerZone {
 				zone = getEnum(line, col + i);
 				if (zone != ZoneEnum.LIBRE && zone != ZoneEnum.BONUSBOMBE
 						&& zone != ZoneEnum.BONUSRANGE
-						&& zone != ZoneEnum.ADVERSAIRE
+						//&& zone != ZoneEnum.ADVERSAIRE
 						&& zone != ZoneEnum.FLAMMES)
 					RIGHT = false;
 			}
@@ -338,7 +346,7 @@ public class DangerZone {
 				zone = getEnum(line, col - i);
 				if (zone != ZoneEnum.LIBRE && zone != ZoneEnum.BONUSBOMBE
 						&& zone != ZoneEnum.BONUSRANGE
-						&& zone != ZoneEnum.ADVERSAIRE
+					//	&& zone != ZoneEnum.ADVERSAIRE
 						&& zone != ZoneEnum.FLAMMES)
 					LEFT = false;
 			}
@@ -346,7 +354,7 @@ public class DangerZone {
 				zone = getEnum(line - i, col);
 				if (zone != ZoneEnum.LIBRE && zone != ZoneEnum.BONUSBOMBE
 						&& zone != ZoneEnum.BONUSRANGE
-						&& zone != ZoneEnum.ADVERSAIRE
+					//	&& zone != ZoneEnum.ADVERSAIRE
 						&& zone != ZoneEnum.FLAMMES)
 					UP = false;
 			}
@@ -354,7 +362,7 @@ public class DangerZone {
 				zone = getEnum(line + i, col);
 				if (zone != ZoneEnum.LIBRE && zone != ZoneEnum.BONUSBOMBE
 						&& zone != ZoneEnum.BONUSRANGE
-						&& zone != ZoneEnum.ADVERSAIRE
+					//	&& zone != ZoneEnum.ADVERSAIRE
 						&& zone != ZoneEnum.FLAMMES)
 					DOWN = false;
 			}
@@ -380,7 +388,7 @@ public class DangerZone {
 		boolean ret = false;
 		PathManagement pMan = new PathManagement(source, zone
 				.getTile(line, col));
-		if (pMan.getPathList() != null)
+		if (pMan.getPathList() != null && pMan.isWalkable())
 			ret = true;
 		pMan = null;
 		return ret;

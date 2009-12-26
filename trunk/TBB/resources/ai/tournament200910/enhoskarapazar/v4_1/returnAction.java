@@ -1,4 +1,4 @@
-package tournament200910.enhoskarapazar.v4;
+package tournament200910.enhoskarapazar.v4_1;
 
 import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
 import fr.free.totalboumboum.engine.content.feature.Direction;

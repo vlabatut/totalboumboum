@@ -1,6 +1,6 @@
 package tournament200910.enhoskarapazar;
 
-import tournament200910.enhoskarapazar.v4.EnhosKarapazar;
+import tournament200910.enhoskarapazar.v4_1.EnhosKarapazar;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 /**
  * class utilisée par le moteur du jeu pour retrouver les IA
