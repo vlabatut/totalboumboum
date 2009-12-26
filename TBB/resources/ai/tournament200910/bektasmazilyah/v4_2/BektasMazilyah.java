@@ -1,4 +1,4 @@
-package tournament200910.bektasmazilyah.v4;
+package tournament200910.bektasmazilyah.v4_2;
 
 
 import java.util.ArrayList;
@@ -38,7 +38,6 @@ public class BektasMazilyah extends ArtificialIntelligence
 	AiAction result = new AiAction(AiActionName.NONE);
 	//private long time;
 	private boolean dropBomb=false;
-	private boolean rivalvar=false;
 	private boolean canGoRival=false;
 	private DangerZone dangerZone;
 //	private BombMatrice bombMatrice;
@@ -63,7 +62,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 			checkDanger();
 			if(isDanger)
 			{//Il y a un danger, il faut se sauver.
-				hareket();
+				suivre();
 				if(nextTile!=null){
 					moveDir = zone.getDirection(currentTile, nextTile);
 					}
@@ -85,10 +84,10 @@ public class BektasMazilyah extends ArtificialIntelligence
 			}
 			else
 			{	
+				
 				mustTakeBonus();
-				if(bonusExiste() && takeBonus)// && takeBonus)
+				if(bonusExiste() && takeBonus)
 				{
-	//				System.out.println("1");
 					goToBonus();
 					if(nextTile!=null)
 					moveDir = zone.getDirection(currentTile, nextTile);
@@ -97,21 +96,17 @@ public class BektasMazilyah extends ArtificialIntelligence
 				}
 				else 
 				{
-	//				System.out.println("2");
-					mustTakeBonus();
-					if(destructExiste() && (takeBonus)) // || !canGoRival))
+					//mustTakeBonus();
+					canGoToRival();
+					if(destructExiste() && !canGoRival)//&& (takeBonus)) // || !canGoRival))
 					{
-	//					System.out.println("3");
+						canGoRival=false;
 						destruct();				
 						if(nextTile!=null)
 						{
-	//						System.out.println("4");
 							moveDir=zone.getDirection(currentTile, nextTile);
-							dropBomb=kacabilirmi();
-	//						System.out.println("drop bomb:" + dropBomb);
-	//						System.out.println("burdayým:" +hero.getTile());
+							dropBomb=canDrop();
 							if(targetTile==currentTile && dropBomb){
-	//							System.out.println("5");
 								dropBomb=false;
 								result = new AiAction(AiActionName.DROP_BOMB);
 								return result;			
@@ -119,57 +114,55 @@ public class BektasMazilyah extends ArtificialIntelligence
 						}
 						
 					}
-					else{
-	//					System.out.println("6");
+					else
+					/**{
+						System.out.println("6");
 							canGoToRival();
 							if(!canGoRival)
 							{
-	//							System.out.println("7");
+								System.out.println("7");
 								destructWallToGoRival();				
 								if(nextTile!=null)
 								{
-		//							System.out.println("8");
+									System.out.println("8");
 									moveDir=zone.getDirection(currentTile, nextTile);
 									dropBomb=kacabilirmi();
+									System.out.println("8den sonra kaçar aslýnda:"+dropBomb);
 									if(targetTile==currentTile && dropBomb){
-			//							System.out.println("9");
+										System.out.println("9");
 										dropBomb=false;
 										result = new AiAction(AiActionName.DROP_BOMB);
 										return result;			
 									}
 								}
-							}
+							}*/
 						
-							else
+							//else
 							{
-				//				System.out.println("10");
-								dropBomb=kacabilirmi();
-								rivalvar=rivalVar();
-								if(dropBomb && rivalvar)
+								dropBomb=canDrop();
+							//	rivalvar=rivalVar();
+								if(dropBomb && rivalWithMe())
 								{
-					//				System.out.println("11");
 									dropBomb=false;
 									//	rivalvar=false;
 									result = new AiAction(AiActionName.DROP_BOMB);
 									return result;
 								}
 								else
-									if(!rivalvar)
+									if(!rivalWithMe())
 									{
-						//				System.out.println("12");
 										deplace();
-										moveDir = zone.getDirection(currentTile, nextTile);
+										if(nextTile!=null)
+											moveDir = zone.getDirection(currentTile, nextTile);									
 									}
-							}
 						
-				}	}
+				}}	
 			}
 			result = new AiAction(AiActionName.MOVE,moveDir);
 		}	
 		return result;	
 	}
 
-	
 	private void deplace() throws StopRequestException 
 	{
 		checkInterruption();
@@ -203,7 +196,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		}	
 }
 
-
+/**
 	private boolean rivalVar() throws StopRequestException
 	{
 		List<AiHero> list =zone.getHeroes();
@@ -222,16 +215,28 @@ public class BektasMazilyah extends ArtificialIntelligence
 		}
  		return result;
 	}
-	
+*/	
 	private void mustTakeBonus() throws StopRequestException {
 		checkInterruption();
-		if(hero.getBombRange() >10 || hero.getBombNumber()>5)
+		if(hero.getBombRange() >3 || hero.getBombNumber()>3)
 			takeBonus=false;
 		else
 			takeBonus=true;
 }
+	private boolean rivalWithMe() throws StopRequestException
+	{
+		checkInterruption();
+		List<AiHero> list =zone.getHeroes();
+		if(list.contains(hero))
+			list.remove(hero);
+		Iterator<AiHero> it = list.iterator();
+		AiTile rival = it.next().getTile();
+		return(hero.getTile().equals(rival));
+			
+		
+	}
 
-	private void hareket() throws StopRequestException
+	private void suivre() throws StopRequestException
 	{
 		checkInterruption();
 		AiTile tile = null;
@@ -265,26 +270,30 @@ public class BektasMazilyah extends ArtificialIntelligence
 		}	
 	}
 	
-	public boolean kacabilirmi() throws StopRequestException
+	public boolean canDrop() throws StopRequestException
 	{
 		checkInterruption();
 		ArrayList<AiTile> neighbors = takeInRange();
 //		System.out.println("iþaretlenecek yerler:" + neighbors);
-		ArrayList<AiTile> result = listedenCikar(neighbors);
+		ArrayList<AiTile> result = removeFromList(neighbors);
 //		System.out.println("listeden çýkýnca:" + result);
 		Iterator<AiTile> it = result.iterator();
 		AiTile temp=null;
 		int count=0;
-		while(it.hasNext())
-		{
-			checkInterruption();
-			temp=it.next();
-			int col=temp.getCol();
-			int line = temp.getLine();
-			Astar a=new Astar (dangerZone,hero.getCol(),hero.getLine(),col,line);
-			if ((hero.getCol()!= col || hero.getLine() != line) && a.findSecurePath())
-				count++;
+		if(result.size()!=0){
+			while(it.hasNext())
+			{
+				checkInterruption();
+				temp=it.next();
+				int col=temp.getCol();
+				int line = temp.getLine();
+				Astar a=new Astar (dangerZone,hero.getCol(),hero.getLine(),col,line);
+				if ((hero.getCol()!= col || hero.getLine() != line) && a.findSecurePath())
+					count++;
+			}
 		}
+		else
+			dropBomb=false;
 		if(count>1)
 			dropBomb=true;
 		else
@@ -304,6 +313,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		if(count==1)
 		{
 			count=0;
+			System.out.println("count 1");
 			temp=hero.getTile();
 			AiTile temp1= temp.getNeighbor(Direction.UP);
 			if(dangerZone.getValeur(temp1.getCol(),temp1.getLine())== EtatEnum.BLOCDEST || dangerZone.getValeur(temp1.getCol(),temp1.getLine())== EtatEnum.BLOCINDEST)
@@ -323,7 +333,6 @@ public class BektasMazilyah extends ArtificialIntelligence
 		return dropBomb;		
 	}
 
-	
 	private ArrayList<AiTile> takeInRange() throws StopRequestException
 	{
 		checkInterruption();
@@ -331,7 +340,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
 		result.add(temp);
 		EtatEnum etat = EtatEnum.LIBRE;
-		int range = 5;
+		int range = 1;
 		int k=0;
 		int x=0;
 		int y=0;
@@ -339,7 +348,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		boolean down=true;
 		boolean	right=true;
 		boolean left=true;
-		while(k<range && up)
+		while(k<range+1 && up)
 		{
 			checkInterruption();
 			temp=temp.getNeighbor(Direction.UP);
@@ -354,7 +363,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		}
 		k=0;
 		temp=hero.getTile();
-		while(k<range && down)
+		while(k<range+1 && down)
 		{
 			checkInterruption();
 			temp=temp.getNeighbor(Direction.DOWN);
@@ -369,7 +378,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		}
 		k=0;
 		temp=hero.getTile();
-		while(k<range && right)
+		while(k<range+1 && right)
 		{
 			checkInterruption();
 			temp=temp.getNeighbor(Direction.RIGHT);
@@ -384,7 +393,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		}
 		k=0;
 		temp=hero.getTile();
-		while(k<range && left)
+		while(k<range+1 && left)
 		{
 			checkInterruption();
 			temp=temp.getNeighbor(Direction.LEFT);
@@ -400,9 +409,8 @@ public class BektasMazilyah extends ArtificialIntelligence
 			
 		return result;
 	}
-	
-	
-	private ArrayList<AiTile> listedenCikar(ArrayList<AiTile> list) throws StopRequestException
+		
+	private ArrayList<AiTile> removeFromList(ArrayList<AiTile> list) throws StopRequestException
 	{
 		checkInterruption();
 		ArrayList<AiTile> result = dangerZone.findSafeTiles();
