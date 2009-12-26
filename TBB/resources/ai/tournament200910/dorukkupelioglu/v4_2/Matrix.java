@@ -1,4 +1,4 @@
-package tournament200910.dorukkupelioglu.v4;
+package tournament200910.dorukkupelioglu.v4_2;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,7 +28,6 @@ public class Matrix
 	public Matrix(DorukKupelioglu dk)throws StopRequestException
 	{
 		dk.checkInterruption();
-		dk.getPercepts().update(100);
 		this.zone=dk.getPercepts();
 		this.dk=dk;
 		init();
@@ -70,24 +69,18 @@ public class Matrix
 		init();		
 		//State.FREE
 		putFREE();
-		
 		//State.INDESTRUCTIBLE et State.DESTRUCTIBLE
 		putDESTINDEST();
-		
 		//State.EXPLODED
-		putEXPLODED();
-		
+		putFIRE();
 		//State.RIVAL
 		putRIVAL();
-
 		//State.BONUS et State.MALUS
 		putITEM();
-		
 		//State.BOMB , State.WILLEXPLODE et State.BONUSDANGER
 		putBLAST();
 		
 		findSafes();
-		
 		findDestructibles();
 		
 		heroes=regulateHeroesList(ownHero.getTile(), heroes);
@@ -132,9 +125,7 @@ public class Matrix
 			if(wall.getState().getName()==AiStateName.BURNING)
 			{
 				if(ownHero.hasThroughFires())
-				{
 					areaMatrix[line][col]=State.FREE;
-				}
 				else
 					areaMatrix[line][col]=State.FIRE;
 			}
@@ -197,7 +188,7 @@ public class Matrix
 			line = opponent.getLine();
 			col = opponent.getCol();
 
-			if (opponent != ownHero) 
+			if (!(opponent.hasEnded()) && opponent != ownHero) 
 			{
 					areaMatrix[line][col] = State.RIVAL;
 					rivals.add(opponent.getTile());
@@ -207,7 +198,7 @@ public class Matrix
 	}
 
 	
-	private void putEXPLODED()throws StopRequestException
+	private void putFIRE()throws StopRequestException
 	{
 		dk.checkInterruption();
 		List<AiFire> fires = zone.getFires();//feus
@@ -255,7 +246,7 @@ public class Matrix
 					for(AiBomb b:tempbombs)
 					{
 						dk.checkInterruption();
-						if(!b.isWorking())
+						if(!b.isWorking() || b.getFailureProbability()>0)
 							working=false;
 						//WILLEXPLODEC ET BONUSDANGERC ne sont pas des cases que je vais
 						//utiliser pour trouver une chemin
@@ -278,7 +269,7 @@ public class Matrix
 								}
 							}
 						}
-						double time=(b.getNormalDuration()-b.getTime())-b.getNormalDuration()*b.getFailureProbability();
+						double time=(b.getNormalDuration()-b.getTime());
 						if(mini>time)
 							mini=time;
 					}
@@ -381,7 +372,7 @@ public class Matrix
 			for(AiHero x:list)
 			{
 				dk.checkInterruption();
-				temp=ManhattanDistance(x.getTile(), tile);
+				temp=findPixelDistance(x.getTile(), tile);
 				if(distance>temp)
 				{
 					distance=temp;
@@ -397,7 +388,7 @@ public class Matrix
 		return result;
 	}
 	
-	private List<AiTile> regulateList(AiTile tile,List<AiTile> list)throws StopRequestException
+	public List<AiTile> regulateList(AiTile tile,List<AiTile> list)throws StopRequestException
 	{
 		dk.checkInterruption();
 		List<AiTile> result=new ArrayList<AiTile>();
@@ -420,7 +411,7 @@ public class Matrix
 		for(AiTile x:list)
 		{
 			dk.checkInterruption();
-			temp=ManhattanDistance(x, tile);
+			temp=findPixelDistance(x, tile);
 			if(distance>temp)
 			{
 				distance=temp;
@@ -429,13 +420,17 @@ public class Matrix
 		}
 		return result;
 	}
-	
-	public double ManhattanDistance(AiTile tile1, AiTile tile2) throws StopRequestException
+	private double findPixelDistance(AiTile tile1, AiTile tile2) throws StopRequestException
 	{
 		dk.checkInterruption();
 		return Math.abs(tile1.getPosX()-tile2.getPosX())+Math.abs(tile1.getPosY()-tile2.getPosY());
 	}
-	/////////////
+	public double ManhattanDistance(AiTile tile1, AiTile tile2) throws StopRequestException
+	{
+		dk.checkInterruption();
+		return Math.abs(tile1.getLine()-tile2.getLine())+Math.abs(tile1.getCol()-tile2.getCol());
+	}
+
 	public void changeState(int line,int col,double state)throws StopRequestException
 	{
 		dk.checkInterruption();

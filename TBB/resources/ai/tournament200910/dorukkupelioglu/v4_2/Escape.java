@@ -1,4 +1,4 @@
-package tournament200910.dorukkupelioglu.v4;
+package tournament200910.dorukkupelioglu.v4_2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,32 +28,55 @@ public class Escape {
 		escapeEnded = true;
 		hasPathFound=false;
 		pathWorks=true;
-
-		if(!safes.isEmpty())
-		{
-			astar=new Astar(dk,false);
-			astar.findPath(dk.getHero().getTile(),safes);
-			path=astar.getPath();
-		
-			if(!(path.isEmpty()))
+		path=new AiPath();
+		if(dk.getMatrix().getAreaMatrix()[dk.getHero().getTile().getLine()][dk.getHero().getTile().getCol()]>State.MALUS)
+		{	if(!safes.isEmpty())
 			{
-				escapeEnded=false;
-				hasPathFound=true;
-				pathStates=new ArrayList<Double>();
-				for(int index=0;index<path.getLength();index++)
-					pathStates.add(dk.getMatrix().getAreaMatrix()[path.getTile(index).getLine()][path.getTile(index).getCol()]);
+				astar=new Astar(dk,true);
+				astar.findPath(dk.getHero().getTile(),safes);
+				path=astar.getPath();
+			
+				if(!(path.isEmpty()))//zamanlı astarda yol bulamazsa zamansız deneyeceğim
+				{
+					escapeEnded=false;
+					hasPathFound=true;
+					pathStates=new ArrayList<Double>();
+					for(int index=0;index<path.getLength();index++)
+						pathStates.add(dk.getMatrix().getAreaMatrix()[path.getTile(index).getLine()][path.getTile(index).getCol()]);
+				}
+				else
+				{
+					astar=new Astar(dk,false);//burda da zamansız deniyorum
+					astar.findPath(dk.getHero().getTile(),safes);
+					path=astar.getPath();
+					if(!(path.isEmpty()))
+					{
+						escapeEnded=false;
+						hasPathFound=true;
+						pathStates=new ArrayList<Double>();
+						for(int index=0;index<path.getLength();index++)
+							pathStates.add(dk.getMatrix().getAreaMatrix()[path.getTile(index).getLine()][path.getTile(index).getCol()]);
+					}
+				}
 			}
 		}
-		System.err.println(path.toString());
+		else
+			hasPathFound=true;
 	}
+	
+	
 	
 	public Direction moveTo()throws StopRequestException//bu fonksiyondan önce pathAvailable fonk çağır 
 	{
 		dk.checkInterruption();
 		Direction moveDir=Direction.NONE;
-		moveDir=dk.getPercepts().getDirection(dk.getHero().getTile(), path.getTile(0));
-		path.removeTile(0);
-		pathStates.remove(0);
+		if(path.getLength()!=0)
+		if(dk.getMatrix().getAreaMatrix()[path.getTile(0).getLine()][path.getTile(0).getCol()]!=State.FIRE)
+		{
+			moveDir=dk.getPercepts().getDirection(dk.getHero().getTile(), path.getTile(0));
+			path.removeTile(0);
+			pathStates.remove(0);
+		}
 		return moveDir;
 	}
 	
@@ -62,21 +85,20 @@ public class Escape {
 		dk.checkInterruption();
 		int control=0;
 		pathStatesControl=new ArrayList<Double>();
-		if(path.getLength()==0)
+		if(path.getLength()==0)//yol kalmadıysa olay bitmiştir
 			escapeEnded=true;
-		else
+		else// yol varsa bozulup bozulmadığına bakarım
 		{
 			while(control<path.getLength())
 			{
 				pathStatesControl.add(dk.getMatrix().getAreaMatrix()[path.getTile(control).getLine()][path.getTile(control).getCol()]);
 				control++;
 			}
-			if(!(pathStates.equals(pathStatesControl)))
+			if(!(pathStates.equals(pathStatesControl)))// eşit değilse yol bozulmuştur bu escape biter
 			{
 				escapeEnded=true;
 				hasPathFound=false;
 				pathWorks=false;
-				System.err.println("kaçış yolu bozuldu");
 			}
 		}
 		return hasPathFound && !escapeEnded;

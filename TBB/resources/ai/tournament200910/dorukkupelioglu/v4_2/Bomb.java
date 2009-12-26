@@ -1,4 +1,4 @@
-package tournament200910.dorukkupelioglu.v4;
+package tournament200910.dorukkupelioglu.v4_2;
 
 import java.util.List;
 
@@ -53,26 +53,22 @@ public class Bomb {
 		if(safes.size()>0)//gidilecek başka safe yoksa zaten bomba bırakma
 		{
 			
-			tempEXPLODED(tile);
-			
+			tempFIRE(tile);
 			astar=new Astar(dk,true);
 			astar.findPath(tile, safes);
 			result=astar.getPath();
-			//eğer yol bulduysak demek ki bomba bırakırsak kaçabileceğimiz yer var
 			if(!(result.isEmpty()))
 			{
 				hasPathFound=true;
 				bombEnded=false;
 			}
-			//System.out.println("bomba koyarsak kaçış yolumuz: "+result.toString());
 		}
 		return result;
 	}
 	
 
 	
-	//Bomba bırakacaksak etki alanını EXPLODED olarak matriste belirtmeliyiz
-	public void tempEXPLODED(AiTile tile)throws StopRequestException
+	public void tempFIRE(AiTile tile)throws StopRequestException
 	{
 		dk.checkInterruption();
 		int line=tile.getLine();
