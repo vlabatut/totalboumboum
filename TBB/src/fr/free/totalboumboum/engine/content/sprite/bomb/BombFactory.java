@@ -146,7 +146,7 @@ public class BombFactory extends SpriteFactory<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public BombFactory cacheCopy(double zoomFactor)
+	public BombFactory cacheCopy(double zoomFactor, Bombset bs)
 	{	BombFactory result = new BombFactory(bombName);
 		
 		// misc
@@ -157,8 +157,7 @@ public class BombFactory extends SpriteFactory<Bomb>
 		result.setAbilities(abilities);
 		
 		// bombset
-		Bombset bombsetCopy = bombset.cacheCopy();
-		result.setBombset(bombsetCopy);
+		result.setBombset(bs);
 		
 		// explosion
 		Explosion explosionCopy = explosion.cacheCopy();

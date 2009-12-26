@@ -67,9 +67,9 @@ public class ThemeLoader
 		cachePath = cachePath + cacheName +FileTools.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		if(engineConfiguration.getFileCache())
-		{	Object o = engineConfiguration.getMemoryCache(cacheName);
-			double zoomFactor = RoundVariables.zoomFactor;
+		Object o = engineConfiguration.getMemoryCache(cacheName);
+		if(engineConfiguration.getFileCache() && o!=null)
+		{	double zoomFactor = RoundVariables.zoomFactor;
 			result = ((Theme)o).cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
