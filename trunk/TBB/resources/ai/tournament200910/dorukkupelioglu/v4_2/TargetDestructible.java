@@ -1,4 +1,4 @@
-package tournament200910.dorukkupelioglu.v4;
+package tournament200910.dorukkupelioglu.v4_2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,28 +45,19 @@ public class TargetDestructible {
 
 		if((dest=findDestructible())>-1)//eğer BONUS_DEST tane duvarın içinde benim gidebileceğim bi tane varsa
 		{
-			//System.out.println("find dest bitti");
-
 			path=pathesOwnHero[dest];
 			if(path.getLength()==1)//1 ise zaten yanındayız demektir
 			{
 				if(dk.getHero().getTile().getNeighbors().contains(path.getTile(0)))
-				{
 					hasPathFound=true;
-				}
 			}
 			else if(path.getLength()>1)//işte o duvarı artık bulduk
 			{
 				hasPathFound=true;
 				targetDestructibleEnded=false;
-				//System.out.println("elde edilen yolun uzunluğu 1 den büyük dest yolu: "+path.toString());
 				pathStates=new ArrayList<Double>();
 				for(int index=0;index<path.getLength()-1;index++)
-				{
 					pathStates.add(dk.getMatrix().getAreaMatrix()[path.getTile(index).getLine()][path.getTile(index).getCol()]);
-				}
-				System.out.println("dest yolu: "+path.toString());
-				System.out.println("dest için stateler : "+pathStates.toString());
 			}	
 		}
 	}
@@ -131,20 +122,6 @@ public class TargetDestructible {
 					indextile=index;
 				}
 			}
-			if(indextile>=0)
-			{
-				//System.out.println("en gidilesi: "+pathesOwnHero[indextile].toString());
-			}
-			else
-			{
-				//System.out.println("en gidiliesi yolu bulamadık");
-			}
-
-
-		}
-		else
-		{
-			//System.out.println("oyunda kırılır duvar yok");
 		}
 		return indextile;
 	}
@@ -185,5 +162,10 @@ public class TargetDestructible {
 	{
 		dk.checkInterruption();
 		return hasPathFound;
+	}
+	
+	public int PathLength()
+	{
+		return path.getLength();
 	}
 }

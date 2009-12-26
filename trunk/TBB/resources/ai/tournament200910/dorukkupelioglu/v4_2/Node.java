@@ -1,4 +1,6 @@
-package tournament200910.dorukkupelioglu.v4;
+package tournament200910.dorukkupelioglu.v4_2;
+
+import java.util.List;
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 /**
@@ -52,6 +54,19 @@ public class Node {
 			Gvalue+=20;
 		else
 			Gvalue+=14;
+		
+		List<AiTile> neighbors=tile.getNeighbors();
+		for(int index=0;index<neighbors.size();index++)
+		{
+			double state=areaMatrix[neighbors.get(index).getLine()][neighbors.get(index).getCol()];
+			if((n==null||n.getTile()!=neighbors.get(index))&&state>State.MALUS)
+			{
+				if(state<State.DESTRUCTIBLE)
+					Gvalue++;
+				else
+					Gvalue+=2;
+			}
+		}
 
 		this.Fvalue=Hvalue+Gvalue;
 	}

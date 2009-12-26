@@ -1,61 +1,53 @@
-package tournament200910.dorukkupelioglu.v4;
+package tournament200910.dorukkupelioglu.v4_1;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
-public class TargetRival {
-
+public class Escape {
+	
 	private DorukKupelioglu dk;
-	private List<AiTile> rivals;
+	private List<AiTile> safes;
 	private Astar astar;
 	private AiPath path;
 	private boolean hasPathFound;
-	private boolean targetRivalEnded;
+	private boolean escapeEnded;
 	private boolean pathWorks;
 	private List<Double> pathStates;
 	private List<Double> pathStatesControl;
 	
-	public TargetRival(DorukKupelioglu dk) throws StopRequestException
+	public Escape(DorukKupelioglu dk)throws StopRequestException//safe yer yoksa ya da safe yer var ama oraya giden yol yoksa escape biter
 	{
 		dk.checkInterruption();
 		this.dk=dk;
-		dk.init();
-		rivals=dk.getMatrix().getRivals();
-		path=new AiPath();
+		safes=dk.getMatrix().getSafes();
+		escapeEnded = true;
 		hasPathFound=false;
-		targetRivalEnded=true;
 		pathWorks=true;
-		astar=new Astar(dk,false);
-			
-		if(!(rivals.isEmpty()))
+
+		if(!safes.isEmpty())
 		{
-			astar.findPath(dk.getHero().getTile(), rivals);
+			astar=new Astar(dk,false);
+			astar.findPath(dk.getHero().getTile(),safes);
 			path=astar.getPath();
-			//if(dk.getMatrix().getAreaMatrix()[path.getLastTile().getLine()][path.getLastTile().getCol()]>State.MALUS)
-				//if(dk.getHero().getTile().getLine()==path.getLastTile().getLine()||dk.getHero().getTile().getCol()==path.getLastTile().getCol())
-					
+		
 			if(!(path.isEmpty()))
 			{
-				targetRivalEnded=false;
+				escapeEnded=false;
 				hasPathFound=true;
 				pathStates=new ArrayList<Double>();
-				for(int index=0;index<path.getLength()-1;index++)
-				{
+				for(int index=0;index<path.getLength();index++)
 					pathStates.add(dk.getMatrix().getAreaMatrix()[path.getTile(index).getLine()][path.getTile(index).getCol()]);
-				}
-				System.out.println("rakip yol: "+path.toString());
-				System.out.println("rakip için stateler : "+pathStates.toString());
 			}
 		}
+		System.err.println(path.toString());
 	}
 	
-	public Direction moveTo()throws StopRequestException
+	public Direction moveTo()throws StopRequestException//bu fonksiyondan önce pathAvailable fonk çağır 
 	{
 		dk.checkInterruption();
 		Direction moveDir=Direction.NONE;
@@ -65,39 +57,43 @@ public class TargetRival {
 		return moveDir;
 	}
 	
-	public boolean pathAvailable() throws StopRequestException
+	public boolean pathAvailable()throws StopRequestException
 	{
 		dk.checkInterruption();
-		dk.init();
-		pathStatesControl=new ArrayList<Double>();
 		int control=0;
-		
-		if(path.getLength()==1|| path.getLength()==0)
-			targetRivalEnded=true;
+		pathStatesControl=new ArrayList<Double>();
+		if(path.getLength()==0)
+			escapeEnded=true;
 		else
 		{
-			while(control<path.getLength()-1)
+			while(control<path.getLength())
 			{
 				pathStatesControl.add(dk.getMatrix().getAreaMatrix()[path.getTile(control).getLine()][path.getTile(control).getCol()]);
 				control++;
 			}
 			if(!(pathStates.equals(pathStatesControl)))
 			{
-				targetRivalEnded=true;
+				escapeEnded=true;
 				hasPathFound=false;
 				pathWorks=false;
+				System.err.println("kaçış yolu bozuldu");
 			}
 		}
-		return hasPathFound && !targetRivalEnded;
-	}	
+		return hasPathFound && !escapeEnded;
+	}
 	
 	public boolean pathWorks()
 	{
 		return pathWorks;
 	}
 	
+	public boolean hasEnded()throws StopRequestException
+	{
+		dk.checkInterruption();
+		return escapeEnded;
+	}
 	
-	public boolean succeed() throws StopRequestException
+	public boolean succeed()throws StopRequestException
 	{
 		dk.checkInterruption();
 		return hasPathFound;
