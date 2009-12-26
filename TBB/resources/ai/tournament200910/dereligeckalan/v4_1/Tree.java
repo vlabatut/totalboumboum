@@ -1,4 +1,4 @@
-package tournament200910.dereligeckalan.v4;
+package tournament200910.dereligeckalan.v4_1;
 
 import java.util.Iterator;
 import java.util.LinkedList;
