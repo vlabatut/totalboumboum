@@ -100,7 +100,7 @@ if(fireFactory==null)
 		// name
 		result.name = name;
 	
-		// items
+		// fires
 		for(Entry<String,FireFactory> entry: fireFactories.entrySet())
 		{	String key = entry.getKey();
 			FireFactory fireFactory = entry.getValue().cacheCopy(zoomFactor,result);

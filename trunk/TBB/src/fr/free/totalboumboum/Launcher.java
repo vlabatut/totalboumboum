@@ -1180,5 +1180,17 @@ public class Launcher
 	 *  	- pb de ralentissement sur la mise en cache
 	 *  	- pas plus rapide que normal (clairement ! mais à mesurer avec jprofiler)
 	 *  	>> mise en cache mémoire au moins pour les joueurs ?
+	 *  all explosions should be loaded/stocked at the zone level, like fires and other general stuff
 	 */ 
+	
+	/*
+	 * TODO
+	 * 	- créer un InstanceContainer à placer dans la conf, pour un accès pratique (working instance)
+	 *  - généraliser le chargement des explosions (comme feux, bombes, etc)
+	 *  - pour tous ces trucs généraux, p-ê ne charger que ceux dont on a besoin :
+	 *  	- si déjà chargé, on utilise
+	 *  	- sinon on charge et on stocke dans l'accès statique
+	 */
+		
+
 }
