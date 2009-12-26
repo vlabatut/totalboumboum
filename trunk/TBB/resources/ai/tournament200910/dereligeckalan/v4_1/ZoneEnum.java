@@ -1,4 +1,4 @@
-package tournament200910.dereligeckalan.v4;
+package tournament200910.dereligeckalan.v4_1;
 
 public enum ZoneEnum {
 	CARACTERE,RIVAL,BOMBE,FEUPOSSIBLE,FEU,BONUSFEU,BONUSBOMBE,BLOCDEST,BLOCINDEST,LIBRE,TEMP

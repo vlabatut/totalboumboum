@@ -1,4 +1,4 @@
-package tournament200910.dereligeckalan.v4;
+package tournament200910.dereligeckalan.v4_2;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -93,7 +93,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		}
 		else {
 			
-			target = false;
+			//target = false;
 			zone1 = new ZoneDangereux(getPercepts(),this);
 			matrice = zone1.getZoneArray();
 			pickNextTile(findNext2());
@@ -118,18 +118,14 @@ public class DereliGeckalan extends ArtificialIntelligence {
 				bombTile = currentTile;
 				}
 			}
-			else if(target== true)
+			else if(tarr != currentTile)
 			{
 				
 				result = new AiAction(AiActionName.MOVE,direction);
 				//System.out.println("1");
 			}
 			}
-			else {
 			
-			result = new AiAction(AiActionName.NONE);
-			
-		}
 		}
 		bonus = false;
 		target = false;

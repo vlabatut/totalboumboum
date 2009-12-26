@@ -1,9 +1,6 @@
-package tournament200910.dereligeckalan.v4;
-
+package tournament200910.dereligeckalan.v4_1;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
-
 
 
 
@@ -22,8 +19,7 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
 
-public class ZoneDangereux {
-	
+public class Zone {
 	private Collection <AiHero> rivals;
 	private AiHero caractere;
 	private Collection <AiBomb> bombes;
@@ -32,14 +28,15 @@ public class ZoneDangereux {
 	private Collection <AiFire> feus; 
 	private int xMax;
 	private int yMax;
-	private double matris[][];
+	private ZoneEnum [][] zoneArray;
 	private DereliGeckalan source;
-	public ZoneDangereux(AiZone zone, DereliGeckalan source) throws StopRequestException {
+	public Zone(AiZone zone, DereliGeckalan source) throws StopRequestException
+	{
 		source.checkInterruption(); //Appel Obligatoire
 		this.source = source;
 		//this.zone = zone;
 		this.caractere = zone.getOwnHero();
-		this.rivals = zone.getRemainingHeroes();
+		rivals = zone.getHeroes();
 		this.bombes = zone.getBombs();
 		this.blocs = zone.getBlocks();
 		this.objets = zone.getItems();
@@ -49,11 +46,12 @@ public class ZoneDangereux {
 		init();
 		//String s = toString();
 		//System.out.println(s);
+		
 	}
 	private void init() throws StopRequestException
 	{
 		source.checkInterruption(); //Appel Obligatoire
-		matris = new double [yMax][xMax];
+		zoneArray = new ZoneEnum [yMax][xMax];
 		int i,j;
 		//Initialisation
 		for(i = 0; i < xMax; i++)
@@ -62,11 +60,11 @@ public class ZoneDangereux {
 			for(j = 0; j < yMax; j++)
 			{
 				source.checkInterruption(); //Appel Obligatoire
-				matris[j][i] = 0 - nombreMur(source.getPercepts().getTile(j,i));
+				zoneArray[j][i] = ZoneEnum.LIBRE;
 			}			
 		}
 		//Mettons notre caractere
-		//matris[caractere.getTile().getLine()][caractere.getTile().getCol()] = 1;
+		zoneArray[caractere.getTile().getLine()][caractere.getTile().getCol()] = ZoneEnum.CARACTERE;
 		
 		//Mettons nos rivals
 		Iterator <AiHero> itRivals = rivals.iterator();
@@ -74,8 +72,8 @@ public class ZoneDangereux {
 		{
 			source.checkInterruption(); //Appel Obligatoire
 			AiHero temp = itRivals.next();
-			if(!temp.equals(caractere) && temp !=null)
-				matris[temp.getLine()][temp.getCol()] = -11;
+			if(!temp.equals(caractere))
+				zoneArray[temp.getLine()][temp.getCol()] = ZoneEnum.RIVAL;
 		}
 		
 		//Mettons les blocs
@@ -85,12 +83,9 @@ public class ZoneDangereux {
 			source.checkInterruption(); //Appel Obligatoire
 			AiBlock temp = itBlocs.next();
 			if(temp.isDestructible())
-			{
-				matris[temp.getLine()][temp.getCol()] = -2;
-				
-			}
+				zoneArray[temp.getLine()][temp.getCol()] = ZoneEnum.BLOCDEST;
 			else
-				matris[temp.getLine()][temp.getCol()] = 0;
+				zoneArray[temp.getLine()][temp.getCol()] = ZoneEnum.BLOCINDEST;
 		}
 		
 		//Mettons les bombes et les feus possibles
@@ -115,20 +110,20 @@ public class ZoneDangereux {
 			boolean right = true;
 			while(k < temp.getRange() && (up || down || left || right))
 			{
-				
-				source.checkInterruption(); //Appel Obligatoire
 				int a =0;
+				source.checkInterruption(); //Appel Obligatoire
+				
 					AiTile temp1 = temp.getTile();
 					while(up && a<k)
 					{
-						source.checkInterruption();
+						
 						AiTile temp2 = temp1.getNeighbor(Direction.UP);
 						temp1 = temp2; 
 						int x = temp2.getCol();
 						int y = temp2.getLine();
-						if((matris[y][x] != 0) && (matris[y][x] != -2) )
+						if((zoneArray[y][x] != ZoneEnum.BLOCDEST) && (zoneArray[y][x] != ZoneEnum.BLOCINDEST))
 						{
-							matris[y][x] = (temp.getNormalDuration() - temp.getTime());
+							zoneArray[y][x] = ZoneEnum.FEUPOSSIBLE;
 							a++;
 						}
 						else up = false;
@@ -139,14 +134,14 @@ public class ZoneDangereux {
 				
 					while(down && a<k)
 					{
-						source.checkInterruption();
+						
 						AiTile temp2 = temp1.getNeighbor(Direction.DOWN);
 						temp1 = temp2; 
 						int x = temp2.getCol();
 						int y = temp2.getLine();
-						if((matris[y][x] != 0) && (matris[y][x] != -2))
+						if((zoneArray[y][x] != ZoneEnum.BLOCDEST) && (zoneArray[y][x] != ZoneEnum.BLOCINDEST))
 						{
-							matris[y][x] = (temp.getNormalDuration() - temp.getTime());
+							zoneArray[y][x] = ZoneEnum.FEUPOSSIBLE;
 							a++;
 						}
 						else down = false;
@@ -155,14 +150,14 @@ public class ZoneDangereux {
 					temp1 = temp.getTile();
 					while(left && a<k)
 					{
-						source.checkInterruption();
+						
 						AiTile temp2 = temp1.getNeighbor(Direction.LEFT);
 						temp1 = temp2; 
 						int x = temp2.getCol();
 						int y = temp2.getLine();
-						if((matris[y][x] != 0) && (matris[y][x] != -2))
+						if((zoneArray[y][x] != ZoneEnum.BLOCDEST) && (zoneArray[y][x] != ZoneEnum.BLOCINDEST))
 						{
-							matris[y][x] = (temp.getNormalDuration() - temp.getTime());
+							zoneArray[y][x] = ZoneEnum.FEUPOSSIBLE;
 							a++;
 						}
 						else left = false;
@@ -171,14 +166,14 @@ public class ZoneDangereux {
 					temp1 = temp.getTile();
 					while(right && a<k)
 					{
-						source.checkInterruption();
+						
 						AiTile temp2 = temp1.getNeighbor(Direction.RIGHT);
 						temp1 = temp2; 
 						int x = temp2.getCol();
 						int y = temp2.getLine();
-						if((matris[y][x] != 0) && (matris[y][x] != -2))
+						if((zoneArray[y][x] != ZoneEnum.BLOCDEST) && (zoneArray[y][x] != ZoneEnum.BLOCINDEST))
 						{
-							matris[y][x] = (temp.getNormalDuration() - temp.getTime());
+							zoneArray[y][x] = ZoneEnum.FEUPOSSIBLE;
 							a++;
 						}
 						else right = false;
@@ -195,7 +190,7 @@ public class ZoneDangereux {
 		{
 			source.checkInterruption(); //Appel Obligatoire
 			AiBomb temp = itBombes2.next();
-			matris[temp.getLine()][temp.getCol()] = temp.getNormalDuration();		
+			zoneArray[temp.getLine()][temp.getCol()] = ZoneEnum.BOMBE;		
 		}
 		
 		//Mettons les feus
@@ -204,7 +199,7 @@ public class ZoneDangereux {
 		{
 			source.checkInterruption(); //Appel Obligatoire
 			AiFire temp = itFeus.next();
-			matris[temp.getLine()][temp.getCol()] = 10;		
+			zoneArray[temp.getLine()][temp.getCol()] = ZoneEnum.FEU;		
 		}
 		
 		
@@ -217,53 +212,25 @@ public class ZoneDangereux {
 			AiItem temp = itObjets.next();
 			
 			if(temp.getType() == AiItemType.EXTRA_BOMB)
-				matris[temp.getLine()][temp.getCol()] = -1;
+				zoneArray[temp.getLine()][temp.getCol()] = ZoneEnum.BONUSBOMBE;
 			if(temp.getType() == AiItemType.EXTRA_FLAME)
-				matris[temp.getLine()][temp.getCol()] = -1;
+				zoneArray[temp.getLine()][temp.getCol()] = ZoneEnum.BONUSFEU;
 		}
 	}
-	private int nombreMur(AiTile target) throws StopRequestException {
-		source.checkInterruption();
-		
-		int res = 1;
-		Collection<AiBlock> bloks = source.getPercepts().getBlocks();
-		LinkedList<AiTile> blokZone = new LinkedList<AiTile>();
-		Iterator<AiBlock> it1 = bloks.iterator();
-		while(it1.hasNext())
-		{
-			source.checkInterruption();
-			AiBlock blok = it1.next();
-			AiTile temp = blok.getTile();
-			if(blok.isDestructible())
-			{
-				blokZone.add(temp);
-			}
-		}
- 		AiTile up = target.getNeighbor(Direction.UP);
-		AiTile down = target.getNeighbor(Direction.DOWN);
-		AiTile right = target.getNeighbor(Direction.RIGHT);
-		AiTile left = target.getNeighbor(Direction.LEFT);
-		if(blokZone.contains(up))
-			res ++;
-		if(blokZone.contains(down))
-			res++;
-		if(blokZone.contains(left))
-			res++;
-		if(blokZone.contains(right))
-			res++;
-		return res;
-	}
-	public double[][] getZoneArray() throws StopRequestException {
+
+	
+	public ZoneEnum[][] getZoneArray() throws StopRequestException {
 		source.checkInterruption(); //Appel Obligatoire
-		return matris;
+		return zoneArray;
 	}
+
 	public String toString()
 	{	
 		String result = "";
 		for(int i = 0; i < yMax;i++)
 		{	
 			for(int j = 0; j < xMax; j++)
-				result += "(" + i + "," + j + ")" + matris[i][j] + "   ";
+				result += "(" + i + "," + j + ")" + zoneArray[i][j] + "   ";
 			result += "\n";
 		}
 		
