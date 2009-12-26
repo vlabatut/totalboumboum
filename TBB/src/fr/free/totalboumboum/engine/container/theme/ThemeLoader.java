@@ -119,16 +119,6 @@ public class ThemeLoader
 		return result;
     }
 
-/*
- * TODO
- * 	- renommer copy en cacheCopy
- * 	- passer tous les trucs qui ne se copient qu'une fois (bombset/feu?)
- * 
- * 	- ou alors p-ê qu'il faut traiter le cache mémoire avant le loader
- * 
- *  - ou alors se comporter exactement comme le loader...	
- */
-	
     private static Theme loadThemeElement(Element root, String individualFolder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// init
     	Theme result = new Theme();

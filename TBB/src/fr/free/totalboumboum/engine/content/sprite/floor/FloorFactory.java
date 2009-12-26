@@ -114,8 +114,10 @@ public class FloorFactory extends SpriteFactory<Floor>
 		result.setBombset(bombsetCopy);
 		
 		// explosion
-		Explosion explosionCopy = explosion.cacheCopy();
-		result.setExplosion(explosionCopy);
+		if(explosion!=null)
+		{	Explosion explosionCopy = explosion.cacheCopy();
+			result.setExplosion(explosionCopy);
+		}
 		
 		// gestures
 		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);

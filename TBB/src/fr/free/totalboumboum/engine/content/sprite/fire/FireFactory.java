@@ -139,8 +139,10 @@ public class FireFactory extends SpriteFactory<Fire>
 		result.setBombset(bombset);
 		
 		// explosion
-		Explosion explosionCopy = explosion.cacheCopy();
-		result.setExplosion(explosionCopy);
+		if(explosion!=null)
+		{	Explosion explosionCopy = explosion.cacheCopy();
+			result.setExplosion(explosionCopy);
+		}
 		
 		// gestures
 		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);

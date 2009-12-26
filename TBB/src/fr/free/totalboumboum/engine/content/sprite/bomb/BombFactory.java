@@ -160,8 +160,10 @@ public class BombFactory extends SpriteFactory<Bomb>
 		result.setBombset(bs);
 		
 		// explosion
-		Explosion explosionCopy = explosion.cacheCopy();
-		result.setExplosion(explosionCopy);
+		if(explosion!=null)
+		{	Explosion explosionCopy = explosion.cacheCopy();
+			result.setExplosion(explosionCopy);
+		}
 		
 		// gestures
 		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
