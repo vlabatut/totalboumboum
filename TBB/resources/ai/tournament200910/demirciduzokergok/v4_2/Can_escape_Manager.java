@@ -1,4 +1,4 @@
-package tournament200910.demirciduzokergok.v4;
+package tournament200910.demirciduzokergok.v4_2;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -63,6 +63,7 @@ public class Can_escape_Manager {
 		
 		
 		path_b = star_b.processShortestPath(ai.getPercepts().getOwnHero().getTile(),possibleDest_b);
+		System.out.println(path_b.getLength());
 		arrived_tile_b = path_b.getLastTile();
 
 		

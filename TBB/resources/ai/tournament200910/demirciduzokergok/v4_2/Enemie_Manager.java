@@ -1,4 +1,4 @@
-package tournament200910.demirciduzokergok.v4;
+package tournament200910.demirciduzokergok.v4_2;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -136,16 +136,21 @@ public class Enemie_Manager {
 				x=-x;
 			if(y<0)
 				y=-y;
-			
-			
-		if(x<=zone.getOwnHero().getBombRange() || y<=zone.getOwnHero().getBombRange()){
-			arrived_b=true;
-		}
+			if(x<3 || y<3){
+				//if(y<zone.getOwnHero().getBombRange()){
+					arrived_b=true;
+					System.out.println("fark 3 den az col");
+			//	}
+			}
+
+			//if(arrived_tile_b==zone.getOwnHero().getTile())
+				//arrived_b=true;
+		
 		else
 			arrived_b=false;
 		}
 		else {
-			arrived_b=true;
+			arrived_b=false;
 		}
 	//	else if(arrived_tile_b==null)
 		//	arrived_b=false;
@@ -166,6 +171,14 @@ public class Enemie_Manager {
 		
 		}
 		
+	
+	
+	
+	public int getPathLength(){
+		return path_b.getLength();		
+		
+	}
+	
 	public void updateCostCalculator_b() throws StopRequestException{
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE

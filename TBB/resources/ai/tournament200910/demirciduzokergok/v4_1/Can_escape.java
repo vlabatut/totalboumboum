@@ -1,5 +1,5 @@
 
-package tournament200910.demirciduzokergok.v4;
+package tournament200910.demirciduzokergok.v4_1;
 
 
 
@@ -14,19 +14,20 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
 import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
 import fr.free.totalboumboum.ai.adapter200910.data.AiFire;
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiItem;
+
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
-public class Safety_Map {
-	private AiZone our_zone;
+public class Can_escape {
 	@SuppressWarnings("unused")
+	private AiZone our_zone;
 	private AiHero our_hero;
+	@SuppressWarnings("unused")
 	private Collection<AiHero> enemies;
 	
 	private Collection<AiBlock> blocks;
-	private Collection<AiItem> bonus;
+
 	private Collection<AiFire> fires;
 	private Collection<AiBomb> bombs;
 	
@@ -48,10 +49,10 @@ public class Safety_Map {
 	public double security_matrix[][];
 	
 	/** Constructeur de classe Safety_Map*/
-	public Safety_Map(AiZone zone){
+	public Can_escape(AiZone zone){
 		this.our_zone=zone;
 		this.blocks=zone.getBlocks();
-		this.bonus=zone.getItems();
+
 		this.fires=zone.getFires();
 		this.bombs=zone.getBombs();
 		//Notre bomberman est incluce aussi:
@@ -84,26 +85,13 @@ public class Safety_Map {
 			blck=block_iterator.next();
 			pos_x=blck.getCol();
 			pos_y=blck.getLine();
-			if(blck.isDestructible())
-				security_matrix[pos_y][pos_x]=DEST_WALL;
-			else
+
+			
 				security_matrix[pos_y][pos_x]=INDEST_WALL;
 		}
 	
 	
-		Iterator<AiItem> bonus_iterator = bonus.iterator();
-		AiItem item_bonus;
-
-		while (bonus_iterator.hasNext()) {
-			item_bonus = bonus_iterator.next();
-
-			pos_x = item_bonus.getCol();
-			pos_y = item_bonus.getLine();
-
-			security_matrix[pos_y][pos_x]=BONUS;
-
-		}		
-					
+				
 		
 			/** Placer les feu*/
 		Iterator<AiFire> fire_iterator=fires.iterator();
@@ -252,20 +240,36 @@ public class Safety_Map {
 			if(security_matrix[pos_y][pos_x]!= FIRE)
 			security_matrix[pos_y][pos_x] = BOMB;	
 	}
-		
-		Iterator<AiHero> it_hero=enemies.iterator();
-		AiHero hr;
-		while(it_hero.hasNext()){
-			hr=it_hero.next();
-			pos_x=hr.getCol();
-			pos_y=hr.getLine();
-			if(hr!=our_zone.getOwnHero()){
-				if(security_matrix[pos_y][pos_x] != FIRE && security_matrix[pos_y][pos_x] != BOMB && security_matrix[pos_y][pos_x] <=0 ){
-					security_matrix[pos_y][pos_x]=ENEMIE;
-				}
+	
+		int i=0;
+		while(our_hero.getBombRange()>i){
+			pos_y=our_hero.getLine();
+			pos_x=our_hero.getCol();
+			if(pos_x+i<width)
+			{
+				if(security_matrix[pos_y][pos_x+i]!=INDEST_WALL)
+					security_matrix[pos_y][pos_x+i]=BOMB;
 			}
+			if(pos_x-i>0)
+			{
+				if(security_matrix[pos_y][pos_x-i]!=INDEST_WALL)
+					security_matrix[pos_y][pos_x-i]=BOMB;
+			}
+			if(pos_y-i>0)
+			{
+				if(security_matrix[pos_y-i][pos_x]!=INDEST_WALL)
+					security_matrix[pos_y-i][pos_x]=BOMB;
+			}
+			if(pos_y+i<height)
+			{
+				if(security_matrix[pos_y+i][pos_x]!=INDEST_WALL)
+					security_matrix[pos_y+i][pos_x]=BOMB;
+			}
+			
+			i++;
+			
+			
 		}
-		
 		
 	
 	}
