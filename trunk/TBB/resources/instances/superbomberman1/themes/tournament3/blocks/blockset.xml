@@ -16,6 +16,7 @@
 		<group name="hardwalls" folder="hardwalls">
 			<block name="regular" folder="regular"/>
 			
+			<block name="center" folder="center"/>
 			<block name="down" folder="down"/>
 			<block name="downleft" folder="downleft"/>
 			<block name="downright" folder="downright"/>
