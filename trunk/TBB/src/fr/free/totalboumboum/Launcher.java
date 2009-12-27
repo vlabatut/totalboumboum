@@ -871,6 +871,7 @@ public class Launcher
 	 * 		- correction d'un bug dans les scripts de compilation (classes non référencées dans les adaptateurs d'IA)
 	 * 		- mise à jour du perso Prognathe
 	 * 		- mise à jour du système de log pour permettre de ne pas écraser toujours le même fichier, mais de créer à chaque fois un fichier différent et daté
+	 * 		- nouveaux niveaux pour le tournoi 3
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
