@@ -196,20 +196,24 @@ buttonStatistics.setEnabled(false);
 		if(tournament==tournamentConf && tournamentConfiguration.getAutoSave())
 		{	try
 			{	// filenames
-				String folder = FileTools.FOLDER_DEFAULT;
-				String backup = FileTools.FOLDER_DEFAULT_BACKUP;
+				String autosave = FileTools.getSavesPath()+File.separator+FileTools.FOLDER_AUTOSAVE;
+				String backup = FileTools.getSavesPath()+File.separator+FileTools.FOLDER_AUTOSAVE_BACKUP;
 				String dataFileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
 				String xmlFileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_XML;
 				// backup
-				File oldFile,newFile;
-				oldFile = new File(folder,dataFileName);
-				newFile = new File(backup,dataFileName);
-				oldFile.renameTo(newFile);
-				oldFile = new File(folder,xmlFileName);
-				newFile = new File(backup,xmlFileName);
-				oldFile.renameTo(newFile);
+				File autosaveFile,backupFile;
+				autosaveFile = new File(autosave,dataFileName);
+				backupFile = new File(backup,dataFileName);
+				if(backupFile.exists())
+					backupFile.delete();
+				autosaveFile.renameTo(backupFile);
+				autosaveFile = new File(autosave,xmlFileName);
+				backupFile = new File(backup,xmlFileName);
+				if(backupFile.exists())
+					backupFile.delete();
+				autosaveFile.renameTo(backupFile);
 				// save
-				GameArchive.saveGame(folder, tournament);
+				GameArchive.saveGame(FileTools.FOLDER_AUTOSAVE,tournament);
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();

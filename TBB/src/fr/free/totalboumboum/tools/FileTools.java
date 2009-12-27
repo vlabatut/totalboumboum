@@ -114,6 +114,8 @@ public class FileTools
 	public static final String FOLDER_ABILITIES = "abilities";
 	public static final String FOLDER_ANIMES = "animes";
 	public static final String FOLDER_AI = "ai";
+	public static final String FOLDER_AUTOSAVE = "autosave";
+	public static final String FOLDER_AUTOSAVE_BACKUP = "autosave_backup";
 	public static final String FOLDER_BLOCKS = "blocks";
 	public static final String FOLDER_BOMBS = "bombs";
 	public static final String FOLDER_CACHE = "cache";
@@ -121,8 +123,6 @@ public class FileTools
 	public static final String FOLDER_CONFIGURATION = "configuration";
 	public static final String FOLDER_CONTROLS = "controls";
 	public static final String FOLDER_DATA = "data";
-	public static final String FOLDER_DEFAULT = "default";
-	public static final String FOLDER_DEFAULT_BACKUP = "default_backup";
 	public static final String FOLDER_DETAILED = "detailed";
 	public static final String FOLDER_EXPLOSIONS = "explosions";
 	public static final String FOLDER_FIRE = "fire";
