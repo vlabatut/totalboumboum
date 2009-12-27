@@ -94,7 +94,7 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 		if(tournamentConfiguration.getAutoLoad() && firstTime)
 		{	firstTime = false;
 			try
-			{	String folder = FileTools.FOLDER_DEFAULT;
+			{	String folder = FileTools.FOLDER_AUTOSAVE;
 				AbstractTournament tournament = GameArchive.loadGame(folder);
 				tournamentSplitPanel.setTournament(tournament);
 				Configuration.getGameConfiguration().getTournamentConfiguration().setTournament(tournament);

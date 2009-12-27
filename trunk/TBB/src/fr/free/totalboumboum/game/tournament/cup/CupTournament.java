@@ -176,15 +176,19 @@ public class CupTournament extends AbstractTournament
 				for(int j=0;j<partsList.size();j++)
 				{	List<Integer> playersList = partsList.get(j);
 					CupPart part = leg.getPart(j);
+					int cupPlayerIndex = 0;
 					for(int k=0;k<playersList.size();k++)
 					{	Integer playerRank = playersList.get(k);
-						CupPlayer player = part.getPlayer(k);
-						if(player.getUsed())
-						{	int previousPartId = player.getPart();
-							int previousRank = player.getRank();
-							List<Integer> previousPlayersList = previousPartsList.get(previousPartId);
-							previousPlayersList.set(previousRank-1,playerRank);
+						CupPlayer player;
+						do
+						{	player = part.getPlayer(cupPlayerIndex);
+							cupPlayerIndex++;
 						}
+						while(!player.getUsed());
+						int previousPartId = player.getPart();
+						int previousRank = player.getRank();
+						List<Integer> previousPlayersList = previousPartsList.get(previousPartId);
+						previousPlayersList.set(previousRank-1,playerRank);
 					}
 				}
 			}
