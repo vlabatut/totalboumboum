@@ -24,6 +24,8 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
+import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
@@ -43,8 +45,10 @@ public class AstarNode implements Comparable<AstarNode>
 	 * @param costCalculator	fonction de cout
 	 * @param heuristicCalculator	fonction heuristique
 	 */
-	protected AstarNode(AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
-	{	// case
+	protected AstarNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
+	{	// ia
+		this.ai = ai;
+		// case
 		this.tile = tile;
 		// hero
 		this.hero = hero;
@@ -69,7 +73,9 @@ public class AstarNode implements Comparable<AstarNode>
 	 * @param parent	noeud de recherche parent de ce noeud
 	 */
 	protected AstarNode(AiTile tile, AstarNode parent)
-	{	// case
+	{	// ia
+		this.ai = parent.getAi();
+		// case
 		this.tile = tile;
 		// hero
 		this.hero = parent.getHero();
@@ -88,6 +94,15 @@ public class AstarNode implements Comparable<AstarNode>
 		successorCalculator = parent.getSuccessorCalculator();
 	}
 
+    /////////////////////////////////////////////////////////////////
+	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArtificialIntelligence ai = null;
+	
+	public ArtificialIntelligence getAi()
+	{	return ai;	
+	}
+	
     /////////////////////////////////////////////////////////////////
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -187,9 +202,12 @@ public class AstarNode implements Comparable<AstarNode>
 	 * 
 	 * @param tile	case à tester
 	 * @return	vrai si la case a déjà été traitée
+	 * @throws StopRequestException 
 	 */
-	private boolean hasBeenExplored(AiTile tile)
-	{	boolean result = this.tile==tile;
+	private boolean hasBeenExplored(AiTile tile) throws StopRequestException
+	{	//ai.checkInterruption();
+		
+		boolean result = this.tile==tile;
 		if(parent!=null && !result)
 			result = parent.hasBeenExplored(tile);
 		return result;
@@ -217,8 +235,9 @@ public class AstarNode implements Comparable<AstarNode>
 	 * (ils sont éventuellement calculés si ce n'est pas déjà fait)
 	 * 
 	 * @return	une liste contenant les fils de ce noeud
+	 * @throws StopRequestException 
 	 */
-	public List<AstarNode> getChildren()
+	public List<AstarNode> getChildren() throws StopRequestException
 	{	if(children==null)
 			developNode();
 		return children;
@@ -228,9 +247,12 @@ public class AstarNode implements Comparable<AstarNode>
 	 * utilise la fonction successeur pour calculer les enfants de ce noeud de recherche,
 	 * i.e. pour déterminer quelles sont les cases que l'on peut atteindre à partir
 	 * de la case courante.
+	 * @throws StopRequestException 
 	 */
-	private void developNode()
-	{	children = new ArrayList<AstarNode>();
+	private void developNode() throws StopRequestException
+	{	//ai.checkInterruption();
+	
+		children = new ArrayList<AstarNode>();
 		List<AiTile> neighbors = successorCalculator.processSuccessors(this);
 		for(AiTile neighbor: neighbors)
 		{	// on ne garde pas les états qui appartiennent déjà au chemin contenant le noeud de recherche courant
@@ -307,6 +329,7 @@ public class AstarNode implements Comparable<AstarNode>
 		}
 		
 		// misc
+		ai = null;
 		costCalculator = null;
 		heuristicCalculator = null;
 		successorCalculator = null;
