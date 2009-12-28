@@ -1201,4 +1201,5 @@ public class Launcher
 		
 	// transformer les fonctions d'édition/génération de niveau en un utilitaire basique
 	// rajouter des fonction pour insérer/supprimer des lignes
+	// astar : renvoyer une exception en cas de problème (p-e ds la version suivante ?)
 }
