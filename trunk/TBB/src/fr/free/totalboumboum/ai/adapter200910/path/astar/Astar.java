@@ -91,7 +91,7 @@ public class Astar
 	/** limite de coût (négatif = pas de limite) */
 	private int maxCost = -1;
 	/** limite de nombre de noeuds (négatif = pas de limite), pas configurable */
-	private int maxNodes = 1000;
+	private int maxNodes = 5000;
 	
 	/**
 	 * limite l'arbre de recherche à une hauteur de maxHeight,
@@ -177,9 +177,9 @@ public class Astar
 		boolean found = false;
 		boolean limitReached = false;
 
-int maxh = 0;
-double maxc = 0;
-int maxn = 0;
+//int maxh = 0;
+//double maxc = 0;
+//int maxn = 0;
 		
 		// traitement
 		do
@@ -215,12 +215,12 @@ int maxn = 0;
 				for(AstarNode node: successors)
 					queue.offer(node);
 			}
-if(currentNode.getDepth()>maxh)
-	maxh = currentNode.getDepth();
-if(currentNode.getCost()>maxc)
-	maxc = currentNode.getCost();
-if(queue.size()>maxn)
-	maxn = queue.size();
+//if(currentNode.getDepth()>maxh)
+//	maxh = currentNode.getDepth();
+//if(currentNode.getCost()>maxc)
+//	maxc = currentNode.getCost();
+//if(queue.size()>maxn)
+//	maxn = queue.size();
 		}
 		while(!queue.isEmpty() && !found && !limitReached);
 		
@@ -244,8 +244,22 @@ if(queue.size()>maxn)
 			}
 			System.out.println(" ]");
 		}
-System.out.println(">>Astar height="+maxh+" cost="+maxc+" size="+maxn);
+//System.out.print(">>Astar height="+maxh+" cost="+maxc+" size="+maxn);
+//System.out.print(" src="+root.getTile()+" trgt="+endTiles.get(endTiles.size()-1));
+//System.out.print(" result="+result);
+//System.out.println();
 
+		finish();
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void finish()
+	{	if(root!=null)
+		{	root.finish();
+			root = null;
+		}		
 	}
 }
