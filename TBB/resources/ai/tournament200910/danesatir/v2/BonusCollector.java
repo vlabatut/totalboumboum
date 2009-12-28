@@ -27,7 +27,7 @@ public class BonusCollector {
 		for(AiItem i: items) {
 			list.add(i.getTile());
 		}
-		Astar a = new Astar(ai.getOwnHero(), new SafeCostCalculator(this.ai,this.ai.getTimeMatrice()), new BasicHeuristicCalculator());
+		Astar a = new Astar(ai,ai.getOwnHero(), new SafeCostCalculator(this.ai,this.ai.getTimeMatrice()), new BasicHeuristicCalculator());
 		AiPath path = a.processShortestPath(source, list);
 		path.removeTile(source);
 		return path.getTile(0);

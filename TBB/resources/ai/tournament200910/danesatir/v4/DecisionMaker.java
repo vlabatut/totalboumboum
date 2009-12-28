@@ -108,7 +108,7 @@ public class DecisionMaker {
 		if(safe==null)
 			return false;
 		Astar astar;
-		astar = new Astar(ai.getOwnHero(),
+		astar = new Astar(ai,ai.getOwnHero(),
 				new MyCost(this.time),
 				new BasicHeuristicCalculator(),
 				new MySuccessor(this.ai,this.time)

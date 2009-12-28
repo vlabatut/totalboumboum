@@ -30,7 +30,7 @@ public class Escape_Manager {
 		double costMatrix[][] = new double[zone.getHeigh()][zone.getWidth()];
 		costCalculator = new MatrixCostCalculator(costMatrix);
 		heuristicCalculator = new BasicHeuristicCalculator();
-		star = new Astar(our_bomberman,costCalculator,heuristicCalculator);
+		star = new Astar(ai,our_bomberman,costCalculator,heuristicCalculator);
 		
 		arrived = false;
 

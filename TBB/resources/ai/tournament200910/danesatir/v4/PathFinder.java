@@ -47,7 +47,7 @@ public class PathFinder {
 	public void calculPath(List<AiTile> targetList) throws StopRequestException, NoWayException {
 		ai.checkInterruption();
 		Astar astar;
-		astar = new Astar(hero,
+		astar = new Astar(ai,hero,
 				new MyCost(this.time),
 				new BasicHeuristicCalculator(),
 				new MySuccessor(this.ai,this.time)

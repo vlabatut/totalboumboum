@@ -22,7 +22,7 @@ public class PathFinder {
 		this.source = source;
 		this.target = target;
 		this.path = null;
-		this.astar = new Astar(ai.getOwnHero(),
+		this.astar = new Astar(ai,ai.getOwnHero(),
 				new SafeCostCalculator(this.ai,this.ai.getTimeMatrice()),
 				new BasicHeuristicCalculator());
 		this.duration = -1;

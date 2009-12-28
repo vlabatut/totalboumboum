@@ -199,7 +199,7 @@ public class DaneSatir extends ArtificialIntelligence
 			break;
 		}
 		case EXPLODE_TO_ENEMY: {
-			Astar astar = new Astar(myHero,
+			Astar astar = new Astar(this,myHero,
 					new WallCost(), 
 					new BasicHeuristicCalculator(),
 					new WallSuccessor(this)

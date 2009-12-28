@@ -75,7 +75,7 @@ public class DemirciDuzokErgok extends ArtificialIntelligence
   
   costCalc = new BasicCostCalculator();
   heuristicCalc = new BasicHeuristicCalculator();
-  star = new Astar(OurBomberMan, costCalc, heuristicCalc);
+  star = new Astar(this,OurBomberMan, costCalc, heuristicCalc);
   
   System.out.println("Width : "+zone_IA.getWidth());
   System.out.println("Heigth : "+zone_IA.getHeigh()); 
