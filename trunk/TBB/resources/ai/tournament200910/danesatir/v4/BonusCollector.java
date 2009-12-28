@@ -68,7 +68,7 @@ public class BonusCollector {
 	public AiTile findWallToExplode() throws StopRequestException {
 		List<AiTile> targets=getWallsTiles();
 		AiHero hero=ai.getOwnHero();
-		Astar astar = new Astar(hero,
+		Astar astar = new Astar(ai,hero,
 			new MyCost(new TimeMatrice(this.ai)), 
 			new BasicHeuristicCalculator(),
 			new WallSuccessor(ai)

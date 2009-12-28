@@ -31,7 +31,7 @@ public class SafeStateController {
 			double costMatrix[][] = new double[zone.getWidth()][zone.getHeigh()];
 			costCalculator = new MatrixCostCalculator(costMatrix);
 			heuristicCalculator = new BasicHeuristicCalculator();
-			astar = new Astar(ai.getOwnHero(),costCalculator,heuristicCalculator);
+			astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
 			
 			// init destinations
 			arrived = false;

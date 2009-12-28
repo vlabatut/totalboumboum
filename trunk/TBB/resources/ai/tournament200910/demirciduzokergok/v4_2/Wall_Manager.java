@@ -38,7 +38,7 @@ public class Wall_Manager {
 		double costMatrix[][] = new double[zone.getHeigh()][zone.getWidth()];
 		costCalculator_b = new MatrixCostCalculator(costMatrix);
 		hcalcul_b = new BasicHeuristicCalculator();
-		star_b = new Astar(ai.getPercepts().getOwnHero(),costCalculator_b,hcalcul_b);
+		star_b = new Astar(ai,ai.getPercepts().getOwnHero(),costCalculator_b,hcalcul_b);
 		
 		// init destinations
 		arrived_b = false;

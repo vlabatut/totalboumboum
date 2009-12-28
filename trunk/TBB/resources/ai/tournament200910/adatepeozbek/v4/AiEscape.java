@@ -1220,7 +1220,7 @@ public class AiEscape
 	public AiPath calculateNewPath(AiTile tileToGo) throws StopRequestException
 	{
 		ownAi.checkInterruption();
-		Astar astar = new Astar(OWN_HERO, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
+		Astar astar = new Astar(ownAi,OWN_HERO, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
 		
 		AiPath localpath = astar.processShortestPath(CURRENT_TILE, tileToGo);
 		for(AiTile tileToPass : localpath.getTiles())
@@ -1261,7 +1261,7 @@ public class AiEscape
 	public boolean calculateNewPath() throws StopRequestException
 	{
 		ownAi.checkInterruption();
-		Astar astar = new Astar(OWN_HERO, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
+		Astar astar = new Astar(ownAi,OWN_HERO, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
 		
 		List<AiTile> safeTiles = getSafeTiles();
 		AiPath localpath = astar.processShortestPath(CURRENT_TILE, safeTiles);

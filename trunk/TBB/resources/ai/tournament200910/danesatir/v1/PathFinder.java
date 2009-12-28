@@ -29,7 +29,7 @@ public class PathFinder {
 	private void init() throws StopRequestException
 	{	
 		ai.checkInterruption();
-		astar = new Astar(ai.getOwnHero(),new BasicCostCalculator(),new BasicHeuristicCalculator());
+		astar = new Astar(ai,ai.getOwnHero(),new BasicCostCalculator(),new BasicHeuristicCalculator());
 	}
 
 }

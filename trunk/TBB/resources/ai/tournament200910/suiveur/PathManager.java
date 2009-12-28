@@ -78,7 +78,7 @@ public class PathManager
 		zone = ai.getZone();
 		costCalculator = new BasicCostCalculator();
 		heuristicCalculator = new BasicHeuristicCalculator();
-		astar = new Astar(ai.getOwnHero(),costCalculator,heuristicCalculator);
+		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
 		updatePrev();
 	}
 	

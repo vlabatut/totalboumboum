@@ -41,7 +41,7 @@ import fr.free.totalboumboum.ai.adapter200910.path.astar.successor.SuccessorCalc
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
  * cette implémentation correspond à peu près à un A* classique. Il y a quand même une modification,
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
- * écartés lorsqu'un noeud de recherch est développé. En d'autres termes, l'algorithme évite
+ * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
  * boucler à l'infini.</br>
  * 
@@ -235,9 +235,7 @@ public class Astar
 			while(!queue.isEmpty() && !found && !limitReached);
 		
 			// build solution path
-//			if(limitReached)
-//				result = null;
-			/*else*/ if(found)
+			if(found)
 			{	while(finalNode!=null)
 				{	AiTile tile = finalNode.getTile();
 					result.addTile(0,tile);

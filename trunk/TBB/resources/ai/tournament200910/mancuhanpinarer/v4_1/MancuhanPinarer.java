@@ -785,7 +785,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		CostCalculator cost = new RedGroupOffenseCostCalculator();
 		// Calcul de l'heuristic par la classe de l'API
 		HeuristicCalculator heuristic = new BasicHeuristicCalculator();
-		astar = new Astar(ownHero, cost, heuristic);
+		astar = new Astar(this,ownHero, cost, heuristic);
 		shortestPath = astar.processShortestPath(startPoint, endPoints);
 		return shortestPath;
 
@@ -815,7 +815,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		CostCalculator cost = new RedGroupDefenseCostCalculator();
 		// Calcul de l'heuristic par la classe de l'API
 		HeuristicCalculator heuristic = new BasicHeuristicCalculator();
-		astar = new Astar(ownHero, cost, heuristic);
+		astar = new Astar(this,ownHero, cost, heuristic);
 		shortestPath = astar.processShortestPath(startPoint, endPoints);
 		return shortestPath;
 	}

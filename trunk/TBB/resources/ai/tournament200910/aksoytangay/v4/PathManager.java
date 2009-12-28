@@ -67,7 +67,7 @@ public class PathManager {
 		CostCalculator costCalculator = new BasicCostCalculator();
 		HeuristicCalculator heuristicCalculator = new BasicHeuristicCalculator();
 		//on cree une instance de Astar qui va nous donner le chemin plus court
-		aStar = new Astar(ownHero, costCalculator, heuristicCalculator);
+		aStar = new Astar(myAI,ownHero, costCalculator, heuristicCalculator);
 		shortestPath = aStar.processShortestPath(startTile, endTiles);
 		
 //		System.out.println("getshortestpathTOESCAPE.patman");

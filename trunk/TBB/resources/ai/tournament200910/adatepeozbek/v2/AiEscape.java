@@ -160,7 +160,7 @@ public class AiEscape
 			
 			if(neighbors.size() == 0 || !found)
 			{
-				Astar astar = new Astar(ownHero, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
+				Astar astar = new Astar(ownAi,ownHero, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
 				//AiTile endTile = GetShortestSafeTile();
 				List<AiTile> safeTiles = getSafeTiles();
 				AiPath localpath = astar.processShortestPath(currentTile, safeTiles);
@@ -214,7 +214,7 @@ public class AiEscape
 			return false;
 		else if(count == 1)
 		{
-			Astar astar = new Astar(ownHero, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
+			Astar astar = new Astar(ownAi,ownHero, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
 			
 			List<AiTile> safeTiles = getSafeTiles();
 			//AiTile tileToGo = GetShortestSafeTile();
@@ -369,7 +369,7 @@ public class AiEscape
 	{
 		ownAi.checkInterruption();
 		
-		Astar astar = new Astar(ownHero, new BasicCostCalculator(),new BasicHeuristicCalculator());
+		Astar astar = new Astar(ownAi,ownHero, new BasicCostCalculator(),new BasicHeuristicCalculator());
 		for(int i=0; i<heroes.size(); i++)
 		{
 			ownAi.checkInterruption();			
@@ -466,7 +466,7 @@ public class AiEscape
 		else if(!isTileSafe(minBlock.getTile()))
 			return false;
 		
-		Astar astar = new Astar(ownHero, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
+		Astar astar = new Astar(ownAi,ownHero, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
 		
 		AiPath localpath = astar.processShortestPath(currentTile, minBlock.getTile());
 			
