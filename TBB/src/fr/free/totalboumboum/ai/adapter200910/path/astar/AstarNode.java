@@ -43,7 +43,7 @@ public class AstarNode implements Comparable<AstarNode>
 	 * @param costCalculator	fonction de cout
 	 * @param heuristicCalculator	fonction heuristique
 	 */
-	public AstarNode(AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
+	protected AstarNode(AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
 	{	// case
 		this.tile = tile;
 		// hero
@@ -68,7 +68,7 @@ public class AstarNode implements Comparable<AstarNode>
 	 * @param tile	case associée à ce noeud de recherche
 	 * @param parent	noeud de recherche parent de ce noeud
 	 */
-	public AstarNode(AiTile tile, AstarNode parent)
+	protected AstarNode(AiTile tile, AstarNode parent)
 	{	// case
 		this.tile = tile;
 		// hero
@@ -267,7 +267,7 @@ public class AstarNode implements Comparable<AstarNode>
 		return result;
 	}
 
-    public int compareTo(AstarNode node)
+	public int compareTo(AstarNode node)
     {	int result = 0;
 		double f1 = cost+heuristic;
     	double f2 = node.getCost()+node.getHeuristic();
@@ -290,5 +290,28 @@ public class AstarNode implements Comparable<AstarNode>
 		result = result + heuristic + " ";
 		result = result + ">";
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected void finish()
+	{	// children
+		if(children!=null)
+		{	while(!children.isEmpty())
+			{	AstarNode n = children.get(0);
+				n.finish();
+				children.remove(0);
+			}
+			children = null;
+		}
+		
+		// misc
+		costCalculator = null;
+		heuristicCalculator = null;
+		successorCalculator = null;
+		parent = null;
+		hero = null;
+		tile = null;
 	}
 }

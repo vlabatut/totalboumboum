@@ -862,7 +862,9 @@ public class Launcher
 	 * 		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
 	 * 		- nouvelle option du jeu permettant de masquer les exceptions provoquées par les IA
-	 * 		- option pour logger les exceptions des IA  
+	 * 		- option pour logger les exceptions des IA
+	 * 		- ajout de l'appel à Thread.yield() dans la méthode checkInterruption d'ArtificialIntelligence : ça permet de mettre en sourdin les IA trop gourmandes en temps proç
+	 * 		- meilleure gestion de A* en ce qui concerne les objets à traiter par le ramasse-miettes 
 	 * - stats :
 	 * 		- classe spécifique pour réinitialiser toutes les stats en dehors du jeu
 	 * 		- méthode pour réinitialiser les stats générales d'un joueur en particulier (appelée hors du jeu)
@@ -1091,7 +1093,8 @@ public class Launcher
 	 *	- IA :
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
 	 * 		- masquage des exceptions provoquées par les IA
-	 * 		- log de ces mêmes exceptions	 
+	 * 		- log de ces mêmes exceptions
+	 * 		- ramasse-miette et A*
 	 *	- stats :
 	 *	- GUI : 
 	 *  - tournois :
