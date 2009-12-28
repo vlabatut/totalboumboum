@@ -205,7 +205,7 @@ public class AstarNode implements Comparable<AstarNode>
 	 * @throws StopRequestException 
 	 */
 	private boolean hasBeenExplored(AiTile tile) throws StopRequestException
-	{	//ai.checkInterruption();
+	{	ai.checkInterruption();
 		
 		boolean result = this.tile==tile;
 		if(parent!=null && !result)
@@ -250,7 +250,7 @@ public class AstarNode implements Comparable<AstarNode>
 	 * @throws StopRequestException 
 	 */
 	private void developNode() throws StopRequestException
-	{	//ai.checkInterruption();
+	{	ai.checkInterruption();
 	
 		children = new ArrayList<AstarNode>();
 		List<AiTile> neighbors = successorCalculator.processSuccessors(this);

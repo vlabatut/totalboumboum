@@ -58,7 +58,7 @@ import fr.free.totalboumboum.ai.adapter200910.path.astar.successor.SuccessorCalc
  * Le but est d'introduire une part de hasard dans les IA, de manière à les rendre moins prévisibles.
  */
 public class Astar
-{	private static boolean verbose = true;
+{	private static boolean verbose = false;
 
 	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
 	{	this(ai,hero,costCalculator,heuristicCalculator,new BasicSuccessorCalculator());
@@ -169,11 +169,10 @@ public class Astar
 	 */
 	public AiPath processShortestPath(AiTile startTile, List<AiTile> endTiles) throws StopRequestException
 	{	if(verbose)
-		{	
-//			System.out.print("A*: from "+startTile+" to [");
-//			for(AiTile tile: endTiles)
-//				System.out.print(" "+tile);
-//			System.out.println(" ]");
+		{	System.out.print("A*: from "+startTile+" to [");
+			for(AiTile tile: endTiles)
+				System.out.print(" "+tile);
+			System.out.println(" ]");
 		}		
 		int maxh = 0;
 		double maxc = 0;
@@ -236,9 +235,9 @@ public class Astar
 			while(!queue.isEmpty() && !found && !limitReached);
 		
 			// build solution path
-			if(limitReached)
-				result = null;
-			else if(found)
+//			if(limitReached)
+//				result = null;
+			/*else*/ if(found)
 			{	while(finalNode!=null)
 				{	AiTile tile = finalNode.getTile();
 					result.addTile(0,tile);
@@ -248,17 +247,16 @@ public class Astar
 		}
 		
 		if(verbose)
-		{	
-//			System.out.print("Path: [");
-//			if(limitReached)
-//				System.out.println(" limit reached");
-//			else if(found)
-//			{	for(AiTile t: result.getTiles())
-//					System.out.print(" "+t);
-//			}
-//			else //if(endTiles.isEmpty())
-//				System.out.println(" endTiles parameter empty");
-//			System.out.println(" ]");
+		{	System.out.print("Path: [");
+			if(limitReached)
+				System.out.println(" limit reached");
+			else if(found)
+			{	for(AiTile t: result.getTiles())
+					System.out.print(" "+t);
+			}
+			else //if(endTiles.isEmpty())
+				System.out.println(" endTiles parameter empty");
+			System.out.println(" ]");
 			//
 			System.out.print("height="+maxh+" cost="+maxc+" size="+maxn);
 			System.out.print(" src="+root.getTile());
