@@ -26,6 +26,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
+import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
@@ -56,14 +58,15 @@ import fr.free.totalboumboum.ai.adapter200910.path.astar.successor.SuccessorCalc
  * Le but est d'introduire une part de hasard dans les IA, de manière à les rendre moins prévisibles.
  */
 public class Astar
-{	private static boolean verbose = false;
+{	private static boolean verbose = true;
 
-	public Astar(AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
-	{	this(hero,costCalculator,heuristicCalculator,new BasicSuccessorCalculator());
+	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
+	{	this(ai,hero,costCalculator,heuristicCalculator,new BasicSuccessorCalculator());
 	}
 	
-	public Astar(AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
-	{	this.hero = hero;
+	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
+	{	this.ai = ai;
+		this.hero = hero;
 		this.costCalculator = costCalculator;
 		this.heuristicCalculator = heuristicCalculator;
 		this.successorCalculator = successorCalculator;
@@ -82,6 +85,8 @@ public class Astar
 	private AstarNode root = null;
 	/** personnage de référence */
 	private AiHero hero = null;
+	/** l'ai qui a réalisé l'appel */
+	private ArtificialIntelligence ai = null;
 
 	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
@@ -91,7 +96,7 @@ public class Astar
 	/** limite de coût (négatif = pas de limite) */
 	private int maxCost = -1;
 	/** limite de nombre de noeuds (négatif = pas de limite), pas configurable */
-	private int maxNodes = 5000;
+	private int maxNodes = 10000;
 	
 	/**
 	 * limite l'arbre de recherche à une hauteur de maxHeight,
@@ -138,8 +143,9 @@ public class Astar
 	 * @param startTile	la case de départ
 	 * @param endTile	la case d'arrivée
 	 * @return un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur null
+	 * @throws StopRequestException 
 	 */
-	public AiPath processShortestPath(AiTile startTile, AiTile endTile)
+	public AiPath processShortestPath(AiTile startTile, AiTile endTile) throws StopRequestException
 	{	ArrayList<AiTile> endTiles = new ArrayList<AiTile>();
 		endTiles.add(endTile);
 		AiPath result = processShortestPath(startTile,endTiles);
@@ -152,102 +158,116 @@ public class Astar
 	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
 	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
 	 * une limite de cout/taille, la valeur null est renvoyée. Dans ce 
-	 * cas là, c'est qu'il y a généralement un problème dans le façon 
+	 * cas-là, c'est qu'il y a généralement un problème dans le façon 
 	 * dont A* est employé (mauvaise fonction de cout, par exemple).
+	 * La fonction renvoie également null si la liste endTiles est vide.
 	 * 
 	 * @param startTile	la case de départ
 	 * @param endTile	la liste des cases d'arrivée possibles
 	 * @return un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null
+	 * @throws StopRequestException 
 	 */
-	public AiPath processShortestPath(AiTile startTile, List<AiTile> endTiles)
+	public AiPath processShortestPath(AiTile startTile, List<AiTile> endTiles) throws StopRequestException
 	{	if(verbose)
-		{	System.out.print("A*: from "+startTile+" to [");
-			for(AiTile tile: endTiles)
-				System.out.print(" "+tile);
-			System.out.println(" ]");
+		{	
+//			System.out.print("A*: from "+startTile+" to [");
+//			for(AiTile tile: endTiles)
+//				System.out.print(" "+tile);
+//			System.out.println(" ]");
 		}		
-		
+		int maxh = 0;
+		double maxc = 0;
+		int maxn = 0;
+
 		// initialisation
+		boolean found = false;
+		boolean limitReached = false;
 		AiPath result = new AiPath();
 		heuristicCalculator.setEndTiles(endTiles);
-		root = new AstarNode(startTile,hero,costCalculator,heuristicCalculator,successorCalculator);
+		root = new AstarNode(ai,startTile,hero,costCalculator,heuristicCalculator,successorCalculator);
 		PriorityQueue<AstarNode> queue = new PriorityQueue<AstarNode>(1);
 		queue.offer(root);
 		AstarNode finalNode = null;
-		boolean found = false;
-		boolean limitReached = false;
-
-//int maxh = 0;
-//double maxc = 0;
-//int maxn = 0;
-		
+	
 		// traitement
-		do
-		{	// on prend le noeud situé en tête de file
-			AstarNode currentNode = queue.poll();
-			if(verbose)
-			{	System.out.println("Visited : "+currentNode.toString());
-				System.out.println("Queue length: "+queue.size());
+		if(!endTiles.isEmpty())
+		{	do
+			{	ai.checkInterruption();
+				// on prend le noeud situé en tête de file
+				AstarNode currentNode = queue.poll();
+				if(verbose)
+				{	System.out.println("Visited : "+currentNode.toString());
+					System.out.println("Queue length: "+queue.size());
+				}
+				// on teste si on est arrivé à la fin de la recherche
+				if(endTiles.contains(currentNode.getTile()))
+				{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
+					finalNode = currentNode;
+					found = true;
+				}
+				// si l'arbre a atteint la hauteur maximale, on s'arrête
+				else if(maxHeight>0 && currentNode.getDepth()>=maxHeight)
+					limitReached = true;
+				// si le noeud courant a atteint le cout maximal, on s'arrête
+				else if(maxCost>0 && currentNode.getCost()>=maxCost)
+					limitReached = true;
+				// si le nombre de noeuds dans la file est trop grand, on s'arrête
+				else if(maxNodes>0 && queue.size()>=maxNodes)
+					limitReached = true;
+				else
+				{	// sinon on récupère les noeuds suivants
+					ArrayList<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
+					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
+					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
+					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
+					Collections.shuffle(successors);
+					// puis on les rajoute dans la file de priorité
+					for(AstarNode node: successors)
+						queue.offer(node);
+				}
+				// verbose
+				if(currentNode.getDepth()>maxh)
+					maxh = currentNode.getDepth();
+				if(currentNode.getCost()>maxc)
+					maxc = currentNode.getCost();
+				if(queue.size()>maxn)
+					maxn = queue.size();
 			}
-			// on teste si on est arrivé à la fin de la recherche
-			if(endTiles.contains(currentNode.getTile()))
-			{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
-				finalNode = currentNode;
-				found = true;
-			}
-			// si l'arbre a atteint la hauteur maximale, on s'arrête
-			else if(maxHeight>0 && currentNode.getDepth()>=maxHeight)
-				limitReached = true;
-			// si le noeud courant a atteint le cout maximal, on s'arrête
-			else if(maxCost>0 && currentNode.getCost()>=maxCost)
-				limitReached = true;
-			// si le nombre de noeuds dans la file est trop grand, on s'arrête
-			else if(maxNodes>0 && queue.size()>=maxNodes)
-				limitReached = true;
-			else
-			{	// sinon on récupère les noeuds suivants
-				ArrayList<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
-				// on introduit du hasard en permuttant aléatoirement les noeuds suivants
-				// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
-				// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
-				Collections.shuffle(successors);
-				// puis on les rajoute dans la file de priorité
-				for(AstarNode node: successors)
-					queue.offer(node);
-			}
-//if(currentNode.getDepth()>maxh)
-//	maxh = currentNode.getDepth();
-//if(currentNode.getCost()>maxc)
-//	maxc = currentNode.getCost();
-//if(queue.size()>maxn)
-//	maxn = queue.size();
-		}
-		while(!queue.isEmpty() && !found && !limitReached);
+			while(!queue.isEmpty() && !found && !limitReached);
 		
-		// build solution path
-		if(limitReached)
-			result = null;
-		else if(found)
-		{	while(finalNode!=null)
-			{	AiTile tile = finalNode.getTile();
-				result.addTile(0,tile);
-				finalNode = finalNode.getParent();
-			}
-		}
-		if(verbose)
-		{	System.out.print("Path: [");
+			// build solution path
 			if(limitReached)
-				System.out.println(" limit reached");
-			else
-			{	for(AiTile t: result.getTiles())
-					System.out.print(" "+t);
+				result = null;
+			else if(found)
+			{	while(finalNode!=null)
+				{	AiTile tile = finalNode.getTile();
+					result.addTile(0,tile);
+					finalNode = finalNode.getParent();
+				}
 			}
-			System.out.println(" ]");
 		}
-//System.out.print(">>Astar height="+maxh+" cost="+maxc+" size="+maxn);
-//System.out.print(" src="+root.getTile()+" trgt="+endTiles.get(endTiles.size()-1));
-//System.out.print(" result="+result);
-//System.out.println();
+		
+		if(verbose)
+		{	
+//			System.out.print("Path: [");
+//			if(limitReached)
+//				System.out.println(" limit reached");
+//			else if(found)
+//			{	for(AiTile t: result.getTiles())
+//					System.out.print(" "+t);
+//			}
+//			else //if(endTiles.isEmpty())
+//				System.out.println(" endTiles parameter empty");
+//			System.out.println(" ]");
+			//
+			System.out.print("height="+maxh+" cost="+maxc+" size="+maxn);
+			System.out.print(" src="+root.getTile());
+			if(!endTiles.isEmpty()) 
+				System.out.println(" trgt="+endTiles.get(endTiles.size()-1));
+			if(result!=null) 
+				System.out.print(" result="+result);
+			System.out.println();
+		}
 
 		finish();
 		return result;
