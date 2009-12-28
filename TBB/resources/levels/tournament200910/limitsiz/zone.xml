@@ -60,6 +60,9 @@
 				<floor name="regular" />
 				<block name="softwall" />
 			</tile>
+			<tile pos="7">
+				<floor name="regular" />
+			</tile>
 		</line>	
 
 		<line pos="2">
@@ -118,6 +121,9 @@
 			<tile pos="6">
 				<floor name="regular" />
 				<block name="softwall" />
+			</tile>
+			<tile pos="7">
+				<floor name="regular" />
 			</tile>
 		</line>	
 
