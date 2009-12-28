@@ -91,7 +91,7 @@ public class Astar
 	/** limite de coût (négatif = pas de limite) */
 	private int maxCost = -1;
 	/** limite de nombre de noeuds (négatif = pas de limite), pas configurable */
-	private int maxNodes = 10000;
+	private int maxNodes = 1000;
 	
 	/**
 	 * limite l'arbre de recherche à une hauteur de maxHeight,
@@ -129,12 +129,15 @@ public class Astar
 	/**
 	 * calcule le plus court chemin pour aller de la case startTile à 
 	 * la case endTile, en utilisant l'algorithme A*. Si jamais aucun
-	 * chemin n'est trouvé lorsque l'algorithme atteint une limite
-	 * de cout/taille, alors un chemin vide est renvoyé.
+	 * chemin n'est trouvé, alors un chemin vide est renvoyé. Si jamais
+	 * l'algorithme atteint une limite de cout/taille, la valeur null est
+	 * renvoyée. Dans ce cas là, c'est qu'il y a généralement un problème
+	 * dans le façon dont A* est employé (mauvaise fonction de cout, par
+	 * exemple). 
 	 * 
 	 * @param startTile	la case de départ
 	 * @param endTile	la case d'arrivée
-	 * @return un chemin pour aller de startTile à endTile, ou un chemin vide
+	 * @return un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur null
 	 */
 	public AiPath processShortestPath(AiTile startTile, AiTile endTile)
 	{	ArrayList<AiTile> endTiles = new ArrayList<AiTile>();
@@ -146,13 +149,15 @@ public class Astar
 	/**
 	 * calcule le plus court chemin pour aller de la case startTile à 
 	 * une des cases contenues dans la liste endTiles (n'importe laquelle),
-	 * en utilisant l'algorithme A*. Si jamais aucun
-	 * chemin n'est trouvé lorsque l'algorithme atteint une limite
-	 * de cout/taille, alors un chemin vide est renvoyé.
+	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
+	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
+	 * une limite de cout/taille, la valeur null est renvoyée. Dans ce 
+	 * cas là, c'est qu'il y a généralement un problème dans le façon 
+	 * dont A* est employé (mauvaise fonction de cout, par exemple).
 	 * 
 	 * @param startTile	la case de départ
 	 * @param endTile	la liste des cases d'arrivée possibles
-	 * @return un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide
+	 * @return un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null
 	 */
 	public AiPath processShortestPath(AiTile startTile, List<AiTile> endTiles)
 	{	if(verbose)
@@ -169,8 +174,13 @@ public class Astar
 		PriorityQueue<AstarNode> queue = new PriorityQueue<AstarNode>(1);
 		queue.offer(root);
 		AstarNode finalNode = null;
-		boolean stop = false;
+		boolean found = false;
+		boolean limitReached = false;
 
+int maxh = 0;
+double maxc = 0;
+int maxn = 0;
+		
 		// traitement
 		do
 		{	// on prend le noeud situé en tête de file
@@ -183,17 +193,17 @@ public class Astar
 			if(endTiles.contains(currentNode.getTile()))
 			{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
 				finalNode = currentNode;
-				stop = true;
+				found = true;
 			}
 			// si l'arbre a atteint la hauteur maximale, on s'arrête
 			else if(maxHeight>0 && currentNode.getDepth()>=maxHeight)
-				stop = true;
+				limitReached = true;
 			// si le noeud courant a atteint le cout maximal, on s'arrête
 			else if(maxCost>0 && currentNode.getCost()>=maxCost)
-				stop = true;
+				limitReached = true;
 			// si le nombre de noeuds dans la file est trop grand, on s'arrête
 			else if(maxNodes>0 && queue.size()>=maxNodes)
-				stop = true;
+				limitReached = true;
 			else
 			{	// sinon on récupère les noeuds suivants
 				ArrayList<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
@@ -205,22 +215,37 @@ public class Astar
 				for(AstarNode node: successors)
 					queue.offer(node);
 			}
+if(currentNode.getDepth()>maxh)
+	maxh = currentNode.getDepth();
+if(currentNode.getCost()>maxc)
+	maxc = currentNode.getCost();
+if(queue.size()>maxn)
+	maxn = queue.size();
 		}
-		while(!queue.isEmpty() && !stop);
+		while(!queue.isEmpty() && !found && !limitReached);
 		
 		// build solution path
-		while(finalNode!=null)
-		{	AiTile tile = finalNode.getTile();
-			result.addTile(0,tile);
-			finalNode = finalNode.getParent();
+		if(limitReached)
+			result = null;
+		else if(found)
+		{	while(finalNode!=null)
+			{	AiTile tile = finalNode.getTile();
+				result.addTile(0,tile);
+				finalNode = finalNode.getParent();
+			}
 		}
 		if(verbose)
 		{	System.out.print("Path: [");
-			for(AiTile t: result.getTiles())
-				System.out.print(" "+t);
+			if(limitReached)
+				System.out.println(" limit reached");
+			else
+			{	for(AiTile t: result.getTiles())
+					System.out.print(" "+t);
+			}
 			System.out.println(" ]");
 		}
-		
+System.out.println(">>Astar height="+maxh+" cost="+maxc+" size="+maxn);
+
 		return result;
 	}
 }
