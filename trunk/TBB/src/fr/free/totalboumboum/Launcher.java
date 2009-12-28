@@ -1188,6 +1188,8 @@ public class Launcher
 	 *  all explosions should be loaded/stocked at the zone level, like fires and other general stuff
 	 */ 
 	
+	// pb a chargement d'un tournoi simple (ex qualif) : les joueurs apparaissent deux fois chacun !
+	
 	/*
 	 * TODO
 	 * 	- créer un InstanceContainer à placer dans la conf, pour un accès pratique (working instance)
