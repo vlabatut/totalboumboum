@@ -1,0 +1,15 @@
+rame :
+  - rose, gris, rouge, marron
+
+mémoire :
+  - outremer
+  - gris, rouge, vert, rouille
+  - blanc, bleu, outremer, cyan
+  - blanc, rouge, rouille, outremer
+  - orange, rouge, blanc
+  - rouille, violet, cyan, outremer
+  - blanc, noir, rouille
+  - rose, rouille, orange, bleu
+
+findiksirin : isOnLine prend trop de temps
+rouille : votre fonction calculateNewPath consomme parfoit énormément de mémoire, beaucoup trop, ce qui provoque un plantage du jeu lorsque 4 IA s'affrontent. Je pense que c'est un problème dans la façon dont vous utilisez A*, peut être dans le calcul de votre matrice de cout.
