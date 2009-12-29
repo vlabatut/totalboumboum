@@ -35,8 +35,8 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.game.quickmatch.LevelsSelection;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
-import fr.free.totalboumboum.engine.container.level.LevelPreview;
-import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
+import fr.free.totalboumboum.engine.container.level.preview.LevelPreview;
+import fr.free.totalboumboum.engine.container.level.preview.LevelPreviewLoader;
 import fr.free.totalboumboum.gui.common.content.subpanel.file.FileBrowserSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.file.FileBrowserSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.file.PackBrowserSubPanel;

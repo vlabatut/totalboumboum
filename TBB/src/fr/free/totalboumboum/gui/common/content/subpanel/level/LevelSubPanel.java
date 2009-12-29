@@ -24,7 +24,7 @@ package fr.free.totalboumboum.gui.common.content.subpanel.level;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.engine.container.level.LevelPreview;
+import fr.free.totalboumboum.engine.container.level.preview.LevelPreview;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -89,19 +89,19 @@ public class LevelSubPanel extends TableSubPanel
 		{	// text
 			ArrayList<String> values = new ArrayList<String>();
 			if(showName)
-				values.add(levelPreview.getTitle());
+				values.add(levelPreview.getLevelInfo().getTitle());
 			if(showPack)
-				values.add(levelPreview.getPack());
+				values.add(levelPreview.getLevelInfo().getPack());
 			if(showSource)
-				values.add(levelPreview.getSource());
+				values.add(levelPreview.getLevelInfo().getSource());
 			if(showAuthor)
-				values.add(levelPreview.getAuthor());
+				values.add(levelPreview.getLevelInfo().getAuthor());
 			if(showInstance)
-				values.add(levelPreview.getInstanceName());
+				values.add(levelPreview.getLevelInfo().getInstance());
 			if(showTheme)
-				values.add(levelPreview.getThemeName());
+				values.add(levelPreview.getLevelInfo().getTheme());
 			if(showDimension)
-				values.add(Integer.toString(levelPreview.getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(levelPreview.getVisibleWidth()));
+				values.add(Integer.toString(levelPreview.getLevelInfo().getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(levelPreview.getLevelInfo().getVisibleWidth()));
 			if(showAllowedPlayerNumbers)
 				values.add(StringTools.formatAllowedPlayerNumbers(levelPreview.getAllowedPlayerNumbers()));
 			

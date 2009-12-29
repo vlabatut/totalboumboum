@@ -82,9 +82,9 @@ public class RoundMiscSubPanel extends TableSubPanel
 			if(showAllowedPlayerNumbers)
 				values.add(StringTools.formatAllowedPlayerNumbers(round.getAllowedPlayerNumbers()));
 			if(showLevelFolder)
-				values.add(round.getHollowLevel().getFolderName());
+				values.add(round.getHollowLevel().getLevelInfo().getFolder());
 			if(showLevelPack)
-				values.add(round.getHollowLevel().getPackName());
+				values.add(round.getHollowLevel().getLevelInfo().getPack());
 			
 			// content
 			for(int line=0;line<keys.size();line++)

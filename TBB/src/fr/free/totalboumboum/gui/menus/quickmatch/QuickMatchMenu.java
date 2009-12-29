@@ -23,7 +23,6 @@ package fr.free.totalboumboum.gui.menus.quickmatch;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -42,7 +41,8 @@ import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
-import fr.free.totalboumboum.engine.container.level.HollowLevel;
+import fr.free.totalboumboum.engine.container.level.hollow.HollowLevel;
+import fr.free.totalboumboum.engine.container.level.hollow.HollowLevelLoader;
 import fr.free.totalboumboum.game.limit.Comparisons;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.LimitLastStanding;
@@ -224,9 +224,8 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			String packName = levelsSelection.getPackName(i);
 			Round round = new Round(match);
 			match.addRound(round);
-			String path = packName+File.separator+folderName;
 	    	try
-			{	HollowLevel hollowLevel = new HollowLevel(path);
+			{	HollowLevel hollowLevel = HollowLevelLoader.loadHollowLevel(packName,folderName);
 		    	round.setHollowLevel(hollowLevel);
 			}
 			catch (ParserConfigurationException e1)

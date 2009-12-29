@@ -53,4 +53,8 @@ public class BombsetMap implements Serializable
 		}
 		return result;
 	}
+	
+	public Bombset getBombset(PredefinedColor color)
+	{	return bombsets.get(color);		
+	}
 }

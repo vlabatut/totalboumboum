@@ -1201,6 +1201,7 @@ public class Launcher
 	 *  - pour tous ces trucs généraux, p-ê ne charger que ceux dont on a besoin :
 	 *  	- si déjà chargé, on utilise
 	 *  	- sinon on charge et on stocke dans l'accès statique
+	 *  - va y avoir un pb dans le finish des sprites et autres objets liés à l'instance... : il n'existeront plus, donc on ne pourra plus les utiliser
 	 */
 		
 	/* transformer les fonctions d'édition/génération de niveau en un utilitaire basique
