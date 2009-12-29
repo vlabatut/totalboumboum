@@ -21,11 +21,20 @@ package fr.free.totalboumboum.engine.container.level.instance;
  * 
  */
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
+import fr.free.totalboumboum.engine.container.fireset.FiresetLoader;
 import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
+import fr.free.totalboumboum.engine.container.itemset.ItemsetLoader;
+import fr.free.totalboumboum.tools.FileTools;
 
 public class Instance implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -48,9 +57,15 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	private BombsetMap bombsetMap;
 
-	public void setBombsetMap(BombsetMap bombsetMap)
-	{	this.bombsetMap = bombsetMap;		
-	}
+	public void loadBombsetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	// init bombset map
+		String individualFolder = FileTools.getInstancesPath()+File.separator+name+File.separator+FileTools.FOLDER_BOMBS;
+		bombsetMap = new BombsetMap();
+    	bombsetMap.initBombset(individualFolder);
+		
+    	// load level bombset
+    	bombsetMap.completeBombset(individualFolder,null);
+    }
 	
 	public BombsetMap getBombsetMap()
 	{	return bombsetMap;	
@@ -61,9 +76,10 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	private FiresetMap firesetMap;
 	
-	public void setFiresetMap(FiresetMap firesetMap)
-	{	this.firesetMap = firesetMap;		
-	}
+	public void loadFiresetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	String individualFolder = FileTools.getInstancesPath()+File.separator+name+File.separator+FileTools.FOLDER_FIRES;
+		firesetMap = FiresetLoader.loadFiresetMap(individualFolder);
+    }
 		
 	public FiresetMap getFiresetMap()
 	{	return firesetMap;	
@@ -74,9 +90,10 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	private Itemset itemset;
 
-	public void setItemset(Itemset itemset)
-	{	this.itemset = itemset;
-	}
+	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	String individualFolder = FileTools.getInstancesPath()+File.separator+name+File.separator+FileTools.FOLDER_ITEMS;
+    	itemset = ItemsetLoader.loadItemset(individualFolder);
+    }
 		
 	public Itemset getItemset()
 	{	return itemset;	

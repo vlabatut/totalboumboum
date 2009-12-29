@@ -32,9 +32,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.level.HollowLevel;
-import fr.free.totalboumboum.engine.container.level.LevelPreview;
-import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
+import fr.free.totalboumboum.engine.container.level.hollow.HollowLevel;
+import fr.free.totalboumboum.engine.container.level.preview.LevelPreview;
+import fr.free.totalboumboum.engine.container.level.preview.LevelPreviewLoader;
 import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.points.PointsProcessor;
@@ -167,8 +167,8 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 	{	BufferedImage image = null;
 		if(selectedRound!=null)
 		{	HollowLevel hollowLevel = selectedRound.getHollowLevel();
-			String pack = hollowLevel.getPackName();
-			String folder = hollowLevel.getFolderName();
+			String pack = hollowLevel.getLevelInfo().getPack();
+			String folder = hollowLevel.getLevelInfo().getFolder();
 			try
 			{	LevelPreview levelPreview = LevelPreviewLoader.loadLevelPreviewOnlyImage(pack, folder);
 				image = levelPreview.getVisualPreview();			

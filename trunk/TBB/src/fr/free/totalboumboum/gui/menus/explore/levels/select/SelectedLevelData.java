@@ -30,8 +30,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.level.LevelPreview;
-import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
+import fr.free.totalboumboum.engine.container.level.preview.LevelPreview;
+import fr.free.totalboumboum.engine.container.level.preview.LevelPreviewLoader;
 import fr.free.totalboumboum.gui.common.content.subpanel.file.PackBrowserSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.file.PackBrowserSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.level.LevelSubPanel;

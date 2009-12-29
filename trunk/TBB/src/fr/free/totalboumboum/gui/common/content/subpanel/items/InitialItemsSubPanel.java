@@ -29,7 +29,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.container.itemset.ItemsetPreview;
-import fr.free.totalboumboum.engine.container.level.LevelPreview;
+import fr.free.totalboumboum.engine.container.level.preview.LevelPreview;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;

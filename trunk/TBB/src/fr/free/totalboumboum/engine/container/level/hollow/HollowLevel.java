@@ -29,23 +29,16 @@ import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
-import fr.free.totalboumboum.engine.container.fireset.FiresetLoader;
-import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
-import fr.free.totalboumboum.engine.container.itemset.ItemsetLoader;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.info.LevelInfo;
 import fr.free.totalboumboum.engine.container.level.instance.Instance;
 import fr.free.totalboumboum.engine.container.level.players.Players;
-import fr.free.totalboumboum.engine.container.level.players.PlayersLoader;
 import fr.free.totalboumboum.engine.container.level.zone.Zone;
-import fr.free.totalboumboum.engine.container.level.zone.ZoneLoader;
 import fr.free.totalboumboum.engine.container.theme.Theme;
 import fr.free.totalboumboum.engine.container.theme.ThemeLoader;
 import fr.free.totalboumboum.engine.container.tile.Tile;
@@ -57,7 +50,6 @@ import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.GameData;
-import fr.free.totalboumboum.tools.XmlTools;
 
 public class HollowLevel implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -123,14 +115,20 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
     public void loadTheme() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// theme
-    	Theme theme = ThemeLoader.loadTheme(themePath);
+    	String individualFolder = FileTools.getInstancesPath()+File.separator+levelInfo.getInstance();
+    	individualFolder = individualFolder+File.separator+FileTools.FOLDER_THEMES+File.separator+levelInfo.getTheme();
+    	Theme theme = ThemeLoader.loadTheme(individualFolder);
 //		level.setTheme(theme);
 		
     	// init zone
 		Tile[][] matrix = level.getMatrix();
-		Itemset itemset = level.getItemset();
+//		Itemset itemset = level.getItemset();
+		Itemset itemset = instance.getItemset();
+		Bombset bombset = instance.getBombsetMap().getBombset(null);
 		double globalLeftX = level.getGlobalLeftX();
 		double globalUpY = level.getGlobalUpY();
+		int globalHeight = levelInfo.getGlobalHeight();
+		int globalWidth = levelInfo.getGlobalWidth();
 		ArrayList<String[][]> matrices = zone.getMatrices();
     	String[][] mFloors = matrices.get(0);
 		String[][] mBlocks = matrices.get(1);
@@ -175,42 +173,6 @@ public class HollowLevel implements Serializable
 	}
     
 	/////////////////////////////////////////////////////////////////
-	// BOMBSET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private BombsetMap bombsetMap;
-	private Bombset bombset;
-
-	public void loadBombsets() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	// bombsets map
-		bombsetMap = new BombsetMap();
-    	bombsetMap.initBombset(bombsetPath);
-		
-    	// level bombset
-    	bombset = bombsetMap.loadBombset(bombsetPath,null);
-		level.setBombset(bombset);
-    }
-	
-	public BombsetMap getBombsetMap()
-	{	return bombsetMap;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// ITEMSET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void loadFiresetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	FiresetMap firesetMap = FiresetLoader.loadFiresetMap(firePath);
-		level.setFiresetMap(firesetMap);
-    }
-
-	/////////////////////////////////////////////////////////////////
-	// ITEMSET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	Itemset itemset = ItemsetLoader.loadItemset(itemPath);
-		level.setItemset(itemset);
-    }
-
-	/////////////////////////////////////////////////////////////////
 	// LEVEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	transient private Level level;
@@ -222,16 +184,22 @@ public class HollowLevel implements Serializable
 	public void initLevel(LocalLoop loop)
 	{	// init
     	level = new Level(loop);
-    	RoundVariables.setInstanceName(instanceName);
+    	RoundVariables.setInstanceName(levelInfo.getInstance());
 		Dimension panelDim = Configuration.getVideoConfiguration().getPanelDimension();
     	double sizeX = panelDim.width;
     	double sizeY = panelDim.height;
 		// matrix
+    	int globalHeight = levelInfo.getGlobalHeight();
+    	int globalWidth = levelInfo.getGlobalWidth();
 		Tile[][] matrix = new Tile[globalHeight][globalWidth];
 		level.setMatrix(matrix);
 		
 		// visible part
-		if(displayForceAll)
+		int visibleHeight = levelInfo.getVisibleHeight();
+		int visibleWidth = levelInfo.getVisibleWidth();
+		int visibleUpLine = levelInfo.getVisiblePositionUpLine();
+		int visibleLeftCol = levelInfo.getVisiblePositionLeftCol();
+		if(levelInfo.getForceAll())
 		{	visibleWidth = globalWidth;
 			visibleHeight = globalHeight;
 			visibleLeftCol = 0;
@@ -272,7 +240,7 @@ public class HollowLevel implements Serializable
 		double horizontalBorderX = 0;
 		double upBorderY = 0;
 		double horizontalBorderWidth = sizeX;
-		if(displayMaximize)
+		if(levelInfo.getMaximize())
 		{	downBorderY = globalUpY+globalHeight*RoundVariables.scaledTileDimension+1;
 			if(globalUpY>0)
 				horizontalBorderHeight = globalUpY;
@@ -304,26 +272,9 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
     public HollowLevel copy()
     {	HollowLevel result = new HollowLevel();
-    	result.displayForceAll = displayForceAll;
-    	result.displayMaximize = displayMaximize;
-    	result.globalHeight = globalHeight;
-    	result.globalWidth = globalWidth;
-    	result.visibleHeight = visibleHeight;
-    	result.visibleWidth = visibleWidth;
-    	result.visibleUpLine = visibleUpLine;
-    	result.visibleLeftCol = visibleLeftCol;
+    	result.levelInfo = levelInfo;
     	result.zone = zone;
-    	result.instancePath = instancePath;
-    	result.themePath = themePath;
-    	result.itemPath = itemPath;
-    	result.bombsetPath = bombsetPath;
-    	result.firePath = firePath;
     	result.players = players;
-      	result.instanceName = instanceName;
-    	result.themeName = themeName;
-    	result.packName = packName;
-    	result.folderName = folderName;
-    	//
     	return result;
     }
     
@@ -335,13 +286,10 @@ public class HollowLevel implements Serializable
 	public void finish()
     {	if(!finished)
 	    {	// misc
-	    	bombsetPath = null;
-	    	instancePath = null;
-	    	firePath = null;
-	    	itemPath = null;
+	    	instance = null;
 	    	level = null;
+	    	levelInfo = null;
 	    	players = null;
-	    	themePath = null;
 	    	zone = null;
 	    }
     }

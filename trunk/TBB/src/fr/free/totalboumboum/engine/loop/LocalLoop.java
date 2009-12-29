@@ -109,12 +109,12 @@ public class LocalLoop extends Loop
 		hollowLevel.initLevel(this);
 		level = hollowLevel.getLevel();
 		RoundVariables.setLoop(this);
-		hollowLevel.loadFiresetMap();
+		hollowLevel.getInstance().loadFiresetMap();
 		loadStepOver();
-		hollowLevel.loadBombsets();
-		BombsetMap bombsetMap = hollowLevel.getBombsetMap();
+		hollowLevel.getInstance().loadBombsetMap();
+		BombsetMap bombsetMap = hollowLevel.getInstance().getBombsetMap();
 		loadStepOver();
-		hollowLevel.loadItemset();
+		hollowLevel.getInstance().loadItemset();
 		loadStepOver();
 		hollowLevel.loadTheme();
 		loadStepOver();

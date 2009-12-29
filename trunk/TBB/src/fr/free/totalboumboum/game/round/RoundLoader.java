@@ -32,6 +32,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.engine.container.level.hollow.HollowLevel;
+import fr.free.totalboumboum.engine.container.level.hollow.HollowLevelLoader;
 import fr.free.totalboumboum.game.limit.LimitLoader;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
@@ -105,8 +107,7 @@ public class RoundLoader
     	// packname
     	String packname = root.getAttribute(XmlTools.PACKNAME).getValue().trim();
     	// load
-    	String folder = packname+File.separator+name;
-    	HollowLevel hollowLevel = new HollowLevel(folder); 
+    	HollowLevel hollowLevel = HollowLevelLoader.loadHollowLevel(packname,name); 
     	result.setHollowLevel(hollowLevel);
     }
     
