@@ -1203,6 +1203,13 @@ public class Launcher
 	 *  	- sinon on charge et on stocke dans l'accès statique
 	 */
 		
-	// transformer les fonctions d'édition/génération de niveau en un utilitaire basique
-	// rajouter des fonction pour insérer/supprimer des lignes
+	/* transformer les fonctions d'édition/génération de niveau en un utilitaire basique
+	 * rajouter des fonction pour 
+	 * 	- insérer/supprimer des lignes
+	 * 	- mettre une bordure
+	 *  - mettre un fond avec des sols
+	 *  - décaller le sol/les blocs/les items/les bombes/les variables
+	 *  
+	 *  - découper une image en nxm floors
+	 */
 }
