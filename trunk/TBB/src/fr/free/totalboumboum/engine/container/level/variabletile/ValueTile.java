@@ -1,6 +1,4 @@
-package fr.free.totalboumboum.engine.container.tile;
-
-import java.io.Serializable;
+package fr.free.totalboumboum.engine.container.level.variabletile;
 
 /*
  * Total Boum Boum
@@ -22,6 +20,8 @@ import java.io.Serializable;
  * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
+
+import java.io.Serializable;
 
 public class ValueTile implements Serializable
 {	private static final long serialVersionUID = 1L;

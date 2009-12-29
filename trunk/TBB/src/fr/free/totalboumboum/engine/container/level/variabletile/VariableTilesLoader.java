@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.container.tile;
+package fr.free.totalboumboum.engine.container.level.variabletile;
 
 /*
  * Total Boum Boum
@@ -27,7 +27,7 @@ import java.util.List;
 
 import org.jdom.Element;
 
-import fr.free.totalboumboum.engine.container.zone.ZoneLoader;
+import fr.free.totalboumboum.engine.container.level.zone.ZoneLoader;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class VariableTilesLoader
