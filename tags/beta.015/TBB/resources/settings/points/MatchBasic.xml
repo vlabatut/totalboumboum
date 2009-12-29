@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<points
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../schemas/point.xsd">
+	
+	<notes>
+		<line value="Players #1,2,3,4+ get 10,6,3,1,0 pts." />
+		<line value="If some players have the same number of points, secondary scores are used: bombings, then items, then bombs." />
+		<line value="If there's still a draw, points are shared." />
+	</notes>
+
+	<rankpoints invert="false" exaequoShare="true">
+		<rankings>
+			<total />
+			<scores type="BOMBINGS"/>
+			<scores type="ITEMS"/>
+			<scores type="BOMBS"/>
+		</rankings>	
+		<values>
+			<value value="10" />
+			<value value="6" />
+			<value value="3" />
+			<value value="1" />
+		</values>
+	</rankpoints>
+	
+<!-- 
+	<discretize>
+		<rankings >
+			<total />
+			<scores type="bombings"/>
+			<scores type="items"/>
+			<scores type="bombs"/>
+		</rankings>
+		<thresholds>
+			<threshold value="1" />
+			<threshold value="2" />
+			<threshold value="3" />
+			<threshold value="4" />
+		</thresholds>
+		<values>
+			<value value="10" />
+			<value value="6" />
+			<value value="3" />
+			<value value="1" />
+			<value value="0" />
+		</values>
+	</discretize>
+ -->
+ 		
+</points>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<match
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../schemas/match.xsd">
+	
+ 	<notes>
+ 		<line value="Rencontre utilisée pour évaluer les IA de l'édition 2008/09 à mi-développement." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 28-11-2008" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<limits>
+<!-- 
+		<confrontation>
+			<points local="true" name="total" />
+			<threshold value="3" />
+		</confrontation>
+ -->
+ 		<points>
+			<points local="true" name="total" />
+			<threshold value="2" />
+			<source local="true" name="total"/>
+ 		</points>
+	</limits>
+
+ 	<rounds randomOrder="false" >
+  		<round local="true" name="round" />
+  	</rounds>
+	
+</match>

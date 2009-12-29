@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:simpleType name="tDirection">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="DOWN" />
+			<xsd:enumeration value="DOWNLEFT" />
+			<xsd:enumeration value="DOWNRIGHT" />
+			<xsd:enumeration value="LEFT" />
+			<xsd:enumeration value="RIGHT" />
+			<xsd:enumeration value="UP" />
+			<xsd:enumeration value="UPLEFT" />
+			<xsd:enumeration value="UPRIGHT" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="tAllDirections">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="SOME" /> <!-- represents any value but NONE -->
+			<xsd:enumeration value="ANY" /> <!-- represents any value including NONE -->
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="tExtendedDirection">
+		<xsd:union memberTypes="tDirection tAllDirections" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="tDirectionList"> 
+    	<xsd:list itemType="tExtendedDirection"/> 
+	</xsd:simpleType> 
+
+</xsd:schema>
+		

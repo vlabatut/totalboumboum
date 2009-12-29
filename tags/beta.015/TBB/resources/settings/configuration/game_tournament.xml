@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameTournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_tournament.xsd">
+	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
+	<tournament name="ClassicCup" />
+	<players>
+		<player file="73" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="91" color="BLUE" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="74" color="ULTRAMARINE" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="88" color="GREY" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="6" color="CYAN" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="60" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="72" color="BLACK" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="12" color="PURPLE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="76" color="WHITE" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="57" color="RUST" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="4" color="BROWN" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="58" color="GRASS" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="14" color="GREEN" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="9" color="PINK" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="8" color="YELLOW" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="13" color="RED" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+	</players>
+</gameTournament>
+
