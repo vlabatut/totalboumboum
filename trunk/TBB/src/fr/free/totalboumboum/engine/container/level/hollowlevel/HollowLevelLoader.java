@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.container.level;
+package fr.free.totalboumboum.engine.container.level.hollowlevel;
 
 /*
  * Total Boum Boum
@@ -39,6 +39,8 @@ import fr.free.totalboumboum.engine.container.fireset.FiresetLoader;
 import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.itemset.ItemsetLoader;
+import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.container.level.instance.Instance;
 import fr.free.totalboumboum.engine.container.level.players.Players;
 import fr.free.totalboumboum.engine.container.level.players.PlayersLoader;
 import fr.free.totalboumboum.engine.container.level.zone.Zone;
@@ -56,24 +58,21 @@ import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.GameData;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class HollowLevel implements Serializable
-{	private static final long serialVersionUID = 1L;
-
-	private HollowLevel()
-	{		
-	}
-
-	public HollowLevel(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+public class HollowLevelLoader
+{	
+	public static HollowLevel loadHollowLevel(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		packName = folder.substring(0,folder.indexOf(File.separator));
 		folderName = folder.substring(folder.indexOf(File.separator)+1,folder.length());
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = FileTools.getLevelsPath()+File.separator+folder;
 		File schemaFile,dataFile;
+		
 		// opening
 		dataFile = new File(individualFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		
 		// loading
 		loadLevelElement(individualFolder,root);
     }
@@ -234,15 +233,10 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String instanceName;
-	private String instancePath;
+	private Instance instance;
 
-	public String getInstancePath()
-    {	return instancePath;
-    }
-    
-	public String getInstanceName()
-    {	return instanceName;
+	public Instance getInstance()
+    {	return instance;
     }
     
 	/////////////////////////////////////////////////////////////////
@@ -407,8 +401,8 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    public HollowLevel copy()
-    {	HollowLevel result = new HollowLevel();
+    public HollowLevelLoader copy()
+    {	HollowLevelLoader result = new HollowLevelLoader();
     	result.displayForceAll = displayForceAll;
     	result.displayMaximize = displayMaximize;
     	result.globalHeight = globalHeight;

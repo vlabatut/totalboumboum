@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.container.level;
+package fr.free.totalboumboum.engine.container.level.preview;
 
 /*
  * Total Boum Boum

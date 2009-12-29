@@ -30,6 +30,8 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.container.level.players.Players;
 import fr.free.totalboumboum.engine.container.level.players.PlayersSaver;
+import fr.free.totalboumboum.engine.container.level.preview.LevelPreview;
+import fr.free.totalboumboum.engine.container.level.preview.LevelPreviewSaver;
 import fr.free.totalboumboum.engine.container.level.zone.Zone;
 import fr.free.totalboumboum.engine.container.level.zone.ZoneSaver;
 import fr.free.totalboumboum.engine.container.level.zone.ZoneTile;
