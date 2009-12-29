@@ -68,7 +68,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		
 		// BOMBSET
 		folder = RoundVariables.instancePath+File.separator+FileTools.FOLDER_BOMBS;
-		Bombset bombset = bombsetMap.loadBombset(folder,color);
+		Bombset bombset = bombsetMap.completeBombset(folder,color);
 		result.setBombset(bombset);
 
 		// result
