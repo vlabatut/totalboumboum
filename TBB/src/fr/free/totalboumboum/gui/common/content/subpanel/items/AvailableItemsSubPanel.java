@@ -31,7 +31,7 @@ import java.util.Map.Entry;
 import fr.free.totalboumboum.engine.container.itemset.ItemsetPreview;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
-import fr.free.totalboumboum.engine.container.zone.Zone;
+import fr.free.totalboumboum.engine.container.level.zone.Zone;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;

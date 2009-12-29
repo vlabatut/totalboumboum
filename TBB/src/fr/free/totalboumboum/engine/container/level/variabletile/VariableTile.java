@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.container.tile;
+package fr.free.totalboumboum.engine.container.level.variabletile;
 
 /*
  * Total Boum Boum

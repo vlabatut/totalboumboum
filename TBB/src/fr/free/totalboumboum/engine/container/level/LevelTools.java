@@ -28,14 +28,16 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.engine.container.level.players.Players;
+import fr.free.totalboumboum.engine.container.level.players.PlayersSaver;
+import fr.free.totalboumboum.engine.container.level.zone.Zone;
+import fr.free.totalboumboum.engine.container.level.zone.ZoneSaver;
+import fr.free.totalboumboum.engine.container.level.zone.ZoneTile;
 import fr.free.totalboumboum.engine.container.theme.Theme;
-import fr.free.totalboumboum.engine.container.zone.Zone;
-import fr.free.totalboumboum.engine.container.zone.ZoneSaver;
-import fr.free.totalboumboum.engine.container.zone.ZoneTile;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class LevelInit
+public class LevelTools
 {	
 	/**
 	 * allows to programmatically initialize a zone,
@@ -45,6 +47,8 @@ public class LevelInit
 	{	createClassicLevel(15,15,"temp","level",1);
 	}
 
+	private static void createEmptyLevel()
+	
 	private static void createClassicLevel(int height, int width, String pack, String level, int border) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// init
 		String folder = FileTools.getLevelsPath()+File.separator+pack+File.separator+level;

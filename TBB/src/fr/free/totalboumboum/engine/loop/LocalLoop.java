@@ -67,7 +67,7 @@ import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.container.level.Players;
+import fr.free.totalboumboum.engine.container.level.players.Players;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Role;
