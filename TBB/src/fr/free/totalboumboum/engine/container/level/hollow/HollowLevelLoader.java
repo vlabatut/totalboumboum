@@ -40,6 +40,8 @@ import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.itemset.ItemsetLoader;
 import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.container.level.info.LevelInfo;
+import fr.free.totalboumboum.engine.container.level.info.LevelInfoLoader;
 import fr.free.totalboumboum.engine.container.level.instance.Instance;
 import fr.free.totalboumboum.engine.container.level.players.Players;
 import fr.free.totalboumboum.engine.container.level.players.PlayersLoader;
@@ -60,23 +62,35 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class HollowLevelLoader
 {	
-	public static HollowLevel loadHollowLevel(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static HollowLevel loadHollowLevel(String pack, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		packName = folder.substring(0,folder.indexOf(File.separator));
-		folderName = folder.substring(folder.indexOf(File.separator)+1,folder.length());
 		String schemaFolder = FileTools.getSchemasPath();
-		String individualFolder = FileTools.getLevelsPath()+File.separator+folder;
-		File schemaFile,dataFile;
+		String individualFolder = FileTools.getLevelsPath()+File.separator+pack+File.separator+folder;
 		
-		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_SCHEMA);
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		// init
+		HollowLevel result = new HollowLevel();
+		// level info
+		LevelInfo levelInfo = LevelInfoLoader.loadLevelInfo(pack,folder);
+		result.setLevelInfo(levelInfo);
+		// players
+		Players players = PlayersLoader.loadPlayers(folder);
+		result.setPlayers(players);
+		// zone
+		Zone zone = ZoneLoader.loadZone(folder,levelInfo.getGlobalHeight(),levelInfo.getGlobalWidth());
+		result.setZone(zone);
 		
-		// loading
-		loadLevelElement(individualFolder,root);
+		return result;
     }
-    
+    	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/////////////////////////////////////////////////////////////////
 	// INIT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -161,93 +175,6 @@ public class HollowLevelLoader
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LOAD				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private void loadLevelElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// init
-		Element element;
-		String content;
-		
-		// display
-		element = root.getChild(XmlTools.DISPLAY);
-		content = element.getAttribute(XmlTools.FORCE_ALL).getValue().trim();
-		displayForceAll = Boolean.parseBoolean(content);
-		content = element.getAttribute(XmlTools.MAXIMIZE).getValue().trim();
-		displayMaximize = Boolean.parseBoolean(content);
-		
-		// global size
-		element = root.getChild(XmlTools.GLOBAL_DIMENSION);
-		content = element.getAttribute(XmlTools.HEIGHT).getValue().trim();
-		globalHeight = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.WIDTH).getValue().trim();
-		globalWidth = Integer.parseInt(content);
-		// visible size
-		element = root.getChild(XmlTools.VISIBLE_DIMENSION);
-		content = element.getAttribute(XmlTools.HEIGHT).getValue().trim();
-		visibleHeight = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.WIDTH).getValue().trim();
-		visibleWidth = Integer.parseInt(content);
-		// visible position
-		element = root.getChild(XmlTools.VISIBLE_POSITION);
-		content = element.getAttribute(XmlTools.UPLINE).getValue().trim();
-		visibleUpLine = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.LEFTCOL).getValue().trim();
-		visibleLeftCol = Integer.parseInt(content);
-		
-		// instance
-		element = root.getChild(XmlTools.INSTANCE);
-		instanceName = element.getAttribute(XmlTools.NAME).getValue().trim();
-		instancePath = FileTools.getInstancesPath()+File.separator+instanceName;
-
-		// players locations
-		players = PlayersLoader.loadPlayers(folder);
-
-		// bombset
-		bombsetPath = instancePath + File.separator+FileTools.FOLDER_BOMBS;
-
-		// fireset
-		firePath = instancePath + File.separator+FileTools.FOLDER_FIRES;
-
-		// itemset
-		itemPath = instancePath + File.separator+FileTools.FOLDER_ITEMS;
-
-		// theme
-		element = root.getChild(XmlTools.THEME);
-		themeName = element.getAttribute(XmlTools.NAME).getValue().trim();
-		String themeFolder = instancePath + File.separator + FileTools.FOLDER_THEMES;
-		themePath = themeFolder + File.separator+themeName;
-
-		// zone
-		zone = ZoneLoader.loadZone(folder,globalHeight,globalWidth);
-	}
-    
-	/////////////////////////////////////////////////////////////////
-	// PLAYERS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Players players;
-
-	public Players getPlayers()
-    {	return players;    	
-    }
-
-	/////////////////////////////////////////////////////////////////
-	// INSTANCE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Instance instance;
-
-	public Instance getInstance()
-    {	return instance;
-    }
-    
-	/////////////////////////////////////////////////////////////////
-	// ZONE				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Zone zone;
-	public Zone getZone()
-    {	return zone;
-    }
-
-	/////////////////////////////////////////////////////////////////
 	// THEME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String themeName;
@@ -309,139 +236,4 @@ public class HollowLevelLoader
 		}
 		level.initTileList();
 	}
-    
-	/////////////////////////////////////////////////////////////////
-	// PACK			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String packName;
-
-	public String getPackName()
-    {	return packName;
-    }
-    
-	/////////////////////////////////////////////////////////////////
-	// FOLDER			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String folderName;
-
-	public String getFolderName()
-    {	return folderName;
-    }
-
-	/////////////////////////////////////////////////////////////////
-	// DIMENSIONS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-    private boolean displayForceAll;
-	private boolean displayMaximize;
-	private int globalHeight;
-	private int globalWidth;
-	private int visibleHeight;
-	private int visibleWidth;
-	private int visibleUpLine;
-	private int visibleLeftCol;
-
-	public int getVisibleHeight()
-    {	return visibleHeight;
-    }
-    
-    public int getVisibleWidth()
-    {	return visibleWidth;
-    }
-   
-	/////////////////////////////////////////////////////////////////
-	// BOMBSET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String bombsetPath;
-	private BombsetMap bombsetMap;
-	private Bombset bombset;
-
-	public void loadBombsets() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	// bombsets map
-		bombsetMap = new BombsetMap();
-    	bombsetMap.loadBombset(bombsetPath);
-		
-    	// level bombset
-    	bombset = bombsetMap.loadBombset(bombsetPath,null);
-		level.setBombset(bombset);
-    }
-	
-	public BombsetMap getBombsetMap()
-	{	return bombsetMap;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// ITEMSET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String firePath;
-
-	public void loadFiresetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	FiresetMap firesetMap = FiresetLoader.loadFiresetMap(firePath);
-		level.setFiresetMap(firesetMap);
-    }
-
-	/////////////////////////////////////////////////////////////////
-	// ITEMSET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String itemPath;
-
-	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	Itemset itemset = ItemsetLoader.loadItemset(itemPath);
-		level.setItemset(itemset);
-    }
-
-	/////////////////////////////////////////////////////////////////
-	// LEVEL			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	transient private Level level;
-
-	public Level getLevel()
-    {	return level;    
-    }
-    
-	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-    public HollowLevelLoader copy()
-    {	HollowLevelLoader result = new HollowLevelLoader();
-    	result.displayForceAll = displayForceAll;
-    	result.displayMaximize = displayMaximize;
-    	result.globalHeight = globalHeight;
-    	result.globalWidth = globalWidth;
-    	result.visibleHeight = visibleHeight;
-    	result.visibleWidth = visibleWidth;
-    	result.visibleUpLine = visibleUpLine;
-    	result.visibleLeftCol = visibleLeftCol;
-    	result.zone = zone;
-    	result.instancePath = instancePath;
-    	result.themePath = themePath;
-    	result.itemPath = itemPath;
-    	result.bombsetPath = bombsetPath;
-    	result.firePath = firePath;
-    	result.players = players;
-      	result.instanceName = instanceName;
-    	result.themeName = themeName;
-    	result.packName = packName;
-    	result.folderName = folderName;
-    	//
-    	return result;
-    }
-    
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-    private boolean finished = false;
-	
-	public void finish()
-    {	if(!finished)
-	    {	// misc
-	    	bombsetPath = null;
-	    	instancePath = null;
-	    	firePath = null;
-	    	itemPath = null;
-	    	level = null;
-	    	players = null;
-	    	themePath = null;
-	    	zone = null;
-	    }
-    }
 }

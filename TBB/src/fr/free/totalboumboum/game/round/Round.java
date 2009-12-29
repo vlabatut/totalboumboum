@@ -36,7 +36,6 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.ai.AisConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.loop.SimulationLoop;

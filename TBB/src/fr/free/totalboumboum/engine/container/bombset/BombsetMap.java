@@ -40,15 +40,15 @@ public class BombsetMap implements Serializable
 	private Bombset partialBombset = null;
 	private final HashMap<PredefinedColor,Bombset> bombsets = new HashMap<PredefinedColor, Bombset>();
 	
-	public void loadBombset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	partialBombset = BombsetLoader.loadBombset(folderPath);
+	public void initBombset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	partialBombset = BombsetLoader.initBombset(folderPath);
 	}
 
-	public Bombset loadBombset(String folderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public Bombset completeBombset(String folderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Bombset result = bombsets.get(color);
 		if(result==null)
 		{	result = partialBombset.copy();
-			BombsetLoader.loadBombset(folderPath,color,result);
+			BombsetLoader.completeBombset(folderPath,color,result);
 			bombsets.put(color,result);
 		}
 		return result;

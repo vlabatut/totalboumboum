@@ -40,6 +40,7 @@ import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.itemset.ItemsetLoader;
 import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.container.level.info.LevelInfo;
 import fr.free.totalboumboum.engine.container.level.instance.Instance;
 import fr.free.totalboumboum.engine.container.level.players.Players;
 import fr.free.totalboumboum.engine.container.level.players.PlayersLoader;
@@ -61,30 +62,163 @@ import fr.free.totalboumboum.tools.XmlTools;
 public class HollowLevel implements Serializable
 {	private static final long serialVersionUID = 1L;
 
-	private HollowLevel()
+	public HollowLevel()
 	{		
 	}
 
-	public HollowLevel(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// init
-		packName = folder.substring(0,folder.indexOf(File.separator));
-		folderName = folder.substring(folder.indexOf(File.separator)+1,folder.length());
-		String schemaFolder = FileTools.getSchemasPath();
-		String individualFolder = FileTools.getLevelsPath()+File.separator+folder;
-		File schemaFile,dataFile;
-		
-		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_SCHEMA);
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		
-		// loading
-		loadLevelElement(individualFolder,root);
+	/////////////////////////////////////////////////////////////////
+	// LEVEL INFO 		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private LevelInfo levelInfo;
+	
+	public LevelInfo getLevelInfo()
+	{	return levelInfo;		
+	}
+	
+	public void setLevelInfo(LevelInfo levelInfo)
+	{	this.levelInfo = levelInfo;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Players players;
+
+	public Players getPlayers()
+    {	return players;    	
+    }
+	
+	public void setPlayers(Players players)
+	{	this.players = players;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// INSTANCE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Instance instance;
+
+	public Instance getInstance()
+    {	return instance;
     }
     
+	public void setInstance(Instance instance)
+	{	this.instance = instance;
+	}
+
 	/////////////////////////////////////////////////////////////////
-	// INIT				/////////////////////////////////////////////
+	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private Zone zone;
+	
+	public Zone getZone()
+    {	return zone;
+    }
+	
+	public void setZone(Zone zone)
+	{	this.zone = zone;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// THEME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+    public void loadTheme() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	// theme
+    	Theme theme = ThemeLoader.loadTheme(themePath);
+//		level.setTheme(theme);
+		
+    	// init zone
+		Tile[][] matrix = level.getMatrix();
+		Itemset itemset = level.getItemset();
+		double globalLeftX = level.getGlobalLeftX();
+		double globalUpY = level.getGlobalUpY();
+		ArrayList<String[][]> matrices = zone.getMatrices();
+    	String[][] mFloors = matrices.get(0);
+		String[][] mBlocks = matrices.get(1);
+		String[][] mItems = matrices.get(2);
+		String[][] mBombs = matrices.get(3);
+		
+		// init tiles
+		for(int line=0;line<globalHeight;line++)
+		{	for(int col=0;col<globalWidth;col++)
+			{	double x = globalLeftX + RoundVariables.scaledTileDimension/2 + col*RoundVariables.scaledTileDimension;
+				double y = globalUpY + RoundVariables.scaledTileDimension/2 + line*RoundVariables.scaledTileDimension;
+				matrix[line][col] = new Tile(level,line,col,x,y);
+				if(mFloors[line][col]==null)
+				{	Floor floor = theme.makeFloor(matrix[line][col]);
+					level.insertSpriteTile(floor);
+				}
+				else
+				{	Floor floor = theme.makeFloor(mFloors[line][col],matrix[line][col]);
+					level.insertSpriteTile(floor);
+				}
+				if(mBlocks[line][col]!=null)
+				{	Block block = theme.makeBlock(mBlocks[line][col],matrix[line][col]);
+					level.insertSpriteTile(block);
+				
+				}
+				if(mItems[line][col]!=null)
+				{	Item item = itemset.makeItem(mItems[line][col],matrix[line][col]);
+					level.insertSpriteTile(item);				
+				}
+				if(mBombs[line][col]!=null)
+				{	String temp[] = mBombs[line][col].split(Theme.PROPERTY_SEPARATOR);
+					int range = Integer.parseInt(temp[temp.length-1]);
+					String name = "";
+					for(int i=0;i<temp.length-1;i++)
+						name = name+temp[i];
+					Bomb bomb = bombset.makeBomb(name,matrix[line][col],range);
+					level.insertSpriteTile(bomb);				
+				}
+			}
+		}
+		level.initTileList();
+	}
+    
+	/////////////////////////////////////////////////////////////////
+	// BOMBSET			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private BombsetMap bombsetMap;
+	private Bombset bombset;
+
+	public void loadBombsets() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	// bombsets map
+		bombsetMap = new BombsetMap();
+    	bombsetMap.initBombset(bombsetPath);
+		
+    	// level bombset
+    	bombset = bombsetMap.loadBombset(bombsetPath,null);
+		level.setBombset(bombset);
+    }
+	
+	public BombsetMap getBombsetMap()
+	{	return bombsetMap;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ITEMSET			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void loadFiresetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	FiresetMap firesetMap = FiresetLoader.loadFiresetMap(firePath);
+		level.setFiresetMap(firesetMap);
+    }
+
+	/////////////////////////////////////////////////////////////////
+	// ITEMSET			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	Itemset itemset = ItemsetLoader.loadItemset(itemPath);
+		level.setItemset(itemset);
+    }
+
+	/////////////////////////////////////////////////////////////////
+	// LEVEL			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	transient private Level level;
+
+	public Level getLevel()
+    {	return level;    
+    }
+    
 	public void initLevel(LocalLoop loop)
 	{	// init
     	level = new Level(loop);
@@ -165,244 +299,6 @@ public class HollowLevel implements Serializable
 		level.setBorders(values);
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// LOAD				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private void loadLevelElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// init
-		Element element;
-		String content;
-		
-		// display
-		element = root.getChild(XmlTools.DISPLAY);
-		content = element.getAttribute(XmlTools.FORCE_ALL).getValue().trim();
-		displayForceAll = Boolean.parseBoolean(content);
-		content = element.getAttribute(XmlTools.MAXIMIZE).getValue().trim();
-		displayMaximize = Boolean.parseBoolean(content);
-		
-		// global size
-		element = root.getChild(XmlTools.GLOBAL_DIMENSION);
-		content = element.getAttribute(XmlTools.HEIGHT).getValue().trim();
-		globalHeight = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.WIDTH).getValue().trim();
-		globalWidth = Integer.parseInt(content);
-		// visible size
-		element = root.getChild(XmlTools.VISIBLE_DIMENSION);
-		content = element.getAttribute(XmlTools.HEIGHT).getValue().trim();
-		visibleHeight = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.WIDTH).getValue().trim();
-		visibleWidth = Integer.parseInt(content);
-		// visible position
-		element = root.getChild(XmlTools.VISIBLE_POSITION);
-		content = element.getAttribute(XmlTools.UPLINE).getValue().trim();
-		visibleUpLine = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.LEFTCOL).getValue().trim();
-		visibleLeftCol = Integer.parseInt(content);
-		
-		// instance
-		element = root.getChild(XmlTools.INSTANCE);
-		instanceName = element.getAttribute(XmlTools.NAME).getValue().trim();
-		instancePath = FileTools.getInstancesPath()+File.separator+instanceName;
-
-		// players locations
-		players = PlayersLoader.loadPlayers(folder);
-
-		// bombset
-		bombsetPath = instancePath + File.separator+FileTools.FOLDER_BOMBS;
-
-		// fireset
-		firePath = instancePath + File.separator+FileTools.FOLDER_FIRES;
-
-		// itemset
-		itemPath = instancePath + File.separator+FileTools.FOLDER_ITEMS;
-
-		// theme
-		element = root.getChild(XmlTools.THEME);
-		themeName = element.getAttribute(XmlTools.NAME).getValue().trim();
-		String themeFolder = instancePath + File.separator + FileTools.FOLDER_THEMES;
-		themePath = themeFolder + File.separator+themeName;
-
-		// zone
-		zone = ZoneLoader.loadZone(folder,globalHeight,globalWidth);
-	}
-    
-	/////////////////////////////////////////////////////////////////
-	// PLAYERS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Players players;
-
-	public Players getPlayers()
-    {	return players;    	
-    }
-
-	/////////////////////////////////////////////////////////////////
-	// INSTANCE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Instance instance;
-
-	public Instance getInstance()
-    {	return instance;
-    }
-    
-	/////////////////////////////////////////////////////////////////
-	// ZONE				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Zone zone;
-	public Zone getZone()
-    {	return zone;
-    }
-
-	/////////////////////////////////////////////////////////////////
-	// THEME			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String themeName;
-	private String themePath;
-
-	public String getThemeName()
-    {	return themeName;
-    }
-
-    public void loadTheme() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	// theme
-    	Theme theme = ThemeLoader.loadTheme(themePath);
-//		level.setTheme(theme);
-		
-    	// init zone
-		Tile[][] matrix = level.getMatrix();
-		Itemset itemset = level.getItemset();
-		double globalLeftX = level.getGlobalLeftX();
-		double globalUpY = level.getGlobalUpY();
-		ArrayList<String[][]> matrices = zone.getMatrices();
-    	String[][] mFloors = matrices.get(0);
-		String[][] mBlocks = matrices.get(1);
-		String[][] mItems = matrices.get(2);
-		String[][] mBombs = matrices.get(3);
-		
-		// init tiles
-		for(int line=0;line<globalHeight;line++)
-		{	for(int col=0;col<globalWidth;col++)
-			{	double x = globalLeftX + RoundVariables.scaledTileDimension/2 + col*RoundVariables.scaledTileDimension;
-				double y = globalUpY + RoundVariables.scaledTileDimension/2 + line*RoundVariables.scaledTileDimension;
-				matrix[line][col] = new Tile(level,line,col,x,y);
-				if(mFloors[line][col]==null)
-				{	Floor floor = theme.makeFloor(matrix[line][col]);
-					level.insertSpriteTile(floor);
-				}
-				else
-				{	Floor floor = theme.makeFloor(mFloors[line][col],matrix[line][col]);
-					level.insertSpriteTile(floor);
-				}
-				if(mBlocks[line][col]!=null)
-				{	Block block = theme.makeBlock(mBlocks[line][col],matrix[line][col]);
-					level.insertSpriteTile(block);
-				
-				}
-				if(mItems[line][col]!=null)
-				{	Item item = itemset.makeItem(mItems[line][col],matrix[line][col]);
-					level.insertSpriteTile(item);				
-				}
-				if(mBombs[line][col]!=null)
-				{	String temp[] = mBombs[line][col].split(Theme.PROPERTY_SEPARATOR);
-					int range = Integer.parseInt(temp[temp.length-1]);
-					String name = "";
-					for(int i=0;i<temp.length-1;i++)
-						name = name+temp[i];
-					Bomb bomb = bombset.makeBomb(name,matrix[line][col],range);
-					level.insertSpriteTile(bomb);				
-				}
-			}
-		}
-		level.initTileList();
-	}
-    
-	/////////////////////////////////////////////////////////////////
-	// PACK			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String packName;
-
-	public String getPackName()
-    {	return packName;
-    }
-    
-	/////////////////////////////////////////////////////////////////
-	// FOLDER			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String folderName;
-
-	public String getFolderName()
-    {	return folderName;
-    }
-
-	/////////////////////////////////////////////////////////////////
-	// DIMENSIONS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-    private boolean displayForceAll;
-	private boolean displayMaximize;
-	private int globalHeight;
-	private int globalWidth;
-	private int visibleHeight;
-	private int visibleWidth;
-	private int visibleUpLine;
-	private int visibleLeftCol;
-
-	public int getVisibleHeight()
-    {	return visibleHeight;
-    }
-    
-    public int getVisibleWidth()
-    {	return visibleWidth;
-    }
-   
-	/////////////////////////////////////////////////////////////////
-	// BOMBSET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String bombsetPath;
-	private BombsetMap bombsetMap;
-	private Bombset bombset;
-
-	public void loadBombsets() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	// bombsets map
-		bombsetMap = new BombsetMap();
-    	bombsetMap.loadBombset(bombsetPath);
-		
-    	// level bombset
-    	bombset = bombsetMap.loadBombset(bombsetPath,null);
-		level.setBombset(bombset);
-    }
-	
-	public BombsetMap getBombsetMap()
-	{	return bombsetMap;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// ITEMSET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String firePath;
-
-	public void loadFiresetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	FiresetMap firesetMap = FiresetLoader.loadFiresetMap(firePath);
-		level.setFiresetMap(firesetMap);
-    }
-
-	/////////////////////////////////////////////////////////////////
-	// ITEMSET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String itemPath;
-
-	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	Itemset itemset = ItemsetLoader.loadItemset(itemPath);
-		level.setItemset(itemset);
-    }
-
-	/////////////////////////////////////////////////////////////////
-	// LEVEL			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	transient private Level level;
-
-	public Level getLevel()
-    {	return level;    
-    }
-    
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

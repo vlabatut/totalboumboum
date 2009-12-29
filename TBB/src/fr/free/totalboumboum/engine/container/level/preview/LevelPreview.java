@@ -22,17 +22,18 @@ package fr.free.totalboumboum.engine.container.level.preview;
  */
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Set;
 
 import fr.free.totalboumboum.engine.container.itemset.ItemsetPreview;
 import fr.free.totalboumboum.engine.container.level.info.LevelInfo;
 
-public class LevelPreview
-{
-	
+public class LevelPreview implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	/////////////////////////////////////////////////////////////////
-	// INFO 			/////////////////////////////////////////////
+	// LEVEL INFO 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private LevelInfo levelInfo;
 	

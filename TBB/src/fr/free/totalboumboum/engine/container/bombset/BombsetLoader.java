@@ -58,7 +58,7 @@ public class BombsetLoader
 	/////////////////////////////////////////////////////////////////
 	// LOAD ALL BUT ANIMES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static Bombset loadBombset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static Bombset initBombset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folderPath;
@@ -189,7 +189,7 @@ public class BombsetLoader
 	/////////////////////////////////////////////////////////////////
 	// LOAD ONLY ANIMES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static Bombset loadBombset(String folderPath, PredefinedColor color, Bombset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static Bombset completeBombset(String folderPath, PredefinedColor color, Bombset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folderPath;
