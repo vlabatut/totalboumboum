@@ -21,10 +21,16 @@ package fr.free.totalboumboum.engine.container.itemset;
  * 
  */
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.engine.container.level.instance.Instance;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
@@ -36,6 +42,21 @@ public class Itemset
 	{	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// INSTANCE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Instance instance = null;
+	
+	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	this.instance = instance;
+		for(ItemFactory itemFactory: itemFactories.values())
+			itemFactory.setInstance(instance);
+	}
+
+	public Instance getInstance()
+	{	return instance;	
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// ITEM FACTORIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -78,7 +99,7 @@ if(itemFactory==null)
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public Itemset cacheCopy(double zoomFactor)
+/*	public Itemset cacheCopy(double zoomFactor)
 	{	Itemset result = new Itemset();
 	
 		// items
@@ -89,5 +110,5 @@ if(itemFactory==null)
 		}
 		
 		return result;
-	}
+	}*/
 }

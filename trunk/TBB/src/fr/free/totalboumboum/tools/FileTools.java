@@ -61,8 +61,9 @@ public class FileTools
 	public static final String FILE_CONFIGURATION = "configuration";
 	public static final String FILE_CONTROLS = "controls";
 	public static final String FILE_ENGINE = "engine";
-	public static final String FILE_EXPLOSIONS = "explosions";
 	public static final String FILE_EXPLOSION = "explosion";
+	public static final String FILE_EXPLOSIONS = "explosions";
+	public static final String FILE_EXPLOSIONSET = "explosionset";
 	public static final String FILE_FIRE = "fire";
 	public static final String FILE_FIRESET = "fireset";
 	public static final String FILE_FIRESETMAP = "firesetmap";

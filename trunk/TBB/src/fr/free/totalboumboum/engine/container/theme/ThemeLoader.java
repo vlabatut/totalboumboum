@@ -21,24 +21,14 @@ package fr.free.totalboumboum.engine.container.theme;
  * 
  */
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
-import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -55,7 +45,13 @@ public class ThemeLoader
 		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_XML);
 		Theme result = null;
 		
-		// caching
+		// opening
+		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		// loading
+		result = loadThemeElement(root,individualFolder);
+		
+		
+/*		// caching
 		String cachePath = FileTools.getCacheThemesPath()+ File.separator;
 		File cacheFolder = new File(cachePath);
 		cacheFolder.mkdirs();
@@ -115,7 +111,7 @@ public class ThemeLoader
 				result = result.cacheCopy(zoomFactor);
 			}
 		}
-		
+*/		
 		return result;
     }
 

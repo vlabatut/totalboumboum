@@ -23,11 +23,8 @@ package fr.free.totalboumboum.engine.content.sprite.floor;
 
 import java.util.HashMap;
 
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
-import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
@@ -99,7 +96,7 @@ public class FloorFactory extends SpriteFactory<Floor>
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public FloorFactory cacheCopy(double zoomFactor)
+/*	public FloorFactory cacheCopy(double zoomFactor)
 	{	FloorFactory result = new FloorFactory();
 		
 		// misc
@@ -124,5 +121,5 @@ public class FloorFactory extends SpriteFactory<Floor>
 		result.setGesturePack(gesturePackCopy);
 
 		return result;
-	}
+	}*/
 }

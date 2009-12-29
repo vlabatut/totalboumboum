@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<explosionset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/explosionset.xsd">
+
+	<explosions>
+		<explosion name="normal" folder="normal" />
+		<explosion name="penetration" folder="penetration" />
+	</explosions>
+	
+</explosionset>

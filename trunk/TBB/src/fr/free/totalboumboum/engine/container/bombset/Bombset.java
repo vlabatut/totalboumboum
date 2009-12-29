@@ -21,17 +21,22 @@ package fr.free.totalboumboum.engine.container.bombset;
  * 
  */
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.engine.container.level.instance.Instance;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
-import fr.free.totalboumboum.game.round.RoundVariables;
 
 public class Bombset implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -41,6 +46,21 @@ public class Bombset implements Serializable
 		requiredAbilities = new ArrayList<ArrayList<StateAbility>>();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// INSTANCE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Instance instance = null;
+	
+	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	this.instance = instance;
+		for(BombFactory bombFactory: bombFactories)
+			bombFactory.setInstance(instance);
+	}
+	
+	public Instance getInstance()
+	{	return instance;	
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// REQUIRED ABILITIES		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -161,7 +181,7 @@ public class Bombset implements Serializable
 	/*
 	 * the Bombset has already been copied/loaded, so it is taken from the level
 	 */
-	public Bombset cacheCopy()
+/*	public Bombset cacheCopy()
 	{	Bombset result = RoundVariables.level.getBombset();
 		return result;
 	}
@@ -174,7 +194,7 @@ public class Bombset implements Serializable
 		}
 		return result;
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

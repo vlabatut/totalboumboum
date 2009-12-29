@@ -102,8 +102,7 @@ public class LevelPreviewLoader
 	}
 
 	private static void loadLevelInfo(String pack, String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	LevelInfo levelInfo = new LevelInfo();
-		LevelInfoLoader.loadLevelInfo(pack,folder);
+	{	LevelInfo levelInfo = LevelInfoLoader.loadLevelInfo(pack,folder);
 		result.setLevelInfo(levelInfo);
 	}
 	

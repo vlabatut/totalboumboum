@@ -184,7 +184,6 @@ public class HollowLevel implements Serializable
 	public void initLevel(LocalLoop loop)
 	{	// init
     	level = new Level(loop);
-    	RoundVariables.setInstanceName(levelInfo.getInstance());
 		Dimension panelDim = Configuration.getVideoConfiguration().getPanelDimension();
     	double sizeX = panelDim.width;
     	double sizeY = panelDim.height;
@@ -275,6 +274,7 @@ public class HollowLevel implements Serializable
     	result.levelInfo = levelInfo;
     	result.zone = zone;
     	result.players = players;
+    	result.instance = new Instance(instance.getName());
     	return result;
     }
     

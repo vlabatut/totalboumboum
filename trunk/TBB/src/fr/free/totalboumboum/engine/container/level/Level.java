@@ -30,9 +30,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
-import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Role;
@@ -337,7 +334,7 @@ public class Level
     /////////////////////////////////////////////////////////////////
 	// BOMBSET				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Bombset bombset;
+/*	private Bombset bombset;
 
 	public Bombset getBombset()
 	{	return bombset;		
@@ -345,11 +342,11 @@ public class Level
 	public void setBombset(Bombset bombset)
 	{	this.bombset = bombset;
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// FIRESET MAP			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private FiresetMap firesetMap;
+/*	private FiresetMap firesetMap;
 
 	public FiresetMap getFiresetMap()
 	{	return firesetMap;	
@@ -357,11 +354,11 @@ public class Level
 	public void setFiresetMap(FiresetMap firesetMap)
 	{	this.firesetMap = firesetMap;
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// ITEMSET				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Itemset itemset;
+/*	private Itemset itemset;
 
 	public Itemset getItemset()
 	{	return itemset;	
@@ -369,7 +366,7 @@ public class Level
 	public void setItemset(Itemset itemset)
 	{	this.itemset = itemset;
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// SPRITES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -1059,14 +1056,14 @@ public class Level
 	{	if(!finished)
 		{	finished = true;
 			// bombset
-			bombset.finish();
-			bombset = null;
+//			bombset.finish();
+//			bombset = null;
 			// fireset map
-			firesetMap.finish();
-			firesetMap = null;
+//			firesetMap.finish();
+//			firesetMap = null;
 			// itemset
-			itemset.finish();
-			itemset = null;
+//			itemset.finish();
+//			itemset = null;
 			// matrix
 			for(int line=0;line<globalHeight;line++)
 			{	for(int col=0;col<globalWidth;col++)

@@ -21,15 +21,8 @@ package fr.free.totalboumboum.engine.container.fireset;
  * 
  */
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -40,15 +33,12 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
 import fr.free.totalboumboum.engine.content.sprite.fire.FireFactory;
 import fr.free.totalboumboum.engine.content.sprite.fire.FireFactoryLoader;
-import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class FiresetLoader
+public class FiresetMapLoader
 {	
 	/////////////////////////////////////////////////////////////////
 	// LOAD MAP		/////////////////////////////////////////////
@@ -59,6 +49,14 @@ public class FiresetLoader
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_FIRESETMAP+FileTools.EXTENSION_SCHEMA);
 		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_FIRESETMAP+FileTools.EXTENSION_XML);
+		
+		
+		// opening
+		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		// loading
+		FiresetMap result = loadFiresetmapElement(individualFolder,root);
+		
+/*		
 		FiresetMap result = null;
 		
 		// caching
@@ -76,14 +74,15 @@ public class FiresetLoader
 		Object o = engineConfiguration.getMemoryCache(cacheName);
 		if(engineConfiguration.getFileCache() && o!=null)
 		{	double zoomFactor = RoundVariables.zoomFactor;
-			result = ((FiresetMap)o).cacheCopy(zoomFactor);
+			result = ((FiresetMap)o).cacheCopy(zoomFactor,instance);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				result = (FiresetMap)oIn.readObject();
+				result = (FiresetMap)oIn.readObject(); //TODO fonction à surcharger
+				result.setInstance(instance); 
 				oIn.close();
 			}
 			catch (FileNotFoundException e)
@@ -101,7 +100,8 @@ public class FiresetLoader
 		{	// opening
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			result = loadFiresetmapElement(individualFolder,root);
+			result = new FiresetMap(instance);
+			loadFiresetmapElement(individualFolder,root,result);
 			// caching
 			boolean cached = false;
 			if(engineConfiguration.getMemoryCache())
@@ -120,13 +120,13 @@ public class FiresetLoader
 			{	double zoomFactor = RoundVariables.zoomFactor;
 				result = result.cacheCopy(zoomFactor);
 			}
-		}
+		}*/
 
 		return result;
 	}
 
 	private static FiresetMap loadFiresetmapElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	FiresetMap result = new FiresetMap();
+	{	FiresetMap result = new FiresetMap();		
 		HashMap<String,FireFactory> abstractFires = new HashMap<String, FireFactory>();
 		
     	// abstract fires
@@ -139,7 +139,7 @@ public class FiresetLoader
     	loadFiresetsElement(folder,firesetsElt,result,abstractFires);
     	
     	return result;
-    }
+	}
 	
 	@SuppressWarnings("unchecked")
 	private static void loadFiresetsElement(String folder, Element root, FiresetMap result, HashMap<String,FireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
