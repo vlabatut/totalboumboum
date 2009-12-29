@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.content.manager.explosion;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.free.totalboumboum.engine.container.explosionset.Explosion;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -31,7 +32,6 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import fr.free.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
-import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;

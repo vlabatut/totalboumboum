@@ -37,7 +37,6 @@ import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
@@ -52,7 +51,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 	 * because the bombset is always loaded in a neutral way, without graphics.
 	 * it is then completed depending on the needed colors (but the rest of the features stay the same) 
 	 */
-	public static BombFactory loadBombFactory(String folderPath, String bombName/*, PredefinedColor color, Bombset bombset*/, HashMap<String,BombFactory> abstractBombs) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static BombFactory loadBombFactory(String folderPath, String bombName, HashMap<String,BombFactory> abstractBombs) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		BombFactory result = new BombFactory(bombName);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
@@ -68,9 +67,9 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		AbilityLoader.loadAbilityPack(folder,abilities);
 		
 		//EXPLOSION
-		Explosion exp = loadExplosionElement(root);
-		if(exp!=null)
-			result.setExplosion(exp); 
+		String explosionName = loadExplosionElement(root);
+		if(explosionName!=null)
+			result.setExplosionName(explosionName);
 		
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
@@ -111,9 +110,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 			AnimesLoader.loadAnimes(folder,gesturePack,color,BombFactory.getAnimeReplacements());
 		
 		// BOMBSET
-		result.setBombset(bombset);
-//if(result.getName()==null)
-//	System.out.println();
+		result.setBombsetColor(color);
 		
 		initDefaultGestures(gesturePack,Role.BOMB);
 	}	

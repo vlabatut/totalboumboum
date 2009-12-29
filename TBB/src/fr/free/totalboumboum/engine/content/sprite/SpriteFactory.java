@@ -21,14 +21,21 @@ package fr.free.totalboumboum.engine.content.sprite;
  * 
  */
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
+import fr.free.totalboumboum.engine.container.explosionset.Explosion;
+import fr.free.totalboumboum.engine.container.level.instance.Instance;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
 import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;
@@ -99,6 +106,20 @@ public abstract class SpriteFactory<T extends Sprite> implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// INSTANCE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Instance instance;
+	
+	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	this.instance = instance;	
+		bombset = instance.getBombsetMap().getBombset(bombsetColor);
+		if(explosionName!=null)
+			explosion = instance.getExplosionSet().getExplosion(explosionName);
+		else
+			explosion = new Explosion();
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected String name;
@@ -141,26 +162,32 @@ public abstract class SpriteFactory<T extends Sprite> implements Serializable
 	// BOMBSET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected Bombset bombset;
-
+	protected PredefinedColor bombsetColor;
+	
 	public Bombset getBombset()
 	{	return bombset;
 	}
 	
-	public void setBombset(Bombset bombset)
-	{	this.bombset = bombset;
+	public void setBombsetColor(PredefinedColor bombsetColor)
+	{	this.bombsetColor = bombsetColor;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// EXPLOSION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected Explosion explosion;
+	protected String explosionName;
 
 	public Explosion getExplosion()
 	{	return explosion;
 	}
 	
-	public void setExplosion(Explosion explosion)
-	{	this.explosion = explosion;
+	public String getExplosionName()
+	{	return explosionName;
+	}
+	
+	public void setExplosionName(String explosionName)
+	{	this.explosionName = explosionName;
 	}
 
 	/////////////////////////////////////////////////////////////////

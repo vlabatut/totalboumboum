@@ -25,12 +25,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemEventManager;
@@ -155,7 +152,7 @@ public class ItemFactory extends SpriteFactory<Item>
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public ItemFactory cacheCopy(double zoomFactor)
+/*	public ItemFactory cacheCopy(double zoomFactor)
 	{	ItemFactory result = new ItemFactory(itemName);
 		
 		// misc
@@ -184,5 +181,5 @@ public class ItemFactory extends SpriteFactory<Item>
 		result.setGesturePack(gesturePackCopy);
 
 		return result;
-	}
+	}*/
 }

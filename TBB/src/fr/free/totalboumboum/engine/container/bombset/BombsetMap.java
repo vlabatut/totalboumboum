@@ -30,31 +30,45 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
+import fr.free.totalboumboum.engine.container.level.instance.Instance;
 
 public class BombsetMap implements Serializable
 {	private static final long serialVersionUID = 1L;
+
+	/////////////////////////////////////////////////////////////////
+	// INSTANCE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Instance instance = null;
+	
+	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	this.instance = instance;
+		for(Bombset bombset: bombsets.values())
+			bombset.setInstance(instance);
+	}
+
+	public Instance getInstance()
+	{	return instance;	
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// BOMBSETS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Bombset partialBombset = null;
 	private final HashMap<PredefinedColor,Bombset> bombsets = new HashMap<PredefinedColor, Bombset>();
+	private String path;
 	
 	public void initBombset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	partialBombset = BombsetLoader.initBombset(folderPath);
+	{	path = folderPath;
+		partialBombset = BombsetLoader.initBombset(folderPath);
 	}
 
-	public Bombset completeBombset(String folderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public Bombset getBombset(PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Bombset result = bombsets.get(color);
 		if(result==null)
 		{	result = partialBombset.copy();
-			BombsetLoader.completeBombset(folderPath,color,result);
+			BombsetLoader.completeBombset(path,color,result);
 			bombsets.put(color,result);
 		}
 		return result;
-	}
-	
-	public Bombset getBombset(PredefinedColor color)
-	{	return bombsets.get(color);		
 	}
 }

@@ -1213,4 +1213,8 @@ public class Launcher
 	 *  
 	 *  - découper une image en nxm floors
 	 */
+	
+	/*
+	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
+	 */
 }

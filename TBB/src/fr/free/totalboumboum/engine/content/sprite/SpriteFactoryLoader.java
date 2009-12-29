@@ -36,14 +36,11 @@ import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
-import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
-import fr.free.totalboumboum.engine.content.feature.explosion.ExplosionLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
-import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -84,7 +81,6 @@ public abstract class SpriteFactoryLoader
 		// init
 		GesturePack gesturePack;
 		ArrayList<AbstractAbility> abilities;
-		Explosion explosion;
 		if(baseStr!=null)
 		{	SpriteFactory<T> base = abstractSprites.get(baseStr);
 			loadGeneralElement(result,base);
@@ -96,12 +92,7 @@ public abstract class SpriteFactoryLoader
 			// abilities
 			abilities = new ArrayList<AbstractAbility>();
 			result.setAbilities(abilities);
-			// explosions
-			explosion = new Explosion();
-			result.setExplosion(explosion);
 		}
-//if(result.getExplosion()==null)
-//		System.out.println(name);
 	}
 	
 	protected static <T extends Sprite> void loadGeneralElement(Element root, SpriteFactory<T> result, SpriteFactory<T> base)
@@ -118,11 +109,11 @@ public abstract class SpriteFactoryLoader
 	private static <T extends Sprite> void loadGeneralElement(SpriteFactory<T> result, SpriteFactory<T> base)
 	{	GesturePack gesturePack = base.getGesturePack().copy();
 		ArrayList<AbstractAbility> abilities = base.getAbilities();
-		Explosion explosion = base.getExplosion();
+		String explosionName = base.getExplosionName();
 		//
 		result.setGesturePack(gesturePack.copy());
 		result.setAbilities((ArrayList<AbstractAbility>)abilities.clone());
-		result.setExplosion(explosion);
+		result.setExplosionName(explosionName);
 	}
 	
 	protected static void initDefaultGestures(GesturePack gesturePack, Role role)
@@ -266,15 +257,11 @@ public abstract class SpriteFactoryLoader
 	/////////////////////////////////////////////////////////////////
 	// EPLOSION LOADING		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected static <T extends Sprite> Explosion loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	Explosion explosion = null;
+	protected static String loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	String result = null;
 		Element elt = root.getChild(XmlTools.EXPLOSION);
 		if(elt!=null)
-		{	String name = elt.getAttribute(XmlTools.NAME).getValue().trim();
-			String folder = RoundVariables.instancePath+File.separator+FileTools.FOLDER_EXPLOSIONS;
-			folder = folder + File.separator+name;
-			explosion = ExplosionLoader.loadExplosion(folder);
-		}
-		return explosion;
+			result = elt.getAttribute(XmlTools.NAME).getValue().trim();
+		return result;
 	}
 }

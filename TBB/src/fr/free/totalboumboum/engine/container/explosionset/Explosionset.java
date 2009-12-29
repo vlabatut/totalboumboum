@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.container.fireset;
+package fr.free.totalboumboum.engine.container.explosionset;
 
 /*
  * Total Boum Boum
@@ -24,23 +24,18 @@ package fr.free.totalboumboum.engine.container.fireset;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.container.level.instance.Instance;
-import fr.free.totalboumboum.engine.container.tile.Tile;
-import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
-import fr.free.totalboumboum.engine.content.sprite.fire.FireFactory;
 
-public class Fireset implements Serializable
+public class Explosionset implements Serializable
 {	private static final long serialVersionUID = 1L;
 
-	public Fireset()
-	{	fireFactories = new HashMap<String,FireFactory>();
+	public Explosionset()
+	{	explosions = new HashMap<String,Explosion>();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -50,8 +45,8 @@ public class Fireset implements Serializable
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
-		for(FireFactory fireFactory: fireFactories.values())
-			fireFactory.setInstance(instance);
+		for(Explosion explosion: explosions.values())
+			explosion.setInstance(instance);
 	}
 
 	public Instance getInstance()
@@ -59,39 +54,57 @@ public class Fireset implements Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FIRE FACTORIES	/////////////////////////////////////////////
+	// EXPLOSIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,FireFactory> fireFactories;
+	private HashMap<String,Explosion> explosions;
 	
-	public void addFireFactory(String name, FireFactory fireFactory)
-	{	fireFactories.put(name, fireFactory);
-		fireFactory.setFireset(this);
+	@SuppressWarnings("unused")
+	private void setExplosions(HashMap<String,Explosion> explosions)
+	{	this.explosions = explosions;
 	}
 	
-	public Fire makeFire(String name, Tile tile)
-	{	Fire result = null;
-		if(name==null)
-			name = fireFactories.keySet().iterator().next();
-		FireFactory fireFactory = fireFactories.get(name);
-if(fireFactory==null)
-	System.out.println(name);
-		result = fireFactory.makeSprite(tile);
+	public void addExplosion(String name, Explosion explosion)
+	{	explosions.put(name,explosion);
+	}
+	
+	public Explosion getExplosion(String name)
+	{	Explosion result = explosions.get(name);
 		return result;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
-	// NAME				/////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String name;
-	
-	public String getName()
-	{	return name;	
+/*	public Explosionset copy()
+	{	Explosionset result = new Explosionset();
+		for(Entry<String,Explosion> entry: explosions.entrySet())
+		{	Explosion explosion = entry.getValue().copy();
+			String name = entry.getKey();
+			result.addExplosion(name,explosion);
+		}
+		return result;
 	}
-	
-	public void setName(String name)
-	{	this.name = name;	
+	*/
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/*
+	 * the Bombset has already been copied/loaded, so it is taken from the level
+	 */
+/*	public Explosionset cacheCopy()
+	{	Explosionset result = RoundVariables.level.getBombset();
+		return result;
 	}
-	
+	public Explosionset cacheCopy(double zoomFactor)
+	{	Explosionset result = new Explosionset();
+		for(int i=0;i<bombFactories.size();i++)
+		{	BombFactory bf = bombFactories.get(i).cacheCopy(zoomFactor,result);
+			ArrayList<StateAbility> ra = requiredAbilities.get(i);
+			result.addBombFactory(bf,ra);
+		}
+		return result;
+	}
+*/	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -100,34 +113,9 @@ if(fireFactory==null)
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
-			// factories
-			{	Iterator<Entry<String,FireFactory>> it = fireFactories.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<String,FireFactory> t = it.next();
-					FireFactory temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
-			}
+			for(Explosion explosion: explosions.values())
+				explosion.finish();
+			explosions.clear();
 		}
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-/*	public Fireset cacheCopy(double zoomFactor)
-	{	Fireset result = new Fireset();
-	
-		// name
-		result.name = name;
-	
-		// fires
-		for(Entry<String,FireFactory> entry: fireFactories.entrySet())
-		{	String key = entry.getKey();
-			FireFactory fireFactory = entry.getValue().cacheCopy(zoomFactor,result);
-			result.addFireFactory(key,fireFactory);
-		}
-		
-		return result;
-	}*/
 }

@@ -23,12 +23,9 @@ package fr.free.totalboumboum.engine.content.sprite.fire;
 
 import java.util.HashMap;
 
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
-import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
@@ -121,7 +118,7 @@ public class FireFactory extends SpriteFactory<Fire>
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public FireFactory cacheCopy(double zoomFactor, Fireset fs)
+/*	public FireFactory cacheCopy(double zoomFactor, Fireset fs)
 	{	FireFactory result = new FireFactory();
 		
 		// misc
@@ -149,5 +146,5 @@ public class FireFactory extends SpriteFactory<Fire>
 		result.setGesturePack(gesturePackCopy);
 
 		return result;
-	}
+	}*/
 }

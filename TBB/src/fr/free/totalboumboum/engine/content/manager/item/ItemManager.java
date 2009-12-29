@@ -78,7 +78,7 @@ public class ItemManager
 	public void reinitInitialItems()
 	{	// init
 		Tile tile = sprite.getTile();
-		Itemset itemset = RoundVariables.level.getItemset();
+		Itemset itemset = RoundVariables.instance.getItemset();
 		initialItems.clear();
 		
 		// recreate all initial items

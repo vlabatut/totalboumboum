@@ -21,15 +21,8 @@ package fr.free.totalboumboum.engine.container.bombset;
  * 
  */
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,15 +34,12 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactoryLoader;
-import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -66,7 +56,13 @@ public class BombsetLoader
 		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_BOMBSET+FileTools.EXTENSION_XML);
 		Bombset result = null;
 		
-		// caching
+		// opening
+		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		// loading
+		result = loadBombsetElement(root,individualFolder);
+		
+		
+/*		// caching
 		String cachePath = FileTools.getCacheThemesPath()+ File.separator;
 		File objectFile = dataFile.getParentFile();
 		String objectName = objectFile.getName();
@@ -124,7 +120,7 @@ public class BombsetLoader
 				result = result.cacheCopy(zoomFactor);
 			}
 		}
-
+*/
 		return result;
 	}
 	

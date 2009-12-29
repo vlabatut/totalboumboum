@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.container.fireset;
+package fr.free.totalboumboum.engine.container.explosionset;
 
 /*
  * Total Boum Boum
@@ -22,17 +22,24 @@ package fr.free.totalboumboum.engine.container.fireset;
  */
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map.Entry;
+import java.io.Serializable;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.engine.container.fireset.Fireset;
 import fr.free.totalboumboum.engine.container.level.instance.Instance;
+import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
-public class FiresetMap
-{
+public class Explosion implements Serializable
+{	private static final long serialVersionUID = 1L;
+	
+	public Explosion()
+	{	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -40,25 +47,44 @@ public class FiresetMap
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
-		for(Fireset fireset: firesets.values())
-			fireset.setInstance(instance);
+		fireset = instance.getFiresetMap().getFireset(firesetName);
 	}
 
 	public Instance getInstance()
 	{	return instance;	
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	String name;
+
+	public String getName()
+	{	return name;
+	}
+
+	public void setName(String name)
+	{	this.name = name;
+	}
 
 	/////////////////////////////////////////////////////////////////
-	// FIRESETS			/////////////////////////////////////////////
+	// FIRESET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final HashMap<String,Fireset> firesets = new HashMap<String, Fireset>();
+	Fireset fireset = null;
+	String firesetName = null;
 	
-	public void addFireset(String name, Fireset fireset)
-	{	firesets.put(name,fireset);		
+	public void setFiresetName(String firesetName)
+	{	this.firesetName = firesetName;	
 	}
 	
-	public Fireset getFireset(String name)
-	{	return firesets.get(name);		
+/*	public void setFireset(Fireset fireset)
+	{	this.fireset = fireset;	
+	}
+*/	
+	public Fire makeFire(String name, Tile tile)
+	{	Fire result = null;
+		result = fireset.makeFire(name,tile);
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -68,25 +94,27 @@ public class FiresetMap
 	
 	public void finish()
 	{	if(!finished)
-		{	for(Entry<String,Fireset> e: firesets.entrySet())
-				e.getValue().finish();
-			firesets.clear();
+		{	finished = true;
+			// fireset
+			if(fireset!=null)
+			{	fireset.finish();
+				fireset = null;
+			}
 		}
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-/*	public FiresetMap cacheCopy(double zoomFactor, Instance instance)
-	{	FiresetMap result = new FiresetMap(instance);
-	
-		// firesets
-		for(Entry<String,Fireset> entry: firesets.entrySet())
-		{	String key = entry.getKey();
-			Fireset fireset = entry.getValue().cacheCopy(zoomFactor);
-			result.addFireset(key,fireset);
-		}
-		
+	/*
+	 * the fireset has already been copied/loaded, so it is taken from the current level
+	 * the rest of the explosion is copied normally
+	 */
+/*	public Explosion cacheCopy()
+	{	Explosion result = new Explosion();
+		FiresetMap fsm = RoundVariables.level.getFiresetMap();
+		Fireset fs = fsm.getFireset(fireset.getName());
+		result.setFireset(fs);		
 		return result;
 	}*/
 }

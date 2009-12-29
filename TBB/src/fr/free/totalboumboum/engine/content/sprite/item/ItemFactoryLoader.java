@@ -32,17 +32,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
-import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class ItemFactoryLoader extends SpriteFactoryLoader
@@ -67,9 +65,9 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		AnimesLoader.loadAnimes(folder,gesturePack,ItemFactory.getAnimeReplacements());
 		
 		//EXPLOSION
-		Explosion exp = loadExplosionElement(root);
-		if(exp!=null)
-			result.setExplosion(exp); 
+		String explosionName = loadExplosionElement(root);
+		if(explosionName!=null)
+			result.setExplosionName(explosionName);
 		
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
@@ -80,8 +78,8 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// BOMBSET
-		Bombset bombset = RoundVariables.level.getBombset();
-		result.setBombset(bombset);
+		PredefinedColor bombsetColor = null;
+		result.setBombsetColor(bombsetColor);
 
 		// ITEM ABILITIES
 		result.setItemAbilities(itemAbilities,itemProbabilities);

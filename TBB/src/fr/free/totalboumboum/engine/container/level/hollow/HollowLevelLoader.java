@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.container.level.hollow;
  * 
  */
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -34,12 +35,14 @@ import fr.free.totalboumboum.engine.container.level.players.Players;
 import fr.free.totalboumboum.engine.container.level.players.PlayersLoader;
 import fr.free.totalboumboum.engine.container.level.zone.Zone;
 import fr.free.totalboumboum.engine.container.level.zone.ZoneLoader;
+import fr.free.totalboumboum.tools.FileTools;
 
 public class HollowLevelLoader
 {	
 	public static HollowLevel loadHollowLevel(String pack, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HollowLevel result = new HollowLevel();
+		String individualFolder = FileTools.getLevelsPath()+File.separator+pack+File.separator+folder;
 		
 		// level info
 		LevelInfo levelInfo = LevelInfoLoader.loadLevelInfo(pack,folder);
@@ -48,10 +51,10 @@ public class HollowLevelLoader
 		Instance instance = new Instance(levelInfo.getInstance());
 		result.setInstance(instance);
 		// players
-		Players players = PlayersLoader.loadPlayers(folder);
+		Players players = PlayersLoader.loadPlayers(individualFolder);
 		result.setPlayers(players);
 		// zone
-		Zone zone = ZoneLoader.loadZone(folder,levelInfo.getGlobalHeight(),levelInfo.getGlobalWidth());
+		Zone zone = ZoneLoader.loadZone(individualFolder,levelInfo.getGlobalHeight(),levelInfo.getGlobalWidth());
 		result.setZone(zone);
 		
 		return result;

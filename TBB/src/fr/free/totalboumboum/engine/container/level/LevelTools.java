@@ -21,23 +21,11 @@ package fr.free.totalboumboum.engine.container.level;
  * 
  */
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.engine.container.level.players.Players;
-import fr.free.totalboumboum.engine.container.level.players.PlayersSaver;
-import fr.free.totalboumboum.engine.container.level.preview.LevelPreview;
-import fr.free.totalboumboum.engine.container.level.preview.LevelPreviewSaver;
-import fr.free.totalboumboum.engine.container.level.zone.Zone;
-import fr.free.totalboumboum.engine.container.level.zone.ZoneSaver;
-import fr.free.totalboumboum.engine.container.level.zone.ZoneTile;
-import fr.free.totalboumboum.engine.container.theme.Theme;
-import fr.free.totalboumboum.engine.player.PlayerLocation;
-import fr.free.totalboumboum.tools.FileTools;
 
 public class LevelTools
 {	
@@ -46,11 +34,9 @@ public class LevelTools
 	 * in order to help designing new levels
 	 */
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	createClassicLevel(15,15,"temp","level",1);
+	{	//createClassicLevel(15,15,"temp","level",1);
 	}
-
-	private static void createEmptyLevel()
-	
+/*	
 	private static void createClassicLevel(int height, int width, String pack, String level, int border) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// init
 		String folder = FileTools.getLevelsPath()+File.separator+pack+File.separator+level;
@@ -157,4 +143,5 @@ public class LevelTools
 		
 		// create image
 	}
+	*/
 }

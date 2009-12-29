@@ -24,13 +24,12 @@ package fr.free.totalboumboum.game.round;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.io.File;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.container.level.instance.Instance;
 import fr.free.totalboumboum.engine.loop.LocalLoop;
 import fr.free.totalboumboum.gui.tools.MessageDisplayer;
-import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.GameData;
 
 public class RoundVariables
@@ -38,12 +37,10 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE PATH		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static String instanceName;
-	public static String instancePath;
+	public static Instance instance;
 	
-    public static void setInstanceName(String instanceName)
-    {	RoundVariables.instanceName = instanceName;
-    	RoundVariables.instancePath = FileTools.getInstancesPath()+File.separator+instanceName;
+    public static void setInstance(Instance instance)
+    {	RoundVariables.instance = instance;
     }
 
 	/////////////////////////////////////////////////////////////////

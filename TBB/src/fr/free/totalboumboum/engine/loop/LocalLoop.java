@@ -63,10 +63,10 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.ai.AisConfiguration;
 import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.hollow.HollowLevel;
+import fr.free.totalboumboum.engine.container.level.instance.Instance;
 import fr.free.totalboumboum.engine.container.level.players.Players;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -104,24 +104,26 @@ public class LocalLoop extends Loop
 	{	// control
 		systemControl = new SystemControl(this);
 
-		// load level
+		// load level & instance
 		HollowLevel hollowLevel = round.getHollowLevel();
+		Instance instance = hollowLevel.getInstance();
 		hollowLevel.initLevel(this);
 		level = hollowLevel.getLevel();
 		RoundVariables.setLoop(this);
-		hollowLevel.getInstance().loadFiresetMap();
+		instance.loadFiresetMap();
+		instance.loadExplosionSet();
 		loadStepOver();
-		hollowLevel.getInstance().loadBombsetMap();
-		BombsetMap bombsetMap = hollowLevel.getInstance().getBombsetMap();
+		instance.loadBombsetMap();
 		loadStepOver();
-		hollowLevel.getInstance().loadItemset();
+		instance.loadItemset();
 		loadStepOver();
 		hollowLevel.loadTheme();
 		loadStepOver();
-
+		hollowLevel.getInstance().initLinks();
+		
 		// load players : common stuff
-		String baseFolder = RoundVariables.instancePath+File.separator+FileTools.FOLDER_HEROES;
-		HeroFactory base = HeroFactoryLoader.loadHeroFactory(baseFolder,bombsetMap);
+		String baseFolder = FileTools.getInstancesPath()+File.separator+RoundVariables.instance.getName()+File.separator+FileTools.FOLDER_HEROES;
+		HeroFactory base = HeroFactoryLoader.loadHeroFactory(baseFolder);
 //		loadStepOver();		
 		// load players : individual stuff
 		ArrayList<Profile> profiles = round.getProfiles();
@@ -140,7 +142,7 @@ public class LocalLoop extends Loop
 				initialPositions[i] = loc.get(i);
 		}
 		HashMap<String,Integer> items = plyrs.getInitialItems();
-		Itemset itemset = level.getItemset();
+		Itemset itemset = instance.getItemset();
 		Iterator<Profile> i = profiles.iterator();
 		int j=0;
 		while(i.hasNext())
@@ -149,7 +151,8 @@ public class LocalLoop extends Loop
 			Tile tile = level.getTile(pl.getLine(),pl.getCol());
 			// sprite
 			Profile profile = i.next();
-			Player player = new Player(profile,base,bombsetMap,tile);
+			Player player = new Player(profile,base,tile);
+			hollowLevel.getInstance().initLinks();
 			players.add(player);
 			pauseAis.add(false);
 			showAiPaths.add(false);

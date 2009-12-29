@@ -126,6 +126,7 @@ public class XmlTools
 	public static final String EVENT = "event";
 	public static final String EXAEQUO_SHARE = "exaequoShare";
 	public static final String EXPLOSION = "explosion";
+	public static final String EXPLOSIONS = "explosions";
 	public static final String FILE = "file";
 	public static final String FIRE = "fire";
 	public static final String FIRESET = "fireset";
