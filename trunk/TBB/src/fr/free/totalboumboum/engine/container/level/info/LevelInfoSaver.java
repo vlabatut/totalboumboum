@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.container.level.preview;
+package fr.free.totalboumboum.engine.container.level.info;
 
 /*
  * Total Boum Boum
@@ -32,11 +32,12 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class LevelPreviewSaver
+public class LevelInfoSaver
 {	
-	public static void saveLevelPreview(String folder, LevelPreview level) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	public static void saveLevelPreview(String folder, LevelInfo levelInfo) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// build document
-		Element root = saveLevelElement(level);	
+		Element root = saveLevelElement(levelInfo);	
+		
 		// save file
 		String individualFolder = folder;
 		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_XML);
@@ -45,54 +46,54 @@ public class LevelPreviewSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
-	private static Element saveLevelElement(LevelPreview level)
+	private static Element saveLevelElement(LevelInfo levelInfo)
 	{	Element result = new Element(XmlTools.LEVEL);
 		
 		// title
 		Element titleElement = new Element(XmlTools.TITLE);
-		titleElement.setAttribute(XmlTools.VALUE,level.getTitle());
+		titleElement.setAttribute(XmlTools.VALUE,levelInfo.getTitle());
 		result.addContent(titleElement);
 		// author
 		Element authorElement = new Element(XmlTools.AUTHOR);
-		authorElement.setAttribute(XmlTools.VALUE,level.getAuthor());
+		authorElement.setAttribute(XmlTools.VALUE,levelInfo.getAuthor());
 		result.addContent(authorElement);
 		// source
 		Element sourceElement = new Element(XmlTools.SOURCE);
-		sourceElement.setAttribute(XmlTools.VALUE,level.getSource());
+		sourceElement.setAttribute(XmlTools.VALUE,levelInfo.getSource());
 		result.addContent(sourceElement);
 		// preview
 		Element previewElement = new Element(XmlTools.PREVIEW);
-		previewElement.setAttribute(XmlTools.FILE,level.getPreviewFile());
+		previewElement.setAttribute(XmlTools.FILE,levelInfo.getPreview());
 		result.addContent(previewElement);
 	
 		// instance
 		Element instanceElement = new Element(XmlTools.INSTANCE);
-		instanceElement.setAttribute(XmlTools.NAME,level.getInstanceName());
+		instanceElement.setAttribute(XmlTools.NAME,levelInfo.getInstance());
 		result.addContent(instanceElement);
 		// theme
 		Element themeElement = new Element(XmlTools.THEME);
-		themeElement.setAttribute(XmlTools.NAME,level.getThemeName());
+		themeElement.setAttribute(XmlTools.NAME,levelInfo.getTheme());
 		result.addContent(themeElement);
 	
 		// global dimension
 		Element globaldimElement = new Element(XmlTools.GLOBAL_DIMENSION);
-		globaldimElement.setAttribute(XmlTools.HEIGHT,Integer.toString(level.getGlobalHeight()));
-		globaldimElement.setAttribute(XmlTools.WIDTH,Integer.toString(level.getGlobalWidth()));
+		globaldimElement.setAttribute(XmlTools.HEIGHT,Integer.toString(levelInfo.getGlobalHeight()));
+		globaldimElement.setAttribute(XmlTools.WIDTH,Integer.toString(levelInfo.getGlobalWidth()));
 		result.addContent(globaldimElement);
 		// visible dimension
 		Element visibledimElement = new Element(XmlTools.VISIBLE_DIMENSION);
-		visibledimElement.setAttribute(XmlTools.HEIGHT,Integer.toString(level.getVisibleHeight()));
-		visibledimElement.setAttribute(XmlTools.WIDTH,Integer.toString(level.getVisibleWidth()));
+		visibledimElement.setAttribute(XmlTools.HEIGHT,Integer.toString(levelInfo.getVisibleHeight()));
+		visibledimElement.setAttribute(XmlTools.WIDTH,Integer.toString(levelInfo.getVisibleWidth()));
 		result.addContent(visibledimElement);
 		// visible position
 		Element visibleposeElement = new Element(XmlTools.VISIBLE_POSITION);
-		visibleposeElement.setAttribute(XmlTools.UPLINE,Integer.toString(level.getVisiblePositionUpLine()));
-		visibleposeElement.setAttribute(XmlTools.LEFTCOL,Integer.toString(level.getVisiblePositionLeftCol()));
+		visibleposeElement.setAttribute(XmlTools.UPLINE,Integer.toString(levelInfo.getVisiblePositionUpLine()));
+		visibleposeElement.setAttribute(XmlTools.LEFTCOL,Integer.toString(levelInfo.getVisiblePositionLeftCol()));
 		result.addContent(visibleposeElement);
 		// display
 		Element displayElement = new Element(XmlTools.DISPLAY);
-		displayElement.setAttribute(XmlTools.FORCE_ALL,Boolean.toString(level.getForceAll()));
-		displayElement.setAttribute(XmlTools.MAXIMIZE,Boolean.toString(level.getMaximize()));
+		displayElement.setAttribute(XmlTools.FORCE_ALL,Boolean.toString(levelInfo.getForceAll()));
+		displayElement.setAttribute(XmlTools.MAXIMIZE,Boolean.toString(levelInfo.getMaximize()));
 		result.addContent(displayElement);
 
 		return result;
