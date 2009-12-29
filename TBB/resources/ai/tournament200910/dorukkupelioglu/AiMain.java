@@ -21,7 +21,7 @@ package tournament200910.dorukkupelioglu;
  * 
  */
 
-import tournament200910.dorukkupelioglu.v5.DorukKupelioglu;
+import tournament200910.dorukkupelioglu.v5_2.DorukKupelioglu;
 import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**
