@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.container.level.info;
 
+import java.io.Serializable;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -21,8 +23,9 @@ package fr.free.totalboumboum.engine.container.level.info;
  * 
  */
 
-public class LevelInfo
-{	
+public class LevelInfo implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	/////////////////////////////////////////////////////////////////
 	// FOLDER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
