@@ -340,7 +340,8 @@ for(ArrayList<Integer> list: permutations)
 	{	// init
 		List<List<Integer>> progression = new ArrayList<List<Integer>>(); // list of qualified players for each part
 		HashMap<Integer,int[]> finalRanking = new HashMap<Integer, int[]>();
-		
+if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 && distribution.get(3)==3)
+	System.out.println();
 		// check compatibility with matches
 		int result = simulatePlayerProgression(distribution,progression,finalRanking);
 		
@@ -363,6 +364,7 @@ for(ArrayList<Integer> list: permutations)
 					i++;
 				}
 			}
+			result = count;
 		}
 		
 		return result;
@@ -406,8 +408,11 @@ for(ArrayList<Integer> list: permutations)
 				
 				// first leg only
 				if(legNumber==0)
-				{	qualifiedCount = distribution.get(partNumber); //use the initial distribution
-					if(!matchAllowed.contains(qualifiedCount))
+				{	int prevInvolved = distribution.get(partNumber); //use the initial distribution
+					qualifiedCount = players.size();
+					if(!matchAllowed.contains(prevInvolved))
+						result = -1;
+					else if(prevInvolved>qualifiedCount)
 						result = -1;
 					else
 					{	list.set(partNumber,qualifiedCount);
