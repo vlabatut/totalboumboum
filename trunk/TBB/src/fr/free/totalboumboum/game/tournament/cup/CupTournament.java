@@ -22,6 +22,7 @@ package fr.free.totalboumboum.game.tournament.cup;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -122,7 +123,7 @@ public class CupTournament extends AbstractTournament
 		{	// init
 			List<List<Integer>> progression = new ArrayList<List<Integer>>(); // list of qualified players for each part
 			List<List<List<Integer>>> indivualProgression = new ArrayList<List<List<Integer>>>(); // same thing except players are distinguished, and not just counted 
-			HashMap<Integer,int[]> finalRanking = new HashMap<Integer, int[]>(); //final cup rankings
+			HashMap<Integer,List<int[]>> finalRanking = new HashMap<Integer,List<int[]>>(); //final cup rankings
 			
 			// process players general progression (counts only, no details)
 			simulatePlayerProgression(firstLegPlayersdistribution,progression,finalRanking);
@@ -141,14 +142,80 @@ public class CupTournament extends AbstractTournament
 			}
 			
 			// affect final ranks
-			{	int indexLeg = progression.size()-1;
-				List<List<Integer>> partsList = indivualProgression.get(indexLeg);
+			{	// defined ranks
+				// get the set of parts ranks (no matter if some ranks are missing or if one rank appears several time)
+				List<Integer> tempList = new ArrayList<Integer>(finalRanking.keySet());
+				// sort them
+				Collections.sort(tempList);
+				// process the parts corresponding to each rank
+				for(int index: tempList)
+				{	// get the parts for the considered rank
+					List<int[]> tablist = finalRanking.get(index);
+					// process them position by position (and not tab by tab)
+					boolean done[]= new boolean[tablist.size()];
+					Arrays.fill(done,false);
+					boolean alldone = false;
+					// idx is the current position
+					int idx = 0;
+					while(!alldone)
+					{	int prevCount = generalRank;
+						// for all tabs in tablist
+						for(int tabid=0;tabid<tablist.size();tabid++)
+						{	if(!done[tabid])
+							{	int[] tp = tablist.get(tabid);
+								// if enough players were qualified, the rank is set
+								if(idx<tp[0])
+								{	// set the players final ranks
+									List<Integer> prog = indivualProgression.get(tp[2]).get(tp[3]);
+									prog.set(idx,prevCount);
+									generalRank++;
+								}
+								// else we stop for this part
+								else
+									done[tabid] = true;								
+								//{qualifiedCount,players.size(),legNumber,partNumber};						
+							}
+						}
+						// pass to the next position
+						idx++;
+						// update alldone
+						alldone = true;
+						for(int i=0;i<done.length;i++)
+							alldone = alldone && done[i];
+					}
+				}
+				
+				// undefined ranks in last leg
+				int lastLegNbr = indivualProgression.size()-1;
+				CupLeg lastLeg = legs.get(lastLegNbr);
+				List<List<Integer>> partsList = indivualProgression.get(lastLegNbr);
+				for(int i=0;i<partsList.size();i++)
+				{	List<Integer> playersList = partsList.get(i);
+					CupPart part = lastLeg.getPart(i);
+					if(part.getRank()==0)
+					{	for(int j=0;j<playersList.size();j++)
+						{	if(playersList.get(j)==0)
+							{	playersList.set(j,generalRank);
+								generalRank++;
+							}
+						}
+					}
+				}
+			}
+			
+			
+			// affect final ranks
+			{	int prevLegRank = -1;
 				// defined ranks
-				int index = 1;
-				int[] tp = finalRanking.get(index);
-				while(tp!=null)
-				{	int partIndex = tp[2];
-					int playerCount = tp[0];
+				int index = 0;
+				while(index<finalRanking.size())
+				{	int prevGeneralRank = generalRank;
+					int[] tp = finalRanking.get(index);
+					int partRank = tp[0];
+					int playerCount = tp[1];
+					int legIndex = tp[3];
+					int partIndex = tp[4];
+					List<List<Integer>> partsList = indivualProgression.get(legIndex);
 					List<Integer> playersList = partsList.get(partIndex);
 					for(int i=0;i<playerCount;i++)
 					{	playersList.set(i,generalRank);
@@ -158,11 +225,13 @@ public class CupTournament extends AbstractTournament
 					tp = finalRanking.get(index);
 				}
 				// undefined ranks
-				for(List<Integer> playersList: partsList)
-				{	for(int i=0;i<playersList.size();i++)
-					{	if(playersList.get(i)==0)
-						{	playersList.set(i,generalRank);
-							generalRank++;
+				for(List<List<Integer>> partsList: indivualProgression)
+				{	for(List<Integer> playersList: partsList)
+					{	for(int i=0;i<playersList.size();i++)
+						{	if(playersList.get(i)==0)
+							{	playersList.set(i,generalRank);
+								generalRank++;
+							}
 						}
 					}
 				}
@@ -339,30 +408,40 @@ for(ArrayList<Integer> list: permutations)
 	private int checkPlayerDistribution(List<Integer> distribution)
 	{	// init
 		List<List<Integer>> progression = new ArrayList<List<Integer>>(); // list of qualified players for each part
-		HashMap<Integer,int[]> finalRanking = new HashMap<Integer, int[]>();
+		HashMap<Integer,List<int[]>> finalRanking = new HashMap<Integer,List<int[]>>();
 if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 && distribution.get(3)==3)
 	System.out.println();
 		// check compatibility with matches
 		int result = simulatePlayerProgression(distribution,progression,finalRanking);
 		
 		// process the highest position for which a player is missing
-		// (we want no hole in the final rankings, or at least we want it to be the downest)
+		// (we want no hole in the final rankings, or at least we want it to be the lowest)
 		if(result!=-1)
-		{	boolean goOn = true;
-			int i=1;
-			int count = 1;
+		{	int count = 1;
+			// get the set of parts ranks (no matter if some ranks are missing or if one rank appears several time)
+			List<Integer> tempList = new ArrayList<Integer>(finalRanking.keySet());
+			// sort them
+			Collections.sort(tempList);
+			// process the parts corresponding to each rank
+			Iterator<Integer> it = tempList.iterator();
+			boolean goOn = it.hasNext();
 			while(goOn)
-			{	int[] tp = finalRanking.get(i);
-				if(tp==null)
-					goOn = false;
-				else
-				{	count = count + tp[0];
+			{	int index = it.next();
+				// get the parts for the considered rank
+				List<int[]> tablist = finalRanking.get(index);
+				// process each one of them
+				Iterator<int[]> it2 = tablist.iterator();
+				while(it2.hasNext())
+				{	int[] tp = it2.next();
+					// add the number of qualified players
+					count = count + tp[0];
+					// if it is less than the number of accepted players : the main count is over for the remaining ranks
 					if(tp[0]<tp[1])
-					{	result = count;
 						goOn = false;
-					}
-					i++;
+					// but the count continue for the rest of this rank
 				}
+				// stop when all ranks are processed or when some player is missing
+				goOn = goOn && it.hasNext();
 			}
 			result = count;
 		}
@@ -387,7 +466,7 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 	 * @param finalRanking
 	 * @return
 	 */
-	private int simulatePlayerProgression(List<Integer> distribution, List<List<Integer>> progression, HashMap<Integer,int[]> finalRanking)
+	private int simulatePlayerProgression(List<Integer> distribution, List<List<Integer>> progression, HashMap<Integer,List<int[]>> finalRanking)
 	{	int result = profiles.size();
 		
 		Iterator<CupLeg> itLeg = legs.iterator();
@@ -422,8 +501,13 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 						// is the part final?
 						int partRank = part.getRank();
 						if(partRank>0)
-						{	int tp[] = {qualifiedCount,players.size(),partNumber};
-							finalRanking.put(partRank,tp);
+						{	int tp[] = {qualifiedCount,players.size(),legNumber,partNumber};
+							List<int[]> tempList = finalRanking.get(partRank);
+							if(tempList==null)
+							{	tempList = new ArrayList<int[]>();
+								finalRanking.put(partRank,tempList);
+							}	
+							tempList.add(tp);
 						}
 					}
 				}
@@ -448,8 +532,13 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 						// is the part final?
 						int partRank = part.getRank();
 						if(partRank>0)
-						{	int tp[] = {qualifiedCount,players.size(),partNumber};
-							finalRanking.put(partRank,tp);
+						{	int tp[] = {qualifiedCount,players.size(),legNumber,partNumber};
+							List<int[]> tempList = finalRanking.get(partRank);
+							if(tempList==null)
+							{	tempList = new ArrayList<int[]>();
+								finalRanking.put(partRank,tempList);
+							}	
+							tempList.add(tp);
 						}
 					}
 				}
