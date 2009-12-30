@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
@@ -367,6 +368,36 @@ public class CupPart implements Serializable
 			}
 		}
 
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SIMULATE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** 
+	 * simulate player progression in a part from fiest leg
+	 * receiving a number qualified of players
+	 */
+	public boolean simulatePlayerProgression(int qualified)
+	{	// init
+		boolean result = true;
+		Set<Integer> matchAllowed = match.getAllowedPlayerNumbers();
+		int qualifiedAllowed = players.size();
+		
+		if(!matchAllowed.contains(qualified))
+			result = false;
+		else if(qualified>qualifiedAllowed)
+			result = false;
+		else
+		{	// mark players
+			for(int i=0;i<players.size();i++)
+				players.get(i).setUsed(i<qualified);
+			// is the part final?
+			if(rank>0)
+			{	for(int i=0;i<players.size();i++)
+					players.get(i).setUsedRank(i)
+			}
+		}
 		return result;
 	}
 }

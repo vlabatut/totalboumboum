@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 /*
@@ -175,5 +176,18 @@ public class CupLeg implements Serializable
 
 	public int getNumber()
 	{	return number;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SIMULATE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void simulatePlayerProgression(List<Integer> distribution)
+	{	for(int i=0;i<distribution.size();i++)
+		{	CupPart part = parts.get(i);
+			int nbr = distribution.get(i);
+			part.simulatePlayerProgression(nbr);
+		}
+			
+		
 	}
 }

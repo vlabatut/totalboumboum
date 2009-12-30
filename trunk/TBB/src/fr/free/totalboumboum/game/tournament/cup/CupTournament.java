@@ -187,11 +187,11 @@ public class CupTournament extends AbstractTournament
 				
 				// undefined ranks in last leg
 				int lastLegNbr = indivualProgression.size()-1;
-				CupLeg lastLeg = legs.get(lastLegNbr);
+//				CupLeg lastLeg = legs.get(lastLegNbr);
 				List<List<Integer>> partsList = indivualProgression.get(lastLegNbr);
 				for(int i=0;i<partsList.size();i++)
 				{	List<Integer> playersList = partsList.get(i);
-					CupPart part = lastLeg.getPart(i);
+//					CupPart part = lastLeg.getPart(i);
 					if(part.getRank()==0)
 					{	for(int j=0;j<playersList.size();j++)
 						{	if(playersList.get(j)==0)

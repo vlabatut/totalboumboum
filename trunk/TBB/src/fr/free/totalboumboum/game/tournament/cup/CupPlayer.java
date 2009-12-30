@@ -56,7 +56,8 @@ public class CupPlayer implements Serializable
 	// USED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean used;
-
+	private int usedRank;
+	
 	public void setUsed(boolean used)
 	{	this.used = used;
 	}
@@ -65,4 +66,11 @@ public class CupPlayer implements Serializable
 	{	return used;
 	}
 	
+	public void setUsedRank(int usedRank)
+	{	this.usedRank = usedRank;
+	}
+
+	public int getUsedRank()
+	{	return usedRank;
+	}
 }
