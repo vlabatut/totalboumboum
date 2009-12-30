@@ -11,6 +11,6 @@
 	<globalDimension height="15" width="15" />
 	<visibleDimension height="14" width="14" />
 	<visiblePosition upLine="1" leftCol="1" />
-	<display forceAll="true" maximize="true" />
+	<display forceAll="false" maximize="true" />
 </level>
 
