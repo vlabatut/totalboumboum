@@ -22,7 +22,6 @@ package fr.free.totalboumboum.game.tournament.cup;
  */
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -120,7 +119,11 @@ public class CupTournament extends AbstractTournament
 			Collections.shuffle(profiles,random);
 		}
 		else if(sortPlayers==CupPlayerSort.SEEDS)
-		{	// init
+		{	CupLeg firstLeg = legs.get(0);
+			firstLeg.simulatePlayerProgression();
+			simulatePlayerFinalRank();
+/*			
+			// init
 			List<List<Integer>> progression = new ArrayList<List<Integer>>(); // list of qualified players for each part
 			List<List<List<Integer>>> indivualProgression = new ArrayList<List<List<Integer>>>(); // same thing except players are distinguished, and not just counted 
 			HashMap<Integer,List<int[]>> finalRanking = new HashMap<Integer,List<int[]>>(); //final cup rankings
@@ -289,6 +292,35 @@ public class CupTournament extends AbstractTournament
 					Profile profile = orderedProfile.get(index);
 					profiles.add(profile);
 				}
+			}*/
+			
+			// use first leg detailed progression to sort profiles list
+			List<Profile> orderedProfile = new ArrayList<Profile>(profiles);
+			Collections.sort(orderedProfile,new Comparator<Profile>()
+			{	@Override
+				public int compare(Profile o1, Profile o2)
+				{	int id1 = o1.getId();
+					int id2 = o2.getId();
+					RankingService rankingService = GameStatistics.getRankingService();
+					int r1 = rankingService.getPlayerRank(id1);
+					if(r1<0)
+						r1 = Integer.MAX_VALUE;
+					int r2 = rankingService.getPlayerRank(id2);
+					if(r2<0)
+						r2 = Integer.MAX_VALUE;
+					int result = r1-r2;
+					return result;
+				}
+			});
+			profiles.clear();
+			for(CupPart part: firstLeg.getParts())
+			{	for(CupPlayer player: part.getPlayers())
+				{	if(player.getUsed())
+					{	int index = player.getSimulatedFinalRank()-1;
+						Profile profile = orderedProfile.get(index);
+						profiles.add(profile);
+					}
+				}
 			}
 		}
 	}
@@ -407,11 +439,25 @@ for(ArrayList<Integer> list: permutations)
 	 */
 	private int checkPlayerDistribution(List<Integer> distribution)
 	{	// init
-		List<List<Integer>> progression = new ArrayList<List<Integer>>(); // list of qualified players for each part
-		HashMap<Integer,List<int[]>> finalRanking = new HashMap<Integer,List<int[]>>();
+//		List<List<Integer>> progression = new ArrayList<List<Integer>>(); // list of qualified players for each part
+//		HashMap<Integer,List<int[]>> finalRanking = new HashMap<Integer,List<int[]>>();
 if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 && distribution.get(3)==3)
 	System.out.println();
 		// check compatibility with matches
+		CupLeg firstLeg = legs.get(0);
+		int result = profiles.size();
+		boolean res = firstLeg.simulatePlayerProgression();
+		if(res)
+		{	simulatePlayerFinalRank();
+			List<CupPart> parts = getAllParts();
+			for(CupPart part: parts)
+			{	int m = part.getSimulatedFinalRankMax();
+				if(m<result)
+					result = m;
+			}
+		}
+		
+/*		
 		int result = simulatePlayerProgression(distribution,progression,finalRanking);
 		
 		// process the highest position for which a player is missing
@@ -445,7 +491,7 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 			}
 			result = count;
 		}
-		
+*/		
 		return result;
 	}
 	
@@ -466,7 +512,7 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 	 * @param finalRanking
 	 * @return
 	 */
-	private int simulatePlayerProgression(List<Integer> distribution, List<List<Integer>> progression, HashMap<Integer,List<int[]>> finalRanking)
+/*	private int simulatePlayerProgression(List<Integer> distribution, List<List<Integer>> progression, HashMap<Integer,List<int[]>> finalRanking)
 	{	int result = profiles.size();
 		
 		Iterator<CupLeg> itLeg = legs.iterator();
@@ -547,11 +593,10 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 		
 		return result;
 	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	@Override
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();		
@@ -591,12 +636,15 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// SIMULATE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void simulatePlayerFinalRank()
 	{	List<CupPart> remainingParts = getAllParts();
 		int totalPartCount = remainingParts.size();
 		int partRank = 1;
 		int playerRank = 1;
-		while(partRank<=totalPartCount && !remainingParts.isEmpty())
+		while(!remainingParts.isEmpty())
 		{	// init list of parts with this rank
 			List<CupPart> templist = new ArrayList<CupPart>();
 			Iterator<CupPart> it = remainingParts.iterator();
@@ -626,10 +674,11 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 			while(count>0);
 			
 			partRank++;
+			if(partRank>totalPartCount)
+				partRank = 0;
 		}
 	}
 
-	
 	/////////////////////////////////////////////////////////////////
 	// LEGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
