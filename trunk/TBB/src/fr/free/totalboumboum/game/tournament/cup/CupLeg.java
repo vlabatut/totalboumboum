@@ -181,13 +181,46 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// SIMULATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void simulatePlayerProgression(List<Integer> distribution)
-	{	for(int i=0;i<distribution.size();i++)
+	public boolean simulatePlayerProgression(List<Integer> distribution)
+	{	boolean result = true;
+		
+		// this leg parts
+		int i = 0;
+		while(i<distribution.size() && result)
 		{	CupPart part = parts.get(i);
 			int nbr = distribution.get(i);
-			part.simulatePlayerProgression(nbr);
+			result = part.simulatePlayerProgression(nbr);
+			i++;
 		}
-			
+	
+		// next leg
+		if(result)
+		{	CupLeg nextLeg = getNextLeg();
+			if(nextLeg!=null)
+				nextLeg.simulatePlayerProgression();
+		}
 		
+		return result;
+	}
+	
+	public boolean simulatePlayerProgression()
+	{	boolean result = true;
+		
+		// this leg parts
+		int i = 0;
+		while(i<parts.size() && result)
+		{	CupPart part = parts.get(i);
+			result = part.simulatePlayerProgression();
+			i++;
+		}
+	
+		// next leg
+		if(result)
+		{	CupLeg nextLeg = getNextLeg();
+			if(nextLeg!=null)
+				nextLeg.simulatePlayerProgression();
+		}
+		
+		return result;
 	}
 }
