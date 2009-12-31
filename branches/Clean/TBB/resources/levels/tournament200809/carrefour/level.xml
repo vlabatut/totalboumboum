@@ -8,11 +8,11 @@
 	<preview file="preview.jpg" />
 
 	<instance name="superbomberman1" />
-	<theme name="gsu_regular"/>
+	<theme name="tournament2"/>
 
-	<globalDimension width="11" height="11" />
-	<visibleDimension width="11" height="11" />
-	<visiblePosition leftCol="0" upLine="0" />
+	<globalDimension height="11" width="11" />
+	<visibleDimension height="11" width="11" />
+	<visiblePosition upLine="0" leftCol="0" />
 	<display forceAll="false" maximize="true" />
 	
 </level>

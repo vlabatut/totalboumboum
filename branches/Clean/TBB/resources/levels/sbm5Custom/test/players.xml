@@ -4,7 +4,7 @@
 	
 	<locations>
 		<case players="1">
-			<location player="0" col="8" line="8" />
+			<location player="0" line="08" col="08" />
 		</case>
 	</locations>
 	

@@ -4,22 +4,22 @@
 	
 	<locations>
 		<case players="1">
-			<location player="0" col="6" line="5" />
+			<location player="0" line="5" col="6" />
 		</case>
 		<case players="2">
-			<location player="0" col="6" line="5" />
-			<location player="1" col="10" line="9" />
+			<location player="0" line="05" col="06" />
+			<location player="1" line="09" col="10" />
 		</case>
 		<case players="3">
-			<location player="0" col="6" line="5" />
-			<location player="1" col="10" line="5" />
-			<location player="2" col="10" line="9" />
+			<location player="0" line="05" col="06" />
+			<location player="1" line="05" col="10" />
+			<location player="2" line="09" col="10" />
 		</case>
 		<case players="4">
-			<location player="0" col="6" line="5" />
-			<location player="1" col="10" line="5" />
-			<location player="2" col="6" line="9" />
-			<location player="3" col="10" line="9" />
+			<location player="0" line="05" col="06" />
+			<location player="1" line="05" col="10" />
+			<location player="2" line="09" col="06" />
+			<location player="3" line="09" col="10" />
 		</case>
 	</locations>
 	
