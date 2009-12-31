@@ -381,7 +381,7 @@ public class CupPart implements Serializable
 	}
 	
 	/** 
-	 * simulate player progression in a part from fiest leg
+	 * simulate player progression in a part from first leg
 	 * receiving a number qualified of players
 	 */
 	public boolean simulatePlayerProgression(int qualified)
@@ -413,6 +413,9 @@ public class CupPart implements Serializable
 		return result;
 	}
 
+	/** 
+	 * simulate player progression in a part from a leg which is not the first one 
+	 */
 	public boolean simulatePlayerProgression()
 	{	// init
 		boolean result = true;
@@ -441,6 +444,12 @@ public class CupPart implements Serializable
 		return result;
 	}
 	
+	/**
+	 * returns the player corresponding to the specified local rank
+	 * in the simulated cup (or null if no player has this rank in this part)
+	 * @param rank
+	 * @return
+	 */
 	public CupPlayer getPlayerSimulatedRank(int rank)
 	{	CupPlayer result = null;
 		Iterator<CupPlayer> it = players.iterator();
@@ -452,6 +461,13 @@ public class CupPart implements Serializable
 		return result;
 	}
 	
+	/**
+	 * process the simulated final rank (ie rank for the whole cup)
+	 * for each used players in this part
+	 * @param localRank
+	 * @param finalRank
+	 * @return
+	 */
 	public boolean simulatePlayerFinalRank(int localRank, int finalRank)
 	{	boolean result = false;
 		
@@ -460,6 +476,29 @@ public class CupPart implements Serializable
 		{	result = true;
 			player.setSimulatedFinalRank(finalRank);
 		}
+		
+		return result;
+	}
+	
+	/**
+	 * returns the final rank of the last used player
+	 * or Integer.MAX_VALUE if all players are used  
+	 * @return
+	 */
+	public int getSimulatedFinalRankMax()
+	{	int result = 0;
+		
+		if(simulatedCount!=players.size())
+		{	for(CupPlayer player: players)
+			{	if(player.getUsed())
+				{	int finalRank = player.getSimulatedFinalRank();
+					if(finalRank>result)
+						result = finalRank;
+				}
+			}
+		}
+		else
+			result = Integer.MAX_VALUE;
 		
 		return result;
 	}
