@@ -9,7 +9,7 @@
 	<theme name="tournament3" />
 	
 	<globalDimension height="15" width="15" />
-	<visibleDimension height="14" width="14" />
+	<visibleDimension height="13" width="13" />
 	<visiblePosition upLine="1" leftCol="1" />
 	<display forceAll="false" maximize="true" />
 </level>
