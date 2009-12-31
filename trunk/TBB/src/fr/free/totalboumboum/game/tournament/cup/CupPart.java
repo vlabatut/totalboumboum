@@ -374,6 +374,12 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// SIMULATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private int simulatedCount;
+	
+	public int getSimulatedCount()
+	{	return simulatedCount;		
+	}
+	
 	/** 
 	 * simulate player progression in a part from fiest leg
 	 * receiving a number qualified of players
@@ -383,17 +389,25 @@ public class CupPart implements Serializable
 		boolean result = true;
 		Set<Integer> matchAllowed = match.getAllowedPlayerNumbers();
 		int qualifiedAllowed = players.size();
+		simulatedCount = 0;
 		
 		if(!matchAllowed.contains(qualified))
 			result = false;
 		else if(qualified>qualifiedAllowed)
 			result = false;
 		else
-		{	// mark players
+		{	simulatedCount = qualified;
+			// mark players
 			for(int i=0;i<players.size();i++)
 			{	CupPlayer player = players.get(i);
-				player.setUsed(i<qualified);
-				player.setUsedRank(0);
+				if(i<qualified)
+				{	player.setUsed(true);
+					player.setSimulatedRank(simulatedCount);
+				}
+				else
+				{	player.setUsed(false);
+					player.setSimulatedRank(0);				
+				}
 			}
 		}
 		return result;
@@ -403,29 +417,50 @@ public class CupPart implements Serializable
 	{	// init
 		boolean result = true;
 		Set<Integer> matchAllowed = match.getAllowedPlayerNumbers();
-		int qualifiedAllowed = players.size();
 		
-		// qualified
-		int qualified = 0;
+		simulatedCount = 0;
 		CupLeg previousLeg = getTournament().getLeg(number-1);
 		for(CupPlayer player: players)
 		{	int prevPartNbr = player.getPart();
 			int prevRank = player.getRank();
-			previousLeg.getPart(prevPartNbr).getPlayer(prevRank);
-		}
-		
-		if(!matchAllowed.contains(qualified))
-			result = false;
-		else if(qualified>qualifiedAllowed)
-			result = false;
-		else
-		{	// mark players
-			for(int i=0;i<players.size();i++)
-			{	CupPlayer player = players.get(i);
-				player.setUsed(i<qualified);
-				player.setUsedRank(0);
+			CupPlayer prevPlayer = previousLeg.getPart(prevPartNbr).getPlayerSimulatedRank(prevRank);
+			if(prevPlayer==null)
+			{	player.setUsed(false);
+				player.setSimulatedRank(0);				
+			}
+			else
+			{	player.setUsed(true);
+				simulatedCount++;
+				player.setSimulatedRank(simulatedCount);
 			}
 		}
+		
+		if(!matchAllowed.contains(simulatedCount))
+			result = false;
+
+		return result;
+	}
+	
+	public CupPlayer getPlayerSimulatedRank(int rank)
+	{	CupPlayer result = null;
+		Iterator<CupPlayer> it = players.iterator();
+		while(result==null && it.hasNext())
+		{	CupPlayer player = it.next();
+			if(player.getSimulatedRank()==rank)
+				result = player;
+		}
+		return result;
+	}
+	
+	public boolean simulatePlayerFinalRank(int localRank, int finalRank)
+	{	boolean result = false;
+		
+		CupPlayer player = getPlayerSimulatedRank(localRank);
+		if(player!=null)
+		{	result = true;
+			player.setSimulatedFinalRank(finalRank);
+		}
+		
 		return result;
 	}
 }

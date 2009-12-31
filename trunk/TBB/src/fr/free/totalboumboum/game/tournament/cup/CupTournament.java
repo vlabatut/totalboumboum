@@ -591,6 +591,45 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 		return result;
 	}
 
+	public void simulatePlayerFinalRank()
+	{	List<CupPart> remainingParts = getAllParts();
+		int totalPartCount = remainingParts.size();
+		int partRank = 1;
+		int playerRank = 1;
+		while(partRank<=totalPartCount && !remainingParts.isEmpty())
+		{	// init list of parts with this rank
+			List<CupPart> templist = new ArrayList<CupPart>();
+			Iterator<CupPart> it = remainingParts.iterator();
+			while(it.hasNext())
+			{	CupPart part = it.next();
+				if(part.getRank()==partRank)
+				{	templist.add(part);
+					it.remove();
+				}
+			}
+			// process players ranks
+			int count = 0;
+			int localRank = 1;
+			do
+			{	it = templist.iterator();
+				while(it.hasNext())
+				{	CupPart part = it.next();
+					boolean over = !part.simulatePlayerFinalRank(localRank,playerRank);
+					if(over)
+						it.remove();
+					else
+						count ++;
+				}
+				playerRank = playerRank + count;
+				localRank++;
+			}
+			while(count>0);
+			
+			partRank++;
+		}
+	}
+
+	
 	/////////////////////////////////////////////////////////////////
 	// LEGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -612,6 +651,23 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 	
 	public CupLeg getCurrentLeg()
 	{	return currentLeg;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PARTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public int getTotalPartCount()
+	{	int result = 0;
+		for(CupLeg leg: legs)
+			result = result + leg.getParts().size();
+		return result;	
+	}
+
+	public List<CupPart> getAllParts()
+	{	List<CupPart> result = new ArrayList<CupPart>();
+		for(CupLeg leg: legs)
+			result.addAll(leg.getParts());
+		return result;	
 	}
 
 	/////////////////////////////////////////////////////////////////
