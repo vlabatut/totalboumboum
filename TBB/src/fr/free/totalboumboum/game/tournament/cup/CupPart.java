@@ -391,11 +391,39 @@ public class CupPart implements Serializable
 		else
 		{	// mark players
 			for(int i=0;i<players.size();i++)
-				players.get(i).setUsed(i<qualified);
-			// is the part final?
-			if(rank>0)
-			{	for(int i=0;i<players.size();i++)
-					players.get(i).setUsedRank(i)
+			{	CupPlayer player = players.get(i);
+				player.setUsed(i<qualified);
+				player.setUsedRank(0);
+			}
+		}
+		return result;
+	}
+
+	public boolean simulatePlayerProgression()
+	{	// init
+		boolean result = true;
+		Set<Integer> matchAllowed = match.getAllowedPlayerNumbers();
+		int qualifiedAllowed = players.size();
+		
+		// qualified
+		int qualified = 0;
+		CupLeg previousLeg = getTournament().getLeg(number-1);
+		for(CupPlayer player: players)
+		{	int prevPartNbr = player.getPart();
+			int prevRank = player.getRank();
+			previousLeg.getPart(prevPartNbr).getPlayer(prevRank);
+		}
+		
+		if(!matchAllowed.contains(qualified))
+			result = false;
+		else if(qualified>qualifiedAllowed)
+			result = false;
+		else
+		{	// mark players
+			for(int i=0;i<players.size();i++)
+			{	CupPlayer player = players.get(i);
+				player.setUsed(i<qualified);
+				player.setUsedRank(0);
 			}
 		}
 		return result;
