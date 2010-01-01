@@ -517,10 +517,12 @@ public class CupPart implements Serializable
 	{	int result = 0;
 		
 		List<Profile> prfls = ranks.getProfilesFromRank(localRank);
-		for(Profile profile: prfls)
-		{	CupPlayer player = getPlayerForProfile(profile);
-			result ++;
-			player.setActualFinalRank(finalRank);
+		if(prfls!=null)
+		{	for(Profile profile: prfls)
+			{	CupPlayer player = getPlayerForProfile(profile);
+				result ++;
+				player.setActualFinalRank(finalRank);
+			}
 		}
 		
 		return result;

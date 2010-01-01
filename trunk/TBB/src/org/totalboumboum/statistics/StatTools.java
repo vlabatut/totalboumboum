@@ -26,7 +26,9 @@ import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.statistics.glicko2.Glicko2Loader;
 import org.totalboumboum.statistics.glicko2.Glicko2Saver;
+import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.OverallStatsLoader;
 import org.totalboumboum.statistics.overall.OverallStatsSaver;
 import org.totalboumboum.statistics.overall.PlayerStats;
@@ -35,7 +37,7 @@ import org.xml.sax.SAXException;
 public class StatTools
 {	
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	//initAllStats();
+	{	initAllStats();
 		//reinitOverallStatsForPlayer(0);
 		exportAllStats();
 	}
@@ -69,21 +71,21 @@ public class StatTools
 	public static void exportAllStats() throws IOException, ClassNotFoundException
 	{	// load
 		HashMap<Integer,PlayerStats> playersStats = OverallStatsLoader.loadOverallStatistics();
-		
+		RankingService glicko2Stats = Glicko2Loader.loadGlicko2Statistics();
 		
 		// export
 		OverallStatsSaver.exportOverallStatistics(playersStats);
-		
+		Glicko2Saver.exportGlicko2Statistics(glicko2Stats);
 	}
 	
 	public static void importAllStats() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// import
 		HashMap<Integer,PlayerStats> playersStats = OverallStatsLoader.importOverallStatistics();
-		
-		
+		RankingService glicko2Stats = Glicko2Loader.importGlicko2Statistics();
+			
 		// save
 		OverallStatsSaver.saveOverallStatistics(playersStats);
-		
+		Glicko2Saver.saveGlicko2Statistics(glicko2Stats);		
 	}
 
 }

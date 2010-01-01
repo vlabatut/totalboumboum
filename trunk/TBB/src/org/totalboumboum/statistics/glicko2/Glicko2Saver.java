@@ -23,9 +23,12 @@ package org.totalboumboum.statistics.glicko2;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.SortedSet;
 
@@ -38,7 +41,6 @@ import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.glicko2.jrs.ResultsBasedRankingService;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
-
 
 public class Glicko2Saver
 {	private static final boolean verbose = false;
@@ -102,5 +104,23 @@ public class Glicko2Saver
 		// save the rankings
 		saveGlicko2Statistics(result);
 		return result;
+	}
+
+	/**
+	 * export glicko2 stats as text (for stats maintenance through classes changes)
+	 */
+	public static void exportGlicko2Statistics(RankingService rankingService) throws FileNotFoundException
+	{	// open the file
+		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_TEXT;
+		File file = new File(path);
+		FileOutputStream fileOut = new FileOutputStream(file);
+		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
+		OutputStreamWriter outSW = new OutputStreamWriter(outBuff);
+		PrintWriter writer = new PrintWriter(outSW);
+		
+		// write data
+		rankingService.exportToText(writer);
+		
+		writer.close();
 	}
 }

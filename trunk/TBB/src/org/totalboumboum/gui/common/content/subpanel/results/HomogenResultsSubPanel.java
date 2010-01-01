@@ -201,10 +201,10 @@ public class HomogenResultsSubPanel extends TableSubPanel
 				if(showRank)
 				{	int rank = orderedPlayers.getRankForProfile(profile);
 					String text;
-					if(rank==-1)
-						text = "-";
-					else
+					if(rank>0)
 						text = Integer.toString(rank);
+					else
+						text = "-";
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
@@ -335,6 +335,13 @@ public class HomogenResultsSubPanel extends TableSubPanel
 			// col widths
 			nameWidth = getDataWidth() - (cols-1)*GuiTools.subPanelMargin;
 			col = 0;
+			if(showRank) 
+			{	setColSubMinWidth(col,rankWidth);
+				setColSubPrefWidth(col,rankWidth);
+				setColSubMaxWidth(col,rankWidth);
+				nameWidth = nameWidth - rankWidth;
+				col++;
+			}
 			if(showPortrait) 
 			{	setColSubMinWidth(col,portraitWidth);
 				setColSubPrefWidth(col,portraitWidth);
@@ -382,13 +389,6 @@ public class HomogenResultsSubPanel extends TableSubPanel
 				setColSubPrefWidth(col,pointsWidth);
 				setColSubMaxWidth(col,pointsWidth);
 				nameWidth = nameWidth - pointsWidth;
-				col++;
-			}
-			if(showRank) 
-			{	setColSubMinWidth(col,rankWidth);
-				setColSubPrefWidth(col,rankWidth);
-				setColSubMaxWidth(col,rankWidth);
-				nameWidth = nameWidth - rankWidth;
 				col++;
 			}
 			if(showName) 

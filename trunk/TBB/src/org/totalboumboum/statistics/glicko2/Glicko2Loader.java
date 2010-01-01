@@ -24,12 +24,15 @@ package org.totalboumboum.statistics.glicko2;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.util.Scanner;
 
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
+import org.totalboumboum.statistics.glicko2.jrs.ResultsBasedRankingService;
 import org.totalboumboum.tools.files.FileTools;
-
 
 public class Glicko2Loader
 {
@@ -46,5 +49,23 @@ public class Glicko2Loader
 		in.close();
 		return result;		
 		// TODO: if problem while reading the file, should restaure and use the backup 
+	}
+
+	public static RankingService importGlicko2Statistics() throws FileNotFoundException
+	{	RankingService result = new ResultsBasedRankingService();
+	
+		// open the file
+		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_TEXT;
+		File file = new File(path);
+		FileInputStream fileIn = new FileInputStream(file);
+		BufferedInputStream inBuff = new BufferedInputStream(fileIn);
+		InputStreamReader inSR = new InputStreamReader(inBuff);
+		Scanner scanner = new Scanner(inSR);
+		
+		// read data
+		result.importFromText(scanner);
+		
+		scanner.close();
+		return result;
 	}
 }
