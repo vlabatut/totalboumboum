@@ -35,7 +35,7 @@ public class AiLoader
 	{	AbstractAiManager<?> result;
 		
 		// check the file
-		String packageFolder = FileTools.getAiPath()+File.separator+packname+File.separator+name;
+		String packageFolder = FileTools.getAisPath()+File.separator+packname+File.separator+FileTools.FOLDER_AIS+File.separator+name;
 		String classFile = packageFolder+File.separator+FileTools.FILE_AI_MAIN_CLASS+FileTools.EXTENSION_CLASS;
 		File file = new File(classFile);
 		if(!file.exists())

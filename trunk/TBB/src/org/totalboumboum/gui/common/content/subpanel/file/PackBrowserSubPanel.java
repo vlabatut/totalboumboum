@@ -42,7 +42,6 @@ import org.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
 public class PackBrowserSubPanel extends TableSubPanel implements MouseListener, FolderBrowserSubPanelListener
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 20;
@@ -52,13 +51,14 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,COLS,false);
 		
 		// pages
-		setFolder(null,new ArrayList<String>());
+		setFolder(null,null,new ArrayList<String>());
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String baseFolder;
+	private String additionalFolder;
 	private ArrayList<String> targetFiles;
 	private int linePrevious;
 	private int lineNext;
@@ -79,15 +79,16 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 	{	return targetFiles;	
 	}
 	
-	public void setFolder(String baseFolder, String targetFile)
+	public void setFolder(String baseFolder, String additionalFolder, String targetFile)
 	{	ArrayList<String> targetFiles = new ArrayList<String>();
 		targetFiles.add(targetFile);
-		setFolder(baseFolder,targetFiles);
+		setFolder(baseFolder,additionalFolder,targetFiles);
 	}
 	
-	public void setFolder(String baseFolder, ArrayList<String> targetFiles)
+	public void setFolder(String baseFolder, String additionalFolder, ArrayList<String> targetFiles)
 	{	// init
 		this.baseFolder = baseFolder;
+		this.additionalFolder = additionalFolder;
 		this.targetFiles = targetFiles;
 		listPanels = new ArrayList<TableContentPanel>();
 		currentPage = 0;
@@ -230,7 +231,10 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 		{	filePanel = new FolderBrowserSubPanel(getWidth(),getHeight());
 			int selectedIndex = (row-controlUpCount)+currentPage*(LINES-controlTotalCount);
 			selectedName = names.get(selectedIndex);
-			String bFolder = baseFolder+File.separator+selectedName;
+			String bFolder = baseFolder;
+			if(additionalFolder!=null)
+				bFolder = bFolder + File.separator + additionalFolder;
+			bFolder = bFolder + File.separator + selectedName;
 			filePanel.setFolder(bFolder,targetFiles);
 			filePanel.addListener(this);
 		}
@@ -253,7 +257,7 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 	}
 	
 	public void refresh()
-	{	setFolder(baseFolder,targetFiles);		
+	{	setFolder(baseFolder,additionalFolder,targetFiles);		
 	}
 
 	/////////////////////////////////////////////////////////////////
