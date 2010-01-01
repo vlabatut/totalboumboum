@@ -117,8 +117,8 @@ public class CupPart implements Serializable
 		{	CupLeg nextLeg = legs.get(nextLegNumber);
 			for(CupPart part: nextLeg.getParts())
 			{	for(CupPlayer player: part.getPlayers())
-				{	if(player.getPart()==number)
-						result.add(player.getRank());
+				{	if(player.getPrevPart()==number)
+						result.add(player.getPrevRank());
 				}
 			}
 		}
@@ -317,8 +317,8 @@ public class CupPart implements Serializable
 	public Profile getProfileForIndex(int index)
 	{	Profile result = null;
 		CupPlayer player = players.get(index);
-		int previousRank = player.getRank();
-		int previousPartNumber = player.getPart();
+		int previousRank = player.getPrevRank();
+		int previousPartNumber = player.getPrevPart();
 		// not the first leg
 		if(previousPartNumber>=0)
 		{	CupLeg previousLeg = leg.getPreviousLeg();
@@ -362,7 +362,7 @@ public class CupPart implements Serializable
 				Iterator<CupPlayer> itPlr = part.getPlayers().iterator();
 				while(itPlr.hasNext() && result==null)
 				{	CupPlayer player = itPlr.next();
-					if(player.getPart()==number && player.getRank()==rank)
+					if(player.getPrevPart()==number && player.getPrevRank()==rank)
 						result = part;
 				}
 			}
@@ -396,12 +396,12 @@ public class CupPart implements Serializable
 		else if(qualified>qualifiedAllowed)
 			result = false;
 		else
-		{	simulatedCount = qualified;
-			// mark players
+		{	// mark players
 			for(int i=0;i<players.size();i++)
 			{	CupPlayer player = players.get(i);
 				if(i<qualified)
 				{	player.setUsed(true);
+					simulatedCount++;
 					player.setSimulatedRank(simulatedCount);
 				}
 				else
@@ -422,10 +422,10 @@ public class CupPart implements Serializable
 		Set<Integer> matchAllowed = match.getAllowedPlayerNumbers();
 		
 		simulatedCount = 0;
-		CupLeg previousLeg = getTournament().getLeg(number-1);
+		CupLeg previousLeg = leg.getPreviousLeg();
 		for(CupPlayer player: players)
-		{	int prevPartNbr = player.getPart();
-			int prevRank = player.getRank();
+		{	int prevPartNbr = player.getPrevPart();
+			int prevRank = player.getPrevRank();
 			CupPlayer prevPlayer = previousLeg.getPart(prevPartNbr).getPlayerSimulatedRank(prevRank);
 			if(prevPlayer==null)
 			{	player.setUsed(false);
@@ -500,6 +500,17 @@ public class CupPart implements Serializable
 		else
 			result = Integer.MAX_VALUE;
 		
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String toString()
+	{	String result = "";
+		result = result + "-- part " + number + "\n";
+		for(CupPlayer player: players)
+			result = result + "  " + player + "\n";
 		return result;
 	}
 }

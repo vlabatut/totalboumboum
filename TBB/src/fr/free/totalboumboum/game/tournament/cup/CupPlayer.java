@@ -26,30 +26,43 @@ import java.io.Serializable;
 public class CupPlayer implements Serializable
 {	private static final long serialVersionUID = 1L;
 
+	public CupPlayer(CupPart part)
+	{	this.part = part;	
+	}
+
 	/////////////////////////////////////////////////////////////////
-	// PART			/////////////////////////////////////////////
+	// PART				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int part;
+	private CupPart part;
 	
-	public int getPart()
+	public CupPart getPart()
 	{	return part;
 	}
 	
-	public void setPart(int part)
-	{	this.part = part;
+	/////////////////////////////////////////////////////////////////
+	// PREVIOUS PART	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int prevPart;
+	
+	public int getPrevPart()
+	{	return prevPart;
+	}
+	
+	public void setPrevPart(int part)
+	{	this.prevPart = part;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// NUMBER			/////////////////////////////////////////////
+	// PREVIOUS RANK	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int rank;
+	private int prevRank;
 
-	public void setRank(int rank)
-	{	this.rank = rank;
+	public void setPrevRank(int rank)
+	{	this.prevRank = rank;
 	}
 
-	public int getRank()
-	{	return rank;
+	public int getPrevRank()
+	{	return prevRank;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -77,9 +90,22 @@ public class CupPlayer implements Serializable
 
 	public void setSimulatedFinalRank(int simulatedFinalRank)
 	{	this.simulatedFinalRank = simulatedFinalRank;
+//		CupLeg prevLeg = part.get
+//		CupPart prevPart;
 	}
 
 	public int getSimulatedFinalRank()
 	{	return simulatedFinalRank;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String toString()
+	{	String result = "";
+		result = result + "used: "+used;
+		result = result + " simulatedRank: "+simulatedRank;
+		result = result + " simulatedFinalRank: "+simulatedFinalRank;
+		return result;
 	}
 }
