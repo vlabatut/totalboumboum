@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
@@ -601,7 +600,56 @@ for(ArrayList<Integer> list: permutations)
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Ranks getOrderedPlayers()
-	{	Ranks result = new Ranks();		
+	{	Ranks result = new Ranks();	
+		
+		// update ranks
+		List<CupPart> remainingParts = getAllParts();
+		int totalPartCount = remainingParts.size();
+		int partRank = 1;
+		int playerRank = 1;
+		while(!remainingParts.isEmpty())
+		{	// init list of parts with this rank
+			List<CupPart> templist = new ArrayList<CupPart>();
+			Iterator<CupPart> it = remainingParts.iterator();
+			while(it.hasNext())
+			{	CupPart part = it.next();
+				if(part.getRank()==partRank)
+				{	templist.add(part);
+					it.remove();
+				}
+			}
+			// process players ranks
+			int count;
+			int localRank = 1;
+			do
+			{	count = 0;
+				it = templist.iterator();
+				while(it.hasNext())
+				{	CupPart part = it.next();
+					int cnt = part.processPlayerFinalRank(localRank,playerRank);
+					count = count + cnt;
+				}
+				playerRank = playerRank + count;
+				localRank++;
+			}
+			while(count>0);
+			
+			partRank++;
+			if(partRank>totalPartCount)
+				partRank = 0;
+		}
+	
+		// use first leg rankings to build final ranks
+		List<CupPlayer> allPlayers = legs.get(0).getAllUsedPlayers();
+		for(int i=0;i<allPlayers.size();i++)
+		{	CupPlayer player = allPlayers.get(i);
+			int rank = player.getActualFinalRank();
+			Profile profile = profiles.get(i);
+			result.addProfile(rank, profile);
+		}
+	
+	
+/*	
 		ArrayList<Profile> ranked = new ArrayList<Profile>();
 		CupLeg leg = legs.get(legs.size()-1);
 		int partRank = 1;
@@ -634,7 +682,7 @@ for(ArrayList<Integer> list: permutations)
 				}
 			}				
 		}
-		
+*/		
 		return result;
 	}
 

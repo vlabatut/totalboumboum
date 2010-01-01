@@ -294,6 +294,15 @@ public class CupPart implements Serializable
 	{	players.add(player);
 	}
 	
+	public List<CupPlayer> getUsedPlayers()
+	{	List<CupPlayer> result = new ArrayList<CupPlayer>();
+		for(CupPlayer player: players)
+		{	if(player.getUsed())
+				result.add(player);			
+		}
+		return result;
+	}
+		
 	/////////////////////////////////////////////////////////////////
 	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
