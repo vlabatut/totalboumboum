@@ -2,7 +2,7 @@ package tournament200809.akpolatsener.v1;
 
 import java.util.Comparator;
 
-import org.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 
 

@@ -3,8 +3,8 @@ package tournament200809.demiragsagar.v2;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.totalboumboum.ai.adapter200809.AiTile;
-import org.totalboumboum.ai.adapter200809.AiZone;
+import org.totalboumboum.ai.v200809.adapter.AiTile;
+import org.totalboumboum.ai.v200809.adapter.AiZone;
 
 
 public class TimeMatrice {

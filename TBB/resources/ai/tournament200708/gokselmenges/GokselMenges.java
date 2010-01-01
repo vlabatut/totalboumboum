@@ -3,7 +3,7 @@ package tournament200708.gokselmenges;
 import java.awt.Point;
 import java.util.Vector;
 
-import org.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 
 

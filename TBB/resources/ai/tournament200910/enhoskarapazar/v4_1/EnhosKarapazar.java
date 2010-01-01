@@ -3,14 +3,14 @@ package tournament200910.enhoskarapazar.v4_1;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.totalboumboum.ai.adapter200910.ArtificialIntelligence;
-import org.totalboumboum.ai.adapter200910.communication.AiAction;
-import org.totalboumboum.ai.adapter200910.communication.AiActionName;
-import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import org.totalboumboum.ai.adapter200910.data.AiBomb;
-import org.totalboumboum.ai.adapter200910.data.AiHero;
-import org.totalboumboum.ai.adapter200910.data.AiTile;
-import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
+import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
+import org.totalboumboum.ai.v200910.adapter.data.AiHero;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 

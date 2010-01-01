@@ -2,8 +2,8 @@ package tournament200910.danesatir.v3;
 
 import java.util.List;
 
-import org.totalboumboum.ai.adapter200910.data.AiBomb;
-import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 
 public class GeneralFuncs {

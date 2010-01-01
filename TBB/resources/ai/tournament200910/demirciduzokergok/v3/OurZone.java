@@ -2,13 +2,13 @@ package tournament200910.demirciduzokergok.v3;
 
 import java.util.*;
 
-import org.totalboumboum.ai.adapter200910.data.AiBlock;
-import org.totalboumboum.ai.adapter200910.data.AiBomb;
-import org.totalboumboum.ai.adapter200910.data.AiFire;
-import org.totalboumboum.ai.adapter200910.data.AiHero;
-import org.totalboumboum.ai.adapter200910.data.AiItem;
-import org.totalboumboum.ai.adapter200910.data.AiTile;
-import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
+import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
+import org.totalboumboum.ai.v200910.adapter.data.AiFire;
+import org.totalboumboum.ai.v200910.adapter.data.AiHero;
+import org.totalboumboum.ai.v200910.adapter.data.AiItem;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
 public class OurZone {
 	// Les constructeurs:

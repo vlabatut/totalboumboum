@@ -21,7 +21,7 @@ package tournament200809.akkayadanacioglu;
  * 
  */
 
-import org.totalboumboum.ai.adapter200809.AiManager;
+import org.totalboumboum.ai.v200809.adapter.AiManager;
 
 import tournament200809.akkayadanacioglu.v2.AkkayaDanacioglu;
 

@@ -1,6 +1,6 @@
 package tournament200809.demiragsagar.v2;
 
-import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.v200809.adapter.AiTile;
 
 public class Node {
 

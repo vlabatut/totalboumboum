@@ -1,7 +1,7 @@
 package tournament200809.gunalpyurtsever.v2;
 
 
-import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
 //objet specifique qui garde les infos de cost et heuristique pour des tiles

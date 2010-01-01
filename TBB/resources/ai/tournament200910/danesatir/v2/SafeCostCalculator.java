@@ -1,8 +1,7 @@
 package tournament200910.danesatir.v2;
 
-import org.totalboumboum.ai.adapter200910.data.AiTile;
-import org.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
-//import org.totalboumboum.ai.adapter200910.path.AiPath;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 
 public class SafeCostCalculator extends CostCalculator {
 

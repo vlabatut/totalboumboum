@@ -3,7 +3,7 @@ package tournament200708.erengokce;
 import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
-import org.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 
 

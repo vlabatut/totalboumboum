@@ -2,7 +2,7 @@ package tournament200910.danesatir.v1;
 
 import java.util.Comparator;
 
-import org.totalboumboum.ai.adapter200910.data.AiBomb;
+import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
 
 
 public class BombComparator implements Comparator<AiBomb> {

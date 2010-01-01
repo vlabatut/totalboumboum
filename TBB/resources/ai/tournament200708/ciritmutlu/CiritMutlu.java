@@ -4,7 +4,7 @@ package tournament200708.ciritmutlu;
 import java.util.LinkedList;
 import java.util.Vector;
 
-import org.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 
 import tournament200708.ciritmutlu.exceptions.AbsentNodeException;

@@ -1,9 +1,9 @@
 package tournament200910.monia;
 
-import org.totalboumboum.ai.adapter200910.ArtificialIntelligence;
-import org.totalboumboum.ai.adapter200910.communication.AiAction;
-import org.totalboumboum.ai.adapter200910.communication.AiActionName;
-import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
+import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
 /**
  * >> ce texte est à remplacer par votre propre description de votre IA

@@ -2,7 +2,7 @@ package tournament200910.dorukkupelioglu.v4_2;
 
 import java.util.List;
 
-import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 /**
  * Cette class est pour creer un noeud qui contient les valeur

@@ -1,7 +1,7 @@
 package tournament200809.demiragsagar.v1;
 
-import org.totalboumboum.ai.adapter200809.AiTile;
-import org.totalboumboum.ai.adapter200809.AiZone;
+import org.totalboumboum.ai.v200809.adapter.AiTile;
+import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 public class Attack {

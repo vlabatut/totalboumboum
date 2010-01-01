@@ -5,16 +5,16 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import org.totalboumboum.ai.adapter200910.ArtificialIntelligence;
-import org.totalboumboum.ai.adapter200910.communication.AiAction;
-import org.totalboumboum.ai.adapter200910.communication.AiActionName;
-import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import org.totalboumboum.ai.adapter200910.data.AiBlock;
-import org.totalboumboum.ai.adapter200910.data.AiBomb;
-import org.totalboumboum.ai.adapter200910.data.AiFire;
-import org.totalboumboum.ai.adapter200910.data.AiHero;
-import org.totalboumboum.ai.adapter200910.data.AiTile;
-import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
+import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
+import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
+import org.totalboumboum.ai.v200910.adapter.data.AiFire;
+import org.totalboumboum.ai.v200910.adapter.data.AiHero;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 import tournament200910.dereligeckalan.v1.PathFinder;

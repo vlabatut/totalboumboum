@@ -1,7 +1,7 @@
 package tournament200910.danesatir.v1;
 
-import org.totalboumboum.ai.adapter200910.data.AiHero;
-import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.ai.v200910.adapter.data.AiHero;
+import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
 public class DecisionMaker {
 	

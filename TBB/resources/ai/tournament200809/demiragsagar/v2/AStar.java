@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Vector;
 
-import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
 

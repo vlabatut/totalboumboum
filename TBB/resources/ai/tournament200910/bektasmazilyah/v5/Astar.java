@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
 
 public final class Astar {

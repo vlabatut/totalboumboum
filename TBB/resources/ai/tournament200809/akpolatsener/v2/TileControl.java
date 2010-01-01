@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
-import org.totalboumboum.ai.adapter200809.AiBomb;
-import org.totalboumboum.ai.adapter200809.AiTile;
-import org.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.ai.v200809.adapter.AiBomb;
+import org.totalboumboum.ai.v200809.adapter.AiTile;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
 import tournament200809.akpolatsener.v2.comparators.ComparatorByHypotenuse;

@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.totalboumboum.ai.adapter200910.ArtificialIntelligence;
-import org.totalboumboum.ai.adapter200910.communication.AiAction;
-import org.totalboumboum.ai.adapter200910.communication.AiActionName;
-import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import org.totalboumboum.ai.adapter200910.data.AiBomb;
-import org.totalboumboum.ai.adapter200910.data.AiHero;
-import org.totalboumboum.ai.adapter200910.data.AiTile;
-import org.totalboumboum.ai.adapter200910.data.AiZone;
-import org.totalboumboum.ai.adapter200910.path.AiPath;
-import org.totalboumboum.ai.adapter200910.path.astar.Astar;
-import org.totalboumboum.ai.adapter200910.path.astar.cost.BasicCostCalculator;
-import org.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
-import org.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
+import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
+import org.totalboumboum.ai.v200910.adapter.data.AiHero;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.data.AiZone;
+import org.totalboumboum.ai.v200910.adapter.path.AiPath;
+import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
+import org.totalboumboum.ai.v200910.adapter.path.astar.cost.BasicCostCalculator;
+import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
+import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
+import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 

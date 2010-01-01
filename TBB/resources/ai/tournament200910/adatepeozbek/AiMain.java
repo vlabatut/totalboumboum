@@ -21,7 +21,7 @@ package tournament200910.adatepeozbek;
  * 
  */
 
-import org.totalboumboum.ai.adapter200910.AiManager;
+import org.totalboumboum.ai.v200910.adapter.AiManager;
 
 import tournament200910.adatepeozbek.v5.AdatepeOzbek;
 

@@ -1,6 +1,6 @@
 package tournament200910.dorukkupelioglu.v4_1;
 
-import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 /**
  * Cette class est pour creer un noeud qui contient les valeur
  * <br><br>G : Cost <br>H : Heuristic <br>F = G + H 

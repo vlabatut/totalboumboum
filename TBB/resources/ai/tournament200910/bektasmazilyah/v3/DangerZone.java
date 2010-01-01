@@ -5,15 +5,15 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import org.totalboumboum.ai.adapter200910.data.AiBlock;
-import org.totalboumboum.ai.adapter200910.data.AiBomb;
-import org.totalboumboum.ai.adapter200910.data.AiFire;
-import org.totalboumboum.ai.adapter200910.data.AiHero;
-import org.totalboumboum.ai.adapter200910.data.AiItem;
-import org.totalboumboum.ai.adapter200910.data.AiItemType;
-import org.totalboumboum.ai.adapter200910.data.AiTile;
-import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
+import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
+import org.totalboumboum.ai.v200910.adapter.data.AiFire;
+import org.totalboumboum.ai.v200910.adapter.data.AiHero;
+import org.totalboumboum.ai.v200910.adapter.data.AiItem;
+import org.totalboumboum.ai.v200910.adapter.data.AiItemType;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 
