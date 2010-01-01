@@ -43,7 +43,7 @@ import org.xml.sax.SAXException;
 public class Glicko2Saver
 {	private static final boolean verbose = false;
 
-	public static void saveStatistics(RankingService rankingService) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static void saveGlicko2Statistics(RankingService rankingService) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init files
 		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 		String backup = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_BACKUP;
@@ -83,7 +83,7 @@ public class Glicko2Saver
 		}
 	}
 
-	public static ResultsBasedRankingService init() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static ResultsBasedRankingService initGlicko2Statistics() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// change ranking properties
 		
 		// create ranking service
@@ -100,7 +100,7 @@ public class Glicko2Saver
 		}
 		
 		// save the rankings
-		saveStatistics(result);
+		saveGlicko2Statistics(result);
 		return result;
 	}
 }

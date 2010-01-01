@@ -23,9 +23,12 @@ package org.totalboumboum.statistics.overall;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,11 +39,10 @@ import org.totalboumboum.configuration.profile.ProfileLoader;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
-
 public class OverallStatsSaver
 {	private static final boolean verbose = false;
 
-	public static void saveStatistics(HashMap<Integer,PlayerStats> playersStats) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static void saveOverallStatistics(HashMap<Integer,PlayerStats> playersStats) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init files
 		String path = FileTools.getOverallStatisticsPath()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 		String backup = FileTools.getOverallStatisticsPath()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_BACKUP;
@@ -51,7 +53,7 @@ public class OverallStatsSaver
 		backupFile.delete();
 		previousFile.renameTo(backupFile);
 		
-		// write the rankings
+		// write the stats
 		File file = new File(path);
 		FileOutputStream fileOut = new FileOutputStream(file);
 		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
@@ -71,7 +73,7 @@ public class OverallStatsSaver
 		}
 	}
 
-	public static HashMap<Integer,PlayerStats> init() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static HashMap<Integer,PlayerStats> initOverallStatistics() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// create stats map
 		HashMap<Integer,PlayerStats> result = new HashMap<Integer, PlayerStats>();
 		
@@ -87,7 +89,28 @@ public class OverallStatsSaver
 		}
 		
 		// save the rankings
-		saveStatistics(result);
+		saveOverallStatistics(result);
 		return result;
+	}
+	
+	/**
+	 * export overall stats as text (for stats maintenance through classes changes)
+	 * @param playersStats
+	 * @throws FileNotFoundException 
+	 */
+	public static void exportOverallStatistics(HashMap<Integer,PlayerStats> playersStats) throws FileNotFoundException
+	{	// open the file
+		String path = FileTools.getOverallStatisticsPath()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_TEXT;
+		File file = new File(path);
+		FileOutputStream fileOut = new FileOutputStream(file);
+		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
+		OutputStreamWriter outSW = new OutputStreamWriter(outBuff);
+		PrintWriter writer = new PrintWriter(outSW);
+		
+		// write data
+		for(PlayerStats ps: playersStats.values())
+			ps.exportToText(writer);
+		
+		writer.close();
 	}
 }

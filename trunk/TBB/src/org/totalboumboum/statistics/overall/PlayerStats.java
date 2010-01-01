@@ -21,8 +21,10 @@ package org.totalboumboum.statistics.overall;
  * 
  */
 
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.tools.strings.StringTools;
@@ -142,12 +144,16 @@ public class PlayerStats implements Serializable
 	/////////////////////////////////////////////////////////////////
 	public String toString()
 	{	String result = "";
-		// rounds
+		
+		// misc
 		result = result+" prevrk: "+previousRank;
+		
+		// rounds
 		result = result+" played: "+roundsPlayed;
 		result = result+" won: "+roundsWon;
 		result = result+" drawn: "+roundsDrawn;
 		result = result+" lost: "+roundsLost;
+		
 		// scores
 		for(Score score: Score.values())
 		{	String text = Long.toString(scores.get(score));
@@ -155,6 +161,50 @@ public class PlayerStats implements Serializable
 				text = StringTools.formatTime(scores.get(score),TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			result = result+" "+score.toString()+": "+text;
 		}
+		
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT IMPORT/EXPORT	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void exportToText(PrintWriter writer)
+	{	// misc
+		writer.print(playerId+";");
+		writer.print(previousRank+";");
+		
+		// rounds
+		writer.print(roundsPlayed+";");
+		writer.print(roundsWon+";");
+		writer.print(roundsDrawn+";");
+		writer.print(roundsLost+";");
+		
+		// scores
+		for(Score score: Score.values())
+			writer.print(scores.get(score)+";");
+		
+		writer.println();
+	}
+
+	public void importFromText(Scanner scanner)
+	{	String text = scanner.nextLine();
+		String texts[] = text.split(";");
+		int t = 0;
+
+		// misc
+		playerId = Integer.parseInt(texts[t++]);
+		previousRank = Integer.parseInt(texts[t++]);
+		
+		// rounds
+		roundsPlayed = Long.parseLong(texts[t++]);
+		roundsWon = Long.parseLong(texts[t++]);
+		roundsDrawn = Long.parseLong(texts[t++]);
+		roundsLost = Long.parseLong(texts[t++]);
+		
+		// scores
+		for(Score score: Score.values())
+		{	long value = Long.parseLong(texts[t++]);
+			scores.put(score,value);
+		}
 	}
 }
