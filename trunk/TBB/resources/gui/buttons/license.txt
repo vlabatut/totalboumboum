@@ -12,7 +12,7 @@ License	: LGPL (GNU Lesser General Public License)
 
 Total Boum Boum
 Author	: Vincent Labatut
-Site	: http://totalboumboum.free.fr
+Site	: http://www.totalboumboum.org
 License	: GPLv2 (GNU General Public License)
 
 	+ description.png	(derivative work from Crystal Project Icons)
