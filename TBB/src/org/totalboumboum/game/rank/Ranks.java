@@ -23,6 +23,7 @@ package org.totalboumboum.game.rank;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -82,7 +83,7 @@ public class Ranks implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public Profile getProfileFromAbsoluteRank(int absoluteRank)
+/*	public Profile getProfileFromAbsoluteRank(int absoluteRank)
 	{	Profile result = null;
 		
 		Iterator<Entry<Integer,ArrayList<Profile>>> it = ranks.entrySet().iterator();
@@ -100,7 +101,23 @@ public class Ranks implements Serializable
 			result = null;
 		return result;
 	}
-	
+*/
+	public List<Profile> getAbsoluteOrderList()
+	{	// init
+		List<Profile> result = new ArrayList<Profile>();
+		List<Integer> keys = new ArrayList<Integer>(ranks.keySet());
+		Collections.sort(keys);
+		
+		// populate list
+		for(int rank: keys)
+		{	List<Profile> profiles = ranks.get(rank);
+			for(Profile profile: profiles)
+				result.add(profile);
+		}
+
+		return result;
+	}
+
 	public List<Profile> getProfilesFromRank(int rank)
 	{	ArrayList<Profile> result = ranks.get(rank);
 		return result;		

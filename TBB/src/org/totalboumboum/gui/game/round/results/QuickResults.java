@@ -26,6 +26,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -141,7 +142,8 @@ sc = "Time";
 			{	// init
 				col = 0;
 				line++;
-				Profile profile = orderedPlayers.getProfileFromAbsoluteRank(i+1);
+				List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();
+				Profile profile = absoluteList.get(i);
 				int profileIndex = players.indexOf(profile);
 				// color
 				Color clr = profile.getSpriteColor().getColor();

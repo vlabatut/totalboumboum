@@ -2,7 +2,7 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Coupe de test" type="CUP" />
 	<played matches="11" rounds="1" />
-	<dates start="2010-01-01T23:07:55" save="2010-01-01T23:12:27" />
+	<dates start="2010-01-01T23:42:14" save="2010-01-01T23:47:03" />
 	<players>
 		<player name="0708.Bingöl+Ketenci" />
 		<player name="0708.Şahin+Yıldırım" />
