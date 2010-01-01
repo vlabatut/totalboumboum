@@ -1,0 +1,7 @@
+package org.totalboumboum.ai.v200910.ais.calisirguner.v4;
+
+//pour map
+public enum Etat {
+	INDESTRUCTIBLES, FEU, FLAMMES, BOMBE, DESTRUCTIBLES, LIBRE, ADVERSAIRE, POINT, INACCESSIBLE, ACCESSIBLE, BOMBEPOSS, FLAMMESPOSS, DANGER, NOUS
+
+}
