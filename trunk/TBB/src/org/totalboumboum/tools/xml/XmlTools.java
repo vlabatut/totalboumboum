@@ -1,4 +1,4 @@
-package org.totalboumboum.tools;
+package org.totalboumboum.tools.xml;
 
 /*
  * Total Boum Boum
@@ -42,6 +42,7 @@ import org.jdom.Namespace;
 import org.jdom.input.DOMBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;

@@ -1,4 +1,4 @@
-package org.totalboumboum.tools.image;
+package org.totalboumboum.tools.images;
 
 /*
  * Total Boum Boum
@@ -54,7 +54,7 @@ import org.jdom.Element;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.anime.Colormap;
 import org.totalboumboum.engine.content.feature.gesture.anime.ColormapLoader;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 

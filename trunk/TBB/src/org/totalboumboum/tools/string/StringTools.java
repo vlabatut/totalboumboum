@@ -1,4 +1,4 @@
-package org.totalboumboum.tools;
+package org.totalboumboum.tools.string;
 
 /*
  * Total Boum Boum
@@ -26,6 +26,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Set;
+
+import org.totalboumboum.tools.GameData;
 
 
 public class StringTools
