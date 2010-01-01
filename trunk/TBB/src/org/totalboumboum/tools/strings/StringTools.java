@@ -1,4 +1,4 @@
-package org.totalboumboum.tools.string;
+package org.totalboumboum.tools.strings;
 
 /*
  * Total Boum Boum
