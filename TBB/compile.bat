@@ -34,7 +34,8 @@
 :: define path variables
 	Set main=.\src\org\totalboumboum
 	Set aig=%main%\ai
-	Set ai=.\resources\ai\org\totalboumboum\ai
+	Set aib=.\resources\ai
+	Set ai=%aib%\org\totalboumboum\ai
 	Set bin=.\bin
 	Set jdom=.\resources\lib\jdom.jar
 	Set cp=%bin%;%jdom%
@@ -68,9 +69,9 @@
 	echo compiling the AI classes located in the resources... 
 	For /d %%f In (%ai%\*) Do (
 		echo 	%%f
-		For /d %%g In (%%f\*) Do ( 
+		For /d %%g In (%%f\ais\*) Do ( 
 			echo 	 	%%g
-			javac -nowarn -sourcepath %sp%;%ai% -classpath %cp%;%ai% %%g\*.java
+			javac -nowarn -sourcepath %sp%;%aib% -classpath %cp%;%aib% %%g\*.java
 		)
 	)
 
