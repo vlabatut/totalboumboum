@@ -120,7 +120,7 @@ public class CupTournament extends AbstractTournament
 		}
 		else if(sortPlayers==CupPlayerSort.SEEDS)
 		{	CupLeg firstLeg = legs.get(0);
-			firstLeg.simulatePlayerProgression();
+			firstLeg.simulatePlayerProgression(firstLegPlayersdistribution);
 			simulatePlayerFinalRank();
 /*			
 			// init
@@ -446,7 +446,7 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 		// check compatibility with matches
 		CupLeg firstLeg = legs.get(0);
 		int result = profiles.size();
-		boolean res = firstLeg.simulatePlayerProgression();
+		boolean res = firstLeg.simulatePlayerProgression(distribution);
 		if(res)
 		{	simulatePlayerFinalRank();
 			List<CupPart> parts = getAllParts();
@@ -656,10 +656,11 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 				}
 			}
 			// process players ranks
-			int count = 0;
+			int count;
 			int localRank = 1;
 			do
-			{	it = templist.iterator();
+			{	count = 0;
+				it = templist.iterator();
 				while(it.hasNext())
 				{	CupPart part = it.next();
 					boolean over = !part.simulatePlayerFinalRank(localRank,playerRank);

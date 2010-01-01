@@ -197,7 +197,7 @@ public class CupLeg implements Serializable
 		if(result)
 		{	CupLeg nextLeg = getNextLeg();
 			if(nextLeg!=null)
-				nextLeg.simulatePlayerProgression();
+				result = nextLeg.simulatePlayerProgression();
 		}
 		
 		return result;
@@ -218,9 +218,20 @@ public class CupLeg implements Serializable
 		if(result)
 		{	CupLeg nextLeg = getNextLeg();
 			if(nextLeg!=null)
-				nextLeg.simulatePlayerProgression();
+				result = nextLeg.simulatePlayerProgression();
 		}
 		
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String toString()
+	{	String result = "";
+		result = result + ">> leg " + number + "\n";
+		for(CupPart part: parts)
+			result = result + part + "\n";
 		return result;
 	}
 }

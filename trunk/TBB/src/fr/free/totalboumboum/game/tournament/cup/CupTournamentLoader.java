@@ -151,23 +151,23 @@ public class CupTournamentLoader
 		Iterator<Element> i = parts.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			CupPlayer player = loadPlayerElement(temp);
+			CupPlayer player = loadPlayerElement(temp, result);
 			result.addPlayer(player);
 		}
 	}
 	
-	private static CupPlayer loadPlayerElement(Element root)
-	{	CupPlayer result = new CupPlayer();
+	private static CupPlayer loadPlayerElement(Element root, CupPart part)
+	{	CupPlayer result = new CupPlayer(part);
 	
 		// number
 		String partStr = root.getAttribute(XmlTools.PART).getValue().trim();
-		int part = Integer.valueOf(partStr);
-		result.setPart(part);
+		int prevPart = Integer.valueOf(partStr);
+		result.setPrevPart(prevPart);
 
 		// rank
 		String rankStr = root.getAttribute(XmlTools.RANK).getValue().trim();
-		int rank = Integer.valueOf(rankStr);
-		result.setRank(rank);
+		int prevRank = Integer.valueOf(rankStr);
+		result.setPrevRank(prevRank);
 
 		return result;
 	}
