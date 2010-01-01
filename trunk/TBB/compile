@@ -5,7 +5,7 @@
 # it should work on most Linux, Unix, and Mac OS systems.
 # It (re)compiles the whole TBB game and the dependant AI classes.
 #
-# v.0.2
+# v.0.3
 #
 # -------------------------------------------------------------------
 #
@@ -32,7 +32,7 @@
 # define path variables
 	main="./src/fr/free/totalboumboum"
 	aig=${main}/ai
-	ai="./resources/ai"
+	ai="./resources/ai/org/totalboumboum/ai"
 	bin="./bin"
 	jdom="./resources/lib/jdom.jar"
 	cp="${bin}:${jdom}"
