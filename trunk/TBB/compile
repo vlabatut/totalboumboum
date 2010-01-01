@@ -32,7 +32,8 @@
 # define path variables
 	main="./src/fr/free/totalboumboum"
 	aig=${main}/ai
-	ai="./resources/ai/org/totalboumboum/ai"
+	aib="./resources/ai"
+	ai=${aib}/org/totalboumboum/ai
 	bin="./bin"
 	jdom="./resources/lib/jdom.jar"
 	cp="${bin}:${jdom}"
@@ -64,7 +65,7 @@
 		echo -e "\t${i}"
 		for j in $(ls -d $i*/); do
 			echo -e "\t\t${j}"	
-			javac -nowarn -sourcepath ${sp}:${ai} -classpath ${cp}:${ai} $j/*.java
+			javac -nowarn -sourcepath ${sp}:${aib} -classpath ${cp}:${aib} $j/*.java
 		done
 	done
 #
