@@ -82,6 +82,7 @@ public class CupPlayer implements Serializable
 	
 	public void setSimulatedRank(int simulatedRank)
 	{	this.simulatedRank = simulatedRank;
+		simulatedFinalRank = 0;
 	}
 
 	public int getSimulatedRank()
@@ -90,8 +91,12 @@ public class CupPlayer implements Serializable
 
 	public void setSimulatedFinalRank(int simulatedFinalRank)
 	{	this.simulatedFinalRank = simulatedFinalRank;
-//		CupLeg prevLeg = part.get
-//		CupPart prevPart;
+		CupLeg prevLeg = part.getLeg().getPreviousLeg();
+		if(prevLeg!=null)
+		{	CupPart prevPart = prevLeg.getPart(this.prevPart);
+			CupPlayer prevPlayer = prevPart.getPlayerSimulatedRank(prevRank);
+			prevPlayer.setSimulatedFinalRank(simulatedFinalRank);
+		}
 	}
 
 	public int getSimulatedFinalRank()

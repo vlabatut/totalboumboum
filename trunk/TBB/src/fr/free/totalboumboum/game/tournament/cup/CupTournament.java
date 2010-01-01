@@ -62,7 +62,6 @@ public class CupTournament extends AbstractTournament
 		List<List<Integer>> distri = distris.get(highestEmptyRank);
 		int index = (int)(Math.random()*distri.size());
 		firstLegPlayersdistribution = distri.get(index);
-//firstLegPlayersdistribution = distri.get(0);			
 		
 		// sort players (as is, random or seeds)
 		sortPlayers();
@@ -317,6 +316,8 @@ public class CupTournament extends AbstractTournament
 			{	for(CupPlayer player: part.getPlayers())
 				{	if(player.getUsed())
 					{	int index = player.getSimulatedFinalRank()-1;
+if(index==-1)
+	System.out.println();
 						Profile profile = orderedProfile.get(index);
 						profiles.add(profile);
 					}
@@ -441,8 +442,7 @@ for(ArrayList<Integer> list: permutations)
 	{	// init
 //		List<List<Integer>> progression = new ArrayList<List<Integer>>(); // list of qualified players for each part
 //		HashMap<Integer,List<int[]>> finalRanking = new HashMap<Integer,List<int[]>>();
-if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 && distribution.get(3)==3)
-	System.out.println();
+
 		// check compatibility with matches
 		CupLeg firstLeg = legs.get(0);
 		int result = profiles.size();
@@ -456,6 +456,8 @@ if(distribution.get(0)==3 && distribution.get(1)==3 && distribution.get(2)==3 &&
 					result = m;
 			}
 		}
+		else
+			result = -1;
 		
 /*		
 		int result = simulatePlayerProgression(distribution,progression,finalRanking);
