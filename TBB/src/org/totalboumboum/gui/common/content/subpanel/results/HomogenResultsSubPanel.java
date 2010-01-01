@@ -89,6 +89,8 @@ public class HomogenResultsSubPanel extends TableSubPanel
 				cols++;
 			if(showPoints) 
 				cols++;
+			if(showRank) 
+				cols++;
 			reinit(LINES,cols);
 			
 			// prefix
@@ -111,6 +113,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 			Arrays.fill(confrontationsWidth,headerHeight);
 			int totalWidth = headerHeight;
 			int pointsWidth = headerHeight;
+			int rankWidth = headerHeight;
 			
 			// headers
 			int col = 0;
@@ -163,6 +166,11 @@ public class HomogenResultsSubPanel extends TableSubPanel
 				}
 				if(showPoints)
 				{	String key = headerPrefix+GuiKeys.POINTS;
+					setLabelKey(0,col,key,true);
+					col++;
+				}
+				if(showRank)
+				{	String key = headerPrefix+GuiKeys.RANK;
 					setLabelKey(0,col,key,true);
 					col++;
 				}
@@ -358,6 +366,13 @@ public class HomogenResultsSubPanel extends TableSubPanel
 				nameWidth = nameWidth - pointsWidth;
 				col++;
 			}
+			if(showRank) 
+			{	setColSubMinWidth(col,rankWidth);
+				setColSubPrefWidth(col,rankWidth);
+				setColSubMaxWidth(col,rankWidth);
+				nameWidth = nameWidth - rankWidth;
+				col++;
+			}
 			if(showName) 
 			{	setColSubMinWidth(colName,nameWidth);
 				setColSubPrefWidth(colName,nameWidth);
@@ -377,6 +392,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 	private boolean showConfrontations = true;
 	private boolean showTotal = true;
 	private boolean showPoints = true;
+	private boolean showRank= true;
 	private boolean showScores = true;
 	private boolean showTime = true;
 	
@@ -402,6 +418,11 @@ public class HomogenResultsSubPanel extends TableSubPanel
 
 	public void setShowPoints(boolean showPoints)
 	{	this.showPoints = showPoints;
+		setStatisticHolder(statisticHolder);
+	}
+
+	public void setShowRank(boolean showRank)
+	{	this.showRank = showRank;
 		setStatisticHolder(statisticHolder);
 	}
 

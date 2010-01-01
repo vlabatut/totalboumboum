@@ -363,3 +363,35 @@
 - création d'une classe spécifique pour les labels, implémentant le rollover
 - correction du bug concernant le rollover des labels
 
++ beta.015
+- Moteur :
+		- correction d'un bug dans SpritePreviewLoader, lors du chargement de sprites sans colormap (de type Prognathe)
+		- possibilité d'enregistrer automatiquement un objet Zone, via une méthode s'appelant hors du jeu (pour faciliter la cration de niveaux)
+		- pareil avec les fichiers level et players, ce qui permet de définir automatiquement des niveaux (basiques, à compléter manuellement)
+		- bug corrigé dans la gestion des tournois de type coupe
+		- bug corrigé dans l'autosave des tournoi (le backup ne se faisait pas)
+- GUI :
+		- correction d'un bug concernant les proportions des panels dans l'écran de présentation d'une manche
+		- correction d'un bug concernant l'édition de profil en général
+		- correction d'un bug lors du choix de la couleur (l'option "pas de couleur" était restée de la première version de la GUI)
+		- correction d'un bug apparaissant lors de la suppression d'un joueur pas enregistré dans Glicko-2
+		- amélioration de la suppression de profil : c'est le profil précédent qui est alors sélectionné (au lieu de revenir au début)
+		- la liste de noms est raffraichie quand un profil est modifié
+		- les 3 configurations de jeu sont éventuellement mises à jour quand un profil est supprimé
+- IA :
+		- prise en compte du coefficient de vitesse pour les valeurs liées au temps
+		- accès au classement Glicko-2 (en plus de round et match déjà présents)
+		- nouvelle option du jeu permettant de masquer les exceptions provoquées par les IA
+		- option pour logger les exceptions des IA
+		- ajout de l'appel à Thread.yield() dans la méthode checkInterruption d'ArtificialIntelligence : ça permet de mettre en sourdin les IA trop gourmandes en temps proç
+		- meilleure gestion de A* en ce qui concerne les objets à traiter par le ramasse-miettes
+		- A* renvoie une exception en cas de paramètres inadaptés 
+- stats :
+		- classe spécifique pour réinitialiser toutes les stats en dehors du jeu
+		- méthode pour réinitialiser les stats générales d'un joueur en particulier (appelée hors du jeu)
+		- les stats de lancement qui n'étaient pas à leur place dans les logs ont été mises dans le fichier de config des stats
+- Divers :
+		- correction d'un bug dans les scripts de compilation (classes non référencées dans les adaptateurs d'IA)
+		- mise à jour du perso Prognathe
+		- mise à jour du système de log pour permettre de ne pas écraser toujours le même fichier, mais de créer à chaque fois un fichier différent et daté
+		- nouveaux niveaux pour le tournoi 3
