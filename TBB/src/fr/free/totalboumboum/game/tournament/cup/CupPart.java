@@ -472,7 +472,7 @@ public class CupPart implements Serializable
 	{	boolean result = false;
 		
 		CupPlayer player = getPlayerSimulatedRank(localRank);
-		if(player!=null)
+		if(player!=null && player.getSimulatedFinalRank()==0)
 		{	result = true;
 			player.setSimulatedFinalRank(finalRank);
 		}
@@ -502,7 +502,7 @@ public class CupPart implements Serializable
 		
 		return result;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
