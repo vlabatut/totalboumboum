@@ -206,8 +206,8 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 				tooltip = null;
 			else
 			{	CupPlayer player = part.getPlayers().get(line-1);
-				int previousPartNumber = player.getPart();
-				int previousRank = player.getRank();
+				int previousPartNumber = player.getPrevPart();
+				int previousRank = player.getPrevRank();
 				String partName = previousLeg.getPart(previousPartNumber).getName();
 				tooltip = partName+":"+previousRank;						
 			}
@@ -355,7 +355,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 						// doesn't work for the first leg 
 						if(previousLeg!=null)
 						{	CupPlayer p = part.getPlayerForProfile(profile);
-							int partNumber = p.getPart();
+							int partNumber = p.getPrevPart();
 							CupPart previousPart = previousLeg.getPart(partNumber);
 							fireBeforeClicked(previousPart);
 						}
