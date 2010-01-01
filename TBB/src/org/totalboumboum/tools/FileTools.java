@@ -115,6 +115,7 @@ public class FileTools
 	public static final String FOLDER_ABILITIES = "abilities";
 	public static final String FOLDER_ANIMES = "animes";
 	public static final String FOLDER_AI = "ai";
+	public static final String FOLDER_AIS = "ais";
 	public static final String FOLDER_AUTOSAVE = "autosave";
 	public static final String FOLDER_AUTOSAVE_BACKUP = "autosave_backup";
 	public static final String FOLDER_BLOCKS = "blocks";
@@ -141,6 +142,7 @@ public class FileTools
 	public static final String FOLDER_MINE = "mine";
 	public static final String FOLDER_MODULATIONS = "modulations";
 	public static final String FOLDER_NORMAL = "normal";
+	public static final String FOLDER_ORG = "org";
 	public static final String FOLDER_OVERALL = "overall";
 	public static final String FOLDER_PENETRATION = "penetration";
 	public static final String FOLDER_PERMISSIONS = "permissions";
@@ -159,6 +161,7 @@ public class FileTools
 	public static final String FOLDER_SOURCE = "src";
 	public static final String FOLDER_STATISTICS = "statistics";
 	public static final String FOLDER_THEMES = "themes";
+	public static final String FOLDER_TOTALBOUMBOUM = "totalboumboum";
 	public static final String FOLDER_TOURNAMENT = "tournament";
 	public static final String FOLDER_TOURNAMENTS = "tournaments";
 	public static final String FOLDER_TRAJECTORIES = "trajectories";
@@ -168,8 +171,12 @@ public class FileTools
 	{	return FOLDER_RESOURCES;		
 	}
 	
-	public static String getAiPath()
-	{	return getResourcesPath()+File.separator+FOLDER_AI;		
+	public static String getAisPath()
+	{	return getResourcesPath() +
+			File.separator + FOLDER_AI +
+			File.separator + FOLDER_ORG +		
+			File.separator + FOLDER_TOTALBOUMBOUM +		
+			File.separator + FOLDER_AI;		
 	}
 	
 	public static String getCachePath()

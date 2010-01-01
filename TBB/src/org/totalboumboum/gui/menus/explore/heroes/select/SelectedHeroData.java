@@ -77,7 +77,7 @@ public class SelectedHeroData extends EntitledDataPanel implements PackBrowserSu
 				packPanel = new PackBrowserSubPanel(listWidth,listHeight);
 				String baseFolder = FileTools.getHeroesPath();
 				String targetFile = FileTools.FILE_SPRITE+FileTools.EXTENSION_XML;
-				packPanel.setFolder(baseFolder,targetFile);
+				packPanel.setFolder(baseFolder,null,targetFile);
 				packPanel.addListener(this);
 				mainPanel.add(packPanel);
 			}
