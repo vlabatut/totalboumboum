@@ -74,7 +74,9 @@ public class HomogenResultsSubPanel extends TableSubPanel
 		int cols = COLS;
 	
 		if(statisticHolder!=null)
-		{	if(showPortrait) 
+		{	if(showRank) 
+				cols++;
+			if(showPortrait) 
 				cols++;
 			if(showName) 
 				cols++;
@@ -88,8 +90,6 @@ public class HomogenResultsSubPanel extends TableSubPanel
 			if(showTotal && !(statisticHolder instanceof Round))
 				cols++;
 			if(showPoints) 
-				cols++;
-			if(showRank) 
 				cols++;
 			reinit(LINES,cols);
 			
@@ -118,6 +118,11 @@ public class HomogenResultsSubPanel extends TableSubPanel
 			// headers
 			int col = 0;
 			{	String headerPrefix = prefix+GuiKeys.HEADER;
+				if(showRank)
+				{	String key = headerPrefix+GuiKeys.RANK;
+					setLabelKey(0,col,key,true);
+					col++;
+				}
 				if(showPortrait) 
 				{	String key = headerPrefix+GuiKeys.PORTRAIT;
 					setLabelKey(0,col,key,true);
@@ -169,11 +174,6 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					setLabelKey(0,col,key,true);
 					col++;
 				}
-				if(showRank)
-				{	String key = headerPrefix+GuiKeys.RANK;
-					setLabelKey(0,col,key,true);
-					col++;
-				}
 			}
 			
 			// init
@@ -197,6 +197,24 @@ public class HomogenResultsSubPanel extends TableSubPanel
 				int profileIndex = players.indexOf(profile);
 				// color
 				Color clr = profile.getSpriteColor().getColor();
+				// rank
+				if(showRank)
+				{	int rank = orderedPlayers.getRankForProfile(profile);
+					String text;
+					if(rank==-1)
+						text = "-";
+					else
+						text = Integer.toString(rank);
+					String tooltip = text;
+					setLabelText(line,col,text,tooltip);
+					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+					setLabelBackground(line,col,bg);			
+					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					if(temp>rankWidth)
+						rankWidth = temp;
+					col++;;
+				}
 				// portrait
 				if(showPortrait)
 				{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);

@@ -13,7 +13,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2009 Vincent Labatut 
+ * Copyright 2008-2010 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
