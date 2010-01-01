@@ -3,6 +3,7 @@ package fr.free.totalboumboum.game.tournament.cup;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
@@ -64,13 +65,12 @@ public class CupTieBreak implements Serializable
 	{	return match;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public Match initMatch()
 	{	// involved players
 		Ranks ranks = part.getOrderedPlayers();
 		int problematicTie = part.getProblematicTie();
-		ArrayList<Profile> tie = ranks.getProfilesFromRank(problematicTie);
-		ArrayList<Profile> profiles = (ArrayList<Profile>)tie.clone();
+		List<Profile> tie = ranks.getProfilesFromRank(problematicTie);
+		List<Profile> profiles = new ArrayList<Profile>(tie);
 		
 		// init match 
 		Match result = match.copy();
@@ -100,7 +100,7 @@ public class CupTieBreak implements Serializable
 		else
 		{	// profiles of the tied players
 			Ranks ranks = part.getOrderedPlayers();
-			ArrayList<Profile> tie = ranks.getProfilesFromRank(problematicTie);
+			List<Profile> tie = ranks.getProfilesFromRank(problematicTie);
 			int tiedPlayersCount = tie.size();
 			ArrayList<Profile> tiedProfiles = (ArrayList<Profile>)tie;
 			

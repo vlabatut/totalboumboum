@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -212,7 +213,7 @@ public class SequenceTournament extends AbstractTournament
 		{	int rank = ranks[i];
 			int rank2 = ranks2[i];
 			Profile profile = getProfiles().get(i);
-			ArrayList<Profile> list = result.getProfilesFromRank(rank);
+			List<Profile> list = result.getProfilesFromRank(rank);
 			int index = -1;
 			// if no list yet : regular insertion
 			if(list==null)

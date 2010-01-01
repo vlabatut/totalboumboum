@@ -131,15 +131,15 @@ public class CupPart implements Serializable
 	private void updateRankings()
 	{	// process ranks
 		Ranks matchRanks = currentMatch.getOrderedPlayers();
-		ArrayList<Profile> tie = ranks.getProfilesFromRank(problematicTie);
+		List<Profile> tie = ranks.getProfilesFromRank(problematicTie);
 		ranks.remove(problematicTie);
 		
 		// update rankings
 		for(int i=0;i<tie.size();i++)
 		{	Profile profile = tie.get(i);
-			int relativeRank = matchRanks.getRankFromProfile(profile);
+			int relativeRank = matchRanks.getRankForProfile(profile);
 			int newRank = problematicTie-1 + relativeRank;
-			ArrayList<Profile> list = ranks.getProfilesFromRank(newRank);
+			List<Profile> list = ranks.getProfilesFromRank(newRank);
 			if(list==null)
 				ranks.addProfile(newRank,profile);
 			else
@@ -152,7 +152,7 @@ public class CupPart implements Serializable
 		int result = -1;
 		int i = 1;
 		while(i<=GameData.CONTROL_COUNT && result<0)
-		{	ArrayList<Profile> list = ranks.getProfilesFromRank(i);
+		{	List<Profile> list = ranks.getProfilesFromRank(i);
 			if(list!=null && list.size()>1)
 			{	int j = 0;
 				while(j<list.size() && result<0)
@@ -324,7 +324,7 @@ public class CupPart implements Serializable
 		{	CupLeg previousLeg = leg.getPreviousLeg();
 			CupPart previousPart = previousLeg.getPart(previousPartNumber);
 			Ranks previousRanks = previousPart.getOrderedPlayers();
-			ArrayList<Profile> list = previousRanks.getProfilesFromRank(previousRank);
+			List<Profile> list = previousRanks.getProfilesFromRank(previousRank);
 			if(list!=null && list.size()==1)
 				result = list.get(0);
 		}
@@ -502,7 +502,20 @@ public class CupPart implements Serializable
 		
 		return result;
 	}
-	
+
+	public int processPlayerFinalRank(int localRank, int finalRank)
+	{	int result = 0;
+		
+		List<Profile> prfls = ranks.getProfilesFromRank(localRank);
+		for(Profile profile: prfls)
+		{	CupPlayer player = getPlayerForProfile(profile);
+			result ++;
+			player.setActualFinalRank(finalRank);
+		}
+		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

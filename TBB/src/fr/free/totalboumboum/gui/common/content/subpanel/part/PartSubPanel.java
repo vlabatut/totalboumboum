@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.rank.Ranks;
@@ -254,7 +255,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 
 		// rank
 		Ranks ranks = part.getOrderedPlayers();
-		int rk = ranks.getRankFromProfile(profile);
+		int rk = ranks.getRankForProfile(profile);
 		if(rk==-1)
 		{	text = "-";
 			tooltip = null;
@@ -364,7 +365,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 				// after button
 				case COL_AFTER:
 					{	Ranks ranks = part.getOrderedPlayers();
-						ArrayList<Profile> pr = ranks.getProfilesFromRank(pos[0]);
+						List<Profile> pr = ranks.getProfilesFromRank(pos[0]);
 						if(pr!=null && pr.size()==1)
 						{	CupPart nextPart = part.getNextPartForRank(pos[0]);
 							if(nextPart!=null)

@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
@@ -99,7 +100,7 @@ public class Ranks implements Serializable
 		return result;
 	}
 	
-	public ArrayList<Profile> getProfilesFromRank(int rank)
+	public List<Profile> getProfilesFromRank(int rank)
 	{	ArrayList<Profile> result = ranks.get(rank);
 		return result;		
 	}
@@ -126,7 +127,7 @@ public class Ranks implements Serializable
 		return result;
 	}
 	
-	public int getRankFromProfile(Profile profile)
+	public int getRankForProfile(Profile profile)
 	{	int result = -1;
 		Iterator<Entry<Integer,ArrayList<Profile>>> it = ranks.entrySet().iterator();
 		while(it.hasNext() && result==-1)

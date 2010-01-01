@@ -23,6 +23,8 @@ package fr.free.totalboumboum.game.tournament.cup;
 
 import java.io.Serializable;
 
+import fr.free.totalboumboum.configuration.profile.Profile;
+
 public class CupPlayer implements Serializable
 {	private static final long serialVersionUID = 1L;
 
@@ -71,6 +73,7 @@ public class CupPlayer implements Serializable
 	private boolean used;
 	private int simulatedRank;
 	private int simulatedFinalRank;
+	private int actualFinalRank;
 	
 	public void setUsed(boolean used)
 	{	this.used = used;
@@ -83,6 +86,7 @@ public class CupPlayer implements Serializable
 	public void setSimulatedRank(int simulatedRank)
 	{	this.simulatedRank = simulatedRank;
 		simulatedFinalRank = 0;
+		actualFinalRank = 0;
 	}
 
 	public int getSimulatedRank()
@@ -102,7 +106,23 @@ public class CupPlayer implements Serializable
 	public int getSimulatedFinalRank()
 	{	return simulatedFinalRank;
 	}
+	
+	public void setActualFinalRank(int actualFinalRank)
+	{	this.actualFinalRank = actualFinalRank;
+		CupLeg prevLeg = part.getLeg().getPreviousLeg();
+		if(prevLeg!=null)
+		{	CupPart prevPart = prevLeg.getPart(this.prevPart);
+			int index = part.getPlayers().indexOf(this);
+			Profile profile = part.getProfileForIndex(index);
+			CupPlayer prevPlayer = prevPart.getPlayerForProfile(profile);
+			prevPlayer.setSimulatedFinalRank(actualFinalRank);
+		}
+	}
 
+	public int getActualFinalRank()
+	{	return actualFinalRank;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
