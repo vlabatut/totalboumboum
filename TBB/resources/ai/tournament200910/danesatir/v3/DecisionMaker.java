@@ -1,7 +1,7 @@
 package tournament200910.danesatir.v3;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiHero;
 
 public class DecisionMaker {
 

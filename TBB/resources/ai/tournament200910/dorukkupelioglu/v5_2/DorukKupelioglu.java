@@ -3,14 +3,15 @@ package tournament200910.dorukkupelioglu.v5_2;
 
 import java.util.Date;
 
+import org.totalboumboum.ai.adapter200910.ArtificialIntelligence;
+import org.totalboumboum.ai.adapter200910.communication.AiAction;
+import org.totalboumboum.ai.adapter200910.communication.AiActionName;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiHero;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.engine.content.feature.Direction;
 
-import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
-import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
-import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+
 
 
 public class DorukKupelioglu extends ArtificialIntelligence 

@@ -5,10 +5,11 @@ package tournament200809.akpolatsener.v2;
 
 import java.util.Collection;
 import java.util.Iterator;
-import fr.free.totalboumboum.ai.adapter200809.AiBomb;
-import fr.free.totalboumboum.ai.adapter200809.AiFire;
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
+
+import org.totalboumboum.ai.adapter200809.AiBomb;
+import org.totalboumboum.ai.adapter200809.AiFire;
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
 
 /**
  * @author Administrator

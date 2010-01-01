@@ -27,17 +27,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.AiOutput;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
-import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
-import fr.free.totalboumboum.ai.adapter200910.data.AiFire;
-import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiItem;
-import fr.free.totalboumboum.ai.adapter200910.data.AiItemType;
-import fr.free.totalboumboum.ai.adapter200910.data.AiStateName;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.ai.adapter200910.communication.AiOutput;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiBlock;
+import org.totalboumboum.ai.adapter200910.data.AiBomb;
+import org.totalboumboum.ai.adapter200910.data.AiFire;
+import org.totalboumboum.ai.adapter200910.data.AiHero;
+import org.totalboumboum.ai.adapter200910.data.AiItem;
+import org.totalboumboum.ai.adapter200910.data.AiItemType;
+import org.totalboumboum.ai.adapter200910.data.AiStateName;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiZone;
+
 
 /**
  * classe chargée d'extraire de la zone les informations

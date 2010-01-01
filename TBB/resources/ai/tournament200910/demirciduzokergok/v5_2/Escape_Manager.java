@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
-import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.Astar;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.MatrixCostCalculator;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiHero;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.ai.adapter200910.path.AiPath;
+import org.totalboumboum.ai.adapter200910.path.astar.Astar;
+import org.totalboumboum.ai.adapter200910.path.astar.cost.MatrixCostCalculator;
+import org.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
+import org.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
+import org.totalboumboum.engine.content.feature.Direction;
+
 
 /**
  * This class is about defense strategie. Our defense strategie is based on the time of 

@@ -2,8 +2,9 @@ package tournament200910.dereligeckalan.v1;
 
 import java.util.Comparator;
 
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+
 import tournament200910.dereligeckalan.v1.Noeud;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
 
 public class NoeudAstar implements Comparator<Noeud> {
 	private Noeud goal;

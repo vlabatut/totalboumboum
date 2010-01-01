@@ -1,8 +1,9 @@
 package tournament200809.devecioglukorkmaz.v1;
 
 import java.util.Comparator;
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
+
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
 
 public class AiTileHeuristicComparator implements Comparator<AiTile> {
 

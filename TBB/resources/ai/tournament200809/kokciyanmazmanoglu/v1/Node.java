@@ -1,7 +1,7 @@
 package tournament200809.kokciyanmazmanoglu.v1;
 
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
 
 
 

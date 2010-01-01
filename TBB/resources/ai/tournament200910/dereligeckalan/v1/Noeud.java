@@ -1,7 +1,7 @@
 package tournament200910.dereligeckalan.v1;
 
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
 
 import tournament200910.dereligeckalan.v1.ZoneEnum;
 
@@ -21,7 +21,7 @@ public class Noeud {
 		/**
 		 * Constructeur.
 		 * @throws StopRequestException 
-		 * @throws fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException 
+		 * @throws org.totalboumboum.ai.adapter200910.communication.StopRequestException 
 		 */
 
 		public Noeud(DereliGeckalan source) throws StopRequestException{
@@ -43,9 +43,9 @@ public class Noeud {
 		 * @param cout
 		 *            cout du noeud
 		 * @throws StopRequestException 
-		 * @throws fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException 
+		 * @throws org.totalboumboum.ai.adapter200910.communication.StopRequestException 
 		 */
-		public Noeud(int x, int y, ZoneEnum valeur, int cout,DereliGeckalan source) throws StopRequestException, fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException {
+		public Noeud(int x, int y, ZoneEnum valeur, int cout,DereliGeckalan source) throws StopRequestException, org.totalboumboum.ai.adapter200910.communication.StopRequestException {
 			super();
 			source.checkInterruption(); //Appel Obligatoire
 			this.source = source;

@@ -4,13 +4,14 @@ package tournament200910.adatepeozbek.v1;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
-import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
-import fr.free.totalboumboum.ai.adapter200910.data.AiFire;
-import fr.free.totalboumboum.ai.adapter200910.data.AiStateName;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
+
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiBlock;
+import org.totalboumboum.ai.adapter200910.data.AiBomb;
+import org.totalboumboum.ai.adapter200910.data.AiFire;
+import org.totalboumboum.ai.adapter200910.data.AiStateName;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiZone;
 
 /* Cette classe d'abord initialise une matrice avec les valeurs initiales MAX_VALUE et
  * commence à contrôler les feux, les bombes, les murs brulés.Puis, l'algorithme se tient

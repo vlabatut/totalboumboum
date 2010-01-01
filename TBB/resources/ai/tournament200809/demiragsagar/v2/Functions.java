@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import fr.free.totalboumboum.ai.adapter200809.AiBlock;
-import fr.free.totalboumboum.ai.adapter200809.AiBomb;
-import fr.free.totalboumboum.ai.adapter200809.AiFire;
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.ai.adapter200809.AiBlock;
+import org.totalboumboum.ai.adapter200809.AiBomb;
+import org.totalboumboum.ai.adapter200809.AiFire;
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.engine.content.feature.Direction;
+
 
 public class Functions {
 	// regarde si il existe un mur de type SOFT ou HARD

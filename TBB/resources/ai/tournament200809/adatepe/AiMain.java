@@ -21,8 +21,9 @@ package tournament200809.adatepe;
  * 
  */
 
+import org.totalboumboum.ai.adapter200809.AiManager;
+
 import tournament200809.adatepe.v1.Adatepe;
-import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager
 {

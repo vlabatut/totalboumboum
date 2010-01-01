@@ -1,8 +1,8 @@
 package tournament200809.tirtiltomruk.v2.zone;
 
-import fr.free.totalboumboum.ai.adapter200809.AiBomb;
+import org.totalboumboum.ai.adapter200809.AiBomb;
+import org.totalboumboum.ai.adapter200809.AiZone;
 
-import fr.free.totalboumboum.ai.adapter200809.AiZone;
 
 public class TimedBomb {
 	

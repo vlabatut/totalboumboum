@@ -1,7 +1,7 @@
 package tournament200910.enhoskarapazar.v5;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.ai.adapter200910.communication.AiActionName;
+import org.totalboumboum.engine.content.feature.Direction;
 
 public class returnAction {
 	Direction move = Direction.NONE;

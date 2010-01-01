@@ -1,7 +1,8 @@
 package tournament200910.dereligeckalan;
 
+import org.totalboumboum.ai.adapter200910.AiManager;
+
 import tournament200910.dereligeckalan.v5.DereliGeckalan;
-import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**
  * class utilisée par le moteur du jeu pour retrouver les IA

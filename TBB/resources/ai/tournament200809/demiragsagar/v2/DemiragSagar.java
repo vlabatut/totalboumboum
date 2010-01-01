@@ -1,9 +1,9 @@
 package tournament200809.demiragsagar.v2;
 
-import fr.free.totalboumboum.ai.adapter200809.AiAction;
-import fr.free.totalboumboum.ai.adapter200809.AiActionName;
-import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.ai.adapter200809.AiAction;
+import org.totalboumboum.ai.adapter200809.AiActionName;
+import org.totalboumboum.ai.adapter200809.ArtificialIntelligence;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
 
 public class DemiragSagar extends ArtificialIntelligence
 {

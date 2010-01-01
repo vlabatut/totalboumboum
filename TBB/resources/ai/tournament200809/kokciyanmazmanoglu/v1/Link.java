@@ -1,6 +1,6 @@
 package tournament200809.kokciyanmazmanoglu.v1;
 
-import fr.free.totalboumboum.ai.adapter200809.AiAction;
+import org.totalboumboum.ai.adapter200809.AiAction;
 
 
 public class Link {

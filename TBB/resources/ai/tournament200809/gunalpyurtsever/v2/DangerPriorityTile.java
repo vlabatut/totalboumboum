@@ -1,6 +1,6 @@
 package tournament200809.gunalpyurtsever.v2;
 
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.AiTile;
 
 public class DangerPriorityTile{
 

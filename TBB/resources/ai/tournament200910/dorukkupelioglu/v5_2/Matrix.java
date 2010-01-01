@@ -5,9 +5,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.*;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.*;
+
 
 public class Matrix 
 {

@@ -2,17 +2,18 @@ package tournament200809.medeniuluer.v2;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.totalboumboum.ai.adapter200809.AiBlock;
+import org.totalboumboum.ai.adapter200809.AiBomb;
+import org.totalboumboum.ai.adapter200809.AiFire;
+import org.totalboumboum.ai.adapter200809.AiHero;
+import org.totalboumboum.ai.adapter200809.AiItem;
+import org.totalboumboum.ai.adapter200809.AiItemType;
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.AiZone;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
+
 import tournament200809.medeniuluer.v2.MedeniUluer;
 
-import fr.free.totalboumboum.ai.adapter200809.AiBlock;
-import fr.free.totalboumboum.ai.adapter200809.AiBomb;
-import fr.free.totalboumboum.ai.adapter200809.AiFire;
-import fr.free.totalboumboum.ai.adapter200809.AiHero;
-import fr.free.totalboumboum.ai.adapter200809.AiItem;
-import fr.free.totalboumboum.ai.adapter200809.AiItemType;
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.ai.adapter200809.AiZone;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
 
 public class Zone {
 	// Une personnalisation generale du AiZone

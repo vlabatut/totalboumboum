@@ -3,13 +3,14 @@ package tournament200910.danesatir.v3;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
-import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.AstarNode;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.successor.BasicSuccessorCalculator;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiBlock;
+import org.totalboumboum.ai.adapter200910.data.AiHero;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.path.astar.AstarNode;
+import org.totalboumboum.ai.adapter200910.path.astar.successor.BasicSuccessorCalculator;
+import org.totalboumboum.engine.content.feature.Direction;
+
 
 public class WallSuccessor extends BasicSuccessorCalculator {
 	@SuppressWarnings("unused")

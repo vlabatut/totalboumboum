@@ -2,7 +2,8 @@ package tournament200910.dorukkupelioglu.v5_1;
 
 import java.util.List;
 
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+
 /**
  * Cette class est pour creer un noeud qui contient les valeur
  * <br><br>G : Cost <br>H : Heuristic <br>F = G + H 

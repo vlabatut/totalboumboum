@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import org.totalboumboum.ai.adapter200809.AiAction;
+import org.totalboumboum.ai.adapter200809.AiActionName;
+import org.totalboumboum.ai.adapter200809.AiBomb;
+import org.totalboumboum.ai.adapter200809.AiHero;
+import org.totalboumboum.ai.adapter200809.AiItem;
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.AiZone;
+import org.totalboumboum.ai.adapter200809.ArtificialIntelligence;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.engine.content.feature.Direction;
+
 import tournament200809.demiragsagar.v2.AStar;
 
-import fr.free.totalboumboum.ai.adapter200809.AiAction;
-import fr.free.totalboumboum.ai.adapter200809.AiActionName;
-import fr.free.totalboumboum.ai.adapter200809.AiBomb;
-import fr.free.totalboumboum.ai.adapter200809.AiHero;
-import fr.free.totalboumboum.ai.adapter200809.AiItem;
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.ai.adapter200809.AiZone;
-import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
-import fr.free.totalboumboum.engine.content.feature.Direction;
 
 public class MonIA extends ArtificialIntelligence {
 

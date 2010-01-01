@@ -1,12 +1,12 @@
 package tournament200910.danesatir.v4;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
-import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.Astar;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiBomb;
+import org.totalboumboum.ai.adapter200910.data.AiHero;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.path.AiPath;
+import org.totalboumboum.ai.adapter200910.path.astar.Astar;
+import org.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
 
 public class DecisionMaker {
 

@@ -2,7 +2,8 @@ package tournament200708.basmansandalli;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+import org.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+
 
 
 

@@ -34,7 +34,7 @@
 	Set bin=.\bin
 	Set jdom=.\resources\lib\jdom.jar
 	Set cp=%bin%;%jdom%;%ai%
-	Set launcher=fr.free.totalboumboum.Launcher
+	Set launcher=org.totalboumboum.Launcher
 
 :: launch the game
 	java -Xmx256m -classpath %cp% %launcher% quick

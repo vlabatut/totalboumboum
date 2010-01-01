@@ -21,7 +21,7 @@ package tournament200910.suiveur;
  * 
  */
 
-import fr.free.totalboumboum.ai.adapter200910.AiManager;
+import org.totalboumboum.ai.adapter200910.AiManager;
 
 /**
  * class utilisée par le moteur du jeu pour retrouver les IA

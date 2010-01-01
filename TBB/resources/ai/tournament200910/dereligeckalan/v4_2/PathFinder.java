@@ -4,14 +4,15 @@ package tournament200910.dereligeckalan.v4_2;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.engine.content.feature.Direction;
 
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
 
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 
-import fr.free.totalboumboum.engine.content.feature.Direction;
+
 
 
 public class PathFinder {

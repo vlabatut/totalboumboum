@@ -2,7 +2,8 @@ package tournament200910.dereligeckalan.v1;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Vector;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
+
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
 
 
 import tournament200910.dereligeckalan.v1.ZoneEnum;

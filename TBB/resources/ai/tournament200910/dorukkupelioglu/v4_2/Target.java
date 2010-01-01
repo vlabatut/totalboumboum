@@ -2,8 +2,8 @@ package tournament200910.dorukkupelioglu.v4_2;
 
 
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.engine.content.feature.Direction;
 
 public class Target 
 {

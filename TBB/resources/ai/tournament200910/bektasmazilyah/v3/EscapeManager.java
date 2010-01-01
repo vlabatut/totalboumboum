@@ -25,18 +25,19 @@ import java.awt.Color;
 import java.util.Iterator;
 import java.util.List;
 
+import org.totalboumboum.ai.adapter200910.communication.AiOutput;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiHero;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.ai.adapter200910.path.AiPath;
+import org.totalboumboum.ai.adapter200910.path.astar.Astar;
+import org.totalboumboum.ai.adapter200910.path.astar.cost.MatrixCostCalculator;
+import org.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
+import org.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
+import org.totalboumboum.engine.content.feature.Direction;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.AiOutput;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
-import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.Astar;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.MatrixCostCalculator;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+
 
 /**
  * classe chargée d'implémenter un déplacement de fuite,

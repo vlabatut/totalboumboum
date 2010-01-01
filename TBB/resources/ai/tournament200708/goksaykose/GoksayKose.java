@@ -1,7 +1,8 @@
 package tournament200708.goksaykose;
 import java.util.Vector;
 
-import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+import org.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+
 
 
 

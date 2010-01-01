@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.ai.adapter200809.AiZone;
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.AiZone;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
+
 
 
 /**

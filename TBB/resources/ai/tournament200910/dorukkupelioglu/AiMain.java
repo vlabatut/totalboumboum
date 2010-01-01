@@ -21,8 +21,9 @@ package tournament200910.dorukkupelioglu;
  * 
  */
 
+import org.totalboumboum.ai.adapter200910.AiManager;
+
 import tournament200910.dorukkupelioglu.v5_2.DorukKupelioglu;
-import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**
  * class utilis�e par le moteur du jeu pour retrouver les IA

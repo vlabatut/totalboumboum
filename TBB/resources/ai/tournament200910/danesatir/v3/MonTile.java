@@ -1,6 +1,6 @@
 package tournament200910.danesatir.v3;
 
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
 
 public class MonTile {
 	private AiTile tile;

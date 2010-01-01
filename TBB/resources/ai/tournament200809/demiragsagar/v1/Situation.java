@@ -1,6 +1,6 @@
 package tournament200809.demiragsagar.v1;
 
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.engine.content.feature.Direction;
 
 public class Situation {
 

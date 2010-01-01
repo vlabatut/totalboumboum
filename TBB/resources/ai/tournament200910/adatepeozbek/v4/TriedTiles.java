@@ -2,8 +2,9 @@ package tournament200910.adatepeozbek.v4;
 
 import java.util.ArrayList;
 import java.util.List;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
+
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
 
 public class TriedTiles
 {

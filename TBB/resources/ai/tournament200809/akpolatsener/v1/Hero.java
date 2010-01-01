@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
-import fr.free.totalboumboum.ai.adapter200809.AiHero;
-import fr.free.totalboumboum.ai.adapter200809.AiZone;
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
+
+import org.totalboumboum.ai.adapter200809.AiHero;
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.AiZone;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
 
 public class Hero {
 

@@ -3,13 +3,14 @@ package tournament200910.findiksirin.v1_2;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
-import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
-import fr.free.totalboumboum.ai.adapter200910.data.AiFire;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiBlock;
+import org.totalboumboum.ai.adapter200910.data.AiBomb;
+import org.totalboumboum.ai.adapter200910.data.AiFire;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.engine.content.feature.Direction;
 
 
 /**

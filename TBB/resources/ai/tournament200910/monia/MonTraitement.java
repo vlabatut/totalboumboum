@@ -1,7 +1,7 @@
 package tournament200910.monia;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.communication.AiAction;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
 
 
 /**

@@ -32,7 +32,7 @@
 	Setlocal
 
 :: define path variables
-	Set main=.\src\fr\free\totalboumboum
+	Set main=.\src\org\totalboumboum
 	Set aig=%main%\ai
 	Set ai=.\resources\ai
 	Set bin=.\bin

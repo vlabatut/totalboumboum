@@ -3,15 +3,16 @@ package tournament200910.danesatir.v5;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
-import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiItem;
-import fr.free.totalboumboum.ai.adapter200910.data.AiStateName;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.Astar;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiBlock;
+import org.totalboumboum.ai.adapter200910.data.AiHero;
+import org.totalboumboum.ai.adapter200910.data.AiItem;
+import org.totalboumboum.ai.adapter200910.data.AiStateName;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.path.AiPath;
+import org.totalboumboum.ai.adapter200910.path.astar.Astar;
+import org.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
+
 /**
  * Class for Bonus Collect
  * @author limon

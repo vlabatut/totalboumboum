@@ -6,8 +6,9 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Vector;
 
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.engine.content.feature.Direction;
+
 
 public class AStar {
 
