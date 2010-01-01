@@ -1,13 +1,13 @@
 :: -------------------------------------------------------------------
 ::
 :: This is an MS-DOS script, it works only on Windows operating systems.
-:: It (re)compiles the whole TBB game
+:: It (re)compiles the whole TBB game (and all AIs located in resources/ai).
 :: v.0.2
 ::
 :: -------------------------------------------------------------------
 ::
 :: Total Boum Boum
-:: Copyright 2008-2009 Vincent Labatut 
+:: Copyright 2008-2010 Vincent Labatut 
 :: 
 :: This file is part of Total Boum Boum.
 :: 

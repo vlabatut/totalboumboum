@@ -3,7 +3,7 @@ Total Boum Boum version 1 Beta
 
 -----------------------------------------------------------------------
 
-Copyright 2008-2009 Vincent Labatut
+Copyright 2008-2010 Vincent Labatut
 http:\\www.totalboumboum.org
 vincent.labatut@free.fr
 
