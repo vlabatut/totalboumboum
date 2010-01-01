@@ -962,6 +962,7 @@
 					<text name="Points" value="Points"  tooltip="Nombre total de points marqués pour cette rencontre" />
 					<text name="Portrait" value="Personnage"  tooltip="Personnage utilisé par le joueur" />
 					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
+					<text name="Rank" value="Classement"  tooltip="Classement actuel dans cette rencontre" />
 					<text name="SelfBombings" value="Auto-bombage"  tooltip="Nombre total d'auto-bombages réalisés au cours de cette rencontre" />
 					<text name="Time" value="Temps"  tooltip="Temps total cumulé pour cette rencontre" />
 					<text name="Total" value="Total"  tooltip="Nombre total de points marqués pour toutes les manches de cette rencontre" />
@@ -985,6 +986,7 @@
 					<text name="Points" value="Points"  tooltip="Nombre de points marqués pour cette manche" />
 					<text name="Portrait" value="Personnage"  tooltip="Personnage utilisé par le joueur" />
 					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
+					<text name="Rank" value="Classement"  tooltip="Classement actuel dans cette manche" />
 					<text name="SelfBombings" value="Auto-bombage"  tooltip="Nombre total d'auto-bombages réalisés au cours de cette manche" />
 					<text name="Time" value="Temps"  tooltip="Temps de jeu pour cette manche" />
 				</group>
@@ -1008,6 +1010,7 @@
 					<text name="Points" value="Points"  tooltip="Nombre de points marqués pour ce tournoi" />
 					<text name="Portrait" value="Personnage"  tooltip="Personnage utilisé par le joueur" />
 					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
+					<text name="Rank" value="Classement"  tooltip="Classement actuel dans ce tournoi" />
 					<text name="SelfBombings" value="Auto-bombage"  tooltip="Nombre total d'auto-bombages réalisés au cours de ce tournoi" />
 					<text name="Time" value="Temps"  tooltip="Nombre total cumulé au cours du tournoi" />
 					<text name="Total" value="Total"  tooltip="Nombre total de points marqués au cours des rencontres" />
