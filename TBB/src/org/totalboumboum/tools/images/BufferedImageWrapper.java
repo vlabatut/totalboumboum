@@ -1,4 +1,4 @@
-package org.totalboumboum.tools.image;
+package org.totalboumboum.tools.images;
 
 import java.io.File;
 import java.awt.image.BufferedImage;

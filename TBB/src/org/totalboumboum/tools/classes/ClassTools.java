@@ -1,4 +1,4 @@
-package org.totalboumboum.tools;
+package org.totalboumboum.tools.classes;
 
 /*
  * Total Boum Boum
