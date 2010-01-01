@@ -32,21 +32,20 @@ import org.totalboumboum.statistics.overall.OverallStatsSaver;
 import org.totalboumboum.statistics.overall.PlayerStats;
 import org.xml.sax.SAXException;
 
-
 public class StatTools
 {	
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	//initAllStats();
 		//reinitOverallStatsForPlayer(0);
-		export
+		exportAllStats();
 	}
 	
 	/**
 	 * initializes both glicko-2 rankings and overall stats, for all profiles
 	 */
 	public static void initAllStats() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	Glicko2Saver.init();
-		OverallStatsSaver.init();		
+	{	Glicko2Saver.initGlicko2Statistics();
+		OverallStatsSaver.initOverallStatistics();		
 	}
 	
 	/**
@@ -57,13 +56,34 @@ public class StatTools
 	 */
 	public static void reinitOverallStatsForPlayer(int id) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{	// load
-		HashMap<Integer,PlayerStats> playersStats = OverallStatsLoader.loadStatistics();
-
+		HashMap<Integer,PlayerStats> playersStats = OverallStatsLoader.loadOverallStatistics();
+		
 		// change
 		PlayerStats playerStat = playersStats.get(id);
 		playerStat.reset();
 		
 		// save
-		OverallStatsSaver.saveStatistics(playersStats);
+		OverallStatsSaver.saveOverallStatistics(playersStats);
 	}
+	
+	public static void exportAllStats() throws IOException, ClassNotFoundException
+	{	// load
+		HashMap<Integer,PlayerStats> playersStats = OverallStatsLoader.loadOverallStatistics();
+		
+		
+		// export
+		OverallStatsSaver.exportOverallStatistics(playersStats);
+		
+	}
+	
+	public static void importAllStats() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	// import
+		HashMap<Integer,PlayerStats> playersStats = OverallStatsLoader.importOverallStatistics();
+		
+		
+		// save
+		OverallStatsSaver.saveOverallStatistics(playersStats);
+		
+	}
+
 }

@@ -33,7 +33,7 @@ import org.totalboumboum.tools.files.FileTools;
 
 public class Glicko2Loader
 {
-	public static RankingService loadStatistics() throws IOException, ClassNotFoundException
+	public static RankingService loadGlicko2Statistics() throws IOException, ClassNotFoundException
 	{	// init path
 		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 		

@@ -52,16 +52,16 @@ public class GameStatistics
 	/////////////////////////////////////////////////////////////////
 	public static void loadStatistics() throws IOException, ClassNotFoundException
 	{	// overall statistics
-		playersStats = OverallStatsLoader.loadStatistics();
+		playersStats = OverallStatsLoader.loadOverallStatistics();
 		// glicko2 ranking service
-		rankingService = Glicko2Loader.loadStatistics();
+		rankingService = Glicko2Loader.loadGlicko2Statistics();
 	}
 	
 	public static void saveStatistics() throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// overall statistics
-		OverallStatsSaver.saveStatistics(playersStats);
+		OverallStatsSaver.saveOverallStatistics(playersStats);
 		// glicko2 ranking service
-		Glicko2Saver.saveStatistics(rankingService);		
+		Glicko2Saver.saveGlicko2Statistics(rankingService);		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -151,7 +151,7 @@ public class GameStatistics
 	private static HashMap<Integer,PlayerStats> playersStats = new HashMap<Integer, PlayerStats>();
 
 	public static void resetPlayersStats() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	HashMap<Integer,PlayerStats> playersStats = OverallStatsSaver.init();
+	{	HashMap<Integer,PlayerStats> playersStats = OverallStatsSaver.initOverallStatistics();
 		GameStatistics.playersStats = playersStats;
 	}
 	
@@ -217,7 +217,7 @@ public class GameStatistics
 	private static RankingService rankingService;
 
 	public static void resetRankingService() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	RankingService rankingService = Glicko2Saver.init();
+	{	RankingService rankingService = Glicko2Saver.initGlicko2Statistics();
 		GameStatistics.rankingService = rankingService;
 	}
 	
