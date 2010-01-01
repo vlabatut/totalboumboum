@@ -1,14 +1,14 @@
 :: -------------------------------------------------------------------
 ::
-:: this is a MS-DOS script, it works only on Windows operating systems.
-:: it launches TBB, but you can preferably use TBB.exe
+:: This is a MS-DOS script, it works only on Windows operating systems.
+:: It launches TBB with the appropriate parameters.
 ::
 :: v.0.1
 ::
 :: -------------------------------------------------------------------
 ::
 :: Total Boum Boum
-:: Copyright 2008-2009 Vincent Labatut 
+:: Copyright 2008-2010 Vincent Labatut 
 :: 
 :: This file is part of Total Boum Boum.
 :: 
