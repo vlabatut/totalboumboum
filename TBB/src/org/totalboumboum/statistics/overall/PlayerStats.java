@@ -170,18 +170,18 @@ public class PlayerStats implements Serializable
 	/////////////////////////////////////////////////////////////////
 	public void exportToText(PrintWriter writer)
 	{	// misc
-		writer.print(playerId+";");
-		writer.print(previousRank+";");
+		writer.print(playerId);
+		writer.print(";"+previousRank);
 		
 		// rounds
-		writer.print(roundsPlayed+";");
-		writer.print(roundsWon+";");
-		writer.print(roundsDrawn+";");
-		writer.print(roundsLost+";");
+		writer.print(";"+roundsPlayed);
+		writer.print(";"+roundsWon);
+		writer.print(";"+roundsDrawn);
+		writer.print(";"+roundsLost);
 		
 		// scores
 		for(Score score: Score.values())
-			writer.print(scores.get(score)+";");
+			writer.print(";"+scores.get(score));
 		
 		writer.println();
 	}

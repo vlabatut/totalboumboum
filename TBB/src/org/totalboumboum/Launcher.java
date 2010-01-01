@@ -848,6 +848,7 @@ public class Launcher
 	 * - GUI :
 	 * - IA :
 	 * - stats :
+	 * 		- possibilité d'exporter/importer les stats sous forme de fichier texte (pour quand on change les classes stat)
 	 * - Divers :
 	 * 		- renommage du package principal de fr.free.totalboumboum en org.totalboumboum
 	 * 		- mise à jour de l'année du copyright de 2008-2009 en 2008-2010

@@ -23,6 +23,7 @@ package org.totalboumboum.statistics.glicko2.jrs;
  * This library was modified by Vincent Labatut to be used in the Total Boum Boum project
  */
 
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,6 +33,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -910,5 +912,64 @@ public class RankingService implements Serializable {
     	//System.out.println("rawLostProba: "+rawLostProba);
     	//System.out.println("result: "+result);
     	return result;
+    }
+
+    /**
+     * export stats data to a text file, in order to make stat classes changes easier
+     * @author 
+     * 		Vincent
+     */
+    public void exportToText(PrintWriter writer)
+    {
+    	// period count
+        writer.println(periodCount);
+        
+        // player ratings
+        writer.println(playerRatings.size());
+        for(PlayerRating playerRating: playerRatings.values())
+        	playerRating.exportToText(writer);
+
+        // game results
+        writer.println(currentPeriodGameResults.size());
+        for(Entry<Integer,PairWiseGameResultsList> entry: currentPeriodGameResults.entrySet())
+        {	int id = entry.getKey();
+        	writer.println(id);
+    		PairWiseGameResultsList gameResults = entry.getValue();
+        	gameResults.exportToText(writer);        	
+        }
+    }
+
+    /**
+     * import stats data from a text file, in order to make stat classes changes easier
+     * @author 
+     * 		Vincent
+     */
+    public void importFromText(Scanner scanner)
+    {	String text;
+    	int n;
+    
+    	// period count
+    	text = scanner.nextLine();
+        periodCount = Integer.parseInt(text);
+        
+        // player ratings
+    	text = scanner.nextLine();
+        n = Integer.parseInt(text);
+        for(int i=0;i<n;i++)
+        {	PlayerRating playerRating = new PlayerRating(0,0,0,0);
+        	playerRating.importFromText(scanner);
+        	playerRatings.put(playerRating.getPlayerId(),playerRating);
+        }
+
+        // game results
+    	text = scanner.nextLine();
+        n = Integer.parseInt(text);
+        for(int i=0;i<n;i++)
+        {	text = scanner.nextLine();
+        	int id = Integer.parseInt(text);
+        	PairWiseGameResultsList gameResults = new PairWiseGameResultsList();
+        	gameResults.importFromText(scanner);
+        	currentPeriodGameResults.put(id,gameResults);
+        }
     }
 }

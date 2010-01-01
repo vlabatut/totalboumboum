@@ -23,6 +23,7 @@ package org.totalboumboum.statistics.glicko2.jrs;
  * This library was modified by Vincent Labatut to be used in the Total Boum Boum project
  */
 
+import java.io.PrintWriter;
 import java.util.*;
 
 /** A list of <code>PairWiseGameResult</code> objects. It extends 
@@ -77,4 +78,36 @@ class PairWiseGameResultsList extends ArrayList<PairWiseGameResult> {
         return (double)numberOfGamesPlayed/numberOfPairWiseGameResults;
     }
     
+    /**
+     * export stats data to a text file, in make stat classes changes easier
+     * @author 
+     * 		Vincent
+     */
+    public void exportToText(PrintWriter writer)
+    {	writer.print(numberOfGamesPlayed);
+		writer.print(";"+numberOfPairWiseGameResults);
+    	writer.println();
+    	
+    	for(PairWiseGameResult result: this)
+    		result.exportToText(writer);
+    }
+
+    /**
+     * import stats data from a text file, in order to make stat classes changes easier
+     * @author 
+     * 		Vincent
+     */
+	public void importFromText(Scanner scanner)
+	{	String text = scanner.nextLine();
+		String texts[] = text.split(";");
+		int t = 0;
+		numberOfGamesPlayed = Integer.parseInt(texts[t++]);
+		numberOfPairWiseGameResults = Integer.parseInt(texts[t++]);
+
+		for(int i=0;i<numberOfPairWiseGameResults;i++)
+		{	PairWiseGameResult result = new PairWiseGameResult(0,0);
+			result.importFromText(scanner);
+			add(result);
+		}
+	}
 }

@@ -23,7 +23,9 @@ package org.totalboumboum.statistics.glicko2.jrs;
  * This library was modified by Vincent Labatut to be used in the Total Boum Boum project
  */
 
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.Scanner;
 
 /** A class representing a player's rating, as computed by the ranking service.
   * <p>
@@ -289,4 +291,35 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
             }
         }
     }
+
+    /**
+     * export stats data to a text file, in order to make stat classes changes easier
+     * @author 
+     * 		Vincent
+     */
+    public void exportToText(PrintWriter writer)
+    {	writer.print(playerId);
+    	writer.print(";"+rating);
+    	writer.print(";"+ratingDeviation);
+    	writer.print(";"+ratingVolatility);
+    	writer.print(";"+roundcount);
+    	writer.println();
+    }
+
+    /**
+     * import stats data from a text file, in order to make stat classes changes easier
+     * @author 
+     * 		Vincent
+     */
+	public void importFromText(Scanner scanner)
+	{	String text = scanner.nextLine();
+		String texts[] = text.split(";");
+		int t = 0;
+
+		playerId = Integer.parseInt(texts[t++]);
+		rating = Double.parseDouble(texts[t++]);
+		ratingDeviation = Double.parseDouble(texts[t++]);
+		ratingVolatility = Double.parseDouble(texts[t++]);
+		roundcount = Integer.parseInt(texts[t++]);
+	}
 }

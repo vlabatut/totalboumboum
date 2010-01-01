@@ -23,7 +23,9 @@ package org.totalboumboum.statistics.glicko2.jrs;
  * This library was modified by Vincent Labatut to be used in the Total Boum Boum project
  */
 
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.Scanner;
 
 /** This class represents the results of a game against a single opponent. It
   * is used internally by the RankingService class. Clients of the system should
@@ -62,4 +64,29 @@ class PairWiseGameResult implements Serializable {
     double getScore() {
         return score;
     }
+
+    /**
+     * export stats data to a text file, in make stat classes changes easier
+     * @author 
+     * 		Vincent
+     */
+    public void exportToText(PrintWriter writer)
+    {	writer.print(opponentId);
+    	writer.print(";"+score);
+    	writer.println();
+    }
+
+    /**
+     * import stats data from a text file, in order to make stat classes changes easier
+     * @author 
+     * 		Vincent
+     */
+	public void importFromText(Scanner scanner)
+	{	String text = scanner.nextLine();
+		String texts[] = text.split(";");
+		int t = 0;
+		
+		opponentId = Integer.parseInt(texts[t++]);
+		score = Double.parseDouble(texts[t++]);
+	}
 }
