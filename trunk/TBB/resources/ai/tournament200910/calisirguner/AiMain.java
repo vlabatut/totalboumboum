@@ -1,7 +1,8 @@
 package tournament200910.calisirguner;
 
+import org.totalboumboum.ai.adapter200910.AiManager;
+
 import tournament200910.calisirguner.v5.CalisirGuner;
-import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**
  * class utilisée par le moteur du jeu pour retrouver les IA

@@ -2,11 +2,12 @@ package tournament200809.akpolatsener.v2.comparators;
 
 import java.util.Comparator;
 
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
+
 import tournament200809.akpolatsener.v2.AkpolatSener;
 import tournament200809.akpolatsener.v2.Danger;
 import tournament200809.akpolatsener.v2.Target;
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
 
 /**
  * la classe comparateur d'apres les distances directes aux dangers ou aux

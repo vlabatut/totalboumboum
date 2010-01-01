@@ -5,10 +5,11 @@ package tournament200809.dayioglugilgeckalan.v2;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.AiZone;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
 
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.ai.adapter200809.AiZone;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
+
 
 public class PathFinder {
 

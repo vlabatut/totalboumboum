@@ -1,7 +1,8 @@
 package tournament200910.findiksirin;
 
+import org.totalboumboum.ai.adapter200910.AiManager;
+
 import tournament200910.findiksirin.v5.FindikSirin;
-import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**
  * class utilisée par le moteur du jeu pour retrouver les IA

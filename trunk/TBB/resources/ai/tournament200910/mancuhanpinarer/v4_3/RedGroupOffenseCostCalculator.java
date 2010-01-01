@@ -3,10 +3,11 @@ package tournament200910.mancuhanpinarer.v4_3;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
+import org.totalboumboum.ai.adapter200910.data.AiBomb;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
+
 
 public class RedGroupOffenseCostCalculator extends CostCalculator {
 

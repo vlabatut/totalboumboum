@@ -4,10 +4,11 @@ package tournament200809.tirtiltomruk.v2.astaralgorithm;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.ai.adapter200809.AiZone;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.AiZone;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.engine.content.feature.Direction;
+
 
 import tournament200809.tirtiltomruk.v2.TirtilTomruk;
 import tournament200809.tirtiltomruk.v2.zone.Zone;

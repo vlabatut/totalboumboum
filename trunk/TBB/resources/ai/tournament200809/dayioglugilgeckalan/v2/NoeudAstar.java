@@ -2,7 +2,8 @@ package tournament200809.dayioglugilgeckalan.v2;
 
 import java.util.Comparator;
 
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
+
 
 public class NoeudAstar implements Comparator<Noeud> {
 

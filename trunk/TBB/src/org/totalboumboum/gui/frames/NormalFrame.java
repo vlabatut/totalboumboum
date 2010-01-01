@@ -143,7 +143,7 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 		String bin = "."+File.separator+"bin";
 		String jdom = "."+File.separator+"resources"+File.separator+"lib"+File.separator+"jdom.jar";
 		String cp = bin+File.pathSeparator+jdom+File.pathSeparator+ai;
-		String launcher = "fr.free.totalboumboum.Launcher";
+		String launcher = "org.totalboumboum.Launcher";
 		String splash = "."+File.separator+"resources"+File.separator+"gui"+File.separator+"images"+File.separator+"splash.png";
 		Runtime runtime = Runtime.getRuntime();
 		try

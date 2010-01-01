@@ -21,8 +21,9 @@ package tournament200809.gunalpyurtsever;
  * 
  */
 
+import org.totalboumboum.ai.adapter200809.AiManager;
+
 import tournament200809.gunalpyurtsever.v2.GunalpYurtsever;
-import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager
 {

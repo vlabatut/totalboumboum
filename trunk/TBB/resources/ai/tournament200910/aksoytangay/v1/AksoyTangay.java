@@ -1,10 +1,10 @@
 package tournament200910.aksoytangay.v1;
 
-import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
-import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
-import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
-import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.ArtificialIntelligence;
+import org.totalboumboum.ai.adapter200910.communication.AiAction;
+import org.totalboumboum.ai.adapter200910.communication.AiActionName;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiZone;
 
 /**
  * >> ce texte est à remplacer par votre propre description de votre IA

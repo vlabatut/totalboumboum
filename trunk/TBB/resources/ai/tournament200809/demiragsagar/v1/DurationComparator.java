@@ -2,7 +2,8 @@ package tournament200809.demiragsagar.v1;
 
 import java.util.Comparator;
 
-import fr.free.totalboumboum.ai.adapter200809.AiBomb;
+import org.totalboumboum.ai.adapter200809.AiBomb;
+
 
 public class DurationComparator implements Comparator<AiBomb> {
 	public int compare(AiBomb bombe1, AiBomb bombe2) {

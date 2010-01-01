@@ -11,7 +11,8 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+
 
 public final class Astar {
 	private static class CostComparator implements Comparator<Node> {

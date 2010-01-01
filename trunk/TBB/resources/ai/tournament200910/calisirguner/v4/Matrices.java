@@ -1,6 +1,6 @@
 package tournament200910.calisirguner.v4;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
 
 
 

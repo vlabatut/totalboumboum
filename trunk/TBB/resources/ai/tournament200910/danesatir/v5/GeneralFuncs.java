@@ -2,8 +2,9 @@ package tournament200910.danesatir.v5;
 
 import java.util.List;
 
-import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiBomb;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+
 
 public class GeneralFuncs {
 	public static boolean tileCompare(AiTile tile1,AiTile tile2){

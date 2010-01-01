@@ -24,15 +24,16 @@ package tournament200910.aldanmazyenigun.v4_2;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
-import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
-import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
-import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.ai.adapter200910.ArtificialIntelligence;
+import org.totalboumboum.ai.adapter200910.communication.AiAction;
+import org.totalboumboum.ai.adapter200910.communication.AiActionName;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiBlock;
+import org.totalboumboum.ai.adapter200910.data.AiHero;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.engine.content.feature.Direction;
+
 
 public class AldanmazYenigun extends ArtificialIntelligence 
 {

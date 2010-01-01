@@ -1,13 +1,13 @@
 package tournament200910.findiksirin.v3;
 
-import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
-import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
-import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.ai.adapter200910.ArtificialIntelligence;
+import org.totalboumboum.ai.adapter200910.communication.AiAction;
+import org.totalboumboum.ai.adapter200910.communication.AiActionName;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.data.AiHero;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.data.AiZone;
+import org.totalboumboum.engine.content.feature.Direction;
 
 public class FindikSirin extends ArtificialIntelligence
 {		

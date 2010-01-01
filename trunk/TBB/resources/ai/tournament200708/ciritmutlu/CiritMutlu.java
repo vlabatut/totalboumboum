@@ -4,7 +4,8 @@ package tournament200708.ciritmutlu;
 import java.util.LinkedList;
 import java.util.Vector;
 
-import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+import org.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+
 
 import tournament200708.ciritmutlu.exceptions.AbsentNodeException;
 import tournament200708.ciritmutlu.exceptions.ImpossibleActionException;

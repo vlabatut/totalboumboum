@@ -2,9 +2,10 @@ package tournament200910.danesatir.v5;
 
 import java.util.List;
 
-import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
-import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
+import org.totalboumboum.ai.adapter200910.data.AiBlock;
+import org.totalboumboum.ai.adapter200910.data.AiTile;
+import org.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
+
 
 public class WallCost extends CostCalculator {
 	@Override

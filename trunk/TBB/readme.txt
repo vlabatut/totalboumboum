@@ -12,7 +12,7 @@ For development purpose, another script called quicklaunch.bat (for Windows) or 
 
 Legal details are available in the files about.txt and license.txt.  
 
-For any question, feel free to visit the website: http://totalboumboum.free.fr.
+For any question, feel free to visit the website: http://www.totalboumboum.org
 May the bomb be with you!
 
 -FRANCAIS------------------------------------------------------------------------------------------------
@@ -29,6 +29,6 @@ Pour faciliter le développement, un autre script appelé quicklaunch.bat (Windows
 
 Pour les détails légaux, lis les fichiers license.txt et about.txt. 
 
-N'hésite pas à aller faire un tour sur le site en cas de problème ou pour avoir plus d'informations: http://totalboumboum.free.fr.
+N'hésite pas à aller faire un tour sur le site en cas de problème ou pour avoir plus d'informations: http://www.totalboumboum.org
 Que la bombe soit avec toi !
 

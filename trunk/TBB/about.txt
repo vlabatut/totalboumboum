@@ -4,7 +4,7 @@ Total Boum Boum version 1 Beta
 -----------------------------------------------------------------------
 
 Copyright 2008-2009 Vincent Labatut
-http:\\totalboumboum.free.fr
+http:\\www.totalboumboum.org
 vincent.labatut@free.fr
 
 Total Boum Boum is free software: you can redistribute it and/or modify
@@ -17,20 +17,20 @@ For source availability and license information see licence.txt
 
 This product includes softwares developed by:
   + Chris Adamson & Joshua Marinacci:
-    Class fr.free.totalboumboum.gui.tools.FullRepaintManager
+    Class org.totalboumboum.gui.tools.FullRepaintManager
     Copyright 2005 Chris Adamson & Joshua Marinacci 
     http://weblogs.java.net/blog/invalidname
     http://weblogs.java.net/blog/joshy
   + Adam Walker:
-    Class fr.free.totalboumboum.gui.tools.MessageDisplayer
+    Class org.totalboumboum.gui.tools.MessageDisplayer
     Copyright 2005 Adam Walker
     http://www.walkersoftware.net/articles/text-effects-in-java
   + Juneym:
-    Class fr.free.totalboumboum.tools.image.BufferedImageWrapper
+    Class org.totalboumboum.tools.image.BufferedImageWrapper
     Copyright 2006 Juneym
     http://forums.sun.com/thread.jspa?threadID=301424
   + Sun Microsystems Inc: 
-    Class fr.free.totalboumboum.gui.tools.SpringUtilities
+    Class org.totalboumboum.gui.tools.SpringUtilities
     Copyright 1995-2008 Sun Microsystems Inc.
     http://www.sun.com
   + JDOM Project:
@@ -38,7 +38,7 @@ This product includes softwares developed by:
     Copyright 2000-2007 JDOM Project - Apache-based license
     http://www.jdom.org
   + JRS - Java Ranking Service
-    Classes in the fr.free.totalboumboum.game.statistics.glicko2.jrs package
+    Classes in the org.totalboumboum.game.statistics.glicko2.jrs package
     Copyright 2005-2006 JRS project - BSD License
     https://jrs.dev.java.net
     These classes were modified by Vincent Labatut

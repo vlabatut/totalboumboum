@@ -1,6 +1,6 @@
 package tournament200910.dereligeckalan.v4_1;
 
-import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
 
 public class SearchLink {
 	private Noeud origin;

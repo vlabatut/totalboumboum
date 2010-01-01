@@ -5,21 +5,22 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 
+import org.totalboumboum.ai.adapter200809.AiAction;
+import org.totalboumboum.ai.adapter200809.AiActionName;
+import org.totalboumboum.ai.adapter200809.AiBlock;
+import org.totalboumboum.ai.adapter200809.AiBomb;
+import org.totalboumboum.ai.adapter200809.AiFire;
+import org.totalboumboum.ai.adapter200809.AiHero;
+import org.totalboumboum.ai.adapter200809.AiTile;
+import org.totalboumboum.ai.adapter200809.AiZone;
+import org.totalboumboum.ai.adapter200809.ArtificialIntelligence;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.engine.content.feature.Direction;
 
 
-import fr.free.totalboumboum.ai.adapter200809.AiAction;
-import fr.free.totalboumboum.ai.adapter200809.AiActionName;
-import fr.free.totalboumboum.ai.adapter200809.AiBlock;
-import fr.free.totalboumboum.ai.adapter200809.AiBomb;
-import fr.free.totalboumboum.ai.adapter200809.AiFire;
-import fr.free.totalboumboum.ai.adapter200809.AiHero;
 
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
-import fr.free.totalboumboum.ai.adapter200809.AiZone;
-import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
 
-import fr.free.totalboumboum.engine.content.feature.Direction;
+
 
 
 public class CoremenKucukkarakurt extends ArtificialIntelligence

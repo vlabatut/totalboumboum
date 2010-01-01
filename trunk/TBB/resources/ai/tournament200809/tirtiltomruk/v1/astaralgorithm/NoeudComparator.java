@@ -2,7 +2,8 @@ package tournament200809.tirtiltomruk.v1.astaralgorithm;
 
 import java.util.Comparator;
 
-import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.ai.adapter200809.StopRequestException;
+
 
 public class NoeudComparator implements Comparator<Noeud> {
 

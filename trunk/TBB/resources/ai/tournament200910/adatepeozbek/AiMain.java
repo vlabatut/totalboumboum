@@ -21,8 +21,9 @@ package tournament200910.adatepeozbek;
  * 
  */
 
+import org.totalboumboum.ai.adapter200910.AiManager;
+
 import tournament200910.adatepeozbek.v5.AdatepeOzbek;
-import fr.free.totalboumboum.ai.adapter200910.AiManager;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les IA

@@ -21,8 +21,9 @@ package tournament200809.devecioglukorkmaz;
  * 
  */
 
+import org.totalboumboum.ai.adapter200809.AiManager;
+
 import tournament200809.devecioglukorkmaz.v2.DeveciogluKorkmaz;
-import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager {
 
