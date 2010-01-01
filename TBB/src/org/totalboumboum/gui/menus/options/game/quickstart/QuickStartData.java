@@ -50,7 +50,7 @@ import org.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfile
 import org.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.StringTools;
+import org.totalboumboum.tools.strings.StringTools;
 import org.xml.sax.SAXException;
 
 

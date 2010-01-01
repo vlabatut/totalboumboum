@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 
 
 public class EngineConfiguration

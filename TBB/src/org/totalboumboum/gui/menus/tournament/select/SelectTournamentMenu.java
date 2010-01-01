@@ -38,7 +38,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.explore.tournaments.select.SelectedTournamentData;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 
 
 public class SelectTournamentMenu extends InnerMenuPanel implements DataPanelListener

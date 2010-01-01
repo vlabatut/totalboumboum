@@ -39,8 +39,8 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
-import org.totalboumboum.tools.FileTools;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 

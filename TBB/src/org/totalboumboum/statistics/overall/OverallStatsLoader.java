@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
 
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 
 
 public class OverallStatsLoader

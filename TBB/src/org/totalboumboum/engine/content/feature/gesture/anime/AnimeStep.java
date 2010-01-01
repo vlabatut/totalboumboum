@@ -27,7 +27,7 @@ import java.util.HashMap;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.content.feature.ImageShift;
-import org.totalboumboum.tools.image.ImageTools;
+import org.totalboumboum.tools.images.ImageTools;
 
 
 public class AnimeStep implements Serializable

@@ -22,7 +22,7 @@ package org.totalboumboum.configuration.game.quickmatch;
  */
 
 import org.jdom.Element;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class LevelsSelectionSaver

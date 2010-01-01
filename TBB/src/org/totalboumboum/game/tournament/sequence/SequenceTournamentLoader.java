@@ -33,7 +33,7 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.TournamentLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.tournament.TournamentLoader;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 

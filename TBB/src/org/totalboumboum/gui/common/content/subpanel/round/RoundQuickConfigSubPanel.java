@@ -35,8 +35,8 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.StringTools;
-import org.totalboumboum.tools.StringTools.TimeUnit;
+import org.totalboumboum.tools.strings.StringTools;
+import org.totalboumboum.tools.strings.StringTools.TimeUnit;
 
 
 public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseListener

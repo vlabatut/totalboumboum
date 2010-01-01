@@ -35,7 +35,7 @@ import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.menus.tournament.load.LoadSplitPanel;
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 

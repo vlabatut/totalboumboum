@@ -8,7 +8,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 /*

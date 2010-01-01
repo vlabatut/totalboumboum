@@ -85,11 +85,11 @@ import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.FileTools;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.StringTools;
-import org.totalboumboum.tools.StringTools.TimeUnit;
 import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.strings.StringTools;
+import org.totalboumboum.tools.strings.StringTools.TimeUnit;
 import org.xml.sax.SAXException;
 
 

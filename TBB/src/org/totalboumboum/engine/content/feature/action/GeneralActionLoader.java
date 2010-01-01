@@ -27,7 +27,7 @@ import java.util.Locale;
 import org.jdom.Element;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.Role;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class GeneralActionLoader

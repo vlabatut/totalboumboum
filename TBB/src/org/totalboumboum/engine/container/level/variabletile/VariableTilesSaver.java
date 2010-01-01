@@ -26,7 +26,7 @@ import java.util.List;
 
 import org.jdom.Element;
 import org.totalboumboum.engine.container.level.zone.ZoneSaver;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class VariableTilesSaver

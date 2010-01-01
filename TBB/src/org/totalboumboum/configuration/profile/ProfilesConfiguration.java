@@ -42,8 +42,8 @@ import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSa
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.Match;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.tools.FileTools;
 import org.totalboumboum.tools.GameData;
+import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 

@@ -40,8 +40,8 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.gui.tools.SpringUtilities;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticRound;
-import org.totalboumboum.tools.StringTools;
-import org.totalboumboum.tools.StringTools.TimeUnit;
+import org.totalboumboum.tools.strings.StringTools;
+import org.totalboumboum.tools.strings.StringTools.TimeUnit;
 
 
 public class QuickResults extends JPanel

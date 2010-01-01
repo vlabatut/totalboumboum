@@ -37,8 +37,8 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.match.MatchLoader;
-import org.totalboumboum.tools.FileTools;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 

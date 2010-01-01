@@ -34,7 +34,7 @@ import org.totalboumboum.engine.container.fireset.FiresetMap;
 import org.totalboumboum.engine.container.fireset.FiresetMapLoader;
 import org.totalboumboum.engine.container.itemset.Itemset;
 import org.totalboumboum.engine.container.itemset.ItemsetLoader;
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 

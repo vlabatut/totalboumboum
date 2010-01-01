@@ -37,7 +37,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.image.ImageTools;
+import org.totalboumboum.tools.images.ImageTools;
 
 
 public class AvailableItemsSubPanel extends TableSubPanel

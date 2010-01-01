@@ -41,8 +41,8 @@ import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.PlayerStats;
-import org.totalboumboum.tools.StringTools;
-import org.totalboumboum.tools.StringTools.TimeUnit;
+import org.totalboumboum.tools.strings.StringTools;
+import org.totalboumboum.tools.strings.StringTools.TimeUnit;
 
 
 public enum StatisticColumn

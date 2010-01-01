@@ -32,8 +32,8 @@ import org.totalboumboum.engine.container.itemset.ItemsetPreviewLoader;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.info.LevelInfoLoader;
 import org.totalboumboum.engine.container.level.players.PlayersPreviewer;
-import org.totalboumboum.tools.FileTools;
-import org.totalboumboum.tools.image.ImageTools;
+import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.images.ImageTools;
 import org.xml.sax.SAXException;
 
 

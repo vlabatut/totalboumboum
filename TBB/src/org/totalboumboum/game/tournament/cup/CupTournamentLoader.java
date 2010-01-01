@@ -34,7 +34,7 @@ import org.totalboumboum.game.points.PointsProcessor;
 import org.totalboumboum.game.points.PointsProcessorLoader;
 import org.totalboumboum.game.points.PointsRankings;
 import org.totalboumboum.game.tournament.TournamentLoader;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 

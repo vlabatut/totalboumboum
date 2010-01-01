@@ -43,7 +43,7 @@ import org.totalboumboum.gui.game.save.SaveData;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 

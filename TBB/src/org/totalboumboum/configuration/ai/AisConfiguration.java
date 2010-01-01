@@ -28,7 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 
 
 public class AisConfiguration

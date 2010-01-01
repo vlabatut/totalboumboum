@@ -32,7 +32,7 @@ import javax.swing.SwingConstants;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.image.ImageTools;
+import org.totalboumboum.tools.images.ImageTools;
 
 
 public class ImageContentPanel extends ContentPanel

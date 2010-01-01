@@ -39,7 +39,7 @@ import org.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import org.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 

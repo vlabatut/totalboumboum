@@ -40,7 +40,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.ClassTools;
+import org.totalboumboum.tools.classes.ClassTools;
 
 
 public class ControlsData extends EntitledDataPanel implements MouseListener,KeyListener

@@ -25,8 +25,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.jdom.Element;
-import org.totalboumboum.tools.FileTools;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class ProfileSaver

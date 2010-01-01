@@ -33,8 +33,8 @@ import org.jdom.Element;
 import org.totalboumboum.gui.tools.GuiFileTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiXmlTools;
-import org.totalboumboum.tools.FileTools;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 

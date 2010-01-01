@@ -32,7 +32,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 
 
 

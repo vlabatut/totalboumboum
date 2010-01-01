@@ -38,8 +38,8 @@ import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactoryLoader;
-import org.totalboumboum.tools.FileTools;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 

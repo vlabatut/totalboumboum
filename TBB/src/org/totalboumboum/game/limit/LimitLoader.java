@@ -30,7 +30,7 @@ import org.jdom.Element;
 import org.totalboumboum.game.points.PointsProcessor;
 import org.totalboumboum.game.points.PointsProcessorLoader;
 import org.totalboumboum.statistics.detailed.Score;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 
