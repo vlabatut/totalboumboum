@@ -29,7 +29,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.TournamentLoader;
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 

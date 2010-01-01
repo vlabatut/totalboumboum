@@ -35,8 +35,8 @@ import org.totalboumboum.game.tournament.cup.CupTournamentLoader;
 import org.totalboumboum.game.tournament.league.LeagueTournamentLoader;
 import org.totalboumboum.game.tournament.sequence.SequenceTournamentLoader;
 import org.totalboumboum.game.tournament.single.SingleTournamentLoader;
-import org.totalboumboum.tools.FileTools;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 

@@ -27,7 +27,7 @@ import org.jdom.Element;
 import org.totalboumboum.engine.content.feature.Contact;
 import org.totalboumboum.engine.content.feature.Orientation;
 import org.totalboumboum.engine.content.feature.TilePosition;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class CircumstanceLoader

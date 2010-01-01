@@ -46,8 +46,8 @@ import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.LocalLoop;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.FileTools;
 import org.totalboumboum.tools.GameData;
+import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 

@@ -48,7 +48,7 @@ import org.totalboumboum.gui.frames.QuickFrame;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 
@@ -1196,6 +1196,7 @@ public class Launcher
 
 	/*
 	 * écrire un programme pour controller les checkinterruptions dans les programmes des étudiants
+	 * écrire un programme pour exporter/importer les stats sous forme de texte (ponctuellement)
 	 */
 	
 	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux

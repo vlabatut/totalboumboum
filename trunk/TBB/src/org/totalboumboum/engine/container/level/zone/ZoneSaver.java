@@ -31,8 +31,8 @@ import org.jdom.Element;
 import org.totalboumboum.engine.container.level.variabletile.VariableTile;
 import org.totalboumboum.engine.container.level.variabletile.VariableTilesSaver;
 import org.totalboumboum.engine.container.theme.Theme;
-import org.totalboumboum.tools.FileTools;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 

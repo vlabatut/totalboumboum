@@ -33,7 +33,7 @@ import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.engine.container.level.players.PlayersLoader;
 import org.totalboumboum.engine.container.level.zone.Zone;
 import org.totalboumboum.engine.container.level.zone.ZoneLoader;
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 

@@ -27,7 +27,7 @@ import java.util.List;
 
 import org.jdom.Element;
 import org.totalboumboum.engine.container.level.zone.ZoneLoader;
-import org.totalboumboum.tools.XmlTools;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class VariableTilesLoader

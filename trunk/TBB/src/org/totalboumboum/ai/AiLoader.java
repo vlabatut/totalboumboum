@@ -25,8 +25,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 
-import org.totalboumboum.tools.ClassTools;
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.classes.ClassTools;
+import org.totalboumboum.tools.files.FileTools;
 
 
 public class AiLoader

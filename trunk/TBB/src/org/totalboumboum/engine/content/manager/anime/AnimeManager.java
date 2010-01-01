@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import org.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.tools.image.ImageTools;
+import org.totalboumboum.tools.images.ImageTools;
 
 
 public class AnimeManager

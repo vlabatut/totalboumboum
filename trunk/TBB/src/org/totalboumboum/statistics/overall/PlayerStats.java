@@ -25,8 +25,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 import org.totalboumboum.statistics.detailed.Score;
-import org.totalboumboum.tools.StringTools;
-import org.totalboumboum.tools.StringTools.TimeUnit;
+import org.totalboumboum.tools.strings.StringTools;
+import org.totalboumboum.tools.strings.StringTools.TimeUnit;
 
 
 public class PlayerStats implements Serializable

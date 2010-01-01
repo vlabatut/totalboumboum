@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 
 
 public class Glicko2Loader

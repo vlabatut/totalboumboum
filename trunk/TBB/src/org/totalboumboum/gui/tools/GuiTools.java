@@ -47,7 +47,7 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.gui.common.structure.ButtonAware;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.image.ImageTools;
+import org.totalboumboum.tools.images.ImageTools;
 
 
 public class GuiTools

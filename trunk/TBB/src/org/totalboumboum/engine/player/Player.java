@@ -40,7 +40,7 @@ import org.totalboumboum.engine.content.sprite.hero.HeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HeroFactoryLoader;
 import org.totalboumboum.engine.control.PlayerControl;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.FileTools;
+import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 

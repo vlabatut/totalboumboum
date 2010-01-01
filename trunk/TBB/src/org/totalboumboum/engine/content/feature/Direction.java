@@ -27,8 +27,8 @@ import java.util.Locale;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.tools.XmlTools;
 import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public enum Direction implements Serializable

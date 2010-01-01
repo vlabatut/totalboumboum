@@ -39,7 +39,7 @@ import org.totalboumboum.gui.common.structure.subpanel.content.ContentPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.image.ImageTools;
+import org.totalboumboum.tools.images.ImageTools;
 
 
 public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
