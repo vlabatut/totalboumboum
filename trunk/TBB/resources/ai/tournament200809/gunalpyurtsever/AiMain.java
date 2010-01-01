@@ -2,7 +2,7 @@ package tournament200809.gunalpyurtsever;
 
 /*
  * Total Boum Boum
- * Copyright 2008 Vincent Labatut 
+ * Copyright 2008-2010 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
