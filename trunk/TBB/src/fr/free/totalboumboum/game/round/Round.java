@@ -26,6 +26,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeSet;
 import java.util.Map.Entry;
 
@@ -299,7 +300,7 @@ public class Round implements StatisticHolder, Serializable
 		{	int rank = ranks[i];
 			int rank2 = ranks2[i];
 			Profile profile = getProfiles().get(i);
-			ArrayList<Profile> list = result.getProfilesFromRank(rank);
+			List<Profile> list = result.getProfilesFromRank(rank);
 			int index = -1;
 			// if no list yet : regular insertion
 			if(list==null)

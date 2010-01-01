@@ -21,8 +21,8 @@ package fr.free.totalboumboum.game.tournament.single;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
@@ -145,7 +145,7 @@ public class SingleTournament extends AbstractTournament
 		{	int rank = ranks[i];
 			int rank2 = ranks2[i];
 			Profile profile = getProfiles().get(i);
-			ArrayList<Profile> list = result.getProfilesFromRank(rank);
+			List<Profile> list = result.getProfilesFromRank(rank);
 			int index = -1;
 			// if no list yet : regular insertion
 			if(list==null)

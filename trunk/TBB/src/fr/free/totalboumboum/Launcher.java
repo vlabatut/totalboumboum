@@ -1217,4 +1217,8 @@ public class Launcher
 	/*
 	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
 	 */
+
+	/*
+	 * écrire un programme pour controller les checkinterruptions dans les programmes des étudiants
+	 */
 }
