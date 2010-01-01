@@ -2,7 +2,7 @@ package org.totalboumboum.gui.tools;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2009 Vincent Labatut 
+ * Copyright 2008-2010 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -84,7 +84,7 @@ public class GuiTools
 	};
 	public static final String STARTUP_LEGAL[] = 
 	{	"Total Boum Boum version "+GameData.VERSION,
-		new Character('\u00A9').toString()+" 2008-2009 Vincent Labatut",
+		new Character('\u00A9').toString()+" 2008-2010 Vincent Labatut",
 		"Licensed under the GPL v2"
 	};
 	
