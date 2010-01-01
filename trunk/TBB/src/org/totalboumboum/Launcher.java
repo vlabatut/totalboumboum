@@ -1197,4 +1197,6 @@ public class Launcher
 	/*
 	 * écrire un programme pour controller les checkinterruptions dans les programmes des étudiants
 	 */
+	
+	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux
 }
