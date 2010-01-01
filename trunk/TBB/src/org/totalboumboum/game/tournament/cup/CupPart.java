@@ -520,12 +520,19 @@ public class CupPart implements Serializable
 		if(prfls!=null)
 		{	for(Profile profile: prfls)
 			{	CupPlayer player = getPlayerForProfile(profile);
-				result ++;
-				player.setActualFinalRank(finalRank);
+//NOTE				if(player.getActualFinalRank()==0)
+				{	result ++;
+					player.setActualFinalRank(finalRank);
+				}
 			}
 		}
 		
 		return result;
+	}
+
+	public void reinitPlayersActualFinalRanks()
+	{	for(CupPlayer player: players)
+			player.reinitActualFinalRank();
 	}
 
 	/////////////////////////////////////////////////////////////////

@@ -27,6 +27,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.configuration.profile.Portraits;
 import org.totalboumboum.configuration.profile.Profile;
@@ -181,6 +182,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 			ArrayList<StatisticBase> confrontationStats = stats.getConfrontationStats();
 			ArrayList<Profile> players = statisticHolder.getProfiles();
 			Ranks orderedPlayers = statisticHolder.getOrderedPlayers();
+			List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();
 			float[] points = stats.getPoints();
 			float[] partialPoints = stats.getTotal();
 	
@@ -191,7 +193,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 			{	// init
 				col = 0;
 				line++;
-				Profile profile = orderedPlayers.getProfileFromAbsoluteRank(i+1);
+				Profile profile = absoluteList.get(i);
 				if(profile==null)
 					profile = players.get(i);
 				int profileIndex = players.indexOf(profile);

@@ -603,6 +603,10 @@ for(ArrayList<Integer> list: permutations)
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();	
 		
+		// reinit ranks
+		for(CupLeg leg: legs)
+			leg.reinitPlayersActualFinalRanks();
+	
 		// update ranks
 		List<CupPart> remainingParts = getAllParts();
 		int totalPartCount = remainingParts.size();
@@ -684,6 +688,7 @@ for(ArrayList<Integer> list: permutations)
 			}				
 		}
 */		
+				
 		return result;
 	}
 
