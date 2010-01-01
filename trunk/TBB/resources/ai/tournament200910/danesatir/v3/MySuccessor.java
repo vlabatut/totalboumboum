@@ -3,11 +3,11 @@ package tournament200910.danesatir.v3;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import org.totalboumboum.ai.adapter200910.data.AiHero;
-import org.totalboumboum.ai.adapter200910.data.AiTile;
-import org.totalboumboum.ai.adapter200910.path.astar.AstarNode;
-import org.totalboumboum.ai.adapter200910.path.astar.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v200910.adapter.data.AiHero;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.path.astar.AstarNode;
+import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 

@@ -1,10 +1,10 @@
 package tournament200910.danesatir.v2;
 
-import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import org.totalboumboum.ai.adapter200910.data.AiTile;
-import org.totalboumboum.ai.adapter200910.path.AiPath;
-import org.totalboumboum.ai.adapter200910.path.astar.Astar;
-import org.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.path.AiPath;
+import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
+import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 
 public class PathFinder {
 	

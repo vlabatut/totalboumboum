@@ -5,9 +5,9 @@ package tournament200809.dayioglugilgeckalan.v2;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-import org.totalboumboum.ai.adapter200809.AiTile;
-import org.totalboumboum.ai.adapter200809.AiZone;
-import org.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.ai.v200809.adapter.AiTile;
+import org.totalboumboum.ai.v200809.adapter.AiZone;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 
 

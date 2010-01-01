@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 import java.util.Vector;
 import java.util.Iterator;
 
-import org.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 
 

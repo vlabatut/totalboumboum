@@ -1,7 +1,7 @@
 package tournament200910.danesatir.v4;
 
-import org.totalboumboum.ai.adapter200910.data.AiTile;
-import org.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 
 public class MyCost extends CostCalculator {
 	private TimeMatrice time;

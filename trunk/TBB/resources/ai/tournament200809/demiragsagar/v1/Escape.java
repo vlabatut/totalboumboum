@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.PriorityQueue;
 
-import org.totalboumboum.ai.adapter200809.AiBlock;
-import org.totalboumboum.ai.adapter200809.AiBomb;
-import org.totalboumboum.ai.adapter200809.AiFire;
-import org.totalboumboum.ai.adapter200809.AiTile;
-import org.totalboumboum.ai.adapter200809.AiZone;
+import org.totalboumboum.ai.v200809.adapter.AiBlock;
+import org.totalboumboum.ai.v200809.adapter.AiBomb;
+import org.totalboumboum.ai.v200809.adapter.AiFire;
+import org.totalboumboum.ai.v200809.adapter.AiTile;
+import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 

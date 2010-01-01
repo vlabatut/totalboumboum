@@ -3,15 +3,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.totalboumboum.ai.adapter200910.communication.StopRequestException;
-import org.totalboumboum.ai.adapter200910.data.AiBlock;
-import org.totalboumboum.ai.adapter200910.data.AiTile;
-import org.totalboumboum.ai.adapter200910.data.AiZone;
-import org.totalboumboum.ai.adapter200910.path.AiPath;
-import org.totalboumboum.ai.adapter200910.path.astar.Astar;
-import org.totalboumboum.ai.adapter200910.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
-import org.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
+import org.totalboumboum.ai.v200910.adapter.data.AiTile;
+import org.totalboumboum.ai.v200910.adapter.data.AiZone;
+import org.totalboumboum.ai.v200910.adapter.path.AiPath;
+import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
+import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
+import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
+import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 

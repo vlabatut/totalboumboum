@@ -25,16 +25,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.totalboumboum.ai.adapter200809.AiAction;
-import org.totalboumboum.ai.adapter200809.AiActionName;
-import org.totalboumboum.ai.adapter200809.AiBlock;
-import org.totalboumboum.ai.adapter200809.AiBomb;
-import org.totalboumboum.ai.adapter200809.AiFire;
-import org.totalboumboum.ai.adapter200809.AiHero;
-import org.totalboumboum.ai.adapter200809.AiTile;
-import org.totalboumboum.ai.adapter200809.AiZone;
-import org.totalboumboum.ai.adapter200809.ArtificialIntelligence;
-import org.totalboumboum.ai.adapter200809.StopRequestException;
+import org.totalboumboum.ai.v200809.adapter.AiAction;
+import org.totalboumboum.ai.v200809.adapter.AiActionName;
+import org.totalboumboum.ai.v200809.adapter.AiBlock;
+import org.totalboumboum.ai.v200809.adapter.AiBomb;
+import org.totalboumboum.ai.v200809.adapter.AiFire;
+import org.totalboumboum.ai.v200809.adapter.AiHero;
+import org.totalboumboum.ai.v200809.adapter.AiTile;
+import org.totalboumboum.ai.v200809.adapter.AiZone;
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
 

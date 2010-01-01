@@ -12,7 +12,7 @@ package tournament200708.okanyuksel;
 
 import java.util.LinkedList;
 
-import org.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 
 

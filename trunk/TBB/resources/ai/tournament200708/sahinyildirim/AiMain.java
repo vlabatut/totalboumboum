@@ -21,7 +21,7 @@ package tournament200708.sahinyildirim;
  * 
  */
 
-import org.totalboumboum.ai.adapter200708.AiManager;
+import org.totalboumboum.ai.v200708.adapter.AiManager;
 
 public class AiMain extends AiManager
 {

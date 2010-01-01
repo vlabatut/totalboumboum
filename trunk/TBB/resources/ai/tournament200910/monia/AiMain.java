@@ -1,6 +1,6 @@
 package tournament200910.monia;
 
-import org.totalboumboum.ai.adapter200910.AiManager;
+import org.totalboumboum.ai.v200910.adapter.AiManager;
 
 /**
  * class utilisée par le moteur du jeu pour retrouver les IA

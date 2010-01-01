@@ -1,6 +1,6 @@
 package tournament200910.adatepeozbek.v5;
 
-import org.totalboumboum.ai.adapter200910.data.AiHero;
+import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 
 public class Enemy
 {
