@@ -2,7 +2,7 @@
 ::
 :: This is an MS-DOS script, it works only on Windows operating systems.
 :: It (re)compiles the whole TBB game (and all AIs located in resources/ai).
-:: v.0.2
+:: v.0.3
 ::
 :: -------------------------------------------------------------------
 ::
@@ -34,7 +34,7 @@
 :: define path variables
 	Set main=.\src\org\totalboumboum
 	Set aig=%main%\ai
-	Set ai=.\resources\ai
+	Set ai=.\resources\ai\org\totalboumboum\ai
 	Set bin=.\bin
 	Set jdom=.\resources\lib\jdom.jar
 	Set cp=%bin%;%jdom%
