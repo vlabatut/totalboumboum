@@ -103,16 +103,16 @@ public class Adatepe extends ArtificialIntelligence
 		int yMax = zone.getHeigh();
 		int i,j;
 		for(i = 0; i < xMax; i++)
-		{
+		{	checkInterruption(); 
 			for(j = 0; j < yMax; j++)
-			{
+			{	checkInterruption(); 
 				boardTiles[i][j] = 0;
 			}
 		}
 		this.wall = ((AiZone) zone).getBlocks();
 		Iterator <AiBlock> itBlocs = wall.iterator();
 		while(itBlocs.hasNext())
-		{
+		{	checkInterruption(); 
 			AiBlock temp = itBlocs.next();
 			boardTiles[temp.getCol()][temp.getLine()] = 1;
 		}
@@ -127,28 +127,28 @@ public class Adatepe extends ArtificialIntelligence
 		this.bomb = ((AiZone) zone).getBombs();
 		Iterator <AiBomb> itBombes = bomb.iterator();
 		while(itBombes.hasNext())
-		{
+		{	checkInterruption(); 
 			AiBomb temp = itBombes.next();
 			boardTiles[temp.getCol()][temp.getLine()] = 2;
 			int y1 = temp.getCol();
 			int x1 = temp.getLine();
 			while (boardTiles[x1+1][y1] != 1 && (x1 < (temp.getLine() + temp.getRange())))
-			{
+			{	checkInterruption(); 
 				boardTiles[x1+1][y1] = 2;
 				x1 = x1 + 1;
 			}
 			while (boardTiles[x1-1][y1] != 1 && (x1 < (temp.getLine() - temp.getRange())))
-			{
+			{	checkInterruption(); 
 				boardTiles[x1-1][y1] = 2;
 				x1 = x1 - 1;
 			}
 			while (boardTiles[x1][y1+1] != 1 && y1 < (temp.getCol() + temp.getRange()))
-			{
+			{	checkInterruption(); 
 				boardTiles[x1][y1+1] = 2;
 				y1 = y1 + 1;
 			}
 			while (boardTiles[x1][y1+1] != 1 && y1 < (temp.getCol() - temp.getRange()))
-			{
+			{	checkInterruption(); 
 				boardTiles[x1][y1-1] = 2;
 				y1 = y1 - 1;
 			}
@@ -156,7 +156,7 @@ public class Adatepe extends ArtificialIntelligence
 		this.fire = ((AiZone) zone).getFires();
 		Iterator <AiFire> itFire = fire.iterator();
 		while(itFire.hasNext())
-		{
+		{	checkInterruption(); 
 			AiFire temp = itFire.next();
 			boardTiles[temp.getCol()][temp.getLine()] = 4;
 		}
@@ -218,7 +218,7 @@ public class Adatepe extends ArtificialIntelligence
 	int x4 = currentTile.getLine();
 	int y4 = currentTile.getCol();
 	while (boardTiles[x4][y4] == 3)
-	{
+	{	checkInterruption(); 
 		if (boardTiles[x4+1][y4] == 3)
 			x4 = x4 + 1;
 		if (boardTiles[x4-1][y4] == 3)
