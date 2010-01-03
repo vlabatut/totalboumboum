@@ -1197,7 +1197,6 @@ public class Launcher
 
 	/*
 	 * écrire un programme pour controller les checkinterruptions dans les programmes des étudiants
-	 * écrire un programme pour exporter/importer les stats sous forme de texte (ponctuellement)
 	 */
 	
 	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux
