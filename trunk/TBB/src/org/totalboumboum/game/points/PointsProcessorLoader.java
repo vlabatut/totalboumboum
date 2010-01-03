@@ -33,10 +33,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.game.match.MatchLoader;
 import org.totalboumboum.statistics.detailed.Score;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class PointsProcessorLoader
 {
@@ -60,12 +60,12 @@ public class PointsProcessorLoader
 	
 	public static PointsProcessor loadPointProcessorFromFilePath(String folderPath) throws ParserConfigurationException, SAXException, IOException
 	{	// init
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
 		File schemaFile,dataFile;
 		// opening
-		dataFile = new File(individualFolder+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_POINT+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(individualFolder+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_POINT+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		PointsProcessor result = loadPointProcessorElement(root);
 		return result;
@@ -73,12 +73,12 @@ public class PointsProcessorLoader
 
 	public static PointsProcessor loadPointProcessorFromName(String name) throws ParserConfigurationException, SAXException, IOException
 	{	// init
-		String schemaFolder = FileTools.getSchemasPath();
-		String individualFolder = FileTools.getPointsPath();
+		String schemaFolder = FilePaths.getSchemasPath();
+		String individualFolder = FilePaths.getPointsPath();
 		File schemaFile,dataFile;
 		// opening
-		dataFile = new File(individualFolder+File.separator+name+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_POINT+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(individualFolder+File.separator+name+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_POINT+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		PointsProcessor result = loadPointProcessorElement(root);
 		return result;

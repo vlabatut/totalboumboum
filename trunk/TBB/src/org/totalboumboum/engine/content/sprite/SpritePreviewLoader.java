@@ -16,11 +16,11 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.anime.Colormap;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class SpritePreviewLoader
 {
@@ -50,7 +50,7 @@ public class SpritePreviewLoader
 	}
 
 	public static SpritePreview loadHeroPreviewCommon(String packName, String spriteName) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	String folder = FileTools.getHeroesPath()+File.separator+packName+File.separator+spriteName;
+	{	String folder = FilePaths.getHeroesPath()+File.separator+packName+File.separator+spriteName;
 		Element root = SpriteFactoryLoader.openFile(folder);
 		HashMap<String,SpritePreview> abstractPreviews = new HashMap<String, SpritePreview>();
 		SpritePreview result = loadSpriteElement(root,folder,abstractPreviews);
@@ -117,12 +117,12 @@ public class SpritePreviewLoader
 	
 	@SuppressWarnings("unchecked")
 	private static void loadImages(String folder, SpritePreview result) throws ParserConfigurationException, SAXException, IOException
-	{	String folderPath = folder+File.separator+FileTools.FILE_ANIMES;
-		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_XML);
+	{	String folderPath = folder+File.separator+FileNames.FILE_ANIMES;
+		File dataFile = new File(folderPath+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
-			String schemaFolder = FileTools.getSchemasPath();
-			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_SCHEMA);
+			String schemaFolder = FilePaths.getSchemasPath();
+			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			
 			// init

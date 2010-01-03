@@ -27,10 +27,10 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class LevelInfoSaver
 {	
@@ -40,9 +40,9 @@ public class LevelInfoSaver
 		
 		// save file
 		String individualFolder = folder;
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_XML);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_SCHEMA);
+		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_LEVEL+FileNames.EXTENSION_XML);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_LEVEL+FileNames.EXTENSION_SCHEMA);
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 

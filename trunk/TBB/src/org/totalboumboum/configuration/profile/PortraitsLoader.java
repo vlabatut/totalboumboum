@@ -33,22 +33,22 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.engine.content.feature.gesture.anime.Colormap;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class PortraitsLoader
 {
 	public static Portraits loadPortraits(String spriteFolderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile,dataFile;
-		String folderPath = spriteFolderPath+File.separator+FileTools.FOLDER_PORTRAITS;
+		String folderPath = spriteFolderPath+File.separator+FileNames.FOLDER_PORTRAITS;
 		// opening
-		dataFile = new File(folderPath+File.separator+FileTools.FILE_PORTRAITS+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PORTRAITS+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(folderPath+File.separator+FileNames.FILE_PORTRAITS+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_PORTRAITS+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		//
 		Portraits result = new Portraits();

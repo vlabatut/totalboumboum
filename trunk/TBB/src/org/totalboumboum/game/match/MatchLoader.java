@@ -36,20 +36,20 @@ import org.totalboumboum.game.limit.MatchLimit;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundLoader;
 import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class MatchLoader
 {	
 	public static Match loadMatchFromFolderPath(String folderPath, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile,dataFile;
 		// opening
-		dataFile = new File(folderPath+File.separator+FileTools.FILE_MATCH+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_MATCH+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(folderPath+File.separator+FileNames.FILE_MATCH+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_MATCH+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// loading
 		Match result = new Match(tournament);
@@ -61,7 +61,7 @@ public class MatchLoader
     }
     
 	public static Match loadMatchFromName(String name, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	String individualFolder = FileTools.getMatchesPath()+File.separator+name;
+	{	String individualFolder = FilePaths.getMatchesPath()+File.separator+name;
 		Match result = loadMatchFromFolderPath(individualFolder,tournament);
 		return result;
     }

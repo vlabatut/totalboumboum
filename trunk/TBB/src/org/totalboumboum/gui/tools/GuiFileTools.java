@@ -124,7 +124,7 @@ public class GuiFileTools
 	public final static String FOLDER_STATS = "stats";
 
 	public static String getGuiPath()
-	{	return org.totalboumboum.tools.files.FileTools.getResourcesPath()+File.separator+FOLDER_GUI;		
+	{	return org.totalboumboum.tools.files.FilePaths.getResourcesPath()+File.separator+FOLDER_GUI;		
 	}
 	
 	public static String getButtonsPath()

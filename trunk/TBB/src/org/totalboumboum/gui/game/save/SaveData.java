@@ -40,9 +40,8 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
-
 
 public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanelListener
 {	
@@ -78,8 +77,8 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 			// list panel
 			{	folderPanel = new FolderBrowserSubPanel(leftWidth,dataHeight);
 				ArrayList<String> targetFiles = new ArrayList<String>();
-				targetFiles.add(FileTools.FILE_ARCHIVE+FileTools.EXTENSION_XML);
-				targetFiles.add(FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA);
+				targetFiles.add(FileNames.FILE_ARCHIVE+FileNames.EXTENSION_XML);
+				targetFiles.add(FileNames.FILE_ARCHIVE+FileNames.EXTENSION_DATA);
 				folderPanel.setShowParent(false);
 				folderPanel.setFolder(baseFolder,targetFiles);
 				folderPanel.addListener(this);

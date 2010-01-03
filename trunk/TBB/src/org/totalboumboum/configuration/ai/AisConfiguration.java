@@ -28,12 +28,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
-
 
 public class AisConfiguration
 {
-
 	public AisConfiguration copy()
 	{	AisConfiguration result = new AisConfiguration();
 
@@ -146,12 +146,12 @@ public class AisConfiguration
 	
 	public void initExceptionsLogStream() throws FileNotFoundException
 	{	// init path
-		String path = FileTools.getLogsPath()+File.separator;
+		String path = FilePaths.getLogsPath()+File.separator;
 		// put the date
 		if(logExceptionsSeparately)
 			path = path + FileTools.getFilenameCompatibleCurrentTime() + "_";
 		// put name and extension
-		path = path + FileTools.FILE_AI_EXCEPTIONS + FileTools.EXTENSION_LOG;
+		path = path + FileNames.FILE_AI_EXCEPTIONS + FileNames.EXTENSION_LOG;
 		// open file
 		File logFile = new File(path);
 		if(logFile.exists())

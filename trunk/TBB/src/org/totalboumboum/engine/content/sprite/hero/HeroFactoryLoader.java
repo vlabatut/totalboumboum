@@ -39,9 +39,8 @@ import org.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import org.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
-
 
 public class HeroFactoryLoader extends SpriteFactoryLoader
 {	
@@ -60,7 +59,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 
 		// ABILITIES
 		ArrayList<AbstractAbility> abilities = result.getAbilities();
-		folder = folderPath + File.separator+FileTools.FOLDER_ABILITIES;
+		folder = folderPath + File.separator+FileNames.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 
 		// EXPLOSION
@@ -69,11 +68,11 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 			result.setExplosionName(explosionName);
 		
 		// MODULATIONS
-		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
+		folder = folderPath+File.separator+FileNames.FOLDER_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.HERO);
 		
 		// TRAJECTORIES
-		folder = folderPath+File.separator+FileTools.FOLDER_TRAJECTORIES;
+		folder = folderPath+File.separator+FileNames.FOLDER_TRAJECTORIES;
 		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// result
@@ -94,7 +93,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		GesturePack gesturePack = result.getGesturePack();
 		
 		// ANIMES
-		folder = folderPath+File.separator+FileTools.FOLDER_ANIMES;
+		folder = folderPath+File.separator+FileNames.FOLDER_ANIMES;
 		AnimesLoader.loadAnimes(folder,gesturePack,color,HeroFactory.getAnimeReplacements());
 		
 		// BOMBSET

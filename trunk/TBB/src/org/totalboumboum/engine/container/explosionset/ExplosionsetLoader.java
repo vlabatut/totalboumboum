@@ -29,19 +29,19 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class ExplosionsetLoader
 {	
 	public static Explosionset loadExplosionset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_EXPLOSIONSET+FileTools.EXTENSION_SCHEMA);
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_EXPLOSIONSET+FileTools.EXTENSION_XML);
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_EXPLOSIONSET+FileNames.EXTENSION_SCHEMA);
+		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_EXPLOSIONSET+FileNames.EXTENSION_XML);
 		Explosionset result = null;
 		
 		// opening
@@ -86,12 +86,12 @@ public class ExplosionsetLoader
 	private static Explosion loadExplosion(String pathFolder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String individualFolder = pathFolder;
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile,dataFile;
 		
 		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_EXPLOSION+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_EXPLOSION+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(individualFolder+File.separator+FileNames.FILE_EXPLOSION+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_EXPLOSION+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// loading

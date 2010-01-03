@@ -27,19 +27,19 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class StatisticsConfigurationLoader
 {	
 	public static StatisticsConfiguration loadStatisticsConfiguration() throws ParserConfigurationException, SAXException, IOException
 	{	StatisticsConfiguration result = new StatisticsConfiguration();
-		String individualFolder = FileTools.getConfigurationPath();
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_XML);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_SCHEMA);
+		String individualFolder = FilePaths.getConfigurationPath();
+		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_XML);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		loadStatisticsElement(root,result);
 		return result;

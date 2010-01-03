@@ -33,16 +33,15 @@ import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.engine.container.level.players.PlayersLoader;
 import org.totalboumboum.engine.container.level.zone.Zone;
 import org.totalboumboum.engine.container.level.zone.ZoneLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
 
 public class HollowLevelLoader
 {	
 	public static HollowLevel loadHollowLevel(String pack, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HollowLevel result = new HollowLevel();
-		String individualFolder = FileTools.getLevelsPath()+File.separator+pack+File.separator+folder;
+		String individualFolder = FilePaths.getLevelsPath()+File.separator+pack+File.separator+folder;
 		
 		// level info
 		LevelInfo levelInfo = LevelInfoLoader.loadLevelInfo(pack,folder);

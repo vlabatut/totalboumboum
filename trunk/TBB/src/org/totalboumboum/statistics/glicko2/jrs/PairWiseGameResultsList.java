@@ -107,7 +107,7 @@ class PairWiseGameResultsList extends ArrayList<PairWiseGameResult> {
 		for(int i=0;i<numberOfPairWiseGameResults;i++)
 		{	PairWiseGameResult result = new PairWiseGameResult(0,0);
 			result.importFromText(scanner);
-			add(result);
+			super.add(result);
 		}
 	}
 }

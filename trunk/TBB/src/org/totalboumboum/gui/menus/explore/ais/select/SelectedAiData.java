@@ -42,9 +42,9 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.common.structure.subpanel.content.TextContentPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
 
 public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubPanelListener
 {	
@@ -78,11 +78,11 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 			{	int listWidth = leftWidth;
 				int listHeight = dataHeight;
 				packPanel = new PackBrowserSubPanel(listWidth,listHeight);
-				String baseFolder = FileTools.getAisPath();
-				String additionalFolder = FileTools.FOLDER_AIS;
+				String baseFolder = FilePaths.getAisPath();
+				String additionalFolder = FileNames.FOLDER_AIS;
 				ArrayList<String> targetFiles = new ArrayList<String>();
-				targetFiles.add(FileTools.FILE_AI+FileTools.EXTENSION_XML);
-				targetFiles.add(FileTools.FILE_AI_MAIN_CLASS+FileTools.EXTENSION_CLASS);
+				targetFiles.add(FileNames.FILE_AI+FileNames.EXTENSION_XML);
+				targetFiles.add(FileNames.FILE_AI_MAIN_CLASS+FileNames.EXTENSION_CLASS);
 				packPanel.setFolder(baseFolder,additionalFolder,targetFiles);
 				packPanel.addListener(this);
 				mainPanel.add(packPanel);

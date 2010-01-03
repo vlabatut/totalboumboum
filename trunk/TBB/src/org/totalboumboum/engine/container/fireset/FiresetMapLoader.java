@@ -33,10 +33,10 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.engine.content.sprite.fire.FireFactory;
 import org.totalboumboum.engine.content.sprite.fire.FireFactoryLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class FiresetMapLoader
 {	
@@ -46,9 +46,9 @@ public class FiresetMapLoader
 	public static FiresetMap loadFiresetMap(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String individualFolder = folderPath;
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_FIRESETMAP+FileTools.EXTENSION_SCHEMA);
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_FIRESETMAP+FileTools.EXTENSION_XML);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_FIRESETMAP+FileNames.EXTENSION_SCHEMA);
+		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_FIRESETMAP+FileNames.EXTENSION_XML);
 		
 		
 		// opening
@@ -163,12 +163,12 @@ public class FiresetMapLoader
 	private static Fireset loadFireset(String folderPath, HashMap<String,FireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String individualFolder = folderPath;
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile,dataFile;
 		
 		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_FIRESET+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_FIRESET+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(individualFolder+File.separator+FileNames.FILE_FIRESET+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_FIRESET+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// loading

@@ -43,9 +43,9 @@ import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.Match;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
 
 public class ProfilesConfiguration
 {
@@ -123,7 +123,7 @@ public class ProfilesConfiguration
 	public void deleteProfile(Profile profile) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// delete file
 		int id = profile.getId();
-		String path = FileTools.getProfilesPath()+File.separator+id+FileTools.EXTENSION_XML;
+		String path = FilePaths.getProfilesPath()+File.separator+id+FileNames.EXTENSION_XML;
 		File file = new File(path);
 		file.delete();
 		

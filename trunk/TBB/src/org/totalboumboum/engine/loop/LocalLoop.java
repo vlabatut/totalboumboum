@@ -87,11 +87,11 @@ import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CalculusTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.strings.StringTools;
 import org.totalboumboum.tools.strings.StringTools.TimeUnit;
 import org.xml.sax.SAXException;
-
 
 public class LocalLoop extends Loop
 {	private static final long serialVersionUID = 1L;
@@ -122,7 +122,7 @@ public class LocalLoop extends Loop
 		hollowLevel.getInstance().initLinks();
 		
 		// load players : common stuff
-		String baseFolder = FileTools.getInstancesPath()+File.separator+RoundVariables.instance.getName()+File.separator+FileTools.FOLDER_HEROES;
+		String baseFolder = FilePaths.getInstancesPath()+File.separator+RoundVariables.instance.getName()+File.separator+FileNames.FOLDER_HEROES;
 		HeroFactory base = HeroFactoryLoader.loadHeroFactory(baseFolder);
 //		loadStepOver();		
 		// load players : individual stuff

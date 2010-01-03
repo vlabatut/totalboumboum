@@ -42,7 +42,7 @@ import org.jdom.Namespace;
 import org.jdom.input.DOMBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -367,7 +367,7 @@ public class XmlTools
 	    // loading all schemas
 //	    System.setProperty("javax.xml.parsers.DocumentBuilderFactory", "org.apache.xerces.parsers.SAXParser");
 //	    System.setProperty("javax.xml.parsers.SAXParserFactory", "org.apache.xerces.jaxp.SAXParserFactoryImpl");
-		File folder = new File(FileTools.getSchemasPath());
+		File folder = new File(FilePaths.getSchemasPath());
 		File[] files = folder.listFiles();
 		for(int i=0;i<files.length;i++)
 		{	if(files[i].isFile())
@@ -429,7 +429,7 @@ public class XmlTools
 		Document document = new Document(root);
 		// schema
 		String schemaPath = schemaFile.getPath();
-		File racine = new File(FileTools.getResourcesPath());
+		File racine = new File(FilePaths.getResourcesPath());
 		File tempFile = new File(dataFile.getPath());
 		while(!tempFile.equals(racine))
 		{	tempFile = tempFile.getParentFile();

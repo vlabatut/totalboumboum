@@ -35,10 +35,10 @@ import org.totalboumboum.game.tournament.cup.CupTournamentLoader;
 import org.totalboumboum.game.tournament.league.LeagueTournamentLoader;
 import org.totalboumboum.game.tournament.sequence.SequenceTournamentLoader;
 import org.totalboumboum.game.tournament.single.SingleTournamentLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class TournamentLoader
 {	
@@ -49,17 +49,17 @@ public class TournamentLoader
 
 	public static AbstractTournament loadTournamentFromFolderPath(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile,dataFile;
 		// opening
-		dataFile = new File(folderPath+File.separator+FileTools.FILE_TOURNAMENT+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_TOURNAMENT+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(folderPath+File.separator+FileNames.FILE_TOURNAMENT+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_TOURNAMENT+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		AbstractTournament result = loadTournamentElement(folderPath,root);
 		return result;
 	}
 	public static AbstractTournament loadTournamentFromName(String name) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	String individualFolder = FileTools.getTournamentsPath()+File.separator+name;
+	{	String individualFolder = FilePaths.getTournamentsPath()+File.separator+name;
 		AbstractTournament result = loadTournamentFromFolderPath(individualFolder);
 		return result;
     }

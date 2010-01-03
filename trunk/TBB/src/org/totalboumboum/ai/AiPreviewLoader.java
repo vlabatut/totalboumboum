@@ -10,7 +10,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.totalboumboum.game.match.MatchLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -19,10 +20,10 @@ public class AiPreviewLoader
 {
 	public static AiPreview loadAiPreview(String pack, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	AiPreview result = new AiPreview(pack,folder);
-		String path = FileTools.getAisPath()+File.separator+pack+File.separator+FileTools.FOLDER_AIS+File.separator+folder;
-		File dataFile = new File(path+File.separator+FileTools.FILE_AI+FileTools.EXTENSION_XML);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_AI+FileTools.EXTENSION_SCHEMA);
+		String path = FilePaths.getAisPath()+File.separator+pack+File.separator+FileNames.FOLDER_AIS+File.separator+folder;
+		File dataFile = new File(path+File.separator+FileNames.FILE_AI+FileNames.EXTENSION_XML);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_AI+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		loadAiElement(root,result);
 		return result;

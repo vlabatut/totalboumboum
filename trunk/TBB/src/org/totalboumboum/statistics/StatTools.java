@@ -37,9 +37,10 @@ import org.xml.sax.SAXException;
 public class StatTools
 {	
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	initAllStats();
+	{	//initAllStats();
 		//reinitOverallStatsForPlayer(0);
-		exportAllStats();
+		//exportAllStats();
+		importAllStats();
 	}
 	
 	/**

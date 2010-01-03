@@ -52,9 +52,8 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
-
 
 public class SelectedRoundData extends EntitledDataPanel implements FolderBrowserSubPanelListener, LimitsSubPanelListener
 {	
@@ -89,7 +88,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 			
 			// list panel
 			{	listPanel = new FolderBrowserSubPanel(leftWidth,dataHeight);
-				String targetFile = FileTools.FILE_ROUND+FileTools.EXTENSION_XML;
+				String targetFile = FileNames.FILE_ROUND+FileNames.EXTENSION_XML;
 				listPanel.setShowParent(false);
 				listPanel.setFolder(baseFolder,targetFile);
 				listPanel.addListener(this);

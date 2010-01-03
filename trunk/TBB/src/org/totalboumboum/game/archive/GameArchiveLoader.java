@@ -30,20 +30,20 @@ import java.util.Locale;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.strings.StringTools;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class GameArchiveLoader
 {	
 	public static GameArchive loadGameArchive(String folderName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	GameArchive result = new GameArchive();
-		String individualFolder = FileTools.getSavesPath()+File.separator+folderName;
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_ARCHIVE+FileTools.EXTENSION_XML);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ARCHIVE+FileTools.EXTENSION_SCHEMA);
+		String individualFolder = FilePaths.getSavesPath()+File.separator+folderName;
+		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_ARCHIVE+FileNames.EXTENSION_XML);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ARCHIVE+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		loadArchiveElement(root,result);
 		result.setFolder(folderName);

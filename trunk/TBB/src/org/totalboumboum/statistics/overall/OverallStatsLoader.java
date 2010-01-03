@@ -31,14 +31,15 @@ import java.io.ObjectInputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 
 public class OverallStatsLoader
 {
 	@SuppressWarnings("unchecked")
 	public static HashMap<Integer,PlayerStats> loadOverallStatistics() throws IOException, ClassNotFoundException
 	{	// init path
-		String path = FileTools.getOverallStatisticsPath()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
+		String path = FilePaths.getOverallStatisticsPath()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_DATA;
 		
 		// read the rankings
 		File file = new File(path);
@@ -55,7 +56,7 @@ public class OverallStatsLoader
 	{	HashMap<Integer,PlayerStats> result = new HashMap<Integer, PlayerStats>();
 	
 		// open the file
-		String path = FileTools.getOverallStatisticsPath()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_TEXT;
+		String path = FilePaths.getOverallStatisticsPath()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_TEXT;
 		File file = new File(path);
 		FileInputStream fileIn = new FileInputStream(file);
 		BufferedInputStream inBuff = new BufferedInputStream(fileIn);

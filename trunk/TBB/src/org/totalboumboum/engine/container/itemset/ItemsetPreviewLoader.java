@@ -33,10 +33,10 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.engine.content.sprite.SpritePreview;
 import org.totalboumboum.engine.content.sprite.SpritePreviewLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class ItemsetPreviewLoader
 {	
@@ -45,13 +45,13 @@ public class ItemsetPreviewLoader
 	/////////////////////////////////////////////////////////////////
 	public static ItemsetPreview loadItemsetPreview(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
 		File schemaFile,dataFile;
 		
 		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_ITEMSET+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ITEMSET+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(individualFolder+File.separator+FileNames.FILE_ITEMSET+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ITEMSET+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// loading

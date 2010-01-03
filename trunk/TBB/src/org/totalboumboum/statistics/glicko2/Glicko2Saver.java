@@ -39,7 +39,8 @@ import org.totalboumboum.configuration.profile.ProfileLoader;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.glicko2.jrs.ResultsBasedRankingService;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 public class Glicko2Saver
@@ -47,8 +48,8 @@ public class Glicko2Saver
 
 	public static void saveGlicko2Statistics(RankingService rankingService) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init files
-		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
-		String backup = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_BACKUP;
+		String path = FilePaths.getGlicko2Path()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_DATA;
+		String backup = FilePaths.getGlicko2Path()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_BACKUP;
 		File backupFile = new File(backup);
 		File previousFile = new File(path);
 		
@@ -111,7 +112,7 @@ public class Glicko2Saver
 	 */
 	public static void exportGlicko2Statistics(RankingService rankingService) throws FileNotFoundException
 	{	// open the file
-		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_TEXT;
+		String path = FilePaths.getGlicko2Path()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_TEXT;
 		File file = new File(path);
 		FileOutputStream fileOut = new FileOutputStream(file);
 		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);

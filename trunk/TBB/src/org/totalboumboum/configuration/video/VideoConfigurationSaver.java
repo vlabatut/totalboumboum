@@ -29,10 +29,10 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class VideoConfigurationSaver
 {	
@@ -40,10 +40,10 @@ public class VideoConfigurationSaver
 	{	// build document
 		Element root = saveVideoElement(videoConfiguration);	
 		// save file
-		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_VIDEO+FileTools.EXTENSION_XML;
+		String engineFile = FilePaths.getConfigurationPath()+File.separator+FileNames.FILE_VIDEO+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_VIDEO+FileTools.EXTENSION_SCHEMA);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_VIDEO+FileNames.EXTENSION_SCHEMA);
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 

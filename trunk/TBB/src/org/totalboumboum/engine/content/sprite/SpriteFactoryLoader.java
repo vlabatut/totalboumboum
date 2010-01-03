@@ -39,10 +39,10 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public abstract class SpriteFactoryLoader
 {	
@@ -51,12 +51,12 @@ public abstract class SpriteFactoryLoader
 	/////////////////////////////////////////////////////////////////
 	public static Element openFile(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile,dataFile;
 		
 		// opening
-		dataFile = new File(folderPath+File.separator+FileTools.FILE_SPRITE+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_SPRITE+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(folderPath+File.separator+FileNames.FILE_SPRITE+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_SPRITE+FileNames.EXTENSION_SCHEMA);
 		Element result = XmlTools.getRootFromFile(dataFile,schemaFile);
 
 		return result;

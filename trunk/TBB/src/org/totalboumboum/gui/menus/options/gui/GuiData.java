@@ -43,8 +43,7 @@ import org.totalboumboum.gui.data.language.Language;
 import org.totalboumboum.gui.tools.GuiFileTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
-
+import org.totalboumboum.tools.files.FileNames;
 
 public class GuiData extends EntitledDataPanel implements MouseListener
 {	
@@ -364,8 +363,8 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 			public boolean accept(File pathname)
 			{	boolean result;
 				String name = pathname.getName();
-				int beginIndex = name.length()-FileTools.EXTENSION_FONT.length();
-				result = name.substring(beginIndex,name.length()).equalsIgnoreCase(FileTools.EXTENSION_FONT);
+				int beginIndex = name.length()-FileNames.EXTENSION_FONT.length();
+				result = name.substring(beginIndex,name.length()).equalsIgnoreCase(FileNames.EXTENSION_FONT);
 				return result;
 			}
 			
@@ -374,7 +373,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 		TreeSet<String> temp = new TreeSet<String>();
 		for(int i=0;i<files.length;i++)
 		{	String name = files[i].getName();
-			temp.add(name.substring(0,name.length()-FileTools.EXTENSION_FONT.length()));
+			temp.add(name.substring(0,name.length()-FileNames.EXTENSION_FONT.length()));
 		}
 		fonts = new String[files.length];
 		Iterator<String> it = temp.iterator();
@@ -393,8 +392,8 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 			public boolean accept(File pathname)
 			{	boolean result;
 				String name = pathname.getName();
-				int beginIndex = name.length()-FileTools.EXTENSION_XML.length();
-				result = name.substring(beginIndex,name.length()).equalsIgnoreCase(FileTools.EXTENSION_XML);
+				int beginIndex = name.length()-FileNames.EXTENSION_XML.length();
+				result = name.substring(beginIndex,name.length()).equalsIgnoreCase(FileNames.EXTENSION_XML);
 				return result;
 			}
 			
@@ -403,7 +402,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 		TreeSet<String> temp = new TreeSet<String>();
 		for(int i=0;i<files.length;i++)
 		{	String name = files[i].getName();
-			temp.add(name.substring(0,name.length()-FileTools.EXTENSION_XML.length()));
+			temp.add(name.substring(0,name.length()-FileNames.EXTENSION_XML.length()));
 		}
 		languages = new String[files.length];
 		Iterator<String> it = temp.iterator();

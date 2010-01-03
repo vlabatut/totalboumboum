@@ -40,9 +40,8 @@ import org.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import org.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
-
 
 public class BombFactoryLoader extends SpriteFactoryLoader
 {	
@@ -63,7 +62,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		
 		// ABILITIES
-		folder = folderPath+File.separator+FileTools.FOLDER_ABILITIES;
+		folder = folderPath+File.separator+FileNames.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 		
 		//EXPLOSION
@@ -72,11 +71,11 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 			result.setExplosionName(explosionName);
 		
 		//MODULATIONS
-		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
+		folder = folderPath+File.separator+FileNames.FOLDER_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.BOMB);
 		
 		// TRAJECTORIES
-		folder = folderPath+File.separator+FileTools.FOLDER_TRAJECTORIES;
+		folder = folderPath+File.separator+FileNames.FOLDER_TRAJECTORIES;
 		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// result
@@ -94,7 +93,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		GesturePack gesturePack = result.getGesturePack();
 		String baseStr = result.getBase();
 		if(baseStr!=null)
-		{	String path = abstractBombs.get(baseStr)+File.separator+FileTools.FOLDER_ANIMES;
+		{	String path = abstractBombs.get(baseStr)+File.separator+FileNames.FOLDER_ANIMES;
 			// NOTE this won't work in case of multiple inheritance (only the direct parent's animation will be loaded)
 			if(color==null)
 				AnimesLoader.loadAnimes(path,gesturePack,BombFactory.getAnimeReplacements());
@@ -103,7 +102,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		}
 		
 		// ANIMES
-		folder = folderPath+File.separator+FileTools.FOLDER_ANIMES;
+		folder = folderPath+File.separator+FileNames.FOLDER_ANIMES;
 		if(color==null)
 			AnimesLoader.loadAnimes(folder,gesturePack,BombFactory.getAnimeReplacements());
 		else
