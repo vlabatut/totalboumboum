@@ -47,9 +47,9 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.LocalLoop;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
 
 public class HollowLevel implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -115,8 +115,8 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
     public void loadTheme() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// theme
-    	String individualFolder = FileTools.getInstancesPath()+File.separator+levelInfo.getInstance();
-    	individualFolder = individualFolder+File.separator+FileTools.FOLDER_THEMES+File.separator+levelInfo.getTheme();
+    	String individualFolder = FilePaths.getInstancesPath()+File.separator+levelInfo.getInstance();
+    	individualFolder = individualFolder+File.separator+FileNames.FOLDER_THEMES+File.separator+levelInfo.getTheme();
     	Theme theme = ThemeLoader.loadTheme(individualFolder);
 //		level.setTheme(theme);
 		

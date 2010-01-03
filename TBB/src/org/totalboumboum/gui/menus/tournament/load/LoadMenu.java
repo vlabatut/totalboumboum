@@ -43,9 +43,9 @@ import org.totalboumboum.gui.game.save.SaveData;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
-
 
 public class LoadMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
@@ -112,7 +112,7 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener
 	// TOURNAMENT CONTAINER			/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private TournamentSplitPanel tournamentPanel;
-	private String baseFolder = FileTools.getSavesPath();
+	private String baseFolder = FilePaths.getSavesPath();
 	
 	public void setTournamentPanel(TournamentSplitPanel tournamentPanel)
 	{	this.tournamentPanel = tournamentPanel;

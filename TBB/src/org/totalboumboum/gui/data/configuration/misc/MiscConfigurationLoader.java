@@ -37,19 +37,19 @@ import org.totalboumboum.gui.data.language.Language;
 import org.totalboumboum.gui.data.language.LanguageLoader;
 import org.totalboumboum.gui.tools.GuiFileTools;
 import org.totalboumboum.gui.tools.GuiXmlTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class MiscConfigurationLoader
 {	
 	public static MiscConfiguration loadMiscConfiguration() throws ParserConfigurationException, SAXException, IOException
 	{	MiscConfiguration result = new MiscConfiguration();
-		String individualFolder = FileTools.getConfigurationPath();
+		String individualFolder = FilePaths.getConfigurationPath();
 		File dataFile = new File(individualFolder+File.separator+GuiFileTools.FILE_GUI+GuiFileTools.EXTENSION_DATA);
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+GuiFileTools.FILE_GUI+GuiFileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		loadGuiElement(root,result);
@@ -80,7 +80,7 @@ public class MiscConfigurationLoader
 
 	public static void loadFontElement(Element root, MiscConfiguration result)
 	{	String filename = root.getAttribute(GuiXmlTools.ATT_VALUE).getValue().trim();
-		String path = GuiFileTools.getFontsPath()+File.separator+filename+FileTools.EXTENSION_FONT;
+		String path = GuiFileTools.getFontsPath()+File.separator+filename+FileNames.EXTENSION_FONT;
 		Font font;
 		try
 		{	InputStream is = new FileInputStream(path);

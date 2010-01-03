@@ -50,9 +50,9 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
 
 public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanelListener, TransferSubPanelListener, FileBrowserSubPanelListener
 {	
@@ -105,8 +105,8 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 			
 			// selection panel
 			{	selectionPanel = new PackBrowserSubPanel(listWidth,dataHeight);
-				String baseFolder = FileTools.getLevelsPath();
-				String targetFile = FileTools.FILE_LEVEL+FileTools.EXTENSION_XML;
+				String baseFolder = FilePaths.getLevelsPath();
+				String targetFile = FileNames.FILE_LEVEL+FileNames.EXTENSION_XML;
 				selectionPanel.setFolder(baseFolder,null,targetFile);
 				selectionPanel.addListener(this);
 				mainPanel.add(selectionPanel);

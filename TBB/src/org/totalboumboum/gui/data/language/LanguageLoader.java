@@ -33,19 +33,19 @@ import org.jdom.Element;
 import org.totalboumboum.gui.tools.GuiFileTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiXmlTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class LanguageLoader
 {	
 	public static Language loadLanguage(String name) throws ParserConfigurationException, SAXException, IOException
 	{	Language result = new Language();
 		String individualFolder = GuiFileTools.getLanguagesPath();
-		File dataFile = new File(individualFolder+File.separator+name+FileTools.EXTENSION_XML);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_LANGUAGE+FileTools.EXTENSION_SCHEMA);
+		File dataFile = new File(individualFolder+File.separator+name+FileNames.EXTENSION_XML);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_LANGUAGE+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		loadLanguageElement(root,result);
 		return result;

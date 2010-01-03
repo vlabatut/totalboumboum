@@ -34,9 +34,9 @@ import org.totalboumboum.engine.container.fireset.FiresetMap;
 import org.totalboumboum.engine.container.fireset.FiresetMapLoader;
 import org.totalboumboum.engine.container.itemset.Itemset;
 import org.totalboumboum.engine.container.itemset.ItemsetLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
 
 public class Instance implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -61,7 +61,7 @@ public class Instance implements Serializable
 
 	public void loadBombsetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// init bombset map
-		String individualFolder = FileTools.getInstancesPath()+File.separator+name+File.separator+FileTools.FOLDER_BOMBS;
+		String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_BOMBS;
 		bombsetMap = new BombsetMap();
     	bombsetMap.initBombset(individualFolder);
 		
@@ -79,7 +79,7 @@ public class Instance implements Serializable
 	private FiresetMap firesetMap;
 	
 	public void loadFiresetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String individualFolder = FileTools.getInstancesPath()+File.separator+name+File.separator+FileTools.FOLDER_FIRES;
+    {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_FIRES;
 		firesetMap = FiresetMapLoader.loadFiresetMap(individualFolder);
     }
 		
@@ -93,7 +93,7 @@ public class Instance implements Serializable
 	private Itemset itemset;
 
 	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String individualFolder = FileTools.getInstancesPath()+File.separator+name+File.separator+FileTools.FOLDER_ITEMS;
+    {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_ITEMS;
     	itemset = ItemsetLoader.loadItemset(individualFolder);
     }
 		
@@ -107,7 +107,7 @@ public class Instance implements Serializable
 	private Explosionset explosionset;
 
 	public void loadExplosionSet() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String individualFolder = FileTools.getInstancesPath()+File.separator+name+File.separator+FileTools.FOLDER_EXPLOSIONS;
+    {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_EXPLOSIONS;
     	explosionset = ExplosionsetLoader.loadExplosionset(individualFolder);
     }
 		

@@ -32,10 +32,10 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.engine.content.sprite.block.BlockFactory;
 import org.totalboumboum.engine.content.sprite.block.BlockFactoryLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class BlocksetLoader
 {	
@@ -44,13 +44,13 @@ public class BlocksetLoader
 	/////////////////////////////////////////////////////////////////
 	public static void loadBlockset(String folderPath, Theme result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
 		File schemaFile,dataFile;
 		
 		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_BLOCKSET+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_BLOCKSET+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(individualFolder+File.separator+FileNames.FILE_BLOCKSET+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_BLOCKSET+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// loading

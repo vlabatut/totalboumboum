@@ -43,20 +43,20 @@ import org.totalboumboum.engine.content.feature.action.GeneralActionLoader;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class ModulationsLoader
 {	
 
 	public static void loadModulations(String individualFolder, GesturePack pack, Role role) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	File dataFile = new File(individualFolder+File.separator+FileTools.FILE_MODULATIONS+FileTools.EXTENSION_XML);
+	{	File dataFile = new File(individualFolder+File.separator+FileNames.FILE_MODULATIONS+FileNames.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
-			String schemaFolder = FileTools.getSchemasPath();
-			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_MODULATIONS+FileTools.EXTENSION_SCHEMA);
+			String schemaFolder = FilePaths.getSchemasPath();
+			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_MODULATIONS+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
 			loadModulationsElement(root,individualFolder,pack,role);
@@ -85,8 +85,8 @@ public class ModulationsLoader
     	
     	// opening
 		File dataFile = new File(localFilePath);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_GESTUREMODULATIONS+FileTools.EXTENSION_SCHEMA);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_GESTUREMODULATIONS+FileNames.EXTENSION_SCHEMA);
 		Element elt = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// loading

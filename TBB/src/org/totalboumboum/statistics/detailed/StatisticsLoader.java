@@ -32,16 +32,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
-import org.totalboumboum.tools.files.FileTools;
-
-
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 
 public class StatisticsLoader
 {
 	public static Statistics loadStatistics() throws IOException, ClassNotFoundException
 	{	Statistics result;
-		String statisticsFolder = FileTools.getStatisticsPath();
-		String individualFolder = statisticsFolder+File.separator+FileTools.FILE_STATISTICS;
+		String statisticsFolder = FilePaths.getStatisticsPath();
+		String individualFolder = statisticsFolder+File.separator+FileNames.FILE_STATISTICS;
 		File file = new File(individualFolder);
 		InputStream in = new FileInputStream(file);
 		BufferedInputStream inBuf = new BufferedInputStream(in);
@@ -52,8 +51,8 @@ public class StatisticsLoader
 	}
 	
 	public static void saveStatistics(Statistics stats) throws IOException
-	{	String statisticsFolder = FileTools.getStatisticsPath();
-		String individualFolder = statisticsFolder+File.separator+FileTools.FILE_STATISTICS;
+	{	String statisticsFolder = FilePaths.getStatisticsPath();
+		String individualFolder = statisticsFolder+File.separator+FileNames.FILE_STATISTICS;
 		File file = new File(individualFolder);
 		OutputStream out = new FileOutputStream(file);
 		BufferedOutputStream outBuf = new BufferedOutputStream(out);

@@ -25,9 +25,9 @@ import java.io.File;
 import java.io.IOException;
 
 import org.jdom.Element;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
-
 
 public class ProfileSaver
 {	
@@ -35,10 +35,10 @@ public class ProfileSaver
 	{	// build document
 		Element root = saveProfileElement(profile);	
 		// save file
-		String file = FileTools.getProfilesPath()+File.separator+Integer.toString(id)+FileTools.EXTENSION_XML;
+		String file = FilePaths.getProfilesPath()+File.separator+Integer.toString(id)+FileNames.EXTENSION_XML;
 		File dataFile = new File(file);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PROFILE+FileTools.EXTENSION_SCHEMA);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_PROFILE+FileNames.EXTENSION_SCHEMA);
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 

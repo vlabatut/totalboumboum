@@ -37,21 +37,21 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.match.MatchLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class RoundLoader
 {	
 	public static Round loadRoundFromFolderPath(String folderPath, Match match) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile,dataFile;
 		
 		// opening
-		dataFile = new File(folderPath+File.separator+FileTools.FILE_ROUND+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ROUND+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(folderPath+File.separator+FileNames.FILE_ROUND+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ROUND+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// loading
@@ -65,7 +65,7 @@ public class RoundLoader
     }
     
 	public static Round loadRoundFromName(String name, Match match) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	String individualFolder = FileTools.getRoundsPath()+File.separator+name;
+	{	String individualFolder = FilePaths.getRoundsPath()+File.separator+name;
 		Round result = loadRoundFromFolderPath(individualFolder,match);
 		return result;
     }

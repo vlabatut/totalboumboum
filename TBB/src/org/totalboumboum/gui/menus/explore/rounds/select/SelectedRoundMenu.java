@@ -33,8 +33,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
-
+import org.totalboumboum.tools.files.FilePaths;
 
 public class SelectedRoundMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
@@ -66,7 +65,7 @@ public class SelectedRoundMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		levelData = new SelectedRoundData(container,FileTools.getRoundsPath());
+		levelData = new SelectedRoundData(container,FilePaths.getRoundsPath());
 		container.setDataPart(levelData);
 	}
 	

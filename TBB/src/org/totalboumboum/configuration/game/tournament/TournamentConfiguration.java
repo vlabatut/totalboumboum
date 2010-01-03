@@ -29,9 +29,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.TournamentLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
 
 public class TournamentConfiguration
 {
@@ -141,14 +141,14 @@ public class TournamentConfiguration
 	public void loadLastTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	if(tournamentName!=null)
 		{	// String folderPath = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_TOURNAMENT;
-			String folderPath = FileTools.getTournamentsPath()+File.separator+tournamentName;
+			String folderPath = FilePaths.getTournamentsPath()+File.separator+tournamentName;
 			tournament = TournamentLoader.loadTournamentFromFolderPath(folderPath);
 		}
 	}
 	
 	public void reinitTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	tournamentName.delete(0,tournamentName.length());
-		String folderPath = FileTools.getConfigurationPath()+File.separator+FileTools.FOLDER_TOURNAMENT;
+		String folderPath = FilePaths.getConfigurationPath()+File.separator+FileNames.FOLDER_TOURNAMENT;
 		tournament = TournamentLoader.loadTournamentFromFolderPath(folderPath);
 	}
 

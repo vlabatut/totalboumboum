@@ -29,10 +29,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.gui.tools.GuiFileTools;
 import org.totalboumboum.gui.tools.GuiXmlTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class MiscConfigurationSaver
 {	
@@ -40,10 +40,10 @@ public class MiscConfigurationSaver
 	{	// build document
 		Element root = saveGuiElement(miscConfiguration);	
 		// save file
-		String engineFile = FileTools.getConfigurationPath()+File.separator+GuiFileTools.FILE_GUI+FileTools.EXTENSION_XML;
+		String engineFile = FilePaths.getConfigurationPath()+File.separator+GuiFileTools.FILE_GUI+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+GuiFileTools.FILE_GUI+FileTools.EXTENSION_SCHEMA);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+GuiFileTools.FILE_GUI+FileNames.EXTENSION_SCHEMA);
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 

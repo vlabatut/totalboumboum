@@ -64,9 +64,9 @@ import org.totalboumboum.gui.game.tournament.results.TournamentResults;
 import org.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
 
 public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel
 {	private static final long serialVersionUID = 1L;
@@ -196,10 +196,10 @@ buttonStatistics.setEnabled(false);
 		if(tournament==tournamentConf && tournamentConfiguration.getAutoSave())
 		{	try
 			{	// filenames
-				String autosave = FileTools.getSavesPath()+File.separator+FileTools.FOLDER_AUTOSAVE;
-				String backup = FileTools.getSavesPath()+File.separator+FileTools.FOLDER_AUTOSAVE_BACKUP;
-				String dataFileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
-				String xmlFileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_XML;
+				String autosave = FilePaths.getSavesPath()+File.separator+FileNames.FOLDER_AUTOSAVE;
+				String backup = FilePaths.getSavesPath()+File.separator+FileNames.FOLDER_AUTOSAVE_BACKUP;
+				String dataFileName = FileNames.FILE_ARCHIVE+FileNames.EXTENSION_DATA;
+				String xmlFileName = FileNames.FILE_ARCHIVE+FileNames.EXTENSION_XML;
 				// backup
 				File autosaveFile,backupFile;
 				autosaveFile = new File(autosave,dataFileName);
@@ -213,7 +213,7 @@ buttonStatistics.setEnabled(false);
 					backupFile.delete();
 				autosaveFile.renameTo(backupFile);
 				// save
-				GameArchive.saveGame(FileTools.FOLDER_AUTOSAVE,tournament);
+				GameArchive.saveGame(FileNames.FOLDER_AUTOSAVE,tournament);
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();

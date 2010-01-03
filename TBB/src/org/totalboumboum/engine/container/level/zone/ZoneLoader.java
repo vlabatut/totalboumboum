@@ -34,10 +34,10 @@ import org.jdom.Element;
 import org.totalboumboum.engine.container.level.variabletile.VariableTile;
 import org.totalboumboum.engine.container.level.variabletile.VariableTilesLoader;
 import org.totalboumboum.engine.container.theme.Theme;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class ZoneLoader
 {	    
@@ -45,13 +45,13 @@ public class ZoneLoader
     {	// init
     	Zone result = new Zone(globalWidth,globalHeight);
     	Element root;
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folder;
 		File schemaFile,dataFile;
 		
 		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_ZONE+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ZONE+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(individualFolder+File.separator+FileNames.FILE_ZONE+FileNames.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ZONE+FileNames.EXTENSION_SCHEMA);
 		root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// tiles random variable

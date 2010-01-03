@@ -45,9 +45,8 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
-
 
 public class SelectedMatchData extends EntitledDataPanel implements FolderBrowserSubPanelListener, LimitsSubPanelListener
 {	
@@ -83,7 +82,7 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 			
 			// list panel
 			{	folderPanel = new FolderBrowserSubPanel(leftWidth,dataHeight);
-				String targetFile = FileTools.FILE_MATCH+FileTools.EXTENSION_XML;
+				String targetFile = FileNames.FILE_MATCH+FileNames.EXTENSION_XML;
 				folderPanel.setShowParent(false);
 				folderPanel.setFolder(baseFolder,targetFile);
 				folderPanel.addListener(this);

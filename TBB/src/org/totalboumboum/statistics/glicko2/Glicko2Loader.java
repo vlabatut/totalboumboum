@@ -32,13 +32,14 @@ import java.util.Scanner;
 
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.glicko2.jrs.ResultsBasedRankingService;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 
 public class Glicko2Loader
 {
 	public static RankingService loadGlicko2Statistics() throws IOException, ClassNotFoundException
 	{	// init path
-		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
+		String path = FilePaths.getGlicko2Path()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_DATA;
 		
 		// read the rankings
 		File file = new File(path);
@@ -55,7 +56,7 @@ public class Glicko2Loader
 	{	RankingService result = new ResultsBasedRankingService();
 	
 		// open the file
-		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_TEXT;
+		String path = FilePaths.getGlicko2Path()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_TEXT;
 		File file = new File(path);
 		FileInputStream fileIn = new FileInputStream(file);
 		BufferedInputStream inBuff = new BufferedInputStream(fileIn);

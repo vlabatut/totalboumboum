@@ -33,10 +33,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.totalboumboum.tools.classes.ClassTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class ControlSettingsSaver
 {	
@@ -44,10 +44,10 @@ public class ControlSettingsSaver
 	{	// build document
 		Element root = saveControlElement(controlSettings);	
 		// save file
-		String controlFile = FileTools.getControlsPath()+File.separator+fileName+FileTools.EXTENSION_XML;
+		String controlFile = FilePaths.getControlsPath()+File.separator+fileName+FileNames.EXTENSION_XML;
 		File dataFile = new File(controlFile);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_CONTROLS+FileTools.EXTENSION_SCHEMA);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_CONTROLS+FileNames.EXTENSION_SCHEMA);
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 

@@ -26,8 +26,8 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 
 import org.totalboumboum.tools.classes.ClassTools;
-import org.totalboumboum.tools.files.FileTools;
-
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 
 public class AiLoader
 {
@@ -35,15 +35,15 @@ public class AiLoader
 	{	AbstractAiManager<?> result;
 		
 		// check the file
-		String packageFolder = FileTools.getAisPath()+File.separator+packname+File.separator+FileTools.FOLDER_AIS+File.separator+name;
-		String classFile = packageFolder+File.separator+FileTools.FILE_AI_MAIN_CLASS+FileTools.EXTENSION_CLASS;
+		String packageFolder = FilePaths.getAisPath()+File.separator+packname+File.separator+FileNames.FOLDER_AIS+File.separator+name;
+		String classFile = packageFolder+File.separator+FileNames.FILE_AI_MAIN_CLASS+FileNames.EXTENSION_CLASS;
 		File file = new File(classFile);
 		if(!file.exists())
 			throw new FileNotFoundException(classFile);
 		
 		// load the class
 		String packageName = packname+ClassTools.CLASS_SEPARATOR+name;
-		String classQualifiedName = packageName+ClassTools.CLASS_SEPARATOR+FileTools.FILE_AI_MAIN_CLASS;
+		String classQualifiedName = packageName+ClassTools.CLASS_SEPARATOR+FileNames.FILE_AI_MAIN_CLASS;
 		Class<?> tempClass = Class.forName(classQualifiedName);
 		if(!AbstractAiManager.class.isAssignableFrom(tempClass))
 			throw new ClassCastException(classQualifiedName);

@@ -40,10 +40,10 @@ import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class TrajectoriesLoader
 {	
@@ -52,11 +52,11 @@ public class TrajectoriesLoader
 	private double zoomFactor;
 */
 	public static void loadTrajectories(String individualFolder, GesturePack pack) throws ParserConfigurationException, SAXException, IOException
-	{	File dataFile = new File(individualFolder+File.separator+FileTools.FILE_TRAJECTORIES+FileTools.EXTENSION_XML);
+	{	File dataFile = new File(individualFolder+File.separator+FileNames.FILE_TRAJECTORIES+FileNames.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
-			String schemaFolder = FileTools.getSchemasPath();
-			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_TRAJECTORIES+FileTools.EXTENSION_SCHEMA);
+			String schemaFolder = FilePaths.getSchemasPath();
+			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_TRAJECTORIES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
 			loadTrajectories(root,pack);

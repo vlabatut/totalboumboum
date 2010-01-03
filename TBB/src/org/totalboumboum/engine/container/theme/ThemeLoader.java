@@ -27,10 +27,10 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class ThemeLoader
 {	
@@ -39,10 +39,10 @@ public class ThemeLoader
 	/////////////////////////////////////////////////////////////////
 	public static Theme loadTheme(String folderPath) throws SAXException, IOException, ParserConfigurationException, ClassNotFoundException
 	{	// init
-		String schemaFolder = FileTools.getSchemasPath();
+		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_SCHEMA);
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_XML);
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_THEME+FileNames.EXTENSION_SCHEMA);
+		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_THEME+FileNames.EXTENSION_XML);
 		Theme result = null;
 		
 		// opening
@@ -126,11 +126,11 @@ public class ThemeLoader
     	loadSourceElement(root,result);
     	
 		// blocks
-    	folder = individualFolder + File.separator + FileTools.FOLDER_BLOCKS;
+    	folder = individualFolder + File.separator + FileNames.FOLDER_BLOCKS;
     	BlocksetLoader.loadBlockset(folder,result);
     	
 		// floors
-    	folder = individualFolder + File.separator + FileTools.FOLDER_FLOORS;
+    	folder = individualFolder + File.separator + FileNames.FOLDER_FLOORS;
     	FloorsetLoader.loadFloorset(folder,result);		
     	
 		// result

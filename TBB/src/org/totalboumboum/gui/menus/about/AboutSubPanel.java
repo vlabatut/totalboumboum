@@ -48,8 +48,7 @@ import org.totalboumboum.gui.common.structure.dialog.inside.ModalDialogSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
-
+import org.totalboumboum.tools.files.FileNames;
 
 public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
@@ -149,7 +148,7 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 	
 	public ArrayList<String> loadText()
 	{	ArrayList<String> result = new ArrayList<String>();
-		String fileName = FileTools.FILE_ABOUT+FileTools.EXTENSION_TEXT;
+		String fileName = FileNames.FILE_ABOUT+FileNames.EXTENSION_TEXT;
 		File file = new File(fileName);
 		try
 		{	FileInputStream in = new FileInputStream(file);

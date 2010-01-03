@@ -29,19 +29,19 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class ControlSettingsLoader
 {	
 	public static ControlSettings loadControlSettings(String fileName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	ControlSettings result;
-		String controlFile = FileTools.getControlsPath()+File.separator+fileName+FileTools.EXTENSION_XML;
+		String controlFile = FilePaths.getControlsPath()+File.separator+fileName+FileNames.EXTENSION_XML;
 		File dataFile = new File(controlFile);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_CONTROLS+FileTools.EXTENSION_SCHEMA);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_CONTROLS+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		result = loadControlsElement(root);
 		return result;

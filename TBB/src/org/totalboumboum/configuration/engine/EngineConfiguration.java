@@ -29,12 +29,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
-
 
 public class EngineConfiguration
 {
-
 	public EngineConfiguration copy()
 	{	EngineConfiguration result = new EngineConfiguration();
 	
@@ -138,12 +138,12 @@ public class EngineConfiguration
 	
 	public void initControlsLogStream() throws FileNotFoundException
 	{	// init path
-		String path = FileTools.getLogsPath()+File.separator;
+		String path = FilePaths.getLogsPath()+File.separator;
 		// put the date
 		if(logControlsSeparately)
 			path = path + FileTools.getFilenameCompatibleCurrentTime() + "_";
 		// put name and extension
-		path = path + FileTools.FILE_CONTROLS + FileTools.EXTENSION_LOG;
+		path = path + FileNames.FILE_CONTROLS + FileNames.EXTENSION_LOG;
 		// open file
 		File logFile = new File(path);
 		if(logFile.exists())

@@ -32,10 +32,10 @@ import org.totalboumboum.engine.container.itemset.ItemsetPreviewLoader;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.info.LevelInfoLoader;
 import org.totalboumboum.engine.container.level.players.PlayersPreviewer;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;
 import org.xml.sax.SAXException;
-
 
 public class LevelPreviewLoader
 {	private static boolean previewItemset;
@@ -89,7 +89,7 @@ public class LevelPreviewLoader
 
 	private static LevelPreview loadLevelPreviewCommon(String pack, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		String individualFolder = FileTools.getLevelsPath()+File.separator+pack+File.separator+folder;
+		String individualFolder = FilePaths.getLevelsPath()+File.separator+pack+File.separator+folder;
 		
 		// loading
 		LevelPreview result = new LevelPreview();
@@ -126,8 +126,8 @@ public class LevelPreviewLoader
 	private static void loadItemset(String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	if(previewItemset)
 		{	String instanceName = result.getLevelInfo().getInstance();
-			String instanceFolder = FileTools.getInstancesPath()+File.separator+instanceName;		
-			String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;
+			String instanceFolder = FilePaths.getInstancesPath()+File.separator+instanceName;		
+			String itemFolder = instanceFolder + File.separator+FileNames.FOLDER_ITEMS;
 			ItemsetPreview itemsetPreview = ItemsetPreviewLoader.loadItemsetPreview(itemFolder);
 			result.setItemsetPreview(itemsetPreview);
 		}

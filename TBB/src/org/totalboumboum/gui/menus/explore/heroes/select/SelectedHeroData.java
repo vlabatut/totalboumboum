@@ -38,9 +38,9 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
 
 public class SelectedHeroData extends EntitledDataPanel implements PackBrowserSubPanelListener
 {	
@@ -75,8 +75,8 @@ public class SelectedHeroData extends EntitledDataPanel implements PackBrowserSu
 			{	int listWidth = leftWidth;
 				int listHeight = dataHeight;
 				packPanel = new PackBrowserSubPanel(listWidth,listHeight);
-				String baseFolder = FileTools.getHeroesPath();
-				String targetFile = FileTools.FILE_SPRITE+FileTools.EXTENSION_XML;
+				String baseFolder = FilePaths.getHeroesPath();
+				String targetFile = FileNames.FILE_SPRITE+FileNames.EXTENSION_XML;
 				packPanel.setFolder(baseFolder,null,targetFile);
 				packPanel.addListener(this);
 				mainPanel.add(packPanel);

@@ -34,10 +34,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.engine.content.sprite.SpritePreview;
 import org.totalboumboum.engine.content.sprite.SpritePreviewLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class ProfileLoader
 {	
@@ -78,10 +78,10 @@ public class ProfileLoader
 	}
 	
 	public static Profile loadProfile(int id) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	String profilesFolder = FileTools.getProfilesPath();
-		File dataFile = new File(profilesFolder+File.separator+id+FileTools.EXTENSION_XML);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PROFILE+FileTools.EXTENSION_SCHEMA);
+	{	String profilesFolder = FilePaths.getProfilesPath();
+		File dataFile = new File(profilesFolder+File.separator+id+FileNames.EXTENSION_XML);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_PROFILE+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		Profile result = new Profile();
 		result.setId(id);
@@ -155,7 +155,7 @@ public class ProfileLoader
     }
     
     private static void loadPortraits(Profile profile, String spritePackname, String spriteFoldername, PredefinedColor spriteColor) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String folder = FileTools.getHeroesPath() + File.separator + spritePackname;
+    {	String folder = FilePaths.getHeroesPath() + File.separator + spritePackname;
 		folder = folder + File.separator + spriteFoldername;
 		Portraits portraits = PortraitsLoader.loadPortraits(folder,spriteColor);
 		profile.setPortraits(portraits);
@@ -165,16 +165,16 @@ public class ProfileLoader
     {	ArrayList<Integer> result = new ArrayList<Integer>();
     	
     	// get folder
-    	String folderStr = FileTools.getProfilesPath();
+    	String folderStr = FilePaths.getProfilesPath();
 		File folder = new File(folderStr);
 		FileFilter filter = new FileFilter()
 		{	@Override
 			public boolean accept(File pathname)
 			{	String name = pathname.getName();
 				int length = name.length();
-				int extLength = FileTools.EXTENSION_XML.length();
+				int extLength = FileNames.EXTENSION_XML.length();
 				String ext = name.substring(length-extLength,length);
-				return ext.equalsIgnoreCase(FileTools.EXTENSION_XML);
+				return ext.equalsIgnoreCase(FileNames.EXTENSION_XML);
 			}			
 		};
 		
@@ -182,7 +182,7 @@ public class ProfileLoader
 		File[] files = folder.listFiles(filter);
 		for(File file: files)
 		{	int length = file.getName().length();
-			int extLength = FileTools.EXTENSION_XML.length();
+			int extLength = FileNames.EXTENSION_XML.length();
 			String idStr = file.getName().substring(0,length-extLength);
 			int id = Integer.parseInt(idStr);
 			result.add(id);

@@ -38,8 +38,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.explore.tournaments.select.SelectedTournamentData;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
-
+import org.totalboumboum.tools.files.FilePaths;
 
 public class SelectTournamentMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
@@ -73,7 +72,7 @@ public class SelectTournamentMenu extends InnerMenuPanel implements DataPanelLis
 		add(Box.createVerticalGlue());		
 
 		// panels
-		folder = FileTools.getTournamentsPath();
+		folder = FilePaths.getTournamentsPath();
 		tournamentData = new SelectedTournamentData(container,folder);
 		container.setDataPart(tournamentData);
 		tournamentData.addListener(this);

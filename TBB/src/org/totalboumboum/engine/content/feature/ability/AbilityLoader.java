@@ -34,10 +34,10 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.GeneralActionLoader;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class AbilityLoader
 {		
@@ -92,10 +92,10 @@ public class AbilityLoader
     }
     
 	public static void loadAbilityPack(String folderPath, ArrayList<AbstractAbility> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	File dataFile = new File(folderPath+File.separator+FileTools.FILE_ABILITIES+FileTools.EXTENSION_XML);
+	{	File dataFile = new File(folderPath+File.separator+FileNames.FILE_ABILITIES+FileNames.EXTENSION_XML);
 		if(dataFile.exists())
-		{	String schemaFolder = FileTools.getSchemasPath();
-			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ABILITIES+FileTools.EXTENSION_SCHEMA);
+		{	String schemaFolder = FilePaths.getSchemasPath();
+			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ABILITIES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			result.addAll(loadAbilitiesElement(root));
 		}

@@ -39,8 +39,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.explore.rounds.select.SelectedRoundData;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.files.FileTools;
-
+import org.totalboumboum.tools.files.FilePaths;
 
 public class SelectRoundMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
@@ -74,7 +73,7 @@ public class SelectRoundMenu extends InnerMenuPanel implements DataPanelListener
 		add(Box.createVerticalGlue());		
 
 		// panels
-		String baseFolder = FileTools.getRoundsPath();
+		String baseFolder = FilePaths.getRoundsPath();
 		roundData = new SelectedRoundData(container,baseFolder);
 		container.setDataPart(roundData);
 		roundData.addListener(this);

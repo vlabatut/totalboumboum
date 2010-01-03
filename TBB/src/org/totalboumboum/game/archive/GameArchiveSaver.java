@@ -29,11 +29,11 @@ import java.util.Date;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.strings.StringTools;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class GameArchiveSaver
 {	
@@ -41,11 +41,11 @@ public class GameArchiveSaver
 	{	// build document
 		Element root = saveArchiveElement(gameArchive);	
 		// save file
-		String folder = FileTools.getSavesPath()+File.separator+gameArchive.getFolder();
-		String path = folder + File.separator+FileTools.FILE_ARCHIVE+FileTools.EXTENSION_XML;
+		String folder = FilePaths.getSavesPath()+File.separator+gameArchive.getFolder();
+		String path = folder + File.separator+FileNames.FILE_ARCHIVE+FileNames.EXTENSION_XML;
 		File dataFile = new File(path);
-		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ARCHIVE+FileTools.EXTENSION_SCHEMA);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ARCHIVE+FileNames.EXTENSION_SCHEMA);
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 

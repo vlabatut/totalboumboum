@@ -38,9 +38,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
 
 public class GameArchive
 {
@@ -80,7 +80,7 @@ public class GameArchive
 	}
 
 	public static void saveGame(String folder, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException
-	{	String path = FileTools.getSavesPath()+File.separator+folder;
+	{	String path = FilePaths.getSavesPath()+File.separator+folder;
 		// folder
 		File folderFile = new File(path);
 		if(!folderFile.exists())
@@ -89,7 +89,7 @@ public class GameArchive
 		GameArchive gameArchive = GameArchive.getArchive(tournament,folder);
 		GameArchiveSaver.saveGameArchive(gameArchive);
 		// data file
-		String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
+		String fileName = FileNames.FILE_ARCHIVE+FileNames.EXTENSION_DATA;
 		File file = new File(path+File.separator+fileName);
 		FileOutputStream out = new FileOutputStream(file);
 		BufferedOutputStream outBuff = new BufferedOutputStream(out);
@@ -99,8 +99,8 @@ public class GameArchive
 	}
 	
 	public static AbstractTournament loadGame(String folder) throws IOException, ClassNotFoundException, ParserConfigurationException, SAXException
-	{	String path = FileTools.getSavesPath()+File.separator+folder;
-		String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
+	{	String path = FilePaths.getSavesPath()+File.separator+folder;
+		String fileName = FileNames.FILE_ARCHIVE+FileNames.EXTENSION_DATA;
 		File file = new File(path+File.separator+fileName);
 		FileInputStream in = new FileInputStream(file);
 		BufferedInputStream inBuff = new BufferedInputStream(in);

@@ -35,9 +35,8 @@ import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.menus.tournament.load.LoadSplitPanel;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
-
 
 public class TournamenuContainer extends MenuPanel implements MenuContainer
 {	private static final long serialVersionUID = 1L;
@@ -94,7 +93,7 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 		if(tournamentConfiguration.getAutoLoad() && firstTime)
 		{	firstTime = false;
 			try
-			{	String folder = FileTools.FOLDER_AUTOSAVE;
+			{	String folder = FileNames.FOLDER_AUTOSAVE;
 				AbstractTournament tournament = GameArchive.loadGame(folder);
 				tournamentSplitPanel.setTournament(tournament);
 				Configuration.getGameConfiguration().getTournamentConfiguration().setTournament(tournament);

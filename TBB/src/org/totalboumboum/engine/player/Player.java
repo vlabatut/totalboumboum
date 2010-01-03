@@ -40,9 +40,8 @@ import org.totalboumboum.engine.content.sprite.hero.HeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HeroFactoryLoader;
 import org.totalboumboum.engine.control.PlayerControl;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
 
 public class Player
 {	
@@ -62,7 +61,7 @@ public class Player
 	{	this.profile = profile;
 		// sprite
 		color = this.profile.getSpriteColor();
-		String folder = FileTools.getHeroesPath()+File.separator+this.profile.getSpritePack();
+		String folder = FilePaths.getHeroesPath()+File.separator+this.profile.getSpritePack();
 		folder = folder + File.separator+this.profile.getSpriteFolder();
 		HeroFactory tempHeroFactory = HeroFactoryLoader.completeHeroFactory(folder,color,base);
 		tempHeroFactory.setInstance(RoundVariables.instance);
