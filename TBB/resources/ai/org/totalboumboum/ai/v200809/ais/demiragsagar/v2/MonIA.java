@@ -36,7 +36,7 @@ public class MonIA extends ArtificialIntelligence {
 	private int distanceTarget;
 	private int counter;
 
-	public MonIA() {
+	public MonIA(){
 		//l'initialisation des variables globales
 		this.state = 0;
 		this.d = Direction.NONE;
@@ -87,7 +87,7 @@ public class MonIA extends ArtificialIntelligence {
 			 */
 			//seulement a l'inisialisation
 			//on creer la matrice de temps restant des bombes
-			this.timeMatrice=new TimeMatrice(this.zone,ownHero.getBombRange());
+			this.timeMatrice=new TimeMatrice(this.zone,ownHero.getBombRange(),this);
 			this.timeMatrice.updateTimeMatrice(caseBombes);
 			this.state=4;
 			break;
@@ -135,7 +135,7 @@ public class MonIA extends ArtificialIntelligence {
 		    	for(AiTile temp: caseItems)
 		    	{
 		    		//La distance entre nous et l'item
-		    		int valeur=Functions.trouveDistance(this.ownHero.getTile(), temp);	
+		    		int valeur=Functions.trouveDistance(this.ownHero.getTile(), temp,this);	
 		    		if(valeur!=-1){
 		    			//Il existe un chemin
 		    			if(min==-1 || min>valeur)
@@ -166,7 +166,7 @@ public class MonIA extends ArtificialIntelligence {
 		}
 		case 7: {
 			
-			int notreDistance = Functions.trouveDistance(caseCourant,caseTarget);
+			int notreDistance = Functions.trouveDistance(caseCourant,caseTarget,this);
 			if (notreDistance == -1) {
 				/*
 				 * Nous ne possedont pas un chemin a l'item
@@ -177,8 +177,8 @@ public class MonIA extends ArtificialIntelligence {
 				this.state = 78;
 			}	
 			else {
-				AiTile closer=Functions.TheCloserTile(this.caseTarget, this.caseEnemies);
-				int closerDist=Functions.trouveDistance(closer, this.caseTarget);
+				AiTile closer=Functions.TheCloserTile(this.caseTarget, this.caseEnemies,this);
+				int closerDist=Functions.trouveDistance(closer, this.caseTarget,this);
 				if(this.debug)
 					System.out.println("distnce nous :"+notreDistance+", lui:"+closerDist);
 				if(notreDistance >= closerDist && closerDist!=-1){
@@ -200,7 +200,7 @@ public class MonIA extends ArtificialIntelligence {
 			break;
 		}		
 		case 10: {
-			AiTile closer=Functions.TheCloserTile(this.caseTarget, this.caseEnemies);
+			AiTile closer=Functions.TheCloserTile(this.caseTarget, this.caseEnemies,this);
 			if(closer!=null){
 				//compare les chemin entre nous-item et enemie-item
 				//envoie l'intersection
@@ -219,7 +219,7 @@ public class MonIA extends ArtificialIntelligence {
 			break;
 		}
 		case 78:{
-			if(Functions.ChildNodes(this.caseCourant)==1) {
+			if(Functions.ChildNodes(this.caseCourant,this)==1) {
 				//regarde les cases voisins
 				//met une bombe si ==1
 				if(supposerBombe(this.caseCourant))
@@ -230,7 +230,7 @@ public class MonIA extends ArtificialIntelligence {
 			}
 			if(this.caseTarget==null)
 				caseTarget=this.caseEnemies.get(0); 
-			AStar a=new AStar(this.caseCourant,this.caseTarget);
+			AStar a=new AStar(this.caseCourant,this.caseTarget,this);
 			a.formeArbre();
 			ArrayList<Node>fils=a.getFils();
 			/*
@@ -242,7 +242,7 @@ public class MonIA extends ArtificialIntelligence {
 				int min=-1;
 				for(Node temp:fils)
 					if(this.timeMatrice.getTime(temp.getTile())==0) {
-						int tempDistance=Functions.trouveDistance(caseCourant, temp.getTile());
+						int tempDistance=Functions.trouveDistance(caseCourant, temp.getTile(),this);
 						if(min==-1 || min>tempDistance)
 							if(this.supposerBombe(temp.getTile())){
 								min=tempDistance;							
@@ -285,7 +285,7 @@ public class MonIA extends ArtificialIntelligence {
 				// veut aller
 				LinkedList<Node> path = arbre.getPath();
 				if (path == null) {
-					if(Functions.memeCordonnes(caseCourant, caseTarget))
+					if(Functions.memeCordonnes(caseCourant, caseTarget,this))
 						//System.out.println("ERREUR: Pas de chemin");
 					break;
 					}
@@ -342,24 +342,19 @@ public class MonIA extends ArtificialIntelligence {
 	 * Prend l'intersection entre le chmein du enemie-item
 	 * et de nous-item
 	 */
-	public AiTile EnemyAtTheGate(AiTile enemy)
-	{
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			e.printStackTrace();
-		}
+	public AiTile EnemyAtTheGate(AiTile enemy) throws StopRequestException
+	{	checkInterruption();
 		AiTile result=null;
-		AStar arbre1=new AStar(this.ownHero.getTile(),this.caseTarget);
+		AStar arbre1=new AStar(this.ownHero.getTile(),this.caseTarget,this);
 		arbre1.formeArbre();
 		//		Il n'y a pas de chemin entre la case courant et la case qu'on veut aller
 		if(arbre1.getPath()==null) 
 			return null;
 		else {
-			if(Functions.memeCordonnes(caseTarget,enemy))
+			if(Functions.memeCordonnes(caseTarget,enemy,this))
 				if(debug)
 					System.out.println("enemy ile ayni case");
-			AStar arbre2 = new AStar(enemy,this.caseTarget);
+			AStar arbre2 = new AStar(enemy,this.caseTarget,this);
 			arbre2.formeArbre();
 			if(arbre2.getPath()==null)
 				return null;
@@ -382,12 +377,8 @@ public class MonIA extends ArtificialIntelligence {
 	 * On suppose de mettre une bombe
 	 * On regarde si on sera en danger
 	 */
-	public boolean supposerBombe(AiTile temp){
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			e.printStackTrace();
-		}
+	public boolean supposerBombe(AiTile temp) throws StopRequestException{
+		checkInterruption();
 		int i,j;
 		boolean resultat=false;
 		long nouveauTime [][]= new long[17][15];
@@ -409,13 +400,9 @@ public class MonIA extends ArtificialIntelligence {
 	/*
 	 * Mettre a jour les tiles des enemies
 	 */
-	public ArrayList<AiTile> getEnemiesTile() {
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			e.printStackTrace();
-		}
-
+	public ArrayList<AiTile> getEnemiesTile() throws StopRequestException {
+		checkInterruption();
+		
 		ArrayList<AiTile> monItera = new ArrayList<AiTile>();
 
 		for (AiHero i : this.zone.getHeroes()) {
@@ -436,13 +423,9 @@ public class MonIA extends ArtificialIntelligence {
 	/*
 	 * Mettre a jour les tiles des bombes
 	 */
-	public ArrayList<AiTile> getBombesTile() {
+	public ArrayList<AiTile> getBombesTile() throws StopRequestException {
+		checkInterruption();
 		ArrayList<AiTile> b = new ArrayList<AiTile>();
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			e.printStackTrace();
-		}
 		if (this.zone.getBombs() != null)
 			for (AiBomb i : this.zone.getBombs()) {
 				try {
@@ -459,13 +442,9 @@ public class MonIA extends ArtificialIntelligence {
 	/*
 	 * Mettre a jour les tiles des items
 	 */
-	public ArrayList<AiTile> getItemsTile() {
+	public ArrayList<AiTile> getItemsTile() throws StopRequestException {
+		checkInterruption();
 		ArrayList<AiTile> p = new ArrayList<AiTile>();
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			e.printStackTrace();
-		}
 		if (this.zone.getItems() != null)
 			for (AiItem i : this.zone.getItems()) {
 				try {
@@ -486,27 +465,26 @@ public class MonIA extends ArtificialIntelligence {
 			e.printStackTrace();
 		}
 	}
-	public boolean seCacher(){
+	public boolean seCacher() throws StopRequestException{
+		checkInterruption();
 		return seCacher(false);
 	}
 	/*
 	 * Chercher une case pour se cacher
 	 */
 	
-	public boolean seCacher(boolean poserBombe) {
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			e.printStackTrace();
-		}
+	public boolean seCacher(boolean poserBombe) throws StopRequestException {
+		checkInterruption();
 		AiTile petit = null;
 		boolean fuir = false;
 		int min = 10000, temp, i, j;
 		for (j = 0; j < 15; j++)
+		{	checkInterruption();
 			for (i = 0; i < 17; i++)
-				if(!Functions.memeCordonnes(zone.getTile(j,i), this.caseCourant))
+			{	checkInterruption();
+				if(!Functions.memeCordonnes(zone.getTile(j,i), this.caseCourant,this))
 					if ( this.timeMatrice.getTime(i,j)==0) {//bulacakkkk
-						temp = Functions.trouveDistance(caseCourant,this.zone.getTile(j, i));
+						temp = Functions.trouveDistance(caseCourant,this.zone.getTile(j, i),this);
 						if (temp > 0 && min > temp) 
 							if(!dangerOnTheTrack(this.zone.getTile(j, i),poserBombe)) {
 								min = temp;
@@ -514,20 +492,18 @@ public class MonIA extends ArtificialIntelligence {
 								fuir = true;
 							}
 					}
+			}
+		}
 		this.caseTarget = petit;
 		return fuir;
 	}
 	/*
 	 * Regarde si il existe un danger sur le chemin chosit
 	 */
-	public boolean dangerOnTheTrack(AiTile target,boolean placerBombe) {
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			e.printStackTrace();
-		}
+	public boolean dangerOnTheTrack(AiTile target,boolean placerBombe) throws StopRequestException {
+		checkInterruption();
 		boolean flag=false;
-		AStar arbre=new AStar(this.caseCourant,target);
+		AStar arbre=new AStar(this.caseCourant,target,this);
 		arbre.formeArbre();
 		LinkedList<Node> path=arbre.getPath();
 		if(path==null)
@@ -536,6 +512,7 @@ public class MonIA extends ArtificialIntelligence {
 		if(placerBombe)
 			dangerSize=dangerSize+5;
 		for(Node tempNode:path) {
+			checkInterruption();
 			if(this.timeMatrice.getTime(tempNode.getTile()) < dangerSize*(this.dangerTime*3) && this.timeMatrice.getTime(tempNode.getTile())!=0)
 				flag=true;
 		}
@@ -545,12 +522,8 @@ public class MonIA extends ArtificialIntelligence {
 	/*
 	 * Regarde si nous sommes arrive a la case cible
 	 */
-	public boolean estCaseCible() {
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			e.printStackTrace();
-		}
+	public boolean estCaseCible() throws StopRequestException {
+		checkInterruption();
 		// fonction verifiant si l'ia est arrive a la case cible
 		boolean resultat = false;
 		if (this.ownHero.getTile().getCol() == this.caseTarget.getCol()	&& this.ownHero.getTile().getLine() == this.caseTarget.getLine())
@@ -562,12 +535,8 @@ public class MonIA extends ArtificialIntelligence {
 	/*
 	 * Compte les nombres des SoftWalls restant
 	 */
-	public int FindSoftWallNumber() {
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			e.printStackTrace();
-		}
+	public int FindSoftWallNumber() throws StopRequestException {
+		checkInterruption();
 		int mat[][] = this.timeMatrice.getBombMatrice(this.zone);
 		int sommeHardWall = 0;
 		for (int i = 0; i < 15; i++)
