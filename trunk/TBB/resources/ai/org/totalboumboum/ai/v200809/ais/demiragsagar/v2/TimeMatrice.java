@@ -5,6 +5,8 @@ import java.util.Iterator;
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 
 public class TimeMatrice {
@@ -15,9 +17,12 @@ public class TimeMatrice {
 	private long durationNormale;
 	private int extendTime;
 	private boolean debug;
-
 	
-	public TimeMatrice(AiZone zone,int defaultPortee) {
+	ArtificialIntelligence ai;
+	
+	public TimeMatrice(AiZone zone,int defaultPortee, ArtificialIntelligence ai) throws StopRequestException {
+		ai.checkInterruption();
+		this.ai = ai;
 		this.zone=zone;
 		this.timeMatrice=new long[20][20];
 		this.defaultPortee=defaultPortee;
@@ -26,13 +31,15 @@ public class TimeMatrice {
 		this.debug=false;
 		createTimeMatrice();
 	}
-	public void setDefaultPortee(int defaultPortee) {
+	public void setDefaultPortee(int defaultPortee) throws StopRequestException {
+		ai.checkInterruption();
 		this.defaultPortee=defaultPortee;
 	}
 	/*
 	 * Donner une valeur a une case de la matrice du temps
 	 */
-	public void putTime(int col,int line,long time) {
+	public void putTime(int col,int line,long time) throws StopRequestException {
+		ai.checkInterruption();
 		this.timeMatrice[col][line]=time;
 	};
 	/*
@@ -40,24 +47,28 @@ public class TimeMatrice {
 	 * Une case contient 0 s'il n y'a aucun danger 
 	 * Sinon il contient le temps restant d'une bombe
 	 */
-	public long getTime(int col,int line) {
+	public long getTime(int col,int line) throws StopRequestException {
+		ai.checkInterruption();
 		return this.timeMatrice[col][line];
 	}
-	public void putTime(AiTile tile,long time) {
+	public void putTime(AiTile tile,long time) throws StopRequestException {
+		ai.checkInterruption();
 		this.putTime(tile.getCol(),tile.getLine(),time);
 	}
-	public long getTime(AiTile tile) {
+	public long getTime(AiTile tile) throws StopRequestException {
+		ai.checkInterruption();
 		return this.getTime(tile.getCol(),tile.getLine());
 	}
 	/*
 	 * Création de la matrice du temps
 	 */
-	public void createTimeMatrice() {
+	public void createTimeMatrice() throws StopRequestException {
+		ai.checkInterruption();
 		// ajout des murs dans la matrice pour une seule fois
 		int i, j;
 		for (j = 0; j < 15; j++)
 			for (i = 0; i < 17; i++)
-				if (Functions.hasWall(this.zone.getTile(j, i)))
+				if (Functions.hasWall(this.zone.getTile(j, i),ai))
 					this.putTime(i,j,-1);
 				else
 					this.putTime(i,j,0);
@@ -66,23 +77,29 @@ public class TimeMatrice {
 	 * S'il ya un mur dans une case on voit -1 
 	 * On augmente la valeur d'une case selon le nombre des bombes qui affectent cette case
 	 */
-	public int[][] getBombMatrice(AiZone zone) {
+	public int[][] getBombMatrice(AiZone zone) throws StopRequestException {
+		ai.checkInterruption();
 		int[][] maMatrice = new int[17][16];
 		int etki;
 		int i, j;
 		for (j = 0; j < 15; j++)
+		{	ai.checkInterruption();
 			for (i = 0; i < 17; i++)
-				if (Functions.hasWall(zone.getTile(j, i)))
+			{	ai.checkInterruption();
+				if (Functions.hasWall(zone.getTile(j, i),ai))
 					maMatrice[i][j] = -1;
 				else
 					maMatrice[i][j] = 0;
+			}
+		}
 		for (AiTile t : this.caseBombes) {
+			ai.checkInterruption();
 			int x = t.getCol();
 			int y = t.getLine();
-			try {
 				boolean up = false, down = false, left = false, right = false;
 				maMatrice[x][y]++;
 				for (etki = 1; etki <= 5; etki++) {
+					ai.checkInterruption();
 					if (x + etki < 16)
 						if (maMatrice[x + etki][y] != -1 && right == false)
 							maMatrice[x + etki][y]++;
@@ -104,19 +121,17 @@ public class TimeMatrice {
 						else
 							up = true;
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
 		}
 
 		return maMatrice;
 
 	}
-	public void printTimeMatrice() {
-		Functions.printMatrice(this.timeMatrice);
+	public void printTimeMatrice() throws StopRequestException {
+		ai.checkInterruption();
+		Functions.printMatrice(this.timeMatrice,ai);
 	}
-	public void updateTimeMatrice(ArrayList<AiTile> nouvelleBombes) {
+	public void updateTimeMatrice(ArrayList<AiTile> nouvelleBombes) throws StopRequestException {
+		ai.checkInterruption();
 		if (this.debug)
 			this.printTimeMatrice();
 		// update matrice
@@ -127,13 +142,16 @@ public class TimeMatrice {
 			System.out.println("Elapsed time : "+elapsedTime);
 		if (elapsedTime > 0) {
 			for (j = 0; j < 15; j++)
+			{	ai.checkInterruption();
 				for (i = 0; i < 17; i++)
+				{	ai.checkInterruption();
 					if(zone.getTile(j, i).getFires().isEmpty())
 					{						
 						if(this.getTime(i,j)==0 && this.caseBombes!=null)
 						{
 							int port;
 							for (AiTile temp : this.caseBombes) {
+								ai.checkInterruption();
 								if(temp.getBombs().isEmpty())
 									port=this.defaultPortee;
 								else
@@ -165,14 +183,16 @@ public class TimeMatrice {
 								
 							}
 						}
-						else if (this.getTime(i,j) == -1 && Functions.hasWall(this.zone.getTile(j, i))){
+						else if (this.getTime(i,j) == -1 && Functions.hasWall(this.zone.getTile(j, i),ai)){
 							this.putTime(i,j,-1);;
 						}
-						else if(this.getTime(i,j) == -1 && !Functions.hasWall(this.zone.getTile(j, i)))
+						else if(this.getTime(i,j) == -1 && !Functions.hasWall(this.zone.getTile(j, i),ai))
 							this.putTime(i,j,0);;
 					}
 					else
 						this.putTime(i,j,0);
+				}
+			}
 		
 			if(this.debug){
 				Iterator<AiTile> ita = this.caseBombes.iterator();
@@ -182,6 +202,7 @@ public class TimeMatrice {
 			if (!nouvelleBombes.isEmpty()) {
 				// si il existe au moins une bombe
 				for(AiTile temp:nouvelleBombes) {
+					ai.checkInterruption();
 					if (this.getTime(temp)>= 0)
 						// avant la bas il n'y avait pas de bombe 
 						// ou quelque chose qui affecte cette case
@@ -198,11 +219,12 @@ public class TimeMatrice {
 	/*
 	 * Controle si les effets des bombes sont vrais
 	 */
-	private void corrigeEffetMatrice(int col,int lig,AiTile temp2,int port,long nombre) {
+	private void corrigeEffetMatrice(int col,int lig,AiTile temp2,int port,long nombre) throws StopRequestException {
+		ai.checkInterruption();
 		boolean up=true,down=true,left=true,right=true;
 		int step=1;
 		while(up && step<=port)
-		{
+		{	ai.checkInterruption();
 			if(this.timeMatrice[temp2.getCol()][temp2.getLine()-step]==-1)
 				up=false;
 				else
@@ -216,7 +238,7 @@ public class TimeMatrice {
 		}
 		step=1;
 		while(down && step<=port)
-		{
+		{	ai.checkInterruption();
 			if(this.timeMatrice[temp2.getCol()][temp2.getLine()+step]==-1)
 				down=false;
 				else
@@ -229,7 +251,7 @@ public class TimeMatrice {
 		}
 		step=1;
 		while(left && step<=port)
-		{
+		{	ai.checkInterruption();
 			if(this.timeMatrice[temp2.getCol()-step][temp2.getLine()]==-1)
 				left=false;
 				else
@@ -242,7 +264,7 @@ public class TimeMatrice {
 		}
 		step=1;
 		while(right && step<=port)
-		{
+		{	ai.checkInterruption();
 			if(this.timeMatrice[temp2.getCol()+step][temp2.getLine()]==-1)
 				right=false;
 				else
@@ -259,7 +281,8 @@ public class TimeMatrice {
 		down=true;	
 	}
 
-	public void placerNouvelleBombe(AiTile temp) {
+	public void placerNouvelleBombe(AiTile temp) throws StopRequestException {
+		ai.checkInterruption();
 		if(this.debug) System.out.println("nouvelle bombe");
 		// bu 2400
 		int portee = this.defaultPortee;
@@ -275,6 +298,7 @@ public class TimeMatrice {
 			//Regardez les effets :Si il ya un -1 dans un des 4 directions
 			// stop
 			while (up && step <= portee) {
+				ai.checkInterruption();
 				if (this.timeMatrice[temp.getCol()][temp.getLine() - step] == -1 || zone.getTile(temp.getLine()-step, temp.getCol()).getItem()!=null)
 					// stop
 					up = false;
@@ -287,6 +311,7 @@ public class TimeMatrice {
 			}
 			step = 1;
 			while (down && step <= portee) {
+				ai.checkInterruption();
 				if (this.timeMatrice[temp.getCol()][temp.getLine() + step] == -1 || zone.getTile(temp.getLine()+step, temp.getCol()).getItem()!=null)
 					// stop
 					down = false;
@@ -298,6 +323,7 @@ public class TimeMatrice {
 			}
 			step = 1;
 			while (left && step <= portee) {
+				ai.checkInterruption();
 				if (this.timeMatrice[temp.getCol() - step][temp.getLine()] == -1 || zone.getTile(temp.getLine(), temp.getCol()-step).getItem()!=null)
 					// stop
 					left = false;
@@ -309,6 +335,7 @@ public class TimeMatrice {
 			}
 			step = 1;
 			while (right && step <= portee) {
+				ai.checkInterruption();
 				if (this.timeMatrice[temp.getCol() + step][temp.getLine()] == -1 || zone.getTile(temp.getLine(), temp.getCol()+step).getItem()!=null)
 					// stop
 					right = false;
@@ -327,11 +354,13 @@ public class TimeMatrice {
 	}
 	
 
-	public void diffuseEffetMatrice(AiTile temp, int portee, long min) {
+	public void diffuseEffetMatrice(AiTile temp, int portee, long min) throws StopRequestException {
+		ai.checkInterruption();
 		//Allez dans les 4 directions dans la longeur de la portee
 		boolean up = true, left = true, right = true, down = true;
 		int step = 1;
 		while (up && step <= portee) {			
+			ai.checkInterruption();
 			if (this.timeMatrice[temp.getCol()][temp.getLine() - step] == -1)
 				// stop
 				up = false;
@@ -354,6 +383,7 @@ public class TimeMatrice {
 		}
 		step = 1;
 		while (down && step <= portee) {
+			ai.checkInterruption();
 			if (this.timeMatrice[temp.getCol()][temp.getLine() + step] == -1)
 				down = false;
 			else if (this.caseBombes.contains(this.zone.getTile(temp.getLine()
@@ -374,6 +404,7 @@ public class TimeMatrice {
 		}
 		step = 1;
 		while (left && step <= portee) {
+			ai.checkInterruption();
 			if (this.timeMatrice[temp.getCol() - step][temp.getLine()] == -1)
 				// stop
 				left = false;
@@ -396,7 +427,7 @@ public class TimeMatrice {
 		}
 		step = 1;
 		while (right && step <= portee) {
-
+			ai.checkInterruption();
 			if (this.timeMatrice[temp.getCol() + step][temp.getLine()] == -1)
 				right = false;
 			else // Est-ce qu'il ya une bombe?
