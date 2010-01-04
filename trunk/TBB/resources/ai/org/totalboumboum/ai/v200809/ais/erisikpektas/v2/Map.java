@@ -11,6 +11,8 @@ import org.totalboumboum.ai.v200809.adapter.AiHero;
 import org.totalboumboum.ai.v200809.adapter.AiItem;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
 
@@ -31,8 +33,11 @@ public class Map {
 
 	private int xadversaire, yadversaire;
 	private Etat matrix[][];
-
-	public Map(AiZone zone) {
+	ArtificialIntelligence ai;
+	
+	public Map(AiZone zone, ArtificialIntelligence ai) throws StopRequestException {
+		ai.checkInterruption();
+		this.ai = ai;
 		this.map = zone;
 		this.bomberman = zone.getOwnHero();
 
@@ -48,8 +53,8 @@ public class Map {
 	}
 
 	// nous remplaçons notre map
-	private void remplir() {
-
+	private void remplir() throws StopRequestException {
+		ai.checkInterruption();
 		// premieremnt on met letat libre pour partout
 		matrix = new Etat[width][height];
 		int i, j;
@@ -66,6 +71,7 @@ public class Map {
 		AiBlock bl;
 
 		while (itbl.hasNext()) {
+			ai.checkInterruption();
 			bl = itbl.next();
 			xadversaire = bl.getCol();
 			yadversaire = bl.getLine();
@@ -89,6 +95,7 @@ public class Map {
 		AiItem item;
 
 		while (itemit.hasNext()) {
+			ai.checkInterruption();
 			item = itemit.next();
 
 			xadversaire = item.getCol();
@@ -108,7 +115,7 @@ public class Map {
 		Iterator<AiBomb> danger = bombes.iterator();
 
 		while (danger.hasNext()) {
-			// APPEL OBLIGATOIRE
+			ai.checkInterruption();// APPEL OBLIGATOIRE
 			b = danger.next();
 			casebombe = b.getTile();
 			xadversaire = b.getCol();
@@ -122,7 +129,7 @@ public class Map {
 
 			if (left == null) {
 				for (int q = 1; q <= b.getRange(); q++) {
-
+					ai.checkInterruption();
 					/*
 					 * if (xadversaire - q > 0 && matrix[xadversaire -
 					 * q][yadversaire] == Etat.POINT){
@@ -161,6 +168,7 @@ public class Map {
 
 			if (right == null) {
 				for (int q = 1; q <= b.getRange(); q++) {
+					ai.checkInterruption();
 					/*
 					 * if ((xadversaire + q < width && matrix[xadversaire +
 					 * q][yadversaire] == Etat.POINT)){
@@ -193,7 +201,7 @@ public class Map {
 			}
 			if (down == null) {
 				for (int q = 1; q <= b.getRange(); q++) {
-
+					ai.checkInterruption();
 					/*
 					 * if (yadversaire +q<height&&
 					 * matrix[xadversaire][yadversaire+q] == Etat.POINT){
@@ -229,7 +237,7 @@ public class Map {
 			}
 			if (up == null) {
 				for (int q = 1; q <= b.getRange(); q++) {
-
+					ai.checkInterruption();
 					/*
 					 * if (yadversaire - q > 0 &&
 					 * matrix[xadversaire][yadversaire-q] == Etat.POINT){
@@ -272,7 +280,7 @@ public class Map {
 		AiHero hero;
 
 		while (it.hasNext()) {
-
+			ai.checkInterruption();
 			hero = it.next();
 			xadversaire = hero.getCol();
 			yadversaire = hero.getLine();
@@ -293,9 +301,10 @@ public class Map {
 	/**
 	 * cest le plus difficle condition a obtenir et naturellemnt cest le plus
 	 * sur
+	 * @throws StopRequestException 
 	 */
-	public boolean isWalkable(int x1, int y1) {
-
+	public boolean isWalkable(int x1, int y1) throws StopRequestException {
+		ai.checkInterruption();
 		boolean resultat = false;
 
 		if (matrix[x1][y1] == Etat.POINT || matrix[x1][y1] == Etat.ADVERSAIRE
@@ -307,9 +316,10 @@ public class Map {
 		return resultat;
 	}
 
-	/** nous allons lutiliser pour senfuire car on peut passer par les flmmes */
-	public boolean isRunnable(int x1, int y1) {
-
+	/** nous allons lutiliser pour senfuire car on peut passer par les flmmes 
+	 * @throws StopRequestException */
+	public boolean isRunnable(int x1, int y1) throws StopRequestException {
+		ai.checkInterruption();
 		boolean resultat = false;
 
 		if (matrix[x1][y1] != Etat.BOMBE && matrix[x1][y1] != Etat.BOMBEPOSS
@@ -330,9 +340,10 @@ public class Map {
 	/**
 	 * on va utiliser cette methode pour voir sil ya qqch quon peut acceder en
 	 * laiissant des bombes car elle peut avoir des murs dest
+	 * @throws StopRequestException 
 	 */
-	public boolean isReachable(int x1, int y1) {
-
+	public boolean isReachable(int x1, int y1) throws StopRequestException {
+		ai.checkInterruption();
 		boolean resultat = false;
 
 		if (matrix[x1][y1] != Etat.BOMBE && matrix[x1][y1] != Etat.BOMBEPOSS
@@ -351,9 +362,10 @@ public class Map {
 	 * on peut passer par des danger et des flammes on la cree car qd qqn met
 	 * deux bombes en meme temps on //ne bouge pas car on voit comme on na pas
 	 * de lieu pour se cacher
+	 * @throws StopRequestException 
 	 */
-	public boolean isNoWhereElse(int x1, int y1) {
-
+	public boolean isNoWhereElse(int x1, int y1) throws StopRequestException {
+		ai.checkInterruption();
 		boolean resultat = false;
 
 		if (matrix[x1][y1] != Etat.BOMBE && matrix[x1][y1] != Etat.BOMBEPOSS
@@ -373,9 +385,11 @@ public class Map {
 	/**
 	 * on va lutiliser pour le cotrole si cest possible de laisser un bombe et
 	 * puis courir donc on cree un bombe imaginaire
+	 * @throws StopRequestException 
 	 */
 
-	public void setbombeposs(int x1, int y1, int range) {
+	public void setbombeposs(int x1, int y1, int range) throws StopRequestException {
+		ai.checkInterruption();
 		matrix[x1][y1] = Etat.BOMBEPOSS;
 
 		AiBlock dr = bomberman.getTile().getNeighbor(Direction.RIGHT)
@@ -388,7 +402,7 @@ public class Map {
 
 		if (gc == null) {
 			for (int q = 1; q <= range; q++) {
-
+				ai.checkInterruption();
 				if (x1 - q > 0
 						&& (matrix[x1 - q][y1] == Etat.FLAMMES || matrix[x1 - q][y1] == Etat.DANGER))
 					matrix[x1 - q][y1] = Etat.DANGER;
@@ -403,6 +417,7 @@ public class Map {
 		}
 		if (dr == null) {
 			for (int q = 1; q <= range; q++) {
+				ai.checkInterruption();
 				if (x1 + q < width
 						&& (matrix[x1 + q][y1] == Etat.FLAMMES || matrix[x1 + q][y1] == Etat.DANGER))
 					matrix[x1 + q][y1] = Etat.DANGER;
@@ -417,6 +432,7 @@ public class Map {
 		}
 		if (bs == null) {
 			for (int q = 1; q <= range; q++) {
+				ai.checkInterruption();
 				if (y1 + q < height
 						&& (matrix[x1][y1 + q] == Etat.FLAMMES || matrix[x1][y1
 								+ q] == Etat.DANGER))
@@ -432,6 +448,7 @@ public class Map {
 		}
 		if (ht == null) {
 			for (int q = 1; q <= range; q++) {
+				ai.checkInterruption();
 				if (y1 - q > 0
 						&& (matrix[x1][y1 - q] == Etat.FLAMMES || matrix[x1][y1
 								- q] == Etat.DANGER))
@@ -448,10 +465,12 @@ public class Map {
 
 	}
 
-	public void setdanger() {
-
+	public void setdanger() throws StopRequestException {
+		ai.checkInterruption();
 		for (int i = 0; i < width; i++) {
+			ai.checkInterruption();
 			for (int j = 0; j < height; j++) {
+				ai.checkInterruption();
 				if (matrix[i][j] == Etat.FLAMMES || matrix[i][j] == Etat.FEU
 						|| matrix[i][j] == Etat.DANGER)
 					matrix[i][j] = Etat.DANGER;
@@ -460,7 +479,8 @@ public class Map {
 	}
 
 	// qd on transforme un bombe possible a un bombe reele
-	public void setbombe(int x1, int y1) {
+	public void setbombe(int x1, int y1) throws StopRequestException {
+		ai.checkInterruption();
 		this.returnMatrix()[x1][y1] = Etat.BOMBE;
 
 	}
@@ -468,8 +488,10 @@ public class Map {
 	/**
 	 * si cest pas possible de trouver un lieu sur apres avoir laisser une bombe
 	 * imaginaire il faut lenlevere
+	 * @throws StopRequestException 
 	 */
-	public void removebombe() {
+	public void removebombe() throws StopRequestException {
+		ai.checkInterruption();
 		remplir();
 
 	}
@@ -477,12 +499,15 @@ public class Map {
 	/**
 	 * au cas de danger il court a un bombe la cause est peut etre quil faut
 	 * tjrs mettre a jour le map donc on a cree ces fonc-la
+	 * @throws StopRequestException 
 	 */
-	public void getbombs() {
+	public void getbombs() throws StopRequestException {
+		ai.checkInterruption();
 		Iterator<AiBomb> itbo = bombes.iterator();
 		AiBomb bo;
 
 		while (itbo.hasNext()) {
+			ai.checkInterruption();
 			bo = itbo.next();
 			xadversaire = bo.getCol();
 			yadversaire = bo.getLine();
@@ -492,11 +517,13 @@ public class Map {
 		}
 	}
 
-	public void getfires() {
+	public void getfires() throws StopRequestException {
+		ai.checkInterruption();
 		Iterator<AiFire> itfeu = feu.iterator();
 		AiFire feu;
 
 		while (itfeu.hasNext()) {
+			ai.checkInterruption();
 			feu = itfeu.next();
 			xadversaire = feu.getCol();
 			yadversaire = feu.getLine();
@@ -507,7 +534,8 @@ public class Map {
 	}
 
 	// ,l envoie la matrice de map
-	public Etat[][] returnMatrix() {
+	public Etat[][] returnMatrix() throws StopRequestException {
+		ai.checkInterruption();
 		return matrix;
 	}
 
@@ -521,5 +549,4 @@ public class Map {
 
 		return result;
 	}
-
 }

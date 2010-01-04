@@ -17,10 +17,6 @@ import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
-
 public class ErisikPektas extends ArtificialIntelligence {
 	private Map map;
 	/** la case occupée actuellement par le personnage */
@@ -106,7 +102,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 		tous = getPercepts();
 		bomberman = tous.getOwnHero();
-		map = new Map(tous);
+		map = new Map(tous,this);
 		// s=map.returnMatrix();
 
 		x = bomberman.getCol();
@@ -369,7 +365,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 				&& !alentours) {
 
 			courtAstar = new Astar(map, x, y, casedestination.getCol(),
-					casedestination.getLine());
+					casedestination.getLine(),this);
 
 			if ((court && !endanger && courtAstar.findPath())
 					|| (court && endanger && courtAstar.findPathdang())
@@ -533,7 +529,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 				if ((tous.getTile(j, i).getItem() != null || map.returnMatrix()[i][j] == etat.ADVERSAIRE
 						&& controle2(tous.getTile(j, i)))
 						&& (i != x || j != y) && existe(tous.getTile(j, i))) {
-					explosionAstar = new Astar(map, x, y, i, j);
+					explosionAstar = new Astar(map, x, y, i, j,this);
 
 					if (explosionAstar.findPathexp()) {
 
@@ -716,7 +712,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 						&& existe(tous.getTile(j, i))
 						&& controle2(tous.getTile(j, i)) && (i != x || j != y)) {
 
-					choixAstar = new Astar(map, x, y, i, j);
+					choixAstar = new Astar(map, x, y, i, j,this);
 
 					if (choixAstar.findPathchoix()) {
 
@@ -1006,7 +1002,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 			for (int col = 0; col < tous.getWidth(); col++) {
 				checkInterruption(); // APPEL OBLIGATOIRE
 				if (c != col || l != line) {
-					securite = new Astar(map, c, l, col, line);
+					securite = new Astar(map, c, l, col, line,this);
 
 					// si cest sures et si on peut y acceder par un chemin
 					// suffisamment sur(nous pouvons marcher sur les flammes )
@@ -1104,7 +1100,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 				if (hero != bomberman&&existe(hero.getTile())
 						&& !securite(hero.getCol(), hero.getLine(), 0)
 								.isEmpty()) {
-					attack = new Astar(map, x, y, hero.getCol(), hero.getLine());
+					attack = new Astar(map, x, y, hero.getCol(), hero.getLine(),this);
 					map.setbombeposs(x, y, bomberman.getBombRange());
 
 					if ((at && hero.getTile() != caseactuelle
@@ -1237,7 +1233,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 					// pour la plus proche case sure quon peut acceder par le
 					// plus sur chemin
-					Astar astarpos = new Astar(map, x, y, xp, yp);
+					Astar astarpos = new Astar(map, x, y, xp, yp,this);
 
 					if ((!endanger && astarpos.findPath())
 							|| (endanger && astarpos.findPathdang())) {
