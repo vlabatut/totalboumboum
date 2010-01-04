@@ -1196,5 +1196,11 @@ public class Launcher
 	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
 	 */
 
+	/*
+	 * tournoi COUPE : 
+	 * 	- pouvoir se qualifier depuis n'importe quel leg, pas forcement le précédent direct
+	 * 	- y compris depuis le leg initial (prévoir une sous-classe pour distinguer initial des autres?)
+	 */
+	
 	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux
 }

@@ -16,36 +16,55 @@ For source availability and license information see licence.txt
 -----------------------------------------------------------------------
 
 This product includes softwares developed by:
+
   + Chris Adamson & Joshua Marinacci:
     Class org.totalboumboum.gui.tools.FullRepaintManager
     Copyright 2005 Chris Adamson & Joshua Marinacci 
     http://weblogs.java.net/blog/invalidname
     http://weblogs.java.net/blog/joshy
+    Used to allow alpha effects in the GUI panels
+    
   + Adam Walker:
     Class org.totalboumboum.gui.tools.MessageDisplayer
     Copyright 2005 Adam Walker
     http://www.walkersoftware.net/articles/text-effects-in-java
+    Used to display messages at the begining of a round
+    
   + Juneym:
     Class org.totalboumboum.tools.image.BufferedImageWrapper
     Copyright 2006 Juneym
     http://forums.sun.com/thread.jspa?threadID=301424
+    Used to write BufferedImage objects for file caching
+    
   + Sun Microsystems Inc: 
     Class org.totalboumboum.gui.tools.SpringUtilities
     Copyright 1995-2008 Sun Microsystems Inc.
     http://www.sun.com
+    Used to layout graphical components in the GUI
+    
   + JDOM Project:
-    JDOM library
+    jdom library
     Copyright 2000-2007 JDOM Project - Apache-based license
     http://www.jdom.org
-  + JRS - Java Ranking Service
+    Used to parse the many XML files defining the sprites and other ingame objects
+    
+  + JRS - Java Ranking Service:
     Classes in the org.totalboumboum.game.statistics.glicko2.jrs package
     Copyright 2005-2006 JRS project - BSD License
     https://jrs.dev.java.net
     These classes were modified by Vincent Labatut
+    Used to rank players depending on their long term results
+    
+  + Japa - Java parser and AST (Abstract Syntax Tree):
+    javaparser library
+    Copyright 2007 Júlio Vilmar Gesser - GPL License
+    http://code.google.com/p/javaparser/
+    Used to parse the students AI Java source code
+    
   + Various AI students from Galatasaray University:
     Most classes in resources/ai (see classes for details)
     Copyright 2007-2009 their respective authors
-    http://gsu.edu.tr - GSU, Istanbul, Turkey
+    http://gsu.edu.tr - GSÜ, Istanbul, Turkey
 
 -----------------------------------------------------------------------
 
