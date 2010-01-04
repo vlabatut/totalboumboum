@@ -181,7 +181,7 @@
 						<text name="Minus" value="Moins" tooltip="Diminuer la vitesse du jeu" />
 					</group>
 					<group name="LogControls">
-						<text name="Title" value="Enregistrer les commandes" tooltip="Enregistre dans un fichier les commandes activés en cours de la partie" />
+						<text name="Title" value="Enregistrer les commandes" tooltip="Enregistre dans un fichier les commandes activées en cours de la partie" />
 						<text name="Disabled" value="Désactivé" tooltip="Enregistrement des commandes désactivé" />
 						<text name="Enabled" value="Activé" tooltip="Enregistrement des commandes activé" />
 					</group>
