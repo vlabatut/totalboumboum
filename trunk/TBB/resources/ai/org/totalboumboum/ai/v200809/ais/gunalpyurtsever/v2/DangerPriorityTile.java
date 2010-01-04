@@ -1,25 +1,32 @@
 package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2;
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 public class DangerPriorityTile{
 
 	AiTile tile;
 	int dangerpriority;
-	public DangerPriorityTile(AiTile tile, int dangerpriority) {
-		
+	ArtificialIntelligence ai;
+	public DangerPriorityTile(AiTile tile, int dangerpriority,ArtificialIntelligence ai) throws StopRequestException {
+		ai.checkInterruption();		
+		this.ai = ai;
 		this.tile = tile;
 		this.dangerpriority = dangerpriority;
 	}
-	public AiTile getTile() {
+	public AiTile getTile() throws StopRequestException {
+		ai.checkInterruption();		
 		return tile;
 	}
 
 
-	public int getDangerpriority() {
+	public int getDangerpriority() throws StopRequestException {
+		ai.checkInterruption();		
 		return dangerpriority;
 	}
-	public void setDangerpriority(int dangerpriority) {
+	public void setDangerpriority(int dangerpriority) throws StopRequestException {
+		ai.checkInterruption();		
 		this.dangerpriority = dangerpriority;
 	}
 	
