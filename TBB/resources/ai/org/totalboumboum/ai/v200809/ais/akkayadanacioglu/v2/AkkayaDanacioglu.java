@@ -71,7 +71,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 				ArrayList<Direction> dirs= getPossibleDirs(currentTile);
 				
 				for(int i=0;i<dirs.size();i++){
-					
+					checkInterruption();
 					//si les directions ce qu'on ai obtenu n'est pas une direction dangeraux 
 					if(!isItDangerousDir(dirs.get(i))){
 						
@@ -91,7 +91,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 				ArrayList<Direction> dirs= getPossibleDirs(currentTile);
 				
 				for(int i=0;i<dirs.size();i++){
-					
+					checkInterruption();
 					//s'il y a une direction que je pousse echapper
 					if(!isItDangerousDir(dirs.get(i))){
 						//drop bomb
@@ -259,8 +259,8 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		Iterator<AiBomb> it = bombs.iterator();
 		
 		while(it.hasNext()){
-			
-			AiBomb tempbomb= it.next();
+			checkInterruption();
+			AiBomb tempbomb = it.next();
 			int difx= Math.abs(currentTile.getLine()-tempbomb.getTile().getLine());
 			int dify= Math.abs(currentTile.getCol()-tempbomb.getTile().getCol());
 			if(difx<5 || dify<5)
@@ -384,9 +384,10 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	 * regarde a direction entree comme un parametre (danger ou safe)
 	 */
 	private boolean isItDangerousDir(Direction dir) throws StopRequestException{
-
+			checkInterruption();
 			AiTile tile=currentTile;
 			for(int i=0;i<10;i++){
+				checkInterruption();
 				AiTile temptTile= tile.getNeighbor(dir);
 				if(temptTile.getBlock()!=null)
 					break;
@@ -425,7 +426,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		Iterator<AiTile> it = tiles.iterator();
 		
 		while(it.hasNext()){
-			
+			checkInterruption();
 			result.add(getPercepts().getDirection(tile, it.next()));
 			
 		}
@@ -450,7 +451,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		ArrayList<Direction> dirs= getPossibleDirs(currentTile);
 		
 		for(int i=0;i<dirs.size();i++){
-			
+			checkInterruption();
 			if(!isItDangerousDir(dirs.get(i))){
 				
 				return result= new AiAction(AiActionName.MOVE,dirs.get(i));

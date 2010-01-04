@@ -336,6 +336,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		Collection<AiHero> heroes= zone.getHeroes();
 		Iterator<AiHero> itAiHeroes= heroes.iterator();
 		while (itAiHeroes.hasNext()) {
+			checkInterruption();
 			AiHero hero = (AiHero) itAiHeroes.next();
 			if((hero!=ownHero)&&matrixAvailable[hero.getLine()][hero.getCol()]==AVAILABLE)
 				heroMatrix[hero.getLine()][hero.getCol()]=HERO;
@@ -354,6 +355,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		Iterator<AiItem> itItems=items.iterator();
 		AiItem item;
 		while(itItems.hasNext()){
+			checkInterruption();
 			item=itItems.next();
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 			AiTile itemTile = item.getTile();
@@ -571,8 +573,8 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		return result;	
 	}
 	private AiAction moveToHigherValueAttack(AiZone zone, int[][][] matriceDefence, int[][] matrixBombing, int matrixBonus[][], AiTile tile) throws StopRequestException{
-		int up, right, left, down, now;
 		checkInterruption();
+		int up, right, left, down, now;
 		AiAction result= new AiAction(AiActionName.NONE);
 		AiTile tileUp =tile.getNeighbor(Direction.UP); 
 		AiTile tileDown =tile.getNeighbor(Direction.DOWN);
@@ -617,6 +619,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		return result;	
 	}
 	private void initVisit() throws StopRequestException {
+		checkInterruption();
 		for (int i = 0; i < line; i++) {
 			checkInterruption();
 			for (int j = 0; j < col; j++) {
@@ -714,9 +717,12 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 			if(bombRange<Math.abs(bomb1Col-bomb2Col))
 				result = false;
 			else{
+				checkInterruption();
 				for (int i = Math.min(bomb1Col, bomb2Col) + 1 ; i < Math.max(bomb1Col, bomb2Col); i++)
+				{	checkInterruption();
 					if (matriceDefence[bomb1Line][i][0] < SAFE && matriceDefence[bomb1Line][i][0] != FIRE)
 						result = false;
+				}
 			}
 		} 
 		else if (bomb1Col == bomb2Col) {
@@ -724,8 +730,10 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 				result = false;
 			else{
 				for (int i = Math.min(bomb1Line, bomb2Line) + 1 ; i < Math.max(bomb1Line,bomb2Line); i++)
+				{	checkInterruption();
 					if (matriceDefence[i][bomb1Col][0] < SAFE && matriceDefence[i][bomb1Col][0] != FIRE)
 						result = false;
+				}
 			}
 		}	
 		return result;
@@ -749,6 +757,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 			Collection<AiTile> tiles = getClearNeighbors(ownHero.getTile(), matriceDefence);
 			Iterator<AiTile> itAiTile = tiles.iterator();
 			while (itAiTile.hasNext()) {
+				checkInterruption();
 				tile = itAiTile.next();			
 				dirNew = zone.getDirection(ownTile, tile);
 
@@ -774,6 +783,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 						Iterator<AiTile> itAiTiles1 = tiles1.iterator();
 						AiTile tile1;
 						while (itAiTiles1.hasNext()) {
+							checkInterruption();
 							tile1 = itAiTiles1.next();
 							if (!tile1.equals(ownTile)
 									&& (matriceDefence[tile1.getLine()][tile1.getCol()][0] == SAFE 
@@ -803,6 +813,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 			Iterator<AiTile> itAiTile = tiles.iterator();
 			Direction dirLastChance=Direction.NONE;
 			while (itAiTile.hasNext()) {
+				checkInterruption();
 				tile = itAiTile.next();
 				if (matriceDefence[tile.getLine()][tile.getCol()][0]>=ITEM&&
 						matriceDefence[tile.getLine()][tile.getCol()][0]<min) {
@@ -825,6 +836,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		AiBomb bombToTest;
 		Collection<AiBomb> processBombs = new LinkedList<AiBomb>();
 		while(itBombs.hasNext()){
+			checkInterruption();
 			bombToTest= itBombs.next();
 			/**
 			 * bomb n'est pas le meme qu'il va tester
@@ -1076,6 +1088,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		Collection<AiTile> tiles = getClearNeighbors(tile, tempMatrice);
 		Iterator<AiTile> itAiTile = tiles.iterator();
 		while (itAiTile.hasNext()) {
+			checkInterruption();
 			tileTemp = itAiTile.next();
 			dirNewValue = calculateCost(tileTemp, tile, tempMatrice, zone);
 			if (dirNewValue < dirOldValue) {

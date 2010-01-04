@@ -14,7 +14,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
 
-public class MonIA extends ArtificialIntelligence {
+public class DemiragSagar extends ArtificialIntelligence {
 	Direction d;
 	AiZone zone;
 	AiHero ownHero;
@@ -33,7 +33,7 @@ public class MonIA extends ArtificialIntelligence {
 	boolean debug;
 	boolean olmadikacilk;
 
-	public MonIA() {
+	public DemiragSagar() {
 		this.d = Direction.NONE;
 		this.estIntermediaire = false;
 		this.caseHedef = null;		
@@ -51,7 +51,7 @@ public class MonIA extends ArtificialIntelligence {
 
 		// zone details
 		this.zone = getPercepts();
-		if(this.monAttack==null) this.monAttack = new Attack(zone,9, 9, 4, 3);
+		if(this.monAttack==null) this.monAttack = new Attack(zone,9, 9, 4, 3, this);
 		getBombes();
 		
 		if (baseX == 0)
@@ -121,7 +121,7 @@ public class MonIA extends ArtificialIntelligence {
 			if(caseCourant.getLine()==target.getLine() && caseCourant.getCol()==target.getCol())
 				return new AiAction(AiActionName.NONE);
 			AStar arbre;
-			arbre = new AStar(caseCourant, target, false);
+			arbre = new AStar(caseCourant, target, this, false);
 			arbre.formeArbre();
 			if(arbre.path==null) {
 				printTile(target);

@@ -68,8 +68,10 @@ public class Danger {
 	 * retourne le danger la plus proche
 	 * 
 	 * @return
+	 * @throws StopRequestException 
 	 */
-	public Object getClosestDanger() {
+	public Object getClosestDanger() throws StopRequestException {
+		as.checkInterruption();
 		return closestDanger;
 	}
 
@@ -89,6 +91,7 @@ public class Danger {
 		Iterator<AiBomb> iter = bombs.iterator();
 
 		while (iter.hasNext()) {
+			as.checkInterruption();
 			bomb = iter.next();
 			distance = control.getHypotenuseTo(as.currentTile, bomb.getTile());
 
@@ -118,6 +121,7 @@ public class Danger {
 		Iterator<AiFire> iter = fires.iterator();
 
 		while (iter.hasNext()) {
+			as.checkInterruption();
 			fire = iter.next();
 			distance = control.getHypotenuseTo(as.currentTile, fire.getTile());
 

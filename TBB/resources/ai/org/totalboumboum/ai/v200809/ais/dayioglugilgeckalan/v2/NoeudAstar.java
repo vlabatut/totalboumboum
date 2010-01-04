@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2;
 
 import java.util.Comparator;
 
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 
@@ -15,9 +16,10 @@ public class NoeudAstar implements Comparator<Noeud> {
 	 * 
 	 * @param goal
 	 *            noeud qu'on prend comme reference en comparant les noeuds
+	 * @throws StopRequestException 
 	 */
-	public NoeudAstar(Noeud goal)
-	{
+	public NoeudAstar(Noeud goal, ArtificialIntelligence ai) throws StopRequestException
+	{	ai.checkInterruption();
 		
 		this.goal=goal;
 	}

@@ -10,7 +10,6 @@ import java.util.PriorityQueue;
 import org.totalboumboum.ai.v200809.adapter.AiBomb;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
-import org.totalboumboum.ai.v200809.ais.akpolatsener.v2.comparators.ComparatorByHypotenuse;
 import org.totalboumboum.engine.content.feature.Direction;
 
 
@@ -177,12 +176,16 @@ public class TileControl {
 		PriorityQueue<AiTile> sortedTiles = new PriorityQueue<AiTile>(1, comp);
 
 		for (AiTile tile : tiles)
+		{	as.checkInterruption();
 			sortedTiles.offer(tile);
+		}
 
 		tiles.clear();
 
 		while (sortedTiles.size() > 0)
-			tiles.add(sortedTiles.poll());
+		{	as.checkInterruption();
+			tiles.add(sortedTiles.poll());		
+		}
 
 		return tiles;
 
@@ -266,6 +269,7 @@ public class TileControl {
 		boolean result = true;
 
 		while (true) {
+			as.checkInterruption();
 			if (checkTile(tile, false, true, true, false, false, false, false)) {
 				result = false;
 				break;

@@ -55,7 +55,10 @@ public class ParseAi
 
         // display trace
         AiVisitor visitor = new AiVisitor();
-        visitor.visit(cu, null);
+        visitor.visit(cu,null);
+        int errorCount = visitor.getErrorCount();
+        if(errorCount>0)
+        	System.out.println("   total : "+errorCount);
 	}
 	
 	private static void parseFolder(File folder) throws ParseException, IOException

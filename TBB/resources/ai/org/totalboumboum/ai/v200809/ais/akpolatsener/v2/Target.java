@@ -72,8 +72,10 @@ public class Target {
 	 * retourne le cible la plus proche
 	 * 
 	 * @return
+	 * @throws StopRequestException 
 	 */
-	public Object getClosestTarget() {
+	public Object getClosestTarget() throws StopRequestException {
+		as.checkInterruption();
 		return closestTarget;
 	}
 
@@ -92,6 +94,7 @@ public class Target {
 		Iterator<AiHero> iter = enemies.iterator();
 
 		while (iter.hasNext()) {
+			as.checkInterruption();
 			enemy = iter.next();
 
 			if (enemy != as.ownHero) {
@@ -126,6 +129,7 @@ public class Target {
 		Iterator<AiItem> iter = bonuses.iterator();
 
 		while (iter.hasNext()) {
+			as.checkInterruption();
 			bonus = iter.next();
 			distance = control.getHypotenuseTo(as.currentTile, bonus.getTile());
 
