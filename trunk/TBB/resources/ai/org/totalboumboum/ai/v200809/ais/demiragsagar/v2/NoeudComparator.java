@@ -2,12 +2,26 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v2;
 
 import java.util.Comparator;
 
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
+
 public class NoeudComparator implements Comparator<Node> {
 
 	public int compare(Node noeud1, Node noeud2) {
 		int resultat;
-		double n_1 = noeud1.getHeuristic();
-		double n_2 = noeud2.getHeuristic();
+		double n_1=0;
+		try {
+			n_1 = noeud1.getHeuristic();
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		double n_2=0;
+		try {
+			n_2 = noeud2.getHeuristic();
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		if (n_1 < n_2)
 			resultat = -1;

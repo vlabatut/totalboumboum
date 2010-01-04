@@ -12,17 +12,13 @@ public class NoeudComparator implements Comparator<Noeud> {
 
 	public NoeudComparator(Noeud t, DeveciogluKorkmaz dk)
 			throws StopRequestException {
-		this.t = t;
 		dk.checkInterruption();
+		this.t = t;
 		this.dk = dk;
 	}
 
 	public int compare(Noeud n1, Noeud n2) {
-		try {
-			dk.checkInterruption();
-		} catch (StopRequestException e1) {
-			e1.printStackTrace();
-		}
+		//dk.checkInterruption();
 		int resultat = 0;
 		try {
 			if (dk.getDistance(t.getTile(), n1.getTile()) > dk.getDistance(t

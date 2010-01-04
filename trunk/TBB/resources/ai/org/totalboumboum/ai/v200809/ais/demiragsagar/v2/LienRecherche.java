@@ -1,19 +1,26 @@
 package org.totalboumboum.ai.v200809.ais.demiragsagar.v2;
 
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
+
 public class LienRecherche {
 	// noeud parent
 	private Node origin;
 	// noeud fils
 	private Node target;
-
+	ArtificialIntelligence ai;
+	
 	/**
 	 * Constructeur.
 	 * 
 	 * @param origin noeud parent
 	 * @param target noeud fils
 	 * @param action action de transition
+	 * @throws StopRequestException 
 	 */
-	public LienRecherche(Node origin, Node target) {
+	public LienRecherche(Node origin, Node target, ArtificialIntelligence ai) throws StopRequestException {
+		ai.checkInterruption();
+		this.ai = ai;
 		this.origin = origin;
 		this.target = target;
 	}
@@ -22,8 +29,10 @@ public class LienRecherche {
 	 * Renvoie le noeud parent du lien
 	 * 
 	 * @return le noeud parent
+	 * @throws StopRequestException 
 	 */
-	public Node getOrigin() {
+	public Node getOrigin() throws StopRequestException {
+		ai.checkInterruption();
 		return origin;
 	}
 
@@ -31,8 +40,10 @@ public class LienRecherche {
 	 * Renvoie le noeud fils du lien
 	 * 
 	 * @return le noeud fils
+	 * @throws StopRequestException 
 	 */
-	public Node getTarget() {
+	public Node getTarget() throws StopRequestException {
+		ai.checkInterruption();
 		return target;
 	}
 
@@ -44,15 +55,20 @@ public class LienRecherche {
 
 	@Override
 	public boolean equals(Object object) {
-		boolean result;
+		boolean result = false;
 		if (object == null)
 			result = false;
 		else if (!(object instanceof LienRecherche))
 			result = false;
 		else {
 			LienRecherche temp = (LienRecherche) object;
-			result = temp.getOrigin() == getOrigin()
-					&& temp.getTarget() == getTarget();
+			try {
+				result = temp.getOrigin() == getOrigin()
+						&& temp.getTarget() == getTarget();
+			} catch (StopRequestException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -60,10 +76,20 @@ public class LienRecherche {
 	@Override
 	public String toString() {
 		String result = "[";
-		result = result + getOrigin().toString();
+		try {
+			result = result + getOrigin().toString();
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		result = result + "] )->";
 		result = result + "[";
-		result = result + getTarget().toString();
+		try {
+			result = result + getTarget().toString();
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		result = result + "]";
 		return result;
 	}

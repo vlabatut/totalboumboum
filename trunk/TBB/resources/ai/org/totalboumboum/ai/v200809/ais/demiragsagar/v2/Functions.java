@@ -34,11 +34,12 @@ public class Functions {
 		for (j = 0; j < 15; j++) {
 			ai.checkInterruption();
 			for (i = 0; i < 17; i++)
-				ai.checkInterruption();
+			{	ai.checkInterruption();
 				if (maMatrice[i][j] >= 0)
 					System.out.print(" " + maMatrice[i][j]);
 				else
 					System.out.print(maMatrice[i][j]);
+			}
 			System.out.println();
 		}
 	}
