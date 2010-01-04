@@ -2,14 +2,22 @@ package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2;
 
 import java.util.Comparator;
 
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
+
 public class AstarComparator implements Comparator<CostTile> {
 	
 	public int compare(CostTile tile1, CostTile tile2){
 		
-		int i = tile1.getCost() + tile1.getHeuristic() - tile2.getCost() - tile2.getHeuristic() ;
+		int i=0;
+		try {
+			i = tile1.getCost() + tile1.getHeuristic() - tile2.getCost() - tile2.getHeuristic();
+			if(i == 0)
+				i =tile1.toString().compareTo(tile2.toString());
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		if(i == 0)
-			i =tile1.toString().compareTo(tile2.toString());
 		
 		return i;
 	}

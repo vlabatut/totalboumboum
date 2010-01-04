@@ -2,6 +2,8 @@ package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2;
 
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
 //objet specifique qui garde les infos de cost et heuristique pour des tiles
@@ -14,9 +16,11 @@ public class CostTile  {
 	private Direction firstDrctn;
 	private boolean markVisited;
 	private boolean inDanger;
+	ArtificialIntelligence ai;
 	
-	public CostTile(AiTile CurrentAiTile, int currentcost, AiTile ComparedAiTile,Direction FirstDirection){
-		
+	public CostTile(AiTile CurrentAiTile, int currentcost, AiTile ComparedAiTile,Direction FirstDirection, ArtificialIntelligence ai) throws StopRequestException{
+		ai.checkInterruption();
+		this.ai = ai;
 		MyAiTile = CurrentAiTile;
 		cost = currentcost;
 	
@@ -28,20 +32,20 @@ public class CostTile  {
 		inDanger = false;
 	}
 	
-	public int getCost(){
-		
+	public int getCost() throws StopRequestException{
+		ai.checkInterruption();
 		return cost;
 		
 	}
 	
-	public int getHeuristic(){
-		
+	public int getHeuristic() throws StopRequestException{
+		ai.checkInterruption();
 		return heuristic;
 		
 	}
 	
-	public AiTile getAiTile(){
-		
+	public AiTile getAiTile() throws StopRequestException{
+		ai.checkInterruption();
 		return MyAiTile;
 	}
 	
@@ -51,32 +55,32 @@ public class CostTile  {
 		
 	}
 	
-	public Direction getFirstDirection(){
-		
+	public Direction getFirstDirection() throws StopRequestException{
+		ai.checkInterruption();
 		return firstDrctn;
 		
 	}
 	
-	public void setmarkVisited(boolean a){
-	
+	public void setmarkVisited(boolean a) throws StopRequestException{
+		ai.checkInterruption();
 		this.markVisited = a;
 		
 	}
 	
-	public boolean getmarkVisited(){
-		
+	public boolean getmarkVisited() throws StopRequestException{
+		ai.checkInterruption();
 		return this.markVisited;
 		
 	}
 	
-	public void setinDanger(boolean danger){
-		
+	public void setinDanger(boolean danger) throws StopRequestException{
+		ai.checkInterruption();
 		this.inDanger = danger;
 		
 	}
 	
-	public boolean getinDanger(){
-		
+	public boolean getinDanger() throws StopRequestException{
+		ai.checkInterruption();
 		return inDanger;
 		
 	}
