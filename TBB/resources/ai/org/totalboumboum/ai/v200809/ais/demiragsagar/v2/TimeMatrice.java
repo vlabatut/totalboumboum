@@ -67,11 +67,15 @@ public class TimeMatrice {
 		// ajout des murs dans la matrice pour une seule fois
 		int i, j;
 		for (j = 0; j < 15; j++)
+		{	ai.checkInterruption();
 			for (i = 0; i < 17; i++)
+			{	ai.checkInterruption();
 				if (Functions.hasWall(this.zone.getTile(j, i),ai))
 					this.putTime(i,j,-1);
 				else
 					this.putTime(i,j,0);
+			}
+		}
 	}
 	/*
 	 * S'il ya un mur dans une case on voit -1 
@@ -197,7 +201,9 @@ public class TimeMatrice {
 			if(this.debug){
 				Iterator<AiTile> ita = this.caseBombes.iterator();
 				while (ita.hasNext())
-					System.out.println("Bombe ancient" + ita.next().getCol());
+				{	ai.checkInterruption();
+					System.out.println("Bombe ancient" + ita.next().getCol());				
+				}
 			}
 			if (!nouvelleBombes.isEmpty()) {
 				// si il existe au moins une bombe

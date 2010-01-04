@@ -18,7 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 
-public class MonIA extends ArtificialIntelligence {
+public class DemiragSagar extends ArtificialIntelligence {
 
 	//les variables globales qui sont mise a jour a chaque iteration
 	private int state;
@@ -36,7 +36,7 @@ public class MonIA extends ArtificialIntelligence {
 	private int distanceTarget;
 	private int counter;
 
-	public MonIA(){
+	public DemiragSagar(){
 		//l'initialisation des variables globales
 		this.state = 0;
 		this.d = Direction.NONE;
@@ -133,7 +133,7 @@ public class MonIA extends ArtificialIntelligence {
 				this.state = 8;
 		    else {
 		    	for(AiTile temp: caseItems)
-		    	{
+		    	{	checkInterruption();
 		    		//La distance entre nous et l'item
 		    		int valeur=Functions.trouveDistance(this.ownHero.getTile(), temp,this);	
 		    		if(valeur!=-1){
@@ -241,6 +241,7 @@ public class MonIA extends ArtificialIntelligence {
 			if(!fils.isEmpty()) {
 				int min=-1;
 				for(Node temp:fils)
+				{	checkInterruption();
 					if(this.timeMatrice.getTime(temp.getTile())==0) {
 						int tempDistance=Functions.trouveDistance(caseCourant, temp.getTile(),this);
 						if(min==-1 || min>tempDistance)
@@ -253,7 +254,8 @@ public class MonIA extends ArtificialIntelligence {
 									this.state=4;
 								break;
 							}
-				}				
+					}
+				}
 			}
 			if(this.state==78) {
 				if(this.supposerBombe(caseCourant)){
@@ -361,6 +363,7 @@ public class MonIA extends ArtificialIntelligence {
 			Node tempNode1 = new Node(this.caseTarget);
 			Node tempNode2 = new Node(this.caseTarget);
 			while(tempNode1.memeCoordonnees(tempNode2)&& tempNode1!=null && tempNode2!=null ) {
+				checkInterruption();
 				result=tempNode1.getTile();
 				if(!tempNode1.memeCoordonnees(new Node(arbre1.firstTile)) && !tempNode2.memeCoordonnees(new Node(arbre2.firstTile))){
 				tempNode1=arbre1.getParentLink(tempNode1).getOrigin();
@@ -383,18 +386,22 @@ public class MonIA extends ArtificialIntelligence {
 		boolean resultat=false;
 		long nouveauTime [][]= new long[17][15];
 		for (j = 0; j < 15; j++)
+		{	checkInterruption();
 			for (i = 0; i < 17; i++)
-			{
+			{	checkInterruption();
 				nouveauTime[i][j]=this.timeMatrice.getTime(i,j);
 			}
+		}
 		this.timeMatrice.placerNouvelleBombe(temp);
 		if(this.seCacher(true))
 			resultat=true;
 		for (j = 0; j < 15; j++)
+		{	checkInterruption();
 			for (i = 0; i < 17; i++)
-			{
+			{	checkInterruption();
 				this.timeMatrice.putTime(i,j,nouveauTime[i][j]);
 			}
+		}
 		return resultat;
 	}
 	/*
@@ -406,13 +413,9 @@ public class MonIA extends ArtificialIntelligence {
 		ArrayList<AiTile> monItera = new ArrayList<AiTile>();
 
 		for (AiHero i : this.zone.getHeroes()) {
+			checkInterruption();
 			if (this.debug)
 				System.out.println("La couleur de l'enemy: " + i.getColor());
-			try {
-				checkInterruption();
-			} catch (StopRequestException e) {
-				e.printStackTrace();
-			}
 			if (i.getColor() != this.ownHero.getColor())
 				if (i != null)
 					monItera.add(i.getTile());
@@ -428,11 +431,7 @@ public class MonIA extends ArtificialIntelligence {
 		ArrayList<AiTile> b = new ArrayList<AiTile>();
 		if (this.zone.getBombs() != null)
 			for (AiBomb i : this.zone.getBombs()) {
-				try {
-					checkInterruption();
-				} catch (StopRequestException e) {
-					e.printStackTrace();
-				}
+				checkInterruption();
 				if(!i.getTile().getBombs().isEmpty())
 					b.add(i.getTile());
 			}
@@ -447,23 +446,15 @@ public class MonIA extends ArtificialIntelligence {
 		ArrayList<AiTile> p = new ArrayList<AiTile>();
 		if (this.zone.getItems() != null)
 			for (AiItem i : this.zone.getItems()) {
-				try {
-					checkInterruption();
-				} catch (StopRequestException e) {
-					e.printStackTrace();
-				}
+				checkInterruption();
 				if(i.getTile().getItem()!=null)
 					p.add(i.getTile());
 			}
 		return p;
 	}
 
-	public void calculeZoneAspect(AiZone zone) {
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			e.printStackTrace();
-		}
+	public void calculeZoneAspect(AiZone zone) throws StopRequestException {
+		checkInterruption();
 	}
 	public boolean seCacher() throws StopRequestException{
 		checkInterruption();
@@ -540,12 +531,16 @@ public class MonIA extends ArtificialIntelligence {
 		int mat[][] = this.timeMatrice.getBombMatrice(this.zone);
 		int sommeHardWall = 0;
 		for (int i = 0; i < 15; i++)
+		{	checkInterruption();
 			for (int j = 0; j < 17; j++)
+			{	checkInterruption();
 				if (mat[j][i] == -1) {
 					AiTile temp = this.zone.getTile(i, j);
 					if (!temp.getBlock().isDestructible())
 						sommeHardWall++;
 				}
+			}
+		}
 		return sommeHardWall;
 	}
 }

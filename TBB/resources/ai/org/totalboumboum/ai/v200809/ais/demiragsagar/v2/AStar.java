@@ -42,7 +42,7 @@ public class AStar {
 
 	public void formeLien(Node parent, Node fils) throws StopRequestException {
 		ai.checkInterruption();
-		LienRecherche link = new LienRecherche(parent, fils);
+		LienRecherche link = new LienRecherche(parent, fils,ai);
 		links.add(link);
 	}
 
@@ -53,9 +53,8 @@ public class AStar {
 		Node courantN = new Node(courant);
 		//On prend un case et on prend ces voisins qui se trouvent en HAUT,en BAS,a DROITE,a GAUCHE .
 		//Ces voisins qui ne contiennent pas de mur ,pas de feu ou pas de bombe vont etre ces fils 
-		try {
 			if (Functions.isClear(courant.getNeighbor(Direction.UP),ai)) {
-				temp = new Node(courant.getNeighbor(Direction.UP), lastTile);
+				temp = new Node(courant.getNeighbor(Direction.UP), lastTile,ai);
 				if(this.getParentLink(temp)==null && !temp.memeCoordonnees(new Node(firstTile)))
 				{
 					result.add(temp);
@@ -63,7 +62,7 @@ public class AStar {
 				}
 			}
 			if (Functions.isClear(courant.getNeighbor(Direction.DOWN),ai)) {
-				temp = new Node(courant.getNeighbor(Direction.DOWN), lastTile);
+				temp = new Node(courant.getNeighbor(Direction.DOWN), lastTile,ai);
 				if(this.getParentLink(temp)==null && !temp.memeCoordonnees(new Node(firstTile)))
 				{
 					result.add(temp);
@@ -71,7 +70,7 @@ public class AStar {
 				}
 			}
 			if (Functions.isClear(courant.getNeighbor(Direction.LEFT),ai)) {
-				temp = new Node(courant.getNeighbor(Direction.LEFT), lastTile);
+				temp = new Node(courant.getNeighbor(Direction.LEFT), lastTile,ai);
 				if(this.getParentLink(temp)==null && !temp.memeCoordonnees(new Node(firstTile)))
 				{
 					result.add(temp);
@@ -79,21 +78,17 @@ public class AStar {
 				}
 			}
 			if (Functions.isClear(courant.getNeighbor(Direction.RIGHT),ai)) {
-				temp = new Node(courant.getNeighbor(Direction.RIGHT), lastTile);
+				temp = new Node(courant.getNeighbor(Direction.RIGHT), lastTile,ai);
 				if(this.getParentLink(temp)==null && !temp.memeCoordonnees(new Node(firstTile)))
 				{
 					result.add(temp);
 					formeLien(courantN, temp);
 				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return result.iterator();
 	}
 	public void formeArbre() throws StopRequestException {
 		ai.checkInterruption();
-		try {
 			init();
 			if (debug)
 				System.out.println("Agac yaratildi");
@@ -140,9 +135,7 @@ public class AStar {
 					}
 				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 	}
 	/*
 	 * On trouve le chemin de l'arbre qui est forme par l'alogrithme A*

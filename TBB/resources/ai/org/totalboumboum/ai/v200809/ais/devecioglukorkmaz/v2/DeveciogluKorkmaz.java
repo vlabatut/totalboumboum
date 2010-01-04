@@ -141,15 +141,15 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 
 	private AiTile setPath(AiTile target) throws StopRequestException {
 		checkInterruption();
-		Noeud cible = new Noeud(target);
+		Noeud cible = new Noeud(target,this);
 		path = new LinkedList<Noeud>();
-		Noeud courant = new Noeud(currentTile);
-		Tree tree = new Tree(courant);
+		Noeud courant = new Noeud(currentTile,this);
+		Tree tree = new Tree(courant,this);
 		NoeudComparator comparator = new NoeudComparator(courant, this);
 		PriorityQueue<Noeud> frange = new PriorityQueue<Noeud>(1000, comparator);
 		LinkedList<Noeud> open = new LinkedList<Noeud>();
 		LinkedList<Noeud> closed = new LinkedList<Noeud>();
-		Noeud temp = new Noeud(currentTile);
+		Noeud temp = new Noeud(currentTile,this);
 		boolean found = false;
 		frange.offer(courant);
 		open.add(courant);
@@ -168,7 +168,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				while (i.hasNext()) {
 					checkInterruption();
 					AiTile temp2 = i.next();
-					Noeud noeud = new Noeud(temp2);
+					Noeud noeud = new Noeud(temp2,this);
 					if (!closed.contains(noeud) && !open.contains(noeud)) {
 						open.add(noeud);
 						tree.addNoeud(temp, noeud);
@@ -192,15 +192,15 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	private AiTile setPathNearestSafeTile(AiTile target)
 			throws StopRequestException {
 		checkInterruption();
-		Noeud cible = new Noeud(target);
+		Noeud cible = new Noeud(target,this);
 		path = new LinkedList<Noeud>();
-		Noeud courant = new Noeud(currentTile);
-		Tree tree = new Tree(courant);
+		Noeud courant = new Noeud(currentTile,this);
+		Tree tree = new Tree(courant,this);
 		NoeudComparator comparator = new NoeudComparator(courant, this);
 		PriorityQueue<Noeud> frange = new PriorityQueue<Noeud>(1000, comparator);
 		LinkedList<Noeud> open = new LinkedList<Noeud>();
 		LinkedList<Noeud> closed = new LinkedList<Noeud>();
-		Noeud temp = new Noeud(currentTile);
+		Noeud temp = new Noeud(currentTile,this);
 		boolean found = false;
 		frange.offer(courant);
 		open.add(courant);
@@ -218,7 +218,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				while (i.hasNext()) {
 					checkInterruption();
 					AiTile temp2 = i.next();
-					Noeud noeud = new Noeud(temp2);
+					Noeud noeud = new Noeud(temp2,this);
 					if (!closed.contains(noeud) && !open.contains(noeud)) {
 						open.add(noeud);
 						tree.addNoeud(temp, noeud);
