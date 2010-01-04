@@ -1071,14 +1071,25 @@ public class Launcher
 	/**
 	 *	- IA :
 	 * 		- accès au classement Glicko-2 (en plus de round et match déjà présents)
-	 * 		- masquage des exceptions provoquées par les IA
-	 * 		- log de ces mêmes exceptions
 	 * 		- ramasse-miette et A*
+	 * 		- modif de checkInterruption avec yield
+	 * 		- utilitaire permettant de controller les checkinterruptions dans les programmes des étudiants
 	 *	- stats :
+	 *		- possibilité d'importer/exporter les stats indépendemment de la version des classes
 	 *	- GUI : 
 	 *  - tournois :
 	 *  	- têtes de séries
 	 *  	- championnat
+	 *  	- vidéos du tournoi
+	 *  - instances :
+	 *  	- thème du tournoi de cette année
+	 *  	- que testent les niveaux utilisés dans les tournois ?
+	 *  
+	 *  x) classement glicko-2 + têtes de série
+	 *  x) test des IA >> A* et yield (images dispo)
+	 *  x) tournoi (vidéo) + pas possible tête de série ni tournoi à 12
+	 *  x) utilitaire pour controler les IA des étudiants
+	 *  x) à quoi servent les niveaux
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

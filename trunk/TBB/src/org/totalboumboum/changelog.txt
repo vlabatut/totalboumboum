@@ -366,7 +366,7 @@
 + beta.015
 - Moteur :
 		- correction d'un bug dans SpritePreviewLoader, lors du chargement de sprites sans colormap (de type Prognathe)
-		- possibilité d'enregistrer automatiquement un objet Zone, via une méthode s'appelant hors du jeu (pour faciliter la cration de niveaux)
+		- possibilité d'enregistrer automatiquement un objet Zone, via une méthode s'appelant hors du jeu (pour faciliter la création de niveaux)
 		- pareil avec les fichiers level et players, ce qui permet de définir automatiquement des niveaux (basiques, à compléter manuellement)
 		- bug corrigé dans la gestion des tournois de type coupe
 		- bug corrigé dans l'autosave des tournoi (le backup ne se faisait pas)
