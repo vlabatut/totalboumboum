@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v200910.tools;
 import java.util.List;
 
 import japa.parser.ast.TypeParameter;
+import japa.parser.ast.body.ConstructorDeclaration;
 import japa.parser.ast.body.MethodDeclaration;
 import japa.parser.ast.body.Parameter;
 import japa.parser.ast.expr.AnnotationExpr;
@@ -43,7 +44,47 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 {
 	private static String CHECK_INTERRUPTION = "checkInterruption";
 	
-	@Override
+	int errorCount = 0;
+	
+	public int getErrorCount()
+	{	return errorCount;	
+	}
+	
+    @Override
+    public void visit(ConstructorDeclaration n, Object arg)
+    {	if (n.getJavaDoc() != null)
+    	{	n.getJavaDoc().accept(this, arg);
+        }
+        if(n.getAnnotations() != null)
+        {	for (AnnotationExpr a : n.getAnnotations())
+        	{	a.accept(this, arg);
+            }
+        }
+        if(n.getTypeParameters() != null)
+        {	for (TypeParameter t : n.getTypeParameters())
+        	{	t.accept(this, arg);
+            }
+        }
+        if(n.getParameters() != null)
+        {	for (Parameter p : n.getParameters())
+        	{	p.accept(this, arg);
+            }
+        }
+        if(n.getThrows() != null)
+        {	for (NameExpr name : n.getThrows())
+        	{	name.accept(this, arg);
+            }
+        }
+        String name = n.getName();
+        BlockStmt block = n.getBlock();
+        System.out.println("Analyse du constructeur "+name);
+    	if(!name.equals("AiMain"))
+    	{	checkBlock(block);  
+    	}
+        block.accept(this, arg);
+    }
+
+    @Override
     public void visit(MethodDeclaration n, Object arg) 
 	{	if(n.getJavaDoc() != null)
 		{	n.getJavaDoc().accept(this, arg);
@@ -70,17 +111,14 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
             }
         }
         if(n.getBody() != null)
-        {	// init
-        	String name = n.getName();
+        {	String name = n.getName();
         	BlockStmt block = n.getBody();
+//if(name.equals("getZoneArray"))
+//	System.out.println();
         	System.out.println("Analyse de la méthode "+name);
-        	
-        	List<Statement> statements = block.getStmts();
-        	if(!statements.isEmpty())
-        	{	Statement firstStatement = statements.get(0);
-        		checkBlock(firstStatement);
+        	if(!name.equals("equals") && !name.equals("compare") && !name.equals("toString"))
+        	{	checkBlock(block);  
         	}
-        	
         	block.accept(this, arg);
         }
     }
@@ -133,23 +171,50 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 
 	private void checkBlock(Statement statement)
 	{	int line = statement.getBeginLine();
-		if(statement instanceof ExpressionStmt)
-		{	ExpressionStmt expressionStmt = (ExpressionStmt) statement;
-			Expression expression = expressionStmt.getExpression();
-			if(expression instanceof MethodCallExpr)
-			{	MethodCallExpr methodCallExpr = (MethodCallExpr) expression;
-				String methodName = methodCallExpr.getName();
-				if(!methodName.equals(CHECK_INTERRUPTION))
-        		{	// erreur
-        			System.out.println("  Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION+"()");
-        			//TODO à compléter par la création d'un commentaire dans le code source
-        		}
+		if(statement instanceof BlockStmt)
+		{ BlockStmt block = (BlockStmt) statement;
+			List<Statement> statements = block.getStmts();
+			if(!statements.isEmpty())
+			{	Statement firstStatement = statements.get(0);
+				line = firstStatement.getBeginLine();
+				if(firstStatement instanceof ExpressionStmt)
+				{	ExpressionStmt expressionStmt = (ExpressionStmt) firstStatement;
+					Expression expression = expressionStmt.getExpression();
+					if(expression instanceof MethodCallExpr)
+					{	MethodCallExpr methodCallExpr = (MethodCallExpr) expression;
+						String methodName = methodCallExpr.getName();
+						if(!methodName.equals(CHECK_INTERRUPTION))
+		        		{	// erreur
+		        			System.out.println("   Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION+"()");
+		        			errorCount++;
+		        			//TODO à compléter par la création d'un commentaire dans le code source
+		        		}
+					}
+					else
+					{	// erreur
+						System.out.println("   Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION+"()");
+	        			errorCount++;
+						//TODO à compléter par la création d'un commentaire dans le code source
+					}
+				}
+				else
+				{	// erreur
+					System.out.println("   Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION+"()");
+        			errorCount++;
+					//TODO à compléter par la création d'un commentaire dans le code source
+				}
+			}
+			else
+			{	// erreur
+				System.out.println("   Attention ligne "+line+" : le bloc est vide !");
+				//TODO à compléter par la création d'un commentaire dans le code source
 			}
 		}
 		else
 		{	// erreur
-			System.out.println("  Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION+"()");
+			System.out.println("   Erreur ligne "+line+" : bloc manquant, appel à "+CHECK_INTERRUPTION+"() manquant également");
+			errorCount++;
 			//TODO à compléter par la création d'un commentaire dans le code source
-		}		
+		}
 	}
 }

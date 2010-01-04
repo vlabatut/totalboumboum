@@ -44,8 +44,8 @@ public class PathFinder {
 		}
 	}
 	
-	public String ToStringPath()
-	{
+	public String ToStringPath() throws StopRequestException
+	{	source.checkInterruption();
 		return path.toString();
 	}
 	
@@ -126,7 +126,7 @@ public class PathFinder {
 		
 		Noeud courant=new Noeud(x,y,tab[x][y],0,source);//case où se trouve ia.
 		Tree tree=new Tree(courant,source);//on cree une arbre pour voir le path.
-		NoeudAstar comparator=new NoeudAstar(goal);//utilise pour l'algorithme Aetoile
+		NoeudAstar comparator=new NoeudAstar(goal,source);//utilise pour l'algorithme Aetoile
 		PriorityQueue<Noeud> frange = new PriorityQueue<Noeud>(1,comparator);//les elements sont inseres en respectant l'ordre du cout et de l'heuristique.
 		LinkedList<Noeud> open=new LinkedList<Noeud>();//liste des elements qu'on regarde.
 		LinkedList<Noeud> closed=new LinkedList<Noeud>();//liste des elements qu'on a dejà regardé.

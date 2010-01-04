@@ -847,6 +847,7 @@ public class Launcher
 	 * - Moteur :
 	 * - GUI :
 	 * - IA :
+	 * 		- utilitaire permettant de controller les checkinterruptions dans les programmes des étudiants
 	 * - stats :
 	 * 		- possibilité d'exporter/importer les stats sous forme de fichier texte (pour quand on change les classes stat)
 	 * - Divers :
@@ -1195,9 +1196,5 @@ public class Launcher
 	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
 	 */
 
-	/*
-	 * écrire un programme pour controller les checkinterruptions dans les programmes des étudiants
-	 */
-	
 	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux
 }

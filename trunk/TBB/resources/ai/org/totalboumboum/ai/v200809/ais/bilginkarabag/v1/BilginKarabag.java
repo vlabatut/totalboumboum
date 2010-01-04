@@ -113,6 +113,7 @@ public class BilginKarabag extends ArtificialIntelligence
 			{	// on en tire une au hasard
 				boolean found = false;
 				for (AiTile tile : tiles) {
+					checkInterruption();
 					if (!dangerous(tile)) {
 						nextTile = tile;
 						found = true;

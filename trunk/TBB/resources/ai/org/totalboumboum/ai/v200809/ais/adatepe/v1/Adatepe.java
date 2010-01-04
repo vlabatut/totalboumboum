@@ -103,7 +103,7 @@ public class Adatepe extends ArtificialIntelligence
 		int yMax = zone.getHeigh();
 		int i,j;
 		for(i = 0; i < xMax; i++)
-		{	checkInterruption(); 
+		{	checkInterruption();
 			for(j = 0; j < yMax; j++)
 			{	checkInterruption(); 
 				boardTiles[i][j] = 0;
