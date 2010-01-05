@@ -202,7 +202,7 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 	// si en laisssan t un bombe on laisse un adversaire entre les bombes et bombes nous le mettons si on pourra nous echapper
 	  private void attaque() throws StopRequestException { 
-		  // avant tout : testd'interruption checkInterruption();
+		  checkInterruption();
 	  
 	  int i = bomberman.getCol(); int j = bomberman.getLine();
 	  
@@ -313,7 +313,7 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 			}
 			if (res != null && res != caseactuelle) {
 				Astar dest = new Astar(map, bomberman.getCol(), bomberman
-						.getLine(), res.getCol(), res.getLine());
+						.getLine(), res.getCol(), res.getLine(),this);
 				AiTile prochaine = null;
 
 				if (dest != null && dest.findPathreach()) {
@@ -419,7 +419,7 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 
 		if (resultat != null && resultat != caseactuelle) {
 			Astar dest = new Astar(map, bomberman.getCol(),
-					bomberman.getLine(), resultat.getCol(), resultat.getLine());
+					bomberman.getLine(), resultat.getCol(), resultat.getLine(),this);
 
 			AiTile prochaine = null;
 
@@ -467,7 +467,7 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 				opt = 0;
 
 				meilleur_astar = new Astar(map, bomberman.getCol(), bomberman
-						.getLine(), option.getCol(), option.getLine());
+						.getLine(), option.getCol(), option.getLine(),this);
 				if (meilleur_astar.findPath()) {
 					Deque<Integer> deque = meilleur_astar.getPath();
 
@@ -526,7 +526,7 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 				checkInterruption(); // APPEL OBLIGATOIRE
 				if (tile.getCol() != col || tile.getLine() != line) {
 					fuite = new Astar(map, tile.getCol(), tile.getLine(), col,
-							line);
+							line,this);
 
 					if (test_sur(zone.getTile(line, col))
 							&& zone.getTile(line, col).getBlocks().size() == 0) {
@@ -624,7 +624,7 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		}
 
 		Astar bonus_astar = new Astar(map, bomberman.getCol(), bomberman
-				.getLine(), tile.getCol(), tile.getLine());
+				.getLine(), tile.getCol(), tile.getLine(),this);
 		if (bonus_astar != null && tile != caseactuelle
 				&& bonus_astar.findPath()) {
 			res = false;
@@ -650,8 +650,9 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		boolean res=false;
 		Iterator <AiBlock> it=zone.getBlocks().iterator();
 		while (it.hasNext() && !res)
-			{AiBlock temp=it.next();
-			Astar a =new Astar (map,bomberman.getCol(),bomberman.getLine(),temp.getCol(),temp.getLine());
+		{	checkInterruption();
+			AiBlock temp=it.next();
+			Astar a =new Astar (map,bomberman.getCol(),bomberman.getLine(),temp.getCol(),temp.getLine(),this);
 			if (temp.isDestructible() &&a.findPathreach()) 
 				res=true;
 			}

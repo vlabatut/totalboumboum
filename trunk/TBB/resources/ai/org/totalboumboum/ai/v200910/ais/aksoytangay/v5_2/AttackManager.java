@@ -393,7 +393,7 @@ public class AttackManager {
 				else
 				{	myAI.checkInterruption();
 					while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmpTile = percepts.getTile(tmpTile.getLine()+1, tmpTile.getCol());
 					}
@@ -877,7 +877,7 @@ public class AttackManager {
 			int i = 0;
 			int j = 0;
 			while(i<3)
-			{
+			{	myAI.checkInterruption();
 				tmpTile = percepts.getTile(tmpTile.getLine()+1, tmpTile.getCol());
 				if(myAI.isDangerous(tmpTile))
 				{	myAI.checkInterruption();
@@ -888,7 +888,7 @@ public class AttackManager {
 				i++;
 			}
 			while(j<3)
-			{
+			{	myAI.checkInterruption();
 				tmpTile = percepts.getTile(tmpTile.getLine()-1, tmpTile.getCol());
 				if(myAI.isDangerous(tmpTile))
 				{	myAI.checkInterruption();
