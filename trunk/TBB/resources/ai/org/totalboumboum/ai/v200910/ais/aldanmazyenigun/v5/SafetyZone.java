@@ -384,7 +384,8 @@ public class SafetyZone {
 		return attackMatrix;
 	}
 
-	public double getCaseLevel(int line, int col) {
+	public double getCaseLevel(int line, int col) throws StopRequestException {
+		ai.checkInterruption();
 		return matrix[line][col];
 	}
 

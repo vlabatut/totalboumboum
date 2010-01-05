@@ -512,12 +512,8 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		checkInterruption();
 		boolean result = false;
 
-		try {
-			result = safetyZone.isSafe(tile.getCol(), tile.getLine());
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		result = safetyZone.isSafe(tile.getCol(), tile.getLine());
+		
 		return result;
 	}
 
@@ -525,12 +521,8 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		checkInterruption();
 		boolean result = false;
 
-		try {
-			result = safetyZone.isBonus(tile.getCol(), tile.getLine());
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		result = safetyZone.isBonus(tile.getCol(), tile.getLine());
+		
 		return result;
 	}
 
@@ -539,12 +531,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		checkInterruption();
 		boolean result = false;
 
-		try {
-			result = safetyZone.iswall(tile.getCol(), tile.getLine());
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		result = safetyZone.iswall(tile.getCol(), tile.getLine());
 		return result;
 	}
 
@@ -552,12 +539,8 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		checkInterruption();
 		boolean result = false;
 
-		try {
-			result = safetyZone.isHero(tile.getCol(), tile.getLine());
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		result = safetyZone.isHero(tile.getCol(), tile.getLine());
+		
 		return result;
 	}
 
@@ -606,19 +589,23 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 
 
-	public void setAccessible(boolean accessible) {
+	public void setAccessible(boolean accessible) throws StopRequestException {
+		checkInterruption(); 
 		this.bonusAccessible = accessible;
 	}
 
-	public boolean isBonusAccessible() {
+	public boolean isBonusAccessible() throws StopRequestException {
+		checkInterruption(); 
 		return bonusAccessible;
 	}
 
-	public void setHeroAccessible(boolean accessible) {
+	public void setHeroAccessible(boolean accessible) throws StopRequestException {
+		checkInterruption(); 
 		this.heroAccessible = accessible;
 	}
 
-	public boolean isHeroAccessible() {
+	public boolean isHeroAccessible() throws StopRequestException {
+		checkInterruption(); 
 		return heroAccessible;
 	}
 
