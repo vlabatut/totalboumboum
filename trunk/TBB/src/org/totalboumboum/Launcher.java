@@ -1081,7 +1081,7 @@ public class Launcher
 	 *  	- que testent les niveaux utilisés dans les tournois ?
 	 *  
 	 *  x) tournoi (vidéo) + pas possible tête de série ni tournoi à 12
-	 *  x) utilitaire pour controler les IA des étudiants
+	 *  x) utilitaire pour controler les IA des étudiants (partage 3/2)
 	 *  x) à quoi servent les niveaux
 	 */
 	
