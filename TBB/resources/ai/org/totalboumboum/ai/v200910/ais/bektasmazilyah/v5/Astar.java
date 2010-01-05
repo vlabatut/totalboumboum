@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
 
@@ -30,9 +31,12 @@ public final class Astar {
 		Node parent;
 		int gcost;
 		int hcost;
-
+		ArtificialIntelligence ai;
+		
 		// on cree les noeuds
-		public Node(int x, int y) {
+		public Node(int x, int y, ArtificialIntelligence ai) throws StopRequestException {
+			ai.checkInterruption();
+			this.ai = ai;
 			assert x >= 0 && x < map.x : "x = " + x;
 			assert y >= 0 && y < map.y : "y = " + y;
 
@@ -40,13 +44,14 @@ public final class Astar {
 			this.y = y;
 		}
 
-		public void calculateHeuristic() {
-
+		public void calculateHeuristic() throws StopRequestException {
+			ai.checkInterruption();
 			hcost = (Math.abs(x - destination.x) + Math.abs(y - destination.y))
 					* (VERTICAL_COST + HORIZONTAL_COST) / 2;
 		}
 
-		public void setParent(Node parent) {
+		public void setParent(Node parent) throws StopRequestException {
+			ai.checkInterruption();
 			this.parent = parent;
 			if (parent.x == x) {
 
@@ -82,14 +87,17 @@ public final class Astar {
 
 
 	private final int[] closed;
-
+	ArtificialIntelligence ai;
+	
 	public Astar(DangerZone map, int originX, int originY, int destinationX,
-			int destinationY) {
+			int destinationY, ArtificialIntelligence ai) throws StopRequestException {
+		ai.checkInterruption();
+		this.ai = ai;
 		assert map != null : "map = " + map;
 
 		this.map = map;
-		destination = new Node(destinationX, destinationY);
-		origin = new Node(originX, originY);
+		destination = new Node(destinationX, destinationY,ai);
+		origin = new Node(originX, originY,ai);
 
 		open = new PriorityQueue<Node>(Math.max(map.x, map.y) * 2,
 				COST_CMP);
@@ -112,17 +120,20 @@ public final class Astar {
 	 * @param x
 	 * @param y
 	 * @param parent
+	 * @throws StopRequestException 
 	 */
 
 
 	
 
 
-	private void addToOpen(int x, int y, Node parent) {
-		Node openNode = new Node(x, y);
+	private void addToOpen(int x, int y, Node parent) throws StopRequestException {
+		ai.checkInterruption();
+		Node openNode = new Node(x, y,ai);
 		openNode.setParent(parent);
 
 		replacing: for (Iterator<Node> i = open.iterator(); i.hasNext();) {
+			ai.checkInterruption();
 			Node existing = i.next();
 			if (existing.x == x && existing.y == y) {
 				if (existing.gcost > openNode.gcost) {
@@ -145,8 +156,10 @@ public final class Astar {
 	 * @throws StopRequestException 
 	 */
 	public boolean findPath() throws StopRequestException {
+		ai.checkInterruption();
 		Node current = origin;
 		while (current != null && (current.x != destination.x || current.y != destination.y)) {
+			ai.checkInterruption();
 			process(current);
 			current = open.poll();
 		}
@@ -160,8 +173,10 @@ public final class Astar {
 	}
 	
 	public boolean findSecurePath() throws StopRequestException {
+		ai.checkInterruption();
 		Node current = origin;
 		while (current != null && (current.x != destination.x || current.y != destination.y)) {
+			ai.checkInterruption();
 			processBonus(current);
 			current = open.poll();
 		}
@@ -175,9 +190,11 @@ public final class Astar {
 	}
 	
 	public boolean findPathSurWall() throws StopRequestException
-	{
+	{	ai.checkInterruption();
+	
 		Node current = origin;
 		while (current != null && (current.x != destination.x || current.y != destination.y)) {
+			ai.checkInterruption();
 			processWall(current);
 			current = open.poll();
 		}
@@ -197,7 +214,8 @@ public final class Astar {
 
 
 
-	public Deque<Integer> getPath() {
+	public Deque<Integer> getPath() throws StopRequestException {
+		ai.checkInterruption();
 		assert destination.parent != null
 				|| (destination.x == origin.x && destination.y == origin.y);
 
@@ -205,6 +223,7 @@ public final class Astar {
 		Node current = destination;
 
 		while (current != null) {
+			ai.checkInterruption();
 			path.addFirst(current.y);
 			path.addFirst(current.x);
 			current = current.parent;
@@ -219,8 +238,10 @@ public final class Astar {
 	 * @param x
 	 * @param y
 	 * @return
+	 * @throws StopRequestException 
 	 */
-	private boolean isClosed(int x, int y) {
+	private boolean isClosed(int x, int y) throws StopRequestException {
+		ai.checkInterruption();
 		int i = map.x * y + x;
 		return (closed[i >> 5] & (1 << (i & 31))) != 0;
 	}
@@ -241,6 +262,7 @@ public final class Astar {
 	
 
 	private void process(Node node) throws StopRequestException {
+		ai.checkInterruption();
 		// no need to process it twice
 		setClosed(node.x, node.y);
 		int c = node.x;
@@ -254,7 +276,9 @@ public final class Astar {
 
 		// check all the neighbors
 		for (int x = lX; x <= uX; ++x) {
+			ai.checkInterruption();
 			for (int y = lY; y <= uY; ++y) {
+				ai.checkInterruption();
 				if (!isClosed(x, y) && map.isWalkable(x, y)
 						&& (c == x || cy == y)) {
 					addToOpen(x, y, node);
@@ -264,6 +288,7 @@ public final class Astar {
 	}
 	
 	private void processBonus(Node node) throws StopRequestException {
+		ai.checkInterruption();
 		// no need to process it twice
 		setClosed(node.x, node.y);
 		int c = node.x;
@@ -277,7 +302,9 @@ public final class Astar {
 
 		// check all the neighbors
 		for (int x = lX; x <= uX; ++x) {
+			ai.checkInterruption();
 			for (int y = lY; y <= uY; ++y) {
+				ai.checkInterruption();
 				if (!isClosed(x, y) && map.canGoToBonus(x, y)
 						&& (c == x || cy == y)) {
 					addToOpen(x, y, node);
@@ -287,6 +314,7 @@ public final class Astar {
 	}
 	
 	private void processWall(Node node) throws StopRequestException {
+		ai.checkInterruption();
 		// no need to process it twice
 		setClosed(node.x, node.y);
 		int c = node.x;
@@ -300,7 +328,9 @@ public final class Astar {
 
 		// check all the neighbors
 		for (int x = lX; x <= uX; ++x) {
+			ai.checkInterruption();
 			for (int y = lY; y <= uY; ++y) {
+				ai.checkInterruption();
 				if (!isClosed(x, y) && map.canGoRival(x, y)
 						&& (c == x || cy == y)) {
 					addToOpen(x, y, node);
@@ -314,8 +344,10 @@ public final class Astar {
 	 * 
 	 * @param x
 	 * @param y
+	 * @throws StopRequestException 
 	 */
-	private void setClosed(int x, int y) {
+	private void setClosed(int x, int y) throws StopRequestException {
+		ai.checkInterruption();
 		int i = map.x * y + x;
 		closed[i >> 5] |= (1 << (i & 31));
 	}
