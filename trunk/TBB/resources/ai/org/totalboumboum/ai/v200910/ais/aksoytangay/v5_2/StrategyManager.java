@@ -457,7 +457,8 @@ public class StrategyManager {
 		
 	}
 	
-	public List<AiBomb> getBombs() {
+	public List<AiBomb> getBombs() throws StopRequestException {
+		myAI.checkInterruption();
 		return bombs;
 	}
 	

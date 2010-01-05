@@ -42,13 +42,15 @@ public class AksoyTangay extends ArtificialIntelligence
 	
 	private AiHero ownHero = null;
 	
-	public AiHero getOwnHero() {
+	public AiHero getOwnHero() throws StopRequestException {
+		checkInterruption();
 		return ownHero;
 	}
 
 
 	
-	public AiTile getOwnHeroTile() {
+	public AiTile getOwnHeroTile() throws StopRequestException {
+		checkInterruption();
 		return ownHeroTile;
 	}
 
@@ -308,7 +310,7 @@ public class AksoyTangay extends ArtificialIntelligence
 		AiHero tmpHero = null;
 		
 		while (itrHero.hasNext()) {
-			
+			checkInterruption();
 			if(tmpHero!=getOwnHero())
 			{	
 				tmpHero = itrHero.next();
@@ -341,6 +343,7 @@ public class AksoyTangay extends ArtificialIntelligence
 		Iterator<AiItem> itrItems = items.iterator();
 		
 		while (itrItems.hasNext()) {
+			checkInterruption();
 			AiItem aiItem = (AiItem) itrItems.next();
 			
 			AiPath tmpPath = pathManager.getShortestPathToOneTile(getOwnHero(), getOwnHeroTile(), aiItem.getTile());

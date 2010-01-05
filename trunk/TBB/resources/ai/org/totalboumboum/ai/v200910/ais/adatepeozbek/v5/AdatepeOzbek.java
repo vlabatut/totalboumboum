@@ -45,10 +45,10 @@ public class AdatepeOzbek extends ArtificialIntelligence
 			enemies = new ArrayList<Enemy>();
 			List<AiHero> remaining = zone.getRemainingHeroes();
 			for(int i = 0; i<remaining.size();i++)
-			{
+			{	checkInterruption();
 				if(remaining.get(i) == zone.getOwnHero())
 					continue;
-				enemies.add(new Enemy(zone.getHeroes().get(i), EnemyTypes.UNKNOWN));
+				enemies.add(new Enemy(zone.getHeroes().get(i), EnemyTypes.UNKNOWN,this));
 			}
 		}
 		

@@ -187,7 +187,7 @@ public class Zone {
 	 * @throws StopRequestException
 	 */
 	public State[][] getMatrix() throws StopRequestException
-	{
+	{	myAI.checkInterruption();
 		//System.out.println("getmatrix.zone");
 		return matrix;
 	}
@@ -202,19 +202,23 @@ public class Zone {
 		return matrix;
 	}
 	
-	public void setZone(AiZone zone) {
+	public void setZone(AiZone zone) throws StopRequestException {
+		myAI.checkInterruption();
 		this.zone = zone;
 	}
 
-	public AiZone getZone() {
+	public AiZone getZone() throws StopRequestException {
+		myAI.checkInterruption();
 		return zone;
 	}
 	
-	public Collection<AiBomb> getBombs() {
+	public Collection<AiBomb> getBombs() throws StopRequestException {
+		myAI.checkInterruption();
 		return bombs;
 	}
 	
-	public Collection<AiItem> getItems() {
+	public Collection<AiItem> getItems() throws StopRequestException {
+		myAI.checkInterruption();
 		return items;
 	}
 }
