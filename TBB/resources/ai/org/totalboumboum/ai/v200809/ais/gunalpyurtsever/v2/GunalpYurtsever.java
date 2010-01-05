@@ -279,13 +279,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		CostTile head =new CostTile(ownHero.getTile(),0,tileGone,Direction.NONE,this);
 		head.setmarkVisited(true);
 		ArrayList<AiTile> tiles = null;
-		try {
 			tiles = getClearNeighbors(head.getAiTile(),true);
-		} catch (StopRequestException e) {
-			
-			e.printStackTrace();
-			
-		}
 
 		while(!tiles.isEmpty()){
 			checkInterruption(); //APPEL OBLIGATOIRE
@@ -303,17 +297,11 @@ public class GunalpYurtsever extends ArtificialIntelligence
 			CostTile costTile = queue.poll();
 			if(!costTile.getmarkVisited()){
 				costTile.setmarkVisited(true);
-				try {
 					if(costTile.getCost()>1)
 						tiles = getClearNeighbors(costTile.getAiTile(),false);
 					else
 						tiles = getClearNeighbors(costTile.getAiTile(),true);
 				
-				} catch (StopRequestException e) {
-				
-					e.printStackTrace();
-				
-				}
 				while(!tiles.isEmpty()){
 					checkInterruption(); //APPEL OBLIGATOIRE
 					

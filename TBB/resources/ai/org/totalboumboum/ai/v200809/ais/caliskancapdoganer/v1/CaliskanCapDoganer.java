@@ -130,11 +130,8 @@ public class CaliskanCapDoganer extends ArtificialIntelligence
 			{	nextTile = tempTile;
 				if (!CheckAvailability())
                 {
-                    try{
 					    pickNextTile();
-                    }catch(Exception e){
-                       // e.printStackTrace();      //on ne montre pas d'erreurs
-                    }
+                    
                 }
 				previousTile = currentTile;
 			}
