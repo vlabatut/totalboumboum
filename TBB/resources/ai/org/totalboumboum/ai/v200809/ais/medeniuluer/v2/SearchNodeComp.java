@@ -2,6 +2,9 @@ package org.totalboumboum.ai.v200809.ais.medeniuluer.v2;
 
 import java.util.Comparator;
 
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
+
 public class SearchNodeComp implements Comparator<SearchNode> {
 
 	/** noeud cible:reference qu'on va utiliser en comparant les noeuds */
@@ -12,10 +15,11 @@ public class SearchNodeComp implements Comparator<SearchNode> {
 	 * 
 	 * @param goal
 	 *            noeud qu'on prend comme reference en comparant les noeuds
+	 * @throws StopRequestException 
 	 */
-	public SearchNodeComp(SearchNode goal)
+	public SearchNodeComp(SearchNode goal, ArtificialIntelligence ai) throws StopRequestException
 	{
-		
+		ai.checkInterruption();
 		this.goal=goal;
 	}
 
@@ -35,8 +39,20 @@ public class SearchNodeComp implements Comparator<SearchNode> {
 		int resultat;
 	//somme de l'heuristique et du cout pour chaque noeud
 	//on va utiliser pour l'algorithme de A_étoile
-	int n_1=node1.getHeuristic(goal)+  node1.getCout();
-	int n_2=node2.getHeuristic(goal)+  node2.getCout();
+	int n_1=0;
+	try {
+		n_1 = node1.getHeuristic(goal)+  node1.getCout();
+	} catch (StopRequestException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	int n_2=0;
+	try {
+		n_2 = node2.getHeuristic(goal)+  node2.getCout();
+	} catch (StopRequestException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	
 	
 		if(n_1<n_2)

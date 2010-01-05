@@ -134,6 +134,7 @@ public final class Astar {
 		openNode.setParent(parent);
 
 		replacing: for (Iterator<Node> i = open.iterator(); i.hasNext();) {
+			ai.checkInterruption();
 			Node existing = i.next();
 			if (existing.x == x && existing.y == y) {
 				if (existing.gcost > openNode.gcost) {
@@ -155,6 +156,7 @@ public final class Astar {
 		openNode.setParent(parent);
 
 		replacing: for (Iterator<Node> i = openchoix.iterator(); i.hasNext();) {
+			ai.checkInterruption();
 			Node existing = i.next();
 			if (existing.x == x && existing.y == y) {
 				if (existing.gcost > openNode.gcost) {
@@ -176,6 +178,7 @@ public final class Astar {
 		openNode.setParent(parent);
 
 		replacing: for (Iterator<Node> i = openexp.iterator(); i.hasNext();) {
+			ai.checkInterruption();
 			Node existing = i.next();
 			if (existing.x == x && existing.y == y) {
 				if (existing.gcost > openNode.gcost) {
@@ -197,6 +200,7 @@ public final class Astar {
 		openNode.setParent(parent);
 
 		replacing: for (Iterator<Node> i = opendang.iterator(); i.hasNext();) {
+			ai.checkInterruption();
 			Node existing = i.next();
 			if (existing.x == x && existing.y == y) {
 				if (existing.gcost > openNode.gcost) {

@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.astaralgorithm;
 
 import java.util.Comparator;
 
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 
@@ -9,16 +10,18 @@ public class NoeudComparator implements Comparator<Noeud> {
 
 	/** noeud cible:reference qu'on va utiliser en comparant les noeuds */
 	private Noeud goal;
-
+	ArtificialIntelligence ai;
+	
 	/**
 	 * Constructeur.
 	 * 
 	 * @param goal
 	 *            noeud qu'on prend comme reference en comparant les noeuds
+	 * @throws StopRequestException 
 	 */
-	public NoeudComparator(Noeud goal)
-	{
-		
+	public NoeudComparator(Noeud goal, ArtificialIntelligence ai) throws StopRequestException
+	{	ai.checkInterruption();
+		this.ai = ai;		
 		this.goal=goal;
 	}
 

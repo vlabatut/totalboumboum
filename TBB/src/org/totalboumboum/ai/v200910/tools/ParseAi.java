@@ -31,15 +31,24 @@ import java.io.IOException;
 
 import org.totalboumboum.tools.files.FileNames;
 
+/**
+ * cette méthode parse les codes sources définissant une IA et vérifie
+ * que les appels à checkInterruption sont effectués correctement
+ * 
+ * @author Vincent Labatut
+ */
 public class ParseAi
-{
+{	private static boolean verbose = false;
+	
 	public static void main(String[] args) throws IOException, ParseException
 	{	String aiPack = "resources/ai/org/totalboumboum/ai/v200809/ais";
 		parseAiPack(aiPack);
 	}
 	
-	private static void parseFile(File file) throws ParseException, IOException
-	{	System.out.println("Analyse de la classe "+file.getPath());
+	private static void parseFile(File file, int level) throws ParseException, IOException
+	{	for(int i=0;i<level;i++)
+			System.out.print("..");
+		System.out.println("Analyse de la classe "+file.getPath());
 		
 		// creates an input stream for the file to be parsed
         FileInputStream in = new FileInputStream(file);
@@ -54,26 +63,32 @@ public class ParseAi
         }
 
         // display trace
-        AiVisitor visitor = new AiVisitor();
+        AiVisitor visitor = new AiVisitor(level);
         visitor.visit(cu,null);
         int errorCount = visitor.getErrorCount();
         if(errorCount>0)
+        {	for(int i=0;i<level;i++)
+				System.out.print("..");
         	System.out.println("   total : "+errorCount);
+        }
 	}
 	
-	private static void parseFolder(File folder) throws ParseException, IOException
+	private static void parseFolder(File folder, int level) throws ParseException, IOException
 	{	System.out.println("Analyse du paquetage "+folder.getPath());
 	
 		File[] files = folder.listFiles();
 		for(File file: files)
 		{	if(file.isDirectory())
-				parseFolder(file);
+				parseFolder(file,level+1);
 			else
 			{	String filename = file.getName();
 				if(filename.endsWith(FileNames.EXTENSION_JAVA))
-					parseFile(file);
-				else
+					parseFile(file,level+1);
+				else if(verbose)
+				{	for(int i=0;i<level;i++)
+						System.out.print("..");
 					System.out.println("Le fichier "+file.getPath()+" n'a pas été reconnu comme un source Java");
+				}
 			}
 		}		
 	}
@@ -83,10 +98,11 @@ public class ParseAi
 		parseAi(aiFolder);
 	}
 	private static void parseAi(File aiFolder) throws ParseException, IOException
-	{	System.out.println("---------------------------------------------");
+	{	System.out.println("----------------------------------------------------------------------");
 		System.out.println("Analyse de l'AI "+aiFolder.getPath());
-		parseFolder(aiFolder);
-		System.out.println();
+		System.out.println("----------------------------------------------------------------------");
+		parseFolder(aiFolder,0);
+		System.out.print("\n\n");
 	}
 	
 	public static void parseAiPack(String aiPack) throws ParseException, IOException

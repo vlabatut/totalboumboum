@@ -150,7 +150,8 @@ public class PathFinder {
 		}
 	}
 
-	public String toStringPath() {
+	public String toStringPath() throws StopRequestException {
+		source.checkInterruption(); // Appel Obligatoire
 		return path.toString();
 	}
 
@@ -200,7 +201,7 @@ public class PathFinder {
 		// trouve ia.
 		Tree tree = new Tree(courant, source);// on cree une arbre pour voir le
 		// path.
-		NoeudComparator comparator = new NoeudComparator(goal);// utilise pour
+		NoeudComparator comparator = new NoeudComparator(goal,source);// utilise pour
 		// l'algorithme
 		// Aetoile
 		PriorityQueue<Noeud> frange = new PriorityQueue<Noeud>(1, comparator);// les

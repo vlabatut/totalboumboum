@@ -140,7 +140,8 @@ public class PathFinder {
 		}
 	}
 
-	public String toStringPath() {
+	public String toStringPath() throws StopRequestException {
+		mu.checkInterruption();
 		return path.toString();
 	}
 
@@ -167,7 +168,7 @@ public class PathFinder {
 
 		SearchNode courant = new SearchNode(x, y, tab[x][y], 0, mu);
 		SearchTree tree = new SearchTree(courant, mu);
-		SearchNodeComp comp = new SearchNodeComp(goal);
+		SearchNodeComp comp = new SearchNodeComp(goal,mu);
 		
 		//A etoile;
 		PriorityQueue<SearchNode> frange = new PriorityQueue<SearchNode>(1, comp);

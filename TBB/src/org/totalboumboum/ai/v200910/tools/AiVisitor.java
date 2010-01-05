@@ -21,9 +21,12 @@ package org.totalboumboum.ai.v200910.tools;
  * 
  */
 
+import java.util.Arrays;
 import java.util.List;
 
 import japa.parser.ast.TypeParameter;
+import japa.parser.ast.body.BodyDeclaration;
+import japa.parser.ast.body.ClassOrInterfaceDeclaration;
 import japa.parser.ast.body.ConstructorDeclaration;
 import japa.parser.ast.body.MethodDeclaration;
 import japa.parser.ast.body.Parameter;
@@ -33,26 +36,109 @@ import japa.parser.ast.expr.MethodCallExpr;
 import japa.parser.ast.expr.NameExpr;
 import japa.parser.ast.stmt.BlockStmt;
 import japa.parser.ast.stmt.DoStmt;
+import japa.parser.ast.stmt.ExplicitConstructorInvocationStmt;
 import japa.parser.ast.stmt.ExpressionStmt;
 import japa.parser.ast.stmt.ForStmt;
 import japa.parser.ast.stmt.ForeachStmt;
 import japa.parser.ast.stmt.Statement;
 import japa.parser.ast.stmt.WhileStmt;
+import japa.parser.ast.type.ClassOrInterfaceType;
 import japa.parser.ast.visitor.VoidVisitorAdapter;
 
+/**
+ * cette méthode parse les codes sources définissant une IA et vérifie
+ * que les appels à checkInterruption sont effectués correctement, c'est à dire :
+ * 	- un appel à chaque début de boucle (for, while, do)
+ * 	- un appel à chaque début de méthode, sauf :
+ * 		- dans un constructeur :
+ * 			- en cas d'appel à super() : checkInterruption() est appelé en deuxième (et non pas en premier)
+ * 			- dans une classe implémentant l'interface ArtificialIntelligence
+ * 		- dans une méthode dont on ne contrôle pas l'interface (du type toString, equals, compare, etc.)
+ * 	- l'appel ne doit pas être placé dans un try-catch qui annulerait son effet
+ * 
+ * @author Vincent Labatut
+ */
 public class AiVisitor extends VoidVisitorAdapter<Object>
-{
-	private static String CHECK_INTERRUPTION = "checkInterruption";
+{	
+
+	public AiVisitor(int initLevel)
+	{	indentLevel = initLevel;		
+	}
 	
-	int errorCount = 0;
+	/////////////////////////////////////////////////////////////////
+	// MISC	CONSTANTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final static String ARTIFICIAL_INTELLIGENCE_CLASS = "ArtificialIntelligence";
+	private final static String CHECK_INTERRUPTION_METHOD = "checkInterruption";
+	private final static List<String> IGNORED_METHODS = Arrays.asList(new String[]
+	{	"AiMain",			
+		"compare",
+		"equals",
+		"toString"
+	});
+
+	/////////////////////////////////////////////////////////////////
+	// MISC VARIABLES	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String currentMethod = null;
+	private int indentLevel;
+	private boolean checkConstructor;
+	
+	/////////////////////////////////////////////////////////////////
+	// ERROR COUNT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int errorCount = 0;
 	
 	public int getErrorCount()
 	{	return errorCount;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// VISITOR			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+    @Override
+    public void visit(ClassOrInterfaceDeclaration n, Object arg)
+    {	checkConstructor = true;
+    
+    	if(n.getJavaDoc() != null)
+    	{	n.getJavaDoc().accept(this, arg);
+        }
+        if(n.getAnnotations() != null)
+        {	for(AnnotationExpr a : n.getAnnotations())
+        	{	a.accept(this, arg);
+            }
+        }
+        if(n.getTypeParameters() != null)
+        {	for (TypeParameter t : n.getTypeParameters())
+        	{	t.accept(this, arg);
+            }
+        }
+        if(n.getExtends() != null)
+        {	for (ClassOrInterfaceType c : n.getExtends())
+        	{	if(c.getName().equals(ARTIFICIAL_INTELLIGENCE_CLASS))
+        			checkConstructor = false;
+        		c.accept(this, arg);
+            }
+        }
+        if(n.getImplements() != null)
+        {	for(ClassOrInterfaceType c : n.getImplements())
+        	{	c.accept(this, arg);
+            }
+        }
+        if(n.getMembers() != null)
+        {	for (BodyDeclaration member : n.getMembers())
+        	{	member.accept(this, arg);
+            }
+        }
+    }
+
     @Override
     public void visit(ConstructorDeclaration n, Object arg)
-    {	if (n.getJavaDoc() != null)
+    {	String prevMethod = currentMethod;
+    	currentMethod = n.getName();
+    	indentLevel++;
+
+    	if (n.getJavaDoc() != null)
     	{	n.getJavaDoc().accept(this, arg);
         }
         if(n.getAnnotations() != null)
@@ -75,18 +161,25 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
         	{	name.accept(this, arg);
             }
         }
-        String name = n.getName();
         BlockStmt block = n.getBlock();
-        System.out.println("Analyse du constructeur "+name);
-    	if(!name.equals("AiMain"))
-    	{	checkBlock(block);  
-    	}
+        for(int i=0;i<indentLevel;i++)
+			System.out.print("..");
+		System.out.println("Analyse du constructeur "+currentMethod);
+    	if(checkConstructor)
+    		checkBlock(block);
         block.accept(this, arg);
-    }
+        
+        currentMethod = prevMethod;
+    	indentLevel--;
+   }
 
     @Override
     public void visit(MethodDeclaration n, Object arg) 
-	{	if(n.getJavaDoc() != null)
+	{	String prevMethod = currentMethod;
+		currentMethod = n.getName();
+    	indentLevel++;
+		
+		if(n.getJavaDoc() != null)
 		{	n.getJavaDoc().accept(this, arg);
         }
         if(n.getAnnotations() != null)
@@ -111,17 +204,19 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
             }
         }
         if(n.getBody() != null)
-        {	String name = n.getName();
-        	BlockStmt block = n.getBody();
+        {	BlockStmt block = n.getBody();
 //if(name.equals("getZoneArray"))
 //	System.out.println();
-        	System.out.println("Analyse de la méthode "+name);
-        	if(!name.equals("equals") && !name.equals("compare") && !name.equals("toString"))
-        	{	checkBlock(block);  
-        	}
+        	for(int i=0;i<indentLevel;i++)
+				System.out.print("..");
+        	System.out.println("Analyse de la méthode "+currentMethod);
+        	checkBlock(block);  
         	block.accept(this, arg);
         }
-    }
+        
+        currentMethod = prevMethod;
+    	indentLevel--;
+  }
 	
 	@Override
 	public void visit(DoStmt n, Object arg)
@@ -170,51 +265,103 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
     }
 
 	private void checkBlock(Statement statement)
-	{	int line = statement.getBeginLine();
-		if(statement instanceof BlockStmt)
-		{ BlockStmt block = (BlockStmt) statement;
-			List<Statement> statements = block.getStmts();
-			if(!statements.isEmpty())
-			{	Statement firstStatement = statements.get(0);
-				line = firstStatement.getBeginLine();
-				if(firstStatement instanceof ExpressionStmt)
-				{	ExpressionStmt expressionStmt = (ExpressionStmt) firstStatement;
-					Expression expression = expressionStmt.getExpression();
-					if(expression instanceof MethodCallExpr)
-					{	MethodCallExpr methodCallExpr = (MethodCallExpr) expression;
-						String methodName = methodCallExpr.getName();
-						if(!methodName.equals(CHECK_INTERRUPTION))
-		        		{	// erreur
-		        			System.out.println("   Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION+"()");
+	{	if(!IGNORED_METHODS.contains(currentMethod))
+		{	int line = statement.getBeginLine();
+			if(statement instanceof BlockStmt)
+			{	BlockStmt block = (BlockStmt) statement;
+				List<Statement> statements = block.getStmts();
+				if(!statements.isEmpty())
+				{	Statement firstStatement = statements.get(0);
+					line = firstStatement.getBeginLine();
+					if(firstStatement instanceof ExpressionStmt)
+					{	ExpressionStmt expressionStmt = (ExpressionStmt) firstStatement;
+						Expression expression = expressionStmt.getExpression();
+						if(expression instanceof MethodCallExpr)
+						{	MethodCallExpr methodCallExpr = (MethodCallExpr) expression;
+							String methodName = methodCallExpr.getName();
+							if(!methodName.equals(CHECK_INTERRUPTION_METHOD))
+			        		{	// erreur
+								for(int i=0;i<indentLevel;i++)
+									System.out.print(">>");
+						       	System.out.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
+			        			errorCount++;
+			        			//TODO à compléter par la création d'un commentaire dans le code source
+			        		}
+						}
+						else
+						{	// erreur
+							for(int i=0;i<indentLevel;i++)
+								System.out.print(">>");
+					       	System.out.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 		        			errorCount++;
-		        			//TODO à compléter par la création d'un commentaire dans le code source
-		        		}
+							//TODO à compléter par la création d'un commentaire dans le code source
+						}
+					}
+					else if(firstStatement instanceof ExplicitConstructorInvocationStmt)
+					{	// c'est un appel à super(), donc ça doit forcément être au début
+						// mais la deuxième instruction doit être un appel à checkInterruption()
+						if(statements.size()<2)
+						{	// erreur
+							for(int i=0;i<indentLevel;i++)
+								System.out.print(">>");
+					       	System.out.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
+		        			errorCount++;
+							//TODO à compléter par la création d'un commentaire dans le code source
+						}
+						else
+						{	line = firstStatement.getBeginLine();
+							Statement secondStatement = statements.get(1);
+							if(secondStatement instanceof ExpressionStmt)
+							{	ExpressionStmt expressionStmt = (ExpressionStmt) secondStatement;
+								Expression expression = expressionStmt.getExpression();
+								if(expression instanceof MethodCallExpr)
+								{	MethodCallExpr methodCallExpr = (MethodCallExpr) expression;
+									String methodName = methodCallExpr.getName();
+									if(!methodName.equals(CHECK_INTERRUPTION_METHOD))
+					        		{	// erreur
+										for(int i=0;i<indentLevel;i++)
+											System.out.print(">>");
+								       	System.out.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
+					        			errorCount++;
+					        			//TODO à compléter par la création d'un commentaire dans le code source
+					        		}
+								}
+								else
+								{	// erreur
+									for(int i=0;i<indentLevel;i++)
+										System.out.print(">>");
+							       	System.out.println("Erreur ligne "+line+" : la deuxième instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
+				        			errorCount++;
+									//TODO à compléter par la création d'un commentaire dans le code source
+								}
+							}
+						}
 					}
 					else
 					{	// erreur
-						System.out.println("   Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION+"()");
+						for(int i=0;i<indentLevel;i++)
+							System.out.print(">>");
+				       	System.out.println("Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION_METHOD+"()");
 	        			errorCount++;
 						//TODO à compléter par la création d'un commentaire dans le code source
 					}
 				}
 				else
 				{	// erreur
-					System.out.println("   Erreur ligne "+line+" : la première instruction du bloc n'est pas un appel à "+CHECK_INTERRUPTION+"()");
-        			errorCount++;
+					for(int i=0;i<indentLevel;i++)
+						System.out.print("--");
+			       	System.out.println("Attention ligne "+line+" : le bloc est vide !");
 					//TODO à compléter par la création d'un commentaire dans le code source
 				}
 			}
 			else
 			{	// erreur
-				System.out.println("   Attention ligne "+line+" : le bloc est vide !");
+				for(int i=0;i<indentLevel;i++)
+					System.out.print(">>");
+		       	System.out.println("Erreur ligne "+line+" : bloc manquant, appel à "+CHECK_INTERRUPTION_METHOD+"() manquant également");
+				errorCount++;
 				//TODO à compléter par la création d'un commentaire dans le code source
 			}
-		}
-		else
-		{	// erreur
-			System.out.println("   Erreur ligne "+line+" : bloc manquant, appel à "+CHECK_INTERRUPTION+"() manquant également");
-			errorCount++;
-			//TODO à compléter par la création d'un commentaire dans le code source
 		}
 	}
 }

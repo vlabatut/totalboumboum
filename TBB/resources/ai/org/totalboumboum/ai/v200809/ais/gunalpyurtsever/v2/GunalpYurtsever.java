@@ -672,7 +672,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		
 		Collection<DangerPriorityTile> dangerTiles = markDangerTileswithPriority();
 		
-		DangerPriorityCostTileComparator myComparator= new DangerPriorityCostTileComparator(getPercepts().getWidth(),getPercepts().getHeigh());
+		DangerPriorityCostTileComparator myComparator= new DangerPriorityCostTileComparator(getPercepts().getWidth(),getPercepts().getHeigh(),this);
 
 		PriorityQueue<DangerPriorityCostTile> developperList = new PriorityQueue<DangerPriorityCostTile>(1,myComparator);
 		
