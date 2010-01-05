@@ -190,7 +190,8 @@ public class WallController {
 			return result;
 		}
 		
-		public AiPath getPath(){
+		public AiPath getPath() throws StopRequestException{
+			ai.checkInterruption();
 			return path;
 		}
 	}

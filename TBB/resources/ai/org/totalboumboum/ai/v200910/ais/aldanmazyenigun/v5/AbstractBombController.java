@@ -228,7 +228,8 @@ public class AbstractBombController {
 		return result;
 	}
 	
-	public AiPath getPath(){
+	public AiPath getPath() throws StopRequestException{
+		ai.checkInterruption();
 		return path;
 	}
 

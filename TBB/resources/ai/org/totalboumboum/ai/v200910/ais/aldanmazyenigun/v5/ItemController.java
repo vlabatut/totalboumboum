@@ -230,11 +230,13 @@ public class ItemController {
 			return result;
 		}
 
-		public void setBonusAccessible(boolean isBonusAccessible) {
+		public void setBonusAccessible(boolean isBonusAccessible) throws StopRequestException {
+			ai.checkInterruption();
 			this.isBonusAccessible = isBonusAccessible;
 		}
 
-		public boolean isBonusAccessible() {
+		public boolean isBonusAccessible() throws StopRequestException {
+			ai.checkInterruption();
 			return isBonusAccessible;
 		}
 		
