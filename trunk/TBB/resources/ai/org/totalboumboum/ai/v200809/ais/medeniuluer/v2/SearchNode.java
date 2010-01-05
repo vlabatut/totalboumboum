@@ -46,9 +46,10 @@ public class SearchNode {
 	 *            valeur du noeud
 	 * @param cout
 	 *            cout du noeud
+	 * @throws StopRequestException 
 	 */
-	public SearchNode(int x, int y, ZoneEnum valeur, int cout) {
-		super();
+	public SearchNode(int x, int y, ZoneEnum valeur, int cout) throws StopRequestException {
+		mu.checkInterruption(); //Appel Obligatoire
 		this.x = x;
 		this.y = y;
 		this.valeur = valeur;
@@ -109,9 +110,10 @@ public class SearchNode {
 	 *            coordonne y du noeud
 	 * @param valeur
 	 *            valeur du noeud
+	 * @throws StopRequestException 
 	 */
-	public SearchNode(int x, int y, ZoneEnum valeur) {
-		super();
+	public SearchNode(int x, int y, ZoneEnum valeur) throws StopRequestException {
+		mu.checkInterruption(); //Appel Obligatoire
 		this.x = x;
 		this.y = y;
 		this.valeur = valeur;
@@ -121,8 +123,10 @@ public class SearchNode {
 	 * Renvoie le coordonne x du noeud
 	 * 
 	 * @return coordonne x
+	 * @throws StopRequestException 
 	 */
-	public int getX() {
+	public int getX() throws StopRequestException {
+		mu.checkInterruption(); //Appel Obligatoire
 		return x;
 	}
 
@@ -131,8 +135,10 @@ public class SearchNode {
 	 * 
 	 * @param x
 	 *            coordonne x
+	 * @throws StopRequestException 
 	 */
-	public void setX(int x) {
+	public void setX(int x) throws StopRequestException {
+		mu.checkInterruption(); //Appel Obligatoire
 		this.x = x;
 	}
 
@@ -140,8 +146,10 @@ public class SearchNode {
 	 * Renvoie le coordonne y du noeud
 	 * 
 	 * @return coordonne y
+	 * @throws StopRequestException 
 	 */
-	public int getY() {
+	public int getY() throws StopRequestException {
+		mu.checkInterruption(); //Appel Obligatoire
 		return y;
 	}
 
@@ -150,8 +158,10 @@ public class SearchNode {
 	 * 
 	 * @param y
 	 *            coordonne y
+	 * @throws StopRequestException 
 	 */
-	public void setY(int y) {
+	public void setY(int y) throws StopRequestException {
+		mu.checkInterruption(); //Appel Obligatoire
 		this.y = y;
 	}
 
@@ -159,8 +169,10 @@ public class SearchNode {
 	 * Renvoie la valeur du noeud
 	 * 
 	 * @return valeur
+	 * @throws StopRequestException 
 	 */
-	public ZoneEnum getValeur() {
+	public ZoneEnum getValeur() throws StopRequestException {
+		mu.checkInterruption(); //Appel Obligatoire
 		return valeur;
 	}
 
@@ -169,8 +181,10 @@ public class SearchNode {
 	 * 
 	 * @param valeur
 	 *            valeur du noeud
+	 * @throws StopRequestException 
 	 */
-	public void setValeur(ZoneEnum valeur) {
+	public void setValeur(ZoneEnum valeur) throws StopRequestException {
+		mu.checkInterruption(); //Appel Obligatoire
 		this.valeur = valeur;
 	}
 
@@ -178,9 +192,11 @@ public class SearchNode {
 	 * Renvoie le cout du noeud
 	 * 
 	 * @return cout
+	 * @throws StopRequestException 
 	 */
 
-	public int getCout() {
+	public int getCout() throws StopRequestException {
+		mu.checkInterruption(); //Appel Obligatoire
 		return cout;
 	}
 
@@ -189,8 +205,10 @@ public class SearchNode {
 	 * 
 	 * @param cout
 	 *            cout du noeud
+	 * @throws StopRequestException 
 	 */
-	public void setCout(int cout) {
+	public void setCout(int cout) throws StopRequestException {
+		mu.checkInterruption(); //Appel Obligatoire
 		this.cout = cout;
 	}
 
@@ -212,13 +230,18 @@ public class SearchNode {
 			e.printStackTrace();
 		}
 		node = (SearchNode) object;
-		if ((node.getX() == x) && (node.getY() == y))
-			return true;
+		try {
+			if ((node.getX() == x) && (node.getY() == y))
+				return true;
 
-		else
+			else
 
-			return false;
-
+				return false;
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**
@@ -230,9 +253,11 @@ public class SearchNode {
 	 * @param goal
 	 *            le noeud par rapport auquel qu'on trouve l'heuristique
 	 * @return l'heuristique du noeud par rapport au noeud goal
+	 * @throws StopRequestException 
 	 */
 
-	public int getHeuristic(SearchNode goal) {
+	public int getHeuristic(SearchNode goal) throws StopRequestException {
+		mu.checkInterruption(); //Appel Obligatoire
 
 		int result = 0;
 		//somme des differences des coordonnees x et de y des noeuds

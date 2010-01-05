@@ -60,7 +60,9 @@ public class Map {
 		int i, j;
 		// Initialisation
 		for (i = 0; i < width; i++) {
+			ai.checkInterruption();
 			for (j = 0; j < height; j++) {
+				ai.checkInterruption();
 				matrix[i][j] = Etat.LIBRE;
 			}
 		}

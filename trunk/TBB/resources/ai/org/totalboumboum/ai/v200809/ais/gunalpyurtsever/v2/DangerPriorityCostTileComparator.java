@@ -3,6 +3,7 @@ package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2;
 
 import java.util.Comparator;
 
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 
@@ -14,8 +15,8 @@ public class DangerPriorityCostTileComparator implements Comparator<DangerPriori
 	
 	
 
-	public DangerPriorityCostTileComparator(int col, int line) {
-		super();
+	public DangerPriorityCostTileComparator(int col, int line, ArtificialIntelligence  ai) throws StopRequestException {
+		ai.checkInterruption();
 		this.col = col;
 		this.line = line;
 	}

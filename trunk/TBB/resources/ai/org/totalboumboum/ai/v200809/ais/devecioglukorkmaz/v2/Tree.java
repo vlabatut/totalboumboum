@@ -64,18 +64,19 @@ public class Tree {
 		if (node != firstNode) {
 			Iterator<SearchLink> i = links.iterator();
 			while (i.hasNext() && result == null) {
-			{	ai.checkInterruption();
+				ai.checkInterruption();
 				SearchLink temp = i.next();
 				if (temp != null)
 					if (temp.getTarget() == node)
 						result = temp;
 				}
-			}
 		}
 		return result;
 	}
 
 	public synchronized Vector<SearchLink> getChildrenLinks(Noeud node) throws StopRequestException {
+		ai.checkInterruption();
+		
 		Vector<SearchLink> result = new Vector<SearchLink>();
 
 		Iterator<SearchLink> i = links.iterator();

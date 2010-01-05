@@ -232,7 +232,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 		boolean control = false; //test si le noeud est final.
 
-		NodeComparator nc = new NodeComparator(startNode, endNode);
+		NodeComparator nc = new NodeComparator(startNode, endNode,this);
 		PriorityQueue<Node> qNode = new PriorityQueue<Node>(1,nc);
 		qNode.offer(startNode);
 		while(!control && !qNode.isEmpty()){

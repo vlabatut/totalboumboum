@@ -2,12 +2,18 @@ package org.totalboumboum.ai.v200809.ais.kokciyanmazmanoglu.v2;
 
 import java.util.Comparator;
 
+import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200809.adapter.StopRequestException;
+
 public class NodeComparator implements Comparator<Node>
 {
 	private Node start;
 	private Node end;
+	ArtificialIntelligence ai;
 	
-	public NodeComparator(Node startNode, Node endNode){
+	public NodeComparator(Node startNode, Node endNode, ArtificialIntelligence ai) throws StopRequestException{
+		ai.checkInterruption();
+		this.ai = ai;
 		this.start = startNode;
 		this.end = endNode;
 	}
@@ -16,12 +22,29 @@ public class NodeComparator implements Comparator<Node>
 	{	int res = 0;
 		
 	
-		double val1 = n1.getCost()+n1.getH(start, end);
-		double val2 = n2.getCost()+n2.getH(start, end);
+		double val1 = 0;
+		try {
+			val1 = n1.getCost()+n1.getH(start, end);
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		double val2 = 0;
+		try {
+			val2 = n2.getCost()+n2.getH(start, end);
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(val1<val2)res = -1;
 		else if(val1>val2)res = 1;
 		else{
-			res = n1.getName().compareTo(n2.getName());
+			try {
+				res = n1.getName().compareTo(n2.getName());
+			} catch (StopRequestException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		return res;

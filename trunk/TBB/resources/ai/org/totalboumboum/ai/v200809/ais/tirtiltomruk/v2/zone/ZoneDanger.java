@@ -118,7 +118,7 @@ public class ZoneDanger {
 							Iterator<AiBomb> itAiBomb = this.zone.getTile(temp.getBomb().getLine() - k, temp.getBomb().getCol()).getBombs().iterator();
 							if(itAiBomb.hasNext())
 							{
-								TimedBomb tempTimedBomb = new TimedBomb(this.zone,itAiBomb.next(),0,source.getTime());
+								TimedBomb tempTimedBomb = new TimedBomb(this.zone,itAiBomb.next(),0,source.getTime(),source);
 								this.timedBombes.get(this.timedBombes.indexOf(tempTimedBomb)).setDanger(temp.getDanger());
 							}
 						}
@@ -139,7 +139,7 @@ public class ZoneDanger {
 							Iterator<AiBomb> itAiBomb = this.zone.getTile(temp.getBomb().getLine() + k, temp.getBomb().getCol()).getBombs().iterator();
 							if(itAiBomb.hasNext())
 							{
-								TimedBomb tempTimedBomb = new TimedBomb(this.zone,itAiBomb.next(),0,source.getTime());
+								TimedBomb tempTimedBomb = new TimedBomb(this.zone,itAiBomb.next(),0,source.getTime(),source);
 								this.timedBombes.get(this.timedBombes.indexOf(tempTimedBomb)).setDanger(temp.getDanger());
 							}
 						}
@@ -160,7 +160,7 @@ public class ZoneDanger {
 							Iterator<AiBomb> itAiBomb = this.zone.getTile(temp.getBomb().getLine(), temp.getBomb().getCol() - k).getBombs().iterator();
 							if(itAiBomb.hasNext())
 							{
-								TimedBomb tempTimedBomb = new TimedBomb(this.zone,itAiBomb.next(),0,source.getTime());
+								TimedBomb tempTimedBomb = new TimedBomb(this.zone,itAiBomb.next(),0,source.getTime(),source);
 								this.timedBombes.get(this.timedBombes.indexOf(tempTimedBomb)).setDanger(temp.getDanger());
 							}
 						}
@@ -181,7 +181,7 @@ public class ZoneDanger {
 							Iterator<AiBomb> itAiBomb = this.zone.getTile(temp.getBomb().getLine(), temp.getBomb().getCol() + k).getBombs().iterator();
 							if(itAiBomb.hasNext())
 							{
-								TimedBomb tempTimedBomb = new TimedBomb(this.zone,itAiBomb.next(),0,source.getTime());
+								TimedBomb tempTimedBomb = new TimedBomb(this.zone,itAiBomb.next(),0,source.getTime(),source);
 								this.timedBombes.get(this.timedBombes.indexOf(tempTimedBomb)).setDanger(temp.getDanger());
 							}
 						}

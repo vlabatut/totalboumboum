@@ -39,9 +39,11 @@ public class SearchLink
 	 * Renvoie le noeud parent du lien 
 	 * @return	le noeud parent
 	 * @throws StopRequestException 
+	 * @throws StopRequestException 
 	 */
-	public Noeud getOrigin()
+	public Noeud getOrigin() throws StopRequestException
 	{   
+		source.checkInterruption(); // Appel Obligatoire
 		return origin;
 	}
 
@@ -65,14 +67,19 @@ public class SearchLink
 	 * @return result indique l'egalite	
 	 */
 	public boolean equals(Object object)
-	{		boolean result;
+	{		boolean result = false;
 		if(object == null)
 			result = false;
 		else if(!(object instanceof SearchLink))
 			result = false;
 		else
 		{	SearchLink temp = (SearchLink) object;
-			result = temp.getOrigin() == getOrigin();
+			try {
+				result = temp.getOrigin() == getOrigin();
+			} catch (StopRequestException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}

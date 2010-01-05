@@ -22,24 +22,28 @@ public class Tree {
 	private Node finalNode;
 	
 	
-	public Tree(int line, int col, KokciyanMazmanoglu ai){
+	public Tree(int line, int col, KokciyanMazmanoglu ai) throws StopRequestException{
+		ai.checkInterruption();
 		nodes = new Vector<Node>();
 		links = new Vector<Link>();
 		km = ai;
-		setFinalNode(new Node(line,col,km.getFieldMatrix()[line][col],this,-1)); 
+		setFinalNode(new Node(line,col,km.getFieldMatrix()[line][col],this,-1,km)); 
 		currentNode = convertToNode(ai.getCurrentTile());
 	}
 	
 	
-	public Node getRoot() {
+	public Node getRoot() throws StopRequestException {
+		km.checkInterruption();
 		return currentNode;
 	}
 	
 
-	public boolean containsNode(Node node)
-	{	boolean result=false;
+	public boolean containsNode(Node node) throws StopRequestException
+	{	km.checkInterruption();
+		boolean result=false;
 		Iterator<Node> i = nodes.iterator();
 		while(i.hasNext() && !result){
+			km.checkInterruption();
 			Node n = i.next();
 			result = ((node.getLine() == n.getLine()) && (node.getCol() == n.getCol()));
 		}
@@ -53,6 +57,7 @@ public class Tree {
 		boolean control = false;
 		Iterator<Node> i = nodes.iterator();
 		while(i.hasNext() && !control){
+			km.checkInterruption();
 			Node n = i.next();
 			control = ((line == n.getLine()) && (col == n.getCol()));
 			result = n;
@@ -70,7 +75,8 @@ public class Tree {
 		if(node != getRoot())
 		{	Iterator<Link> it = links.iterator();
 			while(it.hasNext() && result==null)
-			{	Link temp = it.next();
+			{	km.checkInterruption();
+				Link temp = it.next();
 				if(temp.getChild().equals(node)){
 					result = temp;
 				}
@@ -98,7 +104,8 @@ public class Tree {
 		return result;
 	}
 	
-	public  void markVisitedNod(Node node){
+	public  void markVisitedNod(Node node) throws StopRequestException{
+		km.checkInterruption();
 		node.setVisited(true);
 	}
 	
@@ -123,10 +130,10 @@ public class Tree {
 			//System.out.println(tl.getCol() + " " + tl.getLine() + " " +  dr.name());
 			Node nd = getNodefromTree(tl.getLine(),tl.getCol());
 			if(nd == null){
-				nd = new Node(tl.getLine(),tl.getCol(),km.getFieldMatrix()[tl.getLine()][tl.getCol()],this,node.getDepth()+1);
+				nd = new Node(tl.getLine(),tl.getCol(),km.getFieldMatrix()[tl.getLine()][tl.getCol()],this,node.getDepth()+1,km);
 			}
 			if(!nd.isVisited()  && !km.isWall(tl)){
-				Link lk = new Link(node, nd, new AiAction(AiActionName.MOVE,dr));
+				Link lk = new Link(node, nd, new AiAction(AiActionName.MOVE,dr),km);
 				if(!vLink.contains(lk))
 					addLink(lk, vLink);
 			}
@@ -138,12 +145,14 @@ public class Tree {
 		return vLink.iterator();
 	}
 	
-	public  Node getFinalNode() {
+	public  Node getFinalNode() throws StopRequestException {
+		km.checkInterruption();
 		return finalNode;
 	}
 
 
-	public  void setFinalNode(Node finalNode) {
+	public  void setFinalNode(Node finalNode) throws StopRequestException {
+		km.checkInterruption();
 		this.finalNode = finalNode;
 	}
 	
@@ -153,14 +162,16 @@ public class Tree {
 		return (node.getLine() == fNode.getLine()) && (node.getCol() == fNode.getCol());
 	}
 	
-	public  Node convertToNode(AiTile tile){
+	public  Node convertToNode(AiTile tile) throws StopRequestException{
+		km.checkInterruption();
 		Node nd = null;
 		if(tile != null)
-			nd = new Node(tile.getLine(),tile.getCol(),km.getFieldMatrix()[tile.getLine()][tile.getCol()],this,0);
+			nd = new Node(tile.getLine(),tile.getCol(),km.getFieldMatrix()[tile.getLine()][tile.getCol()],this,0,km);
 		return nd; 
 	}
 	
-	public  void addLink(Link link, Vector<Link> vLink) {
+	public  void addLink(Link link, Vector<Link> vLink) throws StopRequestException {
+		km.checkInterruption();
 		links.add(link);
 		nodes.add(link.getChild());
 		vLink.add(link);
