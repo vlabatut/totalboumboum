@@ -275,7 +275,7 @@ public class DangerZone {
 					{
 					  
 						tile=map.getTile(line, col);
-						Astar a=new Astar (this,hero.getCol(),hero.getLine(),col,line);
+						Astar a=new Astar (this,hero.getCol(),hero.getLine(),col,line,source);
 							if ((hero.getCol()!= col || hero.getLine() != line) && a.findPath())
 								result.add(tile);
 					}
@@ -303,7 +303,7 @@ public class DangerZone {
 				if(source.isBonus(col, line) && !(source.isDanger(col,line)))
 				{
 					tile=map.getTile(line, col);
-					Astar a=new Astar (this,hero.getCol(),hero.getLine(),col,line);
+					Astar a=new Astar (this,hero.getCol(),hero.getLine(),col,line,source);
 					if ((hero.getCol()!= col || hero.getLine() != line) && a.findSecurePath())
 						result.add(tile);
 				}
@@ -332,7 +332,7 @@ public class DangerZone {
 					  
 						tile=map.getTile(line, col);
 						
-						Astar a=new Astar (this,hero.getCol(),hero.getLine(),col,line);
+						Astar a=new Astar (this,hero.getCol(),hero.getLine(),col,line,source);
 							if ((hero.getCol()!= col || hero.getLine() != line) && a.findPath())
 								result.add(tile);
 					}
@@ -360,7 +360,7 @@ public class DangerZone {
 				if(source.isRival(col, line))
 					{
 						tile=map.getTile(line, col);
-						Astar a=new Astar (this,hero.getCol(),hero.getLine(),col,line);
+						Astar a=new Astar (this,hero.getCol(),hero.getLine(),col,line,source);
 						if ((hero.getCol()!= col || hero.getLine() != line) && a.findSecurePath())
 							result.add(tile);
 					}
@@ -388,7 +388,7 @@ public class DangerZone {
 				tile=map.getTile(line, col);
 				if(neighbors.contains(tile))
 				{
-					Astar a=new Astar (this,hero.getCol(),hero.getLine(),col,line);
+					Astar a=new Astar (this,hero.getCol(),hero.getLine(),col,line,source);
 					if ((hero.getCol()!= col || hero.getLine() != line) && a.findSecurePath())
 						result.add(tile);
 				}	
