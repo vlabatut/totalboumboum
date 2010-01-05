@@ -28,6 +28,8 @@ import japa.parser.ast.CompilationUnit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.totalboumboum.tools.files.FileNames;
 
@@ -39,9 +41,16 @@ import org.totalboumboum.tools.files.FileNames;
  */
 public class ParseAi
 {	private static boolean verbose = false;
+	private final static List<String> IGNORED_PACKAGES = Arrays.asList(new String[]
+ 	{	"v1","v1_1","v1_2","v1_3",
+ 		"v2","v2_1","v2_2","v2_3",
+ 		"v3","v3_1","v3_2","v3_3",
+ 		"v4","v4_1","v4_2","v4_3",
+ 		"v5_1"
+ 	});
 	
 	public static void main(String[] args) throws IOException, ParseException
-	{	String aiPack = "resources/ai/org/totalboumboum/ai/v200809/ais";
+	{	String aiPack = "resources/ai/org/totalboumboum/ai/v200910/ais";
 		parseAiPack(aiPack);
 	}
 	
@@ -74,23 +83,27 @@ public class ParseAi
 	}
 	
 	private static void parseFolder(File folder, int level) throws ParseException, IOException
-	{	System.out.println("Analyse du paquetage "+folder.getPath());
-	
-		File[] files = folder.listFiles();
-		for(File file: files)
-		{	if(file.isDirectory())
-				parseFolder(file,level+1);
-			else
-			{	String filename = file.getName();
-				if(filename.endsWith(FileNames.EXTENSION_JAVA))
-					parseFile(file,level+1);
-				else if(verbose)
-				{	for(int i=0;i<level;i++)
-						System.out.print("..");
-					System.out.println("Le fichier "+file.getPath()+" n'a pas été reconnu comme un source Java");
+	{	if(IGNORED_PACKAGES.contains(folder.getName()))
+			System.out.println("Paquetage "+folder.getPath()+" ignoré");
+		else
+		{	System.out.println("Analyse du paquetage "+folder.getPath());
+		
+			File[] files = folder.listFiles();
+			for(File file: files)
+			{	if(file.isDirectory())
+					parseFolder(file,level+1);
+				else
+				{	String filename = file.getName();
+					if(filename.endsWith(FileNames.EXTENSION_JAVA))
+						parseFile(file,level+1);
+					else if(verbose)
+					{	for(int i=0;i<level;i++)
+							System.out.print("..");
+						System.out.println("Le fichier "+file.getPath()+" n'a pas été reconnu comme un source Java");
+					}
 				}
 			}
-		}		
+		}
 	}
 
 	public static void parseAi(String aiPath) throws ParseException, IOException

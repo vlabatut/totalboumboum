@@ -307,7 +307,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 			if(statement instanceof BlockStmt)
 			{	BlockStmt block = (BlockStmt) statement;
 				List<Statement> statements = block.getStmts();
-				if(!statements.isEmpty())
+				if(statements!=null && !statements.isEmpty())
 				{	Statement firstStatement = statements.get(0);
 					line = firstStatement.getBeginLine();
 					if(firstStatement instanceof ExpressionStmt)
