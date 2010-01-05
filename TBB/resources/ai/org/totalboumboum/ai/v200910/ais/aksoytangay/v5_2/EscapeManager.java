@@ -138,7 +138,8 @@ public class EscapeManager {
 		return result;
 	}
 
-	public AiTile getCurrentTile() {
+	public AiTile getCurrentTile() throws StopRequestException {
+		myAI.checkInterruption();
 		return myAI.getOwnHero().getTile();
 	}
 	

@@ -11,7 +11,7 @@ public class TriedTiles
 	public List<AiTile> visited = null;
 	private AdatepeOzbek ownAi;
 	public TriedTiles(AdatepeOzbek ai)throws StopRequestException
-	{
+	{	ai.checkInterruption();
 		ownAi = ai;
 		ownAi.checkInterruption();
 		visited = new ArrayList<AiTile>();
