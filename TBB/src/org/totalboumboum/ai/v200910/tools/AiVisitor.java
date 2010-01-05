@@ -35,6 +35,7 @@ import japa.parser.ast.expr.Expression;
 import japa.parser.ast.expr.MethodCallExpr;
 import japa.parser.ast.expr.NameExpr;
 import japa.parser.ast.stmt.BlockStmt;
+import japa.parser.ast.stmt.CatchClause;
 import japa.parser.ast.stmt.DoStmt;
 import japa.parser.ast.stmt.ExplicitConstructorInvocationStmt;
 import japa.parser.ast.stmt.ExpressionStmt;
@@ -43,6 +44,8 @@ import japa.parser.ast.stmt.ForeachStmt;
 import japa.parser.ast.stmt.Statement;
 import japa.parser.ast.stmt.WhileStmt;
 import japa.parser.ast.type.ClassOrInterfaceType;
+import japa.parser.ast.type.ReferenceType;
+import japa.parser.ast.type.Type;
 import japa.parser.ast.visitor.VoidVisitorAdapter;
 
 /**
@@ -76,6 +79,10 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 		"equals",
 		"toString"
 	});
+	private final static List<String> FORBIDDEN_EXCEPTIONS = Arrays.asList(new String[]
+ 	{	"Exception",			
+ 		"StopRequestException"
+ 	});
 
 	/////////////////////////////////////////////////////////////////
 	// MISC VARIABLES	/////////////////////////////////////////////
@@ -96,6 +103,36 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/////////////////////////////////////////////////////////////////
 	// VISITOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+    @Override
+    public void visit(CatchClause n, Object arg)
+    {	int line = n.getBeginLine();
+    	Parameter e = n.getExcept();
+    	if(!IGNORED_METHODS.contains(currentMethod))
+    	{	Type t = e.getType();
+	    	if(t instanceof ReferenceType)
+			{	Type t2 = ((ReferenceType)t).getType();
+				if(t2 instanceof ClassOrInterfaceType)
+				{	String exceptionName = ((ClassOrInterfaceType)t2).getName();
+					if(FORBIDDEN_EXCEPTIONS.contains(exceptionName))
+					{	for(int i=0;i<indentLevel;i++)
+							System.out.print(">>");
+				       	System.out.println("Erreur ligne "+line+" : le catch("+exceptionName+") masque l'appel à "+CHECK_INTERRUPTION_METHOD+"()");
+						errorCount++;
+						//TODO à compléter par la création d'un commentaire dans le code source
+					}
+				}
+				else
+				{	System.out.print(">>11111111111 problème : exception non conforme ("+t2.getClass()+")");
+				}
+			}
+	    	else
+			{	System.out.print(">>222222222 problème : exception non conforme ("+t.getClass()+")");
+	    	}
+    	}
+    	e.accept(this, arg);
+        n.getCatchBlock().accept(this, arg);
+    }
+
     @Override
     public void visit(ClassOrInterfaceDeclaration n, Object arg)
     {	checkConstructor = true;
