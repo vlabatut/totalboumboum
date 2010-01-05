@@ -40,6 +40,7 @@ public class Map {
 	private int murs[][];
 
 	public Map(AiZone zone, CalisirGuner source) throws StopRequestException {
+		source.checkInterruption();
 		this.map = zone;
 		this.bomberman = zone.getOwnHero();
 		this.adversaires = zone.getRemainingHeroes();
@@ -273,6 +274,7 @@ public class Map {
 		AiFire feu;
 
 		while (itfeu.hasNext()) {
+			source.checkInterruption();
 			feu = itfeu.next();
 			xadversaire = feu.getCol();
 			yadversaire = feu.getLine();
@@ -395,41 +397,54 @@ public class Map {
 		return result;
 	}
 
-	public String risquetoString() {
+	public String risquetoString() throws StopRequestException {
+		source.checkInterruption();
 		String result = "";
 		for (int i = 0; i < height; i++) {
+			source.checkInterruption();
 			for (int j = 0; j < width; j++)
+			{	source.checkInterruption();
 				result += "(" + j + "," + i + ")" + risque[j][i] + "   ";
+			
+			}
 			result += "\n";
 		}
 
 		return result;
 	}
 
-	public String actoString() {
+	public String actoString() throws StopRequestException {
+		source.checkInterruption();
 		String result = "";
 		for (int i = 0; i < height; i++) {
+			source.checkInterruption();
 			for (int j = 0; j < width; j++)
+			{	source.checkInterruption();
 				result += "(" + j + "," + i + ")" + accessibilite[j][i] + "   ";
+			}
 			result += "\n";
 		}
 
 		return result;
 	}
 
-	public String murstoString() {
+	public String murstoString() throws StopRequestException {
+		source.checkInterruption();
 		String result = "";
 		for (int i = 0; i < height; i++) {
+			source.checkInterruption();
 			for (int j = 0; j < width; j++)
+			{	source.checkInterruption();
 				result += "(" + j + "," + i + ")" + murs[j][i] + "   ";
+			}
 			result += "\n";
 		}
 
 		return result;
 	}
 
-	public boolean isWalkable(int x1, int y1) {
-
+	public boolean isWalkable(int x1, int y1) throws StopRequestException {
+		source.checkInterruption();
 		boolean resultat = false;
 
 		if (accessibilite[x1][y1] == Etat.ACCESSIBLE)
@@ -439,8 +454,8 @@ public class Map {
 		return resultat;
 	}
 //pour voir si on peut acceder a un adversaire en explosant les murs
-	public boolean isReachable(int x1, int y1) {
-
+	public boolean isReachable(int x1, int y1) throws StopRequestException {
+		source.checkInterruption();
 		boolean resultat = false;
 
 		if ((accessibilite[x1][y1] == Etat.ACCESSIBLE || matrix[x1][y1] == Etat.DESTRUCTIBLES)
@@ -453,19 +468,23 @@ public class Map {
 		return resultat;
 	}
 
-	int return_risque(int x, int y) {
+	int return_risque(int x, int y) throws StopRequestException {
+		source.checkInterruption();
 		return risque[x][y];
 	}
 
-	int[][] return_risque() {
+	int[][] return_risque() throws StopRequestException {
+		source.checkInterruption();
 		return risque;
 	}
 
-	Etat[][] return_accessibilite() {
+	Etat[][] return_accessibilite() throws StopRequestException {
+		source.checkInterruption();
 		return accessibilite;
 	}
 
-	int[][] return_murs() {
+	int[][] return_murs() throws StopRequestException {
+		source.checkInterruption();
 		return murs;
 	}
 }
