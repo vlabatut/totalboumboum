@@ -101,10 +101,11 @@ public class Wall_Manager_2{
 	
 	
 	public boolean canPass() throws StopRequestException{
-	
+		ai.checkInterruption();
 		int m=0;
 		int stop=1;
 		while(m<path_b.getLength() && path_b.isEmpty()==false && stop==1){
+			ai.checkInterruption();
 			if(safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b.getTile(m).getCol()]!=safe_map.SAFE_CASE){
 				stop=0;
 			}
@@ -124,6 +125,7 @@ public class Wall_Manager_2{
 	 */
 	
 	public boolean canesc() throws StopRequestException{
+		ai.checkInterruption();
 		esc=new Can_escape_Manager(ai);
 		boolean res=true;	
 		if(esc.getPathLength()<3 || esc.getPathLength()>6){
@@ -276,6 +278,7 @@ public class Wall_Manager_2{
 		safe_map=new Safety_Map(zone,ai);
 		AiBlock blck;
 		while(block_iterator.hasNext()==true){
+			ai.checkInterruption();
 			blck=block_iterator.next();
 			if(blck.isDestructible()){
 				if(safe_map.returnMatrix()[blck.getLine()][blck.getCol()+1]==safe_map.SAFE_CASE ||safe_map.returnMatrix()[blck.getLine()][blck.getCol()+1]==safe_map.BONUS ){
@@ -310,10 +313,12 @@ public class Wall_Manager_2{
 	
 	
 	public boolean isdang() throws StopRequestException{
+		ai.checkInterruption();
 		int stop=0;
 		boolean x=false;
 		int m=0;
 		while(m<path_b.getLength() && stop==0){
+			ai.checkInterruption();
 			if(safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b.getTile(m).getCol()]!=safe_map.SAFE_CASE || safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b.getTile(m).getCol()]==safe_map.BONUS)
 			{	x=true;
 				stop=1;
