@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar.heuristic;
 
 import java.util.List;
 
+import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 
@@ -42,7 +43,7 @@ public abstract class HeuristicCalculator
 	 * initialise/modifie la liste de cases pouvant terminer le chemin recherché
 	 * @param endTiles	les cases terminant le chemin
 	 */
-	public void setEndTiles(List<AiTile> endTiles)
+	public void setEndTiles(List<AiTile> endTiles) throws StopRequestException
 	{	this.endTiles = endTiles;		
 	}
 
@@ -51,7 +52,7 @@ public abstract class HeuristicCalculator
 	 * le chemin recherché)
 	 * @return	la liste des cases objectifs
 	 */
-	public List<AiTile> getEndTiles()
+	public List<AiTile> getEndTiles() throws StopRequestException
 	{	return endTiles;	
 	}
 
@@ -65,5 +66,5 @@ public abstract class HeuristicCalculator
 	 * @param tile	la case concernée 
 	 * @return	l'heuristique de la case
 	 */
-	public abstract double processHeuristic(AiTile tile);
+	public abstract double processHeuristic(AiTile tile) throws StopRequestException;
 }

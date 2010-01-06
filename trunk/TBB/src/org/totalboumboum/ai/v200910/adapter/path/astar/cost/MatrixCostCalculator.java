@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v200910.adapter.path.astar.cost;
  * 
  */
 
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 /**
@@ -44,7 +45,7 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 
 	 * @param costMatrix	la matrice de cout
 	 */
-	public MatrixCostCalculator(double costMatrix[][])
+	public MatrixCostCalculator(double costMatrix[][]) throws StopRequestException
 	{	setCostMatrix(costMatrix);			
 	}
 	
@@ -60,7 +61,7 @@ public class MatrixCostCalculator extends CostCalculator
 	 * 
 	 * @param costMatrix	la matrice de cout
 	 */
-	public void setCostMatrix(double costMatrix[][])
+	public void setCostMatrix(double costMatrix[][]) throws StopRequestException
 	{	this.costMatrix = costMatrix;		
 	}
 	
@@ -71,7 +72,7 @@ public class MatrixCostCalculator extends CostCalculator
 	 * @param col	colonne de la case à mettre à jour
 	 * @param cost	nouveau coût à affecter
 	 */
-	public void setCost(int line, int col, double cost)
+	public void setCost(int line, int col, double cost) throws StopRequestException
 	{	costMatrix[line][col] = cost;
 	}
 	
@@ -90,7 +91,7 @@ public class MatrixCostCalculator extends CostCalculator
 	 * @return le cout correspondant à la case d'arrivée dans la matrice de cout
 	 */ 
 	@Override
-	public double processCost(AiTile start, AiTile end)
+	public double processCost(AiTile start, AiTile end) throws StopRequestException
 	{	int col = end.getCol();
 		int line = end.getLine();
 		double result = Double.POSITIVE_INFINITY;

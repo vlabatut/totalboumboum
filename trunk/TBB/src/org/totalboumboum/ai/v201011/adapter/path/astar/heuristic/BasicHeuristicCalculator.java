@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar.heuristic;
 
 import java.util.List;
 
+import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
@@ -47,7 +48,7 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	 * @return	la distance de Manhattan entre tile et la plus proche des cases contenues dans endTiles
 	 */
 	@Override
-	public double processHeuristic(AiTile tile)
+	public double processHeuristic(AiTile tile) throws StopRequestException
 	{	List<AiTile> endTiles = getEndTiles();
 		AiZone zone = tile.getZone();
 		double result = Integer.MAX_VALUE;

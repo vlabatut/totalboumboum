@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar.cost;
  * 
  */
 
+import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
@@ -39,7 +40,7 @@ public class BasicCostCalculator extends CostCalculator
 	 * @return la distance entre ces cases (ici : 1, puisqu'elles sont voisines)
 	 */ 
 	@Override
-	public double processCost(AiTile start, AiTile end)
+	public double processCost(AiTile start, AiTile end) throws StopRequestException
 	{	return 1;		
 	}
 }

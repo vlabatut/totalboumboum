@@ -46,7 +46,7 @@ public class AstarNode implements Comparable<AstarNode>
 	 * @param costCalculator	fonction de cout
 	 * @param heuristicCalculator	fonction heuristique
 	 */
-	protected AstarNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
+	protected AstarNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// ia
 		this.ai = ai;
 		// case
@@ -73,7 +73,7 @@ public class AstarNode implements Comparable<AstarNode>
 	 * @param tile	case associée à ce noeud de recherche
 	 * @param parent	noeud de recherche parent de ce noeud
 	 */
-	protected AstarNode(AiTile tile, AstarNode parent)
+	protected AstarNode(AiTile tile, AstarNode parent) throws StopRequestException
 	{	// ia
 		this.ai = parent.getAi();
 		// case
