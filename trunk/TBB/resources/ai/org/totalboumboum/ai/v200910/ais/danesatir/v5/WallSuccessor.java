@@ -14,26 +14,30 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 public class WallSuccessor extends BasicSuccessorCalculator {
-	@SuppressWarnings("unused")
 	private DaneSatir ai;
 	private TimeMatrice time;
 	
 	public WallSuccessor(DaneSatir ai) throws StopRequestException {
+		ai.checkInterruption();
 		this.ai=ai;
 		this.time=new TimeMatrice(ai);
 	}
 	/**
 	 * Ignore Destructible walls
+	 * @throws StopRequestException 
 	 */
 	@Override
-	public List<AiTile> processSuccessors(AstarNode node)
-	{	// init
+	public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException
+	{	ai.checkInterruption();
+		
+		// init
 		List<AiTile> result = new ArrayList<AiTile>();
 		AiTile tile = node.getTile();
 		AiHero hero = node.getHero();
 		// pour chaque case voisine : on la rajoute si elle est traversable
 		for(Direction direction: Direction.getPrimaryValues())			
-		{	AiTile neighbor = tile.getNeighbor(direction);
+		{	ai.checkInterruption();
+			AiTile neighbor = tile.getNeighbor(direction);
 			List<AiBlock> blocks = neighbor.getBlocks();
 			boolean test=false;
 			if (!blocks.isEmpty()) {
@@ -42,7 +46,7 @@ public class WallSuccessor extends BasicSuccessorCalculator {
 					test=false;
 			}
 			if(neighbor.isCrossableBy(hero) || test==false) {
-				GeneralFuncs.printLog(neighbor+" Time:"+time.getTime(neighbor),VerboseLevel.MED);
+				GeneralFuncs.printLog(neighbor+" Time:"+time.getTime(neighbor),VerboseLevel.MED,ai);
 				if(time.getTime(neighbor) > (node.getDepth()+1)*Limits.tileDistance ||
 						time.getTime(neighbor) == 0)
 					result.add(neighbor);

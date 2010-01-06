@@ -130,7 +130,7 @@ public class DaneSatir extends ArtificialIntelligence
 				
 				//GeneralFuncs.printLog(this, "DaneSatir.java: direction->"+d, VerboseLevel.MED);
 				
-				while(!TimeMatrice.isSafe(dec.getTime(), nextTile)) {
+				while(!TimeMatrice.isSafe(dec.getTime(), nextTile,this)) {
 					checkInterruption();
 					if(dec.getTime().isSaferThan(nextTile, this.myHero.getTile()))
 						break;
@@ -225,7 +225,7 @@ public class DaneSatir extends ArtificialIntelligence
 		}
 		case EXPLODE_TO_ENEMY: {
 			Astar astar = new Astar(this,myHero,
-					new WallCost(), 
+					new WallCost(this), 
 					new BasicHeuristicCalculator(),
 					new WallSuccessor(this)
 					);
@@ -308,28 +308,34 @@ public class DaneSatir extends ArtificialIntelligence
 			this.dec.setState(State.START);
 	}
 	
-	public AiHero getOwnHero() {
+	public AiHero getOwnHero() throws StopRequestException {
+		checkInterruption();
 		return this.myHero;
 	}
 	/**
 	 * Getter for PathFinder
 	 * @return current PathFinder
+	 * @throws StopRequestException 
 	 * @see PathFinder 
 	 */
-	public PathFinder getPathFinder() {
+	public PathFinder getPathFinder() throws StopRequestException {
+		checkInterruption();
 		return p;
 	}
 	
 	/**
 	 * Getter for Result
 	 * @return current result
+	 * @throws StopRequestException 
 	 * @see AiActionName
 	 */
-	public AiAction getResult() {
+	public AiAction getResult() throws StopRequestException {
+		checkInterruption();
 		return result;
 	}
 
-	public void setResult(AiAction result) {
+	public void setResult(AiAction result) throws StopRequestException {
+		checkInterruption();
 		if(result == null)
 			dec.setState(State.START);
 		else 

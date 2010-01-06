@@ -15,6 +15,7 @@ public class DecisionMaker {
 	private TimeMatrice time;
 
 	public DecisionMaker(DaneSatir ai) throws StopRequestException {
+		ai.checkInterruption();
 		this.ai=ai;
 		this.state=State.START;
 	}
@@ -42,19 +43,22 @@ public class DecisionMaker {
 		}
 	}
 
-	private boolean isEnemyExist() {
+	private boolean isEnemyExist() throws StopRequestException {
+		ai.checkInterruption();
 		if(this.ai.getPercepts().getHeroes().size()>1)
 			return true;
 		return false;
 	}
 
-	private boolean isHiddenItemExist() {
+	private boolean isHiddenItemExist() throws StopRequestException {
+		ai.checkInterruption();
 		if(this.ai.getPercepts().getHiddenItemsCount()>0)
 			return true;
 		return false;
 	}
 
-	private boolean isItemExist() {
+	private boolean isItemExist() throws StopRequestException {
+		ai.checkInterruption();
 		if(this.ai.getPercepts().getItems().size()>0)
 			return true;
 		return false;
@@ -71,36 +75,43 @@ public class DecisionMaker {
 		}
 	}
 	
-	private boolean isDanger() {
+	private boolean isDanger() throws StopRequestException {
+		ai.checkInterruption();
 		double dur = this.time.getTime();
 		if(dur>0)
 			return true;
 		return false;
 	}
-	private boolean isHaveBomb() {
+	private boolean isHaveBomb() throws StopRequestException {
+		ai.checkInterruption();
 		AiHero hero = this.ai.getOwnHero();
 		int count=hero.getBombNumber()-hero.getBombCount();
 		if (count>0)
 			return true;
 		return false;
 	}
-	public State getState() {
+	public State getState() throws StopRequestException {
+		ai.checkInterruption();
 		return state;
 	}
 
-	public void setState(State state) {
+	public void setState(State state) throws StopRequestException {
+		ai.checkInterruption();
 		this.state = state;
 	}
 
 	public TimeMatrice getTime() throws StopRequestException {
+		ai.checkInterruption();
 		setTime(new TimeMatrice(ai));
 		return time;
 	}
 
-	private void setTime(TimeMatrice time) {
+	private void setTime(TimeMatrice time) throws StopRequestException {
+		ai.checkInterruption();
 		this.time = time;
 	}
 	public boolean canWeEscape(AiBomb bomb) throws StopRequestException {
+		ai.checkInterruption();
 		return canWeEscape(bomb.getTile());
 	}
 	/**
@@ -120,7 +131,7 @@ public class DecisionMaker {
 			return false;
 		Astar astar;
 		astar = new Astar(ai,ai.getOwnHero(),
-				new MyCost(this.time),
+				new MyCost(this.time,ai),
 				new BasicHeuristicCalculator(),
 				new MySuccessor(this.ai,this.time)
 				);

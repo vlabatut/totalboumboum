@@ -26,16 +26,20 @@ public class BonusCollector {
 	/**
 	 * default constructor we need our instance for handling checkInterruption
 	 * @param ai
+	 * @throws StopRequestException 
 	 */
-	public BonusCollector(DaneSatir ai) {
+	public BonusCollector(DaneSatir ai) throws StopRequestException {
+		ai.checkInterruption();
 		this.ai=ai;
 	}
 	
 	/**
 	 * Return raw item list
 	 * @return AiItem list
+	 * @throws StopRequestException 
 	 */
-	public List<AiItem> getItems() {
+	public List<AiItem> getItems() throws StopRequestException {
+		ai.checkInterruption();
 		return ai.getPercepts().getItems();
 	}
 	
@@ -86,6 +90,7 @@ public class BonusCollector {
 	 * @throws NoWayException
 	 */
 	public void findNearestItem() throws StopRequestException, NoWayException {
+		ai.checkInterruption();
 		findNearestItem(ai.getOwnHero());
 	}
 	
@@ -95,10 +100,11 @@ public class BonusCollector {
 	 * @throws StopRequestException
 	 */
 	public AiTile findWallToExplode() throws StopRequestException {
+		ai.checkInterruption();
 		List<AiTile> targets=getWallsTiles();
 		AiHero hero=ai.getOwnHero();
 		Astar astar = new Astar(ai,hero,
-			new MyCost(new TimeMatrice(this.ai)), 
+			new MyCost(new TimeMatrice(this.ai),ai), 
 			new BasicHeuristicCalculator(),
 			new WallSuccessor(ai)
 			);
@@ -110,11 +116,13 @@ public class BonusCollector {
 		
 		return path.getTile(path.getLength()-2);
 	}
-	public void setNearestItem(AiItem nearestItem) {
+	public void setNearestItem(AiItem nearestItem) throws StopRequestException {
+		ai.checkInterruption();
 		this.nearestItem = nearestItem;
 	}
 
-	public AiItem getNearestItem() {
+	public AiItem getNearestItem() throws StopRequestException {
+		ai.checkInterruption();
 		return nearestItem;
 	}
 	

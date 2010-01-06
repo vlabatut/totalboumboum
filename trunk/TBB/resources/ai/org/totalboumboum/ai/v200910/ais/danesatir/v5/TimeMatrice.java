@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
+import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
 import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
@@ -23,6 +24,7 @@ public class TimeMatrice {
 	private DaneSatir ai;
 	
 	public TimeMatrice(DaneSatir ai) throws StopRequestException {
+		ai.checkInterruption();
 		this.ai=ai;
 		this.zone=ai.getPercepts();
 		//this.zone.update(this.zone.getLimitTime());
@@ -34,14 +36,12 @@ public class TimeMatrice {
 	}
 	
 	public void sortBombes() throws StopRequestException {
-		// avant tout : test d'interruption
 		ai.checkInterruption();
-		Collections.sort(this.bombs,new BombComparator());
+		Collections.sort(this.bombs,new BombComparator(ai));
 //		GeneralFuncs.printBombs(bombs);
 	}
 	
 	public void createMatrice(List<AiBomb> bombes) throws StopRequestException {
-		// avant tout : test d'interruption
 		ai.checkInterruption();
 		for(AiBomb i : bombes ) {
 			ai.checkInterruption();
@@ -50,7 +50,6 @@ public class TimeMatrice {
 	}
 	
 	public void virExpandBomb(AiTile tile) throws StopRequestException{
-		// avant tout : test d'interruption
 		ai.checkInterruption();
 		double duration = Limits.bombDuration;
 		
@@ -64,6 +63,7 @@ public class TimeMatrice {
 		dirs.add(Direction.RIGHT);
 		
 		for(Direction dir : dirs) {
+			ai.checkInterruption();
 			AiTile temp = tile;
 			for (int i=0;i<range;i++) {
 				ai.checkInterruption();
@@ -93,7 +93,7 @@ public class TimeMatrice {
 	private void expandBomb(AiBomb bomb) throws StopRequestException {
 		// avant tout : test d'interruption
 		ai.checkInterruption();
-		double duration = getTimeToExplode(bomb);
+		double duration = getTimeToExplode(bomb,ai);
 		
 		List<AiTile> blast = bomb.getBlast();
 		blast.add(bomb.getTile());
@@ -112,24 +112,27 @@ public class TimeMatrice {
 		}
 	}
 
-	public double getTime(AiTile a) {
+	public double getTime(AiTile a) throws StopRequestException {
+		ai.checkInterruption();
 		return this.matrice[a.getLine()][a.getCol()];
 	}
 	
-	public double getTime() {
+	public double getTime() throws StopRequestException {
+		ai.checkInterruption();
 		AiHero hero = zone.getOwnHero();
 		AiTile tile = hero.getTile();
 		return getTime(tile);
 	}
 	
-	public void setTime(AiTile a, double duration) {
+	public void setTime(AiTile a, double duration) throws StopRequestException {
+		ai.checkInterruption();
 		this.matrice[a.getLine()][a.getCol()] = duration;
 	}
 	
 	public AiTile mostSafeCase(AiTile a, boolean justZero) throws StopRequestException {
 		// avant tout : test d'interruption
 		ai.checkInterruption();
-		MonTile mostSafe = new MonTile(a,0);
+		MonTile mostSafe = new MonTile(a,0,ai);
 		Stack<MonTile> stack = new Stack<MonTile>();
 		Stack<AiTile> processed = new Stack<AiTile>();
 		stack.push(mostSafe);
@@ -144,28 +147,31 @@ public class TimeMatrice {
 					if(getTime(i) == 0)
 						return i;
 					if( getTime(i) > (temp.getIter()+1)*Limits.tileDistance ) { 
-						stack.push(new MonTile(i,temp.getIter()+1));
+						stack.push(new MonTile(i,temp.getIter()+1,ai));
 						if(isSaferThan(i,mostSafe.getTile()) && justZero == false)
-							mostSafe = new MonTile(i,temp.getIter()+1);
+							mostSafe = new MonTile(i,temp.getIter()+1,ai);
 					}
 				}
 			}
 		}
-		if(TimeMatrice.isSafe(this, mostSafe.getTile()) && justZero == false)
+		if(TimeMatrice.isSafe(this, mostSafe.getTile(),ai) && justZero == false)
 			return mostSafe.getTile();
 		return null;
 	}
 	
 	public AiTile mostSafeCase() throws StopRequestException {
+		ai.checkInterruption();
 		AiHero hero = zone.getOwnHero();
 		AiTile tile = hero.getTile();
 		return mostSafeCase(tile);
 	}
 	public AiTile mostSafeCase(AiTile a) throws StopRequestException {
+		ai.checkInterruption();
 		return mostSafeCase(a,false);
 	}
 	
-	public boolean isSaferThan(AiTile a1, AiTile a2) {
+	public boolean isSaferThan(AiTile a1, AiTile a2) throws StopRequestException {
+		ai.checkInterruption();
 		double dur1=getTime(a1);
 		double dur2=getTime(a2);
 		if(dur1==0)
@@ -177,7 +183,8 @@ public class TimeMatrice {
 		return false;
 	}
 	
-	public static double getTimeToExplode(AiBomb bomb) {
+	public static double getTimeToExplode(AiBomb bomb,ArtificialIntelligence ai) throws StopRequestException {
+		ai.checkInterruption();
 		//TODO: make more accurate
 		if( bomb.getNormalDuration() - bomb.getTime() < 0)
 			return Limits.expandBombTime;
@@ -187,7 +194,8 @@ public class TimeMatrice {
 		return bomb.getNormalDuration() - bomb.getTime();
 	}
 	
-	public static boolean isSafe(TimeMatrice time,AiTile a) {
+	public static boolean isSafe(TimeMatrice time,AiTile a,ArtificialIntelligence ai) throws StopRequestException {
+		ai.checkInterruption();
 		double dur = time.getTime(a);
 		List<AiBlock> blocks = a.getBlocks();
 		if(!blocks.isEmpty())
