@@ -193,8 +193,8 @@ public class TargetRival {
 	 */
 	public List<AiTile> findAvailable()throws StopRequestException
 	{
-		rivalavailable=new int[dk.getPercepts().getHeigh()][dk.getPercepts().getWidth()];
 		dk.checkInterruption();
+		rivalavailable=new int[dk.getPercepts().getHeigh()][dk.getPercepts().getWidth()];
 		List<AiTile> result=new ArrayList<AiTile>();
 		for(int index=0;index<rivals.size();index++)//rivalların yanı kendisi değil
 		{

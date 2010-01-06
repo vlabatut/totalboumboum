@@ -148,23 +148,26 @@ public class PathManagement {
 	
 	public int getLength() throws StopRequestException
 	{	
+		ai.checkInterruption();
 		return path.getLength();
 	}
-	public  ArrayList<AiTile> getPathList()
+	public  ArrayList<AiTile> getPathList() throws StopRequestException
 	{
-		
+		ai.checkInterruption();
 		return path.getTiles();
 	}
 	
 	public boolean isWalkable() throws StopRequestException
 	{ 
+		ai.checkInterruption();
 		if(path.getLength()>0)
 			return true;
 		else
 			return false;
 	}
-	public void printPath()
+	public void printPath() throws StopRequestException
 	{
+		ai.checkInterruption();
 		System.out.println(path.getTiles().toString());
 	}
 	

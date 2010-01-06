@@ -163,7 +163,8 @@ public class BonusManager
 	private AiPath path;
 
 	//
-	public boolean isOnBonusDestruction(){
+	public boolean isOnBonusDestruction() throws StopRequestException{
+		ai.checkInterruption();
 		return OnBonusDestruction;
 	}
 	
