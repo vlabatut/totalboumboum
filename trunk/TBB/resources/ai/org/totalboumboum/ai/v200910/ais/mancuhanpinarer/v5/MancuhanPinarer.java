@@ -696,8 +696,10 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * 			La case de bombe passe en parametre.
 	 * @return
 	 * 			vrai si la bombe existe encore
+	 * @throws StopRequestException 
 	 */
-	private boolean isBombExists(AiTile bombTile) {
+	private boolean isBombExists(AiTile bombTile) throws StopRequestException {
+		checkInterruption();
 		boolean result = true;
 		if (bombTile.getBombs().size() == 0)
 			result = false;
@@ -738,8 +740,10 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * 			L'hero adversaire
 	 * @return
 	 * 			vrai si l'hero adversaire est mort.
+	 * @throws StopRequestException 
 	 */
-	private boolean isHeroDead(AiZone gameZone, AiHero hero) {
+	private boolean isHeroDead(AiZone gameZone, AiHero hero) throws StopRequestException {
+		checkInterruption();
 		boolean result = false;
 		List<AiHero> allHeros = gameZone.getHeroes();
 		List<AiHero> remainingHeros = gameZone.getRemainingHeroes();
@@ -1164,7 +1168,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		// L'objet pour implementer l'algo A*
 		Astar astar;
 		// Calcul du cout par la classe de l'API
-		CostCalculator cost = new RedGroupOffenseCostCalculator();
+		CostCalculator cost = new RedGroupOffenseCostCalculator(this);
 		// Calcul de l'heuristic par la classe de l'API
 		HeuristicCalculator heuristic = new BasicHeuristicCalculator();
 		astar = new Astar(this, ownHero, cost, heuristic);
@@ -1196,7 +1200,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		// L'objet pour implementer l'algo A*
 		Astar astar;
 		// Calcul du cout par la classe de l'API
-		CostCalculator cost = new RedGroupDefenseCostCalculator();
+		CostCalculator cost = new RedGroupDefenseCostCalculator(this);
 		// Calcul de l'heuristic par la classe de l'API
 		HeuristicCalculator heuristic = new BasicHeuristicCalculator();
 		astar = new Astar(this, ownHero, cost, heuristic);
