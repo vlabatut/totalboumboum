@@ -119,6 +119,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	@SuppressWarnings("unused")
 	private int distance(AiTile source, AiTile target)
 			throws StopRequestException {
+		checkInterruption();
 		int res = 0;
 		int x_1 = source.getCol();
 		int y_1 = source.getLine();
@@ -129,7 +130,8 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	}
 
 	@SuppressWarnings("unused")
-	private String toTileString(AiTile tile) {
+	private String toTileString(AiTile tile) throws StopRequestException {
+		checkInterruption();
 		String res = "";
 		int x = tile.getLine();
 		int y = tile.getCol();
@@ -140,6 +142,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	@SuppressWarnings("unused")
 	private String toTileString2(LinkedList<AiTile> tile)
 			throws StopRequestException {
+		checkInterruption();
 		String res = "";
 		Iterator<AiTile> it1 = tile.iterator();
 		while (it1.hasNext()) {
@@ -153,6 +156,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	@SuppressWarnings("unused")
 	private void initMatrice() throws StopRequestException {
+		checkInterruption();
 		// LinkedList<AiTile> danger = dangerZone();
 		AiZone zone = getPercepts();
 
@@ -178,6 +182,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		Collection<AiBomb> bombs = zone.getBombs();
 		Iterator<AiBomb> itBomb = bombs.iterator();
 		while (itBomb.hasNext()) {
+			checkInterruption();
 			AiBomb bomb = itBomb.next();
 			double temp = bomb.getNormalDuration() - bomb.getTime();
 			AiTile tile2 = bomb.getTile();
@@ -263,6 +268,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 		Iterator<AiTile> it2 = safeZone.iterator();
 		while (it2.hasNext()) {
+			checkInterruption();
 			AiTile temp = it2.next();
 			int x = temp.getLine();
 			int y = temp.getCol();
@@ -586,7 +592,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		LinkedList<AiTile> bombTiles = new LinkedList<AiTile>();
 		Iterator<AiBomb> it1 = bombs.iterator();
 		while (it1.hasNext()) {
-
+			checkInterruption();
 			if (it1.next().getBlast().contains(currentTile)
 					|| it1.next().getTile() == currentTile) {
 				AiTile temp = it1.next().getTile();
@@ -603,6 +609,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	@SuppressWarnings("unused")
 	private LinkedList<AiTile> bombRange(AiBomb bomb)
 			throws StopRequestException {
+		checkInterruption();
 		LinkedList<AiTile> resultat = new LinkedList<AiTile>();
 
 		return resultat;
@@ -648,6 +655,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		Collection<AiBomb> bombs = getPercepts().getBombs();
 		Iterator<AiBomb> it1 = bombs.iterator();
 		while (it1.hasNext()) {
+			checkInterruption();
 			double temp = it1.next().getNormalDuration();
 			bombTimes.add(temp);
 		}
@@ -697,6 +705,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		Iterator<AiBlock> it1 = blocks.iterator();
 		LinkedList<AiTile> blok = new LinkedList<AiTile>();
 		while (it1.hasNext()) {
+			checkInterruption();
 			AiTile temp = it1.next().getTile();
 			blok.add(temp);
 		}
@@ -724,6 +733,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		Iterator<AiBlock> blokTile = blok.iterator();
 		LinkedList<AiTile> tiles = new LinkedList<AiTile>();
 		while (blokTile.hasNext()) {
+			checkInterruption();
 			AiTile temp = blokTile.next().getTile();
 			tiles.add(temp);
 		}
@@ -884,6 +894,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	@SuppressWarnings("unused")
 	private LinkedList<AiTile> dangerZone1(AiTile tile)
 			throws StopRequestException {
+		checkInterruption();
 		LinkedList<AiTile> res = dangerZone();
 		int x = getPercepts().getOwnHero().getBombRange();
 		int i = 0;
@@ -950,6 +961,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		Collection<AiItem> bonus = getPercepts().getItems();
 		Iterator<AiItem> it1 = bonus.iterator();
 		while (it1.hasNext()) {
+			checkInterruption();
 			AiTile temp = it1.next().getTile();
 			bonusZone.add(temp);
 		}
@@ -980,6 +992,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		int min = 1000;
 		Iterator<AiTile> goTile = bonuslar.iterator();
 		while (goTile.hasNext()) {
+			checkInterruption();
 			AiTile escapeTileTemp = goTile.next();
 			PathFinder pathFind = new PathFinder(this.getPercepts(),
 					escapeTileTemp, this);
@@ -998,6 +1011,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 	@SuppressWarnings("unused")
 	private boolean canGo(AiTile target) throws StopRequestException {
+		checkInterruption();
 		boolean res = true;
 		PathFinder path = new PathFinder(this.getPercepts(), target, this);
 		LinkedList<AiTile> temp = path.getPath();
@@ -1008,6 +1022,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 
 		AiTile temp1;
 		while (it1.hasNext()) {
+			checkInterruption();
 			temp1 = it1.next();
 			int i = temp1.getLine();
 			int j = temp1.getCol();

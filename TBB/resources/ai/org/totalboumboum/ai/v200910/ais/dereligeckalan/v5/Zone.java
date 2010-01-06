@@ -105,12 +105,14 @@ public class Zone {
 			boolean right = true;
 			while(k < temp.getRange() && (up || down || left || right))
 			{
+				source.checkInterruption(); //Appel Obligatoire
 				int a =0;
 				source.checkInterruption(); //Appel Obligatoire
 				
 					AiTile temp1 = temp.getTile();
 					while(up && a<k)
 					{
+						source.checkInterruption(); //Appel Obligatoire
 						
 						AiTile temp2 = temp1.getNeighbor(Direction.UP);
 						temp1 = temp2; 
@@ -129,6 +131,7 @@ public class Zone {
 				
 					while(down && a<k)
 					{
+						source.checkInterruption(); //Appel Obligatoire
 						
 						AiTile temp2 = temp1.getNeighbor(Direction.DOWN);
 						temp1 = temp2; 
@@ -145,7 +148,8 @@ public class Zone {
 					temp1 = temp.getTile();
 					while(left && a<k)
 					{
-						
+						source.checkInterruption(); //Appel Obligatoire
+					
 						AiTile temp2 = temp1.getNeighbor(Direction.LEFT);
 						temp1 = temp2; 
 						int x = temp2.getCol();
@@ -161,6 +165,7 @@ public class Zone {
 					temp1 = temp.getTile();
 					while(right && a<k)
 					{
+						source.checkInterruption(); //Appel Obligatoire
 						
 						AiTile temp2 = temp1.getNeighbor(Direction.RIGHT);
 						temp1 = temp2; 
