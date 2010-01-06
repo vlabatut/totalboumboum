@@ -170,6 +170,7 @@ public class Bonus_Manager {
 		boolean x=true;
 		int m=0;
 		while(m<path_b.getLength()-1 && path_b.isEmpty()==false){
+			ai.checkInterruption();
 			if(safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b.getTile(m).getCol()]!=safe_map.SAFE_CASE)
 				x=false;
 				
@@ -206,7 +207,7 @@ public class Bonus_Manager {
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		safe_map=new Safety_Map(zone);
+		safe_map=new Safety_Map(zone,ai);
 		double safetyMatrix_b[][] = safe_map.returnMatrix();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -259,9 +260,11 @@ public class Bonus_Manager {
 	/**
 	 * verifies if the path is accessible or not:
 	 * @return
+	 * @throws StopRequestException 
 	 */
 	
-	public boolean accessiblePath(){
+	public boolean accessiblePath() throws StopRequestException{
+		ai.checkInterruption();
 		if(path_b.isEmpty()==false)
 			return true;
 		else
@@ -279,7 +282,7 @@ public class Bonus_Manager {
 
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
-		safe_map=new Safety_Map(zone);
+		safe_map=new Safety_Map(zone,ai);
 		AiTile tile_dest_b;
 		ArrayList<AiTile> result_b = new ArrayList<AiTile>();
 		

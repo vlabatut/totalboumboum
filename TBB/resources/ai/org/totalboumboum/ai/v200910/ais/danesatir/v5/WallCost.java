@@ -14,9 +14,8 @@ public class WallCost extends CostCalculator {
 	ArtificialIntelligence ai;
 	
 	public WallCost(ArtificialIntelligence ai) throws StopRequestException
-	{	this.ai = ai;
-		ai.checkInterruption();
-	
+	{	ai.checkInterruption();
+		this.ai = ai;
 	}
 	
 	@Override

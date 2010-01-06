@@ -39,7 +39,7 @@ public class Wall_Manager_2{
 	   //safe_map=new Safety_Map(zone);
 		this.ai = ai;
 		zone = ai.getPercepts();
-		safe_map=new Safety_Map(zone);
+		safe_map=new Safety_Map(zone,ai);
 		
 		// initialise a star
 		double costMatrix[][] = new double[zone.getHeigh()][zone.getWidth()];
@@ -63,7 +63,7 @@ public class Wall_Manager_2{
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		//update the cost method
 		updateCostCalculator_b();
-		safe_map=new Safety_Map(zone);
+		safe_map=new Safety_Map(zone,ai);
 		Direction result = Direction.NONE;
 		//if we didnt arrive yet we will decide if we will make deplacement to the next case or not:
 		if(!hasArrived_b())
@@ -100,7 +100,7 @@ public class Wall_Manager_2{
 	
 	
 	
-	public boolean canPass(){
+	public boolean canPass() throws StopRequestException{
 	
 		int m=0;
 		int stop=1;
@@ -273,7 +273,7 @@ public class Wall_Manager_2{
 		AiTile tile_dest_b=null;
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiBlock> block_iterator=zone.getBlocks().iterator();
-		safe_map=new Safety_Map(zone);
+		safe_map=new Safety_Map(zone,ai);
 		AiBlock blck;
 		while(block_iterator.hasNext()==true){
 			blck=block_iterator.next();
@@ -309,7 +309,7 @@ public class Wall_Manager_2{
 	}
 	
 	
-	public boolean isdang(){
+	public boolean isdang() throws StopRequestException{
 		int stop=0;
 		boolean x=false;
 		int m=0;
