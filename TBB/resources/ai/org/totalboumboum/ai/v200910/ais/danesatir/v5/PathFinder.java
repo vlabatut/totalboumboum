@@ -24,12 +24,15 @@ public class PathFinder {
 	 * Default Constructor for Pathfinder 
 	 * @param ai
 	 * @param time
+	 * @throws StopRequestException 
 	 */
-	public PathFinder(DaneSatir ai, TimeMatrice time) {
+	public PathFinder(DaneSatir ai, TimeMatrice time) throws StopRequestException {
 		this(ai,ai.getOwnHero(),time);
+		ai.checkInterruption();
 	}
 	
-	public PathFinder(DaneSatir ai, AiHero hero, TimeMatrice time) {
+	public PathFinder(DaneSatir ai, AiHero hero, TimeMatrice time) throws StopRequestException {
+		ai.checkInterruption();
 		this.ai=ai;
 		this.hero=hero;
 		this.curIndex=0;
@@ -54,7 +57,7 @@ public class PathFinder {
 		ai.checkInterruption();
 		Astar astar;
 		astar = new Astar(ai,hero,
-				new MyCost(this.time),
+				new MyCost(this.time,ai),
 				new BasicHeuristicCalculator(),
 				new MySuccessor(this.ai,this.time)
 				);
@@ -70,10 +73,12 @@ public class PathFinder {
 		}
 	}
 	
-	public AiPath getPath() {
+	public AiPath getPath() throws StopRequestException {
+		ai.checkInterruption();
 		return path;
 	}
-	public void clearPath() {
+	public void clearPath() throws StopRequestException {
+		ai.checkInterruption();
 		this.path=null;
 	}
 	/**
@@ -136,21 +141,25 @@ public class PathFinder {
 		}
 	}
 	
-	public boolean isTarget(AiTile targetTile) {
+	public boolean isTarget(AiTile targetTile) throws StopRequestException {
+		ai.checkInterruption();
 		if (this.targetList == null)
 			return false;
 		return this.targetList.contains(targetTile);
 	}
 	
-	public boolean isArrive() {
+	public boolean isArrive() throws StopRequestException {
+		ai.checkInterruption();
 		return this.isTarget(this.hero.getTile());
 	}
 	
-	public List<AiTile> getTargets() {
+	public List<AiTile> getTargets() throws StopRequestException {
+		ai.checkInterruption();
 		return this.targetList;
 	}
 
-	public void updateTimeMatrice(TimeMatrice time) {
+	public void updateTimeMatrice(TimeMatrice time) throws StopRequestException {
+		ai.checkInterruption();
 		this.time = time;
 	}
 }
