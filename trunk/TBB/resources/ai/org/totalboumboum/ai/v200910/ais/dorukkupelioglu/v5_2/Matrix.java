@@ -95,9 +95,9 @@ public class Matrix
 	
 
 	private void putFREE()throws StopRequestException//önce her yeri free yaptık
-	{
+	{	dk.checkInterruption();
 		for (line = 0; line < zone.getHeigh(); line++) 
-		{
+		{	
 			dk.checkInterruption();
 			for (col = 0; col < zone.getWidth(); col++) 
 			{

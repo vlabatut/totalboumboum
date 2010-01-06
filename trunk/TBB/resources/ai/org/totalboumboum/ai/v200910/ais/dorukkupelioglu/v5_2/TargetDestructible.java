@@ -157,8 +157,8 @@ public class TargetDestructible {
 		return hasPathFound && !targetDestructibleEnded;
 	}	
 	
-	public boolean pathWorks()
-	{
+	public boolean pathWorks() throws StopRequestException
+	{	dk.checkInterruption();
 		return pathWorks;
 	}
 	
@@ -168,8 +168,8 @@ public class TargetDestructible {
 		return hasPathFound;
 	}
 	
-	public int PathLength()
-	{
+	public int PathLength() throws StopRequestException
+	{	dk.checkInterruption();
 		return path.getLength();
 	}
 }

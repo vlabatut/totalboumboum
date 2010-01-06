@@ -2,6 +2,8 @@ package org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v5_2;
 
 import java.util.List;
 
+import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 /**
@@ -19,16 +21,18 @@ public class Node {
 	private double Gvalue;//cost
 	private double Hvalue;//heuristic
 	private double Fvalue;//cost + heuristic
-
+	ArtificialIntelligence ai;
 	/**
 	 * Constucteur a faire les initialisation
 	 * @param tile la case base du noeud
 	 * @param end elle va utiliser pour la calcule d'heuristique.
 	 * @param parent le noeud parent de ce noeud
 	 * @param areaMatrix cost hesabı yaparken incelenen tile da ne olduğunu öğrenmek için
+	 * @throws StopRequestException 
 	 */
-	public Node(AiTile tile,AiTile end,Node parent,double[][] areaMatrix)
-	{
+	public Node(AiTile tile,AiTile end,Node parent,double[][] areaMatrix, ArtificialIntelligence ai) throws StopRequestException
+	{	ai.checkInterruption();
+		this.ai = ai;
 		this.areaMatrix=areaMatrix;
 		this.tile=tile;
 		this.end=end;
@@ -39,9 +43,10 @@ public class Node {
 	
 	/**
 	 * Cette fonction va trouver les valeurs des G:cost , H:heuristique, F:la totale
+	 * @throws StopRequestException 
 	 */
-	public void putValues()
-	{
+	public void putValues() throws StopRequestException
+	{	ai.checkInterruption();
 		this.Hvalue=Math.sqrt(Math.pow(tile.getCol()-end.getCol(), 2)+Math.pow(tile.getLine()-end.getLine(), 2));
 		Node n= this.parent;
 		if(n!=null)
@@ -57,7 +62,7 @@ public class Node {
 		
 		List<AiTile> neighbors=tile.getNeighbors();
 		for(int index=0;index<neighbors.size();index++)
-		{
+		{	ai.checkInterruption();
 			double state=areaMatrix[neighbors.get(index).getLine()][neighbors.get(index).getCol()];
 			if((n==null||n.getTile()!=neighbors.get(index))&&state>State.MALUS)
 			{
@@ -72,41 +77,46 @@ public class Node {
 	
 	/**
 	 * @return la valeur G:cost du noeud correspondant
+	 * @throws StopRequestException 
 	 */
-	public double getG()
-	{
+	public double getG() throws StopRequestException
+	{	ai.checkInterruption();
 		return Gvalue;
 	}
 	
 	/**
 	 * @return la valeur H:heuristique du noeud correspondant
+	 * @throws StopRequestException 
 	 */
-	public double getH()
-	{
+	public double getH() throws StopRequestException
+	{	ai.checkInterruption();
 		return Hvalue;
 	}
 	
 	/**
 	 * @return la valeur F du noeud correspondant
+	 * @throws StopRequestException 
 	 */
-	public double getF()
-	{
+	public double getF() throws StopRequestException
+	{	ai.checkInterruption();
 		return Fvalue;
 	}
 	
 	/**
 	 * @return le noeud parent du noeud correspondant
+	 * @throws StopRequestException 
 	 */
-	public Node getParent()
-	{
+	public Node getParent() throws StopRequestException
+	{	ai.checkInterruption();
 		return parent;
 	}
 	
 	/**
 	 * @return la case base du ce noeud
+	 * @throws StopRequestException 
 	 */
-	public AiTile getTile()
-	{
+	public AiTile getTile() throws StopRequestException
+	{	ai.checkInterruption();
 		return tile;
 	}
 }
