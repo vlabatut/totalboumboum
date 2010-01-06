@@ -23,6 +23,7 @@ public class MySuccessor extends SuccessorCalculator{
 	
 	public MySuccessor(DaneSatir ai) throws StopRequestException {
 		this(ai,new TimeMatrice(ai));
+		ai.checkInterruption();		
 	}
 	/**
 	 * Expand current tile neighbors and check time with Depth

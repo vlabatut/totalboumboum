@@ -48,7 +48,8 @@ public class Can_escape_Manager {
 
 
 	
-	public int getPathLength(){
+	public int getPathLength() throws StopRequestException{
+		ai.checkInterruption();
 		return path_b.getLength();		
 		
 	}
@@ -77,7 +78,7 @@ public class Can_escape_Manager {
 
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
-		safe_map=new Can_escape(zone);
+		safe_map=new Can_escape(zone,ai);
 		AiTile tile_dest_b;
 		ArrayList<AiTile> result_b = new ArrayList<AiTile>();
 		
