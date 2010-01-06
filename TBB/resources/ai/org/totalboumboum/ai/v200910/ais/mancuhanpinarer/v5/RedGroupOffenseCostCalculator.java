@@ -28,6 +28,7 @@ public class RedGroupOffenseCostCalculator extends CostCalculator {
 		List<AiBomb> bombList=gameZone.getBombs();
 		Iterator<AiBomb> bombIterator=bombList.iterator();
 		while(bombIterator.hasNext()){
+			ai.checkInterruption();
 			AiBomb bomb=bombIterator.next();
 			List<AiTile> effectedTiles=bomb.getBlast();
 			if(effectedTiles.contains(end))

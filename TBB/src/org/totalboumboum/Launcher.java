@@ -1044,6 +1044,7 @@ public class Launcher
 	 * 		- supprimer tous les commentaires TODO et NOTE
 	 * 		- effacer le changelog
 	 * 		- virer les classes contenant un main()
+	 * 		- virer le package d'IA 2010-11
 	 * - ressources :
 	 * 		- supprimer restmp
 	 * 		- réinitialiser les logstats
