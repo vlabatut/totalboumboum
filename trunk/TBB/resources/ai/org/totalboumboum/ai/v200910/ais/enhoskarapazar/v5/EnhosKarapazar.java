@@ -422,8 +422,8 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 				if (ownHeroLine == rivalLine) {
 					if (rivalCol < ownHeroCol) {
 						for (int i = rivalCol + 1; i < ownHeroCol; i++) {
-							try {
-								if (dZone.getEnum(ownHeroLine, i) == ZoneEnum.BONUSBOMBE
+							checkInterruption();
+							if (dZone.getEnum(ownHeroLine, i) == ZoneEnum.BONUSBOMBE
 										|| dZone.getEnum(ownHeroLine, i) == ZoneEnum.BONUSRANGE
 										|| dZone.getEnum(ownHeroLine, i) == ZoneEnum.DESTRUCTIBLES
 										|| dZone.getEnum(ownHeroLine, i) == ZoneEnum.INDESTRUCTIBLES) {
@@ -431,19 +431,10 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 									UP = true;
 									break;
 								}
-							} catch (Exception e) {
-								if (debugMode) {
-									System.out
-											.println("attak range patladý dýþþþþþ................................................................UP"
-													+ i);
-									System.out.println(e.getStackTrace());
-								}
-							}
 						}
 					} else {
 						for (int i = rivalCol - 1; i > ownHeroCol; i--) {
 							checkInterruption(); // APPEL OBLIGATOIRE
-							try {
 								if (dZone.getEnum(ownHeroLine, i) == ZoneEnum.BONUSBOMBE
 										|| dZone.getEnum(ownHeroLine, i) == ZoneEnum.BONUSRANGE
 										|| dZone.getEnum(ownHeroLine, i) == ZoneEnum.DESTRUCTIBLES
@@ -452,14 +443,6 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 									DOWN = true;
 									break;
 								}
-							} catch (Exception e) {
-								if (debugMode) {
-									System.out
-											.println("attak range patladý dýþþþþþ................................................................DOWN"
-													+ i);
-									System.out.println(e.getStackTrace());
-								}
-							}
 						}
 					}
 				} else
@@ -469,7 +452,6 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 						if (rivalLine < ownHeroLine) {
 							for (int i = rivalLine + 1; i < ownHeroLine; i++) {
 								checkInterruption(); // APPEL OBLIGATOIRE
-								try {
 									if (dZone.getEnum(i, ownHeroCol) == ZoneEnum.BONUSBOMBE
 											|| dZone.getEnum(i, ownHeroCol) == ZoneEnum.BONUSRANGE
 											|| dZone.getEnum(i, ownHeroCol) == ZoneEnum.DESTRUCTIBLES
@@ -477,34 +459,17 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 
 										LEFT = true;
 										break;
-									}
-								} catch (Exception e) {
-									if (debugMode) {
-										System.out
-												.println("attak range patladý dýþþþþþ................................................................LEFT"
-														+ i);
-										System.out.println(e.getStackTrace());
-									}
 								}
 							}
 						} else {
 							for (int i = rivalLine - 1; i > ownHeroLine; i--) {
 								checkInterruption(); // APPEL OBLIGATOIRE
-								try {
 									if (dZone.getEnum(ownHeroCol, i) == ZoneEnum.BONUSBOMBE
 											|| dZone.getEnum(i, ownHeroCol) == ZoneEnum.BONUSRANGE
 											|| dZone.getEnum(i, ownHeroCol) == ZoneEnum.DESTRUCTIBLES
 											|| dZone.getEnum(i, ownHeroCol) == ZoneEnum.INDESTRUCTIBLES) {
 										RIGHT = true;
 										break;
-									}
-								} catch (Exception e) {
-									if (debugMode) {
-										System.out
-												.println("attak range patladý dýþþþþþ................................................................RIGHT"
-														+ i);
-										System.out.println(e.getStackTrace());
-									}
 								}
 							}
 						}
@@ -525,6 +490,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	 */
 	private returnAction isDirectionSafe(returnAction move)
 			throws StopRequestException {
+		checkInterruption();
 		int heroLine = ownHero.getLine();
 		int heroCol = ownHero.getCol();
 		boolean dangerDown = inDanger(heroLine + 1, heroCol);

@@ -103,6 +103,7 @@ public class DangerZone {
 			// Est-ce qu'on continue sur ces directions?
 			boolean up = true, down = true, left = true, right = true;
 			while (k < temp.getRange() + 1 && (up || down || left || right)) {
+				source.checkInterruption();
 				int a = 0;
 				source.checkInterruption(); // Appel Obligatoire
 
