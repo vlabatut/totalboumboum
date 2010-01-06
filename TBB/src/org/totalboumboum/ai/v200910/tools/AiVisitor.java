@@ -174,7 +174,8 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
     {	String prevMethod = currentMethod;
     	currentMethod = n.getName();
     	indentLevel++;
-
+if(currentMethod.equals("PathFinder"))
+	System.out.println();
     	if (n.getJavaDoc() != null)
     	{	n.getJavaDoc().accept(this, arg);
         }
@@ -335,7 +336,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 						}
 					}
 					else if(firstStatement instanceof ExplicitConstructorInvocationStmt)
-					{	// c'est un appel à super(), donc ça doit forcément être au début
+					{	// c'est un appel à super/this, donc ça doit forcément être au début
 						// mais la deuxième instruction doit être un appel à checkInterruption()
 						if(statements.size()<2)
 						{	// erreur

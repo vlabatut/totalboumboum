@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar.successor;
 
 import java.util.List;
 
+import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.astar.AstarNode;
 
@@ -50,5 +51,5 @@ public abstract class SuccessorCalculator
 	 * @param node	le noeud de recherche courant 
 	 * @return	la liste de cases accessibles
 	 */
-	public abstract List<AiTile> processSuccessors(AstarNode node);
+	public abstract List<AiTile> processSuccessors(AstarNode node) throws StopRequestException;
 }

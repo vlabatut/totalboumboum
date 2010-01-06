@@ -58,7 +58,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalcul
  * renverra pas forcément toujours la même (il en choisira une au hasard).
  * Le but est d'introduire une part de hasard dans les IA, de manière à les rendre moins prévisibles.
  */
-public class Astar
+public final class Astar
 {	private static boolean verbose = false;
 
 	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)

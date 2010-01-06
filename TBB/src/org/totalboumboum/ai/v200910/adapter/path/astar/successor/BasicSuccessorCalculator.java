@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v200910.adapter.path.astar.successor;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.path.astar.AstarNode;
@@ -54,7 +55,7 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 	 * @return	une liste des cases successeurs
 	 */
 	@Override
-	public List<AiTile> processSuccessors(AstarNode node)
+	public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException
 	{	// init
 		List<AiTile> result = new ArrayList<AiTile>();
 		AiTile tile = node.getTile();

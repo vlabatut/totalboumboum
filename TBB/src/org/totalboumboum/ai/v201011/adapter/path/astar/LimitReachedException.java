@@ -31,7 +31,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * On ne peut donc pas conclure quant à l'existence d'un un chemin solution. 
  */
 
-public class LimitReachedException extends Exception
+public final class LimitReachedException extends Exception
 {	private static final long serialVersionUID = 1L;
 
 	public LimitReachedException(AiTile startTile, List<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
