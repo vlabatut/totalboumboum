@@ -61,7 +61,7 @@ public class Astar
 		start=startTile;
 		if(start!=endTile)
 		{
-			Node startNode=new Node(start,endTile,null,matrix.getAreaMatrix());
+			Node startNode=new Node(start,endTile,null,matrix.getAreaMatrix(),dk);
 			CreateClosedList(startNode,endTile);//bu fonksiyonu çağırdığında init yapıldı
 			Node endNode = isTileInList(endTile,closed);
 			if(endNode!=null)
@@ -183,7 +183,7 @@ public class Astar
 						neighborTile=itne.next();
 						if(isTileInList(neighborTile, closed)==null)
 						{
-							Node neighborNode= new Node(neighborTile,end,smallest,matrix.getAreaMatrix());//Eklenecek node
+							Node neighborNode= new Node(neighborTile,end,smallest,matrix.getAreaMatrix(),dk);//Eklenecek node
 							if(neighborTile==end)//la list "open" ne contient pas les voisines donc il faut les explorer
 							{
 								if(matrix.getAreaMatrix()[end.getLine()][end.getCol()]<=State.DESTRUCTIBLE)

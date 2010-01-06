@@ -164,8 +164,8 @@ public class Target
 		return hasPathFound && !targetEnded;
 	}
 	
-	public boolean pathWorks()
-	{
+	public boolean pathWorks() throws StopRequestException
+	{	dk.checkInterruption();
 		return pathWorks;
 	}
 	

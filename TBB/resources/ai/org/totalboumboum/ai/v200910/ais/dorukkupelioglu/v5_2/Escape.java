@@ -43,7 +43,9 @@ public class Escape {
 					hasPathFound=true;
 					pathStates=new ArrayList<Double>();
 					for(int index=0;index<path.getLength();index++)
+					{	dk.checkInterruption();
 						pathStates.add(dk.getMatrix().getAreaMatrix()[path.getTile(index).getLine()][path.getTile(index).getCol()]);
+					}
 				}
 				else
 				{
@@ -108,8 +110,8 @@ public class Escape {
 		return hasPathFound && !escapeEnded;
 	}
 	
-	public boolean pathWorks()
-	{
+	public boolean pathWorks() throws StopRequestException
+	{	dk.checkInterruption();
 		return pathWorks;
 	}
 	
