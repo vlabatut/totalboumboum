@@ -13,11 +13,12 @@
 		<player file="57" color="RUST" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="9" color="PINK" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="59" color="BROWN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="17" color="GRASS" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="18" color="PURPLE" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="65" color="RED" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="70" color="GREY" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="8" color="WHITE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="54" color="WHITE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="32" color="GRASS" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="77" color="RED" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="1" color="GREY" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="69" color="BLACK" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="64" color="PURPLE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 

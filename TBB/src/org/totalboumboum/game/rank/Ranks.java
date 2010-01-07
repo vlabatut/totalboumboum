@@ -31,7 +31,6 @@ import java.util.Map.Entry;
 
 import org.totalboumboum.configuration.profile.Profile;
 
-
 public class Ranks implements Serializable
 {	private static final long serialVersionUID = 1L;
 
@@ -108,13 +107,26 @@ public class Ranks implements Serializable
 		List<Integer> keys = new ArrayList<Integer>(ranks.keySet());
 		Collections.sort(keys);
 		
-		// populate list
-		for(int rank: keys)
-		{	List<Profile> profiles = ranks.get(rank);
-			for(Profile profile: profiles)
-				result.add(profile);
+		if(keys.size()>0)
+		{	// dealing with unranked profiles first
+			List<Profile> unranked = new ArrayList<Profile>();
+			if(keys.get(0)==0)
+			{	List<Profile> profiles = ranks.get(0);
+				for(Profile profile: profiles)
+					unranked.add(profile);
+				keys.remove(0);
+			}
+			
+			// populate list
+			for(int rank: keys)
+			{	List<Profile> profiles = ranks.get(rank);
+				for(Profile profile: profiles)
+					result.add(profile);
+			}
+			
+			result.addAll(unranked);
 		}
-
+		
 		return result;
 	}
 
