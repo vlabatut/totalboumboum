@@ -37,6 +37,7 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
+import org.totalboumboum.tools.files.FileNames;
 
 
 
@@ -162,5 +163,9 @@ public class ClassTools
 			i++;
 		}
 		return result;
+	}
+
+	public static String getTbbPackage()
+	{	return FileNames.FOLDER_ORG + CLASS_SEPARATOR + FileNames.FOLDER_TOTALBOUMBOUM;		
 	}
 }
