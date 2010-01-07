@@ -110,8 +110,8 @@
 				</tieBreak>
 				<players>
 					<player part="0" rank="1"/>
-					<player part="1" rank="2"/>
 					<player part="2" rank="1"/>
+					<player part="1" rank="2"/>
 					<player part="3" rank="2"/>
 				</players>
 			</part>
@@ -126,10 +126,10 @@
 					<match local="true" name="tieBreak" />
 				</tieBreak>
 				<players>
-					<player part="0" rank="2"/>
 					<player part="1" rank="1"/>
-					<player part="2" rank="2"/>
 					<player part="3" rank="1"/>
+					<player part="0" rank="2"/>
+					<player part="2" rank="2"/>
 				</players>
 			</part>
 		</leg>
@@ -147,8 +147,8 @@
 				</tieBreak>
 				<players>
 					<player part="1" rank="3"/>
-					<player part="1" rank="4"/>
 					<player part="2" rank="3"/>
+					<player part="1" rank="4"/>
 					<player part="2" rank="4"/>
 				</players>
 			</part>
@@ -164,8 +164,8 @@
 				</tieBreak>
 				<players>
 					<player part="1" rank="1"/>
-					<player part="1" rank="2"/>
 					<player part="2" rank="1"/>
+					<player part="1" rank="2"/>
 					<player part="2" rank="2"/>
 				</players>
 			</part>
