@@ -42,7 +42,7 @@ public class AiLoader
 			throw new FileNotFoundException(classFile);
 		
 		// load the class
-		String packageName = packname+ClassTools.CLASS_SEPARATOR+name;
+		String packageName = ClassTools.getTbbPackage()+ClassTools.CLASS_SEPARATOR+FileNames.FOLDER_AI+ClassTools.CLASS_SEPARATOR+packname+ClassTools.CLASS_SEPARATOR+FileNames.FOLDER_AIS+ClassTools.CLASS_SEPARATOR+name;
 		String classQualifiedName = packageName+ClassTools.CLASS_SEPARATOR+FileNames.FILE_AI_MAIN_CLASS;
 		Class<?> tempClass = Class.forName(classQualifiedName);
 		if(!AbstractAiManager.class.isAssignableFrom(tempClass))

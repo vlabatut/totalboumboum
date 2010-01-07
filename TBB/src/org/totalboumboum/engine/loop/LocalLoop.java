@@ -107,6 +107,7 @@ public class LocalLoop extends Loop
 		// load level & instance
 		HollowLevel hollowLevel = round.getHollowLevel();
 		Instance instance = hollowLevel.getInstance();
+		RoundVariables.setInstance(instance);
 		hollowLevel.initLevel(this);
 		level = hollowLevel.getLevel();
 		RoundVariables.setLoop(this);
