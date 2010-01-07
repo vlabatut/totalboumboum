@@ -230,7 +230,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 	{	Ranks ranks = part.getOrderedPlayers();
 		List<Profile> absoluteList = ranks.getAbsoluteOrderList();
 		Profile result = null;
-		if(line<absoluteList.size())
+		if(line<=absoluteList.size())
 			result = absoluteList.get(line-1);
 		else if(ranks.size()==0)
 			result = part.getProfileForIndex(line-1);

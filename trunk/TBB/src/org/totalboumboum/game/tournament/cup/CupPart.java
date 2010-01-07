@@ -518,11 +518,17 @@ public class CupPart implements Serializable
 		
 		List<Profile> prfls = ranks.getProfilesFromRank(localRank);
 		if(prfls!=null)
-		{	for(Profile profile: prfls)
+		{	// process each player with the specified local rank
+			for(Profile profile: prfls)
 			{	CupPlayer player = getPlayerForProfile(profile);
-//NOTE				if(player.getActualFinalRank()==0)
-				{	result ++;
-					player.setActualFinalRank(finalRank);
+				// only if the player was not already ranked in a higher level match 
+				if(player.getActualFinalRank()==0)
+				{	CupPart nextPart = getNextPartForRank(localRank);
+					// and only if the player has no other match coming
+					if(nextPart==null)
+					{	result ++;
+						player.setActualFinalRank(finalRank);
+					}
 				}
 			}
 		}

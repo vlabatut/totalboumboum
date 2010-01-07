@@ -116,7 +116,7 @@ public class CupPlayer implements Serializable
 			int index = part.getPlayers().indexOf(this);
 			Profile profile = part.getProfileForIndex(index);
 			CupPlayer prevPlayer = prevPart.getPlayerForProfile(profile);
-			prevPlayer.setSimulatedFinalRank(actualFinalRank);
+			prevPlayer.setActualFinalRank(actualFinalRank);
 		}
 	}
 
@@ -136,6 +136,7 @@ public class CupPlayer implements Serializable
 		result = result + "used: "+used;
 		result = result + " simulatedRank: "+simulatedRank;
 		result = result + " simulatedFinalRank: "+simulatedFinalRank;
+		result = result + " actualFinalRank: "+actualFinalRank;
 		return result;
 	}
 }
