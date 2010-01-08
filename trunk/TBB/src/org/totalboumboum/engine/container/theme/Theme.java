@@ -21,16 +21,21 @@ package org.totalboumboum.engine.container.theme;
  * 
  */
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.block.BlockFactory;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
+import org.xml.sax.SAXException;
 
 
 public class Theme implements Serializable
@@ -92,6 +97,23 @@ public class Theme implements Serializable
 	{	this.source = source;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// INSTANCE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Instance instance = null;
+	
+	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	this.instance = instance;
+		for(BlockFactory blockFactory: blocks.values())
+			blockFactory.setInstance(instance);
+		for(FloorFactory floorFactory: floors.values())
+			floorFactory.setInstance(instance);
+	}
+
+	public Instance getInstance()
+	{	return instance;	
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FLOORS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
