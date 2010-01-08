@@ -76,6 +76,8 @@ public abstract class SpriteFactory<T extends Sprite> implements Serializable
 		// bombset
 		BombsetManager bombsetManager = new BombsetManager(sprite);
 		bombsetManager.setBombset(bombset);
+if(bombset==null)
+	System.out.println();
 		sprite.setBombsetManager(bombsetManager);
 		
 		// explosion

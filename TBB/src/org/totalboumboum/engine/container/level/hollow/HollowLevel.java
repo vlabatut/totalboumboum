@@ -119,6 +119,9 @@ public class HollowLevel implements Serializable
     	individualFolder = individualFolder+File.separator+FileNames.FOLDER_THEMES+File.separator+levelInfo.getTheme();
     	Theme theme = ThemeLoader.loadTheme(individualFolder);
 //		level.setTheme(theme);
+    	
+		instance.initLinks();
+		theme.setInstance(instance);
 		
     	// init zone
 		Tile[][] matrix = level.getMatrix();

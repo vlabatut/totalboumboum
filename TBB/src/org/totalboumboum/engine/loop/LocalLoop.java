@@ -120,7 +120,6 @@ public class LocalLoop extends Loop
 		loadStepOver();
 		hollowLevel.loadTheme();
 		loadStepOver();
-		hollowLevel.getInstance().initLinks();
 		
 		// load players : common stuff
 		String baseFolder = FilePaths.getInstancesPath()+File.separator+RoundVariables.instance.getName()+File.separator+FileNames.FOLDER_HEROES;
