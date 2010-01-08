@@ -57,7 +57,7 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// BOMBSET MAP		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private BombsetMap bombsetMap;
+	private transient BombsetMap bombsetMap;
 
 	public void loadBombsetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// init bombset map
@@ -76,7 +76,7 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// FIRESET MAP		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private FiresetMap firesetMap;
+	private transient FiresetMap firesetMap;
 	
 	public void loadFiresetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_FIRES;
@@ -90,7 +90,7 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ITEMSET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Itemset itemset;
+	private transient Itemset itemset;
 
 	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_ITEMS;
@@ -104,7 +104,7 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// EXPLOSIONSET		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Explosionset explosionset;
+	private transient Explosionset explosionset;
 
 	public void loadExplosionSet() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_EXPLOSIONS;
