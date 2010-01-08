@@ -20,10 +20,8 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 public class FindikSirin extends ArtificialIntelligence
 {		
-
 	
 	/** méthode appelée par le moteur du jeu pour obtenir une action de notre IA */
 	public AiAction processAction() throws StopRequestException

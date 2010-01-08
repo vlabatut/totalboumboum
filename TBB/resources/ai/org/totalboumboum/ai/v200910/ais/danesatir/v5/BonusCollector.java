@@ -12,7 +12,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
-
 /**
  * Class for Bonus Collect
  * @author limon
@@ -26,20 +25,16 @@ public class BonusCollector {
 	/**
 	 * default constructor we need our instance for handling checkInterruption
 	 * @param ai
-	 * @throws StopRequestException 
 	 */
-	public BonusCollector(DaneSatir ai) throws StopRequestException {
-		ai.checkInterruption();
+	public BonusCollector(DaneSatir ai) {
 		this.ai=ai;
 	}
 	
 	/**
 	 * Return raw item list
 	 * @return AiItem list
-	 * @throws StopRequestException 
 	 */
-	public List<AiItem> getItems() throws StopRequestException {
-		ai.checkInterruption();
+	public List<AiItem> getItems() {
 		return ai.getPercepts().getItems();
 	}
 	
@@ -90,7 +85,6 @@ public class BonusCollector {
 	 * @throws NoWayException
 	 */
 	public void findNearestItem() throws StopRequestException, NoWayException {
-		ai.checkInterruption();
 		findNearestItem(ai.getOwnHero());
 	}
 	
@@ -100,11 +94,10 @@ public class BonusCollector {
 	 * @throws StopRequestException
 	 */
 	public AiTile findWallToExplode() throws StopRequestException {
-		ai.checkInterruption();
 		List<AiTile> targets=getWallsTiles();
 		AiHero hero=ai.getOwnHero();
 		Astar astar = new Astar(ai,hero,
-			new MyCost(new TimeMatrice(this.ai),ai), 
+			new MyCost(new TimeMatrice(this.ai)), 
 			new BasicHeuristicCalculator(),
 			new WallSuccessor(ai)
 			);
@@ -116,13 +109,11 @@ public class BonusCollector {
 		
 		return path.getTile(path.getLength()-2);
 	}
-	public void setNearestItem(AiItem nearestItem) throws StopRequestException {
-		ai.checkInterruption();
+	public void setNearestItem(AiItem nearestItem) {
 		this.nearestItem = nearestItem;
 	}
 
-	public AiItem getNearestItem() throws StopRequestException {
-		ai.checkInterruption();
+	public AiItem getNearestItem() {
 		return nearestItem;
 	}
 	

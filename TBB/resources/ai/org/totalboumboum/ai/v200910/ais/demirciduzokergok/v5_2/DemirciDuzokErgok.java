@@ -3,24 +3,23 @@ package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2;
 
 import java.util.List;
 
+
+
+
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
 import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
+
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
+
+
+
 import org.totalboumboum.engine.content.feature.Direction;
-
-
-
-
-
-
-
-
-
 
 /**
  * >> Our bomberman can be considered as a bit defensive one because of the strategies
@@ -80,7 +79,7 @@ AiPath path_b;
  /* méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
  public AiAction processAction() throws StopRequestException
  { 
-	 checkInterruption(); //APPEL OBLIGATOIRE
+  checkInterruption(); //APPEL OBLIGATOIRE
   
 	  IA_ZONE=getPercepts();
 	 
@@ -99,13 +98,12 @@ AiPath path_b;
 		  q=0;
 		  q_test=0;
 		  moveDir = Direction.NONE;	
-		  safe_map=new Safety_Map(IA_ZONE,this);
+		  safe_map=new Safety_Map(IA_ZONE);
 		
 			int k=0;
 			 for(int i=0;i<IA_ZONE.getHeigh();i++){
-				 checkInterruption();
-				 	for(int j=0;j<IA_ZONE.getWidth();j++)
-				  {	checkInterruption();
+				  for(int j=0;j<IA_ZONE.getWidth();j++)
+				  {
 					  if(safe_map.returnMatrix()[i][j]==safe_map.DEST_WALL)
 						 k++;
 				  }
@@ -152,9 +150,8 @@ AiPath path_b;
 				
 				  boolean r=false;
 			  for(int i=0;i<IA_ZONE.getHeigh();i++){
-				  checkInterruption();
 				  for(int j=0;j<IA_ZONE.getWidth();j++)
-				  {	checkInterruption();
+				  {
 					  if(safe_map.returnMatrix()[i][j]==safe_map.BONUS)
 						  r=true;
 				  }
@@ -342,7 +339,7 @@ AiPath path_b;
  //Method for breaking walls when the enemie is not accessible.
 private void Break_Walls_For_Enemie() throws StopRequestException {
 		
-	checkInterruption();
+			
 		  	
 		  if(wallmanager2!=null&&IA_ZONE.getOwnHero().getBombCount()<2){
 		

@@ -4,15 +4,14 @@ package org.totalboumboum.ai.v200910.ais.dereligeckalan.v5;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
+
+
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
+
 import org.totalboumboum.engine.content.feature.Direction;
-
-
-
-
-
 
 
 public class PathFinder {
@@ -60,9 +59,8 @@ public class PathFinder {
 		}
 	}
 	
-	public String ToStringPath() throws StopRequestException
+	public String ToStringPath()
 	{
-		source.checkInterruption();
 		return path.toString();
 	}
 	
@@ -86,7 +84,7 @@ public class PathFinder {
 		
 		Noeud courant=new Noeud(y,x,tab[y][x],0,source);//case où se trouve ia.
 		Tree tree=new Tree(courant,source);//on cree une arbre pour voir le path.
-		NoeudAstar comparator=new NoeudAstar(goal,source);//utilise pour l'algorithme Aetoile
+		NoeudAstar comparator=new NoeudAstar(goal);//utilise pour l'algorithme Aetoile
 		PriorityQueue<Noeud> frange = new PriorityQueue<Noeud>(1,comparator);//les elements sont inseres en respectant l'ordre du cout et de l'heuristique.
 		LinkedList<Noeud> open=new LinkedList<Noeud>();//liste des elements qu'on regarde.
 		LinkedList<Noeud> closed=new LinkedList<Noeud>();//liste des elements qu'on a dejà regardé.

@@ -2,9 +2,7 @@ package org.totalboumboum.ai.v200910.ais.dereligeckalan.v5;
 
 import java.util.Comparator;
 
-import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
-
 
 public class NoeudAstar implements Comparator<Noeud> {
 	private Noeud goal;
@@ -15,10 +13,8 @@ public class NoeudAstar implements Comparator<Noeud> {
 	 * @param goal
 	 *            noeud qu'on prend comme reference en comparant les noeuds
 	 */
-	ArtificialIntelligence ai;
-	public NoeudAstar(Noeud goal, ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
-		this.ai = ai;
+	public NoeudAstar(Noeud goal) {
+
 		this.goal = goal;
 	}
 

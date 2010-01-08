@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.danesatir.v5;
 
-import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
-import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 /**
@@ -12,28 +10,20 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 public class MonTile {
 	private AiTile tile;
 	private int iter;
-	ArtificialIntelligence ai;
-	
-	MonTile(AiTile tile, int iter, ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
-		this.ai = ai;
+	MonTile(AiTile tile, int iter) {
 		this.setTile(tile);
 		this.setIter(iter);
 	}
-	private void setTile(AiTile tile) throws StopRequestException {
-		ai.checkInterruption();
+	private void setTile(AiTile tile) {
 		this.tile = tile;
 	}
-	public AiTile getTile() throws StopRequestException {
-		ai.checkInterruption();
+	public AiTile getTile() {
 		return tile;
 	}
-	private void setIter(int iter) throws StopRequestException {
-		ai.checkInterruption();
+	private void setIter(int iter) {
 		this.iter = iter;
 	}
-	public int getIter() throws StopRequestException {
-		ai.checkInterruption();
+	public int getIter() {
 		return iter;
 	}
 	

@@ -10,7 +10,6 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 
-
 public class PathFinder {
 	
 	private DaneSatir ai;
@@ -24,15 +23,12 @@ public class PathFinder {
 	 * Default Constructor for Pathfinder 
 	 * @param ai
 	 * @param time
-	 * @throws StopRequestException 
 	 */
-	public PathFinder(DaneSatir ai, TimeMatrice time) throws StopRequestException {
+	public PathFinder(DaneSatir ai, TimeMatrice time) {
 		this(ai,ai.getOwnHero(),time);
-		ai.checkInterruption();
 	}
 	
-	public PathFinder(DaneSatir ai, AiHero hero, TimeMatrice time) throws StopRequestException {
-		ai.checkInterruption();
+	public PathFinder(DaneSatir ai, AiHero hero, TimeMatrice time) {
 		this.ai=ai;
 		this.hero=hero;
 		this.curIndex=0;
@@ -57,7 +53,7 @@ public class PathFinder {
 		ai.checkInterruption();
 		Astar astar;
 		astar = new Astar(ai,hero,
-				new MyCost(this.time,ai),
+				new MyCost(this.time),
 				new BasicHeuristicCalculator(),
 				new MySuccessor(this.ai,this.time)
 				);
@@ -73,12 +69,10 @@ public class PathFinder {
 		}
 	}
 	
-	public AiPath getPath() throws StopRequestException {
-		ai.checkInterruption();
+	public AiPath getPath() {
 		return path;
 	}
-	public void clearPath() throws StopRequestException {
-		ai.checkInterruption();
+	public void clearPath() {
 		this.path=null;
 	}
 	/**
@@ -141,25 +135,21 @@ public class PathFinder {
 		}
 	}
 	
-	public boolean isTarget(AiTile targetTile) throws StopRequestException {
-		ai.checkInterruption();
+	public boolean isTarget(AiTile targetTile) {
 		if (this.targetList == null)
 			return false;
 		return this.targetList.contains(targetTile);
 	}
 	
-	public boolean isArrive() throws StopRequestException {
-		ai.checkInterruption();
+	public boolean isArrive() {
 		return this.isTarget(this.hero.getTile());
 	}
 	
-	public List<AiTile> getTargets() throws StopRequestException {
-		ai.checkInterruption();
+	public List<AiTile> getTargets() {
 		return this.targetList;
 	}
 
-	public void updateTimeMatrice(TimeMatrice time) throws StopRequestException {
-		ai.checkInterruption();
+	public void updateTimeMatrice(TimeMatrice time) {
 		this.time = time;
 	}
 }

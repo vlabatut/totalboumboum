@@ -3,7 +3,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
+
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
@@ -13,10 +16,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
-
-
-
-
 
 
 
@@ -50,7 +49,7 @@ public class Enemie_Manager {
 		
 		this.ai = ai;
 		zone = ai.getPercepts();
-		safe_map=new Safety_Map(zone,ai);
+		safe_map=new Safety_Map(zone);
 		esc=new Can_escape_Manager(ai);
 		
 		// init A*:
@@ -170,7 +169,7 @@ public class Enemie_Manager {
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		int x,y;
-		safe_map=new Safety_Map(zone,ai);
+		safe_map=new Safety_Map(zone);
 		if(arrived_tile_b!=null){
 			x=arrived_tile_b.getCol()-zone.getOwnHero().getCol();
 			y=arrived_tile_b.getLine()-zone.getOwnHero().getLine();
@@ -204,15 +203,12 @@ public class Enemie_Manager {
 	 * This method verifies that if there are any danger levels on the path which we will make a 
 	 * movement to approch the enemie(like different danger levels,bombs and fire). If yes, we stop to make the movement.
 	 * @return
-	 * @throws StopRequestException 
 	 */
-	public boolean canPass() throws StopRequestException{
-		ai.checkInterruption();
+	public boolean canPass(){
 		int m=0;
-		safe_map=new Safety_Map(zone,ai);
+		safe_map=new Safety_Map(zone);
 		int stop=1;
 		while(m<path_b.getLength() && path_b.isEmpty()==false && stop==1){
-			ai.checkInterruption();
 			if(safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b.getTile(m).getCol()]!=safe_map.SAFE_CASE &&safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b.getTile(m).getCol()]!=safe_map.ENEMIE){
 				stop=0;
 			}
@@ -228,11 +224,9 @@ public class Enemie_Manager {
 	
 	/**
 	 * Returns the lenght of the path.
-	 * @throws StopRequestException 
 	 * 
 	 */
-	public int getPathLength() throws StopRequestException{
-		ai.checkInterruption();
+	public int getPathLength(){
 		return path_b.getLength();		
 		
 	}
@@ -293,13 +287,11 @@ public class Enemie_Manager {
 	
 	/**
 	 * This method verifies if we can directly go to the enemie or not:
-	 * @throws StopRequestException 
 	 *
 	 */
-	public boolean accessiblePath() throws StopRequestException{
-		ai.checkInterruption();
+	public boolean accessiblePath(){
 	
-		safe_map=new Safety_Map(zone,ai);
+		safe_map=new Safety_Map(zone);
 		if(safe_map.returnMatrix()[zone.getOwnHero().getLine()][zone.getOwnHero().getCol()]==safe_map.ENEMIE || path_b.isEmpty()==false)
 			return true;
 		else
@@ -312,7 +304,6 @@ public class Enemie_Manager {
 	
 	
 	public boolean canesc() throws StopRequestException{
-		ai.checkInterruption();
 		boolean res=false;
 		esc=new Can_escape_Manager(ai);
 		//We choose the numbers here as 3 and 7 because the normal explosion of the bomb is 6 cases of movement and when we are stucked by both

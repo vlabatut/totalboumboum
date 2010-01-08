@@ -16,7 +16,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.engine.content.feature.Direction;
 
 
-
 public class HeroController {
 
 		/**
@@ -199,8 +198,7 @@ public class HeroController {
 			return result;
 		}
 		
-		public AiPath getPath() throws StopRequestException{
-			ai.checkInterruption();
+		public AiPath getPath(){
 			return path;
 		}
 	}

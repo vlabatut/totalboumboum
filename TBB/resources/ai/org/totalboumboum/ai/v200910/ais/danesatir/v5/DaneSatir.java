@@ -16,7 +16,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * >> ce texte est à remplacer par votre propre description de votre IA
  * 
@@ -130,7 +129,7 @@ public class DaneSatir extends ArtificialIntelligence
 				
 				//GeneralFuncs.printLog(this, "DaneSatir.java: direction->"+d, VerboseLevel.MED);
 				
-				while(!TimeMatrice.isSafe(dec.getTime(), nextTile,this)) {
+				while(!TimeMatrice.isSafe(dec.getTime(), nextTile)) {
 					checkInterruption();
 					if(dec.getTime().isSaferThan(nextTile, this.myHero.getTile()))
 						break;
@@ -225,7 +224,7 @@ public class DaneSatir extends ArtificialIntelligence
 		}
 		case EXPLODE_TO_ENEMY: {
 			Astar astar = new Astar(this,myHero,
-					new WallCost(this), 
+					new WallCost(), 
 					new BasicHeuristicCalculator(),
 					new WallSuccessor(this)
 					);
@@ -308,34 +307,28 @@ public class DaneSatir extends ArtificialIntelligence
 			this.dec.setState(State.START);
 	}
 	
-	public AiHero getOwnHero() throws StopRequestException {
-		checkInterruption();
+	public AiHero getOwnHero() {
 		return this.myHero;
 	}
 	/**
 	 * Getter for PathFinder
 	 * @return current PathFinder
-	 * @throws StopRequestException 
 	 * @see PathFinder 
 	 */
-	public PathFinder getPathFinder() throws StopRequestException {
-		checkInterruption();
+	public PathFinder getPathFinder() {
 		return p;
 	}
 	
 	/**
 	 * Getter for Result
 	 * @return current result
-	 * @throws StopRequestException 
 	 * @see AiActionName
 	 */
-	public AiAction getResult() throws StopRequestException {
-		checkInterruption();
+	public AiAction getResult() {
 		return result;
 	}
 
-	public void setResult(AiAction result) throws StopRequestException {
-		checkInterruption();
+	public void setResult(AiAction result) {
 		if(result == null)
 			dec.setState(State.START);
 		else 

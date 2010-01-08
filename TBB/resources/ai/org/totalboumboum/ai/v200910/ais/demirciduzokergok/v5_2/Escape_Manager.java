@@ -15,7 +15,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * This class is about defense strategie. Our defense strategie is based on the time of 
  * explosion of the bombs according to the valeu in our safaty map. The big and 
@@ -118,7 +117,6 @@ public class Escape_Manager {
 			
 			//iteration on right of our position;
 			while(stop==0&&my_position.getCol()+k<zone.getWidth()){
-				ai.checkInterruption();
 				if(safe_map.returnMatrix()[my_position.getLine()][my_position.getCol()+k]==safe_map.BOMB ||safe_map.returnMatrix()[my_position.getLine()][my_position.getCol()+k]==safe_map.DEST_WALL || safe_map.returnMatrix()[my_position.getLine()][my_position.getCol()+k]==safe_map.INDEST_WALL|| safe_map.returnMatrix()[my_position.getLine()][my_position.getCol()+k]==safe_map.FIRE)
 					stop=1;
 				else
@@ -134,7 +132,6 @@ public class Escape_Manager {
 			k=1;
 			stop=0;
 			while(stop==0&&my_position.getCol()-k>0 ){
-				ai.checkInterruption();
 				if(safe_map.returnMatrix()[my_position.getLine()][my_position.getCol()-k]==safe_map.BOMB ||safe_map.returnMatrix()[my_position.getLine()][my_position.getCol()-k]==safe_map.DEST_WALL || safe_map.returnMatrix()[my_position.getLine()][my_position.getCol()-k]==safe_map.INDEST_WALL|| safe_map.returnMatrix()[my_position.getLine()][my_position.getCol()-k]==safe_map.FIRE)
 					stop=1;
 				else
@@ -149,7 +146,6 @@ public class Escape_Manager {
 			k=1;
 			stop=0;
 			while(stop==0&&my_position.getLine()+k<zone.getHeigh()){
-				ai.checkInterruption();
 				if(safe_map.returnMatrix()[my_position.getLine()+k][my_position.getCol()]==safe_map.BOMB ||safe_map.returnMatrix()[my_position.getLine()+k][my_position.getCol()]==safe_map.DEST_WALL || safe_map.returnMatrix()[my_position.getLine()+k][my_position.getCol()]==safe_map.INDEST_WALL|| safe_map.returnMatrix()[my_position.getLine()+k][my_position.getCol()]==safe_map.FIRE)
 					stop=1;
 				else
@@ -165,7 +161,6 @@ public class Escape_Manager {
 			k=1;
 			stop=0;
 			while(stop==0&&my_position.getLine()-k>0){
-				ai.checkInterruption();
 				if(safe_map.returnMatrix()[my_position.getLine()-k][my_position.getCol()]==safe_map.BOMB ||safe_map.returnMatrix()[my_position.getLine()-k][my_position.getCol()]==safe_map.DEST_WALL || safe_map.returnMatrix()[my_position.getLine()-k][my_position.getCol()]==safe_map.INDEST_WALL|| safe_map.returnMatrix()[my_position.getLine()-k][my_position.getCol()]==safe_map.FIRE)
 				stop=1;
 				else
@@ -190,7 +185,6 @@ public class Escape_Manager {
 				double min=t.get(0);
 				while(m<t.size())
 				{
-					ai.checkInterruption();
 					if(t.get(m)<=min){
 						min=t.get(m);
 						temp=m;
@@ -285,7 +279,7 @@ public class Escape_Manager {
 	public void cost_calculator_updt() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		safe_map=new Safety_Map(zone,ai);		
+		safe_map=new Safety_Map(zone);		
 		double safetyMatrix1[][] = safe_map.returnMatrix();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -319,7 +313,7 @@ public class Escape_Manager {
  */
 	public List<AiTile> destinations_possibles(AiTile tile) throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
-		safe_map=new Safety_Map(zone,ai);
+		safe_map=new Safety_Map(zone);
 		
 		AiTile tile_dest;
 		ArrayList<AiTile> result = new ArrayList<AiTile>();

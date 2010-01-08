@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.ais.aldanmazyenigun.v5;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2010 Vincent Labatut 
+ * Copyright 2008-2009 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -35,7 +35,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
-
 
 /**
  * classe chargée d'implémenter un déplacement de fuite,
@@ -282,7 +281,7 @@ public class AvoidController
 					double min=ai.getDangerLevel(at.get(0));
 					AiTile BestTile=null;
 					while(m<at.size())
-					{	ai.checkInterruption();
+					{
 						if(ai.getDangerLevel(at.get(m))<=min){
 							BestTile=at.get(m);
 							min=ai.getDangerLevel(at.get(m));

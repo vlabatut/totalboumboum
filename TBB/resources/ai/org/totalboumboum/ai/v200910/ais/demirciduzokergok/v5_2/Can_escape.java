@@ -1,4 +1,3 @@
-
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2;
 
 
@@ -7,20 +6,17 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
-import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+
+
+
 import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
 import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
 import org.totalboumboum.ai.v200910.adapter.data.AiFire;
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
+
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
-
-
-
-
-
 
 /**
  * This class is for calculating if we can find a secured place if we pose a bomb.
@@ -58,12 +54,9 @@ public class Can_escape {
 
 	
 	public double security_matrix[][];
-	ArtificialIntelligence ai;
 	
 	/* Constructeur of the Can_escape*/
-	public Can_escape(AiZone zone, ArtificialIntelligence ai) throws StopRequestException{
-		ai.checkInterruption();
-		this.ai = ai;
+	public Can_escape(AiZone zone){
 		this.our_zone=zone;
 		this.blocks=zone.getBlocks();
 
@@ -80,15 +73,12 @@ public class Can_escape {
 		Fill_The_Matrix();
 	}
 
-	public void Fill_The_Matrix() throws StopRequestException {
-		ai.checkInterruption();
+	public void Fill_The_Matrix() {
 		//First of all, we fill the matrce with safe cases.
 		int x,y;
 		security_matrix=new double[height][width];
 		for(y=0;y<height;y++){
-			ai.checkInterruption();
 			for(x=0;x<width;x++){
-				ai.checkInterruption();
 				security_matrix[y][x]=SAFE_CASE;
 			}
 		}
@@ -97,7 +87,6 @@ public class Can_escape {
 		Iterator<AiBlock> block_iterator=blocks.iterator();
 		AiBlock blck;
 		while(block_iterator.hasNext()==true){
-			ai.checkInterruption();
 			blck=block_iterator.next();
 			pos_x=blck.getCol();
 			pos_y=blck.getLine();
@@ -113,7 +102,6 @@ public class Can_escape {
 		Iterator<AiFire> fire_iterator=fires.iterator();
 		AiFire fr;
 		while(fire_iterator.hasNext()){
-			ai.checkInterruption();
 			fr=fire_iterator.next();
 			pos_x=fr.getCol();
 			pos_y=fr.getLine();
@@ -138,7 +126,6 @@ public class Can_escape {
 		
 		
 		while(iterate_bombs.hasNext()==true){
-			ai.checkInterruption();
 			bmb=iterate_bombs.next();
 			
 			pos_x=bmb.getCol();
@@ -176,7 +163,6 @@ public class Can_escape {
 			
 			if(blocks_right.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
-					ai.checkInterruption();
 					if( (pos_x+k<width) && ((security_matrix[pos_y][pos_x+k]==SAFE_CASE))){
 						security_matrix[pos_y][pos_x+k]=danger_level;
 					}
@@ -195,7 +181,6 @@ public class Can_escape {
 			
 			if(blocks_left.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
-					ai.checkInterruption();
 					if( (pos_x-k>0) && ((security_matrix[pos_y][pos_x-k]==SAFE_CASE)||(security_matrix[pos_y][pos_x-k]==BONUS))){
 						security_matrix[pos_y][pos_x-k]=danger_level;
 					}
@@ -215,7 +200,6 @@ public class Can_escape {
 			
 			if(blocks_down.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
-					ai.checkInterruption();
 					if( (pos_y+k<height) && ((security_matrix[pos_y+k][pos_x]==SAFE_CASE))){
 						security_matrix[pos_y+k][pos_x]=danger_level;
 					}
@@ -234,7 +218,6 @@ public class Can_escape {
 			
 			if(blocks_up.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
-					ai.checkInterruption();
 					if( (pos_y-k>0) && ((security_matrix[pos_y-k][pos_x]==SAFE_CASE))){
 						security_matrix[pos_y-k][pos_x]=danger_level;
 					}
@@ -260,7 +243,6 @@ public class Can_escape {
 		AiBomb bm;
 
 		while (it_bmb.hasNext()) {
-			ai.checkInterruption();
 			bm = it_bmb.next();
 			pos_x = bm.getCol();
 			pos_y = bm.getLine();
@@ -276,7 +258,6 @@ public class Can_escape {
 		//according to this part of this class.
 		
 		while(our_hero.getBombRange()>i){
-			ai.checkInterruption();
 			pos_y=our_hero.getLine();
 			pos_x=our_hero.getCol();
 			if(i==0){
@@ -315,8 +296,7 @@ public class Can_escape {
 	
 
 	
-	public double[][] returnMatrix() throws StopRequestException {
-		ai.checkInterruption();
+	public double[][] returnMatrix() {
 		return security_matrix;
 	}
 		

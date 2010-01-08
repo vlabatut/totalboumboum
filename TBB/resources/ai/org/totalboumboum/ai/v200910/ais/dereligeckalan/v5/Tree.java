@@ -3,7 +3,6 @@ package org.totalboumboum.ai.v200910.ais.dereligeckalan.v5;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Vector;
-
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
 

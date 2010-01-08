@@ -15,7 +15,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 public class BektasMazilyah extends ArtificialIntelligence
 {	
 	/**Zone du jeu*/
@@ -162,7 +161,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		{
 			checkInterruption();
 			AiTile kare=it.next();
-			as=new Astar (dangerZone,hero.getCol(),hero.getLine(),kare.getCol(),kare.getLine(),this);		
+			as=new Astar (dangerZone,hero.getCol(),hero.getLine(),kare.getCol(),kare.getLine());		
 			if (as.findSecurePath())
 			{	
 				Deque<Integer> deque = as.getPath();
@@ -234,7 +233,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		{
 			checkInterruption();
 			AiTile kare=it.next();
-			as=new Astar (dangerZone,hero.getCol(),hero.getLine(),kare.getCol(),kare.getLine(),this);		
+			as=new Astar (dangerZone,hero.getCol(),hero.getLine(),kare.getCol(),kare.getLine());		
 			if (as.findPath())
 			{	
 				Deque<Integer> deque = as.getPath();
@@ -274,7 +273,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 				temp=it.next();
 				int col=temp.getCol();
 				int line = temp.getLine();
-				Astar a=new Astar (dangerZone,hero.getCol(),hero.getLine(),col,line,this);
+				Astar a=new Astar (dangerZone,hero.getCol(),hero.getLine(),col,line);
 				if ((hero.getCol()!= col || hero.getLine() != line) && a.findSecurePath())
 					count++;
 			}
@@ -443,7 +442,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		{
 			checkInterruption();
 			temp=it.next();
-			Astar as = new Astar(dangerZone,hero.getCol(),hero.getLine(),temp.getCol(),temp.getLine(),this);
+			Astar as = new Astar(dangerZone,hero.getCol(),hero.getLine(),temp.getCol(),temp.getLine());
 			if(as.findPath())
 			{
 				Deque<Integer> deq = as.getPath();
@@ -460,7 +459,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 			{
 				checkInterruption();
 				temp=ite.next();
-				Astar a = new Astar (dangerZone,hero.getCol(),hero.getLine(),temp.getCol(),temp.getLine(),this);
+				Astar a = new Astar (dangerZone,hero.getCol(),hero.getLine(),temp.getCol(),temp.getLine());
 				if(a.findPath())
 				{
 					Deque<Integer> deq = a.getPath();
@@ -488,7 +487,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		{
 			AiTile kare=it.next();
 			{
-				as=new Astar (dangerZone,hero.getCol(),hero.getLine(),kare.getCol(),kare.getLine(),this);
+				as=new Astar (dangerZone,hero.getCol(),hero.getLine(),kare.getCol(),kare.getLine());
 		
 				if (as.findSecurePath())
 				{	
@@ -531,7 +530,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 			else 
 				kare=null;
 			if(kare!=null){
-			as=new Astar (dangerZone,hero.getCol(),hero.getLine(),kare.getCol(),kare.getLine(),this);
+			as=new Astar (dangerZone,hero.getCol(),hero.getLine(),kare.getCol(),kare.getLine());
 			if (as.findSecurePath())
 			{	
 				Deque<Integer> deque = as.getPath();
@@ -602,7 +601,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		{
 			checkInterruption();
 			temp=it.next().getTile();
-			Astar a = new Astar(dangerZone,getOwnHero().getCol(),getOwnHero().getLine(),temp.getCol(),temp.getLine(),this);
+			Astar a = new Astar(dangerZone,getOwnHero().getCol(),getOwnHero().getLine(),temp.getCol(),temp.getLine());
 			if ((hero.getCol()!= temp.getCol() || hero.getLine() != temp.getLine()) && a.findSecurePath())
 				canGoRival=true;
 		}
@@ -794,7 +793,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		{
 			checkInterruption();
 			temp=it.next();
-			Astar as = new Astar(dangerZone,hero.getCol(),hero.getLine(),temp.getCol(),temp.getLine(),this);
+			Astar as = new Astar(dangerZone,hero.getCol(),hero.getLine(),temp.getCol(),temp.getLine());
 			if(as.findSecurePath())
 				count++;
 		}
@@ -816,7 +815,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		{
 			checkInterruption();
 			temp=it.next();
-			Astar as = new Astar(dangerZone,hero.getCol(),hero.getLine(),temp.getCol(),temp.getLine(),this);
+			Astar as = new Astar(dangerZone,hero.getCol(),hero.getLine(),temp.getCol(),temp.getLine());
 			if(as.findSecurePath());
 				count++;
 		}
