@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2;
+package org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2_;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,11 +7,12 @@ import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
-
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
+
+
 
 public class StrategyManager {
 
@@ -456,7 +457,8 @@ public class StrategyManager {
 		
 	}
 	
-	public List<AiBomb> getBombs() {
+	public List<AiBomb> getBombs() throws StopRequestException {
+		myAI.checkInterruption();
 		return bombs;
 	}
 	

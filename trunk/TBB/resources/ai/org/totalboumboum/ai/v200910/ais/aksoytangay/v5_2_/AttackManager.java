@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2;
+package org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2_;
 
 
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
+
 
 public class AttackManager {
 
@@ -62,35 +63,36 @@ public class AttackManager {
 	
 	
 
-	public AiTile getHeroToAttackTile() {
+	public AiTile getHeroToAttackTile() throws StopRequestException {
+		myAI.checkInterruption();
 		return heroToAttackTile;
 	}
-
-	public void setHeroToAttackTile(AiTile heroToAttackTile) {
+	public void setHeroToAttackTile(AiTile heroToAttackTile) throws StopRequestException {
+		myAI.checkInterruption();
 		this.heroToAttackTile = heroToAttackTile;
-	}
-	
-	public AiHero getHeroToAttack() {
+	}	
+	public AiHero getHeroToAttack() throws StopRequestException {
+		myAI.checkInterruption();
 		return heroToAttack;
 	}
-
-	public void setHeroToAttack(AiHero heroToAttack) {
+	public void setHeroToAttack(AiHero heroToAttack) throws StopRequestException {
+		myAI.checkInterruption();
 		this.heroToAttack = heroToAttack;
-	}
-	
-	public AiTile getNormalAttackTile() {
+	}	
+	public AiTile getNormalAttackTile() throws StopRequestException {
+		myAI.checkInterruption();
 		return normalAttackTile;
 	}
-
-	public void setNormalAttackTile(AiTile normalAttackTile) {
+	public void setNormalAttackTile(AiTile normalAttackTile) throws StopRequestException {
+		myAI.checkInterruption();
 		this.normalAttackTile = normalAttackTile;
 	}
-
-	public AiTile getWhichTileToDropBomb() {
+	public AiTile getWhichTileToDropBomb() throws StopRequestException {
+		myAI.checkInterruption();
 		return whichTileToDropBomb;
 	}
-
-	public void setWhichTileToDropBomb(AiTile whichTileToDropBomb) {
+	public void setWhichTileToDropBomb(AiTile whichTileToDropBomb) throws StopRequestException {
+		myAI.checkInterruption();
 		this.whichTileToDropBomb = whichTileToDropBomb;
 	}
 
@@ -380,7 +382,7 @@ public class AttackManager {
 				if(heroTile.getLine()<ownTile.getLine())
 				{
 					while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmpTile = percepts.getTile(tmpTile.getLine()-1, tmpTile.getCol());
 					}
@@ -389,9 +391,9 @@ public class AttackManager {
 					third = percepts.getTile(ownTile.getLine()-i, ownTile.getCol()+i);
 				}
 				else
-				{
+				{	myAI.checkInterruption();
 					while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmpTile = percepts.getTile(tmpTile.getLine()+1, tmpTile.getCol());
 					}
@@ -405,7 +407,7 @@ public class AttackManager {
 				if(heroTile.getLine()<ownTile.getLine())
 				{
 					while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmpTile = percepts.getTile(tmpTile.getLine()-1, tmpTile.getCol());
 					}
@@ -416,7 +418,7 @@ public class AttackManager {
 				else
 				{
 					while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmpTile = percepts.getTile(tmpTile.getLine()+1, tmpTile.getCol());
 					}
@@ -433,7 +435,7 @@ public class AttackManager {
 				if(heroTile.getCol()<ownTile.getCol())
 				{
 					while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmpTile = percepts.getTile(tmpTile.getLine(), tmpTile.getCol()-1);
 					}
@@ -444,7 +446,7 @@ public class AttackManager {
 				else
 				{
 					while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmpTile = percepts.getTile(tmpTile.getLine(), tmpTile.getCol()+1);
 					}
@@ -458,7 +460,7 @@ public class AttackManager {
 				if(heroTile.getCol()<ownTile.getCol())
 				{
 					while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmpTile = percepts.getTile(tmpTile.getLine(), tmpTile.getCol()-1);
 					}
@@ -469,7 +471,7 @@ public class AttackManager {
 				else
 				{
 					while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmpTile = percepts.getTile(tmpTile.getLine()+1, tmpTile.getCol()+1);
 					}
@@ -507,7 +509,7 @@ public class AttackManager {
 				{
 					
 					while(zone.getMatrix()[tmp2Tile.getLine()][tmp2Tile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmp2Tile = percepts.getTile(tmp2Tile.getLine()-1, tmp2Tile.getCol());
 					}
@@ -517,7 +519,7 @@ public class AttackManager {
 				else
 				{
 					while(zone.getMatrix()[tmp2Tile.getLine()][tmp2Tile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmp2Tile = percepts.getTile(tmp2Tile.getLine()-1, tmp2Tile.getCol());
 					}
@@ -530,7 +532,7 @@ public class AttackManager {
 				if(heroTile.getLine()<ownTile.getLine())
 				{
 					while(zone.getMatrix()[tmp2Tile.getLine()][tmp2Tile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmp2Tile = percepts.getTile(tmp2Tile.getLine()-1, tmp2Tile.getCol());
 					}
@@ -540,7 +542,7 @@ public class AttackManager {
 				else
 				{
 					while(zone.getMatrix()[tmp2Tile.getLine()][tmp2Tile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmp2Tile = percepts.getTile(tmp2Tile.getLine()+1, tmp2Tile.getCol());
 					}
@@ -553,7 +555,7 @@ public class AttackManager {
 				if(heroTile.getCol()<ownTile.getCol())
 				{
 					while(zone.getMatrix()[tmp2Tile.getLine()][tmp2Tile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmp2Tile = percepts.getTile(tmp2Tile.getLine(), tmp2Tile.getCol()-1);
 					}
@@ -563,7 +565,7 @@ public class AttackManager {
 				else
 				{
 					while(zone.getMatrix()[tmp2Tile.getLine()][tmp2Tile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmp2Tile = percepts.getTile(tmp2Tile.getLine(), tmp2Tile.getCol()+1);
 					}
@@ -576,7 +578,7 @@ public class AttackManager {
 				if(heroTile.getCol()<ownTile.getCol())
 				{
 					while(zone.getMatrix()[tmp2Tile.getLine()][tmp2Tile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmp2Tile = percepts.getTile(tmp2Tile.getLine(), tmp2Tile.getCol()-1);
 					}
@@ -586,7 +588,7 @@ public class AttackManager {
 				else
 				{
 					while(zone.getMatrix()[tmp2Tile.getLine()][tmp2Tile.getCol()] != State.INDESTRUCTIBLE)
-					{
+					{	myAI.checkInterruption();
 						i++;
 						tmp2Tile = percepts.getTile(tmp2Tile.getLine(), tmp2Tile.getCol()+1);
 					}
@@ -757,8 +759,7 @@ public class AttackManager {
 		boolean result = true;
 		
 //		int startLine = startTile.getLine();
-//		int startCol = startTile.getCol();
-		
+//		int startCol = startTile.getCol();		
 		Collection<AiTile> tiles = null;
 		if(startTile.getCol() == finishTile.getCol())
 		{
@@ -766,6 +767,7 @@ public class AttackManager {
 			{
 				AiTile tmpTile = startTile;
 				while (tmpTile != finishTile) {
+					myAI.checkInterruption();
 					tiles.add(tmpTile);
 					tmpTile = percepts.getTile(tmpTile.getLine(), tmpTile.getCol()+1);
 				}				
@@ -774,17 +776,18 @@ public class AttackManager {
 			{
 				AiTile tmpTile = startTile;
 				while (tmpTile != finishTile) {
+					myAI.checkInterruption();
 					tiles.add(tmpTile);
 					tmpTile = percepts.getTile(tmpTile.getLine(), tmpTile.getCol()-1);
 				}
 			}
 		}
 		else
-		{
-			if(startTile.getLine()<finishTile.getLine())
+		{	if(startTile.getLine()<finishTile.getLine())
 			{
 				AiTile tmpTile = startTile;
 				while (tmpTile != finishTile) {
+					myAI.checkInterruption();
 					tiles.add(tmpTile);
 					tmpTile = percepts.getTile(tmpTile.getLine()+1, tmpTile.getCol());
 				}				
@@ -793,39 +796,34 @@ public class AttackManager {
 			{
 				AiTile tmpTile = startTile;
 				while (tmpTile != finishTile) {
+					myAI.checkInterruption();
 					tiles.add(tmpTile);
 					tmpTile = percepts.getTile(tmpTile.getLine()-1, tmpTile.getCol());
 				}
 			}
-		}
-		
+		}	
 		Iterator<AiTile> itrTile = tiles.iterator();
 		while (itrTile.hasNext()) {
+			myAI.checkInterruption();
 			AiTile aiTile = (AiTile) itrTile.next();
 			if(myAI.isDangerous(aiTile))
 			{
 				result = false;
 				break;
 			}
-		}
-		
+		}		
 		return result;
-	}
-	
+	}	
 	public boolean isDangerToAttack() throws StopRequestException
-	{
-		myAI.checkInterruption();
-		
-		boolean result = true;
-		
-		
+	{	myAI.checkInterruption();		
+		boolean result = true;		
 		if(zone.getMatrix()[heroToAttack.getLine()-1][heroToAttack.getCol()] == State.INDESTRUCTIBLE || zone.getMatrix()[heroToAttack.getLine()+1][heroToAttack.getCol()] == State.INDESTRUCTIBLE)
 		{
 			if(!isDangerAtLine(heroToAttack.getTile()))
 			{
 				AiTile tmpTile = heroToAttack.getTile();
 				while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
-				{
+				{	myAI.checkInterruption();
 					if(heroToAttack.getCol()<percepts.getWidth()/2)
 						tmpTile = percepts.getTile(tmpTile.getLine(), tmpTile.getCol()-1);
 					else
@@ -847,7 +845,7 @@ public class AttackManager {
 			{
 				AiTile tmpTile = heroToAttack.getTile();
 				while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
-				{
+				{	myAI.checkInterruption();
 					if(heroToAttack.getLine()<percepts.getHeigh()/2)
 						tmpTile = percepts.getTile(tmpTile.getLine()-1, tmpTile.getCol());
 					else
@@ -879,10 +877,10 @@ public class AttackManager {
 			int i = 0;
 			int j = 0;
 			while(i<3)
-			{
+			{	myAI.checkInterruption();
 				tmpTile = percepts.getTile(tmpTile.getLine()+1, tmpTile.getCol());
 				if(myAI.isDangerous(tmpTile))
-				{
+				{	myAI.checkInterruption();
 					result = true;
 					break;
 				}
@@ -890,10 +888,10 @@ public class AttackManager {
 				i++;
 			}
 			while(j<3)
-			{
+			{	myAI.checkInterruption();
 				tmpTile = percepts.getTile(tmpTile.getLine()-1, tmpTile.getCol());
 				if(myAI.isDangerous(tmpTile))
-				{
+				{	myAI.checkInterruption();
 					result = true;
 					break;
 				}
@@ -919,10 +917,10 @@ public class AttackManager {
 			int i = 0;
 			int j = 0;
 			while(i<3)
-			{
+			{	myAI.checkInterruption();
 				tmpTile = percepts.getTile(tmpTile.getLine(), tmpTile.getCol()+1);
 				if(myAI.isDangerous(tmpTile))
-				{
+				{	
 					result = true;
 					break;
 				}
@@ -930,7 +928,7 @@ public class AttackManager {
 				i++;
 			}
 			while(j<3)
-			{
+			{	myAI.checkInterruption();
 				tmpTile = percepts.getTile(tmpTile.getLine(), tmpTile.getCol()-1);
 				if(myAI.isDangerous(tmpTile))
 				{
@@ -958,6 +956,7 @@ public class AttackManager {
 			{
 				AiTile tmpTile = startTile;
 				while (tmpTile != finishTile) {
+					myAI.checkInterruption();
 					tiles.add(tmpTile);
 					tmpTile = percepts.getTile(tmpTile.getLine(), tmpTile.getCol()+1);
 				}				
@@ -966,6 +965,7 @@ public class AttackManager {
 			{
 				AiTile tmpTile = startTile;
 				while (tmpTile != finishTile) {
+					myAI.checkInterruption();
 					tiles.add(tmpTile);
 					tmpTile = percepts.getTile(tmpTile.getLine(), tmpTile.getCol()-1);
 				}
@@ -977,6 +977,7 @@ public class AttackManager {
 			{
 				AiTile tmpTile = startTile;
 				while (tmpTile != finishTile) {
+					myAI.checkInterruption();
 					tiles.add(tmpTile);
 					tmpTile = percepts.getTile(tmpTile.getLine()+1, tmpTile.getCol());
 				}				
@@ -985,6 +986,7 @@ public class AttackManager {
 			{
 				AiTile tmpTile = startTile;
 				while (tmpTile != finishTile) {
+					myAI.checkInterruption();
 					tiles.add(tmpTile);
 					tmpTile = percepts.getTile(tmpTile.getLine()-1, tmpTile.getCol());
 				}
@@ -995,7 +997,7 @@ public class AttackManager {
 	}
 	
 	public AiTile mirrorTile(AiTile ownTile, AiTile heroTile) throws StopRequestException
-	{
+	{	myAI.checkInterruption();
 AttackType attackType = AttackType.NONE;
 		
 		heroToAttack = getHeroToAttackFonx();
@@ -1066,14 +1068,14 @@ AttackType attackType = AttackType.NONE;
 	}
 	
 	public boolean isAtCorner(AiTile tile) throws StopRequestException
-	{
+	{	myAI.checkInterruption();
 		boolean result = false;
 		
 		
 		if(zone.getMatrix()[tile.getLine()-1][tile.getCol()] == State.INDESTRUCTIBLE || zone.getMatrix()[tile.getLine()+1][tile.getCol()] == State.INDESTRUCTIBLE)
 		{
 			for(int i = 1;i<4;i++)
-			{
+			{	myAI.checkInterruption();
 				if(tile.getCol()<percepts.getWidth()/2)
 				{
 					if(zone.getMatrix()[tile.getLine()][tile.getCol()-i] == State.INDESTRUCTIBLE)
@@ -1095,7 +1097,7 @@ AttackType attackType = AttackType.NONE;
 		else if(zone.getMatrix()[tile.getLine()][tile.getCol()-1] == State.INDESTRUCTIBLE || zone.getMatrix()[tile.getLine()][tile.getCol()+1] == State.INDESTRUCTIBLE)
 		{
 			for(int j = 1;j<4;j++)
-			{
+			{	myAI.checkInterruption();
 				if(tile.getLine()<percepts.getHeigh()/2)
 				{
 					if(zone.getMatrix()[tile.getLine()][tile.getCol()-j] == State.INDESTRUCTIBLE)

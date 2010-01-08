@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v200910.ais.adatepeozbek.v5;
+package org.totalboumboum.ai.v200910.ais.adatepeozbek.v5_;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
-import org.totalboumboum.ai.v200910.adapter.path.AiPath;
+import org.totalboumboum.ai.v200910.adapter.path.*;
 
 
 public class AdatepeOzbek extends ArtificialIntelligence 
@@ -45,10 +45,10 @@ public class AdatepeOzbek extends ArtificialIntelligence
 			enemies = new ArrayList<Enemy>();
 			List<AiHero> remaining = zone.getRemainingHeroes();
 			for(int i = 0; i<remaining.size();i++)
-			{
+			{	checkInterruption();
 				if(remaining.get(i) == zone.getOwnHero())
 					continue;
-				enemies.add(new Enemy(zone.getHeroes().get(i), EnemyTypes.UNKNOWN));
+				enemies.add(new Enemy(zone.getHeroes().get(i), EnemyTypes.UNKNOWN,this));
 			}
 		}
 		

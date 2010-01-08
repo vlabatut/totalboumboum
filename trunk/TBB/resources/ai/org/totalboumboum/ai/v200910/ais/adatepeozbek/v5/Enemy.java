@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.adatepeozbek.v5;
 
-import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
-import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 
 public class Enemy
@@ -11,86 +9,68 @@ public class Enemy
 	private int _posedBombs = 0;
 	private int _sameTileCount = 0;
 	private long _lastCheck = 0;
-	ArtificialIntelligence ownAi;
-	
-	public Enemy(AiHero hero, EnemyTypes type,ArtificialIntelligence ownAi) throws StopRequestException
-	{	ownAi.checkInterruption();
-		this.ownAi = ownAi;
+	public Enemy(AiHero hero, EnemyTypes type)
+	{
 		_hero = hero;
 		_type = type;
 	}
 	
-	public AiHero getHero() throws StopRequestException
-	{	ownAi.checkInterruption();
+	public AiHero getHero()
+	{
 		return _hero;
 	}
 	
-	public EnemyTypes getType() throws StopRequestException
-	{	ownAi.checkInterruption();
+	public EnemyTypes getType()
+	{
 		return _type;		
 	}
 	
-	public void updateHero(AiHero hero) throws StopRequestException
-	{	ownAi.checkInterruption();
+	public void updateHero(AiHero hero)
+	{
 		_hero = hero;
 	}
 	
-	public int getPosedBombs() throws StopRequestException
-	{	ownAi.checkInterruption();
+	public int getPosedBombs()
+	{
 		return _posedBombs;		
 	}
 	
-	public void setType(EnemyTypes type) throws StopRequestException
-	{	ownAi.checkInterruption();
+	public void setType(EnemyTypes type)
+	{
 		_type = type;		
 	}
 	
-	public int getSameTileCount() throws StopRequestException
-	{	ownAi.checkInterruption();
+	public int getSameTileCount()
+	{
 		return _sameTileCount;		
 	}
 	
-	public void increasePosedBombs(int ct) throws StopRequestException
-	{	ownAi.checkInterruption();
+	public void increasePosedBombs(int ct)
+	{
 		_posedBombs += ct;		
 	}
 	
-	public void increaseSameTileCount() throws StopRequestException
-	{	ownAi.checkInterruption();
+	public void increaseSameTileCount()
+	{
 		_sameTileCount += 1;		
 	}
 	
-	public void setLastCheck(long time) throws StopRequestException
-	{	ownAi.checkInterruption();
+	public void setLastCheck(long time)
+	{
 		_lastCheck = time;
 	}
 	
-	public long getLastCheck() throws StopRequestException
-	{	ownAi.checkInterruption();
+	public long getLastCheck()
+	{
 		return _lastCheck;
 	}
 	
 	public String toString()
 	{
 		StringBuffer result = new StringBuffer();
-		try {
-			result.append(" - sameTile.: "+ getSameTileCount());
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			result.append(" - posedBombs.: "+ getPosedBombs());
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			result.append(" - totalTime.: "+ getLastCheck());
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		result.append(" - sameTile.: "+ getSameTileCount());
+		result.append(" - posedBombs.: "+ getPosedBombs());
+		result.append(" - totalTime.: "+ getLastCheck());
 		return result.toString();
 	}
 }
