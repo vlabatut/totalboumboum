@@ -22,7 +22,6 @@ package org.totalboumboum.engine.container.fireset;
  */
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -36,9 +35,8 @@ import org.totalboumboum.engine.content.sprite.fire.FireFactory;
 import org.xml.sax.SAXException;
 
 
-public class Fireset implements Serializable
-{	private static final long serialVersionUID = 1L;
-
+public class Fireset
+{	
 	public Fireset()
 	{	fireFactories = new HashMap<String,FireFactory>();
 	}
