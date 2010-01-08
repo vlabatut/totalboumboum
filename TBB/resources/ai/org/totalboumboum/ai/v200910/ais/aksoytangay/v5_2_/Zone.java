@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2;
+package org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2_;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiItem;
 import org.totalboumboum.ai.v200910.adapter.data.AiItemType;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
+
 
 
 /**
@@ -186,7 +187,7 @@ public class Zone {
 	 * @throws StopRequestException
 	 */
 	public State[][] getMatrix() throws StopRequestException
-	{
+	{	myAI.checkInterruption();
 		//System.out.println("getmatrix.zone");
 		return matrix;
 	}
@@ -201,19 +202,23 @@ public class Zone {
 		return matrix;
 	}
 	
-	public void setZone(AiZone zone) {
+	public void setZone(AiZone zone) throws StopRequestException {
+		myAI.checkInterruption();
 		this.zone = zone;
 	}
 
-	public AiZone getZone() {
+	public AiZone getZone() throws StopRequestException {
+		myAI.checkInterruption();
 		return zone;
 	}
 	
-	public Collection<AiBomb> getBombs() {
+	public Collection<AiBomb> getBombs() throws StopRequestException {
+		myAI.checkInterruption();
 		return bombs;
 	}
 	
-	public Collection<AiItem> getItems() {
+	public Collection<AiItem> getItems() throws StopRequestException {
+		myAI.checkInterruption();
 		return items;
 	}
 }

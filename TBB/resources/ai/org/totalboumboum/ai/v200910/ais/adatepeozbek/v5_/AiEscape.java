@@ -1,24 +1,25 @@
-package org.totalboumboum.ai.v200910.ais.adatepeozbek.v5;
+package org.totalboumboum.ai.v200910.ais.adatepeozbek.v5_;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
 import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
-import org.totalboumboum.ai.v200910.adapter.path.AiPath;
-import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
-import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
 import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
 import org.totalboumboum.ai.v200910.adapter.data.AiFire;
+import org.totalboumboum.ai.v200910.adapter.data.AiHero;
+import org.totalboumboum.ai.v200910.adapter.data.AiItem;
 import org.totalboumboum.ai.v200910.adapter.data.AiItemType;
 import org.totalboumboum.ai.v200910.adapter.data.AiStateName;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
-import org.totalboumboum.ai.v200910.adapter.data.AiItem;
+import org.totalboumboum.ai.v200910.adapter.path.AiPath;
+import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
+import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
+import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 public class AiEscape
@@ -140,30 +141,30 @@ public class AiEscape
 		
 		if(ownAi.urgentBombs <= 0 && isHeroInRange())
 		{
-			Debug.writeln("URGENT BOMB ADDED");
+			Debug.writeln("URGENT BOMB ADDED",ownAi);
 			ownAi.urgentBombs = 1;
 			
 		}
 		
 		if(ownAi.urgentBombs > 0 && isHeroInRange())
 		{
-			Debug.writeln("URGENT BOMBS " + ownAi.urgentBombs);
-			Debug.writeln(CURRENT_TILE.toString());
+			Debug.writeln("URGENT BOMBS " + ownAi.urgentBombs,ownAi);
+			Debug.writeln(CURRENT_TILE.toString(),ownAi);
 			if(CURRENT_TILE.getBombs().size() == 0 && (ownAi.lastBombedTile == null || !CURRENT_TILE.getNeighbors().contains(ownAi.lastBombedTile)))
 			{
-				Debug.writeln("Can I escape");
+				Debug.writeln("Can I escape",ownAi);
 				boolean escape = canIEscapeIfIBomb();
 				
-				Debug.writeln("URGENT BOMB " + escape + " URGENT COUNT " + ownAi.urgentBombs + " CURRENT TILE " + CURRENT_TILE.toString());
+				Debug.writeln("URGENT BOMB " + escape + " URGENT COUNT " + ownAi.urgentBombs + " CURRENT TILE " + CURRENT_TILE.toString(),ownAi);
 				if(escape)
 				{
-					Debug.writeln("I can");
+					Debug.writeln("I can",ownAi);
 					ownAi.urgentBombs--;
 					return;
 				}
 				else if(isTileSafe(CURRENT_TILE) && ((path != null && path.getLength() == 1) || path == null))
 				{
-					Debug.writeln("I cant");
+					Debug.writeln("I cant",ownAi);
 					AiPath pth = findPathToGo();
 					if(pth != null)
 					{
@@ -206,11 +207,11 @@ public class AiEscape
 			
 			else if(isTileSafe(CURRENT_TILE) && !isTileSafe(nextTile))
 			{
-				Debug.writeln("NEXT TILE IS NOT SAFE ");
+				Debug.writeln("NEXT TILE IS NOT SAFE ",ownAi);
 				return;
 			}		
 
-			Debug.writeln("END TILE NOT NULL CURRENT: " + CURRENT_TILE.toString() + " NEXT : " + nextTile.toString() + " END : " + path.getLastTile());
+			Debug.writeln("END TILE NOT NULL CURRENT: " + CURRENT_TILE.toString() + " NEXT : " + nextTile.toString() + " END : " + path.getLastTile(),ownAi);
 			Direction dir = zone.getDirection(CURRENT_TILE, nextTile);
 			actionToDo = new AiAction(AiActionName.MOVE, dir);	
 			ownAi.setActionToDo(actionToDo);
@@ -264,11 +265,11 @@ public class AiEscape
 						
 					if(pth != null)
 					{
-						Debug.writeln("GOING TO ENEMY TILE " + enemyChosen.getTile().toString());
+						Debug.writeln("GOING TO ENEMY TILE " + enemyChosen.getTile().toString(),ownAi);
 						
 						int dist = zone.getTileDistance(OWN_HERO.getTile(), enemyChosen.getTile());
 						
-						Debug.writeln("Tile dist: "+ dist);
+						Debug.writeln("Tile dist: "+ dist,ownAi);
 						if(dist <= 2)
 						{
 							ownAi.urgentBombs = 1;
@@ -294,40 +295,40 @@ public class AiEscape
 				
 				if(amIStuck)
 				{
-					Debug.writeln("I AM STUCK !");
+					Debug.writeln("I AM STUCK !",ownAi);
 					return;
 				}
 			}
 				
 			
-			Debug.writeln("I AM NOT STUCK !");
+			Debug.writeln("I AM NOT STUCK !",ownAi);
 			
-			Debug.writeln("Range: " + OWN_HERO.getBombRange() + " Bomb: " + OWN_HERO.getBombNumber());
+			Debug.writeln("Range: " + OWN_HERO.getBombRange() + " Bomb: " + OWN_HERO.getBombNumber(),ownAi);
 			
 				if(isThereBonusInTheTable())
 				{
-					Debug.writeln("THERE ARE BONUS IN AREA");
+					Debug.writeln("THERE ARE BONUS IN AREA",ownAi);
 					if(!enoughArmed())
 					{
 						AiPath pathToBonus = getReachableBonusInArea(10);
 						if(pathToBonus != null)
 						{
-							Debug.writeln("GOING TO BONUS IN AREA !");
+							Debug.writeln("GOING TO BONUS IN AREA !",ownAi);
 							ownAi.setPath(pathToBonus);
 							path = pathToBonus;
 							return;
 						}
 					}
-					Debug.writeln("SEARCHING FOR DEST BLOCKS !");
+					Debug.writeln("SEARCHING FOR DEST BLOCKS !",ownAi);
 					AiBlock destBlock = getDestBlockInMyRange();
 					if(destBlock != null)
 					{
-						Debug.writeln("BLOCK DEST FOUND : " + destBlock.toString());
+						Debug.writeln("BLOCK DEST FOUND : " + destBlock.toString(),ownAi);
 						boolean canIEscape = canIEscapeIfIBomb();
 
 						if(!canIEscape)
 						{
-							Debug.writeln("I CANNOT ESCAPE MOVING TO BLOCK FOUND");
+							Debug.writeln("I CANNOT ESCAPE MOVING TO BLOCK FOUND",ownAi);
 							
 							AiPath pathToGo = calculateNewPath(destBlock.getTile());
 							
@@ -339,7 +340,7 @@ public class AiEscape
 							}
 							
 							if(pathToGo != null)
-								Debug.writeln("Moving to " + pathToGo.toString());
+								Debug.writeln("Moving to " + pathToGo.toString(),ownAi);
 							
 							ownAi.setPath(pathToGo);
 							path = pathToGo;
@@ -347,13 +348,13 @@ public class AiEscape
 						}
 						else
 						{
-							Debug.writeln("ESCAPING");
+							Debug.writeln("ESCAPING",ownAi);
 						}
 						return;
 					}
 					else
 					{
-						Debug.writeln("BLOCK NOT FOUND IN RANGE MOVING TO SHORTEST");
+						Debug.writeln("BLOCK NOT FOUND IN RANGE MOVING TO SHORTEST",ownAi);
 						goToShortestDestBlock();
 					}
 				}
@@ -378,7 +379,7 @@ public class AiEscape
 		if(CURRENT_TILE.getHeroes().contains(hero))
 			return true;
 		while(ct < 4)
-		{
+		{	ownAi.checkInterruption();
 			ct++;
 			if(ct == 2)
 				dir = Direction.RIGHT;
@@ -411,7 +412,7 @@ public class AiEscape
 			return true;
 		
 		while(ct < 4)
-		{
+		{	ownAi.checkInterruption();
 			ct++;
 			if(ct == 2)
 				dir = Direction.RIGHT;
@@ -556,22 +557,22 @@ public class AiEscape
 				if(enm.getPosedBombs() == 0 && enm.getSameTileCount() >= 300 && reach)
 				{
 					enm.setType(EnemyTypes.FOLLOW);
-					Debug.writeln(enm.getHero().toString() + " type is " + enm.getType().toString() + " " + enm.toString());
+					Debug.writeln(enm.getHero().toString() + " type is " + enm.getType().toString() + " " + enm.toString(),ownAi);
 				}
 				else if(enm.getPosedBombs() == 0)
 				{
 					enm.setType(EnemyTypes.EASY);
-					Debug.writeln(enm.getHero().toString() + " type is " + enm.getType().toString() + " " + enm.toString());
+					Debug.writeln(enm.getHero().toString() + " type is " + enm.getType().toString() + " " + enm.toString(),ownAi);
 				}
 				else if(enm.getPosedBombs() > 0 && enm.getPosedBombs() <= 200)
 				{
 					enm.setType(EnemyTypes.MEDIUM);
-					Debug.writeln(enm.getHero().toString() + " type is " + enm.getType().toString() + " " + enm.toString());
+					Debug.writeln(enm.getHero().toString() + " type is " + enm.getType().toString() + " " + enm.toString(),ownAi);
 				}
 				else if(enm.getPosedBombs() > 200)
 				{
 					enm.setType(EnemyTypes.HARD);
-					Debug.writeln(enm.getHero().toString() + " type is " + enm.getType().toString() + " " + enm.toString());
+					Debug.writeln(enm.getHero().toString() + " type is " + enm.getType().toString() + " " + enm.toString(),ownAi);
 				}			
 			}
 	}
@@ -632,7 +633,7 @@ public class AiEscape
 	public boolean stuckAlgorithm() throws StopRequestException
 	{
 		ownAi.checkInterruption();
-		Debug.writeln("Current : " + CURRENT_TILE.toString());
+		Debug.writeln("Current : " + CURRENT_TILE.toString(),ownAi);
 		int count = 0;
 		
 		/*
@@ -672,12 +673,12 @@ public class AiEscape
 					{
 						path = null;
 						ownAi.setPath(null);
-						Debug.writeln("I CANT ESCAPE IF I START RISKY!");
+						Debug.writeln("I CANT ESCAPE IF I START RISKY!",ownAi);
 						break;
 					}
 				}
 			}
-			Debug.writeln("New path found for stuck");
+			Debug.writeln("New path found for stuck",ownAi);
 			return true;
 		}
 	}
@@ -811,9 +812,8 @@ public class AiEscape
 	}
 	
 	public double[][] copyTiles(double[][] from) throws StopRequestException
-	{
+	{	ownAi.checkInterruption();
 		double[][] to = new double[zone.getHeigh()][zone.getWidth()];
-		ownAi.checkInterruption();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -830,7 +830,7 @@ public class AiEscape
 		ownAi.checkInterruption();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
-			Debug.writeln("");
+			Debug.writeln("",ownAi);
 			for(int col=0;col<zone.getWidth();col++)
 			{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
 				if(safeArray[line][col] == STUCK)
@@ -840,7 +840,7 @@ public class AiEscape
 					int dirCt = 0;
 					int stCt = 0;
 					while(dirCt < 4)
-					{
+					{	ownAi.checkInterruption();
 						Direction dir = null;
 						if(dirCt == 0)
 							dir = Direction.UP;
@@ -855,10 +855,10 @@ public class AiEscape
 						{
 							int i=0;
 							for(i=0; i<3; i++)
-							{
+							{	ownAi.checkInterruption();
 								stCt = 0;
 								for(int j=0; j<neiTile.getNeighbors().size(); j++)
-								{
+								{	ownAi.checkInterruption();
 									if(neiTile.getNeighbors().get(j).isCrossableBy(OWN_HERO))
 										stCt++;
 								}
@@ -879,28 +879,28 @@ public class AiEscape
 	
 	public void printTiles() throws StopRequestException
 	{
-		Debug.writeln("LISTING MATRICE");
 		ownAi.checkInterruption();
+		Debug.writeln("LISTING MATRICE",ownAi);
 		for(int line=0;line<zone.getHeigh();line++)
 		{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
-			Debug.writeln("");
+			Debug.writeln("",ownAi);
 			for(int col=0;col<zone.getWidth();col++)
 			{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
-				Debug.write(safeArray[line][col] + " ");
+				Debug.write(safeArray[line][col] + " ",ownAi);
 			}
 		}
 	}
 	
 	public void printTiles(double matrice[][]) throws StopRequestException
 	{
-		Debug.writeln("LISTING MATRICE");
 		ownAi.checkInterruption();
+		Debug.writeln("LISTING MATRICE",ownAi);
 		for(int line=0;line<matrice.length;line++)
 		{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
-			Debug.writeln("");
+			Debug.writeln("",ownAi);
 			for(int col=0;col<matrice[line].length;col++)
 			{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
-				Debug.write(matrice[line][col] + " ");
+				Debug.write(matrice[line][col] + " ",ownAi);
 			}
 		}
 	}
@@ -1058,12 +1058,12 @@ public class AiEscape
 					path = null;
 					ownAi.setPath(null);
 					safeArray = tempArray;
-					Debug.writeln("I CANT ESCAPE IF I BOMB IT'S RISKY!");
+					Debug.writeln("I CANT ESCAPE IF I BOMB IT'S RISKY!",ownAi);
 					return false;
 				}
 			}
-			Debug.writeln("I CAN ESCAPE, BOMBING");
-			Debug.writeln(path.toString());
+			Debug.writeln("I CAN ESCAPE, BOMBING",ownAi);
+			Debug.writeln(path.toString(),ownAi);
 			safeArray = tempArray;
 			actionToDo = new AiAction(AiActionName.DROP_BOMB);	
 			ownAi.setActionToDo(actionToDo);
@@ -1141,7 +1141,7 @@ public class AiEscape
 		int ct = 0;
 		Direction dir = Direction.LEFT;
 		while(ct < 4)
-		{
+		{	ownAi.checkInterruption();
 			ct++;
 			if(ct == 2)
 				dir = Direction.RIGHT;
@@ -1196,13 +1196,13 @@ public class AiEscape
 				{
 					if(ownAi.triedTiles.visited.contains(neigh))
 					{
-						Debug.writeln("TILE ALREADY TRIED");
+						Debug.writeln("TILE ALREADY TRIED",ownAi);
 						continue;
 					}
 					
 					if(stuckCheck(neigh) == STUCK)
 					{
-						Debug.writeln(neigh.toString() + " added ");
+						Debug.writeln(neigh.toString() + " added ",ownAi);
 						ownAi.triedTiles.visited.add(neigh);
 					}
 					
@@ -1241,7 +1241,7 @@ public class AiEscape
 			
 		if(minPath != null)
 		{
-			Debug.writeln("GOING TO SHORTEST BLOCK " + minBlock.getTile().toString());
+			Debug.writeln("GOING TO SHORTEST BLOCK " + minBlock.getTile().toString(),ownAi);
 			ownAi.setPath(minPath);
 			path = minPath;
 			return true;
@@ -1259,7 +1259,7 @@ public class AiEscape
 		for(AiTile tileToPass : localpath.getTiles())
 		{
 			ownAi.checkInterruption();
-			Debug.write(tileToPass.toString()+" ");
+			Debug.write(tileToPass.toString()+" ",ownAi);
 		}
 
 		if(localpath.getTiles().size() > 0)
@@ -1288,13 +1288,13 @@ public class AiEscape
 		for(AiTile tileToPass : localpath.getTiles())
 		{
 			ownAi.checkInterruption();
-			Debug.write(tileToPass.toString()+" ");
+			Debug.write(tileToPass.toString()+" ",ownAi);
 		}
 
 		if(localpath.getTiles().size() > 0)
 		{
-			Debug.writeln(CURRENT_TILE.toString());
-			Debug.writeln(localpath.getLastTile().toString());
+			Debug.writeln(CURRENT_TILE.toString(),ownAi);
+			Debug.writeln(localpath.getLastTile().toString(),ownAi);
 			ownAi.setPath(localpath);
 			path = localpath;
 			return true;
