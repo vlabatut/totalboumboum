@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200910.ais.aldanmazyenigun.v5;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2010 Vincent Labatut 
+ * Copyright 2008-2009 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -32,7 +32,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
-
 
 public class AldanmazYenigun extends ArtificialIntelligence {
 
@@ -512,8 +511,12 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		checkInterruption();
 		boolean result = false;
 
-		result = safetyZone.isSafe(tile.getCol(), tile.getLine());
-		
+		try {
+			result = safetyZone.isSafe(tile.getCol(), tile.getLine());
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -521,8 +524,12 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		checkInterruption();
 		boolean result = false;
 
-		result = safetyZone.isBonus(tile.getCol(), tile.getLine());
-		
+		try {
+			result = safetyZone.isBonus(tile.getCol(), tile.getLine());
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -531,7 +538,12 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		checkInterruption();
 		boolean result = false;
 
-		result = safetyZone.iswall(tile.getCol(), tile.getLine());
+		try {
+			result = safetyZone.iswall(tile.getCol(), tile.getLine());
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -539,8 +551,12 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		checkInterruption();
 		boolean result = false;
 
-		result = safetyZone.isHero(tile.getCol(), tile.getLine());
-		
+		try {
+			result = safetyZone.isHero(tile.getCol(), tile.getLine());
+		} catch (StopRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -589,23 +605,19 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 
 
-	public void setAccessible(boolean accessible) throws StopRequestException {
-		checkInterruption(); 
+	public void setAccessible(boolean accessible) {
 		this.bonusAccessible = accessible;
 	}
 
-	public boolean isBonusAccessible() throws StopRequestException {
-		checkInterruption(); 
+	public boolean isBonusAccessible() {
 		return bonusAccessible;
 	}
 
-	public void setHeroAccessible(boolean accessible) throws StopRequestException {
-		checkInterruption(); 
+	public void setHeroAccessible(boolean accessible) {
 		this.heroAccessible = accessible;
 	}
 
-	public boolean isHeroAccessible() throws StopRequestException {
-		checkInterruption(); 
+	public boolean isHeroAccessible() {
 		return heroAccessible;
 	}
 

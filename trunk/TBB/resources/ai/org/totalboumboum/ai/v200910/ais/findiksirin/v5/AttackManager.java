@@ -3,7 +3,6 @@ package org.totalboumboum.ai.v200910.ais.findiksirin.v5;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;

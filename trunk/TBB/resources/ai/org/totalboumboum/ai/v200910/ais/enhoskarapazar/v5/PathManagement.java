@@ -13,7 +13,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 
-
 public class PathManagement {
 
 	
@@ -148,26 +147,23 @@ public class PathManagement {
 	
 	public int getLength() throws StopRequestException
 	{	
-		ai.checkInterruption();
 		return path.getLength();
 	}
-	public  ArrayList<AiTile> getPathList() throws StopRequestException
+	public  ArrayList<AiTile> getPathList()
 	{
-		ai.checkInterruption();
+		
 		return path.getTiles();
 	}
 	
 	public boolean isWalkable() throws StopRequestException
 	{ 
-		ai.checkInterruption();
 		if(path.getLength()>0)
 			return true;
 		else
 			return false;
 	}
-	public void printPath() throws StopRequestException
+	public void printPath()
 	{
-		ai.checkInterruption();
 		System.out.println(path.getTiles().toString());
 	}
 	

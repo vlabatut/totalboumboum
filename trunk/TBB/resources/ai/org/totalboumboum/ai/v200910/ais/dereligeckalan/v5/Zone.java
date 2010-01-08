@@ -1,6 +1,12 @@
 package org.totalboumboum.ai.v200910.ais.dereligeckalan.v5;
+
 import java.util.Collection;
 import java.util.Iterator;
+
+
+
+
+import org.totalboumboum.ai.v200910.adapter.data.AiItemType;
 
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
@@ -8,16 +14,10 @@ import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
 import org.totalboumboum.ai.v200910.adapter.data.AiFire;
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiItem;
-import org.totalboumboum.ai.v200910.adapter.data.AiItemType;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
+
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
-
-
-
-
-
-
 
 
 public class Zone {
@@ -105,14 +105,12 @@ public class Zone {
 			boolean right = true;
 			while(k < temp.getRange() && (up || down || left || right))
 			{
-				source.checkInterruption(); //Appel Obligatoire
 				int a =0;
 				source.checkInterruption(); //Appel Obligatoire
 				
 					AiTile temp1 = temp.getTile();
 					while(up && a<k)
 					{
-						source.checkInterruption(); //Appel Obligatoire
 						
 						AiTile temp2 = temp1.getNeighbor(Direction.UP);
 						temp1 = temp2; 
@@ -131,7 +129,6 @@ public class Zone {
 				
 					while(down && a<k)
 					{
-						source.checkInterruption(); //Appel Obligatoire
 						
 						AiTile temp2 = temp1.getNeighbor(Direction.DOWN);
 						temp1 = temp2; 
@@ -148,8 +145,7 @@ public class Zone {
 					temp1 = temp.getTile();
 					while(left && a<k)
 					{
-						source.checkInterruption(); //Appel Obligatoire
-					
+						
 						AiTile temp2 = temp1.getNeighbor(Direction.LEFT);
 						temp1 = temp2; 
 						int x = temp2.getCol();
@@ -165,7 +161,6 @@ public class Zone {
 					temp1 = temp.getTile();
 					while(right && a<k)
 					{
-						source.checkInterruption(); //Appel Obligatoire
 						
 						AiTile temp2 = temp1.getNeighbor(Direction.RIGHT);
 						temp1 = temp2; 

@@ -14,7 +14,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 public class AbstractBombController {
 	
 
@@ -228,8 +227,7 @@ public class AbstractBombController {
 		return result;
 	}
 	
-	public AiPath getPath() throws StopRequestException{
-		ai.checkInterruption();
+	public AiPath getPath(){
 		return path;
 	}
 

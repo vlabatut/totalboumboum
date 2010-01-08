@@ -14,7 +14,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 public class DangerZone {
 
 	private AiZone zone;
@@ -103,7 +102,6 @@ public class DangerZone {
 			// Est-ce qu'on continue sur ces directions?
 			boolean up = true, down = true, left = true, right = true;
 			while (k < temp.getRange() + 1 && (up || down || left || right)) {
-				source.checkInterruption();
 				int a = 0;
 				source.checkInterruption(); // Appel Obligatoire
 

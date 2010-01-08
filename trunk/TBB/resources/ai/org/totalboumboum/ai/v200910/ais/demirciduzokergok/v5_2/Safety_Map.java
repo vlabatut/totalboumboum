@@ -1,4 +1,3 @@
-
 package org.totalboumboum.ai.v200910.ais.demirciduzokergok.v5_2;
 
 
@@ -7,8 +6,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
-import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+
+
+
 import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
 import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
 import org.totalboumboum.ai.v200910.adapter.data.AiFire;
@@ -17,10 +17,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiItem;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
-
-
-
-
 
 
 /**
@@ -60,13 +56,9 @@ public class Safety_Map {
 
 	//matrix stocking the danger levels:
 	public double security_matrix[][];
-	ArtificialIntelligence ai;
 	
-	/** Constructer of the class Safety_Map
-	 * @throws StopRequestException */
-	public Safety_Map(AiZone zone, ArtificialIntelligence ai) throws StopRequestException{
-		ai.checkInterruption();
-		this.ai = ai;
+	/** Constructer of the class Safety_Map*/
+	public Safety_Map(AiZone zone){
 		this.our_zone=zone;
 		this.blocks=zone.getBlocks();
 		this.bonus=zone.getItems();
@@ -83,15 +75,12 @@ public class Safety_Map {
 		Fill_The_Matrix();
 	}
 
-	public void Fill_The_Matrix() throws StopRequestException {
-		ai.checkInterruption();
+	public void Fill_The_Matrix() {
 		//firstly we place all the matrice with SAFE_CASE:
 		int x,y;
 		security_matrix=new double[height][width];
 		for(y=0;y<height;y++){
-			ai.checkInterruption();
 			for(x=0;x<width;x++){
-				ai.checkInterruption();
 				security_matrix[y][x]=SAFE_CASE;
 			}
 		}
@@ -100,7 +89,6 @@ public class Safety_Map {
 		Iterator<AiBlock> block_iterator=blocks.iterator();
 		AiBlock blck;
 		while(block_iterator.hasNext()==true){
-			ai.checkInterruption();
 			blck=block_iterator.next();
 			pos_x=blck.getCol();
 			pos_y=blck.getLine();
@@ -117,7 +105,6 @@ public class Safety_Map {
 		AiItem item_bonus;
 
 		while (bonus_iterator.hasNext()) {
-			ai.checkInterruption();
 			item_bonus = bonus_iterator.next();
 
 			pos_x = item_bonus.getCol();
@@ -132,7 +119,6 @@ public class Safety_Map {
 		Iterator<AiFire> fire_iterator=fires.iterator();
 		AiFire fr;
 		while(fire_iterator.hasNext()){
-			ai.checkInterruption();
 			fr=fire_iterator.next();
 			pos_x=fr.getCol();
 			pos_y=fr.getLine();
@@ -157,7 +143,6 @@ public class Safety_Map {
 		//placing the different danger levels:
 		
 		while(iterate_bombs.hasNext()==true){
-			ai.checkInterruption();
 			bmb=iterate_bombs.next();
 			
 			pos_x=bmb.getCol();
@@ -197,7 +182,6 @@ public class Safety_Map {
 			
 			if(blocks_right.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
-					ai.checkInterruption();
 					if( (pos_x+k<width) && ((security_matrix[pos_y][pos_x+k]==SAFE_CASE))){
 						security_matrix[pos_y][pos_x+k]=danger_level;
 					}
@@ -216,7 +200,6 @@ public class Safety_Map {
 			
 			if(blocks_left.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
-					ai.checkInterruption();
 					if( (pos_x-k>0) && ((security_matrix[pos_y][pos_x-k]==SAFE_CASE)||(security_matrix[pos_y][pos_x-k]==BONUS))){
 						security_matrix[pos_y][pos_x-k]=danger_level;
 					}
@@ -236,7 +219,6 @@ public class Safety_Map {
 			
 			if(blocks_down.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
-					ai.checkInterruption();
 					if( (pos_y+k<height) && ((security_matrix[pos_y+k][pos_x]==SAFE_CASE))){
 						security_matrix[pos_y+k][pos_x]=danger_level;
 					}
@@ -255,7 +237,6 @@ public class Safety_Map {
 			
 			if(blocks_up.isEmpty()==true&&danger_level>0){
 				for(int k=1;k<=bmb.getRange();k++){
-					ai.checkInterruption();
 					if( (pos_y-k>0) && ((security_matrix[pos_y-k][pos_x]==SAFE_CASE))){
 						security_matrix[pos_y-k][pos_x]=danger_level;
 					}
@@ -279,7 +260,6 @@ public class Safety_Map {
 		AiBomb bm;
 
 		while (it_bmb.hasNext()) {
-			ai.checkInterruption();
 			bm = it_bmb.next();
 			pos_x = bm.getCol();
 			pos_y = bm.getLine();
@@ -292,7 +272,6 @@ public class Safety_Map {
 		Iterator<AiHero> it_hero=enemies.iterator();
 		AiHero hr;
 		while(it_hero.hasNext()){
-			ai.checkInterruption();
 			hr=it_hero.next();
 			pos_x=hr.getCol();
 			pos_y=hr.getLine();
@@ -309,8 +288,7 @@ public class Safety_Map {
 	
 
 	
-	public double[][] returnMatrix() throws StopRequestException {
-		ai.checkInterruption();
+	public double[][] returnMatrix() {
 		return security_matrix;
 	}
 		

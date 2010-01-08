@@ -3,7 +3,6 @@ package org.totalboumboum.ai.v200910.ais.findiksirin.v5;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
@@ -163,8 +162,7 @@ public class BonusManager
 	private AiPath path;
 
 	//
-	public boolean isOnBonusDestruction() throws StopRequestException{
-		ai.checkInterruption();
+	public boolean isOnBonusDestruction(){
 		return OnBonusDestruction;
 	}
 	

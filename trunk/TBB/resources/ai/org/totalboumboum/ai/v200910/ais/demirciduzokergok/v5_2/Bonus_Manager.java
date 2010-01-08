@@ -3,7 +3,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
+
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
@@ -13,10 +16,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
-
-
-
-
 
 
 /**
@@ -170,7 +169,6 @@ public class Bonus_Manager {
 		boolean x=true;
 		int m=0;
 		while(m<path_b.getLength()-1 && path_b.isEmpty()==false){
-			ai.checkInterruption();
 			if(safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b.getTile(m).getCol()]!=safe_map.SAFE_CASE)
 				x=false;
 				
@@ -207,7 +205,7 @@ public class Bonus_Manager {
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		safe_map=new Safety_Map(zone,ai);
+		safe_map=new Safety_Map(zone);
 		double safetyMatrix_b[][] = safe_map.returnMatrix();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -260,11 +258,9 @@ public class Bonus_Manager {
 	/**
 	 * verifies if the path is accessible or not:
 	 * @return
-	 * @throws StopRequestException 
 	 */
 	
-	public boolean accessiblePath() throws StopRequestException{
-		ai.checkInterruption();
+	public boolean accessiblePath(){
 		if(path_b.isEmpty()==false)
 			return true;
 		else
@@ -282,7 +278,7 @@ public class Bonus_Manager {
 
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
-		safe_map=new Safety_Map(zone,ai);
+		safe_map=new Safety_Map(zone);
 		AiTile tile_dest_b;
 		ArrayList<AiTile> result_b = new ArrayList<AiTile>();
 		

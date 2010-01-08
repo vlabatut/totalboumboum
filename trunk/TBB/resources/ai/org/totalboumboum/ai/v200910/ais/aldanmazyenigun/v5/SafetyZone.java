@@ -13,7 +13,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * on cree la matrice de sécurité et matrice d'attaque dans cette classe. 
  */
@@ -384,8 +383,7 @@ public class SafetyZone {
 		return attackMatrix;
 	}
 
-	public double getCaseLevel(int line, int col) throws StopRequestException {
-		ai.checkInterruption();
+	public double getCaseLevel(int line, int col) {
 		return matrix[line][col];
 	}
 

@@ -3,7 +3,10 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+
+
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
+
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
@@ -12,10 +15,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
-
-
-
-
 
 
 
@@ -48,8 +47,7 @@ public class Can_escape_Manager {
 
 
 	
-	public int getPathLength() throws StopRequestException{
-		ai.checkInterruption();
+	public int getPathLength(){
 		return path_b.getLength();		
 		
 	}
@@ -78,7 +76,7 @@ public class Can_escape_Manager {
 
 
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
-		safe_map=new Can_escape(zone,ai);
+		safe_map=new Can_escape(zone);
 		AiTile tile_dest_b;
 		ArrayList<AiTile> result_b = new ArrayList<AiTile>();
 		

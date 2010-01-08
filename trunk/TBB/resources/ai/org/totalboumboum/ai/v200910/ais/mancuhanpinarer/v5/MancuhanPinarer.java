@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
 import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
@@ -696,10 +695,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * 			La case de bombe passe en parametre.
 	 * @return
 	 * 			vrai si la bombe existe encore
-	 * @throws StopRequestException 
 	 */
-	private boolean isBombExists(AiTile bombTile) throws StopRequestException {
-		checkInterruption();
+	private boolean isBombExists(AiTile bombTile) {
 		boolean result = true;
 		if (bombTile.getBombs().size() == 0)
 			result = false;
@@ -740,10 +737,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 * 			L'hero adversaire
 	 * @return
 	 * 			vrai si l'hero adversaire est mort.
-	 * @throws StopRequestException 
 	 */
-	private boolean isHeroDead(AiZone gameZone, AiHero hero) throws StopRequestException {
-		checkInterruption();
+	private boolean isHeroDead(AiZone gameZone, AiHero hero) {
 		boolean result = false;
 		List<AiHero> allHeros = gameZone.getHeroes();
 		List<AiHero> remainingHeros = gameZone.getRemainingHeroes();
@@ -1168,10 +1163,10 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		// L'objet pour implementer l'algo A*
 		Astar astar;
 		// Calcul du cout par la classe de l'API
-		CostCalculator cost = new RedGroupOffenseCostCalculator(this);
+		CostCalculator cost = new RedGroupOffenseCostCalculator();
 		// Calcul de l'heuristic par la classe de l'API
 		HeuristicCalculator heuristic = new BasicHeuristicCalculator();
-		astar = new Astar(this, ownHero, cost, heuristic);
+		astar = new Astar(this,ownHero, cost, heuristic);
 		shortestPath = astar.processShortestPath(startPoint, endPoints);
 		return shortestPath;
 
@@ -1200,10 +1195,10 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		// L'objet pour implementer l'algo A*
 		Astar astar;
 		// Calcul du cout par la classe de l'API
-		CostCalculator cost = new RedGroupDefenseCostCalculator(this);
+		CostCalculator cost = new RedGroupDefenseCostCalculator();
 		// Calcul de l'heuristic par la classe de l'API
 		HeuristicCalculator heuristic = new BasicHeuristicCalculator();
-		astar = new Astar(this, ownHero, cost, heuristic);
+		astar = new Astar(this,ownHero, cost, heuristic);
 		shortestPath = astar.processShortestPath(startPoint, endPoints);
 		return shortestPath;
 	}

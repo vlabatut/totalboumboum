@@ -2,7 +2,6 @@ package org.totalboumboum.ai.v200910.ais.aldanmazyenigun.v5;
 
 import java.util.Iterator;
 import java.util.List;
-
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
@@ -230,13 +229,11 @@ public class ItemController {
 			return result;
 		}
 
-		public void setBonusAccessible(boolean isBonusAccessible) throws StopRequestException {
-			ai.checkInterruption();
+		public void setBonusAccessible(boolean isBonusAccessible) {
 			this.isBonusAccessible = isBonusAccessible;
 		}
 
-		public boolean isBonusAccessible() throws StopRequestException {
-			ai.checkInterruption();
+		public boolean isBonusAccessible() {
 			return isBonusAccessible;
 		}
 		

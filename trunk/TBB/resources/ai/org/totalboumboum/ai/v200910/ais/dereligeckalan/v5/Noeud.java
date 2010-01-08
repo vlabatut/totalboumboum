@@ -150,7 +150,6 @@ public class Noeud {
 		 */
 
 		public int getCout() throws StopRequestException {
-			source.checkInterruption();
 			return cout;
 		}
 
@@ -162,7 +161,6 @@ public class Noeud {
 		 * @throws StopRequestException 
 		 */
 		public void setCout(int cout) throws StopRequestException {
-			source.checkInterruption();
 			this.cout = cout;
 		}
 
@@ -211,7 +209,7 @@ public class Noeud {
 		 */
 
 		public int getHeuristic(Noeud goal) throws StopRequestException {
-			source.checkInterruption();
+
 			int result = 0;
 			//somme des differences des coordonnees x et de y des noeuds
 			result = result + Math.abs(x - goal.getX());
