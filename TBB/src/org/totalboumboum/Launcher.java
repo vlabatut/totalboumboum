@@ -845,6 +845,8 @@ public class Launcher
 	/* TODO
 	 * + beta.016
 	 * - Moteur :
+	 * 		- création d'une classe Instance pour gérer de façon plus pratique les feux/bombes/items
+	 *  	- généralisation du chargement des explosions (mutualisé plutot que de recommencer à chaque sprite)
 	 * - GUI :
 	 * - IA :
 	 * 		- utilitaire permettant de controller les checkinterruptions dans les programmes des étudiants
@@ -922,10 +924,12 @@ public class Launcher
 	 * 		- possibilité de définir un nom pour tournament/match/round, 
 	 * 		  qui sera affiche en titre de présentation/stats etc. 
 	 * 		  si pas de nom, utilisation d'un nom générique (Round 1 - Prensentation) etc
-	 * 		- faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatibles avec le tournoi 2007-08
 	 * 		- besoin d'une méthode permettant d'exporter un tournoi/match/round, 
 	 * 		  ie de l'écrire entièrement en local (pas de référence à des composants existants)
 	 * 		- dans les fichiers xml, pour les points, plutot que local (vrai ou faux), utiliser round/match/tournament/game (permet de mieux mutualiser les fichiers)
+	 * 		- tournoi coupe : 
+	 * 			- pouvoir se qualifier depuis n'importe quel leg, pas forcement le précédent direct (nécessité de préciser le numéro du leg en plus du part, dans le doc XML et la class CupPlayer)
+	 * 			- y compris depuis le leg initial (prévoir une sous-classe pour distinguer initial des autres?)
 	 * 
 	 * - Items :
 	 * 		- définir des noms "human readable" pour les items, histoire de ne pas afficher ces codes internes dans la GUI, en profiter pour introduire une decription, le tout en plusieurs langues. utiliser le code ISO comme paramètre de langue, et l'introduire dans le fichier de langue
@@ -1169,7 +1173,7 @@ public class Launcher
 	 *  
 	 *  cache :
 	 *  	- pb de mise à l'échelle
-	 *  	- pb de ralentissement sur la mise en cache
+	 *  	- pb de ralentissement du jeu sur la mise en cache
 	 *  	- pas plus rapide que normal (clairement ! mais à mesurer avec jprofiler)
 	 *  	>> mise en cache mémoire au moins pour les joueurs ?
 	 *  all explosions should be loaded/stocked at the zone level, like fires and other general stuff
@@ -1179,8 +1183,6 @@ public class Launcher
 	
 	/*
 	 * TODO
-	 * 	- créer un InstanceContainer à placer dans la conf, pour un accès pratique (working instance)
-	 *  - généraliser le chargement des explosions (comme feux, bombes, etc)
 	 *  - pour tous ces trucs généraux, p-ê ne charger que ceux dont on a besoin :
 	 *  	- si déjà chargé, on utilise
 	 *  	- sinon on charge et on stocke dans l'accès statique
@@ -1201,11 +1203,5 @@ public class Launcher
 	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
 	 */
 
-	/*
-	 * tournoi COUPE : 
-	 * 	- pouvoir se qualifier depuis n'importe quel leg, pas forcement le précédent direct
-	 * 	- y compris depuis le leg initial (prévoir une sous-classe pour distinguer initial des autres?)
-	 */
-	
 	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux
 }
