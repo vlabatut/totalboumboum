@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.demiragsagar.v2.DemiragSagar;
 
-
 public class AiMain extends AiManager {
 
 	public AiMain() {

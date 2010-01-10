@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v200809.ais.caliskancapdoganer;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.caliskancapdoganer.v1.CaliskanCapDoganer;
 
-
 public class AiMain extends AiManager
 {
 

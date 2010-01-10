@@ -428,7 +428,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	// la methode pour s'enfuire avec un mouvement zigzag
 	private AiTile getDirection(AiTile refTile) throws StopRequestException{
-		checkInterruption();
+		
 		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 		
 		double min=10000000;
@@ -436,7 +436,6 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		double dist= getDistance(refTile, currentTile);
 		
 		for (int i=0;i<tiles.size();i++){
-			checkInterruption();
 			if(getDistance(refTile, tiles.get(i))>dist && getDistance(refTile, tiles.get(i))<min ){
 				min=getDistance(refTile, tiles.get(i));
 				k=i;

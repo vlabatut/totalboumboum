@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v200809.ais.coremenkucukkarakurt;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.coremenkucukkarakurt.v2.CoremenKucukkarakurt;
 
-
 public class AiMain extends AiManager
 {
 

@@ -16,6 +16,7 @@ public class Node {
 	private Tree tree;
 	
 	public Node(int line, int col, double cost, Tree t, int depth) {
+		super();
 		this.line = line;
 		this.col = col;
 		this.depth = depth;

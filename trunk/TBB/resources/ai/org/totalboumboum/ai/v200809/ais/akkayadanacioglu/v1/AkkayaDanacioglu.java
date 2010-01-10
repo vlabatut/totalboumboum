@@ -108,7 +108,6 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 						nextTile = currentTile;
 					} else {
 						for (AiTile tile : nTiles) {
-							checkInterruption();
 							if (isClear(tile) && !isInDanger(tile)) {
 								nextTile = tile;
 								break;

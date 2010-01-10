@@ -95,7 +95,11 @@ public class AkpolatSener extends ArtificialIntelligence {
 
 		// si IA n'est pas mort, il va selectionner la case possible
 		if (ownHero != null) {
-			selectTile(currentTile);
+			try {
+				selectTile(currentTile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else
 			result = new AiAction(AiActionName.NONE);
 
@@ -105,9 +109,8 @@ public class AkpolatSener extends ArtificialIntelligence {
 	/**
 	 * determine l'action la plus logique
 	 * @param tile la case dont on cherche les voisines
-	 * @throws StopRequestException 
 	 */
-	public void selectTile(AiTile tile) throws StopRequestException {
+	public void selectTile(AiTile tile) throws Exception {
 		checkInterruption();
 
 		Hero ownHero = new Hero(this, this.zone, this.ownHero);
@@ -148,9 +151,8 @@ public class AkpolatSener extends ArtificialIntelligence {
 	/**
 	 * renvoie le cas la plus possible pour aller
 	 * @return	le cas la plus propre
-	 * @throws StopRequestException 
 	 */
-	public AiTile findPath() throws StopRequestException  {
+	public AiTile findPath() throws Exception {
 		checkInterruption();
 		
 		ArrayList<AiTile> possibleTiles;

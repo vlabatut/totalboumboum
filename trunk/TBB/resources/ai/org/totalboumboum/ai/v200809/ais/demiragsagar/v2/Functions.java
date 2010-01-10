@@ -8,15 +8,12 @@ import org.totalboumboum.ai.v200809.adapter.AiBlock;
 import org.totalboumboum.ai.v200809.adapter.AiBomb;
 import org.totalboumboum.ai.v200809.adapter.AiFire;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
-import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
-import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
 
 public class Functions {
 	// regarde si il existe un mur de type SOFT ou HARD
-	public static boolean hasWall(AiTile tile, ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
+	public static boolean hasWall(AiTile tile) {
 		boolean result;
 		AiBlock block = tile.getBlock();
 		result = block != null;
@@ -27,53 +24,45 @@ public class Functions {
 	 * On voit -1 s'il ya un mur de type hard ou soft
 	 * On voit 0 s'il n'ya pas de mur
 	 */
-	public static void printMatrice(long maMatrice[][], ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
+	public static void printMatrice(long maMatrice[][]) {
 		int i, j;
 		System.out.println("Affichement de la matrice des bombes:");
 		for (j = 0; j < 15; j++) {
-			ai.checkInterruption();
 			for (i = 0; i < 17; i++)
-			{	ai.checkInterruption();
 				if (maMatrice[i][j] >= 0)
 					System.out.print(" " + maMatrice[i][j]);
 				else
 					System.out.print(maMatrice[i][j]);
-			}
 			System.out.println();
 		}
 	}
 	/*
 	 * Retourne true si deux nodes ont les meme coordonnees
 	 */
-	public static boolean memeCordonnes(Node node1,Node node2, ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
-		return Functions.memeCordonnes(node1.getTile(),node2.getTile(),ai);
+	public static boolean memeCordonnes(Node node1,Node node2) {
+		return Functions.memeCordonnes(node1.getTile(),node2.getTile());
 	}
 	/*
 	 * Retourne true si deux cases ont les meme coordonnees
 	 */
-	public static boolean memeCordonnes(AiTile tile1,AiTile tile2, ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
+	public static boolean memeCordonnes(AiTile tile1,AiTile tile2) {
 		return tile1.getCol()==tile2.getCol() && tile1.getLine()==tile2.getLine();
 	}
 	/*
 	 * On donne une case cible(AiTile target) et cette fonction trouve dans ue liste des cases la case plus proche a cette case cible 
 	 */
-	public static AiTile TheCloserTile(AiTile target,ArrayList<AiTile> tiles, ArtificialIntelligence ai) throws StopRequestException
+	public static AiTile TheCloserTile(AiTile target,ArrayList<AiTile> tiles)
 	{
-		ai.checkInterruption();
 		AiTile minTile = null;
 		int valeur=-1;
 		if(!tiles.isEmpty())
 		{
 			for(AiTile temp : tiles)
-			{	ai.checkInterruption();
-
-				int dist=Functions.trouveDistance(temp,target,ai);
+			{
+				int dist=Functions.trouveDistance(temp,target);
 				if(valeur==-1 || (dist!=-1 && valeur>dist))
 				{
-					valeur=Functions.trouveDistance(temp,target,ai);
+					valeur=Functions.trouveDistance(temp,target);
 					minTile=temp;
 				}
 			}
@@ -82,9 +71,8 @@ public class Functions {
 	}
 
 	// On trouve avec combien de cases on peut aller a une case cible
-	public static int trouveDistance(AiTile current, AiTile target, ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
-		if(Functions.memeCordonnes(current, target,ai)) return 0;
+	public static int trouveDistance(AiTile current, AiTile target) {
+		if(Functions.memeCordonnes(current, target)) return 0;
 		AStar arbre = new AStar(current, target, false);
 		arbre.formeArbre();
 		LinkedList<Node> path=arbre.getPath();
@@ -95,24 +83,22 @@ public class Functions {
 	/*
 	 * Trouver les noeuds fils d'une case
 	 */
-	public static int ChildNodes(AiTile courant, ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
+	public static int ChildNodes(AiTile courant) {
 		int result=0;
-		if (!hasWall(courant.getNeighbor(Direction.UP),ai))
+		if (!hasWall(courant.getNeighbor(Direction.UP)))
 			result++;
-		if (!hasWall(courant.getNeighbor(Direction.DOWN),ai))
+		if (!hasWall(courant.getNeighbor(Direction.DOWN)))
 			result++;				
-		if (!hasWall(courant.getNeighbor(Direction.LEFT),ai))
+		if (!hasWall(courant.getNeighbor(Direction.LEFT)))
 			result++;			
-		if (!hasWall(courant.getNeighbor(Direction.RIGHT),ai))
+		if (!hasWall(courant.getNeighbor(Direction.RIGHT)))
 			result++;
 		return result;
 	}
 	/*
 	 * Cette fonction retourne true si une case ne contient pas de block ni de feu et nide bombe
 	 */
-	public static boolean isClear(AiTile tile, ArtificialIntelligence ai) throws StopRequestException{
-		ai.checkInterruption();
+	public static boolean isClear(AiTile tile){
 		boolean result;
 		AiBlock block = tile.getBlock();
 		Collection<AiBomb> bombs = tile.getBombs();

@@ -527,7 +527,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 			checkInterruption(); // Appel Obligatoire
 			AiBomb tempBomb = itBombes.next();
 			TimedBomb tempTimedBomb = new TimedBomb(this.zone, tempBomb, time,
-					time,this);
+					time);
 			if (!this.timedBombes.contains(tempTimedBomb)) {
 				newTimedBombes.add(tempTimedBomb);
 			} else {
@@ -703,9 +703,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 						if (tempZone.getLastSimulatedBombExplodes() != -1)
 						{
 							for(int k = i - 3; k <= i + 3;k++)
-							{	checkInterruption();
+							{
 								for(int l = j - 3; l <= j + 3; l++)
-								{	checkInterruption(); // Appel Obligatoire
+								{checkInterruption(); // Appel Obligatoire
 									if(k > 0 && k < zone.getWidth() && l > 0	&& l < zone.getHeigh()){
 										PathFinder pathFindEscape = new PathFinder(this.zone,zoneArraySimulated,this.zone.getTile(j,i),this.zone.getTile(l,k),this,SearchModeEnum.BOMB_SIMULATION);							
 										LinkedList<AiTile> foundPathEscape = pathFindEscape.getPath();
@@ -770,7 +770,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 
 		Iterator<AiItem> itBonus = this.zone.getItems().iterator();
 		while(itBonus.hasNext())
-		{	checkInterruption();
+		{
 			AiItem temp = itBonus.next();
 			if(temp.getType() == AiItemType.EXTRA_BOMB || temp.getType() == AiItemType.EXTRA_FLAME) 
 				bonus.add(temp.getTile());
@@ -797,7 +797,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 
 		Iterator<AiItem> itBonus = this.zone.getItems().iterator();
 		while(itBonus.hasNext())
-		{	checkInterruption();
+		{
 			AiItem temp = itBonus.next();
 			if(temp.getType() == AiItemType.EXTRA_BOMB || temp.getType() == AiItemType.EXTRA_FLAME) 
 				bonus.add(temp.getTile());
@@ -1035,7 +1035,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	
 	
 	public void attackRivalAlpha(AiHero hero) throws StopRequestException
-	{	checkInterruption();
+	{
 		
 		AiTile bombTile = null;
 		int maxTile = 0;
@@ -1055,9 +1055,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 				boolean escapeFound = false;
 				ZoneEnum[][] zoneDanger = zoneAdapted.simulateBomb(zone.getTile(j,i));
 				for(int k = i - 3; k <= i + 3; k++)
-				{	checkInterruption();
+				{
 					for(int l = j - 3; l <= j + 3;l++)
-					{	checkInterruption();
+					{
 						
 						if(k > 1 && l > 1 && k < zone.getWidth() - 1 && l < zone.getHeigh() - 1){
 						PathFinder pathFind = new PathFinder(zone,zoneDanger,zone.getTile(j,i),zone.getTile(l,k),this,SearchModeEnum.BOMB_SIMULATION);
@@ -1076,9 +1076,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 					//Est-ce qu'il peut se sauver
 					int minPath = Integer.MAX_VALUE;
 					for(int m = hero.getTile().getCol() - 3; m <= hero.getTile().getCol() + 3; m++)
-					{	checkInterruption();
+					{
 						for(int n = hero.getTile().getLine() - 3; n <= hero.getTile().getLine() + 3; n++)
-						{	checkInterruption();
+						{
 						
 							if(m > 1 && n > 1 && m < zone.getWidth() - 1 && n < zone.getHeigh() -1){
 							PathFinder pathFindRival = new PathFinder(zone,zoneDanger,hero.getTile(),zone.getTile(n,m),this,SearchModeEnum.BOMB_SIMULATION);

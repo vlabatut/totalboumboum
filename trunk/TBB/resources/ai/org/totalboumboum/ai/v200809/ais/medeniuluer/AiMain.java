@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v200809.ais.medeniuluer;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.MedeniUluer;
 
-
 public class AiMain extends AiManager
 {
 

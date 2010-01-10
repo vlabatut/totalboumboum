@@ -1,8 +1,9 @@
 package org.totalboumboum.ai.v200809.ais.kokciyanmazmanoglu.v2;
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
-import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
+
+
 
 public class Node {
 
@@ -13,11 +14,9 @@ public class Node {
 	private int depth;
 	
 	private Tree tree;
-	ArtificialIntelligence ai;
 	
-	public Node(int line, int col, double cost, Tree t, int depth, ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
-		this.ai = ai;
+	public Node(int line, int col, double cost, Tree t, int depth) {
+		super();
 		this.line = line;
 		this.col = col;
 		this.depth = depth;
@@ -27,8 +26,7 @@ public class Node {
 	}
 	
 	
-	public  double getH(Node start, Node end) throws StopRequestException{
-		ai.checkInterruption();
+	public  double getH(Node start, Node end){
 		double result;
         
 		double dx1 = this.getLine() - end.getLine();
@@ -49,89 +47,76 @@ public class Node {
 	
 	public  boolean equals(Object object) {
 		Node node = (Node)object;
-		try {
-			if ((node.getLine() == this.getLine()) && (node.getCol() == this.getCol()))
-				return true;
-			else
-				return false;
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
+		if ((node.getLine() == this.getLine()) && (node.getCol() == this.getCol()))
+			return true;
+		else
+			return false;
+
 	}
 
 
 
 
-	public  double getCost() throws StopRequestException {
-		ai.checkInterruption();
+	public  double getCost() {
 		return cost;
 	}
 
 
-	public  void setCost(int cost) throws StopRequestException {
-		ai.checkInterruption();
+	public  void setCost(int cost) {
 		this.cost = cost;
 	}
 
 
-	public  boolean isVisited() throws StopRequestException {
-		ai.checkInterruption();
+	public  boolean isVisited() {
 		return visited;
 	}
 
 
-	public  void setVisited(boolean visited) throws StopRequestException {
-		ai.checkInterruption();
+	public  void setVisited(boolean visited) {
 		this.visited = visited;
 	}
 	
-	public  String getName() throws StopRequestException{
-		ai.checkInterruption();
+	public  String getName(){
 		
 		return this.getCol() + " / " + this.getLine();
 	}
 	
 	public  AiTile convertToTile() throws StopRequestException{
-		ai.checkInterruption();
 		tree.km.checkInterruption();
 		return tree.km.getPercepts().getTile(this.getLine(), this.getCol());
 	}
 
 
-	public  int getLine() throws StopRequestException {
-		ai.checkInterruption();
+	public  int getLine() {
 		return line;
 	}
 
 
-	public  void setLine(int line) throws StopRequestException {
-		ai.checkInterruption();
+	public  void setLine(int line) {
 		this.line = line;
 	}
 
 
-	public  int getCol() throws StopRequestException {
-		ai.checkInterruption();
+	public  int getCol() {
 		return col;
 	}
 
 
-	public  void setCol(int col) throws StopRequestException {
-		ai.checkInterruption();
+	public  void setCol(int col) {
 		this.col = col;
 	}
 
 
-	public int getDepth() throws StopRequestException {
-		ai.checkInterruption();
+	public int getDepth() {
 		return depth;
 	}
 
 
-	public void setDepth(int depth) throws StopRequestException {
-		ai.checkInterruption();
+	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+
+
+
+	
 }

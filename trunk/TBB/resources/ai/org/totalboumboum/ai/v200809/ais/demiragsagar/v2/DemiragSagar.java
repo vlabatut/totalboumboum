@@ -36,7 +36,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 	private int distanceTarget;
 	private int counter;
 
-	public DemiragSagar(){
+	public DemiragSagar() {
 		//l'initialisation des variables globales
 		this.state = 0;
 		this.d = Direction.NONE;
@@ -87,7 +87,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 			 */
 			//seulement a l'inisialisation
 			//on creer la matrice de temps restant des bombes
-			this.timeMatrice=new TimeMatrice(this.zone,ownHero.getBombRange(),this);
+			this.timeMatrice=new TimeMatrice(this.zone,ownHero.getBombRange());
 			this.timeMatrice.updateTimeMatrice(caseBombes);
 			this.state=4;
 			break;
@@ -133,9 +133,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 				this.state = 8;
 		    else {
 		    	for(AiTile temp: caseItems)
-		    	{	checkInterruption();
+		    	{
 		    		//La distance entre nous et l'item
-		    		int valeur=Functions.trouveDistance(this.ownHero.getTile(), temp,this);	
+		    		int valeur=Functions.trouveDistance(this.ownHero.getTile(), temp);	
 		    		if(valeur!=-1){
 		    			//Il existe un chemin
 		    			if(min==-1 || min>valeur)
@@ -166,7 +166,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 		}
 		case 7: {
 			
-			int notreDistance = Functions.trouveDistance(caseCourant,caseTarget,this);
+			int notreDistance = Functions.trouveDistance(caseCourant,caseTarget);
 			if (notreDistance == -1) {
 				/*
 				 * Nous ne possedont pas un chemin a l'item
@@ -177,8 +177,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 				this.state = 78;
 			}	
 			else {
-				AiTile closer=Functions.TheCloserTile(this.caseTarget, this.caseEnemies,this);
-				int closerDist=Functions.trouveDistance(closer, this.caseTarget,this);
+				AiTile closer=Functions.TheCloserTile(this.caseTarget, this.caseEnemies);
+				int closerDist=Functions.trouveDistance(closer, this.caseTarget);
 				if(this.debug)
 					System.out.println("distnce nous :"+notreDistance+", lui:"+closerDist);
 				if(notreDistance >= closerDist && closerDist!=-1){
@@ -200,7 +200,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 			break;
 		}		
 		case 10: {
-			AiTile closer=Functions.TheCloserTile(this.caseTarget, this.caseEnemies,this);
+			AiTile closer=Functions.TheCloserTile(this.caseTarget, this.caseEnemies);
 			if(closer!=null){
 				//compare les chemin entre nous-item et enemie-item
 				//envoie l'intersection
@@ -219,7 +219,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 			break;
 		}
 		case 78:{
-			if(Functions.ChildNodes(this.caseCourant,this)==1) {
+			if(Functions.ChildNodes(this.caseCourant)==1) {
 				//regarde les cases voisins
 				//met une bombe si ==1
 				if(supposerBombe(this.caseCourant))
@@ -230,7 +230,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 			}
 			if(this.caseTarget==null)
 				caseTarget=this.caseEnemies.get(0); 
-			AStar a=new AStar(this.caseCourant,this.caseTarget,this);
+			AStar a=new AStar(this.caseCourant,this.caseTarget);
 			a.formeArbre();
 			ArrayList<Node>fils=a.getFils();
 			/*
@@ -241,9 +241,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 			if(!fils.isEmpty()) {
 				int min=-1;
 				for(Node temp:fils)
-				{	checkInterruption();
 					if(this.timeMatrice.getTime(temp.getTile())==0) {
-						int tempDistance=Functions.trouveDistance(caseCourant, temp.getTile(),this);
+						int tempDistance=Functions.trouveDistance(caseCourant, temp.getTile());
 						if(min==-1 || min>tempDistance)
 							if(this.supposerBombe(temp.getTile())){
 								min=tempDistance;							
@@ -254,8 +253,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 									this.state=4;
 								break;
 							}
-					}
-				}
+				}				
 			}
 			if(this.state==78) {
 				if(this.supposerBombe(caseCourant)){
@@ -287,7 +285,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 				// veut aller
 				LinkedList<Node> path = arbre.getPath();
 				if (path == null) {
-					if(Functions.memeCordonnes(caseCourant, caseTarget,this))
+					if(Functions.memeCordonnes(caseCourant, caseTarget))
 						//System.out.println("ERREUR: Pas de chemin");
 					break;
 					}
@@ -344,26 +342,30 @@ public class DemiragSagar extends ArtificialIntelligence {
 	 * Prend l'intersection entre le chmein du enemie-item
 	 * et de nous-item
 	 */
-	public AiTile EnemyAtTheGate(AiTile enemy) throws StopRequestException
-	{	checkInterruption();
+	public AiTile EnemyAtTheGate(AiTile enemy)
+	{
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
 		AiTile result=null;
-		AStar arbre1=new AStar(this.ownHero.getTile(),this.caseTarget,this);
+		AStar arbre1=new AStar(this.ownHero.getTile(),this.caseTarget);
 		arbre1.formeArbre();
 		//		Il n'y a pas de chemin entre la case courant et la case qu'on veut aller
 		if(arbre1.getPath()==null) 
 			return null;
 		else {
-			if(Functions.memeCordonnes(caseTarget,enemy,this))
+			if(Functions.memeCordonnes(caseTarget,enemy))
 				if(debug)
 					System.out.println("enemy ile ayni case");
-			AStar arbre2 = new AStar(enemy,this.caseTarget,this);
+			AStar arbre2 = new AStar(enemy,this.caseTarget);
 			arbre2.formeArbre();
 			if(arbre2.getPath()==null)
 				return null;
 			Node tempNode1 = new Node(this.caseTarget);
 			Node tempNode2 = new Node(this.caseTarget);
 			while(tempNode1.memeCoordonnees(tempNode2)&& tempNode1!=null && tempNode2!=null ) {
-				checkInterruption();
 				result=tempNode1.getTile();
 				if(!tempNode1.memeCoordonnees(new Node(arbre1.firstTile)) && !tempNode2.memeCoordonnees(new Node(arbre2.firstTile))){
 				tempNode1=arbre1.getParentLink(tempNode1).getOrigin();
@@ -380,42 +382,50 @@ public class DemiragSagar extends ArtificialIntelligence {
 	 * On suppose de mettre une bombe
 	 * On regarde si on sera en danger
 	 */
-	public boolean supposerBombe(AiTile temp) throws StopRequestException{
-		checkInterruption();
+	public boolean supposerBombe(AiTile temp){
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
 		int i,j;
 		boolean resultat=false;
 		long nouveauTime [][]= new long[17][15];
 		for (j = 0; j < 15; j++)
-		{	checkInterruption();
 			for (i = 0; i < 17; i++)
-			{	checkInterruption();
+			{
 				nouveauTime[i][j]=this.timeMatrice.getTime(i,j);
 			}
-		}
 		this.timeMatrice.placerNouvelleBombe(temp);
 		if(this.seCacher(true))
 			resultat=true;
 		for (j = 0; j < 15; j++)
-		{	checkInterruption();
 			for (i = 0; i < 17; i++)
-			{	checkInterruption();
+			{
 				this.timeMatrice.putTime(i,j,nouveauTime[i][j]);
 			}
-		}
 		return resultat;
 	}
 	/*
 	 * Mettre a jour les tiles des enemies
 	 */
-	public ArrayList<AiTile> getEnemiesTile() throws StopRequestException {
-		checkInterruption();
-		
+	public ArrayList<AiTile> getEnemiesTile() {
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
+
 		ArrayList<AiTile> monItera = new ArrayList<AiTile>();
 
 		for (AiHero i : this.zone.getHeroes()) {
-			checkInterruption();
 			if (this.debug)
 				System.out.println("La couleur de l'enemy: " + i.getColor());
+			try {
+				checkInterruption();
+			} catch (StopRequestException e) {
+				e.printStackTrace();
+			}
 			if (i.getColor() != this.ownHero.getColor())
 				if (i != null)
 					monItera.add(i.getTile());
@@ -426,12 +436,20 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/*
 	 * Mettre a jour les tiles des bombes
 	 */
-	public ArrayList<AiTile> getBombesTile() throws StopRequestException {
-		checkInterruption();
+	public ArrayList<AiTile> getBombesTile() {
 		ArrayList<AiTile> b = new ArrayList<AiTile>();
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
 		if (this.zone.getBombs() != null)
 			for (AiBomb i : this.zone.getBombs()) {
-				checkInterruption();
+				try {
+					checkInterruption();
+				} catch (StopRequestException e) {
+					e.printStackTrace();
+				}
 				if(!i.getTile().getBombs().isEmpty())
 					b.add(i.getTile());
 			}
@@ -441,41 +459,54 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/*
 	 * Mettre a jour les tiles des items
 	 */
-	public ArrayList<AiTile> getItemsTile() throws StopRequestException {
-		checkInterruption();
+	public ArrayList<AiTile> getItemsTile() {
 		ArrayList<AiTile> p = new ArrayList<AiTile>();
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
 		if (this.zone.getItems() != null)
 			for (AiItem i : this.zone.getItems()) {
-				checkInterruption();
+				try {
+					checkInterruption();
+				} catch (StopRequestException e) {
+					e.printStackTrace();
+				}
 				if(i.getTile().getItem()!=null)
 					p.add(i.getTile());
 			}
 		return p;
 	}
 
-	public void calculeZoneAspect(AiZone zone) throws StopRequestException {
-		checkInterruption();
+	public void calculeZoneAspect(AiZone zone) {
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
 	}
-	public boolean seCacher() throws StopRequestException{
-		checkInterruption();
+	public boolean seCacher(){
 		return seCacher(false);
 	}
 	/*
 	 * Chercher une case pour se cacher
 	 */
 	
-	public boolean seCacher(boolean poserBombe) throws StopRequestException {
-		checkInterruption();
+	public boolean seCacher(boolean poserBombe) {
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
 		AiTile petit = null;
 		boolean fuir = false;
 		int min = 10000, temp, i, j;
 		for (j = 0; j < 15; j++)
-		{	checkInterruption();
 			for (i = 0; i < 17; i++)
-			{	checkInterruption();
-				if(!Functions.memeCordonnes(zone.getTile(j,i), this.caseCourant,this))
+				if(!Functions.memeCordonnes(zone.getTile(j,i), this.caseCourant))
 					if ( this.timeMatrice.getTime(i,j)==0) {//bulacakkkk
-						temp = Functions.trouveDistance(caseCourant,this.zone.getTile(j, i),this);
+						temp = Functions.trouveDistance(caseCourant,this.zone.getTile(j, i));
 						if (temp > 0 && min > temp) 
 							if(!dangerOnTheTrack(this.zone.getTile(j, i),poserBombe)) {
 								min = temp;
@@ -483,18 +514,20 @@ public class DemiragSagar extends ArtificialIntelligence {
 								fuir = true;
 							}
 					}
-			}
-		}
 		this.caseTarget = petit;
 		return fuir;
 	}
 	/*
 	 * Regarde si il existe un danger sur le chemin chosit
 	 */
-	public boolean dangerOnTheTrack(AiTile target,boolean placerBombe) throws StopRequestException {
-		checkInterruption();
+	public boolean dangerOnTheTrack(AiTile target,boolean placerBombe) {
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
 		boolean flag=false;
-		AStar arbre=new AStar(this.caseCourant,target,this);
+		AStar arbre=new AStar(this.caseCourant,target);
 		arbre.formeArbre();
 		LinkedList<Node> path=arbre.getPath();
 		if(path==null)
@@ -503,7 +536,6 @@ public class DemiragSagar extends ArtificialIntelligence {
 		if(placerBombe)
 			dangerSize=dangerSize+5;
 		for(Node tempNode:path) {
-			checkInterruption();
 			if(this.timeMatrice.getTime(tempNode.getTile()) < dangerSize*(this.dangerTime*3) && this.timeMatrice.getTime(tempNode.getTile())!=0)
 				flag=true;
 		}
@@ -513,8 +545,12 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/*
 	 * Regarde si nous sommes arrive a la case cible
 	 */
-	public boolean estCaseCible() throws StopRequestException {
-		checkInterruption();
+	public boolean estCaseCible() {
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
 		// fonction verifiant si l'ia est arrive a la case cible
 		boolean resultat = false;
 		if (this.ownHero.getTile().getCol() == this.caseTarget.getCol()	&& this.ownHero.getTile().getLine() == this.caseTarget.getLine())
@@ -526,21 +562,21 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/*
 	 * Compte les nombres des SoftWalls restant
 	 */
-	public int FindSoftWallNumber() throws StopRequestException {
-		checkInterruption();
+	public int FindSoftWallNumber() {
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
 		int mat[][] = this.timeMatrice.getBombMatrice(this.zone);
 		int sommeHardWall = 0;
 		for (int i = 0; i < 15; i++)
-		{	checkInterruption();
 			for (int j = 0; j < 17; j++)
-			{	checkInterruption();
 				if (mat[j][i] == -1) {
 					AiTile temp = this.zone.getTile(i, j);
 					if (!temp.getBlock().isDestructible())
 						sommeHardWall++;
 				}
-			}
-		}
 		return sommeHardWall;
 	}
 }

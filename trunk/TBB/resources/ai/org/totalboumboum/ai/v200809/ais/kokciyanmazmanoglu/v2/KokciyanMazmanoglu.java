@@ -232,7 +232,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 		boolean control = false; //test si le noeud est final.
 
-		NodeComparator nc = new NodeComparator(startNode, endNode,this);
+		NodeComparator nc = new NodeComparator(startNode, endNode);
 		PriorityQueue<Node> qNode = new PriorityQueue<Node>(1,nc);
 		qNode.offer(startNode);
 		while(!control && !qNode.isEmpty()){
@@ -564,7 +564,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				result = true;
 			} else {
 				while (i < power)//on va étudier une distance i partant 1 jusqu'à la portée de la bombe
-				{	checkInterruption();
+				{
 					if (bombTile.getCol() + i < zone.getWidth())//si le personnage+la portée de la bombe est dans la zone du jeu
 					{
 						if (possibleMoveD(ai.getLine(), ai.getCol(), i, 1))//s'il est possible d'aller vers la droite pour la distance i
@@ -601,7 +601,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				result = true;
 			} else {
 				while (i < power) {
-					checkInterruption();
 					if (bombTile.getCol() - i > 0) {
 						if (possibleMoveD(ai.getLine(), ai.getCol(), i, -1)) {
 							if (!isMovePossible(ai.getLine() - i, ai.getCol(),
@@ -633,7 +632,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				result = true;
 			} else {
 				while (i < power) {
-					checkInterruption();
 					if (bombTile.getLine() + i < zone.getHeigh()) {
 						if (possibleMoveD(ai.getLine(), ai.getCol(), i, -2)) {
 							if (!isMovePossible(ai.getLine(), ai.getCol() + i,
@@ -665,7 +663,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				result = true;
 			} else {
 				while (i < power) {
-					checkInterruption();
 					if (bombTile.getLine() - i > 0) {
 						if (possibleMoveD(ai.getLine(), ai.getCol(), i, 2)) {
 							if (!isMovePossible(ai.getLine(), ai.getCol() - i,
@@ -718,15 +715,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @return
 	 * @throws StopRequestException 
 	 */
-	public  boolean possibleMoveD(int x,int y,int d, int s) throws StopRequestException{ 
-	checkInterruption();
-	boolean result=false;
+	public  boolean possibleMoveD(int x,int y,int d, int s) throws StopRequestException{ boolean result=false;
+	checkInterruption();  
 	switch(s){
 
 	case 1: // x right
 		result=true;
 		while(d>0){
-			checkInterruption();
 			if(x+d<zone.getWidth()){
 				if(!isObstacle(x+d,y))//s'il n'y existe pas un bloc
 					result=true;
@@ -743,7 +738,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	case -1: // x left
 		result=true;
 		while(d>0){
-			checkInterruption();
 			if(x-d>=0){
 				if(!isObstacle(x-d,y))
 					result=true;
@@ -760,7 +754,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	case 2: // y up
 		result=true;
 		while(d>0){
-			checkInterruption();
 			if(y-d>=0){
 				if(!isObstacle(x,y-d))
 					result=true;
@@ -777,7 +770,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	case -2: // y down
 		result=true;
 		while(d>0){
-			checkInterruption();
 			if(y+d<zone.getHeigh()){
 				if(!isObstacle(x,y+d))
 					result=true;
@@ -804,8 +796,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	int minDistance = Integer.MAX_VALUE;
 	int result[] = {-1,-1};
 	for(int i=0;i<zone.getHeroes().size();i++)
-	{ checkInterruption();
-	AiHero hero = zone.getHeroes().iterator().next();
+	{ AiHero hero = zone.getHeroes().iterator().next();
 	int temp = distance(zone.getTile(zone.getOwnHero().getLine(),zone.getOwnHero().getCol()),zone.getTile(hero.getLine(),hero.getCol()));
 	if(temp<minDistance)
 	{ result[0] = hero.getLine();
@@ -830,7 +821,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		Iterator<AiBomb> iterBomb = zone.getBombs().iterator();
 
 		while (iterBomb.hasNext()) {
-			checkInterruption();
 			AiBomb it= iterBomb.next();
 			if (distance(tile, it.getTile()) < minDistance) {
 				minDistance = distance(tile, it.getTile());
@@ -856,7 +846,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			res= true;
 		else{
 			while (iterTile.hasNext() && !res) {
-				checkInterruption();
 				AiTile t=iterTile.next();
 				if (isBomb(t))
 					res = true;
@@ -888,7 +877,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	}
 
 	public  boolean isSafe2(AiTile tile) throws StopRequestException{
-		checkInterruption();
+
 		boolean result=true;
 		Iterator<AiBomb> a = zone.getBombs().iterator();
 		if(a.hasNext()){
@@ -901,6 +890,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			result=true;		
 		return result;
 	}
+
+
+
+
+
+
+
 
 	/**
 	 * 2 case arasinda duvar var mi
@@ -1121,7 +1117,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			ArrayList<AiTile> result= new ArrayList<AiTile>();
 
 			for(int k=0;k<possible.size();k++){
-				checkInterruption();
 				if(!isObstacle(possible.get(k))){
 					result.add(possible.get(k));
 				}
@@ -1139,30 +1134,28 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	/**
 	 * 
 	 * @return
-	 * @throws StopRequestException 
 	 */
-	public  double[][] getFieldMatrix() throws StopRequestException {
-		checkInterruption();
+	public  double[][] getFieldMatrix() {
 		return FieldMatrix;
 	}
 	/**
 	 * 
 	 * @return
-	 * @throws StopRequestException 
 	 */
-	public  AiTile getCurrentTile() throws StopRequestException {
-		checkInterruption();
+	public  AiTile getCurrentTile() {
 		return currentTile;
 	}
 	/**
 	 * 
 	 * @return
-	 * @throws StopRequestException 
 	 */
-	public  AiTile getPreviousTile() throws StopRequestException {
-		checkInterruption();
+	public  AiTile getPreviousTile() {
 		return previousTile;
 	}
+
+
+
+
 	/**
 	 * 
 	 * @param tile
@@ -1196,7 +1189,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @throws StopRequestException
 	 */
 	public Vector<AiBomb> bombsInRange(AiBomb bomb) throws StopRequestException{
-		checkInterruption();
 		Vector<AiBomb> result = new Vector<AiBomb>();
 		for(int i = 1;i<=bomb.getRange();i++){
 			checkInterruption();
@@ -1256,7 +1248,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @throws StopRequestException
 	 */
 	public AiTile findCible() throws StopRequestException {
-		checkInterruption();
 		AiTile cible=null;
 		double min=100000;
 
@@ -1281,10 +1272,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param mainbomb
 	 * @param bombinrange
 	 * @return
-	 * @throws StopRequestException 
 	 */
-	public double shorterFuseTime(AiBomb mainbomb, AiBomb bombinrange) throws StopRequestException{
-		checkInterruption();
+	public double shorterFuseTime(AiBomb mainbomb, AiBomb bombinrange){
 		double timemain = (double)mainbomb.getNormalDuration();
 		double timerange = (double)bombinrange.getNormalDuration();
 		return Math.min(timemain, timerange);
@@ -1331,6 +1320,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 		}
 	}
+
+
 	/**
 	 * 
 	 * @param iB
@@ -1364,7 +1355,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				double min = bomb.getNormalDuration();	
 				tempVect.add(bomb);
 				while(vectB.hasNext()){
-					checkInterruption();
 					tempVectaDev.add(vectB.next());	
 
 				}
@@ -1377,7 +1367,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 					Iterator<AiBomb>  vect = bombsInRange(bomb).iterator();
 					if(vect != null){
 						while(vect.hasNext()){
-							checkInterruption();
 							AiBomb b = vect.next();
 							if(!tempVectaDev.contains(b) && !tempVect.contains(b))
 								tempVectaDev.add(b);
@@ -1406,7 +1395,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		}//W
 		Object[] set = bombMap.keySet().toArray();
 		for(int i = 0; i<set.length ;i++){
-			checkInterruption();
 			AiBomb temp = (AiBomb) set[i];
 			double time = Math.pow(10,(2500-bombMap.get(temp))/400);
 
@@ -1434,14 +1422,16 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			}		
 
 		}
+
+
 	}
+
 	/**
 	 * 
 	 * @return
 	 * @throws StopRequestException
 	 */
 	public Boolean isTimeToRun2() throws StopRequestException{
-		checkInterruption();
 		Boolean result = false;
 		AiTile hero = zone.getOwnHero().getTile();
 		for(int i = 0;i<=4;i++){
@@ -1461,6 +1451,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 					}
 				}
 			}
+
+
 		}
 		for(int i = 0;i<=4;i++){
 			checkInterruption();
@@ -1516,6 +1508,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 		return result;
 	}
+
+
 	public AiTile chooseTile() throws StopRequestException{
 		checkInterruption(); // APPEL OBLIGATOIRE
 		double res = MaxValor();
@@ -1858,7 +1852,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			synchronized(liste){
 				Iterator<AiTile> itList= liste.iterator();
 				while(itList.hasNext()){
-					checkInterruption();
 					AiTile t= itList.next();
 					if(ActionMatrix[t.getLine()][t.getCol()]<0)
 						liste.remove(t);
@@ -1884,7 +1877,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		ArrayList<AiTile> result= new ArrayList<AiTile>();
 
 		for(int k=0;k<possible.size();k++){
-			checkInterruption();
 			if(!isObstacle(possible.get(k))){
 				result.add(possible.get(k));
 			}
@@ -1897,7 +1889,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			synchronized(result){
 				Iterator<AiTile> itList= result.iterator();
 				while(itList.hasNext()){
-					checkInterruption();
 					AiTile t= itList.next();
 					if(ActionMatrix[t.getLine()][t.getCol()]<0)
 						result.remove(t);
@@ -2052,7 +2043,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			checkInterruption();
 			String s = "";
 			for(int j = 0; j<zone.getWidth(); j++){
-				checkInterruption();
 				s += matrix[i][j] +  " ";
 			}
 			System.out.println(s);
@@ -2068,7 +2058,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		Iterator<AiTile> iterColl = coll.iterator();
 		
 		while(iterColl.hasNext()){
-			checkInterruption();
 			AiTile t = iterColl.next();
 			if(ActionMatrix[t.getLine()][t.getCol()]>=0)
 				control = true;

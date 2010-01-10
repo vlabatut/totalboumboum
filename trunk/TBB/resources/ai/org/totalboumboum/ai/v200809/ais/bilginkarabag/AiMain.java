@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v200809.ais.bilginkarabag;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.bilginkarabag.v2.BilginKarabag;
 
-
 public class AiMain extends AiManager
 {
 

@@ -168,7 +168,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		}
 		
 		//on initialise avec la tile qu'on est sur
-		CostTile head =new CostTile(ownHero.getTile(),0,tileGone,Direction.NONE,this);
+		CostTile head =new CostTile(ownHero.getTile(),0,tileGone,Direction.NONE);
 		
 		head.setmarkVisited(true);
 		
@@ -183,7 +183,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 			
 			if(!dangerousTiles.contains(tiles.get(0))){
 				
-				queue.offer(new CostTile(tiles.get(0),1,tileGone,zone.getDirection(head.getAiTile(),tiles.get(0)),this));
+				queue.offer(new CostTile(tiles.get(0),1,tileGone,zone.getDirection(head.getAiTile(),tiles.get(0))));
 				
 			}
 			tiles.remove(0);
@@ -219,7 +219,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 					if(!dangerousTiles.contains(tiles.get(0))){
 						
 						//on cree des costtiles pour les developper
-						CostTile myTile = new CostTile(tiles.get(0),costTile.getCost()+1,tileGone,costTile.getFirstDirection(),this);
+						CostTile myTile = new CostTile(tiles.get(0),costTile.getCost()+1,tileGone,costTile.getFirstDirection());
 						
 						boolean a = false;
 						
@@ -276,17 +276,23 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		AstarComparator comparator = new AstarComparator();
 		PriorityQueue<CostTile> queue = new PriorityQueue<CostTile>(1,comparator);
 		
-		CostTile head =new CostTile(ownHero.getTile(),0,tileGone,Direction.NONE,this);
+		CostTile head =new CostTile(ownHero.getTile(),0,tileGone,Direction.NONE);
 		head.setmarkVisited(true);
 		ArrayList<AiTile> tiles = null;
+		try {
 			tiles = getClearNeighbors(head.getAiTile(),true);
+		} catch (StopRequestException e) {
+			
+			e.printStackTrace();
+			
+		}
 
 		while(!tiles.isEmpty()){
 			checkInterruption(); //APPEL OBLIGATOIRE
 			
 			
 			
-			queue.offer(new CostTile(tiles.get(0),1,tileGone,zone.getDirection(head.getAiTile(),tiles.get(0)),this));
+			queue.offer(new CostTile(tiles.get(0),1,tileGone,zone.getDirection(head.getAiTile(),tiles.get(0))));
 			tiles.remove(0);
 		}
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -297,17 +303,23 @@ public class GunalpYurtsever extends ArtificialIntelligence
 			CostTile costTile = queue.poll();
 			if(!costTile.getmarkVisited()){
 				costTile.setmarkVisited(true);
+				try {
 					if(costTile.getCost()>1)
 						tiles = getClearNeighbors(costTile.getAiTile(),false);
 					else
 						tiles = getClearNeighbors(costTile.getAiTile(),true);
 				
+				} catch (StopRequestException e) {
+				
+					e.printStackTrace();
+				
+				}
 				while(!tiles.isEmpty()){
 					checkInterruption(); //APPEL OBLIGATOIRE
 					
 			
 					
-					CostTile myTile = new CostTile(tiles.get(0),costTile.getCost()+1,tileGone,costTile.getFirstDirection(),this);
+					CostTile myTile = new CostTile(tiles.get(0),costTile.getCost()+1,tileGone,costTile.getFirstDirection());
 					boolean a = false;
 					Iterator<CostTile> ab = queue.iterator();
 					while(ab.hasNext()){
@@ -529,7 +541,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 				
 				AiBomb b=it.next();
 				range = b.getRange();
-				dangerTiles.add(new DangerPriorityTile(b.getTile(),bombList.indexOf(b),this));
+				dangerTiles.add(new DangerPriorityTile(b.getTile(),bombList.indexOf(b)));
 				Collection<AiTile> bombNeighbors = getPercepts().getNeighborTiles(b.getTile());
 				for (AiTile t : bombNeighbors) {
 					checkInterruption(); // APPEL OBLIGATOIRE
@@ -547,7 +559,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 								theTile = dangerTile;
 						}
 						if(!dangerTiles.contains(theTile))
-							dangerTiles.add(new DangerPriorityTile(t,bombList.indexOf(b),this));
+							dangerTiles.add(new DangerPriorityTile(t,bombList.indexOf(b)));
 						else
 							if(theTile.getDangerpriority()>bombList.indexOf(b))
 								theTile.setDangerpriority(bombList.indexOf(b));
@@ -608,7 +620,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 					isAlsoFireClear(controllingTile))
 					{
 					//
-					CostTile myTile = new CostTile(controllingTile,(int)(Math.abs(controllingTile.getCol()-getPercepts().getOwnHero().getCol())+Math.abs(controllingTile.getLine()-getPercepts().getOwnHero().getLine())),getPercepts().getOwnHero().getTile(),Direction.NONE,this);
+					CostTile myTile = new CostTile(controllingTile,(int)(Math.abs(controllingTile.getCol()-getPercepts().getOwnHero().getCol())+Math.abs(controllingTile.getLine()-getPercepts().getOwnHero().getLine())),getPercepts().getOwnHero().getTile(),Direction.NONE);
 					nearestPriority.add(myTile);
 					
 				}
@@ -625,14 +637,13 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * @param dangerTiles
 	 * @param reqTile
 	 * @return
-	 * @throws StopRequestException 
 	 */
-	private int getpriorityValue(Collection<DangerPriorityTile> dangerTiles,AiTile reqTile) throws StopRequestException{
-		checkInterruption();
+	private int getpriorityValue(Collection<DangerPriorityTile> dangerTiles,AiTile reqTile){
+		
 	int priorityValue = -1;
 	
 	for(DangerPriorityTile dpTile: dangerTiles){
-		checkInterruption();
+		
 		
 		if(reqTile.equals(dpTile.getTile())){
 			
@@ -660,14 +671,14 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		
 		Collection<DangerPriorityTile> dangerTiles = markDangerTileswithPriority();
 		
-		DangerPriorityCostTileComparator myComparator= new DangerPriorityCostTileComparator(getPercepts().getWidth(),getPercepts().getHeigh(),this);
+		DangerPriorityCostTileComparator myComparator= new DangerPriorityCostTileComparator(getPercepts().getWidth(),getPercepts().getHeigh());
 
 		PriorityQueue<DangerPriorityCostTile> developperList = new PriorityQueue<DangerPriorityCostTile>(1,myComparator);
 		
         AiZone zone = getPercepts();
         
         // la tile qu'on trouve sur
-        DangerPriorityCostTile headTile = new DangerPriorityCostTile(new CostTile(zone.getOwnHero().getTile(),0,chosentokillTile,Direction.NONE,this),getpriorityValue(dangerTiles,zone.getOwnHero().getTile()),this);
+        DangerPriorityCostTile headTile = new DangerPriorityCostTile(new CostTile(zone.getOwnHero().getTile(),0,chosentokillTile,Direction.NONE),getpriorityValue(dangerTiles,zone.getOwnHero().getTile()));
         
         developperList.add(headTile);
         
@@ -699,7 +710,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
         	for(AiTile a: neighTiles){
         		checkInterruption(); //APPEL OBLIGATOIRE
         		
-        		DangerPriorityCostTile newcomer = new DangerPriorityCostTile(new CostTile(a,currentTile.getCostTile().getCost()+1,chosentokillTile,Direction.NONE,this),getpriorityValue(dangerTiles,a),this);
+        		DangerPriorityCostTile newcomer = new DangerPriorityCostTile(new CostTile(a,currentTile.getCostTile().getCost()+1,chosentokillTile,Direction.NONE),getpriorityValue(dangerTiles,a));
         		
         		boolean listCheck = true;
         		
@@ -850,7 +861,6 @@ public class GunalpYurtsever extends ArtificialIntelligence
 				
 				if(!possibleDestructibles.isEmpty() && possibleDestructibles.size()<50){
 					for(AiTile block: possibleDestructibles){
-						checkInterruption();
 						itera++;
 						checkInterruption();//APPEL OBLIGATOIRE;
 						AiAction res = AstarAlgorithm(block);
@@ -954,7 +964,6 @@ public class GunalpYurtsever extends ArtificialIntelligence
 				if(nearHero==null){
 					Iterator<AiHero> it=zone.getHeroes().iterator();
 					while(it.hasNext()){
-						checkInterruption();
 						AiHero h=it.next();
 						if(!h.equals(zone.getOwnHero()))
 							nearHero=h.getTile();

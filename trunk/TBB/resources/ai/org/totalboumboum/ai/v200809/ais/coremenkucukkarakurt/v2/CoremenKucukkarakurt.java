@@ -459,7 +459,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	
 	// la methode qui renvoie la direction qui n'est pas dangereuse 
 	private AiTile getDirection(AiTile refTile) throws StopRequestException{
-		checkInterruption();
+		
 		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 		
 		double min=10000000;
@@ -467,7 +467,6 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		double dist= getDistance(refTile, currentTile);
 		
 		for (int i=0;i<tiles.size();i++){
-			checkInterruption();
 			if(getDistance(refTile, tiles.get(i))>dist && getDistance(refTile, tiles.get(i))<min ){
 				min=getDistance(refTile, tiles.get(i));
 				k=i;
@@ -756,13 +755,11 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	
 	// la methode qui renvoie la liste des voisins 
 	private Collection<AiTile> getClearNeighborTiles(AiTile tile) throws StopRequestException
-	{	checkInterruption();
-		Collection<AiTile> result = new ArrayList<AiTile>();
+	{	Collection<AiTile> result = new ArrayList<AiTile>();
 		ArrayList<Direction> directions = Direction.getPrimaryValues();
 		Iterator<Direction> d = directions.iterator();
 		while(d.hasNext())
-		{	checkInterruption();
-			Direction dir = d.next();
+		{	Direction dir = d.next();
 			AiTile neighbor = getPercepts().getNeighborTile(tile, dir);
 			if(isClear(neighbor))
 				result.add(neighbor);

@@ -23,7 +23,7 @@ public class Noeud {
 	private ZoneEnum valeur;
 	/** le cout du noeud */
 	private int cout = 0;
-	
+
 	private DayioglugilGeckalan source;
 	/**
 	 * Constructeur.
@@ -31,8 +31,7 @@ public class Noeud {
 	 */
 
 	public Noeud(DayioglugilGeckalan source) throws StopRequestException {
-		source.checkInterruption();
-		this.source = source;
+		super();
 		source.checkInterruption(); //Appel Obligatoire
 		this.source = source;
 		
@@ -52,6 +51,7 @@ public class Noeud {
 	 * @throws StopRequestException 
 	 */
 	public Noeud(int x, int y, ZoneEnum valeur, int cout,DayioglugilGeckalan source) throws StopRequestException {
+		super();
 		source.checkInterruption(); //Appel Obligatoire
 		this.source = source;
 		this.x = x;
@@ -72,6 +72,7 @@ public class Noeud {
 	 * @throws StopRequestException 
 	 */
 	public Noeud(int x, int y, ZoneEnum valeur, DayioglugilGeckalan source) throws StopRequestException {
+		super();
 		source.checkInterruption(); //Appel Obligatoire
 		this.source = source;
 		this.x = x;
@@ -156,7 +157,6 @@ public class Noeud {
 	 */
 
 	public int getCout() throws StopRequestException {
-		source.checkInterruption();
 		return cout;
 	}
 
@@ -168,7 +168,6 @@ public class Noeud {
 	 * @throws StopRequestException 
 	 */
 	public void setCout(int cout) throws StopRequestException {
-		source.checkInterruption();
 		this.cout = cout;
 	}
 
@@ -217,7 +216,7 @@ public class Noeud {
 	 */
 
 	public int getHeuristic(Noeud goal) throws StopRequestException {
-		source.checkInterruption();
+
 		int result = 0;
 		//somme des differences des coordonnees x et de y des noeuds
 		result = result + Math.abs(x - goal.getX());
@@ -233,7 +232,6 @@ public class Noeud {
 	 */
 
 	public String toString() {
-		
 		String resultat;
 		resultat = x + "  " + y + "  " + valeur;
 		return resultat;

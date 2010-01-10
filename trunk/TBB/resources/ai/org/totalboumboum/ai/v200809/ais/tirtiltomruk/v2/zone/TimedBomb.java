@@ -2,8 +2,6 @@ package org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.zone;
 
 import org.totalboumboum.ai.v200809.adapter.AiBomb;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
-import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
-import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 
 public class TimedBomb {
@@ -13,11 +11,9 @@ public class TimedBomb {
 	private long releaseTime;
 	private long time;
 	private ZoneEnum danger;
-	ArtificialIntelligence ai;
 	
-	public TimedBomb(AiZone zone,AiBomb bomb,long releaseTime, long time, ArtificialIntelligence ai) throws StopRequestException
-	{	ai.checkInterruption();
-		this.ai = ai;
+	public TimedBomb(AiZone zone,AiBomb bomb,long releaseTime, long time)
+	{
 		this.zone = zone;
 		this.bomb = bomb;
 		this.releaseTime = releaseTime;
@@ -32,19 +28,16 @@ public class TimedBomb {
 			this.danger = ZoneEnum.FEUPOSSIBLE_TRESDANGEREUX;		
 	}
 	
-	public ZoneEnum getDanger() throws StopRequestException {
-		ai.checkInterruption();
+	public ZoneEnum getDanger() {
 		return danger;
 	}
 
-	public void setDanger(ZoneEnum danger) throws StopRequestException {
-		ai.checkInterruption();
+	public void setDanger(ZoneEnum danger) {
 		this.danger = danger;
 	}
 
-	public long getRemainingTime() throws StopRequestException
-	{	ai.checkInterruption();
-	
+	public long getRemainingTime()
+	{
 		if(this.bomb.isWorking())
 			return this.bomb.getNormalDuration() - this.time + this.releaseTime;
 		else
@@ -52,30 +45,13 @@ public class TimedBomb {
 	}
 	
 	public boolean equals(Object timedBomb)
-	{	try {
-		ai.checkInterruption();
-	} catch (StopRequestException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
+	{
 		if(!TimedBomb.class.isInstance(timedBomb))
 			return false;
 		else
 		{
-			boolean condition = false;
-			try {
-				condition = this.bomb.equals((((TimedBomb)timedBomb).getBomb()));
-			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				condition = condition && this.zone.equals((((TimedBomb)timedBomb).getZone()));
-			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			boolean condition = this.bomb.equals((((TimedBomb)timedBomb).getBomb()));
+			condition = condition && this.zone.equals((((TimedBomb)timedBomb).getZone()));
 			if(condition)
 				return true;
 			else
@@ -83,33 +59,27 @@ public class TimedBomb {
 		}
 	}
 
-	public AiZone getZone() throws StopRequestException {
-		ai.checkInterruption();
+	public AiZone getZone() {
 		return zone;
 	}
 
-	public void setZone(AiZone zone) throws StopRequestException {
-		ai.checkInterruption();
+	public void setZone(AiZone zone) {
 		this.zone = zone;
 	}
 
-	public AiBomb getBomb() throws StopRequestException {
-		ai.checkInterruption();
+	public AiBomb getBomb() {
 		return bomb;
 	}
 
-	public void setBomb(AiBomb bomb) throws StopRequestException {
-		ai.checkInterruption();
+	public void setBomb(AiBomb bomb) {
 		this.bomb = bomb;
 	}
 
-	public long getReleaseTime() throws StopRequestException {
-		ai.checkInterruption();
+	public long getReleaseTime() {
 		return releaseTime;
 	}
 
-	public void setReleaseTime(long releaseTime) throws StopRequestException {
-		ai.checkInterruption();
+	public void setReleaseTime(long releaseTime) {
 		this.releaseTime = releaseTime;
 	}
 		
@@ -117,18 +87,12 @@ public class TimedBomb {
 	{
 		String result = "";
 		result += "( "+ this.bomb.getCol() + "," + this.bomb.getLine() + ") ";
-		try {
-			result += "Time Remaining:" + this.getRemainingTime();
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		result += "Time Remaining:" + this.getRemainingTime();
 		result += "/ Release Time:" + this.releaseTime;
 		return result;
 	}
 
-	public void setTime(long time) throws StopRequestException {
-		ai.checkInterruption();
+	public void setTime(long time) {
 		this.time = time;
 		this.danger = ZoneEnum.FEUPOSSIBLE_PASDANGEREUX;
 		if(getRemainingTime() < 2000)
