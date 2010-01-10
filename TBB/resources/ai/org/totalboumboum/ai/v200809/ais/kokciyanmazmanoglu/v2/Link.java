@@ -1,8 +1,6 @@
 package org.totalboumboum.ai.v200809.ais.kokciyanmazmanoglu.v2;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
-import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
-import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 
 public class Link {
@@ -10,50 +8,40 @@ public class Link {
 	private Node parent;
 	private Node child;
 	private AiAction action;
-	ArtificialIntelligence ai;
 	
-	public Link(Node p ,Node c, AiAction a, ArtificialIntelligence ai) throws StopRequestException{
-		ai.checkInterruption();
-		this.ai = ai;
+	public Link(Node p ,Node c, AiAction a){
+		
 		this.parent = p;
 		this.child = c;
 		this.action = a;
 	}
 
 
-	public AiAction getAction() throws StopRequestException {
-		ai.checkInterruption();
+	public AiAction getAction() {
 		return action;
 	}
 
 
-	public Node getParent() throws StopRequestException {
-		ai.checkInterruption();
+	public Node getParent() {
 		return parent;
 	}
 
 
-	public Node getChild() throws StopRequestException {
-		ai.checkInterruption();
+	public Node getChild() {
 		return child;
 	}
 	
 	public boolean equals(Object object)
-	{	boolean result = false;
+	{	boolean result;
 		if(object == null)
 			result = false;
 		else if(!(object instanceof Link))
 			result = false;
 		else
 		{	Link temp = (Link) object;
-			try {
-				result = temp.getParent() == getParent()
-					&& temp.getChild() == getChild()
-					&& temp.getAction() == getAction();
-			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			result = temp.getParent() == getParent()
+				&& temp.getChild() == getChild()
+				&& temp.getAction() == getAction();
 		}
 		return result;
 	}

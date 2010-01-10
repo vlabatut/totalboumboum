@@ -79,7 +79,6 @@ public class AkpolatSener extends ArtificialIntelligence {
 					AiTile bestTile = null;
 
 					while (tiles.size() > 0 && i < tiles.size()) {
-						checkInterruption();
 						if (control.isInBombRange(tiles.get(i)))
 							tiles.remove(i);
 						else {

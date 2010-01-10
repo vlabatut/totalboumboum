@@ -69,9 +69,8 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 			//bonus();
 			Iterator <AiBlock>ip=getPercepts().getBlocks().iterator();
 			 while(ip.hasNext() && !existe)
-			 {	checkInterruption();
-				 if(( ip.next()).isDestructible())
-					 existe=true;
+			 {if(( ip.next()).isDestructible())
+				 existe=true;
 				 
 			 }
 			//if (!arret){
@@ -156,8 +155,8 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 		
 		return result;
 	}
-	public void init() throws StopRequestException{
-		checkInterruption();
+	public void init(){
+		
 		nextTile=currentTile;
 		//previousTile=currentTile;
 	}

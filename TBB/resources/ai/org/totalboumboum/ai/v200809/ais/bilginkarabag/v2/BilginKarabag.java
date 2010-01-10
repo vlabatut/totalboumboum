@@ -123,7 +123,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 			if (tiles.size() > 0) { // on en tire une au hasard
 				boolean found = false;
 				for (AiTile tile : tiles) {
-					checkInterruption();
 					if (!dangerous(tile)) {
 						nextTile = tile;
 						found = true;
@@ -350,8 +349,8 @@ public class BilginKarabag extends ArtificialIntelligence {
 		return targetTile;
 	}
 
-	private boolean isThereBomb(AiZone zone, AiHero ownHero) throws StopRequestException {
-		checkInterruption();
+	private boolean isThereBomb(AiZone zone, AiHero ownHero) {
+
 		Collection<AiBomb> blocks = zone.getBombs();
 		Iterator<AiBomb> blocksIterator = blocks.iterator();
 		AiTile tile = ownHero.getTile();
@@ -359,7 +358,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 		double column = tile.getCol();
 		double line = tile.getLine();
 		while (blocksIterator.hasNext()) {
-			checkInterruption();
 			AiBomb bomb = blocksIterator.next();
 			int range = bomb.getRange();
 
@@ -392,8 +390,8 @@ public class BilginKarabag extends ArtificialIntelligence {
 
 	}
 
-	private boolean isThereWall(AiZone zone, AiHero ownHero) throws StopRequestException {
-		checkInterruption();
+	private boolean isThereWall(AiZone zone, AiHero ownHero) {
+
 		Collection<AiBlock> blocks = zone.getBlocks();
 		Iterator<AiBlock> blocksIterator = blocks.iterator();
 		AiTile tile = ownHero.getTile();
@@ -402,7 +400,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 		double line = tile.getLine();
 
 		while (blocksIterator.hasNext()) {
-			checkInterruption();
 			AiBlock block = blocksIterator.next();
 			if (!block.isDestructible())
 				continue;
@@ -420,8 +417,7 @@ public class BilginKarabag extends ArtificialIntelligence {
 
 	}
 
-	private boolean isSettingBombSafe(AiZone zone) throws StopRequestException {
-		checkInterruption();
+	private boolean isSettingBombSafe(AiZone zone) {
 		Collection<AiBomb> bombs = zone.getBombs();
 		Iterator<AiBomb> bombsIterator = bombs.iterator();
 		AiHero ownHero = zone.getOwnHero();
@@ -432,7 +428,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 		int width = zone.getWidth();
 		int height = zone.getHeigh();
 		while (bombsIterator.hasNext()) {
-			checkInterruption();
 			AiBomb bomb = bombsIterator.next();
 			int range = ownHero.getBombRange();
 			int bombRange = bomb.getRange();
@@ -443,7 +438,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 			int i = column;
 
 			for (int j = tile.getLine(); j <= tile.getLine() + range; j++) {
-				checkInterruption();
 				if (j == width - 1)
 					break;
 				try {
@@ -460,7 +454,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 			}
 
 			for (int j = tile.getLine(); j <= tile.getLine() + range; j++) {
-				checkInterruption();
 				if (j == width - 1)
 					break;
 				try {
@@ -476,7 +469,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 			}
 
 			for (int j = tile.getLine(); j >= tile.getLine() - range; j--) {
-				checkInterruption();
 				if (j == 0)
 					break;
 				try {
@@ -492,7 +484,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 			}
 
 			for (int j = tile.getLine(); j >= tile.getLine() - range; j--) {
-				checkInterruption();
 				if (j == 0)
 					break;
 				try {
@@ -510,7 +501,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 			i = line;
 
 			for (int j = tile.getCol(); j <= tile.getCol() + range; j++) {
-				checkInterruption();
 				if (j == height - 1)
 					break;
 				try {
@@ -526,7 +516,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 			}
 
 			for (int j = tile.getCol(); j <= tile.getCol() + range; j++) {
-				checkInterruption();
 				if (j == height - 1)
 					break;
 				try {
@@ -542,7 +531,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 			}
 
 			for (int j = tile.getCol(); j >= tile.getCol() - range; j--) {
-				checkInterruption();
 				if (j == 0)
 					break;
 				try {
@@ -558,7 +546,6 @@ public class BilginKarabag extends ArtificialIntelligence {
 			}
 
 			for (int j = tile.getCol(); j >= tile.getCol() - range; j--) {
-				checkInterruption();
 				if (j == 0)
 					break;
 				try {

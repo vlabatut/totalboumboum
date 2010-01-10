@@ -1,45 +1,32 @@
 package org.totalboumboum.ai.v200809.ais.devecioglukorkmaz.v2;
 
-import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
-import org.totalboumboum.ai.v200809.adapter.StopRequestException;
-
 public class SearchLink {
 	private Noeud origin;
 	private Noeud target;
-	ArtificialIntelligence ai;
 
-	public SearchLink(Noeud origin, Noeud target, ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
-		this.ai = ai;
+	public SearchLink(Noeud origin, Noeud target) {
 		this.origin = origin;
 		this.target = target;
 	}
 
-	public Noeud getOrigin() throws StopRequestException {
-		ai.checkInterruption();
+	public Noeud getOrigin() {
 		return origin;
 	}
 
-	public Noeud getTarget() throws StopRequestException {
-		ai.checkInterruption();
+	public Noeud getTarget() {
 		return target;
 	}
 
 	public boolean equals(Object object) {
-		boolean result = false;
+		boolean result;
 		if (object == null)
 			result = false;
 		else if (!(object instanceof SearchLink))
 			result = false;
 		else {
 			SearchLink temp = (SearchLink) object;
-			try {
-				result = temp.getOrigin() == getOrigin()
-						&& temp.getTarget() == getTarget();
-			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			result = temp.getOrigin() == getOrigin()
+					&& temp.getTarget() == getTarget();
 		}
 		return result;
 	}

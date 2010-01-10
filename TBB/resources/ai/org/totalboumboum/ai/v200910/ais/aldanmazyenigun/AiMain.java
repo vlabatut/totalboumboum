@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v200910.ais.aldanmazyenigun;
 import org.totalboumboum.ai.v200910.adapter.AiManager;
 import org.totalboumboum.ai.v200910.ais.aldanmazyenigun.v5.AldanmazYenigun;
 
-
 /**
  * class utilisée par le moteur du jeu pour retrouver les IA
  */

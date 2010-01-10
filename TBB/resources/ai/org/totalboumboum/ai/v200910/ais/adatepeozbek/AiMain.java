@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v200910.ais.adatepeozbek;
 import org.totalboumboum.ai.v200910.adapter.AiManager;
 import org.totalboumboum.ai.v200910.ais.adatepeozbek.v5.AdatepeOzbek;
 
-
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les IA
  */

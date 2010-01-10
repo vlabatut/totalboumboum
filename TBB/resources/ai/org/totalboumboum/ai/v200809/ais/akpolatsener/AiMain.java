@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v200809.ais.akpolatsener;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.akpolatsener.v2.AkpolatSener;
 
-
 public class AiMain extends AiManager
 {
 

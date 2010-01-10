@@ -65,8 +65,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * interceptée localement par un try/catch. 
 	 */
 	public synchronized void checkInterruption() throws StopRequestException
-	{	Thread.yield();
-		if(stopRequest)
+	{	if(stopRequest)
 			throw new StopRequestException();
 	}
 	

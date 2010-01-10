@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v200809.ais.tirtiltomruk;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.TirtilTomruk;
 
-
 public class AiMain extends AiManager
 {
 

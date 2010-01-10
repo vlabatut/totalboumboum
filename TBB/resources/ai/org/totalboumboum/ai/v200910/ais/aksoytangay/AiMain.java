@@ -3,7 +3,6 @@ package org.totalboumboum.ai.v200910.ais.aksoytangay;
 import org.totalboumboum.ai.v200910.adapter.AiManager;
 import org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2.AksoyTangay;
 
-
 /**
  * class utilisée par le moteur du jeu pour retrouver les IA
  */

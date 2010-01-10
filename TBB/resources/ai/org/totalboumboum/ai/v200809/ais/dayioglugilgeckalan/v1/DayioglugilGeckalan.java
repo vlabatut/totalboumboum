@@ -112,7 +112,6 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 		file.offer(currentTile);
 		Collection<AiTile> x=new ArrayList<AiTile>();
 		while (!file.isEmpty() && safePlace == null) {
-			checkInterruption();
 			AiTile searchNode = file.poll();
 			x.add(searchNode);
 			if (!danger.contains(searchNode))
@@ -162,25 +161,13 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 			 temp=it.next().getTile();
 			 danger.add(temp);
 			 for(i=0;i<5;i++)
-			 {	checkInterruption();
-				 danger.add(zone.getTile(temp.getCol(),temp.getLine()+i));
-			 
-			 }
+			 danger.add(zone.getTile(temp.getCol(),temp.getLine()+i));
 			 for(i=0;i<5;i++)
-			 {	checkInterruption();
 				 danger.add(zone.getTile(temp.getCol(),temp.getLine()-i));
-			 
-			 }
 			 for(i=0;i<5;i++)
-			 {	 checkInterruption();
 				 danger.add(zone.getTile(temp.getCol()+i,temp.getLine()));
-			 
-			 }
 			 for(i=0;i<5;i++)
-			 {	 checkInterruption();
 				 danger.add(zone.getTile(temp.getCol()-i,temp.getLine()));
-			 
-			 }
 				 
 		}
 			

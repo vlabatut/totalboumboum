@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v200809.ais.gunalpyurtsever;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2.GunalpYurtsever;
 
-
 public class AiMain extends AiManager
 {
 

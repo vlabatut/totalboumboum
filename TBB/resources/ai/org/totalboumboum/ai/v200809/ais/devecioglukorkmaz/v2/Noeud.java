@@ -1,75 +1,51 @@
 package org.totalboumboum.ai.v200809.ais.devecioglukorkmaz.v2;
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
-import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
-import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 public class Noeud {
 	private AiTile tile;
 	private boolean visited;
 	private int iteration;
-	ArtificialIntelligence ai;
-	
-	public Noeud(ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
-		this.ai = ai;
+
+	public Noeud() {
 		this.tile = null;
 		this.iteration = -1;
 		visited = false;
 	}
 
-	public Noeud(AiTile tile, ArtificialIntelligence ai) throws StopRequestException {
-		ai.checkInterruption();
-		this.ai = ai;
+	public Noeud(AiTile tile) {
 		this.tile = tile;
 		this.iteration = -1;
 		visited = false;
 	}
 
-	public AiTile getTile() throws StopRequestException {
-		ai.checkInterruption();
+	public AiTile getTile() {
 		return tile;
 	}
 
-	protected void markVisited(int iteration) throws StopRequestException {
-		ai.checkInterruption();
+	protected void markVisited(int iteration) {
 		visited = true;
 		this.iteration = iteration;
 	}
 
-	public boolean isVisited() throws StopRequestException {
-		ai.checkInterruption();
+	public boolean isVisited() {
 		return visited;
 	}
 
-	public int getIteration() throws StopRequestException {
-		ai.checkInterruption();
+	public int getIteration() {
 		return iteration;
 	}
 
 	public boolean equals(Object object) {
-		Noeud noeud=null;
-		try {
-			noeud = new Noeud(ai);
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Noeud noeud = new Noeud();
 		noeud = (Noeud) object;
-		try {
-			if ((noeud.getTile()) == tile)
-				return true;
-			else
-				return false;
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
+		if ((noeud.getTile()) == tile)
+			return true;
+		else
+			return false;
 	}
 
-	public int getHeuristic(Noeud goal) throws StopRequestException {
-		ai.checkInterruption();
+	public int getHeuristic(Noeud goal) {
 		int result = 0;
 		result = result + Math.abs(tile.getLine() - goal.getTile().getLine());
 		result = result + Math.abs(tile.getCol() - goal.getTile().getCol());

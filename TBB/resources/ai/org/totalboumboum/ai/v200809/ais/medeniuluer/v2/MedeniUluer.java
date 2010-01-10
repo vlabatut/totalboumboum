@@ -196,7 +196,7 @@ public class MedeniUluer extends ArtificialIntelligence
 		AiHero rival = null;
 		Iterator <AiHero> itHeroes = heroes.iterator();
 		while (itHeroes.hasNext())
-			{	checkInterruption();
+			{
 				AiHero temp = itHeroes.next();
 				if (!temp.equals(this.getPercepts().getOwnHero()))
 					rival = temp;

@@ -14,12 +14,17 @@ public class AiTileComparator implements Comparator<AiTile> {
 	public AiTileComparator(AiTile t, DeveciogluKorkmaz dk)
 			throws StopRequestException {
 
-		dk.checkInterruption();
 		this.t = t;
+		dk.checkInterruption();
 		this.dk = dk;
 	}
 
 	public int compare(AiTile n1, AiTile n2) {
+		try {
+			dk.checkInterruption();
+		} catch (StopRequestException e1) {
+			e1.printStackTrace();
+		}
 		int resultat = 0;
 		try {
 			if (dk.getDistance(t, n1) > dk.getDistance(t, n2))

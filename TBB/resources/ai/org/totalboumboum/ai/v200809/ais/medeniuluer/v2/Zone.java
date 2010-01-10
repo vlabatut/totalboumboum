@@ -180,9 +180,9 @@ public class Zone {
 		ZoneEnum[][] result = new ZoneEnum[zone.getWidth()][zone.getHeigh()];
 		//Reproduisons le tableau:
 		for(int k = 0; k <this.zone.getHeigh(); k++)
-		{	mu.checkInterruption(); // Appel Obligatoire
+		{
 			for(int l = 0; l<this.zone.getWidth();l++)
-			{	mu.checkInterruption(); // Appel Obligatoire
+			{
 				result[l][k] = this.zoneArray[l][k];
 			}
 		}
@@ -202,7 +202,6 @@ public class Zone {
 		boolean right = true;
 		result[bomb.getCol()][bomb.getLine()] = ZoneEnum.EXPLOSION_SIMULE;
 		while (k <= this.zone.getOwnHero().getBombRange() && (up || down || left || right)) {
-			mu.checkInterruption(); // Appel Obligatoire
 			if (up) {
 				if ((result[bomb.getCol()][bomb.getLine() - k] != ZoneEnum.BLOCDESTRUCTIBLE)
 						&& (result[bomb.getCol()][bomb.getLine() - k] != ZoneEnum.BLOCINDESTRUCTIBLE)) 
@@ -271,8 +270,7 @@ public class Zone {
 		return result;
 	}
 
-	public int getLastSimulatedBombExplodes() throws StopRequestException {
-		mu.checkInterruption(); // Appel Obligatoire
+	public int getLastSimulatedBombExplodes() {
 		return lastSimulatedBombExplodes;
 	}
 

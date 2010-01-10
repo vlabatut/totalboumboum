@@ -18,6 +18,7 @@ import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
+
 public class AltayBasaranoglu extends ArtificialIntelligence
 {
 	/** la case occupée actuellement par le personnage*/
@@ -232,14 +233,12 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 			Iterator<AiHero> itHeroes=heroes.iterator();
 			AiHero hero;
 			while(itHeroes.hasNext()){
-				checkInterruption();
 				hero = itHeroes.next();
 				if(!hero.equals(myOwnHero))
 				newHeroes.add(hero);
 			}
 			itHeroes=newHeroes.iterator();
 			while(itHeroes.hasNext()){
-				checkInterruption();
 				hero=itHeroes.next();
 				heroLine=hero.getLine();
 				heroCol=hero.getCol();
@@ -253,8 +252,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 	}
 
 	@SuppressWarnings("unused")
-	private boolean noObstacle(int[][][] matriceDefence, AiHero hero, AiHero myOwnHero) throws StopRequestException {
-		checkInterruption();
+	private boolean noObstacle(int[][][] matriceDefence, AiHero hero, AiHero myOwnHero) {
 		boolean result=true;
 		int heroLine= hero.getLine();
 		int heroCol= hero.getCol();
@@ -262,17 +260,13 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 		int myCol=myOwnHero.getCol();
 		if(heroLine==myLine){
 			for(int i=Math.min(heroCol, myCol); i<=Math.max(heroCol, myCol); i++)
-			{	checkInterruption();
 				if (matriceDefence[heroLine][i][0]<-2)
 					result=false;
-			}
 		}
 		else if(heroCol==myCol){
 			for(int i=Math.min(heroLine, myLine); i<=Math.max(heroLine, myLine); i++)
-			{	checkInterruption();
 				if (matriceDefence[i][heroCol][0]<-2)
 					result=false;
-			}
 		}
 		return result;
 	}
@@ -291,11 +285,9 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 		int heroLine=ownHero.getLine();
 	    int heroCol=ownHero.getCol();
 		if (!isSafe(matriceDefence,heroLine,heroCol)){
-			checkInterruption();
 			Collection<AiTile> tiles=zone.getNeighborTiles(ownHero.getTile());
 			Iterator<AiTile> itAiTile= tiles.iterator();
 			while(itAiTile.hasNext()){
-				checkInterruption();
 				tile=itAiTile.next();
 				if(isClear(tile, matriceDefence)){
 					dirNew=zone.getDirection(ownTile, tile);
@@ -311,13 +303,11 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 					//s'il a deux choix de meme cout, il va comparer les destinations et il va choisir plus libre
 					///*
 					else if(dirOldValue==dirNewValue&&dirNewValue==0&&!tempDir.equals(dirNew)){
-						checkInterruption();
 						//daha acik alani sec
 						Collection<AiTile> tiles1=zone.getNeighborTiles(zone.getNeighborTile(ownTile, dirNew));
 						Iterator<AiTile> itAiTiles1=tiles1.iterator();
 						AiTile tile1;
 						while (itAiTiles1.hasNext()) {
-							checkInterruption();
 							tile1=itAiTiles1.next();
 							if(!tile1.equals(ownTile)&&matriceDefence[tile1.getLine()][tile1.getCol()][0]==0)
 								tempDir=dirNew;							
@@ -542,7 +532,6 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 		Collection<AiTile> tiles=getClearNeighbors(currentTile, tempMatrice);
 		Iterator<AiTile> itAiTile= tiles.iterator();
 		while(itAiTile.hasNext()){
-			checkInterruption();
 			tile=itAiTile.next();
 			if(isClear(tile, tempMatrice)){
 					dirNewValue=calculateCost(tile,ownTile, tempMatrice, zone);
