@@ -28,6 +28,7 @@ import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v200910.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
+import org.totalboumboum.configuration.Configuration;
 
 
 /**
@@ -55,6 +56,10 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	/** indicateur de demande de terminaison de l'IA (activé par le jeu à la fin de la partie) */
 	private boolean stopRequest = false;
+	/** compteur temporel pour éviter que le thread rende la main trop souvent */
+	private Long lastYield = null;
+	/** compte les appels à checkInterruption() entre deux yields */
+	private int callCount = 0;
 
 	/**
 	 * méthode appelée par le jeu pour demander la fin de l'IA.
@@ -72,7 +77,24 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * interceptée localement par un try/catch. 
 	 */
 	public synchronized void checkInterruption() throws StopRequestException
-	{	Thread.yield();
+	{	if(lastYield==null)
+		{	lastYield = System.currentTimeMillis();
+			Thread.yield();
+		}
+		else
+		{	callCount++;
+			long newTime = System.currentTimeMillis();
+			long diff = newTime - lastYield;
+			long limit = Configuration.getAisConfiguration().getAiYieldPeriod();
+			if(diff>limit)
+			{	lastYield = newTime;
+//				System.out.println(diff+"("+callCount+")");
+				callCount = 0;
+				Thread.yield();
+			}			
+		}
+		
+		//Thread.yield();
 		if(stopRequest)
 			throw new StopRequestException();
 	}
