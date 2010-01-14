@@ -59,6 +59,8 @@ public class AisConfiguration
 	private int aiUps = 50;
 	/** ai update period */
 	private long aiPeriod = (long)(1000.0/aiUps);
+	/** ai yield period (experimental) */
+	private long aiYieldPeriod = (long)10;
 
 	public int getAiUps()
 	{	return aiUps;
@@ -71,6 +73,10 @@ public class AisConfiguration
 	
 	public long getAiPeriod()
 	{	return aiPeriod;
+	}
+
+	public long getAiYieldPeriod()
+	{	return aiYieldPeriod;
 	}
 
 	/////////////////////////////////////////////////////////////////
