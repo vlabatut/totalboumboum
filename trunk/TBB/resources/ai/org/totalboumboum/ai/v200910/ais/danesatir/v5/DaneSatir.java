@@ -146,7 +146,7 @@ public class DaneSatir extends ArtificialIntelligence
 				
 				if(p.isArrive()) {
 					if(dec.getState() == State.GOTO) {
-						//TODO: NONE dogru bi state mi?
+						// NONE dogru bi state mi?
 						dec.setState(State.START);
 						//System.out.println("pehpehpeh");
 					}

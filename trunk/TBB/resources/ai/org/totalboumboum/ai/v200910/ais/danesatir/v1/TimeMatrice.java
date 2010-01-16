@@ -41,7 +41,7 @@ public class TimeMatrice {
 	}
 
 	private void expandBomb(AiBomb bomb) {
-		// TODO Auto-generated method stub
+		// 
 		double duration = GeneralFuncs.getTimeToExplode(bomb);
 		
 		List<AiTile> blast = bomb.getBlast();

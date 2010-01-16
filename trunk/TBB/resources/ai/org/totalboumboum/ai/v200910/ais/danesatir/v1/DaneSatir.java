@@ -50,7 +50,7 @@ public class DaneSatir extends ArtificialIntelligence
 	}
 	
 	private AiAction calculAction() throws StopRequestException {
-		// TODO Auto-generated method stub
+		// 
 		checkInterruption();
 		AiAction result = null;
 		switch(this.state) {
@@ -73,7 +73,7 @@ public class DaneSatir extends ArtificialIntelligence
 	}
 
 	private void findShortestPath() throws StopRequestException {
-		// TODO Auto-generated method stub
+		// 
 		this.checkInterruption();
 		AiPath path = new PathFinder(this,this.currentTile,this.targetTile).getPath();
 		if(GeneralFuncs.tileCompare(path.getTile(0),this.currentTile))
@@ -83,7 +83,7 @@ public class DaneSatir extends ArtificialIntelligence
 	}
 
 	private void searchSafeCase() throws StopRequestException {
-		// TODO Auto-generated method stub
+		// 
 		this.checkInterruption();
 		targetTile = this.timeMatrice.mostSafeCase(currentTile);
 		if(targetTile == null)
@@ -93,7 +93,7 @@ public class DaneSatir extends ArtificialIntelligence
 	}
 
 	private void makeDecision() throws StopRequestException {
-		// TODO Auto-generated method stub
+		// 
 		checkInterruption();
 		this.state = new DecisionMaker(this.zone,this.myHero,this.timeMatrice).getDecision();
 	}
@@ -117,7 +117,7 @@ public class DaneSatir extends ArtificialIntelligence
 	}
 
 	public AiHero getOwnHero() {
-		// TODO Auto-generated method stub
+		// 
 		return this.myHero;
 	}
 }

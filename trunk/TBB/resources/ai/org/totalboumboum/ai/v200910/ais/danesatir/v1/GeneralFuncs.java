@@ -13,7 +13,7 @@ public class GeneralFuncs {
 		return false;
 	} 
 	public static double getTimeToExplode(AiBomb a) {
-		//TODO: make more accurate
+		// make more accurate
 		if( a.getNormalDuration() - a.getTime() < 0)
 			return Limits.expandBombTime;
 		return a.getNormalDuration() - a.getTime();
@@ -25,7 +25,7 @@ public class GeneralFuncs {
 		}
 	}
 	public static boolean checkVerboseLevel(int verbose) {
-		//TODO: make Verbose enums
+		// make Verbose enums
 		if (Limits.debug && Limits.verboseLevel > verbose)
 			return true;
 		return false;

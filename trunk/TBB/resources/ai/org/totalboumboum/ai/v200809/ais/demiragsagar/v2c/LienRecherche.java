@@ -66,7 +66,7 @@ public class LienRecherche {
 				result = temp.getOrigin() == getOrigin()
 						&& temp.getTarget() == getTarget();
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 		}
@@ -79,7 +79,7 @@ public class LienRecherche {
 		try {
 			result = result + getOrigin().toString();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		result = result + "] )->";
@@ -87,7 +87,7 @@ public class LienRecherche {
 		try {
 			result = result + getTarget().toString();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		result = result + "]";

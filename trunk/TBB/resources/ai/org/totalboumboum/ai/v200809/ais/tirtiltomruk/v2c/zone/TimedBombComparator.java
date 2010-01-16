@@ -27,7 +27,7 @@ public class TimedBombComparator implements Comparator<TimedBomb>{
 					return (int) (arg0.getRemainingTime() - arg1.getRemainingTime());
 			}
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		return 0;

@@ -26,14 +26,14 @@ public class NodeComparator implements Comparator<Node>
 		try {
 			val1 = n1.getCost()+n1.getH(start, end);
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		double val2 = 0;
 		try {
 			val2 = n2.getCost()+n2.getH(start, end);
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		if(val1<val2)res = -1;
@@ -42,7 +42,7 @@ public class NodeComparator implements Comparator<Node>
 			try {
 				res = n1.getName().compareTo(n2.getName());
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 			

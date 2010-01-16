@@ -14,7 +14,7 @@ public class AstarComparator implements Comparator<CostTile> {
 			if(i == 0)
 				i =tile1.toString().compareTo(tile2.toString());
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		

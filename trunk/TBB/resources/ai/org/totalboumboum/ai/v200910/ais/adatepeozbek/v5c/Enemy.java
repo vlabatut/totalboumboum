@@ -76,19 +76,19 @@ public class Enemy
 		try {
 			result.append(" - sameTile.: "+ getSameTileCount());
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		try {
 			result.append(" - posedBombs.: "+ getPosedBombs());
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		try {
 			result.append(" - totalTime.: "+ getLastCheck());
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		return result.toString();

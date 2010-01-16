@@ -67,7 +67,7 @@ public class SearchLink {
 			try {
 				result = temp.getOrigin() == getOrigin();
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 		}
