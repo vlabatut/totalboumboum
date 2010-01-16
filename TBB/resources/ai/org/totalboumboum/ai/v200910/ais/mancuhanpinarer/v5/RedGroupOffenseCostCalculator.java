@@ -12,7 +12,7 @@ public class RedGroupOffenseCostCalculator extends CostCalculator {
 
 	@Override
 	public double processCost(AiTile start, AiTile end) {
-		// TODO Auto-generated method stub
+		// 
 		double result=1;
 		AiZone gameZone=end.getZone();
 		List<AiBomb> bombList=gameZone.getBombs();

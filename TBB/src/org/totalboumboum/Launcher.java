@@ -1062,6 +1062,7 @@ public class Launcher
 	 * 			- recompiler le jeu	
 	 * 			- virer les fichiers sources
 	 * 			- virer les IA pas finies (source+profils)
+	 * 			- virer les versions intermédiaires des IA
 	 * 		- options :
 	 * 			- simulation des matches AI-only
 	 * 		- prérégler la partie rapide sur : 

@@ -12,14 +12,14 @@ public class NoeudComparator implements Comparator<Node> {
 		try {
 			n_1 = noeud1.getHeuristic();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		double n_2=0;
 		try {
 			n_2 = noeud2.getHeuristic();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 

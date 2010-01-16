@@ -51,7 +51,7 @@ public class Link {
 					&& temp.getChild() == getChild()
 					&& temp.getAction() == getAction();
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 		}

@@ -45,7 +45,7 @@ public class PathFinder {
 	}
 	
 	public AiTile getNextTile() throws StopRequestException {
-		// TODO Auto-generated method stub
+		// 
 		ai.checkInterruption();
 		AiTile nextTile = null;
 		if (this.duration == -1)

@@ -592,7 +592,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 		try {
 			result = safetyZone.isSafe(tile.getCol(),tile.getLine());
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		return result;
@@ -605,7 +605,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 		try {
 			result = safetyZone.isBonus(tile.getCol(),tile.getLine());
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		return result;
@@ -618,7 +618,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 		try {
 			result = safetyZone.iswall(tile.getCol(),tile.getLine());
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		return result;
@@ -631,7 +631,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 		try {
 			result = safetyZone.isHero(tile.getCol(),tile.getLine());
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		return result;

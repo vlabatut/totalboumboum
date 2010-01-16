@@ -185,7 +185,7 @@ public class TimeMatrice {
 	
 	public static double getTimeToExplode(AiBomb bomb,ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
-		//TODO: make more accurate
+		// make more accurate
 		if( bomb.getNormalDuration() - bomb.getTime() < 0)
 			return Limits.expandBombTime;
 		// Update bombDuration

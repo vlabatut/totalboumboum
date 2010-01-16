@@ -55,7 +55,7 @@ public class Node {
 			else
 				return false;
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		return false;

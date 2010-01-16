@@ -79,7 +79,7 @@ public class DaneSatir extends ArtificialIntelligence
 	}
 
 	private void searchNearBonus() throws StopRequestException {
-		//TODO: make new class BonusCollector
+		//
 		// avant tout : test d'interruption
 		this.checkInterruption();
 		AiTile temp = new BonusCollector(this).findNearBonus(currentTile);

@@ -177,7 +177,7 @@ public class TimeMatrice {
 	}
 	
 	public static double getTimeToExplode(AiBomb bomb) {
-		//TODO: make more accurate
+		//
 		if( bomb.getNormalDuration() - bomb.getTime() < 0)
 			return Limits.expandBombTime;
 		// Update bombDuration

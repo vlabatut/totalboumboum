@@ -55,7 +55,7 @@ public class TimedBomb {
 	{	try {
 		ai.checkInterruption();
 	} catch (StopRequestException e) {
-		// TODO Auto-generated catch block
+		// 
 		e.printStackTrace();
 	}
 	
@@ -67,13 +67,13 @@ public class TimedBomb {
 			try {
 				condition = this.bomb.equals((((TimedBomb)timedBomb).getBomb()));
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 			try {
 				condition = condition && this.zone.equals((((TimedBomb)timedBomb).getZone()));
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 			if(condition)
@@ -120,7 +120,7 @@ public class TimedBomb {
 		try {
 			result += "Time Remaining:" + this.getRemainingTime();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		result += "/ Release Time:" + this.releaseTime;

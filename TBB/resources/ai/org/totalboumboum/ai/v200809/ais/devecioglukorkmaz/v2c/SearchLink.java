@@ -37,7 +37,7 @@ public class SearchLink {
 				result = temp.getOrigin() == getOrigin()
 						&& temp.getTarget() == getTarget();
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 		}

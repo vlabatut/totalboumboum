@@ -27,14 +27,14 @@ public class BombComparator implements Comparator<AiBomb> {
 		try {
 			arg0time = TimeMatrice.getTimeToExplode(arg0,ai);
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		double arg1time=0;
 		try {
 			arg1time = TimeMatrice.getTimeToExplode(arg1,ai);
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		if(arg0time < arg1time)

@@ -17,7 +17,7 @@ public Matrices(Map map){
 	try {
 		remplir(map);
 	} catch (StopRequestException e) {
-		// TODO Auto-generated catch block
+		// 
 		e.printStackTrace();
 	}
 	
