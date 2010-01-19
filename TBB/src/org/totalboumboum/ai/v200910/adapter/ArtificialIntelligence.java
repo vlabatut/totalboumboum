@@ -28,8 +28,8 @@ import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v200910.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
+import org.totalboumboum.ai.v200910.ais.adatepeozbek.v5c.AdatepeOzbek;
 import org.totalboumboum.configuration.Configuration;
-
 
 /**
  * classe dont chaque IA doit hériter. La méthode processAction est la méthode 
@@ -88,7 +88,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			long limit = Configuration.getAisConfiguration().getAiYieldPeriod();
 			if(diff>limit)
 			{	lastYield = newTime;
-//				System.out.println(diff+"("+callCount+")");
+		if(this instanceof AdatepeOzbek)		
+			System.out.println(diff+"("+callCount+")");
 				callCount = 0;
 				Thread.yield();
 			}			

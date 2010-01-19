@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v200910.ais.dorukkupelioglu;
  */
 
 import org.totalboumboum.ai.v200910.adapter.AiManager;
-import org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v5_2.DorukKupelioglu;
+import org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v5_2c.DorukKupelioglu;
 
 /**
  * class utilis�e par le moteur du jeu pour retrouver les IA

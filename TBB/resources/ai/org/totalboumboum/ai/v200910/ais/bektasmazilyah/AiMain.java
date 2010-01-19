@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v200910.ais.bektasmazilyah;
 
 import org.totalboumboum.ai.v200910.adapter.AiManager;
-import org.totalboumboum.ai.v200910.ais.bektasmazilyah.v5.BektasMazilyah;
+import org.totalboumboum.ai.v200910.ais.bektasmazilyah.v5c.BektasMazilyah;
 
 /**
  * class utilisée par le moteur du jeu pour retrouver les IA

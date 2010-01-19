@@ -2,7 +2,7 @@
 <video xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\video.xsd">
 	<fullScreen value="false" />
 	<smoothGraphics value="true" />
-	<panelDimension width="800" height="600" />
+	<panelDimension width="640" height="480" />
 	<border value="black" />
 </video>
 
