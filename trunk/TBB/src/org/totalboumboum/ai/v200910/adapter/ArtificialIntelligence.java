@@ -89,7 +89,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			if(diff>limit)
 			{	lastYield = newTime;
 		if(this instanceof AdatepeOzbek)		
-			System.out.println(diff+"("+callCount+")");
+			System.out.println(this.getClass()+">"+diff+"("+callCount+")");
 				callCount = 0;
 				Thread.yield();
 			}			
