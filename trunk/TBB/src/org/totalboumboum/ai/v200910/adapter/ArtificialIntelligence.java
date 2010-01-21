@@ -88,8 +88,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			long limit = Configuration.getAisConfiguration().getAiYieldPeriod();
 			if(diff>limit)
 			{	lastYield = newTime;
-		if(this instanceof AdatepeOzbek)		
-			System.out.println(this.getClass()+">"+diff+"("+callCount+")");
+if(this instanceof AdatepeOzbek)		
+	System.out.println(this.getClass()+">"+diff+"("+callCount+")");
 				callCount = 0;
 				Thread.yield();
 			}			
