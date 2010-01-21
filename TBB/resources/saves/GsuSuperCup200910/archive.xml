@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+	<tournament name="Super-coupe de Galatasaray II" type="SINGLE" />
+	<played matches="0" rounds="0" />
+	<dates start="2010-01-20T19:22:11" save="2010-01-20T19:23:00" />
+	<players>
+		<player name="0708.Bingöl+Ketenci" />
+		<player name="0809.Erişik+Pektaş" />
+		<player name="0809.Altay+Basaranoğlu" />
+		<player name="0910.Çalışır+Güner" />
+		<player name="0910.Doruk+Küpelioğlu" />
+	</players>
+</archive>
+
