@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blockset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/blockset.xsd" >
+	
+	<abstractBlocks >
+		<block name="common" folder="_common" />
+	</abstractBlocks>
+	
+	<concreteBlocks>
+		<block folder="hardwall" name="hardwall" />
+		<block folder="softwall" name="softwall" />
+	</concreteBlocks>
+	
+</blockset>

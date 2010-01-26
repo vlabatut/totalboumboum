@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:complexType name="tBlock">
+		<xsd:attribute name="group" type="xsd:string" use="optional" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tFloor">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tItem">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="tBomb">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="range" type="xsd:integer" use="optional" default="0" />
+	</xsd:complexType>
+
+	<xsd:group name="gBasicTile">
+		<xsd:sequence>
+			<!--  no floor defined means default floor -->
+			<xsd:element name="floor" type="tFloor" minOccurs="0" />
+			<!--  no block defined means no block at all -->
+			<xsd:element name="block" type="tBlock" minOccurs="0" />
+			<!--  peut aussi y a voir des bombes, bonus, etc -->
+			<xsd:element name="item" type="tItem" minOccurs="0" />
+			<xsd:element name="bomb" type="tBomb" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:group>
+
+	<xsd:complexType name="tTileReference">
+		<xsd:attribute name="name" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tTileType">
+		<xsd:sequence>
+			<xsd:group ref="gBasicTile" />
+			<xsd:element name="reference" type="tTileReference" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="pos" type="xsd:integer" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tLine">
+		<xsd:sequence>
+			<xsd:element name="tile" type="tTileType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="pos" type="xsd:integer" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tMatrix">
+		<xsd:sequence>
+			<xsd:element name="line" type="tLine" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tValue">
+		<xsd:group ref="gBasicTile" />
+		<xsd:attribute name="proba" type="xsd:float" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tVariableTile">
+		<xsd:sequence>
+			<xsd:element name="value" type="tValue" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tVariableTiles">
+		<xsd:sequence>
+			<xsd:element name="variableTile" type="tVariableTile" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tZone">
+		<xsd:sequence>
+			<xsd:element name="variableTiles" type="tVariableTiles"  minOccurs="0"/>
+			<xsd:element name="matrix" type="tMatrix" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="zone" type="tZone" />
+
+</xsd:schema>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tournament
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
+	
+	<general name="Tournament-séquence court"/>
+
+ 	<notes>
+ 		<line value="Short sequence tournament, only 3 times the same match" />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 31-12-2008" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<sequence>
+ 		<limits>
+			<confrontation>
+				<points local="false" name="TournamentBasic" />
+				<threshold value="3" />
+			</confrontation>
+ 		</limits>
+	 	
+		<matches randomOrder="false">
+			<match local="true" name="match" />
+		</matches>
+	</sequence>
+		
+		
+</tournament>

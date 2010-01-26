@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../../schemas/animes.xsd" 
+		scale="1" >
+
+	<gestures>
+		<gesture name="APPEARING" folder="appearing" proportional="true" >
+			<direction name="NONE">
+				<step file="01.gif" duration="100"/>
+				<step file="02.gif" duration="100"/>
+				<step file="03.gif" duration="100"/>
+				<step file="04.gif" duration="100"/>
+				<step file="05.gif" duration="100"/>
+				<step file="06.gif" duration="100"/>
+				<step file="07.gif" duration="100"/>
+				<step file="08.gif" duration="100"/>
+				<step file="09.gif" duration="100"/>
+				<step file="10.gif" duration="100"/>
+				<step file="11.gif" duration="100"/>
+			</direction>
+		</gesture>
+
+		<gesture name="STANDING" folder="standing" >
+			<direction name="NONE">
+				<step file="standing.gif" />
+			</direction>
+		</gesture>
+	</gestures>
+</animes>

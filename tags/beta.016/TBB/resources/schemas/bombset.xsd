@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_ability.xsd"/>
+
+	<xsd:complexType name="tBomb">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="folder" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tConcreteBomb">
+		<xsd:complexContent>
+			<xsd:extension base="tBomb">
+				<xsd:sequence>
+					<xsd:element name="ability" type="tStateAbility" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="tAbstractBombs">
+		<xsd:sequence>
+			<xsd:element name="bomb" type="tBomb" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tConcreteBombs">
+		<xsd:sequence>
+			<xsd:element name="bomb" type="tConcreteBomb" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tBombset">
+		<xsd:sequence>
+			<xsd:element name="abstractBombs" type="tAbstractBombs" minOccurs="0"/>
+			<xsd:element name="concreteBombs" type="tConcreteBombs" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="bombset" type="tBombset" />
+
+</xsd:schema>

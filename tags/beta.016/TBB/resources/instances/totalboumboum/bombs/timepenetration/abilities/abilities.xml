@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
+
+		<!-- STATE -->
+<!--  	BOMB_FAILURE_MAXDURATION --> 
+		<ability strength="5000" frame="false" time="-1" uses="-1">
+			<name value="BOMB_FAILURE_MAXDURATION" />
+		</ability>
+<!--  	BOMB_FAILURE_MINDURATION --> 
+		<ability strength="1000" frame="false" time="-1" uses="-1">
+			<name value="BOMB_FAILURE_MINDURATION" />
+		</ability>
+<!--  	BOMB_FAILURE_PROBABILITY --> 
+		<ability strength="0.03" frame="false" time="-1" uses="-1">
+			<name value="BOMB_FAILURE_PROBABILITY" />
+		</ability>
+<!--  	BOMB_TRIGGER_TIMER -->
+		<ability strength="2400" frame="false" time="-1" uses="-1">
+			<name value="BOMB_TRIGGER_TIMER" /> 
+		</ability> 
+			
+		<!-- ACTION -->
+
+</abilities>

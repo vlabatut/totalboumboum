@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
+		scale="8" >
+		
+	<colors folder="colormaps" >
+		<colormap name="BLACK" file="black" />
+		<colormap name="BLUE" file="blue" />
+		<colormap name="BROWN" file="brown" />
+		<colormap name="CYAN" file="cyan" />
+		<colormap name="GRASS" file="grass" />
+		<colormap name="GREEN" file="green" />
+		<colormap name="GREY" file="grey" />
+		<colormap name="INDIGO" file="indigo" />
+		<colormap name="ORANGE" file="orange" />
+		<colormap name="PINK" file="pink" />
+		<colormap name="PURPLE" file="purple" />
+		<colormap name="RED" file="red" />
+		<colormap name="RUST" file="rust" />
+		<colormap name="ULTRAMARINE" file="ultramarine" />
+		<colormap name="WHITE" file="white" />
+		<colormap name="YELLOW" file="yellow" />
+	</colors>
+	
+	<shadows folder="pictures">
+		<shadow name="small" file="small.png" />
+ 		<shadow name="medium" file="medium.png" />
+ 		<shadow name="large" file="large.png" />
+	</shadows>
+	
+	<gestures folder="pictures">
+		<gesture name="BOUNCING" folder="standing" repeat="true" shadowYShift="-24">
+			<direction name="NONE">
+				<step duration="240" file="01.png" shadow="large" />
+				<step duration="240" file="02.png" shadow="medium" />
+				<step duration="240" file="11.png" shadow="small" />
+				<step duration="240" file="02.png" shadow="medium" />
+			</direction>
+		</gesture>
+		
+		<gesture name="BURNING" folder="burning" repeat="false">
+			<direction name="NONE">
+				<step duration="50" file="1.png"/>
+				<step duration="75" file="2.png"/>
+				<step duration="75" file="3.png"/>
+				<step duration="75" file="4.png"/>
+			</direction>
+		</gesture>
+		
+		<gesture name="LANDING" folder="standing" repeat="false" >
+			<direction name="NONE">
+				<step duration="240" file="01.png" shadow="large" />
+				<step duration="240" file="02.png" shadow="medium" />
+				<step duration="240" file="11.png" shadow="small" />
+				<step duration="240" file="02.png" shadow="medium" />
+			</direction>
+		</gesture>
+		
+		
+		<gesture name="OSCILLATING" folder="standing" repeat="false" >
+			<direction name="DOWN">
+				<step duration="240" file="01.png" shadow="large" yShift="5" />
+				<step duration="240" file="02.png" shadow="medium" yShift="-5" />
+				<step duration="240" file="03.png" shadow="small" yShift="5" />
+				<step duration="240" file="04.png" shadow="medium" yShift="-5" />
+				<step duration="240" file="05.png" shadow="large" yShift="5" />
+				<step duration="240" file="06.png" shadow="medium" yShift="-5" />
+				<step duration="240" file="07.png" shadow="small" yShift="5" />
+				<step duration="240" file="08.png" shadow="medium" yShift="-5" />
+				<step duration="240" file="09.png" shadow="large" yShift="5" />
+				<step duration="240" file="10.png" shadow="medium" yShift="-5" />
+			</direction>
+			<direction name="LEFT">
+				<step duration="240" file="01.png" shadow="large" xShift="-5" />
+				<step duration="240" file="02.png" shadow="medium" xShift="5" />
+				<step duration="240" file="03.png" shadow="small" xShift="-5" />
+				<step duration="240" file="04.png" shadow="medium" xShift="5" />
+				<step duration="240" file="05.png" shadow="large" xShift="-5" />
+				<step duration="240" file="06.png" shadow="medium" xShift="5" />
+				<step duration="240" file="07.png" shadow="small" xShift="-5" />
+				<step duration="240" file="08.png" shadow="medium" xShift="5" />
+				<step duration="240" file="09.png" shadow="large" xShift="-5" />
+				<step duration="240" file="10.png" shadow="medium" xShift="5" />
+			</direction>
+			<direction name="RIGHT">
+				<step duration="240" file="01.png" shadow="large" xShift="5" />
+				<step duration="240" file="02.png" shadow="medium" xShift="-5" />
+				<step duration="240" file="03.png" shadow="small" xShift="5" />
+				<step duration="240" file="04.png" shadow="medium" xShift="-5" />
+				<step duration="240" file="05.png" shadow="large" xShift="5" />
+				<step duration="240" file="06.png" shadow="medium" xShift="-5" />
+				<step duration="240" file="07.png" shadow="small" xShift="5" />
+				<step duration="240" file="08.png" shadow="medium" xShift="-5" />
+				<step duration="240" file="09.png" shadow="large" xShift="5" />
+				<step duration="240" file="10.png" shadow="medium" xShift="-5" />
+			</direction>
+			<direction name="UP">
+				<step duration="240" file="01.png" shadow="large" yShift="-5" />
+				<step duration="240" file="02.png" shadow="medium" yShift="5" />
+				<step duration="240" file="03.png" shadow="small" yShift="-5" />
+				<step duration="240" file="04.png" shadow="medium" yShift="5" />
+				<step duration="240" file="05.png" shadow="large" yShift="-5" />
+				<step duration="240" file="06.png" shadow="medium" yShift="5" />
+				<step duration="240" file="07.png" shadow="small" yShift="-5" />
+				<step duration="240" file="08.png" shadow="medium" yShift="5" />
+				<step duration="240" file="09.png" shadow="large" yShift="-5" />
+				<step duration="240" file="10.png" shadow="medium" yShift="5" />
+			</direction>
+		</gesture>
+
+		<gesture name="OSCILLATING_FAILING" folder="failing" repeat="true" >
+			<direction name="DOWN">
+				<step duration="240" file="1.png" shadow="small" yShift="-5" />
+				<step duration="240" file="2.png" shadow="medium" yShift="5" />
+				<step duration="240" file="3.png" shadow="large" yShift="-5" />
+				<step duration="240" file="2.png" shadow="medium" yShift="5" />
+			</direction>
+			<direction name="LEFT">
+				<step duration="240" file="1.png" shadow="small" xShift="-5" />
+				<step duration="240" file="2.png" shadow="medium" xShift="5" />
+				<step duration="240" file="3.png" shadow="large" xShift="-5" />
+				<step duration="240" file="2.png" shadow="medium" xShift="5" />
+			</direction>
+			<direction name="RIGHT">
+				<step duration="240" file="1.png" shadow="small" xShift="-5" />
+				<step duration="240" file="2.png" shadow="medium" xShift="5" />
+				<step duration="240" file="3.png" shadow="large" xShift="-5" />
+				<step duration="240" file="2.png" shadow="medium" xShift="5" />
+			</direction>
+			<direction name="UP">
+				<step duration="240" file="1.png" shadow="small" yShift="-5" />
+				<step duration="240" file="2.png" shadow="medium" yShift="5" />
+				<step duration="240" file="3.png" shadow="large" yShift="-5" />
+				<step duration="240" file="2.png" shadow="medium" yShift="5" />
+			</direction>
+		</gesture>
+
+		<gesture name="PUNCHED" folder="standing" repeat="true" >
+			<direction name="NONE">
+				<step duration="240" file="01.png" shadow="large" />
+				<step duration="240" file="02.png" shadow="medium" />
+				<step duration="240" file="11.png" shadow="small" />
+				<step duration="240" file="02.png" shadow="medium" />
+			</direction>
+		</gesture>
+		
+		<gesture name="SLIDING" folder="standing" repeat="false" proportional="true">
+			<direction name="NONE">
+				<step duration="240" file="01.png" shadow="large" />
+				<step duration="240" file="02.png" shadow="medium" />
+				<step duration="240" file="03.png" shadow="small" />
+				<step duration="240" file="04.png" shadow="medium" />
+				<step duration="240" file="05.png" shadow="large" />
+				<step duration="240" file="06.png" shadow="medium" />
+				<step duration="240" file="07.png" shadow="small" />
+				<step duration="240" file="08.png" shadow="medium" />
+				<step duration="240" file="09.png" shadow="large" />
+				<step duration="240" file="10.png" shadow="medium" />
+			</direction>
+		</gesture>
+		
+		<gesture name="SLIDING_FAILING" folder="failing" repeat="true">
+			<direction name="NONE">
+				<step duration="240" file="1.png" shadow="small" />
+				<step duration="240" file="2.png" shadow="medium" />
+				<step duration="240" file="3.png" shadow="large" />
+				<step duration="240" file="2.png" shadow="medium" />
+			</direction>
+		</gesture>
+		
+		<gesture name="STANDING" folder="standing" repeat="false" proportional="true">
+			<direction name="NONE">
+				<step duration="240" file="01.png" shadow="large" />
+				<step duration="240" file="02.png" shadow="medium" />
+				<step duration="240" file="03.png" shadow="small" />
+				<step duration="240" file="04.png" shadow="medium" />
+				<step duration="240" file="05.png" shadow="large" />
+				<step duration="240" file="06.png" shadow="medium" />
+				<step duration="240" file="07.png" shadow="small" />
+				<step duration="240" file="08.png" shadow="medium" />
+				<step duration="240" file="09.png" shadow="large" />
+				<step duration="240" file="10.png" shadow="medium" />
+			</direction>
+		</gesture>
+		
+		<gesture name="STANDING_FAILING" folder="failing" repeat="true" >
+			<direction name="NONE">
+				<step duration="240" file="1.png" shadow="small" />
+				<step duration="240" file="2.png" shadow="medium" />
+				<step duration="240" file="3.png" shadow="large" />
+				<step duration="240" file="2.png" shadow="medium" />
+			</direction>
+		</gesture>		
+	</gestures>		
+</animes>

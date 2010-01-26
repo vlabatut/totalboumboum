@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<players 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../schemas/players.xsd" >
+	
+	<locations>
+<!-- 	
+		<case players="0">
+		</case>
+		<case players="1">
+			<location player="0" line="01" col="02" />
+		</case>
+-->		
+		<case players="2">
+			<location player="0" line="01" col="02" />
+			<location player="1" line="13" col="14" />
+		</case>
+		<case players="3">
+			<location player="0" line="01" col="02" />
+			<location player="1" line="01" col="14" />
+			<location player="2" line="13" col="02" />
+		</case>
+		<case players="4">
+			<location player="0" line="01" col="02" />
+			<location player="1" line="01" col="14" />
+			<location player="2" line="13" col="02" />
+			<location player="3" line="13" col="14" />
+		</case>
+	</locations>
+	
+	<items>
+		<item name="extrabomb" number="2" />
+		<item name="extraflame" number="2" />
+<!-- 
+		<item name="punch" number="1" />
+		<item name="goldenflame" number="10" />
+		<item name="kick" number="1" />
+		<item name="penetration" number="1" />
+		<item name="remotecontrol" number="1" />
+		<item name="throughwalls" number="5" />
+		<item name="throughbombs" number="3" />
+ -->		
+	</items>
+	
+</players>

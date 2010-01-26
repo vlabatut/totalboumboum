@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="resources/ai" path="resources/ai"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="resources/lib/jdom.jar" sourcepath="resources/lib/jdom-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.jdom.org/docs/apidocs"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="resources/lib/javaparser-1.0.7.jar" sourcepath="resources/lib/javaparser-1.0.7-src.zip"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

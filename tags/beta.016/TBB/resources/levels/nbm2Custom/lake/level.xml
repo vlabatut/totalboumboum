@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd" >
+
+	<title value="Lake zone" />
+	<author value="Vincent Labatut" />
+	<source value="Original" />
+	<preview file="preview.jpg" />
+
+	<instance name="nesbomberman2" />
+	<theme name="lake"/>
+
+	<globalDimension height="13" width="17" />
+	<visibleDimension height="13" width="15" />
+	<visiblePosition upLine="0" leftCol="1" />
+	<display forceAll="false" maximize="true" />
+		
+</level>
