@@ -847,6 +847,7 @@ public class Launcher
 	 * - Moteur :
 	 * 		- création d'une classe Instance pour gérer de façon plus pratique les feux/bombes/items
 	 *  	- généralisation du chargement des explosions (mutualisé plutot que de recommencer à chaque sprite)
+	 *  	- correction d'un bug dans le chargement des tournois simples
 	 * - GUI :
 	 * - IA :
 	 * 		- utilitaire permettant de controller les checkinterruptions dans les programmes des étudiants
@@ -1179,8 +1180,6 @@ public class Launcher
 	 *  	>> mise en cache mémoire au moins pour les joueurs ?
 	 *  all explosions should be loaded/stocked at the zone level, like fires and other general stuff
 	 */ 
-	
-	// pb a chargement d'un tournoi simple (ex qualif) : les joueurs apparaissent deux fois chacun !
 	
 	/*
 	 * TODO
