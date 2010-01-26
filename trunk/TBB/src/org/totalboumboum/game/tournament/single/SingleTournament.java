@@ -50,7 +50,7 @@ public class SingleTournament extends AbstractTournament
 
 	@Override
 	public void progress()
-	{	if(!isOver())
+	{	if(!isOver() && match.getProfiles().size()==0)
 		{	match.init(profiles);
 		}
 	}
