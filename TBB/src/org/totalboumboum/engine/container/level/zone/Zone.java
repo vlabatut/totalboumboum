@@ -80,6 +80,19 @@ public class Zone implements Serializable
 	{	return tiles;
 	}
 	
+	public ZoneTile getTile(int line, int col)
+	{	ZoneTile result = null;
+		
+		Iterator<ZoneTile> it = tiles.iterator();
+		while(result==null && it.hasNext())
+		{	ZoneTile temp = it.next();
+			if(temp.getLine()==line && temp.getCol()==col)
+				result = temp;
+		}
+		
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ZONE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
