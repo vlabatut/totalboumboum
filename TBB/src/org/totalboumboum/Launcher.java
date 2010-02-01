@@ -1083,13 +1083,9 @@ public class Launcher
 	 *	- GUI : 
 	 *  - tournois :
 	 *  	- championnat
-	 *  	- vidéos du tournoi
 	 *  - instances :
-	 *  	- que testent les niveaux utilisés dans les tournois ?
 	 *  
-	 *  x) tournoi (vidéo) + pas possible tête de série ni tournoi à 12
 	 *  x) utilitaire pour controler les IA des étudiants (partage 3/2)
-	 *  x) à quoi servent les niveaux
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1111,9 +1107,6 @@ public class Launcher
 	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
 	 * 		- renommer les packages des ia en fr.free.totalboumboum.ai.???? (faudra peut être renommer aussi les classes adapter)
 	 * 		- il faut gérer les chemins au niveau des pixels. les cases, c'est pas assez précis.
-	 * - qualification :
-	 * 		- plusieurs IA en même temps
-	 * 		- niveau avec plein de blocs contenant des bonus, pour voir s'ils perdent du temps à les ramasser
 	 * - définir une mesure factuelle (reposant sur des faits de jeu) évaluant l'agressivité des joueurs
 	 * 		- cible des bombes: rien, mur ou IA
 	 * 		- à pondérer avec le nombre de bombes posées par seconde (par ex)
@@ -1137,10 +1130,6 @@ public class Launcher
 	 *  	- possiblité de définir un tie-break random
 	 *  	- possibilité de définir un tie-break classement stats
 	 *  	- possibilité de définir des matches de classement optionnels (?)
-	 *  - tournoi AI : détourner le logo CL
-	 *  	- fond bleuté
-	 *  	- ballon étoilé >> bombe étoilée
-	 *  	- UEFA >> GSU
 	 *  
 	 *  - charger directement le format AI depuis le jeu permettrait de ne pas avoir à générer 50 images de couleurs différentes
 	 *  
@@ -1201,7 +1190,10 @@ public class Launcher
 	
 	/*
 	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
+	 * >> plus simplement: permettre de ne pas spécifier de valeur pour l'attribut = NONE
 	 */
 
 	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux
+	
+	// eval de projet: temps nécessaire pour éliminer l'adversaire de référence
 }

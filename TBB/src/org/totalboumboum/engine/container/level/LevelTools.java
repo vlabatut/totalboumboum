@@ -21,10 +21,23 @@ package org.totalboumboum.engine.container.level;
  * 
  */
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.engine.container.level.info.LevelInfo;
+import org.totalboumboum.engine.container.level.info.LevelInfoSaver;
+import org.totalboumboum.engine.container.level.players.Players;
+import org.totalboumboum.engine.container.level.players.PlayersSaver;
+import org.totalboumboum.engine.container.level.zone.Zone;
+import org.totalboumboum.engine.container.level.zone.ZoneSaver;
+import org.totalboumboum.engine.container.level.zone.ZoneTile;
+import org.totalboumboum.engine.container.theme.Theme;
+import org.totalboumboum.engine.player.PlayerLocation;
+import org.totalboumboum.gui.tools.GuiFileTools;
+import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 public class LevelTools
@@ -34,47 +47,71 @@ public class LevelTools
 	 * in order to help designing new levels
 	 */
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	//createClassicLevel(15,15,"temp","level",1);
+	{	createLevel(15,15,"temp","level",1);
 	}
-/*	
-	private static void createClassicLevel(int height, int width, String pack, String level, int border) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	// init
-		String folder = FileTools.getLevelsPath()+File.separator+pack+File.separator+level;
+		
+	private static void createLevel(int height, int width, String pack, String name, int border) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	{	// create folder
+		String folder = FilePaths.getLevelsPath()+File.separator+pack+File.separator+name;
 		File folderFile = new File(folder);
 		folderFile.mkdirs();
 		
-		// level file
-		LevelPreview levelPreview = new LevelPreview();
-		levelPreview.setAuthor("Vincent Labatut");
-		levelPreview.setForceAll(false);
-		levelPreview.setGlobalHeight(height);
-		levelPreview.setGlobalWidth(width);
-		levelPreview.setInstanceName("superbomberman1");
-		levelPreview.setMaximize(true);
-		levelPreview.setPreviewFile("preview.jpg");
-		levelPreview.setSource("original");
-		levelPreview.setThemeName("normal");
-		levelPreview.setTitle("New level");
+		// init level info
+		LevelInfo levelInfo = initLevelInfo(height, width, border);
+		LevelInfoSaver.saveLevelInfo(folder, levelInfo);
+		
+		// init zone
+		Zone zone = initZone(height,width,border);
+		ZoneSaver.saveZone(folder,zone);
+
+		// init players
+		Players players = initPlayers(height,width,border);
+		PlayersSaver.savePlayers(folder, players);
+		
+		// copy preview image
+		String originalPreview = GuiFileTools.getImagesPath()+File.separator+"preview.jpg";
+		String copy = folder+File.separator+levelInfo.getPreview();
+		FileTools.copyFile(originalPreview,copy);
+	}
+	
+	private static LevelInfo initLevelInfo(int height, int width, int border)
+	{	LevelInfo result = new LevelInfo();
+		
+		// misc data
+		result.setAuthor("[Author's name]");
+		result.setForceAll(false);
+		result.setGlobalHeight(height);
+		result.setGlobalWidth(width);
+		result.setMaximize(true);
+		result.setSource("original");
+		result.setTitle("[Level title]");
+		result.setInstance("superbomberman1");
+		result.setPreview("preview.jpg");
+		result.setTheme("normal");
+		
+		// dimensions
 		int visibleHeight = height;
 		if(border>0)
 			visibleHeight = height - 2*(border-1);
-		levelPreview.setVisibleHeight(visibleHeight);
+		result.setVisibleHeight(visibleHeight);
 		int visibleWidth = width;
 		if(border>0)
 			visibleWidth = width - 2*(border-1);
-		levelPreview.setVisibleWidth(visibleWidth);
+		result.setVisibleWidth(visibleWidth);
 		int visiblePositionLeftCol = 0;
 		if(border>0)
 			visiblePositionLeftCol = border - 1;
-		levelPreview.setVisiblePositionLeftCol(visiblePositionLeftCol);
+		result.setVisiblePositionLeftCol(visiblePositionLeftCol);
 		int visiblePositionUpLine = 0;
 		if(border>0)
 			visiblePositionUpLine = border - 1;
-		levelPreview.setVisiblePositionUpLine(visiblePositionUpLine);
-		LevelPreviewSaver.saveLevelPreview(folder,levelPreview);
-		
-		// fill zone
-		Zone zone = new Zone(width,height);
+		result.setVisiblePositionUpLine(visiblePositionUpLine);
+
+		return result;
+	}
+	
+	private static Zone initZone(int height, int width, int border)
+	{	Zone result = new Zone(width,height);
 		for(int line=0;line<height;line++)
 		{	for(int col=0;col<width;col++)
 			{	ZoneTile tile = new ZoneTile(line,col);
@@ -94,14 +131,16 @@ public class LevelTools
 					// else put a softwall
 					tile.setBlock(Theme.DEFAULT_GROUP+Theme.GROUP_SEPARATOR+"softwall");
 				// add to zone	
-				zone.addTile(tile);
+				result.addTile(tile);
 			}
-		}		
-		// save zone
-		ZoneSaver.saveZone(folder,zone);
+		}
 		
-		// players file
-		Players players = new Players();
+		return result;
+	}
+
+	private static Players initPlayers(int height, int width, int border)
+	{	Players result = new Players();
+		
 		// locations
 		for(int i=1;i<=4;i++)
 		{	PlayerLocation[] loc = new PlayerLocation[i];
@@ -131,17 +170,20 @@ public class LevelTools
 				loc[j].setCol(col);
 				loc[j].setNumber(j);
 			}
-			players.addLocation(loc);
+			result.addLocation(loc);
 		}
+		
 		// items
 		for(int i=0;i<3;i++)
-			players.addInitialItem("extrabomb");
+			result.addInitialItem("extrabomb");
 		for(int i=0;i<3;i++)
-			players.addInitialItem("extraflame");
-		// save players file
-		PlayersSaver.savePlayers(folder,players);
+			result.addInitialItem("extraflame");
 		
-		// create image
+		return result;
 	}
-	*/
+	
+	private static void setBackground(int backgroundHeight, int backgroundWidth)
+	{
+		
+	}
 }
