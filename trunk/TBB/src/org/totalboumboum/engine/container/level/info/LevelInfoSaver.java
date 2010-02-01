@@ -34,7 +34,7 @@ import org.xml.sax.SAXException;
 
 public class LevelInfoSaver
 {	
-	public static void saveLevelPreview(String folder, LevelInfo levelInfo) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	public static void saveLevelInfo(String folder, LevelInfo levelInfo) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// build document
 		Element root = saveLevelElement(levelInfo);	
 		
