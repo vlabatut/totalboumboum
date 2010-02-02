@@ -23,6 +23,7 @@ package org.totalboumboum.engine.container.level.players;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.totalboumboum.engine.player.PlayerLocation;
 
@@ -41,6 +42,21 @@ public class Players implements Serializable
 
 	public HashMap<Integer, PlayerLocation[]> getLocations()
 	{	return locations;	
+	}
+	
+	public boolean isOccupied(int line, int col)
+	{	boolean result = false;
+		Iterator<PlayerLocation[]> it = locations.values().iterator();
+		while(!result && it.hasNext())
+		{	PlayerLocation[] temp = it.next();
+			int i = 0;
+			while(!result && i<temp.length)
+			{	PlayerLocation pl = temp[i];
+				result = pl.getLine()==line && pl.getCol()==col;
+				i++;
+			}
+		}
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
