@@ -23,21 +23,20 @@ package org.totalboumboum.engine.container.level;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.hollow.HollowLevelSaver;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
-import org.totalboumboum.engine.container.level.info.LevelInfoSaver;
 import org.totalboumboum.engine.container.level.players.Players;
-import org.totalboumboum.engine.container.level.players.PlayersSaver;
 import org.totalboumboum.engine.container.level.zone.Zone;
-import org.totalboumboum.engine.container.level.zone.ZoneSaver;
 import org.totalboumboum.engine.container.level.zone.ZoneTile;
 import org.totalboumboum.engine.container.theme.Theme;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.gui.tools.GuiFileTools;
+import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
@@ -49,8 +48,17 @@ public class LevelTools
 	 * in order to help designing new levels
 	 */
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	HollowLevel level = initLevel(15,15,"superbomberman1","normal");
+	{	HollowLevel level = initLevel(15,15,"superbomberman1","tournament3");
+		setBackground(level);
+		addGrid(level);
 		addBorder(level,2,1,1,1);
+		addSoftwalls(level);
+		insertCol(level,0,true,true,true,true,true);
+		insertLine(level,0,true,true,true,true,true);
+		insertCol(level,level.getLevelInfo().getGlobalWidth()/2,true,true,true,true,true);
+		insertLine(level,level.getLevelInfo().getGlobalHeight()/2,true,true,true,true,true);
+		insertCol(level,level.getLevelInfo().getGlobalWidth()-1,true,true,true,true,true);
+		insertLine(level,level.getLevelInfo().getGlobalHeight()-1,true,true,true,true,true);
 		saveLevel(level,"temp","level");
 	}
 		
@@ -203,40 +211,226 @@ public class LevelTools
 	/**
 	 * set a background on the floor, without changing anything else in the level structure
 	 */
-	private static void setBackground()
-	{	
+	private static void setBackground(HollowLevel hollowLevel)
+	{	// init
+		LevelInfo levelInfo = hollowLevel.getLevelInfo();
+		String instance = levelInfo.getInstance();
+		String theme = levelInfo.getTheme();
+		String path = FilePaths.getInstancesPath()+File.separator+instance+File.separator+FileNames.FOLDER_THEMES+File.separator+theme+File.separator+"floors";
+		File folder = new File(path);
 		
-	}
-	
-	
-
-	
-	
-	private static Zone initZone(int height, int width, int border)
-	{	Zone result = new Zone(width,height);
-		for(int line=0;line<height;line++)
-		{	for(int col=0;col<width;col++)
-			{	ZoneTile tile = new ZoneTile(line,col);
-				// floor
-				tile.setFloor("regular");
-				// block
-				if(line<border || line>=height-border || col<border || col>=width-border)
-					// build the border
-					tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");				
-				else if(line==border || line==height-border-1 || col==border || col==width-border-1)
-					// fill the borderline with softwalls
-					tile.setBlock(Theme.DEFAULT_GROUP+Theme.GROUP_SEPARATOR+"softwall");
-				else if((col-border)%2==1 && (line-border)%2==1)
-					// put a block if it fits the regular pattern
-					tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");				
-				else
-					// else put a softwall
-					tile.setBlock(Theme.DEFAULT_GROUP+Theme.GROUP_SEPARATOR+"softwall");
-				// add to zone	
-				result.addTile(tile);
+		// process bg dimensions
+		int bgWidth = -1;
+		int bgHeight = -1;
+		File[] files = folder.listFiles();
+		for(File f: files)
+		{	if(f.isDirectory())
+			{	String[] temp = f.getName().split("_");
+				if(temp.length==2)
+				{	try
+					{	int line = Integer.parseInt(temp[0]);
+						if(line>bgHeight)
+							bgHeight = line;
+						int col = Integer.parseInt(temp[1]);
+						if(col>bgWidth)
+							bgWidth = col;
+					}
+					catch(NumberFormatException e)
+					{	//
+					}
+				}
 			}
 		}
+		bgWidth++;
+		bgHeight++;
 		
-		return result;
+		// process bg upper-left corner
+		int height = levelInfo.getVisibleHeight();
+		int yCenter = levelInfo.getVisiblePositionUpLine()+height/2;
+		int bgUp = yCenter - bgHeight/2;
+		int width = levelInfo.getVisibleWidth();
+		int xCenter = levelInfo.getVisiblePositionLeftCol()+width/2;
+		int bgLeft = xCenter - bgWidth/2;
+		
+		// setting the appropriate floors
+		Zone zone = hollowLevel.getZone();
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(0);
+		nf.setMinimumIntegerDigits(2);
+		for(int line=0;line<bgHeight;line++)
+		{	for(int col=0;col<=bgWidth;col++)
+			{	ZoneTile tile = zone.getTile(bgUp+line,bgLeft+col);
+				String floorName = nf.format(line)+"_"+nf.format(col);
+				File tempFile = new File(path+File.separator+floorName);
+				if(tempFile.exists())
+					tile.setFloor(floorName);
+			}
+		}
+	}
+	
+	/**
+	 * add the traditional grid structure to an empty level
+	 * i.e. hardwall on 1 column/line out of 2
+	 */
+	private static void addGrid(HollowLevel hollowLevel)
+	{	// init
+		LevelInfo levelInfo = hollowLevel.getLevelInfo();
+		int height = levelInfo.getVisibleHeight();
+		int yCenter = levelInfo.getVisiblePositionUpLine()+height/2;
+		int width = levelInfo.getVisibleWidth();		
+		int xCenter = levelInfo.getVisiblePositionLeftCol()+width/2;
+		Zone zone = hollowLevel.getZone();
+		
+		// put hardwalls
+		for(int line=0;line<height;line++)
+		{	if(line%2==yCenter%2)
+			{	for(int col=0;col<width;col++)
+				{	if(col%2==xCenter%2)
+					{	ZoneTile tile = zone.getTile(line,col);
+						tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");				
+					}
+				}
+			}
+		}		
+	}
+
+	private static void addSoftwalls(HollowLevel hollowLevel)
+	{	// init
+		LevelInfo levelInfo = hollowLevel.getLevelInfo();
+		int height = levelInfo.getVisibleHeight();
+		int width = levelInfo.getVisibleWidth();		
+		Zone zone = hollowLevel.getZone();
+		Players players = hollowLevel.getPlayers();
+		
+		// put hardwalls
+		for(int line=0;line<height;line++)
+		{	for(int col=0;col<width;col++)
+			{	if(!players.isOccupied(line,col)
+					&& !players.isOccupied(line-1,col)
+					&& !players.isOccupied(line+1,col)
+					&& !players.isOccupied(line,col-1)
+					&& !players.isOccupied(line,col-1))
+				{	ZoneTile tile = zone.getTile(line,col);
+					if(tile.getBlock()==null)
+						tile.setBlock(Theme.DEFAULT_GROUP+Theme.GROUP_SEPARATOR+"softwall");
+				}
+			}
+		}		
+	}
+	
+	private static void insertLine(HollowLevel hollowLevel, int line, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
+	{	// update dimensions
+		LevelInfo levelInfo = hollowLevel.getLevelInfo();
+		int height = levelInfo.getGlobalHeight() + 1;
+		levelInfo.setGlobalHeight(height);
+		int width = levelInfo.getGlobalWidth() + 1;
+		int vHeight = levelInfo.getVisibleHeight();
+		int vUpLine = levelInfo.getVisiblePositionUpLine();
+		if(line>=vUpLine && line<=vUpLine+vHeight)
+			levelInfo.setVisibleHeight(vHeight + 1);
+		else if(line<vUpLine)
+			levelInfo.setVisiblePositionUpLine(vUpLine+1);
+		
+		// update zone
+		Zone zone = hollowLevel.getZone();
+		// add new line
+		for(int c=0;c<width;c++)
+		{	ZoneTile tile = new ZoneTile(height-1,c);			
+			zone.addTile(tile);
+		}
+		// move existing lines
+		for(int l=height-1;l>line;l--)
+		{	for(int c=0;c<width;c++)
+			{	ZoneTile tile1 = zone.getTile(l,c);
+				ZoneTile tile2 = zone.getTile(l-1,c);
+				if(moveFloors)
+					tile1.setFloor(tile2.getFloor());
+				if(moveBlocks)
+					tile1.setBlock(tile2.getBlock());
+				if(moveBombs)
+					tile1.setBomb(tile2.getBomb());
+				if(moveItems)
+					tile1.setItem(tile2.getItem());
+				if(moveVariables)
+					tile1.setVariable(tile2.getVariable());
+			}
+		}
+		// reinit line "line"
+		for(int c=0;c<width;c++)
+		{	ZoneTile tile = zone.getTile(line,c);
+			tile.setFloor("regular");
+			tile.setBlock(null);
+			tile.setBomb(null);
+			tile.setItem(null);
+			tile.setVariable(null);
+		}
+		
+		// update players
+		Players players = hollowLevel.getPlayers();
+		for(PlayerLocation[] pls: players.getLocations().values())
+		{	for(PlayerLocation pl: pls)
+			{	int temp = pl.getLine();
+				if(line<=temp)
+					pl.setLine(temp+1);
+			}
+		}
+	}
+
+	private static void insertCol(HollowLevel hollowLevel, int col, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
+	{	// update dimensions
+		LevelInfo levelInfo = hollowLevel.getLevelInfo();
+		int height = levelInfo.getGlobalHeight() + 1;
+		int width = levelInfo.getGlobalWidth() + 1;
+		levelInfo.setGlobalWidth(width);
+		int vWidth = levelInfo.getVisibleWidth();
+		int vLeftCol = levelInfo.getVisiblePositionLeftCol();
+		if(col>=vLeftCol && col<=vLeftCol+vWidth)
+			levelInfo.setVisibleWidth(vWidth + 1);
+		else if(col<vLeftCol)
+			levelInfo.setVisiblePositionLeftCol(vLeftCol+1);
+		
+		// update zone
+		Zone zone = hollowLevel.getZone();
+		// add new col
+		for(int l=0;l<height;l++)
+		{	ZoneTile tile = new ZoneTile(l,width-1);			
+			zone.addTile(tile);
+		}
+		// move existing columns
+		for(int c=width-1;c>col;c--)
+		{	for(int l=0;l<height;l++)
+			{	ZoneTile tile1 = zone.getTile(l,c);
+				ZoneTile tile2 = zone.getTile(l,c-1);
+				if(moveFloors)
+					tile1.setFloor(tile2.getFloor());
+				if(moveBlocks)
+					tile1.setBlock(tile2.getBlock());
+				if(moveBombs)
+					tile1.setBomb(tile2.getBomb());
+				if(moveItems)
+					tile1.setItem(tile2.getItem());
+				if(moveVariables)
+					tile1.setVariable(tile2.getVariable());
+			}
+		}
+		// reinit column "col"
+		for(int l=0;l<height;l++)
+		{	ZoneTile tile = zone.getTile(l,col);
+			tile.setFloor("regular");
+			tile.setBlock(null);
+			tile.setBomb(null);
+			tile.setItem(null);
+			tile.setVariable(null);
+		}
+		
+		// update players
+		Players players = hollowLevel.getPlayers();
+		for(PlayerLocation[] pls: players.getLocations().values())
+		{	for(PlayerLocation pl: pls)
+			{	int temp = pl.getCol();
+				if(col<=temp)
+					pl.setCol(temp+1);
+			}
+		}
 	}
 }

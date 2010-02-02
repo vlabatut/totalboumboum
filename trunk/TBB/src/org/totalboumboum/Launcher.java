@@ -984,6 +984,8 @@ public class Launcher
 	 * 		  utile par exemple pour déterminer le nombre de fois qu'un bloc repousse (plutot que de le fixer dans le fichier XML), 
 	 * 		  ou la panne d'une bombe (plutot que de le faire pdt le jeu, et sans utiliser d'ablts spéciales)
 	 * 
+	 * - Niveaux
+	 * 		- outil pour découper une image (background) en nxm floors
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1084,6 +1086,7 @@ public class Launcher
 	 *  - tournois :
 	 *  	- championnat
 	 *  - instances :
+	 *  	- outils d'édition des niveaux
 	 *  
 	 *  x) utilitaire pour controler les IA des étudiants (partage 3/2)
 	 */
@@ -1178,16 +1181,6 @@ public class Launcher
 	 *  - va y avoir un pb dans le finish des sprites et autres objets liés à l'instance... : il n'existeront plus, donc on ne pourra plus les utiliser
 	 */
 		
-	/* transformer les fonctions d'édition/génération de niveau en un utilitaire basique
-	 * rajouter des fonction pour 
-	 * 	- insérer/supprimer des lignes
-	 * 	- mettre une bordure
-	 *  - mettre un fond avec des sols
-	 *  - décaller le sol/les blocs/les items/les bombes/les variables
-	 *  
-	 *  - découper une image en nxm floors
-	 */
-	
 	/*
 	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
 	 * >> plus simplement: permettre de ne pas spécifier de valeur pour l'attribut = NONE
