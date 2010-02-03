@@ -27,7 +27,6 @@ import java.util.Map.Entry;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
-
 public class GesturePack implements Serializable
 {	private static final long serialVersionUID = 1L;
 
@@ -142,6 +141,13 @@ public class GesturePack implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// CACHE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public long getMemSize()
+	{	long result = 0;
+		for(Gesture g: gestures.values())
+			result = result + g.getMemSize();
+		return result;		
+	}
+	
 	public GesturePack cacheCopy(double zoomFactor)
 	{	GesturePack result = new GesturePack();
 		

@@ -21,12 +21,22 @@ package org.totalboumboum.engine.container.theme;
  * 
  */
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.engine.EngineConfiguration;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
@@ -45,14 +55,8 @@ public class ThemeLoader
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_THEME+FileNames.EXTENSION_XML);
 		Theme result = null;
 		
-		// opening
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		// loading
-		result = loadThemeElement(root,individualFolder);
-		
-		
-/*		// caching
-		String cachePath = FileTools.getCacheThemesPath()+ File.separator;
+		// caching
+		String cachePath = FilePaths.getCacheThemesPath()+ File.separator;
 		File cacheFolder = new File(cachePath);
 		cacheFolder.mkdirs();
 		File objectFile = dataFile.getParentFile();
@@ -60,7 +64,7 @@ public class ThemeLoader
 		File packFile = objectFile.getParentFile().getParentFile();
 		String packName = packFile.getName();
 		String cacheName = packName+"_"+objectName;
-		cachePath = cachePath + cacheName +FileTools.EXTENSION_DATA;
+		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getMemoryCache(cacheName);
@@ -111,7 +115,7 @@ public class ThemeLoader
 				result = result.cacheCopy(zoomFactor);
 			}
 		}
-*/		
+		
 		return result;
     }
 

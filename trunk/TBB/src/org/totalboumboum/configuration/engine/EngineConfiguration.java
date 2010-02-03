@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -95,7 +96,10 @@ public class EngineConfiguration
 	/////////////////////////////////////////////////////////////////
 	private boolean fileCache = false;
 	private boolean memoryCache = false;
-	private HashMap<String,Object> cache = new HashMap<String,Object>();
+	private HashMap<String,Cachable> cache = new HashMap<String,Cachable>();
+	private LinkedList<String> cacheNames = new LinkedList<String>();
+	private long cacheSize = 0;
+	private long cacheLimit = 128*1024*1024;
 	
 	public boolean getFileCache()
 	{	return fileCache;
@@ -110,11 +114,36 @@ public class EngineConfiguration
 	public void setMemoryCache(boolean memoryCache)
 	{	this.memoryCache = memoryCache;
 	}
-	public void addMemoryCache(String key, Object value)
-	{	cache.put(key,value);		
+	public void addMemoryCache(String key, Cachable value)
+	{	// possibly erase some existing objects
+		while(cacheSize>cacheLimit)
+		{	// erase older object
+			String older = cacheNames.poll();
+			Cachable temp = cache.get(older);
+			cacheSize = cacheSize - temp.getMemSize();
+			
+			// garbage collect
+			Runtime rt = Runtime.getRuntime();
+			rt.gc(); 
+		}
+
+		// put new object
+		cache.put(key,value);
+		cacheNames.offer(key);
+		cacheSize = cacheSize + value.getMemSize();
 	}
-	public Object getMemoryCache(String key)
+	public Cachable getMemoryCache(String key)
 	{	return cache.get(key);	
+	}
+	public void clearMemoryCache()
+	{	// erase all objects
+		cache.clear();
+		cacheNames.clear();
+		cacheSize = 0;
+		
+		// garbage collect
+		Runtime rt = Runtime.getRuntime();
+		rt.gc(); 
 	}
 
 	/////////////////////////////////////////////////////////////////

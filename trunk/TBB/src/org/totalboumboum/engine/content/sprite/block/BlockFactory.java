@@ -28,7 +28,6 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 
-
 public class BlockFactory extends SpriteFactory<Block>
 {	private static final long serialVersionUID = 1L;
 	
@@ -97,7 +96,7 @@ public class BlockFactory extends SpriteFactory<Block>
 
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 /*	public BlockFactory cacheCopy(double zoomFactor)
 	{	BlockFactory result = new BlockFactory();
 		

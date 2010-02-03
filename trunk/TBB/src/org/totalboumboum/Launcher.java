@@ -1136,22 +1136,10 @@ public class Launcher
 	 *  
 	 *  - charger directement le format AI depuis le jeu permettrait de ne pas avoir à générer 50 images de couleurs différentes
 	 *  
-	 *  - définir un système permettant de charger uniquement les sprites nécessaires (zone, items, bombes)
-	 *  	> n'est ce pas incompatible avec la mise en cache ?
-	 *  
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
 	 *  	- forcer la fin de la période (now)
-	 *  - optimisation du chargement :
-	 *  	- pas la peine de charger un niveau déjà en mémoire
-	 *  	- sprites ds persos à charger une seule fois lors du premier round d'un match
-	 *  	>> ouais mais pb d'échelle ! et charger en taille originale risque d'occuper trop de mémoire
-	 *  	>> p-ê charger et enregistrer dans fichier temp comme des objets java ? chargement devrait être plus rapide, à voir !
-	 *  	   mettre une option dans les options avancées pour forcer le rechargement ("cache sprites"), pour le débug
-	 *  	>> deux types de caches, en fait : (les deux sont indépendents)
-	 *  		- cache DD avec des objets java sérialisés
-	 *  		- cache mémoire avec les objets déjà chargés et à taille réelle. y a juste à les mettre à l'échelle
 	 *  - instance TBB
 	 *  	- autoriser un burning player à poser une dernière bombe...
 	 *  	- bombe sensible aux chocs : en forme d'oeuf
@@ -1164,23 +1152,26 @@ public class Launcher
 	 *  		- elles ne tuent pas, elles contaminent. 
 	 *  		- le contaminateur initial est résistant
 	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
-	 *  
-	 *  cache :
-	 *  	- pb de mise à l'échelle
-	 *  	- pb de ralentissement du jeu sur la mise en cache
-	 *  	- pas plus rapide que normal (clairement ! mais à mesurer avec jprofiler)
-	 *  	>> mise en cache mémoire au moins pour les joueurs ?
-	 *  all explosions should be loaded/stocked at the zone level, like fires and other general stuff
 	 */ 
 	
-	/*
-	 * TODO
-	 *  - pour tous ces trucs généraux, p-ê ne charger que ceux dont on a besoin :
-	 *  	- si déjà chargé, on utilise
-	 *  	- sinon on charge et on stocke dans l'accès statique
-	 *  - va y avoir un pb dans le finish des sprites et autres objets liés à l'instance... : il n'existeront plus, donc on ne pourra plus les utiliser
+	/**
+	 * CACHE
+	 *  	- options :
+	 *  		- (dés)activer + vider cache mémoire
+	 *  		- (dés)activer + vider cache fichier
+	 *  	- problèmes :
+	 *  		- pb de mise à l'échelle avec le cache fichier
+	 *  		- pb de ralentissement du jeu sur la mise en cache fichier
+	 *  		- cache fichier pas plus rapide que chargement normal (clairement ! mais à mesurer avec jprofiler)
+	 *  		- finish des sprites et autres objets liés à l'instance... : 
+	 *  			il n'existeront plus, donc on ne pourra plus les utiliser
+	 *  			>> en fait non, puisqu'il s'agira de copies des objets cachés
+	 *  		- certaines classes comme Explosionset sont à sérializer, ce me semble
+	 *  	- à voir :
+	 *  		- cacher les niveaux (style hollowlevel)
 	 */
-		
+	
+	
 	/*
 	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
 	 * >> plus simplement: permettre de ne pas spécifier de valeur pour l'attribut = NONE

@@ -30,7 +30,6 @@ import java.util.Iterator;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 
-
 public class AnimeDirection implements Serializable
 {	private static final long serialVersionUID = 1L;
 
@@ -208,6 +207,13 @@ public class AnimeDirection implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// CACHE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	public long getMemSize()
+	{	long result = 0;
+		for(AnimeStep s: steps)
+			result = result + s.getMemSize();
+		return result;		
+	}
+	
 /*
 	public AnimeDirection copy(ArrayList<BufferedImage> images, ArrayList<BufferedImage> copyImages)
 	{	AnimeDirection result = new AnimeDirection();

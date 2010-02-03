@@ -373,12 +373,15 @@ public class AnimesLoader
     		duration = Integer.parseInt(attribute.getValue());
     	
     	// image
-    	BufferedImage img = null;    	
+    	BufferedImage img = null;
+    	long imgSize = 0;
     	attribute = root.getAttribute(XmlTools.FILE);
     	if(attribute!=null)
     	{	String strImage = attribute.getValue().trim();
     		String imgPath = filePath+File.separator+strImage;
     		img = loadImage(imgPath,images,colormap,zoom);
+    		File file = new File(imgPath);
+    		imgSize = file.length();
     	}
 		
     	// horizontal shift
@@ -397,11 +400,14 @@ public class AnimesLoader
 		
 		// shadow
 		attribute = root.getAttribute(XmlTools.SHADOW);
+    	long shadowSize = 0;
 		if(attribute!=null)
 		{	shadow = shadows.get(attribute.getValue().trim());
 			if(shadow==null)
 			{	String imgPath = filePath+File.separator+attribute.getValue().trim();
 				shadow = loadImage(imgPath,images,colormap,zoom);
+	    		File file = new File(imgPath);
+				shadowSize = file.length();
 			}
 		}
 		
@@ -426,10 +432,10 @@ public class AnimesLoader
 		
 		// anime
 		result.setDuration(duration);
-		result.setImage(img);
+		result.setImage(img,imgSize);
 		result.setXShift(xShift);
 		result.setYShift(yShift);
-		result.setShadow(shadow);
+		result.setShadow(shadow,shadowSize);
 		result.setShadowXShift(shadowXShift);
 		result.setShadowYShift(shadowYShift);
 		result.setBoundYShift(boundYShift);

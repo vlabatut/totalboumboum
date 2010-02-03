@@ -28,11 +28,11 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.engine.Cachable;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.xml.sax.SAXException;
 
-
-public class FiresetMap implements Serializable
+public class FiresetMap implements Serializable, Cachable
 {	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
@@ -79,6 +79,16 @@ public class FiresetMap implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public long getMemSize()
+	{	long result = 0;
+		
+		// firesets
+		for(Fireset fs: firesets.values())
+			result = result + fs.getMemSize();
+		
+		return result;
+	}
+
 /*	public FiresetMap cacheCopy(double zoomFactor, Instance instance)
 	{	FiresetMap result = new FiresetMap(instance);
 	
