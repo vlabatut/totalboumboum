@@ -29,6 +29,7 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.engine.Cachable;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.block.Block;
@@ -38,7 +39,7 @@ import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
 import org.xml.sax.SAXException;
 
 
-public class Theme implements Serializable
+public class Theme implements Serializable, Cachable
 {	private static final long serialVersionUID = 1L;
 
 	public static final String DEFAULT_GROUP = "default";
@@ -190,6 +191,20 @@ if(bf==null)
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public long getMemSize()
+	{	long result = 0;
+		
+		// blocks
+		for(BlockFactory bf: blocks.values())
+			result = result + bf.getMemSize();
+		
+		// floors
+		for(FloorFactory ff: floors.values())
+			result = result + ff.getMemSize();
+		
+		return result;
+	}
+	
 /*	public Theme cacheCopy(double zoomFactor)
 	{	Theme result = new Theme();
 	

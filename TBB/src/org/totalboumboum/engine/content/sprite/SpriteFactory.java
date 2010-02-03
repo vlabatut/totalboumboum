@@ -46,7 +46,6 @@ import org.totalboumboum.engine.content.manager.modulation.ModulationManager;
 import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 import org.xml.sax.SAXException;
 
-
 public abstract class SpriteFactory<T extends Sprite> implements Serializable
 {	private static final long serialVersionUID = 1L;
 
@@ -203,6 +202,15 @@ if(bombset==null)
 	
 	public void setAbilities(ArrayList<AbstractAbility> abilities)
 	{	this.abilities = abilities;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public long getMemSize()
+	{	long result = 0;
+		result = result + gesturePack.getMemSize();
+		return result;		
 	}
 
 	/////////////////////////////////////////////////////////////////

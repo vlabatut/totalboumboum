@@ -28,15 +28,14 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.engine.Cachable;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
 import org.xml.sax.SAXException;
 
-
-
-public class Itemset
+public class Itemset implements Cachable
 {	
 	public Itemset()
 	{	
@@ -99,6 +98,16 @@ if(itemFactory==null)
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public long getMemSize()
+	{	long result = 0;
+		
+		// items
+		for(ItemFactory ifact: itemFactories.values())
+			result = result + ifact.getMemSize();
+		
+		return result;
+	}
+
 /*	public Itemset cacheCopy(double zoomFactor)
 	{	Itemset result = new Itemset();
 	

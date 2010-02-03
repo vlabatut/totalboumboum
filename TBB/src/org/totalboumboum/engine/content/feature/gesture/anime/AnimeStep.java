@@ -47,14 +47,16 @@ public class AnimeStep implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// IMAGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private transient long imageSize = 0;
 	private transient BufferedImage image;
 
 	public BufferedImage getImage()
 	{	return image;
 	}
 	
-	public void setImage(BufferedImage image)
+	public void setImage(BufferedImage image, long size)
 	{	this.image = image;
+		this.imageSize = size;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -95,14 +97,16 @@ public class AnimeStep implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// SHADOW			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private transient long shadowSize = 0;
 	private transient BufferedImage shadow;
 
 	public boolean hasShadow()
 	{	return shadow != null;
 	}
 	
-	public void setShadow(BufferedImage shadow)
+	public void setShadow(BufferedImage shadow, long size)
 	{	this.shadow = shadow;
+		this.shadowSize = size;
 	}
 	
 	public BufferedImage getShadow()
@@ -177,7 +181,7 @@ public class AnimeStep implements Serializable
 	{	AnimeStep result = new AnimeStep();
 		
 		// image
-		result.setImage(image);
+		result.setImage(image,imageSize);
 		
 		// duration
 		result.setDuration(duration);
@@ -187,7 +191,7 @@ public class AnimeStep implements Serializable
 		result.setYShift(yShift);
 		
 		// shadow
-		result.setShadow(shadow);
+		result.setShadow(shadow,shadowSize);
 		result.setShadowXShift(shadowXShift);
 		result.setShadowYShift(shadowYShift);
 		
@@ -258,8 +262,14 @@ public class AnimeStep implements Serializable
 	}
 */
 	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public long getMemSize()
+	{	long result = 0;
+		result = imageSize + shadowSize;
+		return result;
+	}
+	
 	public AnimeStep cacheCopy(double zoom, HashMap<BufferedImage,BufferedImage> imgs)
 	{	AnimeStep result = new AnimeStep();
 		
@@ -270,7 +280,7 @@ public class AnimeStep implements Serializable
 			{	copyImg = ImageTools.resize(image,zoom,Configuration.getVideoConfiguration().getSmoothGraphics());
 				imgs.put(image,copyImg);
 			}
-			result.setImage(copyImg);
+			result.setImage(copyImg,Math.round(Math.pow(zoom,2)*imageSize));
 		}
 		
 		// duration
@@ -287,7 +297,7 @@ public class AnimeStep implements Serializable
 			{	copyImg = ImageTools.resize(shadow,zoom,Configuration.getVideoConfiguration().getSmoothGraphics());
 				imgs.put(shadow,copyImg);
 			}
-			result.setShadow(copyImg);
+			result.setShadow(copyImg,Math.round(Math.pow(zoom,2)*shadowSize));
 		}
 		result.shadowXShift = shadowXShift*zoom;
 		result.shadowYShift = shadowYShift*zoom;

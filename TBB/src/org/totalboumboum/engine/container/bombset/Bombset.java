@@ -37,7 +37,6 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.xml.sax.SAXException;
 
-
 public class Bombset implements Serializable
 {	private static final long serialVersionUID = 1L;
 
@@ -176,8 +175,18 @@ public class Bombset implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public long getMemSize()
+	{	long result = 0;
+		
+		// bombs
+		for(BombFactory bf: bombFactories)
+			result = result + bf.getMemSize();
+		
+		return result;
+	}
+
 	/*
 	 * the Bombset has already been copied/loaded, so it is taken from the level
 	 */

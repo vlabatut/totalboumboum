@@ -34,7 +34,6 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.fire.FireFactory;
 import org.xml.sax.SAXException;
 
-
 public class Fireset
 {	
 	public Fireset()
@@ -113,6 +112,16 @@ if(fireFactory==null)
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public long getMemSize()
+	{	long result = 0;
+		
+		// fires
+		for(FireFactory ff: fireFactories.values())
+			result = result + ff.getMemSize();
+		
+		return result;
+	}
+
 /*	public Fireset cacheCopy(double zoomFactor)
 	{	Fireset result = new Fireset();
 	

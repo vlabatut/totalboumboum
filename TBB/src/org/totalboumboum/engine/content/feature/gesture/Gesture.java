@@ -43,7 +43,6 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulati
 import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-
 public class Gesture implements Serializable
 {	private static final long serialVersionUID = 1L;
 
@@ -293,6 +292,13 @@ public class Gesture implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// CACHE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public long getMemSize()
+	{	long result = 0;
+		for(AnimeDirection d: animes.values())
+			result = result + d.getMemSize();
+		return result;		
+	}
+	
 	public Gesture cacheCopy(double zoomFactor, double scale)
 	{	Gesture result = new Gesture();
 		double zoom = zoomFactor/scale;

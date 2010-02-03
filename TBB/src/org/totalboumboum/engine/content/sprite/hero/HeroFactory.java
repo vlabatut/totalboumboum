@@ -23,13 +23,13 @@ package org.totalboumboum.engine.content.sprite.hero;
 
 import java.util.HashMap;
 
+import org.totalboumboum.configuration.engine.Cachable;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 
-
-public class HeroFactory extends SpriteFactory<Hero>
+public class HeroFactory extends SpriteFactory<Hero> implements Cachable
 {	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
