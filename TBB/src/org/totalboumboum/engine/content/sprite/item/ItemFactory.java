@@ -161,9 +161,10 @@ public class ItemFactory extends SpriteFactory<Item>
 		result.base = base;
 		result.name = name;
 		
-		// item abilities
+		// item specific data
 		result.itemAbilities = itemAbilities;
 		result.itemProbabilities = itemProbabilities;
+		result.itemName = itemName;
 		
 		// abilities
 		result.setAbilities(abilities);

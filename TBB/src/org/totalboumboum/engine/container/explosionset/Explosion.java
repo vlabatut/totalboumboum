@@ -43,7 +43,7 @@ public class Explosion implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Instance instance = null;
+	private transient Instance instance = null;
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
@@ -70,8 +70,8 @@ public class Explosion implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// FIRESET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	Fireset fireset = null;
-	String firesetName = null;
+	private transient Fireset fireset = null;
+	private String firesetName = null;
 	
 	public void setFiresetName(String firesetName)
 	{	this.firesetName = firesetName;	
