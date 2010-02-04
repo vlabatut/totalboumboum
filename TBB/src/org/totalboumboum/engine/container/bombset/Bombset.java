@@ -28,6 +28,7 @@ import java.util.Iterator;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.engine.Cachable;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -37,7 +38,7 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.xml.sax.SAXException;
 
-public class Bombset implements Serializable
+public class Bombset implements Serializable, Cachable
 {	private static final long serialVersionUID = 1L;
 
 	public Bombset()
@@ -193,17 +194,17 @@ public class Bombset implements Serializable
 /*	public Bombset cacheCopy()
 	{	Bombset result = RoundVariables.level.getBombset();
 		return result;
-	}
+	}*/
 	public Bombset cacheCopy(double zoomFactor)
 	{	Bombset result = new Bombset();
 		for(int i=0;i<bombFactories.size();i++)
-		{	BombFactory bf = bombFactories.get(i).cacheCopy(zoomFactor,result);
+		{	BombFactory bf = bombFactories.get(i).cacheCopy(zoomFactor);
 			ArrayList<StateAbility> ra = requiredAbilities.get(i);
 			result.addBombFactory(bf,ra);
 		}
 		return result;
 	}
-*/	
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -25,6 +25,7 @@ import java.util.HashMap;
 
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 
@@ -144,7 +145,7 @@ public class BombFactory extends SpriteFactory<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-/*	public BombFactory cacheCopy(double zoomFactor, Bombset bs)
+	public BombFactory cacheCopy(double zoomFactor)
 	{	BombFactory result = new BombFactory(bombName);
 		
 		// misc
@@ -155,18 +156,15 @@ public class BombFactory extends SpriteFactory<Bomb>
 		result.setAbilities(abilities);
 		
 		// bombset
-		result.setBombset(bs);
+		result.setBombsetColor(bombsetColor);
 		
 		// explosion
-		if(explosion!=null)
-		{	Explosion explosionCopy = explosion.cacheCopy();
-			result.setExplosion(explosionCopy);
-		}
+		result.setExplosionName(explosionName);
 		
 		// gestures
 		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
 		result.setGesturePack(gesturePackCopy);
 
 		return result;
-	}*/
+	}
 }

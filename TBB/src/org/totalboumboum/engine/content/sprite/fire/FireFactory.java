@@ -23,12 +23,11 @@ package org.totalboumboum.engine.content.sprite.fire;
 
 import java.util.HashMap;
 
-import org.totalboumboum.engine.container.fireset.Fireset;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
-
 
 public class FireFactory extends SpriteFactory<Fire>
 {	private static final long serialVersionUID = 1L;
@@ -86,7 +85,7 @@ public class FireFactory extends SpriteFactory<Fire>
 		EventManager eventManager = new FireEventManager(result);
 		result.setEventManager(eventManager);
 		// fireset name
-		result.setFiresetName(fireset.getName());
+		result.setFiresetName(firesetName);
 		
 		// result
 		result.initSprite(tile);
@@ -96,14 +95,14 @@ public class FireFactory extends SpriteFactory<Fire>
 	/////////////////////////////////////////////////////////////////
 	// FIRESET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Fireset fireset;
+	private String firesetName;
 
-	public void setFireset(Fireset fireset)
-	{	this.fireset = fireset;	
+	public void setFiresetName(String firesetName)
+	{	this.firesetName = firesetName;	
 	}
 	
-	public Fireset getFireset()
-	{	return fireset;			
+	public String getFiresetName()
+	{	return firesetName;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -112,14 +111,14 @@ public class FireFactory extends SpriteFactory<Fire>
 	public void finish()
 	{	if(!finished)
 		{	super.finish();
-			fireset = null;
+			firesetName = null;
 		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-/*	public FireFactory cacheCopy(double zoomFactor, Fireset fs)
+	public FireFactory cacheCopy(double zoomFactor)
 	{	FireFactory result = new FireFactory();
 		
 		// misc
@@ -127,25 +126,21 @@ public class FireFactory extends SpriteFactory<Fire>
 		result.name = name;
 		
 		// fireset
-		result.setFireset(fs);
+		result.setFiresetName(firesetName);
 		
 		// abilities
 		result.setAbilities(abilities);
 		
 		// bombset
-		Bombset bombset = new Bombset();
-		result.setBombset(bombset);
+		result.setBombsetColor(bombsetColor);
 		
 		// explosion
-		if(explosion!=null)
-		{	Explosion explosionCopy = explosion.cacheCopy();
-			result.setExplosion(explosionCopy);
-		}
+		result.setExplosionName(explosionName);
 		
 		// gestures
 		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
 		result.setGesturePack(gesturePackCopy);
 
 		return result;
-	}*/
+	}
 }

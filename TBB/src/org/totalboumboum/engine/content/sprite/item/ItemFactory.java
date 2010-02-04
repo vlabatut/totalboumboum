@@ -28,6 +28,7 @@ import java.util.Iterator;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 import org.totalboumboum.engine.content.sprite.item.ItemEventManager;
@@ -153,7 +154,7 @@ public class ItemFactory extends SpriteFactory<Item>
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-/*	public ItemFactory cacheCopy(double zoomFactor)
+	public ItemFactory cacheCopy(double zoomFactor)
 	{	ItemFactory result = new ItemFactory(itemName);
 		
 		// misc
@@ -168,19 +169,15 @@ public class ItemFactory extends SpriteFactory<Item>
 		result.setAbilities(abilities);
 		
 		// bombset
-		Bombset bombsetCopy = bombset.cacheCopy();
-		result.setBombset(bombsetCopy);
+		result.setBombsetColor(bombsetColor);
 		
 		// explosion
-		if(explosion!=null)
-		{	Explosion explosionCopy = explosion.cacheCopy();
-			result.setExplosion(explosionCopy);
-		}
+		result.setExplosionName(explosionName);
 		
 		// gestures
 		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
 		result.setGesturePack(gesturePackCopy);
 
 		return result;
-	}*/
+	}
 }

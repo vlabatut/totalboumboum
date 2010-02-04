@@ -21,8 +21,12 @@ package org.totalboumboum.engine.container.bombset;
  * 
  */
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,12 +36,15 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.engine.EngineConfiguration;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactoryLoader;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
@@ -56,24 +63,18 @@ public class BombsetLoader
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_XML);
 		Bombset result = null;
 		
-		// opening
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		// loading
-		result = loadBombsetElement(root,individualFolder);
-		
-		
-/*		// caching
-		String cachePath = FileTools.getCacheThemesPath()+ File.separator;
+		// caching
+		String cachePath = FilePaths.getCacheThemesPath()+ File.separator;
 		File objectFile = dataFile.getParentFile();
 		String objectName = objectFile.getName();
 		File packFile = objectFile.getParentFile().getParentFile();
 		String packName = packFile.getName();
 		String cacheName = packName+"_"+objectName;
-		cachePath = cachePath + cacheName +FileTools.EXTENSION_DATA;
+		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getMemoryCache(cacheName);
-		if(engineConfiguration.getFileCache() && o!=null)
+		if(engineConfiguration.getMemoryCache() && o!=null)
 		{	double zoomFactor = RoundVariables.zoomFactor;
 			result = ((Bombset)o).cacheCopy(zoomFactor);
 		}
@@ -120,7 +121,7 @@ public class BombsetLoader
 				result = result.cacheCopy(zoomFactor);
 			}
 		}
-*/
+
 		return result;
 	}
 	
