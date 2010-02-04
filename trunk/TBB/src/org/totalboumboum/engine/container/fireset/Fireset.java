@@ -62,7 +62,7 @@ public class Fireset
 	
 	public void addFireFactory(String name, FireFactory fireFactory)
 	{	fireFactories.put(name, fireFactory);
-		fireFactory.setFireset(this);
+		fireFactory.setFiresetName(name);
 	}
 	
 	public Fire makeFire(String name, Tile tile)

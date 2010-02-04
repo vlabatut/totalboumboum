@@ -205,7 +205,7 @@ if(bf==null)
 		return result;
 	}
 	
-/*	public Theme cacheCopy(double zoomFactor)
+	public Theme cacheCopy(double zoomFactor)
 	{	Theme result = new Theme();
 	
 		// misc
@@ -229,5 +229,5 @@ if(bf==null)
 		}
 		
 		return result;
-	}*/
+	}
 }

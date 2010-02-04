@@ -26,6 +26,7 @@ import java.util.HashMap;
 import org.totalboumboum.configuration.engine.Cachable;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 
@@ -95,6 +96,32 @@ public class HeroFactory extends SpriteFactory<Hero> implements Cachable
 		
 		// result
 		result.initSprite(tile);
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	public HeroFactory cacheCopy(double zoomFactor)
+	{	HeroFactory result = new HeroFactory();
+		
+		// misc
+		result.base = base;
+		result.name = name;
+		
+		// abilities
+		result.setAbilities(abilities);
+		
+		// bombset
+		result.setBombsetColor(bombsetColor);
+		
+		// explosion
+		result.setExplosionName(explosionName);
+		
+		// gestures
+		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		result.setGesturePack(gesturePackCopy);
+
 		return result;
 	}
 
