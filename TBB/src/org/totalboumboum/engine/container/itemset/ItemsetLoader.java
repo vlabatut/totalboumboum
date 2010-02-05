@@ -68,10 +68,8 @@ public class ItemsetLoader
 		File cacheFolder = new File(cachePath);
 		cacheFolder.mkdirs();
 		File objectFile = dataFile.getParentFile();
-		String objectName = objectFile.getName();
-		File packFile = objectFile.getParentFile().getParentFile();
-		String packName = packFile.getName();
-		String cacheName = packName+"_"+objectName;
+		File packFile = objectFile.getParentFile();
+		String cacheName = packFile.getName();
 		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();

@@ -22,6 +22,7 @@ package org.totalboumboum.engine.container.explosionset;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -31,8 +32,9 @@ import org.totalboumboum.configuration.engine.Cachable;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.xml.sax.SAXException;
 
-public class Explosionset implements Cachable
-{	
+public class Explosionset implements Serializable, Cachable
+{	private static final long serialVersionUID = 1L;
+
 	public Explosionset()
 	{	explosions = new HashMap<String,Explosion>();
 	}

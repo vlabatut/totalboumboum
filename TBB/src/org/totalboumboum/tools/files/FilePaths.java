@@ -43,6 +43,9 @@ public class FilePaths
 	public static String getCacheBombsPath()
 	{	return getCachePath()+File.separator+FileNames.FOLDER_BOMBS;		
 	}
+	public static String getCacheExplosionsPath()
+	{	return getCachePath()+File.separator+FileNames.FOLDER_EXPLOSIONS;		
+	}
 	public static String getCacheFiresPath()
 	{	return getCachePath()+File.separator+FileNames.FOLDER_FIRES;		
 	}
