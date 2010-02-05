@@ -76,6 +76,32 @@ if(itemFactory==null)
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public long getMemSize()
+	{	long result = 0;
+		
+		// items
+		for(ItemFactory ifact: itemFactories.values())
+			result = result + ifact.getMemSize();
+		
+		return result;
+	}
+
+	public Itemset cacheCopy(double zoomFactor)
+	{	Itemset result = new Itemset();
+	
+		// items
+		for(Entry<String,ItemFactory> entry: itemFactories.entrySet())
+		{	String key = entry.getKey();
+			ItemFactory itemFactory = entry.getValue().cacheCopy(zoomFactor);
+			result.addItemFactory(key,itemFactory);
+		}
+		
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
@@ -94,30 +120,4 @@ if(itemFactory==null)
 			}
 		}
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public long getMemSize()
-	{	long result = 0;
-		
-		// items
-		for(ItemFactory ifact: itemFactories.values())
-			result = result + ifact.getMemSize();
-		
-		return result;
-	}
-
-/*	public Itemset cacheCopy(double zoomFactor)
-	{	Itemset result = new Itemset();
-	
-		// items
-		for(Entry<String,ItemFactory> entry: itemFactories.entrySet())
-		{	String key = entry.getKey();
-			ItemFactory itemFactory = entry.getValue().cacheCopy(zoomFactor);
-			result.addItemFactory(key,itemFactory);
-		}
-		
-		return result;
-	}*/
 }

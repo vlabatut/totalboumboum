@@ -88,6 +88,21 @@ public class Explosion implements Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/*
+	 * the fireset has already been copied/loaded, so it is taken from the current level
+	 * the rest of the explosion is copied normally
+	 */
+	public Explosion cacheCopy(double zoomFactor)
+	{	Explosion result = new Explosion();
+	
+		result.setFiresetName(firesetName);
+		
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
@@ -102,19 +117,4 @@ public class Explosion implements Serializable
 			}
 		}
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/*
-	 * the fireset has already been copied/loaded, so it is taken from the current level
-	 * the rest of the explosion is copied normally
-	 */
-/*	public Explosion cacheCopy()
-	{	Explosion result = new Explosion();
-		FiresetMap fsm = RoundVariables.level.getFiresetMap();
-		Fireset fs = fsm.getFireset(fireset.getName());
-		result.setFireset(fs);		
-		return result;
-	}*/
 }

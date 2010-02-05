@@ -38,7 +38,7 @@ public class FiresetMap implements Serializable, Cachable
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Instance instance = null;
+	private transient Instance instance = null;
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
@@ -64,19 +64,6 @@ public class FiresetMap implements Serializable, Cachable
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	for(Entry<String,Fireset> e: firesets.entrySet())
-				e.getValue().finish();
-			firesets.clear();
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public long getMemSize()
@@ -89,8 +76,8 @@ public class FiresetMap implements Serializable, Cachable
 		return result;
 	}
 
-/*	public FiresetMap cacheCopy(double zoomFactor, Instance instance)
-	{	FiresetMap result = new FiresetMap(instance);
+	public FiresetMap cacheCopy(double zoomFactor)
+	{	FiresetMap result = new FiresetMap();
 	
 		// firesets
 		for(Entry<String,Fireset> entry: firesets.entrySet())
@@ -100,5 +87,18 @@ public class FiresetMap implements Serializable, Cachable
 		}
 		
 		return result;
-	}*/
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	for(Entry<String,Fireset> e: firesets.entrySet())
+				e.getValue().finish();
+			firesets.clear();
+		}
+	}
 }

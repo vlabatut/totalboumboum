@@ -1180,13 +1180,4 @@ public class Launcher
 	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux
 	
 	// eval de projet: temps nécessaire pour éliminer l'adversaire de référence
-
-	/*
-	 * - le chargement se fait il pour tout l'explosion set ? ou seulement explosion par explosion ?
-	 *   >> ça change le fonctionnement du cache : par exeplosion set dans le premier cas, explosion dans le second
-	 * - même question pour les firesets
-	 * - pour les items, on sait que c'est tout le groupe...
-	 * - visiblement pour les explosions aussi, donc par conséquent c'est pareil pour le feux ?
-	 * >> vérifier tout ça
-	 */
 }
