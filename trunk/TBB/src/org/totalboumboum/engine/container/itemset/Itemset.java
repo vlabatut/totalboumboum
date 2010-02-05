@@ -22,6 +22,7 @@ package org.totalboumboum.engine.container.itemset;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -35,8 +36,9 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
 import org.xml.sax.SAXException;
 
-public class Itemset implements Cachable
-{	
+public class Itemset implements Serializable, Cachable
+{	private static final long serialVersionUID = 1L;
+
 	public Itemset()
 	{	
 	}

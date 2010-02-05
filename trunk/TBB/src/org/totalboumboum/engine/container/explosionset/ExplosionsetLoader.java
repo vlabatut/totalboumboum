@@ -55,12 +55,10 @@ public class ExplosionsetLoader
 		Explosionset result = null;
 		
 		// caching
-		String cachePath = FilePaths.getCacheThemesPath()+ File.separator;
+		String cachePath = FilePaths.getCacheExplosionsPath()+ File.separator;
 		File objectFile = dataFile.getParentFile();
-		String objectName = objectFile.getName();
-		File packFile = objectFile.getParentFile().getParentFile();
-		String packName = packFile.getName();
-		String cacheName = packName+"_"+objectName;
+		File packFile = objectFile.getParentFile();
+		String cacheName = packFile.getName();
 		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();

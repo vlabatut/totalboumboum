@@ -94,7 +94,7 @@ public class EngineConfiguration
 	/////////////////////////////////////////////////////////////////
 	// CACHING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean fileCache = false;
+	private boolean fileCache = true;
 	private boolean memoryCache = false;
 	private HashMap<String,Cachable> cache = new HashMap<String,Cachable>();
 	private LinkedList<String> cacheNames = new LinkedList<String>();
