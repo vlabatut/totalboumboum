@@ -122,7 +122,7 @@ if(fireFactory==null)
 		return result;
 	}
 
-/*	public Fireset cacheCopy(double zoomFactor)
+	public Fireset cacheCopy(double zoomFactor)
 	{	Fireset result = new Fireset();
 	
 		// name
@@ -131,10 +131,10 @@ if(fireFactory==null)
 		// fires
 		for(Entry<String,FireFactory> entry: fireFactories.entrySet())
 		{	String key = entry.getKey();
-			FireFactory fireFactory = entry.getValue().cacheCopy(zoomFactor,result);
+			FireFactory fireFactory = entry.getValue().cacheCopy(zoomFactor);
 			result.addFireFactory(key,fireFactory);
 		}
 		
 		return result;
-	}*/
+	}
 }

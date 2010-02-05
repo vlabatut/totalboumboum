@@ -21,14 +21,24 @@ package org.totalboumboum.engine.container.explosionset;
  * 
  */
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.engine.EngineConfiguration;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
@@ -44,10 +54,64 @@ public class ExplosionsetLoader
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_EXPLOSIONSET+FileNames.EXTENSION_XML);
 		Explosionset result = null;
 		
-		// opening
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		// loading
-		result = loadExplosionsetElement(root,individualFolder);
+		// caching
+		String cachePath = FilePaths.getCacheThemesPath()+ File.separator;
+		File objectFile = dataFile.getParentFile();
+		String objectName = objectFile.getName();
+		File packFile = objectFile.getParentFile().getParentFile();
+		String packName = packFile.getName();
+		String cacheName = packName+"_"+objectName;
+		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
+		File cacheFile = new File(cachePath);
+		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
+		Object o = engineConfiguration.getMemoryCache(cacheName);
+		if(engineConfiguration.getMemoryCache() && o!=null)
+		{	double zoomFactor = RoundVariables.zoomFactor;
+			result = ((Explosionset)o).cacheCopy(zoomFactor);
+		}
+		else if(engineConfiguration.getFileCache() && cacheFile.exists())
+		{	try
+			{	FileInputStream in = new FileInputStream(cacheFile);
+				BufferedInputStream inBuff = new BufferedInputStream(in);
+				ObjectInputStream oIn = new ObjectInputStream(inBuff);
+				result = (Explosionset)oIn.readObject();
+				oIn.close();
+			}
+			catch (FileNotFoundException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
+		
+		if(result==null)
+		{	// opening
+			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+			// loading
+			result = loadExplosionsetElement(root,individualFolder);
+			// caching
+			boolean cached = false;
+			if(engineConfiguration.getMemoryCache())
+			{	engineConfiguration.addMemoryCache(cacheName,result);
+				cached = true;
+			}
+			if(engineConfiguration.getFileCache())
+			{	FileOutputStream out = new FileOutputStream(cacheFile);
+				BufferedOutputStream outBuff = new BufferedOutputStream(out);
+				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
+				oOut.writeObject(result);
+				oOut.close();
+				cached = true;
+			}
+			if(cached)
+			{	double zoomFactor = RoundVariables.zoomFactor;
+				result = result.cacheCopy(zoomFactor);
+			}
+		}
 		
 		return result;
     }

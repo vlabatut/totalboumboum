@@ -21,8 +21,15 @@ package org.totalboumboum.engine.container.itemset;
  * 
  */
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,10 +38,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.engine.EngineConfiguration;
 import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
 import org.totalboumboum.engine.content.sprite.item.ItemFactoryLoader;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
@@ -53,14 +63,8 @@ public class ItemsetLoader
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_ITEMSET+FileNames.EXTENSION_XML);
 		Itemset result = null;
 		
-		// opening
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		// loading
-		result = loadItemsetElement(root,individualFolder);
-		
-		
-/*		// caching
-		String cachePath = FileTools.getCacheItemsPath()+ File.separator;
+		// caching
+		String cachePath = FilePaths.getCacheItemsPath()+ File.separator;
 		File cacheFolder = new File(cachePath);
 		cacheFolder.mkdirs();
 		File objectFile = dataFile.getParentFile();
@@ -68,11 +72,11 @@ public class ItemsetLoader
 		File packFile = objectFile.getParentFile().getParentFile();
 		String packName = packFile.getName();
 		String cacheName = packName+"_"+objectName;
-		cachePath = cachePath + cacheName +FileTools.EXTENSION_DATA;
+		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getMemoryCache(cacheName);
-		if(engineConfiguration.getFileCache() && o!=null)
+		if(engineConfiguration.getMemoryCache() && o!=null)
 		{	double zoomFactor = RoundVariables.zoomFactor;
 			result = ((Itemset)o).cacheCopy(zoomFactor);
 		}
@@ -119,7 +123,7 @@ public class ItemsetLoader
 				result = result.cacheCopy(zoomFactor);
 			}
 		}
-*/		
+		
 		return result;
     }
     

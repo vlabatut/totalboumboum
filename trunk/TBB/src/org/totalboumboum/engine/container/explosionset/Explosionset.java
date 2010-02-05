@@ -23,14 +23,15 @@ package org.totalboumboum.engine.container.explosionset;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.engine.Cachable;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.xml.sax.SAXException;
 
-
-public class Explosionset
+public class Explosionset implements Cachable
 {	
 	public Explosionset()
 	{	explosions = new HashMap<String,Explosion>();
@@ -39,7 +40,7 @@ public class Explosionset
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Instance instance = null;
+	private transient Instance instance = null;
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
@@ -86,23 +87,33 @@ public class Explosionset
 	/////////////////////////////////////////////////////////////////
 	// CACHE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public long getMemSize()
+	{	long result = 0;
+		
+		return result;
+	}
+	
 	/*
 	 * the Bombset has already been copied/loaded, so it is taken from the level
 	 */
 /*	public Explosionset cacheCopy()
 	{	Explosionset result = RoundVariables.level.getBombset();
 		return result;
-	}
+	}*/
+	
 	public Explosionset cacheCopy(double zoomFactor)
 	{	Explosionset result = new Explosionset();
-		for(int i=0;i<bombFactories.size();i++)
-		{	BombFactory bf = bombFactories.get(i).cacheCopy(zoomFactor,result);
-			ArrayList<StateAbility> ra = requiredAbilities.get(i);
-			result.addBombFactory(bf,ra);
+	
+		for(Entry<String,Explosion> entry: explosions.entrySet())
+		{	String key = entry.getKey();
+			Explosion explosion = entry.getValue();
+			result.addExplosion(key,explosion.cacheCopy(zoomFactor));
+		
 		}
+	
 		return result;
 	}
-*/	
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

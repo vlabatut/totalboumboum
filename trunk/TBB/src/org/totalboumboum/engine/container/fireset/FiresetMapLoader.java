@@ -21,8 +21,15 @@ package org.totalboumboum.engine.container.fireset;
  * 
  */
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -31,8 +38,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.engine.EngineConfiguration;
 import org.totalboumboum.engine.content.sprite.fire.FireFactory;
 import org.totalboumboum.engine.content.sprite.fire.FireFactoryLoader;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
@@ -49,18 +59,10 @@ public class FiresetMapLoader
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_FIRESETMAP+FileNames.EXTENSION_SCHEMA);
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_FIRESETMAP+FileNames.EXTENSION_XML);
-		
-		
-		// opening
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		// loading
-		FiresetMap result = loadFiresetmapElement(individualFolder,root);
-		
-/*		
 		FiresetMap result = null;
 		
 		// caching
-		String cachePath = FileTools.getCacheFiresPath()+ File.separator;
+		String cachePath = FilePaths.getCacheFiresPath()+ File.separator;
 		File cacheFolder = new File(cachePath);
 		cacheFolder.mkdirs();
 		File objectFile = dataFile.getParentFile();
@@ -68,13 +70,13 @@ public class FiresetMapLoader
 		File packFile = objectFile.getParentFile().getParentFile();
 		String packName = packFile.getName();
 		String cacheName = packName+"_"+objectName;
-		cachePath = cachePath + cacheName +FileTools.EXTENSION_DATA;
+		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getMemoryCache(cacheName);
-		if(engineConfiguration.getFileCache() && o!=null)
+		if(engineConfiguration.getMemoryCache() && o!=null)
 		{	double zoomFactor = RoundVariables.zoomFactor;
-			result = ((FiresetMap)o).cacheCopy(zoomFactor,instance);
+			result = ((FiresetMap)o).cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
@@ -82,7 +84,7 @@ public class FiresetMapLoader
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
 				result = (FiresetMap)oIn.readObject(); //TODO fonction à surcharger
-				result.setInstance(instance); 
+				//result.setInstance(instance); 
 				oIn.close();
 			}
 			catch (FileNotFoundException e)
@@ -100,8 +102,7 @@ public class FiresetMapLoader
 		{	// opening
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			result = new FiresetMap(instance);
-			loadFiresetmapElement(individualFolder,root,result);
+			result = loadFiresetmapElement(individualFolder,root);
 			// caching
 			boolean cached = false;
 			if(engineConfiguration.getMemoryCache())
@@ -120,7 +121,7 @@ public class FiresetMapLoader
 			{	double zoomFactor = RoundVariables.zoomFactor;
 				result = result.cacheCopy(zoomFactor);
 			}
-		}*/
+		}
 
 		return result;
 	}
