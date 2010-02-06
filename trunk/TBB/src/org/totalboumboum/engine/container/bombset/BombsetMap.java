@@ -61,13 +61,14 @@ public class BombsetMap implements Serializable
 		partialBombset = BombsetLoader.initBombset(folderPath);
 	}
 
-	public Bombset getBombset(PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public void completeBombset(PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	Bombset base = partialBombset.copy();
+		Bombset temp = BombsetLoader.completeBombset(path,color,base);
+		bombsets.put(color,temp);
+	}
+	
+	public Bombset getBombset(PredefinedColor color)
 	{	Bombset result = bombsets.get(color);
-		if(result==null)
-		{	Bombset base = partialBombset.copy();
-			result = BombsetLoader.completeBombset(path,color,base);
-			bombsets.put(color,result);
-		}
 		return result;
 	}
 

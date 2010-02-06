@@ -108,7 +108,7 @@ public abstract class SpriteFactoryLoader
 	
 	@SuppressWarnings("unchecked")
 	private static <T extends Sprite> void loadGeneralElement(SpriteFactory<T> result, SpriteFactory<T> base)
-	{	GesturePack gesturePack = base.getGesturePack().copy();
+	{	GesturePack gesturePack = base.getGesturePack();
 		ArrayList<AbstractAbility> abilities = base.getAbilities();
 		String explosionName = base.getExplosionName();
 		//

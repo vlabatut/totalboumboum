@@ -92,7 +92,7 @@ public class AnimesLoader
 		pack.setScale(scale);
 		
 		// zoom
-		double zoom = RoundVariables.zoomFactor/scale; //TODO no need for that anymore, since it's now resized after loading
+		double zoom = RoundVariables.zoomFactor/scale; //TODO no need for that anymore, since it's now resized only after loading
 		zoom = 1/scale;
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		if(engineConfiguration.getMemoryCache() || engineConfiguration.getFileCache())

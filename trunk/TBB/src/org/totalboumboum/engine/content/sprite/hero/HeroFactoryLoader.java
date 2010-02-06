@@ -64,10 +64,10 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		HeroFactory result = null;
 		
 		// caching
-		String cachePath = FilePaths.getCacheBombsPath()+ File.separator;
+		String cachePath = FilePaths.getCacheHeroesPath()+ File.separator;
 		File spriteFile = new File(folderPath);
 		File packFile = spriteFile.getParentFile();
-		String cacheName = packFile.getName()+"_"+spriteFile.getName()+"_"+"abstract";
+		String cacheName = packFile.getName()+"_"+"abstract";
 		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
@@ -109,7 +109,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 				oOut.writeObject(result);
 				oOut.close();
 			}
-			result = result.cacheCopy(zoomFactor);
+			//result = result.cacheCopy(zoomFactor);
 		}
 		
 		return result;
@@ -156,12 +156,10 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		HeroFactory result = null;
 		
 		// caching
-		String cachePath = FilePaths.getCacheBombsPath()+ File.separator;
+		String cachePath = FilePaths.getCacheHeroesPath()+ File.separator;
 		File spriteFile = new File(folderPath);
 		File packFile = spriteFile.getParentFile();
-		String c = "none";
-		if(color!=null)
-			c = color.toString();
+		String c = color.toString();
 		String cacheName = packFile.getName()+"_"+spriteFile.getName()+"_"+c;
 		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
@@ -191,9 +189,8 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		}
 		
 		if(result==null)
-		{	result = base;
-			// opening & loading
-			complete(folderPath,color,result);
+		{	// opening & loading
+			result = complete(folderPath,color,base);
 			// caching
 			if(engineConfiguration.getMemoryCache())
 			{	engineConfiguration.addMemoryCache(cacheName,result);

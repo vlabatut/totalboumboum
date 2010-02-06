@@ -113,7 +113,7 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// THEME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    public void loadTheme() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    public void loadTheme() throws SAXException, IOException, ParserConfigurationException, ClassNotFoundException
     {	// theme
     	String individualFolder = FilePaths.getInstancesPath()+File.separator+levelInfo.getInstance();
     	individualFolder = individualFolder+File.separator+FileNames.FOLDER_THEMES+File.separator+levelInfo.getTheme();
