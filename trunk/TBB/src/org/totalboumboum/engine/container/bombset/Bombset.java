@@ -203,7 +203,10 @@ public class Bombset implements Serializable, Cachable
 		for(int i=0;i<bombFactories.size();i++)
 		{	BombFactory bf = bombFactories.get(i).cacheCopy(zoomFactor);
 			ArrayList<StateAbility> ra = requiredAbilities.get(i);
-			result.addBombFactory(bf,ra);
+			ArrayList<StateAbility> raCopy = new ArrayList<StateAbility>();
+			for(StateAbility ability: ra)
+				raCopy.add((StateAbility)ability.cacheCopy(zoomFactor));
+			result.addBombFactory(bf,raCopy);
 		}
 		
 		return result;

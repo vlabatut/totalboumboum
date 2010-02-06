@@ -357,18 +357,12 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/*
-	 * TODO il faut récupérer toutes les exceptions éventuellement causées par les IA
-	 * par exemple en les routant sur une fenêtre débug spéciale ?
-	 * (cf OkanYuksel qui fait un dépassement de la pile)
-	 */
-	
-	/*
 	 * TODO dans l'API IA il faut généraliser (tout en simplifiant) les propriétés des sprites, plutot que 
 	 * de définir des fonctions spécifiques à chaque fois.
 	 */
 	
 	/*
-	 * TODO type de tournoi plus adapté au réseau :
+	 * TODO type de tournoi plus adapté au réseau : hot potatoe
 	 * des joueurs jouent un match pendant que d'autres attendent 
 	 * à la fin du match, les n derniers joueurs sont relégués dans la salle d'attente
 	 * n joueurs qui attendaient sont qualifiés.
@@ -379,7 +373,6 @@ public class Launcher
 	 * TODO inclure dans l'API IA des fonctions d'action prédéfinies.
 	 * par exemple des fonctions pour le déplacement, on indique où on veut aller et ça détermine à chaque itération
 	 * quelle est l'action à effectuer. étendre à d'autres actions ?
-	 * limitation pédago: on n'utilise plus A*
 	 */
 	
 	/*
@@ -387,6 +380,10 @@ public class Launcher
 	 * faudrait passer en paramètre le niveau et des infos style l'instance, etc.
 	 * ça permettrait par exemple, pour une IA qui apprend, de télécharger son fichier de sauvegarde
 	 * (dans son package)
+	 */
+	
+	/*
+	 * evaluation du projet : pour la qualification, utiliser ke temps nécessaire pour éliminer un/des adversaire(s) de référence
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -797,13 +794,6 @@ public class Launcher
 	 * >> en même temps, ça laisse le choix au joueur de ramasser l'item ou pas, c'est pas mal finalement (si c'est un malus par ex.)
 	 */
 	
-	 /* 
-	  * TODO BUGS POTENTIELS (à vérifier)
-	  * 
-	  * - il semblerait que les directions dans la SpecificAction et dans la GeneralAction correspondante ne soient pas les mêmes...
-	  * 
-	  */
-	
 	/*
 	 * TODO
 	 * bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
@@ -843,19 +833,15 @@ public class Launcher
 // CHANGE LOG	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* TODO
-	 * + beta.016
+	 * + beta.017
 	 * - Moteur :
-	 * 		- création d'une classe Instance pour gérer de façon plus pratique les feux/bombes/items
-	 *  	- généralisation du chargement des explosions (mutualisé plutot que de recommencer à chaque sprite)
-	 *  	- correction d'un bug dans le chargement des tournois simples
+	 * 		- nouveau système de mise en cache utilisant des fichiers : pas efficace, c'est aussi long que de tout charger direct
+	 * 		- nouveau système de cache mémoire : un peu plus rapide que le chargement normal
 	 * - GUI :
+	 * 		- correction d'un bug dans le menu des options avancées
 	 * - IA :
-	 * 		- utilitaire permettant de controller les checkinterruptions dans les programmes des étudiants
 	 * - stats :
-	 * 		- possibilité d'exporter/importer les stats sous forme de fichier texte (pour quand on change les classes stat)
 	 * - Divers :
-	 * 		- renommage du package principal de fr.free.totalboumboum en org.totalboumboum
-	 * 		- mise à jour de l'année du copyright de 2008-2009 en 2008-2010
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -876,7 +862,12 @@ public class Launcher
 	 *   
 	 * - pb de réinitialisation : 
 	 * 		- jouer un tournoi single (par ex supercup) en entier
-	 * 		- jouer un tournoi de type cup en suivant : il y a un pb sur le MatchPanel, qui semble n'avoir pas été réinit à null 
+	 * 		- jouer un tournoi de type cup en suivant : il y a un pb sur le MatchPanel, qui semble n'avoir pas été réinit à null
+	 * 
+	 *  - apparemment, y a un pb avec les GeneralAction, dont certaines définies dans les fichiers XML ne sont pas compatibles 
+	 *    avec la classe (en termes de circonstances) mais qui sont quand même chargées et initialisées normalement
+	 *  
+	 *  - il semblerait que les directions dans la SpecificAction et dans la GeneralAction correspondante ne soient pas les mêmes...
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -884,8 +875,6 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/* TODO PRIORITÉ HAUTE
-	 * 
-	 * - faire un log automatique energistrant toutes positions, histoire d'avoir une trace des bugs
 	 * 
 	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
 	 * 
@@ -994,6 +983,8 @@ public class Launcher
 
 	/* TODO
 	 * 
+	 * - rajouter une confirmation (popup) quand on sort définitivement d'une partie (icone maison)
+	 * 
 	 * - 1ère exécution
 	 * 		- définir un popup d'informations
 	 * 		- guider l'utilisateur pas à pas pour créer son profile et commencer sa partie
@@ -1023,7 +1014,10 @@ public class Launcher
 	 * 			- si les limites utilisent des points custom, les afficher aussi
 	 * 		- à la fin du round, faire apparaitre les résultats par transparence
 	 * 
-	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
+	 * - tournoi : 
+	 * 		1) on choisit les paramètres 
+	 * 		2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, 
+	 * 		   et restreint aussi les IA pour les mêmes raisons
 	 * 
 	 * - champ en plus 
 	 * 		- dans les profils : le classement du joueur, nbre de rouds gagnés/nbre de rounds joués
@@ -1086,7 +1080,6 @@ public class Launcher
 	 *  - tournois :
 	 *  	- championnat
 	 *  - instances :
-	 *  	- outils d'édition des niveaux
 	 *  
 	 *  x) utilitaire pour controler les IA des étudiants (partage 3/2)
 	 */
@@ -1161,12 +1154,7 @@ public class Launcher
 	 *  		- (dés)activer + vider cache fichier
 	 *  	- problèmes :
 	 *  		- le rendu des objets chargés est pourri (p-e du à la façon d'enregistrer les images)
-	 *  		- cache fichier pas plus rapide que chargement normal (clairement ! mais à mesurer avec jprofiler)
-	 *  		- finish des sprites et autres objets liés à l'instance... : 
-	 *  			il n'existeront plus, donc on ne pourra plus les utiliser
-	 *  			>> en fait non, puisqu'il s'agira de copies des objets cachés
-	 *  	- à voir :
-	 *  		- cacher les niveaux (style hollowlevel)
+	 *  		- optimiser le chargement sans cache (pas la peine de recopier à l'échelle)
 	 */
 	
 	
@@ -1177,7 +1165,4 @@ public class Launcher
 
 	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux
 	
-	// eval de projet: temps nécessaire pour éliminer l'adversaire de référence
-	
-	// apparemment, y a un pb avec les GeneralAction, donc certaines définies dans les fichiers XML ne sont pas compatibles avec la classe (en termes de circonstances) mais qui sont quand même chargées et initialisées normalement
 }
