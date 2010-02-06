@@ -21,12 +21,9 @@ package org.totalboumboum.engine.content.sprite;
  * 
  */
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.bombset.Bombset;
@@ -44,7 +41,6 @@ import org.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import org.totalboumboum.engine.content.manager.item.ItemManager;
 import org.totalboumboum.engine.content.manager.modulation.ModulationManager;
 import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
-import org.xml.sax.SAXException;
 
 public abstract class SpriteFactory<T extends Sprite> implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -111,7 +107,7 @@ if(bombset==null)
 	/////////////////////////////////////////////////////////////////
 	protected transient Instance instance;
 	
-	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public void setInstance(Instance instance)
 	{	this.instance = instance;	
 		bombset = instance.getBombsetMap().getBombset(bombsetColor);
 		if(explosionName!=null)

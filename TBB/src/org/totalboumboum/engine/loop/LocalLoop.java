@@ -114,7 +114,7 @@ public class LocalLoop extends Loop
 		instance.loadFiresetMap();
 		instance.loadExplosionSet();
 		loadStepOver();
-		instance.loadBombsetMap();
+		instance.loadBombsetMaps(round.getProfilesColors());
 		loadStepOver();
 		instance.loadItemset();
 		loadStepOver();

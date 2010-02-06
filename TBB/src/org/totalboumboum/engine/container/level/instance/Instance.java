@@ -24,9 +24,11 @@ package org.totalboumboum.engine.container.level.instance;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.bombset.BombsetMap;
 import org.totalboumboum.engine.container.explosionset.Explosionset;
 import org.totalboumboum.engine.container.explosionset.ExplosionsetLoader;
@@ -59,14 +61,16 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	private transient BombsetMap bombsetMap;
 
-	public void loadBombsetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public void loadBombsetMaps(List<PredefinedColor> playersColors) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// init bombset map
 		String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_BOMBS;
 		bombsetMap = new BombsetMap();
     	bombsetMap.initBombset(individualFolder);
 		
     	// load level bombset
-    	bombsetMap.getBombset(null);
+    	bombsetMap.completeBombset(null);
+    	for(PredefinedColor color: playersColors)
+    		bombsetMap.completeBombset(color);
     }
 	
 	public BombsetMap getBombsetMap()

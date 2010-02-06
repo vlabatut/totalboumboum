@@ -116,7 +116,7 @@ public class BombsetLoader
 				oOut.writeObject(result);
 				oOut.close();
 			}
-			result = result.cacheCopy(zoomFactor);
+//			result = result.cacheCopy(zoomFactor);
 		}
 
 		return result;
