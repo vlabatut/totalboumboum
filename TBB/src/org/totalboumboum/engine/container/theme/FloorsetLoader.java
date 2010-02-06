@@ -35,6 +35,7 @@ import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
 import org.totalboumboum.engine.content.sprite.floor.FloorFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -61,19 +62,19 @@ public class FloorsetLoader
 	private static void loadFloorsetElement(Element root, String folder, Theme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// abstract floors
     	HashMap<String,FloorFactory> abstractFloors = new HashMap<String,FloorFactory>();
-    	Element abstractFloorsElt = root.getChild(XmlTools.ABSTRACT_FLOORS);
+    	Element abstractFloorsElt = root.getChild(XmlNames.ABSTRACT_FLOORS);
     	if(abstractFloorsElt!=null)
     		loadFloorsElement(abstractFloorsElt,folder,result,abstractFloors,Type.ABSTRACT);
     	
     	// concrete floors
-    	Element concreteFloorsElt = root.getChild(XmlTools.CONCRETE_FLOORS);
+    	Element concreteFloorsElt = root.getChild(XmlNames.CONCRETE_FLOORS);
 		loadFloorsElement(concreteFloorsElt,folder,result,abstractFloors,Type.CONCRETE);
 	}
     
 	@SuppressWarnings("unchecked")
 	private static void loadFloorsElement(Element root, String folder, Theme result, HashMap<String,FloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
-    	List<Element> floors = root.getChildren(XmlTools.FLOOR);
+    	List<Element> floors = root.getChildren(XmlNames.FLOOR);
     	Iterator<Element> i = floors.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
@@ -83,11 +84,11 @@ public class FloorsetLoader
     
 	private static void loadFloorElement(Element root, String folder, Theme result, HashMap<String,FloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
+		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
+		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 
 		// factory

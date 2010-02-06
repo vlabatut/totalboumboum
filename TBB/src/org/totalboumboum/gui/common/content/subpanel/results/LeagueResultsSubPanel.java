@@ -37,9 +37,8 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
-import org.totalboumboum.tools.strings.StringTools;
-import org.totalboumboum.tools.strings.StringTools.TimeUnit;
-
+import org.totalboumboum.tools.time.TimeTools;
+import org.totalboumboum.tools.time.TimeUnit;
 
 public class LeagueResultsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
@@ -213,7 +212,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 				}			
 				// time
 				if(showTime)
-				{	String text = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
+				{	String text = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;

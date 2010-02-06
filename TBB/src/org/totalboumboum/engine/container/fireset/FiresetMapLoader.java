@@ -45,6 +45,7 @@ import org.totalboumboum.engine.content.sprite.fire.FireFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -124,12 +125,12 @@ public class FiresetMapLoader
 		HashMap<String,FireFactory> abstractFires = new HashMap<String, FireFactory>();
 		
     	// abstract fires
-    	Element abstractFiresElt = root.getChild(XmlTools.ABSTRACT_FIRES);
+    	Element abstractFiresElt = root.getChild(XmlNames.ABSTRACT_FIRES);
     	if(abstractFiresElt!=null)
     		loadFiresElement(folder,abstractFiresElt,null,abstractFires,Type.ABSTRACT);
 
     	// firesets
-    	Element firesetsElt = root.getChild(XmlTools.FIRESETS);
+    	Element firesetsElt = root.getChild(XmlNames.FIRESETS);
     	loadFiresetsElement(folder,firesetsElt,result,abstractFires);
     	
     	return result;
@@ -137,12 +138,12 @@ public class FiresetMapLoader
 	
 	@SuppressWarnings("unchecked")
 	private static void loadFiresetsElement(String folder, Element root, FiresetMap result, HashMap<String,FireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	List<Element> elts = root.getChildren(XmlTools.FIRESET);
+	{	List<Element> elts = root.getChildren(XmlNames.FIRESET);
     	Iterator<Element> i = elts.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
-    		String name = temp.getAttribute(XmlTools.NAME).getValue().trim();
-			Attribute attribute = temp.getAttribute(XmlTools.FOLDER);
+    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
+			Attribute attribute = temp.getAttribute(XmlNames.FOLDER);
 			String individualFolder = folder+File.separator+attribute.getValue().trim();
 			Fireset fireset = loadFireset(individualFolder,abstractFires);
 			fireset.setName(name);
@@ -175,12 +176,12 @@ public class FiresetMapLoader
 	{	Fireset result = new Fireset();
 		
     	// abstract fires
-    	Element abstractFiresElt = root.getChild(XmlTools.ABSTRACT_FIRES);
+    	Element abstractFiresElt = root.getChild(XmlNames.ABSTRACT_FIRES);
     	if(abstractFiresElt!=null)
     		loadFiresElement(folder,abstractFiresElt,result,abstractFires,Type.ABSTRACT);
 
     	// concrete fires
-    	Element concreteFiresElt = root.getChild(XmlTools.CONCRETE_FIRES);
+    	Element concreteFiresElt = root.getChild(XmlNames.CONCRETE_FIRES);
 		loadFiresElement(folder,concreteFiresElt,result,abstractFires,Type.CONCRETE);
     	
     	return result;
@@ -189,7 +190,7 @@ public class FiresetMapLoader
 	@SuppressWarnings("unchecked")
 	private static void loadFiresElement(String folder, Element root, Fireset result, HashMap<String,FireFactory> abstractFires, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
-		List<Element> elts = root.getChildren(XmlTools.FIRE);
+		List<Element> elts = root.getChildren(XmlNames.FIRE);
     	Iterator<Element> i = elts.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
@@ -199,11 +200,11 @@ public class FiresetMapLoader
     
     private static void loadFireElement(String folder, Element root, Fireset result, HashMap<String,FireFactory> abstractFires, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
+		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
+		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// fire factory

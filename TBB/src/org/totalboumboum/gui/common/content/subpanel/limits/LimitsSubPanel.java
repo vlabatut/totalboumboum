@@ -40,9 +40,8 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.strings.StringTools;
-import org.totalboumboum.tools.strings.StringTools.TimeUnit;
-
+import org.totalboumboum.tools.time.TimeTools;
+import org.totalboumboum.tools.time.TimeUnit;
 
 public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
@@ -111,7 +110,7 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 				else if(limit instanceof LimitTime)
 				{	LimitTime l = (LimitTime)limit;
 					iconName = headerPrefix+GuiKeys.TIME;
-					value = StringTools.formatTime(l.getThreshold(),TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
+					value = TimeTools.formatTime(l.getThreshold(),TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
 				}
 				else if(limit instanceof LimitPoints)
 				{	LimitPoints l = (LimitPoints)limit;

@@ -1160,13 +1160,11 @@ public class Launcher
 	 *  		- (dés)activer + vider cache mémoire
 	 *  		- (dés)activer + vider cache fichier
 	 *  	- problèmes :
-	 *  		- pb de mise à l'échelle avec le cache fichier
-	 *  		- pb de ralentissement du jeu sur la mise en cache fichier
+	 *  		- le rendu des objets chargés est pourri (p-e du à la façon d'enregistrer les images)
 	 *  		- cache fichier pas plus rapide que chargement normal (clairement ! mais à mesurer avec jprofiler)
 	 *  		- finish des sprites et autres objets liés à l'instance... : 
 	 *  			il n'existeront plus, donc on ne pourra plus les utiliser
 	 *  			>> en fait non, puisqu'il s'agira de copies des objets cachés
-	 *  		- certaines classes comme Explosionset sont à sérializer, ce me semble
 	 *  	- à voir :
 	 *  		- cacher les niveaux (style hollowlevel)
 	 */

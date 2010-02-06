@@ -34,6 +34,7 @@ import org.totalboumboum.engine.content.sprite.block.BlockFactory;
 import org.totalboumboum.engine.content.sprite.block.BlockFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -60,24 +61,24 @@ public class BlocksetLoader
 	private static void loadBlocksetElement(Element root, String folder, Theme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// abstract blocks
     	HashMap<String,BlockFactory> abstractItems = new HashMap<String,BlockFactory>();
-    	Element abstractBlocksElt = root.getChild(XmlTools.ABSTRACT_BLOCKS);
+    	Element abstractBlocksElt = root.getChild(XmlNames.ABSTRACT_BLOCKS);
     	if(abstractBlocksElt!=null)
     		loadBlocksElement(abstractBlocksElt,folder,result,abstractItems,Type.ABSTRACT);
     	
     	// concrete blocks
-    	Element concreteBlocksElt = root.getChild(XmlTools.CONCRETE_BLOCKS);
+    	Element concreteBlocksElt = root.getChild(XmlNames.CONCRETE_BLOCKS);
 		loadBlocksElement(concreteBlocksElt,folder,result,abstractItems,Type.CONCRETE);
 	}
 
 	@SuppressWarnings("unchecked")
 	private static void loadBlocksElement(Element root, String folder, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// blocks
-		List<Element> blcksCmpnts = root.getChildren(XmlTools.BLOCK);
+		List<Element> blcksCmpnts = root.getChildren(XmlNames.BLOCK);
 		for(Element temp: blcksCmpnts)
 			loadBlockElement(temp,folder,Theme.DEFAULT_GROUP,result,abstractBlocks,type);
 
 		// groups
-		List<Element> grpsCmpnts = root.getChildren(XmlTools.GROUP);
+		List<Element> grpsCmpnts = root.getChildren(XmlNames.GROUP);
 		for(Element temp: grpsCmpnts)
 			loadGroupElement(temp,folder,result,abstractBlocks,type);
 	}
@@ -85,26 +86,26 @@ public class BlocksetLoader
     @SuppressWarnings("unchecked")
     private static void loadGroupElement(Element root, String individualFolder, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.NAME).getValue();
+		String name = root.getAttribute(XmlNames.NAME).getValue();
 		
 		// folder
     	String localFilePath = individualFolder;
-		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
+		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		localFilePath = localFilePath+File.separator+attribute.getValue();
 		
 		// blocks
-		List<Element> components = root.getChildren(XmlTools.BLOCK);
+		List<Element> components = root.getChildren(XmlNames.BLOCK);
 		for(Element temp: components)
 			loadBlockElement(temp,localFilePath,name,result,abstractBlocks,type);
     }
     
     private static void loadBlockElement(Element root, String individualFolder, String groupName, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.NAME).getValue();
+		String name = root.getAttribute(XmlNames.NAME).getValue();
 		
 		// folder
     	String localFilePath = individualFolder;
-		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
+		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		localFilePath = localFilePath+File.separator+attribute.getValue();
 		
 		// components

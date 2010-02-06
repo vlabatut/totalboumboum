@@ -33,6 +33,7 @@ import org.jdom.Element;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -50,7 +51,7 @@ public class PlayersSaver
 	}
 
 	private static Element savePlayersElement(Players players)
-	{	Element result = new Element(XmlTools.PLAYERS);
+	{	Element result = new Element(XmlNames.PLAYERS);
 		
 		// locations
 		HashMap<Integer,PlayerLocation[]> locations = players.getLocations();
@@ -66,7 +67,7 @@ public class PlayersSaver
 	}
  
 	private static Element saveLocationsElement(HashMap<Integer,PlayerLocation[]> locations)
-	{	Element result = new Element(XmlTools.LOCATIONS);
+	{	Element result = new Element(XmlNames.LOCATIONS);
 		
 		for(PlayerLocation[] playerLocation: locations.values())
 		{	Element caseElement = saveCaseElement(playerLocation);
@@ -77,11 +78,11 @@ public class PlayersSaver
 	}
     
 	private static Element saveCaseElement(PlayerLocation[] playerLocation)
-	{	Element result = new Element(XmlTools.CASE);
+	{	Element result = new Element(XmlNames.CASE);
 		
 		// number of players
 		int nbr = playerLocation.length;
-		result.setAttribute(XmlTools.PLAYERS,Integer.toString(nbr));
+		result.setAttribute(XmlNames.PLAYERS,Integer.toString(nbr));
 		
 		for(int i=0;i<playerLocation.length;i++)
 		{	PlayerLocation location = playerLocation[i];
@@ -93,27 +94,27 @@ public class PlayersSaver
 	}
     
 	private static Element saveLocationElement(PlayerLocation location)
-	{	Element result = new Element(XmlTools.LOCATION);
+	{	Element result = new Element(XmlNames.LOCATION);
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumIntegerDigits(2);
 			
 		// number of players
 		int player = location.getNumber();
-		result.setAttribute(XmlTools.PLAYER,nf.format(player));
+		result.setAttribute(XmlNames.PLAYER,nf.format(player));
 		
 		// line
 		int line = location.getLine();
-		result.setAttribute(XmlTools.LINE,nf.format(line));
+		result.setAttribute(XmlNames.LINE,nf.format(line));
 
 		// column
 		int col = location.getCol();
-		result.setAttribute(XmlTools.COL,nf.format(col));
+		result.setAttribute(XmlNames.COL,nf.format(col));
 	
 		return result;
 	}
 
 	private static Element saveItemsElement(HashMap<String,Integer> items)
-	{	Element result = new Element(XmlTools.ITEMS);
+	{	Element result = new Element(XmlNames.ITEMS);
 		
 		for(Entry<String,Integer> entry: items.entrySet())
 		{	String name = entry.getKey();
@@ -126,13 +127,13 @@ public class PlayersSaver
 	}
     
 	private static Element saveItemElement(String item, int nbr)
-	{	Element result = new Element(XmlTools.ITEM);
+	{	Element result = new Element(XmlNames.ITEM);
 		
 		// name
-		result.setAttribute(XmlTools.NAME,item);
+		result.setAttribute(XmlNames.NAME,item);
 	
 		// number
-		result.setAttribute(XmlTools.NUMBER,Integer.toString(nbr));
+		result.setAttribute(XmlNames.NUMBER,Integer.toString(nbr));
 
 		return result;
 	}

@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.jdom.Element;
-import org.totalboumboum.tools.xml.XmlTools;
+import org.totalboumboum.tools.xml.XmlNames;
 
 
 public class ProfilesSelectionLoader
@@ -33,7 +33,7 @@ public class ProfilesSelectionLoader
 	@SuppressWarnings("unchecked")
 	public static ProfilesSelection loadProfilesSelection(Element root)
 	{	ProfilesSelection result = new ProfilesSelection();
-		List<Element> playersElt = root.getChildren(XmlTools.PLAYER);
+		List<Element> playersElt = root.getChildren(XmlNames.PLAYER);
 		for(Element elt: playersElt)
 			loadPlayerElement(elt,result);
 		return result;
@@ -41,20 +41,20 @@ public class ProfilesSelectionLoader
 
 	private static void loadPlayerElement(Element root, ProfilesSelection result)
 	{	// file
-		String idStr = root.getAttributeValue(XmlTools.FILE);
+		String idStr = root.getAttributeValue(XmlNames.FILE);
 		int id = Integer.parseInt(idStr);
 		
 		// color
-		String colorStr = root.getAttributeValue(XmlTools.COLOR);
+		String colorStr = root.getAttributeValue(XmlNames.COLOR);
 		PredefinedColor color = PredefinedColor.valueOf(colorStr.toUpperCase(Locale.ENGLISH));
 		
 		// controls
-		String controlsStr = root.getAttributeValue(XmlTools.CONTROLS);
+		String controlsStr = root.getAttributeValue(XmlNames.CONTROLS);
 		int controlsIndex = Integer.parseInt(controlsStr);
 
 		// sprite
-		String spriteFolder = root.getAttributeValue(XmlTools.SPRITE_FOLDER);
-		String spritePack = root.getAttributeValue(XmlTools.SPRITE_PACK);
+		String spriteFolder = root.getAttributeValue(XmlNames.SPRITE_FOLDER);
+		String spritePack = root.getAttributeValue(XmlNames.SPRITE_PACK);
 		String[] hero = {spritePack,spriteFolder};
 		
 		result.addProfile(id,color,controlsIndex,hero);

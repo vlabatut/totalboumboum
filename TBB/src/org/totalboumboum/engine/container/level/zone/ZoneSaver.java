@@ -33,6 +33,7 @@ import org.totalboumboum.engine.container.level.variabletile.VariableTilesSaver;
 import org.totalboumboum.engine.container.theme.Theme;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -50,7 +51,7 @@ public class ZoneSaver
 	}
 
 	private static Element saveZoneElement(Zone zone)
-	{	Element result = new Element(XmlTools.ZONE);
+	{	Element result = new Element(XmlNames.ZONE);
 		
 		// tiles random variable
 		HashMap<String,VariableTile> variableTiles = zone.getVariableTiles();
@@ -66,7 +67,7 @@ public class ZoneSaver
 	}
     
     private static Element saveMatrixElement(Zone zone)
-    {	Element result = new Element(XmlTools.MATRIX);
+    {	Element result = new Element(XmlNames.MATRIX);
     	
     	// create and init all elements
     	int prevLine = -1;
@@ -77,8 +78,8 @@ public class ZoneSaver
     		int col = zoneTile.getCol();
     		if(line!=prevLine)
     		{	prevLine = line;
-    			lineElement = new Element(XmlTools.LINE);
-    			lineElement.setAttribute(XmlTools.POSITION, Integer.toString(line));
+    			lineElement = new Element(XmlNames.LINE);
+    			lineElement.setAttribute(XmlNames.POSITION, Integer.toString(line));
         		result.addContent(lineElement);
     		}
     		// process contant terms
@@ -87,12 +88,12 @@ public class ZoneSaver
        		String item = zoneTile.getItem();
        		String bomb = zoneTile.getBomb();
        		Element tileElement = saveBasicTileElement(floor, block, item, bomb);
-			tileElement.setAttribute(XmlTools.POSITION, Integer.toString(col));
+			tileElement.setAttribute(XmlNames.POSITION, Integer.toString(col));
     		// process variable term
     		String variable = zoneTile.getVariable();
     		if(variable!=null)
-    		{	Element variableElement = new Element(XmlTools.REFERENCE);
-    			variableElement.setAttribute(XmlTools.NAME,variable);
+    		{	Element variableElement = new Element(XmlNames.REFERENCE);
+    			variableElement.setAttribute(XmlNames.NAME,variable);
     			tileElement.addContent(variableElement);
     		}
     		
@@ -104,44 +105,44 @@ public class ZoneSaver
     
     public static Element saveBasicTileElement(String floor, String block, String item, String bomb)
     {	// init
-		Element result = new Element(XmlTools.TILE);
+		Element result = new Element(XmlNames.TILE);
 		
 		// floor
 		if(floor!=null)
-		{	Element floorElement = new Element(XmlTools.FLOOR);
+		{	Element floorElement = new Element(XmlNames.FLOOR);
 		result.addContent(floorElement);
 			String floorName = floor;
-			floorElement.setAttribute(XmlTools.NAME,floorName);
+			floorElement.setAttribute(XmlNames.NAME,floorName);
 		}
 		
 		// block
 		if(block!=null)
-		{	Element blockElement = new Element(XmlTools.BLOCK);
+		{	Element blockElement = new Element(XmlNames.BLOCK);
 			result.addContent(blockElement);
 			String temp[] = block.split(Theme.GROUP_SEPARATOR);
 			String blockGroup = temp[0];
-			blockElement.setAttribute(XmlTools.GROUP,blockGroup);
+			blockElement.setAttribute(XmlNames.GROUP,blockGroup);
 			String blockName = temp[1];
-			blockElement.setAttribute(XmlTools.NAME,blockName);
+			blockElement.setAttribute(XmlNames.NAME,blockName);
 		}
 		
 		// item
 		if(item!=null)
-		{	Element itemElement = new Element(XmlTools.ITEM);
+		{	Element itemElement = new Element(XmlNames.ITEM);
 			result.addContent(itemElement);
 			String itemName = item;
-			itemElement.setAttribute(XmlTools.NAME,itemName);
+			itemElement.setAttribute(XmlNames.NAME,itemName);
 		}
 		
 		// bomb		
 		if(bomb!=null)
-		{	Element bombElement = new Element(XmlTools.BOMB);
+		{	Element bombElement = new Element(XmlNames.BOMB);
 			result.addContent(bombElement);
 			String temp[] = bomb.split(Theme.PROPERTY_SEPARATOR);
 			String bombName = temp[0];
-			bombElement.setAttribute(XmlTools.NAME,bombName);
+			bombElement.setAttribute(XmlNames.NAME,bombName);
 			String bombRange = temp[1];
-			bombElement.setAttribute(XmlTools.RANGE,bombRange);
+			bombElement.setAttribute(XmlNames.RANGE,bombRange);
 		}
 
 		return result;

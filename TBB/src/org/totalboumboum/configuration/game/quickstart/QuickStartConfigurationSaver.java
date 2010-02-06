@@ -32,6 +32,7 @@ import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.configuration.profile.ProfilesSelectionSaver;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -49,14 +50,14 @@ public class QuickStartConfigurationSaver
 	}
 
 	private static Element saveGameQuickStartElement(QuickStartConfiguration quickStartConfiguration)
-	{	Element result = new Element(XmlTools.GAME_QUICKSTART); 
+	{	Element result = new Element(XmlNames.GAME_QUICKSTART); 
 			
 		// round
 		Element roundElement = saveRoundELement(quickStartConfiguration);
 		result.addContent(roundElement);
 	
 		// players
-		Element playersElement = new Element(XmlTools.PLAYERS);
+		Element playersElement = new Element(XmlNames.PLAYERS);
 		ProfilesSelection quickStartSelected = quickStartConfiguration.getProfilesSelection();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,quickStartSelected);
 		result.addContent(playersElement);
@@ -65,11 +66,11 @@ public class QuickStartConfigurationSaver
 	}
 	
 	private static Element saveRoundELement(QuickStartConfiguration quickStartConfiguration)
-	{	Element result = new Element(XmlTools.ROUND); 
+	{	Element result = new Element(XmlNames.ROUND); 
 	
 		// name
 		String roundName = quickStartConfiguration.getRoundName().toString();
-		result.setAttribute(XmlTools.NAME,roundName);
+		result.setAttribute(XmlNames.NAME,roundName);
 
 		// allowed players
 		TreeSet<Integer> allowedPlayers = quickStartConfiguration.getAllowedPlayers();
@@ -80,7 +81,7 @@ public class QuickStartConfigurationSaver
 		}
 		if(allowedPlayers.size()>0)
 			allowedPlayersStr = allowedPlayersStr.substring(0,allowedPlayersStr.length()-1);
-		result.setAttribute(XmlTools.ALLOWED_PLAYERS,allowedPlayersStr);
+		result.setAttribute(XmlNames.ALLOWED_PLAYERS,allowedPlayersStr);
 		
 		return result;
 	}

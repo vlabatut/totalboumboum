@@ -35,6 +35,7 @@ import org.jdom.Element;
 import org.totalboumboum.tools.classes.ClassTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -52,7 +53,7 @@ public class ControlSettingsSaver
 	}
 
 	private static Element saveControlElement(ControlSettings controlSettings)
-	{	Element result = new Element(XmlTools.CONTROLS);
+	{	Element result = new Element(XmlNames.CONTROLS);
 		HashMap<String,Integer> onEvents = controlSettings.getOnEvents();
 		Iterator<Entry<String,Integer>> onIt = onEvents.entrySet().iterator();
 		while(onIt.hasNext())
@@ -65,21 +66,21 @@ public class ControlSettingsSaver
 			// main element
 			Element eventElement;
 			{	String autofireText = Boolean.toString(autofire);
-				eventElement = new Element(XmlTools.EVENT);
-				eventElement.setAttribute(XmlTools.NAME,event);
-				eventElement.setAttribute(XmlTools.AUTOFIRE,autofireText);
+				eventElement = new Element(XmlNames.EVENT);
+				eventElement.setAttribute(XmlNames.NAME,event);
+				eventElement.setAttribute(XmlNames.AUTOFIRE,autofireText);
 				result.addContent(eventElement);
 			}
 			// on element
 			{	String onText = getKeyName(onKey);
-				Element onElement = new Element(XmlTools.ON);
-				onElement.setAttribute(XmlTools.KEY,onText);
+				Element onElement = new Element(XmlNames.ON);
+				onElement.setAttribute(XmlNames.KEY,onText);
 				eventElement.addContent(onElement);
 			}
 			// off element
 			{	String offText = getKeyName(offKey);
-				Element offElement = new Element(XmlTools.OFF);
-				offElement.setAttribute(XmlTools.KEY,offText);
+				Element offElement = new Element(XmlNames.OFF);
+				offElement.setAttribute(XmlNames.KEY,offText);
 				eventElement.addContent(offElement);
 			}
 		}

@@ -50,6 +50,7 @@ import org.totalboumboum.engine.content.sprite.bomb.BombFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -129,12 +130,12 @@ public class BombsetLoader
 
     	// abstract bombs
     	HashMap<String,BombFactory> abstractBombs = new HashMap<String,BombFactory>();
-    	Element abstractBombsElt = root.getChild(XmlTools.ABSTRACT_BOMBS);
+    	Element abstractBombsElt = root.getChild(XmlNames.ABSTRACT_BOMBS);
     	if(abstractBombsElt!=null)
     		loadBombsElement(abstractBombsElt,folder,result,abstractBombs,Type.ABSTRACT);
     	
     	// concrete bombs
-    	Element concreteBombsElt = root.getChild(XmlTools.CONCRETE_BOMBS);
+    	Element concreteBombsElt = root.getChild(XmlNames.CONCRETE_BOMBS);
 		loadBombsElement(concreteBombsElt,folder,result,abstractBombs,Type.CONCRETE);
     	
     	return result;
@@ -143,7 +144,7 @@ public class BombsetLoader
 	@SuppressWarnings("unchecked")
 	private static void loadBombsElement(Element root, String folder, Bombset result, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
-    	List<Element> bombs = root.getChildren(XmlTools.BOMB);
+    	List<Element> bombs = root.getChildren(XmlNames.BOMB);
     	Iterator<Element> i = bombs.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
@@ -153,11 +154,11 @@ public class BombsetLoader
 
 	private static void loadBombElement(Element root, String folder, Bombset bombset, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
+		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
+		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// required abilities
@@ -256,19 +257,19 @@ public class BombsetLoader
 	private static void loadBombsetElement(Element root, String folder, PredefinedColor color, Bombset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// abstract bombs
     	HashMap<String,String> abstractBombs = new HashMap<String,String>();
-    	Element abstractBombsElt = root.getChild(XmlTools.ABSTRACT_BOMBS);
+    	Element abstractBombsElt = root.getChild(XmlNames.ABSTRACT_BOMBS);
     	if(abstractBombsElt!=null)
     		loadBombsElement(abstractBombsElt,folder,color,result,abstractBombs,Type.ABSTRACT);
     	
     	// concrete bombs
-    	Element concreteBombsElt = root.getChild(XmlTools.CONCRETE_BOMBS);
+    	Element concreteBombsElt = root.getChild(XmlNames.CONCRETE_BOMBS);
 		loadBombsElement(concreteBombsElt,folder,color,result,abstractBombs,Type.CONCRETE);
 	}
     
     @SuppressWarnings("unchecked")
 	private static void loadBombsElement(Element root, String folder, PredefinedColor color, Bombset result, HashMap<String,String> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = folder;
-    	List<Element> bombs = root.getChildren(XmlTools.BOMB);
+    	List<Element> bombs = root.getChildren(XmlNames.BOMB);
     	Iterator<Element> i = bombs.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
@@ -278,11 +279,11 @@ public class BombsetLoader
     
 	private static void loadBombElement(Element root, String folder, PredefinedColor color, Bombset bombset, HashMap<String,String> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
+		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
+		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// required abilities

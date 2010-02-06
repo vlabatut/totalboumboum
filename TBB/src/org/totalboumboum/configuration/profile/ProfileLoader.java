@@ -36,6 +36,7 @@ import org.totalboumboum.engine.content.sprite.SpritePreview;
 import org.totalboumboum.engine.content.sprite.SpritePreviewLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -91,42 +92,42 @@ public class ProfileLoader
 	
 	private static void loadProfileElement(Element root, Profile result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// general properties
-    	Element general = root.getChild(XmlTools.GENERAL);
+    	Element general = root.getChild(XmlNames.GENERAL);
 		loadGeneralElement(general,result);
 		
 		// artificial intelligence
-		Element ai = root.getChild(XmlTools.AI);
+		Element ai = root.getChild(XmlNames.AI);
 		if(ai!=null)
 			loadAiElement(ai,result);
 		
 		// sprite info
-		Element character = root.getChild(XmlTools.CHARACTER);
+		Element character = root.getChild(XmlNames.CHARACTER);
 		loadSpriteElement(character,result);
 	}
     
     private static void loadGeneralElement(Element root, Profile result)
     {	// name
-    	String name = root.getAttribute(XmlTools.NAME).getValue();
+    	String name = root.getAttribute(XmlNames.NAME).getValue();
     	result.setName(name);
     }
     
     private static void loadAiElement(Element root, Profile result)
     {	// name
-    	String name = root.getAttribute(XmlTools.NAME).getValue();
+    	String name = root.getAttribute(XmlNames.NAME).getValue();
     	result.setAiName(name.trim());
     	
     	// pack
-    	String packname = root.getAttribute(XmlTools.PACK).getValue();
+    	String packname = root.getAttribute(XmlNames.PACK).getValue();
     	result.setAiPackname(packname.trim());
     }
     
     private static void loadSpriteElement(Element root, Profile result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// packname
-    	String spritePackname = root.getAttribute(XmlTools.PACKNAME).getValue();
+    	String spritePackname = root.getAttribute(XmlNames.PACKNAME).getValue();
     	result.getDefaultSprite().setPack(spritePackname);
     	
     	// folder
-    	String spriteFolder = root.getAttribute(XmlTools.NAME).getValue();
+    	String spriteFolder = root.getAttribute(XmlNames.NAME).getValue();
     	result.getDefaultSprite().setFolder(spriteFolder);
     	
     	// name
@@ -136,7 +137,7 @@ public class ProfileLoader
 		result.getDefaultSprite().setName(spriteName);
     	
 		// color
-		String spriteDefaultColorStr = root.getAttribute(XmlTools.COLOR).getValue().trim().toUpperCase(Locale.ENGLISH);
+		String spriteDefaultColorStr = root.getAttribute(XmlNames.COLOR).getValue().trim().toUpperCase(Locale.ENGLISH);
     	PredefinedColor spriteDefaultColor = PredefinedColor.valueOf(spriteDefaultColorStr);
     	result.getDefaultSprite().setColor(spriteDefaultColor);
 		

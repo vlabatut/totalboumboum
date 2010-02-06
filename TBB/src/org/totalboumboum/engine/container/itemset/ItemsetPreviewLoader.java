@@ -35,6 +35,7 @@ import org.totalboumboum.engine.content.sprite.SpritePreview;
 import org.totalboumboum.engine.content.sprite.SpritePreviewLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -65,12 +66,12 @@ public class ItemsetPreviewLoader
 
 		// abstract items
     	HashMap<String,SpritePreview> abstractItems = new HashMap<String,SpritePreview>();
-    	Element abstractItemsElt = root.getChild(XmlTools.ABSTRACT_ITEMS);
+    	Element abstractItemsElt = root.getChild(XmlNames.ABSTRACT_ITEMS);
     	if(abstractItemsElt!=null)
     		loadItemsElement(abstractItemsElt,folder,result,abstractItems,Type.ABSTRACT);
     	
     	// concrete items
-    	Element concreteItemsElt = root.getChild(XmlTools.CONCRETE_ITEMS);
+    	Element concreteItemsElt = root.getChild(XmlNames.CONCRETE_ITEMS);
 		loadItemsElement(concreteItemsElt,folder,result,abstractItems,Type.CONCRETE);
 		
 		return result;
@@ -79,7 +80,7 @@ public class ItemsetPreviewLoader
     @SuppressWarnings("unchecked")
     private static void loadItemsElement(Element root, String folder, ItemsetPreview result, HashMap<String,SpritePreview> abstractItems, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	String individualFolder = folder;
-		List<Element> items = root.getChildren(XmlTools.ITEM);	
+		List<Element> items = root.getChildren(XmlNames.ITEM);	
 		Iterator<Element> i = items.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -89,11 +90,11 @@ public class ItemsetPreviewLoader
     
     private static void loadItemElement(Element root, String folder, ItemsetPreview result, HashMap<String,SpritePreview> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
+		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
+		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		if(attribute!=null)
 			individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		

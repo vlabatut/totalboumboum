@@ -26,13 +26,13 @@ import java.util.List;
 
 import org.jdom.Element;
 import org.totalboumboum.engine.container.level.zone.ZoneSaver;
-import org.totalboumboum.tools.xml.XmlTools;
+import org.totalboumboum.tools.xml.XmlNames;
 
 
 public class VariableTilesSaver
 {	
     public static Element saveVariableTilesElement(HashMap<String,VariableTile> variableTiles)
-    {	Element result = new Element(XmlTools.VARIABLE_TILES);
+    {	Element result = new Element(XmlNames.VARIABLE_TILES);
     	for(VariableTile variableTile: variableTiles.values())
     	{	Element variableTileElement = saveVariableTileElement(variableTile);
     		result.addContent(variableTileElement);
@@ -41,10 +41,10 @@ public class VariableTilesSaver
     }
 
     private static Element saveVariableTileElement(VariableTile variableTile)
-    {	Element result = new Element(XmlTools.VARIABLE_TILE);
+    {	Element result = new Element(XmlNames.VARIABLE_TILE);
     	
     	// name
-    	result.setAttribute(XmlTools.NAME,variableTile.getName());
+    	result.setAttribute(XmlNames.NAME,variableTile.getName());
 
     	// values
     	List<ValueTile> valueTiles = variableTile.getValues();
@@ -66,7 +66,7 @@ public class VariableTilesSaver
     	
     	// probability
 		double proba = valueTile.getProba();
-		result.setAttribute(XmlTools.PROBA,Double.toString(proba));
+		result.setAttribute(XmlNames.PROBA,Double.toString(proba));
 		
 		return result;
     }

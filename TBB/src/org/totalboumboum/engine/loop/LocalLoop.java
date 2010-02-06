@@ -89,8 +89,8 @@ import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CalculusTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.strings.StringTools;
-import org.totalboumboum.tools.strings.StringTools.TimeUnit;
+import org.totalboumboum.tools.time.TimeTools;
+import org.totalboumboum.tools.time.TimeUnit;
 import org.xml.sax.SAXException;
 
 public class LocalLoop extends Loop
@@ -1017,7 +1017,7 @@ public class LocalLoop extends Loop
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			long time = getTotalGameTime();
-			String text = "Game time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
+			String text = "Game time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);
@@ -1030,7 +1030,7 @@ public class LocalLoop extends Loop
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			long time = getTotalEngineTime();
-			String text = "Engine time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
+			String text = "Engine time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);
@@ -1043,7 +1043,7 @@ public class LocalLoop extends Loop
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			long time = System.currentTimeMillis()-gameStartTime;
-			String text = "Real time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
+			String text = "Real time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);

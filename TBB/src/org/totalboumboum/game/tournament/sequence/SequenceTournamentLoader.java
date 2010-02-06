@@ -33,7 +33,7 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.TournamentLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.tournament.TournamentLoader;
-import org.totalboumboum.tools.xml.XmlTools;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
 
@@ -44,12 +44,12 @@ public class SequenceTournamentLoader
 		Element element;
 		
 		// limits
-		element = root.getChild(XmlTools.LIMITS);
+		element = root.getChild(XmlNames.LIMITS);
 		Limits<TournamentLimit> limits = loadLimitsElement(element,folder);
 		result.setLimits(limits);
 		
 		// matches
-		element = root.getChild(XmlTools.MATCHES);
+		element = root.getChild(XmlNames.MATCHES);
 		loadMatchesElement(element,folder,result);
 		return result;
 	}
@@ -57,11 +57,11 @@ public class SequenceTournamentLoader
 	@SuppressWarnings("unchecked")
 	private static void loadMatchesElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// matches order
-    	String str = root.getAttribute(XmlTools.RANDOM_ORDER).getValue().trim();
+    	String str = root.getAttribute(XmlNames.RANDOM_ORDER).getValue().trim();
     	boolean randomOrder = Boolean.valueOf(str);
     	result.setRandomizeMatches(randomOrder);
     	// matches
-    	List<Element> matches = root.getChildren(XmlTools.MATCH);
+    	List<Element> matches = root.getChildren(XmlNames.MATCH);
 		Iterator<Element> i = matches.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();

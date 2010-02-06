@@ -35,6 +35,7 @@ import org.totalboumboum.configuration.profile.ProfilesSelectionLoader;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -53,75 +54,75 @@ public class QuickMatchConfigurationLoader
 
 	private static void loadGameQuickMatchElement(Element root, QuickMatchConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// options
-		Element optionsElement = root.getChild(XmlTools.OPTIONS);
+		Element optionsElement = root.getChild(XmlNames.OPTIONS);
 		// use last players
-		String att = optionsElement.getAttributeValue(XmlTools.USE_LAST_PLAYERS);
+		String att = optionsElement.getAttributeValue(XmlNames.USE_LAST_PLAYERS);
 		boolean useLastPlayers = Boolean.parseBoolean(att);
 		result.setUseLastPlayers(useLastPlayers);
 		// use last levels
-		att = optionsElement.getAttributeValue(XmlTools.USE_LAST_LEVELS);
+		att = optionsElement.getAttributeValue(XmlNames.USE_LAST_LEVELS);
 		boolean useLastLevels = Boolean.parseBoolean(att);
 		result.setUseLastLevels(useLastLevels);
 		// use last settings
-		att = optionsElement.getAttributeValue(XmlTools.USE_LAST_SETTINGS);
+		att = optionsElement.getAttributeValue(XmlNames.USE_LAST_SETTINGS);
 		boolean useLastSettings = Boolean.parseBoolean(att);
 		result.setUseLastSettings(useLastSettings);
 		
 		// settings
-		Element settingsElement = root.getChild(XmlTools.SETTINGS);
+		Element settingsElement = root.getChild(XmlNames.SETTINGS);
 		loadSettingsElement(settingsElement,result);
 		
 		// players
-		Element playersElement = root.getChild(XmlTools.PLAYERS);
+		Element playersElement = root.getChild(XmlNames.PLAYERS);
 		ProfilesSelection quickMatchProfiles = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
 		result.setProfilesSelection(quickMatchProfiles);
 
 		// levels
-		Element levelsElement = root.getChild(XmlTools.LEVELS);
+		Element levelsElement = root.getChild(XmlNames.LEVELS);
 		LevelsSelection quickMatchLevels = LevelsSelectionLoader.loadLevelsSelection(levelsElement);
 		result.setLevelsSelection(quickMatchLevels);
 	}
 
 	private static void loadSettingsElement(Element root, QuickMatchConfiguration result)
 	{	// levels 
-		Element levelsElement = root.getChild(XmlTools.LEVELS);
+		Element levelsElement = root.getChild(XmlNames.LEVELS);
 		loadLevelsElement(levelsElement,result);
 		// players 
-		Element playersElement = root.getChild(XmlTools.PLAYERS);
+		Element playersElement = root.getChild(XmlNames.PLAYERS);
 		loadPlayersElement(playersElement,result);
 		// limits 
-		Element limitsElement = root.getChild(XmlTools.LIMITS);
+		Element limitsElement = root.getChild(XmlNames.LIMITS);
 		loadLimitsElement(limitsElement,result);
 		// points
-		Element pointsElement = root.getChild(XmlTools.POINTS);
+		Element pointsElement = root.getChild(XmlNames.POINTS);
 		loadPointsElement(pointsElement,result);
 	}
 
 	private static void loadLevelsElement(Element root, QuickMatchConfiguration result)
 	{	// random order
-		String att = root.getAttributeValue(XmlTools.RANDOM_ORDER);
+		String att = root.getAttributeValue(XmlNames.RANDOM_ORDER);
 		boolean levelsRandomOrder = Boolean.parseBoolean(att);
 		result.setLevelsRandomOrder(levelsRandomOrder);
 	}
 	
 	private static void loadPlayersElement(Element root, QuickMatchConfiguration result)
 	{	// random location
-		String att = root.getAttributeValue(XmlTools.RANDOM_LOCATION);
+		String att = root.getAttributeValue(XmlNames.RANDOM_LOCATION);
 		boolean playersRandomLocation = Boolean.parseBoolean(att);
 		result.setPlayersRandomLocation(playersRandomLocation);
 	}
 	
 	private static void loadLimitsElement(Element root, QuickMatchConfiguration result)
 	{	// points limit
-		String att = root.getAttributeValue(XmlTools.POINTS);
+		String att = root.getAttributeValue(XmlNames.POINTS);
 		int limitPoints = Integer.parseInt(att);
 		result.setLimitPoints(limitPoints);
 		// rounds limit
-		att = root.getAttributeValue(XmlTools.ROUNDS);
+		att = root.getAttributeValue(XmlNames.ROUNDS);
 		int limitRounds = Integer.parseInt(att);
 		result.setLimitRounds(limitRounds);
 		// time limit
-		att = root.getAttributeValue(XmlTools.TIME);
+		att = root.getAttributeValue(XmlNames.TIME);
 		int limitTime = Integer.parseInt(att);
 		result.setLimitTime(limitTime);
 	}
@@ -132,21 +133,21 @@ public class QuickMatchConfigurationLoader
 		ArrayList<Integer> points = new ArrayList<Integer>();
 		for(int i=0;i<GameData.CONTROL_COUNT;i++)
 			points.add(0);
-		List<Element> list = root.getChildren(XmlTools.VALUE);
+		List<Element> list = root.getChildren(XmlNames.VALUE);
 		for(Element e:list)
-		{	String rankStr = e.getAttributeValue(XmlTools.RANK);
+		{	String rankStr = e.getAttributeValue(XmlNames.RANK);
 			int rank = Integer.parseInt(rankStr);
-			String pointsStr = e.getAttributeValue(XmlTools.POINTS);
+			String pointsStr = e.getAttributeValue(XmlNames.POINTS);
 			int pts = Integer.parseInt(pointsStr);
 			points.set(rank-1,pts);
 		}
 		result.setPoints(points);
 		// share
-		String att = root.getAttributeValue(XmlTools.SHARE);
+		String att = root.getAttributeValue(XmlNames.SHARE);
 		boolean pointsShare = Boolean.parseBoolean(att);
 		result.setPointsShare(pointsShare);
 		// points draw
-		att = root.getAttributeValue(XmlTools.DRAW);
+		att = root.getAttributeValue(XmlNames.DRAW);
 		QuickMatchDraw pointsDraw = QuickMatchDraw.valueOf(att.toUpperCase(Locale.ENGLISH));
 		result.setPointsDraw(pointsDraw);		
 	}

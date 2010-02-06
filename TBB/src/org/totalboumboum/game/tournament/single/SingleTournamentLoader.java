@@ -28,7 +28,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.tournament.TournamentLoader;
-import org.totalboumboum.tools.xml.XmlTools;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
 
@@ -38,7 +38,7 @@ public class SingleTournamentLoader
 	{	SingleTournament result = new SingleTournament();
 		Element element;
 		// match
-		element = root.getChild(XmlTools.MATCH);
+		element = root.getChild(XmlNames.MATCH);
 		loadMatchElement(element,folder,result);
 		return result;
 	}

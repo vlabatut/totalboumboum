@@ -30,6 +30,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -48,7 +49,7 @@ public class AiPreviewSaver
 	}
 
 	private static Element saveAiElement(AiPreview aiPreview)
-	{	Element result = new Element(XmlTools.AI); 
+	{	Element result = new Element(XmlNames.AI); 
 		// notes
 		Element notesElement = saveNotesElement(aiPreview);
 		result.addContent(notesElement);
@@ -60,24 +61,24 @@ public class AiPreviewSaver
 	}
 	
 	private static Element saveNotesElement(AiPreview aiPreview)
-	{	Element result = new Element(XmlTools.NOTES);
+	{	Element result = new Element(XmlNames.NOTES);
 		Iterator<String> it = aiPreview.getNotes().iterator();
 		while(it.hasNext())
 		{	String temp = it.next();
-			Element elt = new Element(XmlTools.LINE);
-			elt.setAttribute(XmlTools.VALUE,temp);
+			Element elt = new Element(XmlNames.LINE);
+			elt.setAttribute(XmlNames.VALUE,temp);
 			result.addContent(elt);
 		}
 		return result;
 	}
 	
 	private static Element saveAuthorsElement(AiPreview aiPreview)
-	{	Element result = new Element(XmlTools.AUTHORS);
+	{	Element result = new Element(XmlNames.AUTHORS);
 		Iterator<String> it = aiPreview.getAuthors().iterator();
 		while(it.hasNext())
 		{	String temp = it.next();
-			Element elt = new Element(XmlTools.AUTHOR);
-			elt.setAttribute(XmlTools.NAME,temp);
+			Element elt = new Element(XmlNames.AUTHOR);
+			elt.setAttribute(XmlNames.NAME,temp);
 			result.addContent(elt);
 		}
 		return result;

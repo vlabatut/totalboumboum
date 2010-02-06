@@ -31,6 +31,7 @@ import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.configuration.profile.ProfilesSelectionSaver;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -48,20 +49,20 @@ public class TournamentConfigurationSaver
 	}
 
 	private static Element saveGameTournamentElement(TournamentConfiguration tournamentConfiguration)
-	{	Element result = new Element(XmlTools.GAME_TOURNAMENT); 
+	{	Element result = new Element(XmlNames.GAME_TOURNAMENT); 
 		
 		// options
 		Element optionsElement = saveTournamentOptionsElement(tournamentConfiguration);
 		result.addContent(optionsElement);
 	
 		// name
-		Element tournamentElement = new Element(XmlTools.TOURNAMENT);
+		Element tournamentElement = new Element(XmlNames.TOURNAMENT);
 		String tournament = tournamentConfiguration.getTournamentName().toString();
-		tournamentElement.setAttribute(XmlTools.NAME,tournament);
+		tournamentElement.setAttribute(XmlNames.NAME,tournament);
 		result.addContent(tournamentElement);
 		
 		// players
-		Element playersElement = new Element(XmlTools.PLAYERS);
+		Element playersElement = new Element(XmlNames.PLAYERS);
 		ProfilesSelection tournamentSelected = tournamentConfiguration.getProfilesSelection();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,tournamentSelected);
 		result.addContent(playersElement);
@@ -70,23 +71,23 @@ public class TournamentConfigurationSaver
 	}
 
 	private static Element saveTournamentOptionsElement(TournamentConfiguration tournamentConfiguration)
-	{	Element result = new Element(XmlTools.OPTIONS);
+	{	Element result = new Element(XmlNames.OPTIONS);
 		
 		// use last players
 		String useLastPlayers = Boolean.toString(tournamentConfiguration.getUseLastPlayers());
-		result.setAttribute(XmlTools.USE_LAST_PLAYERS,useLastPlayers);
+		result.setAttribute(XmlNames.USE_LAST_PLAYERS,useLastPlayers);
 
 		// use last settings
 		String useLastTournament = Boolean.toString(tournamentConfiguration.getUseLastTournament());
-		result.setAttribute(XmlTools.USE_LAST_TOURNAMENT,useLastTournament);
+		result.setAttribute(XmlNames.USE_LAST_TOURNAMENT,useLastTournament);
 
 		// auto load
 		String autoLoad = Boolean.toString(tournamentConfiguration.getAutoLoad());
-		result.setAttribute(XmlTools.AUTOLOAD,autoLoad);
+		result.setAttribute(XmlNames.AUTOLOAD,autoLoad);
 
 		// auto save
 		String autoSave = Boolean.toString(tournamentConfiguration.getAutoSave());
-		result.setAttribute(XmlTools.AUTOSAVE,autoSave);
+		result.setAttribute(XmlNames.AUTOSAVE,autoSave);
 		
 		return result;
 	}

@@ -41,6 +41,7 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.ActorModulati
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -66,16 +67,16 @@ public abstract class SpriteFactoryLoader
 	// GENERAL ELEMENT LOADING		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected static <T extends Sprite, U extends SpriteFactory<T>> void loadGeneralElement(Element root, SpriteFactory<T> result, HashMap<String,U> abstractSprites)
-	{	Element elt = root.getChild(XmlTools.GENERAL);
+	{	Element elt = root.getChild(XmlNames.GENERAL);
 		
 		// name
-		String name = elt.getAttribute(XmlTools.NAME).getValue().trim();
+		String name = elt.getAttribute(XmlNames.NAME).getValue().trim();
 		result.setName(name);
 //if(name==null)
 //	System.out.println();
 
 		// base
-		String baseStr = elt.getAttributeValue(XmlTools.BASE);
+		String baseStr = elt.getAttributeValue(XmlNames.BASE);
 		result.setBase(baseStr);
 		
 		// init
@@ -96,10 +97,10 @@ public abstract class SpriteFactoryLoader
 	}
 	
 	protected static <T extends Sprite> void loadGeneralElement(Element root, SpriteFactory<T> result, SpriteFactory<T> base)
-	{	Element elt = root.getChild(XmlTools.GENERAL);
+	{	Element elt = root.getChild(XmlNames.GENERAL);
 	
 		// name
-		String name = elt.getAttribute(XmlTools.NAME).getValue().trim();
+		String name = elt.getAttribute(XmlNames.NAME).getValue().trim();
 		result.setName(name);
 		
 		loadGeneralElement(result,base);
@@ -259,9 +260,9 @@ public abstract class SpriteFactoryLoader
 	/////////////////////////////////////////////////////////////////
 	protected static String loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String result = null;
-		Element elt = root.getChild(XmlTools.EXPLOSION);
+		Element elt = root.getChild(XmlNames.EXPLOSION);
 		if(elt!=null)
-			result = elt.getAttribute(XmlTools.NAME).getValue().trim();
+			result = elt.getAttribute(XmlNames.NAME).getValue().trim();
 		return result;
 	}
 }
