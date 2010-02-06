@@ -20,7 +20,7 @@
 		<player file="69" color="RUST" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tournament200809" folder="classic" />
+		<level pack="tournament200910" folder="classic" />
 		<level pack="tournament200809" folder="items" />
 		<level pack="tournament200809" folder="line" />
 		<level pack="tournament200910" folder="horizontal" />

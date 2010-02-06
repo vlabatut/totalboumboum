@@ -5,7 +5,7 @@
 # it should work on most Linux, Unix, and Mac OS systems.
 # It (re)compiles the whole TBB game and the dependant AI classes.
 #
-# v.0.3
+# v.0.4
 #
 # -------------------------------------------------------------------
 #
@@ -30,13 +30,14 @@
 # -------------------------------------------------------------------
 #
 # define path variables
-	main="./src/fr/free/totalboumboum"
+	main="./src/org/totalboumboum"
 	aig=${main}/ai
 	aib="./resources/ai"
 	ai=${aib}/org/totalboumboum/ai
 	bin="./bin"
 	jdom="./resources/lib/jdom.jar"
-	cp="${bin}:${jdom}"
+	japa="./resources/lib/javaparser-1.0.7.jar"
+	cp="${bin}:${jdom}:${japa}"
 	sp="./src"
 #
 # create directory for .class files
@@ -63,7 +64,7 @@
 	echo "compiling the AI classes located in the resources..."
 	for i in $(ls -d ${ai}/*/); do
 		echo -e "\t${i}"
-		for j in $(ls -d $i*/); do
+		for j in $(ls -d ${i}/ais/*/); do
 			echo -e "\t\t${j}"	
 			javac -nowarn -sourcepath ${sp}:${aib} -classpath ${cp}:${aib} $j/*.java
 		done
