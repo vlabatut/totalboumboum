@@ -58,6 +58,7 @@ public class ItemsetLoader
 	/////////////////////////////////////////////////////////////////
 	public static Itemset loadItemset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
+		double zoomFactor = RoundVariables.zoomFactor;
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ITEMSET+FileNames.EXTENSION_SCHEMA);
@@ -76,8 +77,7 @@ public class ItemsetLoader
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getMemoryCache(cacheName);
 		if(engineConfiguration.getMemoryCache() && o!=null)
-		{	double zoomFactor = RoundVariables.zoomFactor;
-			result = ((Itemset)o).cacheCopy(zoomFactor);
+		{	result = ((Itemset)o).cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
@@ -86,6 +86,7 @@ public class ItemsetLoader
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
 				result = (Itemset)oIn.readObject();
 				oIn.close();
+				result = result.cacheCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -114,12 +115,9 @@ public class ItemsetLoader
 				oOut.writeObject(result);
 				oOut.close();
 			}
+			result = result.cacheCopy(zoomFactor);
 		}
 		
-		// set final size
-		double zoomFactor = RoundVariables.zoomFactor;
-		result = result.cacheCopy(zoomFactor);
-
 		return result;
     }
     
