@@ -73,7 +73,7 @@ public class BombsetLoader
 		File objectFile = dataFile.getParentFile();
 		File packFile = objectFile.getParentFile();
 		String cacheName = packFile.getName()+"_"+"abstract";
-		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
+		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getMemoryCache(cacheName);
@@ -185,6 +185,7 @@ public class BombsetLoader
 	/////////////////////////////////////////////////////////////////
 	public static Bombset completeBombset(String folderPath, PredefinedColor color, Bombset base) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
+		double zoomFactor = RoundVariables.zoomFactor;
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_SCHEMA);
@@ -199,13 +200,12 @@ public class BombsetLoader
 		if(color!=null)
 			c = color.toString();
 		String cacheName = packFile.getName()+"_"+c;
-		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
+		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getMemoryCache(cacheName);
 		if(engineConfiguration.getMemoryCache() && o!=null)
-		{	double zoomFactor = RoundVariables.zoomFactor;
-			result = ((Bombset)o).cacheCopy(zoomFactor);
+		{	result = ((Bombset)o).cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
@@ -214,6 +214,7 @@ public class BombsetLoader
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
 				result = (Bombset)oIn.readObject();
 				oIn.close();
+				result = result.cacheCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -243,11 +244,8 @@ public class BombsetLoader
 				oOut.writeObject(result);
 				oOut.close();
 			}
+			result = result.cacheCopy(zoomFactor);
 		}
-
-		// set final size
-		double zoomFactor = RoundVariables.zoomFactor;
-		result = result.cacheCopy(zoomFactor);
 		
 		return result;
 	}
