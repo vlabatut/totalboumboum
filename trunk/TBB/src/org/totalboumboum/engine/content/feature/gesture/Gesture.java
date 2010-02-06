@@ -249,44 +249,20 @@ public class Gesture implements Serializable
 		}
 
 		// modulations
-		copyModulations(result);
+		for(SelfModulation e: selfModulations)
+			result.addModulation(e);
+		for(OtherModulation e: otherModulations)
+			result.addModulation(e);
+		for(ActorModulation e: actorModulations)
+			result.addModulation(e);
+		for(TargetModulation e: targetModulations)
+			result.addModulation(e);
+		for(ThirdModulation e: thirdModulations)
+			result.addModulation(e);
 		
 		result.finished = finished;
-		return result;
-	}
-	
-	private void copyModulations(Gesture result)
-	{	// self modulations
-		for(SelfModulation e: selfModulations)
-		{	//SelfModulation temp = e.copy();
-			SelfModulation temp = e;
-			result.addModulation(temp);
-		}
-		// other modulations
-		for(OtherModulation e: otherModulations)
-		{	//OtherModulation temp = e.copy();
-			OtherModulation temp = e;
-			result.addModulation(temp);
-		}
 		
-		// actor modulations
-		for(ActorModulation e: actorModulations)
-		{	//ActorModulation temp = e.copy();
-			ActorModulation temp = e;
-			result.addModulation(temp);
-		}
-		// target modulations
-		for(TargetModulation e: targetModulations)
-		{	//TargetModulation temp = e.copy();
-			TargetModulation temp = e;
-			result.addModulation(temp);
-		}
-		// third modulations
-		for(ThirdModulation e: thirdModulations)
-		{	//ThirdModulation temp = e.copy();
-			ThirdModulation temp = e;
-			result.addModulation(temp);
-		}		
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -321,9 +297,17 @@ public class Gesture implements Serializable
 		}
 	
 		// modulations
-		copyModulations(result);
+		for(SelfModulation e: selfModulations)
+			result.addModulation(e.cacheCopy(zoomFactor));
+		for(OtherModulation e: otherModulations)
+			result.addModulation(e.cacheCopy(zoomFactor));
+		for(ActorModulation e: actorModulations)
+			result.addModulation(e.cacheCopy(zoomFactor));
+		for(TargetModulation e: targetModulations)
+			result.addModulation(e.cacheCopy(zoomFactor));
+		for(ThirdModulation e: thirdModulations)
+			result.addModulation(e.cacheCopy(zoomFactor));
 		
-		result.finished = finished;
 		return result;
 	}
 	

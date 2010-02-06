@@ -6,7 +6,6 @@ import org.totalboumboum.engine.content.feature.Contact;
 import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -110,6 +109,30 @@ public class OtherModulation extends AbstractStateModulation
 		result.frame = frame;
 		result.gestureName = gestureName;
 		result.strength = strength;
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public OtherModulation cacheCopy(double zoomFactor)
+	{	OtherModulation result = new OtherModulation(name);
+		
+		// name
+		result.name = name;
+		
+		// contacts
+		result.contacts.addAll(contacts);
+		
+		// tile positions
+		result.tilePositions.addAll(tilePositions);
+
+		// misc
+		result.strength = strength;
+		result.frame = frame;
+		result.gestureName = gestureName;
+		result.strength = strength;
+		
 		return result;
 	}
 }
