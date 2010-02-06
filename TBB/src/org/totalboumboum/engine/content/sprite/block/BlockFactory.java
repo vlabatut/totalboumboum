@@ -111,7 +111,7 @@ public class BlockFactory extends SpriteFactory<Block>
 		ArrayList<AbstractAbility> abilitiesCopy = new ArrayList<AbstractAbility>();
 		for(AbstractAbility ability: abilities)
 			abilitiesCopy.add(ability.cacheCopy(zoomFactor));
-		result.setAbilities(abilities);
+		result.setAbilities(abilitiesCopy);
 		
 		// bombset
 		result.setBombsetColor(bombsetColor);

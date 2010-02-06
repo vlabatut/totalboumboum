@@ -157,29 +157,76 @@ public class ThirdModulation extends AbstractActionModulation
 	public ThirdModulation copy()
 	{	GeneralAction actionCopy = action;
 		ThirdModulation result = new ThirdModulation(actionCopy); //NOTE why copy the action?
+		
 		// restrictions
 		result.actorRestrictions.addAll(actorRestrictions);
 		result.targetRestrictions.addAll(targetRestrictions);
+		
 		// contacts
 		for(Contact c: actorCircumstance.getContacts())
 			result.addActorContact(c);
 		for(Contact c: targetCircumstance.getContacts())
 			result.addTargetContact(c);
+		
 		// tile positions
 		for(TilePosition tp: actorCircumstance.getTilePositions())
 			result.addActorTilePosition(tp);
 		for(TilePosition tp: targetCircumstance.getTilePositions())
 			result.addTargetTilePosition(tp);
+		
 		// orientations
 		for(Orientation o: actorCircumstance.getOrientations())
 			result.addActorOrientation(o);
 		for(Orientation o: targetCircumstance.getOrientations())
 			result.addTargetOrientation(o);
+		
 		// misc
 		result.finished = finished;
 		result.frame = frame;
 		result.gestureName = gestureName;
 		result.strength = strength;
+		
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public ThirdModulation cacheCopy(double zoomFactor)
+	{	GeneralAction actionCopy = action.cacheCopy(zoomFactor);
+		ThirdModulation result = new ThirdModulation(actionCopy); //NOTE why copy the action?
+		
+		// actor modulations
+		for(AbstractAbility ability: actorRestrictions)
+			result.actorRestrictions.add(ability.cacheCopy(zoomFactor));
+
+		// target modulations
+		for(AbstractAbility ability: targetRestrictions)
+			result.targetRestrictions.add(ability.cacheCopy(zoomFactor));
+		
+		// contacts
+		for(Contact c: actorCircumstance.getContacts())
+			result.addActorContact(c);
+		for(Contact c: targetCircumstance.getContacts())
+			result.addTargetContact(c);
+		
+		// tile positions
+		for(TilePosition tp: actorCircumstance.getTilePositions())
+			result.addActorTilePosition(tp);
+		for(TilePosition tp: targetCircumstance.getTilePositions())
+			result.addTargetTilePosition(tp);
+		
+		// orientations
+		for(Orientation o: actorCircumstance.getOrientations())
+			result.addActorOrientation(o);
+		for(Orientation o: targetCircumstance.getOrientations())
+			result.addTargetOrientation(o);
+		
+		// misc
+		result.frame = frame;
+		result.gestureName = gestureName;
+		result.strength = strength;
+		
 		return result;
 	}
 }
