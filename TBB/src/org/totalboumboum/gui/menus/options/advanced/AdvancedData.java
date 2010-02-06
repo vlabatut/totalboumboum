@@ -362,6 +362,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 				// common
 				engineConfiguration.setSpeedCoeff(speedValues[index]);
 				setGameSpeed();
+				break;
 			// log controls
 			case LINE_LOG_CONTROLS:
 				boolean logControls = !engineConfiguration.getLogControls();
