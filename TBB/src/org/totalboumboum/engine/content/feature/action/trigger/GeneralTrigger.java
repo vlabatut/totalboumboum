@@ -32,7 +32,6 @@ import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
-
 /** 
  * action d'activer l'explosion d'une remote bomb
  * TRANSITIVE
@@ -208,6 +207,15 @@ public class GeneralTrigger extends GeneralAction
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public GeneralTrigger cacheCopy(double zoomFactor)
+	{	GeneralTrigger result = new GeneralTrigger();
+		super.cacheCopy(result);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

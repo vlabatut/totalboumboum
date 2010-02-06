@@ -32,7 +32,6 @@ import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
-
 public class GeneralRelease extends GeneralAction
 {	private static final long serialVersionUID = 1L;
 
@@ -171,6 +170,15 @@ public class GeneralRelease extends GeneralAction
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public GeneralRelease cacheCopy(double zoomFactor)
+	{	GeneralRelease result = new GeneralRelease();
+		super.cacheCopy(result);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

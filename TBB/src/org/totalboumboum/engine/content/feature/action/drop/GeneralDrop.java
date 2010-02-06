@@ -32,7 +32,6 @@ import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
-
 /**
  * action de déposer un objet (une bombe)
  * TRANSITIVE
@@ -208,6 +207,15 @@ public class GeneralDrop extends GeneralAction
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public GeneralDrop cacheCopy(double zoomFactor)
+	{	GeneralDrop result = new GeneralDrop();
+		super.cacheCopy(result);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

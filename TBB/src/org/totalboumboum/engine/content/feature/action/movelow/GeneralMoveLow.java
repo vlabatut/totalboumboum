@@ -32,7 +32,6 @@ import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
-
 /** 
  * action de se déplacer sur le sol
  * INTRANSITIVE
@@ -202,6 +201,15 @@ public class GeneralMoveLow extends GeneralAction
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public GeneralMoveLow cacheCopy(double zoomFactor)
+	{	GeneralMoveLow result = new GeneralMoveLow();
+		super.cacheCopy(result);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

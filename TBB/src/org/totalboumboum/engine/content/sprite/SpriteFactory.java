@@ -217,6 +217,7 @@ if(bombset==null)
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
+			
 			// abilities
 			{	Iterator<AbstractAbility> it = abilities.iterator();
 				while(it.hasNext())
@@ -228,10 +229,15 @@ if(bombset==null)
 			// packs & sets
 			bombset.finish();
 			bombset = null;
+			
+			// explosion
 			explosion.finish();	
 			explosion = null;
+			
+			// gestures
 			gesturePack.finish();
 			gesturePack = null;
+			
 			// misc
 			name = null;
 		}

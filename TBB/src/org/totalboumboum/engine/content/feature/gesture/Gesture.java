@@ -350,25 +350,21 @@ public class Gesture implements Serializable
 			}
 			trajectories.clear();
 			
-			// state permissions
+			// modulations
 			for(SelfModulation e: selfModulations)
 				e.finish();			
-			selfModulations.clear();
-			// other permissions
 			for(OtherModulation e: otherModulations)
 				e.finish();			
-			otherModulations.clear();
-			// actor permissions
 			for(ActorModulation e: actorModulations)
 				e.finish();			
-			actorModulations.clear();
-			// target permissions
 			for(TargetModulation e: targetModulations)
 				e.finish();			
-			targetModulations.clear();
-			// third permissions
 			for(ThirdModulation e: thirdModulations)
 				e.finish();			
+			selfModulations.clear();
+			otherModulations.clear();
+			actorModulations.clear();
+			targetModulations.clear();
 			thirdModulations.clear();
 		}
 	}

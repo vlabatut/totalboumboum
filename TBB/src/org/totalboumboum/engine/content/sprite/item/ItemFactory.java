@@ -161,12 +161,29 @@ public class ItemFactory extends SpriteFactory<Item>
 		result.base = base;
 		result.name = name;
 		
-		// item specific data
-		result.itemAbilities = itemAbilities;
-		result.itemProbabilities = itemProbabilities;
+		// item abilities
+		ArrayList<ArrayList<AbstractAbility>> itemAbilitiesCopy = new ArrayList<ArrayList<AbstractAbility>>();
+		for(ArrayList<AbstractAbility> abilityList: itemAbilities)
+		{	ArrayList<AbstractAbility> temp = new ArrayList<AbstractAbility>();
+			for(AbstractAbility ability: abilityList)
+				temp.add(ability.cacheCopy(zoomFactor));
+			itemAbilitiesCopy.add(temp);
+		}
+		result.itemAbilities = itemAbilitiesCopy;
+		
+		// item probabilities
+		ArrayList<Float> itemProbabilitiesCopy = new ArrayList<Float>();
+		for(Float proba: itemProbabilities)
+			itemProbabilitiesCopy.add(proba);
+		result.itemProbabilities = itemProbabilitiesCopy;
+
+		// item name
 		result.itemName = itemName;
 		
 		// abilities
+		ArrayList<AbstractAbility> abilitiesCopy = new ArrayList<AbstractAbility>();
+		for(AbstractAbility ability: abilities)
+			abilitiesCopy.add(ability.cacheCopy(zoomFactor));
 		result.setAbilities(abilities);
 		
 		// bombset
