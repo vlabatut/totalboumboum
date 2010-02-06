@@ -56,6 +56,7 @@ public class FiresetMapLoader
 	/////////////////////////////////////////////////////////////////
 	public static FiresetMap loadFiresetMap(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
+		double zoomFactor = RoundVariables.zoomFactor;
 		String individualFolder = folderPath;
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_FIRESETMAP+FileNames.EXTENSION_SCHEMA);
@@ -72,8 +73,7 @@ public class FiresetMapLoader
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getMemoryCache(cacheName);
 		if(engineConfiguration.getMemoryCache() && o!=null)
-		{	double zoomFactor = RoundVariables.zoomFactor;
-			result = ((FiresetMap)o).cacheCopy(zoomFactor);
+		{	result = ((FiresetMap)o).cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
@@ -83,6 +83,7 @@ public class FiresetMapLoader
 				result = (FiresetMap)oIn.readObject(); //TODO fonction à surcharger
 				//result.setInstance(instance); 
 				oIn.close();
+				result = result.cacheCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -111,11 +112,8 @@ public class FiresetMapLoader
 				oOut.writeObject(result);
 				oOut.close();
 			}
+			result = result.cacheCopy(zoomFactor);
 		}
-
-		// set final size
-		double zoomFactor = RoundVariables.zoomFactor;
-		result = result.cacheCopy(zoomFactor);
 
 		return result;
 	}
