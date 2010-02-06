@@ -48,7 +48,7 @@ public class LevelTools
 	 * in order to help designing new levels
 	 */
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	HollowLevel level = initLevel(15,15,"superbomberman1","tournament3");
+	{	HollowLevel level = initLevel(15,15,"temp","level","superbomberman1","tournament3");
 		setBackground(level);
 		addGrid(level);
 		addBorder(level,2,1,1,1);
@@ -59,17 +59,20 @@ public class LevelTools
 		insertLine(level,level.getLevelInfo().getGlobalHeight()/2,true,true,true,true,true);
 		insertCol(level,level.getLevelInfo().getGlobalWidth()-1,true,true,true,true,true);
 		insertLine(level,level.getLevelInfo().getGlobalHeight()-1,true,true,true,true,true);
-		saveLevel(level,"temp","level");
+		saveLevel(level);
 	}
 		
-	private static void saveLevel(HollowLevel hollowLevel, String pack, String name) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
-	{	// create level folder
+	private static void saveLevel(HollowLevel hollowLevel) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
+	{	LevelInfo levelInfo = hollowLevel.getLevelInfo();
+		
+		// create level folder
+		String pack = levelInfo.getPack();
+		String name = levelInfo.getFolder();
 		String folder = FilePaths.getLevelsPath()+File.separator+pack+File.separator+name;
 		File folderFile = new File(folder);
 		folderFile.mkdirs();
 		
 		// possibly copy preview image
-		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		String originalPreview = GuiFileTools.getImagesPath()+File.separator+"preview.jpg";
 		String copy = folder+File.separator+levelInfo.getPreview();
 		File fileCopy = new File(copy);
@@ -83,11 +86,14 @@ public class LevelTools
 	/**
 	 * creates and save an empty level
 	 */
-	private static HollowLevel initLevel(int height, int width, String instance, String theme)
+	private static HollowLevel initLevel(int height, int width, String pack, String name, String instance, String theme)
 	{	HollowLevel result = new HollowLevel();
 		
 		// init level info
-		LevelInfo levelInfo = new LevelInfo();		
+		LevelInfo levelInfo = new LevelInfo();
+		
+		levelInfo.setPack(pack);
+		levelInfo.setFolder(name);
 		levelInfo.setAuthor("[Author's name]");
 		levelInfo.setForceAll(false);
 		levelInfo.setGlobalHeight(height);
@@ -171,25 +177,33 @@ public class LevelTools
 		int height = levelInfo.getGlobalHeight();
 		Zone zone = hollowLevel.getZone();
 		
-		// put border
-		for(int line=yMargin;line<height-yMargin;line++)
-		{	if(line==yMargin || line==height-1-yMargin)
-			{	for(int col=xMargin;col<width-xMargin;col++)
-				{	ZoneTile tile = zone.getTile(line,col);
-					tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
-				}
+		// top border
+		for(int line=yMargin;line<yMargin+yThickness;line++)
+		{	for(int col=xMargin;col<width-xMargin;col++)
+			{	ZoneTile tile = zone.getTile(line,col);
+//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
+				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
 			}
-			else
-			{	// left
-				{	int col = xMargin;
-					ZoneTile tile = zone.getTile(line,col);
-					tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
-				}
-				// right
-				{	int col = width-1-xMargin;
-					ZoneTile tile = zone.getTile(line,col);
-					tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
-				}
+		}
+		// side borders
+		for(int line=yMargin+yThickness;line<height-yMargin;line++)
+		{	for(int col=xMargin;col<xMargin+xThickness;col++)
+			{	ZoneTile tile = zone.getTile(line,col);
+//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
+				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
+			}
+			for(int col=width-xMargin-xThickness;col<width-xMargin;col++)
+			{	ZoneTile tile = zone.getTile(line,col);
+//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
+				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
+			}
+		}
+		// bottom border
+		for(int line=height-yMargin-yThickness;line<height-yMargin;line++)
+		{	for(int col=xMargin;col<width-xMargin;col++)
+			{	ZoneTile tile = zone.getTile(line,col);
+//				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
+				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
 			}
 		}
 		
@@ -297,8 +311,8 @@ public class LevelTools
 	private static void addSoftwalls(HollowLevel hollowLevel)
 	{	// init
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
-		int height = levelInfo.getVisibleHeight();
-		int width = levelInfo.getVisibleWidth();		
+		int height = levelInfo.getGlobalHeight();
+		int width = levelInfo.getGlobalWidth();		
 		Zone zone = hollowLevel.getZone();
 		Players players = hollowLevel.getPlayers();
 		
@@ -309,7 +323,7 @@ public class LevelTools
 					&& !players.isOccupied(line-1,col)
 					&& !players.isOccupied(line+1,col)
 					&& !players.isOccupied(line,col-1)
-					&& !players.isOccupied(line,col-1))
+					&& !players.isOccupied(line,col+1))
 				{	ZoneTile tile = zone.getTile(line,col);
 					if(tile.getBlock()==null)
 						tile.setBlock(Theme.DEFAULT_GROUP+Theme.GROUP_SEPARATOR+"softwall");
@@ -323,7 +337,7 @@ public class LevelTools
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		int height = levelInfo.getGlobalHeight() + 1;
 		levelInfo.setGlobalHeight(height);
-		int width = levelInfo.getGlobalWidth() + 1;
+		int width = levelInfo.getGlobalWidth();
 		int vHeight = levelInfo.getVisibleHeight();
 		int vUpLine = levelInfo.getVisiblePositionUpLine();
 		if(line>=vUpLine && line<=vUpLine+vHeight)
@@ -379,7 +393,7 @@ public class LevelTools
 	private static void insertCol(HollowLevel hollowLevel, int col, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
 	{	// update dimensions
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
-		int height = levelInfo.getGlobalHeight() + 1;
+		int height = levelInfo.getGlobalHeight();
 		int width = levelInfo.getGlobalWidth() + 1;
 		levelInfo.setGlobalWidth(width);
 		int vWidth = levelInfo.getVisibleWidth();

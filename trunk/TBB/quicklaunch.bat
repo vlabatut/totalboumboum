@@ -3,7 +3,7 @@
 :: This is a MS-DOS script, it works only on Windows operating systems.
 :: It launches TBB with the appropriate parameters.
 ::
-:: v.0.1
+:: v.0.2
 ::
 :: -------------------------------------------------------------------
 ::
@@ -33,7 +33,8 @@
 	Set ai=.\resources\ai
 	Set bin=.\bin
 	Set jdom=.\resources\lib\jdom.jar
-	Set cp=%bin%;%jdom%;%ai%
+	Set japa=.\resources\lib\javaparser-1.0.7.jar
+	Set cp=%bin%;%jdom%;%japa%;%ai%
 	Set launcher=org.totalboumboum.Launcher
 
 :: launch the game
