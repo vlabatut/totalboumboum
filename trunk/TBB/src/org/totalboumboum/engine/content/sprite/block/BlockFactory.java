@@ -21,9 +21,11 @@ package org.totalboumboum.engine.content.sprite.block;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.manager.event.EventManager;
@@ -106,6 +108,9 @@ public class BlockFactory extends SpriteFactory<Block>
 		result.name = name;
 		
 		// abilities
+		ArrayList<AbstractAbility> abilitiesCopy = new ArrayList<AbstractAbility>();
+		for(AbstractAbility ability: abilities)
+			abilitiesCopy.add(ability.cacheCopy(zoomFactor));
 		result.setAbilities(abilities);
 		
 		// bombset

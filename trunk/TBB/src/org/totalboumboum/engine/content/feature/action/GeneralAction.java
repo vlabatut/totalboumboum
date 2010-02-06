@@ -364,4 +364,30 @@ public abstract class GeneralAction implements Serializable
 		cp.finished = finished;
 	}
 */
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract GeneralAction cacheCopy(double zoomFactor);
+	
+	protected void cacheCopy(GeneralAction result)
+	{	// actors
+		for(Role a: actors)
+			result.addActor(a);
+		// targets
+		for(Role t: targets)
+			result.addActor(t);
+		// directions
+		for(Direction d: directions)
+			result.addDirection(d);
+		// contacts
+		for(Contact c: circumstance.getContacts())
+			result.addContact(c);
+		// orientations
+		for(Orientation o: circumstance.getOrientations())
+			result.addOrientation(o);
+		// tile positions
+		for(TilePosition tp: circumstance.getTilePositions())
+			result.addTilePosition(tp);
+	}
 }

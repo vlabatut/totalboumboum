@@ -75,7 +75,7 @@ public class ItemsetLoader
 		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getMemoryCache(cacheName);
+		Object o = engineConfiguration.getMemoryCache(cachePath);
 		if(engineConfiguration.getMemoryCache() && o!=null)
 		{	result = ((Itemset)o).cacheCopy(zoomFactor);
 		}
@@ -106,7 +106,7 @@ public class ItemsetLoader
 			result = loadItemsetElement(root,individualFolder);
 			// caching
 			if(engineConfiguration.getMemoryCache())
-			{	engineConfiguration.addMemoryCache(cacheName,result);
+			{	engineConfiguration.addMemoryCache(cachePath,result);
 			}
 			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);

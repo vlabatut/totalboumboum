@@ -177,9 +177,11 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	public void finish()
 	{	if(!finished)
 		{	super.finish();
+		
 			// action
 			action.finish();
 			action = null;
+			
 			// actor restrictions
 			{	Iterator<AbstractAbility> it = actorRestrictions.iterator();
 				while(it.hasNext())
@@ -188,6 +190,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 					it.remove();
 				}
 			}
+			
 			// target restrictions
 			{	Iterator<AbstractAbility> it = targetRestrictions.iterator();
 				while(it.hasNext())
