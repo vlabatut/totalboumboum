@@ -161,6 +161,7 @@ public class GesturePack implements Serializable
 		// misc
 		result.scale = scale;
 		result.color = color;
+		
 		return result;
 	}
 }
