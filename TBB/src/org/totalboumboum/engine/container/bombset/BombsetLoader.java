@@ -70,7 +70,7 @@ public class BombsetLoader
 		String cachePath = FilePaths.getCacheBombsPath()+ File.separator;
 		File objectFile = dataFile.getParentFile();
 		File packFile = objectFile.getParentFile();
-		String cacheName = packFile.getName();
+		String cacheName = packFile.getName()+"_"+"abstract";
 		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
@@ -184,18 +184,72 @@ public class BombsetLoader
 	/////////////////////////////////////////////////////////////////
 	// LOAD ONLY ANIMES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static Bombset completeBombset(String folderPath, PredefinedColor color, Bombset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static Bombset completeBombset(String folderPath, PredefinedColor color, Bombset base) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
-		File schemaFile,dataFile;
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_SCHEMA);
+		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_XML);
+		Bombset result = null;
 		
-		// loading components
-		dataFile = new File(individualFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_SCHEMA);
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		// caching
+		String cachePath = FilePaths.getCacheBombsPath()+ File.separator;
+		File objectFile = dataFile.getParentFile();
+		File packFile = objectFile.getParentFile();
+		String c = "none";
+		if(color!=null)
+			c = color.toString();
+		String cacheName = packFile.getName()+"_"+c;
+		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
+		File cacheFile = new File(cachePath);
+		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
+		Object o = engineConfiguration.getMemoryCache(cacheName);
+		if(engineConfiguration.getMemoryCache() && o!=null)
+		{	double zoomFactor = RoundVariables.zoomFactor;
+			result = ((Bombset)o).cacheCopy(zoomFactor);
+		}
+		else if(engineConfiguration.getFileCache() && cacheFile.exists())
+		{	try
+			{	FileInputStream in = new FileInputStream(cacheFile);
+				BufferedInputStream inBuff = new BufferedInputStream(in);
+				ObjectInputStream oIn = new ObjectInputStream(inBuff);
+				result = (Bombset)oIn.readObject();
+				oIn.close();
+			}
+			catch (FileNotFoundException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
 		
-		loadBombsetElement(root,individualFolder,color,result);
+		if(result==null)
+		{	result = base;
+			// opening
+			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+			// loading
+			loadBombsetElement(root,individualFolder,color,result);
+			// caching
+			if(engineConfiguration.getMemoryCache())
+			{	engineConfiguration.addMemoryCache(cacheName,result);
+			}
+			if(engineConfiguration.getFileCache())
+			{	FileOutputStream out = new FileOutputStream(cacheFile);
+				BufferedOutputStream outBuff = new BufferedOutputStream(out);
+				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
+				oOut.writeObject(result);
+				oOut.close();
+			}
+		}
+
+		// set final size
+		double zoomFactor = RoundVariables.zoomFactor;
+		result = result.cacheCopy(zoomFactor);
+		
 		return result;
 	}
 	

@@ -64,8 +64,8 @@ public class BombsetMap implements Serializable
 	public Bombset getBombset(PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Bombset result = bombsets.get(color);
 		if(result==null)
-		{	result = partialBombset.copy();
-			BombsetLoader.completeBombset(path,color,result);
+		{	Bombset base = partialBombset.copy();
+			result = BombsetLoader.completeBombset(path,color,base);
 			bombsets.put(color,result);
 		}
 		return result;
