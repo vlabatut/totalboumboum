@@ -1178,4 +1178,6 @@ public class Launcher
 	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux
 	
 	// eval de projet: temps nécessaire pour éliminer l'adversaire de référence
+	
+	// apparemment, y a un pb avec les GeneralAction, donc certaines définies dans les fichiers XML ne sont pas compatibles avec la classe (en termes de circonstances) mais qui sont quand même chargées et initialisées normalement
 }
