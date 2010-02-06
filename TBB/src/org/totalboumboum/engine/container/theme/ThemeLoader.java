@@ -59,7 +59,7 @@ public class ThemeLoader
 		String cachePath = FilePaths.getCacheThemesPath()+ File.separator;
 		File objectFile = dataFile.getParentFile();
 		File packFile = objectFile.getParentFile().getParentFile();
-		String cacheName = packFile.getName();
+		String cacheName = packFile.getName()+"_"+objectFile.getName();
 		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
@@ -93,10 +93,8 @@ public class ThemeLoader
 			// loading
 			result = loadThemeElement(root,individualFolder);
 			// caching
-			boolean cached = false;
 			if(engineConfiguration.getMemoryCache())
 			{	engineConfiguration.addMemoryCache(cacheName,result);
-				cached = true;
 			}
 			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
@@ -104,14 +102,13 @@ public class ThemeLoader
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
 				oOut.writeObject(result);
 				oOut.close();
-				cached = true;
-			}
-			if(cached)
-			{	double zoomFactor = RoundVariables.zoomFactor;
-				result = result.cacheCopy(zoomFactor);
 			}
 		}
 		
+		// set final size
+		double zoomFactor = RoundVariables.zoomFactor;
+		result = result.cacheCopy(zoomFactor);
+
 		return result;
     }
 

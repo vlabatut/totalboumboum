@@ -92,10 +92,8 @@ public class ExplosionsetLoader
 			// loading
 			result = loadExplosionsetElement(root,individualFolder);
 			// caching
-			boolean cached = false;
 			if(engineConfiguration.getMemoryCache())
 			{	engineConfiguration.addMemoryCache(cacheName,result);
-				cached = true;
 			}
 			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
@@ -103,14 +101,13 @@ public class ExplosionsetLoader
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
 				oOut.writeObject(result);
 				oOut.close();
-				cached = true;
-			}
-			if(cached)
-			{	double zoomFactor = RoundVariables.zoomFactor;
-				result = result.cacheCopy(zoomFactor);
 			}
 		}
 		
+		// set final size
+		double zoomFactor = RoundVariables.zoomFactor;
+		result = result.cacheCopy(zoomFactor);
+
 		return result;
     }
     

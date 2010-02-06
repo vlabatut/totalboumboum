@@ -22,11 +22,15 @@ package org.totalboumboum.engine.content.feature.gesture.anime;
  */
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.content.feature.ImageShift;
+import org.totalboumboum.tools.images.BufferedImageWrapper;
 import org.totalboumboum.tools.images.ImageTools;
 
 
@@ -219,7 +223,7 @@ public class AnimeStep implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// I/O				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-/*	private void writeObject(ObjectOutputStream out) throws IOException
+	private void writeObject(ObjectOutputStream out) throws IOException
 	{	// all fields except images
 		out.defaultWriteObject();
 		
@@ -241,8 +245,8 @@ public class AnimeStep implements Serializable
 		else
 			out.writeObject(new Boolean(false));
 	}
-*/
-/*	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
 	{	// all fields except images
 		in.defaultReadObject();
 		
@@ -260,7 +264,7 @@ public class AnimeStep implements Serializable
 			shadow = cp.getIm();
 		}
 	}
-*/
+
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
