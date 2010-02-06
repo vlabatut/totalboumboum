@@ -24,13 +24,13 @@ package org.totalboumboum.gui.common.content.subpanel.round;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.strings.StringTools;
 
 
 public class RoundMiscSubPanel extends TableSubPanel
@@ -81,7 +81,7 @@ public class RoundMiscSubPanel extends TableSubPanel
 			if(showAuthor)
 				values.add(round.getAuthor());
 			if(showAllowedPlayerNumbers)
-				values.add(StringTools.formatAllowedPlayerNumbers(round.getAllowedPlayerNumbers()));
+				values.add(Players.formatAllowedPlayerNumbers(round.getAllowedPlayerNumbers()));
 			if(showLevelFolder)
 				values.add(round.getHollowLevel().getLevelInfo().getFolder());
 			if(showLevelPack)

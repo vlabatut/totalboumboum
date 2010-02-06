@@ -35,9 +35,8 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.strings.StringTools;
-import org.totalboumboum.tools.strings.StringTools.TimeUnit;
-
+import org.totalboumboum.tools.time.TimeTools;
+import org.totalboumboum.tools.time.TimeUnit;
 
 public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
@@ -380,7 +379,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 		if(time<=0)
 			text = new Character('\u221E').toString();
 		else 
-			text = StringTools.formatTime(time,TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
+			text = TimeTools.formatTime(time,TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
 		String tooltip = text;
 		getLine(LINE_TIME_LIMIT).setLabelText(2,text,tooltip);
 	}

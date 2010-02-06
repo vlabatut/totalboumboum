@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Set;
 
+import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.cup.CupTournament;
 import org.totalboumboum.game.tournament.league.LeagueTournament;
@@ -35,7 +36,6 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.strings.StringTools;
 
 
 public class TournamentMiscSubPanel extends TableSubPanel
@@ -110,8 +110,8 @@ public class TournamentMiscSubPanel extends TableSubPanel
 			}
 			if(showAllowedPlayerNumbers)
 			{	Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
-				textValues.add(StringTools.formatAllowedPlayerNumbers(allowedPlayers));
-				tooltipValues.add(StringTools.formatAllowedPlayerNumbers(allowedPlayers));
+				textValues.add(Players.formatAllowedPlayerNumbers(allowedPlayers));
+				tooltipValues.add(Players.formatAllowedPlayerNumbers(allowedPlayers));
 			}
 			
 			// content

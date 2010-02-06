@@ -54,7 +54,7 @@ import org.jdom.Element;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.anime.Colormap;
 import org.totalboumboum.engine.content.feature.gesture.anime.ColormapLoader;
-import org.totalboumboum.tools.xml.XmlTools;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
 
@@ -203,7 +203,7 @@ public class ImageTools
     {	Object result=null;
     	// folder
     	String localFilePath = individualFolder;
-    	Attribute attribute = root.getAttribute(XmlTools.FOLDER);
+    	Attribute attribute = root.getAttribute(XmlNames.FOLDER);
     	if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
 		// colormaps
@@ -211,13 +211,13 @@ public class ImageTools
     	int i=0;
 		while(result==null && i<clrs.size())
     	{	Element temp = clrs.get(i);
-    		String name = temp.getAttribute(XmlTools.NAME).getValue().trim();
+    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
     		if(name.equalsIgnoreCase(color.toString()))
     		{	// colormap
-    			if(temp.getName().equals(XmlTools.COLORMAP))
+    			if(temp.getName().equals(XmlNames.COLORMAP))
     				result = loadColormapElement(temp,localFilePath);
     			// colorsprite
-    			else if(temp.getName().equals(XmlTools.COLORSPRITE))
+    			else if(temp.getName().equals(XmlNames.COLORSPRITE))
     				result = loadColorspriteElement(temp);
     		}
     		else
@@ -231,7 +231,7 @@ public class ImageTools
     private static Colormap loadColormapElement(Element root, String individualFolder) throws IOException, ParserConfigurationException, SAXException
     {	// file
     	String localPath = individualFolder+File.separator;
-    	localPath = localPath + root.getAttribute(XmlTools.FILE).getValue().trim();
+    	localPath = localPath + root.getAttribute(XmlNames.FILE).getValue().trim();
     	// colormap
     	Colormap colormap = ColormapLoader.loadColormap(localPath);
     	return colormap;
@@ -239,7 +239,7 @@ public class ImageTools
     
     private static String loadColorspriteElement(Element root) throws IOException, ParserConfigurationException, SAXException
     {	// folder
-    	String colorFolder = root.getAttribute(XmlTools.FOLDER).getValue().trim();
+    	String colorFolder = root.getAttribute(XmlNames.FOLDER).getValue().trim();
     	return colorFolder;
     } 
     

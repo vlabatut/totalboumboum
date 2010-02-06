@@ -34,7 +34,7 @@ import org.totalboumboum.game.points.PointsProcessor;
 import org.totalboumboum.game.points.PointsProcessorLoader;
 import org.totalboumboum.game.points.PointsRankings;
 import org.totalboumboum.game.tournament.TournamentLoader;
-import org.totalboumboum.tools.xml.XmlTools;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
 
@@ -45,7 +45,7 @@ public class CupTournamentLoader
 		Element element;
 		
 		// randomize players
-		String sortPlayersStr = root.getAttribute(XmlTools.SORT_PLAYERS).getValue().trim();
+		String sortPlayersStr = root.getAttribute(XmlNames.SORT_PLAYERS).getValue().trim();
 		CupPlayerSort sortPlayers = CupPlayerSort.valueOf(sortPlayersStr);
     	result.setSortPlayers(sortPlayers);
     	
@@ -58,7 +58,7 @@ public class CupTournamentLoader
 
 	@SuppressWarnings("unchecked")
 	private static void loadLegsElement(Element root, String folder, CupTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	List<Element> legs = root.getChildren(XmlTools.LEG);
+	{	List<Element> legs = root.getChildren(XmlNames.LEG);
 		Iterator<Element> i = legs.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -72,17 +72,17 @@ public class CupTournamentLoader
 	{	CupLeg result = new CupLeg(tournament);
 	
 		// randomize parts
-		String randomizePartsStr = root.getAttribute(XmlTools.RANDOMIZE_PARTS).getValue().trim();
+		String randomizePartsStr = root.getAttribute(XmlNames.RANDOMIZE_PARTS).getValue().trim();
 		boolean randomizeParts = Boolean.valueOf(randomizePartsStr);
     	result.setRandomizeParts(randomizeParts);
 
 		// number
-		String numberStr = root.getAttribute(XmlTools.NUMBER).getValue().trim();
+		String numberStr = root.getAttribute(XmlNames.NUMBER).getValue().trim();
 		int number = Integer.valueOf(numberStr);
 		result.setNumber(number);
 		
 		// parts
-		List<Element> parts = root.getChildren(XmlTools.PART);
+		List<Element> parts = root.getChildren(XmlNames.PART);
 		Iterator<Element> i = parts.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -97,31 +97,31 @@ public class CupTournamentLoader
 	{	CupPart result = new CupPart(leg);
 	
 		// name
-		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
+		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		result.setName(name);
 
 		// number
-		String numberStr = root.getAttribute(XmlTools.NUMBER).getValue().trim();
+		String numberStr = root.getAttribute(XmlNames.NUMBER).getValue().trim();
 		int number = Integer.valueOf(numberStr);
 		result.setNumber(number);
 
 		// rank
-		String rankStr = root.getAttribute(XmlTools.RANK).getValue().trim();
+		String rankStr = root.getAttribute(XmlNames.RANK).getValue().trim();
 		int rank = Integer.valueOf(rankStr);
 		result.setRank(rank);
 
 		// match
-		Element matchElt = root.getChild(XmlTools.MATCH);
+		Element matchElt = root.getChild(XmlNames.MATCH);
 		Match match = TournamentLoader.loadMatchElement(matchElt,folder,leg.getTournament());
 		result.setMatch(match);
 		
 		// tie break
-		Element tieBreakElt = root.getChild(XmlTools.TIE_BREAK);
+		Element tieBreakElt = root.getChild(XmlNames.TIE_BREAK);
 		CupTieBreak tieBreak = loadTieBreakElement(tieBreakElt,folder,result);
 		result.setTieBreak(tieBreak);
 		
 		// players
-		Element playersElt = root.getChild(XmlTools.PLAYERS);
+		Element playersElt = root.getChild(XmlNames.PLAYERS);
 		loadPlayersElement(playersElt,folder,result);
 		
 		return result;
@@ -131,12 +131,12 @@ public class CupTournamentLoader
 	{	CupTieBreak result = new CupTieBreak(part);
 	
 		// match
-		Element matchElt = root.getChild(XmlTools.MATCH);
+		Element matchElt = root.getChild(XmlNames.MATCH);
 		Match match = TournamentLoader.loadMatchElement(matchElt,folder,part.getTournament());
 		result.setMatch(match);
 		
 		// tie break
-		Element rankingsElt = root.getChild(XmlTools.RANKINGS);
+		Element rankingsElt = root.getChild(XmlNames.RANKINGS);
 		PointsRankings rankings = new PointsRankings(new ArrayList<PointsProcessor>(),false);
 		if(rankingsElt!=null)
 			rankings = (PointsRankings)PointsProcessorLoader.loadGeneralPointElement(rankingsElt);
@@ -147,7 +147,7 @@ public class CupTournamentLoader
 	
 	@SuppressWarnings("unchecked")
 	private static void loadPlayersElement(Element root, String folder, CupPart result)
-	{	List<Element> parts = root.getChildren(XmlTools.PLAYER);
+	{	List<Element> parts = root.getChildren(XmlNames.PLAYER);
 		Iterator<Element> i = parts.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -160,12 +160,12 @@ public class CupTournamentLoader
 	{	CupPlayer result = new CupPlayer(part);
 	
 		// number
-		String partStr = root.getAttribute(XmlTools.PART).getValue().trim();
+		String partStr = root.getAttribute(XmlNames.PART).getValue().trim();
 		int prevPart = Integer.valueOf(partStr);
 		result.setPrevPart(prevPart);
 
 		// rank
-		String rankStr = root.getAttribute(XmlTools.RANK).getValue().trim();
+		String rankStr = root.getAttribute(XmlNames.RANK).getValue().trim();
 		int prevRank = Integer.valueOf(rankStr);
 		result.setPrevRank(prevRank);
 

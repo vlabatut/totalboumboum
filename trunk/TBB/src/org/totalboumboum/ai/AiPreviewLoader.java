@@ -12,6 +12,7 @@ import org.jdom.Element;
 import org.totalboumboum.game.match.MatchLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -32,21 +33,21 @@ public class AiPreviewLoader
 	private static void loadAiElement(Element root, AiPreview result)
 	{	Element element; 
 		// notes
-		element = root.getChild(XmlTools.NOTES);
+		element = root.getChild(XmlNames.NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		// authors
-		element = root.getChild(XmlTools.AUTHORS);
+		element = root.getChild(XmlNames.AUTHORS);
 		loadAuthorsElement(element,result);
 	}
 	
 	@SuppressWarnings("unchecked")
 	private static void loadAuthorsElement(Element root, AiPreview result)
-	{	List<Element> authors = root.getChildren(XmlTools.AUTHOR);
+	{	List<Element> authors = root.getChildren(XmlNames.AUTHOR);
 		Iterator<Element> it = authors.iterator();
 		while(it.hasNext())
 		{	Element element = it.next();
-			String author = element.getAttributeValue(XmlTools.NAME);
+			String author = element.getAttributeValue(XmlNames.NAME);
 			result.addAuthor(author);
 		}
 	}

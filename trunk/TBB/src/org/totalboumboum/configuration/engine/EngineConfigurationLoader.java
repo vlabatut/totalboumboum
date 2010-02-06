@@ -29,6 +29,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -48,34 +49,34 @@ public class EngineConfigurationLoader
 	private static void loadEngineElement(Element root, EngineConfiguration result)
 	{	Element element; 
 		// timing
-		element = root.getChild(XmlTools.TIMING);
+		element = root.getChild(XmlNames.TIMING);
 		loadTimingElement(element,result);
 		
 		// logs
-		element = root.getChild(XmlTools.LOG);
+		element = root.getChild(XmlNames.LOG);
 		loadLogElement(element,result);
 	}
 	
 	private static void loadTimingElement(Element root, EngineConfiguration result)
 	{	// auto fps
-		String autoFpsStr = root.getAttribute(XmlTools.ADJUST).getValue().trim();
+		String autoFpsStr = root.getAttribute(XmlNames.ADJUST).getValue().trim();
 		boolean autoFps = Boolean.valueOf(autoFpsStr);
 		result.setAutoFps(autoFps);
 
 		// fps
-		String fpsStr = root.getAttribute(XmlTools.FPS).getValue().trim();
+		String fpsStr = root.getAttribute(XmlNames.FPS).getValue().trim();
 		int fps = Integer.valueOf(fpsStr);
 		result.setFps(fps);
 
 		// speed
-		String speedStr = root.getAttribute(XmlTools.SPEED).getValue().trim();
+		String speedStr = root.getAttribute(XmlNames.SPEED).getValue().trim();
 		float speed = Float.valueOf(speedStr);
 		result.setSpeedCoeff(speed);
 	}
 	
 	private static void loadLogElement(Element root, EngineConfiguration result)
 	{	// controls
-		String controlsStr = root.getAttribute(XmlTools.CONTROLS).getValue().trim();
+		String controlsStr = root.getAttribute(XmlNames.CONTROLS).getValue().trim();
 		boolean controls = Boolean.valueOf(controlsStr);
 		result.setLogControls(controls);
 	}

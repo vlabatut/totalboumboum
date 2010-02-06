@@ -39,6 +39,7 @@ import org.totalboumboum.configuration.engine.EngineConfiguration;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -136,25 +137,25 @@ public class ThemeLoader
     
 	private static void loadGeneralElement(Element root, Theme result)
 	{	// name
-		Element nameElt = root.getChild(XmlTools.GENERAL);
-		String name = nameElt.getAttribute(XmlTools.NAME).getValue().trim();
+		Element nameElt = root.getChild(XmlNames.GENERAL);
+		String name = nameElt.getAttribute(XmlNames.NAME).getValue().trim();
 		result.setName(name);
 		
 		// version
-		Element versionElt = root.getChild(XmlTools.GENERAL);
-		String version = versionElt.getAttribute(XmlTools.VERSION).getValue().trim();
+		Element versionElt = root.getChild(XmlNames.GENERAL);
+		String version = versionElt.getAttribute(XmlNames.VERSION).getValue().trim();
 		result.setVersion(version);
 	}
 	
 	private static void loadAuthorElement(Element root, Theme result)
-	{	Element elt = root.getChild(XmlTools.AUTHOR);
-		String name = elt.getAttribute(XmlTools.VALUE).getValue().trim();
+	{	Element elt = root.getChild(XmlNames.AUTHOR);
+		String name = elt.getAttribute(XmlNames.VALUE).getValue().trim();
 		result.setAuthor(name);		
 	}
 	
 	private static void loadSourceElement(Element root, Theme result)
-	{	Element elt = root.getChild(XmlTools.SOURCE);
-		String name = elt.getAttribute(XmlTools.VALUE).getValue().trim();
+	{	Element elt = root.getChild(XmlNames.SOURCE);
+		String name = elt.getAttribute(XmlNames.VALUE).getValue().trim();
 		result.setSource(name);		
 	}
     

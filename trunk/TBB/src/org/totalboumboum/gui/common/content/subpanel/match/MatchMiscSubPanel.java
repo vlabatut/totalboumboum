@@ -24,13 +24,13 @@ package org.totalboumboum.gui.common.content.subpanel.match;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.strings.StringTools;
 
 
 public class MatchMiscSubPanel extends TableSubPanel
@@ -81,7 +81,7 @@ public class MatchMiscSubPanel extends TableSubPanel
 			if(showRoundCount)
 				values.add(Integer.toString(match.getRounds().size()));
 			if(showAllowedPlayerNumbers)
-				values.add(StringTools.formatAllowedPlayerNumbers(match.getAllowedPlayerNumbers()));
+				values.add(Players.formatAllowedPlayerNumbers(match.getAllowedPlayerNumbers()));
 			
 			// content
 			for(int line=0;line<keys.size();line++)

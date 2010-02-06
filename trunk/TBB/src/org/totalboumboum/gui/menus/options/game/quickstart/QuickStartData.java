@@ -37,6 +37,7 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.configuration.profile.ProfileLoader;
 import org.totalboumboum.configuration.profile.ProfilesConfiguration;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
@@ -50,7 +51,6 @@ import org.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfile
 import org.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.strings.StringTools;
 import org.xml.sax.SAXException;
 
 
@@ -196,7 +196,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 		else
 		{	roundPanel.setLabelText(0,0,roundFile.toString(),roundFile.toString());
 			TreeSet<Integer> allowedPlayers = quickStartConfiguration.getAllowedPlayers();
-			String allowedPlayersStr = StringTools.formatAllowedPlayerNumbers(quickStartConfiguration.getAllowedPlayers());
+			String allowedPlayersStr = Players.formatAllowedPlayerNumbers(quickStartConfiguration.getAllowedPlayers());
 			roundPanel.setLabelText(0,1,allowedPlayersStr,allowedPlayersStr);
 			int playersNumber = playersPanel.getPlayers().size();
 			Color bg;

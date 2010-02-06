@@ -32,6 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -50,7 +51,7 @@ public class ProfilesConfigurationSaver
 	}
 
 	private static Element saveProfilesElement(ProfilesConfiguration profilesConfiguration)
-	{	Element result = new Element(XmlTools.PROFILES);
+	{	Element result = new Element(XmlNames.PROFILES);
 		
 		// general
 		Element generalElement = saveGeneralElement(profilesConfiguration);
@@ -64,25 +65,25 @@ public class ProfilesConfigurationSaver
 	}
 	
 	private static Element saveListElement(ProfilesConfiguration profilesConfiguration)
-	{	Element result = new Element(XmlTools.LIST);
+	{	Element result = new Element(XmlNames.LIST);
 		HashMap<Integer,String> profiles = profilesConfiguration.getProfiles();
 		Iterator<Entry<Integer,String>> it = profiles.entrySet().iterator();
 		while(it.hasNext())
 		{	Entry<Integer,String> entry = it.next();
 			String idStr = entry.getKey().toString();
 			String name = entry.getValue();
-			Element element = new Element(XmlTools.PROFILE);
-			element.setAttribute(XmlTools.FILE,idStr);
-			element.setAttribute(XmlTools.NAME,name);
+			Element element = new Element(XmlNames.PROFILE);
+			element.setAttribute(XmlNames.FILE,idStr);
+			element.setAttribute(XmlNames.NAME,name);
 			result.addContent(element);
 		}
 		return result;
 	}	
 
 	private static Element saveGeneralElement(ProfilesConfiguration profilesConfiguration)
-	{	Element result = new Element(XmlTools.GENERAL);
+	{	Element result = new Element(XmlNames.GENERAL);
 		String lastProfile = Integer.toString(profilesConfiguration.getLastProfileIndex());
-		result.setAttribute(XmlTools.LAST,lastProfile);
+		result.setAttribute(XmlNames.LAST,lastProfile);
 		return result;
 	}
 }

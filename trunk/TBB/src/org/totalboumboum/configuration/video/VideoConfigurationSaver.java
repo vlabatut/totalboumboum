@@ -31,6 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -48,7 +49,7 @@ public class VideoConfigurationSaver
 	}
 
 	private static Element saveVideoElement(VideoConfiguration videoConfiguration)
-	{	Element result = new Element(XmlTools.VIDEO); 
+	{	Element result = new Element(XmlNames.VIDEO); 
 		// full screen
 		Element fullScreenElement = saveFullScreenElement(videoConfiguration);
 		result.addContent(fullScreenElement);
@@ -66,22 +67,22 @@ public class VideoConfigurationSaver
 	}
 	
 	private static Element saveFullScreenElement(VideoConfiguration videoConfiguration)
-	{	Element result = new Element(XmlTools.FULL_SCREEN);
+	{	Element result = new Element(XmlNames.FULL_SCREEN);
 		String fullScreen = Boolean.toString(videoConfiguration.getFullScreen());
-		result.setAttribute(XmlTools.VALUE,fullScreen);
+		result.setAttribute(XmlNames.VALUE,fullScreen);
 		return result;
 	}
 	
 	private static Element saveSmoothGraphicsElement(VideoConfiguration videoConfiguration)
-	{	Element result = new Element(XmlTools.SMOOTH_GRAPHICS);
+	{	Element result = new Element(XmlNames.SMOOTH_GRAPHICS);
 		String smoothing = Boolean.toString(videoConfiguration.getSmoothGraphics());
-		result.setAttribute(XmlTools.VALUE,smoothing);
+		result.setAttribute(XmlNames.VALUE,smoothing);
 		return result;
 	}
 	
 	private static Element saveBorderElement(VideoConfiguration videoConfiguration)
 	{	// init
-		Element result = new Element(XmlTools.BORDER);
+		Element result = new Element(XmlNames.BORDER);
 		Color color = videoConfiguration.getBorderColor();
 /*		
 		// red
@@ -95,21 +96,21 @@ public class VideoConfigurationSaver
 		result.setAttribute(XmlTools.ATT_BLUE,blue);
 */
 		if(color!=null)
-			result.setAttribute(XmlTools.VALUE,"black");
+			result.setAttribute(XmlNames.VALUE,"black");
 		//
 		return result;
 	}
 
 	private static Element savePanelDimensionElement(VideoConfiguration videoConfiguration)
 	{	// init
-		Element result = new Element(XmlTools.PANEL_DIMENSION);
+		Element result = new Element(XmlNames.PANEL_DIMENSION);
 		Dimension dim = videoConfiguration.getPanelDimension();
 		// width
 		String width = Integer.toString(dim.width);
-		result.setAttribute(XmlTools.WIDTH,width);
+		result.setAttribute(XmlNames.WIDTH,width);
 		// height
 		String height = Integer.toString(dim.height);
-		result.setAttribute(XmlTools.HEIGHT,height);
+		result.setAttribute(XmlNames.HEIGHT,height);
 		//
 		return result;
 	}

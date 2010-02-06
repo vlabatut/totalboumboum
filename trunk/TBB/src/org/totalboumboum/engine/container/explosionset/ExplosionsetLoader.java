@@ -41,6 +41,7 @@ import org.totalboumboum.configuration.engine.EngineConfiguration;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -115,7 +116,7 @@ public class ExplosionsetLoader
 	{	// init
 		Explosionset result = new Explosionset();
 
-    	Element explosionsElt = root.getChild(XmlTools.EXPLOSIONS);
+    	Element explosionsElt = root.getChild(XmlNames.EXPLOSIONS);
 		loadExplosionsElement(explosionsElt,folder,result);
 		
 		return result;
@@ -124,17 +125,17 @@ public class ExplosionsetLoader
 	@SuppressWarnings("unchecked")
 	private static void loadExplosionsElement(Element root, String folder, Explosionset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
-    	List<Element> items = root.getChildren(XmlTools.EXPLOSION);
+    	List<Element> items = root.getChildren(XmlNames.EXPLOSION);
 		for(Element temp: items)
     		loadExplosionElement(temp,individualFolder,result);
 	}
     
 	private static void loadExplosionElement(Element root, String folder, Explosionset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
+		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
 		// folder
-		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
+		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		String individualFolder = folder+File.separator+attribute.getValue().trim();
 
 		Explosion explosion = loadExplosion(individualFolder);
@@ -161,8 +162,8 @@ public class ExplosionsetLoader
     private static Explosion loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	Explosion result = new Explosion();
     	
-    	Element elt = root.getChild(XmlTools.FIRESET);
-    	String firesetName = elt.getAttribute(XmlTools.NAME).getValue().trim();
+    	Element elt = root.getChild(XmlNames.FIRESET);
+    	String firesetName = elt.getAttribute(XmlNames.NAME).getValue().trim();
     	result.setFiresetName(firesetName);
     	
     	return result;

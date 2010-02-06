@@ -24,13 +24,13 @@ package org.totalboumboum.gui.common.content.subpanel.level;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.engine.container.level.preview.LevelPreview;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.tools.strings.StringTools;
 
 
 public class LevelSubPanel extends TableSubPanel
@@ -104,7 +104,7 @@ public class LevelSubPanel extends TableSubPanel
 			if(showDimension)
 				values.add(Integer.toString(levelPreview.getLevelInfo().getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(levelPreview.getLevelInfo().getVisibleWidth()));
 			if(showAllowedPlayerNumbers)
-				values.add(StringTools.formatAllowedPlayerNumbers(levelPreview.getAllowedPlayerNumbers()));
+				values.add(Players.formatAllowedPlayerNumbers(levelPreview.getAllowedPlayerNumbers()));
 			
 			// content
 			for(int line=0;line<keys.size();line++)

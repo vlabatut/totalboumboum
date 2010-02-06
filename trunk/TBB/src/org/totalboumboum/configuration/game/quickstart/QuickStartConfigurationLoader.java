@@ -32,6 +32,7 @@ import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.configuration.profile.ProfilesSelectionLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -50,23 +51,23 @@ public class QuickStartConfigurationLoader
 
 	private static void loadGameQuickStartElement(Element root, QuickStartConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// round
-		Element roundElement = root.getChild(XmlTools.ROUND);
+		Element roundElement = root.getChild(XmlNames.ROUND);
 		loadRoundElement(roundElement,result);
 		
 		// players
-		Element playersElement = root.getChild(XmlTools.PLAYERS);
+		Element playersElement = root.getChild(XmlNames.PLAYERS);
 		ProfilesSelection quickStartSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
 		result.setProfilesSelection(quickStartSelected);
 	}
 	
 	private static void loadRoundElement(Element root, QuickStartConfiguration result)
 	{	// name
-		String quickStartName = root.getAttribute(XmlTools.NAME).getValue().trim();
+		String quickStartName = root.getAttribute(XmlNames.NAME).getValue().trim();
 		result.setRoundName(new StringBuffer(quickStartName));
 		
 		// allowed players
 		TreeSet<Integer> allowedPlayers = new TreeSet<Integer>();
-		String apStr = root.getAttributeValue(XmlTools.ALLOWED_PLAYERS);
+		String apStr = root.getAttributeValue(XmlNames.ALLOWED_PLAYERS);
 		String[] split = apStr.split(" ");
 		for(String s: split)
 		{	int value = Integer.parseInt(s);

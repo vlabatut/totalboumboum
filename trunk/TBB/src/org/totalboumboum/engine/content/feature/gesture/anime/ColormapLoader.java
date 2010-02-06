@@ -30,6 +30,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -50,21 +51,21 @@ public class ColormapLoader
     @SuppressWarnings("unchecked")
 	private static void loadColorsElement(Element root, Colormap colormap) throws IOException
     {	// colors
-    	List<Element> colorsList = root.getChildren(XmlTools.COLOR);
+    	List<Element> colorsList = root.getChildren(XmlNames.COLOR);
 		for(int i=0;i<colorsList.size();i++)
 			loadColorElement(colorsList.get(i),colormap);    	
     }
 	
     private static void loadColorElement(Element root, Colormap colormap) throws IOException
     {	// index
-		int index = Integer.parseInt(root.getAttribute(XmlTools.INDEX).getValue());
+		int index = Integer.parseInt(root.getAttribute(XmlNames.INDEX).getValue());
 		// RGB
 		byte colors[] = new byte[3];
-		colors[0] = (byte)Integer.parseInt(root.getAttribute(XmlTools.RED).getValue());
+		colors[0] = (byte)Integer.parseInt(root.getAttribute(XmlNames.RED).getValue());
 		// green
-		colors[1] = (byte)Integer.parseInt(root.getAttribute(XmlTools.GREEN).getValue());
+		colors[1] = (byte)Integer.parseInt(root.getAttribute(XmlNames.GREEN).getValue());
 		// blue
-		colors[2] = (byte)Integer.parseInt(root.getAttribute(XmlTools.BLUE).getValue());
+		colors[2] = (byte)Integer.parseInt(root.getAttribute(XmlNames.BLUE).getValue());
 		// colormap
 		colormap.put(index,colors);
     }

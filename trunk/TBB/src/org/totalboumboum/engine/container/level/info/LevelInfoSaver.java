@@ -29,6 +29,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -47,53 +48,53 @@ public class LevelInfoSaver
 	}
 
 	private static Element saveLevelElement(LevelInfo levelInfo)
-	{	Element result = new Element(XmlTools.LEVEL);
+	{	Element result = new Element(XmlNames.LEVEL);
 		
 		// title
-		Element titleElement = new Element(XmlTools.TITLE);
-		titleElement.setAttribute(XmlTools.VALUE,levelInfo.getTitle());
+		Element titleElement = new Element(XmlNames.TITLE);
+		titleElement.setAttribute(XmlNames.VALUE,levelInfo.getTitle());
 		result.addContent(titleElement);
 		// author
-		Element authorElement = new Element(XmlTools.AUTHOR);
-		authorElement.setAttribute(XmlTools.VALUE,levelInfo.getAuthor());
+		Element authorElement = new Element(XmlNames.AUTHOR);
+		authorElement.setAttribute(XmlNames.VALUE,levelInfo.getAuthor());
 		result.addContent(authorElement);
 		// source
-		Element sourceElement = new Element(XmlTools.SOURCE);
-		sourceElement.setAttribute(XmlTools.VALUE,levelInfo.getSource());
+		Element sourceElement = new Element(XmlNames.SOURCE);
+		sourceElement.setAttribute(XmlNames.VALUE,levelInfo.getSource());
 		result.addContent(sourceElement);
 		// preview
-		Element previewElement = new Element(XmlTools.PREVIEW);
-		previewElement.setAttribute(XmlTools.FILE,levelInfo.getPreview());
+		Element previewElement = new Element(XmlNames.PREVIEW);
+		previewElement.setAttribute(XmlNames.FILE,levelInfo.getPreview());
 		result.addContent(previewElement);
 	
 		// instance
-		Element instanceElement = new Element(XmlTools.INSTANCE);
-		instanceElement.setAttribute(XmlTools.NAME,levelInfo.getInstance());
+		Element instanceElement = new Element(XmlNames.INSTANCE);
+		instanceElement.setAttribute(XmlNames.NAME,levelInfo.getInstance());
 		result.addContent(instanceElement);
 		// theme
-		Element themeElement = new Element(XmlTools.THEME);
-		themeElement.setAttribute(XmlTools.NAME,levelInfo.getTheme());
+		Element themeElement = new Element(XmlNames.THEME);
+		themeElement.setAttribute(XmlNames.NAME,levelInfo.getTheme());
 		result.addContent(themeElement);
 	
 		// global dimension
-		Element globaldimElement = new Element(XmlTools.GLOBAL_DIMENSION);
-		globaldimElement.setAttribute(XmlTools.HEIGHT,Integer.toString(levelInfo.getGlobalHeight()));
-		globaldimElement.setAttribute(XmlTools.WIDTH,Integer.toString(levelInfo.getGlobalWidth()));
+		Element globaldimElement = new Element(XmlNames.GLOBAL_DIMENSION);
+		globaldimElement.setAttribute(XmlNames.HEIGHT,Integer.toString(levelInfo.getGlobalHeight()));
+		globaldimElement.setAttribute(XmlNames.WIDTH,Integer.toString(levelInfo.getGlobalWidth()));
 		result.addContent(globaldimElement);
 		// visible dimension
-		Element visibledimElement = new Element(XmlTools.VISIBLE_DIMENSION);
-		visibledimElement.setAttribute(XmlTools.HEIGHT,Integer.toString(levelInfo.getVisibleHeight()));
-		visibledimElement.setAttribute(XmlTools.WIDTH,Integer.toString(levelInfo.getVisibleWidth()));
+		Element visibledimElement = new Element(XmlNames.VISIBLE_DIMENSION);
+		visibledimElement.setAttribute(XmlNames.HEIGHT,Integer.toString(levelInfo.getVisibleHeight()));
+		visibledimElement.setAttribute(XmlNames.WIDTH,Integer.toString(levelInfo.getVisibleWidth()));
 		result.addContent(visibledimElement);
 		// visible position
-		Element visibleposeElement = new Element(XmlTools.VISIBLE_POSITION);
-		visibleposeElement.setAttribute(XmlTools.UPLINE,Integer.toString(levelInfo.getVisiblePositionUpLine()));
-		visibleposeElement.setAttribute(XmlTools.LEFTCOL,Integer.toString(levelInfo.getVisiblePositionLeftCol()));
+		Element visibleposeElement = new Element(XmlNames.VISIBLE_POSITION);
+		visibleposeElement.setAttribute(XmlNames.UPLINE,Integer.toString(levelInfo.getVisiblePositionUpLine()));
+		visibleposeElement.setAttribute(XmlNames.LEFTCOL,Integer.toString(levelInfo.getVisiblePositionLeftCol()));
 		result.addContent(visibleposeElement);
 		// display
-		Element displayElement = new Element(XmlTools.DISPLAY);
-		displayElement.setAttribute(XmlTools.FORCE_ALL,Boolean.toString(levelInfo.getForceAll()));
-		displayElement.setAttribute(XmlTools.MAXIMIZE,Boolean.toString(levelInfo.getMaximize()));
+		Element displayElement = new Element(XmlNames.DISPLAY);
+		displayElement.setAttribute(XmlNames.FORCE_ALL,Boolean.toString(levelInfo.getForceAll()));
+		displayElement.setAttribute(XmlNames.MAXIMIZE,Boolean.toString(levelInfo.getMaximize()));
 		result.addContent(displayElement);
 
 		return result;

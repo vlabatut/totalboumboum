@@ -47,6 +47,7 @@ import org.totalboumboum.engine.content.sprite.item.ItemFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -128,12 +129,12 @@ public class ItemsetLoader
 
 		// abstract items
     	HashMap<String,ItemFactory> abstractItems = new HashMap<String,ItemFactory>();
-    	Element abstractItemsElt = root.getChild(XmlTools.ABSTRACT_ITEMS);
+    	Element abstractItemsElt = root.getChild(XmlNames.ABSTRACT_ITEMS);
     	if(abstractItemsElt!=null)
     		loadItemsElement(abstractItemsElt,folder,result,abstractItems,Type.ABSTRACT);
     	
     	// concrete items
-    	Element concreteItemsElt = root.getChild(XmlTools.CONCRETE_ITEMS);
+    	Element concreteItemsElt = root.getChild(XmlNames.CONCRETE_ITEMS);
 		loadItemsElement(concreteItemsElt,folder,result,abstractItems,Type.CONCRETE);
 		
 		return result;
@@ -142,7 +143,7 @@ public class ItemsetLoader
 	@SuppressWarnings("unchecked")
 	private static void loadItemsElement(Element root, String folder, Itemset result, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
-    	List<Element> items = root.getChildren(XmlTools.ITEM);
+    	List<Element> items = root.getChildren(XmlNames.ITEM);
 		for(Element temp: items)
     		loadItemElement(temp,individualFolder,result,abstractItems,type);
 	}
@@ -150,17 +151,17 @@ public class ItemsetLoader
 	@SuppressWarnings("unchecked")
 	private static void loadItemElement(Element root, String folder, Itemset result, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
+		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
+		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// abilities
 		ArrayList<ArrayList<AbstractAbility>> abilities = new ArrayList<ArrayList<AbstractAbility>>();
 		ArrayList<Float> probabilities = new ArrayList<Float>();
-		List<Element> elements = root.getChildren(XmlTools.ABILITIES);
+		List<Element> elements = root.getChildren(XmlNames.ABILITIES);
 		for(Element e: elements)
 			loadAbilitiesElement(e,abilities,probabilities);
 		// normalize probas
@@ -187,7 +188,7 @@ public class ItemsetLoader
 		abilities.add(list);
 		
 		// probabilities
-		String probaStr = root.getAttributeValue(XmlTools.PROBA).trim();
+		String probaStr = root.getAttributeValue(XmlNames.PROBA).trim();
 		float proba = Float.parseFloat(probaStr);
 		probabilities.add(proba);
 	}

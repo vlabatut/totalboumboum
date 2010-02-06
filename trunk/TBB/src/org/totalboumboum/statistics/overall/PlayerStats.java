@@ -27,9 +27,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import org.totalboumboum.statistics.detailed.Score;
-import org.totalboumboum.tools.strings.StringTools;
-import org.totalboumboum.tools.strings.StringTools.TimeUnit;
-
+import org.totalboumboum.tools.time.TimeTools;
+import org.totalboumboum.tools.time.TimeUnit;
 
 public class PlayerStats implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -158,7 +157,7 @@ public class PlayerStats implements Serializable
 		for(Score score: Score.values())
 		{	String text = Long.toString(scores.get(score));
 			if(score==Score.TIME)
-				text = StringTools.formatTime(scores.get(score),TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
+				text = TimeTools.formatTime(scores.get(score),TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			result = result+" "+score.toString()+": "+text;
 		}
 		

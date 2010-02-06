@@ -1,4 +1,4 @@
-package org.totalboumboum.configuration.game.quickmatch;
+package org.totalboumboum.tools.time;
 
 /*
  * Total Boum Boum
@@ -21,29 +21,44 @@ package org.totalboumboum.configuration.game.quickmatch;
  * 
  */
 
-import java.util.List;
+public enum TimeUnit
+{	MILLISECOND,
+	SECOND,
+	MINUTE,
+	HOUR;
 
-import org.jdom.Element;
-import org.totalboumboum.tools.xml.XmlNames;
-
-
-public class LevelsSelectionLoader
-{	
-	@SuppressWarnings("unchecked")
-	public static LevelsSelection loadLevelsSelection(Element root)
-	{	LevelsSelection result = new LevelsSelection();
-		List<Element> playersElt = root.getChildren(XmlNames.LEVEL);
-		for(Element elt: playersElt)
-			loadLevelElement(elt,result);
+	public String getLetter()
+	{	String result = null;
+		if(this==MILLISECOND)
+			result = "ms";
+		else if(this==SECOND)
+			result = "s";
+		else if(this==MINUTE)
+			result = "min";
+		else if(this==HOUR)
+			result = "h";
 		return result;
 	}
 
-	private static void loadLevelElement(Element root, LevelsSelection result)
-	{	// pack
-		String packName = root.getAttributeValue(XmlNames.PACK);
-		// folder
-		String folderName = root.getAttributeValue(XmlNames.FOLDER);
-		// result
-		result.addLevel(packName,folderName);
+	public String getSymbol()
+	{	String result = null;
+		if(this==MILLISECOND)
+			result = "";
+		else if(this==SECOND)
+			result = "''";
+		else if(this==MINUTE)
+			result = "'";
+		else if(this==HOUR)
+			result = ":";
+		return result;
+	}
+	
+	public String getText(boolean letter)
+	{	String result;
+		if(letter)
+			result = getLetter();
+		else
+			result = getSymbol();
+		return result;
 	}
 }

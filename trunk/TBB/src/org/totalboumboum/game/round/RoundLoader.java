@@ -39,6 +39,7 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.match.MatchLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -75,37 +76,37 @@ public class RoundLoader
     	Element element;
 		
 		// notes
-		element = root.getChild(XmlTools.NOTES);
+		element = root.getChild(XmlNames.NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		
 		// author
-		element = root.getChild(XmlTools.AUTHOR);
+		element = root.getChild(XmlNames.AUTHOR);
 		if(element!=null)
-		{	String author = element.getAttributeValue(XmlTools.VALUE);
+		{	String author = element.getAttributeValue(XmlNames.VALUE);
 			result.setAuthor(author);
 		}
 		
 		// limits
-		element = root.getChild(XmlTools.LIMITS);
+		element = root.getChild(XmlNames.LIMITS);
 		Limits<RoundLimit> limits = loadLimitsElement(element,folderPath);
 		result.setLimits(limits);
 		
 		// level
-		element = root.getChild(XmlTools.LEVEL);
+		element = root.getChild(XmlNames.LEVEL);
 		loadLevelElement(element,result);
 	}		
 		
     private static void loadLevelElement(Element root, Round result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// random locations
-    	String randomLocationStr = root.getAttributeValue(XmlTools.RANDOM_LOCATION).trim();
+    	String randomLocationStr = root.getAttributeValue(XmlNames.RANDOM_LOCATION).trim();
     	boolean randomLocation = Boolean.parseBoolean(randomLocationStr);
     	result.setRandomLocation(randomLocation);
     	
     	// name
-    	String name = root.getAttribute(XmlTools.NAME).getValue().trim();
+    	String name = root.getAttribute(XmlNames.NAME).getValue().trim();
     	// packname
-    	String packname = root.getAttribute(XmlTools.PACKNAME).getValue().trim();
+    	String packname = root.getAttribute(XmlNames.PACKNAME).getValue().trim();
     	// load
     	HollowLevel hollowLevel = HollowLevelLoader.loadHollowLevel(packname,name); 
     	result.setHollowLevel(hollowLevel);

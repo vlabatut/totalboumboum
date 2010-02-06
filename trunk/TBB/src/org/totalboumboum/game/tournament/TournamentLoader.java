@@ -37,6 +37,7 @@ import org.totalboumboum.game.tournament.sequence.SequenceTournamentLoader;
 import org.totalboumboum.game.tournament.single.SingleTournamentLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -71,8 +72,8 @@ public class TournamentLoader
 		Element element;
 		
 		// name
-		element = root.getChild(XmlTools.GENERAL);
-		String name = element.getAttribute(XmlTools.NAME).getValue().trim();
+		element = root.getChild(XmlNames.GENERAL);
+		String name = element.getAttribute(XmlNames.NAME).getValue().trim();
 		
 		// content
 		List<Element> elements = root.getChildren();
@@ -88,14 +89,14 @@ public class TournamentLoader
 			result = SingleTournamentLoader.loadTournamentElement(path,element);
 		
 		// notes
-		element = root.getChild(XmlTools.NOTES);
+		element = root.getChild(XmlNames.NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		
 		// author
-		element = root.getChild(XmlTools.AUTHOR);
+		element = root.getChild(XmlNames.AUTHOR);
 		if(element!=null)
-		{	String author = element.getAttributeValue(XmlTools.VALUE);
+		{	String author = element.getAttributeValue(XmlNames.VALUE);
 			result.setAuthor(author);
 		}
 		
@@ -108,11 +109,11 @@ public class TournamentLoader
 	{	Match result;
 		
 		// local
-		String localStr = root.getAttribute(XmlTools.LOCAL).getValue().trim();
+		String localStr = root.getAttribute(XmlNames.LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
 		
 		// name
-		String name = root.getAttribute(XmlTools.NAME).getValue();
+		String name = root.getAttribute(XmlNames.NAME).getValue();
 		
 		// loading
 		if(local)

@@ -29,6 +29,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -46,7 +47,7 @@ public class EngineConfigurationSaver
 	}
 
 	private static Element saveEngineElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlTools.ENGINE); 
+	{	Element result = new Element(XmlNames.ENGINE); 
 
 		// timing
 		Element timingElement = saveTimingElement(engineConfiguration);
@@ -60,29 +61,29 @@ public class EngineConfigurationSaver
 	}
 	
 	private static Element saveTimingElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlTools.TIMING);
+	{	Element result = new Element(XmlNames.TIMING);
 		
 		// adjust
 		String adjust = Boolean.toString(engineConfiguration.getAutoFps());
-		result.setAttribute(XmlTools.ADJUST,adjust);
+		result.setAttribute(XmlNames.ADJUST,adjust);
 		
 		// fps
 		String fps = Integer.toString(engineConfiguration.getFps());
-		result.setAttribute(XmlTools.FPS,fps);
+		result.setAttribute(XmlNames.FPS,fps);
 		
 		// speed
 		String speed = Double.toString(engineConfiguration.getSpeedCoeff());
-		result.setAttribute(XmlTools.SPEED,speed);
+		result.setAttribute(XmlNames.SPEED,speed);
 				
 		return result;
 	}
 
 	private static Element saveLogElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlTools.LOG);
+	{	Element result = new Element(XmlNames.LOG);
 		
 		// controls
 		String controls = Boolean.toString(engineConfiguration.getLogControls());
-		result.setAttribute(XmlTools.CONTROLS,controls);
+		result.setAttribute(XmlNames.CONTROLS,controls);
 				
 		return result;
 	}

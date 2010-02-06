@@ -31,6 +31,7 @@ import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.configuration.profile.ProfilesSelectionLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -49,38 +50,38 @@ public class TournamentConfigurationLoader
 
 	private static void loadGameTournamentElement(Element root, TournamentConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// options
-		Element optionsElement = root.getChild(XmlTools.OPTIONS);
+		Element optionsElement = root.getChild(XmlNames.OPTIONS);
 		loadOptionsElement(optionsElement,result);
 		
 		// name
-		Element tournamentElement = root.getChild(XmlTools.TOURNAMENT);
-		String tournamentName = tournamentElement.getAttribute(XmlTools.NAME).getValue().trim();
+		Element tournamentElement = root.getChild(XmlNames.TOURNAMENT);
+		String tournamentName = tournamentElement.getAttribute(XmlNames.NAME).getValue().trim();
 		result.setTournamentName(new StringBuffer(tournamentName));
 		
 		// players
-		Element playersElement = root.getChild(XmlTools.PLAYERS);
+		Element playersElement = root.getChild(XmlNames.PLAYERS);
 		ProfilesSelection tournamentSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
 		result.setProfilesSelection(tournamentSelected);
 	}
 	
 	private static void loadOptionsElement(Element root, TournamentConfiguration result)
 	{	// use last players
-		String useLastPlayersStr = root.getAttributeValue(XmlTools.USE_LAST_PLAYERS);
+		String useLastPlayersStr = root.getAttributeValue(XmlNames.USE_LAST_PLAYERS);
 		boolean useLastPlayers = Boolean.parseBoolean(useLastPlayersStr);
 		result.setUseLastPlayers(useLastPlayers);
 		
 		// use last tournament
-		String useLastTournamentStr = root.getAttributeValue(XmlTools.USE_LAST_TOURNAMENT);
+		String useLastTournamentStr = root.getAttributeValue(XmlNames.USE_LAST_TOURNAMENT);
 		boolean useLastTournament = Boolean.parseBoolean(useLastTournamentStr);
 		result.setUseLastTournament(useLastTournament);
 		
 		// autoload
-		String autoLoadStr = root.getAttributeValue(XmlTools.AUTOLOAD);
+		String autoLoadStr = root.getAttributeValue(XmlNames.AUTOLOAD);
 		boolean autoLoad = Boolean.parseBoolean(autoLoadStr);
 		result.setAutoLoad(autoLoad);
 		
 		// autosave
-		String autoSaveStr = root.getAttributeValue(XmlTools.AUTOSAVE);
+		String autoSaveStr = root.getAttributeValue(XmlNames.AUTOSAVE);
 		boolean autoSave = Boolean.parseBoolean(autoSaveStr);
 		result.setAutoSave(autoSave);
 	}

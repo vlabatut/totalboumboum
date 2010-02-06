@@ -29,6 +29,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -46,7 +47,7 @@ public class StatisticsConfigurationSaver
 	}
 
 	private static Element saveStatisticsElement(StatisticsConfiguration statisticsConfiguration)
-	{	Element result = new Element(XmlTools.STATISTICS); 
+	{	Element result = new Element(XmlNames.STATISTICS); 
 		
 		// include quick starts
 		Element includeQuickStartsElement = saveIncludeQuickStartsElement(statisticsConfiguration);
@@ -72,65 +73,65 @@ public class StatisticsConfigurationSaver
 	}
 	
 	private static Element saveIncludeQuickStartsElement(StatisticsConfiguration statisticsConfiguration)
-	{	Element result = new Element(XmlTools.INCLUDE_QUICKSTARTS);
+	{	Element result = new Element(XmlNames.INCLUDE_QUICKSTARTS);
 		String includeQuickStart = Boolean.toString(statisticsConfiguration.getIncludeQuickStarts());
-		result.setAttribute(XmlTools.VALUE,includeQuickStart);
+		result.setAttribute(XmlNames.VALUE,includeQuickStart);
 		return result;
 	}
 
 	private static Element saveIncludeSimulationsElement(StatisticsConfiguration statisticsConfiguration)
-	{	Element result = new Element(XmlTools.INCLUDE_SIMULATIONS);
+	{	Element result = new Element(XmlNames.INCLUDE_SIMULATIONS);
 		String includeSimulations = Boolean.toString(statisticsConfiguration.getIncludeSimulations());
-		result.setAttribute(XmlTools.VALUE,includeSimulations);
+		result.setAttribute(XmlNames.VALUE,includeSimulations);
 		return result;
 	}
 	
 	private static Element saveGlicko2Element(StatisticsConfiguration statisticsConfiguration)
-	{	Element result = new Element(XmlTools.GLICKO2);
+	{	Element result = new Element(XmlNames.GLICKO2);
 		
 		// default rating
 		String defaultRating = Integer.toString(statisticsConfiguration.getDefaultRating());
-		result.setAttribute(XmlTools.DEFAULT_RATING,defaultRating);
+		result.setAttribute(XmlNames.DEFAULT_RATING,defaultRating);
 		
 		// default rating deviation
 		String defaultRatingDeviation = Integer.toString(statisticsConfiguration.getDefaultRatingDeviation());
-		result.setAttribute(XmlTools.DEFAULT_RATING_DEVIATION,defaultRatingDeviation);
+		result.setAttribute(XmlNames.DEFAULT_RATING_DEVIATION,defaultRatingDeviation);
 		
 		// default rating volatility
 		String defaultRatingVolatility = Float.toString(statisticsConfiguration.getDefaultRatingVolatility());
-		result.setAttribute(XmlTools.DEFAULT_RATING_VOLATILITY,defaultRatingVolatility);
+		result.setAttribute(XmlNames.DEFAULT_RATING_VOLATILITY,defaultRatingVolatility);
 		
 		// games per period
 		String gamesPerPeriod = Integer.toString(statisticsConfiguration.getGamesPerPeriod());
-		result.setAttribute(XmlTools.GAMES_PER_PERIOD,gamesPerPeriod);
+		result.setAttribute(XmlNames.GAMES_PER_PERIOD,gamesPerPeriod);
 		
 		return result;
 	}
 
 	private static Element saveRegularLaunchELement(StatisticsConfiguration statisticsConfiguration)
-	{	Element result = new Element(XmlTools.REGULAR_LAUNCH); 
+	{	Element result = new Element(XmlNames.REGULAR_LAUNCH); 
 	
 		// count
 		String countStr = Long.toString(statisticsConfiguration.getRegularLaunchCount());
-		result.setAttribute(XmlTools.COUNT,countStr);
+		result.setAttribute(XmlNames.COUNT,countStr);
 
 		// time
 		String timeStr = Long.toString(statisticsConfiguration.getRegularLaunchTime());
-		result.setAttribute(XmlTools.TIME,timeStr);
+		result.setAttribute(XmlNames.TIME,timeStr);
 		
 		return result;
 	}
 
 	private static Element saveQuickLaunchELement(StatisticsConfiguration statisticsConfiguration)
-	{	Element result = new Element(XmlTools.QUICK_LAUNCH); 
+	{	Element result = new Element(XmlNames.QUICK_LAUNCH); 
 	
 		// count
 		String countStr = Long.toString(statisticsConfiguration.getQuickLaunchCount());
-		result.setAttribute(XmlTools.COUNT,countStr);
+		result.setAttribute(XmlNames.COUNT,countStr);
 
 		// time
 		String timeStr = Long.toString(statisticsConfiguration.getQuickLaunchTime());
-		result.setAttribute(XmlTools.TIME,timeStr);
+		result.setAttribute(XmlNames.TIME,timeStr);
 		
 		return result;
 	}
