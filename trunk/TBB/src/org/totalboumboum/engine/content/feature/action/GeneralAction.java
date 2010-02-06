@@ -373,21 +373,26 @@ public abstract class GeneralAction implements Serializable
 	protected void cacheCopy(GeneralAction result)
 	{	// actors
 		for(Role a: actors)
-			result.addActor(a);
+			result.actors.add(a);
+		
 		// targets
 		for(Role t: targets)
-			result.addActor(t);
+			result.targets.add(t);
+		
 		// directions
 		for(Direction d: directions)
-			result.addDirection(d);
+			result.directions.add(d);
+		
 		// contacts
 		for(Contact c: circumstance.getContacts())
-			result.addContact(c);
+			result.circumstance.addContact(c);
+		
 		// orientations
 		for(Orientation o: circumstance.getOrientations())
-			result.addOrientation(o);
+			result.circumstance.addOrientation(o);
+		
 		// tile positions
 		for(TilePosition tp: circumstance.getTilePositions())
-			result.addTilePosition(tp);
+			result.circumstance.addTilePosition(tp);
 	}
 }
