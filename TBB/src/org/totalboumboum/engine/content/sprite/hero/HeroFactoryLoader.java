@@ -60,7 +60,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 	 */
 	public static HeroFactory loadHeroFactory(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		double zoomFactor = RoundVariables.zoomFactor;
+		//double zoomFactor = RoundVariables.zoomFactor;
 		HeroFactory result = null;
 		
 		// caching
@@ -73,7 +73,8 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromMemoryCache(cacheName);
 		if(engineConfiguration.getMemoryCache() && o!=null)
-		{	result = ((HeroFactory)o).cacheCopy(zoomFactor);
+		{	result = ((HeroFactory)o);
+			//result = result.cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
@@ -82,7 +83,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
 				result = (HeroFactory)oIn.readObject();
 				oIn.close();
-				result = result.cacheCopy(zoomFactor);
+				//result = result.cacheCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -101,6 +102,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 			// caching
 			if(engineConfiguration.getMemoryCache())
 			{	engineConfiguration.addToMemoryCache(cacheName,result);
+				//result = result.cacheCopy(zoomFactor);
 			}
 			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
@@ -108,8 +110,8 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
 				oOut.writeObject(result);
 				oOut.close();
+				//result = result.cacheCopy(zoomFactor);
 			}
-			//result = result.cacheCopy(zoomFactor);
 		}
 		
 		return result;
@@ -194,6 +196,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 			// caching
 			if(engineConfiguration.getMemoryCache())
 			{	engineConfiguration.addToMemoryCache(cacheName,result);
+				result = result.cacheCopy(zoomFactor);
 			}
 			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
@@ -201,14 +204,14 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
 				oOut.writeObject(result);
 				oOut.close();
+				result = result.cacheCopy(zoomFactor);
 			}
-			result = result.cacheCopy(zoomFactor);
 		}
 		
 		return result;
 	}
 	
-	public static HeroFactory complete(String folderPath, PredefinedColor color, HeroFactory base) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static HeroFactory complete(String folderPath, PredefinedColor color, HeroFactory base) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HeroFactory result = new HeroFactory();
 		Element root = SpriteFactoryLoader.openFile(folderPath);
