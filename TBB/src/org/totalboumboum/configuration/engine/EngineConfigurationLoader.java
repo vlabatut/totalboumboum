@@ -55,6 +55,10 @@ public class EngineConfigurationLoader
 		// logs
 		element = root.getChild(XmlNames.LOG);
 		loadLogElement(element,result);
+		
+		// cache
+		element = root.getChild(XmlNames.CACHE);
+		loadCacheElement(element,result);
 	}
 	
 	private static void loadTimingElement(Element root, EngineConfiguration result)
@@ -79,5 +83,17 @@ public class EngineConfigurationLoader
 		String controlsStr = root.getAttribute(XmlNames.CONTROLS).getValue().trim();
 		boolean controls = Boolean.valueOf(controlsStr);
 		result.setLogControls(controls);
+	}
+
+	private static void loadCacheElement(Element root, EngineConfiguration result)
+	{	// cache
+		String cacheStr = root.getAttribute(XmlNames.CACHE).getValue().trim();
+		boolean cache = Boolean.valueOf(cacheStr);
+		result.setMemoryCache(cache);
+
+		// cache limit
+		String cacheLimitStr = root.getAttribute(XmlNames.CACHE_LIMIT).getValue().trim();
+		long cacheLimit = Long.valueOf(cacheLimitStr);
+		result.setCacheLimit(cacheLimit);
 	}
 }

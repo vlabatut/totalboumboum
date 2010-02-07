@@ -71,7 +71,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getMemoryCache(cacheName);
+		Object o = engineConfiguration.getFromMemoryCache(cacheName);
 		if(engineConfiguration.getMemoryCache() && o!=null)
 		{	result = ((HeroFactory)o).cacheCopy(zoomFactor);
 		}
@@ -100,7 +100,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 			result = init(folderPath);
 			// caching
 			if(engineConfiguration.getMemoryCache())
-			{	engineConfiguration.addMemoryCache(cacheName,result);
+			{	engineConfiguration.addToMemoryCache(cacheName,result);
 			}
 			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
@@ -164,7 +164,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getMemoryCache(cacheName);
+		Object o = engineConfiguration.getFromMemoryCache(cacheName);
 		if(engineConfiguration.getMemoryCache() && o!=null)
 		{	result = ((HeroFactory)o).cacheCopy(zoomFactor);
 		}
@@ -193,7 +193,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 			result = complete(folderPath,color,base);
 			// caching
 			if(engineConfiguration.getMemoryCache())
-			{	engineConfiguration.addMemoryCache(cacheName,result);
+			{	engineConfiguration.addToMemoryCache(cacheName,result);
 			}
 			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);

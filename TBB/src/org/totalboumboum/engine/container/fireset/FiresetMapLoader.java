@@ -71,7 +71,7 @@ public class FiresetMapLoader
 		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getMemoryCache(cachePath);
+		Object o = engineConfiguration.getFromMemoryCache(cachePath);
 		if(engineConfiguration.getMemoryCache() && o!=null)
 		{	result = ((FiresetMap)o).cacheCopy(zoomFactor);
 		}
@@ -103,7 +103,7 @@ public class FiresetMapLoader
 			result = loadFiresetmapElement(individualFolder,root);
 			// caching
 			if(engineConfiguration.getMemoryCache())
-			{	engineConfiguration.addMemoryCache(cachePath,result);
+			{	engineConfiguration.addToMemoryCache(cachePath,result);
 			}
 			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);

@@ -46,6 +46,9 @@ public class EngineConfiguration
 		result.setLogControls(logControls); 
 		result.setLogControlsSeparately(logControlsSeparately);
 		
+		result.setMemoryCache(memoryCache);
+		result.setCacheLimit(cacheLimit);
+		
 		return result;
 	}
 
@@ -95,7 +98,7 @@ public class EngineConfiguration
 	// CACHING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean fileCache = false;
-	private boolean memoryCache = true;
+	private boolean memoryCache = false;
 	private HashMap<String,Cachable> cache = new HashMap<String,Cachable>();
 	private LinkedList<String> cacheNames = new LinkedList<String>();
 	private long cacheSize = 0;
@@ -114,7 +117,8 @@ public class EngineConfiguration
 	public void setMemoryCache(boolean memoryCache)
 	{	this.memoryCache = memoryCache;
 	}
-	public void addMemoryCache(String key, Cachable value)
+	
+	public void addToMemoryCache(String key, Cachable value)
 	{	// possibly erase some existing objects
 		while(cacheSize>cacheLimit)
 		{	// erase older object
@@ -132,9 +136,11 @@ public class EngineConfiguration
 		cacheNames.offer(key);
 		cacheSize = cacheSize + value.getMemSize();
 	}
-	public Cachable getMemoryCache(String key)
+	
+	public Cachable getFromMemoryCache(String key)
 	{	return cache.get(key);	
 	}
+	
 	public void clearMemoryCache()
 	{	// erase all objects
 		cache.clear();
@@ -144,6 +150,14 @@ public class EngineConfiguration
 		// garbage collect
 		Runtime rt = Runtime.getRuntime();
 		rt.gc(); 
+	}
+
+	
+	public long getCacheLimit()
+	{	return cacheLimit;
+	}
+	public void setCacheLimit(long cacheLimit)
+	{	this.cacheLimit = cacheLimit;
 	}
 
 	/////////////////////////////////////////////////////////////////
