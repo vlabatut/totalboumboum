@@ -1155,7 +1155,4 @@ public class Launcher
 	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
 	 * >> plus simplement: permettre de ne pas spécifier de valeur pour l'attribut = NONE
 	 */
-
-	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux
-	
 }
