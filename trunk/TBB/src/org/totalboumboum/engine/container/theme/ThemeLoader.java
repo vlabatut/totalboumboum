@@ -97,6 +97,7 @@ public class ThemeLoader
 			// caching
 			if(engineConfiguration.getMemoryCache())
 			{	engineConfiguration.addToMemoryCache(cachePath,result);
+				result = result.cacheCopy(zoomFactor);
 			}
 			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
@@ -104,8 +105,8 @@ public class ThemeLoader
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
 				oOut.writeObject(result);
 				oOut.close();
+				result = result.cacheCopy(zoomFactor);
 			}
-			result = result.cacheCopy(zoomFactor);
 		}
 
 		return result;

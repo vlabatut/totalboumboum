@@ -32,11 +32,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.engine.EngineConfiguration;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ImageShift;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;
@@ -77,11 +80,10 @@ public class TrajectoriesLoader
     @SuppressWarnings("unchecked")
 	private static void loadGestureElement(Element root, GesturePack pack) throws IOException
     {	// zoom
-//    	double zoomFactor = RoundVariables.zoomFactor;  //TODO no need for that anymore, since it's now resized only after loading
-//		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-//		if(engineConfiguration.getMemoryCache() || engineConfiguration.getFileCache())
-//			zoomFactor = 1;
-    	double zoomFactor = 1;
+    	double zoomFactor = RoundVariables.zoomFactor;
+		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
+		if(engineConfiguration.getMemoryCache() || engineConfiguration.getFileCache())
+			zoomFactor = 1;
     		
     	// name
 		String name = root.getAttribute(XmlNames.NAME).getValue().toUpperCase(Locale.ENGLISH);
