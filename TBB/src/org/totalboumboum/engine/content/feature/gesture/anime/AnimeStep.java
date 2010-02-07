@@ -232,6 +232,7 @@ public class AnimeStep implements Serializable
 		{	BufferedImageWrapper cp = new BufferedImageWrapper(image);
 			out.writeObject(new Boolean(true));
 			out.writeObject(cp);
+			//ImageIO.write(image,"jpg",out);
 		}
 		else
 			out.writeObject(new Boolean(false));
@@ -241,6 +242,7 @@ public class AnimeStep implements Serializable
 		{	BufferedImageWrapper cp = new BufferedImageWrapper(shadow);
 			out.writeObject(new Boolean(true));
 			out.writeObject(cp);
+			//ImageIO.write(shadow,"jpg",out);
 		}
 		else
 			out.writeObject(new Boolean(false));
@@ -255,6 +257,7 @@ public class AnimeStep implements Serializable
 		if(flag)
 		{	BufferedImageWrapper cp = (BufferedImageWrapper) in.readObject();
 			image = cp.getIm();
+			//image = ImageIO.read(in);
 		}
 
 		// image
@@ -262,6 +265,7 @@ public class AnimeStep implements Serializable
 		if(flag)
 		{	BufferedImageWrapper cp = (BufferedImageWrapper) in.readObject();
 			shadow = cp.getIm();
+			//shadow = ImageIO.read(in);
 		}
 	}
 

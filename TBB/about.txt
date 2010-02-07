@@ -30,7 +30,7 @@ This product includes softwares developed by:
     http://www.walkersoftware.net/articles/text-effects-in-java
     Used to display messages at the begining of a round
     
-  + Juneym:
+  + JJxMan:
     Class org.totalboumboum.tools.image.BufferedImageWrapper
     Copyright 2006 Juneym
     http://forums.sun.com/thread.jspa?threadID=301424
