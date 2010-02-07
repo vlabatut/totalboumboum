@@ -65,7 +65,7 @@ public class ThemeLoader
 		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getMemoryCache(cachePath);
+		Object o = engineConfiguration.getFromMemoryCache(cachePath);
 		if(engineConfiguration.getMemoryCache() && o!=null)
 		{	result = ((Theme)o).cacheCopy(zoomFactor);
 		}
@@ -96,7 +96,7 @@ public class ThemeLoader
 			result = loadThemeElement(root,individualFolder);
 			// caching
 			if(engineConfiguration.getMemoryCache())
-			{	engineConfiguration.addMemoryCache(cachePath,result);
+			{	engineConfiguration.addToMemoryCache(cachePath,result);
 			}
 			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);

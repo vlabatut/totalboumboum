@@ -70,6 +70,8 @@ public class XmlNames
 	public static final String BOUND_YSHIFT = "boundYShift";
 	public static final String BOUND_ZSHIFT = "boundZShift";
 	public static final String CASE = "case";
+	public static final String CACHE = "cache";
+	public static final String CACHE_LIMIT = "cacheLimit";
 	public static final String CHARACTER = "character";
 	public static final String COL = "col";
 	public static final String COLOR = "color";

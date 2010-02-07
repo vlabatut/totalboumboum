@@ -839,6 +839,7 @@ public class Launcher
 	 * 		- nouveau système de cache mémoire : un peu plus rapide que le chargement normal
 	 * - GUI :
 	 * 		- correction d'un bug dans le menu des options avancées
+	 * 		- options avancées : (dés)activation du cache, réglage de la taille du cache
 	 * - IA :
 	 * - stats :
 	 * - Divers :
@@ -983,6 +984,8 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/* TODO
+	 * 
+	 * - rajouter un bouton dans les options avancées pour vider manuellement le cache mémoire
 	 * 
 	 * - rajouter une confirmation (popup) quand on sort définitivement d'une partie (icone maison)
 	 * 
@@ -1147,17 +1150,6 @@ public class Launcher
 	 *  		- le contaminateur initial est résistant
 	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
 	 */ 
-	
-	/**
-	 * CACHE
-	 *  	- options :
-	 *  		- (dés)activer + vider cache mémoire
-	 *  		- (dés)activer + vider cache fichier
-	 *  	- problèmes :
-	 *  		- le rendu des objets chargés est pourri (p-e du à la façon d'enregistrer les images)
-	 *  		- optimiser le chargement sans cache (pas la peine de recopier à l'échelle)
-	 */
-	
 	
 	/*
 	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau

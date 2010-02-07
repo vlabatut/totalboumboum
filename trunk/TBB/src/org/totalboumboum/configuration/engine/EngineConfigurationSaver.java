@@ -57,6 +57,10 @@ public class EngineConfigurationSaver
 		Element logElement = saveLogElement(engineConfiguration);
 		result.addContent(logElement);
 		
+		// cache
+		Element cacheElement = saveCacheElement(engineConfiguration);
+		result.addContent(cacheElement);
+		
 		return result;
 	}
 	
@@ -84,6 +88,20 @@ public class EngineConfigurationSaver
 		// controls
 		String controls = Boolean.toString(engineConfiguration.getLogControls());
 		result.setAttribute(XmlNames.CONTROLS,controls);
+				
+		return result;
+	}
+
+	private static Element saveCacheElement(EngineConfiguration engineConfiguration)
+	{	Element result = new Element(XmlNames.CACHE);
+		
+		// cache
+		String cache = Boolean.toString(engineConfiguration.getMemoryCache());
+		result.setAttribute(XmlNames.CACHE,cache);
+				
+		// limit
+		String cacheLimit = Long.toString(engineConfiguration.getCacheLimit());
+		result.setAttribute(XmlNames.CACHE_LIMIT,cacheLimit);
 				
 		return result;
 	}
