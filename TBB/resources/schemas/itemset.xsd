@@ -18,7 +18,7 @@
 		<xsd:complexContent>
 			<xsd:extension base="tItem">
 				<xsd:sequence>
-					<xsd:element name="abilities" type="tAbilities" maxOccurs="unbounded"/>
+					<xsd:element name="abilities" type="tAbilities" minOccurs="0" maxOccurs="unbounded"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
