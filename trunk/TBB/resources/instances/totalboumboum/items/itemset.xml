@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<itemset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/itemset.xsd">
+
+	<abstractItems>
+		<item name="common" folder="__common"/>
+		<item name="action" folder="_action"/>
+		<item name="bonus" folder="_bonus"/>
+		<item name="malus" folder="_malus"/>
+		<item name="contagion" folder="_contagion"/>
+	</abstractItems>
+
+	<concreteItems>
+	
+		<item name="antidote" folder="antidote" >
+		</item>
+		
+		<item name="control" folder="control" >
+			<abilities>
+				<ability >
+					<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="death" folder="poison" >
+			<!-- to be completed  -->
+		</item>
+		
+		<item name="extrabomb" folder="extrabomb">	
+			<abilities>
+				<ability >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="extraflame" folder="extraflame">
+			<abilities>
+				<ability >
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="extraspeed" folder="extraspeed" >
+			<abilities>
+				<ability strength="1">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="extrastar" folder="extrastar" >
+			<!-- to be completed  -->
+		</item>
+		
+		<item name="extratime" folder="extratime" >
+			<!-- to be completed  -->
+		</item>
+		
+		<item name="freeze" folder="freeze" >
+			<!-- to be completed  -->
+		</item>
+	
+		<item name="goldenbomb" folder="goldenbomb">
+			<abilities>
+				<ability strength="10" >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="goldenflame" folder="goldenflame">
+			<abilities>
+				<ability strength="10" >
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="goldenspeed" folder="goldenspeed">
+			<abilities>
+				<ability strength="10">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="heart" folder="heart" >
+			<!-- to be completed  -->
+		</item>
+	
+		<item name="kick" folder="kick" >
+			<abilities>
+				<ability >
+					<action name="PUSH" target="BOMB" direction="ANY" contact="COLLISION" orientation="FACE" tilePosition="NEIGHBOR"/>
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="life" folder="life">
+			<abilities>
+				<ability uses="1">
+					<name value="HERO_LIFE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="minusbomb" folder="minusbomb">	
+			<abilities>
+				<ability strength="-1">
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="minusflame" folder="minusflame">
+			<abilities>
+				<ability strength="-1">
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="minusspeed" folder="minusspeed" >
+			<abilities>
+				<ability strength="-1">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="minusstar" folder="minusstar" >
+			<!-- to be completed  -->
+		</item>
+
+		<item name="minustime" folder="minustime" >
+			<!-- to be completed  -->
+		</item>
+		
+		<item name="nobomb" folder="nobomb">	
+			<abilities>
+				<ability strength="-10">
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="noflame" folder="noflame">
+			<abilities>
+				<ability strength="-10">
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="nospeed" folder="nospeed" >
+			<abilities>
+				<ability strength="-10">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="notime" folder="notime" >
+			<!-- to be completed  -->
+		</item>
+
+		<item name="passbombs" folder="passbombs" >
+			<abilities>
+				<ability >
+					<name value="SPRITE_TRAVERSE_BOMB" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="passwalls" folder="passwalls" >
+			<abilities>
+				<ability >
+					<name value="SPRITE_TRAVERSE_WALL" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="penetration" folder="penetration" >
+			<abilities>
+				<ability >
+					<name value="CUSTOM_BOMB_TYPE_PENETRATION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="poison" folder="poison" >
+			<!-- to be completed  -->
+		</item>
+		
+		<item name="punch" folder="punch" >
+			<abilities>
+				<ability >
+					<action name="PUNCH" target="BOMB" direction="ANY" contact="COLLISION INTERSECTION" orientation="FACE" tilePosition="ANY"/>
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="randombonus" folder="randombonus" >
+			<!-- extrabomb -->		
+			<abilities>
+				<ability >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+			<!-- extraflame -->		
+			<abilities>
+				<ability >
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+			<!-- extra speed -->		
+			<abilities>
+				<ability strength="1">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+			<!-- kick -->		
+			<abilities>
+				<ability >
+					<action name="PUSH" target="BOMB" direction="ANY" 
+					contact="COLLISION" orientation="FACE" tilePosition="NEIGHBOR"/>
+				</ability>
+			</abilities>
+			<!-- penetration -->		
+			<abilities>
+				<ability >
+					<name value="CUSTOM_BOMB_TYPE_PENETRATION" />
+				</ability>
+			</abilities>
+			<!-- punch -->		
+			<abilities>
+				<ability >
+					<action name="PUNCH" target="BOMB" direction="ANY"
+					contact="COLLISION INTERSECTION" orientation="FACE" tilePosition="ANY"/>
+				</ability>
+			</abilities>
+			<!-- remote control -->		
+			<abilities>
+				<ability >
+					<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
+				</ability>
+			</abilities>
+			<!-- pass bombs -->		
+			<abilities>
+				<ability >
+					<name value="SPRITE_TRAVERSE_BOMB" />
+				</ability>
+			</abilities>
+			<!-- pass walls -->		
+			<abilities>
+				<ability >
+					<name value="SPRITE_TRAVERSE_WALL" />
+				</ability>
+			</abilities>
+		</item>
+
+		<item name="randomgold" folder="randomgold" >
+			<!-- golden bomb -->		
+			<abilities>
+				<ability strength="10" >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+			<!-- golden flame -->		
+			<abilities>
+				<ability strength="10" >
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+			<!-- golden speed -->		
+			<abilities>
+				<ability strength="10">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+		</item>
+
+		<item name="randommalus" folder="randommalus" >
+			<!-- no bomb -->		
+			<abilities>
+				<ability strength="-10" >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+			<!-- no flame -->		
+			<abilities>
+				<ability strength="-10" >
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+			<!-- no speed -->		
+			<abilities>
+				<ability strength="-10">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+			<!-- poison -->
+				<!-- to be completed  -->
+		</item>
+
+		<item name="shield" folder="shield">
+			<abilities>
+				<ability strength="90" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="16777215" frame="true" time="15000" > <!-- #FFFFFF = white -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="15000">
+					<name value="HERO_FIRE_PROTECTION" />
+				</ability>
+			</abilities>
+		</item>		
+
+		<item name="startshield" folder="shield">
+			<abilities>
+				<ability strength="90" frame="true" time="3000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90" frame="true" time="3000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="16777215" frame="true" time="3000" > <!-- #FFFFFF = white -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="3000">
+					<name value="HERO_FIRE_PROTECTION" />
+				</ability>
+			</abilities>
+		</item>		
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+		<item name="disease" folder="disease" >
+			<!-- bomb constipation -->
+			<abilities>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="20000" >
+					<name value="HERO_BOMB_CONSTIPATION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		
+	</concreteItems>
+
+</itemset>
