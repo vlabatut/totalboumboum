@@ -23,6 +23,7 @@ package org.totalboumboum.engine.content.sprite.item;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -57,15 +58,15 @@ public class Item extends Sprite
 	// ITEM ABILITIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** original abilities given by this item */
-	private ArrayList<AbstractAbility> originalItemAbilities;
+	private List<AbstractAbility> originalItemAbilities;
 	/** working abilities given by this item */
-	private ArrayList<AbstractAbility> itemAbilities;
+	private List<AbstractAbility> itemAbilities;
 	
-	public ArrayList<AbstractAbility> getItemAbilities()
+	public List<AbstractAbility> getItemAbilities()
 	{	return itemAbilities;
 	}
 	
-	public void initItemAbilities(ArrayList<AbstractAbility> abilities)
+	public void initItemAbilities(List<AbstractAbility> abilities)
 	{	originalItemAbilities = abilities;
 		Iterator<AbstractAbility> i = abilities.iterator();
 		while(i.hasNext())

@@ -24,6 +24,7 @@ package org.totalboumboum.engine.content.manager.item;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.totalboumboum.engine.container.itemset.Itemset;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -117,7 +118,7 @@ public class ItemManager
 		list.offer(item);
 
 		// update roles in abilities
-		ArrayList<AbstractAbility> ab = item.getItemAbilities();
+		List<AbstractAbility> ab = item.getItemAbilities();
 		Iterator<AbstractAbility> i = ab.iterator();
 		while(i.hasNext())
 		{	AbstractAbility temp = i.next();

@@ -25,9 +25,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
-
 
 import org.jdom.Element;
 import org.totalboumboum.configuration.profile.PredefinedColor;
@@ -44,7 +44,7 @@ import org.xml.sax.SAXException;
 
 public class ItemFactoryLoader extends SpriteFactoryLoader
 {	
-	public static ItemFactory loadItemFactory(String folderPath, String itemName, ArrayList<ArrayList<AbstractAbility>> itemAbilities, ArrayList<Float> itemProbabilities, HashMap<String,ItemFactory> abstractItems, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static ItemFactory loadItemFactory(String folderPath, String itemName, List<String> itemrefs, List<List<AbstractAbility>> itemAbilities, List<Float> probabilities, HashMap<String,ItemFactory> abstractItems, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		ItemFactory result = new ItemFactory(itemName);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
@@ -80,8 +80,8 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		PredefinedColor bombsetColor = null;
 		result.setBombsetColor(bombsetColor);
 
-		// ITEM ABILITIES
-		result.setItemAbilities(itemAbilities,itemProbabilities);
+		// ITEM ABILITIES / ITEMREFS
+		result.setItemAbilities(itemAbilities,itemrefs,probabilities);
 		
 		// result
 		if(!isAbstract)

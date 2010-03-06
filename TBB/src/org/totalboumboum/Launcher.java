@@ -837,6 +837,7 @@ public class Launcher
 	 * - Moteur :
 	 * 		- nouveau système de mise en cache utilisant des fichiers : pas efficace, c'est aussi long que de tout charger direct
 	 * 		- nouveau système de cache mémoire : un peu plus rapide que le chargement normal
+	 * 		- possibilité de définir des items aléatoires à partir d'intems existant (et plus uniquement en répétant des propriétés)
 	 * - GUI :
 	 * 		- correction d'un bug dans le menu des options avancées
 	 * 		- options avancées : (dés)activation du cache, réglage de la taille du cache

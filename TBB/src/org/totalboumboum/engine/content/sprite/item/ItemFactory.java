@@ -24,6 +24,7 @@ package org.totalboumboum.engine.content.sprite.item;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -78,15 +79,18 @@ public class ItemFactory extends SpriteFactory<Item>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// ABILITIES		/////////////////////////////////////////////
+	// ABILITIES / ITEMREFS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** abilities given by this item */
-	private ArrayList<ArrayList<AbstractAbility>> itemAbilities;
+	private List<List<AbstractAbility>> itemAbilities;
+	/** alternatively: existing bonuses given by this item */
+	private List<String> itemrefs;
 	/** probability associated to the list of abilities **/
-	private ArrayList<Float> itemProbabilities;
+	private List<Float> itemProbabilities;
 	
-	public void setItemAbilities(ArrayList<ArrayList<AbstractAbility>> itemAbilities, ArrayList<Float> itemProbabilities)
+	public void setItemAbilities(List<List<AbstractAbility>> itemAbilities, List<String> itemref, List<Float> itemProbabilities)
 	{	this.itemAbilities = itemAbilities;
+		this.itemrefs = itemref;
 		this.itemProbabilities = itemProbabilities;
 	}
 	
@@ -98,35 +102,49 @@ public class ItemFactory extends SpriteFactory<Item>
 	public Item makeSprite(Tile tile)
 	{	// init
 		Item result = new Item();
-		
-		// common managers
-		initSprite(result);
-	
-		// specific managers
-		// item abilities
 		double proba = Math.random();
 //System.out.println("name: "+itemName+" proba: "+proba);		
 		double total = 0;
 		int index = 0;
-		ArrayList<AbstractAbility> abilities = null;
-		while(index<itemAbilities.size() && abilities==null)
-		{	total = total + itemProbabilities.get(index);
-			if(proba<total)
-				abilities = itemAbilities.get(index);
-			else
-				index ++;
+
+		if(!itemAbilities.isEmpty())
+		{	String name = null;
+			while(index<itemrefs.size() && name==null)
+			{	total = total + itemProbabilities.get(index);
+				if(proba<total)
+					name = itemrefs.get(index);
+				else
+					index ++;
+			}
+			result = instance.getItemset().makeItem(name,tile);
 		}
+		else
+		{	// common managers
+			initSprite(result);
+		
+			// specific managers
+			// item abilities
+			List<AbstractAbility> abilities = null;
+			while(index<itemAbilities.size() && abilities==null)
+			{	total = total + itemProbabilities.get(index);
+				if(proba<total)
+					abilities = itemAbilities.get(index);
+				else
+					index ++;
+			}
 //for(AbstractAbility a: abilities)
 //if(a instanceof StateAbility)
 //System.out.println("\t- "+((StateAbility)a).getName()+", : "+a.getStrength());
-		result.initItemAbilities(abilities);
-		// event
-		EventManager eventManager = new ItemEventManager(result);
-		result.setEventManager(eventManager);
+			result.initItemAbilities(abilities);
+			// event
+			EventManager eventManager = new ItemEventManager(result);
+			result.setEventManager(eventManager);
+			
+			// result
+			result.setItemName(itemName);
+			result.initSprite(tile);
+		}
 		
-		// result
-		result.setItemName(itemName);
-		result.initSprite(tile);
 		return result;
 	}
 
@@ -137,7 +155,7 @@ public class ItemFactory extends SpriteFactory<Item>
 	{	if(!finished)
 		{	super.finish();
 			// item abilities
-			{	for(ArrayList<AbstractAbility> list: itemAbilities)
+			{	for(List<AbstractAbility> list: itemAbilities)
 				{	Iterator<AbstractAbility> it = list.iterator();
 					while(it.hasNext())
 					{	AbstractAbility temp = it.next();
@@ -146,6 +164,7 @@ public class ItemFactory extends SpriteFactory<Item>
 					}
 				}
 				itemAbilities.clear();
+				itemrefs.clear();
 				itemProbabilities.clear();
 			}
 		}
@@ -162,14 +181,20 @@ public class ItemFactory extends SpriteFactory<Item>
 		result.name = name;
 		
 		// item abilities
-		ArrayList<ArrayList<AbstractAbility>> itemAbilitiesCopy = new ArrayList<ArrayList<AbstractAbility>>();
-		for(ArrayList<AbstractAbility> abilityList: itemAbilities)
-		{	ArrayList<AbstractAbility> temp = new ArrayList<AbstractAbility>();
+		List<List<AbstractAbility>> itemAbilitiesCopy = new ArrayList<List<AbstractAbility>>();
+		for(List<AbstractAbility> abilityList: itemAbilities)
+		{	List<AbstractAbility> temp = new ArrayList<AbstractAbility>();
 			for(AbstractAbility ability: abilityList)
 				temp.add(ability.cacheCopy(zoomFactor));
 			itemAbilitiesCopy.add(temp);
 		}
 		result.itemAbilities = itemAbilitiesCopy;
+		
+		// item refs
+		List<String> itemrefsCopy = new ArrayList<String>();
+		for(String itemref: itemrefs)
+			itemrefsCopy.add(itemref);
+		result.itemrefs = itemrefsCopy;
 		
 		// item probabilities
 		ArrayList<Float> itemProbabilitiesCopy = new ArrayList<Float>();
