@@ -1155,4 +1155,15 @@ public class Launcher
 	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
 	 * >> plus simplement: permettre de ne pas spécifier de valeur pour l'attribut = NONE
 	 */
+	
+	/*
+	 * faut implémenter la possibilité de choisir aléatoirement un item, plutot que de les redéfinir stupidement
+	 * ça serait même mieux de définir un bonus random vide dans l'item set et ensuite dans le niveau de pouvoir définir une combinaison d'items ?
+	 * p-ê trop compliqué et en plus non-uniforme. vaut mieux définir différents items séparés, dans l'itemset
+	 * 
+	 * 
+	 * 
+	 * implémenter la décomposition des sprites en layer
+	 * expérimenter en simplifiant les instances existantes
+	 */
 }
