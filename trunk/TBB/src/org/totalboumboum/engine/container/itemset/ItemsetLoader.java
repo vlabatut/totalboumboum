@@ -157,12 +157,20 @@ public class ItemsetLoader
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
-		// abilities
-		ArrayList<ArrayList<AbstractAbility>> abilities = new ArrayList<ArrayList<AbstractAbility>>();
-		ArrayList<Float> probabilities = new ArrayList<Float>();
+		// abilities / itemref
+		List<Float> probabilities = new ArrayList<Float>();
+		List<List<AbstractAbility>> abilities = new ArrayList<List<AbstractAbility>>();
+		List<String> itemrefs = new ArrayList<String>();
 		List<Element> elements = root.getChildren(XmlNames.ABILITIES);
-		for(Element e: elements)
-			loadAbilitiesElement(e,abilities,probabilities);
+		if(!elements.isEmpty())
+		{	for(Element e: elements)
+				loadAbilitiesElement(e,abilities,probabilities);
+		}
+		else
+		{	elements = root.getChildren(XmlNames.ITEM);
+			for(Element e: elements)
+				loadItemrefElement(e,itemrefs,probabilities);
+		}
 		// normalize probas
 		float totalProba = 0;
 		for(Float f: probabilities)
@@ -174,17 +182,28 @@ public class ItemsetLoader
 		
 		// item factory
 		boolean isAbstract = type==Type.ABSTRACT;
-		ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities,probabilities,abstractItems,isAbstract);
+		ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,itemrefs,abilities,probabilities,abstractItems,isAbstract);
 		if(isAbstract)
 			abstractItems.put(name,itemFactory);
 		else
 			result.addItemFactory(name,itemFactory);
     }
 	
-	private static void loadAbilitiesElement(Element root, ArrayList<ArrayList<AbstractAbility>> abilities, ArrayList<Float> probabilities) throws ClassNotFoundException
+	private static void loadAbilitiesElement(Element root, List<List<AbstractAbility>> abilities, List<Float> probabilities) throws ClassNotFoundException
 	{	// abilities
 		ArrayList<AbstractAbility> list = AbilityLoader.loadAbilitiesElement(root);
 		abilities.add(list);
+		
+		// probabilities
+		String probaStr = root.getAttributeValue(XmlNames.PROBA).trim();
+		float proba = Float.parseFloat(probaStr);
+		probabilities.add(proba);
+	}
+
+	private static void loadItemrefElement(Element root, List<String> items, List<Float> probabilities)
+	{	// item
+		String itemName = root.getAttributeValue(XmlNames.NAME).trim();
+		items.add(itemName);
 		
 		// probabilities
 		String probaStr = root.getAttributeValue(XmlNames.PROBA).trim();
