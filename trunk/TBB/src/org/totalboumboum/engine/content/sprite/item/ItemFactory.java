@@ -102,12 +102,18 @@ public class ItemFactory extends SpriteFactory<Item>
 	public Item makeSprite(Tile tile)
 	{	// init
 		Item result = new Item();
+		List<AbstractAbility> abilities = null;
 		double proba = Math.random();
 //System.out.println("name: "+itemName+" proba: "+proba);		
 		double total = 0;
 		int index = 0;
 
-		if(!itemAbilities.isEmpty())
+		// common managers
+		initSprite(result);
+	
+		// specific managers
+		// item abilities
+		if(itemAbilities.isEmpty())
 		{	String name = null;
 			while(index<itemrefs.size() && name==null)
 			{	total = total + itemProbabilities.get(index);
@@ -116,16 +122,12 @@ public class ItemFactory extends SpriteFactory<Item>
 				else
 					index ++;
 			}
-			result = instance.getItemset().makeItem(name,tile);
+System.out.println("name: "+name);			
+			Item itm = instance.getItemset().makeItem(name,tile);
+			abilities = itm.getItemAbilities();
 		}
 		else
-		{	// common managers
-			initSprite(result);
-		
-			// specific managers
-			// item abilities
-			List<AbstractAbility> abilities = null;
-			while(index<itemAbilities.size() && abilities==null)
+		{	while(index<itemAbilities.size() && abilities==null)
 			{	total = total + itemProbabilities.get(index);
 				if(proba<total)
 					abilities = itemAbilities.get(index);
@@ -135,15 +137,16 @@ public class ItemFactory extends SpriteFactory<Item>
 //for(AbstractAbility a: abilities)
 //if(a instanceof StateAbility)
 //System.out.println("\t- "+((StateAbility)a).getName()+", : "+a.getStrength());
-			result.initItemAbilities(abilities);
-			// event
-			EventManager eventManager = new ItemEventManager(result);
-			result.setEventManager(eventManager);
-			
-			// result
-			result.setItemName(itemName);
-			result.initSprite(tile);
 		}
+		result.initItemAbilities(abilities);
+		// event
+		EventManager eventManager = new ItemEventManager(result);
+		result.setEventManager(eventManager);
+		
+		// result
+		result.setItemName(itemName);
+		result.initSprite(tile);
+		
 		
 		return result;
 	}
