@@ -838,6 +838,8 @@ public class Launcher
 	 * 		- nouveau système de mise en cache utilisant des fichiers : pas efficace, c'est aussi long que de tout charger direct
 	 * 		- nouveau système de cache mémoire : un peu plus rapide que le chargement normal
 	 * 		- possibilité de définir des items aléatoires à partir d'intems existant (et plus uniquement en répétant des propriétés)
+	 * 		- correction d'un bug lorsque le round n'a pas de limite de temps
+	 * 		- correction d'un bug lors du calcul des scores quand un joueur se fait tuer par le niveau (i.e. bombe anonyme)
 	 * - GUI :
 	 * 		- correction d'un bug dans le menu des options avancées
 	 * 		- options avancées : (dés)activation du cache, réglage de la taille du cache
