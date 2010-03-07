@@ -45,6 +45,23 @@
 			<!-- to be completed  -->
 		</item>
 		
+		<item name="diarrhea" folder="diarrhea">	
+			<abilities>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="20000" >
+					<name value="HERO_BOMB_DIARRHEA" />
+				</ability>
+			</abilities>
+		</item>
+		
 		<item name="extinction" folder="extinction">
 			<abilities>
 				<ability strength="90"  frame="true" time="20000" >
@@ -124,6 +141,31 @@
 			<!-- to be completed  -->
 		</item>
 	
+		<item name="inversion" folder="inversion">	
+			<abilities>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="20000" >
+					<name value="HERO_CONTROL_INVERSION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="invisibility" folder="invisibility">	
+			<abilities>
+				<ability time="30000" >
+					<name value="SPRITE_INVISIBLE" />
+				</ability>
+			</abilities>
+		</item>
+		
 		<item name="kick" folder="kick" >
 			<abilities>
 				<ability >
@@ -136,6 +178,23 @@
 			<abilities>
 				<ability uses="1">
 					<name value="HERO_LIFE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="longfuse" folder="longfuse" >
+			<abilities>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability strength="1" time="20000" >
+					<name value="HERO_BOMB_TIMER_COEFFICIENT" />
 				</ability>
 			</abilities>
 		</item>
@@ -228,7 +287,10 @@
 
 		<item name="randommalus" folder="randommalus" >
 			<item name="constipation" />
+			<item name="diarrhea" />
 			<item name="extinction" />
+			<item name="longfuse" />
+			<item name="shortfuse" />
 			<item name="slowness" />
 			<item name="poison" />
 		</item>
@@ -250,6 +312,23 @@
 			</abilities>
 		</item>		
 
+		<item name="shortfuse" folder="shortfuse" >
+			<abilities>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90"  frame="true" time="20000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability strength="-0.5" time="20000" >
+					<name value="HERO_BOMB_TIMER_COEFFICIENT" />
+				</ability>
+			</abilities>
+		</item>
+		
 		<item name="slowness" folder="slowness" >
 			<abilities>
 				<ability strength="90"  frame="true" time="20000" >
