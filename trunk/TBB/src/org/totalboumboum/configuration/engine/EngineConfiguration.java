@@ -21,6 +21,7 @@ package org.totalboumboum.configuration.engine;
  * 
  */
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,9 +31,12 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import org.totalboumboum.configuration.profile.PredefinedColor;
+import org.totalboumboum.engine.content.feature.gesture.anime.Colormap;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.images.ImageCache;
 
 public class EngineConfiguration
 {
@@ -46,8 +50,8 @@ public class EngineConfiguration
 		result.setLogControls(logControls); 
 		result.setLogControlsSeparately(logControlsSeparately);
 		
-		result.setMemoryCache(memoryCache);
-		result.setCacheLimit(cacheLimit);
+		result.setMemoryCached(memoryCached);
+		result.setMemoryCacheLimit(memoryCacheLimit);
 		
 		return result;
 	}
@@ -95,46 +99,43 @@ public class EngineConfiguration
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// CACHING			/////////////////////////////////////////////
+	// SPRITE CACHE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean fileCache = false;
-	private boolean memoryCache = false;
+	private boolean fileCached = false;
+	private boolean memoryCached = false;
 	private HashMap<String,Cachable> cache = new HashMap<String,Cachable>();
 	private LinkedList<String> cacheNames = new LinkedList<String>();
-	private long cacheSize = 0;
-	private long cacheLimit = 128*1024*1024;
+	private long memoryCacheLimit = 250; // expressed in number of sprites
 	
-	public boolean getFileCache()
-	{	return fileCache;
+	public boolean getFileCached()
+	{	return fileCached;
 	}
-	public void setFileCache(boolean fileCache)
-	{	this.fileCache = fileCache;
+	public void setFileCached(boolean fileCached)
+	{	this.fileCached = fileCached;
 	}
 
-	public boolean getMemoryCache()
-	{	return memoryCache;
+	public boolean getMemoryCached()
+	{	return memoryCached;
 	}
-	public void setMemoryCache(boolean memoryCache)
-	{	this.memoryCache = memoryCache;
+	public void setMemoryCached(boolean memoryCached)
+	{	this.memoryCached = memoryCached;
 	}
 	
 	public void addToMemoryCache(String key, Cachable value)
 	{	// possibly erase some existing objects
-		while(cacheSize>cacheLimit)
+		while(cache.size()>memoryCacheLimit)
 		{	// erase older object
 			String older = cacheNames.poll();
-			Cachable temp = cache.get(older);
-			cacheSize = cacheSize - temp.getMemSize();
-			
-			// garbage collect
-			Runtime rt = Runtime.getRuntime();
-			rt.gc(); 
+			cache.remove(older);
 		}
+
+		// garbage collect
+		Runtime rt = Runtime.getRuntime();
+		rt.gc(); 
 
 		// put new object
 		cache.put(key,value);
 		cacheNames.offer(key);
-		cacheSize = cacheSize + value.getMemSize();
 	}
 	
 	public Cachable getFromMemoryCache(String key)
@@ -145,19 +146,57 @@ public class EngineConfiguration
 	{	// erase all objects
 		cache.clear();
 		cacheNames.clear();
-		cacheSize = 0;
 		
 		// garbage collect
 		Runtime rt = Runtime.getRuntime();
 		rt.gc(); 
 	}
-
 	
-	public long getCacheLimit()
-	{	return cacheLimit;
+	public long getMemoryCacheLimit()
+	{	return memoryCacheLimit;
 	}
-	public void setCacheLimit(long cacheLimit)
-	{	this.cacheLimit = cacheLimit;
+	public void setMemoryCacheLimit(long memoryCacheLimit)
+	{	this.memoryCacheLimit = memoryCacheLimit;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// IMAGE CACHE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean imageCached = true;
+	private long imageCacheLimit = 128*1024*1024;
+	private ImageCache imageCache = new ImageCache();
+	
+	public boolean isImageCached()
+	{	return imageCached;
+	}
+	public void setImageCached(boolean imageCached)
+	{	this.imageCached = imageCached;
+	}
+
+	public void addToImageCache(String imgPath, Colormap colormap)
+	{	imageCache.addImage(imgPath, colormap);
+	}
+
+	/** 
+	 * note: the color parameter only indicates the use of a colormap. 
+	 * it should be null if no colormap is used, even in the case of a colored sprite
+	 */
+	public BufferedImage retrieveFromImageCache(String imgPath, PredefinedColor color, double zoom) throws IOException
+    {	return imageCache.retrieveImage(imgPath,color,zoom);
+    }
+    
+    public void clearImageCache()
+    {	imageCache.clear();
+    }
+    public void cleanImageCache()
+    {	imageCache.clean();
+    }
+
+	public long getImageCacheLimit()
+	{	return imageCacheLimit;
+	}
+	public void setImageCacheLimit(long imageCacheLimit)
+	{	this.imageCacheLimit = imageCacheLimit;
 	}
 
 	/////////////////////////////////////////////////////////////////

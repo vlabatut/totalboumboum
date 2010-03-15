@@ -350,7 +350,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 	}
 	
 	private void setCache()
-	{	boolean cache = engineConfiguration.getMemoryCache();
+	{	boolean cache = engineConfiguration.getMemoryCached();
 		String key;
 		if(cache)
 			key = GuiKeys.MENU_OPTIONS_ADVANCED_LINE_CACHE_ENABLED;
@@ -360,7 +360,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 	}
 	
 	private void setCacheLimit()
-	{	long limit = engineConfiguration.getCacheLimit();
+	{	long limit = engineConfiguration.getMemoryCacheLimit();
 		limit = limit/1024/1024;
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(0);
@@ -459,13 +459,13 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 				break;
 			// cache
 			case LINE_CACHE:
-				boolean cache = !engineConfiguration.getMemoryCache();
-				engineConfiguration.setMemoryCache(cache);
+				boolean cache = !engineConfiguration.getMemoryCached();
+				engineConfiguration.setMemoryCached(cache);
 				setCache();
 				break;
 			// cache limit
 			case LINE_CACHE_LIMIT:
-				long limit = engineConfiguration.getCacheLimit();
+				long limit = engineConfiguration.getMemoryCacheLimit();
 				// minus
 				if(pos[1]==1)
 				{	if(limit>=16*1024*1024)
@@ -476,7 +476,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 				{	limit = limit + 16*1024*1024;				
 				}
 				// common
-				engineConfiguration.setCacheLimit(limit);
+				engineConfiguration.setMemoryCacheLimit(limit);
 				setCacheLimit();
 				break;			
 		}

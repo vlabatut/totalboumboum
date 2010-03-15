@@ -32,14 +32,19 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
+	<xsd:group name="gImage">
+		<xsd:choice>
+			<xsd:element name="image" type="tImageFile" />
+			<xsd:element name="imageref" type="tImageRef" />
+		</xsd:choice>
+	</xsd:group>
+	
 	<xsd:complexType name="tStep">
 		<xsd:sequence>
-			<xsd:choice>
-				<xsd:element name="image" type="tImageFile" maxOccurs="unbounded" />
-				<xsd:element name="imageref" type="tImageRef" maxOccurs="unbounded" />
-			</xsd:choice>
+			<xsd:group ref="gImage" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="file" type="xsd:string" use="optional" />
+		<xsd:attribute name="name" type="xsd:string" use="optional" />
 		<xsd:attribute name="duration" type="xsd:integer" use="optional" default="0" />
 		<xsd:attribute name="xShift" type="xsd:integer" use="optional" />
 		<xsd:attribute name="yShift" type="xsd:integer" use="optional" />

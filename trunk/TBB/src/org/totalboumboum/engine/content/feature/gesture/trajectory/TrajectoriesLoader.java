@@ -82,7 +82,7 @@ public class TrajectoriesLoader
     {	// zoom
     	double zoomFactor = RoundVariables.zoomFactor;
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		if(engineConfiguration.getMemoryCache() || engineConfiguration.getFileCache())
+		if(engineConfiguration.getMemoryCached() || engineConfiguration.getFileCached())
 			zoomFactor = 1;
     		
     	// name

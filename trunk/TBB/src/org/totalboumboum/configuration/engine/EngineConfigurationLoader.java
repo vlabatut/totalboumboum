@@ -89,11 +89,11 @@ public class EngineConfigurationLoader
 	{	// cache
 		String cacheStr = root.getAttribute(XmlNames.CACHE).getValue().trim();
 		boolean cache = Boolean.valueOf(cacheStr);
-		result.setMemoryCache(cache);
+		result.setMemoryCached(cache);
 
 		// cache limit
 		String cacheLimitStr = root.getAttribute(XmlNames.CACHE_LIMIT).getValue().trim();
 		long cacheLimit = Long.valueOf(cacheLimitStr);
-		result.setCacheLimit(cacheLimit);
+		result.setMemoryCacheLimit(cacheLimit);
 	}
 }

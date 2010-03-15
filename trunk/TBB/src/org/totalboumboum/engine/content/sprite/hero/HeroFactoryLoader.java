@@ -72,11 +72,11 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromMemoryCache(cacheName);
-		if(engineConfiguration.getMemoryCache() && o!=null)
+		if(engineConfiguration.getMemoryCached() && o!=null)
 		{	result = ((HeroFactory)o);
 			//result = result.cacheCopy(zoomFactor);
 		}
-		else if(engineConfiguration.getFileCache() && cacheFile.exists())
+		else if(engineConfiguration.getFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
@@ -100,11 +100,11 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		{	// opening & loading
 			result = init(folderPath);
 			// caching
-			if(engineConfiguration.getMemoryCache())
+			if(engineConfiguration.getMemoryCached())
 			{	engineConfiguration.addToMemoryCache(cacheName,result);
 				//result = result.cacheCopy(zoomFactor);
 			}
-			if(engineConfiguration.getFileCache())
+			if(engineConfiguration.getFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
@@ -167,10 +167,10 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromMemoryCache(cacheName);
-		if(engineConfiguration.getMemoryCache() && o!=null)
+		if(engineConfiguration.getMemoryCached() && o!=null)
 		{	result = ((HeroFactory)o).cacheCopy(zoomFactor);
 		}
-		else if(engineConfiguration.getFileCache() && cacheFile.exists())
+		else if(engineConfiguration.getFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
@@ -194,11 +194,11 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		{	// opening & loading
 			result = complete(folderPath,color,base);
 			// caching
-			if(engineConfiguration.getMemoryCache())
+			if(engineConfiguration.getMemoryCached())
 			{	engineConfiguration.addToMemoryCache(cacheName,result);
 				result = result.cacheCopy(zoomFactor);
 			}
-			if(engineConfiguration.getFileCache())
+			if(engineConfiguration.getFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);

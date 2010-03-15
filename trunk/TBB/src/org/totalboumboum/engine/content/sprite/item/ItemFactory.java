@@ -21,6 +21,7 @@ package org.totalboumboum.engine.content.sprite.item;
  * 
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -145,38 +146,15 @@ System.out.println("name: "+name);
 		
 		// result
 		result.setItemName(itemName);
-		result.initSprite(tile);
-		
+		result.initSprite(tile);		
 		
 		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// item abilities
-			{	for(List<AbstractAbility> list: itemAbilities)
-				{	Iterator<AbstractAbility> it = list.iterator();
-					while(it.hasNext())
-					{	AbstractAbility temp = it.next();
-						temp.finish();
-						it.remove();
-					}
-				}
-				itemAbilities.clear();
-				itemrefs.clear();
-				itemProbabilities.clear();
-			}
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public ItemFactory cacheCopy(double zoomFactor)
+	public ItemFactory deepCopy(double zoomFactor) throws IOException
 	{	ItemFactory result = new ItemFactory(itemName);
 		
 		// misc
@@ -221,9 +199,31 @@ System.out.println("name: "+name);
 		result.setExplosionName(explosionName);
 		
 		// gestures
-		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		GesturePack gesturePackCopy = gesturePack.deepCopy(zoomFactor,null);
 		result.setGesturePack(gesturePackCopy);
 
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			// item abilities
+			{	for(List<AbstractAbility> list: itemAbilities)
+				{	Iterator<AbstractAbility> it = list.iterator();
+					while(it.hasNext())
+					{	AbstractAbility temp = it.next();
+						temp.finish();
+						it.remove();
+					}
+				}
+				itemAbilities.clear();
+				itemrefs.clear();
+				itemProbabilities.clear();
+			}
+		}
 	}
 }

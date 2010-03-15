@@ -61,58 +61,9 @@ import org.xml.sax.SAXException;
 public class ImageTools
 {
 
-	/** 
-	 * make a copy of the <image> parameter.
-	 */
-	public static BufferedImage copyBufferedImage(BufferedImage image)
-	{	int type = image.getType();
-		BufferedImage copy = new BufferedImage(image.getWidth(),image.getHeight(), type/*BufferedImage.TYPE_INT_ARGB*/);
-	  	// create a graphics context
-	  	Graphics2D g2d = copy.createGraphics();
-	    // g2d.setComposite(AlphaComposite.Src);	  	
-	  	// copy image
-	  	g2d.drawImage(image,0,0,null);
-	  	g2d.dispose();
-	  	return copy;
-	  }	
-
-	/** 
-	 * make a BufferedImage copy of im
-	 *
-	public static BufferedImage makeBufferedImage(Image im, int width, int height)
-	{	
-		BufferedImage copy = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-	  	// create a graphics context
-	  	Graphics2D g2d = copy.createGraphics();
-	    // g2d.setComposite(AlphaComposite.Src);
-	  	// copy image
-	  	g2d.drawImage(im,0,0,null);
-	  	g2d.dispose();
-	  	return copy;
-	  }	*/
-	
-	/**
-	 * Load the image from <path>, returning it as a BufferedImage
-	 * which is compatible with the graphics device being used.
-	 * Uses ImageIO.
-	 * @throws IOException 
-	 
-    public static BufferedImage loadImage(String path) throws IOException 
-	{	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
-		BufferedImage im = ImageIO.read(new File(path));
-		ColorModel cm = im.getColorModel();			
-		int transparency = cm.getTransparency();
-		BufferedImage copy =  gc.createCompatibleImage(im.getWidth(), im.getHeight(),transparency);
-		// create a graphics context
-		Graphics2D g2d = copy.createGraphics();
-		// copy image
-		g2d.drawImage(im,0,0,null);
-		g2d.dispose();
-		return copy;	
-	}	
-    */
-	
+	/////////////////////////////////////////////////////////////////
+	// FILE ACCESS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
     public static BufferedImage loadImage(String path, Colormap colormap) throws IOException
     {	BufferedImage image;
     	FileInputStream in = new FileInputStream(path);
@@ -135,114 +86,51 @@ public class ImageTools
     	return image;
     }
     
-    public static BufferedImage getColoredImage(BufferedImage image, Colormap colormap)
-   	{	ColorModel colorModel = image.getColorModel();
-		if(colorModel instanceof IndexColorModel)
-		{	// build the color map
-			IndexColorModel cm = (IndexColorModel) colorModel;
-			int size = cm.getMapSize();
-			int bits = cm.getPixelSize();
-			byte reds[] = new byte[size];
-			byte greens[] = new byte[size];
-			byte blues[] = new byte[size];
-			cm.getReds(reds);
-			cm.getGreens(greens);
-			cm.getBlues(blues);
-			// changing the values    		
-			Iterator<Entry<Integer,byte[]>> i = colormap.entrySet().iterator();
-			while(i.hasNext())
-			{	Entry<Integer,byte[]> temp = i.next();
-				int index = temp.getKey();
-				byte tab[] = temp.getValue();
-				reds[index] = tab[0];
-				greens[index] = tab[1];
-				blues[index] = tab[2];
-			}
-			// creating the new model
-			int trans = cm.getTransparentPixel();
-			IndexColorModel newCm;
-			if(trans<0)
-				newCm = new IndexColorModel(bits, size, reds, greens, blues);
-			else
-				newCm = new IndexColorModel(bits, size, reds, greens, blues, trans);	    		
-			// cloning the image, applying the new color model
-			String[] names = image.getPropertyNames();
-			Hashtable<String,Object> props = new Hashtable<String,Object>();
-			if(names!=null)
-			{	for(int k=0;k<names.length;k++)
-	    		{	Object prop = image.getProperty(names[k]);
-	    			props.put(names[k], prop);
-	    		}
-			}
-			WritableRaster raster = image.copyData(null);
-			BufferedImage copy = new BufferedImage(newCm,raster,image.isAlphaPremultiplied(),props);
-	  		image = copy;  	  		
-		}
-		return image;
-	}
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+    //TODO I guess this should be disabled in favor of getCompatibleImage
+    public static BufferedImage copyBufferedImage(BufferedImage image)
+	{	int type = image.getType();
+		BufferedImage copy = new BufferedImage(image.getWidth(),image.getHeight(), type/*BufferedImage.TYPE_INT_ARGB*/);
+	  	
+		// create a graphics context
+	  	Graphics2D g2d = copy.createGraphics();
+	    // g2d.setComposite(AlphaComposite.Src);	  	
+	  	
+	  	// copy image
+	  	g2d.drawImage(image,0,0,null);
+	  	g2d.dispose();
+	  	return copy;
+	}	
 
-    private static BufferedImage getCompatibleImage(BufferedImage image)
+	private static BufferedImage getCompatibleImage(BufferedImage image)
     {	// get the graphical environment
     	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
-		// get original the color model
+		
+		// get the original color model
 		ColorModel cm = image.getColorModel();			
 		int transparency = cm.getTransparency();
+		
 		// create a new image compatible with both the environment and the original model
 		BufferedImage result =  gc.createCompatibleImage(image.getWidth(),image.getHeight(),transparency);
+		
 		// copy image
 		Graphics2D g2d = result.createGraphics();
 		g2d.drawImage(image,0,0,null);
 		g2d.dispose();
-		// result
+
     	return result;
     }
     
-    @SuppressWarnings("unchecked")
-    public static Object loadColorsElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
-    {	Object result=null;
-    	// folder
-    	String localFilePath = individualFolder;
-    	Attribute attribute = root.getAttribute(XmlNames.FOLDER);
-    	if(attribute!=null)
-			localFilePath = localFilePath+File.separator+attribute.getValue();
-		// colormaps
-    	List<Element> clrs = root.getChildren();
-    	int i=0;
-		while(result==null && i<clrs.size())
-    	{	Element temp = clrs.get(i);
-    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
-    		if(name.equalsIgnoreCase(color.toString()))
-    		{	// colormap
-    			if(temp.getName().equals(XmlNames.COLORMAP))
-    				result = loadColormapElement(temp,localFilePath);
-    			// colorsprite
-    			else if(temp.getName().equals(XmlNames.COLORSPRITE))
-    				result = loadColorspriteElement(temp);
-    		}
-    		else
-    			i++;
-    	}
-		if(result==null)
-			;// erreur
-		return result;
-    }
-    
-    private static Colormap loadColormapElement(Element root, String individualFolder) throws IOException, ParserConfigurationException, SAXException
-    {	// file
-    	String localPath = individualFolder+File.separator;
-    	localPath = localPath + root.getAttribute(XmlNames.FILE).getValue().trim();
-    	// colormap
-    	Colormap colormap = ColormapLoader.loadColormap(localPath);
-    	return colormap;
-    }
-    
-    private static String loadColorspriteElement(Element root) throws IOException, ParserConfigurationException, SAXException
-    {	// folder
-    	String colorFolder = root.getAttribute(XmlNames.FOLDER).getValue().trim();
-    	return colorFolder;
-    } 
-    
+    /**
+     * Resize the specified image using the specified zoom coefficient and smoothing method.
+     * @param imgOld
+     * @param zoom
+     * @param smooth
+     * @return
+     */
     public static BufferedImage resize(BufferedImage imgOld, double zoom, boolean smooth)
     {	int xDim = (int)(imgOld.getWidth()*zoom);
 		int yDim = (int)(imgOld.getHeight()*zoom);
@@ -267,39 +155,127 @@ if(xDim<0 || yDim<0)
 		AffineTransform xform = AffineTransform.getScaleInstance(zoom,zoom);
 		g.drawRenderedImage(imgOld, xform);
 		g.dispose();
-		//
-    	// optimizing : using a model adapted to the graphical environment
+    	
+		// optimizing : using a model adapted to the graphical environment
 		BufferedImage result =  getCompatibleImage(imgNew);
     	return result; 
     }
     
-    public static BufferedImage getAbsentImage(int width, int height)
-    {	BufferedImage result = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
-		Graphics g = result.createGraphics();
-
-		// red cross
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Color.RED);
-		int strokeSize = width/5;
-        g2d.setStroke(new BasicStroke(strokeSize));
-        g2d.drawLine(0+strokeSize,0+strokeSize,width-strokeSize,height-strokeSize);
-        g2d.drawLine(0+strokeSize,height-strokeSize,width-strokeSize,0+strokeSize);
-/*        
-        // question mark
-        g.setColor(Color.BLACK);
-		Font font = new Font("Arial",Font.PLAIN,height);
-		g.setFont(font);
-		FontMetrics metrics = g.getFontMetrics(font);
-		String text = "?";
-		Rectangle2D box = metrics.getStringBounds(text,g);
-		int x = (int)Math.round(width/2-box.getWidth()/2);
-		int y = (int)Math.round(height/2+box.getHeight()/3);
-		g.drawString(text,x,y);
-*/
-		g.dispose();
+	/////////////////////////////////////////////////////////////////
+	// COLORMAP			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+    @SuppressWarnings("unchecked")
+    public static Object loadColorsElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+    {	Object result=null;
+    	
+    	// folder
+    	String localFilePath = individualFolder;
+    	Attribute attribute = root.getAttribute(XmlNames.FOLDER);
+    	if(attribute!=null)
+			localFilePath = localFilePath+File.separator+attribute.getValue();
+		
+    	// colormaps
+    	List<Element> clrs = root.getChildren();
+    	int i=0;
+		while(result==null && i<clrs.size())
+    	{	Element temp = clrs.get(i);
+    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
+    		if(name.equalsIgnoreCase(color.toString()))
+    		{	// colormap
+    			if(temp.getName().equals(XmlNames.COLORMAP))
+    				result = loadColormapElement(temp,localFilePath,color);
+    			// colorsprite
+    			else if(temp.getName().equals(XmlNames.COLORSPRITE))
+    				result = loadColorspriteElement(temp);
+    		}
+    		else
+    			i++;
+    	}
+		if(result==null)
+			;// erreur
+		
 		return result;
     }
     
+    private static Colormap loadColormapElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+    {	// file
+    	String localPath = individualFolder+File.separator;
+    	localPath = localPath + root.getAttribute(XmlNames.FILE).getValue().trim();
+    	
+    	// colormap
+    	Colormap colormap = ColormapLoader.loadColormap(localPath,color);
+    	return colormap;
+    }
+    
+    private static String loadColorspriteElement(Element root) throws IOException, ParserConfigurationException, SAXException
+    {	// folder
+    	String colorFolder = root.getAttribute(XmlNames.FOLDER).getValue().trim();
+    	return colorFolder;
+    } 
+    
+	/////////////////////////////////////////////////////////////////
+	// COLORS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+    /**
+     * Get a neutral image and applies the specified colormap to get a colored image.
+     */
+    public static BufferedImage getColoredImage(BufferedImage image, Colormap colormap)
+   	{	BufferedImage result = image;
+    	
+   		// check if the image is indexed (else it has no sense to apply a colormap)
+   		ColorModel colorModel = image.getColorModel();
+		if(colorModel instanceof IndexColorModel)
+		{	// build the color map
+			IndexColorModel cm = (IndexColorModel) colorModel;
+			int size = cm.getMapSize();
+			int bits = cm.getPixelSize();
+			byte reds[] = new byte[size];
+			byte greens[] = new byte[size];
+			byte blues[] = new byte[size];
+			cm.getReds(reds);
+			cm.getGreens(greens);
+			cm.getBlues(blues);
+			
+			// changing the values    		
+			Iterator<Entry<Integer,byte[]>> i = colormap.entrySet().iterator();
+			while(i.hasNext())
+			{	Entry<Integer,byte[]> temp = i.next();
+				int index = temp.getKey();
+				byte tab[] = temp.getValue();
+				reds[index] = tab[0];
+				greens[index] = tab[1];
+				blues[index] = tab[2];
+			}
+			
+			// creating the new model
+			int trans = cm.getTransparentPixel();
+			IndexColorModel newCm;
+			if(trans<0)
+				newCm = new IndexColorModel(bits, size, reds, greens, blues);
+			else
+				newCm = new IndexColorModel(bits, size, reds, greens, blues, trans);	    		
+			
+			// cloning the image, applying the new color model
+			String[] names = image.getPropertyNames();
+			Hashtable<String,Object> props = new Hashtable<String,Object>();
+			if(names!=null)
+			{	for(int k=0;k<names.length;k++)
+	    		{	Object prop = image.getProperty(names[k]);
+	    			props.put(names[k], prop);
+	    		}
+			}
+			WritableRaster raster = image.copyData(null);
+			result = new BufferedImage(newCm,raster,image.isAlphaPremultiplied(),props);
+		}
+		
+		return result;
+	}
+
+    /**
+     * Get the greyscale version of the specified image. 
+     * @param image
+     * @return
+     */
     public static BufferedImage getGreyScale(BufferedImage image)
     {	// new greyscaled image
     	int width = image.getWidth();
@@ -308,15 +284,16 @@ if(xDim<0 || yDim<0)
 		Graphics g = result.getGraphics();
 		g.drawImage(image,0,0,null);
 		g.dispose();
+		
 		// make it compatible
 		result = getCompatibleImage(result);
-		//
+
     	return result;    	
     }
     
     /**
      * process a new version of the image, which is darker if param<1 and lighter if param>1
-     * method taken here: http://java.sun.com/developer/JDCTechTips/2004/tt0210.html
+     * method taken from here: http://java.sun.com/developer/JDCTechTips/2004/tt0210.html
      * @param image
      * @param param
      * @return
@@ -328,6 +305,13 @@ if(xDim<0 || yDim<0)
         return result;
     }
 
+    /**
+     * Fill the specified image with the specified color.
+     * Alpha transparency is preserved.
+     * @param image
+     * @param rgb
+     * @return
+     */
     public static BufferedImage getFilledImage(BufferedImage image, Integer rgb)
    	{	BufferedImage result = copyBufferedImage(image);
     	int width = result.getWidth();
@@ -361,4 +345,38 @@ if(xDim<0 || yDim<0)
 //System.out.println("--------------------------------");    		
 		return result;
 	}
+
+    /////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+    /**
+     * produces an image (red cross) used to replace missing images,
+     * i.e. images which couldn't be found at loading 
+     */
+    public static BufferedImage getAbsentImage(int width, int height)
+    {	BufferedImage result = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
+		Graphics g = result.createGraphics();
+
+		// red cross
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setColor(Color.RED);
+		int strokeSize = width/5;
+        g2d.setStroke(new BasicStroke(strokeSize));
+        g2d.drawLine(0+strokeSize,0+strokeSize,width-strokeSize,height-strokeSize);
+        g2d.drawLine(0+strokeSize,height-strokeSize,width-strokeSize,0+strokeSize);
+/*        
+        // question mark
+        g.setColor(Color.BLACK);
+		Font font = new Font("Arial",Font.PLAIN,height);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		String text = "?";
+		Rectangle2D box = metrics.getStringBounds(text,g);
+		int x = (int)Math.round(width/2-box.getWidth()/2);
+		int y = (int)Math.round(height/2+box.getHeight()/3);
+		g.drawString(text,x,y);
+*/
+		g.dispose();
+		return result;
+    }
 }

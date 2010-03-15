@@ -72,10 +72,10 @@ public class FiresetMapLoader
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromMemoryCache(cachePath);
-		if(engineConfiguration.getMemoryCache() && o!=null)
-		{	result = ((FiresetMap)o).cacheCopy(zoomFactor);
+		if(engineConfiguration.getMemoryCached() && o!=null)
+		{	result = ((FiresetMap)o).deepCopy(zoomFactor);
 		}
-		else if(engineConfiguration.getFileCache() && cacheFile.exists())
+		else if(engineConfiguration.getFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
@@ -83,7 +83,7 @@ public class FiresetMapLoader
 				result = (FiresetMap)oIn.readObject(); //TODO fonction à surcharger
 				//result.setInstance(instance); 
 				oIn.close();
-				result = result.cacheCopy(zoomFactor);
+				result = result.deepCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -102,17 +102,17 @@ public class FiresetMapLoader
 			// loading
 			result = loadFiresetmapElement(individualFolder,root);
 			// caching
-			if(engineConfiguration.getMemoryCache())
+			if(engineConfiguration.getMemoryCached())
 			{	engineConfiguration.addToMemoryCache(cachePath,result);
-				result = result.cacheCopy(zoomFactor);
+				result = result.deepCopy(zoomFactor);
 			}
-			if(engineConfiguration.getFileCache())
+			if(engineConfiguration.getFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
 				oOut.writeObject(result);
 				oOut.close();
-				result = result.cacheCopy(zoomFactor);
+				result = result.deepCopy(zoomFactor);
 			}
 		}
 

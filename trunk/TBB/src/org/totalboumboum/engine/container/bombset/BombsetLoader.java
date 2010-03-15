@@ -77,11 +77,11 @@ public class BombsetLoader
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromMemoryCache(cachePath);
-		if(engineConfiguration.getMemoryCache() && o!=null)
+		if(engineConfiguration.getMemoryCached() && o!=null)
 		{	result = ((Bombset)o);
 			//result = result.cacheCopy(zoomFactor);
 		}
-		else if(engineConfiguration.getFileCache() && cacheFile.exists())
+		else if(engineConfiguration.getFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
@@ -107,11 +107,11 @@ public class BombsetLoader
 			// loading
 			result = loadBombsetElement(root,individualFolder);
 			// caching
-			if(engineConfiguration.getMemoryCache())
+			if(engineConfiguration.getMemoryCached())
 			{	engineConfiguration.addToMemoryCache(cachePath,result);
 				//result = result.cacheCopy(zoomFactor);
 			}
-			if(engineConfiguration.getFileCache())
+			if(engineConfiguration.getFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
@@ -206,17 +206,17 @@ public class BombsetLoader
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromMemoryCache(cachePath);
-		if(engineConfiguration.getMemoryCache() && o!=null)
-		{	result = ((Bombset)o).cacheCopy(zoomFactor);
+		if(engineConfiguration.getMemoryCached() && o!=null)
+		{	result = ((Bombset)o).deepCopy(zoomFactor,color);
 		}
-		else if(engineConfiguration.getFileCache() && cacheFile.exists())
+		else if(engineConfiguration.getFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
 				result = (Bombset)oIn.readObject();
 				oIn.close();
-				result = result.cacheCopy(zoomFactor);
+				result = result.deepCopy(zoomFactor,color);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -236,17 +236,17 @@ public class BombsetLoader
 			// loading
 			loadBombsetElement(root,individualFolder,color,result);
 			// caching
-			if(engineConfiguration.getMemoryCache())
+			if(engineConfiguration.getMemoryCached())
 			{	engineConfiguration.addToMemoryCache(cachePath,result);
-				result = result.cacheCopy(zoomFactor);
+				result = result.deepCopy(zoomFactor,color);
 			}
-			if(engineConfiguration.getFileCache())
+			if(engineConfiguration.getFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
 				oOut.writeObject(result);
 				oOut.close();
-				result = result.cacheCopy(zoomFactor);
+				result = result.deepCopy(zoomFactor,color);
 			}
 		}
 		

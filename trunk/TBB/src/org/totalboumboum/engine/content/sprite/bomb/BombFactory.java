@@ -21,9 +21,11 @@ package org.totalboumboum.engine.content.sprite.bomb;
  * 
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
@@ -113,7 +115,7 @@ public class BombFactory extends SpriteFactory<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public BombFactory copy()
+	public BombFactory surfaceCopy()
 	{	BombFactory result = new BombFactory(bombName);
 
 		// misc
@@ -130,24 +132,12 @@ public class BombFactory extends SpriteFactory<Bomb>
 		result.setExplosionName(explosionName);
 		
 		// gestures
-		result.setGesturePack(gesturePack.copy());
+		result.setGesturePack(gesturePack.surfaceCopy());
 		
 		return result;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public BombFactory cacheCopy(double zoomFactor)
+	public BombFactory deepCopy(double zoomFactor, PredefinedColor color) throws IOException
 	{	BombFactory result = new BombFactory(bombName);
 		
 		// misc
@@ -167,9 +157,18 @@ public class BombFactory extends SpriteFactory<Bomb>
 		result.setExplosionName(explosionName);
 		
 		// gestures
-		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		GesturePack gesturePackCopy = gesturePack.deepCopy(zoomFactor,color);
 		result.setGesturePack(gesturePackCopy);
 
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
 	}
 }

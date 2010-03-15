@@ -21,6 +21,7 @@ package org.totalboumboum.engine.content.sprite.floor;
  * 
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -89,18 +90,9 @@ public class FloorFactory extends SpriteFactory<Floor>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public FloorFactory cacheCopy(double zoomFactor)
+	public FloorFactory deepCopy(double zoomFactor) throws IOException
 	{	FloorFactory result = new FloorFactory();
 		
 		// misc
@@ -120,9 +112,18 @@ public class FloorFactory extends SpriteFactory<Floor>
 		result.setExplosionName(explosionName);
 		
 		// gestures
-		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		GesturePack gesturePackCopy = gesturePack.deepCopy(zoomFactor,null);
 		result.setGesturePack(gesturePackCopy);
 
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
 	}
 }

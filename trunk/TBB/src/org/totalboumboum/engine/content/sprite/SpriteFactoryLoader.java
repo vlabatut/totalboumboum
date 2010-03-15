@@ -112,7 +112,7 @@ public abstract class SpriteFactoryLoader
 		ArrayList<AbstractAbility> abilities = base.getAbilities();
 		String explosionName = base.getExplosionName();
 		//
-		result.setGesturePack(gesturePack.copy());
+		result.setGesturePack(gesturePack.surfaceCopy());
 		result.setAbilities((ArrayList<AbstractAbility>)abilities.clone());
 		result.setExplosionName(explosionName);
 	}
@@ -193,7 +193,7 @@ public abstract class SpriteFactoryLoader
 		{	// gesture ENTERING
 			Gesture temp = gesturePack.getGesture(GestureName.APPEARING);
 			// copy of APPEARING
-			Gesture gesture = temp.copy();
+			Gesture gesture = temp.surfaceCopy();
 			gesture.setName(GestureName.ENTERING);
 			// but animes are taken from STANDING if there's no anime for APPEARING
 			if(temp.hasNoAnimes())
@@ -204,7 +204,7 @@ public abstract class SpriteFactoryLoader
 		{	// gesture PREPARED
 			Gesture temp = gesturePack.getGesture(GestureName.APPEARING);
 			// copy of APPEARING
-			Gesture gesture = temp.copy();
+			Gesture gesture = temp.surfaceCopy();
 			gesture.setName(GestureName.PREPARED);
 			// with the animes of STANDING
 			temp = gesturePack.getGesture(GestureName.STANDING);

@@ -21,6 +21,7 @@ package org.totalboumboum.engine.content.sprite.block;
  * 
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -100,7 +101,7 @@ public class BlockFactory extends SpriteFactory<Block>
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public BlockFactory cacheCopy(double zoomFactor)
+	public BlockFactory deepCopy(double zoomFactor) throws IOException
 	{	BlockFactory result = new BlockFactory();
 		
 		// misc
@@ -120,7 +121,7 @@ public class BlockFactory extends SpriteFactory<Block>
 		result.setExplosionName(explosionName);
 		
 		// gestures
-		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		GesturePack gesturePackCopy = gesturePack.deepCopy(zoomFactor,null);
 		result.setGesturePack(gesturePackCopy);
 
 		return result;

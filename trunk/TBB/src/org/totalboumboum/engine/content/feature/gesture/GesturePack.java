@@ -21,6 +21,7 @@ package org.totalboumboum.engine.content.feature.gesture;
  * 
  */
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -50,6 +51,19 @@ public class GesturePack implements Serializable
 	
 	public void setScale(double scale)
 	{	this.scale = scale;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SPRITE NAME		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String spriteName;
+	
+	public String getSpriteName()
+	{	return spriteName;
+	}
+	
+	public void setSpriteName(String spriteName)
+	{	this.spriteName = spriteName;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -92,17 +106,19 @@ public class GesturePack implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public GesturePack copy()
+	public GesturePack surfaceCopy()
 	{	GesturePack result = new GesturePack();
 		// gestures
 		for(Entry<GestureName,Gesture> e: gestures.entrySet())
-		{	Gesture cp = e.getValue().copy();
+		{	Gesture cp = e.getValue().surfaceCopy();
 			GestureName nm = e.getKey();
 			result.addGesture(cp,nm);
 		}
+		
 		// misc
 		result.scale = scale;
 		result.color = color;
+		result.spriteName = spriteName;
 		return result;
 	}
 	
@@ -121,6 +137,23 @@ public class GesturePack implements Serializable
 	}
 */	
 
+	public GesturePack deepCopy(double zoomFactor, PredefinedColor color) throws IOException
+	{	GesturePack result = new GesturePack();
+		
+		// gestures
+		for(Entry<GestureName,Gesture> e: gestures.entrySet())
+		{	Gesture cp = e.getValue().deepCopy(zoomFactor,scale,color);
+			GestureName nm = e.getKey();
+			result.addGesture(cp,nm);
+		}
+		
+		// misc
+		result.scale = scale;
+		result.color = color;
+		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -136,32 +169,5 @@ public class GesturePack implements Serializable
 			}
 			gestures.clear();
 		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public long getMemSize()
-	{	long result = 0;
-		for(Gesture g: gestures.values())
-			result = result + g.getMemSize();
-		return result;		
-	}
-	
-	public GesturePack cacheCopy(double zoomFactor)
-	{	GesturePack result = new GesturePack();
-		
-		// gestures
-		for(Entry<GestureName,Gesture> e: gestures.entrySet())
-		{	Gesture cp = e.getValue().cacheCopy(zoomFactor,scale);
-			GestureName nm = e.getKey();
-			result.addGesture(cp,nm);
-		}
-		
-		// misc
-		result.scale = scale;
-		result.color = color;
-		
-		return result;
 	}
 }

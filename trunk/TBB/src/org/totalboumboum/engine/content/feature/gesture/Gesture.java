@@ -21,13 +21,14 @@ package org.totalboumboum.engine.content.feature.gesture;
  * 
  */
 
-import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.action.Circumstance;
@@ -225,9 +226,11 @@ public class Gesture implements Serializable
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * returns a hollow copy, excepted for the animes: no copy at all. 
+	 * returns a copy whose trajectories are the same and animes
+	 * are hollow copies (images not copied, just the key to retrieve them in the cache)
+	 * Used to generate a factory inheriting from an existing one
 	 */
-	public Gesture copy()
+	public Gesture surfaceCopy()
 	{	Gesture result = new Gesture();
 	
 		// name
@@ -235,16 +238,14 @@ public class Gesture implements Serializable
 		
 		// animes
 		for(Entry<Direction,AnimeDirection> e: animes.entrySet())
-		{	//AnimeDirection temp = e.getValue().copy(images,copyImages);
-			AnimeDirection anime = e.getValue();
+		{	AnimeDirection anime = e.getValue();
 			Direction direction = e.getKey();
 			result.addAnimeDirection(anime,direction);
 		}
 		
 		// trajectories
 		for(Entry<Direction,TrajectoryDirection> e: trajectories.entrySet())
-		{	//TrajectoryDirection temp = e.getValue().copy();
-			TrajectoryDirection temp = e.getValue();
+		{	TrajectoryDirection temp = e.getValue();
 			result.addTrajectoryDirection(temp);
 		}
 
@@ -265,17 +266,13 @@ public class Gesture implements Serializable
 		return result;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public long getMemSize()
-	{	long result = 0;
-		for(AnimeDirection d: animes.values())
-			result = result + d.getMemSize();
-		return result;		
-	}
-	
-	public Gesture cacheCopy(double zoomFactor, double scale)
+	/**
+	 * like surface copy, except images are copied, and possibly
+	 * rescaled and recolored.
+	 * Used to generate a new factory from a neutral, cached, one
+	 * @throws IOException 
+	 */
+	public Gesture deepCopy(double zoomFactor, double scale, PredefinedColor color) throws IOException
 	{	Gesture result = new Gesture();
 		double zoom = zoomFactor/scale;
 	
@@ -283,16 +280,15 @@ public class Gesture implements Serializable
 		result.setName(name);
 		
 		// animes
-		HashMap<BufferedImage,BufferedImage> imgs = new HashMap<BufferedImage, BufferedImage>();
 		for(Entry<Direction,AnimeDirection> e: animes.entrySet())
-		{	AnimeDirection temp = e.getValue().cacheCopy(zoom,imgs);
+		{	AnimeDirection temp = e.getValue().deepCopy(zoom,color);
 			Direction direction = e.getKey();
 			result.addAnimeDirection(temp,direction);
 		}
 		
 		// trajectories
 		for(Entry<Direction,TrajectoryDirection> e: trajectories.entrySet())
-		{	TrajectoryDirection temp = e.getValue().cacheCopy(zoomFactor);
+		{	TrajectoryDirection temp = e.getValue().deepCopy(zoomFactor);
 			result.addTrajectoryDirection(temp);
 		}
 	
