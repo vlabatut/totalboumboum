@@ -96,11 +96,11 @@ public class EngineConfigurationSaver
 	{	Element result = new Element(XmlNames.CACHE);
 		
 		// cache
-		String cache = Boolean.toString(engineConfiguration.getMemoryCache());
+		String cache = Boolean.toString(engineConfiguration.getMemoryCached());
 		result.setAttribute(XmlNames.CACHE,cache);
 				
 		// limit
-		String cacheLimit = Long.toString(engineConfiguration.getCacheLimit());
+		String cacheLimit = Long.toString(engineConfiguration.getMemoryCacheLimit());
 		result.setAttribute(XmlNames.CACHE_LIMIT,cacheLimit);
 				
 		return result;

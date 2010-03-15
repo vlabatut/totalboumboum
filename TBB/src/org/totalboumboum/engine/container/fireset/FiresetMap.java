@@ -64,25 +64,15 @@ public class FiresetMap implements Serializable, Cachable
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public long getMemSize()
-	{	long result = 0;
-		
-		// firesets
-		for(Fireset fs: firesets.values())
-			result = result + fs.getMemSize();
-		
-		return result;
-	}
-
-	public FiresetMap cacheCopy(double zoomFactor)
+	public FiresetMap deepCopy(double zoomFactor) throws IOException
 	{	FiresetMap result = new FiresetMap();
 	
 		// firesets
 		for(Entry<String,Fireset> entry: firesets.entrySet())
 		{	String key = entry.getKey();
-			Fireset fireset = entry.getValue().cacheCopy(zoomFactor);
+			Fireset fireset = entry.getValue().deepCopy(zoomFactor);
 			result.addFireset(key,fireset);
 		}
 		

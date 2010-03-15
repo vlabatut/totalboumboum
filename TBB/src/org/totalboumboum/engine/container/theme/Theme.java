@@ -160,6 +160,35 @@ if(bf==null)
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Theme deepCopy(double zoomFactor) throws IOException
+	{	Theme result = new Theme();
+	
+		// misc
+		result.author = author;
+		result.name = name;
+		result.source = source;
+		result.version = version;
+		
+		// blocks
+		for(Entry<String,BlockFactory> entry: blocks.entrySet())
+		{	String key = entry.getKey();
+			BlockFactory blocFactory = entry.getValue().deepCopy(zoomFactor);
+			result.addBlockFactory(key,blocFactory);
+		}
+		
+		// floors
+		for(Entry<String,FloorFactory> entry: floors.entrySet())
+		{	String key = entry.getKey();
+			FloorFactory floorFactory = entry.getValue().deepCopy(zoomFactor);
+			result.addFloorFactory(key,floorFactory);
+		}
+		
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
@@ -186,48 +215,5 @@ if(bf==null)
 				}
 			}
 		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public long getMemSize()
-	{	long result = 0;
-		
-		// blocks
-		for(BlockFactory bf: blocks.values())
-			result = result + bf.getMemSize();
-		
-		// floors
-		for(FloorFactory ff: floors.values())
-			result = result + ff.getMemSize();
-		
-		return result;
-	}
-	
-	public Theme cacheCopy(double zoomFactor)
-	{	Theme result = new Theme();
-	
-		// misc
-		result.author = author;
-		result.name = name;
-		result.source = source;
-		result.version = version;
-		
-		// blocks
-		for(Entry<String,BlockFactory> entry: blocks.entrySet())
-		{	String key = entry.getKey();
-			BlockFactory blocFactory = entry.getValue().cacheCopy(zoomFactor);
-			result.addBlockFactory(key,blocFactory);
-		}
-		
-		// floors
-		for(Entry<String,FloorFactory> entry: floors.entrySet())
-		{	String key = entry.getKey();
-			FloorFactory floorFactory = entry.getValue().cacheCopy(zoomFactor);
-			result.addFloorFactory(key,floorFactory);
-		}
-		
-		return result;
 	}
 }

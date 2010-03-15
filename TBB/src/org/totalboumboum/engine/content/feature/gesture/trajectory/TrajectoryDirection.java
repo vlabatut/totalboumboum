@@ -273,8 +273,12 @@ public class TrajectoryDirection implements Serializable
 			direction = null;
 		}
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 /*	
-	public TrajectoryDirection copy()
+	public TrajectoryDirection surfaceCopy()
 	{	TrajectoryDirection result = new TrajectoryDirection();
 		Iterator<TrajectoryStep> it = steps.iterator();
 		while(it.hasNext())
@@ -299,14 +303,11 @@ public class TrajectoryDirection implements Serializable
 	}
 */	
 
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public TrajectoryDirection cacheCopy(double zoomFactor)
+	public TrajectoryDirection deepCopy(double zoomFactor)
 	{	TrajectoryDirection result = new TrajectoryDirection();
 		Iterator<TrajectoryStep> it = steps.iterator();
 		while(it.hasNext())
-		{	TrajectoryStep temp = it.next().cacheCopy(zoomFactor);
+		{	TrajectoryStep temp = it.next().deepCopy(zoomFactor);
 			result.add(temp);
 		}
 		result.gestureName = gestureName;

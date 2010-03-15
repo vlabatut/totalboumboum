@@ -53,6 +53,7 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		// GENERAL
 		loadGeneralElement(root,result,abstractItems);
 		GesturePack gesturePack = result.getGesturePack();
+		gesturePack.setSpriteName(result.getName());
 				
 		// ABILITIES
 		ArrayList<AbstractAbility> abilities = result.getAbilities();

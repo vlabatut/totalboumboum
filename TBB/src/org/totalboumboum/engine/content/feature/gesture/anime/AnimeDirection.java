@@ -21,12 +21,12 @@ package org.totalboumboum.engine.content.feature.gesture.anime;
  * 
  */
 
-import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 
+import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 
@@ -144,41 +144,42 @@ public class AnimeDirection implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-/*
-	public AnimeDirection copy(ArrayList<BufferedImage> images, ArrayList<BufferedImage> copyImages)
+	public AnimeDirection surfaceCopy()
 	{	AnimeDirection result = new AnimeDirection();
+		
 		// steps
 		Iterator<AnimeStep> i = getIterator();
 		while(i.hasNext())
-		{	AnimeStep copyStep = i.next().copy(images,copyImages); 
+		{	AnimeStep copyStep = i.next().surfaceCopy(); 
 			result.add(copyStep);		
 		}
+		
 		// various fields
 		result.setGestureName(gestureName);
 		result.setDirection(direction);
 		result.setRepeat(repeat);
 		result.setProportional(proportional);
 		result.setBoundHeight(boundHeight);
-		//
+
 		return result;
 	}
-*/
-	public AnimeDirection copy()
+
+	public AnimeDirection deepCopy(double zoom, PredefinedColor color) throws IOException
 	{	AnimeDirection result = new AnimeDirection();
 		
 		// steps
 		Iterator<AnimeStep> i = getIterator();
 		while(i.hasNext())
-		{	AnimeStep copyStep = i.next().copy(); 
+		{	AnimeStep copyStep = i.next().deepCopy(zoom,color); 
 			result.add(copyStep);		
 		}
 		
 		// various fields
-		result.setGestureName(gestureName);
-		result.setDirection(direction);
-		result.setRepeat(repeat);
-		result.setProportional(proportional);
-		result.setBoundHeight(boundHeight);
+		result.gestureName = gestureName;
+		result.direction = direction;
+		result.repeat = repeat;
+		result.proportional = proportional;
+		result.boundHeight = boundHeight*zoom;
 
 		return result;
 	}
@@ -202,54 +203,5 @@ public class AnimeDirection implements Serializable
 			// misc
 			direction = null;
 		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	public long getMemSize()
-	{	long result = 0;
-		for(AnimeStep s: steps)
-			result = result + s.getMemSize();
-		return result;		
-	}
-	
-/*
-	public AnimeDirection copy(ArrayList<BufferedImage> images, ArrayList<BufferedImage> copyImages)
-	{	AnimeDirection result = new AnimeDirection();
-		// steps
-		Iterator<AnimeStep> i = getIterator();
-		while(i.hasNext())
-		{	AnimeStep copyStep = i.next().copy(images,copyImages); 
-			result.add(copyStep);		
-		}
-		// various fields
-		result.setGestureName(gestureName);
-		result.setDirection(direction);
-		result.setRepeat(repeat);
-		result.setProportional(proportional);
-		result.setBoundHeight(boundHeight);
-		//
-		return result;
-	}
-*/
-	public AnimeDirection cacheCopy(double zoom, HashMap<BufferedImage,BufferedImage> imgs)
-	{	AnimeDirection result = new AnimeDirection();
-		
-		// steps
-		Iterator<AnimeStep> i = getIterator();
-		while(i.hasNext())
-		{	AnimeStep copyStep = i.next().cacheCopy(zoom,imgs); 
-			result.add(copyStep);		
-		}
-		
-		// various fields
-		result.gestureName = gestureName;
-		result.direction = direction;
-		result.repeat = repeat;
-		result.proportional = proportional;
-		result.boundHeight = boundHeight*zoom;
-
-		return result;
 	}
 }

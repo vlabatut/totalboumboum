@@ -22,7 +22,9 @@ package org.totalboumboum.engine.content.manager.anime;
  */
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -344,15 +346,17 @@ public class AnimeManager
 	 * renvoie l'image à afficher 
 	 * @return
 	 */
-	public BufferedImage getCurrentImage()
-	{	BufferedImage result = null;
+	public List<BufferedImage> getCurrentImage()
+	{	List<BufferedImage> result = new ArrayList<BufferedImage>();
 		if(!invisible)
-		{	result = currentStep.getImage();
+		{	result = currentStep.getImages();
 			if(result!=null && twinkleChange)
 			{	if(twinkleColor==null)
 					result = null;
 				else
-					result = ImageTools.getFilledImage(result,twinkleColor);
+				{	for(BufferedImage image: currentStep.getImages())
+						result.add(ImageTools.getFilledImage(image,twinkleColor));
+				}
 			}
 		}
 		//result = ImageTools.getDarkenedImage(result,blinkParam);
@@ -371,13 +375,18 @@ public class AnimeManager
  * POSITION
  * ********************************
  */	
-	public double getXShift()
-	{	return currentStep.getXShift();
+	public List<Double> getXShifts()
+	{	return currentStep.getXShifts();
 	}
-	public double getYShift()
-	{	double result = currentStep.getYShift();
+	public List<Double> getYShifts()
+	{	List<Double> result = currentStep.getYShifts();
 		if(isBoundToSprite())
-			result = result + currentStep.getBoundYShift().getValue(getBoundToSprite());
+		{	for(int i=0;i<result.size();i++)
+			{	double value = result.get(i);
+				value = value + currentStep.getBoundYShift().getValue(getBoundToSprite());
+				result.set(i,value);
+			}
+		}			
 		return result;
 	}
 	

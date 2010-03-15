@@ -21,6 +21,7 @@ package org.totalboumboum.engine.content.sprite.fire;
  * 
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -108,19 +109,9 @@ public class FireFactory extends SpriteFactory<Fire>
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			firesetName = null;
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public FireFactory cacheCopy(double zoomFactor)
+	public FireFactory deepCopy(double zoomFactor) throws IOException
 	{	FireFactory result = new FireFactory();
 		
 		// misc
@@ -143,9 +134,19 @@ public class FireFactory extends SpriteFactory<Fire>
 		result.setExplosionName(explosionName);
 		
 		// gestures
-		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		GesturePack gesturePackCopy = gesturePack.deepCopy(zoomFactor,null);
 		result.setGesturePack(gesturePackCopy);
 
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			firesetName = null;
+		}
 	}
 }

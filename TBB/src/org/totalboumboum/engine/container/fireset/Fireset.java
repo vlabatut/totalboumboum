@@ -92,6 +92,25 @@ if(fireFactory==null)
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Fireset deepCopy(double zoomFactor) throws IOException
+	{	Fireset result = new Fireset();
+	
+		// name
+		result.name = name;
+	
+		// fires
+		for(Entry<String,FireFactory> entry: fireFactories.entrySet())
+		{	String key = entry.getKey();
+			FireFactory fireFactory = entry.getValue().deepCopy(zoomFactor);
+			result.addFireFactory(key,fireFactory);
+		}
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
@@ -109,34 +128,5 @@ if(fireFactory==null)
 				}
 			}
 		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public long getMemSize()
-	{	long result = 0;
-		
-		// fires
-		for(FireFactory ff: fireFactories.values())
-			result = result + ff.getMemSize();
-		
-		return result;
-	}
-
-	public Fireset cacheCopy(double zoomFactor)
-	{	Fireset result = new Fireset();
-	
-		// name
-		result.name = name;
-	
-		// fires
-		for(Entry<String,FireFactory> entry: fireFactories.entrySet())
-		{	String key = entry.getKey();
-			FireFactory fireFactory = entry.getValue().cacheCopy(zoomFactor);
-			result.addFireFactory(key,fireFactory);
-		}
-		
-		return result;
 	}
 }

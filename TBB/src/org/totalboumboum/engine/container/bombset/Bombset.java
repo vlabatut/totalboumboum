@@ -29,6 +29,7 @@ import java.util.Iterator;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.engine.Cachable;
+import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -165,11 +166,11 @@ public class Bombset implements Serializable, Cachable
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public Bombset copy()
+	public Bombset surfaceCopy()
 	{	Bombset result = new Bombset();
 	
 		for(int i=0;i<bombFactories.size();i++)
-		{	BombFactory bf = bombFactories.get(i).copy();
+		{	BombFactory bf = bombFactories.get(i).surfaceCopy();
 			ArrayList<StateAbility> ra = requiredAbilities.get(i);
 			result.addBombFactory(bf,ra);
 		}
@@ -177,19 +178,6 @@ public class Bombset implements Serializable, Cachable
 		return result;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public long getMemSize()
-	{	long result = 0;
-		
-		// bombs
-		for(BombFactory bf: bombFactories)
-			result = result + bf.getMemSize();
-		
-		return result;
-	}
-
 	/*
 	 * the Bombset has already been copied/loaded, so it is taken from the level
 	 */
@@ -197,11 +185,11 @@ public class Bombset implements Serializable, Cachable
 	{	Bombset result = RoundVariables.level.getBombset();
 		return result;
 	}*/
-	public Bombset cacheCopy(double zoomFactor)
+	public Bombset deepCopy(double zoomFactor, PredefinedColor color) throws IOException
 	{	Bombset result = new Bombset();
 	
 		for(int i=0;i<bombFactories.size();i++)
-		{	BombFactory bf = bombFactories.get(i).cacheCopy(zoomFactor);
+		{	BombFactory bf = bombFactories.get(i).deepCopy(zoomFactor,color);
 			ArrayList<StateAbility> ra = requiredAbilities.get(i);
 			ArrayList<StateAbility> raCopy = new ArrayList<StateAbility>();
 			for(StateAbility ability: ra)

@@ -142,6 +142,8 @@ public class XmlNames
 	public static final String HEROES = "heroes";
 	public static final String HIDE_ALLAIS = "hideAllAis";
 	public static final String HUMAN = "human";
+	public static final String IMAGE = "image";
+	public static final String IMAGES = "images";
 	public static final String INCLUDE_QUICKSTARTS = "includeQuickStarts";
 	public static final String INCLUDE_SIMULATIONS = "includeSimulations";
 	public static final String INDEX = "index";

@@ -26,22 +26,18 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.ImageShift;
-import org.totalboumboum.tools.images.BufferedImageWrapper;
-import org.totalboumboum.tools.images.ImageTools;
-
 
 public class AnimeStep implements Serializable
 {	private static final long serialVersionUID = 1L;
 
 	public AnimeStep()
-	{	image = null;
-		duration = 0;
-		xShift = 0;
-		yShift = 0;
+	{	duration = 0;
 		shadow = null;
 		shadowXShift = 0;
 		shadowYShift = 0;
@@ -51,16 +47,18 @@ public class AnimeStep implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// IMAGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient long imageSize = 0;
-	private transient BufferedImage image;
+	private transient List<BufferedImage> images = new ArrayList<BufferedImage>();
+	private List<String> imagesFileNames = new ArrayList<String>();
 
-	public BufferedImage getImage()
-	{	return image;
+	public List<BufferedImage> getImages()
+	{	return images;
 	}
 	
-	public void setImage(BufferedImage image, long size)
-	{	this.image = image;
-		this.imageSize = size;
+	public void addImageFileName(String imageFileName, double xShift, double yShift, Colormap colormap)
+	{	imagesFileNames.add(imageFileName);
+		xShifts.add(xShift);
+		yShifts.add(yShift);
+		Configuration.getEngineConfiguration().addToImageCache(imageFileName,colormap);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -79,38 +77,30 @@ public class AnimeStep implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// SHIFTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private double xShift;
-	private double yShift;
+	private transient List<Double> xShifts = new ArrayList<Double>();
+	private transient List<Double> yShifts = new ArrayList<Double>();
 
-	public double getXShift()
-	{	return xShift;
+	public List<Double> getXShifts()
+	{	return xShifts;
 	}
 	
-	public void setXShift(double xShift)
-	{	this.xShift = xShift;
-	}
-
-	public double getYShift()
-	{	return yShift;
-	}
-	
-	public void setYShift(double yShift)
-	{	this.yShift = yShift;
+	public List<Double> getYShifts()
+	{	return yShifts;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// SHADOW			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient long shadowSize = 0;
-	private transient BufferedImage shadow;
+	private transient BufferedImage shadow = null;
+	private String shadowFileName = null;
 
 	public boolean hasShadow()
 	{	return shadow != null;
 	}
 	
-	public void setShadow(BufferedImage shadow, long size)
-	{	this.shadow = shadow;
-		this.shadowSize = size;
+	public void setShadowFileName(String shadowFileName)
+	{	this.shadowFileName = shadowFileName;
+		Configuration.getEngineConfiguration().addToImageCache(shadowFileName,null);
 	}
 	
 	public BufferedImage getShadow()
@@ -153,54 +143,59 @@ public class AnimeStep implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-/*	
-	public AnimeStep copy(ArrayList<BufferedImage> images, ArrayList<BufferedImage> copyImages)
-	{	AnimeStep result = new AnimeStep();
-		// image
-		if(image!=null)
-		{	int index = images.indexOf(image);
-			BufferedImage copyImg = copyImages.get(index);
-			result.setImage(copyImg);
-		}
-		// duration
-		result.setDuration(getDuration());
-		// shifts
-		result.setXShift(xShift);
-		result.setYShift(yShift);
-		// shadow
-		if(shadow!=null)
-		{	int index = images.indexOf(shadow);
-			BufferedImage copyImg = copyImages.get(index);
-			result.setShadow(copyImg);
-		}
-		result.setShadowXShift(shadowXShift);
-		result.setShadowYShift(shadowYShift);
-		// bound
-		result.setBoundYShift(boundYShift);
-		//
-		return result;
-	}
-*/
-	public AnimeStep copy()
+	public AnimeStep surfaceCopy()
 	{	AnimeStep result = new AnimeStep();
 		
 		// image
-		result.setImage(image,imageSize);
+		result.imagesFileNames.addAll(imagesFileNames);
 		
 		// duration
 		result.setDuration(duration);
 		
 		// shifts
-		result.setXShift(xShift);
-		result.setYShift(yShift);
+		result.xShifts.addAll(xShifts);
+		result.yShifts.addAll(yShifts);
 		
 		// shadow
-		result.setShadow(shadow,shadowSize);
+		result.setShadowFileName(shadowFileName);
 		result.setShadowXShift(shadowXShift);
 		result.setShadowYShift(shadowYShift);
 		
 		// bound
 		result.setBoundYShift(boundYShift);
+
+		return result;
+	}
+
+	public AnimeStep deepCopy(double zoom, PredefinedColor color) throws IOException
+	{	AnimeStep result = new AnimeStep();
+		
+		// images
+		for(int i=0;i<imagesFileNames.size();i++)
+		{	String imageFileName = imagesFileNames.get(i);
+			double xShift = xShifts.get(i);
+			double yShift = yShifts.get(i);
+			result.imagesFileNames.add(imageFileName);
+			BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(imageFileName,color,zoom);
+			result.images.add(image);
+			result.xShifts.add(xShift*zoom);
+			result.yShifts.add(yShift*zoom);
+		}
+		
+		// duration
+		result.duration = duration;
+		
+		// shadow
+		if(shadowFileName!=null)
+		{	result.shadowFileName = shadowFileName;
+			BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(shadowFileName,color,zoom);
+			result.shadow = image;
+		}
+		result.shadowXShift = shadowXShift*zoom;
+		result.shadowYShift = shadowYShift*zoom;
+		
+		// bound
+		result.boundYShift = boundYShift;
 
 		return result;
 	}
@@ -213,9 +208,15 @@ public class AnimeStep implements Serializable
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
+
+			// images
+			imagesFileNames = null;
+			images = null;
+			shadowFileName = null;
+			shadow = null;
+
 			// misc
 			boundYShift = null;
-			image = null;
 			shadow = null;
 		}
 	}
@@ -228,21 +229,20 @@ public class AnimeStep implements Serializable
 		out.defaultWriteObject();
 		
 		// image
-		if(this.image != null)
-		{	BufferedImageWrapper cp = new BufferedImageWrapper(image);
-			out.writeObject(new Boolean(true));
-			out.writeObject(cp);
-			//ImageIO.write(image,"jpg",out);
+		out.writeObject(new Integer(imagesFileNames.size()));
+		for(int i=0;i<imagesFileNames.size();i++)
+		{	String imageFileName = imagesFileNames.get(i);
+			Double xShift = new Double(xShifts.get(i));
+			Double yShift = new Double(yShifts.get(i));
+			out.writeObject(imageFileName);
+			out.writeObject(xShift);
+			out.writeObject(yShift);
 		}
-		else
-			out.writeObject(new Boolean(false));
 		
 		// shadow
-		if(this.shadow != null)
-		{	BufferedImageWrapper cp = new BufferedImageWrapper(shadow);
-			out.writeObject(new Boolean(true));
-			out.writeObject(cp);
-			//ImageIO.write(shadow,"jpg",out);
+		if(this.shadowFileName != null)
+		{	out.writeObject(new Boolean(true));
+			out.writeObject(shadowFileName);
 		}
 		else
 			out.writeObject(new Boolean(false));
@@ -253,66 +253,18 @@ public class AnimeStep implements Serializable
 		in.defaultReadObject();
 		
 		// image
-		Boolean flag = (Boolean)in.readObject();
-		if(flag)
-		{	BufferedImageWrapper cp = (BufferedImageWrapper) in.readObject();
-			image = cp.getIm();
-			//image = ImageIO.read(in);
+		int count = (Integer) in.readObject();
+		for(int i=0;i<count;i++)
+		{	String imageFileName = (String) in.readObject();
+			Double xShift = (Double) in.readObject();
+			Double yShift = (Double) in.readObject();
+			addImageFileName(imageFileName,xShift,yShift,null);//TODO to be adapted to sprites using colormaps			
 		}
 
 		// image
-		flag = (Boolean)in.readObject();
+		boolean flag = (Boolean) in.readObject();
 		if(flag)
-		{	BufferedImageWrapper cp = (BufferedImageWrapper) in.readObject();
-			shadow = cp.getIm();
-			//shadow = ImageIO.read(in);
+		{	shadowFileName = (String) in.readObject();
 		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public long getMemSize()
-	{	long result = 0;
-		result = imageSize + shadowSize;
-		return result;
-	}
-	
-	public AnimeStep cacheCopy(double zoom, HashMap<BufferedImage,BufferedImage> imgs)
-	{	AnimeStep result = new AnimeStep();
-		
-		// image
-		if(image!=null)
-		{	BufferedImage copyImg = imgs.get(image);
-			if(copyImg==null)
-			{	copyImg = ImageTools.resize(image,zoom,Configuration.getVideoConfiguration().getSmoothGraphics());
-				imgs.put(image,copyImg);
-			}
-			result.setImage(copyImg,Math.round(Math.pow(zoom,2)*imageSize));
-		}
-		
-		// duration
-		result.duration = duration;
-		
-		// shifts
-		result.xShift = xShift*zoom;
-		result.yShift =  yShift*zoom;
-		
-		// shadow
-		if(shadow!=null)
-		{	BufferedImage copyImg = imgs.get(shadow);
-			if(copyImg==null)
-			{	copyImg = ImageTools.resize(shadow,zoom,Configuration.getVideoConfiguration().getSmoothGraphics());
-				imgs.put(shadow,copyImg);
-			}
-			result.setShadow(copyImg,Math.round(Math.pow(zoom,2)*shadowSize));
-		}
-		result.shadowXShift = shadowXShift*zoom;
-		result.shadowYShift = shadowYShift*zoom;
-		
-		// bound
-		result.boundYShift = boundYShift;
-
-		return result;
 	}
 }

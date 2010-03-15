@@ -23,5 +23,5 @@ package org.totalboumboum.configuration.engine;
 
 public interface Cachable
 {
-	long getMemSize();
+
 }

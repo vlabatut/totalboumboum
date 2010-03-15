@@ -76,17 +76,17 @@ public class ItemsetLoader
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromMemoryCache(cachePath);
-		if(engineConfiguration.getMemoryCache() && o!=null)
-		{	result = ((Itemset)o).cacheCopy(zoomFactor);
+		if(engineConfiguration.getMemoryCached() && o!=null)
+		{	result = ((Itemset)o).deepCopy(zoomFactor);
 		}
-		else if(engineConfiguration.getFileCache() && cacheFile.exists())
+		else if(engineConfiguration.getFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
 				result = (Itemset)oIn.readObject();
 				oIn.close();
-				result = result.cacheCopy(zoomFactor);
+				result = result.deepCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -105,17 +105,17 @@ public class ItemsetLoader
 			// loading
 			result = loadItemsetElement(root,individualFolder);
 			// caching
-			if(engineConfiguration.getMemoryCache())
+			if(engineConfiguration.getMemoryCached())
 			{	engineConfiguration.addToMemoryCache(cachePath,result);
-				result = result.cacheCopy(zoomFactor);
+				result = result.deepCopy(zoomFactor);
 			}
-			if(engineConfiguration.getFileCache())
+			if(engineConfiguration.getFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
 				oOut.writeObject(result);
 				oOut.close();
-				result = result.cacheCopy(zoomFactor);
+				result = result.deepCopy(zoomFactor);
 			}
 		}
 		

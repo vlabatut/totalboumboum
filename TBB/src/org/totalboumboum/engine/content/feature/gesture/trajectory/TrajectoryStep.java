@@ -106,8 +106,12 @@ public class TrajectoryStep implements Serializable
 			boundZShift = null;
 		}
 	}
-/*	
-	public TrajectoryStep copy()
+
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/*	
+	public TrajectoryStep surfaceCopy()
 	{	TrajectoryStep result = new TrajectoryStep();
 		result.boundZShift = boundZShift;
 		result.duration = duration;
@@ -119,10 +123,7 @@ public class TrajectoryStep implements Serializable
 	}
 */	
 
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public TrajectoryStep cacheCopy(double zoomFactor)
+	public TrajectoryStep deepCopy(double zoomFactor)
 	{	TrajectoryStep result = new TrajectoryStep();
 		
 		// location shifts

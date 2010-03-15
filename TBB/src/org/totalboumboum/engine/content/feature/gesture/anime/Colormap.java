@@ -23,10 +23,28 @@ package org.totalboumboum.engine.content.feature.gesture.anime;
 
 import java.util.HashMap;
 
+import org.totalboumboum.configuration.profile.PredefinedColor;
+
 public class Colormap extends HashMap<Integer,byte[]>
 {	private static final long serialVersionUID = 1L;	
-//	public final static String COL_WHITE = "white";
 
+	public Colormap(PredefinedColor color)
+	{	super();
+		this.color = color;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COLOR			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PredefinedColor color = null;
+
+	public PredefinedColor getColor()
+	{	return color;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()

@@ -423,7 +423,7 @@ public abstract class Sprite
 	{	this.animeManager = animeManager;
 	}
 	
-	public BufferedImage getCurrentImage()
+	public List<BufferedImage> getCurrentImage()
 	{	return animeManager.getCurrentImage();	
 	}
 	
@@ -442,12 +442,12 @@ public abstract class Sprite
 	{	return animeManager.getShadow();	
 	}
 	
-	public double getXShift()
-	{	return animeManager.getXShift();
+	public List<Double> getXShifts()
+	{	return animeManager.getXShifts();
 	}
 	
-	public double getYShift()
-	{	return animeManager.getYShift();
+	public List<Double> getYShifts()
+	{	return animeManager.getYShifts();
 	}
 	
 	public double getShadowXShift()

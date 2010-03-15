@@ -30,6 +30,7 @@ import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -127,10 +128,15 @@ public class Tile
 	 * dessine un sprite sans son ombre
 	 */
 	private void drawSprite(Graphics g, Sprite s)
-	{	BufferedImage image = s.getCurrentImage();
-		if(image!=null)
-		{	double pX = s.getCurrentPosX()+s.getXShift();
-			double pY = s.getCurrentPosY()+s.getYShift();
+	{	List<BufferedImage> images =  s.getCurrentImage();
+		List<Double> xShifts =  s.getXShifts();
+		List<Double> yShifts =  s.getYShifts();
+		for(int j=0;j<images.size();j++)
+		{	BufferedImage image = images.get(j);
+			double xShift = xShifts.get(j);
+			double yShift = yShifts.get(j);
+			double pX = s.getCurrentPosX() + xShift;
+			double pY = s.getCurrentPosY() + yShift;
 			double pZ = s.getCurrentPosZ();
 			pX = pX - ((double)image.getWidth())/2;
 			pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;

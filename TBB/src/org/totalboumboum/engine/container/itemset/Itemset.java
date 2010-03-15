@@ -78,25 +78,15 @@ if(itemFactory==null)
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// CACHE				/////////////////////////////////////////
+	// COPY				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public long getMemSize()
-	{	long result = 0;
-		
-		// items
-		for(ItemFactory ifact: itemFactories.values())
-			result = result + ifact.getMemSize();
-		
-		return result;
-	}
-
-	public Itemset cacheCopy(double zoomFactor)
+	public Itemset deepCopy(double zoomFactor) throws IOException
 	{	Itemset result = new Itemset();
 	
 		// items
 		for(Entry<String,ItemFactory> entry: itemFactories.entrySet())
 		{	String key = entry.getKey();
-			ItemFactory itemFactory = entry.getValue().cacheCopy(zoomFactor);
+			ItemFactory itemFactory = entry.getValue().deepCopy(zoomFactor);
 			result.addItemFactory(key,itemFactory);
 		}
 		
