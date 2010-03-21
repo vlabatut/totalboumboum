@@ -22,6 +22,7 @@ package org.totalboumboum.engine.content.feature.gesture;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -43,8 +44,10 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulati
 import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-public class Gesture
-{	public Gesture()
+public class AbstractGesture implements Serializable
+{	private static final long serialVersionUID = 1L;
+
+	public AbstractGesture()
 	{	
 	}
 	
@@ -79,7 +82,7 @@ public class Gesture
 	{	return animes.isEmpty();		
 	}
 	
-	public void setAnimes(Gesture gesture)
+	public void setAnimes(AbstractGesture gesture)
 	{	for(Entry<Direction,AnimeDirection> e: gesture.animes.entrySet())
 		{	Direction direction = e.getKey();
 			AnimeDirection anime = e.getValue();
@@ -227,8 +230,8 @@ public class Gesture
 	 * are hollow copies (images not copied, just the key to retrieve them in the cache)
 	 * Used to generate a factory inheriting from an existing one
 	 */
-	public Gesture surfaceCopy()
-	{	Gesture result = new Gesture();
+	public AbstractGesture surfaceCopy()
+	{	AbstractGesture result = new AbstractGesture();
 	
 		// name
 		result.setName(name);
@@ -269,8 +272,8 @@ public class Gesture
 	 * Used to generate a new factory from a neutral, cached, one
 	 * @throws IOException 
 	 */
-	public Gesture deepCopy(double zoomFactor, double scale, PredefinedColor color) throws IOException
-	{	Gesture result = new Gesture();
+	public AbstractGesture deepCopy(double zoomFactor, double scale, PredefinedColor color) throws IOException
+	{	AbstractGesture result = new AbstractGesture();
 		double zoom = zoomFactor/scale;
 	
 		// name

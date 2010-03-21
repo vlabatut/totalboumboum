@@ -32,8 +32,8 @@ import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
-import org.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
-import org.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
+import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
+import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.tools.images.ImageTools;
 

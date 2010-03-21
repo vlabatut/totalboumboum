@@ -15,7 +15,7 @@ import org.jdom.Element;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.anime.Colormap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;

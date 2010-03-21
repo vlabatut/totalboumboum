@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.feature.gesture.anime;
+package org.totalboumboum.engine.content.feature.gesture.anime.step;
 
 /*
  * Total Boum Boum

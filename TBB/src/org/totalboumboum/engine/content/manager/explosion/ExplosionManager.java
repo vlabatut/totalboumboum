@@ -34,7 +34,7 @@ import org.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate
 import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
+import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.game.round.RoundVariables;
