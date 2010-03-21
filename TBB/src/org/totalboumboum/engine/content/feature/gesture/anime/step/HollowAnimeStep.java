@@ -29,8 +29,7 @@ import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 
 public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -39,29 +38,29 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 	// IMAGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private List<String> imagesFileNames = new ArrayList<String>();
-	private List<ColorRule> imagesColorRules = new ArrayList<ColorRule>();
+	private List<ColorMap> imagesColorMaps = new ArrayList<ColorMap>();
 
 	public List<String> getImagesFileNames()
 	{	return imagesFileNames;
 	}
 	
-	public void addImageFileName(String imageFileName, double xShift, double yShift, ColorRule colorRule)
+	public void addImageFileName(String imageFileName, double xShift, double yShift, ColorMap colorMap)
 	{	imagesFileNames.add(imageFileName);
 		xShifts.add(xShift);
 		yShifts.add(yShift);
-		imagesColorRules.add(colorRule);
-		Configuration.getEngineConfiguration().addToImageCache(imageFileName,colormap);
+		imagesColorMaps.add(colorMap);
 	}
-	
 	
 	/////////////////////////////////////////////////////////////////
 	// SHADOW			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String shadowFileName = null;
+	private ColorMap shadowColorMap = null;
 
-	public void setShadowFileName(String shadowFileName)
+	public void setShadowFileName(String shadowFileName, ColorMap shadowColorMap)
 	{	this.shadowFileName = shadowFileName;
-		Configuration.getEngineConfiguration().addToImageCache(shadowFileName,null);
+		this.shadowColorMap = shadowColorMap;	
+		Configuration.getEngineConfiguration().addToImageCache(shadowFileName,shadowColorMap);
 	}
 	
 	public String getShadowFileName()
@@ -127,6 +126,19 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 		result.boundYShift = boundYShift;
 
 		return result;
+	}
+	
+	public void cache()
+	{	// images
+		for(int i=0;i<imagesFileNames.size();i++)
+		{	String imageFileName = imagesFileNames.get(i);
+			ColorMap colorMap = imagesColorMaps.get(i);
+			Configuration.getEngineConfiguration().addToImageCache(imageFileName,colorMap);
+		}
+		
+		// shadow
+		if(shadowFileName!=null)
+			Configuration.getEngineConfiguration().addToImageCache(shadowFileName,shadowColorMap);
 	}
 
 	/////////////////////////////////////////////////////////////////

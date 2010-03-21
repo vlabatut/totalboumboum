@@ -52,8 +52,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.ColormapLoader;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMapLoader;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
@@ -64,7 +64,7 @@ public class ImageTools
 	/////////////////////////////////////////////////////////////////
 	// FILE ACCESS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    public static BufferedImage loadImage(String path, Colormap colormap) throws IOException
+    public static BufferedImage loadImage(String path, ColorMap colormap) throws IOException
     {	BufferedImage image;
     	FileInputStream in = new FileInputStream(path);
     	BufferedInputStream inBuff = new BufferedInputStream(in);
@@ -197,13 +197,13 @@ if(xDim<0 || yDim<0)
 		return result;
     }
     
-    private static Colormap loadColormapElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+    private static ColorMap loadColormapElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
     {	// file
     	String localPath = individualFolder+File.separator;
     	localPath = localPath + root.getAttribute(XmlNames.FILE).getValue().trim();
     	
     	// colormap
-    	Colormap colormap = ColormapLoader.loadColormap(localPath,color);
+    	ColorMap colormap = ColorMapLoader.loadColormap(localPath,color);
     	return colormap;
     }
     
@@ -219,7 +219,7 @@ if(xDim<0 || yDim<0)
     /**
      * Get a neutral image and applies the specified colormap to get a colored image.
      */
-    public static BufferedImage getColoredImage(BufferedImage image, Colormap colormap)
+    public static BufferedImage getColoredImage(BufferedImage image, ColorMap colormap)
    	{	BufferedImage result = image;
     	
    		// check if the image is indexed (else it has no sense to apply a colormap)
