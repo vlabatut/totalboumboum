@@ -28,11 +28,11 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.engine.Cachable;
+import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.xml.sax.SAXException;
 
-public class Explosionset implements Serializable, Cachable
+public class Explosionset implements Serializable, CachableSpriteContainer
 {	private static final long serialVersionUID = 1L;
 
 	public Explosionset()
@@ -89,12 +89,6 @@ public class Explosionset implements Serializable, Cachable
 	/////////////////////////////////////////////////////////////////
 	// CACHE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public long getMemSize()
-	{	long result = 0;
-		
-		return result;
-	}
-	
 	/*
 	 * the Bombset has already been copied/loaded, so it is taken from the level
 	 */
@@ -103,7 +97,7 @@ public class Explosionset implements Serializable, Cachable
 		return result;
 	}*/
 	
-	public Explosionset cacheCopy(double zoomFactor)
+	public Explosionset deepCopy(double zoomFactor)
 	{	Explosionset result = new Explosionset();
 	
 		for(Entry<String,Explosion> entry: explosions.entrySet())

@@ -28,8 +28,8 @@ import java.util.Iterator;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.engine.Cachable;
 import org.totalboumboum.configuration.profile.PredefinedColor;
+import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -39,7 +39,7 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.xml.sax.SAXException;
 
-public class Bombset implements Serializable, Cachable
+public class Bombset implements Serializable, CachableSpriteContainer
 {	private static final long serialVersionUID = 1L;
 
 	public Bombset()

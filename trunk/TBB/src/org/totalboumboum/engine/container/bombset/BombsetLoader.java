@@ -59,14 +59,14 @@ public class BombsetLoader
 	/////////////////////////////////////////////////////////////////
 	// LOAD ALL BUT ANIMES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static Bombset initBombset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static Bombset initBombset(String folderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		//double zoomFactor = RoundVariables.zoomFactor;
+		double zoomFactor = RoundVariables.zoomFactor;
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_SCHEMA);
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_XML);
-		Bombset result = null;
+		Bombset original = null;
 		
 		// caching
 		String cachePath = FilePaths.getCacheBombsPath()+ File.separator;
@@ -76,19 +76,17 @@ public class BombsetLoader
 		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getFromMemoryCache(cachePath);
-		if(engineConfiguration.getMemoryCached() && o!=null)
-		{	result = ((Bombset)o);
-			//result = result.cacheCopy(zoomFactor);
+		Object o = engineConfiguration.getFromSpriteCache(cachePath);
+		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
+		{	original = ((Bombset)o);
 		}
-		else if(engineConfiguration.getFileCached() && cacheFile.exists())
+		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				result = (Bombset)oIn.readObject();
+				original = (Bombset)oIn.readObject();
 				oIn.close();
-				//result = result.cacheCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -101,26 +99,25 @@ public class BombsetLoader
 			}
 		}
 		
-		if(result==null)
+		if(original==null)
 		{	// opening
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			result = loadBombsetElement(root,individualFolder);
+			original = loadBombsetElement(root,individualFolder);
 			// caching
-			if(engineConfiguration.getMemoryCached())
-			{	engineConfiguration.addToMemoryCache(cachePath,result);
-				//result = result.cacheCopy(zoomFactor);
+			if(engineConfiguration.isSpriteMemoryCached())
+			{	engineConfiguration.addToSpriteCache(cachePath,original);
 			}
-			if(engineConfiguration.getFileCached())
+			if(engineConfiguration.isSpriteFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
-				oOut.writeObject(result);
+				oOut.writeObject(original);
 				oOut.close();
-				//result = result.cacheCopy(zoomFactor);
 			}
 		}
 
+		Bombset result = original.deepCopy(zoomFactor,color);
 		return result;
 	}
 	
@@ -205,11 +202,11 @@ public class BombsetLoader
 		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getFromMemoryCache(cachePath);
-		if(engineConfiguration.getMemoryCached() && o!=null)
+		Object o = engineConfiguration.getFromSpriteCache(cachePath);
+		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
 		{	result = ((Bombset)o).deepCopy(zoomFactor,color);
 		}
-		else if(engineConfiguration.getFileCached() && cacheFile.exists())
+		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
@@ -236,11 +233,11 @@ public class BombsetLoader
 			// loading
 			loadBombsetElement(root,individualFolder,color,result);
 			// caching
-			if(engineConfiguration.getMemoryCached())
-			{	engineConfiguration.addToMemoryCache(cachePath,result);
+			if(engineConfiguration.isSpriteMemoryCached())
+			{	engineConfiguration.addToSpriteCache(cachePath,result);
 				result = result.deepCopy(zoomFactor,color);
 			}
-			if(engineConfiguration.getFileCached())
+			if(engineConfiguration.isSpriteFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);

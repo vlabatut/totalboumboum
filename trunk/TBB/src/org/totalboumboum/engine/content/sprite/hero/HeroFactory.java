@@ -24,7 +24,7 @@ package org.totalboumboum.engine.content.sprite.hero;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.totalboumboum.configuration.engine.Cachable;
+import org.totalboumboum.engine.container.Cachable;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;

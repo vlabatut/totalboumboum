@@ -52,23 +52,22 @@ public class BombsetMap implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// BOMBSETS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Bombset partialBombset = null;
 	private final HashMap<PredefinedColor,Bombset> bombsets = new HashMap<PredefinedColor, Bombset>();
 	private String path;
 	
 	public void initBombset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	path = folderPath;
-		partialBombset = BombsetLoader.initBombset(folderPath);
-	}
-
-	public void completeBombset(PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	Bombset base = partialBombset.surfaceCopy();
-		Bombset temp = BombsetLoader.completeBombset(path,color,base);
-		bombsets.put(color,temp);
+		PredefinedColor color = null;
+		Bombset neutral = BombsetLoader.loadBombset(path,color);
+		bombsets.put(color,neutral);
 	}
 	
 	public Bombset getBombset(PredefinedColor color)
 	{	Bombset result = bombsets.get(color);
+		if(result==null)
+		{	result = BombsetLoader.loadBombset(path,color);
+			bombsets.put(color,result);
+		}
 		return result;
 	}
 }

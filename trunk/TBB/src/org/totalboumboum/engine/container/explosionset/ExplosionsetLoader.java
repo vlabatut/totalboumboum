@@ -54,7 +54,7 @@ public class ExplosionsetLoader
 		String individualFolder = folderPath;
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_EXPLOSIONSET+FileNames.EXTENSION_SCHEMA);
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_EXPLOSIONSET+FileNames.EXTENSION_XML);
-		Explosionset result = null;
+		Explosionset original = null;
 		
 		// caching
 		String cachePath = FilePaths.getCacheExplosionsPath()+ File.separator;
@@ -64,18 +64,17 @@ public class ExplosionsetLoader
 		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getFromMemoryCache(cachePath);
-		if(engineConfiguration.getMemoryCached() && o!=null)
-		{	result = ((Explosionset)o).cacheCopy(zoomFactor);
+		Object o = engineConfiguration.getFromSpriteCache(cachePath);
+		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
+		{	original = ((Explosionset)o);
 		}
-		else if(engineConfiguration.getFileCached() && cacheFile.exists())
+		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				result = (Explosionset)oIn.readObject();
+				original = (Explosionset)oIn.readObject();
 				oIn.close();
-				result = result.cacheCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -88,26 +87,25 @@ public class ExplosionsetLoader
 			}
 		}
 		
-		if(result==null)
+		if(original==null)
 		{	// opening
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			result = loadExplosionsetElement(root,individualFolder);
+			original = loadExplosionsetElement(root,individualFolder);
 			// caching
-			if(engineConfiguration.getMemoryCached())
-			{	engineConfiguration.addToMemoryCache(cachePath,result);
-				result = result.cacheCopy(zoomFactor);
+			if(engineConfiguration.isSpriteMemoryCached())
+			{	engineConfiguration.addToSpriteCache(cachePath,original);
 			}
-			if(engineConfiguration.getFileCached())
+			if(engineConfiguration.isSpriteFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
-				oOut.writeObject(result);
+				oOut.writeObject(original);
 				oOut.close();
-				result = result.cacheCopy(zoomFactor);
 			}
 		}
 
+		Explosionset result = original.deepCopy(zoomFactor);
 		return result;
     }
     

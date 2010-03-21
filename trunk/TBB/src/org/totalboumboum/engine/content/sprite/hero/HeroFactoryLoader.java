@@ -71,12 +71,12 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getFromMemoryCache(cacheName);
-		if(engineConfiguration.getMemoryCached() && o!=null)
+		Object o = engineConfiguration.getFromSpriteCache(cacheName);
+		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
 		{	result = ((HeroFactory)o);
 			//result = result.cacheCopy(zoomFactor);
 		}
-		else if(engineConfiguration.getFileCached() && cacheFile.exists())
+		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
@@ -100,11 +100,11 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		{	// opening & loading
 			result = init(folderPath);
 			// caching
-			if(engineConfiguration.getMemoryCached())
-			{	engineConfiguration.addToMemoryCache(cacheName,result);
+			if(engineConfiguration.isSpriteMemoryCached())
+			{	engineConfiguration.addToSpriteCache(cacheName,result);
 				//result = result.cacheCopy(zoomFactor);
 			}
-			if(engineConfiguration.getFileCached())
+			if(engineConfiguration.isSpriteFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
@@ -166,18 +166,18 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getFromMemoryCache(cacheName);
-		if(engineConfiguration.getMemoryCached() && o!=null)
-		{	result = ((HeroFactory)o).cacheCopy(zoomFactor);
+		Object o = engineConfiguration.getFromSpriteCache(cacheName);
+		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
+		{	result = ((HeroFactory)o).deepCopy(zoomFactor);
 		}
-		else if(engineConfiguration.getFileCached() && cacheFile.exists())
+		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
 				result = (HeroFactory)oIn.readObject();
 				oIn.close();
-				result = result.cacheCopy(zoomFactor);
+				result = result.deepCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -194,17 +194,17 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		{	// opening & loading
 			result = complete(folderPath,color,base);
 			// caching
-			if(engineConfiguration.getMemoryCached())
-			{	engineConfiguration.addToMemoryCache(cacheName,result);
-				result = result.cacheCopy(zoomFactor);
+			if(engineConfiguration.isSpriteMemoryCached())
+			{	engineConfiguration.addToSpriteCache(cacheName,result);
+				result = result.deepCopy(zoomFactor);
 			}
-			if(engineConfiguration.getFileCached())
+			if(engineConfiguration.isSpriteFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
 				oOut.writeObject(result);
 				oOut.close();
-				result = result.cacheCopy(zoomFactor);
+				result = result.deepCopy(zoomFactor);
 			}
 		}
 		

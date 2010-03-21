@@ -63,7 +63,7 @@ public class ItemsetLoader
 		String individualFolder = folderPath;
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ITEMSET+FileNames.EXTENSION_SCHEMA);
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_ITEMSET+FileNames.EXTENSION_XML);
-		Itemset result = null;
+		Itemset original = null;
 		
 		// caching
 		String cachePath = FilePaths.getCacheItemsPath()+ File.separator;
@@ -75,18 +75,17 @@ public class ItemsetLoader
 		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getFromMemoryCache(cachePath);
-		if(engineConfiguration.getMemoryCached() && o!=null)
-		{	result = ((Itemset)o).deepCopy(zoomFactor);
+		Object o = engineConfiguration.getFromSpriteCache(cachePath);
+		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
+		{	original = ((Itemset)o);
 		}
-		else if(engineConfiguration.getFileCached() && cacheFile.exists())
+		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				result = (Itemset)oIn.readObject();
+				original = (Itemset)oIn.readObject();
 				oIn.close();
-				result = result.deepCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -99,26 +98,25 @@ public class ItemsetLoader
 			}
 		}
 		
-		if(result==null)
+		if(original==null)
 		{	// opening
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			result = loadItemsetElement(root,individualFolder);
+			original = loadItemsetElement(root,individualFolder);
 			// caching
-			if(engineConfiguration.getMemoryCached())
-			{	engineConfiguration.addToMemoryCache(cachePath,result);
-				result = result.deepCopy(zoomFactor);
+			if(engineConfiguration.isSpriteMemoryCached())
+			{	engineConfiguration.addToSpriteCache(cachePath,original);
 			}
-			if(engineConfiguration.getFileCached())
+			if(engineConfiguration.isSpriteFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
-				oOut.writeObject(result);
+				oOut.writeObject(original);
 				oOut.close();
-				result = result.deepCopy(zoomFactor);
 			}
 		}
 		
+		Itemset result = original.deepCopy(zoomFactor);
 		return result;
     }
     

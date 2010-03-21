@@ -29,14 +29,14 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.engine.Cachable;
+import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
 import org.xml.sax.SAXException;
 
-public class Itemset implements Serializable, Cachable
+public class Itemset implements Serializable, CachableSpriteContainer
 {	private static final long serialVersionUID = 1L;
 
 	public Itemset()
