@@ -22,6 +22,8 @@ package org.totalboumboum.engine.content.feature.gesture.anime.color;
  */
 
 import java.util.HashMap;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
@@ -39,6 +41,10 @@ public class ColorMap extends ColorRule
 	
 	public void addColor(Integer key, byte[] value)
 	{	map.put(key,value);		
+	}
+	
+	public Set<Entry<Integer,byte[]>> entrySet()
+	{	return map.entrySet();		
 	}
 	
 	/////////////////////////////////////////////////////////////////

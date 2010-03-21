@@ -24,18 +24,15 @@ package org.totalboumboum.tools.images;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 
 public class CachedImage
 {
-	public CachedImage(ImageCache imageCache, String imagePath, ColorMap colormap)
+	public CachedImage(ImageCache imageCache, String imagePath)
 	{	this.imageCache = imageCache;
 		this.imagePath = imagePath;
-		addColormap(colormap);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -61,20 +58,11 @@ public class CachedImage
 	}
 	
     /////////////////////////////////////////////////////////////////
-	// COLORMAPS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private HashMap<PredefinedColor,ColorMap> colormaps = new HashMap<PredefinedColor, ColorMap>();
-
-	public void addColormap(ColorMap colormap)
-	{	colormaps.put(colormap.getColor(),colormap);
-	}
-	
-    /////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String imagePath = null;
 	
-	public BufferedImage getImage(double zoom, PredefinedColor color) throws IOException
+	public BufferedImage getImage(ColorMap colormap, double zoom) throws IOException
 	{	BufferedImage result;
 		
 		// no dim changes requested
@@ -124,7 +112,6 @@ public class CachedImage
 		}
 				
 		// colormap processing
-		ColorMap colormap = colormaps.get(color);
 		if(colormap!=null)
 			result = ImageTools.getColoredImage(result,colormap);
 	

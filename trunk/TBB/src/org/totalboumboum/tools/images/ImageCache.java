@@ -22,13 +22,15 @@ package org.totalboumboum.tools.images;
  */
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profile.PredefinedColor;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorFolder;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
 
 public class ImageCache
 {	
@@ -37,32 +39,44 @@ public class ImageCache
 	/////////////////////////////////////////////////////////////////
 	private HashMap<String,CachedImage> imageMap = new HashMap<String, CachedImage>();
 
-	public void addImage(String imgPath, ColorMap colormap)
-	{	CachedImage cachedImage = imageMap.get(imgPath);
-		if(cachedImage==null)
-		{	cachedImage = new CachedImage(this,imgPath,colormap);
-			imageMap.put(imgPath,cachedImage);
-			imageNames.offer(imgPath);
+	public BufferedImage retrieveImage(String basePath, String imagePath, ColorRule colorRule, double zoom) throws IOException
+	{	BufferedImage result = null;
+		String path = null;
+		ColorMap colorMap = null;
+		
+		// indexed colors
+		if(colorRule instanceof ColorMap)
+		{	colorMap = (ColorMap) colorRule;
+			path = basePath+File.separator+imagePath;
+		}
+		
+		// not indexed colors
+		else
+		{	String folder = ((ColorFolder)colorRule).getFolder();
+			path = basePath+File.separator+folder+File.separator+imagePath;
+			colorMap = null;
+		}
+		
+		CachedImage cachedImage = getImage(path);
+		result = cachedImage.getImage(colorMap,zoom);
+
+		return result;
+	}
+
+	private CachedImage getImage(String path)
+	{	CachedImage result = imageMap.get(path);
+		if(result==null)
+		{	result = new CachedImage(this,path);
+			imageMap.put(path,result);
+			imageNames.offer(path);
 		}
 		else
-			cachedImage.addColormap(colormap);
+		{	imageNames.removeFirstOccurrence(path);
+			imageNames.offer(path);
+		}
+		return result;
 	}
 	
-	public BufferedImage retrieveImage(String imgPath, PredefinedColor color, double zoom) throws IOException
-    {	// load or get the image
-		CachedImage cachedImage = imageMap.get(imgPath);
-if(cachedImage==null)
-	System.out.println("ERREUR: image pas en cache:"+imgPath);
-    	
-		// update FIFO
-		imageNames.removeFirstOccurrence(imgPath);
-		imageNames.offer(imgPath);
-		
-    	// return image
-    	BufferedImage result = cachedImage.getImage(zoom,color);
-    	return result;
-    }
-    
     public void clear()
     {	// erase all images
 		imageMap.clear();
