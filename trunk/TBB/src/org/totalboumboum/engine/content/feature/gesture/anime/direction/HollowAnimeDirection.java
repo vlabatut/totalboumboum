@@ -22,36 +22,27 @@ package org.totalboumboum.engine.content.feature.gesture.anime.direction;
  */
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.anime.step.AbstractAnimeStep;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
+import org.totalboumboum.engine.content.feature.gesture.anime.step.HollowAnimeStep;
 
-public class HollowAnimeDirection extends AbstractAnimeDirection<AbstractAnimeStep>
+public class HollowAnimeDirection extends AbstractAnimeDirection<HollowAnimeStep>
 {	private static final long serialVersionUID = 1L;
 
-	public HollowAnimeDirection()
-	{	gestureName= null;
-		steps = new ArrayList<AnimeStep>(0);
-		repeat = false;
-		proportional = false;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public HollowAnimeDirection surfaceCopy()
+	/**
+	 * used to clone an abstract HollowFactory to be completed
+	 * by additional data (useless for now, might be usefull later) 
+	 */
+/*	public HollowAnimeDirection surfaceCopy()
 	{	HollowAnimeDirection result = new HollowAnimeDirection();
 		
 		// steps
-		Iterator<AnimeStep> i = getIterator();
-		while(i.hasNext())
-		{	AnimeStep copyStep = i.next().surfaceCopy(); 
+		for(HollowAnimeStep as: steps)
+		{	AnimeStep copyStep = as.surfaceCopy(); 
 			result.add(copyStep);		
 		}
 		
@@ -64,14 +55,16 @@ public class HollowAnimeDirection extends AbstractAnimeDirection<AbstractAnimeSt
 
 		return result;
 	}
-
-	public HollowAnimeDirection deepCopy(double zoom, PredefinedColor color) throws IOException
-	{	HollowAnimeDirection result = new HollowAnimeDirection();
+*/
+	/**
+	 * used when generating an actual Factory from a HollowFactory
+	 */
+	public AnimeDirection fill(double zoom, PredefinedColor color) throws IOException
+	{	AnimeDirection result = new AnimeDirection();
 		
 		// steps
-		Iterator<AnimeStep> i = getIterator();
-		while(i.hasNext())
-		{	AnimeStep copyStep = i.next().deepCopy(zoom,color); 
+		for(HollowAnimeStep as: steps)
+		{	AnimeStep copyStep = as.fill(zoom,color); 
 			result.add(copyStep);		
 		}
 		
