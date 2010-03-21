@@ -28,7 +28,7 @@ import java.util.HashMap;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.content.feature.gesture.anime.Colormap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
 
 public class CachedImage
 {

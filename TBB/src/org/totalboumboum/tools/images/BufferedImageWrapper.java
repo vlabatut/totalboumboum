@@ -294,4 +294,56 @@ public class BufferedImageWrapper implements Serializable
 	public void paint(Graphics g) {
 		g.drawImage(this.im, drawPointX, drawPointY, null);
 	}
+	
+/**
+ * NOTE: previously in AnimeStep
+	
+	/////////////////////////////////////////////////////////////////
+	// I/O				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void writeObject(ObjectOutputStream out) throws IOException
+	{	// all fields except images
+		out.defaultWriteObject();
+		
+		// image
+		out.writeObject(new Integer(imagesFileNames.size()));
+		for(int i=0;i<imagesFileNames.size();i++)
+		{	String imageFileName = imagesFileNames.get(i);
+			Double xShift = new Double(getXShifts().get(i));
+			Double yShift = new Double(yShifts.get(i));
+			out.writeObject(imageFileName);
+			out.writeObject(xShift);
+			out.writeObject(yShift);
+		}
+		
+		// shadow
+		if(this.shadowFileName != null)
+		{	out.writeObject(new Boolean(true));
+			out.writeObject(shadowFileName);
+		}
+		else
+			out.writeObject(new Boolean(false));
+	}
+
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+	{	// all fields except images
+		in.defaultReadObject();
+		
+		// image
+		int count = (Integer) in.readObject();
+		for(int i=0;i<count;i++)
+		{	String imageFileName = (String) in.readObject();
+			Double xShift = (Double) in.readObject();
+			Double yShift = (Double) in.readObject();
+			addImageFileName(imageFileName,xShift,yShift,null);//TODO to be adapted to sprites using colormaps			
+		}
+
+		// image
+		boolean flag = (Boolean) in.readObject();
+		if(flag)
+		{	shadowFileName = (String) in.readObject();
+		}
+	}
+
+ */
 }

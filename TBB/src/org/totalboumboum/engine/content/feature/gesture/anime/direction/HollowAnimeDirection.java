@@ -29,9 +29,10 @@ import java.util.Iterator;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.anime.step.AbstractAnimeStep;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 
-public class HollowAnimeDirection implements Serializable
+public class HollowAnimeDirection extends AbstractAnimeDirection<AbstractAnimeStep>
 {	private static final long serialVersionUID = 1L;
 
 	public HollowAnimeDirection()
@@ -39,107 +40,6 @@ public class HollowAnimeDirection implements Serializable
 		steps = new ArrayList<AnimeStep>(0);
 		repeat = false;
 		proportional = false;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// HEIGHT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected double boundHeight; 
-
-	public double getBoundHeight()
-	{	return boundHeight;
-	}
-	public void setBoundHeight(double boundHeight)
-	{	this.boundHeight = boundHeight;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// STEPS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ArrayList<AnimeStep> steps;
-
-	public Iterator<AnimeStep> getIterator()
-	{	return steps.iterator();		
-	}
-	
-	public void add(AnimeStep as)
-	{	steps.add(as);		
-	}
-	
-	public void addAll(ArrayList<AnimeStep> l)
-	{	steps.addAll(l);		
-	}
-	
-	public int getLength()
-	{	return steps.size();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// NAME			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private GestureName gestureName; //debug
-
-	public String getName()
-	{	return gestureName+","+direction;
-	}
-	
-	public void setGestureName(GestureName gestureName)
-	{	this.gestureName = gestureName;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// DIRECTION		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Direction direction; //debug
-
-	public void setDirection(Direction direction)
-	{	this.direction = direction;
-	}
-	
-	public Direction getDirection()
-	{	return direction;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// DURATION			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * Computes the total duration of the animation.
-	 * The result is 0 if there is no time limit. 
-	 * @return	the duration of the animation
-	 */
-	public long getTotalDuration()
-	{	long result = 0;
-		Iterator<AnimeStep> i = steps.iterator();
-		while(i.hasNext())
-			result = result + i.next().getDuration();
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// REPEAT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean repeat;
-
-	public boolean getRepeat()
-	{	return repeat;
-	}
-	
-	public void setRepeat(boolean repeat)
-	{	this.repeat = repeat;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PROPORTIONNAL	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean proportional;
-
-	public boolean getProportional()
-	{	return proportional;
-	}
-	
-	public void setProportional(boolean proportional)
-	{	this.proportional = proportional;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -187,22 +87,10 @@ public class HollowAnimeDirection implements Serializable
 
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
+	/////////////////////////////////////////////////////////////////	
 	public void finish()
 	{	if(!finished)
-		{	finished = true;
-			// images
-			{	Iterator<AnimeStep> it = steps.iterator();
-				while(it.hasNext())
-				{	AnimeStep temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// misc
-			direction = null;
+		{	super.finish();
 		}
 	}
 }

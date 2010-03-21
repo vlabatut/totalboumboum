@@ -32,7 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.engine.content.feature.gesture.anime.Colormap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;

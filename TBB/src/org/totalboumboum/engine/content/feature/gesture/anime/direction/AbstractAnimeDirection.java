@@ -22,29 +22,26 @@ package org.totalboumboum.engine.content.feature.gesture.anime.direction;
  */
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.anime.step.AbstractAnimeStep;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 
-public class AbstractAnimeDirection implements Serializable
+public class AbstractAnimeDirection<T extends AbstractAnimeStep>
 {	private static final long serialVersionUID = 1L;
 
 	public AbstractAnimeDirection()
-	{	gestureName= null;
-		steps = new ArrayList<AnimeStep>(0);
-		repeat = false;
-		proportional = false;
+	{	
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// HEIGHT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected double boundHeight; 
+	protected double boundHeight = 0; 
 
 	public double getBoundHeight()
 	{	return boundHeight;
@@ -56,17 +53,17 @@ public class AbstractAnimeDirection implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// STEPS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<AnimeStep> steps;
+	private ArrayList<T> steps = new ArrayList<T>(0);
 
-	public Iterator<AnimeStep> getIterator()
+	public Iterator<T> getIterator()
 	{	return steps.iterator();		
 	}
 	
-	public void add(AnimeStep as)
+	public void add(T as)
 	{	steps.add(as);		
 	}
 	
-	public void addAll(ArrayList<AnimeStep> l)
+	public void addAll(ArrayList<T> l)
 	{	steps.addAll(l);		
 	}
 	
@@ -77,7 +74,7 @@ public class AbstractAnimeDirection implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// NAME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GestureName gestureName; //debug
+	private GestureName gestureName = null; //debug
 
 	public String getName()
 	{	return gestureName+","+direction;
@@ -90,7 +87,7 @@ public class AbstractAnimeDirection implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Direction direction; //debug
+	private Direction direction = null; //debug
 
 	public void setDirection(Direction direction)
 	{	this.direction = direction;
@@ -110,7 +107,7 @@ public class AbstractAnimeDirection implements Serializable
 	 */
 	public long getTotalDuration()
 	{	long result = 0;
-		Iterator<AnimeStep> i = steps.iterator();
+		Iterator<T> i = steps.iterator();
 		while(i.hasNext())
 			result = result + i.next().getDuration();
 		return result;
@@ -119,7 +116,7 @@ public class AbstractAnimeDirection implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// REPEAT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean repeat;
+	private boolean repeat = false;
 
 	public boolean getRepeat()
 	{	return repeat;
@@ -132,7 +129,7 @@ public class AbstractAnimeDirection implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PROPORTIONNAL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean proportional;
+	private boolean proportional = false;
 
 	public boolean getProportional()
 	{	return proportional;
@@ -188,21 +185,17 @@ public class AbstractAnimeDirection implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
+	protected boolean finished = false;
 	
 	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// images
-			{	Iterator<AnimeStep> it = steps.iterator();
-				while(it.hasNext())
-				{	AnimeStep temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// misc
-			direction = null;
-		}
+	{	finished = true;
+
+		// images
+		for(T step: steps)
+			step.finish();
+		steps.clear();
+
+		// misc
+		direction = null;
 	}
 }

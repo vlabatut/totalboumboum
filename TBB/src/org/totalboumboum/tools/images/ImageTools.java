@@ -52,8 +52,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.content.feature.gesture.anime.Colormap;
-import org.totalboumboum.engine.content.feature.gesture.anime.ColormapLoader;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColormapLoader;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
