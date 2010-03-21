@@ -43,6 +43,8 @@ import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
+import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
+import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;

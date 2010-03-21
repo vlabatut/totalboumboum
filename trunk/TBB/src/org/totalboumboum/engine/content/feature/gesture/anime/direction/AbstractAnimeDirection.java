@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.feature.gesture.anime;
+package org.totalboumboum.engine.content.feature.gesture.anime.direction;
 
 /*
  * Total Boum Boum
@@ -29,6 +29,7 @@ import java.util.Iterator;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 
 public class AbstractAnimeDirection implements Serializable
 {	private static final long serialVersionUID = 1L;

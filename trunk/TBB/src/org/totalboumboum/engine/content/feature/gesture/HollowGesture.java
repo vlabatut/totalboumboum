@@ -43,8 +43,8 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulati
 import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-public class Gesture
-{	public Gesture()
+public class HollowGesture
+{	public HollowGesture()
 	{	
 	}
 	
@@ -79,7 +79,7 @@ public class Gesture
 	{	return animes.isEmpty();		
 	}
 	
-	public void setAnimes(Gesture gesture)
+	public void setAnimes(HollowGesture gesture)
 	{	for(Entry<Direction,AnimeDirection> e: gesture.animes.entrySet())
 		{	Direction direction = e.getKey();
 			AnimeDirection anime = e.getValue();
@@ -227,8 +227,8 @@ public class Gesture
 	 * are hollow copies (images not copied, just the key to retrieve them in the cache)
 	 * Used to generate a factory inheriting from an existing one
 	 */
-	public Gesture surfaceCopy()
-	{	Gesture result = new Gesture();
+	public HollowGesture surfaceCopy()
+	{	HollowGesture result = new HollowGesture();
 	
 		// name
 		result.setName(name);
@@ -269,8 +269,8 @@ public class Gesture
 	 * Used to generate a new factory from a neutral, cached, one
 	 * @throws IOException 
 	 */
-	public Gesture deepCopy(double zoomFactor, double scale, PredefinedColor color) throws IOException
-	{	Gesture result = new Gesture();
+	public HollowGesture deepCopy(double zoomFactor, double scale, PredefinedColor color) throws IOException
+	{	HollowGesture result = new HollowGesture();
 		double zoom = zoomFactor/scale;
 	
 		// name

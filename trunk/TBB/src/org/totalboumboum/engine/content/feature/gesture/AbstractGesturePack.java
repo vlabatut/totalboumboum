@@ -21,38 +21,31 @@ package org.totalboumboum.engine.content.feature.gesture;
  * 
  */
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
-
-public class GesturePack
+public abstract class AbstractGesturePack<T extends AbstractGesture>
 {	
-	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private double scale;
-	
-	public double getScale()
-	{	return scale;
+	public AbstractGesturePack()
+	{	// init the gesture pack with all possible gestures
+		for(GestureName name: GestureName.values())
+		{	Gesture gesture = new Gesture();
+			gesture.setName(name);
+			addGesture(gesture,name);			
+		}
 	}
 	
-	public void setScale(double scale)
-	{	this.scale = scale;
-	}
-
 	/////////////////////////////////////////////////////////////////
-	// COLOR			/////////////////////////////////////////////
+	// SPRITE NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PredefinedColor color;
-
-	public PredefinedColor getColor()
-	{	return color;
+	private String spriteName;
+	
+	public String getSpriteName()
+	{	return spriteName;
 	}
 	
-	public void setColor(PredefinedColor color)
-	{	this.color = color;
+	public void setSpriteName(String spriteName)
+	{	this.spriteName = spriteName;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -74,57 +67,6 @@ public class GesturePack
 	{	return gestures.containsKey(name);		
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public GesturePack surfaceCopy()
-	{	GesturePack result = new GesturePack();
-		// gestures
-		for(Entry<GestureName,Gesture> e: gestures.entrySet())
-		{	Gesture cp = e.getValue().surfaceCopy();
-			GestureName nm = e.getKey();
-			result.addGesture(cp,nm);
-		}
-		
-		// misc
-		result.scale = scale;
-		result.color = color;
-		result.spriteName = spriteName;
-		return result;
-	}
-	
-/*	public void copyAnimesFrom(GesturePack gesturePack)
-	{	for(Entry<GestureName,Gesture> e: gesturePack.gestures.entrySet())
-		{	Gesture cp = e.getValue();
-			GestureName nm = e.getKey();
-			Gesture gest = getGesture(nm);
-			if(gest==null) //should not happen
-			{	gest = new Gesture();
-				gest.setName(nm);
-				addGesture(gest,nm);
-			}
-			gest.copyAnimesFrom(cp);
-		}		
-	}
-*/	
-
-	public GesturePack deepCopy(double zoomFactor, PredefinedColor color) throws IOException
-	{	GesturePack result = new GesturePack();
-		
-		// gestures
-		for(Entry<GestureName,Gesture> e: gestures.entrySet())
-		{	Gesture cp = e.getValue().deepCopy(zoomFactor,scale,color);
-			GestureName nm = e.getKey();
-			result.addGesture(cp,nm);
-		}
-		
-		// misc
-		result.scale = scale;
-		result.color = color;
-		
-		return result;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.feature.gesture.anime;
+package org.totalboumboum.engine.content.feature.gesture.anime.step;
 
 /*
  * Total Boum Boum
@@ -25,7 +25,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,16 +33,25 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.ImageShift;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
 
-public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
+public class AnimeStep
 {	private static final long serialVersionUID = 1L;
 
+	public AnimeStep()
+	{	duration = 0;
+		shadow = null;
+		shadowXShift = 0;
+		shadowYShift = 0;
+		boundYShift = ImageShift.DOWN;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// IMAGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private transient List<BufferedImage> images = new ArrayList<BufferedImage>();
 	private List<String> imagesFileNames = new ArrayList<String>();
 
-	public List<String> getImagesFileNames()
-	{	return imagesFileNames;
+	public List<BufferedImage> getImages()
+	{	return images;
 	}
 	
 	public void addImageFileName(String imageFileName, double xShift, double yShift, Colormap colormap)
@@ -54,24 +62,113 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// DURATION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private long duration;
+
+	public long getDuration()
+	{	return duration;
+	}
+	
+	public void setDuration(long duration)
+	{	this.duration = duration;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SHIFTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private transient List<Double> xShifts = new ArrayList<Double>();
+	private transient List<Double> yShifts = new ArrayList<Double>();
+
+	public List<Double> getXShifts()
+	{	return xShifts;
+	}
+	
+	public List<Double> getYShifts()
+	{	return yShifts;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// SHADOW			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private transient BufferedImage shadow = null;
 	private String shadowFileName = null;
 
+	public boolean hasShadow()
+	{	return shadow != null;
+	}
+	
 	public void setShadowFileName(String shadowFileName)
 	{	this.shadowFileName = shadowFileName;
 		Configuration.getEngineConfiguration().addToImageCache(shadowFileName,null);
 	}
 	
-	public String getShadowFileName()
-	{	return shadowFileName;
+	public BufferedImage getShadow()
+	{	return shadow;
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// SHADOW SHIFTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private double shadowXShift;
+	private double shadowYShift;
+
+	public double getShadowXShift()
+	{	return shadowXShift;
+	}
+	public void setShadowXShift(double shadowXShift)
+	{	this.shadowXShift = shadowXShift;
+	}
+
+	public double getShadowYShift()
+	{	return shadowYShift;
+	}
+	public void setShadowYShift(double shadowYShift)
+	{	this.shadowYShift = shadowYShift;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// BOUND SHIFTS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ImageShift boundYShift;
+
+	public ImageShift getBoundYShift()
+	{	return boundYShift;
+	}
+	
+	public void setBoundYShift(ImageShift boundYShift)
+	{	this.boundYShift = boundYShift;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public HollowAnimeStep deepCopy(double zoom, PredefinedColor color) throws IOException
-	{	HollowAnimeStep result = new HollowAnimeStep();
+	public AnimeStep surfaceCopy()
+	{	AnimeStep result = new AnimeStep();
+		
+		// image
+		result.imagesFileNames.addAll(imagesFileNames);
+		
+		// duration
+		result.setDuration(duration);
+		
+		// shifts
+		result.xShifts.addAll(xShifts);
+		result.yShifts.addAll(yShifts);
+		
+		// shadow
+		result.setShadowFileName(shadowFileName);
+		result.setShadowXShift(shadowXShift);
+		result.setShadowYShift(shadowYShift);
+		
+		// bound
+		result.setBoundYShift(boundYShift);
+
+		return result;
+	}
+
+	public AnimeStep deepCopy(double zoom, PredefinedColor color) throws IOException
+	{	AnimeStep result = new AnimeStep();
 		
 		// images
 		for(int i=0;i<imagesFileNames.size();i++)
@@ -104,6 +201,27 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+
+			// images
+			imagesFileNames = null;
+			images = null;
+			shadowFileName = null;
+			shadow = null;
+
+			// misc
+			boundYShift = null;
+			shadow = null;
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// I/O				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private void writeObject(ObjectOutputStream out) throws IOException
@@ -114,7 +232,7 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 		out.writeObject(new Integer(imagesFileNames.size()));
 		for(int i=0;i<imagesFileNames.size();i++)
 		{	String imageFileName = imagesFileNames.get(i);
-			Double xShift = new Double(getXShifts().get(i));
+			Double xShift = new Double(xShifts.get(i));
 			Double yShift = new Double(yShifts.get(i));
 			out.writeObject(imageFileName);
 			out.writeObject(xShift);
@@ -147,23 +265,6 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 		boolean flag = (Boolean) in.readObject();
 		if(flag)
 		{	shadowFileName = (String) in.readObject();
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-
-			// images
-			imagesFileNames.clear();
-
-			// misc
-			shadowFileName = null;
 		}
 	}
 }
