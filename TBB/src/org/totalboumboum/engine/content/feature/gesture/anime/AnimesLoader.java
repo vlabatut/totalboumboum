@@ -119,7 +119,8 @@ public class AnimesLoader
 			else
 				colorFolder = (String)obj;
 		}
-//TODO décomposition base+couleur+reste au niveau du step		
+//TODO ici c plus comme ça : on charge toutes les couleurs, tant qu'on y est
+//TODO décomposition base+couleur+reste au niveau du step
 		if(colorFolder!=null)
 			localFilePath = localFilePath+File.separator + colorFolder;
 		

@@ -31,9 +31,8 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.CachableSpriteContainer;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
@@ -174,21 +173,14 @@ public class EngineConfiguration
 	{	this.imageCached = imageCached;
 	}
 
-	/**
-	 * register an image in the cache, without loading it
-	 */
-	public void addToImageCache(String imgPath, ColorMap colormap)
-	{	imageCache.addImage(imgPath, colormap);
-	}
-
 	/** 
 	 * retrieve an image for the cache, loading it if necessary,
 	 * or processing it by resizing/coloring an existing neutral image.
 	 * Note: the color parameter only indicates the use of a colormap, 
 	 * it should be null if no colormap is used (even in the case of a colored sprite).
 	 */
-	public BufferedImage retrieveFromImageCache(String imgPath, PredefinedColor color, double zoom) throws IOException
-    {	return imageCache.retrieveImage(imgPath,color,zoom);
+	public BufferedImage retrieveFromImageCache(String basePath, String imagePath, ColorRule colorRule, double zoom) throws IOException
+    {	return imageCache.retrieveImage(basePath,imagePath,colorRule,zoom);
     }
     
     public void clearImageCache()

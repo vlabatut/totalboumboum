@@ -38,25 +38,15 @@ import java.awt.image.IndexColorModel;
 import java.awt.image.Kernel;
 import java.awt.image.WritableRaster;
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Attribute;
-import org.jdom.Element;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMapLoader;
-import org.totalboumboum.tools.xml.XmlNames;
-import org.xml.sax.SAXException;
-
 
 public class ImageTools
 {
@@ -160,58 +150,6 @@ if(xDim<0 || yDim<0)
 		BufferedImage result =  getCompatibleImage(imgNew);
     	return result; 
     }
-    
-	/////////////////////////////////////////////////////////////////
-	// COLORMAP			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-    @SuppressWarnings("unchecked")
-    public static Object loadColorsElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
-    {	Object result=null;
-    	
-    	// folder
-    	String localFilePath = individualFolder;
-    	Attribute attribute = root.getAttribute(XmlNames.FOLDER);
-    	if(attribute!=null)
-			localFilePath = localFilePath+File.separator+attribute.getValue();
-		
-    	// colormaps
-    	List<Element> clrs = root.getChildren();
-    	int i=0;
-		while(result==null && i<clrs.size())
-    	{	Element temp = clrs.get(i);
-    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
-    		if(name.equalsIgnoreCase(color.toString()))
-    		{	// colormap
-    			if(temp.getName().equals(XmlNames.COLORMAP))
-    				result = loadColormapElement(temp,localFilePath,color);
-    			// colorsprite
-    			else if(temp.getName().equals(XmlNames.COLORSPRITE))
-    				result = loadColorspriteElement(temp);
-    		}
-    		else
-    			i++;
-    	}
-		if(result==null)
-			;// erreur
-		
-		return result;
-    }
-    
-    private static ColorMap loadColormapElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
-    {	// file
-    	String localPath = individualFolder+File.separator;
-    	localPath = localPath + root.getAttribute(XmlNames.FILE).getValue().trim();
-    	
-    	// colormap
-    	ColorMap colormap = ColorMapLoader.loadColormap(localPath,color);
-    	return colormap;
-    }
-    
-    private static String loadColorspriteElement(Element root) throws IOException, ParserConfigurationException, SAXException
-    {	// folder
-    	String colorFolder = root.getAttribute(XmlNames.FOLDER).getValue().trim();
-    	return colorFolder;
-    } 
     
 	/////////////////////////////////////////////////////////////////
 	// COLORS			/////////////////////////////////////////////

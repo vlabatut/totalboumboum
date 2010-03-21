@@ -27,47 +27,56 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.tools.files.FileNames;
-import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;
-import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 public class ColorRulesMapLoader
 {
-	public static ColorMap loadColormap(String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
-	{	// opening
-		File dataFile = new File(individualFolder+FileNames.EXTENSION_XML);
-		String schemaFolder = FilePaths.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_COLORMAP+FileNames.EXTENSION_SCHEMA);
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		// loading
-		ColorMap result = new ColorMap(color);
-		loadColorsElement(root, result);
+	@SuppressWarnings("unchecked")
+	public static ColorRulesMap loadColorsElement(Element root, String individualFolder) throws IOException, ParserConfigurationException, SAXException
+	{	ColorRulesMap result = new ColorRulesMap();
+		
+		// folder
+		String localFilePath = individualFolder;
+		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
+		if(attribute!=null)
+			localFilePath = localFilePath+File.separator+attribute.getValue();
+		
+		// colormaps
+		List<Element> clrs = root.getChildren();
+		for(Element temp: clrs)
+		{	String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
+			PredefinedColor color = PredefinedColor.valueOf(name);
+			ColorRule colorRule = null;
+			// colormap
+			if(temp.getName().equals(XmlNames.COLORMAP))
+				colorRule = loadColormapElement(temp,localFilePath,color);
+			// colorsprite
+			else if(temp.getName().equals(XmlNames.COLORSPRITE))
+				colorRule = loadColorspriteElement(temp,color);
+			result.setColorRule(color, colorRule);
+		}
+		
 		return result;
 	}
-    
-    @SuppressWarnings("unchecked")
-	private static void loadColorsElement(Element root, ColorMap colormap) throws IOException
-    {	// colors
-    	List<Element> colorsList = root.getChildren(XmlNames.COLOR);
-		for(int i=0;i<colorsList.size();i++)
-			loadColorElement(colorsList.get(i),colormap);    	
-    }
 	
-    private static void loadColorElement(Element root, ColorMap colormap) throws IOException
-    {	// index
-		int index = Integer.parseInt(root.getAttribute(XmlNames.INDEX).getValue());
-		// RGB
-		byte colors[] = new byte[3];
-		colors[0] = (byte)Integer.parseInt(root.getAttribute(XmlNames.RED).getValue());
-		// green
-		colors[1] = (byte)Integer.parseInt(root.getAttribute(XmlNames.GREEN).getValue());
-		// blue
-		colors[2] = (byte)Integer.parseInt(root.getAttribute(XmlNames.BLUE).getValue());
+	private static ColorMap loadColormapElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+	{	// file
+		String localPath = individualFolder+File.separator;
+		localPath = localPath + root.getAttribute(XmlNames.FILE).getValue().trim();
+		
 		// colormap
-		colormap.addColor(index,colors);
-    }
+		ColorMap colormap = ColorMapLoader.loadColormap(localPath,color);
+		return colormap;
+	}
+	
+	private static ColorFolder loadColorspriteElement(Element root, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+	{	// folder
+		String colorFolder = root.getAttribute(XmlNames.FOLDER).getValue().trim();
+		ColorFolder result = new ColorFolder(color,colorFolder);
+		return result;
+	} 
 }
