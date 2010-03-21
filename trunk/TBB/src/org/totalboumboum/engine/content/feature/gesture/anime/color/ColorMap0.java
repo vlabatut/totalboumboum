@@ -25,10 +25,10 @@ import java.util.HashMap;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
-public class Colormap extends ColorRule
+public class ColorMap0 extends ColorRule
 {	private static final long serialVersionUID = 1L;	
 
-	public Colormap(PredefinedColor color)
+	public ColorMap0(PredefinedColor color)
 	{	super(color);
 	}
 
