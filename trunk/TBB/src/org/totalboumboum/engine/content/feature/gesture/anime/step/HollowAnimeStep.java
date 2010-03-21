@@ -23,15 +23,12 @@ package org.totalboumboum.engine.content.feature.gesture.anime.step;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.content.feature.ImageShift;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
 
 public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
@@ -70,19 +67,47 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public HollowAnimeStep deepCopy(double zoom, PredefinedColor color) throws IOException
+	/**
+	 * used to clone an abstract HollowFactory to be completed
+	 * by additional data (useless for now, may be usefull later) 
+	 */
+/*	public HollowAnimeStep surfaceCopy()
 	{	HollowAnimeStep result = new HollowAnimeStep();
+		
+		// image
+		result.imagesFileNames.addAll(imagesFileNames);
+		
+		// duration
+		result.setDuration(duration);
+		
+		// shifts
+		result.xShifts.addAll(xShifts);
+		result.yShifts.addAll(yShifts);
+		
+		// shadow
+		result.setShadowFileName(shadowFileName);
+		result.setShadowXShift(shadowXShift);
+		result.setShadowYShift(shadowYShift);
+		
+		// bound
+		result.setBoundYShift(boundYShift);
+
+		return result;
+	}
+*/
+	/**
+	 * used when generating an actual Factory from a HollowFactory
+	 */
+	public AnimeStep fill(double zoom, PredefinedColor color) throws IOException
+	{	AnimeStep result = new AnimeStep();
 		
 		// images
 		for(int i=0;i<imagesFileNames.size();i++)
 		{	String imageFileName = imagesFileNames.get(i);
+			BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(imageFileName,color,zoom);
 			double xShift = xShifts.get(i);
 			double yShift = yShifts.get(i);
-			result.imagesFileNames.add(imageFileName);
-			BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(imageFileName,color,zoom);
-			result.images.add(image);
-			result.xShifts.add(xShift*zoom);
-			result.yShifts.add(yShift*zoom);
+			result.addImage(image,xShift,yShift);
 		}
 		
 		// duration
@@ -90,12 +115,9 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 		
 		// shadow
 		if(shadowFileName!=null)
-		{	result.shadowFileName = shadowFileName;
-			BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(shadowFileName,color,zoom);
-			result.shadow = image;
+		{	BufferedImage shadow = Configuration.getEngineConfiguration().retrieveFromImageCache(shadowFileName,color,zoom);
+			result.setShadow(shadow,shadowXShift,shadowYShift);
 		}
-		result.shadowXShift = shadowXShift*zoom;
-		result.shadowYShift = shadowYShift*zoom;
 		
 		// bound
 		result.boundYShift = boundYShift;
@@ -104,66 +126,17 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// I/O				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private void writeObject(ObjectOutputStream out) throws IOException
-	{	// all fields except images
-		out.defaultWriteObject();
-		
-		// image
-		out.writeObject(new Integer(imagesFileNames.size()));
-		for(int i=0;i<imagesFileNames.size();i++)
-		{	String imageFileName = imagesFileNames.get(i);
-			Double xShift = new Double(getXShifts().get(i));
-			Double yShift = new Double(yShifts.get(i));
-			out.writeObject(imageFileName);
-			out.writeObject(xShift);
-			out.writeObject(yShift);
-		}
-		
-		// shadow
-		if(this.shadowFileName != null)
-		{	out.writeObject(new Boolean(true));
-			out.writeObject(shadowFileName);
-		}
-		else
-			out.writeObject(new Boolean(false));
-	}
-
-	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
-	{	// all fields except images
-		in.defaultReadObject();
-		
-		// image
-		int count = (Integer) in.readObject();
-		for(int i=0;i<count;i++)
-		{	String imageFileName = (String) in.readObject();
-			Double xShift = (Double) in.readObject();
-			Double yShift = (Double) in.readObject();
-			addImageFileName(imageFileName,xShift,yShift,null);//TODO to be adapted to sprites using colormaps			
-		}
-
-		// image
-		boolean flag = (Boolean) in.readObject();
-		if(flag)
-		{	shadowFileName = (String) in.readObject();
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-
 	public void finish()
 	{	if(!finished)
 		{	super.finish();
 
 			// images
 			imagesFileNames.clear();
+			shadowFileName = null;
 
 			// misc
-			shadowFileName = null;
 		}
 	}
 }
