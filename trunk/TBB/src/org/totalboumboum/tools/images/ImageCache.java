@@ -28,7 +28,7 @@ import java.util.LinkedList;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 
 public class ImageCache
 {	
@@ -37,7 +37,7 @@ public class ImageCache
 	/////////////////////////////////////////////////////////////////
 	private HashMap<String,CachedImage> imageMap = new HashMap<String, CachedImage>();
 
-	public void addImage(String imgPath, Colormap colormap)
+	public void addImage(String imgPath, ColorMap colormap)
 	{	CachedImage cachedImage = imageMap.get(imgPath);
 		if(cachedImage==null)
 		{	cachedImage = new CachedImage(this,imgPath,colormap);

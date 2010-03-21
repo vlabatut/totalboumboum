@@ -15,7 +15,7 @@ import org.jdom.Element;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;
@@ -191,8 +191,8 @@ public class SpritePreviewLoader
 			    		name = name.toUpperCase(Locale.ENGLISH);
 			    		PredefinedColor color = PredefinedColor.valueOf(name);
 			    		Object obj = ImageTools.loadColorsElement(elt,folderPath,color);
-						if(obj instanceof Colormap)
-						{	Colormap colormap = (Colormap)obj;
+						if(obj instanceof ColorMap)
+						{	ColorMap colormap = (ColorMap)obj;
 							String imagePath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
 							img = ImageTools.loadImage(imagePath, colormap);
 						}

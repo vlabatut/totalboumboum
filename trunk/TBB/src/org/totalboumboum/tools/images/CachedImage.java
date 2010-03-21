@@ -28,11 +28,11 @@ import java.util.HashMap;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 
 public class CachedImage
 {
-	public CachedImage(ImageCache imageCache, String imagePath, Colormap colormap)
+	public CachedImage(ImageCache imageCache, String imagePath, ColorMap colormap)
 	{	this.imageCache = imageCache;
 		this.imagePath = imagePath;
 		addColormap(colormap);
@@ -63,9 +63,9 @@ public class CachedImage
     /////////////////////////////////////////////////////////////////
 	// COLORMAPS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<PredefinedColor,Colormap> colormaps = new HashMap<PredefinedColor, Colormap>();
+	private HashMap<PredefinedColor,ColorMap> colormaps = new HashMap<PredefinedColor, ColorMap>();
 
-	public void addColormap(Colormap colormap)
+	public void addColormap(ColorMap colormap)
 	{	colormaps.put(colormap.getColor(),colormap);
 	}
 	
@@ -124,7 +124,7 @@ public class CachedImage
 		}
 				
 		// colormap processing
-		Colormap colormap = colormaps.get(color);
+		ColorMap colormap = colormaps.get(color);
 		if(colormap!=null)
 			result = ImageTools.getColoredImage(result,colormap);
 	

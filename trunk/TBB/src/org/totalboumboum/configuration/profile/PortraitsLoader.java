@@ -32,7 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;
@@ -61,14 +61,14 @@ public class PortraitsLoader
 	private static void loadPortraitsElement(Element root, String folderPath, PredefinedColor color, Portraits result) throws IOException, ParserConfigurationException, SAXException
 	{	// colors
 		String localFilePath = folderPath;
-    	Colormap colormap = null;
+    	ColorMap colormap = null;
     	String colorFolder = null;
 		Object obj;
 		Element elt = root.getChild(XmlNames.COLORS);;
 		if(elt!=null && color!=null)
 		{	obj = ImageTools.loadColorsElement(elt,localFilePath,color);
-			if(obj instanceof Colormap)
-				colormap = (Colormap)obj;
+			if(obj instanceof ColorMap)
+				colormap = (ColorMap)obj;
 			else
 				colorFolder = (String)obj;
 		}		
@@ -85,7 +85,7 @@ public class PortraitsLoader
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static void loadIngameElement(Element root, String folderPath, Colormap colormap, Portraits result) throws IOException, ParserConfigurationException, SAXException
+	private static void loadIngameElement(Element root, String folderPath, ColorMap colormap, Portraits result) throws IOException, ParserConfigurationException, SAXException
 	{	// folder
 		String folder = folderPath;
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
@@ -107,7 +107,7 @@ public class PortraitsLoader
 	}
 
 	@SuppressWarnings("unchecked")
-	private static void loadOutgameElement(Element root, String folderPath, Colormap colormap, Portraits result) throws IOException, ParserConfigurationException, SAXException
+	private static void loadOutgameElement(Element root, String folderPath, ColorMap colormap, Portraits result) throws IOException, ParserConfigurationException, SAXException
 	{	// folder
 		String folder = folderPath;
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);

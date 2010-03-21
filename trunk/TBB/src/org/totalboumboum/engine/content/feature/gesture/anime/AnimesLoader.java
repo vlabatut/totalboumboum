@@ -42,7 +42,7 @@ import org.totalboumboum.engine.content.feature.ImageShift;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 import org.totalboumboum.game.round.RoundVariables;
@@ -77,7 +77,7 @@ public class AnimesLoader
     private static void loadAnimesElement(Element root, String individualFolder, GesturePack pack, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
     {	HashMap<String,String>imagesFilenames = new HashMap<String, String>();
     	HashMap<String,String>shadowsFilenames = new HashMap<String, String>();
-    	Colormap colormap = null;
+    	ColorMap colormap = null;
     	String colorFolder = null;
 		
     	// local folder
@@ -114,12 +114,12 @@ public class AnimesLoader
 		Element elt = root.getChild(XmlNames.COLORS);
 		if(elt!=null && color!=null)
 		{	obj = ImageTools.loadColorsElement(elt,localFilePath,color);
-			if(obj instanceof Colormap)
-				colormap = (Colormap)obj;
+			if(obj instanceof ColorMap)
+				colormap = (ColorMap)obj;
 			else
 				colorFolder = (String)obj;
 		}
-		
+//TODO décomposition base+couleur+reste au niveau du step		
 		if(colorFolder!=null)
 			localFilePath = localFilePath+File.separator + colorFolder;
 		
@@ -127,7 +127,7 @@ public class AnimesLoader
 		elt = root.getChild(XmlNames.SHADOWS);
 		if(elt!=null)
 			loadShadowsElement(elt,localFilePath,shadowsFilenames);
-		
+//TODO paquets d'images gérés exclusivement dans HollowXxx		
 		// images ?
 		elt = root.getChild(XmlNames.IMAGES);
 		if(elt!=null)
@@ -140,7 +140,7 @@ public class AnimesLoader
     
 	@SuppressWarnings("unchecked")
 	private static void loadImagesElement(Element root, String individualFolder,
-    		HashMap<String,String> imagesFilenames, Colormap colormap) throws IOException
+    		HashMap<String,String> imagesFilenames, ColorMap colormap) throws IOException
     {	// folder
     	String localFilePath = individualFolder;
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
@@ -157,7 +157,7 @@ public class AnimesLoader
     }
     
     private static void loadImageElement(Element root, String individualFolder,
-    		HashMap<String,String> imagesFilenames, Colormap colormap) throws IOException
+    		HashMap<String,String> imagesFilenames, ColorMap colormap) throws IOException
     {	// folder
     	String localFilePath = individualFolder;
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
@@ -208,7 +208,7 @@ public class AnimesLoader
     
     @SuppressWarnings("unchecked")
 	private static void loadGesturesElement(Element root, double boundHeight, String filePath, GesturePack pack,
-			HashMap<String,String> shadowsFilenames, HashMap<String,String> imagesFilenames, Colormap colormap,
+			HashMap<String,String> shadowsFilenames, HashMap<String,String> imagesFilenames, ColorMap colormap,
     		double zoom) throws IOException
     {	// folder
     	String localFilePath = filePath;
@@ -230,7 +230,7 @@ public class AnimesLoader
      */
     @SuppressWarnings("unchecked")
 	private static void loadGestureElement(Element root, GesturePack pack, double boundHeight, String filePath,
-    		HashMap<String,String> shadowsFilenames, HashMap<String,String> imagesFilenames, Colormap colormap,
+    		HashMap<String,String> shadowsFilenames, HashMap<String,String> imagesFilenames, ColorMap colormap,
     		double zoom) throws IOException
     {	// name
     	String name = root.getAttribute(XmlNames.NAME).getValue().toUpperCase(Locale.ENGLISH);
@@ -323,7 +323,7 @@ public class AnimesLoader
     		Element root, String filePath, 
     		double xShift, double yShift, 
     		String shadowFilename, double shadowXShift, double shadowYShift, ImageShift boundYShift,
-    		HashMap<String,String> shadowsFilenames, HashMap<String,String> imagesFilenames, Colormap colormap,
+    		HashMap<String,String> shadowsFilenames, HashMap<String,String> imagesFilenames, ColorMap colormap,
     		double zoom) throws IOException
     {	AnimeDirection result = new AnimeDirection();
 		
@@ -404,7 +404,7 @@ public class AnimesLoader
 	private static AnimeStep loadStepElement(Element root, String filePath, 
     		double xShift, double yShift, HashMap<String,String> imagesFilenames, 
     		String shadowFilename, double shadowXShift, double shadowYShift, ImageShift boundYShift,
-    		HashMap<String,String> shadowsFilenames, Colormap colormap) throws IOException
+    		HashMap<String,String> shadowsFilenames, ColorMap colormap) throws IOException
     {	AnimeStep result = new AnimeStep();    	
     	
     	// duration
@@ -484,7 +484,7 @@ public class AnimesLoader
 
     private static void loadImageStepElement(Element root, String filePath, 
     		HashMap<String,String> imagesFilenames, 
-    		double xShift, double yShift, Colormap colormap, AnimeStep result) throws IOException
+    		double xShift, double yShift, ColorMap colormap, AnimeStep result) throws IOException
 	{
     	// horizontal shift
     	Attribute attribute = root.getAttribute(XmlNames.XSHIFT);
