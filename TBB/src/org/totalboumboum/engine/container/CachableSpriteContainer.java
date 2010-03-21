@@ -21,7 +21,7 @@ package org.totalboumboum.engine.container;
  * 
  */
 
-public interface Cachable
+public interface CachableSpriteContainer
 {
 
 }

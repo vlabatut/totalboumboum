@@ -61,7 +61,7 @@ public class FiresetMapLoader
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_FIRESETMAP+FileNames.EXTENSION_SCHEMA);
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_FIRESETMAP+FileNames.EXTENSION_XML);
-		FiresetMap result = null;
+		FiresetMap original = null;
 		
 		// caching
 		String cachePath = FilePaths.getCacheFiresPath()+ File.separator;
@@ -71,19 +71,18 @@ public class FiresetMapLoader
 		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getFromMemoryCache(cachePath);
-		if(engineConfiguration.getMemoryCached() && o!=null)
-		{	result = ((FiresetMap)o).deepCopy(zoomFactor);
+		Object o = engineConfiguration.getFromSpriteCache(cachePath);
+		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
+		{	original = ((FiresetMap)o);
 		}
-		else if(engineConfiguration.getFileCached() && cacheFile.exists())
+		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				result = (FiresetMap)oIn.readObject(); //TODO fonction à surcharger
+				original = (FiresetMap)oIn.readObject(); //TODO fonction à surcharger
 				//result.setInstance(instance); 
 				oIn.close();
-				result = result.deepCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -96,26 +95,25 @@ public class FiresetMapLoader
 			}
 		}
 		
-		if(result==null)
+		if(original==null)
 		{	// opening
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			result = loadFiresetmapElement(individualFolder,root);
+			original = loadFiresetmapElement(individualFolder,root);
 			// caching
-			if(engineConfiguration.getMemoryCached())
-			{	engineConfiguration.addToMemoryCache(cachePath,result);
-				result = result.deepCopy(zoomFactor);
+			if(engineConfiguration.isSpriteMemoryCached())
+			{	engineConfiguration.addToSpriteCache(cachePath,original);
 			}
-			if(engineConfiguration.getFileCached())
+			if(engineConfiguration.isSpriteFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
-				oOut.writeObject(result);
+				oOut.writeObject(original);
 				oOut.close();
-				result = result.deepCopy(zoomFactor);
 			}
 		}
 
+		FiresetMap result = original.deepCopy(zoomFactor);
 		return result;
 	}
 

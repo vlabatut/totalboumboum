@@ -65,11 +65,11 @@ public class ThemeLoader
 		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getFromMemoryCache(cachePath);
-		if(engineConfiguration.getMemoryCached() && o!=null)
+		Object o = engineConfiguration.getFromSpriteCache(cachePath);
+		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
 		{	result = ((Theme)o).deepCopy(zoomFactor);
 		}
-		else if(engineConfiguration.getFileCached() && cacheFile.exists())
+		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
@@ -95,11 +95,11 @@ public class ThemeLoader
 			// loading
 			result = loadThemeElement(root,individualFolder);
 			// caching
-			if(engineConfiguration.getMemoryCached())
-			{	engineConfiguration.addToMemoryCache(cachePath,result);
+			if(engineConfiguration.isSpriteMemoryCached())
+			{	engineConfiguration.addToSpriteCache(cachePath,result);
 				result = result.deepCopy(zoomFactor);
 			}
-			if(engineConfiguration.getFileCached())
+			if(engineConfiguration.isSpriteFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);

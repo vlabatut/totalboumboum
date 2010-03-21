@@ -94,7 +94,7 @@ public class AnimesLoader
 		double zoom = RoundVariables.zoomFactor/scale; //TODO no need for that anymore, since it's now resized only after loading
 	//	zoom = 1/scale;
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		if(engineConfiguration.getMemoryCached() || engineConfiguration.getFileCached())
+		if(engineConfiguration.isSpriteMemoryCached() || engineConfiguration.isSpriteFileCached())
 			zoom = 1;
 		
 		// bound height

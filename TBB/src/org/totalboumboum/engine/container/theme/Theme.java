@@ -29,7 +29,7 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.engine.Cachable;
+import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.block.Block;
@@ -39,7 +39,7 @@ import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
 import org.xml.sax.SAXException;
 
 
-public class Theme implements Serializable, Cachable
+public class Theme implements Serializable, CachableSpriteContainer
 {	private static final long serialVersionUID = 1L;
 
 	public static final String DEFAULT_GROUP = "default";

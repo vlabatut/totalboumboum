@@ -1162,7 +1162,7 @@ public class Launcher
 	 */
 	
 	/**
-	 *	there's a work to do on the ImageTools.getCompatibleImage function : when is it exactly necessary?
+	 *	TODO there's a work to do on the ImageTools.getCompatibleImage function : when is it exactly necessary?
 	 */
 	
 	/**
