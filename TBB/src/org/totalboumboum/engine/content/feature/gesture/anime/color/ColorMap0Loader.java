@@ -35,29 +35,29 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
-public class ColormapLoader
+public class ColorMap0Loader
 {
-	public static Colormap loadColormap(String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+	public static ColorMap0 loadColormap(String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
 	{	// opening
 		File dataFile = new File(individualFolder+FileNames.EXTENSION_XML);
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_COLORMAP+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// loading
-		Colormap result = new Colormap(color);
+		ColorMap0 result = new ColorMap0(color);
 		loadColorsElement(root, result);
 		return result;
 	}
     
     @SuppressWarnings("unchecked")
-	private static void loadColorsElement(Element root, Colormap colormap) throws IOException
+	private static void loadColorsElement(Element root, ColorMap0 colormap) throws IOException
     {	// colors
     	List<Element> colorsList = root.getChildren(XmlNames.COLOR);
 		for(int i=0;i<colorsList.size();i++)
 			loadColorElement(colorsList.get(i),colormap);    	
     }
 	
-    private static void loadColorElement(Element root, Colormap colormap) throws IOException
+    private static void loadColorElement(Element root, ColorMap0 colormap) throws IOException
     {	// index
 		int index = Integer.parseInt(root.getAttribute(XmlNames.INDEX).getValue());
 		// RGB
