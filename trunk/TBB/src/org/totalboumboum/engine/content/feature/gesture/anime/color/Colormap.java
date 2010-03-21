@@ -25,21 +25,20 @@ import java.util.HashMap;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
-public class Colormap extends HashMap<Integer,byte[]>
+public class Colormap extends ColorRule
 {	private static final long serialVersionUID = 1L;	
 
 	public Colormap(PredefinedColor color)
-	{	super();
-		this.color = color;
+	{	super(color);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// COLOR			/////////////////////////////////////////////
+	// MAP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PredefinedColor color = null;
-
-	public PredefinedColor getColor()
-	{	return color;	
+	private HashMap<Integer,byte[]> map = new HashMap<Integer, byte[]>();
+	
+	public void addColor(Integer key, byte[] value)
+	{	map.put(key,value);		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -51,7 +50,7 @@ public class Colormap extends HashMap<Integer,byte[]>
 	{	if(!finished)
 		{	finished = true;
 			// misc
-			clear();
+			map.clear();
 		}
 	}
 }

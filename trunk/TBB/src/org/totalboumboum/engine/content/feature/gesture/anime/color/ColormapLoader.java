@@ -68,6 +68,6 @@ public class ColormapLoader
 		// blue
 		colors[2] = (byte)Integer.parseInt(root.getAttribute(XmlNames.BLUE).getValue());
 		// colormap
-		colormap.put(index,colors);
+		colormap.addColor(index,colors);
     }
 }
