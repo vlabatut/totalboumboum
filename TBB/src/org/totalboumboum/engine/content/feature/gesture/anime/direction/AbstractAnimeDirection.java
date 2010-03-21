@@ -21,15 +21,13 @@ package org.totalboumboum.engine.content.feature.gesture.anime.direction;
  * 
  */
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AbstractAnimeStep;
-import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 
 public class AbstractAnimeDirection<T extends AbstractAnimeStep>
 {	private static final long serialVersionUID = 1L;
@@ -53,7 +51,7 @@ public class AbstractAnimeDirection<T extends AbstractAnimeStep>
 	/////////////////////////////////////////////////////////////////
 	// STEPS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<T> steps = new ArrayList<T>(0);
+	protected List<T> steps = new ArrayList<T>(0);
 
 	public Iterator<T> getIterator()
 	{	return steps.iterator();		
@@ -63,7 +61,7 @@ public class AbstractAnimeDirection<T extends AbstractAnimeStep>
 	{	steps.add(as);		
 	}
 	
-	public void addAll(ArrayList<T> l)
+	public void addAll(List<T> l)
 	{	steps.addAll(l);		
 	}
 	
@@ -74,7 +72,7 @@ public class AbstractAnimeDirection<T extends AbstractAnimeStep>
 	/////////////////////////////////////////////////////////////////
 	// NAME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GestureName gestureName = null; //debug
+	protected GestureName gestureName = null; //debug
 
 	public String getName()
 	{	return gestureName+","+direction;
@@ -87,7 +85,7 @@ public class AbstractAnimeDirection<T extends AbstractAnimeStep>
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Direction direction = null; //debug
+	protected Direction direction = null; //debug
 
 	public void setDirection(Direction direction)
 	{	this.direction = direction;
@@ -116,7 +114,7 @@ public class AbstractAnimeDirection<T extends AbstractAnimeStep>
 	/////////////////////////////////////////////////////////////////
 	// REPEAT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean repeat = false;
+	protected boolean repeat = false;
 
 	public boolean getRepeat()
 	{	return repeat;
@@ -129,7 +127,7 @@ public class AbstractAnimeDirection<T extends AbstractAnimeStep>
 	/////////////////////////////////////////////////////////////////
 	// PROPORTIONNAL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean proportional = false;
+	protected boolean proportional = false;
 
 	public boolean getProportional()
 	{	return proportional;
@@ -139,49 +137,6 @@ public class AbstractAnimeDirection<T extends AbstractAnimeStep>
 	{	this.proportional = proportional;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	public AbstractAnimeDirection surfaceCopy()
-	{	AbstractAnimeDirection result = new AbstractAnimeDirection();
-		
-		// steps
-		Iterator<AnimeStep> i = getIterator();
-		while(i.hasNext())
-		{	AnimeStep copyStep = i.next().surfaceCopy(); 
-			result.add(copyStep);		
-		}
-		
-		// various fields
-		result.setGestureName(gestureName);
-		result.setDirection(direction);
-		result.setRepeat(repeat);
-		result.setProportional(proportional);
-		result.setBoundHeight(boundHeight);
-
-		return result;
-	}
-
-	public AbstractAnimeDirection deepCopy(double zoom, PredefinedColor color) throws IOException
-	{	AbstractAnimeDirection result = new AbstractAnimeDirection();
-		
-		// steps
-		Iterator<AnimeStep> i = getIterator();
-		while(i.hasNext())
-		{	AnimeStep copyStep = i.next().deepCopy(zoom,color); 
-			result.add(copyStep);		
-		}
-		
-		// various fields
-		result.gestureName = gestureName;
-		result.direction = direction;
-		result.repeat = repeat;
-		result.proportional = proportional;
-		result.boundHeight = boundHeight*zoom;
-
-		return result;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -65,7 +65,7 @@ public class AnimeStep extends AbstractAnimeStep
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * used when generating a sprite from a factory.
+	 * used when generating a sprite from a factory: images are not copied.
 	 * but for now, animes are just copied because they are not modifiable
 	 * (unlike some other sprite parts)
 	 */

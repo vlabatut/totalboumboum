@@ -21,14 +21,8 @@ package org.totalboumboum.engine.content.feature.gesture.anime.direction;
  * 
  */
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 
 public class AnimeDirection extends AbstractAnimeDirection<AnimeStep> implements Serializable
@@ -37,13 +31,18 @@ public class AnimeDirection extends AbstractAnimeDirection<AnimeStep> implements
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public AnimeDirection surfaceCopy()
+	/**
+	 * used when generating a sprite from a factory: images are not copied.
+	 * but for now, animes are just copied because they are not modifiable
+	 * (unlike some other sprite parts)
+	 */
+/*	public AnimeDirection copy()
 	{	AnimeDirection result = new AnimeDirection();
 		
 		// steps
 		Iterator<AnimeStep> i = getIterator();
 		while(i.hasNext())
-		{	AnimeStep copyStep = i.next().surfaceCopy(); 
+		{	AnimeStep copyStep = i.next().copy(); 
 			result.add(copyStep);		
 		}
 		
@@ -56,27 +55,7 @@ public class AnimeDirection extends AbstractAnimeDirection<AnimeStep> implements
 
 		return result;
 	}
-
-	public AnimeDirection deepCopy(double zoom, PredefinedColor color) throws IOException
-	{	AnimeDirection result = new AnimeDirection();
-		
-		// steps
-		Iterator<AnimeStep> i = getIterator();
-		while(i.hasNext())
-		{	AnimeStep copyStep = i.next().deepCopy(zoom,color); 
-			result.add(copyStep);		
-		}
-		
-		// various fields
-		result.gestureName = gestureName;
-		result.direction = direction;
-		result.repeat = repeat;
-		result.proportional = proportional;
-		result.boundHeight = boundHeight*zoom;
-
-		return result;
-	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

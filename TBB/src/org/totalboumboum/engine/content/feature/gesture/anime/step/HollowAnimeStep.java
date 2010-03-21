@@ -29,6 +29,7 @@ import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.PredefinedColor;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.Colormap;
 
 public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
@@ -38,17 +39,20 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 	// IMAGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private List<String> imagesFileNames = new ArrayList<String>();
+	private List<ColorRule> imagesColorRules = new ArrayList<ColorRule>();
 
 	public List<String> getImagesFileNames()
 	{	return imagesFileNames;
 	}
 	
-	public void addImageFileName(String imageFileName, double xShift, double yShift, Colormap colormap)
+	public void addImageFileName(String imageFileName, double xShift, double yShift, ColorRule colorRule)
 	{	imagesFileNames.add(imageFileName);
 		xShifts.add(xShift);
 		yShifts.add(yShift);
+		imagesColorRules.add(colorRule);
 		Configuration.getEngineConfiguration().addToImageCache(imageFileName,colormap);
 	}
+	
 	
 	/////////////////////////////////////////////////////////////////
 	// SHADOW			/////////////////////////////////////////////
@@ -69,7 +73,7 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * used to clone an abstract HollowFactory to be completed
-	 * by additional data (useless for now, may be usefull later) 
+	 * by additional data (useless for now, might be usefull later) 
 	 */
 /*	public HollowAnimeStep surfaceCopy()
 	{	HollowAnimeStep result = new HollowAnimeStep();
