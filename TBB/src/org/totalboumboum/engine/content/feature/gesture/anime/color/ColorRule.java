@@ -21,23 +21,22 @@ package org.totalboumboum.engine.content.feature.gesture.anime.color;
  * 
  */
 
-import java.util.HashMap;
+import java.io.Serializable;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
-public class ColorRule extends HashMap<Integer,byte[]>
-{	private static final long serialVersionUID = 1L;	
+public abstract class ColorRule implements Serializable
+{	private static final long serialVersionUID = 1L;
 
 	public ColorRule(PredefinedColor color)
-	{	super();
-		this.color = color;
+	{	this.color = color;		
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PredefinedColor color = null;
-
+	protected PredefinedColor color = null;
+	
 	public PredefinedColor getColor()
 	{	return color;	
 	}
@@ -45,13 +44,7 @@ public class ColorRule extends HashMap<Integer,byte[]>
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
+	protected boolean finished = false;
 	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// misc
-			clear();
-		}
-	}
+	public abstract void finish();
 }

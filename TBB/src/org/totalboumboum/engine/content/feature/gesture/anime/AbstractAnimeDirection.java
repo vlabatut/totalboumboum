@@ -22,6 +22,7 @@ package org.totalboumboum.engine.content.feature.gesture.anime;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -29,10 +30,10 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 
-public class AnimeDirection
+public class AbstractAnimeDirection implements Serializable
 {	private static final long serialVersionUID = 1L;
 
-	public AnimeDirection()
+	public AbstractAnimeDirection()
 	{	gestureName= null;
 		steps = new ArrayList<AnimeStep>(0);
 		repeat = false;
@@ -143,8 +144,8 @@ public class AnimeDirection
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public AnimeDirection surfaceCopy()
-	{	AnimeDirection result = new AnimeDirection();
+	public AbstractAnimeDirection surfaceCopy()
+	{	AbstractAnimeDirection result = new AbstractAnimeDirection();
 		
 		// steps
 		Iterator<AnimeStep> i = getIterator();
@@ -163,8 +164,8 @@ public class AnimeDirection
 		return result;
 	}
 
-	public AnimeDirection deepCopy(double zoom, PredefinedColor color) throws IOException
-	{	AnimeDirection result = new AnimeDirection();
+	public AbstractAnimeDirection deepCopy(double zoom, PredefinedColor color) throws IOException
+	{	AbstractAnimeDirection result = new AbstractAnimeDirection();
 		
 		// steps
 		Iterator<AnimeStep> i = getIterator();
