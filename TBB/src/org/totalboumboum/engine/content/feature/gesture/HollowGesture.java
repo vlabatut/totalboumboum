@@ -55,26 +55,27 @@ public class HollowGesture extends AbstractGesture<HollowAnimeDirection,HollowTr
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * returns a copy whose trajectories are the same and animes
-	 * are hollow copies (images not copied, just the key to retrieve them in the cache)
-	 * Used to generate a factory inheriting from an existing one
+	 * used to clone an abstract HollowFactory to be completed
+	 * by additional data. All the content is keeped as is (same objects)
+	 * but the containers are cloned, since their own content may be changed
+	 * through inheritance.
 	 */
-	public Gesture copy()
-	{	Gesture result = new Gesture();
+	public HollowGesture copy()
+	{	HollowGesture result = new HollowGesture();
 	
 		// name
 		result.setName(name);
 		
 		// animes
-		for(Entry<Direction,AnimeDirection> e: animes.entrySet())
-		{	AnimeDirection anime = e.getValue();
+		for(Entry<Direction,HollowAnimeDirection> e: animes.entrySet())
+		{	HollowAnimeDirection anime = e.getValue();
 			Direction direction = e.getKey();
 			result.addAnimeDirection(anime,direction);
 		}
 		
 		// trajectories
-		for(Entry<Direction,TrajectoryDirection> e: trajectories.entrySet())
-		{	TrajectoryDirection temp = e.getValue();
+		for(Entry<Direction,HollowTrajectoryDirection> e: trajectories.entrySet())
+		{	HollowTrajectoryDirection temp = e.getValue();
 			result.addTrajectoryDirection(temp);
 		}
 
@@ -96,10 +97,9 @@ public class HollowGesture extends AbstractGesture<HollowAnimeDirection,HollowTr
 	}
 
 	/**
-	 * like surface copy, except images are copied, and possibly
-	 * rescaled and recolored.
-	 * Used to generate a new factory from a neutral, cached, one
-	 * @throws IOException 
+	 * used when generating an actual Factory from a HollowFactory.
+	 * Images names are replaced by the actual images, scalable stuff
+	 * is scaled, etc.
 	 */
 	public Gesture fill(double zoomFactor, double scale, PredefinedColor color) throws IOException
 	{	Gesture result = new Gesture();

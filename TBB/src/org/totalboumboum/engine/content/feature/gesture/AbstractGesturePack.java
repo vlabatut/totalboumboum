@@ -24,21 +24,12 @@ package org.totalboumboum.engine.content.feature.gesture;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-public abstract class AbstractGesturePack<T extends AbstractGesture>
-{	
-	public AbstractGesturePack()
-	{	// init the gesture pack with all possible gestures
-		for(GestureName name: GestureName.values())
-		{	Gesture gesture = new Gesture();
-			gesture.setName(name);
-			addGesture(gesture,name);			
-		}
-	}
-	
+public abstract class AbstractGesturePack<T extends AbstractGesture<?,?>>
+{		
 	/////////////////////////////////////////////////////////////////
 	// SPRITE NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String spriteName;
+	protected String spriteName;
 	
 	public String getSpriteName()
 	{	return spriteName;
@@ -51,15 +42,15 @@ public abstract class AbstractGesturePack<T extends AbstractGesture>
 	/////////////////////////////////////////////////////////////////
 	// GESTURES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final HashMap<GestureName,Gesture> gestures = new HashMap<GestureName, Gesture>();
+	protected final HashMap<GestureName,T> gestures = new HashMap<GestureName, T>();
 	
-	public Gesture getGesture(GestureName name)
-	{	Gesture result = gestures.get(name);
+	public T getGesture(GestureName name)
+	{	T result = gestures.get(name);
 		//NOTE créer le gesture s'il est manquant?
 		return result;
 	}
 
-	public void addGesture(Gesture gesture, GestureName name)
+	public void addGesture(T gesture, GestureName name)
 	{	gestures.put(name,gesture);
 	}
 	
@@ -76,8 +67,8 @@ public abstract class AbstractGesturePack<T extends AbstractGesture>
 	{	if(!finished)
 		{	finished = true;
 			// gestures
-			for(Entry<GestureName,Gesture> e: gestures.entrySet())
-			{	Gesture temp = e.getValue();
+			for(Entry<GestureName,T> e: gestures.entrySet())
+			{	T temp = e.getValue();
 				temp.finish();
 			}
 			gestures.clear();
