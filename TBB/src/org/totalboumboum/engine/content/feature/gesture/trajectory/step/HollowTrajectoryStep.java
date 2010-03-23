@@ -25,6 +25,26 @@ public class HollowTrajectoryStep extends AbstractTrajectoryStep
 {	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * used to clone an abstract HollowFactory to be completed
+	 * by additional data (useless for now, might be usefull later) 
+	 */
+/*	public HollowTrajectoryStep copy()
+	{	HollowTrajectoryStep result = new HollowTrajectoryStep();
+	
+		result.boundZShift = boundZShift;
+		result.duration = duration;
+		result.finished = finished;
+		result.xShift = xShift;
+		result.yShift = yShift;
+		result.zShift = zShift;
+		
+		return result;
+	}
+*/	
+	/**
+	 * used when generating an actual Factory from a HollowFactory
+	 */
 	public TrajectoryStep fill(double zoomFactor)
 	{	TrajectoryStep result = new TrajectoryStep();
 		

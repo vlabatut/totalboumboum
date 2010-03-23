@@ -55,6 +55,47 @@ public class HollowGesture extends AbstractGesture<HollowAnimeDirection,HollowTr
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
+	 * returns a copy whose trajectories are the same and animes
+	 * are hollow copies (images not copied, just the key to retrieve them in the cache)
+	 * Used to generate a factory inheriting from an existing one
+	 */
+	public Gesture copy()
+	{	Gesture result = new Gesture();
+	
+		// name
+		result.setName(name);
+		
+		// animes
+		for(Entry<Direction,AnimeDirection> e: animes.entrySet())
+		{	AnimeDirection anime = e.getValue();
+			Direction direction = e.getKey();
+			result.addAnimeDirection(anime,direction);
+		}
+		
+		// trajectories
+		for(Entry<Direction,TrajectoryDirection> e: trajectories.entrySet())
+		{	TrajectoryDirection temp = e.getValue();
+			result.addTrajectoryDirection(temp);
+		}
+
+		// modulations
+		for(SelfModulation e: selfModulations)
+			result.addModulation(e);
+		for(OtherModulation e: otherModulations)
+			result.addModulation(e);
+		for(ActorModulation e: actorModulations)
+			result.addModulation(e);
+		for(TargetModulation e: targetModulations)
+			result.addModulation(e);
+		for(ThirdModulation e: thirdModulations)
+			result.addModulation(e);
+		
+		result.finished = finished;
+		
+		return result;
+	}
+
+	/**
 	 * like surface copy, except images are copied, and possibly
 	 * rescaled and recolored.
 	 * Used to generate a new factory from a neutral, cached, one
