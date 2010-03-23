@@ -22,6 +22,7 @@ package org.totalboumboum.engine.content.feature.gesture;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -34,51 +35,41 @@ import org.totalboumboum.engine.content.feature.action.Circumstance;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
+import org.totalboumboum.engine.content.feature.gesture.anime.direction.HollowAnimeDirection;
 import org.totalboumboum.engine.content.feature.gesture.modulation.AbstractModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.SelfModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
-import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
+import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-public class HollowGesture
-{	public HollowGesture()
+public class HollowGesture extends AbstractGesture implements Serializable
+{	private static final long serialVersionUID = 1L;
+
+	public HollowGesture()
 	{	
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private GestureName name;
-	
-	public GestureName getName()
-	{	return name;
-	}
-	
-	public void setName(GestureName name)
-	{	this.name = name;
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// ANIMATIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final HashMap<Direction,AnimeDirection> animes = new HashMap<Direction, AnimeDirection>();
+	private final HashMap<Direction,HollowAnimeDirection> animes = new HashMap<Direction, HollowAnimeDirection>();
 	
-	public AnimeDirection getAnimeDirection(Direction direction)
-	{	AnimeDirection result = animes.get(direction);
+	public HollowAnimeDirection getAnimeDirection(Direction direction)
+	{	HollowAnimeDirection result = animes.get(direction);
 		return result;
 	}
 	
-	public void addAnimeDirection(AnimeDirection anime, Direction direction)
+	public void addAnimeDirection(HollowAnimeDirection anime, Direction direction)
 	{	animes.put(direction,anime);
 	}
 	
 	public boolean hasNoAnimes()
 	{	return animes.isEmpty();		
 	}
-	
+/*	
 	public void setAnimes(HollowGesture gesture)
 	{	for(Entry<Direction,AnimeDirection> e: gesture.animes.entrySet())
 		{	Direction direction = e.getKey();
@@ -86,7 +77,7 @@ public class HollowGesture
 			addAnimeDirection(anime,direction);		
 		}
 	}
-	
+*/	
 /*	public void copyAnimesFrom(Gesture gesture)
 	{	for(Entry<Direction,AnimeDirection> e: gesture.animes.entrySet())
 		{	AnimeDirection cp = e.getValue();

@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.feature.gesture.trajectory;
+package org.totalboumboum.engine.content.feature.gesture.trajectory.direction;
 
 /*
  * Total Boum Boum
@@ -27,6 +27,7 @@ import java.util.Iterator;
 
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 
