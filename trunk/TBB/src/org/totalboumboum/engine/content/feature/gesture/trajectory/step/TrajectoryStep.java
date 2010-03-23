@@ -29,7 +29,12 @@ public class TrajectoryStep extends AbstractTrajectoryStep implements Serializab
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public TrajectoryStep copy()
+	/**
+	 * used when generating a sprite from a factory: everything is cloned.
+	 * but for now, trajectories are just re-used because they are not modifiable
+	 * (unlike some other sprite parts)
+	 */
+/*	public TrajectoryStep copy()
 	{	TrajectoryStep result = new TrajectoryStep();
 	
 		result.boundZShift = boundZShift;
@@ -41,4 +46,5 @@ public class TrajectoryStep extends AbstractTrajectoryStep implements Serializab
 		
 		return result;
 	}
+*/	
 }

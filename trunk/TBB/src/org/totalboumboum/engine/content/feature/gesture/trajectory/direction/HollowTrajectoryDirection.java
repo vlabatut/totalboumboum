@@ -31,6 +31,38 @@ public class HollowTrajectoryDirection extends AbstractTrajectoryDirection<Hollo
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * used to clone an abstract HollowFactory to be completed
+	 * by additional data (useless for now, might be usefull later) 
+	 */
+/*	public HollowTrajectoryDirection copy()
+	{	HollowTrajectoryDirection result = new HollowTrajectoryDirection();
+	
+		for(HollowTrajectoryStep step: steps)
+		{	HollowTrajectoryStep temp = step.copy();
+			result.add(temp);
+		}
+		result.direction = direction;
+		result.finished = finished;
+		result.forcedPositionTime = forcedPositionTime;
+		result.forcedXPosition = forcedXPosition;
+		result.forcedYPosition = forcedYPosition;
+		result.forcedZPosition = forcedZPosition;
+		result.forceXPosition = forceXPosition;
+		result.forceYPosition = forceYPosition;
+		result.forceZPosition = forceZPosition;
+		result.gestureName = gestureName;
+		result.proportional = proportional;
+		result.repeat = repeat;
+		result.xInteraction = xInteraction;
+		result.yInteraction = yInteraction;
+		
+		return result;
+	}
+*/
+	/**
+	 * used when generating an actual Factory from a HollowFactory
+	 */
 	public TrajectoryDirection fill(double zoomFactor)
 	{	TrajectoryDirection result = new TrajectoryDirection();
 		Iterator<HollowTrajectoryStep> it = steps.iterator();

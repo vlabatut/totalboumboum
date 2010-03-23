@@ -22,7 +22,6 @@ package org.totalboumboum.engine.content.feature.gesture.trajectory.direction;
  */
 
 import java.io.Serializable;
-import java.util.Iterator;
 
 import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
 
@@ -32,12 +31,16 @@ public class TrajectoryDirection extends AbstractTrajectoryDirection<TrajectoryS
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public TrajectoryDirection copy()
+	/**
+	 * used when generating a sprite from a factory: everything is cloned.
+	 * but for now, trajectories are just re-used because they are not modifiable
+	 * (unlike some other sprite parts)
+	 */
+/*	public TrajectoryDirection copy()
 	{	TrajectoryDirection result = new TrajectoryDirection();
 	
-		Iterator<TrajectoryStep> it = steps.iterator();
-		while(it.hasNext())
-		{	TrajectoryStep temp = it.next().copy();
+		for(TrajectoryStep step: steps)
+		{	TrajectoryStep temp = step.copy();
 			result.add(temp);
 		}
 		result.direction = direction;
@@ -57,4 +60,5 @@ public class TrajectoryDirection extends AbstractTrajectoryDirection<TrajectoryS
 		
 		return result;
 	}
+*/
 }

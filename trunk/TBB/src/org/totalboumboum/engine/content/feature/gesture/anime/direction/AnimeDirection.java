@@ -32,8 +32,8 @@ public class AnimeDirection extends AbstractAnimeDirection<AnimeStep> implements
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * used when generating a sprite from a factory: images are not copied.
-	 * but for now, animes are just copied because they are not modifiable
+	 * used when generating a sprite from a factory: images are not cloned.
+	 * but for now, animes are just re-used because they are not modifiable
 	 * (unlike some other sprite parts)
 	 */
 /*	public AnimeDirection copy()
