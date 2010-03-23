@@ -41,10 +41,10 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.OtherModulati
 import org.totalboumboum.engine.content.feature.gesture.modulation.SelfModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
-import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
+import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-public class AbstractGesture implements Serializable
+public class AbstractGesture
 {	private static final long serialVersionUID = 1L;
 
 	public AbstractGesture()
@@ -54,7 +54,7 @@ public class AbstractGesture implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GestureName name;
+	protected GestureName name;
 	
 	public GestureName getName()
 	{	return name;
@@ -64,42 +64,6 @@ public class AbstractGesture implements Serializable
 	{	this.name = name;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// ANIMATIONS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private final HashMap<Direction,AnimeDirection> animes = new HashMap<Direction, AnimeDirection>();
-	
-	public AnimeDirection getAnimeDirection(Direction direction)
-	{	AnimeDirection result = animes.get(direction);
-		return result;
-	}
-	
-	public void addAnimeDirection(AnimeDirection anime, Direction direction)
-	{	animes.put(direction,anime);
-	}
-	
-	public boolean hasNoAnimes()
-	{	return animes.isEmpty();		
-	}
-	
-	public void setAnimes(AbstractGesture gesture)
-	{	for(Entry<Direction,AnimeDirection> e: gesture.animes.entrySet())
-		{	Direction direction = e.getKey();
-			AnimeDirection anime = e.getValue();
-			addAnimeDirection(anime,direction);		
-		}
-	}
-	
-/*	public void copyAnimesFrom(Gesture gesture)
-	{	for(Entry<Direction,AnimeDirection> e: gesture.animes.entrySet())
-		{	AnimeDirection cp = e.getValue();
-			Direction direction = e.getKey();
-			//AnimeDirection anime = cp.copy();
-			AnimeDirection anime = cp;
-			gesture.addAnimeDirection(anime,direction);
-		}		
-	}
-*/
 	/////////////////////////////////////////////////////////////////
 	// TRAJECTORIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

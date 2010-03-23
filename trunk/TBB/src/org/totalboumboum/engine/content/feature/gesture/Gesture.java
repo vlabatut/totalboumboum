@@ -40,27 +40,11 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.OtherModulati
 import org.totalboumboum.engine.content.feature.gesture.modulation.SelfModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
-import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
+import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 public class Gesture
-{	public Gesture()
-	{	
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private GestureName name;
-	
-	public GestureName getName()
-	{	return name;
-	}
-	
-	public void setName(GestureName name)
-	{	this.name = name;
-	}
-
+{	
 	/////////////////////////////////////////////////////////////////
 	// ANIMATIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -78,7 +62,7 @@ public class Gesture
 	public boolean hasNoAnimes()
 	{	return animes.isEmpty();		
 	}
-	
+/*	
 	public void setAnimes(Gesture gesture)
 	{	for(Entry<Direction,AnimeDirection> e: gesture.animes.entrySet())
 		{	Direction direction = e.getKey();
@@ -86,7 +70,7 @@ public class Gesture
 			addAnimeDirection(anime,direction);		
 		}
 	}
-	
+*/
 /*	public void copyAnimesFrom(Gesture gesture)
 	{	for(Entry<Direction,AnimeDirection> e: gesture.animes.entrySet())
 		{	AnimeDirection cp = e.getValue();

@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.feature.gesture.trajectory;
+package org.totalboumboum.engine.content.feature.gesture.trajectory.step;
 
 /*
  * Total Boum Boum
@@ -27,12 +27,12 @@ import org.totalboumboum.engine.content.feature.ImageShift;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 
-public class TrajectoryStep implements Serializable
+public class AbstractTrajectoryStep implements Serializable
 {	private static final long serialVersionUID = 1L;
 
 	private long duration;
 	
-	public TrajectoryStep()
+	public AbstractTrajectoryStep()
 	{	xShift = 0;
 		yShift = 0;
 		zShift = 0;
@@ -123,8 +123,8 @@ public class TrajectoryStep implements Serializable
 	}
 */	
 
-	public TrajectoryStep deepCopy(double zoomFactor)
-	{	TrajectoryStep result = new TrajectoryStep();
+	public AbstractTrajectoryStep deepCopy(double zoomFactor)
+	{	AbstractTrajectoryStep result = new AbstractTrajectoryStep();
 		
 		// location shifts
 		result.xShift = xShift*zoomFactor;
