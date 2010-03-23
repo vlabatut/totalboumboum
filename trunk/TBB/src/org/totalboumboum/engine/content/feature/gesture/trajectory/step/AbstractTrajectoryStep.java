@@ -21,31 +21,17 @@ package org.totalboumboum.engine.content.feature.gesture.trajectory.step;
  * 
  */
 
-import java.io.Serializable;
-
 import org.totalboumboum.engine.content.feature.ImageShift;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-
-public class AbstractTrajectoryStep implements Serializable
-{	private static final long serialVersionUID = 1L;
-
-	private long duration;
-	
-	public AbstractTrajectoryStep()
-	{	xShift = 0;
-		yShift = 0;
-		zShift = 0;
-		duration = 0;
-		boundZShift = ImageShift.DOWN;
-	}	
-	
+public abstract class AbstractTrajectoryStep
+{	
 	/////////////////////////////////////////////////////////////////
 	// LOCATION SHIFTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private double xShift;
-	private double yShift;
-	private double zShift;
+	protected double xShift = 0;
+	protected double yShift = 0;
+	protected double zShift = 0;
 
 	public double getXShift()
 	{	return xShift;
@@ -74,7 +60,7 @@ public class AbstractTrajectoryStep implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// IMAGE SHIFT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ImageShift boundZShift;
+	protected ImageShift boundZShift = ImageShift.DOWN;
 
 	public ImageShift getBoundZShift()
 	{	return boundZShift;
@@ -87,9 +73,12 @@ public class AbstractTrajectoryStep implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// DURATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	protected long duration = 0;
+	
 	public long getDuration()
 	{	return duration;
 	}
+	
 	public void setDuration(long duration)
 	{	this.duration = duration;
 	}	
@@ -97,7 +86,7 @@ public class AbstractTrajectoryStep implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
+	protected boolean finished = false;
 	
 	public void finish()
 	{	if(!finished)
@@ -105,37 +94,5 @@ public class AbstractTrajectoryStep implements Serializable
 			// misc
 			boundZShift = null;
 		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/*	
-	public TrajectoryStep surfaceCopy()
-	{	TrajectoryStep result = new TrajectoryStep();
-		result.boundZShift = boundZShift;
-		result.duration = duration;
-		result.finished = finished;
-		result.xShift = xShift;
-		result.yShift = yShift;
-		result.zShift = zShift;
-		return result;
-	}
-*/	
-
-	public AbstractTrajectoryStep deepCopy(double zoomFactor)
-	{	AbstractTrajectoryStep result = new AbstractTrajectoryStep();
-		
-		// location shifts
-		result.xShift = xShift*zoomFactor;
-		result.yShift = yShift*zoomFactor;
-		result.zShift = zShift*zoomFactor;
-
-		result.boundZShift = boundZShift;
-		result.duration = duration;
-		
-		result.finished = finished;
-
-		return result;
 	}
 }

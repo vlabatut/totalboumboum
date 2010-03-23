@@ -21,24 +21,23 @@ package org.totalboumboum.engine.content.feature.gesture.trajectory.step;
  * 
  */
 
-import java.io.Serializable;
-
-public class TrajectoryStep extends AbstractTrajectoryStep implements Serializable
-{	private static final long serialVersionUID = 1L;
-
-	/////////////////////////////////////////////////////////////////
+public class HollowTrajectoryStep extends AbstractTrajectoryStep
+{	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public TrajectoryStep copy()
+	public TrajectoryStep fill(double zoomFactor)
 	{	TrajectoryStep result = new TrajectoryStep();
-	
+		
+		// location shifts
+		result.xShift = xShift*zoomFactor;
+		result.yShift = yShift*zoomFactor;
+		result.zShift = zShift*zoomFactor;
+
 		result.boundZShift = boundZShift;
 		result.duration = duration;
-		result.finished = finished;
-		result.xShift = xShift;
-		result.yShift = yShift;
-		result.zShift = zShift;
 		
+		result.finished = finished;
+
 		return result;
 	}
 }

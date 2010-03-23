@@ -21,39 +21,43 @@ package org.totalboumboum.engine.content.feature.gesture.trajectory.direction;
  * 
  */
 
-import java.io.Serializable;
 import java.util.Iterator;
 
+import org.totalboumboum.engine.content.feature.gesture.trajectory.step.HollowTrajectoryStep;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
 
-public class TrajectoryDirection extends AbstractTrajectoryDirection<TrajectoryStep> implements Serializable
-{	private static final long serialVersionUID = 1L;
-	
+public class HollowTrajectoryDirection extends AbstractTrajectoryDirection<HollowTrajectoryStep>
+{	
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public TrajectoryDirection copy()
+	public TrajectoryDirection fill(double zoomFactor)
 	{	TrajectoryDirection result = new TrajectoryDirection();
-	
-		Iterator<TrajectoryStep> it = steps.iterator();
+		Iterator<HollowTrajectoryStep> it = steps.iterator();
 		while(it.hasNext())
-		{	TrajectoryStep temp = it.next().copy();
+		{	TrajectoryStep temp = it.next().fill(zoomFactor);
 			result.add(temp);
 		}
+		result.gestureName = gestureName;
 		result.direction = direction;
-		result.finished = finished;
+
 		result.forcedPositionTime = forcedPositionTime;
-		result.forcedXPosition = forcedXPosition;
-		result.forcedYPosition = forcedYPosition;
-		result.forcedZPosition = forcedZPosition;
+		result.forcedXPosition = forcedXPosition*zoomFactor;
+		result.forcedYPosition = forcedYPosition*zoomFactor;
+		result.forcedZPosition = forcedZPosition*zoomFactor;
+		
 		result.forceXPosition = forceXPosition;
 		result.forceYPosition = forceYPosition;
 		result.forceZPosition = forceZPosition;
-		result.gestureName = gestureName;
+		
 		result.proportional = proportional;
+		
 		result.repeat = repeat;
-		result.xInteraction = xInteraction;
-		result.yInteraction = yInteraction;
+		
+		result.xInteraction = xInteraction*zoomFactor;
+		result.yInteraction = yInteraction*zoomFactor;
+		
+		result.finished = finished;
 		
 		return result;
 	}
