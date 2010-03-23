@@ -21,15 +21,7 @@ package org.totalboumboum.engine.content.feature.gesture;
  * 
  */
 
-import java.util.Map.Entry;
-
-import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
-import org.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
-import org.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
-import org.totalboumboum.engine.content.feature.gesture.modulation.SelfModulation;
-import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
-import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
 
 public class Gesture extends AbstractGesture<AnimeDirection,TrajectoryDirection>
@@ -45,11 +37,11 @@ public class Gesture extends AbstractGesture<AnimeDirection,TrajectoryDirection>
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * returns a copy whose trajectories are the same and animes
-	 * are hollow copies (images not copied, just the key to retrieve them in the cache)
-	 * Used to generate a factory inheriting from an existing one
+	 * used when generating a sprite from a factory: the content is the
+	 * same, only the containers are copied.
+	 * useless for now, since nothing is modified in-game.
 	 */
-	public Gesture copy()
+/*	public Gesture copy()
 	{	Gesture result = new Gesture();
 	
 		// name
@@ -84,4 +76,5 @@ public class Gesture extends AbstractGesture<AnimeDirection,TrajectoryDirection>
 		
 		return result;
 	}
+*/	
 }

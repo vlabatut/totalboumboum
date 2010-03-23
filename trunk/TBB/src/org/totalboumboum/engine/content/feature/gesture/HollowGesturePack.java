@@ -22,95 +22,65 @@ package org.totalboumboum.engine.content.feature.gesture;
  */
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.Map.Entry;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
-public class HollowGesturePack
-{	
-	/////////////////////////////////////////////////////////////////
-	// COLORS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private PredefinedColor color;
+public class HollowGesturePack extends AbstractGesturePack<HollowGesture> implements Serializable
+{	private static final long serialVersionUID = 1L;
 
-	public PredefinedColor getColor()
-	{	return color;
-	}
-	
-	public void setColor(PredefinedColor color)
-	{	this.color = color;
+	public HollowGesturePack()
+	{	// init the gesture pack with all possible gestures
+		for(GestureName name: GestureName.values())
+		{	HollowGesture gesture = new HollowGesture();
+			gesture.setName(name);
+			addGesture(gesture,name);			
+		}
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// GESTURES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private final HashMap<GestureName,Gesture> gestures = new HashMap<GestureName, Gesture>();
-	
-	public Gesture getGesture(GestureName name)
-	{	Gesture result = gestures.get(name);
-		//NOTE créer le gesture s'il est manquant?
-		return result;
-	}
-
-	public void addGesture(Gesture gesture, GestureName name)
-	{	gestures.put(name,gesture);
-	}
-	
-	public boolean containsGesture(GestureName name)
-	{	return gestures.containsKey(name);		
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public HollowGesturePack surfaceCopy()
+	/**
+	 * used to clone an abstract HollowFactory to be completed
+	 * by additional data. All the content is keeped as is (same objects)
+	 * but the containers are cloned, since their own content may be changed
+	 * through inheritance.
+	 */
+	public HollowGesturePack copy()
 	{	HollowGesturePack result = new HollowGesturePack();
 		// gestures
-		for(Entry<GestureName,Gesture> e: gestures.entrySet())
-		{	Gesture cp = e.getValue().surfaceCopy();
+		for(Entry<GestureName,HollowGesture> e: gestures.entrySet())
+		{	HollowGesture cp = e.getValue().copy();
 			GestureName nm = e.getKey();
 			result.addGesture(cp,nm);
 		}
 		
 		// misc
-		result.scale = scale;
-		result.color = color;
 		result.spriteName = spriteName;
 		return result;
 	}
 	
-	public HollowGesturePack deepCopy(double zoomFactor, PredefinedColor color) throws IOException
-	{	HollowGesturePack result = new HollowGesturePack();
+	/**
+	 * used when generating an actual Factory from a HollowFactory.
+	 * Images names are replaced by the actual images, scalable stuff
+	 * is scaled, etc.
+	 */
+	public GesturePack fill(double zoomFactor, double scale, PredefinedColor color) throws IOException
+	{	GesturePack result = new GesturePack();
 		
 		// gestures
-		for(Entry<GestureName,Gesture> e: gestures.entrySet())
-		{	Gesture cp = e.getValue().deepCopy(zoomFactor,scale,color);
+		for(Entry<GestureName,HollowGesture> e: gestures.entrySet())
+		{	Gesture cp = e.getValue().fill(zoomFactor,scale,color);
 			GestureName nm = e.getKey();
 			result.addGesture(cp,nm);
 		}
 		
 		// misc
-		result.scale = scale;
-		result.color = color;
+		result.setScale(scale);
+		result.setColor(color);
 		
 		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// gestures
-			for(Entry<GestureName,Gesture> e: gestures.entrySet())
-			{	Gesture temp = e.getValue();
-				temp.finish();
-			}
-			gestures.clear();
-		}
 	}
 }
