@@ -40,10 +40,14 @@ public class ColorRulesMapLoader
 	{	ColorRulesMap result = new ColorRulesMap();
 		
 		// folder
+		result.setLocalPath(individualFolder);
 		String localFilePath = individualFolder;
+		String folderName = null;
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		if(attribute!=null)
-			localFilePath = localFilePath+File.separator+attribute.getValue();
+		{	folderName = attribute.getValue();
+			localFilePath = localFilePath+File.separator+folderName;
+		}
 		
 		// colormaps
 		List<Element> clrs = root.getChildren();
@@ -56,7 +60,7 @@ public class ColorRulesMapLoader
 				colorRule = loadColormapElement(temp,localFilePath,color);
 			// colorsprite
 			else if(temp.getName().equals(XmlNames.COLORSPRITE))
-				colorRule = loadColorspriteElement(temp,color);
+				colorRule = loadColorspriteElement(temp,folderName,color);
 			result.setColorRule(color, colorRule);
 		}
 		
@@ -73,9 +77,11 @@ public class ColorRulesMapLoader
 		return colormap;
 	}
 	
-	private static ColorFolder loadColorspriteElement(Element root, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+	private static ColorFolder loadColorspriteElement(Element root, String folderName, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
 	{	// folder
 		String colorFolder = root.getAttribute(XmlNames.FOLDER).getValue().trim();
+		if(folderName!=null)
+			colorFolder = folderName+File.separator+colorFolder;
 		ColorFolder result = new ColorFolder(color,colorFolder);
 		return result;
 	} 

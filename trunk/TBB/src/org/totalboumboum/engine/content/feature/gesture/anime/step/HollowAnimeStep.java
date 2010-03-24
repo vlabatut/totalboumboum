@@ -35,19 +35,6 @@ import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMa
 public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 {	private static final long serialVersionUID = 1L;
 
-	public HollowAnimeStep(String path)
-	{	this.path = path;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PATH				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String path = null;
-
-	public String getPath()
-	{	return path;	
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// IMAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -87,11 +74,12 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 	 * used to clone an abstract HollowFactory to be completed
 	 * by additional data (useless for now, might be usefull later) 
 	 */
-/*	public HollowAnimeStep surfaceCopy()
-	{	HollowAnimeStep result = new HollowAnimeStep(step);
+/*	public HollowAnimeStep copy()
+	{	HollowAnimeStep result = new HollowAnimeStep();
 		
 		// image
 		result.imagesFileNames.addAll(imagesFileNames);
+		result.imagesColorRulesMaps.addAll(imagesColorRulesMaps);
 		
 		// duration
 		result.setDuration(duration);
@@ -101,7 +89,7 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 		result.yShifts.addAll(yShifts);
 		
 		// shadow
-		result.setShadowFileName(shadowFileName);
+		result.setShadowFileName(shadowFileName,shadowColorRulesMap);
 		result.setShadowXShift(shadowXShift);
 		result.setShadowYShift(shadowYShift);
 		
@@ -122,7 +110,7 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 		{	String imageFileName = imagesFileNames.get(i);
 			ColorRulesMap colorRulesMap = imagesColorRulesMaps.get(i);
 			ColorRule colorRule = colorRulesMap.getColorRule(color);
-			BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(path,imageFileName,colorRule,zoom);
+			BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(imageFileName,colorRule,zoom);
 			double xShift = xShifts.get(i);
 			double yShift = yShifts.get(i);
 			result.addImage(image,xShift,yShift);
@@ -134,7 +122,7 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 		// shadow
 		if(shadowFileName!=null)
 		{	ColorRule colorRule = shadowColorRulesMap.getColorRule(color);
-			BufferedImage shadow = Configuration.getEngineConfiguration().retrieveFromImageCache(path,shadowFileName,colorRule,zoom);
+			BufferedImage shadow = Configuration.getEngineConfiguration().retrieveFromImageCache(shadowFileName,colorRule,zoom);
 			result.setShadow(shadow,shadowXShift,shadowYShift);
 		}
 		

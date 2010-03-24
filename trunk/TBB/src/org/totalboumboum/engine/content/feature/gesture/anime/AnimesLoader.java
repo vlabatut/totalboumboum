@@ -23,7 +23,6 @@ package org.totalboumboum.engine.content.feature.gesture.anime;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -31,62 +30,48 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.engine.EngineConfiguration;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ImageShift;
-import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
-import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
-import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
-import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.engine.content.feature.gesture.HollowGesture;
+import org.totalboumboum.engine.content.feature.gesture.HollowGesturePack;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMapLoader;
+import org.totalboumboum.engine.content.feature.gesture.anime.direction.HollowAnimeDirection;
+import org.totalboumboum.engine.content.feature.gesture.anime.step.HollowAnimeStep;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.images.ImageTools;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 public class AnimesLoader
 {	
-	public static void loadAnimes(String folderPath, GesturePack pack, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException
-	{	loadAnimes(folderPath,pack,null,animesReplacements);
-	}
 /**
  * TODO
  * - loaders pr animes/traj
  * - p-e qu'on peut résumer sprite factory à une seule classe
  * - les HollowSpriteFact seraient spécialisés
- * - ils contiendraient les ensemble d'images/shadows ? ou bien ça va dans les HollowGesturePack ? (<< yess !) 
+ * - appel à loadAnimes : avant faut init les animes replacements dans le hollowGesturePack
  */
-	public static void loadAnimes(String folderPath, GesturePack pack, PredefinedColor color, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException
-	{	pack.setColor(color);
-		File dataFile = new File(folderPath+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_XML);
+	public static void loadAnimes(String folderPath, HollowGesturePack pack) throws IOException, ParserConfigurationException, SAXException
+	{	File dataFile = new File(folderPath+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
 			String schemaFolder = FilePaths.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-			// loading
-			loadAnimesElement(root,folderPath,pack,color);
-			// completing
-			completeAnimes(pack,animesReplacements);
+			// loading existing animes
+			loadAnimesElement(root,folderPath,pack);
+			// completing missing animes with replacement animes
+			completeAnimes(pack);
 		}
 	}
     
-    private static void loadAnimesElement(Element root, String individualFolder, GesturePack pack, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
-    {	HashMap<String,String>imagesFilenames = new HashMap<String, String>();
-    	HashMap<String,String>shadowsFilenames = new HashMap<String, String>();
-    	ColorMap colormap = null;
-    	String colorFolder = null;
-		
-    	// local folder
+    private static void loadAnimesElement(Element root, String individualFolder, HollowGesturePack pack) throws IOException, ParserConfigurationException, SAXException
+    {	// local folder
     	String localFilePath = individualFolder;
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		if(attribute!=null)
@@ -99,136 +84,111 @@ public class AnimesLoader
 			scale = Double.parseDouble(attribute.getValue());
 		pack.setScale(scale);
 		
-		// zoom
-		double zoom = RoundVariables.zoomFactor/scale; //TODO no need for that anymore, since it's now resized only after loading
-	//	zoom = 1/scale;
-		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		if(engineConfiguration.isSpriteMemoryCached() || engineConfiguration.isSpriteFileCached())
-			zoom = 1;
-		
 		// bound height
 		double boundHeight = 0;
 		attribute = root.getAttribute(XmlNames.BOUND_HEIGHT);
 		if(attribute!=null)
-		{	double temp = Double.parseDouble(attribute.getValue());
-			boundHeight = zoom*temp;
-		}
+			boundHeight = Double.parseDouble(attribute.getValue());
+		pack.setBoundHeight(boundHeight);
 		
 		// colors ?
-		pack.setColor(color);
-		Object obj;
 		Element elt = root.getChild(XmlNames.COLORS);
-		if(elt!=null && color!=null)
-		{	obj = ImageTools.loadColorsElement(elt,localFilePath,color);
-			if(obj instanceof ColorMap)
-				colormap = (ColorMap)obj;
-			else
-				colorFolder = (String)obj;
-		}
-//TODO ici c plus comme ça : on charge toutes les couleurs, tant qu'on y est
-//TODO décomposition base+couleur+reste au niveau du step
-		if(colorFolder!=null)
-			localFilePath = localFilePath+File.separator + colorFolder;
+		ColorRulesMap colorRulesMap = null;
+		if(elt!=null)
+			colorRulesMap = ColorRulesMapLoader.loadColorsElement(elt,localFilePath);
+		pack.setColorRulesMap(colorRulesMap);
 		
 		// shadows ?
 		elt = root.getChild(XmlNames.SHADOWS);
 		if(elt!=null)
-			loadShadowsElement(elt,localFilePath,shadowsFilenames);
-//TODO paquets d'images gérés exclusivement dans HollowXxx		
+			loadShadowsElement(elt,pack);
+
 		// images ?
 		elt = root.getChild(XmlNames.IMAGES);
 		if(elt!=null)
-			loadImagesElement(elt,localFilePath,imagesFilenames,colormap);
+			loadImagesElement(elt,pack);
 		
 		// gestures
 		Element gestures = root.getChild(XmlNames.GESTURES);
-		loadGesturesElement(gestures,boundHeight,localFilePath,pack,shadowsFilenames,imagesFilenames,colormap,zoom);
+		loadGesturesElement(gestures,pack);
 	}
     
 	@SuppressWarnings("unchecked")
-	private static void loadImagesElement(Element root, String individualFolder,
-    		HashMap<String,String> imagesFilenames, ColorMap colormap) throws IOException
+	private static void loadImagesElement(Element root, HollowGesturePack pack) throws IOException
     {	// folder
-    	String localFilePath = individualFolder;
+    	String localFilePath = "";
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		if(attribute!=null)
-			localFilePath = localFilePath+File.separator+attribute.getValue();
+			localFilePath = attribute.getValue()+File.separator;
 		
 		// images
     	List<Element> imgs = root.getChildren(XmlNames.IMAGE);
     	Iterator<Element> i = imgs.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
-    		loadImageElement(tp,localFilePath,imagesFilenames,colormap);
+    		loadImageElement(tp,localFilePath,pack);
     	}
     }
     
-    private static void loadImageElement(Element root, String individualFolder,
-    		HashMap<String,String> imagesFilenames, ColorMap colormap) throws IOException
+    private static void loadImageElement(Element root, String individualFolder, HollowGesturePack pack) throws IOException
     {	// folder
     	String localFilePath = individualFolder;
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		if(attribute!=null)
-			localFilePath = localFilePath+File.separator+attribute.getValue();
+			localFilePath = localFilePath+attribute.getValue()+File.separator;
 		
 		// file
-    	String localPath = localFilePath+File.separator;
-    	localPath = localPath + root.getAttribute(XmlNames.FILE).getValue().trim();
+    	String localPath = localFilePath + root.getAttribute(XmlNames.FILE).getValue().trim();
     	
     	// name
     	String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
     	// result
-    	imagesFilenames.put(name,localPath);
+    	pack.addCommonImageFileName(name,localPath);
     }
     
     @SuppressWarnings("unchecked")
-	private static void loadShadowsElement(Element root, String individualFolder,
-    		HashMap<String,String> shadowsFilenames) throws IOException
+	private static void loadShadowsElement(Element root, HollowGesturePack pack) throws IOException
     {	// folder
-    	String localFilePath = individualFolder;
+    	String localFilePath = "";
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		if(attribute!=null)
-			localFilePath = localFilePath+File.separator+attribute.getValue();
+			localFilePath = attribute.getValue()+File.separator;
 		
 		// shadows
     	List<Element> shdws = root.getChildren(XmlNames.SHADOW);
     	Iterator<Element> i = shdws.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
-    		loadShadowElement(tp,localFilePath,shadowsFilenames);
+    		loadShadowElement(tp,localFilePath,pack);
     	}
     }
     
-    private static void loadShadowElement(Element root, String individualFolder,
-    		HashMap<String,String> shadowsFilenames) throws IOException
+    private static void loadShadowElement(Element root, String individualFolder, HollowGesturePack pack) throws IOException
     {	// file
-    	String localPath = individualFolder+File.separator;
-    	localPath = localPath + root.getAttribute(XmlNames.FILE).getValue().trim();
+    	String localPath = individualFolder + root.getAttribute(XmlNames.FILE).getValue().trim();
     	
     	// name
     	String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
     	// result
-    	shadowsFilenames.put(name,localPath);
+    	pack.addShadowFileName(name,localPath);
     }
     
     @SuppressWarnings("unchecked")
-	private static void loadGesturesElement(Element root, double boundHeight, String filePath, GesturePack pack,
-			HashMap<String,String> shadowsFilenames, HashMap<String,String> imagesFilenames, ColorMap colormap,
-    		double zoom) throws IOException
+	private static void loadGesturesElement(Element root, HollowGesturePack pack) throws IOException
     {	// folder
-    	String localFilePath = filePath;
+    	String localFilePath = "";
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		if(attribute!=null)
-			localFilePath = localFilePath+File.separator+attribute.getValue();
+			localFilePath = localFilePath+attribute.getValue()+File.separator;
 		
 		// gestures
     	List<Element> gesturesList = root.getChildren();
     	Iterator<Element> i = gesturesList.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
-			loadGestureElement(tp,pack,boundHeight,localFilePath,shadowsFilenames,imagesFilenames,colormap,zoom);
+			loadGestureElement(tp,pack,localFilePath);
     	}
     }
     
@@ -236,19 +196,17 @@ public class AnimesLoader
      * load a gesture (and if required all the associated directions) 
      */
     @SuppressWarnings("unchecked")
-	private static void loadGestureElement(Element root, GesturePack pack, double boundHeight, String filePath,
-    		HashMap<String,String> shadowsFilenames, HashMap<String,String> imagesFilenames, ColorMap colormap,
-    		double zoom) throws IOException
+	private static void loadGestureElement(Element root, HollowGesturePack pack, String filePath) throws IOException
     {	// name
     	String name = root.getAttribute(XmlNames.NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);
-    	Gesture gesture = pack.getGesture(gestureName);
+    	HollowGesture gesture = pack.getGesture(gestureName);
     	
     	// images folder
     	String localFilePath = filePath;
     	Attribute attribute = root.getAttribute(XmlNames.FOLDER);
     	if(attribute!=null)
-			localFilePath = localFilePath+File.separator+attribute.getValue();
+			localFilePath = localFilePath+attribute.getValue()+File.separator;
 		
     	// repeat flag
 		String repeatStr = root.getAttribute(XmlNames.REPEAT).getValue();
@@ -266,24 +224,25 @@ public class AnimesLoader
 		double xShift = 0;
 		attribute = root.getAttribute(XmlNames.XSHIFT);
 		if(attribute!=null)
-		{	double temp = Double.parseDouble(attribute.getValue());
-			xShift = zoom*temp;
-		}
+			xShift = Double.parseDouble(attribute.getValue());
+
 		// vertical shift
 		double yShift = 0;
 		attribute = root.getAttribute(XmlNames.YSHIFT);
 		if(attribute!=null)
-		{	double temp = Double.parseDouble(attribute.getValue());
-			yShift = zoom*temp;
-		}
+			yShift = Double.parseDouble(attribute.getValue());
 		
 		// shadow
 		String shadowFilename = null;
+		ColorRulesMap shadowColorRulesMap = null;
 		attribute = root.getAttribute(XmlNames.SHADOW);
 		if(attribute!=null)
-		{	shadowFilename = shadowsFilenames.get(attribute.getValue().trim());
+		{	String key = attribute.getValue().trim();
+			shadowFilename = pack.getShadowFileName(key);
+			shadowColorRulesMap = pack.getShadowColorRulesMap(key);
 			if(shadowFilename==null)
-			{	shadowFilename = localFilePath+File.separator+root.getAttribute(XmlNames.SHADOW).getValue().trim();
+			{	shadowFilename = localFilePath+root.getAttribute(XmlNames.SHADOW).getValue().trim();
+				shadowColorRulesMap = pack.getColorRulesMap();
 			}
 		}
 		
@@ -291,17 +250,13 @@ public class AnimesLoader
 		double shadowXShift = 0;
 		attribute = root.getAttribute(XmlNames.SHADOW_XSHIFT);
 		if(attribute!=null)
-		{	double temp = Double.parseDouble(attribute.getValue());
-			shadowXShift = zoom*temp;
-		}
+			shadowXShift = Double.parseDouble(attribute.getValue());
 		
 		// shadow vertical shift
 		double shadowYShift = 0;
 		attribute = root.getAttribute(XmlNames.SHADOW_YSHIFT);
 		if(attribute!=null)
-		{	double temp = Double.parseDouble(attribute.getValue());
-			shadowYShift = zoom*temp;
-		}
+			shadowYShift = Double.parseDouble(attribute.getValue());
 		
 		// bound shift
 		ImageShift boundYShift = ImageShift.DOWN;
@@ -314,9 +269,8 @@ public class AnimesLoader
     	Iterator<Element> i = directionsList.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
-			AnimeDirection animeDirection = loadDirectionElement(gestureName,boundHeight,repeat,proportional,tp,localFilePath,xShift,yShift,
-					shadowFilename,shadowXShift,shadowYShift,boundYShift
-					,shadowsFilenames,imagesFilenames,colormap,zoom);
+			HollowAnimeDirection animeDirection = loadDirectionElement(gestureName,pack,repeat,proportional,tp,localFilePath,xShift,yShift,
+					shadowFilename,shadowColorRulesMap,shadowXShift,shadowYShift,boundYShift);
 			gesture.addAnimeDirection(animeDirection,animeDirection.getDirection());
 		}
     	completeDirections(gesture);
@@ -326,13 +280,11 @@ public class AnimesLoader
      * load a direction for a given gesture
      */
     @SuppressWarnings("unchecked")
-	private static AnimeDirection loadDirectionElement(GestureName gestureName, double boundHeight, boolean repeat, boolean proportional, 
+	private static HollowAnimeDirection loadDirectionElement(GestureName gestureName, HollowGesturePack pack, boolean repeat, boolean proportional, 
     		Element root, String filePath, 
     		double xShift, double yShift, 
-    		String shadowFilename, double shadowXShift, double shadowYShift, ImageShift boundYShift,
-    		HashMap<String,String> shadowsFilenames, HashMap<String,String> imagesFilenames, ColorMap colormap,
-    		double zoom) throws IOException
-    {	AnimeDirection result = new AnimeDirection();
+    		String shadowFilename, ColorRulesMap shadowColorRulesMap, double shadowXShift, double shadowYShift, ImageShift boundYShift) throws IOException
+    {	HollowAnimeDirection result = new HollowAnimeDirection();
 		
     	// direction
 		String strDirection = root.getAttribute(XmlNames.NAME).getValue().trim();
@@ -341,7 +293,7 @@ public class AnimesLoader
 			direction = Direction.valueOf(strDirection.toUpperCase(Locale.ENGLISH));
     	result.setDirection(direction);
     	result.setGestureName(gestureName);
-    	result.setBoundHeight(boundHeight);
+    	result.setBoundHeight(pack.getBoundHeight());
     	result.setRepeat(repeat);
     	result.setProportional(proportional);
 		
@@ -349,44 +301,39 @@ public class AnimesLoader
     	String localFilePath = filePath;
     	Attribute attribute = root.getAttribute(XmlNames.FOLDER);
     	if(attribute!=null)
-			localFilePath = localFilePath+File.separator+attribute.getValue();
+			localFilePath = localFilePath+attribute.getValue()+File.separator;
 		
     	// horizontal shift
 		attribute = root.getAttribute(XmlNames.XSHIFT);
 		if(attribute!=null)
-		{	double temp = Double.parseDouble(attribute.getValue());
-			xShift = zoom*temp;
-		}
+			xShift = Double.parseDouble(attribute.getValue());
 		
 		// vertical shift
 		attribute = root.getAttribute(XmlNames.YSHIFT);
 		if(attribute!=null)
-		{	double temp = Double.parseDouble(attribute.getValue());
-			yShift = zoom*temp;
-		}
+			yShift = Double.parseDouble(attribute.getValue());
 		
 		// shadow
 		attribute = root.getAttribute(XmlNames.SHADOW);
 		if(attribute!=null)
-		{	shadowFilename = shadowsFilenames.get(attribute.getValue().trim());
+		{	String key = attribute.getValue().trim();
+			shadowFilename = pack.getShadowFileName(key);
+			shadowColorRulesMap = pack.getShadowColorRulesMap(key);
 			if(shadowFilename==null)
-			{	shadowFilename = filePath+File.separator+attribute.getValue().trim();
+			{	shadowFilename = filePath+attribute.getValue().trim();
+				shadowColorRulesMap = pack.getColorRulesMap();
 			}
 		}
 		
 		// shadow horizontal shift
 		attribute = root.getAttribute(XmlNames.SHADOW_XSHIFT);
 		if(attribute!=null)
-		{	double temp = Double.parseDouble(attribute.getValue());
-			shadowXShift = zoom*temp;
-		}
+			shadowXShift = Double.parseDouble(attribute.getValue());
 		
 		// shadow vertical shift
 		attribute = root.getAttribute(XmlNames.SHADOW_YSHIFT);
 		if(attribute!=null)
-		{	double temp = Double.parseDouble(attribute.getValue());
-			shadowYShift = zoom*temp;
-		}
+			shadowYShift = Double.parseDouble(attribute.getValue());
 		
 		// bound shift
 		attribute = root.getAttribute(XmlNames.BOUND_YSHIFT);
@@ -398,7 +345,7 @@ public class AnimesLoader
     	Iterator<Element> i = stepsList.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
-    		AnimeStep animeStep = loadStepElement(tp,localFilePath,xShift,yShift,imagesFilenames,shadowFilename,shadowXShift,shadowYShift,boundYShift,shadowsFilenames,colormap);
+    		HollowAnimeStep animeStep = loadStepElement(tp,pack,localFilePath,xShift,yShift,shadowFilename,shadowColorRulesMap,shadowXShift,shadowYShift,boundYShift);
     		result.add(animeStep);
     	}
     	return result;
@@ -408,12 +355,11 @@ public class AnimesLoader
      * load a step of an animation
      */
     @SuppressWarnings("unchecked")
-	private static AnimeStep loadStepElement(Element root, String filePath, 
-    		double xShift, double yShift, HashMap<String,String> imagesFilenames, 
-    		String shadowFilename, double shadowXShift, double shadowYShift, ImageShift boundYShift,
-    		HashMap<String,String> shadowsFilenames, ColorMap colormap) throws IOException
-    {	AnimeStep result = new AnimeStep();    	
-    	
+	private static HollowAnimeStep loadStepElement(Element root, HollowGesturePack pack, String filePath, 
+    		double xShift, double yShift,
+    		String shadowFilename, ColorRulesMap shadowColorRulesMap, double shadowXShift, double shadowYShift, ImageShift boundYShift) throws IOException
+    {	HollowAnimeStep result = new HollowAnimeStep();    	
+    
     	// duration
     	int duration = 0;
     	Attribute attribute = root.getAttribute(XmlNames.DURATION);
@@ -438,12 +384,15 @@ public class AnimesLoader
 		// shadow
 		attribute = root.getAttribute(XmlNames.SHADOW);
 		if(attribute!=null)
-		{	shadowFilename = shadowsFilenames.get(attribute.getValue().trim());
+		{	String key = attribute.getValue().trim();
+			shadowFilename = pack.getShadowFileName(key);
+			shadowColorRulesMap = pack.getCommonImageRulesMap(key);
 			if(shadowFilename==null)
-			{	shadowFilename = filePath+File.separator+attribute.getValue().trim();
+			{	shadowFilename = filePath+attribute.getValue().trim();
+				shadowColorRulesMap = pack.getColorRulesMap();
 			}
 		}
-		result.setShadowFileName(shadowFilename);
+		result.setShadowFileName(shadowFilename,shadowColorRulesMap);
 		
 		// shadow horizontal shift
 		attribute = root.getAttribute(XmlNames.SHADOW_XSHIFT);
@@ -471,27 +420,28 @@ public class AnimesLoader
 		attribute = root.getAttribute(XmlNames.FILE);
 		if(attribute!=null)
 		{	String strImage = attribute.getValue().trim();
-			String imageFileName = filePath+File.separator+strImage;
-			result.addImageFileName(imageFileName,xShift,yShift,colormap);
+			String imageFileName = filePath+strImage;
+			ColorRulesMap colorRulesMap = pack.getColorRulesMap();
+			result.addImageFileName(imageFileName,xShift,yShift,colorRulesMap);
 		}
 		attribute = root.getAttribute(XmlNames.NAME);
 		if(attribute!=null)
-		{	String strImage = attribute.getValue().trim();
-			String imageFileName = imagesFilenames.get(strImage);
-			result.addImageFileName(imageFileName,xShift,yShift,colormap);
+		{	String key = attribute.getValue().trim();
+			String imageFileName = pack.getCommonImageFileName(key);
+			ColorRulesMap colorRulesMap = pack.getCommonImageRulesMap(key);
+			result.addImageFileName(imageFileName,xShift,yShift,colorRulesMap);
 		}
 		
 		// other images
 		List<Element> imagesElt = root.getChildren();
 		for(Element imageElt: imagesElt)
-			loadImageStepElement(imageElt,filePath,imagesFilenames,xShift,yShift,colormap,result);
+			loadImageStepElement(imageElt,pack,filePath,xShift,yShift,result);
 			
 		return result;
     }	
 
-    private static void loadImageStepElement(Element root, String filePath, 
-    		HashMap<String,String> imagesFilenames, 
-    		double xShift, double yShift, ColorMap colormap, AnimeStep result) throws IOException
+    private static void loadImageStepElement(Element root, HollowGesturePack pack, String filePath, 
+    		double xShift, double yShift, HollowAnimeStep result) throws IOException
 	{
     	// horizontal shift
     	Attribute attribute = root.getAttribute(XmlNames.XSHIFT);
@@ -511,15 +461,17 @@ public class AnimesLoader
     	attribute = root.getAttribute(XmlNames.FILE);
 		if(attribute!=null)
 		{	String strImage = attribute.getValue().trim();
-			String imageFileName = filePath+File.separator+strImage;
-			result.addImageFileName(imageFileName,xShift,yShift,colormap);
+			String imageFileName = filePath+strImage;
+			ColorRulesMap colorRulesMap = pack.getColorRulesMap();
+			result.addImageFileName(imageFileName,xShift,yShift,colorRulesMap);
 		}
 		else
 		{	attribute = root.getAttribute(XmlNames.NAME);
 			if(attribute!=null)
-			{	String strImage = attribute.getValue().trim();
-				String imageFileName = imagesFilenames.get(strImage);
-				result.addImageFileName(imageFileName,xShift,yShift,colormap);
+			{	String key = attribute.getValue().trim();
+				String imageFileName = pack.getCommonImageFileName(key);
+				ColorRulesMap colorRulesMap = pack.getCommonImageRulesMap(key);
+				result.addImageFileName(imageFileName,xShift,yShift,colorRulesMap);
 			}
 		}
 	}
@@ -530,30 +482,30 @@ public class AnimesLoader
      * @param pack
      * @param animesReplacements
      */
-    private static void completeAnimes(GesturePack pack, HashMap<GestureName,GestureName> animesReplacements)
-    {	for(Entry<GestureName,GestureName> e: animesReplacements.entrySet())
+    private static void completeAnimes(HollowGesturePack pack)
+    {	for(Entry<GestureName,GestureName> e: pack.getAnimesReplacements().entrySet())
     	{	GestureName gest = e.getKey();
     		GestureName repl = e.getValue();
-    		completeAnime(pack,animesReplacements,gest,repl);
+    		completeAnime(pack,gest,repl);
     	}    	
     }
     
-    private static void completeAnime(GesturePack pack, HashMap<GestureName,GestureName> animesReplacements, GestureName gestName, GestureName replName)
+    private static void completeAnime(HollowGesturePack pack, GestureName gestName, GestureName replName)
     {	if(replName!=null)
-    	{	Gesture gesture = pack.getGesture(gestName);
+    	{	HollowGesture gesture = pack.getGesture(gestName);
 	    	// create the gesture if necessary
 	    	if(gesture==null)
-	    	{	gesture = new Gesture();
+	    	{	gesture = new HollowGesture();
 	    		gesture.setName(gestName);
 	    	}
 	    	// complete its animes if necessary
 	    	if(gesture.hasNoAnimes())
 	    	{	// get the replacement animes
-	    		GestureName replName2 = animesReplacements.get(replName);
+	    		GestureName replName2 = pack.getAnimesReplacements().get(replName);
 	        	// TODO if a compulsory anime is missing, should be detected here (except for abstract sprite, where it doesn't matter)
 	    		if(replName2!=null)
-					completeAnime(pack,animesReplacements,replName,replName2);
-				Gesture replacement = pack.getGesture(replName);
+					completeAnime(pack,replName,replName2);
+	    		HollowGesture replacement = pack.getGesture(replName);
 				// set it in the considered gesture
 				gesture.setAnimes(replacement);
 	    	}
@@ -566,7 +518,7 @@ public class AnimesLoader
      * @param pack
      * @param animesReplacements
      */
-	private static void completeDirections(Gesture gesture)
+	private static void completeDirections(HollowGesture gesture)
 	{	if(!gesture.hasNoAnimes())
 		{	Direction directions[] = Direction.values();
 			for(Direction direction: directions)
@@ -574,27 +526,27 @@ public class AnimesLoader
 		}
     }
     
-    private static void completeDirection(Gesture gesture, Direction direction)
+    private static void completeDirection(HollowGesture gesture, Direction direction)
     {	if(gesture.getAnimeDirection(direction)==null)
     	{	if(direction==Direction.NONE)
-		    {	AnimeDirection anime = gesture.getAnimeDirection(Direction.DOWN);
+		    {	HollowAnimeDirection anime = gesture.getAnimeDirection(Direction.DOWN);
 		    	if(anime==null)
-	    		{	anime = new AnimeDirection();
+	    		{	anime = new HollowAnimeDirection();
 	    			anime.setDirection(direction);
 	    			anime.setGestureName(gesture.getName());
-	    			AnimeStep as = new AnimeStep();
+	    			HollowAnimeStep as = new HollowAnimeStep();
 	    			anime.add(as);
 	    		}
 		    	gesture.addAnimeDirection(anime,Direction.NONE);
 		    }
 	    	else if(direction.isPrimary())
-	    	{	AnimeDirection anime = gesture.getAnimeDirection(Direction.NONE);
+	    	{	HollowAnimeDirection anime = gesture.getAnimeDirection(Direction.NONE);
 	    		gesture.addAnimeDirection(anime,direction);
 	    	}
 	    	else // composite
 	    	{	Direction primary = direction.getHorizontalPrimary();
 	    		completeDirection(gesture,primary);
-	    		AnimeDirection anime = gesture.getAnimeDirection(primary);
+	    		HollowAnimeDirection anime = gesture.getAnimeDirection(primary);
 	    		gesture.addAnimeDirection(anime,direction);
 	    	}
 	    }
