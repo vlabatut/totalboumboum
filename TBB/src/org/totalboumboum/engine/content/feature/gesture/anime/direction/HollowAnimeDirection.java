@@ -37,12 +37,12 @@ public class HollowAnimeDirection extends AbstractAnimeDirection<HollowAnimeStep
 	 * used to clone an abstract HollowFactory to be completed
 	 * by additional data (useless for now, might be usefull later) 
 	 */
-/*	public HollowAnimeDirection surfaceCopy()
+/*	public HollowAnimeDirection copy()
 	{	HollowAnimeDirection result = new HollowAnimeDirection();
 		
 		// steps
 		for(HollowAnimeStep as: steps)
-		{	AnimeStep copyStep = as.surfaceCopy(); 
+		{	HollowAnimeStep copyStep = as.copy(); 
 			result.add(copyStep);		
 		}
 		

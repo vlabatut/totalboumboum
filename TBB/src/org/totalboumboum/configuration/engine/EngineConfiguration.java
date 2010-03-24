@@ -179,8 +179,8 @@ public class EngineConfiguration
 	 * Note: the color parameter only indicates the use of a colormap, 
 	 * it should be null if no colormap is used (even in the case of a colored sprite).
 	 */
-	public BufferedImage retrieveFromImageCache(String basePath, String imagePath, ColorRule colorRule, double zoom) throws IOException
-    {	return imageCache.retrieveImage(basePath,imagePath,colorRule,zoom);
+	public BufferedImage retrieveFromImageCache(String imagePath, ColorRule colorRule, double zoom) throws IOException
+    {	return imageCache.retrieveImage(imagePath,colorRule,zoom);
     }
     
     public void clearImageCache()

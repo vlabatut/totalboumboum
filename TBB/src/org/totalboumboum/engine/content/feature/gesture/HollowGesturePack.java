@@ -23,9 +23,11 @@ package org.totalboumboum.engine.content.feature.gesture;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map.Entry;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMap;
 
 public class HollowGesturePack extends AbstractGesturePack<HollowGesture> implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -39,6 +41,106 @@ public class HollowGesturePack extends AbstractGesturePack<HollowGesture> implem
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// BOUND HEIGHT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/* used at loading only */
+	private transient double boundHeight = 0;
+	
+	public double getBoundHeight()
+	{	return boundHeight;
+	}
+
+	public void setBoundHeight(double boundHeight)
+	{	this.boundHeight = boundHeight;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COLOR RULES MAP	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/* used at loading only */
+	private transient ColorRulesMap colorRulesMap = null;
+	
+	public ColorRulesMap getColorRulesMap()
+	{	return colorRulesMap;
+	}
+
+	public void setColorRulesMap(ColorRulesMap colorRulesMap)
+	{	this.colorRulesMap = colorRulesMap;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SCALE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private double scale;
+	
+	public double getScale()
+	{	return scale;
+	}
+	
+	public void setScale(double scale)
+	{	this.scale = scale;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ANIMES REPLACEMENTS	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<GestureName,GestureName> animesReplacements = new HashMap<GestureName, GestureName>();
+	
+	public HashMap<GestureName,GestureName> getAnimesReplacements()
+	{	return animesReplacements;
+	}
+
+	public void setAnimesReplacements(HashMap<GestureName,GestureName> animesReplacements)
+	{	this.animesReplacements = animesReplacements;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SHADOWS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<String,String> shadowsFileNames = new HashMap<String,String>();
+	private HashMap<String,ColorRulesMap> shadowsColorRulesMaps = new HashMap<String,ColorRulesMap>();
+
+	public String getShadowFileName(String key)
+	{	return shadowsFileNames.get(key);
+	}
+	
+	public ColorRulesMap getShadowColorRulesMap(String key)
+	{	return shadowsColorRulesMaps.get(key);
+	}
+	
+	public void addShadowFileName(String key, String imageFileName, ColorRulesMap colorRulesMap)
+	{	shadowsFileNames.put(key,imageFileName);
+		shadowsColorRulesMaps.put(key,colorRulesMap);
+	}
+	public void addShadowFileName(String key, String imageFileName)
+	{	shadowsFileNames.put(key,imageFileName);
+		shadowsColorRulesMaps.put(key,colorRulesMap);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COMMON IMAGES	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<String,String> commonImagesFileNames = new HashMap<String,String>();
+	private HashMap<String,ColorRulesMap> commonImagesColorRulesMaps = new HashMap<String,ColorRulesMap>();
+
+	public String getCommonImageFileName(String key)
+	{	return commonImagesFileNames.get(key);
+	}
+	
+	public ColorRulesMap getCommonImageRulesMap(String key)
+	{	return commonImagesColorRulesMaps.get(key);
+	}
+
+	public void addCommonImageFileName(String key, String imageFileName, ColorRulesMap colorRulesMap)
+	{	commonImagesFileNames.put(key,imageFileName);
+		commonImagesColorRulesMaps.put(key,colorRulesMap);
+	}
+	public void addCommonImageFileName(String key, String imageFileName)
+	{	commonImagesFileNames.put(key,imageFileName);
+		commonImagesColorRulesMaps.put(key,colorRulesMap);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -57,8 +159,15 @@ public class HollowGesturePack extends AbstractGesturePack<HollowGesture> implem
 			result.addGesture(cp,nm);
 		}
 		
+		// common images
+		result.commonImagesFileNames.putAll(commonImagesFileNames);
+		result.commonImagesColorRulesMaps.putAll(commonImagesColorRulesMaps);
+		
+		// shadows
+		
 		// misc
 		result.spriteName = spriteName;
+		result.scale = scale;
 		return result;
 	}
 	
@@ -67,7 +176,7 @@ public class HollowGesturePack extends AbstractGesturePack<HollowGesture> implem
 	 * Images names are replaced by the actual images, scalable stuff
 	 * is scaled, etc.
 	 */
-	public GesturePack fill(double zoomFactor, double scale, PredefinedColor color) throws IOException
+	public GesturePack fill(double zoomFactor, PredefinedColor color) throws IOException
 	{	GesturePack result = new GesturePack();
 		
 		// gestures
@@ -78,7 +187,6 @@ public class HollowGesturePack extends AbstractGesturePack<HollowGesture> implem
 		}
 		
 		// misc
-		result.setScale(scale);
 		result.setColor(color);
 		
 		return result;

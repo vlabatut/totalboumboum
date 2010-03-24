@@ -30,6 +30,19 @@ public class ColorRulesMap implements Serializable
 {	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
+	// LOCAL PATH		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String localPath = "";
+	
+	public String getLocalPath()
+	{	return localPath;
+	}
+
+	public void setLocalPath(String localPath)
+	{	this.localPath = localPath;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// MAP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private HashMap<PredefinedColor,ColorRule> colorRules = new HashMap<PredefinedColor, ColorRule>(); 
@@ -39,7 +52,8 @@ public class ColorRulesMap implements Serializable
 	}
 
 	public void setColorRule(PredefinedColor color, ColorRule colorRule)
-	{	colorRules.put(color,colorRule);		
+	{	colorRules.put(color,colorRule);
+		colorRule.setParent(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////

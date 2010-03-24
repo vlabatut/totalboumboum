@@ -39,10 +39,11 @@ public class ImageCache
 	/////////////////////////////////////////////////////////////////
 	private HashMap<String,CachedImage> imageMap = new HashMap<String, CachedImage>();
 
-	public BufferedImage retrieveImage(String basePath, String imagePath, ColorRule colorRule, double zoom) throws IOException
+	public BufferedImage retrieveImage(String imagePath, ColorRule colorRule, double zoom) throws IOException
 	{	BufferedImage result = null;
 		String path = null;
 		ColorMap colorMap = null;
+		String basePath = colorRule.getParent().getLocalPath();
 		
 		// indexed colors
 		if(colorRule instanceof ColorMap)
