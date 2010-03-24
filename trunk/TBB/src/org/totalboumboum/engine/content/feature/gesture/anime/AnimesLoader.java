@@ -58,7 +58,13 @@ public class AnimesLoader
 	public static void loadAnimes(String folderPath, GesturePack pack, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException
 	{	loadAnimes(folderPath,pack,null,animesReplacements);
 	}
-	
+/**
+ * TODO
+ * - loaders pr animes/traj
+ * - p-e qu'on peut résumer sprite factory à une seule classe
+ * - les HollowSpriteFact seraient spécialisés
+ * - ils contiendraient les ensemble d'images/shadows ? ou bien ça va dans les HollowGesturePack ? (<< yess !) 
+ */
 	public static void loadAnimes(String folderPath, GesturePack pack, PredefinedColor color, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException
 	{	pack.setColor(color);
 		File dataFile = new File(folderPath+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_XML);
