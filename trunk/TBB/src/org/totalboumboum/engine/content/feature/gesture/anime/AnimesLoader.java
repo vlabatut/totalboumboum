@@ -49,13 +49,6 @@ import org.xml.sax.SAXException;
 
 public class AnimesLoader
 {	
-/**
- * TODO
- * - loaders pr animes/traj
- * - p-e qu'on peut résumer sprite factory à une seule classe
- * - les HollowSpriteFact seraient spécialisés
- * - appel à loadAnimes : avant faut init les animes replacements dans le hollowGesturePack
- */
 	public static void loadAnimes(String folderPath, HollowGesturePack pack) throws IOException, ParserConfigurationException, SAXException
 	{	File dataFile = new File(folderPath+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_XML);
 		if(dataFile.exists())

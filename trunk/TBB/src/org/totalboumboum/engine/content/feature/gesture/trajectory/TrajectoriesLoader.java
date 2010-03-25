@@ -36,11 +36,11 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.engine.EngineConfiguration;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ImageShift;
-import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
-import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
-import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
+import org.totalboumboum.engine.content.feature.gesture.HollowGesture;
+import org.totalboumboum.engine.content.feature.gesture.HollowGesturePack;
+import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.HollowTrajectoryDirection;
+import org.totalboumboum.engine.content.feature.gesture.trajectory.step.HollowTrajectoryStep;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -50,7 +50,7 @@ import org.xml.sax.SAXException;
 
 public class TrajectoriesLoader
 {	
-	public static void loadTrajectories(String individualFolder, GesturePack pack) throws ParserConfigurationException, SAXException, IOException
+	public static void loadTrajectories(String individualFolder, HollowGesturePack pack) throws ParserConfigurationException, SAXException, IOException
 	{	File dataFile = new File(individualFolder+File.separator+FileNames.FILE_TRAJECTORIES+FileNames.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
@@ -63,7 +63,7 @@ public class TrajectoriesLoader
 	}
 	
     @SuppressWarnings("unchecked")
-	private static void loadTrajectories(Element root, GesturePack pack) throws IOException
+	private static void loadTrajectories(Element root, HollowGesturePack pack) throws IOException
 	{	List<Element> gesturesList = root.getChildren();
 		Iterator<Element> i = gesturesList.iterator();
 		while(i.hasNext())
@@ -76,7 +76,7 @@ public class TrajectoriesLoader
      * load a gesture (and if required all the associated directions) 
      */
     @SuppressWarnings("unchecked")
-	private static void loadGestureElement(Element root, GesturePack pack) throws IOException
+	private static void loadGestureElement(Element root, HollowGesturePack pack) throws IOException
     {	// zoom
     	double zoomFactor = RoundVariables.zoomFactor;
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
@@ -86,7 +86,7 @@ public class TrajectoriesLoader
     	// name
 		String name = root.getAttribute(XmlNames.NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);
-		Gesture gesture = pack.getGesture(gestureName);
+		HollowGesture gesture = pack.getGesture(gestureName);
 		
     	// repeat flag
 		String repeatStr = root.getAttribute(XmlNames.REPEAT).getValue();
@@ -121,7 +121,7 @@ public class TrajectoriesLoader
 		Iterator<Element> i = directionsList.iterator();
 		while(i.hasNext())
 		{	Element tp = i.next();
-			TrajectoryDirection trajectoryDirection = loadDirectionElement(gestureName,tp,zoomFactor,repeat,xInteraction,yInteraction,proportional);
+			HollowTrajectoryDirection trajectoryDirection = loadDirectionElement(gestureName,tp,zoomFactor,repeat,xInteraction,yInteraction,proportional);
 			gesture.addTrajectoryDirection(trajectoryDirection);
 		}
     }
@@ -130,9 +130,9 @@ public class TrajectoriesLoader
      * load a direction for a given gesture
      */
     @SuppressWarnings("unchecked")
-	private static TrajectoryDirection loadDirectionElement(GestureName gestureName, Element root,double zoomFactor,
+	private static HollowTrajectoryDirection loadDirectionElement(GestureName gestureName, Element root,double zoomFactor,
     		boolean repeat, double xInteraction, double yInteraction, boolean proportional) throws IOException
-    {	TrajectoryDirection result = new TrajectoryDirection();
+    {	HollowTrajectoryDirection result = new HollowTrajectoryDirection();
     	result.setRepeat(repeat);
     	result.setGestureName(gestureName);
  		result.setProportional(proportional);
@@ -203,7 +203,7 @@ public class TrajectoriesLoader
 			Iterator<Element> i = stepsList.iterator();
 			while(i.hasNext())
 			{	Element tp = i.next();
-				TrajectoryStep trajectoryStep = loadStepElement(tp,zoomFactor);
+				HollowTrajectoryStep trajectoryStep = loadStepElement(tp,zoomFactor);
 				result.add(trajectoryStep);
 			}
 		}
@@ -214,8 +214,8 @@ public class TrajectoriesLoader
     /**
      * load a step of an animation
      */
-    private static TrajectoryStep loadStepElement(Element root, double zoomFactor) throws IOException
-    {	TrajectoryStep result = new TrajectoryStep();
+    private static HollowTrajectoryStep loadStepElement(Element root, double zoomFactor) throws IOException
+    {	HollowTrajectoryStep result = new HollowTrajectoryStep();
     	String strDuration = root.getAttribute(XmlNames.DURATION).getValue();
     	int duration = Integer.parseInt(strDuration);
 	    //
