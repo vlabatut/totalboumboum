@@ -50,10 +50,6 @@ import org.xml.sax.SAXException;
 
 public class TrajectoriesLoader
 {	
-/*	
-	private String type;
-	private double zoomFactor;
-*/
 	public static void loadTrajectories(String individualFolder, GesturePack pack) throws ParserConfigurationException, SAXException, IOException
 	{	File dataFile = new File(individualFolder+File.separator+FileNames.FILE_TRAJECTORIES+FileNames.EXTENSION_XML);
 		if(dataFile.exists())
