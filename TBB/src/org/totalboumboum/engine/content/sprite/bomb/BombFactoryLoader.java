@@ -36,9 +36,9 @@ import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
-import org.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
+import org.totalboumboum.engine.content.feature.gesture.anime.HollowAnimesLoader;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
-import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
+import org.totalboumboum.engine.content.feature.gesture.trajectory.HollowTrajectoriesLoader;
 import org.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
@@ -76,7 +76,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileNames.FOLDER_TRAJECTORIES;
-		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
+		HollowTrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// result
 		return result;
@@ -96,17 +96,17 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		{	String path = abstractBombs.get(baseStr)+File.separator+FileNames.FOLDER_ANIMES;
 			// NOTE this won't work in case of multiple inheritance (only the direct parent's animation will be loaded)
 			if(color==null)
-				AnimesLoader.loadAnimes(path,gesturePack,BombFactory.getAnimeReplacements());
+				HollowAnimesLoader.loadAnimes(path,gesturePack,BombFactory.getAnimeReplacements());
 			else
-				AnimesLoader.loadAnimes(path,gesturePack,color,BombFactory.getAnimeReplacements());
+				HollowAnimesLoader.loadAnimes(path,gesturePack,color,BombFactory.getAnimeReplacements());
 		}
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileNames.FOLDER_ANIMES;
 		if(color==null)
-			AnimesLoader.loadAnimes(folder,gesturePack,BombFactory.getAnimeReplacements());
+			HollowAnimesLoader.loadAnimes(folder,gesturePack,BombFactory.getAnimeReplacements());
 		else
-			AnimesLoader.loadAnimes(folder,gesturePack,color,BombFactory.getAnimeReplacements());
+			HollowAnimesLoader.loadAnimes(folder,gesturePack,color,BombFactory.getAnimeReplacements());
 		
 		// BOMBSET
 		result.setBombsetColor(color);
