@@ -1202,6 +1202,13 @@ public class Launcher
 	 *     		>> trop difficile et lourd
 	 */
 	
+	/** 
+	 * TODO 
+	 * - p-e qu'on peut résumer sprite factory à une seule classe
+	 * - les HollowSpriteFact seraient spécialisés 
+ 	 * - appel à loadAnimes : avant faut init les animes replacements dans le hollowGesturePack
+	 */  
+
 	/**
 	 * TODO
 	 * dans les fichiers XML animes et trajectoires : pr chaque dir/gesture,
