@@ -21,7 +21,6 @@ package org.totalboumboum.engine.content.sprite;
  * 
  */
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -42,9 +41,22 @@ import org.totalboumboum.engine.content.manager.item.ItemManager;
 import org.totalboumboum.engine.content.manager.modulation.ModulationManager;
 import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 
-public abstract class SpriteFactory<T extends Sprite> implements Serializable
+public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFactory<T,GesturePack>
 {	private static final long serialVersionUID = 1L;
 
+	/////////////////////////////////////////////////////////////////
+	// COLOR			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected PredefinedColor color = null;
+	
+	public PredefinedColor getColor()
+	{	return color;
+	}
+	
+	public void setColor(PredefinedColor color)
+	{	this.color = color;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -105,7 +117,7 @@ if(bombset==null)
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected transient Instance instance;
+	protected Instance instance;
 	
 	public void setInstance(Instance instance)
 	{	this.instance = instance;	
@@ -117,89 +129,23 @@ if(bombset==null)
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// NAME				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected String name;
-
-	public String getName()
-	{	return name;
-	}
-	
-	public void setName(String name)
-	{	this.name = name;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// BASE				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected String base;
-
-	public String getBase()
-	{	return base;
-	}
-	
-	public void setBase(String base)
-	{	this.base = base;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// GESTURE PACK		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected GesturePack gesturePack;
-
-	public GesturePack getGesturePack()
-	{	return gesturePack;
-	}
-	
-	public void setGesturePack(GesturePack gesturePack)
-	{	this.gesturePack = gesturePack;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// BOMBSET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected transient Bombset bombset;
-	protected PredefinedColor bombsetColor;
+	protected Bombset bombset;
 	
 	public Bombset getBombset()
 	{	return bombset;
 	}
 	
-	public void setBombsetColor(PredefinedColor bombsetColor)
-	{	this.bombsetColor = bombsetColor;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// EXPLOSION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected transient Explosion explosion;
-	protected String explosionName;
+	protected Explosion explosion;
 
 	public Explosion getExplosion()
 	{	return explosion;
 	}
 	
-	public String getExplosionName()
-	{	return explosionName;
-	}
-	
-	public void setExplosionName(String explosionName)
-	{	this.explosionName = explosionName;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// ABILITIES		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected ArrayList<AbstractAbility> abilities;
-
-	public ArrayList<AbstractAbility> getAbilities()
-	{	return abilities;
-	}
-	
-	public void setAbilities(ArrayList<AbstractAbility> abilities)
-	{	this.abilities = abilities;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
