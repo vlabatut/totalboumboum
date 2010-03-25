@@ -48,7 +48,7 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
-public class TrajectoriesLoader
+public class HollowTrajectoriesLoader
 {	
 	public static void loadTrajectories(String individualFolder, HollowGesturePack pack) throws ParserConfigurationException, SAXException, IOException
 	{	File dataFile = new File(individualFolder+File.separator+FileNames.FILE_TRAJECTORIES+FileNames.EXTENSION_XML);

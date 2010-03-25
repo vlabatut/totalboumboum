@@ -47,7 +47,7 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
-public class AnimesLoader
+public class HollowAnimesLoader
 {	
 	public static void loadAnimes(String folderPath, HollowGesturePack pack) throws IOException, ParserConfigurationException, SAXException
 	{	File dataFile = new File(folderPath+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_XML);

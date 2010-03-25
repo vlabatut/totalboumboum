@@ -44,9 +44,9 @@ import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
-import org.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
+import org.totalboumboum.engine.content.feature.gesture.anime.HollowAnimesLoader;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
-import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
+import org.totalboumboum.engine.content.feature.gesture.trajectory.HollowTrajectoriesLoader;
 import org.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
@@ -143,7 +143,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileNames.FOLDER_TRAJECTORIES;
-		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
+		HollowTrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// result
 		return result;
@@ -223,7 +223,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileNames.FOLDER_ANIMES;
-		AnimesLoader.loadAnimes(folder,gesturePack,color,HeroFactory.getAnimeReplacements());
+		HollowAnimesLoader.loadAnimes(folder,gesturePack,color,HeroFactory.getAnimeReplacements());
 		
 		// BOMBSET
 		result.setBombsetColor(color);
