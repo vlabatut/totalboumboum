@@ -38,16 +38,16 @@ import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.feature.gesture.anime.HollowAnimesLoader;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.HollowTrajectoriesLoader;
-import org.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
+import org.totalboumboum.engine.content.sprite.HollowSpriteFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
 
-public class FireFactoryLoader extends SpriteFactoryLoader
+public class FireFactoryLoader extends HollowSpriteFactoryLoader
 {	
 	public static FireFactory loadFireFactory(String folderPath, HashMap<String, FireFactory> abstractFires, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		FireFactory result = new FireFactory();
-		Element root = SpriteFactoryLoader.openFile(folderPath);
+		Element root = HollowSpriteFactoryLoader.openFile(folderPath);
 		String folder;
 		
 		// GENERAL

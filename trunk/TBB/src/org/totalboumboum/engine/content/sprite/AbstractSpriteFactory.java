@@ -22,6 +22,7 @@ package org.totalboumboum.engine.content.sprite;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.AbstractGesturePack;
@@ -57,13 +58,26 @@ public abstract class AbstractSpriteFactory<T extends Sprite, U extends Abstract
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected ArrayList<AbstractAbility> abilities;
+	protected List<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
 
-	public ArrayList<AbstractAbility> getAbilities()
+	public List<AbstractAbility> getAbilities()
 	{	return abilities;
 	}
 	
-	public void setAbilities(ArrayList<AbstractAbility> abilities)
+	public void setAbilities(List<AbstractAbility> abilities)
 	{	this.abilities = abilities;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EXPLOSION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected String explosionName;
+
+	public String getExplosionName()
+	{	return explosionName;
+	}
+	
+	public void setExplosionName(String explosionName)
+	{	this.explosionName = explosionName;
 	}
 }

@@ -24,6 +24,7 @@ package org.totalboumboum.engine.content.feature.gesture;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.totalboumboum.engine.content.feature.Direction;
@@ -123,11 +124,11 @@ public abstract class AbstractGesture<T extends AbstractAnimeDirection<?>, U ext
 	/////////////////////////////////////////////////////////////////
 	// MODULATIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected final ArrayList<SelfModulation> selfModulations = new ArrayList<SelfModulation>();
-	protected final ArrayList<OtherModulation> otherModulations = new ArrayList<OtherModulation>();
-	protected final ArrayList<ActorModulation> actorModulations = new ArrayList<ActorModulation>();
-	protected final ArrayList<TargetModulation> targetModulations = new ArrayList<TargetModulation>();
-	protected final ArrayList<ThirdModulation> thirdModulations = new ArrayList<ThirdModulation>();
+	protected final List<SelfModulation> selfModulations = new ArrayList<SelfModulation>();
+	protected final List<OtherModulation> otherModulations = new ArrayList<OtherModulation>();
+	protected final List<ActorModulation> actorModulations = new ArrayList<ActorModulation>();
+	protected final List<TargetModulation> targetModulations = new ArrayList<TargetModulation>();
+	protected final List<ThirdModulation> thirdModulations = new ArrayList<ThirdModulation>();
 
 	public void addModulation(AbstractModulation modulation)
 	{	if(modulation instanceof SelfModulation)
