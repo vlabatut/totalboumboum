@@ -45,7 +45,7 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
-public abstract class SpriteFactoryLoader
+public abstract class HollowSpriteFactoryLoader
 {	
 	/////////////////////////////////////////////////////////////////
 	// FILE OPENING			/////////////////////////////////////////

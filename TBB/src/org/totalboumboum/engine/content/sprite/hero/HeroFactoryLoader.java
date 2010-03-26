@@ -47,13 +47,13 @@ import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.feature.gesture.anime.HollowAnimesLoader;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.HollowTrajectoriesLoader;
-import org.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
+import org.totalboumboum.engine.content.sprite.HollowSpriteFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class HeroFactoryLoader extends SpriteFactoryLoader
+public class HeroFactoryLoader extends HollowSpriteFactoryLoader
 {	
 	/* 
 	 * load the base HeroFactory (i.e. no graphics nor bombset)
@@ -120,7 +120,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 	private static HeroFactory init(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HeroFactory result = new HeroFactory();
-		Element root = SpriteFactoryLoader.openFile(folderPath);
+		Element root = HollowSpriteFactoryLoader.openFile(folderPath);
 		String folder;
 		
 		// GENERAL
@@ -214,7 +214,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 	private static HeroFactory complete(String folderPath, PredefinedColor color, HeroFactory base) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HeroFactory result = new HeroFactory();
-		Element root = SpriteFactoryLoader.openFile(folderPath);
+		Element root = HollowSpriteFactoryLoader.openFile(folderPath);
 		String folder;
 		
 		// GENERAL

@@ -62,7 +62,7 @@ public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFact
 	/////////////////////////////////////////////////////////////////
 	public abstract T makeSprite(Tile tile);
 
-	protected void initSprite(Sprite sprite)
+	protected void initSprite(T sprite)
 	{	// name
 		sprite.setName(name);
 //if(name.equalsIgnoreCase("fireproof"))
@@ -120,8 +120,13 @@ if(bombset==null)
 	protected Instance instance;
 	
 	public void setInstance(Instance instance)
-	{	this.instance = instance;	
-		bombset = instance.getBombsetMap().getBombset(bombsetColor);
+	{	// instance
+		this.instance = instance;	
+		
+		// bombset
+		bombset = instance.getBombsetMap().getBombset(color);
+		
+		// explosion
 		if(explosionName!=null)
 			explosion = instance.getExplosionSet().getExplosion(explosionName);
 		else

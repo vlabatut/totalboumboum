@@ -39,11 +39,11 @@ import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.feature.gesture.anime.HollowAnimesLoader;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.HollowTrajectoriesLoader;
-import org.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
+import org.totalboumboum.engine.content.sprite.HollowSpriteFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
 
-public class BombFactoryLoader extends SpriteFactoryLoader
+public class BombFactoryLoader extends HollowSpriteFactoryLoader
 {	
 	/*
 	 * load everything except the animes (cf. completeBombFactory)
@@ -53,7 +53,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 	public static BombFactory loadBombFactory(String folderPath, String bombName, HashMap<String,BombFactory> abstractBombs) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		BombFactory result = new BombFactory(bombName);
-		Element root = SpriteFactoryLoader.openFile(folderPath);
+		Element root = HollowSpriteFactoryLoader.openFile(folderPath);
 		String folder;
 		
 		// GENERAL

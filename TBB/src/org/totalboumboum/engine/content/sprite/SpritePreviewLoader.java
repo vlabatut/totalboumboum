@@ -52,7 +52,7 @@ public class SpritePreviewLoader
 
 	public static SpritePreview loadHeroPreviewCommon(String packName, String spriteName) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String folder = FilePaths.getHeroesPath()+File.separator+packName+File.separator+spriteName;
-		Element root = SpriteFactoryLoader.openFile(folder);
+		Element root = HollowSpriteFactoryLoader.openFile(folder);
 		HashMap<String,SpritePreview> abstractPreviews = new HashMap<String, SpritePreview>();
 		SpritePreview result = loadSpriteElement(root,folder,abstractPreviews);
 		result.setPack(packName);
@@ -65,7 +65,7 @@ public class SpritePreviewLoader
 		loadImages = true;
 		loadName = true;
 		loadSource = true;
-		Element root = SpriteFactoryLoader.openFile(folder);
+		Element root = HollowSpriteFactoryLoader.openFile(folder);
 		SpritePreview result = loadSpriteElement(root,folder,abstractPreviews);
 		result.setPack(null);//TODO à compléter en extrayant le pack du chemin folder
 		result.setFolder(new File(folder).getName());
