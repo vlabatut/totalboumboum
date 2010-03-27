@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.sprite.block;
+package org.totalboumboum.engine.content.sprite.hero;
 
 /*
  * Total Boum Boum
@@ -24,12 +24,14 @@ package org.totalboumboum.engine.content.sprite.block;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.totalboumboum.configuration.profile.PredefinedColor;
+import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.HollowSpriteFactory;
 
-public class HollowBlockFactory extends HollowSpriteFactory<Block>
+public class HollowHeroFactory extends HollowSpriteFactory<Hero> implements CachableSpriteContainer
 {	private static final long serialVersionUID = 1L;
-	
+
 	/////////////////////////////////////////////////////////////////
 	// GESTURE PACK		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -37,38 +39,40 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 	static
 	{	// APPEARING
 		// BOUNCING
+		animeReplacements.put(GestureName.BOUNCING,GestureName.STANDING);
 		// BURNING
 		animeReplacements.put(GestureName.BURNING,null);
 		// CRYING
+		animeReplacements.put(GestureName.CRYING,GestureName.BURNING);
 		// EXULTING
+		animeReplacements.put(GestureName.EXULTING,GestureName.JUMPING);
 		// HIDING
-		animeReplacements.put(GestureName.HIDING,GestureName.NONE);
 		// JUMPING
+		animeReplacements.put(GestureName.JUMPING,GestureName.STANDING);
 		// LANDING
+		animeReplacements.put(GestureName.LANDING,GestureName.STANDING);
 		// OSCILLATING
 		// OSCILLATING_FAILING
 		// PUNCHED
 		// PUNCHING
+		animeReplacements.put(GestureName.PUNCHING,GestureName.STANDING);
 		// PUSHING
+		animeReplacements.put(GestureName.PUSHING,GestureName.WALKING);
 		// RELEASED
 		// SLIDING
 		// SLIDING_FAILING
+		// SPAWNING
 		// STANDING
 		animeReplacements.put(GestureName.STANDING,null);
 		// STANDING_FAILING
 		// WAITING
+		animeReplacements.put(GestureName.WAITING,GestureName.STANDING);
 		// WALKING		
+		animeReplacements.put(GestureName.WALKING,null);
 	}
 	
 	public static HashMap<GestureName,GestureName> getAnimeReplacements()
 	{	return animeReplacements;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	super.finish();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -80,19 +84,28 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 	 * consequently, it should be initialized after the copy, depending
 	 * on the content of the set file.
 	 */
-	public HollowBlockFactory copy()
-	{	HollowBlockFactory result = new HollowBlockFactory();
+	public HollowHeroFactory copy()
+	{	HollowHeroFactory result = new HollowHeroFactory();
 		
 		initCopy(result);
 		
 		return result;
 	}
-	
-	public BlockFactory fill(double zoomFactor) throws IOException
-	{	BlockFactory result = new BlockFactory();
+
+	public HeroFactory fill(double zoomFactor, PredefinedColor color) throws IOException
+	{	HeroFactory result = new HeroFactory();
 		
-		initFill(result,zoomFactor,null);
-	
+		initFill(result,zoomFactor,color);
+
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
 	}
 }

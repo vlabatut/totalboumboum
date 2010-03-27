@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.sprite.block;
+package org.totalboumboum.engine.content.sprite.fire;
 
 /*
  * Total Boum Boum
@@ -27,9 +27,14 @@ import java.util.HashMap;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.HollowSpriteFactory;
 
-public class HollowBlockFactory extends HollowSpriteFactory<Block>
+public class HollowFireFactory extends HollowSpriteFactory<Fire>
 {	private static final long serialVersionUID = 1L;
-	
+
+/*	public FireFactory(String name)
+	{	this.name = name;
+		
+	}
+*/	
 	/////////////////////////////////////////////////////////////////
 	// GESTURE PACK		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -42,7 +47,6 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 		// CRYING
 		// EXULTING
 		// HIDING
-		animeReplacements.put(GestureName.HIDING,GestureName.NONE);
 		// JUMPING
 		// LANDING
 		// OSCILLATING
@@ -53,8 +57,8 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 		// RELEASED
 		// SLIDING
 		// SLIDING_FAILING
+		// SPAWNING
 		// STANDING
-		animeReplacements.put(GestureName.STANDING,null);
 		// STANDING_FAILING
 		// WAITING
 		// WALKING		
@@ -65,34 +69,55 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
+	// FIRESET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	super.finish();
-	}
+	private String firesetName;
 
+	public void setFiresetName(String firesetName)
+	{	this.firesetName = firesetName;	
+	}
+	
+	public String getFiresetName()
+	{	return firesetName;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * no need to copy sprite-specific info (item name, etc)
 	 * since it's not defined in the sprite file, but in the set file.
 	 * consequently, it should be initialized after the copy, depending
 	 * on the content of the set file.
 	 */
-	public HollowBlockFactory copy()
-	{	HollowBlockFactory result = new HollowBlockFactory();
+	public HollowFireFactory copy()
+	{	HollowFireFactory result = new HollowFireFactory();
 		
+		// common stuff
 		initCopy(result);
 		
 		return result;
 	}
-	
-	public BlockFactory fill(double zoomFactor) throws IOException
-	{	BlockFactory result = new BlockFactory();
+
+	public FireFactory fill(double zoomFactor) throws IOException
+	{	FireFactory result = new FireFactory();
 		
+		// common stuff
 		initFill(result,zoomFactor,null);
-	
+		
+		// fireset
+		result.setFiresetName(firesetName);
+
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			firesetName = null;
+		}
 	}
 }

@@ -27,22 +27,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
-import org.totalboumboum.engine.content.manager.event.EventManager;
-import org.totalboumboum.engine.content.sprite.SpriteFactory;
-import org.totalboumboum.engine.content.sprite.item.ItemEventManager;
+import org.totalboumboum.engine.content.sprite.HollowSpriteFactory;
 
-
-public class ItemFactory extends SpriteFactory<Item>
+public class HollowItemFactory extends HollowSpriteFactory<Item>
 {	private static final long serialVersionUID = 1L;
 
-	public ItemFactory(String itemName)
-	{	this.itemName = itemName;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// GESTURE PACK		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -83,11 +74,11 @@ public class ItemFactory extends SpriteFactory<Item>
 	// ABILITIES / ITEMREFS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** abilities given by this item */
-	protected List<List<AbstractAbility>> itemAbilities;
+	private List<List<AbstractAbility>> itemAbilities;
 	/** alternatively: existing bonuses given by this item */
-	protected List<String> itemrefs;
-	/** probability associated to the list of abilities **/
-	protected List<Float> itemProbabilities;
+	private List<String> itemrefs;
+	/** probabilities associated to the list of abilities **/
+	private List<Float> itemProbabilities;
 	
 	public void setItemAbilities(List<List<AbstractAbility>> itemAbilities, List<String> itemref, List<Float> itemProbabilities)
 	{	this.itemAbilities = itemAbilities;
@@ -98,75 +89,38 @@ public class ItemFactory extends SpriteFactory<Item>
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected String itemName;
+	private String itemName;
 	
-	public Item makeSprite(Tile tile)
-	{	// init
-		Item result = new Item();
-		List<AbstractAbility> abilities = null;
-		double proba = Math.random();
-//System.out.println("name: "+itemName+" proba: "+proba);		
-		double total = 0;
-		int index = 0;
-
-		// common managers
-		initSprite(result);
-	
-		// specific managers
-		// item abilities
-		if(itemAbilities.isEmpty())
-		{	String name = null;
-			while(index<itemrefs.size() && name==null)
-			{	total = total + itemProbabilities.get(index);
-				if(proba<total)
-					name = itemrefs.get(index);
-				else
-					index ++;
-			}
-System.out.println("name: "+name);			
-			Item itm = instance.getItemset().makeItem(name,tile);
-			abilities = itm.getItemAbilities();
-		}
-		else
-		{	while(index<itemAbilities.size() && abilities==null)
-			{	total = total + itemProbabilities.get(index);
-				if(proba<total)
-					abilities = itemAbilities.get(index);
-				else
-					index ++;
-			}
-//for(AbstractAbility a: abilities)
-//if(a instanceof StateAbility)
-//System.out.println("\t- "+((StateAbility)a).getName()+", : "+a.getStrength());
-		}
-		result.initItemAbilities(abilities);
-		// event
-		EventManager eventManager = new ItemEventManager(result);
-		result.setEventManager(eventManager);
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * no need to copy sprite-specific info (item name, etc)
+	 * since it's not defined in the sprite file, but in the set file.
+	 * consequently, it should be initialized after the copy, depending
+	 * on the content of the set file.
+	 */
+	public HollowItemFactory copy()
+	{	HollowItemFactory result = new HollowItemFactory();
 		
-		// result
-		result.setItemName(itemName);
-		result.initSprite(tile);		
+		initCopy(result);
 		
 		return result;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public ItemFactory deepCopy(double zoomFactor) throws IOException
+	public ItemFactory fill(double zoomFactor) throws IOException
 	{	ItemFactory result = new ItemFactory(itemName);
 		
-		// misc
-		result.base = base;
-		result.name = name;
-		
+		// -- common stuff --
+		initFill(result,zoomFactor,null);
+	
+		// --- item stuff ---
 		// item abilities
 		List<List<AbstractAbility>> itemAbilitiesCopy = new ArrayList<List<AbstractAbility>>();
 		for(List<AbstractAbility> abilityList: itemAbilities)
 		{	List<AbstractAbility> temp = new ArrayList<AbstractAbility>();
 			for(AbstractAbility ability: abilityList)
-				temp.add(ability.cacheCopy(zoomFactor));
+				temp.add(ability.copy());
 			itemAbilitiesCopy.add(temp);
 		}
 		result.itemAbilities = itemAbilitiesCopy;
@@ -183,25 +137,6 @@ System.out.println("name: "+name);
 			itemProbabilitiesCopy.add(proba);
 		result.itemProbabilities = itemProbabilitiesCopy;
 
-		// item name
-		result.itemName = itemName;
-		
-		// abilities
-		ArrayList<AbstractAbility> abilitiesCopy = new ArrayList<AbstractAbility>();
-		for(AbstractAbility ability: abilities)
-			abilitiesCopy.add(ability.cacheCopy(zoomFactor));
-		result.setAbilities(abilitiesCopy);
-		
-		// bombset
-		result.setBombsetColor(bombsetColor);
-		
-		// explosion
-		result.setExplosionName(explosionName);
-		
-		// gestures
-		GesturePack gesturePackCopy = gesturePack.deepCopy(zoomFactor,null);
-		result.setGesturePack(gesturePackCopy);
-
 		return result;
 	}
 
@@ -211,6 +146,7 @@ System.out.println("name: "+name);
 	public void finish()
 	{	if(!finished)
 		{	super.finish();
+			
 			// item abilities
 			{	for(List<AbstractAbility> list: itemAbilities)
 				{	Iterator<AbstractAbility> it = list.iterator();

@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.sprite.block;
+package org.totalboumboum.engine.content.sprite.bomb;
 
 /*
  * Total Boum Boum
@@ -24,12 +24,13 @@ package org.totalboumboum.engine.content.sprite.block;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.HollowSpriteFactory;
 
-public class HollowBlockFactory extends HollowSpriteFactory<Block>
+public class HollowBombFactory extends HollowSpriteFactory<Bomb>
 {	private static final long serialVersionUID = 1L;
-	
+
 	/////////////////////////////////////////////////////////////////
 	// GESTURE PACK		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -42,20 +43,27 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 		// CRYING
 		// EXULTING
 		// HIDING
-		animeReplacements.put(GestureName.HIDING,GestureName.NONE);
 		// JUMPING
 		// LANDING
+		animeReplacements.put(GestureName.LANDING,GestureName.STANDING);
 		// OSCILLATING
+		animeReplacements.put(GestureName.OSCILLATING,GestureName.STANDING);
 		// OSCILLATING_FAILING
+		animeReplacements.put(GestureName.OSCILLATING_FAILING,GestureName.STANDING_FAILING);
 		// PUNCHED
+		animeReplacements.put(GestureName.PUNCHED,GestureName.STANDING);
 		// PUNCHING
 		// PUSHING
 		// RELEASED
 		// SLIDING
+		animeReplacements.put(GestureName.SLIDING,GestureName.STANDING);
 		// SLIDING_FAILING
+		animeReplacements.put(GestureName.SLIDING_FAILING,GestureName.STANDING_FAILING);
+		// SPAWNING
 		// STANDING
 		animeReplacements.put(GestureName.STANDING,null);
 		// STANDING_FAILING
+		animeReplacements.put(GestureName.STANDING_FAILING,GestureName.STANDING);
 		// WAITING
 		// WALKING		
 	}
@@ -65,34 +73,45 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	super.finish();
-	}
+	private String bombName;
 
+	public String getBombName()
+	{	return bombName;	
+	}
+	
 	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * no need to copy sprite-specific info (item name, etc)
 	 * since it's not defined in the sprite file, but in the set file.
 	 * consequently, it should be initialized after the copy, depending
 	 * on the content of the set file.
 	 */
-	public HollowBlockFactory copy()
-	{	HollowBlockFactory result = new HollowBlockFactory();
+	public HollowBombFactory copy()
+	{	HollowBombFactory result = new HollowBombFactory();
 		
 		initCopy(result);
 		
 		return result;
 	}
 	
-	public BlockFactory fill(double zoomFactor) throws IOException
-	{	BlockFactory result = new BlockFactory();
+	public BombFactory fill(double zoomFactor, PredefinedColor color) throws IOException
+	{	BombFactory result = new BombFactory(bombName);
 		
-		initFill(result,zoomFactor,null);
-	
+		initFill(result,zoomFactor,color);
+
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
 	}
 }
