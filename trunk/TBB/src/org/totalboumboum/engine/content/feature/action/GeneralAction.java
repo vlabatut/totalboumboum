@@ -360,11 +360,12 @@ public abstract class GeneralAction implements Serializable
 */
 
 	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
+	// COPY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract GeneralAction cacheCopy(double zoomFactor);
+	/** this is actually not so usefull */
+	public abstract GeneralAction copy();
 	
-	protected void cacheCopy(GeneralAction result)
+	protected void copy(GeneralAction result)
 	{	// actors
 		for(Role a: actors)
 			result.actors.add(a);
