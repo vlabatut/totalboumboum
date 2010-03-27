@@ -92,7 +92,7 @@ public class AbilityLoader
 		return result;
     }
     
-	public static void loadAbilityPack(String folderPath, ArrayList<AbstractAbility> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void loadAbilityPack(String folderPath, List<AbstractAbility> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	File dataFile = new File(folderPath+File.separator+FileNames.FILE_ABILITIES+FileNames.EXTENSION_XML);
 		if(dataFile.exists())
 		{	String schemaFolder = FilePaths.getSchemasPath();

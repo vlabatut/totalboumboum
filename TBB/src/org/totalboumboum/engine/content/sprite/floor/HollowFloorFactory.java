@@ -59,8 +59,8 @@ public class HollowFloorFactory extends HollowSpriteFactory<Floor>
 		// WALKING		
 	}
 	
-	public static HashMap<GestureName,GestureName> getAnimeReplacements()
-	{	return animeReplacements;
+	public HashMap<GestureName,GestureName> getAnimeReplacements()
+	{	return HollowFloorFactory.animeReplacements;
 	}
 
 	/////////////////////////////////////////////////////////////////

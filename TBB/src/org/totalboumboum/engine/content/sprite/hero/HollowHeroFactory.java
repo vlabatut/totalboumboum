@@ -71,8 +71,8 @@ public class HollowHeroFactory extends HollowSpriteFactory<Hero> implements Cach
 		animeReplacements.put(GestureName.WALKING,null);
 	}
 	
-	public static HashMap<GestureName,GestureName> getAnimeReplacements()
-	{	return animeReplacements;
+	public HashMap<GestureName,GestureName> getAnimeReplacements()
+	{	return HollowHeroFactory.animeReplacements;
 	}
 
 	/////////////////////////////////////////////////////////////////

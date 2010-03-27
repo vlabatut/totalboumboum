@@ -25,42 +25,70 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
+import org.totalboumboum.engine.content.feature.gesture.HollowGesturePack;
 import org.totalboumboum.engine.content.feature.gesture.anime.HollowAnimesLoader;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.HollowTrajectoriesLoader;
 import org.totalboumboum.engine.content.sprite.HollowSpriteFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
 public class HollowBlockFactoryLoader extends HollowSpriteFactoryLoader
 {	
-	public static BlockFactory loadBlockFactory(String folderPath, HashMap<String,BlockFactory> abstractBlocks, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static HollowBlockFactory loadBlockFactory(String folderPath, HashMap<String,HollowBlockFactory> abstractBlocks, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		BlockFactory result = new BlockFactory();
+		HollowBlockFactory result;
 		Element root = HollowSpriteFactoryLoader.openFile(folderPath);
+		Element elt = root.getChild(XmlNames.GENERAL);
 		String folder;
 		
-		// GENERAL
-		loadGeneralElement(root,result,abstractBlocks);	
-		GesturePack gesturePack = result.getGesturePack();
+		// init
+		String baseStr = root.getAttributeValue(XmlNames.BASE);
+		HollowGesturePack gesturePack;
+		List<AbstractAbility> abilities;
+		if(baseStr==null)
+		{	// create object
+			result = new HollowBlockFactory();
+			// gestures pack
+			gesturePack = new HollowGesturePack();
+			result.setGesturePack(gesturePack);
+			// abilities
+			abilities = new ArrayList<AbstractAbility>();
+			result.setAbilities(abilities);
+		}
+		else
+		{	// base
+			HollowBlockFactory base = abstractBlocks.get(baseStr);
+			result = base.copy();
+			result.setBase(baseStr);
+			// gestures pack
+			gesturePack = result.getGesturePack();
+			// abilities
+			abilities = result.getAbilities();
+		}		
+		// name
+		String name = elt.getAttribute(XmlNames.NAME).getValue().trim();
+		result.setName(name);
+//if(name==null)
+//	System.out.println();
+		
 		
 		// ABILITIES
-		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		folder = folderPath+File.separator+FileNames.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileNames.FOLDER_ANIMES;
-		HollowAnimesLoader.loadAnimes(folder,gesturePack,BlockFactory.getAnimeReplacements());
+		HollowAnimesLoader.loadAnimes(folder,gesturePack);
 		
 		//EXPLOSION
 		String explosionName = loadExplosionElement(root);
@@ -75,13 +103,10 @@ public class HollowBlockFactoryLoader extends HollowSpriteFactoryLoader
 		folder = folderPath+File.separator+FileNames.FOLDER_TRAJECTORIES;
 		HollowTrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
-		// BOMBSET
-		PredefinedColor bombsetColor = null;
-		result.setBombsetColor(bombsetColor);
-
 		// result
 		if(!isAbstract)
 			initDefaultGestures(gesturePack,Role.BLOCK);
+		
 		return result;
 	}	
 }
