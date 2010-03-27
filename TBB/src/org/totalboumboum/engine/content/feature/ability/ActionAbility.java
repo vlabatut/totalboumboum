@@ -70,11 +70,14 @@ public class ActionAbility extends AbstractAbility
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public AbstractAbility copy()
+	/**
+	 * surface copy, actions are not cloned
+	 */
+/*	public AbstractAbility copy()
 	{	ActionAbility result;
 	
 	// action
-		GeneralAction a = action; //NOTE à copier ? (non)
+		GeneralAction a = action;
 		result = new ActionAbility(a);
 		
 		// misc
@@ -85,12 +88,16 @@ public class ActionAbility extends AbstractAbility
 
 		return result;
 	}
-
-	public AbstractAbility cacheCopy(double zoomFactor)
+*/
+	/**
+	 * clone actions, which can be modified when the ability is
+	 * assigned to some sprite (action roles, in particular)
+	 */
+	public AbstractAbility copy()
 	{	ActionAbility result;
 	
 		// action
-		GeneralAction a = action.cacheCopy(zoomFactor);
+		GeneralAction a = action.copy();
 		result = new ActionAbility(a);
 		
 		// misc
