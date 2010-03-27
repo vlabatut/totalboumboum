@@ -21,9 +21,6 @@ package org.totalboumboum.engine.content.feature.gesture.modulation;
  * 
  */
 
-import java.util.Iterator;
-
-import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 
@@ -53,7 +50,7 @@ public class TargetModulation extends AbstractActionModulation
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public TargetModulation copy()
+/*	public TargetModulation copy()
 	{	GeneralAction actionCopy = action;
 		TargetModulation result = new TargetModulation(actionCopy);
 		
@@ -80,11 +77,8 @@ public class TargetModulation extends AbstractActionModulation
 		
 		return result;
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public TargetModulation cacheCopy(double zoomFactor)
+*/
+/*	public TargetModulation cacheCopy(double zoomFactor)
 	{	GeneralAction actionCopy = action.cacheCopy(zoomFactor);
 		TargetModulation result = new TargetModulation(actionCopy);
 		
@@ -103,4 +97,5 @@ public class TargetModulation extends AbstractActionModulation
 		
 		return result;
 	}
+*/	
 }

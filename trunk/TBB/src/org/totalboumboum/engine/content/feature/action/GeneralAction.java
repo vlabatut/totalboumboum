@@ -362,7 +362,10 @@ public abstract class GeneralAction implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// COPY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** this is actually not so usefull */
+	/** 
+	 * this is actually not so usefull,
+	 * because general actions are not modified after their creation 
+	 */
 	public abstract GeneralAction copy();
 	
 	protected void copy(GeneralAction result)

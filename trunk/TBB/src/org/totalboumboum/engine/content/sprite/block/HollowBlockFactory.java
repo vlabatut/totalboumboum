@@ -22,16 +22,11 @@ package org.totalboumboum.engine.content.sprite.block;
  */
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
-import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.HollowSpriteFactory;
-import org.totalboumboum.engine.content.sprite.SpriteFactory;
 
 public class HollowBlockFactory extends HollowSpriteFactory<Block>
 {	private static final long serialVersionUID = 1L;
@@ -80,15 +75,11 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 	/////////////////////////////////////////////////////////////////
 	// CACHE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public HollowBlockFactory deepCopy(double zoomFactor) throws IOException
-	{	HollowBlockFactory result = new HollowBlockFactory();
+	public BlockFactory fill(double zoomFactor, PredefinedColor color) throws IOException
+	{	BlockFactory result = new BlockFactory();
 		
-		// abilities
-		ArrayList<AbstractAbility> abilitiesCopy = new ArrayList<AbstractAbility>();
-		for(AbstractAbility ability: abilities)
-			abilitiesCopy.add(ability.cacheCopy(zoomFactor));
-		result.setAbilities(abilitiesCopy);
-		
+		initFill(result, zoomFactor, color);
+	
 		return result;
 	}
 }

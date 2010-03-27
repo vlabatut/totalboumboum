@@ -77,18 +77,19 @@ public abstract class HollowSpriteFactory<T extends Sprite> extends AbstractSpri
 	 * @throws IOException 
 	 */
 	public void initFill(SpriteFactory<T> result, double zoomFactor, PredefinedColor color) throws IOException
-	{	// gesture pack
+	{	// gesture pack: deep copy (zoom, color...)
 		GesturePack gesturePackCopy = gesturePack.fill(zoomFactor,color);
 		result.setGesturePack(gesturePackCopy);
 		
-		// abilities
+		// abilities: the same (must be copied only when making sprites)
 		result.setAbilities(abilities);
 		
-		// explosions
+		// explosions: name only
 		result.setExplosionName(explosionName);
 		
 		// misc
 		result.setName(name);
+		result.setColor(color);
 	}
 	
 	/////////////////////////////////////////////////////////////////

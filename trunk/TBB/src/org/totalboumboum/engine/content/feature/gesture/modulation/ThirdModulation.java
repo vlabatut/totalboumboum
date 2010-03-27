@@ -154,7 +154,7 @@ public class ThirdModulation extends AbstractActionModulation
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public ThirdModulation copy()
+/*	public ThirdModulation copy()
 	{	GeneralAction actionCopy = action;
 		ThirdModulation result = new ThirdModulation(actionCopy); //NOTE why copy the action?
 		
@@ -188,11 +188,8 @@ public class ThirdModulation extends AbstractActionModulation
 		
 		return result;
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public ThirdModulation cacheCopy(double zoomFactor)
+*/
+/*	public ThirdModulation cacheCopy(double zoomFactor)
 	{	GeneralAction actionCopy = action.cacheCopy(zoomFactor);
 		ThirdModulation result = new ThirdModulation(actionCopy); //NOTE why copy the action?
 		
@@ -228,5 +225,5 @@ public class ThirdModulation extends AbstractActionModulation
 		result.strength = strength;
 		
 		return result;
-	}
+	}*/
 }

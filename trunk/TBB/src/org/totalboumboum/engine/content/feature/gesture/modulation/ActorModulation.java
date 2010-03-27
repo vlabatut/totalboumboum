@@ -21,12 +21,8 @@ package org.totalboumboum.engine.content.feature.gesture.modulation;
  * 
  */
 
-import java.util.Iterator;
-
-import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
-
 
 public class ActorModulation extends AbstractActionModulation
 {	private static final long serialVersionUID = 1L;
@@ -54,7 +50,7 @@ public class ActorModulation extends AbstractActionModulation
 	/////////////////////////////////////////////////////////////////
 	// COPY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public ActorModulation copy()
+/*	public ActorModulation copy()
 	{	GeneralAction actionCopy = action; //NOTE doesn't seem necessary to copy the action (same thing for target and third modulation)
 		ActorModulation result = new ActorModulation(actionCopy);
 		
@@ -82,11 +78,8 @@ public class ActorModulation extends AbstractActionModulation
 		
 		return result;
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public ActorModulation cacheCopy(double zoomFactor)
+*/
+/*	public ActorModulation cacheCopy(double zoomFactor)
 	{	GeneralAction actionCopy = action.cacheCopy(zoomFactor);
 		ActorModulation result = new ActorModulation(actionCopy);
 		
@@ -104,5 +97,5 @@ public class ActorModulation extends AbstractActionModulation
 		result.strength = strength;
 		
 		return result;
-	}
+	}*/
 }

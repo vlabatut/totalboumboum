@@ -134,15 +134,15 @@ public class HollowGesture extends AbstractGesture<HollowAnimeDirection,HollowTr
 	
 		// modulations
 		for(SelfModulation e: selfModulations)
-			result.addModulation(e.cacheCopy(zoomFactor));
+			result.addModulation(e/*.cacheCopy(zoomFactor)*/);
 		for(OtherModulation e: otherModulations)
-			result.addModulation(e.cacheCopy(zoomFactor));
+			result.addModulation(e/*.cacheCopy(zoomFactor)*/);
 		for(ActorModulation e: actorModulations)
-			result.addModulation(e.cacheCopy(zoomFactor));
+			result.addModulation(e/*.cacheCopy(zoomFactor)*/);
 		for(TargetModulation e: targetModulations)
-			result.addModulation(e.cacheCopy(zoomFactor));
+			result.addModulation(e/*.cacheCopy(zoomFactor)*/);
 		for(ThirdModulation e: thirdModulations)
-			result.addModulation(e.cacheCopy(zoomFactor));
+			result.addModulation(e/*.cacheCopy(zoomFactor)*/);
 		
 		return result;
 	}
