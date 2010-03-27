@@ -43,7 +43,7 @@ import org.totalboumboum.configuration.engine.EngineConfiguration;
 import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
-import org.totalboumboum.engine.content.sprite.item.ItemFactoryLoader;
+import org.totalboumboum.engine.content.sprite.item.HollowItemFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -180,7 +180,7 @@ public class ItemsetLoader
 		
 		// item factory
 		boolean isAbstract = type==Type.ABSTRACT;
-		ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,itemrefs,abilities,probabilities,abstractItems,isAbstract);
+		ItemFactory itemFactory = HollowItemFactoryLoader.loadItemFactory(individualFolder,name,itemrefs,abilities,probabilities,abstractItems,isAbstract);
 		if(isAbstract)
 			abstractItems.put(name,itemFactory);
 		else

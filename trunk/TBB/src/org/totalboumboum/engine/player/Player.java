@@ -37,7 +37,7 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.HeroFactory;
-import org.totalboumboum.engine.content.sprite.hero.HeroFactoryLoader;
+import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.control.PlayerControl;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FilePaths;
@@ -63,7 +63,7 @@ public class Player
 		color = this.profile.getSpriteColor();
 		String folder = FilePaths.getHeroesPath()+File.separator+this.profile.getSpritePack();
 		folder = folder + File.separator+this.profile.getSpriteFolder();
-		HeroFactory tempHeroFactory = HeroFactoryLoader.completeHeroFactory(folder,color,base);
+		HeroFactory tempHeroFactory = HollowHeroFactoryLoader.completeHeroFactory(folder,color,base);
 		tempHeroFactory.setInstance(RoundVariables.instance);
 		sprite = tempHeroFactory.makeSprite(tile);
 //		tile.addSprite(sprite);

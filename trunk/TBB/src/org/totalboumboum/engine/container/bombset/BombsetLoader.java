@@ -46,7 +46,7 @@ import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
-import org.totalboumboum.engine.content.sprite.bomb.BombFactoryLoader;
+import org.totalboumboum.engine.content.sprite.bomb.HollowBombFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -170,11 +170,11 @@ public class BombsetLoader
 			}
 		
 			// result
-			BombFactory bombFactory = BombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs);
+			BombFactory bombFactory = HollowBombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs);
 			bombset.addBombFactory(bombFactory,abilities);
 		}
 		else
-		{	BombFactory bombFactory = BombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs);
+		{	BombFactory bombFactory = HollowBombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs);
 			abstractBombs.put(name,bombFactory);
 		}
     }
@@ -286,7 +286,7 @@ public class BombsetLoader
 		BombFactory bombFactory;
 		if(type==Type.CONCRETE)
 		{	bombFactory = bombset.getBombFactory(name);
-			BombFactoryLoader.completeBombFactory(bombFactory,individualFolder,color,bombset,abstractBombs);
+			HollowBombFactoryLoader.completeBombFactory(bombFactory,individualFolder,color,bombset,abstractBombs);
 		}
 		else
 			abstractBombs.put(name,individualFolder);

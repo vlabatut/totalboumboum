@@ -41,7 +41,7 @@ import org.jdom.Element;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.engine.EngineConfiguration;
 import org.totalboumboum.engine.content.sprite.fire.FireFactory;
-import org.totalboumboum.engine.content.sprite.fire.FireFactoryLoader;
+import org.totalboumboum.engine.content.sprite.fire.HollowFireFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -206,7 +206,7 @@ public class FiresetMapLoader
 		
 		// fire factory
 		boolean isAbstract = type==Type.ABSTRACT;
-		FireFactory fireFactory = FireFactoryLoader.loadFireFactory(individualFolder,abstractFires,isAbstract);
+		FireFactory fireFactory = HollowFireFactoryLoader.loadFireFactory(individualFolder,abstractFires,isAbstract);
 		if(isAbstract)
 			abstractFires.put(name,fireFactory);
 		else

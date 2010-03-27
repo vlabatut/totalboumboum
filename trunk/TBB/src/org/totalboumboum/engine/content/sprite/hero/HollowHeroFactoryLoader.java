@@ -53,7 +53,7 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class HeroFactoryLoader extends HollowSpriteFactoryLoader
+public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 {	
 	/* 
 	 * load the base HeroFactory (i.e. no graphics nor bombset)
