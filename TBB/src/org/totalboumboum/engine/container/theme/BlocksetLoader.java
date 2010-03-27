@@ -31,7 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.engine.content.sprite.block.BlockFactory;
-import org.totalboumboum.engine.content.sprite.block.BlockFactoryLoader;
+import org.totalboumboum.engine.content.sprite.block.HollowBlockFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;
@@ -110,7 +110,7 @@ public class BlocksetLoader
 		
 		// components
 		boolean isAbstract = type==Type.ABSTRACT;
-		BlockFactory blockFactory = BlockFactoryLoader.loadBlockFactory(localFilePath,abstractBlocks,isAbstract);
+		BlockFactory blockFactory = HollowBlockFactoryLoader.loadBlockFactory(localFilePath,abstractBlocks,isAbstract);
 		if(isAbstract)
 			abstractBlocks.put(name,blockFactory);
 		else

@@ -32,7 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
-import org.totalboumboum.engine.content.sprite.floor.FloorFactoryLoader;
+import org.totalboumboum.engine.content.sprite.floor.HollowFloorFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;
@@ -93,7 +93,7 @@ public class FloorsetLoader
 
 		// factory
 		boolean isAbstract = type==Type.ABSTRACT;
-		FloorFactory floorFactory = FloorFactoryLoader.loadFloorFactory(individualFolder,abstractFloors,isAbstract);
+		FloorFactory floorFactory = HollowFloorFactoryLoader.loadFloorFactory(individualFolder,abstractFloors,isAbstract);
 		if(isAbstract)
 			abstractFloors.put(name,floorFactory);
 		else

@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.sprite.fire;
+package org.totalboumboum.engine.content.sprite.floor;
 
 /*
  * Total Boum Boum
@@ -42,16 +42,16 @@ import org.totalboumboum.engine.content.sprite.HollowSpriteFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
 
-public class FireFactoryLoader extends HollowSpriteFactoryLoader
+public class HollowFloorFactoryLoader extends HollowSpriteFactoryLoader
 {	
-	public static FireFactory loadFireFactory(String folderPath, HashMap<String, FireFactory> abstractFires, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static FloorFactory loadFloorFactory(String folderPath, HashMap<String,FloorFactory> abstractFloors, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		FireFactory result = new FireFactory();
+		FloorFactory result = new FloorFactory();
 		Element root = HollowSpriteFactoryLoader.openFile(folderPath);
 		String folder;
 		
 		// GENERAL
-		loadGeneralElement(root,result,abstractFires);
+		loadGeneralElement(root,result,abstractFloors);	
 		GesturePack gesturePack = result.getGesturePack();
 		
 		// ABILITIES
@@ -61,7 +61,7 @@ public class FireFactoryLoader extends HollowSpriteFactoryLoader
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileNames.FOLDER_ANIMES;
-		HollowAnimesLoader.loadAnimes(folder,gesturePack,FireFactory.getAnimeReplacements());
+		HollowAnimesLoader.loadAnimes(folder,gesturePack,FloorFactory.getAnimeReplacements());
 		
 		//EXPLOSION
 		String explosionName = loadExplosionElement(root);
@@ -70,10 +70,10 @@ public class FireFactoryLoader extends HollowSpriteFactoryLoader
 		
 		//MODULATIONS
 		folder = folderPath+File.separator+FileNames.FOLDER_MODULATIONS;
-		ModulationsLoader.loadModulations(folder,gesturePack,Role.FIRE);
+		ModulationsLoader.loadModulations(folder,gesturePack,Role.FLOOR);
 		
 		// TRAJECTORIES
-		folder = folderPath+File.separator+FileNames.FOLDER_TRAJECTORIES;
+		folder = folderPath+File.separator+FileNames.FILE_TRAJECTORIES;
 		HollowTrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// BOMBSET
@@ -82,7 +82,7 @@ public class FireFactoryLoader extends HollowSpriteFactoryLoader
 
 		// result
 		if(!isAbstract)
-			initDefaultGestures(gesturePack,Role.FIRE);
+			initDefaultGestures(gesturePack,Role.FLOOR);
 		return result;
 	}	
 }
