@@ -72,18 +72,20 @@ public class ActionAbility extends AbstractAbility
 	/////////////////////////////////////////////////////////////////
 	public AbstractAbility copy()
 	{	ActionAbility result;
+	
+	// action
 		GeneralAction a = action; //NOTE à copier ? (non)
 		result = new ActionAbility(a);
+		
+		// misc
 		result.setFrame(frame);
 		result.setStrength(strength);
 		result.setTime(time);
 		result.setUses(uses);
+
 		return result;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 	public AbstractAbility cacheCopy(double zoomFactor)
 	{	ActionAbility result;
 	

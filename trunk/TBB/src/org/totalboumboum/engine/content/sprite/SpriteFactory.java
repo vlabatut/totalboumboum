@@ -21,7 +21,6 @@ package org.totalboumboum.engine.content.sprite;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
@@ -83,8 +82,8 @@ public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFact
 		// bombset
 		BombsetManager bombsetManager = new BombsetManager(sprite);
 		bombsetManager.setBombset(bombset);
-if(bombset==null)
-	System.out.println();
+//if(bombset==null)
+//	System.out.println();
 		sprite.setBombsetManager(bombsetManager);
 		
 		// explosion
@@ -93,8 +92,8 @@ if(bombset==null)
 		sprite.setExplosionManager(explosionManager);
 		
 		// modulations
-		ModulationManager permissionManager = new ModulationManager(sprite);
-		sprite.setModulationManager(permissionManager);
+		ModulationManager modulationManager = new ModulationManager(sprite);
+		sprite.setModulationManager(modulationManager);
 		
 		// item
 		ItemManager itemManager = new ItemManager(sprite);
