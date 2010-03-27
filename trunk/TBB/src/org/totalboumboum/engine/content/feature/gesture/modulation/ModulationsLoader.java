@@ -40,9 +40,9 @@ import org.totalboumboum.engine.content.feature.action.Circumstance;
 import org.totalboumboum.engine.content.feature.action.CircumstanceLoader;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.GeneralActionLoader;
-import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
+import org.totalboumboum.engine.content.feature.gesture.HollowGesture;
+import org.totalboumboum.engine.content.feature.gesture.HollowGesturePack;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;
@@ -52,7 +52,7 @@ import org.xml.sax.SAXException;
 public class ModulationsLoader
 {	
 
-	public static void loadModulations(String individualFolder, GesturePack pack, Role role) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void loadModulations(String individualFolder, HollowGesturePack pack, Role role) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	File dataFile = new File(individualFolder+File.separator+FileNames.FILE_MODULATIONS+FileNames.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
@@ -65,7 +65,7 @@ public class ModulationsLoader
 	}
 	
     @SuppressWarnings("unchecked")
-	private static void loadModulationsElement(Element root, String individualFolder, GesturePack pack, Role role) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	private static void loadModulationsElement(Element root, String individualFolder, HollowGesturePack pack, Role role) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	List<Element> gesturesList = root.getChildren(XmlNames.GESTURE);
 		Iterator<Element> i = gesturesList.iterator();
 		while(i.hasNext())
@@ -74,11 +74,11 @@ public class ModulationsLoader
 		}
 	}
     
-    private static void loadGestureElement(Element root, String individualFolder, GesturePack pack, Role role) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    private static void loadGestureElement(Element root, String individualFolder, HollowGesturePack pack, Role role) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
     	String name = root.getAttribute(XmlNames.NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);
-    	Gesture gesture = pack.getGesture(gestureName);
+		HollowGesture gesture = pack.getGesture(gestureName);
     	
     	// file
     	String fileName = root.getAttribute(XmlNames.FILE).getValue();
@@ -94,7 +94,7 @@ public class ModulationsLoader
 		loadGestureModulations(elt,gesture,role);
     }
     
-    private static void loadGestureModulations(Element root, Gesture gesture, Role role) throws IOException, ClassNotFoundException
+    private static void loadGestureModulations(Element root, HollowGesture gesture, Role role) throws IOException, ClassNotFoundException
     {	// self modulations
 		Element selfElt = root.getChild(XmlNames.SELF_MODULATIONS);
 		loadModulationsElement(selfElt,ModType.SELF,gesture,role);
@@ -117,7 +117,7 @@ public class ModulationsLoader
     }
     
     @SuppressWarnings("unchecked")
-	private static void loadModulationsElement(Element root, ModType type, Gesture gesture, Role role) throws IOException, ClassNotFoundException
+	private static void loadModulationsElement(Element root, ModType type, HollowGesture gesture, Role role) throws IOException, ClassNotFoundException
     {	List<Element> modulationsList = root.getChildren(XmlNames.MODULATION);
 		Iterator<Element> i = modulationsList.iterator();
 		if(type==ModType.SELF || type==ModType.OTHER)

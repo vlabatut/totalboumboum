@@ -37,6 +37,8 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
+import org.totalboumboum.engine.content.feature.gesture.HollowGesture;
+import org.totalboumboum.engine.content.feature.gesture.HollowGesturePack;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import org.totalboumboum.tools.files.FileNames;
@@ -64,38 +66,8 @@ public abstract class HollowSpriteFactoryLoader
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// GENERAL ELEMENT LOADING		/////////////////////////////////
+	// GESTURES						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected static <T extends Sprite, U extends SpriteFactory<T>> void loadGeneralElement(Element root, SpriteFactory<T> result, HashMap<String,U> abstractSprites)
-	{	Element elt = root.getChild(XmlNames.GENERAL);
-		
-		// name
-		String name = elt.getAttribute(XmlNames.NAME).getValue().trim();
-		result.setName(name);
-//if(name==null)
-//	System.out.println();
-
-		// base
-		String baseStr = elt.getAttributeValue(XmlNames.BASE);
-		result.setBase(baseStr);
-		
-		// init
-		GesturePack gesturePack;
-		ArrayList<AbstractAbility> abilities;
-		if(baseStr!=null)
-		{	SpriteFactory<T> base = abstractSprites.get(baseStr);
-			loadGeneralElement(result,base);
-		}
-		else
-		{	// gestures pack
-			gesturePack = new GesturePack();
-			result.setGesturePack(gesturePack);
-			// abilities
-			abilities = new ArrayList<AbstractAbility>();
-			result.setAbilities(abilities);
-		}
-	}
-	
 	protected static <T extends Sprite> void loadGeneralElement(Element root, SpriteFactory<T> result, SpriteFactory<T> base)
 	{	Element elt = root.getChild(XmlNames.GENERAL);
 	
@@ -106,21 +78,10 @@ public abstract class HollowSpriteFactoryLoader
 		loadGeneralElement(result,base);
 	}
 	
-	@SuppressWarnings("unchecked")
-	private static <T extends Sprite> void loadGeneralElement(SpriteFactory<T> result, SpriteFactory<T> base)
-	{	GesturePack gesturePack = base.getGesturePack();
-		ArrayList<AbstractAbility> abilities = base.getAbilities();
-		String explosionName = base.getExplosionName();
-		//
-		result.setGesturePack(gesturePack.surfaceCopy());
-		result.setAbilities((ArrayList<AbstractAbility>)abilities.clone());
-		result.setExplosionName(explosionName);
-	}
-	
-	protected static void initDefaultGestures(GesturePack gesturePack, Role role)
+	protected static void initDefaultGestures(HollowGesturePack gesturePack, Role role)
 	{	{	// gesture NONE
 			GestureName gestureName = GestureName.NONE;
-			Gesture gesture = gesturePack.getGesture(gestureName);
+			HollowGesture gesture = gesturePack.getGesture(gestureName);
 			for(ActionName an: ActionName.values())
 			{	// any action forbidden as an actor except APPEAR (which can be instant, i.e. without anime nor trajectory)
 				// and consume (workaround for the fires)
@@ -157,7 +118,7 @@ public abstract class HollowSpriteFactoryLoader
 		}
 		{	// gesture ENDED
 			GestureName gestureName = GestureName.ENDED;
-			Gesture gesture = gesturePack.getGesture(gestureName);
+			HollowGesture gesture = gesturePack.getGesture(gestureName);
 			for(ActionName an: ActionName.values())
 			{	// any action forbidden as an actor
 				{	GeneralAction ga = an.createGeneralAction();
@@ -191,9 +152,9 @@ public abstract class HollowSpriteFactoryLoader
 			}
 		}
 		{	// gesture ENTERING
-			Gesture temp = gesturePack.getGesture(GestureName.APPEARING);
+			HollowGesture temp = gesturePack.getGesture(GestureName.APPEARING);
 			// copy of APPEARING
-			Gesture gesture = temp.surfaceCopy();
+			HollowGesture gesture = temp.copy();
 			gesture.setName(GestureName.ENTERING);
 			// but animes are taken from STANDING if there's no anime for APPEARING
 			if(temp.hasNoAnimes())
@@ -202,9 +163,9 @@ public abstract class HollowSpriteFactoryLoader
 			gesturePack.addGesture(gesture,GestureName.ENTERING);
 		}
 		{	// gesture PREPARED
-			Gesture temp = gesturePack.getGesture(GestureName.APPEARING);
+			HollowGesture temp = gesturePack.getGesture(GestureName.APPEARING);
 			// copy of APPEARING
-			Gesture gesture = temp.surfaceCopy();
+			HollowGesture gesture = temp.copy();
 			gesture.setName(GestureName.PREPARED);
 			// with the animes of STANDING
 			temp = gesturePack.getGesture(GestureName.STANDING);
@@ -213,7 +174,7 @@ public abstract class HollowSpriteFactoryLoader
 		}
 		{	// gesture HIDING
 			GestureName gestureName = GestureName.HIDING;
-			Gesture gesture = gesturePack.getGesture(gestureName);
+			HollowGesture gesture = gesturePack.getGesture(gestureName);
 //if(role==Role.ITEM)
 //	System.out.println();
 			for(ActionName an: ActionName.values())
@@ -256,7 +217,7 @@ public abstract class HollowSpriteFactoryLoader
 	
 	
 	/////////////////////////////////////////////////////////////////
-	// EPLOSION LOADING		/////////////////////////////////////////
+	// EPLOSION				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected static String loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String result = null;

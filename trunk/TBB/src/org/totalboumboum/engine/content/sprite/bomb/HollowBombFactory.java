@@ -68,8 +68,8 @@ public class HollowBombFactory extends HollowSpriteFactory<Bomb>
 		// WALKING		
 	}
 	
-	public static HashMap<GestureName,GestureName> getAnimeReplacements()
-	{	return animeReplacements;
+	public HashMap<GestureName,GestureName> getAnimeReplacements()
+	{	return HollowBombFactory.animeReplacements;
 	}
 
 	/////////////////////////////////////////////////////////////////
