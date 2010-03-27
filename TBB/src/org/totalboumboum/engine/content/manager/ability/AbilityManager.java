@@ -23,6 +23,7 @@ package org.totalboumboum.engine.content.manager.ability;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -59,7 +60,7 @@ public class AbilityManager
 	/** abilities provided before the begining of the round */
 	private final ArrayList<AbstractAbility> directAbilities = new ArrayList<AbstractAbility>();
 	
-	public void addDirectAbilities(ArrayList<AbstractAbility> abilities)
+	public void addDirectAbilities(List<AbstractAbility> abilities)
 	{	Iterator<AbstractAbility> i = abilities.iterator();
 		while(i.hasNext())
 			addDirectAbility(i.next());

@@ -35,7 +35,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 /**
  * represents a general action by specifying who can do what to who.
  * The subclasses define what is actually possible in the game. 
- * Instances must by subsumed by the class, they fit more strict situations,
+ * Instances must by subsumed by the class, they fit stricter situations,
  * usually user-defined to be used in abilities and modulations.
  * SpecificActions represent in-game specific situations. 
  */
@@ -43,12 +43,6 @@ public abstract class GeneralAction implements Serializable
 {	private static final long serialVersionUID = 1L;
 
 	
-	/* NOTE in tile position: 
-	 * 	- FAR was changed into REMOTE, 
-	 * 	- the meaning of same was changed (before no tile for actor -> same), 
-	 * 	- undefined was added 
-	 */
-
 	/*NOTE
 	 * - there's not always a direction (the actor can perform an undirected gesture)
 	 * - there's always an actor
