@@ -21,54 +21,12 @@ package org.totalboumboum.engine.content.sprite.floor;
  * 
  */
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 
-
 public class FloorFactory extends SpriteFactory<Floor>
-{	private static final long serialVersionUID = 1L;
-
-	/////////////////////////////////////////////////////////////////
-	// GESTURE PACK		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
-	static
-	{	// APPEARING
-		// BOUNCING
-		// BURNING
-		// CRYING
-		// EXULTING
-		// HIDING
-		// JUMPING
-		// LANDING
-		// OSCILLATING
-		// OSCILLATING_FAILING
-		// PUNCHED
-		// PUNCHING
-		// PUSHING
-		// RELEASED
-		// SLIDING
-		// SLIDING_FAILING
-		// SPAWNING
-		// STANDING
-		animeReplacements.put(GestureName.STANDING,null);
-		// STANDING_FAILING
-		// WAITING
-		// WALKING		
-	}
-	
-	public static HashMap<GestureName,GestureName> getAnimeReplacements()
-	{	return animeReplacements;
-	}
-
+{	
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -86,35 +44,6 @@ public class FloorFactory extends SpriteFactory<Floor>
 		
 		// result
 		result.initSprite(tile);
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public FloorFactory deepCopy(double zoomFactor) throws IOException
-	{	FloorFactory result = new FloorFactory();
-		
-		// misc
-		result.base = base;
-		result.name = name;
-		
-		// abilities
-		ArrayList<AbstractAbility> abilitiesCopy = new ArrayList<AbstractAbility>();
-		for(AbstractAbility ability: abilities)
-			abilitiesCopy.add(ability.cacheCopy(zoomFactor));
-		result.setAbilities(abilitiesCopy);
-		
-		// bombset
-		result.setBombsetColor(bombsetColor);
-		
-		// explosion
-		result.setExplosionName(explosionName);
-		
-		// gestures
-		GesturePack gesturePackCopy = gesturePack.deepCopy(zoomFactor,null);
-		result.setGesturePack(gesturePackCopy);
-
 		return result;
 	}
 

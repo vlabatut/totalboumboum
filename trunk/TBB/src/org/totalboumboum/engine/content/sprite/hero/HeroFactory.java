@@ -21,64 +21,12 @@ package org.totalboumboum.engine.content.sprite.hero;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.totalboumboum.engine.container.Cachable;
 import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 
-public class HeroFactory extends SpriteFactory<Hero> implements Cachable
-{	private static final long serialVersionUID = 1L;
-
-	/////////////////////////////////////////////////////////////////
-	// GESTURE PACK		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
-	static
-	{	// APPEARING
-		// BOUNCING
-		animeReplacements.put(GestureName.BOUNCING,GestureName.STANDING);
-		// BURNING
-		animeReplacements.put(GestureName.BURNING,null);
-		// CRYING
-		animeReplacements.put(GestureName.CRYING,GestureName.BURNING);
-		// EXULTING
-		animeReplacements.put(GestureName.EXULTING,GestureName.JUMPING);
-		// HIDING
-		// JUMPING
-		animeReplacements.put(GestureName.JUMPING,GestureName.STANDING);
-		// LANDING
-		animeReplacements.put(GestureName.LANDING,GestureName.STANDING);
-		// OSCILLATING
-		// OSCILLATING_FAILING
-		// PUNCHED
-		// PUNCHING
-		animeReplacements.put(GestureName.PUNCHING,GestureName.STANDING);
-		// PUSHING
-		animeReplacements.put(GestureName.PUSHING,GestureName.WALKING);
-		// RELEASED
-		// SLIDING
-		// SLIDING_FAILING
-		// SPAWNING
-		// STANDING
-		animeReplacements.put(GestureName.STANDING,null);
-		// STANDING_FAILING
-		// WAITING
-		animeReplacements.put(GestureName.WAITING,GestureName.STANDING);
-		// WALKING		
-		animeReplacements.put(GestureName.WALKING,null);
-	}
-	
-	public static HashMap<GestureName,GestureName> getAnimeReplacements()
-	{	return animeReplacements;
-	}
-
-	/////////////////////////////////////////////////////////////////
+public class HeroFactory extends SpriteFactory<Hero>
+{	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public Hero makeSprite(Tile tile)
@@ -98,35 +46,6 @@ public class HeroFactory extends SpriteFactory<Hero> implements Cachable
 		
 		// result
 		result.initSprite(tile);
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	public HeroFactory deepCopy(double zoomFactor, )
-	{	HeroFactory result = new HeroFactory();
-		
-		// misc
-		result.base = base;
-		result.name = name;
-		
-		// abilities
-		ArrayList<AbstractAbility> abilitiesCopy = new ArrayList<AbstractAbility>();
-		for(AbstractAbility ability: abilities)
-			abilitiesCopy.add(ability.cacheCopy(zoomFactor));
-		result.setAbilities(abilitiesCopy);
-		
-		// bombset
-		result.setBombsetColor(bombsetColor);
-		
-		// explosion
-		result.setExplosionName(explosionName);
-		
-		// gestures
-		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
-		result.setGesturePack(gesturePackCopy);
-
 		return result;
 	}
 

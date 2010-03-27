@@ -21,20 +21,14 @@ package org.totalboumboum.engine.content.sprite.item;
  * 
  */
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 import org.totalboumboum.engine.content.sprite.item.ItemEventManager;
-
 
 public class ItemFactory extends SpriteFactory<Item>
 {	private static final long serialVersionUID = 1L;
@@ -43,42 +37,6 @@ public class ItemFactory extends SpriteFactory<Item>
 	{	this.itemName = itemName;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// GESTURE PACK		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
-	static
-	{	// APPEARING
-		// BOUNCING
-		// BURNING
-		animeReplacements.put(GestureName.BURNING,null);
-		// CRYING
-		// EXULTING
-		// HIDING
-		animeReplacements.put(GestureName.HIDING,GestureName.NONE);
-		// JUMPING
-		// LANDING
-		// OSCILLATING
-		// OSCILLATING_FAILING
-		// PUNCHED
-		// PUNCHING
-		// PUSHING
-		// RELEASED
-		animeReplacements.put(GestureName.RELEASED,GestureName.APPEARING);
-		// SLIDING
-		// SLIDING_FAILING
-		// SPAWNING
-		// STANDING
-		animeReplacements.put(GestureName.STANDING,null);
-		// STANDING_FAILING
-		// WAITING
-		// WALKING		
-	}
-	
-	public static HashMap<GestureName,GestureName> getAnimeReplacements()
-	{	return animeReplacements;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES / ITEMREFS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -148,60 +106,6 @@ System.out.println("name: "+name);
 		result.setItemName(itemName);
 		result.initSprite(tile);		
 		
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public ItemFactory deepCopy(double zoomFactor) throws IOException
-	{	ItemFactory result = new ItemFactory(itemName);
-		
-		// misc
-		result.base = base;
-		result.name = name;
-		
-		// item abilities
-		List<List<AbstractAbility>> itemAbilitiesCopy = new ArrayList<List<AbstractAbility>>();
-		for(List<AbstractAbility> abilityList: itemAbilities)
-		{	List<AbstractAbility> temp = new ArrayList<AbstractAbility>();
-			for(AbstractAbility ability: abilityList)
-				temp.add(ability.cacheCopy(zoomFactor));
-			itemAbilitiesCopy.add(temp);
-		}
-		result.itemAbilities = itemAbilitiesCopy;
-		
-		// item refs
-		List<String> itemrefsCopy = new ArrayList<String>();
-		for(String itemref: itemrefs)
-			itemrefsCopy.add(itemref);
-		result.itemrefs = itemrefsCopy;
-		
-		// item probabilities
-		ArrayList<Float> itemProbabilitiesCopy = new ArrayList<Float>();
-		for(Float proba: itemProbabilities)
-			itemProbabilitiesCopy.add(proba);
-		result.itemProbabilities = itemProbabilitiesCopy;
-
-		// item name
-		result.itemName = itemName;
-		
-		// abilities
-		ArrayList<AbstractAbility> abilitiesCopy = new ArrayList<AbstractAbility>();
-		for(AbstractAbility ability: abilities)
-			abilitiesCopy.add(ability.cacheCopy(zoomFactor));
-		result.setAbilities(abilitiesCopy);
-		
-		// bombset
-		result.setBombsetColor(bombsetColor);
-		
-		// explosion
-		result.setExplosionName(explosionName);
-		
-		// gestures
-		GesturePack gesturePackCopy = gesturePack.deepCopy(zoomFactor,null);
-		result.setGesturePack(gesturePackCopy);
-
 		return result;
 	}
 
