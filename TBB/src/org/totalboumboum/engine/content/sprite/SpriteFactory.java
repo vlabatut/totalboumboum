@@ -41,8 +41,7 @@ import org.totalboumboum.engine.content.manager.modulation.ModulationManager;
 import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 
 public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFactory<T,GesturePack>
-{	private static final long serialVersionUID = 1L;
-
+{	
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -21,67 +21,16 @@ package org.totalboumboum.engine.content.sprite.bomb;
  * 
  */
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 
-
 public class BombFactory extends SpriteFactory<Bomb>
-{	private static final long serialVersionUID = 1L;
-
+{	
 	public BombFactory(String bombName)
 	{	this.bombName = bombName;
 	}	
 	
-	/////////////////////////////////////////////////////////////////
-	// GESTURE PACK		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
-	static
-	{	// APPEARING
-		// BOUNCING
-		// BURNING
-		animeReplacements.put(GestureName.BURNING,null);
-		// CRYING
-		// EXULTING
-		// HIDING
-		// JUMPING
-		// LANDING
-		animeReplacements.put(GestureName.LANDING,GestureName.STANDING);
-		// OSCILLATING
-		animeReplacements.put(GestureName.OSCILLATING,GestureName.STANDING);
-		// OSCILLATING_FAILING
-		animeReplacements.put(GestureName.OSCILLATING_FAILING,GestureName.STANDING_FAILING);
-		// PUNCHED
-		animeReplacements.put(GestureName.PUNCHED,GestureName.STANDING);
-		// PUNCHING
-		// PUSHING
-		// RELEASED
-		// SLIDING
-		animeReplacements.put(GestureName.SLIDING,GestureName.STANDING);
-		// SLIDING_FAILING
-		animeReplacements.put(GestureName.SLIDING_FAILING,GestureName.STANDING_FAILING);
-		// SPAWNING
-		// STANDING
-		animeReplacements.put(GestureName.STANDING,null);
-		// STANDING_FAILING
-		animeReplacements.put(GestureName.STANDING_FAILING,GestureName.STANDING);
-		// WAITING
-		// WALKING		
-	}
-	
-	public static HashMap<GestureName,GestureName> getAnimeReplacements()
-	{	return animeReplacements;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -109,57 +58,6 @@ public class BombFactory extends SpriteFactory<Bomb>
 		// result
 		result.setBombName(bombName);
 		result.initSprite(tile);
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public BombFactory surfaceCopy()
-	{	BombFactory result = new BombFactory(bombName);
-
-		// misc
-		result.setName(name);
-		result.setBase(base);
-		
-		// abilities
-		result.setAbilities(abilities);
-		
-		// bombset
-		//TODO to be completed later (?)
-		
-		// explosion
-		result.setExplosionName(explosionName);
-		
-		// gestures
-		result.setGesturePack(gesturePack.surfaceCopy());
-		
-		return result;
-	}
-	
-	public BombFactory deepCopy(double zoomFactor, PredefinedColor color) throws IOException
-	{	BombFactory result = new BombFactory(bombName);
-		
-		// misc
-		result.base = base;
-		result.name = name;
-		
-		// abilities
-		ArrayList<AbstractAbility> abilitiesCopy = new ArrayList<AbstractAbility>();
-		for(AbstractAbility ability: abilities)
-			abilitiesCopy.add(ability.cacheCopy(zoomFactor));
-		result.setAbilities(abilitiesCopy);
-		
-		// bombset
-		result.setBombsetColor(bombsetColor);
-		
-		// explosion
-		result.setExplosionName(explosionName);
-		
-		// gestures
-		GesturePack gesturePackCopy = gesturePack.deepCopy(zoomFactor,color);
-		result.setGesturePack(gesturePackCopy);
-
 		return result;
 	}
 

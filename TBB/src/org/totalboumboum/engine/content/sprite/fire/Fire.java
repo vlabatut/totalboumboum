@@ -39,8 +39,6 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 
 public class Fire extends Sprite
 {	
-	private String firesetName;
-	
 	public Fire()
 	{	super();
 	}	
@@ -55,6 +53,8 @@ public class Fire extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// FIRESET NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private String firesetName;
+	
 	public String getFiresetName()
 	{	return firesetName;	
 	}
