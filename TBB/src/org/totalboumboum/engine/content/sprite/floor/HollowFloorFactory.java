@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.sprite.block;
+package org.totalboumboum.engine.content.sprite.floor;
 
 /*
  * Total Boum Boum
@@ -27,9 +27,9 @@ import java.util.HashMap;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.HollowSpriteFactory;
 
-public class HollowBlockFactory extends HollowSpriteFactory<Block>
+public class HollowFloorFactory extends HollowSpriteFactory<Floor>
 {	private static final long serialVersionUID = 1L;
-	
+
 	/////////////////////////////////////////////////////////////////
 	// GESTURE PACK		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -38,11 +38,9 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 	{	// APPEARING
 		// BOUNCING
 		// BURNING
-		animeReplacements.put(GestureName.BURNING,null);
 		// CRYING
 		// EXULTING
 		// HIDING
-		animeReplacements.put(GestureName.HIDING,GestureName.NONE);
 		// JUMPING
 		// LANDING
 		// OSCILLATING
@@ -53,6 +51,7 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 		// RELEASED
 		// SLIDING
 		// SLIDING_FAILING
+		// SPAWNING
 		// STANDING
 		animeReplacements.put(GestureName.STANDING,null);
 		// STANDING_FAILING
@@ -65,34 +64,36 @@ public class HollowBlockFactory extends HollowSpriteFactory<Block>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	super.finish();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
 	/**
 	 * no need to copy sprite-specific info (item name, etc)
 	 * since it's not defined in the sprite file, but in the set file.
 	 * consequently, it should be initialized after the copy, depending
 	 * on the content of the set file.
 	 */
-	public HollowBlockFactory copy()
-	{	HollowBlockFactory result = new HollowBlockFactory();
+	public HollowFloorFactory copy()
+	{	HollowFloorFactory result = new HollowFloorFactory();
 		
 		initCopy(result);
 		
 		return result;
 	}
-	
-	public BlockFactory fill(double zoomFactor) throws IOException
-	{	BlockFactory result = new BlockFactory();
+
+	public FloorFactory fill(double zoomFactor) throws IOException
+	{	FloorFactory result = new FloorFactory();
 		
 		initFill(result,zoomFactor,null);
-	
+
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
 	}
 }

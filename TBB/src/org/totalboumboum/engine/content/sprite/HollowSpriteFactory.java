@@ -68,6 +68,9 @@ public abstract class HollowSpriteFactory<T extends Sprite> extends AbstractSpri
 		
 		// explosions
 		result.setExplosionName(explosionName);
+		
+		// misc
+		result.setName(name);
 	}
 	
 	/**
