@@ -23,20 +23,14 @@ package org.totalboumboum.engine.content.sprite;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-
 import org.jdom.Element;
 import org.totalboumboum.engine.content.feature.Role;
-import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
-import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.feature.gesture.HollowGesture;
 import org.totalboumboum.engine.content.feature.gesture.HollowGesturePack;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
@@ -68,16 +62,6 @@ public abstract class HollowSpriteFactoryLoader
 	/////////////////////////////////////////////////////////////////
 	// GESTURES						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected static <T extends Sprite> void loadGeneralElement(Element root, SpriteFactory<T> result, SpriteFactory<T> base)
-	{	Element elt = root.getChild(XmlNames.GENERAL);
-	
-		// name
-		String name = elt.getAttribute(XmlNames.NAME).getValue().trim();
-		result.setName(name);
-		
-		loadGeneralElement(result,base);
-	}
-	
 	protected static void initDefaultGestures(HollowGesturePack gesturePack, Role role)
 	{	{	// gesture NONE
 			GestureName gestureName = GestureName.NONE;

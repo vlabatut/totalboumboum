@@ -51,7 +51,7 @@ public class HollowBlockFactoryLoader extends HollowSpriteFactoryLoader
 		Element elt = root.getChild(XmlNames.GENERAL);
 		String folder;
 		
-		// init
+		// GENERAL
 		String baseStr = root.getAttributeValue(XmlNames.BASE);
 		HollowGesturePack gesturePack;
 		List<AbstractAbility> abilities;
@@ -80,8 +80,7 @@ public class HollowBlockFactoryLoader extends HollowSpriteFactoryLoader
 		result.setName(name);
 //if(name==null)
 //	System.out.println();
-		
-		
+				
 		// ABILITIES
 		folder = folderPath+File.separator+FileNames.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
@@ -105,8 +104,7 @@ public class HollowBlockFactoryLoader extends HollowSpriteFactoryLoader
 		
 		// result
 		if(!isAbstract)
-			initDefaultGestures(gesturePack,Role.BLOCK);
-		
+			initDefaultGestures(gesturePack,Role.BLOCK);		
 		return result;
 	}	
 }
