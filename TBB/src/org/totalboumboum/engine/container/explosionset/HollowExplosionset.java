@@ -21,90 +21,35 @@ package org.totalboumboum.engine.container.explosionset;
  * 
  */
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.totalboumboum.engine.container.CachableSpriteContainer;
-import org.totalboumboum.engine.container.level.instance.Instance;
-import org.xml.sax.SAXException;
 
-public class HollowExplosionset implements Serializable, CachableSpriteContainer
+public class HollowExplosionset extends AbstractExplosionset<HollowExplosion> implements Serializable, CachableSpriteContainer
 {	private static final long serialVersionUID = 1L;
 
 	public HollowExplosionset()
-	{	explosions = new HashMap<String,Explosion>();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// INSTANCE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private transient Instance instance = null;
-	
-	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	this.instance = instance;
-		for(Explosion explosion: explosions.values())
-			explosion.setInstance(instance);
-	}
-
-	public Instance getInstance()
-	{	return instance;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// EXPLOSIONS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private HashMap<String,Explosion> explosions;
-	
-	@SuppressWarnings("unused")
-	private void setExplosions(HashMap<String,Explosion> explosions)
-	{	this.explosions = explosions;
-	}
-	
-	public void addExplosion(String name, Explosion explosion)
-	{	explosions.put(name,explosion);
-	}
-	
-	public Explosion getExplosion(String name)
-	{	Explosion result = explosions.get(name);
-		return result;
+	{	explosions = new HashMap<String,HollowExplosion>();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-/*	public Explosionset copy()
-	{	Explosionset result = new Explosionset();
-		for(Entry<String,Explosion> entry: explosions.entrySet())
-		{	Explosion explosion = entry.getValue().copy();
-			String name = entry.getKey();
-			result.addExplosion(name,explosion);
-		}
-		return result;
-	}
-	*/
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/*
-	 * the Bombset has already been copied/loaded, so it is taken from the level
+	/**
+	 * used when generating actual Sprites from Hollow objects.
+	 * Images names are replaced by the actual images, scalable stuff
+	 * is scaled, etc.
 	 */
-/*	public Explosionset cacheCopy()
-	{	Explosionset result = RoundVariables.level.getBombset();
-		return result;
-	}*/
+	public Explosionset fill(double zoomFactor)
+	{	Explosionset result = new Explosionset();
 	
-	public HollowExplosionset deepCopy(double zoomFactor)
-	{	HollowExplosionset result = new HollowExplosionset();
-	
-		for(Entry<String,Explosion> entry: explosions.entrySet())
+		for(Entry<String,HollowExplosion> entry: explosions.entrySet())
 		{	String key = entry.getKey();
-			Explosion explosion = entry.getValue();
-			result.addExplosion(key,explosion.cacheCopy(zoomFactor));
-		
+			HollowExplosion hollowExplosion = entry.getValue();
+			Explosion explosion = hollowExplosion.fill(zoomFactor);
+			result.addExplosion(key,explosion);	
 		}
 	
 		return result;
@@ -117,10 +62,7 @@ public class HollowExplosionset implements Serializable, CachableSpriteContainer
 	
 	public void finish()
 	{	if(!finished)
-		{	finished = true;
-			for(Explosion explosion: explosions.values())
-				explosion.finish();
-			explosions.clear();
+		{	super.finish();
 		}
 	}
 }

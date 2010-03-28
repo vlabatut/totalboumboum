@@ -47,8 +47,8 @@ public class HollowExplosion extends AbstractExplosion implements Serializable
 	 * the fireset has already been copied/loaded, so it is taken from the current level
 	 * the rest of the explosion is copied normally
 	 */
-	public HollowExplosion cacheCopy(double zoomFactor)
-	{	HollowExplosion result = new HollowExplosion();
+	public Explosion fill(double zoomFactor)
+	{	Explosion result = new Explosion();
 	
 		result.setFiresetName(firesetName);
 		
