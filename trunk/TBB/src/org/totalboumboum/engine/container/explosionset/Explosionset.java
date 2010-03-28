@@ -32,7 +32,7 @@ import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.xml.sax.SAXException;
 
-public class Explosionset implements Serializable, CachableSpriteContainer
+public class Explosionset extends AbstractExplosion
 {	private static final long serialVersionUID = 1L;
 
 	public Explosionset()

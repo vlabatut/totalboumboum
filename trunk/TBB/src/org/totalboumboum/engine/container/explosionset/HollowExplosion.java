@@ -21,32 +21,12 @@ package org.totalboumboum.engine.container.explosionset;
  * 
  */
 
-import java.io.IOException;
+import java.io.Serializable;
 
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.engine.container.fireset.Fireset;
-import org.totalboumboum.engine.container.level.instance.Instance;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.sprite.fire.Fire;
-import org.xml.sax.SAXException;
+public class HollowExplosion extends AbstractExplosion implements Serializable
+{	private static final long serialVersionUID = 1L;
 
-public class Explosion extends AbstractExplosion
-{	
-	/////////////////////////////////////////////////////////////////
-	// INSTANCE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Instance instance = null;
-	
-	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	this.instance = instance;
-		fireset = instance.getFiresetMap().getFireset(firesetName);
-	}
-
-	public Instance getInstance()
-	{	return instance;	
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -61,25 +41,14 @@ public class Explosion extends AbstractExplosion
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FIRESET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Fireset fireset = null;
-
-	public Fire makeFire(String name, Tile tile)
-	{	Fire result = null;
-		result = fireset.makeFire(name,tile);
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// CACHE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/*
 	 * the fireset has already been copied/loaded, so it is taken from the current level
 	 * the rest of the explosion is copied normally
 	 */
-	public Explosion copy(double zoomFactor)
-	{	Explosion result = new Explosion();
+	public HollowExplosion cacheCopy(double zoomFactor)
+	{	HollowExplosion result = new HollowExplosion();
 	
 		result.setFiresetName(firesetName);
 		
@@ -94,10 +63,6 @@ public class Explosion extends AbstractExplosion
 	public void finish()
 	{	if(!finished)
 		{	super.finish();
-			if(fireset!=null)
-			{	fireset.finish();
-				fireset = null;
-			}
 		}
 	}
 }
