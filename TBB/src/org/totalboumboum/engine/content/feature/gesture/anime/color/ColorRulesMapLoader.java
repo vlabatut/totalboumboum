@@ -67,7 +67,37 @@ public class ColorRulesMapLoader
 		return result;
 	}
 	
-	private static ColorMap loadColormapElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+    @SuppressWarnings("unchecked")
+    public static Object loadColorsElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+    {	Object result=null;
+    	// folder
+    	String localFilePath = individualFolder;
+    	Attribute attribute = root.getAttribute(XmlNames.FOLDER);
+    	if(attribute!=null)
+			localFilePath = localFilePath+File.separator+attribute.getValue();
+		// colormaps
+    	List<Element> clrs = root.getChildren();
+    	int i=0;
+		while(result==null && i<clrs.size())
+    	{	Element temp = clrs.get(i);
+    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
+    		if(name.equalsIgnoreCase(color.toString()))
+    		{	// colormap
+    			if(temp.getName().equals(XmlNames.COLORMAP))
+    				result = loadColormapElement(temp,localFilePath,color);
+    			// colorsprite
+    			else if(temp.getName().equals(XmlNames.COLORSPRITE))
+    				result = loadColorspriteElement(temp,localFilePath,color);
+    		}
+    		else
+    			i++;
+    	}
+		if(result==null)
+			;// erreur
+		return result;
+    }
+
+    private static ColorMap loadColormapElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
 	{	// file
 		String localPath = individualFolder+File.separator;
 		localPath = localPath + root.getAttribute(XmlNames.FILE).getValue().trim();

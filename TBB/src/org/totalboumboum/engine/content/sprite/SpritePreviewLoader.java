@@ -1,5 +1,26 @@
 package org.totalboumboum.engine.content.sprite;
 
+/*
+ * Total Boum Boum
+ * Copyright 2008-2010 Vincent Labatut 
+ * 
+ * This file is part of Total Boum Boum.
+ * 
+ * Total Boum Boum is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Total Boum Boum is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +37,7 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMapLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;
@@ -29,8 +51,6 @@ public class SpritePreviewLoader
 	private static boolean loadImages;
 	private static boolean loadName;
 	private static boolean loadSource;
-	
-	
 	
 	public static SpritePreview loadHeroPreview(String packName, String spriteName) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	loadAuthor = true;
@@ -190,7 +210,7 @@ public class SpritePreviewLoader
 			    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
 			    		name = name.toUpperCase(Locale.ENGLISH);
 			    		PredefinedColor color = PredefinedColor.valueOf(name);
-			    		Object obj = ImageTools.loadColorsElement(elt,folderPath,color);
+			    		Object obj = ColorRulesMapLoader.loadColorsElement(elt,folderPath,color);
 						if(obj instanceof ColorMap)
 						{	ColorMap colormap = (ColorMap)obj;
 							String imagePath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;

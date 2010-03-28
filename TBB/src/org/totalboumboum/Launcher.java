@@ -1166,43 +1166,6 @@ public class Launcher
 	 */
 	
 	/**
-	 * TODO risque d'y avoir pas mal de modifs à faire :
-	 *  - au niveau des héros, pas bien capté comment c'est foutu
-	 *  - au niveau du cache mémoire des sprites: pas besoin de faire de deep copy
-	 *  - le fait que les ombres soient traitées à part niveau colormap ne me plait pas trop 
-	 *  		>> traitement classique, et de toute façon le noir ne bouge pas
-	 *  		>> tester si l'image est indexée (on applique) ou pas (même image pour tous). alpha -> pas indexée
-	 *  >> 
-	 *  	- revoir le chargement en deux temps des bombes/heroes, le nouveau système devrait le rendre inutile
-	 *      - au besoin, le coupler avec un cache sprite obligatoire
-	 *      - placer les trucs communs dans l'instance ?
-	 *     
-	 *     		
-	 *     
-	 *     
-	 *     ALGO:
-	 *     1) charger les fichiers XML avec les colormaps et les chemins
-	 *     2) instancier les sprites sous la forme d'une copie zoomée, ce qui provoque le chargement des images nécessaires
-	 *     - les colormaps doivent être stockées au niveau des sprites et non pas du cache, car c'est ce qui est enregistré lors du cache fichier
-	 *     		>> ça signifie que le cache fichier est coloré, et non pas neutre
-	 *     - quand un sprite a été chargé, il est mis en cache sans ses images, c'est pour ça que les images doivent être chargées séparément
-	 *     		>> zoomé ou pas zoomé, il faut faire une copie du sprite
-	 *     - le cache des sprites est obligatoire et sa longueur est exprimée en nombre de sprites
-	 *     - le chargement des sprites colorés ne devrait pas être différent de celui des autres, en utilisant les sprites abstraits
-	 *     		>> faut protéger les sprites héros de manière à ce qu'un petit malin ne s'amuse pas à les surcharger
-	 *     - ancien système de cache : si le sprite est trouvé en cache, il n'est pas copié/zoomé: seulement superficiellement copié
-	 *     		>> le zoom n'a pas besoin d'être spécifié quand on charge les sprites (puisque tout est à l'échelle 1:1)
-	 *     		>> au niveau des sprites, il y a trois niveau de copie:
-	 *     			- deep copy: absolument tout est cloné, car les images sont chargées: instanciation d'une factory (qui n'avait a priori pas d'images elle-même)
-	 *     				- p-ê que celle là pourrait contenir toutes les colormaps? utilisées lors du clonage 
-	 *     			- superficial copy: pour copier une factory qui va être utilisée par héritage. pas besoin des images, mais tout doit être copié
-	 *     			- make sprite: les gestures sont réutilisées, pour le reste c'est à voir...
-	 *     		>> faut adapter les finish() en conséquence, histoire de ne pas supprimer les infos de la factory
-	 *     - p-ê que pour plus de clarté, faudrait distinguer les classes factory et abstract factory?
-	 *     		>> trop difficile et lourd
-	 */
-	
-	/**
 	 * TODO
 	 * dans les fichiers XML animes et trajectoires : pr chaque dir/gesture,
 	 * possibilité (sous forme d'attribut) de redéfinir ou compléter
