@@ -31,10 +31,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
-
 
 import org.jdom.Element;
 import org.totalboumboum.configuration.Configuration;
@@ -43,7 +42,7 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.feature.gesture.GesturePack;
+import org.totalboumboum.engine.content.feature.gesture.HollowGesturePack;
 import org.totalboumboum.engine.content.feature.gesture.anime.HollowAnimesLoader;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.HollowTrajectoriesLoader;
@@ -51,6 +50,7 @@ import org.totalboumboum.engine.content.sprite.HollowSpriteFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
 public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
@@ -58,10 +58,9 @@ public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 	/* 
 	 * load the base HeroFactory (i.e. no graphics nor bombset)
 	 */
-	public static HeroFactory loadHeroFactory(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static HollowHeroFactory loadBase(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		//double zoomFactor = RoundVariables.zoomFactor;
-		HeroFactory result = null;
+		HollowHeroFactory result = null;
 		
 		// caching
 		String cachePath = FilePaths.getCacheHeroesPath()+ File.separator;
@@ -73,7 +72,7 @@ public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromSpriteCache(cacheName);
 		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
-		{	result = ((HeroFactory)o);
+		{	result = ((HollowHeroFactory)o);
 			//result = result.cacheCopy(zoomFactor);
 		}
 		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
@@ -81,7 +80,7 @@ public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				result = (HeroFactory)oIn.readObject();
+				result = (HollowHeroFactory)oIn.readObject();
 				oIn.close();
 				//result = result.cacheCopy(zoomFactor);
 			}
@@ -98,7 +97,7 @@ public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 		
 		if(result==null)
 		{	// opening & loading
-			result = init(folderPath);
+			result = initBase(folderPath);
 			// caching
 			if(engineConfiguration.isSpriteMemoryCached())
 			{	engineConfiguration.addToSpriteCache(cacheName,result);
@@ -117,18 +116,27 @@ public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 		return result;
 	}		
 		
-	private static HeroFactory init(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static HollowHeroFactory initBase(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		HeroFactory result = new HeroFactory();
+		HollowHeroFactory result = new HollowHeroFactory();
 		Element root = HollowSpriteFactoryLoader.openFile(folderPath);
+		Element elt = root.getChild(XmlNames.GENERAL);
 		String folder;
 		
 		// GENERAL
-		loadGeneralElement(root,result,new HashMap<String,HeroFactory>());
-		GesturePack gesturePack = result.getGesturePack();
+		// gestures pack
+		HollowGesturePack gesturePack = new HollowGesturePack();
+		result.setGesturePack(gesturePack);
+		// abilities
+		List<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
+		result.setAbilities(abilities);
+		// name
+		String name = elt.getAttribute(XmlNames.NAME).getValue().trim();
+		result.setName(name);
+//if(name==null)
+//	System.out.println();
 
 		// ABILITIES
-		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		folder = folderPath + File.separator+FileNames.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 
@@ -152,32 +160,29 @@ public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 	/*
 	 * complete the base HeroFactory with graphics and bombset
 	 */
-	public static HeroFactory completeHeroFactory(String folderPath, PredefinedColor color, HeroFactory base) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static HeroFactory completeHeroFactory(String folderPath, PredefinedColor color, HollowHeroFactory base) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		double zoomFactor = RoundVariables.zoomFactor;
-		HeroFactory result = null;
+		HollowHeroFactory original = null;
 		
 		// caching
 		String cachePath = FilePaths.getCacheHeroesPath()+ File.separator;
 		File spriteFile = new File(folderPath);
 		File packFile = spriteFile.getParentFile();
-		String c = color.toString();
-		String cacheName = packFile.getName()+"_"+spriteFile.getName()+"_"+c;
+		String cacheName = packFile.getName()+"_"+spriteFile.getName();
 		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromSpriteCache(cacheName);
 		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
-		{	result = ((HeroFactory)o).deepCopy(zoomFactor);
+		{	original = (HollowHeroFactory)o;
 		}
 		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				result = (HeroFactory)oIn.readObject();
+				original = (HollowHeroFactory)oIn.readObject();
 				oIn.close();
-				result = result.deepCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -190,44 +195,47 @@ public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 			}
 		}
 		
-		if(result==null)
+		if(original==null)
 		{	// opening & loading
-			result = complete(folderPath,color,base);
+			original = complete(folderPath,base);
 			// caching
 			if(engineConfiguration.isSpriteMemoryCached())
-			{	engineConfiguration.addToSpriteCache(cacheName,result);
-				result = result.deepCopy(zoomFactor);
+			{	engineConfiguration.addToSpriteCache(cacheName,original);
 			}
 			if(engineConfiguration.isSpriteFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
-				oOut.writeObject(result);
+				oOut.writeObject(original);
 				oOut.close();
-				result = result.deepCopy(zoomFactor);
 			}
 		}
 		
+		double zoomFactor = RoundVariables.zoomFactor;
+		HeroFactory result = original.fill(zoomFactor,color);
 		return result;
 	}
 	
-	private static HeroFactory complete(String folderPath, PredefinedColor color, HeroFactory base) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static HollowHeroFactory complete(String folderPath, HollowHeroFactory base) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		HeroFactory result = new HeroFactory();
+		HollowHeroFactory result = base.copy();
 		Element root = HollowSpriteFactoryLoader.openFile(folderPath);
+		Element elt = root.getChild(XmlNames.GENERAL);
 		String folder;
-		
+	
 		// GENERAL
-		loadGeneralElement(root,result,base);
-		GesturePack gesturePack = result.getGesturePack();
+		// gestures pack
+		HollowGesturePack gesturePack = result.getGesturePack();
+		// name
+		String name = elt.getAttribute(XmlNames.NAME).getValue().trim();
+		result.setName(name);
+//if(name==null)
+//	System.out.println();
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileNames.FOLDER_ANIMES;
-		HollowAnimesLoader.loadAnimes(folder,gesturePack,color,HeroFactory.getAnimeReplacements());
+		HollowAnimesLoader.loadAnimes(folder,gesturePack);
 		
-		// BOMBSET
-		result.setBombsetColor(color);
-
 		// result
 		initDefaultGestures(gesturePack,Role.HERO);
 		return result;

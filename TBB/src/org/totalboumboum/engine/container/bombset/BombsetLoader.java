@@ -61,7 +61,6 @@ public class BombsetLoader
 	/////////////////////////////////////////////////////////////////
 	public static Bombset initBombset(String folderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		double zoomFactor = RoundVariables.zoomFactor;
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_SCHEMA);
@@ -117,6 +116,7 @@ public class BombsetLoader
 			}
 		}
 
+		double zoomFactor = RoundVariables.zoomFactor;
 		Bombset result = original.deepCopy(zoomFactor,color);
 		return result;
 	}
