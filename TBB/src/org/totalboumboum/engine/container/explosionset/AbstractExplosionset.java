@@ -22,70 +22,94 @@ package org.totalboumboum.engine.container.explosionset;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.engine.container.fireset.Fireset;
+import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.container.level.instance.Instance;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.xml.sax.SAXException;
 
-public class Explosion extends AbstractExplosion
-{	
+public class AbstractExplosionset
+{	private static final long serialVersionUID = 1L;
+
+	public AbstractExplosionset()
+	{	explosions = new HashMap<String,Explosion>();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Instance instance = null;
+	private transient Instance instance = null;
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
-		fireset = instance.getFiresetMap().getFireset(firesetName);
+		for(Explosion explosion: explosions.values())
+			explosion.setInstance(instance);
 	}
 
 	public Instance getInstance()
 	{	return instance;	
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// EXPLOSIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<String,Explosion> explosions;
 	
-	/////////////////////////////////////////////////////////////////
-	// NAME				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	String name;
-
-	public String getName()
-	{	return name;
+	@SuppressWarnings("unused")
+	private void setExplosions(HashMap<String,Explosion> explosions)
+	{	this.explosions = explosions;
 	}
-
-	public void setName(String name)
-	{	this.name = name;
+	
+	public void addExplosion(String name, Explosion explosion)
+	{	explosions.put(name,explosion);
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// FIRESET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Fireset fireset = null;
-
-	public Fire makeFire(String name, Tile tile)
-	{	Fire result = null;
-		result = fireset.makeFire(name,tile);
+	
+	public Explosion getExplosion(String name)
+	{	Explosion result = explosions.get(name);
 		return result;
 	}
-
+	
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+/*	public Explosionset copy()
+	{	Explosionset result = new Explosionset();
+		for(Entry<String,Explosion> entry: explosions.entrySet())
+		{	Explosion explosion = entry.getValue().copy();
+			String name = entry.getKey();
+			result.addExplosion(name,explosion);
+		}
+		return result;
+	}
+	*/
 	/////////////////////////////////////////////////////////////////
 	// CACHE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/*
-	 * the fireset has already been copied/loaded, so it is taken from the current level
-	 * the rest of the explosion is copied normally
+	 * the Bombset has already been copied/loaded, so it is taken from the level
 	 */
-	public Explosion copy(double zoomFactor)
-	{	Explosion result = new Explosion();
+/*	public Explosionset cacheCopy()
+	{	Explosionset result = RoundVariables.level.getBombset();
+		return result;
+	}*/
 	
-		result.setFiresetName(firesetName);
+	public AbstractExplosionset deepCopy(double zoomFactor)
+	{	AbstractExplosionset result = new AbstractExplosionset();
+	
+		for(Entry<String,Explosion> entry: explosions.entrySet())
+		{	String key = entry.getKey();
+			Explosion explosion = entry.getValue();
+			result.addExplosion(key,explosion.cacheCopy(zoomFactor));
 		
+		}
+	
 		return result;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -93,11 +117,10 @@ public class Explosion extends AbstractExplosion
 	
 	public void finish()
 	{	if(!finished)
-		{	super.finish();
-			if(fireset!=null)
-			{	fireset.finish();
-				fireset = null;
-			}
+		{	finished = true;
+			for(Explosion explosion: explosions.values())
+				explosion.finish();
+			explosions.clear();
 		}
 	}
 }
