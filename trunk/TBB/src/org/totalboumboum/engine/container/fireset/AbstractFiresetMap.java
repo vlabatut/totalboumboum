@@ -21,72 +21,33 @@ package org.totalboumboum.engine.container.fireset;
  * 
  */
 
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.totalboumboum.engine.container.CachableSpriteContainer;
-import org.totalboumboum.engine.container.level.instance.Instance;
-import org.xml.sax.SAXException;
-
-public class AbstractFiresetMap implements Serializable, CachableSpriteContainer
-{	private static final long serialVersionUID = 1L;
-
-	/////////////////////////////////////////////////////////////////
-	// INSTANCE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private transient Instance instance = null;
-	
-	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	this.instance = instance;
-		for(Fireset fireset: firesets.values())
-			fireset.setInstance(instance);
-	}
-
-	public Instance getInstance()
-	{	return instance;	
-	}
-
+public abstract class AbstractFiresetMap<T extends AbstractFireset>
+{	
 	/////////////////////////////////////////////////////////////////
 	// FIRESETS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final HashMap<String,Fireset> firesets = new HashMap<String, Fireset>();
+	protected final HashMap<String,T> firesets = new HashMap<String, T>();
 	
-	public void addFireset(String name, Fireset fireset)
+	public void addFireset(String name, T fireset)
 	{	firesets.put(name,fireset);		
 	}
 	
-	public Fireset getFireset(String name)
+	public T getFireset(String name)
 	{	return firesets.get(name);		
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public AbstractFiresetMap deepCopy(double zoomFactor) throws IOException
-	{	AbstractFiresetMap result = new AbstractFiresetMap();
-	
-		// firesets
-		for(Entry<String,Fireset> entry: firesets.entrySet())
-		{	String key = entry.getKey();
-			Fireset fireset = entry.getValue().deepCopy(zoomFactor);
-			result.addFireset(key,fireset);
-		}
-		
-		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
+	protected boolean finished = false;
 	
 	public void finish()
 	{	if(!finished)
-		{	for(Entry<String,Fireset> e: firesets.entrySet())
+		{	finished = true;
+			for(Entry<String,T> e: firesets.entrySet())
 				e.getValue().finish();
 			firesets.clear();
 		}

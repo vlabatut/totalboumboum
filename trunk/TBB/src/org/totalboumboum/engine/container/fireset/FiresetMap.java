@@ -22,19 +22,14 @@ package org.totalboumboum.engine.container.fireset;
  */
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.xml.sax.SAXException;
 
-public class FiresetMap implements Serializable, CachableSpriteContainer
-{	private static final long serialVersionUID = 1L;
-
+public class FiresetMap extends AbstractFiresetMap<Fireset>
+{	
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -51,44 +46,11 @@ public class FiresetMap implements Serializable, CachableSpriteContainer
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FIRESETS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private final HashMap<String,Fireset> firesets = new HashMap<String, Fireset>();
-	
-	public void addFireset(String name, Fireset fireset)
-	{	firesets.put(name,fireset);		
-	}
-	
-	public Fireset getFireset(String name)
-	{	return firesets.get(name);		
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public FiresetMap deepCopy(double zoomFactor) throws IOException
-	{	FiresetMap result = new FiresetMap();
-	
-		// firesets
-		for(Entry<String,Fireset> entry: firesets.entrySet())
-		{	String key = entry.getKey();
-			Fireset fireset = entry.getValue().deepCopy(zoomFactor);
-			result.addFireset(key,fireset);
-		}
-		
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
 	public void finish()
 	{	if(!finished)
-		{	for(Entry<String,Fireset> e: firesets.entrySet())
-				e.getValue().finish();
-			firesets.clear();
+		{	super.finish();
 		}
 	}
 }

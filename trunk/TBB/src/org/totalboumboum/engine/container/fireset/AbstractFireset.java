@@ -21,67 +21,12 @@ package org.totalboumboum.engine.container.fireset;
  * 
  */
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.totalboumboum.engine.container.level.instance.Instance;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.sprite.fire.Fire;
-import org.totalboumboum.engine.content.sprite.fire.FireFactory;
-import org.xml.sax.SAXException;
-
-public class AbstractFireset implements Serializable
-{	private static final long serialVersionUID = 1L;
-
-	public AbstractFireset()
-	{	fireFactories = new HashMap<String,FireFactory>();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// INSTANCE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private transient Instance instance = null;
-	
-	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	this.instance = instance;
-		for(FireFactory fireFactory: fireFactories.values())
-			fireFactory.setInstance(instance);
-	}
-
-	public Instance getInstance()
-	{	return instance;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FIRE FACTORIES	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private HashMap<String,FireFactory> fireFactories;
-	
-	public void addFireFactory(String name, FireFactory fireFactory)
-	{	fireFactories.put(name, fireFactory);
-		fireFactory.setFiresetName(name);
-	}
-	
-	public Fire makeFire(String name, Tile tile)
-	{	Fire result = null;
-		if(name==null)
-			name = fireFactories.keySet().iterator().next();
-		FireFactory fireFactory = fireFactories.get(name);
-if(fireFactory==null)
-	System.out.println(name);
-		result = fireFactory.makeSprite(tile);
-		return result;
-	}
-
+public abstract class AbstractFireset
+{	
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String name;
+	protected String name;
 	
 	public String getName()
 	{	return name;	
@@ -92,41 +37,14 @@ if(fireFactory==null)
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public AbstractFireset deepCopy(double zoomFactor) throws IOException
-	{	AbstractFireset result = new AbstractFireset();
-	
-		// name
-		result.name = name;
-	
-		// fires
-		for(Entry<String,FireFactory> entry: fireFactories.entrySet())
-		{	String key = entry.getKey();
-			FireFactory fireFactory = entry.getValue().deepCopy(zoomFactor);
-			result.addFireFactory(key,fireFactory);
-		}
-		
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
+	protected boolean finished = false;
 	
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
-			// factories
-			{	Iterator<Entry<String,FireFactory>> it = fireFactories.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<String,FireFactory> t = it.next();
-					FireFactory temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
-			}
+			name = null;
 		}
 	}
 }
