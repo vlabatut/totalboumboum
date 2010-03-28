@@ -67,21 +67,8 @@ public class Explosion extends AbstractExplosion
 
 	public Fire makeFire(String name, Tile tile)
 	{	Fire result = null;
+		
 		result = fireset.makeFire(name,tile);
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CACHE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/*
-	 * the fireset has already been copied/loaded, so it is taken from the current level
-	 * the rest of the explosion is copied normally
-	 */
-	public Explosion copy(double zoomFactor)
-	{	Explosion result = new Explosion();
-	
-		result.setFiresetName(firesetName);
 		
 		return result;
 	}

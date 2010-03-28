@@ -54,7 +54,7 @@ public class ExplosionsetLoader
 		String individualFolder = folderPath;
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_EXPLOSIONSET+FileNames.EXTENSION_SCHEMA);
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_EXPLOSIONSET+FileNames.EXTENSION_XML);
-		Explosionset original = null;
+		HollowExplosionset original = null;
 		
 		// caching
 		String cachePath = FilePaths.getCacheExplosionsPath()+ File.separator;
@@ -66,14 +66,14 @@ public class ExplosionsetLoader
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromSpriteCache(cachePath);
 		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
-		{	original = ((Explosionset)o);
+		{	original = ((HollowExplosionset)o);
 		}
 		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				original = (Explosionset)oIn.readObject();
+				original = (HollowExplosionset)oIn.readObject();
 				oIn.close();
 			}
 			catch (FileNotFoundException e)
@@ -105,13 +105,13 @@ public class ExplosionsetLoader
 			}
 		}
 
-		Explosionset result = original.deepCopy(zoomFactor);
+		Explosionset result = original.fill(zoomFactor);
 		return result;
     }
     
-	private static Explosionset loadExplosionsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	private static HollowExplosionset loadExplosionsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// init
-		Explosionset result = new Explosionset();
+		HollowExplosionset result = new HollowExplosionset();
 
     	Element explosionsElt = root.getChild(XmlNames.EXPLOSIONS);
 		loadExplosionsElement(explosionsElt,folder,result);
@@ -120,14 +120,14 @@ public class ExplosionsetLoader
 	}
     
 	@SuppressWarnings("unchecked")
-	private static void loadExplosionsElement(Element root, String folder, Explosionset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadExplosionsElement(Element root, String folder, HollowExplosionset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
     	List<Element> items = root.getChildren(XmlNames.EXPLOSION);
 		for(Element temp: items)
     		loadExplosionElement(temp,individualFolder,result);
 	}
     
-	private static void loadExplosionElement(Element root, String folder, Explosionset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadExplosionElement(Element root, String folder, HollowExplosionset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
@@ -135,12 +135,12 @@ public class ExplosionsetLoader
 		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
 		String individualFolder = folder+File.separator+attribute.getValue().trim();
 
-		Explosion explosion = loadExplosion(individualFolder);
+		HollowExplosion explosion = loadExplosion(individualFolder);
 		explosion.setName(name);
 		result.addExplosion(name,explosion);
     }
 	
-	private static Explosion loadExplosion(String pathFolder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static HollowExplosion loadExplosion(String pathFolder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String individualFolder = pathFolder;
 		String schemaFolder = FilePaths.getSchemasPath();
@@ -152,12 +152,12 @@ public class ExplosionsetLoader
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// loading
-		Explosion result = loadExplosionElement(root);
+		HollowExplosion result = loadExplosionElement(root);
 		return result;
 	}
 	
-    private static Explosion loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	Explosion result = new Explosion();
+    private static HollowExplosion loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	HollowExplosion result = new HollowExplosion();
     	
     	Element elt = root.getChild(XmlNames.FIRESET);
     	String firesetName = elt.getAttribute(XmlNames.NAME).getValue().trim();
