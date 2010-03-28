@@ -27,83 +27,35 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.totalboumboum.engine.container.level.instance.Instance;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.fire.FireFactory;
-import org.xml.sax.SAXException;
+import org.totalboumboum.engine.content.sprite.fire.HollowFireFactory;
 
-public class HollowFireset implements Serializable
+public class HollowFireset extends AbstractFireset implements Serializable
 {	private static final long serialVersionUID = 1L;
-
-	public HollowFireset()
-	{	fireFactories = new HashMap<String,FireFactory>();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// INSTANCE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private transient Instance instance = null;
-	
-	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	this.instance = instance;
-		for(FireFactory fireFactory: fireFactories.values())
-			fireFactory.setInstance(instance);
-	}
-
-	public Instance getInstance()
-	{	return instance;	
-	}
 
 	/////////////////////////////////////////////////////////////////
 	// FIRE FACTORIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,FireFactory> fireFactories;
+	private HashMap<String,HollowFireFactory> fireFactories = new HashMap<String,HollowFireFactory>();
 	
-	public void addFireFactory(String name, FireFactory fireFactory)
+	public void addFireFactory(String name, HollowFireFactory fireFactory)
 	{	fireFactories.put(name, fireFactory);
 		fireFactory.setFiresetName(name);
-	}
-	
-	public Fire makeFire(String name, Tile tile)
-	{	Fire result = null;
-		if(name==null)
-			name = fireFactories.keySet().iterator().next();
-		FireFactory fireFactory = fireFactories.get(name);
-if(fireFactory==null)
-	System.out.println(name);
-		result = fireFactory.makeSprite(tile);
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// NAME				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String name;
-	
-	public String getName()
-	{	return name;	
-	}
-	
-	public void setName(String name)
-	{	this.name = name;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public HollowFireset deepCopy(double zoomFactor) throws IOException
-	{	HollowFireset result = new HollowFireset();
+	public Fireset fill(double zoomFactor) throws IOException
+	{	Fireset result = new Fireset();
 	
 		// name
 		result.name = name;
 	
 		// fires
-		for(Entry<String,FireFactory> entry: fireFactories.entrySet())
+		for(Entry<String,HollowFireFactory> entry: fireFactories.entrySet())
 		{	String key = entry.getKey();
-			FireFactory fireFactory = entry.getValue().deepCopy(zoomFactor);
+			FireFactory fireFactory = entry.getValue().fill(zoomFactor);
 			result.addFireFactory(key,fireFactory);
 		}
 		
@@ -113,16 +65,14 @@ if(fireFactory==null)
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
 	public void finish()
 	{	if(!finished)
-		{	finished = true;
+		{	super.finish();
 			// factories
-			{	Iterator<Entry<String,FireFactory>> it = fireFactories.entrySet().iterator();
+			{	Iterator<Entry<String,HollowFireFactory>> it = fireFactories.entrySet().iterator();
 				while(it.hasNext())
-				{	Entry<String,FireFactory> t = it.next();
-					FireFactory temp = t.getValue();
+				{	Entry<String,HollowFireFactory> t = it.next();
+					HollowFireFactory temp = t.getValue();
 					temp.finish();
 					it.remove();
 				}

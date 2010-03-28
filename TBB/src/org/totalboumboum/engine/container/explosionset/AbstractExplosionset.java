@@ -23,7 +23,7 @@ package org.totalboumboum.engine.container.explosionset;
 
 import java.util.HashMap;
 
-public class AbstractExplosionset<T extends AbstractExplosion>
+public abstract class AbstractExplosionset<T extends AbstractExplosion>
 {	
 	/////////////////////////////////////////////////////////////////
 	// EXPLOSIONS		/////////////////////////////////////////////

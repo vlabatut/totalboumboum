@@ -22,7 +22,6 @@ package org.totalboumboum.engine.container.fireset;
  */
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -35,13 +34,9 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.fire.FireFactory;
 import org.xml.sax.SAXException;
 
-public class Fireset implements Serializable
+public class Fireset extends AbstractFireset
 {	private static final long serialVersionUID = 1L;
 
-	public Fireset()
-	{	fireFactories = new HashMap<String,FireFactory>();
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -60,7 +55,7 @@ public class Fireset implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// FIRE FACTORIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,FireFactory> fireFactories;
+	private HashMap<String,FireFactory> fireFactories = new HashMap<String,FireFactory>();
 	
 	public void addFireFactory(String name, FireFactory fireFactory)
 	{	fireFactories.put(name, fireFactory);
@@ -79,45 +74,11 @@ if(fireFactory==null)
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// NAME				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String name;
-	
-	public String getName()
-	{	return name;	
-	}
-	
-	public void setName(String name)
-	{	this.name = name;	
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public Fireset deepCopy(double zoomFactor) throws IOException
-	{	Fireset result = new Fireset();
-	
-		// name
-		result.name = name;
-	
-		// fires
-		for(Entry<String,FireFactory> entry: fireFactories.entrySet())
-		{	String key = entry.getKey();
-			FireFactory fireFactory = entry.getValue().deepCopy(zoomFactor);
-			result.addFireFactory(key,fireFactory);
-		}
-		
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
 	public void finish()
 	{	if(!finished)
-		{	finished = true;
+		{	super.finish();
 			// factories
 			{	Iterator<Entry<String,FireFactory>> it = fireFactories.entrySet().iterator();
 				while(it.hasNext())
