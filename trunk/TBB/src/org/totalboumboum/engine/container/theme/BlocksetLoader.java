@@ -30,7 +30,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.engine.content.sprite.block.BlockFactory;
+import org.totalboumboum.engine.content.sprite.block.HollowBlockFactory;
 import org.totalboumboum.engine.content.sprite.block.HollowBlockFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -43,7 +43,7 @@ public class BlocksetLoader
 	/////////////////////////////////////////////////////////////////
 	// GENERAL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static void loadBlockset(String folderPath, Theme result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void loadBlockset(String folderPath, HollowTheme result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
@@ -58,20 +58,20 @@ public class BlocksetLoader
 		loadBlocksetElement(root,individualFolder,result);
     }
     
-	private static void loadBlocksetElement(Element root, String folder, Theme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	private static void loadBlocksetElement(Element root, String folder, HollowTheme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// abstract blocks
-    	HashMap<String,BlockFactory> abstractItems = new HashMap<String,BlockFactory>();
+    	HashMap<String,HollowBlockFactory> abstractBlocks = new HashMap<String,HollowBlockFactory>();
     	Element abstractBlocksElt = root.getChild(XmlNames.ABSTRACT_BLOCKS);
     	if(abstractBlocksElt!=null)
-    		loadBlocksElement(abstractBlocksElt,folder,result,abstractItems,Type.ABSTRACT);
+    		loadBlocksElement(abstractBlocksElt,folder,result,abstractBlocks,Type.ABSTRACT);
     	
     	// concrete blocks
     	Element concreteBlocksElt = root.getChild(XmlNames.CONCRETE_BLOCKS);
-		loadBlocksElement(concreteBlocksElt,folder,result,abstractItems,Type.CONCRETE);
+		loadBlocksElement(concreteBlocksElt,folder,result,abstractBlocks,Type.CONCRETE);
 	}
 
 	@SuppressWarnings("unchecked")
-	private static void loadBlocksElement(Element root, String folder, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadBlocksElement(Element root, String folder, HollowTheme result, HashMap<String,HollowBlockFactory> abstractBlocks, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// blocks
 		List<Element> blcksCmpnts = root.getChildren(XmlNames.BLOCK);
 		for(Element temp: blcksCmpnts)
@@ -84,7 +84,7 @@ public class BlocksetLoader
 	}
     
     @SuppressWarnings("unchecked")
-    private static void loadGroupElement(Element root, String individualFolder, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    private static void loadGroupElement(Element root, String individualFolder, HollowTheme result, HashMap<String,HollowBlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlNames.NAME).getValue();
 		
@@ -99,7 +99,7 @@ public class BlocksetLoader
 			loadBlockElement(temp,localFilePath,name,result,abstractBlocks,type);
     }
     
-    private static void loadBlockElement(Element root, String individualFolder, String groupName, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    private static void loadBlockElement(Element root, String individualFolder, String groupName, HollowTheme result, HashMap<String,HollowBlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlNames.NAME).getValue();
 		
@@ -110,7 +110,7 @@ public class BlocksetLoader
 		
 		// components
 		boolean isAbstract = type==Type.ABSTRACT;
-		BlockFactory blockFactory = HollowBlockFactoryLoader.loadBlockFactory(localFilePath,abstractBlocks,isAbstract);
+		HollowBlockFactory blockFactory = HollowBlockFactoryLoader.loadBlockFactory(localFilePath,abstractBlocks,isAbstract);
 		if(isAbstract)
 			abstractBlocks.put(name,blockFactory);
 		else

@@ -46,6 +46,7 @@ import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
+import org.totalboumboum.engine.content.sprite.bomb.HollowBombFactory;
 import org.totalboumboum.engine.content.sprite.bomb.HollowBombFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
@@ -65,7 +66,7 @@ public class BombsetLoader
 		String individualFolder = folderPath;
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_SCHEMA);
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_XML);
-		Bombset original = null;
+		HollowBombset original = null;
 		
 		// caching
 		String cachePath = FilePaths.getCacheBombsPath()+ File.separator;
@@ -77,14 +78,14 @@ public class BombsetLoader
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromSpriteCache(cachePath);
 		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
-		{	original = ((Bombset)o);
+		{	original = ((HollowBombset)o);
 		}
 		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				original = (Bombset)oIn.readObject();
+				original = (HollowBombset)oIn.readObject();
 				oIn.close();
 			}
 			catch (FileNotFoundException e)
@@ -117,16 +118,16 @@ public class BombsetLoader
 		}
 
 		double zoomFactor = RoundVariables.zoomFactor;
-		Bombset result = original.deepCopy(zoomFactor,color);
+		Bombset result = original.fill(zoomFactor,color);
 		return result;
 	}
 	
-    private static Bombset loadBombsetElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static HollowBombset loadBombsetElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// init
-    	Bombset result = new Bombset();
+    	HollowBombset result = new HollowBombset();
 
     	// abstract bombs
-    	HashMap<String,BombFactory> abstractBombs = new HashMap<String,BombFactory>();
+    	HashMap<String,HollowBombFactory> abstractBombs = new HashMap<String,HollowBombFactory>();
     	Element abstractBombsElt = root.getChild(XmlNames.ABSTRACT_BOMBS);
     	if(abstractBombsElt!=null)
     		loadBombsElement(abstractBombsElt,folder,result,abstractBombs,Type.ABSTRACT);
@@ -139,7 +140,7 @@ public class BombsetLoader
     }
     
 	@SuppressWarnings("unchecked")
-	private static void loadBombsElement(Element root, String folder, Bombset result, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadBombsElement(Element root, String folder, HollowBombset result, HashMap<String,HollowBombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
     	List<Element> bombs = root.getChildren(XmlNames.BOMB);
     	Iterator<Element> i = bombs.iterator();
@@ -149,7 +150,7 @@ public class BombsetLoader
     	}
 	}
 
-	private static void loadBombElement(Element root, String folder, Bombset bombset, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadBombElement(Element root, String folder, HollowBombset bombset, HashMap<String,HollowBombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
@@ -160,7 +161,7 @@ public class BombsetLoader
 		
 		// required abilities
 		if(type==Type.CONCRETE)
-		{	ArrayList<AbstractAbility> requiredAbilities = AbilityLoader.loadAbilitiesElement(root);
+		{	List<AbstractAbility> requiredAbilities = AbilityLoader.loadAbilitiesElement(root);
 			Iterator<AbstractAbility> i = requiredAbilities.iterator();
 			ArrayList<StateAbility> abilities = new ArrayList<StateAbility>();
 			while(i.hasNext())
@@ -170,11 +171,11 @@ public class BombsetLoader
 			}
 		
 			// result
-			BombFactory bombFactory = HollowBombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs);
+			HollowBombFactory bombFactory = HollowBombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs);
 			bombset.addBombFactory(bombFactory,abilities);
 		}
 		else
-		{	BombFactory bombFactory = HollowBombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs);
+		{	HollowBombFactory bombFactory = HollowBombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs);
 			abstractBombs.put(name,bombFactory);
 		}
     }

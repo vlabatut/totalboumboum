@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.container.itemset;
+package org.totalboumboum.engine.container.bombset;
 
 /*
  * Total Boum Boum
@@ -22,20 +22,18 @@ package org.totalboumboum.engine.container.itemset;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.level.instance.Instance;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.content.sprite.item.ItemFactory;
 import org.xml.sax.SAXException;
 
-public class Itemset extends AbstractItemset
-{	
+public class AbstractBombsetMap implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -43,8 +41,8 @@ public class Itemset extends AbstractItemset
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
-		for(ItemFactory itemFactory: itemFactories.values())
-			itemFactory.setInstance(instance);
+		for(Bombset bombset: bombsets.values())
+			bombset.setInstance(instance);
 	}
 
 	public Instance getInstance()
@@ -52,41 +50,24 @@ public class Itemset extends AbstractItemset
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// ITEM FACTORIES	/////////////////////////////////////////////
+	// BOMBSETS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final HashMap<String,ItemFactory> itemFactories = new HashMap<String, ItemFactory>();
-
-	public void addItemFactory(String name, ItemFactory itemFactory)
-	{	itemFactories.put(name,itemFactory);		
+	private final HashMap<PredefinedColor,Bombset> bombsets = new HashMap<PredefinedColor, Bombset>();
+	private String path;
+	
+	public void initBombset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	path = folderPath;
+		PredefinedColor color = null;
+		Bombset neutral = BombsetLoader.loadBombset(path,color);
+		bombsets.put(color,neutral);
 	}
 	
-	public Item makeItem(String name, Tile tile)
-	{	Item result = null;
-		ItemFactory itemFactory = itemFactories.get(name);
-if(itemFactory==null)
-	System.out.println(name);
-		result = itemFactory.makeSprite(tile);
-		//result.initGesture();
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// factories
-			{	Iterator<Entry<String,ItemFactory>> it = itemFactories.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<String,ItemFactory> t = it.next();
-					ItemFactory temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
-			}
+	public Bombset getBombset(PredefinedColor color)
+	{	Bombset result = bombsets.get(color);
+		if(result==null)
+		{	result = BombsetLoader.loadBombset(path,color);
+			bombsets.put(color,result);
 		}
+		return result;
 	}
 }

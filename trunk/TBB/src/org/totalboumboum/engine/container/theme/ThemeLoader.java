@@ -50,12 +50,11 @@ public class ThemeLoader
 	/////////////////////////////////////////////////////////////////
 	public static Theme loadTheme(String folderPath) throws SAXException, IOException, ParserConfigurationException, ClassNotFoundException
 	{	// init
-		double zoomFactor = RoundVariables.zoomFactor;
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_THEME+FileNames.EXTENSION_SCHEMA);
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_THEME+FileNames.EXTENSION_XML);
-		Theme result = null;
+		HollowTheme original = null;
 		
 		// caching
 		String cachePath = FilePaths.getCacheThemesPath()+ File.separator;
@@ -67,16 +66,15 @@ public class ThemeLoader
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromSpriteCache(cachePath);
 		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
-		{	result = ((Theme)o).deepCopy(zoomFactor);
+		{	original = (HollowTheme)o;
 		}
 		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				result = (Theme)oIn.readObject();
+				original = (HollowTheme)oIn.readObject();
 				oIn.close();
-				result = result.deepCopy(zoomFactor);
 			}
 			catch (FileNotFoundException e)
 			{	e.printStackTrace();
@@ -89,32 +87,32 @@ public class ThemeLoader
 			}
 		}
 		
-		if(result==null)
+		if(original==null)
 		{	// opening
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			result = loadThemeElement(root,individualFolder);
+			original = loadThemeElement(root,individualFolder);
 			// caching
 			if(engineConfiguration.isSpriteMemoryCached())
-			{	engineConfiguration.addToSpriteCache(cachePath,result);
-				result = result.deepCopy(zoomFactor);
+			{	engineConfiguration.addToSpriteCache(cachePath,original);
 			}
 			if(engineConfiguration.isSpriteFileCached())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
-				oOut.writeObject(result);
+				oOut.writeObject(original);
 				oOut.close();
-				result = result.deepCopy(zoomFactor);
 			}
 		}
 
+		double zoomFactor = RoundVariables.zoomFactor;
+		Theme result = original.fill(zoomFactor);
 		return result;
     }
 
-    private static Theme loadThemeElement(Element root, String individualFolder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    private static HollowTheme loadThemeElement(Element root, String individualFolder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// init
-    	Theme result = new Theme();
+    	HollowTheme result = new HollowTheme();
     	String folder;
 
     	// general data
@@ -134,7 +132,7 @@ public class ThemeLoader
 		return result;
 	}
     
-	private static void loadGeneralElement(Element root, Theme result)
+	private static void loadGeneralElement(Element root, HollowTheme result)
 	{	// name
 		Element nameElt = root.getChild(XmlNames.GENERAL);
 		String name = nameElt.getAttribute(XmlNames.NAME).getValue().trim();
@@ -146,13 +144,13 @@ public class ThemeLoader
 		result.setVersion(version);
 	}
 	
-	private static void loadAuthorElement(Element root, Theme result)
+	private static void loadAuthorElement(Element root, HollowTheme result)
 	{	Element elt = root.getChild(XmlNames.AUTHOR);
 		String name = elt.getAttribute(XmlNames.VALUE).getValue().trim();
 		result.setAuthor(name);		
 	}
 	
-	private static void loadSourceElement(Element root, Theme result)
+	private static void loadSourceElement(Element root, HollowTheme result)
 	{	Element elt = root.getChild(XmlNames.SOURCE);
 		String name = elt.getAttribute(XmlNames.VALUE).getValue().trim();
 		result.setSource(name);		

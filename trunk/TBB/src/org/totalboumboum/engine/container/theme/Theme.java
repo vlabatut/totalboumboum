@@ -22,14 +22,12 @@ package org.totalboumboum.engine.container.theme;
  */
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.block.Block;
@@ -38,66 +36,8 @@ import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
 import org.xml.sax.SAXException;
 
-
-public class Theme implements Serializable, CachableSpriteContainer
-{	private static final long serialVersionUID = 1L;
-
-	public static final String DEFAULT_GROUP = "default";
-	public static final String GROUP_SEPARATOR = "-";
-	public static final String PROPERTY_SEPARATOR = ":";
-
-	/////////////////////////////////////////////////////////////////
-	// NAME				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String version;
-	
-	public String getVersion()
-	{	return version;
-	}
-	
-	public void setVersion(String version)
-	{	this.version = version;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// VERSION			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String name;
-	
-	public String getName()
-	{	return name;
-	}
-	
-	public void setName(String name)
-	{	this.name = name;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// AUTHOR			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String author;
-	
-	public String getAuthor()
-	{	return author;
-	}
-	
-	public void setAuthor(String author)
-	{	this.author = author;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// SOURCE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String source;
-	
-	public String getSource()
-	{	return source;
-	}
-	
-	public void setSource(String source)
-	{	this.source = source;
-	}
-	
+public class Theme extends AbstractTheme
+{	
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -156,35 +96,6 @@ if(bf==null)
 		Block result = bf.makeSprite(tile);
 //NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien été trouvé !	
 		//result.initGesture();
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COPY					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public Theme deepCopy(double zoomFactor) throws IOException
-	{	Theme result = new Theme();
-	
-		// misc
-		result.author = author;
-		result.name = name;
-		result.source = source;
-		result.version = version;
-		
-		// blocks
-		for(Entry<String,BlockFactory> entry: blocks.entrySet())
-		{	String key = entry.getKey();
-			BlockFactory blocFactory = entry.getValue().deepCopy(zoomFactor);
-			result.addBlockFactory(key,blocFactory);
-		}
-		
-		// floors
-		for(Entry<String,FloorFactory> entry: floors.entrySet())
-		{	String key = entry.getKey();
-			FloorFactory floorFactory = entry.getValue().deepCopy(zoomFactor);
-			result.addFloorFactory(key,floorFactory);
-		}
-		
 		return result;
 	}
 

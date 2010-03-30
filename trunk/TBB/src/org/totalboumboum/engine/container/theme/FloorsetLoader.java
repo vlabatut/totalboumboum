@@ -31,7 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
+import org.totalboumboum.engine.content.sprite.floor.HollowFloorFactory;
 import org.totalboumboum.engine.content.sprite.floor.HollowFloorFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -44,7 +44,7 @@ public class FloorsetLoader
 	/////////////////////////////////////////////////////////////////
 	// GENERAL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static void loadFloorset(String folderPath, Theme result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void loadFloorset(String folderPath, HollowTheme result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
@@ -59,9 +59,9 @@ public class FloorsetLoader
 		loadFloorsetElement(root,individualFolder,result);
     }
 
-	private static void loadFloorsetElement(Element root, String folder, Theme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	private static void loadFloorsetElement(Element root, String folder, HollowTheme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// abstract floors
-    	HashMap<String,FloorFactory> abstractFloors = new HashMap<String,FloorFactory>();
+    	HashMap<String,HollowFloorFactory> abstractFloors = new HashMap<String,HollowFloorFactory>();
     	Element abstractFloorsElt = root.getChild(XmlNames.ABSTRACT_FLOORS);
     	if(abstractFloorsElt!=null)
     		loadFloorsElement(abstractFloorsElt,folder,result,abstractFloors,Type.ABSTRACT);
@@ -72,7 +72,7 @@ public class FloorsetLoader
 	}
     
 	@SuppressWarnings("unchecked")
-	private static void loadFloorsElement(Element root, String folder, Theme result, HashMap<String,FloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadFloorsElement(Element root, String folder, HollowTheme result, HashMap<String,HollowFloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
     	List<Element> floors = root.getChildren(XmlNames.FLOOR);
     	Iterator<Element> i = floors.iterator();
@@ -82,7 +82,7 @@ public class FloorsetLoader
     	}
 	}
     
-	private static void loadFloorElement(Element root, String folder, Theme result, HashMap<String,FloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadFloorElement(Element root, String folder, HollowTheme result, HashMap<String,HollowFloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
@@ -93,7 +93,7 @@ public class FloorsetLoader
 
 		// factory
 		boolean isAbstract = type==Type.ABSTRACT;
-		FloorFactory floorFactory = HollowFloorFactoryLoader.loadFloorFactory(individualFolder,abstractFloors,isAbstract);
+		HollowFloorFactory floorFactory = HollowFloorFactoryLoader.loadFloorFactory(individualFolder,abstractFloors,isAbstract);
 		if(isAbstract)
 			abstractFloors.put(name,floorFactory);
 		else
