@@ -22,51 +22,44 @@ package org.totalboumboum.engine.container.itemset;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.totalboumboum.engine.container.level.instance.Instance;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.sprite.item.Item;
+import org.totalboumboum.engine.container.CachableSpriteContainer;
+import org.totalboumboum.engine.content.sprite.item.HollowItemFactory;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
-import org.xml.sax.SAXException;
 
-public class Itemset extends AbstractItemset
-{	
-	/////////////////////////////////////////////////////////////////
-	// INSTANCE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private transient Instance instance = null;
+public class HollowItemset extends AbstractItemset implements Serializable, CachableSpriteContainer
+{	private static final long serialVersionUID = 1L;
+
+	public HollowItemset()
+	{	
+	}
 	
-	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	this.instance = instance;
-		for(ItemFactory itemFactory: itemFactories.values())
-			itemFactory.setInstance(instance);
-	}
-
-	public Instance getInstance()
-	{	return instance;	
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// ITEM FACTORIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final HashMap<String,ItemFactory> itemFactories = new HashMap<String, ItemFactory>();
+	private final HashMap<String,HollowItemFactory> itemFactories = new HashMap<String, HollowItemFactory>();
 
-	public void addItemFactory(String name, ItemFactory itemFactory)
+	public void addItemFactory(String name, HollowItemFactory itemFactory)
 	{	itemFactories.put(name,itemFactory);		
 	}
 	
-	public Item makeItem(String name, Tile tile)
-	{	Item result = null;
-		ItemFactory itemFactory = itemFactories.get(name);
-if(itemFactory==null)
-	System.out.println(name);
-		result = itemFactory.makeSprite(tile);
-		//result.initGesture();
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Itemset fill(double zoomFactor) throws IOException
+	{	Itemset result = new Itemset();
+	
+		// items
+		for(Entry<String,HollowItemFactory> entry: itemFactories.entrySet())
+		{	String key = entry.getKey();
+			ItemFactory itemFactory = entry.getValue().fill(zoomFactor);
+			result.addItemFactory(key,itemFactory);
+		}
+		
 		return result;
 	}
 
@@ -79,10 +72,10 @@ if(itemFactory==null)
 	{	if(!finished)
 		{	super.finish();
 			// factories
-			{	Iterator<Entry<String,ItemFactory>> it = itemFactories.entrySet().iterator();
+			{	Iterator<Entry<String,HollowItemFactory>> it = itemFactories.entrySet().iterator();
 				while(it.hasNext())
-				{	Entry<String,ItemFactory> t = it.next();
-					ItemFactory temp = t.getValue();
+				{	Entry<String,HollowItemFactory> t = it.next();
+					HollowItemFactory temp = t.getValue();
 					temp.finish();
 					it.remove();
 				}

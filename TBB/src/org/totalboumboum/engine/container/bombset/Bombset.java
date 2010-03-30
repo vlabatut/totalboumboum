@@ -22,14 +22,12 @@ package org.totalboumboum.engine.container.bombset;
  */
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -39,14 +37,8 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.xml.sax.SAXException;
 
-public class Bombset implements Serializable, CachableSpriteContainer
-{	private static final long serialVersionUID = 1L;
-
-	public Bombset()
-	{	bombFactories = new ArrayList<BombFactory>();
-		requiredAbilities = new ArrayList<ArrayList<StateAbility>>();
-	}
-	
+public class Bombset extends AbstractBombset
+{	
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -63,26 +55,16 @@ public class Bombset implements Serializable, CachableSpriteContainer
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// REQUIRED ABILITIES		/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ArrayList<ArrayList<StateAbility>> requiredAbilities;
-	
-	@SuppressWarnings("unused")
-	private void setRequiredAbilities(ArrayList<ArrayList<StateAbility>> requiredAbilities)
-	{	this.requiredAbilities = requiredAbilities;
-	}
-		
-	/////////////////////////////////////////////////////////////////
 	// BOMB FACTORIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<BombFactory> bombFactories;
+	protected List<BombFactory> bombFactories = new ArrayList<BombFactory>();
 	
 	@SuppressWarnings("unused")
-	private void setBombFactories(ArrayList<BombFactory> bombFactories)
+	private void setBombFactories(List<BombFactory> bombFactories)
 	{	this.bombFactories = bombFactories;
 	}
 	
-	public void addBombFactory(BombFactory bombFactory, ArrayList<StateAbility> abilities)
+	public void addBombFactory(BombFactory bombFactory, List<StateAbility> abilities)
 	{	bombFactories.add(bombFactory);
 		requiredAbilities.add(abilities);
 	}
@@ -95,10 +77,10 @@ public class Bombset implements Serializable, CachableSpriteContainer
 	public Bomb makeBomb(Sprite sprite)
 	{	Bomb result = null;
 		Tile tile = sprite.getTile();
-		Iterator<ArrayList<StateAbility>> i = requiredAbilities.iterator();
+		Iterator<List<StateAbility>> i = requiredAbilities.iterator();
 		int ind = 0;
 		while(result==null && i.hasNext())
-		{	ArrayList<StateAbility> abilities = i.next();
+		{	List<StateAbility> abilities = i.next();
 			Iterator<StateAbility> j = abilities.iterator();
 			boolean goOn = true;
 			while(goOn && j.hasNext())
@@ -162,44 +144,7 @@ public class Bombset implements Serializable, CachableSpriteContainer
 		}
 		return result;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public Bombset surfaceCopy()
-	{	Bombset result = new Bombset();
-	
-		for(int i=0;i<bombFactories.size();i++)
-		{	BombFactory bf = bombFactories.get(i).surfaceCopy();
-			ArrayList<StateAbility> ra = requiredAbilities.get(i);
-			result.addBombFactory(bf,ra);
-		}
 		
-		return result;
-	}
-	
-	/*
-	 * the Bombset has already been copied/loaded, so it is taken from the level
-	 */
-/*	public Bombset cacheCopy()
-	{	Bombset result = RoundVariables.level.getBombset();
-		return result;
-	}*/
-	public Bombset deepCopy(double zoomFactor, PredefinedColor color) throws IOException
-	{	Bombset result = new Bombset();
-	
-		for(int i=0;i<bombFactories.size();i++)
-		{	BombFactory bf = bombFactories.get(i).deepCopy(zoomFactor,color);
-			ArrayList<StateAbility> ra = requiredAbilities.get(i);
-			ArrayList<StateAbility> raCopy = new ArrayList<StateAbility>();
-			for(StateAbility ability: ra)
-				raCopy.add((StateAbility)ability.cacheCopy(zoomFactor));
-			result.addBombFactory(bf,raCopy);
-		}
-		
-		return result;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -207,25 +152,12 @@ public class Bombset implements Serializable, CachableSpriteContainer
 	
 	public void finish()
 	{	if(!finished)
-		{	finished = true;
+		{	super.finish();
 			// factories
 			{	Iterator<BombFactory> it = bombFactories.iterator();
 				while(it.hasNext())
 				{	BombFactory temp = it.next();
 					temp.finish();
-					it.remove();
-				}
-			}
-			// abilities
-			{	Iterator<ArrayList<StateAbility>> it = requiredAbilities.iterator();
-				while(it.hasNext())
-				{	ArrayList<StateAbility> temp = it.next();
-					Iterator<StateAbility> it2 = temp.iterator();
-					while(it2.hasNext())
-					{	StateAbility temp2 = it2.next();
-						temp2.finish();
-						it2.remove();
-					}
 					it.remove();
 				}
 			}

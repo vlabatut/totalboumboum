@@ -42,7 +42,7 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.engine.EngineConfiguration;
 import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.sprite.item.ItemFactory;
+import org.totalboumboum.engine.content.sprite.item.HollowItemFactory;
 import org.totalboumboum.engine.content.sprite.item.HollowItemFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
@@ -63,7 +63,7 @@ public class ItemsetLoader
 		String individualFolder = folderPath;
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ITEMSET+FileNames.EXTENSION_SCHEMA);
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_ITEMSET+FileNames.EXTENSION_XML);
-		Itemset original = null;
+		HollowItemset original = null;
 		
 		// caching
 		String cachePath = FilePaths.getCacheItemsPath()+ File.separator;
@@ -77,14 +77,14 @@ public class ItemsetLoader
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 		Object o = engineConfiguration.getFromSpriteCache(cachePath);
 		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
-		{	original = ((Itemset)o);
+		{	original = ((HollowItemset)o);
 		}
 		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				original = (Itemset)oIn.readObject();
+				original = (HollowItemset)oIn.readObject();
 				oIn.close();
 			}
 			catch (FileNotFoundException e)
@@ -116,16 +116,16 @@ public class ItemsetLoader
 			}
 		}
 		
-		Itemset result = original.deepCopy(zoomFactor);
+		Itemset result = original.fill(zoomFactor);
 		return result;
     }
     
-	private static Itemset loadItemsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	private static HollowItemset loadItemsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// init
-		Itemset result = new Itemset();
+		HollowItemset result = new HollowItemset();
 
 		// abstract items
-    	HashMap<String,ItemFactory> abstractItems = new HashMap<String,ItemFactory>();
+    	HashMap<String,HollowItemFactory> abstractItems = new HashMap<String,HollowItemFactory>();
     	Element abstractItemsElt = root.getChild(XmlNames.ABSTRACT_ITEMS);
     	if(abstractItemsElt!=null)
     		loadItemsElement(abstractItemsElt,folder,result,abstractItems,Type.ABSTRACT);
@@ -138,7 +138,7 @@ public class ItemsetLoader
 	}
     
 	@SuppressWarnings("unchecked")
-	private static void loadItemsElement(Element root, String folder, Itemset result, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadItemsElement(Element root, String folder, HollowItemset result, HashMap<String,HollowItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
     	List<Element> items = root.getChildren(XmlNames.ITEM);
 		for(Element temp: items)
@@ -146,7 +146,7 @@ public class ItemsetLoader
 	}
     
 	@SuppressWarnings("unchecked")
-	private static void loadItemElement(Element root, String folder, Itemset result, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadItemElement(Element root, String folder, HollowItemset result, HashMap<String,HollowItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
 		
@@ -180,7 +180,7 @@ public class ItemsetLoader
 		
 		// item factory
 		boolean isAbstract = type==Type.ABSTRACT;
-		ItemFactory itemFactory = HollowItemFactoryLoader.loadItemFactory(individualFolder,name,itemrefs,abilities,probabilities,abstractItems,isAbstract);
+		HollowItemFactory itemFactory = HollowItemFactoryLoader.loadItemFactory(individualFolder,name,itemrefs,abilities,probabilities,abstractItems,isAbstract);
 		if(isAbstract)
 			abstractItems.put(name,itemFactory);
 		else
