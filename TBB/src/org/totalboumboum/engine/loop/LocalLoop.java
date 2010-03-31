@@ -77,7 +77,7 @@ import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
-import org.totalboumboum.engine.content.sprite.hero.HeroFactory;
+import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.SystemControl;
@@ -123,7 +123,7 @@ public class LocalLoop extends Loop
 		
 		// load players : common stuff
 		String baseFolder = FilePaths.getInstancesPath()+File.separator+RoundVariables.instance.getName()+File.separator+FileNames.FOLDER_HEROES;
-		HeroFactory base = HollowHeroFactoryLoader.loadHeroFactory(baseFolder);
+		HollowHeroFactory base = HollowHeroFactoryLoader.loadBase(baseFolder);
 //		loadStepOver();		
 		// load players : individual stuff
 		ArrayList<Profile> profiles = round.getProfiles();

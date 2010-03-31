@@ -66,7 +66,7 @@ public class BombsetMap
     	}
 	}
 	
-	public Bombset getBombset(PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public Bombset getBombset(PredefinedColor color)
 	{	Bombset result = bombsets.get(color);
 		return result;
 	}
