@@ -45,7 +45,6 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
-import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.totalboumboum.engine.content.sprite.bomb.HollowBombFactory;
 import org.totalboumboum.engine.content.sprite.bomb.HollowBombFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
@@ -57,9 +56,6 @@ import org.xml.sax.SAXException;
 
 public class BombsetLoader
 {	
-	/////////////////////////////////////////////////////////////////
-	// LOAD ALL BUT ANIMES	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 	public static Bombset initBombset(String folderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
@@ -180,119 +176,6 @@ public class BombsetLoader
 		}
     }
     
-	/////////////////////////////////////////////////////////////////
-	// LOAD ONLY ANIMES	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public static Bombset completeBombset(String folderPath, PredefinedColor color, Bombset base) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// init
-		double zoomFactor = RoundVariables.zoomFactor;
-		String schemaFolder = FilePaths.getSchemasPath();
-		String individualFolder = folderPath;
-		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_SCHEMA);
-		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_BOMBSET+FileNames.EXTENSION_XML);
-		Bombset result = null;
-		
-		// caching
-		String cachePath = FilePaths.getCacheBombsPath()+ File.separator;
-		File objectFile = dataFile.getParentFile();
-		File packFile = objectFile.getParentFile();
-		String c = "none";
-		if(color!=null)
-			c = color.toString();
-		String cacheName = packFile.getName()+"_"+c;
-		cachePath = cachePath + cacheName + FileNames.EXTENSION_DATA;
-		File cacheFile = new File(cachePath);
-		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getFromSpriteCache(cachePath);
-		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
-		{	result = ((Bombset)o).deepCopy(zoomFactor,color);
-		}
-		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
-		{	try
-			{	FileInputStream in = new FileInputStream(cacheFile);
-				BufferedInputStream inBuff = new BufferedInputStream(in);
-				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				result = (Bombset)oIn.readObject();
-				oIn.close();
-				result = result.deepCopy(zoomFactor,color);
-			}
-			catch (FileNotFoundException e)
-			{	e.printStackTrace();
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			}
-			catch (ClassNotFoundException e)
-			{	e.printStackTrace();
-			}
-		}
-		
-		if(result==null)
-		{	result = base;
-			// opening
-			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-			// loading
-			loadBombsetElement(root,individualFolder,color,result);
-			// caching
-			if(engineConfiguration.isSpriteMemoryCached())
-			{	engineConfiguration.addToSpriteCache(cachePath,result);
-				result = result.deepCopy(zoomFactor,color);
-			}
-			if(engineConfiguration.isSpriteFileCached())
-			{	FileOutputStream out = new FileOutputStream(cacheFile);
-				BufferedOutputStream outBuff = new BufferedOutputStream(out);
-				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
-				oOut.writeObject(result);
-				oOut.close();
-				result = result.deepCopy(zoomFactor,color);
-			}
-		}
-		
-		return result;
-	}
-	
-	private static void loadBombsetElement(Element root, String folder, PredefinedColor color, Bombset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	// abstract bombs
-    	HashMap<String,String> abstractBombs = new HashMap<String,String>();
-    	Element abstractBombsElt = root.getChild(XmlNames.ABSTRACT_BOMBS);
-    	if(abstractBombsElt!=null)
-    		loadBombsElement(abstractBombsElt,folder,color,result,abstractBombs,Type.ABSTRACT);
-    	
-    	// concrete bombs
-    	Element concreteBombsElt = root.getChild(XmlNames.CONCRETE_BOMBS);
-		loadBombsElement(concreteBombsElt,folder,color,result,abstractBombs,Type.CONCRETE);
-	}
-    
-    @SuppressWarnings("unchecked")
-	private static void loadBombsElement(Element root, String folder, PredefinedColor color, Bombset result, HashMap<String,String> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String individualFolder = folder;
-    	List<Element> bombs = root.getChildren(XmlNames.BOMB);
-    	Iterator<Element> i = bombs.iterator();
-    	while(i.hasNext())
-    	{	Element temp = i.next();
-    		loadBombElement(temp,individualFolder,color,result,abstractBombs,type);
-    	}
-    }
-    
-	private static void loadBombElement(Element root, String folder, PredefinedColor color, Bombset bombset, HashMap<String,String> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	// name
-		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
-		
-		// folder
-    	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
-		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
-		
-		// required abilities
-		BombFactory bombFactory;
-		if(type==Type.CONCRETE)
-		{	bombFactory = bombset.getBombFactory(name);
-			HollowBombFactoryLoader.completeBombFactory(bombFactory,individualFolder,color,bombset,abstractBombs);
-		}
-		else
-			abstractBombs.put(name,individualFolder);
-    }
-
 	/////////////////////////////////////////////////////////////////
 	// LOADING TYPE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

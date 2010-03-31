@@ -22,7 +22,6 @@ package org.totalboumboum.engine.container.bombset;
  */
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -31,13 +30,13 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.xml.sax.SAXException;
 
-public class BombsetMap implements Serializable
+public class BombsetMap
 {	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient Instance instance = null;
+	private Instance instance = null;
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
