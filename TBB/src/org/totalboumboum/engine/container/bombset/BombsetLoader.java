@@ -56,7 +56,7 @@ import org.xml.sax.SAXException;
 
 public class BombsetLoader
 {	
-	public static Bombset initBombset(String folderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static Bombset loadBombset(String folderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;

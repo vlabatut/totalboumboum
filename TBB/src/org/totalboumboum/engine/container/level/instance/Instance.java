@@ -23,7 +23,6 @@ package org.totalboumboum.engine.container.level.instance;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,9 +39,8 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class Instance implements Serializable
-{	private static final long serialVersionUID = 1L;
-
+public class Instance
+{	
 	public Instance(String name)
 	{	this.name = name;
 	}
@@ -59,18 +57,11 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// BOMBSET MAP		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient BombsetMap bombsetMap;
+	private BombsetMap bombsetMap = new BombsetMap();
 
 	public void loadBombsetMaps(List<PredefinedColor> playersColors) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	// init bombset map
-		String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_BOMBS;
-		bombsetMap = new BombsetMap();
-    	bombsetMap.initBombset(individualFolder);
-		
-    	// load level bombset
-    	bombsetMap.completeBombset(null);
-    	for(PredefinedColor color: playersColors)
-    		bombsetMap.completeBombset(color);
+   {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_BOMBS;
+   		bombsetMap.loadBombsets(individualFolder,playersColors);
     }
 	
 	public BombsetMap getBombsetMap()
@@ -80,7 +71,7 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// FIRESET MAP		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient FiresetMap firesetMap;
+	private FiresetMap firesetMap = new FiresetMap();
 	
 	public void loadFiresetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_FIRES;
@@ -94,7 +85,7 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ITEMSET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient Itemset itemset;
+	private Itemset itemset;
 
 	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_ITEMS;
@@ -108,7 +99,7 @@ public class Instance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// EXPLOSIONSET		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient Explosionset explosionset;
+	private Explosionset explosionset;
 
 	public void loadExplosionSet() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_EXPLOSIONS;
