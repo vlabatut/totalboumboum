@@ -33,6 +33,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMapLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;
@@ -66,7 +67,7 @@ public class PortraitsLoader
 		Object obj;
 		Element elt = root.getChild(XmlNames.COLORS);;
 		if(elt!=null && color!=null)
-		{	obj = ImageTools.loadColorsElement(elt,localFilePath,color);
+		{	obj = ColorRulesMapLoader.loadColorsElement(elt,localFilePath,color);
 			if(obj instanceof ColorMap)
 				colormap = (ColorMap)obj;
 			else

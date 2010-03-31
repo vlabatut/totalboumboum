@@ -37,6 +37,7 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.HeroFactory;
+import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.control.PlayerControl;
 import org.totalboumboum.game.round.RoundVariables;
@@ -57,7 +58,7 @@ public class Player
 	/** current controls */
 	private ControlSettings controlSettings;
 	
-	public Player(Profile profile, HeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public Player(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.profile = profile;
 		// sprite
 		color = this.profile.getSpriteColor();
