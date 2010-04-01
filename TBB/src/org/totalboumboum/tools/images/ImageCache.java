@@ -52,9 +52,15 @@ public class ImageCache
 		}
 		
 		// not indexed colors
-		else
+		else if(colorRule instanceof ColorFolder)
 		{	String folder = ((ColorFolder)colorRule).getFolder();
 			path = basePath+File.separator+folder+File.separator+imagePath;
+			colorMap = null;
+		}
+		
+		// colorless
+		else
+		{	path = basePath+File.separator+imagePath;
 			colorMap = null;
 		}
 		

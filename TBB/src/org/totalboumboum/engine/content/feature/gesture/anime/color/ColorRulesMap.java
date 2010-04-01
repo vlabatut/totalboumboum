@@ -51,8 +51,9 @@ public class ColorRulesMap implements Serializable
 	{	return colorRules.get(color);
 	}
 
-	public void setColorRule(PredefinedColor color, ColorRule colorRule)
-	{	colorRules.put(color,colorRule);
+	public void setColorRule(ColorRule colorRule)
+	{	PredefinedColor color = colorRule.getColor();
+		colorRules.put(color,colorRule);
 		colorRule.setParent(this);
 	}
 	
