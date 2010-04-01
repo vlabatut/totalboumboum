@@ -61,7 +61,7 @@ public class ColorRulesMapLoader
 			// colorsprite
 			else if(temp.getName().equals(XmlNames.COLORSPRITE))
 				colorRule = loadColorspriteElement(temp,folderName,color);
-			result.setColorRule(color, colorRule);
+			result.setColorRule(colorRule);
 		}
 		
 		return result;
