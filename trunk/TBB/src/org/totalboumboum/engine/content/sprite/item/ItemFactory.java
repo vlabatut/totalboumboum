@@ -81,7 +81,7 @@ public class ItemFactory extends SpriteFactory<Item>
 				else
 					index ++;
 			}
-System.out.println("name: "+name);			
+//System.out.println("name: "+name);			
 			Item itm = instance.getItemset().makeItem(name,tile);
 			abilities = itm.getItemAbilities();
 		}
