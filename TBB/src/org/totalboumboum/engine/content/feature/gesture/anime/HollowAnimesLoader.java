@@ -90,6 +90,7 @@ public class HollowAnimesLoader
 		ColorRulesMap colorRulesMap;
 		if(elt==null)
 		{	colorRulesMap = new ColorRulesMap();
+			colorRulesMap.setLocalPath(localFilePath);
 			ColorLess colorLess = new ColorLess();
 			colorRulesMap.setColorRule(colorLess);
 		}
@@ -319,7 +320,7 @@ public class HollowAnimesLoader
 			shadowFilename = pack.getShadowFileName(key);
 			shadowColorRulesMap = pack.getShadowColorRulesMap(key);
 			if(shadowFilename==null)
-			{	shadowFilename = filePath+attribute.getValue().trim();
+			{	shadowFilename = localFilePath+attribute.getValue().trim();
 				shadowColorRulesMap = pack.getColorRulesMap();
 			}
 		}
