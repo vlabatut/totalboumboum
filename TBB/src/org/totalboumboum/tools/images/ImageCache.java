@@ -44,7 +44,7 @@ public class ImageCache
 		String path = null;
 		ColorMap colorMap = null;
 		String basePath = colorRule.getParent().getLocalPath();
-		
+
 		// indexed colors
 		if(colorRule instanceof ColorMap)
 		{	colorMap = (ColorMap) colorRule;

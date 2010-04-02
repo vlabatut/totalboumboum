@@ -87,14 +87,11 @@ public class HollowAnimesLoader
 		
 		// colors ?
 		Element elt = root.getChild(XmlNames.COLORS);
-		ColorRulesMap colorRulesMap;
-		if(elt==null)
-		{	colorRulesMap = new ColorRulesMap();
-			colorRulesMap.setLocalPath(localFilePath);
-			ColorLess colorLess = new ColorLess();
-			colorRulesMap.setColorRule(colorLess);
-		}
-		else
+		ColorRulesMap colorRulesMap = new ColorRulesMap();
+		colorRulesMap.setLocalPath(localFilePath);
+		ColorLess colorLess = new ColorLess();
+		colorRulesMap.setColorRule(colorLess);		
+		if(elt!=null)
 			colorRulesMap = ColorRulesMapLoader.loadColorsElement(elt,localFilePath);
 		pack.setColorRulesMap(colorRulesMap);
 		

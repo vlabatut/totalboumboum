@@ -52,7 +52,7 @@ public class HollowFloorFactoryLoader extends HollowSpriteFactoryLoader
 		String folder;
 		
 		// GENERAL
-		String baseStr = root.getAttributeValue(XmlNames.BASE);
+		String baseStr = elt.getAttributeValue(XmlNames.BASE);
 		HollowGesturePack gesturePack;
 		List<AbstractAbility> abilities;
 		if(baseStr==null)
