@@ -350,9 +350,9 @@ public class AnimeManager
 	{	List<BufferedImage> result = new ArrayList<BufferedImage>();
 		if(!invisible)
 		{	result = currentStep.getImages();
-			if(result!=null && twinkleChange)
+			if(!result.isEmpty() && twinkleChange)
 			{	if(twinkleColor==null)
-					result = null;
+					result = new ArrayList<BufferedImage>();
 				else
 				{	for(BufferedImage image: currentStep.getImages())
 						result.add(ImageTools.getFilledImage(image,twinkleColor));

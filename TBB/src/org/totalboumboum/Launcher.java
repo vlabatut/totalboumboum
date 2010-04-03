@@ -1182,5 +1182,6 @@ public class Launcher
 	 * 		- y aussi un pb de transparence
 	 * 		- idée : faire une classe de cache différente pr les colorFolder et colorMaps (et résoudre le pb de heap)
 	 * - on ne peut plus poser de bombes au deuxième round
+	 * - quand les items apparaissent dans la fumée, y a un décalage
 	 */
 }

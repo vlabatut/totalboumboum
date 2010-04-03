@@ -122,12 +122,38 @@ public class ImageTools
      * @return
      */
     public static BufferedImage resize(BufferedImage imgOld, double zoom, boolean smooth)
-    {	int xDim = (int)(imgOld.getWidth()*zoom);
+    {	// dimensions
+    	int xDim = (int)(imgOld.getWidth()*zoom);
 		int yDim = (int)(imgOld.getHeight()*zoom);
 //		double actualZoom = xDim/imgOld.getWidth();
 if(xDim<0 || yDim<0)
 	System.out.println("ImageTools.resize(): Zoom Error");
-		BufferedImage result = new BufferedImage(xDim, yDim, BufferedImage.TYPE_INT_ARGB);
+
+		// colors and stuff
+//		int type = imgOld.getType();
+//		if(type == BufferedImage.TYPE_CUSTOM)
+//			type = BufferedImage.TYPE_INT_ARGB;
+//   		ColorModel colorModel = imgOld.getColorModel();
+//   	BufferedImage result;
+//		if(colorModel instanceof IndexColorModel)
+//		{	//result = new BufferedImage(xDim,yDim,type,(IndexColorModel)colorModel);
+//			String[] names = imgOld.getPropertyNames();
+//			Hashtable<String,Object> props = new Hashtable<String,Object>();
+//			if(names!=null)
+//			{	for(int k=0;k<names.length;k++)
+//	    		{	Object prop = imgOld.getProperty(names[k]);
+//	    			props.put(names[k], prop);
+//	    		}
+//			}
+//			WritableRaster raster = imgOld.getRaster().createCompatibleWritableRaster(xDim,yDim);		
+//			result = new BufferedImage(colorModel,raster,imgOld.isAlphaPremultiplied(),props);
+//		}
+//		else
+//			result = new BufferedImage(xDim,yDim,type);
+int type = BufferedImage.TYPE_INT_ARGB;
+BufferedImage result = new BufferedImage(xDim,yDim,type);
+
+		// draw resized image
 		Graphics2D g = result.createGraphics();
 		g.setComposite(AlphaComposite.Src);
 		if(smooth)
