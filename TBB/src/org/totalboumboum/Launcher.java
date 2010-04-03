@@ -1176,7 +1176,11 @@ public class Launcher
 	/**
 	 * TODO BUGS
 	 * - le hero NBM2 ne s'élève pas en l'air en cas de victoire
-	 * - les sprites ne sont pas colorés
+	 * - les sprites ne sont pas colorés. 
+	 * 		- pb: pas possib de faire redim puis recol, faut d'abord colorer et après redimensionner (car plein de teintes intermédiaires apparaissent à cause du smoothing)
+	 * 		-> confirmé si on supprime le smoothing
+	 * 		- y aussi un pb de transparence
+	 * 		- idée : faire une classe de cache différente pr les colorFolder et colorMaps (et résoudre le pb de heap)
 	 * - on ne peut plus poser de bombes au deuxième round
 	 */
 }
