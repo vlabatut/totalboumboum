@@ -1172,4 +1172,11 @@ public class Launcher
 	 * l'élément déjà défini dans un éventuel sprite abstrait. bien sur,
 	 * si pas déjà défini on fait un redefine pr défaut
 	 */
+	
+	/**
+	 * TODO BUGS
+	 * - le hero NBM2 ne s'élève pas en l'air en cas de victoire
+	 * - les sprites ne sont pas colorés
+	 * - on ne peut plus poser de bombes au deuxième round
+	 */
 }

@@ -37,7 +37,6 @@ import org.totalboumboum.engine.content.feature.ImageShift;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.HollowGesture;
 import org.totalboumboum.engine.content.feature.gesture.HollowGesturePack;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorLess;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMap;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMapLoader;
 import org.totalboumboum.engine.content.feature.gesture.anime.direction.HollowAnimeDirection;
@@ -87,12 +86,14 @@ public class HollowAnimesLoader
 		
 		// colors ?
 		Element elt = root.getChild(XmlNames.COLORS);
-		ColorRulesMap colorRulesMap = new ColorRulesMap();
-		colorRulesMap.setLocalPath(localFilePath);
-		ColorLess colorLess = new ColorLess();
-		colorRulesMap.setColorRule(colorLess);		
-		if(elt!=null)
-			colorRulesMap = ColorRulesMapLoader.loadColorsElement(elt,localFilePath);
+		ColorRulesMap colorRulesMap;
+		if(elt==null)
+		{	colorRulesMap = new ColorRulesMap();
+			colorRulesMap.setLocalPath(localFilePath);
+		}
+		else
+		{	colorRulesMap = ColorRulesMapLoader.loadColorsElement(elt,localFilePath);
+		}
 		pack.setColorRulesMap(colorRulesMap);
 		
 		// shadows ?
