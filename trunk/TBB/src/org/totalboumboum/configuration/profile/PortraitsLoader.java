@@ -103,6 +103,7 @@ public class PortraitsLoader
 			String file = temp.getAttribute(XmlNames.FILE).getValue().trim();
 			String imagePath = folder + File.separator + file;
 			BufferedImage image = ImageTools.loadImage(imagePath,colormap);
+			image = ImageTools.getCompatibleImage(image);
 			result.addIngamePortrait(name, image);
 		}
 	}
@@ -125,6 +126,7 @@ public class PortraitsLoader
 			String file = temp.getAttribute(XmlNames.FILE).getValue().trim();
 			String imagePath = folder + File.separator + file;
 			BufferedImage image = ImageTools.loadImage(imagePath,colormap);
+			image = ImageTools.getCompatibleImage(image);
 			result.addOutgamePortrait(name,image);
 		}
 	}

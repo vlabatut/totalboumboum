@@ -70,7 +70,7 @@ public class ImageTools
     	}
     	else
     	{	// optimizing : using a model adapted to the graphical environment
-    		image =  getCompatibleImage(image);
+//    		image =  getCompatibleImage(image);
     	}
 		inBuff.close();
     	return image;
@@ -94,7 +94,7 @@ public class ImageTools
 	  	return copy;
 	}	
 
-	private static BufferedImage getCompatibleImage(BufferedImage image)
+	public static BufferedImage getCompatibleImage(BufferedImage image)
     {	// get the graphical environment
     	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
@@ -127,8 +127,8 @@ public class ImageTools
 //		double actualZoom = xDim/imgOld.getWidth();
 if(xDim<0 || yDim<0)
 	System.out.println("ImageTools.resize(): Zoom Error");
-		BufferedImage imgNew = new BufferedImage(xDim, yDim, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = imgNew.createGraphics();
+		BufferedImage result = new BufferedImage(xDim, yDim, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = result.createGraphics();
 		g.setComposite(AlphaComposite.Src);
 		if(smooth)
 		{	g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
@@ -147,7 +147,7 @@ if(xDim<0 || yDim<0)
 		g.dispose();
     	
 		// optimizing : using a model adapted to the graphical environment
-		BufferedImage result =  getCompatibleImage(imgNew);
+//		result =  getCompatibleImage(result);
     	return result; 
     }
     
@@ -224,7 +224,7 @@ if(xDim<0 || yDim<0)
 		g.dispose();
 		
 		// make it compatible
-		result = getCompatibleImage(result);
+//		result = getCompatibleImage(result);
 
     	return result;    	
     }
