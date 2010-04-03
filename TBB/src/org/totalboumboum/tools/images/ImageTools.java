@@ -70,7 +70,7 @@ public class ImageTools
     	}
     	else
     	{	// optimizing : using a model adapted to the graphical environment
-//    		image =  getCompatibleImage(image);
+//        	image =  getCompatibleImage(image); //can't anymore since the recoloring must be performed later
     	}
 		inBuff.close();
     	return image;
@@ -79,6 +79,14 @@ public class ImageTools
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+    private static GraphicsEnvironment ge;
+    private static GraphicsConfiguration gc;
+    // get the graphical environment
+	static 
+    {	ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		gc = ge.getDefaultScreenDevice().getDefaultConfiguration();		
+    }
+    
     //TODO I guess this should be disabled in favor of getCompatibleImage
     public static BufferedImage copyBufferedImage(BufferedImage image)
 	{	int type = image.getType();
@@ -95,11 +103,7 @@ public class ImageTools
 	}	
 
 	public static BufferedImage getCompatibleImage(BufferedImage image)
-    {	// get the graphical environment
-    	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
-		
-		// get the original color model
+    {	// get the original color model
 		ColorModel cm = image.getColorModel();			
 		int transparency = cm.getTransparency();
 		
@@ -121,11 +125,10 @@ public class ImageTools
      * @param smooth
      * @return
      */
-    public static BufferedImage resize(BufferedImage imgOld, double zoom, boolean smooth)
+    public static BufferedImage getResizedImage(BufferedImage imgOld, double zoom, boolean smooth)
     {	// dimensions
     	int xDim = (int)(imgOld.getWidth()*zoom);
 		int yDim = (int)(imgOld.getHeight()*zoom);
-//		double actualZoom = xDim/imgOld.getWidth();
 if(xDim<0 || yDim<0)
 	System.out.println("ImageTools.resize(): Zoom Error");
 
@@ -150,24 +153,30 @@ if(xDim<0 || yDim<0)
 //		}
 //		else
 //			result = new BufferedImage(xDim,yDim,type);
-int type = BufferedImage.TYPE_INT_ARGB;
-BufferedImage result = new BufferedImage(xDim,yDim,type);
+//int type = BufferedImage.TYPE_INT_ARGB;
+//BufferedImage result = new BufferedImage(xDim,yDim,type);
 
+		//get the original color model
+		ColorModel cm = imgOld.getColorModel();			
+		int transparency = cm.getTransparency();
+		// create a new image compatible with both the environment and the original model
+		BufferedImage result =  gc.createCompatibleImage(xDim,yDim,transparency);
+		
 		// draw resized image
 		Graphics2D g = result.createGraphics();
 		g.setComposite(AlphaComposite.Src);
 		if(smooth)
-		{	g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+		{	g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		}
 		else
 		{	g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 		}
-		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+		g.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED);
 		g.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);		
-		//g.drawImage(imgOld, 0, 0, xDim, yDim, null);
+		//g.drawImage(imgOld, 0, 0, xDim, yDim, null); //older version: 12219 vs 10687 (ms)
 		AffineTransform xform = AffineTransform.getScaleInstance(zoom,zoom);
 		g.drawRenderedImage(imgOld, xform);
 		g.dispose();

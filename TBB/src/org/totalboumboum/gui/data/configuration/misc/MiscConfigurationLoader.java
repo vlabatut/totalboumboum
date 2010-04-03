@@ -104,7 +104,7 @@ public class MiscConfigurationLoader
 		double zoomY = dim.getHeight()/(double)image.getHeight();
 		double zoomX = dim.getWidth()/(double)image.getWidth();
 		double zoom = Math.max(zoomX,zoomY);
-		image = ImageTools.resize(image,zoom,true);
+		image = ImageTools.getResizedImage(image,zoom,true);
 		image = ImageTools.getCompatibleImage(image);
 		result.setBackground(filename,image);
 	}

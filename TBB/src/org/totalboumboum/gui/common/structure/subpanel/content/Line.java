@@ -212,7 +212,7 @@ public class Line extends ContentPanel
 	public void setLabelIcon(int col, BufferedImage icon, String tooltip)
 	{	MyLabel label = getLabel(col);
 		double zoom = getHeight()/(double)icon.getHeight();
-		icon = ImageTools.resize(icon,zoom,true);
+		icon = ImageTools.getResizedImage(icon,zoom,true);
 		ImageIcon icn = new ImageIcon(icon);
 		label.setText(null);
 		label.setIcon(icn);

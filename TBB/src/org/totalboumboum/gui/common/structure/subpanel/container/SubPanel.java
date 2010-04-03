@@ -179,7 +179,7 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 
 	public void setTitleIcon(BufferedImage icon, String tooltip)
 	{	double zoom = titleHeight/(double)icon.getHeight();
-		icon = ImageTools.resize(icon,zoom,true);
+		icon = ImageTools.getResizedImage(icon,zoom,true);
 		ImageIcon icn = new ImageIcon(icon);
 		title.setText(null);
 		title.setIcon(icn);					
