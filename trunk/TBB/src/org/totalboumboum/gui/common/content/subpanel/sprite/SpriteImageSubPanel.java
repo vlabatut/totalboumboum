@@ -194,7 +194,7 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 		{	float zoomX = imgWidth/(float)image.getWidth();
 			float zoomY = imgHeight/(float)image.getHeight();
 			float zoom = Math.min(zoomX,zoomY);
-			image = ImageTools.resize(image,zoom,true);
+			image = ImageTools.getResizedImage(image,zoom,true);
 			ImageIcon icon = new ImageIcon(image);
 			label.setIcon(icon);
 			label.setText(null);

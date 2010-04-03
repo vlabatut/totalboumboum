@@ -103,6 +103,7 @@ public class LocalLoop extends Loop
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
 		systemControl = new SystemControl(this);
+long start = System.currentTimeMillis();
 
 		// load level & instance
 		HollowLevel hollowLevel = round.getHollowLevel();
@@ -182,6 +183,8 @@ public class LocalLoop extends Loop
 			loadStepOver();
 			j++;
 		}
+long end = System.currentTimeMillis();
+System.out.println("total load time: "+(end-start));
 		
 		// init logs
 		initLogs();

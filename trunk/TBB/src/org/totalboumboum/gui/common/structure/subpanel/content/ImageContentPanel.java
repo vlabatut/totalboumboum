@@ -97,7 +97,7 @@ public class ImageContentPanel extends ContentPanel
 			float zoomX = getWidth()/(float)newImage.getWidth();
 			float zoomY = getHeight()/(float)newImage.getHeight();
 			float zoom = Math.min(zoomX,zoomY);
-			image = ImageTools.resize(newImage,zoom,true);
+			image = ImageTools.getResizedImage(newImage,zoom,true);
 			// put image
 			ImageIcon icon = new ImageIcon(image);
 			imageLabel.setIcon(icon);
