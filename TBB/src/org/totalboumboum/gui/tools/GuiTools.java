@@ -153,6 +153,7 @@ public class GuiTools
 	{	BufferedImage image;
 		try
 		{	image = ImageTools.loadImage(path,null);
+			image = ImageTools.getCompatibleImage(image);		
 		}
 		catch (IOException e)
 		{	image = absent;
