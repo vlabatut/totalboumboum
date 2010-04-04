@@ -46,17 +46,6 @@ public class CachedImage
 	private BufferedImage regularImage = null; 
 	private double regularImageSize = 0;
 	
-	/////////////////////////////////////////////////////////////////
-	// ZOOMED IMAGE		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private BufferedImage zoomedImage = null;
-	private double currentZoom = 0;
-	private double zoomedImageSize = 0;
-	
-	public double getCurrentZoom()
-	{	return currentZoom;
-	}
-	
     /////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -145,7 +134,7 @@ public class CachedImage
 	}
 
 	public double getTotalSize()
-	{	double result = regularImageSize + zoomedImageSize;
+	{	double result = regularImageSize;
 		return result;
 	}
 }

@@ -85,7 +85,8 @@ public abstract class HollowSpriteFactory<T extends Sprite> extends AbstractSpri
 		result.setGesturePack(gesturePackCopy);
 		
 		// abilities: the same (must be copied only when making sprites)
-		result.setAbilities(abilities);
+		List<AbstractAbility> abilitiesCopy = new ArrayList<AbstractAbility>(abilities);
+		result.setAbilities(abilitiesCopy);
 		
 		// explosions: name only
 		result.setExplosionName(explosionName);

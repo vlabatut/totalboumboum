@@ -1180,5 +1180,6 @@ public class Launcher
 	 * - quand les items apparaissent dans la fumée, y a un décalage
 	 * - lenteur du chargement
 	 * 		- comparer avec 016: nbre d'images chargées,redim,colorées
+	 * 		- voir si c pas le cache qui est plein et se vide tout seul... 
 	 */
 }
