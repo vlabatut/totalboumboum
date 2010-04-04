@@ -1273,20 +1273,24 @@ System.out.println("total load time: "+(end-start));
 		{	super.finish();
 			// system listener
 			panel.removeKeyListener(systemControl);
+			
 			// players
 			Iterator<Player> i = players.iterator();
 			while(i.hasNext())
-			{	Player temp = i.next();
-				panel.removeKeyListener(temp.getSpriteControl());
-				temp.finish();
+			{	Player player = i.next();
+				panel.removeKeyListener(player.getSpriteControl());
+				player.finish();
 				i.remove();
 			}
+			
 			// panel
 //			panel.finish();
 			panel = null;
+			
 			// level
-			level.finish();
+//			level.finish();
 			level = null;
+			
 			// control
 			systemControl.finish();
 			systemControl = null;

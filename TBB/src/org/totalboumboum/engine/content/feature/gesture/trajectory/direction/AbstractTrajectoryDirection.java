@@ -231,25 +231,4 @@ public abstract class AbstractTrajectoryDirection<T extends AbstractTrajectorySt
 	public String toString()
 	{	return getName();
 	}	
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// steps
-			{	Iterator<T> it = steps.iterator();
-				while(it.hasNext())
-				{	T temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// misc
-			direction = null;
-		}
-	}	
 }

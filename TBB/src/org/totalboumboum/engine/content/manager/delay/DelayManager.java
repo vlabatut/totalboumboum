@@ -142,25 +142,4 @@ public class DelayManager
 			}
 		}
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// delays
-			{	Iterator<Entry<String,Double>> it = delays.entrySet().iterator();
-				while(it.hasNext())
-				{	@SuppressWarnings("unused")
-				Entry<String,Double> t = it.next();
-					it.remove();
-				}
-			}
-			// misc
-			sprite = null;
-		}
-	}
 }

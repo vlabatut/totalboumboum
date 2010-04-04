@@ -204,33 +204,4 @@ if(modulationAbilities.size()>0)
 			temp.combine(ability);
 		}
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// current abilities
-			{	Iterator<AbstractAbility> it = currentAbilities.iterator();
-				while(it.hasNext())
-				{	AbstractAbility temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// direct abilities
-			{	Iterator<AbstractAbility> it = directAbilities.iterator();
-				while(it.hasNext())
-				{	AbstractAbility temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// misc
-			sprite = null;
-		}
-	}
 }

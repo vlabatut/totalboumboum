@@ -34,13 +34,4 @@ public class ActionEvent extends AbstractEvent
 	public SpecificAction getAction()
 	{	return action;	
 	}
-	
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// action
-			action.finish();
-			action = null;
-		}
-	}
 }

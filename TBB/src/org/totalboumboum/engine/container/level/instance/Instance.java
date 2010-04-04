@@ -136,14 +136,10 @@ public class Instance
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    private boolean finished = false;
-	
 	public void finish()
-    {	if(!finished)
-	    {	name = null;
-	    	bombsetMap = null;
-	    	firesetMap = null;
-	    	itemset = null;
-	    }
+    {	name = null;
+    	bombsetMap = null;
+    	firesetMap = null;
+    	itemset = null;
     }
 }

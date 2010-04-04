@@ -21,7 +21,6 @@ package org.totalboumboum.engine.content.sprite.item;
  * 
  */
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
@@ -107,27 +106,5 @@ public class ItemFactory extends SpriteFactory<Item>
 		result.initSprite(tile);		
 		
 		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// item abilities
-			{	for(List<AbstractAbility> list: itemAbilities)
-				{	Iterator<AbstractAbility> it = list.iterator();
-					while(it.hasNext())
-					{	AbstractAbility temp = it.next();
-						temp.finish();
-						it.remove();
-					}
-				}
-				itemAbilities.clear();
-				itemrefs.clear();
-				itemProbabilities.clear();
-			}
-		}
 	}
 }

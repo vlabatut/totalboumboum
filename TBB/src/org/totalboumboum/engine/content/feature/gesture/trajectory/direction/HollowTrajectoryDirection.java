@@ -89,8 +89,6 @@ public class HollowTrajectoryDirection extends AbstractTrajectoryDirection<Hollo
 		result.xInteraction = xInteraction*zoomFactor;
 		result.yInteraction = yInteraction*zoomFactor;
 		
-		result.finished = finished;
-		
 		return result;
 	}
 }

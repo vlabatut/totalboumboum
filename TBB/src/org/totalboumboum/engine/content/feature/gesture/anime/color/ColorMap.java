@@ -46,15 +46,4 @@ public class ColorMap extends ColorRule
 	public Set<Entry<Integer,byte[]>> entrySet()
 	{	return map.entrySet();		
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// misc
-			map.clear();
-		}
-	}
 }

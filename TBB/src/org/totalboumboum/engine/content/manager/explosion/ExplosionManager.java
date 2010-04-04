@@ -185,22 +185,4 @@ public class ExplosionManager
 		
 		return result;
 	}	
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// explosion
-if(explosion==null)
-	System.out.println(sprite.getName());
-			explosion.finish();
-			explosion = null;
-			// misc
-			sprite = null;
-		}
-	}
 }

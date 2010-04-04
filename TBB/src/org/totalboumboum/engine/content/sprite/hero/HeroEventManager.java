@@ -682,16 +682,4 @@ public class HeroEventManager extends EventManager
 		gesture = GestureName.STANDING;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// misc
-			blockedDirection = null;
-			controlDirection = null;
-		}
-	}
 }

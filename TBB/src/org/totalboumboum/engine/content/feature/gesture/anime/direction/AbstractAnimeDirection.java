@@ -136,21 +136,4 @@ public abstract class AbstractAnimeDirection<T extends AbstractAnimeStep>
 	public void setProportional(boolean proportional)
 	{	this.proportional = proportional;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	finished = true;
-
-		// images
-		for(T step: steps)
-			step.finish();
-		steps.clear();
-
-		// misc
-		direction = null;
-	}
 }

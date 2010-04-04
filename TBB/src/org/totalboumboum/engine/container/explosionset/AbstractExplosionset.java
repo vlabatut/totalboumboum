@@ -43,18 +43,4 @@ public abstract class AbstractExplosionset<T extends AbstractExplosion>
 	{	T result = explosions.get(name);
 		return result;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			for(T explosion: explosions.values())
-				explosion.finish();
-			explosions.clear();
-		}
-	}
 }

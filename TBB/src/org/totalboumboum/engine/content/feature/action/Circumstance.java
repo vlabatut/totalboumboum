@@ -190,18 +190,4 @@ public class Circumstance implements Serializable
 		
 		return result;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	contacts.clear();
-			orientations.clear();
-			tilePositions.clear();
-		}
-	}
-
 }

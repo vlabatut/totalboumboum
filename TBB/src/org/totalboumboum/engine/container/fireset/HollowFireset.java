@@ -24,7 +24,6 @@ package org.totalboumboum.engine.container.fireset;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map.Entry;
 
 import org.totalboumboum.engine.content.sprite.fire.FireFactory;
@@ -60,23 +59,5 @@ public class HollowFireset extends AbstractFireset implements Serializable
 		}
 		
 		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// factories
-			{	Iterator<Entry<String,HollowFireFactory>> it = fireFactories.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<String,HollowFireFactory> t = it.next();
-					HollowFireFactory temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
-			}
-		}
 	}
 }

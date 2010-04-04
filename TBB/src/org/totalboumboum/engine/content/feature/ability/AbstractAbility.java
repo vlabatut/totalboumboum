@@ -140,16 +140,4 @@ public abstract class AbstractAbility implements Serializable
 	/** used to clone abilities, it's actually a deep copy for ActionAbilities */
 	public abstract AbstractAbility copy();
 	//public abstract AbstractAbility deepCopy();
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-		}
-	}
-
 }

@@ -93,6 +93,7 @@ public class AiZone
 		for(int line=0;line<height;line++)
 			for(int col=0;col<width;col++)
 				matrix[line][col].finish();
+		
 		// sprites
 		blocks.clear();
 		bombs.clear();
@@ -101,6 +102,10 @@ public class AiZone
 		heroes.clear();
 		items.clear();
 		ownHero = null;
+		
+		// misc
+		level = null;
+		player = null;
 	}
 	
 	@Override

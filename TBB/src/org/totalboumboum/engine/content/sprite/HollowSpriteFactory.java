@@ -24,7 +24,6 @@ package org.totalboumboum.engine.content.sprite;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
@@ -94,32 +93,5 @@ public abstract class HollowSpriteFactory<T extends Sprite> extends AbstractSpri
 		// misc
 		result.setName(name);
 		result.setColor(color);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			
-			// abilities
-			{	Iterator<AbstractAbility> it = abilities.iterator();
-				while(it.hasNext())
-				{	AbstractAbility temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-			
-			// gestures
-			gesturePack.finish();
-			gesturePack = null;
-			
-			// misc
-			name = null;
-		}
 	}
 }

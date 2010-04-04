@@ -24,7 +24,6 @@ package org.totalboumboum.engine.container.itemset;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map.Entry;
 
 import org.totalboumboum.engine.container.CachableSpriteContainer;
@@ -63,21 +62,4 @@ public class HollowItemset extends AbstractItemset implements Serializable, Cach
 		return result;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// factories
-			{	Iterator<Entry<String,HollowItemFactory>> it = itemFactories.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<String,HollowItemFactory> t = it.next();
-					HollowItemFactory temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
-			}
-		}
-	}
 }

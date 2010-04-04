@@ -91,21 +91,4 @@ public class HollowBombset extends AbstractBombset implements Serializable, Cach
 		
 		return result;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// factories
-			{	Iterator<HollowBombFactory> it = bombFactories.iterator();
-				while(it.hasNext())
-				{	HollowBombFactory temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-		}
-	}
 }

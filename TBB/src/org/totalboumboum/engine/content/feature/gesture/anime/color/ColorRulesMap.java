@@ -61,18 +61,4 @@ public class ColorRulesMap implements Serializable
 		colorRules.put(color,colorRule);
 		colorRule.setParent(this);
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			
-			colorRules.clear();
-			colorRules = null;
-		}
-	}
 }

@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -223,45 +222,4 @@ public abstract class AbstractGesture<T extends AbstractAnimeDirection<?>, U ext
 			m.getAction().addTarget(role);
 	}
 */	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			
-			// animes
-			for(Entry<Direction,T> e: animes.entrySet())
-			{	T temp = e.getValue();
-				temp.finish();
-			}
-			animes.clear();
-						
-			// trajectories
-			for(Entry<Direction,U> e: trajectories.entrySet())
-			{	U temp = e.getValue();
-				temp.finish();
-			}
-			trajectories.clear();
-			
-			// modulations
-			for(SelfModulation e: selfModulations)
-				e.finish();			
-			for(OtherModulation e: otherModulations)
-				e.finish();			
-			for(ActorModulation e: actorModulations)
-				e.finish();			
-			for(TargetModulation e: targetModulations)
-				e.finish();			
-			for(ThirdModulation e: thirdModulations)
-				e.finish();			
-			selfModulations.clear();
-			otherModulations.clear();
-			actorModulations.clear();
-			targetModulations.clear();
-			thirdModulations.clear();
-		}
-	}
 }

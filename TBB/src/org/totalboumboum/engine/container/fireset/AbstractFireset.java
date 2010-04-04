@@ -35,16 +35,4 @@ public abstract class AbstractFireset
 	public void setName(String name)
 	{	this.name = name;	
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			name = null;
-		}
-	}
 }

@@ -221,28 +221,4 @@ public class BombsetManager
 //			sprite.putControlEvent(event);
 		}
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// dropped bombs
-			{	Iterator<Bomb> it = droppedBombs.iterator();
-				while(it.hasNext())
-				{	Bomb temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// bombset
-			bombset.finish();
-			bombset = null;
-			// misc
-			sprite = null;
-		}
-	}
 }

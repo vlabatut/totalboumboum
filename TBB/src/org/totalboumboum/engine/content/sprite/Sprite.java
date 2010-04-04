@@ -841,49 +841,4 @@ public abstract class Sprite
 	{	eventManager.enterRound(Direction.NONE);
 	}
 */	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// bound sprites
-			{	Iterator<Sprite> it = boundSprites.iterator();
-				while(it.hasNext())
-				{	Sprite temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// managers
-			abilityManager.finish();
-			abilityManager = null;
-			animeManager.finish();
-			animeManager = null;
-			bombsetManager.finish();
-			bombsetManager = null;
-			controlManager.finish();
-			controlManager = null;
-			delayManager.finish();
-			delayManager = null;
-			eventManager.finish();
-			eventManager = null;
-			explosionManager.finish();
-			explosionManager = null;
-			itemManager.finish();
-			itemManager = null;
-			modulationManager.finish();
-			modulationManager = null;
-			trajectoryManager.finish();
-			trajectoryManager = null;
-			// misc
-			boundToSprite = null;
-			toBeRemovedFromSprite = null;
-			owner = null;
-			player = null;
-			name = null;
-		}
-	}	
 }

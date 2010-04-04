@@ -144,21 +144,4 @@ public class Bombset extends AbstractBombset
 		}
 		return result;
 	}
-		
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// factories
-			{	Iterator<BombFactory> it = bombFactories.iterator();
-				while(it.hasNext())
-				{	BombFactory temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-		}
-	}
 }

@@ -22,7 +22,6 @@ package org.totalboumboum.engine.container.bombset;
  */
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -37,30 +36,5 @@ public abstract class AbstractBombset
 	@SuppressWarnings("unused")
 	private void setRequiredAbilities(List<List<StateAbility>> requiredAbilities)
 	{	this.requiredAbilities = requiredAbilities;
-	}
-		
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-
-			// abilities
-			{	Iterator<List<StateAbility>> it = requiredAbilities.iterator();
-				while(it.hasNext())
-				{	List<StateAbility> temp = it.next();
-					Iterator<StateAbility> it2 = temp.iterator();
-					while(it2.hasNext())
-					{	StateAbility temp2 = it2.next();
-						temp2.finish();
-						it2.remove();
-					}
-					it.remove();
-				}
-			}
-		}
 	}
 }
