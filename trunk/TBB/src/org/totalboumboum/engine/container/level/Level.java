@@ -27,7 +27,6 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
@@ -42,7 +41,6 @@ import org.totalboumboum.engine.loop.LocalLoop;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.gui.tools.MessageDisplayer;
 import org.totalboumboum.tools.calculus.CalculusTools;
-
 
 public class Level
 {	public Level(LocalLoop loop)				
@@ -1046,42 +1044,5 @@ public class Level
 //		g.drawString(displayedText,x,y);
 		// effects
 		messageDisplayer.paint(g);
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// bombset
-//			bombset.finish();
-//			bombset = null;
-			// fireset map
-//			firesetMap.finish();
-//			firesetMap = null;
-			// itemset
-//			itemset.finish();
-//			itemset = null;
-			// matrix
-			for(int line=0;line<globalHeight;line++)
-			{	for(int col=0;col<globalWidth;col++)
-				{	matrix[line][col].finish();
-					matrix[line][col] = null;
-				}
-			}
-			// sprites
-			Iterator<Sprite> it = sprites.iterator();
-			while(it.hasNext())
-			{	Sprite temp = it.next();
-				temp.finish();
-				it.remove();
-			}
-			// theme
-//			theme.finish();
-//			theme = null;
-		}
 	}
 }

@@ -102,8 +102,6 @@ public class HollowGesture extends AbstractGesture<HollowAnimeDirection,HollowTr
 		for(ThirdModulation e: thirdModulations)
 			result.addModulation(e);
 		
-		result.finished = finished;
-		
 		return result;
 	}
 

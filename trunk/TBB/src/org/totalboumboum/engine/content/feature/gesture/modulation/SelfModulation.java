@@ -46,7 +46,6 @@ public class SelfModulation extends AbstractStateModulation
 	public SelfModulation copy()
 	{	SelfModulation result = new SelfModulation(name);
 		result.name = name;
-		result.finished = finished;
 		result.frame = frame;
 		result.gestureName = gestureName;
 		result.strength = strength;

@@ -77,15 +77,4 @@ public class AbstractTheme
 	public void setSource(String source)
 	{	this.source = source;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-		}
-	}
 }

@@ -22,7 +22,6 @@ package org.totalboumboum.engine.container.fireset;
  */
 
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 public abstract class AbstractFiresetMap<T extends AbstractFireset>
 {	
@@ -37,19 +36,5 @@ public abstract class AbstractFiresetMap<T extends AbstractFireset>
 	
 	public T getFireset(String name)
 	{	return firesets.get(name);		
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			for(Entry<String,T> e: firesets.entrySet())
-				e.getValue().finish();
-			firesets.clear();
-		}
 	}
 }

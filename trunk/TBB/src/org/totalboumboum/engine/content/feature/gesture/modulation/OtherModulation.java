@@ -105,7 +105,6 @@ public class OtherModulation extends AbstractStateModulation
 		result.contacts.addAll(contacts);
 		result.tilePositions.addAll(tilePositions);
 		result.strength = strength;
-		result.finished = finished;
 		result.frame = frame;
 		result.gestureName = gestureName;
 		result.strength = strength;

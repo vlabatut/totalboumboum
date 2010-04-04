@@ -78,12 +78,6 @@ public class ControlEvent extends AbstractEvent
 	{	return name;	
 	}
 
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-		}
-	}
-	
 	public static String getCodeFromPrimaryDirection(Direction direction)
 	{	String result = null;
 		switch(direction)

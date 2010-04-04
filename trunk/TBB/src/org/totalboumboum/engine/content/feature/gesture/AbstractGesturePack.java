@@ -22,7 +22,6 @@ package org.totalboumboum.engine.content.feature.gesture;
  */
 
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 public abstract class AbstractGesturePack<T extends AbstractGesture<?,?>>
 {		
@@ -56,22 +55,5 @@ public abstract class AbstractGesturePack<T extends AbstractGesture<?,?>>
 	
 	public boolean containsGesture(GestureName name)
 	{	return gestures.containsKey(name);		
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// gestures
-			for(Entry<GestureName,T> e: gestures.entrySet())
-			{	T temp = e.getValue();
-				temp.finish();
-			}
-			gestures.clear();
-		}
 	}
 }

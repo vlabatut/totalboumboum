@@ -169,22 +169,4 @@ public class Item extends Sprite
 
 		return result;		
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// item abilities
-			{	Iterator<AbstractAbility> it = itemAbilities.iterator();
-				while(it.hasNext())
-				{	AbstractAbility temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-		}
-	}
-
 }

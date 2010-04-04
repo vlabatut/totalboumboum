@@ -24,7 +24,6 @@ package org.totalboumboum.engine.content.sprite.item;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -138,28 +137,5 @@ public class HollowItemFactory extends HollowSpriteFactory<Item>
 		result.itemProbabilities = itemProbabilitiesCopy;
 
 		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			
-			// item abilities
-			{	for(List<AbstractAbility> list: itemAbilities)
-				{	Iterator<AbstractAbility> it = list.iterator();
-					while(it.hasNext())
-					{	AbstractAbility temp = it.next();
-						temp.finish();
-						it.remove();
-					}
-				}
-				itemAbilities.clear();
-				itemrefs.clear();
-				itemProbabilities.clear();
-			}
-		}
 	}
 }

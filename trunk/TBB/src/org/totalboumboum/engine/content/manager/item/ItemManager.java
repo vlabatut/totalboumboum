@@ -393,34 +393,4 @@ public class ItemManager
 			}
 		}
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// abilities
-			{	Iterator<AbstractAbility> it = abilities.iterator();
-				while(it.hasNext())
-				{	AbstractAbility temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// items
-			{	initialItems.clear();
-				Iterator<Item> it = collectedItems.iterator();
-				while(it.hasNext())
-				{	Item temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// misc
-			sprite = null;
-		}
-	}
 }

@@ -204,12 +204,15 @@ public abstract class AbstractAiManager<V>
      */
     public final void finish()
     {	finishAi();
-		boolean result = futureAi.isDone(); 
+		
+    	boolean result = futureAi.isDone(); 
     	if(!result) 
     		result = futureAi.cancel(true);
 		/*List<Runnable> list = */executorAi.shutdownNow();
-    	finishPercepts();
-    	ai = null;
+    	
+		finishPercepts();
+    	
+		ai = null;
     	executorAi = null;
     	futureAi = null;
     	player = null;

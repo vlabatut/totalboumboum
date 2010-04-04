@@ -24,7 +24,6 @@ package org.totalboumboum.engine.container.theme;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map.Entry;
 
 import org.totalboumboum.engine.container.CachableSpriteContainer;
@@ -81,32 +80,5 @@ public class HollowTheme extends AbstractTheme implements Serializable, Cachable
 		}
 		
 		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// floors
-			{	Iterator<Entry<String,HollowFloorFactory>> it = floors.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<String,HollowFloorFactory> t = it.next();
-				HollowFloorFactory temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// blocks
-			{	Iterator<Entry<String,HollowBlockFactory>> it = blocks.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<String,HollowBlockFactory> t = it.next();
-				HollowBlockFactory temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
-			}
-		}
 	}
 }

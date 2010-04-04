@@ -842,6 +842,7 @@ public class Launcher
 	 * 		- correction d'un bug lors du calcul des scores quand un joueur se fait tuer par le niveau (i.e. bombe anonyme)
 	 * 		- nouveau sytème de cache : image et sprites sont cachés séparément
 	 * 		- nouveau système permettant de définir des sprites comme des empilement de couches séparées
+	 * 		- simplification du système de suppression d'outil (on laisse le ramasse miette en faire plus, pas la peine de s'en charger manuellement)
 	 * - GUI :
 	 * 		- correction d'un bug dans le menu des options avancées
 	 * 		- options avancées : (dés)activation du cache, réglage de la taille du cache
@@ -1175,9 +1176,8 @@ public class Launcher
 	
 	/**
 	 * TODO BUGS
-	 * - le hero NBM2 ne s'élève pas en l'air en cas de victoire
-	 * - on ne peut plus poser de bombes au deuxième round
 	 * - quand les items apparaissent dans la fumée, y a un décalage
+	 * - le hero NBM2 ne s'élève pas en l'air en cas de victoire
 	 * - lenteur du chargement
 	 * 		- comparer avec 016: nbre d'images chargées,redim,colorées
 	 * 		- voir si c pas le cache qui est plein et se vide tout seul... 

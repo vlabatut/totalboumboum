@@ -126,9 +126,11 @@ public class Round implements StatisticHolder, Serializable
 	{	// loop
 		loop.finish();
 		loop = null;
+		
 		// level description
 		hollowLevel.finish();
 		hollowLevel = null;
+		
 		// misc
 		match = null;
 		panel = null;
@@ -136,6 +138,8 @@ public class Round implements StatisticHolder, Serializable
 		stats = null;
 		RoundVariables.level = null;
 		RoundVariables.loop = null;
+		RoundVariables.instance = null;
+		
 		// garbage collect
 		Runtime rt = Runtime.getRuntime();
 		rt.gc(); 

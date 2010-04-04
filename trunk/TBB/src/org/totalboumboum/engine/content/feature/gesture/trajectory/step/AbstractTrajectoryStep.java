@@ -82,17 +82,4 @@ public abstract class AbstractTrajectoryStep
 	public void setDuration(long duration)
 	{	this.duration = duration;
 	}	
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// misc
-			boundZShift = null;
-		}
-	}
 }

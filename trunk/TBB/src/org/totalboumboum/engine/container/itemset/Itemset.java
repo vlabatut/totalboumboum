@@ -23,8 +23,6 @@ package org.totalboumboum.engine.container.itemset;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -68,23 +66,5 @@ if(itemFactory==null)
 		result = itemFactory.makeSprite(tile);
 		//result.initGesture();
 		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// factories
-			{	Iterator<Entry<String,ItemFactory>> it = itemFactories.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<String,ItemFactory> t = it.next();
-					ItemFactory temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
-			}
-		}
 	}
 }

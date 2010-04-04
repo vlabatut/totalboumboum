@@ -91,15 +91,4 @@ public abstract class AbstractAnimeStep
 	public void setBoundYShift(ImageShift boundYShift)
 	{	this.boundYShift = boundYShift;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-
-	public void finish()
-	{	xShifts.clear();
-		yShifts.clear();
-		finished = true;
-	}
 }

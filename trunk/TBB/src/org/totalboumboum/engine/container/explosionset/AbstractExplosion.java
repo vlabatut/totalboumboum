@@ -49,17 +49,4 @@ public abstract class AbstractExplosion
 	{	this.fireset = fireset;	
 	}
 */	
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// fireset
-			firesetName = null;
-		}
-	}
 }

@@ -128,18 +128,4 @@ public abstract class EventManager
 		}
 		return result;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// misc
-			spriteDirection = null;
-			sprite = null;
-		}
-	}
 }

@@ -23,7 +23,6 @@ package org.totalboumboum.engine.container.theme;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -97,32 +96,5 @@ if(bf==null)
 //NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien été trouvé !	
 		//result.initGesture();
 		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// floors
-			{	Iterator<Entry<String,FloorFactory>> it = floors.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<String,FloorFactory> t = it.next();
-					FloorFactory temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// blocks
-			{	Iterator<Entry<String,BlockFactory>> it = blocks.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<String,BlockFactory> t = it.next();
-					BlockFactory temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
-			}
-		}
 	}
 }

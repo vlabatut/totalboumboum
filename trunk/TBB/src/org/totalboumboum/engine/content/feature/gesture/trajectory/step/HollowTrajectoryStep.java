@@ -55,8 +55,6 @@ public class HollowTrajectoryStep extends AbstractTrajectoryStep
 
 		result.boundZShift = boundZShift;
 		result.duration = duration;
-		
-		result.finished = finished;
 
 		return result;
 	}

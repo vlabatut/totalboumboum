@@ -21,14 +21,11 @@ package org.totalboumboum.engine.content.sprite;
  * 
  */
 
-import java.util.Iterator;
-
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.bombset.Bombset;
 import org.totalboumboum.engine.container.explosionset.Explosion;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.manager.ability.AbilityManager;
 import org.totalboumboum.engine.content.manager.anime.AnimeManager;
@@ -147,39 +144,5 @@ public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFact
 
 	public Explosion getExplosion()
 	{	return explosion;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			
-			// abilities
-			{	Iterator<AbstractAbility> it = abilities.iterator();
-				while(it.hasNext())
-				{	AbstractAbility temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
-			// packs & sets
-			bombset.finish();
-			bombset = null;
-			
-			// explosion
-			explosion.finish();	
-			explosion = null;
-			
-			// gestures
-			gesturePack.finish();
-			gesturePack = null;
-			
-			// misc
-			name = null;
-		}
 	}
 }

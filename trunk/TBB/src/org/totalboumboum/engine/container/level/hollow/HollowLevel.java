@@ -87,7 +87,7 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Instance instance;
+	private transient Instance instance;
 
 	public Instance getInstance()
     {	return instance;
@@ -284,16 +284,11 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    private boolean finished = false;
-	
 	public void finish()
-    {	if(!finished)
-	    {	// misc
-	    	instance = null;
-	    	level = null;
-	    	levelInfo = null;
-	    	players = null;
-	    	zone = null;
-	    }
+    {	instance = null;
+    	level = null;
+    	levelInfo = null;
+    	players = null;
+    	zone = null;
     }
 }

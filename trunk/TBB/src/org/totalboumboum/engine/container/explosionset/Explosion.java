@@ -72,17 +72,4 @@ public class Explosion extends AbstractExplosion
 		
 		return result;
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			if(fireset!=null)
-			{	fireset.finish();
-				fireset = null;
-			}
-		}
-	}
 }

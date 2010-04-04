@@ -145,18 +145,4 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 			Configuration.getEngineConfiguration().addToImageCache(shadowFileName,shadowColorMap);
 	}
 */
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-
-			// images
-			imagesFileNames.clear();
-			shadowFileName = null;
-
-			// misc
-		}
-	}
 }
