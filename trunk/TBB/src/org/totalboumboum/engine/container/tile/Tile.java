@@ -38,6 +38,7 @@ import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.event.AbstractEvent;
+import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -112,11 +113,12 @@ public class Tile
 			drawSprites(items,g,flat,onGround,shadow);
 	}
 
-	private <T extends Sprite> void drawSprites(ArrayList<T> sprites, Graphics g, boolean flat, boolean onGround, boolean shadow)
+	private <T extends Sprite> void drawSprites(List<T> sprites, Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	for(int i=0;i<sprites.size();i++)
 		{	T tempS = sprites.get(i);
 			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-			if(((temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
+			if((((temp.isActive())==flat) && (tempS.isOnGround()==onGround))
+				|| ((tempS.isOnGround()==false) && (onGround==false)))
 				if(shadow)
 					drawShadow(g,tempS);
 				else
@@ -128,13 +130,14 @@ public class Tile
 	 * dessine un sprite sans son ombre
 	 */
 	private void drawSprite(Graphics g, Sprite s)
-	{	List<BufferedImage> images =  s.getCurrentImage();
-		List<Double> xShifts =  s.getXShifts();
-		List<Double> yShifts =  s.getYShifts();
+	{	List<StepImage> images =  s.getCurrentImages();
+if(images.size()>1)
+	System.err.println("ligne");
 		for(int j=0;j<images.size();j++)
-		{	BufferedImage image = images.get(j);
-			double xShift = xShifts.get(j);
-			double yShift = yShifts.get(j);
+		{	StepImage stepImage = images.get(j);
+			BufferedImage image = stepImage.getImage();
+			double xShift = stepImage.getXShift();
+			double yShift = stepImage.getYShift();
 			double pX = s.getCurrentPosX() + xShift;
 			double pY = s.getCurrentPosY() + yShift;
 			double pZ = s.getCurrentPosZ();
@@ -254,10 +257,11 @@ public class Tile
 	 * trace l'ombre d'un sprite (et pas le sprite)
 	 */
 	private void drawShadow(Graphics g, Sprite s)
-	{	BufferedImage image = s.getShadow();
-		if(image!=null)
-		{	double pX = s.getCurrentPosX()+s.getShadowXShift();
-			double pY = s.getCurrentPosY()+s.getShadowYShift();
+	{	StepImage stepImage = s.getShadow();
+		if(stepImage!=null)
+		{	BufferedImage image = stepImage.getImage();
+			double pX = s.getCurrentPosX()+stepImage.getXShift();
+			double pY = s.getCurrentPosY()+stepImage.getYShift();
 			pX = pX - ((double)image.getWidth())/2;
 			pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;
 			//

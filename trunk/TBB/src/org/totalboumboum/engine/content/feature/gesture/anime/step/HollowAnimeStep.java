@@ -21,50 +21,31 @@ package org.totalboumboum.engine.content.feature.gesture.anime.step;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMap;
+import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.HollowStepImage;
+import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
 
-public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
+public class HollowAnimeStep extends AbstractAnimeStep<HollowStepImage> implements Serializable
 {	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// IMAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<String> imagesFileNames = new ArrayList<String>();
-	private List<ColorRulesMap> imagesColorRulesMaps = new ArrayList<ColorRulesMap>();
-
-	public List<String> getImagesFileNames()
-	{	return imagesFileNames;
-	}
-	
-	public void addImageFileName(String imageFileName, double xShift, double yShift, ColorRulesMap colorRulesMap)
-	{	imagesFileNames.add(imageFileName);
-		xShifts.add(xShift);
-		yShifts.add(yShift);
-		imagesColorRulesMaps.add(colorRulesMap);
+	public void addImage(String imageFileName, double xShift, double yShift, ColorRulesMap colorRulesMap)
+	{	HollowStepImage image = new HollowStepImage(imageFileName,xShift,yShift,colorRulesMap);
+		images.add(image);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// SHADOW			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String shadowFileName = null;
-	private ColorRulesMap shadowColorRulesMap = null;
-
-	public void setShadowFileName(String shadowFileName, ColorRulesMap shadowColorRulesMap)
-	{	this.shadowFileName = shadowFileName;
-		this.shadowColorRulesMap = shadowColorRulesMap;	
-	}
-	
-	public String getShadowFileName()
-	{	return shadowFileName;
+	public void setShadow(String shadowFileName, double shadowXShift, double shadowYShift, ColorRulesMap shadowColorRulesMap)
+	{	HollowStepImage image = new HollowStepImage(shadowFileName,shadowXShift,shadowYShift,shadowColorRulesMap);
+		this.shadow = image;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -104,30 +85,26 @@ public class HollowAnimeStep extends AbstractAnimeStep implements Serializable
 	 */
 	public AnimeStep fill(double zoom, PredefinedColor color) throws IOException
 	{	AnimeStep result = new AnimeStep();
-		
 		// images
-		for(int i=0;i<imagesFileNames.size();i++)
-		{	String imageFileName = imagesFileNames.get(i);
-			ColorRulesMap colorRulesMap = imagesColorRulesMaps.get(i);
-			ColorRule colorRule = colorRulesMap.getColorRule(color);
-			BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(imageFileName,colorRule,zoom);
-			double xShift = xShifts.get(i);
-			double yShift = yShifts.get(i);
-			result.addImage(image,xShift,yShift);
+		for(HollowStepImage image: images)
+		{	StepImage imageCopy = image.fill(zoom,color);
+			result.addImage(imageCopy);
 		}
 		
 		// duration
 		result.duration = duration;
 		
 		// shadow
-		if(shadowFileName!=null)
-		{	ColorRule colorRule = shadowColorRulesMap.getColorRule(color);
-			BufferedImage shadow = Configuration.getEngineConfiguration().retrieveFromImageCache(shadowFileName,colorRule,zoom);
-			result.setShadow(shadow,shadowXShift,shadowYShift);
+		if(shadow!=null)
+		{	StepImage shadowCopy = shadow.fill(zoom,color);
+			result.setShadow(shadowCopy);
 		}
 		
 		// bound
 		result.boundYShift = boundYShift;
+
+//if(result.getImages().size()>1)		
+//	System.out.println();
 
 		return result;
 	}

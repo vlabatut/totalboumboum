@@ -1155,6 +1155,7 @@ public class Launcher
 	 *  		- elles ne tuent pas, elles contaminent. 
 	 *  		- le contaminateur initial est résistant
 	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
+	 *  	- apparition des items : fumée+légèrement sur-élevé, puis l'item tombe par terre... (comm bug après cache v2)
 	 */ 
 	
 	/*
@@ -1176,8 +1177,6 @@ public class Launcher
 	
 	/**
 	 * TODO BUGS
-	 * - quand les items apparaissent dans la fumée, y a un décalage
-	 * - le hero NBM2 ne s'élève pas en l'air en cas de victoire
 	 * - lenteur du chargement
 	 * 		- comparer avec 016: nbre d'images chargées,redim,colorées
 	 * 		- voir si c pas le cache qui est plein et se vide tout seul... 

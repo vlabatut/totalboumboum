@@ -29,7 +29,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AbstractAnimeStep;
 
-public abstract class AbstractAnimeDirection<T extends AbstractAnimeStep>
+public abstract class AbstractAnimeDirection<T extends AbstractAnimeStep<?>>
 {	private static final long serialVersionUID = 1L;
 
 	public AbstractAnimeDirection()

@@ -34,6 +34,7 @@ import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
+import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.tools.images.ImageTools;
 
@@ -310,27 +311,24 @@ public class AnimeManager
 	{	return currentStep.hasShadow();	
 	}
 	
-	public BufferedImage getShadow()
-	{	BufferedImage result = null;
+	public StepImage getShadow()
+	{	StepImage result = null;
 		if(!invisible)
 		{	result = currentStep.getShadow();
 			if(result!=null && twinkleChange)
 			{	if(twinkleColor==null)
 					result = null;
 				else
-					result = ImageTools.getFilledImage(result,twinkleColor);
+				{	result = result.copy();
+					BufferedImage image = result.getImage();
+					image = ImageTools.getFilledImage(image,twinkleColor);
+					result.setImage(image);
+				
+				}
 			}
 		}
 		//result = ImageTools.getDarkenedImage(result,blinkParam);
 		return result;
-	}
-	
-	public double getShadowXShift()
-	{	return currentStep.getShadowXShift();
-	}
-	
-	public double getShadowYShift()
-	{	return currentStep.getShadowYShift();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -340,16 +338,24 @@ public class AnimeManager
 	 * renvoie l'image à afficher 
 	 * @return
 	 */
-	public List<BufferedImage> getCurrentImage()
-	{	List<BufferedImage> result = new ArrayList<BufferedImage>();
+	public List<StepImage> getCurrentImages()
+	{	List<StepImage> result = new ArrayList<StepImage>();
 		if(!invisible)
 		{	result = currentStep.getImages();
 			if(!result.isEmpty() && twinkleChange)
 			{	if(twinkleColor==null)
-					result = new ArrayList<BufferedImage>();
+					result = new ArrayList<StepImage>();
 				else
-				{	for(BufferedImage image: currentStep.getImages())
-						result.add(ImageTools.getFilledImage(image,twinkleColor));
+				{	List<StepImage> temp = new ArrayList<StepImage>();
+					for(StepImage stepImage: result)
+					{	BufferedImage image = stepImage.getImage();
+						double xSft = stepImage.getXShift();
+						double ySft = stepImage.getYShift();
+						BufferedImage imageCopy = ImageTools.getFilledImage(image,twinkleColor);
+						StepImage stepImageCopy = new StepImage(imageCopy,xSft,ySft);
+						temp.add(stepImageCopy);
+					}
+					result = temp;
 				}
 			}
 		}
@@ -363,24 +369,6 @@ public class AnimeManager
 	
 	public Direction getCurrentDirection()
 	{	return currentDirection;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// POSITION				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public List<Double> getXShifts()
-	{	return currentStep.getXShifts();
-	}
-	public List<Double> getYShifts()
-	{	List<Double> result = currentStep.getYShifts();
-		if(isBoundToSprite())
-		{	for(int i=0;i<result.size();i++)
-			{	double value = result.get(i);
-				value = value + currentStep.getBoundYShift().getValue(getBoundToSprite());
-				result.set(i,value);
-			}
-		}			
-		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////

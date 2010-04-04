@@ -25,8 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.engine.content.feature.ImageShift;
+import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.AbstractStepImage;
 
-public abstract class AbstractAnimeStep
+public abstract class AbstractAnimeStep<T extends AbstractStepImage>
 {	
 	public AbstractAnimeStep()
 	{	
@@ -46,37 +47,33 @@ public abstract class AbstractAnimeStep
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// SHIFTS			/////////////////////////////////////////////
+	// IMAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected List<Double> xShifts = new ArrayList<Double>();
-	protected List<Double> yShifts = new ArrayList<Double>();
+	protected List<T> images = new ArrayList<T>();
 
-	public List<Double> getXShifts()
-	{	return xShifts;
+	public List<T> getImages()
+	{	return images;
 	}
 	
-	public List<Double> getYShifts()
-	{	return yShifts;
+	public void addImage(T image)
+	{	images.add(image);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
-	// SHADOW SHIFTS	/////////////////////////////////////////////
+	// SHADOW 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected double shadowXShift = 0;
-	protected double shadowYShift = 0;
+	protected T shadow = null;
 
-	public double getShadowXShift()
-	{	return shadowXShift;
+	public T getShadow()
+	{	return shadow;
 	}
-	public void setShadowXShift(double shadowXShift)
-	{	this.shadowXShift = shadowXShift;
+	
+	public void setShadow(T shadow)
+	{	this.shadow = shadow;		
 	}
-
-	public double getShadowYShift()
-	{	return shadowYShift;
-	}
-	public void setShadowYShift(double shadowYShift)
-	{	this.shadowYShift = shadowYShift;
+	
+	public boolean hasShadow()
+	{	return shadow == null;	
 	}
 
 	/////////////////////////////////////////////////////////////////

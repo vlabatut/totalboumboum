@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.feature.gesture.anime.step;
+package org.totalboumboum.engine.content.feature.gesture.anime.stepimage;
 
 /*
  * Total Boum Boum
@@ -21,37 +21,24 @@ package org.totalboumboum.engine.content.feature.gesture.anime.step;
  * 
  */
 
-import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
-
-public class AnimeStep extends AbstractAnimeStep<StepImage>
+public abstract class AbstractStepImage
 {	
-	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * used when generating a sprite from a factory: images are not cloned.
-	 * but for now, animes are just re-used because they are not modifiable
-	 * (unlike some other sprite parts)
-	 */
-/*	public AnimeStep copy()
-	{	AnimeStep result = new AnimeStep();
-		
-		// images
-		result.images.addAll(images);
-		// shifts
-		result.xShifts.addAll(xShifts);
-		result.yShifts.addAll(yShifts);
-		
-		// duration
-		result.setDuration(duration);	
-		
-		// shadow
-		result.setShadow(shadow,shadowXShift,shadowYShift);
-		
-		// bound
-		result.setBoundYShift(boundYShift);
-
-		return result;
+	public AbstractStepImage(double xShift, double yShift)
+	{	this.xShift = xShift;
+		this.yShift = yShift;
 	}
-*/
+	
+	/////////////////////////////////////////////////////////////////
+	// SHIFTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected double xShift = 0;
+	protected double yShift = 0;
+
+	public double getXShift()
+	{	return xShift;
+	}
+	
+	public double getYShift()
+	{	return yShift;
+	}
 }

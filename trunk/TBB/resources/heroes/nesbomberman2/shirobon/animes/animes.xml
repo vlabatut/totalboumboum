@@ -363,9 +363,9 @@
 		<gesture name="WALKING" folder="walking" repeat="true">
 			<direction name="DOWN" folder="down" shadow="shadow.png" >
 				<step duration="130" file="lf.gif" />
-				<step duration="130" file="nf.gif"  />
-				<step duration="130" file="rf.gif"  />
-				<step duration="130" file="nf.gif"  />
+				<step duration="130" file="nf.gif" />
+				<step duration="130" file="rf.gif" />
+				<step duration="130" file="nf.gif" />
 			</direction>
 			<direction name="LEFT" folder="left">
 				<step duration="130" file="lf.gif" shadow="lfShadow.png" />
@@ -380,9 +380,9 @@
 				<step duration="130" file="nf.gif" shadow="nfShadow.png" />
 			</direction>
 			<direction name="UP" folder="up" shadow="shadow.png">
-				<step duration="130" file="lf.gif"  />
-				<step duration="130" file="nf.gif"  />
-				<step duration="130" file="rf.gif"  />
+				<step duration="130" file="lf.gif" />
+				<step duration="130" file="nf.gif" />
+				<step duration="130" file="rf.gif" />
 				<step duration="130" file="nf.gif" />
 			</direction>
 		</gesture>
