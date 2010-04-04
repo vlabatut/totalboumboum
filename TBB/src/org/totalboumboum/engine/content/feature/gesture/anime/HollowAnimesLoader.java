@@ -231,17 +231,13 @@ public class HollowAnimesLoader
 			yShift = Double.parseDouble(attribute.getValue());
 		
 		// shadow
-		String shadowFilename = null;
-		ColorRulesMap shadowColorRulesMap = null;
+		String shadowName = null;
 		attribute = root.getAttribute(XmlNames.SHADOW);
 		if(attribute!=null)
-		{	String key = attribute.getValue().trim();
-			shadowFilename = pack.getShadowFileName(key);
-			shadowColorRulesMap = pack.getShadowColorRulesMap(key);
+		{	shadowName = attribute.getValue().trim();
+			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
-			{	shadowFilename = localFilePath+root.getAttribute(XmlNames.SHADOW).getValue().trim();
-				shadowColorRulesMap = pack.getColorRulesMap();
-			}
+				shadowName = localFilePath+shadowName;
 		}
 		
 		// shadow horizontal shift
@@ -268,7 +264,7 @@ public class HollowAnimesLoader
     	while(i.hasNext())
     	{	Element tp = i.next();
 			HollowAnimeDirection animeDirection = loadDirectionElement(gestureName,pack,repeat,proportional,tp,localFilePath,xShift,yShift,
-					shadowFilename,shadowColorRulesMap,shadowXShift,shadowYShift,boundYShift);
+					shadowName,shadowXShift,shadowYShift,boundYShift);
 			gesture.addAnimeDirection(animeDirection,animeDirection.getDirection());
 		}
     	completeDirections(gesture);
@@ -281,7 +277,7 @@ public class HollowAnimesLoader
 	private static HollowAnimeDirection loadDirectionElement(GestureName gestureName, HollowGesturePack pack, boolean repeat, boolean proportional, 
     		Element root, String filePath, 
     		double xShift, double yShift, 
-    		String shadowFilename, ColorRulesMap shadowColorRulesMap, double shadowXShift, double shadowYShift, ImageShift boundYShift) throws IOException
+    		String shadowName, double shadowXShift, double shadowYShift, ImageShift boundYShift) throws IOException
     {	HollowAnimeDirection result = new HollowAnimeDirection();
 		
     	// direction
@@ -314,13 +310,10 @@ public class HollowAnimesLoader
 		// shadow
 		attribute = root.getAttribute(XmlNames.SHADOW);
 		if(attribute!=null)
-		{	String key = attribute.getValue().trim();
-			shadowFilename = pack.getShadowFileName(key);
-			shadowColorRulesMap = pack.getShadowColorRulesMap(key);
+		{	shadowName = attribute.getValue().trim();
+			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
-			{	shadowFilename = localFilePath+attribute.getValue().trim();
-				shadowColorRulesMap = pack.getColorRulesMap();
-			}
+				shadowName = localFilePath+shadowName;
 		}
 		
 		// shadow horizontal shift
@@ -343,7 +336,7 @@ public class HollowAnimesLoader
     	Iterator<Element> i = stepsList.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
-    		HollowAnimeStep animeStep = loadStepElement(tp,pack,localFilePath,xShift,yShift,shadowFilename,shadowColorRulesMap,shadowXShift,shadowYShift,boundYShift);
+    		HollowAnimeStep animeStep = loadStepElement(tp,pack,localFilePath,xShift,yShift,shadowName,shadowXShift,shadowYShift,boundYShift);
     		result.add(animeStep);
     	}
     	return result;
@@ -355,7 +348,7 @@ public class HollowAnimesLoader
     @SuppressWarnings("unchecked")
 	private static HollowAnimeStep loadStepElement(Element root, HollowGesturePack pack, String filePath, 
     		double xShift, double yShift,
-    		String shadowFilename, ColorRulesMap shadowColorRulesMap, double shadowXShift, double shadowYShift, ImageShift boundYShift) throws IOException
+    		String shadowName, double shadowXShift, double shadowYShift, ImageShift boundYShift) throws IOException
     {	HollowAnimeStep result = new HollowAnimeStep();    	
     
     	// duration
@@ -382,31 +375,37 @@ public class HollowAnimesLoader
 		// shadow
 		attribute = root.getAttribute(XmlNames.SHADOW);
 		if(attribute!=null)
-		{	String key = attribute.getValue().trim();
-			shadowFilename = pack.getShadowFileName(key);
-			shadowColorRulesMap = pack.getCommonImageRulesMap(key);
+		{	shadowName = attribute.getValue().trim();
+			String shadowFilename = pack.getShadowFileName(shadowName);
 			if(shadowFilename==null)
-			{	shadowFilename = filePath+attribute.getValue().trim();
+				shadowName = filePath+attribute.getValue().trim();
+
+			// shadow horizontal shift
+			attribute = root.getAttribute(XmlNames.SHADOW_XSHIFT);
+			if(attribute!=null)
+			{	String shadowXShiftStr = attribute.getValue();
+				shadowXShift = Double.parseDouble(shadowXShiftStr);
+			}
+			
+			// shadow vertical shift
+			attribute = root.getAttribute(XmlNames.SHADOW_YSHIFT);
+			if(attribute!=null)
+			{	String shadowYShiftStr = attribute.getValue();
+				shadowYShift = Double.parseDouble(shadowYShiftStr);
+			}
+			
+		}
+		if(shadowName!=null)
+		{	String shadowFilename = pack.getShadowFileName(shadowName);
+			ColorRulesMap shadowColorRulesMap = pack.getShadowColorRulesMap(shadowName);
+			if(shadowFilename==null)
+			{	shadowFilename = shadowName;
 				shadowColorRulesMap = pack.getColorRulesMap();
 			}
+			result.setShadow(shadowFilename,shadowXShift,shadowYShift,shadowColorRulesMap);
+			//if(shadowFilename.equals("shadow.png"))
+			//	System.out.println("shadowFilename==shadow.png");
 		}
-		result.setShadowFileName(shadowFilename,shadowColorRulesMap);
-		
-		// shadow horizontal shift
-		attribute = root.getAttribute(XmlNames.SHADOW_XSHIFT);
-		if(attribute!=null)
-		{	String shadowXShiftStr = attribute.getValue();
-			shadowXShift = Double.parseDouble(shadowXShiftStr);
-		}
-		result.setShadowXShift(shadowXShift);
-		
-		// shadow vertical shift
-		attribute = root.getAttribute(XmlNames.SHADOW_YSHIFT);
-		if(attribute!=null)
-		{	String shadowYShiftStr = attribute.getValue();
-			shadowYShift = Double.parseDouble(shadowYShiftStr);
-		}
-		result.setShadowYShift(shadowYShift);
 		
 		// bound shift
 		attribute = root.getAttribute(XmlNames.BOUND_YSHIFT);
@@ -420,14 +419,14 @@ public class HollowAnimesLoader
 		{	String strImage = attribute.getValue().trim();
 			String imageFileName = filePath+strImage;
 			ColorRulesMap colorRulesMap = pack.getColorRulesMap();
-			result.addImageFileName(imageFileName,xShift,yShift,colorRulesMap);
+			result.addImage(imageFileName,xShift,yShift,colorRulesMap);
 		}
 		attribute = root.getAttribute(XmlNames.NAME);
 		if(attribute!=null)
 		{	String key = attribute.getValue().trim();
 			String imageFileName = pack.getCommonImageFileName(key);
 			ColorRulesMap colorRulesMap = pack.getCommonImageRulesMap(key);
-			result.addImageFileName(imageFileName,xShift,yShift,colorRulesMap);
+			result.addImage(imageFileName,xShift,yShift,colorRulesMap);
 		}
 		
 		// other images
@@ -461,7 +460,7 @@ public class HollowAnimesLoader
 		{	String strImage = attribute.getValue().trim();
 			String imageFileName = filePath+strImage;
 			ColorRulesMap colorRulesMap = pack.getColorRulesMap();
-			result.addImageFileName(imageFileName,xShift,yShift,colorRulesMap);
+			result.addImage(imageFileName,xShift,yShift,colorRulesMap);
 		}
 		else
 		{	attribute = root.getAttribute(XmlNames.NAME);
@@ -469,7 +468,7 @@ public class HollowAnimesLoader
 			{	String key = attribute.getValue().trim();
 				String imageFileName = pack.getCommonImageFileName(key);
 				ColorRulesMap colorRulesMap = pack.getCommonImageRulesMap(key);
-				result.addImageFileName(imageFileName,xShift,yShift,colorRulesMap);
+				result.addImage(imageFileName,xShift,yShift,colorRulesMap);
 			}
 		}
 	}

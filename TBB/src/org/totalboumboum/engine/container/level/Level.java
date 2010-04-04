@@ -860,51 +860,73 @@ public class Level
 	}
 
 	private void drawLevel(Graphics g)
-	{	// only the on-ground flat sprites (they don't have shadow)
+	{	boolean flat = true;
+		boolean onGround = true;
+		boolean shadow = false;
+		
+		// only the on-ground flat sprites (they don't have shadow)
+		flat = true;
+		onGround = true;
+		shadow = false;
 		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSelection(g,true,true,false);
+				matrix[line][col].drawSelection(g,flat,onGround,shadow);
 		
 		// the rest line by line
 		// first: ground shadows from the last line (for graphical reasons)
+		flat = false;
+		onGround = true;
+		shadow = true;
 		for(int col=0;col<globalWidth;col++)
-			matrix[globalHeight-1][col].drawSelection(g,false,true,true);
+			matrix[globalHeight-1][col].drawSelection(g,flat,onGround,shadow);
 		// then the rest
 		for(int line=0;line<globalHeight;line++)
 		{	// shadows from the non-flat on-ground sprites
+			flat = false;
+			onGround = true;
+			shadow = true;
 			if(line<globalHeight-1)
 			{	for(int col=0;col<globalWidth;col++)
-					matrix[line][col].drawSelection(g,false,true,true);
+					matrix[line][col].drawSelection(g,flat,onGround,shadow);
 			}
 			/*
 			 * the non-flat on-ground sprites themselves:
 			 * each different kind is processed separately for graphical reasons
 			 */
+			flat = false;
+			onGround = true;
+			shadow = false;
 			// floor
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.FLOOR,g,false,true,false);
+				matrix[line][col].drawSprites(Role.FLOOR,g,flat,onGround,shadow);
 			// fires
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.FIRE,g,false,true,false);
+				matrix[line][col].drawSprites(Role.FIRE,g,flat,onGround,shadow);
 			// item
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.ITEM,g,false,true,false);
+				matrix[line][col].drawSprites(Role.ITEM,g,flat,onGround,shadow);
 			// block
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.BLOCK,g,false,true,false);
+				matrix[line][col].drawSprites(Role.BLOCK,g,flat,onGround,shadow);
 			// bombs
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.BOMB,g,false,true,false);
+				matrix[line][col].drawSprites(Role.BOMB,g,flat,onGround,shadow);
 			// heroes
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.HERO,g,false,true,false);
+				matrix[line][col].drawSprites(Role.HERO,g,flat,onGround,shadow);
 			
 			// shadows from the in-air sprites
+			flat = false;
+			onGround = false;
+			shadow = true;
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSelection(g,false,false,true);
+				matrix[line][col].drawSelection(g,flat,onGround,shadow);
 			// the in-air sprites themselves
+			flat = false;
+			onGround = false;
+			shadow = false;
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSelection(g,false,false,false);
+				matrix[line][col].drawSelection(g,flat,onGround,shadow);
 		}
 	}
 /*	

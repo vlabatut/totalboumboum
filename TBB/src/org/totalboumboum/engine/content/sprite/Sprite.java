@@ -21,7 +21,6 @@ package org.totalboumboum.engine.content.sprite;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -48,6 +47,7 @@ import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
+import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
 import org.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
@@ -67,7 +67,6 @@ import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
-
 
 /* 
  * Sprite possédant un status :
@@ -423,8 +422,8 @@ public abstract class Sprite
 	{	this.animeManager = animeManager;
 	}
 	
-	public List<BufferedImage> getCurrentImage()
-	{	return animeManager.getCurrentImage();	
+	public List<StepImage> getCurrentImages()
+	{	return animeManager.getCurrentImages();	
 	}
 	
 	public Direction getCurrentFacingDirection()
@@ -438,24 +437,8 @@ public abstract class Sprite
 	{	return animeManager.hasShadow();
 	}
 	
-	public BufferedImage getShadow()
+	public StepImage getShadow()
 	{	return animeManager.getShadow();	
-	}
-	
-	public List<Double> getXShifts()
-	{	return animeManager.getXShifts();
-	}
-	
-	public List<Double> getYShifts()
-	{	return animeManager.getYShifts();
-	}
-	
-	public double getShadowXShift()
-	{	return animeManager.getShadowXShift();
-	}
-	
-	public double getShadowYShift()
-	{	return animeManager.getShadowYShift();
 	}
 	
 	public double getBoundHeight()

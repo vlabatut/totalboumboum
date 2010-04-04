@@ -112,7 +112,11 @@ public class CachedImage
 		
 		// get original image
 		if(regularImage==null)
-		{	regularImage = ImageTools.loadImage(imagePath,null);
+		{	
+//			if(imagePath.equals("resources\\heroes\\nesbomberman2\\shirobon\\animes\\shadow.png"))
+//			System.out.println();
+			
+			regularImage = ImageTools.loadImage(imagePath,null);
 			File file = new File(imagePath);
 			regularImageSize = file.length();
 			imageCache.increaseSize(regularImageSize);

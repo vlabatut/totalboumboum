@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.feature.gesture.anime.step;
+package org.totalboumboum.engine.content.feature.gesture.anime.stepimage;
 
 /*
  * Total Boum Boum
@@ -21,37 +21,33 @@ package org.totalboumboum.engine.content.feature.gesture.anime.step;
  * 
  */
 
-import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
+import java.awt.image.BufferedImage;
 
-public class AnimeStep extends AbstractAnimeStep<StepImage>
+public class StepImage extends AbstractStepImage
 {	
+	public StepImage(BufferedImage image, double xShift, double yShift)
+	{	super(xShift,yShift);
+		this.image = image;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// IMAGE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private BufferedImage image = null;
+
+	public BufferedImage getImage()
+	{	return image;
+	}
+	
+	public void setImage(BufferedImage image)
+	{	this.image = image;		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * used when generating a sprite from a factory: images are not cloned.
-	 * but for now, animes are just re-used because they are not modifiable
-	 * (unlike some other sprite parts)
-	 */
-/*	public AnimeStep copy()
-	{	AnimeStep result = new AnimeStep();
-		
-		// images
-		result.images.addAll(images);
-		// shifts
-		result.xShifts.addAll(xShifts);
-		result.yShifts.addAll(yShifts);
-		
-		// duration
-		result.setDuration(duration);	
-		
-		// shadow
-		result.setShadow(shadow,shadowXShift,shadowYShift);
-		
-		// bound
-		result.setBoundYShift(boundYShift);
-
+	public StepImage copy()
+	{	StepImage result = new StepImage(image,xShift,yShift);
 		return result;
 	}
-*/
 }

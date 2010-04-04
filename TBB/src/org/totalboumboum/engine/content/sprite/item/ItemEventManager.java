@@ -208,6 +208,7 @@ public class ItemEventManager extends EventManager
 		// else move the item to the tile and make it appear
 		else
 		{	gesture = GestureName.RELEASED;
+			spriteDirection = Direction.NONE;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			EngineEvent evt = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
 			sprite.getTile().spreadEvent(evt);
