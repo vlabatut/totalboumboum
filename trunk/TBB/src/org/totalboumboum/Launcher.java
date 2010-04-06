@@ -1176,9 +1176,10 @@ public class Launcher
 	 */
 	
 	/**
-	 * TODO BUGS
-	 * - lenteur du chargement
-	 * 		- comparer avec 016: nbre d'images chargées,redim,colorées
-	 * 		- voir si c pas le cache qui est plein et se vide tout seul... 
+	 * TODO
+	 * quand on interrompt un round,
+	 * les points sont calculés normalement pr les IA
+	 * et les joueurs humains sont tous ex-aequo derniers
+	 * (voire tout le monde ex-aequo?)
 	 */
 }

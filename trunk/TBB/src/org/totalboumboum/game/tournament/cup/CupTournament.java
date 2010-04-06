@@ -316,8 +316,8 @@ public class CupTournament extends AbstractTournament
 			{	for(CupPlayer player: part.getPlayers())
 				{	if(player.getUsed())
 					{	int index = player.getSimulatedFinalRank()-1;
-if(index==-1)
-	System.out.println();
+//if(index==-1)
+//	System.out.println();
 						Profile profile = orderedProfile.get(index);
 						profiles.add(profile);
 					}

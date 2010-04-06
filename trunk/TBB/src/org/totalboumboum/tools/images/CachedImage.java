@@ -24,6 +24,7 @@ package org.totalboumboum.tools.images;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
@@ -43,13 +44,20 @@ public class CachedImage
 	/////////////////////////////////////////////////////////////////
 	// REGULAR IMAGE	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private BufferedImage regularImage = null; 
-	private double regularImageSize = 0;
-	
-    /////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 	private String imagePath = null;
+	private BufferedImage image = null; 
+	private double imageSize = 0;
+	
+	/////////////////////////////////////////////////////////////////
+	// COPIES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<ColorMap,BufferedImage> copies = new HashMap<ColorMap, BufferedImage>();
+	private double currentZoom = 1;
+	private double copiesTotalSize = 0;
+	
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	
 //	public BufferedImage getImage(ColorMap colormap, double zoom) throws IOException
 //	{	BufferedImage result;
@@ -108,37 +116,54 @@ public class CachedImage
 //	}
 
 	public BufferedImage getImage(ColorMap colormap, double zoom) throws IOException
-	{	BufferedImage result;
+	{	BufferedImage result = null;
 		
-		// get original image
-		if(regularImage==null)
-		{	
-//			if(imagePath.equals("resources\\heroes\\nesbomberman2\\shirobon\\animes\\shadow.png"))
-//			System.out.println();
-			
-			regularImage = ImageTools.loadImage(imagePath,null);
-			File file = new File(imagePath);
-			regularImageSize = file.length();
-			imageCache.increaseSize(regularImageSize);
+		// update zoom
+		if(zoom!=currentZoom)
+		{	currentZoom = zoom;
+			copies.clear();
+			imageCache.changeSize(-copiesTotalSize);
+			copiesTotalSize = 0;
 		}
-		result = regularImage;
+		// get previously zoomed/colored copy
+		else
+			result = copies.get(colormap);
 		
-		// possibly change its color
-		if(colormap!=null)
-			result = ImageTools.getColoredImage(result,colormap);
+		// process an appropriate copy
+		if(result==null)
+		{	// get original image
+			if(image==null)
+			{		
+//				if(imagePath.equals("resources\\heroes\\nesbomberman2\\shirobon\\animes\\shadow.png"))
+//					System.out.println();
+			
+				image = ImageTools.loadImage(imagePath,null);
+				File file = new File(imagePath);
+				imageSize = file.length();
+				imageCache.changeSize(imageSize);
+			}
+			result = image;
+			
+			// possibly change its color
+			if(colormap!=null)
+				result = ImageTools.getColoredImage(result,colormap);
+			
+			// optimize image
+			result = ImageTools.getCompatibleImage(result);
+	
+			// possibly change image size
+			if(zoom!=1)
+				result = ImageTools.getResizedImage(result,zoom,Configuration.getVideoConfiguration().getSmoothGraphics());
+			
+			copies.put(colormap,result);
+			imageCache.changeSize(imageSize*Math.pow(zoom,2));
+		}
 		
-		// optimize image
-		result = ImageTools.getCompatibleImage(result);
-
-		// possibly image size
-		if(zoom!=1)
-			result = ImageTools.getResizedImage(result,zoom,Configuration.getVideoConfiguration().getSmoothGraphics());
-					
 		return result;
 	}
 
 	public double getTotalSize()
-	{	double result = regularImageSize;
+	{	double result = imageSize + copiesTotalSize;
 		return result;
 	}
 }
