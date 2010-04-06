@@ -72,9 +72,9 @@ public class ImageCache
 
 	private CachedImage getImage(String path)
 	{	CachedImage result = imageMap.get(path);
-System.out.println(path+": "+(result==null));
-if(path.equals("resources\\instances\\superbomberman1\\items\\punch\\animes\\released\\1.gif"))
-	System.out.println();
+//System.out.println(path+": "+(result==null));
+//if(path.equals("resources\\instances\\superbomberman1\\items\\punch\\animes\\released\\1.gif"))
+//	System.out.println();
 		if(result==null)
 		{	result = new CachedImage(this,path);
 			imageMap.put(path,result);
@@ -126,7 +126,7 @@ if(path.equals("resources\\instances\\superbomberman1\\items\\punch\\animes\\rel
 	{	return size;		
 	}
 	
-	public void increaseSize(double imageSize)
-	{	size = size + imageSize;
+	public void changeSize(double delta)
+	{	size = size + delta;
 	}
 }
