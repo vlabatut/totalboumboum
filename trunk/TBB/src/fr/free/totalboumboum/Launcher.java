@@ -810,67 +810,8 @@ public class Launcher
 // CHANGE LOG	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* TODO
-	 * + beta.013
-	 * - correction d'un bug lors du chargement des animations des bombes
-	 * - correction d'un bug lors du chargement des animations mutualisées
-	 * - modification d'un thème de NES-BM2 (thème battle, nouveau sol plus lisible, animations d'apparition)
-	 * - correction dans les bombes de NES-BM2 (couleur du reflet de la bombe jaune)
-	 * - le gesture ENDED n'est plus défini en XML, mais en dur car il est constant : pas d'animation, pas de trajectoire, modulations acteur/target toutes négatives, aucune autre modulation
-	 * - pareil pour NONE, sauf que l'action APPEAR est autorisée (en tant qu'acteur)
-	 * - introduction des gestures ENTERING et PREPARED, correspondant à APPEARING et STANDING, mais seulement utilisés pour le début du round
-	 * - généralisation (aux autres sprites) de l'Ability permettant de contraindre le temps mis par les heros pour apparaitre au début de la partie.
-	 * - modification dans le moteur : un sprite dans l'état NONE est quand même associé à une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
-	 * - correction d'un bug dans la gestion des animations et trajectoires proportionnelles
-	 * - correction d'un bug dans la génération des explosions en croix (flamme trop longue)
-	 * - définition d'un système permettant au niveau d'apparaître graduellement au début du round
-	 * - simplification de l'initialisation des actions afin de ne plus avoir à spécifier une tile (le cas où la tile manquait a été supprimé)
-	 * - apparition de messages au début du round (ready-set-go), avec graphismes basiques puis améliorés
-	 * - mise en place d'un fond noir dans le loop panel avant que le niveau ne commence à apparaitre (juste avant le chargement)
-	 * - possibilité de définir des niveaux contenant des bombes, soit directement sur le sol, soit dans des blocks
-	 * - définition des animations d'apparition pour tous les thèmes de SBM1 et NBM2
-	 * - définition d'un système de clignotement pour les sprites
-	 * - définition d'un système aléatoire de définition des abilités associées à un item (pour les malus et les surprise)
-	 * - implémentation de l'inversion des commandes
-	 * - implémentation de la gestion des vies, généralisation du moteur pour permettre au joueur de revenir en jeu
-	 * - implémentation des modificateurs de vitesse de déplacement au sol pour les héros
-	 * - implémentation de la résistance au feu
-	 * - nouveau système de maximum pour les StateAbilities (avec une ability supp contenant le suffixe _MAX)
-	 * - correction d'un bug concernant la précédence temporelle de certains évènements, en particulier quand deux joueurs brûlent au cours de la même explosion
-	 * - implémentation de la constipation bombique
-	 * - correction d'un gros bug dans le calcul de distances entre sprites situés dans la classe Level
-	 * - possibilité d'avoir plusieurs blocs, floors et items dans une même case (par souci de généralisation)
-	 * - système permettant de relacher les items à la mort du joueur
-	 * - correction dans le calcul de la direction entre deux sprites (le côté circulaire des niveaux n'était pas pris en compte)
-	 * - système de contagion des malus
-	 * - système de guérison des malus
-	 * - possibilité de faire exploser les bombes posées par un joueur quand celui-ci brûle
-	 * - touche END permettant de pauser le jeu
-	 * - meilleure gestion de l'exultation/pleur à la fin des manches
-	 * - capacité de résistance au feu pour les items (l'item est déplacé au lieu d'être détruit)
-	 * - blocs laissant passer les flammes mais pas les joueurs ni les bombes (cf niveau story/custom de SBM1)
-	 * - instance SBM1 plus complète (items, niveaux officiels, nouveaux niveaux custom)
-	 * - meilleure gestion des items initiaux (effectivement distribués au start)
-	 * - correction dans les gestion des blocs spawn
-	 * - mise à jour et révision de la strucutre de données de l'API d'IA
-	 * - implémentation de A* dans l'API d'IA
-	 * - pause individuelle des IA
-	 * - affichage de données relatives aux IA : chemins, vision de la zone de jeu, valeurs case par case, etc.
-	 * - touche spéciale permettant d'exécuter seulement une itération du moteur
-	 * - IA suiveuse : IA de démonstration qui choisit un autre joueur puis le suit
-	 * - gestion des IA : mise en place d'UPS, limité par défaut à 10 Hz, afin de décharger le moteur du jeu
-	 * - révision des tournois/rencontres/manches existants
-	 * - correction d'un bug dans la GUI qui empêchait l'affichage automatique des résultats pour les tournois simples
-	 * - correction d'un bug dans la GUI qui empêchait l'affichage complet de la description d'un tournoi de type coupe
-	 * - correction d'un bug dans la GUI : dans les tooltips du tableau des résultats, il manquait les numéros des manches
-	 * - correction d'un bug dans la GUI : dans les résultats, certaines colonnes n'étaient pas assez larges
-	 * - correction d'une erreur dans le cassage d'égalité lors d'un tournoi de type coupe
-	 * - correction d'un bug dans les menus qui empêchait de revenir à une partie rapide abandonnée avant la fin des options
-	 * - correction d'un bug dans le dialogue modal de question : le bouton annuler était désactivé
-	 * - ajout d'un menu modal demandant le nom lors de la création d'un nouveau profil
-	 * - ajout d'un menu modal de confirmation de suppression de sauvegarde, pareil pour les profils
-	 * - ajout d'un menu modal de confirmation d'écrasement de sauvegarde
-	 * - ajout d'un menu modal lorsque les options demandant un redémarrage du jeu sont modifiées
-	 * - correction d'une erreur dans la traduction anglaise de l'interface
+	 * + beta.014
+	 * - 
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
