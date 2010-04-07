@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Tournoi de Galatasaray II" type="CUP" />
-	<played matches="6" rounds="3" />
-	<dates start="2009-10-08T16:35:12" save="2009-10-08T18:40:27" />
+	<played matches="12" rounds="5" />
+	<dates start="2009-10-08T16:35:12" save="2009-10-08T19:17:16" />
 	<players>
 		<player name="0809v2.Kökciyan+Mazmanoğlu" />
 		<player name="0809v2.Bilgin+Karabağ" />
