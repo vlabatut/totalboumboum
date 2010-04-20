@@ -53,7 +53,11 @@ public class ColorRulesMapLoader
 		List<Element> clrs = root.getChildren();
 		for(Element temp: clrs)
 		{	String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
-			PredefinedColor color = PredefinedColor.valueOf(name);
+			PredefinedColor color;
+			if(name.equals(XmlNames.NONE))
+				color = null;
+			else 
+				color = PredefinedColor.valueOf(name);
 			ColorRule colorRule = null;
 			// colormap
 			if(temp.getName().equals(XmlNames.COLORMAP))
@@ -81,7 +85,8 @@ public class ColorRulesMapLoader
 		while(result==null && i<clrs.size())
     	{	Element temp = clrs.get(i);
     		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
-    		if(name.equalsIgnoreCase(color.toString()))
+    		if(color==null && name.equals(XmlNames.NONE) 
+    			|| name.equalsIgnoreCase(color.toString()))
     		{	// colormap
     			if(temp.getName().equals(XmlNames.COLORMAP))
     				result = loadColormapElement(temp,localFilePath,color);

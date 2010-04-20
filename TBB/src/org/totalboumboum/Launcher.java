@@ -843,6 +843,7 @@ public class Launcher
 	 * 		- nouveau sytème de cache : image et sprites sont cachés séparément
 	 * 		- nouveau système permettant de définir des sprites comme des empilement de couches séparées
 	 * 		- simplification du système de suppression d'outil (on laisse le ramasse miette en faire plus, pas la peine de s'en charger manuellement)
+	 * 		- les sprites sans couleurs indexées peuvent maintenant avoir une couleur "NONE" (pr les bombes des niveaux)
 	 * - GUI :
 	 * 		- correction d'un bug dans le menu des options avancées
 	 * 		- options avancées : (dés)activation du cache, réglage de la taille du cache
@@ -1157,15 +1158,6 @@ public class Launcher
 	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
 	 *  	- apparition des items : fumée+légèrement sur-élevé, puis l'item tombe par terre... (comm bug après cache v2)
 	 */ 
-	
-	/*
-	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
-	 * >> plus simplement: permettre de ne pas spécifier de valeur pour l'attribut = NONE
-	 */
-	
-	/**
-	 *	TODO there's a work to do on the ImageTools.getCompatibleImage function : when is it exactly necessary?
-	 */
 	
 	/**
 	 * TODO
