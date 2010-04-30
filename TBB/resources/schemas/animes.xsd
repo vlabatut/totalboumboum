@@ -86,7 +86,7 @@
 
 	<xsd:complexType name="tGestures">
 		<xsd:sequence>
-			<xsd:element name="gesture" type="tGesture" maxOccurs="unbounded" />
+			<xsd:element name="gesture" type="tGesture" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 		<xsd:attribute name="folder" type="xsd:string" use="optional" />
 	</xsd:complexType>
