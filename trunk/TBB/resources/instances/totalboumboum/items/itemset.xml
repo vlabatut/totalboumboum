@@ -5,10 +5,10 @@
 
 	<abstractItems>
 		<item name="common" folder="__common"/>
-		<item name="action" folder="_action"/>
-		<item name="bonus" folder="_bonus"/>
-		<item name="malus" folder="_malus"/>
-		<item name="contagion" folder="_contagion"/>
+		<item name="common_action" folder="_action"/>
+		<item name="common_bonus" folder="_bonus"/>
+		<item name="common_malus" folder="_malus"/>
+		<item name="common_contagion" folder="_contagion"/>
 	</abstractItems>
 
 	<concreteItems>
@@ -137,6 +137,10 @@
 			</abilities>
 		</item>
 		
+		<item name="goldenstar" folder="goldenstar" >
+			<!-- to be completed  -->
+		</item>
+		
 		<item name="heart" folder="heart" >
 			<!-- to be completed  -->
 		</item>
@@ -229,6 +233,14 @@
 
 		<item name="minustime" folder="minustime" >
 			<!-- to be completed  -->
+		</item>
+		
+		<item name="overspeed" folder="overspeed">
+			<abilities>
+				<ability strength="1000">
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
 		</item>
 		
 		<item name="passbombs" folder="passbombs" >
@@ -344,6 +356,10 @@
 			</abilities>
 		</item>
 		
+		<item name="starless" folder="starless" >
+			<!-- to be completed  -->
+		</item>
+
 		<item name="startshield" folder="startshield">
 			<abilities>
 				<ability strength="90" frame="true" time="3000" >
