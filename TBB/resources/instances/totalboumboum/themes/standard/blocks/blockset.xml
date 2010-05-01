@@ -4,9 +4,11 @@
 	
 	<abstractBlocks >
 		<block name="common_regular" folder="_common_regular" />
+		
 		<group name="hardwalls" folder="hardwalls">
 			<block name="common_hard" folder="_common"/>
 		</group>
+		
 		<group name="softwalls" folder="softwalls">
 			<block name="common_soft" folder="_common"/>
 		</group>
