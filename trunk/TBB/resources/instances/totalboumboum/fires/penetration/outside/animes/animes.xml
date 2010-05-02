@@ -5,59 +5,59 @@
 	<gestures>
 		<gesture name="BURNING" >
 			<direction name="DOWN" folder="down">
-				<step duration="50" file="1.gif" />
-				<step duration="60" file="2.gif" />
-				<step duration="80" file="3.gif" />
-				<step duration="80" file="4.gif" />
-				<step duration="100" file="5.gif" />
-				<step duration="80" file="4.gif" />
-				<step duration="80" file="3.gif" />
-				<step duration="60" file="2.gif" />
-				<step duration="50" file="1.gif" />
+				<step duration="50" file="1.png" />
+				<step duration="60" file="2.png" />
+				<step duration="80" file="3.png" />
+				<step duration="80" file="4.png" />
+				<step duration="100" file="5.png" />
+				<step duration="80" file="4.png" />
+				<step duration="80" file="3.png" />
+				<step duration="60" file="2.png" />
+				<step duration="50" file="1.png" />
 			</direction>
 			<direction name="LEFT" folder="left">
-				<step duration="50" file="1.gif" />
-				<step duration="60" file="2.gif" />
-				<step duration="80" file="3.gif" />
-				<step duration="80" file="4.gif" />
-				<step duration="100" file="5.gif" />
-				<step duration="80" file="4.gif" />
-				<step duration="80" file="3.gif" />
-				<step duration="60" file="2.gif" />
-				<step duration="50" file="1.gif" />
+				<step duration="50" file="1.png" />
+				<step duration="60" file="2.png" />
+				<step duration="80" file="3.png" />
+				<step duration="80" file="4.png" />
+				<step duration="100" file="5.png" />
+				<step duration="80" file="4.png" />
+				<step duration="80" file="3.png" />
+				<step duration="60" file="2.png" />
+				<step duration="50" file="1.png" />
 			</direction>
 			<direction name="NONE" folder="none">
-				<step duration="50" file="1.gif" />
-				<step duration="60" file="2.gif" />
-				<step duration="80" file="3.gif" />
-				<step duration="80" file="4.gif" />
-				<step duration="100" file="5.gif" />
-				<step duration="80" file="4.gif" />
-				<step duration="80" file="3.gif" />
-				<step duration="60" file="2.gif" />
-				<step duration="50" file="1.gif" />
+				<step duration="50" file="1.png" />
+				<step duration="60" file="2.png" />
+				<step duration="80" file="3.png" />
+				<step duration="80" file="4.png" />
+				<step duration="100" file="5.png" />
+				<step duration="80" file="4.png" />
+				<step duration="80" file="3.png" />
+				<step duration="60" file="2.png" />
+				<step duration="50" file="1.png" />
 			</direction>
 			<direction name="RIGHT" folder="right">
-				<step duration="50" file="1.gif" />
-				<step duration="60" file="2.gif" />
-				<step duration="80" file="3.gif" />
-				<step duration="80" file="4.gif" />
-				<step duration="100" file="5.gif" />
-				<step duration="80" file="4.gif" />
-				<step duration="80" file="3.gif" />
-				<step duration="60" file="2.gif" />
-				<step duration="50" file="1.gif" />
+				<step duration="50" file="1.png" />
+				<step duration="60" file="2.png" />
+				<step duration="80" file="3.png" />
+				<step duration="80" file="4.png" />
+				<step duration="100" file="5.png" />
+				<step duration="80" file="4.png" />
+				<step duration="80" file="3.png" />
+				<step duration="60" file="2.png" />
+				<step duration="50" file="1.png" />
 			</direction>
 			<direction name="UP" folder="up">
-				<step duration="50" file="1.gif" />
-				<step duration="60" file="2.gif" />
-				<step duration="80" file="3.gif" />
-				<step duration="80" file="4.gif" />
-				<step duration="100" file="5.gif" />
-				<step duration="80" file="4.gif" />
-				<step duration="80" file="3.gif" />
-				<step duration="60" file="2.gif" />
-				<step duration="50" file="1.gif" />
+				<step duration="50" file="1.png" />
+				<step duration="60" file="2.png" />
+				<step duration="80" file="3.png" />
+				<step duration="80" file="4.png" />
+				<step duration="100" file="5.png" />
+				<step duration="80" file="4.png" />
+				<step duration="80" file="3.png" />
+				<step duration="60" file="2.png" />
+				<step duration="50" file="1.png" />
 			</direction>
 		</gesture>
 	</gestures>		
