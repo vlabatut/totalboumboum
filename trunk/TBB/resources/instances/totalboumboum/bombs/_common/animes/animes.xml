@@ -24,7 +24,7 @@
 		<colorsprite name="YELLOW" folder="yellow" />
 	</colors>
 	
-	<shadows folder="shadows">
+	<shadows folder="_shadows">
 		<shadow name="small" file="small.png" />
  		<shadow name="medium" file="medium.png" />
  		<shadow name="large" file="large.png" />
