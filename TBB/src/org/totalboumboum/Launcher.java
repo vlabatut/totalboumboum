@@ -1174,4 +1174,9 @@ public class Launcher
 	 * et les joueurs humains sont tous ex-aequo derniers
 	 * (voire tout le monde ex-aequo?)
 	 */
+
+	/**
+	 * TODO faire une appli propre pour générer les niveaux
+	 * mettre une jolie doc en ligne de commande pour exécuter tout ça
+	 */
 }
