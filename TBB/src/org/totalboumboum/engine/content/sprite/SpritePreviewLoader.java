@@ -191,7 +191,9 @@ public class SpritePreviewLoader
 		    				List<Element> stepList = directionElt.getChildren(XmlNames.STEP);
 		    				Element stepElt = stepList.get(0);
 			    			stepFile = stepElt.getAttributeValue(XmlNames.FILE);
-//TODO TODO faut construire l'image ici, quand elle se compose de plusieurs couches...			    			
+// TODO TODO faut construire l'image ici, quand elle se compose de plusieurs couches...
+// plus faut gérer les références à des images crées précédemment...
+// >> faire plutot une vraie preview?
 	    				}
 	    			}
 	    		}
@@ -234,8 +236,6 @@ public class SpritePreviewLoader
 	    			imgPath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
 	    		else
 					imgPath = folderPath+gesturesFolder+colorFold+gestureFolder+directionFolder+File.separator+stepFile;
-if(imgPath==null)
-	System.out.println();
 	    		BufferedImage image = ImageTools.loadImage(imgPath,null);
 				result.setImage(null,image);
 			}
