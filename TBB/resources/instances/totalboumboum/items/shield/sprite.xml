@@ -3,6 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../schemas/sprite.xsd">
 
-	<general name="Shield Item" base="common_bonus" />
+	<general name="Shield Item" base="common_action" />
 
 </sprite>
