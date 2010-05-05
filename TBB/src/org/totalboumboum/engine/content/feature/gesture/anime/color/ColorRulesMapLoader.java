@@ -54,7 +54,7 @@ public class ColorRulesMapLoader
 		for(Element temp: clrs)
 		{	String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
 			PredefinedColor color;
-			if(name.equals(XmlNames.NONE))
+			if(name.equalsIgnoreCase(XmlNames.NONE))
 				color = null;
 			else 
 				color = PredefinedColor.valueOf(name);
