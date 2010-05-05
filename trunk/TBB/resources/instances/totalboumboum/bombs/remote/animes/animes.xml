@@ -38,15 +38,6 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="BURNING" folder="burning" repeat="false">
-			<direction name="NONE">
-				<step duration="50" file="1.png"/>
-				<step duration="75" file="2.png"/>
-				<step duration="75" file="3.png"/>
-				<step duration="75" file="4.png"/>
-			</direction>
-		</gesture>
-		
 		<gesture name="LANDING" folder="standing" repeat="false" >
 			<direction name="NONE">
 				<step duration="240" file="1.png" shadow="large" />
