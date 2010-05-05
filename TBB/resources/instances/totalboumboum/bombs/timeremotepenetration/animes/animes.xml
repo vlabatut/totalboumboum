@@ -43,7 +43,6 @@
 			</direction>
 		</gesture>
 		
-		
 		<gesture name="OSCILLATING" folder="standing" repeat="false" >
 			<direction name="DOWN">
 				<step duration="240" file="01.png" shadow="large" yShift="5" />
