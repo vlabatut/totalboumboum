@@ -145,59 +145,66 @@ public class SpritePreviewLoader
 			String schemaFolder = FilePaths.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-			
-			// init
-	    	GestureName defaultGesture = GestureName.STANDING;
-	    	Element gesturesElement = root.getChild(XmlNames.GESTURES);
-	    	Attribute gesturesFolderAtt = gesturesElement.getAttribute(XmlNames.FOLDER);
+			Attribute previewAtt = root.getAttribute(XmlNames.PREVIEW);
+	    	boolean found = false;
 	    	String gesturesFolder = "";
 	    	String gestureFolder = "";
 	    	String directionFolder = "";
 	    	String stepFile = "";
-	    	if(gesturesFolderAtt!=null)
-	    		gesturesFolder = File.separator+gesturesFolderAtt.getValue();
-	    	
-	    	// look for the gesture
-    		List<Element> gestureList = gesturesElement.getChildren(XmlNames.GESTURE);
-	    	Iterator<Element> it = gestureList.iterator();
-	    	boolean found = false;
-	    	while(it.hasNext() && !found)
-	    	{	Element gestureElt = it.next();
-	    		String name = gestureElt.getAttributeValue(XmlNames.NAME);
-	    		if(name.equalsIgnoreCase(defaultGesture.toString()))
-	    		{	found = true;
-    				Attribute f = gestureElt.getAttribute(XmlNames.FOLDER);
-    				if(f!=null)
-    					gestureFolder = File.separator+f.getValue();
-    				
-    				// look for the direction
-	    			List<Element> directionList = gestureElt.getChildren(XmlNames.DIRECTION);
-	    			String defaultDirection;
-	    			if(directionList.size()==1)
-	    				defaultDirection = Direction.NONE.toString();
-	    			else
-	    				defaultDirection = Direction.DOWN.toString();
-	    			Iterator<Element> it2 = directionList.iterator();
-	    			boolean found2 = false;
-	    			while(it2.hasNext() && !found2)
-	    			{	Element directionElt = it2.next();
-	    				String name2 = directionElt.getAttributeValue(XmlNames.NAME);
-	    				if(name2.equalsIgnoreCase(defaultDirection))
-	    				{	found2 = true;
-		    				Attribute fold = directionElt.getAttribute(XmlNames.FOLDER);
-		    				if(fold!=null)
-		    					directionFolder = File.separator+fold.getValue();
-		    				// take the first step
-		    				List<Element> stepList = directionElt.getChildren(XmlNames.STEP);
-		    				Element stepElt = stepList.get(0);
-			    			stepFile = stepElt.getAttributeValue(XmlNames.FILE);
-// TODO TODO faut construire l'image ici, quand elle se compose de plusieurs couches...
-// plus faut gérer les références à des images crées précédemment...
-// >> faire plutot une vraie preview?
-	    				}
-	    			}
-	    		}
-	    	}
+			
+			// check if the preview attribute exists
+			if(previewAtt!=null)
+			{	found = true;
+				stepFile = previewAtt.getValue().trim();
+			}
+			// else: look for the first image from the STANDING gesture
+			// (must be defined as an actual image, not a reference, and not multilayers)
+			else
+			{	// init
+		    	GestureName defaultGesture = GestureName.STANDING;
+		    	Element gesturesElement = root.getChild(XmlNames.GESTURES);
+		    	Attribute gesturesFolderAtt = gesturesElement.getAttribute(XmlNames.FOLDER);
+		    	if(gesturesFolderAtt!=null)
+		    		gesturesFolder = File.separator+gesturesFolderAtt.getValue();
+		    	
+		    	// look for the gesture
+	    		List<Element> gestureList = gesturesElement.getChildren(XmlNames.GESTURE);
+		    	Iterator<Element> it = gestureList.iterator();
+		    	while(it.hasNext() && !found)
+		    	{	Element gestureElt = it.next();
+		    		String name = gestureElt.getAttributeValue(XmlNames.NAME);
+		    		if(name.equalsIgnoreCase(defaultGesture.toString()))
+		    		{	found = true;
+	    				Attribute f = gestureElt.getAttribute(XmlNames.FOLDER);
+	    				if(f!=null)
+	    					gestureFolder = File.separator+f.getValue();
+	    				
+	    				// look for the direction
+		    			List<Element> directionList = gestureElt.getChildren(XmlNames.DIRECTION);
+		    			String defaultDirection;
+		    			if(directionList.size()==1)
+		    				defaultDirection = Direction.NONE.toString();
+		    			else
+		    				defaultDirection = Direction.DOWN.toString();
+		    			Iterator<Element> it2 = directionList.iterator();
+		    			boolean found2 = false;
+		    			while(it2.hasNext() && !found2)
+		    			{	Element directionElt = it2.next();
+		    				String name2 = directionElt.getAttributeValue(XmlNames.NAME);
+		    				if(name2.equalsIgnoreCase(defaultDirection))
+		    				{	found2 = true;
+			    				Attribute fold = directionElt.getAttribute(XmlNames.FOLDER);
+			    				if(fold!=null)
+			    					directionFolder = File.separator+fold.getValue();
+			    				// take the first step
+			    				List<Element> stepList = directionElt.getChildren(XmlNames.STEP);
+			    				Element stepElt = stepList.get(0);
+				    			stepFile = stepElt.getAttributeValue(XmlNames.FILE);
+		    				}
+		    			}
+		    		}
+		    	}
+			}
 	    	
 	    	if(found)
 	    	{	Element elt = root.getChild(XmlNames.COLORS);
