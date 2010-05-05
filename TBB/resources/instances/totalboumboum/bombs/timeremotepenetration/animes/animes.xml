@@ -3,7 +3,7 @@
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
 		scale="8" >
 		
-	<colors folder="colormaps" >
+	<colors >
 		<colorsprite name="NONE" folder="none" />
 		
 		<colorsprite name="BLACK" folder="black" />
