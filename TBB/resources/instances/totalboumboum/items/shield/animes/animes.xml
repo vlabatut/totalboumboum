@@ -7,10 +7,10 @@
 
 		<gesture name="APPEARING" proportional="true" >
 			<direction name="NONE">
-				<step duration="30" file="appearing1" />
-				<step duration="30" file="appearing2" />
-				<step duration="30" file="appearing3" />
-				<step duration="30" file="appearing4" />
+				<step duration="30" name="appearing1" />
+				<step duration="30" name="appearing2" />
+				<step duration="30" name="appearing3" />
+				<step duration="30" name="appearing4" />
 				<step duration="30">
 					<imageref name="temporary1" /> 
 					<image file="icon.png" />
@@ -20,10 +20,10 @@
 
 		<gesture name="DISAPPEARING" repeat="false" >
 			<direction name="NONE">
-				<step duration="30" file="appearing4" />
-				<step duration="30" file="appearing3" />
-				<step duration="30" file="appearing2" />
-				<step duration="30" file="appearing1" />
+				<step duration="30" name="appearing4" />
+				<step duration="30" name="appearing3" />
+				<step duration="30" name="appearing2" />
+				<step duration="30" name="appearing1" />
 			</direction>
 		</gesture>
 

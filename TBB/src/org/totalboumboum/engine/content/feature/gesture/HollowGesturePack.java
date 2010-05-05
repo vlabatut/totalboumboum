@@ -164,6 +164,8 @@ public class HollowGesturePack extends AbstractGesturePack<HollowGesture> implem
 		result.commonImagesColorRulesMaps.putAll(commonImagesColorRulesMaps);
 		
 		// shadows
+		result.shadowsFileNames.putAll(shadowsFileNames);
+		result.shadowsColorRulesMaps.putAll(shadowsColorRulesMaps);
 		
 		// misc
 		result.spriteName = spriteName;
