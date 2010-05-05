@@ -13,7 +13,7 @@
 				<step duration="30" file="appearing4" />
 				<step duration="30">
 					<imageref name="temporary1" /> 
-					<image file="icone.png" />
+					<image file="icon.png" />
 				</step>
 			</direction>
 		</gesture>
@@ -31,22 +31,22 @@
 			<direction name="NONE">
 				<step duration="85" >
 					<imageref name="temporary1" />
-					<image file="icone.png" />
+					<image file="icon.png" />
 					<imageref name="smoke1" yShift="33" />
 				</step>
 				<step duration="105" >
 					<imageref name="temporary2" />
-					<image file="icone.png" />
+					<image file="icon.png" />
 					<imageref name="smoke2" yShift="33" />
 				</step>
 				<step duration="80" >
 					<imageref name="temporary3" />
-					<image file="icone.png" />
+					<image file="icon.png" />
 					<imageref name="smoke3" yShift="33" />
 				</step>
 				<step duration="60" >
 					<imageref name="temporary4" />
-					<image file="icone.png" />
+					<image file="icon.png" />
 					<imageref name="smoke4" yShift="33" />
 				</step>				
 			</direction>
@@ -56,19 +56,19 @@
 			<direction name="NONE">
 				<step duration="50">
 					<imageref name="temporary1" /> 
-					<image file="icone.png" />
+					<image file="icon.png" />
 				</step>
 				<step duration="50">
 					<imageref name="temporary2" /> 
-					<image file="icone.png" />
+					<image file="icon.png" />
 				</step>
 				<step duration="50">
 					<imageref name="temporary3" /> 
-					<image file="icone.png" />
+					<image file="icon.png" />
 				</step>
 				<step duration="50">
 					<imageref name="temporary4" /> 
-					<image file="icone.png" />
+					<image file="icon.png" />
 				</step>
 			</direction>
 		</gesture>
