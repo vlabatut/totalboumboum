@@ -8,7 +8,7 @@
 		<image name="permanent2" file="2.png" folder="permanent"/>
 		
 		<image name="temporary1" file="1.png" folder="temporary"/>
-		<image name="temporary3" file="2.png" folder="temporary"/>		
+		<image name="temporary2" file="2.png" folder="temporary"/>		
 		<image name="temporary3" file="3.png" folder="temporary"/>
 		<image name="temporary4" file="4.png" folder="temporary"/>
 		

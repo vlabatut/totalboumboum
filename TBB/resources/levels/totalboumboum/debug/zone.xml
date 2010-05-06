@@ -107,22 +107,22 @@
 			<tile pos="0" >
 			</tile>
 			<tile pos="1" >
-				<block name="hardwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="2" >
 			</tile>
 			<tile pos="3" >
-				<block name="hardwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="4" >
 			</tile>
 			<tile pos="5" >
-				<block name="hardwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="6" >
 			</tile>
 			<tile pos="7" >
-				<block name="hardwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="8" >
 			</tile>
@@ -176,13 +176,13 @@
 			</tile>
 			<tile pos="6" >
 				<block group="softwalls" name="regular" />
-				<bomb name="normal" range="2" />
+				<bomb name="time" range="2" />
 			</tile>
 			<tile pos="7" >
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="8" >
-				<bomb name="normal" range="6" />
+				<bomb name="time" range="6" />
 			</tile>
 		</line>
 		

@@ -168,6 +168,8 @@ public class HollowLevel implements Serializable
 					for(int i=0;i<temp.length-1;i++)
 						name = name+temp[i];
 					Bomb bomb = bombset.makeBomb(name,matrix[line][col],range);
+if(bomb==null)
+	System.err.println("makeBomb error: bomb "+name+" not found.");
 					level.insertSpriteTile(bomb);				
 				}
 			}

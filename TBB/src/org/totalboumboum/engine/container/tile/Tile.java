@@ -131,8 +131,8 @@ public class Tile
 	 */
 	private void drawSprite(Graphics g, Sprite s)
 	{	List<StepImage> images =  s.getCurrentImages();
-if(images.size()>1)
-	System.err.println("ligne");
+//if(images.size()>1)
+//	System.err.println("ligne");
 		for(int j=0;j<images.size();j++)
 		{	StepImage stepImage = images.get(j);
 			BufferedImage image = stepImage.getImage();
