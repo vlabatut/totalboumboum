@@ -32,7 +32,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorFolder;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMapLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -62,19 +64,19 @@ public class PortraitsLoader
 	private static void loadPortraitsElement(Element root, String folderPath, PredefinedColor color, Portraits result) throws IOException, ParserConfigurationException, SAXException
 	{	// colors
 		String localFilePath = folderPath;
+    	ColorRule colorRule = null;
     	ColorMap colormap = null;
-    	String colorFolder = null;
-		Object obj;
+    	ColorFolder colorFolder = null;
 		Element elt = root.getChild(XmlNames.COLORS);;
 		if(elt!=null && color!=null)
-		{	obj = ColorRulesMapLoader.loadColorsElement(elt,localFilePath,color);
-			if(obj instanceof ColorMap)
-				colormap = (ColorMap)obj;
+		{	colorRule = ColorRulesMapLoader.loadColorsElement(elt,localFilePath,color);
+			if(colorRule instanceof ColorMap)
+				colormap = (ColorMap)colorRule;
 			else
-				colorFolder = (String)obj;
+				colorFolder = (ColorFolder)colorRule;
 		}		
 		if(colorFolder!=null)
-			localFilePath = localFilePath+File.separator + colorFolder;
+			localFilePath = colorFolder.getFolder();
 		
 		// ingame
 		Element ingame = root.getChild(XmlNames.INGAME);

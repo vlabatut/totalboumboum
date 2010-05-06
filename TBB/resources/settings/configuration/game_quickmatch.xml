@@ -14,8 +14,8 @@
 		</points>
 	</settings>
 	<players>
-		<player file="1" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="65" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="1" color="CYAN" controls="1" spritePack="totalboumboum" spriteFolder="prognathe" />
+		<player file="65" color="INDIGO" controls="0" spritePack="totalboumboum" spriteFolder="prognathe" />
 	</players>
 	<levels>
 		<level pack="totalboumboum" folder="debug" />
