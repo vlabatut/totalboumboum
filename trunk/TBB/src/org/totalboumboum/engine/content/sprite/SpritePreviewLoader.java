@@ -232,7 +232,7 @@ public class SpritePreviewLoader
 						{	ColorFolder colorFolder = (ColorFolder)colorRule;
 							if(colorFold==null)
 								colorFold = colorFolder;
-							String imagePath = folderPath+gesturesFolder+colorFolder+gestureFolder+directionFolder+File.separator+stepFile;
+							String imagePath = folderPath+gesturesFolder+colorFolder.getFolder()+gestureFolder+directionFolder+File.separator+stepFile;
 							img = ImageTools.loadImage(imagePath,null);
 						}
 			    		result.setImage(color,img);
@@ -240,13 +240,13 @@ public class SpritePreviewLoader
 				}
 	    		
 	    		// get the colorless picture
-	    		String imgPath;
-	    		if(colorFold==null)
-	    			imgPath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
-	    		else
-					imgPath = folderPath+gesturesFolder+colorFold+gestureFolder+directionFolder+File.separator+stepFile;
-	    		BufferedImage image = ImageTools.loadImage(imgPath,null);
-				result.setImage(null,image);
+//	    		String imgPath;
+//	    		if(colorFold==null)
+//	    			imgPath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
+//	    		else
+//					imgPath = folderPath+gesturesFolder+colorFold.getFolder()+gestureFolder+directionFolder+File.separator+stepFile;
+//	    		BufferedImage image = ImageTools.loadImage(imgPath,null);
+//				result.setImage(null,image);
 			}
 		}
 	}
