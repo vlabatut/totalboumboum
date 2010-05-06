@@ -211,7 +211,7 @@ public class SpritePreviewLoader
 	    	if(found)
 	    	{	Element elt = root.getChild(XmlNames.COLORS);
 	    		
-	    		// get the color pictures
+	    		// get the colored picture
 	    		ColorFolder colorFold = null;
 	    		if(elt!=null)
 				{	List<Element> clrs = elt.getChildren();
@@ -232,21 +232,22 @@ public class SpritePreviewLoader
 						{	ColorFolder colorFolder = (ColorFolder)colorRule;
 							if(colorFold==null)
 								colorFold = colorFolder;
-							String imagePath = folderPath+gesturesFolder+colorFolder.getFolder()+gestureFolder+directionFolder+File.separator+stepFile;
+							String imagePath = colorFolder.getFolder()+gestureFolder+directionFolder+File.separator+stepFile;
 							img = ImageTools.loadImage(imagePath,null);
 						}
 			    		result.setImage(color,img);
 			    	}				
 				}
-	    		
 	    		// get the colorless picture
-//	    		String imgPath;
-//	    		if(colorFold==null)
-//	    			imgPath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
-//	    		else
-//					imgPath = folderPath+gesturesFolder+colorFold.getFolder()+gestureFolder+directionFolder+File.separator+stepFile;
-//	    		BufferedImage image = ImageTools.loadImage(imgPath,null);
-//				result.setImage(null,image);
+	    		else
+	    		{	String imgPath;
+//		    		if(colorFold==null)
+		    			imgPath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
+//		    		else
+//						imgPath = folderPath+gesturesFolder+colorFold.getFolder()+gestureFolder+directionFolder+File.separator+stepFile;
+		    		BufferedImage image = ImageTools.loadImage(imgPath,null);
+					result.setImage(null,image);
+	    		}
 			}
 		}
 	}
