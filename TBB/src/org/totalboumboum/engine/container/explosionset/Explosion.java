@@ -69,8 +69,9 @@ if(fireset==null)
 
 	public Fire makeFire(String name, Tile tile)
 	{	Fire result = null;
-System.out.println(name);
-		result = fireset.makeFire(name,tile);
+		
+		if(fireset!=null)
+			result = fireset.makeFire(name,tile);
 		
 		return result;
 	}

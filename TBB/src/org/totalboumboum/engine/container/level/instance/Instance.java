@@ -101,7 +101,7 @@ public class Instance
 	/////////////////////////////////////////////////////////////////
 	private Explosionset explosionset;
 
-	public void loadExplosionSet() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public void loadExplosionset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_EXPLOSIONS;
     	explosionset = ExplosionsetLoader.loadExplosionset(individualFolder);
     }

@@ -97,28 +97,28 @@
 
 		<gesture name="OSCILLATING_FAILING" folder="failing" repeat="true" >
 			<direction name="DOWN">
-				<step duration="240" file="1.png" shadow="small" yShift="-5" />
-				<step duration="240" file="2.png" shadow="medium" yShift="5" />
+				<step duration="240" file="1.png" shadow="large" yShift="-5" />
+				<step duration="240" file="2.png" shadow="large" yShift="5" />
 				<step duration="240" file="3.png" shadow="large" yShift="-5" />
-				<step duration="240" file="2.png" shadow="medium" yShift="5" />
+				<step duration="240" file="2.png" shadow="large" yShift="5" />
 			</direction>
 			<direction name="LEFT">
-				<step duration="240" file="1.png" shadow="small" xShift="-5" />
-				<step duration="240" file="2.png" shadow="medium" xShift="5" />
+				<step duration="240" file="1.png" shadow="large" xShift="-5" />
+				<step duration="240" file="2.png" shadow="large" xShift="5" />
 				<step duration="240" file="3.png" shadow="large" xShift="-5" />
-				<step duration="240" file="2.png" shadow="medium" xShift="5" />
+				<step duration="240" file="2.png" shadow="large" xShift="5" />
 			</direction>
 			<direction name="RIGHT">
-				<step duration="240" file="1.png" shadow="small" xShift="-5" />
-				<step duration="240" file="2.png" shadow="medium" xShift="5" />
+				<step duration="240" file="1.png" shadow="large" xShift="-5" />
+				<step duration="240" file="2.png" shadow="large" xShift="5" />
 				<step duration="240" file="3.png" shadow="large" xShift="-5" />
-				<step duration="240" file="2.png" shadow="medium" xShift="5" />
+				<step duration="240" file="2.png" shadow="large" xShift="5" />
 			</direction>
 			<direction name="UP">
-				<step duration="240" file="1.png" shadow="small" yShift="-5" />
-				<step duration="240" file="2.png" shadow="medium" yShift="5" />
+				<step duration="240" file="1.png" shadow="large" yShift="-5" />
+				<step duration="240" file="2.png" shadow="large" yShift="5" />
 				<step duration="240" file="3.png" shadow="large" yShift="-5" />
-				<step duration="240" file="2.png" shadow="medium" yShift="5" />
+				<step duration="240" file="2.png" shadow="large" yShift="5" />
 			</direction>
 		</gesture>
 
@@ -148,10 +148,10 @@
 		
 		<gesture name="SLIDING_FAILING" folder="failing" repeat="true">
 			<direction name="NONE">
-				<step duration="240" file="1.png" shadow="small" />
-				<step duration="240" file="2.png" shadow="medium" />
+				<step duration="240" file="1.png" shadow="large" />
+				<step duration="240" file="2.png" shadow="large" />
 				<step duration="240" file="3.png" shadow="large" />
-				<step duration="240" file="2.png" shadow="medium" />
+				<step duration="240" file="2.png" shadow="large" />
 			</direction>
 		</gesture>
 		
@@ -172,10 +172,10 @@
 		
 		<gesture name="STANDING_FAILING" folder="failing" repeat="true" >
 			<direction name="NONE">
-				<step duration="240" file="1.png" shadow="small" />
-				<step duration="240" file="2.png" shadow="medium" />
+				<step duration="240" file="1.png" shadow="large" />
+				<step duration="240" file="2.png" shadow="large" />
 				<step duration="240" file="3.png" shadow="large" />
-				<step duration="240" file="2.png" shadow="medium" />
+				<step duration="240" file="2.png" shadow="large" />
 			</direction>
 		</gesture>		
 	</gestures>		
