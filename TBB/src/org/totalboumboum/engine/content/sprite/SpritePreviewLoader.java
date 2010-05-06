@@ -36,7 +36,9 @@ import org.jdom.Element;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorFolder;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
+import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMapLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -210,7 +212,7 @@ public class SpritePreviewLoader
 	    	{	Element elt = root.getChild(XmlNames.COLORS);
 	    		
 	    		// get the color pictures
-	    		String colorFold = null;
+	    		ColorFolder colorFold = null;
 	    		if(elt!=null)
 				{	List<Element> clrs = elt.getChildren();
 					Iterator<Element> iter = clrs.iterator();
@@ -220,14 +222,14 @@ public class SpritePreviewLoader
 			    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
 			    		name = name.toUpperCase(Locale.ENGLISH);
 			    		PredefinedColor color = PredefinedColor.valueOf(name);
-			    		Object obj = ColorRulesMapLoader.loadColorsElement(elt,folderPath,color);
-						if(obj instanceof ColorMap)
-						{	ColorMap colormap = (ColorMap)obj;
+			    		ColorRule colorRule = ColorRulesMapLoader.loadColorsElement(elt,folderPath,color);
+						if(colorRule instanceof ColorMap)
+						{	ColorMap colormap = (ColorMap)colorRule;
 							String imagePath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
 							img = ImageTools.loadImage(imagePath, colormap);
 						}
 						else
-						{	String colorFolder = File.separator+(String)obj;
+						{	ColorFolder colorFolder = (ColorFolder)colorRule;
 							if(colorFold==null)
 								colorFold = colorFolder;
 							String imagePath = folderPath+gesturesFolder+colorFolder+gestureFolder+directionFolder+File.separator+stepFile;

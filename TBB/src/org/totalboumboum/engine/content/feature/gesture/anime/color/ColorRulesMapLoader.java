@@ -72,14 +72,15 @@ public class ColorRulesMapLoader
 	}
 	
     @SuppressWarnings("unchecked")
-    public static Object loadColorsElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
-    {	Object result=null;
+    public static ColorRule loadColorsElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+    {	ColorRule result=null;
     	// folder
     	String localFilePath = individualFolder;
     	Attribute attribute = root.getAttribute(XmlNames.FOLDER);
     	if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
-		// colormaps
+		
+    	// colormaps
     	List<Element> clrs = root.getChildren();
     	int i=0;
 		while(result==null && i<clrs.size())
