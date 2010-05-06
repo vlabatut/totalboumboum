@@ -113,7 +113,7 @@ long start = System.currentTimeMillis();
 		level = hollowLevel.getLevel();
 		RoundVariables.setLoop(this);
 		instance.loadFiresetMap();
-		instance.loadExplosionSet();
+		instance.loadExplosionset();
 		loadStepOver();
 		instance.loadBombsetMaps(round.getProfilesColors());
 		loadStepOver();

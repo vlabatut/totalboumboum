@@ -5,4 +5,6 @@
 
 	<general name="Remote controlled bomb" base="common" />
 
+	<explosion name="normal" />
+
 </sprite>
