@@ -37,6 +37,8 @@ public class HollowStepImage extends AbstractStepImage implements Serializable
 	{	super(xShift,yShift);
 		this.fileName = imageFileName;
 		this.colorRulesMap = colorRulesMap;
+		if(colorRulesMap==null)
+			System.out.println();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -64,7 +66,9 @@ public class HollowStepImage extends AbstractStepImage implements Serializable
 	 * used when generating an actual Factory from a HollowFactory
 	 */
 	public StepImage fill(double zoom, PredefinedColor color) throws IOException
-	{	ColorRule colorRule = colorRulesMap.getColorRule(color);
+	{	
+//System.out.println(fileName);		
+		ColorRule colorRule = colorRulesMap.getColorRule(color);
 		BufferedImage image = Configuration.getEngineConfiguration().retrieveFromImageCache(fileName,colorRule,zoom);
 		StepImage result = new StepImage(image,xShift*zoom,yShift*zoom);
 		

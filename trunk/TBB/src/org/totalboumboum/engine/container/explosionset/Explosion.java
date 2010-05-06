@@ -41,6 +41,8 @@ public class Explosion extends AbstractExplosion
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
 		fireset = instance.getFiresetMap().getFireset(firesetName);
+if(fireset==null)
+	System.err.println("fireset: can't find "+firesetName);
 	}
 
 	public Instance getInstance()
@@ -67,7 +69,7 @@ public class Explosion extends AbstractExplosion
 
 	public Fire makeFire(String name, Tile tile)
 	{	Fire result = null;
-		
+System.out.println(name);
 		result = fireset.makeFire(name,tile);
 		
 		return result;
