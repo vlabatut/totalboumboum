@@ -36,7 +36,7 @@
 		<item name="control" folder="control" >
 			<abilities>
 				<ability >
-					<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
+					<name value="CUSTOM_BOMB_TYPE_REMOTE" />
 				</ability>
 			</abilities>
 		</item>
