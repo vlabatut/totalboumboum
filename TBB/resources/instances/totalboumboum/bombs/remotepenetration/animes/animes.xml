@@ -34,7 +34,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="LANDING" folder="standing" repeat="false" >
+		<gesture name="LANDING" folder="standing" repeat="true" >
 			<direction name="NONE">
 				<step duration="240" file="1.png" shadow="large" />
 				<step duration="240" file="2.png" shadow="medium" />
@@ -43,7 +43,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="OSCILLATING" folder="standing" repeat="false" >
+		<gesture name="OSCILLATING" folder="standing" repeat="true" >
 			<direction name="DOWN">
 				<step duration="240" file="1.png" shadow="large" yShift="5" />
 				<step duration="240" file="2.png" shadow="medium" yShift="-5" />
@@ -106,7 +106,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="SLIDING" folder="standing" repeat="false" proportional="true">
+		<gesture name="SLIDING" folder="standing" repeat="true" proportional="true">
 			<direction name="NONE">
 				<step duration="240" file="1.png" shadow="large" />
 				<step duration="240" file="2.png" shadow="medium" />
@@ -124,7 +124,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="STANDING" folder="standing" repeat="false" proportional="true">
+		<gesture name="STANDING" folder="standing" repeat="true" proportional="true">
 			<direction name="NONE">
 				<step duration="240" file="1.png" shadow="large" />
 				<step duration="240" file="2.png" shadow="large" />

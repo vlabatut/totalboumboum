@@ -9,8 +9,8 @@
 				<step duration="75" file="1.png" />
 				<step duration="75" file="2.png" />
 				<step duration="75" file="3.png" />
-				<step duration="100" file="4.png" shadow="shadow2" shadowYShift="11" />
-				<step duration="100" file="5.png" shadow="shadow3" shadowYShift="15" />
+				<step duration="100" file="4.png" shadow="shadow2" shadowYShift="10" />
+				<step duration="100" file="5.png" shadow="shadow3" shadowYShift="14" />
 			</direction>
 		</gesture>
 
@@ -27,7 +27,7 @@
 			</direction>
 		</gesture>
 
-		<gesture name="STANDING" folder="standing" shadow="shadow4" shadowYShift="27">
+		<gesture name="STANDING" folder="standing" shadow="shadow4" shadowYShift="26">
 			<direction name="NONE">
 				<step file="0.png" />
 			</direction>
