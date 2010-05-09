@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
-		scale="1" >
+		xsi:noNamespaceSchemaLocation="..\..\..\..\..\schemas\animes.xsd" 
+		scale="1" default="standing" >
 		
 	<colors folder="colormaps" >
-		<colormap name="BLACK" file="black" />
-		<colormap name="BLUE" file="blue" />
-		<colormap name="BROWN" file="brown" />
-		<colormap name="CYAN" file="cyan" />
-		<colormap name="GRASS" file="grass" />
-		<colormap name="GREEN" file="green" />
-		<colormap name="GREY" file="grey" />
-		<colormap name="INDIGO" file="indigo" />
-		<colormap name="ORANGE" file="orange" />
-		<colormap name="PINK" file="pink" />
-		<colormap name="PURPLE" file="purple" />
-		<colormap name="RED" file="red" />
-		<colormap name="RUST" file="rust" />
-		<colormap name="ULTRAMARINE" file="ultramarine" />
-		<colormap name="WHITE" file="white" />
-		<colormap name="YELLOW" file="yellow" />
+		<colormap name="black" file="black" />
+		<colormap name="blue" file="blue" />
+		<colormap name="brown" file="brown" />
+		<colormap name="cyan" file="cyan" />
+		<colormap name="grass" file="grass" />
+		<colormap name="green" file="green" />
+		<colormap name="grey" file="grey" />
+		<colormap name="indigo" file="indigo" />
+		<colormap name="orange" file="orange" />
+		<colormap name="pink" file="pink" />
+		<colormap name="purple" file="purple" />
+		<colormap name="red" file="red" />
+		<colormap name="rust" file="rust" />
+		<colormap name="ultramarine" file="ultramarine" />
+		<colormap name="white" file="white" />
+		<colormap name="yellow" file="yellow" />
 	</colors>
 	
 	<shadows folder="pictures">
@@ -27,42 +27,35 @@
 	</shadows>
 	
 	<gestures folder="pictures">
-		<gesture name="BOUNCING" repeat="true" shadow="shadow" shadowYShift="-3">
-			<direction name="NONE">
+		<gesture name="bouncing" repeat="true" shadow="shadow" shadowYShift="-3">
+			<direction name="none">
 				<step duration="300" file="1.gif" />
 				<step duration="300" file="2.gif" />
 			</direction>
 		</gesture>
 		
-		<gesture name="BURNING" repeat="false">
-			<direction name="NONE">
+		<gesture name="burning" repeat="false">
+			<direction name="none">
 				<step duration="100" />
 			</direction>
 		</gesture>
 		
-		<gesture name="LANDING" repeat="true" shadow="shadow" >
-			<direction name="NONE">
+		<gesture name="landing" repeat="true" shadow="shadow" >
+			<direction name="none">
 				<step duration="300" file="1.gif" />
 				<step duration="300" file="2.gif" />
 			</direction>
 		</gesture>
 		
-		<gesture name="PUNCHED" repeat="true" shadow="shadow">
-			<direction name="NONE">
+		<gesture name="sliding" repeat="true" shadow="shadow">
+			<direction name="none">
 				<step duration="300" file="1.gif" />
 				<step duration="300" file="2.gif" />
 			</direction>
 		</gesture>
 		
-		<gesture name="SLIDING" repeat="true" shadow="shadow">
-			<direction name="NONE">
-				<step duration="300" file="1.gif" />
-				<step duration="300" file="2.gif" />
-			</direction>
-		</gesture>
-		
-		<gesture name="STANDING" repeat="true" shadow="shadow" >
-			<direction name="NONE">
+		<gesture name="standing" repeat="true" shadow="shadow" >
+			<direction name="none">
 				<step duration="300" file="1.gif" />
 				<step duration="300" file="2.gif" />
 			</direction>
