@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../../../../schemas/colormap.xsd" >		
+		xsi:noNamespaceSchemaLocation="..\..\..\..\..\xml\schemas\colormaps.xsd" >		
 	
 	<color index="00" red="032" green="016" blue="056" /> <!-- contours -->
 	<color index="01" red="072" green="024" blue="096" /> <!-- corps très foncé -->
