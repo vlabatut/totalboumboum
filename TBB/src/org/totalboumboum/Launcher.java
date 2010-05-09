@@ -833,24 +833,12 @@ public class Launcher
 // CHANGE LOG	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* TODO
-	 * + beta.017
+	 * + beta.018
 	 * - Moteur :
-	 * 		- nouveau système de mise en cache utilisant des fichiers : pas efficace, c'est aussi long que de tout charger direct
-	 * 		- nouveau système de cache mémoire : un peu plus rapide que le chargement normal
-	 * 		- possibilité de définir des items aléatoires à partir d'intems existant (et plus uniquement en répétant des propriétés)
-	 * 		- correction d'un bug lorsque le round n'a pas de limite de temps
-	 * 		- correction d'un bug lors du calcul des scores quand un joueur se fait tuer par le niveau (i.e. bombe anonyme)
-	 * 		- nouveau sytème de cache : image et sprites sont cachés séparément
-	 * 		- nouveau système permettant de définir des sprites comme des empilement de couches séparées
-	 * 		- simplification du système de suppression d'outil (on laisse le ramasse miette en faire plus, pas la peine de s'en charger manuellement)
-	 * 		- les sprites sans couleurs indexées peuvent maintenant avoir une couleur "NONE" (pr les bombes des niveaux)
 	 * - GUI :
-	 * 		- correction d'un bug dans le menu des options avancées
-	 * 		- options avancées : (dés)activation du cache, réglage de la taille du cache
 	 * - IA :
 	 * - stats :
 	 * - Divers :
-	 * 		- outils de conception de niveaux (mais pas d'interface pour l'instant)
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1139,6 +1127,7 @@ public class Launcher
 	 *  	- possibilité de définir des matches de classement optionnels (?)
 	 *  
 	 *  - charger directement le format AI depuis le jeu permettrait de ne pas avoir à générer 50 images de couleurs différentes
+	 *    (ou un autre format vectoriel, SVG p-ê ?)
 	 *  
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
