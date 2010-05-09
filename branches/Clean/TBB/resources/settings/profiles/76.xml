@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profile.xsd">
-	<general name="0910.Fındık+Şırın" />
-	<ai name="findiksirin" pack="tournament200910" />
-	<character name="shirobon" packname="nesbomberman2" color="WHITE" />
-</profile>
-
