@@ -24,14 +24,25 @@ package org.totalboumboum.game.round;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.text.NumberFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.zip.ZipOutputStream;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.level.Level;
+import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
-import org.totalboumboum.engine.loop.LocalLoop;
+import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.gui.tools.MessageDisplayer;
 import org.totalboumboum.tools.GameData;
-
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 
 public class RoundVariables
 {
@@ -48,9 +59,9 @@ public class RoundVariables
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static Level level;
-	public static LocalLoop loop;
+	public static ServerLoop loop;
 	
-	public static void setLoop(LocalLoop loop)
+	public static void setLoop(ServerLoop loop)
 	{	RoundVariables.loop = loop;
 		RoundVariables.level = loop.getLevel();		
 	}
@@ -94,5 +105,56 @@ public class RoundVariables
 					messageDisplayers[i] = null;
 			}
 		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// RECORDING		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static ObjectOutputStream out = null;
+	
+	/**
+	 * creates and open a file named after the current date and time
+	 * in order to record this game replay
+	 */
+	public static void initRecording(HollowLevel level) throws IOException
+	{	if(Configuration.getEngineConfiguration().isRecordRounds())
+		{	String filename = FilePaths.getReplaysPath();
+			Calendar calendar = GregorianCalendar.getInstance();
+//			Date date = calendar.getTime();
+			int year = calendar.get(Calendar.YEAR);
+			int month = calendar.get(Calendar.MONTH)+1;
+			int day = calendar.get(Calendar.DAY_OF_MONTH);
+			int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+			int minute = calendar.get(Calendar.MINUTE);
+			int second = calendar.get(Calendar.SECOND);
+			NumberFormat nf = NumberFormat.getIntegerInstance();
+			nf.setMinimumIntegerDigits(2);
+			filename = filename + File.separator + year+"."+nf.format(month)+"."+nf.format(day)+"."+nf.format(hourOfDay)+"."+nf.format(minute)+"."+nf.format(second) + FileNames.EXTENSION_DATA;
+			File file = new File(filename);
+			FileOutputStream fileOut = new FileOutputStream(file);
+			BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
+			ZipOutputStream outZip = new ZipOutputStream(outBuff);
+			out = new ObjectOutputStream(outZip);
+			out.writeObject(level);
+		}
+	}
+	
+	/**
+	 * records an event in the currently open stream
+	 */
+	public static void recordEvent()
+	{	if(out!=null)
+		{
+//			out.writeObject(rankingService);
+		}
+	}
+	
+	/**
+	 * close the replay output stream (if it was previously opened)
+	 * @throws IOException
+	 */
+	public static void finishRecording() throws IOException
+	{	if(out!=null)
+			out.close();
 	}
 }

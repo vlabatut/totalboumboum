@@ -27,7 +27,7 @@ import org.totalboumboum.ai.AbstractAiManager;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
-import org.totalboumboum.engine.loop.LocalLoop;
+import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.game.round.RoundVariables;
 
@@ -72,7 +72,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	/** l'ensemble des percepts destinés à l'IA */
 	private AiZone percepts;
 	/** le moteur du jeu */
-	private LocalLoop loop;
+	private ServerLoop loop;
 	/** le niveau dans lequel la partie se déroule */
 	private Level level;
 	/** date de la dernière mise à jour des percepts */

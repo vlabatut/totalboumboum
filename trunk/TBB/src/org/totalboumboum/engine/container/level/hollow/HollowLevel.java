@@ -44,7 +44,7 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.loop.LocalLoop;
+import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.files.FileNames;
@@ -186,7 +186,7 @@ if(bomb==null)
     {	return level;    
     }
     
-	public void initLevel(LocalLoop loop)
+	public void initLevel(ServerLoop loop)
 	{	// init
     	level = new Level(loop);
 		Dimension panelDim = Configuration.getVideoConfiguration().getPanelDimension();
@@ -232,7 +232,6 @@ if(bomb==null)
 		double globalUpY = posY - (visibleUpLine+visibleHeight/2.0)*RoundVariables.scaledTileDimension;
     	level.setTilePositions(globalWidth,globalHeight,globalLeftX,globalUpY);
 		
-//NOTE il y a une ligne horizontale dans les borders au dessus du niveau (forcer le zoomFactor à 1 pour la faire apparaitre)		
 		// border
 		double downBorderY;
 		double horizontalBorderHeight;

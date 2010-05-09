@@ -38,7 +38,7 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.loop.LocalLoop;
+import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.game.limit.LimitTime;
 import org.totalboumboum.game.match.Match;
@@ -140,7 +140,7 @@ public class AiZone
 	 */
 	private void updateTimes(long elapsedTime)
 	{	// init
-		LocalLoop loop = level.getLoop();
+		ServerLoop loop = level.getLoop();
 	
 		// total time
 		this.totalTime = loop.getTotalGameTime();

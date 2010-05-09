@@ -142,6 +142,7 @@ public class FileNames
 	public static final String FOLDER_PROFILES = "profiles";
 	public static final String FOLDER_RAW = "raw";
 	public static final String FOLDER_REMOTE = "remote";
+	public static final String FOLDER_REPLAYS = "replays";
 	public static final String FOLDER_ROUNDS = "rounds";
 	public static final String FOLDER_RESOURCES = "resources";
 	public static final String FOLDER_SAVES = "saves";

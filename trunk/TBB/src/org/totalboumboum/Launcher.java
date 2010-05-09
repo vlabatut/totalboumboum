@@ -1168,4 +1168,17 @@ public class Launcher
 	 * TODO faire une appli propre pour générer les niveaux
 	 * mettre une jolie doc en ligne de commande pour exécuter tout ça
 	 */
+
+	/*
+	 * TODO le caractère local d'un joueur s'oppose à ses commandes
+	 * à la fois dans l'interface graphique et dans le moteur
+	 */
+
+	/**
+	 * TODO
+	 * 	1) définir un système d'enregistrement/replay
+	 * 	2) étendre au mode réseau, la seule différence étant que dans le preimier
+	 * 		cas on lit les evts dans un fichier, alors que dans le deuxième on les
+	 * 		reçoit à travers le réseau.
+	 */
 }

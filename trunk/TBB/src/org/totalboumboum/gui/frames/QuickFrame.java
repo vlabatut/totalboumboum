@@ -31,7 +31,7 @@ import org.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.configuration.profile.ProfileLoader;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
-import org.totalboumboum.engine.loop.LocalLoop;
+import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.LoopRenderPanel;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
@@ -62,7 +62,7 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 {	private static final long serialVersionUID = 1L;
 
 	private BufferStrategy bufferStrategy;
-	private LocalLoop loop;
+	private ServerLoop loop;
 	private JProgressBar loadProgressBar;
 	private Canvas canvas;
 	
@@ -189,7 +189,7 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 					repaint();
 				    // loop
 			        requestFocus();					
-				    loop = (LocalLoop)round.getLoop();
+				    loop = (ServerLoop)round.getLoop();
 				    loop.setPanel(this);
 					// init the BufferStrategy
 					canvas.createBufferStrategy(2);

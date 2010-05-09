@@ -37,7 +37,7 @@ import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
-import org.totalboumboum.engine.loop.LocalLoop;
+import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.Loop;
 import org.totalboumboum.engine.loop.SimulationLoop;
 import org.totalboumboum.engine.player.PlayerLocation;
@@ -115,7 +115,7 @@ public class Round implements StatisticHolder, Serializable
 	
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
-		{	loop = new LocalLoop(this);
+		{	loop = new ServerLoop(this);
 			Thread animator = new Thread(loop);
 			animator.start();
 //			loop.init();

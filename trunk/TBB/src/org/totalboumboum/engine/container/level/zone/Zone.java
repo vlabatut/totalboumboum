@@ -31,10 +31,8 @@ import java.util.Map.Entry;
 import org.totalboumboum.engine.container.level.variabletile.ValueTile;
 import org.totalboumboum.engine.container.level.variabletile.VariableTile;
 
-
 public class Zone implements Serializable
 {	private static final long serialVersionUID = 1L;
-
 	
 	public Zone(int globalWidth, int globalHeight)
 	{	this.globalWidth = globalWidth;

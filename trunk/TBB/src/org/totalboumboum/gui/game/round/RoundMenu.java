@@ -38,7 +38,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.engine.loop.LocalLoop;
+import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundRenderPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -392,7 +392,7 @@ buttonStatistics.setEnabled(false);
 				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_COMPLETE);
 					progressBar.setString(text);
 					progressBar.repaint();
-					loopPanel = new LoopPanel(container.getMenuContainer(),container,(LocalLoop)round.getLoop());
+					loopPanel = new LoopPanel(container.getMenuContainer(),container,(ServerLoop)round.getLoop());
 					replaceWith(loopPanel);
 					loopPanel.start();
 				}
