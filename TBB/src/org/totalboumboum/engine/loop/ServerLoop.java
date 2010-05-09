@@ -93,10 +93,10 @@ import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 import org.xml.sax.SAXException;
 
-public class LocalLoop extends Loop
+public class ServerLoop extends Loop
 {	private static final long serialVersionUID = 1L;
 	
-	public LocalLoop(Round round)
+	public ServerLoop(Round round)
 	{	super(round);
 	}	
 	
@@ -105,10 +105,13 @@ public class LocalLoop extends Loop
 		systemControl = new SystemControl(this);
 long start = System.currentTimeMillis();
 
-		// load level & instance
+		// init
 		HollowLevel hollowLevel = round.getHollowLevel();
 		Instance instance = hollowLevel.getInstance();
 		RoundVariables.setInstance(instance);
+		RoundVariables.initRecording(hollowLevel);
+
+		// load level & instance
 		hollowLevel.initLevel(this);
 		level = hollowLevel.getLevel();
 		RoundVariables.setLoop(this);

@@ -75,6 +75,10 @@ public class FilePaths
 	{	return getResourcesPath()+File.separator+FileNames.FOLDER_LOGS;		
 	}
 	
+	public static String getReplaysPath()
+	{	return getResourcesPath()+File.separator+FileNames.FOLDER_REPLAYS;		
+	}
+	
 	public static String getSchemasPath()
 	{	return getResourcesPath()+File.separator+FileNames.FOLDER_SCHEMAS;		
 	}

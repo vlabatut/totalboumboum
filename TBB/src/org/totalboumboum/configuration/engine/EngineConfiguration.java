@@ -239,4 +239,17 @@ public class EngineConfiguration
 	public OutputStream getControlsLogOutput()
 	{	return controlsLogStream;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// RECORD			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean recordRounds = true;
+
+	public boolean isRecordRounds()
+	{	return recordRounds;
+	}
+	
+	public void setRecordRounds(boolean recordRounds)
+	{	this.recordRounds = recordRounds;
+	}
 }
