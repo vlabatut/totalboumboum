@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <round
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../schemas/round.xsd">
+	xsi:noNamespaceSchemaLocation="..\..\schemas\round.xsd">
 	
  	<notes>
  		<line value="Here goes a short description of the round." />
@@ -9,19 +9,14 @@
  		<line value="Date: 27-09-2008" />
  	</notes>
 
-	<author value="Vincent Labatut" />
-
 	<limits>
-		<lastStanding>
-			<points local="false" name="RoundSurvival" />
-			<threshold value="1" comparator="LESSEQ"/>
-		</lastStanding>
-		<time>
-			<points local="false" name="RoundSurvival" />
- 			<threshold value="60000" />
-		</time>
+		<time value="60000"/>
 	</limits>
 	
-	<level packname="sbm1Official" name="battle_04" />
+	<gameplay playMode="survival"  />
+	
+	<points local="false" name="basicSurvival" />
+	
+	<level packname="superbomberman1" name="test3d" />
 
 </round>
