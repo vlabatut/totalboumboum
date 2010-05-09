@@ -21,7 +21,6 @@ package org.totalboumboum.engine.content.manager.item;
  * 
  */
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -43,7 +42,6 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticAction;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
-
 
 public class ItemManager
 {	
