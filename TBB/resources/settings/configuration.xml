@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\schemas\configuration.xsd">
+	
+<!-- ENGINE -->	
+	<fps value="50" />
+	<speed value="1" />
+
+<!-- DISPLAY -->	
+	<smoothGraphics value="true" />
+		
+<!-- DISPLAY -->	
+<!-- 	attention : si vous augmentez la résolution graphique, il faut donner plus de mémoire à la java machine
+		par exemple en utilisant l'option d'exécution -xmx128m pour donner 128 Mo au lieu des 64 alloués par défaut -->
+	<panelDimension width="1024" height="768" />
+	
+<!-- PROFILES -->	
+	<profiles>
+<!-- cyan -->					<profile value="manual" />	
+
+	</profiles>
+
+<!-- TOURNAMENT -->	
+<!-- 	<tournament value="tournamentTest" /> -->
+<!-- 	<tournament value="tournamentLong" />  -->
+	<tournament value="singleTest" />
+	
+	<quickstart value="round01" />
+	
+</configuration>

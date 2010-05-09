@@ -2,7 +2,6 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_direction.xsd"/>
 <xsd:include schemaLocation="_colors.xsd"/>
-<xsd:include schemaLocation="_gesture_name.xsd"/>
 
 	<xsd:simpleType name="tBasePosition">
 		<xsd:restriction base="xsd:string">
@@ -11,40 +10,8 @@
 		</xsd:restriction>
 	</xsd:simpleType>
 
-	<xsd:complexType name="tAbstractImage">
-		<xsd:attribute name="xShift" type="xsd:integer" use="optional" />
-		<xsd:attribute name="yShift" type="xsd:integer" use="optional" />
-	</xsd:complexType>
-
-	<xsd:complexType name="tImageFile">
-		<xsd:complexContent>
-			<xsd:extension base="tAbstractImage">
-				<xsd:attribute name="file" type="xsd:string" use="required" />
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-	<xsd:complexType name="tImageRef">
-		<xsd:complexContent>
-			<xsd:extension base="tAbstractImage">
-				<xsd:attribute name="name" type="xsd:string" use="required" />
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-	<xsd:group name="gImage">
-		<xsd:choice>
-			<xsd:element name="image" type="tImageFile" />
-			<xsd:element name="imageref" type="tImageRef" />
-		</xsd:choice>
-	</xsd:group>
-	
 	<xsd:complexType name="tStep">
-		<xsd:sequence>
-			<xsd:group ref="gImage" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
 		<xsd:attribute name="file" type="xsd:string" use="optional" />
-		<xsd:attribute name="name" type="xsd:string" use="optional" />
 		<xsd:attribute name="duration" type="xsd:integer" use="optional" default="0" />
 		<xsd:attribute name="xShift" type="xsd:integer" use="optional" />
 		<xsd:attribute name="yShift" type="xsd:integer" use="optional" />
@@ -72,7 +39,7 @@
 			<xsd:sequence>
 				<xsd:element name="direction" type="tDirectionGesture" maxOccurs="unbounded" />
 			</xsd:sequence>
-			<xsd:attribute name="name" type="tGestureName" use="required" />
+			<xsd:attribute name="name" type="xsd:string" use="required" />
 			<xsd:attribute name="folder" type="xsd:string" use="optional" />
 			<xsd:attribute name="repeat" type="xsd:boolean" use="optional" default="false" />
 			<xsd:attribute name="proportional" type="xsd:boolean" use="optional" default="false" />			
@@ -86,7 +53,7 @@
 
 	<xsd:complexType name="tGestures">
 		<xsd:sequence>
-			<xsd:element name="gesture" type="tGesture" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="gesture" type="tGesture" maxOccurs="unbounded" />
 		</xsd:sequence>
 		<xsd:attribute name="folder" type="xsd:string" use="optional" />
 	</xsd:complexType>
@@ -103,29 +70,16 @@
 		<xsd:attribute name="folder" type="xsd:string" use="optional" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tImage">
-		<xsd:attribute name="name" type="xsd:string" use="required" />
-		<xsd:attribute name="file" type="xsd:string" use="required" />
-		<xsd:attribute name="folder" type="xsd:string" use="optional" />
-	</xsd:complexType>
-
-	<xsd:complexType name="tImages">
-		<xsd:sequence>
-			<xsd:element name="image" type="tImage" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
-		<xsd:attribute name="folder" type="xsd:string" use="optional" />
-	</xsd:complexType>
-
 	<xsd:complexType name="tAnimes">
 		<xsd:sequence>
 			<xsd:element name="colors" type="tColors" minOccurs="0" />
 			<xsd:element name="shadows" type="tShadows" minOccurs="0" />
-			<xsd:element name="images" type="tImages" minOccurs="0" />
 			<xsd:element name="gestures" type="tGestures" />
 		</xsd:sequence>
 		<xsd:attribute name="scale" type="xsd:integer" use="optional" default="1" />
+		<xsd:attribute name="default" type="xsd:string" use="required" />
+		<xsd:attribute name="folder" type="xsd:string" use="optional" />
 		<xsd:attribute name="boundHeight" type="xsd:integer" use="optional" default="0" />
-		<xsd:attribute name="preview" type="xsd:string" use="optional" />
 	</xsd:complexType>
 
 	<xsd:element name="animes" type="tAnimes" />

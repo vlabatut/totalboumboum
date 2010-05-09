@@ -32,10 +32,6 @@
 		<xsd:attribute name="value" type="xsd:string" use="required" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tQuickmatch">
-		<xsd:attribute name="value" type="xsd:string" use="required" />
-	</xsd:complexType>
-
 	<xsd:complexType name="tQuickstart">
 		<xsd:attribute name="value" type="xsd:string" use="required" />
 	</xsd:complexType>
@@ -48,7 +44,6 @@
 			<xsd:element name="panelDimension" type="tDimension" />
 			<xsd:element name="profiles" type="tProfiles" />
 			<xsd:element name="tournament" type="tTournament" minOccurs="0"/>
-			<xsd:element name="quickmatch" type="tQuickmatch" minOccurs="0"/>
 			<xsd:element name="quickstart" type="tQuickstart" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
