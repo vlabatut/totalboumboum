@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<points
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../schemas/point.xsd">
+	
+	<notes>
+		<line value="Process the difference between the number other players one killed and the number of times he died himself" />
+	</notes>
+
+	<subtraction>
+		<scores type="BOMBINGS"/>
+		<scores type="BOMBEDS"/>
+	</subtraction>
+	
+</points>

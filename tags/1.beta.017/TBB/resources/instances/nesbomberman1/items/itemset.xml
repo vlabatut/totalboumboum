@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<itemset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/itemset.xsd">
+
+	<abstractItems>
+		<item name="common" folder="_common" />	
+	</abstractItems>
+	
+	<concreteItems>	
+		<item name="extrabomb" folder="extrabomb">	
+			<abilities>
+				<ability >
+					<name value="HERO_BOMB_NUMBER" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="extraflame" folder="extraflame">
+			<abilities>
+				<ability >
+					<name value="HERO_BOMB_RANGE" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="fireproof" folder="fireproof">
+			<abilities>
+				<ability strength="50"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="50"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="-1" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="15000">
+					<name value="HERO_FIRE_PROTECTION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="random" folder="random" >
+			<item name="extrabomb" />
+			<item name="extraflame" />
+			<item name="fireproof" />
+			<item name="remotecontrol" />
+			<item name="speed" />
+			<item name="throughbombs" />
+			<item name="throughwalls" />
+		</item>
+		
+		<item name="remotecontrol" folder="remotecontrol" >
+			<abilities>
+				<ability >
+					<name value="CUSTOM_BOMB_TYPE_REMOTECONTROL" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="speed" folder="speed" >
+			<abilities>
+				<ability strength="1" >
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="stage" folder="stage" >
+			<abilities>
+				<ability >
+					<name value="ITEM_CROWN" />
+				</ability>
+			</abilities>
+		</item>
+
+		<item name="throughbombs" folder="throughbombs" >
+			<abilities>
+				<ability >
+					<name value="SPRITE_TRAVERSE_BOMB" />
+				</ability>
+			</abilities>
+		</item>
+		
+		<item name="throughwalls" folder="throughwalls" >
+			<abilities>
+				<ability >
+					<name value="SPRITE_TRAVERSE_WALL" />
+				</ability>
+			</abilities>
+		</item>
+		
+	</concreteItems>
+
+
+</itemset>

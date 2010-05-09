@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tournament
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
+	
+	<general name="Tournoi de Galatasaray II"/>
+
+ 	<notes>
+ 		<line value="2ème tournoi d'évaluation pour le projet d'IA de la GSÜ." />
+ 		<line value="Date: 07-10-2008" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<cup sortPlayers="SEEDS" >
+		<leg number="0" randomizeParts="false" >
+			<part name="Quart-de-finale 1" number="0">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="-1" rank="1"/>
+					<player part="-1" rank="2"/>
+					<player part="-1" rank="3"/>
+					<player part="-1" rank="4"/>
+				</players>
+			</part>
+			<part name="Quart-de-finale 2" number="1">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="-1" rank="5"/>
+					<player part="-1" rank="6"/>
+					<player part="-1" rank="7"/>
+					<player part="-1" rank="8"/>
+				</players>
+			</part>
+			<part name="Quart-de-finale 3" number="2">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="-1" rank="9"/>
+					<player part="-1" rank="10"/>
+					<player part="-1" rank="11"/>
+					<player part="-1" rank="12"/>
+				</players>
+			</part>
+			<part name="Quart-de-finale 4" number="3">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="-1" rank="13"/>
+					<player part="-1" rank="14"/>
+					<player part="-1" rank="15"/>
+					<player part="-1" rank="16"/>
+				</players>
+			</part>
+		</leg>
+		
+		<leg number="1" >
+			<part name="Classement 1" number="0">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="0" rank="3"/>
+					<player part="2" rank="3"/>
+					<player part="1" rank="4"/>
+					<player part="3" rank="4"/>
+				</players>
+			</part>
+			<part name="Classement 2" number="1">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="1" rank="3"/>
+					<player part="3" rank="3"/>
+					<player part="0" rank="4"/>
+					<player part="2" rank="4"/>
+				</players>
+			</part>
+			<part name="Demi-finale 1" number="2">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="0" rank="1"/>
+					<player part="2" rank="1"/>
+					<player part="1" rank="2"/>
+					<player part="3" rank="2"/>
+				</players>
+			</part>
+			<part name="Demi-finale 2" number="3">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="1" rank="1"/>
+					<player part="3" rank="1"/>
+					<player part="0" rank="2"/>
+					<player part="2" rank="2"/>
+				</players>
+			</part>
+		</leg>
+
+		<leg number="2" >
+			<part name="Classement 4" number="0" rank="4">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="0" rank="3"/>
+					<player part="1" rank="3"/>
+					<player part="0" rank="4"/>
+					<player part="1" rank="4"/>
+				</players>
+			</part>
+			<part name="Classement 3" number="1" rank="3">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="0" rank="1"/>
+					<player part="1" rank="1"/>
+					<player part="0" rank="2"/>
+					<player part="1" rank="2"/>
+				</players>
+			</part>
+			<part name="Petite finale" number="2" rank="2">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="2" rank="3"/>
+					<player part="3" rank="3"/>
+					<player part="2" rank="4"/>
+					<player part="3" rank="4"/>
+				</players>
+			</part>
+			<part name="Finale" number="3" rank="1">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="2" rank="1"/>
+					<player part="3" rank="1"/>
+					<player part="2" rank="2"/>
+					<player part="3" rank="2"/>
+				</players>
+			</part>
+		</leg>
+	</cup>		
+		
+</tournament>

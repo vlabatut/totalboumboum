@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/abilities.xsd" >
+
+		<!-- STATE -->
+<!--  	BLOCK_SPAWN --> 
+		<ability strength="5000" frame="false" time="-1" uses="2">
+			<name value="BLOCK_SPAWN" />
+		</ability>
+			
+		<!-- ACTION -->
+<!--  	APPEAR --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="APPEAR" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+
+</abilities>

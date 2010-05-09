@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../xml/schemas/permissions.xsd" >
+	
+	<gesture name="ended" file="ended.xml" />
+
+	<gesture name="burning" file="burning.xml" />
+	<gesture name="standing" file="standing.xml" />
+
+</permissions>

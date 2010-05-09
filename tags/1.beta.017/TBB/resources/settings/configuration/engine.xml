@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<engine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\engine.xsd">
+	<timing adjust="true" fps="50" speed="1.0" />
+	<log controls="true" />
+	<cache cache="true" cacheLimit="134217728" />
+</engine>
+

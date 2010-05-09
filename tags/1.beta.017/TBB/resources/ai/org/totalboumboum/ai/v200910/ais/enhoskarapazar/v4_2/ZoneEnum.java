@@ -1,0 +1,5 @@
+package org.totalboumboum.ai.v200910.ais.enhoskarapazar.v4_2;
+
+public enum ZoneEnum {
+	CARACTERE,INDESTRUCTIBLES,FEU,FLAMMES,BOMBE,DESTRUCTIBLES,LIBRE,ADVERSAIRE,BONUSBOMBE,BONUSRANGE
+}

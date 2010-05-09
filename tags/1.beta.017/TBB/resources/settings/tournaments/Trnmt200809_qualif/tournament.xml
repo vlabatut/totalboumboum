@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tournament
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
+	
+	<general name="Tournoi simple de test"/>
+
+ 	<notes>
+ 		<line value="Tournoi simple utilisé pour testers les implémentations partielles des IA de l'année 2008/09." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 07-10-2008" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<single>
+		<match local="true" name="match" />
+	</single>		
+		
+</tournament>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_limit.xsd"/>
+<xsd:include schemaLocation="_notes.xsd"/>
+<xsd:include schemaLocation="_points.xsd"/>
+
+<!-- CUP -->
+	<xsd:complexType name="tPlayer">
+		<xsd:attribute name="rank" type="xsd:integer" use="required"/>
+		<xsd:attribute name="part" type="xsd:integer" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="tPlayers">
+		<xsd:sequence>
+			<xsd:element name="player" type="tPlayer" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tTieBreak">
+		<xsd:sequence>
+			<xsd:element name="rankings" type="tPointsRankings" minOccurs="0"/>
+			<xsd:element name="match" type="tMatch"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tPart">
+		<xsd:sequence>
+			<xsd:element name="match" type="tMatch" />
+			<xsd:element name="tieBreak" type="tTieBreak" />
+			<xsd:element name="players" type="tPlayers" />
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="number" type="xsd:integer" use="required"/>
+		<xsd:attribute name="rank" type="xsd:integer" use="optional" default="0"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="tLeg">
+		<xsd:sequence>
+			<xsd:element name="part" type="tPart" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="number" type="xsd:integer" use="required"/>
+		<xsd:attribute name="randomizeParts" type="xsd:boolean" use="optional" default="false" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="tSortTypes">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="RANDOM" />
+			<xsd:enumeration value="SEEDS" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="tCup">
+		<xsd:sequence>
+			<xsd:element name="leg" type="tLeg" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="sortPlayers" type="tSortTypes" use="optional" default="RANDOM" />
+	</xsd:complexType>
+
+<!-- LEAGUE -->
+	<xsd:simpleType name="tConfrontationsOrder">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="RANDOM" />
+			<xsd:enumeration value="UNIFORM" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="tLeague">
+		<xsd:sequence>
+<!-- 			<xsd:element name="points" type="tPointProcessor" />  -->
+			<xsd:element name="matches" type="tMatches" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="randomizePlayers" type="xsd:boolean" use="optional" default="false" />
+		<xsd:attribute name="minimizeConfrontations" type="xsd:boolean" use="optional" default="false" />
+		<xsd:attribute name="confrontationsOrder" type="tConfrontationsOrder" use="optional" default="RANDOM" />
+	</xsd:complexType>
+
+<!-- SEQUENCE -->
+	<xsd:complexType name="tSequence">
+		<xsd:sequence>
+			<xsd:element name="limits" type="tTournamentLimits"  />
+			<xsd:element name="matches" type="tMatches" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+<!-- SINGLE -->
+	<xsd:complexType name="tSingle">
+		<xsd:sequence>
+			<xsd:element name="match" type="tMatch" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+<!-- COMMON -->
+	<xsd:complexType name="tMatch">
+		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tMatches">
+		<xsd:sequence>
+			<xsd:element name="match" type="tMatch" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="randomOrder" type="xsd:boolean" use="optional" default="false" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tAuthor">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:group name="gTournament">
+		<xsd:choice>
+			<xsd:element name="cup" type="tCup" />
+			<xsd:element name="league" type="tLeague" />
+			<xsd:element name="sequence" type="tSequence" />
+			<xsd:element name="single" type="tSingle" />
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:complexType name="tGeneral">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tTournament">
+		<xsd:sequence>
+			<xsd:element name="general" type="tGeneral" />
+			<xsd:element name="notes" type="tNotes" />
+			<xsd:element name="author" type="tAuthor"  minOccurs="0"/>
+			<xsd:group ref="gTournament" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="tournament" type="tTournament" />
+
+</xsd:schema>

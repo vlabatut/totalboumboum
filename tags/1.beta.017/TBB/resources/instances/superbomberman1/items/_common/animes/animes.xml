@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
+		scale="1" >
+
+	<images >
+		<image name="smoke1" file="1.gif" folder="smoke"/>
+		<image name="smoke2" file="2.gif" folder="smoke"/>
+		<image name="smoke3" file="3.gif" folder="smoke"/>
+		<image name="smoke4" file="4.gif" folder="smoke"/>		
+	</images>
+
+	<gestures>
+
+		<gesture name="BURNING" repeat="false" folder="burning">
+			<direction name="NONE">
+				<step duration="250" file="1.gif" />
+				<step duration="200" file="2.gif" />
+				<step duration="150" file="3.gif" />
+				<step duration="125" file="4.gif" />
+				<step duration="75" file="5.gif" />
+				<step duration="50" file="6.gif" />
+				<step duration="50" file="7.gif" />
+			</direction>
+		</gesture>
+		
+	</gestures>		
+</animes>
