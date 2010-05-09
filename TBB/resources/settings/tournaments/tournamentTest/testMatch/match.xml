@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<match
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\..\..\..\schemas\match.xsd">
+	
+ 	<options matchLimit="all-levels" matchLimitValue="3" /> 
+ 	<levels randomOrder="false" >
+ 		<level>
+ 			<location packname="superbomberman1" name="test3e" />
+ 			<game playMode="survival" timeLimit="60000" /> 
+ 			<points local="true" name="point" />
+ 		</level>
+
+ 		<level>
+ 			<location packname="superbomberman1" name="test3f" />
+ 			<game playMode="survival" timeLimit="60000" /> 
+ 			<points local="true" name="point" />
+ 		</level>
+
+ 		<level>
+ 			<location packname="superbomberman1" name="test3g" />
+ 			<game playMode="survival" timeLimit="60000" /> 
+ 			<points local="true" name="point" />
+ 		</level>
+	</levels>     
+	
+</match>
