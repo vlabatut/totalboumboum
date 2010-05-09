@@ -133,9 +133,9 @@ public enum Score
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.BOMB_PLAYER)
-		{	int indexActor = playersIds.indexOf(event.getActorId());
-			int indexTarget = playersIds.indexOf(event.getTargetId());
-			if(indexActor>=0 && indexActor!=indexTarget)
+		{	Integer indexActor = playersIds.indexOf(event.getActorId());
+			Integer indexTarget = playersIds.indexOf(event.getTargetId());
+			if(indexActor!=null && !indexActor.equals(indexTarget))
 				result[indexActor] = result[indexActor] + 1;
 		}
 		return result;

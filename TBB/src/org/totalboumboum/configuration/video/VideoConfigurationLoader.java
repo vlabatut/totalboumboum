@@ -30,7 +30,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -50,27 +49,27 @@ public class VideoConfigurationLoader
 	private static void loadVideoElement(Element root, VideoConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Element element; 
 		// full screen
-		element = root.getChild(XmlNames.FULL_SCREEN);
+		element = root.getChild(XmlTools.FULL_SCREEN);
 		loadFullScreenElement(element,result);
 		// smoothing
-		element = root.getChild(XmlNames.SMOOTH_GRAPHICS);
+		element = root.getChild(XmlTools.SMOOTH_GRAPHICS);
 		loadSmoothGraphicsElement(element,result);
 		// border
-		element = root.getChild(XmlNames.BORDER);
+		element = root.getChild(XmlTools.BORDER);
 		loadBorderElement(element,result);
 		// panel
-		element = root.getChild(XmlNames.PANEL_DIMENSION);
+		element = root.getChild(XmlTools.PANEL_DIMENSION);
 		loadPanelDimensionElement(element,result);
 	}
 	
 	private static void loadFullScreenElement(Element root, VideoConfiguration result)
-	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean fullScreen = Boolean.valueOf(value);
 		result.setFullScreen(fullScreen);
 	}
 	
 	private static void loadSmoothGraphicsElement(Element root, VideoConfiguration result)
-	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean smoothGraphics = Boolean.valueOf(value);
 		result.setSmoothGraphics(smoothGraphics);
 	}
@@ -88,16 +87,16 @@ public class VideoConfigurationLoader
 		result.setBorderColor(borderColor);
 */		
 		Color borderColor = null;
-		String value = root.getAttributeValue(XmlNames.VALUE);
+		String value = root.getAttributeValue(XmlTools.VALUE);
 		if(value!=null)
 			borderColor = Color.BLACK;
 		result.setBorderColor(borderColor);
 	}
 	
 	private static void loadPanelDimensionElement(Element root, VideoConfiguration result)
-	{	String valueH = root.getAttribute(XmlNames.HEIGHT).getValue().trim();
+	{	String valueH = root.getAttribute(XmlTools.HEIGHT).getValue().trim();
 		int height = Integer.valueOf(valueH);
-		String valueW = root.getAttribute(XmlNames.WIDTH).getValue().trim();
+		String valueW = root.getAttribute(XmlTools.WIDTH).getValue().trim();
 		int width = Integer.valueOf(valueW);
 		result.setPanelDimension(width, height);
 	}

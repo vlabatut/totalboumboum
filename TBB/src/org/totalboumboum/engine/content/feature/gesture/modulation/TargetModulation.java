@@ -21,8 +21,12 @@ package org.totalboumboum.engine.content.feature.gesture.modulation;
  * 
  */
 
+import java.util.Iterator;
+
+import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
+
 
 public class TargetModulation extends AbstractActionModulation
 {	private static final long serialVersionUID = 1L;
@@ -50,10 +54,9 @@ public class TargetModulation extends AbstractActionModulation
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-/*	public TargetModulation copy()
+	public TargetModulation copy()
 	{	GeneralAction actionCopy = action;
 		TargetModulation result = new TargetModulation(actionCopy);
-		
 		// actor restrictions
 		{	Iterator<AbstractAbility> it = actorRestrictions.iterator();
 			while(it.hasNext())
@@ -68,34 +71,11 @@ public class TargetModulation extends AbstractActionModulation
 				result.addTargetRestriction(temp);
 			}
 		}
-		
-		//misc
+		//
 		result.finished = finished;
 		result.frame = frame;
 		result.gestureName = gestureName;
 		result.strength = strength;
-		
 		return result;
 	}
-*/
-/*	public TargetModulation cacheCopy(double zoomFactor)
-	{	GeneralAction actionCopy = action.cacheCopy(zoomFactor);
-		TargetModulation result = new TargetModulation(actionCopy);
-		
-		// actor restrictions
-		for(AbstractAbility ability: actorRestrictions)
-			result.actorRestrictions.add(ability.cacheCopy(zoomFactor));
-
-		// target restrictions
-		for(AbstractAbility ability: targetRestrictions)
-			result.targetRestrictions.add(ability.cacheCopy(zoomFactor));
-
-		// misc
-		result.frame = frame;
-		result.gestureName = gestureName;
-		result.strength = strength;
-		
-		return result;
-	}
-*/	
 }

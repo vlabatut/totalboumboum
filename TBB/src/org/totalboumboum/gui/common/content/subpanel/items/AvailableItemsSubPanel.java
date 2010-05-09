@@ -86,7 +86,7 @@ public class AvailableItemsSubPanel extends TableSubPanel
 			Iterator<Entry<String,SpritePreview>> i = itemsetPreview.getItemPreviews().entrySet().iterator();
 			int line = 0;
 			int colGroup = 0;
-			while(i.hasNext() && (line<LINES || colGroup<COL_GROUPS) )
+			while(i.hasNext())
 			{	// init
 				Entry<String,SpritePreview> temp = i.next();
 				String itemName = temp.getKey();

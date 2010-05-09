@@ -22,7 +22,9 @@ package org.totalboumboum.engine.content.sprite.bomb;
  */
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.TreeSet;
+import java.util.Map.Entry;
 
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.ActionAbility;
@@ -44,6 +46,7 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.delay.DelayManager;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.Sprite;
+
 
 public class BombEventManager extends EventManager
 {	
@@ -454,5 +457,23 @@ public class BombEventManager extends EventManager
 	private void start()
 	{	sprite.startItemManager();
 		stand();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			// colliding sprites
+			{	Iterator<Entry<Direction,TreeSet<Sprite>>> it = collidingSprites.entrySet().iterator();
+				while(it.hasNext())
+				{	Entry<Direction,TreeSet<Sprite>> t = it.next();
+					TreeSet<Sprite> tree = t.getValue();
+					tree.clear();
+					it.remove();
+				}
+			}
+		}
 	}
 }

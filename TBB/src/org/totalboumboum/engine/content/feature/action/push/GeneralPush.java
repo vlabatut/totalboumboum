@@ -32,6 +32,7 @@ import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
+
 /** 
  * action de pousser un autre objet (peut être un kick)
  * TRANSITIVE
@@ -214,11 +215,12 @@ public class GeneralPush extends GeneralAction
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public GeneralPush copy()
-	{	GeneralPush result = new GeneralPush();
-		super.copy(result);
-		return result;
+	@Override
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
 	}
 }

@@ -32,6 +32,7 @@ import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
+
 /** 
  * action de se déplacer sur le sol
  * INTRANSITIVE
@@ -202,11 +203,12 @@ public class GeneralMoveLow extends GeneralAction
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public GeneralMoveLow copy()
-	{	GeneralMoveLow result = new GeneralMoveLow();
-		super.copy(result);
-		return result;
+	@Override
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
 	}
 }

@@ -228,4 +228,32 @@ public class ControlManager
 				i--;
 		}		
 	}
+
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// control codes
+			{	Iterator<ControlCode> it = controlCodes.iterator();
+				while(it.hasNext())
+				{	ControlCode temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// control events
+			{	Iterator<ControlEvent> it = controlEvents.iterator();
+				while(it.hasNext())
+				{	ControlEvent temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// misc
+			currentControls.clear();
+			controlSettings = null;
+			sprite = null;
+		}
+	}
 }

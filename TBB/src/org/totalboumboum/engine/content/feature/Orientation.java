@@ -9,7 +9,7 @@ import org.jdom.Element;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 /*
@@ -98,13 +98,13 @@ public enum Orientation implements Serializable
 		String orientationStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 		String[] orientationsStr = orientationStr.split(" ");
 		for(String str: orientationsStr)
-		{	if(str.equalsIgnoreCase(XmlNames.VAL_SOME))
+		{	if(str.equalsIgnoreCase(XmlTools.VAL_SOME))
 			{	result.add(Orientation.BACK);
 				result.add(Orientation.OTHER);
 				result.add(Orientation.FACE);
 				result.add(Orientation.NEUTRAL);
 			}
-			else if(str.equalsIgnoreCase(XmlNames.VAL_ANY))
+			else if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
 			{	result.add(Orientation.BACK);
 				result.add(Orientation.OTHER);
 				result.add(Orientation.FACE);

@@ -22,18 +22,23 @@ package org.totalboumboum.engine.container.fireset;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.xml.sax.SAXException;
 
-public class FiresetMap extends AbstractFiresetMap<Fireset>
-{	
+
+public class FiresetMap implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient Instance instance = null;
+	private Instance instance = null;
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
@@ -44,4 +49,46 @@ public class FiresetMap extends AbstractFiresetMap<Fireset>
 	public Instance getInstance()
 	{	return instance;	
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FIRESETS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final HashMap<String,Fireset> firesets = new HashMap<String, Fireset>();
+	
+	public void addFireset(String name, Fireset fireset)
+	{	firesets.put(name,fireset);		
+	}
+	
+	public Fireset getFireset(String name)
+	{	return firesets.get(name);		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	for(Entry<String,Fireset> e: firesets.entrySet())
+				e.getValue().finish();
+			firesets.clear();
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+/*	public FiresetMap cacheCopy(double zoomFactor, Instance instance)
+	{	FiresetMap result = new FiresetMap(instance);
+	
+		// firesets
+		for(Entry<String,Fireset> entry: firesets.entrySet())
+		{	String key = entry.getKey();
+			Fireset fireset = entry.getValue().cacheCopy(zoomFactor);
+			result.addFireset(key,fireset);
+		}
+		
+		return result;
+	}*/
 }

@@ -27,7 +27,7 @@ import java.util.List;
 
 import org.jdom.Element;
 import org.totalboumboum.engine.container.level.zone.ZoneLoader;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class VariableTilesLoader
@@ -36,7 +36,7 @@ public class VariableTilesLoader
     public static HashMap<String,VariableTile> loadVariableTilesElement(Element root)
     {	HashMap<String,VariableTile> result = new HashMap<String, VariableTile>();
 		if(root!=null)
-	   	{	List<Element> elements = root.getChildren(XmlNames.VARIABLE_TILE);
+	   	{	List<Element> elements = root.getChildren(XmlTools.VARIABLE_TILE);
 		    	Iterator<Element> i = elements.iterator();
 		    	while(i.hasNext())
 		    	{	Element temp = i.next();
@@ -49,15 +49,15 @@ public class VariableTilesLoader
     
     @SuppressWarnings("unchecked")
     private static VariableTile loadVariableTileElement(Element root)
-    {	String name = root.getAttribute(XmlNames.NAME).getValue().trim();
+    {	String name = root.getAttribute(XmlTools.NAME).getValue().trim();
     	VariableTile result = new VariableTile(name);
-    	List<Element> elements = root.getChildren(XmlNames.VALUE);
+    	List<Element> elements = root.getChildren(XmlTools.VALUE);
     	Iterator<Element> i = elements.iterator();
     	float sum = 0;
     	while(i.hasNext())
     	{	Element temp = i.next();
     		String[] elts = ZoneLoader.loadBasicTileElement(temp);    	
-        	float tProba = Float.valueOf(temp.getAttribute(XmlNames.PROBA).getValue().trim());
+        	float tProba = Float.valueOf(temp.getAttribute(XmlTools.PROBA).getValue().trim());
     		ValueTile vt = new ValueTile(elts[0],elts[1],elts[2],elts[3],tProba);
     		// NOTE vérifier que les noms des blocks/items/itemvariables/floor référencés sont bien définis
         	sum = sum+tProba;

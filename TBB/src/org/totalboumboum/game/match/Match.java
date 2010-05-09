@@ -152,7 +152,7 @@ public class Match implements StatisticHolder, Serializable
 	// ROUNDS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean randomOrder;
-	private List<Round> rounds = new ArrayList<Round>();
+	private ArrayList<Round> rounds = new ArrayList<Round>();
 
 	public boolean getRandomOrder()
 	{	return randomOrder;
@@ -164,10 +164,10 @@ public class Match implements StatisticHolder, Serializable
 	public void addRound(Round round)
 	{	rounds.add(round);		
 	}
-	public List<Round> getRounds()
+	public ArrayList<Round> getRounds()
 	{	return rounds;	
 	}
-	public void setRounds(List<Round> rounds)
+	public void setRounds(ArrayList<Round> rounds)
 	{	this.rounds.addAll(rounds);			
 	}
 	public void clearRounds()

@@ -30,11 +30,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.engine.content.sprite.block.HollowBlockFactory;
-import org.totalboumboum.engine.content.sprite.block.HollowBlockFactoryLoader;
+import org.totalboumboum.engine.content.sprite.block.BlockFactory;
+import org.totalboumboum.engine.content.sprite.block.BlockFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -43,7 +42,7 @@ public class BlocksetLoader
 	/////////////////////////////////////////////////////////////////
 	// GENERAL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static void loadBlockset(String folderPath, HollowTheme result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void loadBlockset(String folderPath, Theme result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
@@ -58,59 +57,59 @@ public class BlocksetLoader
 		loadBlocksetElement(root,individualFolder,result);
     }
     
-	private static void loadBlocksetElement(Element root, String folder, HollowTheme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	private static void loadBlocksetElement(Element root, String folder, Theme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// abstract blocks
-    	HashMap<String,HollowBlockFactory> abstractBlocks = new HashMap<String,HollowBlockFactory>();
-    	Element abstractBlocksElt = root.getChild(XmlNames.ABSTRACT_BLOCKS);
+    	HashMap<String,BlockFactory> abstractItems = new HashMap<String,BlockFactory>();
+    	Element abstractBlocksElt = root.getChild(XmlTools.ABSTRACT_BLOCKS);
     	if(abstractBlocksElt!=null)
-    		loadBlocksElement(abstractBlocksElt,folder,result,abstractBlocks,Type.ABSTRACT);
+    		loadBlocksElement(abstractBlocksElt,folder,result,abstractItems,Type.ABSTRACT);
     	
     	// concrete blocks
-    	Element concreteBlocksElt = root.getChild(XmlNames.CONCRETE_BLOCKS);
-		loadBlocksElement(concreteBlocksElt,folder,result,abstractBlocks,Type.CONCRETE);
+    	Element concreteBlocksElt = root.getChild(XmlTools.CONCRETE_BLOCKS);
+		loadBlocksElement(concreteBlocksElt,folder,result,abstractItems,Type.CONCRETE);
 	}
 
 	@SuppressWarnings("unchecked")
-	private static void loadBlocksElement(Element root, String folder, HollowTheme result, HashMap<String,HollowBlockFactory> abstractBlocks, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadBlocksElement(Element root, String folder, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// blocks
-		List<Element> blcksCmpnts = root.getChildren(XmlNames.BLOCK);
+		List<Element> blcksCmpnts = root.getChildren(XmlTools.BLOCK);
 		for(Element temp: blcksCmpnts)
 			loadBlockElement(temp,folder,Theme.DEFAULT_GROUP,result,abstractBlocks,type);
 
 		// groups
-		List<Element> grpsCmpnts = root.getChildren(XmlNames.GROUP);
+		List<Element> grpsCmpnts = root.getChildren(XmlTools.GROUP);
 		for(Element temp: grpsCmpnts)
 			loadGroupElement(temp,folder,result,abstractBlocks,type);
 	}
     
     @SuppressWarnings("unchecked")
-    private static void loadGroupElement(Element root, String individualFolder, HollowTheme result, HashMap<String,HollowBlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    private static void loadGroupElement(Element root, String individualFolder, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlNames.NAME).getValue();
+		String name = root.getAttribute(XmlTools.NAME).getValue();
 		
 		// folder
     	String localFilePath = individualFolder;
-		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		localFilePath = localFilePath+File.separator+attribute.getValue();
 		
 		// blocks
-		List<Element> components = root.getChildren(XmlNames.BLOCK);
+		List<Element> components = root.getChildren(XmlTools.BLOCK);
 		for(Element temp: components)
 			loadBlockElement(temp,localFilePath,name,result,abstractBlocks,type);
     }
     
-    private static void loadBlockElement(Element root, String individualFolder, String groupName, HollowTheme result, HashMap<String,HollowBlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    private static void loadBlockElement(Element root, String individualFolder, String groupName, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlNames.NAME).getValue();
+		String name = root.getAttribute(XmlTools.NAME).getValue();
 		
 		// folder
     	String localFilePath = individualFolder;
-		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		localFilePath = localFilePath+File.separator+attribute.getValue();
 		
 		// components
 		boolean isAbstract = type==Type.ABSTRACT;
-		HollowBlockFactory blockFactory = HollowBlockFactoryLoader.loadBlockFactory(localFilePath,abstractBlocks,isAbstract);
+		BlockFactory blockFactory = BlockFactoryLoader.loadBlockFactory(localFilePath,abstractBlocks,isAbstract);
 		if(isAbstract)
 			abstractBlocks.put(name,blockFactory);
 		else

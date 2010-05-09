@@ -30,7 +30,7 @@ import org.jdom.Element;
 import org.totalboumboum.game.points.PointsProcessor;
 import org.totalboumboum.game.points.PointsProcessorLoader;
 import org.totalboumboum.statistics.detailed.Score;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 
@@ -39,22 +39,22 @@ public class LimitLoader
 	public static Limit loadLimitElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	Limit result = null;
 		String type = root.getName();
-		Element pointProcessorElt = root.getChild(XmlNames.POINTS);
+		Element pointProcessorElt = root.getChild(XmlTools.POINTS);
 		PointsProcessor pointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(pointProcessorElt,folder);
 
-		if(type.equals(XmlNames.CONFRONTATION))
+		if(type.equals(XmlTools.CONFRONTATION))
 			result = loadLimitConfrontationElement(root,pointProcessor);
 		
-		else if(type.equals(XmlNames.POINTS))
+		else if(type.equals(XmlTools.POINTS))
 			result = loadLimitPointsElement(root,folder,pointProcessor);
 		
-		else if(type.equals(XmlNames.SCORE))
+		else if(type.equals(XmlTools.SCORE))
 			result = loadLimitScoreElement(root,pointProcessor);
 		
-		else if(type.equals(XmlNames.TIME))
+		else if(type.equals(XmlTools.TIME))
 			result = loadLimitTimeElement(root,pointProcessor);
 		
-		else if(type.equals(XmlNames.LAST_STANDING))
+		else if(type.equals(XmlTools.LAST_STANDING))
 			result = loadLimitLastStandingElement(root,pointProcessor);
 		
 		return result;
@@ -62,11 +62,11 @@ public class LimitLoader
 
 	private static LimitConfrontation loadLimitConfrontationElement(Element root, PointsProcessor pointProcessor)
 	{	// threshold
-		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
-		String str = thresholdElt.getAttribute(XmlNames.VALUE).getValue();
+		Element thresholdElt = root.getChild(XmlTools.THRESHOLD);
+		String str = thresholdElt.getAttribute(XmlTools.VALUE).getValue();
 		int threshold = Integer.parseInt(str);
 		// comparator
-		str = thresholdElt.getAttribute(XmlNames.COMPARATOR).getValue();
+		str = thresholdElt.getAttribute(XmlTools.COMPARATOR).getValue();
 		Comparisons comparatorCode = Comparisons.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// result
 		LimitConfrontation result = new LimitConfrontation(threshold,comparatorCode,pointProcessor);
@@ -75,14 +75,14 @@ public class LimitLoader
 
 	private static LimitPoints loadLimitPointsElement(Element root, String folder, PointsProcessor pointProcessor) throws ParserConfigurationException, SAXException, IOException
 	{	// threshold
-		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
-		String str = thresholdElt.getAttribute(XmlNames.VALUE).getValue();
+		Element thresholdElt = root.getChild(XmlTools.THRESHOLD);
+		String str = thresholdElt.getAttribute(XmlTools.VALUE).getValue();
 		float threshold = Float.parseFloat(str);
 		// comparator
-		str = thresholdElt.getAttribute(XmlNames.COMPARATOR).getValue();
+		str = thresholdElt.getAttribute(XmlTools.COMPARATOR).getValue();
 		Comparisons comparatorCode = Comparisons.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// point processor
-    	Element thresholdPointProcessorElt = root.getChild(XmlNames.SOURCE);
+    	Element thresholdPointProcessorElt = root.getChild(XmlTools.SOURCE);
 		PointsProcessor thresholdPointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(thresholdPointProcessorElt,folder);
 		// result
 		LimitPoints result = new LimitPoints(threshold,comparatorCode,pointProcessor,thresholdPointProcessor);
@@ -91,14 +91,14 @@ public class LimitLoader
 	
 	private static LimitScore loadLimitScoreElement(Element root, PointsProcessor pointProcessor)
 	{	// threshold
-		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
-		String str = thresholdElt.getAttribute(XmlNames.VALUE).getValue();
+		Element thresholdElt = root.getChild(XmlTools.THRESHOLD);
+		String str = thresholdElt.getAttribute(XmlTools.VALUE).getValue();
 		long threshold = Long.parseLong(str);
 		// comparator
-		str = thresholdElt.getAttribute(XmlNames.COMPARATOR).getValue();
+		str = thresholdElt.getAttribute(XmlTools.COMPARATOR).getValue();
 		Comparisons comparatorCode = Comparisons.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// score
-		str = root.getAttribute(XmlNames.TYPE).getValue();
+		str = root.getAttribute(XmlTools.TYPE).getValue();
 		Score score  = Score.valueOf(str.toUpperCase(Locale.ENGLISH).trim());
 		// result
 		LimitScore result = new LimitScore(threshold,comparatorCode,score,pointProcessor);
@@ -107,11 +107,11 @@ public class LimitLoader
 
 	private static LimitTime loadLimitTimeElement(Element root, PointsProcessor pointProcessor)
 	{	// threshold
-		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
-		String str = thresholdElt.getAttribute(XmlNames.VALUE).getValue();
+		Element thresholdElt = root.getChild(XmlTools.THRESHOLD);
+		String str = thresholdElt.getAttribute(XmlTools.VALUE).getValue();
 		long threshold = Long.parseLong(str);
 		// comparator
-		str = thresholdElt.getAttribute(XmlNames.COMPARATOR).getValue();
+		str = thresholdElt.getAttribute(XmlTools.COMPARATOR).getValue();
 		Comparisons comparatorCode = Comparisons.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// result
 		LimitTime result = new LimitTime(threshold,comparatorCode,pointProcessor);
@@ -120,11 +120,11 @@ public class LimitLoader
 
 	private static LimitLastStanding loadLimitLastStandingElement(Element root, PointsProcessor pointProcessor)
 	{	// threshold
-		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
-		String str = thresholdElt.getAttribute(XmlNames.VALUE).getValue();
+		Element thresholdElt = root.getChild(XmlTools.THRESHOLD);
+		String str = thresholdElt.getAttribute(XmlTools.VALUE).getValue();
 		int threshold = Integer.parseInt(str);
 		// comparator
-		str = thresholdElt.getAttribute(XmlNames.COMPARATOR).getValue();
+		str = thresholdElt.getAttribute(XmlTools.COMPARATOR).getValue();
 		Comparisons comparatorCode = Comparisons.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// result
 		LimitLastStanding result = new LimitLastStanding(threshold,comparatorCode,pointProcessor);

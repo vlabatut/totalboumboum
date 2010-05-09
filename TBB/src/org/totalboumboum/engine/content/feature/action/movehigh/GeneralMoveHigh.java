@@ -32,6 +32,7 @@ import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
+
 /** 
  * action de se déplacer en l'air
  * INTRANSITIVE
@@ -201,11 +202,12 @@ public class GeneralMoveHigh extends GeneralAction
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public GeneralMoveHigh copy()
-	{	GeneralMoveHigh result = new GeneralMoveHigh();
-		super.copy(result);
-		return result;
+	@Override
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
 	}
 }

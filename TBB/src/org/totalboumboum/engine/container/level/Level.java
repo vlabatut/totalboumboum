@@ -27,6 +27,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
@@ -41,6 +42,7 @@ import org.totalboumboum.engine.loop.LocalLoop;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.gui.tools.MessageDisplayer;
 import org.totalboumboum.tools.calculus.CalculusTools;
+
 
 public class Level
 {	public Level(LocalLoop loop)				
@@ -860,73 +862,51 @@ public class Level
 	}
 
 	private void drawLevel(Graphics g)
-	{	boolean flat = true;
-		boolean onGround = true;
-		boolean shadow = false;
-		
-		// only the on-ground flat sprites (they don't have shadow)
-		flat = true;
-		onGround = true;
-		shadow = false;
+	{	// only the on-ground flat sprites (they don't have shadow)
 		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSelection(g,flat,onGround,shadow);
+				matrix[line][col].drawSelection(g,true,true,false);
 		
 		// the rest line by line
 		// first: ground shadows from the last line (for graphical reasons)
-		flat = false;
-		onGround = true;
-		shadow = true;
 		for(int col=0;col<globalWidth;col++)
-			matrix[globalHeight-1][col].drawSelection(g,flat,onGround,shadow);
+			matrix[globalHeight-1][col].drawSelection(g,false,true,true);
 		// then the rest
 		for(int line=0;line<globalHeight;line++)
 		{	// shadows from the non-flat on-ground sprites
-			flat = false;
-			onGround = true;
-			shadow = true;
 			if(line<globalHeight-1)
 			{	for(int col=0;col<globalWidth;col++)
-					matrix[line][col].drawSelection(g,flat,onGround,shadow);
+					matrix[line][col].drawSelection(g,false,true,true);
 			}
 			/*
 			 * the non-flat on-ground sprites themselves:
 			 * each different kind is processed separately for graphical reasons
 			 */
-			flat = false;
-			onGround = true;
-			shadow = false;
 			// floor
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.FLOOR,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.FLOOR,g,false,true,false);
 			// fires
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.FIRE,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.FIRE,g,false,true,false);
 			// item
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.ITEM,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.ITEM,g,false,true,false);
 			// block
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.BLOCK,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.BLOCK,g,false,true,false);
 			// bombs
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.BOMB,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.BOMB,g,false,true,false);
 			// heroes
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSprites(Role.HERO,g,flat,onGround,shadow);
+				matrix[line][col].drawSprites(Role.HERO,g,false,true,false);
 			
 			// shadows from the in-air sprites
-			flat = false;
-			onGround = false;
-			shadow = true;
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSelection(g,flat,onGround,shadow);
+				matrix[line][col].drawSelection(g,false,false,true);
 			// the in-air sprites themselves
-			flat = false;
-			onGround = false;
-			shadow = false;
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSelection(g,flat,onGround,shadow);
+				matrix[line][col].drawSelection(g,false,false,false);
 		}
 	}
 /*	
@@ -1066,5 +1046,42 @@ public class Level
 //		g.drawString(displayedText,x,y);
 		// effects
 		messageDisplayer.paint(g);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// bombset
+//			bombset.finish();
+//			bombset = null;
+			// fireset map
+//			firesetMap.finish();
+//			firesetMap = null;
+			// itemset
+//			itemset.finish();
+//			itemset = null;
+			// matrix
+			for(int line=0;line<globalHeight;line++)
+			{	for(int col=0;col<globalWidth;col++)
+				{	matrix[line][col].finish();
+					matrix[line][col] = null;
+				}
+			}
+			// sprites
+			Iterator<Sprite> it = sprites.iterator();
+			while(it.hasNext())
+			{	Sprite temp = it.next();
+				temp.finish();
+				it.remove();
+			}
+			// theme
+//			theme.finish();
+//			theme = null;
+		}
 	}
 }

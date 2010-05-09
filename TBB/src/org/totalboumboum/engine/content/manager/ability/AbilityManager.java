@@ -23,7 +23,6 @@ package org.totalboumboum.engine.content.manager.ability;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -60,7 +59,7 @@ public class AbilityManager
 	/** abilities provided before the begining of the round */
 	private final ArrayList<AbstractAbility> directAbilities = new ArrayList<AbstractAbility>();
 	
-	public void addDirectAbilities(List<AbstractAbility> abilities)
+	public void addDirectAbilities(ArrayList<AbstractAbility> abilities)
 	{	Iterator<AbstractAbility> i = abilities.iterator();
 		while(i.hasNext())
 			addDirectAbility(i.next());
@@ -202,6 +201,35 @@ if(modulationAbilities.size()>0)
 		{	AbstractAbility temp = currentAbilities.get(index);
 			// it is combined with the existing ability
 			temp.combine(ability);
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// current abilities
+			{	Iterator<AbstractAbility> it = currentAbilities.iterator();
+				while(it.hasNext())
+				{	AbstractAbility temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// direct abilities
+			{	Iterator<AbstractAbility> it = directAbilities.iterator();
+				while(it.hasNext())
+				{	AbstractAbility temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// misc
+			sprite = null;
 		}
 	}
 }

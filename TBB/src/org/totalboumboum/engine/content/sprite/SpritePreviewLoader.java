@@ -1,26 +1,5 @@
 package org.totalboumboum.engine.content.sprite;
 
-/*
- * Total Boum Boum
- * Copyright 2008-2010 Vincent Labatut 
- * 
- * This file is part of Total Boum Boum.
- * 
- * Total Boum Boum is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- * 
- * Total Boum Boum is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
- * 
- */
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -36,14 +15,10 @@ import org.jdom.Element;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorFolder;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
-import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMapLoader;
+import org.totalboumboum.engine.content.feature.gesture.anime.Colormap;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -53,6 +28,8 @@ public class SpritePreviewLoader
 	private static boolean loadImages;
 	private static boolean loadName;
 	private static boolean loadSource;
+	
+	
 	
 	public static SpritePreview loadHeroPreview(String packName, String spriteName) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	loadAuthor = true;
@@ -74,7 +51,7 @@ public class SpritePreviewLoader
 
 	public static SpritePreview loadHeroPreviewCommon(String packName, String spriteName) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String folder = FilePaths.getHeroesPath()+File.separator+packName+File.separator+spriteName;
-		Element root = HollowSpriteFactoryLoader.openFile(folder);
+		Element root = SpriteFactoryLoader.openFile(folder);
 		HashMap<String,SpritePreview> abstractPreviews = new HashMap<String, SpritePreview>();
 		SpritePreview result = loadSpriteElement(root,folder,abstractPreviews);
 		result.setPack(packName);
@@ -87,7 +64,7 @@ public class SpritePreviewLoader
 		loadImages = true;
 		loadName = true;
 		loadSource = true;
-		Element root = HollowSpriteFactoryLoader.openFile(folder);
+		Element root = SpriteFactoryLoader.openFile(folder);
 		SpritePreview result = loadSpriteElement(root,folder,abstractPreviews);
 		result.setPack(null);//TODO à compléter en extrayant le pack du chemin folder
 		result.setFolder(new File(folder).getName());
@@ -96,8 +73,8 @@ public class SpritePreviewLoader
 
 	private static SpritePreview loadSpriteElement(Element root, String folder, HashMap<String,SpritePreview> abstractPreviews) throws IOException, ParserConfigurationException, SAXException
 	{	// init
-		Element elt = root.getChild(XmlNames.GENERAL);
-		String baseStr = elt.getAttributeValue(XmlNames.BASE);
+		Element elt = root.getChild(XmlTools.GENERAL);
+		String baseStr = elt.getAttributeValue(XmlTools.BASE);
 		SpritePreview result = abstractPreviews.get(baseStr);
 		if(result==null)
 			result = new SpritePreview();
@@ -117,24 +94,24 @@ public class SpritePreviewLoader
 	}
 	
 	private static void loadNameElement(Element root, SpritePreview result)
-	{	Element elt = root.getChild(XmlNames.GENERAL);
-		String name = elt.getAttribute(XmlNames.NAME).getValue().trim();
+	{	Element elt = root.getChild(XmlTools.GENERAL);
+		String name = elt.getAttribute(XmlTools.NAME).getValue().trim();
 		result.setName(name);		
 	}
 	
 	private static void loadAuthorElement(Element root, SpritePreview result)
-	{	Element elt = root.getChild(XmlNames.AUTHOR);
+	{	Element elt = root.getChild(XmlTools.AUTHOR);
 		String name = null; 
 		if(elt!=null)
-			name = elt.getAttribute(XmlNames.VALUE).getValue().trim();
+			name = elt.getAttribute(XmlTools.VALUE).getValue().trim();
 		result.setAuthor(name);		
 	}
 	
 	private static void loadSourceElement(Element root, SpritePreview result)
-	{	Element elt = root.getChild(XmlNames.SOURCE);
+	{	Element elt = root.getChild(XmlTools.SOURCE);
 		String name = null; 
 		if(elt!=null)
-			name = elt.getAttribute(XmlNames.VALUE).getValue().trim();
+			name = elt.getAttribute(XmlTools.VALUE).getValue().trim();
 		result.setSource(name);		
 	}
 	
@@ -147,107 +124,96 @@ public class SpritePreviewLoader
 			String schemaFolder = FilePaths.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-			Attribute previewAtt = root.getAttribute(XmlNames.PREVIEW);
-	    	boolean found = false;
+			
+			// init
+	    	GestureName defaultGesture = GestureName.STANDING;
+	    	Element gesturesElement = root.getChild(XmlTools.GESTURES);
+	    	Attribute gesturesFolderAtt = gesturesElement.getAttribute(XmlTools.FOLDER);
 	    	String gesturesFolder = "";
 	    	String gestureFolder = "";
 	    	String directionFolder = "";
 	    	String stepFile = "";
-			
-			// check if the preview attribute exists
-			if(previewAtt!=null)
-			{	found = true;
-				stepFile = previewAtt.getValue().trim();
-			}
-			// else: look for the first image from the STANDING gesture
-			// (must be defined as an actual image, not a reference, and not multilayers)
-			else
-			{	// init
-		    	GestureName defaultGesture = GestureName.STANDING;
-		    	Element gesturesElement = root.getChild(XmlNames.GESTURES);
-		    	Attribute gesturesFolderAtt = gesturesElement.getAttribute(XmlNames.FOLDER);
-		    	if(gesturesFolderAtt!=null)
-		    		gesturesFolder = File.separator+gesturesFolderAtt.getValue();
-		    	
-		    	// look for the gesture
-	    		List<Element> gestureList = gesturesElement.getChildren(XmlNames.GESTURE);
-		    	Iterator<Element> it = gestureList.iterator();
-		    	while(it.hasNext() && !found)
-		    	{	Element gestureElt = it.next();
-		    		String name = gestureElt.getAttributeValue(XmlNames.NAME);
-		    		if(name.equalsIgnoreCase(defaultGesture.toString()))
-		    		{	found = true;
-	    				Attribute f = gestureElt.getAttribute(XmlNames.FOLDER);
-	    				if(f!=null)
-	    					gestureFolder = File.separator+f.getValue();
-	    				
-	    				// look for the direction
-		    			List<Element> directionList = gestureElt.getChildren(XmlNames.DIRECTION);
-		    			String defaultDirection;
-		    			if(directionList.size()==1)
-		    				defaultDirection = Direction.NONE.toString();
-		    			else
-		    				defaultDirection = Direction.DOWN.toString();
-		    			Iterator<Element> it2 = directionList.iterator();
-		    			boolean found2 = false;
-		    			while(it2.hasNext() && !found2)
-		    			{	Element directionElt = it2.next();
-		    				String name2 = directionElt.getAttributeValue(XmlNames.NAME);
-		    				if(name2.equalsIgnoreCase(defaultDirection))
-		    				{	found2 = true;
-			    				Attribute fold = directionElt.getAttribute(XmlNames.FOLDER);
-			    				if(fold!=null)
-			    					directionFolder = File.separator+fold.getValue();
-			    				// take the first step
-			    				List<Element> stepList = directionElt.getChildren(XmlNames.STEP);
-			    				Element stepElt = stepList.get(0);
-				    			stepFile = stepElt.getAttributeValue(XmlNames.FILE);
-		    				}
-		    			}
-		    		}
-		    	}
-			}
+	    	if(gesturesFolderAtt!=null)
+	    		gesturesFolder = File.separator+gesturesFolderAtt.getValue();
+	    	
+	    	// look for the gesture
+    		List<Element> gestureList = gesturesElement.getChildren(XmlTools.GESTURE);
+	    	Iterator<Element> it = gestureList.iterator();
+	    	boolean found = false;
+	    	while(it.hasNext() && !found)
+	    	{	Element gestureElt = it.next();
+	    		String name = gestureElt.getAttributeValue(XmlTools.NAME);
+	    		if(name.equalsIgnoreCase(defaultGesture.toString()))
+	    		{	found = true;
+    				Attribute f = gestureElt.getAttribute(XmlTools.FOLDER);
+    				if(f!=null)
+    					gestureFolder = File.separator+f.getValue();
+    				
+    				// look for the direction
+	    			List<Element> directionList = gestureElt.getChildren(XmlTools.DIRECTION);
+	    			String defaultDirection;
+	    			if(directionList.size()==1)
+	    				defaultDirection = Direction.NONE.toString();
+	    			else
+	    				defaultDirection = Direction.DOWN.toString();
+	    			Iterator<Element> it2 = directionList.iterator();
+	    			boolean found2 = false;
+	    			while(it2.hasNext() && !found2)
+	    			{	Element directionElt = it2.next();
+	    				String name2 = directionElt.getAttributeValue(XmlTools.NAME);
+	    				if(name2.equalsIgnoreCase(defaultDirection))
+	    				{	found2 = true;
+		    				Attribute fold = directionElt.getAttribute(XmlTools.FOLDER);
+		    				if(fold!=null)
+		    					directionFolder = File.separator+fold.getValue();
+		    				// take the first step
+		    				List<Element> stepList = directionElt.getChildren(XmlTools.STEP);
+		    				Element stepElt = stepList.get(0);
+			    			stepFile = stepElt.getAttributeValue(XmlTools.FILE);
+	    				}
+	    			}
+	    		}
+	    	}
 	    	
 	    	if(found)
-	    	{	Element elt = root.getChild(XmlNames.COLORS);
+	    	{	Element elt = root.getChild(XmlTools.COLORS);
 	    		
-	    		// get the colored picture
-	    		ColorFolder colorFold = null;
+	    		// get the color pictures
+	    		String colorFold = null;
 	    		if(elt!=null)
 				{	List<Element> clrs = elt.getChildren();
 					Iterator<Element> iter = clrs.iterator();
 			    	while(iter.hasNext())
 			    	{	BufferedImage img;
 			    		Element temp = iter.next();
-			    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
+			    		String name = temp.getAttribute(XmlTools.NAME).getValue().trim();
 			    		name = name.toUpperCase(Locale.ENGLISH);
 			    		PredefinedColor color = PredefinedColor.valueOf(name);
-			    		ColorRule colorRule = ColorRulesMapLoader.loadColorsElement(elt,folderPath,color);
-						if(colorRule instanceof ColorMap)
-						{	ColorMap colormap = (ColorMap)colorRule;
+			    		Object obj = ImageTools.loadColorsElement(elt,folderPath,color);
+						if(obj instanceof Colormap)
+						{	Colormap colormap = (Colormap)obj;
 							String imagePath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
 							img = ImageTools.loadImage(imagePath, colormap);
 						}
 						else
-						{	ColorFolder colorFolder = (ColorFolder)colorRule;
+						{	String colorFolder = File.separator+(String)obj;
 							if(colorFold==null)
 								colorFold = colorFolder;
-							String imagePath = colorFolder.getFolder()+gestureFolder+directionFolder+File.separator+stepFile;
+							String imagePath = folderPath+gesturesFolder+colorFolder+gestureFolder+directionFolder+File.separator+stepFile;
 							img = ImageTools.loadImage(imagePath,null);
 						}
 			    		result.setImage(color,img);
 			    	}				
 				}
+	    		
 	    		// get the colorless picture
+	    		String imgPath;
+	    		if(colorFold==null)
+	    			imgPath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
 	    		else
-	    		{	String imgPath;
-//		    		if(colorFold==null)
-		    			imgPath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
-//		    		else
-//						imgPath = folderPath+gesturesFolder+colorFold.getFolder()+gestureFolder+directionFolder+File.separator+stepFile;
-		    		BufferedImage image = ImageTools.loadImage(imgPath,null);
-					result.setImage(null,image);
-	    		}
+					imgPath = folderPath+gesturesFolder+colorFold+gestureFolder+directionFolder+File.separator+stepFile;
+	    		BufferedImage image = ImageTools.loadImage(imgPath,null);
+				result.setImage(null,image);
 			}
 		}
 	}

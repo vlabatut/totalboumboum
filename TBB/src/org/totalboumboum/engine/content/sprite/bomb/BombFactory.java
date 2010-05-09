@@ -21,16 +21,62 @@ package org.totalboumboum.engine.content.sprite.bomb;
  * 
  */
 
+import java.util.HashMap;
+
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 
+
 public class BombFactory extends SpriteFactory<Bomb>
-{	
+{	private static final long serialVersionUID = 1L;
+
 	public BombFactory(String bombName)
 	{	this.bombName = bombName;
 	}	
 	
+	/////////////////////////////////////////////////////////////////
+	// GESTURE PACK		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
+	static
+	{	// APPEARING
+		// BOUNCING
+		// BURNING
+		animeReplacements.put(GestureName.BURNING,null);
+		// CRYING
+		// EXULTING
+		// HIDING
+		// JUMPING
+		// LANDING
+		animeReplacements.put(GestureName.LANDING,GestureName.STANDING);
+		// OSCILLATING
+		animeReplacements.put(GestureName.OSCILLATING,GestureName.STANDING);
+		// OSCILLATING_FAILING
+		animeReplacements.put(GestureName.OSCILLATING_FAILING,GestureName.STANDING_FAILING);
+		// PUNCHED
+		animeReplacements.put(GestureName.PUNCHED,GestureName.STANDING);
+		// PUNCHING
+		// PUSHING
+		// RELEASED
+		// SLIDING
+		animeReplacements.put(GestureName.SLIDING,GestureName.STANDING);
+		// SLIDING_FAILING
+		animeReplacements.put(GestureName.SLIDING_FAILING,GestureName.STANDING_FAILING);
+		// SPAWNING
+		// STANDING
+		animeReplacements.put(GestureName.STANDING,null);
+		// STANDING_FAILING
+		animeReplacements.put(GestureName.STANDING_FAILING,GestureName.STANDING);
+		// WAITING
+		// WALKING		
+	}
+	
+	public static HashMap<GestureName,GestureName> getAnimeReplacements()
+	{	return animeReplacements;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -60,4 +106,67 @@ public class BombFactory extends SpriteFactory<Bomb>
 		result.initSprite(tile);
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public BombFactory copy()
+	{	BombFactory result = new BombFactory(bombName);
+
+		// misc
+		result.setName(name);
+		result.setBase(base);
+		
+		// abilities
+		result.setAbilities(abilities);
+		
+		// bombset
+		//TODO to be completed later (?)
+		
+		// explosion
+		result.setExplosionName(explosionName);
+		
+		// gestures
+		result.setGesturePack(gesturePack.copy());
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+/*	public BombFactory cacheCopy(double zoomFactor, Bombset bs)
+	{	BombFactory result = new BombFactory(bombName);
+		
+		// misc
+		result.base = base;
+		result.name = name;
+		
+		// abilities
+		result.setAbilities(abilities);
+		
+		// bombset
+		result.setBombset(bs);
+		
+		// explosion
+		if(explosion!=null)
+		{	Explosion explosionCopy = explosion.cacheCopy();
+			result.setExplosion(explosionCopy);
+		}
+		
+		// gestures
+		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		result.setGesturePack(gesturePackCopy);
+
+		return result;
+	}*/
 }

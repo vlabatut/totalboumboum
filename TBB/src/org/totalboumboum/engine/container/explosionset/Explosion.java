@@ -22,6 +22,7 @@ package org.totalboumboum.engine.container.explosionset;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -31,8 +32,14 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.xml.sax.SAXException;
 
-public class Explosion extends AbstractExplosion
-{	
+
+public class Explosion implements Serializable
+{	private static final long serialVersionUID = 1L;
+	
+	public Explosion()
+	{	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -41,8 +48,6 @@ public class Explosion extends AbstractExplosion
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
 		fireset = instance.getFiresetMap().getFireset(firesetName);
-if(fireset==null)
-	System.err.println("fireset: can't find "+firesetName);
 	}
 
 	public Instance getInstance()
@@ -65,14 +70,51 @@ if(fireset==null)
 	/////////////////////////////////////////////////////////////////
 	// FIRESET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Fireset fireset = null;
-
+	Fireset fireset = null;
+	String firesetName = null;
+	
+	public void setFiresetName(String firesetName)
+	{	this.firesetName = firesetName;	
+	}
+	
+/*	public void setFireset(Fireset fireset)
+	{	this.fireset = fireset;	
+	}
+*/	
 	public Fire makeFire(String name, Tile tile)
 	{	Fire result = null;
-		
-		if(fireset!=null)
-			result = fireset.makeFire(name,tile);
-		
+		result = fireset.makeFire(name,tile);
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// fireset
+			if(fireset!=null)
+			{	fireset.finish();
+				fireset = null;
+			}
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/*
+	 * the fireset has already been copied/loaded, so it is taken from the current level
+	 * the rest of the explosion is copied normally
+	 */
+/*	public Explosion cacheCopy()
+	{	Explosion result = new Explosion();
+		FiresetMap fsm = RoundVariables.level.getFiresetMap();
+		Fireset fs = fsm.getFireset(fireset.getName());
+		result.setFireset(fs);		
+		return result;
+	}*/
 }

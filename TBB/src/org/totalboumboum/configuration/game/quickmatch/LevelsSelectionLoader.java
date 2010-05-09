@@ -24,7 +24,7 @@ package org.totalboumboum.configuration.game.quickmatch;
 import java.util.List;
 
 import org.jdom.Element;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class LevelsSelectionLoader
@@ -32,7 +32,7 @@ public class LevelsSelectionLoader
 	@SuppressWarnings("unchecked")
 	public static LevelsSelection loadLevelsSelection(Element root)
 	{	LevelsSelection result = new LevelsSelection();
-		List<Element> playersElt = root.getChildren(XmlNames.LEVEL);
+		List<Element> playersElt = root.getChildren(XmlTools.LEVEL);
 		for(Element elt: playersElt)
 			loadLevelElement(elt,result);
 		return result;
@@ -40,9 +40,9 @@ public class LevelsSelectionLoader
 
 	private static void loadLevelElement(Element root, LevelsSelection result)
 	{	// pack
-		String packName = root.getAttributeValue(XmlNames.PACK);
+		String packName = root.getAttributeValue(XmlTools.PACK);
 		// folder
-		String folderName = root.getAttributeValue(XmlNames.FOLDER);
+		String folderName = root.getAttributeValue(XmlTools.FOLDER);
 		// result
 		result.addLevel(packName,folderName);
 	}

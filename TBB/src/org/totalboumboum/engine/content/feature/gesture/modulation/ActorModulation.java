@@ -21,8 +21,12 @@ package org.totalboumboum.engine.content.feature.gesture.modulation;
  * 
  */
 
+import java.util.Iterator;
+
+import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
+
 
 public class ActorModulation extends AbstractActionModulation
 {	private static final long serialVersionUID = 1L;
@@ -50,10 +54,9 @@ public class ActorModulation extends AbstractActionModulation
 	/////////////////////////////////////////////////////////////////
 	// COPY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-/*	public ActorModulation copy()
+	public ActorModulation copy()
 	{	GeneralAction actionCopy = action; //NOTE doesn't seem necessary to copy the action (same thing for target and third modulation)
 		ActorModulation result = new ActorModulation(actionCopy);
-		
 		// actor restrictions
 		{	Iterator<AbstractAbility> it = actorRestrictions.iterator();
 			while(it.hasNext())
@@ -61,7 +64,6 @@ public class ActorModulation extends AbstractActionModulation
 				result.addActorRestriction(temp);
 			}
 		}
-		
 		// target restrictions
 		{	Iterator<AbstractAbility> it = targetRestrictions.iterator();
 			while(it.hasNext())
@@ -69,33 +71,11 @@ public class ActorModulation extends AbstractActionModulation
 				result.addTargetRestriction(temp);
 			}
 		}
-		
-		//misc
+		//
 		result.finished = finished;
 		result.frame = frame;
 		result.gestureName = gestureName;
 		result.strength = strength;
-		
 		return result;
 	}
-*/
-/*	public ActorModulation cacheCopy(double zoomFactor)
-	{	GeneralAction actionCopy = action.cacheCopy(zoomFactor);
-		ActorModulation result = new ActorModulation(actionCopy);
-		
-		// actor restrictions
-		for(AbstractAbility ability: actorRestrictions)
-			result.actorRestrictions.add(ability.cacheCopy(zoomFactor));
-
-		// target restrictions
-		for(AbstractAbility ability: targetRestrictions)
-			result.targetRestrictions.add(ability.cacheCopy(zoomFactor));
-		
-		//misc
-		result.frame = frame;
-		result.gestureName = gestureName;
-		result.strength = strength;
-		
-		return result;
-	}*/
 }

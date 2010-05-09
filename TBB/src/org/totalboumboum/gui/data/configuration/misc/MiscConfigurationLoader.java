@@ -98,14 +98,12 @@ public class MiscConfigurationLoader
 		String path = GuiFileTools.getBackgroundsPath()+File.separator+filename;
 		// image
 		BufferedImage image = ImageTools.loadImage(path,null);
-		image = ImageTools.getCompatibleImage(image);
 		// resize
 		Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
 		double zoomY = dim.getHeight()/(double)image.getHeight();
 		double zoomX = dim.getWidth()/(double)image.getWidth();
 		double zoom = Math.max(zoomX,zoomY);
-		image = ImageTools.getResizedImage(image,zoom,true);
-		image = ImageTools.getCompatibleImage(image);
+		image = ImageTools.resize(image,zoom,true);
 		result.setBackground(filename,image);
 	}
 }

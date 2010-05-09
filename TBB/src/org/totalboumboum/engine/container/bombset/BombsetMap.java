@@ -22,8 +22,8 @@ package org.totalboumboum.engine.container.bombset;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -31,7 +31,8 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.xml.sax.SAXException;
 
-public class BombsetMap
+
+public class BombsetMap implements Serializable
 {	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
@@ -52,22 +53,22 @@ public class BombsetMap
 	/////////////////////////////////////////////////////////////////
 	// BOMBSETS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private Bombset partialBombset = null;
 	private final HashMap<PredefinedColor,Bombset> bombsets = new HashMap<PredefinedColor, Bombset>();
+	private String path;
 	
-	public void loadBombsets(String folderPath, List<PredefinedColor> playersColors) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// level (neutral)
-		Bombset bombset = BombsetLoader.loadBombset(folderPath,null);
-		bombsets.put(null,bombset);
-
-		// players
-		for(PredefinedColor color: playersColors)
-    	{	bombset = BombsetLoader.loadBombset(folderPath,color);
-			bombsets.put(color,bombset);
-    	}
+	public void initBombset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	path = folderPath;
+		partialBombset = BombsetLoader.initBombset(folderPath);
 	}
-	
-	public Bombset getBombset(PredefinedColor color)
+
+	public Bombset getBombset(PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Bombset result = bombsets.get(color);
+		if(result==null)
+		{	result = partialBombset.copy();
+			BombsetLoader.completeBombset(path,color,result);
+			bombsets.put(color,result);
+		}
 		return result;
 	}
 }

@@ -35,7 +35,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 /**
  * represents a general action by specifying who can do what to who.
  * The subclasses define what is actually possible in the game. 
- * Instances must by subsumed by the class, they fit stricter situations,
+ * Instances must by subsumed by the class, they fit more strict situations,
  * usually user-defined to be used in abilities and modulations.
  * SpecificActions represent in-game specific situations. 
  */
@@ -43,6 +43,12 @@ public abstract class GeneralAction implements Serializable
 {	private static final long serialVersionUID = 1L;
 
 	
+	/* NOTE in tile position: 
+	 * 	- FAR was changed into REMOTE, 
+	 * 	- the meaning of same was changed (before no tile for actor -> same), 
+	 * 	- undefined was added 
+	 */
+
 	/*NOTE
 	 * - there's not always a direction (the actor can perform an undirected gesture)
 	 * - there's always an actor
@@ -188,6 +194,21 @@ public abstract class GeneralAction implements Serializable
 	public void addAnyTargets()
 	{	for(Role r: Role.values())
 			addTarget(r);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			actors.clear();
+			directions.clear();
+			targets.clear();
+			circumstance.finish();
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -343,39 +364,4 @@ public abstract class GeneralAction implements Serializable
 		cp.finished = finished;
 	}
 */
-
-	/////////////////////////////////////////////////////////////////
-	// COPY			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** 
-	 * this is actually not so usefull,
-	 * because general actions are not modified after their creation 
-	 */
-	public abstract GeneralAction copy();
-	
-	protected void copy(GeneralAction result)
-	{	// actors
-		for(Role a: actors)
-			result.actors.add(a);
-		
-		// targets
-		for(Role t: targets)
-			result.targets.add(t);
-		
-		// directions
-		for(Direction d: directions)
-			result.directions.add(d);
-		
-		// contacts
-		for(Contact c: circumstance.getContacts())
-			result.circumstance.addContact(c);
-		
-		// orientations
-		for(Orientation o: circumstance.getOrientations())
-			result.circumstance.addOrientation(o);
-		
-		// tile positions
-		for(TilePosition tp: circumstance.getTilePositions())
-			result.circumstance.addTilePosition(tp);
-	}
 }

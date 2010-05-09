@@ -9,11 +9,6 @@
 		<xsd:attribute name="proba" type="xsd:float" use="optional" default="1"/>
 	</xsd:complexType>
 
-	<xsd:complexType name="tItemref">
-		<xsd:attribute name="name" type="xsd:string" use="required" />
-		<xsd:attribute name="proba" type="xsd:float" use="optional" default="1"/>
-	</xsd:complexType>
-
 	<xsd:complexType name="tItem">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 		<xsd:attribute name="folder" type="xsd:string" use="required" />
@@ -22,14 +17,9 @@
 	<xsd:complexType name="tConcreteItem">
 		<xsd:complexContent>
 			<xsd:extension base="tItem">
-				<xsd:choice>
-					<xsd:sequence>
-						<xsd:element name="abilities" type="tAbilities" minOccurs="0" maxOccurs="unbounded"/>
-					</xsd:sequence>
-					<xsd:sequence>
-						<xsd:element name="item" type="tItemref" maxOccurs="unbounded"/>
-					</xsd:sequence>
-				</xsd:choice>
+				<xsd:sequence>
+					<xsd:element name="abilities" type="tAbilities" maxOccurs="unbounded"/>
+				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>

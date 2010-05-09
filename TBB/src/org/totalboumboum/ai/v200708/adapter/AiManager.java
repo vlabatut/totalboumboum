@@ -23,7 +23,6 @@ package org.totalboumboum.ai.v200708.adapter;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
 
 import org.totalboumboum.ai.AbstractAiManager;
@@ -211,7 +210,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	    				if(!(gesture==GestureName.NONE
 	    						|| gesture==GestureName.HIDING
 	    						|| gesture==GestureName.ENDED))
-	    				{	List<AbstractAbility> itemAbilities = item.getItemAbilities();
+	    				{	ArrayList<AbstractAbility> itemAbilities = item.getItemAbilities();
 			    			// bonus de bombe
 			    			{	Iterator<AbstractAbility> j = itemAbilities.iterator();
 				    			while(j.hasNext() && !found)

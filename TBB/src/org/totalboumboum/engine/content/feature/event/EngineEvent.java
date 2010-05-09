@@ -183,4 +183,18 @@ public class EngineEvent extends AbstractEvent
 	public void setStringParameter(String parameter)
 	{	stringParameter = parameter;	
 	}
+
+    /////////////////////////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			// misc
+			direction = null;
+			source = null;
+			target = null;
+			stringParameter = null;			
+		}
+	}
 }

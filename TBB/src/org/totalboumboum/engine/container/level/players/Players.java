@@ -23,11 +23,8 @@ package org.totalboumboum.engine.container.level.players;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 
 import org.totalboumboum.engine.player.PlayerLocation;
-import org.totalboumboum.tools.GameData;
 
 
 public class Players implements Serializable
@@ -44,21 +41,6 @@ public class Players implements Serializable
 
 	public HashMap<Integer, PlayerLocation[]> getLocations()
 	{	return locations;	
-	}
-	
-	public boolean isOccupied(int line, int col)
-	{	boolean result = false;
-		Iterator<PlayerLocation[]> it = locations.values().iterator();
-		while(!result && it.hasNext())
-		{	PlayerLocation[] temp = it.next();
-			int i = 0;
-			while(!result && i<temp.length)
-			{	PlayerLocation pl = temp[i];
-				result = pl.getLine()==line && pl.getCol()==col;
-				i++;
-			}
-		}
-		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -77,37 +59,5 @@ public class Players implements Serializable
 
 	public HashMap<String,Integer> getInitialItems()
 	{	return initialItems;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FORMAT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public static String formatAllowedPlayerNumbers(Set<Integer> playerNumbers)
-	{	StringBuffer temp = new StringBuffer();
-		if(playerNumbers.size()>0)
-		{	int value = playerNumbers.iterator().next();
-			temp.append(value);
-			boolean serie = true;
-			int first = value;
-			for(int index=value+1;index<=GameData.MAX_PROFILES_COUNT+1;index++)
-			{	if(playerNumbers.contains(index))
-				{	if(!serie)
-					{	serie = true;
-						first = index;
-						temp.append(";"+index);
-					}					
-				}
-				else
-				{	if(serie)
-					{	serie = false;
-						if(index-1!=first)
-							temp.append("-"+(index-1));
-					}
-				}				
-			}
-		}
-		else
-			temp.append(0);
-		return temp.toString();
 	}
 }

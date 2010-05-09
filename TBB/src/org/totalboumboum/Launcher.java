@@ -357,12 +357,18 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/*
+	 * TODO il faut récupérer toutes les exceptions éventuellement causées par les IA
+	 * par exemple en les routant sur une fenêtre débug spéciale ?
+	 * (cf OkanYuksel qui fait un dépassement de la pile)
+	 */
+	
+	/*
 	 * TODO dans l'API IA il faut généraliser (tout en simplifiant) les propriétés des sprites, plutot que 
 	 * de définir des fonctions spécifiques à chaque fois.
 	 */
 	
 	/*
-	 * TODO type de tournoi plus adapté au réseau : hot potatoe
+	 * TODO type de tournoi plus adapté au réseau :
 	 * des joueurs jouent un match pendant que d'autres attendent 
 	 * à la fin du match, les n derniers joueurs sont relégués dans la salle d'attente
 	 * n joueurs qui attendaient sont qualifiés.
@@ -373,6 +379,7 @@ public class Launcher
 	 * TODO inclure dans l'API IA des fonctions d'action prédéfinies.
 	 * par exemple des fonctions pour le déplacement, on indique où on veut aller et ça détermine à chaque itération
 	 * quelle est l'action à effectuer. étendre à d'autres actions ?
+	 * limitation pédago: on n'utilise plus A*
 	 */
 	
 	/*
@@ -380,10 +387,6 @@ public class Launcher
 	 * faudrait passer en paramètre le niveau et des infos style l'instance, etc.
 	 * ça permettrait par exemple, pour une IA qui apprend, de télécharger son fichier de sauvegarde
 	 * (dans son package)
-	 */
-	
-	/*
-	 * evaluation du projet : pour la qualification, utiliser ke temps nécessaire pour éliminer un/des adversaire(s) de référence
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -794,6 +797,13 @@ public class Launcher
 	 * >> en même temps, ça laisse le choix au joueur de ramasser l'item ou pas, c'est pas mal finalement (si c'est un malus par ex.)
 	 */
 	
+	 /* 
+	  * TODO BUGS POTENTIELS (à vérifier)
+	  * 
+	  * - il semblerait que les directions dans la SpecificAction et dans la GeneralAction correspondante ne soient pas les mêmes...
+	  * 
+	  */
+	
 	/*
 	 * TODO
 	 * bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
@@ -833,24 +843,19 @@ public class Launcher
 // CHANGE LOG	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* TODO
-	 * + beta.017
+	 * + beta.016
 	 * - Moteur :
-	 * 		- nouveau système de mise en cache utilisant des fichiers : pas efficace, c'est aussi long que de tout charger direct
-	 * 		- nouveau système de cache mémoire : un peu plus rapide que le chargement normal
-	 * 		- possibilité de définir des items aléatoires à partir d'intems existant (et plus uniquement en répétant des propriétés)
-	 * 		- correction d'un bug lorsque le round n'a pas de limite de temps
-	 * 		- correction d'un bug lors du calcul des scores quand un joueur se fait tuer par le niveau (i.e. bombe anonyme)
-	 * 		- nouveau sytème de cache : image et sprites sont cachés séparément
-	 * 		- nouveau système permettant de définir des sprites comme des empilement de couches séparées
-	 * 		- simplification du système de suppression d'outil (on laisse le ramasse miette en faire plus, pas la peine de s'en charger manuellement)
-	 * 		- les sprites sans couleurs indexées peuvent maintenant avoir une couleur "NONE" (pr les bombes des niveaux)
+	 * 		- création d'une classe Instance pour gérer de façon plus pratique les feux/bombes/items
+	 *  	- généralisation du chargement des explosions (mutualisé plutot que de recommencer à chaque sprite)
+	 *  	- correction d'un bug dans le chargement des tournois simples
 	 * - GUI :
-	 * 		- correction d'un bug dans le menu des options avancées
-	 * 		- options avancées : (dés)activation du cache, réglage de la taille du cache
 	 * - IA :
+	 * 		- utilitaire permettant de controller les checkinterruptions dans les programmes des étudiants
 	 * - stats :
+	 * 		- possibilité d'exporter/importer les stats sous forme de fichier texte (pour quand on change les classes stat)
 	 * - Divers :
-	 * 		- outils de conception de niveaux (mais pas d'interface pour l'instant)
+	 * 		- renommage du package principal de fr.free.totalboumboum en org.totalboumboum
+	 * 		- mise à jour de l'année du copyright de 2008-2009 en 2008-2010
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -871,12 +876,7 @@ public class Launcher
 	 *   
 	 * - pb de réinitialisation : 
 	 * 		- jouer un tournoi single (par ex supercup) en entier
-	 * 		- jouer un tournoi de type cup en suivant : il y a un pb sur le MatchPanel, qui semble n'avoir pas été réinit à null
-	 * 
-	 *  - apparemment, y a un pb avec les GeneralAction, dont certaines définies dans les fichiers XML ne sont pas compatibles 
-	 *    avec la classe (en termes de circonstances) mais qui sont quand même chargées et initialisées normalement
-	 *  
-	 *  - il semblerait que les directions dans la SpecificAction et dans la GeneralAction correspondante ne soient pas les mêmes...
+	 * 		- jouer un tournoi de type cup en suivant : il y a un pb sur le MatchPanel, qui semble n'avoir pas été réinit à null 
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -884,6 +884,8 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/* TODO PRIORITÉ HAUTE
+	 * 
+	 * - faire un log automatique energistrant toutes positions, histoire d'avoir une trace des bugs
 	 * 
 	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
 	 * 
@@ -982,8 +984,6 @@ public class Launcher
 	 * 		  utile par exemple pour déterminer le nombre de fois qu'un bloc repousse (plutot que de le fixer dans le fichier XML), 
 	 * 		  ou la panne d'une bombe (plutot que de le faire pdt le jeu, et sans utiliser d'ablts spéciales)
 	 * 
-	 * - Niveaux
-	 * 		- outil pour découper une image (background) en nxm floors
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -991,10 +991,6 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/* TODO
-	 * 
-	 * - rajouter un bouton dans les options avancées pour vider manuellement le cache mémoire
-	 * 
-	 * - rajouter une confirmation (popup) quand on sort définitivement d'une partie (icone maison)
 	 * 
 	 * - 1ère exécution
 	 * 		- définir un popup d'informations
@@ -1025,10 +1021,7 @@ public class Launcher
 	 * 			- si les limites utilisent des points custom, les afficher aussi
 	 * 		- à la fin du round, faire apparaitre les résultats par transparence
 	 * 
-	 * - tournoi : 
-	 * 		1) on choisit les paramètres 
-	 * 		2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, 
-	 * 		   et restreint aussi les IA pour les mêmes raisons
+	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
 	 * 
 	 * - champ en plus 
 	 * 		- dans les profils : le classement du joueur, nbre de rouds gagnés/nbre de rounds joués
@@ -1090,9 +1083,13 @@ public class Launcher
 	 *	- GUI : 
 	 *  - tournois :
 	 *  	- championnat
+	 *  	- vidéos du tournoi
 	 *  - instances :
+	 *  	- que testent les niveaux utilisés dans les tournois ?
 	 *  
+	 *  x) tournoi (vidéo) + pas possible tête de série ni tournoi à 12
 	 *  x) utilitaire pour controler les IA des étudiants (partage 3/2)
+	 *  x) à quoi servent les niveaux
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1114,6 +1111,9 @@ public class Launcher
 	 * 			- avoir accès à l'identifiant de l'IA, et pas seulement à sa couleur
 	 * 		- renommer les packages des ia en fr.free.totalboumboum.ai.???? (faudra peut être renommer aussi les classes adapter)
 	 * 		- il faut gérer les chemins au niveau des pixels. les cases, c'est pas assez précis.
+	 * - qualification :
+	 * 		- plusieurs IA en même temps
+	 * 		- niveau avec plein de blocs contenant des bonus, pour voir s'ils perdent du temps à les ramasser
 	 * - définir une mesure factuelle (reposant sur des faits de jeu) évaluant l'agressivité des joueurs
 	 * 		- cible des bombes: rien, mur ou IA
 	 * 		- à pondérer avec le nombre de bombes posées par seconde (par ex)
@@ -1137,13 +1137,29 @@ public class Launcher
 	 *  	- possiblité de définir un tie-break random
 	 *  	- possibilité de définir un tie-break classement stats
 	 *  	- possibilité de définir des matches de classement optionnels (?)
+	 *  - tournoi AI : détourner le logo CL
+	 *  	- fond bleuté
+	 *  	- ballon étoilé >> bombe étoilée
+	 *  	- UEFA >> GSU
 	 *  
 	 *  - charger directement le format AI depuis le jeu permettrait de ne pas avoir à générer 50 images de couleurs différentes
+	 *  
+	 *  - définir un système permettant de charger uniquement les sprites nécessaires (zone, items, bombes)
+	 *  	> n'est ce pas incompatible avec la mise en cache ?
 	 *  
 	 *  - options pour les stats ?
 	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
 	 *  	- forcer la fin de la période (now)
+	 *  - optimisation du chargement :
+	 *  	- pas la peine de charger un niveau déjà en mémoire
+	 *  	- sprites ds persos à charger une seule fois lors du premier round d'un match
+	 *  	>> ouais mais pb d'échelle ! et charger en taille originale risque d'occuper trop de mémoire
+	 *  	>> p-ê charger et enregistrer dans fichier temp comme des objets java ? chargement devrait être plus rapide, à voir !
+	 *  	   mettre une option dans les options avancées pour forcer le rechargement ("cache sprites"), pour le débug
+	 *  	>> deux types de caches, en fait : (les deux sont indépendents)
+	 *  		- cache DD avec des objets java sérialisés
+	 *  		- cache mémoire avec les objets déjà chargés et à taille réelle. y a juste à les mettre à l'échelle
 	 *  - instance TBB
 	 *  	- autoriser un burning player à poser une dernière bombe...
 	 *  	- bombe sensible aux chocs : en forme d'oeuf
@@ -1156,27 +1172,36 @@ public class Launcher
 	 *  		- elles ne tuent pas, elles contaminent. 
 	 *  		- le contaminateur initial est résistant
 	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
-	 *  	- apparition des items : fumée+légèrement sur-élevé, puis l'item tombe par terre... (comm bug après cache v2)
+	 *  
+	 *  cache :
+	 *  	- pb de mise à l'échelle
+	 *  	- pb de ralentissement du jeu sur la mise en cache
+	 *  	- pas plus rapide que normal (clairement ! mais à mesurer avec jprofiler)
+	 *  	>> mise en cache mémoire au moins pour les joueurs ?
+	 *  all explosions should be loaded/stocked at the zone level, like fires and other general stuff
 	 */ 
 	
-	/**
+	/*
 	 * TODO
-	 * dans les fichiers XML animes et trajectoires : pr chaque dir/gesture,
-	 * possibilité (sous forme d'attribut) de redéfinir ou compléter
-	 * l'élément déjà défini dans un éventuel sprite abstrait. bien sur,
-	 * si pas déjà défini on fait un redefine pr défaut
+	 *  - pour tous ces trucs généraux, p-ê ne charger que ceux dont on a besoin :
+	 *  	- si déjà chargé, on utilise
+	 *  	- sinon on charge et on stocke dans l'accès statique
+	 *  - va y avoir un pb dans le finish des sprites et autres objets liés à l'instance... : il n'existeront plus, donc on ne pourra plus les utiliser
+	 */
+		
+	/* transformer les fonctions d'édition/génération de niveau en un utilitaire basique
+	 * rajouter des fonction pour 
+	 * 	- insérer/supprimer des lignes
+	 * 	- mettre une bordure
+	 *  - mettre un fond avec des sols
+	 *  - décaller le sol/les blocs/les items/les bombes/les variables
+	 *  
+	 *  - découper une image en nxm floors
 	 */
 	
-	/**
-	 * TODO
-	 * quand on interrompt un round,
-	 * les points sont calculés normalement pr les IA
-	 * et les joueurs humains sont tous ex-aequo derniers
-	 * (voire tout le monde ex-aequo?)
+	/*
+	 * couleurs dans les fichiers XML: rajouter une couleur neutre pour les bombes du niveau
 	 */
 
-	/**
-	 * TODO faire une appli propre pour générer les niveaux
-	 * mettre une jolie doc en ligne de commande pour exécuter tout ça
-	 */
+	// vérifier s'il ne serait pas nécessaire de modifier le script de compilation sous linux
 }

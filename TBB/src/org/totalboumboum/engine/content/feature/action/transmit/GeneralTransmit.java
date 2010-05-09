@@ -32,6 +32,7 @@ import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
+
 public class GeneralTransmit extends GeneralAction
 {	private static final long serialVersionUID = 1L;
 
@@ -171,11 +172,12 @@ public class GeneralTransmit extends GeneralAction
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public GeneralTransmit copy()
-	{	GeneralTransmit result = new GeneralTransmit();
-		super.copy(result);
-		return result;
+	@Override
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
 	}
 }

@@ -32,6 +32,7 @@ import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
+
 /** 
  * action volontaire de brûler (par exemple explosion timer pr une bombe)
  * action de créer une explosion, alors que consume = fait de brûler(?)
@@ -210,11 +211,12 @@ public class GeneralDetonate extends GeneralAction
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// COPY			/////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public GeneralDetonate copy()
-	{	GeneralDetonate result = new GeneralDetonate();
-		super.copy(result);
-		return result;
+	@Override
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
 	}
 }

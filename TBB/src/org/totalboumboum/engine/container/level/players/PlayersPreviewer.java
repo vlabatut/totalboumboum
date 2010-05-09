@@ -35,7 +35,6 @@ import org.jdom.Element;
 import org.totalboumboum.engine.container.level.preview.LevelPreview;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -75,11 +74,11 @@ public class PlayersPreviewer
     {	// init
     	Element element;
     	// locations
-    	element = root.getChild(XmlNames.LOCATIONS);
+    	element = root.getChild(XmlTools.LOCATIONS);
     	loadLocationsElement(element,result);
     	// items
     	if(!onlyAllowedPlayers)
-    	{	element = root.getChild(XmlNames.ITEMS);
+    	{	element = root.getChild(XmlTools.ITEMS);
     		loadItemsElement(element,result);
     	}
     }
@@ -87,11 +86,11 @@ public class PlayersPreviewer
     @SuppressWarnings("unchecked")
 	private static void loadLocationsElement(Element root, LevelPreview result)
     {	Set<Integer> allowedPlayersNumber = new TreeSet<Integer>();
-    	List<Element> elements = root.getChildren(XmlNames.CASE);
+    	List<Element> elements = root.getChildren(XmlTools.CASE);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			String valStr = temp.getAttribute(XmlNames.PLAYERS).getValue().trim();
+			String valStr = temp.getAttribute(XmlTools.PLAYERS).getValue().trim();
 			int value = Integer.valueOf(valStr);
 			allowedPlayersNumber.add(value);
 		}
@@ -101,12 +100,12 @@ public class PlayersPreviewer
     @SuppressWarnings("unchecked")
     private static void loadItemsElement(Element root, LevelPreview result)
     {	HashMap<String,Integer> initialItems = new HashMap<String, Integer>();
-    	List<Element> elements = root.getChildren(XmlNames.ITEM);
+    	List<Element> elements = root.getChildren(XmlTools.ITEM);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			String str = temp.getAttribute(XmlNames.NAME).getValue().trim();
-			String nbrStr = temp.getAttribute(XmlNames.NUMBER).getValue().trim();
+			String str = temp.getAttribute(XmlTools.NAME).getValue().trim();
+			String nbrStr = temp.getAttribute(XmlTools.NUMBER).getValue().trim();
 			int number = Integer.valueOf(nbrStr);
 			initialItems.put(str,number);
 		}

@@ -21,13 +21,17 @@ package org.totalboumboum.engine.content.sprite.item;
  * 
  */
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 import org.totalboumboum.engine.content.sprite.item.ItemEventManager;
+
 
 public class ItemFactory extends SpriteFactory<Item>
 {	private static final long serialVersionUID = 1L;
@@ -37,65 +41,83 @@ public class ItemFactory extends SpriteFactory<Item>
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// ABILITIES / ITEMREFS	/////////////////////////////////////////
+	// GESTURE PACK		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
+	static
+	{	// APPEARING
+		// BOUNCING
+		// BURNING
+		animeReplacements.put(GestureName.BURNING,null);
+		// CRYING
+		// EXULTING
+		// HIDING
+		animeReplacements.put(GestureName.HIDING,GestureName.NONE);
+		// JUMPING
+		// LANDING
+		// OSCILLATING
+		// OSCILLATING_FAILING
+		// PUNCHED
+		// PUNCHING
+		// PUSHING
+		// RELEASED
+		animeReplacements.put(GestureName.RELEASED,GestureName.APPEARING);
+		// SLIDING
+		// SLIDING_FAILING
+		// SPAWNING
+		// STANDING
+		animeReplacements.put(GestureName.STANDING,null);
+		// STANDING_FAILING
+		// WAITING
+		// WALKING		
+	}
+	
+	public static HashMap<GestureName,GestureName> getAnimeReplacements()
+	{	return animeReplacements;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** abilities given by this item */
-	protected List<List<AbstractAbility>> itemAbilities;
-	/** alternatively: existing bonuses given by this item */
-	protected List<String> itemrefs;
+	private ArrayList<ArrayList<AbstractAbility>> itemAbilities;
 	/** probability associated to the list of abilities **/
-	protected List<Float> itemProbabilities;
+	private ArrayList<Float> itemProbabilities;
 	
-	public void setItemAbilities(List<List<AbstractAbility>> itemAbilities, List<String> itemref, List<Float> itemProbabilities)
+	public void setItemAbilities(ArrayList<ArrayList<AbstractAbility>> itemAbilities, ArrayList<Float> itemProbabilities)
 	{	this.itemAbilities = itemAbilities;
-		this.itemrefs = itemref;
 		this.itemProbabilities = itemProbabilities;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected String itemName;
+	private String itemName;
 	
 	public Item makeSprite(Tile tile)
 	{	// init
 		Item result = new Item();
-		List<AbstractAbility> abilities = null;
-		double proba = Math.random();
-//System.out.println("name: "+itemName+" proba: "+proba);		
-		double total = 0;
-		int index = 0;
-
+		
 		// common managers
 		initSprite(result);
 	
 		// specific managers
 		// item abilities
-		if(itemAbilities.isEmpty())
-		{	String name = null;
-			while(index<itemrefs.size() && name==null)
-			{	total = total + itemProbabilities.get(index);
-				if(proba<total)
-					name = itemrefs.get(index);
-				else
-					index ++;
-			}
-//System.out.println("name: "+name);			
-			Item itm = instance.getItemset().makeItem(name,tile);
-			abilities = itm.getItemAbilities();
+		double proba = Math.random();
+//System.out.println("name: "+itemName+" proba: "+proba);		
+		double total = 0;
+		int index = 0;
+		ArrayList<AbstractAbility> abilities = null;
+		while(index<itemAbilities.size() && abilities==null)
+		{	total = total + itemProbabilities.get(index);
+			if(proba<total)
+				abilities = itemAbilities.get(index);
+			else
+				index ++;
 		}
-		else
-		{	while(index<itemAbilities.size() && abilities==null)
-			{	total = total + itemProbabilities.get(index);
-				if(proba<total)
-					abilities = itemAbilities.get(index);
-				else
-					index ++;
-			}
 //for(AbstractAbility a: abilities)
 //if(a instanceof StateAbility)
 //System.out.println("\t- "+((StateAbility)a).getName()+", : "+a.getStrength());
-		}
 		result.initItemAbilities(abilities);
 		// event
 		EventManager eventManager = new ItemEventManager(result);
@@ -103,8 +125,62 @@ public class ItemFactory extends SpriteFactory<Item>
 		
 		// result
 		result.setItemName(itemName);
-		result.initSprite(tile);		
-		
+		result.initSprite(tile);
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			// item abilities
+			{	for(ArrayList<AbstractAbility> list: itemAbilities)
+				{	Iterator<AbstractAbility> it = list.iterator();
+					while(it.hasNext())
+					{	AbstractAbility temp = it.next();
+						temp.finish();
+						it.remove();
+					}
+				}
+				itemAbilities.clear();
+				itemProbabilities.clear();
+			}
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+/*	public ItemFactory cacheCopy(double zoomFactor)
+	{	ItemFactory result = new ItemFactory(itemName);
+		
+		// misc
+		result.base = base;
+		result.name = name;
+		
+		// item abilities
+		result.itemAbilities = itemAbilities;
+		result.itemProbabilities = itemProbabilities;
+		
+		// abilities
+		result.setAbilities(abilities);
+		
+		// bombset
+		Bombset bombsetCopy = bombset.cacheCopy();
+		result.setBombset(bombsetCopy);
+		
+		// explosion
+		if(explosion!=null)
+		{	Explosion explosionCopy = explosion.cacheCopy();
+			result.setExplosion(explosionCopy);
+		}
+		
+		// gestures
+		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		result.setGesturePack(gesturePackCopy);
+
+		return result;
+	}*/
 }

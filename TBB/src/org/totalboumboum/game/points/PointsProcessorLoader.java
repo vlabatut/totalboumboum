@@ -35,7 +35,6 @@ import org.totalboumboum.game.match.MatchLoader;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -45,10 +44,10 @@ public class PointsProcessorLoader
     public static PointsProcessor loadPointProcessorFromElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	PointsProcessor result;
 		// local
-		String localStr = root.getAttribute(XmlNames.LOCAL).getValue().trim();
+		String localStr = root.getAttribute(XmlTools.LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
 		// name
-		String name = root.getAttribute(XmlNames.NAME).getValue();
+		String name = root.getAttribute(XmlTools.NAME).getValue();
 		// loading
 		if(local)
 		{	folder = folder+File.separator+name;
@@ -95,7 +94,7 @@ public class PointsProcessorLoader
 		element = elts.get(1);
 		result = loadGeneralPointElement(element);
 		// notes
-		element = root.getChild(XmlNames.NOTES);
+		element = root.getChild(XmlTools.NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		//
@@ -106,34 +105,34 @@ public class PointsProcessorLoader
 	{	PointsProcessor result = null;
 		String type = root.getName();
 
-		if(type.equals(XmlNames.TOTAL))
+		if(type.equals(XmlTools.TOTAL))
 			result = loadTotalElement(root);
 
-		else if(type.equals(XmlNames.SCORES))
+		else if(type.equals(XmlTools.SCORES))
 			result = loadScoresElement(root);
-		else if(type.equals(XmlNames.CONSTANT))
+		else if(type.equals(XmlTools.CONSTANT))
 			result = loadConstantElement(root);
 
-		else if(type.equals(XmlNames.MAXIMUM))
+		else if(type.equals(XmlTools.MAXIMUM))
 			result = loadMaximumElement(root);
-		else if(type.equals(XmlNames.MINIMUM))
+		else if(type.equals(XmlTools.MINIMUM))
 			result = loadMinimumElement(root);		
-		else if(type.equals(XmlNames.SUMMATION))
+		else if(type.equals(XmlTools.SUMMATION))
 			result = loadSummationElement(root);
-		else if(type.equals(XmlNames.RANKINGS))
+		else if(type.equals(XmlTools.RANKINGS))
 			result = loadRankingsElement(root);
-		else if(type.equals(XmlNames.DISCRETIZE))
+		else if(type.equals(XmlTools.DISCRETIZE))
 			result = loadDiscretizeElement(root);
-		else if(type.equals(XmlNames.RANKPOINTS))
+		else if(type.equals(XmlTools.RANKPOINTS))
 			result = loadRankpointsElement(root);
 		
-		else if(type.equals(XmlNames.ADDITION))
+		else if(type.equals(XmlTools.ADDITION))
 			result = loadAdditionElement(root);
-		else if(type.equals(XmlNames.SUBTRACTION))
+		else if(type.equals(XmlTools.SUBTRACTION))
 			result = loadSubtractionElement(root);
-		else if(type.equals(XmlNames.MULTIPLICATION))
+		else if(type.equals(XmlTools.MULTIPLICATION))
 			result = loadMultiplicationElement(root);
-		else if(type.equals(XmlNames.DIVISION))
+		else if(type.equals(XmlTools.DIVISION))
 			result = loadDivisionElement(root);
 		
 		return result;
@@ -146,7 +145,7 @@ public class PointsProcessorLoader
 
 	private static PointsScores loadScoresElement(Element root)
 	{	// type
-		String str = root.getAttribute(XmlNames.TYPE).getValue();
+		String str = root.getAttribute(XmlTools.TYPE).getValue();
 		Score score  = Score.valueOf(str.toUpperCase(Locale.ENGLISH).trim());
 		// result
 		PointsScores result = new PointsScores(score);
@@ -154,7 +153,7 @@ public class PointsProcessorLoader
 	}
 	private static PointsConstant loadConstantElement(Element root)
 	{	// value
-		String str = root.getAttribute(XmlNames.VALUE).getValue();
+		String str = root.getAttribute(XmlTools.VALUE).getValue();
 		float value = Float.valueOf(str);
 		// result
 		PointsConstant result = new PointsConstant(value);
@@ -188,7 +187,7 @@ public class PointsProcessorLoader
 	@SuppressWarnings("unchecked")
 	private static PointsRankings loadRankingsElement(Element root)
 	{	// invert
-		String str = root.getAttribute(XmlNames.INVERT).getValue();
+		String str = root.getAttribute(XmlTools.INVERT).getValue();
 		boolean invert = Boolean.valueOf(str);
 		// sources
 		ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
@@ -209,22 +208,22 @@ public class PointsProcessorLoader
 		Element src = (Element) root.getChildren().get(0);
 		PointsProcessor source = loadGeneralPointElement(src);
 		// thresholds
-		Element thresholdsElt = root.getChild(XmlNames.THRESHOLDS);
-		List<Element> thresholds = thresholdsElt.getChildren(XmlNames.THRESHOLD);
+		Element thresholdsElt = root.getChild(XmlTools.THRESHOLDS);
+		List<Element> thresholds = thresholdsElt.getChildren(XmlTools.THRESHOLD);
 		float thresh[] = new float[thresholds.size()];
 		for(int i=0;i<thresh.length;i++)
 		{	Element temp = thresholds.get(i);
-			String str = temp.getAttribute(XmlNames.VALUE).getValue();
+			String str = temp.getAttribute(XmlTools.VALUE).getValue();
 			float value = Float.valueOf(str);
 			thresh[i] = value;
 		}
 		// values
-		Element valuesElt = root.getChild(XmlNames.VALUES);
-		List<Element> values = valuesElt.getChildren(XmlNames.VALUE);
+		Element valuesElt = root.getChild(XmlTools.VALUES);
+		List<Element> values = valuesElt.getChildren(XmlTools.VALUE);
 		float vals[] = new float[values.size()];
 		for(int i=0;i<vals.length;i++)
 		{	Element temp = values.get(i);
-			String str = temp.getAttribute(XmlNames.VALUE).getValue();
+			String str = temp.getAttribute(XmlTools.VALUE).getValue();
 			float value = Float.valueOf(str);
 			vals[i] = value;
 		}
@@ -235,13 +234,13 @@ public class PointsProcessorLoader
 	@SuppressWarnings("unchecked")
 	private static PointsRankpoints loadRankpointsElement(Element root)
 	{	// share
-		String str = root.getAttribute(XmlNames.EXAEQUO_SHARE).getValue();
+		String str = root.getAttribute(XmlTools.EXAEQUO_SHARE).getValue();
 		boolean exaequoShare = Boolean.valueOf(str);
 		// invert
-		str = root.getAttribute(XmlNames.INVERT).getValue();
+		str = root.getAttribute(XmlTools.INVERT).getValue();
 		boolean invert = Boolean.valueOf(str);
 		// sources
-		Element rankingsElt = root.getChild(XmlNames.RANKINGS);
+		Element rankingsElt = root.getChild(XmlTools.RANKINGS);
 		ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
 		List<Element> srcs = rankingsElt.getChildren();
 		Iterator<Element> it = srcs.iterator();
@@ -251,12 +250,12 @@ public class PointsProcessorLoader
 			sources.add(source);
 		}
 		// values
-		Element valuesElt = root.getChild(XmlNames.VALUES);
-		List<Element> values = valuesElt.getChildren(XmlNames.VALUE);
+		Element valuesElt = root.getChild(XmlTools.VALUES);
+		List<Element> values = valuesElt.getChildren(XmlTools.VALUE);
 		float vals[] = new float[values.size()];
 		for(int i=0;i<vals.length;i++)
 		{	Element temp = values.get(i);
-			str = temp.getAttribute(XmlNames.VALUE).getValue();
+			str = temp.getAttribute(XmlTools.VALUE).getValue();
 			float value = Float.valueOf(str);
 			vals[i] = value;
 		}

@@ -23,6 +23,8 @@ package org.totalboumboum.engine.container.itemset;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -32,12 +34,18 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
 import org.xml.sax.SAXException;
 
-public class Itemset extends AbstractItemset
+
+
+public class Itemset
 {	
+	public Itemset()
+	{	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient Instance instance = null;
+	private Instance instance = null;
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
@@ -67,4 +75,40 @@ if(itemFactory==null)
 		//result.initGesture();
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// factories
+			{	Iterator<Entry<String,ItemFactory>> it = itemFactories.entrySet().iterator();
+				while(it.hasNext())
+				{	Entry<String,ItemFactory> t = it.next();
+					ItemFactory temp = t.getValue();
+					temp.finish();
+					it.remove();
+				}
+			}
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+/*	public Itemset cacheCopy(double zoomFactor)
+	{	Itemset result = new Itemset();
+	
+		// items
+		for(Entry<String,ItemFactory> entry: itemFactories.entrySet())
+		{	String key = entry.getKey();
+			ItemFactory itemFactory = entry.getValue().cacheCopy(zoomFactor);
+			result.addItemFactory(key,itemFactory);
+		}
+		
+		return result;
+	}*/
 }

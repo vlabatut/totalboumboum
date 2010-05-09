@@ -31,7 +31,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -50,16 +49,16 @@ public class ProfilesConfigurationLoader
 
 	private static void loadProfilesElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// general
-		Element generalElement = root.getChild(XmlNames.GENERAL);
+		Element generalElement = root.getChild(XmlTools.GENERAL);
 		loadGeneralElement(generalElement,result);
 		// list
-		Element listElement = root.getChild(XmlNames.LIST);
+		Element listElement = root.getChild(XmlTools.LIST);
 		loadListElement(listElement,result);
 	}
 
 	@SuppressWarnings("unchecked")
 	private static void loadListElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	List<Element> elements = root.getChildren(XmlNames.PROFILE);
+	{	List<Element> elements = root.getChildren(XmlTools.PROFILE);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -68,14 +67,14 @@ public class ProfilesConfigurationLoader
 	}
 		
 	private static void loadProfileElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	String idStr = root.getAttribute(XmlNames.FILE).getValue().trim();
+	{	String idStr = root.getAttribute(XmlTools.FILE).getValue().trim();
 		Integer id = Integer.parseInt(idStr);
-		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
+		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
 		result.addProfile(id,name);	
 	}
 
 	private static void loadGeneralElement(Element root, ProfilesConfiguration result)
-	{	String lastProfileStr = root.getAttribute(XmlNames.LAST).getValue().trim();
+	{	String lastProfileStr = root.getAttribute(XmlTools.LAST).getValue().trim();
 		int lastProfile = Integer.parseInt(lastProfileStr);
 		result.setLastProfileIndex(lastProfile);
 	}

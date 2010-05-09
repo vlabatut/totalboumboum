@@ -22,9 +22,9 @@ package org.totalboumboum.engine.container.bombset;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -37,12 +37,19 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.xml.sax.SAXException;
 
-public class Bombset extends AbstractBombset
-{	
+
+public class Bombset implements Serializable
+{	private static final long serialVersionUID = 1L;
+
+	public Bombset()
+	{	bombFactories = new ArrayList<BombFactory>();
+		requiredAbilities = new ArrayList<ArrayList<StateAbility>>();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient Instance instance = null;
+	private Instance instance = null;
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
@@ -55,16 +62,26 @@ public class Bombset extends AbstractBombset
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// BOMB FACTORIES	/////////////////////////////////////////////
+	// REQUIRED ABILITIES		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected List<BombFactory> bombFactories = new ArrayList<BombFactory>();
+	private ArrayList<ArrayList<StateAbility>> requiredAbilities;
 	
 	@SuppressWarnings("unused")
-	private void setBombFactories(List<BombFactory> bombFactories)
+	private void setRequiredAbilities(ArrayList<ArrayList<StateAbility>> requiredAbilities)
+	{	this.requiredAbilities = requiredAbilities;
+	}
+		
+	/////////////////////////////////////////////////////////////////
+	// BOMB FACTORIES	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<BombFactory> bombFactories;
+	
+	@SuppressWarnings("unused")
+	private void setBombFactories(ArrayList<BombFactory> bombFactories)
 	{	this.bombFactories = bombFactories;
 	}
 	
-	public void addBombFactory(BombFactory bombFactory, List<StateAbility> abilities)
+	public void addBombFactory(BombFactory bombFactory, ArrayList<StateAbility> abilities)
 	{	bombFactories.add(bombFactory);
 		requiredAbilities.add(abilities);
 	}
@@ -77,10 +94,10 @@ public class Bombset extends AbstractBombset
 	public Bomb makeBomb(Sprite sprite)
 	{	Bomb result = null;
 		Tile tile = sprite.getTile();
-		Iterator<List<StateAbility>> i = requiredAbilities.iterator();
+		Iterator<ArrayList<StateAbility>> i = requiredAbilities.iterator();
 		int ind = 0;
 		while(result==null && i.hasNext())
-		{	List<StateAbility> abilities = i.next();
+		{	ArrayList<StateAbility> abilities = i.next();
 			Iterator<StateAbility> j = abilities.iterator();
 			boolean goOn = true;
 			while(goOn && j.hasNext())
@@ -143,5 +160,70 @@ public class Bombset extends AbstractBombset
 				result = temp;
 		}
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Bombset copy()
+	{	Bombset result = new Bombset();
+		for(int i=0;i<bombFactories.size();i++)
+		{	BombFactory bf = bombFactories.get(i).copy();
+			ArrayList<StateAbility> ra = requiredAbilities.get(i);
+			result.addBombFactory(bf,ra);
+		}
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/*
+	 * the Bombset has already been copied/loaded, so it is taken from the level
+	 */
+/*	public Bombset cacheCopy()
+	{	Bombset result = RoundVariables.level.getBombset();
+		return result;
+	}
+	public Bombset cacheCopy(double zoomFactor)
+	{	Bombset result = new Bombset();
+		for(int i=0;i<bombFactories.size();i++)
+		{	BombFactory bf = bombFactories.get(i).cacheCopy(zoomFactor,result);
+			ArrayList<StateAbility> ra = requiredAbilities.get(i);
+			result.addBombFactory(bf,ra);
+		}
+		return result;
+	}
+*/	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// factories
+			{	Iterator<BombFactory> it = bombFactories.iterator();
+				while(it.hasNext())
+				{	BombFactory temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// abilities
+			{	Iterator<ArrayList<StateAbility>> it = requiredAbilities.iterator();
+				while(it.hasNext())
+				{	ArrayList<StateAbility> temp = it.next();
+					Iterator<StateAbility> it2 = temp.iterator();
+					while(it2.hasNext())
+					{	StateAbility temp2 = it2.next();
+						temp2.finish();
+						it2.remove();
+					}
+					it.remove();
+				}
+			}
+		}
 	}
 }

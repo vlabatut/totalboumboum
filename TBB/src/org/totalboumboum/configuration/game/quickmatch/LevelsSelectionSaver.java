@@ -22,7 +22,7 @@ package org.totalboumboum.configuration.game.quickmatch;
  */
 
 import org.jdom.Element;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class LevelsSelectionSaver
@@ -36,13 +36,13 @@ public class LevelsSelectionSaver
 	}
 	
 	private static Element saveLevelElement(int index, LevelsSelection levelsSelection)
-	{	Element result = new Element(XmlNames.LEVEL);
+	{	Element result = new Element(XmlTools.LEVEL);
 		// folder pack
 		String packName = levelsSelection.getPackName(index);
-		result.setAttribute(XmlNames.PACK,packName);
+		result.setAttribute(XmlTools.PACK,packName);
 		// folder name
 		String folderName = levelsSelection.getFolderName(index);
-		result.setAttribute(XmlNames.FOLDER,folderName);
+		result.setAttribute(XmlTools.FOLDER,folderName);
 		//
 		return result;
 	}

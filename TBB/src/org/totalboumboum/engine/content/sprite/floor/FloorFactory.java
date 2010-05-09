@@ -21,12 +21,50 @@ package org.totalboumboum.engine.content.sprite.floor;
  * 
  */
 
+import java.util.HashMap;
+
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 
+
 public class FloorFactory extends SpriteFactory<Floor>
-{	
+{	private static final long serialVersionUID = 1L;
+
+	/////////////////////////////////////////////////////////////////
+	// GESTURE PACK		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
+	static
+	{	// APPEARING
+		// BOUNCING
+		// BURNING
+		// CRYING
+		// EXULTING
+		// HIDING
+		// JUMPING
+		// LANDING
+		// OSCILLATING
+		// OSCILLATING_FAILING
+		// PUNCHED
+		// PUNCHING
+		// PUSHING
+		// RELEASED
+		// SLIDING
+		// SLIDING_FAILING
+		// SPAWNING
+		// STANDING
+		animeReplacements.put(GestureName.STANDING,null);
+		// STANDING_FAILING
+		// WAITING
+		// WALKING		
+	}
+	
+	public static HashMap<GestureName,GestureName> getAnimeReplacements()
+	{	return animeReplacements;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -46,4 +84,43 @@ public class FloorFactory extends SpriteFactory<Floor>
 		result.initSprite(tile);
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+/*	public FloorFactory cacheCopy(double zoomFactor)
+	{	FloorFactory result = new FloorFactory();
+		
+		// misc
+		result.base = base;
+		result.name = name;
+		
+		// abilities
+		result.setAbilities(abilities);
+		
+		// bombset
+		Bombset bombsetCopy = bombset.cacheCopy();
+		result.setBombset(bombsetCopy);
+		
+		// explosion
+		if(explosion!=null)
+		{	Explosion explosionCopy = explosion.cacheCopy();
+			result.setExplosion(explosionCopy);
+		}
+		
+		// gestures
+		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		result.setGesturePack(gesturePackCopy);
+
+		return result;
+	}*/
 }

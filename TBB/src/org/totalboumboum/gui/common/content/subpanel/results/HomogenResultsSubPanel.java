@@ -43,8 +43,9 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
-import org.totalboumboum.tools.time.TimeTools;
-import org.totalboumboum.tools.time.TimeUnit;
+import org.totalboumboum.tools.strings.StringTools;
+import org.totalboumboum.tools.strings.StringTools.TimeUnit;
+
 
 public class HomogenResultsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
@@ -263,7 +264,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 				}			
 				// time
 				if(showTime)
-				{	String text = TimeTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
+				{	String text = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;

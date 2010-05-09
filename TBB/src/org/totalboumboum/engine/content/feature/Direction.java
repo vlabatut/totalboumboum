@@ -28,7 +28,7 @@ import java.util.Locale;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.tools.calculus.CalculusTools;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public enum Direction implements Serializable
@@ -539,7 +539,7 @@ public enum Direction implements Serializable
 		String directionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 		String[] directionsStr = directionStr.split(" ");
 		for(String str: directionsStr)
-		{	if(str.equalsIgnoreCase(XmlNames.VAL_SOME))
+		{	if(str.equalsIgnoreCase(XmlTools.VAL_SOME))
 			{	result.add(Direction.UP);
 				result.add(Direction.UPRIGHT);
 				result.add(Direction.RIGHT);
@@ -549,7 +549,7 @@ public enum Direction implements Serializable
 				result.add(Direction.LEFT);
 				result.add(Direction.UPLEFT);
 			}
-			else if(str.equalsIgnoreCase(XmlNames.VAL_ANY))
+			else if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
 			{	result.add(Direction.UP);
 				result.add(Direction.UPRIGHT);
 				result.add(Direction.RIGHT);

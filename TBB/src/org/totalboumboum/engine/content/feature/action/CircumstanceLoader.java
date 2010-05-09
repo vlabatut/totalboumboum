@@ -27,26 +27,26 @@ import org.jdom.Element;
 import org.totalboumboum.engine.content.feature.Contact;
 import org.totalboumboum.engine.content.feature.Orientation;
 import org.totalboumboum.engine.content.feature.TilePosition;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class CircumstanceLoader
 {		
 	public static void loadCircumstanceElement(Element root, Circumstance result) throws ClassNotFoundException
     {	// contacts
-		{	ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlNames.CONTACT);
+		{	ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlTools.CONTACT);
 			for(Contact contact: contacts)
 				result.addContact(contact);
 		}
 		
 		// tilePositions
-		{	ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlNames.TILE_POSITION);
+		{	ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.TILE_POSITION);
 			for(TilePosition tilePosition: tilePositions)
 				result.addTilePosition(tilePosition);
 		}
 		
 		// orientations
-		{	ArrayList<Orientation> orientations = Orientation.loadOrientationsAttribute(root,XmlNames.ORIENTATION);
+		{	ArrayList<Orientation> orientations = Orientation.loadOrientationsAttribute(root,XmlTools.ORIENTATION);
 			for(Orientation orientation: orientations)
 				result.addOrientation(orientation);
 		}

@@ -22,9 +22,7 @@ package org.totalboumboum.engine.content.manager.anime;
  */
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -32,9 +30,8 @@ import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
-import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
-import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
-import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
+import org.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
+import org.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.tools.images.ImageTools;
 
@@ -77,9 +74,10 @@ public class AnimeManager
 	private float visibleProbability = 0.02f;
 	
 	
-	/////////////////////////////////////////////////////////////////
-	// INIT					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * INIT
+ * ********************************
+ */	
 	public AnimeManager(Sprite sprite)
 	{	this.sprite = sprite;
 	} 
@@ -185,9 +183,10 @@ public class AnimeManager
 		}
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// UPDATE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * UPDATE
+ * ********************************
+ */	
 	/**
 	 * méthode appelée à chaque itération : 
 	 * met à jour l'image à afficher
@@ -289,9 +288,11 @@ public class AnimeManager
 		while(nextTime<animeTime && i.hasNext());
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// TIME					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * TIME
+ * ********************************
+ */	
+
 	/**
 	 * renvoie la durée totale prévue pour l'animation.
 	 * @return
@@ -304,59 +305,54 @@ public class AnimeManager
 	}
 	
 	
-	/////////////////////////////////////////////////////////////////
-	// SHADOW				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * SHADOW
+ * ********************************
+ */	
 	public boolean hasShadow()
 	{	return currentStep.hasShadow();	
 	}
 	
-	public StepImage getShadow()
-	{	StepImage result = null;
+	public BufferedImage getShadow()
+	{	BufferedImage result = null;
 		if(!invisible)
 		{	result = currentStep.getShadow();
 			if(result!=null && twinkleChange)
 			{	if(twinkleColor==null)
 					result = null;
 				else
-				{	result = result.copy();
-					BufferedImage image = result.getImage();
-					image = ImageTools.getFilledImage(image,twinkleColor);
-					result.setImage(image);
-				
-				}
+					result = ImageTools.getFilledImage(result,twinkleColor);
 			}
 		}
 		//result = ImageTools.getDarkenedImage(result,blinkParam);
 		return result;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// MISC					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	public double getShadowXShift()
+	{	return currentStep.getShadowXShift();
+	}
+	
+	public double getShadowYShift()
+	{	return currentStep.getShadowYShift();
+	}
+	
+/* ********************************
+ * MISC
+ * ********************************
+ */	
 	/**
 	 * renvoie l'image à afficher 
 	 * @return
 	 */
-	public List<StepImage> getCurrentImages()
-	{	List<StepImage> result = new ArrayList<StepImage>();
+	public BufferedImage getCurrentImage()
+	{	BufferedImage result = null;
 		if(!invisible)
-		{	result = currentStep.getImages();
-			if(!result.isEmpty() && twinkleChange)
+		{	result = currentStep.getImage();
+			if(result!=null && twinkleChange)
 			{	if(twinkleColor==null)
-					result = new ArrayList<StepImage>();
+					result = null;
 				else
-				{	List<StepImage> temp = new ArrayList<StepImage>();
-					for(StepImage stepImage: result)
-					{	BufferedImage image = stepImage.getImage();
-						double xSft = stepImage.getXShift();
-						double ySft = stepImage.getYShift();
-						BufferedImage imageCopy = ImageTools.getFilledImage(image,twinkleColor);
-						StepImage stepImageCopy = new StepImage(imageCopy,xSft,ySft);
-						temp.add(stepImageCopy);
-					}
-					result = temp;
-				}
+					result = ImageTools.getFilledImage(result,twinkleColor);
 			}
 		}
 		//result = ImageTools.getDarkenedImage(result,blinkParam);
@@ -371,9 +367,24 @@ public class AnimeManager
 	{	return currentDirection;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// BOUND				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * POSITION
+ * ********************************
+ */	
+	public double getXShift()
+	{	return currentStep.getXShift();
+	}
+	public double getYShift()
+	{	double result = currentStep.getYShift();
+		if(isBoundToSprite())
+			result = result + currentStep.getBoundYShift().getValue(getBoundToSprite());
+		return result;
+	}
+	
+/* ********************************
+ * BOUND
+ * ********************************
+ */	
 	public double getBoundHeight()
 	{	return currentAnime.getBoundHeight();
 	}
@@ -384,5 +395,23 @@ public class AnimeManager
 	
 	private boolean isBoundToSprite()
 	{	return sprite.isBoundToSprite();
+	}
+
+
+
+/* ********************************
+ * FINISHED
+ * ********************************
+ */	
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// misc
+			currentAnime = null;
+			currentStep = null;
+			sprite = null;
+		}
 	}
 }

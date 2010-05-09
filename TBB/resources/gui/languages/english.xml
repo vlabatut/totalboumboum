@@ -170,16 +170,6 @@
 						<text name="Disabled" value="Disabled" tooltip="Automatic FPS is disabled" />
 						<text name="Enabled" value="Enabled" tooltip="Automatic FPS is enabled" />
 					</group>
-					<group name="Cache">
-						<text name="Title" value="Memory cache" tooltip="Cache sprites in memory (in order to speed up loading)" />
-						<text name="Disabled" value="Disabled" tooltip="Memory caching is disabled" />
-						<text name="Enabled" value="Enabled" tooltip="Memory caching is enabled" />
-					</group>
-					<group name="CacheLimit">
-						<text name="Title" value="Cache size" tooltip="Maximal size of the memory cache, in Mb" />
-						<text name="Plus" value="Plus" tooltip="Increase memory cache size" />
-						<text name="Minus" value="Minus" tooltip="Decrease memory cache size" />
-					</group>
 					<group name="Fps">
 						<text name="Title" value="FPS" tooltip="Frames per second rate" />
 						<text name="Plus" value="Plus" tooltip="Increase the frames per second rate" />

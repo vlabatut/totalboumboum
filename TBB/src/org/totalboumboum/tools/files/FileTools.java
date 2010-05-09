@@ -76,27 +76,15 @@ public class FileTools
 		}
 		// or bit-to-bit copy a file
 		else
-		{	copyFile(source,target);
+		{	FileInputStream in = new FileInputStream(source);
+			FileOutputStream out = new FileOutputStream(target);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len=in.read(buf))>0)
+            	out.write(buf, 0, len);
+            in.close();
+            out.close();
         }
-	}
-	
-	public static void copyFile(File source, File target) throws IOException
-	{	FileInputStream in = new FileInputStream(source);
-		FileOutputStream out = new FileOutputStream(target);
-        byte[] buf = new byte[1024];
-        int len;
-        
-        while ((len=in.read(buf))>0)
-        	out.write(buf, 0, len);
-        
-        in.close();
-        out.close();
-	}
-
-	public static void copyFile(String source, String target) throws IOException
-	{	File fileSource = new File(source);
-		File fileTarget = new File(target);
-		copyFile(fileSource,fileTarget);
 	}
 	
 	public static String getFilenameCompatibleCurrentTime()

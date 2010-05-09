@@ -112,7 +112,6 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 		percepts = null;
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.finish();
-		
 		// misc
 		loop = null;
 		level = null;

@@ -24,7 +24,6 @@ package org.totalboumboum.engine.content.manager.item;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.totalboumboum.engine.container.itemset.Itemset;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -118,7 +117,7 @@ public class ItemManager
 		list.offer(item);
 
 		// update roles in abilities
-		List<AbstractAbility> ab = item.getItemAbilities();
+		ArrayList<AbstractAbility> ab = item.getItemAbilities();
 		Iterator<AbstractAbility> i = ab.iterator();
 		while(i.hasNext())
 		{	AbstractAbility temp = i.next();
@@ -391,6 +390,36 @@ public class ItemManager
 				EngineEvent event = new EngineEvent(EngineEvent.END_SPRITE);
 				item.processEvent(event);
 			}
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// abilities
+			{	Iterator<AbstractAbility> it = abilities.iterator();
+				while(it.hasNext())
+				{	AbstractAbility temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// items
+			{	initialItems.clear();
+				Iterator<Item> it = collectedItems.iterator();
+				while(it.hasNext())
+				{	Item temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// misc
+			sprite = null;
 		}
 	}
 }

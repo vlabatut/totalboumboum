@@ -29,7 +29,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -51,59 +50,59 @@ public class AisConfigurationLoader
 	{	Element element; 
 	
 		// ups
-		element = root.getChild(XmlNames.UPS);
+		element = root.getChild(XmlTools.UPS);
 		loadUpsElement(element,result);
 		
 		// auto advance
-		element = root.getChild(XmlNames.AUTO_ADVANCE);
+		element = root.getChild(XmlTools.AUTO_ADVANCE);
 		loadAutoAdvanceElement(element,result);
 		
 		// hide all-ais rounds
-		element = root.getChild(XmlNames.HIDE_ALLAIS);
+		element = root.getChild(XmlTools.HIDE_ALLAIS);
 		loadHideAllAisElement(element,result);
 
 		// display exceptions onscreen during game
-		element = root.getChild(XmlNames.DISPLAY_EXCEPTIONS);
+		element = root.getChild(XmlTools.DISPLAY_EXCEPTIONS);
 		loadDisplayExceptionsElement(element,result);
 
 		// log exceptions during game
-		element = root.getChild(XmlNames.LOG_EXCEPTIONS);
+		element = root.getChild(XmlTools.LOG_EXCEPTIONS);
 		loadLogExceptionsElement(element,result);
 	}
 	
 	private static void loadUpsElement(Element root, AisConfiguration result)
-	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		int ups = Integer.valueOf(value);
 		result.setAiUps(ups);
 	}
 	
 	private static void loadAutoAdvanceElement(Element root, AisConfiguration result)
 	{	// switch
-		{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 			boolean autoAdvance = Boolean.valueOf(value);
 			result.setAutoAdvance(autoAdvance);
 		}
 		// delay
-		{	String value = root.getAttribute(XmlNames.DELAY).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.DELAY).getValue().trim();
 			long autoAdvanceDelay = Long.parseLong(value);
 			result.setAutoAdvanceDelay(autoAdvanceDelay);
 		}		
 	}
 	
 	private static void loadHideAllAisElement(Element root, AisConfiguration result)
-	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean hideAllAis = Boolean.valueOf(value);
 		result.setHideAllAis(hideAllAis);
 	}
 
 	private static void loadDisplayExceptionsElement(Element root, AisConfiguration result)
-	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean displayExceptions = Boolean.valueOf(value);
 		result.setDisplayExceptions(displayExceptions);
 	}
 
 	private static void loadLogExceptionsElement(Element root, AisConfiguration result)
-	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean logExceptions = Boolean.valueOf(value);
 		result.setLogExceptions(logExceptions);
 	}

@@ -21,12 +21,56 @@ package org.totalboumboum.engine.content.sprite.fire;
  * 
  */
 
+import java.util.HashMap;
+
+import org.totalboumboum.engine.container.fireset.Fireset;
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 
+
 public class FireFactory extends SpriteFactory<Fire>
-{	
+{	private static final long serialVersionUID = 1L;
+
+/*	public FireFactory(String name)
+	{	this.name = name;
+		
+	}
+*/	
+	/////////////////////////////////////////////////////////////////
+	// GESTURE PACK		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
+	static
+	{	// APPEARING
+		// BOUNCING
+		// BURNING
+		animeReplacements.put(GestureName.BURNING,null);
+		// CRYING
+		// EXULTING
+		// HIDING
+		// JUMPING
+		// LANDING
+		// OSCILLATING
+		// OSCILLATING_FAILING
+		// PUNCHED
+		// PUNCHING
+		// PUSHING
+		// RELEASED
+		// SLIDING
+		// SLIDING_FAILING
+		// SPAWNING
+		// STANDING
+		// STANDING_FAILING
+		// WAITING
+		// WALKING		
+	}
+	
+	public static HashMap<GestureName,GestureName> getAnimeReplacements()
+	{	return animeReplacements;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -42,7 +86,7 @@ public class FireFactory extends SpriteFactory<Fire>
 		EventManager eventManager = new FireEventManager(result);
 		result.setEventManager(eventManager);
 		// fireset name
-		result.setFiresetName(firesetName);
+		result.setFiresetName(fireset.getName());
 		
 		// result
 		result.initSprite(tile);
@@ -52,13 +96,56 @@ public class FireFactory extends SpriteFactory<Fire>
 	/////////////////////////////////////////////////////////////////
 	// FIRESET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String firesetName;
+	private Fireset fireset;
 
-	public void setFiresetName(String firesetName)
-	{	this.firesetName = firesetName;	
+	public void setFireset(Fireset fireset)
+	{	this.fireset = fireset;	
 	}
 	
-	public String getFiresetName()
-	{	return firesetName;
+	public Fireset getFireset()
+	{	return fireset;			
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			fireset = null;
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+/*	public FireFactory cacheCopy(double zoomFactor, Fireset fs)
+	{	FireFactory result = new FireFactory();
+		
+		// misc
+		result.base = base;
+		result.name = name;
+		
+		// fireset
+		result.setFireset(fs);
+		
+		// abilities
+		result.setAbilities(abilities);
+		
+		// bombset
+		Bombset bombset = new Bombset();
+		result.setBombset(bombset);
+		
+		// explosion
+		if(explosion!=null)
+		{	Explosion explosionCopy = explosion.cacheCopy();
+			result.setExplosion(explosionCopy);
+		}
+		
+		// gestures
+		GesturePack gesturePackCopy = gesturePack.cacheCopy(zoomFactor);
+		result.setGesturePack(gesturePackCopy);
+
+		return result;
+	}*/
 }

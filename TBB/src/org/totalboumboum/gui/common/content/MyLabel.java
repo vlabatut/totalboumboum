@@ -93,7 +93,7 @@ public class MyLabel extends JLabel implements MouseListener, MouseMotionListene
 		if(icon!=null)
 		{	int h = getPreferredSize().height;
 			double zoom = h/(double)icon.getHeight();
-			icon = ImageTools.getResizedImage(icon,zoom,true);
+			icon = ImageTools.resize(icon,zoom,true);
 			icn = new ImageIcon(icon);
 		}
 		setText(null);

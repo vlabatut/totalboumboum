@@ -64,7 +64,7 @@ public abstract class ModalDialogSubPanel extends EmptySubPanel implements Mouse
 		ImageIcon icn = null;
 		if(icon!=null)
 		{	double zoom = buttonsHeight/(double)icon.getHeight();
-			icon = ImageTools.getResizedImage(icon,zoom,true);
+			icon = ImageTools.resize(icon,zoom,true);
 			icn = new ImageIcon(icon);
 		}
 		result.setText(null);

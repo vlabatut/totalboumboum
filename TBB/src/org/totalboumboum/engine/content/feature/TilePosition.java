@@ -8,7 +8,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 /*
@@ -91,12 +91,12 @@ public enum TilePosition implements Serializable
 		String tilePositionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 		String[] tilePositionsStr = tilePositionStr.split(" ");
 		for(String str: tilePositionsStr)
-		{	if(str.equalsIgnoreCase(XmlNames.VAL_SOME))
+		{	if(str.equalsIgnoreCase(XmlTools.VAL_SOME))
 			{	result.add(TilePosition.NEIGHBOR);
 				result.add(TilePosition.REMOTE);
 				result.add(TilePosition.SAME);
 			}
-			else if(str.equalsIgnoreCase(XmlNames.VAL_ANY))
+			else if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
 			{	result.add(TilePosition.NEIGHBOR);
 				result.add(TilePosition.REMOTE);
 				result.add(TilePosition.SAME);

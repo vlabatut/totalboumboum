@@ -23,11 +23,10 @@ package org.totalboumboum.engine.container.level.instance;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.io.Serializable;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.bombset.BombsetMap;
 import org.totalboumboum.engine.container.explosionset.Explosionset;
 import org.totalboumboum.engine.container.explosionset.ExplosionsetLoader;
@@ -39,8 +38,9 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class Instance
-{	
+public class Instance implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public Instance(String name)
 	{	this.name = name;
 	}
@@ -57,11 +57,16 @@ public class Instance
 	/////////////////////////////////////////////////////////////////
 	// BOMBSET MAP		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private BombsetMap bombsetMap = new BombsetMap();
+	private transient BombsetMap bombsetMap;
 
-	public void loadBombsetMaps(List<PredefinedColor> playersColors) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-   {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_BOMBS;
-   		bombsetMap.loadBombsets(individualFolder,playersColors);
+	public void loadBombsetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	// init bombset map
+		String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_BOMBS;
+		bombsetMap = new BombsetMap();
+    	bombsetMap.initBombset(individualFolder);
+		
+    	// load level bombset
+    	bombsetMap.getBombset(null);
     }
 	
 	public BombsetMap getBombsetMap()
@@ -71,7 +76,7 @@ public class Instance
 	/////////////////////////////////////////////////////////////////
 	// FIRESET MAP		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private FiresetMap firesetMap = new FiresetMap();
+	private transient FiresetMap firesetMap;
 	
 	public void loadFiresetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_FIRES;
@@ -85,7 +90,7 @@ public class Instance
 	/////////////////////////////////////////////////////////////////
 	// ITEMSET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Itemset itemset;
+	private transient Itemset itemset;
 
 	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_ITEMS;
@@ -99,9 +104,9 @@ public class Instance
 	/////////////////////////////////////////////////////////////////
 	// EXPLOSIONSET		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Explosionset explosionset;
+	private transient Explosionset explosionset;
 
-	public void loadExplosionset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public void loadExplosionSet() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_EXPLOSIONS;
     	explosionset = ExplosionsetLoader.loadExplosionset(individualFolder);
     }
@@ -136,10 +141,14 @@ public class Instance
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+    private boolean finished = false;
+	
 	public void finish()
-    {	name = null;
-    	bombsetMap = null;
-    	firesetMap = null;
-    	itemset = null;
+    {	if(!finished)
+	    {	name = null;
+	    	bombsetMap = null;
+	    	firesetMap = null;
+	    	itemset = null;
+	    }
     }
 }

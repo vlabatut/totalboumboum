@@ -29,8 +29,8 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
-import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
-import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
+import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
+import org.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryStep;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
@@ -115,9 +115,10 @@ public class TrajectoryManager
 	/** indique si la trajectoire a impliqué (pour le moment) que le sprite ait décollé du sol */ 
 	private boolean hasFlied;
 	
-	/////////////////////////////////////////////////////////////////
-	// INIT					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * INIT
+ * ********************************
+ */	
 	public TrajectoryManager(Sprite sprite)
 	{	this.sprite = sprite;
 	}
@@ -393,9 +394,10 @@ public class TrajectoryManager
 		yMove = p[1];
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// UPDATE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * UPDATE
+ * ********************************
+ */	
 	/**
 	 * méthode appelée à chaque itération
 	 * met à jour le déplacement et la position relative.
@@ -638,9 +640,10 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 			sprite.changeTile(currentTile);
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// TIME					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * TIME
+ * ********************************
+ */	
 	/**
 	 * renvoie la durée totale prévue pour la trajectoire.
 	 * @return
@@ -653,9 +656,10 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	{	return currentTime;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// POSITION				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * POSITION
+ * ********************************
+ */	
 	public double getCurrentPosX()
 	{	double result = currentPosX;
 		if(isBoundToSprite())
@@ -686,9 +690,10 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	{	currentPosZ = posZ;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// DIRECTION			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * DIRECTION
+ * ********************************
+ */	
 	public Direction getActualDirection()
 	{	Direction result = currentDirection;
 		if(currentDirection==Direction.NONE)
@@ -699,9 +704,10 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 		return result;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// BOUND				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * BOUND
+ * ********************************
+ */	
 	private Sprite getBoundToSprite()
 	{	return sprite.getBoundToSprite();
 	}
@@ -710,9 +716,10 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	{	return sprite.isBoundToSprite();
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// COLLISIONS			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * COLLISIONS
+ * ********************************
+ */		
 	private void updateCollidedSprites(ArrayList<Sprite> newCollidedSprites)
 	{	//NOTE faut-il distinquer les changements de direction ?
 		Iterator<Sprite> i;
@@ -795,9 +802,10 @@ if(sprite instanceof Hero)
 	{	return collidedSprites.contains(s);
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// INTERSECTIONS		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/* ********************************
+ * INTERSECTIONS
+ * ********************************
+ */	
 	private void updateIntersectedSprites(ArrayList<Sprite> newIntersectedSprites)
 	{	Iterator<Sprite> i;
 /*	
@@ -867,4 +875,23 @@ if(sprite instanceof Hero)
 	public boolean isOnGround()
 	{	return CalculusTools.isRelativelyEqualTo(currentPosZ,0);
 	}
+	
+/* ********************************
+ * FINISHED
+ * ********************************
+ */	
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// misc
+			collidedSprites.clear();
+			intersectedSprites.clear();
+			currentDirection = null;
+			currentTrajectory = null;
+			sprite = null;
+		}
+	}	
+
 }

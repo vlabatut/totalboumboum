@@ -27,31 +27,31 @@ import java.util.Locale;
 import org.jdom.Element;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.Role;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class GeneralActionLoader
 {		
 	public static GeneralAction loadActionElement(Element root) throws ClassNotFoundException
     {	// name
-		String strName = root.getAttribute(XmlNames.NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
+		String strName = root.getAttribute(XmlTools.NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
 		ActionName name = ActionName.valueOf(strName);
 		GeneralAction result = name.createGeneralAction();
 		
 		// actors
-		{	ArrayList<Role> actors = Role.loadRolesAttribute(root,XmlNames.ACTOR);
+		{	ArrayList<Role> actors = Role.loadRolesAttribute(root,XmlTools.ACTOR);
 			for(Role actor: actors)
 				result.addActor(actor);
 		}
 		
 		// targets
-		{	ArrayList<Role> targets = Role.loadRolesAttribute(root,XmlNames.TARGET);
+		{	ArrayList<Role> targets = Role.loadRolesAttribute(root,XmlTools.TARGET);
 			for(Role target: targets)
 				result.addTarget(target);
 		}
 		
 		// directions
-		{	ArrayList<Direction> directions = Direction.loadDirectionsAttribute(root,XmlNames.DIRECTION);
+		{	ArrayList<Direction> directions = Direction.loadDirectionsAttribute(root,XmlTools.DIRECTION);
 			for(Direction direction: directions)
 				result.addDirection(direction);
 		}

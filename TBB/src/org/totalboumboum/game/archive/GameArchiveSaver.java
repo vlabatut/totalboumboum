@@ -31,8 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.time.TimeTools;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.strings.StringTools;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -51,7 +50,7 @@ public class GameArchiveSaver
 	}
 
 	private static Element saveArchiveElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlNames.ARCHIVE); 
+	{	Element result = new Element(XmlTools.ARCHIVE); 
 		
 		// tournament
 		Element tournamentElement = saveTournamentElement(gameArchive);
@@ -73,52 +72,52 @@ public class GameArchiveSaver
 	}
 
 	private static Element saveTournamentElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlNames.TOURNAMENT);
+	{	Element result = new Element(XmlTools.TOURNAMENT);
 		
 		// name
 		String name = gameArchive.getName();
-		result.setAttribute(XmlNames.NAME,name);
+		result.setAttribute(XmlTools.NAME,name);
 
 		// type
 		TournamentType type = gameArchive.getType();
 		String typeStr = type.toString();
-		result.setAttribute(XmlNames.TYPE,typeStr);
+		result.setAttribute(XmlTools.TYPE,typeStr);
 		
 		return result;
 	}
 
 	private static Element savePlayedElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlNames.PLAYED);
+	{	Element result = new Element(XmlTools.PLAYED);
 		
 		// matches
 		String matches = Integer.toString(gameArchive.getPlayedMatches());
-		result.setAttribute(XmlNames.MATCHES,matches);
+		result.setAttribute(XmlTools.MATCHES,matches);
 
 		// rounds
 		String rounds = Integer.toString(gameArchive.getPlayedRounds());
-		result.setAttribute(XmlNames.ROUNDS,rounds);
+		result.setAttribute(XmlTools.ROUNDS,rounds);
 		
 		return result;
 	}
 
 	private static Element saveDatesElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlNames.DATES);
+	{	Element result = new Element(XmlTools.DATES);
 		
 		// start
 		Date start = gameArchive.getStartDate();
-		String startStr = TimeTools.dateJavaToXml(start);
-		result.setAttribute(XmlNames.START,startStr);
+		String startStr = StringTools.dateJavaToXml(start);
+		result.setAttribute(XmlTools.START,startStr);
 
 		// save
 		Date save = gameArchive.getSaveDate();
-		String saveStr = TimeTools.dateJavaToXml(save);
-		result.setAttribute(XmlNames.SAVE,saveStr);
+		String saveStr = StringTools.dateJavaToXml(save);
+		result.setAttribute(XmlTools.SAVE,saveStr);
 		
 		return result;
 	}
 
 	private static Element savePlayersElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlNames.PLAYERS);
+	{	Element result = new Element(XmlTools.PLAYERS);
 		ArrayList<String> players = gameArchive.getPlayers();
 		for(String player: players)
 		{	Element playerElement = savePlayerElement(player);
@@ -128,10 +127,10 @@ public class GameArchiveSaver
 	}
 	
 	private static Element savePlayerElement(String player)
-	{	Element result = new Element(XmlNames.PLAYER);
+	{	Element result = new Element(XmlTools.PLAYER);
 		
 		// name
-		result.setAttribute(XmlNames.NAME,player);
+		result.setAttribute(XmlTools.NAME,player);
 		
 		return result;
 	}

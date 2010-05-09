@@ -421,4 +421,26 @@ if(sprite instanceof Item && sprite.getCurrentGesture()!=null && sprite.getCurre
 //	public ArrayList<AbstractAbility> getModulationStateAbilities()
 //	{	return stateAbilities;		
 //	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// modulation abilities
+//			{	Iterator<AbstractAbility> it = stateAbilities.iterator();
+//				while(it.hasNext())
+//				{	AbstractAbility temp = it.next();
+//					temp.finish();
+//					it.remove();
+//				}
+//			}
+			// misc
+			currentDirection = null;
+			sprite = null;
+		}
+	}
 }

@@ -108,10 +108,8 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	 */
 	public boolean isConcerningAction(SpecificAction specificAction)
 	{	boolean result;
-	
 		// action
 		result = action.subsume(specificAction);
-		
 		// actor restrictions
 		if(result)
 		{	Sprite actor = specificAction.getActor();
@@ -125,7 +123,6 @@ public abstract class AbstractActionModulation extends AbstractModulation
 				result = ab.isActive();
 			}
 		}
-		
 		// target restrictions
 		if(result)
 		{	Sprite target = specificAction.getTarget();
@@ -139,7 +136,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 				result = ab.isActive();
 			}
 		}
-
+		//	
 		return result;		
 	}
 	public boolean isConcerningAction(GeneralAction generalAction, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties)
@@ -172,6 +169,34 @@ public abstract class AbstractActionModulation extends AbstractModulation
 			result.combine(ability);
 		}
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			// action
+			action.finish();
+			action = null;
+			// actor restrictions
+			{	Iterator<AbstractAbility> it = actorRestrictions.iterator();
+				while(it.hasNext())
+				{	AbstractAbility temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// target restrictions
+			{	Iterator<AbstractAbility> it = targetRestrictions.iterator();
+				while(it.hasNext())
+				{	AbstractAbility temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+		}
 	}
 }
 

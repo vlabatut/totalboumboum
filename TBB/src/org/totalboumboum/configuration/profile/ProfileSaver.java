@@ -27,7 +27,6 @@ import java.io.IOException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 
 public class ProfileSaver
@@ -44,7 +43,7 @@ public class ProfileSaver
 	}
 
 	private static Element saveProfileElement(Profile profile)
-	{	Element result = new Element(XmlNames.PROFILE);
+	{	Element result = new Element(XmlTools.PROFILE);
 		
 		// general properties
 		Element generalElement = saveGeneralElement(profile);
@@ -64,35 +63,35 @@ public class ProfileSaver
 	}
 	
 	private static Element saveGeneralElement(Profile profile)
-	{	Element result = new Element(XmlNames.GENERAL);
+	{	Element result = new Element(XmlTools.GENERAL);
 		String name = profile.getName();
-		result.setAttribute(XmlNames.NAME,name);
+		result.setAttribute(XmlTools.NAME,name);
 		return result;
 	}
 
 	private static Element saveAiElement(Profile profile)
-	{	Element result = new Element(XmlNames.AI);
+	{	Element result = new Element(XmlTools.AI);
 		// name
 		String name = profile.getAiName();
-		result.setAttribute(XmlNames.NAME,name);
+		result.setAttribute(XmlTools.NAME,name);
 		// pack
 		String packname = profile.getAiPackname();
-		result.setAttribute(XmlNames.PACK,packname);
+		result.setAttribute(XmlTools.PACK,packname);
 		//
 		return result;
 	}
 	
 	private static Element saveCharacterElement(Profile profile)
-	{	Element result = new Element(XmlNames.CHARACTER);
+	{	Element result = new Element(XmlTools.CHARACTER);
 		// name
 		String name = profile.getSpriteFolder();
-		result.setAttribute(XmlNames.NAME,name);
+		result.setAttribute(XmlTools.NAME,name);
 		// pack
 		String packname = profile.getSpritePack();
-		result.setAttribute(XmlNames.PACKNAME,packname);
+		result.setAttribute(XmlTools.PACKNAME,packname);
 		// colors
 		String defaultColor = profile.getDefaultSprite().getColor().toString();
-		result.setAttribute(XmlNames.COLOR,defaultColor);
+		result.setAttribute(XmlTools.COLOR,defaultColor);
 		//
 		return result;
 	}

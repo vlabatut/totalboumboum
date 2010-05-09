@@ -22,7 +22,7 @@ package org.totalboumboum.configuration.profile;
  */
 
 import org.jdom.Element;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 public class ProfilesSelectionSaver
@@ -36,25 +36,25 @@ public class ProfilesSelectionSaver
 	}
 	
 	private static Element savePlayerElement(int index, ProfilesSelection profilesSelection)
-	{	Element result = new Element(XmlNames.PLAYER);
+	{	Element result = new Element(XmlTools.PLAYER);
 		
 		// file name
 		int id = profilesSelection.getIds(index);
 		String idStr = Integer.toString(id);
-		result.setAttribute(XmlNames.FILE,idStr);
+		result.setAttribute(XmlTools.FILE,idStr);
 		
 		// color
 		String color = profilesSelection.getColor(index).toString();
-		result.setAttribute(XmlNames.COLOR,color);
+		result.setAttribute(XmlTools.COLOR,color);
 		
 		// controls
 		String controlsIndex = Integer.toString(profilesSelection.getControlsIndex(index));
-		result.setAttribute(XmlNames.CONTROLS,controlsIndex);
+		result.setAttribute(XmlTools.CONTROLS,controlsIndex);
 		
 		// sprite
 		String hero[] = profilesSelection.getHero(index);
-		result.setAttribute(XmlNames.SPRITE_PACK,hero[0]);
-		result.setAttribute(XmlNames.SPRITE_FOLDER,hero[1]);
+		result.setAttribute(XmlTools.SPRITE_PACK,hero[0]);
+		result.setAttribute(XmlTools.SPRITE_FOLDER,hero[1]);
 		
 		return result;
 	}

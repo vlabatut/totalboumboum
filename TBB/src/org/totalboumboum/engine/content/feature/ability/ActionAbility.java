@@ -70,45 +70,17 @@ public class ActionAbility extends AbstractAbility
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * surface copy, actions are not cloned
-	 */
-/*	public AbstractAbility copy()
-	{	ActionAbility result;
-	
-	// action
-		GeneralAction a = action;
-		result = new ActionAbility(a);
-		
-		// misc
-		result.setFrame(frame);
-		result.setStrength(strength);
-		result.setTime(time);
-		result.setUses(uses);
-
-		return result;
-	}
-*/
-	/**
-	 * clone actions, which can be modified when the ability is
-	 * assigned to some sprite (action roles, in particular)
-	 */
 	public AbstractAbility copy()
 	{	ActionAbility result;
-	
-		// action
-		GeneralAction a = action.copy();
+		GeneralAction a = action; //NOTE à copier ? (non)
 		result = new ActionAbility(a);
-		
-		// misc
 		result.setFrame(frame);
 		result.setStrength(strength);
 		result.setTime(time);
 		result.setUses(uses);
-		
 		return result;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -116,5 +88,14 @@ public class ActionAbility extends AbstractAbility
 	{	String result = action.toString();
 		result = result+"["+strength+"]";
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+		}
 	}
 }

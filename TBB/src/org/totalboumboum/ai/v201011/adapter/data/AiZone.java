@@ -1267,7 +1267,6 @@ public class AiZone
 		for(int line=0;line<height;line++)
 			for(int col=0;col<width;col++)
 				matrix[line][col].finish();
-		
 		// sprites
 		blockMap.clear();
 		bombMap.clear();
@@ -1276,9 +1275,5 @@ public class AiZone
 		heroMap.clear();
 		itemMap.clear();
 		ownHero = null;
-		
-		// misc
-		level = null;
-		player = null;
 	}
 }

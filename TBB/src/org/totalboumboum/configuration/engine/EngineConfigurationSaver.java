@@ -29,7 +29,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -47,7 +46,7 @@ public class EngineConfigurationSaver
 	}
 
 	private static Element saveEngineElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlNames.ENGINE); 
+	{	Element result = new Element(XmlTools.ENGINE); 
 
 		// timing
 		Element timingElement = saveTimingElement(engineConfiguration);
@@ -57,51 +56,33 @@ public class EngineConfigurationSaver
 		Element logElement = saveLogElement(engineConfiguration);
 		result.addContent(logElement);
 		
-		// cache
-		Element cacheElement = saveCacheElement(engineConfiguration);
-		result.addContent(cacheElement);
-		
 		return result;
 	}
 	
 	private static Element saveTimingElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlNames.TIMING);
+	{	Element result = new Element(XmlTools.TIMING);
 		
 		// adjust
 		String adjust = Boolean.toString(engineConfiguration.getAutoFps());
-		result.setAttribute(XmlNames.ADJUST,adjust);
+		result.setAttribute(XmlTools.ADJUST,adjust);
 		
 		// fps
 		String fps = Integer.toString(engineConfiguration.getFps());
-		result.setAttribute(XmlNames.FPS,fps);
+		result.setAttribute(XmlTools.FPS,fps);
 		
 		// speed
 		String speed = Double.toString(engineConfiguration.getSpeedCoeff());
-		result.setAttribute(XmlNames.SPEED,speed);
+		result.setAttribute(XmlTools.SPEED,speed);
 				
 		return result;
 	}
 
 	private static Element saveLogElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlNames.LOG);
+	{	Element result = new Element(XmlTools.LOG);
 		
 		// controls
 		String controls = Boolean.toString(engineConfiguration.getLogControls());
-		result.setAttribute(XmlNames.CONTROLS,controls);
-				
-		return result;
-	}
-
-	private static Element saveCacheElement(EngineConfiguration engineConfiguration)
-	{	Element result = new Element(XmlNames.CACHE);
-		
-		// cache
-		String cache = Boolean.toString(engineConfiguration.isSpriteMemoryCached());
-		result.setAttribute(XmlNames.CACHE,cache);
-				
-		// limit
-		String cacheLimit = Long.toString(engineConfiguration.getSpriteCacheLimit());
-		result.setAttribute(XmlNames.CACHE_LIMIT,cacheLimit);
+		result.setAttribute(XmlTools.CONTROLS,controls);
 				
 		return result;
 	}

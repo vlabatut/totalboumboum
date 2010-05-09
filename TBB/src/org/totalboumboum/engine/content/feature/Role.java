@@ -6,7 +6,7 @@ import java.util.Locale;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
 
 
 /*
@@ -61,7 +61,7 @@ public enum Role implements Serializable
 		{	String roleStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 			String[] rolesStr = roleStr.split(" ");
 			for(String str: rolesStr)
-			{	if(str.equalsIgnoreCase(XmlNames.VAL_SOME))
+			{	if(str.equalsIgnoreCase(XmlTools.VAL_SOME))
 				{	result.add(Role.BLOCK);
 					result.add(Role.BOMB);
 					result.add(Role.FIRE);
@@ -69,7 +69,7 @@ public enum Role implements Serializable
 					result.add(Role.HERO);
 					result.add(Role.ITEM);
 				}
-				else if(str.equalsIgnoreCase(XmlNames.VAL_ANY))
+				else if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
 				{	result.add(Role.BLOCK);
 					result.add(Role.BOMB);
 					result.add(Role.FIRE);

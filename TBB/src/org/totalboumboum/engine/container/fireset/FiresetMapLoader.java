@@ -21,15 +21,8 @@ package org.totalboumboum.engine.container.fireset;
  * 
  */
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -38,14 +31,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.engine.EngineConfiguration;
-import org.totalboumboum.engine.content.sprite.fire.HollowFireFactory;
-import org.totalboumboum.engine.content.sprite.fire.HollowFireFactoryLoader;
-import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.engine.content.sprite.fire.FireFactory;
+import org.totalboumboum.engine.content.sprite.fire.FireFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -56,32 +45,44 @@ public class FiresetMapLoader
 	/////////////////////////////////////////////////////////////////
 	public static FiresetMap loadFiresetMap(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		double zoomFactor = RoundVariables.zoomFactor;
 		String individualFolder = folderPath;
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_FIRESETMAP+FileNames.EXTENSION_SCHEMA);
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_FIRESETMAP+FileNames.EXTENSION_XML);
-		HollowFiresetMap original = null;
+		
+		
+		// opening
+		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		// loading
+		FiresetMap result = loadFiresetmapElement(individualFolder,root);
+		
+/*		
+		FiresetMap result = null;
 		
 		// caching
-		String cachePath = FilePaths.getCacheFiresPath()+ File.separator;
+		String cachePath = FileTools.getCacheFiresPath()+ File.separator;
+		File cacheFolder = new File(cachePath);
+		cacheFolder.mkdirs();
 		File objectFile = dataFile.getParentFile();
-		File packFile = objectFile.getParentFile();
-		String cacheName = packFile.getName();
-		cachePath = cachePath + cacheName +FileNames.EXTENSION_DATA;
+		String objectName = objectFile.getName();
+		File packFile = objectFile.getParentFile().getParentFile();
+		String packName = packFile.getName();
+		String cacheName = packName+"_"+objectName;
+		cachePath = cachePath + cacheName +FileTools.EXTENSION_DATA;
 		File cacheFile = new File(cachePath);
 		EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
-		Object o = engineConfiguration.getFromSpriteCache(cachePath);
-		if(engineConfiguration.isSpriteMemoryCached() && o!=null)
-		{	original = ((HollowFiresetMap)o);
+		Object o = engineConfiguration.getMemoryCache(cacheName);
+		if(engineConfiguration.getFileCache() && o!=null)
+		{	double zoomFactor = RoundVariables.zoomFactor;
+			result = ((FiresetMap)o).cacheCopy(zoomFactor,instance);
 		}
-		else if(engineConfiguration.isSpriteFileCached() && cacheFile.exists())
+		else if(engineConfiguration.getFileCache() && cacheFile.exists())
 		{	try
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				original = (HollowFiresetMap)oIn.readObject(); //TODO fonction à surcharger
-				//result.setInstance(instance); 
+				result = (FiresetMap)oIn.readObject(); //TODO fonction à surcharger
+				result.setInstance(instance); 
 				oIn.close();
 			}
 			catch (FileNotFoundException e)
@@ -95,54 +96,61 @@ public class FiresetMapLoader
 			}
 		}
 		
-		if(original==null)
+		if(result==null)
 		{	// opening
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			original = loadFiresetmapElement(individualFolder,root);
+			result = new FiresetMap(instance);
+			loadFiresetmapElement(individualFolder,root,result);
 			// caching
-			if(engineConfiguration.isSpriteMemoryCached())
-			{	engineConfiguration.addToSpriteCache(cachePath,original);
+			boolean cached = false;
+			if(engineConfiguration.getMemoryCache())
+			{	engineConfiguration.addMemoryCache(cacheName,result);
+				cached = true;
 			}
-			if(engineConfiguration.isSpriteFileCached())
+			if(engineConfiguration.getFileCache())
 			{	FileOutputStream out = new FileOutputStream(cacheFile);
 				BufferedOutputStream outBuff = new BufferedOutputStream(out);
 				ObjectOutputStream oOut = new ObjectOutputStream(outBuff);
-				oOut.writeObject(original);
+				oOut.writeObject(result);
 				oOut.close();
+				cached = true;
 			}
-		}
+			if(cached)
+			{	double zoomFactor = RoundVariables.zoomFactor;
+				result = result.cacheCopy(zoomFactor);
+			}
+		}*/
 
-		FiresetMap result = original.fill(zoomFactor);
 		return result;
 	}
 
-	private static HollowFiresetMap loadFiresetmapElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	HollowFiresetMap result = new HollowFiresetMap();		
-		HashMap<String,HollowFireFactory> abstractFires = new HashMap<String, HollowFireFactory>();
+	private static FiresetMap loadFiresetmapElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	FiresetMap result = new FiresetMap();		
+		HashMap<String,FireFactory> abstractFires = new HashMap<String, FireFactory>();
 		
     	// abstract fires
-    	Element abstractFiresElt = root.getChild(XmlNames.ABSTRACT_FIRES);
+    	Element abstractFiresElt = root.getChild(XmlTools.ABSTRACT_FIRES);
     	if(abstractFiresElt!=null)
     		loadFiresElement(folder,abstractFiresElt,null,abstractFires,Type.ABSTRACT);
 
     	// firesets
-    	Element firesetsElt = root.getChild(XmlNames.FIRESETS);
+    	Element firesetsElt = root.getChild(XmlTools.FIRESETS);
     	loadFiresetsElement(folder,firesetsElt,result,abstractFires);
     	
     	return result;
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static void loadFiresetsElement(String folder, Element root, HollowFiresetMap result, HashMap<String,HollowFireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	List<Element> elts = root.getChildren(XmlNames.FIRESET);
+	private static void loadFiresetsElement(String folder, Element root, FiresetMap result, HashMap<String,FireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	List<Element> elts = root.getChildren(XmlTools.FIRESET);
     	Iterator<Element> i = elts.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
-    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
-			Attribute attribute = temp.getAttribute(XmlNames.FOLDER);
+    		String name = temp.getAttribute(XmlTools.NAME).getValue().trim();
+			Attribute attribute = temp.getAttribute(XmlTools.FOLDER);
 			String individualFolder = folder+File.separator+attribute.getValue().trim();
-			HollowFireset fireset = loadFireset(individualFolder,abstractFires);
+			Fireset fireset = loadFireset(individualFolder,abstractFires);
 			fireset.setName(name);
 			result.addFireset(name,fireset);
     	}
@@ -152,7 +160,7 @@ public class FiresetMapLoader
 	// LOAD FIRE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@SuppressWarnings("unchecked")
-	private static HollowFireset loadFireset(String folderPath, HashMap<String,HollowFireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static Fireset loadFireset(String folderPath, HashMap<String,FireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String individualFolder = folderPath;
 		String schemaFolder = FilePaths.getSchemasPath();
@@ -164,30 +172,30 @@ public class FiresetMapLoader
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// loading
-		HashMap<String,HollowFireFactory> abstractFiresCpy = (HashMap<String,HollowFireFactory>) abstractFires.clone(); 
-		HollowFireset result = loadFiresetElement(individualFolder,root,abstractFiresCpy);
+		HashMap<String,FireFactory> abstractFiresCpy = (HashMap<String,FireFactory>) abstractFires.clone(); 
+		Fireset result = loadFiresetElement(individualFolder,root,abstractFiresCpy);
 		return result;
 	}
 	
-	private static HollowFireset loadFiresetElement(String folder, Element root, HashMap<String,HollowFireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	HollowFireset result = new HollowFireset();
+	private static Fireset loadFiresetElement(String folder, Element root, HashMap<String,FireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	Fireset result = new Fireset();
 		
     	// abstract fires
-    	Element abstractFiresElt = root.getChild(XmlNames.ABSTRACT_FIRES);
+    	Element abstractFiresElt = root.getChild(XmlTools.ABSTRACT_FIRES);
     	if(abstractFiresElt!=null)
     		loadFiresElement(folder,abstractFiresElt,result,abstractFires,Type.ABSTRACT);
 
     	// concrete fires
-    	Element concreteFiresElt = root.getChild(XmlNames.CONCRETE_FIRES);
+    	Element concreteFiresElt = root.getChild(XmlTools.CONCRETE_FIRES);
 		loadFiresElement(folder,concreteFiresElt,result,abstractFires,Type.CONCRETE);
     	
     	return result;
     }
 
 	@SuppressWarnings("unchecked")
-	private static void loadFiresElement(String folder, Element root, HollowFireset result, HashMap<String,HollowFireFactory> abstractFires, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadFiresElement(String folder, Element root, Fireset result, HashMap<String,FireFactory> abstractFires, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
-		List<Element> elts = root.getChildren(XmlNames.FIRE);
+		List<Element> elts = root.getChildren(XmlTools.FIRE);
     	Iterator<Element> i = elts.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
@@ -195,18 +203,18 @@ public class FiresetMapLoader
     	}
     }
     
-    private static void loadFireElement(String folder, Element root, HollowFireset result, HashMap<String,HollowFireFactory> abstractFires, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static void loadFireElement(String folder, Element root, Fireset result, HashMap<String,FireFactory> abstractFires, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
+		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// fire factory
 		boolean isAbstract = type==Type.ABSTRACT;
-		HollowFireFactory fireFactory = HollowFireFactoryLoader.loadFireFactory(individualFolder,abstractFires,isAbstract);
+		FireFactory fireFactory = FireFactoryLoader.loadFireFactory(individualFolder,abstractFires,isAbstract);
 		if(isAbstract)
 			abstractFires.put(name,fireFactory);
 		else

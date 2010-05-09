@@ -25,7 +25,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -307,7 +306,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			// random location
 			boolean randomLocation = quickMatchConfiguration.getPlayersRandomLocation();
 			// rounds
-			List<Round> rounds = match.getRounds();
+			ArrayList<Round> rounds = match.getRounds();
 			for(Round r: rounds)
 			{	r.setLimits(limits);
 				r.setRandomLocation(randomLocation);

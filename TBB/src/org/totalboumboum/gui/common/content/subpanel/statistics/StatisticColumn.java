@@ -41,8 +41,9 @@ import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.PlayerStats;
-import org.totalboumboum.tools.time.TimeTools;
-import org.totalboumboum.tools.time.TimeUnit;
+import org.totalboumboum.tools.strings.StringTools;
+import org.totalboumboum.tools.strings.StringTools.TimeUnit;
+
 
 public enum StatisticColumn
 {	// general
@@ -343,15 +344,15 @@ public enum StatisticColumn
 		}			
 		else if(this==SCORE_TIME)
 		{	long timePlayed = playerStats.getScore(Score.TIME);
-			String text = TimeTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MINUTE,false);
-			String tooltip = TimeTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MILLISECOND,true);
+			String text = StringTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MINUTE,false);
+			String tooltip = StringTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MILLISECOND,true);
 			if(container.hasMean())
 			{	long value = 0;
 				long roundsPlayed = playerStats.getRoundsPlayed();
 				if(roundsPlayed>0)
 					value = timePlayed / roundsPlayed;
-				text = TimeTools.formatTime(value,TimeUnit.MINUTE,TimeUnit.SECOND,false);
-				tooltip = TimeTools.formatTime(value,TimeUnit.HOUR,TimeUnit.MILLISECOND,true);							
+				text = StringTools.formatTime(value,TimeUnit.MINUTE,TimeUnit.SECOND,false);
+				tooltip = StringTools.formatTime(value,TimeUnit.HOUR,TimeUnit.MILLISECOND,true);							
 			}
 			panel.setLabelText(line,col,text,tooltip);
 			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);

@@ -23,6 +23,8 @@ package org.totalboumboum.engine.container.fireset;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -32,13 +34,17 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.fire.FireFactory;
 import org.xml.sax.SAXException;
 
-public class Fireset extends AbstractFireset
-{	private static final long serialVersionUID = 1L;
 
+public class Fireset
+{	
+	public Fireset()
+	{	fireFactories = new HashMap<String,FireFactory>();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient Instance instance = null;
+	private Instance instance = null;
 	
 	public void setInstance(Instance instance) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.instance = instance;
@@ -53,11 +59,11 @@ public class Fireset extends AbstractFireset
 	/////////////////////////////////////////////////////////////////
 	// FIRE FACTORIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,FireFactory> fireFactories = new HashMap<String,FireFactory>();
+	private HashMap<String,FireFactory> fireFactories;
 	
 	public void addFireFactory(String name, FireFactory fireFactory)
 	{	fireFactories.put(name, fireFactory);
-		fireFactory.setFiresetName(name);
+		fireFactory.setFireset(this);
 	}
 	
 	public Fire makeFire(String name, Tile tile)
@@ -70,4 +76,56 @@ if(fireFactory==null)
 		result = fireFactory.makeSprite(tile);
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String name;
+	
+	public String getName()
+	{	return name;	
+	}
+	
+	public void setName(String name)
+	{	this.name = name;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// factories
+			{	Iterator<Entry<String,FireFactory>> it = fireFactories.entrySet().iterator();
+				while(it.hasNext())
+				{	Entry<String,FireFactory> t = it.next();
+					FireFactory temp = t.getValue();
+					temp.finish();
+					it.remove();
+				}
+			}
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CACHE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+/*	public Fireset cacheCopy(double zoomFactor)
+	{	Fireset result = new Fireset();
+	
+		// name
+		result.name = name;
+	
+		// fires
+		for(Entry<String,FireFactory> entry: fireFactories.entrySet())
+		{	String key = entry.getKey();
+			FireFactory fireFactory = entry.getValue().cacheCopy(zoomFactor,result);
+			result.addFireFactory(key,fireFactory);
+		}
+		
+		return result;
+	}*/
 }

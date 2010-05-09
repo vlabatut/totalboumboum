@@ -23,7 +23,6 @@ package org.totalboumboum.engine.content.sprite.item;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -58,15 +57,15 @@ public class Item extends Sprite
 	// ITEM ABILITIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** original abilities given by this item */
-	private List<AbstractAbility> originalItemAbilities;
+	private ArrayList<AbstractAbility> originalItemAbilities;
 	/** working abilities given by this item */
-	private List<AbstractAbility> itemAbilities;
+	private ArrayList<AbstractAbility> itemAbilities;
 	
-	public List<AbstractAbility> getItemAbilities()
+	public ArrayList<AbstractAbility> getItemAbilities()
 	{	return itemAbilities;
 	}
 	
-	public void initItemAbilities(List<AbstractAbility> abilities)
+	public void initItemAbilities(ArrayList<AbstractAbility> abilities)
 	{	originalItemAbilities = abilities;
 		Iterator<AbstractAbility> i = abilities.iterator();
 		while(i.hasNext())
@@ -169,4 +168,22 @@ public class Item extends Sprite
 
 		return result;		
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			// item abilities
+			{	Iterator<AbstractAbility> it = itemAbilities.iterator();
+				while(it.hasNext())
+				{	AbstractAbility temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+		}
+	}
+
 }

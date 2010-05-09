@@ -186,7 +186,7 @@ public class Column extends ContentPanel
 	public void setLabelIcon(int line, BufferedImage icon, String tooltip)
 	{	MyLabel label = getLabel(line);
 		double zoom = getWidth()/(double)icon.getHeight();
-		icon = ImageTools.getResizedImage(icon,zoom,true);
+		icon = ImageTools.resize(icon,zoom,true);
 		ImageIcon icn = new ImageIcon(icon);
 		label.setText(null);
 		label.setIcon(icn);

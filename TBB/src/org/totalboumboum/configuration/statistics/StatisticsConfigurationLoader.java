@@ -29,7 +29,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -50,59 +49,59 @@ public class StatisticsConfigurationLoader
 	{	Element element; 
 		
 		// include quick starts
-		element = root.getChild(XmlNames.INCLUDE_QUICKSTARTS);
+		element = root.getChild(XmlTools.INCLUDE_QUICKSTARTS);
 		loadIncludeQuickStartsElement(element,result);
 		
 		// include simulations
-		element = root.getChild(XmlNames.INCLUDE_SIMULATIONS);
+		element = root.getChild(XmlTools.INCLUDE_SIMULATIONS);
 		loadIncludeSimulationsElement(element,result);
 		
 		// glicko-2
-		element = root.getChild(XmlNames.GLICKO2);
+		element = root.getChild(XmlTools.GLICKO2);
 		loadGlicko2Element(element,result);
 
 		// launch time
 		result.initLaunchTime();
 		
 		// regular launch
-		Element regularLaunchElement = root.getChild(XmlNames.REGULAR_LAUNCH);
+		Element regularLaunchElement = root.getChild(XmlTools.REGULAR_LAUNCH);
 		loadRegularLaunchElement(regularLaunchElement,result);
 		
 		// quick launch
-		Element quickLaunchElement = root.getChild(XmlNames.QUICK_LAUNCH);
+		Element quickLaunchElement = root.getChild(XmlTools.QUICK_LAUNCH);
 		loadQuickLaunchElement(quickLaunchElement,result);
 	}
 
 	private static void loadIncludeQuickStartsElement(Element root, StatisticsConfiguration result)
-	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean includeQuickStarts = Boolean.valueOf(value);
 		result.setIncludeQuickStarts(includeQuickStarts);
 	}
 
 	private static void loadIncludeSimulationsElement(Element root, StatisticsConfiguration result)
-	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+	{	String value = root.getAttribute(XmlTools.VALUE).getValue().trim();
 		boolean includeSimulations = Boolean.valueOf(value);
 		result.setIncludeSimulations(includeSimulations);
 	}
 
 	private static void loadGlicko2Element(Element root, StatisticsConfiguration result)
 	{	// default rating
-		{	String value = root.getAttribute(XmlNames.DEFAULT_RATING).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.DEFAULT_RATING).getValue().trim();
 			int defaultRating = Integer.valueOf(value);
 			result.setDefaultRating(defaultRating);
 		}
 		// default rating deviation
-		{	String value = root.getAttribute(XmlNames.DEFAULT_RATING_DEVIATION).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.DEFAULT_RATING_DEVIATION).getValue().trim();
 			int defaultRatingDeviation = Integer.valueOf(value);
 			result.setDefaultRatingDeviation(defaultRatingDeviation);
 		}
 		// default rating volatility
-		{	String value = root.getAttribute(XmlNames.DEFAULT_RATING_VOLATILITY).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.DEFAULT_RATING_VOLATILITY).getValue().trim();
 			float defaultRatingVolatility = Float.valueOf(value);
 			result.setDefaultRatingVolatility(defaultRatingVolatility);
 		}
 		// games per period
-		{	String value = root.getAttribute(XmlNames.GAMES_PER_PERIOD).getValue().trim();
+		{	String value = root.getAttribute(XmlTools.GAMES_PER_PERIOD).getValue().trim();
 			int gamesPerPeriod = Integer.parseInt(value);
 			result.setGamesPerPeriod(gamesPerPeriod);
 		}		
@@ -110,24 +109,24 @@ public class StatisticsConfigurationLoader
 	
 	private static void loadRegularLaunchElement(Element root, StatisticsConfiguration result)
 	{	// count
-		String strCount = root.getAttribute(XmlNames.COUNT).getValue().trim();
+		String strCount = root.getAttribute(XmlTools.COUNT).getValue().trim();
 		int count = Integer.parseInt(strCount);
 		result.setRegularLaunchCount(count);
 		
 		// time
-		String strTime = root.getAttribute(XmlNames.TIME).getValue().trim();
+		String strTime = root.getAttribute(XmlTools.TIME).getValue().trim();
 		int time = Integer.parseInt(strTime);
 		result.setRegularLaunchTime(time);
 	}
 	
 	private static void loadQuickLaunchElement(Element root, StatisticsConfiguration result)
 	{	// count
-		String strCount = root.getAttribute(XmlNames.COUNT).getValue().trim();
+		String strCount = root.getAttribute(XmlTools.COUNT).getValue().trim();
 		int count = Integer.parseInt(strCount);
 		result.setQuickLaunchCount(count);
 		
 		// time
-		String strTime = root.getAttribute(XmlNames.TIME).getValue().trim();
+		String strTime = root.getAttribute(XmlTools.TIME).getValue().trim();
 		int time = Integer.parseInt(strTime);
 		result.setQuickLaunchTime(time);
 	}

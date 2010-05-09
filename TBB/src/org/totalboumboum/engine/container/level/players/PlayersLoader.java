@@ -32,7 +32,6 @@ import org.jdom.Element;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -75,11 +74,11 @@ public class PlayersLoader
     	Element element;
     	
     	// locations
-    	element = root.getChild(XmlNames.LOCATIONS);
+    	element = root.getChild(XmlTools.LOCATIONS);
     	loadLocationsElement(element,result);
     	
     	// items
-    	element = root.getChild(XmlNames.ITEMS);
+    	element = root.getChild(XmlTools.ITEMS);
     	loadItemsElement(element,result);
 
     	return result;
@@ -87,7 +86,7 @@ public class PlayersLoader
     
     @SuppressWarnings("unchecked")
 	private static void loadLocationsElement(Element root, Players result)
-    {	List<Element> elements = root.getChildren(XmlNames.CASE);
+    {	List<Element> elements = root.getChildren(XmlTools.CASE);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -98,12 +97,12 @@ public class PlayersLoader
     @SuppressWarnings("unchecked")
     private static void loadCaseElement(Element root, Players result)
     {	// player count
-    	String valStr = root.getAttribute(XmlNames.PLAYERS).getValue().trim();
+    	String valStr = root.getAttribute(XmlTools.PLAYERS).getValue().trim();
 		int value = Integer.valueOf(valStr);
 		PlayerLocation[] locations = new PlayerLocation[value];
 		
 		// location
-		List<Element> elements = root.getChildren(XmlNames.LOCATION);
+		List<Element> elements = root.getChildren(XmlTools.LOCATION);
 		Iterator<Element> i = elements.iterator();
 		int index = 0;
 		while(i.hasNext())
@@ -118,24 +117,24 @@ public class PlayersLoader
     	
     private static void loadLocationElement(Element root, PlayerLocation result)
     {	// player number
-    	String str = root.getAttribute(XmlNames.PLAYER).getValue().trim();
+    	String str = root.getAttribute(XmlTools.PLAYER).getValue().trim();
 		int number = Integer.valueOf(str);
 		result.setNumber(number);
 		
 		// column
-		str = root.getAttribute(XmlNames.COL).getValue().trim();
+		str = root.getAttribute(XmlTools.COL).getValue().trim();
 		int col = Integer.valueOf(str);
 		result.setCol(col);
 		
 		// line
-		str = root.getAttribute(XmlNames.LINE).getValue().trim();
+		str = root.getAttribute(XmlTools.LINE).getValue().trim();
 		int line = Integer.valueOf(str);
 		result.setLine(line);
     }
     
     @SuppressWarnings("unchecked")
     private static void loadItemsElement(Element root, Players result)
-    {	List<Element> elements = root.getChildren(XmlNames.ITEM);
+    {	List<Element> elements = root.getChildren(XmlTools.ITEM);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -145,10 +144,10 @@ public class PlayersLoader
     
     private static void loadItemElement(Element root, Players result)
     {	// name
-    	String str = root.getAttribute(XmlNames.NAME).getValue().trim();
+    	String str = root.getAttribute(XmlTools.NAME).getValue().trim();
     	
     	// number
-    	String nbrStr = root.getAttribute(XmlNames.NUMBER).getValue().trim();
+    	String nbrStr = root.getAttribute(XmlTools.NUMBER).getValue().trim();
     	int number = Integer.valueOf(nbrStr);
     	
     	// create items

@@ -30,7 +30,6 @@ import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -38,7 +37,6 @@ import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.event.AbstractEvent;
-import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -113,12 +111,11 @@ public class Tile
 			drawSprites(items,g,flat,onGround,shadow);
 	}
 
-	private <T extends Sprite> void drawSprites(List<T> sprites, Graphics g, boolean flat, boolean onGround, boolean shadow)
+	private <T extends Sprite> void drawSprites(ArrayList<T> sprites, Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	for(int i=0;i<sprites.size();i++)
 		{	T tempS = sprites.get(i);
 			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-			if((((temp.isActive())==flat) && (tempS.isOnGround()==onGround))
-				|| ((tempS.isOnGround()==false) && (onGround==false)))
+			if(((temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
 				if(shadow)
 					drawShadow(g,tempS);
 				else
@@ -130,16 +127,10 @@ public class Tile
 	 * dessine un sprite sans son ombre
 	 */
 	private void drawSprite(Graphics g, Sprite s)
-	{	List<StepImage> images =  s.getCurrentImages();
-//if(images.size()>1)
-//	System.err.println("ligne");
-		for(int j=0;j<images.size();j++)
-		{	StepImage stepImage = images.get(j);
-			BufferedImage image = stepImage.getImage();
-			double xShift = stepImage.getXShift();
-			double yShift = stepImage.getYShift();
-			double pX = s.getCurrentPosX() + xShift;
-			double pY = s.getCurrentPosY() + yShift;
+	{	BufferedImage image = s.getCurrentImage();
+		if(image!=null)
+		{	double pX = s.getCurrentPosX()+s.getXShift();
+			double pY = s.getCurrentPosY()+s.getYShift();
 			double pZ = s.getCurrentPosZ();
 			pX = pX - ((double)image.getWidth())/2;
 			pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;
@@ -257,11 +248,10 @@ public class Tile
 	 * trace l'ombre d'un sprite (et pas le sprite)
 	 */
 	private void drawShadow(Graphics g, Sprite s)
-	{	StepImage stepImage = s.getShadow();
-		if(stepImage!=null)
-		{	BufferedImage image = stepImage.getImage();
-			double pX = s.getCurrentPosX()+stepImage.getXShift();
-			double pY = s.getCurrentPosY()+stepImage.getYShift();
+	{	BufferedImage image = s.getShadow();
+		if(image!=null)
+		{	double pX = s.getCurrentPosX()+s.getShadowXShift();
+			double pY = s.getCurrentPosY()+s.getShadowYShift();
 			pX = pX - ((double)image.getWidth())/2;
 			pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;
 			//
@@ -614,5 +604,66 @@ result = level.getTile(x,y)==this;
 		result = result+"("+line+","+col+")";
 		result = result+"("+posX+","+posY+")";
 		return result;
+	}
+	
+    /////////////////////////////////////////////////////////////////
+	// FINISHED		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// block
+			{	Iterator<Block> it = blocks.iterator();
+				while(it.hasNext())
+				{	Block temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// bombs
+			{	Iterator<Bomb> it = bombs.iterator();
+				while(it.hasNext())
+				{	Bomb temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// fires
+			{	Iterator<Fire> it = fires.iterator();
+				while(it.hasNext())
+				{	Fire temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// floor
+			{	Iterator<Floor> it = floors.iterator();
+				while(it.hasNext())
+				{	Floor temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// heroes
+			{	Iterator<Hero> it = heroes.iterator();
+				while(it.hasNext())
+				{	Hero temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// item
+			{	Iterator<Item> it = items.iterator();
+				while(it.hasNext())
+				{	Item temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// misc
+			level = null;
+		}
 	}
 }

@@ -34,7 +34,7 @@ import org.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate
 import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
+import org.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.game.round.RoundVariables;
@@ -185,4 +185,22 @@ public class ExplosionManager
 		
 		return result;
 	}	
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// explosion
+if(explosion==null)
+	System.out.println(sprite.getName());
+			explosion.finish();
+			explosion = null;
+			// misc
+			sprite = null;
+		}
+	}
 }

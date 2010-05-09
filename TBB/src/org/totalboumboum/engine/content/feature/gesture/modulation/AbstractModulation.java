@@ -75,4 +75,15 @@ public abstract class AbstractModulation implements Serializable
 	public void setStrength(float strength)
 	{	this.strength = strength;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+		}
+	}	
 }

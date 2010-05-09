@@ -24,5 +24,12 @@ package org.totalboumboum.engine.content.feature.event;
 
 public class AbstractEvent
 {
+	protected boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+		}
+	}
 
 }

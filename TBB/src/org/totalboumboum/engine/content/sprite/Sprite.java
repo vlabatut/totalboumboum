@@ -21,6 +21,7 @@ package org.totalboumboum.engine.content.sprite;
  * 
  */
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -47,7 +48,6 @@ import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
-import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
 import org.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
@@ -67,6 +67,7 @@ import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
+
 
 /* 
  * Sprite possédant un status :
@@ -422,8 +423,8 @@ public abstract class Sprite
 	{	this.animeManager = animeManager;
 	}
 	
-	public List<StepImage> getCurrentImages()
-	{	return animeManager.getCurrentImages();	
+	public BufferedImage getCurrentImage()
+	{	return animeManager.getCurrentImage();	
 	}
 	
 	public Direction getCurrentFacingDirection()
@@ -437,8 +438,24 @@ public abstract class Sprite
 	{	return animeManager.hasShadow();
 	}
 	
-	public StepImage getShadow()
+	public BufferedImage getShadow()
 	{	return animeManager.getShadow();	
+	}
+	
+	public double getXShift()
+	{	return animeManager.getXShift();
+	}
+	
+	public double getYShift()
+	{	return animeManager.getYShift();
+	}
+	
+	public double getShadowXShift()
+	{	return animeManager.getShadowXShift();
+	}
+	
+	public double getShadowYShift()
+	{	return animeManager.getShadowYShift();
 	}
 	
 	public double getBoundHeight()
@@ -824,4 +841,49 @@ public abstract class Sprite
 	{	eventManager.enterRound(Direction.NONE);
 	}
 */	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	protected boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// bound sprites
+			{	Iterator<Sprite> it = boundSprites.iterator();
+				while(it.hasNext())
+				{	Sprite temp = it.next();
+					temp.finish();
+					it.remove();
+				}
+			}
+			// managers
+			abilityManager.finish();
+			abilityManager = null;
+			animeManager.finish();
+			animeManager = null;
+			bombsetManager.finish();
+			bombsetManager = null;
+			controlManager.finish();
+			controlManager = null;
+			delayManager.finish();
+			delayManager = null;
+			eventManager.finish();
+			eventManager = null;
+			explosionManager.finish();
+			explosionManager = null;
+			itemManager.finish();
+			itemManager = null;
+			modulationManager.finish();
+			modulationManager = null;
+			trajectoryManager.finish();
+			trajectoryManager = null;
+			// misc
+			boundToSprite = null;
+			toBeRemovedFromSprite = null;
+			owner = null;
+			player = null;
+			name = null;
+		}
+	}	
 }

@@ -36,7 +36,6 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.GeneralActionLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -45,30 +44,30 @@ public class AbilityLoader
     private static AbstractAbility loadAbilityElement(Element root) throws ClassNotFoundException
     {	AbstractAbility result = null;
 		// strength
-		String strengthStr = root.getAttribute(XmlNames.STRENGTH).getValue().trim().toUpperCase(Locale.ENGLISH);
+		String strengthStr = root.getAttribute(XmlTools.STRENGTH).getValue().trim().toUpperCase(Locale.ENGLISH);
 		float strength;
-		if(strengthStr.equals(XmlNames.VAL_MAX))
+		if(strengthStr.equals(XmlTools.VAL_MAX))
 			strength = Float.MAX_VALUE; //NOTE format de données à inclure dans le XSD (>> actually I removed it)
 		else
 			strength = Float.parseFloat(strengthStr);
     	// frame
-		Attribute attribute = root.getAttribute(XmlNames.FRAME);
+		Attribute attribute = root.getAttribute(XmlTools.FRAME);
 		boolean frame = Boolean.parseBoolean(attribute.getValue());
     	// uses
-		attribute = root.getAttribute(XmlNames.USES);
+		attribute = root.getAttribute(XmlTools.USES);
 		int uses = Integer.parseInt(attribute.getValue());
     	// time
-		attribute = root.getAttribute(XmlNames.TIME);
+		attribute = root.getAttribute(XmlTools.TIME);
 		int time = Integer.parseInt(attribute.getValue());
 		// state ?
-		Element temp = root.getChild(XmlNames.NAME);
+		Element temp = root.getChild(XmlTools.NAME);
 		if(temp!=null)
-		{	String name = temp.getAttribute(XmlNames.VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
+		{	String name = temp.getAttribute(XmlTools.VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
 			result = new StateAbility(name);
 		}
 		// or action ?
 		else
-		{	temp = root.getChild(XmlNames.ACTION);
+		{	temp = root.getChild(XmlTools.ACTION);
 			GeneralAction action = GeneralActionLoader.loadActionElement(temp);
 			result = new ActionAbility(action);				
 		}
@@ -82,7 +81,7 @@ public class AbilityLoader
     @SuppressWarnings("unchecked")
 	public static ArrayList<AbstractAbility> loadAbilitiesElement(Element root) throws ClassNotFoundException
     {	ArrayList<AbstractAbility> result = new ArrayList<AbstractAbility>();
-    	List<Element> abilitiesElts = root.getChildren(XmlNames.ABILITY);
+    	List<Element> abilitiesElts = root.getChildren(XmlTools.ABILITY);
 		Iterator<Element> i = abilitiesElts.iterator();
 		while(i.hasNext())
 		{	Element elt = i.next();
@@ -92,7 +91,7 @@ public class AbilityLoader
 		return result;
     }
     
-	public static void loadAbilityPack(String folderPath, List<AbstractAbility> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void loadAbilityPack(String folderPath, ArrayList<AbstractAbility> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	File dataFile = new File(folderPath+File.separator+FileNames.FILE_ABILITIES+FileNames.EXTENSION_XML);
 		if(dataFile.exists())
 		{	String schemaFolder = FilePaths.getSchemasPath();

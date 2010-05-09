@@ -48,8 +48,6 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 	private static final int LINE_ADJUST = 1;
 	private static final int LINE_SPEED = 2;
 	private static final int LINE_LOG_CONTROLS = 3;
-	private static final int LINE_CACHE = 4;
-	private static final int LINE_CACHE_LIMIT = 5;
 
 	private LinesSubPanel optionsPanel;
 	private EngineConfiguration engineConfiguration;
@@ -220,73 +218,8 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 				
-				// #4 CACHE
-				{	Line ln = optionsPanel.getLine(LINE_CACHE);
-					ln.addLabel(0);
-					int col = 0;
-					// name
-					{	ln.setLabelMinWidth(col,titleWidth);
-						ln.setLabelPrefWidth(col,titleWidth);
-						ln.setLabelMaxWidth(col,titleWidth);
-						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_CACHE_TITLE,false);
-						col++;
-					}
-					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
-						ln.setLabelMinWidth(col,valueWidth);
-						ln.setLabelPrefWidth(col,valueWidth);
-						ln.setLabelMaxWidth(col,valueWidth);
-						setCache();
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					ln.setBackgroundColor(bg);
-				}
-				
-				// #5 CACHE LIMIT
-				{	Line ln = optionsPanel.getLine(LINE_CACHE_LIMIT);
-					ln.addLabel(0);
-					ln.addLabel(0);
-					ln.addLabel(0);
-					int col = 0;
-					// name
-					{	ln.setLabelMinWidth(col,titleWidth);
-						ln.setLabelPrefWidth(col,titleWidth);
-						ln.setLabelMaxWidth(col,titleWidth);
-						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_CACHE_LIMIT_TITLE,false);
-						col++;
-					}
-					// minus button
-					{	ln.setLabelMinWidth(col,iconWidth);
-						ln.setLabelPrefWidth(col,iconWidth);
-						ln.setLabelMaxWidth(col,iconWidth);
-						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_CACHE_LIMIT_MINUS,true);
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-					// value
-					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
-						ln.setLabelMinWidth(col,valueWidth);
-						ln.setLabelPrefWidth(col,valueWidth);
-						ln.setLabelMaxWidth(col,valueWidth);
-						setCacheLimit();
-						col++;
-					}
-					// plus button
-					{	ln.setLabelMinWidth(col,iconWidth);
-						ln.setLabelPrefWidth(col,iconWidth);
-						ln.setLabelMaxWidth(col,iconWidth);
-						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_CACHE_LIMIT_PLUS,true);
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					ln.setBackgroundColor(bg);
-				}
-				
 				// EMPTY
-				{	for(int line=LINE_CACHE_LIMIT+1;line<LINE_COUNT;line++)
+				{	for(int line=LINE_LOG_CONTROLS+1;line<LINE_COUNT;line++)
 					{	Line ln = optionsPanel.getLine(line);
 						int col = 0;
 						int maxWidth = ln.getWidth();
@@ -349,27 +282,6 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 		optionsPanel.getLine(LINE_LOG_CONTROLS).setLabelKey(1,key,true);
 	}
 	
-	private void setCache()
-	{	boolean cache = engineConfiguration.isSpriteMemoryCached();
-		String key;
-		if(cache)
-			key = GuiKeys.MENU_OPTIONS_ADVANCED_LINE_CACHE_ENABLED;
-		else
-			key = GuiKeys.MENU_OPTIONS_ADVANCED_LINE_CACHE_DISABLED;
-		optionsPanel.getLine(LINE_CACHE).setLabelKey(1,key,true);
-	}
-	
-	private void setCacheLimit()
-	{	long limit = engineConfiguration.getSpriteCacheLimit();
-		limit = limit/1024/1024;
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMaximumFractionDigits(0);
-		nf.setMinimumFractionDigits(0);
-		String text = nf.format(limit);
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_ADVANCED_LINE_CACHE_LIMIT_TITLE+GuiKeys.TOOLTIP); 
-		optionsPanel.getLine(LINE_CACHE_LIMIT).setLabelText(2,text,tooltip);
-	}
-
 	@Override
 	public void refresh()
 	{	// nothing to do here
@@ -450,35 +362,12 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 				// common
 				engineConfiguration.setSpeedCoeff(speedValues[index]);
 				setGameSpeed();
-				break;
 			// log controls
 			case LINE_LOG_CONTROLS:
 				boolean logControls = !engineConfiguration.getLogControls();
 				engineConfiguration.setLogControls(logControls);
 				setLogControls();
 				break;
-			// cache
-			case LINE_CACHE:
-				boolean cache = !engineConfiguration.isSpriteMemoryCached();
-				engineConfiguration.setSpriteMemoryCached(cache);
-				setCache();
-				break;
-			// cache limit
-			case LINE_CACHE_LIMIT:
-				long limit = engineConfiguration.getSpriteCacheLimit();
-				// minus
-				if(pos[1]==1)
-				{	if(limit>=16*1024*1024)
-						limit = limit-16*1024*1024;
-				}
-				// plus
-				else //if(pos[1]==3)
-				{	limit = limit + 16*1024*1024;				
-				}
-				// common
-				engineConfiguration.setSpriteCacheLimit(limit);
-				setCacheLimit();
-				break;			
 		}
 	}
 	

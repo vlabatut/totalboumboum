@@ -29,7 +29,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -47,7 +46,7 @@ public class AisConfigurationSaver
 	}
 
 	private static Element saveAisElement(AisConfiguration aisConfiguration)
-	{	Element result = new Element(XmlNames.AIS); 
+	{	Element result = new Element(XmlTools.AIS); 
 	
 		// ups
 		Element upsElement = saveUpsElement(aisConfiguration);
@@ -73,44 +72,44 @@ public class AisConfigurationSaver
 	}
 	
 	private static Element saveUpsElement(AisConfiguration aisConfiguration)
-	{	Element result = new Element(XmlNames.UPS);
+	{	Element result = new Element(XmlTools.UPS);
 		String ups = Integer.toString(aisConfiguration.getAiUps());
-		result.setAttribute(XmlNames.VALUE,ups);
+		result.setAttribute(XmlTools.VALUE,ups);
 		return result;
 	}
 
 	private static Element saveAutoAdvanceElement(AisConfiguration aisConfiguration)
-	{	Element result = new Element(XmlNames.AUTO_ADVANCE);
+	{	Element result = new Element(XmlTools.AUTO_ADVANCE);
 	
 		// switch
 		String autoAdvance = Boolean.toString(aisConfiguration.getAutoAdvance());
-		result.setAttribute(XmlNames.VALUE,autoAdvance);
+		result.setAttribute(XmlTools.VALUE,autoAdvance);
 		
 		// delay
 		String autoAdvanceDelay = Long.toString(aisConfiguration.getAutoAdvanceDelay());
-		result.setAttribute(XmlNames.DELAY,autoAdvanceDelay);
+		result.setAttribute(XmlTools.DELAY,autoAdvanceDelay);
 
 		return result;
 	}
 	
 	private static Element saveHideAllAisElement(AisConfiguration aisConfiguration)
-	{	Element result = new Element(XmlNames.HIDE_ALLAIS);
+	{	Element result = new Element(XmlTools.HIDE_ALLAIS);
 		String hideAllAis = Boolean.toString(aisConfiguration.getHideAllAis());
-		result.setAttribute(XmlNames.VALUE,hideAllAis);
+		result.setAttribute(XmlTools.VALUE,hideAllAis);
 		return result;
 	}
 
 	private static Element saveDisplayExceptionsElement(AisConfiguration aisConfiguration)
-	{	Element result = new Element(XmlNames.DISPLAY_EXCEPTIONS);
+	{	Element result = new Element(XmlTools.DISPLAY_EXCEPTIONS);
 		String displayExceptions = Boolean.toString(aisConfiguration.getDisplayExceptions());
-		result.setAttribute(XmlNames.VALUE,displayExceptions);
+		result.setAttribute(XmlTools.VALUE,displayExceptions);
 		return result;
 	}
 
 	private static Element saveLogExceptionsElement(AisConfiguration aisConfiguration)
-	{	Element result = new Element(XmlNames.LOG_EXCEPTIONS);
+	{	Element result = new Element(XmlTools.LOG_EXCEPTIONS);
 		String logExceptions = Boolean.toString(aisConfiguration.getLogExceptions());
-		result.setAttribute(XmlNames.VALUE,logExceptions);
+		result.setAttribute(XmlTools.VALUE,logExceptions);
 		return result;
 	}
 }

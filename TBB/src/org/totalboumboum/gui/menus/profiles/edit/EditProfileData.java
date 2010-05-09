@@ -128,7 +128,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					label.setToolTipText(tooltip);
 					BufferedImage icon = GuiTools.getIcon(key);
 					double zoom = nameHeight/(double)icon.getHeight();
-					icon = ImageTools.getResizedImage(icon,zoom,true);
+					icon = ImageTools.resize(icon,zoom,true);
 					ImageIcon icn = new ImageIcon(icon);
 					label.setText(null);
 					namePanel.add(label);

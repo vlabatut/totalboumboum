@@ -46,26 +46,10 @@ public class SelfModulation extends AbstractStateModulation
 	public SelfModulation copy()
 	{	SelfModulation result = new SelfModulation(name);
 		result.name = name;
+		result.finished = finished;
 		result.frame = frame;
 		result.gestureName = gestureName;
 		result.strength = strength;
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CCACHE					/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public SelfModulation cacheCopy(double zoomFactor)
-	{	SelfModulation result = new SelfModulation(name);
-	
-		// name
-		result.name = name;
-		
-		// misc
-		result.frame = frame;
-		result.gestureName = gestureName;
-		result.strength = strength;
-		
 		return result;
 	}
 }

@@ -31,11 +31,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.engine.content.sprite.floor.HollowFloorFactory;
-import org.totalboumboum.engine.content.sprite.floor.HollowFloorFactoryLoader;
+import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
+import org.totalboumboum.engine.content.sprite.floor.FloorFactoryLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -44,7 +43,7 @@ public class FloorsetLoader
 	/////////////////////////////////////////////////////////////////
 	// GENERAL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static void loadFloorset(String folderPath, HollowTheme result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void loadFloorset(String folderPath, Theme result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
@@ -59,22 +58,22 @@ public class FloorsetLoader
 		loadFloorsetElement(root,individualFolder,result);
     }
 
-	private static void loadFloorsetElement(Element root, String folder, HollowTheme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	private static void loadFloorsetElement(Element root, String folder, Theme result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// abstract floors
-    	HashMap<String,HollowFloorFactory> abstractFloors = new HashMap<String,HollowFloorFactory>();
-    	Element abstractFloorsElt = root.getChild(XmlNames.ABSTRACT_FLOORS);
+    	HashMap<String,FloorFactory> abstractFloors = new HashMap<String,FloorFactory>();
+    	Element abstractFloorsElt = root.getChild(XmlTools.ABSTRACT_FLOORS);
     	if(abstractFloorsElt!=null)
     		loadFloorsElement(abstractFloorsElt,folder,result,abstractFloors,Type.ABSTRACT);
     	
     	// concrete floors
-    	Element concreteFloorsElt = root.getChild(XmlNames.CONCRETE_FLOORS);
+    	Element concreteFloorsElt = root.getChild(XmlTools.CONCRETE_FLOORS);
 		loadFloorsElement(concreteFloorsElt,folder,result,abstractFloors,Type.CONCRETE);
 	}
     
 	@SuppressWarnings("unchecked")
-	private static void loadFloorsElement(Element root, String folder, HollowTheme result, HashMap<String,HollowFloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadFloorsElement(Element root, String folder, Theme result, HashMap<String,FloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
-    	List<Element> floors = root.getChildren(XmlNames.FLOOR);
+    	List<Element> floors = root.getChildren(XmlTools.FLOOR);
     	Iterator<Element> i = floors.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
@@ -82,18 +81,18 @@ public class FloorsetLoader
     	}
 	}
     
-	private static void loadFloorElement(Element root, String folder, HollowTheme result, HashMap<String,HollowFloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadFloorElement(Element root, String folder, Theme result, HashMap<String,FloorFactory> abstractFloors, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
+		String name = root.getAttribute(XmlTools.NAME).getValue().trim();
 		
 		// folder
     	String individualFolder = folder;
-		Attribute attribute = root.getAttribute(XmlNames.FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.FOLDER);
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 
 		// factory
 		boolean isAbstract = type==Type.ABSTRACT;
-		HollowFloorFactory floorFactory = HollowFloorFactoryLoader.loadFloorFactory(individualFolder,abstractFloors,isAbstract);
+		FloorFactory floorFactory = FloorFactoryLoader.loadFloorFactory(individualFolder,abstractFloors,isAbstract);
 		if(isAbstract)
 			abstractFloors.put(name,floorFactory);
 		else

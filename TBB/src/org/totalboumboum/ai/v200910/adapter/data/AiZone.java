@@ -40,7 +40,6 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.LocalLoop;
 import org.totalboumboum.engine.player.Player;
-import org.totalboumboum.game.limit.LimitTime;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
@@ -139,20 +138,10 @@ public class AiZone
 	 * @param elapsedTime
 	 */
 	private void updateTimes(long elapsedTime)
-	{	// init
-		LocalLoop loop = level.getLoop();
-	
-		// total time
+	{	LocalLoop loop = level.getLoop();
 		this.totalTime = loop.getTotalGameTime();
-		
-		// elapsed time
 		this.elapsedTime = elapsedTime;
-		
-		// time limit
-		this.limitTime = Long.MAX_VALUE;
-		LimitTime lt = loop.getRound().getLimits().getTimeLimit();
-		if(lt!=null)
-			this.limitTime = lt.getThreshold();
+		this.limitTime = loop.getRound().getLimits().getTimeLimit().getThreshold();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -1278,7 +1267,6 @@ public class AiZone
 		for(int line=0;line<height;line++)
 			for(int col=0;col<width;col++)
 				matrix[line][col].finish();
-		
 		// sprites
 		blockMap.clear();
 		bombMap.clear();
@@ -1287,9 +1275,5 @@ public class AiZone
 		heroMap.clear();
 		itemMap.clear();
 		ownHero = null;
-		
-		// misc
-		level = null;
-		player = null;
 	}
 }

@@ -77,8 +77,8 @@ import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
-import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
-import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
+import org.totalboumboum.engine.content.sprite.hero.HeroFactory;
+import org.totalboumboum.engine.content.sprite.hero.HeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.SystemControl;
 import org.totalboumboum.engine.player.Player;
@@ -89,8 +89,8 @@ import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CalculusTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.time.TimeTools;
-import org.totalboumboum.tools.time.TimeUnit;
+import org.totalboumboum.tools.strings.StringTools;
+import org.totalboumboum.tools.strings.StringTools.TimeUnit;
 import org.xml.sax.SAXException;
 
 public class LocalLoop extends Loop
@@ -103,7 +103,6 @@ public class LocalLoop extends Loop
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
 		systemControl = new SystemControl(this);
-long start = System.currentTimeMillis();
 
 		// load level & instance
 		HollowLevel hollowLevel = round.getHollowLevel();
@@ -113,9 +112,9 @@ long start = System.currentTimeMillis();
 		level = hollowLevel.getLevel();
 		RoundVariables.setLoop(this);
 		instance.loadFiresetMap();
-		instance.loadExplosionset();
+		instance.loadExplosionSet();
 		loadStepOver();
-		instance.loadBombsetMaps(round.getProfilesColors());
+		instance.loadBombsetMap();
 		loadStepOver();
 		instance.loadItemset();
 		loadStepOver();
@@ -124,7 +123,7 @@ long start = System.currentTimeMillis();
 		
 		// load players : common stuff
 		String baseFolder = FilePaths.getInstancesPath()+File.separator+RoundVariables.instance.getName()+File.separator+FileNames.FOLDER_HEROES;
-		HollowHeroFactory base = HollowHeroFactoryLoader.loadBase(baseFolder);
+		HeroFactory base = HeroFactoryLoader.loadHeroFactory(baseFolder);
 //		loadStepOver();		
 		// load players : individual stuff
 		ArrayList<Profile> profiles = round.getProfiles();
@@ -183,8 +182,6 @@ long start = System.currentTimeMillis();
 			loadStepOver();
 			j++;
 		}
-long end = System.currentTimeMillis();
-System.out.println("total load time: "+(end-start));
 		
 		// init logs
 		initLogs();
@@ -1020,7 +1017,7 @@ System.out.println("total load time: "+(end-start));
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			long time = getTotalGameTime();
-			String text = "Game time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
+			String text = "Game time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);
@@ -1033,7 +1030,7 @@ System.out.println("total load time: "+(end-start));
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			long time = getTotalEngineTime();
-			String text = "Engine time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
+			String text = "Engine time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);
@@ -1046,7 +1043,7 @@ System.out.println("total load time: "+(end-start));
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			long time = System.currentTimeMillis()-gameStartTime;
-			String text = "Real time: "+TimeTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
+			String text = "Real time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND,false);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);
@@ -1273,24 +1270,20 @@ System.out.println("total load time: "+(end-start));
 		{	super.finish();
 			// system listener
 			panel.removeKeyListener(systemControl);
-			
 			// players
 			Iterator<Player> i = players.iterator();
 			while(i.hasNext())
-			{	Player player = i.next();
-				panel.removeKeyListener(player.getSpriteControl());
-				player.finish();
+			{	Player temp = i.next();
+				panel.removeKeyListener(temp.getSpriteControl());
+				temp.finish();
 				i.remove();
 			}
-			
 			// panel
 //			panel.finish();
 			panel = null;
-			
 			// level
-//			level.finish();
+			level.finish();
 			level = null;
-			
 			// control
 			systemControl.finish();
 			systemControl = null;

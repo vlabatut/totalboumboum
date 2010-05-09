@@ -87,7 +87,7 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private transient Instance instance;
+	private Instance instance;
 
 	public Instance getInstance()
     {	return instance;
@@ -113,7 +113,7 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// THEME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    public void loadTheme() throws SAXException, IOException, ParserConfigurationException, ClassNotFoundException
+    public void loadTheme() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// theme
     	String individualFolder = FilePaths.getInstancesPath()+File.separator+levelInfo.getInstance();
     	individualFolder = individualFolder+File.separator+FileNames.FOLDER_THEMES+File.separator+levelInfo.getTheme();
@@ -168,8 +168,6 @@ public class HollowLevel implements Serializable
 					for(int i=0;i<temp.length-1;i++)
 						name = name+temp[i];
 					Bomb bomb = bombset.makeBomb(name,matrix[line][col],range);
-if(bomb==null)
-	System.err.println("makeBomb error: bomb "+name+" not found.");
 					level.insertSpriteTile(bomb);				
 				}
 			}
@@ -286,11 +284,16 @@ if(bomb==null)
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+    private boolean finished = false;
+	
 	public void finish()
-    {	instance = null;
-    	level = null;
-    	levelInfo = null;
-    	players = null;
-    	zone = null;
+    {	if(!finished)
+	    {	// misc
+	    	instance = null;
+	    	level = null;
+	    	levelInfo = null;
+	    	players = null;
+	    	zone = null;
+	    }
     }
 }

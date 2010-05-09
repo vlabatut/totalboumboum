@@ -29,7 +29,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -49,51 +48,35 @@ public class EngineConfigurationLoader
 	private static void loadEngineElement(Element root, EngineConfiguration result)
 	{	Element element; 
 		// timing
-		element = root.getChild(XmlNames.TIMING);
+		element = root.getChild(XmlTools.TIMING);
 		loadTimingElement(element,result);
 		
 		// logs
-		element = root.getChild(XmlNames.LOG);
+		element = root.getChild(XmlTools.LOG);
 		loadLogElement(element,result);
-		
-		// cache
-		element = root.getChild(XmlNames.CACHE);
-		loadCacheElement(element,result);
 	}
 	
 	private static void loadTimingElement(Element root, EngineConfiguration result)
 	{	// auto fps
-		String autoFpsStr = root.getAttribute(XmlNames.ADJUST).getValue().trim();
+		String autoFpsStr = root.getAttribute(XmlTools.ADJUST).getValue().trim();
 		boolean autoFps = Boolean.valueOf(autoFpsStr);
 		result.setAutoFps(autoFps);
 
 		// fps
-		String fpsStr = root.getAttribute(XmlNames.FPS).getValue().trim();
+		String fpsStr = root.getAttribute(XmlTools.FPS).getValue().trim();
 		int fps = Integer.valueOf(fpsStr);
 		result.setFps(fps);
 
 		// speed
-		String speedStr = root.getAttribute(XmlNames.SPEED).getValue().trim();
+		String speedStr = root.getAttribute(XmlTools.SPEED).getValue().trim();
 		float speed = Float.valueOf(speedStr);
 		result.setSpeedCoeff(speed);
 	}
 	
 	private static void loadLogElement(Element root, EngineConfiguration result)
 	{	// controls
-		String controlsStr = root.getAttribute(XmlNames.CONTROLS).getValue().trim();
+		String controlsStr = root.getAttribute(XmlTools.CONTROLS).getValue().trim();
 		boolean controls = Boolean.valueOf(controlsStr);
 		result.setLogControls(controls);
-	}
-
-	private static void loadCacheElement(Element root, EngineConfiguration result)
-	{	// cache
-		String cacheStr = root.getAttribute(XmlNames.CACHE).getValue().trim();
-		boolean cache = Boolean.valueOf(cacheStr);
-		result.setSpriteMemoryCached(cache);
-
-		// cache limit
-		String cacheLimitStr = root.getAttribute(XmlNames.CACHE_LIMIT).getValue().trim();
-		long cacheLimit = Long.valueOf(cacheLimitStr);
-		result.setSpriteCacheLimit(cacheLimit);
 	}
 }

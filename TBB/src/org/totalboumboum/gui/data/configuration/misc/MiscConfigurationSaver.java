@@ -31,7 +31,6 @@ import org.totalboumboum.gui.tools.GuiFileTools;
 import org.totalboumboum.gui.tools.GuiXmlTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -66,21 +65,21 @@ public class MiscConfigurationSaver
 	private static Element saveLanguageElement(MiscConfiguration miscConfiguration)
 	{	Element result = new Element(GuiXmlTools.ELT_LANGUAGE);
 		String language = miscConfiguration.getLanguageName();
-		result.setAttribute(XmlNames.VALUE,language);
+		result.setAttribute(XmlTools.VALUE,language);
 		return result;
 	}
 	
 	private static Element saveFontElement(MiscConfiguration miscConfiguration)
 	{	Element result = new Element(GuiXmlTools.ELT_FONT);
 		String font = miscConfiguration.getFontName();
-		result.setAttribute(XmlNames.VALUE,font);
+		result.setAttribute(XmlTools.VALUE,font);
 		return result;
 	}
 	
 	private static Element saveBackgroundElement(MiscConfiguration miscConfiguration)
 	{	Element result = new Element(GuiXmlTools.ELT_BACKGROUND);
 		String background = miscConfiguration.getBackgroundName();
-		result.setAttribute(XmlNames.FILE,background);
+		result.setAttribute(XmlTools.FILE,background);
 		return result;
 	}
 }

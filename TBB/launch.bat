@@ -3,7 +3,7 @@
 :: This is a MS-DOS script, it works only on Windows operating systems.
 :: It launches TBB, but you can preferably use TBB.exe (opens no terminal).
 ::
-:: v.0.2
+:: v.0.1
 ::
 :: -------------------------------------------------------------------
 ::
@@ -33,8 +33,7 @@
 	Set ai=.\resources\ai
 	Set bin=.\bin
 	Set jdom=.\resources\lib\jdom.jar
-	Set japa=.\resources\lib\javaparser-1.0.7.jar
-	Set cp=%bin%;%jdom%;%japa%;%ai%
+	Set cp=%bin%;%jdom%;%ai%
 	Set launcher=org.totalboumboum.Launcher
 	Set splash=.\resources\gui\images\splash.png
 

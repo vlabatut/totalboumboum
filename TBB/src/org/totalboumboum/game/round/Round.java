@@ -34,7 +34,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.loop.LocalLoop;
@@ -53,6 +52,7 @@ import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CalculusTools;
 import org.xml.sax.SAXException;
+
 
 public class Round implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;
@@ -126,11 +126,9 @@ public class Round implements StatisticHolder, Serializable
 	{	// loop
 		loop.finish();
 		loop = null;
-		
 		// level description
 		hollowLevel.finish();
 		hollowLevel = null;
-		
 		// misc
 		match = null;
 		panel = null;
@@ -138,8 +136,6 @@ public class Round implements StatisticHolder, Serializable
 		stats = null;
 		RoundVariables.level = null;
 		RoundVariables.loop = null;
-		RoundVariables.instance = null;
-		
 		// garbage collect
 		Runtime rt = Runtime.getRuntime();
 		rt.gc(); 
@@ -222,12 +218,6 @@ public class Round implements StatisticHolder, Serializable
 	
 	public ArrayList<Profile> getProfiles()
 	{	return match.getProfiles();
-	}	
-	public List<PredefinedColor> getProfilesColors()
-	{	List<PredefinedColor> result = new ArrayList<PredefinedColor>();
-		for(Profile p: match.getProfiles())
-			result.add(p.getSpriteColor());
-		return result;
 	}	
 	
 	public void playerOut(int index)
