@@ -3,13 +3,13 @@
 
 	<xsd:simpleType name="tScore">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="BOMBS" />
-			<xsd:enumeration value="CROWNS" />
-			<xsd:enumeration value="BOMBEDS" />
-			<xsd:enumeration value="ITEMS" />
-			<xsd:enumeration value="BOMBINGS" />
-			<xsd:enumeration value="PAINTINGS" />
-			<xsd:enumeration value="TIME" />
+			<xsd:enumeration value="bombs" />
+			<xsd:enumeration value="crowns" />
+			<xsd:enumeration value="deaths" />
+			<xsd:enumeration value="items" />
+			<xsd:enumeration value="kills" />
+			<xsd:enumeration value="paintings" />
+			<xsd:enumeration value="time" />
 		</xsd:restriction>
 	</xsd:simpleType>
 

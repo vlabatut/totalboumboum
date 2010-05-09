@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fireset
+<fireset name="penetration"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../schemas/fireset.xsd">
 
-	<abstractFires>
-		<fire name="common_penetration" folder="_common" />
-	</abstractFires>
+	<fire name="inside" folder="inside" />	
+	<fire name="outside" folder="outside" />
 
-	<concreteFires>
-		<fire name="inside" folder="inside" />	
-		<fire name="outside" folder="outside" />
-	</concreteFires>
-	
 </fireset>

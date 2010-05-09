@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tournament
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
+	xsi:noNamespaceSchemaLocation="..\..\..\schemas\tournament.xsd">
 	
-	<general name="Basic Tournament"/>
+	<general name="Tournament-séquence loooong"/>
 
  	<notes>
  		<line value="Here goes a short description of the tournament." />
@@ -12,18 +12,20 @@
  	</notes>
  	
 	<sequence>
+
  		<limits>
- 			<confrontation>
-				<points local="true" name="points" />
- 				<threshold value="3" />
- 			</confrontation>
+ 			<confrontation value="3" />
  		</limits>
+
+		<points local="false" name="basicTournament" />
 	 	
 		<matches randomOrder="false">
-			<match local="true" name="match" />
-			<match local="true" name="match" />
-			<match local="true" name="match" />
+			<match local="false" name="matchLong" />
+			<match local="false" name="matchLong" />
+			<match local="false" name="matchLong" />
 		</matches>
+
 	</sequence>
-			
+		
+		
 </tournament>

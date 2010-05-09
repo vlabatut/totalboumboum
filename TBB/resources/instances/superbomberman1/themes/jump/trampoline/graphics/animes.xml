@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="..\..\..\..\..\..\schemas\animes.xsd" 
+		scale="1" default="standing">
+	<gestures>
+		<gesture name="standing" folder="standing" repeat="true">
+			<direction name="none">
+				<step file="standing.gif" />
+			</direction>
+		</gesture>
+		<gesture name="reacting" folder="reacting">
+			<direction name="none">
+				<step duration="150" file="1.gif" />
+				<!--  à compléter -->
+			</direction>
+		</gesture>
+	</gestures>
+</animes>

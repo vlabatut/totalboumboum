@@ -24,6 +24,7 @@
 			<xsd:element name="notes" type="tNotes" />
 			<xsd:element name="author" type="tAuthor"  minOccurs="0"/>
 			<xsd:element name="limits" type="tMatchLimits"  />
+			<xsd:element name="points" type="tPointProcessor" />
 			<xsd:element name="rounds" type="tRounds" />
 		</xsd:sequence>
 	</xsd:complexType>
