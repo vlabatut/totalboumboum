@@ -2,26 +2,26 @@
 <gesture-modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/gesture_modulations.xsd" >
 
-	<selfModulations>
-	</selfModulations>
+	<self-modulations>
+	</self-modulations>
 	
-	<otherModulations>
-	</otherModulations>
+	<other-modulations>
+	</other-modulations>
 	
-	<actorModulations>
-	</actorModulations>
+	<actor-modulations>
+	</actor-modulations>
 	
-	<targetModulations>
+	<target-modulations>
 <!--  	CONSUME --> 
 		<modulation frame="true" strength="0" >
 			<action name="CONSUME" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="SOME" />
-			<actorRestrictions />
-			<targetRestrictions />
+				tilePosition="SAME" orientation="ANY" actor="SOME" />
+			<actor-restrictions />
+			<target-restrictions />
 		</modulation>
-	</targetModulations>
+	</target-modulations>
 	
-	<thirdModulations>
-	</thirdModulations>
+	<third-modulations>
+	</third-modulations>
 
 </gesture-modulations>

@@ -2,8 +2,8 @@
 <floorset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/floorset.xsd" >
 
-	<concreteFloors>
+	<concrete-floors>
 		<floor name="regular" folder="regular" />
-	</concreteFloors>
+	</concrete-floors>
 
 </floorset>

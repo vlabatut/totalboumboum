@@ -4,21 +4,7 @@
 		scale="1" >
 		
 	<gestures>	
-		<gesture name="APPEARING" folder="appearing" proportional="true">
-			<direction name="NONE">
-				<step file="01.gif" duration="100" />
-				<step file="02.gif" duration="100"  />
-				<step file="03.gif" duration="100"  />
-				<step file="04.gif" duration="100"  />
-				<step file="05.gif" duration="100"  />
-				<step file="06.gif" duration="100"  />
-				<step file="07.gif" duration="100"  />
-				<step file="08.gif" duration="100"  />
-				<step file="09.gif" duration="100"  />
-			</direction>
-		</gesture>
-
-		<gesture name="STANDING" folder="standing" >
+		<gesture name="STANDING">
 			<direction name="NONE">
 				<step file="standing.gif" />
 			</direction>

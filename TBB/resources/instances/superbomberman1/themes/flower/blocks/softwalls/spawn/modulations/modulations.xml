@@ -3,5 +3,6 @@
 		xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/modulations.xsd" >
 	
 	<gesture name="HIDING" file="hiding.xml" />
+	<gesture name="SPAWNING" file="spawning.xml" />
 
 </modulations>

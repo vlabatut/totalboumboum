@@ -2,59 +2,35 @@
 <zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd" >
 	
-	<variableTiles>
-		<variableTile name="tile1">
-			<value proba="0.4" >
-			</value>
+	<variable-tiles>
+		<variable-tile name="tile1">
 			<value proba="0.3" >
 				<block name="softwall" />
 			</value>
-			<value proba="0.06" >
+			<value proba="0.1" >
 				<block name="softwall" />
-				<item name="extrabomb" />
+				<item type="extrabomb" />
 			</value>
-			<value proba="0.06" >
+			<value proba="0.1" >
 				<block name="softwall" />
-				<item name="extraflame" />
-			</value>
-			<value proba="0.01" >
-				<block name="softwall" />
-				<item name="fireproof" />
+				<item type="extraflame" />
 			</value>
 			<value proba="0.01" >
 				<block name="softwall" />
-				<item name="life" />
+				<item type="remotecontrol" />
+			</value>
+			<value proba="0.04" >
+				<block name="softwall" />
+				<item type="throughbombs" />
 			</value>
 			<value proba="0.05" >
 				<block name="softwall" />
-				<item name="malus" />
+				<item type="throughwalls" />
 			</value>
-			<value proba="0.02" >
-				<block name="softwall" />
-				<item name="random" />
+			<value proba="0.4" >
 			</value>
-			<value proba="0.02" >
-				<block name="softwall" />
-				<item name="remotecontrol" />
-			</value>
-			<value proba="0.02" >
-				<block name="softwall" />
-				<item name="speed" />
-			</value>
-			<value proba="0.02" >
-				<block name="softwall" />
-				<item name="throughbombs" />
-			</value>
-			<value proba="0.02" >
-				<block name="softwall" />
-				<item name="throughwalls" />
-			</value>
-			<value proba="0.01" >
-				<block name="softwall" />
-				<item name="vest" />
-			</value>
-		</variableTile>
-	</variableTiles>
+		</variable-tile>
+	</variable-tiles>
 	
 	<matrix>
 		<line pos="0">

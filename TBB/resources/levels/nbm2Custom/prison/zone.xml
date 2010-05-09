@@ -2,77 +2,56 @@
 <zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd" >
 	
-	<variableTiles>
-		<variableTile name="tile1">
+	<variable-tiles>
+		<variable-tile name="tile1">
 			<value proba="0.4" >
+				<block group="softwalls" name="broken"/>
 			</value>
-			<value proba="0.3" >
-				<block group="softwalls" name="broken" />
+			<value proba="0.1" >
+				<block group="softwalls" name="regular"/>
 			</value>
-			<value proba="0.06" >
-				<block group="softwalls" name="regular" />
-				<item name="extrabomb" />
+			<value proba="0.1" >
+				<block group="softwalls" name="regular"/>
+				<item type="extrabomb" />
 			</value>
-			<value proba="0.06" >
-				<block group="softwalls" name="regular" />
-				<item name="extraflame" />
-			</value>
-			<value proba="0.01" >
-				<block group="softwalls" name="regular" />
-				<item name="fireproof" />
+			<value proba="0.1" >
+				<block group="softwalls" name="broken"/>
+				<item type="extraflame" />
 			</value>
 			<value proba="0.01" >
-				<block group="softwalls" name="regular" />
-				<item name="life" />
+				<block group="softwalls" name="regular"/>
+				<item type="remotecontrol" />
+			</value>
+			<value proba="0.04" >
+				<block group="softwalls" name="regular"/>
+				<item type="throughbombs" />
 			</value>
 			<value proba="0.05" >
-				<block group="softwalls" name="regular" />
-				<item name="malus" />
+				<block group="softwalls" name="broken"/>
+				<item type="throughwalls" />
 			</value>
-			<value proba="0.02" >
-				<block group="softwalls" name="regular" />
-				<item name="random" />
+			<value proba="0.2" >
 			</value>
-			<value proba="0.02" >
-				<block group="softwalls" name="regular" />
-				<item name="remotecontrol" />
-			</value>
-			<value proba="0.02" >
-				<block group="softwalls" name="regular" />
-				<item name="speed" />
-			</value>
-			<value proba="0.02" >
-				<block group="softwalls" name="regular" />
-				<item name="throughbombs" />
-			</value>
-			<value proba="0.02" >
-				<block group="softwalls" name="regular" />
-				<item name="throughwalls" />
-			</value>
-			<value proba="0.01" >
-				<block group="softwalls" name="regular" />
-				<item name="vest" />
-			</value>
-		</variableTile>
+		</variable-tile>
 
-		<variableTile name="border">
+		<variable-tile name="border">
 			<value proba="0.5" >
 				<block group="hardwalls" name="vertical" />
 			</value>
 			<value proba="0.5" >
 				<block group="hardwalls" name="verticalBroken" />
 			</value>
-		</variableTile>
+		</variable-tile>
 
-		<variableTile name="hardwall">
+		<variable-tile name="hardwall">
 			<value proba="0.5" >
 				<block group="hardwalls" name="regular" />
 			</value>
 			<value proba="0.5" >
 				<block group="hardwalls" name="broken" />
 			</value>
-		</variableTile>
-	</variableTiles>
+		</variable-tile>
+	</variable-tiles>
 	
 	<matrix>
 		<line pos="0">

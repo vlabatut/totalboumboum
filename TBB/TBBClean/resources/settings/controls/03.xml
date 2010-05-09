@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controls xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\controls.xsd">
+	<event name="DROPBOMB" autofire="true">
+		<on key="VK_P" />
+		<off key="VK_P" />
+	</event>
+	<event name="PUNCHBOMB" autofire="false">
+		<on key="VK_DOLLAR" />
+		<off key="VK_DOLLAR" />
+	</event>
+	<event name="RIGHT" autofire="true">
+		<on key="VK_ASTERISK" />
+		<off key="VK_ASTERISK" />
+	</event>
+	<event name="DOWN" autofire="true">
+		<on key="VK_UNDEFINED" />
+		<off key="VK_UNDEFINED" />
+	</event>
+	<event name="UP" autofire="true">
+		<on key="VK_DEAD_CIRCUMFLEX" />
+		<off key="VK_DEAD_CIRCUMFLEX" />
+	</event>
+	<event name="LEFT" autofire="true">
+		<on key="VK_M" />
+		<off key="VK_M" />
+	</event>
+	<event name="TRIGGERBOMB" autofire="false">
+		<on key="VK_COLON" />
+		<off key="VK_COLON" />
+	</event>
+</controls>
+

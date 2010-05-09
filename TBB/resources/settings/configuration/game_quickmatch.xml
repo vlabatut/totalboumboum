@@ -2,8 +2,8 @@
 <gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_quickmatch.xsd">
 	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
 	<settings>
-		<levels randomOrder="false" />
-		<players randomLocation="false" />
+		<levels randomOrder="true" />
+		<players randomLocation="true" />
 		<limits points="0" rounds="6" time="0" />
 		<points share="true" draw="NONE">
 			<value rank="1" points="8" />
@@ -14,11 +14,13 @@
 		</points>
 	</settings>
 	<players>
-		<player file="1" color="CYAN" controls="1" spritePack="totalboumboum" spriteFolder="prognathe" />
-		<player file="65" color="INDIGO" controls="0" spritePack="totalboumboum" spriteFolder="prognathe" />
+		<player file="1" color="CYAN" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="59" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="60" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="53" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="totalboumboum" folder="debug" />
+		<level pack="gsuTournament" folder="old" />
 	</levels>
 </gameQuickmatch>
 

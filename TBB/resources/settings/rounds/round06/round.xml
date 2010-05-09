@@ -13,15 +13,15 @@
 
 	<limits>
 		<lastStanding>
-			<points local="false" name="RoundSurvival" />
+			<points local="false" name="basicSurvival" />
 			<threshold value="1" comparator="LESSEQ"/>
 		</lastStanding>
 		<time>
-			<points local="false" name="RoundSurvival" />
+			<points local="false" name="basicSurvival" />
  			<threshold value="60000" />
 		</time>
 	</limits>
 	
-	<level packname="sbm1Official" name="battle_06" />
+	<level packname="sbm1Custom" name="test3f" />
 
 </round>

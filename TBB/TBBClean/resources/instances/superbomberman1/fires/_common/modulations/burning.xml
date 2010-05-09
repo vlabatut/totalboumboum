@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gesture-modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/gesture_modulations.xsd" >
+
+	<self-modulations>
+	</self-modulations>
+	
+	<other-modulations>
+	</other-modulations>
+	
+	<actor-modulations>
+	</actor-modulations>
+	
+	<target-modulations>
+	</target-modulations>
+	
+	<third-modulations>
+<!--  	APPEAR --> 
+		<modulation frame="true" strength="0" >
+			<action name="APPEAR" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="BLOCK FLOOR HERO ITEM" target="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+			<actor-circumstances contact="ANY" tilePosition="SAME" orientation="ANY" />
+			<target-circumstances  />
+		</modulation>
+	</third-modulations>
+
+</gesture-modulations>

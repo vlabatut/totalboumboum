@@ -54,42 +54,42 @@
 			</tile>
 			<tile pos="2">
 				<block name="softwall" />
-				<item name="goldenflame" />
+				<item type="goldenflame" />
 			</tile>
 			<tile pos="3">
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="4">
 				<block name="softwall" />
-				<item name="throughbombs" />
+				<item type="throughbombs" />
 			</tile>
 			<tile pos="5">
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="6">
 				<block name="softwall" />
-				<item name="throughwalls" />
+				<item type="throughwalls" />
 			</tile>
 			<tile pos="7">
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="8">
 				<block name="softwall" />
-				<item name="extrabomb" />
+				<item type="extrabomb" />
 			</tile>
 			<tile pos="9">
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="10">
 				<block name="softwall" />
-				<item name="extraflame" />
+				<item type="extraflame" />
 			</tile>
 			<tile pos="11">
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="12">
 				<block name="softwall" />
-				<item name="kick" />
+				<item type="kick" />
 			</tile>
 			<tile pos="13">
 				<block group="hardwalls" name="regular" />
@@ -121,14 +121,14 @@
 			</tile>
 			<tile pos="2">
 				<block name="softwall" />
-				<item name="penetration" />
+				<item type="penetration" />
 			</tile>
 			<tile pos="3">
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="4">
 				<block name="softwall" />
-				<item name="remotecontrol" />
+				<item type="remotecontrol" />
 			</tile>
 			<tile pos="5">
 				<block group="hardwalls" name="regular" />
@@ -141,7 +141,7 @@
 			</tile>
 			<tile pos="8">
 				<block name="softwall" />
-				<item name="punch" />
+				<item type="punch" />
 			</tile>
 			<tile pos="9">
 				<block group="hardwalls" name="regular" />
@@ -164,13 +164,13 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="4">
-				<item name="extrabomb" />
+				<item type="extrabomb" />
 			</tile>
 			<tile pos="5">
-				<item name="extraflame" />
+				<item type="extraflame" />
 			</tile>
 			<tile pos="6">
-				<item name="extrabomb" />
+				<item type="extrabomb" />
 			</tile>
 			<tile pos="13">
 				<block group="hardwalls" name="regular" />
