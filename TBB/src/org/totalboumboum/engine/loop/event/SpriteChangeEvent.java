@@ -26,9 +26,9 @@ import java.util.HashMap;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 
-public class SpriteEvent extends ReplayEvent
+public class SpriteChangeEvent extends ReplayEvent
 {
-	public SpriteEvent(int spriteId, long time, Integer x, Integer y, GestureName gesture, Direction direction)
+	public SpriteChangeEvent(int spriteId, long time, Integer x, Integer y, GestureName gesture, Direction direction)
 	{	this.time = time;
 		changes.put(SPRITE_EVENT_POSITION_X,x);
 		changes.put(SPRITE_EVENT_POSITION_Y,y);
@@ -36,23 +36,23 @@ public class SpriteEvent extends ReplayEvent
 		changes.put(SPRITE_EVENT_DIRECTION,direction);
 	}
 
-	public SpriteEvent(int spriteId, long time, GestureName gesture, Direction direction)
+	public SpriteChangeEvent(int spriteId, long time, GestureName gesture, Direction direction)
 	{	this.time = time;
 		changes.put(SPRITE_EVENT_GESTURE,gesture);
 		changes.put(SPRITE_EVENT_DIRECTION,direction);
 	}
 
-	public SpriteEvent(int spriteId, long time, GestureName gesture)
+	public SpriteChangeEvent(int spriteId, long time, GestureName gesture)
 	{	this.time = time;
 		changes.put(SPRITE_EVENT_GESTURE,gesture);
 	}
 
-	public SpriteEvent(int spriteId, long time, Direction direction)
+	public SpriteChangeEvent(int spriteId, long time, Direction direction)
 	{	this.time = time;
 		changes.put(SPRITE_EVENT_DIRECTION,direction);
 	}
 
-	public SpriteEvent(int spriteId, long time, Integer x, Integer y)
+	public SpriteChangeEvent(int spriteId, long time, Integer x, Integer y)
 	{	this.time = time;
 		changes.put(SPRITE_EVENT_POSITION_X,x);
 		changes.put(SPRITE_EVENT_POSITION_Y,y);
@@ -79,10 +79,10 @@ public class SpriteEvent extends ReplayEvent
 	/////////////////////////////////////////////////////////////////
 	// CHANGES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static String SPRITE_EVENT_POSITION_X = "SPRITE_EVENT_POSITION_X";
-	public static String SPRITE_EVENT_POSITION_Y = "SPRITE_EVENT_POSITION_Y";
-	public static String SPRITE_EVENT_GESTURE = "SPRITE_EVENT_GESTURE";
-	public static String SPRITE_EVENT_DIRECTION = "SPRITE_EVENT_DIRECTION";
+	public static final String SPRITE_EVENT_POSITION_X = "SPRITE_EVENT_POSITION_X";
+	public static final String SPRITE_EVENT_POSITION_Y = "SPRITE_EVENT_POSITION_Y";
+	public static final String SPRITE_EVENT_GESTURE = "SPRITE_EVENT_GESTURE";
+	public static final String SPRITE_EVENT_DIRECTION = "SPRITE_EVENT_DIRECTION";
 	private HashMap<String,Object> changes = new HashMap<String,Object>();
 	
 	public HashMap<String,Object> getChanges()

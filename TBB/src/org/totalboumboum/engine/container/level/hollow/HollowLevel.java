@@ -40,11 +40,13 @@ import org.totalboumboum.engine.container.level.zone.Zone;
 import org.totalboumboum.engine.container.theme.Theme;
 import org.totalboumboum.engine.container.theme.ThemeLoader;
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.event.SpriteCreationEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.files.FileNames;
@@ -138,39 +140,82 @@ public class HollowLevel implements Serializable
 		String[][] mItems = matrices.get(2);
 		String[][] mBombs = matrices.get(3);
 		
+		// record stuff
+		boolean recorded = Configuration.getEngineConfiguration().isRecordRounds();
+    	long time = -1;
+    	String name;
+		Role role;
+		int id;
+		
 		// init tiles
 		for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)
 			{	double x = globalLeftX + RoundVariables.scaledTileDimension/2 + col*RoundVariables.scaledTileDimension;
 				double y = globalUpY + RoundVariables.scaledTileDimension/2 + line*RoundVariables.scaledTileDimension;
 				matrix[line][col] = new Tile(level,line,col,x,y);
+
+				// floors
+				Floor floor;
 				if(mFloors[line][col]==null)
-				{	Floor floor = theme.makeFloor(matrix[line][col]);
+				{	floor = theme.makeFloor(matrix[line][col]);
 					level.insertSpriteTile(floor);
+					name = null;
 				}
 				else
-				{	Floor floor = theme.makeFloor(mFloors[line][col],matrix[line][col]);
+				{	floor = theme.makeFloor(mFloors[line][col],matrix[line][col]);
 					level.insertSpriteTile(floor);
+					name = mFloors[line][col];
 				}
+				if(recorded)
+				{	id = floor.getId();
+					role = Role.FLOOR;
+					SpriteCreationEvent event = new SpriteCreationEvent(id,time,name,role,line,col);
+					RoundVariables.recordEvent(event);
+				}
+				
+				// blocks
 				if(mBlocks[line][col]!=null)
 				{	Block block = theme.makeBlock(mBlocks[line][col],matrix[line][col]);
 					level.insertSpriteTile(block);
-				
+					if(recorded)
+					{	id = block.getId();
+						role = Role.BLOCK;
+						name = mBlocks[line][col];
+						SpriteCreationEvent event = new SpriteCreationEvent(id,time,name,role,line,col);
+						RoundVariables.recordEvent(event);
+					}
 				}
+				
+				// items
 				if(mItems[line][col]!=null)
 				{	Item item = itemset.makeItem(mItems[line][col],matrix[line][col]);
 					level.insertSpriteTile(item);				
+					if(recorded)
+					{	id = item.getId();
+						role = Role.ITEM;
+						name = mItems[line][col];
+						SpriteCreationEvent event = new SpriteCreationEvent(id,time,name,role,line,col);
+						RoundVariables.recordEvent(event);
+					}
 				}
+				
+				// bombs
 				if(mBombs[line][col]!=null)
 				{	String temp[] = mBombs[line][col].split(Theme.PROPERTY_SEPARATOR);
 					int range = Integer.parseInt(temp[temp.length-1]);
-					String name = "";
+					name = "";
 					for(int i=0;i<temp.length-1;i++)
 						name = name+temp[i];
 					Bomb bomb = bombset.makeBomb(name,matrix[line][col],range);
 if(bomb==null)
 	System.err.println("makeBomb error: bomb "+name+" not found.");
 					level.insertSpriteTile(bomb);				
+					if(recorded)
+					{	id = bomb.getId();
+						role = Role.BOMB;
+						SpriteCreationEvent event = new SpriteCreationEvent(id,time,name,role,line,col);
+						RoundVariables.recordEvent(event);
+					}
 				}
 			}
 		}

@@ -1180,5 +1180,15 @@ public class Launcher
 	 * 	2) étendre au mode réseau, la seule différence étant que dans le preimier
 	 * 		cas on lit les evts dans un fichier, alors que dans le deuxième on les
 	 * 		reçoit à travers le réseau.
+	 * 
+	 * - on suppose que chaque joueur possède tous les fichiers nécessaires
+	 * - par conséquent, tout les sprites peuvent être chargés a priori, ainsi que l'aperçu du niveau
+	 * - mais la zone est générée partiellement aléatoirement, donc il faut la transmettre (sous forme d'évènements)
+	 * 		>> l'initialisation de la zone (loadTheme) doit différer dans les loops
+	 * - composant dans la loop player qui interprètera les évènements reçus :
+	 * 		- trucs individuels >> envoyés aux sprites concernés
+	 * 		- création: faite sur place. sprites avec des managers light
+	 * 
+	 * 
 	 */
 }

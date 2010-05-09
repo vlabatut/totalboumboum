@@ -39,6 +39,7 @@ import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.event.ReplayEvent;
 import org.totalboumboum.gui.tools.MessageDisplayer;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.files.FileNames;
@@ -140,18 +141,19 @@ public class RoundVariables
 	}
 	
 	/**
-	 * records an event in the currently open stream
+	 * records an event in the currently open stream.
+	 * testing if the event should be recorded, and even created, should
+	 * be performed before event creation, i.e. in the invoking method
 	 */
-	public static void recordEvent()
-	{	if(out!=null)
+	public static void recordEvent(ReplayEvent event) throws IOException
+	{	//if(out!=null)
 		{
-//			out.writeObject(rankingService);
+			out.writeObject(event);
 		}
 	}
 	
 	/**
 	 * close the replay output stream (if it was previously opened)
-	 * @throws IOException
 	 */
 	public static void finishRecording() throws IOException
 	{	if(out!=null)
