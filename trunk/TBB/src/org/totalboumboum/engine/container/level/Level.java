@@ -27,6 +27,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
@@ -370,10 +371,12 @@ public class Level
 	// SPRITES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** all the sprites currently present in the level (even the hidden ones) */
-	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();;
+	private List<Sprite> spritesList = new ArrayList<Sprite>();;
+	private HashMap<Integer,Sprite> spritesMap = new HashMap<Integer,Sprite>();;
 
 	public void removeSprite(Sprite sprite)
-	{	sprites.remove(sprite);
+	{	spritesList.remove(sprite);
+		spritesMap.remove(sprite.getId());
 		//TODO should be called any time a sprite is supressed from the game
 	}
 /*	
@@ -387,7 +390,8 @@ public class Level
 	 * add a sprite for the first time in the level
 	 */
 	public void insertSpriteTile(Sprite sprite)
-	{	sprites.add(sprite);
+	{	spritesList.add(sprite);
+		spritesMap.put(sprite.getId(),sprite);
 		sprite.getTile().addSprite(sprite);
 	}
 	

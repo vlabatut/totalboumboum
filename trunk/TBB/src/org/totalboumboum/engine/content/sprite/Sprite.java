@@ -76,7 +76,13 @@ import org.totalboumboum.statistics.detailed.StatisticEvent;
 public abstract class Sprite
 {	
 	public Sprite()
-	{	boundSprites = new ArrayList<Sprite>();
+	{	this(idCount);
+		idCount ++;
+	}
+
+	public Sprite(int id)
+	{	this.id = id;
+		boundSprites = new ArrayList<Sprite>();
 		toBeRemovedFromSprite = null;
 		boundToSprite = null;
 		currentGesture = null;
@@ -88,6 +94,16 @@ public abstract class Sprite
 		eventManager.initGesture();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ID				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static int idCount = 0;
+	private int id;
+	
+	public int getId()
+	{	return id;	
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
