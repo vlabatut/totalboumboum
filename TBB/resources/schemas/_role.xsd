@@ -3,22 +3,16 @@
 
 	<xsd:simpleType name="tRole">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="NONE" />
-			<xsd:enumeration value="BLOCK" />
-			<xsd:enumeration value="BOMB" />
-			<xsd:enumeration value="FIRE" />
-			<xsd:enumeration value="FLOOR" />
-			<xsd:enumeration value="HERO" />
-			<xsd:enumeration value="ITEM" />
-
-			<xsd:enumeration value="SOME" /> <!-- represents any value but NONE -->
-			<xsd:enumeration value="ANY" /> <!-- represents any value including NONE -->
+			<xsd:enumeration value="block" />
+			<xsd:enumeration value="bomb" />
+			<xsd:enumeration value="fire" />
+			<xsd:enumeration value="floor" />
+			<xsd:enumeration value="hero" />
+			<xsd:enumeration value="item" />
+			<xsd:enumeration value="none" />
+			<xsd:enumeration value="all" />
 		</xsd:restriction>
 	</xsd:simpleType>
-
-	<xsd:simpleType name="tRoleList"> 
-    	<xsd:list itemType="tRole"/> 
-	</xsd:simpleType> 
 
 </xsd:schema>
 		
