@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <theme 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../schemas/theme.xsd" >
-	
-	<general name="Tunnel" version="1.1" />
-	<author value="Vincent Labatut" />
-	<source value="Super Bomberman 1"/>
-	
+	<floors folder="floor">
+		<floor name="floor" />
+	</floors>
+	<blocks>
+		<block folder="softwall" name="softwall" />
+		<group name="hardwalls" folder="hardwalls">
+			<block name="regular" folder="regular"/>
+			<block name="center" folder="center"/>
+			<block name="down" folder="down"/>
+			<block name="downleft" folder="downleft"/>
+			<block name="downright" folder="downright"/>
+			<block name="downT" folder="downT"/>
+			<block name="horizontalA" folder="horizontalA"/>
+			<block name="horizontalB" folder="horizontalB"/>
+			<block name="leftT" folder="leftT"/>
+			<block name="rightT" folder="rightT"/>
+			<block name="up" folder="up"/>
+			<block name="upleft" folder="upleft"/>
+			<block name="upright" folder="upright"/>
+			<block name="upT" folder="upT"/>
+		</group>
+	</blocks>
 </theme>

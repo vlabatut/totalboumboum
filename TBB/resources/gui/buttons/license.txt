@@ -9,10 +9,9 @@ License	: LGPL (GNU Lesser General Public License)
 	+ stats.png
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 Total Boum Boum
 Author	: Vincent Labatut
-Site	: http://www.totalboumboum.org
+Site	: http://totalboumboum.free.fr
 License	: GPLv2 (GNU General Public License)
 
 	+ description.png	(derivative work from Crystal Project Icons)

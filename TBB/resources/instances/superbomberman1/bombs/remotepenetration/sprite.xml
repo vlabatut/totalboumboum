@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../schemas/sprite.xsd">
 
-	<general name="Remote control penetration bomb" base="common" />
+	<general name="Remote control penetration bomb" />
 
 	<explosion name="penetration" />
 

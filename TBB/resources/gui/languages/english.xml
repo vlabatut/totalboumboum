@@ -108,7 +108,6 @@
 		<group name="Options">
 			<group name="Button">
 				<text name="Advanced" value="Advanced" tooltip="Modify the advanced settings" />
-				<text name="Ais" value="AI" tooltip="Modify the artificial intelligence settings" />
 				<text name="Back" value="Back" tooltip="Go back to the main menu" />
 				<text name="Cancel" value="Cancel" tooltip="Cancel the last modifications and go back to the options menu" />
 				<text name="Confirm" value="Confirm" tooltip="Confirm the last modifications and go back to the options menu" />
@@ -117,49 +116,7 @@
 				<text name="Gui" value="Interface" tooltip="Modify graphical interface settings" />
 				<text name="Next" value="Next" tooltip="Next settings" />
 				<text name="Previous" value="Previous" tooltip="Previous settings" />
-				<text name="Statistics" value="Statistics" tooltip="Modify the statistics settings" />
 				<text name="Video" value="Video" tooltip="Modify the video settings" />
-			</group>
-			
-			<group name="Confirm">
-				<text name="Question" value="Warning : these modifications will cause the game to restart" tooltip="These modifications will cause the game to restart" />
-				<text name="Title" value="Warning" tooltip="Game restart needed" />
-			</group>
-			
-			<group name="Ais">
-				<text name="Title" value="Artificial intelligence settings" tooltip="Modify AI settings" />
-				<group name="Line">
-					<group name="AutoAdvance">
-						<text name="Title" value="Auto-advance" tooltip="Automatically advances to the next round (for large-scale AIs testing)" />
-						<text name="Disabled" value="Disabled" tooltip="Automatic advance is disabled" />
-						<text name="Enabled" value="Enabled" tooltip="Automatic advance is enabled" />
-					</group>
-					<group name="AutoAdvanceDelay">
-						<text name="Title" value="Auto-advance delay" tooltip="Delay (in seconds) before auto-advance" />
-						<text name="Plus" value="Plus" tooltip="Increase the delay before auto-advance" />
-						<text name="Minus" value="Minus" tooltip="Decrease the delay before auto-advance" />
-					</group>
-					<group name="Ups">
-						<text name="Title" value="UPS" tooltip="AI udates per second rate" />
-						<text name="Plus" value="Plus" tooltip="Increase the updates per second rate" />
-						<text name="Minus" value="Minus" tooltip="Decrease the updates per second rate" />
-					</group>
-					<group name="HideAllAis">
-						<text name="Title" value="Simule all-AIs" tooltip="Simulate AIs-only rounds (they don't even show on-screen)" />
-						<text name="Disabled" value="Disabled" tooltip="Simule all-AIs is disabled" />
-						<text name="Enabled" value="Enabled" tooltip="Simule all-AIs is enabled" />
-					</group>
-					<group name="DisplayExceptions">
-						<text name="Title" value="Display exceptions" tooltip="Display on the console ingame exceptions caused by AIs" />
-						<text name="Disabled" value="Disabled" tooltip="AIs-caused exceptions display is disabled" />
-						<text name="Enabled" value="Enabled" tooltip="AIs-caused exceptions display is enabled" />
-					</group>
-					<group name="LogExceptions">
-						<text name="Title" value="Log exceptions" tooltip="Log all exceptions caused by AIs" />
-						<text name="Disabled" value="Disabled" tooltip="AIs-caused exceptions log is disabled" />
-						<text name="Enabled" value="Enabled" tooltip="AIs-caused exceptions log is enabled" />
-					</group>
-				</group>
 			</group>
 			
 			<group name="Advanced">
@@ -170,16 +127,6 @@
 						<text name="Disabled" value="Disabled" tooltip="Automatic FPS is disabled" />
 						<text name="Enabled" value="Enabled" tooltip="Automatic FPS is enabled" />
 					</group>
-					<group name="Cache">
-						<text name="Title" value="Memory cache" tooltip="Cache sprites in memory (in order to speed up loading)" />
-						<text name="Disabled" value="Disabled" tooltip="Memory caching is disabled" />
-						<text name="Enabled" value="Enabled" tooltip="Memory caching is enabled" />
-					</group>
-					<group name="CacheLimit">
-						<text name="Title" value="Cache size" tooltip="Maximal size of the memory cache, in Mb" />
-						<text name="Plus" value="Plus" tooltip="Increase memory cache size" />
-						<text name="Minus" value="Minus" tooltip="Decrease memory cache size" />
-					</group>
 					<group name="Fps">
 						<text name="Title" value="FPS" tooltip="Frames per second rate" />
 						<text name="Plus" value="Plus" tooltip="Increase the frames per second rate" />
@@ -189,11 +136,6 @@
 						<text name="Title" value="Speed" tooltip="Game speed" />
 						<text name="Plus" value="Plus" tooltip="Increase game speed" />
 						<text name="Minus" value="Minus" tooltip="Decrease game speed" />
-					</group>
-					<group name="LogControls">
-						<text name="Title" value="Log controls" tooltip="Log all control events" />
-						<text name="Disabled" value="Disabled" tooltip="Control events log is disabled" />
-						<text name="Enabled" value="Enabled" tooltip="Control events log is enabled" />
 					</group>
 				</group>
 			</group>
@@ -213,8 +155,7 @@
 						<text name="Down" value="Down" tooltip="Go down" />
 						<text name="Left" value="Left" tooltip="Go left" />
 						<text name="Dropbomb" value="Drop" tooltip="Drop a bomb" />
-						<text name="Punchbomb" value="Punch" tooltip="Punch a bomb" />
-						<text name="Triggerbomb" value="Remote control" tooltip="Trigger a bombe remotely" />
+						<text name="Punchbomb" value="Punch" tooltip="Punch  a bomb" />
 					</group>
 
 					<group name="Auto" >
@@ -300,55 +241,6 @@
 				</group>
 			</group>
 			
-			<group name="Statistics">
-				<text name="Title" value="Statistics" tooltip="Modify statistics settings" />
-				<group name="Line">
-					<group name="Include">
-						<group name="Quickstart">
-							<text name="Title" value="Include quick starts" tooltip="Include quick starts rounds in statistics" />
-							<text name="Disabled" value="Désactivé" tooltip="Quick starts excluded" />
-							<text name="Enabled" value="Activé" tooltip="Quick starts included" />
-						</group>
-						<group name="Simulation">
-							<text name="Title" value="Include simulations" tooltip="Include simulated rounds in statistics" />
-							<text name="Disabled" value="Désactivé" tooltip="Simulations excluded" />
-							<text name="Enabled" value="Activé" tooltip="Simulations included" />
-						</group>
-					</group>
-					<group name="Glicko2">
-						<group name="DefaultRating">
-							<text name="Title" value="Glicko-2: Default rating" tooltip="Rating for a player entering the Glicko-2 ranking" />
-							<text name="Minus" value="Moins" tooltip="Decrease the default rating" />
-							<text name="Plus" value="Plus" tooltip="Increase the default rating" />
-						</group>
-						<group name="DefaultRatingDeviation">
-							<text name="Title" value="Glicko-2: Default deviation" tooltip="Deviation for a player entering the Glicko-2 ranking" />
-							<text name="Minus" value="Moins" tooltip="Decrease the default deviation" />
-							<text name="Plus" value="Plus" tooltip="Increase the default deviation" />
-						</group>
-						<group name="DefaultRatingVolatility">
-							<text name="Title" value="Glicko-2: Default volatility" tooltip="Volatility for a player entering the Glicko-2 ranking" />
-							<text name="Minus" value="Moins" tooltip="Decrease the default volatility" />
-							<text name="Plus" value="Plus" tooltip="Increase the default volatility" />
-						</group>
-						<group name="GamesPerPeriod">
-							<text name="Title" value="Glicko-2: Games per period" tooltip="Average number of rounds needed to close the current statistical period" />
-							<text name="Minus" value="Moins" tooltip="Decrease the number of games per period" />
-							<text name="Plus" value="Plus" tooltip="Increase the number of games per period" />
-						</group>
-					</group>
-					<group name="Reinit">
-						<text name="Title" value="Reset stats" tooltip="Reset all statistics" />
-						<text name="Do" value="Reset stats" tooltip="Reset all statistics" />
-						<text name="Done" value="Stats reseted" tooltip="Statistics have been reseted" />
-					</group>
-				</group>
-				<group name="Dialog">
-					<text name="Title" value="Statistics reset" tooltip="Reset all statistics" />
-					<text name="Question" value="Do you really want to reset all statistics? (This action cannot be canceled)" tooltip="Do you really want to reset all statistics? (This action cannot be canceled)" />
-				</group>
-			</group>
-
 			<group name="Video">
 				<text name="Title" value="Video" tooltip="Modify video settings" />
 				<group name="Line">
@@ -394,34 +286,12 @@
 				<text name="NameChange" value="Change name" tooltip="Change the name of the profile" />
 			</group>
 
-			<group name="Delete">
-				<text name="Question" value="Do you really want to delete this profil?" tooltip="Do you really want to delete this profil?" />
-				<text name="Title" value="Profile deletion" tooltip="Profile deletion" />
-			</group>
-
-			<group name="New">
-				<text name="Name" value="New profile" />
-				<text name="Question" value="Enter the name for the new profile" tooltip="Enter the name for the new profile" />
-				<text name="Title" value="Profile name" tooltip="Name for the new profile" />
-			</group>
-
 			<group name="Select">
 				<text name="Title" value="Profiles list" tooltip="List of all the existing profiles" />
+				<text name="NewProfile" value="New profile" tooltip="New profile" />
 			</group>
 			
 		</group>	
-
-<!-- STATISTICS MENU -->	
-		<group name="Statistics">
-			<group name="Player">
-				<text name="Title" value="Players rankings" tooltip="Rankings for locally registered players" />
-				<group name="Button">
-					<text name="Glicko2" value="Glicko-2" tooltip="Glicko-2 rankings for locally registered players" />
-					<text name="Scores" value="Scores" tooltip="Score rankings" />
-					<text name="Confrontations" value="Confrontations" tooltip="Confrontation rankings" />
-				</group>
-			</group>
-		</group>
 
 <!-- QUICKMATCH MENU -->	
 		<group name="Quickmatch">
@@ -467,7 +337,7 @@
 				<group name="Points">
 					<group name="Ranks">
 						<text name="Title" value="Rank" tooltip="Round rankings" />
-						<text name="Value" value="#" tooltip="Player ranked #" />
+						<text name="Values" value="#" tooltip="Player ranked #" />
 					</group>
 					<group name="Draw">
 						<text name="Autokill" value="Mutual bombing" tooltip="Draw if the last players kill each other" />
@@ -555,18 +425,10 @@
 				<text name="Delete" value="Delete" tooltip="Delete the selected slot" />
 				<text name="New" value="New" tooltip="Create a new slot" />
 			</group>
-			<group name="Write over">
-				<text name="Question" value="Do you really want to write over this save slot?" tooltip="Do you really want to write over this save slot?" />
-				<text name="Title" value="Write over" tooltip="Write over slot" />
-			</group>
-			<group name="Delete">
-				<text name="Question" value="Do you really want to delete this save slot?" tooltip="Do you really want to delete this save slot?" />
-				<text name="Title" value="Deletion" tooltip="Slot deletion" />
-			</group>
 			<group name="New">
 				<text name="Name" value="New slot" />
 				<text name="Question" value="Enter the name for the new save slot" tooltip="Enter the name for the new save slot" />
-				<text name="Title" value="Name" tooltip="Name for the new save slot" />
+				<text name="Title" value="Slot name" tooltip="Name for the new save slot" />
 			</group>
 		</group>
 
@@ -632,13 +494,11 @@
 				<text name="Statistics" value="Statistics" tooltip="See the detailed statistics of the current round" />
 			</group>
 			<group name="Progressbar">
-				<text name="Bombset" value="Loading bombs" tooltip="Loading bombs" />
-				<text name="Firesetmap" value="Loading fires" tooltip="Loading fires and explosions" />
-				<text name="Itemset" value="Loading items" tooltip="Loading bonuses and maluses" />
-				<text name="Theme" value="Loading theme" tooltip="Loading the graphical theme" />
-				<text name="Player" value="Loading player" tooltip="Loading players" />
-				<text name="Complete" value="Loading complete" tooltip="Loading completed" />
-				<text name="Simulation" value="Simulation" tooltip="Performing round simulation" />
+				<text name="Bombset" value="Loading bombs"  />
+				<text name="Itemset" value="Loading items"  />
+				<text name="Theme" value="Loading theme"  />
+				<text name="Player" value="Loading player"  />
+				<text name="Complete" value="Loading complete"  />
 			</group>
 			<group name="Description">
 				<text name="Title" value="Round description"  tooltip="Round description" />
@@ -649,11 +509,6 @@
 			</group>
 			<group name="Statistics">
 				<text name="Title" value="Round statistics"  tooltip="Round statistics" />
-			</group>
-			<group name="Messages">
-				<text name="Ready" value="Ready?" />
-				<text name="Set" value="Set?" />
-				<text name="Go" value="Boom!" />
 			</group>
 		</group>
 		
@@ -769,7 +624,6 @@
 					<text name="Custom" value="Custom"  tooltip="Number of custom points to score in order to stop this match" />
 					<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this match" />
 					<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this match" />
-					<text name="SelfBombings" value="Self-bombings"  tooltip="Number of self-bombings to suffer in order to stop this match" />
 					<text name="Time" value="Time"  tooltip="Maximum duration of this match" />
 				</group>
 			</group>
@@ -785,7 +639,6 @@
 					<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this round" />
 					<text name="LastStanding" value="Players"  tooltip="The round end depends on the number of remaining players" />
 					<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this round" />
-					<text name="SelfBombings" value="Self-bombings"  tooltip="Number of self-bombings to suffer in order to stop this round" />
 					<text name="Time" value="Time"  tooltip="Maximum duration of this round" />
 				</group>
 			</group>
@@ -801,7 +654,6 @@
 					<text name="Custom" value="Custom points"  tooltip="Number of custom points to score in order to stop this tournament" />
 					<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this tournament" />
 					<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this tournament" />
-					<text name="SelfBombings" value="Self-bombings"  tooltip="Number of self-bombings to suffer in order to stop the tournament" />
 					<text name="Time" value="Time"  tooltip="Maximum duration of this tournament" />
 				</group>
 			</group>
@@ -846,10 +698,8 @@
 				<group name="Header" >
 					<text name="Color" value="Color" tooltip="Selected color" />
 					<text name="Controls" value="Controls" tooltip="Selected controls" />
-					<text name="Delete" value="Unselect all" tooltip="Unselect all profiles" />
 					<text name="Hero" value="Hero" tooltip="Selected character" />
 					<text name="Profile" value="Profile" tooltip="Selected profile" />
-					<text name="Rank" value="#"  tooltip="Rank of the player in the general game statistics" />
 					<text name="Type" value="Type" tooltip="Profile type" />
 				</group>
 				<group name="Data" >
@@ -880,12 +730,11 @@
 					<text name="Bombeds" value="Bombeds"  tooltip="Uses the total number of explosions suffered during the match" />
 					<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
 					<text name="Items" value="Items"  tooltip="Uses the total number of items picked during the match" />
-					<text name="Bombings" value="Bombings"  tooltip="Uses the total number of other players exploded during the match" />
+					<text name="Bombings" value="Bombings"  tooltip="Uses the total number of players explosed during the match" />
 					<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
 					<text name="Paintings" value="Paintings"  tooltip="Uses total the number of tiles painted during the match" />
 					<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
 					<text name="Regular" value="Regular"  tooltip="Regular order" />
-					<text name="SelfBombings" value="Self-bombings"  tooltip="Uses the total number of self-bombings suffered during the match" />
 					<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
 					<text name="Time" value="Time"  tooltip="Uses the total amount of time played during the match" />
 				</group>
@@ -907,12 +756,11 @@
 					<text name="Bombeds" value="Bombeds"  tooltip="Uses the number of explosions suffered during the round" />
 					<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
 					<text name="Items" value="Items"  tooltip="Uses the number of items picked during the round" />
-					<text name="Bombings" value="Bombings"  tooltip="Uses the number of other players exploded during the round" />
+					<text name="Bombings" value="Bombings"  tooltip="Uses the number of players explosed during the round" />
 					<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
 					<text name="Paintings" value="Paintings"  tooltip="Uses the number of tiles painted during the round" />
 					<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
 					<text name="Regular" value="Regular"  tooltip="Regular order" />
-					<text name="SelfBombings" value="Self-bombings"  tooltip="Uses the total number of self-bombings suffered during the round" />
 					<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
 					<text name="Time" value="Time"  tooltip="Uses the amount of time played during the round" />
 				</group>
@@ -935,12 +783,11 @@
 					<text name="Bombeds" value="Bombeds"  tooltip="Uses the total number of explosions suffered during the tournament" />
 					<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
 					<text name="Items" value="Items"  tooltip="Uses the total number of items picked during the tournament" />
-					<text name="Bombings" value="Bombings"  tooltip="Uses the total number of other players exploded during the tournament" />
+					<text name="Bombings" value="Bombings"  tooltip="Uses the total number of players explosed during the tournament" />
 					<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
 					<text name="Paintings" value="Paintings"  tooltip="Uses total the number of tiles painted during the tournament" />
 					<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
 					<text name="Regular" value="Regular"  tooltip="Regular order" />
-					<text name="SelfBombings" value="Self-bombings"  tooltip="Uses the total number of self-bombings suffered during the tournament" />
 					<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
 					<text name="Time" value="Time"  tooltip="Uses the total amount of time played during the tournament" />
 				</group>
@@ -955,15 +802,14 @@
 			<text name="HeroName" value="Hero name" tooltip="Name of the character" />
 			<text name="HeroPack" value="Hero package" tooltip="Name of the character package" />
 			<text name="Name" value="Player name" tooltip="Name of the player" />
-			<text name="Rank" value="Player rank" tooltip="Glicko-2 rank of the player" />
 		</group>
 							
 <!-- RESULTS -->
 		<group name="Results" >
 			<group name="Match">
 				<group name="Header">
-					<text name="Bombeds" value="Bombeds"  tooltip="Total number of times the player was exploded by another player in this match" />
-					<text name="Bombings" value="Bombings"  tooltip="Total number of other players exploded in this match" />
+					<text name="Bombeds" value="Bombeds"  tooltip="Total number of times the player was explosed in this match" />
+					<text name="Bombings" value="Bombings"  tooltip="Total number of players explosed in this match" />
 					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this match" />
 					<text name="Confrontation" value="R"  tooltip="Number of points scored for the round number" />
 					<text name="Crowns" value="Crowns"  tooltip="Total number of crowns picked in this match" />
@@ -974,8 +820,6 @@
 					<text name="Points" value="Points"  tooltip="Number of points scored for this match" />
 					<text name="Portrait" value="Character"  tooltip="Character used by the player" />
 					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
-					<text name="Rank" value="Rank"  tooltip="Current rank in this match" />
-					<text name="SelfBombings" value="Self-bombings"  tooltip="Total number of times the player exploded himself in this match" />
 					<text name="Time" value="Time"  tooltip="Total time spend in the match" />
 					<text name="Total" value="Total"  tooltip="Total number of points scored for all the rounds" />
 				</group>
@@ -987,8 +831,8 @@
 			
 			<group name="Round">
 				<group name="Header">
-					<text name="Bombeds" value="Bombeds"  tooltip="Number of times the player was exploded by another player in this round" />
-					<text name="Bombings" value="Bombings"  tooltip="Number of other players exploded in this round" />
+					<text name="Bombeds" value="Bombeds"  tooltip="Number of times the player was explosed in this round" />
+					<text name="Bombings" value="Bombings"  tooltip="Number of players explosed in this round" />
 					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this round" />
 					<text name="Crowns" value="Crowns"  tooltip="Number of crowns picked in this round" />
 					<text name="Limit" value="Limit"  tooltip="Custom points used as a limit criterion" />
@@ -998,8 +842,6 @@
 					<text name="Points" value="Points"  tooltip="Number of points scored for this round" />
 					<text name="Portrait" value="Character"  tooltip="Character used by the player" />
 					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
-					<text name="Rank" value="Rank"  tooltip="Current rank in this round" />
-					<text name="SelfBombings" value="Self-bombings"  tooltip="Total number of times the player exploded himself in this round" />
 					<text name="Time" value="Time"  tooltip="Time spend in the round" />
 				</group>
 				<group name="Data">
@@ -1010,8 +852,8 @@
 
 			<group name="Tournament" >
 				<group name="Header">
-					<text name="Bombeds" value="Bombeds"  tooltip="Total number of times the player was exploded by another player in this tournament" />
-					<text name="Bombings" value="Bombings"  tooltip="Total number of other players exploded in this tournament" />
+					<text name="Bombeds" value="Bombeds"  tooltip="Total number of times the player was explosed in this tournament" />
+					<text name="Bombings" value="Bombings"  tooltip="Total number of players explosed in this tournament" />
 					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this tournament" />
 					<text name="Confrontation" value="M"  tooltip="Number of points scored for the match number" />
 					<text name="Crowns" value="Crowns"  tooltip="Total number of crowns picked in this tournament" />
@@ -1022,14 +864,8 @@
 					<text name="Points" value="Points"  tooltip="Number of points scored for this tournament" />
 					<text name="Portrait" value="Character"  tooltip="Character used by the player" />
 					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
-					<text name="Rank" value="Rank"  tooltip="Current rank in this tournament" />
-					<text name="SelfBombings" value="Self-bombings"  tooltip="Total number of times the player exploded himself in this tournament" />
 					<text name="Time" value="Time"  tooltip="Total time spend in the tournament" />
 					<text name="Total" value="Total"  tooltip="Total number of points scored for all the matches" />
-					<text name="Played" value="Played"  tooltip="Total number of matches played" />
-					<text name="Won" value="Won"  tooltip="Total number of matches won" />
-					<text name="Drawn" value="Drawn"  tooltip="Total number of matches drawn" />
-					<text name="Lost" value="Lost"  tooltip="Total number of matches lost" />
 				</group>
 				<group name="Data">
 						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
@@ -1045,78 +881,6 @@
 			<text name="LevelFolder" value="Level"  tooltip="Level name for this round" />
 			<text name="LevelPack" value="Package"  tooltip="Level package for this round" />
 			<text name="Title" value="Title" tooltip="Name of this round" />
-		</group>
-
-<!-- STATISTICS -->	
-		<group name="Statistics">
-			<group name="Player">
-				<group name="Common">
-					<group name="Header">
-						<text name="Name" value="Name"  tooltip="Player name" />
-						<text name="Portrait" value="Character"  tooltip="Player character" />
-						<text name="Rank" value="#"  tooltip="Player ranking" />
-						<text name="Evolution" value="Evolution"  tooltip="Change compared to last rating" />
-						<text name="Type" value="Human/Computer"  tooltip="Human or computer-controlled" />
-					</group>
-					<group name="Data">
-						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
-						<text name="Human" value="Human"  tooltip="Human player" />
-						<text name="NoRank" value="-"  tooltip="This player is not ranked" />
-						<text name="Mean" value="Mean"  />
-						<text name="Total" value="Total"  />
-						<text name="Enter" value="Enter"  tooltip="This player has just entered the ranking" />
-						<text name="Exit" value="Exit"  tooltip="This player has just left the ranking" />
-						<text name="Down" value="Down"  tooltip="This player's ranking decreased" />
-						<text name="Up" value="Up"  tooltip="This player's ranking increased" />
-						<text name="Same" value="Same"  tooltip="This player's ranking stayed the same" />
-					</group>
-					<group name="Button">
-						<text name="Register" value="Register"  tooltip="Register the player to the ranking system" />
-						<text name="Unregister" value="Unregister"  tooltip="Unregister the player from the ranking system" />
-						<text name="Next" value="Next page"  tooltip="Go to the next ranking page" />
-						<text name="Previous" value="Previous page"  tooltip="Go to the previous ranking page" />
-						<text name="Mean" value="Mean"  tooltip="Switch to means view" />
-						<text name="Sum" value="Sum"  tooltip="Switch to counts view" />
-						<text name="Ai" value="Ais only"  tooltip="Display only AIs" />
-						<text name="Human" value="Humans only"  tooltip="Display only human players" />
-						<text name="Both" value="Both"  tooltip="Display all players" />
-						<text name="AllRanks" value="Ranked players"  tooltip="Display only ranked players" />
-						<text name="NoRanks" value="Non-ranked players"  tooltip="Display only non-ranked players" />
-						<text name="All" value="All players"  tooltip="Display all players" />
-					</group>
-				</group>
-
-				<group name="Glicko2">
-					<group name="Header">
-						<text name="Mean" value="Mean"  tooltip="Mean level" />
-						<text name="RoundCount" value="Played"  tooltip="Number of rounds played since the last update" />
-						<text name="StandardDeviation" value="Standard-deviation"  tooltip="Standard-deviation" />
-						<text name="Volatility" value="Volatility"  tooltip="Player volatility" />
-					</group>
-				</group>
-
-				<group name="Scores">
-					<group name="Header">
-						<text name="Bombings" value="Bombings"  tooltip="Total number of times the player bombed another player" />
-						<text name="Bombeds" value="Bombeds"  tooltip="Total number of times the player was bombed by another player" />
-						<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped" />
-						<text name="Crowns" value="Crowns"  tooltip="Total number of crowns gathered" />
-						<text name="Items" value="Items"  tooltip="Total number of items gathered" />
-						<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted" />
-						<text name="SelfBombings" value="Self-bombings"  tooltip="Total number of times the player bombed himself" />
-					</group>
-				</group>
-
-				<group name="Confrontations">
-					<group name="Header">
-						<text name="RoundsDrawn" value="Drawn rounds"  tooltip="Total number of drawn rounds" />
-						<text name="RoundsLost" value="Lost rounds"  tooltip="Total number of lost rounds" />
-						<text name="RoundsPlayed" value="Total rounds"  tooltip="Total number of played rounds" />
-						<text name="RoundsWon" value="Won rounds"  tooltip="Total number of rounds wons" />
-						<text name="TimePlayed" value="Total time"  tooltip="Total time played" />
-					</group>
-				</group>
-			</group>
 		</group>
 
 <!-- SPRITE  -->

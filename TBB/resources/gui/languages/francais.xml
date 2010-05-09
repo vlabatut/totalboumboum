@@ -108,7 +108,6 @@
 		<group name="Options">
 			<group name="Button">
 				<text name="Advanced" value="Avancé" tooltip="Options avancées" />
-				<text name="Ais" value="IA" tooltip="Modifier les options des intelligences artificielles" />
 				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
 				<text name="Cancel" value="Annuler" tooltip="Annuler les dernières modifications et revenir au menu des options" />
 				<text name="Confirm" value="Confirmer" tooltip="Confirmer les dernières modifications et revenir au menu des options" />
@@ -117,49 +116,7 @@
 				<text name="Gui" value="Interface" tooltip="Modifier les paramètres de l'interface graphique" />
 				<text name="Next" value="Suivant" tooltip="Accéder aux réglages suivants" />
 				<text name="Previous" value="Précédent" tooltip="Accéder aux réglages précédents" />
-				<text name="Statistics" value="Statistiques" tooltip="Accéder aux réglages des statistiques" />
 				<text name="Video" value="Vidéo" tooltip="Modifier les paramètres graphiques" />
-			</group>
-
-			<group name="Confirm">
-				<text name="Question" value="Attention : ces changements vont entraîner un redémarrage du jeu" tooltip="Ces changements vont entraîner un redémarrage du jeu" />
-				<text name="Title" value="Avertissement" tooltip="Redémarrage du jeu nécessaire" />
-			</group>
-			
-			<group name="Ais">
-				<text name="Title" value="Intelligences artificielles" tooltip="Modifier les paramètres des IA" />
-				<group name="Line">
-					<group name="AutoAdvance">
-						<text name="Title" value="Enchaînement automatique" tooltip="Enchaîne automatiquement les manches (permet de tester les IA intensément)" />
-						<text name="Disabled" value="Désactivé" tooltip="Enchaînement automatique désactivé" />
-						<text name="Enabled" value="Activé" tooltip="Enchaînement automatique activé" />
-					</group>
-					<group name="AutoAdvanceDelay">
-						<text name="Title" value="Délai d'enchaînement" tooltip="Délai (en secondes) avant l'enchaînement automatique" />
-						<text name="Plus" value="Plus" tooltip="Augmente le délai d'enchaînement" />
-						<text name="Minus" value="Moins" tooltip="Diminue le délai d'enchaînement" />
-					</group>
-					<group name="Ups">
-						<text name="Title" value="UPS" tooltip="Taux de mise à jour des IA, par seconde" />
-						<text name="Plus" value="Plus" tooltip="Augmente le taux de mise à jour des IA" />
-						<text name="Minus" value="Moins" tooltip="Diminue le taux de mise à jour des IA" />
-					</group>
-					<group name="HideAllAis">
-						<text name="Title" value="Simulation" tooltip="Simule les manches auxquelles seules des IA participent (la manche n'est pas jouée en direct)" />
-						<text name="Disabled" value="Désactivée" tooltip="Simulation désactivée" />
-						<text name="Enabled" value="Activée" tooltip="Simulation activée" />
-					</group>
-					<group name="DisplayExceptions">
-						<text name="Title" value="Afficher les exceptions" tooltip="Affiche dans la console les exceptions provoquées par les IA au cours de la partie" />
-						<text name="Disabled" value="Désactivé" tooltip="Affichage des exceptions désactivé" />
-						<text name="Enabled" value="Activé" tooltip="Affichage des exceptions activé" />
-					</group>
-					<group name="LogExceptions">
-						<text name="Title" value="Enregistrer les exceptions" tooltip="Enregistre dans un fichier les exceptions provoquées par les IA au cours de la partie" />
-						<text name="Disabled" value="Désactivé" tooltip="Enregistrement des exceptions désactivé" />
-						<text name="Enabled" value="Activé" tooltip="Enregistrement des exceptions activé" />
-					</group>
-				</group>
 			</group>
 			
 			<group name="Advanced">
@@ -170,16 +127,6 @@
 						<text name="Disabled" value="Désactivé" tooltip="Ajustement automatique du FPS désactivé" />
 						<text name="Enabled" value="Activé" tooltip="Ajustement automatique du FPS activé" />
 					</group>
-					<group name="Cache">
-						<text name="Title" value="Cache mémoire" tooltip="Cache les sprites en mémoire (pour accélérer leur chargement)" />
-						<text name="Disabled" value="Désactivé" tooltip="Cache mémoire désactivé" />
-						<text name="Enabled" value="Activé" tooltip="Cache mémoire activé" />
-					</group>
-					<group name="CacheLimit">
-						<text name="Title" value="Taille du cache" tooltip="Taille maximale du cache mémoire en Mo" />
-						<text name="Plus" value="Plus" tooltip="Augmenter la taille du cache mémoire" />
-						<text name="Minus" value="Moins" tooltip="Diminuer la taille du cache mémoire" />
-					</group>
 					<group name="Fps">
 						<text name="Title" value="FPS" tooltip="Nombre d'images par secondes" />
 						<text name="Plus" value="Plus" tooltip="Augmenter le nombre d'images par secondes" />
@@ -189,11 +136,6 @@
 						<text name="Title" value="Vitesse" tooltip="Vitesse du jeu" />
 						<text name="Plus" value="Plus" tooltip="Augmenter la vitesse du jeu" />
 						<text name="Minus" value="Moins" tooltip="Diminuer la vitesse du jeu" />
-					</group>
-					<group name="LogControls">
-						<text name="Title" value="Enregistrer les commandes" tooltip="Enregistre dans un fichier les commandes activées en cours de la partie" />
-						<text name="Disabled" value="Désactivé" tooltip="Enregistrement des commandes désactivé" />
-						<text name="Enabled" value="Activé" tooltip="Enregistrement des commandes activé" />
 					</group>
 				</group>
 			</group>
@@ -214,7 +156,6 @@
 						<text name="Left" value="Gauche" tooltip="Aller vers la gauche" />
 						<text name="Dropbomb" value="Poser" tooltip="Poser une bombe" />
 						<text name="Punchbomb" value="Frapper" tooltip="Frapper une bombe" />
-						<text name="Triggerbomb" value="Télécommande" tooltip="Déclencher une bombe à distance" />
 					</group>
 
 					<group name="Auto" >
@@ -300,55 +241,6 @@
 				</group>
 			</group>
 			
-			<group name="Statistics">
-				<text name="Title" value="Statistiques" tooltip="Modifier les paramètres des statistiques" />
-				<group name="Line">
-					<group name="Include">
-						<group name="Quickstart">
-							<text name="Title" value="Inclure les démarrages rapides" tooltip="Inclure les démarrages rapides dans les statistiques" />
-							<text name="Disabled" value="Désactivé" tooltip="Démarrages rapides exclus des statistiques" />
-							<text name="Enabled" value="Activé" tooltip="Démarrages rapides inclus dans les statistiques" />
-						</group>
-						<group name="Simulation">
-							<text name="Title" value="Inclure les manches simulées" tooltip="Inclure les manches simulées dans les statistiques" />
-							<text name="Disabled" value="Désactivé" tooltip="Manches simulées exclues des statistiques" />
-							<text name="Enabled" value="Activé" tooltip="Manches simulées incluses dans les statistiques" />
-						</group>
-					</group>
-					<group name="Glicko2">
-						<group name="DefaultRating">
-							<text name="Title" value="Glicko-2 : Moyenne de départ" tooltip="Moyenne associée à un joueur qui démarre dans le classement" />
-							<text name="Minus" value="Moins" tooltip="Diminuer la moyenne de départ" />
-							<text name="Plus" value="Plus" tooltip="Augmenter la moyenne de départ" />
-						</group>
-						<group name="DefaultRatingDeviation">
-							<text name="Title" value="Glicko-2 : Déviation de départ" tooltip="Déviation associée à un joueur qui démarre dans le classement" />
-							<text name="Minus" value="Moins" tooltip="Diminuer la déviation de départ" />
-							<text name="Plus" value="Plus" tooltip="Augmenter la déviation de départ" />
-						</group>
-						<group name="DefaultRatingVolatility">
-							<text name="Title" value="Glicko-2 : Volatilité de départ" tooltip="Volatilité associée à un joueur qui démarre dans le classement" />
-							<text name="Minus" value="Moins" tooltip="Diminuer la volatilité de départ" />
-							<text name="Plus" value="Plus" tooltip="Augmenter la volatilité de départ" />
-						</group>
-						<group name="GamesPerPeriod">
-							<text name="Title" value="Glicko-2 : Manches par période" tooltip="Nombre moyen de manches devant être jouées avant de cloturer une période statistique" />
-							<text name="Minus" value="Moins" tooltip="Diminuer le nombre de manches par période" />
-							<text name="Plus" value="Plus" tooltip="Augmenter le nombre de manches par période" />
-						</group>
-					</group>
-					<group name="Reinit">
-						<text name="Title" value="Réinitialisation" tooltip="Réinitialiser les statistiques (ne peut pas être annulé)" />
-						<text name="Do" value="Réinitialisation" tooltip="Réinitialiser les statistiques (ne peut pas être annulé)" />
-						<text name="Done" value="Réinitialisé" tooltip="Les statistiques ont été réinitialisées" />
-					</group>
-				</group>
-				<group name="Dialog">
-					<text name="Title" value="Réinitialisation" tooltip="Réinitialisation des statistiques" />
-					<text name="Question" value="Êtes-vous sûr(e) de vouloir réinitialiser les statistiques ? (cette action ne peut pas être annulée)" />
-				</group>
-			</group>
-
 			<group name="Video">
 				<text name="Title" value="Vidéo" tooltip="Modifier les paramètres graphiques" />
 				<group name="Line">
@@ -394,34 +286,12 @@
 				<text name="NameChange" value="Modifier le nom" tooltip="Modifier le nom du profil" />
 			</group>
 
-			<group name="Delete">
-				<text name="Question" value="Êtes-vous sûr de vouloir supprimer ce profil ?" tooltip="Êtes-vous sûr de vouloir supprimer ce profil ?" />
-				<text name="Title" value="Suppression de profil" tooltip="Suppression de profil" />
-			</group>
-
-			<group name="New">
-				<text name="Name" value="Nouveau profil" />
-				<text name="Question" value="Entrez le nom du nouveau profil" tooltip="Entrez le nom du nouveau profil" />
-				<text name="Title" value="Nom du profil" tooltip="Nom du nouveau profil" />
-			</group>
-
 			<group name="Select">
 				<text name="Title" value="Liste des profils" tooltip="Liste de tous les profils existants" />
+				<text name="NewProfile" value="Nouveau profil" tooltip="Nouveau profil" />
 			</group>
 			
 		</group>	
-
-<!-- STATISTICS MENU -->	
-		<group name="Statistics">
-			<group name="Player">
-				<text name="Title" value="Classement des joueurs" tooltip="Classement des joueurs enregistrés localement" />
-				<group name="Button">
-					<text name="Glicko2" value="Glicko-2" tooltip="Classement des joueurs enregistrés localement" />
-					<text name="Scores" value="Score" tooltip="Classement des joueurs en fonction de leurs scores" />
-					<text name="Confrontations" value="Confrontations" tooltip="Classement des joueurs en fonction de leurs résultats" />
-				</group>
-			</group>
-		</group>
 
 <!-- QUICKMATCH MENU -->	
 		<group name="Quickmatch">
@@ -556,18 +426,10 @@
 				<text name="Delete" value="Supprimer" tooltip="Supprimer l'enregistrement sélectionné" />
 				<text name="New" value="Créer" tooltip="Créer un nouvel enregistrement" />
 			</group>
-			<group name="Confirm">
-				<text name="Question" value="Êtes-vous sûr de vouloir écraser cette sauvegarde ?" tooltip="Êtes-vous sûr de vouloir écraser cette sauvegarde ?" />
-				<text name="Title" value="Écrasement" tooltip="Écrasement" />
-			</group>
-			<group name="Delete">
-				<text name="Question" value="Êtes-vous sûr de vouloir supprimer cette sauvegarde ?" tooltip="Êtes-vous sûr de vouloir supprimer cette sauvegarde ?" />
-				<text name="Title" value="Suppression" tooltip="Suppression de sauvegarde" />
-			</group>
 			<group name="New">
 				<text name="Name" value="Nouvel enregistrement" />
 				<text name="Question" value="Entrez le nom de la nouvelle sauvegarde" tooltip="Entrez le nom de la nouvelle sauvegarde" />
-				<text name="Title" value="Nom" tooltip="Nom de la nouvelle sauvegarde" />
+				<text name="Title" value="Nom de la sauvegarde" tooltip="Nom de la nouvelle sauvegarde" />
 			</group>
 		</group>
 
@@ -632,13 +494,11 @@
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques détaillées de la manche courante" />
 			</group>
 			<group name="Progressbar">
-				<text name="Bombset" value="Bombes"  tooltip="Chargement des bombes" />
-				<text name="Firesetmap" value="Feux"  tooltip="Chargement des flammes et explosions" />
-				<text name="Itemset" value="Items"  tooltip="Chargement des bonus et malus" />
-				<text name="Theme" value="Thème"  tooltip="Chargement du thème graphique" />
-				<text name="Player" value="Personnage"  tooltip="Chargement des personnages" />
-				<text name="Complete" value="Fini"  tooltip="Chargement terminé" />
-				<text name="Simulation" value="Simulation" tooltip="Simulation en cours" />
+				<text name="Bombset" value="Bombes"  />
+				<text name="Itemset" value="Items"  />
+				<text name="Theme" value="Theme"  />
+				<text name="Player" value="Personnage"  />
+				<text name="Complete" value="Fini"  />
 			</group>
 			<group name="Description">
 				<text name="Title" value="Description de la manche"  tooltip="Description de la manche" />
@@ -649,11 +509,6 @@
 			</group>
 			<group name="Statistics">
 				<text name="Title" value="Statistiques de la manche"  tooltip="Statistiques de la manche" />
-			</group>
-			<group name="Messages">
-				<text name="Ready" value="A vos marques !" />
-				<text name="Set" value="Prêt ?" />
-				<text name="Go" value="Boum !" />
 			</group>
 		</group>
 	</group>
@@ -767,7 +622,6 @@
 					<text name="Items" value="Items"  tooltip="Nombre d'items devant être ramassés pour terminer cette rencontre" />
 					<text name="Bombings" value="Bombeur"  tooltip="Nombre de joueurs devant être explosés pour terminer cette rencontre" />
 					<text name="Paintings" value="Peinture"  tooltip="Nombre de cases devant être peintes pour terminer cette rencontre" />
-					<text name="SelfBombings" value="Auto-bombages"  tooltip="Nombre d'auto-bombages devant être subis pour terminer cette rencontre" />
 					<text name="Time" value="Temps"  tooltip="Durée cumulée maximale de cette rencontre" />
 				</group>
 			</group>
@@ -783,7 +637,6 @@
 					<text name="Bombings" value="Bombeur"  tooltip="Nombre de joueurs devant être explosés pour terminer cette manche" />
 					<text name="Paintings" value="Peintures"  tooltip="Nombre de cases devant être peintes pour terminer cette manche" />
 					<text name="Time" value="Temps"  tooltip="Durée maximale de la manche" />
-					<text name="SelfBombings" value="Auto-bombages"  tooltip="Nombre d'auto-bombages devant être subis pour terminer cette manche" />
 					<text name="LastStanding" value="Joueurs"  tooltip="La fin de la manche dépend du nombre de joueurs restant en lice" />
 				</group>
 			</group>
@@ -799,7 +652,6 @@
 					<text name="Items" value="Items"  tooltip="Nombre d'items devant être ramassés pour finir le tournoi" />
 					<text name="Bombings" value="Bombeur"  tooltip="Number de joueurs devant être explosés pour finir le tournoi" />
 					<text name="Paintings" value="Peinture"  tooltip="Nombre de cases devant être peintes pour finir le tournoi" />
-					<text name="SelfBombings" value="Auto-bombages"  tooltip="Nombre d'auto-bombages devant être subis pour terminer ce tournoi" />
 					<text name="Time" value="Temps"  tooltip="Durée maximale (cumulée) du tournoi" />
 				</group>
 			</group>
@@ -844,10 +696,8 @@
 				<group name="Header" >
 					<text name="Color" value="Couleur" tooltip="Couleur sélectionnée" />
 					<text name="Controls" value="Commandes" tooltip="Commandes sélectionnées" />
-					<text name="Delete" value="Désélectionne tout" tooltip="Désélectionne tous les profils" />
 					<text name="Hero" value="Personnage" tooltip="Personnage sélectionné" />
 					<text name="Profile" value="Profil" tooltip="Profil sélectionné" />
-					<text name="Rank" value="n°"  tooltip="Classement du joueur dans les statistiques du jeu" />
 					<text name="Type" value="Type" tooltip="Type de profil (joueur humain ou IA)" />
 				</group>
 				<group name="Data" >
@@ -878,12 +728,11 @@
 					<text name="Bombeds" value="Bombé"  tooltip="Utilise le nombre total d'explosions subies au cours de la rencontre" />
 					<text name="Inverted" value="Inversé"  tooltip="Ordre inversé" />
 					<text name="Items" value="Items"  tooltip="Utilise le nombre total d'items ramassés au cours de la rencontre" />
-					<text name="Bombings" value="Bombeur"  tooltip="Utilise le nombre total d'autres joueurs explosés au cours de la rencontre" />
+					<text name="Bombings" value="Bombeur"  tooltip="Utilise le nombre total de joueurs explosés au cours de la rencontre" />
 					<text name="Noshare" value="Sans partage"  tooltip="En cas d'égalité, les points ne sont pas partagés" />
 					<text name="Paintings" value="Peinture"  tooltip="Utilise le nombre total de cases peintes au cours de la rencontre" />
 					<text name="Partial" value="Partiel"  tooltip="Utilise un résultat partiel issu d'un calcul de points personnalisé" />
 					<text name="Regular" value="Normal"  tooltip="Ordre normal" />
-					<text name="SelfBombings" value="Auto-bombages"  tooltip="Utilise le nombre total d'auto-bombages subis au cours de la rencontre" />
 					<text name="Share" value="Avec partage"  tooltip="En cas d'égalité, les points sont partagés" />
 					<text name="Time" value="Temps"  tooltip="Utilise le temps total cumulé sur la rencontre" />
 				</group>
@@ -905,12 +754,11 @@
 					<text name="Bombeds" value="Bombé"  tooltip="Utilise le nombre d'explosions subies au cours de cette manche" />
 					<text name="Inverted" value="Inversé"  tooltip="Ordre inversé" />
 					<text name="Items" value="Items"  tooltip="Utilise le nombre d'items ramassés au cours de cette manche" />
-					<text name="Bombings" value="Bombeur"  tooltip="Utilise le nombre d'autres joueurs explosés au cours de cette manche" />
+					<text name="Bombings" value="Bombeur"  tooltip="Utilise le nombre de joueurs explosés au cours de cette manche" />
 					<text name="Noshare" value="Sans partage"  tooltip="En cas d'égalité, les points ne sont pas partagés" />
 					<text name="Paintings" value="Peinture"  tooltip="Utilise le nombre de cases peintes au cours de cette manche" />
 					<text name="Partial" value="Partiel"  tooltip="Utilise un résultat partiel issu d'un calcul de points personnalisé" />
 					<text name="Regular" value="Normal"  tooltip="Ordre normal" />
-					<text name="SelfBombings" value="Auto-bombages"  tooltip="Utilise le nombre total d'auto-bombages subis au cours de la manche" />
 					<text name="Share" value="Avec partage"  tooltip="En cas d'égalité, les points sont partagés" />
 					<text name="Time" value="Temps"  tooltip="Utilise le temps de jeu pour cette manche" />
 				</group>
@@ -933,12 +781,11 @@
 					<text name="Bombeds" value="Bombé"  tooltip="Utilise le nombre total d'explosions subies au cours du tournoi" />
 					<text name="Inverted" value="Inversé"  tooltip="Ordre inversé" />
 					<text name="Items" value="Items"  tooltip="Utilise le nombre total d'items ramassés au cours du tournoi" />
-					<text name="Bombings" value="Bombeur"  tooltip="Utilise le nombre total d'autres joueurs explosés au cours du tournoi" />
+					<text name="Bombings" value="Bombeur"  tooltip="Utilise le nombre total de joueurs explosés au cours du tournoi" />
 					<text name="Noshare" value="Sans partage"  tooltip="En cas d'égalité, les points ne sont pas partagés" />
 					<text name="Paintings" value="Peinture"  tooltip="Utilise le nombre total de cases peintes au cours du tournoi" />
 					<text name="Partial" value="Partiel"  tooltip="Utilise un résultat partiel issu d'un calcul de points personnalisé" />
 					<text name="Regular" value="Normal"  tooltip="Ordre normal" />
-					<text name="SelfBombings" value="Auto-bombages"  tooltip="Utilise le nombre total d'auto-bombages subis au cours du tournoi" />
 					<text name="Share" value="Avec partage"  tooltip="En cas d'égalité, les points sont partagés" />
 					<text name="Time" value="Temps"  tooltip="Utilise le temps total cumulé au cours du tournoi" />
 				</group>
@@ -952,15 +799,14 @@
 			<text name="Color" value="Couleur" tooltip="Couleur par défaut du personnage" />
 			<text name="HeroName" value="Nom du personnage" tooltip="Nom du personnage contrôlé par le joueur" />
 			<text name="HeroPack" value="Paquet du personnage" tooltip="Nom du paquet contenant le personnage contrôlé par le joueur" />
-			<text name="Name" value="Nom du joueur" tooltip="Nom du joueur correspondant" />
-			<text name="Rank" value="Classement du joueur" tooltip="Classement du joueur" />
+			<text name="Name" value="Nom du joueur" tooltip="Nom du joueur correspondant à ce profil" />
 		</group>
 				
 <!-- RESULTS -->
 		<group name="Results" >
 			<group name="Match">
 				<group name="Header">
-					<text name="Bombings" value="Bombeur"  tooltip="Nombre total d'autres joueurs explosés au cours de cette rencontre" />
+					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours de cette rencontre" />
 					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies au cours de cette rencontre" />
 					<text name="Bombs" value="Bombes"  tooltip="Nombre total de bombes posées au cours de cette rencontre" />
 					<text name="Confrontation" value="M"  tooltip="Nombre de points marqués pour la manche numéro " />
@@ -972,8 +818,6 @@
 					<text name="Points" value="Points"  tooltip="Nombre total de points marqués pour cette rencontre" />
 					<text name="Portrait" value="Personnage"  tooltip="Personnage utilisé par le joueur" />
 					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
-					<text name="Rank" value="Classement"  tooltip="Classement actuel dans cette rencontre" />
-					<text name="SelfBombings" value="Auto-bombage"  tooltip="Nombre total d'auto-bombages réalisés au cours de cette rencontre" />
 					<text name="Time" value="Temps"  tooltip="Temps total cumulé pour cette rencontre" />
 					<text name="Total" value="Total"  tooltip="Nombre total de points marqués pour toutes les manches de cette rencontre" />
 				</group>
@@ -986,7 +830,7 @@
 			<group name="Round">
 				<group name="Header">
 					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies au cours de cette manche" />
-					<text name="Bombings" value="Bombeur"  tooltip="Nombre total d'autres joueurs explosés au cours de cette manche" />
+					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours de cette manche" />
 					<text name="Bombs" value="Bombes"  tooltip="Nombre total de bombes posées au cours de cette manche" />
 					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours de cette manche" />
 					<text name="Limit" value="Limite"  tooltip="Points personnalisés utilisés comme critère de fin de manche" />
@@ -996,8 +840,6 @@
 					<text name="Points" value="Points"  tooltip="Nombre de points marqués pour cette manche" />
 					<text name="Portrait" value="Personnage"  tooltip="Personnage utilisé par le joueur" />
 					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
-					<text name="Rank" value="Classement"  tooltip="Classement actuel dans cette manche" />
-					<text name="SelfBombings" value="Auto-bombage"  tooltip="Nombre total d'auto-bombages réalisés au cours de cette manche" />
 					<text name="Time" value="Temps"  tooltip="Temps de jeu pour cette manche" />
 				</group>
 				<group name="Data">
@@ -1009,7 +851,7 @@
 			<group name="Tournament" >
 				<group name="Header">
 					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies par le joueur au cours du tournoi" />
-					<text name="Bombings" value="Bombeur"  tooltip="Nombre total d'autres joueurs explosés au cours du tournoi" />
+					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours du tournoi" />
 					<text name="Bombs" value="Bombes"  tooltip="Nombre total de bombes posées au cours du tournoi" />
 					<text name="Confrontation" value="R"  tooltip="Nombre total de points marqués au cours pour la rencontre numéro" />
 					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours du tournoi" />
@@ -1020,14 +862,8 @@
 					<text name="Points" value="Points"  tooltip="Nombre de points marqués pour ce tournoi" />
 					<text name="Portrait" value="Personnage"  tooltip="Personnage utilisé par le joueur" />
 					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
-					<text name="Rank" value="Classement"  tooltip="Classement actuel dans ce tournoi" />
-					<text name="SelfBombings" value="Auto-bombage"  tooltip="Nombre total d'auto-bombages réalisés au cours de ce tournoi" />
 					<text name="Time" value="Temps"  tooltip="Nombre total cumulé au cours du tournoi" />
 					<text name="Total" value="Total"  tooltip="Nombre total de points marqués au cours des rencontres" />
-					<text name="Played" value="Jouées"  tooltip="Nombre total de rencontres jouées" />
-					<text name="Won" value="Gagnées"  tooltip="Nombre total de rencontres gagnées" />
-					<text name="Drawn" value="Nulles"  tooltip="Nombre total de rencontres nulles" />
-					<text name="Lost" value="Perdues"  tooltip="Nombre total de rencontres perdues" />
 				</group>
 				<group name="Data">
 						<text name="Computer" value="Ordinateur"  tooltip="Ce joueur est contrôlé par l'ordinateur" />
@@ -1055,78 +891,6 @@
 			<text name="Source" value="Source"  tooltip="Source de ce personnage (oeuvre originale ou extrait d'un jeu existant)" />
 		</group>
 			
-<!-- STATISTICS -->	
-		<group name="Statistics">
-			<group name="Player">
-				<group name="Common">
-					<group name="Header">
-						<text name="Name" value="Nom"  tooltip="Nom du joueur" />
-						<text name="Portrait" value="Personnage"  tooltip="Personnage choisi par le joueur" />
-						<text name="Rank" value="n°"  tooltip="Classement du joueur" />
-						<text name="Evolution" value="Évolution"  tooltip="Évolution par rapport au classement précédent" />
-						<text name="Type" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
-					</group>
-					<group name="Data">
-						<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
-						<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
-						<text name="NoRank" value="-"  tooltip="Ce joueur n'est pas classé" />
-						<text name="Mean" value="Moy."  />
-						<text name="Total" value="Total"  />
-						<text name="Enter" value="Entrée"  tooltip="Ce joueur vient d'intégrer le classement" />
-						<text name="Exit" value="Sortie"  tooltip="Ce joueur vient de sortir du classement" />
-						<text name="Down" value="Descente"  tooltip="Ce joueur est déscendu dans le classement" />
-						<text name="Up" value="Sortie"  tooltip="Ce joueur est monté dans le classement" />
-						<text name="Same" value="Inchangé"  tooltip="Le classement de ce joueur n'a pas changé" />
-					</group>
-					<group name="Button">
-						<text name="Register" value="Ajouter"  tooltip="Ajouter le joueur dans le classement" />
-						<text name="Unregister" value="Supprimer"  tooltip="Supprimer le joueur du classement" />
-						<text name="Next" value="Page suivante"  tooltip="Aller à la page suivante du classement" />
-						<text name="Previous" value="Page précédente"  tooltip="Aller à la page précédente du classement" />
-						<text name="Mean" value="Moyennes"  tooltip="Afficher les valeurs moyennes" />
-						<text name="Sum" value="Sommes"  tooltip="Afficher les totaux" />
-						<text name="Ai" value="Seulement les IA"  tooltip="Afficher seulement les intelligences artificielles" />
-						<text name="Human" value="Seulement les humains"  tooltip="Afficher seulement les joueurs humains" />
-						<text name="Both" value="Les deux"  tooltip="Afficher tous les joueurs" />
-						<text name="AllRanks" value="Joueurs classés"  tooltip="Afficher seulement les joueurs classés" />
-						<text name="NoRanks" value="Joueurs non-classés"  tooltip="Afficher seulement les joueurs non-classés" />
-						<text name="All" value="Tous les joueurs"  tooltip="Afficher tous les joueurs" />
-					</group>
-				</group>
-
-				<group name="Glicko2">
-					<group name="Header">
-						<text name="Mean" value="Moyenne"  tooltip="Moyenne" />
-						<text name="RoundCount" value="Joués"  tooltip="Nombre de manches jouées depuis la dernière mise-à-jour" />
-						<text name="StandardDeviation" value="Écart-type"  tooltip="Écart-type" />
-						<text name="Volatility" value="Régularité"  tooltip="Régularité du joueur" />
-					</group>
-				</group>
-
-				<group name="Scores">
-					<group name="Header">
-						<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs bombés" />
-						<text name="Bombeds" value="Bombé"  tooltip="Nombre total de bombages subis" />
-						<text name="Bombs" value="Bombes"  tooltip="Nombre total de bombes posées" />
-						<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées" />
-						<text name="Items" value="Items"  tooltip="Nombre total d'items ramassés" />
-						<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes" />
-						<text name="SelfBombings" value="Auto-bombage"  tooltip="Nombre total d'auto-bombages" />
-					</group>
-				</group>
-
-				<group name="Confrontations">
-					<group name="Header">
-						<text name="RoundsDrawn" value="Nombre d'égalités"  tooltip="Nombre de manches soldées par un résultat nul" />
-						<text name="RoundsLost" value="Nombre de défaites"  tooltip="Nombre de manches soldées par une défaite" />
-						<text name="RoundsPlayed" value="Nombre de manches"  tooltip="Nombre total de manches jouées" />
-						<text name="RoundsWon" value="Nombre de victoire"  tooltip="Nombre de manches soldées par une victoire" />
-						<text name="TimePlayed" value="Temps de jeu"  tooltip="Temps total de jeu" />
-					</group>
-				</group>
-			</group>
-		</group>
-
 <!-- TOURNAMENT -->
 		<group name="Tournament">
 			<text name="Author" value="Auteur"  tooltip="Auteur de ce tournoi" />

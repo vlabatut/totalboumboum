@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <controls xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\controls.xsd">
-	<event name="DROPBOMB" autofire="true">
+	<event name="DROPBOMB" autofire="false">
 		<on key="VK_U" />
 		<off key="VK_U" />
 	</event>
@@ -8,25 +8,21 @@
 		<on key="VK_O" />
 		<off key="VK_O" />
 	</event>
-	<event name="RIGHT" autofire="true">
+	<event name="RIGHT" autofire="false">
 		<on key="VK_L" />
 		<off key="VK_L" />
 	</event>
-	<event name="DOWN" autofire="true">
+	<event name="DOWN" autofire="false">
 		<on key="VK_K" />
 		<off key="VK_K" />
 	</event>
-	<event name="UP" autofire="true">
+	<event name="UP" autofire="false">
 		<on key="VK_I" />
 		<off key="VK_I" />
 	</event>
-	<event name="LEFT" autofire="true">
+	<event name="LEFT" autofire="false">
 		<on key="VK_J" />
 		<off key="VK_J" />
-	</event>
-	<event name="TRIGGERBOMB" autofire="false">
-		<on key="VK_N" />
-		<off key="VK_N" />
 	</event>
 </controls>
 
