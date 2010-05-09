@@ -5,16 +5,16 @@
 			<location player="00" line="07" col="01" />
 		</case>
 		<case players="2">
-			<location player="00" line="07" col="02" />
+			<location player="00" line="07" col="01" />
 			<location player="01" line="07" col="12" />
 		</case>
 		<case players="3">
-			<location player="00" line="07" col="02" />
+			<location player="00" line="07" col="01" />
 			<location player="01" line="07" col="12" />
 			<location player="02" line="02" col="07" />
 		</case>
 		<case players="4">
-			<location player="00" line="07" col="02" />
+			<location player="00" line="07" col="01" />
 			<location player="01" line="07" col="12" />
 			<location player="02" line="02" col="07" />
 			<location player="03" line="12" col="07" />
@@ -23,7 +23,6 @@
 	<items>
 		<item name="extrabomb" number="3" />
 		<item name="extraflame" number="3" />
-		<item name="speed" number="1" />
 	</items>
 </players>
 

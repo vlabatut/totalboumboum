@@ -3,13 +3,6 @@
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
 		scale="1" >
 
-	<images >
-		<image name="smoke1" file="1.gif" folder="smoke"/>
-		<image name="smoke2" file="2.gif" folder="smoke"/>
-		<image name="smoke3" file="3.gif" folder="smoke"/>
-		<image name="smoke4" file="4.gif" folder="smoke"/>		
-	</images>
-
 	<gestures>
 
 		<gesture name="BURNING" repeat="false" folder="burning">

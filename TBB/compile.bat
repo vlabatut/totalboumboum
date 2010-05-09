@@ -1,13 +1,13 @@
 :: -------------------------------------------------------------------
 ::
 :: This is an MS-DOS script, it works only on Windows operating systems.
-:: It (re)compiles the whole TBB game (and all AIs located in resources/ai).
-:: v.0.4
+:: It (re)compiles the whole TBB game
+:: v.0.2
 ::
 :: -------------------------------------------------------------------
 ::
 :: Total Boum Boum
-:: Copyright 2008-2010 Vincent Labatut 
+:: Copyright 2008-2009 Vincent Labatut 
 :: 
 :: This file is part of Total Boum Boum.
 :: 
@@ -32,14 +32,12 @@
 	Setlocal
 
 :: define path variables
-	Set main=.\src\org\totalboumboum
+	Set main=.\src\fr\free\totalboumboum
 	Set aig=%main%\ai
-	Set aib=.\resources\ai
-	Set ai=%aib%\org\totalboumboum\ai
+	Set ai=.\resources\ai
 	Set bin=.\bin
 	Set jdom=.\resources\lib\jdom.jar
-	Set japa=.\resources\lib\javaparser-1.0.7.jar
-	Set cp=%bin%;%jdom%;%japa%
+	Set cp=%bin%;%jdom%
 	Set sp=.\src
 
 :: create directory for .class files
@@ -70,9 +68,9 @@
 	echo compiling the AI classes located in the resources... 
 	For /d %%f In (%ai%\*) Do (
 		echo 	%%f
-		For /d %%g In (%%f\ais\*) Do ( 
+		For /d %%g In (%%f\*) Do ( 
 			echo 	 	%%g
-			javac -nowarn -sourcepath %sp%;%aib% -classpath %cp%;%aib% %%g\*.java
+			javac -nowarn -sourcepath %sp%;%ai% -classpath %cp%;%ai% %%g\*.java
 		)
 	)
 

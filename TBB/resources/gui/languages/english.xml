@@ -170,16 +170,6 @@
 						<text name="Disabled" value="Disabled" tooltip="Automatic FPS is disabled" />
 						<text name="Enabled" value="Enabled" tooltip="Automatic FPS is enabled" />
 					</group>
-					<group name="Cache">
-						<text name="Title" value="Memory cache" tooltip="Cache sprites in memory (in order to speed up loading)" />
-						<text name="Disabled" value="Disabled" tooltip="Memory caching is disabled" />
-						<text name="Enabled" value="Enabled" tooltip="Memory caching is enabled" />
-					</group>
-					<group name="CacheLimit">
-						<text name="Title" value="Cache size" tooltip="Maximal size of the memory cache, in Mb" />
-						<text name="Plus" value="Plus" tooltip="Increase memory cache size" />
-						<text name="Minus" value="Minus" tooltip="Decrease memory cache size" />
-					</group>
 					<group name="Fps">
 						<text name="Title" value="FPS" tooltip="Frames per second rate" />
 						<text name="Plus" value="Plus" tooltip="Increase the frames per second rate" />
@@ -974,7 +964,6 @@
 					<text name="Points" value="Points"  tooltip="Number of points scored for this match" />
 					<text name="Portrait" value="Character"  tooltip="Character used by the player" />
 					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
-					<text name="Rank" value="Rank"  tooltip="Current rank in this match" />
 					<text name="SelfBombings" value="Self-bombings"  tooltip="Total number of times the player exploded himself in this match" />
 					<text name="Time" value="Time"  tooltip="Total time spend in the match" />
 					<text name="Total" value="Total"  tooltip="Total number of points scored for all the rounds" />
@@ -998,7 +987,6 @@
 					<text name="Points" value="Points"  tooltip="Number of points scored for this round" />
 					<text name="Portrait" value="Character"  tooltip="Character used by the player" />
 					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
-					<text name="Rank" value="Rank"  tooltip="Current rank in this round" />
 					<text name="SelfBombings" value="Self-bombings"  tooltip="Total number of times the player exploded himself in this round" />
 					<text name="Time" value="Time"  tooltip="Time spend in the round" />
 				</group>
@@ -1022,7 +1010,6 @@
 					<text name="Points" value="Points"  tooltip="Number of points scored for this tournament" />
 					<text name="Portrait" value="Character"  tooltip="Character used by the player" />
 					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
-					<text name="Rank" value="Rank"  tooltip="Current rank in this tournament" />
 					<text name="SelfBombings" value="Self-bombings"  tooltip="Total number of times the player exploded himself in this tournament" />
 					<text name="Time" value="Time"  tooltip="Total time spend in the tournament" />
 					<text name="Total" value="Total"  tooltip="Total number of points scored for all the matches" />

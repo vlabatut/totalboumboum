@@ -11,16 +11,10 @@
 		<xsd:attribute name="controls" type="xsd:boolean" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tCache">
-		<xsd:attribute name="cache" type="xsd:boolean" />
-		<xsd:attribute name="cacheLimit" type="xsd:long" />
-	</xsd:complexType>
-
 	<xsd:complexType name="tEngine">
 		<xsd:sequence>
 			<xsd:element name="timing" type="tTiming" />
 			<xsd:element name="log" type="tLog" />
-			<xsd:element name="cache" type="tCache" />
 		</xsd:sequence>
 	</xsd:complexType>
 

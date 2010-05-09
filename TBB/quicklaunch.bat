@@ -1,14 +1,14 @@
 :: -------------------------------------------------------------------
 ::
-:: This is a MS-DOS script, it works only on Windows operating systems.
-:: It launches TBB with the appropriate parameters.
+:: this is a MS-DOS script, it works only on Windows operating systems.
+:: it launches TBB, but you can preferably use TBB.exe
 ::
-:: v.0.2
+:: v.0.1
 ::
 :: -------------------------------------------------------------------
 ::
 :: Total Boum Boum
-:: Copyright 2008-2010 Vincent Labatut 
+:: Copyright 2008-2009 Vincent Labatut 
 :: 
 :: This file is part of Total Boum Boum.
 :: 
@@ -33,9 +33,8 @@
 	Set ai=.\resources\ai
 	Set bin=.\bin
 	Set jdom=.\resources\lib\jdom.jar
-	Set japa=.\resources\lib\javaparser-1.0.7.jar
-	Set cp=%bin%;%jdom%;%japa%;%ai%
-	Set launcher=org.totalboumboum.Launcher
+	Set cp=%bin%;%jdom%;%ai%
+	Set launcher=fr.free.totalboumboum.Launcher
 
 :: launch the game
 	java -Xmx256m -classpath %cp% %launcher% quick
