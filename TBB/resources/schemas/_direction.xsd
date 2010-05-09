@@ -3,32 +3,27 @@
 
 	<xsd:simpleType name="tDirection">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="NONE" />
-			<xsd:enumeration value="DOWN" />
-			<xsd:enumeration value="DOWNLEFT" />
-			<xsd:enumeration value="DOWNRIGHT" />
-			<xsd:enumeration value="LEFT" />
-			<xsd:enumeration value="RIGHT" />
-			<xsd:enumeration value="UP" />
-			<xsd:enumeration value="UPLEFT" />
-			<xsd:enumeration value="UPRIGHT" />
+			<xsd:enumeration value="none" />
+			<xsd:enumeration value="down" />
+			<xsd:enumeration value="downleft" />
+			<xsd:enumeration value="downright" />
+			<xsd:enumeration value="left" />
+			<xsd:enumeration value="right" />
+			<xsd:enumeration value="up" />
+			<xsd:enumeration value="upleft" />
+			<xsd:enumeration value="upright" />
 		</xsd:restriction>
 	</xsd:simpleType>
 	
 	<xsd:simpleType name="tAllDirections">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="SOME" /> <!-- represents any value but NONE -->
-			<xsd:enumeration value="ANY" /> <!-- represents any value including NONE -->
+			<xsd:enumeration value="all" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
 	<xsd:simpleType name="tExtendedDirection">
 		<xsd:union memberTypes="tDirection tAllDirections" />
 	</xsd:simpleType>
-
-	<xsd:simpleType name="tDirectionList"> 
-    	<xsd:list itemType="tExtendedDirection"/> 
-	</xsd:simpleType> 
 
 </xsd:schema>
 		

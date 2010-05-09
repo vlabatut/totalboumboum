@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="..\..\..\xml\schemas\levels.xsd" >
+	<theme packname="superbomberman1" name="belt"/>
+	<items packname="superbomberman1" name="normal"/>
+	<globalDimension width="17" height="13" />
+	<visibleDimension width="15" height="13" />
+	<visiblePosition leftCol="1" upLine="0" />
+	
+	<matrix>
+		<line pos="0">
+			<tile pos="0">
+				<block type="hardwall" name="outsidecornerleft" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insidecornerleft" />
+			</tile>
+			<tile pos="2">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="3">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="4">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="5">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="6">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="7">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="8">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="9">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="10">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="11">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="12">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="13">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="14">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insidecornerright" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsidecornerright" />
+			</tile>
+		</line>	
+		
+		<line pos="1">
+			<tile pos="0">
+				<block type="hardwall" name="outsideleftA" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insideleftA" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insiderightA" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsiderightA" />
+			</tile>
+		</line>
+		
+		<line pos="2">
+			<tile pos="0">
+				<block type="hardwall" name="outsideleftB" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insideleftB" />
+			</tile>
+			<tile pos="3">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="5">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="7">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="9">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="11">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="13">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insiderightB" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsiderightB" />
+			</tile>
+		</line>
+		
+		<line pos="3">
+			<tile pos="0">
+				<block type="hardwall" name="outsideleftA" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insideleftA" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insiderightA" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsiderightA" />
+			</tile>
+		</line>
+		
+		<line pos="4">
+			<tile pos="0">
+				<block type="hardwall" name="outsideleftB" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insideleftB" />
+			</tile>
+			<tile pos="3">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="5">
+				<block type="hardwall" name="pipebigupleftA" />
+			</tile>
+			<tile pos="6">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="7">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="8">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="9">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="10">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="11">
+				<block type="hardwall" name="pipebiguprightA" />
+			</tile>
+			<tile pos="13">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insiderightB" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsiderightB" />
+			</tile>
+		</line>
+		
+		<line pos="5">
+			<tile pos="0">
+				<block type="hardwall" name="outsideleftA" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insideleftA" />
+			</tile>
+			<tile pos="5">
+				<block type="hardwall" name="pipebigleft1" />
+			</tile>
+			<tile pos="11">
+				<block type="hardwall" name="pipebigright1" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insiderightA" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsiderightA" />
+			</tile>
+		</line>
+		
+		<line pos="6">
+			<tile pos="0">
+				<block type="hardwall" name="outsideleftB" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insideleftB" />
+			</tile>
+			<tile pos="3">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="5">
+				<block type="hardwall" name="pipebigleft1" />
+			</tile>
+			<tile pos="7">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="9">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="11">
+				<block type="hardwall" name="pipebigright1" />
+			</tile>
+			<tile pos="13">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insiderightB" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsiderightB" />
+			</tile>
+		</line>
+		
+		<line pos="7">
+			<tile pos="0">
+				<block type="hardwall" name="outsideleftA" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insideleftA" />
+			</tile>
+			<tile pos="5">
+				<block type="hardwall" name="pipebigleft1" />
+			</tile>
+			<tile pos="11">
+				<block type="hardwall" name="pipebigright1" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insiderightA" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsiderightA" />
+			</tile>
+		</line>
+		
+		<line pos="8">
+			<tile pos="0">
+				<block type="hardwall" name="outsideleftB" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insideleftB" />
+			</tile>
+			<tile pos="3">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="5">
+				<block type="hardwall" name="pipebigdownleftA" />
+			</tile>
+			<tile pos="6">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="7">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="8">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="9">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="10">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="11">
+				<block type="hardwall" name="pipebigdownrightA" />
+			</tile>
+			<tile pos="13">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insiderightB" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsiderightB" />
+			</tile>
+		</line>
+		
+		<line pos="9">
+			<tile pos="0">
+				<block type="hardwall" name="outsideleftA" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insideleftA" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insiderightA" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsiderightA" />
+			</tile>
+		</line>
+		
+		<line pos="10">
+			<tile pos="0">
+				<block type="hardwall" name="outsideleftB" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insideleftB" />
+			</tile>
+			<tile pos="3">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="5">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="7">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="9">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="11">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="13">
+				<block type="hardwall" name="regular" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insiderightB" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsiderightB" />
+			</tile>
+		</line>
+		
+		<line pos="11">
+			<tile pos="0">
+				<block type="hardwall" name="outsideleftA" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insideleftA" />
+			</tile>
+			<tile pos="2">
+				<block type="softwall" name="softwall" />
+			</tile>
+			<tile pos="3">
+				<block type="softwall" name="softwall" />
+			</tile>
+			<tile pos="4">
+				<block type="softwall" name="softwall" />
+			</tile>
+			<tile pos="5">
+				<block type="softwall" name="softwall" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insiderightA" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsiderightA" />
+			</tile>
+		</line>
+		
+		<line pos="12">
+			<tile pos="0">
+				<block type="hardwall" name="outsidecornerleft" />
+			</tile>
+			<tile pos="1">
+				<block type="hardwall" name="insidecornerleft" />
+			</tile>
+			<tile pos="2">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="3">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="4">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="5">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="6">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="7">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="8">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="9">
+				<block type="hardwall" name="pipebighorizontal1A" />
+			</tile>
+			<tile pos="10">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="11">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="12">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="13">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="14">
+				<block type="hardwall" name="pipebighorizontal2A" />
+			</tile>
+			<tile pos="15">
+				<block type="hardwall" name="insidecornerright" />
+			</tile>
+			<tile pos="16">
+				<block type="hardwall" name="outsidecornerright" />
+			</tile>
+		</line>	
+	</matrix>
+	
+</level>
