@@ -5,11 +5,11 @@
 <!-- COMMON -->
 	<xsd:simpleType name="tComparatorCode">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="EQUAL" />
-			<xsd:enumeration value="GREATER" />
-			<xsd:enumeration value="GREATEREQ" />
-			<xsd:enumeration value="LESS" />
-			<xsd:enumeration value="LESSEQ" />
+			<xsd:enumeration value="equal" />
+			<xsd:enumeration value="greater" />
+			<xsd:enumeration value="greatereq" />
+			<xsd:enumeration value="less" />
+			<xsd:enumeration value="lesseq" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
@@ -19,7 +19,7 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="tThreshold">
-		<xsd:attribute name="comparator" type="tComparatorCode" use="optional"  default="GREATEREQ" />
+		<xsd:attribute name="comparator" type="tComparatorCode" use="optional"  default="greatereq" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tIntegerThreshold">

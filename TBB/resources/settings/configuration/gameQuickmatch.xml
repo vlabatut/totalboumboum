@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\gameQuickmatch.xsd">
+	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
+	<settings>
+		<levels randomOrder="true" />
+		<players randomLocation="true" />
+		<limits points="0" rounds="6" time="60000" />
+		<points share="true" draw="none">
+			<value rank="1" points="8" />
+			<value rank="2" points="4" />
+			<value rank="3" points="2" />
+			<value rank="4" points="1" />
+			<value rank="5" points="0" />
+		</points>
+	</settings>
+	<players>
+		<player file="1" color="cyan" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="53" color="red" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="59" color="blue" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="60" color="orange" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+	</players>
+	<levels>
+		<level pack="nbm2Custom" folder="battle" />
+		<level pack="nbm2Custom" folder="cave" />
+		<level pack="nbm2Custom" folder="forest" />
+		<level pack="nbm2Custom" folder="lake" />
+		<level pack="nbm2Custom" folder="mountain" />
+		<level pack="nbm2Custom" folder="prison" />
+	</levels>
+</gameQuickmatch>
+

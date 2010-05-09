@@ -42,41 +42,27 @@
 		<xsd:attribute name="randomizeParts" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
-	<xsd:simpleType name="tSortTypes">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="NONE" />
-			<xsd:enumeration value="RANDOM" />
-			<xsd:enumeration value="SEEDS" />
-		</xsd:restriction>
-	</xsd:simpleType>
-
 	<xsd:complexType name="tCup">
 		<xsd:sequence>
 			<xsd:element name="leg" type="tLeg" maxOccurs="unbounded"/>
 		</xsd:sequence>
-		<xsd:attribute name="sortPlayers" type="tSortTypes" use="optional" default="RANDOM" />
+		<xsd:attribute name="randomizePlayers" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
 <!-- LEAGUE -->
-	<xsd:simpleType name="tConfrontationsOrder">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="NONE" />
-			<xsd:enumeration value="RANDOM" />
-			<xsd:enumeration value="UNIFORM" />
-		</xsd:restriction>
-	</xsd:simpleType>
-
 	<xsd:complexType name="tLeague">
 		<xsd:sequence>
-<!-- 			<xsd:element name="points" type="tPointProcessor" />  -->
-			<xsd:element name="matches" type="tMatches" maxOccurs="unbounded"/>
 		</xsd:sequence>
-		<xsd:attribute name="randomizePlayers" type="xsd:boolean" use="optional" default="false" />
-		<xsd:attribute name="minimizeConfrontations" type="xsd:boolean" use="optional" default="false" />
-		<xsd:attribute name="confrontationsOrder" type="tConfrontationsOrder" use="optional" default="RANDOM" />
 	</xsd:complexType>
 
 <!-- SEQUENCE -->
+	<xsd:complexType name="tMatches">
+		<xsd:sequence>
+			<xsd:element name="match" type="tMatch" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="randomOrder" type="xsd:boolean" use="optional" default="false" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tSequence">
 		<xsd:sequence>
 			<xsd:element name="limits" type="tTournamentLimits"  />
@@ -95,13 +81,6 @@
 	<xsd:complexType name="tMatch">
 		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
 		<xsd:attribute name="name" type="xsd:string" use="required" />
-	</xsd:complexType>
-
-	<xsd:complexType name="tMatches">
-		<xsd:sequence>
-			<xsd:element name="match" type="tMatch" maxOccurs="unbounded"/>
-		</xsd:sequence>
-		<xsd:attribute name="randomOrder" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tAuthor">

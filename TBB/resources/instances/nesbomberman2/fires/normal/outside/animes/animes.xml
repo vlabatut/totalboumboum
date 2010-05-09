@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../../schemas/animes.xsd" 
-		scale="1" >
+		scale="1" default="burning" >
 	<gestures>
-		<gesture name="BURNING" >
-			<direction name="DOWN" folder="down">
+		<gesture name="burning" >
+			<direction name="down" folder="down">
 				<step duration="60" file="1.gif" />
 				<step duration="70" file="2.gif" />
 				<step duration="70" file="3.gif" />
@@ -13,7 +13,7 @@
 				<step duration="60" file="2.gif" />
 				<step duration="70" file="1.gif" />
 			</direction>
-			<direction name="LEFT" folder="left">
+			<direction name="left" folder="left">
 				<step duration="60" file="1.gif" />
 				<step duration="70" file="2.gif" />
 				<step duration="70" file="3.gif" />
@@ -22,7 +22,7 @@
 				<step duration="60" file="2.gif" />
 				<step duration="70" file="1.gif" />
 			</direction>
-			<direction name="NONE" folder="center">
+			<direction name="none" folder="center">
 				<step duration="60" file="1.gif" />
 				<step duration="70" file="2.gif" />
 				<step duration="70" file="3.gif" />
@@ -31,7 +31,7 @@
 				<step duration="60" file="2.gif" />
 				<step duration="70" file="1.gif" />
 			</direction>
-			<direction name="RIGHT" folder="right">
+			<direction name="right" folder="right">
 				<step duration="60" file="1.gif" />
 				<step duration="70" file="2.gif" />
 				<step duration="70" file="3.gif" />
@@ -40,7 +40,7 @@
 				<step duration="60" file="2.gif" />
 				<step duration="70" file="1.gif" />
 			</direction>
-			<direction name="UP" folder="up">
+			<direction name="up" folder="up">
 				<step duration="60" file="1.gif" />
 				<step duration="70" file="2.gif" />
 				<step duration="70" file="3.gif" />

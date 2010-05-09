@@ -3,6 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../schemas/sprite.xsd">
 
-	<general name="Through walls" base="common" />
+	<general name="Through walls" />
 
 </sprite>

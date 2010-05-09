@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../../schemas/animes.xsd" 
-		scale="1" >
-	
+		scale="1" default="standing">
 	<gestures>
-		<gesture name="STANDING" folder="standing" repeat="true" >
-			<direction name="NONE">
+		<gesture name="standing" folder="standing" repeat="true" >
+			<direction name="none">
 				<step duration="200" file="01.gif" />
 				<step duration="200" file="02.gif" />
 				<step duration="200" file="03.gif" />
