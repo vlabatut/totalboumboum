@@ -28,6 +28,9 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 
 public class SpriteChangeEvent extends ReplayEvent
 {
+	
+	//TODO utiliser directement le sprite, comme pour l'autre evt
+	
 	public SpriteChangeEvent(int spriteId, long time, Integer x, Integer y, GestureName gesture, Direction direction)
 	{	this.time = time;
 		changes.put(SPRITE_EVENT_POSITION_X,x);
@@ -81,8 +84,10 @@ public class SpriteChangeEvent extends ReplayEvent
 	/////////////////////////////////////////////////////////////////
 	public static final String SPRITE_EVENT_POSITION_X = "SPRITE_EVENT_POSITION_X";
 	public static final String SPRITE_EVENT_POSITION_Y = "SPRITE_EVENT_POSITION_Y";
+	public static final String SPRITE_EVENT_POSITION_Z = "SPRITE_EVENT_POSITION_Z";
 	public static final String SPRITE_EVENT_GESTURE = "SPRITE_EVENT_GESTURE";
 	public static final String SPRITE_EVENT_DIRECTION = "SPRITE_EVENT_DIRECTION";
+	public static final String SPRITE_EVENT_DURATION = "SPRITE_EVENT_DURATION";
 	private HashMap<String,Object> changes = new HashMap<String,Object>();
 	
 	public HashMap<String,Object> getChanges()

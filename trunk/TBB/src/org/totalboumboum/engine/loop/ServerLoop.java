@@ -81,6 +81,7 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.SystemControl;
+import org.totalboumboum.engine.loop.event.SpriteCreationEvent;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.round.Round;
@@ -153,6 +154,7 @@ long start = System.currentTimeMillis();
 		{	// location
 			PlayerLocation pl = initialPositions[j];
 			Tile tile = level.getTile(pl.getLine(),pl.getCol());
+			
 			// sprite
 			Profile profile = i.next();
 			Player player = new Player(profile,base,tile);
@@ -162,9 +164,15 @@ long start = System.currentTimeMillis();
 			showAiPaths.add(false);
 			showAiTileTexts.add(false);
 			showAiTileColors.add(false);
+			
+			// record/transmit event
+			SpriteCreationEvent event = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
+			RoundVariables.recordEvent(event);
+			
 			// level
 			Hero hero = (Hero)player.getSprite();
 //			level.addHero(hero,pl.getLine(),pl.getCol());
+			
 			// initial items
 			for(Entry<String,Integer> entry: items.entrySet())
 			{	String name = entry.getKey();
@@ -180,8 +188,10 @@ long start = System.currentTimeMillis();
 					item.processEvent(evt);
 				}
 			}
+			
 			// ai
 			player.initAi();
+			
 			// next player...
 			loadStepOver();
 			j++;

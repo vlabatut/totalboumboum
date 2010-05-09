@@ -52,25 +52,13 @@ public class ItemFactory extends SpriteFactory<Item>
 		this.itemProbabilities = itemProbabilities;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// SPRITES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected String itemName;
-	
-	public Item makeSprite(Tile tile)
-	{	// init
-		Item result = new Item();
-		List<AbstractAbility> abilities = null;
+	public List<AbstractAbility> drawItemAbilities()
+	{	List<AbstractAbility> result = null;
 		double proba = Math.random();
-//System.out.println("name: "+itemName+" proba: "+proba);		
+		//System.out.println("name: "+itemName+" proba: "+proba);		
 		double total = 0;
 		int index = 0;
 
-		// common managers
-		initSprite(result);
-	
-		// specific managers
-		// item abilities
 		if(itemAbilities.isEmpty())
 		{	String name = null;
 			while(index<itemrefs.size() && name==null)
@@ -81,14 +69,13 @@ public class ItemFactory extends SpriteFactory<Item>
 					index ++;
 			}
 //System.out.println("name: "+name);			
-			Item itm = instance.getItemset().makeItem(name,tile);
-			abilities = itm.getItemAbilities();
+			result = instance.getItemset().getItemAbilities(name);
 		}
 		else
-		{	while(index<itemAbilities.size() && abilities==null)
+		{	while(index<itemAbilities.size() && result==null)
 			{	total = total + itemProbabilities.get(index);
 				if(proba<total)
-					abilities = itemAbilities.get(index);
+					result = itemAbilities.get(index);
 				else
 					index ++;
 			}
@@ -96,6 +83,25 @@ public class ItemFactory extends SpriteFactory<Item>
 //if(a instanceof StateAbility)
 //System.out.println("\t- "+((StateAbility)a).getName()+", : "+a.getStrength());
 		}
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected String itemName;
+	
+	public Item makeSprite(Tile tile)
+	{	// init
+		Item result = new Item();
+		List<AbstractAbility> abilities = null;
+
+		// common managers
+		initSprite(result);
+	
+		// specific managers
+		// item abilities
 		result.initItemAbilities(abilities);
 		// event
 		EventManager eventManager = new ItemEventManager(result);
