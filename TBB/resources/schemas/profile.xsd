@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="_colors.xsd"/>
 
 	<xsd:complexType name="tCharacter">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 		<xsd:attribute name="packname" type="xsd:string" use="required" />
-		<xsd:attribute name="color" type="tColor" use="required" />
+		<xsd:attribute name="color" type="xsd:string" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tGeneral">
