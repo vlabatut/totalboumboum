@@ -33,6 +33,8 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.block.BlockFactory;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
+import org.totalboumboum.engine.loop.event.SpriteCreationEvent;
+import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
 public class Theme extends AbstractTheme
@@ -66,6 +68,12 @@ public class Theme extends AbstractTheme
 	public Floor makeFloor(Tile tile)
 	{	Entry<String,FloorFactory> entry = floors.entrySet().iterator().next();
 		Floor result = entry.getValue().makeSprite(tile);
+		
+		// record/transmit event
+		String name = entry.getKey();
+		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+		RoundVariables.recordEvent(event);
+		
 		//result.initGesture();
 		return result;
 	}
@@ -73,8 +81,13 @@ public class Theme extends AbstractTheme
 	public Floor makeFloor(String name, Tile tile)
 	{	FloorFactory ff = floors.get(name);
 if(ff==null)
-	System.out.println(name);
+	System.err.println("makeFloor: sprite '"+name+"' not found");
 		Floor result = ff.makeSprite(tile);
+		
+		// record/transmit event
+		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+		RoundVariables.recordEvent(event);
+
 		//result.initGesture();
 		return result;
 	}
@@ -91,9 +104,14 @@ if(ff==null)
 	public Block makeBlock(String name, Tile tile)
 	{	BlockFactory bf = blocks.get(name);
 if(bf==null)
-	System.out.println(name);
+	System.err.println("makeBlock: sprite '"+name+"' not found");
 		Block result = bf.makeSprite(tile);
-//NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien été trouvé !	
+//NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien été trouvé !
+		
+		// record/transmit event
+		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+		RoundVariables.recordEvent(event);
+
 		//result.initGesture();
 		return result;
 	}

@@ -21,6 +21,7 @@ package org.totalboumboum.engine.content.manager.item;
  * 
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -86,8 +87,8 @@ public class ItemManager
 		// recreate all initial items
 		for(Item item: originalInitialItems)
 		{	String name = item.getItemName();
-			itemset.makeItem(name,tile);
-			addItem(item,initialItems);
+			Item itm = itemset.makeItem(name,tile);
+			addItem(itm,initialItems);
 		}		
 	}
 	

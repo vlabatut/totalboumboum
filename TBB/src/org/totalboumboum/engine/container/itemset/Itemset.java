@@ -23,13 +23,17 @@ package org.totalboumboum.engine.container.itemset;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
+import org.totalboumboum.engine.loop.event.SpriteCreationEvent;
+import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
 public class Itemset extends AbstractItemset
@@ -62,9 +66,22 @@ public class Itemset extends AbstractItemset
 	{	Item result = null;
 		ItemFactory itemFactory = itemFactories.get(name);
 if(itemFactory==null)
-	System.out.println(name);
+	System.err.println("makeItem: sprite '"+name+"' not found");
 		result = itemFactory.makeSprite(tile);
+
+		// record/transmit event
+		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+		RoundVariables.recordEvent(event);
+
 		//result.initGesture();
+		return result;
+	}
+	
+	public List<AbstractAbility> getItemAbilities(String name)
+	{	ItemFactory itemFactory = itemFactories.get(name);
+if(itemFactory==null)
+	System.err.println("makeItem: sprite '"+name+"' not found");
+		List<AbstractAbility> result = itemFactory.drawItemAbilities();
 		return result;
 	}
 }

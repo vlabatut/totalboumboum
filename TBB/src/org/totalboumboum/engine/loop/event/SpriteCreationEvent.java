@@ -1,6 +1,10 @@
 package org.totalboumboum.engine.loop.event;
 
+import org.totalboumboum.configuration.profile.PredefinedColor;
+import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Role;
+import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.game.round.RoundVariables;
 
 /*
  * Total Boum Boum
@@ -25,6 +29,7 @@ import org.totalboumboum.engine.content.feature.Role;
 
 public class SpriteCreationEvent extends ReplayEvent
 {
+/*
 	public SpriteCreationEvent(int id, long time, String name, Role role, int line, int col)
 	{	this.id = id;
 		this.time = time;
@@ -32,6 +37,26 @@ public class SpriteCreationEvent extends ReplayEvent
 		this.role = role;
 		this.line = line;
 		this.col = col;
+	}
+*/
+	public SpriteCreationEvent(Sprite sprite, String name)
+	{	// identification
+		id = sprite.getId();
+		this.name = name;
+		
+		// time
+		time = RoundVariables.loop.getTotalEngineTime();
+		
+		// role
+		role = sprite.getRole();
+		
+		// color
+		color = sprite.getColor();
+		
+		// location
+		Tile tile = sprite.getTile();
+		this.line = tile.getLine();
+		this.col = tile.getCol();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -68,6 +93,15 @@ public class SpriteCreationEvent extends ReplayEvent
 	
 	public Role getRole()
 	{	return role;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ROLE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PredefinedColor color;
+	
+	public PredefinedColor getColor()
+	{	return color;	
 	}
 	
 	/////////////////////////////////////////////////////////////////

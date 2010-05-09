@@ -142,13 +142,15 @@ public class RoundVariables
 	
 	/**
 	 * records an event in the currently open stream.
-	 * testing if the event should be recorded, and even created, should
-	 * be performed before event creation, i.e. in the invoking method
 	 */
-	public static void recordEvent(ReplayEvent event) throws IOException
-	{	//if(out!=null)
-		{
-			out.writeObject(event);
+	public static void recordEvent(ReplayEvent event)
+	{	if(out!=null)
+		{	try
+			{	out.writeObject(event);
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
 		}
 	}
 	

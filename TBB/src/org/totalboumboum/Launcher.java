@@ -1190,5 +1190,9 @@ public class Launcher
 	 * 		- création: faite sur place. sprites avec des managers light
 	 * 
 	 * 
+	 * les évènements de création ont été mis partout où nécessaires.
+	 * faut maintenant mettre en place les évènements de modification
+	 * puis tester l'enregistrement
+	 * puis implémenter le lecteur d'évènements
 	 */
 }

@@ -35,6 +35,8 @@ import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
+import org.totalboumboum.engine.loop.event.SpriteCreationEvent;
+import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
 public class Bombset extends AbstractBombset
@@ -105,8 +107,13 @@ public class Bombset extends AbstractBombset
 					StateAbility ab2 = new StateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 					ab2.setStrength(delta);
 					result.addDirectAbility(ab2);
-//System.out.println("coef:"+coef);			
-//System.out.println("time:"+time);					
+//System.out.println("coef:"+coef);
+//System.out.println("time:"+time);
+					
+					// record/transmit event
+					String name = bf.getBombName();
+					SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+					RoundVariables.recordEvent(event);
 				}
 			}
 			else
@@ -120,6 +127,7 @@ public class Bombset extends AbstractBombset
 	 * @param tile
 	 * @param name
 	 * @return
+	 * @throws IOException 
 	 */
 	public Bomb makeBomb(String name, Tile tile, int flameRange)
 	{	Bomb result = null;
@@ -129,6 +137,10 @@ public class Bombset extends AbstractBombset
 			if(bombFactory.getBombName().equalsIgnoreCase(name))
 			{	result = bombFactory.makeSprite(tile);
 				result.setFlameRange(flameRange); //NOTE this is performed in BombsetManager.dropBomb() for the Heroes. Maybe should it be normalized ? use an ability ? (cf note in BombsetMgr)
+
+				// record/transmit event
+				SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+				RoundVariables.recordEvent(event);
 			}
 		}
 		return result;
@@ -140,7 +152,8 @@ public class Bombset extends AbstractBombset
 		while(i.hasNext() && result==null)
 		{	BombFactory temp = i.next();
 			if(temp.getBombName().equalsIgnoreCase(name))
-				result = temp;
+			{	result = temp;
+			}
 		}
 		return result;
 	}
