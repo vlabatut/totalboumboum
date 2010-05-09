@@ -1,24 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="_contact.xsd"/>
 <xsd:include schemaLocation="_direction.xsd"/>
 <xsd:include schemaLocation="_role.xsd"/>
-<xsd:include schemaLocation="_action_name.xsd"/>
-<xsd:include schemaLocation="_tile_position.xsd"/>
-<xsd:include schemaLocation="_orientation.xsd"/>
+
+	<xsd:simpleType name="tContact">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="none" />
+			<xsd:enumeration value="collision" />
+			<xsd:enumeration value="intersection" />
+			<xsd:enumeration value="all" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="tTile">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="same" />
+			<xsd:enumeration value="neighbour" />
+			<xsd:enumeration value="far" />
+			<xsd:enumeration value="all" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="tOrientation">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="same" />
+			<xsd:enumeration value="opposite" />
+			<xsd:enumeration value="other" />
+			<xsd:enumeration value="all" />
+		</xsd:restriction>
+	</xsd:simpleType>
 
 	<xsd:complexType name="tAction">
-		<xsd:attribute name="name" type="tActionName" use="required" />
-		<xsd:attribute name="direction" type="tDirectionList" use="optional" default="ANY" />
-		<xsd:attribute name="contact" type="tContactList" use="optional" default="ANY" />
-		<xsd:attribute name="tilePosition" type="tTilePositionList" use="optional" default="ANY" />
-		<xsd:attribute name="orientation" type="tOrientationList" use="optional" default="ANY" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="direction" type="tExtendedDirection" use="optional" default="none" />
+		<xsd:attribute name="contact" type="tContact" use="optional" default="all" />
+		<xsd:attribute name="tilePosition" type="tTile" use="optional" default="same" />
+		<xsd:attribute name="orientation" type="tOrientation" use="optional" default="same" />
 	</xsd:complexType>
 	
 	<xsd:complexType name="tActionActor">
 		<xsd:complexContent>
 			<xsd:extension base="tAction">
-				<xsd:attribute name="target" type="tRoleList" use="optional" default="NONE" />
+				<xsd:attribute name="target" type="tRole" use="optional" default="none" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -26,7 +49,7 @@
 	<xsd:complexType name="tActionTarget">
 		<xsd:complexContent>
 			<xsd:extension base="tAction">
-				<xsd:attribute name="actor" type="tRoleList" use="required" />
+				<xsd:attribute name="actor" type="tRole" use="required" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -34,8 +57,8 @@
 	<xsd:complexType name="tActionThird">
 		<xsd:complexContent>
 			<xsd:extension base="tAction">
-				<xsd:attribute name="actor" type="tRoleList" use="required" />
-				<xsd:attribute name="target" type="tRoleList" use="optional" default="NONE" />
+				<xsd:attribute name="actor" type="tRole" use="required" />
+				<xsd:attribute name="target" type="tRole" use="optional" default="none" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>

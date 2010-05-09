@@ -11,12 +11,7 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="tItem">
-		<xsd:attribute name="name" type="xsd:string" use="required"/>
-	</xsd:complexType>
-
-	<xsd:complexType name="tBomb">
-		<xsd:attribute name="name" type="xsd:string" use="required"/>
-		<xsd:attribute name="range" type="xsd:integer" use="optional" default="0" />
+		<xsd:attribute name="type" type="xsd:string" use="required"/>
 	</xsd:complexType>
 
 	<xsd:group name="gBasicTile">
@@ -27,7 +22,6 @@
 			<xsd:element name="block" type="tBlock" minOccurs="0" />
 			<!--  peut aussi y a voir des bombes, bonus, etc -->
 			<xsd:element name="item" type="tItem" minOccurs="0" />
-			<xsd:element name="bomb" type="tBomb" minOccurs="0" />
 		</xsd:sequence>
 	</xsd:group>
 
@@ -35,17 +29,17 @@
 		<xsd:attribute name="name" type="xsd:string" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tTileType">
-		<xsd:sequence>
+	<xsd:complexType name="tTileChoice">
+		<xsd:choice>
 			<xsd:group ref="gBasicTile" />
-			<xsd:element name="reference" type="tTileReference" minOccurs="0"/>
-		</xsd:sequence>
+			<xsd:element name="reference" type="tTileReference" />
+		</xsd:choice>
 		<xsd:attribute name="pos" type="xsd:integer" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tLine">
 		<xsd:sequence>
-			<xsd:element name="tile" type="tTileType" maxOccurs="unbounded"/>
+			<xsd:element name="tile" type="tTileChoice" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="pos" type="xsd:integer" />
 	</xsd:complexType>
@@ -70,13 +64,13 @@
 
 	<xsd:complexType name="tVariableTiles">
 		<xsd:sequence>
-			<xsd:element name="variableTile" type="tVariableTile" maxOccurs="unbounded" />
+			<xsd:element name="variable-tile" type="tVariableTile" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<xsd:complexType name="tZone">
 		<xsd:sequence>
-			<xsd:element name="variableTiles" type="tVariableTiles"  minOccurs="0"/>
+			<xsd:element name="variable-tiles" type="tVariableTiles" />
 			<xsd:element name="matrix" type="tMatrix" />
 		</xsd:sequence>
 	</xsd:complexType>
