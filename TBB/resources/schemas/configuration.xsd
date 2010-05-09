@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
+	<xsd:complexType name="tLanguage">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tFps">
 		<xsd:attribute name="value" type="xsd:integer" use="required" />
 	</xsd:complexType>
@@ -18,6 +22,10 @@
 		<xsd:attribute name="width" type="xsd:integer" use="required" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tFont">
+		<xsd:attribute name="file" type="xsd:string" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tProfile">
 		<xsd:attribute name="value" type="xsd:string" use="required" />
 	</xsd:complexType>
@@ -32,24 +40,16 @@
 		<xsd:attribute name="value" type="xsd:string" use="required" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tQuickmatch">
-		<xsd:attribute name="value" type="xsd:string" use="required" />
-	</xsd:complexType>
-
-	<xsd:complexType name="tQuickstart">
-		<xsd:attribute name="value" type="xsd:string" use="required" />
-	</xsd:complexType>
-
 	<xsd:complexType name="tConfiguration">
 		<xsd:sequence>
+			<xsd:element name="language" type="tLanguage" />
 			<xsd:element name="fps" type="tFps" />
 			<xsd:element name="speed" type="tSpeed" />
 			<xsd:element name="smoothGraphics" type="tSmoothGraphics" />
 			<xsd:element name="panelDimension" type="tDimension" />
+			<xsd:element name="font" type="tFont" />
 			<xsd:element name="profiles" type="tProfiles" />
 			<xsd:element name="tournament" type="tTournament" minOccurs="0"/>
-			<xsd:element name="quickmatch" type="tQuickmatch" minOccurs="0"/>
-			<xsd:element name="quickstart" type="tQuickstart" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 

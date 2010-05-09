@@ -1,14 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="_points.xsd"/>
+
+	<xsd:complexType name="tPointPoints" />
 	
-	<xsd:complexType name="tPoints">
+	<xsd:simpleType name="tScore">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="bombs" />
+			<xsd:enumeration value="crowns" />
+			<xsd:enumeration value="deaths" />
+			<xsd:enumeration value="items" />
+			<xsd:enumeration value="kills" />
+			<xsd:enumeration value="paintings" />
+			<xsd:enumeration value="time" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="tPointScores">
+		<xsd:attribute name="type" type="tScore" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointConstant">
+		<xsd:attribute name="value" type="xsd:float" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointMinimum">
 		<xsd:sequence>
-			<xsd:element name="notes" type="tNotes" />
-			<xsd:group ref="gPoints"/>
+			<xsd:group ref="gPoint" />
 		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointMaximum">
+		<xsd:sequence>
+			<xsd:group ref="gPoint" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointTotal">
+		<xsd:sequence>
+			<xsd:group ref="gPoint" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointRankings">
+		<xsd:sequence>
+			<xsd:group ref="gPoint" />
+		</xsd:sequence>
+		<xsd:attribute name="invert" type="xsd:boolean" use="optional" default="false" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tThreshold">
+		<xsd:attribute name="value" type="xsd:float" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tThresholds">
+		<xsd:sequence>
+			<xsd:element name="threshold" type="tThreshold" maxOccurs="unbounded" />			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tValue">
+		<xsd:attribute name="value" type="xsd:float" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tValues">
+		<xsd:sequence>
+			<xsd:element name="value" type="tThreshold" maxOccurs="unbounded" />			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointDiscretize">
+		<xsd:sequence>
+			<xsd:group ref="gPoint" />
+			<xsd:element name="thresholds" type="tThresholds" />
+			<xsd:element name="values" type="tValues" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointAddition">
+		<xsd:sequence>
+			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoint" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointSubtraction">
+		<xsd:sequence>
+			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoint" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointMultiplication">
+		<xsd:sequence>
+			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoint" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointDivision">
+		<xsd:sequence>
+			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoint" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:group name="gPoint">
+		<xsd:choice>
+			<xsd:element name="points" type="tPointPoints" />
+		
+			<xsd:element name="scores" type="tPointScores" />
+			<xsd:element name="constant" type="tPointConstant" />
+
+			<xsd:element name="maximum" type="tPointMaximum" />
+			<xsd:element name="minimum" type="tPointMinimum" />
+			<xsd:element name="total" type="tPointTotal" />
+			<xsd:element name="rankings" type="tPointRankings" />
+			<xsd:element name="discretize" type="tPointDiscretize" />
+
+			<xsd:element name="addition" type="tPointAddition" />
+			<xsd:element name="subtraction" type="tPointSubtraction" />
+			<xsd:element name="multiplication" type="tPointMultiplication" />
+			<xsd:element name="division" type="tPointDivision" />
+		</xsd:choice>
+	</xsd:group>
+	
+	<xsd:complexType name="tPoint">
+		<xsd:group ref="gPoint"/>
 	</xsd:complexType>	
 	
-	<xsd:element name="points" type="tPoints" />
+	<xsd:element name="point" type="tPoint" />
 	
 </xsd:schema>
