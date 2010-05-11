@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.event;
+package org.totalboumboum.engine.loop.event.sprite;
 
 /*
  * Total Boum Boum
@@ -22,22 +22,21 @@ package org.totalboumboum.engine.loop.event;
  */
 
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.loop.event.ReplayEvent;
 
-public class SpriteChangeAnimeEvent extends SpriteChangeEvent
-{	
-	public SpriteChangeAnimeEvent(Sprite sprite)
-	{	super(sprite);
+public abstract class SpriteEvent extends ReplayEvent
+{
+	protected SpriteEvent(Sprite sprite)
+	{	super();
+		spriteId = sprite.getId();
 	}
-
+		
 	/////////////////////////////////////////////////////////////////
-	// CHANGES				/////////////////////////////////////////
+	// ID					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** change in the gesture (the name is transmitted */
-	public static final String SPRITE_EVENT_GESTURE = "SPRITE_EVENT_GESTURE";
-	/** change in the animation direction */
-	public static final String SPRITE_EVENT_DIRECTION = "SPRITE_EVENT_DIRECTION";
-	/** forced duration */
-	public static final String SPRITE_EVENT_DURATION = "SPRITE_EVENT_DURATION";
-	/** animation must be reinitialized */
-	public static final String SPRITE_EVENT_REINIT = "SPRITE_EVENT_REINIT";
+	private int spriteId;
+	
+	public int getSpriteId()
+	{	return spriteId;
+	}
 }

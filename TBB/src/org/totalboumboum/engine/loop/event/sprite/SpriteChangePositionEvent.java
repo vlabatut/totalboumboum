@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.event;
+package org.totalboumboum.engine.loop.event.sprite;
 
 /*
  * Total Boum Boum
@@ -22,20 +22,28 @@ package org.totalboumboum.engine.loop.event;
  */
 
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.game.round.RoundVariables;
 
-public abstract class SpriteEvent extends ReplayEvent
-{
-	protected SpriteEvent(Sprite sprite)
-	{	super();
-		spriteId = sprite.getId();
+public class SpriteChangePositionEvent extends SpriteChangeEvent
+{	
+	public SpriteChangePositionEvent(Sprite sprite)
+	{	super(sprite);
 	}
-		
+
 	/////////////////////////////////////////////////////////////////
-	// ID					/////////////////////////////////////////
+	// CHANGES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int spriteId;
-	
-	public int getSpriteId()
-	{	return spriteId;
+	/** change in the horizontal position */
+	public static final String SPRITE_EVENT_POSITION_X = "SPRITE_EVENT_POSITION_X";
+	/** change in the vertical position */
+	public static final String SPRITE_EVENT_POSITION_Y = "SPRITE_EVENT_POSITION_Y";
+	/** change in the height */
+	public static final String SPRITE_EVENT_POSITION_Z = "SPRITE_EVENT_POSITION_Z";
+
+	/////////////////////////////////////////////////////////////////
+	// SEND EVENT			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public boolean getSendEvent()
+	{	return sendEvent && !RoundVariables.filterEvents;	
 	}
 }

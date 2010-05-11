@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.event;
+package org.totalboumboum.engine.loop.event.sprite;
 
 /*
  * Total Boum Boum
@@ -21,82 +21,61 @@ package org.totalboumboum.engine.loop.event;
  * 
  */
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.Role;
+import java.util.HashMap;
+
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-public class SpriteCreationEvent extends SpriteEvent
-{
-/*
-	public SpriteCreationEvent(int id, long time, String name, Role role, int line, int col)
-	{	this.id = id;
-		this.time = time;
-		this.name = name;
-		this.role = role;
-		this.line = line;
-		this.col = col;
-	}
-*/
-	public SpriteCreationEvent(Sprite sprite, String name)
+public abstract class SpriteChangeEvent extends SpriteEvent
+{	
+	protected SpriteChangeEvent(Sprite sprite)
 	{	super(sprite);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CHANGES				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<String,Object> changes = new HashMap<String,Object>();
 	
-		// name
-		this.name = name;
-		
-		// role
-		role = sprite.getRole();
-		
-		// color
-		color = sprite.getColor();
-		
-		// location
-		Tile tile = sprite.getTile();
-		this.line = tile.getLine();
-		this.col = tile.getCol();
-		
-		// send event
+	public HashMap<String,Object> getChanges()
+	{	return changes;
+	}
+
+	public void setChange(String key, Object value)
+	{	changes.put(key,value);
 		sendEvent = true;
 	}
 
+/*
 	/////////////////////////////////////////////////////////////////
-	// NAME				/////////////////////////////////////////////
+	// POSITION				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String name;
+	private Integer x;
+	private Integer y;
 	
-	public String getName()
-	{	return name;	
+	public Integer getX()
+	{	return x;
+	}
+
+	public Integer getY()
+	{	return y;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// ROLE				/////////////////////////////////////////////
+	// GESTURE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Role role;
-	
-	public Role getRole()
-	{	return role;	
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// COLOR			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private PredefinedColor color;
-	
-	public PredefinedColor getColor()
-	{	return color;	
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// LOCATION			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private int line;
-	private int col;
-	
-	public int getLine()
-	{	return line;
+	private GestureName gesture;
+
+	public GestureName getGesture()
+	{	return gesture;
 	}
 
-	public int getCol()
-	{	return col;	
+	/////////////////////////////////////////////////////////////////
+	// DIRECTION			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Direction direction;
+
+	public Direction getDirection()
+	{	return direction;
 	}
+*/
 }
