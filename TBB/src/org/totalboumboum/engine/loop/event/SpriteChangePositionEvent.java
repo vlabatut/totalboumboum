@@ -21,61 +21,29 @@ package org.totalboumboum.engine.loop.event;
  * 
  */
 
-import java.util.HashMap;
-
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.game.round.RoundVariables;
 
-public abstract class SpriteChangeEvent extends SpriteEvent
+public class SpriteChangePositionEvent extends SpriteChangeEvent
 {	
-	protected SpriteChangeEvent(Sprite sprite)
+	public SpriteChangePositionEvent(Sprite sprite)
 	{	super(sprite);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// CHANGES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,Object> changes = new HashMap<String,Object>();
-	
-	public HashMap<String,Object> getChanges()
-	{	return changes;
-	}
-
-	public void setChange(String key, Object value)
-	{	changes.put(key,value);
-		sendEvent = true;
-	}
-
-/*
-	/////////////////////////////////////////////////////////////////
-	// POSITION				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Integer x;
-	private Integer y;
-	
-	public Integer getX()
-	{	return x;
-	}
-
-	public Integer getY()
-	{	return y;
-	}
+	/** change in the horizontal position */
+	public static final String SPRITE_EVENT_POSITION_X = "SPRITE_EVENT_POSITION_X";
+	/** change in the vertical position */
+	public static final String SPRITE_EVENT_POSITION_Y = "SPRITE_EVENT_POSITION_Y";
+	/** change in the height */
+	public static final String SPRITE_EVENT_POSITION_Z = "SPRITE_EVENT_POSITION_Z";
 
 	/////////////////////////////////////////////////////////////////
-	// GESTURE				/////////////////////////////////////////
+	// SEND EVENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GestureName gesture;
-
-	public GestureName getGesture()
-	{	return gesture;
+	public boolean getSendEvent()
+	{	return sendEvent && !RoundVariables.filterEvents;	
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// DIRECTION			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Direction direction;
-
-	public Direction getDirection()
-	{	return direction;
-	}
-*/
 }

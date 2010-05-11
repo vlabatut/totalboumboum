@@ -1,11 +1,5 @@
 package org.totalboumboum.engine.loop.event;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.Role;
-import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.game.round.RoundVariables;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -27,7 +21,12 @@ import org.totalboumboum.game.round.RoundVariables;
  * 
  */
 
-public class SpriteCreationEvent extends ReplayEvent
+import org.totalboumboum.configuration.profile.PredefinedColor;
+import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.Role;
+import org.totalboumboum.engine.content.sprite.Sprite;
+
+public class SpriteCreationEvent extends SpriteEvent
 {
 /*
 	public SpriteCreationEvent(int id, long time, String name, Role role, int line, int col)
@@ -40,12 +39,10 @@ public class SpriteCreationEvent extends ReplayEvent
 	}
 */
 	public SpriteCreationEvent(Sprite sprite, String name)
-	{	// identification
-		id = sprite.getId();
+	{	super(sprite);
+	
+		// name
 		this.name = name;
-		
-		// time
-		time = RoundVariables.loop.getTotalEngineTime();
 		
 		// role
 		role = sprite.getRole();
@@ -57,26 +54,11 @@ public class SpriteCreationEvent extends ReplayEvent
 		Tile tile = sprite.getTile();
 		this.line = tile.getLine();
 		this.col = tile.getCol();
+		
+		// send event
+		sendEvent = true;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// ID				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private int id;
-	
-	public int getId()
-	{	return id;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// TIME					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private long time;
-	
-	public long getTime()
-	{	return time;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -96,7 +78,7 @@ public class SpriteCreationEvent extends ReplayEvent
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// ROLE				/////////////////////////////////////////////
+	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private PredefinedColor color;
 	
