@@ -40,5 +40,4 @@ public class SpriteChangeAnimeEvent extends SpriteChangeEvent
 	public static final String SPRITE_EVENT_DURATION = "SPRITE_EVENT_DURATION";
 	/** animation must be reinitialized */
 	public static final String SPRITE_EVENT_REINIT = "SPRITE_EVENT_REINIT";
-
 }
