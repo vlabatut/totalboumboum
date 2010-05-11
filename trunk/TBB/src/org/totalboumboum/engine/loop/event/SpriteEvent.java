@@ -21,29 +21,21 @@ package org.totalboumboum.engine.loop.event;
  * 
  */
 
-import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.engine.content.sprite.Sprite;
 
-public abstract class ReplayEvent
+public abstract class SpriteEvent extends ReplayEvent
 {
-	protected ReplayEvent()
-	{	RoundVariables.loop.getTotalEngineTime();
+	protected SpriteEvent(Sprite sprite)
+	{	super();
+		spriteId = sprite.getId();
 	}
+		
+	/////////////////////////////////////////////////////////////////
+	// ID					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int spriteId;
 	
-	/////////////////////////////////////////////////////////////////
-	// TIME					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected long time;
-	
-	public long getTime()
-	{	return time;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// SEND EVENT			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected transient boolean sendEvent = false;
-
-	public boolean getSendEvent()
-	{	return sendEvent;	
+	public int getSpriteId()
+	{	return spriteId;
 	}
 }

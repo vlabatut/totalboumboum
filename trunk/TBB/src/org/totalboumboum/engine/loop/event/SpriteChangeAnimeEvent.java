@@ -21,29 +21,24 @@ package org.totalboumboum.engine.loop.event;
  * 
  */
 
-import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.engine.content.sprite.Sprite;
 
-public abstract class ReplayEvent
-{
-	protected ReplayEvent()
-	{	RoundVariables.loop.getTotalEngineTime();
+public class SpriteChangeAnimeEvent extends SpriteChangeEvent
+{	
+	public SpriteChangeAnimeEvent(Sprite sprite)
+	{	super(sprite);
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// TIME					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected long time;
-	
-	public long getTime()
-	{	return time;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// SEND EVENT			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected transient boolean sendEvent = false;
 
-	public boolean getSendEvent()
-	{	return sendEvent;	
-	}
+	/////////////////////////////////////////////////////////////////
+	// CHANGES				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** change in the gesture (the name is transmitted */
+	public static final String SPRITE_EVENT_GESTURE = "SPRITE_EVENT_GESTURE";
+	/** change in the animation direction */
+	public static final String SPRITE_EVENT_DIRECTION = "SPRITE_EVENT_DIRECTION";
+	/** forced duration */
+	public static final String SPRITE_EVENT_DURATION = "SPRITE_EVENT_DURATION";
+	/** animation must be reinitialized */
+	public static final String SPRITE_EVENT_REINIT = "SPRITE_EVENT_REINIT";
+
 }
