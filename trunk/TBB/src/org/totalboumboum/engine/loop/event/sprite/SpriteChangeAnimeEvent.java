@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.event;
+package org.totalboumboum.engine.loop.event.sprite;
 
 /*
  * Total Boum Boum
@@ -22,28 +22,22 @@ package org.totalboumboum.engine.loop.event;
  */
 
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.game.round.RoundVariables;
 
-public class SpriteChangePositionEvent extends SpriteChangeEvent
+public class SpriteChangeAnimeEvent extends SpriteChangeEvent
 {	
-	public SpriteChangePositionEvent(Sprite sprite)
+	public SpriteChangeAnimeEvent(Sprite sprite)
 	{	super(sprite);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// CHANGES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** change in the horizontal position */
-	public static final String SPRITE_EVENT_POSITION_X = "SPRITE_EVENT_POSITION_X";
-	/** change in the vertical position */
-	public static final String SPRITE_EVENT_POSITION_Y = "SPRITE_EVENT_POSITION_Y";
-	/** change in the height */
-	public static final String SPRITE_EVENT_POSITION_Z = "SPRITE_EVENT_POSITION_Z";
-
-	/////////////////////////////////////////////////////////////////
-	// SEND EVENT			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public boolean getSendEvent()
-	{	return sendEvent && !RoundVariables.filterEvents;	
-	}
+	/** change in the gesture (the name is transmitted */
+	public static final String SPRITE_EVENT_GESTURE = "SPRITE_EVENT_GESTURE";
+	/** change in the animation direction */
+	public static final String SPRITE_EVENT_DIRECTION = "SPRITE_EVENT_DIRECTION";
+	/** forced duration */
+	public static final String SPRITE_EVENT_DURATION = "SPRITE_EVENT_DURATION";
+	/** animation must be reinitialized */
+	public static final String SPRITE_EVENT_REINIT = "SPRITE_EVENT_REINIT";
 }
