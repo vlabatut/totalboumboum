@@ -64,6 +64,7 @@ import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.ControlCode;
+import org.totalboumboum.engine.loop.event.sprite.SpriteChangeAnimeEvent;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
@@ -141,7 +142,20 @@ public abstract class Sprite
 	 * l'animation n'est réinitialisée que si le gesture est modifié
 	 */
 	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
-	{	currentGesture = gesturePack.getGesture(gesture);
+	{	// record event
+		SpriteChangeAnimeEvent event = new SpriteChangeAnimeEvent(this);
+		if(currentGesture.getName()!=gesture)
+			event.setChange(SpriteChangeAnimeEvent.SPRITE_EVENT_GESTURE,gesture);
+		if(spriteDirection!=animeManager.getCurrentDirection())
+			event.setChange(SpriteChangeAnimeEvent.SPRITE_EVENT_DIRECTION,spriteDirection);
+		if(reinit)
+			event.setChange(SpriteChangeAnimeEvent.SPRITE_EVENT_REINIT,true);
+		if(forcedDuration!=0)
+			event.setChange(SpriteChangeAnimeEvent.SPRITE_EVENT_DURATION,forcedDuration);
+		RoundVariables.recordEvent(event);
+			
+		// update gesture
+		currentGesture = gesturePack.getGesture(gesture);
 		modulationManager.updateGesture(currentGesture,spriteDirection);
 		animeManager.updateGesture(currentGesture,spriteDirection,reinit,forcedDuration);
 		trajectoryManager.updateGesture(currentGesture,spriteDirection,controlDirection,reinit,forcedDuration);

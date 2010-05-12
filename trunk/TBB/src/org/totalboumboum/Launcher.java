@@ -1174,6 +1174,14 @@ public class Launcher
 	 * à la fois dans l'interface graphique et dans le moteur
 	 */
 
+	/*
+	 * lors du chargement des sprites, ne charger que le nécessaire :
+	 * 	- blocks/floors
+	 * 	- items
+	 * 	- fires
+	 * 	- heroes gestures (?)
+	 */
+	
 	/**
 	 * TODO
 	 * 	1) définir un système d'enregistrement/replay
@@ -1189,9 +1197,12 @@ public class Launcher
 	 * 		- trucs individuels >> envoyés aux sprites concernés
 	 * 		- création: faite sur place. sprites avec des managers light
 	 * 
+	 * - certaines abilities ont un effet graphique, comme twinkle ou flat
+	 *   faudra penser à un système pour transmettre les changement les concernant
 	 * 
 	 * les évènements de création ont été mis partout où nécessaires.
-	 * faut maintenant mettre en place les évènements de modification
+	 * pareil pour les évènements de modification
+	 * faut vérifier tout le début du round, qu'on a bien tous les éléments pour l'initialisation
 	 * puis tester l'enregistrement
 	 * puis implémenter le lecteur d'évènements
 	 */
