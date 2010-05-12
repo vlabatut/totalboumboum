@@ -35,7 +35,7 @@ import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
-import org.totalboumboum.engine.loop.event.SpriteCreationEvent;
+import org.totalboumboum.engine.loop.event.sprite.SpriteCreationEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 

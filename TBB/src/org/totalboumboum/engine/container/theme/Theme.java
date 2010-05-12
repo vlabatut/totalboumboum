@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.block.BlockFactory;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
-import org.totalboumboum.engine.loop.event.SpriteCreationEvent;
+import org.totalboumboum.engine.loop.event.sprite.SpriteCreationEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 

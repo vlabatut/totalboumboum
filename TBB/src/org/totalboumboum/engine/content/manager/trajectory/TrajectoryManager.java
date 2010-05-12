@@ -32,9 +32,9 @@ import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.loop.event.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
-
 
 public class TrajectoryManager
 {	// divers
@@ -83,7 +83,6 @@ public class TrajectoryManager
 	/** position Y précédente (absolue) */
 	private double previousPosY;
 	/** position Z précédente (absolue) */
-	@SuppressWarnings("unused")
 	private double previousPosZ;
 	/** direction de déplacement courante */
 	private Direction currentDirection = Direction.NONE;
@@ -525,6 +524,9 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	
 		// updating the tile
 		updateTile();
+		
+		// record event
+		recordEvent();
 	}
 	
 	/**
@@ -710,6 +712,20 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	{	return sprite.isBoundToSprite();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void recordEvent()
+	{	SpriteChangePositionEvent event = new SpriteChangePositionEvent(sprite);
+		if(currentPosX!=previousPosX)
+			event.setChange(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_X,currentPosX);
+		if(currentPosX!=previousPosY)
+			event.setChange(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Y,currentPosY);
+		if(currentPosX!=previousPosZ)
+			event.setChange(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Z,currentPosZ);
+		RoundVariables.recordEvent(event);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

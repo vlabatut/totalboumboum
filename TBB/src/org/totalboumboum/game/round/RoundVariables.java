@@ -111,6 +111,7 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	// RECORDING		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public static boolean filterEvents = true;
 	public static ObjectOutputStream out = null;
 	
 	/**
@@ -144,7 +145,7 @@ public class RoundVariables
 	 * records an event in the currently open stream.
 	 */
 	public static void recordEvent(ReplayEvent event)
-	{	if(out!=null)
+	{	if(out!=null && event.getSendEvent())
 		{	try
 			{	out.writeObject(event);
 			}

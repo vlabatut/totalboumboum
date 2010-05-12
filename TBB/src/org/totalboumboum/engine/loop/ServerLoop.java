@@ -81,7 +81,7 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.SystemControl;
-import org.totalboumboum.engine.loop.event.SpriteCreationEvent;
+import org.totalboumboum.engine.loop.event.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.round.Round;
@@ -708,9 +708,12 @@ System.out.println("total load time: "+(end-start));
 
 			beforeTime = System.currentTimeMillis();
 
-			/* If frame animation is taking too long, update the game state
-			   without rendering it, to get the updates/sec nearer to the required FPS. */
+			/* 
+			 * If frame animation is taking too long, update the game state
+			 * without rendering it, to get the updates/sec nearer to the required FPS.
+			 */
 			int skips = 0;
+			RoundVariables.filterEvents = false; // in this situation, we do not want to record certain events
 			while (excess>milliPeriod
 //					&& skips<MAX_FRAME_SKIPS
 					)
@@ -719,6 +722,7 @@ System.out.println("total load time: "+(end-start));
 				update(); 
 				skips++;
 			}
+			RoundVariables.filterEvents = true;
 			
 			framesSkipped = framesSkipped + skips;
 			storeStats( );
