@@ -1,8 +1,5 @@
 package org.totalboumboum.configuration.profile;
 
-import java.io.Serializable;
-
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -23,6 +20,8 @@ import java.io.Serializable;
  * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
+
+import java.io.Serializable;
 
 public class SpriteInfo implements Serializable
 {	private static final long serialVersionUID = 1L;

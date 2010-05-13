@@ -66,7 +66,7 @@ public class LevelTools
 	{	LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		
 		// create level folder
-		String pack = levelInfo.getPack();
+		String pack = levelInfo.getPackName();
 		String name = levelInfo.getFolder();
 		String folder = FilePaths.getLevelsPath()+File.separator+pack+File.separator+name;
 		File folderFile = new File(folder);
@@ -92,7 +92,7 @@ public class LevelTools
 		// init level info
 		LevelInfo levelInfo = new LevelInfo();
 		
-		levelInfo.setPack(pack);
+		levelInfo.setPackName(pack);
 		levelInfo.setFolder(name);
 		levelInfo.setAuthor("[Author's name]");
 		levelInfo.setForceAll(false);
@@ -101,9 +101,9 @@ public class LevelTools
 		levelInfo.setMaximize(true);
 		levelInfo.setSource("original");
 		levelInfo.setTitle("[Level title]");
-		levelInfo.setInstance(instance);
+		levelInfo.setInstanceName(instance);
 		levelInfo.setPreview("preview.jpg");
-		levelInfo.setTheme(theme);
+		levelInfo.setThemeName(theme);
 		levelInfo.setVisibleHeight(height);
 		levelInfo.setVisibleWidth(width);
 		levelInfo.setVisiblePositionLeftCol(0);
@@ -228,8 +228,8 @@ public class LevelTools
 	private static void setBackground(HollowLevel hollowLevel)
 	{	// init
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
-		String instance = levelInfo.getInstance();
-		String theme = levelInfo.getTheme();
+		String instance = levelInfo.getInstanceName();
+		String theme = levelInfo.getThemeName();
 		String path = FilePaths.getInstancesPath()+File.separator+instance+File.separator+FileNames.FOLDER_THEMES+File.separator+theme+File.separator+"floors";
 		File folder = new File(path);
 		

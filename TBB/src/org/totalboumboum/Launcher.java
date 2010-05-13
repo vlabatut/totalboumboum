@@ -1202,7 +1202,11 @@ public class Launcher
 	 * 
 	 * les évènements de création ont été mis partout où nécessaires.
 	 * pareil pour les évènements de modification
-	 * faut vérifier tout le début du round, qu'on a bien tous les éléments pour l'initialisation
+	 * éléments pour l'initialisation du round:
+	 * 		- LevelInfo: pour pouvoir charger l'instance et le thème nécessaires
+	 * 					 en plus c'est dispo direct car c'est pré-chargé
+	 * 		- liste des joueurs avec leur couleur et nom pour charger les sprites
+	 * 		- identité des joueurs controlés (ou pas ?)
 	 * puis tester l'enregistrement
 	 * puis implémenter le lecteur d'évènements
 	 */

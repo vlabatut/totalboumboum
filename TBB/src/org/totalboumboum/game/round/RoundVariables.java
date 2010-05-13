@@ -32,11 +32,10 @@ import java.io.ObjectOutputStream;
 import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.zip.ZipOutputStream;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.level.Level;
-import org.totalboumboum.engine.container.level.hollow.HollowLevel;
+import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.event.ReplayEvent;
@@ -118,7 +117,7 @@ public class RoundVariables
 	 * creates and open a file named after the current date and time
 	 * in order to record this game replay
 	 */
-	public static void initRecording(HollowLevel level) throws IOException
+	public static void initRecording(LevelInfo levelInfo) throws IOException
 	{	if(Configuration.getEngineConfiguration().isRecordRounds())
 		{	String filename = FilePaths.getReplaysPath();
 			Calendar calendar = GregorianCalendar.getInstance();
@@ -131,13 +130,15 @@ public class RoundVariables
 			int second = calendar.get(Calendar.SECOND);
 			NumberFormat nf = NumberFormat.getIntegerInstance();
 			nf.setMinimumIntegerDigits(2);
-			filename = filename + File.separator + year+"."+nf.format(month)+"."+nf.format(day)+"."+nf.format(hourOfDay)+"."+nf.format(minute)+"."+nf.format(second) + FileNames.EXTENSION_DATA;
+			filename = filename + File.separator + year + "." + nf.format(month) + "." + nf.format(day) + ".";
+			filename = filename + nf.format(hourOfDay) + "." + nf.format(minute) + "." + nf.format(second) + ".";
+			filename = filename + levelInfo.getPackName() + "." + levelInfo.getFolder() + FileNames.EXTENSION_DATA;
 			File file = new File(filename);
 			FileOutputStream fileOut = new FileOutputStream(file);
 			BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
-			ZipOutputStream outZip = new ZipOutputStream(outBuff);
-			out = new ObjectOutputStream(outZip);
-			out.writeObject(level);
+//			ZipOutputStream outZip = new ZipOutputStream(outBuff);
+//			out = new ObjectOutputStream(outZip);
+			out = new ObjectOutputStream(outBuff);
 		}
 	}
 	
@@ -148,6 +149,7 @@ public class RoundVariables
 	{	if(out!=null && event.getSendEvent())
 		{	try
 			{	out.writeObject(event);
+				System.out.println("recording: "+event);
 			}
 			catch (IOException e)
 			{	e.printStackTrace();

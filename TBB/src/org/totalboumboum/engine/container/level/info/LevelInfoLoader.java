@@ -48,7 +48,7 @@ public class LevelInfoLoader
 		
 		// loading
 		LevelInfo result = new LevelInfo();
-		result.setPack(pack);
+		result.setPackName(pack);
 		result.setFolder(folder);
 		loadLevelElement(individualFolder,root,result);
 		
@@ -119,12 +119,12 @@ public class LevelInfoLoader
 	
 	private static void loadInstanceElement(Element root, LevelInfo result)
 	{	String instance = root.getAttribute(XmlNames.NAME).getValue().trim();
-		result.setInstance(instance);
+		result.setInstanceName(instance);
 	}
 	
 	private static void loadThemeElement(Element root, LevelInfo result)
 	{	String theme = root.getAttribute(XmlNames.NAME).getValue().trim();
-		result.setTheme(theme);
+		result.setThemeName(theme);
 	}
 
 	private static void loadGlobalDimensionElement(Element root, LevelInfo result)

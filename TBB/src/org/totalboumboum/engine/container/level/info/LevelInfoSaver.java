@@ -69,11 +69,11 @@ public class LevelInfoSaver
 	
 		// instance
 		Element instanceElement = new Element(XmlNames.INSTANCE);
-		instanceElement.setAttribute(XmlNames.NAME,levelInfo.getInstance());
+		instanceElement.setAttribute(XmlNames.NAME,levelInfo.getInstanceName());
 		result.addContent(instanceElement);
 		// theme
 		Element themeElement = new Element(XmlNames.THEME);
-		themeElement.setAttribute(XmlNames.NAME,levelInfo.getTheme());
+		themeElement.setAttribute(XmlNames.NAME,levelInfo.getThemeName());
 		result.addContent(themeElement);
 	
 		// global dimension

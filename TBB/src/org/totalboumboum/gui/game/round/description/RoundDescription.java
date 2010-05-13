@@ -215,7 +215,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 		{	hollowLevel = round.getHollowLevel();
 			limits = round.getLimits();
 			try
-			{	levelPreview = LevelPreviewLoader.loadLevelPreview(hollowLevel.getLevelInfo().getPack(),hollowLevel.getLevelInfo().getFolder());
+			{	levelPreview = LevelPreviewLoader.loadLevelPreview(hollowLevel.getLevelInfo().getPackName(),hollowLevel.getLevelInfo().getFolder());
 				image = levelPreview.getVisualPreview();
 			}
 			catch (ParserConfigurationException e)

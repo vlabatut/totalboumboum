@@ -220,7 +220,7 @@ public class Round implements StatisticHolder, Serializable
 		return result;			
 	}
 	
-	public ArrayList<Profile> getProfiles()
+	public List<Profile> getProfiles()
 	{	return match.getProfiles();
 	}	
 	public List<PredefinedColor> getProfilesColors()

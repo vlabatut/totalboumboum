@@ -26,7 +26,8 @@ import java.util.HashMap;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class SpriteChangeEvent extends SpriteEvent
-{	
+{	private static final long serialVersionUID = 1L;
+
 	protected SpriteChangeEvent(Sprite sprite)
 	{	super(sprite);
 	}
@@ -34,7 +35,7 @@ public abstract class SpriteChangeEvent extends SpriteEvent
 	/////////////////////////////////////////////////////////////////
 	// CHANGES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,Object> changes = new HashMap<String,Object>();
+	protected HashMap<String,Object> changes = new HashMap<String,Object>();
 	
 	public HashMap<String,Object> getChanges()
 	{	return changes;

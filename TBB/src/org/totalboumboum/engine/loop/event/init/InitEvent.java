@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.event.sprite;
+package org.totalboumboum.engine.loop.event.init;
 
 /*
  * Total Boum Boum
@@ -21,44 +21,50 @@ package org.totalboumboum.engine.loop.event.sprite;
  * 
  */
 
-import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.game.round.RoundVariables;
+import java.util.List;
 
-public class SpriteChangePositionEvent extends SpriteChangeEvent
+import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.container.level.info.LevelInfo;
+import org.totalboumboum.engine.loop.event.ReplayEvent;
+
+public class InitEvent extends ReplayEvent
 {	private static final long serialVersionUID = 1L;
 
-	public SpriteChangePositionEvent(Sprite sprite)
-	{	super(sprite);
+	public InitEvent(LevelInfo levelInfo, List<Profile> profiles)
+	{	super();
+		this.levelInfo = levelInfo;
+		this.profiles = profiles;
 	}
-
+		
 	/////////////////////////////////////////////////////////////////
-	// CHANGES				/////////////////////////////////////////
+	// LEVEL INFO			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** change in the horizontal position */
-	public static final String SPRITE_EVENT_POSITION_X = "SPRITE_EVENT_POSITION_X";
-	/** change in the vertical position */
-	public static final String SPRITE_EVENT_POSITION_Y = "SPRITE_EVENT_POSITION_Y";
-	/** change in the height */
-	public static final String SPRITE_EVENT_POSITION_Z = "SPRITE_EVENT_POSITION_Z";
-
-	/////////////////////////////////////////////////////////////////
-	// SEND EVENT			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public boolean getSendEvent()
-	{	return sendEvent && !RoundVariables.filterEvents;	
+	private LevelInfo levelInfo;
+	
+	public LevelInfo getLevelInfo()
+	{	return levelInfo;
 	}
-
+	
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS PROFILES		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<Profile> profiles;
+	
+	public List<Profile> getProfiles()
+	{	return profiles;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TO STRING			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String toString()
-	{	String result = "SpriteChangePositionEvent: ";
-		if(changes.containsKey(SPRITE_EVENT_POSITION_X))
-			result = result + "x=" + changes.get(SPRITE_EVENT_POSITION_X) + " ";
-		if(changes.containsKey(SPRITE_EVENT_POSITION_Y))
-			result = result + "y=" + changes.get(SPRITE_EVENT_POSITION_Y) + " ";
-		if(changes.containsKey(SPRITE_EVENT_POSITION_Z))
-			result = result + "z=" + changes.get(SPRITE_EVENT_POSITION_Z) + " ";
+	{	String result = "SpriteInitEvent: ";
+		result = result + "level=" + levelInfo.getPackName() + "/" + levelInfo.getFolder() + " ";
+		result = result + "players=";
+		for(int i=0;i<profiles.size();i++)
+		{	Profile p = profiles.get(i);
+			result = result + i + ": " + p.getName() + "(" + p.getSpriteColor() + ") ";
+		}
 		return result;
 	}
 }

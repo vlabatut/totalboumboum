@@ -179,7 +179,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 			// init
 			StatisticBase stats = statisticHolder.getStats();
 			ArrayList<StatisticBase> confrontationStats = stats.getConfrontationStats();
-			ArrayList<Profile> players = statisticHolder.getProfiles();
+			List<Profile> players = statisticHolder.getProfiles();
 			Ranks orderedPlayers = statisticHolder.getOrderedPlayers();
 			List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();
 			float[] points = stats.getPoints();

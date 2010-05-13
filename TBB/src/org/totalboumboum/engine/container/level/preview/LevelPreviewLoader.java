@@ -125,7 +125,7 @@ public class LevelPreviewLoader
 	
 	private static void loadItemset(String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	if(previewItemset)
-		{	String instanceName = result.getLevelInfo().getInstance();
+		{	String instanceName = result.getLevelInfo().getInstanceName();
 			String instanceFolder = FilePaths.getInstancesPath()+File.separator+instanceName;		
 			String itemFolder = instanceFolder + File.separator+FileNames.FOLDER_ITEMS;
 			ItemsetPreview itemsetPreview = ItemsetPreviewLoader.loadItemsetPreview(itemFolder);

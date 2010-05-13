@@ -144,7 +144,7 @@ public abstract class Sprite
 	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	// record event
 		SpriteChangeAnimeEvent event = new SpriteChangeAnimeEvent(this);
-		if(currentGesture.getName()!=gesture)
+		if(currentGesture==null || currentGesture.getName()!=gesture)
 			event.setChange(SpriteChangeAnimeEvent.SPRITE_EVENT_GESTURE,gesture);
 		if(spriteDirection!=animeManager.getCurrentDirection())
 			event.setChange(SpriteChangeAnimeEvent.SPRITE_EVENT_DIRECTION,spriteDirection);
