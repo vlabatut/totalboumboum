@@ -47,7 +47,7 @@ public class HollowLevelLoader
 		LevelInfo levelInfo = LevelInfoLoader.loadLevelInfo(pack,folder);
 		result.setLevelInfo(levelInfo);
 		// instance
-		Instance instance = new Instance(levelInfo.getInstance());
+		Instance instance = new Instance(levelInfo.getInstanceName());
 		result.setInstance(instance);
 		// players
 		Players players = PlayersLoader.loadPlayers(individualFolder);

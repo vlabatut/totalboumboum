@@ -24,7 +24,8 @@ package org.totalboumboum.engine.loop.event.sprite;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 public class SpriteChangeAnimeEvent extends SpriteChangeEvent
-{	
+{	private static final long serialVersionUID = 1L;
+
 	public SpriteChangeAnimeEvent(Sprite sprite)
 	{	super(sprite);
 	}
@@ -40,4 +41,20 @@ public class SpriteChangeAnimeEvent extends SpriteChangeEvent
 	public static final String SPRITE_EVENT_DURATION = "SPRITE_EVENT_DURATION";
 	/** animation must be reinitialized */
 	public static final String SPRITE_EVENT_REINIT = "SPRITE_EVENT_REINIT";
+
+	/////////////////////////////////////////////////////////////////
+	// TO STRING			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String toString()
+	{	String result = "SpriteChangePositionEvent: ";
+		if(changes.containsKey(SPRITE_EVENT_GESTURE))
+			result = result + "gesture=" + changes.get(SPRITE_EVENT_GESTURE) + " ";
+		if(changes.containsKey(SPRITE_EVENT_DIRECTION))
+			result = result + "direction=" + changes.get(SPRITE_EVENT_DIRECTION) + " ";
+		if(changes.containsKey(SPRITE_EVENT_DURATION))
+			result = result + "duration=" + changes.get(SPRITE_EVENT_DURATION) + " ";
+		if(changes.containsKey(SPRITE_EVENT_REINIT))
+			result = result + "reinit=" + changes.get(SPRITE_EVENT_REINIT) + " ";
+		return result;
+	}
 }

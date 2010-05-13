@@ -40,7 +40,7 @@ public class HollowLevelSaver
 	public static void saveHollowLevel(HollowLevel hollowLevel) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// init
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
-		String pack = levelInfo.getPack();
+		String pack = levelInfo.getPackName();
 		String folder = levelInfo.getFolder();
 		String individualFolder = FilePaths.getLevelsPath()+File.separator+pack+File.separator+folder;
 		

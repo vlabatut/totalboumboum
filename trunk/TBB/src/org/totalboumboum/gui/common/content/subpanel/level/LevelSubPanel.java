@@ -92,15 +92,15 @@ public class LevelSubPanel extends TableSubPanel
 			if(showName)
 				values.add(levelPreview.getLevelInfo().getTitle());
 			if(showPack)
-				values.add(levelPreview.getLevelInfo().getPack());
+				values.add(levelPreview.getLevelInfo().getPackName());
 			if(showSource)
 				values.add(levelPreview.getLevelInfo().getSource());
 			if(showAuthor)
 				values.add(levelPreview.getLevelInfo().getAuthor());
 			if(showInstance)
-				values.add(levelPreview.getLevelInfo().getInstance());
+				values.add(levelPreview.getLevelInfo().getInstanceName());
 			if(showTheme)
-				values.add(levelPreview.getLevelInfo().getTheme());
+				values.add(levelPreview.getLevelInfo().getThemeName());
 			if(showDimension)
 				values.add(Integer.toString(levelPreview.getLevelInfo().getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(levelPreview.getLevelInfo().getVisibleWidth()));
 			if(showAllowedPlayerNumbers)

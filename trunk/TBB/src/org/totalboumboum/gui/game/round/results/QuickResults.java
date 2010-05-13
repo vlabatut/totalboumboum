@@ -25,7 +25,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -63,7 +62,7 @@ public class QuickResults extends JPanel
 		int width = dimen.width;
 		int height = dimen.height;
 		StatisticRound stats = round.getStats();
-		ArrayList<Profile> players = round.getProfiles();
+		List<Profile> players = round.getProfiles();
 		Ranks orderedPlayers = round.getOrderedPlayers();
 		float[] points = stats.getPoints();
 		setAlignmentX(CENTER_ALIGNMENT);

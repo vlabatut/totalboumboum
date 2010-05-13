@@ -81,6 +81,7 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.SystemControl;
+import org.totalboumboum.engine.loop.event.init.InitEvent;
 import org.totalboumboum.engine.loop.event.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.engine.player.PlayerLocation;
@@ -107,15 +108,18 @@ public class ServerLoop extends Loop
 long start = System.currentTimeMillis();
 
 		// init
+		List<Profile> profiles = round.getProfiles();
 		HollowLevel hollowLevel = round.getHollowLevel();
 		Instance instance = hollowLevel.getInstance();
 		RoundVariables.setInstance(instance);
-		RoundVariables.initRecording(hollowLevel);
+		RoundVariables.setLoop(this);
+		RoundVariables.initRecording(hollowLevel.getLevelInfo());
+		InitEvent initEvent = new InitEvent(hollowLevel.getLevelInfo(),profiles);
+		RoundVariables.recordEvent(initEvent);
 
 		// load level & instance
 		hollowLevel.initLevel(this);
 		level = hollowLevel.getLevel();
-		RoundVariables.setLoop(this);
 		instance.loadFiresetMap();
 		instance.loadExplosionset();
 		loadStepOver();
@@ -131,7 +135,6 @@ long start = System.currentTimeMillis();
 		HollowHeroFactory base = HollowHeroFactoryLoader.loadBase(baseFolder);
 //		loadStepOver();		
 		// load players : individual stuff
-		ArrayList<Profile> profiles = round.getProfiles();
 		int remainingPlayers = profiles.size();
 		Players plyrs = hollowLevel.getPlayers();
 		PlayerLocation[] initialPositions = plyrs.getLocations().get(remainingPlayers);
@@ -166,8 +169,8 @@ long start = System.currentTimeMillis();
 			showAiTileColors.add(false);
 			
 			// record/transmit event
-			SpriteCreationEvent event = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
-			RoundVariables.recordEvent(event);
+			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
+			RoundVariables.recordEvent(spriteEvent);
 			
 			// level
 			Hero hero = (Hero)player.getSprite();

@@ -1,7 +1,5 @@
 package org.totalboumboum.engine.container.level.info;
 
-import java.io.Serializable;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -23,20 +21,22 @@ import java.io.Serializable;
  * 
  */
 
+import java.io.Serializable;
+
 public class LevelInfo implements Serializable
 {	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// PACK				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String pack;
+	private String packName;
 
-	public String getPack()
-	{	return pack;
+	public String getPackName()
+	{	return packName;
 	}
 	
-	public void setPack(String pack)
-	{	this.pack = pack;
+	public void setPackName(String pack)
+	{	this.packName = pack;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -55,26 +55,26 @@ public class LevelInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String instance;
+	private String instanceName;
 	
-	public String getInstance()
-	{	return instance;
+	public String getInstanceName()
+	{	return instanceName;
 	}
 	
-	public void setInstance(String instance)
-	{	this.instance = instance;
+	public void setInstanceName(String instance)
+	{	this.instanceName = instance;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// THEME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String theme;
+	private String themeName;
 	
-	public String getTheme()
-	{	return theme;
+	public String getThemeName()
+	{	return themeName;
 	}
-	public void setTheme(String theme)
-	{	this.theme = theme;
+	public void setThemeName(String theme)
+	{	this.themeName = theme;
 	}
 
 	/////////////////////////////////////////////////////////////////

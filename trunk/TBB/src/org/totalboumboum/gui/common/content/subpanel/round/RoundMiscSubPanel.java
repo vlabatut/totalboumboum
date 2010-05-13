@@ -85,7 +85,7 @@ public class RoundMiscSubPanel extends TableSubPanel
 			if(showLevelFolder)
 				values.add(round.getHollowLevel().getLevelInfo().getFolder());
 			if(showLevelPack)
-				values.add(round.getHollowLevel().getLevelInfo().getPack());
+				values.add(round.getHollowLevel().getLevelInfo().getPackName());
 			
 			// content
 			for(int line=0;line<keys.size();line++)

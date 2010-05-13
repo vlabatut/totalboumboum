@@ -21,11 +21,10 @@ package org.totalboumboum.game.limit;
  * 
  */
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.game.points.PointsProcessor;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
-
 
 /**
  * this limit is based on the number of players remaining in a round.
@@ -68,7 +67,7 @@ public class LimitLastStanding implements RoundLimit
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
 	{	boolean result = false;
-		ArrayList<Boolean> playersStatus = holder.getPlayersStatus();
+		List<Boolean> playersStatus = holder.getPlayersStatus();
 		int count = 0;
 		for(boolean b: playersStatus)
 		{	if(b)

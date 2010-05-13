@@ -21,16 +21,15 @@ package org.totalboumboum.statistics.detailed;
  * 
  */
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 
-
 public interface StatisticHolder
 {
 	public StatisticBase getStats();
-	public ArrayList<Profile> getProfiles();
-	public ArrayList<Boolean> getPlayersStatus();
+	public List<Profile> getProfiles();
+	public List<Boolean> getPlayersStatus();
 	public Ranks getOrderedPlayers();
 }

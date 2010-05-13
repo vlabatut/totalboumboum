@@ -166,7 +166,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 	{	BufferedImage image = null;
 		if(selectedRound!=null)
 		{	HollowLevel hollowLevel = selectedRound.getHollowLevel();
-			String pack = hollowLevel.getLevelInfo().getPack();
+			String pack = hollowLevel.getLevelInfo().getPackName();
 			String folder = hollowLevel.getLevelInfo().getFolder();
 			try
 			{	LevelPreview levelPreview = LevelPreviewLoader.loadLevelPreviewOnlyImage(pack, folder);

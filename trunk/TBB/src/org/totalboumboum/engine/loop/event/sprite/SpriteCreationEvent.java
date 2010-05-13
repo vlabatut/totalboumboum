@@ -27,7 +27,8 @@ import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 public class SpriteCreationEvent extends SpriteEvent
-{
+{	private static final long serialVersionUID = 1L;
+
 /*
 	public SpriteCreationEvent(int id, long time, String name, Role role, int line, int col)
 	{	this.id = id;
@@ -98,5 +99,15 @@ public class SpriteCreationEvent extends SpriteEvent
 
 	public int getCol()
 	{	return col;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TO STRING			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String toString()
+	{	String result = "SpriteCreationEvent: ";
+		result = result + name + " [" + color + "," + role + "] ";
+		result = result + "@(" + line + "," + col + ")";
+		return result;
 	}
 }
