@@ -21,6 +21,7 @@ package org.totalboumboum.engine.content.sprite.item;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
@@ -59,7 +60,7 @@ public class ItemFactory extends SpriteFactory<Item>
 		double total = 0;
 		int index = 0;
 
-		if(itemAbilities.isEmpty())
+		if(!itemrefs.isEmpty())
 		{	String name = null;
 			while(index<itemrefs.size() && name==null)
 			{	total = total + itemProbabilities.get(index);
@@ -71,7 +72,7 @@ public class ItemFactory extends SpriteFactory<Item>
 //System.out.println("name: "+name);			
 			result = instance.getItemset().getItemAbilities(name);
 		}
-		else
+		else if(!itemAbilities.isEmpty())
 		{	while(index<itemAbilities.size() && result==null)
 			{	total = total + itemProbabilities.get(index);
 				if(proba<total)
@@ -82,6 +83,9 @@ public class ItemFactory extends SpriteFactory<Item>
 //for(AbstractAbility a: abilities)
 //if(a instanceof StateAbility)
 //System.out.println("\t- "+((StateAbility)a).getName()+", : "+a.getStrength());
+		}
+		else
+		{	result = new ArrayList<AbstractAbility>();
 		}
 		
 		return result;
@@ -95,14 +99,14 @@ public class ItemFactory extends SpriteFactory<Item>
 	public Item makeSprite(Tile tile)
 	{	// init
 		Item result = new Item();
-		List<AbstractAbility> abilities = null;
 
 		// common managers
 		initSprite(result);
 	
 		// specific managers
 		// item abilities
-		result.initItemAbilities(abilities);
+		List<AbstractAbility> itemAbilities = drawItemAbilities();
+		result.initItemAbilities(itemAbilities);
 		// event
 		EventManager eventManager = new ItemEventManager(result);
 		result.setEventManager(eventManager);

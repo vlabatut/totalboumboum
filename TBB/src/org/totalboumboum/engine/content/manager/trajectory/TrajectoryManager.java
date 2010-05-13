@@ -719,9 +719,9 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	{	SpriteChangePositionEvent event = new SpriteChangePositionEvent(sprite);
 		if(currentPosX!=previousPosX)
 			event.setChange(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_X,currentPosX);
-		if(currentPosX!=previousPosY)
+		if(currentPosY!=previousPosY)
 			event.setChange(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Y,currentPosY);
-		if(currentPosX!=previousPosZ)
+		if(currentPosZ!=previousPosZ)
 			event.setChange(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Z,currentPosZ);
 		RoundVariables.recordEvent(event);
 	}

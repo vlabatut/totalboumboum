@@ -111,8 +111,8 @@ long start = System.currentTimeMillis();
 		List<Profile> profiles = round.getProfiles();
 		HollowLevel hollowLevel = round.getHollowLevel();
 		Instance instance = hollowLevel.getInstance();
-		RoundVariables.setInstance(instance);
-		RoundVariables.setLoop(this);
+		RoundVariables.instance = instance;
+		RoundVariables.loop = this;
 		RoundVariables.initRecording(hollowLevel.getLevelInfo());
 		InitEvent initEvent = new InitEvent(hollowLevel.getLevelInfo(),profiles);
 		RoundVariables.recordEvent(initEvent);
@@ -120,6 +120,7 @@ long start = System.currentTimeMillis();
 		// load level & instance
 		hollowLevel.initLevel(this);
 		level = hollowLevel.getLevel();
+		RoundVariables.level = level;
 		instance.loadFiresetMap();
 		instance.loadExplosionset();
 		loadStepOver();
