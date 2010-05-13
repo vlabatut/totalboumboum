@@ -24,10 +24,14 @@ package org.totalboumboum.game.round;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.NumberFormat;
 import java.util.Calendar;
@@ -154,5 +158,55 @@ public class RoundVariables
 	public static void finishRecording() throws IOException
 	{	if(out!=null)
 			out.close();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// REPLAYING		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static ObjectInputStream in = null;
+	
+	/**
+	 * creates and open a file named after the current date and time
+	 * in order to record this game replay
+	 */
+	public static void initReplaying(String filename) throws IOException
+	{	File file = new File(filename);
+		FileInputStream fileIn = new FileInputStream(file);
+		BufferedInputStream inBuff = new BufferedInputStream(fileIn);
+//		ZipInputStream inZip = new ZipInputStream(inBuff);
+//		in = new ObjectInputStream(inZip);
+		in = new ObjectInputStream(inBuff);
+	}
+	
+	/**
+	 * records an event in the currently open stream.
+	 */
+	public static ReplayEvent loadEvent(ReplayEvent event)
+	{	ReplayEvent result = null;
+		if(in!=null)
+		{	try
+			{	Object object = in.readObject();
+				result = (ReplayEvent) object;
+				System.out.println("reading: "+result);
+			}
+			catch (EOFException e) 
+			{	//
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * close the replay output stream (if it was previously opened)
+	 */
+	public static void finishReplaying() throws IOException
+	{	if(in!=null)
+			in.close();
 	}
 }
