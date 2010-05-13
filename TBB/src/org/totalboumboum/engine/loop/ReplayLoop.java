@@ -21,7 +21,7 @@ package org.totalboumboum.engine.loop;
  * 
  */
 
-public class ReplayerLoop
+public class ReplayLoop
 {
 	
 	
