@@ -21,6 +21,7 @@ package org.totalboumboum.engine.loop.event.sprite;
  * 
  */
 
+import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.event.ReplayEvent;
 
@@ -30,6 +31,8 @@ public abstract class SpriteEvent extends ReplayEvent
 	protected SpriteEvent(Sprite sprite)
 	{	super();
 		spriteId = sprite.getId();
+		Tile tile = sprite.getTile();
+		spriteInfo = sprite.getName()+"@("+tile.getCol()+","+tile.getLine()+")";
 	}
 		
 	/////////////////////////////////////////////////////////////////
@@ -39,5 +42,14 @@ public abstract class SpriteEvent extends ReplayEvent
 	
 	public int getSpriteId()
 	{	return spriteId;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DEBUG INFO			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private transient String spriteInfo;
+	
+	public String getSpriteInfo()
+	{	return spriteInfo;
 	}
 }
