@@ -164,9 +164,19 @@ public class Round implements StatisticHolder, Serializable
 	}	
 	
 	public void loopOver()
-	{	if(Configuration.getEngineConfiguration().isRecordRounds())
+	{	match.roundOver();
+		
+		stats.initEndDate();
+		 // possibly not record simulated stats
+		if((!loop.isSimulated() || Configuration.getStatisticsConfiguration().getIncludeSimulations())
+		// possibly not record quick mode stats
+			&& (!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts()))
+			GameStatistics.update(stats);
+		
+		// possible end replay recording
+		if(Configuration.getEngineConfiguration().isRecordRounds())
 		{	try
-			{	RoundVariables.replay.finishRecording();
+			{	RoundVariables.replay.finishRecording(stats);
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
@@ -179,14 +189,6 @@ public class Round implements StatisticHolder, Serializable
 			}
 		}
 			
-		match.roundOver();
-		
-		stats.initEndDate();
-		 // possibly not record simulated stats
-		if((!loop.isSimulated() || Configuration.getStatisticsConfiguration().getIncludeSimulations())
-		// possibly not record quick mode stats
-			&& (!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts()))
-			GameStatistics.update(stats);
 		if(panel!=null)
 		{	panel.roundOver();
 		}
