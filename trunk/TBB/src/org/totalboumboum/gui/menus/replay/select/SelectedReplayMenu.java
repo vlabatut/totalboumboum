@@ -47,10 +47,10 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
-public class LoadMenu extends InnerMenuPanel implements DataPanelListener
+public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 
-	public LoadMenu(SplitMenuPanel container, MenuPanel parent)
+	public SelectedReplayMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
 		// layout
