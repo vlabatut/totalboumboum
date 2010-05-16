@@ -24,17 +24,18 @@ package org.totalboumboum.gui.menus.replay.select;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.game.archive.GameArchive;
-import org.totalboumboum.game.archive.GameArchiveLoader;
-import org.totalboumboum.gui.common.content.subpanel.archive.ArchiveMiscSubPanel;
-import org.totalboumboum.gui.common.content.subpanel.archive.ArchivePlayersSubPanel;
+import org.totalboumboum.game.replay.Replay;
+import org.totalboumboum.game.replay.ReplayLoader;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanelListener;
+import org.totalboumboum.gui.common.content.subpanel.replay.ReplayMiscSubPanel;
+import org.totalboumboum.gui.common.content.subpanel.replay.ReplayPlayersSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
@@ -56,7 +57,7 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 		this.baseFolder = baseFolder;
 
 		// title
-		setTitleKey(GuiKeys.GAME_SAVE_TITLE);
+		setTitleKey(GuiKeys.MENU_REPLAY_LOAD_TITLE);
 		
 		BasicPanel mainPanel;
 		// data
@@ -72,9 +73,9 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 			
 			// list panel
 			{	folderPanel = new FolderBrowserSubPanel(leftWidth,dataHeight);
-				ArrayList<String> targetFiles = new ArrayList<String>();
-				targetFiles.add(FileNames.FILE_ARCHIVE+FileNames.EXTENSION_XML);
-				targetFiles.add(FileNames.FILE_ARCHIVE+FileNames.EXTENSION_DATA);
+				List<String> targetFiles = new ArrayList<String>();
+				targetFiles.add(FileNames.FILE_REPLAY+FileNames.EXTENSION_XML);
+				targetFiles.add(FileNames.FILE_REPLAY+FileNames.EXTENSION_DATA);
 				folderPanel.setShowParent(false);
 				folderPanel.setFolder(baseFolder,targetFiles);
 				folderPanel.addListener(this);
@@ -96,13 +97,13 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 				
 				rightPanel.add(Box.createVerticalGlue());
 
-				{	miscPanel = new ArchiveMiscSubPanel(rightWidth,miscHeight,5);
+				{	miscPanel = new ReplayMiscSubPanel(rightWidth,miscHeight,5);
 					rightPanel.add(miscPanel);
 				}
 
 				rightPanel.add(Box.createRigidArea(new Dimension(margin,margin)));
 
-				{	playersPanel = new ArchivePlayersSubPanel(rightWidth,playersHeight);
+				{	playersPanel = new ReplayPlayersSubPanel(rightWidth,playersHeight);
 					rightPanel.add(playersPanel);
 				}
 
@@ -118,8 +119,8 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 	// PANELS				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private FolderBrowserSubPanel folderPanel;
-	private ArchiveMiscSubPanel miscPanel;
-	private ArchivePlayersSubPanel playersPanel;
+	private ReplayMiscSubPanel miscPanel;
+	private ReplayPlayersSubPanel playersPanel;
 
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL				/////////////////////////////////
@@ -127,17 +128,17 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 	@Override
 	public void refresh()
 	{	folderPanel.refresh();
-		miscPanel.setGameArchive(selectedArchive);
-		playersPanel.setGameArchive(selectedArchive);
+		miscPanel.setReplay(selectedReplay);
+		playersPanel.setReplay(selectedReplay);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// SELECTED ARCHIVE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GameArchive selectedArchive = null;	
+	private Replay selectedReplay = null;	
 
-	public GameArchive getSelectedGameArchive()
-	{	return selectedArchive;
+	public Replay getSelectedReplay()
+	{	return selectedReplay;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -152,10 +153,10 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 	public void packBrowserSelectionChanged()
 	{	String folder = folderPanel.getSelectedName();
 		if(folder==null)
-			selectedArchive = null;
+			selectedReplay = null;
 		else
 		{	try
-			{	selectedArchive = GameArchiveLoader.loadGameArchive(folder);
+			{	selectedReplay = ReplayLoader.loadReplay(folder);
 			}
 			catch (IllegalArgumentException e)
 			{	e.printStackTrace();
@@ -182,8 +183,8 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 			{	e.printStackTrace();
 			}
 		}
-		miscPanel.setGameArchive(selectedArchive);
-		playersPanel.setGameArchive(selectedArchive);
+		miscPanel.setReplay(selectedReplay);
+		playersPanel.setReplay(selectedReplay);
 		fireDataPanelSelectionChange();
 	}
 }
