@@ -28,6 +28,7 @@ import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.Portraits;
@@ -58,15 +59,15 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Profile> players;
-	ArrayList<String> controlTexts;
-	ArrayList<String> controlTooltips;
+	private List<Profile> players;
+	List<String> controlTexts;
+	List<String> controlTooltips;
 
-	public ArrayList<Profile> getPlayers()
+	public List<Profile> getPlayers()
 	{	return players;	
 	}
 	
-	public void setPlayers(ArrayList<Profile> players)
+	public void setPlayers(List<Profile> players)
 	{	if(players==null)
 			players = new ArrayList<Profile>();
 		this.players = players;
