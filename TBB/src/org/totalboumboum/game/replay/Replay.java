@@ -45,6 +45,7 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.loop.event.ReplayEvent;
 import org.totalboumboum.game.round.Round;
+import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -151,18 +152,20 @@ public class Replay
 	/**
 	 * close the replay output stream (if it was previously opened)
 	 */
-	public void finishRecording() throws IOException, ParserConfigurationException, SAXException
-	{	// close the object stream
+	public void finishRecording(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
+	{	// record the stats
+		out.writeObject(stats);		
+		// close the object stream
 		out.close();
 		
-		// record the preview
+		// possibly record the preview
 		if(preview!=null)
 		{	String previewFilename = FilePaths.getReplaysPath() + File.separator + folder + File.separator + FileNames.FILE_PREVIEW + FileNames.EXTENSION_PNG;
 			File file = new File(previewFilename);
 			ImageIO.write(preview,"png",file);
 		}
 		
-		// record the xml file
+		// record the associated xml file
 		ReplaySaver.saveReplay(this);
 	}
 
@@ -199,8 +202,10 @@ public class Replay
 	{	ReplayEvent result = null;
 		try
 		{	Object object = in.readObject();
-			result = (ReplayEvent) object;
-			System.out.println("reading: "+result);
+			if(object instanceof ReplayEvent)
+			{	result = (ReplayEvent) object;
+				System.out.println("reading: "+result);
+			}
 		}
 		catch (EOFException e) 
 		{	//
@@ -211,6 +216,7 @@ public class Replay
 		catch (ClassNotFoundException e)
 		{	e.printStackTrace();
 		}
+		
 		return result;
 	}
 	
@@ -218,8 +224,7 @@ public class Replay
 	 * close the replay output stream (if it was previously opened)
 	 */
 	public void finishReplaying() throws IOException
-	{	if(in!=null)
-			in.close();
+	{	in.close();
 	}
 
 	/////////////////////////////////////////////////////////////////

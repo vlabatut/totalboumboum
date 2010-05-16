@@ -64,6 +64,7 @@ public class TournamenuMenu extends InnerMenuPanel
 		initButtons();	
 
 		tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
+		
 		// panels
 		playersData = new PlayersData(container);
 		settingsData = new SettingsData(container);
