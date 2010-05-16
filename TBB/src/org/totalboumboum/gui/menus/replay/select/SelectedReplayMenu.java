@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -34,6 +35,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.archive.GameArchive;
+import org.totalboumboum.game.replay.Replay;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -63,21 +65,20 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON);
+		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_REPLAY_LOAD_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonDelete = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
+		buttonDelete = GuiTools.createButton(GuiKeys.MENU_REPLAY_LOAD_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonCancel = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonCancel = GuiTools.createButton(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
-		levelData = new SaveData(container,baseFolder);
-		levelData.setTitleKey(GuiKeys.MENU_TOURNAMENT_LOAD_TITLE);
+		levelData = new SelectedReplayData(container,baseFolder);
 		levelData.addListener(this);
 		container.setDataPart(levelData);
 		refreshButtons();
@@ -86,7 +87,8 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 	/////////////////////////////////////////////////////////////////
 	// PANELS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private SaveData levelData;
+	private SelectedReplayData levelData;
+	private String baseFolder = FilePaths.getReplaysPath();
 
 	/////////////////////////////////////////////////////////////////
 	// BUTTONS						/////////////////////////////////
@@ -109,33 +111,23 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT CONTAINER			/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private TournamentSplitPanel tournamentPanel;
-	private String baseFolder = FilePaths.getSavesPath();
-	
-	public void setTournamentPanel(TournamentSplitPanel tournamentPanel)
-	{	this.tournamentPanel = tournamentPanel;
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CANCEL))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
-		if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_DELETE))
-		{	GameArchive selectedArchive = levelData.getSelectedGameArchive();
-			if(selectedArchive!=null)
-			{	String folder = selectedArchive.getFolder();
-				String path = baseFolder+File.separator+folder;
+		if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_DELETE))
+		{	Replay selectedReplay = levelData.getSelectedReplay();
+			if(selectedReplay!=null)
+			{	String folder = selectedReplay.getFolder();
+				String path = baseFolder + File.separator + folder;
 				File file = new File(path);
 				FileTools.deleteDirectory(file);
 				levelData.refresh();			
 			}
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CONFIRM))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CONFIRM))
 		{	try
 			{	String folder = levelData.getSelectedGameArchive().getFolder();
 				AbstractTournament tournament = GameArchive.loadGame(folder);

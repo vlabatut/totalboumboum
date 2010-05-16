@@ -58,7 +58,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 	// PAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String baseFolder;
-	private ArrayList<String> targetFiles;
+	private List<String> targetFiles;
 	private int linePrevious;
 	private int lineParent;
 	private int lineNext;
@@ -74,7 +74,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 	{	return baseFolder;	
 	}
 	
-	public ArrayList<String> getTargetFiles()
+	public List<String> getTargetFiles()
 	{	return targetFiles;	
 	}
 	
@@ -84,7 +84,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 		setFolder(baseFolder,targetFiles);
 	}
 	
-	public void setFolder(String baseFolder, ArrayList<String> targetFiles)
+	public void setFolder(String baseFolder, List<String> targetFiles)
 	{	// init
 		this.baseFolder = baseFolder;
 		this.targetFiles = targetFiles;
