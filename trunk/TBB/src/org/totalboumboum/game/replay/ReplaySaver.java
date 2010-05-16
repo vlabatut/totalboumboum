@@ -51,7 +51,7 @@ public class ReplaySaver
 	}
 
 	private static Element saveReplayElement(Replay replay)
-	{	Element result = new Element(XmlNames.ARCHIVE); 
+	{	Element result = new Element(XmlNames.REPLAY); 
 		
 		// level
 		Element tournamentElement = saveLevelElement(replay);

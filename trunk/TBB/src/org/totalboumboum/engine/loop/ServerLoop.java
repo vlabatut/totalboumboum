@@ -113,7 +113,6 @@ long start = System.currentTimeMillis();
 		Instance instance = hollowLevel.getInstance();
 		RoundVariables.instance = instance;
 		RoundVariables.loop = this;
-		RoundVariables.initRecording();
 		InitEvent initEvent = new InitEvent(hollowLevel.getLevelInfo(),profiles);
 		RoundVariables.recordEvent(initEvent);
 

@@ -46,6 +46,7 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.rank.Ranks;
+import org.totalboumboum.game.replay.Replay;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
@@ -93,12 +94,15 @@ public class Round implements StatisticHolder, Serializable
 	{	//stats
 		stats = new StatisticRound(this);
 		stats.initStartDate();
+		
 		// players
 		remainingPlayers = getProfiles().size();
 		for(int i=0;i<remainingPlayers;i++)
 			playersStatus.add(new Boolean(true));
+		
 		// level
 		hollowLevel.getZone().makeMatrix();
+		
 		// current points
 		currentPoints = new float[getProfiles().size()];
 		Arrays.fill(currentPoints,0);
@@ -116,6 +120,11 @@ public class Round implements StatisticHolder, Serializable
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
 		{	loop = new ServerLoop(this);
+		
+			// recording
+			if(Configuration.getEngineConfiguration().isRecordRounds())
+				RoundVariables.replay = new Replay(this);
+		
 			Thread animator = new Thread(loop);
 			animator.start();
 //			loop.init();
@@ -155,11 +164,27 @@ public class Round implements StatisticHolder, Serializable
 	}	
 	
 	public void loopOver()
-	{	match.roundOver();
+	{	if(Configuration.getEngineConfiguration().isRecordRounds())
+		{	try
+			{	RoundVariables.replay.finishRecording();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+		}
+			
+		match.roundOver();
+		
 		stats.initEndDate();
 		 // possibly not record simulated stats
 		if((!loop.isSimulated() || Configuration.getStatisticsConfiguration().getIncludeSimulations())
-		// possible not record quick mode stats
+		// possibly not record quick mode stats
 			&& (!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts()))
 			GameStatistics.update(stats);
 		if(panel!=null)
