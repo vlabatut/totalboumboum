@@ -113,7 +113,7 @@ long start = System.currentTimeMillis();
 		Instance instance = hollowLevel.getInstance();
 		RoundVariables.instance = instance;
 		RoundVariables.loop = this;
-		RoundVariables.initRecording(hollowLevel.getLevelInfo());
+		RoundVariables.initRecording();
 		InitEvent initEvent = new InitEvent(hollowLevel.getLevelInfo(),profiles);
 		RoundVariables.recordEvent(initEvent);
 
@@ -132,7 +132,7 @@ long start = System.currentTimeMillis();
 		loadStepOver();
 		
 		// load players : common stuff
-		String baseFolder = FilePaths.getInstancesPath()+File.separator+RoundVariables.instance.getName()+File.separator+FileNames.FOLDER_HEROES;
+		String baseFolder = FilePaths.getInstancesPath()+File.separator+RoundVariables.instance.getName()+File.separator+FileNames.FILE_HEROES;
 		HollowHeroFactory base = HollowHeroFactoryLoader.loadBase(baseFolder);
 //		loadStepOver();		
 		// load players : individual stuff
@@ -717,7 +717,7 @@ System.out.println("total load time: "+(end-start));
 			 * without rendering it, to get the updates/sec nearer to the required FPS.
 			 */
 			int skips = 0;
-			RoundVariables.filterEvents = false; // in this situation, we do not want to record certain events
+			RoundVariables.setFilterEvents(false); // in this situation, we do not want to record certain events
 			while (excess>milliPeriod
 //					&& skips<MAX_FRAME_SKIPS
 					)
@@ -726,7 +726,7 @@ System.out.println("total load time: "+(end-start));
 				update(); 
 				skips++;
 			}
-			RoundVariables.filterEvents = true;
+			RoundVariables.setFilterEvents(true);
 			
 			framesSkipped = framesSkipped + skips;
 			storeStats( );

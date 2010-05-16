@@ -143,7 +143,7 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void fileBrowserParentReached()
-	{	
+	{	// useless here
 	}
 
 	@Override

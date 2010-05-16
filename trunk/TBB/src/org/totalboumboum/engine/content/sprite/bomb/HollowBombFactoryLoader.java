@@ -88,11 +88,11 @@ public class HollowBombFactoryLoader extends HollowSpriteFactoryLoader
 		result.bombName = bombName;
 		
 		// ABILITIES
-		folder = folderPath+File.separator+FileNames.FOLDER_ABILITIES;
+		folder = folderPath+File.separator+FileNames.FILE_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 		
 		// ANIMES
-		folder = folderPath+File.separator+FileNames.FOLDER_ANIMES;
+		folder = folderPath+File.separator+FileNames.FILE_ANIMES;
 		HollowAnimesLoader.loadAnimes(folder,gesturePack);
 
 		//EXPLOSION
@@ -101,11 +101,11 @@ public class HollowBombFactoryLoader extends HollowSpriteFactoryLoader
 			result.setExplosionName(explosionName);
 		
 		//MODULATIONS
-		folder = folderPath+File.separator+FileNames.FOLDER_MODULATIONS;
+		folder = folderPath+File.separator+FileNames.FILE_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.BOMB);
 		
 		// TRAJECTORIES
-		folder = folderPath+File.separator+FileNames.FOLDER_TRAJECTORIES;
+		folder = folderPath+File.separator+FileNames.FILE_TRAJECTORIES;
 		HollowTrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// result

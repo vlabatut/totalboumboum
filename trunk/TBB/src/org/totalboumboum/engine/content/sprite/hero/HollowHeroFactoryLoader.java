@@ -137,7 +137,7 @@ public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 //	System.out.println();
 
 		// ABILITIES
-		folder = folderPath + File.separator+FileNames.FOLDER_ABILITIES;
+		folder = folderPath + File.separator+FileNames.FILE_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 
 		// EXPLOSION
@@ -146,11 +146,11 @@ public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 			result.setExplosionName(explosionName);
 		
 		// MODULATIONS
-		folder = folderPath+File.separator+FileNames.FOLDER_MODULATIONS;
+		folder = folderPath+File.separator+FileNames.FILE_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.HERO);
 		
 		// TRAJECTORIES
-		folder = folderPath+File.separator+FileNames.FOLDER_TRAJECTORIES;
+		folder = folderPath+File.separator+FileNames.FILE_TRAJECTORIES;
 		HollowTrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// result
@@ -233,7 +233,7 @@ public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 //	System.out.println();
 		
 		// ANIMES
-		folder = folderPath+File.separator+FileNames.FOLDER_ANIMES;
+		folder = folderPath+File.separator+FileNames.FILE_ANIMES;
 		HollowAnimesLoader.loadAnimes(folder,gesturePack);
 		
 		// result

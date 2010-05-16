@@ -196,8 +196,8 @@ buttonStatistics.setEnabled(false);
 		if(tournament==tournamentConf && tournamentConfiguration.getAutoSave())
 		{	try
 			{	// filenames
-				String autosave = FilePaths.getSavesPath()+File.separator+FileNames.FOLDER_AUTOSAVE;
-				String backup = FilePaths.getSavesPath()+File.separator+FileNames.FOLDER_AUTOSAVE_BACKUP;
+				String autosave = FilePaths.getSavesPath()+File.separator+FileNames.FILE_AUTOSAVE;
+				String backup = FilePaths.getSavesPath()+File.separator+FileNames.FILE_AUTOSAVE_BACKUP;
 				String dataFileName = FileNames.FILE_ARCHIVE+FileNames.EXTENSION_DATA;
 				String xmlFileName = FileNames.FILE_ARCHIVE+FileNames.EXTENSION_XML;
 				// backup
@@ -213,7 +213,7 @@ buttonStatistics.setEnabled(false);
 					backupFile.delete();
 				autosaveFile.renameTo(backupFile);
 				// save
-				GameArchive.saveGame(FileNames.FOLDER_AUTOSAVE,tournament);
+				GameArchive.saveGame(FileNames.FILE_AUTOSAVE,tournament);
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();

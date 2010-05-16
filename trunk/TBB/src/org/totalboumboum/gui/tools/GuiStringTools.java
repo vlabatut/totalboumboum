@@ -2,6 +2,7 @@ package org.totalboumboum.gui.tools;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -18,7 +19,7 @@ public class GuiStringTools
 	 * @param controlTooltips
 	 * @return
 	 */
-	public static int initControlsTexts(int fontSize, ArrayList<String> controlTexts, ArrayList<String> controlTooltips)
+	public static int initControlsTexts(int fontSize, List<String> controlTexts, List<String> controlTooltips)
 	{	int result = 0;
 		// no control
 		{	// text

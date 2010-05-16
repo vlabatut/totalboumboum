@@ -35,14 +35,14 @@ public class AiLoader
 	{	AbstractAiManager<?> result;
 		
 		// check the file
-		String packageFolder = FilePaths.getAisPath()+File.separator+packname+File.separator+FileNames.FOLDER_AIS+File.separator+name;
+		String packageFolder = FilePaths.getAisPath()+File.separator+packname+File.separator+FileNames.FILE_AIS+File.separator+name;
 		String classFile = packageFolder+File.separator+FileNames.FILE_AI_MAIN_CLASS+FileNames.EXTENSION_CLASS;
 		File file = new File(classFile);
 		if(!file.exists())
 			throw new FileNotFoundException(classFile);
 		
 		// load the class
-		String packageName = ClassTools.getTbbPackage()+ClassTools.CLASS_SEPARATOR+FileNames.FOLDER_AI+ClassTools.CLASS_SEPARATOR+packname+ClassTools.CLASS_SEPARATOR+FileNames.FOLDER_AIS+ClassTools.CLASS_SEPARATOR+name;
+		String packageName = ClassTools.getTbbPackage()+ClassTools.CLASS_SEPARATOR+FileNames.FILE_AI+ClassTools.CLASS_SEPARATOR+packname+ClassTools.CLASS_SEPARATOR+FileNames.FILE_AIS+ClassTools.CLASS_SEPARATOR+name;
 		String classQualifiedName = packageName+ClassTools.CLASS_SEPARATOR+FileNames.FILE_AI_MAIN_CLASS;
 		Class<?> tempClass = Class.forName(classQualifiedName);
 		if(!AbstractAiManager.class.isAssignableFrom(tempClass))

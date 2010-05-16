@@ -13,6 +13,7 @@
 				<text name="Profiles" value="Profiles" tooltip="Edit the players' profiles" />
 				<text name="Quickmatch" value="Quick match" tooltip="Play only one match" />
 				<text name="Quit" value="Quit" tooltip="Quit the game" />
+				<text name="Replay" value="Replay" tooltip="Watch a previously recorded game" />
 				<text name="Resources" value="Resources" tooltip="Browse the available resources" />
 				<text name="Statistics" value="Statistics" tooltip="See the player's statistics" />
 				<text name="Tournament" value="Tournament" tooltip="Select and play a tournament" />
@@ -507,6 +508,29 @@
 			</group>	
 		</group>	
 
+<!-- REPLAY MENU -->	
+		<group name="Replay">
+			<group name="Load">
+				<text name="Title" value="Replay" tooltip="Load and replay a previous game" />
+				<group name="Button">
+					<text name="Cancel" value="Cancel" tooltip="Cancel and go back to the main menu" />
+					<text name="Confirm" value="Confirm" tooltip="Confirm and replay your selection" />
+					<text name="Delete" value="Delete" tooltip="Delete the selected replay" />
+				</group>
+			</group>
+			<group name="Controls">
+				<group name="Button">
+					<text name="Back" value="Back" tooltip="Back to the replay menu" />
+					<text name="Backward" value="Backward" tooltip="Fast backward" />
+					<text name="Faster" value="Faster" tooltip="Increase speed" />
+					<text name="Forward" value="Forward" tooltip="Fast forward" />
+					<text name="Play" value="Play" tooltip="Play the video" />
+					<text name="Quit" value="Quit" tooltip="Back to the main menu" />
+					<text name="Slower" value="Slower" tooltip="Decrease speed" />
+				</group>
+			</group>
+		</group>	
+
 <!-- TOURNAMENT MENU -->	
 		<group name="Tournament">
 			<group name="Button">
@@ -517,7 +541,7 @@
 				<group name="Button">
 					<text name="Cancel" value="Cancel" tooltip="Cancel and go back to the main menu" />
 					<text name="Confirm" value="Confirm" tooltip="Confirm and load your selection" />
-					<text name="Delete" value="Previous" tooltip="Delete the selected game" />
+					<text name="Delete" value="Delete" tooltip="Delete the selected game" />
 				</group>
 			</group>
 			<group name="Players">
@@ -958,6 +982,14 @@
 			<text name="Rank" value="Player rank" tooltip="Glicko-2 rank of the player" />
 		</group>
 							
+<!-- REPLAY -->
+		<group name="Replay">
+			<text name="Name" value="Name" tooltip="Level name" />
+			<text name="Type" value="Pack" tooltip="Level pack" />
+			<text name="Players" value="Players" tooltip="Players involved" />
+			<text name="Save" value="Save" tooltip="Save date" />
+		</group>
+		
 <!-- RESULTS -->
 		<group name="Results" >
 			<group name="Match">

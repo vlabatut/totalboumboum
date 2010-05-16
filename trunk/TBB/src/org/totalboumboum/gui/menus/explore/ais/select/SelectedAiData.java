@@ -79,7 +79,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 				int listHeight = dataHeight;
 				packPanel = new PackBrowserSubPanel(listWidth,listHeight);
 				String baseFolder = FilePaths.getAisPath();
-				String additionalFolder = FileNames.FOLDER_AIS;
+				String additionalFolder = FileNames.FILE_AIS;
 				ArrayList<String> targetFiles = new ArrayList<String>();
 				targetFiles.add(FileNames.FILE_AI+FileNames.EXTENSION_XML);
 				targetFiles.add(FileNames.FILE_AI_MAIN_CLASS+FileNames.EXTENSION_CLASS);

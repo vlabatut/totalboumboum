@@ -43,6 +43,7 @@ import org.totalboumboum.gui.menus.explore.ExploreSplitPanel;
 import org.totalboumboum.gui.menus.options.OptionsSplitPanel;
 import org.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
 import org.totalboumboum.gui.menus.quickmatch.QuickMatchContainer;
+import org.totalboumboum.gui.menus.replay.select.SelectedReplaySplitPanel;
 import org.totalboumboum.gui.menus.statistics.players.PlayerStatisticsSplitPanel;
 import org.totalboumboum.gui.menus.tournament.TournamenuContainer;
 import org.totalboumboum.gui.tools.GuiKeys;
@@ -78,7 +79,9 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonTournament = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuickMatch = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonLoad = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_LOAD,buttonWidth,buttonHeight,fontSize,this);
+		buttonReplay = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_REPLAY,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonAbout = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuit = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUIT,buttonWidth,buttonHeight,fontSize,this);
@@ -104,6 +107,8 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 	private JButton buttonQuickMatch;
 	@SuppressWarnings("unused")
 	private JButton buttonLoad;
+	@SuppressWarnings("unused")
+	private JButton buttonReplay;
 	@SuppressWarnings("unused")
 	private JButton buttonQuit;
 	
@@ -148,6 +153,10 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 				tournamentContainer = new TournamenuContainer(getMenuContainer(),this);
 			tournamentContainer.initLoad();
 			replaceWith(tournamentContainer);
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_REPLAY))
+		{	SelectedReplaySplitPanel replayMenuPanel = new SelectedReplaySplitPanel(getMenuContainer(),this);
+			replaceWith(replayMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUIT))
 		{	getFrame().exit(false);

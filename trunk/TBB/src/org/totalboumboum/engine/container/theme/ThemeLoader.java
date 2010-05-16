@@ -121,11 +121,11 @@ public class ThemeLoader
     	loadSourceElement(root,result);
     	
 		// blocks
-    	folder = individualFolder + File.separator + FileNames.FOLDER_BLOCKS;
+    	folder = individualFolder + File.separator + FileNames.FILE_BLOCKS;
     	BlocksetLoader.loadBlockset(folder,result);
     	
 		// floors
-    	folder = individualFolder + File.separator + FileNames.FOLDER_FLOORS;
+    	folder = individualFolder + File.separator + FileNames.FILE_FLOORS;
     	FloorsetLoader.loadFloorset(folder,result);		
     	
 		// result

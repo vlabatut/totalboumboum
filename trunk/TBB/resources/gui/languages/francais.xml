@@ -13,6 +13,7 @@
 				<text name="Profiles" value="Profils" tooltip="Éditer les profils des joueurs" />
 				<text name="Quickmatch" value="Partie rapide" tooltip="Commencer une partie rapide" />
 				<text name="Quit" value="Quitter" tooltip="Quitter le jeu" />
+				<text name="Replay" value="Revoir" tooltip="Revoir une manche précédemment enregistrée" />
 				<text name="Resources" value="Ressources" tooltip="Naviguer parmi les ressources disponibles" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques des joueurs" />
 				<text name="Tournament" value="Tournoi" tooltip="Commencer un tournoi" />
@@ -507,6 +508,29 @@
 			</group>
 		</group>	
 
+<!-- REPLAY MENU -->	
+		<group name="Replay">
+			<group name="Load">
+				<text name="Title" value="Replay" tooltip="Load and replay a previous game" />
+				<group name="Button">
+					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir au menu principal" />
+					<text name="Confirm" value="Confirmer" tooltip="Confirmer et revoir la manche sélectionnée" />
+					<text name="Delete" value="Supprimer" tooltip="Supprimer le fichier sélectionné" />
+				</group>
+			</group>
+			<group name="Controls">
+				<group name="Button">
+					<text name="Back" value="Retour" tooltip="Revenir au menu précédent" />
+					<text name="Backward" value="Reculer" tooltip="Retour arrière" />
+					<text name="Faster" value="Accélère" tooltip="Accélérer la vitesse de lecture" />
+					<text name="Forward" value="Avancer" tooltip="Avance rapide" />
+					<text name="Play" value="Lire" tooltip="Lire la vidéo" />
+					<text name="Quit" value="Quitter" tooltip="Revenir au menu principal" />
+					<text name="Slower" value="Ralentir" tooltip="Decrease speed" />
+				</group>
+			</group>
+		</group>	
+
 <!-- TOURNAMENT MENU -->	
 		<group name="Tournament">
 			<group name="Button">
@@ -956,6 +980,14 @@
 			<text name="Rank" value="Classement du joueur" tooltip="Classement du joueur" />
 		</group>
 				
+<!-- REPLAY -->
+		<group name="Replay">
+			<text name="Name" value="Niveau" tooltip="Nom du niveau" />
+			<text name="Type" value="Pack" tooltip="Pack du niveau" />
+			<text name="Players" value="Joueurs" tooltip="Noms des participants" />
+			<text name="Save" value="Enregistrement" tooltip="Date de l'enregistrement" />
+		</group>
+	
 <!-- RESULTS -->
 		<group name="Results" >
 			<group name="Match">

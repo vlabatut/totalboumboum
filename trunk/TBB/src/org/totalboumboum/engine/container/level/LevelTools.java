@@ -230,7 +230,7 @@ public class LevelTools
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		String instance = levelInfo.getInstanceName();
 		String theme = levelInfo.getThemeName();
-		String path = FilePaths.getInstancesPath()+File.separator+instance+File.separator+FileNames.FOLDER_THEMES+File.separator+theme+File.separator+"floors";
+		String path = FilePaths.getInstancesPath()+File.separator+instance+File.separator+FileNames.FILE_THEMES+File.separator+theme+File.separator+"floors";
 		File folder = new File(path);
 		
 		// process bg dimensions

@@ -26,102 +26,102 @@ import java.io.File;
 public class FilePaths
 {
 	public static String getResourcesPath()
-	{	return FileNames.FOLDER_RESOURCES;		
+	{	return FileNames.FILE_RESOURCES;		
 	}
 	
 	public static String getAisPath()
 	{	return getResourcesPath() +
-			File.separator + FileNames.FOLDER_AI +
-			File.separator + FileNames.FOLDER_ORG +		
-			File.separator + FileNames.FOLDER_TOTALBOUMBOUM +		
-			File.separator + FileNames.FOLDER_AI;		
+			File.separator + FileNames.FILE_AI +
+			File.separator + FileNames.FILE_ORG +		
+			File.separator + FileNames.FILE_TOTALBOUMBOUM +		
+			File.separator + FileNames.FILE_AI;		
 	}
 	
 	public static String getCachePath()
-	{	return getResourcesPath()+File.separator+FileNames.FOLDER_CACHE;		
+	{	return getResourcesPath()+File.separator+FileNames.FILE_CACHE;		
 	}
 	public static String getCacheBombsPath()
-	{	return getCachePath()+File.separator+FileNames.FOLDER_BOMBS;		
+	{	return getCachePath()+File.separator+FileNames.FILE_BOMBS;		
 	}
 	public static String getCacheExplosionsPath()
-	{	return getCachePath()+File.separator+FileNames.FOLDER_EXPLOSIONS;		
+	{	return getCachePath()+File.separator+FileNames.FILE_EXPLOSIONS;		
 	}
 	public static String getCacheFiresPath()
-	{	return getCachePath()+File.separator+FileNames.FOLDER_FIRES;		
+	{	return getCachePath()+File.separator+FileNames.FILE_FIRES;		
 	}
 	public static String getCacheHeroesPath()
-	{	return getCachePath()+File.separator+FileNames.FOLDER_HEROES;		
+	{	return getCachePath()+File.separator+FileNames.FILE_HEROES;		
 	}
 	public static String getCacheItemsPath()
-	{	return getCachePath()+File.separator+FileNames.FOLDER_ITEMS;		
+	{	return getCachePath()+File.separator+FileNames.FILE_ITEMS;		
 	}
 	public static String getCacheThemesPath()
-	{	return getCachePath()+File.separator+FileNames.FOLDER_THEMES;		
+	{	return getCachePath()+File.separator+FileNames.FILE_THEMES;		
 	}
 
 	public static String getHeroesPath()
-	{	return getResourcesPath()+File.separator+FileNames.FOLDER_HEROES;		
+	{	return getResourcesPath()+File.separator+FileNames.FILE_HEROES;		
 	}
 	
 	public static String getInstancesPath()
-	{	return getResourcesPath()+File.separator+FileNames.FOLDER_INSTANCES;		
+	{	return getResourcesPath()+File.separator+FileNames.FILE_INSTANCES;		
 	}	
 
 	public static String getLevelsPath()
-	{	return getResourcesPath()+File.separator+FileNames.FOLDER_LEVELS;		
+	{	return getResourcesPath()+File.separator+FileNames.FILE_LEVELS;		
 	}
 	
 	public static String getLogsPath()
-	{	return getResourcesPath()+File.separator+FileNames.FOLDER_LOGS;		
+	{	return getResourcesPath()+File.separator+FileNames.FILE_LOGS;		
 	}
 	
 	public static String getReplaysPath()
-	{	return getResourcesPath()+File.separator+FileNames.FOLDER_REPLAYS;		
+	{	return getResourcesPath()+File.separator+FileNames.FILE_REPLAYS;		
 	}
 	
 	public static String getSchemasPath()
-	{	return getResourcesPath()+File.separator+FileNames.FOLDER_SCHEMAS;		
+	{	return getResourcesPath()+File.separator+FileNames.FILE_SCHEMAS;		
 	}
 	
 	public static String getSettingsPath()
-	{	return getResourcesPath()+File.separator+FileNames.FOLDER_SETTINGS;		
+	{	return getResourcesPath()+File.separator+FileNames.FILE_SETTINGS;		
 	}
 	public static String getConfigurationPath()
-	{	return getSettingsPath()+File.separator+FileNames.FOLDER_CONFIGURATION;		
+	{	return getSettingsPath()+File.separator+FileNames.FILE_CONFIGURATION;		
 	}
 	public static String getControlsPath()
-	{	return getSettingsPath()+File.separator+FileNames.FOLDER_CONTROLS;		
+	{	return getSettingsPath()+File.separator+FileNames.FILE_CONTROLS;		
 	}
 	public static String getMatchesPath()
-	{	return getSettingsPath()+File.separator+FileNames.FOLDER_MATCHES;		
+	{	return getSettingsPath()+File.separator+FileNames.FILE_MATCHES;		
 	}
 	public static String getPointsPath()
-	{	return getSettingsPath()+File.separator+FileNames.FOLDER_POINTS;		
+	{	return getSettingsPath()+File.separator+FileNames.FILE_POINTS;		
 	}
 	public static String getProfilesPath()
-	{	return getSettingsPath()+File.separator+FileNames.FOLDER_PROFILES;		
+	{	return getSettingsPath()+File.separator+FileNames.FILE_PROFILES;		
 	}
 	public static String getRoundsPath()
-	{	return getSettingsPath()+File.separator+FileNames.FOLDER_ROUNDS;		
+	{	return getSettingsPath()+File.separator+FileNames.FILE_ROUNDS;		
 	}
 	public static String getTournamentsPath()
-	{	return getSettingsPath()+File.separator+FileNames.FOLDER_TOURNAMENTS;		
+	{	return getSettingsPath()+File.separator+FileNames.FILE_TOURNAMENTS;		
 	}
 
 	public static String getSavesPath()
-	{	return getResourcesPath()+File.separator+FileNames.FOLDER_SAVES;		
+	{	return getResourcesPath()+File.separator+FileNames.FILE_SAVES;		
 	}
 
 	public static String getStatisticsPath()
-	{	return getResourcesPath()+File.separator+FileNames.FOLDER_STATISTICS;		
+	{	return getResourcesPath()+File.separator+FileNames.FILE_STATISTICS;		
 	}
 	public static String getDetailedStatisticsPath()
-	{	return getStatisticsPath()+File.separator+FileNames.FOLDER_DETAILED;		
+	{	return getStatisticsPath()+File.separator+FileNames.FILE_DETAILED;		
 	}
 	public static String getGlicko2Path()
-	{	return getStatisticsPath()+File.separator+FileNames.FOLDER_GLICKO2;		
+	{	return getStatisticsPath()+File.separator+FileNames.FILE_GLICKO2;		
 	}
 	public static String getOverallStatisticsPath()
-	{	return getStatisticsPath()+File.separator+FileNames.FOLDER_OVERALL;		
+	{	return getStatisticsPath()+File.separator+FileNames.FILE_OVERALL;		
 	}
 }

@@ -116,7 +116,7 @@ public class HollowLevel implements Serializable
     public void loadTheme() throws SAXException, IOException, ParserConfigurationException, ClassNotFoundException
     {	// theme
     	String individualFolder = FilePaths.getInstancesPath()+File.separator+levelInfo.getInstanceName();
-    	individualFolder = individualFolder+File.separator+FileNames.FOLDER_THEMES+File.separator+levelInfo.getThemeName();
+    	individualFolder = individualFolder+File.separator+FileNames.FILE_THEMES+File.separator+levelInfo.getThemeName();
     	Theme theme = ThemeLoader.loadTheme(individualFolder);
 //		level.setTheme(theme);
     	

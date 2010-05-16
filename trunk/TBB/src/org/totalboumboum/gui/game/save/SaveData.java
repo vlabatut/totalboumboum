@@ -48,10 +48,6 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
 
-	private FolderBrowserSubPanel folderPanel;
-	private ArchiveMiscSubPanel miscPanel;
-	private ArchivePlayersSubPanel playersPanel;
-
 	@SuppressWarnings("unused")
 	private String baseFolder;
 	
@@ -118,6 +114,16 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 		}
 	}
 		
+	/////////////////////////////////////////////////////////////////
+	// PANELS				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private FolderBrowserSubPanel folderPanel;
+	private ArchiveMiscSubPanel miscPanel;
+	private ArchivePlayersSubPanel playersPanel;
+
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
 	{	folderPanel.refresh();
