@@ -240,6 +240,7 @@ public class XmlNames
 	public static final String REFERENCE = "reference";
 	public static final String REGULAR_LAUNCH = "regularLaunch";
 	public static final String REPEAT = "repeat";
+	public static final String REPLAY = "replay";
 	public static final String ROUND = "round";
 	public static final String ROUNDS = "rounds";
 	public static final String SAVE = "save";

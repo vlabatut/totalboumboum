@@ -39,6 +39,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
@@ -46,6 +47,7 @@ import org.totalboumboum.engine.loop.event.ReplayEvent;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.xml.sax.SAXException;
 
 public class Replay
 {
@@ -53,7 +55,7 @@ public class Replay
 	{	
 	}
 	
-	public Replay(Round round)
+	public Replay(Round round) throws IOException
 	{	// level
 		LevelInfo levelInfo = round.getHollowLevel().getLevelInfo();
 		levelName = levelInfo.getFolder();
@@ -71,6 +73,13 @@ public class Replay
 		
 		// paths
 		initFolder();
+		
+		// init recording
+		initRecording();
+		
+		// record round info
+		out.writeObject(profiles);
+		out.writeObject(levelInfo);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -113,9 +122,12 @@ public class Replay
 	 * creates and open a file named after the current date and time
 	 * in order to record this game replay
 	 */
-	public void initRecording() throws IOException
-	{	String filenamePath = FilePaths.getReplaysPath() + File.separator + folder + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
-		File file = new File(filenamePath);
+	private void initRecording() throws IOException
+	{	String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
+		File file = new File(folderPath);
+		file.mkdir();
+		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
+		file = new File(filePath);
 		FileOutputStream fileOut = new FileOutputStream(file);
 		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
 //		ZipOutputStream outZip = new ZipOutputStream(outBuff);
@@ -139,7 +151,7 @@ public class Replay
 	/**
 	 * close the replay output stream (if it was previously opened)
 	 */
-	public void finishRecording() throws IOException
+	public void finishRecording() throws IOException, ParserConfigurationException, SAXException
 	{	// close the object stream
 		out.close();
 		
@@ -149,6 +161,9 @@ public class Replay
 			File file = new File(previewFilename);
 			ImageIO.write(preview,"png",file);
 		}
+		
+		// record the xml file
+		ReplaySaver.saveReplay(this);
 	}
 
 	public void setFilterEvents(boolean flag)
@@ -255,12 +270,12 @@ public class Replay
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> players = new ArrayList<String>();
+	private final List<String> players = new ArrayList<String>();
 	
 	public void addPlayer(String player)
 	{	players.add(player);
 	}
-	public ArrayList<String> getPlayers()
+	public List<String> getPlayers()
 	{	return players;
 	}
 }

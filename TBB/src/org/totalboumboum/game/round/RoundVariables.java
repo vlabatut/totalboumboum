@@ -24,7 +24,6 @@ package org.totalboumboum.game.round;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.io.IOException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.level.Level;
@@ -94,11 +93,6 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	public static Replay replay = null;
 	
-	public static void initRecording() throws IOException
-	{	if(replay!=null && Configuration.getEngineConfiguration().isRecordRounds())
-			replay.initRecording();
-	}
-	
 	public static void recordEvent(ReplayEvent event)
 	{	if(replay!=null && event.getSendEvent())
 			replay.recordEvent(event);
@@ -114,10 +108,5 @@ public class RoundVariables
 		if(replay!=null)
 			result = replay.getFilterEvents();
 		return result;
-	}
-
-	public static void finishRecording() throws IOException
-	{	if(replay!=null)
-			replay.finishRecording();
 	}
 }
