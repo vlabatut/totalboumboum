@@ -1,4 +1,4 @@
-package org.totalboumboum.gui.common.content.subpanel.archive;
+package org.totalboumboum.gui.common.content.subpanel.replay;
 
 /*
  * Total Boum Boum
@@ -24,42 +24,42 @@ package org.totalboumboum.gui.common.content.subpanel.archive;
 import java.awt.Color;
 import java.util.List;
 
-import org.totalboumboum.game.archive.GameArchive;
+import org.totalboumboum.game.replay.Replay;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.GameData;
 
-public class ArchivePlayersSubPanel extends TableSubPanel
+public class ReplayPlayersSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	private static final int COL_SUBS = 1;
 	private static final int COL_GROUPS = 1;
 	private static final int LINES = GameData.MAX_PROFILES_COUNT;
 	
-	public ArchivePlayersSubPanel(int width, int height)
+	public ReplayPlayersSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,COL_GROUPS,COL_SUBS,true);
-		setGameArchive(null);
+		setReplay(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
 	// ARCHIVE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GameArchive gameArchive;
+	private Replay replay;
 
-	public GameArchive getGameArchive()
-	{	return gameArchive;	
+	public Replay getReplay()
+	{	return replay;	
 	}
 	
-	public void setGameArchive(GameArchive gameArchive)
-	{	this.gameArchive = gameArchive;
+	public void setReplay(Replay replay)
+	{	this.replay = replay;
 		
 		// sizes
 		reinit(LINES,COL_GROUPS,COL_SUBS);
 		
 		// header
 		int line = 0;
-		{	String key = GuiKeys.COMMON_ARCHIVE_PLAYERS;
+		{	String key = GuiKeys.COMMON_REPLAY_PLAYERS;
 			setLabelKey(line,0,key,true);
 			Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 			setLabelBackground(line,0,bg);
@@ -67,9 +67,9 @@ public class ArchivePlayersSubPanel extends TableSubPanel
 		}
 				
 		// data
-		if(gameArchive!=null)
+		if(replay!=null)
 		{	// text
-			List<String> textValues = gameArchive.getPlayers();
+			List<String> textValues = replay.getPlayers();
 			List<String> tooltipValues = textValues;
 			// content
 			while(line<LINES && (line-1)<textValues.size())
