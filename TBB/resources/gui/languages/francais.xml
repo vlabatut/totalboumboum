@@ -511,7 +511,7 @@
 <!-- REPLAY MENU -->	
 		<group name="Replay">
 			<group name="Load">
-				<text name="Title" value="Replay" tooltip="Load and replay a previous game" />
+				<text name="Title" value="Revoir une manche" tooltip="Revoir une manche précédemment enregistrée" />
 				<group name="Button">
 					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir au menu principal" />
 					<text name="Confirm" value="Confirmer" tooltip="Confirmer et revoir la manche sélectionnée" />
@@ -983,9 +983,10 @@
 <!-- REPLAY -->
 		<group name="Replay">
 			<text name="Name" value="Niveau" tooltip="Nom du niveau" />
-			<text name="Type" value="Pack" tooltip="Pack du niveau" />
+			<text name="Pack" value="Pack" tooltip="Pack du niveau" />
 			<text name="Players" value="Joueurs" tooltip="Noms des participants" />
 			<text name="Save" value="Enregistrement" tooltip="Date de l'enregistrement" />
+			<text name="Type" value="Pack" tooltip="Pack du niveau" />
 		</group>
 	
 <!-- RESULTS -->

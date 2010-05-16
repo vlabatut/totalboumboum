@@ -99,8 +99,8 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 	private JButton buttonDelete;
 
 	private void refreshButtons()
-	{	GameArchive gameArchive = levelData.getSelectedGameArchive();
-		if(gameArchive==null)
+	{	Replay replay = levelData.getSelectedReplay();
+		if(replay==null)
 		{	buttonDelete.setEnabled(false);
 			buttonConfirm.setEnabled(false);
 		}

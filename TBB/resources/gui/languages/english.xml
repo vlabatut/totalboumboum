@@ -985,9 +985,10 @@
 <!-- REPLAY -->
 		<group name="Replay">
 			<text name="Name" value="Name" tooltip="Level name" />
-			<text name="Type" value="Pack" tooltip="Level pack" />
+			<text name="Pack" value="Pack" tooltip="Level pack" />
 			<text name="Players" value="Players" tooltip="Players involved" />
 			<text name="Save" value="Save" tooltip="Save date" />
+			<text name="Type" value="Pack" tooltip="Level pack" />
 		</group>
 		
 <!-- RESULTS -->
