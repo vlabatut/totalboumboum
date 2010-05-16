@@ -166,6 +166,6 @@ public class ClassTools
 	}
 
 	public static String getTbbPackage()
-	{	return FileNames.FOLDER_ORG + CLASS_SEPARATOR + FileNames.FOLDER_TOTALBOUMBOUM;		
+	{	return FileNames.FILE_ORG + CLASS_SEPARATOR + FileNames.FILE_TOTALBOUMBOUM;		
 	}
 }

@@ -1,11 +1,5 @@
 package org.totalboumboum.game.archive;
 
-import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.game.tournament.cup.CupTournament;
-import org.totalboumboum.game.tournament.league.LeagueTournament;
-import org.totalboumboum.game.tournament.sequence.SequenceTournament;
-import org.totalboumboum.game.tournament.single.SingleTournament;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -26,6 +20,12 @@ import org.totalboumboum.game.tournament.single.SingleTournament;
  * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
+
+import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.game.tournament.cup.CupTournament;
+import org.totalboumboum.game.tournament.league.LeagueTournament;
+import org.totalboumboum.game.tournament.sequence.SequenceTournament;
+import org.totalboumboum.game.tournament.single.SingleTournament;
 
 public enum TournamentType
 {

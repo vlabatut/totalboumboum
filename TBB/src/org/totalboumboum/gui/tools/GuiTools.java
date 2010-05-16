@@ -531,7 +531,8 @@ public class GuiTools
 		{	String folder = baseFolder+GuiFileTools.FILE_LEVEL;
 			String[] uses =
 			{	GuiKeys.COMMON_ROUND_LEVEL_FOLDER,
-				GuiKeys.COMMON_LEVEL_TITLE
+				GuiKeys.COMMON_LEVEL_TITLE,
+				GuiKeys.COMMON_REPLAY_NAME
 			};
 			loadTableImages(folder,uses);
 		}
@@ -580,7 +581,8 @@ public class GuiTools
 				GuiKeys.COMMON_ARCHIVE_PLAYERS,
 				GuiKeys.COMMON_PART_PLAYER,
 				GuiKeys.MENU_PROFILES_EDIT_NAME,
-				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_NAME
+				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_NAME,
+				GuiKeys.COMMON_REPLAY_PLAYERS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -600,7 +602,8 @@ public class GuiTools
 				GuiKeys.COMMON_AI_PACK,
 				GuiKeys.COMMON_SPRITE_PACK,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_PACKAGE,
-				GuiKeys.COMMON_ROUND_LEVEL_PACK
+				GuiKeys.COMMON_ROUND_LEVEL_PACK,
+				GuiKeys.COMMON_REPLAY_PACK
 			};
 			loadTableImages(folder,uses);
 		}
@@ -680,7 +683,8 @@ public class GuiTools
 		// save
 		{	String folder = baseFolder+GuiFileTools.FILE_SAVE;
 			String[] uses =
-			{	GuiKeys.COMMON_ARCHIVE_SAVE
+			{	GuiKeys.COMMON_ARCHIVE_SAVE,
+				GuiKeys.COMMON_REPLAY_SAVE
 			};
 			loadTableImages(folder,uses);
 		}

@@ -1146,6 +1146,9 @@ public class Launcher
 	 *  		- le contaminateur initial est résistant
 	 *  	- si le feu normal était graphiquement un truc carré avec plein de flamèches ?
 	 *  	- apparition des items : fumée+légèrement sur-élevé, puis l'item tombe par terre... (comm bug après cache v2)
+	 *  
+	 *  - enregistrement d'une partie : au lieu d'utiliser data+xml, mettre les données
+	 *    xml dans le fichier de données aussi. (au début bien entendu)
 	 */ 
 	
 	/**
@@ -1209,5 +1212,11 @@ public class Launcher
 	 * 		- identité des joueurs controlés (ou pas ?)
 	 * puis tester l'enregistrement
 	 * puis implémenter le lecteur d'évènements
+	 */
+	
+	/**
+	 * TODO replay
+	 * 	- ajouter des commandes (avance rapide, vitesse, retour arrière)
+	 *  - enregistrer une image au pif en cours de jeu, histoire de l'enregistrer en tant que preview
 	 */
 }

@@ -45,7 +45,7 @@ public class SpriteChangePositionEvent extends SpriteChangeEvent
 	// SEND EVENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public boolean getSendEvent()
-	{	return sendEvent && !RoundVariables.filterEvents;	
+	{	return sendEvent && !RoundVariables.getFilterEvents();	
 	}
 
 	/////////////////////////////////////////////////////////////////

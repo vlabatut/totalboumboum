@@ -60,7 +60,7 @@ public class Instance
 	private BombsetMap bombsetMap = new BombsetMap();
 
 	public void loadBombsetMaps(List<PredefinedColor> playersColors) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-   {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_BOMBS;
+   {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FILE_BOMBS;
    		bombsetMap.loadBombsets(individualFolder,playersColors);
     }
 	
@@ -74,7 +74,7 @@ public class Instance
 	private FiresetMap firesetMap = new FiresetMap();
 	
 	public void loadFiresetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_FIRES;
+    {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FILE_FIRES;
 		firesetMap = FiresetMapLoader.loadFiresetMap(individualFolder);
     }
 		
@@ -88,7 +88,7 @@ public class Instance
 	private Itemset itemset;
 
 	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_ITEMS;
+    {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FILE_ITEMS;
     	itemset = ItemsetLoader.loadItemset(individualFolder);
     }
 		
@@ -102,7 +102,7 @@ public class Instance
 	private Explosionset explosionset;
 
 	public void loadExplosionset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FOLDER_EXPLOSIONS;
+    {	String individualFolder = FilePaths.getInstancesPath()+File.separator+name+File.separator+FileNames.FILE_EXPLOSIONS;
     	explosionset = ExplosionsetLoader.loadExplosionset(individualFolder);
     }
 		

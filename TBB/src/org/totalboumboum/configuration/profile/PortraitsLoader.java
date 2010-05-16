@@ -49,7 +49,7 @@ public class PortraitsLoader
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile,dataFile;
-		String folderPath = spriteFolderPath+File.separator+FileNames.FOLDER_PORTRAITS;
+		String folderPath = spriteFolderPath+File.separator+FileNames.FILE_PORTRAITS;
 		// opening
 		dataFile = new File(folderPath+File.separator+FileNames.FILE_PORTRAITS+FileNames.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_PORTRAITS+FileNames.EXTENSION_SCHEMA);

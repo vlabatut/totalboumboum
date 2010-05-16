@@ -21,7 +21,7 @@ public class AiPreviewLoader
 {
 	public static AiPreview loadAiPreview(String pack, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	AiPreview result = new AiPreview(pack,folder);
-		String path = FilePaths.getAisPath()+File.separator+pack+File.separator+FileNames.FOLDER_AIS+File.separator+folder;
+		String path = FilePaths.getAisPath()+File.separator+pack+File.separator+FileNames.FILE_AIS+File.separator+folder;
 		File dataFile = new File(path+File.separator+FileNames.FILE_AI+FileNames.EXTENSION_XML);
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_AI+FileNames.EXTENSION_SCHEMA);

@@ -148,7 +148,7 @@ public class TournamentConfiguration
 	
 	public void reinitTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	tournamentName.delete(0,tournamentName.length());
-		String folderPath = FilePaths.getConfigurationPath()+File.separator+FileNames.FOLDER_TOURNAMENT;
+		String folderPath = FilePaths.getConfigurationPath()+File.separator+FileNames.FILE_TOURNAMENT;
 		tournament = TournamentLoader.loadTournamentFromFolderPath(folderPath);
 	}
 

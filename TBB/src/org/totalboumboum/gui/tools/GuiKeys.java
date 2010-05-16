@@ -51,6 +51,7 @@ public class GuiKeys
 	public static final String AUTOSAVE = "Autosave";
 	public static final String AVAILABLE = "Available";
 	public static final String BACK = "Back";
+	public static final String BACKWARD = "Backward";
 	public static final String BACKGROUND = "Background";
 	public static final String BEFORE = "Before";
 	public static final String BLACK = "Black";
@@ -106,12 +107,14 @@ public class GuiKeys
 	public static final String EXCEPTIONS = "Exceptions";
 	public static final String EXIT = "Exit";
 	public static final String FALSE = "False";
+	public static final String FASTER = "Faster";
 	public static final String FILE = "File";
 	public static final String FINISH = "Finish";
 	public static final String FIRESETMAP = "Firesetmap";
 	public static final String FIXED = "Fixed";
 	public static final String FOLDER = "Folder";
 	public static final String FONT = "Font";
+	public static final String FORWARD = "Forward";
 	public static final String FPS = "Fps";
 	public static final String FULL = "Full";
 	public static final String GAME = "Game";
@@ -208,6 +211,7 @@ public class GuiKeys
 	public static final String REGISTER = "Register";
 	public static final String REGULAR = "Regular";
 	public static final String REINIT = "Reinit";
+	public static final String REPLAY = "Replay";
 	public static final String RESET = "Reset";
 	public static final String RESOURCES = "Resources";
 	public static final String RESULTS = "Results";
@@ -230,6 +234,7 @@ public class GuiKeys
 	public static final String SIMULATION = "Simulation";
 	public static final String SINGLE = "Single";
 	public static final String SIZE = "Size";
+	public static final String SLOWER = "Slower";
 	public static final String SMOOTH = "Smooth";
 	public static final String SOURCE = "Source";
 	public static final String SPEED = "Speed";
@@ -278,6 +283,7 @@ public class GuiKeys
 		public static final String MENU_MAIN_BUTTON_PROFILES = MENU_MAIN_BUTTON+PROFILES;
 		public static final String MENU_MAIN_BUTTON_QUICKMATCH = MENU_MAIN_BUTTON+QUICKMATCH;
 		public static final String MENU_MAIN_BUTTON_QUIT = MENU_MAIN_BUTTON+QUIT;
+		public static final String MENU_MAIN_BUTTON_REPLAY = MENU_MAIN_BUTTON+REPLAY;
 		public static final String MENU_MAIN_BUTTON_RESOURCES = MENU_MAIN_BUTTON+RESOURCES;
 		public static final String MENU_MAIN_BUTTON_STATISTICS = MENU_MAIN_BUTTON+STATISTICS;
 		public static final String MENU_MAIN_BUTTON_TOURNAMENT = MENU_MAIN_BUTTON+TOURNAMENT;
@@ -736,7 +742,29 @@ public class GuiKeys
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_MINUS = MENU_QUICKMATCH_SETTINGS_POINTS_VALUES+MINUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_PLUS = MENU_QUICKMATCH_SETTINGS_POINTS_VALUES+PLUS;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_TITLE = MENU_QUICKMATCH_SETTINGS_POINTS_VALUES+TITLE;
-			
+
+	/* REPLAY */
+	public static final String MENU_REPLAY = MENU+REPLAY;
+		/* LOAD */
+		public static final String MENU_REPLAY_LOAD = MENU_REPLAY+LOAD;
+		public static final String MENU_REPLAY_LOAD_TITLE = MENU_REPLAY_LOAD+TITLE;
+			/* BUTTONS */
+			public static final String MENU_REPLAY_LOAD_BUTTON = MENU_REPLAY_LOAD+BUTTON;
+			public static final String MENU_REPLAY_LOAD_BUTTON_CANCEL = MENU_REPLAY_LOAD+CANCEL;
+			public static final String MENU_REPLAY_LOAD_BUTTON_CONFIRM = MENU_REPLAY_LOAD+CONFIRM;
+			public static final String MENU_REPLAY_LOAD_BUTTON_DELETE = MENU_REPLAY_LOAD+DELETE;
+		/* CONTROLS */
+		public static final String MENU_REPLAY_CONTROLS = MENU_REPLAY+CONTROLS;
+			/* BUTTONS */
+			public static final String MENU_REPLAY_CONTROLS_BUTTON = MENU_REPLAY_CONTROLS+BUTTON;
+			public static final String MENU_REPLAY_CONTROLS_BUTTON_BACK = MENU_REPLAY_CONTROLS_BUTTON+BACK;
+			public static final String MENU_REPLAY_CONTROLS_BUTTON_BACKWARD = MENU_REPLAY_CONTROLS_BUTTON+BACKWARD;
+			public static final String MENU_REPLAY_CONTROLS_BUTTON_FASTER = MENU_REPLAY_CONTROLS_BUTTON+FASTER;
+			public static final String MENU_REPLAY_CONTROLS_BUTTON_FORWARD = MENU_REPLAY_CONTROLS_BUTTON+FORWARD;
+			public static final String MENU_REPLAY_CONTROLS_BUTTON_PLAY = MENU_REPLAY_CONTROLS_BUTTON+PLAY;
+			public static final String MENU_REPLAY_CONTROLS_BUTTON_QUIT = MENU_REPLAY_CONTROLS_BUTTON+QUIT;
+			public static final String MENU_REPLAY_CONTROLS_BUTTON_SLOWER = MENU_REPLAY_CONTROLS_BUTTON+SLOWER;
+				
 	/* TOURNAMENT */
 	public static final String MENU_TOURNAMENT = MENU+TOURNAMENT;
 		/* BUTTONS */
@@ -1155,6 +1183,13 @@ public class GuiKeys
 	public static final String COMMON_PROFILES_NAME = COMMON_PROFILES+NAME;
 	public static final String COMMON_PROFILES_RANK = COMMON_PROFILES+RANK;
 			
+	/* REPLAY */
+	public static final String COMMON_REPLAY = COMMON+REPLAY;
+	public static final String COMMON_REPLAY_NAME = COMMON_REPLAY+NAME;
+	public static final String COMMON_REPLAY_PACK = COMMON_REPLAY+PACK;			
+	public static final String COMMON_REPLAY_PLAYERS = COMMON_REPLAY+PLAYERS;
+	public static final String COMMON_REPLAY_SAVE = COMMON_REPLAY+SAVE;
+
 	/* RESULTS */
 	public static final String COMMON_RESULTS = COMMON+RESULTS;
 		/* MATCH */

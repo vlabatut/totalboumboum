@@ -127,7 +127,7 @@ public class LevelPreviewLoader
 	{	if(previewItemset)
 		{	String instanceName = result.getLevelInfo().getInstanceName();
 			String instanceFolder = FilePaths.getInstancesPath()+File.separator+instanceName;		
-			String itemFolder = instanceFolder + File.separator+FileNames.FOLDER_ITEMS;
+			String itemFolder = instanceFolder + File.separator+FileNames.FILE_ITEMS;
 			ItemsetPreview itemsetPreview = ItemsetPreviewLoader.loadItemsetPreview(itemFolder);
 			result.setItemsetPreview(itemsetPreview);
 		}
