@@ -90,5 +90,4 @@ public class QuickMatchContainer extends MenuPanel implements MenuContainer
 		validate();
 		repaint();		
 	}
-
 }

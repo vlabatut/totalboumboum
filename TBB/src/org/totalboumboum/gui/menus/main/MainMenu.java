@@ -43,13 +43,12 @@ import org.totalboumboum.gui.menus.explore.ExploreSplitPanel;
 import org.totalboumboum.gui.menus.options.OptionsSplitPanel;
 import org.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
 import org.totalboumboum.gui.menus.quickmatch.QuickMatchContainer;
-import org.totalboumboum.gui.menus.replay.select.SelectedReplaySplitPanel;
+import org.totalboumboum.gui.menus.replay.ReplayContainer;
 import org.totalboumboum.gui.menus.statistics.players.PlayerStatisticsSplitPanel;
 import org.totalboumboum.gui.menus.tournament.TournamenuContainer;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
-
 
 public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
@@ -155,8 +154,8 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 			replaceWith(tournamentContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_REPLAY))
-		{	SelectedReplaySplitPanel replayMenuPanel = new SelectedReplaySplitPanel(getMenuContainer(),this);
-			replaceWith(replayMenuPanel);
+		{	ReplayContainer replayContainer = new ReplayContainer(getMenuContainer(),this);
+			replaceWith(replayContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUIT))
 		{	getFrame().exit(false);

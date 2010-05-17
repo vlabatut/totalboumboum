@@ -116,8 +116,8 @@ public class Replay
 	/////////////////////////////////////////////////////////////////
 	// RECORDER				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public boolean filterEvents = true;
-	public ObjectOutputStream out = null;
+	private boolean filterEvents = true;
+	private ObjectOutputStream out = null;
 	
 	/**
 	 * creates and open a file named after the current date and time
@@ -180,19 +180,35 @@ public class Replay
 	/////////////////////////////////////////////////////////////////
 	// REPLAYER				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public ObjectInputStream in = null;
+	private ObjectInputStream in = null;
+	private List<Profile> readProfiles = null;
+	private LevelInfo readLevelInfo = null;
 	
 	/**
 	 * creates and open a file named after the current date and time
 	 * in order to record this game replay
 	 */
-	public void initReplaying(String filename) throws IOException
-	{	File file = new File(filename);
+	@SuppressWarnings("unchecked")
+	public void initReplaying() throws IOException, ClassNotFoundException
+	{	String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
+		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
+		File file = new File(filePath);
 		FileInputStream fileIn = new FileInputStream(file);
 		BufferedInputStream inBuff = new BufferedInputStream(fileIn);
 //		ZipInputStream inZip = new ZipInputStream(inBuff);
 //		in = new ObjectInputStream(inZip);
 		in = new ObjectInputStream(inBuff);
+		
+		readProfiles = (List<Profile>) in.readObject();
+		readLevelInfo = (LevelInfo) in.readObject();
+	}
+	
+	public List<Profile> getReadProfiles()
+	{	return readProfiles;
+	}
+	
+	public LevelInfo getReadLevelInfo()
+	{	return readLevelInfo;
 	}
 	
 	/**

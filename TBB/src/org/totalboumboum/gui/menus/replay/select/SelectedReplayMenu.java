@@ -37,6 +37,7 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.archive.GameArchive;
 import org.totalboumboum.game.replay.Replay;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -128,11 +129,11 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 			}
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CONFIRM))
-		{	try
-			{	String folder = levelData.getSelectedGameArchive().getFolder();
-				AbstractTournament tournament = GameArchive.loadGame(folder);
+		{	TournamentSplitPanel tournamentPanel = new TournamentSplitPanel(container.getMenuContainer(),getMenuParent());
+			try
+			{	Replay selectedReplay = levelData.getSelectedReplay();
+				SingleTournament tournament = new SingleTournament(selectedReplay);
 				tournamentPanel.setTournament(tournament);
-				Configuration.getGameConfiguration().getTournamentConfiguration().setTournament(tournament);
 			}
 			catch (IOException e1)
 			{	e1.printStackTrace();
