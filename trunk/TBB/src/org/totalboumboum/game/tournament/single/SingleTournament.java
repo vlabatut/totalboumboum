@@ -21,13 +21,16 @@ package org.totalboumboum.game.tournament.single;
  * 
  */
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.rank.Ranks;
+import org.totalboumboum.game.replay.Replay;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
@@ -36,6 +39,20 @@ import org.totalboumboum.statistics.detailed.StatisticTournament;
 public class SingleTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
 	
+	public SingleTournament()
+	{	
+	}
+
+	public SingleTournament(Replay replay) throws IOException, ClassNotFoundException
+	{	replay.initReplaying();
+		profiles.addAll(replay.getReadProfiles());
+		LevelInfo levelInfo = replay.getReadLevelInfo();
+		
+		/*
+		 * TODO init le tournoi comme dans le chargement + quickstart
+		 */
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
