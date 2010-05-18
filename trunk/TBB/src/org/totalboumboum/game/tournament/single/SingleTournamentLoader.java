@@ -37,6 +37,7 @@ public class SingleTournamentLoader
 	public static SingleTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	SingleTournament result = new SingleTournament();
 		Element element;
+		
 		// match
 		element = root.getChild(XmlNames.MATCH);
 		loadMatchElement(element,folder,result);

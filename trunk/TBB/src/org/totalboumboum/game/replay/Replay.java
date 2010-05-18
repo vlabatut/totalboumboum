@@ -44,6 +44,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.loop.event.ReplayEvent;
+import org.totalboumboum.game.limit.Limits;
+import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.files.FileNames;
@@ -81,6 +83,7 @@ public class Replay
 		// record round info
 		out.writeObject(profiles);
 		out.writeObject(levelInfo);
+		out.writeObject(round.getLimits());
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -183,6 +186,7 @@ public class Replay
 	private ObjectInputStream in = null;
 	private List<Profile> readProfiles = null;
 	private LevelInfo readLevelInfo = null;
+	private Limits<RoundLimit> readRoundLimits = null;
 	
 	/**
 	 * creates and open a file named after the current date and time
@@ -201,6 +205,7 @@ public class Replay
 		
 		readProfiles = (List<Profile>) in.readObject();
 		readLevelInfo = (LevelInfo) in.readObject();
+		readRoundLimits = (Limits<RoundLimit>) in.readObject();
 	}
 	
 	public List<Profile> getReadProfiles()
@@ -209,6 +214,10 @@ public class Replay
 	
 	public LevelInfo getReadLevelInfo()
 	{	return readLevelInfo;
+	}
+	
+	public Limits<RoundLimit> getReadRoundLimits()
+	{	return readRoundLimits;
 	}
 	
 	/**

@@ -106,8 +106,12 @@ public class QuickStartConfiguration
 	public SingleTournament loadQuickstart() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// single tournament
 		SingleTournament result = new SingleTournament();
+		result.setAuthor("quick start");
+		result.setName("quick start");
+		
 		// one round match
 		Match match = new Match(result);
+		match.setAuthor("quick start");
 		{	// notes
 			ArrayList<String> notes = new ArrayList<String>();
 			notes.add("auto-generated notes");
@@ -121,6 +125,7 @@ public class QuickStartConfiguration
 			match.setLimits(limits);
 		}
 		result.setMatch(match);
+		
 		// round
 		Round round = RoundLoader.loadRoundFromName(roundName.toString(),match);
 		match.addRound(round);
