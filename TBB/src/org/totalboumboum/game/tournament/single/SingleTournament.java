@@ -22,19 +22,32 @@ package org.totalboumboum.game.tournament.single;
  */
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
+import org.totalboumboum.engine.container.level.instance.Instance;
+import org.totalboumboum.game.limit.Comparisons;
+import org.totalboumboum.game.limit.LimitConfrontation;
+import org.totalboumboum.game.limit.Limits;
+import org.totalboumboum.game.limit.MatchLimit;
+import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
+import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.PointsTotal;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.replay.Replay;
+import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
-
+import org.xml.sax.SAXException;
 
 public class SingleTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
@@ -43,14 +56,57 @@ public class SingleTournament extends AbstractTournament
 	{	
 	}
 
-	public SingleTournament(Replay replay) throws IOException, ClassNotFoundException
+	public SingleTournament(Replay replay) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{	replay.initReplaying();
+		setName("Replay");
+		setAuthor("Replay");
 		profiles.addAll(replay.getReadProfiles());
-		LevelInfo levelInfo = replay.getReadLevelInfo();
+
+		// one round match
+		Match match = new Match(this);
+		match.setAuthor("Replay");
+		{	// notes
+			ArrayList<String> notes = new ArrayList<String>();
+			notes.add("auto-generated notes");
+			match.setNotes(notes);
+		}
+		{	// limits
+			PointsProcessor pointProcessor = new PointsTotal();
+			Limits<MatchLimit> limits = new Limits<MatchLimit>();
+			MatchLimit limit = new LimitConfrontation(1,Comparisons.GREATEREQ,pointProcessor);
+			limits.addLimit(limit);
+			match.setLimits(limits);
+		}
+		setMatch(match);
 		
-		/*
-		 * TODO init le tournoi comme dans le chargement + quickstart
-		 */
+		// round
+		Round round = new Round(match);
+		match.setAuthor("Replay");
+		{	// notes
+			ArrayList<String> notes = new ArrayList<String>();
+			notes.add("auto-generated notes");
+			round.setNotes(notes);
+		}
+		{	// limits
+			Limits<RoundLimit> limits = replay.getReadRoundLimits();
+			round.setLimits(limits);
+		}
+		match.addRound(round);
+		
+		// level
+		HollowLevel hollowLevel = new HollowLevel();
+		LevelInfo levelInfo = replay.getReadLevelInfo();
+		hollowLevel.setLevelInfo(levelInfo);
+		Instance instance = new Instance(levelInfo.getInstanceName());
+		hollowLevel.setInstance(instance);
+		// no need for Players nor Zone objects here
+		round.setHollowLevel(hollowLevel);
+		
+		// progress
+		init();
+	    progress();
+	    match = getCurrentMatch();
+	    match.progress();
 	}
 
 	/////////////////////////////////////////////////////////////////

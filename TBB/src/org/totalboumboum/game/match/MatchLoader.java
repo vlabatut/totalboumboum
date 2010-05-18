@@ -48,16 +48,19 @@ public class MatchLoader
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile,dataFile;
+		
 		// opening
 		dataFile = new File(folderPath+File.separator+FileNames.FILE_MATCH+FileNames.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_MATCH+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		
 		// loading
 		Match result = new Match(tournament);
 		File temp = new File(folderPath);
 		String name = temp.getName();
 		result.setName(name);
 		loadMatchElement(root,folderPath,tournament,result);
+		
 		return result;
     }
     
@@ -114,6 +117,7 @@ public class MatchLoader
     	String str = root.getAttribute(XmlNames.RANDOM_ORDER).getValue().trim();
     	boolean randomOrder = Boolean.valueOf(str);
     	result.setRandomOrder(randomOrder);
+    	
     	// rounds
 		List<Element> elements = root.getChildren(XmlNames.ROUND);
     	Iterator<Element> i = elements.iterator();
@@ -125,11 +129,14 @@ public class MatchLoader
     
     private static void loadRoundElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Round round;
+		
 		// local
 		String localStr = root.getAttribute(XmlNames.LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
+		
 		// name
 		String name = root.getAttribute(XmlNames.NAME).getValue();
+		
 		// loading
 		if(local)
 		{	folder = folder+File.separator+name;

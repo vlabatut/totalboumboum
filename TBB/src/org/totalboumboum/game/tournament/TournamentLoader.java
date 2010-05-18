@@ -52,11 +52,13 @@ public class TournamentLoader
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile,dataFile;
+		
 		// opening
 		dataFile = new File(folderPath+File.separator+FileNames.FILE_TOURNAMENT+FileNames.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_TOURNAMENT+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		AbstractTournament result = loadTournamentElement(folderPath,root);
+		
 		return result;
 	}
 	public static AbstractTournament loadTournamentFromName(String name) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
@@ -100,8 +102,9 @@ public class TournamentLoader
 			result.setAuthor(author);
 		}
 		
-		//
+		// name
 		result.setName(name);
+		
 		return result;
 	}
 	
