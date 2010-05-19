@@ -203,7 +203,8 @@ public class GuiTools
 				GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_PREVIOUS,
 				GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PREVIOUS,
 				GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS,
-				GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS
+				GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS,
+				GuiKeys.MENU_REPLAY_ROUND_BUTTON_BACK
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
@@ -215,12 +216,6 @@ public class GuiTools
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
-		{	String folder = baseFolder+GuiFileTools.FOLDER_PLAY+File.separator;
-			String[] uses = 
-			{	GuiKeys.GAME_ROUND_BUTTON_PLAY
-			};
-			loadButtonImages(buttonStates,folder,uses);
-		}
 		{	String folder = baseFolder+GuiFileTools.FOLDER_HOME+File.separator;
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT,
@@ -229,7 +224,15 @@ public class GuiTools
 				GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_QUIT,
 				GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_QUIT,
 				GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_QUIT,
-				GuiKeys.MENU_TOURNAMENT_BUTTON_QUIT
+				GuiKeys.MENU_TOURNAMENT_BUTTON_QUIT,
+				GuiKeys.MENU_REPLAY_ROUND_BUTTON_QUIT
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_PLAY+File.separator;
+			String[] uses = 
+			{	GuiKeys.GAME_ROUND_BUTTON_PLAY,
+				GuiKeys.MENU_REPLAY_ROUND_BUTTON_REPLAY
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}

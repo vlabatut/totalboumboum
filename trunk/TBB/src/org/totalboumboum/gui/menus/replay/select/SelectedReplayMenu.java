@@ -32,13 +32,15 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.replay.Replay;
+import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
+import org.totalboumboum.gui.menus.replay.round.RoundSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FilePaths;
@@ -124,11 +126,13 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 			}
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CONFIRM))
-		{	TournamentSplitPanel tournamentPanel = new TournamentSplitPanel(container.getMenuContainer(),getMenuParent());
+		{	RoundSplitPanel roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 			try
 			{	Replay selectedReplay = levelData.getSelectedReplay();
 				SingleTournament tournament = new SingleTournament(selectedReplay);
-				tournamentPanel.setTournament(tournament);
+				Match match = tournament.getCurrentMatch();
+				Round round = match.getCurrentRound();
+				roundPanel.setRound(round);
 			}
 			catch (IOException e1)
 			{	e1.printStackTrace();
@@ -154,7 +158,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 			catch (NoSuchFieldException e1)
 			{	e1.printStackTrace();
 			}
-			replaceWith(tournamentPanel);
+			replaceWith(roundPanel);
 	    }
 	} 
 	
