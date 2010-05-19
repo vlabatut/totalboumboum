@@ -244,8 +244,7 @@ buttonStatistics.setEnabled(false);
 
 	private void refreshButtons()
 	{	if(tournament!=null)
-		{	
-			if(tournament instanceof SingleTournament)
+		{	if(tournament instanceof SingleTournament)
 			{	if(tournament.isOver())
 				{	buttonMatch.setEnabled(false);
 					GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);

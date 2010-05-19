@@ -529,6 +529,13 @@
 					<text name="Slower" value="Ralentir" tooltip="Decrease speed" />
 				</group>
 			</group>
+			<group name="Round">
+				<group name="Button">
+					<text name="Quit" value="Quitter" tooltip="Revenir au menu principal" />
+					<text name="Replay" value="Voir" tooltip="Commencer à visionner la vidéo" />
+					<text name="Back" value="Retour" tooltip="Revenir à la sélection de la vidéo" />
+				</group>
+			</group>
 		</group>	
 
 <!-- TOURNAMENT MENU -->	

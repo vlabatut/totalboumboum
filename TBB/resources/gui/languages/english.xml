@@ -529,6 +529,13 @@
 					<text name="Slower" value="Slower" tooltip="Decrease speed" />
 				</group>
 			</group>
+			<group name="Round">
+				<group name="Button">
+					<text name="Quit" value="Quitr" tooltip="Back to the main menu" />
+					<text name="Replay" value="Replay" tooltip="Start replaying" />
+					<text name="Back" value="Back" tooltip="Back to replay selection" />
+				</group>
+			</group>
 		</group>	
 
 <!-- TOURNAMENT MENU -->	
