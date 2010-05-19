@@ -24,12 +24,14 @@ package org.totalboumboum.game.tournament.single;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.configuration.profile.ProfileLoader;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.instance.Instance;
@@ -60,7 +62,12 @@ public class SingleTournament extends AbstractTournament
 	{	replay.initReplaying();
 		setName("Replay");
 		setAuthor("Replay");
-		profiles.addAll(replay.getReadProfiles());
+		
+		// profiles
+		List<Profile> readProfiles = replay.getReadProfiles();
+		for(Profile p: readProfiles)
+			ProfileLoader.reloadPortraits(p);
+		profiles.addAll(readProfiles);
 
 		// one round match
 		Match match = new Match(this);
@@ -99,6 +106,8 @@ public class SingleTournament extends AbstractTournament
 		hollowLevel.setLevelInfo(levelInfo);
 		Instance instance = new Instance(levelInfo.getInstanceName());
 		hollowLevel.setInstance(instance);
+		HashMap<String,Integer> readItemCounts = replay.getReadItemCounts();
+		hollowLevel.setItemCounts(readItemCounts);
 		// no need for Players nor Zone objects here
 		round.setHollowLevel(hollowLevel);
 		
@@ -107,12 +116,22 @@ public class SingleTournament extends AbstractTournament
 	    progress();
 	    match = getCurrentMatch();
 	    match.progress();
+	    
+	    replayed = true;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// REPLAY			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean replayed = false;
+	
+	public boolean isReplayed()
+	{	return replayed;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	@Override
 	public void init()
 	{	begun = true;

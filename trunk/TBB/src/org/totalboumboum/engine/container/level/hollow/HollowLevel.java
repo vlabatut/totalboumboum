@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -101,6 +102,25 @@ public class HollowLevel implements Serializable
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Zone zone;
+	private HashMap<String,Integer> itemCounts = new HashMap<String, Integer>();
+	
+	public void setItemCounts(HashMap<String,Integer> itemCounts)
+	{	this.itemCounts = itemCounts;
+	}
+	
+	public void makeZone()
+	{	if(zone!=null)
+			zone.makeMatrix();		
+	}
+	
+	public HashMap<String,Integer> getItemCount()
+	{	HashMap<String,Integer> result;
+		if(zone!=null)
+			result = zone.getItemCount();
+		else
+			result = itemCounts;
+		return result;
+	}
 	
 	public Zone getZone()
     {	return zone;
@@ -287,6 +307,7 @@ if(bomb==null)
     	result.zone = zone;
     	result.players = players;
     	result.instance = new Instance(instance.getName());
+    	result.itemCounts = itemCounts;
     	return result;
     }
     
