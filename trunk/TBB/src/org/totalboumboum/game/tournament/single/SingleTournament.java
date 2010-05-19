@@ -89,6 +89,7 @@ public class SingleTournament extends AbstractTournament
 		// round
 		Round round = new Round(match);
 		match.setAuthor("Replay");
+	    round.setReplayed(true);
 		{	// notes
 			ArrayList<String> notes = new ArrayList<String>();
 			notes.add("auto-generated notes");
@@ -116,19 +117,8 @@ public class SingleTournament extends AbstractTournament
 	    progress();
 	    match = getCurrentMatch();
 	    match.progress();
-	    
-	    replayed = true;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// REPLAY			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean replayed = false;
-	
-	public boolean isReplayed()
-	{	return replayed;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
