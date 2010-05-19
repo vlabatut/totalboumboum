@@ -1202,16 +1202,6 @@ public class Launcher
 	 * 
 	 * - certaines abilities ont un effet graphique, comme twinkle ou flat
 	 *   faudra penser à un système pour transmettre les changement les concernant
-	 * 
-	 * les évènements de création ont été mis partout où nécessaires.
-	 * pareil pour les évènements de modification
-	 * éléments pour l'initialisation du round:
-	 * 		- LevelInfo: pour pouvoir charger l'instance et le thème nécessaires
-	 * 					 en plus c'est dispo direct car c'est pré-chargé
-	 * 		- liste des joueurs avec leur couleur et nom pour charger les sprites
-	 * 		- identité des joueurs controlés (ou pas ?)
-	 * puis tester l'enregistrement
-	 * puis implémenter le lecteur d'évènements
 	 */
 	
 	/**

@@ -81,7 +81,6 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.SystemControl;
-import org.totalboumboum.engine.loop.event.init.InitEvent;
 import org.totalboumboum.engine.loop.event.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.engine.player.PlayerLocation;
@@ -113,8 +112,6 @@ long start = System.currentTimeMillis();
 		Instance instance = hollowLevel.getInstance();
 		RoundVariables.instance = instance;
 		RoundVariables.loop = this;
-		InitEvent initEvent = new InitEvent(hollowLevel.getLevelInfo(),profiles);
-		RoundVariables.recordEvent(initEvent);
 
 		// load level & instance
 		hollowLevel.initLevel(this);

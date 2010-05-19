@@ -122,7 +122,7 @@ public class Round implements StatisticHolder, Serializable
 		{	loop = new ServerLoop(this);
 		
 			// recording
-			if(Configuration.getEngineConfiguration().isRecordRounds())
+			if(Configuration.getEngineConfiguration().isRecordRounds() && !replayed)
 				RoundVariables.replay = new Replay(this);
 		
 			Thread animator = new Thread(loop);
@@ -155,6 +155,19 @@ public class Round implements StatisticHolder, Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// REPLAY			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean replayed = false;
+	
+	public boolean isReplayed()
+	{	return replayed;
+	}
+
+	public void setReplayed(boolean replayed)
+	{	this.replayed = replayed;		
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// LOOP 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	transient private Loop loop = null;
@@ -170,7 +183,9 @@ public class Round implements StatisticHolder, Serializable
 		 // possibly not record simulated stats
 		if((!loop.isSimulated() || Configuration.getStatisticsConfiguration().getIncludeSimulations())
 		// possibly not record quick mode stats
-			&& (!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts()))
+			&& (!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts())
+		// don't record replay stats	
+			&& !replayed)
 			GameStatistics.update(stats);
 		
 		// possible end replay recording
