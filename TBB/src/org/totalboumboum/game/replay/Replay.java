@@ -36,6 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -83,7 +84,10 @@ public class Replay
 		// record round info
 		out.writeObject(profiles);
 		out.writeObject(levelInfo);
-		out.writeObject(round.getLimits());
+		Limits<RoundLimit> limits = round.getLimits();
+		out.writeObject(limits);
+		HashMap<String,Integer> itemsCounts = round.getHollowLevel().getItemCount();
+		out.writeObject(itemsCounts);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -187,6 +191,7 @@ public class Replay
 	private List<Profile> readProfiles = null;
 	private LevelInfo readLevelInfo = null;
 	private Limits<RoundLimit> readRoundLimits = null;
+	private HashMap<String,Integer> readItemCounts = null;
 	
 	/**
 	 * creates and open a file named after the current date and time
@@ -205,7 +210,8 @@ public class Replay
 		
 		readProfiles = (List<Profile>) in.readObject();
 		readLevelInfo = (LevelInfo) in.readObject();
-		readRoundLimits = (Limits<RoundLimit>) in.readObject();
+		readRoundLimits = (Limits<RoundLimit>) in.readObject();		
+		readItemCounts = (HashMap<String,Integer>) in.readObject();		
 	}
 	
 	public List<Profile> getReadProfiles()
@@ -220,6 +226,10 @@ public class Replay
 	{	return readRoundLimits;
 	}
 	
+	public HashMap<String,Integer> getReadItemCounts()
+	{	return readItemCounts;
+	}
+
 	/**
 	 * reads an event in the currently open stream.
 	 */

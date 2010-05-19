@@ -50,7 +50,7 @@ public class ReplayLoader
 		File schemaFile = new File(schemaFolder + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		loadReplayElement(root,result);
-		result.setFolder(individualFolder);
+		result.setFolder(folderName);
 		
 		// load preview image
 		String previewPath = individualFolder + File.separator + FileNames.FILE_PREVIEW + FileNames.EXTENSION_PNG;

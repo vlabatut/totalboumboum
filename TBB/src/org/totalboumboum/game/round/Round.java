@@ -101,7 +101,7 @@ public class Round implements StatisticHolder, Serializable
 			playersStatus.add(new Boolean(true));
 		
 		// level
-		hollowLevel.getZone().makeMatrix();
+		hollowLevel.makeZone();
 		
 		// current points
 		currentPoints = new float[getProfiles().size()];

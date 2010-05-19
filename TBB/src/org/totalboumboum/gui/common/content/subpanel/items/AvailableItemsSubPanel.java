@@ -31,14 +31,12 @@ import java.util.Map.Entry;
 import org.totalboumboum.engine.container.itemset.ItemsetPreview;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.preview.LevelPreview;
-import org.totalboumboum.engine.container.level.zone.Zone;
 import org.totalboumboum.engine.content.sprite.SpritePreview;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
-
 
 public class AvailableItemsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
@@ -81,8 +79,7 @@ public class AvailableItemsSubPanel extends TableSubPanel
 			NumberFormat nf = NumberFormat.getInstance();
 			nf.setMinimumFractionDigits(0);
 			ItemsetPreview itemsetPreview = levelPreview.getItemsetPreview();
-			Zone zone = hollowLevel.getZone();
-			HashMap<String,Integer> itemList = zone.getItemCount();
+			HashMap<String,Integer> itemList = hollowLevel.getItemCount();
 			Iterator<Entry<String,SpritePreview>> i = itemsetPreview.getItemPreviews().entrySet().iterator();
 			int line = 0;
 			int colGroup = 0;
