@@ -28,7 +28,7 @@ import java.awt.Font;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.instance.Instance;
-import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.ReplayEvent;
 import org.totalboumboum.game.replay.Replay;
 import org.totalboumboum.gui.tools.MessageDisplayer;
@@ -45,7 +45,7 @@ public class RoundVariables
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static Level level;
-	public static ServerLoop loop;
+	public static VisibleLoop loop;
 	
 	/////////////////////////////////////////////////////////////////
 	// SCALE			/////////////////////////////////////////////
