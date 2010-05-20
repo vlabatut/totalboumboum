@@ -26,7 +26,6 @@ import java.io.Serializable;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 
-
 public abstract class Loop implements Runnable, Serializable
 {	private static final long serialVersionUID = 1L;
 	

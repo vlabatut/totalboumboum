@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.control;
+package org.totalboumboum.engine.control.system;
 
 /*
  * Total Boum Boum
@@ -22,22 +22,19 @@ package org.totalboumboum.engine.control;
  */
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.HashMap;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.ServerLoop;
 
-
-public class SystemControl implements KeyListener
+public class ServerSytemControl extends SystemControl
 {	
 	private ServerLoop loop;
 	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
 	private HashMap<Integer,Boolean> keysPressed;
 	
-	public SystemControl(ServerLoop loop)
-	{	this.loop = loop;
-		keysPressed = new HashMap<Integer,Boolean>();
+	public ServerSytemControl(ServerLoop loop)
+	{	super(loop);
 	}
 
 	// handles termination and game-play keys
@@ -48,7 +45,6 @@ public class SystemControl implements KeyListener
 		{	keysPressed.put(keyCode, true);
 		
 			// termination keys
-			// allow a convenient exit from the full screen configuration
 			if ((keyCode == KeyEvent.VK_ESCAPE)
 //					|| (keyCode == KeyEvent.VK_END)
 //					|| ((keyCode == KeyEvent.VK_C) && e.isControlDown())
@@ -61,7 +57,7 @@ public class SystemControl implements KeyListener
 				//loop.rebirth();
 //			}
 
-			// debug : modifier la vitesse
+			// debug: change speed
 			else if(keyCode == KeyEvent.VK_PAGE_UP)
 			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()*2);
 			}
@@ -69,36 +65,36 @@ public class SystemControl implements KeyListener
 			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()/2);
 			}
 
-			// debug : grille
+			// debug: grid
 			else if(keyCode == KeyEvent.VK_F1)
 			{	loop.setShowGrid(!loop.getShowGrid());
 			}
-			// debug : tiles positions
+			// debug: tiles positions
 			else if(keyCode == KeyEvent.VK_F2)
 			{	loop.switchShowTilesPositions();
 			}
-			// debug : sprites positions
+			// debug: sprites positions
 			else if(keyCode == KeyEvent.VK_F3)
 			{	loop.switchShowSpritesPositions();
 			}
-			// debug : FPS/UPS
+			// debug: FPS/UPS
 			else if(keyCode == KeyEvent.VK_F4)
 			{	loop.switchShowFPS();
 			}
-			// debug : speed coeff
+			// debug: speed coeff
 			else if(keyCode == KeyEvent.VK_F5)
 			{	loop.switchShowSpeed();
 			}
-			// debug : time
+			// debug: time
 			else if(keyCode == KeyEvent.VK_F6)
 			{	loop.switchShowTime();
 			}
-			// debug : names
+			// debug: names
 			else if(keyCode == KeyEvent.VK_F7)
 			{	loop.switchShowNames();
 			}
 			
-			// debug : engine pause
+			// debug: engine pause
 			else if(keyCode == KeyEvent.VK_END)
 			{	loop.switchEnginePause();
 			}
@@ -106,7 +102,7 @@ public class SystemControl implements KeyListener
 			{	loop.switchEngineStep(true);
 			}
 			
-			// debug : AIs pause
+			// debug: AIs pause
 			else if(keyCode>=KeyEvent.VK_0 && keyCode<=KeyEvent.VK_9)
 			{	int index;
 				if(keyCode==KeyEvent.VK_0)
@@ -122,26 +118,6 @@ public class SystemControl implements KeyListener
 				else
 					loop.switchAiPause(index);
 			}
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e)
-	{	int keyCode = e.getKeyCode();
-		keysPressed.put(keyCode, false);		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0)
-	{	// NOTE a priori inutile ici
-	}
-	
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			loop = null;
 		}
 	}
 }

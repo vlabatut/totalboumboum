@@ -21,13 +21,45 @@ package org.totalboumboum.engine.loop;
  * 
  */
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
+import java.util.Map.Entry;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.container.itemset.Itemset;
+import org.totalboumboum.engine.container.level.hollow.HollowLevel;
+import org.totalboumboum.engine.container.level.instance.Instance;
+import org.totalboumboum.engine.container.level.players.Players;
+import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.action.SpecificAction;
+import org.totalboumboum.engine.content.feature.action.gather.SpecificGather;
+import org.totalboumboum.engine.content.feature.event.ActionEvent;
+import org.totalboumboum.engine.content.sprite.hero.Hero;
+import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
+import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
+import org.totalboumboum.engine.content.sprite.item.Item;
+import org.totalboumboum.engine.control.system.ReplaySytemControl;
+import org.totalboumboum.engine.control.system.SystemControl;
+import org.totalboumboum.engine.loop.event.sprite.SpriteCreationEvent;
+import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.round.Round;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticAction;
@@ -35,14 +67,131 @@ import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.PlayerStats;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
+import org.xml.sax.SAXException;
 
-public class ReplayLoop extends Loop
+public class ReplayLoop extends VisibleLoop
 {	private static final long serialVersionUID = 1L;
 	private boolean verbose = false;
 	
 	public ReplayLoop(Round round)
 	{	super(round);
 	}	
+
+	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
+	{	// control
+		systemControl = new ReplaySytemControl(this);
+long start = System.currentTimeMillis();
+
+		// init
+		List<Profile> profiles = round.getProfiles();
+		HollowLevel hollowLevel = round.getHollowLevel();
+		Instance instance = hollowLevel.getInstance();
+		RoundVariables.instance = instance;
+		RoundVariables.loop = this;
+
+		// load level & instance
+		hollowLevel.initLevel(this);
+		level = hollowLevel.getLevel();
+		RoundVariables.level = level;
+		instance.loadFiresetMap();
+		instance.loadExplosionset();
+		loadStepOver();
+		instance.loadBombsetMaps(round.getProfilesColors());
+		loadStepOver();
+		instance.loadItemset();
+		loadStepOver();
+		hollowLevel.loadTheme();
+		loadStepOver();
+		
+		// load players : common stuff
+		String baseFolder = FilePaths.getInstancesPath()+File.separator+RoundVariables.instance.getName()+File.separator+FileNames.FILE_HEROES;
+		HollowHeroFactory base = HollowHeroFactoryLoader.loadBase(baseFolder);
+//		loadStepOver();		
+		// load players : individual stuff
+		int remainingPlayers = profiles.size();
+		Players plyrs = hollowLevel.getPlayers();
+		PlayerLocation[] initialPositions = plyrs.getLocations().get(remainingPlayers);
+		if(round.getRandomLocation())
+		{	ArrayList<PlayerLocation> loc = new ArrayList<PlayerLocation>();
+			for(int i=0;i<initialPositions.length;i++)
+				loc.add(initialPositions[i]);
+			Calendar cal = new GregorianCalendar();
+			long seed = cal.getTimeInMillis();
+			Random random = new Random(seed);
+			Collections.shuffle(loc,random);
+			for(int i=0;i<initialPositions.length;i++)
+				initialPositions[i] = loc.get(i);
+		}
+		HashMap<String,Integer> items = plyrs.getInitialItems();
+		Itemset itemset = instance.getItemset();
+		Iterator<Profile> i = profiles.iterator();
+		int j=0;
+		while(i.hasNext())
+		{	// location
+			PlayerLocation pl = initialPositions[j];
+			Tile tile = level.getTile(pl.getLine(),pl.getCol());
+			
+			// sprite
+			Profile profile = i.next();
+			Player player = new Player(profile,base,tile);
+			hollowLevel.getInstance().initLinks();
+			players.add(player);
+			pauseAis.add(false);
+			showAiPaths.add(false);
+			showAiTileTexts.add(false);
+			showAiTileColors.add(false);
+			
+			// record/transmit event
+			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
+			RoundVariables.recordEvent(spriteEvent);
+			
+			// level
+			Hero hero = (Hero)player.getSprite();
+//			level.addHero(hero,pl.getLine(),pl.getCol());
+			
+			// initial items
+			for(Entry<String,Integer> entry: items.entrySet())
+			{	String name = entry.getKey();
+				int number = entry.getValue();
+				for(int k=0;k<number;k++)
+				{	// create item
+					Item item = itemset.makeItem(name,tile);
+					// add item
+					hero.addInitialItem(item);
+					// hide item
+					SpecificAction action = new SpecificGather(hero,item);
+					ActionEvent evt = new ActionEvent(action);
+					item.processEvent(evt);
+				}
+			}
+			
+			// ai
+			player.initAi();
+			
+			// next player...
+			loadStepOver();
+			j++;
+		}
+long end = System.currentTimeMillis();
+System.out.println("total load time: "+(end-start));
+		
+		// init logs
+		initLogs();
+		// init entries
+		initEntries();
+	}
+	
+	public void loadStepOver()
+	{	round.loadStepOver();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SYNCH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Lock loadLock = new ReentrantLock();
+	private Condition cond = loadLock.newCondition();
 
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
