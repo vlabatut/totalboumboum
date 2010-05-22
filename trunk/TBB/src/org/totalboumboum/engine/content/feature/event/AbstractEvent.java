@@ -21,7 +21,6 @@ package org.totalboumboum.engine.content.feature.event;
  * 
  */
 
-
 public class AbstractEvent
 {
 

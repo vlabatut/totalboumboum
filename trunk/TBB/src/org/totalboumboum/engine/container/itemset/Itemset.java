@@ -32,7 +32,7 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
-import org.totalboumboum.engine.loop.event.sprite.SpriteCreationEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 

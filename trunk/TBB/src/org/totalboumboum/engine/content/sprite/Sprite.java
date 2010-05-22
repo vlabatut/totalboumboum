@@ -64,7 +64,7 @@ import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.ControlCode;
-import org.totalboumboum.engine.loop.event.sprite.SpriteChangeAnimeEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticEvent;

@@ -26,20 +26,25 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
+import java.util.List;
 
-import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.player.Player;
 
-public class DisplayEnginePause implements Display
+public class DisplayAisPause implements Display
 {
-	public DisplayEnginePause(VisibleLoop loop)
+	public DisplayAisPause(ServerLoop loop)
 	{	this.loop = loop;
+		this.players = loop.getPlayers();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private VisibleLoop loop;
+	private ServerLoop loop;
+	private List<Player> players;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
@@ -50,14 +55,14 @@ public class DisplayEnginePause implements Display
 	}
 	
 	public boolean getShow()
-	{	return loop.getEnginePause();
+	{	return true;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_DISPLAY_ENGINE_PAUSE;
+	{	return ControlEvent.SWITCH_DISPLAY_AIS_PAUSE;
 		
 	}
 
@@ -66,16 +71,20 @@ public class DisplayEnginePause implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	if(getShow())
-		{	g.setColor(Color.MAGENTA);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Engine paused";
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(70+box.getHeight()/2);
-			g.drawString(text, x, y);
+	{	g.setColor(Color.MAGENTA);
+		Font font = new Font("Dialog", Font.BOLD, 12);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		String text = "AI Paused";
+		Rectangle2D box = metrics.getStringBounds(text, g);
+		for(int i=0;i<players.size();i++)
+		{	Player player = players.get(i);
+			if(loop.getAiPause(i) && !player.isOut())
+			{	Sprite s = player.getSprite();
+				int x = (int)Math.round(s.getCurrentPosX()-box.getWidth()/2);
+				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
+				g.drawString(text, x, y);
+			}
 		}
 	}
 }

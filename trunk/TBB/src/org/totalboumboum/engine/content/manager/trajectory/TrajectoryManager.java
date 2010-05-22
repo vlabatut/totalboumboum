@@ -32,7 +32,7 @@ import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.loop.event.sprite.SpriteChangePositionEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
