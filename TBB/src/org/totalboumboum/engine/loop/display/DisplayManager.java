@@ -23,26 +23,38 @@ package org.totalboumboum.engine.loop.display;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import org.totalboumboum.engine.loop.event.control.ControlEvent;
 
 public class DisplayManager
 {
-	
-	
+	/////////////////////////////////////////////////////////////////
+	// EVENT 			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void provessEvent(ControlEvent event)
+	{	Display d = displaysMap.get(event.getName());
+		if(d!=null)
+			d.switchShow();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// DISPLAYS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	List<Display> displays = new ArrayList<Display>();
+	private List<Display> displaysList = new ArrayList<Display>();
+	private HashMap<String,Display> displaysMap = new HashMap<String, Display>();
 	
 	public void addDisplay(Display d)
-	{	displays.add(d);
+	{	displaysList.add(d);
+		displaysMap.put(d.getEventName(),d);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void draw(Graphics g)
-	{	for(Display d: displays)
+	{	for(Display d: displaysList)
 			d.draw(g);		
 	}
 }

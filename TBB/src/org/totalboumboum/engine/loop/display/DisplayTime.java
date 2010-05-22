@@ -28,6 +28,7 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
@@ -54,6 +55,14 @@ public class DisplayTime implements Display
 	
 	public synchronized int getShow()
 	{	return show;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EVENT NAME		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String getEventName()
+	{	return ControlEvent.SWITCH_DISPLAY_TIME;
+		
 	}
 
 	/////////////////////////////////////////////////////////////////
