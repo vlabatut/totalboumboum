@@ -41,9 +41,8 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.ServerLoop;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
-
 
 public abstract class AiManager extends AbstractAiManager<Integer>
 {	private boolean debug = false;
@@ -91,8 +90,8 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	@Override
 	public void updatePercepts()
 	{	// compute all the percepts
-    	Player player = getPlayer(); 
-    	ServerLoop loop = RoundVariables.loop;
+    	AbstractPlayer player = getPlayer(); 
+    	ServerLoop loop = (ServerLoop)RoundVariables.loop;
     	Tile[][] matrix = RoundVariables.level.getMatrix();
     	Sprite sprite = player.getSprite();
     	
@@ -252,10 +251,10 @@ public abstract class AiManager extends AbstractAiManager<Integer>
     	playersStates = new Vector<Boolean>();
     	firePowers = new Vector<Integer>();
     	bombCounts = new Vector<Integer>();
-		ArrayList<Player> plyrs = loop.getPlayers();
-		Iterator<Player> i = plyrs.iterator();
+		List<AbstractPlayer> plyrs = loop.getPlayers();
+		Iterator<AbstractPlayer> i = plyrs.iterator();
 		while(i.hasNext())
-		{	Player tempPlayer = i.next();
+		{	AbstractPlayer tempPlayer = i.next();
 			// le joueur représenté par cet objet ne doit pas apparaitre dans cette liste
 			if(tempPlayer!=player)
 			{	// position

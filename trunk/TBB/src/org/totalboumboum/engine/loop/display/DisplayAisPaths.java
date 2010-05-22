@@ -37,7 +37,8 @@ import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.loop.Loop;
 import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
+import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
@@ -51,7 +52,7 @@ public class DisplayAisPaths implements Display
 	/////////////////////////////////////////////////////////////////
 	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<Player> players;
+	private List<AbstractPlayer> players;
 	private Level level;
 	
 	/////////////////////////////////////////////////////////////////
@@ -64,7 +65,7 @@ public class DisplayAisPaths implements Display
 	{	int index = event.getIndex();
 		if(index<show.size())
 		{	boolean temp = show.get(index);
-			if(players.get(index).getArtificialIntelligence()!=null)
+			if(players.get(index) instanceof AiPlayer)
 				temp = !temp;
 			show.set(index,temp);
 		}
@@ -89,9 +90,9 @@ public class DisplayAisPaths implements Display
 	{	Graphics2D g2 = (Graphics2D)g;
 		double tileSize = RoundVariables.scaledTileDimension;
 		for(int i=0;i<players.size();i++)
-		{	Player player = players.get(i);
-			if(player.hasAi())
-			{	AbstractAiManager<?> aiMgr = player.getArtificialIntelligence();
+		{	AbstractPlayer player = players.get(i);
+			if(player instanceof AiPlayer)
+			{	AbstractAiManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
 				if(getShow(i))
 				{	List<List<Tile>> paths = aiMgr.getPaths();
 					List<Color> colors = aiMgr.getPathColors();

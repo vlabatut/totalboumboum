@@ -51,7 +51,9 @@ import org.totalboumboum.engine.control.system.SystemControl;
 import org.totalboumboum.engine.loop.display.DisplayManager;
 import org.totalboumboum.engine.loop.display.DisplayMessage;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
+import org.totalboumboum.engine.player.AiPlayer;
+import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
@@ -78,9 +80,9 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected List<Player> players = new ArrayList<Player>();
+	protected List<AbstractPlayer> players = new ArrayList<AbstractPlayer>();
 	
-	public List<Player> getPlayers()
+	public List<AbstractPlayer> getPlayers()
 	{	return players;
 	}
 
@@ -401,14 +403,18 @@ public abstract class VisibleLoop extends Loop
 	public void setPanel(LoopRenderPanel panel)
 	{	loadLock.lock();
 		this.panel = panel;
+		
 		// system listener
 		panel.addKeyListener(systemControl);
+		
 		// players listeners
-		Iterator<Player> i = players.iterator();
+		Iterator<AbstractPlayer> i = players.iterator();
 		while(i.hasNext())
-		{	Player player = i.next();
-			panel.addKeyListener(player.getSpriteControl());
+		{	AbstractPlayer player = i.next();
+			if(player instanceof ControlledPlayer)
+				panel.addKeyListener(((ControlledPlayer)player).getSpriteControl());
 		}
+		
 		// waking the process thread up
 		cond.signal();
 		loadLock.unlock();	
@@ -421,7 +427,7 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// LOOP END		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void playerOut(Player player)
+	public void playerOut(AbstractPlayer player)
 	{	int index = players.indexOf(player);
 		round.playerOut(index);
 		panel.playerOut(index);	
@@ -452,12 +458,12 @@ public abstract class VisibleLoop extends Loop
 				printWriter.println("Start: "+dateFormat.format(startDate));
 				// players
 				printWriter.println("Players: ");
-				for(Player player: players)
+				for(AbstractPlayer player: players)
 				{	int id = player.getId();
 					String name = player.getName();
 					String color = player.getColor().toString();
 					String type = "Human player";
-					if(player.hasAi())
+					if(player instanceof AiPlayer)
 						type = "AI player";
 					printWriter.println("\t("+id+") "+name+" ["+color+"] - "+type);
 				}
@@ -662,10 +668,11 @@ public abstract class VisibleLoop extends Loop
 			panel.removeKeyListener(systemControl);
 			
 			// players
-			Iterator<Player> i = players.iterator();
+			Iterator<AbstractPlayer> i = players.iterator();
 			while(i.hasNext())
-			{	Player player = i.next();
-				panel.removeKeyListener(player.getSpriteControl());
+			{	AbstractPlayer player = i.next();
+				if(player instanceof ControlledPlayer)
+					panel.removeKeyListener(((ControlledPlayer)player).getSpriteControl());
 				player.finish();
 				i.remove();
 			}

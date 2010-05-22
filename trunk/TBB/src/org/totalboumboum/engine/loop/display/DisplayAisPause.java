@@ -31,7 +31,7 @@ import java.util.List;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
 
 public class DisplayAisPause implements Display
 {
@@ -44,7 +44,7 @@ public class DisplayAisPause implements Display
 	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private ServerLoop loop;
-	private List<Player> players;
+	private List<AbstractPlayer> players;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////

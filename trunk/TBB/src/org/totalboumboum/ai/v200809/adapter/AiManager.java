@@ -28,7 +28,7 @@ import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.loop.ServerLoop;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
 
@@ -79,9 +79,9 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public void init(String instance, Player player)
+	public void init(String instance, AbstractPlayer player)
 	{	super.init(instance,player);
-		loop = RoundVariables.loop;
+		loop = (ServerLoop)RoundVariables.loop;
 		level = RoundVariables.level;
 		percepts = new AiZone(level,player);
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());

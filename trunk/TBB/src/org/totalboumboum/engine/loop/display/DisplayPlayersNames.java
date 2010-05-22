@@ -31,7 +31,7 @@ import java.util.List;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
 
 public class DisplayPlayersNames implements Display
 {
@@ -42,7 +42,7 @@ public class DisplayPlayersNames implements Display
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<Player> players;	
+	private List<AbstractPlayer> players;	
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
@@ -76,7 +76,7 @@ public class DisplayPlayersNames implements Display
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			for(int i=0;i<players.size();i++)
-			{	Player player = players.get(i);
+			{	AbstractPlayer player = players.get(i);
 				if(!player.isOut())
 				{	String text = "["+(i+1)+"] "+player.getName();
 					Sprite s = player.getSprite();

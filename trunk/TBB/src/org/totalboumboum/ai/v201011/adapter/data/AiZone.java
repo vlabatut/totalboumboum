@@ -39,7 +39,7 @@ import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.ServerLoop;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
@@ -72,7 +72,7 @@ public class AiZone
 	 * @param level	niveau à représenter
 	 * @param player	joueur dont le point de vue est à adopter
 	 */
-	public AiZone(Level level, Player player)
+	public AiZone(Level level, AbstractPlayer player)
 	{	this.level = level;
 		this.player = player;
 		initMatrix();
@@ -159,12 +159,12 @@ public class AiZone
 	 * à l'action en cours, telles que l'évolution du classement des joueurs
 	 */
 	private void updateMeta()
-	{	List<Player> players = level.getLoop().getPlayers();
+	{	List<AbstractPlayer> players = level.getLoop().getPlayers();
 		// stats
 		statsRanks.clear();
 		RankingService rankingService = GameStatistics.getRankingService();
 		for(int i=0;i<players.size();i++)
-		{	Player player = players.get(i);
+		{	AbstractPlayer player = players.get(i);
 			Hero hero = (Hero)player.getSprite();
 			AiHero aiHero = heroMap.get(hero);
 			int playerId = player.getId();
@@ -239,7 +239,7 @@ public class AiZone
 	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** joueur contrôlé par l'IA */
-	private Player player;
+	private AbstractPlayer player;
 	
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////

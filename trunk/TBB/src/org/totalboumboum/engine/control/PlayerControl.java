@@ -27,20 +27,19 @@ import java.util.HashMap;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
-
 
 public class PlayerControl implements KeyListener
 {	
-	public PlayerControl(Player player)
+	public PlayerControl(ControlledPlayer player)
 	{	this.player = player;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Player player;
+	private ControlledPlayer player;
 	
 	public Sprite getSprite()
 	{	return player.getSprite();

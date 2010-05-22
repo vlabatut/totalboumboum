@@ -37,9 +37,9 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public abstract class Player
+public abstract class AbstractPlayer
 {	
-	public Player(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public AbstractPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.profile = profile;
 		
 		// sprite

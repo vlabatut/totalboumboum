@@ -56,7 +56,7 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.system.ReplaySytemControl;
 import org.totalboumboum.engine.control.system.SystemControl;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
@@ -135,7 +135,7 @@ long start = System.currentTimeMillis();
 			
 			// sprite
 			Profile profile = i.next();
-			Player player = new Player(profile,base,tile);
+			AbstractPlayer player = new AbstractPlayer(profile,base,tile);
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
 			pauseAis.add(false);

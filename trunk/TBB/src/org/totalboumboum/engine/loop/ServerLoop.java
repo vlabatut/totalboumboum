@@ -77,7 +77,8 @@ import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
+import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
@@ -148,7 +149,7 @@ long start = System.currentTimeMillis();
 			
 			// sprite
 			Profile profile = i.next();
-			Player player = new Player(profile,base,tile);
+			AbstractPlayer player = new AbstractPlayer(profile,base,tile);
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
 			pauseAis.add(false);
@@ -176,9 +177,6 @@ long start = System.currentTimeMillis();
 					item.processEvent(evt);
 				}
 			}
-			
-			// ai
-			player.initAi();
 			
 			// next player...
 			loadStepOver();
@@ -214,12 +212,12 @@ System.out.println("total load time: "+(end-start));
 				printWriter.println("Start: "+dateFormat.format(startDate));
 				// players
 				printWriter.println("Players: ");
-				for(Player player: players)
+				for(AbstractPlayer player: players)
 				{	int id = player.getId();
 					String name = player.getName();
 					String color = player.getColor().toString();
 					String type = "Human player";
-					if(player.hasAi())
+					if(player instanceof AiPlayer)
 						type = "AI player";
 					printWriter.println("\t("+id+") "+name+" ["+color+"] - "+type);
 				}
@@ -262,7 +260,7 @@ System.out.println("total load time: "+(end-start));
 		{	boolean pause = pauseAis.get(index);
 			if(pause)
 				pause = false;
-			else if(players.get(index).getArtificialIntelligence()!=null)
+			else if(players.get(index) instanceof AiPlayer)
 				pause = true;
 			pauseAis.set(index,pause);
 		}
@@ -298,10 +296,10 @@ System.out.println("total load time: "+(end-start));
 				if(aiTime >= Configuration.getAisConfiguration().getAiPeriod())
 				{	aiTime = 0;
 					for(int i=0;i<players.size();i++)
-					{	Player player = players.get(i);
+					{	AbstractPlayer player = players.get(i);
 						boolean aiPause = getAiPause(i);
-						if(!player.isOut())
-							player.update(aiPause);
+						if(!player.isOut() && player instanceof AiPlayer)
+							((AiPlayer)player).updateAi(aiPause);
 					}
 				}
 			}
@@ -371,7 +369,7 @@ System.out.println("total load time: "+(end-start));
 
 	public void initCelebrationDuration()
 	{	if(players.size()>0)
-		{	Player player = players.get(0);
+		{	AbstractPlayer player = players.get(0);
 			Sprite sprite = player.getSprite();
 			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
 			celebrationDuration = ability.getStrength();
@@ -381,14 +379,14 @@ System.out.println("total load time: "+(end-start));
 	}
 	
 	public void reportVictory(int index)
-	{	Player player = players.get(index);
+	{	AbstractPlayer player = players.get(index);
 		Sprite sprite = player.getSprite();
 		EngineEvent event = new EngineEvent(EngineEvent.CELEBRATION_VICTORY);
 		sprite.processEvent(event);
 	}
 	
 	public void reportDefeat(int index)
-	{	Player player = players.get(index);
+	{	AbstractPlayer player = players.get(index);
 		Sprite sprite = player.getSprite();
 		EngineEvent event = new EngineEvent(EngineEvent.CELEBRATION_DEFEAT);
 		sprite.processEvent(event);

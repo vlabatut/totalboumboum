@@ -39,7 +39,7 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
 
 
 /**
@@ -61,7 +61,7 @@ public class AiZone
 {	/** niveau représenté par cette classe */
 	private Level level;
 	/** joueur contrôlé par l'IA */
-	private Player player;
+	private AbstractPlayer player;
 	
 	/**
 	 * construit une représentation du niveau passé en paramètre,
@@ -69,7 +69,7 @@ public class AiZone
 	 * @param level	niveau à représenter
 	 * @param player	joueur dont le point de vue est à adopter
 	 */
-	AiZone(Level level, Player player)
+	AiZone(Level level, AbstractPlayer player)
 	{	this.level = level;
 		this.player = player;
 		initMatrix();
