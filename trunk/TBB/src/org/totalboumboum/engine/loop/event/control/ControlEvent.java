@@ -26,7 +26,6 @@ public class ControlEvent
 	
 	public final static String REQUIRE_ENGINE_STEP = "REQUIRE_ENGINE_STEP";
 	public final static String REQUIRE_NEXT_MESSAGE = "REQUIRE_NEXT_MESSAGE";
-	
 	public final static String SWITCH_AIS_PAUSE = "SWITCH_AIS_PAUSE";
 	public final static String SWITCH_DISPLAY_AIS_COLORS = "SWITCH_DISPLAY_AIS_COLORS";
 	public final static String SWITCH_DISPLAY_AIS_PATHS = "SWITCH_DISPLAY_AIS_PATHS";
@@ -35,10 +34,14 @@ public class ControlEvent
 	public final static String SWITCH_DISPLAY_GRID = "SWITCH_DISPLAY_GRID";
 	public final static String SWITCH_DISPLAY_PLAYERS_NAMES = "SWITCH_DISPLAY_PLAYERS_NAMES";
 	public final static String SWITCH_DISPLAY_SPEED = "SWITCH_DISPLAY_SPEED";
+	public final static String SWITCH_DISPLAY_SPRITES_POSITIONS = "SWITCH_DISPLAY_SPRITES_POSITIONS";
 	public final static String SWITCH_DISPLAY_TILES_POSITIONS = "SWITCH_DISPLAY_TILES_POSITIONS";
 	public final static String SWITCH_DISPLAY_TIME = "SWITCH_DISPLAY_TIME";
 	public final static String SWITCH_ENGINE_PAUSE = "SWITCH_ENGINE_PAUSE";
 	
+	public final static int REGULAR = 0;
+	public final static int MODE = 1;
+
 	public ControlEvent(String name)
 	{	this.name = name;
 	}

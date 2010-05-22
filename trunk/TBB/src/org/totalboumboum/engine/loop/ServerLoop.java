@@ -68,9 +68,12 @@ import org.totalboumboum.engine.loop.display.DisplayAisPause;
 import org.totalboumboum.engine.loop.display.DisplayAisTexts;
 import org.totalboumboum.engine.loop.display.DisplayEnginePause;
 import org.totalboumboum.engine.loop.display.DisplayFPS;
+import org.totalboumboum.engine.loop.display.DisplayGrid;
 import org.totalboumboum.engine.loop.display.DisplayMessage;
 import org.totalboumboum.engine.loop.display.DisplayPlayersNames;
 import org.totalboumboum.engine.loop.display.DisplaySpeed;
+import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
+import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
@@ -313,6 +316,18 @@ System.out.println("total load time: "+(end-start));
 
 		// pre-round messages (ready-steady-go)
 		display = new DisplayMessage();
+		displayManager.addDisplay(display);
+
+		// grid positions
+		display = new DisplayGrid(this);
+		displayManager.addDisplay(display);
+
+		// tiles positions
+		display = new DisplayTilesPositions(this);
+		displayManager.addDisplay(display);
+
+		// sprites positions
+		display = new DisplaySpritesPositions(this);
 		displayManager.addDisplay(display);
 
 		// AIs paths

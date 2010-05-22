@@ -73,12 +73,21 @@ public class ServerSytemControl extends SystemControl
 			}
 			// debug: tiles positions
 			else if(keyCode == KeyEvent.VK_F2)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS);
+			{	ControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,ControlEvent.MODE);
+				else
+					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,ControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
 			// debug: sprites positions
 			else if(keyCode == KeyEvent.VK_F3)
-			{	loop.switchShowSpritesPositions();//TODO
+			{	ControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,ControlEvent.MODE);
+				else
+					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,ControlEvent.REGULAR);
+				loop.processEvent(controlEvent);
 			}
 			// debug: FPS/UPS
 			else if(keyCode == KeyEvent.VK_F4)
