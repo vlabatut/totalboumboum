@@ -22,16 +22,10 @@ package org.totalboumboum.engine.player;
  */
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.ai.AbstractAiManager;
-import org.totalboumboum.ai.AiLoader;
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -39,27 +33,15 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.HeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
-import org.totalboumboum.engine.control.PlayerControl;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class Player
+public abstract class Player
 {	
-	private Profile profile;
-	/** sprite */
-	private Sprite sprite;
-	/** artificial intelligence */
-	private AbstractAiManager<?> ai = null;
-	/** control */
-	private PlayerControl spriteControl;
-	/** current color */
-	private PredefinedColor color;
-	/** current controls */
-	private ControlSettings controlSettings;
-	
 	public Player(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.profile = profile;
+		
 		// sprite
 		color = this.profile.getSpriteColor();
 		String folder = FilePaths.getHeroesPath()+File.separator+this.profile.getSpritePack();
@@ -67,88 +49,66 @@ public class Player
 		HeroFactory tempHeroFactory = HollowHeroFactoryLoader.completeHeroFactory(folder,color,base);
 		tempHeroFactory.setInstance(RoundVariables.instance);
 		sprite = tempHeroFactory.makeSprite(tile);
-//		tile.addSprite(sprite);
 		RoundVariables.level.insertSpriteTile(sprite);
-		// control settings
-		int indexCtrSet = profile.getControlSettingsIndex();
-		controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(indexCtrSet);
-		if(controlSettings == null)
-			controlSettings = new ControlSettings();
-		sprite.setControlSettings(controlSettings);
-		//
+		
 		sprite.setPlayer(this);
-		spriteControl = new PlayerControl(this);
 	}
 
-	public void initAi() throws FileNotFoundException, IllegalArgumentException, SecurityException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
-	{	// artificial intelligence
-    	if(this.profile.getAiName() != null)
-    	{	ai = AiLoader.loadAi(profile.getAiName(), profile.getAiPackname());
-    		ai.init(RoundVariables.instance.getName(),this);
-    	}
-	}
+	/////////////////////////////////////////////////////////////////
+	// PROFILE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Profile profile;
 	
-	public void update(boolean aisPause)
-	{	if(hasAi())
-			ai.update(aisPause);
-	}
+	/////////////////////////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Sprite sprite;
 	
-	public int getId()
-	{	return profile.getId();
-	}
-	public String getName()
-	{	return profile.getName();
-	}
-	public ControlSettings getControlSettings()
-	{	return controlSettings;
-	}
-	public PlayerControl getSpriteControl()
-	{	return spriteControl;
-	}
-
-	public AbstractAiManager<?> getArtificialIntelligence()
-	{	return ai;
-	}
-	
-	public boolean hasAi()
-	{	return ai!=null;	
-	}
-
 	public Sprite getSprite()
 	{	return sprite;
 	}
+
+	public int getId()
+	{	return profile.getId();
+	}
+
+	public String getName()
+	{	return profile.getName();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COLOR			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** current color */
+	protected PredefinedColor color;
+	
 	public PredefinedColor getColor()
 	{	return color;
 	}
 	
-	private boolean playerOut = false;
+	/////////////////////////////////////////////////////////////////
+	// OUT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean playerOut = false;
 	
 	public void setOut()
 	{	playerOut = true;
 		RoundVariables.loop.playerOut(this);	
 	}
+	
 	public boolean isOut()
 	{	return playerOut;	
 	}
 	
-	private boolean finished = false;
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean finished = false;
 	
 	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// control
-			spriteControl.finish();
-			spriteControl = null;
-			// ai
-			if(ai!=null)
-			{	ai.finish();
-				ai = null;
-			}
-			// misc
-			controlSettings = null;
-			color = null;
-			profile = null;
-			sprite = null;
-		}
+	{	finished = true;
+		color = null;
+		profile = null;
+		sprite = null;
 	}
 }
