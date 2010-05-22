@@ -65,7 +65,7 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 
@@ -826,13 +826,13 @@ public abstract class Sprite
 	/////////////////////////////////////////////////////////////////
 	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Player player;
+	private AbstractPlayer player;
 
-	public Player getPlayer()
+	public AbstractPlayer getPlayer()
 	{	return player;
 	}
 	
-	public void setPlayer(Player player)
+	public void setPlayer(AbstractPlayer player)
 	{	this.player = player;
 	}
 	

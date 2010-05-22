@@ -25,54 +25,14 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
-import org.totalboumboum.engine.control.PlayerControl;
 import org.xml.sax.SAXException;
 
-public class HumanPlayer extends Player
+public class HumanPlayer extends ControlledPlayer
 {	
 	public HumanPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
-		
-		// set controls
-		int indexCtrSet = profile.getControlSettingsIndex();
-		controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(indexCtrSet);
-		if(controlSettings == null)
-			controlSettings = new ControlSettings();
-		sprite.setControlSettings(controlSettings);
-		spriteControl = new PlayerControl(this);
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CONTROLS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** control */
-	private PlayerControl spriteControl;
-	/** current controls */
-	private ControlSettings controlSettings;
-
-	public ControlSettings getControlSettings()
-	{	return controlSettings;
-	}
-	public PlayerControl getSpriteControl()
-	{	return spriteControl;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			
-			// control
-			spriteControl.finish();
-			spriteControl = null;
-			controlSettings = null;
-		}
 	}
 }

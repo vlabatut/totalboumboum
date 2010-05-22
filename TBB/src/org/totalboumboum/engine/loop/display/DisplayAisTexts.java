@@ -34,7 +34,8 @@ import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
+import org.totalboumboum.engine.player.AiPlayer;
 
 public class DisplayAisTexts implements Display
 {
@@ -46,7 +47,7 @@ public class DisplayAisTexts implements Display
 	/////////////////////////////////////////////////////////////////
 	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<Player> players;
+	private List<AbstractPlayer> players;
 	private Level level;
 	
 	/////////////////////////////////////////////////////////////////
@@ -59,7 +60,7 @@ public class DisplayAisTexts implements Display
 	{	int index = event.getIndex();
 		if(index<show.size())
 		{	boolean temp = show.get(index);
-			if(players.get(index).getArtificialIntelligence()!=null)
+			if(players.get(index) instanceof AiPlayer)
 				temp = !temp;
 			show.set(index,temp);
 		}
@@ -82,9 +83,9 @@ public class DisplayAisTexts implements Display
 	@Override
 	public void draw(Graphics g)
 	{	for(int i=0;i<players.size();i++)
-		{	Player player = players.get(i);
-			if(player.hasAi())
-			{	AbstractAiManager<?> aiMgr = player.getArtificialIntelligence();
+		{	AbstractPlayer player = players.get(i);
+			if(player instanceof AiPlayer)
+			{	AbstractAiManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
 				// tile texts
 				if(getShow(i))
 				{	g.setColor(Color.MAGENTA);

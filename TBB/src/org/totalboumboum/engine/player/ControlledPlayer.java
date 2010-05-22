@@ -22,44 +22,46 @@ package org.totalboumboum.engine.player;
  */
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.ai.AbstractAiManager;
-import org.totalboumboum.ai.AiLoader;
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
-import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.engine.control.PlayerControl;
 import org.xml.sax.SAXException;
 
-public class AiPlayer extends ControlledPlayer
+public abstract class ControlledPlayer extends AbstractPlayer
 {	
-	public AiPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
+	public ControlledPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
-
-		// artificial intelligence
-//		if(this.profile.getAiName() != null)
-    	{	ai = AiLoader.loadAi(profile.getAiName(), profile.getAiPackname());
-    		ai.init(RoundVariables.instance.getName(),this);
-    	}
+		
+		// set controls
+		int indexCtrSet = profile.getControlSettingsIndex();
+		controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(indexCtrSet);
+		if(controlSettings == null)
+			controlSettings = new ControlSettings();
+		sprite.setControlSettings(controlSettings);
+		spriteControl = new PlayerControl(this);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// AI				/////////////////////////////////////////////
+	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** artificial intelligence */
-	private AbstractAiManager<?> ai = null;
-	
-	public void updateAi(boolean aisPause)
-	{	ai.update(aisPause);
-	}
-	
-	public AbstractAiManager<?> getArtificialIntelligence()
-	{	return ai;
-	}
+	/** control */
+	private PlayerControl spriteControl;
+	/** current controls */
+	private ControlSettings controlSettings;
 
+	public ControlSettings getControlSettings()
+	{	return controlSettings;
+	}
+	public PlayerControl getSpriteControl()
+	{	return spriteControl;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -67,11 +69,10 @@ public class AiPlayer extends ControlledPlayer
 	{	if(!finished)
 		{	super.finish();
 			
-			// ai
-			if(ai!=null)
-			{	ai.finish();
-				ai = null;
-			}
+			// control
+			spriteControl.finish();
+			spriteControl = null;
+			controlSettings = null;
 		}
 	}
 }

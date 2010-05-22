@@ -49,7 +49,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticAction;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
@@ -122,7 +122,7 @@ public class HeroEventManager extends EventManager
 					sprite.modifyUse(stateAbility,-1);
 				}
 				else
-				{	Player player = sprite.getPlayer(); 
+				{	AbstractPlayer player = sprite.getPlayer(); 
 					if(player!=null)
 						player.setOut();
 				}

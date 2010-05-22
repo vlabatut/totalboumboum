@@ -39,7 +39,7 @@ import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
-import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
 
@@ -229,7 +229,7 @@ public abstract class AbstractAiManager<V>
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
     /** le joueur contrôlé par l'IA */
-    private Player player;
+    private AbstractPlayer player;
    
     /**
      * initialise le gestionnaire d'IA
@@ -237,10 +237,11 @@ public abstract class AbstractAiManager<V>
      * @param instance	instance utilisée dans ce round
      * @param player	joueur contrôlé par l'IA
      */
-    public void init(String instance, Player player)
+    public void init(String instance, AbstractPlayer player)
 	{	// input
     	this.player = player;
-		// output
+		
+    	// output
 		Level level = RoundVariables.level;
 		int height = level.getGlobalHeight();
 		int width = level.getGlobalWidth();
@@ -253,7 +254,7 @@ public abstract class AbstractAiManager<V>
 	 * 
 	 * @return	un objet représentant le joueur contrôlé par l'IA
 	 */
-    public Player getPlayer()
+    public AbstractPlayer getPlayer()
 	{	return player;		
 	}
 	

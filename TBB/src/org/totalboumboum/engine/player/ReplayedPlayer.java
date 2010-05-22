@@ -30,7 +30,7 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.xml.sax.SAXException;
 
-public class ReplayedPlayer extends Player
+public class ReplayedPlayer extends AbstractPlayer
 {	
 	public ReplayedPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
