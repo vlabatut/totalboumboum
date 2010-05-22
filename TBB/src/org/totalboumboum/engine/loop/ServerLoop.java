@@ -76,7 +76,7 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.system.ServerSytemControl;
-import org.totalboumboum.engine.loop.event.sprite.SpriteCreationEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.round.Round;
@@ -435,36 +435,6 @@ System.out.println("total load time: "+(end-start));
 	 *  - display à mettre dans level ? après tout, y a déjà grille et cie.
 	 *    changer tout ça en display, qui gèreraient leurs évts clavier d'une façon ou d'une autre ?
 	 */
-	
-	private void drawEnginePause(Graphics g)
-	{	g.setColor(Color.MAGENTA);
-		Font font = new Font("Dialog", Font.PLAIN, 18);
-		g.setFont(font);
-		FontMetrics metrics = g.getFontMetrics(font);
-		String text = "Engine paused";
-		Rectangle2D box = metrics.getStringBounds(text, g);
-		int x = 10;
-		int y = (int)Math.round(70+box.getHeight()/2);
-		g.drawString(text, x, y);
-	}
-
-	private void drawAisPause(Graphics g)
-	{	g.setColor(Color.MAGENTA);
-		Font font = new Font("Dialog", Font.BOLD, 12);
-		g.setFont(font);
-		FontMetrics metrics = g.getFontMetrics(font);
-		String text = "AI Paused";
-		Rectangle2D box = metrics.getStringBounds(text, g);
-		for(int i=0;i<players.size();i++)
-		{	Player player = players.get(i);
-			if(pauseAis.get(i) && !player.isOut())
-			{	Sprite s = player.getSprite();
-				int x = (int)Math.round(s.getCurrentPosX()-box.getWidth()/2);
-				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
-				g.drawString(text, x, y);
-			}
-		}
-	}
 	
 	private static final int AI_INFO_ALPHA_LEVEL = 100;
 	private void drawAisInfo(Graphics g)
