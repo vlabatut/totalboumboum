@@ -1,4 +1,4 @@
-package org.totalboumboum.gui.tools;
+package org.totalboumboum.tools.images;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -17,6 +17,8 @@ import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
+
+import org.totalboumboum.gui.tools.GuiTools;
 
 /**
  * most of this class was adapted from a work by Adam Walker <adam@walkersoftware.net>

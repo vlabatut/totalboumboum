@@ -22,47 +22,59 @@ package org.totalboumboum.engine.loop.display;
  */
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.ai.AbstractAiManager;
+import org.totalboumboum.engine.container.level.Level;
+import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.loop.Loop;
+import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.engine.player.Player;
+import org.totalboumboum.game.round.RoundVariables;
 
-public class DisplayPlayersNames implements Display
+public class DisplayAisColors implements Display
 {
-	public DisplayPlayersNames(VisibleLoop loop)
+	public DisplayAisColors(ServerLoop loop)
 	{	this.players = loop.getPlayers();
+		this.level = loop.getLevel();
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PLAYERS			/////////////////////////////////////////////
+	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<Player> players;	
+	private List<Player> players;
+	private Level level;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean show = false;
-	
+	private final List<Boolean> show = new ArrayList<Boolean>();
+
 	@Override
 	public synchronized void switchShow(ControlEvent event)
-	{	show = !show;		
+	{	int index = event.getIndex();
+		if(index<show.size())
+		{	boolean temp = show.get(index);
+			if(players.get(index).getArtificialIntelligence()!=null)
+				temp = !temp;
+			show.set(index,temp);
+		}
 	}
 	
-	private synchronized boolean getShow()
-	{	return show;
+	private synchronized boolean getShow(int index)
+	{	return show.get(index);		
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES;
+	{	return ControlEvent.SWITCH_DISPLAY_AIS_COLORS;
 		
 	}
 
@@ -71,36 +83,28 @@ public class DisplayPlayersNames implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	if(getShow())
-		{	//Graphics2D g2 = (Graphics2D) g;
-			Font font = new Font("Dialog",Font.BOLD,12);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			for(int i=0;i<players.size();i++)
-			{	Player player = players.get(i);
-				if(!player.isOut())
-				{	String text = "["+(i+1)+"] "+player.getName();
-					Sprite s = player.getSprite();
-					Rectangle2D box = metrics.getStringBounds(text,g);
-					double boxWidth = box.getWidth();
-					double boxHeight = box.getHeight();
-					int x = (int)Math.round(s.getCurrentPosX()-boxWidth/2);
-					int y = (int)Math.round(s.getCurrentPosY()+boxHeight/2-metrics.getDescent());
-					Color rectangleColor = new Color(255,255,255,100);
-					g.setColor(rectangleColor);
-					int arcDim = (int)Math.round(boxWidth/10);
-					double xMargin = boxWidth/15;
-					double yMargin = boxHeight/5;
-					int rectangleWidth = (int)Math.round(boxWidth+2*xMargin);
-					int rectangleHeight = (int)Math.round(boxHeight+2*yMargin);
-					int rx = (int)Math.round(s.getCurrentPosX()-rectangleWidth/2);
-					int ry = (int)Math.round(s.getCurrentPosY()-rectangleHeight/2);
-					g.fillRoundRect(rx,ry,rectangleWidth,rectangleHeight,arcDim,arcDim);
-					g.setColor(Color.BLACK);
-					g.drawString(text,x+1,y+1);
-					Color color = player.getColor().getColor();
-					g.setColor(color);
-					g.drawString(text,x,y);
+	{	Graphics2D g2 = (Graphics2D)g;
+		double tileSize = RoundVariables.scaledTileDimension;
+		for(int i=0;i<players.size();i++)
+		{	Player player = players.get(i);
+			if(player.hasAi())
+			{	AbstractAiManager<?> aiMgr = player.getArtificialIntelligence();
+				// tile colors
+				if(getShow(i))
+				{	Color[][] colors = aiMgr.getTileColors();
+					for(int line=0;line<level.getGlobalHeight();line++)
+					{	for(int col=0;col<level.getGlobalWidth();col++)
+						{	Color color = colors[line][col];
+							if(color!=null)
+							{	Color paintColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),Loop.INFO_ALPHA_LEVEL);
+								g2.setPaint(paintColor);
+								Tile tile = level.getTile(line,col);
+								double x = tile.getPosX()-tileSize/2;
+								double y = tile.getPosY()-tileSize/2;
+								g2.fill(new Rectangle2D.Double(x,y,tileSize,tileSize));
+							}
+						}
+					}
 				}
 			}
 		}

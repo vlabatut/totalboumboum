@@ -22,38 +22,66 @@ package org.totalboumboum.engine.loop.display;
  */
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.tools.images.MessageDisplayer;
 
-public class DisplayEnginePause implements Display
+public class DisplayMessage implements Display
 {
-	public DisplayEnginePause(VisibleLoop loop)
-	{	this.loop = loop;
+	public DisplayMessage()
+	{	
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
+	// DISPLAYED TEXT		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private VisibleLoop loop;
-	
+	public static MessageDisplayer messageDisplayers[] = null;
+
+	public static void initMessageDisplayers(String texts[], VisibleLoop loop)
+	{	if(messageDisplayers == null)
+		{	messageDisplayers = new MessageDisplayer[texts.length+1];
+			messageDisplayers[0] = null;
+			Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
+			double coef = 0.9;
+			Font displayedTextFont = loop.getPanel().getMessageFont(dim.width*coef,dim.height*coef);
+			displayedTextFont = displayedTextFont.deriveFont(Font.BOLD);
+			int xc = (int)Math.round(dim.width/2);
+			int yc = (int)Math.round(dim.height/2);
+			for(int i=1;i<messageDisplayers.length;i++)
+			{	if(texts[i]!=null)
+				{	MessageDisplayer temp = new MessageDisplayer(displayedTextFont,xc,yc);
+					temp.setFatten(3);
+					temp.setTextColor(new Color(204, 18,128));
+					temp.updateText(texts[i]);
+					messageDisplayers[i] = temp;
+				}
+				else
+					messageDisplayers[i] = null;
+			}
+		}
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private int show = 0;
+	
 	@Override
 	public void switchShow(ControlEvent event)
-	{	// useless here
+	{	show++;		
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_ENGINE_PAUSE;
+	{	return ControlEvent.REQUIRE_NEXT_MESSAGE;
+		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -61,16 +89,16 @@ public class DisplayEnginePause implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	if(loop.getEnginePause())
-		{	g.setColor(Color.MAGENTA);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Engine paused";
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(70+box.getHeight()/2);
-			g.drawString(text, x, y);
-		}
+	{	// basic
+//		g.setColor(Color.WHITE);
+//		g.setFont(displayedTextFont);
+//		FontMetrics metrics = g.getFontMetrics(displayedTextFont);
+//		Rectangle2D box = metrics.getStringBounds(displayedText,g);
+//		int x = (int)Math.round(pixelLeftX+pixelWidth/2-box.getWidth()/2);
+//		int y = (int)Math.round(pixelTopY+pixelHeight/2+box.getHeight()/2);
+//		g.drawString(displayedText,x,y);
+		// effects
+		if(messageDisplayers.length>show && messageDisplayers[show]!=null)
+			messageDisplayers[show].paint(g);
 	}
 }

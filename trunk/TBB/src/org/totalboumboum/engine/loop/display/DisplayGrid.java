@@ -22,38 +22,49 @@ package org.totalboumboum.engine.loop.display;
  */
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
 
+import org.totalboumboum.engine.container.level.Level;
+import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.game.round.RoundVariables;
 
-public class DisplayEnginePause implements Display
+public class DisplayGrid implements Display
 {
-	public DisplayEnginePause(VisibleLoop loop)
-	{	this.loop = loop;
+	public DisplayGrid(VisibleLoop loop)
+	{	this.level = loop.getLevel();
+		this.globalHeight = level.getGlobalHeight();
+		this.globalWidth = level.getGlobalWidth();
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private VisibleLoop loop;
+	private Level level;
+	private int globalHeight;
+	private int globalWidth;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private boolean show = false;
+	
 	@Override
-	public void switchShow(ControlEvent event)
-	{	// useless here
+	public synchronized void switchShow(ControlEvent event)
+	{	show = !show;		
 	}
 	
+	private synchronized boolean getShow()
+	{	return show;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_ENGINE_PAUSE;
+	{	return ControlEvent.SWITCH_DISPLAY_GRID;
+		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -61,16 +72,19 @@ public class DisplayEnginePause implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	if(loop.getEnginePause())
-		{	g.setColor(Color.MAGENTA);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Engine paused";
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(70+box.getHeight()/2);
-			g.drawString(text, x, y);
+	{	if(getShow())
+		{	g.setColor(Color.CYAN);
+			// croix					
+//			g.drawLine((int)posX, 0, (int)posX, configuration.getPanelDimensionY());
+//			g.drawLine(0,(int)posY, configuration.getPanelDimensionX(), (int)posY);
+			// grille
+			for(int line=0;line<globalHeight;line++)
+			{	for(int col=0;col<globalWidth;col++)
+				{	Tile temp = level.getTile(line,col);
+					g.drawLine((int)temp.getPosX(), (int)temp.getPosY(), (int)temp.getPosX(), (int)temp.getPosY());
+					g.drawRect((int)(temp.getPosX()-RoundVariables.scaledTileDimension/2), (int)(temp.getPosY()-RoundVariables.scaledTileDimension/2), (int)RoundVariables.scaledTileDimension, (int)RoundVariables.scaledTileDimension);
+				}
+			}
 		}
 	}
 }

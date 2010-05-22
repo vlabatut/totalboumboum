@@ -21,17 +21,11 @@ package org.totalboumboum.game.round;
  * 
  */
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-
-import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.replay.Replay;
-import org.totalboumboum.gui.tools.MessageDisplayer;
 import org.totalboumboum.tools.GameData;
 
 public class RoundVariables
@@ -58,34 +52,6 @@ public class RoundVariables
 	{	RoundVariables.zoomFactor = zoomFactor;
 		toleranceCoefficient = zoomFactor*GameData.TOLERANCE;
 		scaledTileDimension = GameData.STANDARD_TILE_DIMENSION*zoomFactor;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PRE-ROUND MESSAGES	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public static MessageDisplayer messageDisplayers[] = null;
-	
-	public static void initMessageDisplayers(String texts[])
-	{	if(messageDisplayers == null)
-		{	messageDisplayers = new MessageDisplayer[texts.length];
-			Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
-			double coef = 0.9;
-			Font displayedTextFont = loop.getPanel().getMessageFont(dim.width*coef,dim.height*coef);
-			displayedTextFont = displayedTextFont.deriveFont(Font.BOLD);
-			int xc = (int)Math.round(dim.width/2);
-			int yc = (int)Math.round(dim.height/2);
-			for(int i=0;i<texts.length;i++)
-			{	if(texts[i]!=null)
-				{	MessageDisplayer temp = new MessageDisplayer(displayedTextFont,xc,yc);
-					temp.setFatten(3);
-					temp.setTextColor(new Color(204, 18,128));
-					temp.updateText(texts[i]);
-					messageDisplayers[i] = temp;
-				}
-				else
-					messageDisplayers[i] = null;
-			}
-		}
 	}
 
 	/////////////////////////////////////////////////////////////////

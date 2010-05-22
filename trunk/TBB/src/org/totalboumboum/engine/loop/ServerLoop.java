@@ -21,15 +21,6 @@ package org.totalboumboum.engine.loop;
  * 
  */
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Stroke;
-import java.awt.geom.Path2D;
-import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,7 +28,6 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -48,12 +38,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Map.Entry;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.ai.AbstractAiManager;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.configuration.profile.Profile;
@@ -62,8 +49,6 @@ import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
@@ -76,17 +61,25 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.system.ServerSytemControl;
+import org.totalboumboum.engine.loop.display.Display;
+import org.totalboumboum.engine.loop.display.DisplayAisColors;
+import org.totalboumboum.engine.loop.display.DisplayAisPaths;
+import org.totalboumboum.engine.loop.display.DisplayAisPause;
+import org.totalboumboum.engine.loop.display.DisplayAisTexts;
+import org.totalboumboum.engine.loop.display.DisplayEnginePause;
+import org.totalboumboum.engine.loop.display.DisplayFPS;
+import org.totalboumboum.engine.loop.display.DisplayMessage;
+import org.totalboumboum.engine.loop.display.DisplayPlayersNames;
+import org.totalboumboum.engine.loop.display.DisplaySpeed;
+import org.totalboumboum.engine.loop.display.DisplayTime;
+import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.calculus.CalculusTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
-import org.totalboumboum.tools.time.TimeTools;
-import org.totalboumboum.tools.time.TimeUnit;
 import org.xml.sax.SAXException;
 
 public class ServerLoop extends VisibleLoop
@@ -156,9 +149,6 @@ long start = System.currentTimeMillis();
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
 			pauseAis.add(false);
-			showAiPaths.add(false);
-			showAiTileTexts.add(false);
-			showAiTileColors.add(false);
 			
 			// record/transmit event
 			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
@@ -198,6 +188,8 @@ System.out.println("total load time: "+(end-start));
 		initLogs();
 		// init entries
 		initEntries();
+		// init displays
+		initDisplayManager();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -260,9 +252,6 @@ System.out.println("total load time: "+(end-start));
 	// DEBUG AIS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final ArrayList<Boolean> pauseAis = new ArrayList<Boolean>();
-	private final ArrayList<Boolean> showAiPaths = new ArrayList<Boolean>();
-	private final ArrayList<Boolean> showAiTileTexts = new ArrayList<Boolean>();
-	private final ArrayList<Boolean> showAiTileColors = new ArrayList<Boolean>();
 
 	public void switchAiPause(int index)
 	{	debugLock.lock();
@@ -281,59 +270,6 @@ System.out.println("total load time: "+(end-start));
 	{	boolean result;
 		debugLock.lock();
 		result = pauseAis.get(index);
-		debugLock.unlock();
-		return result;
-	}
-
-	public void switchShowAiPaths(int index)
-	{	debugLock.lock();
-		if(index<showAiPaths.size())
-		{	boolean show = showAiPaths.get(index);
-			if(players.get(index).getArtificialIntelligence()!=null)
-				show = !show;
-			showAiPaths.set(index,show);
-		}
-		debugLock.unlock();
-	}
-	public void switchShowAiTileTexts(int index)
-	{	debugLock.lock();
-		if(index<showAiTileTexts.size())
-		{	boolean show = showAiTileTexts.get(index);
-			if(players.get(index).getArtificialIntelligence()!=null)
-				show = !show;
-			showAiTileTexts.set(index,show);
-		}
-		debugLock.unlock();
-	}
-	public void switchShowAiTileColors(int index)
-	{	debugLock.lock();
-		if(index<showAiTileColors.size())
-		{	boolean show = showAiTileColors.get(index);
-			if(players.get(index).getArtificialIntelligence()!=null)
-				show = !show;
-			showAiTileColors.set(index,show);
-		}
-		debugLock.unlock();
-	}
-		
-	public boolean getShowAiPaths(int index)
-	{	boolean result;
-		debugLock.lock();
-		result = showAiPaths.get(index);
-		debugLock.unlock();
-		return result;
-	}
-	public boolean getShowAiTileTexts(int index)
-	{	boolean result;
-		debugLock.lock();
-		result = showAiTileTexts.get(index);
-		debugLock.unlock();
-		return result;
-	}
-	public boolean getShowAiTileColors(int index)
-	{	boolean result;
-		debugLock.lock();
-		result = showAiTileColors.get(index);
 		debugLock.unlock();
 		return result;
 	}
@@ -370,6 +306,50 @@ System.out.println("total load time: "+(end-start));
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// DISPLAY MANAGER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected void initDisplayManager()
+	{	Display display;
+
+		// pre-round messages (ready-steady-go)
+		display = new DisplayMessage();
+		displayManager.addDisplay(display);
+
+		// AIs paths
+		display = new DisplayAisPaths(this);
+		displayManager.addDisplay(display);
+		// AIs colors
+		display = new DisplayAisColors(this);
+		displayManager.addDisplay(display);
+		// AIs texts
+		display = new DisplayAisTexts(this);
+		displayManager.addDisplay(display);
+		// AIs pauses
+		display = new DisplayAisPause(this);
+		displayManager.addDisplay(display);
+		
+		// players names
+		display = new DisplayPlayersNames(this);
+		displayManager.addDisplay(display);
+		
+		// speed
+		display = new DisplaySpeed();
+		displayManager.addDisplay(display);
+		
+		// time
+		display = new DisplayTime(this);
+		displayManager.addDisplay(display);
+		
+		// FPS
+		display = new DisplayFPS(this);
+		displayManager.addDisplay(display);
+		
+		// engine pause
+		display = new DisplayEnginePause(this);
+		displayManager.addDisplay(display);
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// CELEBRATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	double celebrationDuration = -1;
@@ -400,158 +380,13 @@ System.out.println("total load time: "+(end-start));
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// DRAW				/////////////////////////////////////////////
+	// SYSTEM CONTROLS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void draw(Graphics g)
-	{	// level
-		level.draw(g);
-
-		// ais data
-		drawAisInfo(g);
-		// FPS
-		if(getShowFPS())
-			drawFPS(g);
-		// pause
-		if(getEnginePause())
-			drawEnginePause(g);
-
-		drawAisPause(g);
+	public void processEvent(ControlEvent event)
+	{	String name = event.getName();
+		if(name.equals(ControlEvent.SWITCH_AIS_PAUSE))
+			switchEngineStep(true);
+		else
+			super.processEvent(event);
 	}
-
-	/**
-	 * NOTE
-	 * level
-	 * players names
-	 * ais data
-	 * speed
-	 * time
-	 * FPS
-	 * pause
-	 */
-	
-	/*
-	 * TODO finir le système de displays :
-	 * 	- comment gérer le lock des pauses ? >> niveau de loop (ou display) ?
-	 *  - display à mettre dans level ? après tout, y a déjà grille et cie.
-	 *    changer tout ça en display, qui gèreraient leurs évts clavier d'une façon ou d'une autre ?
-	 */
-	
-	private static final int AI_INFO_ALPHA_LEVEL = 100;
-	private void drawAisInfo(Graphics g)
-	{	Graphics2D g2 = (Graphics2D)g;
-		double tileSize = RoundVariables.scaledTileDimension;
-		for(int i=0;i<players.size();i++)
-		{	Player player = players.get(i);
-			if(player.hasAi())
-			{	AbstractAiManager<?> aiMgr = player.getArtificialIntelligence();
-				// tile colors
-				if(getShowAiTileColors(i))
-				{	Color[][] colors = aiMgr.getTileColors();
-					for(int line=0;line<level.getGlobalHeight();line++)
-					{	for(int col=0;col<level.getGlobalWidth();col++)
-						{	Color color = colors[line][col];
-							if(color!=null)
-							{	Color paintColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),AI_INFO_ALPHA_LEVEL);
-								g2.setPaint(paintColor);
-								Tile tile = level.getTile(line,col);
-								double x = tile.getPosX()-tileSize/2;
-								double y = tile.getPosY()-tileSize/2;
-								g2.fill(new Rectangle2D.Double(x,y,tileSize,tileSize));
-							}
-						}
-					}
-				}
-				// paths
-				if(getShowAiPaths(i))
-				{	List<List<Tile>> paths = aiMgr.getPaths();
-					List<Color> colors = aiMgr.getPathColors();
-					Stroke prevStroke = g2.getStroke();
-					int thickness = (int)(tileSize/3);
-					Stroke stroke = new BasicStroke(thickness,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND);
-					g2.setStroke(stroke);
-					for(int j=0;j<paths.size();j++)
-					{	List<Tile> path = paths.get(j);
-						Color color = colors.get(j);
-						if(color!=null && !path.isEmpty())
-						{	Color paintColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),AI_INFO_ALPHA_LEVEL);
-							g2.setPaint(paintColor);
-							Tile tile2 = path.get(0);
-							double x1,x2 = tile2.getPosX();
-							double y1,y2 = tile2.getPosY();
-							Path2D shape = new Path2D.Double();
-							shape.moveTo(x2,y2);
-							int k = 1;
-							while(k<path.size())
-							{	// tiles
-								x1 = x2;
-								y1 = y2;
-								tile2 = path.get(k);							
-								x2 = tile2.getPosX();
-								y2 = tile2.getPosY();
-								// directions (to manage the case where the path cross the level off-scree)
-								Direction direction12 = level.getDirection(x1,y1,x2,y2);
-								int[] intDir12 = direction12.getIntFromDirection();
-								Direction direction21 = direction12.getOpposite();
-								int[] intDir21 = direction21.getIntFromDirection();
-								// alternative locations
-								double x1b = x2 + intDir21[0]*tileSize;
-								double y1b = y2 + intDir21[1]*tileSize;
-								double x2b = x1 + intDir12[0]*tileSize;
-								double y2b = y1 + intDir12[1]*tileSize;
-								// compare actual and theoretical positions
-								if(!CalculusTools.isRelativelyEqualTo(x1,x1b) || !CalculusTools.isRelativelyEqualTo(y1,y1b))
-								{	shape.lineTo(x2b,y2b);
-									g2.draw(shape);
-									shape = new Path2D.Double();
-									shape.moveTo(x1b,y1b);
-									shape.lineTo(x2,y2);
-								}
-								else
-									shape.lineTo(x2,y2);
-								k++;
-							}
-							g2.draw(shape);
-						}
-					}
-					g2.setStroke(prevStroke);
-				}
-				// tile texts
-				if(getShowAiTileTexts(i))
-				{	g.setColor(Color.MAGENTA);
-					Font font = new Font("Dialog", Font.PLAIN, 15);
-					g.setFont(font);
-					FontMetrics metrics = g.getFontMetrics(font);
-					String[][] texts = aiMgr.getTileTexts();
-					for(int line=0;line<level.getGlobalHeight();line++)
-					{	for(int col=0;col<level.getGlobalWidth();col++)
-						{	String text = texts[line][col];
-							if(text!=null)
-							{	Tile tile = level.getTile(line,col);
-								Rectangle2D box = metrics.getStringBounds(text, g);
-								int x = (int)Math.round(tile.getPosX()-box.getWidth()/2);
-								int y = (int)Math.round(tile.getPosY()+box.getHeight()/2);
-								g.drawString(text, x, y);
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		g.setColor(Color.MAGENTA);
-		Font font = new Font("Dialog", Font.BOLD, 12);
-		g.setFont(font);
-		FontMetrics metrics = g.getFontMetrics(font);
-		String text = "AI Paused";
-		Rectangle2D box = metrics.getStringBounds(text, g);
-		for(int i=0;i<players.size();i++)
-		{	if(pauseAis.get(i))
-			{	Sprite s = players.get(i).getSprite();
-				int x = (int)Math.round(s.getCurrentPosX()-box.getWidth()/2);
-				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
-				g.drawString(text, x, y);
-			}
-		}
-	}
-
 }

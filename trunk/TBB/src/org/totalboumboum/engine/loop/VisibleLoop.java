@@ -21,6 +21,7 @@ package org.totalboumboum.engine.loop;
  * 
  */
 
+import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -47,6 +48,9 @@ import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.control.system.SystemControl;
+import org.totalboumboum.engine.loop.display.DisplayManager;
+import org.totalboumboum.engine.loop.display.DisplayMessage;
+import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.engine.player.Player;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
@@ -127,6 +131,7 @@ public abstract class VisibleLoop extends Loop
 			if(panel==null)
 				cond.await();
 			// start the game
+			DisplayMessage.initMessageDisplayers(entryTexts,this);
 			process();
 		}
 		catch (IllegalArgumentException e)
@@ -491,40 +496,12 @@ public abstract class VisibleLoop extends Loop
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// DEBUG			/////////////////////////////////////////////
+	// ENGINE PAUSE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected boolean showGrid = false;
-	protected int showTilesPositions = 0;
 	protected int showSpritesPositions = 0;
 	protected boolean pauseEngine = false;
 	protected boolean stepEngine = false;
 	protected Lock debugLock = new ReentrantLock();
-
-	public void setShowGrid(boolean showGrid)
-	{	debugLock.lock();
-		this.showGrid = showGrid;
-		debugLock.unlock();
-	}
-	public boolean getShowGrid()
-	{	boolean result;
-		debugLock.lock();
-		result = showGrid;
-		debugLock.unlock();
-		return result;
-	}
-
-	public void switchShowTilesPositions()
-	{	debugLock.lock();
-		showTilesPositions = (showTilesPositions+1)%3;
-		debugLock.unlock();
-	}
-	public int getShowTilesPositions()
-	{	int result;
-		debugLock.lock();
-		result = showTilesPositions;
-		debugLock.unlock();
-		return result;
-	}
 
 	public void switchShowSpritesPositions()
 	{	debugLock.lock();
@@ -572,12 +549,13 @@ public abstract class VisibleLoop extends Loop
 	protected Double[] entryDelays;
 	protected int entryIndex = 0;
 	protected boolean hasStarted = false;
+	protected String[] entryTexts;
 	
 	protected void initEntries()
 	{	entryIndex = 0;
 		entryRoles = new Role[]{Role.FLOOR,Role.BLOCK,Role.ITEM,Role.BOMB,Role.HERO};
 		entryDelays = new Double[]{0d,0d,0d,0d,0d,0d,GameData.READY_TIME,GameData.SET_TIME,GameData.GO_TIME};
-		String[] entryTexts = new String[]{null,null,null,null,null,panel.getMessageTextReady(),panel.getMessageTextSet(),panel.getMessageTextGo()};
+		entryTexts = new String[]{null,null,null,null,null,panel.getMessageTextReady(),panel.getMessageTextSet(),panel.getMessageTextGo()};
 		// set the roles
 		for(int i=0;i<entryRoles.length;i++)
 		{	double duration = level.getEntryDuration(entryRoles[i]);
@@ -594,9 +572,6 @@ public abstract class VisibleLoop extends Loop
 		}
 //for(int i=0;i<entryDelays.length;i++)
 //	System.out.println("entryDelays["+i+"]="+entryDelays[i]);
-	
-		// init the message displayers
-		RoundVariables.initMessageDisplayers(entryTexts);
 	}
 
 	protected void manageEntries()
@@ -618,15 +593,17 @@ public abstract class VisibleLoop extends Loop
 					}
 					// show ready-set-go
 					else if(entryIndex<entryDelays.length-1)
-					{	level.updateMessageDisplayer(entryIndex);
+					{	ControlEvent event = new ControlEvent(ControlEvent.REQUIRE_NEXT_MESSAGE);
+						processEvent(event);
 //System.out.println(totalTime+": message");				
 					}
 					// start the game
 					else //if(entryIndex==entryDelays.length-1) 
-					{	level.updateMessageDisplayer(-1);
+					{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_NEXT_MESSAGE);
+						processEvent(controlEvent);
 //System.out.println(totalTime+": start");				
-						EngineEvent event = new EngineEvent(EngineEvent.ROUND_START);
-						level.spreadEvent(event);
+						EngineEvent engineEvent = new EngineEvent(EngineEvent.ROUND_START);
+						level.spreadEvent(engineEvent);
 						hasStarted = true;
 						done = true;
 					}
@@ -635,7 +612,37 @@ public abstract class VisibleLoop extends Loop
 			}
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// SYSTEM CONTROLS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void processEvent(ControlEvent event)
+	{	String name = event.getName();
+		if(name.equals(ControlEvent.REQUIRE_ENGINE_STEP))
+			switchEngineStep(true);
+		else if(name.equals(ControlEvent.SWITCH_ENGINE_PAUSE))
+			switchEnginePause();
+		else
+			displayManager.provessEvent(event);		
+	}
 	
+	/////////////////////////////////////////////////////////////////
+	// DISPLAY MANAGER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	DisplayManager displayManager = new DisplayManager();
+	
+	protected abstract void initDisplayManager();
+	
+	/////////////////////////////////////////////////////////////////
+	// DRAW				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void draw(Graphics g)
+	{	// level
+		level.draw(g);
+
+		// display manager
+		displayManager.draw(g);
+	}
 	/////////////////////////////////////////////////////////////////
 	// SIMULATED		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -26,34 +26,55 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.ai.AbstractAiManager;
+import org.totalboumboum.engine.container.level.Level;
+import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.player.Player;
 
-public class DisplayEnginePause implements Display
+public class DisplayAisTexts implements Display
 {
-	public DisplayEnginePause(VisibleLoop loop)
-	{	this.loop = loop;
+	public DisplayAisTexts(ServerLoop loop)
+	{	this.players = loop.getPlayers();
+		this.level = loop.getLevel();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private VisibleLoop loop;
+	private List<Player> players;
+	private Level level;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private final List<Boolean> show = new ArrayList<Boolean>();
+
 	@Override
-	public void switchShow(ControlEvent event)
-	{	// useless here
+	public synchronized void switchShow(ControlEvent event)
+	{	int index = event.getIndex();
+		if(index<show.size())
+		{	boolean temp = show.get(index);
+			if(players.get(index).getArtificialIntelligence()!=null)
+				temp = !temp;
+			show.set(index,temp);
+		}
 	}
 	
+	private synchronized boolean getShow(int index)
+	{	return show.get(index);		
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_ENGINE_PAUSE;
+	{	return ControlEvent.SWITCH_DISPLAY_AIS_TEXTS;
+		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -61,16 +82,31 @@ public class DisplayEnginePause implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	if(loop.getEnginePause())
-		{	g.setColor(Color.MAGENTA);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Engine paused";
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(70+box.getHeight()/2);
-			g.drawString(text, x, y);
+	{	for(int i=0;i<players.size();i++)
+		{	Player player = players.get(i);
+			if(player.hasAi())
+			{	AbstractAiManager<?> aiMgr = player.getArtificialIntelligence();
+				// tile texts
+				if(getShow(i))
+				{	g.setColor(Color.MAGENTA);
+					Font font = new Font("Dialog", Font.PLAIN, 15);
+					g.setFont(font);
+					FontMetrics metrics = g.getFontMetrics(font);
+					String[][] texts = aiMgr.getTileTexts();
+					for(int line=0;line<level.getGlobalHeight();line++)
+					{	for(int col=0;col<level.getGlobalWidth();col++)
+						{	String text = texts[line][col];
+							if(text!=null)
+							{	Tile tile = level.getTile(line,col);
+								Rectangle2D box = metrics.getStringBounds(text, g);
+								int x = (int)Math.round(tile.getPosX()-box.getWidth()/2);
+								int y = (int)Math.round(tile.getPosY()+box.getHeight()/2);
+								g.drawString(text, x, y);
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

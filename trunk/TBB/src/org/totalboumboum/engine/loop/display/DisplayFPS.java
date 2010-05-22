@@ -49,11 +49,11 @@ public class DisplayFPS implements Display
 	private boolean show = false;
 	
 	@Override
-	public synchronized void switchShow()
+	public synchronized void switchShow(ControlEvent event)
 	{	show = !show;		
 	}
 	
-	public synchronized boolean getShow()
+	private synchronized boolean getShow()
 	{	return show;
 	}
 

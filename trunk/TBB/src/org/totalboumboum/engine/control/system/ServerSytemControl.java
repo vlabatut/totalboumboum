@@ -26,6 +26,7 @@ import java.util.HashMap;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.event.control.ControlEvent;
 
 public class ServerSytemControl extends SystemControl
 {	
@@ -49,57 +50,65 @@ public class ServerSytemControl extends SystemControl
 //					|| (keyCode == KeyEvent.VK_END)
 //					|| ((keyCode == KeyEvent.VK_C) && e.isControlDown())
 				)
-				loop.setCanceled(true);
+				loop.setCanceled(true); //TODO
 			
 			// faire renaitre le bonhomme
 //			else if(keyCode == KeyEvent.VK_1)
-//			{	//TODO à adapter car ça peut être intéressant pour le débug
+//			{	//NOTE à adapter car ça peut être intéressant pour le débug
 				//loop.rebirth();
 //			}
 
 			// debug: change speed
 			else if(keyCode == KeyEvent.VK_PAGE_UP)
-			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()*2);
+			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()*2);//TODO
 			}
 			else if(keyCode == KeyEvent.VK_PAGE_DOWN)
-			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()/2);
+			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()/2);//TODO
 			}
 
 			// debug: grid
 			else if(keyCode == KeyEvent.VK_F1)
-			{	loop.setShowGrid(!loop.getShowGrid());
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_GRID);
+				loop.processEvent(controlEvent);
 			}
 			// debug: tiles positions
 			else if(keyCode == KeyEvent.VK_F2)
-			{	loop.switchShowTilesPositions();
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS);
+				loop.processEvent(controlEvent);
 			}
 			// debug: sprites positions
 			else if(keyCode == KeyEvent.VK_F3)
-			{	loop.switchShowSpritesPositions();
+			{	loop.switchShowSpritesPositions();//TODO
 			}
 			// debug: FPS/UPS
 			else if(keyCode == KeyEvent.VK_F4)
-			{	loop.switchShowFPS();
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_FPS);
+				loop.processEvent(controlEvent);
 			}
 			// debug: speed coeff
 			else if(keyCode == KeyEvent.VK_F5)
-			{	loop.switchShowSpeed();
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPEED);
+				loop.processEvent(controlEvent);
 			}
 			// debug: time
 			else if(keyCode == KeyEvent.VK_F6)
-			{	loop.switchShowTime();
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TIME);
+				loop.processEvent(controlEvent);
 			}
 			// debug: names
 			else if(keyCode == KeyEvent.VK_F7)
-			{	loop.switchShowNames();
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
+				loop.processEvent(controlEvent);
 			}
 			
 			// debug: engine pause
 			else if(keyCode == KeyEvent.VK_END)
-			{	loop.switchEnginePause();
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_ENGINE_PAUSE);
+				loop.processEvent(controlEvent);
 			}
 			else if(keyCode == KeyEvent.VK_HOME)
-			{	loop.switchEngineStep(true);
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_ENGINE_STEP);
+				loop.processEvent(controlEvent);
 			}
 			
 			// debug: AIs pause
@@ -109,14 +118,17 @@ public class ServerSytemControl extends SystemControl
 					index = 9;
 				else
 					index = keyCode-KeyEvent.VK_1;
+				String name;
 				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					loop.switchShowAiPaths(index);
+					name = ControlEvent.SWITCH_DISPLAY_AIS_PATHS;
 				else if(keysPressed.containsKey(KeyEvent.VK_ALT) && keysPressed.get(KeyEvent.VK_ALT))
-					loop.switchShowAiTileColors(index);
+					name = ControlEvent.SWITCH_DISPLAY_AIS_COLORS;
 				else if(keysPressed.containsKey(KeyEvent.VK_CONTROL) && keysPressed.get(KeyEvent.VK_CONTROL))
-					loop.switchShowAiTileTexts(index);
+					name = ControlEvent.SWITCH_DISPLAY_AIS_TEXTS;
 				else
-					loop.switchAiPause(index);
+					name = ControlEvent.SWITCH_AIS_PAUSE;
+				ControlEvent controlEvent = new ControlEvent(name,index);
+				loop.processEvent(controlEvent);
 			}
 		}
 	}

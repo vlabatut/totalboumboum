@@ -24,15 +24,28 @@ package org.totalboumboum.engine.loop.event.control;
 public class ControlEvent
 {	private static final long serialVersionUID = 1L;
 	
-	public final static String SWITCH_DISPLAY_AIS_PAUSE = "SWITCH_DISPLAY_AIS_PAUSE";
-	public final static String SWITCH_DISPLAY_ENGINE_PAUSE = "SWITCH_DISPLAY_ENGINE_PAUSE";
+	public final static String REQUIRE_ENGINE_STEP = "REQUIRE_ENGINE_STEP";
+	public final static String REQUIRE_NEXT_MESSAGE = "REQUIRE_NEXT_MESSAGE";
+	
+	public final static String SWITCH_AIS_PAUSE = "SWITCH_AIS_PAUSE";
+	public final static String SWITCH_DISPLAY_AIS_COLORS = "SWITCH_DISPLAY_AIS_COLORS";
+	public final static String SWITCH_DISPLAY_AIS_PATHS = "SWITCH_DISPLAY_AIS_PATHS";
+	public final static String SWITCH_DISPLAY_AIS_TEXTS = "SWITCH_DISPLAY_AIS_TEXTS";
 	public final static String SWITCH_DISPLAY_FPS = "SWITCH_DISPLAY_FPS";
+	public final static String SWITCH_DISPLAY_GRID = "SWITCH_DISPLAY_GRID";
 	public final static String SWITCH_DISPLAY_PLAYERS_NAMES = "SWITCH_DISPLAY_PLAYERS_NAMES";
 	public final static String SWITCH_DISPLAY_SPEED = "SWITCH_DISPLAY_SPEED";
+	public final static String SWITCH_DISPLAY_TILES_POSITIONS = "SWITCH_DISPLAY_TILES_POSITIONS";
 	public final static String SWITCH_DISPLAY_TIME = "SWITCH_DISPLAY_TIME";
+	public final static String SWITCH_ENGINE_PAUSE = "SWITCH_ENGINE_PAUSE";
 	
-	protected ControlEvent(String name)
+	public ControlEvent(String name)
 	{	this.name = name;
+	}
+	
+	public ControlEvent(String name, int index)
+	{	this.name = name;
+		this.index = index;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -46,5 +59,14 @@ public class ControlEvent
 	
 	public boolean hasName(String name)
 	{	return this.name.equals(name);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// INDEX				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int index;
+	
+	public int getIndex()
+	{	return index;	
 	}
 }

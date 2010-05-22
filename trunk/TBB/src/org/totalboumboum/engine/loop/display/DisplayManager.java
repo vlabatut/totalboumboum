@@ -36,7 +36,7 @@ public class DisplayManager
 	public void provessEvent(ControlEvent event)
 	{	Display d = displaysMap.get(event.getName());
 		if(d!=null)
-			d.switchShow();
+			d.switchShow(event);
 	}
 
 	/////////////////////////////////////////////////////////////////

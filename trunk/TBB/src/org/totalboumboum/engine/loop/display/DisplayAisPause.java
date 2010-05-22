@@ -50,20 +50,15 @@ public class DisplayAisPause implements Display
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void switchShow()
+	public void switchShow(ControlEvent event)
 	{	// useless here
 	}
 	
-	public boolean getShow()
-	{	return true;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_DISPLAY_AIS_PAUSE;
-		
+	{	return ControlEvent.SWITCH_AIS_PAUSE;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -78,13 +73,13 @@ public class DisplayAisPause implements Display
 		String text = "AI Paused";
 		Rectangle2D box = metrics.getStringBounds(text, g);
 		for(int i=0;i<players.size();i++)
-		{	Player player = players.get(i);
-			if(loop.getAiPause(i) && !player.isOut())
-			{	Sprite s = player.getSprite();
+		{	if(loop.getAiPause(i))
+			{	Sprite s = players.get(i).getSprite();
 				int x = (int)Math.round(s.getCurrentPosX()-box.getWidth()/2);
 				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
 				g.drawString(text, x, y);
 			}
 		}
+
 	}
 }

@@ -21,11 +21,7 @@ package org.totalboumboum.engine.container.level;
  * 
  */
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +36,6 @@ import org.totalboumboum.engine.content.manager.trajectory.MoveZone;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.gui.tools.MessageDisplayer;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
 public class Level
@@ -853,17 +848,6 @@ public class Level
 
 	//NOTE optimisation : à effectuer seulement pour les tiles visibles
 	public void draw(Graphics g)
-	{	drawLevel(g);
-		
-		if(loop.getShowGrid())
-			drawGrid(g);
-		if(loop.getShowTilesPositions()>0)
-			drawTilesPositions(g);
-		if(messageDisplayer!=null)
-			drawDisplayedText(g);
-	}
-
-	private void drawLevel(Graphics g)
 	{	boolean flat = true;
 		boolean onGround = true;
 		boolean shadow = false;
@@ -951,61 +935,7 @@ public class Level
 		}
 	}
 */
-	private void drawGrid(Graphics g)
-	{	g.setColor(Color.CYAN);
-		// croix					
-//		g.drawLine((int)posX, 0, (int)posX, configuration.getPanelDimensionY());
-//		g.drawLine(0,(int)posY, configuration.getPanelDimensionX(), (int)posY);
-		// grille
-		for(int line=0;line<globalHeight;line++)
-			for(int col=0;col<globalWidth;col++)
-			{	Tile temp = matrix[line][col];
-				g.drawLine((int)temp.getPosX(), (int)temp.getPosY(), (int)temp.getPosX(), (int)temp.getPosY());
-				g.drawRect((int)(temp.getPosX()-RoundVariables.scaledTileDimension/2), (int)(temp.getPosY()-RoundVariables.scaledTileDimension/2), (int)RoundVariables.scaledTileDimension, (int)RoundVariables.scaledTileDimension);
-			}
-	}
 
-	private void drawTilesPositions(Graphics g)
-	{	// expressed in tiles
-		if(loop.getShowTilesPositions()==1)
-		{	g.setColor(Color.CYAN);
-			Font font = new Font("Dialog", Font.PLAIN, 12);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			for(int line=0;line<globalHeight;line++)
-				for(int col=0;col<globalWidth;col++)
-				{	Tile temp = matrix[line][col];
-					String text = "("+line+","+col+")";
-					Rectangle2D box = metrics.getStringBounds(text, g);
-					int x = (int)Math.round(temp.getPosX()-box.getWidth()/2);
-					int y = (int)Math.round(temp.getPosY()+box.getHeight()/2);
-					g.drawString(text, x, y);
-				}
-		}
-		// expressed in pixels
-		else if(loop.getShowTilesPositions()==2)
-		{	// coordonnées
-			g.setColor(Color.CYAN);
-			Font font = new Font("Dialog", Font.PLAIN, 12);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			for(int line=0;line<globalHeight;line++)
-				for(int col=0;col<globalWidth;col++)
-				{	Tile temp = matrix[line][col];
-					String textX = Double.toString(temp.getPosX());
-					String textY = Double.toString(temp.getPosY());
-					Rectangle2D boxX = metrics.getStringBounds(textX, g);
-					Rectangle2D boxY = metrics.getStringBounds(textY, g);
-					int x = (int)Math.round(temp.getPosX()-boxX.getWidth()/2);
-					int y = (int)Math.round(temp.getPosY());
-					g.drawString(textX, x, y);
-					x = (int)Math.round(temp.getPosX()-boxY.getWidth()/2);
-					y = (int)Math.round(temp.getPosY()+boxY.getHeight());
-					g.drawString(textY, x, y);
-				}
-		}
-	}
-			
 	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -1046,29 +976,4 @@ public class Level
 		}
 		return result;
 	}	
-	
-	/////////////////////////////////////////////////////////////////
-	// DISPLAYED TEXT		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private MessageDisplayer messageDisplayer = null;
-
-	public void updateMessageDisplayer(int index)
-	{	if(index>=0)
-			messageDisplayer = RoundVariables.messageDisplayers[index];
-		else
-			messageDisplayer = null;
-	}
-	
-	private void drawDisplayedText(Graphics g)
-	{	// basic
-//		g.setColor(Color.WHITE);
-//		g.setFont(displayedTextFont);
-//		FontMetrics metrics = g.getFontMetrics(displayedTextFont);
-//		Rectangle2D box = metrics.getStringBounds(displayedText,g);
-//		int x = (int)Math.round(pixelLeftX+pixelWidth/2-box.getWidth()/2);
-//		int y = (int)Math.round(pixelTopY+pixelHeight/2+box.getHeight()/2);
-//		g.drawString(displayedText,x,y);
-		// effects
-		messageDisplayer.paint(g);
-	}
 }
