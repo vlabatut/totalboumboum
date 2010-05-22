@@ -30,6 +30,7 @@ import java.text.NumberFormat;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.event.control.ControlEvent;
 
 public class DisplayFPS implements Display
 {
@@ -54,6 +55,14 @@ public class DisplayFPS implements Display
 	
 	public synchronized boolean getShow()
 	{	return show;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EVENT NAME		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String getEventName()
+	{	return ControlEvent.SWITCH_DISPLAY_FPS;
+		
 	}
 
 	/////////////////////////////////////////////////////////////////

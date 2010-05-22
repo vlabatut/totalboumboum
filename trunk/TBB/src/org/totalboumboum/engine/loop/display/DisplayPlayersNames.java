@@ -29,6 +29,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.engine.player.Player;
 
 public class DisplayPlayersNames implements Display
@@ -54,6 +55,14 @@ public class DisplayPlayersNames implements Display
 	
 	public synchronized boolean getShow()
 	{	return show;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EVENT NAME		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String getEventName()
+	{	return ControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES;
+		
 	}
 
 	/////////////////////////////////////////////////////////////////

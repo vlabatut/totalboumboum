@@ -31,6 +31,7 @@ import java.util.concurrent.locks.Lock;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.event.control.ControlEvent;
 
 public class DisplayEnginePause implements Display
 {
@@ -67,6 +68,14 @@ public class DisplayEnginePause implements Display
 		result = show;
 		lock.unlock();
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EVENT NAME		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String getEventName()
+	{	return ControlEvent.SWITCH_DISPLAY_ENGINE_PAUSE;
+		
 	}
 
 	/////////////////////////////////////////////////////////////////

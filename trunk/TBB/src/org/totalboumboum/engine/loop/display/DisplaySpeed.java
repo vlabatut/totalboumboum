@@ -28,6 +28,7 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.engine.loop.event.control.ControlEvent;
 
 public class DisplaySpeed implements Display
 {
@@ -47,6 +48,14 @@ public class DisplaySpeed implements Display
 	
 	public synchronized boolean getShow()
 	{	return show;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EVENT NAME		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String getEventName()
+	{	return ControlEvent.SWITCH_DISPLAY_SPEED;
+		
 	}
 
 	/////////////////////////////////////////////////////////////////
