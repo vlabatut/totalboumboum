@@ -182,52 +182,7 @@ public class Tile
 				g.drawImage(image, new Double(listX.get(i)).intValue(), new Double(listY.get(i)-pZ).intValue(), null);		
 //				g.drawImage(image, new Long(Math.round(listX.get(i))).intValue(), new Long(Math.round(listY.get(i)-pZ)).intValue(), null);		
 		}
-		// position
-		if(!(s instanceof Floor))
-		{	if(s instanceof Hero)
-				g.setColor(Color.WHITE);
-			else if(s instanceof Block)
-				g.setColor(Color.GRAY);
-			else if(s instanceof Bomb)
-				g.setColor(Color.WHITE);
-			else if(s instanceof Item)
-				g.setColor(Color.WHITE);
-			else if(s instanceof Fire)
-				g.setColor(Color.BLACK);
-			if(RoundVariables.loop.getShowSpritesPositions()==1)
-			{	// coordonnées
-				Font font = new Font("Dialog", Font.BOLD, 12);
-				g.setFont(font);
-				FontMetrics metrics = g.getFontMetrics(font);
-				String text = "("+line+","+col+")";
-				Rectangle2D box = metrics.getStringBounds(text, g);
-				int x = (int)Math.round(s.getCurrentPosX()-box.getWidth()/2);
-				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
-				g.drawString(text, x, y);
-			}
-			else if(RoundVariables.loop.getShowSpritesPositions()==2)
-			{	// coordonnées
-				Font font = new Font("Dialog", Font.BOLD, 12);
-				g.setFont(font);
-				FontMetrics metrics = g.getFontMetrics(font);
-				DecimalFormat nf = new DecimalFormat("000.00") ;
-				String textX = nf.format(s.getCurrentPosX());
-				String textY = nf.format(s.getCurrentPosY());
-				String textZ = nf.format(s.getCurrentPosZ());
-				Rectangle2D boxX = metrics.getStringBounds(textX, g);
-				Rectangle2D boxY = metrics.getStringBounds(textY, g);
-				Rectangle2D boxZ = metrics.getStringBounds(textZ, g);
-				int x = (int)Math.round(s.getCurrentPosX()-boxX.getWidth()/2);
-				int y = (int)Math.round(s.getCurrentPosY()-boxY.getHeight()/2);
-				g.drawString(textX, x, y);
-				x = (int)Math.round(s.getCurrentPosX()-boxY.getWidth()/2);
-				y = (int)Math.round(s.getCurrentPosY()+boxY.getHeight()/2);
-				g.drawString(textY, x, y);
-				x = (int)Math.round(s.getCurrentPosX()-boxZ.getWidth()/2);
-				y = (int)Math.round(s.getCurrentPosY()+boxY.getHeight()/2+boxZ.getHeight());
-				g.drawString(textZ, x, y);
-			}	
-		}
+
 		// bound sprites
 		if(s.hasBoundSprite())
 		{	Iterator<Sprite> i = s.getBoundSprites();

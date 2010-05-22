@@ -50,15 +50,23 @@ public class DisplayTilesPositions implements Display
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int show = 0;
+	private boolean show = false;
+	private boolean mode = true;
 	
 	@Override
 	public synchronized void switchShow(ControlEvent event)
-	{	show = (show+1)%4;
+	{	if(event.getIndex()==ControlEvent.REGULAR)
+			show = !show;
+		else
+			mode = !mode;
 	}
 	
-	private synchronized int getShow()
+	private synchronized boolean getShow()
 	{	return show;
+	}
+
+	private synchronized boolean getMode()
+	{	return mode;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -74,44 +82,47 @@ public class DisplayTilesPositions implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	int s = getShow();
-		// positions expressed in tiles
-		if(s==1)
-		{	g.setColor(Color.CYAN);
-			Font font = new Font("Dialog", Font.PLAIN, 12);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			for(int line=0;line<globalHeight;line++)
-			{	for(int col=0;col<globalWidth;col++)
-				{	Tile temp = level.getTile(line,col);
-					String text = "("+line+","+col+")";
-					Rectangle2D box = metrics.getStringBounds(text, g);
-					int x = (int)Math.round(temp.getPosX()-box.getWidth()/2);
-					int y = (int)Math.round(temp.getPosY()+box.getHeight()/2);
-					g.drawString(text, x, y);
+	{	boolean s = getShow();
+		boolean m = getMode();
+		if(s)
+		{	// positions expressed in tiles
+			if(m)
+			{	g.setColor(Color.CYAN);
+				Font font = new Font("Dialog", Font.PLAIN, 12);
+				g.setFont(font);
+				FontMetrics metrics = g.getFontMetrics(font);
+				for(int line=0;line<globalHeight;line++)
+				{	for(int col=0;col<globalWidth;col++)
+					{	Tile temp = level.getTile(line,col);
+						String text = "("+line+","+col+")";
+						Rectangle2D box = metrics.getStringBounds(text, g);
+						int x = (int)Math.round(temp.getPosX()-box.getWidth()/2);
+						int y = (int)Math.round(temp.getPosY()+box.getHeight()/2);
+						g.drawString(text, x, y);
+					}
 				}
 			}
-		}
-		// positions expressed in pixels
-		else if(s==2)
-		{	// coordonnées
-			g.setColor(Color.CYAN);
-			Font font = new Font("Dialog", Font.PLAIN, 12);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			for(int line=0;line<globalHeight;line++)
-			{	for(int col=0;col<globalWidth;col++)
-				{	Tile temp = level.getTile(line,col);
-					String textX = Double.toString(temp.getPosX());
-					String textY = Double.toString(temp.getPosY());
-					Rectangle2D boxX = metrics.getStringBounds(textX, g);
-					Rectangle2D boxY = metrics.getStringBounds(textY, g);
-					int x = (int)Math.round(temp.getPosX()-boxX.getWidth()/2);
-					int y = (int)Math.round(temp.getPosY());
-					g.drawString(textX, x, y);
-					x = (int)Math.round(temp.getPosX()-boxY.getWidth()/2);
-					y = (int)Math.round(temp.getPosY()+boxY.getHeight());
-					g.drawString(textY, x, y);
+			// positions expressed in pixels
+			else
+			{	// coordonnées
+				g.setColor(Color.CYAN);
+				Font font = new Font("Dialog", Font.PLAIN, 12);
+				g.setFont(font);
+				FontMetrics metrics = g.getFontMetrics(font);
+				for(int line=0;line<globalHeight;line++)
+				{	for(int col=0;col<globalWidth;col++)
+					{	Tile temp = level.getTile(line,col);
+						String textX = Double.toString(temp.getPosX());
+						String textY = Double.toString(temp.getPosY());
+						Rectangle2D boxX = metrics.getStringBounds(textX, g);
+						Rectangle2D boxY = metrics.getStringBounds(textY, g);
+						int x = (int)Math.round(temp.getPosX()-boxX.getWidth()/2);
+						int y = (int)Math.round(temp.getPosY());
+						g.drawString(textX, x, y);
+						x = (int)Math.round(temp.getPosX()-boxY.getWidth()/2);
+						y = (int)Math.round(temp.getPosY()+boxY.getHeight());
+						g.drawString(textY, x, y);
+					}
 				}
 			}
 		}
