@@ -49,11 +49,11 @@ public class DisplayTime implements Display
 	private int show = 0;
 	
 	@Override
-	public synchronized void switchShow()
+	public synchronized void switchShow(ControlEvent event)
 	{	show = (show+1)%4;
 	}
 	
-	public synchronized int getShow()
+	private synchronized int getShow()
 	{	return show;
 	}
 

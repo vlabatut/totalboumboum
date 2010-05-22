@@ -26,35 +26,38 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
-import java.util.List;
 
-import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.container.level.Level;
+import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
-import org.totalboumboum.engine.player.Player;
 
-public class DisplayPlayersNames implements Display
+public class DisplayTilesPositions implements Display
 {
-	public DisplayPlayersNames(VisibleLoop loop)
-	{	this.players = loop.getPlayers();
+	public DisplayTilesPositions(VisibleLoop loop)
+	{	this.level = loop.getLevel();
+		this.globalHeight = level.getGlobalHeight();
+		this.globalWidth = level.getGlobalWidth();
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
-	// PLAYERS			/////////////////////////////////////////////
+	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<Player> players;	
+	private Level level;
+	private int globalHeight;
+	private int globalWidth;
 	
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean show = false;
+	private int show = 0;
 	
 	@Override
 	public synchronized void switchShow(ControlEvent event)
-	{	show = !show;		
+	{	show = (show+1)%4;
 	}
 	
-	private synchronized boolean getShow()
+	private synchronized int getShow()
 	{	return show;
 	}
 
@@ -62,7 +65,7 @@ public class DisplayPlayersNames implements Display
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES;
+	{	return ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS;
 		
 	}
 
@@ -71,36 +74,44 @@ public class DisplayPlayersNames implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	if(getShow())
-		{	//Graphics2D g2 = (Graphics2D) g;
-			Font font = new Font("Dialog",Font.BOLD,12);
+	{	int s = getShow();
+		// positions expressed in tiles
+		if(s==1)
+		{	g.setColor(Color.CYAN);
+			Font font = new Font("Dialog", Font.PLAIN, 12);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
-			for(int i=0;i<players.size();i++)
-			{	Player player = players.get(i);
-				if(!player.isOut())
-				{	String text = "["+(i+1)+"] "+player.getName();
-					Sprite s = player.getSprite();
-					Rectangle2D box = metrics.getStringBounds(text,g);
-					double boxWidth = box.getWidth();
-					double boxHeight = box.getHeight();
-					int x = (int)Math.round(s.getCurrentPosX()-boxWidth/2);
-					int y = (int)Math.round(s.getCurrentPosY()+boxHeight/2-metrics.getDescent());
-					Color rectangleColor = new Color(255,255,255,100);
-					g.setColor(rectangleColor);
-					int arcDim = (int)Math.round(boxWidth/10);
-					double xMargin = boxWidth/15;
-					double yMargin = boxHeight/5;
-					int rectangleWidth = (int)Math.round(boxWidth+2*xMargin);
-					int rectangleHeight = (int)Math.round(boxHeight+2*yMargin);
-					int rx = (int)Math.round(s.getCurrentPosX()-rectangleWidth/2);
-					int ry = (int)Math.round(s.getCurrentPosY()-rectangleHeight/2);
-					g.fillRoundRect(rx,ry,rectangleWidth,rectangleHeight,arcDim,arcDim);
-					g.setColor(Color.BLACK);
-					g.drawString(text,x+1,y+1);
-					Color color = player.getColor().getColor();
-					g.setColor(color);
-					g.drawString(text,x,y);
+			for(int line=0;line<globalHeight;line++)
+			{	for(int col=0;col<globalWidth;col++)
+				{	Tile temp = level.getTile(line,col);
+					String text = "("+line+","+col+")";
+					Rectangle2D box = metrics.getStringBounds(text, g);
+					int x = (int)Math.round(temp.getPosX()-box.getWidth()/2);
+					int y = (int)Math.round(temp.getPosY()+box.getHeight()/2);
+					g.drawString(text, x, y);
+				}
+			}
+		}
+		// positions expressed in pixels
+		else if(s==2)
+		{	// coordonnées
+			g.setColor(Color.CYAN);
+			Font font = new Font("Dialog", Font.PLAIN, 12);
+			g.setFont(font);
+			FontMetrics metrics = g.getFontMetrics(font);
+			for(int line=0;line<globalHeight;line++)
+			{	for(int col=0;col<globalWidth;col++)
+				{	Tile temp = level.getTile(line,col);
+					String textX = Double.toString(temp.getPosX());
+					String textY = Double.toString(temp.getPosY());
+					Rectangle2D boxX = metrics.getStringBounds(textX, g);
+					Rectangle2D boxY = metrics.getStringBounds(textY, g);
+					int x = (int)Math.round(temp.getPosX()-boxX.getWidth()/2);
+					int y = (int)Math.round(temp.getPosY());
+					g.drawString(textX, x, y);
+					x = (int)Math.round(temp.getPosX()-boxY.getWidth()/2);
+					y = (int)Math.round(temp.getPosY()+boxY.getHeight());
+					g.drawString(textY, x, y);
 				}
 			}
 		}
