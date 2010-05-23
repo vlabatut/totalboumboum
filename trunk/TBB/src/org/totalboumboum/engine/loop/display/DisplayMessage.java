@@ -33,8 +33,9 @@ import org.totalboumboum.tools.images.MessageDisplayer;
 
 public class DisplayMessage implements Display
 {
-	public DisplayMessage()
-	{	
+	public DisplayMessage(VisibleLoop loop)
+	{	if(messageDisplayers == null)
+			initMessageDisplayers(loop);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -42,27 +43,26 @@ public class DisplayMessage implements Display
 	/////////////////////////////////////////////////////////////////
 	public static MessageDisplayer messageDisplayers[] = null;
 
-	public static void initMessageDisplayers(String texts[], VisibleLoop loop)
-	{	if(messageDisplayers == null)
-		{	messageDisplayers = new MessageDisplayer[texts.length+1];
-			messageDisplayers[0] = null;
-			Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
-			double coef = 0.9;
-			Font displayedTextFont = loop.getPanel().getMessageFont(dim.width*coef,dim.height*coef);
-			displayedTextFont = displayedTextFont.deriveFont(Font.BOLD);
-			int xc = (int)Math.round(dim.width/2);
-			int yc = (int)Math.round(dim.height/2);
-			for(int i=1;i<messageDisplayers.length;i++)
-			{	if(texts[i]!=null)
-				{	MessageDisplayer temp = new MessageDisplayer(displayedTextFont,xc,yc);
-					temp.setFatten(3);
-					temp.setTextColor(new Color(204, 18,128));
-					temp.updateText(texts[i]);
-					messageDisplayers[i] = temp;
-				}
-				else
-					messageDisplayers[i] = null;
+	private static void initMessageDisplayers(VisibleLoop loop)
+	{	String texts[] = loop.getEntryTexts();
+		messageDisplayers = new MessageDisplayer[texts.length+1];
+		messageDisplayers[0] = null;
+		Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
+		double coef = 0.9;
+		Font displayedTextFont = loop.getPanel().getMessageFont(dim.width*coef,dim.height*coef);
+		displayedTextFont = displayedTextFont.deriveFont(Font.BOLD);
+		int xc = (int)Math.round(dim.width/2);
+		int yc = (int)Math.round(dim.height/2);
+		for(int i=1;i<messageDisplayers.length;i++)
+		{	if(texts[i]!=null)
+			{	MessageDisplayer temp = new MessageDisplayer(displayedTextFont,xc,yc);
+				temp.setFatten(3);
+				temp.setTextColor(new Color(204, 18,128));
+				temp.updateText(texts[i]);
+				messageDisplayers[i] = temp;
 			}
+			else
+				messageDisplayers[i] = null;
 		}
 	}
 

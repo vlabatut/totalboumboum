@@ -181,7 +181,7 @@ public class Round implements StatisticHolder, Serializable
 		
 		stats.initEndDate();
 		 // possibly not record simulated stats
-		if((!loop.isSimulated() || Configuration.getStatisticsConfiguration().getIncludeSimulations())
+		if((!(loop instanceof SimulationLoop) || Configuration.getStatisticsConfiguration().getIncludeSimulations())
 		// possibly not record quick mode stats
 			&& (!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts())
 		// don't record replay stats	
@@ -310,7 +310,7 @@ public class Round implements StatisticHolder, Serializable
 	}
 	
 	private void celebrate()
-	{	loop.initCelebrationDuration();
+	{	loop.initCelebration();
 		ArrayList<Integer> winners = getWinners();
 		// celebration time !
 		for(int i=0;i<getProfiles().size();i++)
