@@ -24,9 +24,13 @@ package org.totalboumboum.engine.loop.event.control;
 public class ControlEvent
 {	private static final long serialVersionUID = 1L;
 	
+	public final static String REQUIRE_CANCEL_ROUND = "REQUIRE_CANCEL_ROUND";
 	public final static String REQUIRE_ENGINE_STEP = "REQUIRE_ENGINE_STEP";
 	public final static String REQUIRE_NEXT_MESSAGE = "REQUIRE_NEXT_MESSAGE";
+	public final static String REQUIRE_SLOW_DOWN = "REQUIRE_SLOW_DOWN";
+	public final static String REQUIRE_SPEED_UP = "REQUIRE_SPEED_UP";
 	public final static String SWITCH_AIS_PAUSE = "SWITCH_AIS_PAUSE";
+	public final static String SWITCH_BACKWARD = "SWITCH_BACKWARD";
 	public final static String SWITCH_DISPLAY_AIS_COLORS = "SWITCH_DISPLAY_AIS_COLORS";
 	public final static String SWITCH_DISPLAY_AIS_PATHS = "SWITCH_DISPLAY_AIS_PATHS";
 	public final static String SWITCH_DISPLAY_AIS_TEXTS = "SWITCH_DISPLAY_AIS_TEXTS";
@@ -38,6 +42,7 @@ public class ControlEvent
 	public final static String SWITCH_DISPLAY_TILES_POSITIONS = "SWITCH_DISPLAY_TILES_POSITIONS";
 	public final static String SWITCH_DISPLAY_TIME = "SWITCH_DISPLAY_TIME";
 	public final static String SWITCH_ENGINE_PAUSE = "SWITCH_ENGINE_PAUSE";
+	public final static String SWITCH_FAST_FORWARD = "SWITCH_FAST_FORWARD";
 	
 	public final static int REGULAR = 0;
 	public final static int MODE = 1;

@@ -24,7 +24,6 @@ package org.totalboumboum.engine.control.system;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
-import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
 
@@ -45,12 +44,14 @@ public class ServerSytemControl extends SystemControl
 		if(!keysPressed.containsKey(keyCode) || !keysPressed.get(keyCode))
 		{	keysPressed.put(keyCode, true);
 		
-			// termination keys
+			// force game termination
 			if ((keyCode == KeyEvent.VK_ESCAPE)
 //					|| (keyCode == KeyEvent.VK_END)
 //					|| ((keyCode == KeyEvent.VK_C) && e.isControlDown())
 				)
-				loop.setCanceled(true); //TODO
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_CANCEL_ROUND);
+				loop.processEvent(controlEvent);
+			}
 			
 			// faire renaitre le bonhomme
 //			else if(keyCode == KeyEvent.VK_1)
@@ -60,10 +61,12 @@ public class ServerSytemControl extends SystemControl
 
 			// debug: change speed
 			else if(keyCode == KeyEvent.VK_PAGE_UP)
-			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()*2);//TODO
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_SPEED_UP);
+				loop.processEvent(controlEvent);
 			}
 			else if(keyCode == KeyEvent.VK_PAGE_DOWN)
-			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()/2);//TODO
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_SLOW_DOWN);
+				loop.processEvent(controlEvent);
 			}
 
 			// debug: grid

@@ -52,7 +52,6 @@ import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.control.system.SystemControl;
 import org.totalboumboum.engine.loop.display.DisplayManager;
-import org.totalboumboum.engine.loop.display.DisplayMessage;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
@@ -102,7 +101,7 @@ public abstract class VisibleLoop extends Loop
 	protected boolean isCanceled = false;
 	protected Lock cancelLock = new ReentrantLock();
 
-	public void setCanceled(boolean isCanceled)
+	protected void setCanceled(boolean isCanceled)
 	{	cancelLock.lock();
 		this.isCanceled = isCanceled;
 		cancelLock.unlock();
@@ -115,6 +114,8 @@ public abstract class VisibleLoop extends Loop
 		cancelLock.unlock();
 		return result;
 	}
+	
+	protected abstract void updateCancel();
 
 	/////////////////////////////////////////////////////////////////
 	// INITIALIZING		/////////////////////////////////////////////
@@ -143,6 +144,12 @@ public abstract class VisibleLoop extends Loop
 		initDisplayManager();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// GAME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean gameStarted = false;
+	protected boolean gameOver = false;
+
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -283,21 +290,14 @@ public abstract class VisibleLoop extends Loop
 				update(); 
 				skips++;
 			}
-			RoundVariables.setFilterEvents(true);
-			
+			RoundVariables.setFilterEvents(true);			
 			framesSkipped = framesSkipped + skips;
-			storeStats( );
 			
 			long delta = afterTime-lastTime;
 			totalEngineTime = totalEngineTime + delta;
-			if(!getEnginePause() && hasStarted && celebrationDuration<0)
+			if(!getEnginePause() && gameStarted && !gameOver)
 			{	totalGameTime = totalGameTime + (long)(delta*Configuration.getEngineConfiguration().getSpeedCoeff());
 				round.updateTime(totalGameTime);
-			}
-			
-			if(isCanceled())
-			{	round.cancelGame();
-				setCanceled(false);
 			}
 		}
 		
@@ -369,7 +369,7 @@ public abstract class VisibleLoop extends Loop
 		}		
 	}
 	
-	protected void storeStats( )
+	protected void updateStats( )
     {	frameCount++;
     	long timeNow = System.currentTimeMillis();
 //System.out.println("stat time: "+(timeNow-prevStatsTime));    	
@@ -427,12 +427,11 @@ public abstract class VisibleLoop extends Loop
 	protected SystemControl systemControl;
 
 	public void processEvent(ControlEvent event)
-	{	String name = event.getName();
-		if(name.equals(ControlEvent.REQUIRE_ENGINE_STEP))
-			switchEngineStep(true);
-		else if(name.equals(ControlEvent.SWITCH_ENGINE_PAUSE))
-			switchEnginePause();
-		else
+	{	
+//		String name = event.getName();
+//		if(name.equals(ControlEvent.REQUIRE_CANCEL_ROUND))
+//			setCanceled(true);
+//		else
 			displayManager.provessEvent(event);		
 	}
 
@@ -589,7 +588,6 @@ public abstract class VisibleLoop extends Loop
 	protected Role[] entryRoles;
 	protected Double[] entryDelays;
 	protected int entryIndex = 0;
-	protected boolean hasStarted = false;
 	protected String[] entryTexts;
 	
 	protected void initEntries()
@@ -645,7 +643,7 @@ public abstract class VisibleLoop extends Loop
 //System.out.println(totalTime+": start");				
 						EngineEvent engineEvent = new EngineEvent(EngineEvent.ROUND_START);
 						level.spreadEvent(engineEvent);
-						hasStarted = true;
+						gameStarted = true;
 						done = true;
 					}
 					entryIndex++;

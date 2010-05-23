@@ -24,9 +24,9 @@ package org.totalboumboum.engine.control.system;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
-import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.event.control.ControlEvent;
 
 public class ReplaySytemControl extends SystemControl
 {	
@@ -51,57 +51,78 @@ public class ReplaySytemControl extends SystemControl
 //					|| (keyCode == KeyEvent.VK_END)
 //					|| ((keyCode == KeyEvent.VK_C) && e.isControlDown())
 				)
-			{	loop.setCanceled(true);
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_CANCEL_ROUND);
+				loop.processEvent(controlEvent);
 			}
 			
 			// replay: fast forward
 			else if(keyCode == KeyEvent.VK_RIGHT)
-			{	//TODO loop.setShowGrid(!loop.getShowGrid());
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_FAST_FORWARD);
+				loop.processEvent(controlEvent);
 			}
 			// replay: backward
 			else if(keyCode == KeyEvent.VK_LEFT)
-			{	//TODO loop.setShowGrid(!loop.getShowGrid());
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_BACKWARD);
+				loop.processEvent(controlEvent);
 			}
 			// replay: speed up
 			else if(keyCode == KeyEvent.VK_UP)
-			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()*2);
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_SPEED_UP);
+				loop.processEvent(controlEvent);
 			}
 			// replay: slow down
 			else if(keyCode == KeyEvent.VK_DOWN)
-			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()/2);
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_SLOW_DOWN);
+				loop.processEvent(controlEvent);
 			}
 			// replay: pause/play
 			else if(keyCode == KeyEvent.VK_SPACE)
-			{	loop.switchEnginePause();
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_ENGINE_PAUSE);
+				loop.processEvent(controlEvent);
 			}
 			
 			// debug: grid
 			else if(keyCode == KeyEvent.VK_F1)
-			{	loop.setShowGrid(!loop.getShowGrid());
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_GRID);
+				loop.processEvent(controlEvent);
 			}
 			// debug: tiles positions
 			else if(keyCode == KeyEvent.VK_F2)
-			{	loop.switchShowTilesPositions();
+			{	ControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,ControlEvent.MODE);
+				else
+					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,ControlEvent.REGULAR);
+				loop.processEvent(controlEvent);
 			}
 			// debug: sprites positions
 			else if(keyCode == KeyEvent.VK_F3)
-			{	loop.switchShowSpritesPositions();
+			{	ControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,ControlEvent.MODE);
+				else
+					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,ControlEvent.REGULAR);
+				loop.processEvent(controlEvent);
 			}
 			// debug: FPS/UPS
 			else if(keyCode == KeyEvent.VK_F4)
-			{	loop.switchShowFPS();
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_FPS);
+				loop.processEvent(controlEvent);
 			}
 			// debug: speed coeff
 			else if(keyCode == KeyEvent.VK_F5)
-			{	loop.switchShowSpeed();
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPEED);
+				loop.processEvent(controlEvent);
 			}
 			// debug: time
 			else if(keyCode == KeyEvent.VK_F6)
-			{	loop.switchShowTime();
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TIME);
+				loop.processEvent(controlEvent);
 			}
 			// debug: names
 			else if(keyCode == KeyEvent.VK_F7)
-			{	loop.switchShowNames();
+			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
+				loop.processEvent(controlEvent);
 			}
 		}
 	}
