@@ -125,11 +125,11 @@ long start = System.currentTimeMillis();
 		hollowLevel.instanciateZone();
 		loadStepOver();
 		
-		// load players : common stuff
+		// load players base
 		String baseFolder = FilePaths.getInstancesPath()+File.separator+RoundVariables.instance.getName()+File.separator+FileNames.FILE_HEROES;
 		HollowHeroFactory base = HollowHeroFactoryLoader.loadBase(baseFolder);
-//		loadStepOver();		
-		// load players : individual stuff
+		
+		// place players
 		int remainingPlayers = profiles.size();
 		Players plyrs = hollowLevel.getPlayers();
 		PlayerLocation[] initialPositions = plyrs.getLocations().get(remainingPlayers);
@@ -144,6 +144,8 @@ long start = System.currentTimeMillis();
 			for(int i=0;i<initialPositions.length;i++)
 				initialPositions[i] = loc.get(i);
 		}
+		
+		// create sprites and stuff
 		HashMap<String,Integer> items = plyrs.getInitialItems();
 		Itemset itemset = instance.getItemset();
 		Iterator<Profile> i = profiles.iterator();
@@ -453,9 +455,9 @@ System.out.println("total load time: "+(end-start));
 		else if(name.equals(ControlEvent.REQUIRE_ENGINE_STEP))
 			switchEngineStep(true);
 		else if(name.equals(ControlEvent.REQUIRE_SLOW_DOWN))
-			Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()/2);
+			slowDown();
 		else if(name.equals(ControlEvent.REQUIRE_SPEED_UP))
-			Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()*2);
+			speedUp();
 		else if(name.equals(ControlEvent.SWITCH_AIS_PAUSE))
 			switchEngineStep(true);
 		else if(name.equals(ControlEvent.SWITCH_ENGINE_PAUSE))

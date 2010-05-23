@@ -1216,5 +1216,6 @@ public class Launcher
 	
 	// TODO loop >> effacer tous les objets inutiles dans finish()
 	// TODO enregistrer des temps et positions à l'échelle 1:1 seulement
+	//TODO virer les enregistrement si on lit déjà!	(suffit de ne pas créer le replay ou aut')	
 	
 }

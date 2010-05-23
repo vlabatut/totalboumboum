@@ -438,7 +438,7 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// GRAPHICS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	transient protected LoopRenderPanel panel;
+	protected transient LoopRenderPanel panel;
 
 	public void setPanel(LoopRenderPanel panel)
 	{	loadLock.lock();
@@ -580,6 +580,23 @@ public abstract class VisibleLoop extends Loop
 		{	totalGameTime = totalGameTime + (long)(milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 			switchEngineStep(false);
 		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ENGINE SPEED		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected void speedUp()
+	{	debugLock.lock();
+		double coef = Configuration.getEngineConfiguration().getSpeedCoeff()*2;
+		Configuration.getEngineConfiguration().setSpeedCoeff(coef);
+		debugLock.unlock();
+	}
+	
+	protected void slowDown()
+	{	debugLock.lock();
+		double coef = Configuration.getEngineConfiguration().getSpeedCoeff()/2;
+		Configuration.getEngineConfiguration().setSpeedCoeff(coef);
+		debugLock.unlock();
 	}
 	
 	/////////////////////////////////////////////////////////////////
