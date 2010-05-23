@@ -79,6 +79,7 @@ import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
+import org.totalboumboum.engine.player.HumanPlayer;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
@@ -93,7 +94,8 @@ public class ServerLoop extends VisibleLoop
 	{	super(round);
 	}	
 	
-	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
+	@Override
+	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
 		systemControl = new ServerSytemControl(this);
 long start = System.currentTimeMillis();
@@ -149,7 +151,7 @@ long start = System.currentTimeMillis();
 			
 			// sprite
 			Profile profile = i.next();
-			AbstractPlayer player = new AbstractPlayer(profile,base,tile);
+			AbstractPlayer player = initPlayer(profile,base,tile);
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
 			pauseAis.add(false);
@@ -184,13 +186,18 @@ long start = System.currentTimeMillis();
 		}
 long end = System.currentTimeMillis();
 System.out.println("total load time: "+(end-start));
-		
-		// init logs
-		initLogs();
-		// init entries
-		initEntries();
-		// init displays
-		initDisplayManager();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS 			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
+	{	AbstractPlayer result;
+		if(profile.hasAi())
+			result = new AiPlayer(profile,base,tile);
+		else
+			result = new HumanPlayer(profile,base,tile);
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -198,6 +205,7 @@ System.out.println("total load time: "+(end-start));
 	/////////////////////////////////////////////////////////////////
 	private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
 	
+	@Override
 	protected void initLogs()
 	{	super.initLogs();
 		if(aisConfiguration.getLogExceptions())
@@ -228,6 +236,7 @@ System.out.println("total load time: "+(end-start));
 		}
 	}
 	
+	@Override
 	protected void updateLogs()
 	{	super.updateLogs();
 		if(aisConfiguration.getLogExceptions())
@@ -237,6 +246,7 @@ System.out.println("total load time: "+(end-start));
 		}
 	}
 	
+	@Override
 	protected void closeLogs()
 	{	super.closeLogs();
 		if(aisConfiguration.getLogExceptions())
@@ -250,7 +260,7 @@ System.out.println("total load time: "+(end-start));
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// DEBUG AIS		/////////////////////////////////////////////
+	// AIS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final ArrayList<Boolean> pauseAis = new ArrayList<Boolean>();
 
@@ -274,46 +284,58 @@ System.out.println("total load time: "+(end-start));
 		debugLock.unlock();
 		return result;
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// ENGINE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** AIs current time, used to inforce AIs period defined in the game options */
-	private long aiTime = 0;
-
-	public void process()
-	{	aiTime = 0;
-		super.process();
-	}
-
-	protected void update()
-	{	if(!getEnginePause() || getEngineStep())
-		{	super.update();
-			
-			// update AIs
-			if(hasStarted) // only after the round has started
-			{	aiTime = aiTime + milliPeriod;
-				if(aiTime >= Configuration.getAisConfiguration().getAiPeriod())
-				{	aiTime = 0;
-					for(int i=0;i<players.size();i++)
-					{	AbstractPlayer player = players.get(i);
-						boolean aiPause = getAiPause(i);
-						if(!player.isOut() && player instanceof AiPlayer)
-							((AiPlayer)player).updateAi(aiPause);
-					}
+	
+	private void updateAis()
+	{	if(hasStarted) // only after the round has started
+		{	aiTime = aiTime + milliPeriod;
+			if(aiTime >= Configuration.getAisConfiguration().getAiPeriod())
+			{	aiTime = 0;
+				for(int i=0;i<players.size();i++)
+				{	AbstractPlayer player = players.get(i);
+					boolean aiPause = getAiPause(i);
+					if(!player.isOut() && player instanceof AiPlayer)
+						((AiPlayer)player).updateAi(aiPause);
 				}
 			}
 		}
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** AIs current time, used to inforce AIs period defined in the game options */
+	private long aiTime = 0;
+
+	@Override
+	protected void initTimes()
+	{	super.initTimes();
+		aiTime = 0;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ENGINE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	@Override
+	protected void update()
+	{	if(!getEnginePause() || getEngineStep())
+		{	updateEngineStep();
+			updateLogs();
+			updateCelebration();
+			updateEntries();
+			level.update();		
+			updateAis();
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// DISPLAY MANAGER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	protected void initDisplayManager()
 	{	Display display;
-
-		// pre-round messages (ready-steady-go)
-		display = new DisplayMessage();
+	
+		display = new DisplayMessage(this);
 		displayManager.addDisplay(display);
 
 		// grid positions
@@ -367,7 +389,8 @@ System.out.println("total load time: "+(end-start));
 	/////////////////////////////////////////////////////////////////
 	double celebrationDuration = -1;
 
-	public void initCelebrationDuration()
+	@Override
+	public void initCelebration()
 	{	if(players.size()>0)
 		{	AbstractPlayer player = players.get(0);
 			Sprite sprite = player.getSprite();
@@ -378,6 +401,15 @@ System.out.println("total load time: "+(end-start));
 			celebrationDuration = 1;
 	}
 	
+	protected void updateCelebration()
+	{	if(celebrationDuration>0)
+		{	celebrationDuration = celebrationDuration - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+			if(celebrationDuration<=0)
+				setOver(true);
+		}
+	}
+		
+	@Override
 	public void reportVictory(int index)
 	{	AbstractPlayer player = players.get(index);
 		Sprite sprite = player.getSprite();
@@ -385,6 +417,7 @@ System.out.println("total load time: "+(end-start));
 		sprite.processEvent(event);
 	}
 	
+	@Override
 	public void reportDefeat(int index)
 	{	AbstractPlayer player = players.get(index);
 		Sprite sprite = player.getSprite();
@@ -395,6 +428,7 @@ System.out.println("total load time: "+(end-start));
 	/////////////////////////////////////////////////////////////////
 	// SYSTEM CONTROLS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void processEvent(ControlEvent event)
 	{	String name = event.getName();
 		if(name.equals(ControlEvent.SWITCH_AIS_PAUSE))

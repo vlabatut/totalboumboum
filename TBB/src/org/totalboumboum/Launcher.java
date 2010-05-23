@@ -1213,9 +1213,7 @@ public class Launcher
 	 *  - enregistrer une image au pif en cours de jeu, histoire de l'enregistrer en tant que preview
 	 */
 	
-	// TODO Player >> faire plusieurs classes spécialisées
 	
 	// TODO loop >> effacer tous les objets inutiles dans finish() 
 	
-	// TODO finir les Display
 }

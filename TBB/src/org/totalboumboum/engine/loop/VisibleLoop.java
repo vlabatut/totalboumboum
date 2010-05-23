@@ -43,10 +43,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.engine.EngineConfiguration;
+import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.Level;
+import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
+import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.control.system.SystemControl;
 import org.totalboumboum.engine.loop.display.DisplayManager;
 import org.totalboumboum.engine.loop.display.DisplayMessage;
@@ -66,8 +69,6 @@ public abstract class VisibleLoop extends Loop
 	{	super(round);
 	}	
 	
-	public abstract void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException;
-
 	/////////////////////////////////////////////////////////////////
 	// LEVEL 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -86,12 +87,62 @@ public abstract class VisibleLoop extends Loop
 	{	return players;
 	}
 
+	public void playerOut(AbstractPlayer player)
+	{	int index = players.indexOf(player);
+		round.playerOut(index);
+		panel.playerOut(index);	
+	}
+	
+	public abstract AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException;
+
 	/////////////////////////////////////////////////////////////////
-	// SYNCH			/////////////////////////////////////////////
+	// CANCELATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** indicates if the game has been canceled */
+	protected boolean isCanceled = false;
+	protected Lock cancelLock = new ReentrantLock();
+
+	public void setCanceled(boolean isCanceled)
+	{	cancelLock.lock();
+		this.isCanceled = isCanceled;
+		cancelLock.unlock();
+	}
+	
+	public boolean isCanceled()
+	{	boolean result;
+		cancelLock.lock();
+		result = isCanceled;
+		cancelLock.unlock();
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// INITIALIZING		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected Lock loadLock = new ReentrantLock();
 	protected Condition cond = loadLock.newCondition();
 
+	protected abstract void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException;
+
+	public void loadStepOver()
+	{	round.loadStepOver();
+	}
+	
+	/**
+	 * stuff not needing the panel to be initialized
+	 */
+	protected void startLoopInit()
+	{	initLogs();
+	}
+
+	/**
+	 * stuff to be initialized once the panel is set
+	 */
+	protected void finishLoopInit()
+	{	initEntries();
+		initDisplayManager();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -107,33 +158,24 @@ public abstract class VisibleLoop extends Loop
 	protected static int MAX_FRAME_SKIPS = 5;
 	/** game period expressed un milliseconds */
 	protected long milliPeriod;
-	protected Lock loopLock = new ReentrantLock();
-	/** indicates if the game has been canceled */
-	protected boolean isCanceled = false;
-
-	public void setCanceled(boolean isCanceled)
-	{	loopLock.lock();
-		this.isCanceled = isCanceled;
-		loopLock.unlock();
-	}
-	public boolean isCanceled()
-	{	boolean result;
-		loopLock.lock();
-		result = isCanceled;
-		loopLock.unlock();
-		return result;
-	}
 
 	public void run()
 	{	loadLock.lock();
 		try
 		{	// load the round
-			init();
+			load();
+			
+			// init the loop
+			startLoopInit();
+			
 			// wait for the GUI to be ready
 			if(panel==null)
 				cond.await();
+			
+			// finish init (stuff requiring the panel)
+			finishLoopInit();
+			
 			// start the game
-			DisplayMessage.initMessageDisplayers(entryTexts,this);
 			process();
 		}
 		catch (IllegalArgumentException e)
@@ -181,25 +223,21 @@ public abstract class VisibleLoop extends Loop
 		int noDelays = 0;
 		long excess = 0L;
 
-		for(int k=0;k<NUM_FPS;k++)
-		{	fpsStore[k] = 0;
-	        upsStore[k] = 0;
-		}		
-		
-		gameStartTime = System.currentTimeMillis();
-		prevStatsTime = gameStartTime;
+		// stats
+		initStats();		
+
+		// time
+		initTimes();
 		beforeTime = gameStartTime;
 		afterTime = gameStartTime;
-		totalGameTime = 0;
-		totalEngineTime = 0;
 
 		while(!isOver())
-		{	
-			milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
+		{	milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 			
 			// cycle
 			update();
 			panel.paintScreen();
+			
 			// time process
 			lastTime = afterTime;
 			afterTime = System.currentTimeMillis();
@@ -270,28 +308,7 @@ public abstract class VisibleLoop extends Loop
 		panel.loopOver();
 	}
 
-	protected void update()
-	{	if(getEngineStep())
-		{	totalGameTime = totalGameTime + (long)(milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
-			switchEngineStep(false);
-		}
-		
-		// logs
-		updateLogs();
-		
-		// celebrations
-		if(celebrationDuration>0)
-		{	celebrationDuration = celebrationDuration - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
-			if(celebrationDuration<=0)
-				setOver(true);
-		}
-		
-		// entry
-		manageEntries();
-		
-		// update level
-		level.update();
-	}
+	protected abstract void update();
 
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
@@ -300,6 +317,13 @@ public abstract class VisibleLoop extends Loop
 	protected long totalGameTime = 0;
 	/** total real time elapsed since the level started appearing */
 	protected long totalEngineTime = 0;
+	
+	protected void initTimes()
+	{	gameStartTime = System.currentTimeMillis();
+		prevStatsTime = gameStartTime;
+		totalGameTime = 0;
+		totalEngineTime = 0;
+	}
 	
 	public long getTotalGameTime()
 	{	return totalGameTime;	
@@ -310,7 +334,7 @@ public abstract class VisibleLoop extends Loop
 	}
 
 	public long getTotalRealTime()
-	{	long result = System.currentTimeMillis()-gameStartTime;
+	{	long result = System.currentTimeMillis() - gameStartTime;
 		return result;	
 	}
 
@@ -338,6 +362,13 @@ public abstract class VisibleLoop extends Loop
 	{	return averageUPS;	
 	}
 
+	protected void initStats()
+	{	for(int k=0;k<NUM_FPS;k++)
+		{	fpsStore[k] = 0;
+	        upsStore[k] = 0;
+		}		
+	}
+	
 	protected void storeStats( )
     {	frameCount++;
     	long timeNow = System.currentTimeMillis();
@@ -395,6 +426,16 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	protected SystemControl systemControl;
 
+	public void processEvent(ControlEvent event)
+	{	String name = event.getName();
+		if(name.equals(ControlEvent.REQUIRE_ENGINE_STEP))
+			switchEngineStep(true);
+		else if(name.equals(ControlEvent.SWITCH_ENGINE_PAUSE))
+			switchEnginePause();
+		else
+			displayManager.provessEvent(event);		
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// GRAPHICS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -424,22 +465,21 @@ public abstract class VisibleLoop extends Loop
 	{	return panel;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// LOOP END		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void playerOut(AbstractPlayer player)
-	{	int index = players.indexOf(player);
-		round.playerOut(index);
-		panel.playerOut(index);	
+	public void draw(Graphics g)
+	{	// level
+		level.draw(g);
+
+		// display manager
+		displayManager.draw(g);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LOAD 			/////////////////////////////////////////////
+	// DISPLAY MANAGER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void loadStepOver()
-	{	round.loadStepOver();
-	}
-
+	DisplayManager displayManager = new DisplayManager();
+	
+	protected abstract void initDisplayManager();
+	
 	/////////////////////////////////////////////////////////////////
 	// LOGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -504,29 +544,16 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// ENGINE PAUSE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected int showSpritesPositions = 0;
 	protected boolean pauseEngine = false;
 	protected boolean stepEngine = false;
 	protected Lock debugLock = new ReentrantLock();
-
-	public void switchShowSpritesPositions()
-	{	debugLock.lock();
-		showSpritesPositions = (showSpritesPositions+1)%3;
-		debugLock.unlock();
-	}
-	public int getShowSpritesPositions()
-	{	int result;
-		debugLock.lock();
-		result = showSpritesPositions;
-		debugLock.unlock();
-		return result;
-	}
 
 	public void switchEnginePause()
 	{	debugLock.lock();
 		pauseEngine = !pauseEngine;		
 		debugLock.unlock();
 	}
+	
 	public boolean getEnginePause()
 	{	boolean result;
 		debugLock.lock();
@@ -540,6 +567,7 @@ public abstract class VisibleLoop extends Loop
 		stepEngine = value;		
 		debugLock.unlock();
 	}
+	
 	public boolean getEngineStep()
 	{	boolean result;
 		debugLock.lock();
@@ -547,7 +575,14 @@ public abstract class VisibleLoop extends Loop
 		debugLock.unlock();
 		return result;
 	}
-
+	
+	protected void updateEngineStep()
+	{	if(getEngineStep())
+		{	totalGameTime = totalGameTime + (long)(milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+			switchEngineStep(false);
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ENTRY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -580,7 +615,7 @@ public abstract class VisibleLoop extends Loop
 //	System.out.println("entryDelays["+i+"]="+entryDelays[i]);
 	}
 
-	protected void manageEntries()
+	protected void updateEntries()
 	{	// general case
 		if(entryIndex<entryDelays.length)
 		{	boolean done = false;
@@ -619,41 +654,8 @@ public abstract class VisibleLoop extends Loop
 		}
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// SYSTEM CONTROLS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void processEvent(ControlEvent event)
-	{	String name = event.getName();
-		if(name.equals(ControlEvent.REQUIRE_ENGINE_STEP))
-			switchEngineStep(true);
-		else if(name.equals(ControlEvent.SWITCH_ENGINE_PAUSE))
-			switchEnginePause();
-		else
-			displayManager.provessEvent(event);		
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// DISPLAY MANAGER	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	DisplayManager displayManager = new DisplayManager();
-	
-	protected abstract void initDisplayManager();
-	
-	/////////////////////////////////////////////////////////////////
-	// DRAW				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void draw(Graphics g)
-	{	// level
-		level.draw(g);
-
-		// display manager
-		displayManager.draw(g);
-	}
-	/////////////////////////////////////////////////////////////////
-	// SIMULATED		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public boolean isSimulated()
-	{	return false;		
+	public String[] getEntryTexts()
+	{	return entryTexts;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -691,5 +693,3 @@ public abstract class VisibleLoop extends Loop
 		}		
 	}	
 }
-
-// TODO gérer différents types de Player: local, IA, remote
