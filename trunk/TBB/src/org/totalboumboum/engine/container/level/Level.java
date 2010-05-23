@@ -34,21 +34,21 @@ import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.event.AbstractEvent;
 import org.totalboumboum.engine.content.manager.trajectory.MoveZone;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
 public class Level
-{	public Level(ServerLoop loop)				
+{	public Level(VisibleLoop loop)				
 	{	this.loop = loop;
 	}
 	
      /////////////////////////////////////////////////////////////////
 	// LOOP					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ServerLoop loop;
+	private VisibleLoop loop;
 
-	public ServerLoop getLoop()
+	public VisibleLoop getLoop()
 	{	return loop;	
 	}
 	

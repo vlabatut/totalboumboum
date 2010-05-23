@@ -233,7 +233,7 @@ public class Replay
 	/**
 	 * reads an event in the currently open stream.
 	 */
-	public ReplayEvent loadEvent(ReplayEvent event)
+	public ReplayEvent loadEvent()
 	{	ReplayEvent result = null;
 		try
 		{	Object object = in.readObject();

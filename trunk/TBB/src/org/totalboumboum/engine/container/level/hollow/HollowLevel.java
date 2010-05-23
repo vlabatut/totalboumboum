@@ -41,11 +41,14 @@ import org.totalboumboum.engine.container.level.zone.Zone;
 import org.totalboumboum.engine.container.theme.Theme;
 import org.totalboumboum.engine.container.theme.ThemeLoader;
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.Role;
+import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.files.FileNames;
@@ -129,23 +132,10 @@ public class HollowLevel implements Serializable
 	public void setZone(Zone zone)
 	{	this.zone = zone;		
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// THEME			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-    public void loadTheme() throws SAXException, IOException, ParserConfigurationException, ClassNotFoundException
-    {	// theme
-    	String individualFolder = FilePaths.getInstancesPath()+File.separator+levelInfo.getInstanceName();
-    	individualFolder = individualFolder+File.separator+FileNames.FILE_THEMES+File.separator+levelInfo.getThemeName();
-    	Theme theme = ThemeLoader.loadTheme(individualFolder);
-//		level.setTheme(theme);
-    	
-		instance.initLinks();
-		theme.setInstance(instance);
-		
-    	// init zone
+	
+	public void instanciateZone()
+	{	// init zone
 		Tile[][] matrix = level.getMatrix();
-//		Itemset itemset = level.getItemset();
 		Itemset itemset = instance.getItemset();
 		Bombset bombset = instance.getBombsetMap().getBombset(null);
 		double globalLeftX = level.getGlobalLeftX();
@@ -204,6 +194,86 @@ if(bomb==null)
 		}
 		level.initTileList();
 	}
+
+	public SpriteCreationEvent synchronizeZone()
+	{	// init zone
+		Tile[][] matrix = level.getMatrix();
+		Itemset itemset = instance.getItemset();
+		Bombset bombset = instance.getBombsetMap().getBombset(null);
+		double globalLeftX = level.getGlobalLeftX();
+		double globalUpY = level.getGlobalUpY();
+		int globalHeight = levelInfo.getGlobalHeight();
+		int globalWidth = levelInfo.getGlobalWidth();
+		
+		// init tiles
+		for(int line=0;line<globalHeight;line++)
+		{	for(int col=0;col<globalWidth;col++)
+			{	double x = globalLeftX + RoundVariables.scaledTileDimension/2 + col*RoundVariables.scaledTileDimension;
+				double y = globalUpY + RoundVariables.scaledTileDimension/2 + line*RoundVariables.scaledTileDimension;
+				matrix[line][col] = new Tile(level,line,col,x,y);
+			}
+		}
+		
+		// init sprites
+		boolean goOn;
+		SpriteCreationEvent event;
+		do
+		{	event = (SpriteCreationEvent) RoundVariables.replay.loadEvent();
+			int line = event.getLine();
+			int col = event.getCol();
+			//PredefinedColor color = event.getColor();
+			Role role = event.getRole();
+			String name = event.getName();
+			int id = event.getSpriteId();
+			//long time = sce.getTime();
+			goOn = role != Role.HERO;
+			if(goOn)
+			{	Sprite sprite = null;
+				// floors
+				if(role==Role.FLOOR)
+				{	sprite = theme.makeFloor(name,matrix[line][col]);
+					sprite.setId(id);
+				}
+				// blocks
+				else if(role==Role.BLOCK)
+				{	sprite = theme.makeBlock(name,matrix[line][col]);
+					sprite.setId(id);
+				}
+				// items
+				else if(role==Role.ITEM)
+				{	sprite = itemset.makeItem(name,matrix[line][col]);
+					sprite.setId(id);
+				}
+				// bombs
+				else if(role==Role.BOMB)
+				{	sprite = bombset.makeBomb(name,matrix[line][col],0);
+					sprite.setId(id);
+				}
+				// insert sprite
+				level.insertSpriteTile(sprite);
+			}
+		}
+		while(goOn);
+		
+		level.initTileList();
+		return event;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// THEME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+    private transient Theme theme;
+	
+	public void loadTheme() throws SAXException, IOException, ParserConfigurationException, ClassNotFoundException
+    {	// theme
+    	String individualFolder = FilePaths.getInstancesPath()+File.separator+levelInfo.getInstanceName();
+    	individualFolder = individualFolder+File.separator+FileNames.FILE_THEMES+File.separator+levelInfo.getThemeName();
+    	theme = ThemeLoader.loadTheme(individualFolder);
+//		level.setTheme(theme);
+    	
+		instance.initLinks();
+		theme.setInstance(instance);
+	}
     
 	/////////////////////////////////////////////////////////////////
 	// LEVEL			/////////////////////////////////////////////
@@ -214,7 +284,7 @@ if(bomb==null)
     {	return level;    
     }
     
-	public void initLevel(ServerLoop loop)
+	public void initLevel(VisibleLoop loop)
 	{	// init
     	level = new Level(loop);
 		Dimension panelDim = Configuration.getVideoConfiguration().getPanelDimension();

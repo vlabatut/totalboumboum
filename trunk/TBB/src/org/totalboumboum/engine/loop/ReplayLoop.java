@@ -33,9 +33,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Map.Entry;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -54,7 +51,6 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.system.ReplaySytemControl;
-import org.totalboumboum.engine.control.system.SystemControl;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.PlayerLocation;
@@ -79,6 +75,9 @@ public class ReplayLoop extends VisibleLoop
 	{	super(round);
 	}	
 
+	/////////////////////////////////////////////////////////////////
+	// INITIALIZING		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
@@ -104,6 +103,7 @@ long start = System.currentTimeMillis();
 		instance.loadItemset();
 		loadStepOver();
 		hollowLevel.loadTheme();
+		hollowLevel.synchronizeZone();
 		loadStepOver();
 		
 		// load players : common stuff
@@ -136,13 +136,9 @@ long start = System.currentTimeMillis();
 			
 			// sprite
 			Profile profile = i.next();
-			AbstractPlayer player = new AbstractPlayer(profile,base,tile);
+			AbstractPlayer player = initPlayer(profile,base,tile);
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
-			pauseAis.add(false);
-			showAiPaths.add(false);
-			showAiTileTexts.add(false);
-			showAiTileColors.add(false);
 			
 			// record/transmit event
 			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
@@ -168,20 +164,12 @@ long start = System.currentTimeMillis();
 				}
 			}
 			
-			// ai
-			player.initAi();
-			
 			// next player...
 			loadStepOver();
 			j++;
 		}
 long end = System.currentTimeMillis();
 System.out.println("total load time: "+(end-start));
-		
-		// init logs
-		initLogs();
-		// init entries
-		initEntries();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -368,6 +356,12 @@ System.out.println("total load time: "+(end-start));
 
 	@Override
 	protected void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void updateCancel() {
 		// TODO Auto-generated method stub
 		
 	}	

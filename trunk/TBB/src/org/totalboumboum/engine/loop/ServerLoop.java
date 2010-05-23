@@ -94,6 +94,9 @@ public class ServerLoop extends VisibleLoop
 	{	super(round);
 	}	
 	
+	/////////////////////////////////////////////////////////////////
+	// INITIALIZING		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
@@ -119,6 +122,7 @@ long start = System.currentTimeMillis();
 		instance.loadItemset();
 		loadStepOver();
 		hollowLevel.loadTheme();
+		hollowLevel.instanciateZone();
 		loadStepOver();
 		
 		// load players : common stuff
