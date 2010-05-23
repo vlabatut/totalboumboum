@@ -38,7 +38,7 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
@@ -46,7 +46,6 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.calculus.CalculusTools;
-
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
@@ -138,7 +137,7 @@ public class AiZone
 	 * @param elapsedTime
 	 */
 	private void updateTimes(long elapsedTime)
-	{	ServerLoop loop = level.getLoop();
+	{	VisibleLoop loop = level.getLoop();
 		this.totalTime = loop.getTotalGameTime();
 		this.elapsedTime = elapsedTime;
 		this.limitTime = loop.getRound().getLimits().getTimeLimit().getThreshold();

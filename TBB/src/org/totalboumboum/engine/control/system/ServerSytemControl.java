@@ -22,22 +22,20 @@ package org.totalboumboum.engine.control.system;
  */
 
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
 
 import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
 
 public class ServerSytemControl extends SystemControl
 {	
-	private ServerLoop loop;
-	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
-	private HashMap<Integer,Boolean> keysPressed;
-	
 	public ServerSytemControl(ServerLoop loop)
 	{	super(loop);
 	}
 
-	// handles termination and game-play keys
+	/////////////////////////////////////////////////////////////////
+	// KEYS				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
 	@Override
 	public void keyPressed(KeyEvent e)
 	{	int keyCode = e.getKeyCode();

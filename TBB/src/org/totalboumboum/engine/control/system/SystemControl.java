@@ -29,16 +29,17 @@ import org.totalboumboum.engine.loop.VisibleLoop;
 
 public abstract class SystemControl implements KeyListener
 {	
-	protected VisibleLoop loop;
-	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
-	private HashMap<Integer,Boolean> keysPressed;
-	
 	public SystemControl(VisibleLoop loop)
 	{	this.loop = loop;
 		keysPressed = new HashMap<Integer,Boolean>();
 	}
 
-	// handles termination and game-play keys
+	/////////////////////////////////////////////////////////////////
+	// KEYS				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
+	protected HashMap<Integer,Boolean> keysPressed;
+
 	@Override
 	public void keyPressed(KeyEvent e)
 	{	// to override
@@ -46,15 +47,22 @@ public abstract class SystemControl implements KeyListener
 
 	@Override
 	public void keyReleased(KeyEvent e)
-	{	int keyCode = e.getKeyCode();
-		keysPressed.put(keyCode, false);		
+	{	// to override	
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0)
-	{	// NOTE a priori inutile ici
+	{	// (a priori) useless here
 	}
-	
+
+	/////////////////////////////////////////////////////////////////
+	// LOOP				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected VisibleLoop loop;
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()

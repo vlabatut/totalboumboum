@@ -22,23 +22,19 @@ package org.totalboumboum.engine.control.system;
  */
 
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
 
 import org.totalboumboum.engine.loop.ReplayLoop;
-import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
 
 public class ReplaySytemControl extends SystemControl
 {	
-	private ServerLoop loop;
-	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
-	private HashMap<Integer,Boolean> keysPressed;
-	
 	public ReplaySytemControl(ReplayLoop loop)
 	{	super(loop);
 	}
 
-	// handles termination and game-play keys
+	/////////////////////////////////////////////////////////////////
+	// KEYS				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void keyPressed(KeyEvent e)
 	{	int keyCode = e.getKeyCode();
@@ -124,6 +120,23 @@ public class ReplaySytemControl extends SystemControl
 			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
 				loop.processEvent(controlEvent);
 			}
+		}
+	}
+	
+	@Override
+	public void keyReleased(KeyEvent e)
+	{	int keyCode = e.getKeyCode();
+		keysPressed.put(keyCode, false);
+		
+		// replay: fast forward
+		if(keyCode == KeyEvent.VK_RIGHT)
+		{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_FAST_FORWARD);
+			loop.processEvent(controlEvent);
+		}
+		// replay: backward
+		else if(keyCode == KeyEvent.VK_LEFT)
+		{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_BACKWARD);
+			loop.processEvent(controlEvent);
 		}
 	}
 }
