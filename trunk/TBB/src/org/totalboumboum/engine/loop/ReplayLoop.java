@@ -79,7 +79,8 @@ public class ReplayLoop extends VisibleLoop
 	{	super(round);
 	}	
 
-	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
+	@Override
+	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
 		systemControl = new ReplaySytemControl(this);
 long start = System.currentTimeMillis();
@@ -183,19 +184,10 @@ System.out.println("total load time: "+(end-start));
 		initEntries();
 	}
 	
-	public void loadStepOver()
-	{	round.loadStepOver();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// SYNCH			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Lock loadLock = new ReentrantLock();
-	private Condition cond = loadLock.newCondition();
-
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void run()
 	{	// init
 		RankingService rankingService = GameStatistics.getRankingService();
@@ -327,193 +319,56 @@ System.out.println("total load time: "+(end-start));
 		round.loopOver();
 	}
 		
-/*	
-	public void run()
-	{	List<Profile> profiles = round.getProfiles();
-		HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-		
-		// process the final results		
-		List<List<Profile>> metalist = new ArrayList<List<Profile>>();
-		List<Profile> temp = new ArrayList<Profile>(profiles);
-		metalist.add(temp);
-		List<Boolean> flags = new ArrayList<Boolean>();
-		flags.add(false);
-		processOrder(metalist,flags);
-		
-		// process the total statistics
-		HashMap<Integer,HashMap<Score,Long>> playersScores = new HashMap<Integer,HashMap<Score,Long>>();
-		double stdev = 1; //TODO would be better with the actual standard-deviation
-		Score scores[] = Score.values();
-		for(Profile profile: profiles)
-		{	int playerId = profile.getId();
-			HashMap<Score,Long> playerScores = new HashMap<Score,Long>();
-			playersScores.put(playerId,playerScores);
-			PlayerStats playerStats = playersStats.get(playerId);
-			for(int i=0;i<scores.length;i++)
-			{	Score score = scores[i];
-				long total = playerStats.getScore(score);
-				Random generator = new Random();
-				double z = generator.nextGaussian();
-				long value = Math.round(z*stdev + total);
-				if(value<0)
-					value = 0;
-				playerScores.put(score,value);
-			}			
-		}
-		
-		// verify consistancy between scores
-		long previousTime = Long.MAX_VALUE;
-		long totalKills = 0;
-		for(int i=0;i<metalist.size();i++)
-		{	List<Profile> list = metalist.get(i);
-			long groupTime = -1;
-			for(int j=0;j<list.size();j++)
-			{	Profile profile = list.get(i);
-				int playerId = profile.getId();
-				HashMap<Score,Long> playerScores = playersScores.get(playerId);
-				// death
-				long deaths = playerScores.get(Score.BOMBEDS);
-				if(i==0)
-					deaths = 0;
-				else
-					deaths = 1;
-				playerScores.put(Score.BOMBEDS,deaths);
-				// kills
-				long kills = playerScores.get(Score.BOMBINGS);
-				if(totalKills+kills>profiles.size())
-				{	kills = profiles.size() - totalKills;
-					playerScores.put(Score.BOMBINGS,kills);
-				}
-				//bombs
-				long bombs = playerScores.get(Score.BOMBS);
-				if(bombs<kills)
-					playerScores.put(Score.BOMBS,kills);
-				// time
-				long time = playerScores.get(Score.TIME); //NOTE should be generalized for other points systems
-				if(groupTime<0)
-				{	if(time>previousTime)
-					{	time = previousTime-1;
-						playerScores.put(Score.TIME,time);
-					}
-					groupTime = time;
-					previousTime = time;
-				}
-				else
-					playerScores.put(Score.TIME,groupTime);
-				// other scores
-				playerScores.put(Score.CROWNS,0l);//NOTE temporary;
-				playerScores.put(Score.PAINTINGS,0l);//NOTE temporary;
-			}
-		}
-		
-		// process the round events
-		for(Profile profile: profiles)
-		{	int playerId = profile.getId();
-			HashMap<Score,Long> playerScores = playersScores.get(playerId);
-			// Score.BOMBS
-			long playerScore = playerScores.get(Score.BOMBS);
-			// Score.ITEMS
-			// Score.BOMBEDS
-			// Score.BOMBINGS
-			// Score.TIME
-			// Score.PAINTINGS
-			// Score.CROWNS
-			
-			for(Score score: Score.values())
-			{	long playerScore = playerScores.get(score);
-				
-			}			
-		}
-		
-		StatisticEvent event;
-		
-		round.addStatisticEvent(event)
-	}
-*/
-/*	
-	private void processOrder(List<List<Profile>> metalist, List<Boolean> flags)
-	{	// find a list to process
-		int index = flags.indexOf(false);
-		List<Profile> list = metalist.get(index);
-		flags.set(index,true);
-		
-		// process the list
-		if(list.size()>1)
-		{	RankingService rankingService = GameStatistics.getRankingService();
-			Iterator<Profile> it = list.iterator();
-			Profile p1 = it.next();
-			int id1 = p1.getId();
-			PlayerRating pr1 = rankingService.getPlayerRating(id1);
-			List<Profile> before = new ArrayList<Profile>();
-			List<Profile> after = new ArrayList<Profile>();
-			while(it.hasNext())
-			{	Profile p2 = it.next();
-				it.remove();
-				int id2 = p2.getId();
-				PlayerRating pr2 = rankingService.getPlayerRating(id2);
-				// draw ?
-				double threshold = rankingService.calculateProbabilityOfDraw(pr1,pr2);
-				double proba = Math.random();
-				if(proba>threshold)
-				{	// win ?
-					threshold = rankingService.calculateProbabilityOfWin(pr1,pr2);
-					proba = Math.random();
-					if(proba<=threshold)
-						after.add(p2);
-					else
-						before.add(p2);
-				}
-			}
-			if(before.size()>0)
-			{	metalist.add(index,before);
-				flags.add(index,false);
-				index++;
-			}
-			if(after.size()>0)
-			{	index++;
-				if(index<metalist.size())
-				{	metalist.add(index,after);
-					flags.add(index,false);
-				}
-				else
-				{	metalist.add(after);
-					flags.add(false);
-				}
-			}
-		}
-	}
-*/	
-
 	/////////////////////////////////////////////////////////////////
 	// CELEBRATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void initCelebration()
 	{	setOver(true);
 	}
 
+	@Override
 	public void reportVictory(int index)
 	{	// useless here		
 	}
 	
+	@Override
 	public void reportDefeat(int index)
 	{	// useless here		
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// SIMULATED		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public boolean isSimulated()
-	{	return false;		
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
+	@Override
 	public void finish()
 	{	if(!finished)
 		{	super.finish();
 		}		
+	}
+
+	@Override
+	protected void initDisplayManager() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base,
+			Tile tile) throws IllegalArgumentException, SecurityException,
+			ParserConfigurationException, SAXException, IOException,
+			ClassNotFoundException, InstantiationException,
+			IllegalAccessException, InvocationTargetException,
+			NoSuchMethodException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void update() {
+		// TODO Auto-generated method stub
+		
 	}	
 }

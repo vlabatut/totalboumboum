@@ -189,6 +189,16 @@ System.out.println("total load time: "+(end-start));
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// CANCELATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected void updateCancel()
+	{	if(isCanceled())
+		{	round.cancelGame();
+			setCanceled(false);
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// PLAYERS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
@@ -286,7 +296,7 @@ System.out.println("total load time: "+(end-start));
 	}
 	
 	private void updateAis()
-	{	if(hasStarted) // only after the round has started
+	{	if(gameStarted) // only after the round has started
 		{	aiTime = aiTime + milliPeriod;
 			if(aiTime >= Configuration.getAisConfiguration().getAiPeriod())
 			{	aiTime = 0;
@@ -315,16 +325,17 @@ System.out.println("total load time: "+(end-start));
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	@Override
 	protected void update()
 	{	if(!getEnginePause() || getEngineStep())
-		{	updateEngineStep();
+		{	updateCancel();
+			updateEngineStep();
 			updateLogs();
 			updateCelebration();
 			updateEntries();
 			level.update();		
 			updateAis();
+			updateStats();
 		}
 	}
 
@@ -399,6 +410,8 @@ System.out.println("total load time: "+(end-start));
 		}
 		else
 			celebrationDuration = 1;
+		if(celebrationDuration>=0)
+			gameOver = true;
 	}
 	
 	protected void updateCelebration()
@@ -431,8 +444,18 @@ System.out.println("total load time: "+(end-start));
 	@Override
 	public void processEvent(ControlEvent event)
 	{	String name = event.getName();
-		if(name.equals(ControlEvent.SWITCH_AIS_PAUSE))
+		if(name.equals(ControlEvent.REQUIRE_CANCEL_ROUND))
+			setCanceled(true);
+		else if(name.equals(ControlEvent.REQUIRE_ENGINE_STEP))
 			switchEngineStep(true);
+		else if(name.equals(ControlEvent.REQUIRE_SLOW_DOWN))
+			Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()/2);
+		else if(name.equals(ControlEvent.REQUIRE_SPEED_UP))
+			Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()*2);
+		else if(name.equals(ControlEvent.SWITCH_AIS_PAUSE))
+			switchEngineStep(true);
+		else if(name.equals(ControlEvent.SWITCH_ENGINE_PAUSE))
+			switchEnginePause();
 		else
 			super.processEvent(event);
 	}

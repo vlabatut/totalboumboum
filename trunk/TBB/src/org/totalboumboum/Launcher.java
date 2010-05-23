@@ -1214,6 +1214,7 @@ public class Launcher
 	 */
 	
 	
-	// TODO loop >> effacer tous les objets inutiles dans finish() 
+	// TODO loop >> effacer tous les objets inutiles dans finish()
+	// TODO enregistrer des temps et positions à l'échelle 1:1 seulement
 	
 }
