@@ -218,6 +218,10 @@ public class Round implements StatisticHolder, Serializable
 	{	return stats;
 	}
 
+	public void setStats(StatisticRound stats)
+	{	this.stats = stats;	
+	}
+	
 	public void addStatisticEvent(StatisticEvent event)
 	{	if(!isOver())
 		{	stats.addStatisticEvent(event);
@@ -311,7 +315,7 @@ public class Round implements StatisticHolder, Serializable
 	
 	private void celebrate()
 	{	loop.initCelebration();
-		ArrayList<Integer> winners = getWinners();
+		List<Integer> winners = getWinners();
 		// celebration time !
 		for(int i=0;i<getProfiles().size();i++)
 		{	if(winners.contains(new Integer(i)))	
