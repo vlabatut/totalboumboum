@@ -64,6 +64,14 @@ public class RoundVariables
 			replay.recordEvent(event);
 	}
 
+	public static ReplayEvent loadEvent()
+	{	ReplayEvent result = null;
+		if(replay!=null)
+			result = replay.loadEvent();
+		return result;
+	}
+
+	
 	public static void setFilterEvents(boolean flag)
 	{	if(replay!=null)
 			replay.setFilterEvents(flag);

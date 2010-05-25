@@ -50,8 +50,8 @@ public abstract class Loop implements Runnable, Serializable
 	
 	public void setOver(boolean isOver)
 	{	this.isOver = isOver;
-		
 	}
+	
 	public boolean isOver()
 	{	return isOver;
 	}

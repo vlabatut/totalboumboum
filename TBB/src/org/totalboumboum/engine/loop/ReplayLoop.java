@@ -48,11 +48,13 @@ import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.ReplayedPlayer;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -134,7 +136,8 @@ public class ReplayLoop extends VisibleLoop
 	/////////////////////////////////////////////////////////////////
 	@Override
 	protected void updateCancel()
-	{	// TODO Auto-generated method stub
+	{	setOver(true);
+		setCanceled(false);
 	}	
 
 	/////////////////////////////////////////////////////////////////
@@ -155,8 +158,22 @@ public class ReplayLoop extends VisibleLoop
 	{	if(!getEnginePause() || getEngineStep())
 		{	updateCancel();
 			updateEntries();
-			level.update();		
+			level.update();
+			updateEvents();
 			updateStats();
+		}
+	}
+	
+	private void updateEvents()
+	{	Object o = RoundVariables.loadEvent();
+		if(o instanceof ReplayEvent)
+		{
+			// TODO
+		}
+		else
+		{	StatisticRound stats = (StatisticRound)o;
+			round.setStats(stats);
+			setOver(true);
 		}
 	}
 
