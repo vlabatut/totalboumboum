@@ -123,13 +123,20 @@ public class Round implements StatisticHolder, Serializable
 		
 			// recording
 			if(Configuration.getEngineConfiguration().isRecordRounds() && !replayed)
-				RoundVariables.replay = new Replay(this);
+			{	replay = new Replay(this);
+				RoundVariables.replay = replay;
+			}
 		
 			Thread animator = new Thread(loop);
 			animator.start();
 //			loop.init();
 		}
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// REPLAY			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Replay replay = null;
 	
 	public void finish()
 	{	// loop
@@ -177,9 +184,24 @@ public class Round implements StatisticHolder, Serializable
 	}	
 	
 	public void loopOver()
-	{	match.roundOver();
-		
-		stats.initEndDate();
+	{	// read stats from replay if replayed
+		if(replayed)
+		{	try
+			{	replay.finishReplaying();
+				StatisticRound stats = replay.getReadRoundStats();
+				setStats(stats);
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
+		// init stats date only if not replayed
+		else
+			stats.initEndDate();
+	
 		 // possibly not record simulated stats
 		if((!(loop instanceof SimulationLoop) || Configuration.getStatisticsConfiguration().getIncludeSimulations())
 		// possibly not record quick mode stats
@@ -188,7 +210,7 @@ public class Round implements StatisticHolder, Serializable
 			&& !replayed)
 			GameStatistics.update(stats);
 		
-		// possible end replay recording
+		// possibly end replay recording
 		if(Configuration.getEngineConfiguration().isRecordRounds())
 		{	try
 			{	RoundVariables.replay.finishRecording(stats);
@@ -204,6 +226,7 @@ public class Round implements StatisticHolder, Serializable
 			}
 		}
 			
+		match.roundOver();
 		if(panel!=null)
 		{	panel.roundOver();
 		}

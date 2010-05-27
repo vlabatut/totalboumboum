@@ -30,6 +30,8 @@ import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.fire.FireFactory;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
+import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
 public class Fireset extends AbstractFireset
@@ -68,6 +70,12 @@ public class Fireset extends AbstractFireset
 if(fireFactory==null)
 	System.out.println(name);
 		result = fireFactory.makeSprite(tile);
+		
+		// record/transmit event
+		String eventName = getName()+"/"+name;
+		SpriteCreationEvent event = new SpriteCreationEvent(result,eventName);
+		RoundVariables.recordEvent(event);
+
 		return result;
 	}
 }

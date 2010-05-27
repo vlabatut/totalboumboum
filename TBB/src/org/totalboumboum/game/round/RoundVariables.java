@@ -70,7 +70,6 @@ public class RoundVariables
 			result = replay.loadEvent();
 		return result;
 	}
-
 	
 	public static void setFilterEvents(boolean flag)
 	{	if(replay!=null)

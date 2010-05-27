@@ -24,6 +24,8 @@ package org.totalboumboum.engine.loop;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,6 +35,9 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
@@ -49,12 +54,14 @@ import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.ReplayedPlayer;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -95,7 +102,7 @@ public class ReplayLoop extends VisibleLoop
 		instance.loadItemset();
 		loadStepOver();
 		hollowLevel.loadTheme();
-		SpriteCreationEvent event = hollowLevel.synchronizeZone();
+		hollowLevel.synchronizeZone();
 		loadStepOver();
 		
 		// load players base
@@ -105,7 +112,10 @@ public class ReplayLoop extends VisibleLoop
 		// create players sprites
 		Iterator<Profile> i = profiles.iterator();
 		while(i.hasNext())
-		{	// extract info from event
+		{	// get event
+			SpriteCreationEvent event = (SpriteCreationEvent)RoundVariables.loadEvent();
+			
+			// extract info from event
 			int col = event.getCol();
 			int line = event.getLine();
 			int id = event.getSpriteId();
@@ -129,8 +139,15 @@ public class ReplayLoop extends VisibleLoop
 		long end = System.currentTimeMillis();
 		if(verbose)
 			System.out.println("total load time: "+(end-start));
+		
 	}
 	
+	@Override
+	protected void startLoopInit()
+	{	super.startLoopInit();
+		initEvent();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// CANCELATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -163,17 +180,58 @@ public class ReplayLoop extends VisibleLoop
 			updateStats();
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// REPLAY			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ReplayEvent currentEvent = null;
+	
+	private void initEvent()
+	{	currentEvent = (ReplayEvent)RoundVariables.loadEvent();
+	}
 	
 	private void updateEvents()
-	{	Object o = RoundVariables.loadEvent();
-		if(o instanceof ReplayEvent)
-		{
-			// TODO
+	{	// read events
+		List<ReplayEvent> events = new ArrayList<ReplayEvent>();
+		while(currentEvent.getTime()<getTotalEngineTime())
+		{	events.add(currentEvent);
+			currentEvent = RoundVariables.loadEvent();
 		}
-		else
-		{	StatisticRound stats = (StatisticRound)o;
-			round.setStats(stats);
-			setOver(true);
+
+		// process events
+		for(ReplayEvent event: events)
+		{	// sprite creation
+			if(event instanceof SpriteCreationEvent)
+			{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
+				HollowLevel hollowLevel = round.getHollowLevel();
+				Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
+				level.insertSpriteTile(sprite);
+			}
+			
+			// sprite anime change
+			else if(event instanceof SpriteChangeAnimeEvent)
+			{	SpriteChangeAnimeEvent scaEvent = (SpriteChangeAnimeEvent) event;
+				int id = scaEvent.getSpriteId();
+				level.getSprite(id);
+				HashMap<String,Object> changes = scaEvent.getChanges();
+				Direction direction = (Direction) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_DIRECTION);
+				Double duration = (Double) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_DURATION);
+				GestureName gestureName = (GestureName) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_GESTURE);
+				Boolean reinit = (Boolean) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_REINIT);
+				
+				// TODO
+			}
+			
+			// sprite position change
+			else if(event instanceof SpriteChangePositionEvent)
+			{
+				// TODO
+			}
+			
+			// final event
+			else
+			{	setOver(true);
+			}
 		}
 	}
 
