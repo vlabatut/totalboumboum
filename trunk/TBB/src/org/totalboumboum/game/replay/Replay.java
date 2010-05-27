@@ -45,6 +45,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
+import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.round.Round;
@@ -161,6 +162,8 @@ public class Replay
 	 */
 	public void finishRecording(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
 	{	// record the stats
+		StopReplayEvent event = new StopReplayEvent();
+		out.writeObject(event);
 		out.writeObject(stats);		
 		// close the object stream
 		out.close();
@@ -192,6 +195,7 @@ public class Replay
 	private LevelInfo readLevelInfo = null;
 	private Limits<RoundLimit> readRoundLimits = null;
 	private HashMap<String,Integer> readItemCounts = null;
+	private StatisticRound readRoundStats = null;
 	
 	/**
 	 * creates and open a file named after the current date and time
@@ -230,6 +234,10 @@ public class Replay
 	{	return readItemCounts;
 	}
 
+	public StatisticRound getReadRoundStats()
+	{	return readRoundStats;
+	}
+
 	/**
 	 * reads an event in the currently open stream.
 	 */
@@ -257,9 +265,11 @@ public class Replay
 	
 	/**
 	 * close the replay output stream (if it was previously opened)
+	 * @throws ClassNotFoundException 
 	 */
-	public void finishReplaying() throws IOException
-	{	in.close();
+	public void finishReplaying() throws IOException, ClassNotFoundException
+	{	readRoundStats = (StatisticRound) in.readObject();
+		in.close();
 	}
 
 	/////////////////////////////////////////////////////////////////

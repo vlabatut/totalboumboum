@@ -32,6 +32,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.bombset.Bombset;
+import org.totalboumboum.engine.container.fireset.Fireset;
+import org.totalboumboum.engine.container.fireset.FiresetMap;
 import org.totalboumboum.engine.container.itemset.Itemset;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
@@ -48,6 +50,8 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
+import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
@@ -193,13 +197,15 @@ if(bomb==null)
 			}
 		}
 		level.initTileList();
+		
+		// record ending event
+		StopReplayEvent event = new StopReplayEvent();
+		RoundVariables.recordEvent(event);
 	}
 
-	public SpriteCreationEvent synchronizeZone()
+	public void synchronizeZone()
 	{	// init zone
 		Tile[][] matrix = level.getMatrix();
-		Itemset itemset = instance.getItemset();
-		Bombset bombset = instance.getBombsetMap().getBombset(null);
 		double globalLeftX = level.getGlobalLeftX();
 		double globalUpY = level.getGlobalUpY();
 		int globalHeight = levelInfo.getGlobalHeight();
@@ -215,48 +221,68 @@ if(bomb==null)
 		}
 		
 		// init sprites
-		boolean goOn;
-		SpriteCreationEvent event;
+		ReplayEvent tempEvent = RoundVariables.replay.loadEvent();
 		do
-		{	event = (SpriteCreationEvent) RoundVariables.replay.loadEvent();
-			int line = event.getLine();
-			int col = event.getCol();
-			//PredefinedColor color = event.getColor();
-			Role role = event.getRole();
-			String name = event.getName();
-			int id = event.getSpriteId();
-			//long time = sce.getTime();
-			goOn = role != Role.HERO;
-			if(goOn)
-			{	Sprite sprite = null;
-				// floors
-				if(role==Role.FLOOR)
-				{	sprite = theme.makeFloor(name,matrix[line][col]);
-					sprite.setId(id);
-				}
-				// blocks
-				else if(role==Role.BLOCK)
-				{	sprite = theme.makeBlock(name,matrix[line][col]);
-					sprite.setId(id);
-				}
-				// items
-				else if(role==Role.ITEM)
-				{	sprite = itemset.makeItem(name,matrix[line][col]);
-					sprite.setId(id);
-				}
-				// bombs
-				else if(role==Role.BOMB)
-				{	sprite = bombset.makeBomb(name,matrix[line][col],0);
-					sprite.setId(id);
-				}
-				// insert sprite
-				level.insertSpriteTile(sprite);
-			}
+		{	SpriteCreationEvent event = (SpriteCreationEvent) tempEvent;
+			Sprite sprite = createSpriteFromEvent(event);
+			level.insertSpriteTile(sprite);
+			tempEvent = RoundVariables.replay.loadEvent();
 		}
-		while(goOn);
+		while(!(tempEvent instanceof StopReplayEvent));
 		
 		level.initTileList();
-		return event;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Sprite createSpriteFromEvent(SpriteCreationEvent event)
+	{	Tile[][] matrix = level.getMatrix();
+		
+		int line = event.getLine();
+		int col = event.getCol();
+		//PredefinedColor color = event.getColor();
+		Role role = event.getRole();
+		String name = event.getName();
+		int id = event.getSpriteId();
+		//long time = sce.getTime();
+		Sprite sprite = null;
+		
+		// floors
+		if(role==Role.FLOOR)
+		{	sprite = theme.makeFloor(name,matrix[line][col]);
+			sprite.setId(id);
+		}
+		// blocks
+		else if(role==Role.BLOCK)
+		{	sprite = theme.makeBlock(name,matrix[line][col]);
+			sprite.setId(id);
+		}
+		// items
+		else if(role==Role.ITEM)
+		{	Itemset itemset = instance.getItemset();
+			sprite = itemset.makeItem(name,matrix[line][col]);
+			sprite.setId(id);
+		}
+		// bombs
+		else if(role==Role.BOMB)
+		{	Bombset bombset = instance.getBombsetMap().getBombset(null);
+			sprite = bombset.makeBomb(name,matrix[line][col],0);
+			sprite.setId(id);
+		}
+		// fires
+		else if(role==Role.FIRE)
+		{	String names[] = name.split("/");
+			FiresetMap firesetMap = instance.getFiresetMap();
+			Fireset fireset = firesetMap.getFireset(names[0]);
+			sprite = fireset.makeFire(names[1],matrix[line][col]);
+			sprite.setId(id);
+		}
+		// heroes
+		else if(role==Role.HERO)
+		{	//TODO
+		}
+		return sprite;
 	}
 	
 	/////////////////////////////////////////////////////////////////
