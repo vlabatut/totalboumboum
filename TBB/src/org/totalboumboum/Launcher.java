@@ -1216,6 +1216,9 @@ public class Launcher
 	
 	// TODO loop >> effacer tous les objets inutiles dans finish()
 	// TODO enregistrer des temps et positions à l'échelle 1:1 seulement
+	//		>> non : rengistrer à l'échelle courrante
+	//		   garder cette échelle
+	//		   lors de la lecture, Replay fait la conversion de l'échelle originelle vers la courante
 	//TODO virer les enregistrement si on lit déjà!	(suffit de ne pas créer le replay ou aut')	
 	
 }

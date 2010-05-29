@@ -55,7 +55,6 @@ import org.totalboumboum.engine.loop.display.DisplayTime;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
@@ -212,20 +211,38 @@ public class ReplayLoop extends VisibleLoop
 			else if(event instanceof SpriteChangeAnimeEvent)
 			{	SpriteChangeAnimeEvent scaEvent = (SpriteChangeAnimeEvent) event;
 				int id = scaEvent.getSpriteId();
-				level.getSprite(id);
+				Sprite sprite = level.getSprite(id);
 				HashMap<String,Object> changes = scaEvent.getChanges();
 				Direction direction = (Direction) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_DIRECTION);
+				if(direction==null)
+					direction = sprite.getCurrentFacingDirection();
 				Double duration = (Double) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_DURATION);
+				if(duration==null)
+					duration = 0d;
 				GestureName gestureName = (GestureName) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_GESTURE);
+				if(gestureName==null)
+					gestureName = sprite.getCurrentGesture().getName();
 				Boolean reinit = (Boolean) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_REINIT);
-				
-				// TODO
+				if(reinit==null)
+					reinit = false;
+				sprite.setGesture(gestureName,direction,Direction.NONE,reinit,duration);
 			}
 			
 			// sprite position change
 			else if(event instanceof SpriteChangePositionEvent)
-			{
-				// TODO
+			{	SpriteChangePositionEvent scpEvent = (SpriteChangePositionEvent) event;
+				int id = scpEvent.getSpriteId();
+				Sprite sprite = level.getSprite(id);
+				HashMap<String,Object> changes = scpEvent.getChanges();
+				Double x = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_X);
+				if(x!=null)
+					sprite.setCurrentPosX(x);
+				Double y = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Y);
+				if(y!=null)
+					sprite.setCurrentPosY(y);
+				Double z = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Z);
+				if(z!=null)
+					sprite.setCurrentPosZ(z);
 			}
 			
 			// final event
