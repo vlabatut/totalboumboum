@@ -779,6 +779,9 @@ public abstract class Sprite
 	public double getCurrentPosZ()
 	{	return trajectoryManager.getCurrentPosZ();
 	}
+	public void setCurrentPosZ(double positionZ)
+	{	trajectoryManager.setCurrentPosZ(positionZ);
+	}
 	
 	public double getTrajectoryTotalDuration()
 	{	return trajectoryManager.getTotalDuration();
