@@ -90,6 +90,7 @@ public class SingleTournament extends AbstractTournament
 		Round round = new Round(match);
 		match.setAuthor("Replay");
 	    round.setReplayed(true);
+	    round.setReplay(replay);
 		{	// notes
 			ArrayList<String> notes = new ArrayList<String>();
 			notes.add("auto-generated notes");

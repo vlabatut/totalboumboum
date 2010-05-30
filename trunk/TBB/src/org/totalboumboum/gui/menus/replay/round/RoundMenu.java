@@ -37,7 +37,7 @@ import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundRenderPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -207,64 +207,45 @@ buttonStatistics.setEnabled(false);
 			int height = getHeight();
 			Dimension dim = new Dimension(width,height);
 			
-			// simulation
-			if(round.isSimulated())
-			{	// create progress bar
-				progressBar = new JProgressBar();
-				progressBar.setFont(font);
-				progressBar.setStringPainted(true); 
-				String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_SIMULATION);
-				progressBar.setString(text);
-				progressBar.setMaximumSize(dim);
-				remove(2);
-				add(progressBar,2);
-				validate();
-				repaint();
-				// start simulation
-				round.simulate();
+			// create progress bar
+			int limit = profiles.size()+4;
+			progressBar = new JProgressBar(0,limit);
+			progressBar.setFont(font);
+			progressBar.setStringPainted(true); 
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_FIRESETMAP);
+			progressBar.setString(text);
+			progressBar.setMaximumSize(dim);
+			remove(2);
+			add(progressBar,2);
+			validate();
+			repaint();
+			// round advance
+			try
+			{	round.progress();
 			}
-			// actual game
-			else
-			{	// create progress bar
-				int limit = profiles.size()+4;
-				progressBar = new JProgressBar(0,limit);
-				progressBar.setFont(font);
-				progressBar.setStringPainted(true); 
-				String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_FIRESETMAP);
-				progressBar.setString(text);
-				progressBar.setMaximumSize(dim);
-				remove(2);
-				add(progressBar,2);
-				validate();
-				repaint();
-				// round advance
-				try
-				{	round.progress();
-				}
-				catch (IllegalArgumentException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SecurityException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IllegalAccessException e1)
-				{	e1.printStackTrace();
-				}
-				catch (NoSuchFieldException e1)
-				{	e1.printStackTrace();
-				}
+			catch (IllegalArgumentException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SecurityException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ClassNotFoundException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IllegalAccessException e1)
+			{	e1.printStackTrace();
+			}
+			catch (NoSuchFieldException e1)
+			{	e1.printStackTrace();
 			}
 	    }
 	} 
@@ -328,7 +309,7 @@ buttonStatistics.setEnabled(false);
 				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_COMPLETE);
 					progressBar.setString(text);
 					progressBar.repaint();
-					loopPanel = new LoopPanel(container.getMenuContainer(),container,(ServerLoop)round.getLoop());
+					loopPanel = new LoopPanel(container.getMenuContainer(),container,(VisibleLoop)round.getLoop());
 					replaceWith(loopPanel);
 					loopPanel.start();
 				}

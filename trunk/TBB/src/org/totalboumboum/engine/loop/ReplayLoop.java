@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,8 +34,6 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
@@ -57,6 +54,7 @@ import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.ReplayedPlayer;
 import org.totalboumboum.game.round.Round;
@@ -112,7 +110,11 @@ public class ReplayLoop extends VisibleLoop
 		Iterator<Profile> i = profiles.iterator();
 		while(i.hasNext())
 		{	// get event
-			SpriteCreationEvent event = (SpriteCreationEvent)RoundVariables.loadEvent();
+			SpriteEvent tempEvent;
+			do
+				tempEvent = (SpriteEvent)RoundVariables.loadEvent();
+			while(!(tempEvent instanceof SpriteCreationEvent));
+			SpriteCreationEvent event = (SpriteCreationEvent)tempEvent;
 			
 			// extract info from event
 			int col = event.getCol();
@@ -212,20 +214,7 @@ public class ReplayLoop extends VisibleLoop
 			{	SpriteChangeAnimeEvent scaEvent = (SpriteChangeAnimeEvent) event;
 				int id = scaEvent.getSpriteId();
 				Sprite sprite = level.getSprite(id);
-				HashMap<String,Object> changes = scaEvent.getChanges();
-				Direction direction = (Direction) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_DIRECTION);
-				if(direction==null)
-					direction = sprite.getCurrentFacingDirection();
-				Double duration = (Double) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_DURATION);
-				if(duration==null)
-					duration = 0d;
-				GestureName gestureName = (GestureName) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_GESTURE);
-				if(gestureName==null)
-					gestureName = sprite.getCurrentGesture().getName();
-				Boolean reinit = (Boolean) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_REINIT);
-				if(reinit==null)
-					reinit = false;
-				sprite.setGesture(gestureName,direction,Direction.NONE,reinit,duration);
+				sprite.processChangeAnimeEvent(scaEvent);
 			}
 			
 			// sprite position change
@@ -233,16 +222,7 @@ public class ReplayLoop extends VisibleLoop
 			{	SpriteChangePositionEvent scpEvent = (SpriteChangePositionEvent) event;
 				int id = scpEvent.getSpriteId();
 				Sprite sprite = level.getSprite(id);
-				HashMap<String,Object> changes = scpEvent.getChanges();
-				Double x = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_X);
-				if(x!=null)
-					sprite.setCurrentPosX(x);
-				Double y = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Y);
-				if(y!=null)
-					sprite.setCurrentPosY(y);
-				Double z = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Z);
-				if(z!=null)
-					sprite.setCurrentPosZ(z);
+				sprite.processChangePositionEvent(scpEvent);
 			}
 			
 			// final event

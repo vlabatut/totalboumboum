@@ -55,7 +55,8 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 public class Replay
-{
+{	private boolean verbose = true;
+	
 	public Replay()
 	{	
 	}
@@ -148,12 +149,15 @@ public class Replay
 	 * records an event in the currently open stream.
 	 */
 	public void recordEvent(ReplayEvent event)
-	{	try
-		{	out.writeObject(event);
-//			System.out.println("recording: "+event);
-		}
-		catch (IOException e)
-		{	e.printStackTrace();
+	{	if(out!=null)
+		{	try
+			{	out.writeObject(event);
+				if(verbose)
+				System.out.println("recording: "+event);
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
 		}
 	}
 	
@@ -161,22 +165,24 @@ public class Replay
 	 * close the replay output stream (if it was previously opened)
 	 */
 	public void finishRecording(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
-	{	// record the stats
-		StopReplayEvent event = new StopReplayEvent();
-		out.writeObject(event);
-		out.writeObject(stats);		
-		// close the object stream
-		out.close();
-		
-		// possibly record the preview
-		if(preview!=null)
-		{	String previewFilename = FilePaths.getReplaysPath() + File.separator + folder + File.separator + FileNames.FILE_PREVIEW + FileNames.EXTENSION_PNG;
-			File file = new File(previewFilename);
-			ImageIO.write(preview,"png",file);
+	{	if(out!=null)
+		{	// record the stats
+			StopReplayEvent event = new StopReplayEvent();
+			out.writeObject(event);
+			out.writeObject(stats);		
+			// close the object stream
+			out.close();
+			
+			// possibly record the preview
+			if(preview!=null)
+			{	String previewFilename = FilePaths.getReplaysPath() + File.separator + folder + File.separator + FileNames.FILE_PREVIEW + FileNames.EXTENSION_PNG;
+				File file = new File(previewFilename);
+				ImageIO.write(preview,"png",file);
+			}
+			
+			// record the associated xml file
+			ReplaySaver.saveReplay(this);
 		}
-		
-		// record the associated xml file
-		ReplaySaver.saveReplay(this);
 	}
 
 	public void setFilterEvents(boolean flag)
@@ -243,11 +249,13 @@ public class Replay
 	 */
 	public ReplayEvent loadEvent()
 	{	ReplayEvent result = null;
+		
 		try
 		{	Object object = in.readObject();
 			if(object instanceof ReplayEvent)
 			{	result = (ReplayEvent) object;
-				System.out.println("reading: "+result);
+				if(verbose)
+					System.out.println("reading: "+result);
 			}
 		}
 		catch (EOFException e) 

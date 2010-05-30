@@ -44,7 +44,7 @@ public abstract class ReplayEvent implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// SEND EVENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected transient boolean sendEvent = false;
+	protected transient boolean sendEvent = true;
 
 	public boolean getSendEvent()
 	{	return sendEvent;	

@@ -30,6 +30,7 @@ public abstract class SpriteChangeEvent extends SpriteEvent
 
 	protected SpriteChangeEvent(Sprite sprite)
 	{	super(sprite);
+		sendEvent = false;
 	}
 
 	/////////////////////////////////////////////////////////////////
