@@ -138,7 +138,7 @@ public class ReplayLoop extends VisibleLoop
 			
 			// level
 			Hero hero = (Hero)player.getSprite();
-			hero.setId(id);
+			level.changeSpriteId(hero,id);
 			
 			// next player...
 			loadStepOver();
