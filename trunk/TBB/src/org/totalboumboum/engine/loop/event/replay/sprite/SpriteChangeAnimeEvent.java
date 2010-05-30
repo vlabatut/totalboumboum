@@ -53,7 +53,7 @@ public class SpriteChangeAnimeEvent extends SpriteChangeEvent
 	// TO STRING			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String toString()
-	{	String result = "SpriteChangeAnimeEvent: " + getSpriteInfo() + " ";
+	{	String result = "SpriteChangeAnimeEvent("+time+":"+spriteId+"): " + getSpriteInfo() + " ";
 		if(changes.containsKey(SPRITE_EVENT_GESTURE))
 			result = result + "gesture=" + changes.get(SPRITE_EVENT_GESTURE) + " ";
 		if(changes.containsKey(SPRITE_EVENT_DIRECTION))

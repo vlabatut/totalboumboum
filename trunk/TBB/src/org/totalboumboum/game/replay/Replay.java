@@ -153,7 +153,7 @@ public class Replay
 		{	try
 			{	out.writeObject(event);
 				if(verbose)
-				System.out.println("recording: "+event);
+					System.out.println("recording: "+event);
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
@@ -168,8 +168,10 @@ public class Replay
 	{	if(out!=null)
 		{	// record the stats
 			StopReplayEvent event = new StopReplayEvent();
-			out.writeObject(event);
-			out.writeObject(stats);		
+			recordEvent(event);
+			out.writeObject(stats);
+			if(verbose)
+				System.out.println("recording: stats");
 			// close the object stream
 			out.close();
 			
@@ -276,7 +278,9 @@ public class Replay
 	 * @throws ClassNotFoundException 
 	 */
 	public void finishReplaying() throws IOException, ClassNotFoundException
-	{	readRoundStats = (StatisticRound) in.readObject();
+	{	if(verbose)
+			System.out.println("reading: stats");
+		readRoundStats = (StatisticRound) in.readObject();
 		in.close();
 	}
 

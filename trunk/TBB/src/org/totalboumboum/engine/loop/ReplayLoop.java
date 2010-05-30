@@ -34,6 +34,7 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
@@ -51,6 +52,7 @@ import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
+import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
@@ -110,11 +112,15 @@ public class ReplayLoop extends VisibleLoop
 		Iterator<Profile> i = profiles.iterator();
 		while(i.hasNext())
 		{	// get event
-			SpriteEvent tempEvent;
+			SpriteCreationEvent event;
 			do
-				tempEvent = (SpriteEvent)RoundVariables.loadEvent();
-			while(!(tempEvent instanceof SpriteCreationEvent));
-			SpriteCreationEvent event = (SpriteCreationEvent)tempEvent;
+			{	SpriteEvent tempEvent;
+				do
+					tempEvent = (SpriteEvent)RoundVariables.loadEvent();
+				while(!(tempEvent instanceof SpriteCreationEvent));
+				event = (SpriteCreationEvent)tempEvent;
+			}
+			while(event.getRole()!=Role.HERO);
 			
 			// extract info from event
 			int col = event.getCol();
@@ -154,8 +160,10 @@ public class ReplayLoop extends VisibleLoop
 	/////////////////////////////////////////////////////////////////
 	@Override
 	protected void updateCancel()
-	{	setOver(true);
-		setCanceled(false);
+	{	if(isCanceled())
+		{	setOver(true);
+			setCanceled(false);
+		}
 	}	
 
 	/////////////////////////////////////////////////////////////////
@@ -188,46 +196,58 @@ public class ReplayLoop extends VisibleLoop
 	private ReplayEvent currentEvent = null;
 	
 	private void initEvent()
-	{	currentEvent = (ReplayEvent)RoundVariables.loadEvent();
+	{	// get all the remaining useless SpriteEvents
+		ReplayEvent tempEvent;
+		do
+			tempEvent = (ReplayEvent)RoundVariables.loadEvent();
+		while(!(tempEvent instanceof StopReplayEvent));
+
+		// get the first meaningful ReplayEvent
+		currentEvent = (ReplayEvent)RoundVariables.loadEvent();
 	}
 	
 	private void updateEvents()
-	{	// read events
-		List<ReplayEvent> events = new ArrayList<ReplayEvent>();
-		while(currentEvent.getTime()<getTotalEngineTime())
-		{	events.add(currentEvent);
-			currentEvent = RoundVariables.loadEvent();
-		}
-
-		// process events
-		for(ReplayEvent event: events)
-		{	// sprite creation
-			if(event instanceof SpriteCreationEvent)
-			{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
-				HollowLevel hollowLevel = round.getHollowLevel();
-				Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
-				level.insertSpriteTile(sprite);
+	{	if(!isOver())
+		{	// read events
+System.out.println("/////////////////////////////////////////");		
+			List<ReplayEvent> events = new ArrayList<ReplayEvent>();
+			while(currentEvent.getTime()<getTotalEngineTime() && !(currentEvent instanceof StopReplayEvent))
+			{	events.add(currentEvent);
+System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
+				currentEvent = RoundVariables.loadEvent();
 			}
-			
-			// sprite anime change
-			else if(event instanceof SpriteChangeAnimeEvent)
-			{	SpriteChangeAnimeEvent scaEvent = (SpriteChangeAnimeEvent) event;
-				int id = scaEvent.getSpriteId();
-				Sprite sprite = level.getSprite(id);
-				sprite.processChangeAnimeEvent(scaEvent);
-			}
-			
-			// sprite position change
-			else if(event instanceof SpriteChangePositionEvent)
-			{	SpriteChangePositionEvent scpEvent = (SpriteChangePositionEvent) event;
-				int id = scpEvent.getSpriteId();
-				Sprite sprite = level.getSprite(id);
-				sprite.processChangePositionEvent(scpEvent);
-			}
-			
-			// final event
-			else
-			{	setOver(true);
+	
+			// process events
+			for(ReplayEvent event: events)
+			{	// sprite creation
+				if(event instanceof SpriteCreationEvent)
+				{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
+					HollowLevel hollowLevel = round.getHollowLevel();
+					Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
+					level.insertSpriteTile(sprite);
+				}
+				
+				// sprite anime change
+				else if(event instanceof SpriteChangeAnimeEvent)
+				{	SpriteChangeAnimeEvent scaEvent = (SpriteChangeAnimeEvent) event;
+					int id = scaEvent.getSpriteId();
+					Sprite sprite = level.getSprite(id);
+					if(sprite!=null) //certainly a creation-related anime change, when initializing the gesture
+						sprite.processChangeAnimeEvent(scaEvent);
+				}
+				
+				// sprite position change
+				else if(event instanceof SpriteChangePositionEvent)
+				{	SpriteChangePositionEvent scpEvent = (SpriteChangePositionEvent) event;
+					int id = scpEvent.getSpriteId();
+					Sprite sprite = level.getSprite(id);
+					sprite.processChangePositionEvent(scpEvent);
+				}
+				
+				// final event
+				else
+				{	setOver(true);
+				}
 			}
 		}
 	}

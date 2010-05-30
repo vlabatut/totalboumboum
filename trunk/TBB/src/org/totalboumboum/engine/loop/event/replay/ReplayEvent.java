@@ -29,7 +29,7 @@ public abstract class ReplayEvent implements Serializable
 {	private static final long serialVersionUID = 1L;
 	
 	protected ReplayEvent()
-	{	RoundVariables.loop.getTotalEngineTime();
+	{	time = RoundVariables.loop.getTotalEngineTime();
 	}
 	
 	/////////////////////////////////////////////////////////////////

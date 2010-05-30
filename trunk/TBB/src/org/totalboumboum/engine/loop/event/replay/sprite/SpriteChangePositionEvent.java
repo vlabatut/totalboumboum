@@ -52,7 +52,7 @@ public class SpriteChangePositionEvent extends SpriteChangeEvent
 	// TO STRING			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String toString()
-	{	String result = "SpriteChangePositionEvent: " + getSpriteInfo() + " ";
+	{	String result = "SpriteChangePositionEvent("+time+":"+spriteId+"): " + getSpriteInfo() + " ";
 		if(changes.containsKey(SPRITE_EVENT_POSITION_X))
 			result = result + "x=" + changes.get(SPRITE_EVENT_POSITION_X) + " ";
 		if(changes.containsKey(SPRITE_EVENT_POSITION_Y))
