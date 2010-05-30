@@ -54,11 +54,11 @@ public class DisplayMessage implements Display
 		int xc = (int)Math.round(dim.width/2);
 		int yc = (int)Math.round(dim.height/2);
 		for(int i=1;i<messageDisplayers.length;i++)
-		{	if(texts[i]!=null)
+		{	if(texts[i-1]!=null)
 			{	MessageDisplayer temp = new MessageDisplayer(displayedTextFont,xc,yc);
 				temp.setFatten(3);
 				temp.setTextColor(new Color(204, 18,128));
-				temp.updateText(texts[i]);
+				temp.updateText(texts[i-1]);
 				messageDisplayers[i] = temp;
 			}
 			else

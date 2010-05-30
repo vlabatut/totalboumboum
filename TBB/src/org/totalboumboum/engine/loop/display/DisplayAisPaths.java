@@ -47,6 +47,9 @@ public class DisplayAisPaths implements Display
 	public DisplayAisPaths(ServerLoop loop)
 	{	this.players = loop.getPlayers();
 		this.level = loop.getLevel();
+		
+		for(int i=0;i<players.size();i++)
+			show.add(false);
 	}
 	
 	/////////////////////////////////////////////////////////////////
