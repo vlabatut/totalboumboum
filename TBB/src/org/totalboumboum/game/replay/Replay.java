@@ -55,7 +55,7 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 public class Replay
-{	private boolean verbose = true;
+{	private boolean verbose = false;
 	
 	public Replay()
 	{	

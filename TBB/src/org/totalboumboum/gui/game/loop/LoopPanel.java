@@ -185,7 +185,8 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		{	public void run()
 			{	//System.out.println("the round is over.");
 				parent.refresh();
-				((RoundSplitPanel)parent).autoAdvance();
+				if(parent instanceof RoundSplitPanel)
+					((RoundSplitPanel)parent).autoAdvance();
 				replaceWith(parent);
 			}
 		});

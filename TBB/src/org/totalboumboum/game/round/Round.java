@@ -204,6 +204,7 @@ public class Round implements StatisticHolder, Serializable
 			{	replay.finishReplaying();
 				StatisticRound stats = replay.getReadRoundStats();
 				setStats(stats);
+				roundOver = true; // ou close?
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
@@ -216,7 +217,7 @@ public class Round implements StatisticHolder, Serializable
 		else
 			stats.initEndDate();
 	
-		 // possibly not record simulated stats
+		// possibly not record simulated stats
 		if((!(loop instanceof SimulationLoop) || Configuration.getStatisticsConfiguration().getIncludeSimulations())
 		// possibly not record quick mode stats
 			&& (!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts())

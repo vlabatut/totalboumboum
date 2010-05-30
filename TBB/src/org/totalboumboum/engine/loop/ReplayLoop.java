@@ -208,45 +208,46 @@ public class ReplayLoop extends VisibleLoop
 	
 	private void updateEvents()
 	{	if(!isOver())
-		{	// read events
-System.out.println("/////////////////////////////////////////");		
-			List<ReplayEvent> events = new ArrayList<ReplayEvent>();
-			while(currentEvent.getTime()<getTotalEngineTime() && !(currentEvent instanceof StopReplayEvent))
-			{	events.add(currentEvent);
-System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
-				currentEvent = RoundVariables.loadEvent();
+		{	// final event
+			if(currentEvent instanceof StopReplayEvent)
+			{	setOver(true);
 			}
-	
-			// process events
-			for(ReplayEvent event: events)
-			{	// sprite creation
-				if(event instanceof SpriteCreationEvent)
-				{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
-					HollowLevel hollowLevel = round.getHollowLevel();
-					Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
-					level.insertSpriteTile(sprite);
+			else
+			{	// read events
+System.out.println("/////////////////////////////////////////");		
+				List<ReplayEvent> events = new ArrayList<ReplayEvent>();
+				while(currentEvent.getTime()<getTotalEngineTime() && !(currentEvent instanceof StopReplayEvent))
+				{	events.add(currentEvent);
+System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
+					currentEvent = RoundVariables.loadEvent();
 				}
-				
-				// sprite anime change
-				else if(event instanceof SpriteChangeAnimeEvent)
-				{	SpriteChangeAnimeEvent scaEvent = (SpriteChangeAnimeEvent) event;
-					int id = scaEvent.getSpriteId();
-					Sprite sprite = level.getSprite(id);
-					if(sprite!=null) //certainly a creation-related anime change, when initializing the gesture
-						sprite.processChangeAnimeEvent(scaEvent);
-				}
-				
-				// sprite position change
-				else if(event instanceof SpriteChangePositionEvent)
-				{	SpriteChangePositionEvent scpEvent = (SpriteChangePositionEvent) event;
-					int id = scpEvent.getSpriteId();
-					Sprite sprite = level.getSprite(id);
-					sprite.processChangePositionEvent(scpEvent);
-				}
-				
-				// final event
-				else
-				{	setOver(true);
+		
+				// process events
+				for(ReplayEvent event: events)
+				{	// sprite creation
+					if(event instanceof SpriteCreationEvent)
+					{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
+						HollowLevel hollowLevel = round.getHollowLevel();
+						Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
+						level.insertSpriteTile(sprite);
+					}
+					
+					// sprite anime change
+					else if(event instanceof SpriteChangeAnimeEvent)
+					{	SpriteChangeAnimeEvent scaEvent = (SpriteChangeAnimeEvent) event;
+						int id = scaEvent.getSpriteId();
+						Sprite sprite = level.getSprite(id);
+						if(sprite!=null) //certainly a creation-related anime change, when initializing the gesture
+							sprite.processChangeAnimeEvent(scaEvent);
+					}
+					
+					// sprite position change
+					else if(event instanceof SpriteChangePositionEvent)
+					{	SpriteChangePositionEvent scpEvent = (SpriteChangePositionEvent) event;
+						int id = scpEvent.getSpriteId();
+						Sprite sprite = level.getSprite(id);
+						sprite.processChangePositionEvent(scpEvent);
+					}
 				}
 			}
 		}
