@@ -619,7 +619,7 @@ public abstract class VisibleLoop extends Loop
 			if(i<entryRoles.length-1)
 				duration = duration/2; //so that sprites appear almost at the same time
 			entryDelays[i+1] = duration/*+Configuration.getEngineConfiguration().getMilliPeriod()*/;// a little more time, just too be sure it goes OK
-			entryTexts[i] = entryRoles[i].toString(); //actually not used, but hey...
+			//entryTexts[i] = entryRoles[i].toString(); //actually not used, but hey...
 		}
 		// unset the messages (for quicklaunch)
 		for(int i=entryRoles.length;i<entryTexts.length;i++)
@@ -648,13 +648,13 @@ public abstract class VisibleLoop extends Loop
 						level.spreadEvent(event,entryRoles[entryIndex]);
 					}
 					// show ready-set-go
-					else if(entryIndex<entryDelays.length-1)
+					if(entryIndex<entryDelays.length-1)
 					{	ControlEvent event = new ControlEvent(ControlEvent.REQUIRE_NEXT_MESSAGE);
 						processEvent(event);
 //System.out.println(totalTime+": message");				
 					}
 					// start the game
-					else //if(entryIndex==entryDelays.length-1) 
+					if(entryIndex==entryDelays.length-1) 
 					{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_NEXT_MESSAGE);
 						processEvent(controlEvent);
 //System.out.println(totalTime+": start");				

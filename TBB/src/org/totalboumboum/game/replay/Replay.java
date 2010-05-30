@@ -150,7 +150,7 @@ public class Replay
 	public void recordEvent(ReplayEvent event)
 	{	try
 		{	out.writeObject(event);
-			System.out.println("recording: "+event);
+//			System.out.println("recording: "+event);
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
