@@ -22,18 +22,11 @@ package org.totalboumboum.engine.content.manager.trajectory;
  */
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
-import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
-import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
-import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
 /*
@@ -186,6 +179,8 @@ public abstract class TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	protected final List<Sprite> collidedSprites = new ArrayList<Sprite>();
+	
 	public void addCollidedSprite(Sprite collidedSprite)
 	{	collidedSprites.add(collidedSprite);
 	}
@@ -203,6 +198,7 @@ public abstract class TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// INTERSECTIONS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	protected final List<Sprite> intersectedSprites = new ArrayList<Sprite>();
 	
 	public void addIntersectedSprite(Sprite intersectedSprite)
 	{	intersectedSprites.add(intersectedSprite);

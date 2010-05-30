@@ -23,7 +23,6 @@ package org.totalboumboum.engine.content.manager.trajectory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -38,16 +37,7 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
 public class RegularTrajectoryManager extends TrajectoryManager
-{	/** indique que la trajectoire est terminée (plus de déplacement) */
-	private boolean isTerminated;
-	
-	// collisions
-	private final List<Sprite> intersectedSprites = new ArrayList<Sprite>();;
-	private final List<Sprite> collidedSprites = new ArrayList<Sprite>();;
-
-	/////////////////////////////////////////////////////////////////
-	// INIT					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+{	
 	public RegularTrajectoryManager(Sprite sprite)
 	{	super(sprite);
 	}
@@ -61,6 +51,7 @@ public class RegularTrajectoryManager extends TrajectoryManager
 	/**
 	 * change l'animation en cours d'affichage
 	 */
+	@Override
 	public void updateGesture(Gesture gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	// init
 		hasFlied = getCurrentPosZ()>0;
@@ -354,7 +345,9 @@ public class RegularTrajectoryManager extends TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// UPDATE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** modification de position X (utilisée lors de la mise à jour de la position) */
+	/** indique que la trajectoire est terminée (plus de déplacement) */
+	private boolean isTerminated;
+		/** modification de position X (utilisée lors de la mise à jour de la position) */
 	double shiftX = 0;
 	/** modification de position Y (utilisée lors de la mise à jour de la position) */
 	double shiftY = 0;
@@ -368,6 +361,7 @@ public class RegularTrajectoryManager extends TrajectoryManager
 	 * de la trajectoire sert de premier point à la répétition suivante.
 	 * donc si on veut un cycle parfait, il faut rajouter un dernier point ramenant ou premier 
 	 */
+	@Override
 	public void update()
 	{	
 /*	
@@ -665,7 +659,7 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	// COLLISIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private void updateCollidedSprites(ArrayList<Sprite> newCollidedSprites)
-	{	//NOTE faut-il distinquer les changements de direction ?
+	{	//NOTE faut-il distinguer les changements de direction ?
 		Iterator<Sprite> i;
 		
 /*		
