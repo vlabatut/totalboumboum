@@ -45,31 +45,33 @@ public class DisplayMessage implements Display
 
 	private static void initMessageDisplayers(VisibleLoop loop)
 	{	String texts[] = loop.getEntryTexts();
-		messageDisplayers = new MessageDisplayer[texts.length+1];
-		messageDisplayers[0] = null;
+		messageDisplayers = new MessageDisplayer[texts.length];
 		Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
 		double coef = 0.9;
 		Font displayedTextFont = loop.getPanel().getMessageFont(dim.width*coef,dim.height*coef);
 		displayedTextFont = displayedTextFont.deriveFont(Font.BOLD);
 		int xc = (int)Math.round(dim.width/2);
 		int yc = (int)Math.round(dim.height/2);
-		for(int i=1;i<messageDisplayers.length;i++)
-		{	if(texts[i-1]!=null)
+		for(int i=0;i<messageDisplayers.length;i++)
+		{	if(texts[i]!=null)
 			{	MessageDisplayer temp = new MessageDisplayer(displayedTextFont,xc,yc);
 				temp.setFatten(3);
 				temp.setTextColor(new Color(204, 18,128));
-				temp.updateText(texts[i-1]);
+				temp.updateText(texts[i]);
 				messageDisplayers[i] = temp;
 			}
 			else
 				messageDisplayers[i] = null;
 		}
+//for(int i=0;i<texts.length;i++)
+//	System.out.print(texts[i]);
+//System.out.println();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int show = 0;
+	private int show = -1;
 	
 	@Override
 	public void switchShow(ControlEvent event)
@@ -97,7 +99,7 @@ public class DisplayMessage implements Display
 //		int y = (int)Math.round(pixelTopY+pixelHeight/2+box.getHeight()/2);
 //		g.drawString(displayedText,x,y);
 		// effects
-		if(messageDisplayers.length>show && messageDisplayers[show]!=null)
+		if(show>=0 && show<messageDisplayers.length && messageDisplayers[show]!=null)
 			messageDisplayers[show].paint(g);
 	}
 }
