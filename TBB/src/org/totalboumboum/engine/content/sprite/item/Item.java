@@ -36,6 +36,7 @@ import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import org.totalboumboum.engine.content.manager.item.ItemManager;
 import org.totalboumboum.engine.content.manager.modulation.ModulationManager;
+import org.totalboumboum.engine.content.manager.trajectory.RegularTrajectoryManager;
 import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
@@ -120,7 +121,7 @@ public class Item extends Sprite
 		result.setAnimeManager(animeManager);
 		
 		// trajectory
-		TrajectoryManager trajectoryManager = new TrajectoryManager(result);
+		TrajectoryManager trajectoryManager = new RegularTrajectoryManager(result);
 		result.setTrajectoryManager(trajectoryManager);
 		
 		// bombset

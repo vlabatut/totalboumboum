@@ -35,7 +35,11 @@ import org.totalboumboum.engine.content.manager.delay.DelayManager;
 import org.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import org.totalboumboum.engine.content.manager.item.ItemManager;
 import org.totalboumboum.engine.content.manager.modulation.ModulationManager;
+import org.totalboumboum.engine.content.manager.trajectory.RegularTrajectoryManager;
+import org.totalboumboum.engine.content.manager.trajectory.ReplayTrajectoryManager;
 import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
+import org.totalboumboum.engine.loop.ReplayLoop;
+import org.totalboumboum.game.round.RoundVariables;
 
 public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFactory<T,GesturePack>
 {	
@@ -72,7 +76,11 @@ public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFact
 		sprite.setAnimeManager(animeManager);
 		
 		// trajectory
-		TrajectoryManager trajectoryManager = new TrajectoryManager(sprite);
+		TrajectoryManager trajectoryManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			trajectoryManager = new ReplayTrajectoryManager(sprite);
+		else
+			trajectoryManager = new RegularTrajectoryManager(sprite);
 		sprite.setTrajectoryManager(trajectoryManager);
 		
 		// bombset
