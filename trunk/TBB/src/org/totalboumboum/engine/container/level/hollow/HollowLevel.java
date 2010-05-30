@@ -31,6 +31,7 @@ import java.util.HashMap;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.bombset.Bombset;
 import org.totalboumboum.engine.container.fireset.Fireset;
 import org.totalboumboum.engine.container.fireset.FiresetMap;
@@ -279,8 +280,12 @@ if(bomb==null)
 		}
 		// bombs
 		else if(role==Role.BOMB)
-		{	Bombset bombset = instance.getBombsetMap().getBombset(null);
-			sprite = bombset.makeBomb(name,matrix[line][col],0);
+		{	String names[] = name.split("/");
+			PredefinedColor color = null;
+			if(!names[1].equalsIgnoreCase(null))
+				color = PredefinedColor.valueOf(names[1]);
+			Bombset bombset = instance.getBombsetMap().getBombset(color);
+			sprite = bombset.makeBomb(names[0],matrix[line][col],0);
 			sprite.setId(id);
 		}
 		// fires
