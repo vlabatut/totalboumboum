@@ -142,4 +142,10 @@ public class ServerSytemControl extends SystemControl
 			}
 		}
 	}
+	
+	@Override
+	public void keyReleased(KeyEvent e)
+	{	int keyCode = e.getKeyCode();
+		keysPressed.put(keyCode, false);
+	}
 }

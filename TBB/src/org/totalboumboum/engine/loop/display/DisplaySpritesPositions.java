@@ -62,7 +62,10 @@ public class DisplaySpritesPositions implements Display
 	
 	@Override
 	public synchronized void switchShow(ControlEvent event)
-	{	show = (show+1)%7;
+	{	if(event.getIndex()==ControlEvent.REGULAR)
+			show = (show+1)%7;
+		else
+			mode = !mode;
 	}
 	
 	private synchronized int getShow()
