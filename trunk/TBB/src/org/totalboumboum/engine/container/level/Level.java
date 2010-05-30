@@ -398,6 +398,13 @@ public class Level
 	{	return spritesMap.get(id);
 	}
 	
+	public void changeSpriteId(Sprite sprite, int newId)
+	{	int oldId = sprite.getId();
+		sprite.setId(newId);
+		spritesMap.remove(oldId);
+		spritesMap.put(newId,sprite);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// DIRECTIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
