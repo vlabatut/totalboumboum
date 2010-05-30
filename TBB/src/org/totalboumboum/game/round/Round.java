@@ -37,6 +37,7 @@ import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
+import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.Loop;
 import org.totalboumboum.engine.loop.SimulationLoop;
@@ -119,7 +120,10 @@ public class Round implements StatisticHolder, Serializable
 	
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
-		{	loop = new ServerLoop(this);
+		{	if(replayed)
+				loop = new ReplayLoop(this);
+			else
+				loop = new ServerLoop(this);
 		
 			// recording
 			if(Configuration.getEngineConfiguration().isRecordRounds() && !replayed)
@@ -127,6 +131,9 @@ public class Round implements StatisticHolder, Serializable
 				RoundVariables.replay = replay;
 			}
 		
+			if(replayed)
+				RoundVariables.replay = replay;
+			
 			Thread animator = new Thread(loop);
 			animator.start();
 //			loop.init();
@@ -138,6 +145,13 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	private Replay replay = null;
 	
+	public void setReplay(Replay replay)
+	{	this.replay = replay;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void finish()
 	{	// loop
 		loop.finish();
@@ -225,7 +239,7 @@ public class Round implements StatisticHolder, Serializable
 			{	e.printStackTrace();
 			}
 		}
-			
+		
 		match.roundOver();
 		if(panel!=null)
 		{	panel.roundOver();
@@ -483,6 +497,10 @@ public class Round implements StatisticHolder, Serializable
 		result.setAuthor(author);
 		result.setName(name);
 		result.setRandomLocation(randomLocation);
+		
+		result.setReplayed(replayed);
+		result.replay = replay;
+		
 		return result;
 	}
 	

@@ -52,6 +52,7 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
@@ -223,9 +224,21 @@ if(bomb==null)
 		// init sprites
 		ReplayEvent tempEvent = RoundVariables.replay.loadEvent();
 		do
-		{	SpriteCreationEvent event = (SpriteCreationEvent) tempEvent;
-			Sprite sprite = createSpriteFromEvent(event);
-			level.insertSpriteTile(sprite);
+		{	// creation
+			if(tempEvent instanceof SpriteCreationEvent)
+			{	SpriteCreationEvent event = (SpriteCreationEvent) tempEvent;
+				Sprite sprite = createSpriteFromEvent(event);
+				level.insertSpriteTile(sprite);
+			}
+			// anime
+			else if(tempEvent instanceof SpriteChangeAnimeEvent)
+			{	SpriteChangeAnimeEvent event = (SpriteChangeAnimeEvent) tempEvent;
+				int id = event.getSpriteId();
+				Sprite sprite = level.getSprite(id);
+				if(sprite!=null)
+					sprite.processChangeAnimeEvent(event);
+			}
+			// next event
 			tempEvent = RoundVariables.replay.loadEvent();
 		}
 		while(!(tempEvent instanceof StopReplayEvent));

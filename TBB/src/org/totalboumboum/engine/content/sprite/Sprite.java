@@ -22,6 +22,7 @@ package org.totalboumboum.engine.content.sprite;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,6 +66,7 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
+import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
@@ -185,7 +187,40 @@ public abstract class Sprite
 	public PredefinedColor getColor()
 	{	return gesturePack.getColor();		
 	}
-		
+	
+	/////////////////////////////////////////////////////////////////
+	// REPLAY EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void processChangeAnimeEvent(SpriteChangeAnimeEvent event)
+	{	HashMap<String,Object> changes = event.getChanges();
+		Direction direction = (Direction) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_DIRECTION);
+		if(direction==null)
+			direction = getCurrentFacingDirection();
+		Double duration = (Double) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_DURATION);
+		if(duration==null)
+			duration = 0d;
+		GestureName gestureName = (GestureName) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_GESTURE);
+		if(gestureName==null)
+			gestureName = currentGesture.getName();
+		Boolean reinit = (Boolean) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_REINIT);
+		if(reinit==null)
+			reinit = false;
+		setGesture(gestureName,direction,Direction.NONE,reinit,duration);
+	}
+	
+	public void processChangePositionEvent(SpriteChangePositionEvent event)
+	{	HashMap<String,Object> changes = event.getChanges();
+		Double x = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_X);
+		if(x!=null)
+			setCurrentPosX(x);
+		Double y = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Y);
+		if(y!=null)
+			setCurrentPosY(y);
+		Double z = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Z);
+		if(z!=null)
+			setCurrentPosZ(z);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

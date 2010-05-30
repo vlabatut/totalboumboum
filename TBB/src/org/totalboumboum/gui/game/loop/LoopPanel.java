@@ -40,8 +40,8 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.LoopRenderPanel;
+import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.SimpleMenuPanel;
@@ -50,10 +50,9 @@ import org.totalboumboum.gui.game.round.RoundSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
 public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 {	private static final long serialVersionUID = 1L;
-	private ServerLoop loop;
+	private VisibleLoop loop;
 	private BufferedImage backgroundImage;
 	private Color backgroundColor;
 	// 0=normal 1=VolatileImage 2=BufferStrategy
@@ -62,7 +61,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	private Image image;
 	private BufferStrategy bufferStrategy;
 	
-	public LoopPanel(MenuContainer container, MenuPanel parent, ServerLoop loop)
+	public LoopPanel(MenuContainer container, MenuPanel parent, VisibleLoop loop)
 	{	super(container,parent);
 		setBackground(Color.BLACK);
     	setIgnoreRepaint(true);
