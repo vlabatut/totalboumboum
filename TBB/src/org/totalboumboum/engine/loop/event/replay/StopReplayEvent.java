@@ -33,7 +33,7 @@ public class StopReplayEvent extends ReplayEvent
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
-	{	String result = "StopReplayEvent";
+	{	String result = "StopReplayEvent("+time+")";
 		return result;
 	}
 }

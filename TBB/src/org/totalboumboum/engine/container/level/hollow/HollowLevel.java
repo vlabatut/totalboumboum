@@ -199,7 +199,7 @@ if(bomb==null)
 		}
 		level.initTileList();
 		
-		// record ending event
+		// separation event
 		StopReplayEvent event = new StopReplayEvent();
 		RoundVariables.recordEvent(event);
 	}

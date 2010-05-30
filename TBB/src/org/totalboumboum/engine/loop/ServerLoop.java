@@ -76,6 +76,7 @@ import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
 import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
@@ -190,6 +191,11 @@ long start = System.currentTimeMillis();
 			loadStepOver();
 			j++;
 		}
+		
+		// separation event
+		StopReplayEvent event = new StopReplayEvent();
+		RoundVariables.recordEvent(event);
+
 long end = System.currentTimeMillis();
 System.out.println("total load time: "+(end-start));
 	}

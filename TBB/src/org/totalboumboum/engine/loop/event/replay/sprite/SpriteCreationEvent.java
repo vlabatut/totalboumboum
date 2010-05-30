@@ -105,7 +105,7 @@ public class SpriteCreationEvent extends SpriteEvent
 	// TO STRING			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String toString()
-	{	String result = "SpriteCreationEvent: " + getSpriteInfo() + " ";
+	{	String result = "SpriteCreationEvent("+time+":"+spriteId+"): " + getSpriteInfo() + " ";
 		result = result + name + " [" + color + "," + role + "] ";
 		result = result + "@(" + line + "," + col + ")";
 		return result;
