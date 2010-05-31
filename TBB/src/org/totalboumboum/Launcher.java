@@ -1213,12 +1213,27 @@ public class Launcher
 	 *  - enregistrer une image au pif en cours de jeu, histoire de l'enregistrer en tant que preview
 	 */
 	
+	/*
+	 * TODO interface
+	 * remplacer le menu actuel par des icones dont la taille représente l'importance
+	 * à gauche de l'icone, mettre le texte actuellement présent dans les boutons
+	 * il est aligé à droite et sa taille est proportionnelle à celle des boutons
+	 * 	- optiosn       : engrenages
+	 * 	- profils       : une des icones de profil/joueur/etc
+	 * 	- stats         : icone stat utilisée en cours de jeu
+	 *  - ressources    : icone package
+	 *  - tournoi	    : coupe
+	 *  - partie rapide : éclair du bouton play
+	 *  - charger       : disquette avec flèche (inverse de sauvegarde)
+	 *  - revoir        : une télé ? un oeil ?
+	 *  - à propos      : un "?"
+	 *  - quitter       : une croix (comme pour fermer une fenêtre) ou l'icone "quitter" du tournoi (?)
+	 */
 	
 	// TODO loop >> effacer tous les objets inutiles dans finish()
 	// TODO enregistrer des temps et positions à l'échelle 1:1 seulement
 	//		>> non : rengistrer à l'échelle courrante
 	//		   garder cette échelle
 	//		   lors de la lecture, Replay fait la conversion de l'échelle originelle vers la courante
-	//TODO virer les enregistrement si on lit déjà!	(suffit de ne pas créer le replay ou aut')	
 	
 }
