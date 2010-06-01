@@ -36,54 +36,28 @@ import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDir
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.images.ImageTools;
 
-
 public class AnimeManager
-{	/** sprite possédant ce manager */
-	private Sprite sprite;
-	/** animation courante */
-	private AnimeDirection currentAnime;
-	/** pas courrant */
-	private AnimeStep currentStep;
-	/** current facing direction */
-	private Direction currentDirection = Direction.NONE;
-	/** indique que l'animation est finie (on reste sur la dernière image) */
-	private boolean isTerminated;
-	
-	/** temps total écoulé de puis le début de l'animation */
-	private double currentTime;
-	/** temps normalisé écoulé de puis le début de l'animation (réinitialisé par un repeat) */
-	private double animeTime;
-	/** durée totale originale de l'animation */
-	private double animeDuration;
-	/** durée totale effective de l'animation */
-	private double totalDuration = 0;
-	/** coefficient de mofication du temps dû au délai imposé */
-	private double forcedDurationCoeff = 1;
-	
-	/** indicates if the sprite should be colored because of some twinkle going on */
-	private boolean twinkleChange;
-	/** color (or absence of color) used for twinkling */
-	private Integer twinkleColor;
-	/** indicates how long the sprite has been twinkling */
-	private double twinkleTime;
-	/** constant used to modify the blinking image */
-//	private float blinkParam = 2f;
-	
-	/** sprite temporarily invisible */
-	private boolean invisible;
-	/** chance for the sprite not to be invisible when he's supposed to be */
-	private float visibleProbability = 0.02f;
-	
-	
-	/////////////////////////////////////////////////////////////////
-	// INIT					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+{	
 	public AnimeManager(Sprite sprite)
 	{	this.sprite = sprite;
 	} 
-
+	
+	/////////////////////////////////////////////////////////////////
+	// SPRITE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** sprite possédant ce manager */
+	protected Sprite sprite;
+	
+	/////////////////////////////////////////////////////////////////
+	// GESTURE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** animation courante */
+	protected AnimeDirection currentAnime;
+	
 	/**
 	 * Change l'animation en cours pour le sprite considéré.
 	 * Paramètres :
@@ -204,13 +178,49 @@ public class AnimeManager
 		// check if the animations is over
 		if(currentTime>totalDuration)
 		{	isTerminated = true;
-			sprite.processEvent(new EngineEvent(EngineEvent.ANIME_OVER));
+			// send even only for a server loop
+			if(RoundVariables.loop instanceof ServerLoop)
+				sprite.processEvent(new EngineEvent(EngineEvent.ANIME_OVER));
 //if(sprite instanceof Floor)
 //	System.out.println("F<<totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
 //if(sprite instanceof Block)
 //	System.out.println("B<<totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
 		}
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// STEP					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** pas courrant */
+	protected AnimeStep currentStep;
+
+	/**
+	 * calcule l'étape courante de l'animation, en fonction du temps courant
+	 */
+	private void updateStep()
+	{	// process current displayable image
+		double nextTime = 0;
+		Iterator<AnimeStep> i = currentAnime.getIterator();
+		do
+		{	currentStep = i.next(); 
+			nextTime = nextTime + currentStep.getDuration()/**forcedDurationCoeff*/;
+		}
+		while(nextTime<animeTime && i.hasNext());
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TIME					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** temps total écoulé de puis le début de l'animation */
+	protected double currentTime;
+	/** temps normalisé écoulé de puis le début de l'animation (réinitialisé par un repeat) */
+	protected double animeTime;
+	/** durée totale originale de l'animation */
+	protected double animeDuration;
+	/** durée totale effective de l'animation */
+	protected double totalDuration = 0;
+	/** coefficient de mofication du temps dû au délai imposé */
+	protected double forcedDurationCoeff = 1;
 	
 	/**
 	 * met à jour les différentes variables gérant le temps
@@ -276,29 +286,13 @@ public class AnimeManager
 	}
 	
 	/**
-	 * calcule l'étape courante de l'animation, en fonction du temps courant
-	 */
-	private void updateStep()
-	{	// process current displayable image
-		double nextTime = 0;
-		Iterator<AnimeStep> i = currentAnime.getIterator();
-		do
-		{	currentStep = i.next(); 
-			nextTime = nextTime + currentStep.getDuration()/**forcedDurationCoeff*/;
-		}
-		while(nextTime<animeTime && i.hasNext());
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// TIME					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
 	 * renvoie la durée totale prévue pour l'animation.
 	 * @return
 	 */
 	public double getTotalDuration()
 	{	return totalDuration;
 	}
+	
 	public double getCurrentTime()
 	{	return currentTime;
 	}
@@ -332,6 +326,26 @@ public class AnimeManager
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// TWINKLE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** indicates if the sprite should be colored because of some twinkle going on */
+	protected boolean twinkleChange;
+	/** color (or absence of color) used for twinkling */
+	protected Integer twinkleColor;
+	/** indicates how long the sprite has been twinkling */
+	protected double twinkleTime;
+	/** constant used to modify the blinking image */
+//	private float blinkParam = 2f;
+
+	/////////////////////////////////////////////////////////////////
+	// INVISIBLE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** sprite temporarily invisible */
+	protected boolean invisible;
+	/** chance for the sprite not to be invisible when he's supposed to be */
+	protected float visibleProbability = 0.02f;
+
+	/////////////////////////////////////////////////////////////////
 	// MISC					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
@@ -363,9 +377,21 @@ public class AnimeManager
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TERMINATED			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** indique que l'animation est finie (on reste sur la dernière image) */
+	protected boolean isTerminated;
+	
 	public boolean isTerminated()
 	{	return isTerminated;	
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DIRECTION			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** current facing direction */
+	protected Direction currentDirection = Direction.NONE;
 	
 	public Direction getCurrentDirection()
 	{	return currentDirection;
