@@ -783,4 +783,12 @@ if(sprite instanceof Hero)
 			tempSprite.processEvent(event);
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public TrajectoryManager copy(Sprite sprite)
+	{	TrajectoryManager result = new RegularTrajectoryManager(sprite);
+		return result;
+	}
 }

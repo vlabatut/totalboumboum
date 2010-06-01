@@ -24,6 +24,8 @@ package org.totalboumboum.engine.content.sprite.bomb;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
+import org.totalboumboum.engine.loop.ReplayLoop;
+import org.totalboumboum.game.round.RoundVariables;
 
 public class BombFactory extends SpriteFactory<Bomb>
 {	
@@ -52,7 +54,11 @@ public class BombFactory extends SpriteFactory<Bomb>
 //		value = configuration.getBombSetting(Configuration.BOMB_SETTING_LIFETIME);
 //		result.addDelay(DelayManager.DL_EXPLOSION,value);
 		// event
-		EventManager eventManager = new BombEventManager(result);
+		EventManager eventManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			eventManager = null;
+		else
+			eventManager = new BombEventManager(result);
 		result.setEventManager(eventManager);
 		
 		// result

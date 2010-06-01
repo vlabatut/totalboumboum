@@ -29,6 +29,8 @@ import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 import org.totalboumboum.engine.content.sprite.item.ItemEventManager;
+import org.totalboumboum.engine.loop.ReplayLoop;
+import org.totalboumboum.game.round.RoundVariables;
 
 public class ItemFactory extends SpriteFactory<Item>
 {	private static final long serialVersionUID = 1L;
@@ -108,7 +110,11 @@ public class ItemFactory extends SpriteFactory<Item>
 		List<AbstractAbility> itemAbilities = drawItemAbilities();
 		result.initItemAbilities(itemAbilities);
 		// event
-		EventManager eventManager = new ItemEventManager(result);
+		EventManager eventManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			eventManager = null;
+		else
+			eventManager = new ItemEventManager(result);
 		result.setEventManager(eventManager);
 		
 		// result
