@@ -1238,5 +1238,4 @@ public class Launcher
 	
 	// TODO faut transmettre les abilities/modulations graphiques, elles sont nécessaires
 	//	>> faut donc un modulation manager, et un ability manager (?)
-	
 }
