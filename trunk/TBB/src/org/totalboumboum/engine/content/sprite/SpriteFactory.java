@@ -84,36 +84,65 @@ public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFact
 		sprite.setTrajectoryManager(trajectoryManager);
 		
 		// bombset
-		BombsetManager bombsetManager = new BombsetManager(sprite);
+		BombsetManager bombsetManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			bombsetManager = null;
+		else
+			bombsetManager = new BombsetManager(sprite);
 		bombsetManager.setBombset(bombset);
 //if(bombset==null)
 //	System.out.println();
 		sprite.setBombsetManager(bombsetManager);
 		
 		// explosion
-		ExplosionManager explosionManager = new ExplosionManager(sprite);
+		ExplosionManager explosionManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			explosionManager = null;
+		else
+			explosionManager = new ExplosionManager(sprite);
 		explosionManager.setExplosion(explosion);
 		sprite.setExplosionManager(explosionManager);
 		
 		// modulations
-		ModulationManager modulationManager = new ModulationManager(sprite);
+		ModulationManager modulationManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			modulationManager = null;
+		else
+			modulationManager = new ModulationManager(sprite);
 		sprite.setModulationManager(modulationManager);
 		
 		// item
-		ItemManager itemManager = new ItemManager(sprite);
+		ItemManager itemManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			itemManager = null;
+		else
+			itemManager = new ItemManager(sprite);
 		sprite.setItemManager(itemManager);
 		
 		// ability
-		AbilityManager abilityManager = new AbilityManager(sprite);
-		abilityManager.addDirectAbilities(abilities);
+		AbilityManager abilityManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			abilityManager = null;
+		else
+		{	abilityManager = new AbilityManager(sprite);
+			abilityManager.addDirectAbilities(abilities);
+		}
 		sprite.setAbilityManager(abilityManager);
 		
 		// delay
-		DelayManager delayManager = new DelayManager(sprite);
+		DelayManager delayManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			delayManager = null;
+		else
+			delayManager = new DelayManager(sprite);
 		sprite.setDelayManager(delayManager);
 		
 		// control
-		ControlManager controlManager = new ControlManager(sprite);
+		ControlManager controlManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			controlManager = null;
+		else
+			controlManager = new ControlManager(sprite);
 		sprite.setControlManager(controlManager);
 	}
 	

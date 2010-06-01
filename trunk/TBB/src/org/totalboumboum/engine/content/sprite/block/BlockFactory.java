@@ -24,6 +24,8 @@ package org.totalboumboum.engine.content.sprite.block;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
+import org.totalboumboum.engine.loop.ReplayLoop;
+import org.totalboumboum.game.round.RoundVariables;
 
 public class BlockFactory extends SpriteFactory<Block>
 {	
@@ -39,7 +41,11 @@ public class BlockFactory extends SpriteFactory<Block>
 	
 		// specific managers
 		// event
-		EventManager eventManager = new BlockEventManager(result);
+		EventManager eventManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			eventManager = null;
+		else
+			eventManager = new BlockEventManager(result);
 		result.setEventManager(eventManager);
 		
 		// result

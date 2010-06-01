@@ -24,6 +24,8 @@ package org.totalboumboum.engine.content.sprite.fire;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
+import org.totalboumboum.engine.loop.ReplayLoop;
+import org.totalboumboum.game.round.RoundVariables;
 
 public class FireFactory extends SpriteFactory<Fire>
 {	
@@ -39,7 +41,11 @@ public class FireFactory extends SpriteFactory<Fire>
 	
 		// specific managers
 		// event
-		EventManager eventManager = new FireEventManager(result);
+		EventManager eventManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			eventManager = null;
+		else
+			eventManager = new FireEventManager(result);
 		result.setEventManager(eventManager);
 		// fireset name
 		result.setFiresetName(firesetName);

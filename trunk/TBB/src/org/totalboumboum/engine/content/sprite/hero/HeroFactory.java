@@ -24,6 +24,8 @@ package org.totalboumboum.engine.content.sprite.hero;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
+import org.totalboumboum.engine.loop.ReplayLoop;
+import org.totalboumboum.game.round.RoundVariables;
 
 public class HeroFactory extends SpriteFactory<Hero>
 {	/////////////////////////////////////////////////////////////////
@@ -41,7 +43,11 @@ public class HeroFactory extends SpriteFactory<Hero>
 //		double value = configuration.getHeroSetting(Configuration.HERO_SETTING_WAIT_DELAY);
 //		result.addDelay(DelayManager.DL_WAIT,value);
 		// event
-		EventManager eventManager = new HeroEventManager(result);
+		EventManager eventManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			eventManager = null;
+		else
+			eventManager = new HeroEventManager(result);
 		result.setEventManager(eventManager);
 		
 		// result

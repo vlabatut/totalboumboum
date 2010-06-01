@@ -54,4 +54,12 @@ public class ReplayTrajectoryManager extends TrajectoryManager
 	public void updateGesture(Gesture gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	// nothing to do here, since there's no trajectory
 	}	
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public TrajectoryManager copy(Sprite sprite)
+	{	TrajectoryManager result = new ReplayTrajectoryManager(sprite);
+		return result;
+	}
 }

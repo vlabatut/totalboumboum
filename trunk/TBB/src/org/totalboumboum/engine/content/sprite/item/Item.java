@@ -36,10 +36,8 @@ import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import org.totalboumboum.engine.content.manager.item.ItemManager;
 import org.totalboumboum.engine.content.manager.modulation.ModulationManager;
-import org.totalboumboum.engine.content.manager.trajectory.RegularTrajectoryManager;
 import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 import org.totalboumboum.engine.content.sprite.Sprite;
-
 
 public class Item extends Sprite
 {	
@@ -121,38 +119,69 @@ public class Item extends Sprite
 		result.setAnimeManager(animeManager);
 		
 		// trajectory
-		TrajectoryManager trajectoryManager = new RegularTrajectoryManager(result);
-		result.setTrajectoryManager(trajectoryManager);
+		TrajectoryManager tm = trajectoryManager.copy(result);
+		result.setTrajectoryManager(tm);
 		
 		// bombset
-		BombsetManager bombsetManager = new BombsetManager(result);
-		bombsetManager.setBombset(getBombsetManager().getBombset());
+		BombsetManager bombsetManager;
+		if(this.bombsetManager == null)
+			bombsetManager = null;
+		else
+		{	bombsetManager = new BombsetManager(result);
+			bombsetManager.setBombset(getBombsetManager().getBombset());
+		}
 		result.setBombsetManager(bombsetManager);
 		
 		// explosion
-		ExplosionManager explosionManager = new ExplosionManager(result);
-		explosionManager.setExplosion(getExplosionManager().getExplosion());
+		ExplosionManager explosionManager;
+		if(this.explosionManager == null)
+			explosionManager = null;
+		else
+		{	explosionManager = new ExplosionManager(result);
+			explosionManager.setExplosion(getExplosionManager().getExplosion());
+		}
 		result.setExplosionManager(explosionManager);
 		
 		// modulations
-		ModulationManager permissionManager = new ModulationManager(result);
-		result.setModulationManager(permissionManager);
+		ModulationManager modulationManager;
+		if(this.modulationManager == null)
+			modulationManager = null;
+		else
+			modulationManager = new ModulationManager(result);
+		result.setModulationManager(modulationManager);
 		
 		// item
-		ItemManager itemManager = new ItemManager(result);
+		ItemManager itemManager;
+		if(this.itemManager == null)
+			itemManager = null;
+		else
+			itemManager = new ItemManager(result);
 		result.setItemManager(itemManager);
 		
 		// ability
-		AbilityManager abilityManager = new AbilityManager(result);
-		abilityManager.addDirectAbilities(getDirectAbilities());
+		AbilityManager abilityManager;
+		if(this.abilityManager == null)
+			abilityManager = null;
+		else
+		{	abilityManager = new AbilityManager(result);
+			abilityManager.addDirectAbilities(getDirectAbilities());
+		}
 		result.setAbilityManager(abilityManager);
 		
 		// delay
 		DelayManager delayManager = new DelayManager(result);
+		if(this.delayManager == null)
+			delayManager = null;
+		else
+			delayManager = new DelayManager(result);
 		result.setDelayManager(delayManager);
 		
 		// control
-		ControlManager controlManager = new ControlManager(result);
+		ControlManager controlManager;
+		if(this.controlManager == null)
+			controlManager = null;
+		else
+			controlManager = new ControlManager(result);
 		result.setControlManager(controlManager);
 		
 		// item abilities
@@ -161,7 +190,11 @@ public class Item extends Sprite
 			result.addItemAbility(ability);
 		
 		// event
-		EventManager eventManager = new ItemEventManager(result);
+		EventManager eventManager;
+		if(this.eventManager == null)
+			eventManager = null;
+		else
+			eventManager = new ItemEventManager(result);
 		result.setEventManager(eventManager);
 		
 		// misc
