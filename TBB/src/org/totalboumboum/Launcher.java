@@ -1236,4 +1236,7 @@ public class Launcher
 	//		   garder cette échelle
 	//		   lors de la lecture, Replay fait la conversion de l'échelle originelle vers la courante
 	
+	// TODO faut transmettre les abilities/modulations graphiques, elles sont nécessaires
+	//	>> faut donc un modulation manager, et un ability manager (?)
+	
 }
