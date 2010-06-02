@@ -88,8 +88,9 @@ public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFact
 		if(RoundVariables.loop instanceof ReplayLoop)
 			bombsetManager = null;
 		else
-			bombsetManager = new BombsetManager(sprite);
-		bombsetManager.setBombset(bombset);
+		{	bombsetManager = new BombsetManager(sprite);
+			bombsetManager.setBombset(bombset);
+		}
 //if(bombset==null)
 //	System.out.println();
 		sprite.setBombsetManager(bombsetManager);
@@ -99,8 +100,9 @@ public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFact
 		if(RoundVariables.loop instanceof ReplayLoop)
 			explosionManager = null;
 		else
-			explosionManager = new ExplosionManager(sprite);
-		explosionManager.setExplosion(explosion);
+		{	explosionManager = new ExplosionManager(sprite);
+			explosionManager.setExplosion(explosion);
+		}
 		sprite.setExplosionManager(explosionManager);
 		
 		// modulations
