@@ -27,6 +27,7 @@ import java.util.List;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.manager.event.EventManager;
+import org.totalboumboum.engine.content.manager.event.ReplayEventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 import org.totalboumboum.engine.content.sprite.item.ItemEventManager;
 import org.totalboumboum.engine.loop.ReplayLoop;
@@ -112,7 +113,7 @@ public class ItemFactory extends SpriteFactory<Item>
 		// event
 		EventManager eventManager;
 		if(RoundVariables.loop instanceof ReplayLoop)
-			eventManager = null;
+			eventManager = new ReplayEventManager(result);
 		else
 			eventManager = new ItemEventManager(result);
 		result.setEventManager(eventManager);

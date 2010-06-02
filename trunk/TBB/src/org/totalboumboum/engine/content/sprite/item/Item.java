@@ -186,11 +186,7 @@ public class Item extends Sprite
 			result.addItemAbility(ability);
 		
 		// event
-		EventManager eventManager;
-		if(this.eventManager == null)
-			eventManager = null;
-		else
-			eventManager = new ItemEventManager(result);
+		EventManager eventManager = this.eventManager.copy(result);
 		result.setEventManager(eventManager);
 		
 		// misc

@@ -94,7 +94,7 @@ public abstract class Sprite
 	public void initSprite(Tile tile)
 	{	this.tile = tile;
 		center();
-		initGesture();
+		eventManager.initGesture();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -141,16 +141,6 @@ public abstract class Sprite
 	
 	public void setGesturePack(GesturePack gesturePack)
 	{	this.gesturePack = gesturePack;	
-	}
-	
-	public void initGesture()
-	{	GestureName gesture = GestureName.NONE;
-		Direction spriteDirection = Direction.NONE;
-		if(eventManager!=null)
-		{	eventManager.setGesture(GestureName.NONE);
-			eventManager.setSpriteDirection(Direction.NONE);
-		}
-		setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
 	
 	/*
@@ -325,6 +315,7 @@ public abstract class Sprite
 		itemManager.update();
 		animeManager.update();
 		trajectoryManager.update();
+//TODO implémenter une version bidon de tous les mgrs		
 		/*
 		 * NOTE : il est important que le trajectoryManager soit updaté en dernier
 		 * comme ça, un changement de case arrive après avoir traité tous les évènements
