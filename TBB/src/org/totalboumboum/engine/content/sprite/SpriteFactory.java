@@ -35,6 +35,8 @@ import org.totalboumboum.engine.content.manager.delay.DelayManager;
 import org.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import org.totalboumboum.engine.content.manager.item.ItemManager;
 import org.totalboumboum.engine.content.manager.modulation.ModulationManager;
+import org.totalboumboum.engine.content.manager.modulation.RegularModulationManager;
+import org.totalboumboum.engine.content.manager.modulation.ReplayModulationManager;
 import org.totalboumboum.engine.content.manager.trajectory.RegularTrajectoryManager;
 import org.totalboumboum.engine.content.manager.trajectory.ReplayTrajectoryManager;
 import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
@@ -108,9 +110,9 @@ public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFact
 		// modulations
 		ModulationManager modulationManager;
 		if(RoundVariables.loop instanceof ReplayLoop)
-			modulationManager = null;
+			modulationManager = new ReplayModulationManager(sprite);
 		else
-			modulationManager = new ModulationManager(sprite);
+			modulationManager = new RegularModulationManager(sprite);
 		sprite.setModulationManager(modulationManager);
 		
 		// item
