@@ -94,7 +94,7 @@ public abstract class Sprite
 	public void initSprite(Tile tile)
 	{	this.tile = tile;
 		center();
-		eventManager.initGesture();
+		initGesture();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -141,6 +141,16 @@ public abstract class Sprite
 	
 	public void setGesturePack(GesturePack gesturePack)
 	{	this.gesturePack = gesturePack;	
+	}
+	
+	public void initGesture()
+	{	GestureName gesture = GestureName.NONE;
+		Direction spriteDirection = Direction.NONE;
+		if(eventManager!=null)
+		{	eventManager.setGesture(GestureName.NONE);
+			eventManager.setSpriteDirection(Direction.NONE);
+		}
+		setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
 	
 	/*

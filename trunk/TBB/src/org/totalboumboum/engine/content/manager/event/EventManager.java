@@ -64,12 +64,6 @@ public abstract class EventManager
 	/** current gesture */
 	protected GestureName gesture;
 	
-	public void initGesture()
-	{	gesture = GestureName.NONE;
-		spriteDirection = Direction.NONE;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-	}
-	
 	public GestureName getGesture()
 	{	return gesture;
 	}
