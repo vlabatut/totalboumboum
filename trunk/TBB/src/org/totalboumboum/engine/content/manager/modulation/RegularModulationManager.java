@@ -374,4 +374,12 @@ if(sprite instanceof Item && sprite.getCurrentGesture()!=null && sprite.getCurre
 //	public ArrayList<AbstractAbility> getModulationStateAbilities()
 //	{	return stateAbilities;		
 //	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public ModulationManager copy(Sprite sprite)
+	{	ModulationManager result = new RegularModulationManager(sprite);
+		return result;
+	}
 }

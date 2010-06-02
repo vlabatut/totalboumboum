@@ -132,4 +132,9 @@ public abstract class ModulationManager
 	public abstract boolean isTargetPreventing(SpecificAction action);
 	
 	public abstract StateAbility modulateStateAbility(String name);
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract ModulationManager copy(Sprite sprite);
 }

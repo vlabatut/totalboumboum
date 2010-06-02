@@ -127,4 +127,12 @@ public class ReplayModulationManager extends ModulationManager
 	{	StateAbility result = sprite.getAbility(name);
 		return result;
 	}	
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public ModulationManager copy(Sprite sprite)
+	{	ModulationManager result = new ReplayModulationManager(sprite);
+		return result;
+	}
 }
