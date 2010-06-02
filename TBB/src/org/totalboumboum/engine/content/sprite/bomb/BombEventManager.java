@@ -455,4 +455,12 @@ public class BombEventManager extends EventManager
 	{	sprite.startItemManager();
 		stand();
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public EventManager copy(Sprite sprite)
+	{	EventManager result = new BombEventManager((Bomb)sprite);
+		return result;
+	}
 }

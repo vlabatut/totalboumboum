@@ -118,4 +118,12 @@ public class FloorEventManager extends EventManager
 		gesture = GestureName.STANDING;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public EventManager copy(Sprite sprite)
+	{	EventManager result = new FloorEventManager((Floor)sprite);
+		return result;
+	}
 }

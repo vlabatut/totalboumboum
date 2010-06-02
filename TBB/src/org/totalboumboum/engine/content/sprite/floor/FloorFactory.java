@@ -23,6 +23,7 @@ package org.totalboumboum.engine.content.sprite.floor;
 
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.manager.event.EventManager;
+import org.totalboumboum.engine.content.manager.event.ReplayEventManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.game.round.RoundVariables;
@@ -43,7 +44,7 @@ public class FloorFactory extends SpriteFactory<Floor>
 		// event
 		EventManager eventManager;
 		if(RoundVariables.loop instanceof ReplayLoop)
-			eventManager = null;
+			eventManager = new ReplayEventManager(result);
 		else
 			eventManager = new FloorEventManager(result);
 		result.setEventManager(eventManager);

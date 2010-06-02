@@ -37,6 +37,7 @@ import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.delay.DelayManager;
 import org.totalboumboum.engine.content.manager.event.EventManager;
+import org.totalboumboum.engine.content.sprite.Sprite;
 
 public class ItemEventManager extends EventManager
 {	
@@ -213,5 +214,13 @@ public class ItemEventManager extends EventManager
 			EngineEvent evt = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
 			sprite.getTile().spreadEvent(evt);
 		}		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public EventManager copy(Sprite sprite)
+	{	EventManager result = new ItemEventManager((Item)sprite);
+		return result;
 	}
 }

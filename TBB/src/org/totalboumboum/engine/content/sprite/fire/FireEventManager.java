@@ -161,4 +161,12 @@ public class FireEventManager extends EventManager
 		gesture = GestureName.STANDING;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public EventManager copy(Sprite sprite)
+	{	EventManager result = new FireEventManager((Fire)sprite);
+		return result;
+	}
 }

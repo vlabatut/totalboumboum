@@ -34,6 +34,7 @@ import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.delay.DelayManager;
 import org.totalboumboum.engine.content.manager.event.EventManager;
+import org.totalboumboum.engine.content.sprite.Sprite;
 
 public class BlockEventManager extends EventManager
 {
@@ -171,5 +172,13 @@ public class BlockEventManager extends EventManager
 	{	sprite.startItemManager();
 		gesture = GestureName.STANDING;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public EventManager copy(Sprite sprite)
+	{	EventManager result = new BlockEventManager((Block)sprite);
+		return result;
 	}
 }

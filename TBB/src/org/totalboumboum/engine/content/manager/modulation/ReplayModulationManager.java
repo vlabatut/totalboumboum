@@ -98,7 +98,8 @@ public class ReplayModulationManager extends ModulationManager
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public ActionAbility modulateAction(SpecificAction action)
-	{	ActionAbility result = sprite.getAbility(action);
+	{	//ActionAbility result = sprite.getAbility(action);
+ActionAbility result = new ActionAbility(action);
 		return result;
 	}
 	
@@ -124,7 +125,8 @@ public class ReplayModulationManager extends ModulationManager
 	}
 	
 	public StateAbility modulateStateAbility(String name)
-	{	StateAbility result = sprite.getAbility(name);
+	{	//StateAbility result = sprite.getAbility(name);
+StateAbility result = new StateAbility(name);
 		return result;
 	}	
 

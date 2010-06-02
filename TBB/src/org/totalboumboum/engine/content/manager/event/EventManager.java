@@ -35,7 +35,6 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
 
-
 public abstract class EventManager
 {		
 	public EventManager(Sprite sprite)
@@ -72,6 +71,12 @@ public abstract class EventManager
 	{	this.gesture = gesture;
 	}
 
+	public void initGesture()
+	{	gesture = GestureName.NONE;
+		spriteDirection = Direction.NONE;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -96,7 +101,6 @@ public abstract class EventManager
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	protected void endSprite()
 	{	gesture = GestureName.ENDED;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
@@ -122,4 +126,9 @@ public abstract class EventManager
 		}
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract EventManager copy(Sprite sprite);
 }
