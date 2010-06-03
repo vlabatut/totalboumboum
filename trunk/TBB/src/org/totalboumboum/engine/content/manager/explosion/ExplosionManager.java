@@ -21,26 +21,13 @@ package org.totalboumboum.engine.content.manager.explosion;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.engine.container.explosionset.Explosion;
 import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.feature.action.SpecificAction;
-import org.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
-import org.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
-import org.totalboumboum.engine.content.feature.event.ActionEvent;
-import org.totalboumboum.engine.content.feature.gesture.Gesture;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.content.sprite.fire.Fire;
-import org.totalboumboum.game.round.RoundVariables;
 
-
-public class ExplosionManager
+public abstract class ExplosionManager
 {	
 	public ExplosionManager(Sprite sprite)
 	{	this.sprite = sprite;
@@ -50,7 +37,7 @@ public class ExplosionManager
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Sprite sprite;
+	protected Sprite sprite;
 	
 	public Sprite getSprite()
 	{	return sprite;
@@ -72,7 +59,7 @@ public class ExplosionManager
 	/////////////////////////////////////////////////////////////////
 	// EXPLOSION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Explosion explosion;
+	protected Explosion explosion;
 	
 	public void setExplosion(Explosion explosion)
 	{	this.explosion = explosion;	
@@ -82,15 +69,7 @@ public class ExplosionManager
 	{	return explosion;	
 	}
 	
-	public long getExplosionDuration()
-	{	long result;
-		Tile tile = sprite.getTile();
-		Fire fire = explosion.makeFire(null,tile);
-		Gesture gesture = fire.getGesturePack().getGesture(GestureName.BURNING);
-		AnimeDirection anime = gesture.getAnimeDirection(Direction.LEFT);
-		result = anime.getTotalDuration();
-		return result;
-	}
+	public abstract long getExplosionDuration();
 	
 	/**
 	 * create the explosion and returns the list of concerned tiles
@@ -98,91 +77,10 @@ public class ExplosionManager
 	 * @param fake	false if one just wants the tile list and not the actual explosion
 	 * @return	the list of tiles to be put on fire
 	 */
-	public List<Tile> makeExplosion(boolean fake)
-	{	// init
-		List<Tile> result = new ArrayList<Tile>();
-		Tile tile = sprite.getTile();
-		Sprite owner;
-		if(sprite.getOwner()==null)
-			owner = sprite;
-		else
-			owner = sprite.getOwner();
-		
-		// center
-		{	Fire fire;
-			if(flameRange==0)
-				fire = explosion.makeFire("outside",tile);
-			else
-				fire = explosion.makeFire("inside",tile);
-			fire.setOwner(owner);
-			SpecificAction specificAction = new SpecificAppear(fire,Direction.NONE);
-			AbstractAbility ability = fire.modulateAction(specificAction);
-			if(!fake)
-			{	if(!ability.isActive())
-				{	fire.consumeTile(tile);
-				}
-				else
-				{	RoundVariables.level.insertSpriteTile(fire);
-					SpecificDetonate detonateAction = new SpecificDetonate(sprite,Direction.NONE);
-					ActionEvent evt = new ActionEvent(detonateAction);
-					fire.processEvent(evt);
-				}
-			}
-			result.add(tile);
-		}
-		
-		// branches
-		{	boolean blocked[] = {false,false,false,false};
-			Tile tiles[] = {tile,tile,tile,tile};
-			Direction directions[] = {Direction.DOWN, Direction.LEFT, Direction.RIGHT, Direction.UP};
-			ArrayList<Tile> processed = new ArrayList<Tile>();
-			processed.add(tile);
-			boolean goOn = true;
-			int length = 1;
-			while(goOn && length<=flameRange)
-			{	goOn = false;
-				// increase the explosion
-				for(int i=0;i<directions.length;i++)
-				{	if(!blocked[i])
-					{	// get the tile
-						Direction direction = directions[i];
-						Tile tempTile = tiles[i].getNeighbor(direction);
-						tiles[i] = tempTile;
-						if(!processed.contains(tempTile))
-						{	processed.add(tempTile);
-							Fire fire;
-							if(length==flameRange)
-								fire = explosion.makeFire("outside",tempTile); //TODO remplacer ces chaines de caractères par des valeurs énumérées
-							else
-								fire = explosion.makeFire("inside",tempTile);
-							fire.setOwner(owner);
-							SpecificAction specificAction = new SpecificAppear(fire,direction);
-							AbstractAbility ability = fire.modulateAction(specificAction);
-							blocked[i] = !ability.isActive();
-							if(!fake)
-							{	if(blocked[i])
-								{	fire.consumeTile(tempTile);
-									//blocked[i] = true;
-								}
-								else
-								{	goOn = true;
-									RoundVariables.level.insertSpriteTile(fire);
-									SpecificDetonate detonateAction = new SpecificDetonate(sprite,direction);
-									ActionEvent evt = new ActionEvent(detonateAction);
-									fire.processEvent(evt);
-								}
-							}
-							else
-							{	goOn = goOn || !blocked[i];
-							}
-							result.add(tempTile);
-						}
-					}
-				}
-				length++;
-			}
-		}
-		
-		return result;
-	}	
+	public abstract List<Tile> makeExplosion(boolean fake);
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract ExplosionManager copy(Sprite sprite);
 }

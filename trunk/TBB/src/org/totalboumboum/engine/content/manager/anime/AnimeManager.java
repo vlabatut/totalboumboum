@@ -411,4 +411,12 @@ public class AnimeManager
 	private boolean isBoundToSprite()
 	{	return sprite.isBoundToSprite();
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public AnimeManager copy(Sprite sprite)
+	{	AnimeManager result = new AnimeManager(sprite);
+		return result;
+	}
 }

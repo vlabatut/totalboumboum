@@ -38,9 +38,9 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulat
 import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-public class RegularModulationManager extends ModulationManager
+public class FullModulationManager extends ModulationManager
 {	
-	public RegularModulationManager(Sprite sprite)
+	public FullModulationManager(Sprite sprite)
 	{	super(sprite);
 	}
 	
@@ -378,8 +378,9 @@ if(sprite instanceof Item && sprite.getCurrentGesture()!=null && sprite.getCurre
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public ModulationManager copy(Sprite sprite)
-	{	ModulationManager result = new RegularModulationManager(sprite);
+	{	ModulationManager result = new FullModulationManager(sprite);
 		return result;
 	}
 }

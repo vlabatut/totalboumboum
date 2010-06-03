@@ -35,9 +35,9 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulat
 import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-public class ReplayModulationManager extends ModulationManager
+public class EmptyModulationManager extends ModulationManager
 {	
-	public ReplayModulationManager(Sprite sprite)
+	public EmptyModulationManager(Sprite sprite)
 	{	super(sprite);
 	}
 	
@@ -133,8 +133,9 @@ StateAbility result = new StateAbility(name);
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public ModulationManager copy(Sprite sprite)
-	{	ModulationManager result = new ReplayModulationManager(sprite);
+	{	ModulationManager result = new EmptyModulationManager(sprite);
 		return result;
 	}
 }

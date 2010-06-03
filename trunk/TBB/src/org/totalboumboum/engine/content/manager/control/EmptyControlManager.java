@@ -21,57 +21,46 @@ package org.totalboumboum.engine.content.manager.control;
  * 
  */
 
-import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.control.ControlCode;
 
-public abstract class ControlManager
+public class EmptyControlManager extends ControlManager
 {	
-	public ControlManager(Sprite sprite)
-	{	this.sprite = sprite;
+	public EmptyControlManager(Sprite sprite)
+	{	super(sprite);
 	}	
 
 	/////////////////////////////////////////////////////////////////
-	// SPRITE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** managed sprite  */
-	protected Sprite sprite;
-	
-	public Sprite getSprite()
-	{	return sprite;
-	}
-	
-	public void setSprite(Sprite sprite)
-	{	this.sprite = sprite;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// SETTINGS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected ControlSettings controlSettings;
-	
-	public void setControlSettings(ControlSettings controlSettings)
-	{	this.controlSettings = controlSettings;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// CODES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract void putControlCode(ControlCode controlCode);
+	public synchronized void putControlCode(ControlCode controlCode)
+	{	
+		// useless here
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// EVENTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract void putControlEvent(ControlEvent controlEvent);
+	public synchronized void putControlEvent(ControlEvent controlEvent)
+	{	
+		// useless here
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract void update();
-	
+	public void update()
+	{	
+		// useless here
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract ControlManager copy(Sprite sprite);
+	@Override
+	public ControlManager copy(Sprite sprite)
+	{	ControlManager result = new EmptyControlManager(sprite);
+		return result;
+	}
 }

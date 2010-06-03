@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.manager.trajectory;
+package org.totalboumboum.engine.content.manager.bombset;
 
 /*
  * Total Boum Boum
@@ -21,45 +21,61 @@ package org.totalboumboum.engine.content.manager.trajectory;
  * 
  */
 
-import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.gesture.Gesture;
+import org.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 
-public class ReplayTrajectoryManager extends TrajectoryManager
-{
-	public ReplayTrajectoryManager(Sprite sprite)
+public class FullBombsetManager extends BombsetManager
+{	
+	public FullBombsetManager(Sprite sprite)
 	{	super(sprite);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
-	// BINDING				/////////////////////////////////////////
+	// DROP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void setBoundToSprite(Sprite newSprite)
-	{	// nothing to do here: the sprite can't be bound
+	public Bomb makeBomb()
+	{	Bomb result = null;
+		return result;
+	}
+	
+	@Override
+	public void dropBomb(SpecificDrop dropAction)
+	{	
+		// useless here
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// UPDATE				/////////////////////////////////////////
+	// TRIGGER			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void triggerBomb()
+	{	
+		// useless here
+	}
+	
+	@Override
+	public void triggerAllBombs()
+	{	
+		// useless here
+	}	
+	
+	/////////////////////////////////////////////////////////////////
+	// UPDATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void update()
-	{	// nothing to do here, since there's no trajectory
+	{	
+		// useless here
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// GESTURE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void updateGesture(Gesture gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
-	{	// nothing to do here, since there's no trajectory
-	}	
 
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public TrajectoryManager copy(Sprite sprite)
-	{	TrajectoryManager result = new ReplayTrajectoryManager(sprite);
+	@Override
+	public BombsetManager copy(Sprite sprite)
+	{	BombsetManager result = new EmptyBombsetManager(sprite); 
 		return result;
 	}
 }
