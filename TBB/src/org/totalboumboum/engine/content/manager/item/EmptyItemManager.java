@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.manager.bombset;
+package org.totalboumboum.engine.content.manager.item;
 
 /*
  * Total Boum Boum
@@ -21,70 +21,93 @@ package org.totalboumboum.engine.content.manager.bombset;
  * 
  */
 
-import java.util.LinkedList;
-
-import org.totalboumboum.engine.container.bombset.Bombset;
-import org.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.content.sprite.bomb.Bomb;
+import org.totalboumboum.engine.content.sprite.item.Item;
 
-public abstract class BombsetManager
+public class EmptyItemManager extends ItemManager
 {	
-	public BombsetManager(Sprite sprite)
-	{	this.sprite = sprite;
-		bombset = null;
-		droppedBombs = new LinkedList<Bomb>();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// BOMBSET			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected Bombset bombset;
-	
-	public void setBombset(Bombset bombset)
-	{	this.bombset = bombset;		
-	}
-	
-	public Bombset getBombset()
-	{	return bombset;
+	public EmptyItemManager(Sprite sprite)
+	{	super(sprite);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// SPRITE			/////////////////////////////////////////////
+	// INITIAL ITEMS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected Sprite sprite;
+	@Override
+	public void addInitialItem(Item item)
+	{	
+		// useless here
+	}
 	
-	public Sprite getSprite()
-	{	return sprite;
+	@Override
+	public void reinitInitialItems()
+	{			
+		// useless here
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// DROP				/////////////////////////////////////////////
+	// COLLECTED ITEMS			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	@Override
+	public void collectItem(Item item)
+	{	
+		// useless here
+	}
+	
 	/////////////////////////////////////////////////////////////////
-	protected LinkedList<Bomb> droppedBombs;
+	// RECEIVE ITEMS			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void receiveItem(Item item)
+	{	
+		// useless here
+	}
 	
-	public abstract Bomb makeBomb();
+	/////////////////////////////////////////////////////////////////
+	// RELEASE ITEMS			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void releaseLastItem()
+	{	
+		// useless here
+	}
 	
-	public abstract void dropBomb(SpecificDrop dropAction);
-
-	public LinkedList<Bomb> getDroppedBombs()
-	{	return droppedBombs;
+	@Override
+	public void releaseRandomItem()
+	{	
+		// useless here
+	}
+	
+	@Override
+	public void releaseAllItems()
+	{	
+		// useless here
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// TRIGGER			/////////////////////////////////////////////
+	// TRANSMIT ITEM	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract void triggerBomb();
-	
-	public abstract void triggerAllBombs();
-	
+	@Override
+	public void transmitAllItems(Sprite target)
+	{	
+		// useless here
+	}
+		
 	/////////////////////////////////////////////////////////////////
-	// UPDATE			/////////////////////////////////////////////
+	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract void update();
+	@Override
+	public void update()
+	{	
+		// useless here
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract BombsetManager copy(Sprite sprite);
+	@Override
+	public ItemManager copy(Sprite sprite)
+	{	ItemManager result = new EmptyItemManager(sprite);
+		return result;
+	}
 }

@@ -36,9 +36,9 @@ import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEve
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
-public class RegularTrajectoryManager extends TrajectoryManager
+public class FullTrajectoryManager extends TrajectoryManager
 {	
-	public RegularTrajectoryManager(Sprite sprite)
+	public FullTrajectoryManager(Sprite sprite)
 	{	super(sprite);
 	}
 
@@ -787,8 +787,9 @@ if(sprite instanceof Hero)
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public TrajectoryManager copy(Sprite sprite)
-	{	TrajectoryManager result = new RegularTrajectoryManager(sprite);
+	{	TrajectoryManager result = new FullTrajectoryManager(sprite);
 		return result;
 	}
 }

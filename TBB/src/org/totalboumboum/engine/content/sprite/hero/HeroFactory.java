@@ -22,8 +22,20 @@ package org.totalboumboum.engine.content.sprite.hero;
  */
 
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.manager.bombset.BombsetManager;
+import org.totalboumboum.engine.content.manager.bombset.EmptyBombsetManager;
+import org.totalboumboum.engine.content.manager.bombset.FullBombsetManager;
+import org.totalboumboum.engine.content.manager.control.ControlManager;
+import org.totalboumboum.engine.content.manager.control.EmptyControlManager;
+import org.totalboumboum.engine.content.manager.control.FullControlManager;
 import org.totalboumboum.engine.content.manager.event.EventManager;
-import org.totalboumboum.engine.content.manager.event.ReplayEventManager;
+import org.totalboumboum.engine.content.manager.event.EmptyEventManager;
+import org.totalboumboum.engine.content.manager.item.EmptyItemManager;
+import org.totalboumboum.engine.content.manager.item.FullItemManager;
+import org.totalboumboum.engine.content.manager.item.ItemManager;
+import org.totalboumboum.engine.content.manager.trajectory.EmptyTrajectoryManager;
+import org.totalboumboum.engine.content.manager.trajectory.FullTrajectoryManager;
+import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.game.round.RoundVariables;
@@ -39,14 +51,58 @@ public class HeroFactory extends SpriteFactory<Hero>
 		// common managers
 		initSprite(result);
 	
-		// specific managers
+		// anime
+
+		// trajectory
+		TrajectoryManager trajectoryManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			trajectoryManager = new EmptyTrajectoryManager(result);
+		else
+			trajectoryManager = new FullTrajectoryManager(result);
+		result.setTrajectoryManager(trajectoryManager);
+		
+		// bombset
+		BombsetManager bombsetManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			bombsetManager = new EmptyBombsetManager(result);
+		else
+		{	bombsetManager = new FullBombsetManager(result);
+			bombsetManager.setBombset(bombset);
+		}
+//if(bombset==null)
+//	System.out.println();
+		result.setBombsetManager(bombsetManager);
+		
+		// explosion
+		
+		// modulations
+		
+		// item
+		ItemManager itemManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			itemManager = new EmptyItemManager(result);
+		else
+			itemManager = new FullItemManager(result);
+		result.setItemManager(itemManager);
+		
+		// ability
+		
 		// delay
 //		double value = configuration.getHeroSetting(Configuration.HERO_SETTING_WAIT_DELAY);
 //		result.addDelay(DelayManager.DL_WAIT,value);
+		
+		// control
+		ControlManager controlManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			controlManager = new EmptyControlManager(result);
+		else
+			controlManager = new FullControlManager(result);
+		result.setControlManager(controlManager);
+
 		// event
 		EventManager eventManager;
 		if(RoundVariables.loop instanceof ReplayLoop)
-			eventManager = new ReplayEventManager(result);
+			eventManager = new EmptyEventManager(result);
 		else
 			eventManager = new HeroEventManager(result);
 		result.setEventManager(eventManager);

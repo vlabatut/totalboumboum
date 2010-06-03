@@ -26,8 +26,17 @@ import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import org.totalboumboum.engine.content.manager.bombset.BombsetManager;
+import org.totalboumboum.engine.content.manager.bombset.EmptyBombsetManager;
+import org.totalboumboum.engine.content.manager.control.ControlManager;
+import org.totalboumboum.engine.content.manager.control.EmptyControlManager;
 import org.totalboumboum.engine.content.manager.event.EventManager;
-import org.totalboumboum.engine.content.manager.event.ReplayEventManager;
+import org.totalboumboum.engine.content.manager.event.EmptyEventManager;
+import org.totalboumboum.engine.content.manager.item.EmptyItemManager;
+import org.totalboumboum.engine.content.manager.item.ItemManager;
+import org.totalboumboum.engine.content.manager.trajectory.EmptyTrajectoryManager;
+import org.totalboumboum.engine.content.manager.trajectory.FullTrajectoryManager;
+import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 import org.totalboumboum.engine.content.sprite.SpriteFactory;
 import org.totalboumboum.engine.content.sprite.item.ItemEventManager;
 import org.totalboumboum.engine.loop.ReplayLoop;
@@ -106,14 +115,47 @@ public class ItemFactory extends SpriteFactory<Item>
 		// common managers
 		initSprite(result);
 	
-		// specific managers
+		// anime
+
+		// trajectory
+		TrajectoryManager trajectoryManager;
+		if(RoundVariables.loop instanceof ReplayLoop)
+			trajectoryManager = new EmptyTrajectoryManager(result);
+		else
+			trajectoryManager = new FullTrajectoryManager(result);
+		result.setTrajectoryManager(trajectoryManager);
+		
+		// bombset
+		BombsetManager bombsetManager = new EmptyBombsetManager(result);
+		bombsetManager.setBombset(bombset);
+//if(bombset==null)
+//	System.out.println();
+		result.setBombsetManager(bombsetManager);
+		
+		// explosion
+		
+		// modulations
+		
+		// item
+		ItemManager itemManager = new EmptyItemManager(result);
+		result.setItemManager(itemManager);
+		
+		// ability
+		
+		// delay
+		
+		// control
+		ControlManager controlManager = new EmptyControlManager(result);
+		result.setControlManager(controlManager);
+
 		// item abilities
 		List<AbstractAbility> itemAbilities = drawItemAbilities();
 		result.initItemAbilities(itemAbilities);
+		
 		// event
 		EventManager eventManager;
 		if(RoundVariables.loop instanceof ReplayLoop)
-			eventManager = new ReplayEventManager(result);
+			eventManager = new EmptyEventManager(result);
 		else
 			eventManager = new ItemEventManager(result);
 		result.setEventManager(eventManager);

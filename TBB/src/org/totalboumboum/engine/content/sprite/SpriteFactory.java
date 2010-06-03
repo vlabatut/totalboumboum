@@ -28,18 +28,18 @@ import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.manager.ability.AbilityManager;
+import org.totalboumboum.engine.content.manager.ability.EmptyAbilityManager;
+import org.totalboumboum.engine.content.manager.ability.FullAbilityManager;
 import org.totalboumboum.engine.content.manager.anime.AnimeManager;
-import org.totalboumboum.engine.content.manager.bombset.BombsetManager;
-import org.totalboumboum.engine.content.manager.control.ControlManager;
 import org.totalboumboum.engine.content.manager.delay.DelayManager;
+import org.totalboumboum.engine.content.manager.delay.EmptyDelayManager;
+import org.totalboumboum.engine.content.manager.delay.FullDelayManager;
+import org.totalboumboum.engine.content.manager.explosion.EmptyExplosionManager;
 import org.totalboumboum.engine.content.manager.explosion.ExplosionManager;
-import org.totalboumboum.engine.content.manager.item.ItemManager;
+import org.totalboumboum.engine.content.manager.explosion.FullExplosionManager;
 import org.totalboumboum.engine.content.manager.modulation.ModulationManager;
-import org.totalboumboum.engine.content.manager.modulation.RegularModulationManager;
-import org.totalboumboum.engine.content.manager.modulation.ReplayModulationManager;
-import org.totalboumboum.engine.content.manager.trajectory.RegularTrajectoryManager;
-import org.totalboumboum.engine.content.manager.trajectory.ReplayTrajectoryManager;
-import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
+import org.totalboumboum.engine.content.manager.modulation.FullModulationManager;
+import org.totalboumboum.engine.content.manager.modulation.EmptyModulationManager;
 import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.game.round.RoundVariables;
 
@@ -63,91 +63,63 @@ public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFact
 	/////////////////////////////////////////////////////////////////
 	public abstract T makeSprite(Tile tile);
 
-	protected void initSprite(T sprite)
+	protected void initSprite(T result)
 	{	// name
-		sprite.setName(name);
+		result.setName(name);
 //if(name.equalsIgnoreCase("fireproof"))
 //	System.out.println();
 
 		// gesture pack
 		GesturePack gp = gesturePack;
-		sprite.setGesturePack(gp);
+		result.setGesturePack(gp);
 		
 		// anime
-		AnimeManager animeManager = new AnimeManager(sprite);
-		sprite.setAnimeManager(animeManager);
+		AnimeManager animeManager = new AnimeManager(result);
+		result.setAnimeManager(animeManager);
 		
 		// trajectory
-		TrajectoryManager trajectoryManager;
-		if(RoundVariables.loop instanceof ReplayLoop)
-			trajectoryManager = new ReplayTrajectoryManager(sprite);
-		else
-			trajectoryManager = new RegularTrajectoryManager(sprite);
-		sprite.setTrajectoryManager(trajectoryManager);
-		
+
 		// bombset
-		BombsetManager bombsetManager;
-		if(RoundVariables.loop instanceof ReplayLoop)
-			bombsetManager = null;
-		else
-		{	bombsetManager = new BombsetManager(sprite);
-			bombsetManager.setBombset(bombset);
-		}
-//if(bombset==null)
-//	System.out.println();
-		sprite.setBombsetManager(bombsetManager);
 		
 		// explosion
 		ExplosionManager explosionManager;
 		if(RoundVariables.loop instanceof ReplayLoop)
-			explosionManager = null;
+			explosionManager = new EmptyExplosionManager(result);
 		else
-		{	explosionManager = new ExplosionManager(sprite);
+		{	explosionManager = new FullExplosionManager(result);
 			explosionManager.setExplosion(explosion);
 		}
-		sprite.setExplosionManager(explosionManager);
+		result.setExplosionManager(explosionManager);
 		
 		// modulations
 		ModulationManager modulationManager;
 		if(RoundVariables.loop instanceof ReplayLoop)
-			modulationManager = new ReplayModulationManager(sprite);
+			modulationManager = new EmptyModulationManager(result);
 		else
-			modulationManager = new RegularModulationManager(sprite);
-		sprite.setModulationManager(modulationManager);
+			modulationManager = new FullModulationManager(result);
+		result.setModulationManager(modulationManager);
 		
 		// item
-		ItemManager itemManager;
-		if(RoundVariables.loop instanceof ReplayLoop)
-			itemManager = null;
-		else
-			itemManager = new ItemManager(sprite);
-		sprite.setItemManager(itemManager);
-		
+
 		// ability
 		AbilityManager abilityManager;
 		if(RoundVariables.loop instanceof ReplayLoop)
-			abilityManager = null;
+			abilityManager = new EmptyAbilityManager(result);
 		else
-		{	abilityManager = new AbilityManager(sprite);
+		{	abilityManager = new FullAbilityManager(result);
 			abilityManager.addDirectAbilities(abilities);
 		}
-		sprite.setAbilityManager(abilityManager);
+		result.setAbilityManager(abilityManager);
 		
 		// delay
 		DelayManager delayManager;
 		if(RoundVariables.loop instanceof ReplayLoop)
-			delayManager = null;
+			delayManager = new EmptyDelayManager(result);
 		else
-			delayManager = new DelayManager(sprite);
-		sprite.setDelayManager(delayManager);
+			delayManager = new FullDelayManager(result);
+		result.setDelayManager(delayManager);
 		
 		// control
-		ControlManager controlManager;
-		if(RoundVariables.loop instanceof ReplayLoop)
-			controlManager = null;
-		else
-			controlManager = new ControlManager(sprite);
-		sprite.setControlManager(controlManager);
 	}
 	
 	/////////////////////////////////////////////////////////////////

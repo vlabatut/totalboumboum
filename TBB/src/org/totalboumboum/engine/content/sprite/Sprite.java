@@ -479,7 +479,7 @@ public abstract class Sprite
 	{	abilityManager.addDirectAbility(ability);
 	}
 	
-	public ArrayList<AbstractAbility> getDirectAbilities()
+	public List<AbstractAbility> getDirectAbilities()
 	{	return abilityManager.getDirectAbilities();		
 	}
 	
@@ -688,7 +688,7 @@ public abstract class Sprite
 	{	return itemManager.dropAllItems();
 	}
 */	
-	public ArrayList<AbstractAbility> getItemsAbilities()
+	public List<AbstractAbility> getItemsAbilities()
 	{	return itemManager.getItemAbilities();	
 	}
 	

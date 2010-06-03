@@ -115,7 +115,7 @@ public class Item extends Sprite
 		result.setGesturePack(gesturePack);
 		
 		// anime
-		AnimeManager animeManager = new AnimeManager(result);
+		AnimeManager animeManager = this.animeManager.copy(result);
 		result.setAnimeManager(animeManager);
 		
 		// trajectory
@@ -123,61 +123,31 @@ public class Item extends Sprite
 		result.setTrajectoryManager(trajectoryManager);
 		
 		// bombset
-		BombsetManager bombsetManager;
-		if(this.bombsetManager == null)
-			bombsetManager = null;
-		else
-		{	bombsetManager = new BombsetManager(result);
-			bombsetManager.setBombset(getBombsetManager().getBombset());
-		}
+		BombsetManager bombsetManager = this.bombsetManager.copy(result);
 		result.setBombsetManager(bombsetManager);
 		
 		// explosion
-		ExplosionManager em;
-		if(this.explosionManager == null)
-			em = null;
-		else
-		{	em = new ExplosionManager(result);
-			em.setExplosion(getExplosionManager().getExplosion());
-		}
-		result.setExplosionManager(em);
+		ExplosionManager explosionManager = this.explosionManager.copy(result);
+		result.setExplosionManager(explosionManager);
 		
 		// modulations
 		ModulationManager modulationManager = this.modulationManager.copy(result);
 		result.setModulationManager(modulationManager);
 		
 		// item
-		ItemManager itemManager;
-		if(this.itemManager == null)
-			itemManager = null;
-		else
-			itemManager = new ItemManager(result);
+		ItemManager itemManager = this.itemManager.copy(result);
 		result.setItemManager(itemManager);
 		
 		// ability
-		AbilityManager abilityManager;
-		if(this.abilityManager == null)
-			abilityManager = null;
-		else
-		{	abilityManager = new AbilityManager(result);
-			abilityManager.addDirectAbilities(getDirectAbilities());
-		}
+		AbilityManager abilityManager = this.abilityManager.copy(result);
 		result.setAbilityManager(abilityManager);
 		
 		// delay
-		DelayManager delayManager = new DelayManager(result);
-		if(this.delayManager == null)
-			delayManager = null;
-		else
-			delayManager = new DelayManager(result);
+		DelayManager delayManager = this.delayManager.copy(result);
 		result.setDelayManager(delayManager);
 		
 		// control
-		ControlManager controlManager;
-		if(this.controlManager == null)
-			controlManager = null;
-		else
-			controlManager = new ControlManager(result);
+		ControlManager controlManager = this.controlManager.copy(result);
 		result.setControlManager(controlManager);
 		
 		// item abilities

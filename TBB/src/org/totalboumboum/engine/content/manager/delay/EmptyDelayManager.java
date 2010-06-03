@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.manager.event;
+package org.totalboumboum.engine.content.manager.delay;
 
 /*
  * Total Boum Boum
@@ -21,40 +21,61 @@ package org.totalboumboum.engine.content.manager.event;
  * 
  */
 
-import org.totalboumboum.engine.content.feature.event.ActionEvent;
-import org.totalboumboum.engine.content.feature.event.ControlEvent;
-import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-public class ReplayEventManager extends EventManager
-{		
-	public ReplayEventManager(Sprite sprite)
+public class EmptyDelayManager extends DelayManager
+{	
+	public EmptyDelayManager(Sprite sprite)
 	{	super(sprite);
-	}	
+	}
 
 	/////////////////////////////////////////////////////////////////
-	// EVENTS PROCESSING	/////////////////////////////////////////
+	// DELAYS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void processEvent(ActionEvent event)
-	{
+	@Override
+	public void addDelay(String name, double duration)
+	{	
 		// useless here
 	}
 	
-	public void processEvent(ControlEvent event)
-	{
+	@Override
+	public void addIterDelay(String name, int iterations)
+	{	
 		// useless here
 	}
 	
-	public void processEvent(EngineEvent event)
-	{
+	@Override
+	public void removeDelay(String name)
+	{		
+		// useless here
+	}
+	
+	@Override
+	public double getDelay(String name)
+	{	double result = -1;
+		return result;
+	}
+	
+	@Override
+	public boolean hasDelay(String name)
+	{	return false;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EXECUTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void update()
+	{	
 		// useless here
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public EventManager copy(Sprite sprite)
-	{	EventManager result = new ReplayEventManager(sprite);
+	@Override
+	public DelayManager copy(Sprite sprite)
+	{	DelayManager result = new EmptyDelayManager(sprite);
 		return result;
 	}
 }

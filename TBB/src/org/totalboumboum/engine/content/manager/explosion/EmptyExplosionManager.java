@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.content.manager.trajectory;
+package org.totalboumboum.engine.content.manager.explosion;
 
 /*
  * Total Boum Boum
@@ -21,46 +21,38 @@ package org.totalboumboum.engine.content.manager.trajectory;
  * 
  */
 
-import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.gesture.Gesture;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-public class EmptyTrajectoryManager extends TrajectoryManager
-{
-	public EmptyTrajectoryManager(Sprite sprite)
+public class EmptyExplosionManager extends ExplosionManager
+{	
+	public EmptyExplosionManager(Sprite sprite)
 	{	super(sprite);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
-	// BINDING				/////////////////////////////////////////
+	// EXPLOSION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void setBoundToSprite(Sprite newSprite)
-	{	// nothing to do here: the sprite can't be bound
+	public long getExplosionDuration()
+	{	return 0;
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// UPDATE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	
 	@Override
-	public void update()
-	{	// nothing to do here, since there's no trajectory
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// GESTURE				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void updateGesture(Gesture gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
-	{	// nothing to do here, since there's no trajectory
+	public List<Tile> makeExplosion(boolean fake)
+	{	List<Tile> result = new ArrayList<Tile>();
+		return result;
 	}	
 
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public TrajectoryManager copy(Sprite sprite)
-	{	TrajectoryManager result = new EmptyTrajectoryManager(sprite);
+	public ExplosionManager copy(Sprite sprite)
+	{	ExplosionManager result = new EmptyExplosionManager(sprite);
 		return result;
 	}
 }

@@ -23,15 +23,11 @@ package org.totalboumboum.engine.content.manager.delay;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
+import java.util.List;
 
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-
-public class DelayManager
+public abstract class DelayManager
 {	
 	public static final String DL_DEFEAT = "DL_DEFEAT";
 	public static final String DL_ENTER = "DL_ENTER";
@@ -44,7 +40,6 @@ public class DelayManager
 	public static final String DL_START = "DL_START";
 	public static final String DL_VICTORY = "DL_VICTORY";
 	public static final String DL_WAIT = "DL_WAIT";
-	
 
 	public DelayManager(Sprite sprite)
 	{	this.sprite = sprite;
@@ -56,29 +51,20 @@ public class DelayManager
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Sprite sprite;
+	protected Sprite sprite;
 
 	/////////////////////////////////////////////////////////////////
 	// DELAYS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,Double> delays;
-	private HashMap<String,Double> addedDelays;
-	private ArrayList<String> removedDelays;
+	protected HashMap<String,Double> delays;
+	protected HashMap<String,Double> addedDelays;
+	protected List<String> removedDelays;
 
-	public void addDelay(String name, double duration)
-	{	addedDelays.put(name, duration);		
-	}
+	public abstract void addDelay(String name, double duration);
 	
-	public void addIterDelay(String name, int iterations)
-	{	double period = Configuration.getEngineConfiguration().getMilliPeriod();
-		double speedCoeff = Configuration.getEngineConfiguration().getSpeedCoeff();
-		double duration = iterations*period*speedCoeff;
-		addDelay(name,duration);
-	}
+	public abstract void addIterDelay(String name, int iterations);
 	
-	public void removeDelay(String name)
-	{	removedDelays.add(name);		
-	}
+	public abstract void removeDelay(String name);
 	
 	/**
 	 * returns the current delay associated to the name parameter,
@@ -86,60 +72,17 @@ public class DelayManager
 	 * @param name
 	 * @return	a double corresponding to a delay
 	 */
-	public double getDelay(String name)
-	{	double result = -1;
-		if(delays.containsKey(name))
-			result = delays.get(name);
-		else if(addedDelays.containsKey(name))
-			result = addedDelays.get(name);
-		return result;
-	}
-	public boolean hasDelay(String name)
-	{	return delays.containsKey(name) || addedDelays.containsKey(name);		
-	}
+	public abstract double getDelay(String name);
+	
+	public abstract boolean hasDelay(String name);
 
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void update()
-	{	
-//if(sprite instanceof Bomb)
-//	System.out.println();
-		
-		// added delays
-		{	Iterator<Entry<String,Double>> i = addedDelays.entrySet().iterator();
-			while(i.hasNext())
-			{	Entry<String,Double> temp = i.next();
-				Double value = temp.getValue();
-				String key = temp.getKey();
-				delays.put(key,value);
-				i.remove();
-			}
-		}
-		// removed delays
-		{	Iterator<String> i = removedDelays.iterator();
-			while(i.hasNext())
-			{	String key = i.next();
-				delays.remove(key);
-				i.remove();
-			}
-		}
-		
-		// update remaining delays
-		{	double period = Configuration.getEngineConfiguration().getMilliPeriod();
-			double speedCoeff = Configuration.getEngineConfiguration().getSpeedCoeff();
-			Iterator<Entry<String,Double>> i = delays.entrySet().iterator();
-			while(i.hasNext())
-			{	Entry<String,Double> temp = i.next();
-				String name = temp.getKey();
-				double duration = temp.getValue() - period*speedCoeff;
-				if(duration<=0)
-				{	i.remove();
-					sprite.processEvent(new EngineEvent(EngineEvent.DELAY_OVER,name));
-				}
-				else
-					temp.setValue(duration);
-			}
-		}
-	}
+	public abstract void update();
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract DelayManager copy(Sprite sprite);
 }

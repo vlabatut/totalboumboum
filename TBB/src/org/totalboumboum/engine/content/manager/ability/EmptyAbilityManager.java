@@ -21,7 +21,6 @@ package org.totalboumboum.engine.content.manager.ability;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -31,68 +30,66 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-public abstract class AbilityManager
+public class EmptyAbilityManager extends AbilityManager
 {	
-	public AbilityManager(Sprite sprite)
-	{	this.sprite = sprite;
+	public EmptyAbilityManager(Sprite sprite)
+	{	super(sprite);
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// SPRITE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected Sprite sprite;
-	
-	public Sprite getSprite()
-	{	return sprite;
-	}
-
-/*	
-	public boolean hasAbility(AbstractAbility ability)
-	{	return dynamicAbilities.contains(ability);
-	}
-*/
 	/////////////////////////////////////////////////////////////////
 	// DIRECT ABILITIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abilities provided before the begining of the round */
-	protected final List<AbstractAbility> directAbilities = new ArrayList<AbstractAbility>();
+	@Override
+	public void addDirectAbilities(List<AbstractAbility> abilities)
+	{	
+		// useless here
+	}
 	
-	public abstract void addDirectAbilities(List<AbstractAbility> abilities);
-	
-	public abstract void addDirectAbility(AbstractAbility ability);
-	
-	public List<AbstractAbility> getDirectAbilities()
-	{	return directAbilities;	
+	@Override
+	public void addDirectAbility(AbstractAbility ability)
+	{	
+		// useless here
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// CURRENT ABILITIES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** all abilities (direct and items) */
-	protected final List<AbstractAbility> currentAbilities = new ArrayList<AbstractAbility>();
-	
-	public abstract StateAbility getAbility(String name);
-	
-/*	public StateAbility getAbility(StateAbility ability)
-	{	return getAbility(ability.getName());
+	@Override
+	public StateAbility getAbility(String name)
+	{	StateAbility result = new StateAbility(name);
+		return result;
 	}
-*/
-	
-	public abstract ActionAbility getAbility(SpecificAction action);
-	
-	public abstract ActionAbility getAbility(GeneralAction action);
 
-	/**
-	 *  current abilities :
-	 *  	- directAbilities
-	 *  	- itemAbilities
-	 */
-	public abstract void update();
+	@Override
+	public ActionAbility getAbility(SpecificAction action)
+	{	ActionAbility result = new ActionAbility(action);
+		return result;
+	}
 	
-	public abstract void modifyUse(AbstractAbility ability, int delta);
+	@Override
+	public ActionAbility getAbility(GeneralAction action)
+	{	ActionAbility result = new ActionAbility(action);
+		return result;
+	}
 
+	@Override
+	public void update()
+	{	
+		// useless here
+	}
+	
+	@Override
+	public void modifyUse(AbstractAbility ability, int delta)
+	{	
+		// useless here
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract AbilityManager copy(Sprite sprite);
+	@Override
+	public AbilityManager copy(Sprite sprite)
+	{	AbilityManager result = new EmptyAbilityManager(sprite);
+		return result;
+	}
 }
