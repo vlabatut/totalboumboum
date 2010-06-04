@@ -21,9 +21,25 @@ package org.totalboumboum.engine.content.manager.bombset;
  * 
  */
 
+import java.util.Iterator;
+
+import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.engine.content.feature.ability.ActionAbility;
+import org.totalboumboum.engine.content.feature.ability.StateAbility;
+import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
+import org.totalboumboum.engine.content.feature.action.SpecificAction;
+import org.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
+import org.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
 import org.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
+import org.totalboumboum.engine.content.feature.action.trigger.SpecificTrigger;
+import org.totalboumboum.engine.content.feature.event.ActionEvent;
+import org.totalboumboum.engine.content.feature.event.ControlEvent;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
+import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.statistics.detailed.StatisticAction;
+import org.totalboumboum.statistics.detailed.StatisticEvent;
 
 public class FullBombsetManager extends BombsetManager
 {	
@@ -36,14 +52,69 @@ public class FullBombsetManager extends BombsetManager
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Bomb makeBomb()
-	{	Bomb result = null;
+	{	Bomb result = bombset.makeBomb(sprite);
 		return result;
 	}
 	
 	@Override
 	public void dropBomb(SpecificDrop dropAction)
-	{	
-		// useless here
+	{	// init
+		Bomb bomb = (Bomb)dropAction.getTarget();
+		Direction direction = dropAction.getDirection();
+
+		// can the bomb appear here?
+		SpecificAppear action = new SpecificAppear(bomb,direction);
+		ActionAbility ablt = bomb.modulateAction(action);
+//System.out.println(sprite.getCurrentPosX()+": "+ablt.isActive());		
+		if(ablt.isActive())
+		{	// bomb range
+			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
+			int flameRange = (int)ability.getStrength();
+			ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
+			if(ability.isActive())
+			{	int limit = (int)ability.getStrength();
+				if(flameRange>limit)
+					flameRange = limit;
+			}
+//System.out.println("flameRange: "+flameRange);	
+		
+			// bomb number
+			ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
+			int droppedBombLimit = (int)ability.getStrength();
+			ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
+			if(ability.isActive())
+			{	int limit = (int)ability.getStrength();
+				if(droppedBombLimit>limit)
+					droppedBombLimit = limit;
+			}
+//System.out.println("droppedBombLimit: "+droppedBombLimit);	
+//System.out.println("droppedBombs.size(): "+droppedBombs.size());	
+			
+			if(droppedBombs.size()<droppedBombLimit)
+			{	if(bomb!=null)
+				{	bomb.setFlameRange(flameRange); //NOTE maybe it should be more consistent to use a specific StateAbility, initialized automatically from the owner when the bomb is made (by the bombfactory)?
+					//Tile tile = sprite.getTile();
+					SpecificAction specificAction = new SpecificAppear(bomb);
+					ablt = bomb.modulateAction(specificAction);
+					if(ablt.isActive())
+					{	RoundVariables.level.insertSpriteTile(bomb);
+//						bomb.setCurrentPosX(tile.getPosX());
+//						bomb.setCurrentPosY(tile.getPosY());
+						ActionEvent evt = new ActionEvent(dropAction);
+						bomb.processEvent(evt);
+						droppedBombs.offer(bomb);
+						// stats
+						StatisticAction statAction = StatisticAction.DROP_BOMB;
+						long statTime = sprite.getLoopTime();
+						Integer statActor = sprite.getPlayer().getId();
+						//String statTarget = bomb.getBombName();
+						StatisticEvent statEvent = new StatisticEvent(statActor,statAction,null,statTime);
+						sprite.addStatisticEvent(statEvent);
+//System.out.println("droppedBombCount:"+droppedBombCount);
+					}
+				}
+			}
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -51,14 +122,49 @@ public class FullBombsetManager extends BombsetManager
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void triggerBomb()
-	{	
-		// useless here
+	{	boolean found = false;
+		Iterator<Bomb> b = droppedBombs.iterator();
+		while(!found && b.hasNext())
+		{	Bomb bomb = b.next();
+			// check if the bomb is remote controlled
+			StateAbility triggerAbility = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_CONTROL);
+			if(triggerAbility.isActive())
+			{	// check if the bomb can explode
+				SpecificAction action = new SpecificDetonate(bomb);
+				ActionAbility detonateAbility = bomb.modulateAction(action);
+				if(detonateAbility.isActive())
+				{	found = true;
+					// make it explode
+					SpecificAction specificAction = new SpecificTrigger(sprite,bomb);
+					ActionEvent event = new ActionEvent(specificAction);
+					bomb.processEvent(event);				
+				}
+			}
+		}
 	}
 	
 	@Override
 	public void triggerAllBombs()
-	{	
-		// useless here
+	{	for(Bomb bomb: droppedBombs)
+		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_ON_DEATH_EXPLODE);
+			if(ability.isActive())
+			{	// set failure probability to zero
+				StateAbility failureAbility = new StateAbility(StateAbilityName.BOMB_FAILURE_PROBABILITY);
+				failureAbility.setStrength(0);
+				failureAbility.setFrame(true);
+				bomb.addDirectAbility(failureAbility);
+				
+				// check if the bomb can explose
+				SpecificAction action = new SpecificDetonate(bomb);
+				ActionAbility detonateAbility = bomb.modulateAction(action);
+				if(detonateAbility.isActive())
+				{	// make it explode
+					SpecificAction specificAction = new SpecificTrigger(sprite,bomb);
+					ActionEvent event = new ActionEvent(specificAction);
+					bomb.processEvent(event);				
+				}
+			}
+		}
 	}	
 	
 	/////////////////////////////////////////////////////////////////
@@ -66,8 +172,26 @@ public class FullBombsetManager extends BombsetManager
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void update()
-	{	
-		// useless here
+	{	// dropped bombs
+		Iterator<Bomb> i = droppedBombs.iterator();
+		while(i.hasNext())
+		{	Bomb bomb = i.next();
+			if(bomb.getCurrentGesture().getName()==GestureName.ENDED)
+			{	i.remove();
+//System.out.println("droppedBombCount:"+droppedBombCount);	
+			}
+		}
+		
+		// diarrhea disease
+		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_DIARRHEA);
+//if(sprite instanceof Hero)
+//System.out.println("diarrhea ("+sprite.getCurrentPosX()+"): "+ab.isActive());		
+		if(ab.isActive())
+		{	ControlEvent event = new ControlEvent(ControlEvent.DROPBOMB,true);
+			sprite.putControlEvent(event);
+//			event = new ControlEvent(ControlEvent.DROPBOMB,false);
+//			sprite.putControlEvent(event);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -75,7 +199,7 @@ public class FullBombsetManager extends BombsetManager
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public BombsetManager copy(Sprite sprite)
-	{	BombsetManager result = new EmptyBombsetManager(sprite); 
+	{	BombsetManager result = new FullBombsetManager(sprite); 
 		return result;
 	}
 }

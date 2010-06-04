@@ -29,6 +29,7 @@ import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.action.Circumstance;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
+import org.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
 import org.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
@@ -44,63 +45,58 @@ public class EmptyModulationManager extends ModulationManager
 	/////////////////////////////////////////////////////////////////
 	// OTHER MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private final OtherModulation otherModulation = new OtherModulation("");
+
 	@Override
 	public OtherModulation getOtherModulation(String name, Sprite modulated)
-	{	OtherModulation result = null;
-		if(result==null)
-			result = new OtherModulation(name);
-		return result;
+	{	return otherModulation;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// ACTOR MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private final ActorModulation actorModulation = new ActorModulation(new GeneralAppear());
+
 	@Override
 	public ActorModulation getActorModulation(SpecificAction action)
-	{	ActorModulation result = null;
-		if(result==null)
-			result = new ActorModulation(action);
-		return result;
+	{	return actorModulation;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// TARGET MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private final TargetModulation targetModulation = new TargetModulation(new GeneralAppear());
+
 	@Override
 	public TargetModulation getTargetModulation(SpecificAction action)
-	{	TargetModulation result = null;
-		if(result==null)
-			result = new TargetModulation(action);
-		return result;
+	{	return targetModulation;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// THIRD MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private final ThirdModulation thirdModulation = new ThirdModulation(new GeneralAppear());
+	
 	@Override
 	public ThirdModulation getThirdModulation(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
-	{	ThirdModulation result = null;
-		if(result==null)
-			result = new ThirdModulation(action);
-		return result;
+	{	return thirdModulation;
 	}
 	
 	@Override
 	public ThirdModulation getThirdModulation(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
-	{	ThirdModulation result = null;
-		if(result==null)
-			result = new ThirdModulation(action);
-		return result;
+	{	return thirdModulation;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private final ActionAbility actionAbility = new ActionAbility(new GeneralAppear());
+	private final StateAbility stateAbility = new StateAbility("");
+	
 	@Override
 	public ActionAbility modulateAction(SpecificAction action)
 	{	//ActionAbility result = sprite.getAbility(action);
-ActionAbility result = new ActionAbility(action);
-		return result;
+		return actionAbility;
 	}
 	
 	/**
@@ -126,8 +122,7 @@ ActionAbility result = new ActionAbility(action);
 	
 	public StateAbility modulateStateAbility(String name)
 	{	//StateAbility result = sprite.getAbility(name);
-StateAbility result = new StateAbility(name);
-		return result;
+		return stateAbility;
 	}	
 
 	/////////////////////////////////////////////////////////////////

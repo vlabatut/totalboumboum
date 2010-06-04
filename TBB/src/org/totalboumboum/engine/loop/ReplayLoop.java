@@ -214,11 +214,11 @@ public class ReplayLoop extends VisibleLoop
 			}
 			else
 			{	// read events
-System.out.println("/////////////////////////////////////////");		
+//System.out.println("/////////////////////////////////////////");		
 				List<ReplayEvent> events = new ArrayList<ReplayEvent>();
 				while(currentEvent.getTime()<getTotalEngineTime() && !(currentEvent instanceof StopReplayEvent))
 				{	events.add(currentEvent);
-System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
+//System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
 					currentEvent = RoundVariables.loadEvent();
 				}
 		
