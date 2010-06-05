@@ -50,6 +50,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 	private static final int LINE_LOG_CONTROLS = 3;
 	private static final int LINE_CACHE = 4;
 	private static final int LINE_CACHE_LIMIT = 5;
+	private static final int LINE_RECORD_GAMES = 6;
 
 	private LinesSubPanel optionsPanel;
 	private EngineConfiguration engineConfiguration;
@@ -285,8 +286,32 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 				
+				// #6 RECORD GAMES
+				{	Line ln = optionsPanel.getLine(LINE_RECORD_GAMES);
+					ln.addLabel(0);
+					int col = 0;
+					// name
+					{	ln.setLabelMinWidth(col,titleWidth);
+						ln.setLabelPrefWidth(col,titleWidth);
+						ln.setLabelMaxWidth(col,titleWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES_TITLE,false);
+						col++;
+					}
+					// value
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+						ln.setLabelMinWidth(col,valueWidth);
+						ln.setLabelPrefWidth(col,valueWidth);
+						ln.setLabelMaxWidth(col,valueWidth);
+						setRecordGames();
+						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
+				}
+				
 				// EMPTY
-				{	for(int line=LINE_CACHE_LIMIT+1;line<LINE_COUNT;line++)
+				{	for(int line=LINE_RECORD_GAMES+1;line<LINE_COUNT;line++)
 					{	Line ln = optionsPanel.getLine(line);
 						int col = 0;
 						int maxWidth = ln.getWidth();
@@ -370,6 +395,16 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 		optionsPanel.getLine(LINE_CACHE_LIMIT).setLabelText(2,text,tooltip);
 	}
 
+	private void setRecordGames()
+	{	boolean adjust = engineConfiguration.isRecordRounds();
+		String key;
+		if(adjust)
+			key = GuiKeys.MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES_ENABLED;
+		else
+			key = GuiKeys.MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES_DISABLED;
+		optionsPanel.getLine(LINE_RECORD_GAMES).setLabelKey(1,key,true);
+	}
+	
 	@Override
 	public void refresh()
 	{	// nothing to do here
@@ -421,13 +456,13 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 				engineConfiguration.setFps(fps);
 				setFps();
 				break;
-			// border
+			// adjust FPS
 			case LINE_ADJUST:
 				boolean adjust = !engineConfiguration.getAutoFps();
 				engineConfiguration.setAutoFps(adjust);
 				setAdjust();
 				break;
-			// smooth graphics
+			// speed
 			case LINE_SPEED:
 				double speed = engineConfiguration.getSpeedCoeff();
 				int index;
@@ -479,6 +514,12 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 				engineConfiguration.setSpriteCacheLimit(limit);
 				setCacheLimit();
 				break;			
+			// record games
+			case LINE_RECORD_GAMES:
+				boolean recordGames = !engineConfiguration.isRecordRounds();
+				engineConfiguration.setRecordRounds(recordGames);
+				setRecordGames();
+				break;
 		}
 	}
 	

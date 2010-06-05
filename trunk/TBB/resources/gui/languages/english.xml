@@ -186,6 +186,11 @@
 						<text name="Plus" value="Plus" tooltip="Increase the frames per second rate" />
 						<text name="Minus" value="Minus" tooltip="Decrease the frames per second rate" />
 					</group>
+					<group name="RecordGames">
+						<text name="Title" value="Record rounds" tooltip="Record each round so that you can replay it later" />
+						<text name="Disabled" value="Disabled" tooltip="Round recording disabled" />
+						<text name="Enabled" value="Enabled" tooltip="Round recording enabled" />
+					</group>
 					<group name="Speed">
 						<text name="Title" value="Speed" tooltip="Game speed" />
 						<text name="Plus" value="Plus" tooltip="Increase game speed" />

@@ -156,7 +156,7 @@
 						<text name="Enabled" value="Activé" tooltip="Affichage des exceptions activé" />
 					</group>
 					<group name="LogExceptions">
-						<text name="Title" value="Enregistrer les exceptions" tooltip="Enregistre dans un fichier les exceptions provoquées par les IA au cours de la partie" />
+						<text name="Title" value="Journaliser les exceptions" tooltip="Enregistre dans un fichier les exceptions provoquées par les IA au cours de la partie" />
 						<text name="Disabled" value="Désactivé" tooltip="Enregistrement des exceptions désactivé" />
 						<text name="Enabled" value="Activé" tooltip="Enregistrement des exceptions activé" />
 					</group>
@@ -167,7 +167,7 @@
 				<text name="Title" value="Options avancées" tooltip="Modifier les paramètres avancés" />
 				<group name="Line">
 					<group name="Adjust">
-						<text name="Title" value="auto FPS" tooltip="Ajuste automatiquement le nombre d'images par secondes (recommandé)" />
+						<text name="Title" value="Auto FPS" tooltip="Ajuste automatiquement le nombre d'images par secondes (recommandé)" />
 						<text name="Disabled" value="Désactivé" tooltip="Ajustement automatique du FPS désactivé" />
 						<text name="Enabled" value="Activé" tooltip="Ajustement automatique du FPS activé" />
 					</group>
@@ -186,13 +186,18 @@
 						<text name="Plus" value="Plus" tooltip="Augmenter le nombre d'images par secondes" />
 						<text name="Minus" value="Moins" tooltip="Diminuer le nombre d'images par secondes" />
 					</group>
+					<group name="RecordGames">
+						<text name="Title" value="Enregistrer les manches" tooltip="Enregistre chaque manche de manière à pouvoir la revoir plus tard" />
+						<text name="Disabled" value="Désactivé" tooltip="Enregistrement des manches désactivé" />
+						<text name="Enabled" value="Activé" tooltip="Enregistrement des manches activé" />
+					</group>
 					<group name="Speed">
 						<text name="Title" value="Vitesse" tooltip="Vitesse du jeu" />
 						<text name="Plus" value="Plus" tooltip="Augmenter la vitesse du jeu" />
 						<text name="Minus" value="Moins" tooltip="Diminuer la vitesse du jeu" />
 					</group>
 					<group name="LogControls">
-						<text name="Title" value="Enregistrer les commandes" tooltip="Enregistre dans un fichier les commandes activées en cours de la partie" />
+						<text name="Title" value="Journalisation des commandes" tooltip="Enregistre dans un fichier les commandes activées en cours de la partie" />
 						<text name="Disabled" value="Désactivé" tooltip="Enregistrement des commandes désactivé" />
 						<text name="Enabled" value="Activé" tooltip="Enregistrement des commandes activé" />
 					</group>
