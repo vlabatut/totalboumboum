@@ -838,7 +838,11 @@ public class Launcher
 	 * 		- refonte de l'affichage : tout est maintenant délégué à un ensemble de classes Display
 	 * 		- distinction entre différents types de joueurs (humain, ia, distant) via des classes spécifiques
 	 * 		- nouvelle classe de Loop pour le replay, meilleure structuration des Loop
+	 * 		- nouveaux managers vides, entre autres destinés aux sprites du mode replay
+	 * 		- nouvelle classe Replay, rendant le replay fonctionnel
 	 * - GUI :
+	 * 		- nouvelle option de replay dans le menu principal
+	 * 		- (dés)activation de l'enregistrement du replay dans les options
 	 * - IA :
 	 * - stats :
 	 * - Divers :

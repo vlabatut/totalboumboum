@@ -53,6 +53,8 @@ public class EngineConfiguration
 		result.setSpriteMemoryCached(spriteMemoryCached);
 		result.setSpriteCacheLimit(spriteCacheLimit);
 		
+		result.setRecordRounds(recordRounds);
+
 		return result;
 	}
 

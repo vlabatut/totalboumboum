@@ -207,6 +207,7 @@ public class GuiKeys
 	public static final String RANKPOINTS = "Rankpoints";
 	public static final String RATING = "Rating";
 	public static final String READY = "Ready";
+	public static final String RECORD = "Record";
 	public static final String RED = "Red";
 	public static final String REGISTER = "Register";
 	public static final String REGULAR = "Regular";
@@ -410,6 +411,11 @@ public class GuiKeys
 				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE = MENU_OPTIONS_ADVANCED_LINE_FPS+TITLE;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS = MENU_OPTIONS_ADVANCED_LINE_FPS+MINUS;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS = MENU_OPTIONS_ADVANCED_LINE_FPS+PLUS;
+				/* RECORD GAMES */
+				public static final String MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES = MENU_OPTIONS_ADVANCED_LINE+RECORD+GAMES;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES_TITLE = MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES+TITLE;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES_DISABLED = MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES+DISABLED;
+				public static final String MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES_ENABLED = MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES+ENABLED;
 				/* SPEED */
 				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED = MENU_OPTIONS_ADVANCED_LINE+SPEED;
 				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE = MENU_OPTIONS_ADVANCED_LINE_SPEED+TITLE;
