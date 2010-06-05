@@ -121,7 +121,10 @@ public class Round implements StatisticHolder, Serializable
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
 		{	if(replayed)
-				loop = new ReplayLoop(this);
+			{	loop = new ReplayLoop(this);
+				double zoomCoef = RoundVariables.zoomFactor / replay.getReadZoomCoef();
+				((ReplayLoop)loop).setZoomCoef(zoomCoef);
+			}
 			else
 				loop = new ServerLoop(this);
 		

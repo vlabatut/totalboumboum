@@ -185,6 +185,15 @@ public class ReplayLoop extends VisibleLoop
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// ZOOM COEFFICIENT		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private double zoomCoefficient = 1;
+	
+	public void setZoomCoef(double zoomCoef)
+	{	this.zoomCoefficient = zoomCoef;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// REPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private ReplayEvent currentEvent = null;
@@ -242,7 +251,7 @@ public class ReplayLoop extends VisibleLoop
 					{	SpriteChangePositionEvent scpEvent = (SpriteChangePositionEvent) event;
 						int id = scpEvent.getSpriteId();
 						Sprite sprite = level.getSprite(id);
-						sprite.processChangePositionEvent(scpEvent);
+						sprite.processChangePositionEvent(scpEvent,zoomCoefficient);
 					}
 				}
 			}
