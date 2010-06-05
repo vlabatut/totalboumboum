@@ -63,10 +63,14 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 		setMenuPanel(menuSplitPanel);
 	}	
 	
+	
+	/////////////////////////////////////////////////////////////////
+	// REFRESH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
 	public void refresh()
 	{	menuPart.refresh();
 	}
-
 	
 /*
 	public void setTournament(AbstractTournament tournament)

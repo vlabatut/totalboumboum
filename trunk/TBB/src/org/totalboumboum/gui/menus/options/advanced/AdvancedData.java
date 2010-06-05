@@ -396,9 +396,9 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 	}
 
 	private void setRecordGames()
-	{	boolean adjust = engineConfiguration.isRecordRounds();
+	{	boolean recordGames = engineConfiguration.isRecordRounds();
 		String key;
-		if(adjust)
+		if(recordGames)
 			key = GuiKeys.MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES_ENABLED;
 		else
 			key = GuiKeys.MENU_OPTIONS_ADVANCED_LINE_RECORD_GAMES_DISABLED;

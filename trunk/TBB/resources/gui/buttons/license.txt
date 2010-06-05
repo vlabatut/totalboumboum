@@ -1,8 +1,8 @@
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Crystal Project Icons
-Author	: Everaldo Coelho
-Site	: http://www.everaldo.com/crystal/
+Crystal Project icons
+Author: Everaldo Coelho
+Site: http://www.everaldo.com/crystal/
 License	: LGPL (GNU Lesser General Public License)
 
 	+ home.png
@@ -10,17 +10,19 @@ License	: LGPL (GNU Lesser General Public License)
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Total Boum Boum
-Author	: Vincent Labatut
-Site	: http://www.totalboumboum.org
+Total Boum Boum icons
+Authors: 
+	Icons: Vincent Labatut (http://www.totalboumboum.org)
+	Background: Everaldo Coelho (http://www.everaldo.com/crystal)
 License	: GPLv2 (GNU General Public License)
 
-	+ description.png	(derivative work from Crystal Project Icons)
-	+ frame.png
-	+ left_blue.png		(derivative work from Crystal Project Icons)
-	+ left_red.png		(derivative work from Crystal Project Icons)
-	+ play.png			(derivative work from Crystal Project Icons)
-	+ results.png		(derivative work from Crystal Project Icons)
-	+ right_blue.png	(derivative work from Crystal Project Icons)
-	+ right_red.png		(derivative work from Crystal Project Icons)
+	+ camera.png
+	+ description.png
+	+ left_blue.png
+	+ left_red.png
+	+ play.png
+	+ results.png
+	+ right_blue.png
+	+ right_red.png
+	+ save.png
 	

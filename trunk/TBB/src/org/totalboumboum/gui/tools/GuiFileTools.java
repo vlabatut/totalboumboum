@@ -105,6 +105,7 @@ public class GuiFileTools
 	// folders
 	public static final String FOLDER_BACKGROUNDS = "backgrounds";
 	public static final String FOLDER_BUTTONS = "buttons";
+	public final static String FOLDER_CAMERA = "camera";
 	public final static String FOLDER_DATA = "data";
 	public final static String FOLDER_DESCRIPTION = "description";
 	public static final String FOLDER_FONTS = "fonts";

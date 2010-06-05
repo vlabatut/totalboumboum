@@ -32,7 +32,6 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
 public class TournamentSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L;
 
@@ -49,6 +48,13 @@ public class TournamentSplitPanel extends SplitMenuPanel
 		setMenuPart(menu);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// REFRESH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void refreshButtons()
+	{	((TournamentMenu)menuPart).refreshButtons();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// AUTO ADVANCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

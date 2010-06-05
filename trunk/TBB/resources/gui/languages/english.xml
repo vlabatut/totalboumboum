@@ -615,6 +615,7 @@
 				<text name="Menu" value="Menu" tooltip="Go back to the main menu without quitting the tournament" />
 				<text name="NextMatch" value="Next match" tooltip="Go to the next match" />
 				<text name="Quit" value="Quit" tooltip="Quit the tournament and go back to main menu" />
+				<text name="RecordGames" value="Record games" tooltip="Record games to replay them later" />
 				<text name="Results" value="Results" tooltip="See the current results of this tournament" />
 				<text name="Save" value="Save" tooltip="Save current game" />
 				<text name="Statistics" value="Statistics" tooltip="See the detailed statistics of the current tournament" />
@@ -639,6 +640,7 @@
 				<text name="Quit" value="Quit" tooltip="Quit the tournament and go back to main menu" />
 				<text name="Finish" value="Finish the current match" tooltip="Finish this match and back to the tournament" />
 				<text name="NextRound" value="Next Round" tooltip="Go to the next round" />
+				<text name="RecordGames" value="Record games" tooltip="Record games to replay them later" />
 				<text name="Results" value="Results" tooltip="See the current results of this match" />
 				<text name="Save" value="Save" tooltip="Save current game" />
 				<text name="Statistics" value="Statistics" tooltip="See the detailed statistics of the current match" />
@@ -663,6 +665,7 @@
 				<text name="Finish" value="Finish the current round" tooltip="Finish this round and back to the match" />
 				<text name="Play" value="Play" tooltip="Start to play" />
 				<text name="Quit" value="Quit" tooltip="Quit the tournament and go back to main menu" />
+				<text name="RecordGames" value="Record games" tooltip="Record games to replay them later" />
 				<text name="Results" value="Results" tooltip="See the results of the current round" />
 				<text name="Save" value="Save" tooltip="Save current game" />
 				<text name="Statistics" value="Statistics" tooltip="See the detailed statistics of the current round" />

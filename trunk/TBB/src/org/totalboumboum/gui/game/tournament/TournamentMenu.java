@@ -88,6 +88,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		// buttons
 		buttonQuit = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		buttonSave = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
+		buttonRecord = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_RECORD_GAMES,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
 		buttonMenu = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
@@ -234,6 +235,7 @@ buttonStatistics.setEnabled(false);
 	private JButton buttonQuit;
 	@SuppressWarnings("unused")
 	private JButton buttonSave;
+	private JToggleButton buttonRecord;
 	private JButton buttonMenu;
 	private JToggleButton buttonDescription;
 	private JToggleButton  buttonResults;
@@ -242,7 +244,7 @@ buttonStatistics.setEnabled(false);
 	
 	private Thread thread = null;
 
-	private void refreshButtons()
+	public void refreshButtons()
 	{	if(tournament!=null)
 		{	if(tournament instanceof SingleTournament)
 			{	if(tournament.isOver())
@@ -279,6 +281,10 @@ buttonStatistics.setEnabled(false);
 		else
 		{	buttonMatch.setEnabled(false);
 		}
+	
+		// record games
+		boolean recordGames = Configuration.getEngineConfiguration().isRecordRounds();
+		buttonRecord.setSelected(recordGames);
 	}
 	
 	public void autoAdvance()
@@ -338,6 +344,10 @@ buttonStatistics.setEnabled(false);
 			savePanel.setTournament(tournament);
 			replaceWith(savePanel);
 	    }
+		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_RECORD_GAMES))
+		{	boolean recordGames = buttonRecord.isSelected();
+			Configuration.getEngineConfiguration().setRecordRounds(recordGames);
+	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU))
 		{	replaceWith(parent);
 	    }
@@ -362,6 +372,8 @@ buttonStatistics.setEnabled(false);
 				matchPanel = mPanel;
 				mPanel.setMatch(match);
 			}
+			else
+				((MatchSplitPanel)matchPanel).refreshButtons();
 			replaceWith(matchPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_CURRENT_ROUND))
@@ -371,7 +383,9 @@ buttonStatistics.setEnabled(false);
 			{	RoundSplitPanel rPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 				matchPanel = rPanel;
 				rPanel.setRound(round);
-			}							
+			}
+			else
+				((RoundSplitPanel)matchPanel).refreshButtons();
 			replaceWith(matchPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH))

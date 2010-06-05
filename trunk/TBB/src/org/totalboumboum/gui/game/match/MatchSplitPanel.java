@@ -32,7 +32,6 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
 public class MatchSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L;
 
@@ -47,6 +46,13 @@ public class MatchSplitPanel extends SplitMenuPanel
 		// panels
 		MatchMenu menu = new MatchMenu(this,parent);
 		setMenuPart(menu);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// REFRESH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void refreshButtons()
+	{	((MatchMenu)menuPart).refreshButtons();
 	}
 	
 	/////////////////////////////////////////////////////////////////
