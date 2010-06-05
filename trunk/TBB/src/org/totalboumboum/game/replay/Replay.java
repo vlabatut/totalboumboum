@@ -49,6 +49,7 @@ import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.round.Round;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -62,7 +63,9 @@ public class Replay
 	}
 	
 	public Replay(Round round) throws IOException
-	{	// level
+	{	Double zoomCoef = RoundVariables.zoomFactor;
+		
+		// level
 		LevelInfo levelInfo = round.getHollowLevel().getLevelInfo();
 		levelName = levelInfo.getFolder();
 		levelPack = levelInfo.getPackName();
@@ -84,6 +87,7 @@ public class Replay
 		initRecording();
 		
 		// record round info
+		out.writeObject(zoomCoef);
 		out.writeObject(profiles);
 		out.writeObject(levelInfo);
 		Limits<RoundLimit> limits = round.getLimits();
@@ -199,6 +203,7 @@ public class Replay
 	// REPLAYER				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private ObjectInputStream in = null;
+	private Double readZoomCoef = null;
 	private List<Profile> readProfiles = null;
 	private LevelInfo readLevelInfo = null;
 	private Limits<RoundLimit> readRoundLimits = null;
@@ -220,10 +225,15 @@ public class Replay
 //		in = new ObjectInputStream(inZip);
 		in = new ObjectInputStream(inBuff);
 		
+		readZoomCoef = (Double) in.readObject();
 		readProfiles = (List<Profile>) in.readObject();
 		readLevelInfo = (LevelInfo) in.readObject();
 		readRoundLimits = (Limits<RoundLimit>) in.readObject();		
 		readItemCounts = (HashMap<String,Integer>) in.readObject();		
+	}
+	
+	public double getReadZoomCoef()
+	{	return readZoomCoef;
 	}
 	
 	public List<Profile> getReadProfiles()

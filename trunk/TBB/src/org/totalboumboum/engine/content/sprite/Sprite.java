@@ -208,17 +208,17 @@ public abstract class Sprite
 		setGesture(gestureName,direction,Direction.NONE,reinit,duration);
 	}
 	
-	public void processChangePositionEvent(SpriteChangePositionEvent event)
+	public void processChangePositionEvent(SpriteChangePositionEvent event, double zoomCoef)
 	{	HashMap<String,Object> changes = event.getChanges();
 		Double x = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_X);
 		if(x!=null)
-			setCurrentPosX(x);
+			setCurrentPosX(x*zoomCoef);
 		Double y = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Y);
 		if(y!=null)
-			setCurrentPosY(y);
+			setCurrentPosY(y*zoomCoef);
 		Double z = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Z);
 		if(z!=null)
-			setCurrentPosZ(z);
+			setCurrentPosZ(z*zoomCoef);
 	}
 	
 	/////////////////////////////////////////////////////////////////
