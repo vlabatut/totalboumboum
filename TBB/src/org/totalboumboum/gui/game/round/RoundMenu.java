@@ -272,6 +272,7 @@ buttonStatistics.setEnabled(false);
 			// common
 			buttonPlay.setEnabled(false);
 			buttonQuit.setEnabled(false);
+			buttonRecord.setEnabled(false);
 			buttonSave.setEnabled(false);
 			buttonMatch.setEnabled(false);
 			int fontSize = GuiTools.getFontSize(getHeight()*0.6);
@@ -289,8 +290,8 @@ buttonStatistics.setEnabled(false);
 				String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_SIMULATION);
 				progressBar.setString(text);
 				progressBar.setMaximumSize(dim);
-				remove(2);
-				add(progressBar,2);
+				remove(progressBarPosition);
+				add(progressBar,progressBarPosition);
 				validate();
 				repaint();
 				// start simulation
@@ -306,8 +307,8 @@ buttonStatistics.setEnabled(false);
 				String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_FIRESETMAP);
 				progressBar.setString(text);
 				progressBar.setMaximumSize(dim);
-				remove(2);
-				add(progressBar,2);
+				remove(progressBarPosition);
+				add(progressBar,progressBarPosition);
 				validate();
 				repaint();
 				// round advance
@@ -355,17 +356,19 @@ buttonStatistics.setEnabled(false);
 	// ROUND RENDER PANEL	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private JProgressBar progressBar;
+	private final int progressBarPosition = 3; 
 	
 	@Override
 	public void roundOver()
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	// remove progress bar
-				remove(2);
-				add(Box.createHorizontalGlue(),2);
+				remove(progressBarPosition);
+				add(Box.createHorizontalGlue(),progressBarPosition);
 				//
 				buttonMatch.setEnabled(true);
 				buttonQuit.setEnabled(true);
+				buttonRecord.setEnabled(true);
 				buttonSave.setEnabled(true);
 				roundResults.refresh();
 				buttonResults.doClick();

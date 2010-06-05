@@ -68,7 +68,7 @@ public class Replay
 		levelPack = levelInfo.getPackName();
 		
 		// date
-		save = GregorianCalendar.getInstance().getTime();
+		saveDate = GregorianCalendar.getInstance().getTime();
 		
 		// players
 		List<Profile> profiles = round.getProfiles();
@@ -100,7 +100,7 @@ public class Replay
 	private void initFolder()
 	{	folder = "";
 		Calendar calendar = GregorianCalendar.getInstance();
-		calendar.setTime(save);
+		calendar.setTime(saveDate);
 		int year = calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH)+1;
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -320,13 +320,13 @@ public class Replay
 	/////////////////////////////////////////////////////////////////
 	// DATE					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Date save;
+	private Date saveDate;
 	
 	public void setSaveDate(Date save)
-	{	this.save = save;
+	{	this.saveDate = save;
 	}
 	public Date getSaveDate()
-	{	return save;
+	{	return saveDate;
 	}
 
 	/////////////////////////////////////////////////////////////////
