@@ -202,7 +202,7 @@ if(bomb==null)
 		
 		// separation event
 		StopReplayEvent event = new StopReplayEvent();
-		RoundVariables.recordEvent(event);
+		RoundVariables.writeEvent(event);
 	}
 
 	public void synchronizeZone()
@@ -223,7 +223,7 @@ if(bomb==null)
 		}
 		
 		// init sprites
-		ReplayEvent tempEvent = RoundVariables.replay.loadEvent();
+		ReplayEvent tempEvent = RoundVariables.replay.readEvent();
 		do
 		{	// creation
 			if(tempEvent instanceof SpriteCreationEvent)
@@ -240,7 +240,7 @@ if(bomb==null)
 					sprite.processChangeAnimeEvent(event);
 			}
 			// next event
-			tempEvent = RoundVariables.replay.loadEvent();
+			tempEvent = RoundVariables.replay.readEvent();
 		}
 		while(!(tempEvent instanceof StopReplayEvent));
 		

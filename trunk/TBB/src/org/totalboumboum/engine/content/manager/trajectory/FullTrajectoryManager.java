@@ -652,7 +652,7 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 			event.setChange(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Y,currentPosY);
 		if(currentPosZ!=previousPosZ)
 			event.setChange(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_Z,currentPosZ);
-		RoundVariables.recordEvent(event);
+		RoundVariables.writeEvent(event);
 	}
 	
 	/////////////////////////////////////////////////////////////////

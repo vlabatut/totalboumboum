@@ -59,15 +59,15 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	public static Replay replay = null;
 	
-	public static void recordEvent(ReplayEvent event)
+	public static void writeEvent(ReplayEvent event)
 	{	if(replay!=null && event.getSendEvent())
-			replay.recordEvent(event);
+			replay.writeEvent(event);
 	}
 
-	public static ReplayEvent loadEvent()
+	public static ReplayEvent readEvent()
 	{	ReplayEvent result = null;
 		if(replay!=null)
-			result = replay.loadEvent();
+			result = replay.readEvent();
 		return result;
 	}
 	

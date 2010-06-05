@@ -71,7 +71,7 @@ if(itemFactory==null)
 
 		// record/transmit event
 		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-		RoundVariables.recordEvent(event);
+		RoundVariables.writeEvent(event);
 
 		//result.initGesture();
 		return result;

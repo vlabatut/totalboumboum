@@ -74,7 +74,7 @@ if(fireFactory==null)
 		// record/transmit event
 		String eventName = getName()+"/"+name;
 		SpriteCreationEvent event = new SpriteCreationEvent(result,eventName);
-		RoundVariables.recordEvent(event);
+		RoundVariables.writeEvent(event);
 
 		return result;
 	}

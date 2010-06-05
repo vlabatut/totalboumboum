@@ -148,7 +148,7 @@ public class Replay
 	/**
 	 * records an event in the currently open stream.
 	 */
-	public void recordEvent(ReplayEvent event)
+	public void writeEvent(ReplayEvent event)
 	{	if(out!=null)
 		{	try
 			{	out.writeObject(event);
@@ -164,11 +164,11 @@ public class Replay
 	/**
 	 * close the replay output stream (if it was previously opened)
 	 */
-	public void finishRecording(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
+	public void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
 	{	if(out!=null)
 		{	// record the stats
 			StopReplayEvent event = new StopReplayEvent();
-			recordEvent(event);
+			writeEvent(event);
 			out.writeObject(stats);
 			if(verbose)
 				System.out.println("recording: stats");
@@ -249,7 +249,7 @@ public class Replay
 	/**
 	 * reads an event in the currently open stream.
 	 */
-	public ReplayEvent loadEvent()
+	public ReplayEvent readEvent()
 	{	ReplayEvent result = null;
 		
 		try
@@ -277,7 +277,7 @@ public class Replay
 	 * close the replay output stream (if it was previously opened)
 	 * @throws ClassNotFoundException 
 	 */
-	public void finishReplaying() throws IOException, ClassNotFoundException
+	public void finishReading() throws IOException, ClassNotFoundException
 	{	if(verbose)
 			System.out.println("reading: stats");
 		readRoundStats = (StatisticRound) in.readObject();

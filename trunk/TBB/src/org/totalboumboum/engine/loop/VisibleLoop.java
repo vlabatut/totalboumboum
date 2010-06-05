@@ -63,6 +63,7 @@ import org.xml.sax.SAXException;
 
 public abstract class VisibleLoop extends Loop
 {	private static final long serialVersionUID = 1L;
+	protected boolean verbose = false;
 	
 	public VisibleLoop(Round round)
 	{	super(round);
@@ -170,7 +171,11 @@ public abstract class VisibleLoop extends Loop
 	{	loadLock.lock();
 		try
 		{	// load the round
+			long loadStart = System.currentTimeMillis();
 			load();
+			long loadEnd = System.currentTimeMillis();
+			if(verbose)
+				System.out.println("total load time: "+(loadEnd-loadStart));
 			
 			// init the loop
 			startLoopInit();
@@ -281,7 +286,7 @@ public abstract class VisibleLoop extends Loop
 			 * without rendering it, to get the updates/sec nearer to the required FPS.
 			 */
 			int skips = 0;
-			RoundVariables.setFilterEvents(false); // in this situation, we do not want to record certain events
+			RoundVariables.setFilterEvents(true); // in this situation, we do not want to record certain events
 			while (excess>milliPeriod
 //					&& skips<MAX_FRAME_SKIPS
 					)
@@ -290,7 +295,7 @@ public abstract class VisibleLoop extends Loop
 				update(); 
 				skips++;
 			}
-			RoundVariables.setFilterEvents(true);			
+			RoundVariables.setFilterEvents(false);			
 			framesSkipped = framesSkipped + skips;
 			
 			long delta = afterTime-lastTime;

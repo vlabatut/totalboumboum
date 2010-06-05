@@ -72,7 +72,7 @@ public class Theme extends AbstractTheme
 		// record/transmit event
 		String name = entry.getKey();
 		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-		RoundVariables.recordEvent(event);
+		RoundVariables.writeEvent(event);
 		
 		//result.initGesture();
 		return result;
@@ -86,7 +86,7 @@ if(ff==null)
 		
 		// record/transmit event
 		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-		RoundVariables.recordEvent(event);
+		RoundVariables.writeEvent(event);
 
 		//result.initGesture();
 		return result;
@@ -110,7 +110,7 @@ if(bf==null)
 		
 		// record/transmit event
 		SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-		RoundVariables.recordEvent(event);
+		RoundVariables.writeEvent(event);
 
 		//result.initGesture();
 		return result;
