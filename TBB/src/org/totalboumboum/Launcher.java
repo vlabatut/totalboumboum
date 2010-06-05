@@ -843,6 +843,7 @@ public class Launcher
 	 * - GUI :
 	 * 		- nouvelle option de replay dans le menu principal
 	 * 		- (dés)activation de l'enregistrement du replay dans les options
+	 * 		- même chose dans le menu des tournois/parties rapides (en tant que raccourci)
 	 * - IA :
 	 * - stats :
 	 * - Divers :

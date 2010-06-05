@@ -186,6 +186,14 @@ public class GuiTools
 			ICON_PRESSED};
 		String baseFolder = GuiFileTools.getButtonsPath()+File.separator;
 		// images
+		{	String folder = baseFolder+GuiFileTools.FOLDER_CAMERA+File.separator;
+			String[] uses = 
+			{	GuiKeys.GAME_TOURNAMENT_BUTTON_RECORD_GAMES,
+				GuiKeys.GAME_MATCH_BUTTON_RECORD_GAMES,
+				GuiKeys.GAME_ROUND_BUTTON_RECORD_GAMES
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
 		{	String folder = baseFolder+GuiFileTools.FOLDER_DESCRIPTION+File.separator;
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_DESCRIPTION,
