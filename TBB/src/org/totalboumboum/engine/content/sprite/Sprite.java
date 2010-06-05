@@ -158,7 +158,7 @@ public abstract class Sprite
 			event.setChange(SpriteChangeAnimeEvent.SPRITE_EVENT_REINIT,true);
 		if(forcedDuration!=0)
 			event.setChange(SpriteChangeAnimeEvent.SPRITE_EVENT_DURATION,forcedDuration);
-		RoundVariables.recordEvent(event);
+		RoundVariables.writeEvent(event);
 			
 		// update gesture
 		currentGesture = gesturePack.getGesture(gesture);
@@ -398,6 +398,8 @@ public abstract class Sprite
 	// SPEED COEFF		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected double speedCoeff = 1;
+	protected double speedAbility = 1;
+	protected double speedAbilityCoef = 1;
 	
 	/**
 	 * S'il y  a un boundToSprite, son speedCoeff est renvoyé.
@@ -409,29 +411,32 @@ public abstract class Sprite
 	{	double result;
 		if(boundToSprite==null)
 		{	result = speedCoeff*Configuration.getEngineConfiguration().getSpeedCoeff();
-			StateAbility ability = modulateStateAbility(StateAbilityName.HERO_WALK_SPEED_MODULATION);
 			// NOTE limitation to WALKING, or not?
 			if(currentGesture.getName()==GestureName.WALKING
 				|| currentGesture.getName()==GestureName.CARRYING
 				|| currentGesture.getName()==GestureName.STANDING
 				|| currentGesture.getName()==GestureName.HOLDING
 				|| currentGesture.getName()==GestureName.PUSHING)
-			{	double coef = 1;
+			{	StateAbility ability = modulateStateAbility(StateAbilityName.HERO_WALK_SPEED_MODULATION);
 				int speed = (int)ability.getStrength();
-				int delta = -(int)Math.signum(speed);
-				String name;
-				do
-				{	name = StateAbilityName.getHeroWalkSpeed(speed);
-					if(name!=null) // i.e. if speed is not zero
-					{	ability = modulateStateAbility(name);
-						if(ability.isActive())
-							coef = ability.getStrength();
-						else
-							speed = speed + delta;
+				if(speed!=speedAbility)
+				{	speedAbility = speed;
+					speedAbilityCoef = 1;
+					int delta = -(int)Math.signum(speed);
+					String name;
+					do
+					{	name = StateAbilityName.getHeroWalkSpeed(speed);
+						if(name!=null) // i.e. if speed is not zero
+						{	ability = modulateStateAbility(name);
+							if(ability.isActive())
+								speedAbilityCoef = ability.getStrength();
+							else
+								speed = speed + delta;
+						}
 					}
+					while(name!=null && !ability.isActive());
+					result = result*speedAbilityCoef;
 				}
-				while(name!=null && !ability.isActive());
-				result = result*coef;			
 			}
 		}
 		else

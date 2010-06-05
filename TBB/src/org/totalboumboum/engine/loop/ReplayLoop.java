@@ -67,7 +67,6 @@ import org.xml.sax.SAXException;
 
 public class ReplayLoop extends VisibleLoop
 {	private static final long serialVersionUID = 1L;
-	private boolean verbose = false;
 	
 	public ReplayLoop(Round round)
 	{	super(round);
@@ -80,7 +79,6 @@ public class ReplayLoop extends VisibleLoop
 	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
 		systemControl = new ReplaySytemControl(this);
-		long start = System.currentTimeMillis();
 
 		// init
 		List<Profile> profiles = round.getProfiles();
@@ -116,7 +114,7 @@ public class ReplayLoop extends VisibleLoop
 			do
 			{	SpriteEvent tempEvent;
 				do
-					tempEvent = (SpriteEvent)RoundVariables.loadEvent();
+					tempEvent = (SpriteEvent)RoundVariables.readEvent();
 				while(!(tempEvent instanceof SpriteCreationEvent));
 				event = (SpriteCreationEvent)tempEvent;
 			}
@@ -143,10 +141,6 @@ public class ReplayLoop extends VisibleLoop
 			// next player...
 			loadStepOver();
 		}
-		long end = System.currentTimeMillis();
-		if(verbose)
-			System.out.println("total load time: "+(end-start));
-		
 	}
 	
 	@Override
@@ -199,11 +193,11 @@ public class ReplayLoop extends VisibleLoop
 	{	// get all the remaining useless SpriteEvents
 		ReplayEvent tempEvent;
 		do
-			tempEvent = (ReplayEvent)RoundVariables.loadEvent();
+			tempEvent = (ReplayEvent)RoundVariables.readEvent();
 		while(!(tempEvent instanceof StopReplayEvent));
 
 		// get the first meaningful ReplayEvent
-		currentEvent = (ReplayEvent)RoundVariables.loadEvent();
+		currentEvent = (ReplayEvent)RoundVariables.readEvent();
 	}
 	
 	private void updateEvents()
@@ -214,12 +208,14 @@ public class ReplayLoop extends VisibleLoop
 			}
 			else
 			{	// read events
-//System.out.println("/////////////////////////////////////////");		
+				if(verbose)
+					System.out.println("/////////////////////////////////////////");		
 				List<ReplayEvent> events = new ArrayList<ReplayEvent>();
 				while(currentEvent.getTime()<getTotalEngineTime() && !(currentEvent instanceof StopReplayEvent))
 				{	events.add(currentEvent);
-//System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
-					currentEvent = RoundVariables.loadEvent();
+					if(verbose)
+						System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
+					currentEvent = RoundVariables.readEvent();
 				}
 		
 				// process events

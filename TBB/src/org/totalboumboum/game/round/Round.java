@@ -201,7 +201,7 @@ public class Round implements StatisticHolder, Serializable
 	{	// read stats from replay if replayed
 		if(replayed)
 		{	try
-			{	replay.finishReplaying();
+			{	replay.finishReading();
 				StatisticRound stats = replay.getReadRoundStats();
 				setStats(stats);
 				roundOver = true; // ou close?
@@ -228,7 +228,7 @@ public class Round implements StatisticHolder, Serializable
 		// possibly end replay recording
 		if(Configuration.getEngineConfiguration().isRecordRounds())
 		{	try
-			{	RoundVariables.replay.finishRecording(stats);
+			{	RoundVariables.replay.finishWriting(stats);
 			}
 			catch (IOException e)
 			{	e.printStackTrace();

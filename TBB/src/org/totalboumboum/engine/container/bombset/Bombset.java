@@ -114,7 +114,7 @@ public class Bombset extends AbstractBombset
 					String name = bf.getBombName();
 					name = name + "/" + bf.getColor();
 					SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-					RoundVariables.recordEvent(event);
+					RoundVariables.writeEvent(event);
 				}
 			}
 			else
@@ -141,7 +141,7 @@ public class Bombset extends AbstractBombset
 
 				// record/transmit event
 				SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-				RoundVariables.recordEvent(event);
+				RoundVariables.writeEvent(event);
 			}
 		}
 		return result;

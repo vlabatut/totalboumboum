@@ -102,7 +102,6 @@ public class ServerLoop extends VisibleLoop
 	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
 		systemControl = new ServerSytemControl(this);
-long start = System.currentTimeMillis();
 
 		// init
 		List<Profile> profiles = round.getProfiles();
@@ -165,7 +164,7 @@ long start = System.currentTimeMillis();
 			
 			// record/transmit event
 			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
-			RoundVariables.recordEvent(spriteEvent);
+			RoundVariables.writeEvent(spriteEvent);
 			
 			// level
 			Hero hero = (Hero)player.getSprite();
@@ -194,10 +193,7 @@ long start = System.currentTimeMillis();
 		
 		// separation event
 		StopReplayEvent event = new StopReplayEvent();
-		RoundVariables.recordEvent(event);
-
-long end = System.currentTimeMillis();
-System.out.println("total load time: "+(end-start));
+		RoundVariables.writeEvent(event);
 	}
 	
 	/////////////////////////////////////////////////////////////////
