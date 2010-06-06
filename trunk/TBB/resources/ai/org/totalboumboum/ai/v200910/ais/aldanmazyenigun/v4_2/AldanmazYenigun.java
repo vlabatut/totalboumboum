@@ -161,7 +161,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 			{
 				updateTarget();
 				
-				ArrayList<AiHero> heroess = new ArrayList<AiHero>(zone.getRemainingHeroes());
+				List<AiHero> heroess = new ArrayList<AiHero>(zone.getRemainingHeroes());
 				heroess.remove(ownHero);
 				for(AiHero h: heroess){
 					checkInterruption();
@@ -386,7 +386,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	public List<AiTile> findSafeTiles(AiTile origin) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
@@ -407,7 +407,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	public List<AiTile> findAbstractSafeTiles(AiTile origin) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
@@ -433,7 +433,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	public List<AiTile> findItemsTiles(AiTile origin) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
@@ -452,7 +452,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	public List<AiTile> findHerosTiles(AiTile origin) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=1;line<zone.getHeigh()-1;line++)
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=1;col<zone.getWidth()-1;col++)
@@ -496,7 +496,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	public List<AiTile> findWallTiles(AiTile origin) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+	List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=1;line<zone.getHeigh()-1;line++)
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=1;col<zone.getWidth()-1;col++)
@@ -694,7 +694,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 		checkInterruption(); //APPEL OBLIGATOIRE
 	
 		targetWall = null;
-		ArrayList<AiBlock> blocks = new ArrayList<AiBlock>(zone.getBlocks());
+		List<AiBlock> blocks = new ArrayList<AiBlock>(zone.getBlocks());
 		if(!blocks.isEmpty())
 		{	int index = (int)Math.random()*blocks.size();
 			targetWall = blocks.get(index);
@@ -752,7 +752,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		targetHero = null;
-		ArrayList<AiHero> heroes = new ArrayList<AiHero>(zone.getRemainingHeroes());
+		List<AiHero> heroes = new ArrayList<AiHero>(zone.getRemainingHeroes());
 		heroes.remove(ownHero);
 		if(!heroes.isEmpty())
 		{
@@ -784,7 +784,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 			targetHero = heroes.get(0);
 			*/
 			if(targetHero.hasEnded() || !heroAccessible){
-				ArrayList<AiHero> heros = new ArrayList<AiHero>(zone.getRemainingHeroes());
+				List<AiHero> heros = new ArrayList<AiHero>(zone.getRemainingHeroes());
 				heros.remove(ownHero);
 				targetHero = heros.get(index);
 			}

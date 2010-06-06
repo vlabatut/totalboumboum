@@ -112,9 +112,9 @@ public class Escape_Manager {
 			//We declare 2 Arraylist:
 		    
 		    //First one keeps danger level of the cases in which we are stucked.
-		    ArrayList<Double> t=new ArrayList<Double>();
+		    List<Double> t=new ArrayList<Double>();
 			//The second one keeps the coordinates(tiles) between the bombs we are stucked:
-		    ArrayList<AiTile> at=new ArrayList<AiTile>();
+		    List<AiTile> at=new ArrayList<AiTile>();
 			
 			//iteration on right of our position;
 			while(stop==0&&my_position.getCol()+k<zone.getWidth()){
@@ -322,7 +322,7 @@ public class Escape_Manager {
 		safe_map=new Safety_Map(zone,ai);
 		
 		AiTile tile_dest;
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int pos_y=0;pos_y<zone.getHeigh();pos_y++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			

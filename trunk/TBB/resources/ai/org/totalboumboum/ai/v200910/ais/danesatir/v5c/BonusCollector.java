@@ -51,7 +51,7 @@ public class BonusCollector {
 	public List<AiTile> getItemsTiles() throws StopRequestException {
 		// avant tout : test d'interruption
 		ai.checkInterruption();
-		ArrayList<AiTile> result=new ArrayList<AiTile>();
+		List<AiTile> result=new ArrayList<AiTile>();
 		for(AiItem i: getItems()) {
 			ai.checkInterruption();
 			result.add(i.getTile());

@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v200910.ais.enhoskarapazar.v5c;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
@@ -12,7 +12,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.BasicCostCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
-
 
 public class PathManagement {
 
@@ -151,7 +150,7 @@ public class PathManagement {
 		ai.checkInterruption();
 		return path.getLength();
 	}
-	public  ArrayList<AiTile> getPathList() throws StopRequestException
+	public  List<AiTile> getPathList() throws StopRequestException
 	{
 		ai.checkInterruption();
 		return path.getTiles();

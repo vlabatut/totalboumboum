@@ -270,7 +270,7 @@ public class Wall_Manager_2{
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		//safe_map=new Safety_Map(zone);
 		AiTile tile_dest_b=null;
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiBlock> block_iterator=zone.getBlocks().iterator();
 		safe_map=new Safety_Map(zone);
 		AiBlock blck;

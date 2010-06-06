@@ -154,8 +154,8 @@ public class BektasMazilyah extends ArtificialIntelligence
 	{
 		checkInterruption();
 		AiTile tile = null;
-		ArrayList<AiTile> l = dangerZone.findRivalsTiles();
-		ArrayList<AiTile> li =aligner(l);
+		List<AiTile> l = dangerZone.findRivalsTiles();
+		List<AiTile> li =aligner(l);
 		Iterator<AiTile> it =li.iterator();
 		if (it.hasNext())
 		{
@@ -191,7 +191,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		List<AiHero> list =zone.getRemainingHeroes();
 		if(list.contains(hero))
 			list.remove(hero);
-		ArrayList<AiTile> li = preciserRange();
+		List<AiTile> li = preciserRange();
 		Iterator<AiHero> it = list.iterator();
 		AiTile temp =null;
 		boolean result=false;
@@ -226,8 +226,8 @@ public class BektasMazilyah extends ArtificialIntelligence
 	{
 		checkInterruption();
 		AiTile tile = null;
-		ArrayList<AiTile> l = dangerZone.findSafeTiles();
-		ArrayList<AiTile> li =aligner(l);
+		List<AiTile> l = dangerZone.findSafeTiles();
+		List<AiTile> li =aligner(l);
 		Iterator<AiTile> it =li.iterator();
 		if (it.hasNext())
 		{
@@ -261,8 +261,8 @@ public class BektasMazilyah extends ArtificialIntelligence
 	public boolean canDrop() throws StopRequestException
 	{
 		checkInterruption();
-		ArrayList<AiTile> neighbors = preciserRange();
-		ArrayList<AiTile> result = removeFromList(neighbors);
+		List<AiTile> neighbors = preciserRange();
+		List<AiTile> result = removeFromList(neighbors);
 		Iterator<AiTile> it = result.iterator();
 		AiTile temp=null;
 		int count=0;
@@ -324,11 +324,11 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 * @throws StopRequestException
 	 */
 	
-	private ArrayList<AiTile> preciserRange() throws StopRequestException
+	private List<AiTile> preciserRange() throws StopRequestException
 	{
 		checkInterruption();
 		AiTile temp=hero.getTile();
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		result.add(temp);
 		EtatEnum etat = EtatEnum.LIBRE;
 		int range = 3;
@@ -408,10 +408,10 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 * @throws StopRequestException
 	 */
 	
-	private ArrayList<AiTile> removeFromList(ArrayList<AiTile> list) throws StopRequestException
+	private List<AiTile> removeFromList(List<AiTile> list) throws StopRequestException
 	{
 		checkInterruption();
-		ArrayList<AiTile> result = dangerZone.findSafeTiles();
+		List<AiTile> result = dangerZone.findSafeTiles();
 		Iterator<AiTile> it = list.iterator();
 		AiTile temp = null;
 		while(it.hasNext())
@@ -430,11 +430,11 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 * @return
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> aligner(ArrayList<AiTile> source) throws StopRequestException
+	public List<AiTile> aligner(List<AiTile> source) throws StopRequestException
 	{
 		checkInterruption();
-		ArrayList<AiTile> src = source;
-		ArrayList<AiTile> target = new ArrayList<AiTile>();
+		List<AiTile> src = source;
+		List<AiTile> target = new ArrayList<AiTile>();
 		Iterator<AiTile> it = source.iterator();
 		AiTile temp;
 		int max=0;
@@ -480,8 +480,8 @@ public class BektasMazilyah extends ArtificialIntelligence
 	{		
 		checkInterruption();
 		AiTile tile = null;
-		ArrayList<AiTile> l = dangerZone.findBonusTiles();
-		ArrayList<AiTile> li = aligner(l);
+		List<AiTile> l = dangerZone.findBonusTiles();
+		List<AiTile> li = aligner(l);
 		Iterator<AiTile> it =li.iterator();
 		if (it.hasNext())
 		{
@@ -516,10 +516,10 @@ public class BektasMazilyah extends ArtificialIntelligence
 	{
 		
 		checkInterruption();
-		ArrayList<AiTile> a= dangerZone.findDesctructibleTiles();
-		ArrayList<AiTile> b= findClearNeighbors(a);
-		ArrayList<AiTile> dst= dangerZone.findTilesForDestruct(b);
-		ArrayList<AiTile> dest=aligner(dst);
+		List<AiTile> a= dangerZone.findDesctructibleTiles();
+		List<AiTile> b= findClearNeighbors(a);
+		List<AiTile> dst= dangerZone.findTilesForDestruct(b);
+		List<AiTile> dest=aligner(dst);
 		AiTile tile = null;
 		AiTile kare=null;
 		Iterator<AiTile> it =dest.iterator();
@@ -558,11 +558,11 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 * @return list
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> findClearNeighbors(ArrayList<AiTile> list) throws StopRequestException
+	public List<AiTile> findClearNeighbors(List<AiTile> list) throws StopRequestException
 	{
 		checkInterruption();
-		ArrayList<AiTile> li = list;
-		ArrayList<AiTile> clearNeighbors = new ArrayList<AiTile>();
+		List<AiTile> li = list;
+		List<AiTile> clearNeighbors = new ArrayList<AiTile>();
 		Iterator<AiTile> it =li.iterator();
 		while(it.hasNext())
 		{
@@ -613,11 +613,11 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 * @return list
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> pathTiles(Deque<Integer> deq) throws StopRequestException
+	public List<AiTile> pathTiles(Deque<Integer> deq) throws StopRequestException
 	{
 		checkInterruption();
 		AiTile tile;
-		ArrayList<AiTile> tilesOfPath = new ArrayList<AiTile>();
+		List<AiTile> tilesOfPath = new ArrayList<AiTile>();
 		int tempx;
 		int tempy;
 		while(!deq.isEmpty()) {
@@ -785,7 +785,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 */
 	public boolean bonusExiste () throws StopRequestException{
 		checkInterruption();
-		ArrayList<AiTile> bonusList=dangerZone.findBonusTiles();
+		List<AiTile> bonusList=dangerZone.findBonusTiles();
 		Iterator<AiTile> it = bonusList.iterator();
 		AiTile temp;
 		int count=0;
@@ -807,7 +807,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	 */
 	public boolean destructExiste () throws StopRequestException{
 		checkInterruption();
-		ArrayList<AiTile> dstList=dangerZone.findDesctructibleTiles();
+		List<AiTile> dstList=dangerZone.findDesctructibleTiles();
 		Iterator<AiTile> it = dstList.iterator();
 		AiTile temp;
 		int count=0;

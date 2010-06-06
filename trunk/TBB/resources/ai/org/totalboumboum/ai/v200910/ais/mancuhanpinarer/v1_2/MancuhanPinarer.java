@@ -260,7 +260,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	private AiAction newAction() throws StopRequestException {
 		checkInterruption();
 		//les cases suivant pour le deplacement.
-		ArrayList<AiTile> tiles = this.nextMove.getTiles();
+		List<AiTile> tiles = this.nextMove.getTiles();
 		//deplacement sur l'abcisse
 		int dx;
 		//deplacement sur l'ordonne

@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v200910.ais._suiveur;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
@@ -242,7 +243,7 @@ public class Suiveur extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		target = null;
-		ArrayList<AiHero> heroes = new ArrayList<AiHero>(zone.getRemainingHeroes());
+		List<AiHero> heroes = new ArrayList<AiHero>(zone.getRemainingHeroes());
 		heroes.remove(ownHero);
 		if(!heroes.isEmpty())
 		{	int index = (int)Math.random()*heroes.size();

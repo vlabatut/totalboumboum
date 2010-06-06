@@ -31,7 +31,7 @@ public class HeroController {
 			
 			// init A*
 			double costMatrix[][] = new double[zone.getHeigh()][zone.getWidth()];
-			ArrayList<AiTile> heroTiles = new ArrayList<AiTile>();
+			List<AiTile> heroTiles = new ArrayList<AiTile>();
 			heroTiles.add(hero.getTile());
 			
 			costCalculator = new MatrixCostCalculator(costMatrix);

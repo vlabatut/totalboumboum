@@ -85,10 +85,10 @@ public class Escape_Manager {
 			AiTile my_position=zone.getOwnHero().getTile();
 
 			int k=1;
-		//	System.out.print(k);
-		int stop=0;
-			ArrayList<Double> t=new ArrayList<Double>();
-			ArrayList<AiTile> at=new ArrayList<AiTile>();
+			//	System.out.print(k);
+			int stop=0;
+			List<Double> t=new ArrayList<Double>();
+			List<AiTile> at=new ArrayList<AiTile>();
 			
 			//iteration on right of our position;
 			while(stop==0&&my_position.getCol()+k<zone.getWidth()){
@@ -275,7 +275,7 @@ public class Escape_Manager {
 		safe_map=new Safety_Map(zone);
 		
 		AiTile tile_dest;
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int pos_y=0;pos_y<zone.getHeigh();pos_y++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			

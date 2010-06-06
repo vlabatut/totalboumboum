@@ -24,7 +24,7 @@ public class BonusCollector {
 		// avant tout : test d'interruption
 		ai.checkInterruption();
 		//if(items.size());
-		ArrayList<AiTile> list = new ArrayList<AiTile>();
+		List<AiTile> list = new ArrayList<AiTile>();
 		for(AiItem i: items) {
 			list.add(i.getTile());
 		}

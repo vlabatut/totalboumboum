@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v200910.ais.enhoskarapazar.v5;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
@@ -149,7 +149,7 @@ public class PathManagement {
 	{	
 		return path.getLength();
 	}
-	public  ArrayList<AiTile> getPathList()
+	public  List<AiTile> getPathList()
 	{
 		
 		return path.getTiles();

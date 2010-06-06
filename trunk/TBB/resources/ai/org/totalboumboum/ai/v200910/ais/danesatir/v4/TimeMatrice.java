@@ -56,8 +56,8 @@ public class TimeMatrice {
 		
 		/*FIX: check destructible*/
 		int range = this.ai.getOwnHero().getBombRange()-1;
-		ArrayList<AiTile> blast = new ArrayList<AiTile>();
-		ArrayList<Direction> dirs = new ArrayList<Direction>();
+		List<AiTile> blast = new ArrayList<AiTile>();
+		List<Direction> dirs = new ArrayList<Direction>();
 		dirs.add(Direction.UP);
 		dirs.add(Direction.DOWN);
 		dirs.add(Direction.LEFT);

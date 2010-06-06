@@ -46,7 +46,7 @@ public class BonusCollector {
 	public List<AiTile> getItemsTiles() throws StopRequestException {
 		// avant tout : test d'interruption
 		ai.checkInterruption();
-		ArrayList<AiTile> result=new ArrayList<AiTile>();
+		List<AiTile> result=new ArrayList<AiTile>();
 		for(AiItem i: getItems()) {
 			ai.checkInterruption();
 			result.add(i.getTile());
@@ -125,7 +125,7 @@ public class BonusCollector {
 	private List<AiTile> getWallsTiles() throws StopRequestException {
 		ai.checkInterruption();
 		List<AiBlock> blocks=ai.getPercepts().getBlocks();
-		ArrayList<AiTile> targets= new ArrayList<AiTile>();
+		List<AiTile> targets= new ArrayList<AiTile>();
 		for(AiBlock i : blocks) {
 			ai.checkInterruption();
 			if(i.isDestructible() && i.getState().getName()!=AiStateName.BURNING && !i.hasEnded())

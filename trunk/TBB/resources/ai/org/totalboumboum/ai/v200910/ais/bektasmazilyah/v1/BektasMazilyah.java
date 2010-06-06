@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
@@ -199,7 +200,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		checkInterruption(); //APPEL OBLIGATOIRE
 		
 		// liste des cases voisines accessibles	
-		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+		List<AiTile> tiles = getClearNeighbors(currentTile);
 		// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 		boolean canGoBack = false;
 		if(tiles.contains(previousTile))
@@ -244,13 +245,13 @@ public class BektasMazilyah extends ArtificialIntelligence
 	}
 	
 	
-	private ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
+	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -264,7 +265,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	
 	public Collection<AiTile> getNeighborTiles(AiTile tile)
 	{	Collection<AiTile> result = new ArrayList<AiTile>();
-		ArrayList<Direction> directions = Direction.getPrimaryValues();
+	List<Direction> directions = Direction.getPrimaryValues();
 		Iterator<Direction> d = directions.iterator();
 		while(d.hasNext())
 		{	Direction dir = d.next();
