@@ -21,12 +21,39 @@ package org.totalboumboum.engine.control.player;
  * 
  */
 
+import java.io.ObjectInputStream;
+
+import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.player.RemotePlayer;
 
-public class RemotePlayerControl extends PlayerControl<RemotePlayer> 
+public class RemotePlayerControl extends PlayerControl<RemotePlayer> implements Runnable
 {	
 	public RemotePlayerControl(RemotePlayer player)
 	{	super(player);
+		in = player.getInputStream();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// INPUT STREAM		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ObjectInputStream in;
+	
+	/////////////////////////////////////////////////////////////////
+	// RUNNABLE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void run()
+	{	Sprite sprite = getSprite();
+		while(!Thread.interrupted())
+		{	/* TODO 
+			 *	1) lire un évènement dans le flux
+			 *	2) l'envoyer au sprite correspondant
+			 *
+			 *  c'est tout !
+			 */
+		
+			
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -38,6 +65,8 @@ public class RemotePlayerControl extends PlayerControl<RemotePlayer>
 	{	if(!finished)
 		{	finished = true;
 			super.finish();
+			
+			in = null;
 		}
 	}
 }
