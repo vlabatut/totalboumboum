@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v200910.ais.enhoskarapazar.v4_1;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
@@ -558,11 +559,11 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		ZoneEnum myzone = dZone.getEnum(line, col);
 		boolean ret = (myzone == ZoneEnum.FEU || myzone == ZoneEnum.BOMBE);
 
-		ArrayList<AiBomb> bombs = (ArrayList<AiBomb>) zone.getBombs();
+		List<AiBomb> bombs = (ArrayList<AiBomb>) zone.getBombs();
 		for (AiBomb aiBomb : bombs) {
 			checkInterruption();
 			boolean isrange = false;
-			ArrayList<AiTile> range = (ArrayList<AiTile>) aiBomb.getBlast();
+			List<AiTile> range = (ArrayList<AiTile>) aiBomb.getBlast();
 			for (AiTile aiTile : range) {
 				checkInterruption();
 				if (aiTile.getCol() == col && aiTile.getLine() == line)
@@ -834,7 +835,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return count;
 	}
 
-	public void goTroughPath(ArrayList<AiTile> a) throws StopRequestException {
+	public void goTroughPath(List<AiTile> a) throws StopRequestException {
 		checkInterruption();
 		updateLocation();
 		Iterator<AiTile> it = a.iterator();
@@ -865,7 +866,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		return result;
 	}
 
-	public boolean pathInDanger(ArrayList<AiTile> array)
+	public boolean pathInDanger(List<AiTile> array)
 			throws StopRequestException {
 		checkInterruption();
 		updateLocation();

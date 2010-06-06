@@ -39,7 +39,7 @@ public class PathFinder {
 	
 	public void calculPath(AiTile target) throws StopRequestException, NoWayException {
 		ai.checkInterruption();
-		ArrayList<AiTile> targets = new ArrayList<AiTile>();
+		List<AiTile> targets = new ArrayList<AiTile>();
 		targets.add(target);
 		calculPath(targets);
 	}

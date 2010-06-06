@@ -3,6 +3,7 @@ package org.totalboumboum.ai.v200910.ais.bektasmazilyah.v4_1;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
@@ -160,10 +161,10 @@ public class BombMatrice {
 	
 	}
 	
-	public ArrayList<AiTile> findPlusSafeTiles() throws StopRequestException
+	public List<AiTile> findPlusSafeTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+	List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<y;line++)
 		{	source.checkInterruption(); //APPEL OBLIGATOIRE
 			

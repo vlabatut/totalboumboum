@@ -238,7 +238,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	public List<AiTile> findSafeTiles(AiTile origin) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
@@ -270,7 +270,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	public List<AiTile> findItemsTiles(AiTile origin) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)

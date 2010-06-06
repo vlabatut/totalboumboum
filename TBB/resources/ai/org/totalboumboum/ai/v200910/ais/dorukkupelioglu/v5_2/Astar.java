@@ -25,8 +25,8 @@ public class Astar
 	private AiPath path;
 	private AiHero hero;
 	private AiTile start;
-	private ArrayList<Node> closed;
-	private ArrayList<Node> open;
+	private List<Node> closed;
+	private List<Node> open;
 	private boolean stop;
 	private boolean useTime;
 	private double PathFValue;

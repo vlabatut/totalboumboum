@@ -24,8 +24,8 @@ public class Astar {
 	
 	private DorukKupelioglu dk;
 	private Matrix matrix;
-	private ArrayList<Node> closed;
-	private ArrayList<Node> open;
+	private List<Node> closed;
+	private List<Node> open;
 	private boolean stop;
 	private AiPath path;
 	private double PathFValue;

@@ -223,7 +223,7 @@ public class AvoidController
 				AiTile myPosition=ai.getOwnHero().getTile();
 				int k=1;
 				int stop=0;
-				ArrayList<AiTile> at=new ArrayList<AiTile>();
+				List<AiTile> at=new ArrayList<AiTile>();
 				SafetyZone safetyZ=new SafetyZone(ai);
 				
 				while(stop==0 && myPosition.getCol()+k<ai.getZone().getWidth()){

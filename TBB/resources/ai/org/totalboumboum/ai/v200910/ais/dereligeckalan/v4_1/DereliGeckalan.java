@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
@@ -656,7 +657,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	private AiTile escapeTile() throws StopRequestException {
 		checkInterruption();
 		AiTile resultat = currentTile;
-		ArrayList<Integer> times = new ArrayList<Integer>();
+		List<Integer> times = new ArrayList<Integer>();
 		Collection<AiBomb> bombs = getPercepts().getBombs();
 		LinkedList<AiTile> bombTiles = new LinkedList<AiTile>();
 		Iterator<AiBomb> it1 = bombs.iterator();
@@ -718,9 +719,9 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	}
 
 	@SuppressWarnings("unused")
-	private ArrayList<Double> bombTimes() throws StopRequestException {
+	private List<Double> bombTimes() throws StopRequestException {
 		checkInterruption();
-		ArrayList<Double> bombTimes = new ArrayList<Double>();
+		List<Double> bombTimes = new ArrayList<Double>();
 		Collection<AiBomb> bombs = getPercepts().getBombs();
 		Iterator<AiBomb> it1 = bombs.iterator();
 		while (it1.hasNext()) {

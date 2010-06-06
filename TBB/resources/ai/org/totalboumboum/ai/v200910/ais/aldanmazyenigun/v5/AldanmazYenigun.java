@@ -145,7 +145,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 			else if (heroAccessible) {
 				updateTarget();
 
-				ArrayList<AiHero> heroess = new ArrayList<AiHero>(zone
+				List<AiHero> heroess = new ArrayList<AiHero>(zone
 						.getRemainingHeroes());
 				heroess.remove(ownHero);
 
@@ -339,7 +339,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for (int line = 0; line < zone.getHeigh(); line++) {
 			checkInterruption(); // APPEL OBLIGATOIRE
 			for (int col = 0; col < zone.getWidth(); col++) {
@@ -364,7 +364,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for (int line = 0; line < zone.getHeigh(); line++) {
 			checkInterruption(); // APPEL OBLIGATOIRE
 			for (int col = 0; col < zone.getWidth(); col++) {
@@ -395,7 +395,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for (int line = 0; line < zone.getHeigh(); line++) {
 			checkInterruption(); // APPEL OBLIGATOIRE
 			for (int col = 0; col < zone.getWidth(); col++) {
@@ -419,7 +419,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for (int line = 1; line < zone.getHeigh() - 1; line++) {
 			checkInterruption(); // APPEL OBLIGATOIRE
 			for (int col = 1; col < zone.getWidth() - 1; col++) {
@@ -453,7 +453,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for (int line = 1; line < zone.getHeigh() - 1; line++) {
 			checkInterruption(); // APPEL OBLIGATOIRE
 			for (int col = 1; col < zone.getWidth() - 1; col++) {

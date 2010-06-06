@@ -1,8 +1,8 @@
 package org.totalboumboum.ai.v200910.ais.enhoskarapazar.v4_1;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
@@ -16,7 +16,6 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
-
 
 public class PathManagement {
 
@@ -277,7 +276,7 @@ public class PathManagement {
 	{	
 		return path.getLength();
 	}
-	public  ArrayList<AiTile> getPathList()
+	public  List<AiTile> getPathList()
 	{
 		
 		return path.getTiles();

@@ -41,7 +41,7 @@ public class BonusManager
 	//creation de la liste des bonus 
 	private List<AiTile> bonusDestinations() throws StopRequestException{
 	ai.checkInterruption();
-	ArrayList<AiTile> dest = new ArrayList<AiTile>();
+	List<AiTile> dest = new ArrayList<AiTile>();
 	for(int line=0;line<zone.getHeigh();line++)
 	{	ai.checkInterruption();
 		for(int col=0;col<zone.getWidth();col++)
@@ -65,7 +65,7 @@ public class BonusManager
 	//si la liste des bombes est vide, on cree une liste des tiles pour destruire
 	public List<AiTile> bonusDestructions() throws StopRequestException{
 		ai.checkInterruption();
-		ArrayList<AiTile> destructibles = new ArrayList<AiTile>();
+		List<AiTile> destructibles = new ArrayList<AiTile>();
 		if(noBonus()){
 			for(int line=0;line<zone.getHeigh();line++)
 			{	ai.checkInterruption();

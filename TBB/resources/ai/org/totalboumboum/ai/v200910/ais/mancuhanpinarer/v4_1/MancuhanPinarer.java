@@ -830,7 +830,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	private AiAction newAction(AiPath nextMove) throws StopRequestException {
 		checkInterruption();
 		// les cases suivant pour le deplacement.
-		ArrayList<AiTile> tiles = nextMove.getTiles();
+		List<AiTile> tiles = nextMove.getTiles();
 		// deplacement sur l'abcisse
 		int dx;
 		// deplacement sur l'ordonne

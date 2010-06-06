@@ -181,10 +181,10 @@ public class Wall_Manager_2 {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		//safe_map=new Safety_Map(zone);
 		AiTile tile_dest_b=null;
-		ArrayList<AiTile> result_b = new ArrayList<AiTile>();
-		ArrayList<AiTile> result_c = new ArrayList<AiTile>();
-		ArrayList<AiTile> result_d = new ArrayList<AiTile>();
-		ArrayList<AiTile> result_e = new ArrayList<AiTile>();
+		List<AiTile> result_b = new ArrayList<AiTile>();
+		List<AiTile> result_c = new ArrayList<AiTile>();
+		List<AiTile> result_d = new ArrayList<AiTile>();
+		List<AiTile> result_e = new ArrayList<AiTile>();
 		Iterator<AiBlock> block_iterator=zone.getBlocks().iterator();
 		AiBlock blck;
 		while(block_iterator.hasNext()==true){

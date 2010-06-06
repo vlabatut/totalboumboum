@@ -4,6 +4,7 @@ package org.totalboumboum.ai.v200910.ais.bektasmazilyah.v4_1;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
@@ -230,10 +231,10 @@ public class DangerZone {
 		return ourZone[x][y];
 	}
 
-	public ArrayList<AiTile> findSafeTiles() throws StopRequestException
+	public List<AiTile> findSafeTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<y;line++)
 		{	source.checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -255,10 +256,10 @@ public class DangerZone {
 		return result;
 	}
 		
-	public ArrayList<AiTile> findBonusTiles() throws StopRequestException
+	public List<AiTile> findBonusTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+	List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<y;line++)
 		{	source.checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -278,10 +279,10 @@ public class DangerZone {
 		return result;
 	}
 	
-	public ArrayList<AiTile> findDangerTiles() throws StopRequestException
+	public List<AiTile> findDangerTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+	List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<y;line++)
 		{	source.checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -304,10 +305,10 @@ public class DangerZone {
 		return result;
 	}
 	
-	public ArrayList<AiTile> findDesctructibleTiles() throws StopRequestException
+	public List<AiTile> findDesctructibleTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<y;line++)
 		{	source.checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -326,10 +327,10 @@ public class DangerZone {
 		return result;
 	}
 	
-	public ArrayList<AiTile> findRivalsTiles() throws StopRequestException
+	public List<AiTile> findRivalsTiles() throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<y;line++)
 		{	source.checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -350,10 +351,10 @@ public class DangerZone {
 		return result;
 	}
 
-	public ArrayList<AiTile> findTilesForDestruct(ArrayList<AiTile> neighbors) throws StopRequestException
+	public List<AiTile> findTilesForDestruct(List<AiTile> neighbors) throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int line =0; line <y; line++)
 		{	source.checkInterruption(); //APPEL OBLIGATOIR
 			for(int col = 0; col < x; col++)
@@ -375,7 +376,7 @@ public class DangerZone {
 		return result;
 	}
 	
-	public void afficheDestructibles(ArrayList<AiTile> destructibles) throws StopRequestException
+	public void afficheDestructibles(List<AiTile> destructibles) throws StopRequestException
 	{
 		source.checkInterruption();
 		System.out.println(destructibles);

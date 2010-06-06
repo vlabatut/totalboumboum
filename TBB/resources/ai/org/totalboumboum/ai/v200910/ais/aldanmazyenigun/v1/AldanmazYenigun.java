@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v200910.ais.aldanmazyenigun.v1;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
@@ -282,7 +283,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		targetItem = null;
-		ArrayList<AiItem> items = new ArrayList<AiItem>(zone.getItems());
+		List<AiItem> items = new ArrayList<AiItem>(zone.getItems());
 
 		if(!items.isEmpty())
 		{

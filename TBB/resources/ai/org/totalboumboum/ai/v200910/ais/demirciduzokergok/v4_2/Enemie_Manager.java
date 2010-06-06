@@ -234,7 +234,7 @@ public class Enemie_Manager {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		safe_map=new Safety_Map(zone);
 		AiTile tile_dest_b;
-		ArrayList<AiTile> result_b = new ArrayList<AiTile>();
+		List<AiTile> result_b = new ArrayList<AiTile>();
 		
 		for(int pos_y=0;pos_y<zone.getHeigh();pos_y++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE

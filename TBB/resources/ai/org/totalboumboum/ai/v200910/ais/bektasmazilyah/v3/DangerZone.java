@@ -236,7 +236,7 @@ public class DangerZone {
 	public List<AiTile> findSafeTiles(AiTile origin) throws StopRequestException
 	{	source.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<y;line++)
 		{	source.checkInterruption(); //APPEL OBLIGATOIRE
 			

@@ -350,7 +350,7 @@ public class DaneSatir extends ArtificialIntelligence
 	public List<AiTile> getEnemies() throws StopRequestException {
 		checkInterruption();
 		List<AiHero> heroes = this.zone.getHeroes();
-		ArrayList<AiTile> targets = new ArrayList<AiTile>();
+		List<AiTile> targets = new ArrayList<AiTile>();
 		heroes.remove(myHero);
 		for(AiHero i : heroes) {
 			checkInterruption();
