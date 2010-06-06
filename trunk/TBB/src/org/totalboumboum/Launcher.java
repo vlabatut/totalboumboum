@@ -847,6 +847,7 @@ public class Launcher
 	 * - IA :
 	 * - stats :
 	 * - Divers :
+	 * 		- nettoyage du code par rapport à l'utilisation de ArrayList (remplacé par List partout où c'était possible)
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

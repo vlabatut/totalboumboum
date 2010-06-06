@@ -22,10 +22,10 @@ package org.totalboumboum.engine.player;
  */
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -35,20 +35,36 @@ import org.xml.sax.SAXException;
 
 public class RemotePlayer extends AbstractPlayer
 {	
-	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile, ControlSettings controlSettings, ObjectInputStream in) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 		
 // TODO the control manager in the sprite must be initialized witht the controlsettings read in the stream
 // (should be already done when uploading profiles, to be verified)
 		// set controls
-		int indexCtrSet = profile.getControlSettingsIndex();
-		controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(indexCtrSet);
-		if(controlSettings == null)
-			controlSettings = new ControlSettings();
+		this.controlSettings = controlSettings;
 		sprite.setControlSettings(controlSettings);
 		spriteControl = new RemotePlayerControl(this);
+		
+		// stream
+		this.in = in;
+		startThread();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// THREAD			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	Thread thread;
+	
+	private void startThread()
+	{	thread = new Thread(spriteControl);
+		thread.start();
+	}
+	
+	//TODO to be called somewhere!
+	public void stopThread()
+	{	thread.interrupt();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -66,6 +82,15 @@ public class RemotePlayer extends AbstractPlayer
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// INPUT STREAM		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ObjectInputStream in;
+	
+	public ObjectInputStream getInputStream()
+	{	return in;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
@@ -77,6 +102,7 @@ public class RemotePlayer extends AbstractPlayer
 			spriteControl.finish();
 			spriteControl = null;
 			controlSettings = null;
+			in = null;
 		}
 	}
 }
