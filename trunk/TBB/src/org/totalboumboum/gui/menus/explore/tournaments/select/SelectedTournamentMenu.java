@@ -22,7 +22,7 @@ package org.totalboumboum.gui.menus.explore.tournaments.select;
  */
 
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -56,7 +56,7 @@ public class SelectedTournamentMenu extends InnerMenuPanel
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_RESOURCES_TOURNAMENT_BUTTON);
+		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_RESOURCES_TOURNAMENT_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons

@@ -28,6 +28,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.controls.ControlSettings;
@@ -87,8 +88,8 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 			keysPanel = new TableSubPanel(w,h,Mode.BORDER,lines,cols,true);
 
 			// headers
-			{	ArrayList<String> keys = new ArrayList<String>();
-				ArrayList<Boolean> imageFlags = new ArrayList<Boolean>();
+			{	List<String> keys = new ArrayList<String>();
+				List<Boolean> imageFlags = new ArrayList<Boolean>();
 				for(int i=0;i<head.length;i++)
 				{	keys.add(head[i]);
 					imageFlags.add(true);

@@ -26,6 +26,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -107,8 +108,8 @@ buttonStatistics.setEnabled(false);
 	{	// match
 		if(match!=null)
 		{	match.setPanel(null);
-			ArrayList<Profile> profiles = match.getProfiles();
-			ArrayList<Integer> controls = new ArrayList<Integer>();
+			List<Profile> profiles = match.getProfiles();
+			List<Integer> controls = new ArrayList<Integer>();
 			for(Profile p: profiles)
 			{	int control = p.getControlSettingsIndex();
 				if(controls.contains(control))

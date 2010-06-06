@@ -24,6 +24,7 @@ package org.totalboumboum.configuration.controls;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 public class ControlSettings
@@ -33,7 +34,7 @@ public class ControlSettings
 
 	private void addKey(int key, String event, boolean on)
 	{	// init
-		HashMap<Integer,ArrayList<String>> keys;
+		HashMap<Integer,List<String>> keys;
 		HashMap<String,Integer> events;
 		if(on)
 		{	keys = onKeys;
@@ -47,11 +48,11 @@ public class ControlSettings
 		removeEvent(event,on);
 		// put new value
 		if(keys.containsKey(key))
-		{	ArrayList<String> evts = keys.get(key);
+		{	List<String> evts = keys.get(key);
 			evts.add(event);
 		}
 		else
-		{	ArrayList<String> evts = new ArrayList<String>();
+		{	List<String> evts = new ArrayList<String>();
 			evts.add(event);
 			keys.put(key,evts);		
 		}
@@ -69,8 +70,8 @@ public class ControlSettings
 		return result;
 	}
 	
-	private ArrayList<String> getEventsFromKey(int keyCode, boolean on)
-	{	ArrayList<String> result;
+	private List<String> getEventsFromKey(int keyCode, boolean on)
+	{	List<String> result;
 		if(on)
 			result = onKeys.get(keyCode);
 		else
@@ -82,7 +83,7 @@ public class ControlSettings
 	
 	private void removeEvent(String event, boolean on)
 	{	// init
-		HashMap<Integer,ArrayList<String>> keys;
+		HashMap<Integer,List<String>> keys;
 		HashMap<String,Integer> events;
 		if(on)
 		{	keys = onKeys;
@@ -95,7 +96,7 @@ public class ControlSettings
 		int oldKey = getKeyFromEvent(event, on);
 		if(oldKey!=-1)
 		{	// keys
-			ArrayList<String> list = keys.get(oldKey);
+			List<String> list = keys.get(oldKey);
 			list.remove(event);
 			if(list.size()==0)
 				keys.remove(oldKey);
@@ -107,7 +108,7 @@ public class ControlSettings
 	/////////////////////////////////////////////////////////////////
 	// ON				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final HashMap<Integer,ArrayList<String>> onKeys = new HashMap<Integer,ArrayList<String>>();
+	private final HashMap<Integer,List<String>> onKeys = new HashMap<Integer,List<String>>();
 	private final HashMap<String,Integer> onEvents = new HashMap<String,Integer>();
 	
 	public boolean containsOnKey(int key)
@@ -122,7 +123,7 @@ public class ControlSettings
 	{	return getKeyFromEvent(event,true);
 	}
 	
-	public ArrayList<String> getEventsFromOnKey(int keyCode)
+	public List<String> getEventsFromOnKey(int keyCode)
 	{	return getEventsFromKey(keyCode,true);
 	}
 	
@@ -133,7 +134,7 @@ public class ControlSettings
 	/////////////////////////////////////////////////////////////////
 	// OFF				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final HashMap<Integer,ArrayList<String>> offKeys = new HashMap<Integer,ArrayList<String>>();
+	private final HashMap<Integer,List<String>> offKeys = new HashMap<Integer,List<String>>();
 	private final HashMap<String,Integer> offEvents = new HashMap<String,Integer>();
 
 	public boolean containsOffKey(int key)
@@ -148,7 +149,7 @@ public class ControlSettings
 	{	return getKeyFromEvent(event,false);
 	}
 	
-	public ArrayList<String> getEventsFromOffKey(int keyCode)
+	public List<String> getEventsFromOffKey(int keyCode)
 	{	return getEventsFromKey(keyCode,false);
 	}
 
@@ -159,7 +160,7 @@ public class ControlSettings
 	/////////////////////////////////////////////////////////////////
 	// AUTOFIRE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> autofires = new ArrayList<String>();
+	private final List<String> autofires = new ArrayList<String>();
 
 	public boolean isAutofire(String event)
 	{	return autofires.contains(event);		
@@ -180,11 +181,11 @@ public class ControlSettings
 	public ControlSettings copy()
 	{	ControlSettings result = new ControlSettings();
 		// on keys
-		{	Iterator<Entry<Integer,ArrayList<String>>> it = onKeys.entrySet().iterator();
+		{	Iterator<Entry<Integer,List<String>>> it = onKeys.entrySet().iterator();
 			while(it.hasNext())
-			{	Entry<Integer,ArrayList<String>> entry = it.next();
+			{	Entry<Integer,List<String>> entry = it.next();
 				Integer key = entry.getKey();
-				ArrayList<String> values = entry.getValue();
+				List<String> values = entry.getValue();
 				Iterator<String> it2 = values.iterator();
 				while(it2.hasNext())
 				{	String temp = it2.next();
@@ -193,11 +194,11 @@ public class ControlSettings
 			}
 		}
 		// off keys
-		{	Iterator<Entry<Integer,ArrayList<String>>> it = offKeys.entrySet().iterator();
+		{	Iterator<Entry<Integer,List<String>>> it = offKeys.entrySet().iterator();
 			while(it.hasNext())
-			{	Entry<Integer,ArrayList<String>> entry = it.next();
+			{	Entry<Integer,List<String>> entry = it.next();
 				Integer key = entry.getKey();
-				ArrayList<String> values = entry.getValue();
+				List<String> values = entry.getValue();
 				Iterator<String> it2 = values.iterator();
 				while(it2.hasNext())
 				{	String temp = it2.next();

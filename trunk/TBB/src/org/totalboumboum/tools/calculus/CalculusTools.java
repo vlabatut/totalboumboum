@@ -102,22 +102,22 @@ public class CalculusTools
 	 * process all the unique distributions (i.e. without considering permutations)
 	 * of a certain number of players in a certain number of matches.
 	 */
-	public static ArrayList<ArrayList<Integer>> processDistributions(int players, int matches)
+	public static List<List<Integer>> processDistributions(int players, int matches)
 	{	return processDistributions(players,matches,players);
 		
 	}
-	private static ArrayList<ArrayList<Integer>> processDistributions(int players, int matches, int previous)
+	private static List<List<Integer>> processDistributions(int players, int matches, int previous)
 	{	// init
-		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		if(players==0)
-		{	ArrayList<Integer> list = new ArrayList<Integer>();
+		{	List<Integer> list = new ArrayList<Integer>();
 			for(int i=0;i<matches;i++)
 				list.add(0);
 			result.add(list);
 		}
 		else if(matches==1)
 		{	if(players<=previous)
-			{	ArrayList<Integer> list = new ArrayList<Integer>();
+			{	List<Integer> list = new ArrayList<Integer>();
 				list.add(players);
 				result.add(list);
 			}
@@ -129,8 +129,8 @@ public class CalculusTools
 	
 			// combi
 			for(int i=start;i>0;i--)
-			{	ArrayList<ArrayList<Integer>> temp = processDistributions(players-i,matches-1,i);
-				for(ArrayList<Integer> list: temp)
+			{	List<List<Integer>> temp = processDistributions(players-i,matches-1,i);
+				for(List<Integer> list: temp)
 				{	list.add(0,i);
 					result.add(list);
 				}			
@@ -153,7 +153,7 @@ public class CalculusTools
 		result.add(clone);
 	
 		// init directions
-		ArrayList<Integer> directions = new ArrayList<Integer>();
+		List<Integer> directions = new ArrayList<Integer>();
 		for (int i=1;i<=values.size();i++)
 			directions.add(1);
 		
@@ -512,8 +512,8 @@ for(List<Set<Integer>> list: matches)
 		return result;
 	}
 
-	public static ArrayList<Integer> getWinners(float[] points)
-	{	ArrayList<Integer> result = new ArrayList<Integer>();
+	public static List<Integer> getWinners(float[] points)
+	{	List<Integer> result = new ArrayList<Integer>();
 		int[] ranks = CalculusTools.getRanks(points);
 		for(int i=0;i<ranks.length;i++)
 			if(ranks[i]==1 && points[i]>0)

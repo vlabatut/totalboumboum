@@ -136,7 +136,7 @@ public class ServerLoop extends VisibleLoop
 		Players plyrs = hollowLevel.getPlayers();
 		PlayerLocation[] initialPositions = plyrs.getLocations().get(remainingPlayers);
 		if(round.getRandomLocation())
-		{	ArrayList<PlayerLocation> loc = new ArrayList<PlayerLocation>();
+		{	List<PlayerLocation> loc = new ArrayList<PlayerLocation>();
 			for(int i=0;i<initialPositions.length;i++)
 				loc.add(initialPositions[i]);
 			Calendar cal = new GregorianCalendar();
@@ -282,7 +282,7 @@ public class ServerLoop extends VisibleLoop
 	/////////////////////////////////////////////////////////////////
 	// AIS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<Boolean> pauseAis = new ArrayList<Boolean>();
+	private final List<Boolean> pauseAis = new ArrayList<Boolean>();
 
 	public void switchAiPause(int index)
 	{	debugLock.lock();

@@ -159,11 +159,11 @@ public class ModulationsLoader
 		else //if(type.equals(ModType.OTHER))
 		{	result = new OtherModulation(name);
 			// contacts
-			ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlNames.CONTACT);
+			List<Contact> contacts = Contact.loadContactsAttribute(root,XmlNames.CONTACT);
 			for(Contact contact: contacts)
 				((OtherModulation)result).addContact(contact);
 			// tilePositions
-			ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlNames.TILE_POSITION);
+			List<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlNames.TILE_POSITION);
 			for(TilePosition tilePosition: tilePositions)
 				((OtherModulation)result).addTilePosition(tilePosition);
 		}
@@ -197,13 +197,13 @@ public class ModulationsLoader
 			action.addTarget(role);
     	
 		// actor restrictions
-		ArrayList<AbstractAbility> actorRestrictions = new ArrayList<AbstractAbility>();
+		List<AbstractAbility> actorRestrictions = new ArrayList<AbstractAbility>();
 		Element actorRestrElt = root.getChild(XmlNames.ACTOR_RESTRICTIONS);
 		if(actorRestrElt!=null)
 			actorRestrictions = AbilityLoader.loadAbilitiesElement(actorRestrElt);
     	
 		// target restrictions
-		ArrayList<AbstractAbility> targetRestrictions = new ArrayList<AbstractAbility>();
+		List<AbstractAbility> targetRestrictions = new ArrayList<AbstractAbility>();
 		Element targetRestrElt = root.getChild(XmlNames.TARGET_RESTRICTIONS);
 		if(targetRestrElt!=null)
 			targetRestrictions = AbilityLoader.loadAbilitiesElement(targetRestrElt);

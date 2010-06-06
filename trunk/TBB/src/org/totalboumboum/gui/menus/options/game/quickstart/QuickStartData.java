@@ -25,7 +25,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 import javax.swing.Box;
@@ -52,7 +52,6 @@ import org.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSpli
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
-
 
 public class QuickStartData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, MouseListener
 {	
@@ -147,7 +146,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	{	this.quickStartConfiguration = quickStartConfiguration;
 		try
 		{	ProfilesSelection profilesSelection = quickStartConfiguration.getProfilesSelection();
-			ArrayList<Profile> profiles = ProfileLoader.loadProfiles(profilesSelection);
+			List<Profile> profiles = ProfileLoader.loadProfiles(profilesSelection);
 			playersPanel.setPlayers(profiles);
 			refreshRound();
 		}
@@ -178,7 +177,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	}
 	
 	public QuickStartConfiguration getQuickStartConfiguration()
-	{	ArrayList<Profile> players = playersPanel.getPlayers();
+	{	List<Profile> players = playersPanel.getPlayers();
 		ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(players);
 		quickStartConfiguration.setProfilesSelection(profilesSelection);
 		return quickStartConfiguration;	
@@ -279,7 +278,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 
 	@Override
 	public void playerSelectionPlayerAdded(int index)
-	{	ArrayList<Profile> players = playersPanel.getPlayers();
+	{	List<Profile> players = playersPanel.getPlayers();
 		SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,players);
 		getMenuContainer().replaceWith(selectProfilePanel);
 	}
@@ -291,7 +290,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 
 	@Override
 	public void playerSelectionProfileSet(int index)
-	{	ArrayList<Profile> players = playersPanel.getPlayers();
+	{	List<Profile> players = playersPanel.getPlayers();
 		SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,players);
 		getMenuContainer().replaceWith(selectProfilePanel);
 	}

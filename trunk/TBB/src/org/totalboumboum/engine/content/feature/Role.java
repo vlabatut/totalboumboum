@@ -2,6 +2,7 @@ package org.totalboumboum.engine.content.feature;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.jdom.Attribute;
@@ -54,8 +55,8 @@ public enum Role implements Serializable
 	 * the XML value SOME represents any role except NONE. 
 	 * the XML value ANY represents any role including NONE. 
 	 */
-	public static ArrayList<Role> loadRolesAttribute(Element root, String attName)
-	{	ArrayList<Role> result = new ArrayList<Role>();
+	public static List<Role> loadRolesAttribute(Element root, String attName)
+	{	List<Role> result = new ArrayList<Role>();
 		Attribute attribute = root.getAttribute(attName);
 		if(attribute!=null)
 		{	String roleStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);

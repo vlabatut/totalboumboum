@@ -134,7 +134,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 
         // position relative de l'éventuelle bombe
         bombPosition = ArtificialIntelligence.AI_DIR_NONE;
-        ArrayList<Bomb> bombes = tile.getBombs();
+        List<Bomb> bombes = tile.getBombs();
         if(bombes.size()>0)
         {	int minX = Integer.MAX_VALUE;
         	int minY = Integer.MAX_VALUE;
@@ -201,7 +201,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	    			zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_FIRE;
 	    		// bonus/malus
 	    		else if(temp.getItems().size()>0)
-	    		{	ArrayList<Item> items = temp.getItems();
+	    		{	List<Item> items = temp.getItems();
 	    			Iterator<Item> it = items.iterator();
 	    			boolean found = false;
 	    			while(!found && it.hasNext())
@@ -346,11 +346,11 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	// REACTION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
     /** simulates control keys */
-    private ArrayList<Integer> controlKeys;
+    private List<Integer> controlKeys;
 
 	@Override
-	public ArrayList<ControlEvent> convertReaction(Integer value)
-	{	ArrayList<ControlEvent> result = new ArrayList<ControlEvent>();
+	public List<ControlEvent> convertReaction(Integer value)
+	{	List<ControlEvent> result = new ArrayList<ControlEvent>();
 		ControlEvent event;
 		if(debug)
 			System.out.print("action:");

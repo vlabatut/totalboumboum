@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
@@ -64,14 +65,14 @@ public class TransferSubPanel extends TableSubPanel implements MouseListener
 		reinit(lines,cols);
 
 		// icons
-		ArrayList<String> keys = new ArrayList<String>();
+		List<String> keys = new ArrayList<String>();
 		if(showLeft)
 			keys.add(GuiKeys.COMMON_TRANSFER_LEFT);
 		if(showRight)
 			keys.add(GuiKeys.COMMON_TRANSFER_RIGHT);
 
 		// enabled
-		ArrayList<Boolean> enabled = new ArrayList<Boolean>();
+		List<Boolean> enabled = new ArrayList<Boolean>();
 		if(showLeft)
 			enabled.add(enabledLeft);
 		if(showRight)
@@ -169,7 +170,7 @@ public class TransferSubPanel extends TableSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<TransferSubPanelListener> listeners = new ArrayList<TransferSubPanelListener>();
+	private List<TransferSubPanelListener> listeners = new ArrayList<TransferSubPanelListener>();
 	
 	public void addListener(TransferSubPanelListener listener)
 	{	if(!listeners.contains(listener))

@@ -23,6 +23,7 @@ package org.totalboumboum.gui.menus.tournament;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -38,7 +39,6 @@ import org.totalboumboum.gui.menus.tournament.hero.SelectHeroSplitPanel;
 import org.totalboumboum.gui.menus.tournament.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.xml.sax.SAXException;
-
 
 public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener
 {	
@@ -74,7 +74,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	public void setTournamentConfiguration(TournamentConfiguration tournamentConfiguration)
 	{	ProfilesSelection profilesSelection = tournamentConfiguration.getProfilesSelection();
-		ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
+		List<Profile> selectedProfiles = new ArrayList<Profile>();
 		try
 		{	selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
 		}
@@ -105,7 +105,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		playersPanel.setPlayers(selectedProfiles);
 	}
 	
-	public ArrayList<Profile> getSelectedProfiles()
+	public List<Profile> getSelectedProfiles()
 	{	return playersPanel.getPlayers();	
 	}
 

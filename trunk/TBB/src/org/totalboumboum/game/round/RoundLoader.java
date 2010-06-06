@@ -23,7 +23,6 @@ package org.totalboumboum.game.round;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -77,7 +76,7 @@ public class RoundLoader
 		
 		// notes
 		element = root.getChild(XmlNames.NOTES);
-		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
+		List<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		
 		// author

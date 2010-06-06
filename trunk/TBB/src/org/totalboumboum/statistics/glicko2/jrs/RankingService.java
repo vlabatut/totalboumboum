@@ -79,7 +79,7 @@ public class RankingService implements Serializable {
     /** List of RankingServiceListeners to notify when rating periods begin
       * and end.
       */
-    ArrayList<RankingServiceListener> listeners;
+    List<RankingServiceListener> listeners;
     
     /** The number of rating periods computed. */
     int periodCount;

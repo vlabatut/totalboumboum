@@ -23,6 +23,7 @@ package org.totalboumboum.configuration.game.quickstart;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -113,7 +114,7 @@ public class QuickStartConfiguration
 		Match match = new Match(result);
 		match.setAuthor("quick start");
 		{	// notes
-			ArrayList<String> notes = new ArrayList<String>();
+			List<String> notes = new ArrayList<String>();
 			notes.add("auto-generated notes");
 			match.setNotes(notes);
 		}

@@ -2,6 +2,7 @@ package org.totalboumboum.gui.tools;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -1401,8 +1402,8 @@ public class GuiKeys
 	 * @param keyStart
 	 * @return
 	 */
-	public static ArrayList<String> getKeysLike(String keyStart)
-	{	ArrayList<String> result = new ArrayList<String>();
+	public static List<String> getKeysLike(String keyStart)
+	{	List<String> result = new ArrayList<String>();
 		Iterator<Entry<String,String>> it = GuiConfiguration.getMiscConfiguration().getLanguage().getTexts().entrySet().iterator();
 		while(it.hasNext())
 		{	Entry<String,String> temp = it.next();

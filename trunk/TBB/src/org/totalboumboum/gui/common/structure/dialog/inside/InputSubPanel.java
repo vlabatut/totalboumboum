@@ -30,7 +30,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -47,11 +47,10 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
 public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
-	public InputSubPanel(int width, int height, String key, ArrayList<String> text, String defaultText)
+	public InputSubPanel(int width, int height, String key, List<String> text, String defaultText)
 	{	super(width,height);
 	
 		setTitleKey(key,false);
@@ -66,7 +65,7 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 	private MyLabel buttonCancel;
 	private JTextPane inputPane;
 	
-	public void setContent(ArrayList<String> text, String defaultText)
+	public void setContent(List<String> text, String defaultText)
 	{	// sizes
 		float fontSize = getTitleFontSize()*GuiTools.FONT_TEXT_RATIO;
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);

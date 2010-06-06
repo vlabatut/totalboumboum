@@ -32,6 +32,7 @@ import java.io.ObjectOutputStream;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -69,7 +70,7 @@ public class GameArchive
 		result.save = GregorianCalendar.getInstance().getTime();
 		
 		// players
-		ArrayList<Profile> profiles = tournament.getProfiles();
+		List<Profile> profiles = tournament.getProfiles();
 		for(Profile profile: profiles)
 		{	String name = profile.getName();
 			result.addPlayer(name);
@@ -185,12 +186,12 @@ public class GameArchive
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> players = new ArrayList<String>();
+	private final List<String> players = new ArrayList<String>();
 	
 	public void addPlayer(String player)
 	{	players.add(player);
 	}
-	public ArrayList<String> getPlayers()
+	public List<String> getPlayers()
 	{	return players;
 	}
 }

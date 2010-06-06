@@ -23,6 +23,7 @@ package org.totalboumboum.gui.common.content.subpanel.round;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.game.round.Round;
@@ -61,7 +62,7 @@ public class RoundMiscSubPanel extends TableSubPanel
 		reinit(LINES,COL_GROUPS,COL_SUBS);
 		
 		// icons
-		ArrayList<String> keys = new ArrayList<String>();
+		List<String> keys = new ArrayList<String>();
 		if(showTitle)
 			keys.add(GuiKeys.COMMON_ROUND_TITLE);
 		if(showAuthor)
@@ -75,7 +76,7 @@ public class RoundMiscSubPanel extends TableSubPanel
 		
 		if(round!=null)
 		{	// text
-			ArrayList<String> values = new ArrayList<String>();
+			List<String> values = new ArrayList<String>();
 			if(showTitle)
 				values.add(round.getName());
 			if(showAuthor)

@@ -150,7 +150,7 @@ public abstract class AbstractAiManager<V>
     			{	// on récupère les réactions de l'IA
     				V value = futureAi.get();
     				// on les convertit et les envoie au moteur
-    				ArrayList<ControlEvent> events = convertReaction(value);
+    				List<ControlEvent> events = convertReaction(value);
     				Iterator<ControlEvent> it = events.iterator();
     				while(it.hasNext())
     				{	ControlEvent event = it.next();
@@ -273,7 +273,7 @@ public abstract class AbstractAiManager<V>
 	 * @param value	la valeur renvoyée par l'ia, qui est à convertir
 	 * @return	le résultat de la conversion sous la forme d'un évènement à envoyer au sprite contrôlé par l'IA
 	 */
-	public abstract ArrayList<ControlEvent> convertReaction(V value);
+	public abstract List<ControlEvent> convertReaction(V value);
    
 	/**
 	 * termine proprement les percepts, de manière à libérer les ressources occupées.

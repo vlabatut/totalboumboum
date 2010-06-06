@@ -28,6 +28,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -65,10 +66,10 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Profile> players;
+	private List<Profile> players;
 	private int rankWidth;
 
-	public ArrayList<Profile> getPlayers()
+	public List<Profile> getPlayers()
 	{	return players;	
 	}
 	
@@ -76,7 +77,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	{	return players.get(index);	
 	}
 	
-	public void setPlayers(ArrayList<Profile> players)
+	public void setPlayers(List<Profile> players)
 	{	// init
 		if(players==null)
 			players = new ArrayList<Profile>();
@@ -327,12 +328,12 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	// DISPLAY	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	// controls
-	private ArrayList<String> controlTexts;
-	private ArrayList<String> controlTooltips;
+	private List<String> controlTexts;
+	private List<String> controlTooltips;
 	// colors
-	private ArrayList<String> colorTexts;
-	private ArrayList<String> colorTooltips;
-	private ArrayList<Color> colorBackgrounds;
+	private List<String> colorTexts;
+	private List<String> colorTooltips;
+	private List<Color> colorBackgrounds;
 	// indices
 	private static final int COL_DELETE = 0;
 	private static final int COL_PROFILE = 1;
@@ -512,7 +513,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<PlayersSelectionSubPanelListener> listeners = new ArrayList<PlayersSelectionSubPanelListener>();
+	private List<PlayersSelectionSubPanelListener> listeners = new ArrayList<PlayersSelectionSubPanelListener>();
 	
 	public void addListener(PlayersSelectionSubPanelListener listener)
 	{	if(!listeners.contains(listener))

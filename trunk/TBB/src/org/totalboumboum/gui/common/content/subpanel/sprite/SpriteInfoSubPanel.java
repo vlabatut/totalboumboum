@@ -23,6 +23,7 @@ package org.totalboumboum.gui.common.content.subpanel.sprite;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.engine.content.sprite.SpritePreview;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
@@ -59,7 +60,7 @@ public class SpriteInfoSubPanel extends TableSubPanel
 		reinit(LINES,COL_GROUPS,COL_SUBS);
 		
 		// icons
-		ArrayList<String> keys = new ArrayList<String>();
+		List<String> keys = new ArrayList<String>();
 		if(showName)
 			keys.add(GuiKeys.COMMON_SPRITE_NAME);
 		if(showPack)
@@ -71,7 +72,7 @@ public class SpriteInfoSubPanel extends TableSubPanel
 		
 		if(spritePreview!=null)
 		{	// text
-			ArrayList<String> values = new ArrayList<String>();
+			List<String> values = new ArrayList<String>();
 			if(showName)
 				values.add(spritePreview.getName());
 			if(showPack)

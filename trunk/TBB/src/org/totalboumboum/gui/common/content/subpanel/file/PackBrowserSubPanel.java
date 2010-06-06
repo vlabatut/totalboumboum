@@ -59,7 +59,7 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 	/////////////////////////////////////////////////////////////////
 	private String baseFolder;
 	private String additionalFolder;
-	private ArrayList<String> targetFiles;
+	private List<String> targetFiles;
 	private int linePrevious;
 	private int lineNext;
 	private int controlTotalCount;
@@ -75,7 +75,7 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 	{	return baseFolder;	
 	}
 	
-	public ArrayList<String> getTargetFiles()
+	public List<String> getTargetFiles()
 	{	return targetFiles;	
 	}
 	
@@ -85,7 +85,7 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 		setFolder(baseFolder,additionalFolder,targetFiles);
 	}
 	
-	public void setFolder(String baseFolder, String additionalFolder, ArrayList<String> targetFiles)
+	public void setFolder(String baseFolder, String additionalFolder, List<String> targetFiles)
 	{	// init
 		this.baseFolder = baseFolder;
 		this.additionalFolder = additionalFolder;

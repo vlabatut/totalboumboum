@@ -147,7 +147,7 @@ public class Astar
 	 * @throws StopRequestException 
 	 */
 	public AiPath processShortestPath(AiTile startTile, AiTile endTile) throws StopRequestException
-	{	ArrayList<AiTile> endTiles = new ArrayList<AiTile>();
+	{	List<AiTile> endTiles = new ArrayList<AiTile>();
 		endTiles.add(endTile);
 		AiPath result = processShortestPath(startTile,endTiles);
 		return result;
@@ -216,7 +216,7 @@ public class Astar
 					limitReached = true;
 				else
 				{	// sinon on récupère les noeuds suivants
-					ArrayList<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
+					List<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
 					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)

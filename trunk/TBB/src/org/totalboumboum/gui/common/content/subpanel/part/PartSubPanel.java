@@ -300,7 +300,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<PartSubPanelListener> listeners = new ArrayList<PartSubPanelListener>();
+	private List<PartSubPanelListener> listeners = new ArrayList<PartSubPanelListener>();
 	
 	public void addListener(PartSubPanelListener listener)
 	{	if(!listeners.contains(listener))

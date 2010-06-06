@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import org.totalboumboum.gui.common.content.MyLabel;
@@ -304,7 +305,7 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<MatchQuickConfigSubPanelListener> listeners = new ArrayList<MatchQuickConfigSubPanelListener>();
+	private List<MatchQuickConfigSubPanelListener> listeners = new ArrayList<MatchQuickConfigSubPanelListener>();
 	
 	public void addListener(MatchQuickConfigSubPanelListener listener)
 	{	if(!listeners.contains(listener))

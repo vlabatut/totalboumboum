@@ -2,6 +2,7 @@ package org.totalboumboum.engine.content.feature;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.jdom.Attribute;
@@ -73,8 +74,8 @@ public enum Contact implements Serializable
 	 * the XML value SOME represents any contact except NONE. 
 	 * the XML value ANY represents any contact including NONE. 
 	 */
-	public static ArrayList<Contact> loadContactsAttribute(Element root, String attName)
-	{	ArrayList<Contact> result = new ArrayList<Contact>();
+	public static List<Contact> loadContactsAttribute(Element root, String attName)
+	{	List<Contact> result = new ArrayList<Contact>();
 		Attribute attribute = root.getAttribute(attName);
 		String contactStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 		String[] contactsStr = contactStr.split(" ");

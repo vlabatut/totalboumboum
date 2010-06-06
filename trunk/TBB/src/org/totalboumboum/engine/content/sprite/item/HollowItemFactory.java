@@ -131,7 +131,7 @@ public class HollowItemFactory extends HollowSpriteFactory<Item>
 		result.itemrefs = itemrefsCopy;
 		
 		// item probabilities
-		ArrayList<Float> itemProbabilitiesCopy = new ArrayList<Float>();
+		List<Float> itemProbabilitiesCopy = new ArrayList<Float>();
 		for(Float proba: itemProbabilities)
 			itemProbabilitiesCopy.add(proba);
 		result.itemProbabilities = itemProbabilitiesCopy;

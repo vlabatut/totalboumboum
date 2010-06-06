@@ -103,7 +103,7 @@ public class Level
 	// TILES MATRIX		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Tile matrix[][];
-	private ArrayList<Tile> tileList;
+	private List<Tile> tileList;
 	
 	public Tile[][] getMatrix()
 	{	return matrix;
@@ -707,8 +707,8 @@ public class Level
 		result = matrix[l][c];
 		return result;
 	}
-	public ArrayList<Tile> getNeighborTiles(int line, int col)
-	{	ArrayList<Tile> resultat = new ArrayList<Tile>();
+	public List<Tile> getNeighborTiles(int line, int col)
+	{	List<Tile> resultat = new ArrayList<Tile>();
 		resultat.add(getNeighborTile(line, col, Direction.LEFT));
 		resultat.add(getNeighborTile(line, col, Direction.DOWNLEFT));
 		resultat.add(getNeighborTile(line, col, Direction.DOWN));
@@ -980,7 +980,7 @@ public class Level
 		for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)
 			{	Tile tile = matrix[line][col];
-				ArrayList<Sprite> list = tile.getSprites(role);
+				List<Sprite> list = tile.getSprites(role);
 				for(Sprite sprite: list)
 				{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
 					double duration = ability.getStrength();

@@ -29,6 +29,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -102,7 +103,7 @@ public abstract class ModalDialogSubPanel extends EmptySubPanel implements Mouse
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<ModalDialogSubPanelListener> listeners = new ArrayList<ModalDialogSubPanelListener>();
+	private List<ModalDialogSubPanelListener> listeners = new ArrayList<ModalDialogSubPanelListener>();
 	
 	public void addListener(ModalDialogSubPanelListener listener)
 	{	if(!listeners.contains(listener))

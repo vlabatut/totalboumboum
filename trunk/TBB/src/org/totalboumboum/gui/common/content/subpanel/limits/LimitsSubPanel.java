@@ -27,6 +27,7 @@ import java.awt.event.MouseListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.game.limit.Limit;
 import org.totalboumboum.game.limit.LimitConfrontation;
@@ -269,7 +270,7 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<LimitsSubPanelListener> listeners = new ArrayList<LimitsSubPanelListener>();
+	private List<LimitsSubPanelListener> listeners = new ArrayList<LimitsSubPanelListener>();
 	
 	public void addListener(LimitsSubPanelListener listener)
 	{	if(!listeners.contains(listener))

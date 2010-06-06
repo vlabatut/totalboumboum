@@ -25,8 +25,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -38,7 +38,6 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
-
 
 public class Column extends ContentPanel
 {	
@@ -93,7 +92,7 @@ public class Column extends ContentPanel
 	{	return lineFontSize;	
 	}
 	
-	public void setKeys(ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	public void setKeys(List<String> keys, List<Boolean> imageFlags)
 	{	Iterator<String> colKeys = keys.iterator();
 		Iterator<Boolean> colFlags = imageFlags.iterator();
 		int col = 0;
@@ -105,7 +104,7 @@ public class Column extends ContentPanel
 		}			
 	}
 
-	public void setIcons(ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	public void setIcons(List<BufferedImage> icons, List<String> tooltips)
 	{	Iterator<BufferedImage> colIcons = icons.iterator();
 		Iterator<String> colTooltips = tooltips.iterator();
 		int col = 0;
@@ -117,7 +116,7 @@ public class Column extends ContentPanel
 		}			
 	}
 
-	public void setTexts(ArrayList<String> texts, ArrayList<String> tooltips)
+	public void setTexts(List<String> texts, List<String> tooltips)
 	{	Iterator<String> colTexts = texts.iterator();
 		Iterator<String> colTooltips = tooltips.iterator();
 		int col = 0;

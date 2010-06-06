@@ -78,7 +78,7 @@ public class Tile
 			updateSprites(items);
 	}
 
-	private <T extends Sprite> void updateSprites(ArrayList<T> sprites)
+	private <T extends Sprite> void updateSprites(List<T> sprites)
 	{	int i=0;
 		while(i<sprites.size())
 		{	T temp = sprites.get(i);
@@ -138,8 +138,8 @@ public class Tile
 			pX = pX - ((double)image.getWidth())/2;
 			pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;
 			//
-			ArrayList<Double> listX = new ArrayList<Double>(0);
-			ArrayList<Double> listY = new ArrayList<Double>(0);
+			List<Double> listX = new ArrayList<Double>(0);
+			List<Double> listY = new ArrayList<Double>(0);
 			listX.add(pX);
 			listY.add(pY);
 			// déborde à gauche
@@ -214,8 +214,8 @@ public class Tile
 			pX = pX - ((double)image.getWidth())/2;
 			pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;
 			//
-			ArrayList<Double> listX = new ArrayList<Double>(0);
-			ArrayList<Double> listY = new ArrayList<Double>(0);
+			List<Double> listX = new ArrayList<Double>(0);
+			List<Double> listY = new ArrayList<Double>(0);
 			listX.add(pX);
 			listY.add(pY);
 			// déborde à gauche
@@ -256,7 +256,7 @@ public class Tile
 	/////////////////////////////////////////////////////////////////
 	// HERO					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Hero> heroes;
+	private List<Hero> heroes;
 
 	private void addHero(Hero hero)
 	{	heroes.add(hero);		
@@ -268,14 +268,14 @@ public class Tile
 	{	heroes.remove(hero);	
 	}
 
-	public ArrayList<Hero> getHeroes()
+	public List<Hero> getHeroes()
 	{	return heroes;
 	}
 
     /////////////////////////////////////////////////////////////////
 	// BOMB					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Bomb> bombs;
+	private List<Bomb> bombs;
 
 	private void addBomb(Bomb bomb)
 	{	bombs.add(bomb);		
@@ -287,14 +287,14 @@ public class Tile
 	{	bombs.remove(bomb);	
 	}
 
-	public ArrayList<Bomb> getBombs()
+	public List<Bomb> getBombs()
 	{	return bombs;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FIRE					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Fire> fires;
+	private List<Fire> fires;
 
 	private void addFire(Fire fire)
 	{	fires.add(fire);
@@ -306,14 +306,14 @@ public class Tile
 	{	fires.remove(fire);	
 	}
 
-	public ArrayList<Fire> getFires()
+	public List<Fire> getFires()
 	{	return fires;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// BLOCK				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Block> blocks;
+	private List<Block> blocks;
 
 	private void addBlock(Block block)
 	{	blocks.add(block);		
@@ -325,14 +325,14 @@ public class Tile
 	{	blocks.remove(block);	
 	}
 	
-	public ArrayList<Block> getBlocks()
+	public List<Block> getBlocks()
 	{	return blocks;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ITEM					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Item> items;
+	private List<Item> items;
 
 	private void addItem(Item item)
 	{	items.add(item);		
@@ -344,14 +344,14 @@ public class Tile
 	{	items.remove(item);	
 	}
 	
-	public ArrayList<Item> getItems()
+	public List<Item> getItems()
 	{	return items;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FLOOR				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Floor> floors;
+	private List<Floor> floors;
 
 	private void addFloor(Floor floor)
 	{	floors.add(floor);		
@@ -363,7 +363,7 @@ public class Tile
 	{	floors.remove(floor);	
 	}
 
-	public ArrayList<Floor> getFloors()
+	public List<Floor> getFloors()
 	{	return floors;
 	}
 
@@ -400,8 +400,8 @@ public class Tile
 			removeItem((Item) sprite);
 	}
 
-	public ArrayList<Sprite> getSprites()
-	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
+	public List<Sprite> getSprites()
+	{	List<Sprite> result = new ArrayList<Sprite>();
 		// floor
 		{	Iterator<Floor> i = floors.iterator();
 			while(i.hasNext())
@@ -435,8 +435,8 @@ public class Tile
 		return result;
 	}
 
-	public ArrayList<Sprite> getSprites(Role role)
-	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
+	public List<Sprite> getSprites(Role role)
+	{	List<Sprite> result = new ArrayList<Sprite>();
 		// floor
 		if(role==Role.FLOOR)
 			result.addAll(floors);

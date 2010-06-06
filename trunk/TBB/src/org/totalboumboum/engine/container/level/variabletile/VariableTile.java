@@ -24,6 +24,7 @@ package org.totalboumboum.engine.container.level.variabletile;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class VariableTile implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -44,9 +45,9 @@ public class VariableTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// VALUES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<ValueTile> values = new ArrayList<ValueTile>();
+	private List<ValueTile> values = new ArrayList<ValueTile>();
 
-	public ArrayList<ValueTile> getValues()
+	public List<ValueTile> getValues()
 	{	return values;
 	}
 	
@@ -68,7 +69,7 @@ public class VariableTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// OCCURRENCES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Integer> counts;
+	private List<Integer> counts;
 	private int totalCount;
 	private int totalOccurrences = 0;
 
@@ -126,7 +127,7 @@ public class VariableTile implements Serializable
 		}
 		// calculate minima
 		int indexMin = 0;
-		ArrayList<Integer> indices = new ArrayList<Integer>();
+		List<Integer> indices = new ArrayList<Integer>();
 		for(k=0;k<def.length;k++)
 		{	if(def[k]<def[indexMin])
 			{	indices.clear();

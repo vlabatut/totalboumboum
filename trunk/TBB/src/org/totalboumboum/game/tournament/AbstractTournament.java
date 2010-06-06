@@ -24,6 +24,7 @@ package org.totalboumboum.game.tournament;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -79,21 +80,21 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected ArrayList<Profile> profiles = new ArrayList<Profile>();
+	protected List<Profile> profiles = new ArrayList<Profile>();
 
-	public void setProfiles(ArrayList<Profile> profiles)
+	public void setProfiles(List<Profile> profiles)
 	{	this.profiles.clear();
 		this.profiles.addAll(profiles);		
 	}
 	
-	public ArrayList<Profile> getProfiles()
+	public List<Profile> getProfiles()
 	{	return profiles;	
 	}
 
 	public abstract Set<Integer> getAllowedPlayerNumbers();
 	
 	@Override
-	public ArrayList<Boolean> getPlayersStatus()
+	public List<Boolean> getPlayersStatus()
 	{	// useless here
 		return null;
 	}
@@ -152,12 +153,12 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	/////////////////////////////////////////////////////////////////
 	// NOTES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> notes = new ArrayList<String>();
+	private final List<String> notes = new ArrayList<String>();
 
-	public void setNotes(ArrayList<String> notes)
+	public void setNotes(List<String> notes)
 	{	this.notes.addAll(notes);
 	}
-	public ArrayList<String> getNotes()
+	public List<String> getNotes()
 	{	return notes;
 	}
 }

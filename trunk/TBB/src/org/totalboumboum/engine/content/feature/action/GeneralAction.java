@@ -2,6 +2,7 @@ package org.totalboumboum.engine.content.feature.action;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Contact;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -77,9 +78,9 @@ public abstract class GeneralAction implements Serializable
 	// DIRECTIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** directions of the action */
-	protected final ArrayList<Direction> directions = new ArrayList<Direction>();
+	protected final List<Direction> directions = new ArrayList<Direction>();
 
-	protected ArrayList<Direction> getDirections()
+	protected List<Direction> getDirections()
 	{	return directions;
 	}
 	
@@ -160,9 +161,9 @@ public abstract class GeneralAction implements Serializable
 	// ACTORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** roles of the acting sprite */
-	protected final ArrayList<Role> actors = new ArrayList<Role>();
+	protected final List<Role> actors = new ArrayList<Role>();
 	
-	protected ArrayList<Role> getActors()
+	protected List<Role> getActors()
 	{	return actors;
 	}
 	
@@ -177,9 +178,9 @@ public abstract class GeneralAction implements Serializable
 	// TARGETS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** role of the targeted sprite */
-	protected final ArrayList<Role> targets = new ArrayList<Role>();
+	protected final List<Role> targets = new ArrayList<Role>();
 	
-	protected ArrayList<Role> getTargets()
+	protected List<Role> getTargets()
 	{	return targets;
 	}
 	

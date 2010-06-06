@@ -22,6 +22,7 @@ package org.totalboumboum.statistics.detailed;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.game.match.Match;
 
@@ -36,9 +37,9 @@ public class StatisticMatch extends StatisticBase
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC ROUNDS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<StatisticRound> rounds = new ArrayList<StatisticRound>();
+	private final List<StatisticRound> rounds = new ArrayList<StatisticRound>();
 
-	public ArrayList<StatisticRound> getStatisticRounds()
+	public List<StatisticRound> getStatisticRounds()
 	{	return rounds;
 	}
 
@@ -68,8 +69,8 @@ public class StatisticMatch extends StatisticBase
 	}
 	
 	@Override
-	public ArrayList<StatisticBase> getConfrontationStats()
-	{	ArrayList<StatisticBase> result = new ArrayList<StatisticBase>();
+	public List<StatisticBase> getConfrontationStats()
+	{	List<StatisticBase> result = new ArrayList<StatisticBase>();
 		for(StatisticRound r: rounds)
 			result.add(r);
 		return result;

@@ -23,6 +23,7 @@ package org.totalboumboum.engine.content.sprite.hero;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -286,7 +287,7 @@ public class HeroEventManager extends EventManager
 			Tile neighbor = tile.getNeighbor(spriteDirection);
 			boolean found = false;
 			// bomb in the same tile ?
-			{	ArrayList<Bomb> bombs = tile.getBombs();
+			{	List<Bomb> bombs = tile.getBombs();
 				Iterator<Bomb> i = bombs.iterator();
 				while(!found && i.hasNext())
 				{	Bomb bomb = i.next();
@@ -307,7 +308,7 @@ public class HeroEventManager extends EventManager
 			}
 			// if not : in the neighbor tile ?
 			if(!found)
-			{	ArrayList<Bomb> bombs = neighbor.getBombs();
+			{	List<Bomb> bombs = neighbor.getBombs();
 				Iterator<Bomb> i = bombs.iterator();
 				while(!found && i.hasNext())
 				{	Bomb bomb = i.next();
@@ -509,11 +510,10 @@ public class HeroEventManager extends EventManager
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void engTileLowEnter(EngineEvent event)
 	{	if(event.getSource()==sprite)
 		{	if(gesture.equals(GestureName.PUSHING) || gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.WALKING))
-			{	ArrayList<Item> items = (ArrayList<Item>)sprite.getTile().getItems().clone();
+			{	List<Item> items = new ArrayList<Item>(sprite.getTile().getItems());
 				for(Item item: items)
 				{	SpecificAction action = new SpecificGather(sprite,item);
 					ActionAbility ability = sprite.modulateAction(action);
@@ -529,7 +529,7 @@ public class HeroEventManager extends EventManager
 	
 	private void engTouchGround(EngineEvent event)
 	{	//if(gesture.equals(GestureConstants.LANDING))
-		{	ArrayList<Item> items = sprite.getTile().getItems();
+		{	List<Item> items = sprite.getTile().getItems();
 			for(Item item: items)
 			{	SpecificAction action = new SpecificGather(sprite,item);
 				ActionAbility ability = sprite.modulateAction(action);

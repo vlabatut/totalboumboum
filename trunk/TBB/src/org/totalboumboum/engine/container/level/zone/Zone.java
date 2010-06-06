@@ -68,7 +68,7 @@ public class Zone implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// MATRIX		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<ZoneTile> tiles = new ArrayList<ZoneTile>();
+	private List<ZoneTile> tiles = new ArrayList<ZoneTile>();
 	
 	public void addTile(ZoneTile tile)
 	{	tiles.add(tile);
@@ -94,7 +94,7 @@ public class Zone implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ZONE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<String[][]> matrices;
+	private List<String[][]> matrices;
 	
 	/**
 	 * 0: floors
@@ -103,7 +103,7 @@ public class Zone implements Serializable
 	 * 3: bombs
 	 * @return
 	 */
-	public ArrayList<String[][]> getMatrices()
+	public List<String[][]> getMatrices()
 	{	return matrices;		
 	}
 	public void makeMatrix()

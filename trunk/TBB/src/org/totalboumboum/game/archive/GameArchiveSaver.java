@@ -23,8 +23,8 @@ package org.totalboumboum.game.archive;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -119,7 +119,7 @@ public class GameArchiveSaver
 
 	private static Element savePlayersElement(GameArchive gameArchive)
 	{	Element result = new Element(XmlNames.PLAYERS);
-		ArrayList<String> players = gameArchive.getPlayers();
+		List<String> players = gameArchive.getPlayers();
 		for(String player: players)
 		{	Element playerElement = savePlayerElement(player);
 			result.addContent(playerElement);

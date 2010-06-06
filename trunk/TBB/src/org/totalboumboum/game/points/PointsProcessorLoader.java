@@ -96,7 +96,7 @@ public class PointsProcessorLoader
 		result = loadGeneralPointElement(element);
 		// notes
 		element = root.getChild(XmlNames.NOTES);
-		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
+		List<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		//
 		return result;
@@ -191,7 +191,7 @@ public class PointsProcessorLoader
 		String str = root.getAttribute(XmlNames.INVERT).getValue();
 		boolean invert = Boolean.valueOf(str);
 		// sources
-		ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
+		List<PointsProcessor> sources = new ArrayList<PointsProcessor>();
 		List<Element> srcs = root.getChildren();
 		Iterator<Element> it = srcs.iterator();
 		while(it.hasNext())
@@ -242,7 +242,7 @@ public class PointsProcessorLoader
 		boolean invert = Boolean.valueOf(str);
 		// sources
 		Element rankingsElt = root.getChild(XmlNames.RANKINGS);
-		ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
+		List<PointsProcessor> sources = new ArrayList<PointsProcessor>();
 		List<Element> srcs = rankingsElt.getChildren();
 		Iterator<Element> it = srcs.iterator();
 		while(it.hasNext())

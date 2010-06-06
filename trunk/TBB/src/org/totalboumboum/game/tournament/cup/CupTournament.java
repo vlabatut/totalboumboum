@@ -346,7 +346,7 @@ public class CupTournament extends AbstractTournament
 	{	int matches = legs.get(0).getParts().size();
 
 		// get the distributions
-		ArrayList<ArrayList<Integer>> distributions = CalculusTools.processDistributions(playerCount,matches);
+		List<List<Integer>> distributions = CalculusTools.processDistributions(playerCount,matches);
 		
 		// permute them
 		TreeSet<List<Integer>> permutations = new TreeSet<List<Integer>>(new Comparator<List<Integer>>()
@@ -739,11 +739,11 @@ for(ArrayList<Integer> list: permutations)
 	/////////////////////////////////////////////////////////////////
 	// LEGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<CupLeg> legs = new ArrayList<CupLeg>();
+	private final List<CupLeg> legs = new ArrayList<CupLeg>();
 	private int currentIndex;
 	private CupLeg currentLeg;
 	
-	public ArrayList<CupLeg> getLegs()
+	public List<CupLeg> getLegs()
 	{	return legs;	
 	}
 	

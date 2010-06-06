@@ -24,12 +24,11 @@ package org.totalboumboum.gui.common.structure.subpanel.container;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
-
 
 public class TableSubPanel extends SubPanel<TableContentPanel>
 {	private static final long serialVersionUID = 1L;
@@ -113,15 +112,15 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	{	getDataPanel().addLine(index,cols);
 	}
 	
-	public void setLineKeys(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	public void setLineKeys(int line, List<String> keys, List<Boolean> imageFlags)
 	{	getDataPanel().setLineKeys(line,keys,imageFlags);
 	}
 	
-	public void setLineIcons(int line, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	public void setLineIcons(int line, List<BufferedImage> icons, List<String> tooltips)
 	{	getDataPanel().setLineIcons(line,icons,tooltips);
 	}
 	
-	public void setLineTexts(int line, ArrayList<String> texts, ArrayList<String> tooltips)
+	public void setLineTexts(int line, List<String> texts, List<String> tooltips)
 	{	getDataPanel().setLineTexts(line,texts,tooltips);
 	}
 
@@ -133,24 +132,24 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	{	getDataPanel().setLineForeground(line,fg);
 	}
 
-	public void setLineKeysSimple(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	public void setLineKeysSimple(int line, List<String> keys, List<Boolean> imageFlags)
 	{	getDataPanel().setLineKeysSimple(line,keys,imageFlags);
 	}
-	public void setLineKeysMultiple(int line, ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags)
+	public void setLineKeysMultiple(int line, List<List<String>> keys, List<List<Boolean>> imageFlags)
 	{	getDataPanel().setLineKeysMultiple(line,keys,imageFlags);
 	}
 	
-	public void setLineIconsSimple(int line, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	public void setLineIconsSimple(int line, List<BufferedImage> icons, List<String> tooltips)
 	{	getDataPanel().setLineIconsSimple(line,icons,tooltips);
 	}
-	public void setLineIconsMultiple(int line, ArrayList<ArrayList<BufferedImage>> icons, ArrayList<ArrayList<String>> tooltips)
+	public void setLineIconsMultiple(int line, List<List<BufferedImage>> icons, List<List<String>> tooltips)
 	{	getDataPanel().setLineIconsMultiple(line,icons,tooltips);
 	}
 	
-	public void setLineTextsSimple(int line, ArrayList<String> texts, ArrayList<String> tooltips)
+	public void setLineTextsSimple(int line, List<String> texts, List<String> tooltips)
 	{	getDataPanel().setLineTextsSimple(line,texts,tooltips);
 	}
-	public void setLineTextsMultiple(int line, ArrayList<ArrayList<String>> texts, ArrayList<ArrayList<String>> tooltips)
+	public void setLineTextsMultiple(int line, List<List<String>> texts, List<List<String>> tooltips)
 	{	getDataPanel().setLineTextsMultiple(line,texts,tooltips);
 	}
 
@@ -235,10 +234,10 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	{	getDataPanel().unsetColSubWidth(colSub,mode);
 	}
 	
-	public ArrayList<MyLabel> getColumn(int col)
+	public List<MyLabel> getColumn(int col)
 	{	return getDataPanel().getColumn(col);
 	}
-	public ArrayList<MyLabel> getColSub(int colGroup, int colSub)
+	public List<MyLabel> getColSub(int colGroup, int colSub)
 	{	return getDataPanel().getColSub(colGroup,colSub);
 	}
 	
@@ -261,22 +260,22 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	public void addColGroup(int groupIndex)
 	{	getDataPanel().addColGroup(groupIndex);
 	}
-	public void setColumnKeys(int col, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	public void setColumnKeys(int col, List<String> keys, List<Boolean> imageFlags)
 	{	getDataPanel().setColumnKeys(col,keys,imageFlags);
 	}
-	public void setColumnKeys(int colGroup, int colSub, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	public void setColumnKeys(int colGroup, int colSub, List<String> keys, List<Boolean> imageFlags)
 	{	getDataPanel().setColumnKeys(colGroup,colSub,keys,imageFlags);
 	}
-	public void setColumnIcons(int col, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	public void setColumnIcons(int col, List<BufferedImage> icons, List<String> tooltips)
 	{	getDataPanel().setColumnIcons(col,icons,tooltips);
 	}
-	public void setColumnIcons(int colGroup, int colSub, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	public void setColumnIcons(int colGroup, int colSub, List<BufferedImage> icons, List<String> tooltips)
 	{	getDataPanel().setColumnIcons(colGroup,colSub,icons,tooltips);
 	}
-	public void setColumnTexts(int col, ArrayList<String> texts, ArrayList<String> tooltips)
+	public void setColumnTexts(int col, List<String> texts, List<String> tooltips)
 	{	getDataPanel().setColumnTexts(col,texts,tooltips);
 	}
-	public void setColumnTexts(int colGroup, int colSub, ArrayList<String> texts, ArrayList<String> tooltips)
+	public void setColumnTexts(int colGroup, int colSub, List<String> texts, List<String> tooltips)
 	{	getDataPanel().setColumnTexts(colGroup,colSub,texts,tooltips);
 	}
 	public void setColumnBackground(int col, Color bg)
@@ -296,13 +295,13 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	/////////////////////////////////////////////////////////////////
 	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void setContentBySubLineKeys(ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags, boolean wholeLine)
+	public void setContentBySubLineKeys(List<List<String>> keys, List<List<Boolean>> imageFlags, boolean wholeLine)
 	{	getDataPanel().setContentBySubLineKeys(keys,imageFlags,wholeLine);
 	}
-	public void setContentBySubLineIcon(ArrayList<ArrayList<BufferedImage>> icons, ArrayList<ArrayList<String>> tooltips, boolean wholeLine)
+	public void setContentBySubLineIcon(List<List<BufferedImage>> icons, List<List<String>> tooltips, boolean wholeLine)
 	{	getDataPanel().setContentBySubLineIcon(icons,tooltips,wholeLine);
 	}
-	public void setContentBySubLineText(ArrayList<ArrayList<String>> texts, ArrayList<ArrayList<String>> tooltips, boolean wholeLine)
+	public void setContentBySubLineText(List<List<String>> texts, List<List<String>> tooltips, boolean wholeLine)
 	{	getDataPanel().setContentBySubLineText(texts,tooltips,wholeLine);
 	}
 }

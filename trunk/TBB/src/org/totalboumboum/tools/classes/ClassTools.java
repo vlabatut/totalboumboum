@@ -28,6 +28,7 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
@@ -53,7 +54,7 @@ public class ClassTools
 	 * @return	liste des classes
 	 */
 	public static Class<?>[] getClassesInPackageJar(String jarName,String packageName)
-	{	ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+	{	List<Class<?>> classes = new ArrayList<Class<?>>();
 		packageName = packageName.replaceAll("\\.", "/");
 		try
 		{	JarInputStream jarFile = new JarInputStream(new FileInputStream(jarName));
@@ -82,7 +83,7 @@ public class ClassTools
 	 * @return	liste des classes
 	 */
 	public static Class<?>[] getClassesInPackage(String packageName) throws ClassNotFoundException 
-	{	ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+	{	List<Class<?>> classes = new ArrayList<Class<?>>();
 		// Get a File object for the package
 		File directory = null;
 		try
@@ -117,7 +118,7 @@ public class ClassTools
 	}
 	
 	public static Class<?>[] getClassesInPackageImplementing(String packageName, Class<?> inter) throws ClassNotFoundException
-	{	ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+	{	List<Class<?>> classes = new ArrayList<Class<?>>();
 		Class<?>[] temp = getClassesInPackage(packageName);
 		for(int i=0;i<temp.length;i++)
 			if(inter.isAssignableFrom(temp[i]) 

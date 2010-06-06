@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -64,7 +65,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.GAME_SAVE_BUTTON);
+		List<String> texts = GuiKeys.getKeysLike(GuiKeys.GAME_SAVE_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
@@ -130,7 +131,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 	    }
 		if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_NEW))
 		{	String key = GuiKeys.GAME_SAVE_NEW_TITLE;
-			ArrayList<String> text = new ArrayList<String>();
+		List<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_NEW_QUESTION));
 			String defaultText = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_NEW_NAME);
 			inputModalNew = new InputModalDialogPanel(getMenuParent(),key,text,defaultText);
@@ -140,7 +141,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 	    }
 		if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_DELETE))
 		{	String key = GuiKeys.GAME_SAVE_DELETE_TITLE;
-			ArrayList<String> text = new ArrayList<String>();
+		List<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_DELETE_QUESTION));
 			questionModalDelete = new QuestionModalDialogPanel(getMenuParent(),key,text);
 			questionModalDelete.addListener(this);
@@ -148,7 +149,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CONFIRM))
 		{	String key = GuiKeys.GAME_SAVE_CONFIRM_TITLE;
-			ArrayList<String> text = new ArrayList<String>();
+		List<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_CONFIRM_QUESTION));
 			questionModalConfirm = new QuestionModalDialogPanel(getMenuParent(),key,text);
 			questionModalConfirm.addListener(this);

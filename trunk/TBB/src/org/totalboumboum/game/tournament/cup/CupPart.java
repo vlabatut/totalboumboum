@@ -56,7 +56,7 @@ public class CupPart implements Serializable
 	{	// match
 		currentMatch = match;
 		// profiles
-		ArrayList<Profile> profiles = new ArrayList<Profile>();
+		List<Profile> profiles = new ArrayList<Profile>();
 		for(int i=0;i<players.size();i++)
 		{	Profile p = getProfileForIndex(i);
 			if(p!=null)
@@ -85,7 +85,7 @@ public class CupPart implements Serializable
 			updateRankings();
 		
 		// process the ranks needed for the coming leg (or final ranking)
-		ArrayList<Integer> neededRanks = getNeededRanks();
+		List<Integer> neededRanks = getNeededRanks();
 		
 		// identify the first tie conflicting with these needed ranks
 		problematicTie = getProblematicTie(neededRanks);
@@ -98,10 +98,10 @@ public class CupPart implements Serializable
 			setOver(true);
 	}
 
-	private ArrayList<Integer> getNeededRanks()
-	{	ArrayList<Integer> result = new ArrayList<Integer>();
+	private List<Integer> getNeededRanks()
+	{	List<Integer> result = new ArrayList<Integer>();
 		int nextLegNumber = leg.getNumber()+1;
-		ArrayList<CupLeg> legs = getTournament().getLegs();
+		List<CupLeg> legs = getTournament().getLegs();
 		
 		// this was the last leg
 		if(nextLegNumber>=legs.size())
@@ -148,7 +148,7 @@ public class CupPart implements Serializable
 		}
 	}
 	
-	private int getProblematicTie(ArrayList<Integer> neededRanks)
+	private int getProblematicTie(List<Integer> neededRanks)
 	{	// keep only (meaninful) ties
 		int result = -1;
 		int i = 1;
@@ -281,9 +281,9 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<CupPlayer> players = new ArrayList<CupPlayer>();
+	private final List<CupPlayer> players = new ArrayList<CupPlayer>();
 	
-	public ArrayList<CupPlayer> getPlayers()
+	public List<CupPlayer> getPlayers()
 	{	return players;
 	}
 	
@@ -347,7 +347,7 @@ public class CupPart implements Serializable
 				{	int legCount = firstLegPlayersdistribution.get(i);
 					count = count + legCount;				
 				}
-				ArrayList<Profile> profiles = getTournament().getProfiles();
+				List<Profile> profiles = getTournament().getProfiles();
 				result = profiles.get(count+index);
 			}
 		}

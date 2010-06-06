@@ -26,6 +26,7 @@ import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -120,7 +121,7 @@ public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends Co
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<ModalDialogPanelListener> listeners = new ArrayList<ModalDialogPanelListener>();
+	private List<ModalDialogPanelListener> listeners = new ArrayList<ModalDialogPanelListener>();
 	
 	public void addListener(ModalDialogPanelListener listener)
 	{	if(!listeners.contains(listener))

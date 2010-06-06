@@ -21,7 +21,7 @@ package org.totalboumboum.engine.content.manager.modulation;
  * 
  */
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.ability.ActionAbility;
@@ -83,7 +83,7 @@ public class EmptyModulationManager extends ModulationManager
 	}
 	
 	@Override
-	public ThirdModulation getThirdModulation(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return thirdModulation;
 	}
 
@@ -109,7 +109,7 @@ public class EmptyModulationManager extends ModulationManager
 	}
 	
 	@Override
-	public boolean isThirdPreventing(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	public boolean isThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	boolean result = false;
 		return result;
 	}

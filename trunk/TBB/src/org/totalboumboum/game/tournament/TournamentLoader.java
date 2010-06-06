@@ -23,7 +23,6 @@ package org.totalboumboum.game.tournament;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -92,7 +91,7 @@ public class TournamentLoader
 		
 		// notes
 		element = root.getChild(XmlNames.NOTES);
-		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
+		List<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		
 		// author

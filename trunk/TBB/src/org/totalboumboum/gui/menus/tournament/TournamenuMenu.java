@@ -24,7 +24,7 @@ package org.totalboumboum.gui.menus.tournament;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -45,7 +45,6 @@ import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
-
 
 public class TournamenuMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
@@ -155,7 +154,7 @@ public class TournamenuMenu extends InnerMenuPanel
 	}
 
 	private void setTournamentPlayers()
-	{	ArrayList<Profile> selectedProfiles = playersData.getSelectedProfiles();
+	{	List<Profile> selectedProfiles = playersData.getSelectedProfiles();
 		AbstractTournament tournament = tournamentConfiguration.getTournament();
 		tournament.setProfiles(selectedProfiles);
 	}

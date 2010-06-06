@@ -21,8 +21,8 @@ package org.totalboumboum.engine.content.manager.trajectory;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -435,8 +435,8 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 				//
 				currentPosX = mz.getCurrentX();
 				currentPosY = mz.getCurrentY();
-				ArrayList<Sprite> newIntersectedSprites = mz.getIntersectedSprites();
-				ArrayList<Sprite> newCollidedSprites = mz.getCollidedSprites();
+				List<Sprite> newIntersectedSprites = mz.getIntersectedSprites();
+				List<Sprite> newCollidedSprites = mz.getCollidedSprites();
 				//
 				updateCollidedSprites(newCollidedSprites);
 /*				
@@ -658,7 +658,7 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void updateCollidedSprites(ArrayList<Sprite> newCollidedSprites)
+	private void updateCollidedSprites(List<Sprite> newCollidedSprites)
 	{	//NOTE faut-il distinguer les changements de direction ?
 		Iterator<Sprite> i;
 		
@@ -729,7 +729,7 @@ if(sprite instanceof Hero)
 	/////////////////////////////////////////////////////////////////
 	// INTERSECTIONS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void updateIntersectedSprites(ArrayList<Sprite> newIntersectedSprites)
+	private void updateIntersectedSprites(List<Sprite> newIntersectedSprites)
 	{	Iterator<Sprite> i;
 /*	
 if(newCollidedSprites.size()>0)

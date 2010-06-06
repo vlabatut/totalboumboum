@@ -80,8 +80,8 @@ public class AbilityLoader
     }
     
     @SuppressWarnings("unchecked")
-	public static ArrayList<AbstractAbility> loadAbilitiesElement(Element root) throws ClassNotFoundException
-    {	ArrayList<AbstractAbility> result = new ArrayList<AbstractAbility>();
+	public static List<AbstractAbility> loadAbilitiesElement(Element root) throws ClassNotFoundException
+    {	List<AbstractAbility> result = new ArrayList<AbstractAbility>();
     	List<Element> abilitiesElts = root.getChildren(XmlNames.ABILITY);
 		Iterator<Element> i = abilitiesElts.iterator();
 		while(i.hasNext())

@@ -284,7 +284,7 @@ public abstract class Sprite
 	/////////////////////////////////////////////////////////////////
 	// BOUND SPRITES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected ArrayList<Sprite> boundSprites;
+	protected List<Sprite> boundSprites;
 	
 	public boolean hasBoundSprite()
 	{	return boundSprites.size()>0;	
@@ -737,7 +737,7 @@ public abstract class Sprite
 	public ThirdModulation getThirdModulation(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.getThirdModulation(action,actorCircumstances,targetCircumstances);
 	}
-	public ThirdModulation getThirdModulation(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
 	}
 	
@@ -756,7 +756,7 @@ public abstract class Sprite
 	public boolean isThirdPreventing(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.isThirdPreventing(action,actorCircumstances,targetCircumstances);
 	}
-	public boolean isThirdPreventing(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	public boolean isThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.isThirdPreventing(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
 	}
 	

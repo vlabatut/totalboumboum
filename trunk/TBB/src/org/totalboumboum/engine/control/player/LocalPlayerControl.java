@@ -25,41 +25,62 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 
-import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.configuration.controls.ControlSettings;
+import org.totalboumboum.engine.control.ControlCode;
+import org.totalboumboum.engine.player.ControlledPlayer;
+import org.totalboumboum.game.round.RoundVariables;
 
-public abstract class SystemControl implements KeyListener
+public class LocalPlayerControl extends PlayerControl<ControlledPlayer> implements KeyListener 
 {	
-	public SystemControl(VisibleLoop loop)
-	{	this.loop = loop;
-		keysPressed = new HashMap<Integer,Boolean>();
+	public LocalPlayerControl(ControlledPlayer player)
+	{	super(player);
 	}
-
+	
+	/////////////////////////////////////////////////////////////////
+	// SETTINGS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public ControlSettings getControlSettings()
+	{	return player.getControlSettings();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
-	protected HashMap<Integer,Boolean> keysPressed;
-
+	private final HashMap<Integer,Boolean> pressedKeys = new HashMap<Integer,Boolean>();
+	
 	@Override
 	public void keyPressed(KeyEvent e)
-	{	// to override
+	{	int keyCode = e.getKeyCode();
+//System.out.println(player.getName()+":"+e.getKeyChar());	
+		if(!pressedKeys.containsKey(keyCode) || !pressedKeys.get(keyCode))
+		{	pressedKeys.put(keyCode, true);
+			if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOnKey(keyCode))
+		    {	ControlCode controlCode = new ControlCode(keyCode,true);
+				getSprite().putControlCode(controlCode);				
+		    }
+	    }
 	}
 
+/*
+ * TODO non-system keys should not be listened to when in pause 
+ */
+	
 	@Override
 	public void keyReleased(KeyEvent e)
-	{	// to override	
+	{	int keyCode = e.getKeyCode();
+		pressedKeys.put(keyCode,false);	
+		if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOffKey(keyCode))
+	    {	ControlCode controlCode = new ControlCode(keyCode,false);
+			getSprite().putControlCode(controlCode);				
+	    }
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0)
-	{	// (a priori) useless here
+	{	// should be useless here
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected VisibleLoop loop;
-
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -68,7 +89,7 @@ public abstract class SystemControl implements KeyListener
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
-			loop = null;
+			super.finish();
 		}
 	}
 }

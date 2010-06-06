@@ -73,7 +73,7 @@ public class SingleTournament extends AbstractTournament
 		Match match = new Match(this);
 		match.setAuthor("Replay");
 		{	// notes
-			ArrayList<String> notes = new ArrayList<String>();
+			List<String> notes = new ArrayList<String>();
 			notes.add("auto-generated notes");
 			match.setNotes(notes);
 		}
@@ -92,7 +92,7 @@ public class SingleTournament extends AbstractTournament
 	    round.setReplayed(true);
 	    round.setReplay(replay);
 		{	// notes
-			ArrayList<String> notes = new ArrayList<String>();
+			List<String> notes = new ArrayList<String>();
 			notes.add("auto-generated notes");
 			round.setNotes(notes);
 		}

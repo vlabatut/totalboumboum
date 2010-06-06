@@ -24,7 +24,6 @@ package org.totalboumboum.gui.common.content.subpanel.results;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.configuration.profile.Portraits;
@@ -147,7 +146,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 			// init
 			StatisticTournament stats = leagueTournament.getStats();
 			//ArrayList<StatisticBase> confrontationStats = stats.getConfrontationStats();
-			ArrayList<Profile> players = leagueTournament.getProfiles();
+			List<Profile> players = leagueTournament.getProfiles();
 			Ranks orderedPlayers = leagueTournament.getOrderedPlayers();
 			List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();
 			float[] total = stats.getTotal();

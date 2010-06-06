@@ -23,6 +23,7 @@ package org.totalboumboum.engine.content.feature;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.jdom.Attribute;
@@ -256,8 +257,8 @@ public enum Direction implements Serializable
 	 * returns the list of all primary directions
 	 * @return
 	 */
-	public static ArrayList<Direction> getPrimaryValues()
-	{	ArrayList<Direction> result = new ArrayList<Direction>();
+	public static List<Direction> getPrimaryValues()
+	{	List<Direction> result = new ArrayList<Direction>();
 		result.add(DOWN);
 		result.add(LEFT);
 		result.add(RIGHT);
@@ -533,8 +534,8 @@ public enum Direction implements Serializable
 	 * the XML value SOME represents any direction except NONE. 
 	 * the XML value ANY represents any direction including NONE. 
 	 */
-	public static ArrayList<Direction> loadDirectionsAttribute(Element root, String attName)
-	{	ArrayList<Direction> result = new ArrayList<Direction>();
+	public static List<Direction> loadDirectionsAttribute(Element root, String attName)
+	{	List<Direction> result = new ArrayList<Direction>();
 		Attribute attribute = root.getAttribute(attName);
 		String directionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 		String[] directionsStr = directionStr.split(" ");

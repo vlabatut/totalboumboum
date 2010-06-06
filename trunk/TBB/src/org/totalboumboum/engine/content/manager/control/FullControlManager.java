@@ -24,9 +24,9 @@ package org.totalboumboum.engine.content.manager.control;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.engine.EngineConfiguration;
@@ -83,7 +83,7 @@ public class FullControlManager extends ControlManager
 		LinkedList<ControlEvent> eventsList = new LinkedList<ControlEvent>();
 		for(int j=currentControls.size()-1;j>=0;j--)
 		{	int keyCode = currentControls.get(j);
-			ArrayList<String> eventNames = controlSettings.getEventsFromOnKey(keyCode);
+			List<String> eventNames = controlSettings.getEventsFromOnKey(keyCode);
 			Iterator<String> it = eventNames.iterator();
 			while(it.hasNext())
 			{	String eventName = it.next();
@@ -100,7 +100,7 @@ public class FullControlManager extends ControlManager
 			int keyCode = cc.getKeyCode();
 			// if a key is pressed : new control in currentControls & new event in eventsList
 			if(cc.getMode())
-			{	ArrayList<String> eventNames = controlSettings.getEventsFromOnKey(keyCode);
+			{	List<String> eventNames = controlSettings.getEventsFromOnKey(keyCode);
 				if(!currentControls.contains(keyCode))
 					currentControls.offer(keyCode);
 				Iterator<String> it = eventNames.iterator();
@@ -112,7 +112,7 @@ public class FullControlManager extends ControlManager
 			}
 			// if a key is released : control removed from currentControls & new event in eventsList
 			else
-			{	ArrayList<String> eventNames = controlSettings.getEventsFromOffKey(keyCode);
+			{	List<String> eventNames = controlSettings.getEventsFromOffKey(keyCode);
 				if(currentControls.contains(keyCode))
 					currentControls.remove(new Integer(keyCode));
 				Iterator<String> it = eventNames.iterator();

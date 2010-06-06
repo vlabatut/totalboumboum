@@ -1,6 +1,7 @@
 package org.totalboumboum.ai;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AiPreview
 {
@@ -30,9 +31,9 @@ public class AiPreview
 	/////////////////////////////////////////////////////////////////
 	// AUTHOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> authors = new ArrayList<String>();
+	private final List<String> authors = new ArrayList<String>();
 	
-	public ArrayList<String> getAuthors()
+	public List<String> getAuthors()
 	{	return authors;
 	}
 	
@@ -43,12 +44,12 @@ public class AiPreview
 	/////////////////////////////////////////////////////////////////
 	// NOTES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> notes = new ArrayList<String>();
+	private final List<String> notes = new ArrayList<String>();
 
-	public void setNotes(ArrayList<String> notes)
+	public void setNotes(List<String> notes)
 	{	this.notes.addAll(notes);
 	}
-	public ArrayList<String> getNotes()
+	public List<String> getNotes()
 	{	return notes;
 	}
 }

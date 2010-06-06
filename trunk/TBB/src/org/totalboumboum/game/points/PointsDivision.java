@@ -21,11 +21,10 @@ package org.totalboumboum.game.points;
  * 
  */
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
-
 
 /**
  * This PointsProcessor divides the results coming from two other PointProcessor objects.
@@ -58,7 +57,7 @@ public class PointsDivision extends PointsProcessor implements PPPrimaryOperator
 	public float[] process(StatisticHolder holder)
 	{	// init
 		StatisticBase stats = holder.getStats();
-		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		List<Integer> playersIds = stats.getPlayersIds();
 		float[] result = new float[playersIds.size()];
 		float[] leftTemp = leftSource.process(holder);
 		float[] rightTemp = rightSource.process(holder);

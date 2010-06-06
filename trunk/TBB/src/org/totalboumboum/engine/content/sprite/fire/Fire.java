@@ -21,8 +21,8 @@ package org.totalboumboum.engine.content.sprite.fire;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Contact;
@@ -35,7 +35,6 @@ import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
-
 
 public class Fire extends Sprite
 {	
@@ -67,7 +66,7 @@ public class Fire extends Sprite
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	public void consumeTile(Tile tile)
-	{	ArrayList<Sprite> sprites = tile.getSprites();
+	{	List<Sprite> sprites = tile.getSprites();
 		Iterator<Sprite> i = sprites.iterator();
 		while(i.hasNext())
 		{	Sprite ts = i.next();

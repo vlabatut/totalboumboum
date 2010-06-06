@@ -28,6 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 
 import org.totalboumboum.configuration.profile.Profile;
 
@@ -105,7 +106,7 @@ public abstract class StatisticBase implements Serializable
 	// CONFRONTATIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public abstract int getConfrontationCount();
-	public abstract ArrayList<StatisticBase> getConfrontationStats();
+	public abstract List<StatisticBase> getConfrontationStats();
 
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
@@ -147,9 +148,9 @@ public abstract class StatisticBase implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<Integer> playersIds = new ArrayList<Integer>();
+	private final List<Integer> playersIds = new ArrayList<Integer>();
 
-	public ArrayList<Integer> getPlayersIds()
+	public List<Integer> getPlayersIds()
 	{	return playersIds;
 	}
 

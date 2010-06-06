@@ -23,6 +23,7 @@ package org.totalboumboum.engine.content.manager.modulation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -115,7 +116,7 @@ public class FullModulationManager extends ModulationManager
 	}
 	
 	@Override
-	public ThirdModulation getThirdModulation(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	ThirdModulation result = null;
 		if(currentGesture!=null)
 			result = currentGesture.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
@@ -175,7 +176,7 @@ public class FullModulationManager extends ModulationManager
 		Sprite target = action.getTarget();
 		if(result.isActive())
 		{	// list of the involved sprites
-			ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+			List<Sprite> sprites = new ArrayList<Sprite>();
 			Tile tileA = action.getTile();
 			if(tileA!=null)
 			{	for(Sprite s: tileA.getSprites())
@@ -257,7 +258,7 @@ public class FullModulationManager extends ModulationManager
 	}
 	
 	@Override
-	public boolean isThirdPreventing(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	public boolean isThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	boolean result = false;
 		ThirdModulation thirdModulation = sprite.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
 		result = thirdModulation.getFrame() && thirdModulation.getStrength()<=0;
@@ -302,7 +303,7 @@ public class FullModulationManager extends ModulationManager
 	{	StateAbility result = ability;
 		if(result.isActive())
 		{	// list of the involved sprites
-			ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+			List<Sprite> sprites = new ArrayList<Sprite>();
 			Tile tile = sprite.getTile();
 			if(tile!=null)
 			{	for(Sprite s: tile.getSprites())
