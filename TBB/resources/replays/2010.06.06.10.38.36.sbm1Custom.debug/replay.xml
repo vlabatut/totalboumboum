@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<replay xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\replay.xsd">
+	<level name="debug" pack="sbm1Custom" />
+	<date save="2010-06-06T10:38:36" />
+	<players>
+		<player name="Joueur humain" />
+		<player name="Suiveur" />
+	</players>
+</replay>
+
