@@ -1,6 +1,7 @@
 package org.totalboumboum.ai.v200708.ais.camasdemirbas;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Un chemin résolu par quelque algorithme de conclusion de chemin. 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 @SuppressWarnings("unchecked")
 public class Path {
 	/** La liste d'étapes développant ce chemin */
-	private ArrayList steps = new ArrayList();
+	private List steps = new ArrayList();
 	
 	/**
 	 * Créer un chemin vide

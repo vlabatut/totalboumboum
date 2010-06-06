@@ -1,6 +1,7 @@
 package org.totalboumboum.ai.v200708.ais.basmansandalli;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
@@ -975,7 +976,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		boolean result=true;
 		
 		//récupération d'une liste des bombes existantes dans la zone du jeu
-		ArrayList<int[]> bombList = new ArrayList<int[]>();
+		List<int[]> bombList = new ArrayList<int[]>();
 		for(int i=0;i<getZoneMatrixDimX();i++)
 		{
 			for(int j=0;j<getZoneMatrixDimY();j++)

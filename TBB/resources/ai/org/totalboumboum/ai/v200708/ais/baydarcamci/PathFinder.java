@@ -1,6 +1,6 @@
 package org.totalboumboum.ai.v200708.ais.baydarcamci;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A PathFinder can find a path between two indexed nodes in a Map.
@@ -18,7 +18,7 @@ public interface PathFinder {
 	 * @param end The end node state
 	 * @param path Contains the path through the nodes
 	 */
-	public void findPath(int[] start, int [] end, ArrayList<int[]> path);
+	public void findPath(int[] start, int [] end, List<int[]> path);
 	
 	/**
 	 * Perform the next step in the search.

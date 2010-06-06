@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v200708.ais.camasdemirbas;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import org.totalboumboum.ai.v200708.ais.camasdemirbas.ManhattanHeuristic;
 
@@ -15,7 +16,7 @@ import org.totalboumboum.ai.v200708.ais.camasdemirbas.ManhattanHeuristic;
 
 @SuppressWarnings("unchecked")
 public class AStarPathFinder implements PathFinder {
-	private ArrayList closed = new ArrayList();
+	private List closed = new ArrayList();
 	private SortedList open = new SortedList();
 	
 	/** La carte est cherchée */
@@ -266,7 +267,7 @@ public class AStarPathFinder implements PathFinder {
 	 */
 	private class SortedList {
 		/** La liste d'éléments */
-		private ArrayList list = new ArrayList();
+		private List list = new ArrayList();
 		
 		/**
 		 * Rapporter le premier élément de la liste

@@ -1,6 +1,7 @@
 package org.totalboumboum.ai.v200708.ais.keceryaman;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
@@ -33,7 +34,7 @@ public class KecerYaman extends ArtificialIntelligence {
 	 * algorithm pour trouver le mieux chemin
 	 */
 	private AStar bestPath;
-	private ArrayList<Node> path = new ArrayList<Node>();
+	private List<Node> path = new ArrayList<Node>();
 	private Node currentNode;
 	private Node nextNode;
 	

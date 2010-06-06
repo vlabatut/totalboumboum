@@ -2,26 +2,27 @@ package org.totalboumboum.ai.v200708.ais.keceryaman;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class AStar {
 	/**
 	 * Class fields
 	 */
 	public static BinaryHeapList openList = new BinaryHeapList(); // open list (nodes to be visited)
-	public static ArrayList<Node> closedList = new ArrayList<Node>(); // closed list (visited nodes)
+	public static List<Node> closedList = new ArrayList<Node>(); // closed list (visited nodes)
 	private Node current; // current node
 	private Node neighbor; // a neighbor node (changes during a loop)
 	private Node targetNode;
 //	private Node startNode;
 	public static int[] target; // target node
 	private Iterator<Node> nodes;
-	private ArrayList<Node> path = new ArrayList<Node>();
+	private List<Node> path = new ArrayList<Node>();
 	public static boolean[] closedListCheck = new boolean[255];
 	public static boolean[] openListCheck = new boolean[255]; 
 	public static boolean[] openListValues = new boolean[255];
 	private boolean targetAdded = false;
 	
-	public  ArrayList<Node> bestPath (Node nodenode){
+	public  List<Node> bestPath (Node nodenode){
 		// initialization
 		openList.clear();
 		clearOpenListCheck();

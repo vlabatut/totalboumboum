@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v200708.ais.sahinyildirim;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Vector;
 import java.util.Iterator;
@@ -21,7 +22,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	private int tryNum = 1;
 	
 	// A****************************
-	private ArrayList<Integer> path = new ArrayList<Integer>();
+	private List<Integer> path = new ArrayList<Integer>();
 	private Vector<ParentChild> perler = new Vector<ParentChild>();
    
 	int pathtoFait = 0;
@@ -65,7 +66,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		Vector<Integer> possibleMoves = new Vector<Integer>();
 		
 		// listes des bombes qui sont proches
-		ArrayList<Integer> bombPositions = getClosestBlockPosition(x, y,
+		List<Integer> bombPositions = getClosestBlockPosition(x, y,
 				ArtificialIntelligence.AI_BLOCK_BOMB);
 				
 		// si il y a des bombs alors defence()
@@ -206,7 +207,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	{
 		boolean result = false;
 		
-		ArrayList<Integer> playerPos = getClosestPlayerPosition(x, y);
+		List<Integer> playerPos = getClosestPlayerPosition(x, y);
 		
 		for(int j=0;j<playerPos.size();j+=2)
 		{
@@ -664,7 +665,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * @param bombs
 	 * @return
 	 */
-	private Vector<Integer> defence(int x, int y, ArrayList<Integer> bombs) {
+	private Vector<Integer> defence(int x, int y, List<Integer> bombs) {
 		int xB, yB;
 		int possibleLeft = 0;
 		int possibleRight = 0;
@@ -1347,9 +1348,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * @param blockType
 	 * @return un arraylist contient la position des blocks
 	 */
-	private ArrayList<Integer> getClosestBlockPosition(int x, int y,
+	private List<Integer> getClosestBlockPosition(int x, int y,
 			int blockType) {
-		ArrayList<Integer> bombalar = new ArrayList<Integer>();
+		List<Integer> bombalar = new ArrayList<Integer>();
 		
 		int[][] matrix = getZoneMatrix();
 		for (int i = 0; i < getZoneMatrixDimX(); i++)
@@ -1399,8 +1400,8 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 * @param y	position de référencepol
 	 * @return	position du joueur le plus proche
 	 */
-	private ArrayList<Integer> getClosestPlayerPosition(int x, int y) {
-		ArrayList<Integer> players = new ArrayList<Integer>();
+	private List<Integer> getClosestPlayerPosition(int x, int y) {
+		List<Integer> players = new ArrayList<Integer>();
 		int minDistance = Integer.MAX_VALUE;
 		for (int i = 0; i < getPlayerCount(); i++) {
 			if (isPlayerAlive(i)) {
