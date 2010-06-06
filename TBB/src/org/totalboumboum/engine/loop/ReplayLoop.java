@@ -89,6 +89,7 @@ public class ReplayLoop extends VisibleLoop
 
 		// load level & instance
 		hollowLevel.initLevel(this);
+		zoomCoefficient = RoundVariables.zoomFactor / RoundVariables.replay.getReadZoomCoef();
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
 		instance.loadFiresetMap();
