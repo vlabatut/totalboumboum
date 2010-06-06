@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
 import org.totalboumboum.ai.v200809.adapter.AiActionName;
@@ -229,7 +230,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 			int heroLine, heroCol, myLine=currentTile.getLine(), myCol=currentTile.getCol();
 			AiHero myOwnHero=zone.getOwnHero();
 			Collection<AiHero> heroes= zone.getHeroes();
-			ArrayList<AiHero> newHeroes=new ArrayList<AiHero>();
+			List<AiHero> newHeroes=new ArrayList<AiHero>();
 			Iterator<AiHero> itHeroes=heroes.iterator();
 			AiHero hero;
 			while(itHeroes.hasNext()){
@@ -381,7 +382,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE

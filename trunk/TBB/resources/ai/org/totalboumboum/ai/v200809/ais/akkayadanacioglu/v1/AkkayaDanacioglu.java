@@ -3,6 +3,7 @@ package org.totalboumboum.ai.v200809.ais.akkayadanacioglu.v1;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
 import org.totalboumboum.ai.v200809.adapter.AiActionName;
@@ -81,7 +82,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 
 	private void pickNextTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
-		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+		List<AiTile> tiles = getClearNeighbors(currentTile);
 		boolean canGoBack = false;
 		if (tiles.contains(previousTile)) {
 			tiles.remove(previousTile);
@@ -103,7 +104,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 				dir = getNewDir(dir);
 				nextTile = getPercepts().getNeighborTile(currentTile, dir);
 				if (!isClear(nextTile) || isInDanger(nextTile)) {
-					ArrayList<AiTile> nTiles = getClearNeighbors(currentTile);
+					List<AiTile> nTiles = getClearNeighbors(currentTile);
 					if (nTiles.size() == 0) {
 						nextTile = currentTile;
 					} else {
@@ -128,12 +129,12 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 		}
 	}
 
-	private ArrayList<AiTile> getClearNeighbors(AiTile tile)
+	private List<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbors.iterator();
 		while (it.hasNext()) {
 			checkInterruption(); // APPEL OBLIGATOIRE
@@ -235,7 +236,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		if (!isClear(nextTile)) {
-			ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+			List<AiTile> tiles = getClearNeighbors(currentTile);
 
 			if (tiles.contains(nextTile))
 				tiles.remove(nextTile);

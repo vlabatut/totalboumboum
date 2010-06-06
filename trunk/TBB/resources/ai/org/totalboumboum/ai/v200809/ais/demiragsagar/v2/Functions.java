@@ -1,15 +1,14 @@
 package org.totalboumboum.ai.v200809.ais.demiragsagar.v2;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiBlock;
 import org.totalboumboum.ai.v200809.adapter.AiBomb;
 import org.totalboumboum.ai.v200809.adapter.AiFire;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
-
 
 public class Functions {
 	// regarde si il existe un mur de type SOFT ou HARD
@@ -51,7 +50,7 @@ public class Functions {
 	/*
 	 * On donne une case cible(AiTile target) et cette fonction trouve dans ue liste des cases la case plus proche a cette case cible 
 	 */
-	public static AiTile TheCloserTile(AiTile target,ArrayList<AiTile> tiles)
+	public static AiTile TheCloserTile(AiTile target,List<AiTile> tiles)
 	{
 		AiTile minTile = null;
 		int valeur=-1;

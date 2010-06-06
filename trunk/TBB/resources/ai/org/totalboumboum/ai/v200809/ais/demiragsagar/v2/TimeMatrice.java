@@ -1,14 +1,13 @@
 package org.totalboumboum.ai.v200809.ais.demiragsagar.v2;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 
-
 public class TimeMatrice {
-	private ArrayList<AiTile> caseBombes;
+	private List<AiTile> caseBombes;
 	private long timeMatrice[][];
 	private AiZone zone;
 	private int defaultPortee;
@@ -116,7 +115,7 @@ public class TimeMatrice {
 	public void printTimeMatrice() {
 		Functions.printMatrice(this.timeMatrice);
 	}
-	public void updateTimeMatrice(ArrayList<AiTile> nouvelleBombes) {
+	public void updateTimeMatrice(List<AiTile> nouvelleBombes) {
 		if (this.debug)
 			this.printTimeMatrice();
 		// update matrice

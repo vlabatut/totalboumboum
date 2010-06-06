@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
 import org.totalboumboum.ai.v200809.adapter.AiActionName;
@@ -182,13 +183,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	 * @throws StopRequestException 
 	 */
 	
-	private ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
+	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -217,7 +218,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		// si un obstacle est apparu sur la case destination, on change de destination
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
-			ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+			List<AiTile> tiles = getClearNeighbors(currentTile);
 			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);
@@ -387,14 +388,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	
 	
 	// la methode qui renvoi la liste des positions des bombes presentes
-	private ArrayList<AiTile> getBombPos() throws StopRequestException
+	private List<AiTile> getBombPos() throws StopRequestException
 	{	
 		checkInterruption(); //APPEL OBLIGATOIRE
 		
 		// liste des cases autour de la case de référence
 		Collection<AiBomb> bombs = getPercepts().getBombs();
 		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 	
 		Iterator<AiBomb> it = bombs.iterator();
 	
@@ -415,7 +416,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 	// liste des cases voisines accessibles	
-	ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+	List<AiTile> tiles = getClearNeighbors(currentTile);
 	// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 	boolean canGoBack = false;
 	if(tiles.contains(previousTile))
@@ -460,7 +461,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	// la methode qui renvoie la direction qui n'est pas dangereuse 
 	private AiTile getDirection(AiTile refTile) throws StopRequestException{
 		checkInterruption();
-		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+		List<AiTile> tiles = getClearNeighbors(currentTile);
 		
 		double min=10000000;
 		int k=0;
@@ -489,7 +490,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		AiTile tile=null;
 		double min=10000000;
 		
-		ArrayList<AiBomb> bombs = getCloseBombs();	
+		List<AiBomb> bombs = getCloseBombs();	
 		
 		
 		Iterator<AiBomb> it = bombs.iterator();
@@ -512,14 +513,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	
 	// la methode qui renvoie la liste des bombes proche a notre hero
-	private ArrayList<AiBomb> getCloseBombs() throws StopRequestException
+	private List<AiBomb> getCloseBombs() throws StopRequestException
 	{	
 		checkInterruption(); //APPEL OBLIGATOIRE
 		
 		// liste des cases autour de la case de référence
 		Collection<AiBomb> bombs = getPercepts().getBombs();
 		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<AiBomb> result = new ArrayList<AiBomb>();
+		List<AiBomb> result = new ArrayList<AiBomb>();
 	
 		Iterator<AiBomb> it = bombs.iterator();
 	
@@ -651,7 +652,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		checkInterruption(); //APPEL OBLIGATOIRE
 		
 		
-		ArrayList<Direction> dirs = new ArrayList<Direction>();
+		List<Direction> dirs = new ArrayList<Direction>();
 		
 		
 		tile=currentTile;
@@ -758,7 +759,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	private Collection<AiTile> getClearNeighborTiles(AiTile tile) throws StopRequestException
 	{	checkInterruption();
 		Collection<AiTile> result = new ArrayList<AiTile>();
-		ArrayList<Direction> directions = Direction.getPrimaryValues();
+		List<Direction> directions = Direction.getPrimaryValues();
 		Iterator<Direction> d = directions.iterator();
 		while(d.hasNext())
 		{	checkInterruption();

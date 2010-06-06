@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v200809.ais.akkayadanacioglu.v2;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import java.util.Iterator;
 
@@ -68,7 +69,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 			if(currentTile.getBombs().size()>0){
 				
 				//on prends les directions possibles
-				ArrayList<Direction> dirs= getPossibleDirs(currentTile);
+				List<Direction> dirs= getPossibleDirs(currentTile);
 				
 				for(int i=0;i<dirs.size();i++){
 					
@@ -88,7 +89,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 			if(!isInDanger(currentTile)&& dangerousBombs().size()<1){
 				
 				//les directions possibles
-				ArrayList<Direction> dirs= getPossibleDirs(currentTile);
+				List<Direction> dirs= getPossibleDirs(currentTile);
 				
 				for(int i=0;i<dirs.size();i++){
 					
@@ -140,13 +141,13 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	 * @throws StopRequestException 
 	 */
 	
-	private ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
+	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -175,7 +176,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		// si un obstacle est apparu sur la case destination, on change de destination
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
-			ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+			List<AiTile> tiles = getClearNeighbors(currentTile);
 			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);
@@ -199,7 +200,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 	// liste des cases voisines accessibles	
-	ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+	List<AiTile> tiles = getClearNeighbors(currentTile);
 	// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 	boolean canGoBack = false;
 	if(tiles.contains(previousTile))
@@ -247,14 +248,14 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	/*
 	 * renvoi la liste des bombes qui me menacent
 	 */
-	private ArrayList<AiBomb> dangerousBombs() throws StopRequestException{
+	private List<AiBomb> dangerousBombs() throws StopRequestException{
 		
 		checkInterruption(); //APPEL OBLIGATOIRE
 		
 		// liste des bombes dans la zone
 		Collection<AiBomb> bombs = getPercepts().getBombs();
 		
-		ArrayList<AiBomb> result = new ArrayList<AiBomb>();
+		List<AiBomb> result = new ArrayList<AiBomb>();
 	
 		Iterator<AiBomb> it = bombs.iterator();
 		
@@ -413,14 +414,14 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	/*
 	 * renvoi la liste des directions possibles
 	 */
-	private ArrayList<Direction> getPossibleDirs(AiTile tile) throws StopRequestException{
+	private List<Direction> getPossibleDirs(AiTile tile) throws StopRequestException{
 		
 		checkInterruption(); //APPEL OBLIGATOIRE
 		
 		// liste des cases autour de la case de référence
 		Collection<AiTile> tiles = getClearNeighbors(tile);
 		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<Direction> result = new ArrayList<Direction>();
+		List<Direction> result = new ArrayList<Direction>();
 	
 		Iterator<AiTile> it = tiles.iterator();
 		
@@ -447,7 +448,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		init();
 	if(currentTile.getBombs().size()>0){
 		
-		ArrayList<Direction> dirs= getPossibleDirs(currentTile);
+		List<Direction> dirs= getPossibleDirs(currentTile);
 		
 		for(int i=0;i<dirs.size();i++){
 			

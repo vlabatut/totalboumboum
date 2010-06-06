@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v200809.ais.akpolatsener.v1;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
@@ -45,7 +46,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 	Direction direction;
 	
 	/** liste des cas visités avec ses champs*/
-	ArrayList<XTile> xTiles = new ArrayList<XTile>();
+	List<XTile> xTiles = new ArrayList<XTile>();
 	
 	/** action de resultat à renvoyer*/
 	AiAction result = new AiAction(AiActionName.NONE);
@@ -155,7 +156,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 	public AiTile findPath() throws Exception {
 		checkInterruption();
 		
-		ArrayList<AiTile> possibleTiles;
+		List<AiTile> possibleTiles;
 
 		AiTile bestTile = null;
 
@@ -198,7 +199,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 	 * @return la case ayant la plus haute priorité dans la liste
 	 * @throws StopRequestException
 	 */	
-	public AiTile selectMostPrior(ArrayList<AiTile> tiles)	throws StopRequestException 
+	public AiTile selectMostPrior(List<AiTile> tiles)	throws StopRequestException 
 	{
 		checkInterruption();
 		

@@ -3,6 +3,7 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v2;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
 import org.totalboumboum.ai.v200809.adapter.AiActionName;
@@ -28,9 +29,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 	private AiTile caseCourant;
 	private AiTile caseTarget;
 	private boolean debug;
-	private ArrayList<AiTile> caseEnemies;
-	private ArrayList<AiTile> caseBombes;
-	private ArrayList<AiTile> caseItems;
+	private List<AiTile> caseEnemies;
+	private List<AiTile> caseBombes;
+	private List<AiTile> caseItems;
 	private TimeMatrice timeMatrice;
 	private long dangerTime;
 	private int distanceTarget;
@@ -232,7 +233,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 				caseTarget=this.caseEnemies.get(0); 
 			AStar a=new AStar(this.caseCourant,this.caseTarget);
 			a.formeArbre();
-			ArrayList<Node>fils=a.getFils();
+			List<Node>fils=a.getFils();
 			/*
 			 * On explose les murs qui nous empeche
 			 * a aller a l'enemie
@@ -409,14 +410,14 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/*
 	 * Mettre a jour les tiles des enemies
 	 */
-	public ArrayList<AiTile> getEnemiesTile() {
+	public List<AiTile> getEnemiesTile() {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
 			e.printStackTrace();
 		}
 
-		ArrayList<AiTile> monItera = new ArrayList<AiTile>();
+		List<AiTile> monItera = new ArrayList<AiTile>();
 
 		for (AiHero i : this.zone.getHeroes()) {
 			if (this.debug)
@@ -436,8 +437,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/*
 	 * Mettre a jour les tiles des bombes
 	 */
-	public ArrayList<AiTile> getBombesTile() {
-		ArrayList<AiTile> b = new ArrayList<AiTile>();
+	public List<AiTile> getBombesTile() {
+		List<AiTile> b = new ArrayList<AiTile>();
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
@@ -459,8 +460,8 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/*
 	 * Mettre a jour les tiles des items
 	 */
-	public ArrayList<AiTile> getItemsTile() {
-		ArrayList<AiTile> p = new ArrayList<AiTile>();
+	public List<AiTile> getItemsTile() {
+		List<AiTile> p = new ArrayList<AiTile>();
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {

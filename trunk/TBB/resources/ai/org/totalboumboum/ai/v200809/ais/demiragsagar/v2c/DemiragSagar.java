@@ -3,6 +3,7 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v2c;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
 import org.totalboumboum.ai.v200809.adapter.AiActionName;
@@ -27,9 +28,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 	private AiTile caseCourant;
 	private AiTile caseTarget;
 	private boolean debug;
-	private ArrayList<AiTile> caseEnemies;
-	private ArrayList<AiTile> caseBombes;
-	private ArrayList<AiTile> caseItems;
+	private List<AiTile> caseEnemies;
+	private List<AiTile> caseBombes;
+	private List<AiTile> caseItems;
 	private TimeMatrice timeMatrice;
 	private long dangerTime;
 	private int distanceTarget;
@@ -231,7 +232,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 				caseTarget=this.caseEnemies.get(0); 
 			AStar a=new AStar(this.caseCourant,this.caseTarget,this);
 			a.formeArbre();
-			ArrayList<Node>fils=a.getFils();
+			List<Node>fils = a.getFils();
 			/*
 			 * On explose les murs qui nous empeche
 			 * a aller a l'enemie
@@ -406,10 +407,10 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/*
 	 * Mettre a jour les tiles des enemies
 	 */
-	public ArrayList<AiTile> getEnemiesTile() throws StopRequestException {
+	public List<AiTile> getEnemiesTile() throws StopRequestException {
 		checkInterruption();
 		
-		ArrayList<AiTile> monItera = new ArrayList<AiTile>();
+		List<AiTile> monItera = new ArrayList<AiTile>();
 
 		for (AiHero i : this.zone.getHeroes()) {
 			checkInterruption();
@@ -425,9 +426,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/*
 	 * Mettre a jour les tiles des bombes
 	 */
-	public ArrayList<AiTile> getBombesTile() throws StopRequestException {
+	public List<AiTile> getBombesTile() throws StopRequestException {
 		checkInterruption();
-		ArrayList<AiTile> b = new ArrayList<AiTile>();
+		List<AiTile> b = new ArrayList<AiTile>();
 		if (this.zone.getBombs() != null)
 			for (AiBomb i : this.zone.getBombs()) {
 				checkInterruption();
@@ -440,9 +441,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 	/*
 	 * Mettre a jour les tiles des items
 	 */
-	public ArrayList<AiTile> getItemsTile() throws StopRequestException {
+	public List<AiTile> getItemsTile() throws StopRequestException {
 		checkInterruption();
-		ArrayList<AiTile> p = new ArrayList<AiTile>();
+		List<AiTile> p = new ArrayList<AiTile>();
 		if (this.zone.getItems() != null)
 			for (AiItem i : this.zone.getItems()) {
 				checkInterruption();

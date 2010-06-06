@@ -3,6 +3,7 @@ package org.totalboumboum.ai.v200809.ais.devecioglukorkmaz.v1;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
@@ -223,13 +224,13 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
-	private ArrayList<AiTile> getClearNeighbors(AiTile tile)
+	private List<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbors.iterator();
 		while (it.hasNext()) {
 			checkInterruption(); // APPEL OBLIGATOIRE

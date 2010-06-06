@@ -3,6 +3,7 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v2;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Vector;
 
@@ -171,8 +172,8 @@ public class AStar {
 	/*
 	 * On trouve les fils d'un noeud
 	 */
-	public ArrayList <Node> getChildrenLinks(Node node) {
-		ArrayList <Node> result = new ArrayList<Node>();
+	public List <Node> getChildrenLinks(Node node) {
+		List <Node> result = new ArrayList<Node>();
 
 		Iterator<LienRecherche> i = links.iterator();
 		while (i.hasNext()) {
@@ -184,9 +185,9 @@ public class AStar {
 	}
 	//Il trouve les cases qui n'ont pas de fils
 	//ou on peut poser des bombes
-	public ArrayList<Node> getFils()
+	public List<Node> getFils()
 	{
-		ArrayList<Node> nodes=new ArrayList<Node>();
+		List<Node> nodes=new ArrayList<Node>();
 		Iterator <LienRecherche> it=this.links.iterator();
 		while(it.hasNext())
 		{

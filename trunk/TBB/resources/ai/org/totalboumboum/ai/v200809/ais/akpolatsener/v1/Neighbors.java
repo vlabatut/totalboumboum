@@ -3,6 +3,7 @@ package org.totalboumboum.ai.v200809.ais.akpolatsener.v1;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
@@ -34,7 +35,7 @@ public class Neighbors {
 	XTile tempTile;
 
 	/** liste des bombes autour les cases voisines */
-	ArrayList<AiTile> bombTiles = new ArrayList<AiTile>();
+	List<AiTile> bombTiles = new ArrayList<AiTile>();
 
 	
 
@@ -54,13 +55,13 @@ public class Neighbors {
 	 * @return liste des voisins sans condition
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> findAllNeighbors() throws StopRequestException 
+	public List<AiTile> findAllNeighbors() throws StopRequestException 
 	{
 		sa.checkInterruption();
 
 		Iterator<AiTile> iter = zone.getNeighborTiles(currentTile).iterator();
 
-		ArrayList<AiTile> tiles = new ArrayList<AiTile>();
+		List<AiTile> tiles = new ArrayList<AiTile>();
 		
 		while (iter.hasNext())
 		{
@@ -76,13 +77,13 @@ public class Neighbors {
 	 * @return la liste des voisins propres
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> findCleanNeighbors() throws StopRequestException {
+	public List<AiTile> findCleanNeighbors() throws StopRequestException {
 		sa.checkInterruption();
 
 		//on prend toutes les voisins et on en elimine
-		ArrayList<AiTile> tiles = findAllNeighbors();
+		List<AiTile> tiles = findAllNeighbors();
 
-		ArrayList<AiTile> cleanTiles = new ArrayList<AiTile>();
+		List<AiTile> cleanTiles = new ArrayList<AiTile>();
 
 		Iterator<AiTile> iter = tiles.iterator();
 
@@ -106,16 +107,16 @@ public class Neighbors {
 	 * @return la liste des cases voisines propres qui ne sont pas dans la portée d'une bombe
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> findNeighborsNotInBombRange()	throws StopRequestException
+	public List<AiTile> findNeighborsNotInBombRange()	throws StopRequestException
 	{
 		sa.checkInterruption();
 
-		ArrayList<AiTile> noBombTiles = new ArrayList<AiTile>();
+		List<AiTile> noBombTiles = new ArrayList<AiTile>();
 		
 		bombTiles.clear();
 		
 		//premierement on obtient les cases propres
-		ArrayList<AiTile> tiles = findCleanNeighbors();
+		List<AiTile> tiles = findCleanNeighbors();
 		Iterator<AiTile> iter = tiles.iterator();
 
 		//on considere que la portée d'une bombe est 20 cases

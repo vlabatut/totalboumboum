@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Vector;
 
@@ -889,13 +890,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				}
 			}
 		} else {
-			ArrayList<AiTile> possible = new ArrayList<AiTile>();
+			List<AiTile> possible = new ArrayList<AiTile>();
 			possible.add(zone.getTile(me.getLine()-2,me.getCol()-1));// sol ust capraz
 			possible.add(zone.getTile(me.getLine()-2,me.getCol()+1));// sag ust capraz
 			possible.add(zone.getTile(me.getLine()+2,me.getCol()-1));// sol alt capraz
 			possible.add(zone.getTile(me.getLine()+2,me.getCol()+1));// sag alt capraz
 
-			ArrayList<AiTile> result= new ArrayList<AiTile>();
+			List<AiTile> result= new ArrayList<AiTile>();
 
 			for(int k=0;k<possible.size();k++){
 				if(!isObstacle(possible.get(k))){
@@ -943,13 +944,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @return
 	 * @throws StopRequestException
 	 */
-	public  ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
+	public  List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 
 	// liste des cases autour de la case de référence
 	Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 	// on garde les cases sans bloc ni bombe ni feu
-	ArrayList<AiTile> result = new ArrayList<AiTile>();
+	List<AiTile> result = new ArrayList<AiTile>();
 	Iterator<AiTile> it = neighbors.iterator();
 	while(it.hasNext())
 	{	checkInterruption(); //APPEL OBLIGATOIRE

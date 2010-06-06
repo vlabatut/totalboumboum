@@ -1,6 +1,6 @@
 package org.totalboumboum.ai.v200809.ais.akpolatsener.v2c;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
 import org.totalboumboum.ai.v200809.adapter.AiActionName;
@@ -47,7 +47,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 		checkInterruption();
 
 		control = new TileControl(this);
-		ArrayList<AiTile> tiles;
+		List<AiTile> tiles;
 		// initialisation des zone, personnage et case actuelle
 		zone = getPercepts();
 		ownHero = zone.getOwnHero();

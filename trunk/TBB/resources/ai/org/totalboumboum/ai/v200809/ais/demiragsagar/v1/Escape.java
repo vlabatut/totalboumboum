@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v1;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v200809.adapter.AiBlock;
@@ -13,9 +14,9 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 public class Escape {
-	private ArrayList<AiTile> bombes;
+	private List<AiTile> bombes;
 	
-	public Escape(ArrayList<AiTile> bombes) {
+	public Escape(List<AiTile> bombes) {
 		this.bombes=bombes;
 	}
 
@@ -87,10 +88,10 @@ public class Escape {
 	// return mesTiles;
 	// }
 
-	public ArrayList<AiTile> getIntersection(AiZone zone) {
+	public List<AiTile> getIntersection(AiZone zone) {
 		int matrice[][] = this.getMatrice(zone);
 		int i, j;
-		ArrayList<AiTile> mesTiles = new ArrayList<AiTile>();
+		List<AiTile> mesTiles = new ArrayList<AiTile>();
 		for (i = 0; i < 16; i++)
 			for (j = 0; j < 15; j++)
 				if (matrice[i][j] > 1)
