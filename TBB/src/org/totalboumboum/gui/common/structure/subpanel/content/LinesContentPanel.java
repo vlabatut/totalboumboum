@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -110,7 +111,7 @@ public class LinesContentPanel extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	// SIZE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Integer> lineHeights = new ArrayList<Integer>();
+	private List<Integer> lineHeights = new ArrayList<Integer>();
 	private int headerWidth;
 	private int lineWidth;
 
@@ -230,17 +231,17 @@ public class LinesContentPanel extends ContentPanel
 		add(line,2*index);
 	}
 	
-	public void setLineKeys(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	public void setLineKeys(int line, List<String> keys, List<Boolean> imageFlags)
 	{	Line l = getLine(line);
 		l.setKeys(keys,imageFlags);
 	}
 	
-	public void setLineIcons(int line, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	public void setLineIcons(int line, List<BufferedImage> icons, List<String> tooltips)
 	{	Line l = getLine(line);
 		l.setIcons(icons,tooltips);
 	}
 	
-	public void setLineTexts(int line, ArrayList<String> texts, ArrayList<String> tooltips)
+	public void setLineTexts(int line, List<String> texts, List<String> tooltips)
 	{	Line l = getLine(line);
 		l.setTexts(texts,tooltips);
 	}

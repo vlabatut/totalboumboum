@@ -119,12 +119,12 @@ public class CupLeg implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PARTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<CupPart> parts = new ArrayList<CupPart>();
+	private final List<CupPart> parts = new ArrayList<CupPart>();
 	private int currentIndex;
 	private CupPart currentPart;
 	private boolean randomizeParts;
 	
-	public ArrayList<CupPart> getParts()
+	public List<CupPart> getParts()
 	{	return parts;
 	}
 	

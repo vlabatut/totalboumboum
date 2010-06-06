@@ -159,7 +159,7 @@ public class BombsetLoader
 		if(type==Type.CONCRETE)
 		{	List<AbstractAbility> requiredAbilities = AbilityLoader.loadAbilitiesElement(root);
 			Iterator<AbstractAbility> i = requiredAbilities.iterator();
-			ArrayList<StateAbility> abilities = new ArrayList<StateAbility>();
+			List<StateAbility> abilities = new ArrayList<StateAbility>();
 			while(i.hasNext())
 			{	AbstractAbility ablt = i.next();
 				if(ablt instanceof StateAbility)

@@ -22,6 +22,7 @@ package org.totalboumboum.configuration.profile;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProfilesSelection
 {
@@ -84,7 +85,7 @@ public class ProfilesSelection
 	/////////////////////////////////////////////////////////////////
 	// IDs					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<Integer> ids = new ArrayList<Integer>();
+	private final List<Integer> ids = new ArrayList<Integer>();
 	
 	public Integer getIds(int index)
 	{	return ids.get(index);	
@@ -93,7 +94,7 @@ public class ProfilesSelection
 	/////////////////////////////////////////////////////////////////
 	// COLORS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<PredefinedColor> colors = new ArrayList<PredefinedColor>();
+	private final List<PredefinedColor> colors = new ArrayList<PredefinedColor>();
 	
 	public PredefinedColor getColor(int index)
 	{	return colors.get(index);	
@@ -102,7 +103,7 @@ public class ProfilesSelection
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<Integer> controls = new ArrayList<Integer>();
+	private final List<Integer> controls = new ArrayList<Integer>();
 	
 	public int getControlsIndex(int index)
 	{	return controls.get(index);	
@@ -111,7 +112,7 @@ public class ProfilesSelection
 	/////////////////////////////////////////////////////////////////
 	// HEROES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String[]> heroes = new ArrayList<String[]>();
+	private final List<String[]> heroes = new ArrayList<String[]>();
 	
 	public String[] getHero(int index)
 	{	return heroes.get(index);	

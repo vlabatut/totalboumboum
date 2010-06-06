@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -154,13 +155,13 @@ public class AiTile
 	/** block éventuellement contenu dans cette case */
 	private AiBlock block = null;
 	/** liste des bombes éventuellement contenues dans cette case */
-	private final ArrayList<AiBomb> bombs = new ArrayList<AiBomb>();
+	private final List<AiBomb> bombs = new ArrayList<AiBomb>();
 	/** liste des feux éventuellement contenus dans cette case */
-	private final ArrayList<AiFire> fires = new ArrayList<AiFire>();
+	private final List<AiFire> fires = new ArrayList<AiFire>();
 	/** sol de cette case */
 	private AiFloor floor = null;
 	/** liste des personnages éventuellement contenus dans cette case */
-	private final ArrayList<AiHero> heroes = new ArrayList<AiHero>();
+	private final List<AiHero> heroes = new ArrayList<AiHero>();
 	/** item éventuellement contenu dans cette case */
 	private AiItem item = null;
 
@@ -339,7 +340,7 @@ public class AiTile
 	 * @param <T>	type de représentation
 	 * @param list	liste de représentations
 	 */
-	private <T extends AiSprite<?>> void finishSprites(ArrayList<T> list)
+	private <T extends AiSprite<?>> void finishSprites(List<T> list)
 	{	Iterator<T> it = list.iterator();
 		while(it.hasNext())
 		{	T temp = it.next();

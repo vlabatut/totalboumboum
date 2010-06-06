@@ -23,6 +23,7 @@ package org.totalboumboum.gui.common.content.subpanel.profile;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
@@ -63,7 +64,7 @@ public class ProfileSubPanel extends TableSubPanel
 		reinit(LINES,COL_GROUPS,COL_SUBS);
 		
 		// icons
-		ArrayList<String> keys = new ArrayList<String>();
+		List<String> keys = new ArrayList<String>();
 		if(showName)
 			keys.add(GuiKeys.COMMON_PROFILES_NAME);
 		if(showAiName)
@@ -82,7 +83,7 @@ public class ProfileSubPanel extends TableSubPanel
 		if(profile!=null)
 		{	int playerId = profile.getId();
 			// text
-			ArrayList<String> values = new ArrayList<String>();
+			List<String> values = new ArrayList<String>();
 			if(showName)
 				values.add(profile.getName());
 			if(showAiName)

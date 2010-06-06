@@ -437,7 +437,7 @@ public class AiTile
 	 * getNeighbors.
 	 */
 	void initNeighbors()
-	{	ArrayList<Direction> directions = Direction.getPrimaryValues();
+	{	List<Direction> directions = Direction.getPrimaryValues();
 		for(Direction direction: directions)
 		{	Tile neighbor = tile.getNeighbor(direction);
 			int line = neighbor.getLine();

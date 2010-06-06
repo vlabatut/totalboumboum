@@ -23,6 +23,7 @@ package org.totalboumboum.gui.common.content.subpanel.tournament;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.totalboumboum.engine.container.level.players.Players;
@@ -36,7 +37,6 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-
 
 public class TournamentMiscSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
@@ -66,7 +66,7 @@ public class TournamentMiscSubPanel extends TableSubPanel
 		reinit(getLineCount(),COL_GROUPS,COL_SUBS);
 		
 		// icons
-		ArrayList<String> keys = new ArrayList<String>();
+		List<String> keys = new ArrayList<String>();
 		allowedPlayersLine = 0;
 		if(showName)
 		{	keys.add(GuiKeys.COMMON_TOURNAMENT_NAME);
@@ -85,8 +85,8 @@ public class TournamentMiscSubPanel extends TableSubPanel
 		
 		if(tournament!=null)
 		{	// text
-			ArrayList<String> textValues = new ArrayList<String>();
-			ArrayList<String> tooltipValues = new ArrayList<String>();
+			List<String> textValues = new ArrayList<String>();
+			List<String> tooltipValues = new ArrayList<String>();
 			if(showName)
 			{	textValues.add(tournament.getName());
 				tooltipValues.add(tournament.getName());

@@ -23,12 +23,11 @@ package org.totalboumboum.gui.common.structure.subpanel.container;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Column;
 import org.totalboumboum.gui.common.structure.subpanel.content.ColumnsContentPanel;
-
 
 public class ColumnsSubPanel extends SubPanel<ColumnsContentPanel>
 {	private static final long serialVersionUID = 1L;
@@ -69,15 +68,15 @@ public class ColumnsSubPanel extends SubPanel<ColumnsContentPanel>
 	{	getDataPanel().addColumn(index);
 	}
 	
-	public void setColumnKeys(int col, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	public void setColumnKeys(int col, List<String> keys, List<Boolean> imageFlags)
 	{	getDataPanel().setColumnKeys(col,keys,imageFlags);
 	}
 	
-	public void setColumnIcons(int col, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	public void setColumnIcons(int col, List<BufferedImage> icons, List<String> tooltips)
 	{	getDataPanel().setColumnIcons(col,icons,tooltips);
 	}
 	
-	public void setColumnTexts(int col, ArrayList<String> texts, ArrayList<String> tooltips)
+	public void setColumnTexts(int col, List<String> texts, List<String> tooltips)
 	{	getDataPanel().setColumnTexts(col,texts,tooltips);
 	}
 

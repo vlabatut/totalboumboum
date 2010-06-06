@@ -21,8 +21,7 @@ package org.totalboumboum.statistics.detailed;
  * 
  */
 
-import java.util.ArrayList;
-
+import java.util.List;
 
 public enum Score
 {	/** number of bombs dropped */
@@ -75,7 +74,7 @@ public enum Score
 
 	public long[] processBombs(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		List<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.DROP_BOMB)
@@ -87,7 +86,7 @@ public enum Score
 
 	public long[] processCrowns(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		List<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.GATHER_CROWN)
@@ -103,7 +102,7 @@ public enum Score
 
 	public long[] processBombeds(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		List<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.BOMB_PLAYER)
@@ -117,7 +116,7 @@ public enum Score
 
 	public long[] processItems(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		List<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.GATHER_ITEM)
@@ -129,7 +128,7 @@ public enum Score
 
 	public long[] processBombings(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		List<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.BOMB_PLAYER)
@@ -143,7 +142,7 @@ public enum Score
 
 	public long[] processSelfBombings(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		List<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.BOMB_PLAYER)
@@ -157,7 +156,7 @@ public enum Score
 
 	public long[] processPaintings(StatisticRound stats, StatisticEvent event)
 	{	// init
-		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		List<Integer> playersIds = stats.getPlayersIds();
 		long result[] = stats.getScores(this);
 		// processing
 		if(event.getAction() == StatisticAction.WIN_TILE)

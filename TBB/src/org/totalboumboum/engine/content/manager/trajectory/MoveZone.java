@@ -24,6 +24,7 @@ package org.totalboumboum.engine.content.manager.trajectory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -194,9 +195,9 @@ public class MoveZone
 	/////////////////////////////////////////////////////////////////
 	// COLLIDED SPRITES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Sprite> collidedSprites;
+	private List<Sprite> collidedSprites;
 	
-	public ArrayList<Sprite> getCollidedSprites()
+	public List<Sprite> getCollidedSprites()
 	{	return collidedSprites;		
 	}
 
@@ -208,9 +209,9 @@ public class MoveZone
 	/////////////////////////////////////////////////////////////////
 	// INTERSECTED SPRITES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Sprite> intersectedSprites;
+	private List<Sprite> intersectedSprites;
 	
-	public ArrayList<Sprite> getIntersectedSprites()
+	public List<Sprite> getIntersectedSprites()
 	{	return intersectedSprites;		
 	}
 
@@ -227,8 +228,8 @@ public class MoveZone
 	 * i.e. tiles intersecting the trajectory, +/- a safe margin
 	 * corresponfing to a tile size.
 	 */
-	private ArrayList<Tile> getCrossedTiles()
-	{	ArrayList<Tile> result = new ArrayList<Tile>();
+	private List<Tile> getCrossedTiles()
+	{	List<Tile> result = new ArrayList<Tile>();
 		// init
 		double tileDimension = RoundVariables.scaledTileDimension;
 		double upleftX = RoundVariables.level.normalizePositionX(Math.min(currentX,targetX) - tileDimension);
@@ -258,11 +259,11 @@ public class MoveZone
 	 * They're ordered in function of the distance to the trajectory source
 	 * (the secondary criterion being the distance between the sprite and the obstacle) 
 	 */
-	private ArrayList<PotentialObstacle> getCrossedSprites()
-	{	ArrayList<PotentialObstacle> result = new ArrayList<PotentialObstacle>();
-		ArrayList<Tile> tiles = getCrossedTiles();
+	private List<PotentialObstacle> getCrossedSprites()
+	{	List<PotentialObstacle> result = new ArrayList<PotentialObstacle>();
+		List<Tile> tiles = getCrossedTiles();
 		for(Tile t: tiles)
-		{	ArrayList<Sprite> temp = t.getSprites();
+		{	List<Sprite> temp = t.getSprites();
 			for(Sprite s: temp)
 			{	
 //if(s instanceof Item)
@@ -302,7 +303,7 @@ public class MoveZone
 	}
 	
 	public void applyMove()
-	{	ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
+	{	List<PotentialObstacle> potentialObstacles = getCrossedSprites();
 //System.out.println(potentialObstacles.size());	
 		boolean goOn = usedDirection!=Direction.NONE;
 		while(potentialObstacles.size()>0 && goOn)

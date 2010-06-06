@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -66,7 +67,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_PROFILES_BUTTON);
+		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_PROFILES_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
@@ -116,7 +117,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_NEW))
 		{	String key = GuiKeys.MENU_PROFILES_NEW_TITLE;
-			ArrayList<String> text = new ArrayList<String>();
+			List<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_PROFILES_NEW_QUESTION));
 			String defaultText = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_PROFILES_NEW_NAME);
 			inputPanel = new InputModalDialogPanel(getMenuParent(),key,text,defaultText);
@@ -133,7 +134,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_DELETE))
 		{	String key = GuiKeys.MENU_PROFILES_DELETE_TITLE;
-			ArrayList<String> text = new ArrayList<String>();
+			List<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_PROFILES_DELETE_QUESTION));
 			questionPanel = new QuestionModalDialogPanel(getMenuParent(),key,text);
 			questionPanel.addListener(this);

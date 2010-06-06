@@ -23,6 +23,7 @@ package org.totalboumboum.game.points;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
@@ -44,7 +45,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
 public class PointsRankings extends PointsProcessor implements PPFunction
 {	private static final long serialVersionUID = 1L;
 
-	public PointsRankings(ArrayList<PointsProcessor> sources, boolean inverted)
+	public PointsRankings(List<PointsProcessor> sources, boolean inverted)
 	{	this.sources.addAll(sources);
 		this.inverted = inverted;
 	}
@@ -61,9 +62,9 @@ public class PointsRankings extends PointsProcessor implements PPFunction
 	/////////////////////////////////////////////////////////////////
 	// SOURCES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
+	private List<PointsProcessor> sources = new ArrayList<PointsProcessor>();
 
-	public ArrayList<PointsProcessor> getSources()
+	public List<PointsProcessor> getSources()
 	{	return sources;		
 	}
 	
@@ -74,7 +75,7 @@ public class PointsRankings extends PointsProcessor implements PPFunction
 	public float[] process(StatisticHolder holder)
 	{	// source
 		StatisticBase stats = holder.getStats();
-		ArrayList<float[]> values = new ArrayList<float[]>();
+		List<float[]> values = new ArrayList<float[]>();
 		Iterator<PointsProcessor> it = sources.iterator();
 		while (it.hasNext())
 		{	PointsProcessor source = it.next();
@@ -82,7 +83,7 @@ public class PointsRankings extends PointsProcessor implements PPFunction
 		}
 		
 		// result
-		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		List<Integer> playersIds = stats.getPlayersIds();
 		float[] result = new float[playersIds.size()];
 		for(int i=0;i<result.length;i++)
 			result[i] = 1;
@@ -105,7 +106,7 @@ public class PointsRankings extends PointsProcessor implements PPFunction
 	 * Compares two players according to their points.
 	 * The various sources are considered according to their order in the list. 
 	 */
-	public int comparePoints(int i, int j, ArrayList<float[]> values, boolean inverted)
+	public int comparePoints(int i, int j, List<float[]> values, boolean inverted)
 	{	// inverted ?
 		if(inverted)
 		{	int temp = i;

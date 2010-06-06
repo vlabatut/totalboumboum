@@ -23,6 +23,7 @@ package org.totalboumboum.game.points;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
@@ -35,12 +36,12 @@ public abstract class PointsProcessor implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// NOTES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> notes = new ArrayList<String>();
+	private final List<String> notes = new ArrayList<String>();
 
-	public void setNotes(ArrayList<String> notes)
+	public void setNotes(List<String> notes)
 	{	this.notes.addAll(notes);
 	}
-	public ArrayList<String> getNotes()
+	public List<String> getNotes()
 	{	return notes;
 	}
 }

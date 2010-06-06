@@ -218,7 +218,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** fils du noeud */
-	private ArrayList<AstarNode> children = null;
+	private List<AstarNode> children = null;
 	/** calculateur des successeurs */
 	private SuccessorCalculator successorCalculator;
 	

@@ -102,7 +102,7 @@ public class FullExplosionManager extends ExplosionManager
 		{	boolean blocked[] = {false,false,false,false};
 			Tile tiles[] = {tile,tile,tile,tile};
 			Direction directions[] = {Direction.DOWN, Direction.LEFT, Direction.RIGHT, Direction.UP};
-			ArrayList<Tile> processed = new ArrayList<Tile>();
+			List<Tile> processed = new ArrayList<Tile>();
 			processed.add(tile);
 			boolean goOn = true;
 			int length = 1;

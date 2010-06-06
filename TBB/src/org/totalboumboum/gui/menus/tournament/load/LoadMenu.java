@@ -25,7 +25,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -63,7 +63,7 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON);
+		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons

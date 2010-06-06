@@ -25,8 +25,8 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -148,7 +148,7 @@ public class HollowLevel implements Serializable
 		double globalUpY = level.getGlobalUpY();
 		int globalHeight = levelInfo.getGlobalHeight();
 		int globalWidth = levelInfo.getGlobalWidth();
-		ArrayList<String[][]> matrices = zone.getMatrices();
+		List<String[][]> matrices = zone.getMatrices();
     	String[][] mFloors = matrices.get(0);
 		String[][] mBlocks = matrices.get(1);
 		String[][] mItems = matrices.get(2);

@@ -24,7 +24,6 @@ package org.totalboumboum.gui.common.content.subpanel.results;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -178,7 +177,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 			
 			// init
 			StatisticBase stats = statisticHolder.getStats();
-			ArrayList<StatisticBase> confrontationStats = stats.getConfrontationStats();
+			List<StatisticBase> confrontationStats = stats.getConfrontationStats();
 			List<Profile> players = statisticHolder.getProfiles();
 			Ranks orderedPlayers = statisticHolder.getOrderedPlayers();
 			List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();

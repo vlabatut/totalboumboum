@@ -392,8 +392,8 @@ public class AiBomb extends AiSprite<Bomb>
 			actorCircumstance.addOrientation(Orientation.FACE);
 			actorCircumstance.addTilePosition(TilePosition.NEIGHBOR);
 			Circumstance targetCircumstance = new Circumstance();
-			ArrayList<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
-			ArrayList<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
+			List<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
+			List<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
 			boolean temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 			if(temp)
 			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_BOMB);

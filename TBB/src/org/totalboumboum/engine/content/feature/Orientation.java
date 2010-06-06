@@ -2,6 +2,7 @@ package org.totalboumboum.engine.content.feature;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.jdom.Attribute;
@@ -92,8 +93,8 @@ public enum Orientation implements Serializable
 	 * the XML value SOME represents any orientation except NONE. 
 	 * the XML value ANY represents any orientation including NONE. 
 	 */
-	public static ArrayList<Orientation> loadOrientationsAttribute(Element root, String attName)
-	{	ArrayList<Orientation> result = new ArrayList<Orientation>();
+	public static List<Orientation> loadOrientationsAttribute(Element root, String attName)
+	{	List<Orientation> result = new ArrayList<Orientation>();
 		Attribute attribute = root.getAttribute(attName);
 		String orientationStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 		String[] orientationsStr = orientationStr.split(" ");

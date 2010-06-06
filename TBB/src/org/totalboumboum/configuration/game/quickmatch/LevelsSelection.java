@@ -22,6 +22,7 @@ package org.totalboumboum.configuration.game.quickmatch;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LevelsSelection
 {
@@ -56,7 +57,7 @@ public class LevelsSelection
 	/////////////////////////////////////////////////////////////////
 	// FOLDER NAMES			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> folderNames = new ArrayList<String>();
+	private final List<String> folderNames = new ArrayList<String>();
 	
 	public String getFolderName(int index)
 	{	return folderNames.get(index);	
@@ -65,7 +66,7 @@ public class LevelsSelection
 	/////////////////////////////////////////////////////////////////
 	// PACK NAMES			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> packNames = new ArrayList<String>();
+	private final List<String> packNames = new ArrayList<String>();
 	
 	public String getPackName(int index)
 	{	return packNames.get(index);	

@@ -21,14 +21,13 @@ package org.totalboumboum.engine.content.feature.action;
  * 
  */
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.jdom.Element;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.tools.xml.XmlNames;
-
 
 public class GeneralActionLoader
 {		
@@ -39,19 +38,19 @@ public class GeneralActionLoader
 		GeneralAction result = name.createGeneralAction();
 		
 		// actors
-		{	ArrayList<Role> actors = Role.loadRolesAttribute(root,XmlNames.ACTOR);
+		{	List<Role> actors = Role.loadRolesAttribute(root,XmlNames.ACTOR);
 			for(Role actor: actors)
 				result.addActor(actor);
 		}
 		
 		// targets
-		{	ArrayList<Role> targets = Role.loadRolesAttribute(root,XmlNames.TARGET);
+		{	List<Role> targets = Role.loadRolesAttribute(root,XmlNames.TARGET);
 			for(Role target: targets)
 				result.addTarget(target);
 		}
 		
 		// directions
-		{	ArrayList<Direction> directions = Direction.loadDirectionsAttribute(root,XmlNames.DIRECTION);
+		{	List<Direction> directions = Direction.loadDirectionsAttribute(root,XmlNames.DIRECTION);
 			for(Direction direction: directions)
 				result.addDirection(direction);
 		}

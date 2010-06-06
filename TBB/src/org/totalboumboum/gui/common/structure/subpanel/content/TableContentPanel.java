@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.SwingConstants;
 
@@ -67,9 +68,9 @@ public class TableContentPanel extends LinesContentPanel
 	/////////////////////////////////////////////////////////////////
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Integer> minWidths = new ArrayList<Integer>();
-	private ArrayList<Integer> prefWidths = new ArrayList<Integer>();
-	private ArrayList<Integer> maxWidths = new ArrayList<Integer>();
+	private List<Integer> minWidths = new ArrayList<Integer>();
+	private List<Integer> prefWidths = new ArrayList<Integer>();
+	private List<Integer> maxWidths = new ArrayList<Integer>();
 	private int colGroups;
 	private int colSubs;
 	
@@ -135,11 +136,11 @@ public class TableContentPanel extends LinesContentPanel
 		}
 	}	
 
-	public ArrayList<MyLabel> getColumn(int col)
+	public List<MyLabel> getColumn(int col)
 	{	return getColSub(0,col);		
 	}
-	public ArrayList<MyLabel> getColSub(int colGroup, int colSub)
-	{	ArrayList<MyLabel> result = new ArrayList<MyLabel>();
+	public List<MyLabel> getColSub(int colGroup, int colSub)
+	{	List<MyLabel> result = new ArrayList<MyLabel>();
 		for(int line=0;line<getLineCount();line++)
 		{	MyLabel label = getLabel(line,colGroup,colSub);
 			result.add(label);
@@ -261,10 +262,10 @@ public class TableContentPanel extends LinesContentPanel
 		}
 	}
 
-	public void setColumnKeys(int col, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	public void setColumnKeys(int col, List<String> keys, List<Boolean> imageFlags)
 	{	setColumnKeys(0,col,keys,imageFlags);
 	}
-	public void setColumnKeys(int colGroup, int colSub, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	public void setColumnKeys(int colGroup, int colSub, List<String> keys, List<Boolean> imageFlags)
 	{	Iterator<String> lineKeys = keys.iterator();
 		Iterator<Boolean> lineFlags = imageFlags.iterator();
 		int line = 0;
@@ -276,10 +277,10 @@ public class TableContentPanel extends LinesContentPanel
 		}			
 	}
 	
-	public void setColumnIcons(int col, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	public void setColumnIcons(int col, List<BufferedImage> icons, List<String> tooltips)
 	{	setColumnIcons(0,col,icons,tooltips);
 	}
-	public void setColumnIcons(int colGroup, int colSub, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	public void setColumnIcons(int colGroup, int colSub, List<BufferedImage> icons, List<String> tooltips)
 	{	Iterator<BufferedImage> lineIcons = icons.iterator();
 		Iterator<String> lineTooltips = tooltips.iterator();
 		int line = 0;
@@ -291,10 +292,10 @@ public class TableContentPanel extends LinesContentPanel
 		}			
 	}
 	
-	public void setColumnTexts(int col, ArrayList<String> texts, ArrayList<String> tooltips)
+	public void setColumnTexts(int col, List<String> texts, List<String> tooltips)
 	{	setColumnTexts(0,col,texts,tooltips);
 	}
-	public void setColumnTexts(int colGroup, int colSub, ArrayList<String> texts, ArrayList<String> tooltips)
+	public void setColumnTexts(int colGroup, int colSub, List<String> texts, List<String> tooltips)
 	{	Iterator<String> lineTexts = texts.iterator();
 		Iterator<String> lineTooltips = tooltips.iterator();
 		int line = 0;
@@ -389,21 +390,21 @@ public class TableContentPanel extends LinesContentPanel
 	/////////////////////////////////////////////////////////////////
 	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void setLineKeysSimple(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
-	{	ArrayList<ArrayList<String>> newKeys = new ArrayList<ArrayList<String>>();
+	public void setLineKeysSimple(int line, List<String> keys, List<Boolean> imageFlags)
+	{	List<List<String>> newKeys = new ArrayList<List<String>>();
 		newKeys.add(keys);
-		ArrayList<ArrayList<Boolean>> newFlags = new ArrayList<ArrayList<Boolean>>();
+		List<List<Boolean>> newFlags = new ArrayList<List<Boolean>>();
 		newFlags.add(imageFlags);
 		setLineKeysMultiple(line,newKeys,newFlags);
 	}
-	public void setLineKeysMultiple(int line, ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags)
-	{	Iterator<ArrayList<String>> groupKeys = keys.iterator();
-		Iterator<ArrayList<Boolean>> groupFlags = imageFlags.iterator();
+	public void setLineKeysMultiple(int line, List<List<String>> keys, List<List<Boolean>> imageFlags)
+	{	Iterator<List<String>> groupKeys = keys.iterator();
+		Iterator<List<Boolean>> groupFlags = imageFlags.iterator();
 		int colGroup = 0;
 		while(groupKeys.hasNext())
 		{	int colSub = 0;
-			ArrayList<String> tempKeys = groupKeys.next();
-			ArrayList<Boolean> tempFlags = groupFlags.next();
+			List<String> tempKeys = groupKeys.next();
+			List<Boolean> tempFlags = groupFlags.next();
 			Iterator<String> colKeys = tempKeys.iterator();
 			Iterator<Boolean> colFlags = tempFlags.iterator();
 			while(colKeys.hasNext())
@@ -416,21 +417,21 @@ public class TableContentPanel extends LinesContentPanel
 		}
 	}
 	
-	public void setLineIconsSimple(int line, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
-	{	ArrayList<ArrayList<BufferedImage>> newIcons = new ArrayList<ArrayList<BufferedImage>>();
+	public void setLineIconsSimple(int line, List<BufferedImage> icons, List<String> tooltips)
+	{	List<List<BufferedImage>> newIcons = new ArrayList<List<BufferedImage>>();
 		newIcons.add(icons);
-		ArrayList<ArrayList<String>> newTooltips = new ArrayList<ArrayList<String>>();
+		List<List<String>> newTooltips = new ArrayList<List<String>>();
 		newTooltips.add(tooltips);
 		setLineIconsMultiple(line,newIcons,newTooltips);
 	}
-	public void setLineIconsMultiple(int line, ArrayList<ArrayList<BufferedImage>> icons, ArrayList<ArrayList<String>> tooltips)
-	{	Iterator<ArrayList<BufferedImage>> groupIcons = icons.iterator();
-		Iterator<ArrayList<String>> groupTooltips = tooltips.iterator();
+	public void setLineIconsMultiple(int line, List<List<BufferedImage>> icons, List<List<String>> tooltips)
+	{	Iterator<List<BufferedImage>> groupIcons = icons.iterator();
+		Iterator<List<String>> groupTooltips = tooltips.iterator();
 		int colGroup = 0;
 		while(groupIcons.hasNext())
 		{	int colSub = 0;
-			ArrayList<BufferedImage> tempIcons = groupIcons.next();
-			ArrayList<String> tempTooltips = groupTooltips.next();
+			List<BufferedImage> tempIcons = groupIcons.next();
+			List<String> tempTooltips = groupTooltips.next();
 			Iterator<BufferedImage> colIcons = tempIcons.iterator();
 			Iterator<String> colTooltips = tempTooltips.iterator();
 			while(colIcons.hasNext())
@@ -443,21 +444,21 @@ public class TableContentPanel extends LinesContentPanel
 		}
 	}
 	
-	public void setLineTextsSimple(int line, ArrayList<String> texts, ArrayList<String> tooltips)
-	{	ArrayList<ArrayList<String>> newTexts = new ArrayList<ArrayList<String>>();
+	public void setLineTextsSimple(int line, List<String> texts, List<String> tooltips)
+	{	List<List<String>> newTexts = new ArrayList<List<String>>();
 		newTexts.add(texts);
-		ArrayList<ArrayList<String>> newTooltips = new ArrayList<ArrayList<String>>();
+		List<List<String>> newTooltips = new ArrayList<List<String>>();
 		newTooltips.add(tooltips);
 		setLineTextsMultiple(line,newTexts,newTooltips);
 	}
-	public void setLineTextsMultiple(int line, ArrayList<ArrayList<String>> texts, ArrayList<ArrayList<String>> tooltips)
-	{	Iterator<ArrayList<String>> groupTexts = texts.iterator();
-		Iterator<ArrayList<String>> groupTooltips = tooltips.iterator();
+	public void setLineTextsMultiple(int line, List<List<String>> texts, List<List<String>> tooltips)
+	{	Iterator<List<String>> groupTexts = texts.iterator();
+		Iterator<List<String>> groupTooltips = tooltips.iterator();
 		int colGroup = 0;
 		while(groupTexts.hasNext())
 		{	int colSub = 0;
-			ArrayList<String> tempTexts = groupTexts.next();
-			ArrayList<String> tempTooltips = groupTooltips.next();
+			List<String> tempTexts = groupTexts.next();
+			List<String> tempTooltips = groupTooltips.next();
 			Iterator<String> colTexts = tempTexts.iterator();
 			Iterator<String> colTooltips = tempTooltips.iterator();
 			while(colTexts.hasNext())
@@ -470,18 +471,18 @@ public class TableContentPanel extends LinesContentPanel
 		}
 	}
 	
-	public void setContentBySubLineKeys(ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags, boolean wholeLine)
+	public void setContentBySubLineKeys(List<List<String>> keys, List<List<Boolean>> imageFlags, boolean wholeLine)
 	{	if(wholeLine)
-		{	Iterator<ArrayList<String>> keysIt = keys.iterator();
-			Iterator<ArrayList<Boolean>> flagsIt = imageFlags.iterator();
+		{	Iterator<List<String>> keysIt = keys.iterator();
+			Iterator<List<Boolean>> flagsIt = imageFlags.iterator();
 			int line = 0;
 			if(hasHeader())
 				line = 1;
 			while(keysIt.hasNext() && line<getLineCount())
 			{	int colGroup=0;
 				while(keysIt.hasNext() && colGroup<colGroups)
-				{	ArrayList<String> tempKeys = keysIt.next();
-					ArrayList<Boolean> tempFlags = flagsIt.next();
+				{	List<String> tempKeys = keysIt.next();
+					List<Boolean> tempFlags = flagsIt.next();
 					Iterator<String> keyIt = tempKeys.iterator();
 					Iterator<Boolean> flagIt = tempFlags.iterator();
 					for(int colSub=0;colSub<colSubs;colSub++)
@@ -495,8 +496,8 @@ public class TableContentPanel extends LinesContentPanel
 			}
 		}
 		else
-		{	Iterator<ArrayList<String>> keysIt = keys.iterator();
-			Iterator<ArrayList<Boolean>> flagsIt = imageFlags.iterator();
+		{	Iterator<List<String>> keysIt = keys.iterator();
+			Iterator<List<Boolean>> flagsIt = imageFlags.iterator();
 			int start = 0;
 			if(hasHeader())
 				start = 1;
@@ -504,8 +505,8 @@ public class TableContentPanel extends LinesContentPanel
 			while(keysIt.hasNext() && colGroup<colGroups)
 			{	int line=start;
 				while(keysIt.hasNext() && line<getLineCount())
-				{	ArrayList<String> tempKeys = keysIt.next();
-					ArrayList<Boolean> tempFlags = flagsIt.next();
+				{	List<String> tempKeys = keysIt.next();
+					List<Boolean> tempFlags = flagsIt.next();
 					Iterator<String> keyIt = tempKeys.iterator();
 					Iterator<Boolean> flagIt = tempFlags.iterator();
 					for(int colSub=0;colSub<colSubs;colSub++)
@@ -520,18 +521,18 @@ public class TableContentPanel extends LinesContentPanel
 		}
 	}
 	
-	public void setContentBySubLineIcon(ArrayList<ArrayList<BufferedImage>> icons, ArrayList<ArrayList<String>> tooltips, boolean wholeLine)
+	public void setContentBySubLineIcon(List<List<BufferedImage>> icons, List<List<String>> tooltips, boolean wholeLine)
 	{	if(wholeLine)
-		{	Iterator<ArrayList<BufferedImage>> iconsIt = icons.iterator();
-			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
+		{	Iterator<List<BufferedImage>> iconsIt = icons.iterator();
+			Iterator<List<String>> tooltipsIt = tooltips.iterator();
 			int line = 0;
 			if(hasHeader())
 				line = 1;
 			while(iconsIt.hasNext() && line<getLineCount())
 			{	int colGroup=0;
 				while(iconsIt.hasNext() && colGroup<colGroups)
-				{	ArrayList<BufferedImage> tempIcons = iconsIt.next();
-					ArrayList<String> tempTooltips = tooltipsIt.next();
+				{	List<BufferedImage> tempIcons = iconsIt.next();
+					List<String> tempTooltips = tooltipsIt.next();
 					Iterator<BufferedImage> iconIt = tempIcons.iterator();
 					Iterator<String> tooltipIt = tempTooltips.iterator();
 					for(int colSub=0;colSub<colSubs;colSub++)
@@ -545,8 +546,8 @@ public class TableContentPanel extends LinesContentPanel
 			}
 		}
 		else
-		{	Iterator<ArrayList<BufferedImage>> iconsIt = icons.iterator();
-			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
+		{	Iterator<List<BufferedImage>> iconsIt = icons.iterator();
+			Iterator<List<String>> tooltipsIt = tooltips.iterator();
 			int start = 0;
 			if(hasHeader())
 				start = 1;
@@ -554,8 +555,8 @@ public class TableContentPanel extends LinesContentPanel
 			while(iconsIt.hasNext() && colGroup<colGroups)
 			{	int line=start;
 				while(iconsIt.hasNext() && line<getLineCount())
-				{	ArrayList<BufferedImage> tempIcons = iconsIt.next();
-					ArrayList<String> tempTooltips = tooltipsIt.next();
+				{	List<BufferedImage> tempIcons = iconsIt.next();
+				List<String> tempTooltips = tooltipsIt.next();
 					Iterator<BufferedImage> iconIt = tempIcons.iterator();
 					Iterator<String> tooltipIt = tempTooltips.iterator();
 					for(int colSub=0;colSub<colSubs;colSub++)
@@ -570,18 +571,18 @@ public class TableContentPanel extends LinesContentPanel
 		}
 	}
 	
-	public void setContentBySubLineText(ArrayList<ArrayList<String>> texts, ArrayList<ArrayList<String>> tooltips, boolean wholeLine)
+	public void setContentBySubLineText(List<List<String>> texts, List<List<String>> tooltips, boolean wholeLine)
 	{	if(wholeLine)
-		{	Iterator<ArrayList<String>> textsIt = texts.iterator();
-			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
+		{	Iterator<List<String>> textsIt = texts.iterator();
+			Iterator<List<String>> tooltipsIt = tooltips.iterator();
 			int line = 0;
 			if(hasHeader())
 				line = 1;
 			while(textsIt.hasNext() && line<getLineCount())
 			{	int colGroup=0;
 				while(textsIt.hasNext() && colGroup<colGroups)
-				{	ArrayList<String> tempTexts = textsIt.next();
-					ArrayList<String> tempTooltips = tooltipsIt.next();
+				{	List<String> tempTexts = textsIt.next();
+					List<String> tempTooltips = tooltipsIt.next();
 					Iterator<String> textIt = tempTexts.iterator();
 					Iterator<String> tooltipIt = tempTooltips.iterator();
 					for(int colSub=0;colSub<colSubs;colSub++)
@@ -595,8 +596,8 @@ public class TableContentPanel extends LinesContentPanel
 			}
 		}
 		else
-		{	Iterator<ArrayList<String>> textsIt = texts.iterator();
-			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
+		{	Iterator<List<String>> textsIt = texts.iterator();
+			Iterator<List<String>> tooltipsIt = tooltips.iterator();
 			int start = 0;
 			if(hasHeader())
 				start = 1;
@@ -604,8 +605,8 @@ public class TableContentPanel extends LinesContentPanel
 			while(textsIt.hasNext() && colGroup<colGroups)
 			{	int line=start;
 				while(textsIt.hasNext() && line<getLineCount())
-				{	ArrayList<String> tempTexts = textsIt.next();
-					ArrayList<String> tempTooltips = tooltipsIt.next();
+				{	List<String> tempTexts = textsIt.next();
+					List<String> tempTooltips = tooltipsIt.next();
 					Iterator<String> textIt = tempTexts.iterator();
 					Iterator<String> tooltipIt = tempTooltips.iterator();
 					for(int colSub=0;colSub<colSubs;colSub++)

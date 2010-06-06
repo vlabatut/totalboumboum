@@ -22,7 +22,7 @@ package org.totalboumboum.gui.game.tournament.description;
  */
 
 import java.awt.Dimension;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -41,7 +41,6 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-
 
 public class SequenceDescription extends TournamentDescription<SequenceTournament> implements LimitsSubPanelListener
 {	
@@ -115,7 +114,7 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 	{	// init
 		this.tournament = tournament;
 		// players
-		ArrayList<Profile> players = tournament.getProfiles();
+		List<Profile> players = tournament.getProfiles();
 		playersPanel.setPlayers(players);
 		// limits
 		limitsPanel.setLimits(tournament.getLimits());		

@@ -21,30 +21,23 @@ package org.totalboumboum.engine.control.player;
  * 
  */
 
-import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.player.AbstractPlayer;
+import org.totalboumboum.engine.player.RemotePlayer;
 
-public abstract class PlayerControl<T extends AbstractPlayer>
+public class RemotePlayerControl extends PlayerControl<RemotePlayer> 
 {	
-	public PlayerControl(T player)
-	{	this.player = player;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PLAYER			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected T player;
-	
-	public Sprite getSprite()
-	{	return player.getSprite();
+	public RemotePlayerControl(RemotePlayer player)
+	{	super(player);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
+	private boolean finished = false;
 	
 	public void finish()
-	{	player = null;
+	{	if(!finished)
+		{	finished = true;
+			super.finish();
+		}
 	}
 }

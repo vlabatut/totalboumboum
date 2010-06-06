@@ -189,7 +189,7 @@ public class ItemsetLoader
 	
 	private static void loadAbilitiesElement(Element root, List<List<AbstractAbility>> abilities, List<Float> probabilities) throws ClassNotFoundException
 	{	// abilities
-		ArrayList<AbstractAbility> list = AbilityLoader.loadAbilitiesElement(root);
+		List<AbstractAbility> list = AbilityLoader.loadAbilitiesElement(root);
 		abilities.add(list);
 		
 		// probabilities

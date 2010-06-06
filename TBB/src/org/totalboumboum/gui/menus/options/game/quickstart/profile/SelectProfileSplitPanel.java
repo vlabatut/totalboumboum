@@ -24,7 +24,7 @@ package org.totalboumboum.gui.menus.options.game.quickstart.profile;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.gui.common.structure.MenuContainer;
@@ -33,13 +33,12 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
 public class SelectProfileSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 
-	public SelectProfileSplitPanel(MenuContainer container, MenuPanel parent, int index, ArrayList<Profile> profiles)
+	public SelectProfileSplitPanel(MenuContainer container, MenuPanel parent, int index, List<Profile> profiles)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background

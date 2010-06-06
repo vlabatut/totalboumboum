@@ -22,6 +22,7 @@ package org.totalboumboum.statistics.detailed;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.game.round.Round;
 
@@ -37,9 +38,9 @@ public class StatisticRound extends StatisticBase
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC EVENTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<StatisticEvent> events = new ArrayList<StatisticEvent>();
+	private final List<StatisticEvent> events = new ArrayList<StatisticEvent>();
 	
-	public ArrayList<StatisticEvent> getStatisticEvents()
+	public List<StatisticEvent> getStatisticEvents()
 	{	return events;
 	}
 
@@ -59,8 +60,8 @@ public class StatisticRound extends StatisticBase
 	}
 
 	@Override
-	public ArrayList<StatisticBase> getConfrontationStats()
-	{	ArrayList<StatisticBase> result = new ArrayList<StatisticBase>();
+	public List<StatisticBase> getConfrontationStats()
+	{	List<StatisticBase> result = new ArrayList<StatisticBase>();
 		return result;
 	}
 	

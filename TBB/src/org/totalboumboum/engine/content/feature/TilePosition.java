@@ -2,6 +2,7 @@ package org.totalboumboum.engine.content.feature;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.jdom.Attribute;
@@ -85,8 +86,8 @@ public enum TilePosition implements Serializable
 	 * the XML value SOME represents any tile position except NONE. 
 	 * the XML value ANY represents any tile position including NONE. 
 	 */
-	public static ArrayList<TilePosition> loadTilePositionsAttribute(Element root, String attName)
-	{	ArrayList<TilePosition> result = new ArrayList<TilePosition>();
+	public static List<TilePosition> loadTilePositionsAttribute(Element root, String attName)
+	{	List<TilePosition> result = new ArrayList<TilePosition>();
 		Attribute attribute = root.getAttribute(attName);
 		String tilePositionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 		String[] tilePositionsStr = tilePositionStr.split(" ");

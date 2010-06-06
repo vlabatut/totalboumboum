@@ -202,7 +202,7 @@ public abstract class AbstractGesture<T extends AbstractAnimeDirection<?>, U ext
 		}
 		return result;
 	}
-	public ThirdModulation getThirdModulation(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	public ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	ThirdModulation result = null;
 		Iterator<ThirdModulation> i = thirdModulations.iterator();
 		while(i.hasNext() && result==null)

@@ -76,7 +76,7 @@ public class MatchLoader
 		
 		// notes
 		element = root.getChild(XmlNames.NOTES);
-		ArrayList<String> notes = loadNotesElement(element);
+		List<String> notes = loadNotesElement(element);
 		result.setNotes(notes);
 		
 		// author
@@ -97,8 +97,8 @@ public class MatchLoader
 	}		
 		
     @SuppressWarnings("unchecked")
-	public static ArrayList<String> loadNotesElement(Element root)
-    {	ArrayList<String> result = new ArrayList<String>();
+	public static List<String> loadNotesElement(Element root)
+    {	List<String> result = new ArrayList<String>();
     	if(root!=null)
     	{	List<Element> lines = root.getChildren(XmlNames.LINE);
 	    	Iterator<Element> i = lines.iterator();

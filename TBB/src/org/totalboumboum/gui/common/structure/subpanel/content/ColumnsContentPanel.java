@@ -24,14 +24,13 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.tools.GuiTools;
-
 
 public class ColumnsContentPanel extends ContentPanel
 {	private static final long serialVersionUID = 1L;
@@ -124,17 +123,17 @@ public class ColumnsContentPanel extends ContentPanel
 		add(column,2*index);
 	}
 	
-	public void setColumnKeys(int col, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	public void setColumnKeys(int col, List<String> keys, List<Boolean> imageFlags)
 	{	Column l = getColumn(col);
 		l.setKeys(keys,imageFlags);
 	}
 	
-	public void setColumnIcons(int col, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	public void setColumnIcons(int col, List<BufferedImage> icons, List<String> tooltips)
 	{	Column l = getColumn(col);
 		l.setIcons(icons,tooltips);
 	}
 	
-	public void setColumnTexts(int col, ArrayList<String> texts, ArrayList<String> tooltips)
+	public void setColumnTexts(int col, List<String> texts, List<String> tooltips)
 	{	Column l = getColumn(col);
 		l.setTexts(texts,tooltips);
 	}

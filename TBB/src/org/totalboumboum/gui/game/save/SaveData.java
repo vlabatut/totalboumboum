@@ -24,6 +24,7 @@ package org.totalboumboum.gui.game.save;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -72,7 +73,7 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 			
 			// list panel
 			{	folderPanel = new FolderBrowserSubPanel(leftWidth,dataHeight);
-				ArrayList<String> targetFiles = new ArrayList<String>();
+				List<String> targetFiles = new ArrayList<String>();
 				targetFiles.add(FileNames.FILE_ARCHIVE+FileNames.EXTENSION_XML);
 				targetFiles.add(FileNames.FILE_ARCHIVE+FileNames.EXTENSION_DATA);
 				folderPanel.setShowParent(false);

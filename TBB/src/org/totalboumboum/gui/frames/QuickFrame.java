@@ -57,6 +57,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuickFrame extends AbstractFrame implements ActionListener, LoopRenderPanel, RoundRenderPanel
 {	private static final long serialVersionUID = 1L;
@@ -99,7 +100,7 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 		// tournament
 		QuickStartConfiguration quickStartConfiguration = Configuration.getGameConfiguration().getQuickStartConfiguration(); 
 		tournament = quickStartConfiguration.loadQuickstart();
-		ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
+		List<Profile> selectedProfiles = new ArrayList<Profile>();
 		ProfilesSelection profilesSelection = quickStartConfiguration.getProfilesSelection();
 		selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
 		tournament.setProfiles(selectedProfiles);

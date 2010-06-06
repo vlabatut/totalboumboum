@@ -26,6 +26,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 import org.totalboumboum.configuration.Configuration;
@@ -306,7 +307,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 			case LINE_PANELDIM:
 				Dimension dim = videoConfiguration.getPanelDimension();
 				// index of the current dimension
-				ArrayList<Dimension> resolist;
+				List<Dimension> resolist;
 				if(availableResolutions.contains(dim))
 					resolist = new ArrayList<Dimension>(availableResolutions);
 				else	

@@ -26,6 +26,7 @@ import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.game.points.PointsConstant;
 import org.totalboumboum.game.points.PointsDiscretize;
@@ -75,8 +76,8 @@ public class PointsSubPanel extends TableSubPanel
 	public void setPointsProcessor(PointsProcessor pointsProcessor)
 	{	this.pointsProcessor = pointsProcessor;
 		// init data
-		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
-		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
+		ArrayList<List<Object>> data = new ArrayList<List<Object>>();
+		ArrayList<List<String>> tooltips = new ArrayList<List<String>>();
 		if(pointsProcessor!=null)
 			makePointsProcessorPanel(pointsProcessor,data,tooltips);
 		
@@ -95,14 +96,14 @@ public class PointsSubPanel extends TableSubPanel
 			}
 		
 			// data
-			Iterator<ArrayList<Object>> dt = data.iterator();
-			Iterator<ArrayList<String>> tt = tooltips.iterator();
+			Iterator<List<Object>> dt = data.iterator();
+			Iterator<List<String>> tt = tooltips.iterator();
 			int line = 0;
 			int colGroup = 0;
 			while(dt.hasNext())
 			{	// init
-				ArrayList<Object> tempDt = dt.next();
-				ArrayList<String> tempTt = tt.next();
+				List<Object> tempDt = dt.next();
+				List<String> tempTt = tt.next();
 				int colSub = 0;
 				// left
 				{	String tooltip = tempTt.get(colSub);
@@ -156,7 +157,7 @@ public class PointsSubPanel extends TableSubPanel
 //		repaint();
 	}
 	
-	private void makePointsProcessorPanel(PointsProcessor pp, ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips)
+	private void makePointsProcessorPanel(PointsProcessor pp, List<List<Object>> data, List<List<String>> tooltips)
 	{	// rankpoints
 		if(pp instanceof PointsRankpoints)
 		{	PointsRankpoints pr = (PointsRankpoints) pp;
@@ -206,14 +207,14 @@ public class PointsSubPanel extends TableSubPanel
 		}
 	}
 	
-	private void makePointsRankpointsPanel(PointsRankpoints pr, ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips)
+	private void makePointsRankpointsPanel(PointsRankpoints pr, List<List<Object>> data, List<List<String>> tooltips)
 	{	// format
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(2);
 		nf.setMinimumFractionDigits(0);
 		// this pp
-		{	ArrayList<Object> dt = new ArrayList<Object>();
-			ArrayList<String> tt = new ArrayList<String>();
+		{	List<Object> dt = new ArrayList<Object>();
+		List<String> tt = new ArrayList<String>();
 			data.add(dt);
 			tooltips.add(tt);
 			String name = prefix+GuiKeys.HEADER+GuiKeys.RANKPOINTS;
@@ -233,7 +234,7 @@ public class PointsSubPanel extends TableSubPanel
 		}
 		// source
 		{	PointsRankings prk = pr.getSource();
-			ArrayList<PointsProcessor> sources = prk.getSources();
+		List<PointsProcessor> sources = prk.getSources();
 			Iterator<PointsProcessor> i = sources.iterator();
 			while(i.hasNext())
 			{	PointsProcessor source = i.next();
@@ -246,8 +247,8 @@ public class PointsSubPanel extends TableSubPanel
 			{	String nbr = "#"+(i+1); 
 				String value = nf.format(values[i]);
 				String tooltip = nbr+new Character('\u2192').toString()+value+"pts";
-				ArrayList<Object> dt = new ArrayList<Object>();
-				ArrayList<String> tt = new ArrayList<String>();
+				List<Object> dt = new ArrayList<Object>();
+				List<String> tt = new ArrayList<String>();
 				data.add(dt);
 				tooltips.add(tt);
 				dt.add(nbr);
@@ -258,15 +259,15 @@ public class PointsSubPanel extends TableSubPanel
 		}		
 	}
 
-	private void makePointsDiscretizePanel(PointsDiscretize pd, ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips)
+	private void makePointsDiscretizePanel(PointsDiscretize pd, List<List<Object>> data, List<List<String>> tooltips)
 	{	// format
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(2);
 		nf.setMinimumFractionDigits(0);
 		
 		// this pp
-		{	ArrayList<Object> dt = new ArrayList<Object>();
-			ArrayList<String> tt = new ArrayList<String>();
+		{	List<Object> dt = new ArrayList<Object>();
+			List<String> tt = new ArrayList<String>();
 			data.add(dt);
 			tooltips.add(tt);
 			String name = prefix+GuiKeys.HEADER+GuiKeys.DISCRETIZE;
@@ -306,11 +307,11 @@ public class PointsSubPanel extends TableSubPanel
 		}
 	}
 
-	private void makePointsRankingsPanel(PointsRankings pr, ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips)
+	private void makePointsRankingsPanel(PointsRankings pr, List<List<Object>> data, List<List<String>> tooltips)
 	{	// this PP
 		{	boolean inverted = pr.isInverted();
-			ArrayList<Object> dt = new ArrayList<Object>();
-			ArrayList<String> tt = new ArrayList<String>();
+			List<Object> dt = new ArrayList<Object>();
+			List<String> tt = new ArrayList<String>();
 			data.add(dt);
 			tooltips.add(tt);
 			String name = prefix+GuiKeys.HEADER+GuiKeys.RANKINGS;
@@ -327,7 +328,7 @@ public class PointsSubPanel extends TableSubPanel
 			tt.add(tooltip);
 		}
 		// sources
-		{	ArrayList<PointsProcessor> sources = pr.getSources();
+		{	List<PointsProcessor> sources = pr.getSources();
 			Iterator<PointsProcessor> i = sources.iterator();
 			while(i.hasNext())
 			{	PointsProcessor source = i.next();
@@ -336,15 +337,15 @@ public class PointsSubPanel extends TableSubPanel
 		}
 	}
 
-	private void makePointsConstantPanel(PointsConstant pc, ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips)
+	private void makePointsConstantPanel(PointsConstant pc, List<List<Object>> data, List<List<String>> tooltips)
 	{	// format
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(2);
 		nf.setMinimumFractionDigits(0);
 		
 		float value = pc.getValue();
-		ArrayList<Object> dt = new ArrayList<Object>();
-		ArrayList<String> tt = new ArrayList<String>();
+		List<Object> dt = new ArrayList<Object>();
+		List<String> tt = new ArrayList<String>();
 		data.add(dt);
 		tooltips.add(tt);
 		String name = prefix+GuiKeys.HEADER+GuiKeys.CONSTANT;
@@ -357,9 +358,9 @@ public class PointsSubPanel extends TableSubPanel
 		tt.add(text);
 	}
 
-	private void makePointsTotalPanel(PointsTotal pt, ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips)
-	{	ArrayList<Object> dt = new ArrayList<Object>();
-		ArrayList<String> tt = new ArrayList<String>();
+	private void makePointsTotalPanel(PointsTotal pt, List<List<Object>> data, List<List<String>> tooltips)
+	{	List<Object> dt = new ArrayList<Object>();
+		List<String> tt = new ArrayList<String>();
 		data.add(dt);
 		tooltips.add(tt);
 		String name = prefix+GuiKeys.HEADER+GuiKeys.TOTAL;
@@ -372,10 +373,10 @@ public class PointsSubPanel extends TableSubPanel
 		tt.add(tooltip);
 	}
 
-	private void makePointsScoresPanel(PointsScores ps, ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips)
+	private void makePointsScoresPanel(PointsScores ps, List<List<Object>> data, List<List<String>> tooltips)
 	{	Score score = ps.getScore();
-		ArrayList<Object> dt = new ArrayList<Object>();
-		ArrayList<String> tt = new ArrayList<String>();
+		List<Object> dt = new ArrayList<Object>();
+		List<String> tt = new ArrayList<String>();
 		data.add(dt);
 		tooltips.add(tt);
 		String name = prefix+GuiKeys.HEADER+GuiKeys.SCORE;

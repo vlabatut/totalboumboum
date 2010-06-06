@@ -32,7 +32,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -48,7 +47,6 @@ import org.totalboumboum.gui.common.structure.ButtonAware;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.images.ImageTools;
-
 
 public class GuiTools
 {	
@@ -1310,7 +1308,7 @@ public class GuiTools
 	 * @param texts
 	 * @return
 	 */
-	public static int getMaximalWidth(float fontSize, ArrayList<String> texts)
+	public static int getMaximalWidth(float fontSize, List<String> texts)
 	{	int result = 0;
 		Iterator<String> it = texts.iterator();
 		while(it.hasNext())

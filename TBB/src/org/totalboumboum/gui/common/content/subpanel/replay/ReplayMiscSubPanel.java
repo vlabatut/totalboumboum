@@ -24,6 +24,7 @@ package org.totalboumboum.gui.common.content.subpanel.replay;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.game.replay.Replay;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
@@ -59,7 +60,7 @@ public class ReplayMiscSubPanel extends TableSubPanel
 		reinit(getLineCount(),COL_GROUPS,COL_SUBS);
 		
 		// icons
-		ArrayList<String> keys = new ArrayList<String>();
+		List<String> keys = new ArrayList<String>();
 		if(showName)
 			keys.add(GuiKeys.COMMON_REPLAY_NAME);
 		if(showPack)
@@ -69,8 +70,8 @@ public class ReplayMiscSubPanel extends TableSubPanel
 		
 		if(replay!=null)
 		{	// text
-			ArrayList<String> textValues = new ArrayList<String>();
-			ArrayList<String> tooltipValues = new ArrayList<String>();
+			List<String> textValues = new ArrayList<String>();
+			List<String> tooltipValues = new ArrayList<String>();
 			if(showName)
 			{	textValues.add(replay.getLevelName());
 				tooltipValues.add(replay.getLevelName());

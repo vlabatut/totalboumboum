@@ -103,12 +103,12 @@ public class CupTieBreak implements Serializable
 			Ranks ranks = part.getOrderedPlayers();
 			List<Profile> tie = ranks.getProfilesFromRank(problematicTie);
 			int tiedPlayersCount = tie.size();
-			ArrayList<Profile> tiedProfiles = (ArrayList<Profile>)tie;
+			List<Profile> tiedProfiles = (ArrayList<Profile>)tie;
 			
 			// tournament-relative numbers of the tied players
 			CupTournament tournament = part.getTournament();
-			ArrayList<Profile> tournamentProfiles = tournament.getProfiles();
-			ArrayList<Integer> numbers = new ArrayList<Integer>();
+			List<Profile> tournamentProfiles = tournament.getProfiles();
+			List<Integer> numbers = new ArrayList<Integer>();
 			for(Profile p: tiedProfiles)
 				numbers.add(tournamentProfiles.indexOf(p));
 			

@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
@@ -280,7 +281,7 @@ public class AiZone
 	 */
 	public Collection<AiTile> getNeighborTiles(AiTile tile)
 	{	Collection<AiTile> result = new ArrayList<AiTile>();
-		ArrayList<Direction> directions = Direction.getPrimaryValues();
+		List<Direction> directions = Direction.getPrimaryValues();
 		Iterator<Direction> d = directions.iterator();
 		while(d.hasNext())
 		{	Direction dir = d.next();

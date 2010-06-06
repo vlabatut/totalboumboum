@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -69,7 +70,7 @@ public class StatisticsMenu extends InnerMenuPanel implements ModalDialogPanelLi
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_OPTIONS_BUTTON);
+		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_OPTIONS_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
@@ -90,7 +91,7 @@ public class StatisticsMenu extends InnerMenuPanel implements ModalDialogPanelLi
 			boolean reinit = statisticsConfiguration.getReinit();
 			if(reinit)
 			{	String key = GuiKeys.MENU_OPTIONS_STATISTICS_DIALOG_TITLE;
-				ArrayList<String> text = new ArrayList<String>();
+				List<String> text = new ArrayList<String>();
 				text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_STATISTICS_DIALOG_QUESTION));
 				questionModal = new QuestionModalDialogPanel(getMenuParent(),key,text);
 				questionModal.addListener(this);

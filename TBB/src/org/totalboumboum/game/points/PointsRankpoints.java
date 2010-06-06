@@ -22,12 +22,11 @@ package org.totalboumboum.game.points;
  */
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
-
 
 /**
  * This PointsProcessor process the rankings in function of  the results coming 
@@ -50,7 +49,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
 public class PointsRankpoints extends PointsProcessor implements PPFunction
 {	private static final long serialVersionUID = 1L;
 
-	public PointsRankpoints(ArrayList<PointsProcessor> sources, float[] values, boolean inverted, boolean exaequoShare)
+	public PointsRankpoints(List<PointsProcessor> sources, float[] values, boolean inverted, boolean exaequoShare)
 	{	this.source = new PointsRankings(sources,inverted);
 		this.values = values;
 		this.exaequoShare = exaequoShare;
@@ -85,7 +84,7 @@ public class PointsRankpoints extends PointsProcessor implements PPFunction
 	public float[] process(StatisticHolder holder)
 	{	// init
 		StatisticBase stats = holder.getStats();
-		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		List<Integer> playersIds = stats.getPlayersIds();
 		float[] result = new float[playersIds.size()];
 		float[] temp = source.process(holder);
 		float[] values2 = new float[values.length];

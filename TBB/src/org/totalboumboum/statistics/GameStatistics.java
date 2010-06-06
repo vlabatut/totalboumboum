@@ -22,7 +22,6 @@ package org.totalboumboum.statistics;
  */
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -43,7 +42,6 @@ import org.totalboumboum.statistics.overall.OverallStatsSaver;
 import org.totalboumboum.statistics.overall.PlayerStats;
 import org.totalboumboum.tools.calculus.CalculusTools;
 import org.xml.sax.SAXException;
-
 
 public class GameStatistics
 {
@@ -161,7 +159,7 @@ public class GameStatistics
 	
 	public static void updatePlayersStats(StatisticRound stats)
 	{	float[] points = stats.getPoints();
-		ArrayList<Integer> winners = CalculusTools.getWinners(points);
+		List<Integer> winners = CalculusTools.getWinners(points);
 		
 		for(int index=0;index<stats.getPlayersIds().size();index++)
 		{	// init

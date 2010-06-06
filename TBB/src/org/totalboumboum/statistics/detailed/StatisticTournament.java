@@ -23,6 +23,7 @@ package org.totalboumboum.statistics.detailed;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.tools.calculus.CalculusTools;
@@ -48,7 +49,7 @@ public class StatisticTournament extends StatisticBase
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC MATCHES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<StatisticMatch> matches = new ArrayList<StatisticMatch>();
+	private final List<StatisticMatch> matches = new ArrayList<StatisticMatch>();
 	private int played[];
 	private int won[];
 	private int drawn[];
@@ -67,7 +68,7 @@ public class StatisticTournament extends StatisticBase
 	{	return lost;
 	}
 
-	public ArrayList<StatisticMatch> getStatisticMatches()
+	public List<StatisticMatch> getStatisticMatches()
 	{	return matches;
 	}
 
@@ -125,8 +126,8 @@ public class StatisticTournament extends StatisticBase
 	}
 
 	@Override
-	public ArrayList<StatisticBase> getConfrontationStats()
-	{	ArrayList<StatisticBase> result = new ArrayList<StatisticBase>();
+	public List<StatisticBase> getConfrontationStats()
+	{	List<StatisticBase> result = new ArrayList<StatisticBase>();
 		for(StatisticMatch r: matches)
 			result.add(r);
 		return result;

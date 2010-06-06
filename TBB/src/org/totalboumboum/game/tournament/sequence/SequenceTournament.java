@@ -92,7 +92,7 @@ public class SequenceTournament extends AbstractTournament
 	// MATCHES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean randomizeMatches;
-	private ArrayList<Match> matches = new ArrayList<Match>();
+	private List<Match> matches = new ArrayList<Match>();
 	private Match currentMatch;
 	private int currentIndex;
 

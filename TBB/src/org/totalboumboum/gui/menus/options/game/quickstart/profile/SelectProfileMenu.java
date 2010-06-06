@@ -24,7 +24,7 @@ package org.totalboumboum.gui.menus.options.game.quickstart.profile;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -45,16 +45,15 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
-
 public class SelectProfileMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	
 	private int index;
-	private ArrayList<Profile> profiles;
+	private List<Profile> profiles;
 	
 	private SelectedProfileData profileData;
 
-	public SelectProfileMenu(SplitMenuPanel container, MenuPanel parent, int index, ArrayList<Profile> profiles)
+	public SelectProfileMenu(SplitMenuPanel container, MenuPanel parent, int index, List<Profile> profiles)
 	{	super(container, parent);
 		this.index = index;
 		this.profiles = profiles;
@@ -69,7 +68,7 @@ public class SelectProfileMenu extends InnerMenuPanel implements DataPanelListen
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_OPTIONS_BUTTON);
+		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_OPTIONS_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons

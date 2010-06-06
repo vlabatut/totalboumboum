@@ -24,6 +24,7 @@ package org.totalboumboum.gui.common.content.subpanel.round;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import org.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
@@ -385,7 +386,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 	}
 	
 	private void setPointsValue(int index)
-	{	ArrayList<Integer> points = quickMatchConfiguration.getPoints();
+	{	List<Integer> points = quickMatchConfiguration.getPoints();
 		int i = 1+(index*3)+1;
 		String text = Integer.toString(points.get(index));
 		String tooltip = text;
@@ -519,7 +520,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<RoundQuickConfigSubPanelListener> listeners = new ArrayList<RoundQuickConfigSubPanelListener>();
+	private List<RoundQuickConfigSubPanelListener> listeners = new ArrayList<RoundQuickConfigSubPanelListener>();
 	
 	public void addListener(RoundQuickConfigSubPanelListener listener)
 	{	if(!listeners.contains(listener))

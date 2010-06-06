@@ -24,6 +24,7 @@ package org.totalboumboum.game.limit;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
@@ -31,7 +32,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
 public class Limits<T extends Limit> implements Serializable
 {	private static final long serialVersionUID = 1L;
 
-	ArrayList<T> limits = new ArrayList<T>();
+	List<T> limits = new ArrayList<T>();
 	private int index;
 	
 	public void addLimit(T limit)

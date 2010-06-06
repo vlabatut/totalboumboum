@@ -215,7 +215,7 @@ public class LeagueTournament extends AbstractTournament
 	private boolean randomizeMatches;
 	private ConfrontationOrder confrontationOrder;
 	private boolean minimizeConfrontations;
-	private ArrayList<Match> matches = new ArrayList<Match>();
+	private List<Match> matches = new ArrayList<Match>();
 	private Match currentMatch;
 	private int currentIndex;
 	private int matchCount;

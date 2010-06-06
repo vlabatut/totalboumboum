@@ -21,7 +21,7 @@ package org.totalboumboum.engine.content.feature.gesture.modulation;
  * 
  */
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Contact;
 import org.totalboumboum.engine.content.feature.Orientation;
@@ -30,7 +30,6 @@ import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.action.Circumstance;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
-
 
 public class ThirdModulation extends AbstractActionModulation
 {	private static final long serialVersionUID = 1L;
@@ -130,7 +129,7 @@ public class ThirdModulation extends AbstractActionModulation
 */		//	
 		return result;		
 	}
-	public boolean isConcerningAction(GeneralAction generalAction, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances) 
+	public boolean isConcerningAction(GeneralAction generalAction, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances) 
 	{	boolean result = super.isConcerningAction(generalAction,actorProperties,targetProperties);
 		if(result)
 			result = this.actorCircumstance.subsume(actorCircumstances);

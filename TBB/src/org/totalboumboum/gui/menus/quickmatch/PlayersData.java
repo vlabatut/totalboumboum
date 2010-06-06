@@ -23,6 +23,7 @@ package org.totalboumboum.gui.menus.quickmatch;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -72,7 +73,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	/////////////////////////////////////////////////////////////////
 	public void setQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration)
 	{	ProfilesSelection profilesSelection = quickMatchConfiguration.getProfilesSelection();
-		ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
+		List<Profile> selectedProfiles = new ArrayList<Profile>();
 		try
 		{	selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
 		}
@@ -103,7 +104,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		playersPanel.setPlayers(selectedProfiles);
 	}
 	
-	public ArrayList<Profile> getSelectedProfiles()
+	public List<Profile> getSelectedProfiles()
 	{	return playersPanel.getPlayers();	
 	}
 

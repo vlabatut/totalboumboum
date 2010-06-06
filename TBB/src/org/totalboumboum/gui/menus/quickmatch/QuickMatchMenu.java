@@ -212,7 +212,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 	}
 
 	private void setTournamentPlayers()
-	{	ArrayList<Profile> selectedProfiles = playersData.getSelectedProfiles();
+	{	List<Profile> selectedProfiles = playersData.getSelectedProfiles();
 		tournament.setProfiles(selectedProfiles);
 	}
 	
@@ -275,7 +275,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		{	// limits
 			Limits<RoundLimit> limits = new Limits<RoundLimit>();
 			boolean share = quickMatchConfiguration.getPointsShare();
-			ArrayList<Integer> pts = quickMatchConfiguration.getPoints();
+			List<Integer> pts = quickMatchConfiguration.getPoints();
 			float[] values = new float[pts.size()];
 			for(int i=0;i<values.length;i++)
 				values[i] = pts.get(i);

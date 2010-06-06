@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.Box;
@@ -61,7 +62,7 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		setTitleText(title,tooltip);
 		
-		ArrayList<String> text = loadText();
+		List<String> text = loadText();
 		setContent(text);
 	}
 		
@@ -70,7 +71,7 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	private MyLabel buttonConfirm;
 	
-	public void setContent(ArrayList<String> text)
+	public void setContent(List<String> text)
 	{	// sizes
 		float fontSize = getTitleFontSize()*GuiTools.FONT_TEXT_RATIO;
 		int buttonsHeight = (int)(GuiTools.getPixelHeight(fontSize)/GuiTools.FONT_RATIO);
@@ -146,8 +147,8 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 //		getDataPanel().add(Box.createVerticalGlue());
 	}
 	
-	public ArrayList<String> loadText()
-	{	ArrayList<String> result = new ArrayList<String>();
+	public List<String> loadText()
+	{	List<String> result = new ArrayList<String>();
 		String fileName = FileNames.FILE_ABOUT+FileNames.EXTENSION_TEXT;
 		File file = new File(fileName);
 		try

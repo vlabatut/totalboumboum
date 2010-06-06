@@ -1,13 +1,11 @@
 package org.totalboumboum.gui.tools;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.tools.GameData;
-
 
 public class GuiStringTools
 {
@@ -57,7 +55,7 @@ public class GuiStringTools
 	 * @param colorBackgrounds
 	 * @return
 	 */
-	public static int initColorTexts(int fontSize, ArrayList<String> colorTexts, ArrayList<String> colorTooltips, ArrayList<Color> colorBackgrounds)
+	public static int initColorTexts(int fontSize, List<String> colorTexts, List<String> colorTooltips, List<Color> colorBackgrounds)
 	{	int result = 0;
 		for(PredefinedColor color : PredefinedColor.values())
 		{	// text

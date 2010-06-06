@@ -22,6 +22,7 @@ package org.totalboumboum.gui.common.structure.panel.data;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.gui.common.structure.panel.ContentPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -56,7 +57,7 @@ public abstract class InnerDataPanel extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<DataPanelListener> listeners = new ArrayList<DataPanelListener>();
+	private List<DataPanelListener> listeners = new ArrayList<DataPanelListener>();
 	
 	public void addListener(DataPanelListener listener)
 	{	if(!listeners.contains(listener))

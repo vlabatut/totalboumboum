@@ -22,6 +22,7 @@ package org.totalboumboum.configuration.game.quickmatch;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.tools.GameData;
@@ -112,7 +113,7 @@ public class QuickMatchConfiguration
 	/////////////////////////////////////////////////////////////////
 	private boolean levelsRandomOrder = false;
 	private boolean playersRandomLocation = false;
-	private ArrayList<Integer> points = new ArrayList<Integer>(5);
+	private List<Integer> points = new ArrayList<Integer>(5);
 	private boolean pointsShare = false;
 	private QuickMatchDraw pointsDraw = QuickMatchDraw.BOTH;
 	private int limitTime = 60000;
@@ -154,10 +155,10 @@ public class QuickMatchConfiguration
 	{	this.playersRandomLocation = playersRandomLocation;
 	}
 	
-	public ArrayList<Integer> getPoints()
+	public List<Integer> getPoints()
 	{	return points;
 	}
-	public void setPoints(ArrayList<Integer> points)
+	public void setPoints(List<Integer> points)
 	{	this.points = points;
 	}
 	

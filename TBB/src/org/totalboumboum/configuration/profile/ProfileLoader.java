@@ -42,8 +42,8 @@ import org.xml.sax.SAXException;
 
 public class ProfileLoader
 {	
-	public static ArrayList<Profile> loadProfiles(ProfilesSelection profilesSelection) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	ArrayList<Profile> result = new ArrayList<Profile>();
+	public static List<Profile> loadProfiles(ProfilesSelection profilesSelection) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	List<Profile> result = new ArrayList<Profile>();
 		int size = profilesSelection.getProfileCount();
 		for(int i=0;i<size;i++)
 		{	// profile
@@ -163,7 +163,7 @@ public class ProfileLoader
     }
     
     public static List<Integer> getIdsList()
-    {	ArrayList<Integer> result = new ArrayList<Integer>();
+    {	List<Integer> result = new ArrayList<Integer>();
     	
     	// get folder
     	String folderStr = FilePaths.getProfilesPath();

@@ -23,7 +23,7 @@ package org.totalboumboum.gui.menus.explore;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -41,7 +41,6 @@ import org.totalboumboum.gui.menus.explore.rounds.select.SelectedRoundSplitPanel
 import org.totalboumboum.gui.menus.explore.tournaments.select.SelectedTournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-
 
 public class ExploreMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
@@ -80,7 +79,7 @@ public class ExploreMenu extends InnerMenuPanel
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_RESOURCES_BUTTON);
+		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_RESOURCES_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons

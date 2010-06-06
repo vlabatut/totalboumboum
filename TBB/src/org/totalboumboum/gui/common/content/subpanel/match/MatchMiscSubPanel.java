@@ -23,6 +23,7 @@ package org.totalboumboum.gui.common.content.subpanel.match;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.game.match.Match;
@@ -61,7 +62,7 @@ public class MatchMiscSubPanel extends TableSubPanel
 		reinit(LINES,COL_GROUPS,COL_SUBS);
 		
 		// icons
-		ArrayList<String> keys = new ArrayList<String>();
+		List<String> keys = new ArrayList<String>();
 		if(showName)
 			keys.add(GuiKeys.COMMON_MATCH_NAME);
 		if(showAuthor)
@@ -73,7 +74,7 @@ public class MatchMiscSubPanel extends TableSubPanel
 		
 		if(match!=null)
 		{	// text
-			ArrayList<String> values = new ArrayList<String>();
+			List<String> values = new ArrayList<String>();
 			if(showName)
 				values.add(match.getName());
 			if(showAuthor)

@@ -2,6 +2,7 @@ package org.totalboumboum.engine.content.feature.action;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Contact;
 import org.totalboumboum.engine.content.feature.Orientation;
@@ -62,7 +63,7 @@ public class Circumstance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ORIENTATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<Orientation> orientations = new ArrayList<Orientation>();
+	private final List<Orientation> orientations = new ArrayList<Orientation>();
 
 	public Orientation getOrientation()
 	{	Orientation result = null;
@@ -71,7 +72,7 @@ public class Circumstance implements Serializable
 		return result;
 	}
 
-	public ArrayList<Orientation> getOrientations()
+	public List<Orientation> getOrientations()
 	{	return orientations;	
 	}
 	
@@ -132,7 +133,7 @@ public class Circumstance implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// CONTACT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<Contact> contacts = new ArrayList<Contact>();
+	private final List<Contact> contacts = new ArrayList<Contact>();
 
 	public Contact getContact()
 	{	Contact result = null;
@@ -141,7 +142,7 @@ public class Circumstance implements Serializable
 		return result;
 	}
 
-	public ArrayList<Contact> getContacts()
+	public List<Contact> getContacts()
 	{	return contacts;	
 	}
 	
@@ -172,19 +173,19 @@ public class Circumstance implements Serializable
 		
 		// contact
 		if(result)
-		{	ArrayList<Contact> cts = circumstance.getContacts();
+		{	List<Contact> cts = circumstance.getContacts();
 			result = contacts.containsAll(cts);		
 		}
 		
 		// orientation
 		if(result)
-		{	ArrayList<Orientation> orts = circumstance.getOrientations();
+		{	List<Orientation> orts = circumstance.getOrientations();
 			result = orientations.containsAll(orts);
 		}
 		
 		// tile position
 		if(result)
-		{	ArrayList<TilePosition> tpos = circumstance.getTilePositions();
+		{	List<TilePosition> tpos = circumstance.getTilePositions();
 			result = tilePositions.containsAll(tpos);		
 		}
 		

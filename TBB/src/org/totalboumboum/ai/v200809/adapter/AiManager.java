@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v200809.adapter;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.ai.AbstractAiManager;
 import org.totalboumboum.engine.container.level.Level;
@@ -115,8 +116,8 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
     private Direction lastMove = Direction.NONE;
 
 	@Override
-	public ArrayList<ControlEvent> convertReaction(AiAction value)
-	{	ArrayList<ControlEvent> result = new ArrayList<ControlEvent>();
+	public List<ControlEvent> convertReaction(AiAction value)
+	{	List<ControlEvent> result = new ArrayList<ControlEvent>();
 		AiActionName name = value.getName();
 		Direction direction = value.getDirection();
 		ControlEvent event;
@@ -152,7 +153,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	 * 
 	 * @param result	liste des évènements adaptée à l'action renvoyée par l'IA
 	 */
-	private void reactionStop(ArrayList<ControlEvent> result)
+	private void reactionStop(List<ControlEvent> result)
 	{	if(lastMove!=Direction.NONE)
 		{	Direction prim[] = lastMove.getPrimaries();
 			for(int i=0;i<prim.length;i++)
@@ -172,7 +173,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	 * @param result
 	 * @param direction
 	 */
-	private void updateMove(ArrayList<ControlEvent> result, Direction direction)
+	private void updateMove(List<ControlEvent> result, Direction direction)
 	{	// init
 		Direction prim1[] = lastMove.getPrimaries();
 		Direction prim2[] = direction.getPrimaries();

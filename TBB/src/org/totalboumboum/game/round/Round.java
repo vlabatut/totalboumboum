@@ -280,7 +280,7 @@ public class Round implements StatisticHolder, Serializable
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int remainingPlayers;
-	private final ArrayList<Boolean> playersStatus = new ArrayList<Boolean>();
+	private final List<Boolean> playersStatus = new ArrayList<Boolean>();
 	private boolean randomLocation;
 
 	public boolean getRandomLocation()
@@ -290,7 +290,7 @@ public class Round implements StatisticHolder, Serializable
 	{	this.randomLocation = randomLocations;
 	}
 
-	public ArrayList<Boolean> getPlayersStatus()
+	public List<Boolean> getPlayersStatus()
 	{	return playersStatus;		
 	}
 	
@@ -422,9 +422,9 @@ public class Round implements StatisticHolder, Serializable
 		return result;
 	}
 	
-	public ArrayList<Integer> getWinners()
+	public List<Integer> getWinners()
 	{	float[] points = stats.getPoints();
-		ArrayList<Integer> result = CalculusTools.getWinners(points);
+		List<Integer> result = CalculusTools.getWinners(points);
 		return result;
 	}
 
@@ -443,12 +443,12 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// NOTES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> notes = new ArrayList<String>();
+	private final List<String> notes = new ArrayList<String>();
 
-	public void setNotes(ArrayList<String> notes)
+	public void setNotes(List<String> notes)
 	{	this.notes.addAll(notes);
 	}
-	public ArrayList<String> getNotes()
+	public List<String> getNotes()
 	{	return notes;
 	}
 

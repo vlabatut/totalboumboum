@@ -21,7 +21,7 @@ package org.totalboumboum.gui.game.tournament.results;
  * 
  */
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -33,7 +33,6 @@ import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPa
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiTools;
-
 
 public class CupResults extends TournamentResults<CupTournament>
 {	
@@ -90,7 +89,7 @@ public class CupResults extends TournamentResults<CupTournament>
 	{	this.tournament = tournament;
 		resultsPanel.setStatisticHolder(tournament);
 		// legs
-		ArrayList<CupLeg> legs = tournament.getLegs();
+		List<CupLeg> legs = tournament.getLegs();
 		legsPanel.setLeg(legs.get(0),LEGS_PER_PAGE);		
 	}
 	

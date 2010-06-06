@@ -1,6 +1,7 @@
 package org.totalboumboum.engine.content.feature.gesture.modulation;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Contact;
 import org.totalboumboum.engine.content.feature.TilePosition;
@@ -38,7 +39,7 @@ public class OtherModulation extends AbstractStateModulation
 	// CONTACTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** contacts between the other sprite and the modulating sprite */
-	protected final ArrayList<Contact> contacts = new ArrayList<Contact>();
+	protected final List<Contact> contacts = new ArrayList<Contact>();
 /*
 	protected ArrayList<Contact> getContacts()
 	{	return contacts;
@@ -52,7 +53,7 @@ public class OtherModulation extends AbstractStateModulation
 	// TILE POSITIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** positions of the other sprite in terms of tiles */
-	protected final ArrayList<TilePosition> tilePositions =  new ArrayList<TilePosition>();
+	protected final List<TilePosition> tilePositions =  new ArrayList<TilePosition>();
 	
 /*	protected ArrayList<TilePosition> getTilePositions()
 	{	return tilePositions;

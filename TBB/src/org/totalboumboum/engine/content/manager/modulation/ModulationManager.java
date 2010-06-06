@@ -21,7 +21,7 @@ package org.totalboumboum.engine.content.manager.modulation;
  * 
  */
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -108,7 +108,7 @@ public abstract class ModulationManager
 	 */
 	public abstract ThirdModulation getThirdModulation(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances);
 
-	public abstract ThirdModulation getThirdModulation(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances);
+	public abstract ThirdModulation getThirdModulation(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances);
 
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES			/////////////////////////////////////////
@@ -127,7 +127,7 @@ public abstract class ModulationManager
 	 */
 	public abstract boolean isThirdPreventing(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances);
 
-	public abstract boolean isThirdPreventing(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances);
+	public abstract boolean isThirdPreventing(GeneralAction action, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances);
 	
 	public abstract boolean isTargetPreventing(SpecificAction action);
 	

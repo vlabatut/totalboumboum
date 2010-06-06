@@ -130,7 +130,7 @@ public class QuickMatchConfigurationLoader
 	@SuppressWarnings("unchecked")
 	private static void loadPointsElement(Element root, QuickMatchConfiguration result)
 	{	// values
-		ArrayList<Integer> points = new ArrayList<Integer>();
+		List<Integer> points = new ArrayList<Integer>();
 		for(int i=0;i<GameData.CONTROL_COUNT;i++)
 			points.add(0);
 		List<Element> list = root.getChildren(XmlNames.VALUE);

@@ -23,12 +23,13 @@ package org.totalboumboum.statistics.detailed;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Statistics implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private final ArrayList<StatisticTournament> tournaments = new ArrayList<StatisticTournament>();
+	private final List<StatisticTournament> tournaments = new ArrayList<StatisticTournament>();
 	
 	public void addGame(StatisticTournament tournament)
 	{	tournaments.add(tournament);

@@ -207,7 +207,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	@SuppressWarnings("unchecked")
 	private HashMap<Integer,List<Comparable>> playersScores = new HashMap<Integer, List<Comparable>>();
 	private int currentPage = 0;
-	private final ArrayList<TableSubPanel> listPanels = new ArrayList<TableSubPanel>();
+	private final List<TableSubPanel> listPanels = new ArrayList<TableSubPanel>();
 	private int pageCount;	
 	private int lines;
 	private TableSubPanel mainPanel;

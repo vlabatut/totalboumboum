@@ -177,12 +177,12 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<Profile> profiles = new ArrayList<Profile>();
+	private final List<Profile> profiles = new ArrayList<Profile>();
 
 	public void addProfile(Profile profile)
 	{	profiles.add(profile);
 	}
-	public ArrayList<Profile> getProfiles()
+	public List<Profile> getProfiles()
 	{	return profiles;	
 	}
 	
@@ -198,7 +198,7 @@ public class Match implements StatisticHolder, Serializable
 	}
 	
 	@Override
-	public ArrayList<Boolean> getPlayersStatus()
+	public List<Boolean> getPlayersStatus()
 	{	// useless here
 		return null;
 	}
@@ -349,12 +349,12 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// NOTES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> notes = new ArrayList<String>();
+	private final List<String> notes = new ArrayList<String>();
 
-	public void setNotes(ArrayList<String> notes)
+	public void setNotes(List<String> notes)
 	{	this.notes.addAll(notes);
 	}
-	public ArrayList<String> getNotes()
+	public List<String> getNotes()
 	{	return notes;
 	}
 	

@@ -21,7 +21,7 @@ package org.totalboumboum.gui.game.tournament.description;
  * 
  */
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -42,7 +42,6 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-
 
 public class SingleDescription extends TournamentDescription<SingleTournament> implements LimitsSubPanelListener
 {	
@@ -120,7 +119,7 @@ public class SingleDescription extends TournamentDescription<SingleTournament> i
 		{	limits = match.getLimits();
 		}
 		// players
-		ArrayList<Profile> players = match.getProfiles();
+		List<Profile> players = match.getProfiles();
 		playersPanel.setPlayers(players);
 		// limits & points
 		limitsPanel.setLimits(limits);

@@ -30,45 +30,49 @@ import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
-import org.totalboumboum.engine.control.player.LocalPlayerControl;
+import org.totalboumboum.engine.control.player.RemotePlayerControl;
 import org.xml.sax.SAXException;
 
-public abstract class ControlledPlayer extends AbstractPlayer
+public class RemotePlayer extends AbstractPlayer
 {	
-	public ControlledPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 		
+// TODO the control manager in the sprite must be initialized witht the controlsettings read in the stream
+// (should be already done when uploading profiles, to be verified)
 		// set controls
 		int indexCtrSet = profile.getControlSettingsIndex();
 		controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(indexCtrSet);
 		if(controlSettings == null)
 			controlSettings = new ControlSettings();
 		sprite.setControlSettings(controlSettings);
-		spriteControl = new LocalPlayerControl(this);
+		spriteControl = new RemotePlayerControl(this);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** control */
-	private LocalPlayerControl spriteControl;
+	private RemotePlayerControl spriteControl;
 	/** current controls */
 	private ControlSettings controlSettings;
 
 	public ControlSettings getControlSettings()
 	{	return controlSettings;
 	}
-	public LocalPlayerControl getSpriteControl()
+
+	public RemotePlayerControl getSpriteControl()
 	{	return spriteControl;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void finish()
 	{	if(!finished)
 		{	super.finish();
-			
+		
 			// control
 			spriteControl.finish();
 			spriteControl = null;

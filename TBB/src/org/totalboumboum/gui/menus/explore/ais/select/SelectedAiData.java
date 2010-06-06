@@ -24,6 +24,7 @@ package org.totalboumboum.gui.menus.explore.ais.select;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -80,7 +81,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 				packPanel = new PackBrowserSubPanel(listWidth,listHeight);
 				String baseFolder = FilePaths.getAisPath();
 				String additionalFolder = FileNames.FILE_AIS;
-				ArrayList<String> targetFiles = new ArrayList<String>();
+				List<String> targetFiles = new ArrayList<String>();
 				targetFiles.add(FileNames.FILE_AI+FileNames.EXTENSION_XML);
 				targetFiles.add(FileNames.FILE_AI_MAIN_CLASS+FileNames.EXTENSION_CLASS);
 				packPanel.setFolder(baseFolder,additionalFolder,targetFiles);
@@ -125,7 +126,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 	{	// infos
 		infosPanel.setAiPreview(selectedAi);
 		// notes
-		ArrayList<String> notesValues;
+		List<String> notesValues;
 		TextContentPanel textPanel = notesPanel.getDataPanel();
 		// no player selected
 		if(selectedAi==null)

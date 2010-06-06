@@ -23,6 +23,7 @@ package org.totalboumboum.engine.content.feature.gesture.modulation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.ability.ActionAbility;
@@ -58,7 +59,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	// ACTOR RESTRICTIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** abilités necessaires à l'acteur pour que la modulation soit appliquée */
-	protected final ArrayList<AbstractAbility> actorRestrictions = new ArrayList<AbstractAbility>();
+	protected final List<AbstractAbility> actorRestrictions = new ArrayList<AbstractAbility>();
 	
 	public void addActorRestriction(AbstractAbility ability)
 	{	actorRestrictions.add(ability);
@@ -68,7 +69,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	// TARGET RESTRICTIONS		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** abilités necessaires à la cible pour que la modulation soit appliquée */
-	protected final ArrayList<AbstractAbility> targetRestrictions = new ArrayList<AbstractAbility>();
+	protected final List<AbstractAbility> targetRestrictions = new ArrayList<AbstractAbility>();
 	
 	public void addTargetRestriction(AbstractAbility ability)
 	{	targetRestrictions.add(ability);
@@ -142,7 +143,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 
 		return result;		
 	}
-	public boolean isConcerningAction(GeneralAction generalAction, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties)
+	public boolean isConcerningAction(GeneralAction generalAction, List<AbstractAbility> actorProperties, List<AbstractAbility> targetProperties)
 	{	boolean result;
 		// action
 		result = action.subsume(generalAction);

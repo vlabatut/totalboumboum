@@ -36,8 +36,8 @@ public class Ranks implements Serializable
 
 	public Ranks copy()
 	{	Ranks result = new Ranks();
-		for(Entry<Integer,ArrayList<Profile>> entry: ranks.entrySet())
-		{	ArrayList<Profile> list = entry.getValue();
+		for(Entry<Integer,List<Profile>> entry: ranks.entrySet())
+		{	List<Profile> list = entry.getValue();
 			int rank = entry.getKey();
 			for(Profile profile: list)
 				result.addProfile(rank, profile);
@@ -48,14 +48,14 @@ public class Ranks implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// HASHMAP			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final HashMap<Integer,ArrayList<Profile>> ranks = new HashMap<Integer, ArrayList<Profile>>();
+	private final HashMap<Integer,List<Profile>> ranks = new HashMap<Integer, List<Profile>>();
 	
-	public HashMap<Integer,ArrayList<Profile>> getRanks()
+	public HashMap<Integer,List<Profile>> getRanks()
 	{	return ranks;
 	}
 		
 	public void addProfile(int rank, Profile profile)
-	{	ArrayList<Profile> list = ranks.get(rank);
+	{	List<Profile> list = ranks.get(rank);
 		if(list==null)
 		{	list = new ArrayList<Profile>();
 			ranks.put(rank,list);
@@ -74,7 +74,7 @@ public class Ranks implements Serializable
 	
 	public int size()
 	{	int result = 0;
-		for(Entry<Integer,ArrayList<Profile>> entry: ranks.entrySet())
+		for(Entry<Integer,List<Profile>> entry: ranks.entrySet())
 			result = result + entry.getValue().size();
 		return result;		
 	}
@@ -131,7 +131,7 @@ public class Ranks implements Serializable
 	}
 
 	public List<Profile> getProfilesFromRank(int rank)
-	{	ArrayList<Profile> result = ranks.get(rank);
+	{	List<Profile> result = ranks.get(rank);
 		return result;		
 	}
 
@@ -140,11 +140,11 @@ public class Ranks implements Serializable
 	/////////////////////////////////////////////////////////////////
 	public int getAbsoluteRankForProfile(Profile profile)
 	{	int result = -1;
-		Iterator<Entry<Integer,ArrayList<Profile>>> it = ranks.entrySet().iterator();
+		Iterator<Entry<Integer,List<Profile>>> it = ranks.entrySet().iterator();
 		int cpt = 1;
 		while(it.hasNext() && result==-1)
-		{	Entry<Integer,ArrayList<Profile>> entry = it.next();
-			ArrayList<Profile> list = entry.getValue();
+		{	Entry<Integer,List<Profile>> entry = it.next();
+		List<Profile> list = entry.getValue();
 			Iterator<Profile> it2 = list.iterator();
 			while(it2.hasNext() && result==-1)
 			{	Profile p = it2.next();
@@ -159,11 +159,11 @@ public class Ranks implements Serializable
 	
 	public int getRankForProfile(Profile profile)
 	{	int result = -1;
-		Iterator<Entry<Integer,ArrayList<Profile>>> it = ranks.entrySet().iterator();
+		Iterator<Entry<Integer,List<Profile>>> it = ranks.entrySet().iterator();
 		while(it.hasNext() && result==-1)
-		{	Entry<Integer,ArrayList<Profile>> entry = it.next();
+		{	Entry<Integer,List<Profile>> entry = it.next();
 			int rank = entry.getKey();
-			ArrayList<Profile> list = entry.getValue();
+			List<Profile> list = entry.getValue();
 			if(list.contains(profile))
 				result = rank;
 		}

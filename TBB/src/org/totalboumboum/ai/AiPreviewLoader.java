@@ -2,7 +2,6 @@ package org.totalboumboum.ai;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
-
 
 public class AiPreviewLoader
 {
@@ -34,7 +32,7 @@ public class AiPreviewLoader
 	{	Element element; 
 		// notes
 		element = root.getChild(XmlNames.NOTES);
-		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
+		List<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		// authors
 		element = root.getChild(XmlNames.AUTHORS);

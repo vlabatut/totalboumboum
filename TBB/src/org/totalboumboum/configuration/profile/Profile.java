@@ -23,7 +23,7 @@ package org.totalboumboum.configuration.profile;
 
 import java.io.Serializable;
 
-import org.totalboumboum.engine.control.player.PlayerControl;
+import org.totalboumboum.engine.control.player.LocalPlayerControl;
 
 
 public class Profile implements Serializable
@@ -138,7 +138,7 @@ public class Profile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	transient private PlayerControl spriteControl;
+	transient private LocalPlayerControl spriteControl;
 	private int controlSettingsIndex = 0;
 
 	public int getControlSettingsIndex()
@@ -149,11 +149,11 @@ public class Profile implements Serializable
 	{	this.controlSettingsIndex = controlSettings;
 	}
 	
-	public PlayerControl getSpriteControl()
+	public LocalPlayerControl getSpriteControl()
 	{	return spriteControl;
 	}
 	
-	public void setSpriteControl(PlayerControl spriteControl)
+	public void setSpriteControl(LocalPlayerControl spriteControl)
 	{	this.spriteControl = spriteControl;
 	}
 

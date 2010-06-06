@@ -23,6 +23,7 @@ package org.totalboumboum.gui.common.content.subpanel.level;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.engine.container.level.preview.LevelPreview;
@@ -68,7 +69,7 @@ public class LevelSubPanel extends TableSubPanel
 		reinit(lines,COL_GROUPS,COL_SUBS);
 		
 		// icons
-		ArrayList<String> keys = new ArrayList<String>();
+		List<String> keys = new ArrayList<String>();
 		if(showName)
 			keys.add(GuiKeys.COMMON_LEVEL_NAME);
 		if(showPack)
@@ -88,7 +89,7 @@ public class LevelSubPanel extends TableSubPanel
 		
 		if(levelPreview!=null)
 		{	// text
-			ArrayList<String> values = new ArrayList<String>();
+			List<String> values = new ArrayList<String>();
 			if(showName)
 				values.add(levelPreview.getLevelInfo().getTitle());
 			if(showPack)

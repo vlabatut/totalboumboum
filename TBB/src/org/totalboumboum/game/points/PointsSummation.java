@@ -21,11 +21,10 @@ package org.totalboumboum.game.points;
  * 
  */
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
-
 
 /**
  * This PointsProcessor calculates its result by summing all the 
@@ -57,7 +56,7 @@ public class PointsSummation extends PointsProcessor implements PPFunction
 	public float[] process(StatisticHolder holder)
 	{	// init
 		StatisticBase stats = holder.getStats();
-		ArrayList<Integer> playersIds = stats.getPlayersIds();
+		List<Integer> playersIds = stats.getPlayersIds();
 		float[] result = new float[playersIds.size()];
 		float[] temp = source.process(holder);
 		// process

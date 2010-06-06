@@ -23,7 +23,7 @@ package org.totalboumboum.configuration.game.quickmatch;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -133,7 +133,7 @@ public class QuickMatchConfigurationSaver
 			String draw = quickMatchConfiguration.getPointsDraw().toString();
 			pointsElement.setAttribute(XmlNames.DRAW,draw);
 			// values
-			ArrayList<Integer> values = quickMatchConfiguration.getPoints();
+			List<Integer> values = quickMatchConfiguration.getPoints();
 			for(int r=0;r<values.size();r++)
 			{	Element valueElement = new Element(XmlNames.VALUE);
 				pointsElement.addContent(valueElement);

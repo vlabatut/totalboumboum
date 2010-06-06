@@ -28,6 +28,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -256,7 +257,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	private CupLeg leg;
 	private CupPart selectedPart;
 	private int currentPage = 0;
-	private ArrayList<JPanel> pagePanels;
+	private List<JPanel> pagePanels;
 	private int pageCount;	
 	
 	public void setLeg(CupLeg leg, int partsPerPage)
@@ -311,7 +312,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	private int getPageCount()
 	{	int result = 1;
 		if(leg!=null)
-		{	ArrayList<CupPart> parts = leg.getParts();
+		{	List<CupPart> parts = leg.getParts();
 			result = parts.size()/partsPerPage;
 			if(parts.size()%partsPerPage>0)
 				result++;
@@ -327,7 +328,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	
 	private void selectPart(CupPart part)
 	{	// init
-		ArrayList<CupPart> parts = leg.getParts();
+		List<CupPart> parts = leg.getParts();
 		int index;
 	
 		// unselect
@@ -347,7 +348,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 			index = parts.indexOf(part);
 			if(index==-1)
 			{	CupTournament tournament = leg.getTournament();
-				ArrayList<CupLeg> legs = tournament.getLegs();
+				List<CupLeg> legs = tournament.getLegs();
 				Iterator<CupLeg> it = legs.iterator();
 				CupLeg lg = null;
 				while(index==-1 && it.hasNext())
@@ -419,7 +420,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 
 		// previous leg
 		if(index==COL_LEFT)
-		{	ArrayList<CupLeg> legs = leg.getTournament().getLegs();
+		{	List<CupLeg> legs = leg.getTournament().getLegs();
 			int legNumber = leg.getNumber();
 			if(legNumber>0)
 			{	selectPart(null);
@@ -449,7 +450,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 		}
 		// previous leg
 		else if(index==COL_RIGHT)
-		{	ArrayList<CupLeg> legs = leg.getTournament().getLegs();
+		{	List<CupLeg> legs = leg.getTournament().getLegs();
 			int legNumber = leg.getNumber();
 			if(legNumber<legs.size()-1)
 			{	selectPart(null);
@@ -468,7 +469,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<LegSubPanelListener> listeners = new ArrayList<LegSubPanelListener>();
+	private List<LegSubPanelListener> listeners = new ArrayList<LegSubPanelListener>();
 	
 	public void addListener(LegSubPanelListener listener)
 	{	if(!listeners.contains(listener))
