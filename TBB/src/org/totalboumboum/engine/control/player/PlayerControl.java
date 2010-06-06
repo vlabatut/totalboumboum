@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.control;
+package org.totalboumboum.engine.control.player;
 
 /*
  * Total Boum Boum
@@ -27,6 +27,7 @@ import java.util.HashMap;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
@@ -87,7 +88,7 @@ public class PlayerControl implements KeyListener
 
 	@Override
 	public void keyTyped(KeyEvent arg0)
-	{	// NOTE a priori inutile ici
+	{	// should be useless here
 	}
 	
 	/////////////////////////////////////////////////////////////////

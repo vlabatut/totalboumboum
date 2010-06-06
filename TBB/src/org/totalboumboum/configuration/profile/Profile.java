@@ -23,7 +23,7 @@ package org.totalboumboum.configuration.profile;
 
 import java.io.Serializable;
 
-import org.totalboumboum.engine.control.PlayerControl;
+import org.totalboumboum.engine.control.player.PlayerControl;
 
 
 public class Profile implements Serializable

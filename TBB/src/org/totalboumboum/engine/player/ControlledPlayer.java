@@ -30,7 +30,7 @@ import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
-import org.totalboumboum.engine.control.PlayerControl;
+import org.totalboumboum.engine.control.player.PlayerControl;
 import org.xml.sax.SAXException;
 
 public abstract class ControlledPlayer extends AbstractPlayer
