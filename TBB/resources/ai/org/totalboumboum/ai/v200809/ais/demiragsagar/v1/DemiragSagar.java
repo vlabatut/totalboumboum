@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v1;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
 import org.totalboumboum.ai.v200809.adapter.AiActionName;
@@ -20,7 +21,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 	AiHero ownHero;
 	AiTile caseCourant;
 	AiTile caseHedef;
-	ArrayList<AiTile> bombes;
+	List<AiTile> bombes;
 	int baseX = 0;
 	int baseY;
 	int zoneWidth;
@@ -28,7 +29,7 @@ public class DemiragSagar extends ArtificialIntelligence {
 	Attack monAttack;
 	double[][] matrice;
 	Escape esc;
-	ArrayList<AiTile> interTiles;
+	List<AiTile> interTiles;
 	boolean estIntermediaire;
 	boolean debug;
 	boolean olmadikacilk;

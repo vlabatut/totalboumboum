@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Vector;
 
@@ -21,7 +22,6 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
-
 
 public class KokciyanMazmanoglu extends ArtificialIntelligence
 {
@@ -1108,13 +1108,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				}
 			}
 		} else {
-			ArrayList<AiTile> possible = new ArrayList<AiTile>();
+			List<AiTile> possible = new ArrayList<AiTile>();
 			possible.add(zone.getTile(me.getLine()-2,me.getCol()-1));// sol ust capraz
 			possible.add(zone.getTile(me.getLine()-2,me.getCol()+1));// sag ust capraz
 			possible.add(zone.getTile(me.getLine()+2,me.getCol()-1));// sol alt capraz
 			possible.add(zone.getTile(me.getLine()+2,me.getCol()+1));// sag alt capraz
 
-			ArrayList<AiTile> result= new ArrayList<AiTile>();
+			List<AiTile> result= new ArrayList<AiTile>();
 
 			for(int k=0;k<possible.size();k++){
 				if(!isObstacle(possible.get(k))){
@@ -1162,13 +1162,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @return
 	 * @throws StopRequestException
 	 */
-	public  ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
+	public  List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 
 	// liste des cases autour de la case de référence
 	Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 	// on garde les cases sans bloc ni bombe ni feu
-	ArrayList<AiTile> result = new ArrayList<AiTile>();
+	List<AiTile> result = new ArrayList<AiTile>();
 	Iterator<AiTile> it = neighbors.iterator();
 	while(it.hasNext())
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -1519,7 +1519,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		AiTile targetTile = currentTile;
 		if(res>0)
 		{
-			ArrayList<AiTile> list = new ArrayList<AiTile>();
+			List<AiTile> list = new ArrayList<AiTile>();
 			for (int i = 0; i < zone.getHeigh(); i++){
 				checkInterruption();
 				for (int j = 0; j < zone.getWidth(); j++){
@@ -1864,7 +1864,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 					res=false;
 			}
 		} //else {
-		ArrayList<AiTile> possible = new ArrayList<AiTile>();
+		List<AiTile> possible = new ArrayList<AiTile>();
 		if(0<me.getLine()-2 && 0<me.getCol()-1)
 			possible.add(zone.getTile(me.getLine()-2,me.getCol()-1));// sol ust capraz
 		if(0<me.getLine()-2 && me.getCol()+1<zone.getWidth())
@@ -1874,7 +1874,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		if(me.getLine()+2<zone.getHeigh() && me.getCol()+1<zone.getWidth())
 			possible.add(zone.getTile(me.getLine()+2,me.getCol()+1));// sag alt capraz
 
-		ArrayList<AiTile> result= new ArrayList<AiTile>();
+		List<AiTile> result= new ArrayList<AiTile>();
 
 		for(int k=0;k<possible.size();k++){
 			if(!isObstacle(possible.get(k))){
@@ -1922,7 +1922,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 		double count = MinPosValor(matrix);
 
-		ArrayList<AiTile> list = new ArrayList<AiTile>();
+		List<AiTile> list = new ArrayList<AiTile>();
 		for (int i = 0; i < zone.getHeigh(); i++){
 			checkInterruption();
 			for (int j = 0; j < zone.getWidth(); j++){
@@ -1948,7 +1948,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 		double count = MinPosValor(matrix);
 		if(count != Double.MAX_VALUE){
-			ArrayList<AiTile> list = new ArrayList<AiTile>();
+			List<AiTile> list = new ArrayList<AiTile>();
 			for (int i = 0; i < zone.getHeigh(); i++){
 				checkInterruption();
 				for (int j = 0; j < zone.getWidth(); j++){

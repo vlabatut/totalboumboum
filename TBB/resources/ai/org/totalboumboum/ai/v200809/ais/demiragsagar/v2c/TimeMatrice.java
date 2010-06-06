@@ -1,16 +1,15 @@
 package org.totalboumboum.ai.v200809.ais.demiragsagar.v2c;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
 public class TimeMatrice {
-	private ArrayList<AiTile> caseBombes;
+	private List<AiTile> caseBombes;
 	private long timeMatrice[][];
 	private AiZone zone;
 	private int defaultPortee;
@@ -134,7 +133,7 @@ public class TimeMatrice {
 		ai.checkInterruption();
 		Functions.printMatrice(this.timeMatrice,ai);
 	}
-	public void updateTimeMatrice(ArrayList<AiTile> nouvelleBombes) throws StopRequestException {
+	public void updateTimeMatrice(List<AiTile> nouvelleBombes) throws StopRequestException {
 		ai.checkInterruption();
 		if (this.debug)
 			this.printTimeMatrice();

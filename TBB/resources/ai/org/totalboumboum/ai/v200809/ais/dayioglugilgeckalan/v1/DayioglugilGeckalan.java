@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
 import org.totalboumboum.ai.v200809.adapter.AiActionName;
@@ -179,7 +180,7 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 	private AiTile getNextTile() throws StopRequestException{
 		checkInterruption();
 		
-		ArrayList<AiTile> list = getClearNeighbors(currentTile);
+		List<AiTile> list = getClearNeighbors(currentTile);
 		Iterator<AiTile> it1 = list.iterator();
 		AiTile temp;
 	    AiTile min=it1.next();
@@ -197,7 +198,7 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases voisines accessibles	
-		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+		List<AiTile> tiles = getClearNeighbors(currentTile);
 		// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 		boolean canGoBack = false;
 		if(tiles.contains(previousTile))
@@ -239,13 +240,13 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 		}
 	}
 	
-	private ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
+	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -274,7 +275,7 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 		// si un obstacle est apparu sur la case destination, on change de destination
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
-			ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+			List<AiTile> tiles = getClearNeighbors(currentTile);
 			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);

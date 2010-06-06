@@ -5,6 +5,7 @@ package org.totalboumboum.ai.v200809.ais.akpolatsener.v2;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v200809.adapter.AiBomb;
@@ -33,13 +34,13 @@ public class TileControl {
 	 * @return liste des voisins sans condition
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> findAllNeighbors(AiTile tile)
+	public List<AiTile> findAllNeighbors(AiTile tile)
 			throws StopRequestException {
 		as.checkInterruption();
 
 		Iterator<AiTile> iter = as.zone.getNeighborTiles(tile).iterator();
 
-		ArrayList<AiTile> tiles = new ArrayList<AiTile>();
+		List<AiTile> tiles = new ArrayList<AiTile>();
 
 		while (iter.hasNext()) {
 			as.checkInterruption();
@@ -70,13 +71,13 @@ public class TileControl {
 	 * @return liste des voisins filtré
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> filterNeighbors(AiTile tile, boolean bombDanger,
+	public List<AiTile> filterNeighbors(AiTile tile, boolean bombDanger,
 			boolean bomb, boolean fire, boolean block, boolean enemy,
 			boolean softwall, boolean bonus) throws StopRequestException {
 		as.checkInterruption();
 
-		ArrayList<AiTile> tiles = findAllNeighbors(tile);
-		ArrayList<AiTile> filteredTiles = new ArrayList<AiTile>();
+		List<AiTile> tiles = findAllNeighbors(tile);
+		List<AiTile> filteredTiles = new ArrayList<AiTile>();
 
 		for (AiTile tempTile : tiles) {
 			as.checkInterruption();
@@ -147,7 +148,7 @@ public class TileControl {
 	public int getNeighborsCount(AiTile tile) throws StopRequestException {
 		as.checkInterruption();
 
-		ArrayList<AiTile> tiles = this.filterNeighbors(tile, false, false,
+		List<AiTile> tiles = this.filterNeighbors(tile, false, false,
 				false, false, false, false, false);
 
 		return tiles.size();
@@ -162,7 +163,7 @@ public class TileControl {
 	 * @return la liste des cases triés
 	 * @throws StopRequestException
 	 */
-	ArrayList<AiTile> sortTiles(ArrayList<AiTile> tiles, boolean targetOrDanger)
+	List<AiTile> sortTiles(List<AiTile> tiles, boolean targetOrDanger)
 			throws StopRequestException {
 		as.checkInterruption();
 
@@ -329,7 +330,7 @@ public class TileControl {
 
 		Direction result = null;
 
-		ArrayList<AiTile> tiles = filterNeighbors(tile, true, true, true,
+		List<AiTile> tiles = filterNeighbors(tile, true, true, true,
 				true, false, true, false);
 		if (tiles.size() == 0)
 			tiles = filterNeighbors(tile, false, true, true, true, false,
@@ -338,7 +339,7 @@ public class TileControl {
 		for (AiTile neigh : tiles) {
 			as.checkInterruption();
 			Direction dir = null;
-			ArrayList<AiTile> neighbors = null;
+			List<AiTile> neighbors = null;
 			AiTile tempTile = neigh;
 			while ((neighbors = filterNeighbors(tempTile, false, true, true,
 					true, false, true, false)).size() > 0) {

@@ -5,6 +5,7 @@ package org.totalboumboum.ai.v200809.ais.medeniuluer.v2;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
 import org.totalboumboum.ai.v200809.adapter.AiActionName;
@@ -97,7 +98,7 @@ public class MedeniUluer extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases voisines accessibles	
-		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+	List<AiTile> tiles = getClearNeighbors(currentTile);
 		// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 		boolean canGoBack = false;
 		if(tiles.contains(previousTile))
@@ -139,7 +140,7 @@ public class MedeniUluer extends ArtificialIntelligence
 		}
 	}
 	
-	private ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
+	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
@@ -174,7 +175,7 @@ public class MedeniUluer extends ArtificialIntelligence
 		// si un obstacle est apparu sur la case destination, on change de destination
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
-			ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
+			List<AiTile> tiles = getClearNeighbors(currentTile);
 			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);

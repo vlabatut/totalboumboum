@@ -3,6 +3,7 @@ package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2c;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
@@ -26,7 +27,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 
 	private int strategy;
 	// liste des bombes
-	private ArrayList<AiBomb> bombList;
+	private List<AiBomb> bombList;
 	// Definit pour garder la cost pour acceder a cible( modifié a chaque invocation de Astar 
 	private int cost;
 	
@@ -66,13 +67,13 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * @return
 	 * @throws StopRequestException
 	 */
-	private ArrayList<AiTile> getClearNeighbors(AiTile head, boolean fire) throws StopRequestException
+	private List<AiTile> getClearNeighbors(AiTile head, boolean fire) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(head);
 		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -172,7 +173,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		
 		head.setmarkVisited(true);
 		
-		ArrayList<AiTile> tiles = null;
+		List<AiTile> tiles = null;
 		
 		tiles = getClearNeighbors(head.getAiTile(),true);
 		
@@ -278,7 +279,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		
 		CostTile head =new CostTile(ownHero.getTile(),0,tileGone,Direction.NONE,this);
 		head.setmarkVisited(true);
-		ArrayList<AiTile> tiles = null;
+		List<AiTile> tiles = null;
 			tiles = getClearNeighbors(head.getAiTile(),true);
 
 		while(!tiles.isEmpty()){
@@ -473,10 +474,10 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * @return dangertiles
 	 * @throws StopRequestException
 	 */
-	private ArrayList<AiTile> markDangerTiles() throws StopRequestException {
+	private List<AiTile> markDangerTiles() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		
-		ArrayList<AiTile> dangerTiles = new ArrayList<AiTile>();
+		List<AiTile> dangerTiles = new ArrayList<AiTile>();
 		Collection<AiBomb> bombs = getPercepts().getBombs();
 		//s'il y a des bombs
 		if (bombs.size() > 0) {
@@ -516,10 +517,10 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * @return
 	 * @throws StopRequestException
 	 */
-	private ArrayList<DangerPriorityTile> markDangerTileswithPriority() throws StopRequestException {
+	private List<DangerPriorityTile> markDangerTileswithPriority() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		
-		ArrayList<DangerPriorityTile> dangerTiles = new ArrayList<DangerPriorityTile>();
+		List<DangerPriorityTile> dangerTiles = new ArrayList<DangerPriorityTile>();
 		Collection<AiBomb> bombs = getPercepts().getBombs();
 		if (bombs.size() > 0) {
 			int range;
@@ -819,7 +820,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		
 		if(strategy == -1){
 			
-			ArrayList<AiTile> blockSearcher = new ArrayList<AiTile>();
+			List<AiTile> blockSearcher = new ArrayList<AiTile>();
 			Collection<AiTile> possibleDestructibles = new ArrayList<AiTile>();
 			Collection<AiTile> oldClears = new ArrayList<AiTile>();
 			blockSearcher.add(zone.getOwnHero().getTile());
@@ -878,7 +879,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	private boolean bombCheck(AiZone zone) throws StopRequestException{
 		
 		checkInterruption(); //APPEL OBLIGATOIRE
-		ArrayList<AiTile> blockSearcher = new ArrayList<AiTile>();
+		List<AiTile> blockSearcher = new ArrayList<AiTile>();
 		Collection<AiTile> oldClears = new ArrayList<AiTile>();
 		blockSearcher.add(zone.getOwnHero().getTile());
 		while(!blockSearcher.isEmpty()){

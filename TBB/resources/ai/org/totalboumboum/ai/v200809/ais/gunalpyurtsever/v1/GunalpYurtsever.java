@@ -3,6 +3,7 @@ package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v1;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
@@ -21,13 +22,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class GunalpYurtsever extends ArtificialIntelligence
 {
 	
-	private ArrayList<AiTile> getClearNeighbors(AiTile head, boolean fire) throws StopRequestException
+	private List<AiTile> getClearNeighbors(AiTile head, boolean fire) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(head);
 		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -85,7 +86,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		
 		CostTile head =new CostTile(ownHero.getTile(),0,tileGone,Direction.NONE);
 		head.setmarkVisited(true);
-		ArrayList<AiTile> tiles = null;
+		List<AiTile> tiles = null;
 		
 		try {
 			tiles = getClearNeighbors(head.getAiTile(),true);
@@ -172,7 +173,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		
 		CostTile head =new CostTile(ownHero.getTile(),0,tileGone,Direction.NONE);
 		head.setmarkVisited(true);
-		ArrayList<AiTile> tiles = null;
+		List<AiTile> tiles = null;
 		try {
 			tiles = getClearNeighbors(head.getAiTile(),true);
 		} catch (StopRequestException e) {
@@ -307,10 +308,10 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	}
 	
 	
-	public ArrayList<AiTile> markDangerTiles() throws StopRequestException {
+	public List<AiTile> markDangerTiles() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		
-		ArrayList<AiTile> dangerTiles = new ArrayList<AiTile>();
+		List<AiTile> dangerTiles = new ArrayList<AiTile>();
 		Collection<AiBomb> bombs = getPercepts().getBombs();
 		if (bombs.size() > 0) {
 			int range;

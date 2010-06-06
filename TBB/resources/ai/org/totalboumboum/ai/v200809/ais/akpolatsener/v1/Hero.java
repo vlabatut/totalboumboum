@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.totalboumboum.ai.v200809.adapter.AiHero;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
@@ -67,8 +68,8 @@ public class Hero {
 		Collection<AiHero> allHeros = zone.getHeroes();
 		Iterator<AiHero> iter = allHeros.iterator();
 		
-		ArrayList<AiHero> allHeros2 = new ArrayList<AiHero>();
-		ArrayList<Integer> heroDistance = new ArrayList<Integer>();
+		List<AiHero> allHeros2 = new ArrayList<AiHero>();
+		List<Integer> heroDistance = new ArrayList<Integer>();
 
 		int heroNumber;
 		

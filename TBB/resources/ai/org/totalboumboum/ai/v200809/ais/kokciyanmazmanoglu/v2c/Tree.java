@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v200809.ais.kokciyanmazmanoglu.v2c;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
@@ -9,9 +9,6 @@ import org.totalboumboum.ai.v200809.adapter.AiActionName;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
-
-
-
 
 public class Tree {
 
@@ -115,7 +112,7 @@ public class Tree {
 		km.checkInterruption();
 		Vector<Link> vLink = new Vector<Link>();
 		AiTile tNode = km.getPercepts().getTile(node.getLine(), node.getCol());
-		ArrayList<AiTile> arrayTile= km.getClearNeighbors(tNode);
+		List<AiTile> arrayTile= km.getClearNeighbors(tNode);
 		if(arrayTile.size() != 1){
 		if(arrayTile.contains(node.convertToTile()))arrayTile.remove(node.convertToTile());
 		}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
@@ -419,11 +420,11 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		// return Math.hypot(vertical, horizontal);
 	}
 
-	private ArrayList<AiTile> getClearNeighbors(AiTile tile)
+	private List<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
 		checkInterruption();
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbors.iterator();
 		while (it.hasNext()) {
 			checkInterruption();
