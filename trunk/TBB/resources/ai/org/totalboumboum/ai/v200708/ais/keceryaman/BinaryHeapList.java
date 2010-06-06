@@ -1,9 +1,10 @@
 package org.totalboumboum.ai.v200708.ais.keceryaman;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BinaryHeapList {
-	private ArrayList<Node> list;
+	private List<Node> list;
 	
 	/**
 	 * Adding a new element to the list

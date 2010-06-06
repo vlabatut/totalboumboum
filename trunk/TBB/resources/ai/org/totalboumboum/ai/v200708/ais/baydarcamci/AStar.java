@@ -25,7 +25,7 @@ public class AStar implements PathFinder {
 	/** The map */
 	
 	/** A current list of neighbors. Optimized for 2D grids to begin with but it will adjust itself */
-	private ArrayList<int[]> neighbors = new ArrayList<int[]>(8);
+	private List<int[]> neighbors = new ArrayList<int[]>(8);
 
 	/** The goal node */
 	private Node end;
@@ -37,7 +37,7 @@ public class AStar implements PathFinder {
 	private int steps;
 	
 	/** The current path */
-	public ArrayList<int[]> path = new ArrayList<int[]>();
+	public List<int[]> path = new ArrayList<int[]>();
 	
 	private int[] ownPosition;
     
@@ -193,7 +193,7 @@ public class AStar implements PathFinder {
 	    
 	}
 	
-	public synchronized void findPath(int[] from, int[] to, ArrayList<int[]> path) {
+	public synchronized void findPath(int[] from, int[] to, List<int[]> path) {
 		cleanup();
 		steps = 0;
 		this.path = path;
@@ -393,7 +393,7 @@ public class AStar implements PathFinder {
 		
 	}
 
-	public void getNeighbors(int [] node, int [] parent, ArrayList<int[]> path)
+	public void getNeighbors(int [] node, int [] parent, List<int[]> path)
 	{   BaydarCamci bomber = new BaydarCamci();
 	    node=ownPosition;
 	    bomber.getPossibleMoves(ownPosition[0],ownPosition[1]);

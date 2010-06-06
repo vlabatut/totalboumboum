@@ -1,6 +1,7 @@
 package org.totalboumboum.ai.v200708.ais.keceryaman;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Node {
 	/**
@@ -25,7 +26,7 @@ public class Node {
 	 * nodes
 	 */
 	private Node parent;
-	public ArrayList<Node> neighbors;
+	public List<Node> neighbors;
 	
 	public int getCost (){
 		return cost;

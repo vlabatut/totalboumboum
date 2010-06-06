@@ -1,6 +1,7 @@
 package org.totalboumboum.ai.v200708.ais.baydarcamci;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
@@ -30,7 +31,7 @@ public class BaydarCamci extends ArtificialIntelligence
     int runAwayStep = 0; 
     public int bombPower =0 ;
     
-    public ArrayList<int[]> path = new ArrayList<int[]>();
+    public List<int[]> path = new ArrayList<int[]>();
     
     
     /**

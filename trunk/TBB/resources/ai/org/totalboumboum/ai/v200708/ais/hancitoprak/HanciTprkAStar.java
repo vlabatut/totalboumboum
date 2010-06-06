@@ -2,15 +2,16 @@ package org.totalboumboum.ai.v200708.ais.hancitoprak;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class HanciTprkAStar {
 
 	/** The set of nodes that have been searched through */
-	private ArrayList<HanciTprkNode> closed = new ArrayList<HanciTprkNode>();
+	private List<HanciTprkNode> closed = new ArrayList<HanciTprkNode>();
 	/** The set of nodes that we do not yet consider fully searched */
 	private HanciTprkSortedList open = new HanciTprkSortedList();
 
-	public ArrayList<HanciTprkNode> path = new ArrayList<HanciTprkNode>();
+	public List<HanciTprkNode> path = new ArrayList<HanciTprkNode>();
 
 	private HanciTprkNode[][] nodes;
 
@@ -366,7 +367,7 @@ public class HanciTprkAStar {
 	}
 
 	public boolean isInList(HanciTprkNode courante,
-			ArrayList<HanciTprkNode> list) {
+			List<HanciTprkNode> list) {
 		Iterator<HanciTprkNode> ito = list.iterator();
 		while (ito.hasNext()) {
 			if (ito.next().equals(courante))

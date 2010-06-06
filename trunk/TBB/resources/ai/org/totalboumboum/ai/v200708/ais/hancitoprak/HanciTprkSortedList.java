@@ -2,11 +2,12 @@ package org.totalboumboum.ai.v200708.ais.hancitoprak;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class HanciTprkSortedList {
 	/** The list of elements */
 	@SuppressWarnings("unchecked")
-	private ArrayList list = new ArrayList();
+	private List list = new ArrayList();
 	
 	@SuppressWarnings("unchecked")
 	public HanciTprkSortedList() {
