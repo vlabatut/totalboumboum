@@ -75,7 +75,7 @@ import org.totalboumboum.engine.loop.display.DisplaySpeed;
 import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
@@ -452,19 +452,19 @@ public class ServerLoop extends VisibleLoop
 	// SYSTEM CONTROLS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void processEvent(ControlEvent event)
+	public void processEvent(SystemControlEvent event)
 	{	String name = event.getName();
-		if(name.equals(ControlEvent.REQUIRE_CANCEL_ROUND))
+		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 			setCanceled(true);
-		else if(name.equals(ControlEvent.REQUIRE_ENGINE_STEP))
+		else if(name.equals(SystemControlEvent.REQUIRE_ENGINE_STEP))
 			switchEngineStep(true);
-		else if(name.equals(ControlEvent.REQUIRE_SLOW_DOWN))
+		else if(name.equals(SystemControlEvent.REQUIRE_SLOW_DOWN))
 			slowDown();
-		else if(name.equals(ControlEvent.REQUIRE_SPEED_UP))
+		else if(name.equals(SystemControlEvent.REQUIRE_SPEED_UP))
 			speedUp();
-		else if(name.equals(ControlEvent.SWITCH_AIS_PAUSE))
+		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
 			switchEngineStep(true);
-		else if(name.equals(ControlEvent.SWITCH_ENGINE_PAUSE))
+		else if(name.equals(SystemControlEvent.SWITCH_ENGINE_PAUSE))
 			switchEnginePause();
 		else
 			super.processEvent(event);

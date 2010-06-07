@@ -33,7 +33,7 @@ import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.loop.Loop;
 import org.totalboumboum.engine.loop.ServerLoop;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.round.RoundVariables;
@@ -60,7 +60,7 @@ public class DisplayAisColors implements Display
 	private final List<Boolean> show = new ArrayList<Boolean>();
 
 	@Override
-	public synchronized void switchShow(ControlEvent event)
+	public synchronized void switchShow(SystemControlEvent event)
 	{	int index = event.getIndex();
 		if(index<show.size())
 		{	boolean temp = show.get(index);
@@ -78,7 +78,7 @@ public class DisplayAisColors implements Display
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_DISPLAY_AIS_COLORS;
+	{	return SystemControlEvent.SWITCH_DISPLAY_AIS_COLORS;
 	}
 
 	/////////////////////////////////////////////////////////////////

@@ -27,7 +27,7 @@ import java.awt.Graphics;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.loop.VisibleLoop;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.game.round.RoundVariables;
 
 public class DisplayGrid implements Display
@@ -51,7 +51,7 @@ public class DisplayGrid implements Display
 	private boolean show = false;
 	
 	@Override
-	public synchronized void switchShow(ControlEvent event)
+	public synchronized void switchShow(SystemControlEvent event)
 	{	show = !show;		
 	}
 	
@@ -63,7 +63,7 @@ public class DisplayGrid implements Display
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_DISPLAY_GRID;
+	{	return SystemControlEvent.SWITCH_DISPLAY_GRID;
 	}
 
 	/////////////////////////////////////////////////////////////////

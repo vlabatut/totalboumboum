@@ -28,7 +28,7 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
 import org.totalboumboum.engine.loop.VisibleLoop;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 public class DisplayEnginePause implements Display
 {
@@ -45,7 +45,7 @@ public class DisplayEnginePause implements Display
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void switchShow(ControlEvent event)
+	public void switchShow(SystemControlEvent event)
 	{	// useless here
 	}
 	
@@ -53,7 +53,7 @@ public class DisplayEnginePause implements Display
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_ENGINE_PAUSE;
+	{	return SystemControlEvent.SWITCH_ENGINE_PAUSE;
 	}
 
 	/////////////////////////////////////////////////////////////////

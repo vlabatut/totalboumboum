@@ -28,7 +28,7 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 public class DisplaySpeed implements Display
 {
@@ -42,7 +42,7 @@ public class DisplaySpeed implements Display
 	private boolean show = false;
 	
 	@Override
-	public synchronized void switchShow(ControlEvent event)
+	public synchronized void switchShow(SystemControlEvent event)
 	{	show = !show;		
 	}
 	
@@ -54,7 +54,7 @@ public class DisplaySpeed implements Display
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_DISPLAY_SPEED;
+	{	return SystemControlEvent.SWITCH_DISPLAY_SPEED;
 	}
 
 	/////////////////////////////////////////////////////////////////

@@ -30,7 +30,7 @@ import java.awt.geom.Rectangle2D;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.loop.VisibleLoop;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 public class DisplayTilesPositions implements Display
 {
@@ -54,8 +54,8 @@ public class DisplayTilesPositions implements Display
 	private boolean mode = true;
 	
 	@Override
-	public synchronized void switchShow(ControlEvent event)
-	{	if(event.getIndex()==ControlEvent.REGULAR)
+	public synchronized void switchShow(SystemControlEvent event)
+	{	if(event.getIndex()==SystemControlEvent.REGULAR)
 			show = !show;
 		else
 			mode = !mode;
@@ -73,7 +73,7 @@ public class DisplayTilesPositions implements Display
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS;
+	{	return SystemControlEvent.SWITCH_DISPLAY_TILES_POSITIONS;
 		
 	}
 

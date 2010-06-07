@@ -52,7 +52,7 @@ import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.control.system.SystemControl;
 import org.totalboumboum.engine.loop.display.DisplayManager;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.ControlledPlayer;
@@ -431,7 +431,7 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	protected SystemControl systemControl;
 
-	public void processEvent(ControlEvent event)
+	public void processEvent(SystemControlEvent event)
 	{	
 //		String name = event.getName();
 //		if(name.equals(ControlEvent.REQUIRE_CANCEL_ROUND))
@@ -654,13 +654,13 @@ public abstract class VisibleLoop extends Loop
 					}
 					// show ready-set-go
 					if(entryIndex<entryDelays.length-1)
-					{	ControlEvent event = new ControlEvent(ControlEvent.REQUIRE_NEXT_MESSAGE);
+					{	SystemControlEvent event = new SystemControlEvent(SystemControlEvent.REQUIRE_NEXT_MESSAGE);
 						processEvent(event);
 //System.out.println(totalTime+": message");				
 					}
 					// start the game
 					if(entryIndex==entryDelays.length-1) 
-					{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_NEXT_MESSAGE);
+					{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_NEXT_MESSAGE);
 						processEvent(controlEvent);
 //System.out.println(totalTime+": start");				
 						EngineEvent engineEvent = new EngineEvent(EngineEvent.ROUND_START);

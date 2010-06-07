@@ -21,24 +21,38 @@ package org.totalboumboum.engine.control;
  * 
  */
 
+import java.io.Serializable;
 
-public class ControlCode
-{	private int keyCode;
-	private boolean mode;
+public class ControlCode implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	
 	public ControlCode(int keyCode, boolean mode)
 	{	this.keyCode = keyCode;
 		this.mode = mode;
 	}
 
-	public int getKeyCode() {
-		return keyCode;
+	/////////////////////////////////////////////////////////////////
+	// CODE					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int keyCode;
+
+	public int getKeyCode()
+	{	return keyCode;
 	}
 
-	public boolean getMode() {
-		return mode;
+	/////////////////////////////////////////////////////////////////
+	// MODE					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean mode;
+
+	public boolean getMode()
+	{	return mode;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()

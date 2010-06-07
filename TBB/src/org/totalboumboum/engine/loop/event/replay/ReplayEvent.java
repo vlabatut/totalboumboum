@@ -21,24 +21,13 @@ package org.totalboumboum.engine.loop.event.replay;
  * 
  */
 
-import java.io.Serializable;
+import org.totalboumboum.engine.loop.event.StreamedEvent;
 
-import org.totalboumboum.game.round.RoundVariables;
-
-public abstract class ReplayEvent implements Serializable
+public abstract class ReplayEvent extends StreamedEvent
 {	private static final long serialVersionUID = 1L;
 	
 	protected ReplayEvent()
-	{	time = RoundVariables.loop.getTotalEngineTime();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// TIME					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected long time;
-	
-	public long getTime()
-	{	return time;
+	{	super();
 	}
 	
 	/////////////////////////////////////////////////////////////////

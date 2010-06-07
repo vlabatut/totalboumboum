@@ -21,7 +21,7 @@ package org.totalboumboum.engine.loop.event.control;
  * 
  */
 
-public class ControlEvent
+public class SystemControlEvent
 {	private static final long serialVersionUID = 1L;
 	
 	public final static String REQUIRE_CANCEL_ROUND = "REQUIRE_CANCEL_ROUND";
@@ -47,11 +47,11 @@ public class ControlEvent
 	public final static int REGULAR = 0;
 	public final static int MODE = 1;
 
-	public ControlEvent(String name)
+	public SystemControlEvent(String name)
 	{	this.name = name;
 	}
 	
-	public ControlEvent(String name, int index)
+	public SystemControlEvent(String name, int index)
 	{	this.name = name;
 		this.index = index;
 	}

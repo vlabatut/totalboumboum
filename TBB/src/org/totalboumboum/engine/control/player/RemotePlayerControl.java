@@ -21,9 +21,12 @@ package org.totalboumboum.engine.control.player;
  * 
  */
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.control.ControlCode;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.player.RemotePlayer;
 
 public class RemotePlayerControl extends PlayerControl<RemotePlayer> implements Runnable
@@ -44,15 +47,21 @@ public class RemotePlayerControl extends PlayerControl<RemotePlayer> implements 
 	@Override
 	public void run()
 	{	Sprite sprite = getSprite();
-		while(!Thread.interrupted())
-		{	/* TODO 
-			 *	1) lire un évènement dans le flux
-			 *	2) l'envoyer au sprite correspondant
-			 *
-			 *  c'est tout !
-			 */
-		
-			
+		try
+		{	while(!Thread.interrupted())
+			{	// read the control event in the network stream
+				RemotePlayerControlEvent event = (RemotePlayerControlEvent)in.readObject();
+				// get the control code
+				ControlCode controlCode = event.getControlCode();
+				// send it to the sprite like a local control code
+				sprite.putControlCode(controlCode);
+			}
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
+		{	e.printStackTrace();
 		}
 	}
 	

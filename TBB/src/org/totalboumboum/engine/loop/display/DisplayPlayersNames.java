@@ -30,7 +30,7 @@ import java.util.List;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.VisibleLoop;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 
 public class DisplayPlayersNames implements Display
@@ -50,7 +50,7 @@ public class DisplayPlayersNames implements Display
 	private boolean show = false;
 	
 	@Override
-	public synchronized void switchShow(ControlEvent event)
+	public synchronized void switchShow(SystemControlEvent event)
 	{	show = !show;		
 	}
 	
@@ -62,7 +62,7 @@ public class DisplayPlayersNames implements Display
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES;
+	{	return SystemControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES;
 	}
 
 	/////////////////////////////////////////////////////////////////

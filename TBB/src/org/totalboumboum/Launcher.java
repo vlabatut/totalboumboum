@@ -1237,12 +1237,24 @@ public class Launcher
 	 */
 	
 	// TODO loop >> effacer tous les objets inutiles dans finish()
-	// TODO enregistrer des temps et positions à l'échelle 1:1 seulement
-	//		>> non : rengistrer à l'échelle courrante
-	//		   garder cette échelle
-	//		   lors de la lecture, Replay fait la conversion de l'échelle originelle vers la courante
 	
 	// TODO faut transmettre les abilities/modulations graphiques, elles sont nécessaires
 	//	>> faut donc un modulation manager, et un ability manager (?)
 	//	>> coute cher... autre solution ?
+	
+	/* TODO
+	 * - côté serveur :
+	 * 		- modification de la boucle pour initialiser et fermer les connexion nécessaires
+	 *        (elles peuvent aussi être gérées en amont, à voir)
+	 *        mais de toute façon faut aussi envoyer les données via la connexion (comme pr replay en fait)
+	 *      - nouvelle classe héritant de Player, controlé à distance 
+	 *      - nouveau controle associé à cette classe, lisant les controle dans le flux associé au joueur
+	 *        >> NOTE attention: peut y avoir plusieurs joueurs pour un seul flux !
+	 * - côté client :
+	 * 		- version de la boucle héritant de replay mais rajoutant la gestion des controles
+	 *  	- version spéciale de Control pour que les codes soient envoyés dans le flux (NetworkControl)
+	 *  	- version d'un joueur : comme avant, mais généraliser pour prendre LocalControl ou NetworkControl
+	 *  	  le controle utilisé peut être décidé lors de l'init de la loop, en fonction du type de la loop justement
+	 *  	  intérêt: on garde le joueur humain et l'IA
+	 */
 }

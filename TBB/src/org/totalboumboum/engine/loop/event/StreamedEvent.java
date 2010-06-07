@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.event;
 
 /*
  * Total Boum Boum
@@ -21,24 +21,23 @@ package org.totalboumboum.engine.loop.display;
  * 
  */
 
-import java.awt.Graphics;
+import java.io.Serializable;
 
-import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
+import org.totalboumboum.game.round.RoundVariables;
 
-public interface Display
-{
-	/////////////////////////////////////////////////////////////////
-	// SHOW				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void switchShow(SystemControlEvent event);
+public abstract class StreamedEvent implements Serializable
+{	private static final long serialVersionUID = 1L;
+	
+	protected StreamedEvent()
+	{	time = RoundVariables.loop.getTotalEngineTime();
+	}
 	
 	/////////////////////////////////////////////////////////////////
-	// DRAW				/////////////////////////////////////////////
+	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void draw(Graphics g);
-
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public String getEventName();
+	protected long time;
+	
+	public long getTime()
+	{	return time;
+	}
 }

@@ -1,4 +1,4 @@
-package org.totalboumboum.engine.loop.display;
+package org.totalboumboum.engine.loop.event.control;
 
 /*
  * Total Boum Boum
@@ -21,24 +21,23 @@ package org.totalboumboum.engine.loop.display;
  * 
  */
 
-import java.awt.Graphics;
+import org.totalboumboum.engine.control.ControlCode;
+import org.totalboumboum.engine.loop.event.StreamedEvent;
 
-import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
+public class RemotePlayerControlEvent extends StreamedEvent
+{	private static final long serialVersionUID = 1L;
 
-public interface Display
-{
-	/////////////////////////////////////////////////////////////////
-	// SHOW				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void switchShow(SystemControlEvent event);
+	public RemotePlayerControlEvent(ControlCode controlCode)
+	{	super();
+		this.controlCode = controlCode;
+	}
 	
 	/////////////////////////////////////////////////////////////////
-	// DRAW				/////////////////////////////////////////////
+	// CONTROL CODE			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void draw(Graphics g);
+	private ControlCode controlCode;
 
-	/////////////////////////////////////////////////////////////////
-	// EVENT NAME		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public String getEventName();
+	public ControlCode getControlCode()
+	{	return controlCode;	
+	}
 }
