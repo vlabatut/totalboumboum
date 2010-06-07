@@ -30,7 +30,7 @@ import java.util.List;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.ServerLoop;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 
 public class DisplayAisPause implements Display
@@ -50,7 +50,7 @@ public class DisplayAisPause implements Display
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void switchShow(ControlEvent event)
+	public void switchShow(SystemControlEvent event)
 	{	// useless here
 	}
 	
@@ -58,7 +58,7 @@ public class DisplayAisPause implements Display
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_AIS_PAUSE;
+	{	return SystemControlEvent.SWITCH_AIS_PAUSE;
 	}
 
 	/////////////////////////////////////////////////////////////////

@@ -24,7 +24,7 @@ package org.totalboumboum.engine.control.system;
 import java.awt.event.KeyEvent;
 
 import org.totalboumboum.engine.loop.ReplayLoop;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 public class ReplaySytemControl extends SystemControl
 {	
@@ -47,77 +47,77 @@ public class ReplaySytemControl extends SystemControl
 //					|| (keyCode == KeyEvent.VK_END)
 //					|| ((keyCode == KeyEvent.VK_C) && e.isControlDown())
 				)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_CANCEL_ROUND);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_CANCEL_ROUND);
 				loop.processEvent(controlEvent);
 			}
 			
 			// replay: fast forward
 			else if(keyCode == KeyEvent.VK_RIGHT)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_FAST_FORWARD);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_FAST_FORWARD);
 				loop.processEvent(controlEvent);
 			}
 			// replay: backward
 			else if(keyCode == KeyEvent.VK_LEFT)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_BACKWARD);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_BACKWARD);
 				loop.processEvent(controlEvent);
 			}
 			// replay: speed up
 			else if(keyCode == KeyEvent.VK_UP)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_SPEED_UP);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_SPEED_UP);
 				loop.processEvent(controlEvent);
 			}
 			// replay: slow down
 			else if(keyCode == KeyEvent.VK_DOWN)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_SLOW_DOWN);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_SLOW_DOWN);
 				loop.processEvent(controlEvent);
 			}
 			// replay: pause/play
 			else if(keyCode == KeyEvent.VK_SPACE)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_ENGINE_PAUSE);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE);
 				loop.processEvent(controlEvent);
 			}
 			
 			// debug: grid
 			else if(keyCode == KeyEvent.VK_F1)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_GRID);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_GRID);
 				loop.processEvent(controlEvent);
 			}
 			// debug: tiles positions
 			else if(keyCode == KeyEvent.VK_F2)
-			{	ControlEvent controlEvent;
+			{	SystemControlEvent controlEvent;
 				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,ControlEvent.MODE);
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,SystemControlEvent.MODE);
 				else
-					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,ControlEvent.REGULAR);
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
 			// debug: sprites positions
 			else if(keyCode == KeyEvent.VK_F3)
-			{	ControlEvent controlEvent;
+			{	SystemControlEvent controlEvent;
 				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,ControlEvent.MODE);
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,SystemControlEvent.MODE);
 				else
-					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,ControlEvent.REGULAR);
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
 			// debug: FPS/UPS
 			else if(keyCode == KeyEvent.VK_F4)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_FPS);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_FPS);
 				loop.processEvent(controlEvent);
 			}
 			// debug: speed coeff
 			else if(keyCode == KeyEvent.VK_F5)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPEED);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPEED);
 				loop.processEvent(controlEvent);
 			}
 			// debug: time
 			else if(keyCode == KeyEvent.VK_F6)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TIME);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME);
 				loop.processEvent(controlEvent);
 			}
 			// debug: names
 			else if(keyCode == KeyEvent.VK_F7)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
 				loop.processEvent(controlEvent);
 			}
 		}
@@ -130,12 +130,12 @@ public class ReplaySytemControl extends SystemControl
 		
 		// replay: fast forward
 		if(keyCode == KeyEvent.VK_RIGHT)
-		{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_FAST_FORWARD);
+		{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_FAST_FORWARD);
 			loop.processEvent(controlEvent);
 		}
 		// replay: backward
 		else if(keyCode == KeyEvent.VK_LEFT)
-		{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_BACKWARD);
+		{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_BACKWARD);
 			loop.processEvent(controlEvent);
 		}
 	}

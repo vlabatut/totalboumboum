@@ -24,7 +24,7 @@ package org.totalboumboum.engine.control.system;
 import java.awt.event.KeyEvent;
 
 import org.totalboumboum.engine.loop.ServerLoop;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 public class ServerSytemControl extends SystemControl
 {	
@@ -47,7 +47,7 @@ public class ServerSytemControl extends SystemControl
 //					|| (keyCode == KeyEvent.VK_END)
 //					|| ((keyCode == KeyEvent.VK_C) && e.isControlDown())
 				)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_CANCEL_ROUND);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_CANCEL_ROUND);
 				loop.processEvent(controlEvent);
 			}
 			
@@ -59,65 +59,65 @@ public class ServerSytemControl extends SystemControl
 
 			// debug: change speed
 			else if(keyCode == KeyEvent.VK_PAGE_UP)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_SPEED_UP);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_SPEED_UP);
 				loop.processEvent(controlEvent);
 			}
 			else if(keyCode == KeyEvent.VK_PAGE_DOWN)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_SLOW_DOWN);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_SLOW_DOWN);
 				loop.processEvent(controlEvent);
 			}
 
 			// debug: grid
 			else if(keyCode == KeyEvent.VK_F1)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_GRID);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_GRID);
 				loop.processEvent(controlEvent);
 			}
 			// debug: tiles positions
 			else if(keyCode == KeyEvent.VK_F2)
-			{	ControlEvent controlEvent;
+			{	SystemControlEvent controlEvent;
 				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,ControlEvent.MODE);
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,SystemControlEvent.MODE);
 				else
-					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,ControlEvent.REGULAR);
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TILES_POSITIONS,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
 			// debug: sprites positions
 			else if(keyCode == KeyEvent.VK_F3)
-			{	ControlEvent controlEvent;
+			{	SystemControlEvent controlEvent;
 				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,ControlEvent.MODE);
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,SystemControlEvent.MODE);
 				else
-					controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,ControlEvent.REGULAR);
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
 			// debug: FPS/UPS
 			else if(keyCode == KeyEvent.VK_F4)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_FPS);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_FPS);
 				loop.processEvent(controlEvent);
 			}
 			// debug: speed coeff
 			else if(keyCode == KeyEvent.VK_F5)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_SPEED);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_SPEED);
 				loop.processEvent(controlEvent);
 			}
 			// debug: time
 			else if(keyCode == KeyEvent.VK_F6)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_TIME);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_TIME);
 				loop.processEvent(controlEvent);
 			}
 			// debug: names
 			else if(keyCode == KeyEvent.VK_F7)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
 				loop.processEvent(controlEvent);
 			}
 			
 			// debug: engine pause
 			else if(keyCode == KeyEvent.VK_END)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.SWITCH_ENGINE_PAUSE);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE);
 				loop.processEvent(controlEvent);
 			}
 			else if(keyCode == KeyEvent.VK_HOME)
-			{	ControlEvent controlEvent = new ControlEvent(ControlEvent.REQUIRE_ENGINE_STEP);
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_ENGINE_STEP);
 				loop.processEvent(controlEvent);
 			}
 			
@@ -130,14 +130,14 @@ public class ServerSytemControl extends SystemControl
 					index = keyCode-KeyEvent.VK_1;
 				String name;
 				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
-					name = ControlEvent.SWITCH_DISPLAY_AIS_PATHS;
+					name = SystemControlEvent.SWITCH_DISPLAY_AIS_PATHS;
 				else if(keysPressed.containsKey(KeyEvent.VK_ALT) && keysPressed.get(KeyEvent.VK_ALT))
-					name = ControlEvent.SWITCH_DISPLAY_AIS_COLORS;
+					name = SystemControlEvent.SWITCH_DISPLAY_AIS_COLORS;
 				else if(keysPressed.containsKey(KeyEvent.VK_CONTROL) && keysPressed.get(KeyEvent.VK_CONTROL))
-					name = ControlEvent.SWITCH_DISPLAY_AIS_TEXTS;
+					name = SystemControlEvent.SWITCH_DISPLAY_AIS_TEXTS;
 				else
-					name = ControlEvent.SWITCH_AIS_PAUSE;
-				ControlEvent controlEvent = new ControlEvent(name,index);
+					name = SystemControlEvent.SWITCH_AIS_PAUSE;
+				SystemControlEvent controlEvent = new SystemControlEvent(name,index);
 				loop.processEvent(controlEvent);
 			}
 		}

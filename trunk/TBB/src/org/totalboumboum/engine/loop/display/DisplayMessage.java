@@ -28,7 +28,7 @@ import java.awt.Graphics;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.VisibleLoop;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.tools.images.MessageDisplayer;
 
 public class DisplayMessage implements Display
@@ -74,7 +74,7 @@ public class DisplayMessage implements Display
 	private int show = -1;
 	
 	@Override
-	public void switchShow(ControlEvent event)
+	public void switchShow(SystemControlEvent event)
 	{	show++;		
 	}
 
@@ -82,7 +82,7 @@ public class DisplayMessage implements Display
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.REQUIRE_NEXT_MESSAGE;
+	{	return SystemControlEvent.REQUIRE_NEXT_MESSAGE;
 	}
 
 	/////////////////////////////////////////////////////////////////

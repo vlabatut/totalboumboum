@@ -26,14 +26,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 public class DisplayManager
 {
 	/////////////////////////////////////////////////////////////////
 	// EVENT 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void provessEvent(ControlEvent event)
+	public void provessEvent(SystemControlEvent event)
 	{	Display d = displaysMap.get(event.getName());
 		if(d!=null)
 			d.switchShow(event);

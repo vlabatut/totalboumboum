@@ -39,7 +39,7 @@ import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.VisibleLoop;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 public class DisplaySpritesPositions implements Display
 {
@@ -61,8 +61,8 @@ public class DisplaySpritesPositions implements Display
 	private boolean mode = true;
 	
 	@Override
-	public synchronized void switchShow(ControlEvent event)
-	{	if(event.getIndex()==ControlEvent.REGULAR)
+	public synchronized void switchShow(SystemControlEvent event)
+	{	if(event.getIndex()==SystemControlEvent.REGULAR)
 			show = (show+1)%7;
 		else
 			mode = !mode;
@@ -80,7 +80,7 @@ public class DisplaySpritesPositions implements Display
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS;
+	{	return SystemControlEvent.SWITCH_DISPLAY_SPRITES_POSITIONS;
 	}
 
 	/////////////////////////////////////////////////////////////////

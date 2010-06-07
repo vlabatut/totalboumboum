@@ -28,7 +28,7 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
 import org.totalboumboum.engine.loop.VisibleLoop;
-import org.totalboumboum.engine.loop.event.control.ControlEvent;
+import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
@@ -49,7 +49,7 @@ public class DisplayTime implements Display
 	private int show = 0;
 	
 	@Override
-	public synchronized void switchShow(ControlEvent event)
+	public synchronized void switchShow(SystemControlEvent event)
 	{	show = (show+1)%4;
 	}
 	
@@ -61,7 +61,7 @@ public class DisplayTime implements Display
 	// EVENT NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String getEventName()
-	{	return ControlEvent.SWITCH_DISPLAY_TIME;
+	{	return SystemControlEvent.SWITCH_DISPLAY_TIME;
 	}
 
 	/////////////////////////////////////////////////////////////////
