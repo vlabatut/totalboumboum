@@ -29,9 +29,9 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 
-public class RemotePlayerControlContainer implements Runnable
+public class RemotePlayersControl implements Runnable
 {	
-	public RemotePlayerControlContainer(ObjectInputStream in)
+	public RemotePlayersControl(ObjectInputStream in)
 	{	this.in = in;
 	}
 
