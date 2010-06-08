@@ -23,37 +23,48 @@ package org.totalboumboum.engine.control.player;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.HashMap;
 
-import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
-import org.totalboumboum.engine.player.RemotePlayer;
 
-public class RemotePlayersControl extends PlayerControl<RemotePlayer> implements Runnable
+public class RemotePlayerControlContainer implements Runnable
 {	
-	public RemotePlayersControl(RemotePlayer player)
-	{	super(player);
-		in = player.getInputStream();
+	public RemotePlayerControlContainer(ObjectInputStream in)
+	{	this.in = in;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ObjectInputStream in;
+	private ObjectInputStream in = null;
+	
+	/////////////////////////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final HashMap<Integer,Hero> heroes = new HashMap<Integer,Hero>();
+	
+	public void addHero(Hero hero)
+	{	int id = hero.getId();
+		heroes.put(id,hero);
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// RUNNABLE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void run()
-	{	Sprite sprite = getSprite();
-		try
+	{	try
 		{	while(!Thread.interrupted())
 			{	// read the control event in the network stream
 				RemotePlayerControlEvent event = (RemotePlayerControlEvent)in.readObject();
 				// get the control code
 				ControlCode controlCode = event.getControlCode();
+				// get the sprite id
+				int id = event.getSpriteId();
 				// send it to the sprite like a local control code
+				Hero sprite = heroes.get(id);
 				sprite.putControlCode(controlCode);
 			}
 		}
@@ -68,13 +79,13 @@ public class RemotePlayersControl extends PlayerControl<RemotePlayer> implements
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
+	protected boolean finished = false;
 	
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
-			super.finish();
-			
+		
+			heroes.clear();
 			in = null;
 		}
 	}

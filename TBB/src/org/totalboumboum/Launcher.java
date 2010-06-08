@@ -1247,9 +1247,9 @@ public class Launcher
 	 * 		- modification de la boucle pour initialiser et fermer les connexion nécessaires
 	 *        (elles peuvent aussi être gérées en amont, à voir)
 	 *        mais de toute façon faut aussi envoyer les données via la connexion (comme pr replay en fait)
-	 *      - nouvelle classe héritant de Player, controlé à distance 
-	 *      - nouveau controle associé à cette classe, lisant les controle dans le flux associé au joueur
-	 *        >> NOTE attention: peut y avoir plusieurs joueurs pour un seul flux !
+	 *      x nouvelle classe héritant de Player, controlé à distance 
+	 *      x nouveau controle associé à cette classe, lisant les controle dans le flux associé au joueur
+	 *      - le container des remotePlayerControl doit être initialisé dans la boucle et lancé aussi (run)
 	 * - côté client :
 	 * 		- version de la boucle héritant de replay mais rajoutant la gestion des controles
 	 *  	- version spéciale de Control pour que les codes soient envoyés dans le flux (NetworkControl)
