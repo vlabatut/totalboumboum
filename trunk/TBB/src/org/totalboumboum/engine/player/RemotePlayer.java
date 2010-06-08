@@ -29,12 +29,12 @@ import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
-import org.totalboumboum.engine.control.player.RemotePlayerControlContainer;
+import org.totalboumboum.engine.control.player.RemotePlayersControl;
 import org.xml.sax.SAXException;
 
 public class RemotePlayer extends AbstractPlayer
 {	
-	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile, ControlSettings controlSettings, RemotePlayerControlContainer spriteControl) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile, ControlSettings controlSettings, RemotePlayersControl spriteControl) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 		
 		// set controls
@@ -66,7 +66,7 @@ public class RemotePlayer extends AbstractPlayer
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** control */
-	private RemotePlayerControlContainer spriteControl;
+	private RemotePlayersControl spriteControl;
 	/** current controls */
 	private ControlSettings controlSettings;
 
@@ -74,7 +74,7 @@ public class RemotePlayer extends AbstractPlayer
 	{	return controlSettings;
 	}
 
-	public RemotePlayerControlContainer getSpriteControl()
+	public RemotePlayersControl getSpriteControl()
 	{	return spriteControl;
 	}
 	
