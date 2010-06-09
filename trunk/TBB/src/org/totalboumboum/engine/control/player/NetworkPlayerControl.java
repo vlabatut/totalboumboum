@@ -22,18 +22,30 @@ package org.totalboumboum.engine.control.player;
  */
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.control.ControlCode;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
-public class LocalPlayerControl extends PlayerControl 
+public class NetworkPlayerControl extends PlayerControl 
 {	
-	public LocalPlayerControl(ControlledPlayer player)
+	public NetworkPlayerControl(ControlledPlayer player, NetworkPlayersControl networkPlayersControl)
 	{	super(player);
+		this.networkPlayersControl = networkPlayersControl;
+		this.out = networkPlayersControl.getStream();
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// CONTAINER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
+	private NetworkPlayersControl networkPlayersControl;
+	private ObjectOutputStream out;
 	
 	/////////////////////////////////////////////////////////////////
 	// SETTINGS			/////////////////////////////////////////////
@@ -56,7 +68,13 @@ public class LocalPlayerControl extends PlayerControl
 		{	pressedKeys.put(keyCode, true);
 			if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOnKey(keyCode))
 		    {	ControlCode controlCode = new ControlCode(keyCode,true);
-				getSprite().putControlCode(controlCode);				
+		    	RemotePlayerControlEvent event = new RemotePlayerControlEvent(getSprite(), controlCode);
+				try
+				{	out.writeObject(event);
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}				
 		    }
 	    }
 	}
@@ -71,7 +89,13 @@ public class LocalPlayerControl extends PlayerControl
 		pressedKeys.put(keyCode,false);	
 		if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOffKey(keyCode))
 	    {	ControlCode controlCode = new ControlCode(keyCode,false);
-			getSprite().putControlCode(controlCode);				
+	    	RemotePlayerControlEvent event = new RemotePlayerControlEvent(getSprite(), controlCode);
+			try
+			{	out.writeObject(event);
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}				
 	    }
 	}
 
@@ -87,6 +111,9 @@ public class LocalPlayerControl extends PlayerControl
 	{	if(!finished)
 		{	finished = true;
 			super.finish();
+			
+			networkPlayersControl = null;
+			out = null;
 		}
 	}
 }

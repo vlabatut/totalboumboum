@@ -29,7 +29,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;

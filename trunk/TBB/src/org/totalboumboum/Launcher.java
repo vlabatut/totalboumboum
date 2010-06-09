@@ -1252,8 +1252,8 @@ public class Launcher
 	 *      - le container des remotePlayerControl doit être initialisé dans la boucle et lancé aussi (run)
 	 * - côté client :
 	 * 		- version de la boucle héritant de replay mais rajoutant la gestion des controles locaux
-	 *  	- version spéciale de Control pour que les codes soient envoyés dans le flux (NetworkControl)
-	 *  	- version d'un joueur : comme avant, mais généraliser pour prendre LocalControl ou NetworkControl
+	 *  	x version spéciale de Control pour que les codes soient envoyés dans le flux (NetworkControl)
+	 *  	x version d'un joueur : comme avant, mais généraliser pour prendre LocalControl ou NetworkControl
 	 *  	  le controle utilisé peut être décidé lors de l'init de la loop, en fonction du type de la loop justement
 	 *  	  intérêt: on garde le joueur humain et l'IA
 	 */

@@ -31,34 +31,42 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.control.player.LocalPlayerControl;
+import org.totalboumboum.engine.control.player.NetworkPlayerControl;
+import org.totalboumboum.engine.control.player.NetworkPlayersControl;
+import org.totalboumboum.engine.control.player.PlayerControl;
 import org.xml.sax.SAXException;
 
 public abstract class ControlledPlayer extends AbstractPlayer
 {	
-	public ControlledPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public ControlledPlayer(Profile profile, HollowHeroFactory base, Tile tile, NetworkPlayersControl networkPlayersControl) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 		
-		// set controls
+		// set controls settings
 		int indexCtrSet = profile.getControlSettingsIndex();
 		controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(indexCtrSet);
 		if(controlSettings == null)
 			controlSettings = new ControlSettings();
 		sprite.setControlSettings(controlSettings);
-		spriteControl = new LocalPlayerControl(this);
+		
+		// set controls
+		if(networkPlayersControl==null)
+			spriteControl = new LocalPlayerControl(this);
+		else
+			spriteControl = new NetworkPlayerControl(this,networkPlayersControl);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** control */
-	private LocalPlayerControl spriteControl;
+	private PlayerControl spriteControl;
 	/** current controls */
 	private ControlSettings controlSettings;
 
 	public ControlSettings getControlSettings()
 	{	return controlSettings;
 	}
-	public LocalPlayerControl getSpriteControl()
+	public PlayerControl getSpriteControl()
 	{	return spriteControl;
 	}
 	

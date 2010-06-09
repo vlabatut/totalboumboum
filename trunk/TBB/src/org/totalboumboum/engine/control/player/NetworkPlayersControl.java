@@ -21,24 +21,22 @@ package org.totalboumboum.engine.control.player;
  * 
  */
 
-import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
-import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.player.ControlledPlayer;
-
-public abstract class PlayerControl implements KeyListener
+public class NetworkPlayersControl
 {	
-	public PlayerControl(ControlledPlayer player)
-	{	this.player = player;
+	public NetworkPlayersControl(ObjectOutputStream out)
+	{	this.out = out;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PLAYER			/////////////////////////////////////////////
+	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected ControlledPlayer player;
+	private ObjectOutputStream out = null;
 	
-	public Sprite getSprite()
-	{	return player.getSprite();
+	public ObjectOutputStream getStream()
+	{	return out;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -47,6 +45,16 @@ public abstract class PlayerControl implements KeyListener
 	protected boolean finished = false;
 	
 	public void finish()
-	{	player = null;
+	{	if(!finished)
+		{	finished = true;
+		
+			try
+			{	out.close();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			out = null;
+		}
 	}
 }
