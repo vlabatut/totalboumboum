@@ -86,6 +86,12 @@ public class RemotePlayersControl implements Runnable
 		{	finished = true;
 		
 			heroes.clear();
+			try
+			{	in.close();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
 			in = null;
 		}
 	}

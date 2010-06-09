@@ -28,11 +28,16 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
+import org.totalboumboum.engine.control.player.NetworkPlayersControl;
 import org.xml.sax.SAXException;
 
 public class HumanPlayer extends ControlledPlayer
 {	
 	public HumanPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	super(profile,base,tile);
+	{	this(profile,base,tile,null);
+	}
+	
+	public HumanPlayer(Profile profile, HollowHeroFactory base, Tile tile, NetworkPlayersControl networkPlayersControl) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	super(profile,base,tile,networkPlayersControl);
 	}
 }
