@@ -1,4 +1,4 @@
-package org.totalboumboum.game.replay;
+package org.totalboumboum.game.replay.file;
 
 /*
  * Total Boum Boum
