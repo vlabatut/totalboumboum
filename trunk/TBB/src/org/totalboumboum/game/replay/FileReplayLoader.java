@@ -38,7 +38,7 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
-public class ReplayLoader
+public class FileReplayLoader
 {	
 	public static Replay loadReplay(String folderName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Replay result = new Replay();
