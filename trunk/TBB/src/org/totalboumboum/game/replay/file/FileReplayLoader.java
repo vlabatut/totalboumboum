@@ -40,8 +40,8 @@ import org.xml.sax.SAXException;
 
 public class FileReplayLoader
 {	
-	public static Replay loadReplay(String folderName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	Replay result = new Replay();
+	public static FileReplay loadReplay(String folderName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	FileReplay result = new FileReplay();
 		
 		// load xml file
 		String individualFolder = FilePaths.getReplaysPath() + File.separator + folderName;
@@ -63,7 +63,7 @@ public class FileReplayLoader
 		return result;
 	}
 
-	private static void loadReplayElement(Element root, Replay result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	private static void loadReplayElement(Element root, FileReplay result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// level
 		Element levelElement = root.getChild(XmlNames.LEVEL);
 		loadLevelElement(levelElement,result);
@@ -77,7 +77,7 @@ public class FileReplayLoader
 		loadPlayersElement(playersElement,result);		
 	}
 	
-	private static void loadLevelElement(Element root, Replay result)
+	private static void loadLevelElement(Element root, FileReplay result)
 	{	// name
 		String name = root.getAttributeValue(XmlNames.NAME);
 		result.setLevelName(name);
@@ -87,7 +87,7 @@ public class FileReplayLoader
 		result.setLevelPack(pack);
 	}
 	
-	private static void loadDateElement(Element root, Replay result)
+	private static void loadDateElement(Element root, FileReplay result)
 	{	// save
 		String saveStr = root.getAttributeValue(XmlNames.SAVE);
 		Date save = TimeTools.dateXmlToJava(saveStr);
@@ -95,13 +95,13 @@ public class FileReplayLoader
 	}
 
 	@SuppressWarnings("unchecked")
-	private static void loadPlayersElement(Element root, Replay result)
+	private static void loadPlayersElement(Element root, FileReplay result)
 	{	List<Element> playerList = root.getChildren(XmlNames.PLAYER);
 		for(Element playerElement: playerList)
 			loadPlayerElement(playerElement,result);
 	}
 
-	private static void loadPlayerElement(Element root, Replay result)
+	private static void loadPlayerElement(Element root, FileReplay result)
 	{	// name
 		String name = root.getAttributeValue(XmlNames.NAME);
 		result.addPlayer(name);

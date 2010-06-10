@@ -48,20 +48,20 @@ import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
+import org.totalboumboum.game.replay.Replay;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class Replay
-{	private boolean verbose = false;
-	
-	public Replay()
+public class FileReplay extends Replay
+{	
+	public FileReplay()
 	{	
 	}
 	
-	public Replay(Round round) throws IOException
+	public FileReplay(Round round) throws IOException
 	{	// level
 		LevelInfo levelInfo = round.getHollowLevel().getLevelInfo();
 		levelName = levelInfo.getFolder();

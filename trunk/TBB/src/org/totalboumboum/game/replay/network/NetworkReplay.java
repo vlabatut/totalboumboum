@@ -1,4 +1,4 @@
-package org.totalboumboum.game.replay;
+package org.totalboumboum.game.replay.network;
 
 /*
  * Total Boum Boum
@@ -54,14 +54,13 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public abstract class Replay
-{	private static final boolean VERBOSE = false;
-	
-	public Replay()
+public class NetworkReplay
+{	
+	public NetworkReplay()
 	{	
 	}
 	
-	public Replay(Round round) throws IOException
+	public NetworkReplay(Round round) throws IOException
 	{	// level
 		LevelInfo levelInfo = round.getHollowLevel().getLevelInfo();
 		levelName = levelInfo.getFolder();
@@ -152,7 +151,7 @@ public abstract class Replay
 	{	if(out!=null)
 		{	try
 			{	out.writeObject(event);
-				if(VERBOSE)
+				if(verbose)
 					System.out.println("recording: "+event);
 			}
 			catch (IOException e)
@@ -170,7 +169,7 @@ public abstract class Replay
 			StopReplayEvent event = new StopReplayEvent();
 			writeEvent(event);
 			out.writeObject(stats);
-			if(VERBOSE)
+			if(verbose)
 				System.out.println("recording: stats");
 			// close the object stream
 			out.close();
@@ -267,7 +266,7 @@ public abstract class Replay
 		{	Object object = in.readObject();
 			if(object instanceof ReplayEvent)
 			{	result = (ReplayEvent) object;
-				if(VERBOSE)
+				if(verbose)
 					System.out.println("reading: "+result);
 			}
 		}
@@ -289,7 +288,7 @@ public abstract class Replay
 	 * @throws ClassNotFoundException 
 	 */
 	public void finishReading() throws IOException, ClassNotFoundException
-	{	if(VERBOSE)
+	{	if(verbose)
 			System.out.println("reading: stats");
 		readRoundStats = (StatisticRound) in.readObject();
 		in.close();
