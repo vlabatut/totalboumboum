@@ -1256,5 +1256,7 @@ public class Launcher
 	 *  	x version d'un joueur : comme avant, mais généraliser pour prendre LocalControl ou NetworkControl
 	 *  	  le controle utilisé peut être décidé lors de l'init de la loop, en fonction du type de la loop justement
 	 *  	  intérêt: on garde le joueur humain et l'IA
+	 * - développer une LocalLoop séparée, car cette fonctionnalité de debug ne doivent pas être accessibles dans le cadre d'un serveur
+	 * - pb pr les IA remote : y a besoin de l'état réel du niveau, pas seulement des graphismes
 	 */
 }
