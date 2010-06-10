@@ -38,9 +38,10 @@ import org.xml.sax.SAXException;
 
 public class ReplaySaver
 {	
-	public static void saveReplay(OutputFileStream replay) throws ParserConfigurationException, SAXException, IOException
+	public static void saveReplay(OutputFileGameStream replay) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveReplayElement(replay);	
+		
 		// save file
 		String folder = FilePaths.getReplaysPath() + File.separator + replay.getFolder();
 		String path = folder + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_XML;
@@ -50,7 +51,7 @@ public class ReplaySaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
-	private static Element saveReplayElement(OutputFileStream replay)
+	private static Element saveReplayElement(OutputFileGameStream replay)
 	{	Element result = new Element(XmlNames.REPLAY); 
 		
 		// level
@@ -68,7 +69,7 @@ public class ReplaySaver
 		return result;
 	}
 
-	private static Element saveLevelElement(OutputFileStream replay)
+	private static Element saveLevelElement(OutputFileGameStream replay)
 	{	Element result = new Element(XmlNames.LEVEL);
 		
 		// name
@@ -82,7 +83,7 @@ public class ReplaySaver
 		return result;
 	}
 
-	private static Element saveDateElement(OutputFileStream replay)
+	private static Element saveDateElement(OutputFileGameStream replay)
 	{	Element result = new Element(XmlNames.DATE);
 		
 		// save
@@ -93,7 +94,7 @@ public class ReplaySaver
 		return result;
 	}
 
-	private static Element savePlayersElement(OutputFileStream replay)
+	private static Element savePlayersElement(OutputFileGameStream replay)
 	{	Element result = new Element(XmlNames.PLAYERS);
 		List<String> players = replay.getPlayers();
 		for(String player: players)
