@@ -183,7 +183,7 @@ public class Replay
 			}
 			
 			// record the associated xml file
-			ReplaySaver.saveReplay(this);
+			FileReplaySaver.saveReplay(this);
 		}
 	}
 

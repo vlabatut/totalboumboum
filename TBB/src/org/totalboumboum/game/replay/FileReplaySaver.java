@@ -36,7 +36,7 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
-public class ReplaySaver
+public class FileReplaySaver
 {	
 	public static void saveReplay(Replay replay) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
