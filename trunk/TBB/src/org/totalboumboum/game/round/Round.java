@@ -47,7 +47,7 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.rank.Ranks;
-import org.totalboumboum.game.replay.Replay;
+import org.totalboumboum.game.stream.file.FileOutputGameStream;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
@@ -55,6 +55,7 @@ import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CalculusTools;
 import org.xml.sax.SAXException;
+
 
 public class Round implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;
@@ -127,7 +128,7 @@ public class Round implements StatisticHolder, Serializable
 		
 			// recording
 			if(Configuration.getEngineConfiguration().isRecordRounds() && !replayed)
-			{	replay = new Replay(this);
+			{	replay = new FileOutputGameStream(this);
 				RoundVariables.replay = replay;
 			}
 		
@@ -143,9 +144,9 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// REPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Replay replay = null;
+	private FileOutputGameStream replay = null;
 	
-	public void setReplay(Replay replay)
+	public void setReplay(FileOutputGameStream replay)
 	{	this.replay = replay;
 	}
 	
@@ -228,7 +229,7 @@ public class Round implements StatisticHolder, Serializable
 		// possibly end replay recording
 		if(Configuration.getEngineConfiguration().isRecordRounds())
 		{	try
-			{	RoundVariables.replay.finishWriting(stats);
+			{	RoundVariables.finishWriting(stats);
 			}
 			catch (IOException e)
 			{	e.printStackTrace();

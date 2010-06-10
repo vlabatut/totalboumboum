@@ -44,12 +44,13 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.points.PointsProcessor;
 import org.totalboumboum.game.points.PointsTotal;
 import org.totalboumboum.game.rank.Ranks;
-import org.totalboumboum.game.replay.Replay;
 import org.totalboumboum.game.round.Round;
+import org.totalboumboum.game.stream.file.FileOutputGameStream;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.xml.sax.SAXException;
+
 
 public class SingleTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
@@ -58,7 +59,7 @@ public class SingleTournament extends AbstractTournament
 	{	
 	}
 
-	public SingleTournament(Replay replay) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
+	public SingleTournament(FileOutputGameStream replay) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{	replay.initReplaying();
 		setName("Replay");
 		setAuthor("Replay");

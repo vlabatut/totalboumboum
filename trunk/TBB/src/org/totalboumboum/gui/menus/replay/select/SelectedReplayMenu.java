@@ -33,8 +33,8 @@ import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.game.match.Match;
-import org.totalboumboum.game.replay.Replay;
 import org.totalboumboum.game.round.Round;
+import org.totalboumboum.game.stream.file.FileOutputGameStream;
 import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -46,6 +46,7 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
+
 
 public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
@@ -97,7 +98,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 	private JButton buttonDelete;
 
 	private void refreshButtons()
-	{	Replay replay = levelData.getSelectedReplay();
+	{	FileOutputGameStream replay = levelData.getSelectedReplay();
 		if(replay==null)
 		{	buttonDelete.setEnabled(false);
 			buttonConfirm.setEnabled(false);
@@ -116,7 +117,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 		{	replaceWith(parent);
 	    }
 		if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_DELETE))
-		{	Replay selectedReplay = levelData.getSelectedReplay();
+		{	FileOutputGameStream selectedReplay = levelData.getSelectedReplay();
 			if(selectedReplay!=null)
 			{	String folder = selectedReplay.getFolder();
 				String path = baseFolder + File.separator + folder;
@@ -128,7 +129,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 		else if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CONFIRM))
 		{	RoundSplitPanel roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 			try
-			{	Replay selectedReplay = levelData.getSelectedReplay();
+			{	FileOutputGameStream selectedReplay = levelData.getSelectedReplay();
 				SingleTournament tournament = new SingleTournament(selectedReplay);
 				Match match = tournament.getCurrentMatch();
 				Round round = match.getCurrentRound();

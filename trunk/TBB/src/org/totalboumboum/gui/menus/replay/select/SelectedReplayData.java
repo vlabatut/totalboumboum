@@ -30,8 +30,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.game.replay.Replay;
-import org.totalboumboum.game.replay.ReplayLoader;
+import org.totalboumboum.game.stream.file.FileOutputGameStream;
+import org.totalboumboum.game.stream.file.ReplayLoader;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.replay.ReplayMiscSubPanel;
@@ -43,6 +43,7 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
+
 
 public class SelectedReplayData extends EntitledDataPanel implements FolderBrowserSubPanelListener
 {	
@@ -135,9 +136,9 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 	/////////////////////////////////////////////////////////////////
 	// SELECTED ARCHIVE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Replay selectedReplay = null;	
+	private FileOutputGameStream selectedReplay = null;	
 
-	public Replay getSelectedReplay()
+	public FileOutputGameStream getSelectedReplay()
 	{	return selectedReplay;
 	}
 	

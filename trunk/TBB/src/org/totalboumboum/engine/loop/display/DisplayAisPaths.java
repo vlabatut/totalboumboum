@@ -34,8 +34,8 @@ import org.totalboumboum.ai.AbstractAiManager;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.engine.loop.InteractiveLoop;
 import org.totalboumboum.engine.loop.Loop;
-import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
@@ -44,7 +44,7 @@ import org.totalboumboum.tools.calculus.CalculusTools;
 
 public class DisplayAisPaths implements Display
 {
-	public DisplayAisPaths(ServerLoop loop)
+	public DisplayAisPaths(InteractiveLoop loop)
 	{	this.players = loop.getPlayers();
 		this.level = loop.getLevel();
 		

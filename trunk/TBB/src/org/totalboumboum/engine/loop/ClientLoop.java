@@ -38,6 +38,7 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
@@ -48,6 +49,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.control.player.NetworkPlayersControl;
+import org.totalboumboum.engine.control.system.LocalSytemControl;
 import org.totalboumboum.engine.control.system.ReplaySytemControl;
 import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.display.DisplayAisColors;
@@ -80,7 +82,7 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class ClientLoop extends VisibleLoop
+public class ClientLoop extends VisibleLoop implements InteractiveLoop
 {	private static final long serialVersionUID = 1L;
 	
 	public ClientLoop(Round round)
@@ -93,7 +95,7 @@ public class ClientLoop extends VisibleLoop
 	@Override
 	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
-		systemControl = new ReplaySytemControl(this);
+		systemControl = new LocalSytemControl(this);
 
 		// init
 		List<Profile> profiles = round.getProfiles();
@@ -389,6 +391,8 @@ public class ClientLoop extends VisibleLoop
 	/////////////////////////////////////////////////////////////////
 	// LOGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
+
 	protected void initLogs()
 	{	super.initLogs();
 		if(aisConfiguration.getLogExceptions())

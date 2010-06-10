@@ -21,12 +21,19 @@ package org.totalboumboum.game.round;
  * 
  */
 
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
-import org.totalboumboum.game.replay.Replay;
+import org.totalboumboum.game.stream.file.FileOutputGameStream;
+import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.GameData;
+import org.xml.sax.SAXException;
+
 
 public class RoundVariables
 {
@@ -57,11 +64,16 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	// REPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static Replay replay = null;
+//	public static Replay replay = null;
 	
 	public static void writeEvent(ReplayEvent event)
 	{	if(replay!=null && event.getSendEvent())
 			replay.writeEvent(event);
+	}
+
+	public static void writeZoomCoef(double zoomCoef) throws IOException
+	{	if(replay!=null)
+			replay.writeZoomCoef(zoomCoef);
 	}
 
 	public static ReplayEvent readEvent()
@@ -82,4 +94,10 @@ public class RoundVariables
 			result = replay.getFilterEvents();
 		return result;
 	}
+	
+	public static void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
+	{	if(replay!=null)
+			finishWriting(stats);
+	}
+
 }

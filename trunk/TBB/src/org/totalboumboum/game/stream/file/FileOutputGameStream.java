@@ -47,9 +47,9 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class OutputFileGameStream extends OutputGameStream
+public class FileOutputGameStream extends OutputGameStream
 {	
-	public OutputFileGameStream(Round round) throws IOException
+	public FileOutputGameStream(Round round) throws IOException
 	{	// level
 		LevelInfo levelInfo = round.getHollowLevel().getLevelInfo();
 		levelName = levelInfo.getFolder();
@@ -134,19 +134,17 @@ public class OutputFileGameStream extends OutputGameStream
 	 * close the replay output stream (if it was previously opened)
 	 */
 	public void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
-	{	if(out!=null)
-		{	super.finishWriting(stats);
+	{	super.finishWriting(stats);
 		
-			// possibly record the preview
-			if(preview!=null)
-			{	String previewFilename = FilePaths.getReplaysPath() + File.separator + folder + File.separator + FileNames.FILE_PREVIEW + FileNames.EXTENSION_PNG;
-				File file = new File(previewFilename);
-				ImageIO.write(preview,"png",file);
-			}
-			
-			// record the associated xml file
-			ReplaySaver.saveReplay(this);
+		// possibly record the preview
+		if(preview!=null)
+		{	String previewFilename = FilePaths.getReplaysPath() + File.separator + folder + File.separator + FileNames.FILE_PREVIEW + FileNames.EXTENSION_PNG;
+			File file = new File(previewFilename);
+			ImageIO.write(preview,"png",file);
 		}
+		
+		// record the associated xml file
+		ReplaySaver.saveReplay(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////
