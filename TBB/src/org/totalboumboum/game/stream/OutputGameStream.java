@@ -34,14 +34,14 @@ import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.xml.sax.SAXException;
 
-public abstract class OutputStream
+public abstract class OutputGameStream
 {	private static final boolean VERBOSE = false;
 		
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean filterEvents = true;
-	private ObjectOutputStream out = null;
+	protected boolean filterEvents = true;
+	protected ObjectOutputStream out = null;
 		
 	/**
 	 * records an event in the currently open stream.
@@ -87,8 +87,8 @@ public abstract class OutputStream
 	/////////////////////////////////////////////////////////////////
 	// LEVEL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String levelName;
-	private String levelPack;
+	protected String levelName;
+	protected String levelPack;
 	
 	public void setLevelName(String name)
 	{	this.levelName = name;
@@ -107,7 +107,7 @@ public abstract class OutputStream
 	/////////////////////////////////////////////////////////////////
 	// DATE					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Date saveDate;
+	protected Date saveDate;
 	
 	public void setSaveDate(Date save)
 	{	this.saveDate = save;
@@ -119,7 +119,7 @@ public abstract class OutputStream
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final List<String> players = new ArrayList<String>();
+	protected final List<String> players = new ArrayList<String>();
 	
 	public void addPlayer(String player)
 	{	players.add(player);

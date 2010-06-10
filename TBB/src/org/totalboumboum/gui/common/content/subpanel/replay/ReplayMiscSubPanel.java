@@ -26,12 +26,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.game.replay.Replay;
+import org.totalboumboum.game.stream.file.FileOutputGameStream;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+
 
 public class ReplayMiscSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
@@ -47,13 +48,13 @@ public class ReplayMiscSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// ARCHIVE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Replay replay;
+	private FileOutputGameStream replay;
 
-	public Replay getReplay()
+	public FileOutputGameStream getReplay()
 	{	return replay;	
 	}
 	
-	public void setReplay(Replay replay)
+	public void setReplay(FileOutputGameStream replay)
 	{	this.replay = replay;
 		
 		// sizes

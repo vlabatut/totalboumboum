@@ -36,19 +36,19 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 
-public abstract class InputStream
+public abstract class InputGameStream
 {	private static final boolean VERBOSE = false;
 	
 	/////////////////////////////////////////////////////////////////
 	// INPUT				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ObjectInputStream in = null;
-	private Double readZoomCoef = null;
-	private List<Profile> readProfiles = null;
-	private LevelInfo readLevelInfo = null;
-	private Limits<RoundLimit> readRoundLimits = null;
-	private HashMap<String,Integer> readItemCounts = null;
-	private StatisticRound readRoundStats = null;
+	protected ObjectInputStream in = null;
+	protected Double readZoomCoef = null;
+	protected List<Profile> readProfiles = null;
+	protected LevelInfo readLevelInfo = null;
+	protected Limits<RoundLimit> readRoundLimits = null;
+	protected HashMap<String,Integer> readItemCounts = null;
+	protected StatisticRound readRoundStats = null;
 	
 	/**
 	 * creates and open a file named after the current date and time
@@ -128,8 +128,8 @@ public abstract class InputStream
 	/////////////////////////////////////////////////////////////////
 	// LEVEL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String levelName;
-	private String levelPack;
+	protected String levelName;
+	protected String levelPack;
 	
 	public void setLevelName(String name)
 	{	this.levelName = name;
@@ -148,7 +148,7 @@ public abstract class InputStream
 	/////////////////////////////////////////////////////////////////
 	// DATE					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Date saveDate;
+	protected Date saveDate;
 	
 	public void setSaveDate(Date save)
 	{	this.saveDate = save;
@@ -160,7 +160,7 @@ public abstract class InputStream
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final List<String> players = new ArrayList<String>();
+	protected final List<String> players = new ArrayList<String>();
 	
 	public void addPlayer(String player)
 	{	players.add(player);

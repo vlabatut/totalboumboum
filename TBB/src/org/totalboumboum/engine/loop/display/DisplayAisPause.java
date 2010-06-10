@@ -29,13 +29,13 @@ import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.InteractiveLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 
 public class DisplayAisPause implements Display
 {
-	public DisplayAisPause(ServerLoop loop)
+	public DisplayAisPause(InteractiveLoop loop)
 	{	this.loop = loop;
 		this.players = loop.getPlayers();
 	}
@@ -43,7 +43,7 @@ public class DisplayAisPause implements Display
 	/////////////////////////////////////////////////////////////////
 	// LOOP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ServerLoop loop;
+	private InteractiveLoop loop;
 	private List<AbstractPlayer> players;
 	
 	/////////////////////////////////////////////////////////////////

@@ -23,12 +23,12 @@ package org.totalboumboum.engine.control.system;
 
 import java.awt.event.KeyEvent;
 
-import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
-public class ServerSytemControl extends SystemControl
+public class LocalSytemControl extends SystemControl
 {	
-	public ServerSytemControl(ServerLoop loop)
+	public LocalSytemControl(VisibleLoop loop)
 	{	super(loop);
 	}
 

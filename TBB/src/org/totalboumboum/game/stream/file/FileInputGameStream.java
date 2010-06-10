@@ -32,9 +32,9 @@ import org.totalboumboum.game.stream.InputGameStream;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
-public class InputFileGameStream extends InputGameStream
+public class FileInputGameStream extends InputGameStream
 {	
-	public InputFileGameStream()
+	public FileInputGameStream()
 	{	
 	}
 	

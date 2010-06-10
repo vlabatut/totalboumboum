@@ -60,7 +60,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.control.system.ServerSytemControl;
+import org.totalboumboum.engine.control.system.LocalSytemControl;
 import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.display.DisplayAisColors;
 import org.totalboumboum.engine.loop.display.DisplayAisPaths;
@@ -88,7 +88,7 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class ServerLoop extends VisibleLoop
+public class ServerLoop extends VisibleLoop implements InteractiveLoop
 {	private static final long serialVersionUID = 1L;
 	
 	public ServerLoop(Round round)
@@ -101,7 +101,7 @@ public class ServerLoop extends VisibleLoop
 	@Override
 	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
-		systemControl = new ServerSytemControl(this);
+		systemControl = new LocalSytemControl(this);
 
 		// init
 		List<Profile> profiles = round.getProfiles();
@@ -113,7 +113,7 @@ public class ServerLoop extends VisibleLoop
 		// load level & instance
 		hollowLevel.initLevel(this);
 		Double zoomCoef = RoundVariables.zoomFactor;
-		RoundVariables.replay.writeZoomCoef(zoomCoef);
+		RoundVariables.writeZoomCoef(zoomCoef);
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
 		instance.loadFiresetMap();
