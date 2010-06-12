@@ -38,11 +38,8 @@ public abstract class OutputGameStream
 {	private static final boolean VERBOSE = false;
 		
 	/////////////////////////////////////////////////////////////////
-	// OUTPUT				/////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected boolean filterEvents = true;
-	protected ObjectOutputStream out = null;
-		
 	/**
 	 * records an event in the currently open stream.
 	 */
@@ -57,19 +54,39 @@ public abstract class OutputGameStream
 		}
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ROUND				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * close the replay output stream
 	 */
-	public void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
+	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
 	{	// record the stats
 		StopReplayEvent event = new StopReplayEvent();
 		writeEvent(event);
 		out.writeObject(stats);
 		if(VERBOSE)
 			System.out.println("recording: stats");
-		// close the object stream
-		out.close();
 	}
+
+	public void writeZoomCoef(double zoomCoef) throws IOException
+	{	//Double zoomCoef = RoundVariables.zoomFactor;
+		out.writeObject(zoomCoef);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// STREAM				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected ObjectOutputStream out = null;
+		
+	public void close() throws IOException
+	{	out.close();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FILTER				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean filterEvents = true;
 
 	public void setFilterEvents(boolean flag)
 	{	filterEvents = flag;		
@@ -77,11 +94,6 @@ public abstract class OutputGameStream
 	
 	public boolean getFilterEvents()
 	{	return filterEvents;		
-	}
-	
-	public void writeZoomCoef(double zoomCoef) throws IOException
-	{	//Double zoomCoef = RoundVariables.zoomFactor;
-		out.writeObject(zoomCoef);
 	}
 	
 	/////////////////////////////////////////////////////////////////

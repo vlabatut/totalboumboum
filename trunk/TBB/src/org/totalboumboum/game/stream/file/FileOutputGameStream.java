@@ -28,7 +28,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -50,34 +52,14 @@ import org.xml.sax.SAXException;
 public class FileOutputGameStream extends OutputGameStream
 {	
 	public FileOutputGameStream(Round round) throws IOException
-	{	// level
-		LevelInfo levelInfo = round.getHollowLevel().getLevelInfo();
-		levelName = levelInfo.getFolder();
-		levelPack = levelInfo.getPackName();
-		
-		// date
-		saveDate = GregorianCalendar.getInstance().getTime();
-		
-		// players
-		List<Profile> profiles = round.getProfiles();
-		for(Profile profile: profiles)
-		{	String name = profile.getName();
-			addPlayer(name);
-		}
-		
-		// paths
+	{	// init data
+		initLevel(round);
+		initSaveDate();
+		initPlayers(round);
 		initFolder();
 		
 		// init recording
-		initRecording();
-		
-		// record round info
-		out.writeObject(profiles);
-		out.writeObject(levelInfo);
-		Limits<RoundLimit> limits = round.getLimits();
-		out.writeObject(limits);
-		HashMap<String,Integer> itemsCounts = round.getHollowLevel().getItemCount();
-		out.writeObject(itemsCounts);
+		initRound();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -111,14 +93,15 @@ public class FileOutputGameStream extends OutputGameStream
 	}
 		
 	/////////////////////////////////////////////////////////////////
-	// OUTPUT				/////////////////////////////////////////
+	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * creates and open a file named after the current date and time
 	 * in order to record this game replay
 	 */
-	private void initRecording() throws IOException
-	{	String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
+	private void initRound() throws IOException
+	{	// open file
+		String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
 		File file = new File(folderPath);
 		file.mkdir();
 		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
@@ -128,13 +111,26 @@ public class FileOutputGameStream extends OutputGameStream
 //		ZipOutputStream outZip = new ZipOutputStream(outBuff);
 //		out = new ObjectOutputStream(outZip);
 		out = new ObjectOutputStream(outBuff);
+		
+		// write data
+		out.writeObject(profiles);
+		out.writeObject(levelInfo);
+		Limits<RoundLimit> limits = round.getLimits();
+		out.writeObject(limits);
+		HashMap<String,Integer> itemsCounts = round.getHollowLevel().getItemCount();
+		out.writeObject(itemsCounts);
+// TODO faut réfléchir à l'utilisation de chaque fonction des flux
+// en d'autres termes : quel est l'algo d'initialisation pour un round/tournoi, exactement?
+// question à poser à la fois pour l'écriture et la lecture
 	}
 	
 	/**
 	 * close the replay output stream (if it was previously opened)
 	 */
-	public void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
-	{	super.finishWriting(stats);
+	@Override
+	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
+	{	super.finishRound(stats);
+		close();
 		
 		// possibly record the preview
 		if(preview!=null)
@@ -158,5 +154,35 @@ public class FileOutputGameStream extends OutputGameStream
 	
 	public void setPreview(BufferedImage preview)
 	{	this.preview = preview;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LEVEL				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected String levelName;
+	protected String levelPack;
+	
+	public void initLevel(Round round)
+	{	LevelInfo levelInfo = round.getHollowLevel().getLevelInfo();
+		levelName = levelInfo.getFolder();
+		levelPack = levelInfo.getPackName();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DATE					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void initSaveDate()
+	{	saveDate = GregorianCalendar.getInstance().getTime();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void initPlayers(Round round)
+	{	List<Profile> profiles = round.getProfiles();
+		for(Profile profile: profiles)
+		{	String name = profile.getName();
+			addPlayer(name);
+		}
 	}
 }
