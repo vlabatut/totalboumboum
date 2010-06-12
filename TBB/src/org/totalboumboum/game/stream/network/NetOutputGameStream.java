@@ -59,7 +59,7 @@ public class NetOutputGameStream extends OutputGameStream
 //TODO		initFolder();
 		
 		// init recording
-		initRecording();
+		initRound();
 		
 		// record round info
 		out.writeObject(profiles);
@@ -71,28 +71,29 @@ public class NetOutputGameStream extends OutputGameStream
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// NETWORK				/////////////////////////////////////////
+	// TOURNAMENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
+	public void initTournament()
+	{
+		// TODO
+	}
 	
 	/////////////////////////////////////////////////////////////////
-	// OUTPUT				/////////////////////////////////////////
+	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * creates and open a file named after the current date and time
 	 * in order to record this game replay
 	 */
-	private void initRecording() throws IOException
+	private void initRound() throws IOException
 	{	
-//TODO		out = new ObjectOutputStream(outBuff);
 	}
 	
 	/**
 	 * close the replay output stream (if it was previously opened)
 	 */
-	public void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
-	{	super.finishWriting(stats);
-		
-//TODO
+	@Override
+	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
+	{	super.finishRound(stats);
 	}
 }

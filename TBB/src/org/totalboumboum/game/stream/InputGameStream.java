@@ -40,53 +40,62 @@ public abstract class InputGameStream
 {	private static final boolean VERBOSE = false;
 	
 	/////////////////////////////////////////////////////////////////
-	// INPUT				/////////////////////////////////////////
+	// ZOOM					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected ObjectInputStream in = null;
 	protected Double readZoomCoef = null;
-	protected List<Profile> readProfiles = null;
-	protected LevelInfo readLevelInfo = null;
-	protected Limits<RoundLimit> readRoundLimits = null;
-	protected HashMap<String,Integer> readItemCounts = null;
-	protected StatisticRound readRoundStats = null;
-	
-	/**
-	 * creates and open a file named after the current date and time
-	 * in order to record this game replay
-	 */
-	@SuppressWarnings("unchecked")
-	public void initReplaying() throws IOException, ClassNotFoundException
-	{	readProfiles = (List<Profile>) in.readObject();
-		readLevelInfo = (LevelInfo) in.readObject();
-		readRoundLimits = (Limits<RoundLimit>) in.readObject();		
-		readItemCounts = (HashMap<String,Integer>) in.readObject();		
-		readZoomCoef = (Double) in.readObject();
-	}
-	
+
 	public double getReadZoomCoef()
 	{	return readZoomCoef;
 	}
-	
+
+	/////////////////////////////////////////////////////////////////
+	// PROFILES				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected List<Profile> readProfiles = null;
+
 	public List<Profile> getReadProfiles()
 	{	return readProfiles;
 	}
-	
+
+	/////////////////////////////////////////////////////////////////
+	// INFO					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected LevelInfo readLevelInfo = null;
+
 	public LevelInfo getReadLevelInfo()
 	{	return readLevelInfo;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// LIMITS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Limits<RoundLimit> readRoundLimits = null;
+
 	public Limits<RoundLimit> getReadRoundLimits()
 	{	return readRoundLimits;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ITEMS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected HashMap<String,Integer> readItemCounts = null;
+
 	public HashMap<String,Integer> getReadItemCounts()
 	{	return readItemCounts;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// STATS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected StatisticRound readRoundStats = null;
+	
 	public StatisticRound getReadRoundStats()
 	{	return readRoundStats;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * reads an event in the currently open stream.
 	 */
@@ -114,17 +123,40 @@ public abstract class InputGameStream
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ROUND				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * creates and open a file named after the current date and time
+	 * in order to record this game replay
+	 */
+	@SuppressWarnings("unchecked")
+	public void initRound() throws IOException, ClassNotFoundException
+	{	readProfiles = (List<Profile>) in.readObject();
+		readLevelInfo = (LevelInfo) in.readObject();
+		readRoundLimits = (Limits<RoundLimit>) in.readObject();		
+		readItemCounts = (HashMap<String,Integer>) in.readObject();		
+		readZoomCoef = (Double) in.readObject();
+	}
+
 	/**
 	 * close the replay output stream (if it was previously opened)
-	 * @throws ClassNotFoundException 
 	 */
-	public void finishReading() throws IOException, ClassNotFoundException
+	public void finishRound() throws IOException, ClassNotFoundException
 	{	if(VERBOSE)
 			System.out.println("reading: stats");
 		readRoundStats = (StatisticRound) in.readObject();
-		in.close();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// STREAM				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected ObjectInputStream in = null;
+
+	public void close() throws IOException
+	{	in.close();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LEVEL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -167,5 +199,24 @@ public abstract class InputGameStream
 	}
 	public List<String> getPlayers()
 	{	return players;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean finished = false;
+	
+	public void finish()
+	{	finished = true;
+		
+		in = null;
+		
+		readItemCounts = null;
+		readLevelInfo = null;
+		readProfiles = null;
+		readRoundLimits = null;
+		readRoundStats = null;
+		readZoomCoef = null;
+		readZoomCoef = null;
 	}
 }

@@ -52,13 +52,14 @@ public class FileInputGameStream extends InputGameStream
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// INPUT				/////////////////////////////////////////
+	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
 	 * creates and open a file named after the current date and time
 	 * in order to record this game replay
 	 */
-	public void initReplaying() throws IOException, ClassNotFoundException
+	@Override
+	public void initRound() throws IOException, ClassNotFoundException
 	{	String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
 		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
 		File file = new File(filePath);
@@ -68,9 +69,15 @@ public class FileInputGameStream extends InputGameStream
 //		in = new ObjectInputStream(inZip);
 		in = new ObjectInputStream(inBuff);
 		
-		super.initReplaying();
+		super.initRound();
 	}
 
+	@Override
+	public void finishRound() throws IOException, ClassNotFoundException
+	{	super.finishRound();
+		close();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PREVIEW				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -82,5 +89,18 @@ public class FileInputGameStream extends InputGameStream
 	
 	public void setPreview(BufferedImage preview)
 	{	this.preview = preview;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			
+			preview = null;
+			folder = null;
+		}
 	}
 }

@@ -47,7 +47,9 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.rank.Ranks;
+import org.totalboumboum.game.stream.InputGameStream;
 import org.totalboumboum.game.stream.file.FileOutputGameStream;
+import org.totalboumboum.game.stream.network.NetOutputGameStream;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
@@ -128,12 +130,12 @@ public class Round implements StatisticHolder, Serializable
 		
 			// recording
 			if(Configuration.getEngineConfiguration().isRecordRounds() && !replayed)
-			{	replay = new FileOutputGameStream(this);
-				RoundVariables.replay = replay;
+			{	fileOut = new FileOutputGameStream(this);
+				RoundVariables.fileOut = fileOut;
 			}
 		
 			if(replayed)
-				RoundVariables.replay = replay;
+				RoundVariables.in = in;
 			
 			Thread animator = new Thread(loop);
 			animator.start();
@@ -142,14 +144,25 @@ public class Round implements StatisticHolder, Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// REPLAY			/////////////////////////////////////////////
+	// OUTPUT GAME STREAM	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private FileOutputGameStream replay = null;
+	private FileOutputGameStream fileOut = null;
+	private NetOutputGameStream netOut = null;
 	
-	public void setReplay(FileOutputGameStream replay)
-	{	this.replay = replay;
+	public void setNetOutputGameStream(NetOutputGameStream netOut)
+	{	this.netOut = netOut;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// INPUT GAME STREAM	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private InputGameStream in = null;
+
+	public void setInputGameStream(InputGameStream in)
+	{	this.in = in;
+		replayed = true;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -184,10 +197,6 @@ public class Round implements StatisticHolder, Serializable
 	public boolean isReplayed()
 	{	return replayed;
 	}
-
-	public void setReplayed(boolean replayed)
-	{	this.replayed = replayed;		
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// LOOP 			/////////////////////////////////////////////
@@ -202,8 +211,8 @@ public class Round implements StatisticHolder, Serializable
 	{	// read stats from replay if replayed
 		if(replayed)
 		{	try
-			{	replay.finishReading();
-				StatisticRound stats = replay.getReadRoundStats();
+			{	in.finishRound();
+				StatisticRound stats = in.getReadRoundStats();
 				setStats(stats);
 				roundOver = true; // ou close?
 			}
@@ -500,8 +509,10 @@ public class Round implements StatisticHolder, Serializable
 		result.setName(name);
 		result.setRandomLocation(randomLocation);
 		
-		result.setReplayed(replayed);
-		result.replay = replay;
+		result.replayed = replayed;
+		result.fileOut = fileOut;
+		result.netOut = netOut;
+		result.in = in;
 		
 		return result;
 	}

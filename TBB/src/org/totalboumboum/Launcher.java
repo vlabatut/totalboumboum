@@ -1259,8 +1259,8 @@ public class Launcher
 	 *  	- à la place du RemotePlayersControl, c'est l'équivalent du Replay qui va gérer ça et transférer le beans aux sprites
 	 *  	- même dans l'autre sens, faudrait p-ê un objet central, histoire de faciliter la synchro lors de l'accès au flux...
 	 * - Replay :
-	 * 		- séparer in/out
-	 * 		- généraliser pour gérer à la fois les fichiers et les réseaux
+	 * 		x séparer in/out
+	 * 		x généraliser pour gérer à la fois les fichiers et les réseaux
 	 * - développer une LocalLoop séparée, car certaines fonctionnalité de debug ne doivent pas être accessibles dans le cadre d'un serveur
 	 * - pb pr les IA remote : y a besoin de l'état réel du niveau, pas seulement des graphismes
 	 */

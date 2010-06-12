@@ -45,12 +45,11 @@ import org.totalboumboum.game.points.PointsProcessor;
 import org.totalboumboum.game.points.PointsTotal;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.game.stream.file.FileOutputGameStream;
+import org.totalboumboum.game.stream.file.FileInputGameStream;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.xml.sax.SAXException;
-
 
 public class SingleTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
@@ -59,8 +58,8 @@ public class SingleTournament extends AbstractTournament
 	{	
 	}
 
-	public SingleTournament(FileOutputGameStream replay) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
-	{	replay.initReplaying();
+	public SingleTournament(FileInputGameStream replay) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
+	{	replay.initRound();
 		setName("Replay");
 		setAuthor("Replay");
 		
@@ -90,8 +89,7 @@ public class SingleTournament extends AbstractTournament
 		// round
 		Round round = new Round(match);
 		match.setAuthor("Replay");
-	    round.setReplayed(true);
-	    round.setReplay(replay);
+	    round.setInputGameStream(replay);
 		{	// notes
 			List<String> notes = new ArrayList<String>();
 			notes.add("auto-generated notes");

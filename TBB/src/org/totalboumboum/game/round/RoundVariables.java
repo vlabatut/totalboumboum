@@ -29,7 +29,10 @@ import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
+import org.totalboumboum.game.stream.InputGameStream;
+import org.totalboumboum.game.stream.OutputGameStream;
 import org.totalboumboum.game.stream.file.FileOutputGameStream;
+import org.totalboumboum.game.stream.network.NetOutputGameStream;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
@@ -62,10 +65,10 @@ public class RoundVariables
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// REPLAY			/////////////////////////////////////////////
+	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-//	public static Replay replay = null;
-	
+	public static InputGameStream in = null;
+
 	public static void writeEvent(ReplayEvent event)
 	{	if(replay!=null && event.getSendEvent())
 			replay.writeEvent(event);
@@ -76,18 +79,11 @@ public class RoundVariables
 			replay.writeZoomCoef(zoomCoef);
 	}
 
-	public static ReplayEvent readEvent()
-	{	ReplayEvent result = null;
-		if(replay!=null)
-			result = replay.readEvent();
-		return result;
-	}
-	
 	public static void setFilterEvents(boolean flag)
 	{	if(replay!=null)
 			replay.setFilterEvents(flag);
 	}
-	
+
 	public static boolean getFilterEvents()
 	{	boolean result = false;
 		if(replay!=null)
@@ -99,5 +95,17 @@ public class RoundVariables
 	{	if(replay!=null)
 			finishWriting(stats);
 	}
-
+	/////////////////////////////////////////////////////////////////
+	// INPUT STREAM		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static FileOutputGameStream fileOut = null;
+	public static NetOutputGameStream netOut = null;
+	
+/*	public static ReplayEvent readEvent()
+	{	ReplayEvent result = null;
+		if(replay!=null)
+			result = replay.readEvent();
+		return result;
+	}
+*/
 }
