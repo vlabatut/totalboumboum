@@ -26,9 +26,9 @@ import java.awt.event.KeyEvent;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
-public class LocalSytemControl extends SystemControl
+public class ServerSytemControl extends SystemControl
 {	
-	public LocalSytemControl(VisibleLoop loop)
+	public ServerSytemControl(VisibleLoop loop)
 	{	super(loop);
 	}
 
@@ -51,22 +51,6 @@ public class LocalSytemControl extends SystemControl
 				loop.processEvent(controlEvent);
 			}
 			
-			// faire renaitre le bonhomme
-//			else if(keyCode == KeyEvent.VK_1)
-//			{	//NOTE à adapter car ça peut être intéressant pour le débug
-				//loop.rebirth();
-//			}
-
-			// debug: change speed
-			else if(keyCode == KeyEvent.VK_PAGE_UP)
-			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_SPEED_UP);
-				loop.processEvent(controlEvent);
-			}
-			else if(keyCode == KeyEvent.VK_PAGE_DOWN)
-			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_SLOW_DOWN);
-				loop.processEvent(controlEvent);
-			}
-
 			// debug: grid
 			else if(keyCode == KeyEvent.VK_F1)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_GRID);
@@ -108,16 +92,6 @@ public class LocalSytemControl extends SystemControl
 			// debug: names
 			else if(keyCode == KeyEvent.VK_F7)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_PLAYERS_NAMES);
-				loop.processEvent(controlEvent);
-			}
-			
-			// debug: engine pause
-			else if(keyCode == KeyEvent.VK_END)
-			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_ENGINE_PAUSE);
-				loop.processEvent(controlEvent);
-			}
-			else if(keyCode == KeyEvent.VK_HOME)
-			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_ENGINE_STEP);
 				loop.processEvent(controlEvent);
 			}
 			

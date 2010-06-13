@@ -454,18 +454,26 @@ public class LocalLoop extends VisibleLoop implements InteractiveLoop
 	public void processEvent(SystemControlEvent event)
 	{	String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
-			setCanceled(true);
+		{	setCanceled(true);
+		}
 		else if(name.equals(SystemControlEvent.REQUIRE_ENGINE_STEP))
-			switchEngineStep(true);
+		{	switchEngineStep(true);
+		}
 		else if(name.equals(SystemControlEvent.REQUIRE_SLOW_DOWN))
-			slowDown();
+		{	slowDown();
+		}
 		else if(name.equals(SystemControlEvent.REQUIRE_SPEED_UP))
-			speedUp();
+		{	speedUp();
+		}
 		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
-			switchEngineStep(true);
+		{	int index = event.getIndex();
+			switchAiPause(index);
+		}
 		else if(name.equals(SystemControlEvent.SWITCH_ENGINE_PAUSE))
-			switchEnginePause();
+		{	switchEnginePause();
+		}
 		else
-			super.processEvent(event);
+		{	super.processEvent(event);
+		}
 	}
 }

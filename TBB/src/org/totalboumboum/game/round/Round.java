@@ -38,7 +38,7 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.loop.ReplayLoop;
-import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.LocalLoop;
 import org.totalboumboum.engine.loop.Loop;
 import org.totalboumboum.engine.loop.SimulationLoop;
 import org.totalboumboum.engine.player.PlayerLocation;
@@ -126,7 +126,7 @@ public class Round implements StatisticHolder, Serializable
 		{	if(replayed)
 				loop = new ReplayLoop(this);
 			else
-				loop = new ServerLoop(this);
+				loop = new LocalLoop(this);
 		
 			// recording
 			if(Configuration.getEngineConfiguration().isRecordRounds() && !replayed)

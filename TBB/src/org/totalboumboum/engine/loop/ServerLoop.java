@@ -30,33 +30,42 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.container.itemset.Itemset;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
+import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.Role;
+import org.totalboumboum.engine.content.feature.ability.StateAbility;
+import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
+import org.totalboumboum.engine.content.feature.action.SpecificAction;
+import org.totalboumboum.engine.content.feature.action.gather.SpecificGather;
+import org.totalboumboum.engine.content.feature.event.ActionEvent;
+import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
-import org.totalboumboum.engine.control.player.NetworkPlayersControl;
-import org.totalboumboum.engine.control.system.LocalSytemControl;
-import org.totalboumboum.engine.control.system.ReplaySytemControl;
+import org.totalboumboum.engine.content.sprite.item.Item;
+import org.totalboumboum.engine.control.system.ServerSytemControl;
 import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.display.DisplayAisColors;
 import org.totalboumboum.engine.loop.display.DisplayAisPaths;
 import org.totalboumboum.engine.loop.display.DisplayAisPause;
 import org.totalboumboum.engine.loop.display.DisplayAisTexts;
-import org.totalboumboum.engine.loop.display.DisplayEnginePause;
 import org.totalboumboum.engine.loop.display.DisplayFPS;
 import org.totalboumboum.engine.loop.display.DisplayGrid;
 import org.totalboumboum.engine.loop.display.DisplayMessage;
@@ -66,36 +75,32 @@ import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
-import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangeAnimeEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
-import org.totalboumboum.engine.loop.event.replay.sprite.SpriteEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.HumanPlayer;
-import org.totalboumboum.engine.player.ReplayedPlayer;
+import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class ClientLoop extends VisibleLoop implements InteractiveLoop
+public class ServerLoop extends VisibleLoop implements InteractiveLoop
 {	private static final long serialVersionUID = 1L;
 	
-	public ClientLoop(Round round)
+	public ServerLoop(Round round)
 	{	super(round);
 	}	
-
+	
 	/////////////////////////////////////////////////////////////////
 	// INITIALIZING		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
-		systemControl = new LocalSytemControl(this);
+		systemControl = new ServerSytemControl(this);
 
 		// init
 		List<Profile> profiles = round.getProfiles();
@@ -106,7 +111,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 
 		// load level & instance
 		hollowLevel.initLevel(this);
-		zoomCoefficient = RoundVariables.zoomFactor / RoundVariables.replay.getZoomCoef();
+		RoundVariables.writeZoomCoef(RoundVariables.zoomFactor);
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
 		instance.loadFiresetMap();
@@ -117,82 +122,161 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 		instance.loadItemset();
 		loadStepOver();
 		hollowLevel.loadTheme();
-		hollowLevel.synchronizeZone();
+		hollowLevel.instanciateZone();
 		loadStepOver();
 		
 		// load players base
 		String baseFolder = FilePaths.getInstancesPath()+File.separator+RoundVariables.instance.getName()+File.separator+FileNames.FILE_HEROES;
 		HollowHeroFactory base = HollowHeroFactoryLoader.loadBase(baseFolder);
 		
-		// create players sprites
+		// place players
+		int remainingPlayers = profiles.size();
+		Players plyrs = hollowLevel.getPlayers();
+		PlayerLocation[] initialPositions = plyrs.getLocations().get(remainingPlayers);
+		if(round.getRandomLocation())
+		{	List<PlayerLocation> loc = new ArrayList<PlayerLocation>();
+			for(int i=0;i<initialPositions.length;i++)
+				loc.add(initialPositions[i]);
+			Calendar cal = new GregorianCalendar();
+			long seed = cal.getTimeInMillis();
+			Random random = new Random(seed);
+			Collections.shuffle(loc,random);
+			for(int i=0;i<initialPositions.length;i++)
+				initialPositions[i] = loc.get(i);
+		}
+		
+		// create sprites and stuff
+		HashMap<String,Integer> items = plyrs.getInitialItems();
+		Itemset itemset = instance.getItemset();
 		Iterator<Profile> i = profiles.iterator();
+		int j=0;
 		while(i.hasNext())
-		{	// get event
-			SpriteCreationEvent event;
-			do
-			{	SpriteEvent tempEvent;
-				do
-					tempEvent = (SpriteEvent)RoundVariables.readEvent();
-				while(!(tempEvent instanceof SpriteCreationEvent));
-				event = (SpriteCreationEvent)tempEvent;
-			}
-			while(event.getRole()!=Role.HERO);
-			
-			// extract info from event
-			int col = event.getCol();
-			int line = event.getLine();
-			int id = event.getSpriteId();
-			
-			// location
-			Tile tile = level.getTile(line,col);
+		{	// location
+			PlayerLocation pl = initialPositions[j];
+			Tile tile = level.getTile(pl.getLine(),pl.getCol());
 			
 			// sprite
 			Profile profile = i.next();
 			AbstractPlayer player = initPlayer(profile,base,tile);
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
+			pauseAis.add(false);
+			
+			// record/transmit event
+			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
+			RoundVariables.writeEvent(spriteEvent);
 			
 			// level
 			Hero hero = (Hero)player.getSprite();
-			level.changeSpriteId(hero,id);
+//			level.addHero(hero,pl.getLine(),pl.getCol());
+			
+			// initial items
+			for(Entry<String,Integer> entry: items.entrySet())
+			{	String name = entry.getKey();
+				int number = entry.getValue();
+				for(int k=0;k<number;k++)
+				{	// create item
+					Item item = itemset.makeItem(name,tile);
+					// add item
+					hero.addInitialItem(item);
+					// hide item
+					SpecificAction action = new SpecificGather(hero,item);
+					ActionEvent evt = new ActionEvent(action);
+					item.processEvent(evt);
+				}
+			}
 			
 			// next player...
 			loadStepOver();
+			j++;
 		}
+		
+		// separation event
+		StopReplayEvent event = new StopReplayEvent();
+		RoundVariables.writeEvent(event);
 	}
 	
-	@Override
-	protected void startLoopInit()
-	{	super.startLoopInit();
-		initEvent();
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// CANCELATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	protected void updateCancel()
 	{	if(isCanceled())
-		{	setOver(true);
+		{	round.cancelGame();
 			setCanceled(false);
 		}
-	}	
-
-	/////////////////////////////////////////////////////////////////
-	// PLAYERS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private NetworkPlayersControl networkPlayersControl;
+	}
 	
-	@Override
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS 			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{	AbstractPlayer result;
 		if(profile.hasAi())
-			result = new AiPlayer(profile,base,tile,networkPlayersControl);
+			result = new AiPlayer(profile,base,tile);
 		else
-			result = new HumanPlayer(profile,base,tile,networkPlayersControl);
+			result = new HumanPlayer(profile,base,tile);
 		return result;
 	}
-
+	
+	/////////////////////////////////////////////////////////////////
+	// LOGS				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
+	
+	@Override
+	protected void initLogs()
+	{	super.initLogs();
+		if(aisConfiguration.getLogExceptions())
+		{	try
+			{	aisConfiguration.initExceptionsLogStream();
+				OutputStream out = aisConfiguration.getExceptionsLogOutput();
+				PrintWriter printWriter = new PrintWriter(out,true);
+				// start date/time
+				Calendar cal = new GregorianCalendar();
+				Date startDate = cal.getTime();
+				DateFormat dateFormat = DateFormat.getDateTimeInstance();
+				printWriter.println("Start: "+dateFormat.format(startDate));
+				// players
+				printWriter.println("Players: ");
+				for(AbstractPlayer player: players)
+				{	int id = player.getId();
+					String name = player.getName();
+					String color = player.getColor().toString();
+					String type = "Human player";
+					if(player instanceof AiPlayer)
+						type = "AI player";
+					printWriter.println("\t("+id+") "+name+" ["+color+"] - "+type);
+				}
+			}
+			catch (FileNotFoundException e)
+			{	e.printStackTrace();
+			}			
+		}
+	}
+	
+	@Override
+	protected void updateLogs()
+	{	super.updateLogs();
+		if(aisConfiguration.getLogExceptions())
+		{	OutputStream out = aisConfiguration.getExceptionsLogOutput();
+			PrintWriter printWriter = new PrintWriter(out,true);
+			printWriter.println("--"+totalGameTime+"ms --------------------------");
+		}
+	}
+	
+	@Override
+	protected void closeLogs()
+	{	super.closeLogs();
+		if(aisConfiguration.getLogExceptions())
+		{	try
+			{	aisConfiguration.closeExceptionsLogStream();
+			}
+			catch(IOException e)
+			{	e.printStackTrace();
+			}
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// AIS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -254,85 +338,11 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	{	if(!getEnginePause() || getEngineStep())
 		{	updateCancel();
 			updateLogs();
+			updateCelebration();
 			updateEntries();
-			level.update();
-			updateEvents();
+			level.update();		
 			updateAis();
 			updateStats();
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// ZOOM COEFFICIENT		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private double zoomCoefficient = 1;
-	
-	public void setZoomCoef(double zoomCoef)
-	{	this.zoomCoefficient = zoomCoef;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// REPLAY			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ReplayEvent currentEvent = null;
-	
-	private void initEvent()
-	{	// get all the remaining useless SpriteEvents
-		ReplayEvent tempEvent;
-		do
-			tempEvent = (ReplayEvent)RoundVariables.readEvent();
-		while(!(tempEvent instanceof StopReplayEvent));
-
-		// get the first meaningful ReplayEvent
-		currentEvent = (ReplayEvent)RoundVariables.readEvent();
-	}
-	
-	private void updateEvents()
-	{	if(!isOver())
-		{	// final event
-			if(currentEvent instanceof StopReplayEvent)
-			{	setOver(true);
-			}
-			else
-			{	// read events
-				if(verbose)
-					System.out.println("/////////////////////////////////////////");		
-				List<ReplayEvent> events = new ArrayList<ReplayEvent>();
-				while(currentEvent.getTime()<getTotalEngineTime() && !(currentEvent instanceof StopReplayEvent))
-				{	events.add(currentEvent);
-					if(verbose)
-						System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
-					currentEvent = RoundVariables.readEvent();
-				}
-		
-				// process events
-				for(ReplayEvent event: events)
-				{	// sprite creation
-					if(event instanceof SpriteCreationEvent)
-					{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
-						HollowLevel hollowLevel = round.getHollowLevel();
-						Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
-						level.insertSpriteTile(sprite);
-					}
-					
-					// sprite anime change
-					else if(event instanceof SpriteChangeAnimeEvent)
-					{	SpriteChangeAnimeEvent scaEvent = (SpriteChangeAnimeEvent) event;
-						int id = scaEvent.getSpriteId();
-						Sprite sprite = level.getSprite(id);
-						if(sprite!=null) //certainly a creation-related anime change, when initializing the gesture
-							sprite.processChangeAnimeEvent(scaEvent);
-					}
-					
-					// sprite position change
-					else if(event instanceof SpriteChangePositionEvent)
-					{	SpriteChangePositionEvent scpEvent = (SpriteChangePositionEvent) event;
-						int id = scpEvent.getSpriteId();
-						Sprite sprite = level.getSprite(id);
-						sprite.processChangePositionEvent(scpEvent,zoomCoefficient);
-					}
-				}
-			}
 		}
 	}
 
@@ -345,19 +355,19 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	
 		display = new DisplayMessage(this);
 		displayManager.addDisplay(display);
-	
+
 		// grid positions
 		display = new DisplayGrid(this);
 		displayManager.addDisplay(display);
-	
+
 		// tiles positions
 		display = new DisplayTilesPositions(this);
 		displayManager.addDisplay(display);
-	
+
 		// sprites positions
 		display = new DisplaySpritesPositions(this);
 		displayManager.addDisplay(display);
-	
+
 		// AIs paths
 		display = new DisplayAisPaths(this);
 		displayManager.addDisplay(display);
@@ -387,61 +397,48 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 		display = new DisplayFPS(this);
 		displayManager.addDisplay(display);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
-	// LOGS				/////////////////////////////////////////////
+	// CELEBRATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
+	double celebrationDuration = -1;
 
-	protected void initLogs()
-	{	super.initLogs();
-		if(aisConfiguration.getLogExceptions())
-		{	try
-			{	aisConfiguration.initExceptionsLogStream();
-				OutputStream out = aisConfiguration.getExceptionsLogOutput();
-				PrintWriter printWriter = new PrintWriter(out,true);
-				// start date/time
-				Calendar cal = new GregorianCalendar();
-				Date startDate = cal.getTime();
-				DateFormat dateFormat = DateFormat.getDateTimeInstance();
-				printWriter.println("Start: "+dateFormat.format(startDate));
-				// players
-				printWriter.println("Players: ");
-				for(AbstractPlayer player: players)
-				{	int id = player.getId();
-					String name = player.getName();
-					String color = player.getColor().toString();
-					String type = "Human player";
-					if(player instanceof AiPlayer)
-						type = "AI player";
-					printWriter.println("\t("+id+") "+name+" ["+color+"] - "+type);
-				}
-			}
-			catch (FileNotFoundException e)
-			{	e.printStackTrace();
-			}			
+	@Override
+	public void initCelebration()
+	{	if(players.size()>0)
+		{	AbstractPlayer player = players.get(0);
+			Sprite sprite = player.getSprite();
+			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
+			celebrationDuration = ability.getStrength();
+		}
+		else
+			celebrationDuration = 1;
+		if(celebrationDuration>=0)
+			gameOver = true;
+	}
+	
+	protected void updateCelebration()
+	{	if(celebrationDuration>0)
+		{	celebrationDuration = celebrationDuration - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+			if(celebrationDuration<=0)
+				setOver(true);
 		}
 	}
-
-	protected void updateLogs()
-	{	super.updateLogs();
-		if(aisConfiguration.getLogExceptions())
-		{	OutputStream out = aisConfiguration.getExceptionsLogOutput();
-			PrintWriter printWriter = new PrintWriter(out,true);
-			printWriter.println("--"+totalGameTime+"ms --------------------------");
-		}
+		
+	@Override
+	public void reportVictory(int index)
+	{	AbstractPlayer player = players.get(index);
+		Sprite sprite = player.getSprite();
+		EngineEvent event = new EngineEvent(EngineEvent.CELEBRATION_VICTORY);
+		sprite.processEvent(event);
 	}
-
-	protected void closeLogs()
-	{	super.closeLogs();
-		if(aisConfiguration.getLogExceptions())
-		{	try
-			{	aisConfiguration.closeExceptionsLogStream();
-			}
-			catch(IOException e)
-			{	e.printStackTrace();
-			}
-		}
+	
+	@Override
+	public void reportDefeat(int index)
+	{	AbstractPlayer player = players.get(index);
+		Sprite sprite = player.getSprite();
+		EngineEvent event = new EngineEvent(EngineEvent.CELEBRATION_DEFEAT);
+		sprite.processEvent(event);
 	}
 
 	/////////////////////////////////////////////////////////////////

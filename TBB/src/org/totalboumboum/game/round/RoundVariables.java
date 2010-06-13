@@ -30,13 +30,11 @@ import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.stream.InputGameStream;
-import org.totalboumboum.game.stream.OutputGameStream;
 import org.totalboumboum.game.stream.file.FileOutputGameStream;
 import org.totalboumboum.game.stream.network.NetOutputGameStream;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
-
 
 public class RoundVariables
 {
@@ -69,43 +67,54 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	public static InputGameStream in = null;
 
-	public static void writeEvent(ReplayEvent event)
-	{	if(replay!=null && event.getSendEvent())
-			replay.writeEvent(event);
-	}
-
-	public static void writeZoomCoef(double zoomCoef) throws IOException
-	{	if(replay!=null)
-			replay.writeZoomCoef(zoomCoef);
-	}
-
-	public static void setFilterEvents(boolean flag)
-	{	if(replay!=null)
-			replay.setFilterEvents(flag);
-	}
-
-	public static boolean getFilterEvents()
-	{	boolean result = false;
-		if(replay!=null)
-			result = replay.getFilterEvents();
+	public static ReplayEvent readEvent()
+	{	ReplayEvent result = null;
+		if(in!=null)
+			result = in.readEvent();
 		return result;
 	}
-	
-	public static void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
-	{	if(replay!=null)
-			finishWriting(stats);
-	}
+
 	/////////////////////////////////////////////////////////////////
-	// INPUT STREAM		/////////////////////////////////////////////
+	// OUTPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static FileOutputGameStream fileOut = null;
 	public static NetOutputGameStream netOut = null;
 	
-/*	public static ReplayEvent readEvent()
-	{	ReplayEvent result = null;
-		if(replay!=null)
-			result = replay.readEvent();
+	public static void writeEvent(ReplayEvent event)
+	{	if(fileOut!=null && event.getSendEvent())
+			fileOut.writeEvent(event);
+		if(netOut!=null && event.getSendEvent())
+			netOut.writeEvent(event);
+	}
+
+	public static void writeZoomCoef(double zoomCoef) throws IOException
+	{	if(fileOut!=null)
+			fileOut.writeZoomCoef(zoomCoef);
+		if(netOut!=null)
+			netOut.writeZoomCoef(zoomCoef);
+	}
+
+	public static void setFilterEvents(boolean flag)
+	{	if(fileOut!=null)
+			fileOut.setFilterEvents(flag);
+		if(netOut!=null)
+			netOut.setFilterEvents(flag);
+	}
+
+	public static boolean getFilterEvents()
+	{	boolean result = false;
+		if(fileOut!=null)
+			result = fileOut.getFilterEvents();
+		if(netOut!=null)
+			result = netOut.getFilterEvents();
 		return result;
 	}
-*/
+	
+	public static void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
+	{	if(fileOut!=null)
+			finishWriting(stats);
+		if(netOut!=null)
+			finishWriting(stats);
+	}
+
 }

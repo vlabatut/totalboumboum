@@ -346,18 +346,25 @@ public class ReplayLoop extends VisibleLoop
 	public void processEvent(SystemControlEvent event)
 	{	String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
-			setCanceled(true);
+		{	setCanceled(true);
+		}
 		else if(name.equals(SystemControlEvent.REQUIRE_SLOW_DOWN))
-			slowDown();
+		{	slowDown();
+		}
 		else if(name.equals(SystemControlEvent.REQUIRE_SPEED_UP))
-			speedUp();
+		{	speedUp();
+		}
 		else if(name.equals(SystemControlEvent.SWITCH_BACKWARD))
-			switchBackward();
+		{	switchBackward();
+		}
 		else if(name.equals(SystemControlEvent.SWITCH_ENGINE_PAUSE))
-			switchEnginePause();
+		{	switchEnginePause();
+		}
 		else if(name.equals(SystemControlEvent.SWITCH_FAST_FORWARD))
-			switchFastforward();
+		{	switchFastforward();
+		}
 		else
-			super.processEvent(event);
+		{	super.processEvent(event);
+		}
 	}
 }
