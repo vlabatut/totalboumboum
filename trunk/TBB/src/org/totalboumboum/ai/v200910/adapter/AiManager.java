@@ -36,7 +36,7 @@ import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
-import org.totalboumboum.engine.loop.ServerLoop;
+import org.totalboumboum.engine.loop.LocalLoop;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
@@ -80,7 +80,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	/** l'ensemble des percepts destinés à l'IA */
 	private AiZone percepts;
 	/** le moteur du jeu */
-	private ServerLoop loop;
+	private LocalLoop loop;
 	/** le niveau dans lequel la partie se déroule */
 	private Level level;
 	/** date de la dernière mise à jour des percepts */
@@ -89,7 +89,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	@Override
 	public void init(String instance, AbstractPlayer player)
 	{	super.init(instance,player);
-		loop = (ServerLoop)RoundVariables.loop;
+		loop = (LocalLoop)RoundVariables.loop;
 		level = RoundVariables.level;
 		percepts = new AiZone(level,player);
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());

@@ -1261,7 +1261,7 @@ public class Launcher
 	 * - Replay :
 	 * 		x séparer in/out
 	 * 		x généraliser pour gérer à la fois les fichiers et les réseaux
-	 * - développer une LocalLoop séparée, car certaines fonctionnalité de debug ne doivent pas être accessibles dans le cadre d'un serveur
+	 * - développer une LocalLoop séparée, car certaines fonctionnalités de debug ne doivent pas être accessibles dans le cadre d'un serveur
 	 * - pb pr les IA remote : y a besoin de l'état réel du niveau, pas seulement des graphismes
 	 */
 	
@@ -1272,7 +1272,6 @@ public class Launcher
 	 * x p-e garder le round en permanence, avec un setround
 	 * - le stream ne contient que les flux vers les joueurs concernés par le round
 	 * - p-ê définir une classe différente pour gérer toutes les connexions du tournoi
-	 * - 
 	 */
 
 }
