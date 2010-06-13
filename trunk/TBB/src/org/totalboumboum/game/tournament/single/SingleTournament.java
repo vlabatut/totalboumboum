@@ -64,7 +64,7 @@ public class SingleTournament extends AbstractTournament
 		setAuthor("Replay");
 		
 		// profiles
-		List<Profile> readProfiles = replay.getReadProfiles();
+		List<Profile> readProfiles = replay.getProfiles();
 		for(Profile p: readProfiles)
 			ProfileLoader.reloadPortraits(p);
 		profiles.addAll(readProfiles);
@@ -96,18 +96,18 @@ public class SingleTournament extends AbstractTournament
 			round.setNotes(notes);
 		}
 		{	// limits
-			Limits<RoundLimit> limits = replay.getReadRoundLimits();
+			Limits<RoundLimit> limits = replay.getRoundLimits();
 			round.setLimits(limits);
 		}
 		match.addRound(round);
 		
 		// level
 		HollowLevel hollowLevel = new HollowLevel();
-		LevelInfo levelInfo = replay.getReadLevelInfo();
+		LevelInfo levelInfo = replay.getLevelInfo();
 		hollowLevel.setLevelInfo(levelInfo);
 		Instance instance = new Instance(levelInfo.getInstanceName());
 		hollowLevel.setInstance(instance);
-		HashMap<String,Integer> readItemCounts = replay.getReadItemCounts();
+		HashMap<String,Integer> readItemCounts = replay.getItemCounts();
 		hollowLevel.setItemCounts(readItemCounts);
 		// no need for Players nor Zone objects here
 		round.setHollowLevel(hollowLevel);

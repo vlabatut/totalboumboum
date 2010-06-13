@@ -24,8 +24,6 @@ package org.totalboumboum.game.stream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,55 +40,55 @@ public abstract class InputGameStream
 	/////////////////////////////////////////////////////////////////
 	// ZOOM					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected Double readZoomCoef = null;
+	protected Double zoomCoef = null;
 
-	public double getReadZoomCoef()
-	{	return readZoomCoef;
+	public double getZoomCoef()
+	{	return zoomCoef;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// PROFILES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected List<Profile> readProfiles = null;
+	protected List<Profile> profiles = null;
 
-	public List<Profile> getReadProfiles()
-	{	return readProfiles;
+	public List<Profile> getProfiles()
+	{	return profiles;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// INFO					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected LevelInfo readLevelInfo = null;
+	protected LevelInfo levelInfo = null;
 
-	public LevelInfo getReadLevelInfo()
-	{	return readLevelInfo;
+	public LevelInfo getLevelInfo()
+	{	return levelInfo;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// LIMITS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected Limits<RoundLimit> readRoundLimits = null;
+	protected Limits<RoundLimit> roundLimits = null;
 
-	public Limits<RoundLimit> getReadRoundLimits()
-	{	return readRoundLimits;
+	public Limits<RoundLimit> getRoundLimits()
+	{	return roundLimits;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ITEMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected HashMap<String,Integer> readItemCounts = null;
+	protected HashMap<String,Integer> itemCounts = null;
 
-	public HashMap<String,Integer> getReadItemCounts()
-	{	return readItemCounts;
+	public HashMap<String,Integer> getItemCounts()
+	{	return itemCounts;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// STATS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected StatisticRound readRoundStats = null;
+	protected StatisticRound roundStats = null;
 	
-	public StatisticRound getReadRoundStats()
-	{	return readRoundStats;
+	public StatisticRound getRoundStats()
+	{	return roundStats;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -132,11 +130,11 @@ public abstract class InputGameStream
 	 */
 	@SuppressWarnings("unchecked")
 	public void initRound() throws IOException, ClassNotFoundException
-	{	readProfiles = (List<Profile>) in.readObject();
-		readLevelInfo = (LevelInfo) in.readObject();
-		readRoundLimits = (Limits<RoundLimit>) in.readObject();		
-		readItemCounts = (HashMap<String,Integer>) in.readObject();		
-		readZoomCoef = (Double) in.readObject();
+	{	profiles = (List<Profile>) in.readObject();
+		levelInfo = (LevelInfo) in.readObject();
+		roundLimits = (Limits<RoundLimit>) in.readObject();		
+		itemCounts = (HashMap<String,Integer>) in.readObject();		
+		zoomCoef = (Double) in.readObject();
 	}
 
 	/**
@@ -145,7 +143,7 @@ public abstract class InputGameStream
 	public void finishRound() throws IOException, ClassNotFoundException
 	{	if(VERBOSE)
 			System.out.println("reading: stats");
-		readRoundStats = (StatisticRound) in.readObject();
+		roundStats = (StatisticRound) in.readObject();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -158,50 +156,6 @@ public abstract class InputGameStream
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LEVEL				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected String levelName;
-	protected String levelPack;
-	
-	public void setLevelName(String name)
-	{	this.levelName = name;
-	}
-	public String getLevelName()
-	{	return levelName;
-	}
-	
-	public void setLevelPack(String levelPack)
-	{	this.levelPack = levelPack;
-	}
-	public String getLevelPack()
-	{	return levelPack;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// DATE					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected Date saveDate;
-	
-	public void setSaveDate(Date save)
-	{	this.saveDate = save;
-	}
-	public Date getSaveDate()
-	{	return saveDate;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PLAYERS				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected final List<String> players = new ArrayList<String>();
-	
-	public void addPlayer(String player)
-	{	players.add(player);
-	}
-	public List<String> getPlayers()
-	{	return players;
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected boolean finished = false;
@@ -211,12 +165,11 @@ public abstract class InputGameStream
 		
 		in = null;
 		
-		readItemCounts = null;
-		readLevelInfo = null;
-		readProfiles = null;
-		readRoundLimits = null;
-		readRoundStats = null;
-		readZoomCoef = null;
-		readZoomCoef = null;
+		itemCounts = null;
+		levelInfo = null;
+		profiles = null;
+		roundLimits = null;
+		roundStats = null;
+		zoomCoef = null;
 	}
 }

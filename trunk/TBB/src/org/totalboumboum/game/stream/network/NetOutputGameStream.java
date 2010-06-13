@@ -22,16 +22,14 @@ package org.totalboumboum.game.stream.network;
  */
 
 import java.io.IOException;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.engine.container.level.info.LevelInfo;
-import org.totalboumboum.game.limit.Limits;
-import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.stream.OutputGameStream;
 import org.totalboumboum.statistics.detailed.StatisticRound;
@@ -39,43 +37,13 @@ import org.xml.sax.SAXException;
 
 public class NetOutputGameStream extends OutputGameStream
 {	
-	public NetOutputGameStream(Round round) throws IOException
-	{	// level
-		LevelInfo levelInfo = round.getHollowLevel().getLevelInfo();
-		levelName = levelInfo.getFolder();
-		levelPack = levelInfo.getPackName();
-		
-		// date
-		saveDate = GregorianCalendar.getInstance().getTime();
-		
-		// players
-		List<Profile> profiles = round.getProfiles();
-		for(Profile profile: profiles)
-		{	String name = profile.getName();
-			addPlayer(name);
-		}
-		
-		// paths
-//TODO		initFolder();
-		
-		// init recording
-		initRound();
-		
-		// record round info
-		out.writeObject(profiles);
-		out.writeObject(levelInfo);
-		Limits<RoundLimit> limits = round.getLimits();
-		out.writeObject(limits);
-		HashMap<String,Integer> itemsCounts = round.getHollowLevel().getItemCount();
-		out.writeObject(itemsCounts);
-	}
+	public NetOutputGameStream(Round round, List<Socket> sockets) throws IOException
+	{	super(round);
 	
-	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void initTournament()
-	{
-		// TODO
+		// init net-related stuff
+		
+		// init round
+		initRound(sockets);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -85,8 +53,18 @@ public class NetOutputGameStream extends OutputGameStream
 	 * creates and open a file named after the current date and time
 	 * in order to record this game replay
 	 */
-	private void initRound() throws IOException
-	{	
+	private void initRound(List<Socket> sockets) throws IOException
+	{	// init streams and threads
+		for(Socket socket: sockets)
+		{	OutputStream o = socket.getOutputStream();
+			ObjectOutputStream oo = new ObjectOutputStream(o);
+			out.add(oo);
+			RunnableWriter w = new RunnableWriter(oo);
+			writers.add(w);
+			w.start();
+		}
+		
+		initRound();
 	}
 	
 	/**
@@ -95,5 +73,26 @@ public class NetOutputGameStream extends OutputGameStream
 	@Override
 	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
 	{	super.finishRound(stats);
+		
+		finishWriters();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STREAM				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	protected void write(Object object) throws IOException
+	{	for(RunnableWriter w: writers)
+			w.addObject(object);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// THREADS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<RunnableWriter> writers = new ArrayList<RunnableWriter>();
+
+	public void finishWriters() throws IOException
+	{	for(RunnableWriter w: writers)
+			w.interrupt();
 	}
 }

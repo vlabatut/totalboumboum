@@ -23,20 +23,77 @@ package org.totalboumboum.game.stream;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
+import org.totalboumboum.game.limit.Limits;
+import org.totalboumboum.game.limit.RoundLimit;
+import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.xml.sax.SAXException;
 
 public abstract class OutputGameStream
 {	private static final boolean VERBOSE = false;
 		
+	public OutputGameStream(Round round)
+	{	this.round = round;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ZOOM					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void writeZoomCoef(double zoomCoef) throws IOException
+	{	write(zoomCoef);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PROFILES				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected void writeProfiles() throws IOException
+	{	List<Profile> profiles = round.getProfiles();
+		write(profiles);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// INFO					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected void writeLevelInfo() throws IOException
+	{	LevelInfo leveInfo = round.getHollowLevel().getLevelInfo();
+		for(ObjectOutputStream o: out)
+			o.writeObject(leveInfo);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// LIMITS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected void writeLimits() throws IOException
+	{	Limits<RoundLimit> limits = round.getLimits();
+		write(limits);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ITEMS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected void writeItems() throws IOException
+	{	HashMap<String,Integer> itemsCounts = round.getHollowLevel().getItemCount();
+		write(itemsCounts);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STATS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected void writeStats() throws IOException
+	{	StatisticRound stats = round.getStats();
+		write(stats);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -45,7 +102,8 @@ public abstract class OutputGameStream
 	 */
 	public void writeEvent(ReplayEvent event)
 	{	try
-		{	out.writeObject(event);
+		{	for(ObjectOutputStream o: out)
+				o.writeObject(event);
 			if(VERBOSE)
 				System.out.println("recording: "+event);
 		}
@@ -57,31 +115,36 @@ public abstract class OutputGameStream
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	protected Round round;
+	
+	protected void initRound() throws IOException
+	{	writeProfiles();
+		writeLevelInfo();
+		writeLimits();
+		writeItems();
+	}
+
 	/**
 	 * close the replay output stream
 	 */
 	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
-	{	// record the stats
+	{	// put a stop event
 		StopReplayEvent event = new StopReplayEvent();
 		writeEvent(event);
-		out.writeObject(stats);
+		
+		// record the stats
+		writeStats();
+		
 		if(VERBOSE)
 			System.out.println("recording: stats");
 	}
 
-	public void writeZoomCoef(double zoomCoef) throws IOException
-	{	//Double zoomCoef = RoundVariables.zoomFactor;
-		out.writeObject(zoomCoef);
-	}
-	
 	/////////////////////////////////////////////////////////////////
-	// STREAM				/////////////////////////////////////////
+	// STREAMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected ObjectOutputStream out = null;
+	protected List<ObjectOutputStream> out = new ArrayList<ObjectOutputStream>();
 		
-	public void close() throws IOException
-	{	out.close();
-	}
+	protected abstract void write(Object object) throws IOException;
 	
 	/////////////////////////////////////////////////////////////////
 	// FILTER				/////////////////////////////////////////
@@ -94,49 +157,5 @@ public abstract class OutputGameStream
 	
 	public boolean getFilterEvents()
 	{	return filterEvents;		
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// LEVEL				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected String levelName;
-	protected String levelPack;
-	
-	public void setLevelName(String name)
-	{	this.levelName = name;
-	}
-	public String getLevelName()
-	{	return levelName;
-	}
-	
-	public void setLevelPack(String levelPack)
-	{	this.levelPack = levelPack;
-	}
-	public String getLevelPack()
-	{	return levelPack;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// DATE					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected Date saveDate;
-	
-	public void setSaveDate(Date save)
-	{	this.saveDate = save;
-	}
-	public Date getSaveDate()
-	{	return saveDate;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PLAYERS				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected final List<String> players = new ArrayList<String>();
-	
-	public void addPlayer(String player)
-	{	players.add(player);
-	}
-	public List<String> getPlayers()
-	{	return players;
 	}
 }

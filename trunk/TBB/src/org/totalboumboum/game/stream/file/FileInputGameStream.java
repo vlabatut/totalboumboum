@@ -27,6 +27,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import org.totalboumboum.game.stream.InputGameStream;
 import org.totalboumboum.tools.files.FileNames;
@@ -34,23 +37,6 @@ import org.totalboumboum.tools.files.FilePaths;
 
 public class FileInputGameStream extends InputGameStream
 {	
-	public FileInputGameStream()
-	{	
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FOLDER				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String folder = null;
-
-	public String getFolder()
-	{	return folder;		
-	}
-	
-	public void setFolder(String folder)
-	{	this.folder = folder;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
@@ -79,6 +65,19 @@ public class FileInputGameStream extends InputGameStream
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// FOLDER				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String folder = null;
+
+	public String getFolder()
+	{	return folder;		
+	}
+	
+	public void setFolder(String folder)
+	{	this.folder = folder;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// PREVIEW				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private BufferedImage preview = null;
@@ -92,6 +91,54 @@ public class FileInputGameStream extends InputGameStream
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// LEVEL				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected String levelName;
+	protected String levelPack;
+	
+	public void setLevelName(String name)
+	{	this.levelName = name;
+	}
+	
+	public String getLevelName()
+	{	return levelName;
+	}
+	
+	public void setLevelPack(String levelPack)
+	{	this.levelPack = levelPack;
+	}
+	
+	public String getLevelPack()
+	{	return levelPack;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DATE					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Date saveDate;
+	
+	public void setSaveDate(Date save)
+	{	this.saveDate = save;
+	}
+	
+	public Date getSaveDate()
+	{	return saveDate;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected final List<String> players = new ArrayList<String>();
+	
+	public void addPlayer(String player)
+	{	players.add(player);
+	}
+	
+	public List<String> getPlayers()
+	{	return players;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
@@ -99,8 +146,11 @@ public class FileInputGameStream extends InputGameStream
 	{	if(!finished)
 		{	super.finish();
 			
-			preview = null;
 			folder = null;
+			preview = null;
+			levelName = null;
+			levelPack = null;
+			saveDate = null;
 		}
 	}
 }

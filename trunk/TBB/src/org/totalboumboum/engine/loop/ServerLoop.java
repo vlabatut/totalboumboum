@@ -112,8 +112,7 @@ public class ServerLoop extends VisibleLoop implements InteractiveLoop
 
 		// load level & instance
 		hollowLevel.initLevel(this);
-		Double zoomCoef = RoundVariables.zoomFactor;
-		RoundVariables.writeZoomCoef(zoomCoef);
+		RoundVariables.writeZoomCoef(RoundVariables.zoomFactor);
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
 		instance.loadFiresetMap();
