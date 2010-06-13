@@ -60,13 +60,11 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.control.system.LocalSytemControl;
 import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.display.DisplayAisColors;
 import org.totalboumboum.engine.loop.display.DisplayAisPaths;
 import org.totalboumboum.engine.loop.display.DisplayAisPause;
 import org.totalboumboum.engine.loop.display.DisplayAisTexts;
-import org.totalboumboum.engine.loop.display.DisplayEnginePause;
 import org.totalboumboum.engine.loop.display.DisplayFPS;
 import org.totalboumboum.engine.loop.display.DisplayGrid;
 import org.totalboumboum.engine.loop.display.DisplayMessage;
@@ -75,7 +73,6 @@ import org.totalboumboum.engine.loop.display.DisplaySpeed;
 import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
-import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
@@ -88,7 +85,7 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class LocalLoop extends VisibleLoop implements InteractiveLoop
+public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 {	private static final long serialVersionUID = 1L;
 	
 	public LocalLoop(Round round)
@@ -100,10 +97,7 @@ public class LocalLoop extends VisibleLoop implements InteractiveLoop
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
-	{	// control
-		systemControl = new LocalSytemControl(this);
-
-		// init
+	{	// init
 		List<Profile> profiles = round.getProfiles();
 		HollowLevel hollowLevel = round.getHollowLevel();
 		Instance instance = hollowLevel.getInstance();
@@ -281,7 +275,7 @@ public class LocalLoop extends VisibleLoop implements InteractiveLoop
 	/////////////////////////////////////////////////////////////////
 	// AIS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final List<Boolean> pauseAis = new ArrayList<Boolean>();
+	protected final List<Boolean> pauseAis = new ArrayList<Boolean>();
 
 	public void switchAiPause(int index)
 	{	debugLock.lock();
@@ -304,7 +298,7 @@ public class LocalLoop extends VisibleLoop implements InteractiveLoop
 		return result;
 	}
 	
-	private void updateAis()
+	protected void updateAis()
 	{	if(gameStarted) // only after the round has started
 		{	aiTime = aiTime + milliPeriod;
 			if(aiTime >= Configuration.getAisConfiguration().getAiPeriod())
@@ -331,23 +325,6 @@ public class LocalLoop extends VisibleLoop implements InteractiveLoop
 		aiTime = 0;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// ENGINE			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	protected void update()
-	{	if(!getEnginePause() || getEngineStep())
-		{	updateCancel();
-			updateEngineStep();
-			updateLogs();
-			updateCelebration();
-			updateEntries();
-			level.update();		
-			updateAis();
-			updateStats();
-		}
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY MANAGER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -398,10 +375,6 @@ public class LocalLoop extends VisibleLoop implements InteractiveLoop
 		// FPS
 		display = new DisplayFPS(this);
 		displayManager.addDisplay(display);
-		
-		// engine pause
-		display = new DisplayEnginePause(this);
-		displayManager.addDisplay(display);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -445,35 +418,5 @@ public class LocalLoop extends VisibleLoop implements InteractiveLoop
 		Sprite sprite = player.getSprite();
 		EngineEvent event = new EngineEvent(EngineEvent.CELEBRATION_DEFEAT);
 		sprite.processEvent(event);
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// SYSTEM CONTROLS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void processEvent(SystemControlEvent event)
-	{	String name = event.getName();
-		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
-		{	setCanceled(true);
-		}
-		else if(name.equals(SystemControlEvent.REQUIRE_ENGINE_STEP))
-		{	switchEngineStep(true);
-		}
-		else if(name.equals(SystemControlEvent.REQUIRE_SLOW_DOWN))
-		{	slowDown();
-		}
-		else if(name.equals(SystemControlEvent.REQUIRE_SPEED_UP))
-		{	speedUp();
-		}
-		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
-		{	int index = event.getIndex();
-			switchAiPause(index);
-		}
-		else if(name.equals(SystemControlEvent.SWITCH_ENGINE_PAUSE))
-		{	switchEnginePause();
-		}
-		else
-		{	super.processEvent(event);
-		}
 	}
 }

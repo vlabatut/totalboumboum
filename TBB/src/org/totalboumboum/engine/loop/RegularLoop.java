@@ -49,7 +49,9 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.control.system.ServerSytemControl;
+import org.totalboumboum.engine.control.system.LocalSytemControl;
+import org.totalboumboum.engine.loop.display.Display;
+import org.totalboumboum.engine.loop.display.DisplayEnginePause;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
@@ -61,10 +63,10 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class ServerLoop extends LocalLoop
+public class RegularLoop extends LocalLoop
 {	private static final long serialVersionUID = 1L;
 	
-	public ServerLoop(Round round)
+	public RegularLoop(Round round)
 	{	super(round);
 	}	
 	
@@ -74,7 +76,7 @@ public class ServerLoop extends LocalLoop
 	@Override
 	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
-		systemControl = new ServerSytemControl(this);
+		systemControl = new LocalSytemControl(this);
 
 		// init
 		List<Profile> profiles = round.getProfiles();
@@ -177,6 +179,7 @@ public class ServerLoop extends LocalLoop
 	protected void update()
 	{	if(!getEnginePause() || getEngineStep())
 		{	updateCancel();
+			updateEngineStep();
 			updateLogs();
 			updateCelebration();
 			updateEntries();
@@ -187,6 +190,20 @@ public class ServerLoop extends LocalLoop
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// DISPLAY MANAGER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	protected void initDisplayManager()
+	{	Display display;
+	
+		super.initDisplayManager();
+	
+		// engine pause
+		display = new DisplayEnginePause(this);
+		displayManager.addDisplay(display);
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// SYSTEM CONTROLS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
@@ -195,9 +212,21 @@ public class ServerLoop extends LocalLoop
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
 		}
+		else if(name.equals(SystemControlEvent.REQUIRE_ENGINE_STEP))
+		{	switchEngineStep(true);
+		}
+		else if(name.equals(SystemControlEvent.REQUIRE_SLOW_DOWN))
+		{	slowDown();
+		}
+		else if(name.equals(SystemControlEvent.REQUIRE_SPEED_UP))
+		{	speedUp();
+		}
 		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
 		{	int index = event.getIndex();
 			switchAiPause(index);
+		}
+		else if(name.equals(SystemControlEvent.SWITCH_ENGINE_PAUSE))
+		{	switchEnginePause();
 		}
 		else
 		{	super.processEvent(event);
