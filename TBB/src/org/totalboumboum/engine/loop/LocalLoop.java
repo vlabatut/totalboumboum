@@ -88,10 +88,10 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class ServerLoop extends VisibleLoop implements InteractiveLoop
+public class LocalLoop extends VisibleLoop implements InteractiveLoop
 {	private static final long serialVersionUID = 1L;
 	
-	public ServerLoop(Round round)
+	public LocalLoop(Round round)
 	{	super(round);
 	}	
 	
