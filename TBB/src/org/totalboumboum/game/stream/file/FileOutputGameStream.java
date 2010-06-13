@@ -61,6 +61,15 @@ public class FileOutputGameStream extends OutputGameStream
 		// init recording
 		initRound();
 	}
+/*
+ * TODO
+ * - dans le netstream, on passe directement les flux. les sockets sont gérés en amont
+ * - pr ça penser aux différents constructeurs de boucle. même pr le replay, on peut passer le nom du fichier
+ * - p-e garder le round en permanence, avec un setround
+ * - le stream ne contient que les flux vers les joueurs concernés par le round
+ * - p-ê définir une classe différente pour gérer toutes les connexions du tournoi
+ * - 
+ */
 	
 	/////////////////////////////////////////////////////////////////
 	// FOLDER				/////////////////////////////////////////
