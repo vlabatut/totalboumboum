@@ -212,7 +212,7 @@ public class Round implements StatisticHolder, Serializable
 		if(replayed)
 		{	try
 			{	in.finishRound();
-				StatisticRound stats = in.getReadRoundStats();
+				StatisticRound stats = in.getRoundStats();
 				setStats(stats);
 				roundOver = true; // ou close?
 			}

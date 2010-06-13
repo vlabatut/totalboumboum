@@ -106,7 +106,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 
 		// load level & instance
 		hollowLevel.initLevel(this);
-		zoomCoefficient = RoundVariables.zoomFactor / RoundVariables.replay.getReadZoomCoef();
+		zoomCoefficient = RoundVariables.zoomFactor / RoundVariables.replay.getZoomCoef();
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
 		instance.loadFiresetMap();

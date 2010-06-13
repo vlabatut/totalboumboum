@@ -22,24 +22,19 @@ package org.totalboumboum.game.stream.network;
  */
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.net.Socket;
 
 import org.totalboumboum.game.stream.InputGameStream;
 
 public class NetInputGameStream extends InputGameStream
 {	
-	public NetInputGameStream()
-	{	
+	public NetInputGameStream(Socket socket) throws IOException
+	{	InputStream i = socket.getInputStream();
+		in = new ObjectInputStream(i);
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// TOURNEMENT			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	public void initTournament()
-	{
-		// TODO
-	}
-	
-	
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	

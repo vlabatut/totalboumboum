@@ -1264,4 +1264,22 @@ public class Launcher
 	 * - développer une LocalLoop séparée, car certaines fonctionnalité de debug ne doivent pas être accessibles dans le cadre d'un serveur
 	 * - pb pr les IA remote : y a besoin de l'état réel du niveau, pas seulement des graphismes
 	 */
+	
+	/*
+	 * TODO
+	 * x dans le netstream, on passe directement les flux. les sockets sont gérés en amont
+	 * - pr ça penser aux différents constructeurs de boucle. même pr le replay, on peut passer le nom du fichier
+	 * x p-e garder le round en permanence, avec un setround
+	 * - le stream ne contient que les flux vers les joueurs concernés par le round
+	 * - p-ê définir une classe différente pour gérer toutes les connexions du tournoi
+	 * - 
+	 */
+
 }
+
+
+
+
+
+
+
