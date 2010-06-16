@@ -1251,23 +1251,23 @@ public class Launcher
 	 *      x nouveau controle associé à cette classe, lisant les controle dans le flux associé au joueur
 	 *      - le container des remotePlayerControl doit être initialisé dans la boucle et lancé aussi (run)
 	 * - côté client :
-	 * 		- version de la boucle héritant de replay mais rajoutant la gestion des controles locaux
+	 * 		x version de la boucle héritant de replay mais rajoutant la gestion des controles locaux
 	 *  	x version spéciale de Control pour que les codes soient envoyés dans le flux (NetworkControl)
 	 *  	x version d'un joueur : comme avant, mais généraliser pour prendre LocalControl ou NetworkControl
 	 *  	  le controle utilisé peut être décidé lors de l'init de la loop, en fonction du type de la loop justement
 	 *  	  intérêt: on garde le joueur humain et l'IA
-	 *  	- à la place du RemotePlayersControl, c'est l'équivalent du Replay qui va gérer ça et transférer le beans aux sprites
+	 *  	x à la place du RemotePlayersControl, c'est l'équivalent du Replay qui va gérer ça et transférer le beans aux sprites
 	 *  	- même dans l'autre sens, faudrait p-ê un objet central, histoire de faciliter la synchro lors de l'accès au flux...
 	 * - Replay :
 	 * 		x séparer in/out
 	 * 		x généraliser pour gérer à la fois les fichiers et les réseaux
-	 * - développer une LocalLoop séparée, car certaines fonctionnalités de debug ne doivent pas être accessibles dans le cadre d'un serveur
+	 * x développer une LocalLoop séparée, car certaines fonctionnalités de debug ne doivent pas être accessibles dans le cadre d'un serveur
 	 * - pb pr les IA remote : y a besoin de l'état réel du niveau, pas seulement des graphismes
 	 */
 	
 	/*
 	 * TODO
-	 * x dans le netstream, on passe directement les flux. les sockets sont gérés en amont
+	 * x dans le netstream, on passe directement les sockets déjà ouverts.
 	 * - pr ça penser aux différents constructeurs de boucle. même pr le replay, on peut passer le nom du fichier
 	 * x p-e garder le round en permanence, avec un setround
 	 * - le stream ne contient que les flux vers les joueurs concernés par le round

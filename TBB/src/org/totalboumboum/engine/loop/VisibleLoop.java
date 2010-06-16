@@ -63,7 +63,7 @@ import org.xml.sax.SAXException;
 
 public abstract class VisibleLoop extends Loop
 {	private static final long serialVersionUID = 1L;
-	protected boolean verbose = false;
+	protected final static boolean VERBOSE = false;
 	
 	public VisibleLoop(Round round)
 	{	super(round);
@@ -174,7 +174,7 @@ public abstract class VisibleLoop extends Loop
 			long loadStart = System.currentTimeMillis();
 			load();
 			long loadEnd = System.currentTimeMillis();
-			if(verbose)
+			if(VERBOSE)
 				System.out.println("total load time: "+(loadEnd-loadStart));
 			
 			// init the loop

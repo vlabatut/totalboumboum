@@ -22,8 +22,6 @@ package org.totalboumboum.engine.control.player;
  */
 
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
@@ -31,6 +29,7 @@ import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.game.stream.network.NetOutputGameStream;
 
 public class NetworkPlayerControl extends PlayerControl 
 {	
@@ -45,7 +44,7 @@ public class NetworkPlayerControl extends PlayerControl
 	/////////////////////////////////////////////////////////////////
 	@SuppressWarnings("unused")
 	private NetworkPlayersControl networkPlayersControl;
-	private ObjectOutputStream out;
+	private NetOutputGameStream out;
 	
 	/////////////////////////////////////////////////////////////////
 	// SETTINGS			/////////////////////////////////////////////
@@ -69,12 +68,7 @@ public class NetworkPlayerControl extends PlayerControl
 			if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOnKey(keyCode))
 		    {	ControlCode controlCode = new ControlCode(keyCode,true);
 		    	RemotePlayerControlEvent event = new RemotePlayerControlEvent(getSprite(), controlCode);
-				try
-				{	out.writeObject(event);
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}				
+		    	out.writeEvent(event);
 		    }
 	    }
 	}
@@ -90,12 +84,7 @@ public class NetworkPlayerControl extends PlayerControl
 		if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOffKey(keyCode))
 	    {	ControlCode controlCode = new ControlCode(keyCode,false);
 	    	RemotePlayerControlEvent event = new RemotePlayerControlEvent(getSprite(), controlCode);
-			try
-			{	out.writeObject(event);
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}				
+	    	out.writeEvent(event);
 	    }
 	}
 

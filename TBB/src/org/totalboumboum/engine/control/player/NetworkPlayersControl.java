@@ -21,21 +21,20 @@ package org.totalboumboum.engine.control.player;
  * 
  */
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import org.totalboumboum.game.stream.network.NetOutputGameStream;
 
 public class NetworkPlayersControl
 {	
-	public NetworkPlayersControl(ObjectOutputStream out)
+	public NetworkPlayersControl(NetOutputGameStream out)
 	{	this.out = out;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// INPUT STREAM		/////////////////////////////////////////////
+	// STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ObjectOutputStream out = null;
+	private NetOutputGameStream out = null;
 	
-	public ObjectOutputStream getStream()
+	public NetOutputGameStream getStream()
 	{	return out;	
 	}
 	
@@ -48,12 +47,6 @@ public class NetworkPlayersControl
 	{	if(!finished)
 		{	finished = true;
 		
-			try
-			{	out.close();
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			}
 			out = null;
 		}
 	}
