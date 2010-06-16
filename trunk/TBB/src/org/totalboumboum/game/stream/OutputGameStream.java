@@ -31,7 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
-import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
+import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
@@ -100,7 +100,7 @@ public abstract class OutputGameStream
 	/**
 	 * records an event in the currently open stream.
 	 */
-	public void writeEvent(ReplayEvent event)
+	public void writeEvent(StreamedEvent event)
 	{	try
 		{	for(ObjectOutputStream o: out)
 				o.writeObject(event);

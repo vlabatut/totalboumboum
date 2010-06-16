@@ -50,13 +50,11 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.control.player.NetworkPlayersControl;
 import org.totalboumboum.engine.control.system.LocalSytemControl;
-import org.totalboumboum.engine.control.system.ReplaySytemControl;
 import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.display.DisplayAisColors;
 import org.totalboumboum.engine.loop.display.DisplayAisPaths;
 import org.totalboumboum.engine.loop.display.DisplayAisPause;
 import org.totalboumboum.engine.loop.display.DisplayAisTexts;
-import org.totalboumboum.engine.loop.display.DisplayEnginePause;
 import org.totalboumboum.engine.loop.display.DisplayFPS;
 import org.totalboumboum.engine.loop.display.DisplayGrid;
 import org.totalboumboum.engine.loop.display.DisplayMessage;
@@ -75,7 +73,6 @@ import org.totalboumboum.engine.loop.event.replay.sprite.SpriteEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.HumanPlayer;
-import org.totalboumboum.engine.player.ReplayedPlayer;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
@@ -96,7 +93,8 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
 		systemControl = new LocalSytemControl(this);
-
+		networkPlayersControl = new NetworkPlayersControl(RoundVariables.netOut);
+		
 		// init
 		List<Profile> profiles = round.getProfiles();
 		HollowLevel hollowLevel = round.getHollowLevel();
@@ -106,7 +104,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 
 		// load level & instance
 		hollowLevel.initLevel(this);
-		zoomCoefficient = RoundVariables.zoomFactor / RoundVariables.replay.getZoomCoef();
+		zoomCoefficient = RoundVariables.zoomFactor / RoundVariables.in.getZoomCoef();
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
 		instance.loadFiresetMap();
@@ -132,7 +130,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 			do
 			{	SpriteEvent tempEvent;
 				do
-					tempEvent = (SpriteEvent)RoundVariables.readEvent();
+					tempEvent = (SpriteEvent)RoundVariables.in.readEvent();
 				while(!(tempEvent instanceof SpriteCreationEvent));
 				event = (SpriteCreationEvent)tempEvent;
 			}
@@ -280,11 +278,11 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	{	// get all the remaining useless SpriteEvents
 		ReplayEvent tempEvent;
 		do
-			tempEvent = (ReplayEvent)RoundVariables.readEvent();
+			tempEvent = (ReplayEvent)RoundVariables.in.readEvent();
 		while(!(tempEvent instanceof StopReplayEvent));
 
 		// get the first meaningful ReplayEvent
-		currentEvent = (ReplayEvent)RoundVariables.readEvent();
+		currentEvent = (ReplayEvent)RoundVariables.in.readEvent();
 	}
 	
 	private void updateEvents()
@@ -295,14 +293,14 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 			}
 			else
 			{	// read events
-				if(verbose)
+				if(VERBOSE)
 					System.out.println("/////////////////////////////////////////");		
 				List<ReplayEvent> events = new ArrayList<ReplayEvent>();
 				while(currentEvent.getTime()<getTotalEngineTime() && !(currentEvent instanceof StopReplayEvent))
 				{	events.add(currentEvent);
-					if(verbose)
+					if(VERBOSE)
 						System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
-					currentEvent = RoundVariables.readEvent();
+					currentEvent = (ReplayEvent)RoundVariables.in.readEvent();
 				}
 		
 				// process events
