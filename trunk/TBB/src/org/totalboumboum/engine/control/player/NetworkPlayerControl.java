@@ -33,17 +33,14 @@ import org.totalboumboum.game.stream.network.NetOutputGameStream;
 
 public class NetworkPlayerControl extends PlayerControl 
 {	
-	public NetworkPlayerControl(ControlledPlayer player, NetworkPlayersControl networkPlayersControl)
+	public NetworkPlayerControl(ControlledPlayer player, NetOutputGameStream out)
 	{	super(player);
-		this.networkPlayersControl = networkPlayersControl;
-		this.out = networkPlayersControl.getStream();
+		this.out = out;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// CONTAINER		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@SuppressWarnings("unused")
-	private NetworkPlayersControl networkPlayersControl;
 	private NetOutputGameStream out;
 	
 	/////////////////////////////////////////////////////////////////
@@ -101,7 +98,6 @@ public class NetworkPlayerControl extends PlayerControl
 		{	finished = true;
 			super.finish();
 			
-			networkPlayersControl = null;
 			out = null;
 		}
 	}

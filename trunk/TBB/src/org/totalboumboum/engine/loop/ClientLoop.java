@@ -48,7 +48,6 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
-import org.totalboumboum.engine.control.player.NetworkPlayersControl;
 import org.totalboumboum.engine.control.system.LocalSytemControl;
 import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.display.DisplayAisColors;
@@ -93,7 +92,6 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	public void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
 		systemControl = new LocalSytemControl(this);
-		networkPlayersControl = new NetworkPlayersControl(RoundVariables.netOut);
 		
 		// init
 		List<Profile> profiles = round.getProfiles();
@@ -179,15 +177,13 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private NetworkPlayersControl networkPlayersControl;
-	
 	@Override
 	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{	AbstractPlayer result;
 		if(profile.hasAi())
-			result = new AiPlayer(profile,base,tile,networkPlayersControl);
+			result = new AiPlayer(profile,base,tile,RoundVariables.netOut);
 		else
-			result = new HumanPlayer(profile,base,tile,networkPlayersControl);
+			result = new HumanPlayer(profile,base,tile,RoundVariables.netOut);
 		return result;
 	}
 

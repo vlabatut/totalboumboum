@@ -22,6 +22,7 @@ package org.totalboumboum.configuration.profile;
  */
 
 import java.io.Serializable;
+import java.net.Socket;
 
 import org.totalboumboum.engine.control.player.LocalPlayerControl;
 
@@ -100,6 +101,23 @@ public class Profile implements Serializable
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// REMOTE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Socket socket = null;
+	
+	public Socket getSocket()
+	{	return socket;	
+	}
+	
+	public void setSocket(Socket socket)
+	{	this.socket = socket;	
+	}
+	
+	public boolean isRemote()
+	{	return socket == null;		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// AI				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
