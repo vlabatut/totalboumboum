@@ -29,21 +29,23 @@ import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
-import org.totalboumboum.engine.control.player.RemotePlayersControl;
+import org.totalboumboum.engine.control.player.RemotePlayerControl;
+import org.totalboumboum.game.stream.network.NetInputGameStream;
 import org.xml.sax.SAXException;
 
 public class RemotePlayer extends AbstractPlayer
 {	
-	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile, ControlSettings controlSettings, RemotePlayersControl spriteControl) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile, NetInputGameStream in) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 		
-		// set controls
-		this.controlSettings = controlSettings;
+		// set controls settings
+		controlSettings = in.getControlSettings();
 		sprite.setControlSettings(controlSettings);
-		this.spriteControl = spriteControl;
-		spriteControl.addHero(sprite);
 		
-		// stream
+		// set controls
+		this.spriteControl = new RemotePlayerControl(sprite,in);
+		
+		// start stream
 		startThread();
 	}
 
@@ -66,7 +68,7 @@ public class RemotePlayer extends AbstractPlayer
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** control */
-	private RemotePlayersControl spriteControl;
+	private RemotePlayerControl spriteControl;
 	/** current controls */
 	private ControlSettings controlSettings;
 
@@ -74,7 +76,7 @@ public class RemotePlayer extends AbstractPlayer
 	{	return controlSettings;
 	}
 
-	public RemotePlayersControl getSpriteControl()
+	public RemotePlayerControl getSpriteControl()
 	{	return spriteControl;
 	}
 	

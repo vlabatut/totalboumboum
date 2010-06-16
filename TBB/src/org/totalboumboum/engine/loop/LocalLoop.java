@@ -77,7 +77,6 @@ import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
-import org.totalboumboum.engine.player.HumanPlayer;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
@@ -199,18 +198,6 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		{	round.cancelGame();
 			setCanceled(false);
 		}
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// PLAYERS 			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
-	{	AbstractPlayer result;
-		if(profile.hasAi())
-			result = new AiPlayer(profile,base,tile);
-		else
-			result = new HumanPlayer(profile,base,tile);
-		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
