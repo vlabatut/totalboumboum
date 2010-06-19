@@ -30,12 +30,12 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.control.player.RemotePlayerControl;
-import org.totalboumboum.game.stream.network.NetInputGameStream;
+import org.totalboumboum.game.stream.network.NetInputServerStream;
 import org.xml.sax.SAXException;
 
 public class RemotePlayer extends AbstractPlayer
 {	
-	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile, NetInputGameStream in) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile, NetInputServerStream in) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 		
 		// set controls settings

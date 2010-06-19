@@ -24,19 +24,25 @@ package org.totalboumboum.engine.control.player;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
-import org.totalboumboum.game.stream.network.NetInputGameStream;
+import org.totalboumboum.game.stream.network.NetInputServerStream;
 
 public class RemotePlayerControl implements Runnable
 {	
-	public RemotePlayerControl(Hero sprite, NetInputGameStream in)
-	{	this.in = in;
+	public RemotePlayerControl(int index, Hero sprite, NetInputServerStream in)
+	{	this.index = index;
+		this.in = in;
 		this.sprite = sprite;
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// PLAYER INDEX		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int index;
+	
+	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private NetInputGameStream in = null;
+	private NetInputServerStream in = null;
 	
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
@@ -50,7 +56,7 @@ public class RemotePlayerControl implements Runnable
 	public void run()
 	{	while(!Thread.interrupted())
 		{	// read the control event in the network stream
-			RemotePlayerControlEvent event = (RemotePlayerControlEvent)in.readEvent();
+			RemotePlayerControlEvent event = in.readEvent(index);
 			// get the control code
 			ControlCode controlCode = event.getControlCode();
 			// send it to the sprite like a local control code

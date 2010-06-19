@@ -29,11 +29,11 @@ import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.game.stream.network.NetOutputGameStream;
+import org.totalboumboum.game.stream.network.NetOutputServerStream;
 
 public class NetworkPlayerControl extends PlayerControl 
 {	
-	public NetworkPlayerControl(ControlledPlayer player, NetOutputGameStream out)
+	public NetworkPlayerControl(ControlledPlayer player, NetOutputServerStream out)
 	{	super(player);
 		this.out = out;
 	}
@@ -41,7 +41,7 @@ public class NetworkPlayerControl extends PlayerControl
 	/////////////////////////////////////////////////////////////////
 	// CONTAINER		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private NetOutputGameStream out;
+	private NetOutputServerStream out;
 	
 	/////////////////////////////////////////////////////////////////
 	// SETTINGS			/////////////////////////////////////////////

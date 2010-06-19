@@ -223,7 +223,7 @@ if(bomb==null)
 		}
 		
 		// init sprites
-		ReplayEvent tempEvent = (ReplayEvent)RoundVariables.in.readEvent();
+		ReplayEvent tempEvent = RoundVariables.readEvent();
 		do
 		{	// creation
 			if(tempEvent instanceof SpriteCreationEvent)
@@ -240,7 +240,7 @@ if(bomb==null)
 					sprite.processChangeAnimeEvent(event);
 			}
 			// next event
-			tempEvent = (ReplayEvent)RoundVariables.in.readEvent();
+			tempEvent = RoundVariables.readEvent();
 		}
 		while(!(tempEvent instanceof StopReplayEvent));
 		

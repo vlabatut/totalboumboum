@@ -48,8 +48,8 @@ import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.stream.InputClientStream;
-import org.totalboumboum.game.stream.file.FileOutputGameStream;
-import org.totalboumboum.game.stream.network.NetOutputGameStream;
+import org.totalboumboum.game.stream.file.FileOutputServerStream;
+import org.totalboumboum.game.stream.network.NetOutputServerStream;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
@@ -130,12 +130,12 @@ public class Round implements StatisticHolder, Serializable
 		
 			// recording
 			if(Configuration.getEngineConfiguration().isRecordRounds() && !replayed)
-			{	fileOut = new FileOutputGameStream(this);
+			{	fileOut = new FileOutputServerStream(this);
 				RoundVariables.fileOut = fileOut;
 			}
 		
 			if(replayed)
-				RoundVariables.in = in;
+				RoundVariables.inClient = in;
 			
 			Thread animator = new Thread(loop);
 			animator.start();
@@ -146,10 +146,10 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT GAME STREAM	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private FileOutputGameStream fileOut = null;
-	private NetOutputGameStream netOut = null;
+	private FileOutputServerStream fileOut = null;
+	private NetOutputServerStream netOut = null;
 	
-	public void setNetOutputGameStream(NetOutputGameStream netOut)
+	public void setNetOutputGameStream(NetOutputServerStream netOut)
 	{	this.netOut = netOut;
 	}
 	

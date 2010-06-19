@@ -102,7 +102,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 
 		// load level & instance
 		hollowLevel.initLevel(this);
-		zoomCoefficient = RoundVariables.zoomFactor / RoundVariables.in.getZoomCoef();
+		zoomCoefficient = RoundVariables.zoomFactor / RoundVariables.netClientIn.getZoomCoef();
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
 		instance.loadFiresetMap();
@@ -128,7 +128,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 			do
 			{	SpriteEvent tempEvent;
 				do
-					tempEvent = (SpriteEvent)RoundVariables.in.readEvent();
+					tempEvent = (SpriteEvent)RoundVariables.netClientIn.readEvent();
 				while(!(tempEvent instanceof SpriteCreationEvent));
 				event = (SpriteCreationEvent)tempEvent;
 			}
@@ -181,9 +181,9 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{	AbstractPlayer result;
 		if(profile.hasAi())
-			result = new AiPlayer(profile,base,tile,RoundVariables.netOut);
+			result = new AiPlayer(profile,base,tile,RoundVariables.netServerOut);
 		else
-			result = new HumanPlayer(profile,base,tile,RoundVariables.netOut);
+			result = new HumanPlayer(profile,base,tile,RoundVariables.netServerOut);
 		return result;
 	}
 
@@ -274,11 +274,11 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	{	// get all the remaining useless SpriteEvents
 		ReplayEvent tempEvent;
 		do
-			tempEvent = (ReplayEvent)RoundVariables.in.readEvent();
+			tempEvent = RoundVariables.netClientIn.readEvent();
 		while(!(tempEvent instanceof StopReplayEvent));
 
 		// get the first meaningful ReplayEvent
-		currentEvent = (ReplayEvent)RoundVariables.in.readEvent();
+		currentEvent = RoundVariables.netClientIn.readEvent();
 	}
 	
 	private void updateEvents()
@@ -296,7 +296,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 				{	events.add(currentEvent);
 					if(VERBOSE)
 						System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
-					currentEvent = (ReplayEvent)RoundVariables.in.readEvent();
+					currentEvent = RoundVariables.netClientIn.readEvent();
 				}
 		
 				// process events

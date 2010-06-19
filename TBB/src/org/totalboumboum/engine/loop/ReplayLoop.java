@@ -89,7 +89,7 @@ public class ReplayLoop extends VisibleLoop
 
 		// load level & instance
 		hollowLevel.initLevel(this);
-		zoomCoefficient = RoundVariables.zoomFactor / RoundVariables.in.getZoomCoef();
+		zoomCoefficient = RoundVariables.zoomFactor / RoundVariables.fileIn.getZoomCoef();
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
 		instance.loadFiresetMap();
@@ -115,7 +115,7 @@ public class ReplayLoop extends VisibleLoop
 			do
 			{	SpriteEvent tempEvent;
 				do
-					tempEvent = (SpriteEvent)RoundVariables.in.readEvent();
+					tempEvent = (SpriteEvent)RoundVariables.fileIn.readEvent();
 				while(!(tempEvent instanceof SpriteCreationEvent));
 				event = (SpriteCreationEvent)tempEvent;
 			}
@@ -203,11 +203,11 @@ public class ReplayLoop extends VisibleLoop
 	{	// get all the remaining useless SpriteEvents
 		ReplayEvent tempEvent;
 		do
-			tempEvent = (ReplayEvent)RoundVariables.in.readEvent();
+			tempEvent = RoundVariables.fileIn.readEvent();
 		while(!(tempEvent instanceof StopReplayEvent));
 
 		// get the first meaningful ReplayEvent
-		currentEvent = (ReplayEvent)RoundVariables.in.readEvent();
+		currentEvent = RoundVariables.fileIn.readEvent();
 	}
 	
 	private void updateEvents()
@@ -225,7 +225,7 @@ public class ReplayLoop extends VisibleLoop
 				{	events.add(currentEvent);
 					if(VisibleLoop.VERBOSE)
 						System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
-					currentEvent = (ReplayEvent)RoundVariables.in.readEvent();
+					currentEvent = RoundVariables.fileIn.readEvent();
 				}
 		
 				// process events
