@@ -47,7 +47,7 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.rank.Ranks;
-import org.totalboumboum.game.stream.InputGameStream;
+import org.totalboumboum.game.stream.InputClientStream;
 import org.totalboumboum.game.stream.file.FileOutputGameStream;
 import org.totalboumboum.game.stream.network.NetOutputGameStream;
 import org.totalboumboum.statistics.GameStatistics;
@@ -156,9 +156,9 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// INPUT GAME STREAM	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private InputGameStream in = null;
+	private InputClientStream in = null;
 
-	public void setInputGameStream(InputGameStream in)
+	public void setInputGameStream(InputClientStream in)
 	{	this.in = in;
 		replayed = true;
 	}
