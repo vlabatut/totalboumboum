@@ -26,12 +26,11 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
-import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.game.stream.InputClientStream;
 
-public class NetInputGameStream extends InputClientStream
+public class NetInputClientStream extends InputClientStream
 {	
-	public NetInputGameStream(Socket socket) throws IOException
+	public NetInputClientStream(Socket socket) throws IOException
 	{	InputStream i = socket.getInputStream();
 		in = new ObjectInputStream(i);
 	}
@@ -46,10 +45,6 @@ public class NetInputGameStream extends InputClientStream
 	@Override
 	public void initRound() throws IOException, ClassNotFoundException
 	{	super.initRound();
-	
-	ControlSettings controlSettings = in.getControlSettings(); //TODO?
-//TODO pour net, faut distinguer le in/out pour server/client
-
 	}
 
 	/////////////////////////////////////////////////////////////////

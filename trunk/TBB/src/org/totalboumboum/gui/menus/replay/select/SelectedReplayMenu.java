@@ -34,7 +34,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.game.stream.file.FileInputGameStream;
+import org.totalboumboum.game.stream.file.FileInputClientStream;
 import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -97,7 +97,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 	private JButton buttonDelete;
 
 	private void refreshButtons()
-	{	FileInputGameStream replay = levelData.getSelectedReplay();
+	{	FileInputClientStream replay = levelData.getSelectedReplay();
 		if(replay==null)
 		{	buttonDelete.setEnabled(false);
 			buttonConfirm.setEnabled(false);
@@ -116,7 +116,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 		{	replaceWith(parent);
 	    }
 		if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_DELETE))
-		{	FileInputGameStream selectedReplay = levelData.getSelectedReplay();
+		{	FileInputClientStream selectedReplay = levelData.getSelectedReplay();
 			if(selectedReplay!=null)
 			{	String folder = selectedReplay.getFolder();
 				String path = baseFolder + File.separator + folder;
@@ -128,7 +128,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 		else if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CONFIRM))
 		{	RoundSplitPanel roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 			try
-			{	FileInputGameStream selectedReplay = levelData.getSelectedReplay();
+			{	FileInputClientStream selectedReplay = levelData.getSelectedReplay();
 				SingleTournament tournament = new SingleTournament(selectedReplay);
 				Match match = tournament.getCurrentMatch();
 				Round round = match.getCurrentRound();

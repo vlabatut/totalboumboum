@@ -25,25 +25,16 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
+import org.totalboumboum.game.stream.OutputClientStream;
 
-import org.totalboumboum.game.round.Round;
-import org.totalboumboum.game.stream.OutputServerStream;
-import org.totalboumboum.statistics.detailed.StatisticRound;
-import org.xml.sax.SAXException;
-
-public class NetOutputGameStream extends OutputServerStream
+public class NetOutputClientStream extends OutputClientStream
 {	
-	public NetOutputGameStream(Round round, List<Socket> sockets) throws IOException
-	{	super(round);
-	
-		// init net-related stuff
+	public NetOutputClientStream(Socket socket) throws IOException
+	{	// init net-related stuff
 		
 		// init round
-		initRound(sockets);
+		initRound(socket);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -53,28 +44,16 @@ public class NetOutputGameStream extends OutputServerStream
 	 * creates and open a file named after the current date and time
 	 * in order to record this game replay
 	 */
-	private void initRound(List<Socket> sockets) throws IOException
+	private void initRound(Socket socket) throws IOException
 	{	// init streams and threads
-		for(Socket socket: sockets)
-		{	OutputStream o = socket.getOutputStream();
-			ObjectOutputStream oo = new ObjectOutputStream(o);
-			outs.add(oo);
-			RunnableWriter w = new RunnableWriter(oo);
-			writers.add(w);
-			w.start();
-		}
-		
-		initRound();
+		OutputStream o = socket.getOutputStream();
+		out = new ObjectOutputStream(o);
+		RunnableWriter writer = new RunnableWriter(out);
+		writer.start();
 	}
 	
-	/**
-	 * close the replay output stream (if it was previously opened)
-	 */
-	@Override
-	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
-	{	super.finishRound(stats);
-		
-		finishWriters();
+	public void finishRound()
+	{	finishWriter();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -82,17 +61,15 @@ public class NetOutputGameStream extends OutputServerStream
 	/////////////////////////////////////////////////////////////////
 	@Override
 	protected void write(Object object) throws IOException
-	{	for(RunnableWriter w: writers)
-			w.addObject(object);
+	{	writer.addObject(object);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// THREADS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<RunnableWriter> writers = new ArrayList<RunnableWriter>();
+	private RunnableWriter writer = null;
 
-	public void finishWriters() throws IOException
-	{	for(RunnableWriter w: writers)
-			w.interrupt();
+	private void finishWriter()
+	{	writer.interrupt();
 	}
 }

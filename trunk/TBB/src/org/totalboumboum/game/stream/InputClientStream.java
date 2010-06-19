@@ -29,7 +29,7 @@ import java.util.List;
 
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
-import org.totalboumboum.engine.loop.event.StreamedEvent;
+import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.statistics.detailed.StatisticRound;
@@ -97,13 +97,13 @@ public abstract class InputClientStream
 	/**
 	 * reads an event in the currently open stream.
 	 */
-	public StreamedEvent readEvent()
-	{	StreamedEvent result = null;
+	public ReplayEvent readEvent()
+	{	ReplayEvent result = null;
 		
 		try
 		{	Object object = in.readObject();
-			if(object instanceof StreamedEvent)
-			{	result = (StreamedEvent) object;
+			if(object instanceof ReplayEvent)
+			{	result = (ReplayEvent) object;
 				if(VERBOSE)
 					System.out.println("reading: "+result);
 			}

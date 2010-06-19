@@ -28,7 +28,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
-import org.totalboumboum.game.stream.network.NetOutputGameStream;
+import org.totalboumboum.game.stream.network.NetOutputServerStream;
 import org.xml.sax.SAXException;
 
 public class HumanPlayer extends ControlledPlayer
@@ -37,7 +37,7 @@ public class HumanPlayer extends ControlledPlayer
 	{	this(profile,base,tile,null);
 	}
 	
-	public HumanPlayer(Profile profile, HollowHeroFactory base, Tile tile, NetOutputGameStream out) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public HumanPlayer(Profile profile, HollowHeroFactory base, Tile tile, NetOutputServerStream out) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile,out);
 	}
 }

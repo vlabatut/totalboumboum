@@ -33,12 +33,12 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.control.player.LocalPlayerControl;
 import org.totalboumboum.engine.control.player.NetworkPlayerControl;
 import org.totalboumboum.engine.control.player.PlayerControl;
-import org.totalboumboum.game.stream.network.NetOutputGameStream;
+import org.totalboumboum.game.stream.network.NetOutputServerStream;
 import org.xml.sax.SAXException;
 
 public abstract class ControlledPlayer extends AbstractPlayer
 {	
-	public ControlledPlayer(Profile profile, HollowHeroFactory base, Tile tile, NetOutputGameStream out) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public ControlledPlayer(Profile profile, HollowHeroFactory base, Tile tile, NetOutputServerStream out) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 		
 		// set controls settings

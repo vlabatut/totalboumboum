@@ -28,10 +28,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.loop.VisibleLoop;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
-import org.totalboumboum.game.stream.InputClientStream;
-import org.totalboumboum.game.stream.file.FileOutputGameStream;
-import org.totalboumboum.game.stream.network.NetOutputGameStream;
+import org.totalboumboum.game.stream.file.FileInputClientStream;
+import org.totalboumboum.game.stream.file.FileOutputServerStream;
+import org.totalboumboum.game.stream.network.NetInputClientStream;
+import org.totalboumboum.game.stream.network.NetInputServerStream;
+import org.totalboumboum.game.stream.network.NetOutputClientStream;
+import org.totalboumboum.game.stream.network.NetOutputServerStream;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
@@ -65,55 +69,65 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static InputClientStream in = null;
-/*
+	public static FileInputClientStream fileIn = null;
+	public static NetInputClientStream netClientIn = null;
+	public static NetInputServerStream netServerIn = null;
+
 	public static ReplayEvent readEvent()
 	{	ReplayEvent result = null;
-		if(in!=null)
-			result = in.readEvent();
+		if(fileIn!=null)
+			result = fileIn.readEvent();
+		else if(netClientIn!=null)
+			result = netClientIn.readEvent();
 		return result;
 	}
-*/
+
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static FileOutputGameStream fileOut = null;
-	public static NetOutputGameStream netOut = null;
+	public static FileOutputServerStream fileOut = null;
+	public static NetOutputClientStream netClientOut = null;
+	public static NetOutputServerStream netServerOut = null;
 	
 	public static void writeEvent(ReplayEvent event)
 	{	if(fileOut!=null && event.getSendEvent())
 			fileOut.writeEvent(event);
-		if(netOut!=null && event.getSendEvent())
-			netOut.writeEvent(event);
+		if(netServerOut!=null && event.getSendEvent())
+			netServerOut.writeEvent(event);
 	}
 
+	public static void writeEvent(RemotePlayerControlEvent event)
+	{	if(netClientOut!=null)
+			netClientOut.writeEvent(event);
+	}
+	
 	public static void writeZoomCoef(double zoomCoef) throws IOException
 	{	if(fileOut!=null)
 			fileOut.writeZoomCoef(zoomCoef);
-		if(netOut!=null)
-			netOut.writeZoomCoef(zoomCoef);
+		if(netServerOut!=null)
+			netServerOut.writeZoomCoef(zoomCoef);
 	}
 
 	public static void setFilterEvents(boolean flag)
 	{	if(fileOut!=null)
 			fileOut.setFilterEvents(flag);
-		if(netOut!=null)
-			netOut.setFilterEvents(flag);
+		if(netServerOut!=null)
+			netServerOut.setFilterEvents(flag);
 	}
 
 	public static boolean getFilterEvents()
 	{	boolean result = false;
 		if(fileOut!=null)
 			result = fileOut.getFilterEvents();
-		if(netOut!=null)
-			result = netOut.getFilterEvents();
+		if(netServerOut!=null)
+			result = netServerOut.getFilterEvents();
 		return result;
 	}
 	
 	public static void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
 	{	if(fileOut!=null)
 			finishWriting(stats);
-		if(netOut!=null)
+		if(netServerOut!=null)
 			finishWriting(stats);
 	}
 

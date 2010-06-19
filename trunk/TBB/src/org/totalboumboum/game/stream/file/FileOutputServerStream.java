@@ -46,9 +46,9 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class FileOutputGameStream extends OutputServerStream
+public class FileOutputServerStream extends OutputServerStream
 {	
-	public FileOutputGameStream(Round round) throws IOException
+	public FileOutputServerStream(Round round) throws IOException
 	{	super(round);
 	
 		// init file-related data

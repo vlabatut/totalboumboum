@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.game.stream.file.FileInputGameStream;
+import org.totalboumboum.game.stream.file.FileInputClientStream;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -47,13 +47,13 @@ public class ReplayMiscSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// ARCHIVE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private FileInputGameStream replay;
+	private FileInputClientStream replay;
 
-	public FileInputGameStream getReplay()
+	public FileInputClientStream getReplay()
 	{	return replay;	
 	}
 	
-	public void setReplay(FileInputGameStream replay)
+	public void setReplay(FileInputClientStream replay)
 	{	this.replay = replay;
 		
 		// sizes

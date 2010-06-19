@@ -35,7 +35,7 @@ import org.totalboumboum.game.stream.InputClientStream;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
-public class FileInputGameStream extends InputClientStream
+public class FileInputClientStream extends InputClientStream
 {	
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////

@@ -33,14 +33,10 @@ import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 public abstract class InputServerStream
 {	private static final boolean VERBOSE = false;
 	
-	public InputServerStream(List<ObjectInputStream> in)
-	{	this.ins = in.toArray(this.ins);
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// CONTROL SETTINGS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final List<ControlSettings> controlSettings = new ArrayList<ControlSettings>();
+	protected final List<ControlSettings> controlSettings = new ArrayList<ControlSettings>();
 	
 	public List<ControlSettings> getControlSettings()
 	{	return controlSettings;
@@ -93,9 +89,7 @@ public abstract class InputServerStream
 	// STREAMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected ObjectInputStream[] ins;
-		
-	protected abstract void write(Object object) throws IOException;
-	
+			
 	public void close() throws IOException
 	{	for(ObjectInputStream ooi: ins)
 			ooi.close();
