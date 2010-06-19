@@ -39,10 +39,10 @@ import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.xml.sax.SAXException;
 
-public abstract class OutputGameStream
+public abstract class OutputServerStream
 {	private static final boolean VERBOSE = false;
 		
-	public OutputGameStream(Round round)
+	public OutputServerStream(Round round)
 	{	this.round = round;
 	}
 
@@ -66,7 +66,7 @@ public abstract class OutputGameStream
 	/////////////////////////////////////////////////////////////////
 	protected void writeLevelInfo() throws IOException
 	{	LevelInfo leveInfo = round.getHollowLevel().getLevelInfo();
-		for(ObjectOutputStream o: out)
+		for(ObjectOutputStream o: outs)
 			o.writeObject(leveInfo);
 	}
 	
@@ -102,7 +102,7 @@ public abstract class OutputGameStream
 	 */
 	public void writeEvent(StreamedEvent event)
 	{	try
-		{	for(ObjectOutputStream o: out)
+		{	for(ObjectOutputStream o: outs)
 				o.writeObject(event);
 			if(VERBOSE)
 				System.out.println("recording: "+event);
@@ -142,8 +142,8 @@ public abstract class OutputGameStream
 	/////////////////////////////////////////////////////////////////
 	// STREAMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected List<ObjectOutputStream> out = new ArrayList<ObjectOutputStream>();
-		
+	protected final List<ObjectOutputStream> outs = new ArrayList<ObjectOutputStream>();
+
 	protected abstract void write(Object object) throws IOException;
 	
 	/////////////////////////////////////////////////////////////////

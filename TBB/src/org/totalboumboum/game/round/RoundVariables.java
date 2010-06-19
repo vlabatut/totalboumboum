@@ -29,7 +29,7 @@ import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
-import org.totalboumboum.game.stream.InputGameStream;
+import org.totalboumboum.game.stream.InputClientStream;
 import org.totalboumboum.game.stream.file.FileOutputGameStream;
 import org.totalboumboum.game.stream.network.NetOutputGameStream;
 import org.totalboumboum.statistics.detailed.StatisticRound;
@@ -65,7 +65,7 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static InputGameStream in = null;
+	public static InputClientStream in = null;
 /*
 	public static ReplayEvent readEvent()
 	{	ReplayEvent result = null;

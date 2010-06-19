@@ -34,7 +34,7 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 
-public abstract class InputGameStream
+public abstract class InputClientStream
 {	private static final boolean VERBOSE = false;
 	
 	/////////////////////////////////////////////////////////////////

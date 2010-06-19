@@ -31,11 +31,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.totalboumboum.game.stream.InputGameStream;
+import org.totalboumboum.game.stream.InputClientStream;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
-public class FileInputGameStream extends InputGameStream
+public class FileInputGameStream extends InputClientStream
 {	
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////

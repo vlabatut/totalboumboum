@@ -40,13 +40,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.game.stream.OutputGameStream;
+import org.totalboumboum.game.stream.OutputServerStream;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class FileOutputGameStream extends OutputGameStream
+public class FileOutputGameStream extends OutputServerStream
 {	
 	public FileOutputGameStream(Round round) throws IOException
 	{	super(round);
@@ -101,17 +101,17 @@ public class FileOutputGameStream extends OutputGameStream
 //		ZipOutputStream outZip = new ZipOutputStream(outBuff);
 //		out = new ObjectOutputStream(outZip);
 		ObjectOutputStream o = new ObjectOutputStream(outBuff);
-		out.add(o);
+		outs.add(o);
 	}
 	
 	@Override
 	protected void write(Object object) throws IOException
-	{	for(ObjectOutputStream o: out)
+	{	for(ObjectOutputStream o: outs)
 			o.writeObject(object);
 	}
 
 	private void close() throws IOException
-	{	for(ObjectOutputStream o: out)
+	{	for(ObjectOutputStream o: outs)
 			o.close();
 	}
 

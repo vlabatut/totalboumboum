@@ -31,11 +31,11 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.game.stream.OutputGameStream;
+import org.totalboumboum.game.stream.OutputServerStream;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.xml.sax.SAXException;
 
-public class NetOutputGameStream extends OutputGameStream
+public class NetOutputGameStream extends OutputServerStream
 {	
 	public NetOutputGameStream(Round round, List<Socket> sockets) throws IOException
 	{	super(round);
@@ -58,7 +58,7 @@ public class NetOutputGameStream extends OutputGameStream
 		for(Socket socket: sockets)
 		{	OutputStream o = socket.getOutputStream();
 			ObjectOutputStream oo = new ObjectOutputStream(o);
-			out.add(oo);
+			outs.add(oo);
 			RunnableWriter w = new RunnableWriter(oo);
 			writers.add(w);
 			w.start();

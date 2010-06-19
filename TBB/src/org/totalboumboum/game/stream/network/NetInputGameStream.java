@@ -27,9 +27,9 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
-import org.totalboumboum.game.stream.InputGameStream;
+import org.totalboumboum.game.stream.InputClientStream;
 
-public class NetInputGameStream extends InputGameStream
+public class NetInputGameStream extends InputClientStream
 {	
 	public NetInputGameStream(Socket socket) throws IOException
 	{	InputStream i = socket.getInputStream();
