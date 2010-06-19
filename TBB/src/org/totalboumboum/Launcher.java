@@ -1236,11 +1236,12 @@ public class Launcher
 	 *  - quitter       : une croix (comme pour fermer une fenêtre) ou l'icone "quitter" du tournoi (?)
 	 */
 	
-	// TODO loop >> effacer tous les objets inutiles dans finish()
+	// TODO toutes Loops >> effacer tous les objets inutiles dans finish()
 	
 	// TODO faut transmettre les abilities/modulations graphiques, elles sont nécessaires
 	//	>> faut donc un modulation manager, et un ability manager (?)
 	//	>> coute cher... autre solution ?
+	// pb pr les IA remote : y a besoin de l'état réel du niveau, pas seulement des graphismes
 	
 	/* TODO
 	 * - côté serveur :
@@ -1249,7 +1250,7 @@ public class Launcher
 	 *        mais de toute façon faut aussi envoyer les données via la connexion (comme pr replay en fait)
 	 *      x nouvelle classe héritant de Player, controlé à distance 
 	 *      x nouveau controle associé à cette classe, lisant les controle dans le flux associé au joueur
-	 *      - le container des remotePlayerControl doit être initialisé dans la boucle et lancé aussi (run)
+	 *      xle container des remotePlayerControl doit être initialisé dans la boucle et lancé aussi (run)
 	 * - côté client :
 	 * 		x version de la boucle héritant de replay mais rajoutant la gestion des controles locaux
 	 *  	x version spéciale de Control pour que les codes soient envoyés dans le flux (NetworkControl)
@@ -1257,12 +1258,11 @@ public class Launcher
 	 *  	  le controle utilisé peut être décidé lors de l'init de la loop, en fonction du type de la loop justement
 	 *  	  intérêt: on garde le joueur humain et l'IA
 	 *  	x à la place du RemotePlayersControl, c'est l'équivalent du Replay qui va gérer ça et transférer le beans aux sprites
-	 *  	- même dans l'autre sens, faudrait p-ê un objet central, histoire de faciliter la synchro lors de l'accès au flux...
+	 *  	x même dans l'autre sens, faudrait p-ê un objet central, histoire de faciliter la synchro lors de l'accès au flux...
 	 * - Replay :
 	 * 		x séparer in/out
 	 * 		x généraliser pour gérer à la fois les fichiers et les réseaux
 	 * x développer une LocalLoop séparée, car certaines fonctionnalités de debug ne doivent pas être accessibles dans le cadre d'un serveur
-	 * - pb pr les IA remote : y a besoin de l'état réel du niveau, pas seulement des graphismes
 	 */
 	
 	/*
@@ -1273,12 +1273,16 @@ public class Launcher
 	 * - le stream ne contient que les flux vers les joueurs concernés par le round
 	 * - p-ê définir une classe différente pour gérer toutes les connexions du tournoi
 	 */
+	
+	// TODO renommer mes "streams" en "writer/reader", c'est plus logique
+	
+	/* TODO
+	 * 1) définir le thread qui va gérer les évènements lus dans le flux pour les net-client-in
+	 * 2) initialiser les différents streams
+	 * 3) tester que le mode normal marche tjrs
+	 * 4) tester que l'enregistrement local marche tjrs
+	 * 5) tester que le replay marche tjrs
+	 * 6) tester le mode réseau ! 
+	 */
 
 }
-
-
-
-
-
-
-
