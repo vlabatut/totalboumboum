@@ -72,16 +72,16 @@ public class RoundVariables
 	public static FileInputClientStream fileIn = null;
 	public static NetInputClientStream netClientIn = null;
 	public static NetInputServerStream netServerIn = null;
-
+/*
 	public static ReplayEvent readEvent()
 	{	ReplayEvent result = null;
 		if(fileIn!=null)
-			result = fileIn.readEvent();
+			result = fileIn.readEvents();
 		else if(netClientIn!=null)
-			result = netClientIn.readEvent();
+			result = netClientIn.readEvents();
 		return result;
 	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

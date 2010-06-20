@@ -34,7 +34,12 @@ import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 
 public abstract class InputClientStream
-{	
+{	protected final boolean verbose = false;
+
+	public InputClientStream()
+	{
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// ZOOM					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -116,13 +121,17 @@ public abstract class InputClientStream
 	 * close the replay output stream (if it was previously opened)
 	 */
 	public void finishRound() throws IOException, ClassNotFoundException
-	{	roundStats = (StatisticRound) in.readObject();
+	{	if(verbose)
+			System.out.println("reading: stats");
+		roundStats = (StatisticRound) in.readObject();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected ObjectInputStream in = null;
+
+	public abstract void initStreams() throws IOException;
 
 	public void close() throws IOException
 	{	in.close();

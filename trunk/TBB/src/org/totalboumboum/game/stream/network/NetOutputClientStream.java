@@ -25,29 +25,31 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.List;
 
+import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.game.stream.OutputClientStream;
 
 public class NetOutputClientStream extends OutputClientStream
 {	
-	public NetOutputClientStream(Socket socket) throws IOException
-	{	// init net-related stuff
-		OutputStream o = socket.getOutputStream();
-		out = new ObjectOutputStream(o);
+	public NetOutputClientStream(Socket socket, List<ControlSettings> controlSettings) throws IOException
+	{	super(controlSettings);
 	
-		// init round
-		initRound();
+		this.socket = socket;
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * creates and open a file named after the current date and time
-	 * in order to record this game replay
-	 */
-	private void initRound() throws IOException
-	{	writer = new RunnableWriter(out);
+	@Override
+	public void initRound() throws IOException
+	{	super.initRound();
+
+		writer = new RunnableWriter(out);
 		writer.start();
 	}
 	
@@ -58,6 +60,14 @@ public class NetOutputClientStream extends OutputClientStream
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private Socket socket = null;
+	
+	@Override
+	public void initStreams() throws IOException
+	{	OutputStream o = socket.getOutputStream();
+		out = new ObjectOutputStream(o);
+	}
+
 	@Override
 	protected void write(Object object) throws IOException
 	{	writer.addObject(object);
@@ -80,6 +90,7 @@ public class NetOutputClientStream extends OutputClientStream
 	{	if(!finished)
 		{	super.finish();
 			
+			socket = null;
 			writer = null;
 		}
 	}

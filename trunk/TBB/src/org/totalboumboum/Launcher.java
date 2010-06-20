@@ -1288,5 +1288,16 @@ public class Launcher
 	/**
 	 * TODO attention : il n'y a pas forcément un stream par joueur :
 	 * un client peut très bien gérer plusieurs joueurs
+	 * >> besoin d'un convertisseur permettant de chopper le flux d'un joueur
+	 * >> le joueur d'origine doit être identifié lors de l'envoi d'un evt
+	 */
+	
+	/* NOTE
+	 * algo des flux :
+	 * 	+ créateur : initialise l'objet avec les info nécessaires
+	 *    le traitement associé est effectué (ex: calcul chemin pr fichier)
+	 *  + initialisation du flux (ouverture in/out)
+	 *  + initialisation du round : lecture/écriture des infos nécessaires, , création reader/writer
+	 *  + après la fin du round : finish round pour balancer/lire les dernières données et tuer les threads
 	 */
 }

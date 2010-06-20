@@ -47,8 +47,11 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.rank.Ranks;
-import org.totalboumboum.game.stream.InputClientStream;
+import org.totalboumboum.game.stream.file.FileInputClientStream;
 import org.totalboumboum.game.stream.file.FileOutputServerStream;
+import org.totalboumboum.game.stream.network.NetInputClientStream;
+import org.totalboumboum.game.stream.network.NetInputServerStream;
+import org.totalboumboum.game.stream.network.NetOutputClientStream;
 import org.totalboumboum.game.stream.network.NetOutputServerStream;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
@@ -57,7 +60,6 @@ import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CalculusTools;
 import org.xml.sax.SAXException;
-
 
 public class Round implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;
@@ -135,7 +137,7 @@ public class Round implements StatisticHolder, Serializable
 			}
 		
 			if(replayed)
-				RoundVariables.inClient = in;
+				RoundVariables.fileIn = fileIn;
 			
 			Thread animator = new Thread(loop);
 			animator.start();
@@ -146,23 +148,26 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT GAME STREAM	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private FileOutputServerStream fileOut = null;
-	private NetOutputServerStream netOut = null;
-	
+	public FileOutputServerStream fileOut = null;
+	public NetOutputClientStream netClientOut = null;
+	public NetOutputServerStream netServerOut = null;
+/*	
 	public void setNetOutputGameStream(NetOutputServerStream netOut)
 	{	this.netOut = netOut;
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// INPUT GAME STREAM	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private InputClientStream in = null;
-
+	public FileInputClientStream fileIn = null;
+	public NetInputClientStream netClientIn = null;
+	public NetInputServerStream netServerIn = null;
+/*
 	public void setInputGameStream(InputClientStream in)
 	{	this.in = in;
 		replayed = true;
 	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -211,8 +216,8 @@ public class Round implements StatisticHolder, Serializable
 	{	// read stats from replay if replayed
 		if(replayed)
 		{	try
-			{	in.finishRound();
-				StatisticRound stats = in.getRoundStats();
+			{	fileIn.finishRound();
+				StatisticRound stats = fileIn.getRoundStats();
 				setStats(stats);
 				roundOver = true; // ou close?
 			}
@@ -511,8 +516,11 @@ public class Round implements StatisticHolder, Serializable
 		
 		result.replayed = replayed;
 		result.fileOut = fileOut;
-		result.netOut = netOut;
-		result.in = in;
+		result.fileIn = fileIn;
+		result.netClientOut = netClientOut;
+		result.netClientIn = netClientIn;
+		result.netServerOut = netServerOut;
+		result.netServerIn = netServerIn;
 		
 		return result;
 	}

@@ -28,9 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
-
-public class RunnableReader extends Thread
+public class RunnableReader<T extends Object> extends Thread
 {
 	public RunnableReader(ObjectInputStream in)
 	{	this.in = in;
@@ -39,13 +37,14 @@ public class RunnableReader extends Thread
 	/////////////////////////////////////////////////////////////////
 	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unchecked")
 	@Override
 	public void run()
 	{	while(!Thread.interrupted())
 		{	try
 			{	Object object = in.readObject();
-				ReplayEvent event = (ReplayEvent) object;
-				addEvent(event);
+				T obj = (T) object;
+				addEvent(obj);
 			}
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
@@ -64,15 +63,15 @@ public class RunnableReader extends Thread
 	/////////////////////////////////////////////////////////////////
 	// DATA					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Queue<ReplayEvent> data = new LinkedList<ReplayEvent>();
+	private Queue<T> data = new LinkedList<T>();
 	
-	public synchronized List<ReplayEvent> getEvents()
-	{	List<ReplayEvent> result = new ArrayList<ReplayEvent>(data);
+	public synchronized List<T> getData()
+	{	List<T> result = new ArrayList<T>(data);
 		data.clear();
 		return result;
 	}
 	
-	private synchronized void addEvent(ReplayEvent event)
+	private synchronized void addEvent(T event)
 	{	data.offer(event);
 	}
 }

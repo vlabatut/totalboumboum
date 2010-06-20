@@ -23,22 +23,24 @@ package org.totalboumboum.game.stream;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
-import org.totalboumboum.game.round.Round;
 
 public abstract class OutputClientStream
-{	private static final boolean VERBOSE = false;
+{	protected final boolean verbose = false;
 		
-	public OutputClientStream()
-	{	
+	public OutputClientStream(List<ControlSettings> controlSettings)
+	{	this.controlSettings = controlSettings;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// CONTROL SETTINGS					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void writeControlSettings(ControlSettings controlSettings) throws IOException
+	protected List<ControlSettings> controlSettings = null;
+	
+	public void writeControlSettings() throws IOException
 	{	write(controlSettings);
 	}
 	
@@ -51,7 +53,7 @@ public abstract class OutputClientStream
 	public void writeEvent(RemotePlayerControlEvent event)
 	{	try
 		{	out.writeObject(event);
-			if(VERBOSE)
+			if(verbose)
 				System.out.println("recording: "+event);
 		}
 		catch (IOException e)
@@ -66,13 +68,15 @@ public abstract class OutputClientStream
 	 * writes player-related information in the open stream
 	 */
 	protected void initRound() throws IOException
-	{	writeControlSettings(controlSettings);
+	{	writeControlSettings();
 	}
 	/////////////////////////////////////////////////////////////////
 	// STREAMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected ObjectOutputStream out = null;
 		
+	public abstract void initStreams() throws IOException;
+
 	protected abstract void write(Object object) throws IOException;
 	
 	/////////////////////////////////////////////////////////////////

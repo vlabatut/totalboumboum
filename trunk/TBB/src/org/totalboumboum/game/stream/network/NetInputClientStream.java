@@ -21,28 +21,26 @@ package org.totalboumboum.game.stream.network;
  * 
  */
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.stream.InputClientStream;
 
 public class NetInputClientStream extends InputClientStream
-{	private static final boolean VERBOSE = false;
-
+{	
 	public NetInputClientStream(Socket socket) throws IOException
-	{	// net stuff
-		InputStream i = socket.getInputStream();
-		in = new ObjectInputStream(i);
-		
-		// init round
-		initRound();
+	{	super();
+	
+		this.socket = socket;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
@@ -51,16 +49,13 @@ public class NetInputClientStream extends InputClientStream
 	public void initRound() throws IOException, ClassNotFoundException
 	{	super.initRound();
 	
-		reader = new RunnableReader(in);
+		reader = new RunnableReader<ReplayEvent>(in);
 		reader.start();
 	}
 
 	@Override
 	public void finishRound() throws IOException, ClassNotFoundException
-	{	if(VERBOSE)
-			System.out.println("reading: stats");
-	
-		super.finishRound();
+	{	super.finishRound();
 		
 		finishReader();
 	}
@@ -68,16 +63,24 @@ public class NetInputClientStream extends InputClientStream
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private Socket socket = null;
+	
+	@Override
+	public void initStreams() throws IOException
+	{	InputStream i = socket.getInputStream();
+		in = new ObjectInputStream(i);
+	}
+
 	@Override
 	public List<ReplayEvent> readEvents()
-	{	List<ReplayEvent> result = reader.getEvents();
+	{	List<ReplayEvent> result = reader.getData();
 		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// THREADS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private RunnableReader reader = null;
+	private RunnableReader<ReplayEvent> reader = null;
 
 	private void finishReader()
 	{	reader.interrupt();
@@ -91,6 +94,7 @@ public class NetInputClientStream extends InputClientStream
 	{	if(!finished)
 		{	super.finish();
 			
+			socket = null;
 			reader = null;
 		}
 	}
