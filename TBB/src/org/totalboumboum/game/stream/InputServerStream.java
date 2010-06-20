@@ -75,6 +75,9 @@ public abstract class InputServerStream
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * reads remote player-related information in the open streams
+	 */
 	public void initRound() throws IOException, ClassNotFoundException
 	{	for(int i=0;i<ins.length;i++)
 		{	ObjectInputStream in = ins[i];

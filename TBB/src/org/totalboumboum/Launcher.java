@@ -1285,4 +1285,8 @@ public class Launcher
 	 * 6) tester le mode réseau ! 
 	 */
 
+	/**
+	 * TODO attention : il n'y a pas forcément un stream par joueur :
+	 * un client peut très bien gérer plusieurs joueurs
+	 */
 }

@@ -26,6 +26,7 @@ import java.io.ObjectOutputStream;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
+import org.totalboumboum.game.round.Round;
 
 public abstract class OutputClientStream
 {	private static final boolean VERBOSE = false;
@@ -59,9 +60,29 @@ public abstract class OutputClientStream
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// ROUND				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * writes player-related information in the open stream
+	 */
+	protected void initRound() throws IOException
+	{	writeControlSettings(controlSettings);
+	}
+	/////////////////////////////////////////////////////////////////
 	// STREAMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected ObjectOutputStream out = null;
 		
 	protected abstract void write(Object object) throws IOException;
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISH				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean finished = false;
+	
+	public void finish()
+	{	finished = true;
+	
+		out = null;
+	}		
 }

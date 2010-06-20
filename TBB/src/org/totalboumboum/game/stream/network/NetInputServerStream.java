@@ -67,7 +67,7 @@ public class NetInputServerStream extends InputServerStream
 	{	if(!finished)
 		{	super.finish();
 			
-			//
+			readers.clear();
 		}
 	}
 }

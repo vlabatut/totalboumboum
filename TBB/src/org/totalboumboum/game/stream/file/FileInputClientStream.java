@@ -23,6 +23,7 @@ package org.totalboumboum.game.stream.file;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -31,12 +32,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.stream.InputClientStream;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
 public class FileInputClientStream extends InputClientStream
-{	
+{	private static final boolean VERBOSE = false;
+	
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
@@ -60,7 +63,11 @@ public class FileInputClientStream extends InputClientStream
 
 	@Override
 	public void finishRound() throws IOException, ClassNotFoundException
-	{	super.finishRound();
+	{	if(VERBOSE)
+			System.out.println("reading: stats");
+	
+		super.finishRound();
+		
 		close();
 	}
 	
@@ -138,6 +145,38 @@ public class FileInputClientStream extends InputClientStream
 	{	return players;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * reads an event in the currently open stream.
+	 */
+	@Override
+	public List<ReplayEvent> readEvents()
+	{	List<ReplayEvent> result = new ArrayList<ReplayEvent>();
+		
+		try
+		{	Object object = in.readObject();
+			if(object instanceof ReplayEvent)
+			{	ReplayEvent event = (ReplayEvent) object;
+				result.add(event);
+				if(VERBOSE)
+					System.out.println("reading: "+result);
+			}
+		}
+		catch (EOFException e) 
+		{	//
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
+		{	e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

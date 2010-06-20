@@ -21,32 +21,68 @@ package org.totalboumboum.game.stream.network;
  * 
  */
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.stream.InputClientStream;
 
 public class NetInputClientStream extends InputClientStream
-{	
+{	private static final boolean VERBOSE = false;
+
 	public NetInputClientStream(Socket socket) throws IOException
-	{	InputStream i = socket.getInputStream();
+	{	// net stuff
+		InputStream i = socket.getInputStream();
 		in = new ObjectInputStream(i);
+		
+		// init round
+		initRound();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/**
-	 * creates and open a file named after the current date and time
-	 * in order to record this game replay
-	 */
 	@Override
 	public void initRound() throws IOException, ClassNotFoundException
 	{	super.initRound();
+	
+		reader = new RunnableReader(in);
+		reader.start();
 	}
 
+	@Override
+	public void finishRound() throws IOException, ClassNotFoundException
+	{	if(VERBOSE)
+			System.out.println("reading: stats");
+	
+		super.finishRound();
+		
+		finishReader();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STREAM				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public List<ReplayEvent> readEvents()
+	{	List<ReplayEvent> result = reader.getEvents();
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// THREADS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private RunnableReader reader = null;
+
+	private void finishReader()
+	{	reader.interrupt();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -55,7 +91,7 @@ public class NetInputClientStream extends InputClientStream
 	{	if(!finished)
 		{	super.finish();
 			
-			//
+			reader = null;
 		}
 	}
 }

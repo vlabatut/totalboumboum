@@ -194,4 +194,18 @@ public class FileOutputServerStream extends OutputServerStream
 		String result = levelInfo.getPackName();
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			
+			folder = null;
+			preview = null;
+			saveDate = null;
+		}
+	}
 }

@@ -117,6 +117,9 @@ public abstract class OutputServerStream
 	/////////////////////////////////////////////////////////////////
 	protected Round round;
 	
+	/**
+	 * writes round-related information in the open streams
+	 */
 	protected void initRound() throws IOException
 	{	writeProfiles();
 		writeLevelInfo();
@@ -158,4 +161,16 @@ public abstract class OutputServerStream
 	public boolean getFilterEvents()
 	{	return filterEvents;		
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean finished = false;
+	
+	public void finish()
+	{	finished = true;
+	
+		outs.clear();
+		round = null;
+	}		
 }
