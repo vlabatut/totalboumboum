@@ -284,7 +284,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	private void updateEvents()
 	{	if(!isOver())
 		{	// final event
-			if(currentEvent instanceof StopReplayEvent)
+			if(currentEvent!=null && currentEvent instanceof StopReplayEvent)
 			{	setOver(true);
 			}
 			else
@@ -292,7 +292,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 				if(VERBOSE)
 					System.out.println("/////////////////////////////////////////");		
 				List<ReplayEvent> events = new ArrayList<ReplayEvent>();
-				while(currentEvent.getTime()<getTotalEngineTime() && !(currentEvent instanceof StopReplayEvent))
+				while(currentEvent!=null && currentEvent.getTime()<getTotalEngineTime() && !(currentEvent instanceof StopReplayEvent))
 				{	events.add(currentEvent);
 					if(VERBOSE)
 						System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		

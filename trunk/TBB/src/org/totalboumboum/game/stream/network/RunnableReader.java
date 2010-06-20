@@ -23,9 +23,7 @@ package org.totalboumboum.game.stream.network;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class RunnableReader<T extends Object> extends Thread
@@ -65,9 +63,8 @@ public class RunnableReader<T extends Object> extends Thread
 	/////////////////////////////////////////////////////////////////
 	private Queue<T> data = new LinkedList<T>();
 	
-	public synchronized List<T> getData()
-	{	List<T> result = new ArrayList<T>(data);
-		data.clear();
+	public synchronized T getData()
+	{	T result = data.poll();
 		return result;
 	}
 	

@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
-import java.util.List;
 
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.stream.InputClientStream;
@@ -72,8 +71,8 @@ public class NetInputClientStream extends InputClientStream
 	}
 
 	@Override
-	public List<ReplayEvent> readEvents()
-	{	List<ReplayEvent> result = reader.getData();
+	public ReplayEvent readEvent()
+	{	ReplayEvent result = reader.getData();
 		return result;
 	}
 	

@@ -129,16 +129,15 @@ public class FileInputClientStream extends InputClientStream
 	 * reads an event in the currently open stream.
 	 */
 	@Override
-	public List<ReplayEvent> readEvents()
-	{	List<ReplayEvent> result = new ArrayList<ReplayEvent>();
+	public ReplayEvent readEvent()
+	{	ReplayEvent result = null;
 		
 		try
 		{	Object object = in.readObject();
 			if(object instanceof ReplayEvent)
-			{	ReplayEvent event = (ReplayEvent) object;
-				result.add(event);
+			{	result = (ReplayEvent) object;
 				if(verbose)
-					System.out.println("reading: "+event);
+					System.out.println("reading: "+result);
 			}
 		}
 		catch (EOFException e) 
