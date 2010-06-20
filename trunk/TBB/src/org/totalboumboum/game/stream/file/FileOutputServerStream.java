@@ -146,7 +146,7 @@ public class FileOutputServerStream extends OutputServerStream
 	@Override
 	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
 	{	super.finishRound(stats);
-		close();
+//		close();
 		
 		// possibly record the preview
 		if(preview!=null)
@@ -184,7 +184,7 @@ public class FileOutputServerStream extends OutputServerStream
 			o.writeObject(object);
 	}
 
-	private void close() throws IOException
+	public void close() throws IOException
 	{	for(ObjectOutputStream o: outs)
 			o.close();
 	}

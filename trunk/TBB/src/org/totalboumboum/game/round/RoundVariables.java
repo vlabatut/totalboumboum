@@ -22,6 +22,8 @@ package org.totalboumboum.game.round;
  */
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -72,16 +74,16 @@ public class RoundVariables
 	public static FileInputClientStream fileIn = null;
 	public static NetInputClientStream netClientIn = null;
 	public static NetInputServerStream netServerIn = null;
-/*
-	public static ReplayEvent readEvent()
-	{	ReplayEvent result = null;
+
+	public static List<ReplayEvent> readEvent()
+	{	List<ReplayEvent> result = new ArrayList<ReplayEvent>();
 		if(fileIn!=null)
 			result = fileIn.readEvents();
 		else if(netClientIn!=null)
 			result = netClientIn.readEvents();
 		return result;
 	}
-*/
+
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -37,9 +37,11 @@ import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
+import org.totalboumboum.engine.loop.ClientLoop;
 import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.engine.loop.RegularLoop;
 import org.totalboumboum.engine.loop.Loop;
+import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.SimulationLoop;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.limit.LimitTime;
@@ -125,19 +127,31 @@ public class Round implements StatisticHolder, Serializable
 	
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
-		{	if(replayed)
+		{	// replay
+			if(fileIn!=null)
 				loop = new ReplayLoop(this);
+			// client
+			else if(netClientIn!=null)
+				loop = new ClientLoop(this);
+			// server
+			else if(netServerIn!=null)
+				loop = new ServerLoop(this);
+			// regular (local)
 			else
 				loop = new RegularLoop(this);
 		
 			// recording
-			if(Configuration.getEngineConfiguration().isRecordRounds() && !replayed)
+			if(Configuration.getEngineConfiguration().isRecordRounds() && fileIn==null)
 			{	fileOut = new FileOutputServerStream(this);
 				RoundVariables.fileOut = fileOut;
 			}
 		
-			if(replayed)
-				RoundVariables.fileIn = fileIn;
+			RoundVariables.fileIn = fileIn;
+			RoundVariables.fileOut = fileOut;
+			RoundVariables.netClientIn = netClientIn;
+			RoundVariables.netClientOut = netClientOut;
+			RoundVariables.netServerIn = netServerIn;
+			RoundVariables.netServerOut = netServerOut;
 			
 			Thread animator = new Thread(loop);
 			animator.start();
@@ -162,12 +176,11 @@ public class Round implements StatisticHolder, Serializable
 	public FileInputClientStream fileIn = null;
 	public NetInputClientStream netClientIn = null;
 	public NetInputServerStream netServerIn = null;
-/*
-	public void setInputGameStream(InputClientStream in)
-	{	this.in = in;
-		replayed = true;
+
+	public void setInputStream(FileInputClientStream in)
+	{	fileIn = in;
 	}
-*/
+
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -195,15 +208,6 @@ public class Round implements StatisticHolder, Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// REPLAY			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean replayed = false;
-	
-	public boolean isReplayed()
-	{	return replayed;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// LOOP 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	transient private Loop loop = null;
@@ -214,12 +218,12 @@ public class Round implements StatisticHolder, Serializable
 	
 	public void loopOver()
 	{	// read stats from replay if replayed
-		if(replayed)
+		if(fileIn!=null)
 		{	try
 			{	fileIn.finishRound();
 				StatisticRound stats = fileIn.getRoundStats();
 				setStats(stats);
-				roundOver = true; // ou close?
+				fileIn.close();
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
@@ -227,23 +231,42 @@ public class Round implements StatisticHolder, Serializable
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
 			}
+			roundOver = true;
 		}
-		// init stats date only if not replayed
+		// read stats from server if network game
+		else if(netClientIn!=null)
+		{	try
+			{	netClientIn.finishRound();
+				StatisticRound stats = fileIn.getRoundStats();
+				setStats(stats);
+				netClientOut.finishRound();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+			roundOver = true;
+		}
+		// else : init stats date
 		else
-			stats.initEndDate();
+		{	stats.initEndDate();		
+		}
 	
 		// possibly not record simulated stats
 		if((!(loop instanceof SimulationLoop) || Configuration.getStatisticsConfiguration().getIncludeSimulations())
 		// possibly not record quick mode stats
 			&& (!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts())
 		// don't record replay stats	
-			&& !replayed)
+			&& fileIn==null)
 			GameStatistics.update(stats);
 		
 		// possibly end replay recording
-		if(Configuration.getEngineConfiguration().isRecordRounds())
+		if(fileOut!=null)
 		{	try
-			{	RoundVariables.finishWriting(stats);
+			{	fileOut.finishRound(stats);
+				fileOut.close();
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
@@ -255,7 +278,24 @@ public class Round implements StatisticHolder, Serializable
 			{	e.printStackTrace();
 			}
 		}
-		
+
+		// possibly end network game
+		if(netServerOut!=null)
+		{	try
+			{	netServerOut.finishRound(stats);
+				netServerIn.finishRound();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+		}
+
 		match.roundOver();
 		if(panel!=null)
 		{	panel.roundOver();
@@ -514,13 +554,12 @@ public class Round implements StatisticHolder, Serializable
 		result.setName(name);
 		result.setRandomLocation(randomLocation);
 		
-		result.replayed = replayed;
-		result.fileOut = fileOut;
+//		result.fileOut = fileOut;
 		result.fileIn = fileIn;
-		result.netClientOut = netClientOut;
-		result.netClientIn = netClientIn;
-		result.netServerOut = netServerOut;
-		result.netServerIn = netServerIn;
+//		result.netClientOut = netClientOut;
+//		result.netClientIn = netClientIn;
+//		result.netServerOut = netServerOut;
+//		result.netServerIn = netServerIn;
 		
 		return result;
 	}

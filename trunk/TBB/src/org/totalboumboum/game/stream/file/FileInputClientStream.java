@@ -165,8 +165,6 @@ public class FileInputClientStream extends InputClientStream
 	@Override
 	public void finishRound() throws IOException, ClassNotFoundException
 	{	super.finishRound();
-		
-		close();
 	}
 	
 	/////////////////////////////////////////////////////////////////
