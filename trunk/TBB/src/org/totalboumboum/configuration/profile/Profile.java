@@ -105,7 +105,7 @@ public class Profile implements Serializable
 	// REMOTE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Socket socket = null;
-	
+//TODO en fait c'est pas le socket, ça doit être plus général car le même socket peut être associé à plusieurs joueurs	
 	public Socket getSocket()
 	{	return socket;	
 	}

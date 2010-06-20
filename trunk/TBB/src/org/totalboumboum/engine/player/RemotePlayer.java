@@ -35,15 +35,16 @@ import org.xml.sax.SAXException;
 
 public class RemotePlayer extends AbstractPlayer
 {	
-	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile, NetInputServerStream in, int index) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile, RemotePlayerControl controls) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 		
 		// set controls settings
-		controlSettings = in.getControlSettings().get(index);
+		controlSettings = controls.getControlSettings().get(index);
 		sprite.setControlSettings(controlSettings);
 		
 		// set controls
-		this.spriteControl = new RemotePlayerControl(index,sprite,in);
+		controls.addSprite(sprite);
+		this.spriteControl = controls;
 	}
 
 	/////////////////////////////////////////////////////////////////
