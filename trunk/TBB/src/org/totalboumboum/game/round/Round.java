@@ -129,13 +129,19 @@ public class Round implements StatisticHolder, Serializable
 	{	if(!isOver())
 		{	// replay
 			if(fileIn!=null)
-				loop = new ReplayLoop(this);
+			{	loop = new ReplayLoop(this);
+				//TODO plus logique d'initialiser stream & round ici non ?
+			}
 			// client
 			else if(netClientIn!=null)
-				loop = new ClientLoop(this);
+			{	loop = new ClientLoop(this);
+				// TODO
+			}
 			// server
 			else if(netServerIn!=null)
-				loop = new ServerLoop(this);
+			{	loop = new ServerLoop(this);
+				// TODO
+			}
 			// regular (local)
 			else
 				loop = new RegularLoop(this);
@@ -144,6 +150,8 @@ public class Round implements StatisticHolder, Serializable
 			if(Configuration.getEngineConfiguration().isRecordRounds() && fileIn==null)
 			{	fileOut = new FileOutputServerStream(this);
 				RoundVariables.fileOut = fileOut;
+				fileOut.initStreams();
+				fileOut.initRound();
 			}
 		
 			RoundVariables.fileIn = fileIn;
@@ -162,9 +170,9 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT GAME STREAM	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public FileOutputServerStream fileOut = null;
-	public NetOutputClientStream netClientOut = null;
-	public NetOutputServerStream netServerOut = null;
+	private FileOutputServerStream fileOut = null;
+	private NetOutputClientStream netClientOut = null;
+	private NetOutputServerStream netServerOut = null;
 /*	
 	public void setNetOutputGameStream(NetOutputServerStream netOut)
 	{	this.netOut = netOut;
@@ -173,9 +181,9 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// INPUT GAME STREAM	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public FileInputClientStream fileIn = null;
-	public NetInputClientStream netClientIn = null;
-	public NetInputServerStream netServerIn = null;
+	private FileInputClientStream fileIn = null;
+	private NetInputClientStream netClientIn = null;
+	private NetInputServerStream netServerIn = null;
 
 	public void setInputStream(FileInputClientStream in)
 	{	fileIn = in;
