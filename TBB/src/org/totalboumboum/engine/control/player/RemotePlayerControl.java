@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
@@ -48,7 +49,13 @@ public class RemotePlayerControl
 	private HashMap<Integer,Hero> sprites = new HashMap<Integer, Hero>();
 	
 	public void addSprite(Hero sprite)
-	{	sprites.put(sprite.getId(),sprite);		
+	{	// add sprite
+		sprites.put(sprite.getId(),sprite);
+		int index = sprites.size() - 1;
+		
+		// set controls settings
+		ControlSettings controlSettings = in.getControlSettings().get(index);
+		sprite.setControlSettings(controlSettings);
 	}
 	
 	/////////////////////////////////////////////////////////////////
