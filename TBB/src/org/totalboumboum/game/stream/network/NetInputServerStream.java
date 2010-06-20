@@ -28,35 +28,73 @@ import java.net.Socket;
 import java.util.List;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.stream.InputServerStream;
 
 public class NetInputServerStream extends InputServerStream
 {	
 	public NetInputServerStream(List<Socket> sockets) throws IOException
-	{	for(int i=0;i<sockets.size();i++)
-		{	Socket socket = sockets.get(i);
-			if(socket==null)
-				ins[i] = null;
-			else
-			{	InputStream in = socket.getInputStream();
-				ins[i] = new ObjectInputStream(in);
-			}
-		}
+	{	super();
+		
+		this.sockets = sockets;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public List<RemotePlayerControlEvent> readEvents(int index)
+	{	List<RemotePlayerControlEvent> result = readers[index].getData();
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initRound() throws IOException, ClassNotFoundException
 	{	super.initRound();
 	
 		for(ObjectInputStream in: ins)
-		{	ControlSettings cs = null;
-			if(in!=null)
-				cs = (ControlSettings) in.readObject();
+		{	ControlSettings cs = (ControlSettings) in.readObject();
 			controlSettings.add(cs);
 		}
+		
+		// start threads
+		readers = new RunnableReader[ins.length];
+		for(int i=0;i<ins.length;i++)
+		{	readers[i] = new RunnableReader<RemotePlayerControlEvent>(ins[i]);
+			readers[i].start();
+		}
+	}
+	
+	public void finishRound()
+	{	finishReaders();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STREAMS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<Socket> sockets = null;
+
+	@Override
+	public void initStreams() throws IOException
+	{	for(int i=0;i<sockets.size();i++)
+		{	Socket socket = sockets.get(i);
+			InputStream in = socket.getInputStream();
+			ins[i] = new ObjectInputStream(in);
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// THREADS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private RunnableReader<RemotePlayerControlEvent>[] readers = null;
+
+	private void finishReaders()
+	{	for(RunnableReader<RemotePlayerControlEvent> r: readers)
+			r.interrupt();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -67,7 +105,8 @@ public class NetInputServerStream extends InputServerStream
 	{	if(!finished)
 		{	super.finish();
 			
-			readers.clear();
+			sockets.clear();
+			readers = null;
 		}
 	}
 }

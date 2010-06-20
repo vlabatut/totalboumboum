@@ -40,7 +40,7 @@ import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.xml.sax.SAXException;
 
 public abstract class OutputServerStream
-{	private static final boolean VERBOSE = false;
+{	protected final boolean verbose = false;
 		
 	public OutputServerStream(Round round)
 	{	this.round = round;
@@ -97,14 +97,11 @@ public abstract class OutputServerStream
 	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * records an event in the currently open stream.
-	 */
 	public void writeEvent(StreamedEvent event)
 	{	try
 		{	for(ObjectOutputStream o: outs)
 				o.writeObject(event);
-			if(VERBOSE)
+			if(verbose)
 				System.out.println("recording: "+event);
 		}
 		catch (IOException e)
@@ -138,7 +135,7 @@ public abstract class OutputServerStream
 		// record the stats
 		writeStats();
 		
-		if(VERBOSE)
+		if(verbose)
 			System.out.println("recording: stats");
 	}
 
@@ -146,6 +143,8 @@ public abstract class OutputServerStream
 	// STREAMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected final List<ObjectOutputStream> outs = new ArrayList<ObjectOutputStream>();
+
+	public abstract void initStreams() throws IOException;
 
 	protected abstract void write(Object object) throws IOException;
 	

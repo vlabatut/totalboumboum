@@ -38,37 +38,14 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
 public class FileInputClientStream extends InputClientStream
-{	private static final boolean VERBOSE = false;
-	
-	/////////////////////////////////////////////////////////////////
-	// ROUND				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	/**
-	 * creates and open a file named after the current date and time
-	 * in order to record this game replay
-	 */
-	@Override
-	public void initRound() throws IOException, ClassNotFoundException
-	{	String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
-		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
-		File file = new File(filePath);
-		FileInputStream fileIn = new FileInputStream(file);
-		BufferedInputStream inBuff = new BufferedInputStream(fileIn);
-//		ZipInputStream inZip = new ZipInputStream(inBuff);
-//		in = new ObjectInputStream(inZip);
-		in = new ObjectInputStream(inBuff);
-		
-		super.initRound();
+{	
+	public FileInputClientStream()
+	{	super();
 	}
-
-	@Override
-	public void finishRound() throws IOException, ClassNotFoundException
-	{	if(VERBOSE)
-			System.out.println("reading: stats");
 	
-		super.finishRound();
-		
-		close();
+	public FileInputClientStream(String folder)
+	{	super();
+		this.folder = folder;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -160,8 +137,8 @@ public class FileInputClientStream extends InputClientStream
 			if(object instanceof ReplayEvent)
 			{	ReplayEvent event = (ReplayEvent) object;
 				result.add(event);
-				if(VERBOSE)
-					System.out.println("reading: "+result);
+				if(verbose)
+					System.out.println("reading: "+event);
 			}
 		}
 		catch (EOFException e) 
@@ -177,6 +154,36 @@ public class FileInputClientStream extends InputClientStream
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ROUND				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	@Override
+	public void initRound() throws IOException, ClassNotFoundException
+	{	super.initRound();
+	}
+
+	@Override
+	public void finishRound() throws IOException, ClassNotFoundException
+	{	super.finishRound();
+		
+		close();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// STREAMS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void initStreams() throws IOException
+	{	String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
+		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
+		File file = new File(filePath);
+		FileInputStream fileIn = new FileInputStream(file);
+		BufferedInputStream inBuff = new BufferedInputStream(fileIn);
+//		ZipInputStream inZip = new ZipInputStream(inBuff);
+//		in = new ObjectInputStream(inZip);
+		in = new ObjectInputStream(inBuff);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

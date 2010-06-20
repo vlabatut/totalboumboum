@@ -40,16 +40,27 @@ public class NetOutputServerStream extends OutputServerStream
 	public NetOutputServerStream(Round round, List<Socket> sockets) throws IOException
 	{	super(round);
 	
-		// init net-related stuff
-		initStreams(sockets);
-		
-		// init round
-		initRound();
+		this.sockets = sockets;
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public void initRound() throws IOException
+	{	// start threads
+		for(ObjectOutputStream oo: outs)
+		{	RunnableWriter w = new RunnableWriter(oo);
+			writers.add(w);
+			w.start();
+		}
+		
+		super.initRound();
+	}
+	
 	/**
 	 * close the replay output stream (if it was previously opened)
 	 */
@@ -63,15 +74,15 @@ public class NetOutputServerStream extends OutputServerStream
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void initStreams(List<Socket> sockets) throws IOException
+	private List<Socket> sockets = null;
+	
+	@Override
+	public void initStreams() throws IOException
 	{	// init streams and threads
 		for(Socket socket: sockets)
 		{	OutputStream o = socket.getOutputStream();
 			ObjectOutputStream oo = new ObjectOutputStream(o);
 			outs.add(oo);
-			RunnableWriter w = new RunnableWriter(oo);
-			writers.add(w);
-			w.start();
 		}
 	}
 
@@ -99,6 +110,7 @@ public class NetOutputServerStream extends OutputServerStream
 	{	if(!finished)
 		{	super.finish();
 			
+			sockets.clear();
 			writers.clear();
 		}
 	}

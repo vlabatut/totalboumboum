@@ -51,70 +51,10 @@ public class FileOutputServerStream extends OutputServerStream
 	public FileOutputServerStream(Round round) throws IOException
 	{	super(round);
 	
-		// init file-related data
 		initSaveDate();
 		initFolder();
-		
-		// init recording
-		initStream();
-		initRound();
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// ROUND				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * close the replay output stream (if it was previously opened)
-	 */
-	@Override
-	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
-	{	super.finishRound(stats);
-		close();
-		
-		// possibly record the preview
-		if(preview!=null)
-		{	String previewFilename = FilePaths.getReplaysPath() + File.separator + folder + File.separator + FileNames.FILE_PREVIEW + FileNames.EXTENSION_PNG;
-			File file = new File(previewFilename);
-			ImageIO.write(preview,"png",file);
-		}
-		
-		// record the associated xml file
-		ReplaySaver.saveReplay(this);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// STREAM				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * creates and open a file named after the current date and time
-	 * in order to record this game replay
-	 */
-	private void initStream() throws IOException
-	{	// open file
-		String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
-		File file = new File(folderPath);
-		file.mkdir();
-		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
-		file = new File(filePath);
-		FileOutputStream fileOut = new FileOutputStream(file);
-		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
-//		ZipOutputStream outZip = new ZipOutputStream(outBuff);
-//		out = new ObjectOutputStream(outZip);
-		ObjectOutputStream o = new ObjectOutputStream(outBuff);
-		outs.add(o);
-	}
-	
-	@Override
-	protected void write(Object object) throws IOException
-	{	for(ObjectOutputStream o: outs)
-			o.writeObject(object);
-	}
-
-	private void close() throws IOException
-	{	for(ObjectOutputStream o: outs)
-			o.close();
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// FOLDER				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -193,6 +133,60 @@ public class FileOutputServerStream extends OutputServerStream
 	{	LevelInfo levelInfo = round.getHollowLevel().getLevelInfo();
 		String result = levelInfo.getPackName();
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ROUND				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void initRound() throws IOException
+	{	super.initRound();
+	}
+
+	@Override
+	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
+	{	super.finishRound(stats);
+		close();
+		
+		// possibly record the preview
+		if(preview!=null)
+		{	String previewFilename = FilePaths.getReplaysPath() + File.separator + folder + File.separator + FileNames.FILE_PREVIEW + FileNames.EXTENSION_PNG;
+			File file = new File(previewFilename);
+			ImageIO.write(preview,"png",file);
+		}
+		
+		// record the associated xml file
+		ReplaySaver.saveReplay(this);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// STREAM				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void initStreams() throws IOException
+	{	// open file
+		String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
+		File file = new File(folderPath);
+		file.mkdir();
+		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
+		file = new File(filePath);
+		FileOutputStream fileOut = new FileOutputStream(file);
+		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
+//		ZipOutputStream outZip = new ZipOutputStream(outBuff);
+//		out = new ObjectOutputStream(outZip);
+		ObjectOutputStream o = new ObjectOutputStream(outBuff);
+		outs.add(o);
+	}
+	
+	@Override
+	protected void write(Object object) throws IOException
+	{	for(ObjectOutputStream o: outs)
+			o.writeObject(object);
+	}
+
+	private void close() throws IOException
+	{	for(ObjectOutputStream o: outs)
+			o.close();
 	}
 
 	/////////////////////////////////////////////////////////////////

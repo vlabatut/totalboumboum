@@ -21,7 +21,6 @@ package org.totalboumboum.game.stream;
  * 
  */
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -31,8 +30,12 @@ import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 
 public abstract class InputServerStream
-{	private static final boolean VERBOSE = false;
+{	protected final boolean verbose = false;
 	
+	public InputServerStream()
+	{
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// CONTROL SETTINGS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -45,32 +48,7 @@ public abstract class InputServerStream
 	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * reads an event in the currently open stream.
-	 */
-	public RemotePlayerControlEvent readEvent(int index)
-	{	RemotePlayerControlEvent result = null;
-		
-		try
-		{	Object object = ins[index].readObject();
-			if(object instanceof RemotePlayerControlEvent)
-			{	result = (RemotePlayerControlEvent) object;
-				if(VERBOSE)
-					System.out.println("reading: "+result);
-			}
-		}
-		catch (EOFException e) 
-		{	//
-		}
-		catch (IOException e)
-		{	e.printStackTrace();
-		}
-		catch (ClassNotFoundException e)
-		{	e.printStackTrace();
-		}
-		
-		return result;
-	}
+	public abstract List<RemotePlayerControlEvent> readEvents(int index);
 	
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
@@ -80,11 +58,8 @@ public abstract class InputServerStream
 	 */
 	public void initRound() throws IOException, ClassNotFoundException
 	{	for(int i=0;i<ins.length;i++)
-		{	ObjectInputStream in = ins[i];
-			if(in!=null)
-			{	ControlSettings cs = (ControlSettings) ins[i].readObject();
-				controlSettings.add(cs);
-			}
+		{	ControlSettings cs = (ControlSettings) ins[i].readObject();
+			controlSettings.add(cs);
 		}
 	}
 
@@ -93,6 +68,8 @@ public abstract class InputServerStream
 	/////////////////////////////////////////////////////////////////
 	protected ObjectInputStream[] ins;
 			
+	public abstract void initStreams() throws IOException;
+
 	public void close() throws IOException
 	{	for(ObjectInputStream ooi: ins)
 			ooi.close();
