@@ -22,6 +22,7 @@ package org.totalboumboum.engine.control.player;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.engine.content.sprite.hero.Hero;
@@ -32,17 +33,10 @@ import org.totalboumboum.game.stream.network.NetInputServerStream;
 
 public class RemotePlayerControl
 {	
-	public RemotePlayerControl(int index, Hero sprite, NetInputServerStream in)
-	{	this.index = index;
-		this.in = in;
-		this.sprite = sprite;
+	public RemotePlayerControl(NetInputServerStream in)
+	{	this.in = in;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// PLAYER INDEX		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private int index;
-	
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -51,7 +45,11 @@ public class RemotePlayerControl
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Hero sprite;
+	private HashMap<Integer,Hero> sprites = new HashMap<Integer, Hero>();
+	
+	public void addSprite(Hero sprite)
+	{	sprites.put(sprite.getId(),sprite);		
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// EVENTS			/////////////////////////////////////////////
@@ -62,19 +60,24 @@ public class RemotePlayerControl
 	{	long totalTime = RoundVariables.loop.getTotalEngineTime();
 		List<RemotePlayerControlEvent> events = new ArrayList<RemotePlayerControlEvent>();
 		
-		// read events
-		while(currentEvent!=null && currentEvent.getTime()<totalTime)
-		{	events.add(currentEvent);
-//			if(VERBOSE)
-//				System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
-			currentEvent = in.readEvent(index);
+		for(int i=0;i<in.getSize();i++)
+		{	// read events
+			while(currentEvent!=null && currentEvent.getTime()<totalTime)
+			{	events.add(currentEvent);
+//				if(VERBOSE)
+//					System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
+				currentEvent = in.readEvent(i);
+			}
 		}
 		
 		// process events
 		for(RemotePlayerControlEvent event: events)
 		{	// get the control code
 			ControlCode controlCode = event.getControlCode();
-			// send it to the sprite like a local control code
+			// get the appropriate sprite
+			int id = event.getSpriteId();
+			Hero sprite = sprites.get(id);
+			// send the event to the sprite like a local control code
 			sprite.putControlCode(controlCode);
 		}
 	}
@@ -88,7 +91,7 @@ public class RemotePlayerControl
 	{	if(!finished)
 		{	finished = true;
 		
-			sprite = null;
+			sprites.clear();
 			in = null;
 		}
 	}

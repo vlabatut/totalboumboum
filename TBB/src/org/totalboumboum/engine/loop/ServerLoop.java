@@ -49,6 +49,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
+import org.totalboumboum.engine.control.player.RemotePlayerControl;
 import org.totalboumboum.engine.control.system.ServerSytemControl;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
@@ -60,7 +61,6 @@ import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.engine.player.RemotePlayer;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.game.stream.network.NetInputServerStream;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -123,6 +123,9 @@ public class ServerLoop extends LocalLoop
 				initialPositions[i] = loc.get(i);
 		}
 		
+		// create remote controls
+		remoteControls = new RemotePlayerControl(RoundVariables.netServerIn);
+		
 		// create sprites and stuff
 		HashMap<String,Integer> items = plyrs.getInitialItems();
 		Itemset itemset = instance.getItemset();
@@ -180,8 +183,7 @@ public class ServerLoop extends LocalLoop
 	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{	AbstractPlayer result;
 		if(profile.isRemote())
-		{	NetInputServerStream in = RoundVariables.netServerIn;
-			result = new RemotePlayer(profile,base,tile,in);
+		{	result = new RemotePlayer(profile,base,tile,remoteControls);
 		}
 		else
 		{	if(profile.hasAi())
@@ -225,4 +227,9 @@ public class ServerLoop extends LocalLoop
 		{	super.processEvent(event);
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// REMOTE CONTROLS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private RemotePlayerControl remoteControls;
 }

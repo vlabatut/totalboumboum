@@ -47,7 +47,17 @@ public class NetInputServerStream extends InputServerStream
 	{	RemotePlayerControlEvent result = readers[index].getData();
 		return result;
 	}
-
+/*
+	public List<RemotePlayerControlEvent> readEvents()
+	{	List<RemotePlayerControlEvent> result = new ArrayList<RemotePlayerControlEvent>();
+		for(RunnableReader<RemotePlayerControlEvent> reader: readers)
+		{	RemotePlayerControlEvent event = reader.getData();
+			if(event!=null)
+				result.add(event);
+		}
+		return result;
+	}
+*/
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
@@ -87,6 +97,10 @@ public class NetInputServerStream extends InputServerStream
 		}
 	}
 
+	public int getSize()
+	{	return ins.length;		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// THREADS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
