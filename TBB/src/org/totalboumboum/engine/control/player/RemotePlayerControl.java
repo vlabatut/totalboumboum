@@ -21,11 +21,13 @@ package org.totalboumboum.engine.control.player;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.game.stream.network.NetInputServerStream;
 
 public class RemotePlayerControl
@@ -54,8 +56,21 @@ public class RemotePlayerControl
 	/////////////////////////////////////////////////////////////////
 	// EVENTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private RemotePlayerControlEvent currentEvent = null;
+	
 	public void update()
-	{	List<RemotePlayerControlEvent> events = in.readEvents(index);
+	{	long totalTime = RoundVariables.loop.getTotalEngineTime();
+		List<RemotePlayerControlEvent> events = new ArrayList<RemotePlayerControlEvent>();
+		
+		// read events
+		while(currentEvent!=null && currentEvent.getTime()<totalTime)
+		{	events.add(currentEvent);
+//			if(VERBOSE)
+//				System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
+			currentEvent = in.readEvent(index);
+		}
+		
+		// process events
 		for(RemotePlayerControlEvent event: events)
 		{	// get the control code
 			ControlCode controlCode = event.getControlCode();

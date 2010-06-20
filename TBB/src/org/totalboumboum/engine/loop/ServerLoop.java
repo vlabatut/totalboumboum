@@ -49,7 +49,6 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.control.player.RemotePlayerControl;
 import org.totalboumboum.engine.control.system.ServerSytemControl;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
@@ -181,7 +180,7 @@ public class ServerLoop extends LocalLoop
 	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{	AbstractPlayer result;
 		if(profile.isRemote())
-		{	NetInputServerStream in = (NetInputServerStream)RoundVariables.inClient;
+		{	NetInputServerStream in = RoundVariables.netServerIn;
 			result = new RemotePlayer(profile,base,tile,in);
 		}
 		else

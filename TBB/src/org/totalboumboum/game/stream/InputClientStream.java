@@ -100,7 +100,7 @@ public abstract class InputClientStream
 	/**
 	 * reads an event in the currently open stream.
 	 */
-	public abstract List<ReplayEvent> readEvents();
+	public abstract ReplayEvent readEvent();
 	
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////

@@ -43,8 +43,8 @@ public class NetInputServerStream extends InputServerStream
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public List<RemotePlayerControlEvent> readEvents(int index)
-	{	List<RemotePlayerControlEvent> result = readers[index].getData();
+	public RemotePlayerControlEvent readEvent(int index)
+	{	RemotePlayerControlEvent result = readers[index].getData();
 		return result;
 	}
 
