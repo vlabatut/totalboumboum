@@ -59,7 +59,8 @@ public class SingleTournament extends AbstractTournament
 	}
 
 	public SingleTournament(FileInputClientStream replay) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
-	{	replay.initRound();
+	{	replay.initStreams();
+		replay.initRound();
 		setName("Replay");
 		setAuthor("Replay");
 		
@@ -89,7 +90,7 @@ public class SingleTournament extends AbstractTournament
 		// round
 		Round round = new Round(match);
 		match.setAuthor("Replay");
-	    round.setInputGameStream(replay);
+	    round.setInputStream(replay);
 		{	// notes
 			List<String> notes = new ArrayList<String>();
 			notes.add("auto-generated notes");
