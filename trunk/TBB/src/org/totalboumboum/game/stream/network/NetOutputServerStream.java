@@ -41,32 +41,15 @@ public class NetOutputServerStream extends OutputServerStream
 	{	super(round);
 	
 		// init net-related stuff
+		initStreams(sockets);
 		
 		// init round
-		initRound(sockets);
+		initRound();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * creates and open a file named after the current date and time
-	 * in order to record this game replay
-	 */
-	private void initRound(List<Socket> sockets) throws IOException
-	{	// init streams and threads
-		for(Socket socket: sockets)
-		{	OutputStream o = socket.getOutputStream();
-			ObjectOutputStream oo = new ObjectOutputStream(o);
-			outs.add(oo);
-			RunnableWriter w = new RunnableWriter(oo);
-			writers.add(w);
-			w.start();
-		}
-		
-		initRound();
-	}
-	
 	/**
 	 * close the replay output stream (if it was previously opened)
 	 */
@@ -80,6 +63,18 @@ public class NetOutputServerStream extends OutputServerStream
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private void initStreams(List<Socket> sockets) throws IOException
+	{	// init streams and threads
+		for(Socket socket: sockets)
+		{	OutputStream o = socket.getOutputStream();
+			ObjectOutputStream oo = new ObjectOutputStream(o);
+			outs.add(oo);
+			RunnableWriter w = new RunnableWriter(oo);
+			writers.add(w);
+			w.start();
+		}
+	}
+
 	@Override
 	protected void write(Object object) throws IOException
 	{	for(RunnableWriter w: writers)
@@ -89,10 +84,22 @@ public class NetOutputServerStream extends OutputServerStream
 	/////////////////////////////////////////////////////////////////
 	// THREADS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<RunnableWriter> writers = new ArrayList<RunnableWriter>();
+	private final List<RunnableWriter> writers = new ArrayList<RunnableWriter>();
 
 	private void finishWriters() throws IOException
 	{	for(RunnableWriter w: writers)
 			w.interrupt();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void finish()
+	{	if(!finished)
+		{	super.finish();
+			
+			writers.clear();
+		}
 	}
 }

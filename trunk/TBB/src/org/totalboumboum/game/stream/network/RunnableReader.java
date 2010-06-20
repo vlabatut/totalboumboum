@@ -22,65 +22,57 @@ package org.totalboumboum.game.stream.network;
  */
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.net.Socket;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
-import org.totalboumboum.game.stream.OutputClientStream;
+import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 
-public class NetOutputClientStream extends OutputClientStream
-{	
-	public NetOutputClientStream(Socket socket) throws IOException
-	{	// init net-related stuff
-		OutputStream o = socket.getOutputStream();
-		out = new ObjectOutputStream(o);
-	
-		// init round
-		initRound();
+public class RunnableReader extends Thread
+{
+	public RunnableReader(ObjectInputStream in)
+	{	this.in = in;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// ROUND				/////////////////////////////////////////
+	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * creates and open a file named after the current date and time
-	 * in order to record this game replay
-	 */
-	private void initRound() throws IOException
-	{	writer = new RunnableWriter(out);
-		writer.start();
-	}
-	
-	public void finishRound()
-	{	finishWriter();
+	@Override
+	public void run()
+	{	while(!Thread.interrupted())
+		{	try
+			{	Object object = in.readObject();
+				ReplayEvent event = (ReplayEvent) object;
+				addEvent(event);
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
-	protected void write(Object object) throws IOException
-	{	writer.addObject(object);
+	private ObjectInputStream in;
+
+	/////////////////////////////////////////////////////////////////
+	// DATA					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Queue<ReplayEvent> data = new LinkedList<ReplayEvent>();
+	
+	public synchronized List<ReplayEvent> getEvents()
+	{	List<ReplayEvent> result = new ArrayList<ReplayEvent>(data);
+		data.clear();
+		return result;
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// THREADS				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private RunnableWriter writer = null;
-
-	private void finishWriter()
-	{	writer.interrupt();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISH				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			
-			writer = null;
-		}
+	
+	private synchronized void addEvent(ReplayEvent event)
+	{	data.offer(event);
 	}
 }

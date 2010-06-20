@@ -21,7 +21,6 @@ package org.totalboumboum.game.stream;
  * 
  */
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
@@ -35,8 +34,7 @@ import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 
 public abstract class InputClientStream
-{	private static final boolean VERBOSE = false;
-	
+{	
 	/////////////////////////////////////////////////////////////////
 	// ZOOM					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -97,36 +95,13 @@ public abstract class InputClientStream
 	/**
 	 * reads an event in the currently open stream.
 	 */
-	public ReplayEvent readEvent()
-	{	ReplayEvent result = null;
-		
-		try
-		{	Object object = in.readObject();
-			if(object instanceof ReplayEvent)
-			{	result = (ReplayEvent) object;
-				if(VERBOSE)
-					System.out.println("reading: "+result);
-			}
-		}
-		catch (EOFException e) 
-		{	//
-		}
-		catch (IOException e)
-		{	e.printStackTrace();
-		}
-		catch (ClassNotFoundException e)
-		{	e.printStackTrace();
-		}
-		
-		return result;
-	}
+	public abstract List<ReplayEvent> readEvents();
 	
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * creates and open a file named after the current date and time
-	 * in order to record this game replay
+	 * reads round-related information in the open stream
 	 */
 	@SuppressWarnings("unchecked")
 	public void initRound() throws IOException, ClassNotFoundException
@@ -141,9 +116,7 @@ public abstract class InputClientStream
 	 * close the replay output stream (if it was previously opened)
 	 */
 	public void finishRound() throws IOException, ClassNotFoundException
-	{	if(VERBOSE)
-			System.out.println("reading: stats");
-		roundStats = (StatisticRound) in.readObject();
+	{	roundStats = (StatisticRound) in.readObject();
 	}
 
 	/////////////////////////////////////////////////////////////////
