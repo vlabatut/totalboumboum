@@ -34,7 +34,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.game.stream.file.FileInputClientStream;
+import org.totalboumboum.game.stream.round.FileInputClientStream;
 import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
