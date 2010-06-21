@@ -22,10 +22,8 @@ package org.totalboumboum.configuration.profile;
  */
 
 import java.io.Serializable;
-import java.net.Socket;
 
 import org.totalboumboum.engine.control.player.LocalPlayerControl;
-
 
 public class Profile implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -104,18 +102,24 @@ public class Profile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// REMOTE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Socket socket = null;
-//TODO en fait c'est pas le socket, ça doit être plus général car le même socket peut être associé à plusieurs joueurs	
-	public Socket getSocket()
-	{	return socket;	
+	private int socketNumber = -1;
+	private int localNumber = -1;
+	
+	public int getSocketNumber()
+	{	return socketNumber;	
 	}
 	
-	public void setSocket(Socket socket)
-	{	this.socket = socket;	
+	public int getLocalNumber()
+	{	return localNumber;	
+	}
+
+	public void setRemoteNumbers(int socketNumber, int localNumber)
+	{	this.socketNumber = socketNumber;
+		this.localNumber = localNumber;
 	}
 	
 	public boolean isRemote()
-	{	return socket == null;		
+	{	return socketNumber >= 0;		
 	}
 	
 	/////////////////////////////////////////////////////////////////
