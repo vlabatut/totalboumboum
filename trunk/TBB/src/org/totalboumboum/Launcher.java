@@ -1284,4 +1284,12 @@ public class Launcher
 	 *  + initialisation du round : lecture/écriture des infos nécessaires, , création reader/writer
 	 *  + après la fin du round : finish round pour balancer/lire les dernières données et tuer les threads
 	 */
+	
+	/*
+	 * TODO
+	 * - créer un reader/writer tournoi qui prend tous les flux existants
+	 * - capable de creer les reader/writer matches + convertisseurs d"adresses", avec seulement les flux nécessaires
+	 * - éventuellement virer les classes abstraites des w/r car finalement les différentes classes filles sont bien différentiées
+	 * - au niveau match, y aura un initRound et un initMatch (?)
+	 */
 }

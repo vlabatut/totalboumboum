@@ -32,7 +32,7 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.game.stream.network.NetOutputServerStream;
+import org.totalboumboum.game.stream.match.NetOutputServerStream;
 import org.xml.sax.SAXException;
 
 public class AiPlayer extends ControlledPlayer
