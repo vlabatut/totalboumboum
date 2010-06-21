@@ -1276,22 +1276,6 @@ public class Launcher
 	
 	// TODO renommer mes "streams" en "writer/reader", c'est plus logique
 	
-	/* TODO
-	 * 1) définir le thread qui va gérer les évènements lus dans le flux pour les net-client-in
-	 * 2) initialiser les différents streams
-	 * 3) tester que le mode normal marche tjrs
-	 * 4) tester que l'enregistrement local marche tjrs
-	 * 5) tester que le replay marche tjrs
-	 * 6) tester le mode réseau ! 
-	 */
-
-	/**
-	 * TODO attention : il n'y a pas forcément un stream par joueur :
-	 * un client peut très bien gérer plusieurs joueurs
-	 * >> besoin d'un convertisseur permettant de chopper le flux d'un joueur
-	 * >> le joueur d'origine doit être identifié lors de l'envoi d'un evt
-	 */
-	
 	/* NOTE
 	 * algo des flux :
 	 * 	+ créateur : initialise l'objet avec les info nécessaires

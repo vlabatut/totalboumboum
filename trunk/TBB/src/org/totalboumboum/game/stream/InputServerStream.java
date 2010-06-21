@@ -24,25 +24,36 @@ package org.totalboumboum.game.stream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
+import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 
 public abstract class InputServerStream
 {	protected final boolean verbose = false;
 	
-	public InputServerStream()
+	public InputServerStream(HashMap<Integer,HashMap<Integer,Integer>> translation)
 	{
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// TRANSLATION			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<Integer,HashMap<Integer,Integer>> translation;
+	
+	/////////////////////////////////////////////////////////////////
 	// CONTROL SETTINGS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected final List<ControlSettings> controlSettings = new ArrayList<ControlSettings>();
+	protected final List<List<ControlSettings>> controlSettings = new ArrayList<List<ControlSettings>>();
 	
-	public List<ControlSettings> getControlSettings()
-	{	return controlSettings;
+	public ControlSettings getControlSettings(Profile profile)
+	{	ControlSettings result = null;
+		int tempIndex = profile.getSocketNumber();
+		int localIndex = profile.getLocalNumber();
+		int index = translation.get(streamIndex).get(localIndex);
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -56,9 +67,10 @@ public abstract class InputServerStream
 	/**
 	 * reads remote player-related information in the open streams
 	 */
+	@SuppressWarnings("unchecked")
 	public void initRound() throws IOException, ClassNotFoundException
 	{	for(int i=0;i<ins.length;i++)
-		{	ControlSettings cs = (ControlSettings) ins[i].readObject();
+		{	List<ControlSettings> cs = (List<ControlSettings>) ins[i].readObject();
 			controlSettings.add(cs);
 		}
 	}

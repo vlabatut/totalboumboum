@@ -27,7 +27,6 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.List;
 
-import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.stream.InputServerStream;
 
@@ -66,11 +65,6 @@ public class NetInputServerStream extends InputServerStream
 	public void initRound() throws IOException, ClassNotFoundException
 	{	super.initRound();
 	
-		for(ObjectInputStream in: ins)
-		{	ControlSettings cs = (ControlSettings) in.readObject();
-			controlSettings.add(cs);
-		}
-		
 		// start threads
 		readers = new RunnableReader[ins.length];
 		for(int i=0;i<ins.length;i++)
