@@ -28,26 +28,44 @@ import java.net.Socket;
 import java.util.List;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
-import org.totalboumboum.game.stream.OutputClientStream;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 
-public class NetOutputClientStream extends OutputClientStream
-{	
+public class NetOutputClientStream
+{	private final boolean verbose = false;
+
 	public NetOutputClientStream(Socket socket, List<ControlSettings> controlSettings) throws IOException
-	{	super(controlSettings);
-	
+	{	this.controlSettings = controlSettings;
 		this.socket = socket;
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// CONTROL SETTINGS					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<ControlSettings> controlSettings = null;
+	
+	public void writeControlSettings() throws IOException
+	{	write(controlSettings);
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public void writeEvent(RemotePlayerControlEvent event)
+	{	try
+		{	out.writeObject(event);
+			if(verbose)
+				System.out.println("recording: "+event);
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public void initRound() throws IOException
-	{	super.initRound();
+	{	writeControlSettings();
 
 		writer = new RunnableWriter(out);
 		writer.start();
@@ -60,16 +78,15 @@ public class NetOutputClientStream extends OutputClientStream
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private ObjectOutputStream out = null;
 	private Socket socket = null;
 	
-	@Override
 	public void initStreams() throws IOException
 	{	OutputStream o = socket.getOutputStream();
 		out = new ObjectOutputStream(o);
 	}
 
-	@Override
-	protected void write(Object object) throws IOException
+	private void write(Object object) throws IOException
 	{	writer.addObject(object);
 	}
 
@@ -85,11 +102,13 @@ public class NetOutputClientStream extends OutputClientStream
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
+	protected boolean finished = false;
+	
 	public void finish()
 	{	if(!finished)
-		{	super.finish();
+		{	finished = true;
 			
+			out = null;
 			socket = null;
 			writer = null;
 		}

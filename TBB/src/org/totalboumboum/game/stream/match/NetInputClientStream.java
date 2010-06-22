@@ -25,12 +25,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.List;
 
+import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
-import org.totalboumboum.game.stream.InputClientStream;
+import org.totalboumboum.game.limit.Limits;
+import org.totalboumboum.game.limit.RoundLimit;
+import org.totalboumboum.statistics.detailed.StatisticRound;
 
-public class NetInputClientStream extends InputClientStream
-{	
+public class NetInputClientStream
+{	private final boolean verbose = false;
+
 	public NetInputClientStream(Socket socket) throws IOException
 	{	super();
 	
@@ -38,24 +45,86 @@ public class NetInputClientStream extends InputClientStream
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// ZOOM					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Double zoomCoef = null;
+
+	public double getZoomCoef()
+	{	return zoomCoef;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PROFILES				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<Profile> profiles = null;
+
+	public List<Profile> getProfiles()
+	{	return profiles;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// INFO					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private LevelInfo levelInfo = null;
+
+	public LevelInfo getLevelInfo()
+	{	return levelInfo;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// LIMITS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Limits<RoundLimit> roundLimits = null;
+
+	public Limits<RoundLimit> getRoundLimits()
+	{	return roundLimits;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ITEMS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<String,Integer> itemCounts = null;
+
+	public HashMap<String,Integer> getItemCounts()
+	{	return itemCounts;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STATS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private StatisticRound roundStats = null;
+	
+	public StatisticRound getRoundStats()
+	{	return roundStats;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
+	public ReplayEvent readEvent()
+	{	ReplayEvent result = reader.getData();
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	@Override
+	@SuppressWarnings("unchecked")
 	public void initRound() throws IOException, ClassNotFoundException
-	{	super.initRound();
+	{	profiles = (List<Profile>) in.readObject();
+		levelInfo = (LevelInfo) in.readObject();
+		roundLimits = (Limits<RoundLimit>) in.readObject();		
+		itemCounts = (HashMap<String,Integer>) in.readObject();		
+		zoomCoef = (Double) in.readObject();
 	
 		reader = new RunnableReader<ReplayEvent>(in);
 		reader.start();
 	}
 
-	@Override
 	public void finishRound() throws IOException, ClassNotFoundException
-	{	super.finishRound();
-		
+	{	if(verbose)
+			System.out.println("reading: stats");
+		roundStats = (StatisticRound) in.readObject();
 		finishReader();
 	}
 
@@ -63,17 +132,15 @@ public class NetInputClientStream extends InputClientStream
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Socket socket = null;
-	
-	@Override
+	private ObjectInputStream in = null;
+
 	public void initStreams() throws IOException
 	{	InputStream i = socket.getInputStream();
 		in = new ObjectInputStream(i);
 	}
 
-	@Override
-	public ReplayEvent readEvent()
-	{	ReplayEvent result = reader.getData();
-		return result;
+	public void close() throws IOException
+	{	in.close();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -88,11 +155,21 @@ public class NetInputClientStream extends InputClientStream
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
+	private boolean finished = false;
+
 	public void finish()
 	{	if(!finished)
-		{	super.finish();
+		{	finished = true;
 			
+			in = null;
+		
+			itemCounts = null;
+			levelInfo = null;
+			profiles = null;
+			roundLimits = null;
+			roundStats = null;
+			zoomCoef = null;
+	
 			socket = null;
 			reader = null;
 		}

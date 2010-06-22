@@ -1242,6 +1242,7 @@ public class Launcher
 	//	>> faut donc un modulation manager, et un ability manager (?)
 	//	>> coute cher... autre solution ?
 	// pb pr les IA remote : y a besoin de l'état réel du niveau, pas seulement des graphismes
+	// solution : mise à jour locale (pas comme replay) et tant pis pr la puissance perdue et la possible dé-synchro
 	
 	/* TODO
 	 * - côté serveur :
