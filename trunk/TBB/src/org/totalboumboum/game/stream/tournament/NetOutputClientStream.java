@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.match;
+package org.totalboumboum.game.stream.tournament;
 
 /*
  * Total Boum Boum

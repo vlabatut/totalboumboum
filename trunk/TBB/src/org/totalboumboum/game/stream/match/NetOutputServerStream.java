@@ -38,15 +38,15 @@ import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.round.Round;
+import org.totalboumboum.game.stream.RunnableWriter;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.xml.sax.SAXException;
 
 public class NetOutputServerStream
 {	private final boolean verbose = false;
 
-	public NetOutputServerStream(Round round, List<Socket> sockets) throws IOException
+	public NetOutputServerStream(Round round, List<Socket> sockets)
 	{	this.round = round;
-	
 		this.sockets = sockets;
 	}
 	

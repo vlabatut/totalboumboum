@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.match;
+package org.totalboumboum.game.stream.tournament;
 
 /*
  * Total Boum Boum
@@ -22,135 +22,176 @@ package org.totalboumboum.game.stream.match;
  */
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
-import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
+import org.totalboumboum.engine.loop.event.StreamedEvent;
+import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
-import org.totalboumboum.game.stream.RunnableReader;
+import org.totalboumboum.game.round.Round;
+import org.totalboumboum.game.stream.RunnableWriter;
 import org.totalboumboum.statistics.detailed.StatisticRound;
+import org.xml.sax.SAXException;
 
-public class NetInputClientStream
+public class NetOutputServerStream
 {	private final boolean verbose = false;
 
-	public NetInputClientStream(Socket socket)
-	{	this.socket = socket;
+	public NetOutputServerStream(Round round, List<Socket> sockets)
+	{	this.round = round;
+		this.sockets = sockets;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// ZOOM					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Double zoomCoef = null;
-
-	public double getZoomCoef()
-	{	return zoomCoef;
+	public void writeZoomCoef(double zoomCoef) throws IOException
+	{	write(zoomCoef);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// PROFILES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<Profile> profiles = null;
-
-	public List<Profile> getProfiles()
-	{	return profiles;
+	private void writeProfiles() throws IOException
+	{	List<Profile> profiles = round.getProfiles();
+		write(profiles);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// INFO					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private LevelInfo levelInfo = null;
-
-	public LevelInfo getLevelInfo()
-	{	return levelInfo;
+	private void writeLevelInfo() throws IOException
+	{	LevelInfo leveInfo = round.getHollowLevel().getLevelInfo();
+		for(ObjectOutputStream o: outs)
+			o.writeObject(leveInfo);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// LIMITS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Limits<RoundLimit> roundLimits = null;
-
-	public Limits<RoundLimit> getRoundLimits()
-	{	return roundLimits;
+	private void writeLimits() throws IOException
+	{	Limits<RoundLimit> limits = round.getLimits();
+		write(limits);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ITEMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,Integer> itemCounts = null;
-
-	public HashMap<String,Integer> getItemCounts()
-	{	return itemCounts;
+	private void writeItems() throws IOException
+	{	HashMap<String,Integer> itemsCounts = round.getHollowLevel().getItemCount();
+		write(itemsCounts);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// STATS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private StatisticRound roundStats = null;
-	
-	public StatisticRound getRoundStats()
-	{	return roundStats;
+	private void writeStats() throws IOException
+	{	StatisticRound stats = round.getStats();
+		write(stats);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public ReplayEvent readEvent()
-	{	ReplayEvent result = reader.getData();
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// ROUND				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	@SuppressWarnings("unchecked")
-	public void initRound() throws IOException, ClassNotFoundException
-	{	profiles = (List<Profile>) in.readObject();
-		levelInfo = (LevelInfo) in.readObject();
-		roundLimits = (Limits<RoundLimit>) in.readObject();		
-		itemCounts = (HashMap<String,Integer>) in.readObject();		
-		zoomCoef = (Double) in.readObject();
-	
-		reader = new RunnableReader<ReplayEvent>(in);
-		reader.start();
+	public void writeEvent(StreamedEvent event)
+	{	try
+		{	for(ObjectOutputStream o: outs)
+				o.writeObject(event);
+			if(verbose)
+				System.out.println("recording: "+event);
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
 	}
 
-	public void finishRound() throws IOException, ClassNotFoundException
-	{	if(verbose)
-			System.out.println("reading: stats");
-		roundStats = (StatisticRound) in.readObject();
-		finishReader();
+	/////////////////////////////////////////////////////////////////
+	// ROUND				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Round round;
+
+	public void initRound() throws IOException
+	{	// start threads
+		for(ObjectOutputStream oo: outs)
+		{	RunnableWriter w = new RunnableWriter(oo);
+			writers.add(w);
+			w.start();
+		}
+		
+		writeProfiles();
+		writeLevelInfo();
+		writeLimits();
+		writeItems();
+	}
+	
+	/**
+	 * close the replay output stream (if it was previously opened)
+	 */
+	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
+	{	// put a stop event
+		StopReplayEvent event = new StopReplayEvent();
+		writeEvent(event);
+		
+		// record the stats
+		writeStats();
+		
+		if(verbose)
+			System.out.println("recording: stats");
+		
+		finishWriters();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Socket socket = null;
-	private ObjectInputStream in = null;
-
-	public void initStreams() throws IOException
-	{	InputStream i = socket.getInputStream();
-		in = new ObjectInputStream(i);
-	}
-
-	public void close() throws IOException
-	{	in.close();
-	}
+	private final List<ObjectOutputStream> outs = new ArrayList<ObjectOutputStream>();
+	private List<Socket> sockets = null;
 	
+	public void initStreams() throws IOException
+	{	// init streams and threads
+		for(Socket socket: sockets)
+		{	OutputStream o = socket.getOutputStream();
+			ObjectOutputStream oo = new ObjectOutputStream(o);
+			outs.add(oo);
+		}
+	}
+
+	protected void write(Object object) throws IOException
+	{	for(RunnableWriter w: writers)
+			w.addObject(object);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// THREADS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private RunnableReader<ReplayEvent> reader = null;
+	private final List<RunnableWriter> writers = new ArrayList<RunnableWriter>();
 
-	private void finishReader()
-	{	reader.interrupt();
+	private void finishWriters() throws IOException
+	{	for(RunnableWriter w: writers)
+			w.interrupt();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FILTER				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean filterEvents = true;
+
+	public void setFilterEvents(boolean flag)
+	{	filterEvents = flag;		
 	}
 	
+	public boolean getFilterEvents()
+	{	return filterEvents;		
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -160,17 +201,11 @@ public class NetInputClientStream
 	{	if(!finished)
 		{	finished = true;
 			
-			in = null;
-		
-			itemCounts = null;
-			levelInfo = null;
-			profiles = null;
-			roundLimits = null;
-			roundStats = null;
-			zoomCoef = null;
+			outs.clear();
+			round = null;
 	
-			socket = null;
-			reader = null;
+			sockets.clear();
+			writers.clear();
 		}
 	}
 }

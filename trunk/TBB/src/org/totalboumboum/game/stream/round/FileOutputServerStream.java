@@ -53,7 +53,7 @@ import org.xml.sax.SAXException;
 public class FileOutputServerStream
 {	private final boolean verbose = false;
 
-	public FileOutputServerStream(Round round) throws IOException
+	public FileOutputServerStream(Round round)
 	{	this.round = round;
 	
 		initSaveDate();
