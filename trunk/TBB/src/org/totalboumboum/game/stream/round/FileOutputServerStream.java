@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -39,22 +40,73 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
+import org.totalboumboum.engine.loop.event.StreamedEvent;
+import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
+import org.totalboumboum.game.limit.Limits;
+import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.game.stream.OutputServerStream;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
-public class FileOutputServerStream extends OutputServerStream
-{	
+public class FileOutputServerStream
+{	private final boolean verbose = false;
+
 	public FileOutputServerStream(Round round) throws IOException
-	{	super(round);
+	{	this.round = round;
 	
 		initSaveDate();
 		initFolder();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ZOOM					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void writeZoomCoef(double zoomCoef) throws IOException
+	{	write(zoomCoef);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PROFILES				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void writeProfiles() throws IOException
+	{	List<Profile> profiles = round.getProfiles();
+		write(profiles);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// INFO					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void writeLevelInfo() throws IOException
+	{	LevelInfo leveInfo = round.getHollowLevel().getLevelInfo();
+		out.writeObject(leveInfo);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// LIMITS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void writeLimits() throws IOException
+	{	Limits<RoundLimit> limits = round.getLimits();
+		write(limits);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ITEMS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void writeItems() throws IOException
+	{	HashMap<String,Integer> itemsCounts = round.getHollowLevel().getItemCount();
+		write(itemsCounts);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STATS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void writeStats() throws IOException
+	{	StatisticRound stats = round.getStats();
+		write(stats);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FOLDER				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -136,16 +188,42 @@ public class FileOutputServerStream extends OutputServerStream
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// ROUND				/////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
-	public void initRound() throws IOException
-	{	super.initRound();
+	public void writeEvent(StreamedEvent event)
+	{	try
+		{	out.writeObject(event);
+			if(verbose)
+				System.out.println("recording: "+event);
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
 	}
 
-	@Override
+	/////////////////////////////////////////////////////////////////
+	// ROUND				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Round round;
+
+	public void initRound() throws IOException
+	{	writeProfiles();
+		writeLevelInfo();
+		writeLimits();
+		writeItems();
+	}
+
 	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
-	{	super.finishRound(stats);
+	{	// put a stop event
+		StopReplayEvent event = new StopReplayEvent();
+		writeEvent(event);
+		
+		// record the stats
+		writeStats();
+		
+		if(verbose)
+			System.out.println("recording: stats");
+		
 //		close();
 		
 		// possibly record the preview
@@ -162,8 +240,9 @@ public class FileOutputServerStream extends OutputServerStream
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
-	public void initStreams() throws IOException
+	private ObjectOutputStream out = null;
+
+	public void initStream() throws IOException
 	{	// open file
 		String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
 		File file = new File(folderPath);
@@ -174,28 +253,41 @@ public class FileOutputServerStream extends OutputServerStream
 		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
 //		ZipOutputStream outZip = new ZipOutputStream(outBuff);
 //		out = new ObjectOutputStream(outZip);
-		ObjectOutputStream o = new ObjectOutputStream(outBuff);
-		outs.add(o);
+		out = new ObjectOutputStream(outBuff);
 	}
 	
-	@Override
 	protected void write(Object object) throws IOException
-	{	for(ObjectOutputStream o: outs)
-			o.writeObject(object);
+	{	out.writeObject(object);
 	}
 
 	public void close() throws IOException
-	{	for(ObjectOutputStream o: outs)
-			o.close();
+	{	out.close();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FILTER				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean filterEvents = true;
+
+	public void setFilterEvents(boolean flag)
+	{	filterEvents = flag;		
+	}
+	
+	public boolean getFilterEvents()
+	{	return filterEvents;		
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
+	private boolean finished = false;
+
 	public void finish()
 	{	if(!finished)
-		{	super.finish();
+		{	finished = true;
+			
+			out = null;
+			round = null;
 			
 			folder = null;
 			preview = null;

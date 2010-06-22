@@ -25,13 +25,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import org.totalboumboum.configuration.controls.ControlSettings;
+import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
-import org.totalboumboum.game.stream.InputServerStream;
 
-public class NetInputServerStream extends InputServerStream
-{	
+public class NetInputServerStream
+{	private final boolean verbose = false;
+
 	public NetInputServerStream(List<Socket> sockets) throws IOException
 	{	super();
 		
@@ -39,31 +43,40 @@ public class NetInputServerStream extends InputServerStream
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// TRANSLATION			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<Integer,HashMap<Integer,Integer>> translation;
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTROL SETTINGS		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final List<List<ControlSettings>> controlSettings = new ArrayList<List<ControlSettings>>();
+	
+	public ControlSettings getControlSettings(Profile profile)
+	{	ControlSettings result = null;
+		int tempIndex = profile.getSocketNumber();
+		int localIndex = profile.getLocalNumber();
+		int index = translation.get(streamIndex).get(localIndex);
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public RemotePlayerControlEvent readEvent(int index)
 	{	RemotePlayerControlEvent result = readers[index].getData();
 		return result;
 	}
-/*
-	public List<RemotePlayerControlEvent> readEvents()
-	{	List<RemotePlayerControlEvent> result = new ArrayList<RemotePlayerControlEvent>();
-		for(RunnableReader<RemotePlayerControlEvent> reader: readers)
-		{	RemotePlayerControlEvent event = reader.getData();
-			if(event!=null)
-				result.add(event);
-		}
-		return result;
-	}
-*/
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@SuppressWarnings("unchecked")
-	@Override
 	public void initRound() throws IOException, ClassNotFoundException
-	{	super.initRound();
+	{	// init control settings
+		for(int i=0;i<ins.length;i++)
+		{	List<ControlSettings> cs = (List<ControlSettings>) ins[i].readObject();
+			controlSettings.add(cs);
+		}
 	
 		// start threads
 		readers = new RunnableReader[ins.length];
@@ -80,15 +93,20 @@ public class NetInputServerStream extends InputServerStream
 	/////////////////////////////////////////////////////////////////
 	// STREAMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private ObjectInputStream[] ins;
 	private List<Socket> sockets = null;
 
-	@Override
 	public void initStreams() throws IOException
 	{	for(int i=0;i<sockets.size();i++)
 		{	Socket socket = sockets.get(i);
 			InputStream in = socket.getInputStream();
 			ins[i] = new ObjectInputStream(in);
 		}
+	}
+
+	public void close() throws IOException
+	{	for(ObjectInputStream ooi: ins)
+			ooi.close();
 	}
 
 	public int getSize()
@@ -108,11 +126,13 @@ public class NetInputServerStream extends InputServerStream
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
+	protected boolean finished = false;
+
 	public void finish()
 	{	if(!finished)
-		{	super.finish();
-			
+		{	finished = true;
+		
+			controlSettings.clear();
 			sockets.clear();
 			readers = null;
 		}

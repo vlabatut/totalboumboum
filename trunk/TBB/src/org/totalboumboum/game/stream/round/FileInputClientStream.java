@@ -30,15 +30,21 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
-import org.totalboumboum.game.stream.InputClientStream;
+import org.totalboumboum.game.limit.Limits;
+import org.totalboumboum.game.limit.RoundLimit;
+import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
-public class FileInputClientStream extends InputClientStream
-{	
+public class FileInputClientStream
+{	private final boolean verbose = false;
+	
 	public FileInputClientStream()
 	{	super();
 	}
@@ -48,6 +54,60 @@ public class FileInputClientStream extends InputClientStream
 		this.folder = folder;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ZOOM					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Double zoomCoef = null;
+
+	public double getZoomCoef()
+	{	return zoomCoef;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PROFILES				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<Profile> profiles = null;
+
+	public List<Profile> getProfiles()
+	{	return profiles;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// INFO					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private LevelInfo levelInfo = null;
+
+	public LevelInfo getLevelInfo()
+	{	return levelInfo;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// LIMITS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Limits<RoundLimit> roundLimits = null;
+
+	public Limits<RoundLimit> getRoundLimits()
+	{	return roundLimits;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ITEMS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<String,Integer> itemCounts = null;
+
+	public HashMap<String,Integer> getItemCounts()
+	{	return itemCounts;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STATS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private StatisticRound roundStats = null;
+	
+	public StatisticRound getRoundStats()
+	{	return roundStats;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FOLDER				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -77,8 +137,8 @@ public class FileInputClientStream extends InputClientStream
 	/////////////////////////////////////////////////////////////////
 	// LEVEL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected String levelName;
-	protected String levelPack;
+	private String levelName;
+	private String levelPack;
 	
 	public void setLevelName(String name)
 	{	this.levelName = name;
@@ -99,7 +159,7 @@ public class FileInputClientStream extends InputClientStream
 	/////////////////////////////////////////////////////////////////
 	// DATE					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected Date saveDate;
+	private Date saveDate;
 	
 	public void setSaveDate(Date save)
 	{	this.saveDate = save;
@@ -112,7 +172,7 @@ public class FileInputClientStream extends InputClientStream
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected final List<String> players = new ArrayList<String>();
+	private final List<String> players = new ArrayList<String>();
 	
 	public void addPlayer(String player)
 	{	players.add(player);
@@ -128,7 +188,6 @@ public class FileInputClientStream extends InputClientStream
 	/**
 	 * reads an event in the currently open stream.
 	 */
-	@Override
 	public ReplayEvent readEvent()
 	{	ReplayEvent result = null;
 		
@@ -156,20 +215,26 @@ public class FileInputClientStream extends InputClientStream
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	@Override
+	@SuppressWarnings("unchecked")
 	public void initRound() throws IOException, ClassNotFoundException
-	{	super.initRound();
+	{	profiles = (List<Profile>) in.readObject();
+		levelInfo = (LevelInfo) in.readObject();
+		roundLimits = (Limits<RoundLimit>) in.readObject();		
+		itemCounts = (HashMap<String,Integer>) in.readObject();		
+		zoomCoef = (Double) in.readObject();
 	}
 
-	@Override
 	public void finishRound() throws IOException, ClassNotFoundException
-	{	super.finishRound();
+	{	if(verbose)
+			System.out.println("reading: stats");
+		roundStats = (StatisticRound) in.readObject();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// STREAMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
+	private ObjectInputStream in = null;
+
 	public void initStreams() throws IOException
 	{	String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
 		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
@@ -181,14 +246,28 @@ public class FileInputClientStream extends InputClientStream
 		in = new ObjectInputStream(inBuff);
 	}
 
+	public void close() throws IOException
+	{	in.close();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
+	private boolean finished = false;
+
 	public void finish()
 	{	if(!finished)
-		{	super.finish();
+		{	finished = true;
 			
+			in = null;
+			
+			itemCounts = null;
+			levelInfo = null;
+			profiles = null;
+			roundLimits = null;
+			roundStats = null;
+			zoomCoef = null;
+	
 			folder = null;
 			preview = null;
 			levelName = null;
