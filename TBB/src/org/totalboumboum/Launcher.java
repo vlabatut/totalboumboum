@@ -1290,7 +1290,7 @@ public class Launcher
 	 * TODO
 	 * - créer un reader/writer tournoi qui prend tous les flux existants
 	 * - capable de creer les reader/writer matches + convertisseurs d"adresses", avec seulement les flux nécessaires
-	 * - éventuellement virer les classes abstraites des w/r car finalement les différentes classes filles sont bien différentiées
+	 * + éventuellement virer les classes abstraites des w/r car finalement les différentes classes filles sont bien différentiées
 	 * - au niveau match, y aura un initRound et un initMatch (?)
 	 */
 }

@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.match;
+package org.totalboumboum.game.stream;
 
 /*
  * Total Boum Boum
@@ -22,53 +22,71 @@ package org.totalboumboum.game.stream.match;
  */
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class RunnableReader<T extends Object> extends Thread
+public class RunnableWriter extends Thread
 {
-	public RunnableReader(ObjectInputStream in)
-	{	this.in = in;
+	public RunnableWriter(ObjectOutputStream out)
+	{	this.out = out;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@SuppressWarnings("unchecked")
 	@Override
 	public void run()
 	{	while(!Thread.interrupted())
-		{	try
-			{	Object object = in.readObject();
-				T obj = (T) object;
-				addEvent(obj);
+		{	// wait for some objects to write
+			while(isEmpty())
+			{	try
+				{	wait();
+				}
+				catch (InterruptedException e)
+				{	//e.printStackTrace();
+				}
 			}
-			catch (ClassNotFoundException e)
-			{	e.printStackTrace();
+			// write the first object
+			try
+			{	Object object = getObject();
+				out.writeObject(object);
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
 			}
 		}
+/*	
+		try
+		{	out.close();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+*/
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ObjectInputStream in;
+	private ObjectOutputStream out;
 
 	/////////////////////////////////////////////////////////////////
 	// DATA					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Queue<T> data = new LinkedList<T>();
+	private Queue<Object> data = new LinkedList<Object>();
 	
-	public synchronized T getData()
-	{	T result = data.poll();
+	private synchronized boolean isEmpty()
+	{	boolean result = data.isEmpty();
 		return result;
 	}
 	
-	private synchronized void addEvent(T event)
-	{	data.offer(event);
+	private synchronized Object getObject()
+	{	Object result = data.poll();
+		return result;
+	}
+	
+	public synchronized void addObject(Object object)
+	{	data.offer(object);
 	}
 }

@@ -46,7 +46,7 @@ public class FileInputClientStream
 {	private final boolean verbose = false;
 	
 	public FileInputClientStream()
-	{	super();
+	{	
 	}
 	
 	public FileInputClientStream(String folder)
