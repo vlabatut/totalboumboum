@@ -1291,6 +1291,16 @@ public class Launcher
 	 * - créer un reader/writer tournoi qui prend tous les flux existants
 	 * - capable de creer les reader/writer matches + convertisseurs d"adresses", avec seulement les flux nécessaires
 	 * + éventuellement virer les classes abstraites des w/r car finalement les différentes classes filles sont bien différentiées
+	 * - créer la classe ServerConnection, symétrique de ClientConnection
+	 * - virer l'aspect générique de RunnableReader
 	 * - au niveau match, y aura un initRound et un initMatch (?)
+	 */
+	
+	/*
+	 * TODO
+	 * ça serait bien d'avoir une factory qui initialise les connexions des clients
+	 * de façon asynchrone, histoire 
+	 * 		1) de pas tout bloquer chez le serveur
+	 * 		2) que les autres clients puissent se connecter en même temps
 	 */
 }
