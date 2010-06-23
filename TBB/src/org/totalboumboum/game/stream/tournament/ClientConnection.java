@@ -25,24 +25,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
+import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.engine.container.level.info.LevelInfo;
-import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
-import org.totalboumboum.game.limit.Limits;
-import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.stream.RunnableReader;
-import org.totalboumboum.statistics.detailed.StatisticRound;
+import org.totalboumboum.game.stream.RunnableWriter;
 
-public class GameConnection
+public class ClientConnection
 {	
-	public GameConnection(Socket socket)
-	{	
-		//TODO ça serait bien d'avoir une factory qui fait ça de façon asynchrone
+	public ClientConnection(Socket socket)
+	{	this.socket = socket;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -55,13 +51,49 @@ public class GameConnection
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// CONTROL SETTINGS		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final List<ControlSettings> controlSettings = new ArrayList<ControlSettings>();
+
+	public List<ControlSettings> getControlSettings()
+	{	return controlSettings;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Socket socket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
 	
+	public void initStreams() throws IOException
+	{	// create streams
+		InputStream is = socket.getInputStream();
+		in = new ObjectInputStream(is);
+		OutputStream os = socket.getOutputStream();
+		out = new ObjectOutputStream(os);
+
+		//TODO lire les trucs d'init (profils/cs)
+
+		// create threads
+		reader = new RunnableReader<Object>(in);
+		reader.start();
+		writer = new RunnableWriter(out);
+		writer.start();
+	}
+
+	public void close() throws IOException
+	{	reader.interrupt();
+		in.close();
+		
+	}
 	
+	/////////////////////////////////////////////////////////////////
+	// THREADS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private RunnableReader<Object> reader = null;
+	private RunnableWriter writer = null;
+
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -71,17 +103,15 @@ public class GameConnection
 	{	if(!finished)
 		{	finished = true;
 			
-			in = null;
-		
-			itemCounts = null;
-			levelInfo = null;
-			profiles = null;
-			roundLimits = null;
-			roundStats = null;
-			zoomCoef = null;
+			profiles.clear();
+			controlSettings.clear();
 	
+			in = null;
+			out = null;
+
 			socket = null;
 			reader = null;
+			writer = null;
 		}
 	}
 }
