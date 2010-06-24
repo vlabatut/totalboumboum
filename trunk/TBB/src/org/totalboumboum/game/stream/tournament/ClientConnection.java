@@ -45,6 +45,12 @@ public class ClientConnection
 	{	this.socket = socket;
 	}
 
+	public void initConnection()
+	{
+		//TODO load control settings
+		// the profiles must be loaded one by one. a scenario must be defined first
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -54,7 +60,9 @@ public class ClientConnection
 	@SuppressWarnings("unchecked")
 	public void initTournament() throws IOException, ClassNotFoundException
 	{	profiles = (List<Profile>) in.readObject();
-		controlSettings = (List<ControlSettings>) in.readObject(); 
+		controlSettings = (List<ControlSettings>) in.readObject();
+		//TODO should only consist in sending tournament to the clients
+		// and maybe loading the control settings? in which case there'll be nothing in initConnection
 	}
 	
 	public void updateTournament()
@@ -95,6 +103,11 @@ public class ClientConnection
 
 	public List<Profile> getProfiles()
 	{	return profiles;
+	}
+	
+	public void addProfile(Profile profile)
+	{
+		// TODO listening to the reader?
 	}
 
 	/////////////////////////////////////////////////////////////////
