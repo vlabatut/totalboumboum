@@ -23,7 +23,9 @@ package org.totalboumboum.game.stream;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class RunnableReader<T extends Object> extends Thread
@@ -42,7 +44,7 @@ public class RunnableReader<T extends Object> extends Thread
 		{	try
 			{	Object object = in.readObject();
 				T obj = (T) object;
-				addEvent(obj);
+				addData(obj);
 			}
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
@@ -68,7 +70,13 @@ public class RunnableReader<T extends Object> extends Thread
 		return result;
 	}
 	
-	private synchronized void addEvent(T event)
+	public synchronized List<T> getAllData()
+	{	List<T> result = new ArrayList<T>(data);
+		data.clear();
+		return result;
+	}
+	
+	private synchronized void addData(T event)
 	{	data.offer(event);
 	}
 }

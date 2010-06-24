@@ -35,13 +35,13 @@ import org.totalboumboum.game.stream.RunnableReader;
 import org.totalboumboum.game.stream.RunnableWriter;
 
 /**
- * represents a server-side connection with a client
+ * represents a client-side connection with a server
  * @author Vincent
  *
  */
-public class ClientConnection
+public class ServerConnection
 {	
-	public ClientConnection(Socket socket)
+	public ServerConnection(Socket socket)
 	{	this.socket = socket;
 	}
 
@@ -49,12 +49,11 @@ public class ClientConnection
 	// TOURNAMENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * NOTE to be done before starting the thread or it won't work...
+	 * NOTE to be done after starting the thread or it won't work...
 	 */
-	@SuppressWarnings("unchecked")
-	public void initTournament() throws IOException, ClassNotFoundException
-	{	profiles = (List<Profile>) in.readObject();
-		controlSettings = (List<ControlSettings>) in.readObject(); 
+	public void initTournament(List<Profile> profiles, List<ControlSettings> controlSettings) throws IOException, ClassNotFoundException
+	{	writer.addObject(profiles);
+		writer.addObject(controlSettings);
 	}
 	
 	public void updateTournament()
@@ -86,24 +85,6 @@ public class ClientConnection
 	public void updateRound()
 	{
 		//TODO
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PROFILES				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<Profile> profiles;
-
-	public List<Profile> getProfiles()
-	{	return profiles;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CONTROL SETTINGS		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<ControlSettings> controlSettings;
-
-	public List<ControlSettings> getControlSettings()
-	{	return controlSettings;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -163,9 +144,6 @@ public class ClientConnection
 	{	if(!finished)
 		{	finished = true;
 			
-			profiles.clear();
-			controlSettings.clear();
-	
 			in = null;
 			out = null;
 
