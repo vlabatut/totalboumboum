@@ -43,6 +43,11 @@ import org.totalboumboum.engine.content.manager.modulation.EmptyModulationManage
 import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.game.round.RoundVariables;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class SpriteFactory<T extends Sprite> extends AbstractSpriteFactory<T,GesturePack>
 {	
 	/////////////////////////////////////////////////////////////////

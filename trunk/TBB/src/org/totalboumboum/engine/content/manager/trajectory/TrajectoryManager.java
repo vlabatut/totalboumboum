@@ -29,11 +29,11 @@ import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
-/*
- * TODO nettoyer les 2 trajectoryMgr de manière à mutualiser l'essentiel
- * créer le ReplayTM , version simplifiée ne gérant que la position et pas les trajectoires
+/**
+ * 
+ * @author Vincent Labatut
+ *
  */
-
 public abstract class TrajectoryManager
 {
 	/////////////////////////////////////////////////////////////////

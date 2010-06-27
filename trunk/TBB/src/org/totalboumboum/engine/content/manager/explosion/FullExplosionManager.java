@@ -38,6 +38,11 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.game.round.RoundVariables;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FullExplosionManager extends ExplosionManager
 {	
 	public FullExplosionManager(Sprite sprite)

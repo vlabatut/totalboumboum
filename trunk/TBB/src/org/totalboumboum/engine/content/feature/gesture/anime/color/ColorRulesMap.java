@@ -26,6 +26,11 @@ import java.util.HashMap;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ColorRulesMap implements Serializable
 {	private static final long serialVersionUID = 1L;
 

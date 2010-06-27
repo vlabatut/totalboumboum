@@ -40,6 +40,11 @@ import org.totalboumboum.engine.loop.RegularLoop;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.images.ImageTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AnimeManager
 {	
 	public AnimeManager(Sprite sprite)

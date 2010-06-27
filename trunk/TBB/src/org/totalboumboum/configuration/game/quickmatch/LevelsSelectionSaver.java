@@ -24,7 +24,11 @@ package org.totalboumboum.configuration.game.quickmatch;
 import org.jdom.Element;
 import org.totalboumboum.tools.xml.XmlNames;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LevelsSelectionSaver
 {	
 	public static void saveLevelsSelection(Element result, LevelsSelection levelsSelection)

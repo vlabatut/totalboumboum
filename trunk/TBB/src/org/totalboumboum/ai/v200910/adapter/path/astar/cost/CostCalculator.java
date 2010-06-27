@@ -26,8 +26,12 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 
 /**
+ * 
  * permet de définir une fonction de cout utilisée lors de la recherche
  * avec l'algorithme A*
+ * 
+ * @author Vincent Labatut
+ *
  */
 public abstract class CostCalculator
 {

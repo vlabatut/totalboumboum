@@ -33,10 +33,9 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
  * en train de glisser (SLIDING), ou bien à un joueur en train de pousser 
  * une bombe (PUSHING), etc.
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public enum AiStateName
 {
 	// equivalent gesture: BURNING

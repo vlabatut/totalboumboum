@@ -29,7 +29,11 @@ import org.jdom.Element;
 import org.totalboumboum.engine.container.level.zone.ZoneLoader;
 import org.totalboumboum.tools.xml.XmlNames;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class VariableTilesLoader
 {	
     @SuppressWarnings("unchecked")

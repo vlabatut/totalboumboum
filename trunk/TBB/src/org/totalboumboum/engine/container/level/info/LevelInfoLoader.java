@@ -33,6 +33,11 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LevelInfoLoader
 {	
 	public static LevelInfo loadLevelInfo(String pack, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

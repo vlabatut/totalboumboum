@@ -28,6 +28,11 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FullDelayManager extends DelayManager
 {	
 	public FullDelayManager(Sprite sprite)

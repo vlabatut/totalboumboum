@@ -25,6 +25,11 @@ import java.io.Serializable;
 
 import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class TrajectoryDirection extends AbstractTrajectoryDirection<TrajectoryStep> implements Serializable
 {	private static final long serialVersionUID = 1L;
 	

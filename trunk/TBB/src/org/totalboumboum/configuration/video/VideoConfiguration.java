@@ -25,6 +25,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class VideoConfiguration
 {
 	public VideoConfiguration copy()

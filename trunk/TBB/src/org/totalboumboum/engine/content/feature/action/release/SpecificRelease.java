@@ -25,6 +25,11 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SpecificRelease extends SpecificAction
 {
 	public SpecificRelease(Sprite actor, Sprite target)

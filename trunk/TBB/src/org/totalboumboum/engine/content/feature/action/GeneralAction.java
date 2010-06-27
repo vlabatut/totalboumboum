@@ -39,6 +39,9 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * Instances must by subsumed by the class, they fit stricter situations,
  * usually user-defined to be used in abilities and modulations.
  * SpecificActions represent in-game specific situations. 
+ * 
+ * @author Vincent Labatut
+ *
  */
 public abstract class GeneralAction implements Serializable
 {	private static final long serialVersionUID = 1L;

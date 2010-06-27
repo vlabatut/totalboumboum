@@ -32,6 +32,11 @@ import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.game.stream.match.NetInputServerStream;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class RemotePlayerControl
 {	
 	public RemotePlayerControl(NetInputServerStream in)

@@ -24,6 +24,11 @@ package org.totalboumboum.engine.loop.event.replay.sprite;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SpriteChangePositionEvent extends SpriteChangeEvent
 {	private static final long serialVersionUID = 1L;
 

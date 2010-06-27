@@ -58,10 +58,9 @@ import org.totalboumboum.tools.calculus.CalculusTools;
  * les autres objets. Si l'IA a besoin d'une trace des états précédents du jeu, son
  * concepteur doit se charger de l'implémenter lui-même.
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class AiZone
 {	
 	/**

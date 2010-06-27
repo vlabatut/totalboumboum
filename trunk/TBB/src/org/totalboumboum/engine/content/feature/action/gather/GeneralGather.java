@@ -73,7 +73,9 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>contact:		collision or intersection
  * 	<br>tilePosition:	same
  * 	<br>orientation:	any or undefined
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class GeneralGather extends GeneralAction
 {	private static final long serialVersionUID = 1L;

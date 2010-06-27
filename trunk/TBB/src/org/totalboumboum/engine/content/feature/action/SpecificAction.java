@@ -28,6 +28,11 @@ import org.totalboumboum.engine.content.feature.Orientation;
 import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class SpecificAction
 {	
 	protected SpecificAction(ActionName name, Sprite actor)

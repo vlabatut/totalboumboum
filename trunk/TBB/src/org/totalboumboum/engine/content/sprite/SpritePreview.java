@@ -27,7 +27,11 @@ import java.util.Map.Entry;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SpritePreview
 {
 	/////////////////////////////////////////////////////////////////

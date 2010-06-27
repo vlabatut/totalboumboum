@@ -32,6 +32,11 @@ import org.totalboumboum.engine.content.sprite.block.HollowBlockFactory;
 import org.totalboumboum.engine.content.sprite.floor.FloorFactory;
 import org.totalboumboum.engine.content.sprite.floor.HollowFloorFactory;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowTheme extends AbstractTheme implements Serializable, CachableSpriteContainer
 {	private static final long serialVersionUID = 1L;
 

@@ -31,6 +31,11 @@ import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.tools.images.MessageDisplayer;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplayMessage implements Display
 {
 	public DisplayMessage(VisibleLoop loop)

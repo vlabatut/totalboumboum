@@ -39,6 +39,11 @@ import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Bombset extends AbstractBombset
 {	
 	/////////////////////////////////////////////////////////////////

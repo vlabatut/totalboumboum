@@ -37,6 +37,11 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LevelPreviewLoader
 {	private static boolean previewItemset;
 	private static boolean previewPlayers;

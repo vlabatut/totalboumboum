@@ -28,6 +28,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FiresetMap extends AbstractFiresetMap<Fireset>
 {	
 	/////////////////////////////////////////////////////////////////

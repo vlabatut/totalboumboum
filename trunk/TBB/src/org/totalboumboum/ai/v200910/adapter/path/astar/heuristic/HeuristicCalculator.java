@@ -26,10 +26,13 @@ import java.util.List;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
-
 /**
+ * 
  * permet de définir une fonction heuristique utilisée par l'algorithme
  * A* lors de la recherche d'un plus court chemin.
+ * 
+ * @author Vincent Labatut
+ *
  */
 public abstract class HeuristicCalculator
 {

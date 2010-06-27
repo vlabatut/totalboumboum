@@ -45,7 +45,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * De plus, cette fonction doit également apparaître au début de chaque boucle
  * définie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
  *  
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 public abstract class ArtificialIntelligence implements Callable<AiAction>

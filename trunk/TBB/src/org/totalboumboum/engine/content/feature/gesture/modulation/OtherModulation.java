@@ -1,12 +1,5 @@
 package org.totalboumboum.engine.content.feature.gesture.modulation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.totalboumboum.engine.content.feature.Contact;
-import org.totalboumboum.engine.content.feature.TilePosition;
-import org.totalboumboum.engine.content.sprite.Sprite;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -28,6 +21,18 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * 
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.totalboumboum.engine.content.feature.Contact;
+import org.totalboumboum.engine.content.feature.TilePosition;
+import org.totalboumboum.engine.content.sprite.Sprite;
+
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class OtherModulation extends AbstractStateModulation
 {	private static final long serialVersionUID = 1L;
 

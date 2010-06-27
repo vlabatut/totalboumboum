@@ -42,6 +42,11 @@ import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplayAisPaths implements Display
 {
 	public DisplayAisPaths(InteractiveLoop loop)

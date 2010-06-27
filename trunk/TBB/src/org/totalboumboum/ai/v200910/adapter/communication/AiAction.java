@@ -32,7 +32,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * L'action et la direction sont toutes les deux constantes, respectivement
  * de classes AiActionName et Direction.
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 public class AiAction

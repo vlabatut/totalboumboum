@@ -27,7 +27,11 @@ import java.util.List;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.tools.GameData;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class QuickMatchConfiguration
 {
 	public QuickMatchConfiguration copy()

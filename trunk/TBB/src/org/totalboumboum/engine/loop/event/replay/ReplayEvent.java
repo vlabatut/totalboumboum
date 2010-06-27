@@ -23,6 +23,11 @@ package org.totalboumboum.engine.loop.event.replay;
 
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ReplayEvent extends StreamedEvent
 {	private static final long serialVersionUID = 1L;
 	

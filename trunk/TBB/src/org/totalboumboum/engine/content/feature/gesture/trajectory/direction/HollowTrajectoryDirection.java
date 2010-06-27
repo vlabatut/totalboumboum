@@ -26,6 +26,11 @@ import java.util.Iterator;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.step.HollowTrajectoryStep;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.step.TrajectoryStep;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowTrajectoryDirection extends AbstractTrajectoryDirection<HollowTrajectoryStep>
 {	
 	/////////////////////////////////////////////////////////////////

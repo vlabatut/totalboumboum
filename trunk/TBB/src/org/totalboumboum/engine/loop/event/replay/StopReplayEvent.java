@@ -21,6 +21,11 @@ package org.totalboumboum.engine.loop.event.replay;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class StopReplayEvent extends ReplayEvent
 {	private static final long serialVersionUID = 1L;
 	

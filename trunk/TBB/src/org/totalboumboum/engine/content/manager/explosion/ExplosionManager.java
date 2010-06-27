@@ -27,6 +27,11 @@ import org.totalboumboum.engine.container.explosionset.Explosion;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ExplosionManager
 {	
 	public ExplosionManager(Sprite sprite)

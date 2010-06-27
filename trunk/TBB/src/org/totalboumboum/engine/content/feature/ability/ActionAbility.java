@@ -25,6 +25,11 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ActionAbility extends AbstractAbility
 {	private static final long serialVersionUID = 1L;
 	

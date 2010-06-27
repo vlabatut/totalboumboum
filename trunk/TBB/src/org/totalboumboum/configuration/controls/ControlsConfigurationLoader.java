@@ -31,7 +31,11 @@ import org.totalboumboum.configuration.controls.ControlSettingsLoader;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ControlsConfigurationLoader
 {	
 	public static ControlsConfiguration loadControlsConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException

@@ -1,7 +1,5 @@
 package org.totalboumboum.engine.content.feature.gesture;
 
-import java.io.Serializable;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -23,6 +21,13 @@ import java.io.Serializable;
  * 
  */
 
+import java.io.Serializable;
+
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public enum GestureName implements Serializable
 {	
 	/** the sprite is suddenly appearing in the zone */

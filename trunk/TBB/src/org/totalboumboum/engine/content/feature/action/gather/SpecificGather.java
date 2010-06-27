@@ -35,7 +35,9 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>contact:		collision or intersection
  * 	<br>tilePosition:	same
  * 	<br>orientation:	any or undefined
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class SpecificGather extends SpecificAction
 {

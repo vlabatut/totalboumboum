@@ -29,6 +29,11 @@ import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMa
 import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.HollowStepImage;
 import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowAnimeStep extends AbstractAnimeStep<HollowStepImage> implements Serializable
 {	private static final long serialVersionUID = 1L;
 

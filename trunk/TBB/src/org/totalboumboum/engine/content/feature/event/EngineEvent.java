@@ -24,6 +24,11 @@ package org.totalboumboum.engine.content.feature.event;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class EngineEvent extends AbstractEvent
 {	
     /////////////////////////////////////////////////////////////////

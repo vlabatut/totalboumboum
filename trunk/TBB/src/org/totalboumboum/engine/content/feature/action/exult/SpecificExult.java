@@ -35,7 +35,9 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>contact:		none
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class SpecificExult extends SpecificAction
 {

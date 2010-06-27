@@ -23,6 +23,9 @@ package org.totalboumboum.ai.v201011.adapter.data;
 
 /**
  * types de blocages possibles pour un sprite
+ * 
+ * @author Vincent Labatut
+ *
  */
 public enum AiStopType
 {

@@ -42,6 +42,11 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowFireFactoryLoader extends HollowSpriteFactoryLoader
 {	
 	public static HollowFireFactory loadFireFactory(String folderPath, HashMap<String, HollowFireFactory> abstractFires, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

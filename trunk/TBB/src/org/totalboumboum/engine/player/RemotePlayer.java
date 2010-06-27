@@ -32,6 +32,11 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.control.player.RemotePlayerControl;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class RemotePlayer extends AbstractPlayer
 {	
 	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile, RemotePlayerControl controls) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

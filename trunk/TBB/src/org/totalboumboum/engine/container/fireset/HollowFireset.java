@@ -29,6 +29,11 @@ import java.util.Map.Entry;
 import org.totalboumboum.engine.content.sprite.fire.FireFactory;
 import org.totalboumboum.engine.content.sprite.fire.HollowFireFactory;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowFireset extends AbstractFireset implements Serializable
 {	private static final long serialVersionUID = 1L;
 

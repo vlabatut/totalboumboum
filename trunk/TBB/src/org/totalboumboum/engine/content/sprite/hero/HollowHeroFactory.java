@@ -29,6 +29,11 @@ import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.HollowSpriteFactory;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowHeroFactory extends HollowSpriteFactory<Hero> implements CachableSpriteContainer
 {	private static final long serialVersionUID = 1L;
 

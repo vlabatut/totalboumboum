@@ -24,6 +24,8 @@ package org.totalboumboum.ai.v201011.adapter.data;
 /**
  * types d'items reconnus par l'IA.
  * 	
+ * @author Vincent Labatut
+ *
  */
 public enum AiItemType
 {

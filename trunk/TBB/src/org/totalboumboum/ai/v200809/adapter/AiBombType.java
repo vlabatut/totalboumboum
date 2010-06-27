@@ -22,8 +22,11 @@ package org.totalboumboum.ai.v200809.adapter;
  */
 
 /**
+ * 
  * types de bombes reconnus par l'IA.
  * 	
+ * @author Vincent Labatut
+ *
  */
 public enum AiBombType
 {

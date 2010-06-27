@@ -30,6 +30,11 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ProfileSaver
 {	
 	public static void saveProfile(Profile profile, Integer id) throws IOException

@@ -33,7 +33,11 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalculator;
 
 /**
- * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
+ * 
+ * Représente un noeud dans l'arbre de recherche développé par l'algorithme A*
+ *  
+ * @author Vincent Labatut
+ *
  */
 public class AstarNode implements Comparable<AstarNode>
 {	

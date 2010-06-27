@@ -23,6 +23,11 @@ package org.totalboumboum.engine.content.feature.gesture.anime.step;
 
 import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AnimeStep extends AbstractAnimeStep<StepImage>
 {	
 	/////////////////////////////////////////////////////////////////

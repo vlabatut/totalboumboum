@@ -45,6 +45,11 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ExplosionsetLoader
 {	
 	public static Explosionset loadExplosionset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

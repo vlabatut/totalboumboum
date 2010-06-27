@@ -24,6 +24,11 @@ package org.totalboumboum.configuration.game.quickmatch;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LevelsSelection
 {
 	public LevelsSelection copy()

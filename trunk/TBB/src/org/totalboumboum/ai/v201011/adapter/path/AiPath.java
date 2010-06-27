@@ -29,7 +29,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AiPath
 {	
     /////////////////////////////////////////////////////////////////

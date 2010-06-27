@@ -32,6 +32,11 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AisConfiguration
 {
 	public AisConfiguration copy()

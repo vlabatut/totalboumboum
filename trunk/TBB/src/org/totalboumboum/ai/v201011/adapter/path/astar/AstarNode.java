@@ -34,6 +34,9 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalcul
 
 /**
  * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
+ * 
+ * @author Vincent Labatut
+ *
  */
 public final class AstarNode implements Comparable<AstarNode>
 {	

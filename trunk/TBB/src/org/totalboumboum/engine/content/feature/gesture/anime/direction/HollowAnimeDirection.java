@@ -27,6 +27,11 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.HollowAnimeStep;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowAnimeDirection extends AbstractAnimeDirection<HollowAnimeStep>
 {	private static final long serialVersionUID = 1L;
 

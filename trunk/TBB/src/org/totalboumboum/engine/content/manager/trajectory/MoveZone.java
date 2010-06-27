@@ -34,7 +34,11 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class MoveZone
 {	private boolean vertical;
 	

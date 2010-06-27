@@ -23,6 +23,11 @@ package org.totalboumboum.engine.loop.event.replay.sprite;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SpriteChangeAnimeEvent extends SpriteChangeEvent
 {	private static final long serialVersionUID = 1L;
 

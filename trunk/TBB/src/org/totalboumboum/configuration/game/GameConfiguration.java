@@ -25,6 +25,11 @@ import org.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import org.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GameConfiguration
 {
 	/////////////////////////////////////////////////////////////////

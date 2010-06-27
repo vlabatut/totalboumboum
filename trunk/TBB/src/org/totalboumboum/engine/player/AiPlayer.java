@@ -35,6 +35,11 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.game.stream.match.NetOutputServerStream;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AiPlayer extends ControlledPlayer
 {	
 	public AiPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException

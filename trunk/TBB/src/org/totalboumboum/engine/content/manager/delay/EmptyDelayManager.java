@@ -23,6 +23,11 @@ package org.totalboumboum.engine.content.manager.delay;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class EmptyDelayManager extends DelayManager
 {	
 	public EmptyDelayManager(Sprite sprite)

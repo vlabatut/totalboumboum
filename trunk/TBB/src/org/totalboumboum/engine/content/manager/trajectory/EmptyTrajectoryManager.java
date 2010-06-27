@@ -25,6 +25,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class EmptyTrajectoryManager extends TrajectoryManager
 {
 	public EmptyTrajectoryManager(Sprite sprite)

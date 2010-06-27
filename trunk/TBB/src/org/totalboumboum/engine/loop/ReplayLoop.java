@@ -65,6 +65,11 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ReplayLoop extends VisibleLoop
 {	private static final long serialVersionUID = 1L;
 	

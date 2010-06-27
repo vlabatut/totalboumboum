@@ -41,7 +41,11 @@ import org.totalboumboum.game.round.RoundLoader;
 import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class QuickStartConfiguration
 {
 	@SuppressWarnings("unchecked")

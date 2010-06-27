@@ -21,6 +21,11 @@ package org.totalboumboum.engine.container.fireset;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractFireset
 {	
 	/////////////////////////////////////////////////////////////////

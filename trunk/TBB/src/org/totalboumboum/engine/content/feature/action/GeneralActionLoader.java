@@ -29,6 +29,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.tools.xml.XmlNames;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GeneralActionLoader
 {		
 	public static GeneralAction loadActionElement(Element root) throws ClassNotFoundException

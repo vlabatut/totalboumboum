@@ -23,6 +23,11 @@ package org.totalboumboum.engine.content.feature.event;
 
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ControlEvent extends AbstractEvent
 {	// directions
 	public static final String DOWN = "DOWN";

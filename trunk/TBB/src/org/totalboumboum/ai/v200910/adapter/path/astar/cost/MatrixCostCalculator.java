@@ -25,6 +25,7 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 /**
+ * 
  * Classe étendant la classe abstraite CostCalculator grâce à une matrice de coûts.
  * Ici, le cout pour passer d'une case à l'autre dépend uniquement de la case
  * de destination. Ce cout est égal à la valeur associée à la case dans la matrice
@@ -35,6 +36,9 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  * aux cases qui sont à portée d'une bombe susceptibles d'exploser, ou bien 
  * un cout infini (avec Double.POSITIVE_INFINITY) aux cases qu'on veut interdire
  * au personnage parce qu'elles sont trop dangereuses. 
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class MatrixCostCalculator extends CostCalculator
 {

@@ -33,6 +33,11 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class EngineConfigurationSaver
 {	
 	public static void saveEngineConfiguration(EngineConfiguration engineConfiguration) throws ParserConfigurationException, SAXException, IOException

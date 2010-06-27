@@ -30,6 +30,11 @@ import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.HollowSpriteFactory;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowItemFactory extends HollowSpriteFactory<Item>
 {	private static final long serialVersionUID = 1L;
 

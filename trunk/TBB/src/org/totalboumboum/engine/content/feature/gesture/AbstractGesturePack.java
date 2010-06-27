@@ -23,6 +23,11 @@ package org.totalboumboum.engine.content.feature.gesture;
 
 import java.util.HashMap;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractGesturePack<T extends AbstractGesture<?,?>>
 {		
 	/////////////////////////////////////////////////////////////////

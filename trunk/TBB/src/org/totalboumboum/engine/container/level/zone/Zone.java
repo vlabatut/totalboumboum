@@ -31,6 +31,11 @@ import java.util.Map.Entry;
 import org.totalboumboum.engine.container.level.variabletile.ValueTile;
 import org.totalboumboum.engine.container.level.variabletile.VariableTile;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Zone implements Serializable
 {	private static final long serialVersionUID = 1L;
 	

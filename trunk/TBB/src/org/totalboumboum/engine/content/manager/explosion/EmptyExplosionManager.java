@@ -27,6 +27,11 @@ import java.util.List;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class EmptyExplosionManager extends ExplosionManager
 {	
 	public EmptyExplosionManager(Sprite sprite)

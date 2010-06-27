@@ -29,7 +29,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * Le paramètre T détermine le type de sprite représenté : bloc, bombe,
  * feu, sol, personnage ou item. 
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  * @param <T>	type de sprite représenté
  */

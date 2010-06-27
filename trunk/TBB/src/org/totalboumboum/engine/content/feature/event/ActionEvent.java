@@ -23,6 +23,11 @@ package org.totalboumboum.engine.content.feature.event;
 
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ActionEvent extends AbstractEvent
 {	
 	private SpecificAction action;

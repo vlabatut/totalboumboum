@@ -1,7 +1,5 @@
 package org.totalboumboum.engine.content.feature.gesture.modulation;
 
-import org.totalboumboum.engine.content.feature.ability.StateAbility;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -23,6 +21,13 @@ import org.totalboumboum.engine.content.feature.ability.StateAbility;
  * 
  */
 
+import org.totalboumboum.engine.content.feature.ability.StateAbility;
+
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AbstractStateModulation extends AbstractModulation
 {	private static final long serialVersionUID = 1L;
 

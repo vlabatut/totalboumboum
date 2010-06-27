@@ -36,6 +36,11 @@ import org.totalboumboum.engine.content.manager.delay.DelayManager;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class BlockEventManager extends EventManager
 {
 	public BlockEventManager(Block sprite)

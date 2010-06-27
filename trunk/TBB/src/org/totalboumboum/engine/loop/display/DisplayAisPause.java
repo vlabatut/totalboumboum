@@ -33,6 +33,11 @@ import org.totalboumboum.engine.loop.InteractiveLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplayAisPause implements Display
 {
 	public DisplayAisPause(InteractiveLoop loop)

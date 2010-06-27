@@ -23,8 +23,10 @@ package org.totalboumboum.ai.v201011.adapter.communication;
 
 /**
  * exception levée par l'IA quand le moteur du jeu lui demande de se terminer. 
+ * 
+ * @author Vincent Labatut
+ *
  */
-
 public class StopRequestException extends Exception
 {	private static final long serialVersionUID = 1L;	
 }

@@ -38,6 +38,11 @@ import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplayAisColors implements Display
 {
 	public DisplayAisColors(InteractiveLoop loop)

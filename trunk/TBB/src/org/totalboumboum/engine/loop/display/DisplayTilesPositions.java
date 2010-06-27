@@ -32,6 +32,11 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplayTilesPositions implements Display
 {
 	public DisplayTilesPositions(VisibleLoop loop)

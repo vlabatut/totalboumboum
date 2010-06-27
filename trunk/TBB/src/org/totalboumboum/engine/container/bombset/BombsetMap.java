@@ -31,6 +31,11 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class BombsetMap
 {	private static final long serialVersionUID = 1L;
 

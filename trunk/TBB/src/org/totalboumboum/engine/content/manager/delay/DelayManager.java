@@ -27,6 +27,11 @@ import java.util.List;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class DelayManager
 {	
 	public static final String DL_DEFEAT = "DL_DEFEAT";

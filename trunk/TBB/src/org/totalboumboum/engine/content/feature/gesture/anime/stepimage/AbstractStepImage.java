@@ -21,6 +21,11 @@ package org.totalboumboum.engine.content.feature.gesture.anime.stepimage;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractStepImage
 {	
 	public AbstractStepImage(double xShift, double yShift)

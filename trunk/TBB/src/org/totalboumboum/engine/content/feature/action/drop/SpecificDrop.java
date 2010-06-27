@@ -35,7 +35,9 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>contact:		none (the target is not supposed to be ongame)
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class SpecificDrop extends SpecificAction
 {

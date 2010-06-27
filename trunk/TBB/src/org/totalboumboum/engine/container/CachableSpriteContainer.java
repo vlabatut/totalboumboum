@@ -21,6 +21,11 @@ package org.totalboumboum.engine.container;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface CachableSpriteContainer
 {
 

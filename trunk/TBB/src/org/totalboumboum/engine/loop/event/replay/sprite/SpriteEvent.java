@@ -25,6 +25,11 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class SpriteEvent extends ReplayEvent
 {	private static final long serialVersionUID = 1L;
 

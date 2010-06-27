@@ -23,6 +23,11 @@ package org.totalboumboum.engine.container.level.variabletile;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ValueTile implements Serializable
 {	private static final long serialVersionUID = 1L;
 

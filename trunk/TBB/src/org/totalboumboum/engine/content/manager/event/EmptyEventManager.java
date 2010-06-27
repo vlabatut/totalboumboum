@@ -26,6 +26,11 @@ import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class EmptyEventManager extends EventManager
 {		
 	public EmptyEventManager(Sprite sprite)

@@ -31,6 +31,11 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AiOutput
 {
 	public AiOutput(AiZone zone)

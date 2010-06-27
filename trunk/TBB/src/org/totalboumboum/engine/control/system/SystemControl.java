@@ -27,6 +27,11 @@ import java.util.HashMap;
 
 import org.totalboumboum.engine.loop.VisibleLoop;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class SystemControl implements KeyListener
 {	
 	public SystemControl(VisibleLoop loop)

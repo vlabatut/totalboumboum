@@ -30,8 +30,8 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.path.astar.AstarNode;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
+ * 
  * implémentation la plus simple d'une fonction successeur : 
  * on prend les 4 cases voisines, en ne gardant que celles qui sont traversables
  * par le personnage considéré.
@@ -40,6 +40,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * courante, et à vérifier qu'aucune bombe ne sera en train d'exploser dans les cases voisines
  * quand le joueur y sera. En d'autres termes, on peut calculer si le joueur a le temps
  * de passer sur une case avant qu'elle ne soit prise dans une explosion.
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class BasicSuccessorCalculator extends SuccessorCalculator
 {

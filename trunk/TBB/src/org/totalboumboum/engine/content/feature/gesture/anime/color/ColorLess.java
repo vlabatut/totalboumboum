@@ -21,6 +21,11 @@ package org.totalboumboum.engine.content.feature.gesture.anime.color;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ColorLess extends ColorRule
 {	private static final long serialVersionUID = 1L;
 

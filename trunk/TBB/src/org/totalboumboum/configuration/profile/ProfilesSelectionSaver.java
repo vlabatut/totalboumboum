@@ -24,7 +24,11 @@ package org.totalboumboum.configuration.profile;
 import org.jdom.Element;
 import org.totalboumboum.tools.xml.XmlNames;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ProfilesSelectionSaver
 {	
 	public static void saveProfilesSelection(Element result, ProfilesSelection profilesSelection)

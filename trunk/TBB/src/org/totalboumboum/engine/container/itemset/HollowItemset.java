@@ -30,6 +30,11 @@ import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.content.sprite.item.HollowItemFactory;
 import org.totalboumboum.engine.content.sprite.item.ItemFactory;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowItemset extends AbstractItemset implements Serializable, CachableSpriteContainer
 {	private static final long serialVersionUID = 1L;
 

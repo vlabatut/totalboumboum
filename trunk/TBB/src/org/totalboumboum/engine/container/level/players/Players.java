@@ -29,7 +29,11 @@ import java.util.Set;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.tools.GameData;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Players implements Serializable
 {	private static final long serialVersionUID = 1L;
 

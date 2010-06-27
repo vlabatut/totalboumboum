@@ -21,6 +21,11 @@ package org.totalboumboum.engine.container.itemset;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractItemset
 {	
 

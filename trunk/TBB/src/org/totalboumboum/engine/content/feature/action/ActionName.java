@@ -19,7 +19,11 @@ import org.totalboumboum.engine.content.feature.action.release.GeneralRelease;
 import org.totalboumboum.engine.content.feature.action.transmit.GeneralTransmit;
 import org.totalboumboum.engine.content.feature.action.trigger.GeneralTrigger;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public enum ActionName implements Serializable
 {
 	/** appearing in a tile, coming from nowhere (after a teleport, a drop, at the begining of a round, etc) */

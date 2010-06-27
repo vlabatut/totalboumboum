@@ -1,15 +1,5 @@
 package org.totalboumboum.engine.content.feature;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import org.jdom.Attribute;
-import org.jdom.Element;
-import org.totalboumboum.tools.xml.XmlNames;
-
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -31,8 +21,20 @@ import org.totalboumboum.tools.xml.XmlNames;
  * 
  */
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import org.jdom.Attribute;
+import org.jdom.Element;
+import org.totalboumboum.tools.xml.XmlNames;
+
 /**
  * represents the role of the actor or the target during an action.
+ * 
+ * @author Vincent Labatut
+ *
  */
 public enum Role implements Serializable
 {	/** no object required (likely: no target) */

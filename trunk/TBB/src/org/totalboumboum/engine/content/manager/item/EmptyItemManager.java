@@ -24,6 +24,11 @@ package org.totalboumboum.engine.content.manager.item;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.item.Item;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class EmptyItemManager extends ItemManager
 {	
 	public EmptyItemManager(Sprite sprite)

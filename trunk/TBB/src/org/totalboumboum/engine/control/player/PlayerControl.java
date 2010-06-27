@@ -26,6 +26,11 @@ import java.awt.event.KeyListener;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.player.ControlledPlayer;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class PlayerControl implements KeyListener
 {	
 	public PlayerControl(ControlledPlayer player)

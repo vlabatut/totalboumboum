@@ -25,6 +25,11 @@ import java.io.Serializable;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ColorRule implements Serializable
 {	private static final long serialVersionUID = 1L;
 

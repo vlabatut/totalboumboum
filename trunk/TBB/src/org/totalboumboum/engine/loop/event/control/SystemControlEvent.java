@@ -21,6 +21,11 @@ package org.totalboumboum.engine.loop.event.control;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SystemControlEvent
 {	private static final long serialVersionUID = 1L;
 	

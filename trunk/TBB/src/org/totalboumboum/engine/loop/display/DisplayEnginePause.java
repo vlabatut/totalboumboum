@@ -30,6 +30,11 @@ import java.awt.geom.Rectangle2D;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplayEnginePause implements Display
 {
 	public DisplayEnginePause(VisibleLoop loop)

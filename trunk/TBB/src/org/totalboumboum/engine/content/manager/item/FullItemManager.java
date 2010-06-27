@@ -42,6 +42,11 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticAction;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FullItemManager extends ItemManager
 {	
 	public FullItemManager(Sprite sprite)

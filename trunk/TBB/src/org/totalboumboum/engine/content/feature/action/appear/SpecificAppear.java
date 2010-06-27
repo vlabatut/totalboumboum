@@ -36,7 +36,9 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>contact:		any or none
  * 	<br>tilePosition:	any or undefined
  * 	<br>orientation:	any or undefined
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class SpecificAppear extends SpecificAction
 {

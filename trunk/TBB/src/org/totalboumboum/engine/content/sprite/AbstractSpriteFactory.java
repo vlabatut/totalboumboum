@@ -27,6 +27,11 @@ import java.util.List;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.AbstractGesturePack;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractSpriteFactory<T extends Sprite, U extends AbstractGesturePack<?>>
 {	
 	/////////////////////////////////////////////////////////////////

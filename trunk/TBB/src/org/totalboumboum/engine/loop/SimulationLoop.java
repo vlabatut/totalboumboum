@@ -36,6 +36,11 @@ import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.PlayerStats;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SimulationLoop extends Loop
 {	private static final long serialVersionUID = 1L;
 	private boolean verbose = false;

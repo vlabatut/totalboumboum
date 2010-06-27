@@ -29,6 +29,11 @@ import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.item.Item;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ItemManager
 {	
 	public ItemManager(Sprite sprite)

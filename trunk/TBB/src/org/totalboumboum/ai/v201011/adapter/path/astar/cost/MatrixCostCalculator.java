@@ -35,6 +35,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * aux cases qui sont à portée d'une bombe susceptibles d'exploser, ou bien 
  * un cout infini (avec Double.POSITIVE_INFINITY) aux cases qu'on veut interdire
  * au personnage parce qu'elles sont trop dangereuses. 
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class MatrixCostCalculator extends CostCalculator
 {

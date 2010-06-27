@@ -37,14 +37,12 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.game.round.RoundVariables;
 
-
 /**
  * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class AiTile
 {	/**
 	 * construit une représentation de la case passée en paramètre

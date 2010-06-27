@@ -35,7 +35,9 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>contact:		any or none
  * 	<br>tilePosition:	same or neighbor
  * 	<br>orientation:	same
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class SpecificPunch extends SpecificAction
 {

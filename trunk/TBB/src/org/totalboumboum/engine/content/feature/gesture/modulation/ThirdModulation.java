@@ -31,6 +31,11 @@ import org.totalboumboum.engine.content.feature.action.Circumstance;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ThirdModulation extends AbstractActionModulation
 {	private static final long serialVersionUID = 1L;
 
