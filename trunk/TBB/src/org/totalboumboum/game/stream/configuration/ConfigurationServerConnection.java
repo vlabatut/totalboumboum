@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.game.stream.AbstractConnection;
+import org.totalboumboum.game.stream.network.AbstractConnection;
 import org.totalboumboum.game.tournament.AbstractTournament;
 
 /**

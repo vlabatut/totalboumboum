@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.tournament;
+package org.totalboumboum.game.stream.temp.match;
 
 /*
  * Total Boum Boum
@@ -22,133 +22,100 @@ package org.totalboumboum.game.stream.tournament;
  */
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.List;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.game.stream.network.RunnableReader;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.stream.network.RunnableWriter;
 
 /**
- * represents a client-side connection with a server
+ * 
  * @author Vincent Labatut
  *
  */
-public class ServerConnection
-{	
-	public ServerConnection(Socket socket)
-	{	this.socket = socket;
-	}
+public class NetOutputClientStream
+{	private final boolean verbose = false;
 
-	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * NOTE to be done after starting the thread or it won't work...
-	 */
-	public void initTournament(List<Profile> profiles, List<ControlSettings> controlSettings) throws IOException, ClassNotFoundException
-	{	writer.addObject(profiles);
-		writer.addObject(controlSettings);
-	}
-	
-	public void updateTournament()
-	{
-		//TODO
+	public NetOutputClientStream(Socket socket, List<ControlSettings> controlSettings)
+	{	this.controlSettings = controlSettings;
+		this.socket = socket;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// MATCH				/////////////////////////////////////////
+	// CONTROL SETTINGS					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void initMatch()
-	{
-		//TODO
+	private List<ControlSettings> controlSettings = null;
+	
+	public void writeControlSettings() throws IOException
+	{	write(controlSettings);
 	}
 
-	public void updateMatch()
-	{
-		//TODO
+	/////////////////////////////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void writeEvent(RemotePlayerControlEvent event)
+	{	try
+		{	out.writeObject(event);
+			if(verbose)
+				System.out.println("recording: "+event);
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void initRound()
-	{
-		//TODO
-	}
+	public void initRound() throws IOException
+	{	writeControlSettings();
 
-	public void updateRound()
-	{
-		//TODO
+		writer = new RunnableWriter(out);
+		writer.start();
+	}
+	
+	public void finishRound()
+	{	finishWriter();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Socket socket;
-	private ObjectInputStream in;
-	private ObjectOutputStream out;
+	private ObjectOutputStream out = null;
+	private Socket socket = null;
 	
 	public void initStreams() throws IOException
-	{	InputStream is = socket.getInputStream();
-		in = new ObjectInputStream(is);
-		OutputStream os = socket.getOutputStream();
-		out = new ObjectOutputStream(os);
+	{	OutputStream o = socket.getOutputStream();
+		out = new ObjectOutputStream(o);
 	}
 
-	public void close() throws IOException
-	{	reader.interrupt();
-		writer.interrupt();
-		in.close();
-		out.close();
-	}
-	
-	public void write(Object object) throws IOException
+	private void write(Object object) throws IOException
 	{	writer.addObject(object);
-	}
-	
-	public Object readObject()
-	{	Object result = reader.getData();
-		return result;
-	}
-
-	public List<Object> readObjects()
-	{	List<Object> result = reader.getAllData();
-		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// THREADS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private RunnableReader<Object> reader = null;
 	private RunnableWriter writer = null;
-	
-	public void initThreads()
-	{	reader = new RunnableReader<Object>(in);
-		reader.start();
-		writer = new RunnableWriter(out);
-		writer.start();
+
+	private void finishWriter()
+	{	writer.interrupt();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-
+	protected boolean finished = false;
+	
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
 			
-			in = null;
 			out = null;
-
 			socket = null;
-			reader = null;
 			writer = null;
 		}
 	}

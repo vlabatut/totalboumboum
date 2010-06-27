@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.tournament;
+package org.totalboumboum.game.stream.file;
 
 /*
  * Total Boum Boum
@@ -21,14 +21,21 @@ package org.totalboumboum.game.stream.tournament;
  * 
  */
 
+import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.net.Socket;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.profile.Profile;
@@ -38,8 +45,9 @@ import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.game.stream.network.RunnableWriter;
 import org.totalboumboum.statistics.detailed.StatisticRound;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
@@ -47,12 +55,14 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class NetOutputServerStream
+public class FileOutputServerStream
 {	private final boolean verbose = false;
 
-	public NetOutputServerStream(Round round, List<Socket> sockets)
+	public FileOutputServerStream(Round round)
 	{	this.round = round;
-		this.sockets = sockets;
+	
+		initSaveDate();
+		initFolder();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -75,8 +85,7 @@ public class NetOutputServerStream
 	/////////////////////////////////////////////////////////////////
 	private void writeLevelInfo() throws IOException
 	{	LevelInfo leveInfo = round.getHollowLevel().getLevelInfo();
-		for(ObjectOutputStream o: outs)
-			o.writeObject(leveInfo);
+		out.writeObject(leveInfo);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -104,12 +113,91 @@ public class NetOutputServerStream
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// FOLDER				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String folder = null;
+
+	private void initFolder()
+	{	folder = "";
+		Calendar calendar = GregorianCalendar.getInstance();
+		calendar.setTime(saveDate);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH)+1;
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+		NumberFormat nf = NumberFormat.getIntegerInstance();
+		nf.setMinimumIntegerDigits(2);
+		folder = year + "." + nf.format(month) + "." + nf.format(day) + ".";
+		folder = folder + nf.format(hourOfDay) + "." + nf.format(minute) + "." + nf.format(second) + ".";
+		folder = folder + getLevelPack() + "." + getLevelName();
+	}
+	
+	public String getFolder()
+	{	return folder;		
+	}
+	
+	public void setFolder(String folder)
+	{	this.folder = folder;
+	}
+		
+	/////////////////////////////////////////////////////////////////
+	// PREVIEW				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private BufferedImage preview = null;
+	
+	public BufferedImage getPreview()
+	{	return preview;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATE					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Date saveDate;
+	
+	public Date getSaveDate()
+	{	return saveDate;
+	}
+
+	private void initSaveDate()
+	{	saveDate = GregorianCalendar.getInstance().getTime();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public List<String> getPlayers()
+	{	List<String> result = new ArrayList<String>();
+		List<Profile> profiles = round.getProfiles();
+		for(Profile profile: profiles)
+		{	String name = profile.getName();
+			result.add(name);
+		}
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LEVEL				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String getLevelName()
+	{	LevelInfo levelInfo = round.getHollowLevel().getLevelInfo();
+		String result = levelInfo.getFolder();
+		return result;
+	}
+	
+	public String getLevelPack()
+	{	LevelInfo levelInfo = round.getHollowLevel().getLevelInfo();
+		String result = levelInfo.getPackName();
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void writeEvent(StreamedEvent event)
 	{	try
-		{	for(ObjectOutputStream o: outs)
-				o.writeObject(event);
+		{	out.writeObject(event);
 			if(verbose)
 				System.out.println("recording: "+event);
 		}
@@ -124,22 +212,12 @@ public class NetOutputServerStream
 	private Round round;
 
 	public void initRound() throws IOException
-	{	// start threads
-		for(ObjectOutputStream oo: outs)
-		{	RunnableWriter w = new RunnableWriter(oo);
-			writers.add(w);
-			w.start();
-		}
-		
-		writeProfiles();
+	{	writeProfiles();
 		writeLevelInfo();
 		writeLimits();
 		writeItems();
 	}
-	
-	/**
-	 * close the replay output stream (if it was previously opened)
-	 */
+
 	public void finishRound(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
 	{	// put a stop event
 		StopReplayEvent event = new StopReplayEvent();
@@ -151,37 +229,44 @@ public class NetOutputServerStream
 		if(verbose)
 			System.out.println("recording: stats");
 		
-		finishWriters();
+//		close();
+		
+		// possibly record the preview
+		if(preview!=null)
+		{	String previewFilename = FilePaths.getReplaysPath() + File.separator + folder + File.separator + FileNames.FILE_PREVIEW + FileNames.EXTENSION_PNG;
+			File file = new File(previewFilename);
+			ImageIO.write(preview,"png",file);
+		}
+		
+		// record the associated xml file
+		ReplaySaver.saveReplay(this);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final List<ObjectOutputStream> outs = new ArrayList<ObjectOutputStream>();
-	private List<Socket> sockets = null;
+	private ObjectOutputStream out = null;
+
+	public void initStream() throws IOException
+	{	// open file
+		String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
+		File file = new File(folderPath);
+		file.mkdir();
+		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
+		file = new File(filePath);
+		FileOutputStream fileOut = new FileOutputStream(file);
+		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
+//		ZipOutputStream outZip = new ZipOutputStream(outBuff);
+//		out = new ObjectOutputStream(outZip);
+		out = new ObjectOutputStream(outBuff);
+	}
 	
-	public void initStreams() throws IOException
-	{	// init streams and threads
-		for(Socket socket: sockets)
-		{	OutputStream o = socket.getOutputStream();
-			ObjectOutputStream oo = new ObjectOutputStream(o);
-			outs.add(oo);
-		}
-	}
-
 	protected void write(Object object) throws IOException
-	{	for(RunnableWriter w: writers)
-			w.addObject(object);
+	{	out.writeObject(object);
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// THREADS				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private final List<RunnableWriter> writers = new ArrayList<RunnableWriter>();
-
-	private void finishWriters() throws IOException
-	{	for(RunnableWriter w: writers)
-			w.interrupt();
+	public void close() throws IOException
+	{	out.close();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -206,11 +291,12 @@ public class NetOutputServerStream
 	{	if(!finished)
 		{	finished = true;
 			
-			outs.clear();
+			out = null;
 			round = null;
-	
-			sockets.clear();
-			writers.clear();
+			
+			folder = null;
+			preview = null;
+			saveDate = null;
 		}
 	}
 }
