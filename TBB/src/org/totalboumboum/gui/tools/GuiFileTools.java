@@ -23,6 +23,11 @@ package org.totalboumboum.gui.tools;
 
 import java.io.File;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GuiFileTools
 {
 	public static final String EXTENSION_SCHEMA = ".xsd";

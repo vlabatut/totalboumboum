@@ -50,7 +50,11 @@ import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class PlayersSelectionSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 16+1;

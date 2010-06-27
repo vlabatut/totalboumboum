@@ -42,6 +42,11 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SelectedHeroData extends EntitledDataPanel implements PackBrowserSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;

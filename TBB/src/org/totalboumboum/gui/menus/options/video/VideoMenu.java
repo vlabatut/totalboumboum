@@ -45,7 +45,11 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class VideoMenu extends InnerMenuPanel implements ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
 	

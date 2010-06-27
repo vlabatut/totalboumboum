@@ -1,5 +1,9 @@
 package org.totalboumboum.gui.tools;
 
+import javax.swing.RepaintManager; 
+import javax.swing.JComponent; 
+import java.awt.Container;
+
 /**
  * Swing Hacks 
  * By Chris Adamson, Joshua Marinacci 
@@ -8,11 +12,6 @@ package org.totalboumboum.gui.tools;
  * Pub Date: June 2005 
  * ISBN: 0-596-00907-0 
  */
-
-import javax.swing.RepaintManager; 
-import javax.swing.JComponent; 
-import java.awt.Container;
-
 public class FullRepaintManager extends RepaintManager { 
 	public void addDirtyRegion(JComponent comp, int x, int y, int w,
 					int h) {

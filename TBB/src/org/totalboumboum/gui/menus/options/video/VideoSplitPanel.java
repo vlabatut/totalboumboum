@@ -35,7 +35,11 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class VideoSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 

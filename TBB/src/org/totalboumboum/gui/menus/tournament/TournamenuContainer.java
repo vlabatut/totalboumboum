@@ -21,7 +21,6 @@ package org.totalboumboum.gui.menus.tournament;
  * 
  */
 
-
 import java.awt.BorderLayout;
 import java.io.IOException;
 
@@ -38,6 +37,11 @@ import org.totalboumboum.gui.menus.tournament.load.LoadSplitPanel;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class TournamenuContainer extends MenuPanel implements MenuContainer
 {	private static final long serialVersionUID = 1L;
 

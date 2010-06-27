@@ -27,7 +27,11 @@ import java.awt.BorderLayout;
 import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class QuickMatchContainer extends MenuPanel implements MenuContainer
 {	private static final long serialVersionUID = 1L;
 

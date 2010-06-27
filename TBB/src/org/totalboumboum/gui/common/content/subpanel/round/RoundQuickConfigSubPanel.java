@@ -39,6 +39,11 @@ import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	

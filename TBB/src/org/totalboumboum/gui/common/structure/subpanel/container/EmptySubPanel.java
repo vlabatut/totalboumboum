@@ -23,6 +23,11 @@ package org.totalboumboum.gui.common.structure.subpanel.container;
 
 import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class EmptySubPanel extends SubPanel<EmptyContentPanel>
 {	private static final long serialVersionUID = 1L;
 

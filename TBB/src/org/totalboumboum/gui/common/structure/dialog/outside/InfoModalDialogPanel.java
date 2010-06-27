@@ -21,13 +21,17 @@ package org.totalboumboum.gui.common.structure.dialog.outside;
  * 
  */
 
-
 import java.util.List;
 
 import org.totalboumboum.gui.common.structure.dialog.inside.InfoSubPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.tools.GuiTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class InfoModalDialogPanel extends ModalDialogPanel<InfoSubPanel>
 {	private static final long serialVersionUID = 1L;
 

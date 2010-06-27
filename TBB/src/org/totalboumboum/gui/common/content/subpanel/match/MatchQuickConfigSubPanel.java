@@ -35,7 +35,11 @@ import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	

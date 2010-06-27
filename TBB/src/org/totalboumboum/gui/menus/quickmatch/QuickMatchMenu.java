@@ -71,7 +71,11 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.detailed.Score;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	

@@ -21,6 +21,11 @@ package org.totalboumboum.gui.common.content.subpanel.match;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface MatchQuickConfigSubPanelListener
 {
 	public void matchQuickConfigModified();

@@ -37,6 +37,11 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class PlayerStatisticsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	

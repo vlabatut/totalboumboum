@@ -42,6 +42,11 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractFrame extends JFrame implements WindowListener
 {	private static final long serialVersionUID = 1L;
 

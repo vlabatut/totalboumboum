@@ -43,6 +43,11 @@ import org.totalboumboum.tools.images.ImageTools;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class MiscConfigurationLoader
 {	
 	public static MiscConfiguration loadMiscConfiguration() throws ParserConfigurationException, SAXException, IOException

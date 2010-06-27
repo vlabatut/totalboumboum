@@ -26,6 +26,11 @@ import org.totalboumboum.gui.common.structure.panel.ContentPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.frames.NormalFrame;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class InnerMenuPanel extends ContentPanel implements ButtonAware
 {	private static final long serialVersionUID = 1L;
 

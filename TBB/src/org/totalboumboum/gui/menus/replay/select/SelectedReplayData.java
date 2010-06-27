@@ -30,8 +30,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.game.stream.round.FileInputClientStream;
-import org.totalboumboum.game.stream.round.ReplayLoader;
+import org.totalboumboum.game.stream.file.FileInputClientStream;
+import org.totalboumboum.game.stream.file.ReplayLoader;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.replay.ReplayMiscSubPanel;
@@ -44,6 +44,11 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SelectedReplayData extends EntitledDataPanel implements FolderBrowserSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;

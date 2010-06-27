@@ -35,7 +35,11 @@ import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ProfileSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 21;

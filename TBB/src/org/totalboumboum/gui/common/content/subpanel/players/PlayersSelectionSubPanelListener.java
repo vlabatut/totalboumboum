@@ -21,6 +21,11 @@ package org.totalboumboum.gui.common.content.subpanel.players;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface PlayersSelectionSubPanelListener
 {
 	public void playerSelectionPlayerAdded(int index);

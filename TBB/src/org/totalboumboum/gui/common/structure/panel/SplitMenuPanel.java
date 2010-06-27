@@ -27,7 +27,11 @@ import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 {	private static final long serialVersionUID = 1L;
 

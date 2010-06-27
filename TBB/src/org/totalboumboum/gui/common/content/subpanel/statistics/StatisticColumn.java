@@ -44,6 +44,11 @@ import org.totalboumboum.statistics.overall.PlayerStats;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public enum StatisticColumn
 {	// general
 	GENERAL_BUTTON,

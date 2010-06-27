@@ -21,6 +21,11 @@ package org.totalboumboum.gui.common.content.subpanel.round;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface RoundQuickConfigSubPanelListener
 {
 	public void roundQuickConfigModified();

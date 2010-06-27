@@ -23,6 +23,11 @@ package org.totalboumboum.gui.common.structure.subpanel.content;
 
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ContentPanel extends BasicPanel
 {	private static final long serialVersionUID = 1L;
 

@@ -21,6 +21,11 @@ package org.totalboumboum.gui.common.content.subpanel.limits;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface LimitsSubPanelListener
 {
 	public void limitSelectionChanged();

@@ -36,6 +36,11 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class CupDescription extends TournamentDescription<CupTournament> implements LegSubPanelListener
 {	private static final long serialVersionUID = 1L;
 

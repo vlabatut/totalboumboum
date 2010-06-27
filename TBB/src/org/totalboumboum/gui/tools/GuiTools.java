@@ -48,6 +48,11 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.images.ImageTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GuiTools
 {	
 	/////////////////////////////////////////////////////////////////

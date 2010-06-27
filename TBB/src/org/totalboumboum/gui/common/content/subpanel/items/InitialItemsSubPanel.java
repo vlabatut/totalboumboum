@@ -36,7 +36,11 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class InitialItemsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 4;

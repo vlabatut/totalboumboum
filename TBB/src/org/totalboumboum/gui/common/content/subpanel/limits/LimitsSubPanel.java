@@ -44,6 +44,11 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	private static final int COL_GROUPS = 1;

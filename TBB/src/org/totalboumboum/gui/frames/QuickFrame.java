@@ -59,6 +59,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class QuickFrame extends AbstractFrame implements ActionListener, LoopRenderPanel, RoundRenderPanel
 {	private static final long serialVersionUID = 1L;
 

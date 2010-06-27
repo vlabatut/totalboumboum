@@ -31,7 +31,11 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class QuickStartSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L;
 

@@ -43,6 +43,11 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class NormalFrame extends AbstractFrame implements MenuContainer
 {	private static final long serialVersionUID = 1L;
 

@@ -30,7 +30,11 @@ import java.awt.image.BufferedImage;
 import org.totalboumboum.gui.data.language.Language;
 import org.totalboumboum.tools.images.ImageTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class MiscConfiguration
 {
 

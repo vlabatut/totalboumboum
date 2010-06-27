@@ -23,6 +23,11 @@ import org.totalboumboum.game.tournament.cup.CupPart;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface PartSubPanelListener
 {
 	public void partAfterClicked(CupPart part);

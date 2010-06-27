@@ -28,7 +28,11 @@ import org.totalboumboum.gui.common.structure.panel.ContentPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.frames.NormalFrame;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class InnerDataPanel extends ContentPanel
 {	
 	private static final long serialVersionUID = 1L;

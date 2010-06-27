@@ -32,6 +32,11 @@ import javax.swing.BoxLayout;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.tools.GuiTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ColumnsContentPanel extends ContentPanel
 {	private static final long serialVersionUID = 1L;
 

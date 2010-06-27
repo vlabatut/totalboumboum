@@ -32,7 +32,11 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LoadSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 

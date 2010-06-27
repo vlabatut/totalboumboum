@@ -38,7 +38,11 @@ import javax.swing.text.StyledDocument;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class TextContentPanel extends ContentPanel
 {	private static final long serialVersionUID = 1L;
 	

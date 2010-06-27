@@ -35,6 +35,11 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class MiscConfigurationSaver
 {	
 	public static void saveMiscConfiguration(MiscConfiguration miscConfiguration) throws ParserConfigurationException, SAXException, IOException

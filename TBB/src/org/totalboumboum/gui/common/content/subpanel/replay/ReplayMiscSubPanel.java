@@ -26,13 +26,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.game.stream.round.FileInputClientStream;
+import org.totalboumboum.game.stream.file.FileInputClientStream;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ReplayMiscSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	private static final int COL_SUBS = 2;

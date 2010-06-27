@@ -29,6 +29,11 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Column;
 import org.totalboumboum.gui.common.structure.subpanel.content.ColumnsContentPanel;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ColumnsSubPanel extends SubPanel<ColumnsContentPanel>
 {	private static final long serialVersionUID = 1L;
 

@@ -42,7 +42,11 @@ import org.totalboumboum.gui.menus.tournament.select.SelectTournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SettingsData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;

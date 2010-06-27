@@ -43,6 +43,11 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ControlsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	

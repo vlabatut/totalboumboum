@@ -42,6 +42,11 @@ import org.totalboumboum.gui.menus.explore.tournaments.select.SelectedTournament
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ExploreMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	

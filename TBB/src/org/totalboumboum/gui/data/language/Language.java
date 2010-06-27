@@ -25,6 +25,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Language
 {	
 	private final HashMap<String, String> texts = new HashMap<String,String>();

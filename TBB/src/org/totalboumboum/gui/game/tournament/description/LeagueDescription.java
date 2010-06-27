@@ -42,6 +42,11 @@ import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LeagueDescription extends TournamentDescription<LeagueTournament> implements LimitsSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
