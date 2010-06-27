@@ -1303,4 +1303,107 @@ public class Launcher
 	 * 		1) de pas tout bloquer chez le serveur
 	 * 		2) que les autres clients puissent se connecter en même temps
 	 */
+	
+	//TODO remarque : faire une classe connexion, mutualiser flux/threads pour client et server
+	
+	/*
+	 * TODO scénario de configuration d'un tournoi net
+	 * ------------------------------------------------
+	 * 
+	 * coté serveur : 
+	 * 1) définition du tournoi : type, niveaux, etc. (dc inversé par rapport à la version actuelle)
+	 * 2) ensuite seulement, sélection des joueurs : 
+	 * 		possibilité d'ouvrir des slots "remote".
+	 * 		possibilité de verrouiller certains slots (inutilisables)
+	 * 3) puis on rend la partie accessible aux joueurs distants (publish)
+	 *    après ça, on ne peut plus modifier la partie, sauf en l'annulant et en recommençant
+	 * 4) puis le serveur attend que les clients se connectent et s'enregistrent pour participer à la partie
+	 * 
+	 * coté client : 
+	 * 5) écran de connexion à une partie existante (style : entrer directement l'ip, ou bien choisir dans une liste venant du site).
+	 * 6) après connexion, on affiche les propriétés du tournoi
+	 *    (sans pouvoir les modifier bien sur)
+	 *    un "next" amène à l'écran de sélection des joueurs.
+	 * 7) on clique sur les slots libres de manière à rajouter des joueurs locaux
+	 *    (comme pour une partie locale)
+	 * 
+	 * cote serveur :
+	 * 8) les nouveaux joueurs sont affichés dans la GUI
+	 *    toute modif (ds la liste des joueurs) est répercutée à tous les clients connectés
+	 * 9) quand on estime qu'il y a assez de joueurs, on clique next pour commencer la partie
+	 * 
+	 * cote client :
+	 * 10) quand le serveur démarre la partie, on se retrouve automatiquement dans l'écran de présentation du tournoi
+	 * 
+	 * 
+	 * 
+	 * 
+	 * remarques :
+	 * 	- la gui de création de tournoi/partie rapide est la même que d'hab, avec une option supplémentaire "publish online"
+	 * 	  (vaut mieux un écran de config spécifique qu'un simple bouton. ça permettra de gérer certaines options comme "partie privée" ou autre)
+	 *  - GUI server pour la sélection de joueur :
+	 *  	- en rouge les joueurs minimaux
+	 *  	- en gris (comme maintenant) ceux qu'on peut éventuellement virer sans que ça empêche d'utiliser le tournoi/partie
+	 *  - coté client, jouer une partie rapide ou un tournoi c pareil puisqu'une partie rapide est un tournoi !
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * en termes de connexion :
+	 * 3) partie publiée : 
+	 * 		- création d'un thread à l'écoute d'un socket
+	 *		- quand un client se connecte, il crée un objet ClientConnection qui va s'occuper de le gérer
+	 *		  (avec reader/writer dans leur propre thread)
+	 *		- la gui enregistre un listener auprès de cet objet pour écouter les évènements de configuration
+	 *		- on écrit le tournoi (ou sa description) dans le flux afin que le client y accède
+	 * 5) connection à une partie :
+	 * 		- création d'un objet ServerConnection gérant tout ça avec ses propres threads
+	 * 		- la GUI enregistre un listener comme ci-dessus pour les évènements de configuration
+	 * 6) affichage de la description du tournoi :
+	 * 		- on attend de recevoir un évènement indiquant que la description du tournoi a été lue
+	 * 		- puis on l'affiche dans la GUI
+	 * 7) clic sur un slot libre :
+	 * 		- le client écrit dans le flux le profil du joueur
+	 * 		- pour chaque modif possible du profil, un objet adéquat est ensuite écrit dans le flux
+	 * 		- dans les deux cas, la mise à jour de la GUI se fait via la réponse du serveur, et non pas localement
+	 * 		- NOTE: ceci pose d'ailleurs un problème de synchro et de réactivité de l'interface
+	 * 			    on pourrait définir une méthode permettant de lire un objet de façon bloquée avec un délai max
+	 * 				la méthode retourne automatiquement un objet si elle peut le lire, ou bien null ou bout du temps limite
+	 * 				ici, ça permettrait de bloquer la GUI le temps que le serveur envoie une confirmation que le beans a été traité
+	 * 				alternativement, on pourrait aussi bloquer en utilisant l'attente d'un évènement  
+	 * 8) nouveau joueur enregistré 
+	 * 		- le serveur lit dans le flux le profil et le rajoute dans la liste des joueurs si c'est possible
+	 * 		- chaque modif lue dans le flux entraine un évènement que le serveur traite localement (il applique la modif)
+	 * 		- puis le serveur envoie à tous les clients une mise à jour de l'écran des joueurs
+	 * 9) démarrage de la partie coté serveur
+	 * 		- le serveur écrit dans le flux un objet représentant le début de la partie
+	 * 		  (normalement, les clients ont déjà toutes les infos nécessaires : tournoi, joueurs...
+	 * 10) démarrage de la partie coté client
+	 * 		- l'objet approprié est reçu
+	 * 		- validation de l'objet tournoi
+	 * 		- affichage du tournoi
+	 */
+	
+	/*
+	 * TODO scénario de jeu en ligne, une fois que le tournoi/partie a été configuré(e)
+	 * ------------------------------------------------------------------------------
+	 * 
+	 * 1) il est nécessaire que toute action aléatoire soit synchro avec le serveur.
+	 * 	  en conséquence, les clients ne peuvent avancer dans le tournoi que quand ils ont reçu l'objet approprié du serveur
+	 *    coté client, le bouton "suivant" reste grisé tant que l'objet n'a pas été reçu
+	 * 2) pour le round c'est différent car tout a été chargé avant d'entrer à l'écran de description du round
+	 *    quand un client clique sur "commencer", les sprites sont chargés et un signal du serveur est attendu
+	 *    le serveur envoie le signal quand tous les clients et lui même sont prêts
+	 *    le jeu commence alors
+	 * 3) même topo pour les stats : faut que le serveur ait fait 'retour' pr que les stats soient calculées
+	 *    donc tant qu'il ne l'a pas fait, on a du grisé sur le bouton des clients
+	 *    ou plutot : les stats ne sont pas mises à jour, tout simplement. mais ils peuvent les visualiser (?)
+	 *    
+	 * en termes de connexion :
+	 * 1) quand on commence un match, le serveur l'écrit dans les connexions
+	 *    pareil quand on commence un round
+	 * 2) le round lui-même, c'est déjà fait
+	 * 3) pour les stats, suffit également de les écrire coté client
+  	 */
 }

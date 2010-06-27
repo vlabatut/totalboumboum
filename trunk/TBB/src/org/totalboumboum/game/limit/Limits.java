@@ -28,7 +28,11 @@ import java.util.List;
 
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Limits<T extends Limit> implements Serializable
 {	private static final long serialVersionUID = 1L;
 

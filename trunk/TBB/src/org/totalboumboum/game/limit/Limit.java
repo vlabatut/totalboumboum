@@ -26,7 +26,11 @@ import java.io.Serializable;
 import org.totalboumboum.game.points.PointsProcessor;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface Limit extends Serializable
 {
 	/////////////////////////////////////////////////////////////////

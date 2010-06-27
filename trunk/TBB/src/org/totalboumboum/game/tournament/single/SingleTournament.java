@@ -51,6 +51,11 @@ import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SingleTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
 	

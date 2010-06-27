@@ -28,7 +28,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * this limit is based on the number of points calculated by its PointProcessor.
  * for example, a match can be stopped as soon as a player scores more than 50 points.
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit

@@ -43,6 +43,11 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GameArchive
 {
 	public static GameArchive getArchive(AbstractTournament tournament, String folder)

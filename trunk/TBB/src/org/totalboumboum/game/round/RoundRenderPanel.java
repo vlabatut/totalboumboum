@@ -21,6 +21,11 @@ package org.totalboumboum.game.round;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface RoundRenderPanel
 {
 	public void roundOver();

@@ -36,7 +36,11 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractTournament implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;
 

@@ -4,6 +4,11 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class IntegerSetComparator implements Comparator<Set<Integer>>
 {	@Override
 	public int compare(Set<Integer> s1, Set<Integer> s2)

@@ -33,7 +33,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * For example, a tournament can be stopped when one player's cumulated time is
  * greater than 10 minutes.   
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit

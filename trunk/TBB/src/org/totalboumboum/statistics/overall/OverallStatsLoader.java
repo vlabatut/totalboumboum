@@ -34,6 +34,11 @@ import java.util.Scanner;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class OverallStatsLoader
 {
 	@SuppressWarnings("unchecked")

@@ -21,6 +21,11 @@ package org.totalboumboum.tools;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GameData
 {
 	/////////////////////////////////////////////////////////////////

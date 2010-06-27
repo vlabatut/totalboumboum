@@ -26,7 +26,11 @@ import java.util.List;
 
 import org.totalboumboum.game.round.Round;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class StatisticRound extends StatisticBase
 {
 	private static final long serialVersionUID = 1L;

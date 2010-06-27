@@ -29,6 +29,11 @@ import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FileTools
 {
 	/**

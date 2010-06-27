@@ -31,6 +31,11 @@ import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.stream.RunnableWriter;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class NetOutputClientStream
 {	private final boolean verbose = false;
 

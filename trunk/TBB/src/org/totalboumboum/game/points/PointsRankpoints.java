@@ -42,10 +42,9 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * 		- 5 pts for the second place
  * then the result would be {10,0,5} 
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class PointsRankpoints extends PointsProcessor implements PPFunction
 {	private static final long serialVersionUID = 1L;
 

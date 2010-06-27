@@ -32,10 +32,9 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * 
  * For example, if the source was {12,2,5} then the result would be {12,12,12} 
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class PointsMaximum extends PointsProcessor implements PPFunction
 {	private static final long serialVersionUID = 1L;
 

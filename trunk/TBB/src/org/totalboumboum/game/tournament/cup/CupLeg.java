@@ -1,14 +1,5 @@
 package org.totalboumboum.game.tournament.cup;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -30,6 +21,20 @@ import java.util.Random;
  * 
  */
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class CupLeg implements Serializable
 {	private static final long serialVersionUID = 1L;
 

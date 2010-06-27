@@ -32,10 +32,9 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * For example, if the sources were {1,2,3} and {4,5,6}
  * then the result would be {4,10,18} 
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class PointsMultiplication extends PointsProcessor implements PPPrimaryOperator
 {	private static final long serialVersionUID = 1L;
 

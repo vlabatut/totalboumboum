@@ -30,7 +30,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * this limit is based on the number of players remaining in a round.
  * For example, a round can be stopped when there is only one player remaining.
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 public class LimitLastStanding implements RoundLimit

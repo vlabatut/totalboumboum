@@ -35,6 +35,11 @@ import org.totalboumboum.statistics.glicko2.jrs.ResultsBasedRankingService;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Glicko2Loader
 {
 	public static RankingService loadGlicko2Statistics() throws IOException, ClassNotFoundException

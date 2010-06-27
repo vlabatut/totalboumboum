@@ -40,8 +40,11 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.tools.files.FileNames;
 
-
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ClassTools
 {	
 	public static final String CLASS_SEPARATOR = ".";

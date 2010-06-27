@@ -32,7 +32,11 @@ import org.totalboumboum.game.rank.Ranks;
  * 
  */
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class CupTieBreak implements Serializable
 {	private static final long serialVersionUID = 1L;
 

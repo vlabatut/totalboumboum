@@ -1,5 +1,9 @@
 package org.totalboumboum.statistics.glicko2.jrs;
 
+/** 
+ *
+ * @author Derek Hilder
+ */
 public class TestProba {
 
 	/**

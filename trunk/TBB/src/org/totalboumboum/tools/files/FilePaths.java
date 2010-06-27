@@ -23,6 +23,11 @@ package org.totalboumboum.tools.files;
 
 import java.io.File;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FilePaths
 {
 	public static String getResourcesPath()

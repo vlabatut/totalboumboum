@@ -26,6 +26,11 @@ import java.util.List;
 
 import org.totalboumboum.game.match.Match;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class StatisticMatch extends StatisticBase
 {
 	private static final long serialVersionUID = 1L;

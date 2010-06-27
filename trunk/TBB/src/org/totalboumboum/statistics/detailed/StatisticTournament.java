@@ -28,7 +28,11 @@ import java.util.List;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class StatisticTournament extends StatisticBase
 {
 	private static final long serialVersionUID = 1L;

@@ -29,7 +29,11 @@ import java.util.TreeSet;
 
 import org.totalboumboum.game.round.RoundVariables;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class CalculusTools
 {	
 	/////////////////////////////////////////////////////////////////

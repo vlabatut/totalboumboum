@@ -23,16 +23,23 @@ package org.totalboumboum.game.stream;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class RunnableReader<T extends Object> extends Thread
 {
-	public RunnableReader(ObjectInputStream in)
+	public RunnableReader(ObjectInputStream in, AbstractConnection<?> connection)
 	{	this.in = in;
+		this.connection = connection;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONNECTION			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected AbstractConnection<?> connection;
 	
 	/////////////////////////////////////////////////////////////////
 	// RUNNABLE				/////////////////////////////////////////
@@ -44,7 +51,7 @@ public class RunnableReader<T extends Object> extends Thread
 		{	try
 			{	Object object = in.readObject();
 				T obj = (T) object;
-				addData(obj);
+				connection.dataRead(obj);
 			}
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
@@ -59,24 +66,4 @@ public class RunnableReader<T extends Object> extends Thread
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private ObjectInputStream in;
-
-	/////////////////////////////////////////////////////////////////
-	// DATA					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Queue<T> data = new LinkedList<T>();
-	
-	public synchronized T getData()
-	{	T result = data.poll();
-		return result;
-	}
-	
-	public synchronized List<T> getAllData()
-	{	List<T> result = new ArrayList<T>(data);
-		data.clear();
-		return result;
-	}
-	
-	private synchronized void addData(T event)
-	{	data.offer(event);
-	}
 }

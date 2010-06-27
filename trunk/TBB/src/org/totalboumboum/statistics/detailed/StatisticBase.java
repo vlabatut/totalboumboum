@@ -32,8 +32,11 @@ import java.util.List;
 
 import org.totalboumboum.configuration.profile.Profile;
 
-
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class StatisticBase implements Serializable
 {	private static final long serialVersionUID = 1L;
 	

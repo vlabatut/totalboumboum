@@ -23,6 +23,11 @@ package org.totalboumboum.statistics.detailed;
 
 import java.util.List;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public enum Score
 {	/** number of bombs dropped */
 	BOMBS, 

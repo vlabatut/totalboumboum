@@ -27,6 +27,11 @@ import org.totalboumboum.game.tournament.league.LeagueTournament;
 import org.totalboumboum.game.tournament.sequence.SequenceTournament;
 import org.totalboumboum.game.tournament.single.SingleTournament;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public enum TournamentType
 {
 	CUP,LEAGUE,SEQUENCE,SINGLE;

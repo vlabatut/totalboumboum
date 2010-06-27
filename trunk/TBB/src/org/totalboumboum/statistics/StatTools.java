@@ -34,6 +34,11 @@ import org.totalboumboum.statistics.overall.OverallStatsSaver;
 import org.totalboumboum.statistics.overall.PlayerStats;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class StatTools
 {	
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException

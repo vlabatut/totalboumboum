@@ -25,6 +25,11 @@ import javax.xml.parsers.DocumentBuilder;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class XmlNames
 {
 
