@@ -1410,4 +1410,10 @@ public class Launcher
 	 * 2) le round lui-même, c'est déjà fait
 	 * 3) pour les stats, suffit également de les écrire coté client
   	 */
+	
+	/**
+	 * TODO
+	 * - définir connection pour round
+	 * - définir manageur pour plusieurs connexions (coté serveur)
+	 */
 }
