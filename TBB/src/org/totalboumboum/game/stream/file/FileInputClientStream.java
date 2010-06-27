@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.tournament;
+package org.totalboumboum.game.stream.file;
 
 /*
  * Total Boum Boum
@@ -21,10 +21,15 @@ package org.totalboumboum.game.stream.tournament;
  * 
  */
 
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,21 +38,27 @@ import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
-import org.totalboumboum.game.stream.network.RunnableReader;
 import org.totalboumboum.statistics.detailed.StatisticRound;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class NetInputClientStream
+public class FileInputClientStream
 {	private final boolean verbose = false;
-
-	public NetInputClientStream(Socket socket)
-	{	this.socket = socket;
+	
+	public FileInputClientStream()
+	{	
 	}
-
+	
+	public FileInputClientStream(String folder)
+	{	super();
+		this.folder = folder;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ZOOM					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -103,10 +114,106 @@ public class NetInputClientStream
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// FOLDER				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String folder = null;
+
+	public String getFolder()
+	{	return folder;		
+	}
+	
+	public void setFolder(String folder)
+	{	this.folder = folder;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PREVIEW				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private BufferedImage preview = null;
+	
+	public BufferedImage getPreview()
+	{	return preview;		
+	}
+	
+	public void setPreview(BufferedImage preview)
+	{	this.preview = preview;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LEVEL				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String levelName;
+	private String levelPack;
+	
+	public void setLevelName(String name)
+	{	this.levelName = name;
+	}
+	
+	public String getLevelName()
+	{	return levelName;
+	}
+	
+	public void setLevelPack(String levelPack)
+	{	this.levelPack = levelPack;
+	}
+	
+	public String getLevelPack()
+	{	return levelPack;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DATE					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Date saveDate;
+	
+	public void setSaveDate(Date save)
+	{	this.saveDate = save;
+	}
+	
+	public Date getSaveDate()
+	{	return saveDate;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final List<String> players = new ArrayList<String>();
+	
+	public void addPlayer(String player)
+	{	players.add(player);
+	}
+	
+	public List<String> getPlayers()
+	{	return players;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * reads an event in the currently open stream.
+	 */
 	public ReplayEvent readEvent()
-	{	ReplayEvent result = reader.getData();
+	{	ReplayEvent result = null;
+		
+		try
+		{	Object object = in.readObject();
+			if(object instanceof ReplayEvent)
+			{	result = (ReplayEvent) object;
+				if(verbose)
+					System.out.println("reading: "+result);
+			}
+		}
+		catch (EOFException e) 
+		{	//
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
+		{	e.printStackTrace();
+		}
+		
 		return result;
 	}
 	
@@ -120,40 +227,32 @@ public class NetInputClientStream
 		roundLimits = (Limits<RoundLimit>) in.readObject();		
 		itemCounts = (HashMap<String,Integer>) in.readObject();		
 		zoomCoef = (Double) in.readObject();
-	
-		reader = new RunnableReader<ReplayEvent>(in);
-		reader.start();
 	}
 
 	public void finishRound() throws IOException, ClassNotFoundException
 	{	if(verbose)
 			System.out.println("reading: stats");
 		roundStats = (StatisticRound) in.readObject();
-		finishReader();
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
-	// STREAM				/////////////////////////////////////////
+	// STREAMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Socket socket = null;
 	private ObjectInputStream in = null;
 
 	public void initStreams() throws IOException
-	{	InputStream i = socket.getInputStream();
-		in = new ObjectInputStream(i);
+	{	String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
+		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
+		File file = new File(filePath);
+		FileInputStream fileIn = new FileInputStream(file);
+		BufferedInputStream inBuff = new BufferedInputStream(fileIn);
+//		ZipInputStream inZip = new ZipInputStream(inBuff);
+//		in = new ObjectInputStream(inZip);
+		in = new ObjectInputStream(inBuff);
 	}
 
 	public void close() throws IOException
 	{	in.close();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// THREADS				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private RunnableReader<ReplayEvent> reader = null;
-
-	private void finishReader()
-	{	reader.interrupt();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -166,7 +265,7 @@ public class NetInputClientStream
 		{	finished = true;
 			
 			in = null;
-		
+			
 			itemCounts = null;
 			levelInfo = null;
 			profiles = null;
@@ -174,8 +273,11 @@ public class NetInputClientStream
 			roundStats = null;
 			zoomCoef = null;
 	
-			socket = null;
-			reader = null;
+			folder = null;
+			preview = null;
+			levelName = null;
+			levelPack = null;
+			saveDate = null;
 		}
 	}
 }

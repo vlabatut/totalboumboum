@@ -29,7 +29,7 @@ import java.util.List;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
-import org.totalboumboum.game.stream.RunnableWriter;
+import org.totalboumboum.game.stream.network.RunnableWriter;
 
 /**
  * 

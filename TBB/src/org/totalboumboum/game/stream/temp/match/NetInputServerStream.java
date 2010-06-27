@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.tournament;
+package org.totalboumboum.game.stream.temp.match;
 
 /*
  * Total Boum Boum
@@ -71,6 +71,7 @@ public class NetInputServerStream
 	{	RemotePlayerControlEvent result = readers[index].getData();
 		return result;
 	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ROUND				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
