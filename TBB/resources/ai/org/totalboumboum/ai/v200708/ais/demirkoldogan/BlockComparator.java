@@ -2,6 +2,12 @@ package org.totalboumboum.ai.v200708.ais.demirkoldogan;
 
 import java.util.Comparator;
 
+/**
+ * 
+ * @author Turkalp Goker Demirkol
+ * @author Emre Dogan
+ *
+ */
 public class BlockComparator implements Comparator<Block>
 {
 

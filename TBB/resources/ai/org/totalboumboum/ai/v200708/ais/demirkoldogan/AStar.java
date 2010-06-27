@@ -6,11 +6,12 @@ import java.util.Vector;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
-
-
+/**
+ * 
+ * @author Turkalp Goker Demirkol
+ * @author Emre Dogan
+ *
+ */
 public class AStar {
 	
 	private Block ownBlock;   //point de depart

@@ -3,12 +3,14 @@ package org.totalboumboum.ai.v200708.ais.bingolketenci;
 
 /**
  * Représente un noeud dans un arbre de recherche.
- *Chaque noeud est defini avec les coordonnees x et y
- *chaque noeud possede aussi une valeur entiere 
- *et un cout.
+ * Chaque noeud est defini avec les coordonnees x et y
+ * chaque noeud possede aussi une valeur entiere 
+ * et un cout.
+ * 
+ * @author Gizem Bingol
+ * @author Utku Gorkem Kentenci
+ *
  */
-
-
 public class Noeud {
 
 	/** la coordonnee x du noeud */

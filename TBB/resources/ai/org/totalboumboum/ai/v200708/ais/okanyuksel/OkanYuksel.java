@@ -14,11 +14,12 @@ import java.util.LinkedList;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
-
-
+/**
+ * 
+ * @author Betul Okan
+ * @author Erkan Yuksel
+ *
+ */
 public class OkanYuksel extends ArtificialIntelligence
 {
 	private static final long serialVersionUID = 1L;

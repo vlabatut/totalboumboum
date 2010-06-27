@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * 
+ * @author Serkan Kecer
+ * @author Onur Yaman
+ *
+ */
 public class AStar {
 	/**
 	 * Class fields

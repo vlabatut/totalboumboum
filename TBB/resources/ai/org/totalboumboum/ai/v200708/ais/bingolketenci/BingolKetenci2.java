@@ -15,6 +15,10 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * étoile). Dès qu'il arrive au cible,il le détruit.Avant de faire un mouvement,
  * il controle tout d'abord s'il y a un danger pour lui.S'il y en a,il bouge
  * seulement pour se sauver.
+ * 
+ * @author Gizem Bingol
+ * @author Utku Gorkem Kentenci
+ *
  */
 public class BingolKetenci2 extends ArtificialIntelligence {
 	private static final long serialVersionUID = 1L;

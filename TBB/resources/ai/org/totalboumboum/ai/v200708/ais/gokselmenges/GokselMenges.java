@@ -5,15 +5,12 @@ import java.util.Vector;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
-
-
-
-
-
-
+/**
+ * 
+ * @author Atahan Goksel
+ * @author Erdem Menges
+ *
+ */
 public class GokselMenges  extends ArtificialIntelligence
 {
 

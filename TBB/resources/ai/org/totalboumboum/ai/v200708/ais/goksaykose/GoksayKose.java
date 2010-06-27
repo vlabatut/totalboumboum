@@ -3,11 +3,12 @@ import java.util.Vector;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
-
-
+/**
+ * 
+ * @author Deniz Goksay
+ * @author Ipek Kose
+ *
+ */
 public class GoksayKose extends ArtificialIntelligence{
 	private static final long serialVersionUID = 1L;
 	/**true si la case est occupé par un bombe**/ 

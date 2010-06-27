@@ -23,6 +23,11 @@ package org.totalboumboum.ai.v200708.ais.kurtulusozsoy;
 
 import org.totalboumboum.ai.v200708.adapter.AiManager;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AiMain extends AiManager
 {
 	public AiMain()

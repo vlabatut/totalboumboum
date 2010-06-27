@@ -2,11 +2,12 @@ package org.totalboumboum.ai.v200708.ais.caglayanelmas;
 
 
 /**
- * @author Ozan Caglayan, Can Elmas
- * 
  * La classe qui représente un noeud de recherche.
+ * 
+ * @author Ozan Caglayan
+ * @author Arif Can Elmas
+ *
  */
-
 public class SearchNode
 {	
 	private int[] state;

@@ -4,6 +4,12 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * 
+ * @author Can Eren
+ * @author Mustafa Mert Gokce
+ *
+ */
 public class MoveQueue {
 
 	Vector<Node> way;

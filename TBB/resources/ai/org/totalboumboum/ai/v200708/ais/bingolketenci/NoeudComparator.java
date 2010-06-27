@@ -2,6 +2,12 @@ package org.totalboumboum.ai.v200708.ais.bingolketenci;
 
 import java.util.Comparator;
 
+/**
+ * 
+ * @author Gizem Bingol
+ * @author Utku Gorkem Kentenci
+ *
+ */
 public class NoeudComparator implements Comparator<Noeud> {
 
 	/** noeud cible:reference qu'on va utiliser en comparant les noeuds */

@@ -3,11 +3,12 @@ package org.totalboumboum.ai.v200708.ais.baydarcamci;
 
 import java.util.*;
 
-
-
-
 /**
  * Implements the basic heuristic A* route finding algorithm
+ * 
+ * @author Ayca Selva Baydar
+ * @author Ayfer Camci
+ *
  */
 public class AStar implements PathFinder {
 

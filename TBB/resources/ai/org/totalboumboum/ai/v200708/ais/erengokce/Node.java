@@ -1,5 +1,11 @@
 package org.totalboumboum.ai.v200708.ais.erengokce;
 
+/**
+ * 
+ * @author Can Eren
+ * @author Mustafa Mert Gokce
+ *
+ */
 public class Node {
 
 	//noeud son abscisse,ordonnee, et son noeud pere sil en existe

@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * 
+ * @author Aslihan Hanci
+ * @author Emine Canan Toprak
+ *
+ */
 public class HanciTprkAStar {
 
 	/** The set of nodes that have been searched through */

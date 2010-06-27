@@ -3,19 +3,14 @@ package org.totalboumboum.ai.v200708.ais.sahinyildirim;
 import java.awt.Point;
 import java.util.Vector;
 
-/*cette classe  est  pour  construire une relation  pere-> child
+/** 
+ * cette classe  est  pour  construire une relation  pere-> child
  *  
  * cette classe prendre un pointFind dans le constructor qui nous sert a trouver
  * les fils d'un point 
  * 
- *
- * 
- * 
- * 
- * *
- */
-/**
- * @author megaist
+ * @author Serkan Sahin
+ * @author Mehmet Yildirim
  *
  */
 public class ParentChild {

@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 
+ * @author Aslihan Hanci
+ * @author Emine Canan Toprak
+ *
+ */
 public class HanciTprkSortedList {
 	/** The list of elements */
 	@SuppressWarnings("unchecked")

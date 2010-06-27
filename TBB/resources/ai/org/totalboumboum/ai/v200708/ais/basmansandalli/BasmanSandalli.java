@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
+/**
+ * 
+ * @author Can Basman
+ * @author Halil Ibrahim Sandalli
+ *
+ */
 public class BasmanSandalli extends ArtificialIntelligence {
 	private static final long serialVersionUID = 1L;
 	

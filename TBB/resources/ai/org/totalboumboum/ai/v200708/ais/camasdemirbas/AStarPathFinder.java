@@ -11,9 +11,10 @@ import org.totalboumboum.ai.v200708.ais.camasdemirbas.ManhattanHeuristic;
  * Une implémentation de viseur de chemin 
  * qui utilise l'AStar l'algorithme basé heuristique déterminer un chemin. 
  * 
- * @author Gokhan Camas -- Irem Demirbas
+ * @author Gokhan Camas
+ * @author Irem Demirbas
+ *
  */
-
 @SuppressWarnings("unchecked")
 public class AStarPathFinder implements PathFinder {
 	private List closed = new ArrayList();

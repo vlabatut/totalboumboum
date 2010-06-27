@@ -1,15 +1,15 @@
 package org.totalboumboum.ai.v200708.ais.kilicpala;
 
-
 import java.util.Vector;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
-
-
+/**
+ * 
+ * @author Ugur Caglar Kilic
+ * @author Ibrahim Yagizhan Pala
+ *
+ */
 public class KilicPala extends ArtificialIntelligence
 {	private static final long serialVersionUID = 1L;
 	/** le dernier déplacement effectué */

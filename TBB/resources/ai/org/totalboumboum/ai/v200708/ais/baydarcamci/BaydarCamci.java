@@ -15,6 +15,10 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * ne pose jamais de bombe, et essaie juste de s'éloigner le plus
  * possible des dangers existants, i.e. par ordre de dangerosité
  * croissante : le feu, les bombes, les autres joueurs. 
+ * 
+ * @author Ayca Selva Baydar
+ * @author Ayfer Camci
+ *
  */
 public class BaydarCamci extends ArtificialIntelligence
 {

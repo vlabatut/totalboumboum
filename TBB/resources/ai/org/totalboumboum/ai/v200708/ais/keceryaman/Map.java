@@ -5,6 +5,10 @@ package org.totalboumboum.ai.v200708.ais.keceryaman;
  *  - x/j axis: 17 (colonnes)
  *  - y/i axis: 15 (lignes)
  *  ++ THIS CLASS WORKS FINE!
+ * 
+ * @author Serkan Kecer
+ * @author Onur Yaman
+ *
  */
 public class Map {
 	private static int[][] map = new int[17][15];

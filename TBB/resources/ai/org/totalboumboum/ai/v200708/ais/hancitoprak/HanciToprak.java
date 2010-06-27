@@ -4,10 +4,12 @@ import java.util.Vector;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
-
+/**
+ * 
+ * @author Aslihan Hanci
+ * @author Emine Canan Toprak
+ *
+ */
 public class HanciToprak extends ArtificialIntelligence {
 	private static final long serialVersionUID = 1L;
 	/** le dernier déplacement effectué */
