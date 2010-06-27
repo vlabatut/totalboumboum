@@ -42,6 +42,11 @@ import org.totalboumboum.game.stream.RunnableWriter;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class NetOutputServerStream
 {	private final boolean verbose = false;
 

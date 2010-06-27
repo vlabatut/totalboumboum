@@ -49,7 +49,11 @@ import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CalculusTools;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Match implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;
 

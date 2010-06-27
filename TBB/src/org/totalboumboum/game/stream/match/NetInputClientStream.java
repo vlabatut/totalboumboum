@@ -36,6 +36,11 @@ import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.stream.RunnableReader;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class NetInputClientStream
 {	private final boolean verbose = false;
 

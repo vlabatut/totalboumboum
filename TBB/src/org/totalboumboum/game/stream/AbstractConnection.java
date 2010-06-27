@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.match;
+package org.totalboumboum.game.stream;
 
 /*
  * Total Boum Boum
@@ -22,100 +22,105 @@ package org.totalboumboum.game.stream.match;
  */
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
-
-import org.totalboumboum.configuration.controls.ControlSettings;
-import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
-import org.totalboumboum.game.stream.RunnableWriter;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class NetOutputClientStream
-{	private final boolean verbose = false;
-
-	public NetOutputClientStream(Socket socket, List<ControlSettings> controlSettings)
-	{	this.controlSettings = controlSettings;
-		this.socket = socket;
+public abstract class AbstractConnection<T extends Object>
+{	
+	public AbstractConnection(Socket socket) throws IOException
+	{	initStreams(socket);
+		initThreads();
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// GENERAL				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void initStreams(Socket socket) throws IOException
+	{	InputStream is = socket.getInputStream();
+		in = new ObjectInputStream(is);
+		OutputStream os = socket.getOutputStream();
+		out = new ObjectOutputStream(os);
+	}
+
+	public void close() throws IOException
+	{	// threads
+		reader.interrupt();
+		writer.interrupt();
+		
+		// streams
+		in.close();
+		out.close();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// INPUT STREAM			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ObjectInputStream in;
 	
+	public abstract void dataRead(Object data);
+
 	/////////////////////////////////////////////////////////////////
-	// CONTROL SETTINGS					/////////////////////////////////////////
+	// OUTPUT STREAM		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<ControlSettings> controlSettings = null;
+	private ObjectOutputStream out;
 	
-	public void writeControlSettings() throws IOException
-	{	write(controlSettings);
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// EVENTS				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void writeEvent(RemotePlayerControlEvent event)
-	{	try
-		{	out.writeObject(event);
-			if(verbose)
-				System.out.println("recording: "+event);
-		}
-		catch (IOException e)
-		{	e.printStackTrace();
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// ROUND				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void initRound() throws IOException
-	{	writeControlSettings();
-
-		writer = new RunnableWriter(out);
-		writer.start();
-	}
-	
-	public void finishRound()
-	{	finishWriter();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// STREAM				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ObjectOutputStream out = null;
-	private Socket socket = null;
-	
-	public void initStreams() throws IOException
-	{	OutputStream o = socket.getOutputStream();
-		out = new ObjectOutputStream(o);
-	}
-
-	private void write(Object object) throws IOException
+	public void write(Object object) throws IOException
 	{	writer.addObject(object);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// THREADS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private RunnableReader<Object> reader = null;
 	private RunnableWriter writer = null;
-
-	private void finishWriter()
-	{	writer.interrupt();
+	
+	private void initThreads()
+	{	reader = new RunnableReader<Object>(in,this);
+		reader.start();
+		writer = new RunnableWriter(out);
+		writer.start();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected final List<T> listeners = new ArrayList<T>();
+	
+	public boolean addListener(T listener)
+	{	boolean result = false;
+		if(!listeners.contains(listener))
+			result = listeners.add(listener);
+		return result;
+	}
+	
+	public boolean removeListener(T listener)
+	{	boolean result = listeners.remove(listener);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected boolean finished = false;
-	
+
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
 			
+			in = null;
 			out = null;
-			socket = null;
+
+			reader = null;
 			writer = null;
 		}
 	}

@@ -35,6 +35,11 @@ import java.io.OutputStream;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class StatisticsLoader
 {
 	public static Statistics loadStatistics() throws IOException, ClassNotFoundException

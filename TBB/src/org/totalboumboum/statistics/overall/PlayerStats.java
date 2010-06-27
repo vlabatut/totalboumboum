@@ -30,6 +30,11 @@ import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class PlayerStats implements Serializable
 {	private static final long serialVersionUID = 1L;
 

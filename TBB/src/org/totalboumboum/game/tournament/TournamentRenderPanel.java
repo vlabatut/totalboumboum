@@ -21,6 +21,11 @@ package org.totalboumboum.game.tournament;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface TournamentRenderPanel
 {
 	public void tournamentOver();

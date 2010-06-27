@@ -33,10 +33,9 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * For example, if there was 5 players and the parameter was 7 
  * then the result would be {7,7,7} 
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class PointsConstant extends PointsProcessor implements PPConstant
 {	private static final long serialVersionUID = 1L;
 

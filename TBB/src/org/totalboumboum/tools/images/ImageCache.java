@@ -32,6 +32,11 @@ import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorFolder;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ImageCache
 {	
 	/////////////////////////////////////////////////////////////////

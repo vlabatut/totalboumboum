@@ -31,6 +31,11 @@ import java.util.Map.Entry;
 
 import org.totalboumboum.configuration.profile.Profile;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Ranks implements Serializable
 {	private static final long serialVersionUID = 1L;
 

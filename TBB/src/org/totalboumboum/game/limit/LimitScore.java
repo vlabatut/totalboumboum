@@ -30,7 +30,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * this limit is based on a given score (time, bombings, items...).
  * for example, a round can be stopped as soon as a player collects 30 items, or has 4 bombings
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit

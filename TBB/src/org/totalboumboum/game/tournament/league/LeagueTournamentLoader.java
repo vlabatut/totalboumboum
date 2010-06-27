@@ -34,7 +34,11 @@ import org.totalboumboum.game.tournament.league.LeagueTournament.ConfrontationOr
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LeagueTournamentLoader
 {
 	public static LeagueTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

@@ -21,6 +21,11 @@ package org.totalboumboum.game.match;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface MatchRenderPanel
 {
 	public void matchOver();

@@ -31,10 +31,9 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * 
  * For example, for {1,5,0,1} and {1,2,1,0} the result would be {0,3,-1,1}
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class PointsSubstraction extends PointsProcessor implements PPSecondaryOperator
 {	private static final long serialVersionUID = 1L;
 

@@ -56,8 +56,11 @@ import org.totalboumboum.statistics.GameStatistics;
   * <p>
   * The current implementation is based on the Glicko-2 algorithm, with 
   * extensions to support multiplayer and team based games.
+  * <p>
+  * Note: contains some modifications by Vincent Labatut.
   *
   * @author Derek Hilder
+  * @author Vincent Labatut
   */
 public class RankingService implements Serializable {
     private static final long serialVersionUID = 1L;

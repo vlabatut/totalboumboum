@@ -31,10 +31,9 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * For example, if the first player had picked 15 items, the second none and 
  * the third 7, and if the items score wass processed, then result would be {15,0,7} 
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class PointsScores extends PointsProcessor implements PPConstant
 {	private static final long serialVersionUID = 1L;
 

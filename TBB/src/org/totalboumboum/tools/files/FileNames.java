@@ -21,6 +21,11 @@ package org.totalboumboum.tools.files;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FileNames
 {
 	public static final String EXTENSION_BACKUP = ".backup";

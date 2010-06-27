@@ -26,6 +26,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class TimeTools
 {
 	public static Date dateXmlToJava(String xmlStr)

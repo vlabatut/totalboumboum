@@ -21,6 +21,11 @@ package org.totalboumboum.tools.time;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public enum TimeUnit
 {	MILLISECOND,
 	SECOND,

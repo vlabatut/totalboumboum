@@ -23,6 +23,10 @@ import org.totalboumboum.gui.tools.GuiTools;
 /**
  * most of this class was adapted from a work by Adam Walker <adam@walkersoftware.net>
  * cf. http://www.walkersoftware.net/articles/text-effects-in-java/
+ * 
+ * @author Adam Walker
+ * @author Vincent Labatut
+ *
  */
 public class MessageDisplayer
 {

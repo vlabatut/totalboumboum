@@ -41,7 +41,11 @@ import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LeagueTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
 

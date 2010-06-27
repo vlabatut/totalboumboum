@@ -37,10 +37,9 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * 		values:       | 1 | 2 | 4  |  6 | 10 |
  * the the result would be {2,4,0}
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class PointsDiscretize extends PointsProcessor implements PPFunction
 {	private static final long serialVersionUID = 1L;
 

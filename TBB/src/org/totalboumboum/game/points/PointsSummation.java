@@ -33,10 +33,9 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * For example, for 5 players and a {1,3,4,0,3} points vector coming
  * from the source, the result would be {11,11,11,11,11}. 
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class PointsSummation extends PointsProcessor implements PPFunction
 {	private static final long serialVersionUID = 1L;
 

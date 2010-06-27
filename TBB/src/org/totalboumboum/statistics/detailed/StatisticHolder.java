@@ -26,6 +26,11 @@ import java.util.List;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface StatisticHolder
 {
 	public StatisticBase getStats();

@@ -36,7 +36,11 @@ import org.totalboumboum.game.tournament.TournamentLoader;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SequenceTournamentLoader
 {	
 	public static SequenceTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

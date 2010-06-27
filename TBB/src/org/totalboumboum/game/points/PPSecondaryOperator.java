@@ -21,6 +21,11 @@ package org.totalboumboum.game.points;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface PPSecondaryOperator
 {
 

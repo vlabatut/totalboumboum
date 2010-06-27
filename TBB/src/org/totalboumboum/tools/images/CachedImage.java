@@ -29,6 +29,11 @@ import java.util.HashMap;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class CachedImage
 {
 	public CachedImage(ImageCache imageCache, String imagePath)

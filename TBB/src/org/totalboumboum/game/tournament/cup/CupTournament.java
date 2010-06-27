@@ -44,7 +44,11 @@ import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class CupTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
 

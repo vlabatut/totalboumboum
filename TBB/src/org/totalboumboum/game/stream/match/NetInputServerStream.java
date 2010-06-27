@@ -34,6 +34,11 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.stream.RunnableReader;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class NetInputServerStream
 {	private final boolean verbose = false;
 

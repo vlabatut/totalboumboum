@@ -33,7 +33,11 @@ import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LimitLoader
 {
 	public static Limit loadLimitElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException

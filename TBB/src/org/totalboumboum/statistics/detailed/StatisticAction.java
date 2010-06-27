@@ -23,6 +23,11 @@ package org.totalboumboum.statistics.detailed;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public enum StatisticAction implements Serializable
 {	
 	/* item related */

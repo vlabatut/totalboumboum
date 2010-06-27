@@ -43,6 +43,11 @@ import org.totalboumboum.statistics.overall.PlayerStats;
 import org.totalboumboum.tools.calculus.CalculusTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GameStatistics
 {
 	/////////////////////////////////////////////////////////////////

@@ -29,7 +29,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * this limit is based on the number of confrontations during a tournament or match.
  * for example, a match can be limited to 10 rounds, or a sequence tournament to 5 matches
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 public class LimitConfrontation implements TournamentLimit, MatchLimit

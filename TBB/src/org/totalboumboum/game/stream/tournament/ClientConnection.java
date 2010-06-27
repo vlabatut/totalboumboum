@@ -36,7 +36,7 @@ import org.totalboumboum.game.stream.RunnableWriter;
 
 /**
  * represents a server-side connection with a client
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 public class ClientConnection

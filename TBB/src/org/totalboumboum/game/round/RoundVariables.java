@@ -40,6 +40,11 @@ import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class RoundVariables
 {
 	/////////////////////////////////////////////////////////////////

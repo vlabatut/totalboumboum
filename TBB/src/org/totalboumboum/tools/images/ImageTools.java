@@ -48,6 +48,11 @@ import javax.imageio.ImageIO;
 
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ImageTools
 {
 

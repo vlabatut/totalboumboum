@@ -31,10 +31,9 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * For example, for a match in which 2 rounds have been played with
  * {1,0,0,0} and {1,5,0,2} points, the result would be {2,5,0,2}. 
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class PointsTotal extends PointsProcessor implements PPConstant
 {	private static final long serialVersionUID = 1L;
 

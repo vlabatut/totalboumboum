@@ -42,6 +42,11 @@ import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FileInputClientStream
 {	private final boolean verbose = false;
 	

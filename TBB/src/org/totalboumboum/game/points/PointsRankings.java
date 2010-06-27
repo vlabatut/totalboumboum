@@ -38,10 +38,9 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * 
  * Note : the order can be normal (ie. increasing) or inverted (ie. decreasing)
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class PointsRankings extends PointsProcessor implements PPFunction
 {	private static final long serialVersionUID = 1L;
 

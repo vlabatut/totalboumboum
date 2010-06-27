@@ -21,6 +21,11 @@ package org.totalboumboum.game.limit;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface RoundLimit extends Limit
 {
 

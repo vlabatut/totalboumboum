@@ -41,7 +41,11 @@ import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.tools.GameData;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SequenceTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
 
