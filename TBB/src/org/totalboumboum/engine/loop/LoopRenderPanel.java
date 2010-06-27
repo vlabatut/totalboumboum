@@ -24,6 +24,11 @@ package org.totalboumboum.engine.loop;
 import java.awt.Font;
 import java.awt.event.KeyListener;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface LoopRenderPanel
 {	public void paintScreen();
 

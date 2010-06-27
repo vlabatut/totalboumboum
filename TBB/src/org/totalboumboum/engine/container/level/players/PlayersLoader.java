@@ -36,6 +36,11 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class PlayersLoader
 {	
     public static Players loadPlayers(String folder) throws ParserConfigurationException, SAXException, IOException

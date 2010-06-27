@@ -29,7 +29,11 @@ import java.util.Set;
 import org.totalboumboum.engine.container.itemset.ItemsetPreview;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LevelPreview implements Serializable
 {	private static final long serialVersionUID = 1L;
 

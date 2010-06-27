@@ -23,6 +23,11 @@ package org.totalboumboum.engine.content.feature.gesture.anime.color;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ColorFolder extends ColorRule
 {	private static final long serialVersionUID = 1L;
 

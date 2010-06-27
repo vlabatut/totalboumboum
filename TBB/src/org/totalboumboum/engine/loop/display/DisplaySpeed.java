@@ -30,6 +30,11 @@ import java.awt.geom.Rectangle2D;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplaySpeed implements Display
 {
 	public DisplaySpeed()

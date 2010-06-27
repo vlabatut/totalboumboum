@@ -27,6 +27,11 @@ import java.util.Map.Entry;
 
 import org.totalboumboum.engine.container.CachableSpriteContainer;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowFiresetMap extends AbstractFiresetMap<HollowFireset> implements Serializable, CachableSpriteContainer
 {	private static final long serialVersionUID = 1L;
 

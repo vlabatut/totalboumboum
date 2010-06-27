@@ -45,7 +45,7 @@ import org.totalboumboum.engine.content.sprite.block.Block;
  * Représente un bloc du jeu, c'est à dire généralement un mur
  * (pouvant être détruit ou pas). 
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 

@@ -30,6 +30,11 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMap;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowStepImage extends AbstractStepImage implements Serializable
 {	private static final long serialVersionUID = 1L;
 

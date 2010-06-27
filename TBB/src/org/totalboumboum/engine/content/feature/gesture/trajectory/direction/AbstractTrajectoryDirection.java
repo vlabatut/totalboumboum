@@ -30,6 +30,11 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.step.AbstractTrajectoryStep;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractTrajectoryDirection<T extends AbstractTrajectoryStep>
 {	
 	/////////////////////////////////////////////////////////////////

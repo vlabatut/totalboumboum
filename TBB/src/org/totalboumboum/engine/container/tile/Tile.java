@@ -43,6 +43,11 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.game.round.RoundVariables;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Tile
 {		
 	public Tile(Level level,int line, int col, double posX, double posY)

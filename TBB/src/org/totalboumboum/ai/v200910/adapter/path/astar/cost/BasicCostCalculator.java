@@ -25,9 +25,13 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 /**
+ * 
  * Classe étendant la classe abstraite CostCalculator de la manière la plus simple possible.
  * Ici, le cout pour passer d'une case à l'autre est simplement 1, quelles que soient
  * les cases considérées.
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class BasicCostCalculator extends CostCalculator
 {

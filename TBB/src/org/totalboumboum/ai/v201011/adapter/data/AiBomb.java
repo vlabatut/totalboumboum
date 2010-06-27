@@ -42,15 +42,13 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 
-
 /**
  * représente une bombe du jeu, ie un objet que les joueurs peuvent déposer
  * pour détruire les murs et éliminer les autre joueurs.
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class AiBomb extends AiSprite<Bomb>
 {	
 	/**

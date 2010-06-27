@@ -39,6 +39,11 @@ import org.totalboumboum.engine.content.manager.modulation.ModulationManager;
 import org.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Item extends Sprite
 {	
 	public Item()

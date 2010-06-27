@@ -27,10 +27,13 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.path.astar.AstarNode;
 
-
 /**
+ * 
  * permet de définir une fonction successeur utilisée par l'algorithme
  * A* lors de la recherche d'un plus court chemin, pour développer un état
+ * 
+ * @author Vincent Labatut
+ *
  */
 public abstract class SuccessorCalculator
 {

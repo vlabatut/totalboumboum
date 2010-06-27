@@ -35,7 +35,9 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>contact:		intersection or collision
  * 	<br>tilePosition:	same or neighbor
  * 	<br>orientation:	same
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class SpecificPush extends SpecificAction
 {

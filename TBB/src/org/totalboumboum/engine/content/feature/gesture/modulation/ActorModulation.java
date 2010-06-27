@@ -24,6 +24,11 @@ package org.totalboumboum.engine.content.feature.gesture.modulation;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ActorModulation extends AbstractActionModulation
 {	private static final long serialVersionUID = 1L;
 

@@ -26,6 +26,11 @@ import java.io.Serializable;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class Loop implements Runnable, Serializable
 {	private static final long serialVersionUID = 1L;
 	public static final int INFO_ALPHA_LEVEL = 100;

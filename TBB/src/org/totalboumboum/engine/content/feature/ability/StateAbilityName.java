@@ -1,7 +1,5 @@
 package org.totalboumboum.engine.content.feature.ability;
 
-import java.io.Serializable;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -23,10 +21,14 @@ import java.io.Serializable;
  * 
  */
 
+import java.io.Serializable;
+
 /**
  * names for all predefined StateAbilities.
  * must be Strings, since it's possible to define custom ones in XML files
  * (hence no enum type)
+ * 
+ * @author Vincent Labatut
  *
  */
 public class StateAbilityName implements Serializable

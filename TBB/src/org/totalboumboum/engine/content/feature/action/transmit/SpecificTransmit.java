@@ -26,6 +26,11 @@ import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.item.Item;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SpecificTransmit extends SpecificAction
 {
 	/**

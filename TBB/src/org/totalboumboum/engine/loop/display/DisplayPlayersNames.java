@@ -33,6 +33,11 @@ import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplayPlayersNames implements Display
 {
 	public DisplayPlayersNames(VisibleLoop loop)

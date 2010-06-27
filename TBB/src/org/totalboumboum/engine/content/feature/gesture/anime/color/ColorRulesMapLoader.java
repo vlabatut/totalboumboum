@@ -33,6 +33,11 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ColorRulesMapLoader
 {
 	@SuppressWarnings("unchecked")

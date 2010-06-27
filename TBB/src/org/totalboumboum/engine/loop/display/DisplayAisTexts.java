@@ -37,6 +37,11 @@ import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplayAisTexts implements Display
 {
 	public DisplayAisTexts(InteractiveLoop loop)

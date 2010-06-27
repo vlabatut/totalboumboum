@@ -28,7 +28,11 @@ import org.jdom.Element;
 import org.totalboumboum.engine.container.level.zone.ZoneSaver;
 import org.totalboumboum.tools.xml.XmlNames;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class VariableTilesSaver
 {	
     public static Element saveVariableTilesElement(HashMap<String,VariableTile> variableTiles)

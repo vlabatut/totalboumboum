@@ -34,6 +34,11 @@ import org.totalboumboum.engine.content.manager.delay.DelayManager;
 import org.totalboumboum.engine.content.manager.event.EventManager;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FireEventManager extends EventManager
 {
 	public FireEventManager(Fire sprite)

@@ -32,7 +32,6 @@ import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
-
 /** 
  * action d'apparaitre de nulle part (suite à téléport, ou drop) 
  * INTRANSITIVE
@@ -63,6 +62,11 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>tilePosition:	any or undefined
  * 	<br>orientation:	any or undefined
  *  
+ */
+/**
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class GeneralAppear extends GeneralAction
 {	private static final long serialVersionUID = 1L;

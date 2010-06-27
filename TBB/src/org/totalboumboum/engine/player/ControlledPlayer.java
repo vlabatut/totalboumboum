@@ -36,6 +36,11 @@ import org.totalboumboum.engine.control.player.PlayerControl;
 import org.totalboumboum.game.stream.match.NetOutputServerStream;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ControlledPlayer extends AbstractPlayer
 {	
 	public ControlledPlayer(Profile profile, HollowHeroFactory base, Tile tile, NetOutputServerStream out) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

@@ -40,15 +40,13 @@ import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import org.totalboumboum.engine.content.sprite.block.Block;
 
-
 /**
  * Représente un bloc du jeu, c'est à dire généralement un mur
  * (pouvant être détruit ou pas). 
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class AiBlock extends AiSprite<Block>
 {
 	/**

@@ -3,6 +3,11 @@ package org.totalboumboum.ai;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AiPreview
 {
 	public AiPreview(String pack, String folder)

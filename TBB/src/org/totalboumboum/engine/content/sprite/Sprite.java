@@ -71,11 +71,13 @@ import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 
-/* 
+/** 
  * Sprite possédant un status :
  * softwall, hero, bomb, item...
+ * 
+ * @author Vincent Labatut
+ *
  */
-
 public abstract class Sprite
 {	
 	public Sprite()

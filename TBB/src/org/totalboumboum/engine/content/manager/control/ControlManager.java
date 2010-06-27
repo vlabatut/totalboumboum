@@ -26,6 +26,11 @@ import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.control.ControlCode;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ControlManager
 {	
 	public ControlManager(Sprite sprite)

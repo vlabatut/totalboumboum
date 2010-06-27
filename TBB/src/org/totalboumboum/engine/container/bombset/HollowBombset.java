@@ -33,6 +33,11 @@ import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.totalboumboum.engine.content.sprite.bomb.HollowBombFactory;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowBombset extends AbstractBombset implements Serializable, CachableSpriteContainer
 {	private static final long serialVersionUID = 1L;
 

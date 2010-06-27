@@ -25,6 +25,11 @@ import org.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class EmptyBombsetManager extends BombsetManager
 {	
 	public EmptyBombsetManager(Sprite sprite)

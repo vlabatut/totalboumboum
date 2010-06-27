@@ -28,6 +28,11 @@ import java.util.List;
 
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplayManager
 {
 	/////////////////////////////////////////////////////////////////

@@ -27,7 +27,11 @@ import java.util.Locale;
 import org.jdom.Element;
 import org.totalboumboum.tools.xml.XmlNames;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ProfilesSelectionLoader
 {	
 	@SuppressWarnings("unchecked")

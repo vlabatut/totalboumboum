@@ -25,6 +25,11 @@ import java.awt.Graphics;
 
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface Display
 {
 	/////////////////////////////////////////////////////////////////

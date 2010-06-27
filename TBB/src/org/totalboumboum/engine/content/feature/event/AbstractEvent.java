@@ -21,6 +21,11 @@ package org.totalboumboum.engine.content.feature.event;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AbstractEvent
 {
 

@@ -21,6 +21,11 @@ package org.totalboumboum.engine.content.feature.gesture.trajectory.step;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowTrajectoryStep extends AbstractTrajectoryStep
 {	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////

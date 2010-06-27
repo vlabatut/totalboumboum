@@ -36,6 +36,11 @@ import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Fire extends Sprite
 {	
 	public Fire()

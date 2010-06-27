@@ -67,7 +67,9 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>contact:		none (the target is not supposed to be ongame)
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class GeneralDrop extends GeneralAction
 {	private static final long serialVersionUID = 1L;

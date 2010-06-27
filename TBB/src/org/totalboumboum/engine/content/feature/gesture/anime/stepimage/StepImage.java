@@ -23,6 +23,11 @@ package org.totalboumboum.engine.content.feature.gesture.anime.stepimage;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class StepImage extends AbstractStepImage
 {	
 	public StepImage(BufferedImage image, double xShift, double yShift)

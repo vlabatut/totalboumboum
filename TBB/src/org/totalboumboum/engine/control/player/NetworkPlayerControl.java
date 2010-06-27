@@ -31,6 +31,11 @@ import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.game.stream.match.NetOutputServerStream;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class NetworkPlayerControl extends PlayerControl 
 {	
 	public NetworkPlayerControl(ControlledPlayer player, NetOutputServerStream out)

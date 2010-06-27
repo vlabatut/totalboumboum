@@ -27,11 +27,14 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
-
 /**
+ * 
  * implémentation la plus simple d'une heuristique : 
  * on utilise la distance de Manhattan entre la case de départ et 
  * la plus proche des cases d'arrivée.
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class BasicHeuristicCalculator extends HeuristicCalculator
 {

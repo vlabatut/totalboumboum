@@ -23,6 +23,11 @@ package org.totalboumboum.engine.container.fireset;
 
 import java.util.HashMap;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractFiresetMap<T extends AbstractFireset>
 {	
 	/////////////////////////////////////////////////////////////////

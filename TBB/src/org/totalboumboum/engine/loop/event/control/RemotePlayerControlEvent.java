@@ -25,6 +25,11 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class RemotePlayerControlEvent extends StreamedEvent
 {	private static final long serialVersionUID = 1L;
 

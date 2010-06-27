@@ -36,6 +36,11 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class QuickStartConfigurationSaver
 {	
 	public static void saveQuickStartConfiguration(QuickStartConfiguration quickStartConfiguration) throws ParserConfigurationException, SAXException, IOException

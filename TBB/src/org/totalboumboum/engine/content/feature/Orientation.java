@@ -1,18 +1,5 @@
 package org.totalboumboum.engine.content.feature;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import org.jdom.Attribute;
-import org.jdom.Element;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.xml.XmlNames;
-
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -34,10 +21,25 @@ import org.totalboumboum.tools.xml.XmlNames;
  * 
  */
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import org.jdom.Attribute;
+import org.jdom.Element;
+import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.tools.xml.XmlNames;
+
 /**
  * represents the compared directions of the action and of the target
  * (the levels is closed, so the target direction has to be considered in terms of shortest distance)  
- */ 
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public enum Orientation implements Serializable
 {	/** no target or no action direction */
 	NONE,

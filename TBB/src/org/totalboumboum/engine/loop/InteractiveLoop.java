@@ -26,6 +26,11 @@ import java.util.List;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.player.AbstractPlayer;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface InteractiveLoop
 {	
 	/////////////////////////////////////////////////////////////////

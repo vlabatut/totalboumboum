@@ -21,6 +21,11 @@ package org.totalboumboum.engine.content.feature.gesture.modulation;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SelfModulation extends AbstractStateModulation
 {	private static final long serialVersionUID = 1L;
 

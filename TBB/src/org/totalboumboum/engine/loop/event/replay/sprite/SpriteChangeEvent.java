@@ -25,6 +25,11 @@ import java.util.HashMap;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class SpriteChangeEvent extends SpriteEvent
 {	private static final long serialVersionUID = 1L;
 

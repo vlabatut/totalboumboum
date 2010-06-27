@@ -26,6 +26,11 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SpriteCreationEvent extends SpriteEvent
 {	private static final long serialVersionUID = 1L;
 

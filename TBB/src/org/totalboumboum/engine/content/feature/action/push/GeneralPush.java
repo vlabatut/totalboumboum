@@ -73,7 +73,9 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>contact:		intersection or collision
  * 	<br>tilePosition:	same or neighbor
  * 	<br>orientation:	same
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class GeneralPush extends GeneralAction
 {	private static final long serialVersionUID = 1L;

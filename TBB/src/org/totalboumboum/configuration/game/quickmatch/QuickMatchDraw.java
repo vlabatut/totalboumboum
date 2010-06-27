@@ -1,5 +1,10 @@
 package org.totalboumboum.configuration.game.quickmatch;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public enum QuickMatchDraw
 {
 	NONE,

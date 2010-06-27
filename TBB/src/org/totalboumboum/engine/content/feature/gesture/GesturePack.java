@@ -23,6 +23,11 @@ package org.totalboumboum.engine.content.feature.gesture;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GesturePack extends AbstractGesturePack<Gesture>
 {	
 	/////////////////////////////////////////////////////////////////

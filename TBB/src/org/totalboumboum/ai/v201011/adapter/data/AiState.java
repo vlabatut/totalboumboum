@@ -32,10 +32,9 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * direction dans laquelle elle est effectuée (pour les actions orientées
  * comme le déplacement, par exemple).
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
-
 public class AiState 
 {
 	/** sprite dont l'état est représenté */

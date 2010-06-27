@@ -37,6 +37,11 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulat
 import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ModulationManager
 {	
 	public ModulationManager(Sprite sprite)

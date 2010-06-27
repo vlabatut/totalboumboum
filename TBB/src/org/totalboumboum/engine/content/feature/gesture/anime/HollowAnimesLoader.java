@@ -47,6 +47,11 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowAnimesLoader
 {	
 	public static void loadAnimes(String folderPath, HollowGesturePack pack) throws IOException, ParserConfigurationException, SAXException

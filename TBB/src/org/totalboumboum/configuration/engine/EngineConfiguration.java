@@ -38,6 +38,11 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 import org.totalboumboum.tools.images.ImageCache;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class EngineConfiguration
 {
 	public EngineConfiguration copy()

@@ -38,13 +38,12 @@ import org.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
 import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import org.totalboumboum.engine.content.sprite.item.Item;
 
-
 /**
  * représente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
  * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
  * par l'item. Ce type est représentée par une valeur de type AiItemType.
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 public class AiItem extends AiSprite<Item>

@@ -42,6 +42,11 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowFloorFactoryLoader extends HollowSpriteFactoryLoader
 {	
 	public static HollowFloorFactory loadFloorFactory(String folderPath, HashMap<String,HollowFloorFactory> abstractFloors, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

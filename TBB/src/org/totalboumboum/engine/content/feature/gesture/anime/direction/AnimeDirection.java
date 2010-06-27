@@ -25,6 +25,11 @@ import java.io.Serializable;
 
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AnimeDirection extends AbstractAnimeDirection<AnimeStep> implements Serializable
 {	private static final long serialVersionUID = 1L;
 

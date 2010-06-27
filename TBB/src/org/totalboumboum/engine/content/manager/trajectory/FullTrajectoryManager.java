@@ -36,6 +36,11 @@ import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEve
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FullTrajectoryManager extends TrajectoryManager
 {	
 	public FullTrajectoryManager(Sprite sprite)

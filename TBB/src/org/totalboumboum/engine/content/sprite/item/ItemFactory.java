@@ -42,6 +42,11 @@ import org.totalboumboum.engine.content.sprite.item.ItemEventManager;
 import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.game.round.RoundVariables;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ItemFactory extends SpriteFactory<Item>
 {	private static final long serialVersionUID = 1L;
 

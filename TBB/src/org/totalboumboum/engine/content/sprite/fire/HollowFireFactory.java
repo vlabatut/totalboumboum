@@ -27,6 +27,11 @@ import java.util.HashMap;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.HollowSpriteFactory;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowFireFactory extends HollowSpriteFactory<Fire>
 {	private static final long serialVersionUID = 1L;
 

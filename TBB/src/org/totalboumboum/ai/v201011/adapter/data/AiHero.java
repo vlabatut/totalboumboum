@@ -34,7 +34,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
  * représente un personnage du jeu, ie un sprite contrôlé par un joueur
  * humain ou une IA.
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 public class AiHero extends AiSprite<Hero>

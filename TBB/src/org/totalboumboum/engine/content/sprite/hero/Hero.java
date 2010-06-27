@@ -24,6 +24,11 @@ package org.totalboumboum.engine.content.sprite.hero;
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Hero extends Sprite
 {	
 	public Hero()

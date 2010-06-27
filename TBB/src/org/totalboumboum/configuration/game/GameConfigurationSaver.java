@@ -30,7 +30,11 @@ import org.totalboumboum.configuration.game.quickstart.QuickStartConfigurationSa
 import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSaver;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GameConfigurationSaver
 {	
 	public static void saveGameConfiguration(GameConfiguration gameConfiguration) throws ParserConfigurationException, SAXException, IOException

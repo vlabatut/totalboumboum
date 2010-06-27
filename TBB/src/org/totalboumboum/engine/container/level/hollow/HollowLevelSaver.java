@@ -35,6 +35,11 @@ import org.totalboumboum.engine.container.level.zone.ZoneSaver;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowLevelSaver
 {	
 	public static void saveHollowLevel(HollowLevel hollowLevel) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException

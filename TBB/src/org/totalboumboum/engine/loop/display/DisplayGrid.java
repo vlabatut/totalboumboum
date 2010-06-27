@@ -30,6 +30,11 @@ import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.game.round.RoundVariables;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplayGrid implements Display
 {
 	public DisplayGrid(VisibleLoop loop)

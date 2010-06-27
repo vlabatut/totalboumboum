@@ -44,6 +44,11 @@ import org.totalboumboum.engine.loop.RegularLoop;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AiManager extends AbstractAiManager<Integer>
 {	private boolean debug = false;
 

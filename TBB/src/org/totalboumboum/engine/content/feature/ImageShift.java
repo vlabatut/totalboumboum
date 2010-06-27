@@ -25,7 +25,11 @@ import java.io.Serializable;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public enum ImageShift implements Serializable
 {
 	DOWN,BOUNDHEIGHT;

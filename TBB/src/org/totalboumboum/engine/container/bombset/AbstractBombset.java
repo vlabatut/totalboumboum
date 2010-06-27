@@ -26,6 +26,11 @@ import java.util.List;
 
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractBombset
 {	
 	/////////////////////////////////////////////////////////////////

@@ -32,6 +32,11 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplayFPS implements Display
 {
 	public DisplayFPS(VisibleLoop loop)

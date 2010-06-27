@@ -41,6 +41,11 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulati
 import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.AbstractTrajectoryDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractGesture<T extends AbstractAnimeDirection<?>, U extends AbstractTrajectoryDirection<?>>
 {	private static final long serialVersionUID = 1L;
 

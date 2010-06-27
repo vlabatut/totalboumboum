@@ -38,6 +38,11 @@ import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Level
 {	public Level(VisibleLoop loop)				
 	{	this.loop = loop;

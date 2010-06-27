@@ -1,17 +1,5 @@
 package org.totalboumboum.engine.content.feature;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import org.jdom.Attribute;
-import org.jdom.Element;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.tools.xml.XmlNames;
-
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -32,9 +20,24 @@ import org.totalboumboum.tools.xml.XmlNames;
  * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import org.jdom.Attribute;
+import org.jdom.Element;
+import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.tools.xml.XmlNames;
+
 /**
  * represents the kind of contact between the actor and the target during an action:
  * 
+ * 
+ * @author Vincent Labatut
+ *
  */
 public enum Contact implements Serializable
 {	

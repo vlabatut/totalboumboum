@@ -37,6 +37,11 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulati
 import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.HollowTrajectoryDirection;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowGesture extends AbstractGesture<HollowAnimeDirection,HollowTrajectoryDirection> implements Serializable
 {	private static final long serialVersionUID = 1L;
 

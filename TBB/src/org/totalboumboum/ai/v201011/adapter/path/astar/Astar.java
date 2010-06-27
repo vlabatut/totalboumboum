@@ -57,6 +57,9 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalcul
  * rapport au cout défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
  * renverra pas forcément toujours la même (il en choisira une au hasard).
  * Le but est d'introduire une part de hasard dans les IA, de manière à les rendre moins prévisibles.
+ * 
+ * @author Vincent Labatut
+ *
  */
 public final class Astar
 {	private static boolean verbose = false;

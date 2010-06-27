@@ -25,7 +25,11 @@ import java.util.HashMap;
 
 import org.totalboumboum.engine.content.sprite.SpritePreview;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ItemsetPreview
 {
 	HashMap<String,SpritePreview> itemPreviews = new HashMap<String, SpritePreview>();

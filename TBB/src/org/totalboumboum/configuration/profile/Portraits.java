@@ -24,6 +24,11 @@ package org.totalboumboum.configuration.profile;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Portraits
 {	
 	public static final String INGAME_LOST = "LOST";

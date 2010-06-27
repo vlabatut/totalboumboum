@@ -23,6 +23,11 @@ package org.totalboumboum.engine.container.explosionset;
 
 import java.util.HashMap;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractExplosionset<T extends AbstractExplosion>
 {	
 	/////////////////////////////////////////////////////////////////

@@ -26,6 +26,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class VariableTile implements Serializable
 {	private static final long serialVersionUID = 1L;
 	

@@ -25,6 +25,11 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.concurrent.Callable;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ArtificialIntelligence implements Callable<Integer>
 {	// constantes de sens de déplacement
 	/** constante représentant la direction : sur-place (pas de déplacement)*/ 

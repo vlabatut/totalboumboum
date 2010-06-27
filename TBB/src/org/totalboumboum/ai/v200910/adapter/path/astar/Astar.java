@@ -36,8 +36,8 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.ai.v200910.adapter.path.astar.successor.BasicSuccessorCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalculator;
 
-
 /**
+ * 
  * Implémentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
  * cette implémentation correspond à peu près à un A* classique. Il y a quand même une modification,
@@ -57,6 +57,9 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
  * rapport au cout défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
  * renverra pas forcément toujours la même (il en choisira une au hasard).
  * Le but est d'introduire une part de hasard dans les IA, de manière à les rendre moins prévisibles.
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class Astar
 {	private static boolean verbose = false;

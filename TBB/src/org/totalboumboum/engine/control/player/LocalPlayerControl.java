@@ -29,6 +29,11 @@ import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LocalPlayerControl extends PlayerControl 
 {	
 	public LocalPlayerControl(ControlledPlayer player)

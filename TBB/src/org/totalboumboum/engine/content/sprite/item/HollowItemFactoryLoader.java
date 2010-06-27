@@ -42,6 +42,11 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowItemFactoryLoader extends HollowSpriteFactoryLoader
 {	
 	public static HollowItemFactory loadItemFactory(String folderPath, String itemName, List<String> itemrefs, List<List<AbstractAbility>> itemAbilities, List<Float> probabilities, HashMap<String,HollowItemFactory> abstractItems, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

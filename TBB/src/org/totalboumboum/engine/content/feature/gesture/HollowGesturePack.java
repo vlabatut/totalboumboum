@@ -29,6 +29,11 @@ import java.util.Map.Entry;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMap;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowGesturePack extends AbstractGesturePack<HollowGesture> implements Serializable
 {	private static final long serialVersionUID = 1L;
 

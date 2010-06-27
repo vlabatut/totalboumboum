@@ -60,7 +60,9 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>contact:		none
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class GeneralMoveHigh extends GeneralAction
 {	private static final long serialVersionUID = 1L;

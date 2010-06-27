@@ -21,6 +21,11 @@ package org.totalboumboum.engine.container.explosionset;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractExplosion
 {	
 	/////////////////////////////////////////////////////////////////

@@ -53,6 +53,11 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowHeroFactoryLoader extends HollowSpriteFactoryLoader
 {	
 	/* 

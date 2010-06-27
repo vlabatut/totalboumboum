@@ -31,6 +31,11 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Explosion extends AbstractExplosion
 {	
 	/////////////////////////////////////////////////////////////////

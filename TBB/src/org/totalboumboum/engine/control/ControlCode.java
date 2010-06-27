@@ -23,6 +23,11 @@ package org.totalboumboum.engine.control;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ControlCode implements Serializable
 {	private static final long serialVersionUID = 1L;
 

@@ -21,6 +21,11 @@ package org.totalboumboum.configuration.statistics;
  * 
  */
  
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class StatisticsConfiguration
 {
 	public StatisticsConfiguration copy()

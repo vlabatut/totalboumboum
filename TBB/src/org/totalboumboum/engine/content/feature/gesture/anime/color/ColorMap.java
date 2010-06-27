@@ -27,6 +27,11 @@ import java.util.Map.Entry;
 
 import org.totalboumboum.configuration.profile.PredefinedColor;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ColorMap extends ColorRule
 {	private static final long serialVersionUID = 1L;	
 

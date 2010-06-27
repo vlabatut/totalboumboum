@@ -31,7 +31,11 @@ import org.jdom.Element;
 import org.totalboumboum.tools.calculus.CalculusTools;
 import org.totalboumboum.tools.xml.XmlNames;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public enum Direction implements Serializable
 {
 	/////////////////////////////////////////////////////////////////

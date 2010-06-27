@@ -37,6 +37,11 @@ import org.totalboumboum.engine.content.sprite.SpriteFactory;
 import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.game.round.RoundVariables;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FloorFactory extends SpriteFactory<Floor>
 {	
 	/////////////////////////////////////////////////////////////////

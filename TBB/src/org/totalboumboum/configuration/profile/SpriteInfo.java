@@ -23,6 +23,11 @@ package org.totalboumboum.configuration.profile;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SpriteInfo implements Serializable
 {	private static final long serialVersionUID = 1L;
 

@@ -24,6 +24,11 @@ package org.totalboumboum.configuration.profile;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ProfilesSelection
 {
 	public ProfilesSelection copy()

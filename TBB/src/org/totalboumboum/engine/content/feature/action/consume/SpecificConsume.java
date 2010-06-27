@@ -40,7 +40,9 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
  * 	<br>contact:		any or none
  * 	<br>tilePosition:	any or undefined
  * 	<br>orientation:	any or undefined
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class SpecificConsume extends SpecificAction
 {

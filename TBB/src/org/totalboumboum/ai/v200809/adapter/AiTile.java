@@ -41,7 +41,7 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 /**
  * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 

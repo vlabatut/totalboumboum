@@ -31,6 +31,11 @@ import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.feature.gesture.HollowGesturePack;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class HollowSpriteFactory<T extends Sprite> extends AbstractSpriteFactory<T,HollowGesturePack> implements Serializable
 {	private static final long serialVersionUID = 1L;
 

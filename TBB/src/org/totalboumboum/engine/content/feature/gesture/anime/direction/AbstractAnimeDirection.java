@@ -29,6 +29,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AbstractAnimeStep;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractAnimeDirection<T extends AbstractAnimeStep<?>>
 {	private static final long serialVersionUID = 1L;
 

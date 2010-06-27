@@ -24,6 +24,11 @@ package org.totalboumboum.engine.content.feature.gesture.trajectory.step;
 import org.totalboumboum.engine.content.feature.ImageShift;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractTrajectoryStep
 {	
 	/////////////////////////////////////////////////////////////////

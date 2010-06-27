@@ -30,7 +30,11 @@ import org.totalboumboum.configuration.game.quickstart.QuickStartConfigurationLo
 import org.totalboumboum.configuration.game.tournament.TournamentConfigurationLoader;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GameConfigurationLoader
 {	
 	public static GameConfiguration loadGameConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException

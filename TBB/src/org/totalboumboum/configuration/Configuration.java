@@ -48,7 +48,11 @@ import org.totalboumboum.configuration.video.VideoConfigurationLoader;
 import org.totalboumboum.configuration.video.VideoConfigurationSaver;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Configuration
 {	
 

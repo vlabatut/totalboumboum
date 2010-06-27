@@ -61,6 +61,11 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class VisibleLoop extends Loop
 {	private static final long serialVersionUID = 1L;
 	protected final static boolean VERBOSE = false;

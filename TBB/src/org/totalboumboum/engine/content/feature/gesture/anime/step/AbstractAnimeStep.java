@@ -27,6 +27,11 @@ import java.util.List;
 import org.totalboumboum.engine.content.feature.ImageShift;
 import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.AbstractStepImage;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractAnimeStep<T extends AbstractStepImage>
 {	
 	public AbstractAnimeStep()

@@ -32,6 +32,11 @@ import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GeneralTransmit extends GeneralAction
 {	private static final long serialVersionUID = 1L;
 

@@ -29,6 +29,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 /**
  * exception levée par l'algorithme A* quand il atteint une des limites fixées au préalable.
  * On ne peut donc pas conclure quant à l'existence d'un un chemin solution. 
+ * 
+ * @author Vincent Labatut
+ *
  */
 
 public final class LimitReachedException extends Exception

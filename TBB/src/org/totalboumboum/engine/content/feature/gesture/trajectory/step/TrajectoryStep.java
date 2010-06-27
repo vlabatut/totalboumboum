@@ -23,6 +23,11 @@ package org.totalboumboum.engine.content.feature.gesture.trajectory.step;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class TrajectoryStep extends AbstractTrajectoryStep implements Serializable
 {	private static final long serialVersionUID = 1L;
 

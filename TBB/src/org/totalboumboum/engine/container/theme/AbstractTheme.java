@@ -21,6 +21,11 @@ package org.totalboumboum.engine.container.theme;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AbstractTheme
 {	public static final String DEFAULT_GROUP = "default";
 	public static final String GROUP_SEPARATOR = "-";

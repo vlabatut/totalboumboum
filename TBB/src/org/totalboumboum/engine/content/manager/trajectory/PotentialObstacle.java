@@ -34,6 +34,11 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class PotentialObstacle
 {	private MoveZone moveZone;
 	double tileDimension;

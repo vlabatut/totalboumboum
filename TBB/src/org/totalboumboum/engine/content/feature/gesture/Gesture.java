@@ -24,6 +24,11 @@ package org.totalboumboum.engine.content.feature.gesture;
 import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Gesture extends AbstractGesture<AnimeDirection,TrajectoryDirection>
 {	
 	/////////////////////////////////////////////////////////////////

@@ -73,7 +73,9 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>contact:		any or none
  * 	<br>tilePosition:	any or undefined
  * 	<br>orientation:	any or undefined
- *  
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class GeneralConsume extends GeneralAction
 {	private static final long serialVersionUID = 1L;

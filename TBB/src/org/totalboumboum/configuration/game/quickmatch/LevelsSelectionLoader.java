@@ -26,7 +26,11 @@ import java.util.List;
 import org.jdom.Element;
 import org.totalboumboum.tools.xml.XmlNames;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LevelsSelectionLoader
 {	
 	@SuppressWarnings("unchecked")

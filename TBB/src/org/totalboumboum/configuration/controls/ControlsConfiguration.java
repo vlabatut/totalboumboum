@@ -23,6 +23,11 @@ package org.totalboumboum.configuration.controls;
 
 import java.util.HashMap;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ControlsConfiguration
 {
 	/////////////////////////////////////////////////////////////////

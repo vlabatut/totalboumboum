@@ -26,6 +26,11 @@ import java.awt.event.KeyEvent;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ServerSytemControl extends SystemControl
 {	
 	public ServerSytemControl(VisibleLoop loop)

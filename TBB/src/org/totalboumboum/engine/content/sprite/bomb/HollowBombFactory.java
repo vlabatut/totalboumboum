@@ -28,6 +28,11 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.HollowSpriteFactory;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class HollowBombFactory extends HollowSpriteFactory<Bomb>
 {	private static final long serialVersionUID = 1L;
 

@@ -1,10 +1,5 @@
 package org.totalboumboum.engine.content.feature.gesture.modulation;
 
-import java.io.Serializable;
-
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
-
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -26,6 +21,15 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
  * 
  */
 
+import java.io.Serializable;
+
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
+
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class AbstractModulation implements Serializable
 {	private static final long serialVersionUID = 1L;
 

@@ -27,7 +27,7 @@ import org.totalboumboum.engine.content.sprite.floor.Floor;
  * représente un sol du jeu, ie le graphisme affiché en tant que première couche de toute
  * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  */
 public class AiFloor extends AiSprite<Floor>

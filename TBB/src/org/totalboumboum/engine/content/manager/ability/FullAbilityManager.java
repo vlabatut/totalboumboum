@@ -32,6 +32,11 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class FullAbilityManager extends AbilityManager
 {	
 	public FullAbilityManager(Sprite sprite)

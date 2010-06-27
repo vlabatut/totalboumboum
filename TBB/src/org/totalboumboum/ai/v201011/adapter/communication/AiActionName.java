@@ -25,6 +25,9 @@ package org.totalboumboum.ai.v201011.adapter.communication;
  * noms donnés aux différentes actions qu'une IA peut effectuer : 
  * NONE (ne rien faire), MOVE (se déplacer, avec la direction à préciser), 
  * DROP_BOMB (poser une bombe), PUNCH (frapper une bombe)... 
+ * 
+ * @author Vincent Labatut
+ *
  */
 public enum AiActionName
 {

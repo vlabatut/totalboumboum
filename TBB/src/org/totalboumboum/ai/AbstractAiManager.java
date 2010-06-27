@@ -50,7 +50,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * d'IA donnée. Puis, chaque IA doit elle même surclasser la classe résultante
  * (tout ça dans le but de faciliter le chargement de la classe implémentant l'IA).
  * 
- * @author Vincent
+ * @author Vincent Labatut
  *
  * @param <V>	le type de donnée renvoyée par l'IA (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
  */

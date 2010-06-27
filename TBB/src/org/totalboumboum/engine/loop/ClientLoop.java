@@ -78,6 +78,11 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ClientLoop extends VisibleLoop implements InteractiveLoop
 {	private static final long serialVersionUID = 1L;
 	

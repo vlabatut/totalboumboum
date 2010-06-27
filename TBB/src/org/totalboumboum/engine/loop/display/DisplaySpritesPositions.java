@@ -41,6 +41,11 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class DisplaySpritesPositions implements Display
 {
 	public DisplaySpritesPositions(VisibleLoop loop)

@@ -21,6 +21,11 @@ package org.totalboumboum.engine.content.feature.ability;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class StateAbility extends AbstractAbility
 {	private static final long serialVersionUID = 1L;
 

@@ -29,6 +29,11 @@ import org.totalboumboum.engine.content.feature.Orientation;
 import org.totalboumboum.engine.content.feature.TilePosition;
 import org.totalboumboum.tools.xml.XmlNames;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class CircumstanceLoader
 {		
 	public static void loadCircumstanceElement(Element root, Circumstance result) throws ClassNotFoundException
