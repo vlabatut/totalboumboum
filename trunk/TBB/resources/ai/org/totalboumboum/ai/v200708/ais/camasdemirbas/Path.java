@@ -8,7 +8,9 @@ import java.util.List;
  * Un feuilleton d'étapes de l'emplacement commençant à l'emplacement de cible. 
  * Ceci inclut une étape pour l'emplacement initial. 
  * 
- * @author Gokhan Camas -- Irem Demirbas
+ * @author Gokhan Camas
+ * @author Irem Demirbas
+ *
  */
 @SuppressWarnings("unchecked")
 public class Path {

@@ -2,16 +2,17 @@ package org.totalboumboum.ai.v200708.ais.sahinyildirim;
 
 import java.awt.Point;
 
+/**
+ * Cette classe est pour construire une relation entre un point et son cout
+ * donc on sait le cout d'un point et on sait si ce point dans la 
+ * gameZone est un wallSoft
+ * 
+ * @author Serkan Sahin
+ * @author Mehmet Yildirim
+ *
+ */
 public class PointFind {
 		
-		/**
-		 * Cette classe est pour construire une relation entre un point et son cout
-		 * donc on sait le cout d'un point et on sait si ce point dans la 
-		 * gameZone est un wallSoft
-		 * 
-		 *
-		 */
-	 
 	private static final long serialVersionUID = 1L;
 		//le point du joueur
 		private Point rootPoint;

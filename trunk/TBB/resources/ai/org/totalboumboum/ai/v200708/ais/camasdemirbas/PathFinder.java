@@ -5,7 +5,9 @@ package org.totalboumboum.ai.v200708.ais.camasdemirbas;
  * qui peut trouver un chemin d'un emplacement sur une carte de carreau 
  * à un autre a basé l'information fournie par cette carte de carreau. 
  * 
- * @author Gokhan Camas -- Irem Demirbas
+ * @author Gokhan Camas
+ * @author Irem Demirbas
+ *
  */
 public interface PathFinder {
 

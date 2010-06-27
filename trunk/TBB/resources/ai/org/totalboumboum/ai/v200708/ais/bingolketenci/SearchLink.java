@@ -6,6 +6,10 @@ package org.totalboumboum.ai.v200708.ais.bingolketenci;
  * Ce lien est défini par les deux noeuds reliés : l'origine (parent)
  * et la cible (fils) ainsi que par l'action à réaliser pour passer 
  * d'un état à l'autre.
+ * 
+ * @author Gizem Bingol
+ * @author Utku Gorkem Kentenci
+ *
  */
 public class SearchLink
 {	// noeud parent

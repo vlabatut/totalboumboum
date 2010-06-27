@@ -1,5 +1,11 @@
 package org.totalboumboum.ai.v200708.ais.hancitoprak;
 
+/**
+ * 
+ * @author Aslihan Hanci
+ * @author Emine Canan Toprak
+ *
+ */
 @SuppressWarnings("unchecked")
 public class HanciTprkNode implements Comparable {
 	/** coordonnee x de HanciTprkNode */

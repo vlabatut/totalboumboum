@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
-
+/**
+ * 
+ * @author Serkan Kecer
+ * @author Onur Yaman
+ *
+ */
 public class KecerYaman extends ArtificialIntelligence {
 	/********************************************************************************/
 	private static final long serialVersionUID = 1L;

@@ -3,6 +3,12 @@ package org.totalboumboum.ai.v200708.ais.keceryaman;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Serkan Kecer
+ * @author Onur Yaman
+ *
+ */
 public class Node {
 	/**
 	 * position

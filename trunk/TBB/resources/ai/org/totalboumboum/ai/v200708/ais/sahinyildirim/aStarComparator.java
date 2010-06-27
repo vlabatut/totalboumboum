@@ -2,10 +2,14 @@ package org.totalboumboum.ai.v200708.ais.sahinyildirim;
 
 import java.util.Comparator;
 
+/**
+ * 
+ * @author Serkan Sahin
+ * @author Mehmet Yildirim
+ *
+ */
 public class aStarComparator implements Comparator<PointFind>
 {
-
-	
 	public int compare(PointFind point1, PointFind point2) 
 	{
 		int result = -1;

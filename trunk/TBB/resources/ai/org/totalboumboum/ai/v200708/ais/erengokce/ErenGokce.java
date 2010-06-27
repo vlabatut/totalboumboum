@@ -5,11 +5,12 @@ import java.util.concurrent.ExecutionException;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
-
-
+/**
+ * 
+ * @author Can Eren
+ * @author Mustafa Mert Gokce
+ *
+ */
 public class ErenGokce extends ArtificialIntelligence {
 
 	/**

@@ -11,12 +11,14 @@ import org.totalboumboum.ai.v200708.ais.ciritmutlu.problem.Problem;
 import org.totalboumboum.ai.v200708.ais.ciritmutlu.problem.State;
 import org.totalboumboum.ai.v200708.ais.ciritmutlu.tree.SearchNode;
 import org.totalboumboum.ai.v200708.ais.ciritmutlu.tree.SearchTree;
-
-
-
-
 //import src.ai.old200708.ciritmutlu.tree.SearchLink;
 
+/**
+ * 
+ * @author Semen Cirit
+ * @author Mine Mutlu
+ *
+ */
 public class CiritMutlu extends ArtificialIntelligence {
 	private SearchTree tree;	// arbre de recherche a construire
 	private State tempState;	// etat temporaire qui va etre utilise pour l'action suvante

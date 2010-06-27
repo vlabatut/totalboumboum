@@ -1,10 +1,11 @@
 package org.totalboumboum.ai.v200708.ais.camasdemirbas;
 
-
 /**
  * Ceci tient l'état et le contexte de chaque carreau sur la carte. 
  * 
- * @author Gokhan Camas -- Irem Demirbas
+ * @author Gokhan Camas
+ * @author Irem Demirbas
+ *
  */
 public class GameMap {
 	/** La largeur de carte dans les carreaux */

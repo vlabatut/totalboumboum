@@ -5,10 +5,12 @@ import java.util.Vector;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
-
+/**
+ * 
+ * @author Turkalp Goker Demirkol
+ * @author Emre Dogan
+ *
+ */
 public class DemirkolDogan extends ArtificialIntelligence{
 
 	

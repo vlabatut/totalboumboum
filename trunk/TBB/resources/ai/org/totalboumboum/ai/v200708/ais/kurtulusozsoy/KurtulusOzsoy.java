@@ -1,13 +1,16 @@
 package org.totalboumboum.ai.v200708.ais.kurtulusozsoy;
+
 import java.util.Random;
 import java.util.Vector;
 
 import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
-
-
-
-
+/**
+ * 
+ * @author Mehmet Kurtulus
+ * @author Yalcin Ozsoy
+ *
+ */
 public class KurtulusOzsoy extends ArtificialIntelligence{
 	
 
