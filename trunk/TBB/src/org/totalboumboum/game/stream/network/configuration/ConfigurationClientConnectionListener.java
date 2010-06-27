@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.configuration;
+package org.totalboumboum.game.stream.network.configuration;
 
 /*
  * Total Boum Boum

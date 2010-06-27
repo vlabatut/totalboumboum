@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.configuration;
+package org.totalboumboum.game.stream._temp.tournament;
 
 /*
  * Total Boum Boum
@@ -21,19 +21,33 @@ package org.totalboumboum.game.stream.configuration;
  * 
  */
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public interface ConfigurationServerConnectionListener
+public class StreamNumberConverter
 {	
-	public void tournamentRead(AbstractTournament tournament);
-	public void profilesRead(List<Profile> profiles);
-	public void tournamentStarted(Boolean start);
+	public StreamNumberConverter()
+	{
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TRANSLATION			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final HashMap<Integer,Integer> sockets = new HashMap<Integer, Integer>();
+	private final List<HashMap<Integer,Integer>> players = new ArrayList<HashMap<Integer,Integer>>();
+	
+	
+	
 }
