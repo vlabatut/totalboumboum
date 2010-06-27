@@ -51,7 +51,11 @@ import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class Launcher
 {	
 	public static void main(String args[]) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
