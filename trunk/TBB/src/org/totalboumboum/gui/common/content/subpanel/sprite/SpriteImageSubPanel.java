@@ -40,7 +40,11 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	

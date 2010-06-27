@@ -42,7 +42,11 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.detailed.Score;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class PointsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 8;

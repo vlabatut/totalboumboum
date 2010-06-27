@@ -21,6 +21,11 @@ package org.totalboumboum.gui.common.structure.dialog.inside;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface ModalDialogSubPanelListener
 {
 	public void modalDialogButtonClicked(String buttonCode);

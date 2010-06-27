@@ -34,6 +34,11 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class CupResults extends TournamentResults<CupTournament>
 {	
 	private static final long serialVersionUID = 1L;

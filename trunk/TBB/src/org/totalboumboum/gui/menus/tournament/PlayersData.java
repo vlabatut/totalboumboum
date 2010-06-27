@@ -40,6 +40,11 @@ import org.totalboumboum.gui.menus.tournament.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;

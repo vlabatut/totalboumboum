@@ -44,7 +44,11 @@ import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.GameData;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 16+1;

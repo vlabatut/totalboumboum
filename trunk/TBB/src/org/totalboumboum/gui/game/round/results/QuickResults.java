@@ -43,6 +43,11 @@ import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class QuickResults extends JPanel
 {	
 	private static final long serialVersionUID = 1L;

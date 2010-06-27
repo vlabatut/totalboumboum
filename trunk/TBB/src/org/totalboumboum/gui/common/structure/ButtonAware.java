@@ -24,6 +24,11 @@ package org.totalboumboum.gui.common.structure;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface ButtonAware extends ActionListener
 {	
 	public Component add(Component comp);

@@ -25,7 +25,11 @@ import java.awt.image.BufferedImage;
 
 import org.totalboumboum.gui.common.structure.subpanel.content.ImageContentPanel;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ImageSubPanel extends SubPanel<ImageContentPanel>
 {	private static final long serialVersionUID = 1L;
 	

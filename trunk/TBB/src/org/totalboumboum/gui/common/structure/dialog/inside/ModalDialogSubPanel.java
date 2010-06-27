@@ -41,7 +41,11 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ModalDialogSubPanel extends EmptySubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	

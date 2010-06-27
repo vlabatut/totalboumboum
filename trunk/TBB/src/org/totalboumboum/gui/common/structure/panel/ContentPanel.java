@@ -28,6 +28,11 @@ import javax.swing.JPanel;
 import org.totalboumboum.gui.frames.NormalFrame;
 
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ContentPanel extends JPanel
 {
 	protected static final long serialVersionUID = 1L;

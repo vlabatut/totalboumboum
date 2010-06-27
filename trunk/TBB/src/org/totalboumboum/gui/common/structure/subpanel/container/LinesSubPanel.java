@@ -30,6 +30,11 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.common.structure.subpanel.content.LinesContentPanel;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LinesSubPanel extends SubPanel<LinesContentPanel>
 {	private static final long serialVersionUID = 1L;
 

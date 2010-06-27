@@ -34,7 +34,11 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ImageContentPanel extends ContentPanel
 {	private static final long serialVersionUID = 1L;
 

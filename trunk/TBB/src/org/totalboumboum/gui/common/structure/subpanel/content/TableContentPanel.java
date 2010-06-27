@@ -32,7 +32,11 @@ import javax.swing.SwingConstants;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class TableContentPanel extends LinesContentPanel
 {	private static final long serialVersionUID = 1L;
 

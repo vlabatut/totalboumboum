@@ -46,7 +46,11 @@ import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSubPanelListener
 {	private static final long serialVersionUID = 1L;
 

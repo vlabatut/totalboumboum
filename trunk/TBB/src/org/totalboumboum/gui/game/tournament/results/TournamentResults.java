@@ -27,6 +27,11 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class TournamentResults<T extends AbstractTournament> extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;

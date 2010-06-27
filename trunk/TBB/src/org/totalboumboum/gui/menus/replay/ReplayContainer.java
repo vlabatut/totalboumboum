@@ -27,6 +27,11 @@ import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.replay.select.SelectedReplaySplitPanel;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ReplayContainer extends MenuPanel implements MenuContainer
 {	private static final long serialVersionUID = 1L;
 

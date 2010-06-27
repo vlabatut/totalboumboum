@@ -50,6 +50,11 @@ import org.totalboumboum.gui.game.round.RoundSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 {	private static final long serialVersionUID = 1L;
 	private VisibleLoop loop;

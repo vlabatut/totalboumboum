@@ -37,7 +37,11 @@ import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SettingsData extends EntitledDataPanel implements MatchQuickConfigSubPanelListener, RoundQuickConfigSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;

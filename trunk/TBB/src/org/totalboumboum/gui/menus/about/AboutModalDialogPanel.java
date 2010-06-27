@@ -26,6 +26,11 @@ import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.tools.GuiTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AboutModalDialogPanel extends ModalDialogPanel<AboutSubPanel>
 {	private static final long serialVersionUID = 1L;
 

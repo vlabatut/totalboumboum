@@ -46,7 +46,11 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class StatisticsMenu extends InnerMenuPanel implements ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
 	

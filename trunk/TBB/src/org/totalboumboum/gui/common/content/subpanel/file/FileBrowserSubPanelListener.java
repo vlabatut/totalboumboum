@@ -21,6 +21,11 @@ package org.totalboumboum.gui.common.content.subpanel.file;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface FileBrowserSubPanelListener
 {
 	public void fileBrowserSelectionChanged();

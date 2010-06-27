@@ -21,6 +21,11 @@ package org.totalboumboum.gui.common.content.subpanel.transfer;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface TransferSubPanelListener
 {
 	public void transferLeftClicked();

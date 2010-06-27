@@ -28,7 +28,11 @@ import javax.swing.BoxLayout;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.InnerDataPanel;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GameData extends InnerDataPanel
 {	private static final long serialVersionUID = 1L;
 	

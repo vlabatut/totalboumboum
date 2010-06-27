@@ -25,6 +25,11 @@ import org.totalboumboum.game.tournament.league.LeagueTournament;
 import org.totalboumboum.gui.common.content.subpanel.results.LeagueResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LeagueResults extends TournamentResults<LeagueTournament>
 {	
 	private static final long serialVersionUID = 1L;

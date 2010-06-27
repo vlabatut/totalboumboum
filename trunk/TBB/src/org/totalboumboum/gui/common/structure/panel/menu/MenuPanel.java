@@ -25,7 +25,11 @@ import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.ContentPanel;
 import org.totalboumboum.gui.frames.NormalFrame;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class MenuPanel extends ContentPanel
 {	private static final long serialVersionUID = 1L;
 

@@ -24,6 +24,11 @@ package org.totalboumboum.gui.common.structure;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.frames.NormalFrame;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface MenuContainer
 {	
 	/////////////////////////////////////////////////////////////////

@@ -38,6 +38,11 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LanguageLoader
 {	
 	public static Language loadLanguage(String name) throws ParserConfigurationException, SAXException, IOException

@@ -30,7 +30,11 @@ import org.totalboumboum.gui.data.configuration.misc.MiscConfigurationLoader;
 import org.totalboumboum.gui.data.configuration.misc.MiscConfigurationSaver;
 import org.xml.sax.SAXException;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GuiConfiguration
 {	
 	/////////////////////////////////////////////////////////////////

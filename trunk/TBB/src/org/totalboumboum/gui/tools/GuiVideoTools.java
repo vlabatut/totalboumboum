@@ -7,6 +7,11 @@ import java.awt.GraphicsEnvironment;
 import java.util.Comparator;
 import java.util.TreeSet;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GuiVideoTools
 {
 	/**

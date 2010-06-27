@@ -55,6 +55,11 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SelectedRoundData extends EntitledDataPanel implements FolderBrowserSubPanelListener, LimitsSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;

@@ -25,6 +25,11 @@ import org.totalboumboum.game.tournament.sequence.SequenceTournament;
 import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SequenceResults extends TournamentResults<SequenceTournament>
 {	
 	private static final long serialVersionUID = 1L;

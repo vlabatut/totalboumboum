@@ -34,7 +34,11 @@ import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class LinesContentPanel extends ContentPanel
 {	private static final long serialVersionUID = 1L;
 	

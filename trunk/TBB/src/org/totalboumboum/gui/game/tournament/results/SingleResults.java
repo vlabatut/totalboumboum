@@ -27,6 +27,11 @@ import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPa
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SingleResults extends TournamentResults<SingleTournament>
 {	
 	private static final long serialVersionUID = 1L;

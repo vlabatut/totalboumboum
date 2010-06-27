@@ -42,7 +42,11 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.gui.tools.GuiVideoTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class VideoData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;

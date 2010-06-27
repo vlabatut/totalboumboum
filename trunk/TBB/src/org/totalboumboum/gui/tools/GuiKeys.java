@@ -29,6 +29,11 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GuiKeys
 {
 	/////////////////////////////////////////////////////////////////

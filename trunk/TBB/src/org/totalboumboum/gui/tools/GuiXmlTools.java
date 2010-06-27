@@ -21,6 +21,11 @@ package org.totalboumboum.gui.tools;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GuiXmlTools
 {
 	// Elements names

@@ -38,6 +38,11 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AvailableItemsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 4;

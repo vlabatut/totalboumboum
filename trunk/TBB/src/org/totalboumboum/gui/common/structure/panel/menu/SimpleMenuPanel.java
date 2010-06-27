@@ -24,6 +24,11 @@ import org.totalboumboum.gui.common.structure.MenuContainer;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class SimpleMenuPanel extends MenuPanel implements ButtonAware
 {	private static final long serialVersionUID = 1L; 
 

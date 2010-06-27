@@ -45,6 +45,11 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FileNames;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GuiData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;

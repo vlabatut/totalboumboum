@@ -38,7 +38,11 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class StatisticsData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;

@@ -43,6 +43,11 @@ import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class MatchDescription extends EntitledDataPanel implements LimitsSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;

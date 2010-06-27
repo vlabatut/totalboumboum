@@ -26,6 +26,11 @@ import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class TournamentDescription<T extends AbstractTournament> extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;

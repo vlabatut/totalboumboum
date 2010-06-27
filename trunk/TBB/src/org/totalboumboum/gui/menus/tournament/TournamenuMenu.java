@@ -46,6 +46,11 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class TournamenuMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	

@@ -41,6 +41,11 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.files.FilePaths;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SelectRoundMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	

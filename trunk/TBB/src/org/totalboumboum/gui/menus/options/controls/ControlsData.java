@@ -43,7 +43,11 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.classes.ClassTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class ControlsData extends EntitledDataPanel implements MouseListener,KeyListener
 {	
 	private static final long serialVersionUID = 1L;

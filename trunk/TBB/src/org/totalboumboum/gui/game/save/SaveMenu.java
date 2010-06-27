@@ -49,6 +49,11 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
 

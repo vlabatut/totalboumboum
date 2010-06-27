@@ -39,7 +39,11 @@ import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.frames.NormalFrame;
 import org.totalboumboum.gui.tools.GuiTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends ContentPanel implements ModalDialogSubPanelListener, MouseListener
 {	private static final long serialVersionUID = 1L;
 

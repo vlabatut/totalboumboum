@@ -41,7 +41,11 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
 
-
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 {	private static final long serialVersionUID = 1L;
 

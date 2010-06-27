@@ -7,6 +7,11 @@ import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.tools.GameData;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class GuiStringTools
 {
 	/**

@@ -23,6 +23,11 @@ package org.totalboumboum.gui.common.structure.subpanel.container;
 
 import org.totalboumboum.gui.common.structure.subpanel.content.TextContentPanel;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class TextSubPanel extends SubPanel<TextContentPanel>
 {	private static final long serialVersionUID = 1L;
 	

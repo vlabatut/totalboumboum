@@ -21,6 +21,11 @@ package org.totalboumboum.gui.common.structure.panel.data;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface DataPanelListener
 {
 	public void dataPanelSelectionChanged();

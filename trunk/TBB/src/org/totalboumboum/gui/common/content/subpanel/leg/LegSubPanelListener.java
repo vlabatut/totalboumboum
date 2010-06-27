@@ -21,6 +21,11 @@ package org.totalboumboum.gui.common.content.subpanel.leg;
  * 
  */
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public interface LegSubPanelListener
 {
 	public void legSelectionChanged();
