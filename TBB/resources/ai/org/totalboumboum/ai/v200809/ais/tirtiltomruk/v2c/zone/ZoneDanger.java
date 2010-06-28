@@ -14,7 +14,12 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2c.TirtilTomruk;
 
-
+/**
+*
+* @author Abdullah Tirtil
+* @author Mert Tomruk
+*
+*/
 public class ZoneDanger {
 	//Une personnalisation du AiZone qui se specifie sur les dangers de la zone
 	private AiZone zone;

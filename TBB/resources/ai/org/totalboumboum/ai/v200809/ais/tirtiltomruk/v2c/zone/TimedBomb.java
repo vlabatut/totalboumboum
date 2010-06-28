@@ -5,7 +5,12 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
+/**
+*
+* @author Abdullah Tirtil
+* @author Mert Tomruk
+*
+*/
 public class TimedBomb {
 	
 	private AiZone zone;

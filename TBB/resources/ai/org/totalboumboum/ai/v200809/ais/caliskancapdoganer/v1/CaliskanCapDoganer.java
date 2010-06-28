@@ -17,7 +17,13 @@ import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @author Anil Çaliskan
+ * @author Fahri Cap
+ * @author Sedat Doganer
+ *
+ */
 public class CaliskanCapDoganer extends ArtificialIntelligence
 {
 	/*

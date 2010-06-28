@@ -5,7 +5,9 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
  * la classe XTile est l'abreviation de Extended Tile
- * @author SenerAkpolat
+ * 
+ * @author Cem Akpolat
+ * @author Emre Sener
  *
  */
 public class XTile {

@@ -2,6 +2,12 @@ package org.totalboumboum.ai.v200809.ais.kokciyanmazmanoglu.v2;
 
 import java.util.Comparator;
 
+/**
+*
+* @author Nadin Kokciyan
+* @author Hikmet Mazmanoglu
+*
+*/
 public class NodeComparator implements Comparator<Node>
 {
 	private Node start;

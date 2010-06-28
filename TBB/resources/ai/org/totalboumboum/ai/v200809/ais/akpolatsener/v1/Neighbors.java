@@ -9,11 +9,10 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
-
 /**
  * 
- * @author SenerAkpolat
+ * @author Cem Akpolat
+ * @author Emre Sener
  *
  */
 public class Neighbors {

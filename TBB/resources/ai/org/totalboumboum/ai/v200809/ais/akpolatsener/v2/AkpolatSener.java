@@ -12,6 +12,12 @@ import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * 
+ * @author Cem Akpolat
+ * @author Emre Sener
+ *
+ */
 public class AkpolatSener extends ArtificialIntelligence {
 
 	/** les cases actuel, precedent et prochain */

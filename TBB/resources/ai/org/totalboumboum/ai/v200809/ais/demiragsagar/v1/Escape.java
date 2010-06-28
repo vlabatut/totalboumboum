@@ -12,7 +12,12 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class Escape {
 	private List<AiTile> bombes;
 	

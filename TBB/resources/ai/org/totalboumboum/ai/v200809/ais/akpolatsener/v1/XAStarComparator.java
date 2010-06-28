@@ -4,11 +4,12 @@ import java.util.Comparator;
 
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
-
 /**
  * Compare deux XTiles en fonction de leur heuristique et de leur nombre de visites.
- * @author SenerAkpolat
+ * 
+ * @author Cem Akpolat
+ * @author Emre Sener
+ *
  */
 public class XAStarComparator implements Comparator<XTile> 
 {

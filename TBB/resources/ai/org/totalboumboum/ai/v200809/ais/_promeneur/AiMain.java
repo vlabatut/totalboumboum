@@ -23,6 +23,11 @@ package org.totalboumboum.ai.v200809.ais._promeneur;
 
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AiMain extends AiManager
 {
 

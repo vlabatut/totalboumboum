@@ -1,9 +1,14 @@
 package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v1;
 
-
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * 
+ * @author Ozan Gunalp
+ * @author Sinan Yurtsever
+ *
+ */
 public class CostTile  {
 	
 	private AiTile MyAiTile;

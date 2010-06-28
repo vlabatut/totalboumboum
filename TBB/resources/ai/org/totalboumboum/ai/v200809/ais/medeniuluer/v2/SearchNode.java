@@ -2,15 +2,16 @@ package org.totalboumboum.ai.v200809.ais.medeniuluer.v2;
 
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
 /**
  * Représente un noeud dans un arbre de recherche.
  *Chaque noeud est defini avec les coordonnees x et y
  *chaque noeud possede aussi une valeur entiere 
  *et un cout.
+ *
+ * @author Ekin Medeni
+ * @author Pinar Uluer
+ *
  */
-
-
 public class SearchNode {
 
 	/** la coordonnee x du noeud */

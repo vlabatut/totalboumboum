@@ -4,7 +4,12 @@ import java.util.Comparator;
 
 import org.totalboumboum.ai.v200809.adapter.AiBomb;
 
-
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class DurationComparator implements Comparator<AiBomb> {
 	public int compare(AiBomb bombe1, AiBomb bombe2) {
 		int resultat;

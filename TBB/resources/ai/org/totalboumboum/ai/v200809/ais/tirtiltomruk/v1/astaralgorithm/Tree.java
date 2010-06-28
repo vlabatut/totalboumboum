@@ -8,13 +8,14 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v1.TirtilTomruk;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v1.zone.ZoneEnum;
 
-
-
 /**
  * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
  * orientes
+ *
+ * @author Abdullah Tirtil
+ * @author Mert Tomruk
+ *
  */
-
 public class Tree {
 
 	// ensemble des noeuds composant l'arbre

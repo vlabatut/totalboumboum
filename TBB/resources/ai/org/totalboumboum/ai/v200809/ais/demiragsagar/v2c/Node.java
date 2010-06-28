@@ -4,6 +4,12 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class Node {
 
 	AiTile tile;

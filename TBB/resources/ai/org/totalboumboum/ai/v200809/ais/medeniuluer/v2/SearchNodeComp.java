@@ -2,6 +2,12 @@ package org.totalboumboum.ai.v200809.ais.medeniuluer.v2;
 
 import java.util.Comparator;
 
+/**
+*
+* @author Ekin Medeni
+* @author Pinar Uluer
+*
+*/
 public class SearchNodeComp implements Comparator<SearchNode> {
 
 	/** noeud cible:reference qu'on va utiliser en comparant les noeuds */

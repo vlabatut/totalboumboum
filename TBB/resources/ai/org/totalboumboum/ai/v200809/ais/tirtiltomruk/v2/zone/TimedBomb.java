@@ -3,7 +3,12 @@ package org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.zone;
 import org.totalboumboum.ai.v200809.adapter.AiBomb;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 
-
+/**
+*
+* @author Abdullah Tirtil
+* @author Mert Tomruk
+*
+*/
 public class TimedBomb {
 	
 	private AiZone zone;

@@ -4,7 +4,12 @@ import org.totalboumboum.ai.v200809.adapter.AiAction;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
+/**
+*
+* @author Nadin Kokciyan
+* @author Hikmet Mazmanoglu
+*
+*/
 public class Link {
 
 	private Node parent;

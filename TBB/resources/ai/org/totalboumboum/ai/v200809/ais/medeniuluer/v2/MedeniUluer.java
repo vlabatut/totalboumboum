@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v200809.ais.medeniuluer.v2;
 
-
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -19,8 +17,12 @@ import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
+/**
+*
+* @author Ekin Medeni
+* @author Pinar Uluer
+*
+*/
 public class MedeniUluer extends ArtificialIntelligence 
 {
 	/** la case occupée actuellement par le personnage*/

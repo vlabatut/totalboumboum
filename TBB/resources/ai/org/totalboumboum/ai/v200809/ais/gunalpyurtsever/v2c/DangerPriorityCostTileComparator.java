@@ -1,13 +1,16 @@
 package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2c;
 
-
 import java.util.Comparator;
 
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
-
+/**
+ * 
+ * @author Ozan Gunalp
+ * @author Sinan Yurtsever
+ *
+ */
 public class DangerPriorityCostTileComparator implements Comparator<DangerPriorityCostTile> {
 
 	private int col;

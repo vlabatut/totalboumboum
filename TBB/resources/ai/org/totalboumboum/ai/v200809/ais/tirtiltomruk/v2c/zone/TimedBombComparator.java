@@ -4,6 +4,12 @@ import java.util.Comparator;
 
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
+/**
+*
+* @author Abdullah Tirtil
+* @author Mert Tomruk
+*
+*/
 public class TimedBombComparator implements Comparator<TimedBomb>{
 
 	@Override

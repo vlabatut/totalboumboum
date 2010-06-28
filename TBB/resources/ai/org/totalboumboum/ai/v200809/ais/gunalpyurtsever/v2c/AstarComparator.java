@@ -4,6 +4,12 @@ import java.util.Comparator;
 
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
+/**
+ * 
+ * @author Ozan Gunalp
+ * @author Sinan Yurtsever
+ *
+ */
 public class AstarComparator implements Comparator<CostTile> {
 	
 	public int compare(CostTile tile1, CostTile tile2){

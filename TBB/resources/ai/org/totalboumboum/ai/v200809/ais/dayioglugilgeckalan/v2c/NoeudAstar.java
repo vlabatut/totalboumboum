@@ -5,7 +5,12 @@ import java.util.Comparator;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
+/**
+ * 
+ * @author Ali Batuhan Dayioglugil
+ * @author Gokhan Geckalan
+ *
+ */
 public class NoeudAstar implements Comparator<Noeud> {
 
 	/** noeud cible:reference qu'on va utiliser en comparant les noeuds */

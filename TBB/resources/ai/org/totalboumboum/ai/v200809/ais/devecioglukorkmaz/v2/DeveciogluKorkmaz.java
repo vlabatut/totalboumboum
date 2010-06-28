@@ -22,8 +22,12 @@ import org.totalboumboum.ai.v200809.ais.devecioglukorkmaz.v2.NoeudComparator;
 import org.totalboumboum.ai.v200809.ais.devecioglukorkmaz.v2.Tree;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
+/**
+ * 
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
+ *
+ */
 public class DeveciogluKorkmaz extends ArtificialIntelligence {
 
 	AiHero ownHero;

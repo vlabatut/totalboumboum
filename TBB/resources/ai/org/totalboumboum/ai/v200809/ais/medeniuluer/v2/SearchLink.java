@@ -3,13 +3,15 @@ package org.totalboumboum.ai.v200809.ais.medeniuluer.v2;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.MedeniUluer;
 
-
-
 /**
  * Représente un lien orienté dans un arbre de recherche.
  * Ce lien est défini par les deux noeuds reliés : l'origine (parent)
  * et la cible (fils) ainsi que par l'action à réaliser pour passer 
  * d'un état à l'autre.
+ *
+ * @author Ekin Medeni
+ * @author Pinar Uluer
+ *
  */
 public class SearchLink
 {	// noeud parent

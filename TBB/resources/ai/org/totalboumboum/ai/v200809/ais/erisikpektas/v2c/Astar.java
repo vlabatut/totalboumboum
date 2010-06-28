@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v200809.ais.erisikpektas.v2c;
 
-//cest un class Astar que lon a trouve par un site dintenet de forum dadressse http://x86.sun.com/thread.jspa?messageID=10084929 
-
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.Iterator;
@@ -12,6 +10,14 @@ import java.util.Queue;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
+/**
+ * cest un class Astar que lon a trouve par un site dintenet 
+ * de forum dadressse http://x86.sun.com/thread.jspa?messageID=10084929
+ * 
+ * @author Doga Erisik
+ * @author Abdurrahman Pektas
+ *
+ */
 public final class Astar {
 	private static class CostComparator implements Comparator<Node> {
 		//

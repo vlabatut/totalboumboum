@@ -2,13 +2,15 @@ package org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2c;
 
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
-
 /**
  * Représente un lien orienté dans un arbre de recherche.
  * Ce lien est défini par les deux noeuds reliés : l'origine (parent)
  * et la cible (fils) ainsi que par l'action à réaliser pour passer 
  * d'un état à l'autre.
+ * 
+ * @author Ali Batuhan Dayioglugil
+ * @author Gokhan Geckalan
+ *
  */
 public class SearchLink
 {	// noeud parent

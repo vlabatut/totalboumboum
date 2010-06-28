@@ -1,4 +1,5 @@
 package org.totalboumboum.ai.v200809.ais.medeniuluer.v2;
+
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -13,8 +14,12 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.MedeniUluer;
 
-
-
+/**
+*
+* @author Ekin Medeni
+* @author Pinar Uluer
+*
+*/
 public class Zone {
 	// Une personnalisation generale du AiZone
 	private AiZone zone;

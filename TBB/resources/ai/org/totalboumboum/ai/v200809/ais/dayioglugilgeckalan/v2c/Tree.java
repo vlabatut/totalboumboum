@@ -6,14 +6,14 @@ import java.util.Vector;
 
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
-
-
 /**
  * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
  * orientes
+ * 
+ * @author Ali Batuhan Dayioglugil
+ * @author Gokhan Geckalan
+ *
  */
-
 public class Tree {
 
 	// ensemble des noeuds composant l'arbre

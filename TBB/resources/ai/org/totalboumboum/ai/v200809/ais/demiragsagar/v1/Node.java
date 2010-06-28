@@ -2,6 +2,12 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v1;
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class Node {
 
 	AiTile tile;

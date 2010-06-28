@@ -24,6 +24,11 @@ package org.totalboumboum.ai.v200809.ais.altaybasaranoglu;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.altaybasaranoglu.v2.AltayBasaranoglu;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AiMain extends AiManager
 {
 

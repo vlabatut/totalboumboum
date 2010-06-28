@@ -1,10 +1,13 @@
 package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2;
 
-
 import java.util.Comparator;
 
-
-
+/**
+ * 
+ * @author Ozan Gunalp
+ * @author Sinan Yurtsever
+ *
+ */
 public class DangerPriorityCostTileComparator implements Comparator<DangerPriorityCostTile> {
 
 	private int col;

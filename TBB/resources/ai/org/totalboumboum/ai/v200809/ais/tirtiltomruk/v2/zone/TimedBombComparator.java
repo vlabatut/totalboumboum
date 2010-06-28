@@ -2,6 +2,12 @@ package org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.zone;
 
 import java.util.Comparator;
 
+/**
+*
+* @author Abdullah Tirtil
+* @author Mert Tomruk
+*
+*/
 public class TimedBombComparator implements Comparator<TimedBomb>{
 
 	@Override

@@ -4,7 +4,12 @@ import java.util.Comparator;
 
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
+/**
+ * 
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
+ *
+ */
 public class NoeudComparator implements Comparator<Noeud> {
 
 	private Noeud t;

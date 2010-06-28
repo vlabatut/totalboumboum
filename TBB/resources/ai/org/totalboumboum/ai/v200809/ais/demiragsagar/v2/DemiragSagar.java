@@ -17,8 +17,12 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.ai.v200809.ais.demiragsagar.v2.AStar;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class DemiragSagar extends ArtificialIntelligence {
 
 	//les variables globales qui sont mise a jour a chaque iteration
