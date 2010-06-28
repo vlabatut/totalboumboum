@@ -5,6 +5,12 @@ import java.util.Comparator;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
+/**
+*
+* @author Nadin Kokciyan
+* @author Hikmet Mazmanoglu
+*
+*/
 public class NodeComparator implements Comparator<Node>
 {
 	private Node start;

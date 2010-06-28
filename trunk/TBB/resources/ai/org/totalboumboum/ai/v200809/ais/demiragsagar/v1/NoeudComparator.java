@@ -2,6 +2,12 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v1;
 
 import java.util.Comparator;
 
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class NoeudComparator implements Comparator<Node> {
 
 	public int compare(Node noeud1, Node noeud2) {

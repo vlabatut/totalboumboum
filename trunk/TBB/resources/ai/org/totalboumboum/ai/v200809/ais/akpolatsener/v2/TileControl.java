@@ -14,10 +14,11 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.ai.v200809.ais.akpolatsener.v2.comparators.ComparatorByHypotenuse;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
- * @author Administrator
  * 
+ * @author Cem Akpolat
+ * @author Emre Sener
+ *
  */
 public class TileControl {
 	/** la classe principale de notre IA */

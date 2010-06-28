@@ -10,6 +10,12 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+*
+* @author Nadin Kokciyan
+* @author Hikmet Mazmanoglu
+*
+*/
 public class Tree {
 
 	KokciyanMazmanoglu km;

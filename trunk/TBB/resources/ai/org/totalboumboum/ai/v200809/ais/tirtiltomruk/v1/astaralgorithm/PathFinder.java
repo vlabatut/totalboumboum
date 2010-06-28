@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v200809.ais.tirtiltomruk.v1.astaralgorithm;
 
-
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
@@ -11,10 +10,12 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v1.TirtilTomruk;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v1.zone.Zone;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v1.zone.ZoneEnum;
 
-
-
-
-
+/**
+*
+* @author Abdullah Tirtil
+* @author Mert Tomruk
+*
+*/
 public class PathFinder {
 
 	private LinkedList<Noeud> path;

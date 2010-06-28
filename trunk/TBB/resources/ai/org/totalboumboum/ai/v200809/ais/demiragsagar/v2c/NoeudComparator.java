@@ -4,6 +4,12 @@ import java.util.Comparator;
 
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class NoeudComparator implements Comparator<Node> {
 
 	public int compare(Node noeud1, Node noeud2) {

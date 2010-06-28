@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2c;
 
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -26,9 +25,12 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2c.zone.ZoneDanger;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2c.zone.ZoneEnum;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
+/**
+*
+* @author Abdullah Tirtil
+* @author Mert Tomruk
+*
+*/
 public class TirtilTomruk extends ArtificialIntelligence {
 	private AiZone zone;
 	private AiHero caractere;

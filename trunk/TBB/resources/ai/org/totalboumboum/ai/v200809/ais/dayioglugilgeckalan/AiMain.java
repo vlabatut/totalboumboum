@@ -24,6 +24,11 @@ package org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2.DayioglugilGeckalan;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AiMain extends AiManager
 {
 	public AiMain()

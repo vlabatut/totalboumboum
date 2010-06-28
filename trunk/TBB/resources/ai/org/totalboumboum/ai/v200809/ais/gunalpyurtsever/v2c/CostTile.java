@@ -1,13 +1,17 @@
 package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2c;
 
-
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
-//objet specifique qui garde les infos de cost et heuristique pour des tiles
-
+/**
+ * objet specifique qui garde les infos de cost et heuristique pour des tiles
+ * 
+ * @author Ozan Gunalp
+ * @author Sinan Yurtsever
+ *
+ */
 public class CostTile  {
 	
 	private AiTile MyAiTile;

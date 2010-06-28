@@ -10,7 +10,12 @@ import java.util.Vector;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class AStar {
 
 	AiTile firstTile;

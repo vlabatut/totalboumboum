@@ -2,6 +2,12 @@ package org.totalboumboum.ai.v200809.ais.devecioglukorkmaz.v2;
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 
+/**
+ * 
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
+ *
+ */
 public class Noeud {
 	private AiTile tile;
 	private boolean visited;

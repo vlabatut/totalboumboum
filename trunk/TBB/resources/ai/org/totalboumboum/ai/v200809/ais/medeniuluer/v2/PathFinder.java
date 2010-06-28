@@ -11,8 +11,12 @@ import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.Zone;
 import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.ZoneEnum;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
+/**
+*
+* @author Ekin Medeni
+* @author Pinar Uluer
+*
+*/
 public class PathFinder {
 	
 	private LinkedList<SearchNode> path;

@@ -10,6 +10,12 @@ import org.totalboumboum.ai.v200809.adapter.AiFire;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class Functions {
 	// regarde si il existe un mur de type SOFT ou HARD
 	public static boolean hasWall(AiTile tile) {

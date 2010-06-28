@@ -14,9 +14,12 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2c.TirtilTomruk;
 
-
-
-
+/**
+*
+* @author Abdullah Tirtil
+* @author Mert Tomruk
+*
+*/
 public class Zone {
 	// Une personnalisation generale du AiZone
 	private AiZone zone;

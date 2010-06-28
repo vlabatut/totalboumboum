@@ -1,5 +1,11 @@
 package org.totalboumboum.ai.v200809.ais.devecioglukorkmaz.v2;
 
+/**
+ * 
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
+ *
+ */
 public class SearchLink {
 	private Noeud origin;
 	private Noeud target;

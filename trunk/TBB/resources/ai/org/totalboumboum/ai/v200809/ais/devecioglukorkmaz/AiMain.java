@@ -24,6 +24,11 @@ package org.totalboumboum.ai.v200809.ais.devecioglukorkmaz;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.devecioglukorkmaz.v2.DeveciogluKorkmaz;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AiMain extends AiManager {
 
 	public AiMain() {

@@ -6,6 +6,12 @@ import java.util.List;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class TimeMatrice {
 	private List<AiTile> caseBombes;
 	private long timeMatrice[][];

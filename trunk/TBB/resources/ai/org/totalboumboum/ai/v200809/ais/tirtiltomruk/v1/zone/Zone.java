@@ -13,8 +13,12 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v1.TirtilTomruk;
 
-
-
+/**
+*
+* @author Abdullah Tirtil
+* @author Mert Tomruk
+*
+*/
 public class Zone{
 	//Une personnalisation du AiZone qui se specifie sur les dangers de la zone
 	@SuppressWarnings("unused")

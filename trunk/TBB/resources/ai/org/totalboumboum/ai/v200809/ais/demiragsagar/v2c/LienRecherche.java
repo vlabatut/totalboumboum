@@ -3,6 +3,12 @@ package org.totalboumboum.ai.v200809.ais.demiragsagar.v2c;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class LienRecherche {
 	// noeud parent
 	private Node origin;

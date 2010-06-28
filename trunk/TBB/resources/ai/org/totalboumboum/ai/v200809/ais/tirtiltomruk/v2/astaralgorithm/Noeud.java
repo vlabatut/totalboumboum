@@ -4,16 +4,16 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.TirtilTomruk;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v2.zone.ZoneEnum;
 
-
-
 /**
  * Représente un noeud dans un arbre de recherche.
  *Chaque noeud est defini avec les coordonnees x et y
  *chaque noeud possede aussi une valeur entiere 
  *et un cout.
+ *
+ * @author Abdullah Tirtil
+ * @author Mert Tomruk
+ *
  */
-
-
 public class Noeud {
 
 	/** la coordonnee x du noeud */

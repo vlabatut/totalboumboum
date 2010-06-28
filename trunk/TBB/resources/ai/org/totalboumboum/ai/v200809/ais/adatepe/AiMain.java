@@ -24,6 +24,11 @@ package org.totalboumboum.ai.v200809.ais.adatepe;
 import org.totalboumboum.ai.v200809.adapter.AiManager;
 import org.totalboumboum.ai.v200809.ais.adatepe.v1.Adatepe;
 
+/**
+ * 
+ * @author Vincent Labatut
+ *
+ */
 public class AiMain extends AiManager
 {
 

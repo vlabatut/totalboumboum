@@ -1,5 +1,11 @@
 package org.totalboumboum.ai.v200809.ais.kokciyanmazmanoglu.v2c;
 
+/**
+*
+* @author Nadin Kokciyan
+* @author Hikmet Mazmanoglu
+*
+*/
 public enum Mission {
 
 	STAND_IDLY,

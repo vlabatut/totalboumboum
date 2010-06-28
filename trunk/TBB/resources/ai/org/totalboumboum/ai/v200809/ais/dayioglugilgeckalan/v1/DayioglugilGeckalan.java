@@ -19,7 +19,12 @@ import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @author Ali Batuhan Dayioglugil
+ * @author Gokhan Geckalan
+ *
+ */
 public class DayioglugilGeckalan extends ArtificialIntelligence 
 {
 	

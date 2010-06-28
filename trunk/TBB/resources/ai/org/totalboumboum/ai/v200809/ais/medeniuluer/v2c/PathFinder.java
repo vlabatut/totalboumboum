@@ -8,8 +8,12 @@ import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
+/**
+*
+* @author Ekin Medeni
+* @author Pinar Uluer
+*
+*/
 public class PathFinder {
 	
 	private LinkedList<SearchNode> path;

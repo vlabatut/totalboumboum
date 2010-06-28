@@ -1,5 +1,11 @@
 package org.totalboumboum.ai.v200809.ais.demiragsagar.v1;
 
+/**
+ * 
+ * @author Dogus Burcu Demirag
+ * @author Zeynep Sagar
+ *
+ */
 public class LienRecherche {
 	// noeud parent
 	private Node origin;

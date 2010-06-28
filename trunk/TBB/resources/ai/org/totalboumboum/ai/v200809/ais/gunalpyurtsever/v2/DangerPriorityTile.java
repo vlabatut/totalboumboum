@@ -2,6 +2,12 @@ package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v2;
 
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 
+/**
+ * 
+ * @author Ozan Gunalp
+ * @author Sinan Yurtsever
+ *
+ */
 public class DangerPriorityTile{
 
 	AiTile tile;

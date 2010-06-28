@@ -12,10 +12,12 @@ import org.totalboumboum.ai.v200809.adapter.AiItemType;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
-
-//import org.totalboumboum.ai.adapter200809.AiTile;
-
+/**
+ * 
+ * @author Ali Batuhan Dayioglugil
+ * @author Gokhan Geckalan
+ *
+ */
 public class Zone{
 	//Une personnalisation du AiZone qui se specifie sur les dangers de la zone
 	//private AiZone zone;

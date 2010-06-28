@@ -2,9 +2,13 @@ package org.totalboumboum.ai.v200809.ais.gunalpyurtsever.v1;
 
 import java.util.Comparator;
 
+/**
+ * 
+ * @author Ozan Gunalp
+ * @author Sinan Yurtsever
+ *
+ */
 public class NearestSafePlaceComparator implements Comparator<CostTile> {
-
-
 
 	public int compare(CostTile tile1, CostTile tile2){
 		

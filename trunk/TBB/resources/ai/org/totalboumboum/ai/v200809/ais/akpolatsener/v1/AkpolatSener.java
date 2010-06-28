@@ -16,7 +16,12 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @author Cem Akpolat
+ * @author Emre Sener
+ *
+ */
 public class AkpolatSener extends ArtificialIntelligence {
 	
 	/** indique la minimum distance necessaire pour poser une bombe */

@@ -2,7 +2,12 @@ package org.totalboumboum.ai.v200809.ais.kokciyanmazmanoglu.v1;
 
 import org.totalboumboum.ai.v200809.adapter.AiAction;
 
-
+/**
+*
+* @author Nadin Kokciyan
+* @author Hikmet Mazmanoglu
+*
+*/
 public class Link {
 
 	private Node parent;

@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2;
 
-
-
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
@@ -9,8 +7,12 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
-
+/**
+ * 
+ * @author Ali Batuhan Dayioglugil
+ * @author Gokhan Geckalan
+ *
+ */
 public class PathFinder {
 
 	private LinkedList<Noeud> path;

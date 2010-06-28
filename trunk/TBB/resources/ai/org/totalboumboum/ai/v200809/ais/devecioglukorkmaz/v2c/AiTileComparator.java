@@ -5,7 +5,12 @@ import java.util.Comparator;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
+/**
+ * 
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
+ *
+ */
 public class AiTileComparator implements Comparator<AiTile> {
 
 	AiTile t;

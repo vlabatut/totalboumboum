@@ -10,8 +10,11 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 /**
  * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
  * orientes
+ * 
+ * @author Eser Devecioglu
+ * @author Alev Korkmaz
+ *
  */
-
 public class Tree {
 
 	private Vector<Noeud> nodes;

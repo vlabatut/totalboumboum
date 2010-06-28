@@ -13,8 +13,12 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
-
+/**
+*
+* @author Ekin Medeni
+* @author Pinar Uluer
+*
+*/
 public class Zone {
 	// Une personnalisation generale du AiZone
 	private AiZone zone;

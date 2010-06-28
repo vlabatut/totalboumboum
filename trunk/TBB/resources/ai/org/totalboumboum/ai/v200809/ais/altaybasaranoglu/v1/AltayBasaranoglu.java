@@ -19,7 +19,12 @@ import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @author Ismail Gokhan Altay
+ * @author Ertugrul Basaranoglu
+ *
+ */
 public class AltayBasaranoglu extends ArtificialIntelligence
 {
 	/** la case occupée actuellement par le personnage*/

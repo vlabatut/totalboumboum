@@ -17,7 +17,12 @@ import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @author Ali Bilgin
+ * @author Cagdas Emrah Karabag
+ *
+ */
 public class BilginKarabag extends ArtificialIntelligence 
 {
 	/** la case occupée actuellement par le personnage*/

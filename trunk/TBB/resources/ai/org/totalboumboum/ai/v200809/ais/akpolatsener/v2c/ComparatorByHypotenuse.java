@@ -5,12 +5,13 @@ import java.util.Comparator;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
 /**
  * la classe comparateur d'apres les distances directes aux dangers ou aux
  * cibles
  * 
- * @author SenerAkpolat
+ * @author Cem Akpolat
+ * @author Emre Sener
+ *
  */
 public class ComparatorByHypotenuse implements Comparator<AiTile> {
 	/** la classe principale de notre IA */

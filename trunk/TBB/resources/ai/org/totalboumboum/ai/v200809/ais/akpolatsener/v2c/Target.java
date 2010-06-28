@@ -11,10 +11,11 @@ import org.totalboumboum.ai.v200809.adapter.AiItem;
 import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
-
 /**
- * @author Administrator
  * 
+ * @author Cem Akpolat
+ * @author Emre Sener
+ *
  */
 public class Target {
 

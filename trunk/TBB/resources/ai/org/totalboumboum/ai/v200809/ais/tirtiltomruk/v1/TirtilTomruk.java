@@ -17,7 +17,12 @@ import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v1.zone.Zone;
 import org.totalboumboum.ai.v200809.ais.tirtiltomruk.v1.zone.ZoneEnum;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+*
+* @author Abdullah Tirtil
+* @author Mert Tomruk
+*
+*/
 public class TirtilTomruk extends ArtificialIntelligence
 {
 	private AiZone zone;
