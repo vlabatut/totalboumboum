@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network.tournament;
+package org.totalboumboum.game.stream.network.connection;
 
 /*
  * Total Boum Boum
@@ -21,11 +21,18 @@ package org.totalboumboum.game.stream.network.tournament;
  * 
  */
 
+import java.util.List;
+
+import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.tournament.AbstractTournament;
+
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public interface TournamentClientConnectionListener
+public interface ConfigurationServerConnectionListener
 {	
+	public void tournamentRead(AbstractTournament tournament);
+	public void profilesRead(List<Profile> profiles);
 }

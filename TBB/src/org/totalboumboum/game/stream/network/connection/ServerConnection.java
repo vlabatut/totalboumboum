@@ -28,7 +28,6 @@ import java.util.List;
 
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.stream.network.connection.AbstractConnection;
-import org.totalboumboum.game.stream.network.tournament.TournamentServerConnectionListener;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 
@@ -37,7 +36,7 @@ import org.totalboumboum.statistics.detailed.StatisticTournament;
  * @author Vincent Labatut
  *
  */
-public class ServerConnection extends AbstractConnection<ServerConnectionListener>
+public class ServerConnection extends AbstractConnection<ConfigurationServerConnectionListener>
 {	
 	public ServerConnection(Socket socket) throws IOException
 	{	super(socket);
@@ -82,12 +81,12 @@ public class ServerConnection extends AbstractConnection<ServerConnectionListene
 	// LISTENERS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private void fireTournamentRead(AbstractTournament tournament)
-	{	for(ServerConnectionListener listener: listeners)
+	{	for(ConfigurationServerConnectionListener listener: listeners)
 			listener.tournamentRead(tournament);
 	}
 
 	private void fireProfilesRead(List<Profile> profiles)
-	{	for(ServerConnectionListener listener: listeners)
+	{	for(ConfigurationServerConnectionListener listener: listeners)
 			listener.profilesRead(profiles);
 	}
 
@@ -100,6 +99,7 @@ public class ServerConnection extends AbstractConnection<ServerConnectionListene
 	{	for(TournamentServerConnectionListener listener: listeners)
 			listener.matchStarted(start);
 	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

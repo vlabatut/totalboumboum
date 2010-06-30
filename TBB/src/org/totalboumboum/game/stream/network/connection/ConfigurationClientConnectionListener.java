@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network.round;
+package org.totalboumboum.game.stream.network.connection;
 
 /*
  * Total Boum Boum
@@ -21,17 +21,17 @@ package org.totalboumboum.game.stream.network.round;
  * 
  */
 
-import org.totalboumboum.game.match.Match;
-import org.totalboumboum.statistics.detailed.StatisticMatch;
+import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.configuration.profile.SpriteInfo;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public interface RoundServerConnectionListener
+public interface ConfigurationClientConnectionListener
 {	
-	public void matchUpdated(Match match);
-	public void statsUpdated(StatisticMatch stats);
-	public void roundStarted(Boolean next);
+	public void profileAdded(Profile profile);
+	public void profileRemoved(Integer id);
+	public void spriteChanged(Integer id, SpriteInfo sprite);
 }

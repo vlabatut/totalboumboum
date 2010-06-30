@@ -36,7 +36,7 @@ import org.totalboumboum.statistics.detailed.StatisticTournament;
  * @author Vincent Labatut
  *
  */
-public class ClientConnection extends AbstractConnection<ClientConnectionListener>
+public class ClientConnection extends AbstractConnection<ConfigurationClientConnectionListener>
 {	
 	public ClientConnection(Socket socket) throws IOException
 	{	super(socket);
@@ -45,6 +45,9 @@ public class ClientConnection extends AbstractConnection<ClientConnectionListene
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	public void updateProfiles(List<Profile> profiles) throws IOException
+	{	write(profiles);
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT			/////////////////////////////////////////
@@ -91,17 +94,17 @@ public class ClientConnection extends AbstractConnection<ClientConnectionListene
 	// LISTENERS				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private void fireProfileAdded(Profile profile)
-	{	for(ClientConnectionListener listener: listeners)
+	{	for(ConfigurationClientConnectionListener listener: listeners)
 			listener.profileAdded(profile);
 	}
 	
 	private void fireProfileRemoved(Integer id)
-	{	for(ClientConnectionListener listener: listeners)
+	{	for(ConfigurationClientConnectionListener listener: listeners)
 			listener.profileRemoved(id);
 	}
 	
 	private void fireSpriteChanged(Integer id, SpriteInfo sprite)
-	{	for(ClientConnectionListener listener: listeners)
+	{	for(ConfigurationClientConnectionListener listener: listeners)
 			listener.spriteChanged(id,sprite);
 	}
 	

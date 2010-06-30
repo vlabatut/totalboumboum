@@ -21,17 +21,17 @@ package org.totalboumboum.game.stream.network.connection;
  * 
  */
 
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.SpriteInfo;
+import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.statistics.detailed.StatisticTournament;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public interface ClientConnectionListener
+public interface TournamentServerConnectionListener
 {	
-	public void profileAdded(Profile profile);
-	public void profileRemoved(Integer id);
-	public void spriteChanged(Integer id, SpriteInfo sprite);
+	public void tournamentUpdated(AbstractTournament tournament);
+	public void statsUpdated(StatisticTournament stats);
+	public void matchStarted(Boolean next);
 }
