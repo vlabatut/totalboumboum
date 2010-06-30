@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import org.totalboumboum.game.match.Match;
-import org.totalboumboum.game.stream.network.AbstractConnection;
+import org.totalboumboum.game.stream.network.connection.AbstractConnection;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 
 /**

@@ -31,8 +31,8 @@ import java.util.List;
 
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.game.stream.network.RunnableReader;
-import org.totalboumboum.game.stream.network.RunnableWriter;
+import org.totalboumboum.game.stream.network.threads.RunnableReader;
+import org.totalboumboum.game.stream.network.threads.RunnableWriter;
 
 /**
  * represents a server-side connection with a client

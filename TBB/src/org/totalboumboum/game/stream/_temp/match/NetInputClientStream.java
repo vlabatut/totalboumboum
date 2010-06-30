@@ -33,7 +33,7 @@ import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
-import org.totalboumboum.game.stream.network.RunnableReader;
+import org.totalboumboum.game.stream.network.threads.RunnableReader;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 
 /**

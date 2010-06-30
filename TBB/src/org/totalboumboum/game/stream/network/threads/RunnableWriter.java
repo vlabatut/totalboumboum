@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network;
+package org.totalboumboum.game.stream.network.threads;
 
 /*
  * Total Boum Boum
@@ -22,48 +22,76 @@ package org.totalboumboum.game.stream.network;
  */
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class RunnableReader<T extends Object> extends Thread
+public class RunnableWriter extends Thread
 {
-	public RunnableReader(ObjectInputStream in, AbstractConnection<?> connection)
-	{	this.in = in;
-		this.connection = connection;
+	public RunnableWriter(ObjectOutputStream out)
+	{	this.out = out;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CONNECTION			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected AbstractConnection<?> connection;
 	
 	/////////////////////////////////////////////////////////////////
 	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@SuppressWarnings("unchecked")
 	@Override
 	public void run()
 	{	while(!Thread.interrupted())
-		{	try
-			{	Object object = in.readObject();
-				T obj = (T) object;
-				connection.dataRead(obj);
+		{	// wait for some objects to write
+			while(isEmpty())
+			{	try
+				{	wait();
+				}
+				catch (InterruptedException e)
+				{	//e.printStackTrace();
+				}
 			}
-			catch (ClassNotFoundException e)
-			{	e.printStackTrace();
+			// write the first object
+			try
+			{	Object object = getObject();
+				out.writeObject(object);
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
 			}
 		}
+/*	
+		try
+		{	out.close();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+*/
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ObjectInputStream in;
+	private ObjectOutputStream out;
+
+	/////////////////////////////////////////////////////////////////
+	// DATA					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Queue<Object> data = new LinkedList<Object>();
+	
+	private synchronized boolean isEmpty()
+	{	boolean result = data.isEmpty();
+		return result;
+	}
+	
+	private synchronized Object getObject()
+	{	Object result = data.poll();
+		return result;
+	}
+	
+	public synchronized void addObject(Object object)
+	{	data.offer(object);
+	}
 }

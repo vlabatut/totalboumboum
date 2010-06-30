@@ -24,7 +24,7 @@ package org.totalboumboum.game.stream.network.tournament;
 import java.io.IOException;
 import java.net.Socket;
 
-import org.totalboumboum.game.stream.network.AbstractConnection;
+import org.totalboumboum.game.stream.network.connection.AbstractConnection;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 
