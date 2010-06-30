@@ -38,7 +38,7 @@ import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.game.stream.network.threads.RunnableWriter;
+import org.totalboumboum.game.stream.network.thread.RunnableWriter;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.xml.sax.SAXException;
 
