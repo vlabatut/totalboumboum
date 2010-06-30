@@ -6,6 +6,9 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
 /**
  * >> ce texte est à remplacer par votre propre description de votre classe
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class MonTraitement
 {	/** classe principale de l'IA, permet d'accéder à checkInterruption() */

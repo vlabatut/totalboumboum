@@ -26,6 +26,9 @@ import org.totalboumboum.ai.v200910.ais.adatepeozbek.v5c.AdatepeOzbek;
 
 /**
  * Classe utilisée par le moteur du jeu pour retrouver les IA
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class AiMain extends AiManager
 {

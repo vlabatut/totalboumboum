@@ -12,6 +12,9 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  * n'hésitez pas à décomposer le traitement en plusieurs classes,
  * plus votre programme est modulaire et plus il sera facile à
  * débugger, modifier, relire, comprendre, etc.
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class MonIA extends ArtificialIntelligence
 {	
