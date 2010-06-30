@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network.tournament;
+package org.totalboumboum.game.stream.network.thread;
 
 /*
  * Total Boum Boum
@@ -22,47 +22,76 @@ package org.totalboumboum.game.stream.network.tournament;
  */
 
 import java.io.IOException;
-import java.net.Socket;
-
-import org.totalboumboum.game.stream.network.connection.AbstractConnection;
-import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.statistics.detailed.StatisticTournament;
+import java.io.ObjectOutputStream;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class TournamentClientConnection extends AbstractConnection<TournamentClientConnectionListener>
-{	
-	public TournamentClientConnection(Socket socket) throws IOException
-	{	super(socket);
+public class RunnableWriter extends Thread
+{
+	public RunnableWriter(ObjectOutputStream out)
+	{	this.out = out;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// OUTPUT STREAM		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	
+	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// INPUT STREAM			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
 	@Override
-	public void dataRead(Object data)
-	{	
+	public void run()
+	{	while(!Thread.interrupted())
+		{	// wait for some objects to write
+			while(isEmpty())
+			{	try
+				{	wait();
+				}
+				catch (InterruptedException e)
+				{	//e.printStackTrace();
+				}
+			}
+			// write the first object
+			try
+			{	Object object = getObject();
+				out.writeObject(object);
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+		}
+/*	
+		try
+		{	out.close();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+*/
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LISTENERS			/////////////////////////////////////////
+	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private ObjectOutputStream out;
+
+	/////////////////////////////////////////////////////////////////
+	// DATA					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Queue<Object> data = new LinkedList<Object>();
 	
-	/////////////////////////////////////////////////////////////////
-	// FINISH				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			
-		}
+	private synchronized boolean isEmpty()
+	{	boolean result = data.isEmpty();
+		return result;
+	}
+	
+	private synchronized Object getObject()
+	{	Object result = data.poll();
+		return result;
+	}
+	
+	public synchronized void addObject(Object object)
+	{	data.offer(object);
 	}
 }

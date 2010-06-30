@@ -65,20 +65,6 @@ public class TournamentServerConnection extends AbstractConnection<TournamentSer
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void fireTournamentUpdated(AbstractTournament tournament)
-	{	for(TournamentServerConnectionListener listener: listeners)
-			listener.tournamentUpdated(tournament);
-	}
-
-	private void fireStatsUpdated(StatisticTournament stats)
-	{	for(TournamentServerConnectionListener listener: listeners)
-			listener.statsUpdated(stats);
-	}
-
-	private void fireMatchStarted(Boolean start)
-	{	for(TournamentServerConnectionListener listener: listeners)
-			listener.matchStarted(start);
-	}
 
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////

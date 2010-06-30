@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network.tournament;
+package org.totalboumboum.game.stream.network.thread;
 
 /*
  * Total Boum Boum
@@ -22,47 +22,50 @@ package org.totalboumboum.game.stream.network.tournament;
  */
 
 import java.io.IOException;
-import java.net.Socket;
+import java.io.ObjectInputStream;
 
 import org.totalboumboum.game.stream.network.connection.AbstractConnection;
-import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.statistics.detailed.StatisticTournament;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class TournamentClientConnection extends AbstractConnection<TournamentClientConnectionListener>
-{	
-	public TournamentClientConnection(Socket socket) throws IOException
-	{	super(socket);
+public class RunnableReader<T extends Object> extends Thread
+{
+	public RunnableReader(ObjectInputStream in, AbstractConnection<?> connection)
+	{	this.in = in;
+		this.connection = connection;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// OUTPUT STREAM		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
+	// CONNECTION			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected AbstractConnection<?> connection;
 	
 	/////////////////////////////////////////////////////////////////
-	// INPUT STREAM			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
+	// RUNNABLE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unchecked")
 	@Override
-	public void dataRead(Object data)
-	{	
+	public void run()
+	{	while(!Thread.interrupted())
+		{	try
+			{	Object object = in.readObject();
+				T obj = (T) object;
+				connection.dataRead(obj);
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LISTENERS			/////////////////////////////////////////
+	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISH				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			
-		}
-	}
+	private ObjectInputStream in;
 }

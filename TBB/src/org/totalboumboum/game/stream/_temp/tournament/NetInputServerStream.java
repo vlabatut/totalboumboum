@@ -32,7 +32,7 @@ import java.util.List;
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
-import org.totalboumboum.game.stream.network.threads.RunnableReader;
+import org.totalboumboum.game.stream.network.thread.RunnableReader;
 
 /**
  * 

@@ -28,7 +28,9 @@ import java.util.List;
 
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.stream.network.connection.AbstractConnection;
+import org.totalboumboum.game.stream.network.tournament.TournamentServerConnectionListener;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.statistics.detailed.StatisticTournament;
 
 /**
  * 
@@ -89,6 +91,15 @@ public class ServerConnection extends AbstractConnection<ServerConnectionListene
 			listener.profilesRead(profiles);
 	}
 
+	private void fireTournamentStatsRead(StatisticTournament stats)
+	{	for(TournamentServerConnectionListener listener: listeners)
+			listener.statsUpdated(stats);
+	}
+
+	private void fireMatchStarted(Boolean start)
+	{	for(TournamentServerConnectionListener listener: listeners)
+			listener.matchStarted(start);
+	}
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
