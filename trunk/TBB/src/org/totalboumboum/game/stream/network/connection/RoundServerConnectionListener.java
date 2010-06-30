@@ -21,18 +21,17 @@ package org.totalboumboum.game.stream.network.connection;
  * 
  */
 
-import java.util.List;
-
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.game.match.Match;
+import org.totalboumboum.statistics.detailed.StatisticMatch;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public interface ServerConnectionListener
+public interface RoundServerConnectionListener
 {	
-	public void tournamentRead(AbstractTournament tournament);
-	public void profilesRead(List<Profile> profiles);
+	public void matchUpdated(Match match);
+	public void statsUpdated(StatisticMatch stats);
+	public void roundStarted(Boolean next);
 }
