@@ -1415,5 +1415,7 @@ public class Launcher
 	 * TODO
 	 * - définir connection pour round
 	 * - définir manageur pour plusieurs connexions (coté serveur)
+	 * - désactivation des threads quand on change de "niveau" (config>tournament>match>round)
+	 *   afin qu'un thread ne lise pas les données destinées à un autre...
 	 */
 }
