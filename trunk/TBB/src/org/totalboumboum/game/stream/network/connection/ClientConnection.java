@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network.round;
+package org.totalboumboum.game.stream.network.connection;
 
 /*
  * Total Boum Boum
@@ -23,63 +23,71 @@ package org.totalboumboum.game.stream.network.round;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 
-import org.totalboumboum.game.match.Match;
+import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.configuration.profile.SpriteInfo;
 import org.totalboumboum.game.stream.network.connection.AbstractConnection;
-import org.totalboumboum.statistics.detailed.StatisticMatch;
+import org.totalboumboum.game.tournament.AbstractTournament;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class RoundServerConnection extends AbstractConnection<RoundServerConnectionListener>
+public class ClientConnection extends AbstractConnection<ClientConnectionListener>
 {	
-	public RoundServerConnection(Socket socket) throws IOException
+	public ClientConnection(Socket socket) throws IOException
 	{	super(socket);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	public void updateTournament(AbstractTournament tournament) throws IOException
+	{	write(tournament);
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void dataRead(Object data)
-	{	if(data instanceof Match)
-		{	Match match = (Match)data;
-			fireMatchUpdated(match);
+	{	if(data instanceof Profile)
+		{	Profile profile = (Profile)data;
+			fireProfileAdded(profile);
 		}
-		else if(data instanceof StatisticMatch)
-		{	StatisticMatch stats = (StatisticMatch)data;
-			fireStatsUpdated(stats);
+		else if(data instanceof Integer)
+		{	Integer id = (Integer)data;
+			fireProfileRemoved(id);
 		}
-		else if(data instanceof Boolean)
-		{	Boolean next = (Boolean) data;
-			fireRoundStarted(next);
+		else if(data instanceof List)
+		{	List<Object> temp = (List<Object>)data;
+			Integer id = (Integer)temp.get(0);
+			SpriteInfo sprite = (SpriteInfo)temp.get(1);
+			fireSpriteChanged(id,sprite);
 		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void fireMatchUpdated(Match match)
-	{	for(RoundServerConnectionListener listener: listeners)
-			listener.matchUpdated(match);
+	private void fireProfileAdded(Profile profile)
+	{	for(ClientConnectionListener listener: listeners)
+			listener.profileAdded(profile);
 	}
-
-	private void fireStatsUpdated(StatisticMatch stats)
-	{	for(RoundServerConnectionListener listener: listeners)
-			listener.statsUpdated(stats);
+	
+	private void fireProfileRemoved(Integer id)
+	{	for(ClientConnectionListener listener: listeners)
+			listener.profileRemoved(id);
 	}
-
-	private void fireRoundStarted(Boolean start)
-	{	for(RoundServerConnectionListener listener: listeners)
-			listener.roundStarted(start);
+	
+	private void fireSpriteChanged(Integer id, SpriteInfo sprite)
+	{	for(ClientConnectionListener listener: listeners)
+			listener.spriteChanged(id,sprite);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
