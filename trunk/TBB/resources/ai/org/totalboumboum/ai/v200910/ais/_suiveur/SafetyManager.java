@@ -49,6 +49,9 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * Une valeur négative signifie que la case est menacée par une bombe
  * télécommandée, qui peut exploser n'importe quand (la valeur absolue
  * de la valeur correspond au temps depuis lequel la bombe a été posée)
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class SafetyManager
 {	

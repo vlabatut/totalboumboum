@@ -41,6 +41,9 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * classe chargée d'implémenter un déplacement, 
  * en respectant un chemin donné
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class PathManager
 {

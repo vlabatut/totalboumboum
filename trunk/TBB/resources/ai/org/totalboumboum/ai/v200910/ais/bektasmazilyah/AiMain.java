@@ -4,7 +4,10 @@ import org.totalboumboum.ai.v200910.adapter.AiManager;
 import org.totalboumboum.ai.v200910.ais.bektasmazilyah.v5c.BektasMazilyah;
 
 /**
- * class utilisée par le moteur du jeu pour retrouver les IA
+ * classe utilisée par le moteur du jeu pour retrouver les IA
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class AiMain extends AiManager
 {

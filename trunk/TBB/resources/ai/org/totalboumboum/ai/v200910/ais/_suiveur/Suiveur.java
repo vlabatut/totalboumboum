@@ -38,6 +38,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * cette classe implémente une IA relativement stupide, qui choisit une cible
  * (un autre joueur), puis essaie de la rejoindre, et enfin se contente de la
  * suivre partout où elle va.
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class Suiveur extends ArtificialIntelligence 
 {	

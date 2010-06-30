@@ -41,6 +41,9 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * classe chargée d'implémenter un déplacement de fuite,
  * (personnage menacé par une ou plusieurs bombes) 
+ * 
+ * @author Vincent Labatut
+ *
  */
 public class EscapeManager
 {
