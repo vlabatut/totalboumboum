@@ -26,6 +26,6 @@ package org.totalboumboum.game.stream.network.match;
  * @author Vincent Labatut
  *
  */
-public interface MatchServerConnectionListenerBis
+public interface MatchServerConnectionListener
 {	
 }
