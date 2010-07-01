@@ -35,9 +35,9 @@ import org.totalboumboum.game.tournament.AbstractTournament;
  * @author Vincent Labatut
  *
  */
-public class ConfigurationServerConnectionBis extends AbstractConnection<ConfigurationServerConnectionListenerBis>
+public class ConfigurationServerConnection extends AbstractConnection<ConfigurationServerConnectionListener>
 {	
-	public ConfigurationServerConnectionBis(Socket socket, AbstractTournament tournament) throws IOException
+	public ConfigurationServerConnection(Socket socket, AbstractTournament tournament) throws IOException
 	{	super(socket);
 		write(tournament);
 	}
@@ -75,17 +75,17 @@ public class ConfigurationServerConnectionBis extends AbstractConnection<Configu
 	// LISTENERS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private void fireProfileAdded(Profile profile)
-	{	for(ConfigurationServerConnectionListenerBis listener: listeners)
+	{	for(ConfigurationServerConnectionListener listener: listeners)
 			listener.profileAdded(profile);
 	}
 	
 	private void fireProfileRemoved(Integer id)
-	{	for(ConfigurationServerConnectionListenerBis listener: listeners)
+	{	for(ConfigurationServerConnectionListener listener: listeners)
 			listener.profileRemoved(id);
 	}
 	
 	private void fireSpriteChanged(Integer id, SpriteInfo sprite)
-	{	for(ConfigurationServerConnectionListenerBis listener: listeners)
+	{	for(ConfigurationServerConnectionListener listener: listeners)
 			listener.spriteChanged(id,sprite);
 	}
 	

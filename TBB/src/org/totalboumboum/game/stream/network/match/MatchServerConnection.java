@@ -33,9 +33,9 @@ import org.totalboumboum.statistics.detailed.StatisticMatch;
  * @author Vincent Labatut
  *
  */
-public class MatchServerConnectionBis extends AbstractConnection<MatchServerConnectionListenerBis>
+public class MatchServerConnection extends AbstractConnection<MatchServerConnectionListener>
 {	
-	public MatchServerConnectionBis(Socket socket) throws IOException
+	public MatchServerConnection(Socket socket) throws IOException
 	{	super(socket);
 	}
 	

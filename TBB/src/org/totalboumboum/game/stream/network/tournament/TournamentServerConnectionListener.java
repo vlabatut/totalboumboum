@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network.round;
+package org.totalboumboum.game.stream.network.tournament;
 
 /*
  * Total Boum Boum
@@ -21,18 +21,11 @@ package org.totalboumboum.game.stream.network.round;
  * 
  */
 
-import java.util.List;
-
-import org.totalboumboum.configuration.controls.ControlSettings;
-import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
-
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public interface RoundServerConnectionListenerBis
+public interface TournamentServerConnectionListener
 {	
-	public void eventRead(RemotePlayerControlEvent event);
-	public void controlSettingsRead(List<ControlSettings> controlSettings);
 }

@@ -42,9 +42,9 @@ import org.totalboumboum.statistics.detailed.StatisticRound;
  * @author Vincent Labatut
  *
  */
-public class RoundServerConnectionBis extends AbstractConnection<RoundServerConnectionListenerBis>
+public class RoundServerConnection extends AbstractConnection<RoundServerConnectionListener>
 {	
-	public RoundServerConnectionBis(Socket socket) throws IOException
+	public RoundServerConnection(Socket socket) throws IOException
 	{	super(socket);
 	}
 	
@@ -103,12 +103,12 @@ public class RoundServerConnectionBis extends AbstractConnection<RoundServerConn
 	// LISTENERS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private void fireEventRead(RemotePlayerControlEvent event)
-	{	for(RoundServerConnectionListenerBis listener: listeners)
+	{	for(RoundServerConnectionListener listener: listeners)
 			listener.eventRead(event);
 	}
 	
 	private void fireControlSettingsRead(List<ControlSettings> controlSettings)
-	{	for(RoundServerConnectionListenerBis listener: listeners)
+	{	for(RoundServerConnectionListener listener: listeners)
 			listener.controlSettingsRead(controlSettings);
 	}
 	

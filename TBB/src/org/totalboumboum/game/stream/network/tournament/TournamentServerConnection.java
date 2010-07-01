@@ -33,9 +33,9 @@ import org.totalboumboum.statistics.detailed.StatisticTournament;
  * @author Vincent Labatut
  *
  */
-public class TournamentServerConnectionBis extends AbstractConnection<TournamentServerConnectionListenerBis>
+public class TournamentServerConnection extends AbstractConnection<TournamentServerConnectionListener>
 {	
-	public TournamentServerConnectionBis(Socket socket) throws IOException
+	public TournamentServerConnection(Socket socket) throws IOException
 	{	super(socket);
 	}
 	

@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network.configuration;
+package org.totalboumboum.game.stream.network.round;
 
 /*
  * Total Boum Boum
@@ -21,17 +21,18 @@ package org.totalboumboum.game.stream.network.configuration;
  * 
  */
 
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.SpriteInfo;
+import java.util.List;
+
+import org.totalboumboum.configuration.controls.ControlSettings;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public interface ConfigurationServerConnectionListenerBis
+public interface RoundServerConnectionListener
 {	
-	public void profileAdded(Profile profile);
-	public void profileRemoved(Integer id);
-	public void spriteChanged(Integer id, SpriteInfo sprite);
+	public void eventRead(RemotePlayerControlEvent event);
+	public void controlSettingsRead(List<ControlSettings> controlSettings);
 }

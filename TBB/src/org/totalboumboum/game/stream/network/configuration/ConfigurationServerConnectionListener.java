@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network.tournament;
+package org.totalboumboum.game.stream.network.configuration;
 
 /*
  * Total Boum Boum
@@ -21,11 +21,17 @@ package org.totalboumboum.game.stream.network.tournament;
  * 
  */
 
+import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.configuration.profile.SpriteInfo;
+
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public interface TournamentServerConnectionListenerBis
+public interface ConfigurationServerConnectionListener
 {	
+	public void profileAdded(Profile profile);
+	public void profileRemoved(Integer id);
+	public void spriteChanged(Integer id, SpriteInfo sprite);
 }
