@@ -13,9 +13,16 @@ import org.totalboumboum.ai.v200910.adapter.data.AiStateName;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
-/* Cette classe d'abord initialise une matrice avec les valeurs initiales MAX_VALUE et
+/** 
+ * Cette classe d'abord initialise une matrice avec les valeurs initiales MAX_VALUE et
  * commence à contrôler les feux, les bombes, les murs brulés.Puis, l'algorithme se tient
  * compte des bombes et remet les valeurs de leurs temps d'explosion à la matrice.
+ * 
+ * @version 1
+ * 
+ * @author Can Adatape
+ * @author Sena Ozbek
+ *
  */
 public class SafetyManager
 {		

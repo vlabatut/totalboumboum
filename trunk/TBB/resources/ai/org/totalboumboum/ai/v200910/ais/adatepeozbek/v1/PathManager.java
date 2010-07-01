@@ -37,10 +37,15 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * Classe chargée d'implémenter un déplacement,
  * en respectant un chemin donné
+ * 
+ * @version 1
+ * 
+ * @author Can Adatape
+ * @author Sena Ozbek
+ *
  */
 public class PathManager
 {

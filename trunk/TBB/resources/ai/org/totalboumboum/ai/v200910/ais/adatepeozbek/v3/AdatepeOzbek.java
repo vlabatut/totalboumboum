@@ -12,7 +12,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.*;
 
-
+/**
+ * 
+ * @version 3
+ * 
+ * @author Can Adatape
+ * @author Sena Ozbek
+ *
+ */
 public class AdatepeOzbek extends ArtificialIntelligence 
 {	
 	private AiHero ownHero = null;

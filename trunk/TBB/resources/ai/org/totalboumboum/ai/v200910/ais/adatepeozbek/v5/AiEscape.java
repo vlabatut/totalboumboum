@@ -21,6 +21,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.data.AiItem;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * 
+ * @version 5
+ * 
+ * @author Can Adatape
+ * @author Sena Ozbek
+ *
+ */
 public class AiEscape
 {		
 	private AdatepeOzbek ownAi;
