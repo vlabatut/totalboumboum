@@ -2,6 +2,14 @@ package org.totalboumboum.ai.v200910.ais.adatepeozbek.v5;
 
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 
+/**
+ * 
+ * @version 5
+ * 
+ * @author Can Adatape
+ * @author Sena Ozbek
+ *
+ */
 public class Enemy
 {
 	private AiHero _hero = null;

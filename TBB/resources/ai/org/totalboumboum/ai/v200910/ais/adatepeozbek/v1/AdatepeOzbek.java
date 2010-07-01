@@ -31,9 +31,11 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Cette classe implémente une IA relativement stupide, qui choisit une cible
- * (un autre joueur), puis essaie de la rejoindre, et enfin se contente de la
- * suivre partout où elle va.
+ * @version 1
+ * 
+ * @author Can Adatape
+ * @author Sena Ozbek
+ *
  */
 public class AdatepeOzbek extends ArtificialIntelligence 
 {	

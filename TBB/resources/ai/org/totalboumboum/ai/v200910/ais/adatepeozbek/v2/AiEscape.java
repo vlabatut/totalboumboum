@@ -21,6 +21,14 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * 
+ * @version 2
+ * 
+ * @author Can Adatape
+ * @author Sena Ozbek
+ *
+ */
 public class AiEscape
 {		
 	private AdatepeOzbek ownAi;

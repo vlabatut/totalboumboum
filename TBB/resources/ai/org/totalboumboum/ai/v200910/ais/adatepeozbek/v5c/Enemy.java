@@ -4,6 +4,14 @@ import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 
+/**
+ * 
+ * @version 5.c
+ * 
+ * @author Can Adatape
+ * @author Sena Ozbek
+ *
+ */
 public class Enemy
 {
 	private AiHero _hero = null;

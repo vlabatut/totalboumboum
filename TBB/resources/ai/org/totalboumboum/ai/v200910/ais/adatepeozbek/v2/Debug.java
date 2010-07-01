@@ -1,5 +1,13 @@
 package org.totalboumboum.ai.v200910.ais.adatepeozbek.v2;
 
+/**
+ * 
+ * @version 2
+ * 
+ * @author Can Adatape
+ * @author Sena Ozbek
+ *
+ */
 public class Debug
 {
 	private static boolean debug = false;
