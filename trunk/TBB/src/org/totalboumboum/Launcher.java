@@ -1417,5 +1417,8 @@ public class Launcher
 	 * - définir manageur pour plusieurs connexions (coté serveur)
 	 * - désactivation des threads quand on change de "niveau" (config>tournament>match>round)
 	 *   afin qu'un thread ne lise pas les données destinées à un autre...
+	 *   c'est très possible puisque la seule action effectuée en conséquence du début d'un nouveau match ou autre, coté server, c'est
+	 *   de débloquer un bouton, donc on peut facilement bloquer le thread reader sans qu'il lise avant l'objet suivant... 
+	 *   ou alors on peut faire toutes les mises à jour (t/m/r) en même temps à la fin du round ? à voir comment c'est fait actuellement 
 	 */
 }
