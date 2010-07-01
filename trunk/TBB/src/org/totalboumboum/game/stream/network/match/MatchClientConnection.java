@@ -42,30 +42,44 @@ public class MatchClientConnection extends AbstractConnection<MatchClientConnect
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public void updateMatch(Match match) throws IOException
-	{	write(match);
-	}
-	
-	public void updateStats(StatisticMatch stats) throws IOException
-	{	write(stats);
-	}
-	
-	public void startRound(Boolean next) throws IOException
-	{	write(next);
-	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void dataRead(Object data)
-	{	
+	{	if(data instanceof Match)
+		{	Match match = (Match)data;
+			fireMatchUpdated(match);
+		}
+		else if(data instanceof StatisticMatch)
+		{	StatisticMatch stats = (StatisticMatch)data;
+			fireStatsUpdated(stats);
+		}
+		else if(data instanceof Boolean)
+		{	Boolean next = (Boolean) data;
+			fireRoundStarted(next);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
+	private void fireMatchUpdated(Match match)
+	{	for(MatchClientConnectionListener listener: listeners)
+			listener.matchUpdated(match);
+	}
+
+	private void fireStatsUpdated(StatisticMatch stats)
+	{	for(MatchClientConnectionListener listener: listeners)
+			listener.statsUpdated(stats);
+	}
+
+	private void fireRoundStarted(Boolean start)
+	{	for(MatchClientConnectionListener listener: listeners)
+			listener.roundStarted(start);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

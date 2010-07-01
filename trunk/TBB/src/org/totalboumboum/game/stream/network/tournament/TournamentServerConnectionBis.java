@@ -33,53 +33,39 @@ import org.totalboumboum.statistics.detailed.StatisticTournament;
  * @author Vincent Labatut
  *
  */
-public class TournamentServerConnection extends AbstractConnection<TournamentServerConnectionListener>
+public class TournamentServerConnectionBis extends AbstractConnection<TournamentServerConnectionListenerBis>
 {	
-	public TournamentServerConnection(Socket socket) throws IOException
+	public TournamentServerConnectionBis(Socket socket) throws IOException
 	{	super(socket);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-
+	public void updateTournament(AbstractTournament tournament) throws IOException
+	{	write(tournament);
+	}
+	
+	public void updateStats(StatisticTournament stats) throws IOException
+	{	write(stats);
+	}
+	
+	public void startMatch(Boolean next) throws IOException
+	{	write(next);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void dataRead(Object data)
-	{	if(data instanceof AbstractTournament)
-		{	AbstractTournament tournament = (AbstractTournament)data;
-			fireTournamentUpdated(tournament);
-		}
-		else if(data instanceof StatisticTournament)
-		{	StatisticTournament stats = (StatisticTournament)data;
-			fireStatsUpdated(stats);
-		}
-		else if(data instanceof Boolean)
-		{	Boolean next = (Boolean) data;
-			fireMatchStarted(next);
-		}
+	{	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void fireTournamentUpdated(AbstractTournament tournament)
-	{	for(TournamentServerConnectionListener listener: listeners)
-			listener.tournamentUpdated(tournament);
-	}
-
-	private void fireStatsUpdated(StatisticTournament stats)
-	{	for(TournamentServerConnectionListener listener: listeners)
-			listener.statsUpdated(stats);
-	}
-
-	private void fireMatchStarted(Boolean start)
-	{	for(TournamentServerConnectionListener listener: listeners)
-			listener.matchStarted(start);
-	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

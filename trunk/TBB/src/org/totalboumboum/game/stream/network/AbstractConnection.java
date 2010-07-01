@@ -90,6 +90,10 @@ public abstract class AbstractConnection<T extends Object>
 		writer = new RunnableWriter(out);
 		writer.start();
 	}
+	
+	public void pauseReader(boolean pause)
+	{	reader.pause(pause);		
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS			/////////////////////////////////////////

@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network.round;
+package org.totalboumboum.game.stream.network.match;
 
 /*
  * Total Boum Boum
@@ -33,53 +33,39 @@ import org.totalboumboum.statistics.detailed.StatisticMatch;
  * @author Vincent Labatut
  *
  */
-public class RoundServerConnection extends AbstractConnection<RoundServerConnectionListener>
+public class MatchServerConnectionBis extends AbstractConnection<MatchServerConnectionListenerBis>
 {	
-	public RoundServerConnection(Socket socket) throws IOException
+	public MatchServerConnectionBis(Socket socket) throws IOException
 	{	super(socket);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-
+	public void updateMatch(Match match) throws IOException
+	{	write(match);
+	}
+	
+	public void updateStats(StatisticMatch stats) throws IOException
+	{	write(stats);
+	}
+	
+	public void startRound(Boolean next) throws IOException
+	{	write(next);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void dataRead(Object data)
-	{	if(data instanceof Match)
-		{	Match match = (Match)data;
-			fireMatchUpdated(match);
-		}
-		else if(data instanceof StatisticMatch)
-		{	StatisticMatch stats = (StatisticMatch)data;
-			fireStatsUpdated(stats);
-		}
-		else if(data instanceof Boolean)
-		{	Boolean next = (Boolean) data;
-			fireRoundStarted(next);
-		}
+	{	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void fireMatchUpdated(Match match)
-	{	for(RoundServerConnectionListener listener: listeners)
-			listener.matchUpdated(match);
-	}
-
-	private void fireStatsUpdated(StatisticMatch stats)
-	{	for(RoundServerConnectionListener listener: listeners)
-			listener.statsUpdated(stats);
-	}
-
-	private void fireRoundStarted(Boolean start)
-	{	for(RoundServerConnectionListener listener: listeners)
-			listener.roundStarted(start);
-	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -21,8 +21,10 @@ package org.totalboumboum.game.stream.network.configuration;
  * 
  */
 
+import java.util.List;
+
 import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.SpriteInfo;
+import org.totalboumboum.game.tournament.AbstractTournament;
 
 /**
  * 
@@ -31,7 +33,7 @@ import org.totalboumboum.configuration.profile.SpriteInfo;
  */
 public interface ConfigurationClientConnectionListener
 {	
-	public void profileAdded(Profile profile);
-	public void profileRemoved(Integer id);
-	public void spriteChanged(Integer id, SpriteInfo sprite);
+	public void tournamentRead(AbstractTournament tournament);
+	public void profilesRead(List<Profile> profiles);
+	public void tournamentStarted(Boolean start);
 }

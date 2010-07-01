@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network.match;
+package org.totalboumboum.game.stream.network.round;
 
 /*
  * Total Boum Boum
@@ -21,17 +21,18 @@ package org.totalboumboum.game.stream.network.match;
  * 
  */
 
-import org.totalboumboum.game.match.Match;
-import org.totalboumboum.statistics.detailed.StatisticMatch;
+import java.util.List;
+
+import org.totalboumboum.configuration.controls.ControlSettings;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public interface MatchServerConnectionListener
+public interface RoundServerConnectionListenerBis
 {	
-	public void matchUpdated(Match match);
-	public void statsUpdated(StatisticMatch stats);
-	public void roundStarted(Boolean next);
+	public void eventRead(RemotePlayerControlEvent event);
+	public void controlSettingsRead(List<ControlSettings> controlSettings);
 }
