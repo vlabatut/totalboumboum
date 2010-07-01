@@ -10,7 +10,12 @@ import java.awt.Container;
  * ............................................... 
  * Publisher: O'Reilly 
  * Pub Date: June 2005 
- * ISBN: 0-596-00907-0 
+ * ISBN: 0-596-00907-0
+ *  http://weblogs.java.net/blog/invalidname
+ *  http://weblogs.java.net/blog/joshy
+ * 
+ * @author Chris Adamson
+ * @author Joshua Marinacci
  */
 public class FullRepaintManager extends RepaintManager { 
 	public void addDirtyRegion(JComponent comp, int x, int y, int w,

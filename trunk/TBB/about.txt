@@ -25,7 +25,7 @@ This product includes softwares developed by:
     Used to allow alpha effects in the GUI panels
     
   + Adam Walker:
-    Class org.totalboumboum.gui.tools.MessageDisplayer
+    Class org.totalboumboum.tools.images.MessageDisplayer
     Copyright 2005 Adam Walker
     http://www.walkersoftware.net/articles/text-effects-in-java
     Used to display messages at the begining of a round
@@ -46,7 +46,7 @@ This product includes softwares developed by:
     Classes in the org.totalboumboum.game.statistics.glicko2.jrs package
     Copyright 2005-2006 JRS project - BSD License
     https://jrs.dev.java.net
-    These classes were modified by Vincent Labatut
+    Some of these classes were modified by Vincent Labatut
     Used to rank players depending on their long term results
     
   + Japa - Java parser and AST (Abstract Syntax Tree):
@@ -78,3 +78,4 @@ This product uses icons derived from a work by:
     see resources/gui/buttons/license for details
     http://www.everaldo.com/crystal
 Modifications by Vincent Labatut
+
