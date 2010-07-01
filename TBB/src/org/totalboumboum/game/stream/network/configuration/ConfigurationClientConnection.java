@@ -23,10 +23,10 @@ package org.totalboumboum.game.stream.network.configuration;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.SpriteInfo;
 import org.totalboumboum.game.stream.network.AbstractConnection;
 import org.totalboumboum.game.tournament.AbstractTournament;
 
@@ -37,58 +37,67 @@ import org.totalboumboum.game.tournament.AbstractTournament;
  */
 public class ConfigurationClientConnection extends AbstractConnection<ConfigurationClientConnectionListener>
 {	
-	public ConfigurationClientConnection(Socket socket, AbstractTournament tournament) throws IOException
+	public ConfigurationClientConnection(Socket socket) throws IOException
 	{	super(socket);
-		write(tournament);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public void startTournament(Boolean start) throws IOException
-	{	write(start);
+	public void addProfile(Profile profile) throws IOException
+	{	write(profile);
 	}
 	
+	public void removeProfile(Profile profile) throws IOException
+	{	Integer id = profile.getId();
+		write(id);
+	}
+	
+	public void changeSprite(Profile profile) throws IOException
+	{	List<Object> list = new ArrayList<Object>();
+		list.add(profile.getId());
+		list.add(profile.getSelectedSprite());
+		write(list);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void dataRead(Object data)
-	{	if(data instanceof Profile)
-		{	Profile profile = (Profile)data;
-			fireProfileAdded(profile);
-		}
-		else if(data instanceof Integer)
-		{	Integer id = (Integer)data;
-			fireProfileRemoved(id);
+	{	if(data instanceof AbstractTournament)
+		{	AbstractTournament tournament = (AbstractTournament)data;
+			fireTournamentRead(tournament);
 		}
 		else if(data instanceof List)
-		{	List<Object> temp = (List<Object>)data;
-			Integer id = (Integer)temp.get(0);
-			SpriteInfo sprite = (SpriteInfo)temp.get(1);
-			fireSpriteChanged(id,sprite);
+		{	List<Profile> profiles = (List<Profile>)data;
+			fireProfilesRead(profiles);
+		}
+		else if(data instanceof Boolean)
+		{	Boolean start = (Boolean) data;
+			fireTournamentStarted(start);
 		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void fireProfileAdded(Profile profile)
+	private void fireTournamentRead(AbstractTournament tournament)
 	{	for(ConfigurationClientConnectionListener listener: listeners)
-			listener.profileAdded(profile);
+			listener.tournamentRead(tournament);
 	}
-	
-	private void fireProfileRemoved(Integer id)
+
+	private void fireProfilesRead(List<Profile> profiles)
 	{	for(ConfigurationClientConnectionListener listener: listeners)
-			listener.profileRemoved(id);
+			listener.profilesRead(profiles);
 	}
-	
-	private void fireSpriteChanged(Integer id, SpriteInfo sprite)
+
+	private void fireTournamentStarted(Boolean start)
 	{	for(ConfigurationClientConnectionListener listener: listeners)
-			listener.spriteChanged(id,sprite);
+			listener.tournamentStarted(start);
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

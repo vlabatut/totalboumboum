@@ -42,13 +42,39 @@ public class RunnableReader<T extends Object> extends Thread
 	protected AbstractConnection<?> connection;
 	
 	/////////////////////////////////////////////////////////////////
+	// PAUSE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean paused = false;
+	
+	public synchronized void pause(boolean pause)
+	{	if(pause!=paused)
+		{	paused = pause;
+			if(!pause)
+				notify();
+		}
+	}
+	
+	private synchronized boolean isPaused()
+	{	return paused;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@SuppressWarnings("unchecked")
 	@Override
 	public void run()
 	{	while(!Thread.interrupted())
-		{	try
+		{	if(isPaused())
+			{	try
+				{	wait();	
+				}
+				catch (InterruptedException e)
+				{	e.printStackTrace();
+				}
+			}
+		
+			try
 			{	Object object = in.readObject();
 				T obj = (T) object;
 				connection.dataRead(obj);

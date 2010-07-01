@@ -21,6 +21,9 @@ package org.totalboumboum.game.stream.network.match;
  * 
  */
 
+import org.totalboumboum.game.match.Match;
+import org.totalboumboum.statistics.detailed.StatisticMatch;
+
 /**
  * 
  * @author Vincent Labatut
@@ -28,4 +31,7 @@ package org.totalboumboum.game.stream.network.match;
  */
 public interface MatchClientConnectionListener
 {	
+	public void matchUpdated(Match match);
+	public void statsUpdated(StatisticMatch stats);
+	public void roundStarted(Boolean next);
 }

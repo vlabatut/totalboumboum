@@ -42,30 +42,44 @@ public class TournamentClientConnection extends AbstractConnection<TournamentCli
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public void updateTournament(AbstractTournament tournament) throws IOException
-	{	write(tournament);
-	}
-	
-	public void updateStats(StatisticTournament stats) throws IOException
-	{	write(stats);
-	}
-	
-	public void startMatch(Boolean next) throws IOException
-	{	write(next);
-	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void dataRead(Object data)
-	{	
+	{	if(data instanceof AbstractTournament)
+		{	AbstractTournament tournament = (AbstractTournament)data;
+			fireTournamentUpdated(tournament);
+		}
+		else if(data instanceof StatisticTournament)
+		{	StatisticTournament stats = (StatisticTournament)data;
+			fireStatsUpdated(stats);
+		}
+		else if(data instanceof Boolean)
+		{	Boolean next = (Boolean) data;
+			fireMatchStarted(next);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
+	private void fireTournamentUpdated(AbstractTournament tournament)
+	{	for(TournamentClientConnectionListener listener: listeners)
+			listener.tournamentUpdated(tournament);
+	}
+
+	private void fireStatsUpdated(StatisticTournament stats)
+	{	for(TournamentClientConnectionListener listener: listeners)
+			listener.statsUpdated(stats);
+	}
+
+	private void fireMatchStarted(Boolean start)
+	{	for(TournamentClientConnectionListener listener: listeners)
+			listener.matchStarted(start);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

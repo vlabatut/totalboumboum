@@ -1,4 +1,4 @@
-package org.totalboumboum.game.stream.network.configuration;
+package org.totalboumboum.game.stream.network.round;
 
 /*
  * Total Boum Boum
@@ -23,81 +23,95 @@ package org.totalboumboum.game.stream.network.configuration;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.container.level.info.LevelInfo;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
+import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
+import org.totalboumboum.game.limit.Limits;
+import org.totalboumboum.game.limit.RoundLimit;
+import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.stream.network.AbstractConnection;
-import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.statistics.detailed.StatisticRound;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class ConfigurationServerConnection extends AbstractConnection<ConfigurationServerConnectionListener>
+public class RoundServerConnectionBis extends AbstractConnection<RoundServerConnectionListenerBis>
 {	
-	public ConfigurationServerConnection(Socket socket) throws IOException
+	public RoundServerConnectionBis(Socket socket) throws IOException
 	{	super(socket);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public void addProfile(Profile profile) throws IOException
-	{	write(profile);
+	public void updateRound(Round match) throws IOException
+	{	write(match);
 	}
 	
-	public void removeProfile(Profile profile) throws IOException
-	{	Integer id = profile.getId();
-		write(id);
+	public void updateStats(StatisticRound stats) throws IOException
+	{	write(stats);
 	}
 	
-	public void changeSprite(Profile profile) throws IOException
-	{	List<Object> list = new ArrayList<Object>();
-		list.add(profile.getId());
-		list.add(profile.getSelectedSprite());
-		write(list);
+	public void setZoomCoeff(Double zoomCoeff) throws IOException
+	{	write(zoomCoeff);		
+	}
+	
+	public void setProfiles(List<Profile> profiles) throws IOException
+	{	write(profiles);		
+	}
+	
+	public void setLevelInfo(LevelInfo levelInfo) throws IOException
+	{	write(levelInfo);		
 	}
 
+	public void setLimits(Limits<RoundLimit> limits) throws IOException
+	{	write(limits);		
+	}
+
+	public void setItemCounts(HashMap<String,Integer> itemCounts) throws IOException
+	{	write(itemCounts);		
+	}
+	
+	public void sendEvent(ReplayEvent event) throws IOException
+	{	write(event);		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void dataRead(Object data)
-	{	if(data instanceof AbstractTournament)
-		{	AbstractTournament tournament = (AbstractTournament)data;
-			fireTournamentRead(tournament);
+	{	if(data instanceof RemotePlayerControlEvent)
+		{	RemotePlayerControlEvent event = (RemotePlayerControlEvent)data;
+			fireEventRead(event);
 		}
 		else if(data instanceof List)
-		{	List<Profile> profiles = (List<Profile>)data;
-			fireProfilesRead(profiles);
-		}
-		else if(data instanceof Boolean)
-		{	Boolean start = (Boolean) data;
-			fireTournamentStarted(start);
+		{	List<ControlSettings> controlSettings = (List<ControlSettings>)data;
+			fireControlSettingsRead(controlSettings);
 		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void fireTournamentRead(AbstractTournament tournament)
-	{	for(ConfigurationServerConnectionListener listener: listeners)
-			listener.tournamentRead(tournament);
+	private void fireEventRead(RemotePlayerControlEvent event)
+	{	for(RoundServerConnectionListenerBis listener: listeners)
+			listener.eventRead(event);
 	}
-
-	private void fireProfilesRead(List<Profile> profiles)
-	{	for(ConfigurationServerConnectionListener listener: listeners)
-			listener.profilesRead(profiles);
+	
+	private void fireControlSettingsRead(List<ControlSettings> controlSettings)
+	{	for(RoundServerConnectionListenerBis listener: listeners)
+			listener.controlSettingsRead(controlSettings);
 	}
-
-	private void fireTournamentStarted(Boolean start)
-	{	for(ConfigurationServerConnectionListener listener: listeners)
-			listener.tournamentStarted(start);
-	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -21,6 +21,17 @@ package org.totalboumboum.game.stream.network.round;
  * 
  */
 
+import java.util.HashMap;
+import java.util.List;
+
+import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.container.level.info.LevelInfo;
+import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
+import org.totalboumboum.game.limit.Limits;
+import org.totalboumboum.game.limit.RoundLimit;
+import org.totalboumboum.game.round.Round;
+import org.totalboumboum.statistics.detailed.StatisticRound;
+
 /**
  * 
  * @author Vincent Labatut
@@ -28,4 +39,13 @@ package org.totalboumboum.game.stream.network.round;
  */
 public interface RoundClientConnectionListener
 {	
+	public void roundUpdated(Round round);
+	public void statsUpdated(StatisticRound stats);
+	public void roundStarted(Boolean next);
+	public void zoomCoeffRead(Double zoomCoeff);
+	public void profilesRead(List<Profile> profiles);
+	public void levelInfoRead(LevelInfo levelInfo);
+	public void limitsRead(Limits<RoundLimit> limits);
+	public void itemCountsRead(HashMap<String,Integer> itemCounts);
+	public void eventRead(ReplayEvent event);
 }
