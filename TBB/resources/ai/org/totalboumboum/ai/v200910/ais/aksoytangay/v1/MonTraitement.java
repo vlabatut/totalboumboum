@@ -3,9 +3,13 @@ package org.totalboumboum.ai.v200910.ais.aksoytangay.v1;
 import org.totalboumboum.ai.v200910.adapter.communication.AiAction;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
-
 /**
- * >> ce texte est à remplacer par votre propre description de votre classe
+ * 
+ * @version 1
+ * 
+ * @author Cihan Aksoy
+ * @author Necmi Murat Tangay
+ *
  */
 public class MonTraitement
 {	/** classe principale de l'IA, permet d'accéder à checkInterruption() */

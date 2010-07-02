@@ -16,7 +16,13 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
 
 /**
- * >> cette class sert a definir ce qui existe dans chaque case.
+ * cette class sert a definir ce qui existe dans chaque case.
+ * 
+ * @version 3
+ * 
+ * @author Cihan Aksoy
+ * @author Necmi Murat Tangay
+ *
  */
 public class Zone {
 	

@@ -19,12 +19,17 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * >> ce texte est à remplacer par votre propre description de votre IA
  * 
  * classe principale de l'IA, qui définit son comportement.
  * n'hésitez pas à décomposer le traitement en plusieurs classes,
  * plus votre programme est modulaire et plus il sera facile à
  * débugger, modifier, relire, comprendre, etc.
+ * 
+ * @version 5.2
+ * 
+ * @author Cihan Aksoy
+ * @author Necmi Murat Tangay
+ *
  */
 public class AksoyTangay extends ArtificialIntelligence
 {	

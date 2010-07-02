@@ -16,11 +16,14 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
 /**
- * >> cette class sert a diriger les chemins.
+ * cette class sert a diriger les chemins.
+ * 
+ * @version 5.1
+ * 
+ * @author Cihan Aksoy
+ * @author Necmi Murat Tangay
+ *
  */
 public class PathManager {
 	
