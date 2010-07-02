@@ -15,6 +15,12 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * on cree la matrice de sécurité et matrice d'attaque dans cette classe. 
+ * 
+ * @version 5
+ * 
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
+ *
  */
 public class SafetyZone {
 

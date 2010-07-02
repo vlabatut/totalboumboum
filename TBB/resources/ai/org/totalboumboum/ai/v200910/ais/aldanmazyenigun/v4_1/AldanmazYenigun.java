@@ -34,7 +34,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @version 4.1
+ * 
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
+ *
+ */
 public class AldanmazYenigun extends ArtificialIntelligence 
 {
 	private AiHero ownHero = null;

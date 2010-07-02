@@ -35,9 +35,14 @@ import org.totalboumboum.ai.v200910.ais.aldanmazyenigun.v3.AvoidController;
 import org.totalboumboum.ai.v200910.ais.aldanmazyenigun.v3.PathController;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
+/**
+ * 
+ * @version 3
+ * 
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
+ *
+ */
 public class AldanmazYenigun extends ArtificialIntelligence 
 {
 	private AiHero ownHero = null;

@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.aldanmazyenigun.v5c;
 
-
 import java.util.Iterator;
 
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
@@ -18,6 +17,12 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * classe chargée d'implémenter un déplacement, 
  * en respectant un chemin donné
+ * 
+ * @version 5.c
+ * 
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
+ *
  */
 public class PathController
 {
