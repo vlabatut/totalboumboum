@@ -2,8 +2,14 @@ package org.totalboumboum.ai.v200910.ais.aksoytangay.v4;
 
 
 /**
- * >> cette class sert a donner un variable different pour chaque situation 
+ * cette class sert a donner un variable different pour chaque situation 
  * des cases.
+ * 
+ * @version 4
+ * 
+ * @author Cihan Aksoy
+ * @author Necmi Murat Tangay
+ *
  */
 public enum State
 {	

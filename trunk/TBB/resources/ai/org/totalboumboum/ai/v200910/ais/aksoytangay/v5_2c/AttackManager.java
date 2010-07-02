@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2c;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -15,7 +14,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @version 5.2.c
+ * 
+ * @author Cihan Aksoy
+ * @author Necmi Murat Tangay
+ *
+ */
 public class AttackManager {
 
 	

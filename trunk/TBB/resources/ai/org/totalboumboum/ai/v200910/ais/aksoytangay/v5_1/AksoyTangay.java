@@ -1,8 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.aksoytangay.v5_1;
 
-
-
-
 import java.util.ArrayList;
 
 import java.util.Collection;
@@ -22,21 +19,18 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
-
-
-
-
-
 /**
- * >> ce texte est à remplacer par votre propre description de votre IA
  * 
  * classe principale de l'IA, qui définit son comportement.
  * n'hésitez pas à décomposer le traitement en plusieurs classes,
  * plus votre programme est modulaire et plus il sera facile à
  * débugger, modifier, relire, comprendre, etc.
+ * 
+ * @version 5.1
+ * 
+ * @author Cihan Aksoy
+ * @author Necmi Murat Tangay
+ *
  */
 public class AksoyTangay extends ArtificialIntelligence
 {	

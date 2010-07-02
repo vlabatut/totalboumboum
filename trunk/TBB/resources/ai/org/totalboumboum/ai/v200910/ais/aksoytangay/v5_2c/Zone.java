@@ -13,10 +13,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiItemType;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
-
-
 /**
- * >> cette class sert a definir ce qui existe dans chaque case.
+ * cette class sert a definir ce qui existe dans chaque case.
+ * 
+ * @version 5.2.c
+ * 
+ * @author Cihan Aksoy
+ * @author Necmi Murat Tangay
+ *
  */
 public class Zone {
 	
