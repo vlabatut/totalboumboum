@@ -14,7 +14,14 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @version 5
+ * 
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
+ *
+ */
 public class WallController {
 
 		/**

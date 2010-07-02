@@ -39,6 +39,12 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * classe chargée d'implémenter un déplacement de fuite,
  * (personnage menacé par une ou plusieurs bombes) 
+ * 
+ * @version 5
+ * 
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
+ *
  */
 public class AvoidController
 {

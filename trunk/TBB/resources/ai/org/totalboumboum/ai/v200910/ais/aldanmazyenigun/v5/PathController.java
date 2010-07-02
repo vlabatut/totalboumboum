@@ -17,6 +17,12 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * classe chargée d'implémenter un déplacement, 
  * en respectant un chemin donné
+ * 
+ * @version 5
+ * 
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
+ *
  */
 public class PathController
 {

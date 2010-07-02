@@ -39,7 +39,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiStateName;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
-
 /**
  * classe chargée d'extraire de la zone les informations
  * permettant de déterminer le niveau de sûreté des cases.
@@ -51,6 +50,12 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * Une valeur négative signifie que la case est menacée par une bombe
  * télécommandée, qui peut exploser n'importe quand (la valeur absolue
  * de la valeur correspond au temps depuis lequel la bombe a été posée)
+ * 
+ * @version 1
+ * 
+ * @author Cansin Aldanmaz
+ * @author Yalcin Yenigun
+ *
  */
 public class SafetyManager
 {	
