@@ -1227,7 +1227,7 @@ public class Launcher
 	 * TODO interface
 	 * remplacer le menu actuel par des icones dont la taille représente l'importance
 	 * à gauche de l'icone, mettre le texte actuellement présent dans les boutons
-	 * il est aligé à droite et sa taille est proportionnelle à celle des boutons
+	 * il est aligné à droite et sa taille est proportionnelle à celle des boutons
 	 * 	- optiosn       : engrenages
 	 * 	- profils       : une des icones de profil/joueur/etc
 	 * 	- stats         : icone stat utilisée en cours de jeu
@@ -1269,46 +1269,6 @@ public class Launcher
 	 * 		x généraliser pour gérer à la fois les fichiers et les réseaux
 	 * x développer une LocalLoop séparée, car certaines fonctionnalités de debug ne doivent pas être accessibles dans le cadre d'un serveur
 	 */
-	
-	/*
-	 * TODO
-	 * x dans le netstream, on passe directement les sockets déjà ouverts.
-	 * - pr ça penser aux différents constructeurs de boucle. même pr le replay, on peut passer le nom du fichier
-	 * x p-e garder le round en permanence, avec un setround
-	 * - le stream ne contient que les flux vers les joueurs concernés par le round
-	 * - p-ê définir une classe différente pour gérer toutes les connexions du tournoi
-	 */
-	
-	// TODO renommer mes "streams" en "writer/reader", c'est plus logique
-	
-	/* NOTE
-	 * algo des flux :
-	 * 	+ créateur : initialise l'objet avec les info nécessaires
-	 *    le traitement associé est effectué (ex: calcul chemin pr fichier)
-	 *  + initialisation du flux (ouverture in/out)
-	 *  + initialisation du round : lecture/écriture des infos nécessaires, , création reader/writer
-	 *  + après la fin du round : finish round pour balancer/lire les dernières données et tuer les threads
-	 */
-	
-	/*
-	 * TODO
-	 * - créer un reader/writer tournoi qui prend tous les flux existants
-	 * - capable de creer les reader/writer matches + convertisseurs d"adresses", avec seulement les flux nécessaires
-	 * + éventuellement virer les classes abstraites des w/r car finalement les différentes classes filles sont bien différentiées
-	 * - créer la classe ServerConnection, symétrique de ClientConnection
-	 * - virer l'aspect générique de RunnableReader
-	 * - au niveau match, y aura un initRound et un initMatch (?)
-	 */
-	
-	/*
-	 * TODO
-	 * ça serait bien d'avoir une factory qui initialise les connexions des clients
-	 * de façon asynchrone, histoire 
-	 * 		1) de pas tout bloquer chez le serveur
-	 * 		2) que les autres clients puissent se connecter en même temps
-	 */
-	
-	//TODO remarque : faire une classe connexion, mutualiser flux/threads pour client et server
 	
 	/*
 	 * TODO scénario de configuration d'un tournoi net
@@ -1410,15 +1370,4 @@ public class Launcher
 	 * 2) le round lui-même, c'est déjà fait
 	 * 3) pour les stats, suffit également de les écrire coté client
   	 */
-	
-	/**
-	 * TODO
-	 * - définir connection pour round
-	 * - définir manageur pour plusieurs connexions (coté serveur)
-	 * - désactivation des threads quand on change de "niveau" (config>tournament>match>round)
-	 *   afin qu'un thread ne lise pas les données destinées à un autre...
-	 *   c'est très possible puisque la seule action effectuée en conséquence du début d'un nouveau match ou autre, coté server, c'est
-	 *   de débloquer un bouton, donc on peut facilement bloquer le thread reader sans qu'il lise avant l'objet suivant... 
-	 *   ou alors on peut faire toutes les mises à jour (t/m/r) en même temps à la fin du round ? à voir comment c'est fait actuellement 
-	 */
 }
