@@ -1,9 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.bektasmazilyah.v5;
 
-
-
-//cest un class Astar que lon a trouve par un site dintenet de forum dadressse http://x86.sun.com/thread.jspa?messageID=10084929 
-
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.Iterator;
@@ -13,6 +9,15 @@ import java.util.Queue;
 
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
+/**
+ * cest un class Astar que lon a trouve par un site dintenet de forum dadressse http://x86.sun.com/thread.jspa?messageID=10084929 
+ * 
+ * @version 5
+ * 
+ * @author Erdem Bektas
+ * @author Nedim Mazilyah
+ *
+ */
 public final class Astar {
 	private static class CostComparator implements Comparator<Node> {
 		//

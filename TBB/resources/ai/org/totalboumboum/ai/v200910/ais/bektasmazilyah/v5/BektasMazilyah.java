@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.bektasmazilyah.v5;
 
-
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
@@ -15,6 +14,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * 
+ * @version 5
+ * 
+ * @author Erdem Bektas
+ * @author Nedim Mazilyah
+ *
+ */
 public class BektasMazilyah extends ArtificialIntelligence
 {	
 	/**Zone du jeu*/
