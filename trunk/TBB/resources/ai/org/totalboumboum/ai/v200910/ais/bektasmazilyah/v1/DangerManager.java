@@ -13,7 +13,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiStateName;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
-
+/**
+ * 
+ * @version 1
+ * 
+ * @author Erdem Bektas
+ * @author Nedim Mazilyah
+ *
+ */
 public class DangerManager {
 	
 	private BektasMazilyah hero;

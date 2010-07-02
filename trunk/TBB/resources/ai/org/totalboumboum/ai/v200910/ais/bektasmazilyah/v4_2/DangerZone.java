@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.bektasmazilyah.v4_2;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -17,7 +16,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @version 4.2
+ * 
+ * @author Erdem Bektas
+ * @author Nedim Mazilyah
+ *
+ */
 public class DangerZone {
 	
 	private BektasMazilyah source;
