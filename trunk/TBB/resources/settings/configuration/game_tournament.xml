@@ -4,9 +4,9 @@
 	<tournament name="Trnmt200809_supercup" />
 	<players>
 		<player file="8" color="WHITE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="63" color="BLACK" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="51" color="GREY" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="61" color="GREEN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="12" color="PURPLE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="6" color="CYAN" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="17" color="YELLOW" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 

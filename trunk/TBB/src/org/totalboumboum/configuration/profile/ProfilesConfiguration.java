@@ -56,6 +56,7 @@ public class ProfilesConfiguration
 {
 	public ProfilesConfiguration copy()
 	{	ProfilesConfiguration result = new ProfilesConfiguration();
+		
 		// loaded profiles
 		Iterator<Entry<Integer,String>> it = profiles.entrySet().iterator();
 		while(it.hasNext())

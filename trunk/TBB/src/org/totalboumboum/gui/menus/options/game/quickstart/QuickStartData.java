@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 import javax.swing.Box;
@@ -152,7 +153,8 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 		try
 		{	ProfilesSelection profilesSelection = quickStartConfiguration.getProfilesSelection();
 			List<Profile> profiles = ProfileLoader.loadProfiles(profilesSelection);
-			playersPanel.setPlayers(profiles);
+			Set<Integer> allowedPlayers = quickStartConfiguration.getAllowedPlayers();
+			playersPanel.setPlayers(profiles,allowedPlayers);
 			refreshRound();
 		}
 		catch (IllegalArgumentException e1)
