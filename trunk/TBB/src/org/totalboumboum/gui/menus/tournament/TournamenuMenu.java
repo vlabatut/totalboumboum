@@ -241,5 +241,5 @@ public class TournamenuMenu extends InnerMenuPanel
 			buttonSettingsNext.setEnabled(false);
 		else
 			buttonSettingsNext.setEnabled(true);
-	}
+	} 
 }
