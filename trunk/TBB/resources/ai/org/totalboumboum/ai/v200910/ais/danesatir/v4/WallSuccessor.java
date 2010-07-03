@@ -12,7 +12,14 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.AstarNode;
 import org.totalboumboum.ai.v200910.adapter.path.astar.successor.BasicSuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @version 4
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class WallSuccessor extends BasicSuccessorCalculator {
 	@SuppressWarnings("unused")
 	private DaneSatir ai;

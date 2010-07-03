@@ -4,7 +4,11 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 /**
  * AiTile implementation for use with BFS
- * @author limon
+ * 
+ * @version 5
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
  *
  */
 public class MonTile {

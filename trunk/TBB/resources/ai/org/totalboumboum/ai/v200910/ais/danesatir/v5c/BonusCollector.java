@@ -15,7 +15,11 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicC
 
 /**
  * Class for Bonus Collect
- * @author limon
+ * 
+ * @version 5.c
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
  *
  */
 public class BonusCollector {

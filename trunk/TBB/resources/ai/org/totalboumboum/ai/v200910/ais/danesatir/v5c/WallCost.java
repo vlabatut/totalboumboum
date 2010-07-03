@@ -8,7 +8,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 
-
+/**
+ * 
+ * @version 5.c
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class WallCost extends CostCalculator {
 
 	ArtificialIntelligence ai;

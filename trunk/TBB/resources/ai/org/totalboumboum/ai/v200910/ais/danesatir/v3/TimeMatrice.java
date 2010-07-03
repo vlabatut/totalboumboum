@@ -10,7 +10,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
-
+/**
+ * 
+ * @version 3
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class TimeMatrice {
 
 	private double[][] matrice;

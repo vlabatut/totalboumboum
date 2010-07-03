@@ -5,7 +5,14 @@ import java.util.List;
 import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
-
+/**
+ * 
+ * @version 3
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class GeneralFuncs {
 	public static boolean tileCompare(AiTile tile1,AiTile tile2){
 		if (tile1.getCol() == tile2.getCol() && tile1.getLine() == tile2.getLine())

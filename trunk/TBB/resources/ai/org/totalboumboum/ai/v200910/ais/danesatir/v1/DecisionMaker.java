@@ -3,6 +3,14 @@ package org.totalboumboum.ai.v200910.ais.danesatir.v1;
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
+/**
+ * 
+ * @version 1
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class DecisionMaker {
 	
 	private TimeMatrice time;

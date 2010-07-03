@@ -4,7 +4,14 @@ import java.util.Comparator;
 
 import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
 
-
+/**
+ * 
+ * @version 4
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class BombComparator implements Comparator<AiBomb> {
 
 	@Override

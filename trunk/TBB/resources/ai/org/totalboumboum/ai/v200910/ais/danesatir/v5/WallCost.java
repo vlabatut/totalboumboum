@@ -6,6 +6,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.path.astar.cost.CostCalculator;
 
+/**
+ * 
+ * @version 5
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class WallCost extends CostCalculator {
 	@Override
 	public double processCost(AiTile start, AiTile end) {

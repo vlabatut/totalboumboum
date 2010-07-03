@@ -6,7 +6,14 @@ import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
 
-
+/**
+ * 
+ * @version 5.c
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class BombComparator implements Comparator<AiBomb> {
 
 	ArtificialIntelligence ai;

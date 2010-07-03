@@ -10,7 +10,14 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.AstarNode;
 import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @version 3
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class MySuccessor extends SuccessorCalculator{
 	@SuppressWarnings("unused")
 	private DaneSatir ai;

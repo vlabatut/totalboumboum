@@ -10,7 +10,14 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.AstarNode;
 import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
+/**
+ * 
+ * @version 5.c
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class MySuccessor extends SuccessorCalculator{
 	private DaneSatir ai;
 	private TimeMatrice time;
