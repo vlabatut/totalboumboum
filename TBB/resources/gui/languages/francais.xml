@@ -561,8 +561,8 @@
 				<group name="Button">
 					<text name="Cancel" value="Annuler" tooltip="Annuler la sélection et revenir à l'écran des joueurs" />
 					<text name="Confirm" value="Confirmer" tooltip="Confirmer la sélection" />
-					<text name="Next" value="Suivant" tooltip="Aller à la sélection du tournoi" />
-					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal sans quitter le tournoi" />
+					<text name="Next" value="Suivant" tooltip="Commencer le tournoi" />
+					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection du tournoi" />
 				</group>
 			</group>
 			<group name="Settings">
@@ -570,8 +570,8 @@
 				<group name="Button">
 					<text name="Cancel" value="Annuler" tooltip="Annuler la sélection et revenir à l'écran du tournoi" />
 					<text name="Confirm" value="Confirmer" tooltip="Confirmer la sélection" />
-					<text name="Next" value="Suivant" tooltip="Commencer le tournoi" />
-					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection des joueurs" />
+					<text name="Next" value="Suivant" tooltip="Sélectionner les joueurs" />
+					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />
 					<text name="Select" value="Sélectionner" tooltip="Sélectionner un autre tournoi prédéfini" />
 				</group>
 			</group>

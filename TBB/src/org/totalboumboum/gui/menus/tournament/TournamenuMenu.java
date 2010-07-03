@@ -35,8 +35,6 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSaver;
 import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfilesConfiguration;
-import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -152,10 +150,11 @@ public class TournamenuMenu extends InnerMenuPanel
 		catch (ClassNotFoundException e)
 		{	e.printStackTrace();
 		}
+		
 		// set panel
-		playersData.setTournamentConfiguration(tournamentConfiguration);
-		container.setDataPart(playersData);
-		setButtonsPlayers();
+		settingsData.setTournamentConfiguration(tournamentConfiguration);
+		container.setDataPart(settingsData);
+		setButtonsSettings();
 	}
 
 	private void setTournamentPlayers()
@@ -188,27 +187,18 @@ public class TournamenuMenu extends InnerMenuPanel
 			tournamentConfiguration.setTournament(tournament);
 			getFrame().setMainMenuPanel();
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS))				
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS))				
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS))				
-		{	setButtonsPlayers();
-			container.setDataPart(playersData);
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_NEXT))
-		{	// synch game options
-			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(playersData.getSelectedProfiles());
-			tournamentConfiguration.setProfilesSelection(profilesSelection);
-			// set settings panel
-			settingsData.setTournamentConfiguration(tournamentConfiguration);
-			setButtonsSettings();
-			refresh();
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS))				
+		{	setButtonsSettings();
 			container.setDataPart(settingsData);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT))
-		{	// implements settings in tournament
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_NEXT))
+		{	// set the tournament
 			setTournamentPlayers();
 			setTournamentSettings();
+			
 			// save tournament options
 			try
 			{	TournamentConfigurationSaver.saveTournamentConfiguration(tournamentConfiguration);
@@ -222,12 +212,25 @@ public class TournamenuMenu extends InnerMenuPanel
 			catch (IOException e1)
 			{	e1.printStackTrace();
 			}
+			
 			// synch game options
 			Configuration.getGameConfiguration().setTournamentConfiguration(tournamentConfiguration);
+			
 			// match panel
 			AbstractTournament tournament = tournamentConfiguration.getTournament();
 			tournamentPanel.setTournament(tournament);
 			replaceWith(tournamentPanel);
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT))
+		{	// synch game options
+//NOTE			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(playersData.getSelectedProfiles());
+//			tournamentConfiguration.setProfilesSelection(profilesSelection);
+			
+			// set payers panel
+			playersData.setTournamentConfiguration(tournamentConfiguration);
+			setButtonsPlayers();
+			refresh();
+			container.setDataPart(playersData);
 	    }
 	} 
 	
@@ -238,8 +241,8 @@ public class TournamenuMenu extends InnerMenuPanel
 	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
 		if(tournament==null || 
 			!tournament.getAllowedPlayerNumbers().contains(tournamentConfiguration.getProfilesSelection().getProfileCount()))
-			buttonSettingsNext.setEnabled(false);
+			buttonPlayersNext.setEnabled(false);
 		else
-			buttonSettingsNext.setEnabled(true);
+			buttonPlayersNext.setEnabled(true);
 	} 
 }
