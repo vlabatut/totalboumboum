@@ -1,10 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.calisirguner.v4;
 
-////on na pas pu atteindre nos objectifs po
-//les temps des bombes mais au moins on essaie de s'enfuir des bombes 
-//et tout va bien pour nos objectifs pour les bonus
-//et on sest profité des classes de groupe bleu de l'annee precedente
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Deque;
@@ -24,12 +19,16 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 /**
- * >> ce texte est à remplacer par votre propre description de votre IA
+ * on na pas pu atteindre nos objectifs po
+ * les temps des bombes mais au moins on essaie de s'enfuir des bombes 
+ * et tout va bien pour nos objectifs pour les bonus
+ * et on sest profité des classes de groupe bleu de l'annee precedente
  * 
- * classe principale de l'IA, qui définit son comportement. n'hésitez pas à
- * décomposer le traitement en plusieurs classes, plus votre programme est
- * modulaire et plus il sera facile à débugger, modifier, relire, comprendre,
- * etc.
+ * @version 4
+ * 
+ * @author Emre Calisir
+ * @author Burak Ozgen Guner
+ *
  */
 public class CalisirGuner extends ArtificialIntelligence {
 	private AiZone zone;

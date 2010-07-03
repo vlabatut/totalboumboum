@@ -1,5 +1,4 @@
 package org.totalboumboum.ai.v200910.ais.calisirguner.v3;
-//on la pris des bleus de l'annee precedente et on la change un peu cf les flammes et es matrices de risque et accesibilite
 
 import java.util.Collection;
 import java.util.List;
@@ -15,16 +14,15 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
-
-
-
-
-
-
-
-
-
+/**
+ * on la pris des bleus de l'annee precedente et on la change un peu cf les flammes et es matrices de risque et accesibilite
+ * 
+ * @version 3
+ * 
+ * @author Emre Calisir
+ * @author Burak Ozgen Guner
+ *
+ */
 public class Map {
 
 	
