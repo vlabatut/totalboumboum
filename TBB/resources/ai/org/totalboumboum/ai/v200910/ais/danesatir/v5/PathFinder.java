@@ -10,6 +10,14 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 
+/**
+ * 
+ * @version 5
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class PathFinder {
 	
 	private DaneSatir ai;

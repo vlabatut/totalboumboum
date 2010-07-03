@@ -2,6 +2,14 @@ package org.totalboumboum.ai.v200910.ais.danesatir.v4;
 
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
+/**
+ * 
+ * @version 4
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class MonTile {
 	private AiTile tile;
 	private int iter;

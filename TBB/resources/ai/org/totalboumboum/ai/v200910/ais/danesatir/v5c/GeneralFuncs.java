@@ -7,7 +7,14 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiBomb;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
-
+/**
+ * 
+ * @version 5.c
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class GeneralFuncs {
 	public static boolean tileCompare(AiTile tile1,AiTile tile2,ArtificialIntelligence ai) throws StopRequestException{
 		ai.checkInterruption();

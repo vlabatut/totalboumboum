@@ -9,12 +9,12 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
 /**
- * >> ce texte est à remplacer par votre propre description de votre IA
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * @version 2
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
  */
 public class DaneSatir extends ArtificialIntelligence
 {

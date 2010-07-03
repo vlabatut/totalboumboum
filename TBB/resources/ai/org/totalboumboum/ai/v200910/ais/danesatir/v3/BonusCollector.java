@@ -12,7 +12,14 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 
-
+/**
+ * 
+ * @version 3
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class BonusCollector {
 	
 	private DaneSatir ai;

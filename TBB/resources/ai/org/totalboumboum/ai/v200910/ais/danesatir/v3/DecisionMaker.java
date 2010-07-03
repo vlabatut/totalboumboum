@@ -3,6 +3,14 @@ package org.totalboumboum.ai.v200910.ais.danesatir.v3;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 
+/**
+ * 
+ * @version 3
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class DecisionMaker {
 
 	private DaneSatir ai;

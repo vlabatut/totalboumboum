@@ -2,7 +2,11 @@ package org.totalboumboum.ai.v200910.ais.danesatir.v5;
 
 /**
  * Default variables list.
- * @author limon
+ * 
+ * @version 5
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
  *
  */
 public class Limits {

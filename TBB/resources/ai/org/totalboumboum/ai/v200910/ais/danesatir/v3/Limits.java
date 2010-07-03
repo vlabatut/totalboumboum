@@ -1,5 +1,13 @@
 package org.totalboumboum.ai.v200910.ais.danesatir.v3;
 
+/**
+ * 
+ * @version 3
+ * 
+ * @author Levent Dane
+ * @author Tolga Can Satir
+ *
+ */
 public class Limits {
 	public static double dangerLimit=200;
 	public static double expandBombTime=190;
