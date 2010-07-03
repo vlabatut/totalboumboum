@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v200910.ais.calisirguner.v5;
 
-//cest un class Astar que lon a trouve par un site dintenet de forum dadressse http://x86.sun.com/thread.jspa?messageID=10084929 
-
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.Iterator;
@@ -9,6 +7,15 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/**
+ * cest un class Astar que lon a trouve par un site dintenet de forum dadressse http://x86.sun.com/thread.jspa?messageID=10084929
+ * 
+ * @version 5
+ * 
+ * @author Emre Calisir
+ * @author Burak Ozgen Guner
+ *
+ */
 public final class Astar {
 	private static class CostComparator implements Comparator<Node> {
 		//

@@ -1,5 +1,4 @@
 package org.totalboumboum.ai.v200910.ais.calisirguner.v2;
-//on la pris des bleus de l'annee precedente et on la change un peu cf les flammes
 
 import java.util.Collection;
 import java.util.List;
@@ -14,12 +13,15 @@ import org.totalboumboum.ai.v200910.adapter.data.AiItem;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
-
-
-
-
-
-
+/**
+ * on la pris des bleus de l'annee precedente et on la change un peu cf les flammes
+ * 
+ * @version 2
+ * 
+ * @author Emre Calisir
+ * @author Burak Ozgen Guner
+ *
+ */
 public class Map {
 
 	@SuppressWarnings("unused")

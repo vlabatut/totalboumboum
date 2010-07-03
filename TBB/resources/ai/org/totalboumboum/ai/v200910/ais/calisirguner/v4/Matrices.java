@@ -2,8 +2,14 @@ package org.totalboumboum.ai.v200910.ais.calisirguner.v4;
 
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
-
-
+/**
+ * 
+ * @version 4
+ * 
+ * @author Emre Calisir
+ * @author Burak Ozgen Guner
+ *
+ */
 public class Matrices {
 	
 	private Etat accessibilite[][];
