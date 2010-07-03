@@ -73,10 +73,13 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	}
 		
 	/////////////////////////////////////////////////////////////////
-	// PLAYERS						/////////////////////////////////
+	// CONFIGURATION				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private QuickMatchConfiguration quickMatchConfiguration;
+	
 	public void setQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration)
-	{	ProfilesSelection profilesSelection = quickMatchConfiguration.getProfilesSelection();
+	{	this.quickMatchConfiguration = quickMatchConfiguration;
+		ProfilesSelection profilesSelection = quickMatchConfiguration.getProfilesSelection();
 		List<Profile> selectedProfiles = new ArrayList<Profile>();
 		try
 		{	selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
@@ -105,7 +108,8 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		catch (ClassNotFoundException e1)
 		{	e1.printStackTrace();
 		}
-		playersPanel.setPlayers(selectedProfiles);
+//TODO		quickMatchConfiguration.getLevelsSelection().
+		playersPanel.setPlayers(selectedProfiles,null);
 	}
 	
 	public List<Profile> getSelectedProfiles()

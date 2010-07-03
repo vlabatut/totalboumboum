@@ -99,10 +99,10 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
 		miscPanel.setTournament(tournament);
 		refreshTournament();
-		if(tournament.getAllowedPlayerNumbers().contains(tournamentConfiguration.getProfilesSelection().getProfileCount()))
-			miscPanel.selectAllowedPlayers(false);
-		else
-			miscPanel.selectAllowedPlayers(true);
+//		if(tournament.getAllowedPlayerNumbers().contains(tournamentConfiguration.getProfilesSelection().getProfileCount()))
+//			miscPanel.selectAllowedPlayers(false);
+//		else
+//			miscPanel.selectAllowedPlayers(true);
 	}
 	
 	/////////////////////////////////////////////////////////////////

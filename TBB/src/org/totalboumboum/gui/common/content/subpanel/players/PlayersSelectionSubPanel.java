@@ -27,8 +27,11 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -64,7 +67,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,COLS,true);
 		
 		// limits
-		setPlayers(null);
+		setPlayers(null,null);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -72,7 +75,8 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	private List<Profile> players;
 	private int rankWidth;
-
+	private Set<Integer> allowedPlayers;
+	
 	public List<Profile> getPlayers()
 	{	return players;	
 	}
@@ -81,11 +85,14 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	{	return players.get(index);	
 	}
 	
-	public void setPlayers(List<Profile> players)
+	public void setPlayers(List<Profile> players, Set<Integer> allowedPlayers)
 	{	// init
 		if(players==null)
 			players = new ArrayList<Profile>();
 		this.players = players;
+		if(allowedPlayers==null)
+			allowedPlayers = new TreeSet<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16));
+		this.allowedPlayers = allowedPlayers;
 		controlTexts = new ArrayList<String>();
 		controlTooltips = new ArrayList<String>();
 		colorTexts = new ArrayList<String>();
@@ -147,7 +154,11 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		// data
 		for(int line=1;line<LINES;line++)
 		{	for(int col=0;col<COLS;col++)
-			{	Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			{	Color bg;
+				if(!allowedPlayers.contains(line) && col==COL_PROFILE)
+					bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+				else
+					bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				setLabelBackground(line,col,bg);
 			}
 		}
@@ -156,6 +167,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 
 	public void refreshPlayer(int line)
 	{	int index = line-1;
+		
 		// if there's a player on this line 
 		if(players.size()>index)
 		{	// init
@@ -180,7 +192,12 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				String tooltip = profile.getName();
 				setLabelText(line,COL_PROFILE,text,tooltip);
 				// color
-				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+				//Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+				Color bg;
+				if(allowedPlayers.contains(line))
+					bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+				else
+					bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
 				setLabelBackground(line,COL_PROFILE,bg);
 				// mouse listener
 				MyLabel lbl = getLabel(line,COL_PROFILE);
@@ -278,6 +295,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				lbl.setMouseSensitive(true);
 			}
 		}
+		
 		// if there's no player on this line
 		else if(line<LINES)
 		{	for(int col=0;col<COLS;col++)
@@ -286,14 +304,22 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				lbl.setToolTipText(null);
 				lbl.setIcon(null);
 				lbl.removeMouseListener(this);
-				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+				Color bg;
+				if(!allowedPlayers.contains(line) && col==COL_PROFILE)
+					bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+				else
+					bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				setLabelBackground(line,col,bg);
 			}
 			if(index==players.size())
 			{	int col = COL_DELETE;
 				String key = GuiKeys.COMMON_PLAYERS_SELECTION_DATA_ADD;
 				setLabelKey(line,col,key,true);
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg;
+				if(!allowedPlayers.contains(line) && col==COL_PROFILE)
+					bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+				else
+					bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				setLabelBackground(line,col,bg);
 				MyLabel lbl = getLabel(line,col);
 				lbl.removeMouseListener(this); //just in case
@@ -328,6 +354,11 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		}
 	}
 
+	public void setAllowedPlayers(Set<Integer> allowedPlayers)
+	{	this.allowedPlayers = allowedPlayers;
+		refresh();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

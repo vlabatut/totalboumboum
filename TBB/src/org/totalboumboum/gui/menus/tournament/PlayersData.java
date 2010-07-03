@@ -24,6 +24,7 @@ package org.totalboumboum.gui.menus.tournament;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -31,6 +32,7 @@ import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.configuration.profile.ProfileLoader;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -69,16 +71,23 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
-	{	playersPanel.refresh();
+	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
+		Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
+		playersPanel.setAllowedPlayers(allowedPlayers);
+		//playersPanel.refresh();
 	}
 		
 	/////////////////////////////////////////////////////////////////
-	// PLAYERS						/////////////////////////////////
+	// TOURNAMENT CONFIGURATION		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private TournamentConfiguration tournamentConfiguration;
 //	private ArrayList<Profile> players;
-
+	
 	public void setTournamentConfiguration(TournamentConfiguration tournamentConfiguration)
-	{	ProfilesSelection profilesSelection = tournamentConfiguration.getProfilesSelection();
+	{	this.tournamentConfiguration = tournamentConfiguration;
+		AbstractTournament tournament = tournamentConfiguration.getTournament();
+		Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
+		ProfilesSelection profilesSelection = tournamentConfiguration.getProfilesSelection();
 		List<Profile> selectedProfiles = new ArrayList<Profile>();
 		try
 		{	selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
@@ -107,7 +116,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		catch (ClassNotFoundException e1)
 		{	e1.printStackTrace();
 		}
-		playersPanel.setPlayers(selectedProfiles);
+		playersPanel.setPlayers(selectedProfiles,allowedPlayers);
 	}
 	
 	public List<Profile> getSelectedProfiles()
@@ -132,7 +141,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void playerSelectionPlayerRemoved(int index)
-	{	
+	{	getMenuContainer().getMenuPart().refresh();
 	}
 
 	@Override

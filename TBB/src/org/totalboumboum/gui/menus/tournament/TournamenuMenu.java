@@ -35,6 +35,8 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSaver;
 import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.configuration.profile.ProfilesConfiguration;
+import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -195,7 +197,11 @@ public class TournamenuMenu extends InnerMenuPanel
 			container.setDataPart(settingsData);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_NEXT))
-		{	// set the tournament
+		{	// synch game options
+			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(playersData.getSelectedProfiles());
+			tournamentConfiguration.setProfilesSelection(profilesSelection);
+			
+			// set the tournament
 			setTournamentPlayers();
 			setTournamentSettings();
 			
@@ -222,11 +228,7 @@ public class TournamenuMenu extends InnerMenuPanel
 			replaceWith(tournamentPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT))
-		{	// synch game options
-//NOTE			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(playersData.getSelectedProfiles());
-//			tournamentConfiguration.setProfilesSelection(profilesSelection);
-			
-			// set payers panel
+		{	// set payers panel
 			playersData.setTournamentConfiguration(tournamentConfiguration);
 			setButtonsPlayers();
 			refresh();
@@ -240,7 +242,7 @@ public class TournamenuMenu extends InnerMenuPanel
 	public void refresh()
 	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
 		if(tournament==null || 
-			!tournament.getAllowedPlayerNumbers().contains(tournamentConfiguration.getProfilesSelection().getProfileCount()))
+			!tournament.getAllowedPlayerNumbers().contains(playersData.getSelectedProfiles().size()))
 			buttonPlayersNext.setEnabled(false);
 		else
 			buttonPlayersNext.setEnabled(true);
