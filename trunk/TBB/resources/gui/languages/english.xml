@@ -561,8 +561,8 @@
 				<group name="Button">
 					<text name="Cancel" value="Cancel" tooltip="Cancel your sélection and come back to players selection" />
 					<text name="Confirm" value="Confirm" tooltip="Confirm your selection" />
-					<text name="Next" value="Next" tooltip="Go to tournament selection" />
-					<text name="Previous" value="Previous" tooltip="Come back to the main menu without quitting this tournament" />
+					<text name="Next" value="Next" tooltip="Start the tournament" />
+					<text name="Previous" value="Previous" tooltip="Go back to tournament selection" />
 				</group>
 			</group>
 			<group name="Settings">
@@ -570,8 +570,8 @@
 				<group name="Button">
 					<text name="Cancel" value="Cancel" tooltip="Cancel your selection and come back to tournament selection" />
 					<text name="Confirm" value="Confirm" tooltip="Confirm your selection" />
-					<text name="Next" value="Next" tooltip="Start the tournament" />
-					<text name="Previous" value="Previous" tooltip="Go back to players selection" />
+					<text name="Next" value="Next" tooltip="Go to players selection" />
+					<text name="Previous" value="Previous" tooltip="Come back to the main menu" />
 					<text name="Select" value="Select" tooltip="Select another tournament" />
 				</group>
 			</group>
