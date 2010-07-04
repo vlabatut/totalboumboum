@@ -568,10 +568,12 @@
 			<group name="Settings">
 				<text name="Title" value="Sélection du tournoi" tooltip="Écran de sélection du tournoi" />
 				<group name="Button">
+					<text name="BlockPlayers" value="Bloquer" tooltip="Bloquer l'inscription des joueurs distants" />
 					<text name="Cancel" value="Annuler" tooltip="Annuler la sélection et revenir à l'écran du tournoi" />
 					<text name="Confirm" value="Confirmer" tooltip="Confirmer la sélection" />
 					<text name="Next" value="Suivant" tooltip="Sélectionner les joueurs" />
 					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />
+					<text name="Publish" value="Publier" tooltip="Ouvrir votre tournoi au jeu en réseau" />
 					<text name="Select" value="Sélectionner" tooltip="Sélectionner un autre tournoi prédéfini" />
 				</group>
 			</group>
