@@ -54,7 +54,7 @@ public class ConfigurationServerConnectionManager extends AbstractConnectionMana
 	}
 	
 	@Override
-	protected void addConnection(ConfigurationServerConnection connection)
+	protected synchronized void addConnection(ConfigurationServerConnection connection)
 	{	connections.add(connection);
 		connection.addListener(this);
 	}

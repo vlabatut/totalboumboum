@@ -126,6 +126,25 @@ public class ProfilesConfiguration
 		return id;
 	}
 	
+	/**
+	 * used during network game, to synch
+	 * profiles across platforms
+	 */
+	public void insertProfile(Profile profile) throws IOException, ParserConfigurationException, SAXException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	// create file
+		Integer id = profile.getId();
+		if(!profiles.containsKey(id))
+		{	ProfileSaver.saveProfile(profile,id);
+			
+			// add/save in config
+			addProfile(id,profile.getName());
+			ProfilesConfigurationSaver.saveProfilesConfiguration(this);
+			
+			// register in stats
+			GameStatistics.addPlayer(id);
+		}
+	}
+	
 	public void deleteProfile(Profile profile) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// delete file
 		int id = profile.getId();

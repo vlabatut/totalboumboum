@@ -38,6 +38,10 @@ import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSa
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.configuration.profile.ProfilesConfiguration;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.configuration.profile.SpriteInfo;
+import org.totalboumboum.game.stream.network.configuration.ConfigurationServerConnectionListener;
+import org.totalboumboum.game.stream.network.configuration.ConfigurationServerConnectionManager;
+import org.totalboumboum.game.stream.network.configuration.ConfigurationServerConnectionThread;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -53,7 +57,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
+public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener, ConfigurationServerConnectionListener
 {	private static final long serialVersionUID = 1L;
 	
 	public TournamenuMenu(SplitMenuPanel container, MenuPanel parent)
@@ -238,7 +242,7 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 			// synch game options
 			Configuration.getGameConfiguration().setTournamentConfiguration(tournamentConfiguration);
 			
-			// match panel
+			// tournament panel
 			AbstractTournament tournament = tournamentConfiguration.getTournament();
 			tournamentPanel.setTournament(tournament);
 			replaceWith(tournamentPanel);
@@ -259,7 +263,16 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 			revalidate();
 			
 			// set up the connection
-			
+			try
+			{	AbstractTournament tournament = tournamentConfiguration.getTournament();
+				connectionManager = new ConfigurationServerConnectionManager(tournament);
+				connectionManager.addListener(this);
+				ConfigurationServerConnectionThread thread = new ConfigurationServerConnectionThread(connectionManager);
+				thread.start();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
 	    }
 	} 
 	
@@ -276,5 +289,62 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 	@Override
 	public void dataPanelSelectionChanged()
 	{	refreshButtons();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CONNECTION MANAGER	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ConfigurationServerConnectionManager connectionManager = null;
+
+	@Override
+	public synchronized void profileAdded(Profile profile)
+	{	// possibly add the profile to the local ones
+		try
+		{	Configuration.getProfilesConfiguration().insertProfile(profile);
+		}
+		catch (IllegalArgumentException e)
+		{	e.printStackTrace();
+		}
+		catch (SecurityException e)
+		{	e.printStackTrace();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		catch (ParserConfigurationException e)
+		{	e.printStackTrace();
+		}
+		catch (SAXException e)
+		{	e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{	e.printStackTrace();
+		}
+		catch (NoSuchFieldException e)
+		{	e.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
+		{	e.printStackTrace();
+		}
+//TODO set up the client side now, starting with the connection interface (a modal menu ?)		
+		// add the profile to the selection
+		ProfilesSelection profilesSelection = tournamentConfiguration.getProfilesSelection();
+		if(!profilesSelection.containsProfile(profile))
+			profilesSelection.addProfile(profile);
+		
+		// update the GUI
+		playersData.refresh();
+	}
+
+	@Override
+	public synchronized void profileRemoved(Integer id)
+	{	
+		playersData.refresh();
+	}
+
+	@Override
+	public synchronized void spriteChanged(Integer id, SpriteInfo sprite)
+	{	
+		playersData.refresh();
 	}
 }

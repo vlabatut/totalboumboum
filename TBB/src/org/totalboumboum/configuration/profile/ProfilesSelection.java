@@ -67,6 +67,21 @@ public class ProfilesSelection
 	{	return ids.size();
 	}
 
+	/**
+	 * for the network mode
+	 * @param profile	the profile to be added
+	 */
+	public void addProfile(Profile profile)
+	{	int id = profile.getId();
+		ids.add(id);
+		PredefinedColor color = profile.getSpriteColor();
+		colors.add(color);
+		int controlsIndex = 0;
+		controls.add(controlsIndex);
+		String hero[] = {profile.getSpritePack(),profile.getSpriteFolder()};
+		heroes.add(hero);
+	}
+
 	public void addProfile(Integer id, PredefinedColor color, int controlsIndex, String hero[])
 	{	ids.add(id);
 		colors.add(color);
@@ -84,6 +99,11 @@ public class ProfilesSelection
 	
 	public boolean containsProfile(Integer id)
 	{	boolean result = ids.contains(id);
+		return result;
+	}
+
+	public boolean containsProfile(Profile profile)
+	{	boolean result = ids.contains(profile.getId());
 		return result;
 	}
 

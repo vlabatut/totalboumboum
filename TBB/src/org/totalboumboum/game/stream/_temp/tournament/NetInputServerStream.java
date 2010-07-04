@@ -83,9 +83,9 @@ public class NetInputServerStream
 		}
 	
 		// start threads
-		readers = new RunnableReader[ins.length];
+		readers = new ConfigurationServerConnectionThread[ins.length];
 		for(int i=0;i<ins.length;i++)
-		{	readers[i] = new RunnableReader<RemotePlayerControlEvent>(ins[i]);
+		{	readers[i] = new ConfigurationServerConnectionThread<RemotePlayerControlEvent>(ins[i]);
 			readers[i].start();
 		}
 	}
