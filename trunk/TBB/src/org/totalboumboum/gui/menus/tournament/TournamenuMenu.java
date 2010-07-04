@@ -39,6 +39,7 @@ import org.totalboumboum.configuration.profile.ProfilesConfiguration;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
@@ -51,7 +52,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class TournamenuMenu extends InnerMenuPanel
+public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	
 	public TournamenuMenu(SplitMenuPanel container, MenuPanel parent)
@@ -71,7 +72,9 @@ public class TournamenuMenu extends InnerMenuPanel
 		
 		// panels
 		playersData = new PlayersData(container);
+		playersData.addListener(this);
 		settingsData = new SettingsData(container);
+		settingsData.addListener(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -121,6 +124,14 @@ public class TournamenuMenu extends InnerMenuPanel
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(buttonSettingsNext);
+	}
+	
+	private void refreshButtons()
+	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
+		if(tournament==null || !tournament.getAllowedPlayerNumbers().contains(playersData.getSelectedProfiles().size()))
+			buttonPlayersNext.setEnabled(false);
+		else
+			buttonPlayersNext.setEnabled(true);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -240,11 +251,14 @@ public class TournamenuMenu extends InnerMenuPanel
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void refresh()
-	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
-		if(tournament==null || 
-			!tournament.getAllowedPlayerNumbers().contains(playersData.getSelectedProfiles().size()))
-			buttonPlayersNext.setEnabled(false);
-		else
-			buttonPlayersNext.setEnabled(true);
+	{	refreshButtons();
 	} 
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void dataPanelSelectionChanged()
+	{	refreshButtons();
+	}
 }

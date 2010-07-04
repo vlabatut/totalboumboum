@@ -23,7 +23,7 @@ package org.totalboumboum.configuration.game.quickstart;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.TreeSet;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -78,7 +78,7 @@ public class QuickStartConfigurationSaver
 		result.setAttribute(XmlNames.NAME,roundName);
 
 		// allowed players
-		TreeSet<Integer> allowedPlayers = quickStartConfiguration.getAllowedPlayers();
+		Set<Integer> allowedPlayers = quickStartConfiguration.getAllowedPlayers();
 		String allowedPlayersStr = "";
 		for(Integer i: allowedPlayers)
 		{	String str = i.toString();

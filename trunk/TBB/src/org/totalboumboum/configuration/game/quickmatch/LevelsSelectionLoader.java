@@ -22,6 +22,7 @@ package org.totalboumboum.configuration.game.quickmatch;
  */
 
 import java.util.List;
+import java.util.TreeSet;
 
 import org.jdom.Element;
 import org.totalboumboum.tools.xml.XmlNames;
@@ -45,9 +46,20 @@ public class LevelsSelectionLoader
 	private static void loadLevelElement(Element root, LevelsSelection result)
 	{	// pack
 		String packName = root.getAttributeValue(XmlNames.PACK);
+		
 		// folder
 		String folderName = root.getAttributeValue(XmlNames.FOLDER);
+		
+		// allowed players
+		TreeSet<Integer> allowedPlayers = new TreeSet<Integer>();
+		String apStr = root.getAttributeValue(XmlNames.ALLOWED_PLAYERS);
+		String[] split = apStr.split(" ");
+		for(String s: split)
+		{	int value = Integer.parseInt(s);
+			allowedPlayers.add(value);
+		}
+		
 		// result
-		result.addLevel(packName,folderName);
+		result.addLevel(packName,folderName,allowedPlayers);
 	}
 }

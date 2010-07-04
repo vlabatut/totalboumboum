@@ -23,6 +23,8 @@ package org.totalboumboum.configuration.game.quickmatch;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * 
@@ -33,8 +35,11 @@ public class LevelsSelection
 {
 	public LevelsSelection copy()
 	{	LevelsSelection result = new LevelsSelection();
-		for(int i=0;i<packNames.size();i++)
-			result.addLevel(packNames.get(i),folderNames.get(i));
+	
+		result.packNames.addAll(packNames);
+		result.folderNames.addAll(folderNames);
+		result.allowedPlayers.addAll(allowedPlayers);
+		
 		return result;
 	}
 	
@@ -45,13 +50,14 @@ public class LevelsSelection
 	{	return packNames.size();
 	}
 
-	public void addLevel(String packName, String folderName)
-	{	addLevel(getLevelCount(),packName,folderName);
+	public void addLevel(String packName, String folderName, Set<Integer> allowedPlayers)
+	{	addLevel(getLevelCount(),packName,folderName,allowedPlayers);
 	}
 	
-	public void addLevel(int index, String packName, String folderName)
+	public void addLevel(int index, String packName, String folderName, Set<Integer> allowedPlayers)
 	{	folderNames.add(index,folderName);
 		packNames.add(index,packName);
+		updateAllowedPlayers(allowedPlayers);
 	}
 	
 	public void removeLevel(int index)
@@ -59,6 +65,22 @@ public class LevelsSelection
 		packNames.remove(index);		
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// ALLOWED PLAYERS		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Set<Integer> allowedPlayers = new TreeSet<Integer>();
+	
+	public Set<Integer> getAllowedPlayerNumbers()
+	{	return allowedPlayers;	
+	}
+	
+	private void updateAllowedPlayers(Set<Integer> allowedPlayers)
+	{	if(this.allowedPlayers.isEmpty())
+			this.allowedPlayers.addAll(allowedPlayers);
+		else
+			this.allowedPlayers.retainAll(allowedPlayers);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FOLDER NAMES			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

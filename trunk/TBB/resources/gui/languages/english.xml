@@ -435,7 +435,7 @@
 				<text name="Title" value="Levels selection" tooltip="Select the levels for this quick match" />
 				<group name="Button">
 					<text name="Next" value="Next" tooltip="Go to match parameters" />
-					<text name="Previous" value="Previous" tooltip="Back to players selection" />
+					<text name="Previous" value="Previous" tooltip="Back to main menu" />
 					<text name="Quit" value="Quit" tooltip="Quit the match and go to main menu" />
 				</group>
 			</group>
@@ -444,15 +444,15 @@
 				<group name="Button">
 					<text name="Cancel" value="Cancel" tooltip="Cancel and come back to the players selection screen" />
 					<text name="Confirm" value="Confirm" tooltip="Confirm the selection" />
-					<text name="Next" value="Next" tooltip="Go to levels selection" />
-					<text name="Previous" value="Previous" tooltip="Back to main menu without quitting the match" />
+					<text name="Next" value="Next" tooltip="Start the match" />
+					<text name="Previous" value="Previous" tooltip="Back to match parameters" />
 					<text name="Quit" value="Quit" tooltip="Quit the match and go to main menu" />
 				</group>
 			</group>
 			<group name="Settings" >
 				<text name="Title" value="Quick match settings" tooltip="General settings of the quick match" />
 				<group name="Button">
-					<text name="Next" value="Next" tooltip="Start the match" />
+					<text name="Next" value="Next" tooltip="Go to players selection" />
 					<text name="Previous" value="Previous" tooltip="Back to levels selection" />
 					<text name="Quit" value="Quit" tooltip="Quit the match and go to main menu" />
 				</group>
