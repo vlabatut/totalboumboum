@@ -129,7 +129,7 @@ public class ServerConnection
 	private RunnableWriter writer = null;
 	
 	public void initThreads()
-	{	reader = new RunnableReader<Object>(in);
+	{	reader = new ConfigurationServerConnectionThread<Object>(in);
 		reader.start();
 		writer = new RunnableWriter(out);
 		writer.start();

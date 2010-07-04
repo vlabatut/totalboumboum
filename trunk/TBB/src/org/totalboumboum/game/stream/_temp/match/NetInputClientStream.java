@@ -121,7 +121,7 @@ public class NetInputClientStream
 		itemCounts = (HashMap<String,Integer>) in.readObject();		
 		zoomCoef = (Double) in.readObject();
 	
-		reader = new RunnableReader<ReplayEvent>(in);
+		reader = new ConfigurationServerConnectionThread<ReplayEvent>(in);
 		reader.start();
 	}
 
