@@ -94,6 +94,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 
 		// panels
 		playersData = new PlayersData(container);
+		playersData.addListener(this);
 		levelsData = new LevelsData(container);
 		levelsData.addListener(this);
 		settingsData = new SettingsData(container);
@@ -106,10 +107,10 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 	/////////////////////////////////////////////////////////////////
 	private JButton buttonQuit;
 	private JButton buttonPlayersPrevious;
-	private JButton buttonLevelsPrevious;
-	private JButton buttonSettingsPrevious;
 	private JButton buttonPlayersNext;
+	private JButton buttonLevelsPrevious;
 	private JButton buttonLevelsNext;
+	private JButton buttonSettingsPrevious;
 	private JButton buttonSettingsNext;
 	private int buttonWidth;
 	private int buttonHeight;
@@ -171,14 +172,25 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 	}
 	
 	private void refreshButtons()
-	{	if(quickMatchConfiguration.getLevelsSelection().getLevelCount()==0)
+	{	LevelsSelection levelsSelection = quickMatchConfiguration.getLevelsSelection();
+	
+		// levels
+		if(quickMatchConfiguration.getLevelsSelection().getLevelCount()==0)
 			buttonLevelsNext.setEnabled(false);
 		else
 			buttonLevelsNext.setEnabled(true);
+
+		// settings
 		if(quickMatchConfiguration.getLimitPoints()<=0 && quickMatchConfiguration.getLimitRounds()<=0)
 			buttonSettingsNext.setEnabled(false);
 		else
 			buttonSettingsNext.setEnabled(true);
+		
+		// players
+		if(tournament==null || !levelsSelection.getAllowedPlayerNumbers().contains(playersData.getSelectedProfiles().size()))
+				buttonPlayersNext.setEnabled(false);
+			else
+				buttonPlayersNext.setEnabled(true);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -202,10 +214,11 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 				quickMatchConfiguration.reinitLevels();
 			if(!quickMatchConfiguration.getUseLastSettings())
 				quickMatchConfiguration.reinitSettings();
+			
 			// set panel
-			playersData.setQuickMatchConfiguration(quickMatchConfiguration);
-			container.setDataPart(playersData);
-			setButtonsPlayers();
+			levelsData.setQuickMatchConfiguration(quickMatchConfiguration);
+			container.setDataPart(levelsData);
+			setButtonsLevels();
 			result = true;
 		}		
 		// existing (unfinished) tournament
@@ -340,11 +353,11 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_PREVIOUS))				
-		{	replaceWith(parent);
+		{	setButtonsSettings();
+			container.setDataPart(settingsData);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_PREVIOUS))				
-		{	setButtonsPlayers();
-			container.setDataPart(playersData);
+		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PREVIOUS))				
 		{	setButtonsLevels();
@@ -353,25 +366,11 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT))
 		{	// set players in tournament
 			setTournamentPlayers();
+			
 			// synch game options
 			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(tournament.getProfiles());
 			quickMatchConfiguration.setProfilesSelection(profilesSelection);
-			// set levels panel
-			levelsData.setQuickMatchConfiguration(quickMatchConfiguration);
-			setButtonsLevels();
-			container.setDataPart(levelsData);
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT))
-		{	// set levels in tournament
-			setTournamentLevels();
-			// set settings panel
-			settingsData.setQuickMatchConfiguration(quickMatchConfiguration);
-			setButtonsSettings();
-			container.setDataPart(settingsData);
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT))
-		{	// implements settings in tournament
-			setTournamentSettings();
+			
 			// save quick match options
 			try
 			{	QuickMatchConfigurationSaver.saveQuickMatchConfiguration(quickMatchConfiguration);
@@ -385,11 +384,31 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			catch (IOException e1)
 			{	e1.printStackTrace();
 			}
+			
 			// synch game options
 			Configuration.getGameConfiguration().setQuickMatchConfiguration(quickMatchConfiguration);
+			
 			// match panel
 			tournamentPanel.setTournament(tournament);
 			replaceWith(tournamentPanel);
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT))
+		{	// set levels in tournament
+			setTournamentLevels();
+			
+			// set settings panel
+			settingsData.setQuickMatchConfiguration(quickMatchConfiguration);
+			setButtonsSettings();
+			container.setDataPart(settingsData);
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT))
+		{	// implements settings in tournament
+			setTournamentSettings();
+			
+			// set players panel
+			playersData.setQuickMatchConfiguration(quickMatchConfiguration);
+			setButtonsPlayers();
+			container.setDataPart(playersData);
 	    }
 	} 
 	

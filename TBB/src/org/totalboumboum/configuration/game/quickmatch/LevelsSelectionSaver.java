@@ -21,6 +21,8 @@ package org.totalboumboum.configuration.game.quickmatch;
  * 
  */
 
+import java.util.Set;
+
 import org.jdom.Element;
 import org.totalboumboum.tools.xml.XmlNames;
 
@@ -41,13 +43,26 @@ public class LevelsSelectionSaver
 	
 	private static Element saveLevelElement(int index, LevelsSelection levelsSelection)
 	{	Element result = new Element(XmlNames.LEVEL);
+		
 		// folder pack
 		String packName = levelsSelection.getPackName(index);
 		result.setAttribute(XmlNames.PACK,packName);
+		
 		// folder name
 		String folderName = levelsSelection.getFolderName(index);
 		result.setAttribute(XmlNames.FOLDER,folderName);
-		//
+
+		// allowed players
+		Set<Integer> allowedPlayers = levelsSelection.getAllowedPlayerNumbers();
+		String allowedPlayersStr = "";
+		for(Integer i: allowedPlayers)
+		{	String str = i.toString();
+			allowedPlayersStr = allowedPlayersStr + str + " ";
+		}
+		if(allowedPlayers.size()>0)
+			allowedPlayersStr = allowedPlayersStr.substring(0,allowedPlayersStr.length()-1);
+		result.setAttribute(XmlNames.ALLOWED_PLAYERS,allowedPlayersStr);
+
 		return result;
 	}
 }

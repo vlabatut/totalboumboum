@@ -1370,4 +1370,9 @@ public class Launcher
 	 * 2) le round lui-même, c'est déjà fait
 	 * 3) pour les stats, suffit également de les écrire coté client
   	 */
+	
+	//TODO tester les confs de tournois/partie rapide sans l'option "utiliser les réglages précédents"
+	//TODO voir pouquoi c'est si lent dans l'interface quand on règle le tournoi
+	//TODO rajouter un bouton permettant de bloquer l'inscription/désinscription d'un joueur
+	//	   à un tournoi online, afin d'en finaliser le casting
 }

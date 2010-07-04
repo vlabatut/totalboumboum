@@ -435,7 +435,7 @@
 				<text name="Title" value="Sélection des niveaux" tooltip="Sélection des niveaux pour cette partie rapide" />
 				<group name="Button">
 					<text name="Next" value="Suivant" tooltip="Aller aux paramètres de la rencontre" />
-					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection des joueurs" />
+					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />
 					<text name="Quit" value="Quitter" tooltip="Quitter la rencontre et revenir au menu principal" />
 				</group>
 			</group>
@@ -444,15 +444,15 @@
 				<group name="Button">
 					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir à l'écran de sélection des joueurs" />
 					<text name="Confirm" value="Confirmer" tooltip="Valider la sélection" />
-					<text name="Next" value="Suivant" tooltip="Aller à la sélection des niveaux" />
-					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal sans quitter" />
+					<text name="Next" value="Suivant" tooltip="Commencer la partie" />
+					<text name="Previous" value="Précédent" tooltip="Revenir aux paramètres de la rencontre" />
 					<text name="Quit" value="Quitter" tooltip="Quitter la rencontre et revenir au menu principal" />
 				</group>
 			</group>
 			<group name="Settings">
 				<text name="Title" value="Réglages de la partie" tooltip="Réglage des paramètres généraux de la partie" />
 				<group name="Button">
-					<text name="Next" value="Suivant" tooltip="Commencer la partie" />
+					<text name="Next" value="Suivant" tooltip="Aller à la sélection des joueurs" />
 					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection des niveaux" />
 					<text name="Quit" value="Quitter" tooltip="Quitter la rencontre et revenir au menu principal" />
 				</group>

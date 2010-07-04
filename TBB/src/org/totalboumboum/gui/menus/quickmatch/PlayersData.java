@@ -24,6 +24,7 @@ package org.totalboumboum.gui.menus.quickmatch;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -75,10 +76,10 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private QuickMatchConfiguration quickMatchConfiguration;
+	//private QuickMatchConfiguration quickMatchConfiguration;
 	
 	public void setQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration)
-	{	this.quickMatchConfiguration = quickMatchConfiguration;
+	{	//this.quickMatchConfiguration = quickMatchConfiguration;
 		ProfilesSelection profilesSelection = quickMatchConfiguration.getProfilesSelection();
 		List<Profile> selectedProfiles = new ArrayList<Profile>();
 		try
@@ -108,8 +109,8 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		catch (ClassNotFoundException e1)
 		{	e1.printStackTrace();
 		}
-//TODO		quickMatchConfiguration.getLevelsSelection().
-		playersPanel.setPlayers(selectedProfiles,null);
+		Set<Integer> allowedPlayers = quickMatchConfiguration.getLevelsSelection().getAllowedPlayerNumbers();
+		playersPanel.setPlayers(selectedProfiles,allowedPlayers);
 	}
 	
 	public List<Profile> getSelectedProfiles()
@@ -134,7 +135,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void playerSelectionPlayerRemoved(int index)
-	{	
+	{	fireDataPanelSelectionChange();
 	}
 
 	@Override

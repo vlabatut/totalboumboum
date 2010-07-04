@@ -27,7 +27,6 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -201,7 +200,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 		}
 		else
 		{	roundPanel.setLabelText(0,0,roundFile.toString(),roundFile.toString());
-			TreeSet<Integer> allowedPlayers = quickStartConfiguration.getAllowedPlayers();
+			Set<Integer> allowedPlayers = quickStartConfiguration.getAllowedPlayers();
 			String allowedPlayersStr = Players.formatAllowedPlayerNumbers(quickStartConfiguration.getAllowedPlayers());
 			roundPanel.setLabelText(0,1,allowedPlayersStr,allowedPlayersStr);
 			int playersNumber = playersPanel.getPlayers().size();

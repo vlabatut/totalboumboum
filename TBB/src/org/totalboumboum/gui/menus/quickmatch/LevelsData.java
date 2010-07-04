@@ -26,6 +26,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -167,11 +168,11 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 		else
 			commandsPanel.setEnabledRight(false);
 		// left arrow
-		if(selectedLevelPreview!=null 
-			&& selectedLevelPreview.getAllowedPlayerNumbers().contains(playerCount))
-			commandsPanel.setEnabledLeft(true);
-		else
-			commandsPanel.setEnabledLeft(false);		
+//		if(selectedLevelPreview!=null 
+//			&& selectedLevelPreview.getAllowedPlayerNumbers().contains(playerCount))
+//			commandsPanel.setEnabledLeft(true);
+//		else
+//			commandsPanel.setEnabledLeft(false);		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -302,7 +303,8 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 			else
 				index++;
 			// levels selection
-			levelsSelection.addLevel(index,packName,folderName);
+			Set<Integer> allowedPlayers = selectedLevelPreview.getAllowedPlayerNumbers();
+			levelsSelection.addLevel(index,packName,folderName,allowedPlayers);
 			// file names
 			numberFileNames();
 			selectedPanel.setFileNames(fileNames);

@@ -2,9 +2,14 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_game.xsd"/>
 
+	<xsd:simpleType name="tAllowedPlayers">
+	   <xsd:list itemType="xsd:integer"/>
+	</xsd:simpleType>
+ 
 	<xsd:complexType name="tLevel">
 		<xsd:attribute name="pack" type="xsd:string" use="required" />
 		<xsd:attribute name="folder" type="xsd:string" use="required" />
+		<xsd:attribute name="allowedPlayers" type="tAllowedPlayers" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tLevels">

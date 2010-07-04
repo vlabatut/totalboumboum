@@ -24,6 +24,7 @@ package org.totalboumboum.configuration.game.quickstart;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -48,7 +49,6 @@ import org.xml.sax.SAXException;
  */
 public class QuickStartConfiguration
 {
-	@SuppressWarnings("unchecked")
 	public QuickStartConfiguration copy()
 	{	QuickStartConfiguration result = new QuickStartConfiguration();
 
@@ -56,7 +56,7 @@ public class QuickStartConfiguration
 		ProfilesSelection quickstartCopy = profilesSelection.copy();
 		result.setProfilesSelection(quickstartCopy);
 		result.setRoundName(new StringBuffer(roundName));
-		result.setAllowedPlayers((TreeSet<Integer>)allowedPlayers.clone());
+		result.setAllowedPlayers(new TreeSet<Integer>(allowedPlayers));
 		return result;
 	}
 	
@@ -92,12 +92,12 @@ public class QuickStartConfiguration
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private StringBuffer roundName = null;
-	private TreeSet<Integer> allowedPlayers = new TreeSet<Integer>();
+	private Set<Integer> allowedPlayers = new TreeSet<Integer>();
 	
-	public TreeSet<Integer> getAllowedPlayers()
+	public Set<Integer> getAllowedPlayers()
 	{	return allowedPlayers;
 	}
-	public void setAllowedPlayers(TreeSet<Integer> allowedPlayers)
+	public void setAllowedPlayers(Set<Integer> allowedPlayers)
 	{	this.allowedPlayers = allowedPlayers;
 	}
 

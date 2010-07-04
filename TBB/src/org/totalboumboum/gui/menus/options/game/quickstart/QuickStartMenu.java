@@ -26,7 +26,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.List;
-import java.util.TreeSet;
+import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -104,7 +104,7 @@ public class QuickStartMenu extends InnerMenuPanel implements DataPanelListener
 		
 	private void refreshButtons()
 	{	QuickStartConfiguration copyConfiguration = quickstartPanel.getQuickStartConfiguration();
-		TreeSet<Integer> allowedPlayers = copyConfiguration.getAllowedPlayers();
+		Set<Integer> allowedPlayers = copyConfiguration.getAllowedPlayers();
 		int playersNumber = copyConfiguration.getProfilesSelection().getProfileCount();
 		if(allowedPlayers.contains(playersNumber))
 			buttonConfirm.setEnabled(true);
