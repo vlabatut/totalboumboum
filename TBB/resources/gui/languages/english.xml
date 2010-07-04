@@ -568,10 +568,12 @@
 			<group name="Settings">
 				<text name="Title" value="Tournament selection" tooltip="Select a tournament" />
 				<group name="Button">
+					<text name="BlockPlayers" value="Block" tooltip="Block remote players registration" />
 					<text name="Cancel" value="Cancel" tooltip="Cancel your selection and come back to tournament selection" />
 					<text name="Confirm" value="Confirm" tooltip="Confirm your selection" />
 					<text name="Next" value="Next" tooltip="Go to players selection" />
 					<text name="Previous" value="Previous" tooltip="Come back to the main menu" />
+					<text name="Publish" value="Publish" tooltip="Make your tournament available for network play" />
 					<text name="Select" value="Select" tooltip="Select another tournament" />
 				</group>
 			</group>
