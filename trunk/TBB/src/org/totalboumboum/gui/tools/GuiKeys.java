@@ -61,6 +61,7 @@ public class GuiKeys
 	public static final String BACKGROUND = "Background";
 	public static final String BEFORE = "Before";
 	public static final String BLACK = "Black";
+	public static final String BLOCK = "Block";
 	public static final String BLUE = "Blue";
 	public static final String BOMBEDS = "Bombeds";
 	public static final String BOMBINGS = "Bombings";
@@ -201,6 +202,7 @@ public class GuiKeys
 	public static final String PROFILE = "Profile";
 	public static final String PROFILES = "Profiles";
 	public static final String PROGRESSBAR = "Progressbar";
+	public static final String PUBLISH = "Publish";
 	public static final String PURPLE = "Purple";
 	public static final String QUESTION = "Question";
 	public static final String QUICKMATCH = "Quickmatch";
@@ -697,8 +699,10 @@ public class GuiKeys
 		public static final String MENU_QUICKMATCH_SETTINGS_TITLE = MENU_QUICKMATCH_SETTINGS+TITLE;
 			/* BUTTONS */
 			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON = MENU_QUICKMATCH_SETTINGS+BUTTON;
+			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS = MENU_QUICKMATCH_SETTINGS_BUTTON+BLOCK+PLAYERS;
 			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT = MENU_QUICKMATCH_SETTINGS_BUTTON+NEXT;
 			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON_PREVIOUS = MENU_QUICKMATCH_SETTINGS_BUTTON+PREVIOUS;
+			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON_PUBLISH = MENU_QUICKMATCH_SETTINGS_BUTTON+PUBLISH;
 			public static final String MENU_QUICKMATCH_SETTINGS_BUTTON_QUIT = MENU_QUICKMATCH_SETTINGS_BUTTON+QUIT;
 			/* LEVELS */
 			public static final String MENU_QUICKMATCH_SETTINGS_LEVELS = MENU_QUICKMATCH_SETTINGS+LEVELS;
@@ -811,9 +815,11 @@ public class GuiKeys
 		public static final String MENU_TOURNAMENT_SETTINGS_TITLE = MENU_TOURNAMENT_SETTINGS+TITLE;
 			/* BUTTONS */
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON = MENU_TOURNAMENT_SETTINGS+BUTTON;
+			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_BLOCK_PLAYERS = MENU_TOURNAMENT_SETTINGS_BUTTON+BLOCK+PLAYERS;
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_CANCEL = MENU_TOURNAMENT_SETTINGS_BUTTON+CANCEL;
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_CONFIRM = MENU_TOURNAMENT_SETTINGS_BUTTON+CONFIRM;
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT = MENU_TOURNAMENT_SETTINGS_BUTTON+NEXT;
+			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_PUBLISH = MENU_TOURNAMENT_SETTINGS_BUTTON+PUBLISH;
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS = MENU_TOURNAMENT_SETTINGS_BUTTON+PREVIOUS;
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_SELECT = MENU_TOURNAMENT_SETTINGS_BUTTON+SELECT;
 	

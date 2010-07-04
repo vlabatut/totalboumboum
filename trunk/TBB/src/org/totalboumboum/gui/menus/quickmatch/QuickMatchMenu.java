@@ -30,6 +30,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JToggleButton;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
@@ -112,6 +113,8 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 	private JButton buttonLevelsNext;
 	private JButton buttonSettingsPrevious;
 	private JButton buttonSettingsNext;
+	private JButton buttonPublish;
+	private JToggleButton buttonBlockPlayers;
 	private int buttonWidth;
 	private int buttonHeight;
 
@@ -126,6 +129,8 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		buttonPlayersNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		buttonLevelsNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		buttonSettingsNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonPublish = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PUBLISH,buttonWidth,buttonHeight,1,this);
+		buttonBlockPlayers = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS,buttonWidth,buttonHeight,1,this);
 		removeAll();
 	}
 	
@@ -136,7 +141,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		add(buttonPlayersPrevious);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
+		add(buttonPublish);
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(buttonPlayersNext);
@@ -329,7 +334,8 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			{	r.setLimits(limits);
 				r.setRandomLocation(randomLocation);
 			}
-		}				
+		}
+		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -409,6 +415,16 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			playersData.setQuickMatchConfiguration(quickMatchConfiguration);
 			setButtonsPlayers();
 			container.setDataPart(playersData);
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PUBLISH))
+		{	// update buttons
+			buttonPlayersPrevious.setEnabled(false);
+			int index = GuiTools.indexOfComponent(this,buttonPublish);
+			remove(index);
+			add(buttonBlockPlayers,index);
+			revalidate();
+			
+			// set up the connection
 	    }
 	} 
 	

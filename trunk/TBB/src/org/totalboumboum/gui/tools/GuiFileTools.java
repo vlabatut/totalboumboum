@@ -109,6 +109,7 @@ public class GuiFileTools
 
 	// folders
 	public static final String FOLDER_BACKGROUNDS = "backgrounds";
+	public final static String FOLDER_BLOCKING = "blocking";
 	public static final String FOLDER_BUTTONS = "buttons";
 	public final static String FOLDER_CAMERA = "camera";
 	public final static String FOLDER_DATA = "data";
@@ -122,6 +123,7 @@ public class GuiFileTools
 	public static final String FOLDER_LANGUAGES = "languages";
 	public final static String FOLDER_LEFT_BLUE = "left_blue";
 	public final static String FOLDER_LEFT_RED = "left_red";
+	public final static String FOLDER_NETWORK = "network";
 	public final static String FOLDER_PLAY = "play";
 	public final static String FOLDER_RESULTS = "results";
 	public final static String FOLDER_RIGHT_BLUE = "right_blue";

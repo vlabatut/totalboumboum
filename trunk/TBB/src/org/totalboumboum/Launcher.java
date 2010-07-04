@@ -1375,4 +1375,14 @@ public class Launcher
 	//TODO voir pouquoi c'est si lent dans l'interface quand on règle le tournoi
 	//TODO rajouter un bouton permettant de bloquer l'inscription/désinscription d'un joueur
 	//	   à un tournoi online, afin d'en finaliser le casting
+	//	   (on peut utiliser le même bouton que "publier" en lui donnant 3 états)
+	// TODO utiliser des string comme message plutot qu'un booleen dans les connection
+	//		intérêt : on peut transmettre des infos plus variées tq "start" "players refused" etc.
+	
+	/*
+	 * - penser à virer les connextions créées lors de la configuration du tournoi
+	 * 	 et pr lesquelles aucun joueur ne s'est enregistré
+	 * - en cas d'annulation d'un tournoi publié, penser à supprimer toutes les connexions en cours
+	 */
+	
 }
