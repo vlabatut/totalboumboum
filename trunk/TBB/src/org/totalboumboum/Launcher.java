@@ -763,6 +763,43 @@ public class Launcher
 
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IDENTIFICATION		//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * TODO
+	 * 
+	 * PB: est-ce qu'on autorise la création d'hote/joueur indépendemment du central, ou pas.
+	 * 
+	 * HOTES
+	 * - chaque hôte est identifié par un UUID (http://www.javapractices.com/topic/TopicAction.do?Id=56)
+	 *   qui n'est jamais modifié après
+	 * - de plus, l'ensemble de toutes ses adresses MAC sont enregistrées
+	 *   (http://www.kodejava.org/examples/250.html 
+	 *    http://www.stratos.me/2008/07/find-mac-address-using-java
+	 *    http://www.kodejava.org/examples/250.html)
+	 * - cette liste est mise à jour à chaque démarrage
+	 * - si d'un démarrage à l'autre il n'y a aucune adresse commune, ça veut dire que ce n'est plus la même machine
+	 * - on génère alors un nouvel UUID qui écrase le précédent
+	 * - les mots de passe de tous les profils sont réinitialisés
+	 * 
+	 * JOUEURS
+	 * - chaque joueur est identifié par l'identifiant de l'hote sur lequel il est créé
+	 *   plus un identifiant unique pour cet hôte (on peut prendre un autre UUID)
+	 * - ce numéro ne change jamais, même quand il joue sur un autre hote (ce qui est possible)
+	 * - on a un truc du style : joueur@createur
+	 * - quand le profil est utilisé sur son hote de création, pas besoin de mot de passe
+	 * - sinon il faut un mot de passe, qu'on a la possibilité d'enregistrer
+	 * >> en fait pas besoin de voir l'hote, avec l'uDDi ça suffit
+	 *    chaque joueur doit entrer le mdp quel que soit l'hote (même créateur)
+	 *    si le joueur n'est pas enregistré sur le site, il ne peut pas être protégé par un mot de passe
+	 *    et de toute façon ses stats ne comptent pas
+	 * >> intérêt d'identifier de façon unique l'hote ??
+	 *    ah oui, pr les stats sur qui joue chez qui...
+	 */
+	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // KNOWN, WAITING BUGS	//////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
@@ -1385,4 +1422,6 @@ public class Launcher
 	 * - en cas d'annulation d'un tournoi publié, penser à supprimer toutes les connexions en cours
 	 */
 	
+
+	//TODO set up the client side now, starting with the connection interface (a modal menu ?)		
 }

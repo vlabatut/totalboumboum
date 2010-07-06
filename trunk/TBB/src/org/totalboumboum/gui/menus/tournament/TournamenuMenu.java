@@ -326,7 +326,7 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener,
 		catch (ClassNotFoundException e)
 		{	e.printStackTrace();
 		}
-//TODO set up the client side now, starting with the connection interface (a modal menu ?)		
+
 		// add the profile to the selection
 		ProfilesSelection profilesSelection = tournamentConfiguration.getProfilesSelection();
 		if(!profilesSelection.containsProfile(profile))
