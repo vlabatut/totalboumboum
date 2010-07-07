@@ -770,6 +770,7 @@ public class Launcher
 	 * TODO
 	 * 
 	 * PB: est-ce qu'on autorise la création d'hote/joueur indépendemment du central, ou pas.
+	 * >> OUI,mais pas de mdp
 	 * 
 	 * HOTES
 	 * - chaque hôte est identifié par un UUID (http://www.javapractices.com/topic/TopicAction.do?Id=56)
