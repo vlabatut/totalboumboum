@@ -796,6 +796,9 @@ public class Launcher
 	 *    et de toute façon ses stats ne comptent pas
 	 * >> intérêt d'identifier de façon unique l'hote ??
 	 *    ah oui, pr les stats sur qui joue chez qui...
+	 *    
+	 * NOTE empecher le même joueur de joueur deux matches en même temps...
+	 * >> que les matches via central enregistrés dans les stats
 	 */
 	
 	
