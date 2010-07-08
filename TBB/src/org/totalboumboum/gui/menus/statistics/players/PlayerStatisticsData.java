@@ -62,8 +62,8 @@ public class PlayerStatisticsData extends EntitledDataPanel
 			
 			// set players ids
 			setView(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2);
-			List<Integer> playersIds = ProfileLoader.getIdsList();
-			HashMap<Integer, Profile> profilesMap;
+			List<String> playersIds = ProfileLoader.getIdsList();
+			HashMap<String, Profile> profilesMap;
 			try
 			{	profilesMap = ProfileLoader.loadProfiles(playersIds);
 				mainPanel.setPlayersIds(profilesMap,LINES);

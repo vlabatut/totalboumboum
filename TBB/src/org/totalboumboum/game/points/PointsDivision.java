@@ -56,7 +56,7 @@ public class PointsDivision extends PointsProcessor implements PPPrimaryOperator
 	public float[] process(StatisticHolder holder)
 	{	// init
 		StatisticBase stats = holder.getStats();
-		List<Integer> playersIds = stats.getPlayersIds();
+		List<String> playersIds = stats.getPlayersIds();
 		float[] result = new float[playersIds.size()];
 		float[] leftTemp = leftSource.process(holder);
 		float[] rightTemp = rightSource.process(holder);

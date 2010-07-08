@@ -75,10 +75,10 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 			// list panel
 			{	filePanel = new FileBrowserSubPanel(leftWidth,dataHeight);
 				filePanel.setShowParent(false);
-				HashMap<Integer,String> ids = profilesConfiguration.getProfiles();
+				HashMap<String,String> ids = profilesConfiguration.getProfiles();
 				HashMap<String,String> fileNames = new HashMap<String, String>();
-				for(Entry<Integer,String> entry: ids.entrySet())
-				{	String key = entry.getKey().toString();
+				for(Entry<String,String> entry: ids.entrySet())
+				{	String key = entry.getKey();
 					String value = entry.getValue();
 					fileNames.put(key,value);
 				}
@@ -123,22 +123,22 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 	{	return selectedProfile;
 	}
 
-	public Integer getSelectedProfileId()
-	{	String fileName = filePanel.getSelectedFileName();
-		Integer result = Integer.parseInt(fileName);
+	public String getSelectedProfileId()
+	{	String result = filePanel.getSelectedFileName();
+		//Integer result = Integer.parseInt(fileName);
 		return result;
 	}
 	
-	public void setSelectedProfile(Integer id)
-	{	String fileName = id.toString();
+	public void setSelectedProfile(String id)
+	{	String fileName = id/*.toString()*/;
 		filePanel.setSelectedFileName(fileName);
 	}
 
-	public Integer getReplacementProfileId()
-	{	Integer result = null;
-		String fileName = filePanel.getReplacementFileName();
-		if(fileName!=null)
-			result = Integer.parseInt(fileName);
+	public String getReplacementProfileId()
+	{	//Integer result = null;
+		String result = filePanel.getReplacementFileName();
+//		if(fileName!=null)
+//			result = Integer.parseInt(fileName);
 		return result;	
 	}
 	
@@ -157,8 +157,8 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 			selectedProfile = null;
 		else
 		{	try
-			{	int id = Integer.parseInt(file);
-				selectedProfile = ProfileLoader.loadProfile(id);			
+			{	//int id = Integer.parseInt(file);
+				selectedProfile = ProfileLoader.loadProfile(file);			
 			}
 			catch (IllegalArgumentException e)
 			{	e.printStackTrace();

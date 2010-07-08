@@ -187,13 +187,13 @@ public class Profile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ID				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int id = -1;
+	private String id = null;
 	
-	public int getId()
+	public String getId()
 	{	return id;	
 	}
 	
-	public void setId(int id)
+	public void setId(String id)
 	{	this.id = id;	
 	}
 	
@@ -222,7 +222,7 @@ public class Profile implements Serializable
 	{	boolean result = false;
 		if(o instanceof Profile)
 		{	Profile temp = (Profile) o;
-			result = temp.getId() == id;
+			result = temp.getId().equals(id);
 		}
 		return result;
 	}

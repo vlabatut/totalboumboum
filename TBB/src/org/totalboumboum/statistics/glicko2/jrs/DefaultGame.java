@@ -26,6 +26,7 @@ package org.totalboumboum.statistics.glicko2.jrs;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /** A default implementation of the <code>Game</code> interface. This class
   * can be used to obtain matches from the ranking service when the game's state
@@ -34,27 +35,50 @@ import java.util.Set;
   * @see RankingService#orderByBestMatch(Object,Map)
   *
   * @author Derek Hilder
+  * @author Vincent Labatut
   */
 public class DefaultGame implements Game, Serializable {
     private static final long serialVersionUID = 1L;
     
     /** The game's ID */
-    private Integer id;
+    private String id;
     
     /** A Set of Objects representing the IDs of the players participating
       * in the game.
       */
-    private HashSet<Integer> participantIds;
+    private HashSet<String> participantIds;
     
+    /** Create an instance of a DefaultGame with no participants.
+     *  The id is automatically processed
+     *  
+     * @author Vincent Labatut
+     */
+   public DefaultGame() {
+       this(UUID.randomUUID().toString(), new HashSet<String>());
+   }
+   
     /** Create an instance of a DefaultGame with no participants.
       * 
       * @param id 
       *     The unique ID to assign to the game.
       */
-    public DefaultGame(Integer id) {
-        this(id, new HashSet<Integer>());
+    public DefaultGame(String id) {
+        this(id, new HashSet<String>());
     }
     
+    /** Create an instance of a DefaultGame with the specified list of
+     * partipants.
+     * 
+     * @param participantIds 
+     *     The IDs of the players participating in the game.
+     *     
+      * @author Vincent Labatut
+    */
+   public DefaultGame(Set<String> participantIds) {
+       this.id = UUID.randomUUID().toString();
+       this.participantIds = new HashSet<String>(participantIds);
+   }
+
     /** Create an instance of a DefaultGame with the specified list of
       * partipants.
       * 
@@ -63,9 +87,9 @@ public class DefaultGame implements Game, Serializable {
       * @param participantIds 
       *     The IDs of the players participating in the game.
       */
-    public DefaultGame(Integer id, Set<Integer> participantIds) {
+    public DefaultGame(String id, Set<String> participantIds) {
         this.id = id;
-        this.participantIds = new HashSet<Integer>(participantIds);
+        this.participantIds = new HashSet<String>(participantIds);
     }
 
     /** Get the game's ID.
@@ -73,7 +97,7 @@ public class DefaultGame implements Game, Serializable {
       * @return 
       *     An Object representing the game's unique ID.
       */
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -83,7 +107,7 @@ public class DefaultGame implements Game, Serializable {
       *     A Set of Objects representing the IDs of the players participating
       *     in the game.
       */
-    public Set<Integer> getParticipantIds() {
+    public Set<String> getParticipantIds() {
         return participantIds;
     }
 }

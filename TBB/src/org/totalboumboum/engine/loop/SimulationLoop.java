@@ -56,16 +56,16 @@ public class SimulationLoop extends Loop
 	{	// init
 		RankingService rankingService = GameStatistics.getRankingService();
 		List<Profile> profiles = round.getProfiles();
-		HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+		HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		List<Profile> currentPlayers = new ArrayList<Profile>(profiles);
 		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
-		HashMap<Integer,HashMap<Score,Long>> currentScores = new HashMap<Integer, HashMap<Score,Long>>();
+		HashMap<String,HashMap<Score,Long>> currentScores = new HashMap<String, HashMap<Score,Long>>();
 		
 		// process probabilities and estimate duration
 		long theoreticalDuration = 0;
-		HashMap<Integer,HashMap<Score,Double>> probabilities = new HashMap<Integer, HashMap<Score,Double>>();
+		HashMap<String,HashMap<Score,Double>> probabilities = new HashMap<String, HashMap<Score,Double>>();
 		for(Profile profile: profiles)
-		{	int playerId = profile.getId();
+		{	String playerId = profile.getId();
 			PlayerStats playerStats = playersStats.get(playerId);
 			// init scores
 			HashMap<Score,Long> playerScores = new HashMap<Score, Long>();
@@ -114,7 +114,7 @@ public class SimulationLoop extends Loop
 			List<Profile> deadPlayers = new ArrayList<Profile>();
 			for(Profile profile: currentPlayers)
 			{	if(!deadPlayers.contains(profile))
-				{	int playerId = profile.getId();
+				{	String playerId = profile.getId();
 					PlayerRating playerRating = rankingService.getPlayerRating(playerId);
 					HashMap<Score,Double> playerProbas = probabilities.get(playerId);
 					double p,threshold;
@@ -146,7 +146,7 @@ public class SimulationLoop extends Loop
 						if(temp.size()>0)
 						{	int index = (int)(Math.random()*temp.size());
 							Profile profile2 = temp.get(index);
-							int playerId2 = profile2.getId();
+							String playerId2 = profile2.getId();
 							PlayerRating playerRating2 = rankingService.getPlayerRating(playerId2);
 							// draw
 							p = Math.random();

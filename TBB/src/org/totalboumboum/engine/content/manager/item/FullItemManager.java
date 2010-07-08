@@ -94,7 +94,7 @@ public class FullItemManager extends ItemManager
 		// stats
 		StatisticAction statAction = StatisticAction.GATHER_ITEM;
 		long statTime = sprite.getLoopTime();
-		Integer statActor = sprite.getPlayer().getId();
+		String statActor = sprite.getPlayer().getId();
 		//String statTarget = item.getItemName();
 		StatisticEvent statEvent = new StatisticEvent(statActor,statAction,null,statTime);
 		sprite.addStatisticEvent(statEvent);
@@ -127,7 +127,7 @@ public class FullItemManager extends ItemManager
 		// stats
 		StatisticAction statAction = StatisticAction.RECEIVE_ITEM;
 		long statTime = sprite.getLoopTime();
-		Integer statActor = sprite.getPlayer().getId();
+		String statActor = sprite.getPlayer().getId();
 		//String statTarget = item.getItemName(); //NOTE target should be who did give this item
 		StatisticEvent statEvent = new StatisticEvent(statActor,statAction,null,statTime);
 		sprite.addStatisticEvent(statEvent);
@@ -202,7 +202,7 @@ public class FullItemManager extends ItemManager
 			// stats
 			StatisticAction statAction = StatisticAction.LOSE_ITEM;
 			long statTime = sprite.getLoopTime();
-			Integer statActor = sprite.getPlayer().getId();
+			String statActor = sprite.getPlayer().getId();
 			//String statTarget = item.getItemName();
 			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,null,statTime);
 			sprite.addStatisticEvent(statEvent);
@@ -275,7 +275,7 @@ public class FullItemManager extends ItemManager
 							// stats
 							StatisticAction statAction = StatisticAction.LOSE_ITEM;
 							long statTime = sprite.getLoopTime();
-							Integer statActor = sprite.getPlayer().getId();
+							String statActor = sprite.getPlayer().getId();
 							//String statTarget = temp.getItemName();
 							StatisticEvent statEvent = new StatisticEvent(statActor,statAction,null,statTime);
 							sprite.addStatisticEvent(statEvent);
@@ -326,7 +326,7 @@ public class FullItemManager extends ItemManager
 				// stats
 				StatisticAction statAction = StatisticAction.TRANSMIT_ITEM;
 				long statTime = sprite.getLoopTime();
-				Integer statActor = sprite.getPlayer().getId();
+				String statActor = sprite.getPlayer().getId();
 				//String statTarget = item.getItemName(); //NOTE target should be who gave the item
 				StatisticEvent statEvent = new StatisticEvent(statActor,statAction,null,statTime);
 				sprite.addStatisticEvent(statEvent);

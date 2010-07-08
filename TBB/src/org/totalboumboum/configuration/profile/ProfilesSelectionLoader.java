@@ -45,8 +45,8 @@ public class ProfilesSelectionLoader
 
 	private static void loadPlayerElement(Element root, ProfilesSelection result)
 	{	// file
-		String idStr = root.getAttributeValue(XmlNames.FILE);
-		int id = Integer.parseInt(idStr);
+		String id = root.getAttributeValue(XmlNames.FILE);
+		//int id = Integer.parseInt(idStr);
 		
 		// color
 		String colorStr = root.getAttributeValue(XmlNames.COLOR);

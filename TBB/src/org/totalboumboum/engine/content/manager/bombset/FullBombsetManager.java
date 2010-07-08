@@ -111,7 +111,7 @@ public class FullBombsetManager extends BombsetManager
 						// stats
 						StatisticAction statAction = StatisticAction.DROP_BOMB;
 						long statTime = sprite.getLoopTime();
-						Integer statActor = sprite.getPlayer().getId();
+						String statActor = sprite.getPlayer().getId();
 						//String statTarget = bomb.getBombName();
 						StatisticEvent statEvent = new StatisticEvent(statActor,statAction,null,statTime);
 						sprite.addStatisticEvent(statEvent);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profiles.xsd">
-	<general last="91" />
+	<general />
 	<list>
 		<profile file="1" name="Joueur Humain" />
 		<profile file="2" name="0708.Başman+Sandallı" />

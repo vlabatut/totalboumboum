@@ -62,9 +62,9 @@ public class StatTools
 	 * (which can be manually reinitialized from the game GUI anyway)
 	 * @param id	the player to reinitialize
 	 */
-	public static void reinitOverallStatsForPlayer(int id) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
+	public static void reinitOverallStatsForPlayer(String id) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{	// load
-		HashMap<Integer,PlayerStats> playersStats = OverallStatsLoader.loadOverallStatistics();
+		HashMap<String,PlayerStats> playersStats = OverallStatsLoader.loadOverallStatistics();
 		
 		// change
 		PlayerStats playerStat = playersStats.get(id);
@@ -76,7 +76,7 @@ public class StatTools
 	
 	public static void exportAllStats() throws IOException, ClassNotFoundException
 	{	// load
-		HashMap<Integer,PlayerStats> playersStats = OverallStatsLoader.loadOverallStatistics();
+		HashMap<String,PlayerStats> playersStats = OverallStatsLoader.loadOverallStatistics();
 		RankingService glicko2Stats = Glicko2Loader.loadGlicko2Statistics();
 		
 		// export
@@ -86,7 +86,7 @@ public class StatTools
 	
 	public static void importAllStats() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// import
-		HashMap<Integer,PlayerStats> playersStats = OverallStatsLoader.importOverallStatistics();
+		HashMap<String,PlayerStats> playersStats = OverallStatsLoader.importOverallStatistics();
 		RankingService glicko2Stats = Glicko2Loader.importGlicko2Statistics();
 			
 		// save

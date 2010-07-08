@@ -67,7 +67,7 @@ public class HeroEventManager extends EventManager
 	/** current interactive move direction*/
 	protected Direction controlDirection;
 	
-	protected Integer explosedBy = null;
+	protected String explosedBy = null;
 
 	public HeroEventManager(Hero sprite)
 	{	super(sprite);		
@@ -116,8 +116,8 @@ public class HeroEventManager extends EventManager
 				// stats
 				StatisticAction statAction = StatisticAction.BOMB_PLAYER;
 				long statTime = sprite.getLoopTime();
-				Integer statActor = explosedBy;
-				Integer statTarget = sprite.getPlayer().getId();
+				String statActor = explosedBy;
+				String statTarget = sprite.getPlayer().getId();
 				StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 				sprite.addStatisticEvent(statEvent);
 				// other lifes remaining?

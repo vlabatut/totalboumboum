@@ -152,7 +152,7 @@ public class FullControlManager extends ControlManager
 		{	try
 			{	OutputStreamWriter out = new OutputStreamWriter(engineConfiguration.getControlsLogOutput(),"UTF8");
 				PrintWriter printWriter = new PrintWriter(out,true);
-				int id = sprite.getPlayer().getId();
+				String id = sprite.getPlayer().getId();
 				printWriter.print("\t"+id+": [");
 				for(ControlEvent event: eventsList)
 					printWriter.print(event.getName()+"/"+event.getMode()+" ");
@@ -185,7 +185,7 @@ public class FullControlManager extends ControlManager
 		{	try
 			{	OutputStreamWriter out = new OutputStreamWriter(engineConfiguration.getControlsLogOutput(),"UTF8");
 				PrintWriter printWriter = new PrintWriter(out,true);
-				int id = sprite.getPlayer().getId();
+				String id = sprite.getPlayer().getId();
 				printWriter.print("\t"+id+": [");
 				for(ControlEvent event: controlEvents)
 					printWriter.print(event.getName()+"/"+event.getMode()+" ");

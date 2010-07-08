@@ -166,7 +166,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 				// rank
 				{	NumberFormat nf = NumberFormat.getInstance();
 					nf.setMinimumFractionDigits(0);
-					int playerId = profile.getId();
+					String playerId = profile.getId();
 					int playerRank = rankingService.getPlayerRank(playerId);
 					String text,tooltip;
 					if(playerRank<0)

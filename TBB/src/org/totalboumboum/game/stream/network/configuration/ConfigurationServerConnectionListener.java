@@ -32,6 +32,6 @@ import org.totalboumboum.configuration.profile.SpriteInfo;
 public interface ConfigurationServerConnectionListener
 {	
 	public void profileAdded(Profile profile);
-	public void profileRemoved(Integer id);
-	public void spriteChanged(Integer id, SpriteInfo sprite);
+	public void profileRemoved(String id);
+	public void spriteChanged(String id, SpriteInfo sprite);
 }

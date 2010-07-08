@@ -73,7 +73,7 @@ public abstract class AbstractPlayer
 	{	return sprite;
 	}
 
-	public int getId()
+	public String getId()
 	{	return profile.getId();
 	}
 

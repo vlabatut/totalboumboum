@@ -165,7 +165,7 @@ public class AiZone
 		{	AbstractPlayer player = players.get(i);
 			Hero hero = (Hero)player.getSprite();
 			AiHero aiHero = heroMap.get(hero);
-			int playerId = player.getId();
+			String playerId = player.getId();
 			int rank = rankingService.getPlayerRank(playerId);
 			statsRanks.put(aiHero,rank);
 		}

@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.stream.network.AbstractConnection;
@@ -49,8 +50,9 @@ public class ConfigurationClientConnection extends AbstractConnection<Configurat
 	}
 	
 	public void removeProfile(Profile profile) throws IOException
-	{	Integer id = profile.getId();
-		write(id);
+	{	String id = profile.getId();
+		UUID uuid = UUID.fromString(id);
+		write(uuid);
 	}
 	
 	public void changeSprite(Profile profile) throws IOException

@@ -37,13 +37,13 @@ public interface Game {
     /** Get the ID of the game. This should uniquely identify the game to
       * an instance of the ranking service.
       */
-    public Integer getId();
+    public String getId();
     
     /** The the ids of the players participating in the game.
       *
       * @returns
       *     A Set of Objects representing the ids of the partipants.
       */
-    public Set<Integer> getParticipantIds();
+    public Set<String> getParticipantIds();
     
 }

@@ -82,7 +82,7 @@ public class GameMatch implements Comparable<GameMatch>, Serializable {
       * @return 
       *     A Set of Objects representing the players' ids.
       */
-    public Set<Integer> getPlayerIds() {
+    public Set<String> getPlayerIds() {
         return game.getParticipantIds();
     }
 

@@ -78,7 +78,7 @@ public class PointsDiscretize extends PointsProcessor implements PPFunction
 	public float[] process(StatisticHolder holder)
 	{	// init
 		StatisticBase stats = holder.getStats();
-		List<Integer> playersIds = stats.getPlayersIds();
+		List<String> playersIds = stats.getPlayersIds();
 		float[] result = new float[playersIds.size()];
 		float[] temp = source.process(holder);
 		

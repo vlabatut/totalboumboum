@@ -32,11 +32,11 @@ public class StatisticEvent implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
-	public StatisticEvent(Integer actorId, StatisticAction action, Integer targetId, long time)
+	public StatisticEvent(String actorId, StatisticAction action, String targetId, long time)
 	{	this(actorId,action,targetId,time,false);
 		
 	}
-	public StatisticEvent(Integer actorId, StatisticAction action, Integer targetId, long time, boolean simulated)
+	public StatisticEvent(String actorId, StatisticAction action, String targetId, long time, boolean simulated)
 	{	this.actorId = actorId;
 		this.action = action;
 		this.targetId = targetId;
@@ -47,13 +47,13 @@ public class StatisticEvent implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ACTOR				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Integer actorId;
+	private String actorId;
 
-	public Integer getActorId()
+	public String getActorId()
 	{	return actorId;
 	}
 	
-	public void setActorId(Integer actorId)
+	public void setActorId(String actorId)
 	{	this.actorId = actorId;
 	}
 
@@ -73,13 +73,13 @@ public class StatisticEvent implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// TARGET				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Integer targetId;
+	private String targetId;
 	
-	public Integer getTargetId()
+	public String getTargetId()
 	{	return targetId;
 	}
 	
-	public void setTargetId(Integer targetId)
+	public void setTargetId(String targetId)
 	{	this.targetId = targetId;
 	}
 	

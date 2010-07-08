@@ -131,7 +131,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_MODIFY))
 		{	Profile profile = profileData.getSelectedProfile();
 			if(profile!=null)
-			{	Integer profileId = profileData.getSelectedProfileId();
+			{	String profileId = profileData.getSelectedProfileId();
 				EditProfileSplitPanel editPanel = new EditProfileSplitPanel(container.getMenuContainer(),container,profile,profileId);
 				replaceWith(editPanel);
 			}
@@ -181,7 +181,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 				try
 				{	// create profile
 					ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
-					Integer id = profilesConfig.createProfile(input);
+					String id = profilesConfig.createProfile(input);
 					// rebuild panel
 					refresh();
 					profileData.setSelectedProfile(id);
@@ -215,7 +215,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 		else if(questionPanel!=null)
 		{	questionPanel = null;				
 			Profile profile = profileData.getSelectedProfile();
-			Integer id = profileData.getReplacementProfileId();
+			String id = profileData.getReplacementProfileId();
 			if(profile!=null)
 			{	try
 				{	// delete profile

@@ -114,7 +114,7 @@ public class GameStatistics
 	 * used when a new profile is created
 	 * @param playerId
 	 */
-	public static void addPlayer(int playerId) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static void addPlayer(String playerId) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	boolean changed = false;
 		if(!playersStats.containsKey(playerId))
 		{	changed = true;
@@ -134,7 +134,7 @@ public class GameStatistics
 	 * used when a profile is definitely removed
 	 * @param playerId
 	 */
-	public static void deletePlayer(int playerId) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static void deletePlayer(String playerId) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	boolean changed = false;
 		if(playersStats.containsKey(playerId))
 		{	changed = true;
@@ -151,14 +151,14 @@ public class GameStatistics
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS STATISTICS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private static HashMap<Integer,PlayerStats> playersStats = new HashMap<Integer, PlayerStats>();
+	private static HashMap<String,PlayerStats> playersStats = new HashMap<String, PlayerStats>();
 
 	public static void resetPlayersStats() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	HashMap<Integer,PlayerStats> playersStats = OverallStatsSaver.initOverallStatistics();
+	{	HashMap<String,PlayerStats> playersStats = OverallStatsSaver.initOverallStatistics();
 		GameStatistics.playersStats = playersStats;
 	}
 	
-	public static HashMap<Integer,PlayerStats> getPlayersStats()
+	public static HashMap<String,PlayerStats> getPlayersStats()
 	{	return playersStats;	
 	}
 	
@@ -168,7 +168,7 @@ public class GameStatistics
 		
 		for(int index=0;index<stats.getPlayersIds().size();index++)
 		{	// init
-			Integer id = stats.getPlayersIds().get(index);
+			String id = stats.getPlayersIds().get(index);
 			PlayerStats playerStats = playersStats.get(id);
 			
 			// scores
@@ -209,7 +209,7 @@ public class GameStatistics
 		while(it.hasNext())
 		{	PlayerRating playerRating = it.next();
 			rank++;
-			int playerId = playerRating.getPlayerId();
+			String playerId = playerRating.getPlayerId();
 			playersStats.get(playerId).setPreviousRank(rank);
 		}
 	}
@@ -246,14 +246,14 @@ public class GameStatistics
 			}
 		}
 		else*/
-		{	List<Integer> players = stats.getPlayersIds();
+		{	List<String> players = stats.getPlayersIds();
 			// ignore rounds with only one player
 			if(players.size()>1)
 			{	gameResults = new GameResults();
 				float[] points = stats.getPoints();
-				Set<Integer> registeredPlayers = rankingService.getPlayers();
+				Set<String> registeredPlayers = rankingService.getPlayers();
 				for(int index=0;index<points.length;index++)
-				{	int playerId = players.get(index);
+				{	String playerId = players.get(index);
 					// only consider the registered players
 					if(registeredPlayers.contains(playerId))
 					{	double playerScore = points[index];

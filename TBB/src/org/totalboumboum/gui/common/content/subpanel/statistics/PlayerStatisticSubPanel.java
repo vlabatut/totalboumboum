@@ -206,10 +206,10 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	/////////////////////////////////////////////////////////////////
 	// PAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<Integer> playersIds;
-	private HashMap<Integer,Profile> profilesMap;
+	private List<String> playersIds;
+	private HashMap<String,Profile> profilesMap;
 	@SuppressWarnings("unchecked")
-	private HashMap<Integer,List<Comparable>> playersScores = new HashMap<Integer, List<Comparable>>();
+	private HashMap<String,List<Comparable>> playersScores = new HashMap<String, List<Comparable>>();
 	private int currentPage = 0;
 	private final List<TableSubPanel> listPanels = new ArrayList<TableSubPanel>();
 	private int pageCount;	
@@ -217,31 +217,31 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	private TableSubPanel mainPanel;
 	private JPanel buttonsPanel;
 	
-	public HashMap<Integer,Profile> getPlayersProfiles()
+	public HashMap<String,Profile> getPlayersProfiles()
 	{	return profilesMap;	
 	}
 	
-	public List<Integer> getPlayersIds()
+	public List<String> getPlayersIds()
 	{	return playersIds;	
 	}
 	
-	public void setPlayersIds(HashMap<Integer,Profile> profilesMap, int lines)
+	public void setPlayersIds(HashMap<String,Profile> profilesMap, int lines)
 	{	// init
 		this.lines = lines;
 		lines++;
 		if(profilesMap==null)
-			profilesMap = new HashMap<Integer,Profile>();
+			profilesMap = new HashMap<String,Profile>();
 		this.profilesMap = profilesMap;
 		listPanels.clear();
 		
 		// sorting players
 		RankingService rankingService = GameStatistics.getRankingService();
 		sortCriterion.updateValues(this,playersScores,rankingService,profilesMap);
-		playersIds = new ArrayList<Integer>(profilesMap.keySet());
-		Collections.sort(playersIds,new Comparator<Integer>()
+		playersIds = new ArrayList<String>(profilesMap.keySet());
+		Collections.sort(playersIds,new Comparator<String>()
 		{	@SuppressWarnings("unchecked")
 			@Override
-			public int compare(Integer playerId1, Integer playerId2)
+			public int compare(String playerId1, String playerId2)
 			{	int result = 0;
 				List<Comparable> list1 = playersScores.get(playerId1);
 				List<Comparable> list2 = playersScores.get(playerId2);
@@ -257,9 +257,9 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		});
 		if((inverted && !sortCriterion.isInverted())
 			|| (!inverted && sortCriterion.isInverted()))
-		{	List<Integer> temp = playersIds;
-			playersIds = new ArrayList<Integer>();
-			for(Integer i: temp)
+		{	List<String> temp = playersIds;
+			playersIds = new ArrayList<String>();
+			for(String i: temp)
 				playersIds.add(0,i);
 		}
 		
@@ -276,7 +276,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		// building all pages
 		pageCount = 0;
 		int headerHeight = 0;
-		HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+		HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		int idIndex = 0;
 		do
 		{	// build the panel			
@@ -303,7 +303,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			int line = 1;
 			while(line<lines && idIndex<playersIds.size())
 			{	// init
-				int playerId = playersIds.get(idIndex);
+				String playerId = playersIds.get(idIndex);
 				idIndex++;
 				Profile profile = profilesMap.get(playerId);
 				PlayerRating playerRating = rankingService.getPlayerRating(playerId);
@@ -534,9 +534,9 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			}
 			// add/remove
 			else if(p[1]==0)
-			{	int playerId = playersIds.get((currentPage*lines)+p[0]-1);
+			{	String playerId = playersIds.get((currentPage*lines)+p[0]-1);
 				RankingService rankingService = GameStatistics.getRankingService();
-				Set<Integer> playersIds = rankingService.getPlayers();
+				Set<String> playersIds = rankingService.getPlayers();
 				if(playersIds.contains(playerId))
 					GameStatistics.getRankingService().deregisterPlayer(playerId);
 				else

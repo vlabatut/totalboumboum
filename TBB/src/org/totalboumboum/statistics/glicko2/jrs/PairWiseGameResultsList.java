@@ -105,7 +105,7 @@ class PairWiseGameResultsList extends ArrayList<PairWiseGameResult> {
 		numberOfPairWiseGameResults = Integer.parseInt(texts[t++]);
 
 		for(int i=0;i<numberOfPairWiseGameResults;i++)
-		{	PairWiseGameResult result = new PairWiseGameResult(0,0);
+		{	PairWiseGameResult result = new PairWiseGameResult("",0);
 			result.importFromText(scanner);
 			super.add(result);
 		}

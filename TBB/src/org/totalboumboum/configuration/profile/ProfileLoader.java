@@ -52,7 +52,7 @@ public class ProfileLoader
 		int size = profilesSelection.getProfileCount();
 		for(int i=0;i<size;i++)
 		{	// profile
-			int id = profilesSelection.getIds(i);
+			String id = profilesSelection.getIds(i);
 			Profile profile = loadProfile(id);
 			SpriteInfo selectedSprite = profile.getSelectedSprite();
 			// sprite
@@ -74,16 +74,16 @@ public class ProfileLoader
 		return result;
 	}
 
-	public static HashMap<Integer,Profile> loadProfiles(List<Integer> playersIds) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	HashMap<Integer,Profile> result = new HashMap<Integer, Profile>();
-		for(Integer playerId: playersIds)
+	public static HashMap<String,Profile> loadProfiles(List<String> playersIds) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	HashMap<String,Profile> result = new HashMap<String, Profile>();
+		for(String playerId: playersIds)
 		{	Profile profile = loadProfile(playerId);
 			result.put(playerId,profile);
 		}
 		return result;
 	}
 	
-	public static Profile loadProfile(int id) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static Profile loadProfile(String id) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	String profilesFolder = FilePaths.getProfilesPath();
 		File dataFile = new File(profilesFolder+File.separator+id+FileNames.EXTENSION_XML);
 		String schemaFolder = FilePaths.getSchemasPath();
@@ -167,8 +167,8 @@ public class ProfileLoader
 		profile.setPortraits(portraits);
     }
     
-    public static List<Integer> getIdsList()
-    {	List<Integer> result = new ArrayList<Integer>();
+    public static List<String> getIdsList()
+    {	List<String> result = new ArrayList<String>();
     	
     	// get folder
     	String folderStr = FilePaths.getProfilesPath();
@@ -189,8 +189,8 @@ public class ProfileLoader
 		for(File file: files)
 		{	int length = file.getName().length();
 			int extLength = FileNames.EXTENSION_XML.length();
-			String idStr = file.getName().substring(0,length-extLength);
-			int id = Integer.parseInt(idStr);
+			String id = file.getName().substring(0,length-extLength);
+			//int id = Integer.parseInt(idStr);
 			result.add(id);
 		}
     

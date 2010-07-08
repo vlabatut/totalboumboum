@@ -183,7 +183,7 @@ public enum StatisticColumn
 		return result;
 	}
 	
-	public void setLabelContent(PlayerStatisticSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, int playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats)
+	public void setLabelContent(PlayerStatisticSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, String playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats)
 	{	// general
 		if(this==GENERAL_BUTTON)
 		{	String key;
@@ -383,7 +383,7 @@ public enum StatisticColumn
 		}
 	}
 
-	private void setScoreLabel(PlayerStatisticSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, int playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats, Score score)
+	private void setScoreLabel(PlayerStatisticSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, String playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats, Score score)
 	{	long scoreValue = playerStats.getScore(score);
 		String text;
 		String tooltip;
@@ -410,7 +410,7 @@ public enum StatisticColumn
 			colWidths[col] = temp;
 	}
 	
-	private void setConfrontationsLabel(PlayerStatisticSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, int playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats, long confrontations)
+	private void setConfrontationsLabel(PlayerStatisticSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, String playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats, long confrontations)
 	{	String text = Long.toString(confrontations);
 		String tooltip = text;
 		if(container.hasMean())
@@ -432,14 +432,14 @@ public enum StatisticColumn
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void updateValues(PlayerStatisticSubPanel container, HashMap<Integer,List<Comparable>> playersScores, RankingService rankingService, HashMap<Integer,Profile> profilesMap)
+	public void updateValues(PlayerStatisticSubPanel container, HashMap<String,List<Comparable>> playersScores, RankingService rankingService, HashMap<String,Profile> profilesMap)
 	{	playersScores.clear();
-		for(Entry<Integer,Profile> entry: profilesMap.entrySet())
+		for(Entry<String,Profile> entry: profilesMap.entrySet())
 		{	// init
 			Profile profile = entry.getValue();
-			Integer playerId = entry.getKey();
+			String playerId = entry.getKey();
 			PlayerRating playerRating = rankingService.getPlayerRating(playerId);
-			HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+			HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 			PlayerStats playerStats = playersStats.get(playerId);
 			int playerRank = rankingService.getPlayerRank(playerId);
 			//int playersCount = rankingService.getPlayers().size();
@@ -498,28 +498,28 @@ public enum StatisticColumn
 				}
 				list.add(mean);
 				list.add(stdev);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==GLICKO_DEVIATION)
 			{	double stdev = 0;
 				if(playerRating!=null)
 					stdev = playerRating.getRatingDeviation();
 				list.add(stdev);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==GLICKO_VOLATILITY)
 			{	double volatility = 0;
 				if(playerRating!=null)
 					volatility = playerRating.getRatingVolatility();
 				list.add(volatility);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==GLICKO_ROUNDCOUNT)
 			{	int roundcount = 0;
 				if(playerRating!=null)
 					roundcount = playerRating.getRoundcount();
 				list.add(roundcount);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			// scores
 			else if(this==SCORE_BOMBS)
@@ -529,7 +529,7 @@ public enum StatisticColumn
 						bombs = bombs / totalRoundsPlayed;
 				}
 				list.add(bombs);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==SCORE_BOMBINGS)
 			{	double bombings = playerStats.getScore(Score.BOMBINGS);
@@ -538,7 +538,7 @@ public enum StatisticColumn
 						bombings = bombings / totalRoundsPlayed;
 				}
 				list.add(bombings);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==SCORE_BOMBEDS)
 			{	double bombeds = playerStats.getScore(Score.BOMBEDS);
@@ -547,7 +547,7 @@ public enum StatisticColumn
 						bombeds = bombeds / totalRoundsPlayed;
 				}
 				list.add(bombeds);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==SCORE_ITEMS)
 			{	double items = playerStats.getScore(Score.ITEMS);
@@ -556,7 +556,7 @@ public enum StatisticColumn
 						items = items / totalRoundsPlayed;
 				}
 				list.add(items);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==SCORE_CROWNS)
 			{	double crowns = playerStats.getScore(Score.CROWNS);
@@ -565,7 +565,7 @@ public enum StatisticColumn
 						crowns = crowns / totalRoundsPlayed;
 				}
 				list.add(crowns);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==SCORE_PAINTINGS)
 			{	double paintings = playerStats.getScore(Score.CROWNS);
@@ -574,7 +574,7 @@ public enum StatisticColumn
 						paintings = paintings / totalRoundsPlayed;
 				}
 				list.add(paintings);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==SCORE_SELF_BOMBINGS)
 			{	double selfBombings = playerStats.getScore(Score.SELF_BOMBINGS);
@@ -583,7 +583,7 @@ public enum StatisticColumn
 						selfBombings = selfBombings / totalRoundsPlayed;
 				}
 				list.add(selfBombings);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==SCORE_TIME)
 			{	double time = playerStats.getScore(Score.TIME);
@@ -592,7 +592,7 @@ public enum StatisticColumn
 						time = time / totalRoundsPlayed;
 				}
 				list.add(time);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			// confrontations
 			else if(this==ROUNDS_PLAYED)
@@ -602,7 +602,7 @@ public enum StatisticColumn
 						roundPlayed = roundPlayed / totalRoundsPlayed;
 				}
 				list.add(roundPlayed);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==ROUNDS_WON)
 			{	double roundsWon = playerStats.getRoundsWon();
@@ -611,7 +611,7 @@ public enum StatisticColumn
 						roundsWon = roundsWon / totalRoundsPlayed;
 				}
 				list.add(roundsWon);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==ROUNDS_DRAWN)
 			{	double roundsDrawn = playerStats.getRoundsDrawn();
@@ -620,7 +620,7 @@ public enum StatisticColumn
 						roundsDrawn = roundsDrawn / totalRoundsPlayed;
 				}
 				list.add(roundsDrawn);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			else if(this==ROUNDS_LOST)
 			{	double roundsLost = playerStats.getRoundsLost();
@@ -629,7 +629,7 @@ public enum StatisticColumn
 						roundsLost = roundsLost / totalRoundsPlayed;
 				}
 				list.add(roundsLost);
-				list.add(-playerId);
+				list.add(playerId);
 			}
 			//
 			playersScores.put(playerId,list);

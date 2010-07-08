@@ -48,7 +48,7 @@ import org.xml.sax.SAXException;
 public class OverallStatsSaver
 {	private static final boolean verbose = false;
 
-	public static void saveOverallStatistics(HashMap<Integer,PlayerStats> playersStats) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static void saveOverallStatistics(HashMap<String,PlayerStats> playersStats) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init files
 		String path = FilePaths.getOverallStatisticsPath()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_DATA;
 		String backup = FilePaths.getOverallStatisticsPath()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_BACKUP;
@@ -71,7 +71,7 @@ public class OverallStatsSaver
 		if(verbose)
 		{	System.out.println("\n######### OVERALL STATISTICS #########");
 			for(PlayerStats playerStats: playersStats.values())
-			{	int playerId = playerStats.getPlayerId();
+			{	String playerId = playerStats.getPlayerId();
 				String text = playerStats.toString();
 				Profile profile = ProfileLoader.loadProfile(playerId);
 				System.out.println(profile.getName()+text);				
@@ -79,15 +79,15 @@ public class OverallStatsSaver
 		}
 	}
 
-	public static HashMap<Integer,PlayerStats> initOverallStatistics() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static HashMap<String,PlayerStats> initOverallStatistics() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// create stats map
-		HashMap<Integer,PlayerStats> result = new HashMap<Integer, PlayerStats>();
+		HashMap<String,PlayerStats> result = new HashMap<String, PlayerStats>();
 		
 		// get ids list
-	    List<Integer> idsList = ProfileLoader.getIdsList();
+	    List<String> idsList = ProfileLoader.getIdsList();
 
 		// register all existing players
-		for(Integer id: idsList)
+		for(String id: idsList)
 		{	if(verbose)
 				System.out.println(id);
 			PlayerStats playerStats = new PlayerStats(id);
@@ -104,7 +104,7 @@ public class OverallStatsSaver
 	 * @param playersStats
 	 * @throws FileNotFoundException 
 	 */
-	public static void exportOverallStatistics(HashMap<Integer,PlayerStats> playersStats) throws FileNotFoundException
+	public static void exportOverallStatistics(HashMap<String,PlayerStats> playersStats) throws FileNotFoundException
 	{	// open the file
 		String path = FilePaths.getOverallStatisticsPath()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_TEXT;
 		File file = new File(path);
