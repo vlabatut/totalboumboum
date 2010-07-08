@@ -62,6 +62,10 @@ public class PlayerStats implements Serializable
 	public String getPlayerId()
 	{	return playerId;
 	}
+	
+	public void setPlayerId(String id)
+	{	playerId = id;
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// PREVIOUS RANK	/////////////////////////////////////////////
