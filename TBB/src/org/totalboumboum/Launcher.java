@@ -1431,4 +1431,7 @@ public class Launcher
 	
 	//TODO profile id is a string and not an int anymore
 	//also string in "profile selection" (game config)
+	
+	//TODO profiles options : reset passwords (automatically performed
+	//when the MAC address changes, anyway
 }
