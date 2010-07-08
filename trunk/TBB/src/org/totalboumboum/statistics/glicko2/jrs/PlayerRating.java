@@ -43,7 +43,7 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
 
     private static final double GLICKO2_SCALE = 173.7178;
     
-    protected Integer playerId;
+    protected String playerId;
     protected double rating;
     protected double ratingDeviation;
     protected double ratingVolatility;
@@ -65,7 +65,7 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
       * @todo
       *     Should the player's id be passed in too?
       */
-    public PlayerRating(Integer playerId, double rating, double ratingDeviation, double ratingVolatility) {
+    public PlayerRating(String playerId, double rating, double ratingDeviation, double ratingVolatility) {
         this(playerId, rating, ratingDeviation, ratingVolatility, false);
     }
     
@@ -86,7 +86,7 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
       * @todo
       *     Should the player's id be passed in too?
       */
-    public PlayerRating(Integer playerId, double rating, double ratingDeviation, 
+    public PlayerRating(String playerId, double rating, double ratingDeviation, 
                         double ratingVolatility, boolean glicko2Scale) 
     {
         this.playerId = playerId;
@@ -106,7 +106,7 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
       * @return 
       *     An <code>Object</code> that uniquely identifies the player.
       */
-    public Integer getPlayerId() {
+    public String getPlayerId() {
         return playerId;
     }
 
@@ -316,7 +316,7 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
 		String texts[] = text.split(";");
 		int t = 0;
 
-		playerId = Integer.parseInt(texts[t++]);
+		playerId = texts[t++];
 		rating = Double.parseDouble(texts[t++]);
 		ratingDeviation = Double.parseDouble(texts[t++]);
 		ratingVolatility = Double.parseDouble(texts[t++]);

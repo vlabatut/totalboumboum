@@ -83,12 +83,12 @@ public class ConfigurationServerConnectionManager extends AbstractConnectionMana
 	}
 
 	@Override
-	public void profileRemoved(Integer id)
+	public void profileRemoved(String id)
 	{	fireProfileRemoved(id);
 	}
 
 	@Override
-	public void spriteChanged(Integer id, SpriteInfo sprite)
+	public void spriteChanged(String id, SpriteInfo sprite)
 	{	fireSpriteChanged(id,sprite);
 	}
 
@@ -97,12 +97,12 @@ public class ConfigurationServerConnectionManager extends AbstractConnectionMana
 			listener.profileAdded(profile);
 	}
 	
-	private void fireProfileRemoved(Integer id)
+	private void fireProfileRemoved(String id)
 	{	for(ConfigurationServerConnectionListener listener: listeners)
 			listener.profileRemoved(id);
 	}
 	
-	private void fireSpriteChanged(Integer id, SpriteInfo sprite)
+	private void fireSpriteChanged(String id, SpriteInfo sprite)
 	{	for(ConfigurationServerConnectionListener listener: listeners)
 			listener.spriteChanged(id,sprite);
 	}

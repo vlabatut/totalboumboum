@@ -71,14 +71,14 @@ public class ProfilesConfigurationSaver
 	
 	private static Element saveListElement(ProfilesConfiguration profilesConfiguration)
 	{	Element result = new Element(XmlNames.LIST);
-		HashMap<Integer,String> profiles = profilesConfiguration.getProfiles();
-		Iterator<Entry<Integer,String>> it = profiles.entrySet().iterator();
+		HashMap<String,String> profiles = profilesConfiguration.getProfiles();
+		Iterator<Entry<String,String>> it = profiles.entrySet().iterator();
 		while(it.hasNext())
-		{	Entry<Integer,String> entry = it.next();
-			String idStr = entry.getKey().toString();
+		{	Entry<String,String> entry = it.next();
+			String id = entry.getKey();
 			String name = entry.getValue();
 			Element element = new Element(XmlNames.PROFILE);
-			element.setAttribute(XmlNames.FILE,idStr);
+			element.setAttribute(XmlNames.FILE,id);
 			element.setAttribute(XmlNames.NAME,name);
 			result.addContent(element);
 		}
@@ -87,8 +87,8 @@ public class ProfilesConfigurationSaver
 
 	private static Element saveGeneralElement(ProfilesConfiguration profilesConfiguration)
 	{	Element result = new Element(XmlNames.GENERAL);
-		String lastProfile = Integer.toString(profilesConfiguration.getLastProfileIndex());
-		result.setAttribute(XmlNames.LAST,lastProfile);
+		//String lastProfile = Integer.toString(profilesConfiguration.getLastProfileIndex());
+		//result.setAttribute(XmlNames.LAST,lastProfile);
 		return result;
 	}
 }

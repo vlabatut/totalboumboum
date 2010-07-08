@@ -44,7 +44,7 @@ public abstract class StatisticBase implements Serializable
 	{	totalTime = 0;
 		// players
 		for(Profile p: holder.getProfiles())
-		{	Integer playerId = p.getId();
+		{	String playerId = p.getId();
 			playersIds.add(playerId);
 		}
 		// points
@@ -151,13 +151,13 @@ public abstract class StatisticBase implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final List<Integer> playersIds = new ArrayList<Integer>();
+	private final List<String> playersIds = new ArrayList<String>();
 
-	public List<Integer> getPlayersIds()
+	public List<String> getPlayersIds()
 	{	return playersIds;
 	}
 
-	public void addPlayerId(Integer playerId)
+	public void addPlayerId(String playerId)
 	{	playersIds.add(playerId);
 	}
 }

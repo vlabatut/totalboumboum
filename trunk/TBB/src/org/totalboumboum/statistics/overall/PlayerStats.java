@@ -38,7 +38,7 @@ import org.totalboumboum.tools.time.TimeUnit;
 public class PlayerStats implements Serializable
 {	private static final long serialVersionUID = 1L;
 
-	public PlayerStats(int playerID)
+	public PlayerStats(String playerID)
 	{	this.playerId = playerID;
 		reset();
 	}
@@ -57,9 +57,9 @@ public class PlayerStats implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYER ID		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int playerId;
+	private String playerId;
 
-	public int getPlayerId()
+	public String getPlayerId()
 	{	return playerId;
 	}
 
@@ -196,7 +196,7 @@ public class PlayerStats implements Serializable
 		int t = 0;
 
 		// misc
-		playerId = Integer.parseInt(texts[t++]);
+		playerId = texts[t++];
 		previousRank = Integer.parseInt(texts[t++]);
 		
 		// rounds

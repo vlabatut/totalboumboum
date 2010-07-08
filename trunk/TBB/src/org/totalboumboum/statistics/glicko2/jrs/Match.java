@@ -33,7 +33,7 @@ import java.io.Serializable;
 public class Match implements Comparable<Match>, Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer playerId;
+    private String playerId;
     private double rating;
     private double ratingDeviation;
     private double probabilityOfDraw;
@@ -50,7 +50,7 @@ public class Match implements Comparable<Match>, Serializable {
       *     The proability that the player requesting the match will 
       *     draw against the player being matched.
       */
-    Match(Integer playerId, double rating, double ratingDeviation, double probabilityOfDraw) {
+    Match(String playerId, double rating, double ratingDeviation, double probabilityOfDraw) {
         this.playerId = playerId;
         this.rating = rating;
         this.ratingDeviation = ratingDeviation;
@@ -95,7 +95,7 @@ public class Match implements Comparable<Match>, Serializable {
       * @return 
       *     A player id.
       */
-    public Integer getPlayerId() {
+    public String getPlayerId() {
         return playerId;
     }
 

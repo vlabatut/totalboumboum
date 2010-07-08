@@ -43,9 +43,9 @@ public class ProfilesSelectionSaver
 	{	Element result = new Element(XmlNames.PLAYER);
 		
 		// file name
-		int id = profilesSelection.getIds(index);
-		String idStr = Integer.toString(id);
-		result.setAttribute(XmlNames.FILE,idStr);
+		String id = profilesSelection.getIds(index);
+		//String idStr = Integer.toString(id);
+		result.setAttribute(XmlNames.FILE,id);
 		
 		// color
 		String color = profilesSelection.getColor(index).toString();

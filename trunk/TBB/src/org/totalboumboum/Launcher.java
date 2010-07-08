@@ -1427,5 +1427,8 @@ public class Launcher
 	 */
 	
 
-	//TODO set up the client side now, starting with the connection interface (a modal menu ?)		
+	//TODO set up the client side now, starting with the connection interface (a modal menu ?)
+	
+	//TODO profile id is a string and not an int anymore
+	//also string in "profile selection" (game config)
 }

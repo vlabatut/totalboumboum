@@ -77,7 +77,7 @@ public class Glicko2Saver
 			int total = 0;
 			int players = 0;
 			for(PlayerRating pr: playerRatings)
-			{	int playerId = (Integer)pr.getPlayerId();
+			{	String playerId = (String)pr.getPlayerId();
 				Profile profile = ProfileLoader.loadProfile(playerId);
 				double rating = pr.getRating();
 				double ratingDeviation = pr.getRatingDeviation();
@@ -98,10 +98,10 @@ public class Glicko2Saver
 		ResultsBasedRankingService result = new ResultsBasedRankingService();
 		
 		// get ids list
-	    List<Integer> idsList = ProfileLoader.getIdsList();
+	    List<String> idsList = ProfileLoader.getIdsList();
 
 		// register all existing players
-		for(Integer id: idsList)
+		for(String id: idsList)
 		{	if(verbose)
 				System.out.println(id);
 			result.registerPlayer(id);

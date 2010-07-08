@@ -72,7 +72,7 @@ public class ProfilesSelection
 	 * @param profile	the profile to be added
 	 */
 	public void addProfile(Profile profile)
-	{	int id = profile.getId();
+	{	String id = profile.getId();
 		ids.add(id);
 		PredefinedColor color = profile.getSpriteColor();
 		colors.add(color);
@@ -82,14 +82,14 @@ public class ProfilesSelection
 		heroes.add(hero);
 	}
 
-	public void addProfile(Integer id, PredefinedColor color, int controlsIndex, String hero[])
+	public void addProfile(String id, PredefinedColor color, int controlsIndex, String hero[])
 	{	ids.add(id);
 		colors.add(color);
 		controls.add(controlsIndex);
 		heroes.add(hero);
 	}
 	
-	public void removeProfile(Integer id)
+	public void removeProfile(String id)
 	{	int index = ids.indexOf(id);
 		ids.remove(index);
 		colors.remove(index);
@@ -97,7 +97,7 @@ public class ProfilesSelection
 		heroes.remove(index);
 	}
 	
-	public boolean containsProfile(Integer id)
+	public boolean containsProfile(String id)
 	{	boolean result = ids.contains(id);
 		return result;
 	}
@@ -110,9 +110,9 @@ public class ProfilesSelection
 	/////////////////////////////////////////////////////////////////
 	// IDs					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final List<Integer> ids = new ArrayList<Integer>();
+	private final List<String> ids = new ArrayList<String>();
 	
-	public Integer getIds(int index)
+	public String getIds(int index)
 	{	return ids.get(index);	
 	}	
 

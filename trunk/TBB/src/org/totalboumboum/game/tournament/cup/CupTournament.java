@@ -302,8 +302,8 @@ public class CupTournament extends AbstractTournament
 			Collections.sort(orderedProfile,new Comparator<Profile>()
 			{	@Override
 				public int compare(Profile o1, Profile o2)
-				{	int id1 = o1.getId();
-					int id2 = o2.getId();
+				{	String id1 = o1.getId();
+					String id2 = o2.getId();
 					RankingService rankingService = GameStatistics.getRankingService();
 					int r1 = rankingService.getPlayerRank(id1);
 					if(r1<0)

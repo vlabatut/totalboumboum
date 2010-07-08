@@ -88,7 +88,7 @@ public class StatisticTournament extends StatisticBase
 				count++;
 		boolean draw = count==1;
 		for(int i=0;i<matchRanks.length;i++)
-		{	Integer playerId = match.getPlayersIds().get(i);
+		{	String playerId = match.getPlayersIds().get(i);
 			int index = getPlayersIds().indexOf(playerId);
 			played[index]++;
 			if(matchRanks[i]>1)
@@ -104,7 +104,7 @@ public class StatisticTournament extends StatisticBase
 		{	long[] currentScores = getScores(score);
 			long[] matchScores = match.getScores(score);
 			for(int i=0;i<matchScores.length;i++)
-			{	Integer playerId = match.getPlayersIds().get(i);
+			{	String playerId = match.getPlayersIds().get(i);
 				int index = getPlayersIds().indexOf(playerId);
 				currentScores[index] = currentScores[index] + matchScores[i];			
 			}
@@ -113,7 +113,7 @@ public class StatisticTournament extends StatisticBase
 		// total
 		float[] matchPoints = match.getPoints();
 		for(int i=0;i<matchPoints.length;i++)
-		{	Integer playerId = match.getPlayersIds().get(i);
+		{	String playerId = match.getPlayersIds().get(i);
 			int index = getPlayersIds().indexOf(playerId);
 			getTotal()[index] = getTotal()[index] + matchPoints[i];
 		}

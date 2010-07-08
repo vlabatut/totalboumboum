@@ -407,7 +407,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 				// players
 				printWriter.println("Players: ");
 				for(AbstractPlayer player: players)
-				{	int id = player.getId();
+				{	String id = player.getId();
 					String name = player.getName();
 					String color = player.getColor().toString();
 					String type = "Human player";

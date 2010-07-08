@@ -337,13 +337,13 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener,
 	}
 
 	@Override
-	public synchronized void profileRemoved(Integer id)
+	public synchronized void profileRemoved(String id)
 	{	
 		playersData.refresh();
 	}
 
 	@Override
-	public synchronized void spriteChanged(Integer id, SpriteInfo sprite)
+	public synchronized void spriteChanged(String id, SpriteInfo sprite)
 	{	
 		playersData.refresh();
 	}

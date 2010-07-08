@@ -508,7 +508,7 @@ public abstract class VisibleLoop extends Loop
 				// players
 				printWriter.println("Players: ");
 				for(AbstractPlayer player: players)
-				{	int id = player.getId();
+				{	String id = player.getId();
 					String name = player.getName();
 					String color = player.getColor().toString();
 					String type = "Human player";

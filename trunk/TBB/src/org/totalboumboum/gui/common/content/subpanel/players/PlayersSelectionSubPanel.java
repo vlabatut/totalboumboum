@@ -234,7 +234,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			// rank
 			{	// content
 				RankingService rankingService = GameStatistics.getRankingService();
-				int playerId = profile.getId();
+				String playerId = profile.getId();
 				int rank = rankingService.getPlayerRank(playerId);
 				String text,tooltip;
 				if(rank<0)
@@ -474,7 +474,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					Iterator<Profile> it = players.iterator();
 					RankingService rankingService = GameStatistics.getRankingService();
 					Profile profile = players.get(index);
-					int playerId = profile.getId();
+					String playerId = profile.getId();
 					PlayerRating playerRating = rankingService.getPlayerRating(playerId);
 					if(playerRating==null)
 					{	while(it.hasNext())

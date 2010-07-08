@@ -42,7 +42,7 @@ import org.totalboumboum.tools.files.FilePaths;
 public class OverallStatsLoader
 {
 	@SuppressWarnings("unchecked")
-	public static HashMap<Integer,PlayerStats> loadOverallStatistics() throws IOException, ClassNotFoundException
+	public static HashMap<String,PlayerStats> loadOverallStatistics() throws IOException, ClassNotFoundException
 	{	// init path
 		String path = FilePaths.getOverallStatisticsPath()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_DATA;
 		
@@ -51,14 +51,14 @@ public class OverallStatsLoader
 		FileInputStream filein = new FileInputStream(file);
 		BufferedInputStream inBuff = new BufferedInputStream(filein);
 		ObjectInputStream in = new ObjectInputStream(inBuff);
-		HashMap<Integer,PlayerStats> result = (HashMap<Integer,PlayerStats>) in.readObject();
+		HashMap<String,PlayerStats> result = (HashMap<String,PlayerStats>) in.readObject();
 		in.close();
 		return result;		
 		// TODO: if problem while reading the file, should restaure and use the backup 
 	}
 
-	public static HashMap<Integer,PlayerStats> importOverallStatistics() throws FileNotFoundException
-	{	HashMap<Integer,PlayerStats> result = new HashMap<Integer, PlayerStats>();
+	public static HashMap<String,PlayerStats> importOverallStatistics() throws FileNotFoundException
+	{	HashMap<String,PlayerStats> result = new HashMap<String, PlayerStats>();
 	
 		// open the file
 		String path = FilePaths.getOverallStatisticsPath()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_TEXT;
@@ -70,7 +70,7 @@ public class OverallStatsLoader
 		
 		// read data
 		while(scanner.hasNextLine())
-		{	PlayerStats playerStats = new PlayerStats(0);
+		{	PlayerStats playerStats = new PlayerStats("");
 			playerStats.importFromText(scanner);
 			result.put(playerStats.getPlayerId(),playerStats);
 		}

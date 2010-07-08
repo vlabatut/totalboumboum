@@ -52,7 +52,7 @@ import org.xml.sax.SAXException;
 public class EditProfileMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, Integer profileId)
+	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, String profileId)
 	{	super(container, parent);
 		this.profile = profile;
 		this.profileId = profileId;
@@ -99,7 +99,7 @@ public class EditProfileMenu extends InnerMenuPanel
 	// PROFILE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Profile profile;
-	private Integer profileId;
+	private String profileId;
 
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER	/////////////////////////////////////////////
@@ -128,7 +128,7 @@ public class EditProfileMenu extends InnerMenuPanel
 				}
 			}
 			parent.refresh();
-			int id = profile.getId();
+			String id = profile.getId();
 			((SelectedProfileSplitPanel)parent).setSelectedProfile(id);
 			replaceWith(parent);
 	    }

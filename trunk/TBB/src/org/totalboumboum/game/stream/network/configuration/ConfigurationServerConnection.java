@@ -24,6 +24,7 @@ package org.totalboumboum.game.stream.network.configuration;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
+import java.util.UUID;
 
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.configuration.profile.SpriteInfo;
@@ -59,13 +60,13 @@ public class ConfigurationServerConnection extends AbstractConnection<Configurat
 		{	Profile profile = (Profile)data;
 			fireProfileAdded(profile);
 		}
-		else if(data instanceof Integer)
-		{	Integer id = (Integer)data;
+		else if(data instanceof UUID)
+		{	UUID id = (UUID)data;
 			fireProfileRemoved(id);
 		}
 		else if(data instanceof List)
 		{	List<Object> temp = (List<Object>)data;
-			Integer id = (Integer)temp.get(0);
+			String id = (String)temp.get(0);
 			SpriteInfo sprite = (SpriteInfo)temp.get(1);
 			fireSpriteChanged(id,sprite);
 		}
@@ -79,12 +80,12 @@ public class ConfigurationServerConnection extends AbstractConnection<Configurat
 			listener.profileAdded(profile);
 	}
 	
-	private void fireProfileRemoved(Integer id)
+	private void fireProfileRemoved(UUID id)
 	{	for(ConfigurationServerConnectionListener listener: listeners)
-			listener.profileRemoved(id);
+			listener.profileRemoved(id.toString());
 	}
 	
-	private void fireSpriteChanged(Integer id, SpriteInfo sprite)
+	private void fireSpriteChanged(String id, SpriteInfo sprite)
 	{	for(ConfigurationServerConnectionListener listener: listeners)
 			listener.spriteChanged(id,sprite);
 	}

@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -58,11 +59,11 @@ public class ProfilesConfiguration
 	{	ProfilesConfiguration result = new ProfilesConfiguration();
 		
 		// loaded profiles
-		Iterator<Entry<Integer,String>> it = profiles.entrySet().iterator();
+		Iterator<Entry<String,String>> it = profiles.entrySet().iterator();
 		while(it.hasNext())
-		{	Entry<Integer,String> entry = it.next();
+		{	Entry<String,String> entry = it.next();
 			String value = entry.getValue();
-			Integer key = entry.getKey();
+			String key = entry.getKey();
 			result.addProfile(key,value);
 		}
 		//
@@ -72,34 +73,24 @@ public class ProfilesConfiguration
 	/////////////////////////////////////////////////////////////////
 	// PROFILES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<Integer,String> profiles = new HashMap<Integer,String>();
-	private int lastProfileIndex = 0;
+	private HashMap<String,String> profiles = new HashMap<String,String>();
 
-	public HashMap<Integer,String> getProfiles()
+	public HashMap<String,String> getProfiles()
 	{	return profiles;	
 	}
 	
-	public void addProfile(Integer file, String name)
-	{	profiles.put(file,name);
+	public void addProfile(String id, String name)
+	{	profiles.put(id,name);
 	}
 	
-	public void removeProfile(int id)
+	public void removeProfile(String id)
 	{	profiles.remove(id);
 	}
-	
-	public int getLastProfileIndex()
-	{	return lastProfileIndex;
-	}
 
-	public void setLastProfileIndex(int lastProfileIndex)
-	{	this.lastProfileIndex = lastProfileIndex;
-	}
-	
-	public Integer createProfile(String name) throws IOException, ParserConfigurationException, SAXException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public String createProfile(String name) throws IOException, ParserConfigurationException, SAXException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// refresh counter
-		int lastProfile = getLastProfileIndex();
-		int nextProfile = lastProfile+1;
-		setLastProfileIndex(nextProfile);
+		UUID uuid = UUID.randomUUID();
+		String id = uuid.toString();
 		
 		// create profile
 		Profile newProfile = new Profile();
@@ -113,7 +104,7 @@ public class ProfilesConfiguration
 		spriteInfo.setColor(spriteColor);
 		
 		// create file
-		Integer id = nextProfile/*+FileTools.EXTENSION_DATA*/;			
+		//Integer id = nextProfile/*+FileTools.EXTENSION_DATA*/;
 		ProfileSaver.saveProfile(newProfile,id);
 		
 		// add/save in config
@@ -121,7 +112,7 @@ public class ProfilesConfiguration
 		ProfilesConfigurationSaver.saveProfilesConfiguration(this);
 		
 		// register in stats
-		GameStatistics.addPlayer(nextProfile);
+		GameStatistics.addPlayer(id);
 		
 		return id;
 	}
@@ -132,7 +123,7 @@ public class ProfilesConfiguration
 	 */
 	public void insertProfile(Profile profile) throws IOException, ParserConfigurationException, SAXException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// create file
-		Integer id = profile.getId();
+		String id = profile.getId();
 		if(!profiles.containsKey(id))
 		{	ProfileSaver.saveProfile(profile,id);
 			
@@ -147,7 +138,7 @@ public class ProfilesConfiguration
 	
 	public void deleteProfile(Profile profile) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// delete file
-		int id = profile.getId();
+		String id = profile.getId();
 		String path = FilePaths.getProfilesPath()+File.separator+id+FileNames.EXTENSION_XML;
 		File file = new File(path);
 		file.delete();
@@ -251,7 +242,7 @@ public class ProfilesConfiguration
 	public static ProfilesSelection getSelection(List<Profile> profiles)
 	{	ProfilesSelection result = new ProfilesSelection();
 		for(Profile p: profiles)
-		{	int id = p.getId();
+		{	String id = p.getId();
 			PredefinedColor color = p.getSpriteColor();
 			int controlsIndex = p.getControlSettingsIndex();
 			String[] hero = {p.getSpritePack(),p.getSpriteFolder()};
@@ -262,9 +253,9 @@ public class ProfilesConfiguration
 	
 	public static void randomlyCompleteProfiles(List<Profile> profiles, int number) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	// list of ids minus already selected players 
-		List<Integer> playersIds = ProfileLoader.getIdsList();
+		List<String> playersIds = ProfileLoader.getIdsList();
 		for(Profile profile: profiles)
-		{	Integer playerId = profile.getId();
+		{	String playerId = profile.getId();
 			playersIds.remove(playerId);
 		}
 		
@@ -272,7 +263,7 @@ public class ProfilesConfiguration
 		List<Profile> additionalProfiles = new ArrayList<Profile>();
 		for(int i=profiles.size();i<number;i++)
 		{	int index = (int)(Math.random()*playersIds.size());
-			int playerId = playersIds.get(index);
+			String playerId = playersIds.get(index);
 			playersIds.remove(index);
 			Profile profile = ProfileLoader.loadProfile(playerId);
 			additionalProfiles.add(profile);
@@ -313,20 +304,20 @@ public class ProfilesConfiguration
 
 	public static void rankCompleteProfiles(List<Profile> profiles, int number, Profile reference) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	// list of previously selected players
-		List<Integer> profilesIds = new ArrayList<Integer>();
+		List<String> profilesIds = new ArrayList<String>();
 		for(Profile profile: profiles)
 			profilesIds.add(profile.getId());
 		
 		// list of ids minus already selected players 
-		List<Integer> playersIds = ProfileLoader.getIdsList();
+		List<String> playersIds = ProfileLoader.getIdsList();
 		for(Profile profile: profiles)
-		{	Integer playerId = profile.getId();
+		{	String playerId = profile.getId();
 			playersIds.remove(playerId);
 		}
 
 		// process a list of related players
 		RankingService rankingService = GameStatistics.getRankingService();
-		int referenceId = reference.getId();
+		String referenceId = reference.getId();
 		Set<Match> matches = rankingService.getMatches(referenceId);
 		List<Profile> additionalProfiles = new ArrayList<Profile>();
 		int n = number - profiles.size();
@@ -334,7 +325,7 @@ public class ProfilesConfiguration
 		Iterator<Match> it = matches.iterator();
 		while(it.hasNext() && i<n)
 		{	Match match = it.next();
-			int opponentId = match.getPlayerId();
+			String opponentId = match.getPlayerId();
 			if(!profilesIds.contains(opponentId))
 			{	Profile profile = ProfileLoader.loadProfile(opponentId);
 				additionalProfiles.add(profile);			

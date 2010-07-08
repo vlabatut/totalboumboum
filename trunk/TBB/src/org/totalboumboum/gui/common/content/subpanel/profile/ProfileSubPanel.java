@@ -85,7 +85,7 @@ public class ProfileSubPanel extends TableSubPanel
 			keys.add(GuiKeys.COMMON_PROFILES_RANK);
 		
 		if(profile!=null)
-		{	int playerId = profile.getId();
+		{	String playerId = profile.getId();
 			// text
 			List<String> values = new ArrayList<String>();
 			if(showName)

@@ -36,7 +36,7 @@ import java.util.Scanner;
 class PairWiseGameResult implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    private Integer opponentId;
+    private String opponentId;
     
     /** The value of the game result. For example, 1 for a win and 0 for a loss. */
     private double score;
@@ -44,7 +44,7 @@ class PairWiseGameResult implements Serializable {
     /**
      * Creates a new instance of PairWiseGameResult
      */
-    PairWiseGameResult(Integer opponentId, double score) {
+    PairWiseGameResult(String opponentId, double score) {
         this.opponentId = opponentId;
         this.score = score;
     }
@@ -53,7 +53,7 @@ class PairWiseGameResult implements Serializable {
      * 
      * @return 
      */
-    Integer getOpponentId() {
+    String getOpponentId() {
         return opponentId;
     }
 
@@ -86,7 +86,7 @@ class PairWiseGameResult implements Serializable {
 		String texts[] = text.split(";");
 		int t = 0;
 		
-		opponentId = Integer.parseInt(texts[t++]);
+		opponentId = texts[t++];
 		score = Double.parseDouble(texts[t++]);
 	}
 }

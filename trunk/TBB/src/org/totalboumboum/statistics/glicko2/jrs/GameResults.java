@@ -43,27 +43,27 @@ public class GameResults implements Serializable {
       * <p>
       * <code>Map&lt;Object pid, Double score&gt;</code> 
       */
-    private HashMap<Integer,Double> playerResults;
+    private HashMap<String,Double> playerResults;
     
     /** A list of the teams' results, indexed by team id.
       * <p>
       * <code>Map&lt;Object tid, Double score&gt;</code> 
       */
-    private HashMap<Integer,Double> teamResults;
+    private HashMap<String,Double> teamResults;
     
     /** A list of the members of each team.
       * <p>
       * <code>Map&lt;Object tid, List&lt;Object pid&gt;&gt;</code>
       */
-    private HashMap<Integer,List<Integer>> teamMembers;
+    private HashMap<String,List<String>> teamMembers;
     
     /** Create an empty GameResults object. Use the <code>addPlayerResults</code>
       * methods to add each player's results.
       */
     public GameResults() {
-        playerResults = new HashMap<Integer, Double>();
-        teamResults = new HashMap<Integer, Double>();
-        teamMembers = new HashMap<Integer, List<Integer>>();
+        playerResults = new HashMap<String, Double>();
+        teamResults = new HashMap<String, Double>();
+        teamMembers = new HashMap<String, List<String>>();
     }
     
     /** Add the results for a player in a multiplayer game.
@@ -73,7 +73,7 @@ public class GameResults implements Serializable {
       * @param score 
       *     The player's individual score at the end of the game.
       */
-    public void addPlayerResults(Integer playerId, double score) {
+    public void addPlayerResults(String playerId, double score) {
         // In a multiplayer game, assign each player to their own team.
         addPlayerResults(playerId, playerId, score);
     }
@@ -93,14 +93,14 @@ public class GameResults implements Serializable {
       * scores of each of team's members. This can be override with
       * the <code>setTeamResult</code> method. </i>
       */
-    public void addPlayerResults(Integer teamId, Integer playerId, double score) {
+    public void addPlayerResults(String teamId, String playerId, double score) {
         
         // Add the player's results
         playerResults.put(playerId, new Double(score));
         
         // Add the player to the specified team
         if (teamMembers.get(teamId) == null) {
-            teamMembers.put(teamId, new ArrayList<Integer>());
+            teamMembers.put(teamId, new ArrayList<String>());
         }
         teamMembers.get(teamId).add(playerId);
         
@@ -123,7 +123,7 @@ public class GameResults implements Serializable {
       * @return 
       *     A Set of Objects representing the team ids.
       */
-    public Set<Integer> getTeams() {
+    public Set<String> getTeams() {
         return teamMembers.keySet();
     }
     
@@ -134,7 +134,7 @@ public class GameResults implements Serializable {
       * @return 
       *     The team's results for the game. 
       */
-    public double getTeamResults(Integer teamId) {
+    public double getTeamResults(String teamId) {
         Double teamResult = (Double)teamResults.get(teamId);
         if (teamResult == null) {
             return 0;
@@ -154,7 +154,7 @@ public class GameResults implements Serializable {
       * @param score 
       *     The team's result, or score.
       */
-    public void setTeamResults(Integer teamId, double score) {
+    public void setTeamResults(String teamId, double score) {
         teamResults.put(teamId, new Double(score));
     }
     
@@ -165,7 +165,7 @@ public class GameResults implements Serializable {
       * @return 
       *     A List of Objects representing the ids of the players on the team.
       */
-    public List<Integer> getTeamMembers(Integer teamId) {
+    public List<String> getTeamMembers(String teamId) {
         return teamMembers.get(teamId);
     }
     
@@ -174,7 +174,7 @@ public class GameResults implements Serializable {
       * @return 
       *     A Set of Objects representing the ids of the players.
       */
-    public Set<Integer> getPlayers() {
+    public Set<String> getPlayers() {
         return playerResults.keySet();
     }
     
@@ -185,7 +185,7 @@ public class GameResults implements Serializable {
       * @return 
       *     The player's results, or score.
       */
-    public double getPlayerResults(Integer playerId) {
+    public double getPlayerResults(String playerId) {
         return playerResults.get(playerId).doubleValue();
     }
 }
