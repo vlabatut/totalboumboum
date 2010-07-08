@@ -58,6 +58,18 @@ class PairWiseGameResult implements Serializable {
     }
 
     /**
+     * Change the opponent's id
+     * 
+     * @param	id
+     * 		the new id for the concerned opponent
+     * 
+     * @author Vincent Labatut
+     */
+    void setOpponentId(String id) {
+        opponentId = id;
+    }
+
+    /**
      * 
      * @return 
      */

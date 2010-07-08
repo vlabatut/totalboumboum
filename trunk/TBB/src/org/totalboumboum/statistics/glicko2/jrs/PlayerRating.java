@@ -102,13 +102,24 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
     }
     
     /** Get the Id of the player being rated.
-      * 
-      * @return 
-      *     An <code>Object</code> that uniquely identifies the player.
-      */
-    public String getPlayerId() {
-        return playerId;
-    }
+     * 
+     * @return 
+     *     An <code>Object</code> that uniquely identifies the player.
+     */
+   public String getPlayerId() {
+       return playerId;
+   }
+
+   /** Modify the Id of the player being rated.
+    * 
+    * @param	newId 
+    *     A <code>String</code> that uniquely identifies the player.
+    * 
+    * @author Vincent Labatut
+    */
+   public void setPlayerId(String newId)
+   {	this.playerId = newId;
+   }
 
     /** Get the mean rating of the player's skill.
       * 

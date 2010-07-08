@@ -57,7 +57,7 @@ import org.totalboumboum.statistics.GameStatistics;
   * The current implementation is based on the Glicko-2 algorithm, with 
   * extensions to support multiplayer and team based games.
   * <p>
-  * Note: contains some modifications by Vincent Labatut.
+  * Note: contains some modifications and additional methods by Vincent Labatut.
   *
   * @author Derek Hilder
   * @author Vincent Labatut
@@ -181,7 +181,7 @@ public class RankingService implements Serializable {
       *     A unique identifier for the player.
       *
       * @author
-      *     Vincent
+      *     Vincent Labatut
       */
     public void deregisterPlayer(String playerId)
     {	// get the list of opponents
@@ -191,7 +191,8 @@ public class RankingService implements Serializable {
     	{	String opponentId = result.getOpponentId();
     		set.add(opponentId);
     	}
-    	// remove the player in the opponentss' results
+    	
+    	// remove the player in the opponents' results
     	for(String opponentId: set)
     	{	PairWiseGameResultsList opponentResults = currentPeriodGameResults.get(opponentId);
     		Iterator<PairWiseGameResult> it = opponentResults.iterator();
@@ -201,10 +202,55 @@ public class RankingService implements Serializable {
     				it.remove();
     		}
     	}
+    	
     	// remove the player's ratings
     	playerRatings.remove(playerId);
+    	
     	// remove the player's results
     	currentPeriodGameResults.remove(playerId);
+    }
+    
+   /** Switch the player's old id to a new id, 
+     * wherever it is needed in the RankingService.
+     * 
+     * @param oldId
+     *		The player's previous identifier
+     * @param newId
+     *		The player's new identifier
+     *
+     * @author
+     *     Vincent Labatut
+     */
+    public void changePlayerId(String oldId, String newId)
+    {	// get the list of opponents
+    	Set<String> set = new HashSet<String>();
+    	PairWiseGameResultsList results = currentPeriodGameResults.get(oldId);
+    	for(PairWiseGameResult result: results)
+    	{	String opponentId = result.getOpponentId();
+    		set.add(opponentId);
+    	}
+    	
+    	// change the player's id in the opponents' results
+    	for(String opponentId: set)
+    	{	PairWiseGameResultsList opponentResults = currentPeriodGameResults.get(opponentId);
+    		Iterator<PairWiseGameResult> it = opponentResults.iterator();
+    		while(it.hasNext())
+    		{	PairWiseGameResult opponentResult = it.next();
+    			if(opponentResult.getOpponentId().equals(oldId))
+    				opponentResult.setOpponentId(newId);
+    		}
+    	}
+    	
+    	// change the player's id in the ratings
+    	PlayerRating playerRating = playerRatings.get(oldId);
+    	playerRating.setPlayerId(newId);
+    	playerRatings.remove(oldId);
+    	playerRatings.put(newId,playerRating);
+    	
+    	// change the player's id in the results
+    	PairWiseGameResultsList pairWiseGameResultsList = currentPeriodGameResults.remove(newId);
+    	currentPeriodGameResults.remove(oldId);
+    	currentPeriodGameResults.put(newId,pairWiseGameResultsList);
     }
     
     /** Get a list of the ids of the players registered with the service.
