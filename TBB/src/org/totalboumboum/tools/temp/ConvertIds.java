@@ -1,20 +1,26 @@
+package org.totalboumboum.tools.temp;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.totalboumboum.statistics.glicko2.Glicko2Loader;
+import org.totalboumboum.statistics.glicko2.Glicko2Saver;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.OverallStatsLoader;
+import org.totalboumboum.statistics.overall.OverallStatsSaver;
 import org.totalboumboum.statistics.overall.PlayerStats;
+import org.xml.sax.SAXException;
 
 
-public class GenerateUUID
+public class ConvertIds
 {
 
-	public static void main(String[] args) throws IOException, ClassNotFoundException
+	public static void main(String[] args) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{
 		/*
 		// generate new ids
@@ -41,11 +47,17 @@ public class GenerateUUID
 			String newId = uuid.toString();
 			// player stats
 			PlayerStats playerStats = playersStats.get(oldId);
+			playerStats.setPlayerId(newId);
 			playersStats.remove(oldId);
 			playersStats.put(newId,playerStats);
 			// glicko stats
-			glicko2Stats.changePlayerId(oldId,newId);
+			if(glicko2Stats.getPlayers().contains(oldId))
+				glicko2Stats.changePlayerId(oldId,newId);
 		}
+
+		// save
+		OverallStatsSaver.saveOverallStatistics(playersStats);
+		Glicko2Saver.saveGlicko2Statistics(glicko2Stats);		
 	}
 	
 	public static HashMap<String,UUID> getUUIDs()

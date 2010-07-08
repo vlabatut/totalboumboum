@@ -187,9 +187,11 @@ public class RankingService implements Serializable {
     {	// get the list of opponents
     	Set<String> set = new HashSet<String>();
     	PairWiseGameResultsList results = currentPeriodGameResults.get(playerId);
-    	for(PairWiseGameResult result: results)
-    	{	String opponentId = result.getOpponentId();
-    		set.add(opponentId);
+    	if(results!=null)
+    	{	for(PairWiseGameResult result: results)
+	    	{	String opponentId = result.getOpponentId();
+	    		set.add(opponentId);
+	    	}
     	}
     	
     	// remove the player in the opponents' results
@@ -225,9 +227,11 @@ public class RankingService implements Serializable {
     {	// get the list of opponents
     	Set<String> set = new HashSet<String>();
     	PairWiseGameResultsList results = currentPeriodGameResults.get(oldId);
-    	for(PairWiseGameResult result: results)
-    	{	String opponentId = result.getOpponentId();
-    		set.add(opponentId);
+    	if(results!=null)
+    	{	for(PairWiseGameResult result: results)
+	    	{	String opponentId = result.getOpponentId();
+	    		set.add(opponentId);
+	    	}
     	}
     	
     	// change the player's id in the opponents' results
@@ -248,9 +252,11 @@ public class RankingService implements Serializable {
     	playerRatings.put(newId,playerRating);
     	
     	// change the player's id in the results
-    	PairWiseGameResultsList pairWiseGameResultsList = currentPeriodGameResults.remove(newId);
-    	currentPeriodGameResults.remove(oldId);
-    	currentPeriodGameResults.put(newId,pairWiseGameResultsList);
+    	PairWiseGameResultsList pairWiseGameResultsList = currentPeriodGameResults.get(oldId);
+    	if(pairWiseGameResultsList!=null)
+    	{	currentPeriodGameResults.remove(oldId);
+    		currentPeriodGameResults.put(newId,pairWiseGameResultsList);
+    	}
     }
     
     /** Get a list of the ids of the players registered with the service.
