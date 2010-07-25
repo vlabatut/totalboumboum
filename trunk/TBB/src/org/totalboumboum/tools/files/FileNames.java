@@ -88,6 +88,7 @@ public class FileNames
 	public static final String FILE_GRAPHICS = "graphics";
 	public static final String FILE_HERO = "hero";
 	public static final String FILE_HEROES = "heroes";
+	public static final String FILE_HOSTS = "hosts";
 	public static final String FILE_INSTANCES = "instances";
 	public static final String FILE_ITEM = "item";
 	public static final String FILE_ITEMS = "items";

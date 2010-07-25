@@ -129,4 +129,7 @@ public class FilePaths
 	public static String getOverallStatisticsPath()
 	{	return getStatisticsPath()+File.separator+FileNames.FILE_OVERALL;		
 	}
+	public static String getHostsStatisticsPath()
+	{	return getStatisticsPath()+File.separator+FileNames.FILE_HOSTS;		
+	}
 }
