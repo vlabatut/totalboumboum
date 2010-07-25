@@ -22,18 +22,15 @@ package org.totalboumboum.game.network.host;
  */
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.InetAddress;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.engine.content.sprite.SpritePreview;
-import org.totalboumboum.engine.content.sprite.SpritePreviewLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;
@@ -47,153 +44,49 @@ import org.xml.sax.SAXException;
  */
 public class HostsLoader
 {	
-	public static List<Profile> loadProfiles(ProfilesSelection profilesSelection) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	List<Profile> result = new ArrayList<Profile>();
-		int size = profilesSelection.getProfileCount();
-		for(int i=0;i<size;i++)
-		{	// profile
-			String id = profilesSelection.getIds(i);
-			Profile profile = loadProfile(id);
-			SpriteInfo selectedSprite = profile.getSelectedSprite();
-			// sprite
-			String packName = profilesSelection.getHero(i)[0];
-			selectedSprite.setPack(packName);
-			String folderName = profilesSelection.getHero(i)[1];
-			selectedSprite.setFolder(folderName);
-			SpritePreview heroPreview = SpritePreviewLoader.loadHeroPreviewOnlyName(packName,folderName);
-			selectedSprite.setName(heroPreview.getName());
-			// color
-			selectedSprite.setColor(profilesSelection.getColor(i));
-			// controls
-			int controlsIndex = profilesSelection.getControlsIndex(i);
-			profile.setControlSettingsIndex(controlsIndex);
-			// result
-			reloadPortraits(profile);
-			result.add(profile);
-		}
+	public static HashMap<String,HostInfo> loadHosts() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	
+		HashMap<String,HostInfo> result = new HashMap<String,HostInfo>();
+		File dataFile = new File(FilePaths.getHostsStatisticsPath()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_XML);
+		String schemaFolder = FilePaths.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_HOSTS+FileNames.EXTENSION_SCHEMA);
+		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		loadHostsElement(root,result);
 		return result;
 	}
 
-	public static HashMap<String,Profile> loadProfiles(List<String> playersIds) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	HashMap<String,Profile> result = new HashMap<String, Profile>();
-		for(String playerId: playersIds)
-		{	Profile profile = loadProfile(playerId);
-			result.put(playerId,profile);
+	private static void loadHostsElement(Element root, HashMap<String,HostInfo> result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	@SuppressWarnings("unchecked")
+		List<Element> elements = root.getChildren(XmlNames.HOST);
+		Iterator<Element> i = elements.iterator();
+		while(i.hasNext())
+		{	Element temp = i.next();
+			HostInfo host = loadHostElement(temp);
+			result.put(host.getId(),host);
 		}
-		return result;
 	}
 	
-	public static Profile loadProfile(String id) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	String profilesFolder = FilePaths.getProfilesPath();
-		File dataFile = new File(profilesFolder+File.separator+id+FileNames.EXTENSION_XML);
-		String schemaFolder = FilePaths.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_PROFILE+FileNames.EXTENSION_SCHEMA);
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		Profile result = new Profile();
-		result.setId(id);
-		loadProfileElement(root,result);
-		return result;
-	}
+	private static HostInfo loadHostElement(Element root) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	HostInfo result = new HostInfo();
 	
-	private static void loadProfileElement(Element root, Profile result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	// general properties
-    	Element general = root.getChild(XmlNames.GENERAL);
-		loadGeneralElement(general,result);
+		// id
+    	String id = root.getAttribute(XmlNames.ID).getValue();
+    	result.setName(id);
 		
-		// artificial intelligence
-		Element ai = root.getChild(XmlNames.AI);
-		if(ai!=null)
-			loadAiElement(ai,result);
-		
-		// sprite info
-		Element character = root.getChild(XmlNames.CHARACTER);
-		loadSpriteElement(character,result);
-	}
-    
-    private static void loadGeneralElement(Element root, Profile result)
-    {	// name
+		// name
     	String name = root.getAttribute(XmlNames.NAME).getValue();
     	result.setName(name);
-    }
-    
-    private static void loadAiElement(Element root, Profile result)
-    {	// name
-    	String name = root.getAttribute(XmlNames.NAME).getValue();
-    	result.setAiName(name.trim());
-    	
-    	// pack
-    	String packname = root.getAttribute(XmlNames.PACK).getValue();
-    	result.setAiPackname(packname.trim());
-    }
-    
-    private static void loadSpriteElement(Element root, Profile result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	// packname
-    	String spritePackname = root.getAttribute(XmlNames.PACKNAME).getValue();
-    	result.getDefaultSprite().setPack(spritePackname);
-    	
-    	// folder
-    	String spriteFolder = root.getAttribute(XmlNames.NAME).getValue();
-    	result.getDefaultSprite().setFolder(spriteFolder);
-    	
-    	// name
-    	SpritePreview heroPreview = new SpritePreview();
-		heroPreview = SpritePreviewLoader.loadHeroPreviewOnlyName(spritePackname,spriteFolder);
-		String spriteName = heroPreview.getName();
-		result.getDefaultSprite().setName(spriteName);
-    	
-		// color
-		String spriteDefaultColorStr = root.getAttribute(XmlNames.COLOR).getValue().trim().toUpperCase(Locale.ENGLISH);
-    	PredefinedColor spriteDefaultColor = PredefinedColor.valueOf(spriteDefaultColorStr);
-    	result.getDefaultSprite().setColor(spriteDefaultColor);
 		
-    	// portraits
-    	PredefinedColor spriteColor = result.getSpriteColor();
-    	String packName = result.getSpritePack();
-    	String folderName = result.getSpriteFolder();
-		loadPortraits(result,packName,folderName,spriteColor);
-    }	        
-
-    public static void reloadPortraits(Profile profile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String spritePackname = profile.getSpritePack();
-		String spriteFoldername = profile.getSpriteFolder();
-		PredefinedColor spriteColor = profile.getSpriteColor();
-		loadPortraits(profile,spritePackname,spriteFoldername,spriteColor);
-    }
-    
-    private static void loadPortraits(Profile profile, String spritePackname, String spriteFoldername, PredefinedColor spriteColor) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String folder = FilePaths.getHeroesPath() + File.separator + spritePackname;
-		folder = folder + File.separator + spriteFoldername;
-		Portraits portraits = PortraitsLoader.loadPortraits(folder,spriteColor);
-		profile.setPortraits(portraits);
-    }
-    
-    public static List<String> getIdsList()
-    {	List<String> result = new ArrayList<String>();
-    	
-    	// get folder
-    	String folderStr = FilePaths.getProfilesPath();
-		File folder = new File(folderStr);
-		FileFilter filter = new FileFilter()
-		{	@Override
-			public boolean accept(File pathname)
-			{	String name = pathname.getName();
-				int length = name.length();
-				int extLength = FileNames.EXTENSION_XML.length();
-				String ext = name.substring(length-extLength,length);
-				return ext.equalsIgnoreCase(FileNames.EXTENSION_XML);
-			}			
-		};
+		// use
+    	String useStr = root.getAttribute(XmlNames.USE).getValue();
+    	int use = Integer.parseInt(useStr);
+    	result.setUses(use);
 		
-		// get files
-		File[] files = folder.listFiles(filter);
-		for(File file: files)
-		{	int length = file.getName().length();
-			int extLength = FileNames.EXTENSION_XML.length();
-			String id = file.getName().substring(0,length-extLength);
-			//int id = Integer.parseInt(idStr);
-			result.add(id);
-		}
-    
+		// last IP
+    	String ipStr = root.getAttribute(XmlNames.LAST_IP).getValue();
+    	InetAddress ip = InetAddress.getByName(ipStr);
+    	result.setLastIp(ip);
+    	
     	return result;
-    }
+	}
 }
