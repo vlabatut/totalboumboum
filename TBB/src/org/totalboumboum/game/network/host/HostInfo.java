@@ -21,19 +21,15 @@ package org.totalboumboum.game.network.host;
  * 
  */
 
-import java.io.Serializable;
 import java.net.InetAddress;
-
-import org.totalboumboum.game.tournament.AbstractTournament;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class HostInfo implements Serializable
-{	private static final long serialVersionUID = 1L;
-
+public class HostInfo
+{	
 	/////////////////////////////////////////////////////////////////
 	// ID					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
