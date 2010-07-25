@@ -1,4 +1,4 @@
-package org.totalboumboum.game.network.host;
+package org.totalboumboum.game.network.game;
 
 /*
  * Total Boum Boum
