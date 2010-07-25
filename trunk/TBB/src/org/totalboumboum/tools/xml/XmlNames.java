@@ -147,7 +147,10 @@ public class XmlNames
 	public static final String HERO = "hero";
 	public static final String HEROES = "heroes";
 	public static final String HIDE_ALLAIS = "hideAllAis";
+	public static final String HOST = "host";
+	public static final String HOSTS = "hosts";
 	public static final String HUMAN = "human";
+	public static final String ID = "id";
 	public static final String IMAGE = "image";
 	public static final String IMAGES = "images";
 	public static final String INCLUDE_QUICKSTARTS = "includeQuickStarts";
@@ -163,6 +166,7 @@ public class XmlNames
 	public static final String KIND = "kind";
 	public static final String LANGUAGE = "language";
 	public static final String LAST = "last";
+	public static final String LAST_IP = "lastIp";
 	public static final String LAST_STANDING = "lastStanding";
 	public static final String LEFTCOL = "leftCol";
 	public static final String LEG = "leg";
@@ -306,6 +310,7 @@ public class XmlNames
 	public static final String UNIFORM = "uniform";
 	public static final String UPLINE = "upLine";
 	public static final String UPS = "ups";
+	public static final String USE = "use";
 	public static final String USE_LAST_PLAYERS = "useLastPlayers";
 	public static final String USE_LAST_LEVELS = "useLastLevels";
 	public static final String USE_LAST_SETTINGS = "useLastSettings";

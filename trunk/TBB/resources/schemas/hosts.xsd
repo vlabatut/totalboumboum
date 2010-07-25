@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_ipaddress.xsd"/>
+
+	<xsd:complexType name="tHost">
+		<xsd:attribute name="id" type="xsd:string" use="required" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="use" type="xsd:integer" use="required" />
+		<xsd:attribute name="lastIp" type="ipAddress" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tHosts">
+		<xsd:sequence>
+			<xsd:element name="host" type="tHost" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="hosts" type="tHosts" />
+
+</xsd:schema>

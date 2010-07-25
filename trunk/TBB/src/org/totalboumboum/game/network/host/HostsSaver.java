@@ -23,6 +23,7 @@ package org.totalboumboum.game.network.host;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
@@ -37,68 +38,47 @@ import org.totalboumboum.tools.xml.XmlTools;
  */
 public class HostsSaver
 {	
-	public static void saveProfile(Profile profile, String id) throws IOException
+	public static void saveHosts(HashMap<String,HostInfo> hosts) throws IOException
 	{	// build document
-		Element root = saveProfileElement(profile);	
+		Element root = saveHostsElement(hosts);
+		
 		// save file
-		String file = FilePaths.getProfilesPath()+File.separator+id+FileNames.EXTENSION_XML;
-		File dataFile = new File(file);
+		File dataFile = new File(FilePaths.getHostsStatisticsPath()+File.separator+FileNames.FILE_STATISTICS+FileNames.EXTENSION_XML);
 		String schemaFolder = FilePaths.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_PROFILE+FileNames.EXTENSION_SCHEMA);
+		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_HOSTS+FileNames.EXTENSION_SCHEMA);
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
-	private static Element saveProfileElement(Profile profile)
-	{	Element result = new Element(XmlNames.PROFILE);
+	private static Element saveHostsElement(HashMap<String,HostInfo> hosts)
+	{	Element result = new Element(XmlNames.HOST);
 		
-		// general properties
-		Element generalElement = saveGeneralElement(profile);
-		result.addContent(generalElement);
-		
-		// artificial intelligence
-		if(profile.hasAi())
-		{	Element aiElement = saveAiElement(profile);
-			result.addContent(aiElement);
+		for(HostInfo host: hosts.values())
+		{	Element hostElement = saveHostElement(host);
+			result.addContent(hostElement);
 		}
 		
-		// sprite info
-		Element characterElement = saveCharacterElement(profile);
-		result.addContent(characterElement);
+		return result;
+	}
+	
+	private static Element saveHostElement(HostInfo host)
+	{	Element result = new Element(XmlNames.HOST);
 		
-		return result;
-	}
-	
-	private static Element saveGeneralElement(Profile profile)
-	{	Element result = new Element(XmlNames.GENERAL);
-		String name = profile.getName();
-		result.setAttribute(XmlNames.NAME,name);
-		return result;
-	}
-
-	private static Element saveAiElement(Profile profile)
-	{	Element result = new Element(XmlNames.AI);
+		// id
+		String id = host.getId();
+		result.setAttribute(XmlNames.ID,id);
+		
 		// name
-		String name = profile.getAiName();
+		String name = host.getName();
 		result.setAttribute(XmlNames.NAME,name);
-		// pack
-		String packname = profile.getAiPackname();
-		result.setAttribute(XmlNames.PACK,packname);
-		//
-		return result;
-	}
+		
+		// use
+		String use = Integer.toString(host.getUses());
+		result.setAttribute(XmlNames.USE,use);
+		
+		// last IP
+		String ip = host.getLastIp().getHostAddress();
+		result.setAttribute(XmlNames.LAST_IP,ip);
 	
-	private static Element saveCharacterElement(Profile profile)
-	{	Element result = new Element(XmlNames.CHARACTER);
-		// name
-		String name = profile.getSpriteFolder();
-		result.setAttribute(XmlNames.NAME,name);
-		// pack
-		String packname = profile.getSpritePack();
-		result.setAttribute(XmlNames.PACKNAME,packname);
-		// colors
-		String defaultColor = profile.getDefaultSprite().getColor().toString();
-		result.setAttribute(XmlNames.COLOR,defaultColor);
-		//
 		return result;
 	}
 }
