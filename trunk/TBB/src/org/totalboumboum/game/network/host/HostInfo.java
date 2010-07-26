@@ -87,15 +87,28 @@ public class HostInfo
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// STATE				/////////////////////////////////////////
+	// TYPE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HostType type = HostType.DIRECT;
+	private HostConnection type = HostConnection.DIRECT;
 	
-	public HostType getType()
+	public HostConnection getType()
 	{	return type;
 	}
 
-	public void setType(HostType type)
+	public void setType(HostConnection type)
 	{	this.type = type;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STATE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HostState state = HostState.CHECKING;
+	
+	public HostState getState()
+	{	return state;
+	}
+
+	public void setState(HostState state)
+	{	this.state = state;
 	}
 }
