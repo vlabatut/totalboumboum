@@ -163,8 +163,7 @@ public class PathFinder {
 		tree=null;//on vide l'arbre.
 	}
 	
-	@SuppressWarnings("unchecked")
-
+	@SuppressWarnings({ "unchecked", "unused" })
 	public LinkedList <AiTile> getPath() throws StopRequestException
 	{	source.checkInterruption(); //Appel Obligatoire
 		//On doit renverser la file

@@ -42,6 +42,7 @@ public class Target {
 	 * @param tile
 	 * @throws StopRequestException
 	 */
+	@SuppressWarnings("unused")
 	void findClosest(AiTile tile) throws StopRequestException {
 		as.checkInterruption();
 

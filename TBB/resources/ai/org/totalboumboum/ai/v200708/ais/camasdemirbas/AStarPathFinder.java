@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v200708.ais.camasdemirbas.ManhattanHeuristic;
  */
 @SuppressWarnings("unchecked")
 public class AStarPathFinder implements PathFinder {
+	@SuppressWarnings("rawtypes")
 	private List closed = new ArrayList();
 	private SortedList open = new SortedList();
 	
@@ -268,6 +269,7 @@ public class AStarPathFinder implements PathFinder {
 	 */
 	private class SortedList {
 		/** La liste d'éléments */
+		@SuppressWarnings("rawtypes")
 		private List list = new ArrayList();
 		
 		/**
@@ -329,6 +331,7 @@ public class AStarPathFinder implements PathFinder {
 	 * Un noeud seul dans le graphique de recherche
 	 */
 	
+	@SuppressWarnings("rawtypes")
 	private class Node implements Comparable {
 		private int x;
 		private int y;

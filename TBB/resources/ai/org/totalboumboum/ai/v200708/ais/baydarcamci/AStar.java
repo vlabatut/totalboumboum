@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v200708.ais.baydarcamci;
 
-
 import java.util.*;
 
 /**
@@ -134,6 +133,7 @@ public class AStar implements PathFinder {
 		Node child; // used after the search for the application to view the search in reverse
 
 		int g; // cost of this node + it's predecessors
+		@SuppressWarnings("unused")
 		int h; // heuristic estimate of distance to goal
 //		int f; // sum of cumulative cost of predecessors and self and heuristic
 
