@@ -12,10 +12,10 @@ import java.util.List;
  */
 public class HanciTprkSortedList {
 	/** The list of elements */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private List list = new ArrayList();
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public HanciTprkSortedList() {
 		super();
 		this.list = new ArrayList();

@@ -208,7 +208,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	/////////////////////////////////////////////////////////////////
 	private List<String> playersIds;
 	private HashMap<String,Profile> profilesMap;
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private HashMap<String,List<Comparable>> playersScores = new HashMap<String, List<Comparable>>();
 	private int currentPage = 0;
 	private final List<TableSubPanel> listPanels = new ArrayList<TableSubPanel>();
@@ -239,7 +239,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		sortCriterion.updateValues(this,playersScores,rankingService,profilesMap);
 		playersIds = new ArrayList<String>(profilesMap.keySet());
 		Collections.sort(playersIds,new Comparator<String>()
-		{	@SuppressWarnings("unchecked")
+		{	@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
 			public int compare(String playerId1, String playerId2)
 			{	int result = 0;

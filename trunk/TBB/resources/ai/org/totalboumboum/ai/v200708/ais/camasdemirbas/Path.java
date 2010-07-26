@@ -15,6 +15,7 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class Path {
 	/** La liste d'étapes développant ce chemin */
+	@SuppressWarnings("rawtypes")
 	private List steps = new ArrayList();
 	
 	/**

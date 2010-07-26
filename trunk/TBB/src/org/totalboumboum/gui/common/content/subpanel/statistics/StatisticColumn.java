@@ -431,7 +431,7 @@ public enum StatisticColumn
 			colWidths[col] = temp;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public void updateValues(PlayerStatisticSubPanel container, HashMap<String,List<Comparable>> playersScores, RankingService rankingService, HashMap<String,Profile> profilesMap)
 	{	playersScores.clear();
 		for(Entry<String,Profile> entry: profilesMap.entrySet())
