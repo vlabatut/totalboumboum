@@ -89,13 +89,13 @@ public class HostInfo
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HostConnection type = HostConnection.DIRECT;
+	private HostType type = HostType.DIRECT;
 	
-	public HostConnection getType()
+	public HostType getType()
 	{	return type;
 	}
 
-	public void setType(HostConnection type)
+	public void setType(HostType type)
 	{	this.type = type;
 	}
 

@@ -26,7 +26,7 @@ package org.totalboumboum.game.network.host;
  * @author Vincent Labatut
  *
  */
-public enum HostConnection
+public enum HostType
 {	
 	DIRECT,
 	CENTRAL;
