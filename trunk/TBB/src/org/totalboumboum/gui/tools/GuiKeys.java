@@ -74,6 +74,7 @@ public class GuiKeys
 	public static final String BUTTON = "Button";
 	public static final String CACHE = "Cache";
 	public static final String CANCEL = "Cancel";
+	public static final String CENTRAL = "Central";
 	public static final String CHANGE = "Change";
 	public static final String COLOR = "Color";
 	public static final String COLORS = "Colors";
@@ -99,6 +100,7 @@ public class GuiKeys
 	public static final String DEVIATION = "Deviation";
 	public static final String DIALOG = "Dialog";
 	public static final String DIMENSION = "Dimension";
+	public static final String DIRECT = "Direct";
 	public static final String DISABLED = "Disabled";
 	public static final String DISCRETIZE = "Discretize";
 	public static final String DISPLAY = "Display";
@@ -137,6 +139,7 @@ public class GuiKeys
 	public static final String HERO = "Hero";
 	public static final String HEROES = "Heroes";
 	public static final String HIDE = "Hide";
+	public static final String HOST = "Host";
 	public static final String HUMAN = "Human";
 	public static final String IMAGE = "Image";
 	public static final String INCLUDE = "Include";
@@ -145,6 +148,7 @@ public class GuiKeys
 	public static final String INSTANCE = "Instance";
 	public static final String INSTANCES = "Instances";
 	public static final String INVERTED = "Inverted";
+	public static final String IP = "Ip";
 	public static final String ITEMS = "Items";
 	public static final String ITEMSET = "Itemset";
 	public static final String LANGUAGE = "Language";
@@ -990,6 +994,15 @@ public class GuiKeys
 	public static final String COMMON_DIALOG = COMMON+DIALOG;
 	public static final String COMMON_DIALOG_CANCEL = COMMON_DIALOG+CANCEL;
 	public static final String COMMON_DIALOG_CONFIRM = COMMON_DIALOG+CONFIRM;
+
+	/* HOST */
+	public static final String COMMON_HOST = COMMON+HOST;
+	public static final String COMMON_HOST_IP = COMMON_HOST+IP;
+	public static final String COMMON_HOST_NAME = COMMON_HOST+NAME;
+	public static final String COMMON_HOST_PLAYED = COMMON_HOST+PLAYED;
+	public static final String COMMON_HOST_TYPE = COMMON_HOST+TYPE;
+		public static final String COMMON_HOST_TYPE_CENTRAL = COMMON_HOST_TYPE+CENTRAL;
+		public static final String COMMON_HOST_TYPE_DIRECT = COMMON_HOST_TYPE+DIRECT;
 
 	/* ITEMS */
 	public static final String COMMON_ITEMS = COMMON+ITEMS;

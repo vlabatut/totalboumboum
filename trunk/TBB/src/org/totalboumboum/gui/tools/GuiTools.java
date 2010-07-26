@@ -314,6 +314,13 @@ public class GuiTools
 	
 	private static void initHeaderImages()
 	{	String baseFolder = GuiFileTools.getHeadersPath()+File.separator;
+		// address
+		{	String folder = baseFolder+GuiFileTools.FILE_ADDRESS;
+			String[] uses =
+			{	GuiKeys.COMMON_HOST_IP
+			};
+			loadTableImages(folder,uses);
+		}
 		// author
 		{	String folder = baseFolder+GuiFileTools.FILE_AUTHOR;
 			String[] uses =
@@ -381,7 +388,8 @@ public class GuiTools
 				GuiKeys.COMMON_ARCHIVE_CONFRONTATIONS,
 				GuiKeys.COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_ROUND_COUNT,
 				GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_PLAYED,
-				GuiKeys.COMMON_RESULTS_TOURNAMENT_HEADER_PLAYED
+				GuiKeys.COMMON_RESULTS_TOURNAMENT_HEADER_PLAYED,
+				GuiKeys.COMMON_HOST_PLAYED
 			};
 			loadTableImages(folder,uses);
 		}
@@ -730,7 +738,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_LEVEL_SOURCE,
 				GuiKeys.COMMON_SPRITE_SOURCE,
-				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE
+				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE,
+				GuiKeys.COMMON_HOST_TYPE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -786,7 +795,8 @@ public class GuiTools
 				GuiKeys.COMMON_MATCH_NAME,
 				GuiKeys.COMMON_ROUND_TITLE,
 				GuiKeys.COMMON_TOURNAMENT_NAME,
-				GuiKeys.COMMON_ARCHIVE_NAME
+				GuiKeys.COMMON_ARCHIVE_NAME,
+				GuiKeys.COMMON_HOST_NAME
 			};
 			loadTableImages(folder,uses);
 		}

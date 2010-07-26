@@ -764,6 +764,18 @@
 			<text name="Confirm" value="Confirmer"  tooltip="Confirmer l'opération et fermer cette fenêtre" />
 		</group>
 								
+<!-- HOST -->
+		<group name="Host" >
+			<text name="Ip" value="IP" tooltip="Dernière adresse de l'hôte" />
+			<text name="Name" value="Nom" tooltip="Nom de l'hôte" />
+			<text name="Played" value="Joués" tooltip="Nombre de parties jouées sur cet hôte" />
+			<text name="Type" value="Type" tooltip="Type de connexion (central ou direct)" />
+			<group name="Type" >
+				<text name="Central" value="Central" tooltip="Hôte accessible via le central" />
+				<text name="Direct" value="Direct" tooltip="Hôte accessible directement" />
+			</group>
+		</group>
+		
 <!-- ITEMS -->
 		<group name="Items">
 			<group name="Available">
