@@ -34,6 +34,7 @@ public class GuiFileTools
 	public static final String EXTENSION_DATA = ".xml";
 
 	// files
+	public final static String FILE_ADDRESS = "address";
 	public final static String FILE_AUTHOR = "author.png";
 	public final static String FILE_AUTOFIRE = "autofire.png";
 	public final static String FILE_AVERAGE = "average.png";

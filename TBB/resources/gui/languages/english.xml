@@ -766,6 +766,18 @@
 			<text name="Confirm" value="Confirm"  tooltip="Confirme the ongoing operation and close this window" />
 		</group>
 								
+<!-- HOST -->
+		<group name="Host" >
+			<text name="Ip" value="IP" tooltip="Last address for this host" />
+			<text name="Name" value="Name" tooltip="Host name" />
+			<text name="Played" value="Played" tooltip="Number of games played on this host" />
+			<text name="Type" value="Type" tooltip="Connection type (central or direct)" />
+			<group name="Type" >
+				<text name="Central" value="Central" tooltip="Central connection" />
+				<text name="Direct" value="Direct" tooltip="Direct connection" />
+			</group>
+		</group>
+		
 <!-- ITEMS -->
 		<group name="Items">
 			<group name="Available">
