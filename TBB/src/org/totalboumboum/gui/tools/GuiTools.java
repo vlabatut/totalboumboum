@@ -317,7 +317,7 @@ public class GuiTools
 		// address
 		{	String folder = baseFolder+GuiFileTools.FILE_ADDRESS;
 			String[] uses =
-			{	GuiKeys.COMMON_HOST_IP
+			{	GuiKeys.COMMON_HOST_INFO_IP
 			};
 			loadTableImages(folder,uses);
 		}
@@ -389,7 +389,7 @@ public class GuiTools
 				GuiKeys.COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_ROUND_COUNT,
 				GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_PLAYED,
 				GuiKeys.COMMON_RESULTS_TOURNAMENT_HEADER_PLAYED,
-				GuiKeys.COMMON_HOST_PLAYED
+				GuiKeys.COMMON_HOST_INFO_PLAYED
 			};
 			loadTableImages(folder,uses);
 		}
@@ -491,7 +491,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_MATCH_HEADER_PORTRAIT,
 				GuiKeys.COMMON_RESULTS_ROUND_HEADER_PORTRAIT,
 				GuiKeys.COMMON_PLAYERS_LIST_HEADER_HERO,
-				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_PORTRAIT
+				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_PORTRAIT,
+				GuiKeys.COMMON_GAME_INFO_PLAYER_COUNT
 			};
 			loadTableImages(folder,uses);
 			loadTableImages(folder,uses);
@@ -601,7 +602,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.MENU_RESOURCES_AI_SELECT_NOTES,
 				GuiKeys.COMMON_TOURNAMENT_TYPE,
-				GuiKeys.COMMON_ARCHIVE_TYPE
+				GuiKeys.COMMON_ARCHIVE_TYPE,
+				GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -672,7 +674,8 @@ public class GuiTools
 				GuiKeys.COMMON_LIMIT_ROUND_HEADER_LAST_STANDING,
 				GuiKeys.COMMON_ROUND_ALLOWED_PLAYERS,
 				GuiKeys.COMMON_LEVEL_ALLOWED_PLAYERS,
-				GuiKeys.COMMON_TOURNAMENT_ALLOWED_PLAYERS
+				GuiKeys.COMMON_TOURNAMENT_ALLOWED_PLAYERS,
+				GuiKeys.COMMON_GAME_INFO_ALLOWED_PLAYERS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -712,7 +715,8 @@ public class GuiTools
 			{	GuiKeys.COMMON_PLAYERS_LIST_HEADER_RANK,
 				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_RANK,
-				GuiKeys.COMMON_PROFILES_RANK
+				GuiKeys.COMMON_PROFILES_RANK,
+				GuiKeys.COMMON_GAME_INFO_AVERAGE_SCORE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -739,7 +743,7 @@ public class GuiTools
 			{	GuiKeys.COMMON_LEVEL_SOURCE,
 				GuiKeys.COMMON_SPRITE_SOURCE,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE,
-				GuiKeys.COMMON_HOST_TYPE
+				GuiKeys.COMMON_HOST_INFO_TYPE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -796,7 +800,8 @@ public class GuiTools
 				GuiKeys.COMMON_ROUND_TITLE,
 				GuiKeys.COMMON_TOURNAMENT_NAME,
 				GuiKeys.COMMON_ARCHIVE_NAME,
-				GuiKeys.COMMON_HOST_NAME
+				GuiKeys.COMMON_HOST_INFO_NAME,
+				GuiKeys.COMMON_GAME_INFO_TOURNAMENT_NAME
 			};
 			loadTableImages(folder,uses);
 		}

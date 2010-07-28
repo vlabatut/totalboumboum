@@ -1,4 +1,4 @@
-package org.totalboumboum.gui.common.content.subpanel.archive;
+package org.totalboumboum.gui.common.content.subpanel.host;
 
 /*
  * Total Boum Boum
@@ -22,11 +22,12 @@ package org.totalboumboum.gui.common.content.subpanel.archive;
  */
 
 import java.awt.Color;
-import java.text.SimpleDateFormat;
+import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.List;
 
-import org.totalboumboum.game.archive.GameArchive;
-import org.totalboumboum.game.tournament.TournamentType;
+import org.totalboumboum.game.network.host.HostInfo;
+import org.totalboumboum.game.network.host.HostType;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -38,88 +39,79 @@ import org.totalboumboum.gui.tools.GuiTools;
  * @author Vincent Labatut
  *
  */
-public class ArchiveMiscSubPanel extends TableSubPanel
+public class HostInfoSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 8;
 	private static final int COL_SUBS = 2;
 	private static final int COL_GROUPS = 1;
 	
-	public ArchiveMiscSubPanel(int width, int height, int lines)
-	{	super(width,height,SubPanel.Mode.BORDER,lines,COL_GROUPS,COL_SUBS,true);
+	public HostInfoSubPanel(int width, int height)
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,COL_GROUPS,COL_SUBS,true);
 		
-		setGameArchive(null);
+		setHostInfo(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
-	// ARCHIVE			/////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GameArchive gameArchive;
+	private HostInfo hostInfo;
 
-	public GameArchive getGameArchive()
-	{	return gameArchive;	
+	public HostInfo getHostInfo()
+	{	return hostInfo;	
 	}
 	
-	public void setGameArchive(GameArchive gameArchive)
-	{	this.gameArchive = gameArchive;
+	public void setHostInfo(HostInfo hostInfo)
+	{	this.hostInfo = hostInfo;
 		
 		// sizes
-		reinit(getLineCount(),COL_GROUPS,COL_SUBS);
+		reinit(LINES,COL_GROUPS,COL_SUBS);
 		
 		// icons
-		ArrayList<String> keys = new ArrayList<String>();
+		List<String> keys = new ArrayList<String>();
 		if(showName)
-			keys.add(GuiKeys.COMMON_ARCHIVE_NAME);
+			keys.add(GuiKeys.COMMON_HOST_INFO_NAME);
+		if(showIp)
+			keys.add(GuiKeys.COMMON_HOST_INFO_IP);
 		if(showType)
-			keys.add(GuiKeys.COMMON_ARCHIVE_TYPE);
-		if(showConfrontations)
-			keys.add(GuiKeys.COMMON_ARCHIVE_CONFRONTATIONS);
-		if(showStart)
-			keys.add(GuiKeys.COMMON_ARCHIVE_START);
-		if(showSave)
-			keys.add(GuiKeys.COMMON_ARCHIVE_SAVE);
+			keys.add(GuiKeys.COMMON_HOST_INFO_TYPE);
+		if(showPlayed)
+			keys.add(GuiKeys.COMMON_HOST_INFO_PLAYED);
 		
-		if(gameArchive!=null)
+		if(hostInfo!=null)
 		{	// text
-			ArrayList<String> textValues = new ArrayList<String>();
-			ArrayList<String> tooltipValues = new ArrayList<String>();
+			List<String> values = new ArrayList<String>();
 			if(showName)
-			{	textValues.add(gameArchive.getName());
-				tooltipValues.add(gameArchive.getName());
+			{	String text = hostInfo.getName();
+				if(text==null)
+					text = "";
+				values.add(text);
+			}
+			if(showIp)
+			{	InetAddress ip = hostInfo.getLastIp();
+				String text = "";
+				if(ip!=null)
+					text = ip.getHostName();
+				values.add(text);
 			}
 			if(showType)
-			{	String key = "";
-				TournamentType type = gameArchive.getType();
-				if(type==TournamentType.CUP)
-					key = GuiKeys.COMMON_ARCHIVE_TYPES_CUP;
-				else if(type==TournamentType.LEAGUE)
-					key = GuiKeys.COMMON_ARCHIVE_TYPES_LEAGUE;
-				else if(type==TournamentType.SEQUENCE)
-					key = GuiKeys.COMMON_ARCHIVE_TYPES_SEQUENCE;
-				else if(type==TournamentType.SINGLE)
-					key = GuiKeys.COMMON_ARCHIVE_TYPES_SINGLE;
-				textValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key));
-				tooltipValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP));
+			{	HostType type = hostInfo.getType();
+				String text = "";
+				if(type!=null)
+				{	String key;
+					if(type.equals(HostType.CENTRAL))
+						key = GuiKeys.COMMON_HOST_INFO_TYPE_CENTRAL;
+					else
+						key = GuiKeys.COMMON_HOST_INFO_TYPE_DIRECT;
+					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+				}
+				values.add(text);
 			}
-			if(showConfrontations)
-			{	String matches = Integer.toString(gameArchive.getPlayedMatches());
-				String rounds = Integer.toString(gameArchive.getPlayedRounds());
-				String text = matches+" : "+rounds;
-				textValues.add(text);
-				tooltipValues.add(text);
-			}
-			if(showStart)
-			{	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-				String start = sdf.format(gameArchive.getStartDate());
-				textValues.add(start);
-				tooltipValues.add(start);
+			if(showPlayed)
+			{	int value = hostInfo.getUses();
+				String text = Integer.toString(value);
+				values.add(text);
 			}
 			
-			if(showSave)
-			{	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-				String save = sdf.format(gameArchive.getSaveDate());
-				textValues.add(save);
-				tooltipValues.add(save);
-			}
-
 			// content
 			for(int line=0;line<keys.size();line++)
 			{	// header
@@ -130,8 +122,8 @@ public class ArchiveMiscSubPanel extends TableSubPanel
 					colSub++;
 				}
 				// data
-				{	String text = textValues.get(line);
-					String tooltip = tooltipValues.get(line);
+				{	String text = values.get(line);
+					String tooltip = text;
 					setLabelText(line,colSub,text,tooltip);
 					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,0,fg);
@@ -184,29 +176,23 @@ public class ArchiveMiscSubPanel extends TableSubPanel
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean showName = true;
+	private boolean showIp = true;
+	private boolean showPlayed = true;
 	private boolean showType = true;
-	private boolean showConfrontations = true;
-	private boolean showStart = true;
-	private boolean showSave = true;
 
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
 	}
 
+	public void setShowIp(boolean showIp)
+	{	this.showIp = showIp;
+	}
+
+	public void setShowPlayed(boolean showPlayed)
+	{	this.showPlayed = showPlayed;
+	}
+
 	public void setShowType(boolean showType)
 	{	this.showType = showType;
 	}
-
-	public void setShowConfrontations(boolean showConfrontations)
-	{	this.showConfrontations = showConfrontations;
-	}
-
-	public void setShowStart(boolean showStart)
-	{	this.showStart = showStart;
-	}
-
-	public void setShowSave(boolean showSave)
-	{	this.showSave = showSave;
-	}
-
 }

@@ -764,8 +764,23 @@
 			<text name="Confirm" value="Confirmer"  tooltip="Confirmer l'opération et fermer cette fenêtre" />
 		</group>
 								
-<!-- HOST -->
-		<group name="Host" >
+<!-- GAME INFO -->
+		<group name="GameInfo" >
+			<text name="AllowedPlayers" value="Permis" tooltip="Nombre de joueurs permis pour ce tournoi" />
+			<text name="AverageScore" value="Score" tooltip="Niveau moyen des joueurs déjà inscrits" />
+			<text name="PlayerCount" value="Joueurs" tooltip="Nombre de joueurs déjà inscrits" />
+			<text name="TournamentName" value="Nom" tooltip="Nom du tournoi" />
+			<text name="TournamentType" value="Type" tooltip="Type du tournoi" />
+			<group name="Type" >
+				<text name="Cup" value="Coupe" tooltip="Coupe à élimination directe" />
+				<text name="League" value="Ligue" tooltip="Championat complet" />
+				<text name="Sequence" value="Séquence" tooltip="Séquence de plusieurs rencontres" />
+				<text name="Single" value="Simple" tooltip="Une seule rencontre" />
+			</group>
+		</group>
+		
+<!-- HOST INFO -->
+		<group name="HostInfo" >
 			<text name="Ip" value="IP" tooltip="Dernière adresse de l'hôte" />
 			<text name="Name" value="Nom" tooltip="Nom de l'hôte" />
 			<text name="Played" value="Joués" tooltip="Nombre de parties jouées sur cet hôte" />
