@@ -56,6 +56,7 @@ public class GuiKeys
 	public static final String AUTOLOAD = "Autoload";
 	public static final String AUTOSAVE = "Autosave";
 	public static final String AVAILABLE = "Available";
+	public static final String AVERAGE = "Average";
 	public static final String BACK = "Back";
 	public static final String BACKWARD = "Backward";
 	public static final String BACKGROUND = "Background";
@@ -144,6 +145,7 @@ public class GuiKeys
 	public static final String IMAGE = "Image";
 	public static final String INCLUDE = "Include";
 	public static final String INDIGO = "Indigo";
+	public static final String INFO = "Info";
 	public static final String INITIAL = "Initial";
 	public static final String INSTANCE = "Instance";
 	public static final String INSTANCES = "Instances";
@@ -995,14 +997,28 @@ public class GuiKeys
 	public static final String COMMON_DIALOG_CANCEL = COMMON_DIALOG+CANCEL;
 	public static final String COMMON_DIALOG_CONFIRM = COMMON_DIALOG+CONFIRM;
 
-	/* HOST */
-	public static final String COMMON_HOST = COMMON+HOST;
-	public static final String COMMON_HOST_IP = COMMON_HOST+IP;
-	public static final String COMMON_HOST_NAME = COMMON_HOST+NAME;
-	public static final String COMMON_HOST_PLAYED = COMMON_HOST+PLAYED;
-	public static final String COMMON_HOST_TYPE = COMMON_HOST+TYPE;
-		public static final String COMMON_HOST_TYPE_CENTRAL = COMMON_HOST_TYPE+CENTRAL;
-		public static final String COMMON_HOST_TYPE_DIRECT = COMMON_HOST_TYPE+DIRECT;
+	/* GAME INFO */
+	public static final String COMMON_GAME_INFO = COMMON+GAME+INFO;
+	public static final String COMMON_GAME_INFO_ALLOWED_PLAYERS = COMMON_GAME_INFO+ALLOWED+PLAYERS;
+	public static final String COMMON_GAME_INFO_AVERAGE_SCORE = COMMON_GAME_INFO+AVERAGE+SCORE;
+	public static final String COMMON_GAME_INFO_PLAYER_COUNT = COMMON_GAME_INFO+PLAYER+COUNT;
+	public static final String COMMON_GAME_INFO_TOURNAMENT_NAME = COMMON_GAME_INFO+TOURNAMENT+NAME;
+		/* GAME INFO TOURNAMENT TYPE */
+		public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE = COMMON_GAME_INFO+TOURNAMENT+TYPE;
+		public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_CUP = COMMON_GAME_INFO_TOURNAMENT_TYPE+CUP;
+		public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_LEAGUE = COMMON_GAME_INFO_TOURNAMENT_TYPE+LEAGUE;
+		public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_SEQUENCE = COMMON_GAME_INFO_TOURNAMENT_TYPE+SEQUENCE;
+		public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_SINGLE = COMMON_GAME_INFO_TOURNAMENT_TYPE+SINGLE;
+
+	/* HOST INFO */
+	public static final String COMMON_HOST_INFO = COMMON+HOST+INFO;
+	public static final String COMMON_HOST_INFO_IP = COMMON_HOST_INFO+IP;
+	public static final String COMMON_HOST_INFO_NAME = COMMON_HOST_INFO+NAME;
+	public static final String COMMON_HOST_INFO_PLAYED = COMMON_HOST_INFO+PLAYED;
+		/* HOST INFO TYPE*/
+		public static final String COMMON_HOST_INFO_TYPE = COMMON_HOST_INFO+TYPE;
+		public static final String COMMON_HOST_INFO_TYPE_CENTRAL = COMMON_HOST_INFO_TYPE+CENTRAL;
+		public static final String COMMON_HOST_INFO_TYPE_DIRECT = COMMON_HOST_INFO_TYPE+DIRECT;
 
 	/* ITEMS */
 	public static final String COMMON_ITEMS = COMMON+ITEMS;

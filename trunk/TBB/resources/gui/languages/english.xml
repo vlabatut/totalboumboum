@@ -766,8 +766,23 @@
 			<text name="Confirm" value="Confirm"  tooltip="Confirme the ongoing operation and close this window" />
 		</group>
 								
-<!-- HOST -->
-		<group name="Host" >
+<!-- GAME INFO -->
+		<group name="GameInfo" >
+			<text name="AllowedPlayers" value="Allowed" tooltip="Numbers of players allowed for this tournament" />
+			<text name="AverageScore" value="Skill" tooltip="Average skill of the players already registered" />
+			<text name="PlayerCount" value="PlayerCount" tooltip="Number of players already registered" />
+			<text name="TournamentName" value="Name" tooltip="Tournament name" />
+			<text name="TournamentType" value="Type" tooltip="Tournament type" />
+			<group name="Type" >
+				<text name="Cup" value="Cup" tooltip="Knock-out tournament" />
+				<text name="League" value="League" tooltip="Round-robin tournament" />
+				<text name="Sequence" value="Sequence" tooltip="Sequence of matches" />
+				<text name="Single" value="Single" tooltip="One single match" />
+			</group>
+		</group>
+		
+<!-- HOST INFO -->
+		<group name="HostInfo" >
 			<text name="Ip" value="IP" tooltip="Last address for this host" />
 			<text name="Name" value="Name" tooltip="Host name" />
 			<text name="Played" value="Played" tooltip="Number of games played on this host" />

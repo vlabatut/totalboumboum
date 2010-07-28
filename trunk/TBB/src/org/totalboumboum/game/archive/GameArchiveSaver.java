@@ -29,6 +29,7 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
+import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.time.TimeTools;

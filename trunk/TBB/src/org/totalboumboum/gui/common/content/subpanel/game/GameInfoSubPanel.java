@@ -1,4 +1,4 @@
-package org.totalboumboum.gui.common.content.subpanel.host;
+package org.totalboumboum.gui.common.content.subpanel.game;
 
 /*
  * Total Boum Boum
@@ -22,12 +22,14 @@ package org.totalboumboum.gui.common.content.subpanel.host;
  */
 
 import java.awt.Color;
-import java.net.InetAddress;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import org.totalboumboum.game.network.host.HostInfo;
-import org.totalboumboum.game.network.host.HostType;
+import org.totalboumboum.engine.container.level.players.Players;
+import org.totalboumboum.game.network.game.GameInfo;
+import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -39,76 +41,93 @@ import org.totalboumboum.gui.tools.GuiTools;
  * @author Vincent Labatut
  *
  */
-public class HostSubPanel extends TableSubPanel
+public class GameInfoSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 8;
 	private static final int COL_SUBS = 2;
 	private static final int COL_GROUPS = 1;
 	
-	public HostSubPanel(int width, int height)
+	public GameInfoSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,COL_GROUPS,COL_SUBS,true);
 		
-		setHostInfo(null);
+		setGameInfo(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HostInfo hostInfo;
+	private GameInfo gameInfo;
 
-	public HostInfo getHostInfo()
-	{	return hostInfo;	
+	public GameInfo getGameInfo()
+	{	return gameInfo;	
 	}
 	
-	public void setHostInfo(HostInfo hostInfo)
-	{	this.hostInfo = hostInfo;
+	public void setGameInfo(GameInfo gameInfo)
+	{	this.gameInfo = gameInfo;
 		
 		// sizes
 		reinit(LINES,COL_GROUPS,COL_SUBS);
 		
 		// icons
 		List<String> keys = new ArrayList<String>();
-		if(showName)
-			keys.add(GuiKeys.COMMON_HOST_NAME);
-		if(showIp)
-			keys.add(GuiKeys.COMMON_HOST_IP);
-		if(showType)
-			keys.add(GuiKeys.COMMON_HOST_TYPE);
-		if(showPlayed)
-			keys.add(GuiKeys.COMMON_HOST_PLAYED);
+		if(showTournamentName)
+			keys.add(GuiKeys.COMMON_GAME_INFO_TOURNAMENT_NAME);
+		if(showTournamentType)
+			keys.add(GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE);
+		if(showAllowedPlayers)
+			keys.add(GuiKeys.COMMON_GAME_INFO_ALLOWED_PLAYERS);
+		if(showPlayerCount)
+			keys.add(GuiKeys.COMMON_GAME_INFO_PLAYER_COUNT);
+		if(showAverageScore)
+			keys.add(GuiKeys.COMMON_GAME_INFO_AVERAGE_SCORE);
 		
-		if(hostInfo!=null)
+		if(gameInfo!=null)
 		{	// text
 			List<String> values = new ArrayList<String>();
-			if(showName)
-			{	String text = hostInfo.getName();
+			if(showTournamentName)
+			{	String text = gameInfo.getTournamentName();
 				if(text==null)
 					text = "";
 				values.add(text);
 			}
-			if(showIp)
-			{	InetAddress ip = hostInfo.getLastIp();
-				String text = "";
-				if(ip!=null)
-					text = ip.getHostName();
-				values.add(text);
-			}
-			if(showType)
-			{	HostType type = hostInfo.getType();
+			if(showTournamentType)
+			{	TournamentType type = gameInfo.getTournamentType();
 				String text = "";
 				if(type!=null)
-				{	String key;
-					if(type.equals(HostType.CENTRAL))
-						key = GuiKeys.COMMON_HOST_TYPE_CENTRAL;
-					else
-						key = GuiKeys.COMMON_HOST_TYPE_DIRECT;
+				{	String key = "ERROR";
+					if(type.equals(TournamentType.CUP))
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_CUP;
+					else if(type.equals(TournamentType.LEAGUE))
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_LEAGUE;
+					else if(type.equals(TournamentType.SEQUENCE))
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_SEQUENCE;
+					else if(type.equals(TournamentType.SINGLE))
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_SINGLE;
 					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 				}
 				values.add(text);
 			}
-			if(showPlayed)
-			{	int value = hostInfo.getUses();
-				String text = Integer.toString(value);
+			if(showAllowedPlayers)
+			{	Set<Integer> value = gameInfo.getAllowedPlayers();
+				String text = Players.formatAllowedPlayerNumbers(value);
+				values.add(text);
+			}
+			if(showPlayerCount)
+			{	Integer value = gameInfo.getPlayerCount();
+				String text = "";
+				if(value!=null)
+					text = Integer.toString(value);
+				values.add(text);
+			}
+			if(showAverageScore)
+			{	Double value = gameInfo.getAverageScore();
+				String text = "";
+				if(value!=null)
+				{	NumberFormat nf = NumberFormat.getInstance();
+					nf.setMaximumFractionDigits(2);
+					nf.setMinimumFractionDigits(2);
+					text = nf.format(value);
+				}
 				values.add(text);
 			}
 			
@@ -175,24 +194,29 @@ public class HostSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean showName = true;
-	private boolean showIp = true;
-	private boolean showPlayed = true;
-	private boolean showType = true;
+	private boolean showAllowedPlayers = true;
+	private boolean showAverageScore = true;
+	private boolean showPlayerCount = true;
+	private boolean showTournamentName = true;
+	private boolean showTournamentType = true;
 
-	public void setShowName(boolean showName)
-	{	this.showName = showName;
+	public void setShowAllowedPlayers(boolean showAllowedPlayers)
+	{	this.showAllowedPlayers = showAllowedPlayers;
 	}
 
-	public void setShowIp(boolean showIp)
-	{	this.showIp = showIp;
+	public void setShowAverageScore(boolean showAverageScore)
+	{	this.showAverageScore = showAverageScore;
 	}
 
-	public void setShowPlayed(boolean showPlayed)
-	{	this.showPlayed = showPlayed;
+	public void setShowPlayerCount(boolean showPlayerCount)
+	{	this.showPlayerCount = showPlayerCount;
 	}
 
-	public void setShowType(boolean showType)
-	{	this.showType = showType;
+	public void setShowTournamentName(boolean showTournamentName)
+	{	this.showTournamentName = showTournamentName;
+	}
+
+	public void setShowTournamentType(boolean showTournamentType)
+	{	this.showTournamentType = showTournamentType;
 	}
 }

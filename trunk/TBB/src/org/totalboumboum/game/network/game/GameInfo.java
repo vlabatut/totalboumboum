@@ -22,10 +22,10 @@ package org.totalboumboum.game.network.game;
  */
 
 import java.io.Serializable;
-import java.net.InetAddress;
-import java.util.List;
+import java.util.Set;
 
-import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.game.network.host.HostInfo;
+import org.totalboumboum.game.tournament.TournamentType;
 
 /**
  * 
@@ -36,63 +36,80 @@ public class GameInfo implements Serializable
 {	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
-	// PLAYERS				/////////////////////////////////////////
+	// AVERAGE SCORE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<Double> glickoScores;
+	private double averageScore;
 
-	public void addPlayer(String id)
-	{	this.id = id;
-	}
-	
-	/*
-	 * TODO
-	 * player count
-	 * allowed counts
-	 * player g-level
-	 * tournament type
-	 * tournament name
-	 */
-	
-	/////////////////////////////////////////////////////////////////
-	// USE					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private int uses;
-
-	public int getUses()
-	{	return uses;
+	public void setAverageScore(double averageScore)
+	{	this.averageScore = averageScore;
 	}
 
-	public void setUses(int uses)
-	{	this.uses = uses;
-	}
-
-	public void incrementUses()
-	{	uses++;
+	public double getAverageScore()
+	{	return averageScore;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// ADDRESS				/////////////////////////////////////////
+	// PLAYERS COUNT		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private InetAddress lastIp;
+	private int playerCount;
 
-	public InetAddress getLastIp()
-	{	return lastIp;
+	public void setPlayerCount(int playerCount)
+	{	this.playerCount = playerCount;
 	}
 
-	public void setLastIp(InetAddress lastIp)
-	{	this.lastIp = lastIp;
+	public int getPlayerCount()
+	{	return playerCount;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT			/////////////////////////////////////////
+	// ALLOWED PLAYERS 		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private AbstractTournament tournament;
+	private Set<Integer> allowedPlayers;
 
-	public AbstractTournament getTournament()
-	{	return tournament;
+	public void setAllowedPlayers(Set<Integer> allowedPlayers)
+	{	this.allowedPlayers = allowedPlayers;
 	}
 
-	public void setTournament(AbstractTournament tournament)
-	{	this.tournament = tournament;
+	public Set<Integer> getAllowedPlayers()
+	{	return allowedPlayers;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT TYPE		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private TournamentType tournamentType;
+
+	public void setTournamentType(TournamentType tournamentType)
+	{	this.tournamentType = tournamentType;
+	}
+
+	public TournamentType getTournamentType()
+	{	return tournamentType;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT NAME		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String tournamentName;
+
+	public void setTournamentName(String tournamentName)
+	{	this.tournamentName = tournamentName;
+	}
+
+	public String getTournamentName()
+	{	return tournamentName;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// HOST INFO			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HostInfo hostInfo;
+
+	public void setHostInfo(HostInfo hostInfo)
+	{	this.hostInfo = hostInfo;
+	}
+
+	public HostInfo getHostInfo()
+	{	return hostInfo;	
 	}
 }

@@ -1,4 +1,4 @@
-package org.totalboumboum.game.archive;
+package org.totalboumboum.game.tournament;
 
 /*
  * Total Boum Boum
@@ -21,7 +21,6 @@ package org.totalboumboum.game.archive;
  * 
  */
 
-import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.cup.CupTournament;
 import org.totalboumboum.game.tournament.league.LeagueTournament;
 import org.totalboumboum.game.tournament.sequence.SequenceTournament;
@@ -34,7 +33,10 @@ import org.totalboumboum.game.tournament.single.SingleTournament;
  */
 public enum TournamentType
 {
-	CUP,LEAGUE,SEQUENCE,SINGLE;
+	CUP,
+	LEAGUE,
+	SEQUENCE,
+	SINGLE;
 	
 	public static TournamentType getType(AbstractTournament tournament)
 	{	TournamentType result = null;
