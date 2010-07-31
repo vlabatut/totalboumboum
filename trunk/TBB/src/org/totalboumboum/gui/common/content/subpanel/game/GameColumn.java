@@ -25,10 +25,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.TreeSet;
 
 import org.totalboumboum.configuration.profile.Portraits;
 import org.totalboumboum.configuration.profile.Profile;
@@ -235,207 +238,84 @@ public enum GameColumn
 	}
 
 	@SuppressWarnings("rawtypes")
-	public void updateValues(GameListSubPanel container, HashMap<String,List<Comparable>> playersScores, RankingService rankingService, HashMap<String,Profile> profilesMap)
-	{	playersScores.clear();
-		for(Entry<String,Profile> entry: profilesMap.entrySet())
+	public void updateValues(GameListSubPanel container, HashMap<String,List<Comparable>> gameInfos, List<GameInfo> gamesList)
+	{	gameInfos.clear();
+		for(GameInfo gameInfo: gamesList)
 		{	// init
-			Profile profile = entry.getValue();
-			String playerId = entry.getKey();
-			PlayerRating playerRating = rankingService.getPlayerRating(playerId);
-			HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
-			PlayerStats playerStats = playersStats.get(playerId);
-			int playerRank = rankingService.getPlayerRank(playerId);
-			//int playersCount = rankingService.getPlayers().size();
-			int previousRank = playerStats.getPreviousRank();
-			long totalRoundsPlayed = playerStats.getRoundsPlayed();
 			List<Comparable> list = new ArrayList<Comparable>();
 			// process
-			if(this==GENERAL_BUTTON || this==GENERAL_RANK)
-			{	int rank = Integer.MAX_VALUE;
-				if(playerRating!=null)
-					rank = rankingService.getPlayerRank(playerId);
-				list.add(rank);
-				list.add(playerId);
-			}
-			else if(this==GENERAL_EVOLUTION)
-			{	int evolution;
-				if(playerRating!=null)
-				{	if(previousRank==-1)
-						evolution = Integer.MIN_VALUE-2;
-					else if(previousRank<playerRank)
-						evolution = playerRank-previousRank;
-					else if(previousRank>playerRank)
-						evolution = playerRank-previousRank;
-					else
-						evolution = playerRank-previousRank;
-				}
-				else if(previousRank!=-1)
-					evolution = Integer.MIN_VALUE-1;
-				else
-					evolution = Integer.MIN_VALUE;
-				list.add(evolution);
-				list.add(playerId);
-			}
-			else if(this==GENERAL_PORTRAIT)
-			{	String spriteName = profile.getSpritePack()+File.separator+profile.getSpriteFolder();
-				list.add(spriteName);
-				list.add(playerId);
-			}
-			else if(this==GENERAL_TYPE)
-			{	Boolean type = profile.getAiName()!=null;
-				list.add(type);
-				list.add(playerId);
-			}
-			else if(this==GENERAL_NAME)
-			{	String name = profile.getName();
+			if(this==BUTTON || this==HOST_NAME)
+			{	String name = gameInfo.getTournamentName();
+				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
 				list.add(name);
-				list.add(playerId);
+				list.add(ip);
 			}
-			// glicko-2
-			else if(this==GLICKO_MEAN)
-			{	double mean = 0;
-				double stdev = 0;
-				if(playerRating!=null)
-				{	mean = playerRating.getRating();
-					stdev = playerRating.getRatingDeviation();
+			else if(this==PREFERRED)
+			{	Boolean preferred = gameInfo.getHostInfo().isPreferred();
+				String name = gameInfo.getTournamentName();
+				list.add(preferred);
+				list.add(name);
+			}
+			if(this==HOST_IP)
+			{	String ip = gameInfo.getHostInfo().getLastIp().getHostName();
+				String name = gameInfo.getTournamentName();
+				list.add(ip);
+				list.add(name);
+			}
+			else if(this==TOURNAMENT_TYPE)
+			{	TournamentType type = gameInfo.getTournamentType();
+				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
+				list.add(type);
+				list.add(ip);
+			}
+			else if(this==PLAYER_COUNT)
+			{	int playerCount = gameInfo.getPlayerCount();
+				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
+				list.add(playerCount);
+				list.add(ip);
+			}
+			else if(this==ALLOWED_PLAYER)
+			{	final class Temp extends TreeSet<Integer> implements Comparable<TreeSet<Integer>>
+				{	private static final long serialVersionUID = 1L;
+					@Override
+					public int compareTo(TreeSet<Integer> s)
+					{	int result = 0;
+						Iterator<Integer> it1 = this.iterator();
+						Iterator<Integer> it2 = s.iterator();
+						while(result==0 && it1.hasNext() && it2.hasNext())
+						{	Integer i1 = it1.next();
+							Integer i2 = it2.next();
+							result = i1 - i2;
+						}
+						if(result==0)
+						{	if(it1.hasNext() && !it2.hasNext())
+								result = 1;
+							else if(!it1.hasNext() && it2.hasNext())
+								result = -1;
+						}			
+						return result;
+					}
 				}
-				list.add(mean);
-				list.add(stdev);
-				list.add(playerId);
+				Temp allowedPlayer = new Temp();
+				allowedPlayer.addAll(gameInfo.getAllowedPlayers());
+				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
+				list.add(allowedPlayer);
+				list.add(ip);
 			}
-			else if(this==GLICKO_DEVIATION)
-			{	double stdev = 0;
-				if(playerRating!=null)
-					stdev = playerRating.getRatingDeviation();
-				list.add(stdev);
-				list.add(playerId);
+			else if(this==AVERAGE_LEVEL)
+			{	Double level = gameInfo.getAverageScore();
+				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
+				list.add(level);
+				list.add(ip);
 			}
-			else if(this==GLICKO_VOLATILITY)
-			{	double volatility = 0;
-				if(playerRating!=null)
-					volatility = playerRating.getRatingVolatility();
-				list.add(volatility);
-				list.add(playerId);
+			else if(this==TOURNAMENT_STATE)
+			{	HostState state = gameInfo.getHostInfo().getState();
+				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
+				list.add(state);
+				list.add(ip);
 			}
-			else if(this==GLICKO_ROUNDCOUNT)
-			{	int roundcount = 0;
-				if(playerRating!=null)
-					roundcount = playerRating.getRoundcount();
-				list.add(roundcount);
-				list.add(playerId);
-			}
-			// scores
-			else if(this==SCORE_BOMBS)
-			{	double bombs = playerStats.getScore(Score.BOMBS);
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						bombs = bombs / totalRoundsPlayed;
-				}
-				list.add(bombs);
-				list.add(playerId);
-			}
-			else if(this==SCORE_BOMBINGS)
-			{	double bombings = playerStats.getScore(Score.BOMBINGS);
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						bombings = bombings / totalRoundsPlayed;
-				}
-				list.add(bombings);
-				list.add(playerId);
-			}
-			else if(this==SCORE_BOMBEDS)
-			{	double bombeds = playerStats.getScore(Score.BOMBEDS);
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						bombeds = bombeds / totalRoundsPlayed;
-				}
-				list.add(bombeds);
-				list.add(playerId);
-			}
-			else if(this==SCORE_ITEMS)
-			{	double items = playerStats.getScore(Score.ITEMS);
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						items = items / totalRoundsPlayed;
-				}
-				list.add(items);
-				list.add(playerId);
-			}
-			else if(this==SCORE_CROWNS)
-			{	double crowns = playerStats.getScore(Score.CROWNS);
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						crowns = crowns / totalRoundsPlayed;
-				}
-				list.add(crowns);
-				list.add(playerId);
-			}
-			else if(this==SCORE_PAINTINGS)
-			{	double paintings = playerStats.getScore(Score.CROWNS);
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						paintings = paintings / totalRoundsPlayed;
-				}
-				list.add(paintings);
-				list.add(playerId);
-			}
-			else if(this==SCORE_SELF_BOMBINGS)
-			{	double selfBombings = playerStats.getScore(Score.SELF_BOMBINGS);
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						selfBombings = selfBombings / totalRoundsPlayed;
-				}
-				list.add(selfBombings);
-				list.add(playerId);
-			}
-			else if(this==SCORE_TIME)
-			{	double time = playerStats.getScore(Score.TIME);
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						time = time / totalRoundsPlayed;
-				}
-				list.add(time);
-				list.add(playerId);
-			}
-			// confrontations
-			else if(this==ROUNDS_PLAYED)
-			{	double roundPlayed = totalRoundsPlayed;
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						roundPlayed = roundPlayed / totalRoundsPlayed;
-				}
-				list.add(roundPlayed);
-				list.add(playerId);
-			}
-			else if(this==ROUNDS_WON)
-			{	double roundsWon = playerStats.getRoundsWon();
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						roundsWon = roundsWon / totalRoundsPlayed;
-				}
-				list.add(roundsWon);
-				list.add(playerId);
-			}
-			else if(this==ROUNDS_DRAWN)
-			{	double roundsDrawn = playerStats.getRoundsDrawn();
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						roundsDrawn = roundsDrawn / totalRoundsPlayed;
-				}
-				list.add(roundsDrawn);
-				list.add(playerId);
-			}
-			else if(this==ROUNDS_LOST)
-			{	double roundsLost = playerStats.getRoundsLost();
-				if(container.hasMean())
-				{	if(totalRoundsPlayed>0)
-						roundsLost = roundsLost / totalRoundsPlayed;
-				}
-				list.add(roundsLost);
-				list.add(playerId);
-			}
-			//
-			playersScores.put(playerId,list);
+
+			gameInfos.put(gameInfo.getHostInfo().getId(),list);
 		}
 	}
 }	
