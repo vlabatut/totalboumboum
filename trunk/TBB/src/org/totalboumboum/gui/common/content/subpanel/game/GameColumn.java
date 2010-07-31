@@ -27,10 +27,15 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.totalboumboum.configuration.profile.Portraits;
 import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.container.level.players.Players;
+import org.totalboumboum.game.network.game.GameInfo;
+import org.totalboumboum.game.network.host.HostState;
+import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -59,7 +64,7 @@ public enum GameColumn
 	ALLOWED_PLAYER,
 	AVERAGE_LEVEL,
 	TOURNAMENT_STATE;
-
+	
 	public boolean isInverted()
 	{	boolean result = false;			
 
@@ -93,24 +98,24 @@ public enum GameColumn
 		else if(this==PREFERRED)
 			result = GuiKeys.COMMON_GAME_LIST_HEADER_PREFERRED;
 		else if(this==HOST_NAME)
-			result = GuiKeys.COMMON_GAME_LIST_HOST_NAME;
+			result = GuiKeys.COMMON_GAME_LIST_HEADER_HOST_NAME;
 		else if(this==HOST_IP)
-			result = GuiKeys.COMMON_GAME_LIST_HOST_IP;
+			result = GuiKeys.COMMON_GAME_LIST_HEADER_HOST_IP;
 		else if(this==TOURNAMENT_TYPE)
-			result = GuiKeys.COMMON_GAME_LIST_TOURNAMENT_TYPE;
+			result = GuiKeys.COMMON_GAME_LIST_HEADER_TOURNAMENT_TYPE;
 		else if(this==PLAYER_COUNT)
-			result = GuiKeys.COMMON_GAME_LIST_PLAYER_COUNT;
+			result = GuiKeys.COMMON_GAME_LIST_HEADER_PLAYER_COUNT;
 		else if(this==ALLOWED_PLAYER)
-			result = GuiKeys.COMMON_GAME_LIST_ALLOWED_PLAYER;
+			result = GuiKeys.COMMON_GAME_LIST_HEADER_ALLOWED_PLAYER;
 		else if(this==AVERAGE_LEVEL)
-			result = GuiKeys.COMMON_GAME_LIST_AVERAGE_LEVEL;
+			result = GuiKeys.COMMON_GAME_LIST_HEADER_AVERAGE_LEVEL;
 		else if(this==TOURNAMENT_STATE)
-			result = GuiKeys.COMMON_GAME_LIST_TOURNAMENT_STATE;
+			result = GuiKeys.COMMON_GAME_LIST_HEADER_TOURNAMENT_STATE;
 
 		return result;
 	}
 	
-	public void setLabelContent(GameListSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, String playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats)
+	public void setLabelContent(GameListSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, GameInfo gameInfo)
 	{	if(this==GENERAL_BUTTON)
 		{	String key;
 			if(playerRating==null)
@@ -122,236 +127,113 @@ public enum GameColumn
 			label.addMouseListener(container);
 			label.setMouseSensitive(true);
 		}
-		else if(this==GENERAL_RANK)
-		{	if(playerRating!=null)
-			{	String text = Integer.toString(playerRank);
-				String tooltip = text;
-				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-				if(temp>colWidths[col])
-					colWidths[col] = temp;
-			}
+//TODO 	BUTTON
+	
+		else if(this==PREFERRED)
+		{	String key;
+			if(gameInfo.isPreferred())
+				key = GuiKeys.COMMON_GAME_LIST_DATA_FAV_PREFERRED;
 			else
-			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_NO_RANK;
-				panel.setLabelKey(line,col,key,false);
-			}
-		}
-		else if(this==GENERAL_EVOLUTION)
-		{	int previousRank = playerStats.getPreviousRank();
-			String key = null;
-			String tooltip = "";
-			if(playerRating!=null)
-			{	if(previousRank==-1)
-				{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_ENTER;
-					tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);				
-				}
-				else if(previousRank<playerRank)
-				{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_DOWN;
-					tooltip = Integer.toString(previousRank-playerRank);
-				}
-				else if(previousRank>playerRank)
-				{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_UP;
-					tooltip = "+"+Integer.toString(previousRank-playerRank);				
-				}
-				else
-				{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_SAME;
-					tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);;				
-				}
-			}
-			else if(previousRank!=-1)
-			{	key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_EXIT;
-				tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);			
-			}
+				key = GuiKeys.COMMON_GAME_LIST_DATA_FAV_REGULAR;
 			if(key!=null)
-			{	BufferedImage icon = GuiTools.getIcon(key);
-				panel.setLabelIcon(line,col,icon,tooltip);	
+			{	panel.setLabelKey(line,col,key,true);
+				MyLabel label = panel.getLabel(line,col);
+				label.addMouseListener(container);
+				label.setMouseSensitive(true);
 			}
 		}
-		else if(this==GENERAL_PORTRAIT)
-		{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
-			String tooltip = profile.getSpriteName();
-			panel.setLabelIcon(line,col,image,tooltip);
-		}		
-		else if(this==GENERAL_TYPE)
-		{	String aiName = profile.getAiName();
-			String key;
-			if(aiName==null)
-				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_HUMAN;
-			else
-				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_COMPUTER;
-			panel.setLabelKey(line,col,key,true);
-		}
-		else if(this==GENERAL_NAME)
-		{	String text = profile.getName();
-			String tooltip = profile.getName();
+		else if(this==HOST_NAME)
+		{	// content
+			String text = gameInfo.getHostInfo().getName();
+			String tooltip = text;
 			panel.setLabelText(line,col,text,tooltip);
-		}
-		// glicko-2
-		else if(this==GLICKO_MEAN)
-		{	if(playerRating!=null)
-			{	double mean = playerRating.getRating();
-				NumberFormat nfText = NumberFormat.getInstance();
-				nfText.setMaximumFractionDigits(0);
-				String text = nfText.format(mean);
-				NumberFormat nfTooltip = NumberFormat.getInstance();
-				nfTooltip.setMaximumFractionDigits(6);
-				String tooltip = nfTooltip.format(mean);
-				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-				if(temp>colWidths[col])
-					colWidths[col] = temp;
-			}
-		}
-		else if(this==GLICKO_DEVIATION)
-		{	if(playerRating!=null)
-			{	double stdev = playerRating.getRatingDeviation();
-				NumberFormat nfText = NumberFormat.getInstance();
-				nfText.setMaximumFractionDigits(0);
-				String text = nfText.format(stdev);
-				NumberFormat nfTooltip = NumberFormat.getInstance();
-				nfTooltip.setMaximumFractionDigits(6);
-				String tooltip = nfTooltip.format(stdev);
-				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-				if(temp>colWidths[col])
-					colWidths[col] = temp;
-			}
-		}
-		else if(this==GLICKO_VOLATILITY)
-		{	if(playerRating!=null)
-			{	double variability = playerRating.getRatingVolatility();
-				NumberFormat nfText = NumberFormat.getInstance();
-				nfText.setMaximumFractionDigits(2);
-				nfText.setMinimumFractionDigits(2);
-				String text = nfText.format(variability);
-				NumberFormat nfTooltip = NumberFormat.getInstance();
-				nfTooltip.setMaximumFractionDigits(6);
-				String tooltip = nfTooltip.format(variability);
-				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-				if(temp>colWidths[col])
-					colWidths[col] = temp;
-			}
-		}
-		else if(this==GLICKO_ROUNDCOUNT)
-		{	if(playerRating!=null)
-			{	int roundcount = playerRating.getRoundcount();
-				String text = Integer.toString(roundcount);
-				String tooltip = text;
-				panel.setLabelText(line,col,text,tooltip);
-				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-				if(temp>colWidths[col])
-					colWidths[col] = temp;
-			}
-			col++;
-		}
-		// scores
-		else if(this==SCORE_BOMBS)
-		{	setScoreLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,Score.BOMBS);
-		}			
-		else if(this==SCORE_BOMBINGS)
-		{	setScoreLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,Score.BOMBINGS);
-		}			
-		else if(this==SCORE_SELF_BOMBINGS)
-		{	setScoreLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,Score.SELF_BOMBINGS);
-		}			
-		else if(this==SCORE_BOMBEDS)
-		{	setScoreLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,Score.BOMBEDS);
-		}			
-		else if(this==SCORE_ITEMS)
-		{	setScoreLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,Score.ITEMS);
-		}			
-		else if(this==SCORE_CROWNS)
-		{	setScoreLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,Score.CROWNS);
-		}			
-		else if(this==SCORE_PAINTINGS)
-		{	setScoreLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,Score.PAINTINGS);
-		}			
-		else if(this==SCORE_TIME)
-		{	long timePlayed = playerStats.getScore(Score.TIME);
-			String text = TimeTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MINUTE,false);
-			String tooltip = TimeTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MILLISECOND,true);
-			if(container.hasMean())
-			{	long value = 0;
-				long roundsPlayed = playerStats.getRoundsPlayed();
-				if(roundsPlayed>0)
-					value = timePlayed / roundsPlayed;
-				text = TimeTools.formatTime(value,TimeUnit.MINUTE,TimeUnit.SECOND,false);
-				tooltip = TimeTools.formatTime(value,TimeUnit.HOUR,TimeUnit.MILLISECOND,true);							
-			}
-			panel.setLabelText(line,col,text,tooltip);
+			// column width
 			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 			if(temp>colWidths[col])
 				colWidths[col] = temp;
-			col++;
 		}
-		// confrontations
-		else if(this==ROUNDS_PLAYED)
-		{	long roundsPlayed = playerStats.getRoundsPlayed();
-			setConfrontationsLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,roundsPlayed);
+		else if(this==HOST_IP)
+		{	// content
+			String text = gameInfo.getHostInfo().getLastIp().getHostName();
+			String tooltip = text;
+			panel.setLabelText(line,col,text,tooltip);
+//			MyLabel label = panel.getLabel(line,col);
+//			label.addMouseListener(container);
+//			label.setMouseSensitive(true);
+// TODO better doing it in the specifc subpanel			
+			// column width
+			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+			if(temp>colWidths[col])
+				colWidths[col] = temp;
 		}
-		else if(this==ROUNDS_WON)
-		{	long roundsWon = playerStats.getRoundsWon();
-			setConfrontationsLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,roundsWon);
+		else if(this==TOURNAMENT_TYPE)
+		{	TournamentType type = gameInfo.getTournamentType();
+			String key;
+			if(type.equals(TournamentType.CUP))
+				key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_CUP;
+			else if(type.equals(TournamentType.LEAGUE))
+				key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_LEAGUE;
+			else if(type.equals(TournamentType.SEQUENCE))
+				key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SEQUENCE;
+			else if(type.equals(TournamentType.SINGLE))
+				key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SINGLE;
+			if(key!=null)
+				panel.setLabelKey(line,col,key,true);
 		}
-		else if(this==ROUNDS_DRAWN)
-		{	long roundsDrawn = playerStats.getRoundsDrawn();
-			setConfrontationsLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,roundsDrawn);
+		else if(this==PLAYER_COUNT)
+		{	// content
+			String text = Integer.toString(gameInfo.getPlayerCount());
+			String tooltip = text;
+			panel.setLabelText(line,col,text,tooltip);
+			// column width
+			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+			if(temp>colWidths[col])
+				colWidths[col] = temp;
 		}
-		else if(this==ROUNDS_LOST)
-		{	long roundsLost = playerStats.getRoundsLost();
-			setConfrontationsLabel(container,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats,roundsLost);
+		else if(this==ALLOWED_PLAYER)
+		{	// content
+			Set<Integer> value = gameInfo.getAllowedPlayers();
+			String text = Players.formatAllowedPlayerNumbers(value);
+			String tooltip = text;
+			panel.setLabelText(line,col,text,tooltip);
+			// column width
+			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+			if(temp>colWidths[col])
+				colWidths[col] = temp;
+		}
+		else if(this==AVERAGE_LEVEL)
+		{	// content
+			double mean = gameInfo.getAverageScore();
+			NumberFormat nfText = NumberFormat.getInstance();
+			nfText.setMaximumFractionDigits(0);
+			String text = nfText.format(mean);
+			NumberFormat nfTooltip = NumberFormat.getInstance();
+			nfTooltip.setMaximumFractionDigits(6);
+			String tooltip = nfTooltip.format(mean);
+			panel.setLabelText(line,col,text,tooltip);
+			// column width
+			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+			if(temp>colWidths[col])
+				colWidths[col] = temp;
+		}
+		else if(this==TOURNAMENT_STATE)
+		{	HostState state = gameInfo.getHostInfo().getState();
+			String key;
+			if(state.equals(HostState.CLOSED))
+				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_CLOSED;
+			else if(HostState.equals(HostState.FINISHED))
+				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_FINISHED;
+			else if(HostState.equals(HostState.OPEN))
+				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_OPEN;
+			else if(HostState.equals(HostState.PLAYING))
+				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_PLAYING;
+			else if(HostState.equals(HostState.UNKOWN))
+				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKOWN;
+			if(key!=null)
+				panel.setLabelKey(line,col,key,true);
 		}
 	}
 
-	private void setScoreLabel(GameListSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, String playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats, Score score)
-	{	long scoreValue = playerStats.getScore(score);
-		String text;
-		String tooltip;
-		if(container.hasMean())
-		{	NumberFormat nfText = NumberFormat.getInstance();
-			nfText.setMaximumFractionDigits(2);
-			nfText.setMinimumFractionDigits(2);
-			NumberFormat nfTooltip = NumberFormat.getInstance();
-			nfTooltip.setMaximumFractionDigits(6);
-			double value = 0;
-			long roundsPlayed = playerStats.getRoundsPlayed();
-			if(roundsPlayed>0)
-				value = scoreValue / (double)roundsPlayed;
-			text = nfText.format(value);
-			tooltip = nfTooltip.format(value);
-		}
-		else
-		{	text = Long.toString(scoreValue);
-			tooltip = text;
-		}
-		panel.setLabelText(line,col,text,tooltip);
-		int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-		if(temp>colWidths[col])
-			colWidths[col] = temp;
-	}
-	
-	private void setConfrontationsLabel(GameListSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, String playerId, int playerRank, Profile profile, PlayerRating playerRating, PlayerStats playerStats, long confrontations)
-	{	String text = Long.toString(confrontations);
-		String tooltip = text;
-		if(container.hasMean())
-		{	double value = 0;
-			long roundsPlayed = playerStats.getRoundsPlayed();
-			if(roundsPlayed>0)
-				value = 100 * confrontations / (double)roundsPlayed;
-			NumberFormat nfText = NumberFormat.getInstance();
-			nfText.setMaximumFractionDigits(0);
-			text = nfText.format(value)+"%";
-			NumberFormat nfTooltip = NumberFormat.getInstance();
-			nfTooltip.setMaximumFractionDigits(4);
-			tooltip = nfTooltip.format(value)+"%";
-		}
-		panel.setLabelText(line,col,text,tooltip);
-		int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-		if(temp>colWidths[col])
-			colWidths[col] = temp;
-	}
-	
 	@SuppressWarnings("rawtypes")
 	public void updateValues(GameListSubPanel container, HashMap<String,List<Comparable>> playersScores, RankingService rankingService, HashMap<String,Profile> profilesMap)
 	{	playersScores.clear();
