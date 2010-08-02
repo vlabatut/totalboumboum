@@ -66,7 +66,8 @@ public enum GameColumn
 	PLAYER_COUNT,
 	ALLOWED_PLAYER,
 	AVERAGE_LEVEL,
-	TOURNAMENT_STATE;
+	TOURNAMENT_STATE,
+	PLAYED;
 	
 	public boolean isInverted()
 	{	boolean result = false;			
@@ -88,6 +89,8 @@ public enum GameColumn
 		else if(this==AVERAGE_LEVEL)
 			result = true;
 		else if(this==TOURNAMENT_STATE)
+			result = true;
+		else if(this==PLAYED)
 			result = true;
 
 		return result;
@@ -114,6 +117,8 @@ public enum GameColumn
 			result = GuiKeys.COMMON_GAME_LIST_HEADER_AVERAGE_LEVEL;
 		else if(this==TOURNAMENT_STATE)
 			result = GuiKeys.COMMON_GAME_LIST_HEADER_TOURNAMENT_STATE;
+		else if(this==TOURNAMENT_STATE)
+			result = GuiKeys.COMMON_GAME_LIST_HEADER_PLAYED;
 
 		return result;
 	}
@@ -134,7 +139,7 @@ public enum GameColumn
 	
 		else if(this==PREFERRED)
 		{	String key;
-			if(gameInfo.isPreferred())
+			if(gameInfo.getHostInfo().isPreferred())
 				key = GuiKeys.COMMON_GAME_LIST_DATA_FAV_PREFERRED;
 			else
 				key = GuiKeys.COMMON_GAME_LIST_DATA_FAV_REGULAR;
@@ -235,12 +240,23 @@ public enum GameColumn
 			if(key!=null)
 				panel.setLabelKey(line,col,key,true);
 		}
+		else if(this==PLAYED)
+		{	// content
+			int played = gameInfo.getHostInfo().getUses();
+			String text = Integer.toString(played);
+			String tooltip = text;
+			panel.setLabelText(line,col,text,tooltip);
+			// column width
+			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+			if(temp>colWidths[col])
+				colWidths[col] = temp;
+		}
 	}
 
 	@SuppressWarnings("rawtypes")
-	public void updateValues(GameListSubPanel container, HashMap<String,List<Comparable>> gameInfos, List<GameInfo> gamesList)
-	{	gameInfos.clear();
-		for(GameInfo gameInfo: gamesList)
+	public void updateValues(GameListSubPanel container, HashMap<String,List<Comparable>> valuesMap, HashMap<String,GameInfo> gamesMap)
+	{	valuesMap.clear();
+		for(GameInfo gameInfo: gamesMap.values())
 		{	// init
 			List<Comparable> list = new ArrayList<Comparable>();
 			// process
@@ -314,8 +330,14 @@ public enum GameColumn
 				list.add(state);
 				list.add(ip);
 			}
+			else if(this==PLAYED)
+			{	Integer played = gameInfo.getHostInfo().getUses();
+				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
+				list.add(played);
+				list.add(ip);
+			}
 
-			gameInfos.put(gameInfo.getHostInfo().getId(),list);
+			valuesMap.put(gameInfo.getHostInfo().getId(),list);
 		}
 	}
 }	
