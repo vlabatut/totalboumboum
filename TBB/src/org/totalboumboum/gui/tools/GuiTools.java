@@ -317,7 +317,8 @@ public class GuiTools
 		// address
 		{	String folder = baseFolder+GuiFileTools.FILE_ADDRESS;
 			String[] uses =
-			{	GuiKeys.COMMON_HOST_INFO_IP
+			{	GuiKeys.COMMON_HOST_INFO_IP,
+				GuiKeys.COMMON_GAME_LIST_HEADER_HOST_IP
 			};
 			loadTableImages(folder,uses);
 		}
@@ -468,7 +469,8 @@ public class GuiTools
 		// evolution
 		{	String folder = baseFolder+GuiFileTools.FILE_EVOLUTION;
 			String[] uses =
-			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_EVOLUTION
+			{	GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_EVOLUTION,
+				GuiKeys.COMMON_GAME_LIST_HEADER_TOURNAMENT_STATE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -492,7 +494,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_ROUND_HEADER_PORTRAIT,
 				GuiKeys.COMMON_PLAYERS_LIST_HEADER_HERO,
 				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_PORTRAIT,
-				GuiKeys.COMMON_GAME_INFO_PLAYER_COUNT
+				GuiKeys.COMMON_GAME_INFO_PLAYER_COUNT,
+				GuiKeys.COMMON_GAME_LIST_HEADER_PLAYER_COUNT
 			};
 			loadTableImages(folder,uses);
 			loadTableImages(folder,uses);
@@ -603,7 +606,6 @@ public class GuiTools
 			{	GuiKeys.MENU_RESOURCES_AI_SELECT_NOTES,
 				GuiKeys.COMMON_TOURNAMENT_TYPE,
 				GuiKeys.COMMON_ARCHIVE_TYPE,
-				GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -675,7 +677,8 @@ public class GuiTools
 				GuiKeys.COMMON_ROUND_ALLOWED_PLAYERS,
 				GuiKeys.COMMON_LEVEL_ALLOWED_PLAYERS,
 				GuiKeys.COMMON_TOURNAMENT_ALLOWED_PLAYERS,
-				GuiKeys.COMMON_GAME_INFO_ALLOWED_PLAYERS
+				GuiKeys.COMMON_GAME_INFO_ALLOWED_PLAYERS,
+				GuiKeys.COMMON_GAME_LIST_HEADER_ALLOWED_PLAYER
 			};
 			loadTableImages(folder,uses);
 		}
@@ -716,7 +719,8 @@ public class GuiTools
 				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_RANK,
 				GuiKeys.COMMON_PROFILES_RANK,
-				GuiKeys.COMMON_GAME_INFO_AVERAGE_SCORE
+				GuiKeys.COMMON_GAME_INFO_AVERAGE_SCORE,
+				GuiKeys.COMMON_GAME_LIST_HEADER_AVERAGE_LEVEL
 			};
 			loadTableImages(folder,uses);
 		}
@@ -751,6 +755,13 @@ public class GuiTools
 		{	String folder = baseFolder+GuiFileTools.FILE_STDEV;
 			String[] uses =
 			{	GuiKeys.COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_STANDARD_DEVIATION
+			};
+			loadTableImages(folder,uses);
+		}
+		// star
+		{	String folder = baseFolder+GuiFileTools.FILE_STAR;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_HEADER_PREFERRED
 			};
 			loadTableImages(folder,uses);
 		}
@@ -801,7 +812,8 @@ public class GuiTools
 				GuiKeys.COMMON_TOURNAMENT_NAME,
 				GuiKeys.COMMON_ARCHIVE_NAME,
 				GuiKeys.COMMON_HOST_INFO_NAME,
-				GuiKeys.COMMON_GAME_INFO_TOURNAMENT_NAME
+				GuiKeys.COMMON_GAME_INFO_TOURNAMENT_NAME,
+				GuiKeys.COMMON_GAME_LIST_HEADER_HOST_NAME
 			};
 			loadTableImages(folder,uses);
 		}
@@ -812,6 +824,14 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_MATCH_HEADER_TOTAL,
 				GuiKeys.COMMON_POINTS_TOURNAMENT_HEADER_TOTAL,
 				GuiKeys.COMMON_POINTS_MATCH_HEADER_TOTAL
+			};
+			loadTableImages(folder,uses);
+		}
+		// tournament
+		{	String folder = baseFolder+GuiFileTools.FILE_TOURNAMENT;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE,
+				GuiKeys.COMMON_GAME_LIST_HEADER_TOURNAMENT_TYPE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -857,6 +877,20 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// closed
+		{	String folder = baseFolder+GuiFileTools.FILE_CLOSED;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_STATE_CLOSED
+			};
+			loadTableImages(folder,uses);
+		}
+		// command
+		{	String folder = baseFolder+GuiFileTools.FILE_COMMAND;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKNOWN
+			};
+			loadTableImages(folder,uses);
+		}
 		// computer
 		{	String folder = baseFolder+GuiFileTools.FILE_COMPUTER;
 			String[] uses =
@@ -876,6 +910,13 @@ public class GuiTools
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_CROWNS,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_CROWNS,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_CROWNS
+			};
+			loadTableImages(folder,uses);
+		}
+		// cup
+		{	String folder = baseFolder+GuiFileTools.FILE_CUP;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_TYPE_CUP
 			};
 			loadTableImages(folder,uses);
 		}
@@ -942,6 +983,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// finished
+		{	String folder = baseFolder+GuiFileTools.FILE_FINISHED;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_STATE_FINISHED
+			};
+			loadTableImages(folder,uses);
+		}
 		// human
 		{	String folder = baseFolder+GuiFileTools.FILE_HUMAN;
 			String[] uses =
@@ -979,6 +1027,13 @@ public class GuiTools
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_BOMBINGS,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_BOMBINGS,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_BOMBINGS
+			};
+			loadTableImages(folder,uses);
+		}
+		// league
+		{	String folder = baseFolder+GuiFileTools.FILE_LEAGUE;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_TYPE_LEAGUE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1026,9 +1081,23 @@ public class GuiTools
 		// no share
 		{	String folder = baseFolder+GuiFileTools.FILE_NOSHARE;
 			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_FAV_REGULAR
+			};
+			loadTableImages(folder,uses);
+		}
+		// no star
+		{	String folder = baseFolder+GuiFileTools.FILE_NOSTAR;
+			String[] uses =
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_NOSHARE,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_NOSHARE,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_NOSHARE
+			};
+			loadTableImages(folder,uses);
+		}
+		// open
+		{	String folder = baseFolder+GuiFileTools.FILE_OPEN;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_STATE_OPEN
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1071,6 +1140,13 @@ public class GuiTools
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_PARTIAL,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_PARTIAL,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_PARTIAL
+			};
+			loadTableImages(folder,uses);
+		}
+		// playing
+		{	String folder = baseFolder+GuiFileTools.FILE_PLAYING;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_STATE_PLAYING
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1130,12 +1206,33 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// sequence
+		{	String folder = baseFolder+GuiFileTools.FILE_SEQUENCE;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SEQUENCE
+			};
+			loadTableImages(folder,uses);
+		}
 		// share
 		{	String folder = baseFolder+GuiFileTools.FILE_SHARE;
 			String[] uses =
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_SHARE,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_SHARE,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_SHARE
+			};
+			loadTableImages(folder,uses);
+		}
+		// single
+		{	String folder = baseFolder+GuiFileTools.FILE_SINGLE;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SINGLE
+			};
+			loadTableImages(folder,uses);
+		}
+		// star
+		{	String folder = baseFolder+GuiFileTools.FILE_STAR;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_FAV_PREFERRED
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1208,6 +1305,13 @@ public class GuiTools
 				GuiKeys.MENU_OPTIONS_STATISTICS_LINE_INCLUDE_QUICKSTART_ENABLED,
 				GuiKeys.MENU_OPTIONS_STATISTICS_LINE_INCLUDE_SIMULATION_ENABLED,
 				GuiKeys.MENU_OPTIONS_STATISTICS_LINE_REINIT_DONE
+			};
+			loadTableImages(folder,uses);
+		}
+		// turning
+		{	String folder = baseFolder+GuiFileTools.FILE_TURNING;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_TYPE_TURNING
 			};
 			loadTableImages(folder,uses);
 		}

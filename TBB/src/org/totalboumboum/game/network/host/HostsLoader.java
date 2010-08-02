@@ -87,6 +87,11 @@ public class HostsLoader
     	InetAddress ip = InetAddress.getByName(ipStr);
     	result.setLastIp(ip);
     	
+    	// preferred
+    	String preferredStr = root.getAttribute(XmlNames.PREFERRED).getValue();
+    	Boolean preferred = Boolean.parseBoolean(preferredStr);
+    	result.setPreferred(preferred);
+    	
     	return result;
 	}
 }

@@ -224,14 +224,14 @@ public enum GameColumn
 			String key;
 			if(state.equals(HostState.CLOSED))
 				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_CLOSED;
-			else if(HostState.equals(HostState.FINISHED))
+			else if(state.equals(HostState.FINISHED))
 				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_FINISHED;
-			else if(HostState.equals(HostState.OPEN))
+			else if(state.equals(HostState.OPEN))
 				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_OPEN;
-			else if(HostState.equals(HostState.PLAYING))
+			else if(state.equals(HostState.PLAYING))
 				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_PLAYING;
-			else if(HostState.equals(HostState.UNKOWN))
-				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKOWN;
+			else if(state.equals(HostState.UNKOWN))
+				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKNOWN;
 			if(key!=null)
 				panel.setLabelKey(line,col,key,true);
 		}

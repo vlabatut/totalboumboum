@@ -76,6 +76,8 @@ public class HostInfoSubPanel extends TableSubPanel
 			keys.add(GuiKeys.COMMON_HOST_INFO_TYPE);
 		if(showPlayed)
 			keys.add(GuiKeys.COMMON_HOST_INFO_PLAYED);
+		if(showPreferred)
+			keys.add(GuiKeys.COMMON_HOST_INFO_PREFERRED);
 		
 		if(hostInfo!=null)
 		{	// text
@@ -99,9 +101,9 @@ public class HostInfoSubPanel extends TableSubPanel
 				if(type!=null)
 				{	String key;
 					if(type.equals(HostType.CENTRAL))
-						key = GuiKeys.COMMON_HOST_INFO_TYPE_CENTRAL;
+						key = GuiKeys.COMMON_HOST_INFO_TYPE_DATA_CENTRAL;
 					else
-						key = GuiKeys.COMMON_HOST_INFO_TYPE_DIRECT;
+						key = GuiKeys.COMMON_HOST_INFO_TYPE_DATA_DIRECT;
 					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 				}
 				values.add(text);
@@ -109,6 +111,19 @@ public class HostInfoSubPanel extends TableSubPanel
 			if(showPlayed)
 			{	int value = hostInfo.getUses();
 				String text = Integer.toString(value);
+				values.add(text);
+			}
+			if(showPreferred)
+			{	Boolean preferred = hostInfo.getPreferred();
+				String text = "";
+				if(preferred!=null)
+				{	String key;
+					if(preferred)
+						key = GuiKeys.COMMON_HOST_INFO_PREFERRED_DATA_PREFERRED;
+					else
+						key = GuiKeys.COMMON_HOST_INFO_PREFERRED_DATA_NON_PREFERRED;
+					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+				}
 				values.add(text);
 			}
 			
@@ -178,6 +193,7 @@ public class HostInfoSubPanel extends TableSubPanel
 	private boolean showName = true;
 	private boolean showIp = true;
 	private boolean showPlayed = true;
+	private boolean showPreferred = true;
 	private boolean showType = true;
 
 	public void setShowName(boolean showName)
@@ -190,6 +206,10 @@ public class HostInfoSubPanel extends TableSubPanel
 
 	public void setShowPlayed(boolean showPlayed)
 	{	this.showPlayed = showPlayed;
+	}
+
+	public void setShowPreferred(boolean showPreferred)
+	{	this.showPreferred = showPreferred;
 	}
 
 	public void setShowType(boolean showType)
