@@ -772,12 +772,55 @@
 			<text name="AverageScore" value="Skill" tooltip="Average skill of the players already registered" />
 			<text name="PlayerCount" value="PlayerCount" tooltip="Number of players already registered" />
 			<text name="TournamentName" value="Name" tooltip="Tournament name" />
+			<text name="TournamentState" value="State" tooltip="Tournament state" />
+			<group name="StateData" >
+				<text name="Closed" value="Closed" tooltip="Registration already closed for this tournament" />
+				<text name="Finished" value="Finished" tooltip="This Tournament has ended" />
+				<text name="Open" value="Open" tooltip="Tournament open for registration" />
+				<text name="Playing" value="Playing" tooltip="This tournament has already started" />
+				<text name="Unknown" value="Unknown" tooltip="Currently retrieving the tournament state" />
+			</group>
 			<text name="TournamentType" value="Type" tooltip="Tournament type" />
-			<group name="Type" >
+			<group name="TypeData" >
 				<text name="Cup" value="Cup" tooltip="Knock-out tournament" />
 				<text name="League" value="League" tooltip="Round-robin tournament" />
 				<text name="Sequence" value="Sequence" tooltip="Sequence of matches" />
 				<text name="Single" value="Single" tooltip="One single match" />
+				<text name="Turning" value="Turning" tooltip="Around the table matches" />
+			</group>
+		</group>
+
+<!-- GAME LIST -->
+		<group name="GameList" >
+			<group name="Header" >
+				<text name="AllowedPlayer" value="Allowed" tooltip="Numbers of players allowed for this tournament" />
+				<text name="AverageLevel" value="Skill" tooltip="Average skill of the players already registered" />
+				<text name="HostIp" value="IP" tooltip="Last address for this host" />
+				<text name="HostName" value="Name" tooltip="Host name" />
+				<text name="PlayerCount" value="PlayerCount" tooltip="Number of players already registered" />
+				<text name="Preferred" value="Preferred" tooltip="Favorite hosts" />
+				<text name="TournamentState" value="State" tooltip="Tournament state" />
+				<text name="TournamentType" value="Type" tooltip="Tournament type" />
+			</group>
+			<group name="Data" >
+				<group name="Fav" >
+					<text name="Preferred" value="Preferred" tooltip="This host is among your favorite ones" />
+					<text name="Regular" value="Regular" tooltip="This host is not among your favorite ones" />
+				</group>
+				<group name="State" >
+					<text name="Closed" value="Closed" tooltip="Registration already closed for this tournament" />
+					<text name="Finished" value="Finished" tooltip="This Tournament has ended" />
+					<text name="Open" value="Open" tooltip="Tournament open for registration" />
+					<text name="Playing" value="Playing" tooltip="This tournament has already started" />
+					<text name="Unknown" value="Unknown" tooltip="Currently retrieving the tournament state" />
+				</group>
+				<group name="Type" >
+					<text name="Cup" value="Cup" tooltip="Knock-out tournament" />
+					<text name="League" value="League" tooltip="Round-robin tournament" />
+					<text name="Sequence" value="Sequence" tooltip="Sequence of matches" />
+					<text name="Single" value="Single" tooltip="One single match" />
+					<text name="Turning" value="Turning" tooltip="Around the table matches" />
+				</group>
 			</group>
 		</group>
 		
@@ -786,8 +829,13 @@
 			<text name="Ip" value="IP" tooltip="Last address for this host" />
 			<text name="Name" value="Name" tooltip="Host name" />
 			<text name="Played" value="Played" tooltip="Number of games played on this host" />
+			<text name="Preferred" value="Preferred" tooltip="Host favorite status" />
+			<group name="PreferredData" >
+				<text name="Preferred" value="Preferred" tooltip="Preferred host" />
+				<text name="NonPreferred" value="Not preferred" tooltip="Not a preferred host" />
+			</group>
 			<text name="Type" value="Type" tooltip="Connection type (central or direct)" />
-			<group name="Type" >
+			<group name="TypeData" >
 				<text name="Central" value="Central" tooltip="Central connection" />
 				<text name="Direct" value="Direct" tooltip="Direct connection" />
 			</group>

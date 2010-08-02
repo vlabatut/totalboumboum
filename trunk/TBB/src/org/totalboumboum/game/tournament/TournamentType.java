@@ -25,6 +25,7 @@ import org.totalboumboum.game.tournament.cup.CupTournament;
 import org.totalboumboum.game.tournament.league.LeagueTournament;
 import org.totalboumboum.game.tournament.sequence.SequenceTournament;
 import org.totalboumboum.game.tournament.single.SingleTournament;
+import org.totalboumboum.game.tournament.turning.TurningTournament;
 
 /**
  * 
@@ -33,10 +34,16 @@ import org.totalboumboum.game.tournament.single.SingleTournament;
  */
 public enum TournamentType
 {
+	/** knock-out type tournament (direct eliminations) */
 	CUP,
+	/** round-robin tournament (each player meets all the others) */
 	LEAGUE,
+	/** sequence of matches opposing the same players */
 	SEQUENCE,
-	SINGLE;
+	/** one single match */
+	SINGLE,
+	/** around the table tournament (players alternatively play and wait) */ 
+	TURNING;
 	
 	public static TournamentType getType(AbstractTournament tournament)
 	{	TournamentType result = null;
@@ -48,6 +55,8 @@ public enum TournamentType
 			result = SEQUENCE;
 		else if(tournament instanceof SingleTournament)
 			result = SINGLE;
+		else if(tournament instanceof TurningTournament)
+			result = TURNING;
 		return result;
 	}
 }

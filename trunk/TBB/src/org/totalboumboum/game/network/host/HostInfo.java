@@ -111,4 +111,17 @@ public class HostInfo
 	public void setState(HostState state)
 	{	this.state = state;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// PREFERRED			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Boolean preferred = null;
+	
+	public Boolean isPreferred()
+	{	return preferred;
+	}
+
+	public void setPreferred(boolean preferred)
+	{	this.preferred = preferred;
+	}
 }

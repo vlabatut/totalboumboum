@@ -225,6 +225,7 @@ public class XmlNames
 	public static final String POINTS = "points";
 	public static final String PORTRAIT = "portrait";
 	public static final String POSITION = "pos";
+	public static final String PREFERRED = "preferred";
 	public static final String PREVIEW = "preview";
 	public static final String PROBA = "proba";
 	public static final String PROFILE = "profile";

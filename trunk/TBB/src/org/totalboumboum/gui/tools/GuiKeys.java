@@ -77,6 +77,7 @@ public class GuiKeys
 	public static final String CANCEL = "Cancel";
 	public static final String CENTRAL = "Central";
 	public static final String CHANGE = "Change";
+	public static final String CLOSED = "Closed";
 	public static final String COLOR = "Color";
 	public static final String COLORS = "Colors";
 	public static final String COMMON = "Common";
@@ -118,8 +119,10 @@ public class GuiKeys
 	public static final String EXIT = "Exit";
 	public static final String FALSE = "False";
 	public static final String FASTER = "Faster";
+	public static final String FAV = "Fav";
 	public static final String FILE = "File";
 	public static final String FINISH = "Finish";
+	public static final String FINISHED = "Finished";
 	public static final String FIRESETMAP = "Firesetmap";
 	public static final String FIXED = "Fixed";
 	public static final String FOLDER = "Folder";
@@ -179,8 +182,10 @@ public class GuiKeys
 	public static final String NEW = "New";
 	public static final String NEXT = "Next";
 	public static final String NO = "No";
+	public static final String NON = "Non";
 	public static final String NONE = "None";
 	public static final String NOTES = "Notes";
+	public static final String OPEN = "Open";
 	public static final String OPTIONS = "Options";
 	public static final String ORANGE = "Orange";
 	public static final String ORDER = "Order";
@@ -200,9 +205,11 @@ public class GuiKeys
 	public static final String PLAYED = "Played";
 	public static final String PLAYER = "Player";
 	public static final String PLAYERS = "Players";
+	public static final String PLAYING = "Playing";
 	public static final String PLUS = "Plus";
 	public static final String POINTS = "Points";
 	public static final String PORTRAIT = "Portrait";
+	public static final String PREFERRED = "Preferred";
 	public static final String PREVIEW = "Preview";
 	public static final String PREVIOUS = "Previous";
 	public static final String PROFILE = "Profile";
@@ -256,6 +263,7 @@ public class GuiKeys
 	public static final String SPRITE = "Sprite";
 	public static final String STANDARD = "Standard";
 	public static final String START = "Start";
+	public static final String STATE = "State";
 	public static final String STATISTICS = "Statistics";
 	public static final String SUM = "Sum";
 	public static final String THEME = "Theme";
@@ -267,10 +275,12 @@ public class GuiKeys
 	public static final String TOURNAMENTS = "Tournaments";
 	public static final String TRANSFER = "Transfer";
 	public static final String TRUE = "True";
+	public static final String TURNING = "Turning";
 	public static final String TYPE = "Type";
 	public static final String TYPES = "Types";
 	public static final String ULTRAMARINE = "Ultramarine";
 	public static final String UNDECIDED = "Undecided";
+	public static final String UNKNOWN = "Unknown";
 	public static final String UNREGISTER = "Unregister";
 	public static final String UP = "Up";
 	public static final String UPS = "Ups";
@@ -1003,22 +1013,69 @@ public class GuiKeys
 	public static final String COMMON_GAME_INFO_AVERAGE_SCORE = COMMON_GAME_INFO+AVERAGE+SCORE;
 	public static final String COMMON_GAME_INFO_PLAYER_COUNT = COMMON_GAME_INFO+PLAYER+COUNT;
 	public static final String COMMON_GAME_INFO_TOURNAMENT_NAME = COMMON_GAME_INFO+TOURNAMENT+NAME;
+		/* GAME INFO TOURNAMENT STATE */
+		public static final String COMMON_GAME_INFO_TOURNAMENT_STATE = COMMON_GAME_INFO+TOURNAMENT+STATE;
+			/* GAME INFO TOURNAMENT STATE DATA */
+			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA = COMMON_GAME_INFO_TOURNAMENT_STATE+DATA;
+			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_CLOSED = COMMON_GAME_INFO_TOURNAMENT_STATE_DATA+CLOSED;
+			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_FINISHED = COMMON_GAME_INFO_TOURNAMENT_STATE_DATA+FINISHED;
+			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_OPEN = COMMON_GAME_INFO_TOURNAMENT_STATE_DATA+OPEN;
+			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_PLAYING = COMMON_GAME_INFO_TOURNAMENT_STATE_DATA+PLAYING;
+			public static final String COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_UNKNOWN = COMMON_GAME_INFO_TOURNAMENT_STATE_DATA+UNKNOWN;
 		/* GAME INFO TOURNAMENT TYPE */
 		public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE = COMMON_GAME_INFO+TOURNAMENT+TYPE;
-		public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_CUP = COMMON_GAME_INFO_TOURNAMENT_TYPE+CUP;
-		public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_LEAGUE = COMMON_GAME_INFO_TOURNAMENT_TYPE+LEAGUE;
-		public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_SEQUENCE = COMMON_GAME_INFO_TOURNAMENT_TYPE+SEQUENCE;
-		public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_SINGLE = COMMON_GAME_INFO_TOURNAMENT_TYPE+SINGLE;
+			/* GAME INFO TOURNAMENT TYPE DATA */
+			public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA = COMMON_GAME_INFO_TOURNAMENT_TYPE+DATA;
+			public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_CUP = COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA+CUP;
+			public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_LEAGUE = COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA+LEAGUE;
+			public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_SEQUENCE = COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA+SEQUENCE;
+			public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_SINGLE = COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA+SINGLE;
+			public static final String COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_TURNING = COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA+TURNING;
+
+	/* GAME LIST */
+	public static final String COMMON_GAME_LIST = COMMON+GAME+LIST;
+		/* GAME LIST HEADER */
+		public static final String COMMON_GAME_LIST_HEADER = COMMON_GAME_LIST+HEADER;
+		public static final String COMMON_GAME_LIST_HEADER_ALLOWED_PLAYER = COMMON_GAME_LIST_HEADER+ALLOWED+PLAYER;
+		public static final String COMMON_GAME_LIST_HEADER_AVERAGE_LEVEL = COMMON_GAME_LIST_HEADER+AVERAGE+LEVEL;
+		public static final String COMMON_GAME_LIST_HEADER_HOST_IP = COMMON_GAME_LIST_HEADER+HOST+IP;
+		public static final String COMMON_GAME_LIST_HEADER_HOST_NAME = COMMON_GAME_LIST_HEADER+HOST+NAME;
+		public static final String COMMON_GAME_LIST_HEADER_PLAYER_COUNT = COMMON_GAME_LIST_HEADER+PLAYER+COUNT;
+		public static final String COMMON_GAME_LIST_HEADER_PREFERRED = COMMON_GAME_LIST_HEADER+PREFERRED;
+		public static final String COMMON_GAME_LIST_HEADER_TOURNAMENT_STATE = COMMON_GAME_LIST_HEADER+TOURNAMENT+STATE;
+		public static final String COMMON_GAME_LIST_HEADER_TOURNAMENT_TYPE = COMMON_GAME_LIST_HEADER+TOURNAMENT+TYPE;
+		/* GAME LIST DATA */
+		public static final String COMMON_GAME_LIST_DATA = COMMON_GAME_LIST+DATA;
+		public static final String COMMON_GAME_LIST_DATA_FAV_PREFERRED = COMMON_GAME_LIST_DATA+FAV+PREFERRED;
+		public static final String COMMON_GAME_LIST_DATA_FAV_REGULAR = COMMON_GAME_LIST_DATA+FAV+REGULAR;
+		public static final String COMMON_GAME_LIST_DATA_STATE_CLOSED = COMMON_GAME_LIST_DATA+STATE+CLOSED;
+		public static final String COMMON_GAME_LIST_DATA_STATE_FINISHED = COMMON_GAME_LIST_DATA+STATE+FINISHED;
+		public static final String COMMON_GAME_LIST_DATA_STATE_OPEN = COMMON_GAME_LIST_DATA+STATE+OPEN;
+		public static final String COMMON_GAME_LIST_DATA_STATE_PLAYING = COMMON_GAME_LIST_DATA+STATE+PLAYING;
+		public static final String COMMON_GAME_LIST_DATA_STATE_UNKNOWN = COMMON_GAME_LIST_DATA+STATE+UNKNOWN;
+		public static final String COMMON_GAME_LIST_DATA_TYPE_CUP = COMMON_GAME_LIST_DATA+TYPE+CUP;
+		public static final String COMMON_GAME_LIST_DATA_TYPE_LEAGUE = COMMON_GAME_LIST_DATA+TYPE+LEAGUE;
+		public static final String COMMON_GAME_LIST_DATA_TYPE_SEQUENCE = COMMON_GAME_LIST_DATA+TYPE+SEQUENCE;
+		public static final String COMMON_GAME_LIST_DATA_TYPE_SINGLE = COMMON_GAME_LIST_DATA+TYPE+SINGLE;
+		public static final String COMMON_GAME_LIST_DATA_TYPE_TURNING = COMMON_GAME_LIST_DATA+TYPE+TURNING;
 
 	/* HOST INFO */
 	public static final String COMMON_HOST_INFO = COMMON+HOST+INFO;
 	public static final String COMMON_HOST_INFO_IP = COMMON_HOST_INFO+IP;
 	public static final String COMMON_HOST_INFO_NAME = COMMON_HOST_INFO+NAME;
 	public static final String COMMON_HOST_INFO_PLAYED = COMMON_HOST_INFO+PLAYED;
+		/* HOST INFO PREFERRED*/
+		public static final String COMMON_HOST_INFO_PREFERRED = COMMON_HOST_INFO+PREFERRED;
+			/* HOST INFO PREFERRED DATA */
+			public static final String COMMON_HOST_INFO_PREFERRED_DATA = COMMON_HOST_INFO_PREFERRED+DATA;
+			public static final String COMMON_HOST_INFO_PREFERRED_DATA_PREFERRED = COMMON_HOST_INFO_PREFERRED_DATA+PREFERRED;
+			public static final String COMMON_HOST_INFO_PREFERRED_DATA_NON_PREFERRED = COMMON_HOST_INFO_PREFERRED_DATA+NON+PREFERRED;
 		/* HOST INFO TYPE*/
 		public static final String COMMON_HOST_INFO_TYPE = COMMON_HOST_INFO+TYPE;
-		public static final String COMMON_HOST_INFO_TYPE_CENTRAL = COMMON_HOST_INFO_TYPE+CENTRAL;
-		public static final String COMMON_HOST_INFO_TYPE_DIRECT = COMMON_HOST_INFO_TYPE+DIRECT;
+			/* HOST INFO TYPE DATA */
+			public static final String COMMON_HOST_INFO_TYPE_DATA = COMMON_HOST_INFO_TYPE+DATA;
+			public static final String COMMON_HOST_INFO_TYPE_DATA_CENTRAL = COMMON_HOST_INFO_TYPE_DATA+CENTRAL;
+			public static final String COMMON_HOST_INFO_TYPE_DATA_DIRECT = COMMON_HOST_INFO_TYPE_DATA+DIRECT;
 
 	/* ITEMS */
 	public static final String COMMON_ITEMS = COMMON+ITEMS;

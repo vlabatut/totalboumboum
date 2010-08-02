@@ -30,5 +30,5 @@ import java.util.HashMap;
  */
 public class HostsList extends HashMap<String,HostInfo>
 {	private static final long serialVersionUID = 1L;
-
+	// TODO is this class needed?
 }

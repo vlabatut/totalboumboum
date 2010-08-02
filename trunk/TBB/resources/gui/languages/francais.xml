@@ -770,12 +770,55 @@
 			<text name="AverageScore" value="Score" tooltip="Niveau moyen des joueurs déjà inscrits" />
 			<text name="PlayerCount" value="Joueurs" tooltip="Nombre de joueurs déjà inscrits" />
 			<text name="TournamentName" value="Nom" tooltip="Nom du tournoi" />
+			<text name="TournamentState" value="État" tooltip="État du tournament" />
+			<group name="StateData" >
+				<text name="Closed" value="Fermé" tooltip="Inscriptions déjà fermées pour ce tournoi" />
+				<text name="Finished" value="Terminé" tooltip="Tournoi terminé" />
+				<text name="Open" value="Ouvert" tooltip="Tournoi ouvert aux inscriptions" />
+				<text name="Playing" value="En cours" tooltip="Tournoi déjà commencé" />
+				<text name="Unknown" value="Inconnu" tooltip="En train de récupérer l'état du tournoi..." />
+			</group>
 			<text name="TournamentType" value="Type" tooltip="Type du tournoi" />
-			<group name="Type" >
+			<group name="TypeData" >
 				<text name="Cup" value="Coupe" tooltip="Coupe à élimination directe" />
 				<text name="League" value="Ligue" tooltip="Championat complet" />
 				<text name="Sequence" value="Séquence" tooltip="Séquence de plusieurs rencontres" />
 				<text name="Single" value="Simple" tooltip="Une seule rencontre" />
+				<text name="Turning" value="Tournante" tooltip="Rencontres tournantes" />
+			</group>
+		</group>
+		
+<!-- GAME LIST -->
+		<group name="GameList" >
+			<group name="Header" >
+				<text name="AllowedPlayer" value="Permis" tooltip="Nombre de joueurs permis pour ce tournoi" />
+				<text name="AverageLevel" value="Score" tooltip="Niveau moyen des joueurs déjà inscrits" />
+				<text name="HostIp" value="IP" tooltip="Dernière adresse de l'hôte" />
+				<text name="HostName" value="Nom" tooltip="Nom de l'hôte" />
+				<text name="PlayerCount" value="Joueurs" tooltip="Nombre de joueurs déjà inscrits" />
+				<text name="Preferred" value="Favoris" tooltip="Hôtes favoris" />
+				<text name="TournamentState" value="State" tooltip="État du tournoi" />
+				<text name="TournamentType" value="Type" tooltip="Type du tournoi" />
+			</group>
+			<group name="Data" >
+				<group name="Fav" >
+					<text name="Preferred" value="Favori" tooltip="Cet hote figure parmi vos favoris" />
+					<text name="Regular" value="Normal" tooltip="Cet hote ne figure pas parmi vos favoris" />
+				</group>
+				<group name="State" >
+					<text name="Closed" value="Fermé" tooltip="Inscriptions déjà fermées pour ce tournoi" />
+					<text name="Finished" value="Terminé" tooltip="Tournoi terminé" />
+					<text name="Open" value="Ouvert" tooltip="Tournoi ouvert aux inscriptions" />
+					<text name="Playing" value="En cours" tooltip="Tournoi déjà commencé" />
+					<text name="Unknown" value="Inconnu" tooltip="En train de récupérer l'état du tournoi..." />
+				</group>
+				<group name="Type" >
+					<text name="Cup" value="Coupe" tooltip="Coupe à élimination directe" />
+					<text name="League" value="Ligue" tooltip="Championat complet" />
+					<text name="Sequence" value="Séquence" tooltip="Séquence de plusieurs rencontres" />
+					<text name="Single" value="Simple" tooltip="Une seule rencontre" />
+					<text name="Turning" value="Tournante" tooltip="Rencontres tournantes" />
+				</group>
 			</group>
 		</group>
 		
@@ -784,8 +827,13 @@
 			<text name="Ip" value="IP" tooltip="Dernière adresse de l'hôte" />
 			<text name="Name" value="Nom" tooltip="Nom de l'hôte" />
 			<text name="Played" value="Joués" tooltip="Nombre de parties jouées sur cet hôte" />
+			<text name="Preferred" value="Preferred" tooltip="Statut de favori" />
+			<group name="PreferredData" >
+				<text name="Preferred" value="Favori" tooltip="Hôte figurant parmi les favoris" />
+				<text name="NonPreferred" value="Non-favori" tooltip="Hôte ne figurant pas parmi les favoris" />
+			</group>
 			<text name="Type" value="Type" tooltip="Type de connexion (central ou direct)" />
-			<group name="Type" >
+			<group name="TypeData" >
 				<text name="Central" value="Central" tooltip="Hôte accessible via le central" />
 				<text name="Direct" value="Direct" tooltip="Hôte accessible directement" />
 			</group>

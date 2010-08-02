@@ -29,6 +29,7 @@ import java.util.Set;
 
 import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.game.network.game.GameInfo;
+import org.totalboumboum.game.network.host.HostState;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
@@ -80,6 +81,8 @@ public class GameInfoSubPanel extends TableSubPanel
 			keys.add(GuiKeys.COMMON_GAME_INFO_PLAYER_COUNT);
 		if(showAverageScore)
 			keys.add(GuiKeys.COMMON_GAME_INFO_AVERAGE_SCORE);
+		if(showTournamentState)
+			keys.add(GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE);
 		
 		if(gameInfo!=null)
 		{	// text
@@ -92,17 +95,19 @@ public class GameInfoSubPanel extends TableSubPanel
 			}
 			if(showTournamentType)
 			{	TournamentType type = gameInfo.getTournamentType();
-				String text = "";
+				String text = "ERROR";
 				if(type!=null)
-				{	String key = "ERROR";
+				{	String key = "";
 					if(type.equals(TournamentType.CUP))
-						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_CUP;
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_CUP;
 					else if(type.equals(TournamentType.LEAGUE))
-						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_LEAGUE;
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_LEAGUE;
 					else if(type.equals(TournamentType.SEQUENCE))
-						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_SEQUENCE;
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_SEQUENCE;
 					else if(type.equals(TournamentType.SINGLE))
-						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_SINGLE;
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_SINGLE;
+					else if(type.equals(TournamentType.TURNING))
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_TURNING;
 					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 				}
 				values.add(text);
@@ -127,6 +132,25 @@ public class GameInfoSubPanel extends TableSubPanel
 					nf.setMaximumFractionDigits(2);
 					nf.setMinimumFractionDigits(2);
 					text = nf.format(value);
+				}
+				values.add(text);
+			}
+			if(showTournamentState)
+			{	HostState state = gameInfo.getHostInfo().getState();
+				String text = "ERROR";
+				if(state!=null)
+				{	String key = "";
+					if(state.equals(HostState.CLOSED))
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_CLOSED;
+					else if(state.equals(HostState.FINISHED))
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_FINISHED;
+					else if(state.equals(HostState.OPEN))
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_OPEN;
+					else if(state.equals(HostState.PLAYING))
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_PLAYING;
+					else if(state.equals(HostState.UNKOWN))
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_UNKNOWN;
+					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 				}
 				values.add(text);
 			}
@@ -198,6 +222,7 @@ public class GameInfoSubPanel extends TableSubPanel
 	private boolean showAverageScore = true;
 	private boolean showPlayerCount = true;
 	private boolean showTournamentName = true;
+	private boolean showTournamentState = true;
 	private boolean showTournamentType = true;
 
 	public void setShowAllowedPlayers(boolean showAllowedPlayers)
@@ -214,6 +239,10 @@ public class GameInfoSubPanel extends TableSubPanel
 
 	public void setShowTournamentName(boolean showTournamentName)
 	{	this.showTournamentName = showTournamentName;
+	}
+
+	public void setShowTournamentState(boolean showTournamentState)
+	{	this.showTournamentState = showTournamentState;
 	}
 
 	public void setShowTournamentType(boolean showTournamentType)
