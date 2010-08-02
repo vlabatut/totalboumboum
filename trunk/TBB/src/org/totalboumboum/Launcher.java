@@ -1412,6 +1412,14 @@ public class Launcher
 	 * 3) pour les stats, suffit également de les écrire coté client
   	 */
 	
+	// TODO dans la gui, faudrait gérer le texte comme les images :
+	// le même texte peut servir sur plusieurs éléments.
+	// ça économiserait du traitement et de la place dans les fichiers de traduction,
+	// qui seraient plus simples à maintenir.
+	// et en plus on pourrait garder des noms d'éléments correspondant aux composants GUI,
+	// sans se soucier de leur signification réelle (contenu textuel).
+	// du cp, les clés du texte pourraient être plus explicites (car indépendantes)
+	
 	//TODO tester les confs de tournois/partie rapide sans l'option "utiliser les réglages précédents"
 	//TODO voir pouquoi c'est si lent dans l'interface quand on règle le tournoi
 	//TODO rajouter un bouton permettant de bloquer l'inscription/désinscription d'un joueur
