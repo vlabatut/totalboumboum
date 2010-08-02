@@ -41,6 +41,7 @@ import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.network.game.GameInfo;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
@@ -63,20 +64,6 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	private final static int COL_PREVIOUS = 0;
 	private final static int COL_NEXT = 2;
-
-/**
- * colonnes :
- *  - suppression/ajout : seulement direct 
- *  - favori : tous
- *  - nom hote : tous
- *  - ip : tous
- *  - type tournoi : tous
- *  - nombre joueurs : tous
- *  - joueurs autorisés : tous
- *  - niveau moyen : tous
- *  - état (ouvert/fermé/en cours/inconnu) : tous
- */
-	
 	
 	public GameListSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER);
@@ -97,8 +84,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		
 		// sizes
 		int buttonHeight = GuiTools.subPanelTitleHeight;
-		int regularButtonWidth = (getDataWidth() - 4*GuiTools.subPanelMargin)/5;
-		int centerButtonWidth = getDataWidth()- 4*regularButtonWidth - 4*GuiTools.subPanelMargin;
+		int buttonWidth = (getDataWidth() - 1*GuiTools.subPanelMargin)/2;
 		int mainPanelHeight = getDataHeight() - buttonHeight - GuiTools.subPanelMargin;
 		
 		// main panel
@@ -125,62 +111,11 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
+				Dimension dim = new Dimension(buttonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
-				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_PREVIOUS;
-				label.setKey(key,true);
-				label.setHorizontalAlignment(JLabel.CENTER);
-				label.setVerticalAlignment(JLabel.CENTER);
-				label.addMouseListener(this);
-				label.setMouseSensitive(true);
-				buttonsPanel.add(label);
-			}
-			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
-			// type
-			{	MyLabel label = new MyLabel();
-				label.setOpaque(true);
-				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
-				label.setMinimumSize(dim);
-				label.setPreferredSize(dim);
-				label.setMaximumSize(dim);
-				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_HUMAN;
-				label.setKey(key,true);
-				label.setHorizontalAlignment(JLabel.CENTER);
-				label.setVerticalAlignment(JLabel.CENTER);
-				label.addMouseListener(this);
-				label.setMouseSensitive(true);
-				buttonsPanel.add(label);
-			}
-			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
-			// ranks
-			{	MyLabel label = new MyLabel();
-				label.setOpaque(true);
-				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
-				label.setMinimumSize(dim);
-				label.setPreferredSize(dim);
-				label.setMaximumSize(dim);
-				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALLRANKS;
-				label.setKey(key,true);
-				label.setHorizontalAlignment(JLabel.CENTER);
-				label.setVerticalAlignment(JLabel.CENTER);
-				label.addMouseListener(this);
-				label.setMouseSensitive(true);
-				buttonsPanel.add(label);
-			}
-			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
-			// sum/mean
-			{	MyLabel label = new MyLabel();
-				label.setOpaque(true);
-				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-				Dimension dim = new Dimension(centerButtonWidth,buttonHeight);
-				label.setMinimumSize(dim);
-				label.setPreferredSize(dim);
-				label.setMaximumSize(dim);
-				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_MEAN;
+				String key = GuiKeys.COMMON_GAME_LIST_BUTTON_PREVIOUS;
 				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
@@ -193,11 +128,11 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
+				Dimension dim = new Dimension(buttonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
-				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_NEXT;
+				String key = GuiKeys.COMMON_GAME_LIST_BUTTON_NEXT;
 				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
@@ -210,17 +145,17 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		
 		// pages
 		currentPage = 0;
-		sortCriterion = GameColumn.GLICKO_MEAN;
-		setPlayersIds(null,16);
+		sortCriterion = GameColumn.PLAYED;
+		setGameInfos(null,16);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<String> playersIds;
-	private HashMap<String,Profile> profilesMap;
+	private List<String> gamesIds;
+	private HashMap<String,GameInfo> gamesMap;
 	@SuppressWarnings("rawtypes")
-	private HashMap<String,List<Comparable>> playersScores = new HashMap<String, List<Comparable>>();
+	private HashMap<String,List<Comparable>> valuesMap = new HashMap<String, List<Comparable>>();
 	private int currentPage = 0;
 	private final List<TableSubPanel> listPanels = new ArrayList<TableSubPanel>();
 	private int pageCount;	
@@ -228,34 +163,29 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	private TableSubPanel mainPanel;
 	private JPanel buttonsPanel;
 	
-	public HashMap<String,Profile> getPlayersProfiles()
-	{	return profilesMap;	
+	public HashMap<String,GameInfo> getGameInfos()
+	{	return gamesMap;
 	}
 	
-	public List<String> getPlayersIds()
-	{	return playersIds;	
-	}
-	
-	public void setPlayersIds(HashMap<String,Profile> profilesMap, int lines)
+	public void setGameInfos(HashMap<String,GameInfo> gamesMap, int lines)
 	{	// init
 		this.lines = lines;
 		lines++;
-		if(profilesMap==null)
-			profilesMap = new HashMap<String,Profile>();
-		this.profilesMap = profilesMap;
+		if(gamesMap==null)
+			gamesMap = new HashMap<String,GameInfo>();
+		this.gamesMap = gamesMap;
 		listPanels.clear();
 		
 		// sorting players
-		RankingService rankingService = GameStatistics.getRankingService();
-		sortCriterion.updateValues(this,playersScores,rankingService,profilesMap);
-		playersIds = new ArrayList<String>(profilesMap.keySet());
-		Collections.sort(playersIds,new Comparator<String>()
+		sortCriterion.updateValues(this,valuesMap,gamesMap);
+		gamesIds = new ArrayList<String>(gamesMap.keySet());
+		Collections.sort(gamesIds,new Comparator<String>()
 		{	@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
 			public int compare(String playerId1, String playerId2)
 			{	int result = 0;
-				List<Comparable> list1 = playersScores.get(playerId1);
-				List<Comparable> list2 = playersScores.get(playerId2);
+				List<Comparable> list1 = valuesMap.get(playerId1);
+				List<Comparable> list2 = valuesMap.get(playerId2);
 				int index = 0;
 				while(result==0 && index<list1.size())
 				{	Comparable o1 = list1.get(index);
@@ -268,10 +198,10 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		});
 		if((inverted && !sortCriterion.isInverted())
 			|| (!inverted && sortCriterion.isInverted()))
-		{	List<String> temp = playersIds;
-			playersIds = new ArrayList<String>();
+		{	List<String> temp = gamesIds;
+			gamesIds = new ArrayList<String>();
 			for(String i: temp)
-				playersIds.add(0,i);
+				gamesIds.add(0,i);
 		}
 		
 		// cols
@@ -287,7 +217,6 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		// building all pages
 		pageCount = 0;
 		int headerHeight = 0;
-		HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		int idIndex = 0;
 		do
 		{	// build the panel			
@@ -310,33 +239,20 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 					colWidths[h] = headerHeight;
 			}
 
-			// data: process each playerId
+			// data: process each game id
 			int line = 1;
-			while(line<lines && idIndex<playersIds.size())
+			while(line<lines && idIndex<gamesIds.size())
 			{	// init
-				String playerId = playersIds.get(idIndex);
+				String gameId = gamesIds.get(idIndex);
 				idIndex++;
-				Profile profile = profilesMap.get(playerId);
-				PlayerRating playerRating = rankingService.getPlayerRating(playerId);
-				PlayerStats playerStats = playersStats.get(playerId);
-				int playerRank = rankingService.getPlayerRank(playerId);
-				if(((type==Type.AI && profile.hasAi()) || (type==Type.HUMAN && !profile.hasAi()) || type==Type.BOTH)
-					&& ((ranks==Ranks.ALL_RANKS && playerRating!=null) || (ranks==Ranks.NO_RANKS && playerRating==null) || ranks==Ranks.ALL))
-				{	// color
-					Color clr = profile.getSpriteColor().getColor();
-					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-					if(playerRating==null)
-						alpha = alpha/3;
-					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-					panel.setLineBackground(line,bg);
-					// columns
-					for(int col=0;col<cols;col++)
-					{	GameColumn column = columns.get(col);
-						column.setLabelContent(this,panel,colWidths,line,col,playerId,playerRank,profile,playerRating,playerStats);
-					}
-					// next line
-					line++;
+				GameInfo gameInfo = gamesMap.get(gameId);
+				// columns
+				for(int col=0;col<cols;col++)
+				{	GameColumn column = columns.get(col);
+					column.setLabelContent(this,panel,colWidths,line,col,gameInfo);
 				}
+				// next line
+				line++;
 			}
 						
 			// add panel to list
@@ -345,10 +261,10 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				pageCount++;
 			}
 		}
-		while(idIndex<playersIds.size());
+		while(idIndex<gamesIds.size());
 		
 		// col widths
-		{	int colName = columns.indexOf(GameColumn.GENERAL_NAME);
+		{	int colName = columns.indexOf(GameColumn.HOST_NAME);
 			// process name width
 			if(colName!=-1)
 			{	colWidths[colName] = getDataWidth() - (cols-1)*GuiTools.subPanelMargin;
@@ -391,7 +307,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	}
 	
 	public void refresh()
-	{	setPlayersIds(profilesMap,lines);
+	{	setGameInfos(gamesMap,lines);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -411,13 +327,6 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	private GameColumn sortCriterion = null;
 	private boolean inverted = false;
-	private boolean mean = false;
-	private Type type = Type.BOTH;
-	private Ranks ranks = Ranks.ALL;
-	
-	public boolean hasMean()
-	{	return mean;
-	}	
 	
 	public void setSort(GameColumn sort)
 	{	if(sortCriterion==sort)
@@ -427,32 +336,6 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			sortCriterion = sort;
 		}
 		refresh();
-	}
-	
-	private enum Type
-	{	HUMAN,
-		AI,
-		BOTH;
-	
-		public Type getNext()
-		{	Type[] values = Type.values();
-			int index = (this.ordinal()+1)%values.length;
-			Type result = values[index];
-			return result;
-		}
-	}
-	
-	private enum Ranks
-	{	ALL,
-		ALL_RANKS,
-		NO_RANKS;
-	
-		public Ranks getNext()
-		{	Ranks[] values = Ranks.values();
-			int index = (this.ordinal()+1)%values.length;
-			Ranks result = values[index];
-			return result;
-		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -486,46 +369,6 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 					refreshList();
 				}
 			}
-			// switch type
-			else if(pos==COL_TYPE)
-			{	type = type.getNext();
-				String key;
-				if(type==Type.HUMAN)
-					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_AI;
-				else if(type==Type.AI)
-					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_BOTH;
-				else
-					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_HUMAN;
-				MyLabel lbl = (MyLabel)buttonsPanel.getComponent(COL_TYPE);
-				lbl.setKey(key,true);
-				refresh();
-			}
-			// ranks
-			else if(pos==COL_RANKS)
-			{	ranks = ranks.getNext();
-				String key;
-				if(ranks==Ranks.ALL)
-					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALLRANKS;
-				else if(ranks==Ranks.ALL_RANKS)
-					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_NORANKS;
-				else
-					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_ALL;
-				MyLabel lbl = (MyLabel)buttonsPanel.getComponent(COL_RANKS);
-				lbl.setKey(key,true);
-				refresh();
-			}
-			// mean/sum
-			else if(pos==COL_SUM_MEAN)
-			{	String key;
-				if(mean)
-					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_MEAN;
-				else
-					key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_SUM;
-				MyLabel lbl = (MyLabel)buttonsPanel.getComponent(COL_SUM_MEAN);
-				lbl.setKey(key,true);
-				mean = !mean;
-				refresh();
-			}
 			// next page
 			else if(pos==COL_NEXT)
 			{	if(currentPage<pageCount-1)
@@ -534,6 +377,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				}
 			}
 		}
+		
 		// table buttons
 		else
 		{	int[] p = mainPanel.getLabelPositionSimple(label);
@@ -543,9 +387,27 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				if(rc!=null)
 					setSort(rc);
 			}
-			// add/remove
+			// preferred
 			else if(p[1]==0)
-			{	String playerId = playersIds.get((currentPage*lines)+p[0]-1);
+			{
+				//TODO switch from favorite list
+				
+/**
+ * TODO
+ * - rajouter connections dans configuration
+ * - gérer les listes : central, direct, favoris
+ * - rajouter un objet connexion dans game, de manière à gérer les connections dans ces listes
+ * - niveau fichiers : mettre la liste d'hotes directs et de favoris dans le fichier de config
+ *   ou pas, car ça peut aussi se charger à la demande quand on veut faire une partie réseau
+ * - rajouter dans la config réseau l'@ du central 				
+ */
+			}
+			// add/remove
+			else if(p[1]==2)
+			{	
+				// TODO add/remove from the direct connexion list
+				
+				String gameId = gamesIds.get((currentPage*lines)+p[0]-1);
 				RankingService rankingService = GameStatistics.getRankingService();
 				Set<String> playersIds = rankingService.getPlayers();
 				if(playersIds.contains(playerId))

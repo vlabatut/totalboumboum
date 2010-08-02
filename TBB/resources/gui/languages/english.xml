@@ -792,11 +792,16 @@
 
 <!-- GAME LIST -->
 		<group name="GameList" >
+			<group name="Button" >
+				<text name="Previous" value="Previous" tooltip="Previous hosts page" />
+				<text name="Next" value="Next" tooltip="Next hosts page" />
+			</group>
 			<group name="Header" >
 				<text name="AllowedPlayer" value="Allowed" tooltip="Numbers of players allowed for this tournament" />
 				<text name="AverageLevel" value="Skill" tooltip="Average skill of the players already registered" />
 				<text name="HostIp" value="IP" tooltip="Last address for this host" />
 				<text name="HostName" value="Name" tooltip="Host name" />
+				<text name="Played" value="Played" tooltip="Number of games played on this host" />
 				<text name="PlayerCount" value="PlayerCount" tooltip="Number of players already registered" />
 				<text name="Preferred" value="Preferred" tooltip="Favorite hosts" />
 				<text name="TournamentState" value="State" tooltip="Tournament state" />
