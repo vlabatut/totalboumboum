@@ -38,33 +38,33 @@ public class GameInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// AVERAGE SCORE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private double averageScore;
+	private Double averageScore = null;
 
-	public void setAverageScore(double averageScore)
+	public void setAverageScore(Double averageScore)
 	{	this.averageScore = averageScore;
 	}
 
-	public double getAverageScore()
+	public Double getAverageScore()
 	{	return averageScore;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS COUNT		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int playerCount;
+	private Integer playerCount = null;
 
-	public void setPlayerCount(int playerCount)
+	public void setPlayerCount(Integer playerCount)
 	{	this.playerCount = playerCount;
 	}
 
-	public int getPlayerCount()
+	public Integer getPlayerCount()
 	{	return playerCount;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ALLOWED PLAYERS 		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Set<Integer> allowedPlayers;
+	private Set<Integer> allowedPlayers = null;
 
 	public void setAllowedPlayers(Set<Integer> allowedPlayers)
 	{	this.allowedPlayers = allowedPlayers;
@@ -77,7 +77,7 @@ public class GameInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT TYPE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private TournamentType tournamentType;
+	private TournamentType tournamentType = null;
 
 	public void setTournamentType(TournamentType tournamentType)
 	{	this.tournamentType = tournamentType;
@@ -90,7 +90,7 @@ public class GameInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT NAME		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String tournamentName;
+	private String tournamentName = null;
 
 	public void setTournamentName(String tournamentName)
 	{	this.tournamentName = tournamentName;
@@ -103,7 +103,7 @@ public class GameInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// HOST INFO			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HostInfo hostInfo;
+	private HostInfo hostInfo = null;
 
 	public void setHostInfo(HostInfo hostInfo)
 	{	this.hostInfo = hostInfo;

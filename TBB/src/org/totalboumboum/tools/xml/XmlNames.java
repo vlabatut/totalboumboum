@@ -77,6 +77,7 @@ public class XmlNames
 	public static final String CASE = "case";
 	public static final String CACHE = "cache";
 	public static final String CACHE_LIMIT = "cacheLimit";
+	public static final String CENTRAL = "central";
 	public static final String CHARACTER = "character";
 	public static final String COL = "col";
 	public static final String COLOR = "color";
@@ -91,6 +92,7 @@ public class XmlNames
 	public static final String CONCRETE_ITEMS = "concreteItems";
 	public static final String CONFRONTATION = "confrontation";
 	public static final String CONFRONTATIONS_ORDER = "confrontationsOrder";
+	public static final String CONNECTIONS = "connections";
 	public static final String CONSTANT = "constant";
 	public static final String CONTACT = "contact";
 	public static final String CONTROL = "control";
@@ -159,6 +161,7 @@ public class XmlNames
 	public static final String INGAME = "ingame";
 	public static final String INSTANCE = "instance";
 	public static final String INVERT = "invert";
+	public static final String IP = "ip";
 	public static final String ITEM = "item";
 	public static final String ITEMS = "items";
 	public static final String ITEMSET = "itemset";

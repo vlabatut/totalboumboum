@@ -394,12 +394,8 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				
 /**
  * TODO
- * - rajouter connections dans configuration
  * - gérer les listes : central, direct, favoris
  * - rajouter un objet connexion dans game, de manière à gérer les connections dans ces listes
- * - niveau fichiers : mettre la liste d'hotes directs et de favoris dans le fichier de config
- *   ou pas, car ça peut aussi se charger à la demande quand on veut faire une partie réseau
- * - rajouter dans la config réseau l'@ du central 				
  */
 			}
 			// add/remove

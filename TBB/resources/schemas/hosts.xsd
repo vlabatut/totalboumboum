@@ -6,7 +6,7 @@
 		<xsd:attribute name="id" type="xsd:string" use="required" />
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 		<xsd:attribute name="use" type="xsd:integer" use="required" />
-		<xsd:attribute name="lastIp" type="ipAddress" use="required" />
+		<xsd:attribute name="lastIp" type="tIpAddress" use="required" />
 		<xsd:attribute name="preferred" type="xsd:boolean" default="false" />
 	</xsd:complexType>
 
