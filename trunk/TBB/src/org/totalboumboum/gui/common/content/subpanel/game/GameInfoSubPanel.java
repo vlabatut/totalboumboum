@@ -88,9 +88,9 @@ public class GameInfoSubPanel extends TableSubPanel
 		{	// text
 			List<String> values = new ArrayList<String>();
 			if(showTournamentName)
-			{	String text = gameInfo.getTournamentName();
-				if(text==null)
-					text = "";
+			{	String text = "?";
+				if(text!=null)
+					text = gameInfo.getTournamentName();
 				values.add(text);
 			}
 			if(showTournamentType)
@@ -114,19 +114,21 @@ public class GameInfoSubPanel extends TableSubPanel
 			}
 			if(showAllowedPlayers)
 			{	Set<Integer> value = gameInfo.getAllowedPlayers();
-				String text = Players.formatAllowedPlayerNumbers(value);
+				String text = "?";
+				if(value!=null)
+					text = Players.formatAllowedPlayerNumbers(value);
 				values.add(text);
 			}
 			if(showPlayerCount)
 			{	Integer value = gameInfo.getPlayerCount();
-				String text = "";
+				String text = "?";
 				if(value!=null)
 					text = Integer.toString(value);
 				values.add(text);
 			}
 			if(showAverageScore)
 			{	Double value = gameInfo.getAverageScore();
-				String text = "";
+				String text = "?";
 				if(value!=null)
 				{	NumberFormat nf = NumberFormat.getInstance();
 					nf.setMaximumFractionDigits(2);

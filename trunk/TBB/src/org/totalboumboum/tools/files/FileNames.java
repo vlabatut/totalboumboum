@@ -62,6 +62,7 @@ public class FileNames
 	public static final String FILE_COLORMAP = "colormap";
 	public static final String FILE_COLORMAPS = "colormaps";
 	public static final String FILE_CONFIGURATION = "configuration";
+	public static final String FILE_CONNECTIONS = "connections";
 	public static final String FILE_CONTROLS = "controls";
 	public static final String FILE_DATA = "data";
 	public static final String FILE_DETAILED = "detailed";

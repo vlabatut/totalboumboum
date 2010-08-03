@@ -83,21 +83,21 @@ public class HostInfoSubPanel extends TableSubPanel
 		{	// text
 			List<String> values = new ArrayList<String>();
 			if(showName)
-			{	String text = hostInfo.getName();
-				if(text==null)
-					text = "";
+			{	String text = "?";
+				if(text!=null)
+					text = hostInfo.getName();
 				values.add(text);
 			}
 			if(showIp)
 			{	InetAddress ip = hostInfo.getLastIp();
-				String text = "";
+				String text = "?";
 				if(ip!=null)
 					text = ip.getHostName();
 				values.add(text);
 			}
 			if(showType)
 			{	HostType type = hostInfo.getType();
-				String text = "";
+				String text = "?";
 				if(type!=null)
 				{	String key;
 					if(type.equals(HostType.CENTRAL))
@@ -109,13 +109,15 @@ public class HostInfoSubPanel extends TableSubPanel
 				values.add(text);
 			}
 			if(showPlayed)
-			{	int value = hostInfo.getUses();
-				String text = Integer.toString(value);
+			{	Integer value = hostInfo.getUses();
+				String text = "?";
+				if(value!=null)
+					text = Integer.toString(value);
 				values.add(text);
 			}
 			if(showPreferred)
-			{	Boolean preferred = hostInfo.getPreferred();
-				String text = "";
+			{	Boolean preferred = hostInfo.isPreferred();
+				String text = "?";
 				if(preferred!=null)
 				{	String key;
 					if(preferred)

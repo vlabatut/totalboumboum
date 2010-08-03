@@ -23,6 +23,7 @@ package org.totalboumboum.gui.common.content.subpanel.game;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.InetAddress;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -152,7 +153,10 @@ public enum GameColumn
 		}
 		else if(this==HOST_NAME)
 		{	// content
-			String text = gameInfo.getHostInfo().getName();
+			String name = gameInfo.getHostInfo().getName();
+			String text = "?";
+			if(name!=null)
+				text = name;
 			String tooltip = text;
 			panel.setLabelText(line,col,text,tooltip);
 			// column width
@@ -162,13 +166,18 @@ public enum GameColumn
 		}
 		else if(this==HOST_IP)
 		{	// content
-			String text = gameInfo.getHostInfo().getLastIp().getHostName();
+			InetAddress ip = gameInfo.getHostInfo().getLastIp();
+			String text = "?";
+			if(ip!=null)
+				text = ip.getHostName();
 			String tooltip = text;
 			panel.setLabelText(line,col,text,tooltip);
 //			MyLabel label = panel.getLabel(line,col);
 //			label.addMouseListener(container);
 //			label.setMouseSensitive(true);
-// TODO better doing it in the specifc subpanel			
+// TODO better doing it in the specifc subpanel
+// same thing with other stuff allowing to edit a new direct connection (?)
+// or take it automatically from the ip, maybe that's better!
 			// column width
 			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 			if(temp>colWidths[col])
@@ -176,21 +185,31 @@ public enum GameColumn
 		}
 		else if(this==TOURNAMENT_TYPE)
 		{	TournamentType type = gameInfo.getTournamentType();
-			String key;
-			if(type.equals(TournamentType.CUP))
-				key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_CUP;
-			else if(type.equals(TournamentType.LEAGUE))
-				key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_LEAGUE;
-			else if(type.equals(TournamentType.SEQUENCE))
-				key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SEQUENCE;
-			else if(type.equals(TournamentType.SINGLE))
-				key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SINGLE;
-			if(key!=null)
-				panel.setLabelKey(line,col,key,true);
+			if(type!=null)
+			{	String key;
+				if(type.equals(TournamentType.CUP))
+					key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_CUP;
+				else if(type.equals(TournamentType.LEAGUE))
+					key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_LEAGUE;
+				else if(type.equals(TournamentType.SEQUENCE))
+					key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SEQUENCE;
+				else if(type.equals(TournamentType.SINGLE))
+					key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SINGLE;
+				if(key!=null)
+					panel.setLabelKey(line,col,key,true);
+			}
+			else
+			{	String text = "?";
+				String tooltip = text;
+				panel.setLabelText(line,col,text,tooltip);
+			}
 		}
 		else if(this==PLAYER_COUNT)
 		{	// content
-			String text = Integer.toString(gameInfo.getPlayerCount());
+			Integer value = gameInfo.getPlayerCount();
+			String text = "?";
+			if(value!=null)
+				text = Integer.toString(value);
 			String tooltip = text;
 			panel.setLabelText(line,col,text,tooltip);
 			// column width
@@ -201,7 +220,9 @@ public enum GameColumn
 		else if(this==ALLOWED_PLAYER)
 		{	// content
 			Set<Integer> value = gameInfo.getAllowedPlayers();
-			String text = Players.formatAllowedPlayerNumbers(value);
+			String text = "?";
+			if(value!=null)
+				text = Players.formatAllowedPlayerNumbers(value);
 			String tooltip = text;
 			panel.setLabelText(line,col,text,tooltip);
 			// column width
@@ -211,13 +232,17 @@ public enum GameColumn
 		}
 		else if(this==AVERAGE_LEVEL)
 		{	// content
-			double mean = gameInfo.getAverageScore();
-			NumberFormat nfText = NumberFormat.getInstance();
-			nfText.setMaximumFractionDigits(0);
-			String text = nfText.format(mean);
-			NumberFormat nfTooltip = NumberFormat.getInstance();
-			nfTooltip.setMaximumFractionDigits(6);
-			String tooltip = nfTooltip.format(mean);
+			Double mean = gameInfo.getAverageScore();
+			String text = "?";
+			String tooltip = text;
+			if(mean!=null)
+			{	NumberFormat nfText = NumberFormat.getInstance();
+				nfText.setMaximumFractionDigits(0);
+				text = nfText.format(mean);
+				NumberFormat nfTooltip = NumberFormat.getInstance();
+				nfTooltip.setMaximumFractionDigits(6);
+				tooltip = nfTooltip.format(mean);
+			}
 			panel.setLabelText(line,col,text,tooltip);
 			// column width
 			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
@@ -242,8 +267,10 @@ public enum GameColumn
 		}
 		else if(this==PLAYED)
 		{	// content
-			int played = gameInfo.getHostInfo().getUses();
-			String text = Integer.toString(played);
+			Integer played = gameInfo.getHostInfo().getUses();
+			String text = "?";
+			if(played!=null)
+				text = Integer.toString(played);
 			String tooltip = text;
 			panel.setLabelText(line,col,text,tooltip);
 			// column width
