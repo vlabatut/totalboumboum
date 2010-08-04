@@ -40,6 +40,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.network.game.GameInfo;
 import org.totalboumboum.gui.common.content.MyLabel;
@@ -389,13 +390,19 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			}
 			// preferred
 			else if(p[1]==0)
-			{
-				//TODO switch from favorite list
+			{	
+				String gameId = gamesIds.get((currentPage*lines)+p[0]-1);
+				GameInfo gameInfo = 
 				
 /**
  * TODO
- * - gérer les listes : central, direct, favoris
- * - rajouter un objet connexion dans game, de manière à gérer les connections dans ces listes
+ * 	- ici : faut juste changer le statut de favori et changer l'affichage ?
+ * 		>> non, dans tous les cas faut émettre car on ne sait pas de quelle liste il s'agit
+ * 			donc niveau config ça pourrait être n'importe quoi
+ *      >> en fait, vu qu'on ne fait plus de liste de favoris, ça serait
+ *      surement mieux de mettre les boutons dans la table comme pour les stats des joueurs 
+ *  - émettre un evt pr la suppression
+ *  - général: dans cette classe, faut gérer la sélection de game				
  */
 			}
 			// add/remove

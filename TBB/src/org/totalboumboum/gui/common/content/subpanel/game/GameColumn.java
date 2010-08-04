@@ -175,7 +175,7 @@ public enum GameColumn
 //			MyLabel label = panel.getLabel(line,col);
 //			label.addMouseListener(container);
 //			label.setMouseSensitive(true);
-// TODO better doing it in the specifc subpanel
+// TODO better doing it in the specific subpanel
 // same thing with other stuff allowing to edit a new direct connection (?)
 // or take it automatically from the ip, maybe that's better!
 			// column width
