@@ -400,9 +400,10 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
  * 		>> non, dans tous les cas faut émettre car on ne sait pas de quelle liste il s'agit
  * 			donc niveau config ça pourrait être n'importe quoi
  *      >> en fait, vu qu'on ne fait plus de liste de favoris, ça serait
- *      surement mieux de mettre les boutons dans la table comme pour les stats des joueurs 
+ *      surement mieux de mettre les boutons dans la table comme pour les stats des joueurs
+ *      >> non car à cause des subpanels annexes, faut sortir de cette classe pr faire une màj de toute façon
  *  - émettre un evt pr la suppression
- *  - général: dans cette classe, faut gérer la sélection de game				
+ *  - général: dans cette classe, faut gérer la sélection de game (ligne)
  */
 			}
 			// add/remove

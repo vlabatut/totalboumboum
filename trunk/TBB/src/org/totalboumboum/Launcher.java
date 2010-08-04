@@ -560,6 +560,11 @@ public class Launcher
 	 * item spécial qui, quand un héros meurt, déclence automatiquement une explosion, éventuellement avec un effet de zone  
 	 */
 	
+	/*
+	 *  TODO malus pour les bombes :
+	 *  portée aléatoire : on sait pas à quelle distance ça va péter 
+	 */
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // XML			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1452,6 +1457,16 @@ public class Launcher
 	//    et à chaque fois, on envoie uniquement aux listener concernés en ignorant les autres.
 	//    (ça peut même se déléguer pareil)
 	
-	// TODO malus pour les bombes : 
-	// portée aléatoire : on sait pas à quelle distance ça va péter
+	
+	/* TODO la communication moteur >> gui devrait se faire par evts, y compris durant le jeu
+	 * >> ca permettrait de ne pas raffraichir pour rien lors de l'affichage de toutes les structures du jeu
+	 * >> faut définir un système d'évènement pour toute classe affichée directement par un composant graphique
+	 * >> ça permetrait de ne pas avoir à recréer les écrans. par ex, dans les options : si qqch est changé, c'est automatiquement màj en background
+	 * 		- sauf qu'en fait c'est un mvais ex car dans les options ce sont des clones qui sont utilisés
+	 *        mais il suffirait de ne pas recréer à chaque fois le panel, plutot de réutiliser le précédent en faisant un set et en affectant le listener
+	 *      - faudrait du cp faire attention à la gestion de la mémoire : 
+	 *      	- les objets finished devraient se débarasser de leurs listeners
+	 *      	- en réaction, les listeners mettent leur référence à null et n'affichent rien >> bon ça
+	 *      >> ça va poser des pb de gestion de la mémoire (?)
+	 */
 }
