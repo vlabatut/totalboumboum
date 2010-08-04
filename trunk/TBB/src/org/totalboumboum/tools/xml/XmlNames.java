@@ -105,6 +105,7 @@ public class XmlNames
 	public static final String DEFAULT_RATING_DEVIATION = "defaultRatingDeviation";
 	public static final String DEFAULT_RATING_VOLATILITY = "defaultRatingVolatility";
 	public static final String DELAY = "delay";
+	public static final String DIRECT = "direct";
 	public static final String DIRECTION = "direction";
 	public static final String DISCRETIZE = "discretize";
 	public static final String DISPLAY = "display";

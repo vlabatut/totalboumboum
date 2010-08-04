@@ -92,6 +92,14 @@ public class HostsLoader
     	Boolean preferred = Boolean.parseBoolean(preferredStr);
     	result.setPreferred(preferred);
     	
+    	// direct
+    	String directStr = root.getAttribute(XmlNames.DIRECT).getValue();
+    	Boolean direct = Boolean.parseBoolean(directStr);
+    	if(direct)
+    		result.setType(HostType.DIRECT);
+		else
+    		result.setType(HostType.CENTRAL);
+    	
     	return result;
 	}
 }

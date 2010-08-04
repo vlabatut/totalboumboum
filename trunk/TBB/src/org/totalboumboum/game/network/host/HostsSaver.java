@@ -83,6 +83,10 @@ public class HostsSaver
 		String preferred = Boolean.toString(host.isPreferred());
 		result.setAttribute(XmlNames.PREFERRED,preferred);
 		
+		// direct
+		String direct = Boolean.toString(host.getType()==HostType.DIRECT);
+		result.setAttribute(XmlNames.DIRECT,direct);
+		
 		return result;
 	}
 }

@@ -1442,4 +1442,16 @@ public class Launcher
 	
 	//TODO profiles options : reset passwords (automatically performed
 	//when the MAC address changes, anyway
+	
+	//TODO gestion des connections :
+	// - un seul objet
+	// - faire de la délagation vers des composants pour chaque étape
+	// >> intéret : ne pas avoir besoin de metre en pause les threads, ni d'en créer 50 différents
+	// - pb: identifier le listener auquel envoyer l'event quand on reçoit un nouvel objet
+	// >> suffit de passer par des classes messages : une pr round, une pr match, etc.
+	//    et à chaque fois, on envoie uniquement aux listener concernés en ignorant les autres.
+	//    (ça peut même se déléguer pareil)
+	
+	// TODO malus pour les bombes : 
+	// portée aléatoire : on sait pas à quelle distance ça va péter
 }

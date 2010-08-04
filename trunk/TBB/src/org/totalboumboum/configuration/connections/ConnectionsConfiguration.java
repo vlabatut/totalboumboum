@@ -31,6 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.game.network.game.GameInfo;
 import org.totalboumboum.game.network.host.HostInfo;
+import org.totalboumboum.game.network.host.HostType;
 import org.totalboumboum.game.network.host.HostsLoader;
 import org.totalboumboum.game.network.host.HostsSaver;
 import org.xml.sax.SAXException;
@@ -68,7 +69,7 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	private List<GameInfo> centralConnections = new ArrayList<GameInfo>();
 	
-	private void initCentralConnections()
+	private void updateCentralConnections()
 	{
 		// TODO use the central ip to get all connections
 	}
@@ -82,9 +83,9 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	private List<GameInfo> directConnections = new ArrayList<GameInfo>();
 	
-	private void initDirectConnections()
-	{	for(HostInfo host: preferredHosts.values())
-		{	if(host.isPreferred())
+	private void updateDirectConnections()
+	{	for(HostInfo host: recordedHosts.values())
+		{	if(host.getType()==HostType.DIRECT)
 			{	GameInfo gameInfo = new GameInfo();
 				gameInfo.setHostInfo(host);
 				directConnections.add(gameInfo);
@@ -97,29 +98,26 @@ public class ConnectionsConfiguration
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PREFERRED HOSTS		/////////////////////////////////////////
+	// RECORDED HOSTS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,HostInfo> preferredHosts = null;
+	private HashMap<String,HostInfo> recordedHosts = null;
 	
-	private void loadPreferredHosts() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	if(preferredHosts==null)
-			preferredHosts = HostsLoader.loadHosts();
+	private void updateRecordedHosts() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	if(recordedHosts==null)
+			recordedHosts = HostsLoader.loadHosts();
 	}
 	
-	private void savePreferredHosts() throws IOException
-	{	if(preferredHosts!=null)
-			HostsSaver.saveHosts(preferredHosts);
-	}
-	
-	public HashMap<String,HostInfo> getPreferredHosts()
-	{	return preferredHosts;
+	public void saveRecordedHosts() throws IOException
+	{	if(recordedHosts!=null)
+			HostsSaver.saveHosts(recordedHosts);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void initConnections() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	loadPreferredHosts();
-		initDirectConnections();
+	public void updateConnections() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	updateRecordedHosts();
+		updateDirectConnections();
+		updateCentralConnections();
 	}
 }
