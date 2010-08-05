@@ -87,7 +87,7 @@ public class ConnectionsConfiguration
 	private List<GameInfo> directConnections = new ArrayList<GameInfo>();
 	
 	private void updateDirectConnections()
-	{	for(HostInfo host: recordedHosts.values())
+	{	for(HostInfo host: hosts.values())
 		{	if(host.getType()==HostType.DIRECT)
 			{	GameInfo gameInfo = new GameInfo();
 				gameInfo.setHostInfo(host);
@@ -101,25 +101,33 @@ public class ConnectionsConfiguration
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// RECORDED HOSTS		/////////////////////////////////////////
+	// HOSTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,HostInfo> recordedHosts = null;
+	private HashMap<String,HostInfo> hosts = null;
 	
-	private void updateRecordedHosts() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	if(recordedHosts==null)
-			recordedHosts = HostsLoader.loadHosts();
+	private void updateHosts() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	if(hosts==null)
+			hosts = HostsLoader.loadHosts();
 	}
 	
-	public void saveRecordedHosts() throws IOException
-	{	if(recordedHosts!=null)
-			HostsSaver.saveHosts(recordedHosts);
+	public HostInfo createHost(InetAddress ip)
+	{	HostInfo result = null;
+	
+		// TODO to be defined
+		
+		return result;
+	}
+	
+	public void saveHosts() throws IOException
+	{	if(hosts!=null)
+			HostsSaver.saveHosts(hosts);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void updateConnections() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	updateRecordedHosts();
+	{	updateHosts();
 		updateDirectConnections();
 		updateCentralConnections();
 	}
@@ -159,7 +167,7 @@ public class ConnectionsConfiguration
 			centralIp = null;
 			centralConnections = null;
 			directConnections = null;
-			recordedHosts = null;
+			hosts = null;
 		}
 	}
 }

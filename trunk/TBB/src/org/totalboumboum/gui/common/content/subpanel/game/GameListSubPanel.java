@@ -404,6 +404,8 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
  *      >> non car à cause des subpanels annexes, faut sortir de cette classe pr faire une màj de toute façon
  *  - émettre un evt pr la suppression
  *  - général: dans cette classe, faut gérer la sélection de game (ligne)
+ *  
+ *  - faut définir les envois d'évts dans ConnectionConfiguration
  */
 			}
 			// add/remove
