@@ -1458,7 +1458,7 @@ public class Launcher
 	//    (ça peut même se déléguer pareil)
 	
 	
-	/* TODO la communication moteur >> gui devrait se faire par evts, y compris durant le jeu
+	/* TODO la communication [moteur >> gui] devrait se faire par evts, y compris durant le jeu
 	 * >> ca permettrait de ne pas raffraichir pour rien lors de l'affichage de toutes les structures du jeu
 	 * >> faut définir un système d'évènement pour toute classe affichée directement par un composant graphique
 	 * >> ça permetrait de ne pas avoir à recréer les écrans. par ex, dans les options : si qqch est changé, c'est automatiquement màj en background

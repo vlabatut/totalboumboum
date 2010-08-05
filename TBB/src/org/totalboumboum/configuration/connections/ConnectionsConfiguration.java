@@ -34,6 +34,9 @@ import org.totalboumboum.game.network.host.HostInfo;
 import org.totalboumboum.game.network.host.HostType;
 import org.totalboumboum.game.network.host.HostsLoader;
 import org.totalboumboum.game.network.host.HostsSaver;
+import org.totalboumboum.tools.event.EventName;
+import org.totalboumboum.tools.event.UpdateEvent;
+import org.totalboumboum.tools.event.UpdateListener;
 import org.xml.sax.SAXException;
 
 /**
@@ -119,5 +122,44 @@ public class ConnectionsConfiguration
 	{	updateRecordedHosts();
 		updateDirectConnections();
 		updateCentralConnections();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<UpdateListener> listeners = new ArrayList<UpdateListener>();
+	
+	public void addListener(UpdateListener listener)
+	{	if(!listeners.contains(listener))
+			listeners.add(listener);
+	}
+	
+	public void removeListener(UpdateListener listener)
+	{	listeners.remove(listener);
+	}
+	
+	private void fireUpdateEvent(UpdateEvent event)
+	{	for(UpdateListener listener: listeners)
+			listener.updated(event);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			
+			UpdateEvent event = new UpdateEvent(this,EventName.FINISHED);
+			fireUpdateEvent(event);
+			listeners.clear();
+			
+			centralIp = null;
+			centralConnections = null;
+			directConnections = null;
+			recordedHosts = null;
+		}
 	}
 }
