@@ -461,6 +461,8 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY								/////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private boolean showAddButton = true;
+	
 	public void addColumn(int index, GameColumn column)
 	{	columns.add(index,column);
 		refresh();
@@ -474,5 +476,9 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	public void removeColumn(int index)
 	{	columns.remove(index);
 		refresh();
+	}
+	
+	public void setShowAddButton(boolean showAddButton)
+	{	this.showAddButton = showAddButton;
 	}
 }

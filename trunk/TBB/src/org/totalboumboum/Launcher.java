@@ -1468,5 +1468,6 @@ public class Launcher
 	 *      	- les objets finished devraient se débarasser de leurs listeners
 	 *      	- en réaction, les listeners mettent leur référence à null et n'affichent rien >> bon ça
 	 *      >> ça va poser des pb de gestion de la mémoire (?)
+	 * >>> à faire plus tard...
 	 */
 }
