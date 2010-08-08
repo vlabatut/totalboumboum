@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -44,6 +45,7 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.network.game.GameInfo;
 import org.totalboumboum.gui.common.content.MyLabel;
+import org.totalboumboum.gui.common.content.subpanel.statistics.PlayerStatisticSubPanel.Type;
 import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
@@ -64,7 +66,8 @@ import org.xml.sax.SAXException;
 public class GameListSubPanel extends EmptySubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	private final static int COL_PREVIOUS = 0;
-	private final static int COL_NEXT = 2;
+	private final static int COL_DISPLAY = 2;
+	private final static int COL_NEXT = 4;
 	
 	public GameListSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER);
@@ -85,7 +88,8 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		
 		// sizes
 		int buttonHeight = GuiTools.subPanelTitleHeight;
-		int buttonWidth = (getDataWidth() - 1*GuiTools.subPanelMargin)/2;
+		int regularButtonWidth = (getDataWidth() - 2*GuiTools.subPanelMargin)/3;
+		int centerButtonWidth = getDataWidth()- 2*regularButtonWidth - 2*GuiTools.subPanelMargin;
 		int mainPanelHeight = getDataHeight() - buttonHeight - GuiTools.subPanelMargin;
 		
 		// main panel
@@ -112,7 +116,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-				Dimension dim = new Dimension(buttonWidth,buttonHeight);
+				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
@@ -125,11 +129,28 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				buttonsPanel.add(label);
 			}
 			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			// central
+			{	MyLabel label = new MyLabel();
+				label.setOpaque(true);
+				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				Dimension dim = new Dimension(centerButtonWidth,buttonHeight);
+				label.setMinimumSize(dim);
+				label.setPreferredSize(dim);
+				label.setMaximumSize(dim);
+				String key = GuiKeys.COMMON_GAME_LIST_BUTTON_CENTRAL;
+				label.setKey(key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
+				label.addMouseListener(this);
+				label.setMouseSensitive(true);
+				buttonsPanel.add(label);
+			}
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// down
 			{	MyLabel label = new MyLabel();
 				label.setOpaque(true);
 				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-				Dimension dim = new Dimension(buttonWidth,buttonHeight);
+				Dimension dim = new Dimension(regularButtonWidth,buttonHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
@@ -168,6 +189,10 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	{	return gamesMap;
 	}
 	
+	public List<String> getGamesIds()
+	{	return gamesIds;	
+	}
+		
 	public void setGameInfos(HashMap<String,GameInfo> gamesMap, int lines)
 	{	// init
 		this.lines = lines;
@@ -177,7 +202,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		this.gamesMap = gamesMap;
 		listPanels.clear();
 		
-		// sorting players
+		// sorting games
 		sortCriterion.updateValues(this,valuesMap,gamesMap);
 		gamesIds = new ArrayList<String>(gamesMap.keySet());
 		Collections.sort(gamesIds,new Comparator<String>()
@@ -370,6 +395,23 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 					refreshList();
 				}
 			}
+			// switch type
+			else if(pos==COL_DISPLAY)
+			{	String key;
+				DisplayMode dm;
+				if(displayMode.equals(DisplayMode.CENTRAL))
+				{	dm = DisplayMode.DIRECT;
+					key = GuiKeys.COMMON_GAME_LIST_BUTTON_DIRECT;
+				}
+				else
+				{	dm = DisplayMode.CENTRAL;
+					key = GuiKeys.COMMON_GAME_LIST_BUTTON_CENTRAL;
+				}
+				MyLabel lbl = (MyLabel)buttonsPanel.getComponent(COL_DISPLAY);
+				lbl.setKey(key,true);
+				setDisplayMode(dm);
+				// TODO envoyer l'evt de sélection change (id + display mode)
+			}
 			// next page
 			else if(pos==COL_NEXT)
 			{	if(currentPage<pageCount-1)
@@ -401,11 +443,8 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
  * 			donc niveau config ça pourrait être n'importe quoi
  *      >> en fait, vu qu'on ne fait plus de liste de favoris, ça serait
  *      surement mieux de mettre les boutons dans la table comme pour les stats des joueurs
- *      >> non car à cause des subpanels annexes, faut sortir de cette classe pr faire une màj de toute façon
  *  - émettre un evt pr la suppression
  *  - général: dans cette classe, faut gérer la sélection de game (ligne)
- *  
- *  - faut définir les envois d'évts dans ConnectionConfiguration
  */
 			}
 			// add/remove
@@ -461,8 +500,38 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY								/////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean showAddButton = true;
+	private DisplayMode displayMode = DisplayMode.CENTRAL;
 	
+	private enum DisplayMode
+	{	CENTRAL,
+		DIRECT;
+	}
+	
+	public void setDisplayMode(DisplayMode displayMode)
+	{	this.displayMode = displayMode;
+		
+		if(displayMode.equals(DisplayMode.CENTRAL))
+		{	columns.clear();
+			columns.add(GameColumn.PREFERRED);
+			columns.add(GameColumn.HOST_NAME);
+			columns.add(GameColumn.TOURNAMENT_TYPE);
+			columns.add(GameColumn.PLAYER_COUNT);
+			columns.add(GameColumn.TOURNAMENT_STATE);
+		}
+		else if(displayMode.equals(DisplayMode.DIRECT))
+		{	columns.clear();
+			columns.add(GameColumn.PREFERRED);
+			columns.add(GameColumn.BUTTON);
+			columns.add(GameColumn.HOST_NAME);
+			columns.add(GameColumn.TOURNAMENT_TYPE);
+			columns.add(GameColumn.PLAYER_COUNT);
+			columns.add(GameColumn.TOURNAMENT_STATE);
+		}
+		
+		refresh();
+	}
+
+/*	
 	public void addColumn(int index, GameColumn column)
 	{	columns.add(index,column);
 		refresh();
@@ -477,8 +546,15 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	{	columns.remove(index);
 		refresh();
 	}
-	
-	public void setShowAddButton(boolean showAddButton)
-	{	this.showAddButton = showAddButton;
+
+	public boolean isShowAddButton()
+	{	boolean result = false;
+		Iterator<GameColumn> col = columns.iterator();
+		while(!result && col.hasNext())
+		{	GameColumn c = col.next();
+			result = c==GameColumn.BUTTON;
+		}
+		return result;
 	}
+*/	
 }
