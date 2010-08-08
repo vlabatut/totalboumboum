@@ -114,6 +114,7 @@ public class GuiKeys
 	public static final String EDIT = "Edit";
 	public static final String ENABLED = "Enabled";
 	public static final String ENTER = "Enter";
+	public static final String ENTRY = "Entry";
 	public static final String EVOLUTION = "Evolution";
 	public static final String EXCEPTIONS = "Exceptions";
 	public static final String EXIT = "Exit";
@@ -233,6 +234,7 @@ public class GuiKeys
 	public static final String REGISTER = "Register";
 	public static final String REGULAR = "Regular";
 	public static final String REINIT = "Reinit";
+	public static final String REMOVE = "Remove";
 	public static final String REPLAY = "Replay";
 	public static final String RESET = "Reset";
 	public static final String RESOURCES = "Resources";
@@ -1036,8 +1038,10 @@ public class GuiKeys
 	public static final String COMMON_GAME_LIST = COMMON+GAME+LIST;
 		/* GAME LIST BUTTON */
 		public static final String COMMON_GAME_LIST_BUTTON = COMMON_GAME_LIST+BUTTON;
-		public static final String COMMON_GAME_LIST_BUTTON_PREVIOUS = COMMON_GAME_LIST_BUTTON+PREVIOUS;
+		public static final String COMMON_GAME_LIST_BUTTON_ADD = COMMON_GAME_LIST_BUTTON+ADD;
 		public static final String COMMON_GAME_LIST_BUTTON_NEXT = COMMON_GAME_LIST_BUTTON+NEXT;
+		public static final String COMMON_GAME_LIST_BUTTON_PREVIOUS = COMMON_GAME_LIST_BUTTON+PREVIOUS;
+		public static final String COMMON_GAME_LIST_BUTTON_REMOVE = COMMON_GAME_LIST_BUTTON+REMOVE;
 		/* GAME LIST HEADER */
 		public static final String COMMON_GAME_LIST_HEADER = COMMON_GAME_LIST+HEADER;
 		public static final String COMMON_GAME_LIST_HEADER_ALLOWED_PLAYER = COMMON_GAME_LIST_HEADER+ALLOWED+PLAYER;

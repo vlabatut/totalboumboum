@@ -791,8 +791,10 @@
 <!-- GAME LIST -->
 		<group name="GameList" >
 			<group name="Button" >
-				<text name="Previous" value="Précédents" tooltip="Hôtes précédents" />
+				<text name="Add" value="Ajouter" tooltip="Ajouter un nouvel hôte" />
 				<text name="Next" value="Suivants" tooltip="Hôtes suivants" />
+				<text name="Previous" value="Précédents" tooltip="Hôtes précédents" />
+				<text name="Remove" value="Enlever" tooltip="Retirer cet hôte" />
 			</group>
 			<group name="Header" >
 				<text name="AllowedPlayer" value="Permis" tooltip="Nombre de joueurs permis pour ce tournoi" />

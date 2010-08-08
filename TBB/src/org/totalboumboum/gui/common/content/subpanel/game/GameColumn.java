@@ -21,37 +21,23 @@ package org.totalboumboum.gui.common.content.subpanel.game;
  * 
  */
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.net.InetAddress;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.Map.Entry;
 import java.util.TreeSet;
 
-import org.totalboumboum.configuration.profile.Portraits;
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.game.network.game.GameInfo;
 import org.totalboumboum.game.network.host.HostState;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
-import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.statistics.GameStatistics;
-import org.totalboumboum.statistics.detailed.Score;
-import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
-import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.statistics.overall.PlayerStats;
-import org.totalboumboum.tools.time.TimeTools;
-import org.totalboumboum.tools.time.TimeUnit;
 
 /**
  * 
@@ -125,158 +111,169 @@ public enum GameColumn
 	}
 	
 	public void setLabelContent(GameListSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, GameInfo gameInfo)
-	{	if(this==GENERAL_BUTTON)
+	{	if(this==BUTTON)
 		{	String key;
-			if(playerRating==null)
-				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_REGISTER;
+			if(gameInfo==null)
+				key = GuiKeys.COMMON_GAME_LIST_BUTTON_ADD;
 			else
-				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER;
+				key = GuiKeys.COMMON_GAME_LIST_BUTTON_REMOVE;
 			panel.setLabelKey(line,col,key,true);
 			MyLabel label = panel.getLabel(line,col);
 			label.addMouseListener(container);
 			label.setMouseSensitive(true);
 		}
-//TODO 	BUTTON
-	
 		else if(this==PREFERRED)
-		{	String key;
-			if(gameInfo.getHostInfo().isPreferred())
-				key = GuiKeys.COMMON_GAME_LIST_DATA_FAV_PREFERRED;
-			else
-				key = GuiKeys.COMMON_GAME_LIST_DATA_FAV_REGULAR;
-			if(key!=null)
-			{	panel.setLabelKey(line,col,key,true);
+		{	if(gameInfo!=null)
+			{	String key;
+				if(gameInfo.getHostInfo().isPreferred())
+					key = GuiKeys.COMMON_GAME_LIST_DATA_FAV_PREFERRED;
+				else
+					key = GuiKeys.COMMON_GAME_LIST_DATA_FAV_REGULAR;
+				panel.setLabelKey(line,col,key,true);
 				MyLabel label = panel.getLabel(line,col);
 				label.addMouseListener(container);
 				label.setMouseSensitive(true);
 			}
 		}
 		else if(this==HOST_NAME)
-		{	// content
-			String name = gameInfo.getHostInfo().getName();
-			String text = "?";
-			if(name!=null)
-				text = name;
-			String tooltip = text;
-			panel.setLabelText(line,col,text,tooltip);
-			// column width
-			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-			if(temp>colWidths[col])
-				colWidths[col] = temp;
-		}
-		else if(this==HOST_IP)
-		{	// content
-			InetAddress ip = gameInfo.getHostInfo().getLastIp();
-			String text = "?";
-			if(ip!=null)
-				text = ip.getHostName();
-			String tooltip = text;
-			panel.setLabelText(line,col,text,tooltip);
-//			MyLabel label = panel.getLabel(line,col);
-//			label.addMouseListener(container);
-//			label.setMouseSensitive(true);
-// TODO better doing it in the specific subpanel
-// same thing with other stuff allowing to edit a new direct connection (?)
-// or take it automatically from the ip, maybe that's better!
-			// column width
-			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-			if(temp>colWidths[col])
-				colWidths[col] = temp;
-		}
-		else if(this==TOURNAMENT_TYPE)
-		{	TournamentType type = gameInfo.getTournamentType();
-			if(type!=null)
-			{	String key;
-				if(type.equals(TournamentType.CUP))
-					key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_CUP;
-				else if(type.equals(TournamentType.LEAGUE))
-					key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_LEAGUE;
-				else if(type.equals(TournamentType.SEQUENCE))
-					key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SEQUENCE;
-				else if(type.equals(TournamentType.SINGLE))
-					key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SINGLE;
-				if(key!=null)
-					panel.setLabelKey(line,col,key,true);
-			}
-			else
-			{	String text = "?";
+		{	if(gameInfo!=null)
+			{	// content
+				String name = gameInfo.getHostInfo().getName();
+				String text = "?";
+				if(name!=null)
+					text = name;
 				String tooltip = text;
 				panel.setLabelText(line,col,text,tooltip);
+				// column width
+				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+				if(temp>colWidths[col])
+					colWidths[col] = temp;
+			}
+		}
+		else if(this==HOST_IP)
+		{	if(gameInfo!=null)
+			{	// content
+				InetAddress ip = gameInfo.getHostInfo().getLastIp();
+				String text = "?";
+				if(ip!=null)
+					text = ip.getHostName();
+				String tooltip = text;
+				panel.setLabelText(line,col,text,tooltip);
+//				MyLabel label = panel.getLabel(line,col);
+//				label.addMouseListener(container);
+//				label.setMouseSensitive(true);
+				// column width
+				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+				if(temp>colWidths[col])
+					colWidths[col] = temp;
+			}
+		}
+		else if(this==TOURNAMENT_TYPE)
+		{	if(gameInfo!=null)
+			{	TournamentType type = gameInfo.getTournamentType();
+				if(type!=null)
+				{	String key = null;
+					if(type.equals(TournamentType.CUP))
+						key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_CUP;
+					else if(type.equals(TournamentType.LEAGUE))
+						key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_LEAGUE;
+					else if(type.equals(TournamentType.SEQUENCE))
+						key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SEQUENCE;
+					else if(type.equals(TournamentType.SINGLE))
+						key = GuiKeys.COMMON_GAME_LIST_DATA_TYPE_SINGLE;
+					if(key!=null)
+						panel.setLabelKey(line,col,key,true);
+				}
+				else
+				{	String text = "?";
+					String tooltip = text;
+					panel.setLabelText(line,col,text,tooltip);
+				}
 			}
 		}
 		else if(this==PLAYER_COUNT)
-		{	// content
-			Integer value = gameInfo.getPlayerCount();
-			String text = "?";
-			if(value!=null)
-				text = Integer.toString(value);
-			String tooltip = text;
-			panel.setLabelText(line,col,text,tooltip);
-			// column width
-			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-			if(temp>colWidths[col])
-				colWidths[col] = temp;
+		{	if(gameInfo!=null)
+			{	// content
+				Integer value = gameInfo.getPlayerCount();
+				String text = "?";
+				if(value!=null)
+					text = Integer.toString(value);
+				String tooltip = text;
+				panel.setLabelText(line,col,text,tooltip);
+				// column width
+				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+				if(temp>colWidths[col])
+					colWidths[col] = temp;
+			}
 		}
 		else if(this==ALLOWED_PLAYER)
-		{	// content
-			Set<Integer> value = gameInfo.getAllowedPlayers();
-			String text = "?";
-			if(value!=null)
-				text = Players.formatAllowedPlayerNumbers(value);
-			String tooltip = text;
-			panel.setLabelText(line,col,text,tooltip);
-			// column width
-			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-			if(temp>colWidths[col])
-				colWidths[col] = temp;
+		{	if(gameInfo!=null)
+			{	// content
+				Set<Integer> value = gameInfo.getAllowedPlayers();
+				String text = "?";
+				if(value!=null)
+					text = Players.formatAllowedPlayerNumbers(value);
+				String tooltip = text;
+				panel.setLabelText(line,col,text,tooltip);
+				// column width
+				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+				if(temp>colWidths[col])
+					colWidths[col] = temp;
+			}
 		}
 		else if(this==AVERAGE_LEVEL)
-		{	// content
-			Double mean = gameInfo.getAverageScore();
-			String text = "?";
-			String tooltip = text;
-			if(mean!=null)
-			{	NumberFormat nfText = NumberFormat.getInstance();
-				nfText.setMaximumFractionDigits(0);
-				text = nfText.format(mean);
-				NumberFormat nfTooltip = NumberFormat.getInstance();
-				nfTooltip.setMaximumFractionDigits(6);
-				tooltip = nfTooltip.format(mean);
+		{	if(gameInfo!=null)
+			{	// content
+				Double mean = gameInfo.getAverageScore();
+				String text = "?";
+				String tooltip = text;
+				if(mean!=null)
+				{	NumberFormat nfText = NumberFormat.getInstance();
+					nfText.setMaximumFractionDigits(0);
+					text = nfText.format(mean);
+					NumberFormat nfTooltip = NumberFormat.getInstance();
+					nfTooltip.setMaximumFractionDigits(6);
+					tooltip = nfTooltip.format(mean);
+				}
+				panel.setLabelText(line,col,text,tooltip);
+				// column width
+				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+				if(temp>colWidths[col])
+					colWidths[col] = temp;
 			}
-			panel.setLabelText(line,col,text,tooltip);
-			// column width
-			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-			if(temp>colWidths[col])
-				colWidths[col] = temp;
 		}
 		else if(this==TOURNAMENT_STATE)
-		{	HostState state = gameInfo.getHostInfo().getState();
-			String key;
-			if(state.equals(HostState.CLOSED))
-				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_CLOSED;
-			else if(state.equals(HostState.FINISHED))
-				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_FINISHED;
-			else if(state.equals(HostState.OPEN))
-				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_OPEN;
-			else if(state.equals(HostState.PLAYING))
-				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_PLAYING;
-			else if(state.equals(HostState.UNKOWN))
-				key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKNOWN;
-			if(key!=null)
-				panel.setLabelKey(line,col,key,true);
+		{	if(gameInfo!=null)
+			{	HostState state = gameInfo.getHostInfo().getState();
+				String key = null;
+				if(state.equals(HostState.CLOSED))
+					key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_CLOSED;
+				else if(state.equals(HostState.FINISHED))
+					key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_FINISHED;
+				else if(state.equals(HostState.OPEN))
+					key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_OPEN;
+				else if(state.equals(HostState.PLAYING))
+					key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_PLAYING;
+				else if(state.equals(HostState.UNKOWN))
+					key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKNOWN;
+				if(key!=null)
+					panel.setLabelKey(line,col,key,true);
+			}
 		}
 		else if(this==PLAYED)
-		{	// content
-			Integer played = gameInfo.getHostInfo().getUses();
-			String text = "?";
-			if(played!=null)
-				text = Integer.toString(played);
-			String tooltip = text;
-			panel.setLabelText(line,col,text,tooltip);
-			// column width
-			int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
-			if(temp>colWidths[col])
-				colWidths[col] = temp;
+		{	if(gameInfo!=null)
+			{	// content
+				Integer played = gameInfo.getHostInfo().getUses();
+				String text = "?";
+				if(played!=null)
+					text = Integer.toString(played);
+				String tooltip = text;
+				panel.setLabelText(line,col,text,tooltip);
+				// column width
+				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
+				if(temp>colWidths[col])
+					colWidths[col] = temp;
+			}
 		}
 	}
 

@@ -793,8 +793,10 @@
 <!-- GAME LIST -->
 		<group name="GameList" >
 			<group name="Button" >
-				<text name="Previous" value="Previous" tooltip="Previous hosts page" />
+				<text name="Add" value="Add" tooltip="Add a new host" />
 				<text name="Next" value="Next" tooltip="Next hosts page" />
+				<text name="Previous" value="Previous" tooltip="Previous hosts page" />
+				<text name="Remove" value="Remove" tooltip="Remove this host" />
 			</group>
 			<group name="Header" >
 				<text name="AllowedPlayer" value="Allowed" tooltip="Numbers of players allowed for this tournament" />
