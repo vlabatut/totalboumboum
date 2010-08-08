@@ -39,6 +39,7 @@ public class GuiFileTools
 	public final static String FILE_AUTOFIRE = "autofire.png";
 	public final static String FILE_AVERAGE = "average.png";
 	public final static String FILE_BOMBS = "bombs.png";
+	public final static String FILE_CENTRAL = "central.png";
 	public final static String FILE_CLOSED = "closed.png";
 	public final static String FILE_COLOR = "color.png";
 	public final static String FILE_COMMAND = "command.png";
@@ -51,6 +52,7 @@ public class GuiFileTools
 	public final static String FILE_DEATHS = "deaths.png";
 	public final static String FILE_DOWN = "down.png";
 	public final static String FILE_DIMENSION = "dimension.png";
+	public final static String FILE_DIRECT = "direct.png";
 	public final static String FILE_DISCRETIZE = "discretize.png";
 	public final static String FILE_DRAW = "draw.png";
 	public final static String FILE_EDIT = "edit.png";

@@ -355,6 +355,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// central
+		{	String folder = baseFolder+GuiFileTools.FILE_CENTRAL;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_BUTTON_CENTRAL
+			};
+			loadTableImages(folder,uses);
+		}
 		// color
 		{	String folder = baseFolder+GuiFileTools.FILE_COLOR;
 			String[] uses =
@@ -447,6 +454,13 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_LEVEL_DIMENSION,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SIZE
+			};
+			loadTableImages(folder,uses);
+		}
+		// direct
+		{	String folder = baseFolder+GuiFileTools.FILE_DIRECT;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_BUTTON_DIRECT
 			};
 			loadTableImages(folder,uses);
 		}
