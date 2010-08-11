@@ -278,7 +278,7 @@ public enum GameColumn
 	}
 
 	@SuppressWarnings("rawtypes")
-	public void updateValues(GameListSubPanel container, HashMap<String,List<Comparable>> valuesMap, HashMap<String,GameInfo> gamesMap)
+	public void updateValues(HashMap<String,List<Comparable>> valuesMap, HashMap<String,GameInfo> gamesMap)
 	{	valuesMap.clear();
 		for(GameInfo gameInfo: gamesMap.values())
 		{	// init

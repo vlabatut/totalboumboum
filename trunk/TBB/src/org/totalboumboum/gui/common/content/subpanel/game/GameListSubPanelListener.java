@@ -1,5 +1,7 @@
 package org.totalboumboum.gui.common.content.subpanel.game;
 
+import org.totalboumboum.game.network.game.GameInfo;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -29,6 +31,7 @@ package org.totalboumboum.gui.common.content.subpanel.game;
 public interface GameListSubPanelListener
 {
 	public void gameSelectionChanged(String gameId);
+	public void gameLineModified(GameInfo gameInfo);
 	public void gameBeforeClicked();
 	public void gameAfterClicked();
 }
