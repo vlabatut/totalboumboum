@@ -44,8 +44,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.network.game.GameInfo;
+import org.totalboumboum.game.tournament.cup.CupLeg;
+import org.totalboumboum.game.tournament.cup.CupPart;
+import org.totalboumboum.game.tournament.cup.CupTournament;
 import org.totalboumboum.gui.common.content.MyLabel;
-import org.totalboumboum.gui.common.content.subpanel.statistics.PlayerStatisticSubPanel.Type;
+import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
+import org.totalboumboum.gui.common.content.subpanel.part.PartSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
@@ -184,6 +188,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	private int lines;
 	private TableSubPanel mainPanel;
 	private JPanel buttonsPanel;
+	private String selectedId = null;
 	
 	public HashMap<String,GameInfo> getGameInfos()
 	{	return gamesMap;
@@ -334,6 +339,55 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	
 	public void refresh()
 	{	setGameInfos(gamesMap,lines);
+	}
+	
+	public GameInfo getSelectedGame()
+	{	GameInfo result = null;
+		if(selectedId!=null)
+			result = gamesMap.get(selectedId);
+		return result;
+	}
+
+	private void selectGame(String gameId)
+	{	// init
+		int index;
+	
+		// unselect
+		if(selectedId!=null)
+		{	// get line
+			index = gamesIds.indexOf(selectedId);
+			int page = index/lines;
+			int line = index%lines;
+			// change color
+			TableSubPanel panel = listPanels.get(page);
+			Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
+			panel.setLineBackground(line,bg);
+			// update selected id
+			selectedId = null;
+		}
+			
+		//select
+		if(gameId!=null)
+		{	// update selected id
+			selectedId = gameId;
+			// get page
+			index = gamesIds.indexOf(selectedId);
+			int page = index/lines;
+			// refresh page
+			if(page!=currentPage)
+			{	currentPage = page;
+				refreshList();
+			}
+			// get line
+			int line = index%lines;
+			// change color
+			TableSubPanel panel = listPanels.get(page);
+			Color bg = GuiTools.COLOR_TABLE_SELECTED_PALE_BACKGROUND;
+			panel.setLineBackground(line,bg);
+		}
+		
+		// update listeners
+		fireGameSelectionChanged(gameId);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -557,4 +611,33 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		return result;
 	}
 */	
+
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<GameListSubPanelListener> listeners = new ArrayList<GameListSubPanelListener>();
+	
+	public void addListener(GameListSubPanelListener listener)
+	{	if(!listeners.contains(listener))
+			listeners.add(listener);		
+	}
+
+	public void removeListener(GameListSubPanelListener listener)
+	{	listeners.remove(listener);		
+	}
+	
+	private void fireGameSelectionChanged(String gameId)
+	{	for(GameListSubPanelListener listener: listeners)
+			listener.gameSelectionChanged(gameId);
+	}
+
+	private void fireGameBeforeClicked()
+	{	for(GameListSubPanelListener listener: listeners)
+			listener.gameBeforeClicked();
+	}
+
+	private void fireGameAfterClicked()
+	{	for(GameListSubPanelListener listener: listeners)
+			listener.gameAfterClicked();
+	}
 }

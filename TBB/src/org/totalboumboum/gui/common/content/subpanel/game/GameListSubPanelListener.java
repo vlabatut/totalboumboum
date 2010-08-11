@@ -26,9 +26,9 @@ package org.totalboumboum.gui.common.content.subpanel.game;
  * @author Vincent Labatut
  *
  */
-public interface LegSubPanelListener
+public interface GameListSubPanelListener
 {
-	public void legSelectionChanged();
-	public void legBeforeClicked();
-	public void legAfterClicked();
+	public void gameSelectionChanged(String gameId);
+	public void gameBeforeClicked();
+	public void gameAfterClicked();
 }
