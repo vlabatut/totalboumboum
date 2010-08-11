@@ -44,6 +44,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.network.game.GameInfo;
+import org.totalboumboum.game.network.host.HostInfo;
 import org.totalboumboum.game.tournament.cup.CupLeg;
 import org.totalboumboum.game.tournament.cup.CupPart;
 import org.totalboumboum.game.tournament.cup.CupTournament;
@@ -189,6 +190,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	private TableSubPanel mainPanel;
 	private JPanel buttonsPanel;
 	private String selectedId = null;
+	private int colWidths[];
 	
 	public HashMap<String,GameInfo> getGameInfos()
 	{	return gamesMap;
@@ -208,8 +210,8 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		listPanels.clear();
 		
 		// sorting games
-		sortCriterion.updateValues(this,valuesMap,gamesMap);
-		gamesIds = new ArrayList<String>(gamesMap.keySet());
+		sortCriterion.updateValues(valuesMap,gamesMap);
+		gamesIds = new ArrayList<String>(valuesMap.keySet());
 		Collections.sort(gamesIds,new Comparator<String>()
 		{	@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
@@ -238,7 +240,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		// cols
 		int cols = columns.size();
 		String headerKeys[] = new String[cols];
-		int colWidths[] = new int[cols];
+		colWidths = new int[cols];
 		for(int col=0;col<columns.size();col++)
 		{	GameColumn rc = columns.get(col);
 			headerKeys[col] = rc.getHeaderKey();
@@ -320,6 +322,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			currentPage = pageCount-1;
 
 		refreshList();
+		selectGame(selectedId);
 	}
 	
 	private void refreshList()
@@ -351,6 +354,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	private void selectGame(String gameId)
 	{	// init
 		int index;
+		boolean fire = gameId==selectedId;
 	
 		// unselect
 		if(selectedId!=null)
@@ -387,7 +391,8 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		}
 		
 		// update listeners
-		fireGameSelectionChanged(gameId);
+		if(fire)
+			fireGameSelectionChanged(gameId);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -461,10 +466,14 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				{	dm = DisplayMode.CENTRAL;
 					key = GuiKeys.COMMON_GAME_LIST_BUTTON_CENTRAL;
 				}
+				if(selectedId!=null)
+				{	GameInfo gameInfo = gamesMap.get(selectedId);
+					if(!gameInfo.getHostInfo().getType().equals(dm))
+						selectGame(null);
+				}
 				MyLabel lbl = (MyLabel)buttonsPanel.getComponent(COL_DISPLAY);
 				lbl.setKey(key,true);
 				setDisplayMode(dm);
-				// TODO envoyer l'evt de sélection change (id + display mode)
 			}
 			// next page
 			else if(pos==COL_NEXT)
@@ -485,10 +494,19 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 					setSort(rc);
 			}
 			// preferred
-			else if(p[1]==0)
-			{	
+			else if(p[1]==(columns.indexOf(GameColumn.PREFERRED)*2))
+			{	// change preference
 				String gameId = gamesIds.get((currentPage*lines)+p[0]-1);
-				GameInfo gameInfo = 
+				GameInfo gameInfo = gamesMap.get(gameId);
+				HostInfo hostInfo = gameInfo.getHostInfo();
+				boolean preferred = hostInfo.isPreferred();
+				hostInfo.setPreferred(!preferred);
+				// change icon
+				TableSubPanel panel = listPanels.get(currentPage);
+				GameColumn.PREFERRED.setLabelContent(this,panel,colWidths,p[0],p[1],gameInfo);
+//TODO definie a specific function to update a GameInfo, which will fire the adapted event				
+				// fire GUI event
+				fireGameLineModified(gameInfo);
 				
 /**
  * TODO
@@ -502,7 +520,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
  */
 			}
 			// add/remove
-			else if(p[1]==2)
+			else if(p[1]==(columns.indexOf(GameColumn.BUTTON)*2))
 			{	
 				// TODO add/remove from the direct connexion list
 				
@@ -542,6 +560,11 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				{	e1.printStackTrace();
 				}
 				refresh();
+			}
+			// select line
+			else if(p[1]==(columns.indexOf(GameColumn.HOST_NAME)*2))
+			{	String gameId = gamesIds.get((currentPage*lines)+p[0]-1);
+				selectGame(gameId);
 			}
 		}
 	}
@@ -629,6 +652,11 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	private void fireGameSelectionChanged(String gameId)
 	{	for(GameListSubPanelListener listener: listeners)
 			listener.gameSelectionChanged(gameId);
+	}
+
+	private void fireGameLineModified(GameInfo gameInfo)
+	{	for(GameListSubPanelListener listener: listeners)
+			listener.gameLineModified(gameInfo);
 	}
 
 	private void fireGameBeforeClicked()
