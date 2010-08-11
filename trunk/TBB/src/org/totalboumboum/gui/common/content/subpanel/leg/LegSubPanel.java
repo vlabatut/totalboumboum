@@ -348,7 +348,7 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 		
 		//select
 		if(part!=null)
-		{	// same leg, or other leg ?
+		{	// same leg, or other leg?
 			index = parts.indexOf(part);
 			if(index==-1)
 			{	CupTournament tournament = leg.getTournament();
