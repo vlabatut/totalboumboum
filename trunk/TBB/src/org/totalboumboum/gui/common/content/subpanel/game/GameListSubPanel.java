@@ -26,42 +26,27 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.network.game.GameInfo;
 import org.totalboumboum.game.network.host.HostInfo;
-import org.totalboumboum.game.tournament.cup.CupLeg;
-import org.totalboumboum.game.tournament.cup.CupPart;
-import org.totalboumboum.game.tournament.cup.CupTournament;
 import org.totalboumboum.gui.common.content.MyLabel;
-import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
-import org.totalboumboum.gui.common.content.subpanel.part.PartSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.statistics.GameStatistics;
-import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
-import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.statistics.overall.PlayerStats;
-import org.xml.sax.SAXException;
 
 /**
  * 
@@ -180,7 +165,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	// PAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private List<String> gamesIds;
-	private HashMap<String,GameInfo> gamesMap;
+	private HashMap<String,GameInfo> gamesMap = new HashMap<String, GameInfo>();
 	@SuppressWarnings("rawtypes")
 	private HashMap<String,List<Comparable>> valuesMap = new HashMap<String, List<Comparable>>();
 	private int currentPage = 0;
@@ -206,8 +191,19 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		lines++;
 		if(gamesMap==null)
 			gamesMap = new HashMap<String,GameInfo>();
-		this.gamesMap = gamesMap;
+		this.gamesMap = new HashMap<String, GameInfo>(gamesMap);
 		listPanels.clear();
+		
+		// filter games
+		Iterator<GameInfo> it = gamesMap.values().iterator();
+		while(it.hasNext())
+		{	GameInfo gi = it.next();
+			HostInfo hi = gi.getHostInfo();
+			if(!hi.isDirect() && displayMode.equals(DisplayMode.DIRECT))
+				it.remove();
+			else if(!hi.isCentral() && displayMode.equals(DisplayMode.CENTRAL))
+				it.remove();
+		}
 		
 		// sorting games
 		sortCriterion.updateValues(valuesMap,gamesMap);
@@ -395,6 +391,27 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			fireGameSelectionChanged(gameId);
 	}
 
+	public void updateGame(GameInfo gameInfo)
+	{	// get position
+		String gameId = gameInfo.getHostInfo().getId();
+		int index = gamesIds.indexOf(gameId);
+		
+		// update this graphical component
+		if(index>=0)
+		{	int page = index/lines;
+			int line = index%lines;
+			TableSubPanel panel = listPanels.get(page);
+			for(int c=0;c<columns.size();c++)
+			{	GameColumn gameColumn = columns.get(c);
+				int col = c * 2;
+				gameColumn.setLabelContent(this,panel,colWidths,line,col,gameInfo);
+			}
+		}
+		
+		// fire an event for the other components
+		fireGameLineModified(gameInfo);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -468,7 +485,8 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				}
 				if(selectedId!=null)
 				{	GameInfo gameInfo = gamesMap.get(selectedId);
-					if(!gameInfo.getHostInfo().getType().equals(dm))
+					if((!gameInfo.getHostInfo().isDirect() && dm.equals(DisplayMode.DIRECT))
+						|| (!gameInfo.getHostInfo().isCentral() && dm.equals(DisplayMode.CENTRAL)))
 						selectGame(null);
 				}
 				MyLabel lbl = (MyLabel)buttonsPanel.getComponent(COL_DISPLAY);
@@ -501,65 +519,19 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				HostInfo hostInfo = gameInfo.getHostInfo();
 				boolean preferred = hostInfo.isPreferred();
 				hostInfo.setPreferred(!preferred);
-				// change icon
-				TableSubPanel panel = listPanels.get(currentPage);
-				GameColumn.PREFERRED.setLabelContent(this,panel,colWidths,p[0],p[1],gameInfo);
-//TODO definie a specific function to update a GameInfo, which will fire the adapted event				
-				// fire GUI event
-				fireGameLineModified(gameInfo);
-				
-/**
- * TODO
- * 	- ici : faut juste changer le statut de favori et changer l'affichage ?
- * 		>> non, dans tous les cas faut émettre car on ne sait pas de quelle liste il s'agit
- * 			donc niveau config ça pourrait être n'importe quoi
- *      >> en fait, vu qu'on ne fait plus de liste de favoris, ça serait
- *      surement mieux de mettre les boutons dans la table comme pour les stats des joueurs
- *  - émettre un evt pr la suppression
- *  - général: dans cette classe, faut gérer la sélection de game (ligne)
- */
+				// update gui
+				updateGame(gameInfo);
 			}
-			// add/remove
+			// add/remove from direct connection list
 			else if(p[1]==(columns.indexOf(GameColumn.BUTTON)*2))
-			{	
-				// TODO add/remove from the direct connexion list
-				
+			{	// change direct connection
 				String gameId = gamesIds.get((currentPage*lines)+p[0]-1);
-				RankingService rankingService = GameStatistics.getRankingService();
-				Set<String> playersIds = rankingService.getPlayers();
-				if(playersIds.contains(playerId))
-					GameStatistics.getRankingService().deregisterPlayer(playerId);
-				else
-					GameStatistics.getRankingService().registerPlayer(playerId);
-				// save the new rankings
-				try
-				{	GameStatistics.saveStatistics();
-				}
-				catch (IllegalArgumentException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SecurityException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IllegalAccessException e1)
-				{	e1.printStackTrace();
-				}
-				catch (NoSuchFieldException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				}
-				refresh();
+				GameInfo gameInfo = gamesMap.get(gameId);
+				HostInfo hostInfo = gameInfo.getHostInfo();
+				boolean direct = hostInfo.isDirect();
+				hostInfo.setDirect(!direct);
+				// update gui
+				updateGame(gameInfo);
 			}
 			// select line
 			else if(p[1]==(columns.indexOf(GameColumn.HOST_NAME)*2))
@@ -659,11 +631,13 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			listener.gameLineModified(gameInfo);
 	}
 
+	@SuppressWarnings("unused")
 	private void fireGameBeforeClicked()
 	{	for(GameListSubPanelListener listener: listeners)
 			listener.gameBeforeClicked();
 	}
 
+	@SuppressWarnings("unused")
 	private void fireGameAfterClicked()
 	{	for(GameListSubPanelListener listener: listeners)
 			listener.gameAfterClicked();
