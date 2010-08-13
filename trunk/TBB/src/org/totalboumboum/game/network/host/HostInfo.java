@@ -89,14 +89,23 @@ public class HostInfo
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HostType type = HostType.DIRECT;
+	private boolean central = false;
+	private boolean direct = false;
 	
-	public HostType getType()
-	{	return type;
+	public boolean isCentral()
+	{	return central;
 	}
 
-	public void setType(HostType type)
-	{	this.type = type;
+	public void setCentral(boolean central)
+	{	this.central = central;
+	}
+	
+	public boolean isDirect()
+	{	return direct;
+	}
+
+	public void setDirect(boolean direct)
+	{	this.direct = direct;
 	}
 	
 	/////////////////////////////////////////////////////////////////
