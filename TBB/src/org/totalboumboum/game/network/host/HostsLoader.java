@@ -92,13 +92,15 @@ public class HostsLoader
     	Boolean preferred = Boolean.parseBoolean(preferredStr);
     	result.setPreferred(preferred);
     	
+    	// central
+    	String centralStr = root.getAttribute(XmlNames.CENTRAL).getValue();
+    	Boolean central = Boolean.parseBoolean(centralStr);
+    	result.setCentral(central);
+    	
     	// direct
     	String directStr = root.getAttribute(XmlNames.DIRECT).getValue();
     	Boolean direct = Boolean.parseBoolean(directStr);
-    	if(direct)
-    		result.setType(HostType.DIRECT);
-		else
-    		result.setType(HostType.CENTRAL);
+    	result.setDirect(direct);
     	
     	return result;
 	}
