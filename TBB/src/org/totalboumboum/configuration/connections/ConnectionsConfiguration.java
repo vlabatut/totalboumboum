@@ -31,7 +31,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.game.network.game.GameInfo;
 import org.totalboumboum.game.network.host.HostInfo;
-import org.totalboumboum.game.network.host.HostType;
 import org.totalboumboum.game.network.host.HostsLoader;
 import org.totalboumboum.game.network.host.HostsSaver;
 import org.totalboumboum.tools.event.EventName;
@@ -88,7 +87,7 @@ public class ConnectionsConfiguration
 	
 	private void updateDirectConnections()
 	{	for(HostInfo host: hosts.values())
-		{	if(host.getType()==HostType.DIRECT)
+		{	if(host.isDirect())
 			{	GameInfo gameInfo = new GameInfo();
 				gameInfo.setHostInfo(host);
 				directConnections.add(gameInfo);

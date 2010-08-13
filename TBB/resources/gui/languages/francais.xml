@@ -841,6 +841,7 @@
 			</group>
 			<text name="Type" value="Type" tooltip="Type de connexion (central ou direct)" />
 			<group name="TypeData" >
+				<text name="Both" value="Tout" tooltip="Hôte accessible directement et via le central" />
 				<text name="Central" value="Central" tooltip="Hôte accessible via le central" />
 				<text name="Direct" value="Direct" tooltip="Hôte accessible directement" />
 			</group>

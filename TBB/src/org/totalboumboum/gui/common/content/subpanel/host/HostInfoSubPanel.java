@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.game.network.host.HostInfo;
-import org.totalboumboum.game.network.host.HostType;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -96,16 +95,24 @@ public class HostInfoSubPanel extends TableSubPanel
 				values.add(text);
 			}
 			if(showType)
-			{	HostType type = hostInfo.getType();
-				String text = "?";
-				if(type!=null)
-				{	String key;
-					if(type.equals(HostType.CENTRAL))
-						key = GuiKeys.COMMON_HOST_INFO_TYPE_DATA_CENTRAL;
+			{	String text;
+				String key;
+				if(hostInfo.isCentral())
+				{	if(hostInfo.isDirect())
+						key = GuiKeys.COMMON_HOST_INFO_TYPE_DATA_BOTH;
 					else
-						key = GuiKeys.COMMON_HOST_INFO_TYPE_DATA_DIRECT;
-					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+						key = GuiKeys.COMMON_HOST_INFO_TYPE_DATA_CENTRAL;
 				}
+				else
+				{	if(hostInfo.isDirect())
+						key = GuiKeys.COMMON_HOST_INFO_TYPE_DATA_DIRECT;
+					else
+						key = null;
+				}
+				if(key==null)
+					text = "?";
+				else
+					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 				values.add(text);
 			}
 			if(showPlayed)

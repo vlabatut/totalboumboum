@@ -112,24 +112,28 @@ public enum GameColumn
 	
 	public void setLabelContent(GameListSubPanel container, TableSubPanel panel, int colWidths[], int line, int col, GameInfo gameInfo)
 	{	if(this==BUTTON)
-		{	String key;
+		{	// content
+			String key;
 			if(gameInfo==null)
 				key = GuiKeys.COMMON_GAME_LIST_BUTTON_ADD;
 			else
 				key = GuiKeys.COMMON_GAME_LIST_BUTTON_REMOVE;
 			panel.setLabelKey(line,col,key,true);
+			// listener
 			MyLabel label = panel.getLabel(line,col);
 			label.addMouseListener(container);
 			label.setMouseSensitive(true);
 		}
 		else if(this==PREFERRED)
 		{	if(gameInfo!=null)
-			{	String key;
+			{	// content
+				String key;
 				if(gameInfo.getHostInfo().isPreferred())
 					key = GuiKeys.COMMON_GAME_LIST_DATA_FAV_PREFERRED;
 				else
 					key = GuiKeys.COMMON_GAME_LIST_DATA_FAV_REGULAR;
 				panel.setLabelKey(line,col,key,true);
+				// listener
 				MyLabel label = panel.getLabel(line,col);
 				label.addMouseListener(container);
 				label.setMouseSensitive(true);
@@ -144,6 +148,10 @@ public enum GameColumn
 					text = name;
 				String tooltip = text;
 				panel.setLabelText(line,col,text,tooltip);
+				// listener
+				MyLabel label = panel.getLabel(line,col);
+				label.addMouseListener(container);
+				label.setMouseSensitive(true);
 				// column width
 				int temp = GuiTools.getPixelWidth(panel.getLineFontSize(),text);
 				if(temp>colWidths[col])
@@ -159,6 +167,7 @@ public enum GameColumn
 					text = ip.getHostName();
 				String tooltip = text;
 				panel.setLabelText(line,col,text,tooltip);
+				// listener
 //				MyLabel label = panel.getLabel(line,col);
 //				label.addMouseListener(container);
 //				label.setMouseSensitive(true);
