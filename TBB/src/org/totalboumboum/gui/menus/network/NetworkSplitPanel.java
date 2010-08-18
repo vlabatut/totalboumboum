@@ -37,19 +37,19 @@ import org.totalboumboum.gui.tools.GuiTools;
  * @author Vincent Labatut
  *
  */
-public class TournamenuSplitPanel extends SplitMenuPanel
+public class NetworkSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 	
-	public TournamenuSplitPanel(MenuContainer container, MenuPanel parent)
+	public NetworkSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		TournamenuMenu menu = new TournamenuMenu(this,parent);
+		NetworkMenu menu = new NetworkMenu(this,parent);
 		setMenuPart(menu);
 	}
 	
@@ -57,11 +57,11 @@ public class TournamenuSplitPanel extends SplitMenuPanel
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void initTournament()
-	{	((TournamenuMenu)getMenuPart()).initTournament();
+	{	((NetworkMenu)getMenuPart()).initTournament();
 	}
 
 	public void setTournamentPanel(TournamentSplitPanel tournamentPanel)
-	{	((TournamenuMenu)getMenuPart()).setTournamentPanel(tournamentPanel);
+	{	((NetworkMenu)getMenuPart()).setTournamentPanel(tournamentPanel);
 	}
 
 	/////////////////////////////////////////////////////////////////
