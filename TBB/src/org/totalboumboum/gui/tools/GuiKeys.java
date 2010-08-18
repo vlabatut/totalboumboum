@@ -180,6 +180,7 @@ public class GuiKeys
 	public static final String MINUS = "Minus";
 	public static final String MODIFY = "Modify";
 	public static final String NAME = "Name";
+	public static final String NETWORK = "Network";
 	public static final String NEW = "New";
 	public static final String NEXT = "Next";
 	public static final String NO = "No";
@@ -306,6 +307,7 @@ public class GuiKeys
 		public static final String MENU_MAIN_BUTTON = MENU_MAIN+BUTTON;
 		public static final String MENU_MAIN_BUTTON_ABOUT = MENU_MAIN_BUTTON+ABOUT;
 		public static final String MENU_MAIN_BUTTON_LOAD = MENU_MAIN_BUTTON+LOAD;
+		public static final String MENU_MAIN_BUTTON_NETWORK = MENU_MAIN_BUTTON+NETWORK;
 		public static final String MENU_MAIN_BUTTON_OPTIONS = MENU_MAIN_BUTTON+OPTIONS;
 		public static final String MENU_MAIN_BUTTON_PROFILES = MENU_MAIN_BUTTON+PROFILES;
 		public static final String MENU_MAIN_BUTTON_QUICKMATCH = MENU_MAIN_BUTTON+QUICKMATCH;
