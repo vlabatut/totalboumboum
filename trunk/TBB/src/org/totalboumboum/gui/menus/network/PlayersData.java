@@ -37,8 +37,8 @@ import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSub
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import org.totalboumboum.gui.menus.tournament.hero.SelectHeroSplitPanel;
-import org.totalboumboum.gui.menus.tournament.profile.SelectProfileSplitPanel;
+import org.totalboumboum.gui.menus.network.hero.SelectHeroSplitPanel;
+import org.totalboumboum.gui.menus.network.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.xml.sax.SAXException;
 

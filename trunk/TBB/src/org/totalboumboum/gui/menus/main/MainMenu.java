@@ -40,6 +40,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.SimpleMenuPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.menus.about.AboutModalDialogPanel;
 import org.totalboumboum.gui.menus.explore.ExploreSplitPanel;
+import org.totalboumboum.gui.menus.network.NetworkContainer;
 import org.totalboumboum.gui.menus.options.OptionsSplitPanel;
 import org.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
 import org.totalboumboum.gui.menus.quickmatch.QuickMatchContainer;
@@ -124,6 +125,7 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 	/////////////////////////////////////////////////////////////////
 	private TournamenuContainer tournamentContainer;
 	private QuickMatchContainer quickMatchContainer;
+	private NetworkContainer networkContainer;
 	
 	/////////////////////////////////////////////////////////////////
 	// JCOMPONENT		/////////////////////////////////////////////
@@ -181,10 +183,10 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 			replaceWith(quickMatchContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_NETWORK))
-		{	if(quickMatchContainer==null)
-				quickMatchContainer = new QuickMatchContainer(getMenuContainer(),this);
-			quickMatchContainer.initTournament();
-			replaceWith(quickMatchContainer);
+		{	if(networkContainer==null)
+				networkContainer = new NetworkContainer(getMenuContainer(),this);
+			networkContainer.initTournament();
+			replaceWith(networkContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_ABOUT))
 		{	
