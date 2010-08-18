@@ -10,6 +10,7 @@
 				<text name="About" value="À propos" tooltip="À propos de Total Boum Boum" />
 				<text name="Load" value="Charger" tooltip="Charger une partie précédemment commencée" />
 				<text name="Options" value="Options" tooltip="Accéder aux options générales du jeu" />
+				<text name="Network" value="Partie réseau" tooltip="Se connecter à une partie pour jouer en réseau" />
 				<text name="Profiles" value="Profils" tooltip="Éditer les profils des joueurs" />
 				<text name="Quickmatch" value="Partie rapide" tooltip="Commencer une partie rapide" />
 				<text name="Quit" value="Quitter" tooltip="Quitter le jeu" />
@@ -454,6 +455,7 @@
 				<group name="Button">
 					<text name="Next" value="Suivant" tooltip="Aller à la sélection des joueurs" />
 					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection des niveaux" />
+					<text name="Publish" value="Publier" tooltip="Ouvrir votre rencontre au jeu en réseau" />
 					<text name="Quit" value="Quitter" tooltip="Quitter la rencontre et revenir au menu principal" />
 				</group>
 				<group name="Levels">

@@ -83,6 +83,7 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonTournament = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuickMatch = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
+		buttonNetworkGame = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_NETWORK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonLoad = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_LOAD,buttonWidth,buttonHeight,fontSize,this);
 		buttonReplay = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_REPLAY,buttonWidth,buttonHeight,fontSize,this);
@@ -109,6 +110,8 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 	private JButton buttonTournament;
 	@SuppressWarnings("unused")
 	private JButton buttonQuickMatch;
+	@SuppressWarnings("unused")
+	private JButton buttonNetworkGame;
 	@SuppressWarnings("unused")
 	private JButton buttonLoad;
 	@SuppressWarnings("unused")
@@ -172,6 +175,12 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 			replaceWith(tournamentContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH))
+		{	if(quickMatchContainer==null)
+				quickMatchContainer = new QuickMatchContainer(getMenuContainer(),this);
+			quickMatchContainer.initTournament();
+			replaceWith(quickMatchContainer);
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_NETWORK))
 		{	if(quickMatchContainer==null)
 				quickMatchContainer = new QuickMatchContainer(getMenuContainer(),this);
 			quickMatchContainer.initTournament();

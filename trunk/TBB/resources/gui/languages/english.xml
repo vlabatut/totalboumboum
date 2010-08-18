@@ -9,9 +9,10 @@
 			<group name="Button">
 				<text name="About" value="About" tooltip="About Total Boum Boum" />
 				<text name="Load" value="Load" tooltip="Load a previous game" />
+				<text name="Network" value="Network Game" tooltip="Connect to a server to play on the network" />
 				<text name="Options" value="Options" tooltip="Access the game options" />
 				<text name="Profiles" value="Profiles" tooltip="Edit the players' profiles" />
-				<text name="Quickmatch" value="Quick match" tooltip="Play only one match" />
+				<text name="Quickmatch" value="Quick Match" tooltip="Play only one match" />
 				<text name="Quit" value="Quit" tooltip="Quit the game" />
 				<text name="Replay" value="Replay" tooltip="Watch a previously recorded game" />
 				<text name="Resources" value="Resources" tooltip="Browse the available resources" />
@@ -453,6 +454,7 @@
 				<text name="Title" value="Quick match settings" tooltip="General settings of the quick match" />
 				<group name="Button">
 					<text name="Next" value="Next" tooltip="Go to players selection" />
+					<text name="Publish" value="Publish" tooltip="Make your game available for network play" />
 					<text name="Previous" value="Previous" tooltip="Back to levels selection" />
 					<text name="Quit" value="Quit" tooltip="Quit the match and go to main menu" />
 				</group>
