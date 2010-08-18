@@ -1,4 +1,4 @@
-package org.totalboumboum.gui.menus.networks;
+package org.totalboumboum.gui.menus.network;
 
 /*
  * Total Boum Boum
