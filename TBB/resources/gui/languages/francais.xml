@@ -581,6 +581,29 @@
 			</group>
 		</group>	
 
+<!-- NETWORK MENU -->	
+		<group name="Network">
+			<group name="Button">
+				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
+			</group>
+			<group name="Games">
+				<text name="Title" value="Sélection de la partie" tooltip="Sélectionner une partie existante ouverte au jeu en réseau" />
+				<group name="Button">
+					<text name="Next" value="Suivant" tooltip="Sélectionner les joueurs" />
+					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />
+				</group>
+			</group>
+			<group name="Players">
+				<text name="Title" value="Sélection des joueurs" tooltip="Écran de sélection des joueurs pour ce tournoi" />
+				<group name="Button">
+					<text name="Cancel" value="Annuler" tooltip="Annuler la sélection et revenir à l'écran des joueurs" />
+					<text name="Confirm" value="Confirmer" tooltip="Confirmer la sélection" />
+					<text name="Next" value="Suivant" tooltip="Valider la sélection" />
+					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection de la partie" />
+				</group>
+			</group>
+		</group>	
+
 	</group>
 
 

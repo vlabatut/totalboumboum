@@ -581,6 +581,29 @@
 			</group>
 		</group>	
 		
+<!-- NETWORK MENU -->	
+		<group name="Network">
+			<group name="Button">
+				<text name="Quit" value="Quit" tooltip="Quit the tournament and go back to the main menu" />
+			</group>
+			<group name="Games">
+				<text name="Title" value="Game selection" tooltip="Select one of the current network games" />
+				<group name="Button">
+					<text name="Next" value="Next" tooltip="Go to players selection" />
+					<text name="Previous" value="Previous" tooltip="Come back to the main menu" />
+				</group>
+			</group>
+			<group name="Players">
+				<text name="Title" value="Players selection" tooltip="Select the players for this tournament" />
+				<group name="Button">
+					<text name="Cancel" value="Cancel" tooltip="Cancel your sélection and come back to players selection" />
+					<text name="Confirm" value="Confirm" tooltip="Confirm your selection" />
+					<text name="Next" value="Next" tooltip="Confirm your selection" />
+					<text name="Previous" value="Previous" tooltip="Go back to game selection" />
+				</group>
+			</group>
+		</group>	
+
 	</group>
 
 <!-- GAME -->	
