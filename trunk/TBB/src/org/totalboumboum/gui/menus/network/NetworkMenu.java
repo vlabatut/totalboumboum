@@ -57,10 +57,10 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener, ConfigurationServerConnectionListener
+public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, ConfigurationServerConnectionListener
 {	private static final long serialVersionUID = 1L;
 	
-	public TournamenuMenu(SplitMenuPanel container, MenuPanel parent)
+	public NetworkMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
 		// layout

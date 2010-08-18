@@ -42,10 +42,10 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class TournamenuContainer extends MenuPanel implements MenuContainer
+public class NetworkContainer extends MenuPanel implements MenuContainer
 {	private static final long serialVersionUID = 1L;
 
-	public TournamenuContainer(MenuContainer container, MenuPanel parent)
+	public NetworkContainer(MenuContainer container, MenuPanel parent)
 	{	super(container.getMenuWidth(),container.getMenuHeight());
 		
 		// layout
@@ -60,7 +60,7 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 		
 		// split panel
 		tournamentSplitPanel = new TournamentSplitPanel(this,parent);
-		menuSplitPanel = new TournamenuSplitPanel(this,parent);
+		menuSplitPanel = new NetworkSplitPanel(this,parent);
 		menuSplitPanel.setTournamentPanel(tournamentSplitPanel);
 		loadSplitPanel = new LoadSplitPanel(this,parent);
 		loadSplitPanel.setTournamentPanel(tournamentSplitPanel);
@@ -91,7 +91,7 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 	/////////////////////////////////////////////////////////////////
 	// SPLIT PANELS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private TournamenuSplitPanel menuSplitPanel;
+	private NetworkSplitPanel menuSplitPanel;
 	private TournamentSplitPanel tournamentSplitPanel;
 	private LoadSplitPanel loadSplitPanel;
 	private boolean firstTime = true;
