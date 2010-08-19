@@ -22,20 +22,10 @@ package org.totalboumboum.gui.menus.network;
  */
 
 import java.awt.BorderLayout;
-import java.io.IOException;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
-import org.totalboumboum.game.archive.GameArchive;
-import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
-import org.totalboumboum.gui.menus.tournament.load.LoadSplitPanel;
-import org.totalboumboum.tools.files.FileNames;
-import org.xml.sax.SAXException;
 
 /**
  * 
@@ -62,8 +52,6 @@ public class NetworkContainer extends MenuPanel implements MenuContainer
 		tournamentSplitPanel = new TournamentSplitPanel(this,parent);
 		menuSplitPanel = new NetworkSplitPanel(this,parent);
 		menuSplitPanel.setTournamentPanel(tournamentSplitPanel);
-		loadSplitPanel = new LoadSplitPanel(this,parent);
-		loadSplitPanel.setTournamentPanel(tournamentSplitPanel);
 		setMenuPanel(menuSplitPanel);
 	}	
 	
@@ -86,56 +74,14 @@ public class NetworkContainer extends MenuPanel implements MenuContainer
 	
 */
 	
-	
-	
 	/////////////////////////////////////////////////////////////////
 	// SPLIT PANELS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private NetworkSplitPanel menuSplitPanel;
 	private TournamentSplitPanel tournamentSplitPanel;
-	private LoadSplitPanel loadSplitPanel;
-	private boolean firstTime = true;
 	
 	public void initTournament()
-	{	TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration();
-		if(tournamentConfiguration.getAutoLoad() && firstTime)
-		{	firstTime = false;
-			try
-			{	String folder = FileNames.FILE_AUTOSAVE;
-				AbstractTournament tournament = GameArchive.loadGame(folder);
-				tournamentSplitPanel.setTournament(tournament);
-				Configuration.getGameConfiguration().getTournamentConfiguration().setTournament(tournament);
-				setMenuPanel(tournamentSplitPanel);
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ClassNotFoundException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-		}
-		else
-		{	AbstractTournament tournament = tournamentConfiguration.getTournament();
-			if(tournament==null || tournament.isOver())
-			{	menuSplitPanel.initTournament();
-				setMenuPanel(menuSplitPanel);		
-			}
-			else if(tournament.hasBegun())
-				setMenuPanel(tournamentSplitPanel);
-			else
-				setMenuPanel(menuSplitPanel);
-		}
-	}
-	
-	public void initLoad()
-	{	loadSplitPanel.refresh();
-		setMenuPanel(loadSplitPanel);
+	{	menuSplitPanel.initTournament();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -163,5 +109,4 @@ public class NetworkContainer extends MenuPanel implements MenuContainer
 		validate();
 		repaint();		
 	}
-
 }

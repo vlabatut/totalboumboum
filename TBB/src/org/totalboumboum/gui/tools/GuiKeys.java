@@ -37,7 +37,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 public class GuiKeys
 {
 	/////////////////////////////////////////////////////////////////
-	// MISC	/////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static final String ABOUT = "About";
 	public static final String ADD = "Add";
@@ -847,14 +847,14 @@ public class GuiKeys
 		public static final String MENU_NETWORK = MENU+NETWORK;
 			/* BUTTONS */
 			public static final String MENU_NETWORK_BUTTON = MENU_NETWORK+BUTTON;
-			public static final String MENU_NETWORK_BUTTON_QUIT = MENU_NETWORK+QUIT;
+			public static final String MENU_NETWORK_BUTTON_QUIT = MENU_NETWORK_BUTTON+QUIT;
 			/* GAMES */
 			public static final String MENU_NETWORK_GAMES = MENU_NETWORK+GAMES;
 			public static final String MENU_NETWORK_GAMES_TITLE = MENU_NETWORK_GAMES+TITLE;
 				/* BUTTONS */
 				public static final String MENU_NETWORK_GAMES_BUTTON = MENU_NETWORK_GAMES+BUTTON;
-				public static final String MENU_NETWORK_GAMES_BUTTON_NEXT = MENU_NETWORK_GAMES+NEXT;
-				public static final String MENU_NETWORK_GAMES_BUTTON_PREVIOUS = MENU_NETWORK_GAMES+PREVIOUS;
+				public static final String MENU_NETWORK_GAMES_BUTTON_NEXT = MENU_NETWORK_GAMES_BUTTON+NEXT;
+				public static final String MENU_NETWORK_GAMES_BUTTON_PREVIOUS = MENU_NETWORK_GAMES_BUTTON+PREVIOUS;
 			/* PLAYERS */
 			public static final String MENU_NETWORK_PLAYERS = MENU_NETWORK+PLAYERS;
 			public static final String MENU_NETWORK_PLAYERS_TITLE = MENU_NETWORK_PLAYERS+TITLE;
@@ -1072,6 +1072,7 @@ public class GuiKeys
 		public static final String COMMON_GAME_LIST_HEADER = COMMON_GAME_LIST+HEADER;
 		public static final String COMMON_GAME_LIST_HEADER_ALLOWED_PLAYER = COMMON_GAME_LIST_HEADER+ALLOWED+PLAYER;
 		public static final String COMMON_GAME_LIST_HEADER_AVERAGE_LEVEL = COMMON_GAME_LIST_HEADER+AVERAGE+LEVEL;
+		public static final String COMMON_GAME_LIST_HEADER_BUTTON = COMMON_GAME_LIST_HEADER+BUTTON;
 		public static final String COMMON_GAME_LIST_HEADER_HOST_IP = COMMON_GAME_LIST_HEADER+HOST+IP;
 		public static final String COMMON_GAME_LIST_HEADER_HOST_NAME = COMMON_GAME_LIST_HEADER+HOST+NAME;
 		public static final String COMMON_GAME_LIST_HEADER_PLAYED = COMMON_GAME_LIST_HEADER+PLAYED;

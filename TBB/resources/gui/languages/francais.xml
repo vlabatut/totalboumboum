@@ -795,7 +795,7 @@
 			<text name="AverageScore" value="Score" tooltip="Niveau moyen des joueurs déjà inscrits" />
 			<text name="PlayerCount" value="Joueurs" tooltip="Nombre de joueurs déjà inscrits" />
 			<text name="TournamentName" value="Nom" tooltip="Nom du tournoi" />
-			<text name="TournamentState" value="État" tooltip="État du tournament" />
+			<text name="TournamentState" value="État" tooltip="État du tournoi" />
 			<group name="StateData" >
 				<text name="Closed" value="Fermé" tooltip="Inscriptions déjà fermées pour ce tournoi" />
 				<text name="Finished" value="Terminé" tooltip="Tournoi terminé" />
@@ -817,6 +817,8 @@
 		<group name="GameList" >
 			<group name="Button" >
 				<text name="Add" value="Ajouter" tooltip="Ajouter un nouvel hôte" />
+				<text name="Central" value="Central" tooltip="Afficher les parties disponibles sur le central" />
+				<text name="Direct" value="Direct" tooltip="Afficher les parties disponibles en connexion directe" />
 				<text name="Next" value="Suivants" tooltip="Hôtes suivants" />
 				<text name="Previous" value="Précédents" tooltip="Hôtes précédents" />
 				<text name="Remove" value="Enlever" tooltip="Retirer cet hôte" />
@@ -824,6 +826,7 @@
 			<group name="Header" >
 				<text name="AllowedPlayer" value="Permis" tooltip="Nombre de joueurs permis pour ce tournoi" />
 				<text name="AverageLevel" value="Score" tooltip="Niveau moyen des joueurs déjà inscrits" />
+				<text name="Button" value="Réinitialiser" tooltip="Supprime tous les hôtes directs enregistrés" />
 				<text name="HostIp" value="IP" tooltip="Dernière adresse de l'hôte" />
 				<text name="HostName" value="Nom" tooltip="Nom de l'hôte" />
 				<text name="Played" value="Joués" tooltip="Nombre de rencontres jouées sur cet hôte" />
