@@ -52,10 +52,6 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
 
-	private PlayersListSubPanel playersPanel;
-	private LimitsSubPanel<TournamentLimit> limitsPanel;
-	private PointsSubPanel pointsPanel;
-
 	public SequenceDescription(SplitMenuPanel container)
 	{	super(container);
 		
@@ -113,7 +109,14 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT			/////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	private PlayersListSubPanel playersPanel;
+	private LimitsSubPanel<TournamentLimit> limitsPanel;
+	private PointsSubPanel pointsPanel;
+
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	public void setTournament(SequenceTournament tournament)
 	{	// init
@@ -128,7 +131,6 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	@Override
 	public void refresh()
 	{	// nothing to do here
@@ -137,7 +139,6 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 	/////////////////////////////////////////////////////////////////
 	// LIMITS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	@Override
 	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();

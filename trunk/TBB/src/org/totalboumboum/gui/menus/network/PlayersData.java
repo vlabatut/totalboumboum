@@ -57,7 +57,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	{	super(container);
 		
 		// title
-		String key = GuiKeys.MENU_TOURNAMENT_PLAYERS_TITLE;
+		String key = GuiKeys.MENU_NETWORK_PLAYERS_TITLE;
 		setTitleKey(key);
 		
 		// data

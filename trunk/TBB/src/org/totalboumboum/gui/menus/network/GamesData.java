@@ -21,24 +21,21 @@ package org.totalboumboum.gui.menus.network;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.HashMap;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 
-import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
-import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.gui.common.content.MyLabel;
-import org.totalboumboum.gui.common.content.subpanel.tournament.TournamentMiscSubPanel;
+import org.totalboumboum.game.network.game.GameInfo;
+import org.totalboumboum.gui.common.content.subpanel.game.GameInfoSubPanel;
+import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanel;
+import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanelListener;
+import org.totalboumboum.gui.common.content.subpanel.host.HostInfoSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
-import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
-import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
-import org.totalboumboum.gui.menus.tournament.select.SelectTournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
@@ -47,162 +44,109 @@ import org.totalboumboum.gui.tools.GuiTools;
  * @author Vincent Labatut
  *
  */
-public class GamesData extends EntitledDataPanel implements MouseListener
+public class GamesData extends EntitledDataPanel implements GameListSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
-	private static final float SPLIT_RATIO = 0.04f;
-	
-	private TournamentMiscSubPanel miscPanel;
-	private TableSubPanel tournamentPanel;
-	private int tournamentHeight;
-	private int miscHeight;
+	private static final float SPLIT_RATIO = 0.6f;
+	private final int GAME_LIST_LINES = 16;
 	
 	public GamesData(SplitMenuPanel container)
 	{	super(container);
+		HashMap<String,GameInfo> gamesMap = new HashMap<String, GameInfo>(); //TODO 
 		
 		// title
-		setTitleKey(GuiKeys.MENU_NETWORK_GAMES_TITLE);
+		{	String key = GuiKeys.MENU_NETWORK_GAMES_TITLE;
+			setTitleKey(key);
+		}
 		
-		BasicPanel mainPanel;
 		// data
-		{	mainPanel = new BasicPanel(dataWidth,dataHeight);
-			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS); 
+		{	BasicPanel mainPanel = new BasicPanel(dataWidth,dataHeight);
+			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
 				mainPanel.setLayout(layout);
 			}
 			
 			int margin = GuiTools.panelMargin;
-			tournamentHeight = (int)(dataHeight*SPLIT_RATIO); 
-			miscHeight = dataHeight - tournamentHeight - margin;
+			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
+			int rightWidth = dataWidth - leftWidth - margin; 
 			mainPanel.setOpaque(false);
 			
-			// tournament panel
-			{	tournamentPanel = makeTournamentPanel(dataWidth,tournamentHeight);
-				mainPanel.add(tournamentPanel);
+			// game list panel
+			{	listPanel = new GameListSubPanel(leftWidth,dataHeight);
+				listPanel.setGameInfos(gamesMap,GAME_LIST_LINES);
+				listPanel.addListener(this);
+				mainPanel.add(listPanel);
 			}
 			
-			mainPanel.add(Box.createRigidArea(new Dimension(GuiTools.panelMargin,GuiTools.panelMargin)));
+			mainPanel.add(Box.createHorizontalGlue());
 			
-			// misc panel
-			{	miscPanel = new TournamentMiscSubPanel(dataWidth,miscHeight,15);
-				mainPanel.add(miscPanel);
+			// right panel
+			{	JPanel rightPanel = new JPanel();
+				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
+					rightPanel.setLayout(layout);
+				}
+				rightPanel.setOpaque(false);
+				Dimension dim = new Dimension(rightWidth,dataHeight);
+				rightPanel.setPreferredSize(dim);
+				rightPanel.setMinimumSize(dim);
+				rightPanel.setMaximumSize(dim);
+				int upHeight = (dataHeight - margin)/2;
+				int downHeight = dataHeight - upHeight - margin;
+				
+				// host panel
+				{	hostPanel = new HostInfoSubPanel(rightWidth,upHeight);
+					//hostPanel.addListener(this);
+					rightPanel.add(hostPanel);
+				}
+
+				rightPanel.add(Box.createVerticalGlue());
+				
+				// game panel
+				{	gamePanel = new GameInfoSubPanel(rightWidth,downHeight);
+					rightPanel.add(gamePanel);
+				}
+				
+				mainPanel.add(rightPanel);
 			}
-			
+
 			setDataPart(mainPanel);
 		}
 	}
 		
 	/////////////////////////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	private GameListSubPanel listPanel;
+	private GameInfoSubPanel gamePanel;
+	private HostInfoSubPanel hostPanel;
+
+	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
-	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
-		miscPanel.setTournament(tournament);
-		refreshTournament();
-//		if(tournament.getAllowedPlayerNumbers().contains(tournamentConfiguration.getProfilesSelection().getProfileCount()))
-//			miscPanel.selectAllowedPlayers(false);
-//		else
-//			miscPanel.selectAllowedPlayers(true);
+	{	// TODO useless here (?)
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// MOUSE LISTENER	/////////////////////////////////////////////
+	// GAME LIST SUBPANEL LISTENER		/////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void mouseClicked(MouseEvent e)
-	{	
-	}
-	
-	@Override
-	public void mouseEntered(MouseEvent e)
-	{	
-	}
-	
-	@Override
-	public void mouseExited(MouseEvent e)
-	{	
-	}
-	
-	@Override
-	public void mousePressed(MouseEvent e)
-	{	SelectTournamentSplitPanel selectTournamentPanel = new SelectTournamentSplitPanel(container.getMenuContainer(),container,tournamentConfiguration);
-		getMenuContainer().replaceWith(selectTournamentPanel);
-	}
-	
-	@Override
-	public void mouseReleased(MouseEvent e)
+	public void gameSelectionChanged(String gameId)
 	{	
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// CONFIGURATION				/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private TournamentConfiguration tournamentConfiguration;
-
-	public void setTournamentConfiguration(TournamentConfiguration tournamentConfiguration)
-	{	this.tournamentConfiguration = tournamentConfiguration;
-		refresh();
-	}
-	
-	public TournamentConfiguration getTournamentConfiguration()
-	{	return tournamentConfiguration;	
+	@Override
+	public void gameLineModified(GameInfo gameInfo)
+	{	
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private void refreshTournament()
-	{	String tournamentFile = tournamentConfiguration.getTournamentName().toString();
-		if(tournamentFile!=null)
-			tournamentPanel.setLabelText(0,0,tournamentFile.toString(),tournamentFile.toString());
-		else
-			tournamentPanel.setLabelText(0,0,null,null);
+	@Override
+	public void gameBeforeClicked()
+	{	
 	}
 
-	private TableSubPanel makeTournamentPanel(int width, int height)
-	{	int cols = 2;
-		int lines = 1;
-		int margin = GuiTools.subPanelMargin;
-		TableSubPanel result = new TableSubPanel(width,height,Mode.BORDER,lines,cols,false);
-		@SuppressWarnings("unused")
-		int headerHeight = result.getHeaderHeight();
-		int lineHeight = result.getLineHeight();
-		int iconWidth = lineHeight;
-		int fileWidth = result.getDataWidth() - (iconWidth + (cols-1)*margin);		
-		
-		{	int line = 0;
-			int col = 0;
-			// name
-			{	// size
-				result.setColSubMinWidth(col,fileWidth);
-				result.setColSubPrefWidth(col,fileWidth);
-				result.setColSubMaxWidth(col,fileWidth);
-				// color
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				result.setLabelBackground(line,col,bg);
-				// next
-				col++;
-			}
-			// browse
-			{	// size
-				result.setColSubMinWidth(col,iconWidth);
-				result.setColSubPrefWidth(col,iconWidth);
-				result.setColSubMaxWidth(col,iconWidth);
-				// icon
-				String key = GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_SELECT;
-				result.setLabelKey(line,col,key,true);
-				// color
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				result.setLabelBackground(line,col,bg);
-				// listener
-				MyLabel lbl = result.getLabel(line,col);
-				lbl.addMouseListener(this);
-				lbl.setMouseSensitive(true);
-				// next
-				col++;
-			}
-		}
-		
-		return result;	
+	@Override
+	public void gameAfterClicked()
+	{	
 	}
 }

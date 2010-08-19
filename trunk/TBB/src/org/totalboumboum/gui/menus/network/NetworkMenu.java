@@ -39,6 +39,8 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.configuration.profile.ProfilesConfiguration;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.configuration.profile.SpriteInfo;
+import org.totalboumboum.game.stream.network.configuration.ConfigurationClientConnection;
+import org.totalboumboum.game.stream.network.configuration.ConfigurationClientConnectionListener;
 import org.totalboumboum.game.stream.network.configuration.ConfigurationServerConnectionListener;
 import org.totalboumboum.game.stream.network.configuration.ConfigurationServerConnectionManager;
 import org.totalboumboum.game.stream.network.configuration.ConfigurationServerConnectionThread;
@@ -57,7 +59,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, ConfigurationServerConnectionListener
+public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, ConfigurationClientConnectionListener
 {	private static final long serialVersionUID = 1L;
 	
 	public NetworkMenu(SplitMenuPanel container, MenuPanel parent)
@@ -72,26 +74,22 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, Co
 
 		// buttons
 		initButtons();	
-
-		tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
 		
 		// panels
+		gamesData = new GamesData(container);
+		gamesData.addListener(this);
 		playersData = new PlayersData(container);
 		playersData.addListener(this);
-		settingsData = new SettingsData(container);
-		settingsData.addListener(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// BUTTONS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private JButton buttonQuit;
+	private JButton buttonGamesPrevious;
+	private JButton buttonGamesNext;
 	private JButton buttonPlayersPrevious;
 	private JButton buttonPlayersNext;
-	private JButton buttonSettingsPrevious;
-	private JButton buttonSettingsNext;
-	private JButton buttonPublish;
-	private JToggleButton buttonBlockPlayers;
 	private int buttonWidth;
 	private int buttonHeight;
 
@@ -99,14 +97,25 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, Co
 	{	buttonWidth = getHeight();
 		buttonHeight = getHeight();
 
-		buttonQuit = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
-		buttonPlayersPrevious = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonPlayersNext = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
-		buttonSettingsPrevious = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonSettingsNext = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
-		buttonPublish = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PUBLISH,buttonWidth,buttonHeight,1,this);
-		buttonBlockPlayers = GuiTools.createToggleButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_BLOCK_PLAYERS,buttonWidth,buttonHeight,1,this);
+		buttonQuit = GuiTools.createButton(GuiKeys.MENU_NETWORK_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonGamesPrevious = GuiTools.createButton(GuiKeys.MENU_NETWORK_GAMES_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonGamesNext = GuiTools.createButton(GuiKeys.MENU_NETWORK_GAMES_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonPlayersPrevious = GuiTools.createButton(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonPlayersNext = GuiTools.createButton(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		removeAll();
+	}
+	
+	private void setButtonsGames()
+	{	removeAll();
+		add(buttonQuit);
+		add(Box.createHorizontalGlue());
+		add(buttonGamesPrevious);
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
+		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
+		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(buttonGamesNext);
 	}
 	
 	private void setButtonsPlayers()
@@ -116,28 +125,14 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, Co
 		add(buttonPlayersPrevious);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(buttonPublish);
+		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(buttonPlayersNext);
 	}
 	
-	private void setButtonsSettings()
-	{	removeAll();
-		add(buttonQuit);
-		add(Box.createHorizontalGlue());
-		add(buttonSettingsPrevious);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-		add(buttonSettingsNext);
-	}
-	
 	private void refreshButtons()
-	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
-		if(tournament==null || !tournament.getAllowedPlayerNumbers().contains(playersData.getSelectedProfiles().size()))
+	{	if(tournament==null) //TODO à compléter
 			buttonPlayersNext.setEnabled(false);
 		else
 			buttonPlayersNext.setEnabled(true);
@@ -146,42 +141,18 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, Co
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private TournamentConfiguration tournamentConfiguration;
+	private AbstractTournament tournament = null;
 	
 	public void initTournament()
-	{	// init configuration
-		tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
-		if(!tournamentConfiguration.getUseLastPlayers())
-			tournamentConfiguration.reinitPlayers();
-		
-		try
-		{	if(!tournamentConfiguration.getUseLastTournament())
-				tournamentConfiguration.reinitTournament();
-			else
-				tournamentConfiguration.loadLastTournament();
-		}
-		catch (ParserConfigurationException e)
-		{	e.printStackTrace();
-		}
-		catch (SAXException e)
-		{	e.printStackTrace();
-		}
-		catch (IOException e)
-		{	e.printStackTrace();
-		}
-		catch (ClassNotFoundException e)
-		{	e.printStackTrace();
-		}
-		
-		// set panel
-		settingsData.setTournamentConfiguration(tournamentConfiguration);
-		container.setDataPart(settingsData);
-		setButtonsSettings();
+	{	// set panel
+		//gamesData.setTournamentConfiguration(tournamentConfiguration);
+		container.setDataPart(gamesData);
+		setButtonsGames();
 	}
 
 	private void setTournamentPlayers()
 	{	List<Profile> selectedProfiles = playersData.getSelectedProfiles();
-		AbstractTournament tournament = tournamentConfiguration.getTournament();
+//TODO		AbstractTournament tournament = tournamentConfiguration.getTournament();
 		tournament.setProfiles(selectedProfiles);
 	}
 	
@@ -193,8 +164,8 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, Co
 	// PANELS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private TournamentSplitPanel tournamentPanel;
+	private GamesData gamesData;
 	private PlayersData playersData;
-	private SettingsData settingsData;
 	
 	public void setTournamentPanel(TournamentSplitPanel tournamentPanel)
 	{	this.tournamentPanel = tournamentPanel;
@@ -204,29 +175,28 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, Co
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_QUIT))
-		{	AbstractTournament tournament = null;
-			tournamentConfiguration.setTournament(tournament);
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_BUTTON_QUIT))
+		{	// TODO
 			getFrame().setMainMenuPanel();
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS))				
+		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_GAMES_BUTTON_PREVIOUS))				
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS))				
-		{	setButtonsSettings();
-			container.setDataPart(settingsData);
+		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_PREVIOUS))				
+		{	setButtonsGames();
+			container.setDataPart(gamesData);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_NEXT))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_NEXT))
 		{	// synch game options
 			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(playersData.getSelectedProfiles());
-			tournamentConfiguration.setProfilesSelection(profilesSelection);
+//TODO			tournamentConfiguration.setProfilesSelection(profilesSelection);
 			
 			// set the tournament
 			setTournamentPlayers();
 			setTournamentSettings();
 			
 			// save tournament options
-			try
+/*			try
 			{	TournamentConfigurationSaver.saveTournamentConfiguration(tournamentConfiguration);
 			}
 			catch (ParserConfigurationException e1)
@@ -238,41 +208,21 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, Co
 			catch (IOException e1)
 			{	e1.printStackTrace();
 			}
-			
+*/			
 			// synch game options
-			Configuration.getGameConfiguration().setTournamentConfiguration(tournamentConfiguration);
+//TODO			Configuration.getGameConfiguration().setTournamentConfiguration(tournamentConfiguration);
 			
 			// tournament panel
-			AbstractTournament tournament = tournamentConfiguration.getTournament();
+//TODO			AbstractTournament tournament = tournamentConfiguration.getTournament();
 			tournamentPanel.setTournament(tournament);
 			replaceWith(tournamentPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_GAMES_BUTTON_NEXT))
 		{	// set payers panel
-			playersData.setTournamentConfiguration(tournamentConfiguration);
+//TODO			playersData.setTournamentConfiguration(tournamentConfiguration);
 			setButtonsPlayers();
 			refresh();
 			container.setDataPart(playersData);
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PUBLISH))
-		{	// update buttons
-			buttonPlayersPrevious.setEnabled(false);
-			int index = GuiTools.indexOfComponent(this,buttonPublish);
-			remove(index);
-			add(buttonBlockPlayers,index);
-			revalidate();
-			
-			// set up the connection
-			try
-			{	AbstractTournament tournament = tournamentConfiguration.getTournament();
-				connectionManager = new ConfigurationServerConnectionManager(tournament);
-				connectionManager.addListener(this);
-				ConfigurationServerConnectionThread thread = new ConfigurationServerConnectionThread(connectionManager);
-				thread.start();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
 	    }
 	} 
 	
@@ -294,57 +244,20 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, Co
 	/////////////////////////////////////////////////////////////////
 	// CONNECTION MANAGER	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ConfigurationServerConnectionManager connectionManager = null;
+	private ConfigurationClientConnection connection = null;
 
 	@Override
-	public synchronized void profileAdded(Profile profile)
-	{	// possibly add the profile to the local ones
-		try
-		{	Configuration.getProfilesConfiguration().insertProfile(profile);
-		}
-		catch (IllegalArgumentException e)
-		{	e.printStackTrace();
-		}
-		catch (SecurityException e)
-		{	e.printStackTrace();
-		}
-		catch (IOException e)
-		{	e.printStackTrace();
-		}
-		catch (ParserConfigurationException e)
-		{	e.printStackTrace();
-		}
-		catch (SAXException e)
-		{	e.printStackTrace();
-		}
-		catch (IllegalAccessException e)
-		{	e.printStackTrace();
-		}
-		catch (NoSuchFieldException e)
-		{	e.printStackTrace();
-		}
-		catch (ClassNotFoundException e)
-		{	e.printStackTrace();
-		}
-
-		// add the profile to the selection
-		ProfilesSelection profilesSelection = tournamentConfiguration.getProfilesSelection();
-		if(!profilesSelection.containsProfile(profile))
-			profilesSelection.addProfile(profile);
-		
-		// update the GUI
-		playersData.refresh();
+	public void tournamentRead(AbstractTournament tournament)
+	{	// TODO Auto-generated method stub
 	}
 
 	@Override
-	public synchronized void profileRemoved(String id)
-	{	
-		playersData.refresh();
+	public void profilesRead(List<Profile> profiles)
+	{	// TODO Auto-generated method stub
 	}
 
 	@Override
-	public synchronized void spriteChanged(String id, SpriteInfo sprite)
-	{	
-		playersData.refresh();
+	public void tournamentStarted(Boolean start)
+	{	// TODO Auto-generated method stub
 	}
 }

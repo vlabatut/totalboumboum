@@ -87,7 +87,7 @@ public enum GameColumn
 	{	String result = null;			
 
 		if(this==BUTTON)
-			result = null;
+			result = GuiKeys.COMMON_GAME_LIST_HEADER_BUTTON;
 		else if(this==PREFERRED)
 			result = GuiKeys.COMMON_GAME_LIST_HEADER_PREFERRED;
 		else if(this==HOST_NAME)

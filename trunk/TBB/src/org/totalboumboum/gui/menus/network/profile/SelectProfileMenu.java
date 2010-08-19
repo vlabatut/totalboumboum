@@ -77,14 +77,14 @@ public class SelectProfileMenu extends InnerMenuPanel
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON);
+		List<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonCancel = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonCancel = GuiTools.createButton(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -96,10 +96,10 @@ public class SelectProfileMenu extends InnerMenuPanel
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_CANCEL))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_CONFIRM))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_CONFIRM))
 		{	ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
 			Profile profile = profileData.getSelectedProfile();
 			if(profile!=null && !profiles.contains(profile))
