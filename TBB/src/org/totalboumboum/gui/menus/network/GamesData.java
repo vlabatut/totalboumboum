@@ -22,13 +22,20 @@ package org.totalboumboum.gui.menus.network;
  */
 
 import java.awt.Dimension;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.TreeSet;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import org.totalboumboum.game.network.game.GameInfo;
+import org.totalboumboum.game.network.host.HostInfo;
+import org.totalboumboum.game.network.host.HostState;
+import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.gui.common.content.subpanel.game.GameInfoSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanelListener;
@@ -52,7 +59,102 @@ public class GamesData extends EntitledDataPanel implements GameListSubPanelList
 	
 	public GamesData(SplitMenuPanel container)
 	{	super(container);
-		HashMap<String,GameInfo> gamesMap = new HashMap<String, GameInfo>(); //TODO 
+		HashMap<String,GameInfo> gamesMap = new HashMap<String, GameInfo>(); //TODO
+		
+try
+{	HostInfo hostInfo = new HostInfo();
+	hostInfo.setCentral(true);
+	hostInfo.setDirect(true);
+	hostInfo.setId("132456");
+	hostInfo.setLastIp(InetAddress.getByName("127.0.0.1"));
+	hostInfo.setName("example1");
+	hostInfo.setPreferred(true);
+	hostInfo.setState(HostState.OPEN);
+	hostInfo.setUses(213);
+	GameInfo gameInfo = new GameInfo();
+	gameInfo.setAllowedPlayers(new TreeSet<Integer>(Arrays.asList(1,2,3,4,5)));
+	gameInfo.setAverageScore(1234.56);
+	gameInfo.setHostInfo(hostInfo);
+	gameInfo.setPlayerCount(2);
+	gameInfo.setTournamentName("My Tournament 1");
+	gameInfo.setTournamentType(TournamentType.CUP);
+	gamesMap.put(gameInfo.getHostInfo().getId(),gameInfo);
+	
+	hostInfo = new HostInfo();
+	hostInfo.setCentral(false);
+	hostInfo.setDirect(true);
+	hostInfo.setId("321456");
+	hostInfo.setLastIp(InetAddress.getByName("127.0.0.2"));
+	hostInfo.setName("example2");
+	hostInfo.setPreferred(true);
+	hostInfo.setState(HostState.PLAYING);
+	hostInfo.setUses(456);
+	gameInfo = new GameInfo();
+	gameInfo.setAllowedPlayers(new TreeSet<Integer>(Arrays.asList(4,5)));
+	gameInfo.setAverageScore(1893.43);
+	gameInfo.setHostInfo(hostInfo);
+	gameInfo.setPlayerCount(4);
+	gameInfo.setTournamentName("My Tournament 2");
+	gameInfo.setTournamentType(TournamentType.LEAGUE);
+	gamesMap.put(gameInfo.getHostInfo().getId(),gameInfo);
+
+	hostInfo = new HostInfo();
+	hostInfo.setCentral(true);
+	hostInfo.setDirect(true);
+	hostInfo.setId("285259");
+	hostInfo.setLastIp(InetAddress.getByName("127.0.0.3"));
+	hostInfo.setName("example3");
+	hostInfo.setPreferred(false);
+	hostInfo.setState(HostState.FINISHED);
+	hostInfo.setUses(52);
+	gameInfo = new GameInfo();
+	gameInfo.setAllowedPlayers(new TreeSet<Integer>(Arrays.asList(1,2,4)));
+	gameInfo.setAverageScore(985.27);
+	gameInfo.setHostInfo(hostInfo);
+	gameInfo.setPlayerCount(2);
+	gameInfo.setTournamentName("My Tournament 3");
+	gameInfo.setTournamentType(TournamentType.SEQUENCE);
+	gamesMap.put(gameInfo.getHostInfo().getId(),gameInfo);
+
+	hostInfo = new HostInfo();
+	hostInfo.setCentral(true);
+	hostInfo.setDirect(true);
+	hostInfo.setId("741285");
+	hostInfo.setLastIp(InetAddress.getByName("127.0.0.4"));
+	hostInfo.setName("example4");
+	hostInfo.setPreferred(false);
+	hostInfo.setState(HostState.CLOSED);
+	hostInfo.setUses(18);
+	gameInfo = new GameInfo();
+	gameInfo.setAllowedPlayers(new TreeSet<Integer>(Arrays.asList(1,2,3,4)));
+	gameInfo.setAverageScore(1287.97);
+	gameInfo.setHostInfo(hostInfo);
+	gameInfo.setPlayerCount(1);
+	gameInfo.setTournamentName("My Tournament 4");
+	gameInfo.setTournamentType(TournamentType.SINGLE);
+	gamesMap.put(gameInfo.getHostInfo().getId(),gameInfo);
+
+	hostInfo = new HostInfo();
+	hostInfo.setCentral(true);
+	hostInfo.setDirect(true);
+	hostInfo.setId("258417");
+	hostInfo.setLastIp(InetAddress.getByName("127.0.0.5"));
+	hostInfo.setName("example5");
+	hostInfo.setPreferred(false);
+	hostInfo.setState(HostState.UNKOWN);
+	hostInfo.setUses(1856);
+	gameInfo = new GameInfo();
+	gameInfo.setAllowedPlayers(new TreeSet<Integer>(Arrays.asList(1,2,3,4,5)));
+	gameInfo.setAverageScore(1111.22);
+	gameInfo.setHostInfo(hostInfo);
+	gameInfo.setPlayerCount(3);
+	gameInfo.setTournamentName("My Tournament 5");
+	gameInfo.setTournamentType(TournamentType.CUP);
+	gamesMap.put(gameInfo.getHostInfo().getId(),gameInfo);
+}
+catch (UnknownHostException e)
+{	e.printStackTrace();
+}
 		
 		// title
 		{	String key = GuiKeys.MENU_NETWORK_GAMES_TITLE;
