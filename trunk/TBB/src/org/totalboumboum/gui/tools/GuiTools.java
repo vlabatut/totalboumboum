@@ -1106,16 +1106,16 @@ public class GuiTools
 		// no share
 		{	String folder = baseFolder+GuiFileTools.FILE_NOSHARE;
 			String[] uses =
-			{	GuiKeys.COMMON_GAME_LIST_DATA_FAV_REGULAR
+			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_NOSHARE,
+				GuiKeys.COMMON_POINTS_MATCH_DATA_NOSHARE,
+				GuiKeys.COMMON_POINTS_ROUND_DATA_NOSHARE
 			};
 			loadTableImages(folder,uses);
 		}
 		// no star
 		{	String folder = baseFolder+GuiFileTools.FILE_NOSTAR;
 			String[] uses =
-			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_NOSHARE,
-				GuiKeys.COMMON_POINTS_MATCH_DATA_NOSHARE,
-				GuiKeys.COMMON_POINTS_ROUND_DATA_NOSHARE
+			{	GuiKeys.COMMON_GAME_LIST_DATA_FAV_REGULAR
 			};
 			loadTableImages(folder,uses);
 		}
