@@ -34,4 +34,5 @@ public interface GameListSubPanelListener
 	public void gameLineModified(GameInfo gameInfo);
 	public void gameBeforeClicked();
 	public void gameAfterClicked();
+	public void gameAddClicked();
 }

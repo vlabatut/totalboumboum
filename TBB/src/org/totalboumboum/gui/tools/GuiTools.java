@@ -472,6 +472,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// edit
+		{	String folder = baseFolder+GuiFileTools.FILE_EDIT;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_HEADER_BUTTON
+			};
+			loadTableImages(folder,uses);
+		}
 		// evolution
 		{	String folder = baseFolder+GuiFileTools.FILE_EVOLUTION;
 			String[] uses =
@@ -485,8 +492,7 @@ public class GuiTools
 		{	String folder = baseFolder+GuiFileTools.FILE_FALSE;
 			String[] uses =
 			{	GuiKeys.COMMON_DIALOG_CANCEL,
-				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_DELETE,
-				GuiKeys.COMMON_GAME_LIST_HEADER_BUTTON
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_DELETE
 			};
 			loadTableImages(folder,uses);
 		}
