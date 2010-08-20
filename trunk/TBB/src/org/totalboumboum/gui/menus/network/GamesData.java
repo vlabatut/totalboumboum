@@ -59,7 +59,7 @@ public class GamesData extends EntitledDataPanel implements GameListSubPanelList
 	
 	public GamesData(SplitMenuPanel container)
 	{	super(container);
-		HashMap<String,GameInfo> gamesMap = new HashMap<String, GameInfo>(); //TODO
+		gamesMap = new HashMap<String, GameInfo>(); //TODO
 		
 try
 {	HostInfo hostInfo = new HostInfo();
@@ -213,7 +213,12 @@ catch (UnknownHostException e)
 			setDataPart(mainPanel);
 		}
 	}
-		
+	
+	/////////////////////////////////////////////////////////////////
+	// GAMES MAP		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	private HashMap<String,GameInfo> gamesMap;
+	
 	/////////////////////////////////////////////////////////////////
 	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
@@ -234,12 +239,20 @@ catch (UnknownHostException e)
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void gameSelectionChanged(String gameId)
-	{	
+	{	GameInfo gameInfo = gamesMap.get(gameId);
+		gamePanel.setGameInfo(gameInfo);
+		HostInfo hostInfo = gameInfo.getHostInfo();
+		hostPanel.setHostInfo(hostInfo);
 	}
 
 	@Override
 	public void gameLineModified(GameInfo gameInfo)
-	{	
+	{	GameInfo gi = gamePanel.getGameInfo();
+		if(gameInfo==gi)
+		{	gamePanel.setGameInfo(gameInfo);
+			HostInfo hostInfo = gameInfo.getHostInfo();
+			hostPanel.setHostInfo(hostInfo);
+		}
 	}
 
 	@Override
@@ -250,5 +263,10 @@ catch (UnknownHostException e)
 	@Override
 	public void gameAfterClicked()
 	{	
+	}
+
+	@Override
+	public void gameAddClicked()
+	{	// TODO Auto-generated method stub
 	}
 }

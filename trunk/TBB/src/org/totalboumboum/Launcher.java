@@ -1470,4 +1470,10 @@ public class Launcher
 	 *      >> ça va poser des pb de gestion de la mémoire (?)
 	 * >>> à faire plus tard...
 	 */
+	
+	/**
+	 * TODO
+	 * - pb avec les hosts qui ne sont pas centraux (comme si host n'existait pas)
+	 * - pb avec le bouton de favori
+	 */
 }

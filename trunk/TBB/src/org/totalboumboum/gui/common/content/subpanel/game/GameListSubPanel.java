@@ -350,17 +350,17 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	private void selectGame(String gameId)
 	{	// init
 		int index;
-		boolean fire = gameId==selectedId;
+		boolean fire = gameId!=selectedId;
 	
 		// unselect
 		if(selectedId!=null)
 		{	// get line
 			index = gamesIds.indexOf(selectedId);
 			int page = index/lines;
-			int line = index%lines;
+			int line = index%lines + 1;
 			// change color
 			TableSubPanel panel = listPanels.get(page);
-			Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			panel.setLineBackground(line,bg);
 			// update selected id
 			selectedId = null;
@@ -379,7 +379,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				refreshList();
 			}
 			// get line
-			int line = index%lines;
+			int line = index%lines + 1;
 			// change color
 			TableSubPanel panel = listPanels.get(page);
 			Color bg = GuiTools.COLOR_TABLE_SELECTED_PALE_BACKGROUND;
@@ -399,14 +399,17 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		// update this graphical component
 		if(index>=0)
 		{	int page = index/lines;
-			int line = index%lines;
+			int line = index%lines + 1;
 			TableSubPanel panel = listPanels.get(page);
 			for(int c=0;c<columns.size();c++)
 			{	GameColumn gameColumn = columns.get(c);
-				int col = c * 2;
-				gameColumn.setLabelContent(this,panel,colWidths,line,col,gameInfo);
+				gameColumn.setLabelContent(this,panel,colWidths,line,c,gameInfo);
 			}
 		}
+		
+		// refresh GUI
+		validate();
+		repaint();
 		
 		// fire an event for the other components
 		fireGameLineModified(gameInfo);
@@ -505,14 +508,16 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		// table buttons
 		else
 		{	int[] p = mainPanel.getLabelPositionSimple(label);
+			GameColumn rc = columns.get(p[1]);
 			// change order
 			if(p[0]==0)
-			{	GameColumn rc = columns.get(p[1]);
-				if(rc!=null)
+			{	if(rc.equals(GameColumn.BUTTON))
+					fireGameAddClicked();
+				else
 					setSort(rc);
 			}
 			// preferred
-			else if(p[1]==(columns.indexOf(GameColumn.PREFERRED)*2))
+			else if(rc.equals(GameColumn.PREFERRED))
 			{	// change preference
 				String gameId = gamesIds.get((currentPage*lines)+p[0]-1);
 				GameInfo gameInfo = gamesMap.get(gameId);
@@ -523,7 +528,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				updateGame(gameInfo);
 			}
 			// add/remove from direct connection list
-			else if(p[1]==(columns.indexOf(GameColumn.BUTTON)*2))
+			else if(rc.equals(GameColumn.BUTTON))
 			{	// change direct connection
 				String gameId = gamesIds.get((currentPage*lines)+p[0]-1);
 				GameInfo gameInfo = gamesMap.get(gameId);
@@ -534,7 +539,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				updateGame(gameInfo);
 			}
 			// select line
-			else if(p[1]==(columns.indexOf(GameColumn.HOST_NAME)*2))
+			else if(rc.equals(GameColumn.HOST_NAME))
 			{	String gameId = gamesIds.get((currentPage*lines)+p[0]-1);
 				selectGame(gameId);
 			}
@@ -641,5 +646,10 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	private void fireGameAfterClicked()
 	{	for(GameListSubPanelListener listener: listeners)
 			listener.gameAfterClicked();
+	}
+
+	private void fireGameAddClicked()
+	{	for(GameListSubPanelListener listener: listeners)
+			listener.gameAddClicked();
 	}
 }
