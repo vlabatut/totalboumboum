@@ -1478,5 +1478,6 @@ public class Launcher
 	 * 		x donner l'ip dans un popup
 	 * 		- retrouver les détails sur le net
 	 * 		>> pas besoin de plus d'interaction style modifier l'ip (suffit de supprimer/recréer)
+	 * - le serveur doit pouvoir choisir le port
 	 */
 }
