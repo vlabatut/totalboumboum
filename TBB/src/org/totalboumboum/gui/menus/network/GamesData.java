@@ -24,8 +24,10 @@ package org.totalboumboum.gui.menus.network;
 import java.awt.Dimension;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.TreeSet;
 
 import javax.swing.Box;
@@ -40,18 +42,22 @@ import org.totalboumboum.gui.common.content.subpanel.game.GameInfoSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.host.HostInfoSubPanel;
+import org.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
+import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
+import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.tools.network.NetworkTools;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class GamesData extends EntitledDataPanel implements GameListSubPanelListener
+public class GamesData extends EntitledDataPanel implements GameListSubPanelListener,ModalDialogPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
@@ -271,6 +277,37 @@ catch (UnknownHostException e)
 
 	@Override
 	public void gameAddClicked()
-	{	// TODO Auto-generated method stub
+	{	String defaultText = "xxx.xxx.xxx.xxx";
+		String key = GuiKeys.MENU_NETWORK_GAMES_ADD_HOST_TITLE;
+		List<String> text = new ArrayList<String>();
+		text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_NETWORK_GAMES_ADD_HOST_TEXT));
+		inputModalNew = new InputModalDialogPanel(container.getMenuParent(),key,text,defaultText);
+		inputModalNew.addListener(this);
+		getFrame().setModalDialog(inputModalNew);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private InputModalDialogPanel inputModalNew = null;
+	
+	@Override
+	public void modalDialogButtonClicked(String buttonCode)
+	{	String input = inputModalNew.getInput();
+		if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CANCEL))
+		{	getFrame().unsetModalDialog();
+			inputModalNew = null;
+		}
+		else if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+		{	if(NetworkTools.validateIPAddress(input))
+			{	getFrame().unsetModalDialog();
+				inputModalNew = null;
+				// TODO create new host
+				
+				//TODO refresh the GUI
+				//getDataPart().refresh();
+				//refreshButtons();
+			}
+		}
 	}
 }

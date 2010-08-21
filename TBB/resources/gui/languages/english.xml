@@ -587,6 +587,11 @@
 				<text name="Quit" value="Quit" tooltip="Quit the tournament and go back to the main menu" />
 			</group>
 			<group name="Games">
+				<text name="Title" value="Sélection de la partie" tooltip="Sélectionner une partie existante ouverte au jeu en réseau" />
+				<group name="AddHost">
+					<text name="Text" value="Enter the IP address of the new host:" tooltip="Enter the IP address of the new host, under the decimal format xxx.xxx.xxx.xxx" />
+					<text name="Title" value="New Host" tooltip="New Host" />
+				</group>
 				<text name="Title" value="Game selection" tooltip="Select one of the current network games" />
 				<group name="Button">
 					<text name="Next" value="Next" tooltip="Go to players selection" />
