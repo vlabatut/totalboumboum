@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.control.player.LocalPlayerControl;
 import org.totalboumboum.engine.control.player.NetworkPlayerControl;
 import org.totalboumboum.engine.control.player.PlayerControl;
-import org.totalboumboum.game.stream._temp.match.NetOutputServerStream;
+import org.totalboumboum.network.stream._temp.match.NetOutputServerStream;
 import org.xml.sax.SAXException;
 
 /**
