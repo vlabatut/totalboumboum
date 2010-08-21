@@ -136,7 +136,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 	    }
 		if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_NEW))
 		{	String key = GuiKeys.GAME_SAVE_NEW_TITLE;
-		List<String> text = new ArrayList<String>();
+			List<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_NEW_QUESTION));
 			String defaultText = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_NEW_NAME);
 			inputModalNew = new InputModalDialogPanel(getMenuParent(),key,text,defaultText);

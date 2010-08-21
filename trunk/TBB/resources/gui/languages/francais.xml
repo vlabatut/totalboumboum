@@ -588,6 +588,10 @@
 			</group>
 			<group name="Games">
 				<text name="Title" value="Sélection de la partie" tooltip="Sélectionner une partie existante ouverte au jeu en réseau" />
+				<group name="AddHost">
+					<text name="Text" value="Entrez l'adresse IP du nouvel hôte :" tooltip="Entrez l'adresse IP du nouvel hôte en utilisant la notation décimale de type xxx.xxx.xxx.xxx" />
+					<text name="Title" value="Nouvel hôte" tooltip="Nouvel hôte" />
+				</group>
 				<group name="Button">
 					<text name="Next" value="Suivant" tooltip="Sélectionner les joueurs" />
 					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />

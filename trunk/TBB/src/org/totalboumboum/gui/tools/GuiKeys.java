@@ -269,6 +269,7 @@ public class GuiKeys
 	public static final String STATE = "State";
 	public static final String STATISTICS = "Statistics";
 	public static final String SUM = "Sum";
+	public static final String TEXT = "Text";
 	public static final String THEME = "Theme";
 	public static final String TIME = "Time";
 	public static final String TITLE = "Title";
@@ -851,6 +852,10 @@ public class GuiKeys
 			/* GAMES */
 			public static final String MENU_NETWORK_GAMES = MENU_NETWORK+GAMES;
 			public static final String MENU_NETWORK_GAMES_TITLE = MENU_NETWORK_GAMES+TITLE;
+				/* ADD HOST */
+				public static final String MENU_NETWORK_GAMES_ADD_HOST = MENU_NETWORK_GAMES+ADD+HOST;
+				public static final String MENU_NETWORK_GAMES_ADD_HOST_TITLE = MENU_NETWORK_GAMES_ADD_HOST+TITLE;
+				public static final String MENU_NETWORK_GAMES_ADD_HOST_TEXT = MENU_NETWORK_GAMES_ADD_HOST+TEXT;
 				/* BUTTONS */
 				public static final String MENU_NETWORK_GAMES_BUTTON = MENU_NETWORK_GAMES+BUTTON;
 				public static final String MENU_NETWORK_GAMES_BUTTON_NEXT = MENU_NETWORK_GAMES_BUTTON+NEXT;
