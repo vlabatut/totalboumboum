@@ -127,7 +127,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
-				String key = GuiKeys.COMMON_GAME_LIST_BUTTON_CENTRAL;
+				String key = GuiKeys.COMMON_GAME_LIST_BUTTON_DIRECT;
 				label.setKey(key,true);
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setVerticalAlignment(JLabel.CENTER);
@@ -157,7 +157,8 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		
 		// pages
 		currentPage = 0;
-		sortCriterion = GameColumn.PLAYED;
+		setSort(GameColumn.HOST_NAME);
+		setDisplayMode(DisplayMode.CENTRAL);
 		setGameInfos(null,16);
 	}
 	
@@ -192,10 +193,11 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		if(gamesMap==null)
 			gamesMap = new HashMap<String,GameInfo>();
 		this.gamesMap = new HashMap<String, GameInfo>(gamesMap);
+		HashMap<String,GameInfo> gamesMapCopy = new HashMap<String, GameInfo>(gamesMap);
 		listPanels.clear();
 		
 		// filter games
-		Iterator<GameInfo> it = gamesMap.values().iterator();
+		Iterator<GameInfo> it = gamesMapCopy.values().iterator();
 		while(it.hasNext())
 		{	GameInfo gi = it.next();
 			HostInfo hi = gi.getHostInfo();
@@ -206,7 +208,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		}
 		
 		// sorting games
-		sortCriterion.updateValues(valuesMap,gamesMap);
+		updateValues(valuesMap,gamesMapCopy);
 		gamesIds = new ArrayList<String>(valuesMap.keySet());
 		Collections.sort(gamesIds,new Comparator<String>()
 		{	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -225,8 +227,9 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				return result;
 			}
 		});
-		if((inverted && !sortCriterion.isInverted())
-			|| (!inverted && sortCriterion.isInverted()))
+		if(criteria.size()>0 &&
+			(inverted &&  !criteria.get(0).isInverted())
+			|| (!inverted && criteria.get(0).isInverted()))
 		{	List<String> temp = gamesIds;
 			gamesIds = new ArrayList<String>();
 			for(String i: temp)
@@ -274,7 +277,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			{	// init
 				String gameId = gamesIds.get(idIndex);
 				idIndex++;
-				GameInfo gameInfo = gamesMap.get(gameId);
+				GameInfo gameInfo = gamesMapCopy.get(gameId);
 				// columns
 				for(int col=0;col<cols;col++)
 				{	GameColumn column = columns.get(col);
@@ -430,19 +433,36 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// SORT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GameColumn sortCriterion = null;
+	private List<GameColumn> criteria = new ArrayList<GameColumn>();
 	private boolean inverted = false;
 	
-	public void setSort(GameColumn sort)
-	{	if(sortCriterion==sort)
+	public void setSort(GameColumn criterion)
+	{	if(criteria.size()>0 && criteria.get(0)==criterion)
 			inverted = !inverted;		
 		else
 		{	inverted = false;
-			sortCriterion = sort;
+			criteria.remove(criterion);
+			criteria.add(0,criterion);
 		}
+
+//for(GameColumn gc: criteria)
+//	System.out.print(" "+gc);
+//System.out.println();
+
 		refresh();
 	}
-	
+
+	@SuppressWarnings("rawtypes")
+	private void updateValues(HashMap<String,List<Comparable>> valuesMap, HashMap<String,GameInfo> gamesMap)
+	{	valuesMap.clear();
+		for(GameInfo gameInfo: gamesMap.values())
+		{	List<Comparable> list = new ArrayList<Comparable>();
+			for(GameColumn c: criteria)
+				list.add(c.getDataValue(gameInfo));
+			valuesMap.put(gameInfo.getHostInfo().getId(),list);
+		}
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -480,11 +500,11 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				DisplayMode dm;
 				if(displayMode.equals(DisplayMode.CENTRAL))
 				{	dm = DisplayMode.DIRECT;
-					key = GuiKeys.COMMON_GAME_LIST_BUTTON_DIRECT;
+					key = GuiKeys.COMMON_GAME_LIST_BUTTON_CENTRAL;
 				}
 				else
 				{	dm = DisplayMode.CENTRAL;
-					key = GuiKeys.COMMON_GAME_LIST_BUTTON_CENTRAL;
+					key = GuiKeys.COMMON_GAME_LIST_BUTTON_DIRECT;
 				}
 				if(selectedId!=null)
 				{	GameInfo gameInfo = gamesMap.get(selectedId);
@@ -554,7 +574,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY								/////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private DisplayMode displayMode = DisplayMode.CENTRAL;
+	private DisplayMode displayMode;
 	
 	private enum DisplayMode
 	{	CENTRAL,

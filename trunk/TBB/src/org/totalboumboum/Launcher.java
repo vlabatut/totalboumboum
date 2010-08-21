@@ -1473,7 +1473,10 @@ public class Launcher
 	
 	/**
 	 * TODO
-	 * - pb avec les hosts qui ne sont pas centraux (comme si host n'existait pas)
-	 * - pb avec le bouton de favori
+	 * - ralentissement: p-ê inetadress?
+	 * - rajouter l'interaction avec l'hote rajouté par l'utilisateur :
+	 * 		- donner l'ip dans un popup
+	 * 		- retrouver les détails sur le net
+	 * 		>> pas besoin de plus d'interaction style modifier l'ip (suffit de supprimer/recréer)
 	 */
 }

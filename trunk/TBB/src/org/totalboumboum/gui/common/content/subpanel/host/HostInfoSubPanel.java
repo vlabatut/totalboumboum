@@ -80,23 +80,27 @@ public class HostInfoSubPanel extends TableSubPanel
 		
 		if(hostInfo!=null)
 		{	// text
-			List<String> values = new ArrayList<String>();
+			List<String> texts = new ArrayList<String>();
+			List<String> tooltips = new ArrayList<String>();
 			if(showName)
 			{	String text = "?";
 				if(text!=null)
 					text = hostInfo.getName();
-				values.add(text);
+				texts.add(text);
+				tooltips.add(text);
 			}
 			if(showIp)
 			{	InetAddress ip = hostInfo.getLastIp();
 				String text = "?";
 				if(ip!=null)
 					text = ip.getHostName();
-				values.add(text);
+				texts.add(text);
+				tooltips.add(text);
 			}
 			if(showType)
 			{	String text;
 				String key;
+				String tooltip;
 				if(hostInfo.isCentral())
 				{	if(hostInfo.isDirect())
 						key = GuiKeys.COMMON_HOST_INFO_TYPE_DATA_BOTH;
@@ -110,21 +114,28 @@ public class HostInfoSubPanel extends TableSubPanel
 						key = null;
 				}
 				if(key==null)
-					text = "?";
+				{	text = "?";
+					tooltip = text;
+				}
 				else
-					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
-				values.add(text);
+				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+					tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+				}
+				texts.add(text);
+				tooltips.add(tooltip);
 			}
 			if(showPlayed)
 			{	Integer value = hostInfo.getUses();
 				String text = "?";
 				if(value!=null)
 					text = Integer.toString(value);
-				values.add(text);
+				texts.add(text);
+				tooltips.add(text);
 			}
 			if(showPreferred)
 			{	Boolean preferred = hostInfo.isPreferred();
 				String text = "?";
+				String tooltip = text;
 				if(preferred!=null)
 				{	String key;
 					if(preferred)
@@ -132,8 +143,10 @@ public class HostInfoSubPanel extends TableSubPanel
 					else
 						key = GuiKeys.COMMON_HOST_INFO_PREFERRED_DATA_NON_PREFERRED;
 					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+					tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 				}
-				values.add(text);
+				texts.add(text);
+				tooltips.add(tooltip);
 			}
 			
 			// content
@@ -146,8 +159,8 @@ public class HostInfoSubPanel extends TableSubPanel
 					colSub++;
 				}
 				// data
-				{	String text = values.get(line);
-					String tooltip = text;
+				{	String text = texts.get(line);
+					String tooltip = tooltips.get(line);
 					setLabelText(line,colSub,text,tooltip);
 					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,0,fg);

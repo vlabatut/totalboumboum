@@ -805,7 +805,7 @@
 			</group>
 			<text name="TournamentType" value="Type" tooltip="Type du tournoi" />
 			<group name="TournamentTypeData" >
-				<text name="Cup" value="Coupe" tooltip="Coupe à élimination directe" />
+				<text name="Cup" value="Coupe" tooltip="Tournoi à élimination directe" />
 				<text name="League" value="Ligue" tooltip="Championat complet" />
 				<text name="Sequence" value="Séquence" tooltip="Séquence de plusieurs rencontres" />
 				<text name="Single" value="Simple" tooltip="Une seule rencontre" />
