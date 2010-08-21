@@ -1475,7 +1475,7 @@ public class Launcher
 	 * TODO
 	 * - ralentissement: p-ê inetadress?
 	 * - rajouter l'interaction avec l'hote rajouté par l'utilisateur :
-	 * 		- donner l'ip dans un popup
+	 * 		x donner l'ip dans un popup
 	 * 		- retrouver les détails sur le net
 	 * 		>> pas besoin de plus d'interaction style modifier l'ip (suffit de supprimer/recréer)
 	 */
