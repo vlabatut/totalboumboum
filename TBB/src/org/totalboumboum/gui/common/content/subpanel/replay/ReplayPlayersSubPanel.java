@@ -24,11 +24,11 @@ package org.totalboumboum.gui.common.content.subpanel.replay;
 import java.awt.Color;
 import java.util.List;
 
-import org.totalboumboum.game.stream.file.FileInputClientStream;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.network.stream.file.FileInputClientStream;
 import org.totalboumboum.tools.GameData;
 
 /**
