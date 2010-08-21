@@ -29,7 +29,7 @@ import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.game.stream._temp.match.NetOutputServerStream;
+import org.totalboumboum.network.stream._temp.match.NetOutputServerStream;
 
 /**
  * 

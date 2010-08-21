@@ -28,7 +28,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
-import org.totalboumboum.game.stream._temp.match.NetOutputServerStream;
+import org.totalboumboum.network.stream._temp.match.NetOutputServerStream;
 import org.xml.sax.SAXException;
 
 /**

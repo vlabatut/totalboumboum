@@ -30,7 +30,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.game.stream._temp.match.NetInputServerStream;
+import org.totalboumboum.network.stream._temp.match.NetInputServerStream;
 
 /**
  * 

@@ -29,10 +29,10 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.game.network.game.GameInfo;
-import org.totalboumboum.game.network.host.HostInfo;
-import org.totalboumboum.game.network.host.HostsLoader;
-import org.totalboumboum.game.network.host.HostsSaver;
+import org.totalboumboum.network.game.GameInfo;
+import org.totalboumboum.network.host.HostInfo;
+import org.totalboumboum.network.host.HostsLoader;
+import org.totalboumboum.network.host.HostsSaver;
 import org.totalboumboum.tools.event.EventName;
 import org.totalboumboum.tools.event.UpdateEvent;
 import org.totalboumboum.tools.event.UpdateListener;
