@@ -23,10 +23,7 @@ package org.totalboumboum.gui.common.content.subpanel.game;
 
 import java.net.InetAddress;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -104,8 +101,69 @@ public enum GameColumn
 			result = GuiKeys.COMMON_GAME_LIST_HEADER_AVERAGE_LEVEL;
 		else if(this==TOURNAMENT_STATE)
 			result = GuiKeys.COMMON_GAME_LIST_HEADER_TOURNAMENT_STATE;
-		else if(this==TOURNAMENT_STATE)
+		else if(this==PLAYED)
 			result = GuiKeys.COMMON_GAME_LIST_HEADER_PLAYED;
+
+		return result;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public Comparable getDataValue(GameInfo gameInfo)
+	{	Comparable result = null;			
+
+		if(this==BUTTON)
+		{	result = 0;
+		}
+		else if(this==PREFERRED)
+		{	result = gameInfo.getHostInfo().isPreferred();
+		}
+		else if(this==HOST_NAME)
+		{	result = gameInfo.getHostInfo().getName();
+		}
+		else if(this==HOST_IP)
+		{	result = gameInfo.getHostInfo().getLastIp().getHostName();
+		}
+		else if(this==TOURNAMENT_TYPE)
+		{	result = gameInfo.getTournamentType();
+		}
+		else if(this==PLAYER_COUNT)
+		{	result = gameInfo.getPlayerCount();
+		}
+		else if(this==ALLOWED_PLAYER)
+		{	final class Temp extends TreeSet<Integer> implements Comparable<TreeSet<Integer>>
+			{	private static final long serialVersionUID = 1L;
+				@Override
+				public int compareTo(TreeSet<Integer> s)
+				{	int result = 0;
+					Iterator<Integer> it1 = this.iterator();
+					Iterator<Integer> it2 = s.iterator();
+					while(result==0 && it1.hasNext() && it2.hasNext())
+					{	Integer i1 = it1.next();
+						Integer i2 = it2.next();
+						result = i1 - i2;
+					}
+					if(result==0)
+					{	if(it1.hasNext() && !it2.hasNext())
+							result = 1;
+						else if(!it1.hasNext() && it2.hasNext())
+							result = -1;
+					}			
+					return result;
+				}
+			}
+			Temp allowedPlayer = new Temp();
+			allowedPlayer.addAll(gameInfo.getAllowedPlayers());
+			result = allowedPlayer;
+		}
+		else if(this==AVERAGE_LEVEL)
+		{	result = gameInfo.getAverageScore();
+		}
+		else if(this==TOURNAMENT_STATE)
+		{	result = gameInfo.getHostInfo().getState();
+		}
+		else if(this==PLAYED)
+		{	result = gameInfo.getHostInfo().getUses();
+		}
 
 		return result;
 	}
@@ -121,6 +179,7 @@ public enum GameColumn
 			panel.setLabelKey(line,col,key,true);
 			// listener
 			MyLabel label = panel.getLabel(line,col);
+			label.removeMouseListener(container);
 			label.addMouseListener(container);
 			label.setMouseSensitive(true);
 		}
@@ -135,6 +194,7 @@ public enum GameColumn
 				panel.setLabelKey(line,col,key,true);
 				// listener
 				MyLabel label = panel.getLabel(line,col);
+				label.removeMouseListener(container);
 				label.addMouseListener(container);
 				label.setMouseSensitive(true);
 			}
@@ -150,6 +210,7 @@ public enum GameColumn
 				panel.setLabelText(line,col,text,tooltip);
 				// listener
 				MyLabel label = panel.getLabel(line,col);
+				label.removeMouseListener(container);
 				label.addMouseListener(container);
 				label.setMouseSensitive(true);
 				// column width
@@ -283,94 +344,6 @@ public enum GameColumn
 				if(temp>colWidths[col])
 					colWidths[col] = temp;
 			}
-		}
-	}
-
-	@SuppressWarnings("rawtypes")
-	public void updateValues(HashMap<String,List<Comparable>> valuesMap, HashMap<String,GameInfo> gamesMap)
-	{	valuesMap.clear();
-		for(GameInfo gameInfo: gamesMap.values())
-		{	// init
-			List<Comparable> list = new ArrayList<Comparable>();
-			// process
-			if(this==BUTTON || this==HOST_NAME)
-			{	String name = gameInfo.getTournamentName();
-				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
-				list.add(name);
-				list.add(ip);
-			}
-			else if(this==PREFERRED)
-			{	Boolean preferred = gameInfo.getHostInfo().isPreferred();
-				String name = gameInfo.getTournamentName();
-				list.add(preferred);
-				list.add(name);
-			}
-			if(this==HOST_IP)
-			{	String ip = gameInfo.getHostInfo().getLastIp().getHostName();
-				String name = gameInfo.getTournamentName();
-				list.add(ip);
-				list.add(name);
-			}
-			else if(this==TOURNAMENT_TYPE)
-			{	TournamentType type = gameInfo.getTournamentType();
-				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
-				list.add(type);
-				list.add(ip);
-			}
-			else if(this==PLAYER_COUNT)
-			{	int playerCount = gameInfo.getPlayerCount();
-				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
-				list.add(playerCount);
-				list.add(ip);
-			}
-			else if(this==ALLOWED_PLAYER)
-			{	final class Temp extends TreeSet<Integer> implements Comparable<TreeSet<Integer>>
-				{	private static final long serialVersionUID = 1L;
-					@Override
-					public int compareTo(TreeSet<Integer> s)
-					{	int result = 0;
-						Iterator<Integer> it1 = this.iterator();
-						Iterator<Integer> it2 = s.iterator();
-						while(result==0 && it1.hasNext() && it2.hasNext())
-						{	Integer i1 = it1.next();
-							Integer i2 = it2.next();
-							result = i1 - i2;
-						}
-						if(result==0)
-						{	if(it1.hasNext() && !it2.hasNext())
-								result = 1;
-							else if(!it1.hasNext() && it2.hasNext())
-								result = -1;
-						}			
-						return result;
-					}
-				}
-				Temp allowedPlayer = new Temp();
-				allowedPlayer.addAll(gameInfo.getAllowedPlayers());
-				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
-				list.add(allowedPlayer);
-				list.add(ip);
-			}
-			else if(this==AVERAGE_LEVEL)
-			{	Double level = gameInfo.getAverageScore();
-				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
-				list.add(level);
-				list.add(ip);
-			}
-			else if(this==TOURNAMENT_STATE)
-			{	HostState state = gameInfo.getHostInfo().getState();
-				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
-				list.add(state);
-				list.add(ip);
-			}
-			else if(this==PLAYED)
-			{	Integer played = gameInfo.getHostInfo().getUses();
-				String ip = gameInfo.getHostInfo().getLastIp().getHostName();
-				list.add(played);
-				list.add(ip);
-			}
-
-			valuesMap.put(gameInfo.getHostInfo().getId(),list);
 		}
 	}
 }	

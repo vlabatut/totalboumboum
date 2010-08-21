@@ -86,16 +86,19 @@ public class GameInfoSubPanel extends TableSubPanel
 		
 		if(gameInfo!=null)
 		{	// text
-			List<String> values = new ArrayList<String>();
+			List<String> texts = new ArrayList<String>();
+			List<String> tooltips = new ArrayList<String>();
 			if(showTournamentName)
 			{	String text = "?";
 				if(text!=null)
 					text = gameInfo.getTournamentName();
-				values.add(text);
+				texts.add(text);
+				tooltips.add(text);
 			}
 			if(showTournamentType)
 			{	TournamentType type = gameInfo.getTournamentType();
 				String text = "ERROR";
+				String tooltip = text;
 				if(type!=null)
 				{	String key = "";
 					if(type.equals(TournamentType.CUP))
@@ -109,22 +112,26 @@ public class GameInfoSubPanel extends TableSubPanel
 					else if(type.equals(TournamentType.TURNING))
 						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_TYPE_DATA_TURNING;
 					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+					tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 				}
-				values.add(text);
+				texts.add(text);
+				tooltips.add(tooltip);
 			}
 			if(showAllowedPlayers)
 			{	Set<Integer> value = gameInfo.getAllowedPlayers();
 				String text = "?";
 				if(value!=null)
 					text = Players.formatAllowedPlayerNumbers(value);
-				values.add(text);
+				texts.add(text);
+				tooltips.add(text);
 			}
 			if(showPlayerCount)
 			{	Integer value = gameInfo.getPlayerCount();
 				String text = "?";
 				if(value!=null)
 					text = Integer.toString(value);
-				values.add(text);
+				texts.add(text);
+				tooltips.add(text);
 			}
 			if(showAverageScore)
 			{	Double value = gameInfo.getAverageScore();
@@ -135,11 +142,13 @@ public class GameInfoSubPanel extends TableSubPanel
 					nf.setMinimumFractionDigits(2);
 					text = nf.format(value);
 				}
-				values.add(text);
+				texts.add(text);
+				tooltips.add(text);
 			}
 			if(showTournamentState)
 			{	HostState state = gameInfo.getHostInfo().getState();
 				String text = "ERROR";
+				String tooltip = text;
 				if(state!=null)
 				{	String key = "";
 					if(state.equals(HostState.CLOSED))
@@ -153,8 +162,10 @@ public class GameInfoSubPanel extends TableSubPanel
 					else if(state.equals(HostState.UNKOWN))
 						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_UNKNOWN;
 					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+					tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 				}
-				values.add(text);
+				texts.add(text);
+				tooltips.add(tooltip);
 			}
 			
 			// content
@@ -167,8 +178,8 @@ public class GameInfoSubPanel extends TableSubPanel
 					colSub++;
 				}
 				// data
-				{	String text = values.get(line);
-					String tooltip = text;
+				{	String text = texts.get(line);
+					String tooltip = tooltips.get(line);
 					setLabelText(line,colSub,text,tooltip);
 					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
 					setLabelForeground(line,0,fg);

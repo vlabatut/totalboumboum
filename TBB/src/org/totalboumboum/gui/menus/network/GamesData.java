@@ -241,7 +241,9 @@ catch (UnknownHostException e)
 	public void gameSelectionChanged(String gameId)
 	{	GameInfo gameInfo = gamesMap.get(gameId);
 		gamePanel.setGameInfo(gameInfo);
-		HostInfo hostInfo = gameInfo.getHostInfo();
+		HostInfo hostInfo = null;
+		if(gameInfo!=null)
+			hostInfo = gameInfo.getHostInfo();
 		hostPanel.setHostInfo(hostInfo);
 	}
 
@@ -252,6 +254,8 @@ catch (UnknownHostException e)
 		{	gamePanel.setGameInfo(gameInfo);
 			HostInfo hostInfo = gameInfo.getHostInfo();
 			hostPanel.setHostInfo(hostInfo);
+			//validate();
+			//repaint();
 		}
 	}
 
