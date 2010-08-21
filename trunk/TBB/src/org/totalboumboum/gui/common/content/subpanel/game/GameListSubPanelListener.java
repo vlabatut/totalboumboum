@@ -1,6 +1,6 @@
 package org.totalboumboum.gui.common.content.subpanel.game;
 
-import org.totalboumboum.game.network.game.GameInfo;
+import org.totalboumboum.network.game.GameInfo;
 
 /*
  * Total Boum Boum

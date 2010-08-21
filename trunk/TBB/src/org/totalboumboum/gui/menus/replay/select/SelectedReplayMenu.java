@@ -34,7 +34,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.game.stream.file.FileInputClientStream;
 import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -43,6 +42,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.replay.round.RoundSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.network.stream.file.FileInputClientStream;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;

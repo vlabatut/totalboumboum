@@ -34,9 +34,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import org.totalboumboum.game.network.game.GameInfo;
-import org.totalboumboum.game.network.host.HostInfo;
-import org.totalboumboum.game.network.host.HostState;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.gui.common.content.subpanel.game.GameInfoSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanel;
@@ -50,6 +47,9 @@ import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.network.game.GameInfo;
+import org.totalboumboum.network.host.HostInfo;
+import org.totalboumboum.network.host.HostState;
 import org.totalboumboum.tools.network.NetworkTools;
 
 /**
