@@ -33,7 +33,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.game.archive.GameArchive;
+import org.totalboumboum.game.file.archive.GameArchive;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
 import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;

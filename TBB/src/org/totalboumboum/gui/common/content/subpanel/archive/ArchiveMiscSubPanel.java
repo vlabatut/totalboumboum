@@ -25,7 +25,7 @@ import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import org.totalboumboum.game.archive.GameArchive;
+import org.totalboumboum.game.file.archive.GameArchive;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
