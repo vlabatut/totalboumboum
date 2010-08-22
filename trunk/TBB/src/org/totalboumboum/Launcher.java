@@ -1480,4 +1480,36 @@ public class Launcher
 	 * 		>> pas besoin de plus d'interaction style modifier l'ip (suffit de supprimer/recréer)
 	 * - le serveur doit pouvoir choisir le port
 	 */
+	
+	/**
+	 * TODO
+	 * - la structure gérant la connexion (des deux côtés) est au même niveau que la classe du tournoi,
+	 *   i.e. stockée qqpart dans la config
+	 * - la connexion est gérée globalement par une structure utilisant la délégation pour implémenter le traitement des i/o
+	 * - chaque délégué correspond à une étape : config/tournoi/match/round
+	 * - l'étape correspondant à une info lue est identifiée par un évènement de classe dédiée,
+	 * 	 ce qui permet de l'acheminer vers le délégué approprié
+	 * - coté serveur :
+	 * 		- la classe est exécutée par un thread indépendant, prêt à répondre à toute sollicitation
+	 * 		- à chaque demande, un nouveau thread est forked pour gérer ce client en particulier
+	 * 		- si c'est une simple demande de gameinfo, le thread s'arrête desuite
+	 * 		- sinon il doit rester en vie pour la suite du jeu (cas où le client s'enregistre dans la partie)
+	 * 		- en cours de jeu, on a donc 1 thread par joueur, plus des threads occasionnels générés pour les autres clients demandant des infos
+	 * 		  (à noter qu'en passant par le central, seul celui-ci est susceptible de demander des infos en cours de jeu, ce qu'il ne fait pas
+	 *         puisque tout marche par push. où alors, après un time out sur la partie, pour vérifier si elle n'a pas crashé.)
+	 *      - mais en fait pour chaque joueur, on a 1 thread en input et un en output, donc ça fait deux par joueur
+	 *        (pour une simple demande d'info, un seul thread fait les deux, le fait d'attendre est bcp moins grave)
+	 *      - en termes de structure, on peut considérer :
+	 *      	- une classe générale principale centralisant tout ça
+	 *      	  chargée de créer le premier thread gérant la connexion 
+	 *      	- pr chaque étape, un container secondaire contenu dans cette classe
+	 *      	  une espèce de multiplexeur/démultiplexeur
+	 *      	- pr chaque client, un gestionnaire contenu dans chaque container 
+	 *            dans le cas de l'inscription au tournoi, il s'occuperait de créer le deuxième thread
+	 *      - en fait le coup du multiplexeur/démultiplexeur n'est valable que quand la partie a commencé : 
+	 *        alors le serveur envoie la meme chose à chaque client.
+	 *        mais ce n'est pas le cas pour tout ce qui est config, donc à gérer différemment.
+	 * - côté client :
+	 * 		-  un 
+	 */
 }
