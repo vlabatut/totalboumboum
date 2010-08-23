@@ -1,8 +1,6 @@
 package org.totalboumboum.network.newstream.server.tournament;
 
-import org.totalboumboum.network.newstream.AbstractConnection;
 import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
-import org.totalboumboum.network.newstream.server.configuration.ServerConfigurationConnection;
 
 /*
  * Total Boum Boum
@@ -30,13 +28,17 @@ import org.totalboumboum.network.newstream.server.configuration.ServerConfigurat
  * @author Vincent Labatut
  *
  */
-public class ServerTournamentConnection extends AbstractConnection
+public class ServerTournamentConnectionManager
 {
 	private ServerGeneralConnection generalConnection;
 	
-	public ServerTournamentConnection(ServerConfigurationConnection configConnection)
-	{	reader = configConnection.getReader();
-		writer = configConnection.getWriter();
+	public ServerTournamentConnectionManager()
+	{	
+		/*
+		 *		- if necessary, add the object to write in the queue
+		 * 		- create the second thread, send it execute processOutput
+		 * 		- the first thread then goes executing processInput
+		 */
 	}
 
 	private void processInput()
