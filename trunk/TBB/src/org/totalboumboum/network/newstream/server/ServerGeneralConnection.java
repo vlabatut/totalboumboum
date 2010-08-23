@@ -1,5 +1,11 @@
 package org.totalboumboum.network.newstream.server;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
+import org.totalboumboum.network.newstream.event.NetworkMessage;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -21,10 +27,6 @@ package org.totalboumboum.network.newstream.server;
  * 
  */
 
-import org.totalboumboum.network.newstream.server.configuration.ServerConfigurationConnection;
-import org.totalboumboum.network.newstream.server.match.ServerMatchConnection;
-import org.totalboumboum.network.newstream.server.round.ServerRoundConnection;
-import org.totalboumboum.network.newstream.server.tournament.ServerTournamentConnection;
 
 /**
  * 
@@ -34,7 +36,7 @@ import org.totalboumboum.network.newstream.server.tournament.ServerTournamentCon
 public class ServerGeneralConnection implements Runnable
 {
 	/////////////////////////////////////////////////////////////////
-	// NEW CONNECTION	/////////////////////////////////////////////
+	// RUNNABLE		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void run()
@@ -47,38 +49,22 @@ public class ServerGeneralConnection implements Runnable
 		 */
 	}
 	
-	private void handleNewConnection()
-	{
-		/* TODO
-		 * - wait for the first message to be read
-		 * - depending on the message, decide if the connection is config- or game-related
-		 * - creates an instance of the appropriate class
-		 */
+	/////////////////////////////////////////////////////////////////
+	// CONNECTIONS			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final List<ServerIndividualConnection> inividualConfigConnections = new ArrayList<ServerIndividualConnection>();
+	private final List<ServerIndividualConnection> inividualTournamentConnections = new ArrayList<ServerIndividualConnection>();
+	
+	public void propagateMessage(NetworkMessage message)
+	{	// select the appropriate connections
+		List<ServerIndividualConnection> individualConnections;
+		if(message instanceof ConfigurationNetworkMessage)
+			individualConnections = inividualConfigConnections;
+		else 
+			individualConnections = inividualTournamentConnections;
 		
-		/**TODO
-		 * >> it's actually simplest to put two threads every where
-		 * >> the tournamentConnection class actually does the whole processing for tournament/match/round (?)
-		 */
+		// send the message
+		for(ServerIndividualConnection connection: individualConnections)
+			connection.writeMessage(message);
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CONFIGURATION	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ServerConfigurationConnection configurationConnection;
-	
-	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ServerTournamentConnection tournamentConnection;
-
-	/////////////////////////////////////////////////////////////////
-	// MATCH 			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ServerMatchConnection matchConnection;
-
-	/////////////////////////////////////////////////////////////////
-	// ROUND 			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ServerRoundConnection roundConnection;
-
 }

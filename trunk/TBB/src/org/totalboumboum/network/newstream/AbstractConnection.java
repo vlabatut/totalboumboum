@@ -28,6 +28,10 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import org.totalboumboum.network.newstream.event.NetworkMessage;
+import org.totalboumboum.network.newstream.thread.RunnableReader;
+import org.totalboumboum.network.newstream.thread.RunnableWriter;
+
 /**
  * 
  * @author Vincent Labatut
@@ -43,7 +47,7 @@ public abstract class AbstractConnection
 		ObjectOutputStream out = new ObjectOutputStream(os);
 		
 		// init threads
-		reader = new RunnableReader<Object>(in,this);
+		reader = new RunnableReader(in,this);
 		reader.start();
 		writer = new RunnableWriter(out);
 		writer.start();
@@ -52,9 +56,13 @@ public abstract class AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// READER				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private RunnableReader<Object> reader = null;
+	protected RunnableReader reader = null;
 
-	public abstract void dataRead(Object data);
+/*	public RunnableReader getReader()
+	{	return reader;
+	}
+*/	
+	public abstract void messageRead(NetworkMessage message);
 
 	public void pauseReader(boolean pause)
 	{	reader.pause(pause);		
@@ -63,10 +71,14 @@ public abstract class AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// WRITER				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private RunnableWriter writer = null;
+	protected RunnableWriter writer = null;
 	
-	public void write(Object object) throws IOException
-	{	writer.addObject(object);
+/*	public RunnableWriter getWriter()
+	{	return writer;
+	}
+*/	
+	public void writeMessage(NetworkMessage message) throws IOException
+	{	writer.addMessage(message);
 	}
 	
 	/////////////////////////////////////////////////////////////////
