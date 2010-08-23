@@ -28,12 +28,8 @@ import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
  * @author Vincent Labatut
  *
  */
-public class ServerConfigurationConnection
+public class ServerConfigurationConnection extends 
 {
-
-	// this is necessary in order to fetch stuff read from the clien
-	private ServerGeneralConnection generalConnection;
-	
 	public ServerConfigurationConnection()
 	{	
 		/*
@@ -43,10 +39,17 @@ public class ServerConfigurationConnection
 		 */
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// GENERAL CONNECTION	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ServerGeneralConnection generalConnection;
+
+	/////////////////////////////////////////////////////////////////
+	// READER				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private void processInput()
 	{
 		/*TODO
-		 * - write the game info using gameInfoRequested
 		 * - infinite loop: 
 		 * 	- wait for the next message
 		 * 	- process this message
@@ -54,12 +57,15 @@ public class ServerConfigurationConnection
 		 */
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// WRITER				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private void processOutput()
 	{
 		/*TODO
 		 * - infinite loop: 
-		 * 	- wait for the next message
-		 * 	- process this message
+		 * 	- wait for somthing in the queue
+		 * 	- write it in the socket
 		 *  
 		 */
 	}
