@@ -26,6 +26,8 @@ import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.totalboumboum.network.newstream.event.NetworkMessage;
+
 /**
  * 
  * @author Vincent Labatut
@@ -59,8 +61,8 @@ public class RunnableWriter extends Thread
 			}
 			// write the first object
 			try
-			{	Object object = getObject();
-				out.writeObject(object);
+			{	NetworkMessage message = getMessage();
+				out.writeObject(message);
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
@@ -79,19 +81,19 @@ public class RunnableWriter extends Thread
 	/////////////////////////////////////////////////////////////////
 	// DATA					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Queue<Object> data = new LinkedList<Object>();
+	private Queue<NetworkMessage> data = new LinkedList<NetworkMessage>();
 	
 	private synchronized boolean isEmpty()
 	{	boolean result = data.isEmpty();
 		return result;
 	}
 	
-	private synchronized Object getObject()
-	{	Object result = data.poll();
+	private synchronized NetworkMessage getMessage()
+	{	NetworkMessage result = data.poll();
 		return result;
 	}
 	
-	public synchronized void addObject(Object object)
-	{	data.offer(object);
+	public synchronized void addMessage(NetworkMessage message)
+	{	data.offer(message);
 	}
 }

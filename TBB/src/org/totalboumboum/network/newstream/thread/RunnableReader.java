@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import org.totalboumboum.network.newstream.AbstractConnection;
+import org.totalboumboum.network.newstream.event.NetworkMessage;
 
 /**
  * 
@@ -69,7 +70,8 @@ public class RunnableReader extends Thread
 		
 			try
 			{	Object object = in.readObject();
-				connection.dataRead(object);
+				NetworkMessage message = (NetworkMessage) object;
+				connection.messageRead(message);
 			}
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
