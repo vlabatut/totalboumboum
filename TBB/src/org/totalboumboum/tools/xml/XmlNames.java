@@ -151,6 +151,7 @@ public class XmlNames
 	public static final String HEROES = "heroes";
 	public static final String HIDE_ALLAIS = "hideAllAis";
 	public static final String HOST = "host";
+	public static final String HOSTING = "hosting";
 	public static final String HOSTS = "hosts";
 	public static final String HUMAN = "human";
 	public static final String ID = "id";
@@ -227,6 +228,7 @@ public class XmlNames
 	public static final String PLAYERS = "players";
 	public static final String POINT = "point";
 	public static final String POINTS = "points";
+	public static final String PORT = "port";
 	public static final String PORTRAIT = "portrait";
 	public static final String POSITION = "pos";
 	public static final String PREFERRED = "preferred";

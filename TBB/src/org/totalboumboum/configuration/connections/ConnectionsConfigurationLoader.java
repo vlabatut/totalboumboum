@@ -52,12 +52,13 @@ public class ConnectionsConfigurationLoader
 	}
 
 	private static void loadConnectionsElement(Element root, ConnectionsConfiguration result) throws UnknownHostException
-	{	Element element; 
+	{	// central
+		Element centralElement = root.getChild(XmlNames.CENTRAL);
+		loadCentralElement(centralElement,result);
 		
-		// central
-		element = root.getChild(XmlNames.CENTRAL);
-		loadCentralElement(element,result);
-		
+		// hosting
+		Element hostingElement = root.getChild(XmlNames.HOSTING);
+		loadHostingElement(hostingElement,result);
 	}
 	
 	private static void loadCentralElement(Element root, ConnectionsConfiguration result) throws UnknownHostException
@@ -65,5 +66,12 @@ public class ConnectionsConfigurationLoader
 		String centralIpStr = root.getAttribute(XmlNames.IP).getValue().trim();
 		InetAddress centralIp = InetAddress.getByName(centralIpStr);
 		result.setCentralIp(centralIp);
+	}
+
+	private static void loadHostingElement(Element root, ConnectionsConfiguration result) throws UnknownHostException
+	{	// port
+		String portStr = root.getAttribute(XmlNames.PORT).getValue().trim();
+		int port = Integer.parseInt(portStr);
+		result.setPort(port);
 	}
 }

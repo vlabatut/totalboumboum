@@ -6,9 +6,14 @@
 		<xsd:attribute name="ip" type="tIpAddress" use="required"/>
 	</xsd:complexType>
 
+	<xsd:complexType name="tHosting">
+		<xsd:attribute name="port" type="xsd:integer" use="required"/>
+	</xsd:complexType>
+
 	<xsd:complexType name="tConnections">
 		<xsd:sequence>
 			<xsd:element name="central" type="tCentral" />
+			<xsd:element name="hosting" type="tHosting" />
 		</xsd:sequence>
 	</xsd:complexType>
 
