@@ -1,16 +1,5 @@
 package org.totalboumboum.network.newstream.server;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
-import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
-import org.totalboumboum.network.newstream.event.NetworkMessage;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -32,6 +21,16 @@ import org.totalboumboum.network.newstream.event.NetworkMessage;
  * 
  */
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
+import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
+import org.totalboumboum.network.newstream.event.NetworkMessage;
 
 /**
  * 
@@ -63,6 +62,7 @@ public class ServerGeneralConnection implements Runnable
 		while(true)
 		{	try
 			{	Socket socket = serverSocket.accept();
+				createConnection(socket);
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
@@ -73,19 +73,24 @@ public class ServerGeneralConnection implements Runnable
 	/////////////////////////////////////////////////////////////////
 	// CONNECTIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final List<ServerIndividualConnection> inividualConfigConnections = new ArrayList<ServerIndividualConnection>();
-	private final List<ServerIndividualConnection> inividualTournamentConnections = new ArrayList<ServerIndividualConnection>();
+	private final List<ServerIndividualConnection> individualConnections = new ArrayList<ServerIndividualConnection>();
 	
-	public void propagateMessage(NetworkMessage message)
-	{	// select the appropriate connections
-		List<ServerIndividualConnection> individualConnections;
-		if(message instanceof ConfigurationNetworkMessage)
-			individualConnections = inividualConfigConnections;
-		else 
-			individualConnections = inividualTournamentConnections;
-		
-		// send the message
-		for(ServerIndividualConnection connection: individualConnections)
-			connection.writeMessage(message);
+	public synchronized void propagateMessage(NetworkMessage message)
+	{	for(ServerIndividualConnection connection: individualConnections)
+		{	if(message instanceof ConfigurationNetworkMessage && !connection.getMode())
+				connection.writeMessage(message);
+			else if(!(message instanceof ConfigurationNetworkMessage) && connection.getMode())
+				connection.writeMessage(message);
+		}
+	}
+	
+	public synchronized void createConnection(Socket socket) throws IOException
+	{	ServerIndividualConnection individualConnection = new ServerIndividualConnection(this,socket);
+		individualConnections.add(individualConnection);
+	}
+	
+	public synchronized void removeConnection(ServerIndividualConnection connection)
+	{	connection.finish();
+		individualConnections.remove(connection);
 	}
 }
