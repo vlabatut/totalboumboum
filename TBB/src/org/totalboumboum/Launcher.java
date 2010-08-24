@@ -1512,4 +1512,19 @@ public class Launcher
 	 * - côté client :
 	 * 		-  un 
 	 */
+	
+	/**
+	 * TODO algo de connection
+	 * 	- on n'a besoin de rien lire : la connection commence forcément par la demande de gameinfo
+	 *  - donc le socket peut être directement utilisé pour créer une connection de type config
+	 *    avec reader/writer
+	 *  - plus besoin d'un thread spécial pour gérer les nouvelles connections, puisqu'on en crée
+	 *    systématiquement deux autres pour les i/o
+	 *    
+	 *    
+	 *  - en fait c'est pas la peine de distinguer config/tournoi : suffit
+	 *    d'utiliser les instances individuelles pr l'écriture particulière
+	 *    et l'instance générale pour l'écriture collective.
+	 *    la lecture, elle, est toujours individuelle de toute façon.
+	 */
 }
