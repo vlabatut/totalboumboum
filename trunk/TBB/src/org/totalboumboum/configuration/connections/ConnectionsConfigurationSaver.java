@@ -43,6 +43,7 @@ public class ConnectionsConfigurationSaver
 	public static void saveConnectionsConfiguration(ConnectionsConfiguration connectionsConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveConnectionsElement(connectionsConfiguration);	
+		
 		// save file
 		String engineFile = FilePaths.getConfigurationPath()+File.separator+FileNames.FILE_CONNECTIONS+FileNames.EXTENSION_XML;
 		File dataFile = new File(engineFile);
@@ -58,6 +59,10 @@ public class ConnectionsConfigurationSaver
 		Element centralElement = saveCentralElement(connectionsConfiguration);
 		result.addContent(centralElement);
 		
+		// hosting
+		Element hostingElement = saveHostingElement(connectionsConfiguration);
+		result.addContent(hostingElement);
+		
 		return result;
 	}
 	
@@ -67,6 +72,16 @@ public class ConnectionsConfigurationSaver
 		// ip
 		String ip = connectionsConfiguration.getCentralIp().getHostName();
 		result.setAttribute(XmlNames.IP,ip);
+				
+		return result;
+	}
+
+	private static Element saveHostingElement(ConnectionsConfiguration connectionsConfiguration)
+	{	Element result = new Element(XmlNames.HOSTING);
+		
+		// port
+		String port = Integer.toString(connectionsConfiguration.getPort());
+		result.setAttribute(XmlNames.PORT,port);
 				
 		return result;
 	}

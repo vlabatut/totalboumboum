@@ -1,8 +1,13 @@
 package org.totalboumboum.network.newstream.server;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
 import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
 import org.totalboumboum.network.newstream.event.NetworkMessage;
 
@@ -40,13 +45,29 @@ public class ServerGeneralConnection implements Runnable
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void run()
-	{	
-		/* TODO
-		 * 
-		 * - listen to the socket 
-		 * - create a new thread for every new connection
-		 * - this new thread calls handleNewConnection on it
-		 */
+	{	// init
+		ConnectionsConfiguration connectionConfiguration = Configuration.getConnectionsConfiguration();
+		int port = connectionConfiguration.getPort();
+		
+		// create socket
+		ServerSocket serverSocket = null;
+		try
+		{	
+			serverSocket = new ServerSocket(port);
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		
+		// wait for new connections
+		while(true)
+		{	try
+			{	Socket socket = serverSocket.accept();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
