@@ -171,7 +171,7 @@ public class NetOutputServerStream
 
 	protected void write(Object object) throws IOException
 	{	for(RunnableWriter w: writers)
-			w.addObject(object);
+			w.addMessage(object);
 	}
 
 	/////////////////////////////////////////////////////////////////

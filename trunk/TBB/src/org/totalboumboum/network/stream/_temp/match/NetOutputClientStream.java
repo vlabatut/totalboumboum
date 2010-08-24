@@ -93,7 +93,7 @@ public class NetOutputClientStream
 	}
 
 	private void write(Object object) throws IOException
-	{	writer.addObject(object);
+	{	writer.addMessage(object);
 	}
 
 	/////////////////////////////////////////////////////////////////

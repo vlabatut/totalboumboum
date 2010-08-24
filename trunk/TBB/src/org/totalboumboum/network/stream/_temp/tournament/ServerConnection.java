@@ -52,8 +52,8 @@ public class ServerConnection
 	 * NOTE to be done after starting the thread or it won't work...
 	 */
 	public void initTournament(List<Profile> profiles, List<ControlSettings> controlSettings) throws IOException, ClassNotFoundException
-	{	writer.addObject(profiles);
-		writer.addObject(controlSettings);
+	{	writer.addMessage(profiles);
+		writer.addMessage(controlSettings);
 	}
 	
 	public void updateTournament()
@@ -109,7 +109,7 @@ public class ServerConnection
 	}
 	
 	public void write(Object object) throws IOException
-	{	writer.addObject(object);
+	{	writer.addMessage(object);
 	}
 	
 	public Object readObject()

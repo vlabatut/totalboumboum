@@ -141,7 +141,7 @@ public class ClientConnection
 	}
 	
 	public void write(Object object) throws IOException
-	{	writer.addObject(object);
+	{	writer.addMessage(object);
 	}
 	
 	public Object readObject()
