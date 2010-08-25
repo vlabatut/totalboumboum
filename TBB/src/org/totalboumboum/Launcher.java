@@ -1527,4 +1527,6 @@ public class Launcher
 	 *    et l'instance générale pour l'écriture collective.
 	 *    la lecture, elle, est toujours individuelle de toute façon.
 	 */
+	
+	// TODO pour récup l'@ du serveur côté client, utiliser Socket.getInetAddress() 
 }

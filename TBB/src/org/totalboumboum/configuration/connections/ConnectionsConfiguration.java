@@ -23,6 +23,7 @@ package org.totalboumboum.configuration.connections;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,8 +73,9 @@ public class ConnectionsConfiguration
 	private List<GameInfo> centralConnections = new ArrayList<GameInfo>();
 	
 	private void updateCentralConnections()
-	{
-		// TODO use the central ip to get all connections
+	{	if(centralConnections.isEmpty())
+		{	// TODO use the central ip to get all connections
+		}
 	}
 	
 	public List<GameInfo> getCentralConnections()
@@ -86,11 +88,13 @@ public class ConnectionsConfiguration
 	private List<GameInfo> directConnections = new ArrayList<GameInfo>();
 	
 	private void updateDirectConnections()
-	{	for(HostInfo host: hosts.values())
-		{	if(host.isDirect())
-			{	GameInfo gameInfo = new GameInfo();
-				gameInfo.setHostInfo(host);
-				directConnections.add(gameInfo);
+	{	if(directConnections.isEmpty())
+		{	for(HostInfo host: hosts.values())
+			{	if(host.isDirect())
+				{	GameInfo gameInfo = new GameInfo();
+					gameInfo.setHostInfo(host);
+					directConnections.add(gameInfo);
+				}
 			}
 		}
 	}
@@ -121,6 +125,16 @@ public class ConnectionsConfiguration
 	{	if(hosts!=null)
 			HostsSaver.saveHosts(hosts);
 	}
+	
+	public HostInfo getLocalHostInfo()
+	{	HostInfo result = new HostInfo();
+		result.setId(id);			// enregistré dans la config xml
+		result.setLastIp(lastIp);	// info locale au client
+		result.setName(name);		// enregistré dans xml
+		result.setPreferred(preferred); // info locale au client
+		result.setUses(uses); 		// info locale au client
+		return result;
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
@@ -129,6 +143,19 @@ public class ConnectionsConfiguration
 	{	updateHosts();
 		updateDirectConnections();
 		updateCentralConnections();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// IP ADDRESS			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private InetAddress ip = null;
+	
+	public InetAddress getIp() throws UnknownHostException
+	{	if(ip==null)
+		{	ip = InetAddress.getLocalHost();
+			
+		}
+		return ip;
 	}
 	
 	/////////////////////////////////////////////////////////////////
