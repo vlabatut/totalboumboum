@@ -26,9 +26,15 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
+import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.tournament.TournamentType;
+import org.totalboumboum.network.game.GameInfo;
+import org.totalboumboum.network.host.HostInfo;
+import org.totalboumboum.network.host.HostState;
 import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
 import org.totalboumboum.network.newstream.event.NetworkMessage;
 
@@ -39,6 +45,93 @@ import org.totalboumboum.network.newstream.event.NetworkMessage;
  */
 public class ServerGeneralConnection implements Runnable
 {
+	public ServerGeneralConnection(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles)
+	{	this.playerProfiles.addAll(playerProfiles);
+		initGameInfo(allowedPlayers,tournamentName,tournamentType,playerScores,playerProfiles);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// GAME INFO	/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private GameInfo gameInfo = null;
+	
+	private void initGameInfo(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles)
+	{	gameInfo = new GameInfo();
+	
+		// players
+		gameInfo.setAllowedPlayers(allowedPlayers);
+		gameInfo.setTournamentName(tournamentName);
+		int playerCount = playerProfiles.size();
+		gameInfo.setPlayerCount(playerCount);
+		
+		// average score
+		double averageScore = 0;
+		for(Double d: playerScores)
+			averageScore = averageScore + d;
+		averageScore = averageScore / playerCount;
+		gameInfo.setAverageScore(averageScore);
+
+		// tournament type
+		gameInfo.setTournamentType(tournamentType);
+
+		// host info
+		HostInfo hostInfo = Configuration.getConnectionsConfiguration().getLocalHostInfo();
+		hostInfo.setState(hostState);
+		hostInfo.setCentral(central);
+		hostInfo.setDirect(direct);
+		gameInfo.setHostInfo(hostInfo);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// HOST STATE	/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HostState hostState = HostState.UNKOWN;
+	
+	public void setHostState(HostState hostState)
+	{	this.hostState = hostState;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CENTRAL		/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean central;
+	
+	public void setCentral(boolean central)
+	{	this.central = central;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DIRECT		/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean direct;
+	
+	public void setDirect(boolean direct)
+	{	this.direct = direct;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PROFILES		/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final List<Profile> playerProfiles = new ArrayList<Profile>();
+	
+	public void addProfile(int index, Profile profile)
+	{	//TODO
+	}
+
+	public void setProfile(int index, Profile profile)
+	{	//TODO
+	}
+
+	public void removeProfile(int index)
+	{
+		// TODO
+	}
+	
+	public void removeProfile(Profile profile)
+	{
+		// TODO
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// RUNNABLE		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
