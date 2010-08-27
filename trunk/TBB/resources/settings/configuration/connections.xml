@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <connections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\connections.xsd">
 	<central ip="87.106.97.5" />
-	<hosting port="1324" />
+	<hosting port="1324" name="myhost" id="xxxx" mac="123 456 789" />
 </connections>
 

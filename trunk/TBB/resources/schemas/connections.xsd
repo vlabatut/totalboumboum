@@ -8,6 +8,9 @@
 
 	<xsd:complexType name="tHosting">
 		<xsd:attribute name="port" type="xsd:integer" use="required"/>
+		<xsd:attribute name="id" type="xsd:string" use="required"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="mac" type="xsd:string" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="tConnections">

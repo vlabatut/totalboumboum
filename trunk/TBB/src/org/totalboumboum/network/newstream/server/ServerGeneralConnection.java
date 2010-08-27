@@ -76,6 +76,9 @@ public class ServerGeneralConnection implements Runnable
 
 		// host info
 		HostInfo hostInfo = Configuration.getConnectionsConfiguration().getLocalHostInfo();
+//		result.setLastIp(lastIp);	// TODO info locale au client
+//		result.setPreferred(preferred); // TODO info locale au client
+//		result.setUses(uses); 		// TODO info locale au client
 		hostInfo.setState(hostState);
 		hostInfo.setCentral(central);
 		hostInfo.setDirect(direct);

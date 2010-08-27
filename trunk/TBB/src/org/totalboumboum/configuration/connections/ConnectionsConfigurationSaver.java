@@ -23,6 +23,7 @@ package org.totalboumboum.configuration.connections;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -82,7 +83,24 @@ public class ConnectionsConfigurationSaver
 		// port
 		String port = Integer.toString(connectionsConfiguration.getPort());
 		result.setAttribute(XmlNames.PORT,port);
-				
+			
+		// id
+		String id = connectionsConfiguration.getHostId();
+		result.setAttribute(XmlNames.ID,id);
+			
+		// name
+		String name = connectionsConfiguration.getHostName();
+		result.setAttribute(XmlNames.NAME,name);
+			
+		// mac addresses
+		List<String> macAddresses = connectionsConfiguration.getMacAddresses();
+		String macStr = "";
+		if(macAddresses.size()>0)
+			macStr = macAddresses.get(0);
+		for(int i=1;i<macAddresses.size();i++)
+			macStr = macStr + " " + macAddresses.get(i);
+		result.setAttribute(XmlNames.MAC,macStr);
+			
 		return result;
 	}
 }

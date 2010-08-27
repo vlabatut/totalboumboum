@@ -23,7 +23,6 @@ package org.totalboumboum.configuration.connections;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -128,11 +127,8 @@ public class ConnectionsConfiguration
 	
 	public HostInfo getLocalHostInfo()
 	{	HostInfo result = new HostInfo();
-		result.setId(id);			// enregistré dans la config xml
-		result.setLastIp(lastIp);	// info locale au client
-		result.setName(name);		// enregistré dans xml
-		result.setPreferred(preferred); // info locale au client
-		result.setUses(uses); 		// info locale au client
+		result.setId(hostId);
+		result.setName(hostName);
 		return result;
 	}
 
@@ -146,19 +142,6 @@ public class ConnectionsConfiguration
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// IP ADDRESS			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private InetAddress ip = null;
-	
-	public InetAddress getIp() throws UnknownHostException
-	{	if(ip==null)
-		{	ip = InetAddress.getLocalHost();
-			
-		}
-		return ip;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// PORT					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int port;
@@ -169,6 +152,50 @@ public class ConnectionsConfiguration
 
 	public void setPort(int port)
 	{	this.port = port;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// HOST NAME			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String hostName;
+	
+	public String getHostName()
+	{	return hostName;
+	}
+
+	public void setHostName(String hostName)
+	{	this.hostName = hostName;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// HOST ID				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String hostId;
+	
+	public String getHostId()
+	{	return hostId;
+	}
+
+	public void setHostId(String hostId)
+	{	this.hostId = hostId;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// MAC ADDRESSES		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<String> macAddresses = new ArrayList<String>();
+	
+	public boolean hasMacAddress(String address)
+	{	boolean result = macAddresses.contains(address);
+		return result;
+	}
+	
+	public void setMacAddresses(List<String> addresses)
+	{	macAddresses = addresses;
+	}
+	
+	public List<String> getMacAddresses()
+	{	return macAddresses;
 	}
 	
 	/////////////////////////////////////////////////////////////////

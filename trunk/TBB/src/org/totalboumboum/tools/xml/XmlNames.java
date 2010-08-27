@@ -188,6 +188,7 @@ public class XmlNames
 	public static final String LOG = "log";
 	public static final String LOG_EXCEPTIONS = "logExceptions";
 	public static final String LOGSTATS = "logstats";
+	public static final String MAC = "mac";
 	public static final String MARGIN = "margin";
 	public static final String MATCH = "match";
 	public static final String MATCH_LIMIT = "matchLimit";
