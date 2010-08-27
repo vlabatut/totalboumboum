@@ -25,6 +25,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jdom.Element;
 import org.totalboumboum.tools.files.FileNames;
@@ -73,5 +75,23 @@ public class ConnectionsConfigurationLoader
 		String portStr = root.getAttribute(XmlNames.PORT).getValue().trim();
 		int port = Integer.parseInt(portStr);
 		result.setPort(port);
+		
+		// id
+		String id = root.getAttribute(XmlNames.ID).getValue().trim();
+		result.setHostId(id);
+
+		// name
+		String name = root.getAttribute(XmlNames.NAME).getValue().trim();
+		result.setHostName(name);
+		
+		// mac addresses
+		List<String> macAddresses = new ArrayList<String>();
+		String macStr = root.getAttribute(XmlNames.MAC).getValue().trim();
+		String[] split = macStr.split(" ");
+		for(String s: split)
+		{	//int value = Integer.parseInt(s);
+			macAddresses.add(s);
+		}
+		result.setMacAddresses(macAddresses);
 	}
 }
