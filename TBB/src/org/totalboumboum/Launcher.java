@@ -1528,5 +1528,6 @@ public class Launcher
 	 *    la lecture, elle, est toujours individuelle de toute façon.
 	 */
 	
-	// TODO pour récup l'@ du serveur côté client, utiliser Socket.getInetAddress() 
+	// TODO pour récup l'@ du serveur côté client, utiliser Socket.getInetAddress()
+	// bah non, en fait on n'a jamais besoin de faire ça !
 }

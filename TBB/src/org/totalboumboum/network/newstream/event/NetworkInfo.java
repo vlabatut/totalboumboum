@@ -28,12 +28,26 @@ package org.totalboumboum.network.newstream.event;
  */
 public enum NetworkInfo
 {	// config level
+	/** client requests game information */ 
 	REQUEST_GAME_INFO,
-	REQUEST_PLAYERS_LIST
+	/** client requests players list */
+	REQUEST_PLAYERS_LIST,
 	
 	// tournament level
-	
+	/** client requests current tournament stats */
+	REQUEST_TOURNAMENT_STATS,
+
 	// match level
+	/** client requests current match stats */
+	REQUEST_MATCH_STATS,
 	
 	// round level
+	/** client requests current round stats */
+	REQUEST_ROUND_STATS,
+	
+	// in-game level
+	/** client indicates it leaves the tournament */
+	INFO_GAME_QUIT,
+	/** client indicates a player's move (while playing) */
+	INFO_GAME_MOVE,
 }
