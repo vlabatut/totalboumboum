@@ -87,6 +87,11 @@ public class HostsLoader
     	InetAddress ip = InetAddress.getByName(ipStr);
     	result.setLastIp(ip);
     	
+		// last port
+    	String portStr = root.getAttribute(XmlNames.LAST_PORT).getValue();
+    	Integer port = Integer.parseInt(portStr);
+    	result.setLastPort(port);
+    	
     	// preferred
     	String preferredStr = root.getAttribute(XmlNames.PREFERRED).getValue();
     	Boolean preferred = Boolean.parseBoolean(preferredStr);
