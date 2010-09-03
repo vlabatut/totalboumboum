@@ -79,6 +79,10 @@ public class HostsSaver
 		String ip = host.getLastIp().getHostAddress();
 		result.setAttribute(XmlNames.LAST_IP,ip);
 	
+		// last IP
+		String port = host.getLastPort().toString();
+		result.setAttribute(XmlNames.LAST_PORT,port);
+	
 		// preferred
 		String preferred = Boolean.toString(host.isPreferred());
 		result.setAttribute(XmlNames.PREFERRED,preferred);

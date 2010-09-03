@@ -172,6 +172,7 @@ public class XmlNames
 	public static final String LANGUAGE = "language";
 	public static final String LAST = "last";
 	public static final String LAST_IP = "lastIp";
+	public static final String LAST_PORT = "lastPort";
 	public static final String LAST_STANDING = "lastStanding";
 	public static final String LEFTCOL = "leftCol";
 	public static final String LEG = "leg";

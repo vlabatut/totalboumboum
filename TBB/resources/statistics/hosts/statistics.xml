@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hosts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\hosts.xsd">
-	<host id="xxxxx" name="servername" use="0" lastIp="127.0.0.1" direct="true"/>
+	<host id="xxxxx" name="servername" use="0" lastIp="127.0.0.1" lastPort="1234" direct="true"/>
 </hosts>
 
