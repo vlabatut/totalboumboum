@@ -32,6 +32,13 @@ public enum NetworkInfo
 	REQUEST_GAME_INFO,
 	/** client requests players list */
 	REQUEST_PLAYERS_LIST,
+	/** client adds a new player */
+	REQUEST_PLAYERS_ADD,
+	
+	/**
+	 * TODO faire un dessin pr visualiser les ps
+	 * >> possible qu'il y ait concurrence qd plusieurs clients veulent ajouter un jour en même temps
+	 */
 	
 	// tournament level
 	/** client requests current tournament stats */

@@ -21,24 +21,10 @@ package org.totalboumboum.network.newstream.client;
  * 
  */
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.network.game.GameInfo;
-import org.totalboumboum.network.host.HostInfo;
-import org.totalboumboum.network.host.HostState;
-import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
-import org.totalboumboum.network.newstream.event.NetworkMessage;
-import org.totalboumboum.tools.event.UpdateEvent;
-import org.totalboumboum.tools.event.UpdateListener;
 
 /**
  * 
@@ -47,9 +33,13 @@ import org.totalboumboum.tools.event.UpdateListener;
  */
 public class ClientGeneralConnection
 {
-	public ClientGeneralConnection(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles)
-	{	this.playerProfiles.addAll(playerProfiles);
-		initGameInfo(allowedPlayers,tournamentName,tournamentType,playerScores,playerProfiles);
+	public ClientGeneralConnection(List<GameInfo> gameInfos)
+	{	// init direct connections
+		//List<GameInfo> gameInfos = Configuration.getConnectionsConfiguration().getDirectConnections();
+		for(GameInfo gameInfo: gameInfos)
+			createConnection(gameInfo);
+		
+		// TODO for central connection, a special connection will be defined for the configuration stage
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -57,21 +47,12 @@ public class ClientGeneralConnection
 	/////////////////////////////////////////////////////////////////
 	private final List<ClientIndividualConnection> individualConnections = new ArrayList<ClientIndividualConnection>();
 	
-	public synchronized void propagateMessage(NetworkMessage message)
-	{	for(ClientIndividualConnection connection: individualConnections)
-		{	if(message instanceof ConfigurationNetworkMessage && !connection.getMode())
-				connection.writeMessage(message);
-			else if(!(message instanceof ConfigurationNetworkMessage) && connection.getMode())
-				connection.writeMessage(message);
-		}
-	}
-	
-	public synchronized void createConnection(Socket socket) throws IOException
-	{	ClientIndividualConnection individualConnection = new ClientIndividualConnection(this,socket);
+	public void createConnection(GameInfo gameInfo)
+	{	ClientIndividualConnection individualConnection = new ClientIndividualConnection(this,gameInfo);
 		individualConnections.add(individualConnection);
 	}
 	
-	public synchronized void removeConnection(ClientIndividualConnection connection)
+	public void removeConnection(ClientIndividualConnection connection)
 	{	connection.finish();
 		individualConnections.remove(connection);
 	}
@@ -100,15 +81,15 @@ public class ClientGeneralConnection
 	{	listeners.remove(listener);
 	}
 	
-	private void fireConnectionAdded(ClientIndividualConnection connection, int index)
-	{	for(ClientGeneralConnectionListener listener: listeners)
-			listener.connectionAdded(connection,index);
-	}
+//	private void fireConnectionAdded(ClientIndividualConnection connection, int index)
+//	{	for(ClientGeneralConnectionListener listener: listeners)
+//			listener.connectionAdded(connection,index);
+//	}
 
-	private void fireConnectionRemoved(ClientIndividualConnection connection, int index)
-	{	for(ClientGeneralConnectionListener listener: listeners)
-			listener.connectionRemoved(connection,index);
-	}
+//	private void fireConnectionRemoved(ClientIndividualConnection connection, int index)
+//	{	for(ClientGeneralConnectionListener listener: listeners)
+//			listener.connectionRemoved(connection,index);
+//	}
 
 	private void fireConnectionGameInfoChanged(ClientIndividualConnection connection, int index)
 	{	for(ClientGeneralConnectionListener listener: listeners)
