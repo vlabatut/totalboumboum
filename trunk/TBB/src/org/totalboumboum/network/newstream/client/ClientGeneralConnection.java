@@ -37,48 +37,19 @@ import org.totalboumboum.network.host.HostInfo;
 import org.totalboumboum.network.host.HostState;
 import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
 import org.totalboumboum.network.newstream.event.NetworkMessage;
+import org.totalboumboum.tools.event.UpdateEvent;
+import org.totalboumboum.tools.event.UpdateListener;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class ClientGeneralConnection implements Runnable
+public class ClientGeneralConnection
 {
 	public ClientGeneralConnection(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles)
 	{	this.playerProfiles.addAll(playerProfiles);
 		initGameInfo(allowedPlayers,tournamentName,tournamentType,playerScores,playerProfiles);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// RUNNABLE		/////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void run()
-	{	// init
-		ConnectionsConfiguration connectionConfiguration = Configuration.getConnectionsConfiguration();
-		int port = connectionConfiguration.getPort();
-		
-		// create socket
-		ServerSocket serverSocket = null;
-		try
-		{	
-			serverSocket = new ServerSocket(port);
-		}
-		catch (IOException e)
-		{	e.printStackTrace();
-		}
-		
-		// wait for new connections
-		while(true)
-		{	try
-			{	Socket socket = serverSocket.accept();
-				createConnection(socket);
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			}
-		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -103,5 +74,49 @@ public class ClientGeneralConnection implements Runnable
 	public synchronized void removeConnection(ClientIndividualConnection connection)
 	{	connection.finish();
 		individualConnections.remove(connection);
+	}
+	
+	public void gameInfoChanged(ClientIndividualConnection connection)
+	{	int index = individualConnections.indexOf(connection);
+		fireConnectionGameInfoChanged(connection,index);
+	}
+
+	public void profilesChanged(ClientIndividualConnection connection)
+	{	int index = individualConnections.indexOf(connection);
+		fireConnectionProfilesChanged(connection,index);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<ClientGeneralConnectionListener> listeners = new ArrayList<ClientGeneralConnectionListener>();
+	
+	public void addListener(ClientGeneralConnectionListener listener)
+	{	if(!listeners.contains(listener))
+			listeners.add(listener);
+	}
+	
+	public void removeListener(ClientGeneralConnectionListener listener)
+	{	listeners.remove(listener);
+	}
+	
+	private void fireConnectionAdded(ClientIndividualConnection connection, int index)
+	{	for(ClientGeneralConnectionListener listener: listeners)
+			listener.connectionAdded(connection,index);
+	}
+
+	private void fireConnectionRemoved(ClientIndividualConnection connection, int index)
+	{	for(ClientGeneralConnectionListener listener: listeners)
+			listener.connectionRemoved(connection,index);
+	}
+
+	private void fireConnectionGameInfoChanged(ClientIndividualConnection connection, int index)
+	{	for(ClientGeneralConnectionListener listener: listeners)
+			listener.connectionGameInfoChanged(connection,index);
+	}
+
+	private void fireConnectionProfilesChanged(ClientIndividualConnection connection, int index)
+	{	for(ClientGeneralConnectionListener listener: listeners)
+			listener.connectionProfilesChanged(connection,index);
 	}
 }

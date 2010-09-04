@@ -35,8 +35,8 @@ import org.totalboumboum.network.newstream.event.NetworkMessage;
  */
 public class RunnableWriter extends Thread
 {
-	public RunnableWriter(ObjectOutputStream out)
-	{	this.out = out;
+	public RunnableWriter()
+	{	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -44,6 +44,10 @@ public class RunnableWriter extends Thread
 	/////////////////////////////////////////////////////////////////
 	private ObjectOutputStream out;
 
+	public void setStream(ObjectOutputStream out)
+	{	this.out = out;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

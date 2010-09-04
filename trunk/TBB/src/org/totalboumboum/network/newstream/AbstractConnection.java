@@ -39,7 +39,16 @@ import org.totalboumboum.network.newstream.thread.RunnableWriter;
  */
 public abstract class AbstractConnection
 {	
+	public AbstractConnection()
+	{	writer = new RunnableWriter();
+		reader = new RunnableReader();
+	}
+	
 	public AbstractConnection(Socket socket) throws IOException
+	{	initConnection(socket);
+	}
+
+	protected void initConnection(Socket socket) throws IOException
 	{	// init streams
 		InputStream is = socket.getInputStream();
 		ObjectInputStream in = new ObjectInputStream(is);
@@ -47,12 +56,13 @@ public abstract class AbstractConnection
 		ObjectOutputStream out = new ObjectOutputStream(os);
 		
 		// init threads
-		reader = new RunnableReader(in,this);
-		reader.start();
-		writer = new RunnableWriter(out);
+		writer.setStream(out);
 		writer.start();
+		reader.setStream(in);
+		reader.setConnection(this);
+		reader.start();
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// READER				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

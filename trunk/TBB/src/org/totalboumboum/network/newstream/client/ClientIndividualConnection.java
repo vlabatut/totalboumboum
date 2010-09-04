@@ -22,16 +22,14 @@ package org.totalboumboum.network.newstream.client;
  */
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
-import org.totalboumboum.network.host.HostState;
 import org.totalboumboum.network.newstream.AbstractConnection;
 import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
 import org.totalboumboum.network.newstream.event.MatchNetworkMessage;
@@ -45,14 +43,39 @@ import org.totalboumboum.network.newstream.event.TournamentNetworkMessage;
  * @author Vincent Labatut
  *
  */
-public class ClientIndividualConnection extends AbstractConnection
+public class ClientIndividualConnection extends AbstractConnection implements Runnable
 {
-	public ClientIndividualConnection(ClientGeneralConnection generalConnection, Socket socket, String hostId) throws IOException
-	{	super(socket);
+	public ClientIndividualConnection(ClientGeneralConnection generalConnection, GameInfo gameInfo)
+	{	this.generalConnection = generalConnection;
+		this.gameInfo = gameInfo;
+		
+		initSocket();
+	}
 	
-		// init connection data
-		this.generalConnection = generalConnection;
-		initGameInfo(hostId);
+	/////////////////////////////////////////////////////////////////
+	// RUNNABLE		/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void run()
+	{	HostInfo hostInfo = gameInfo.getHostInfo();
+		InetAddress address = hostInfo.getLastIp();
+		int port = hostInfo.getLastPort();
+		try
+		{	Socket socket = new Socket(address,port);
+			initConnection(socket);
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SOCKET				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	private void initSocket()
+	{	// TODO : manage time-out
+		Thread thread = new Thread(this);
+		thread.start();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -65,30 +88,18 @@ public class ClientIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	private GameInfo gameInfo = null;
 	
-	private void initGameInfo(String hostId)
-	{	gameInfo = new GameInfo();
-	
-//TODO retrieve host from id	
-		// host info
-		HostInfo hostInfo = new HostInfo();
-		hostInfo.setLastIp(lastIp);	// TODO info locale au client
-		hostInfo.setLastPort(lastIp);	// TODO info locale au client
-		hostInfo.setPreferred(preferred); // TODO info locale au client
-		hostInfo.setUses(uses); 		// TODO info locale au client
-		hostInfo.setState(HostState.UNKOWN);
-		gameInfo.setHostInfo(hostInfo);
+	public GameInfo getGameInfo()
+	{	return gameInfo;
 	}
-	
 
+	/////////////////////////////////////////////////////////////////
+	// PROFILES		/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<Profile> playerProfiles = new ArrayList<Profile>();
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	public List<Profile> getPlayerProfiles()
+	{	return playerProfiles;
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// MODE					/////////////////////////////////////////
@@ -102,13 +113,14 @@ public class ClientIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// PROCESS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unchecked")
 	@Override
 	public void messageRead(NetworkMessage message)
 	{	if(message instanceof ConfigurationNetworkMessage)
 		{	if(message.getInfo().equals(NetworkInfo.REQUEST_GAME_INFO))
-				gameInfoRequested();
+				gameInfoReceived((GameInfo)message.getData());
 			else if(message.getInfo().equals(NetworkInfo.REQUEST_PLAYERS_LIST))
-				playersListRequested();
+				playersListReceived((List<Profile>)message.getData());
 			// TODO
 		}
 		else if(message instanceof TournamentNetworkMessage)
@@ -132,15 +144,34 @@ public class ClientIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION MESSAGES	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void gameInfoRequested()
-	{	GameInfo gameInfo = null;
-		ConfigurationNetworkMessage message = new ConfigurationNetworkMessage(NetworkInfo.REQUEST_GAME_INFO,gameInfo);
-		writer.addMessage(message);
+	private void gameInfoReceived(GameInfo gameInfo)
+	{	// complete host info
+		HostInfo oldHostInfo = this.gameInfo.getHostInfo();
+		HostInfo hostInfo = gameInfo.getHostInfo();
+		hostInfo.setLastIp(oldHostInfo.getLastIp());
+		hostInfo.setLastPort(oldHostInfo.getLastPort());
+		hostInfo.setPreferred(oldHostInfo.isPreferred());
+		hostInfo.setUses(oldHostInfo.getUses());
+
+		// update game info
+		this.gameInfo = gameInfo;
+		
+		// propagate modifications
+		generalConnection.gameInfoChanged(this);
 	}
+
+	/**
+	 * TODO
+	 * when a time out occurs, the host state is set to unknown
+	 * and modification is propagated
+	 */
 	
-	private void playersListRequested()
-	{	
-		// TODO write the players list
+	private void playersListReceived(List<Profile> playerProfiles)
+	{	// update profile list
+		this.playerProfiles = playerProfiles;
+		
+		// propagate modification
+		generalConnection.profilesChanged(this);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -154,6 +185,7 @@ public class ClientIndividualConnection extends AbstractConnection
 	{	if(!finished)
 		{	super.finish();
 			
+			gameInfo = null;
 			generalConnection = null;
 		}
 	}

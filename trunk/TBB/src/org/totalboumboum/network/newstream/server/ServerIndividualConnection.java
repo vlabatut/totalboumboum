@@ -41,8 +41,9 @@ import org.totalboumboum.network.newstream.event.TournamentNetworkMessage;
 public class ServerIndividualConnection extends AbstractConnection
 {
 	public ServerIndividualConnection(ServerGeneralConnection generalConnection, Socket socket) throws IOException
-	{	super(socket);
-		this.generalConnection = generalConnection;
+	{	this.generalConnection = generalConnection;
+	
+		initConnection(socket);
 	}
 	
 	/////////////////////////////////////////////////////////////////

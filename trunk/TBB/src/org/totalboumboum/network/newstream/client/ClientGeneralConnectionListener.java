@@ -1,4 +1,4 @@
-package org.totalboumboum.network.newstream.event;
+package org.totalboumboum.network.newstream.client;
 
 /*
  * Total Boum Boum
@@ -26,28 +26,10 @@ package org.totalboumboum.network.newstream.event;
  * @author Vincent Labatut
  *
  */
-public enum NetworkInfo
-{	// config level
-	/** client requests game information */ 
-	REQUEST_GAME_INFO,
-	/** client requests players list */
-	REQUEST_PLAYERS_LIST,
-	
-	// tournament level
-	/** client requests current tournament stats */
-	REQUEST_TOURNAMENT_STATS,
-
-	// match level
-	/** client requests current match stats */
-	REQUEST_MATCH_STATS,
-	
-	// round level
-	/** client requests current round stats */
-	REQUEST_ROUND_STATS,
-	
-	// in-game level
-	/** client indicates it leaves the tournament */
-	INFO_GAME_QUIT,
-	/** client indicates a player's move (while playing) */
-	INFO_GAME_MOVE
+public interface ClientGeneralConnectionListener
+{
+	public void connectionAdded(ClientIndividualConnection connection, int index);
+	public void connectionRemoved(ClientIndividualConnection connection, int index);
+	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index);
+	public void connectionProfilesChanged(ClientIndividualConnection connection, int index);
 }
