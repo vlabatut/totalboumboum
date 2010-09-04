@@ -34,9 +34,8 @@ import org.totalboumboum.network.newstream.event.NetworkMessage;
  */
 public class RunnableReader extends Thread
 {
-	public RunnableReader(ObjectInputStream in, AbstractConnection connection)
-	{	this.in = in;
-		this.connection = connection;
+	public RunnableReader()
+	{	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -53,6 +52,10 @@ public class RunnableReader extends Thread
 	/////////////////////////////////////////////////////////////////
 	private ObjectInputStream in;
 
+	public void setStream(ObjectInputStream in)
+	{	this.in = in;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
