@@ -153,6 +153,7 @@ public class ServerGeneralConnection implements Runnable
 		ServerSocket serverSocket = null;
 		try
 		{	serverSocket = new ServerSocket(port);
+System.out.println(serverSocket.getLocalSocketAddress());		
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
