@@ -88,8 +88,8 @@ public class HostsSaver
 		result.setAttribute(XmlNames.PREFERRED,preferred);
 		
 		// central
-		String central = Boolean.toString(host.isCentral());
-		result.setAttribute(XmlNames.CENTRAL,central);
+//		String central = Boolean.toString(host.isCentral());
+//		result.setAttribute(XmlNames.CENTRAL,central);
 		
 		// direct
 		String direct = Boolean.toString(host.isDirect());
