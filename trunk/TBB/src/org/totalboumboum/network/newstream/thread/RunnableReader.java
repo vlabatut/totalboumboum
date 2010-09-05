@@ -32,7 +32,7 @@ import org.totalboumboum.network.newstream.event.NetworkMessage;
  * @author Vincent Labatut
  *
  */
-public class RunnableReader extends Thread
+public class RunnableReader implements Runnable
 {
 	public RunnableReader()
 	{	
@@ -61,7 +61,7 @@ public class RunnableReader extends Thread
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void run()
-	{	while(!Thread.interrupted())
+	{	while(!isFinished())
 		{	if(isPaused())
 			{	try
 				{	wait();	
@@ -87,6 +87,8 @@ public class RunnableReader extends Thread
 		// close stream
 		try
 		{	in.close();
+			in = null;
+			connection = null;
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
@@ -108,5 +110,18 @@ public class RunnableReader extends Thread
 	
 	private synchronized boolean isPaused()
 	{	return paused;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+		
+	public synchronized boolean isFinished()
+	{	return finished;
+	}
+	
+	public synchronized void finish()
+	{	finished = true;
 	}
 }

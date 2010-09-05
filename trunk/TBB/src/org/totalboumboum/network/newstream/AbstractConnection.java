@@ -55,12 +55,16 @@ public abstract class AbstractConnection
 		OutputStream os = socket.getOutputStream();
 		ObjectOutputStream out = new ObjectOutputStream(os);
 		
-		// init threads
+		// init writer
 		writer.setStream(out);
-		writer.start();
+		Thread writeThread = new Thread(writer);
+		writeThread.start();
+	
+		// init reader
 		reader.setStream(in);
 		reader.setConnection(this);
-		reader.start();
+		Thread readThread = new Thread(reader);
+		readThread.start();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -101,11 +105,11 @@ public abstract class AbstractConnection
 		{	finished = true;
 			
 			// reader
-			reader.interrupt();
+			reader.finish();
 			reader = null;
 			
 			// writer
-			writer.interrupt();
+			writer.finish();
 			writer = null;
 		}
 	}
