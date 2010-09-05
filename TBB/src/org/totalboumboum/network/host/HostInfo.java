@@ -21,6 +21,7 @@ package org.totalboumboum.network.host;
  * 
  */
 
+import java.io.Serializable;
 import java.net.InetAddress;
 
 /**
@@ -28,8 +29,9 @@ import java.net.InetAddress;
  * @author Vincent Labatut
  *
  */
-public class HostInfo
-{	
+public class HostInfo implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	/////////////////////////////////////////////////////////////////
 	// ID					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
