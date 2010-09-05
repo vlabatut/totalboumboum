@@ -19,18 +19,21 @@ import org.xml.sax.SAXException;
 public class ConvertIds
 {
 	public static void main(String[] args) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
-	{	
+	{	displayNewId();
 		//generateIds();
 		//convertIds();
+	}
+	
+	private static void displayNewId()
+	{	UUID idOne = UUID.randomUUID();
+		System.out.println(idOne);
 	}
 	
 	@SuppressWarnings("unused")
 	private static void generateIds()
 	{	// generate new ids
 		for(int i=0;i<49;i++)
-		{	UUID idOne = UUID.randomUUID();
-			System.out.println(idOne);
-		}
+			displayNewId();
 		
 		// check size
 		System.out.println(getUUIDs().size());

@@ -24,7 +24,9 @@ package org.totalboumboum.gui.menus.tournament;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -40,6 +42,7 @@ import org.totalboumboum.configuration.profile.ProfilesConfiguration;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
 import org.totalboumboum.configuration.profile.SpriteInfo;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -47,9 +50,13 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
 import org.totalboumboum.network.stream.network.configuration.ConfigurationServerConnectionListener;
 import org.totalboumboum.network.stream.network.configuration.ConfigurationServerConnectionManager;
 import org.totalboumboum.network.stream.network.configuration.ConfigurationServerConnectionThread;
+import org.totalboumboum.statistics.GameStatistics;
+import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
+import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.xml.sax.SAXException;
 
 /**
@@ -263,7 +270,7 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener,
 			revalidate();
 			
 			// set up the connection
-			try
+/*			try
 			{	AbstractTournament tournament = tournamentConfiguration.getTournament();
 				connectionManager = new ConfigurationServerConnectionManager(tournament);
 				connectionManager.addListener(this);
@@ -272,7 +279,28 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener,
 			}
 			catch (IOException e1)
 			{	e1.printStackTrace();
+			}*/	
+			AbstractTournament tournament = tournamentConfiguration.getTournament();
+			Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
+			String tournamentName = tournament.getName();
+			TournamentType tournamentType = TournamentType.getType(tournament);
+			List<Profile> playerProfiles = playersData.getSelectedProfiles();
+			List<Double> playersScores = new ArrayList<Double>();
+			RankingService glicko2 = GameStatistics.getRankingService();
+			for(Profile p: playerProfiles)
+			{	Double score = null;
+				String id = p.getId();
+				if(glicko2.getPlayers().contains(id))
+				{	PlayerRating playerRating = glicko2.getPlayerRating(id);
+					score = playerRating.getRating();
+				}
+				playersScores.add(score);
 			}
+			ServerGeneralConnection connection = new ServerGeneralConnection(allowedPlayers,tournamentName,tournamentType,playersScores,playerProfiles);
+			Configuration.getConnectionsConfiguration().setServerConnection(connection);
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS))
+		{	// TODO
 	    }
 	} 
 	

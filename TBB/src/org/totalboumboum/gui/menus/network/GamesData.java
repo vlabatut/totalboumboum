@@ -66,7 +66,7 @@ public class GamesData extends EntitledDataPanel implements GameListSubPanelList
 	public GamesData(SplitMenuPanel container)
 	{	super(container);
 		gamesMap = new HashMap<String, GameInfo>(); //TODO
-		
+/*		
 try
 {	HostInfo hostInfo = new HostInfo();
 	hostInfo.setCentral(true);
@@ -161,7 +161,7 @@ try
 catch (UnknownHostException e)
 {	e.printStackTrace();
 }
-		
+*/		
 		// title
 		{	String key = GuiKeys.MENU_NETWORK_GAMES_TITLE;
 			setTitleKey(key);

@@ -33,6 +33,8 @@ import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
 import org.totalboumboum.network.host.HostsLoader;
 import org.totalboumboum.network.host.HostsSaver;
+import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
+import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
 import org.totalboumboum.tools.event.EventName;
 import org.totalboumboum.tools.event.UpdateEvent;
 import org.totalboumboum.tools.event.UpdateListener;
@@ -48,8 +50,19 @@ public class ConnectionsConfiguration
 	public ConnectionsConfiguration copy()
 	{	ConnectionsConfiguration result = new ConnectionsConfiguration();
 	
-		result.setCentralIp(centralIp);
+		result.centralIp = centralIp;
+		result.port = port;
+		result.hostName = hostName;
+		result.hostId = hostId;
+	
+		result.centralConnections.addAll(centralConnections);
+		result.directConnections.addAll(directConnections);
+		result.hosts.putAll(hosts);
+		result.macAddresses.addAll(macAddresses);
 
+		result.clientConnection = clientConnection;
+		result.serverConnection = serverConnection;
+		
 		return result;
 	}
 
@@ -198,6 +211,32 @@ public class ConnectionsConfiguration
 	{	return macAddresses;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SERVER GENERAL CONNECTION	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ServerGeneralConnection serverConnection;
+	
+	public ServerGeneralConnection getServerConnection()
+	{	return serverConnection;
+	}
+
+	public void setServerConnection(ServerGeneralConnection serverConnection)
+	{	this.serverConnection = serverConnection;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CLIENT GENERAL CONNECTION	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ClientGeneralConnection clientConnection;
+	
+	public ClientGeneralConnection getClientConnection()
+	{	return clientConnection;
+	}
+
+	public void setClientConnection(ClientGeneralConnection clientConnection)
+	{	this.clientConnection = clientConnection;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
