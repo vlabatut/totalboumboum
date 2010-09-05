@@ -33,7 +33,7 @@ import org.totalboumboum.network.newstream.event.NetworkMessage;
  * @author Vincent Labatut
  *
  */
-public class RunnableWriter extends Thread
+public class RunnableWriter implements Runnable
 {
 	public RunnableWriter()
 	{	
@@ -53,7 +53,7 @@ public class RunnableWriter extends Thread
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void run()
-	{	while(!Thread.interrupted())
+	{	while(!isFinished() && !isEmpty())
 		{	// wait for some objects to write
 			while(isEmpty())
 			{	try
@@ -76,6 +76,7 @@ public class RunnableWriter extends Thread
 		// close stream
 		try
 		{	out.close();
+			out = null;
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
@@ -99,5 +100,18 @@ public class RunnableWriter extends Thread
 	
 	public synchronized void addMessage(NetworkMessage message)
 	{	data.offer(message);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+		
+	public synchronized boolean isFinished()
+	{	return finished;
+	}
+	
+	public synchronized void finish()
+	{	finished = true;
 	}
 }

@@ -29,7 +29,6 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
 import org.totalboumboum.network.host.HostsLoader;
 import org.totalboumboum.network.host.HostsSaver;

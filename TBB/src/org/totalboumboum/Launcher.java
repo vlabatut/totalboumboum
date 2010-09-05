@@ -1535,5 +1535,10 @@ public class Launcher
 	 * TODO
 	 * pb potentiel quand plusieurs clients veulent ajouter un joueur en même temps
 	 * >> placer un synchronize sur les méthodes appelées par la connection indiv sur la cx générale
-	 */
+	 * 
+	 * faut vraiment implémenter les time-outs :
+	 * 	- si un client demande les gameinfo à un serveur, mais que celui-ci n'est pas encore prêt ?
+	 *    >> faut alors recommencer au bout d'un temps donné (délai = param config)
+	 *    >> cb de fois on recommence (ce nbre = param config)
+	 */ 
 }

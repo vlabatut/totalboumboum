@@ -44,10 +44,15 @@ import org.totalboumboum.network.newstream.event.NetworkMessage;
  *
  */
 public class ServerGeneralConnection implements Runnable
-{
+{	
 	public ServerGeneralConnection(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles)
-	{	this.playerProfiles.addAll(playerProfiles);
+	{	// set data
+		this.playerProfiles.addAll(playerProfiles);
 		initGameInfo(allowedPlayers,tournamentName,tournamentType,playerScores,playerProfiles);
+		
+		// launch thread
+		Thread thread = new Thread(this);
+		thread.start();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -147,15 +152,14 @@ public class ServerGeneralConnection implements Runnable
 		// create socket
 		ServerSocket serverSocket = null;
 		try
-		{	
-			serverSocket = new ServerSocket(port);
+		{	serverSocket = new ServerSocket(port);
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
 		}
 		
 		// wait for new connections
-		while(true)
+		while(!isFinished())
 		{	try
 			{	Socket socket = serverSocket.accept();
 				createConnection(socket);
@@ -188,5 +192,18 @@ public class ServerGeneralConnection implements Runnable
 	public synchronized void removeConnection(ServerIndividualConnection connection)
 	{	connection.finish();
 		individualConnections.remove(connection);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+		
+	public synchronized boolean isFinished()
+	{	return finished;
+	}
+	
+	public synchronized void finish()
+	{	finished = true;
 	}
 }
