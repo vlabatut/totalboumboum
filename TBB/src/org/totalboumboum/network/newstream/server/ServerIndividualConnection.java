@@ -43,7 +43,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	public ServerIndividualConnection(ServerGeneralConnection generalConnection, Socket socket) throws IOException
 	{	this.generalConnection = generalConnection;
 	
-		initConnection(socket);
+		initConnection(socket,true);
 	}
 	
 	/////////////////////////////////////////////////////////////////
