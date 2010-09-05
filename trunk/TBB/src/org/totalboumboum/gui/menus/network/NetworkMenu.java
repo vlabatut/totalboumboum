@@ -23,22 +23,15 @@ package org.totalboumboum.gui.menus.network;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JToggleButton;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
-import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSaver;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.configuration.profile.ProfilesConfiguration;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
-import org.totalboumboum.configuration.profile.SpriteInfo;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -49,10 +42,6 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.network.stream.network.configuration.ConfigurationClientConnection;
 import org.totalboumboum.network.stream.network.configuration.ConfigurationClientConnectionListener;
-import org.totalboumboum.network.stream.network.configuration.ConfigurationServerConnectionListener;
-import org.totalboumboum.network.stream.network.configuration.ConfigurationServerConnectionManager;
-import org.totalboumboum.network.stream.network.configuration.ConfigurationServerConnectionThread;
-import org.xml.sax.SAXException;
 
 /**
  * 
