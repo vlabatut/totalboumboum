@@ -49,6 +49,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// GENERAL CONNECTION	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
 	private ServerGeneralConnection generalConnection;
 
 	/////////////////////////////////////////////////////////////////
@@ -73,15 +74,15 @@ public class ServerIndividualConnection extends AbstractConnection
 			// TODO
 		}
 		else if(message instanceof TournamentNetworkMessage)
-		{
+		{	
 			// TODO
 		}
 		else if(message instanceof MatchNetworkMessage)
-		{
+		{	
 			// TODO
 		}
 		else if(message instanceof RoundNetworkMessage)
-		{
+		{	
 			// TODO
 		}
 	}

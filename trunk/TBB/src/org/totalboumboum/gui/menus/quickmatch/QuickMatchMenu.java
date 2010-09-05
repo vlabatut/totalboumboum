@@ -425,6 +425,10 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			revalidate();
 			
 			// set up the connection
+			//TODO
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS))
+		{	// TODO
 	    }
 	} 
 	
