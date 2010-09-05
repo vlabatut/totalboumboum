@@ -45,9 +45,11 @@ import org.totalboumboum.network.newstream.event.TournamentNetworkMessage;
  */
 public class ClientIndividualConnection extends AbstractConnection implements Runnable
 {
-	public ClientIndividualConnection(ClientGeneralConnection generalConnection, GameInfo gameInfo)
+	public ClientIndividualConnection(ClientGeneralConnection generalConnection, HostInfo hostInfo)
 	{	this.generalConnection = generalConnection;
-		this.gameInfo = gameInfo;
+		
+		this.gameInfo = new GameInfo();
+		gameInfo.setHostInfo(hostInfo);
 		
 		initSocket();
 	}

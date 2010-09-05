@@ -1530,4 +1530,10 @@ public class Launcher
 	
 	// TODO pour récup l'@ du serveur côté client, utiliser Socket.getInetAddress()
 	// bah non, en fait on n'a jamais besoin de faire ça !
+	
+	/**
+	 * TODO
+	 * pb potentiel quand plusieurs clients veulent ajouter un joueur en même temps
+	 * >> placer un synchronize sur les méthodes appelées par la connection indiv sur la cx générale
+	 */
 }

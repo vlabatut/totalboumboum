@@ -55,8 +55,6 @@ public class ConnectionsConfiguration
 		result.hostName = hostName;
 		result.hostId = hostId;
 	
-		result.centralConnections.addAll(centralConnections);
-		result.directConnections.addAll(directConnections);
 		result.hosts.putAll(hosts);
 		result.macAddresses.addAll(macAddresses);
 
@@ -80,47 +78,11 @@ public class ConnectionsConfiguration
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// CENTRAL CONNECTIONS	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<GameInfo> centralConnections = new ArrayList<GameInfo>();
-	
-	private void updateCentralConnections()
-	{	if(centralConnections.isEmpty())
-		{	// TODO use the central ip to get all connections
-		}
-	}
-	
-	public List<GameInfo> getCentralConnections()
-	{	return centralConnections;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// DIRECT CONNECTIONS	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<GameInfo> directConnections = new ArrayList<GameInfo>();
-	
-	private void updateDirectConnections()
-	{	if(directConnections.isEmpty())
-		{	for(HostInfo host: hosts.values())
-			{	if(host.isDirect())
-				{	GameInfo gameInfo = new GameInfo();
-					gameInfo.setHostInfo(host);
-					directConnections.add(gameInfo);
-				}
-			}
-		}
-	}
-	
-	public List<GameInfo> getDirectConnections()
-	{	return directConnections;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// HOSTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private HashMap<String,HostInfo> hosts = null;
 	
-	private void updateHosts() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public void initHosts() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	if(hosts==null)
 			hosts = HostsLoader.loadHosts();
 	}
@@ -138,6 +100,10 @@ public class ConnectionsConfiguration
 			HostsSaver.saveHosts(hosts);
 	}
 	
+	public HashMap<String,HostInfo> getHosts()
+	{	return hosts;	
+	}
+	
 	public HostInfo getLocalHostInfo()
 	{	HostInfo result = new HostInfo();
 		result.setId(hostId);
@@ -145,15 +111,6 @@ public class ConnectionsConfiguration
 		return result;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// GAME				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void updateConnections() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	updateHosts();
-		updateDirectConnections();
-		updateCentralConnections();
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// PORT					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -270,8 +227,6 @@ public class ConnectionsConfiguration
 			listeners.clear();
 			
 			centralIp = null;
-			centralConnections = null;
-			directConnections = null;
 			hosts = null;
 		}
 	}
