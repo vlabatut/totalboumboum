@@ -52,8 +52,8 @@ public class RunnableWriter implements Runnable
 	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void run()
-	{	while(!isFinished() && !isEmpty())
+	public synchronized void run()
+	{	while(!isFinished() || !isEmpty())
 		{	// wait for some objects to write
 			while(isEmpty())
 			{	try
@@ -101,6 +101,7 @@ System.out.println(message);
 	
 	public synchronized void addMessage(NetworkMessage message)
 	{	data.offer(message);
+		notify();
 	}
 
 	/////////////////////////////////////////////////////////////////

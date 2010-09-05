@@ -49,7 +49,6 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// GENERAL CONNECTION	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@SuppressWarnings("unused")
 	private ServerGeneralConnection generalConnection;
 
 	/////////////////////////////////////////////////////////////////
@@ -95,7 +94,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	// CONFIGURATION MESSAGES	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private void gameInfoRequested()
-	{	GameInfo gameInfo = null;
+	{	GameInfo gameInfo = generalConnection.getGameInfo();
 		ConfigurationNetworkMessage message = new ConfigurationNetworkMessage(NetworkInfo.REQUEST_GAME_INFO,gameInfo);
 		writer.addMessage(message);
 	}

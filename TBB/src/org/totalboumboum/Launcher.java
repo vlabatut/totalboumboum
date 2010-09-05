@@ -1540,5 +1540,9 @@ public class Launcher
 	 * 	- si un client demande les gameinfo à un serveur, mais que celui-ci n'est pas encore prêt ?
 	 *    >> faut alors recommencer au bout d'un temps donné (délai = param config)
 	 *    >> cb de fois on recommence (ce nbre = param config)
+	 *    
+	 * aucun buffering toléré pour le réseau, donc faut faire un flush à chaque
+	 * écriture dans le flux
 	 */ 
+	
 }
