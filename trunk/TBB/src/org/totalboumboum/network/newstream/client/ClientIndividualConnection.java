@@ -64,7 +64,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		int port = hostInfo.getLastPort();
 		try
 		{	Socket socket = new Socket(address,port);
-			initConnection(socket);
+			initConnection(socket,false);
 			NetworkMessage message = new ConfigurationNetworkMessage(NetworkInfo.REQUEST_GAME_INFO);
 			writeMessage(message);
 		}

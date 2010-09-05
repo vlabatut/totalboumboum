@@ -48,12 +48,22 @@ public abstract class AbstractConnection
 //	{	initConnection(socket);
 //	}
 
-	protected void initConnection(Socket socket) throws IOException
+	protected void initConnection(Socket socket, boolean order) throws IOException
 	{	// init streams
-		InputStream is = socket.getInputStream();
-		ObjectInputStream in = new ObjectInputStream(is);
-		OutputStream os = socket.getOutputStream();
-		ObjectOutputStream out = new ObjectOutputStream(os);
+		ObjectInputStream in;
+		ObjectOutputStream out;
+		if(order)
+		{	InputStream is = socket.getInputStream();
+			in = new ObjectInputStream(is);
+			OutputStream os = socket.getOutputStream();
+			out = new ObjectOutputStream(os);
+		}
+		else
+		{	OutputStream os = socket.getOutputStream();
+			out = new ObjectOutputStream(os);
+			InputStream is = socket.getInputStream();
+			in = new ObjectInputStream(is);
+		}
 		
 		// init writer
 		writer.setStream(out);
