@@ -44,9 +44,9 @@ public abstract class AbstractConnection
 		reader = new RunnableReader();
 	}
 	
-	public AbstractConnection(Socket socket) throws IOException
-	{	initConnection(socket);
-	}
+//	public AbstractConnection(Socket socket) throws IOException
+//	{	initConnection(socket);
+//	}
 
 	protected void initConnection(Socket socket) throws IOException
 	{	// init streams
