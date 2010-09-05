@@ -67,6 +67,13 @@ public class ClientGeneralConnection
 		fireConnectionProfilesChanged(connection,index);
 	}
 
+	public List<GameInfo> getGameList()
+	{	List<GameInfo> result = new ArrayList<GameInfo>();
+		for(ClientIndividualConnection connection: individualConnections)
+			result.add(connection.getGameInfo());
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

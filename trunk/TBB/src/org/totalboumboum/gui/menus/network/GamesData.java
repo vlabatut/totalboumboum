@@ -22,19 +22,15 @@ package org.totalboumboum.gui.menus.network;
  */
 
 import java.awt.Dimension;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TreeSet;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import org.totalboumboum.game.tournament.TournamentType;
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.gui.common.content.subpanel.game.GameInfoSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanelListener;
@@ -49,7 +45,7 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
-import org.totalboumboum.network.host.HostState;
+import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
 import org.totalboumboum.tools.network.NetworkTools;
 
 /**
@@ -65,7 +61,11 @@ public class GamesData extends EntitledDataPanel implements GameListSubPanelList
 	
 	public GamesData(SplitMenuPanel container)
 	{	super(container);
-		gamesMap = new HashMap<String, GameInfo>(); //TODO
+		ClientGeneralConnection generalConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+		List<GameInfo> gamesList = generalConnection.getGameList();
+		gamesMap = new HashMap<String, GameInfo>();
+		for(GameInfo gi: gamesList)
+			gamesMap.put(gi.getHostInfo().getId(),gi);
 /*		
 try
 {	HostInfo hostInfo = new HostInfo();
