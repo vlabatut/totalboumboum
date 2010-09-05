@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.network.game.GameInfo;
+import org.totalboumboum.network.host.HostInfo;
 
 /**
  * 
@@ -33,11 +34,11 @@ import org.totalboumboum.network.game.GameInfo;
  */
 public class ClientGeneralConnection
 {
-	public ClientGeneralConnection(List<GameInfo> gameInfos)
+	public ClientGeneralConnection(List<HostInfo> hosts)
 	{	// init direct connections
 		//List<GameInfo> gameInfos = Configuration.getConnectionsConfiguration().getDirectConnections();
-		for(GameInfo gameInfo: gameInfos)
-			createConnection(gameInfo);
+		for(HostInfo hostInfo: hosts)
+			createConnection(hostInfo);
 		
 		// TODO for central connection, a special connection will be defined for the configuration stage
 	}
@@ -47,8 +48,8 @@ public class ClientGeneralConnection
 	/////////////////////////////////////////////////////////////////
 	private final List<ClientIndividualConnection> individualConnections = new ArrayList<ClientIndividualConnection>();
 	
-	public void createConnection(GameInfo gameInfo)
-	{	ClientIndividualConnection individualConnection = new ClientIndividualConnection(this,gameInfo);
+	public void createConnection(HostInfo hostInfo)
+	{	ClientIndividualConnection individualConnection = new ClientIndividualConnection(this,hostInfo);
 		individualConnections.add(individualConnection);
 	}
 	
