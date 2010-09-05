@@ -67,6 +67,7 @@ public class RunnableWriter implements Runnable
 			try
 			{	NetworkMessage message = getMessage();
 				out.writeObject(message);
+System.out.println(message);
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
