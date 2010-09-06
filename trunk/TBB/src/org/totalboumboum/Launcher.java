@@ -1535,13 +1535,19 @@ public class Launcher
 	 * TODO
 	 * pb potentiel quand plusieurs clients veulent ajouter un joueur en même temps
 	 * >> placer un synchronize sur les méthodes appelées par la connection indiv sur la cx générale
+	 * en fait, plus généralement : le thread qui envoie les evts correspondants à des lectures, que ce
+	 * soit côté client ou côté serveur, doit être synchro sur les fonctions de type 'fireXxx' de manière à éviter
+	 * déjà les pb quand plusieurs msgs arrivent en même temps.
+	 * mais même au niveau du listener qui reçoit le call, il ne faut pas que le thread de ce call (fire), i.e. le reader,
+	 * vienne entrer en conflit avec le thread local. donc synchro nécessaire sur les ressources concernées
+	 * (note : à vérif, mais c'était déjà fait au niveau loop avec une file synchronisée) 
 	 * 
 	 * faut vraiment implémenter les time-outs :
 	 * 	- si un client demande les gameinfo à un serveur, mais que celui-ci n'est pas encore prêt ?
 	 *    >> faut alors recommencer au bout d'un temps donné (délai = param config)
 	 *    >> cb de fois on recommence (ce nbre = param config)
 	 *    
-	 * aucun buffering toléré pour le réseau, donc faut faire un flush à chaque
+	 * aucun buffering toléré pour le réseau (round in-game), donc faut faire un flush à chaque
 	 * écriture dans le flux
 	 * 
 	 * when a player is unselected/selected/changed server side,
@@ -1551,6 +1557,8 @@ public class Launcher
 	 * ça le met à jour. si déjà connecté, pas la peine de mettre à jour puisqu'il fait des push
 	 * mettre en place un buffer empêchant l'utilisateur de demander plusieurs mise à jour
 	 * 
+	 * coté client, la demande de gameinfo ne doit pas être réalisée avant que la GUI soit prête à traiter les réponses des serveurs
+	 * donc ça veut dire : à faire au niveau du panel directement, et non plus anticipé depuis le menu principal
 	 */ 
 	
 }

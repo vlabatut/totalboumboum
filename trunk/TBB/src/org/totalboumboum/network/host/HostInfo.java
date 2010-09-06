@@ -22,7 +22,6 @@ package org.totalboumboum.network.host;
  */
 
 import java.io.Serializable;
-import java.net.InetAddress;
 
 /**
  * 
@@ -78,13 +77,13 @@ public class HostInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ADDRESS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private InetAddress lastIp = null;
+	private String lastIp = null;
 
-	public InetAddress getLastIp()
+	public String getLastIp()
 	{	return lastIp;
 	}
 
-	public void setLastIp(InetAddress lastIp)
+	public void setLastIp(String lastIp)
 	{	this.lastIp = lastIp;
 	}
 	

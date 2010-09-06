@@ -23,7 +23,6 @@ package org.totalboumboum.network.host;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -83,8 +82,7 @@ public class HostsLoader
     	result.setUses(use);
 		
 		// last IP
-    	String ipStr = root.getAttribute(XmlNames.LAST_IP).getValue();
-    	InetAddress ip = InetAddress.getByName(ipStr);
+    	String ip = root.getAttribute(XmlNames.LAST_IP).getValue();
     	result.setLastIp(ip);
     	
 		// last port
