@@ -1547,6 +1547,10 @@ public class Launcher
 	 * when a player is unselected/selected/changed server side,
 	 * the game info must be modified (change in the players average score)
 	 * 
+	 * quand on clique sur un serveur pas encore connecté dans la liste directe
+	 * ça le met à jour. si déjà connecté, pas la peine de mettre à jour puisqu'il fait des push
+	 * mettre en place un buffer empêchant l'utilisateur de demander plusieurs mise à jour
+	 * 
 	 */ 
 	
 }
