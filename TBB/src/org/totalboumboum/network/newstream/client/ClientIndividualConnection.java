@@ -149,16 +149,13 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	// CONFIGURATION MESSAGES	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private void gameInfoReceived(GameInfo gameInfo)
-	{	// complete host info
-		HostInfo oldHostInfo = this.gameInfo.getHostInfo();
-		HostInfo hostInfo = gameInfo.getHostInfo();
-		hostInfo.setLastIp(oldHostInfo.getLastIp());
-		hostInfo.setLastPort(oldHostInfo.getLastPort());
-		hostInfo.setPreferred(oldHostInfo.isPreferred());
-		hostInfo.setUses(oldHostInfo.getUses());
-
-		// update game info
-		this.gameInfo = gameInfo;
+	{	// update game info
+		this.gameInfo.setAllowedPlayers(gameInfo.getAllowedPlayers());
+		this.gameInfo.setAverageScore(gameInfo.getAverageScore());
+		this.gameInfo.setPlayerCount(gameInfo.getPlayerCount());
+		this.gameInfo.setTournamentName(gameInfo.getTournamentName());
+		this.gameInfo.setTournamentType(gameInfo.getTournamentType());
+		this.gameInfo.getHostInfo().setState(gameInfo.getHostInfo().getState());
 		
 		// propagate modifications
 		generalConnection.gameInfoChanged(this);
