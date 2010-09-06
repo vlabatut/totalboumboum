@@ -22,7 +22,6 @@ package org.totalboumboum.configuration.connections;
  */
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,13 +65,13 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// CENTRAL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private InetAddress centralIp;
+	private String centralIp;
 
-	public void setCentralIp(InetAddress centralIp)
+	public void setCentralIp(String centralIp)
 	{	this.centralIp = centralIp;		
 	}
 	
-	public InetAddress getCentralIp()
+	public String getCentralIp()
 	{	return centralIp;		
 	}
 
@@ -86,7 +85,7 @@ public class ConnectionsConfiguration
 			hosts = HostsLoader.loadHosts();
 	}
 	
-	public HostInfo createHost(InetAddress ip)
+	public HostInfo createHost(String ip)
 	{	HostInfo result = null;
 	
 		// TODO to be defined

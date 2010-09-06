@@ -23,7 +23,6 @@ package org.totalboumboum.configuration.connections;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,8 +64,7 @@ public class ConnectionsConfigurationLoader
 	
 	private static void loadCentralElement(Element root, ConnectionsConfiguration result) throws UnknownHostException
 	{	// ip
-		String centralIpStr = root.getAttribute(XmlNames.IP).getValue().trim();
-		InetAddress centralIp = InetAddress.getByName(centralIpStr);
+		String centralIp = root.getAttribute(XmlNames.IP).getValue().trim();
 		result.setCentralIp(centralIp);
 	}
 

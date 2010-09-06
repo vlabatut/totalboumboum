@@ -21,7 +21,6 @@ package org.totalboumboum.gui.common.content.subpanel.game;
  * 
  */
 
-import java.net.InetAddress;
 import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.Set;
@@ -222,10 +221,10 @@ public enum GameColumn
 		else if(this==HOST_IP)
 		{	if(gameInfo!=null)
 			{	// content
-				InetAddress ip = gameInfo.getHostInfo().getLastIp();
+				String ip = gameInfo.getHostInfo().getLastIp();
 				String text = "?";
 				if(ip!=null)
-					text = ip.getHostName();
+					text = ip;
 				String tooltip = text;
 				panel.setLabelText(line,col,text,tooltip);
 				// listener

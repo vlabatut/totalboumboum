@@ -22,7 +22,6 @@ package org.totalboumboum.network.newstream.client;
  */
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +59,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	@Override
 	public void run()
 	{	HostInfo hostInfo = gameInfo.getHostInfo();
-		InetAddress address = hostInfo.getLastIp();
+		String address = hostInfo.getLastIp();
 		int port = hostInfo.getLastPort();
 		try
 		{	Socket socket = new Socket(address,port);

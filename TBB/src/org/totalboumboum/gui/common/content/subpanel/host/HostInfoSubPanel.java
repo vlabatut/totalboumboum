@@ -22,7 +22,6 @@ package org.totalboumboum.gui.common.content.subpanel.host;
  */
 
 import java.awt.Color;
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,10 +90,10 @@ public class HostInfoSubPanel extends TableSubPanel
 				tooltips.add(text);
 			}
 			if(showIp)
-			{	InetAddress ip = hostInfo.getLastIp();
+			{	String ip = hostInfo.getLastIp();
 				String text = "?";
 				if(ip!=null)
-					text = ip.getHostName();
+					text = ip;
 				texts.add(text);
 				tooltips.add(text);
 			}

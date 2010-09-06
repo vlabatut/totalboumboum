@@ -75,7 +75,7 @@ try
 	hostInfo.setCentral(true);
 	hostInfo.setDirect(true);
 	hostInfo.setId("132456");
-	hostInfo.setLastIp(InetAddress.getByName("127.0.0.1"));
+	hostInfo.setLastIp("127.0.0.1");
 	hostInfo.setName("example1");
 	hostInfo.setPreferred(true);
 	hostInfo.setState(HostState.OPEN);
@@ -93,7 +93,7 @@ try
 	hostInfo.setCentral(false);
 	hostInfo.setDirect(true);
 	hostInfo.setId("321456");
-	hostInfo.setLastIp(InetAddress.getByName("127.0.0.2"));
+	hostInfo.setLastIp("127.0.0.2");
 	hostInfo.setName("example2");
 	hostInfo.setPreferred(true);
 	hostInfo.setState(HostState.PLAYING);
@@ -111,7 +111,7 @@ try
 	hostInfo.setCentral(true);
 	hostInfo.setDirect(true);
 	hostInfo.setId("285259");
-	hostInfo.setLastIp(InetAddress.getByName("127.0.0.3"));
+	hostInfo.setLastIp("127.0.0.3");
 	hostInfo.setName("example3");
 	hostInfo.setPreferred(false);
 	hostInfo.setState(HostState.FINISHED);
@@ -129,7 +129,7 @@ try
 	hostInfo.setCentral(true);
 	hostInfo.setDirect(true);
 	hostInfo.setId("741285");
-	hostInfo.setLastIp(InetAddress.getByName("127.0.0.4"));
+	hostInfo.setLastIp("127.0.0.4");
 	hostInfo.setName("example4");
 	hostInfo.setPreferred(false);
 	hostInfo.setState(HostState.CLOSED);
@@ -147,7 +147,7 @@ try
 	hostInfo.setCentral(true);
 	hostInfo.setDirect(true);
 	hostInfo.setId("258417");
-	hostInfo.setLastIp(InetAddress.getByName("127.0.0.5"));
+	hostInfo.setLastIp("127.0.0.5");
 	hostInfo.setName("example5");
 	hostInfo.setPreferred(false);
 	hostInfo.setState(HostState.UNKOWN);
