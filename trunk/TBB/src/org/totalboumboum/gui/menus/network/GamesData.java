@@ -64,6 +64,7 @@ public class GamesData extends EntitledDataPanel implements GameListSubPanelList
 	public GamesData(SplitMenuPanel container)
 	{	super(container);
 		ClientGeneralConnection generalConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+		generalConnection.addListener(this);
 		List<GameInfo> gamesList = generalConnection.getGameList();
 		gamesMap = new HashMap<String, GameInfo>();
 		for(GameInfo gi: gamesList)
