@@ -97,7 +97,7 @@ public class ServerGeneralConnection implements Runnable
 	/////////////////////////////////////////////////////////////////
 	// HOST STATE	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HostState hostState = HostState.UNKOWN;
+	private HostState hostState = HostState.OPEN;
 	
 	public void setHostState(HostState hostState)
 	{	this.hostState = hostState;
