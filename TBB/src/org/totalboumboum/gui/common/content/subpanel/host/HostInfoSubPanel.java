@@ -83,9 +83,10 @@ public class HostInfoSubPanel extends TableSubPanel
 			List<String> texts = new ArrayList<String>();
 			List<String> tooltips = new ArrayList<String>();
 			if(showName)
-			{	String text = "?";
-				if(text!=null)
-					text = hostInfo.getName();
+			{	String name = hostInfo.getName();
+				String text = "?";
+				if(name!=null)
+					text = name;
 				texts.add(text);
 				tooltips.add(text);
 			}

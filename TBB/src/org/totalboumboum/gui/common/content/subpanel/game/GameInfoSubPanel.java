@@ -89,15 +89,16 @@ public class GameInfoSubPanel extends TableSubPanel
 			List<String> texts = new ArrayList<String>();
 			List<String> tooltips = new ArrayList<String>();
 			if(showTournamentName)
-			{	String text = "?";
-				if(text!=null)
-					text = gameInfo.getTournamentName();
+			{	String name = gameInfo.getTournamentName();
+				String text = "?";
+				if(name!=null)
+					text = name;
 				texts.add(text);
 				tooltips.add(text);
 			}
 			if(showTournamentType)
 			{	TournamentType type = gameInfo.getTournamentType();
-				String text = "ERROR";
+				String text = "?";
 				String tooltip = text;
 				if(type!=null)
 				{	String key = "";
@@ -147,7 +148,7 @@ public class GameInfoSubPanel extends TableSubPanel
 			}
 			if(showTournamentState)
 			{	HostState state = gameInfo.getHostInfo().getState();
-				String text = "ERROR";
+				String text = "?";
 				String tooltip = text;
 				if(state!=null)
 				{	String key = "";

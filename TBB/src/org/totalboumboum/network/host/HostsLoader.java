@@ -71,7 +71,7 @@ public class HostsLoader
 	
 		// id
     	String id = root.getAttribute(XmlNames.ID).getValue();
-    	result.setName(id);
+    	result.setId(id);
 		
 		// name
     	String name = root.getAttribute(XmlNames.NAME).getValue();
