@@ -46,6 +46,8 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
 import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
+import org.totalboumboum.network.newstream.client.ClientGeneralConnectionListener;
+import org.totalboumboum.network.newstream.client.ClientIndividualConnection;
 import org.totalboumboum.tools.network.NetworkTools;
 
 /**
@@ -53,7 +55,7 @@ import org.totalboumboum.tools.network.NetworkTools;
  * @author Vincent Labatut
  *
  */
-public class GamesData extends EntitledDataPanel implements GameListSubPanelListener,ModalDialogPanelListener
+public class GamesData extends EntitledDataPanel implements GameListSubPanelListener,ModalDialogPanelListener,ClientGeneralConnectionListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
@@ -309,5 +311,37 @@ catch (UnknownHostException e)
 				//refreshButtons();
 			}
 		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CLIENT CONNECTION LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void connectionAdded(ClientIndividualConnection connection, int index)
+	{	// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void connectionRemoved(ClientIndividualConnection connection,int index)
+	{	// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index)
+	{	GameInfo gameInfo = connection.getGameInfo();
+		listPanel.updateGame(gameInfo);
+		GameInfo gi = gamePanel.getGameInfo();
+		if(gameInfo==gi)
+		{	gamePanel.setGameInfo(gameInfo);
+			HostInfo hostInfo = gameInfo.getHostInfo();
+			hostPanel.setHostInfo(hostInfo);
+			//validate();
+			//repaint();
+		}
+	}
+
+	@Override
+	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
+	{	// TODO Auto-generated method stub
 	}
 }
