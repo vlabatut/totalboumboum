@@ -342,6 +342,6 @@ catch (UnknownHostException e)
 
 	@Override
 	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
-	{	// TODO Auto-generated method stub
+	{	// useless at this stage
 	}
 }

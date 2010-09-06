@@ -1543,6 +1543,10 @@ public class Launcher
 	 *    
 	 * aucun buffering toléré pour le réseau, donc faut faire un flush à chaque
 	 * écriture dans le flux
+	 * 
+	 * when a player is unselected/selected/changed server side,
+	 * the game info must be modified (change in the players average score)
+	 * 
 	 */ 
 	
 }
