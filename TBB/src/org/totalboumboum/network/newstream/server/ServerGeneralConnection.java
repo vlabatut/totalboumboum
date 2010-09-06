@@ -127,7 +127,7 @@ public class ServerGeneralConnection implements Runnable
 	private final List<Profile> playerProfiles = new ArrayList<Profile>();
 	
 	public void addProfile(int index, Profile profile)
-	{	//TODO
+	{	//TODO must add the profile localy and then fire the appropriate event regarding players, and also gameinfo (player average level)
 	}
 
 	public void setProfile(int index, Profile profile)
