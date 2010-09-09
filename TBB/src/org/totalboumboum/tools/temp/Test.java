@@ -1,7 +1,6 @@
 package org.totalboumboum.tools.temp;
 
 import java.net.*;
-import java.io.*;
 
 public class Test
 {

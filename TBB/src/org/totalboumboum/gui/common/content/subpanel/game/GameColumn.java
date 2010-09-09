@@ -120,7 +120,7 @@ public enum GameColumn
 		{	result = gameInfo.getHostInfo().getName();
 		}
 		else if(this==HOST_IP)
-		{	result = gameInfo.getHostInfo().getLastIp().getHostName();
+		{	result = gameInfo.getHostInfo().getLastIp();
 		}
 		else if(this==TOURNAMENT_TYPE)
 		{	result = gameInfo.getTournamentType();

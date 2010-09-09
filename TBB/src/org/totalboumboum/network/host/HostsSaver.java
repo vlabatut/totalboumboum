@@ -76,7 +76,7 @@ public class HostsSaver
 		result.setAttribute(XmlNames.USE,use);
 		
 		// last IP
-		String ip = host.getLastIp().getHostAddress();
+		String ip = host.getLastIp();
 		result.setAttribute(XmlNames.LAST_IP,ip);
 	
 		// last IP
