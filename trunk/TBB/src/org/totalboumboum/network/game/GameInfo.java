@@ -23,6 +23,7 @@ package org.totalboumboum.network.game;
 
 import java.io.Serializable;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.network.host.HostInfo;
@@ -111,5 +112,21 @@ public class GameInfo implements Serializable
 
 	public HostInfo getHostInfo()
 	{	return hostInfo;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public GameInfo copy()
+	{	GameInfo result = new GameInfo();
+
+		result.allowedPlayers = new TreeSet<Integer>(allowedPlayers);
+		result.averageScore = averageScore;
+		result.hostInfo = hostInfo.copy();
+		result.playerCount = playerCount;
+		result.tournamentName = tournamentName;
+		result.tournamentType = tournamentType;
+		
+		return result;
 	}
 }

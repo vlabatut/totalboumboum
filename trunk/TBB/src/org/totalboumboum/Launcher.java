@@ -1533,14 +1533,6 @@ public class Launcher
 	
 	/**
 	 * TODO
-	 * pb potentiel quand plusieurs clients veulent ajouter un joueur en même temps
-	 * >> placer un synchronize sur les méthodes appelées par la connection indiv sur la cx générale
-	 * en fait, plus généralement : le thread qui envoie les evts correspondants à des lectures, que ce
-	 * soit côté client ou côté serveur, doit être synchro sur les fonctions de type 'fireXxx' de manière à éviter
-	 * déjà les pb quand plusieurs msgs arrivent en même temps.
-	 * mais même au niveau du listener qui reçoit le call, il ne faut pas que le thread de ce call (fire), i.e. le reader,
-	 * vienne entrer en conflit avec le thread local. donc synchro nécessaire sur les ressources concernées
-	 * (note : à vérif, mais c'était déjà fait au niveau loop avec une file synchronisée) 
 	 * 
 	 * faut vraiment implémenter les time-outs :
 	 * 	- si un client demande les gameinfo à un serveur, mais que celui-ci n'est pas encore prêt ?
@@ -1556,6 +1548,9 @@ public class Launcher
 	 * quand on clique sur un serveur pas encore connecté dans la liste directe
 	 * ça le met à jour. si déjà connecté, pas la peine de mettre à jour puisqu'il fait des push
 	 * mettre en place un buffer empêchant l'utilisateur de demander plusieurs mise à jour
+	 * 
+	 * faut régler le pb (normal) des exceptions à répétition
+	 * quand le C ou le S ferme son flux
 	 * 
 	 * NOTE règles générales
 	 * 	- une demande d'info auprès du serveur (voire client) ne doit pas être

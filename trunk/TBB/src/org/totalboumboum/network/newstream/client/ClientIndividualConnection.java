@@ -118,9 +118,9 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	@Override
 	public void messageRead(NetworkMessage message)
 	{	if(message instanceof ConfigurationNetworkMessage)
-		{	if(message.getInfo().equals(NetworkInfo.REQUEST_GAME_INFO))
+		{	if(message.getInfo().equals(NetworkInfo.UPDATE_GAME_INFO))
 				gameInfoReceived((GameInfo)message.getData());
-			else if(message.getInfo().equals(NetworkInfo.REQUEST_PLAYERS_LIST))
+			else if(message.getInfo().equals(NetworkInfo.UPDATE_PLAYERS_LIST))
 				playersListReceived((List<Profile>)message.getData());
 			// TODO
 		}

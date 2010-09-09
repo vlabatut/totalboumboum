@@ -23,6 +23,8 @@ package org.totalboumboum.network.newstream.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
@@ -67,16 +69,6 @@ public class ClientGeneralConnection
 		individualConnections.remove(connection);
 	}
 	
-	public void gameInfoChanged(ClientIndividualConnection connection)
-	{	int index = individualConnections.indexOf(connection);
-		fireConnectionGameInfoChanged(connection,index);
-	}
-
-	public void profilesChanged(ClientIndividualConnection connection)
-	{	int index = individualConnections.indexOf(connection);
-		fireConnectionProfilesChanged(connection,index);
-	}
-
 	public List<GameInfo> getGameList()
 	{	List<GameInfo> result = new ArrayList<GameInfo>();
 		for(ClientIndividualConnection connection: individualConnections)
@@ -84,6 +76,29 @@ public class ClientGeneralConnection
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// EVENTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Lock updateLock = new ReentrantLock();
+
+	public void gameInfoChanged(ClientIndividualConnection connection)
+	{	updateLock.lock();
+		
+		int index = individualConnections.indexOf(connection);
+		fireConnectionGameInfoChanged(connection,index);
+		
+		updateLock.unlock();
+	}
+
+	public void profilesChanged(ClientIndividualConnection connection)
+	{	updateLock.lock();
+	
+		int index = individualConnections.indexOf(connection);
+		fireConnectionProfilesChanged(connection,index);
+		
+		updateLock.unlock();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
