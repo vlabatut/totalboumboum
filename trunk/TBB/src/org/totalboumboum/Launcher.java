@@ -1557,8 +1557,12 @@ public class Launcher
 	 * ça le met à jour. si déjà connecté, pas la peine de mettre à jour puisqu'il fait des push
 	 * mettre en place un buffer empêchant l'utilisateur de demander plusieurs mise à jour
 	 * 
-	 * coté client, la demande de gameinfo ne doit pas être réalisée avant que la GUI soit prête à traiter les réponses des serveurs
-	 * donc ça veut dire : à faire au niveau du panel directement, et non plus anticipé depuis le menu principal
+	 * NOTE règles générales
+	 * 	- une demande d'info auprès du serveur (voire client) ne doit pas être
+	 *    réalisée tant que la GUI n'est pas prête à traiter l'évènement de lecture associé
+	 *  - les méthodes des connexions générales susceptibles d'être appelées par les connexions
+	 *    individuelles doivent être synchro, afin d'éviter par ex que plusieurs clients
+	 *    ne demande la même tâche en même temps, risquant une interférence
 	 */ 
 	
 }
