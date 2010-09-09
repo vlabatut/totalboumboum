@@ -147,4 +147,23 @@ public class HostInfo implements Serializable
 	public void setPreferred(boolean preferred)
 	{	this.preferred = preferred;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public HostInfo copy()
+	{	HostInfo result = new HostInfo();
+		
+		result.central = central;
+		result.direct = direct;
+		result.id = id;
+		result.lastIp = lastIp;
+		result.lastPort = lastPort;
+		result.name = name;
+		result.preferred = preferred;
+		result.state = state;
+		result.uses = uses;
+		
+		return result;
+	}
 }

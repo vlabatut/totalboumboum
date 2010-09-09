@@ -27,6 +27,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
@@ -36,6 +38,7 @@ import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
 import org.totalboumboum.network.host.HostState;
 import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
+import org.totalboumboum.network.newstream.event.NetworkInfo;
 import org.totalboumboum.network.newstream.event.NetworkMessage;
 
 /**
@@ -45,10 +48,10 @@ import org.totalboumboum.network.newstream.event.NetworkMessage;
  */
 public class ServerGeneralConnection implements Runnable
 {	
-	public ServerGeneralConnection(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles)
+	public ServerGeneralConnection(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles, boolean direct, boolean central)
 	{	// set data
 		this.playerProfiles.addAll(playerProfiles);
-		initGameInfo(allowedPlayers,tournamentName,tournamentType,playerScores,playerProfiles);
+		initGameInfo(allowedPlayers,tournamentName,tournamentType,playerScores,playerProfiles,direct,central);
 		
 		// launch thread
 		Thread thread = new Thread(this);
@@ -59,9 +62,12 @@ public class ServerGeneralConnection implements Runnable
 	// GAME INFO	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private GameInfo gameInfo = null;
+	private Lock gameInfoLock = new ReentrantLock();
 	
-	private void initGameInfo(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles)
-	{	gameInfo = new GameInfo();
+	private void initGameInfo(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles, boolean direct, boolean central)
+	{	gameInfoLock.lock();
+		
+		gameInfo = new GameInfo();
 	
 		// players
 		gameInfo.setAllowedPlayers(allowedPlayers);
@@ -84,64 +90,74 @@ public class ServerGeneralConnection implements Runnable
 //		result.setLastIp(lastIp);	// TODO info locale au client
 //		result.setPreferred(preferred); // TODO info locale au client
 //		result.setUses(uses); 		// TODO info locale au client
-		hostInfo.setState(hostState);
+		hostInfo.setState(HostState.OPEN);
 		hostInfo.setCentral(central);
 		hostInfo.setDirect(direct);
 		gameInfo.setHostInfo(hostInfo);
+		
+		gameInfoLock.unlock();
 	}
 	
 	public GameInfo getGameInfo()
-	{	return gameInfo;
+	{	GameInfo result = null;
+		
+		gameInfoLock.lock();
+		result = gameInfo.copy();
+		gameInfoLock.unlock();
+		
+		return result;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// HOST STATE	/////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private HostState hostState = HostState.OPEN;
-	
-	public void setHostState(HostState hostState)
-	{	this.hostState = hostState;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CENTRAL		/////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean central;
-	
-	public void setCentral(boolean central)
-	{	this.central = central;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// DIRECT		/////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean direct;
-	
-	public void setDirect(boolean direct)
-	{	this.direct = direct;
+	public void updateHostState(HostState hostState)
+	{	NetworkMessage message;
+		
+		gameInfoLock.lock();
+		
+		gameInfo.getHostInfo().setState(hostState);
+		GameInfo copy = gameInfo.copy();
+		message = new ConfigurationNetworkMessage(NetworkInfo.UPDATE_GAME_INFO,copy);
+		
+		gameInfoLock.unlock();
+		
+		propagateMessage(message);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PROFILES		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final List<Profile> playerProfiles = new ArrayList<Profile>();
+	private Lock profileLock = new ReentrantLock();
 	
 	public void addProfile(int index, Profile profile)
-	{	//TODO must add the profile localy and then fire the appropriate event regarding players, and also gameinfo (player average level)
+	{	profileLock.lock();
+		
+		//TODO must add the profile localy and then fire the appropriate event regarding players, and also gameinfo (player average level)
+		
+		profileLock.unlock();
 	}
 
 	public void setProfile(int index, Profile profile)
-	{	//TODO
+	{	profileLock.lock();
+		
+		//TODO
+		
+		profileLock.unlock();
 	}
 
 	public void removeProfile(int index)
-	{
+	{	profileLock.lock();
+		
 		// TODO
+		
+		profileLock.unlock();
 	}
 	
 	public void removeProfile(Profile profile)
-	{
+	{	profileLock.lock();
+		
 		// TODO
+		
+		profileLock.unlock();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -179,24 +195,36 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	// CONNECTIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final List<ServerIndividualConnection> individualConnections = new ArrayList<ServerIndividualConnection>();
+	private Lock connectionsLock = new ReentrantLock();
 	
-	public synchronized void propagateMessage(NetworkMessage message)
-	{	for(ServerIndividualConnection connection: individualConnections)
+	public void propagateMessage(NetworkMessage message)
+	{	connectionsLock.lock();
+	
+		for(ServerIndividualConnection connection: individualConnections)
 		{	if(message instanceof ConfigurationNetworkMessage && !connection.getMode())
 				connection.writeMessage(message);
 			else if(!(message instanceof ConfigurationNetworkMessage) && connection.getMode())
 				connection.writeMessage(message);
 		}
+		
+		connectionsLock.unlock();
 	}
 	
-	public synchronized void createConnection(Socket socket) throws IOException
-	{	ServerIndividualConnection individualConnection = new ServerIndividualConnection(this,socket);
+	public void createConnection(Socket socket) throws IOException
+	{	connectionsLock.lock();
+	
+		ServerIndividualConnection individualConnection = new ServerIndividualConnection(this,socket);
+		
 		individualConnections.add(individualConnection);
 	}
 	
-	public synchronized void removeConnection(ServerIndividualConnection connection)
-	{	connection.finish();
+	public void removeConnection(ServerIndividualConnection connection)
+	{	connectionsLock.lock();
+	
+		connection.finish();
 		individualConnections.remove(connection);
+		
+		connectionsLock.unlock();
 	}
 
 	/////////////////////////////////////////////////////////////////

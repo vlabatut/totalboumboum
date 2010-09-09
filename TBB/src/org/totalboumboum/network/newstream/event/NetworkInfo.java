@@ -34,23 +34,29 @@ public enum NetworkInfo
 	REQUEST_PLAYERS_LIST,
 	/** client adds a new player */
 	REQUEST_PLAYERS_ADD,
+	/** server sends game information */ 
+	UPDATE_GAME_INFO,
+	/** server sends players list */
+	UPDATE_PLAYERS_LIST,
 	
-	/**
-	 * TODO faire un dessin pr visualiser les ps
-	 * >> possible qu'il y ait concurrence qd plusieurs clients veulent ajouter un jour en même temps
-	 */
 	
 	// tournament level
 	/** client requests current tournament stats */
 	REQUEST_TOURNAMENT_STATS,
+	/** server sends current tournament stats */
+	UPDATE_TOURNAMENT_STATS,
 
 	// match level
 	/** client requests current match stats */
 	REQUEST_MATCH_STATS,
+	/** server sends current match stats */
+	UPDATE_MATCH_STATS,
 	
 	// round level
 	/** client requests current round stats */
 	REQUEST_ROUND_STATS,
+	/** server sends current round stats */
+	UPDATE_ROUND_STATS,
 	
 	// in-game level
 	/** client indicates it leaves the tournament */

@@ -296,7 +296,9 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener,
 				}
 				playersScores.add(score);
 			}
-			ServerGeneralConnection connection = new ServerGeneralConnection(allowedPlayers,tournamentName,tournamentType,playersScores,playerProfiles);
+			boolean direct = true; 		// TODO should be decided by a button or something
+			boolean central = false;	// TODO same thing as above
+			ServerGeneralConnection connection = new ServerGeneralConnection(allowedPlayers,tournamentName,tournamentType,playersScores,playerProfiles,direct,central);
 			Configuration.getConnectionsConfiguration().setServerConnection(connection);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS))
