@@ -1559,5 +1559,4 @@ public class Launcher
 	 *    individuelles doivent être synchro, afin d'éviter par ex que plusieurs clients
 	 *    ne demande la même tâche en même temps, risquant une interférence
 	 */ 
-	
 }
