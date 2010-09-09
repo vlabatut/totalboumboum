@@ -63,6 +63,7 @@ public class GamesData extends EntitledDataPanel implements GameListSubPanelList
 	
 	public GamesData(SplitMenuPanel container)
 	{	super(container);
+	
 		ClientGeneralConnection generalConnection = Configuration.getConnectionsConfiguration().getClientConnection();
 		generalConnection.addListener(this);
 		List<GameInfo> gamesList = generalConnection.getGameList();
@@ -220,6 +221,7 @@ catch (UnknownHostException e)
 			}
 
 			setDataPart(mainPanel);
+			generalConnection.requestGameInfos();
 		}
 	}
 	

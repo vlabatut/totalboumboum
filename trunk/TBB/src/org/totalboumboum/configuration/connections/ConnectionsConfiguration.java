@@ -80,11 +80,6 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	private HashMap<String,HostInfo> hosts = null;
 	
-	public void initHosts() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	if(hosts==null)
-			hosts = HostsLoader.loadHosts();
-	}
-	
 	public HostInfo createHost(String ip)
 	{	HostInfo result = null;
 	
@@ -190,6 +185,14 @@ public class ConnectionsConfiguration
 
 	public void setClientConnection(ClientGeneralConnection clientConnection)
 	{	this.clientConnection = clientConnection;
+	}
+	
+	public void initClientConnection() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	if(clientConnection==null)
+		{	HostsLoader.loadHosts();
+			List<HostInfo> h = new ArrayList<HostInfo>(hosts.values());
+			clientConnection = new ClientGeneralConnection(h);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////

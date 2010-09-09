@@ -26,6 +26,9 @@ import java.util.List;
 
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
+import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
+import org.totalboumboum.network.newstream.event.NetworkInfo;
+import org.totalboumboum.network.newstream.event.NetworkMessage;
 
 /**
  * 
@@ -47,6 +50,12 @@ public class ClientGeneralConnection
 	// CONNECTIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final List<ClientIndividualConnection> individualConnections = new ArrayList<ClientIndividualConnection>();
+	
+	public void requestGameInfos()
+	{	NetworkMessage message = new ConfigurationNetworkMessage(NetworkInfo.REQUEST_GAME_INFO);
+		for(ClientIndividualConnection connection: individualConnections)
+			connection.writeMessage(message);
+	}
 	
 	public void createConnection(HostInfo hostInfo)
 	{	ClientIndividualConnection individualConnection = new ClientIndividualConnection(this,hostInfo);

@@ -71,7 +71,7 @@ public class ConnectionsConfigurationSaver
 	{	Element result = new Element(XmlNames.CENTRAL);
 		
 		// ip
-		String ip = connectionsConfiguration.getCentralIp().getHostName();
+		String ip = connectionsConfiguration.getCentralIp();
 		result.setAttribute(XmlNames.IP,ip);
 				
 		return result;

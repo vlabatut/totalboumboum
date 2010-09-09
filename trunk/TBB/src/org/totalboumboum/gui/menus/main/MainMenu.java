@@ -26,8 +26,6 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.Box;
@@ -35,8 +33,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
 import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -53,8 +49,6 @@ import org.totalboumboum.gui.menus.statistics.players.PlayerStatisticsSplitPanel
 import org.totalboumboum.gui.menus.tournament.TournamenuContainer;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.network.host.HostInfo;
-import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**
@@ -189,47 +183,10 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 			replaceWith(quickMatchContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_NETWORK))
-		{	ConnectionsConfiguration conf = Configuration.getConnectionsConfiguration();
-			try
-			{	// load and get hosts
-				conf.initHosts();
-				HashMap<String,HostInfo> hostsMap = conf.getHosts();
-				List<HostInfo> hosts = new ArrayList<HostInfo>(hostsMap.values());
-				
-				// init client general connection
-				ClientGeneralConnection connection = new ClientGeneralConnection(hosts);
-				conf.setClientConnection(connection);
-				
-				// set GUI
-				if(networkContainer==null)
-					networkContainer = new NetworkContainer(getMenuContainer(),this);
-				networkContainer.initTournament();
-				replaceWith(networkContainer);
-			}
-			catch (IllegalArgumentException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SecurityException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IllegalAccessException e1)
-			{	e1.printStackTrace();
-			}
-			catch (NoSuchFieldException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ClassNotFoundException e1)
-			{	e1.printStackTrace();
-			}
+		{	if(networkContainer==null)
+				networkContainer = new NetworkContainer(getMenuContainer(),this);
+			networkContainer.initTournament();
+			replaceWith(networkContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_ABOUT))
 		{	
