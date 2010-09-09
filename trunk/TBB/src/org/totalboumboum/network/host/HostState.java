@@ -28,7 +28,7 @@ package org.totalboumboum.network.host;
  */
 public enum HostState
 {	
-	/** one can register to the game */
+	/** one can register to the game (if there's room, that is)*/
 	OPEN,
 	/** too late to register */
 	CLOSED,

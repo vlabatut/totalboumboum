@@ -53,7 +53,6 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
 import org.totalboumboum.network.stream.network.configuration.ConfigurationServerConnectionListener;
 import org.totalboumboum.network.stream.network.configuration.ConfigurationServerConnectionManager;
-import org.totalboumboum.network.stream.network.configuration.ConfigurationServerConnectionThread;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
