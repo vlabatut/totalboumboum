@@ -22,6 +22,7 @@ package org.totalboumboum.gui.menus.network;
  */
 
 import java.awt.Dimension;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,8 +30,10 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
 import org.totalboumboum.gui.common.content.subpanel.game.GameInfoSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanelListener;
@@ -49,6 +52,7 @@ import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
 import org.totalboumboum.network.newstream.client.ClientGeneralConnectionListener;
 import org.totalboumboum.network.newstream.client.ClientIndividualConnection;
 import org.totalboumboum.tools.network.NetworkTools;
+import org.xml.sax.SAXException;
 
 /**
  * 
@@ -64,7 +68,35 @@ public class GamesData extends EntitledDataPanel implements GameListSubPanelList
 	public GamesData(SplitMenuPanel container)
 	{	super(container);
 	
-		ClientGeneralConnection generalConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+		ConnectionsConfiguration config = Configuration.getConnectionsConfiguration();
+		try
+		{	config.initClientConnection();
+		}
+		catch (IllegalArgumentException e)
+		{	e.printStackTrace();
+		}
+		catch (SecurityException e)
+		{	e.printStackTrace();
+		}
+		catch (ParserConfigurationException e)
+		{	e.printStackTrace();
+		}
+		catch (SAXException e)
+		{	e.printStackTrace();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{	e.printStackTrace();
+		}
+		catch (NoSuchFieldException e)
+		{	e.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
+		{	e.printStackTrace();
+		}
+		ClientGeneralConnection generalConnection = config.getClientConnection();
 		generalConnection.addListener(this);
 		List<GameInfo> gamesList = generalConnection.getGameList();
 		gamesMap = new HashMap<String, GameInfo>();

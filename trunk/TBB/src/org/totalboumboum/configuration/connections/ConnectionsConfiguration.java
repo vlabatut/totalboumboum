@@ -189,7 +189,7 @@ public class ConnectionsConfiguration
 	
 	public void initClientConnection() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	if(clientConnection==null)
-		{	HostsLoader.loadHosts();
+		{	hosts = HostsLoader.loadHosts();
 			List<HostInfo> h = new ArrayList<HostInfo>(hosts.values());
 			clientConnection = new ClientGeneralConnection(h);
 		}
