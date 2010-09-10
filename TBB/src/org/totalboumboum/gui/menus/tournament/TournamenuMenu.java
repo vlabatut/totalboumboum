@@ -40,7 +40,6 @@ import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSa
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.configuration.profile.ProfilesConfiguration;
 import org.totalboumboum.configuration.profile.ProfilesSelection;
-import org.totalboumboum.configuration.profile.SpriteInfo;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -51,8 +50,6 @@ import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
-import org.totalboumboum.network.stream.network.configuration.ConfigurationServerConnectionListener;
-import org.totalboumboum.network.stream.network.configuration.ConfigurationServerConnectionManager;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
@@ -63,7 +60,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener, ConfigurationServerConnectionListener
+public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	
 	public TournamenuMenu(SplitMenuPanel container, MenuPanel parent)
@@ -318,62 +315,5 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener,
 	@Override
 	public void dataPanelSelectionChanged()
 	{	refreshButtons();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CONNECTION MANAGER	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ConfigurationServerConnectionManager connectionManager = null;
-
-	@Override
-	public synchronized void profileAdded(Profile profile)
-	{	// possibly add the profile to the local ones
-		try
-		{	Configuration.getProfilesConfiguration().insertProfile(profile);
-		}
-		catch (IllegalArgumentException e)
-		{	e.printStackTrace();
-		}
-		catch (SecurityException e)
-		{	e.printStackTrace();
-		}
-		catch (IOException e)
-		{	e.printStackTrace();
-		}
-		catch (ParserConfigurationException e)
-		{	e.printStackTrace();
-		}
-		catch (SAXException e)
-		{	e.printStackTrace();
-		}
-		catch (IllegalAccessException e)
-		{	e.printStackTrace();
-		}
-		catch (NoSuchFieldException e)
-		{	e.printStackTrace();
-		}
-		catch (ClassNotFoundException e)
-		{	e.printStackTrace();
-		}
-
-		// add the profile to the selection
-		ProfilesSelection profilesSelection = tournamentConfiguration.getProfilesSelection();
-		if(!profilesSelection.containsProfile(profile))
-			profilesSelection.addProfile(profile);
-		
-		// update the GUI
-		playersData.refresh();
-	}
-
-	@Override
-	public synchronized void profileRemoved(String id)
-	{	
-		playersData.refresh();
-	}
-
-	@Override
-	public synchronized void spriteChanged(String id, SpriteInfo sprite)
-	{	
-		playersData.refresh();
 	}
 }

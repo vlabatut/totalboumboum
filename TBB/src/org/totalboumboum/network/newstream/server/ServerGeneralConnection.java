@@ -214,8 +214,9 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	{	connectionsLock.lock();
 	
 		ServerIndividualConnection individualConnection = new ServerIndividualConnection(this,socket);
-		
 		individualConnections.add(individualConnection);
+		
+		connectionsLock.unlock();
 	}
 	
 	public void removeConnection(ServerIndividualConnection connection)
@@ -225,6 +226,17 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		individualConnections.remove(connection);
 		
 		connectionsLock.unlock();
+	}
+	
+	public ServerIndividualConnection getConnection(int index)
+	{	ServerIndividualConnection result;
+		connectionsLock.lock();
+		
+		result = individualConnections.get(index);
+	
+		connectionsLock.unlock();
+		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

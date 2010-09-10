@@ -23,7 +23,12 @@ package org.totalboumboum.network.newstream.server;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 
+import org.totalboumboum.configuration.controls.ControlSettings;
+import org.totalboumboum.engine.control.player.RemotePlayerControl;
+import org.totalboumboum.engine.loop.event.StreamedEvent;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.newstream.AbstractConnection;
 import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
@@ -59,10 +64,30 @@ public class ServerIndividualConnection extends AbstractConnection
 	public boolean getMode()
 	{	return inGame;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// CONTROL SETTINGS		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<ControlSettings> controlSettings; //TODO to be initialized
+	
+	public ControlSettings getControlSettings(int index)
+	{	ControlSettings result = controlSettings.get(index);
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// REMOTE PLAYER CONTROL	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private RemotePlayerControl remotePlayerControl = null;
+	
+	public void setRemotePlayerControl(RemotePlayerControl remotePlayerControl)
+	{	this.remotePlayerControl = remotePlayerControl;
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	// TODO virer les différentes classes de messages : c'est redondant avec les info incluses dans les msgs
 	@Override
 	public void messageRead(NetworkMessage message)
 	{	if(message instanceof ConfigurationNetworkMessage)
@@ -81,8 +106,8 @@ public class ServerIndividualConnection extends AbstractConnection
 			// TODO
 		}
 		else if(message instanceof RoundNetworkMessage)
-		{	
-			// TODO
+		{	if(message.getInfo().equals(NetworkInfo.INFO_PLAYER_CONTROL))
+				controlReceived(message);
 		}
 	}
 	
@@ -105,9 +130,24 @@ public class ServerIndividualConnection extends AbstractConnection
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT MESSAGES	/////////////////////////////////////
+	// TOURNAMENT MESSAGES		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 
+	/////////////////////////////////////////////////////////////////
+	// MATCH MESSAGES			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////
+	// ROUND MESSAGES			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void controlReceived(NetworkMessage message)
+	{	StreamedEvent event = (StreamedEvent) message.getData();
+		if(event instanceof RemotePlayerControlEvent)
+		{	RemotePlayerControlEvent evt = (RemotePlayerControlEvent) event;
+			remotePlayerControl.addEvent(evt);
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

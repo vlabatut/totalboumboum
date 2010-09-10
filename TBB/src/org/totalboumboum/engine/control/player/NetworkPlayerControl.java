@@ -24,29 +24,30 @@ package org.totalboumboum.engine.control.player;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.network.stream._temp.match.NetOutputServerStream;
+import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
 
 /**
- * 
+ * Client side class : fetch local player's actions to the server
  * @author Vincent Labatut
  *
  */
 public class NetworkPlayerControl extends PlayerControl 
 {	
-	public NetworkPlayerControl(ControlledPlayer player, NetOutputServerStream out)
+	public NetworkPlayerControl(ControlledPlayer player)
 	{	super(player);
-		this.out = out;
+		connection = Configuration.getConnectionsConfiguration().getClientConnection();
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// CONTAINER		/////////////////////////////////////////////
+	// CONNECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private NetOutputServerStream out;
+	private ClientGeneralConnection connection;
 	
 	/////////////////////////////////////////////////////////////////
 	// SETTINGS			/////////////////////////////////////////////
@@ -70,7 +71,7 @@ public class NetworkPlayerControl extends PlayerControl
 			if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOnKey(keyCode))
 		    {	ControlCode controlCode = new ControlCode(keyCode,true);
 		    	RemotePlayerControlEvent event = new RemotePlayerControlEvent(getSprite(), controlCode);
-		    	out.writeEvent(event);
+		    	connection.sendControl(event);
 		    }
 	    }
 	}
@@ -86,7 +87,7 @@ public class NetworkPlayerControl extends PlayerControl
 		if (!RoundVariables.loop.getEnginePause() && getControlSettings().containsOffKey(keyCode))
 	    {	ControlCode controlCode = new ControlCode(keyCode,false);
 	    	RemotePlayerControlEvent event = new RemotePlayerControlEvent(getSprite(), controlCode);
-	    	out.writeEvent(event);
+	    	connection.sendControl(event);
 	    }
 	}
 
@@ -103,7 +104,7 @@ public class NetworkPlayerControl extends PlayerControl
 		{	finished = true;
 			super.finish();
 			
-			out = null;
+			connection = null;
 		}
 	}
 }

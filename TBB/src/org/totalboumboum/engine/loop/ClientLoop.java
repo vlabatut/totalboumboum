@@ -34,6 +34,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -74,6 +77,7 @@ import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.HumanPlayer;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -107,7 +111,8 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 
 		// load level & instance
 		hollowLevel.initLevel(this);
-		zoomCoefficient = RoundVariables.zoomFactor / RoundVariables.netClientIn.getZoomCoef();
+		ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+		zoomCoefficient = RoundVariables.zoomFactor / clientConnection.getZoomCoeff();
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
 		instance.loadFiresetMap();
@@ -133,7 +138,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 			do
 			{	SpriteEvent tempEvent;
 				do
-					tempEvent = (SpriteEvent)RoundVariables.netClientIn.readEvent();
+					tempEvent = (SpriteEvent)retrieveEvent();
 				while(!(tempEvent instanceof SpriteCreationEvent));
 				event = (SpriteCreationEvent)tempEvent;
 			}
@@ -186,9 +191,9 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{	AbstractPlayer result;
 		if(profile.hasAi())
-			result = new AiPlayer(profile,base,tile,RoundVariables.netServerOut);
+			result = new AiPlayer(profile,base,tile);
 		else
-			result = new HumanPlayer(profile,base,tile,RoundVariables.netServerOut);
+			result = new HumanPlayer(profile,base,tile);
 		return result;
 	}
 
@@ -273,63 +278,102 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	/////////////////////////////////////////////////////////////////
 	// REPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ReplayEvent currentEvent = null;
+	private final List<ReplayEvent> eventList = new ArrayList<ReplayEvent>();
+	private Lock eventLock = new ReentrantLock();
+	private Condition cond = eventLock.newCondition();
+	
+	public void addEvent(ReplayEvent event)
+	{	eventLock.lock();
+		
+		eventList.add(event);
+		cond.signal();
+		
+		eventLock.unlock();
+	}
+	
+	/**
+	 * always returns an event.
+	 * if the list is empty, the thread is blocked until an event arrives
+	 * @return
+	 */
+	public ReplayEvent retrieveEvent()
+	{	ReplayEvent result = null;
+	
+		eventLock.lock();
+		try
+		{	while(eventList.isEmpty())
+				cond.await();
+			result = eventList.get(0);
+			eventList.remove(0);
+		}
+		catch(InterruptedException e)
+		{	e.printStackTrace();
+		}
+		finally
+		{	eventLock.unlock();
+		}
+		
+		return result;
+	}
 	
 	private void initEvent()
 	{	// get all the remaining useless SpriteEvents
 		ReplayEvent tempEvent;
 		do
-			tempEvent = RoundVariables.netClientIn.readEvent();
+			tempEvent = retrieveEvent();
 		while(!(tempEvent instanceof StopReplayEvent));
 
 		// get the first meaningful ReplayEvent
-		currentEvent = RoundVariables.netClientIn.readEvent();
+		//currentEvent = RoundVariables.netClientIn.readEvent();
 	}
 	
 	private void updateEvents()
 	{	if(!isOver())
-		{	// final event
-			if(currentEvent!=null && currentEvent instanceof StopReplayEvent)
-			{	setOver(true);
-			}
-			else
-			{	// read events
-				if(VERBOSE)
-					System.out.println("/////////////////////////////////////////");		
-				List<ReplayEvent> events = new ArrayList<ReplayEvent>();
-				while(currentEvent!=null && currentEvent.getTime()<getTotalEngineTime() && !(currentEvent instanceof StopReplayEvent))
-				{	events.add(currentEvent);
+		{	if(VERBOSE)
+				System.out.println("/////////////////////////////////////////");		
+				
+			List<ReplayEvent> events = new ArrayList<ReplayEvent>();
+			eventLock.lock();
+			Iterator<ReplayEvent> it = eventList.iterator();
+			while(it.hasNext())
+			{	ReplayEvent event = it.next();
+				if(event.getTime()<getTotalEngineTime())
+				{	events.add(event);
+					it.remove();
 					if(VERBOSE)
-						System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
-					currentEvent = RoundVariables.netClientIn.readEvent();
+						System.out.print("["+event.getTime()+"<"+getTotalEngineTime()+"]");		
 				}
-		
-				// process events
-				for(ReplayEvent event: events)
-				{	// sprite creation
-					if(event instanceof SpriteCreationEvent)
-					{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
-						HollowLevel hollowLevel = round.getHollowLevel();
-						Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
-						level.insertSpriteTile(sprite);
-					}
-					
-					// sprite anime change
-					else if(event instanceof SpriteChangeAnimeEvent)
-					{	SpriteChangeAnimeEvent scaEvent = (SpriteChangeAnimeEvent) event;
-						int id = scaEvent.getSpriteId();
-						Sprite sprite = level.getSprite(id);
-						if(sprite!=null) //certainly a creation-related anime change, when initializing the gesture
-							sprite.processChangeAnimeEvent(scaEvent);
-					}
-					
-					// sprite position change
-					else if(event instanceof SpriteChangePositionEvent)
-					{	SpriteChangePositionEvent scpEvent = (SpriteChangePositionEvent) event;
-						int id = scpEvent.getSpriteId();
-						Sprite sprite = level.getSprite(id);
-						sprite.processChangePositionEvent(scpEvent,zoomCoefficient);
-					}
+			}
+			eventLock.unlock();
+	
+			// process events
+			for(ReplayEvent event: events)
+			{	// sprite creation
+				if(event instanceof SpriteCreationEvent)
+				{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
+					HollowLevel hollowLevel = round.getHollowLevel();
+					Sprite sprite = hollowLevel.createSpriteFromEvent(scEvent);
+					level.insertSpriteTile(sprite);
+				}
+				
+				// sprite anime change
+				else if(event instanceof SpriteChangeAnimeEvent)
+				{	SpriteChangeAnimeEvent scaEvent = (SpriteChangeAnimeEvent) event;
+					int id = scaEvent.getSpriteId();
+					Sprite sprite = level.getSprite(id);
+					if(sprite!=null) //certainly a creation-related anime change, when initializing the gesture
+						sprite.processChangeAnimeEvent(scaEvent);
+				}
+				
+				// sprite position change
+				else if(event instanceof SpriteChangePositionEvent)
+				{	SpriteChangePositionEvent scpEvent = (SpriteChangePositionEvent) event;
+					int id = scpEvent.getSpriteId();
+					Sprite sprite = level.getSprite(id);
+					sprite.processChangePositionEvent(scpEvent,zoomCoefficient);
+				}
+				else if(event instanceof StopReplayEvent)
+				{	setOver(true);
 				}
 			}
 		}
