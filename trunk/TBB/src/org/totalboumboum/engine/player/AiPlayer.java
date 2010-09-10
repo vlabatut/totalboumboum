@@ -32,7 +32,6 @@ import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.network.stream._temp.match.NetOutputServerStream;
 import org.xml.sax.SAXException;
 
 /**
@@ -43,11 +42,7 @@ import org.xml.sax.SAXException;
 public class AiPlayer extends ControlledPlayer
 {	
 	public AiPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
-	{	this(profile,base,tile,null);
-	}
-	
-	public AiPlayer(Profile profile, HollowHeroFactory base, Tile tile, NetOutputServerStream out) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
-	{	super(profile,base,tile,out);
+	{	super(profile,base,tile);
 
 		// artificial intelligence
 //		if(this.profile.getAiName() != null)

@@ -61,6 +61,8 @@ public enum NetworkInfo
 	// in-game level
 	/** client indicates it leaves the tournament */
 	INFO_GAME_QUIT,
-	/** client indicates a player's move (while playing) */
-	INFO_GAME_MOVE
+	/** client indicates a player's action (while playing) */
+	INFO_PLAYER_CONTROL,
+	/** server sends an update event (while playing) */
+	INFO_REPLAY
 }

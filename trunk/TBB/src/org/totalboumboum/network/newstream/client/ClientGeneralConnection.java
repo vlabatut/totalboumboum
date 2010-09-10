@@ -26,6 +26,9 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.totalboumboum.engine.loop.ClientLoop;
+import org.totalboumboum.engine.loop.event.StreamedEvent;
+import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
 import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
@@ -52,12 +55,7 @@ public class ClientGeneralConnection
 	// CONNECTIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final List<ClientIndividualConnection> individualConnections = new ArrayList<ClientIndividualConnection>();
-	
-	public void requestGameInfos()
-	{	NetworkMessage message = new ConfigurationNetworkMessage(NetworkInfo.REQUEST_GAME_INFO);
-		for(ClientIndividualConnection connection: individualConnections)
-			connection.writeMessage(message);
-	}
+	private ClientIndividualConnection activeConnection;
 	
 	public void createConnection(HostInfo hostInfo)
 	{	ClientIndividualConnection individualConnection = new ClientIndividualConnection(this,hostInfo);
@@ -77,7 +75,16 @@ public class ClientGeneralConnection
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// EVENTS			/////////////////////////////////////////////
+	// CLIENT LOOP			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ClientLoop loop = null;
+	
+	public void setLoop(ClientLoop loop)
+	{	this.loop = loop;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// RECEIVED MESSAGES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Lock updateLock = new ReentrantLock();
 
@@ -98,7 +105,36 @@ public class ClientGeneralConnection
 		
 		updateLock.unlock();
 	}
+	
+	public void replayReceived(ReplayEvent event)
+	{	// the method invoked is already synchronized
+		loop.addEvent(event);
+	}
 
+	/////////////////////////////////////////////////////////////////
+	// SENT MESSAGES		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void sendControl(StreamedEvent event)
+	{	NetworkMessage message = new ConfigurationNetworkMessage(NetworkInfo.INFO_PLAYER_CONTROL,event);
+		activeConnection.writeMessage(message);
+	}
+	
+	public void requestGameInfos()
+	{	NetworkMessage message = new ConfigurationNetworkMessage(NetworkInfo.REQUEST_GAME_INFO);
+		for(ClientIndividualConnection connection: individualConnections)
+			connection.writeMessage(message);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ZOOM COEFF		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Double zoomCoeff = null;
+	
+	// TODO not supposed to be synch since it should be defined long before being needed (right?)
+	public Double getZoomCoeff()
+	{	return zoomCoeff;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

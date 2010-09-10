@@ -23,30 +23,38 @@ package org.totalboumboum.engine.control.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.network.stream._temp.match.NetInputServerStream;
+import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
+import org.totalboumboum.network.newstream.server.ServerIndividualConnection;
 
 /**
+ * Server side class: fetch the actions of a remote player
  * 
  * @author Vincent Labatut
  *
  */
 public class RemotePlayerControl
 {	
-	public RemotePlayerControl(NetInputServerStream in)
-	{	this.in = in;
+	public RemotePlayerControl(int index)
+	{	ServerGeneralConnection generalConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+		connection = generalConnection.getConnection(index);
+		connection.setRemotePlayerControl(this);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private NetInputServerStream in = null;
+	private ServerIndividualConnection connection = null;
 	
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
@@ -59,28 +67,40 @@ public class RemotePlayerControl
 		int index = sprites.size() - 1;
 		
 		// set controls settings
-		ControlSettings controlSettings = in.getControlSettings().get(index);
+		ControlSettings controlSettings = connection.getControlSettings(index);
 		sprite.setControlSettings(controlSettings);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// EVENTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private RemotePlayerControlEvent currentEvent = null;
+	private final List<RemotePlayerControlEvent> eventList = new ArrayList<RemotePlayerControlEvent>();
+	private Lock eventLock = new ReentrantLock();
+	
+	public void addEvent(RemotePlayerControlEvent event)
+	{	eventLock.lock();
+		
+	eventList.add(event);
+	
+		eventLock.unlock();
+	}
 	
 	public void update()
 	{	long totalTime = RoundVariables.loop.getTotalEngineTime();
 		List<RemotePlayerControlEvent> events = new ArrayList<RemotePlayerControlEvent>();
 		
-		for(int i=0;i<in.getSize();i++)
-		{	// read events
-			while(currentEvent!=null && currentEvent.getTime()<totalTime)
-			{	events.add(currentEvent);
+		eventLock.lock();
+		Iterator<RemotePlayerControlEvent> it = eventList.iterator();
+		while(it.hasNext())
+		{	RemotePlayerControlEvent event = it.next();
+			if(event.getTime()<totalTime)
+			{	events.add(event);
+				it.remove();
 //				if(VERBOSE)
 //					System.out.print("["+currentEvent.getTime()+"<"+getTotalEngineTime()+"]");		
-				currentEvent = in.readEvent(i);
 			}
 		}
+		eventLock.unlock();
 		
 		// process events
 		for(RemotePlayerControlEvent event: events)
@@ -104,7 +124,7 @@ public class RemotePlayerControl
 		{	finished = true;
 		
 			sprites.clear();
-			in = null;
+			connection = null;
 		}
 	}
 }

@@ -1532,6 +1532,22 @@ public class Launcher
 	// bah non, en fait on n'a jamais besoin de faire ça !
 	
 	/**
+	 * utilisation de lock : mettre unlock dans un block finally
+	 * 
+	 * public class MaClasse
+		{	...
+			public void maMethode(...)
+			{	verrou.lock();
+				try
+				{	//section critique...
+				}
+				finally
+				{	verrou.unlock();
+				}
+				...
+	 */
+	
+	/**
 	 * TODO
 	 * 
 	 * faut vraiment implémenter les time-outs :
