@@ -129,7 +129,7 @@ public class ServerLoop extends LocalLoop
 		}
 		
 		// create remote controls
-		remoteControls = new RemotePlayerControl(RoundVariables.netServerIn);
+		remoteControls = new RemotePlayerControl();
 		
 		// create sprites and stuff
 		HashMap<String,Integer> items = plyrs.getInitialItems();

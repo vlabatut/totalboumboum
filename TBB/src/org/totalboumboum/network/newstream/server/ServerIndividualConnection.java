@@ -23,10 +23,7 @@ package org.totalboumboum.network.newstream.server;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.List;
 
-import org.totalboumboum.configuration.controls.ControlSettings;
-import org.totalboumboum.engine.control.player.RemotePlayerControl;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.network.game.GameInfo;
@@ -65,25 +62,6 @@ public class ServerIndividualConnection extends AbstractConnection
 	{	return inGame;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// CONTROL SETTINGS		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<ControlSettings> controlSettings; //TODO to be initialized
-	
-	public ControlSettings getControlSettings(int index)
-	{	ControlSettings result = controlSettings.get(index);
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// REMOTE PLAYER CONTROL	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private RemotePlayerControl remotePlayerControl = null;
-	
-	public void setRemotePlayerControl(RemotePlayerControl remotePlayerControl)
-	{	this.remotePlayerControl = remotePlayerControl;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -144,7 +122,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	{	StreamedEvent event = (StreamedEvent) message.getData();
 		if(event instanceof RemotePlayerControlEvent)
 		{	RemotePlayerControlEvent evt = (RemotePlayerControlEvent) event;
-			remotePlayerControl.addEvent(evt);
+			generalConnection.controlReceived(evt);
 		}
 	}
 	
