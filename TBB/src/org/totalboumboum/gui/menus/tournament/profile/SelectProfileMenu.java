@@ -42,6 +42,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.profiles.select.SelectedProfileData;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**
@@ -124,10 +125,19 @@ public class SelectProfileMenu extends InnerMenuPanel
 				{	e1.printStackTrace();
 				}
 				// add to profiles list
+				ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
 				if(index<profiles.size())
-					profiles.set(index,profile);
+				{	profiles.set(index,profile);
+					// NOTE this would be so much cleaner with an events system...
+					if(connection!=null)
+						connection.profileSet(index,profile);
+				}
 				else
-					profiles.add(profile);
+				{	profiles.add(profile);
+					// NOTE this would be so much cleaner with an events system...
+					if(connection!=null)
+						connection.profileAdded(profile);
+				}
 			}
 			parent.refresh();
 			replaceWith(parent);

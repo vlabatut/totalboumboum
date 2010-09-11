@@ -150,7 +150,7 @@ public class ServerGeneralConnection implements Runnable
 	private final List<Profile> playerProfiles = new ArrayList<Profile>();
 	private Lock profileLock = new ReentrantLock();
 	
-	public void profileAdded(int index, Profile profile)
+	public void profileAdded(Profile profile)
 	{	gameInfoLock.lock();
 		{	// update player count
 			int playerCount = gameInfo.getPlayerCount();
@@ -171,12 +171,24 @@ public class ServerGeneralConnection implements Runnable
 		gameInfoLock.lock();
 		
 		profileLock.lock();
-		{	playerProfiles.remove(profile);
+		{	// update players list
+			playerProfiles.add(profile);
 			
 			// send the appropriate message
 			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_PLAYERS_LIST,playerProfiles);
 			propagateMessage(message);
 		}
+		profileLock.unlock();
+	}
+	
+	public void profilesAdded(List<Profile> profiles)
+	{	profileLock.lock();
+		
+		for(Profile profile: profiles)
+		{	if(!playerProfiles.contains(profile))
+				profileAdded(profile);
+		}
+		
 		profileLock.unlock();
 	}
 
@@ -253,7 +265,8 @@ public class ServerGeneralConnection implements Runnable
 		gameInfoLock.lock();
 		
 		profileLock.lock();
-		{	playerProfiles.remove(profile);
+		{	// update players list
+			playerProfiles.remove(profile);
 			
 			// send the appropriate message
 			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_PLAYERS_LIST,playerProfiles);

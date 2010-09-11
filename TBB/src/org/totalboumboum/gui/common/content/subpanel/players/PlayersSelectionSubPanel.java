@@ -432,6 +432,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					{	try
 						{	ProfilesConfiguration.randomlyCompleteProfiles(players,LINES-1);
 							refresh();
+							firePlayersAdded();
 						}
 						catch (ParserConfigurationException e1)
 						{	e1.printStackTrace();
@@ -492,6 +493,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					{	try
 						{	ProfilesConfiguration.rankCompleteProfiles(players,LINES-1,profile);
 							refresh();
+							firePlayersAdded();
 						}
 						catch (IllegalArgumentException e1)
 						{	e1.printStackTrace();
@@ -521,20 +523,24 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				}
 				break;
 			case COL_COLOR:
-				{	Profile profile = players.get(pos[0]-1);
+				{	int index = pos[0]-1;
+					Profile profile = players.get(index);
 					PredefinedColor color = profile.getSpriteColor();
 					color = Configuration.getProfilesConfiguration().getNextFreeColor(players,profile,color);
 					profile.getSelectedSprite().setColor(color);
 					reloadPortraits(pos[0]);
 					refreshPlayer(pos[0]);
+					fireColorSet(index);
 				}
 				break;
 			case COL_CONTROLS:
-				{	Profile profile = players.get(pos[0]-1);
-					int index = profile.getControlSettingsIndex();
-					index = Configuration.getProfilesConfiguration().getNextFreeControls(players,index);
-					profile.setControlSettingsIndex(index);
-					setLabelText(pos[0],pos[2],controlTexts.get(index),controlTooltips.get(index));
+				{	int index = pos[0]-1;
+					Profile profile = players.get(index);
+					int ctrlIndex = profile.getControlSettingsIndex();
+					ctrlIndex = Configuration.getProfilesConfiguration().getNextFreeControls(players,ctrlIndex);
+					profile.setControlSettingsIndex(ctrlIndex);
+					setLabelText(pos[0],pos[2],controlTexts.get(ctrlIndex),controlTooltips.get(ctrlIndex));
+					fireControlsSet(index);
 				}
 				break;
 		}
@@ -568,6 +574,11 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionPlayerAdded(index);
 	}
+	
+	public void firePlayersAdded()
+	{	for(PlayersSelectionSubPanelListener listener: listeners)
+			listener.playerSelectionPlayersAdded();
+	}
 
 	public void fireProfileSet(int index)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
@@ -577,5 +588,15 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	public void fireHeroSet(int index)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionHeroSet(index);
+	}
+	
+	public void fireColorSet(int index)
+	{	for(PlayersSelectionSubPanelListener listener: listeners)
+			listener.playerSelectionColorSet(index);
+	}
+	
+	public void fireControlsSet(int index)
+	{	for(PlayersSelectionSubPanelListener listener: listeners)
+			listener.playerSelectionControlsSet(index);
 	}
 }

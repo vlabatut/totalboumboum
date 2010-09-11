@@ -29,7 +29,10 @@ package org.totalboumboum.gui.common.content.subpanel.players;
 public interface PlayersSelectionSubPanelListener
 {
 	public void playerSelectionPlayerAdded(int index);
+	public void playerSelectionPlayersAdded();
 	public void playerSelectionPlayerRemoved(int index);
 	public void playerSelectionProfileSet(int index);
 	public void playerSelectionHeroSet(int index);
+	public void playerSelectionColorSet(int index);
+	public void playerSelectionControlsSet(int index);
 }
