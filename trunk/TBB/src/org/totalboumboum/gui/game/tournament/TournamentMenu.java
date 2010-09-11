@@ -36,7 +36,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.file.archive.GameArchive;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
@@ -65,7 +64,6 @@ import org.totalboumboum.gui.game.tournament.results.TournamentResults;
 import org.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;

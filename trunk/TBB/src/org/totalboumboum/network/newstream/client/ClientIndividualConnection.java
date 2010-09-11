@@ -31,12 +31,8 @@ import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
 import org.totalboumboum.network.newstream.AbstractConnection;
-import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
-import org.totalboumboum.network.newstream.event.MatchNetworkMessage;
 import org.totalboumboum.network.newstream.event.NetworkInfo;
 import org.totalboumboum.network.newstream.event.NetworkMessage;
-import org.totalboumboum.network.newstream.event.RoundNetworkMessage;
-import org.totalboumboum.network.newstream.event.TournamentNetworkMessage;
 
 /**
  * 
@@ -118,26 +114,12 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	@SuppressWarnings("unchecked")
 	@Override
 	public void messageRead(NetworkMessage message)
-	{	if(message instanceof ConfigurationNetworkMessage)
-		{	if(message.getInfo().equals(NetworkInfo.UPDATE_GAME_INFO))
-				gameInfoReceived((GameInfo)message.getData());
-			else if(message.getInfo().equals(NetworkInfo.UPDATE_PLAYERS_LIST))
-				playersListReceived((List<Profile>)message.getData());
-			// TODO
-		}
-		else if(message instanceof TournamentNetworkMessage)
-		{
-			// TODO
-		}
-		else if(message instanceof MatchNetworkMessage)
-		{
-			// TODO
-		}
-		else if(message instanceof RoundNetworkMessage)
-		{	if(message.getInfo().equals(NetworkInfo.INFO_REPLAY))
-				replayReceived((ReplayEvent)message.getData());
-			
-		}
+	{	if(message.getInfo().equals(NetworkInfo.UPDATE_GAME_INFO))
+			gameInfoReceived((GameInfo)message.getData());
+		else if(message.getInfo().equals(NetworkInfo.UPDATE_PLAYERS_LIST))
+			playersListReceived((List<Profile>)message.getData());
+		else if(message.getInfo().equals(NetworkInfo.INFO_REPLAY))
+			replayReceived((ReplayEvent)message.getData());
 	}
 	
 	public void writeMessage(NetworkMessage message)

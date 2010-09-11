@@ -28,6 +28,7 @@ import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.configuration.profile.ProfileLoader;
@@ -40,6 +41,7 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.menus.tournament.hero.SelectHeroSplitPanel;
 import org.totalboumboum.gui.menus.tournament.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**
@@ -148,5 +150,26 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	public void playerSelectionProfileSet(int index)
 	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,getSelectedProfiles());
 		getMenuContainer().replaceWith(selectProfilePanel);
+	}
+
+	@Override
+	public void playerSelectionPlayersAdded()
+	{	// NOTE this would be so much cleaner with an events system...
+		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(connection!=null)
+			connection.profilesAdded(playersPanel.getPlayers());
+	}
+
+	@Override
+	public void playerSelectionColorSet(int index)
+	{	Profile profile = playersPanel.getPlayer(index);
+		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(connection!=null)
+			connection.profileModified(profile);
+	}
+
+	@Override
+	public void playerSelectionControlsSet(int index)
+	{	// not used here
 	}
 }

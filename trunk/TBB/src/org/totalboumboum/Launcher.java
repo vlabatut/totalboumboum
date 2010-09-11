@@ -1575,18 +1575,6 @@ public class Launcher
 	 *    individuelles doivent être synchro, afin d'éviter par ex que plusieurs clients
 	 *    ne demande la même tâche en même temps, risquant une interférence
 	 *    
-	 * changements à gérer sur la sélection des joueurs côté serveur
-	 * 		- suppression d'un profil
-	 * 		- ajout d'un profil
-	 * 		- échange d'un profil
-	 * 		x modification d'un profil
-	 * 			x perso
-	 * 			x couleur
-	 *  	- les ajouts automatiques :
-	 *  		- aléatoire
-	 *  		- par rang
-	 * >> le faire directement sur la connection, pas la peine de passer par le menu principal...
-	 * 
 	 * pr l'histoire d'utiliser des evts sur les éléments du jeu affichés par la GUI :
 	 * ça ne concerne pas la communication entre éléments du jeu (sauf exception), qui devrait
 	 * être réalisée de manière directe.
@@ -1597,5 +1585,8 @@ public class Launcher
 	 * pose des pb de mise à jour du jeu en réseau, car on est alors obligé de duppliquer les listes.
 	 * >> réforme à organiser conjointement à la mise en place des évènements
 	 * 
+	 * faut revoir la notion de profil:
+	 * 	- connecter directement les stats
+	 *  - introduire la distinction entre profil local et distant
 	 */ 
 }

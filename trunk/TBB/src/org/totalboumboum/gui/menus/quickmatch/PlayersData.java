@@ -143,4 +143,19 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,getSelectedProfiles());
 		getMenuContainer().replaceWith(selectProfilePanel);
 	}
+
+	@Override
+	public void playerSelectionPlayersAdded()
+	{	// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void playerSelectionColorSet(int index)
+	{	// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void playerSelectionControlsSet(int index)
+	{	// TODO Auto-generated method stub
+	}
 }

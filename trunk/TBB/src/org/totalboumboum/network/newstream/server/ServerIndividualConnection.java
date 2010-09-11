@@ -28,12 +28,8 @@ import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.newstream.AbstractConnection;
-import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
-import org.totalboumboum.network.newstream.event.MatchNetworkMessage;
 import org.totalboumboum.network.newstream.event.NetworkInfo;
 import org.totalboumboum.network.newstream.event.NetworkMessage;
-import org.totalboumboum.network.newstream.event.RoundNetworkMessage;
-import org.totalboumboum.network.newstream.event.TournamentNetworkMessage;
 
 /**
  * 
@@ -72,25 +68,13 @@ public class ServerIndividualConnection extends AbstractConnection
 	// TODO virer les différentes classes de messages : c'est redondant avec les info incluses dans les msgs
 	@Override
 	public void messageRead(NetworkMessage message)
-	{	if(message instanceof ConfigurationNetworkMessage)
-		{	if(message.getInfo().equals(NetworkInfo.REQUEST_GAME_INFO))
-				gameInfoRequested();
-			else if(message.getInfo().equals(NetworkInfo.REQUEST_PLAYERS_LIST))
-				playersListRequested();
-			// TODO
-		}
-		else if(message instanceof TournamentNetworkMessage)
-		{	
-			// TODO
-		}
-		else if(message instanceof MatchNetworkMessage)
-		{	
-			// TODO
-		}
-		else if(message instanceof RoundNetworkMessage)
-		{	if(message.getInfo().equals(NetworkInfo.INFO_PLAYER_CONTROL))
+	{	// TODO maybe those should be filtered? or a standard reply is always provided by the corresponding function?
+		if(message.getInfo().equals(NetworkInfo.REQUEST_GAME_INFO))
+			gameInfoRequested();
+		else if(message.getInfo().equals(NetworkInfo.REQUEST_PLAYERS_LIST))
+			playersListRequested();
+		else if(message.getInfo().equals(NetworkInfo.INFO_PLAYER_CONTROL))
 				controlReceived(message);
-		}
 	}
 	
 	public void writeMessage(NetworkMessage message)
@@ -102,7 +86,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	private void gameInfoRequested()
 	{	GameInfo gameInfo = generalConnection.getGameInfo();
-		ConfigurationNetworkMessage message = new ConfigurationNetworkMessage(NetworkInfo.REQUEST_GAME_INFO,gameInfo);
+		NetworkMessage message = new NetworkMessage(NetworkInfo.REQUEST_GAME_INFO,gameInfo);
 		writer.addMessage(message);
 	}
 	

@@ -300,4 +300,20 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 		SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,players);
 		getMenuContainer().replaceWith(selectProfilePanel);
 	}
+
+
+	@Override
+	public void playerSelectionPlayersAdded()
+	{	// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void playerSelectionColorSet(int index)
+	{	// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void playerSelectionControlsSet(int index)
+	{	// TODO Auto-generated method stub
+	}
 }

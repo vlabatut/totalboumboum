@@ -31,7 +31,6 @@ import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
-import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
 import org.totalboumboum.network.newstream.event.NetworkInfo;
 import org.totalboumboum.network.newstream.event.NetworkMessage;
 
@@ -115,12 +114,12 @@ public class ClientGeneralConnection
 	// SENT MESSAGES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void sendControl(StreamedEvent event)
-	{	NetworkMessage message = new ConfigurationNetworkMessage(NetworkInfo.INFO_PLAYER_CONTROL,event);
+	{	NetworkMessage message = new NetworkMessage(NetworkInfo.INFO_PLAYER_CONTROL,event);
 		activeConnection.writeMessage(message);
 	}
 	
 	public void requestGameInfos()
-	{	NetworkMessage message = new ConfigurationNetworkMessage(NetworkInfo.REQUEST_GAME_INFO);
+	{	NetworkMessage message = new NetworkMessage(NetworkInfo.REQUEST_GAME_INFO);
 		for(ClientIndividualConnection connection: individualConnections)
 			connection.writeMessage(message);
 	}
