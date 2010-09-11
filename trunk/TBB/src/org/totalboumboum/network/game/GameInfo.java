@@ -139,14 +139,14 @@ public class GameInfo implements Serializable
 		if(hostInfo!=null)
 			result = result + hostInfo.toString();
 		if(tournamentName!=null)
-			result = result + " " + tournamentName;
+			result = result + ", " + tournamentName;
 		if(tournamentType!=null)
-			result = result + " " + tournamentType;
+			result = result + ", " + tournamentType;
 		if(playerCount!=null)
-			result = result + " " + playerCount;
+			result = result + ", " + playerCount;
 		if(averageScore!=null)
-			result = result + " " + averageScore;
-		result = result + "{";
+			result = result + ", " + averageScore;
+		result = result + ", {";
 		for(Integer val: allowedPlayers)
 			result = result + " " + val;
 		result = result + " }";

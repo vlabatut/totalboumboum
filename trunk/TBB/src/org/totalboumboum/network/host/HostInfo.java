@@ -176,13 +176,13 @@ public class HostInfo implements Serializable
 		if(name!=null)
 			result = result + name;
 		if(state!=null)
-			result = result + state;
+			result = result + ", " + state;
 		if(uses!=null)
-			result = result + uses;
+			result = result + ", " + uses;
 		if(lastIp!=null)
-			result = result + lastIp;
+			result = result + ", " + lastIp;
 		if(lastPort!=null)
-			result = result + lastPort;
+			result = result + ", " + lastPort;
 		return result;
 	}
 }
