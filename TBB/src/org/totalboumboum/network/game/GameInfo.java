@@ -129,4 +129,27 @@ public class GameInfo implements Serializable
 		
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// STRING				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	String result = "";
+		if(hostInfo!=null)
+			result = result + hostInfo.toString();
+		if(tournamentName!=null)
+			result = result + " " + tournamentName;
+		if(tournamentType!=null)
+			result = result + " " + tournamentType;
+		if(playerCount!=null)
+			result = result + " " + playerCount;
+		if(averageScore!=null)
+			result = result + " " + averageScore;
+		result = result + "{";
+		for(Integer val: allowedPlayers)
+			result = result + " " + val;
+		result = result + " }";
+		return result;
+	}
 }
