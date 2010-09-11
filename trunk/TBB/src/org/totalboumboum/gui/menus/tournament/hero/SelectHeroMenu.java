@@ -31,6 +31,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.configuration.profile.ProfileLoader;
 import org.totalboumboum.configuration.profile.SpriteInfo;
@@ -41,6 +42,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.explore.heroes.select.SelectedHeroData;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**
@@ -126,10 +128,12 @@ public class SelectHeroMenu extends InnerMenuPanel
 				}
 			}
 			parent.refresh();
-//			if(parent instanceof TournamentSplitPanel)
-//			{	// NOTE this would be so much cleaner with an events system...
-//				((TournamentMenu)((TournamentSplitPanel)parent).getMenuPart()).profileModified(profile);
-//			}
+			
+			// NOTE this would be so much cleaner with an events system...
+			ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+			if(connection!=null)
+				connection.profileModified(profile);
+
 			replaceWith(parent);
 	    }
 	} 

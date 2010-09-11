@@ -40,9 +40,10 @@ import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
 import org.totalboumboum.network.host.HostState;
-import org.totalboumboum.network.newstream.event.ConfigurationNetworkMessage;
 import org.totalboumboum.network.newstream.event.NetworkInfo;
 import org.totalboumboum.network.newstream.event.NetworkMessage;
+import org.totalboumboum.statistics.GameStatistics;
+import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 
 /**
  * 
@@ -101,9 +102,8 @@ public class ServerGeneralConnection implements Runnable
 		double averageScore = 0;
 		for(Double d: playerScores)
 			averageScore = averageScore + d;
-		averageScore = averageScore / playerCount;
-		gameInfo.setAverageScore(averageScore);
-
+		averageScore = averageScore / playerScores.size();
+		gameInfo.setAverageScore(averageScore);		
 		// tournament type
 		gameInfo.setTournamentType(tournamentType);
 
@@ -137,7 +137,7 @@ public class ServerGeneralConnection implements Runnable
 		
 		gameInfo.getHostInfo().setState(hostState);
 		GameInfo copy = gameInfo.copy();
-		message = new ConfigurationNetworkMessage(NetworkInfo.UPDATE_GAME_INFO,copy);
+		message = new NetworkMessage(NetworkInfo.UPDATE_GAME_INFO,copy);
 		
 		gameInfoLock.unlock();
 		
@@ -151,42 +151,114 @@ public class ServerGeneralConnection implements Runnable
 	private Lock profileLock = new ReentrantLock();
 	
 	public void profileAdded(int index, Profile profile)
-	{	profileLock.lock();
+	{	gameInfoLock.lock();
+		{	// update player count
+			int playerCount = gameInfo.getPlayerCount();
+			playerCount ++;
+			gameInfo.setPlayerCount(playerCount);
+			
+			// update average score
+			double averageScore = gameInfo.getAverageScore();
+			RankingService rankingService = GameStatistics.getRankingService();
+			double score = rankingService.getPlayerRank(profile.getId());
+			averageScore = (averageScore*playerProfiles.size()*playerProfiles.size()+score) / (playerProfiles.size()+1);
+			gameInfo.setAverageScore(averageScore);
+	
+			// send the appropriate message 
+			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_GAME_INFO,gameInfo);
+			propagateMessage(message);
+		}		
+		gameInfoLock.lock();
 		
-		//TODO must add the profile localy and then fire the appropriate event regarding players, and also gameinfo (player average level)
-		
+		profileLock.lock();
+		{	playerProfiles.remove(profile);
+			
+			// send the appropriate message
+			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_PLAYERS_LIST,playerProfiles);
+			propagateMessage(message);
+		}
 		profileLock.unlock();
 	}
 
+	/**
+	 * some profile was switched for another one
+	 */
 	public void profileSet(int index, Profile profile)
-	{	profileLock.lock();
+	{	gameInfoLock.lock();
+		{	// update average score
+			double averageScore = gameInfo.getAverageScore();
+			Profile oldProfile = playerProfiles.get(index);
+			RankingService rankingService = GameStatistics.getRankingService();
+			double oldScore = rankingService.getPlayerRank(oldProfile.getId());
+			averageScore = averageScore - oldScore/playerProfiles.size();
+			double newScore = rankingService.getPlayerRank(profile.getId());
+			averageScore = averageScore + newScore/playerProfiles.size();
+			gameInfo.setAverageScore(averageScore);
+
+			// send the appropriate message 
+			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_GAME_INFO,gameInfo);
+			propagateMessage(message);
+		}		
+		gameInfoLock.lock();
 		
-		//TODO
-		
+		profileLock.lock();
+		{	// update profiles list
+			playerProfiles.set(index,profile);
+			
+			// send the appropriate message 
+			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_PLAYERS_LIST,playerProfiles);
+			propagateMessage(message);
+		}		
 		profileLock.unlock();
 	}
 
+	/**
+	 * just a change of color or sprite in a profile
+	 */
 	public void profileModified(Profile profile)
 	{	profileLock.lock();
-		
-		//TODO
-		
+		{	// send the appropriate message
+			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_PLAYERS_LIST,playerProfiles);
+			propagateMessage(message);
+		}		
 		profileLock.unlock();
 	}
 
 	public void profileRemoved(int index)
 	{	profileLock.lock();
-		
-		// TODO
-		
+		{	Profile profile = playerProfiles.get(index);
+			profileRemoved(profile);
+		}
 		profileLock.unlock();
 	}
 	
 	public void profileRemoved(Profile profile)
-	{	profileLock.lock();
+	{	gameInfoLock.lock();
+		{	// update player count
+			int playerCount = gameInfo.getPlayerCount();
+			playerCount --;
+			gameInfo.setPlayerCount(playerCount);
+			
+			// update average score
+			double averageScore = gameInfo.getAverageScore();
+			RankingService rankingService = GameStatistics.getRankingService();
+			double score = rankingService.getPlayerRank(profile.getId());
+			averageScore = (averageScore*playerProfiles.size() - score) / (playerProfiles.size()-1);
+			gameInfo.setAverageScore(averageScore);
+	
+			// send the appropriate message 
+			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_GAME_INFO,gameInfo);
+			propagateMessage(message);
+		}		
+		gameInfoLock.lock();
 		
-		// TODO
-		
+		profileLock.lock();
+		{	playerProfiles.remove(profile);
+			
+			// send the appropriate message
+			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_PLAYERS_LIST,playerProfiles);
+			propagateMessage(message);
+		}
 		profileLock.unlock();
 	}
 	
@@ -228,12 +300,19 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	private Lock connectionsLock = new ReentrantLock();
 	
 	public void propagateMessage(NetworkMessage message)
-	{	connectionsLock.lock();
+	{	NetworkInfo info = message.getInfo();
+		connectionsLock.lock();
 	
 		for(ServerIndividualConnection connection: individualConnections)
-		{	if(message instanceof ConfigurationNetworkMessage && !connection.getMode())
-				connection.writeMessage(message);
-			else if(!(message instanceof ConfigurationNetworkMessage) && connection.getMode())
+		{	boolean send = false;
+			
+			if(info==NetworkInfo.UPDATE_GAME_INFO)
+				send = connection.getState()==ClientState.SELECTING_GAME
+						|| connection.getState()==ClientState.SELECTING_PLAYERS;
+			else if(info==NetworkInfo.UPDATE_PLAYERS_LIST)
+				send = connection.getState()==ClientState.SELECTING_PLAYERS;
+			
+			if(send)	
 				connection.writeMessage(message);
 		}
 		

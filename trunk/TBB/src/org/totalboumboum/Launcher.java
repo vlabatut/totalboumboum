@@ -1579,16 +1579,23 @@ public class Launcher
 	 * 		- suppression d'un profil
 	 * 		- ajout d'un profil
 	 * 		- échange d'un profil
-	 * 		- modification d'un profil
-	 * 			- perso
-	 * 			- couleur
+	 * 		x modification d'un profil
+	 * 			x perso
+	 * 			x couleur
 	 *  	- les ajouts automatiques :
 	 *  		- aléatoire
 	 *  		- par rang
 	 * >> le faire directement sur la connection, pas la peine de passer par le menu principal...
 	 * 
-	 * nécessiter de connaitre l'état du client côté serveur,
-	 * pr savoir que lui envoyer comme info (toutes ne vont pas le concerner)
-	 * >> ça devrait remplacer l'espère de booléen 'ingame'
+	 * pr l'histoire d'utiliser des evts sur les éléments du jeu affichés par la GUI :
+	 * ça ne concerne pas la communication entre éléments du jeu (sauf exception), qui devrait
+	 * être réalisée de manière directe.
+	 * 
+	 * certains pb de gestion de la GUI viennent du fait que des données temporaires sont stockées dans les classes de la GUI
+	 * alors qu'elles seraient mieux controlées et intégrées si elles étaient du côté du jeu
+	 * exemple: sélection temporaire de joueurs lors de la configuration d'un joueur. le fait que ces données soient dans la GUI
+	 * pose des pb de mise à jour du jeu en réseau, car on est alors obligé de duppliquer les listes.
+	 * >> réforme à organiser conjointement à la mise en place des évènements
+	 * 
 	 */ 
 }

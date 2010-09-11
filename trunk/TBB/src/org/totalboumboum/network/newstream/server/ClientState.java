@@ -1,4 +1,4 @@
-package org.totalboumboum.network.newstream.event;
+package org.totalboumboum.network.newstream.server;
 
 /*
  * Total Boum Boum
@@ -26,18 +26,20 @@ package org.totalboumboum.network.newstream.event;
  * @author Vincent Labatut
  *
  */
-public class TournamentNetworkMessage extends NetworkMessage
-{	private static final long serialVersionUID = 1L;
-
-	public TournamentNetworkMessage(Object data)
-	{	super(data);
-	}	
-
-	public TournamentNetworkMessage(NetworkInfo info)
-	{	super(info);
-	}	
-
-	public TournamentNetworkMessage(NetworkInfo info, Object data)
-	{	super(info,data);
-	}	
+public enum ClientState
+{	// config level
+	/** client currently choosing a game */
+	SELECTING_GAME,
+	/** client has chosen a game, currently selecting his players */
+	SELECTING_PLAYERS,
+	/** client has chosen his players, currently waiting for the tournament to begin */
+	WAITING_TOURNAMENT
+	
+	// tournament level
+	
+	// match level
+	
+	// round level
+	
+	// in-game level
 }
