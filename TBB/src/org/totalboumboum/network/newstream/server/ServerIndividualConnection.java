@@ -86,7 +86,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	private void gameInfoRequested()
 	{	GameInfo gameInfo = generalConnection.getGameInfo();
-		NetworkMessage message = new NetworkMessage(NetworkInfo.REQUEST_GAME_INFO,gameInfo);
+		NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_GAME_INFO,gameInfo);
 		writer.addMessage(message);
 	}
 	
