@@ -1574,5 +1574,21 @@ public class Launcher
 	 *  - les méthodes des connexions générales susceptibles d'être appelées par les connexions
 	 *    individuelles doivent être synchro, afin d'éviter par ex que plusieurs clients
 	 *    ne demande la même tâche en même temps, risquant une interférence
+	 *    
+	 * changements à gérer sur la sélection des joueurs côté serveur
+	 * 		- suppression d'un profil
+	 * 		- ajout d'un profil
+	 * 		- échange d'un profil
+	 * 		- modification d'un profil
+	 * 			- perso
+	 * 			- couleur
+	 *  	- les ajouts automatiques :
+	 *  		- aléatoire
+	 *  		- par rang
+	 * >> le faire directement sur la connection, pas la peine de passer par le menu principal...
+	 * 
+	 * nécessiter de connaitre l'état du client côté serveur,
+	 * pr savoir que lui envoyer comme info (toutes ne vont pas le concerner)
+	 * >> ça devrait remplacer l'espère de booléen 'ingame'
 	 */ 
 }
