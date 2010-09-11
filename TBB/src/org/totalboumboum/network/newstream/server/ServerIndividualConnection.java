@@ -56,10 +56,14 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// MODE					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean inGame = false;
+	private ClientState state = ClientState.SELECTING_GAME;
 	
-	public boolean getMode()
-	{	return inGame;
+	public ClientState getState()
+	{	return state;
+	}
+	
+	public void setState(ClientState state)
+	{	this.state = state;
 	}
 
 	/////////////////////////////////////////////////////////////////

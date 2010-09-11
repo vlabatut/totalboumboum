@@ -28,15 +28,11 @@ import java.io.Serializable;
  * @author Vincent Labatut
  *
  */
-public abstract class NetworkMessage implements Serializable
+public class NetworkMessage implements Serializable
 {	private static final long serialVersionUID = 1L;
 
 	public NetworkMessage(NetworkInfo info)
 	{	this.info = info;
-	}
-	
-	public NetworkMessage(Object data)
-	{	this.data = data;
 	}
 	
 	public NetworkMessage(NetworkInfo info, Object data)
