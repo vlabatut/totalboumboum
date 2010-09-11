@@ -150,7 +150,7 @@ public class ServerGeneralConnection implements Runnable
 	private final List<Profile> playerProfiles = new ArrayList<Profile>();
 	private Lock profileLock = new ReentrantLock();
 	
-	public void addProfile(int index, Profile profile)
+	public void profileAdded(int index, Profile profile)
 	{	profileLock.lock();
 		
 		//TODO must add the profile localy and then fire the appropriate event regarding players, and also gameinfo (player average level)
@@ -158,7 +158,7 @@ public class ServerGeneralConnection implements Runnable
 		profileLock.unlock();
 	}
 
-	public void setProfile(int index, Profile profile)
+	public void profileSet(int index, Profile profile)
 	{	profileLock.lock();
 		
 		//TODO
@@ -166,7 +166,15 @@ public class ServerGeneralConnection implements Runnable
 		profileLock.unlock();
 	}
 
-	public void removeProfile(int index)
+	public void profileModified(Profile profile)
+	{	profileLock.lock();
+		
+		//TODO
+		
+		profileLock.unlock();
+	}
+
+	public void profileRemoved(int index)
 	{	profileLock.lock();
 		
 		// TODO
@@ -174,7 +182,7 @@ public class ServerGeneralConnection implements Runnable
 		profileLock.unlock();
 	}
 	
-	public void removeProfile(Profile profile)
+	public void profileRemoved(Profile profile)
 	{	profileLock.lock();
 		
 		// TODO

@@ -107,6 +107,7 @@ public class SelectHeroMenu extends InnerMenuPanel
 				spriteInfo.setFolder(spriteFolder);
 				String spritePack = heroPreview.getPack();
 				spriteInfo.setPack(spritePack);
+				
 				// reload portraits
 				try
 				{	ProfileLoader.reloadPortraits(profile);
@@ -125,6 +126,10 @@ public class SelectHeroMenu extends InnerMenuPanel
 				}
 			}
 			parent.refresh();
+//			if(parent instanceof TournamentSplitPanel)
+//			{	// NOTE this would be so much cleaner with an events system...
+//				((TournamentMenu)((TournamentSplitPanel)parent).getMenuPart()).profileModified(profile);
+//			}
 			replaceWith(parent);
 	    }
 	} 
