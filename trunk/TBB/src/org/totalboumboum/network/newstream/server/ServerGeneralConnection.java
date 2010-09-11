@@ -32,7 +32,10 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
+import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.engine.control.player.RemotePlayerControl;
+import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
@@ -56,6 +59,25 @@ public class ServerGeneralConnection implements Runnable
 		// launch thread
 		Thread thread = new Thread(this);
 		thread.start();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTROL SETTINGS		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<ControlSettings> controlSettings; //TODO to be initialized
+	
+	public ControlSettings getControlSettings(int index)
+	{	ControlSettings result = controlSettings.get(index);
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// REMOTE PLAYER CONTROL	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private RemotePlayerControl remotePlayerControl = null;
+	
+	public void setRemotePlayerControl(RemotePlayerControl remotePlayerControl)
+	{	this.remotePlayerControl = remotePlayerControl;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -239,6 +261,13 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// CONTROLS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void controlReceived(RemotePlayerControlEvent event)
+	{	remotePlayerControl.addEvent(event);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

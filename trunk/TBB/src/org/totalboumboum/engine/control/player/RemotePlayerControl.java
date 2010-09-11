@@ -35,7 +35,6 @@ import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
-import org.totalboumboum.network.newstream.server.ServerIndividualConnection;
 
 /**
  * Server side class: fetch the actions of a remote player
@@ -45,16 +44,15 @@ import org.totalboumboum.network.newstream.server.ServerIndividualConnection;
  */
 public class RemotePlayerControl
 {	
-	public RemotePlayerControl(int index)
-	{	ServerGeneralConnection generalConnection = Configuration.getConnectionsConfiguration().getServerConnection();
-		connection = generalConnection.getConnection(index);
+	public RemotePlayerControl()
+	{	connection = Configuration.getConnectionsConfiguration().getServerConnection();
 		connection.setRemotePlayerControl(this);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ServerIndividualConnection connection = null;
+	private ServerGeneralConnection connection = null;
 	
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////

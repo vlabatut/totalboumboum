@@ -40,15 +40,13 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.network.stream.network.configuration.ConfigurationClientConnection;
-import org.totalboumboum.network.stream.network.configuration.ConfigurationClientConnectionListener;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, ConfigurationClientConnectionListener
+public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	
 	public NetworkMenu(SplitMenuPanel container, MenuPanel parent)
@@ -228,25 +226,5 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener, Co
 	@Override
 	public void dataPanelSelectionChanged()
 	{	refreshButtons();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CONNECTION MANAGER	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ConfigurationClientConnection connection = null;
-
-	@Override
-	public void tournamentRead(AbstractTournament tournament)
-	{	// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void profilesRead(List<Profile> profiles)
-	{	// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void tournamentStarted(Boolean start)
-	{	// TODO Auto-generated method stub
 	}
 }

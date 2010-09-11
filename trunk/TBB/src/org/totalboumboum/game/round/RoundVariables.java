@@ -32,10 +32,6 @@ import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.file.replay.FileInputClientStream;
 import org.totalboumboum.game.file.replay.FileOutputServerStream;
-import org.totalboumboum.network.stream._temp.match.NetInputClientStream;
-import org.totalboumboum.network.stream._temp.match.NetInputServerStream;
-import org.totalboumboum.network.stream._temp.match.NetOutputClientStream;
-import org.totalboumboum.network.stream._temp.match.NetOutputServerStream;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
@@ -75,15 +71,11 @@ public class RoundVariables
 	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static FileInputClientStream fileIn = null;
-	public static NetInputClientStream netClientIn = null;
-	public static NetInputServerStream netServerIn = null;
 
 	public static ReplayEvent readEvent()
 	{	ReplayEvent result = null;
 		if(fileIn!=null)
 			result = fileIn.readEvent();
-		else if(netClientIn!=null)
-			result = netClientIn.readEvent();
 		return result;
 	}
 

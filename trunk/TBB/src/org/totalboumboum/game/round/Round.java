@@ -51,10 +51,8 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.rank.Ranks;
-import org.totalboumboum.network.stream._temp.match.NetInputClientStream;
-import org.totalboumboum.network.stream._temp.match.NetInputServerStream;
-import org.totalboumboum.network.stream._temp.match.NetOutputClientStream;
-import org.totalboumboum.network.stream._temp.match.NetOutputServerStream;
+import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
+import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
@@ -132,18 +130,21 @@ public class Round implements StatisticHolder, Serializable
 	
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
-		{	// replay
+		{	ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+			
+			// replay
 			if(fileIn!=null)
 			{	loop = new ReplayLoop(this);
 				//TODO plus logique d'initialiser stream & round ici non ?
 			}
 			// client
-			else if(netClientIn!=null)
+			else if(clientConnection!=null)
 			{	loop = new ClientLoop(this);
 				// TODO
 			}
 			// server
-			else if(netServerIn!=null)
+			else if(serverConnection!=null)
 			{	loop = new ServerLoop(this);
 				// TODO
 			}
@@ -161,10 +162,6 @@ public class Round implements StatisticHolder, Serializable
 		
 			RoundVariables.fileIn = fileIn;
 			RoundVariables.fileOut = fileOut;
-			RoundVariables.netClientIn = netClientIn;
-			RoundVariables.netClientOut = netClientOut;
-			RoundVariables.netServerIn = netServerIn;
-			RoundVariables.netServerOut = netServerOut;
 			
 			Thread animator = new Thread(loop);
 			animator.start();
@@ -175,21 +172,15 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT GAME STREAM	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	// TODO maybe should better be handled at a configuration level, like for the network connections
+	// TODO maybe all the round ingame stuff should be there too
 	private FileOutputServerStream fileOut = null;
-	private NetOutputClientStream netClientOut = null;
-	private NetOutputServerStream netServerOut = null;
+	private FileInputClientStream fileIn = null;
 /*	
 	public void setNetOutputGameStream(NetOutputServerStream netOut)
 	{	this.netOut = netOut;
 	}
 */	
-	/////////////////////////////////////////////////////////////////
-	// INPUT GAME STREAM	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private FileInputClientStream fileIn = null;
-	private NetInputClientStream netClientIn = null;
-	private NetInputServerStream netServerIn = null;
-
 	public void setInputStream(FileInputClientStream in)
 	{	fileIn = in;
 	}
@@ -230,7 +221,10 @@ public class Round implements StatisticHolder, Serializable
 	}	
 	
 	public void loopOver()
-	{	// read stats from replay if replayed
+	{	ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+		
+		// read stats from replay if replayed
 		if(fileIn!=null)
 		{	try
 			{	fileIn.finishRound();
@@ -247,12 +241,12 @@ public class Round implements StatisticHolder, Serializable
 			roundOver = true;
 		}
 		// read stats from server if network game
-		else if(netClientIn!=null)
+		else if(clientConnection!=null)
 		{	try
-			{	netClientIn.finishRound();
+			{	netClientIn.finishRound(); //TODO whatever that could consist in, must do it in the connection
 				StatisticRound stats = fileIn.getRoundStats();
 				setStats(stats);
-				netClientOut.finishRound();
+				netClientOut.finishRound(); //TODO same thing (check old version of the network classes)
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
@@ -293,9 +287,9 @@ public class Round implements StatisticHolder, Serializable
 		}
 
 		// possibly end network game
-		if(netServerOut!=null)
+		if(serverConnection!=null)
 		{	try
-			{	netServerOut.finishRound(stats);
+			{	netServerOut.finishRound(stats); //TODO like for client connection...
 				netServerIn.finishRound();
 			}
 			catch (IOException e)
