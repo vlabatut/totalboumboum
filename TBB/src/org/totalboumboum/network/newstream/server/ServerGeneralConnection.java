@@ -41,7 +41,7 @@ import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
 import org.totalboumboum.network.host.HostState;
 import org.totalboumboum.network.newstream.client.ClientState;
-import org.totalboumboum.network.newstream.message.NetworkInfo;
+import org.totalboumboum.network.newstream.message.MessageName;
 import org.totalboumboum.network.newstream.message.NetworkMessage;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
@@ -139,7 +139,7 @@ public class ServerGeneralConnection implements Runnable
 		
 		gameInfo.getHostInfo().setState(hostState);
 		GameInfo copy = gameInfo.copy();
-		message = new NetworkMessage(NetworkInfo.UPDATE_GAME_INFO,copy);
+		message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,copy);
 		
 		gameInfoLock.unlock();
 		
@@ -168,7 +168,7 @@ public class ServerGeneralConnection implements Runnable
 			gameInfo.setAverageScore(averageScore);
 	
 			// send the appropriate message 
-			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_GAME_INFO,gameInfo);
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
 			propagateMessage(message);
 		}		
 		gameInfoLock.lock();
@@ -178,7 +178,7 @@ public class ServerGeneralConnection implements Runnable
 			playerProfiles.add(profile);
 			
 			// send the appropriate message
-			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_PLAYERS_LIST,playerProfiles);
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
 			propagateMessage(message);
 		}
 		profileLock.unlock();
@@ -213,7 +213,7 @@ public class ServerGeneralConnection implements Runnable
 			gameInfo.setAverageScore(averageScore);
 
 			// send the appropriate message 
-			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_GAME_INFO,gameInfo);
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
 			propagateMessage(message);
 		}		
 		gameInfoLock.lock();
@@ -223,7 +223,7 @@ public class ServerGeneralConnection implements Runnable
 			playerProfiles.set(index,profile);
 			
 			// send the appropriate message 
-			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_PLAYERS_LIST,playerProfiles);
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
 			propagateMessage(message);
 		}		
 		profileLock.unlock();
@@ -235,7 +235,7 @@ public class ServerGeneralConnection implements Runnable
 	public void profileModified(Profile profile)
 	{	profileLock.lock();
 		{	// send the appropriate message
-			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_PLAYERS_LIST,playerProfiles);
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
 			propagateMessage(message);
 		}		
 		profileLock.unlock();
@@ -268,7 +268,7 @@ public class ServerGeneralConnection implements Runnable
 			gameInfo.setAverageScore(averageScore);
 	
 			// send the appropriate message 
-			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_GAME_INFO,gameInfo);
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
 			propagateMessage(message);
 		}		
 		gameInfoLock.lock();
@@ -278,7 +278,7 @@ public class ServerGeneralConnection implements Runnable
 			playerProfiles.remove(profile);
 			
 			// send the appropriate message
-			NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_PLAYERS_LIST,playerProfiles);
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
 			propagateMessage(message);
 		}
 		profileLock.unlock();
@@ -322,16 +322,16 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	private Lock connectionsLock = new ReentrantLock();
 	
 	public void propagateMessage(NetworkMessage message)
-	{	NetworkInfo info = message.getInfo();
+	{	MessageName info = message.getInfo();
 		connectionsLock.lock();
 	
 		for(ServerIndividualConnection connection: individualConnections)
 		{	boolean send = false;
 			
-			if(info==NetworkInfo.UPDATE_GAME_INFO)
+			if(info==MessageName.UPDATE_GAME_INFO)
 				send = connection.getState()==ClientState.SELECTING_GAME
 						|| connection.getState()==ClientState.SELECTING_PLAYERS;
-			else if(info==NetworkInfo.UPDATE_PLAYERS_LIST)
+			else if(info==MessageName.UPDATE_PLAYERS_LIST)
 				send = connection.getState()==ClientState.SELECTING_PLAYERS;
 			
 			if(send)	
