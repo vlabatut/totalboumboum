@@ -143,7 +143,10 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void playerSelectionPlayerRemoved(int index)
-	{	fireDataPanelSelectionChange();
+	{	ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(connection!=null)
+			connection.profileRemoved(index);
+		fireDataPanelSelectionChange();
 	}
 
 	@Override
