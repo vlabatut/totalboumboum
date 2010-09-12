@@ -365,14 +365,15 @@ catch (UnknownHostException e)
 	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index)
 	{	GameInfo gameInfo = connection.getGameInfo();
 		listPanel.updateGame(gameInfo);
-		GameInfo gi = gamePanel.getGameInfo();
-		if(gameInfo==gi)
-		{	gamePanel.setGameInfo(gameInfo);
-			HostInfo hostInfo = gameInfo.getHostInfo();
-			hostPanel.setHostInfo(hostInfo);
-			//validate();
-			//repaint();
-		}
+// unnecessary since the table is going to fire an event anyway		
+//		GameInfo gi = gamePanel.getGameInfo();
+//		if(gameInfo==gi)
+//		{	gamePanel.setGameInfo(gameInfo);
+//			HostInfo hostInfo = gameInfo.getHostInfo();
+//			hostPanel.setHostInfo(hostInfo);
+//			//validate();
+//			//repaint();
+//		}
 	}
 
 	@Override
