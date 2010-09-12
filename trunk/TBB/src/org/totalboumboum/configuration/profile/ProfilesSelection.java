@@ -24,6 +24,8 @@ package org.totalboumboum.configuration.profile;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.totalboumboum.game.profile.Profile;
+
 /**
  * 
  * @author Vincent Labatut
