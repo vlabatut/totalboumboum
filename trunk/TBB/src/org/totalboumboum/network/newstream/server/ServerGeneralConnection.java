@@ -33,9 +33,9 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
 import org.totalboumboum.configuration.controls.ControlSettings;
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.control.player.RemotePlayerControl;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
@@ -381,12 +381,19 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
-		
-	public synchronized boolean isFinished()
-	{	return finished;
+	private Lock finishedLock = new ReentrantLock();
+	
+	public boolean isFinished()
+	{	boolean result;
+		finishedLock.lock();
+		result = finished;
+		finishedLock.unlock();
+		return result;
 	}
 	
-	public synchronized void finish()
-	{	finished = true;
+	public void finish()
+	{	finishedLock.lock();
+		finished = true;
+		finishedLock.unlock();
 	}
 }

@@ -26,8 +26,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
 import org.totalboumboum.network.newstream.AbstractConnection;
