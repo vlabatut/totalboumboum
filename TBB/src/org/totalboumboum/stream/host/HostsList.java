@@ -1,4 +1,4 @@
-package org.totalboumboum.network.host;
+package org.totalboumboum.stream.host;
 
 /*
  * Total Boum Boum
@@ -21,21 +21,14 @@ package org.totalboumboum.network.host;
  * 
  */
 
+import java.util.HashMap;
+
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public enum HostState
-{	
-	/** one can register to the game (if there's room, that is)*/
-	OPEN,
-	/** too late to register */
-	CLOSED,
-	/** the game is currently going on */
-	PLAYING,
-	/** the game is finished and no new one has been set up yet */
-	FINISHED,
-	/** currently retrieving the host state */
-	UNKOWN;
+public class HostsList extends HashMap<String,HostInfo>
+{	private static final long serialVersionUID = 1L;
+	// TODO is this class needed?
 }

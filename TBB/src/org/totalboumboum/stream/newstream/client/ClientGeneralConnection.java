@@ -1,4 +1,4 @@
-package org.totalboumboum.network.newstream.client;
+package org.totalboumboum.stream.newstream.client;
 
 /*
  * Total Boum Boum
@@ -29,10 +29,10 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.totalboumboum.engine.loop.ClientLoop;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
-import org.totalboumboum.network.game.GameInfo;
-import org.totalboumboum.network.host.HostInfo;
-import org.totalboumboum.network.newstream.message.MessageName;
-import org.totalboumboum.network.newstream.message.NetworkMessage;
+import org.totalboumboum.stream.game.GameInfo;
+import org.totalboumboum.stream.host.HostInfo;
+import org.totalboumboum.stream.newstream.message.MessageName;
+import org.totalboumboum.stream.newstream.message.NetworkMessage;
 
 /**
  * 

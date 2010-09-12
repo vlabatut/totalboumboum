@@ -1,4 +1,4 @@
-package org.totalboumboum.network.newstream.client;
+package org.totalboumboum.stream.newstream.client;
 
 /*
  * Total Boum Boum

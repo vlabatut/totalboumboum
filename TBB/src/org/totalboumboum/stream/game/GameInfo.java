@@ -1,4 +1,4 @@
-package org.totalboumboum.network.game;
+package org.totalboumboum.stream.game;
 
 /*
  * Total Boum Boum
@@ -26,7 +26,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.totalboumboum.game.tournament.TournamentType;
-import org.totalboumboum.network.host.HostInfo;
+import org.totalboumboum.stream.host.HostInfo;
 
 /**
  * 

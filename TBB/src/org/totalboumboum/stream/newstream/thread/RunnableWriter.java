@@ -1,4 +1,4 @@
-package org.totalboumboum.network.newstream.thread;
+package org.totalboumboum.stream.newstream.thread;
 
 /*
  * Total Boum Boum
@@ -26,7 +26,7 @@ import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import org.totalboumboum.network.newstream.message.NetworkMessage;
+import org.totalboumboum.stream.newstream.message.NetworkMessage;
 
 /**
  * 
