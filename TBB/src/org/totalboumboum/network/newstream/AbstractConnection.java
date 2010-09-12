@@ -28,7 +28,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import org.totalboumboum.network.newstream.event.NetworkMessage;
+import org.totalboumboum.network.newstream.message.NetworkMessage;
 import org.totalboumboum.network.newstream.thread.RunnableReader;
 import org.totalboumboum.network.newstream.thread.RunnableWriter;
 
