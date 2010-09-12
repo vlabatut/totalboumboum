@@ -1,4 +1,4 @@
-package org.totalboumboum.stream.data.host;
+package org.totalboumboum.stream.network.data.host;
 
 /*
  * Total Boum Boum

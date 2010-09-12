@@ -1,4 +1,4 @@
-package org.totalboumboum.stream.newstream.client;
+package org.totalboumboum.stream.network.client;
 
 /*
  * Total Boum Boum
@@ -26,20 +26,10 @@ package org.totalboumboum.stream.newstream.client;
  * @author Vincent Labatut
  *
  */
-public enum ClientState
-{	// config level
-	/** client currently choosing a game */
-	SELECTING_GAME,
-	/** client has chosen a game, currently selecting his players */
-	SELECTING_PLAYERS,
-	/** client has chosen his players, currently waiting for the tournament to begin */
-	WAITING_TOURNAMENT
-	
-	// tournament level
-	
-	// match level
-	
-	// round level
-	
-	// in-game level
+public interface ClientGeneralConnectionListener
+{
+	public void connectionAdded(ClientIndividualConnection connection, int index);
+	public void connectionRemoved(ClientIndividualConnection connection, int index);
+	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index);
+	public void connectionProfilesChanged(ClientIndividualConnection connection, int index);
 }

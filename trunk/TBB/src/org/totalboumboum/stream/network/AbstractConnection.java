@@ -1,4 +1,4 @@
-package org.totalboumboum.stream.newstream;
+package org.totalboumboum.stream.network;
 
 /*
  * Total Boum Boum
@@ -28,9 +28,9 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import org.totalboumboum.stream.newstream.message.NetworkMessage;
-import org.totalboumboum.stream.newstream.thread.RunnableReader;
-import org.totalboumboum.stream.newstream.thread.RunnableWriter;
+import org.totalboumboum.stream.network.message.NetworkMessage;
+import org.totalboumboum.stream.network.thread.RunnableReader;
+import org.totalboumboum.stream.network.thread.RunnableWriter;
 
 /**
  * 
