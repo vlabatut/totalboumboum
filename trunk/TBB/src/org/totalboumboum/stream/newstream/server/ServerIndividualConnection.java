@@ -26,7 +26,7 @@ import java.net.Socket;
 
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
-import org.totalboumboum.stream.game.GameInfo;
+import org.totalboumboum.stream.data.game.GameInfo;
 import org.totalboumboum.stream.newstream.AbstractConnection;
 import org.totalboumboum.stream.newstream.client.ClientState;
 import org.totalboumboum.stream.newstream.message.MessageName;
