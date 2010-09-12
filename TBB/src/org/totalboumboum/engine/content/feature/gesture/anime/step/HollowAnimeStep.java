@@ -24,10 +24,10 @@ package org.totalboumboum.engine.content.feature.gesture.anime.step;
 import java.io.IOException;
 import java.io.Serializable;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMap;
 import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.HollowStepImage;
 import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

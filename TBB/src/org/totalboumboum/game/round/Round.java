@@ -34,8 +34,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
-import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.loop.ClientLoop;
 import org.totalboumboum.engine.loop.ReplayLoop;
@@ -44,21 +42,23 @@ import org.totalboumboum.engine.loop.Loop;
 import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.SimulationLoop;
 import org.totalboumboum.engine.player.PlayerLocation;
-import org.totalboumboum.game.file.replay.FileInputClientStream;
-import org.totalboumboum.game.file.replay.FileOutputServerStream;
 import org.totalboumboum.game.limit.LimitTime;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
-import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
-import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 import org.totalboumboum.statistics.detailed.StatisticRound;
+import org.totalboumboum.stream.file.replay.FileInputClientStream;
+import org.totalboumboum.stream.file.replay.FileOutputServerStream;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**

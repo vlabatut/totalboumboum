@@ -23,9 +23,9 @@ package org.totalboumboum.engine.content.feature.gesture.anime.direction;
 
 import java.io.IOException;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 import org.totalboumboum.engine.content.feature.gesture.anime.step.HollowAnimeStep;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

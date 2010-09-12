@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.points.PointsRankings;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 
 

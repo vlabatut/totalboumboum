@@ -29,9 +29,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfilesConfiguration;
-import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;

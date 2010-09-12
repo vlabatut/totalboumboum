@@ -28,11 +28,11 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.network.host.HostInfo;
-import org.totalboumboum.network.host.HostsLoader;
-import org.totalboumboum.network.host.HostsSaver;
-import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
-import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.data.host.HostInfo;
+import org.totalboumboum.stream.network.data.host.HostsLoader;
+import org.totalboumboum.stream.network.data.host.HostsSaver;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.event.EventName;
 import org.totalboumboum.tools.event.UpdateEvent;
 import org.totalboumboum.tools.event.UpdateListener;

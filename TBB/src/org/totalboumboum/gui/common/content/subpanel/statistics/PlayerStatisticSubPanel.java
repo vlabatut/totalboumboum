@@ -40,7 +40,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;

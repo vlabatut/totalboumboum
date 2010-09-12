@@ -28,8 +28,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.match.Match;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.tools.GameData;
 

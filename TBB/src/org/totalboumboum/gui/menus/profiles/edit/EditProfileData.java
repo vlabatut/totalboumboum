@@ -45,8 +45,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
@@ -61,6 +60,7 @@ import org.totalboumboum.gui.menus.profiles.heroes.SelectedHeroSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

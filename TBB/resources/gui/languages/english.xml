@@ -395,7 +395,7 @@
 				<text name="Color" value="Color" tooltip="Color of the character" />
 				<text name="ColorNext" value="Next" tooltip="Next color" />
 				<text name="ColorPrevious" value="Previous" tooltip="Previous color" />
-				<text name="Hero" value="Character" tooltip="Character controled by the player" />
+				<text name="Hero" value="Character" tooltip="Character controlled by the player" />
 				<text name="HeroChange" value="Select the character" tooltip="Select another character" />
 				<text name="Name" value="Name" tooltip="Name of the profile" />
 				<text name="NameChange" value="Change name" tooltip="Change the name of the profile" />
@@ -996,6 +996,7 @@
 					<text name="Controls" value="#"  tooltip="The player uses the commands number" />
 					<text name="Human" value="Human"  tooltip="This player is human-controlled" />
 					<text name="NoControls" value="-"  tooltip="This player does not use any commands" />
+					<text name="Remote" value="Remote"  tooltip="This player is remotely controlled" />
 				</group>
 			</group>
 
@@ -1014,6 +1015,7 @@
 					<text name="Computer" value="Computer" tooltip="Computer-controlled player" />
 					<text name="Delete" value="Unselect" tooltip="Unselect this profile" />
 					<text name="Human" value="Human" tooltip="Human-controlled player" />
+					<text name="Remote" value="Remote"  tooltip="This player is remotely controlled" />
 				</group>
 			</group>
 		</group>
@@ -1148,6 +1150,7 @@
 				<group name="Data">
 					<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
 					<text name="Human" value="Human"  tooltip="Human-controlled player" />
+					<text name="Remote" value="Remote"  tooltip="Remotely controlled player" />
 				</group>
 			</group>
 			
@@ -1171,6 +1174,7 @@
 				<group name="Data">
 					<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
 					<text name="Human" value="Human"  tooltip="Human-controlled player" />
+					<text name="Remote" value="Remote"  tooltip="Remotely controlled player" />
 				</group>
 			</group>
 
@@ -1198,8 +1202,9 @@
 					<text name="Lost" value="Lost"  tooltip="Total number of matches lost" />
 				</group>
 				<group name="Data">
-						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
-						<text name="Human" value="Human"  tooltip="Human-controlled player" />
+					<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
+					<text name="Human" value="Human"  tooltip="Human-controlled player" />
+					<text name="Remote" value="Remote"  tooltip="Remotely controlled player" />
 				</group>
 			</group>
 		</group>
@@ -1227,6 +1232,7 @@
 					<group name="Data">
 						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
 						<text name="Human" value="Human"  tooltip="Human player" />
+						<text name="Remote" value="Remote"  tooltip="Remotely controlled player" />
 						<text name="NoRank" value="-"  tooltip="This player is not ranked" />
 						<text name="Mean" value="Mean"  />
 						<text name="Total" value="Total"  />

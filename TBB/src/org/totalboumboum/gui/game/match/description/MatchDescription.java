@@ -27,12 +27,12 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.limit.Limit;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.MatchLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersListSubPanel;

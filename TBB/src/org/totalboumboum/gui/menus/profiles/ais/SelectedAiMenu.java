@@ -30,7 +30,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
 import org.totalboumboum.ai.AiPreview;
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;

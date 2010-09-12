@@ -29,9 +29,9 @@ import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileLoader;
 import org.totalboumboum.game.match.Match;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.xml.sax.SAXException;

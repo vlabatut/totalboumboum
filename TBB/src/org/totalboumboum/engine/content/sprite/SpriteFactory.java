@@ -21,7 +21,6 @@ package org.totalboumboum.engine.content.sprite;
  * 
  */
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.bombset.Bombset;
 import org.totalboumboum.engine.container.explosionset.Explosion;
 import org.totalboumboum.engine.container.level.instance.Instance;
@@ -42,6 +41,7 @@ import org.totalboumboum.engine.content.manager.modulation.FullModulationManager
 import org.totalboumboum.engine.content.manager.modulation.EmptyModulationManager;
 import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

@@ -29,7 +29,6 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.sprite.SpritePreview;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.ColumnsSubPanel;
@@ -39,6 +38,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.tools.images.ImageTools;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

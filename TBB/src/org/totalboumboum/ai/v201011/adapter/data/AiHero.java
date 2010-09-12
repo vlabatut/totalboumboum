@@ -21,7 +21,6 @@ package org.totalboumboum.ai.v201011.adapter.data;
  * 
  */
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
@@ -29,6 +28,7 @@ import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente un personnage du jeu, ie un sprite contrôlé par un joueur

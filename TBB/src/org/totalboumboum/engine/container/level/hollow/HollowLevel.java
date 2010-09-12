@@ -31,7 +31,6 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.bombset.Bombset;
 import org.totalboumboum.engine.container.fireset.Fireset;
 import org.totalboumboum.engine.container.fireset.FiresetMap;
@@ -59,6 +58,7 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**

@@ -26,7 +26,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.cup.CupLeg;
 import org.totalboumboum.game.tournament.cup.CupTournament;
 import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanel;

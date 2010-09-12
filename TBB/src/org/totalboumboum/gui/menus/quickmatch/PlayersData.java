@@ -29,9 +29,9 @@ import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileLoader;
-import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;

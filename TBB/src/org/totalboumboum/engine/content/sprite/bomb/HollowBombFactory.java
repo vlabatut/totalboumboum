@@ -24,9 +24,9 @@ package org.totalboumboum.engine.content.sprite.bomb;
 import java.io.IOException;
 import java.util.HashMap;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.HollowSpriteFactory;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

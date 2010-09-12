@@ -27,13 +27,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.controls.ControlSettings;
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.control.player.LocalPlayerControl;
 import org.totalboumboum.engine.control.player.NetworkPlayerControl;
 import org.totalboumboum.engine.control.player.PlayerControl;
-import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**

@@ -28,8 +28,8 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileLoader;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.gui.common.content.subpanel.statistics.PlayerStatisticSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.statistics.StatisticColumn;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;

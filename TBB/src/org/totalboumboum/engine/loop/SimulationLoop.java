@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;

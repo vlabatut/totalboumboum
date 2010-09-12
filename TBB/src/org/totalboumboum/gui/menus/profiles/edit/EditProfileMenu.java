@@ -32,10 +32,10 @@ import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileSaver;
-import org.totalboumboum.configuration.profile.ProfilesConfiguration;
-import org.totalboumboum.configuration.profile.ProfilesConfigurationSaver;
+import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
+import org.totalboumboum.configuration.profiles.ProfilesConfigurationSaver;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileSaver;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;

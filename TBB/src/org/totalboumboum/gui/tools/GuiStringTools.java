@@ -3,9 +3,9 @@ package org.totalboumboum.gui.tools;
 import java.awt.Color;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.tools.GameData;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

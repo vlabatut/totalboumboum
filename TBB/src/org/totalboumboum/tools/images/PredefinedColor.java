@@ -1,4 +1,4 @@
-package org.totalboumboum.configuration.profiles;
+package org.totalboumboum.tools.images;
 
 /*
  * Total Boum Boum

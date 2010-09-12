@@ -28,9 +28,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.ai.AbstractAiManager;
 import org.totalboumboum.ai.AiLoader;
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 

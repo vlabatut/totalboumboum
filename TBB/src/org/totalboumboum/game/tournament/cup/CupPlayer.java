@@ -23,7 +23,7 @@ package org.totalboumboum.game.tournament.cup;
 
 import java.io.Serializable;
 
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 
 /**
  * 

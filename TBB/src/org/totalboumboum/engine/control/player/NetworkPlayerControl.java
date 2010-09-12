@@ -30,7 +30,7 @@ import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.player.ControlledPlayer;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 
 /**
  * Client side class : fetch local player's actions to the server

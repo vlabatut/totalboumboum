@@ -28,9 +28,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.Portraits;
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.match.Match;
+import org.totalboumboum.game.profile.Portraits;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.AbstractTournament;

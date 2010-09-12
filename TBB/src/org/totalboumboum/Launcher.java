@@ -1555,12 +1555,6 @@ public class Launcher
 	 *    >> faut alors recommencer au bout d'un temps donné (délai = param config)
 	 *    >> cb de fois on recommence (ce nbre = param config)
 	 *    
-	 * aucun buffering toléré pour le réseau (round in-game), donc faut faire un flush à chaque
-	 * écriture dans le flux
-	 * 
-	 * when a player is unselected/selected/changed server side,
-	 * the game info must be modified (change in the players average score)
-	 * 
 	 * quand on clique sur un serveur pas encore connecté dans la liste directe
 	 * ça le met à jour. si déjà connecté, pas la peine de mettre à jour puisqu'il fait des push
 	 * mettre en place un buffer empêchant l'utilisateur de demander plusieurs mise à jour
@@ -1588,5 +1582,9 @@ public class Launcher
 	 * faut revoir la notion de profil:
 	 * 	- connecter directement les stats
 	 *  - introduire la distinction entre profil local et distant
+	 *  
+	 * en fait dès le démarrage, un process gère les tentatives de connection sur le port configuré
+	 * de cette manière, on peut toujours répondre aux tentatives de connection
+	 * >> à voir si ça ne prend pas trop de ressources ?
 	 */ 
 }

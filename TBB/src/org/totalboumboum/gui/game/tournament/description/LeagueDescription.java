@@ -28,10 +28,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.limit.Limit;
 import org.totalboumboum.game.limit.TournamentLimit;
 import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.league.LeagueTournament;
 import org.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;

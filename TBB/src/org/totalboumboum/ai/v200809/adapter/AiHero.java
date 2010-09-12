@@ -21,10 +21,10 @@ package org.totalboumboum.ai.v200809.adapter;
  * 
  */
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente un personnage du jeu, ie un sprite contrôlé par un joueur

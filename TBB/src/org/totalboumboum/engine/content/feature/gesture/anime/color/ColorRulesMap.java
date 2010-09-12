@@ -24,7 +24,7 @@ package org.totalboumboum.engine.content.feature.gesture.anime.color;
 import java.io.Serializable;
 import java.util.HashMap;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

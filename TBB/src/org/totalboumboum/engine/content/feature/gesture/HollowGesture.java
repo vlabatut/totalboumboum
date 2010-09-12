@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map.Entry;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
 import org.totalboumboum.engine.content.feature.gesture.anime.direction.HollowAnimeDirection;
@@ -36,6 +35,7 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulat
 import org.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.HollowTrajectoryDirection;
 import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

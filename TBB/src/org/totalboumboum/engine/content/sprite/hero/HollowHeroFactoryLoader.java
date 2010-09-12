@@ -38,7 +38,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.engine.EngineConfiguration;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -50,6 +49,7 @@ import org.totalboumboum.engine.content.sprite.HollowSpriteFactoryLoader;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
