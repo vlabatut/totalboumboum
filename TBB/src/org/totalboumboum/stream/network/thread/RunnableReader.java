@@ -1,4 +1,4 @@
-package org.totalboumboum.stream.newstream.thread;
+package org.totalboumboum.stream.network.thread;
 
 /*
  * Total Boum Boum
@@ -22,63 +22,74 @@ package org.totalboumboum.stream.newstream.thread;
  */
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.io.ObjectInputStream;
 
-import org.totalboumboum.stream.newstream.message.NetworkMessage;
+import org.totalboumboum.stream.network.AbstractConnection;
+import org.totalboumboum.stream.network.message.NetworkMessage;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class RunnableWriter implements Runnable
+public class RunnableReader implements Runnable
 {
-	public RunnableWriter()
+	public RunnableReader()
 	{	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONNECTION			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected AbstractConnection connection;
+	
+	public void setConnection(AbstractConnection connection)
+	{	this.connection = connection;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ObjectOutputStream out;
+	private ObjectInputStream in;
 
-	public void setStream(ObjectOutputStream out)
-	{	this.out = out;
+	public void setStream(ObjectInputStream in)
+	{	this.in = in;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public synchronized void run()
-	{	while(!isFinished() || !isEmpty())
-		{	// wait for some objects to write
-			while(isEmpty())
+	public void run()
+	{	while(!isFinished())
+		{	if(isPaused())
 			{	try
-				{	wait();
+				{	wait();	
 				}
 				catch (InterruptedException e)
-				{	//e.printStackTrace();
+				{	e.printStackTrace();
 				}
 			}
-			// write the first object
+		
 			try
-			{	NetworkMessage message = getMessage();
-				out.writeObject(message);
-				out.flush();out.reset();
+			{	Object object = in.readObject();
+				NetworkMessage message = (NetworkMessage) object;
 System.out.println(message);
+				connection.messageRead(message);
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
 			}
 		}
-
+	
 		// close stream
 		try
-		{	out.close();
-			out = null;
+		{	in.close();
+			in = null;
+			connection = null;
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
@@ -86,23 +97,20 @@ System.out.println(message);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// DATA					/////////////////////////////////////////
+	// PAUSE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Queue<NetworkMessage> data = new LinkedList<NetworkMessage>();
+	private boolean paused = false;
 	
-	private synchronized boolean isEmpty()
-	{	boolean result = data.isEmpty();
-		return result;
+	public synchronized void pause(boolean pause)
+	{	if(pause!=paused)
+		{	paused = pause;
+			if(!pause)
+				notify();
+		}
 	}
 	
-	private synchronized NetworkMessage getMessage()
-	{	NetworkMessage result = data.poll();
-		return result;
-	}
-	
-	public synchronized void addMessage(NetworkMessage message)
-	{	data.offer(message);
-		notify();
+	private synchronized boolean isPaused()
+	{	return paused;	
 	}
 
 	/////////////////////////////////////////////////////////////////

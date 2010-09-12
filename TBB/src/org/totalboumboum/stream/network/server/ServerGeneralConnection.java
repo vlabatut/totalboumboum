@@ -1,4 +1,4 @@
-package org.totalboumboum.stream.newstream.server;
+package org.totalboumboum.stream.network.server;
 
 /*
  * Total Boum Boum
@@ -40,12 +40,12 @@ import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.stream.data.game.GameInfo;
-import org.totalboumboum.stream.data.host.HostInfo;
-import org.totalboumboum.stream.data.host.HostState;
-import org.totalboumboum.stream.newstream.client.ClientState;
-import org.totalboumboum.stream.newstream.message.MessageName;
-import org.totalboumboum.stream.newstream.message.NetworkMessage;
+import org.totalboumboum.stream.network.client.ClientState;
+import org.totalboumboum.stream.network.data.game.GameInfo;
+import org.totalboumboum.stream.network.data.host.HostInfo;
+import org.totalboumboum.stream.network.data.host.HostState;
+import org.totalboumboum.stream.network.message.MessageName;
+import org.totalboumboum.stream.network.message.NetworkMessage;
 
 /**
  * 

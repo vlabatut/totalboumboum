@@ -1,4 +1,4 @@
-package org.totalboumboum.stream.data.host;
+package org.totalboumboum.stream.network.client;
 
 /*
  * Total Boum Boum
@@ -26,16 +26,20 @@ package org.totalboumboum.stream.data.host;
  * @author Vincent Labatut
  *
  */
-public enum HostState
-{	
-	/** one can register to the game (if there's room, that is)*/
-	OPEN,
-	/** too late to register */
-	CLOSED,
-	/** the game is currently going on */
-	PLAYING,
-	/** the game is finished and no new one has been set up yet */
-	FINISHED,
-	/** currently retrieving the host state */
-	UNKOWN;
+public enum ClientState
+{	// config level
+	/** client currently choosing a game */
+	SELECTING_GAME,
+	/** client has chosen a game, currently selecting his players */
+	SELECTING_PLAYERS,
+	/** client has chosen his players, currently waiting for the tournament to begin */
+	WAITING_TOURNAMENT
+	
+	// tournament level
+	
+	// match level
+	
+	// round level
+	
+	// in-game level
 }

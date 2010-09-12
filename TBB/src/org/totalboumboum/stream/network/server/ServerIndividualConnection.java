@@ -1,4 +1,4 @@
-package org.totalboumboum.stream.newstream.server;
+package org.totalboumboum.stream.network.server;
 
 /*
  * Total Boum Boum
@@ -26,11 +26,11 @@ import java.net.Socket;
 
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
-import org.totalboumboum.stream.data.game.GameInfo;
-import org.totalboumboum.stream.newstream.AbstractConnection;
-import org.totalboumboum.stream.newstream.client.ClientState;
-import org.totalboumboum.stream.newstream.message.MessageName;
-import org.totalboumboum.stream.newstream.message.NetworkMessage;
+import org.totalboumboum.stream.network.AbstractConnection;
+import org.totalboumboum.stream.network.client.ClientState;
+import org.totalboumboum.stream.network.data.game.GameInfo;
+import org.totalboumboum.stream.network.message.MessageName;
+import org.totalboumboum.stream.network.message.NetworkMessage;
 
 /**
  * 

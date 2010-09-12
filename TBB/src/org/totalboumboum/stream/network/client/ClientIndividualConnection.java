@@ -1,4 +1,4 @@
-package org.totalboumboum.stream.newstream.client;
+package org.totalboumboum.stream.network.client;
 
 /*
  * Total Boum Boum
@@ -28,11 +28,11 @@ import java.util.List;
 
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
-import org.totalboumboum.stream.data.game.GameInfo;
-import org.totalboumboum.stream.data.host.HostInfo;
-import org.totalboumboum.stream.newstream.AbstractConnection;
-import org.totalboumboum.stream.newstream.message.MessageName;
-import org.totalboumboum.stream.newstream.message.NetworkMessage;
+import org.totalboumboum.stream.network.AbstractConnection;
+import org.totalboumboum.stream.network.data.game.GameInfo;
+import org.totalboumboum.stream.network.data.host.HostInfo;
+import org.totalboumboum.stream.network.message.MessageName;
+import org.totalboumboum.stream.network.message.NetworkMessage;
 
 /**
  * 
