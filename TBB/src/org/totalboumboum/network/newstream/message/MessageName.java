@@ -50,7 +50,8 @@ public enum MessageName
 		 * 		- client just reconnected at this stage
 		 * 		- central might be interested too
 		 * behavior:
-		 * 		- server answers only when open 
+		 * 		- server answers only when it's open
+		 * 		- or to the central, anytime
 		 */
 		REQUEST_PLAYERS_LIST,
 		/** client adds a new player */
@@ -97,5 +98,30 @@ public enum MessageName
 		/** client indicates a player's action (while playing) */
 		INFO_PLAYER_CONTROL,
 		/** server sends an update event (while playing) */
-		INFO_REPLAY
+		INFO_REPLAY,
+		
+	/* 
+	 * common
+	 */
+		/** server accept/reject reconnection */
+		ANSWER_RECONNECTION,
+		/** client asks for reconnection */
+		REQUEST_RECONNECTION,
+		/** client or server asks for disconnection*/
+		REQUEST_DISCONNECTION,
+		/** client sends its new state */
+		UPDATING_STATE
 }
+
+/**
+ * reconnection process:
+ * 	- client connects and sends a REQUEST_RECONNECTION message, with its id
+ * 	- server checks if the id's
+ * 	- sends back an ANSWER_RECONNECTION message with a boolean showing acceptation or reject
+ *  - if accepted, the server then sends the necessary updates to the client
+ */
+
+/**
+ * deconnection process:
+ *  - none. can be seen as accidental, so no need to exchange any specific message 
+ */
