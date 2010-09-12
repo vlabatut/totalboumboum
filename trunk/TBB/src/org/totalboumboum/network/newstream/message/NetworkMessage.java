@@ -1,4 +1,4 @@
-package org.totalboumboum.network.newstream.event;
+package org.totalboumboum.network.newstream.message;
 
 /*
  * Total Boum Boum

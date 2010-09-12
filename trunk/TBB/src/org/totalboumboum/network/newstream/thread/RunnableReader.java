@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import org.totalboumboum.network.newstream.AbstractConnection;
-import org.totalboumboum.network.newstream.event.NetworkMessage;
+import org.totalboumboum.network.newstream.message.NetworkMessage;
 
 /**
  * 

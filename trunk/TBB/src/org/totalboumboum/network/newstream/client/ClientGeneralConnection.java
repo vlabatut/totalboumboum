@@ -31,8 +31,8 @@ import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
-import org.totalboumboum.network.newstream.event.NetworkInfo;
-import org.totalboumboum.network.newstream.event.NetworkMessage;
+import org.totalboumboum.network.newstream.message.NetworkInfo;
+import org.totalboumboum.network.newstream.message.NetworkMessage;
 
 /**
  * 

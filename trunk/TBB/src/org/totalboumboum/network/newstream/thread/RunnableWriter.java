@@ -26,7 +26,7 @@ import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import org.totalboumboum.network.newstream.event.NetworkMessage;
+import org.totalboumboum.network.newstream.message.NetworkMessage;
 
 /**
  * 
