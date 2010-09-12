@@ -33,7 +33,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorFolder;
@@ -43,6 +42,7 @@ import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMa
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.images.ImageTools;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;

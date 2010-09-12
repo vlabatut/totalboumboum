@@ -24,11 +24,11 @@ package org.totalboumboum.gui.common.content.subpanel.archive;
 import java.awt.Color;
 import java.util.List;
 
-import org.totalboumboum.game.file.archive.GameArchive;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.tools.GameData;
 
 /**

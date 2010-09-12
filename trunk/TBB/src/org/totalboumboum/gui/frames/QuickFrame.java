@@ -28,12 +28,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileLoader;
-import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.engine.loop.RegularLoop;
 import org.totalboumboum.engine.loop.LoopRenderPanel;
 import org.totalboumboum.game.match.Match;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundRenderPanel;
 import org.totalboumboum.game.tournament.AbstractTournament;

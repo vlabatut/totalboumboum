@@ -36,11 +36,10 @@ import java.util.TreeSet;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profile.Portraits;
-import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileLoader;
-import org.totalboumboum.configuration.profile.ProfilesConfiguration;
+import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
+import org.totalboumboum.game.profile.Portraits;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
@@ -51,6 +50,7 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**
@@ -208,7 +208,9 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			// type
 			{	// content
 				String profileType;
-				if(profile.hasAi())
+				if(profile.isRemote())
+					profileType = GuiKeys.COMMON_PLAYERS_SELECTION_DATA_REMOTE;
+				else if(profile.hasAi())
 					profileType = GuiKeys.COMMON_PLAYERS_SELECTION_DATA_COMPUTER;
 				else
 					profileType = GuiKeys.COMMON_PLAYERS_SELECTION_DATA_HUMAN;

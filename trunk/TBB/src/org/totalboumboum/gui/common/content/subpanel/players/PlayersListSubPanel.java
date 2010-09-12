@@ -31,8 +31,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profile.Portraits;
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Portraits;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
@@ -141,7 +141,9 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 				// profile type
 				{	String aiName = profile.getAiName();
 					String key;
-					if(aiName==null)
+					if(profile.isRemote())
+						key = GuiKeys.COMMON_PLAYERS_LIST_DATA_REMOTE;
+					else if(aiName==null)
 						key = GuiKeys.COMMON_PLAYERS_LIST_DATA_HUMAN;
 					else
 						key = GuiKeys.COMMON_PLAYERS_LIST_DATA_COMPUTER;

@@ -30,7 +30,6 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -59,6 +58,7 @@ import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.ReplayedPlayer;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.files.FileNames;

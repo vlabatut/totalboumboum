@@ -37,9 +37,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSaver;
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfilesConfiguration;
-import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -49,10 +49,10 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**

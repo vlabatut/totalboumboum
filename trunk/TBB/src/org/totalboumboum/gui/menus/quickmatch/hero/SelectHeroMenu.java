@@ -31,10 +31,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileLoader;
-import org.totalboumboum.configuration.profile.SpriteInfo;
 import org.totalboumboum.engine.content.sprite.SpritePreview;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
+import org.totalboumboum.game.profile.SpriteInfo;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;

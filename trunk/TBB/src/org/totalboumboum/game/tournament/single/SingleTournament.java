@@ -30,12 +30,9 @@ import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileLoader;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.instance.Instance;
-import org.totalboumboum.game.file.replay.FileInputClientStream;
 import org.totalboumboum.game.limit.Comparisons;
 import org.totalboumboum.game.limit.LimitConfrontation;
 import org.totalboumboum.game.limit.Limits;
@@ -44,11 +41,14 @@ import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.points.PointsProcessor;
 import org.totalboumboum.game.points.PointsTotal;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
+import org.totalboumboum.stream.file.replay.FileInputClientStream;
 import org.xml.sax.SAXException;
 
 /**

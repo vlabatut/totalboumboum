@@ -50,6 +50,7 @@ import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**

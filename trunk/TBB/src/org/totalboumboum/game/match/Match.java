@@ -36,9 +36,9 @@ import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.MatchLimit;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.AbstractTournament;

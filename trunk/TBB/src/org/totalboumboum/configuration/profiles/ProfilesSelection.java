@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

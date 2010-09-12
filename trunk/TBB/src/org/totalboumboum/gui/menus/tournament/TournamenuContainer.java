@@ -28,12 +28,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
-import org.totalboumboum.game.file.archive.GameArchive;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.menus.tournament.load.LoadSplitPanel;
+import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
 

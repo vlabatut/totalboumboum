@@ -26,9 +26,9 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMap;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

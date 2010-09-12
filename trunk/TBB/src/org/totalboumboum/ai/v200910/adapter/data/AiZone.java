@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -47,6 +46,7 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.

@@ -33,11 +33,11 @@ import javax.swing.BoxLayout;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileLoader;
-import org.totalboumboum.configuration.profile.ProfilesConfiguration;
-import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.engine.container.level.players.Players;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;

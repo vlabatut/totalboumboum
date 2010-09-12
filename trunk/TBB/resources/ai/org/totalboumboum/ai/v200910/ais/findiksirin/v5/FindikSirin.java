@@ -17,8 +17,8 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
 import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 public class FindikSirin extends ArtificialIntelligence
 {		

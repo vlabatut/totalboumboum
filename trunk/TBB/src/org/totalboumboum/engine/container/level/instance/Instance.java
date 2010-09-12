@@ -27,7 +27,6 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.bombset.BombsetMap;
 import org.totalboumboum.engine.container.explosionset.Explosionset;
 import org.totalboumboum.engine.container.explosionset.ExplosionsetLoader;
@@ -37,6 +36,7 @@ import org.totalboumboum.engine.container.itemset.Itemset;
 import org.totalboumboum.engine.container.itemset.ItemsetLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**

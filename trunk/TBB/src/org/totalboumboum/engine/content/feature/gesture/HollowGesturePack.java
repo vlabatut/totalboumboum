@@ -26,8 +26,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRulesMap;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

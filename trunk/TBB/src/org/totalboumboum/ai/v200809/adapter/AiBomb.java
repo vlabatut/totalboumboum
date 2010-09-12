@@ -21,11 +21,11 @@ package org.totalboumboum.ai.v200809.adapter;
  * 
  */
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente une bombe du jeu, ie un objet que les joueurs peuvent déposer

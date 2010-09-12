@@ -13,8 +13,8 @@ import org.totalboumboum.ai.v200809.adapter.AiTile;
 import org.totalboumboum.ai.v200809.adapter.AiZone;
 import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

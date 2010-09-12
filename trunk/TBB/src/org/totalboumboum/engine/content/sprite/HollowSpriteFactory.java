@@ -26,10 +26,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import org.totalboumboum.engine.content.feature.gesture.GesturePack;
 import org.totalboumboum.engine.content.feature.gesture.HollowGesturePack;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

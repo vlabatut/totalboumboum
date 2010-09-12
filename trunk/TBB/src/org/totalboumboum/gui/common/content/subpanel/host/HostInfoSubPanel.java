@@ -30,7 +30,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.network.host.HostInfo;
+import org.totalboumboum.stream.network.data.host.HostInfo;
 
 /**
  * 

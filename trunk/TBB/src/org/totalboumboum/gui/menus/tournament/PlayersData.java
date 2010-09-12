@@ -30,9 +30,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileLoader;
-import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
@@ -41,7 +41,7 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.menus.tournament.hero.SelectHeroSplitPanel;
 import org.totalboumboum.gui.menus.tournament.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**

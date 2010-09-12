@@ -43,7 +43,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.engine.EngineConfiguration;
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -56,6 +55,7 @@ import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.engine.player.ControlledPlayer;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;

@@ -32,17 +32,17 @@ import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profile.PredefinedColor;
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileLoader;
-import org.totalboumboum.configuration.profile.ProfilesConfiguration;
+import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.profiles.select.SelectedProfileData;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**

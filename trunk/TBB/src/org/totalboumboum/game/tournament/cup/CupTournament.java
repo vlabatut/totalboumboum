@@ -33,8 +33,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.totalboumboum.configuration.profile.Profile;
 import org.totalboumboum.game.match.Match;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.GameStatistics;

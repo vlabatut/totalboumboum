@@ -29,8 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.totalboumboum.configuration.profile.Portraits;
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Portraits;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -254,7 +254,9 @@ public enum StatisticColumn
 		else if(this==GENERAL_TYPE)
 		{	String aiName = profile.getAiName();
 			String key;
-			if(aiName==null)
+			if(profile.isRemote())
+				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_REMOTE;
+			else if(aiName==null)
 				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_HUMAN;
 			else
 				key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_COMPUTER;

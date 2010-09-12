@@ -30,9 +30,9 @@ import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
-import org.totalboumboum.game.file.replay.FileInputClientStream;
-import org.totalboumboum.game.file.replay.FileOutputServerStream;
 import org.totalboumboum.statistics.detailed.StatisticRound;
+import org.totalboumboum.stream.file.replay.FileInputClientStream;
+import org.totalboumboum.stream.file.replay.FileOutputServerStream;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 

@@ -34,7 +34,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.network.newstream.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 
 /**
  * Server side class: fetch the actions of a remote player

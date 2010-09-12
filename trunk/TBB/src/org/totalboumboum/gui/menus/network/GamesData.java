@@ -46,11 +46,11 @@ import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.network.game.GameInfo;
-import org.totalboumboum.network.host.HostInfo;
-import org.totalboumboum.network.newstream.client.ClientGeneralConnection;
-import org.totalboumboum.network.newstream.client.ClientGeneralConnectionListener;
-import org.totalboumboum.network.newstream.client.ClientIndividualConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
+import org.totalboumboum.stream.network.client.ClientIndividualConnection;
+import org.totalboumboum.stream.network.data.game.GameInfo;
+import org.totalboumboum.stream.network.data.host.HostInfo;
 import org.totalboumboum.tools.network.NetworkTools;
 import org.xml.sax.SAXException;
 

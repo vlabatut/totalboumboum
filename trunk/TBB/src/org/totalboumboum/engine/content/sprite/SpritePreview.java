@@ -25,7 +25,7 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

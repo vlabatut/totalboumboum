@@ -27,11 +27,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.CachableSpriteContainer;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import org.totalboumboum.engine.content.sprite.bomb.HollowBombFactory;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

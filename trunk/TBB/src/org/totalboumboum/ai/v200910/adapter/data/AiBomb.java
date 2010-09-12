@@ -24,7 +24,6 @@ package org.totalboumboum.ai.v200910.adapter.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Contact;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -41,6 +40,7 @@ import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 
 /**

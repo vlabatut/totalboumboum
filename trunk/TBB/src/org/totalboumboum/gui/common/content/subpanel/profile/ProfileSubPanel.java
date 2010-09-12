@@ -25,7 +25,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;

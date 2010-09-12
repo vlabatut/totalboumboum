@@ -31,7 +31,7 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.gui.common.content.MyLabel;

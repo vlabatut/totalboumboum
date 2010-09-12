@@ -26,8 +26,8 @@ import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.Portraits;
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Portraits;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.league.LeagueTournament;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;

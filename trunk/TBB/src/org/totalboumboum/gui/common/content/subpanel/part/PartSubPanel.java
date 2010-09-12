@@ -27,7 +27,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.cup.CupLeg;
 import org.totalboumboum.game.tournament.cup.CupPart;

@@ -33,7 +33,6 @@ import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.game.file.archive.GameArchive;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -43,6 +42,7 @@ import org.totalboumboum.gui.game.save.SaveData;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;

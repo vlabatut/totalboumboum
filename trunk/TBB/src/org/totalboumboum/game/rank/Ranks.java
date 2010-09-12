@@ -29,7 +29,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 
 /**
  * 

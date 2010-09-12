@@ -21,10 +21,10 @@ package org.totalboumboum.engine.loop.event.replay.sprite;
  * 
  */
 
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Role;
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 

@@ -29,7 +29,6 @@ import java.util.List;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.controls.ControlSettings;
-import org.totalboumboum.configuration.profile.PredefinedColor;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.Role;
@@ -70,6 +69,7 @@ import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEve
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /** 
  * Sprite possédant un status :

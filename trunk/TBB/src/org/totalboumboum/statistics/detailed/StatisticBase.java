@@ -30,7 +30,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 
 /**
  * 

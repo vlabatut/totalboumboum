@@ -993,6 +993,7 @@
 					<text name="Controls" value="n°"  tooltip="Le joueur utilise les commandes numéro" />
 					<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
 					<text name="NoControls" value="-"  tooltip="Le joueur n'utilise pas de commandes" />
+					<text name="Remote" value="Distant"  tooltip="Le joueur est contrôlé à distance" />
 				</group>
 			</group>
 
@@ -1011,6 +1012,7 @@
 					<text name="Computer" value="Ordinateur" tooltip="Intelligence artificielle" />
 					<text name="Delete" value="Désélectionne" tooltip="Désélectionne le profil" />
 					<text name="Human" value="Humain" tooltip="Joueur humain" />
+					<text name="Remote" value="Distant"  tooltip="Le joueur est contrôlé à distance" />
 				</group>
 			</group>
 		</group>
@@ -1143,8 +1145,9 @@
 					<text name="Total" value="Total"  tooltip="Nombre total de points marqués pour toutes les manches de cette rencontre" />
 				</group>
 				<group name="Data">
-						<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
-						<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
+					<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
+					<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
+					<text name="Remote" value="Distant"  tooltip="Joueur contrôlé à distance" />
 				</group>
 			</group>
 			
@@ -1168,6 +1171,7 @@
 				<group name="Data">
 					<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
 					<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
+					<text name="Remote" value="Distant"  tooltip="Joueur contrôlé à distance" />
 				</group>
 			</group>
 
@@ -1195,8 +1199,9 @@
 					<text name="Lost" value="Perdues"  tooltip="Nombre total de rencontres perdues" />
 				</group>
 				<group name="Data">
-						<text name="Computer" value="Ordinateur"  tooltip="Ce joueur est contrôlé par l'ordinateur" />
-						<text name="Human" value="Humain"  tooltip="Ce joueur est contrôlé par un être humain (ou un geek)" />
+					<text name="Computer" value="Ordinateur"  tooltip="Ce joueur est contrôlé par l'ordinateur" />
+					<text name="Human" value="Humain"  tooltip="Ce joueur est contrôlé par un être humain (ou un geek)" />
+					<text name="Remote" value="Distant"  tooltip="Joueur contrôlé à distance" />
 				</group>
 			</group>
 		</group>
@@ -1234,6 +1239,7 @@
 					<group name="Data">
 						<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
 						<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
+						<text name="Remote" value="Distant"  tooltip="Joueur contrôlé à distance" />
 						<text name="NoRank" value="-"  tooltip="Ce joueur n'est pas classé" />
 						<text name="Mean" value="Moy."  />
 						<text name="Total" value="Total"  />

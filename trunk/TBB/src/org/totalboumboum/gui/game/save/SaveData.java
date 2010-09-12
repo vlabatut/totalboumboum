@@ -30,8 +30,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.game.file.archive.GameArchive;
-import org.totalboumboum.game.file.archive.GameArchiveLoader;
 import org.totalboumboum.gui.common.content.subpanel.archive.ArchiveMiscSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.archive.ArchivePlayersSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanel;
@@ -41,6 +39,8 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.stream.file.archive.GameArchive;
+import org.totalboumboum.stream.file.archive.GameArchiveLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
 

@@ -26,7 +26,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.Profile;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.gui.common.structure.MenuContainer;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;

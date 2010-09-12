@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.jdom.Element;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.totalboumboum.tools.xml.XmlNames;
 
 /**

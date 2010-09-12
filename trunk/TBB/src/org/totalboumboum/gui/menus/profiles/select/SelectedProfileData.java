@@ -30,9 +30,9 @@ import javax.swing.BoxLayout;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profile.Profile;
-import org.totalboumboum.configuration.profile.ProfileLoader;
-import org.totalboumboum.configuration.profile.ProfilesConfiguration;
+import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
+import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.gui.common.content.subpanel.file.FileBrowserSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.file.FileBrowserSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.profile.ProfileSubPanel;
