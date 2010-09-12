@@ -256,11 +256,14 @@ public class ServerGeneralConnection implements Runnable
 			gameInfo.setPlayerCount(playerCount);
 			
 			// update average score
-			double averageScore = gameInfo.getAverageScore();
-			RankingService rankingService = GameStatistics.getRankingService();
-			PlayerRating playerRating = rankingService.getPlayerRating(profile.getId());
-			double score = playerRating.getRating();
-			averageScore = (averageScore*playerProfiles.size() - score) / (playerProfiles.size()-1);
+			double averageScore = 0;
+			if(playerCount>0)
+			{	averageScore = gameInfo.getAverageScore();
+				RankingService rankingService = GameStatistics.getRankingService();
+				PlayerRating playerRating = rankingService.getPlayerRating(profile.getId());
+				double score = playerRating.getRating();
+				averageScore = (averageScore*playerProfiles.size() - score) / (playerProfiles.size()-1);
+			}
 			gameInfo.setAverageScore(averageScore);
 	
 			// send the appropriate message 
