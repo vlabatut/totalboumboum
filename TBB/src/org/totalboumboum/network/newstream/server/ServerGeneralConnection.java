@@ -43,6 +43,7 @@ import org.totalboumboum.network.host.HostState;
 import org.totalboumboum.network.newstream.event.NetworkInfo;
 import org.totalboumboum.network.newstream.event.NetworkMessage;
 import org.totalboumboum.statistics.GameStatistics;
+import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 
 /**
@@ -160,8 +161,9 @@ public class ServerGeneralConnection implements Runnable
 			// update average score
 			double averageScore = gameInfo.getAverageScore();
 			RankingService rankingService = GameStatistics.getRankingService();
-			double score = rankingService.getPlayerRank(profile.getId());
-			averageScore = (averageScore*playerProfiles.size()*playerProfiles.size()+score) / (playerProfiles.size()+1);
+			PlayerRating playerRating = rankingService.getPlayerRating(profile.getId());
+			double score = playerRating.getRating();
+			averageScore = (averageScore*playerProfiles.size()+score) / (playerProfiles.size()+1);
 			gameInfo.setAverageScore(averageScore);
 	
 			// send the appropriate message 
@@ -201,9 +203,11 @@ public class ServerGeneralConnection implements Runnable
 			double averageScore = gameInfo.getAverageScore();
 			Profile oldProfile = playerProfiles.get(index);
 			RankingService rankingService = GameStatistics.getRankingService();
-			double oldScore = rankingService.getPlayerRank(oldProfile.getId());
+			PlayerRating oldRating = rankingService.getPlayerRating(oldProfile.getId()); 
+			double oldScore = oldRating.getRating();
 			averageScore = averageScore - oldScore/playerProfiles.size();
-			double newScore = rankingService.getPlayerRank(profile.getId());
+			PlayerRating newRating = rankingService.getPlayerRating(profile.getId());
+			double newScore = newRating.getRating();
 			averageScore = averageScore + newScore/playerProfiles.size();
 			gameInfo.setAverageScore(averageScore);
 
@@ -254,7 +258,8 @@ public class ServerGeneralConnection implements Runnable
 			// update average score
 			double averageScore = gameInfo.getAverageScore();
 			RankingService rankingService = GameStatistics.getRankingService();
-			double score = rankingService.getPlayerRank(profile.getId());
+			PlayerRating playerRating = rankingService.getPlayerRating(profile.getId());
+			double score = playerRating.getRating();
 			averageScore = (averageScore*playerProfiles.size() - score) / (playerProfiles.size()-1);
 			gameInfo.setAverageScore(averageScore);
 	
