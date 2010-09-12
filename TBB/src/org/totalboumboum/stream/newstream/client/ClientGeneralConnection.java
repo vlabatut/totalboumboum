@@ -29,8 +29,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.totalboumboum.engine.loop.ClientLoop;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
-import org.totalboumboum.stream.game.GameInfo;
-import org.totalboumboum.stream.host.HostInfo;
+import org.totalboumboum.stream.data.game.GameInfo;
+import org.totalboumboum.stream.data.host.HostInfo;
 import org.totalboumboum.stream.newstream.message.MessageName;
 import org.totalboumboum.stream.newstream.message.NetworkMessage;
 
