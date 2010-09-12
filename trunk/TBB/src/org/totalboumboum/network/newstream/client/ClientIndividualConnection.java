@@ -31,7 +31,7 @@ import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.host.HostInfo;
 import org.totalboumboum.network.newstream.AbstractConnection;
-import org.totalboumboum.network.newstream.message.NetworkInfo;
+import org.totalboumboum.network.newstream.message.MessageName;
 import org.totalboumboum.network.newstream.message.NetworkMessage;
 
 /**
@@ -114,11 +114,11 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	@SuppressWarnings("unchecked")
 	@Override
 	public void messageRead(NetworkMessage message)
-	{	if(message.getInfo().equals(NetworkInfo.UPDATE_GAME_INFO))
+	{	if(message.getInfo().equals(MessageName.UPDATE_GAME_INFO))
 			gameInfoReceived((GameInfo)message.getData());
-		else if(message.getInfo().equals(NetworkInfo.UPDATE_PLAYERS_LIST))
+		else if(message.getInfo().equals(MessageName.UPDATE_PLAYERS_LIST))
 			playersListReceived((List<Profile>)message.getData());
-		else if(message.getInfo().equals(NetworkInfo.INFO_REPLAY))
+		else if(message.getInfo().equals(MessageName.INFO_REPLAY))
 			replayReceived((ReplayEvent)message.getData());
 	}
 	

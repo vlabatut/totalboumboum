@@ -31,11 +31,11 @@ import java.io.Serializable;
 public class NetworkMessage implements Serializable
 {	private static final long serialVersionUID = 1L;
 
-	public NetworkMessage(NetworkInfo info)
+	public NetworkMessage(MessageName info)
 	{	this.info = info;
 	}
 	
-	public NetworkMessage(NetworkInfo info, Object data)
+	public NetworkMessage(MessageName info, Object data)
 	{	this.info = info;
 		this.data = data;
 	}
@@ -43,9 +43,9 @@ public class NetworkMessage implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// INFO 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private NetworkInfo info = null;
+	private MessageName info = null;
 	
-	public NetworkInfo getInfo()
+	public MessageName getInfo()
 	{	return info;	
 	}
 	

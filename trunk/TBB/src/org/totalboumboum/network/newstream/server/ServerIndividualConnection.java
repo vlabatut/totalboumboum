@@ -29,7 +29,7 @@ import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.network.game.GameInfo;
 import org.totalboumboum.network.newstream.AbstractConnection;
 import org.totalboumboum.network.newstream.client.ClientState;
-import org.totalboumboum.network.newstream.message.NetworkInfo;
+import org.totalboumboum.network.newstream.message.MessageName;
 import org.totalboumboum.network.newstream.message.NetworkMessage;
 
 /**
@@ -70,11 +70,11 @@ public class ServerIndividualConnection extends AbstractConnection
 	@Override
 	public void messageRead(NetworkMessage message)
 	{	// TODO maybe those should be filtered? or a standard reply is always provided by the corresponding function?
-		if(message.getInfo().equals(NetworkInfo.REQUEST_GAME_INFO))
+		if(message.getInfo().equals(MessageName.REQUEST_GAME_INFO))
 			gameInfoRequested();
-		else if(message.getInfo().equals(NetworkInfo.REQUEST_PLAYERS_LIST))
+		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_LIST))
 			playersListRequested();
-		else if(message.getInfo().equals(NetworkInfo.INFO_PLAYER_CONTROL))
+		else if(message.getInfo().equals(MessageName.INFO_PLAYER_CONTROL))
 				controlReceived(message);
 	}
 	
@@ -87,7 +87,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	private void gameInfoRequested()
 	{	GameInfo gameInfo = generalConnection.getGameInfo();
-		NetworkMessage message = new NetworkMessage(NetworkInfo.UPDATE_GAME_INFO,gameInfo);
+		NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
 		writer.addMessage(message);
 	}
 	
