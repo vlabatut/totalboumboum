@@ -29,7 +29,7 @@ import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.game.limit.Comparisons;
 import org.totalboumboum.game.limit.LimitConfrontation;
 import org.totalboumboum.game.limit.Limits;

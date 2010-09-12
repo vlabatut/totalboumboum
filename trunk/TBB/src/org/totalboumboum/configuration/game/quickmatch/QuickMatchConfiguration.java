@@ -24,7 +24,7 @@ package org.totalboumboum.configuration.game.quickmatch;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.tools.GameData;
 
 /**

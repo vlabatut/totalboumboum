@@ -27,8 +27,8 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.configuration.profile.ProfilesSelection;
-import org.totalboumboum.configuration.profile.ProfilesSelectionSaver;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
+import org.totalboumboum.configuration.profiles.ProfilesSelectionSaver;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;

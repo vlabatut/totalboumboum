@@ -26,7 +26,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.configuration.profile.ProfilesSelection;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.TournamentLoader;
 import org.totalboumboum.tools.files.FileNames;

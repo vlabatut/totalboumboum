@@ -30,8 +30,8 @@ import java.util.Locale;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.configuration.profile.ProfilesSelection;
-import org.totalboumboum.configuration.profile.ProfilesSelectionLoader;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
+import org.totalboumboum.configuration.profiles.ProfilesSelectionLoader;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
