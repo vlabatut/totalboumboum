@@ -23,6 +23,7 @@ package org.totalboumboum.stream.network.thread;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.net.SocketException;
 
 import org.totalboumboum.stream.network.AbstractConnection;
 import org.totalboumboum.stream.network.message.NetworkMessage;
@@ -34,9 +35,14 @@ import org.totalboumboum.stream.network.message.NetworkMessage;
  */
 public class RunnableReader implements Runnable
 {
-	public RunnableReader()
-	{	
+	public RunnableReader(OwnerInterface owner)
+	{	this.owner = owner;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// OWNER				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private OwnerInterface owner;
 	
 	/////////////////////////////////////////////////////////////////
 	// CONNECTION			/////////////////////////////////////////
@@ -67,7 +73,9 @@ public class RunnableReader implements Runnable
 				{	wait();	
 				}
 				catch (InterruptedException e)
-				{	e.printStackTrace();
+				{	// stream broken
+					System.err.println("SocketException: connection lost");
+					owner.connectionLost();
 				}
 			}
 		
@@ -76,6 +84,11 @@ public class RunnableReader implements Runnable
 				NetworkMessage message = (NetworkMessage) object;
 System.out.println(message);
 				connection.messageRead(message);
+			}
+			catch(SocketException e)
+			{	// stream broken
+				System.err.println("SocketException: connection lost");
+				owner.connectionLost();
 			}
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();

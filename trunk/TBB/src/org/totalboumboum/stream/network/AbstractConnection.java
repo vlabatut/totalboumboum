@@ -29,6 +29,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 import org.totalboumboum.stream.network.message.NetworkMessage;
+import org.totalboumboum.stream.network.thread.OwnerInterface;
 import org.totalboumboum.stream.network.thread.RunnableReader;
 import org.totalboumboum.stream.network.thread.RunnableWriter;
 
@@ -37,11 +38,11 @@ import org.totalboumboum.stream.network.thread.RunnableWriter;
  * @author Vincent Labatut
  *
  */
-public abstract class AbstractConnection
+public abstract class AbstractConnection implements OwnerInterface
 {	
 	public AbstractConnection()
-	{	writer = new RunnableWriter();
-		reader = new RunnableReader();
+	{	writer = new RunnableWriter(this);
+		reader = new RunnableReader(this);
 	}
 	
 //	public AbstractConnection(Socket socket) throws IOException
