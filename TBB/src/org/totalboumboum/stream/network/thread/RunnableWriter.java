@@ -23,6 +23,7 @@ package org.totalboumboum.stream.network.thread;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.SocketException;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -35,9 +36,14 @@ import org.totalboumboum.stream.network.message.NetworkMessage;
  */
 public class RunnableWriter implements Runnable
 {
-	public RunnableWriter()
-	{	
+	public RunnableWriter(OwnerInterface owner)
+	{	this.owner = owner;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// OWNER				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private OwnerInterface owner;
 	
 	/////////////////////////////////////////////////////////////////
 	// STREAM				/////////////////////////////////////////
@@ -70,11 +76,16 @@ public class RunnableWriter implements Runnable
 				out.flush();out.reset();
 System.out.println(message);
 			}
-			catch (IOException e)
+			catch(SocketException e)
+			{	// stream broken
+				System.err.println("SocketException: connection lost");
+				owner.connectionLost();
+			}
+			catch(IOException e)
 			{	e.printStackTrace();
 			}
 		}
-
+//TODO should be in a finally(?)
 		// close stream
 		try
 		{	out.close();
