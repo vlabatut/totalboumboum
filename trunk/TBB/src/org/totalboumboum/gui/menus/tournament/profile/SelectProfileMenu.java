@@ -136,7 +136,7 @@ public class SelectProfileMenu extends InnerMenuPanel
 				{	profiles.add(profile);
 					// NOTE this would be so much cleaner with an events system...
 					if(connection!=null)
-						connection.profileAdded(profile);
+						connection.localProfileAdded(profile);
 				}
 			}
 			parent.refresh();

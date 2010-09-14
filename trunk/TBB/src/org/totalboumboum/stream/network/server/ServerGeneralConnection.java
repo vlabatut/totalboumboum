@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
@@ -56,7 +57,7 @@ public class ServerGeneralConnection implements Runnable
 {	
 	public ServerGeneralConnection(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles, boolean direct, boolean central)
 	{	// set data
-		this.playerProfiles.addAll(playerProfiles);
+		initPlayerProfiles(playerProfiles);
 		initGameInfo(allowedPlayers,tournamentName,tournamentType,playerScores,playerProfiles,direct,central);
 		
 		// launch thread
@@ -150,10 +151,24 @@ public class ServerGeneralConnection implements Runnable
 	// PROFILES		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final List<Profile> playerProfiles = new ArrayList<Profile>();
+	private final HashMap<String,ServerIndividualConnection> playerConnections = new HashMap<String, ServerIndividualConnection>(); 
 	private Lock profileLock = new ReentrantLock();
 	
-	public void profileAdded(Profile profile)
-	{	gameInfoLock.lock();
+	private void initPlayerProfiles(List<Profile> playerProfiles)
+	{	this.playerProfiles.addAll(playerProfiles);
+		for(Profile profile: playerProfiles)
+			playerConnections.put(profile.getId(),null);
+	}
+	
+	public void localProfileAdded(Profile profile, ServerIndividualConnection connection)
+	{	int size;
+		
+		profileLock.lock();
+		{	size = playerProfiles.size();
+		}
+		profileLock.unlock();
+	
+		gameInfoLock.lock();
 		{	// update player count
 			int playerCount = gameInfo.getPlayerCount();
 			playerCount ++;
@@ -164,7 +179,7 @@ public class ServerGeneralConnection implements Runnable
 			RankingService rankingService = GameStatistics.getRankingService();
 			PlayerRating playerRating = rankingService.getPlayerRating(profile.getId());
 			double score = playerRating.getRating();
-			averageScore = (averageScore*playerProfiles.size()+score) / (playerProfiles.size()+1);
+			averageScore = (averageScore*size+score) / (size+1);
 			gameInfo.setAverageScore(averageScore);
 	
 			// send the appropriate message 
@@ -176,6 +191,7 @@ public class ServerGeneralConnection implements Runnable
 		profileLock.lock();
 		{	// update players list
 			playerProfiles.add(profile);
+			playerConnections.put(profile.getId(),connection);
 			
 			// send the appropriate message
 			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
@@ -184,12 +200,15 @@ public class ServerGeneralConnection implements Runnable
 		profileLock.unlock();
 	}
 	
+	/** 
+	 * NOTE: necessarily local 
+	 */
 	public void profilesAdded(List<Profile> profiles)
 	{	profileLock.lock();
 		
 		for(Profile profile: profiles)
 		{	if(!playerProfiles.contains(profile))
-				profileAdded(profile);
+				localProfileAdded(profile,null);
 		}
 		
 		profileLock.unlock();
@@ -198,18 +217,26 @@ public class ServerGeneralConnection implements Runnable
 	/**
 	 * some profile was switched for another one
 	 */
-	public void profileSet(int index, Profile profile)
-	{	gameInfoLock.lock();
+	public void profileSet(int index, Profile profile, ServerIndividualConnection connection)
+	{	Profile oldProfile;
+		int size;
+	
+		profileLock.lock();
+		{	oldProfile = playerProfiles.get(index);
+			size = playerProfiles.size();
+		}
+		profileLock.unlock();
+	
+		gameInfoLock.lock();
 		{	// update average score
 			double averageScore = gameInfo.getAverageScore();
-			Profile oldProfile = playerProfiles.get(index);
 			RankingService rankingService = GameStatistics.getRankingService();
 			PlayerRating oldRating = rankingService.getPlayerRating(oldProfile.getId()); 
 			double oldScore = oldRating.getRating();
-			averageScore = averageScore - oldScore/playerProfiles.size();
+			averageScore = averageScore - oldScore/size;
 			PlayerRating newRating = rankingService.getPlayerRating(profile.getId());
 			double newScore = newRating.getRating();
-			averageScore = averageScore + newScore/playerProfiles.size();
+			averageScore = averageScore + newScore/size;
 			gameInfo.setAverageScore(averageScore);
 
 			// send the appropriate message 
@@ -220,6 +247,8 @@ public class ServerGeneralConnection implements Runnable
 		
 		profileLock.lock();
 		{	// update profiles list
+			playerConnections.remove(oldProfile.getId());
+			playerConnections.put(profile.getId(),connection);
 			playerProfiles.set(index,profile);
 			
 			// send the appropriate message 
@@ -250,7 +279,14 @@ public class ServerGeneralConnection implements Runnable
 	}
 	
 	public void profileRemoved(Profile profile)
-	{	gameInfoLock.lock();
+	{	int size;
+		
+		profileLock.lock();
+		{	size = playerProfiles.size();
+		}
+		profileLock.unlock();
+	
+		gameInfoLock.lock();
 		{	// update player count
 			int playerCount = gameInfo.getPlayerCount();
 			playerCount --;
@@ -263,7 +299,7 @@ public class ServerGeneralConnection implements Runnable
 				RankingService rankingService = GameStatistics.getRankingService();
 				PlayerRating playerRating = rankingService.getPlayerRating(profile.getId());
 				double score = playerRating.getRating();
-				averageScore = (averageScore*playerProfiles.size() - score) / (playerProfiles.size()-1);
+				averageScore = (averageScore*size - score) / (size-1);
 			}
 			gameInfo.setAverageScore(averageScore);
 	
@@ -276,12 +312,36 @@ public class ServerGeneralConnection implements Runnable
 		profileLock.lock();
 		{	// update players list
 			playerProfiles.remove(profile);
+			playerConnections.remove(profile.getId());
 			
 			// send the appropriate message
 			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
 			propagateMessage(message);
 		}
 		profileLock.unlock();
+	}
+
+//	boolean found = false;
+//	Iterator<Profile> it = playerProfiles.iterator();
+//	do
+//	{	Profile p = it.next();
+//		if(p.getId().equals(id))
+//		{	playerProfiles.remove(p);
+//			found = true;
+//		}
+//	}
+//	while(it.hasNext() && !found);
+	
+	public void playerSelectionExited(ServerIndividualConnection connection)
+	{	profileLock.lock();
+		{	for(Profile profile: playerProfiles)
+			{	ServerIndividualConnection ct = playerConnections.get(profile.getId());
+				if(ct==connection)
+				{	profileRemoved(profile);
+					fireProfileRemoved(profile);
+				}
+			}
+		}		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -377,6 +437,25 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	{	remotePlayerControl.addEvent(event);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<ServerGeneralConnectionListener> listeners = new ArrayList<ServerGeneralConnectionListener>();
+	
+	public void addListener(ServerGeneralConnectionListener listener)
+	{	if(!listeners.contains(listener))
+			listeners.add(listener);
+	}
+	
+	public void removeListener(ServerGeneralConnectionListener listener)
+	{	listeners.remove(listener);
+	}
+	
+	private void fireProfileRemoved(Profile profile)
+	{	for(ServerGeneralConnectionListener listener: listeners)
+			listener.profileRemoved(profile);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

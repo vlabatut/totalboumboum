@@ -51,7 +51,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	private ServerGeneralConnection generalConnection;
 
 	/////////////////////////////////////////////////////////////////
-	// MODE					/////////////////////////////////////////
+	// CLIENT STATE			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private ClientState state = ClientState.SELECTING_GAME;
 	
@@ -66,14 +66,17 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// PROCESS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// TODO virer les différentes classes de messages : c'est redondant avec les info incluses dans les msgs
 	@Override
 	public void messageRead(NetworkMessage message)
-	{	// TODO maybe those should be filtered? or a standard reply is always provided by the corresponding function?
-		if(message.getInfo().equals(MessageName.REQUEST_GAME_INFO))
+	{	if(message.getInfo().equals(MessageName.REQUEST_GAME_INFO))
 			gameInfoRequested();
 		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_LIST))
 			playersListRequested();
+		else if(message.getInfo().equals(MessageName.ENTERS_PLAYERS_SELECTION))
+			entersPlayersSelection(message);
+		else if(message.getInfo().equals(MessageName.EXITS_PLAYERS_SELECTION))
+			exitsPlayersSelection(message);
+		
 		else if(message.getInfo().equals(MessageName.INFO_PLAYER_CONTROL))
 				controlReceived(message);
 	}
@@ -94,6 +97,23 @@ public class ServerIndividualConnection extends AbstractConnection
 	private void playersListRequested()
 	{	
 		// TODO write the players list
+	}
+	
+	private void entersPlayersSelection(NetworkMessage message)
+	{	boolean local = (Boolean) message.getData();
+		if(local)
+			state = ClientState.SELECTING_PLAYERS;
+		else
+			state = ClientState.INTERESTED_ELSEWHERE;
+	}
+
+	private void exitsPlayersSelection(NetworkMessage message)
+	{	boolean local = (Boolean) message.getData();
+		state = ClientState.SELECTING_GAME;
+		if(local)
+		{	// TODO must remove all the players from this connection
+			generalConnection.playerSelectionExited(this);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -126,6 +146,14 @@ public class ServerIndividualConnection extends AbstractConnection
 		writer = null;
 		
 		//TODO à completer
+		if(state==ClientState.SELECTING_GAME)
+		{	generalConnection.removeConnection(this);
+			
+		}
+		else if(state==ClientState.SELECTING_GAME)
+		{	generalConnection.removeConnection(this);
+			
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////

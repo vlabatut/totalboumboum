@@ -1588,7 +1588,15 @@ public class Launcher
 	 * de cette manière, on peut toujours répondre aux tentatives de connection
 	 * >> à voir si ça ne prend pas trop de ressources ?
 	 * 
-	 * en cas de connection perdue, la réaction du server dépend de l'état du client
-	 * le client, lui, revient soit au menu principal (en cours de partie) soit au menu de sélection (en cours de sélection des joueurs)
+	 * GUI: dans les cas où on a un panel affichant une liste et d'autres
+	 * panels affichant l'élément sélectionné, il faudrait que ces derniers écoutent
+	 * la liste afin de se mettre à jour automatiquement quand nécessaire.
 	 */ 
+	
+	/**
+	 * en cours:
+	 * 	- finir la gestion des opérations sur les joueurs (ajout, etc) niveau serveur et client
+	 *  - implémenter les fonctions d'écoute dans la GUI joueurs côté serveur
+	 *  - modifier la GUI sélect joueurs côté client
+	 */
 }
