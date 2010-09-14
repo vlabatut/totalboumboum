@@ -33,6 +33,13 @@ public enum MessageName
 	 * config level
 	 */
 		/** 
+		 * if true, the client selects a game and enters the players selection screen
+		 * else, it means it enters another game (but might come back to game selection) 
+		 * */
+		ENTERS_PLAYERS_SELECTION,
+		/** client abort players selection to go back to the game selection screen */
+		EXITS_PLAYERS_SELECTION,
+		/** 
 		 * client requests game information
 		 * possible causes:
 		 * 		- client connects for the first time
@@ -60,7 +67,7 @@ public enum MessageName
 		UPDATE_CLIENT_STATE,
 		
 		/** server requests client current state */ 
-		REQUEST_CLIENT_STATE,
+//		REQUEST_CLIENT_STATE, //pas nécessaire, à éviter même
 		/** server sends game information */ 
 		UPDATE_GAME_INFO,
 		/** server sends players list */

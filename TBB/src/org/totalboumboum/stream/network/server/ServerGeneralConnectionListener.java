@@ -1,4 +1,6 @@
-package org.totalboumboum.stream.network.client;
+package org.totalboumboum.stream.network.server;
+
+import org.totalboumboum.game.profile.Profile;
 
 /*
  * Total Boum Boum
@@ -26,22 +28,10 @@ package org.totalboumboum.stream.network.client;
  * @author Vincent Labatut
  *
  */
-public enum ClientState
-{	// config level
-	/** client currently choosing a game */
-	SELECTING_GAME,
-	/** client has chosen a game, currently selecting his players */
-	SELECTING_PLAYERS,
-	/** client has chosen another game, currently selecting his players (might go back, though) */
-	INTERESTED_ELSEWHERE,
-	/** client has chosen his players, currently waiting for the tournament to begin */
-	WAITING_TOURNAMENT
-	
-	// tournament level
-	
-	// match level
-	
-	// round level
-	
-	// in-game level
+public interface ServerGeneralConnectionListener
+{
+	public void profileAdded(int index, Profile profile);
+	public void profileRemoved(Profile profile);
+	public void profileModified(Profile profile);
+	public void profileSet(int index, Profile profile);
 }
