@@ -1,3 +1,4 @@
+
 package org.totalboumboum;
 
 /*
@@ -1586,5 +1587,8 @@ public class Launcher
 	 * en fait dès le démarrage, un process gère les tentatives de connection sur le port configuré
 	 * de cette manière, on peut toujours répondre aux tentatives de connection
 	 * >> à voir si ça ne prend pas trop de ressources ?
+	 * 
+	 * en cas de connection perdue, la réaction du server dépend de l'état du client
+	 * le client, lui, revient soit au menu principal (en cours de partie) soit au menu de sélection (en cours de sélection des joueurs)
 	 */ 
 }
