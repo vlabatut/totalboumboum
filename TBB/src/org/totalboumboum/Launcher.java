@@ -1588,9 +1588,12 @@ public class Launcher
 	 * de cette manière, on peut toujours répondre aux tentatives de connection
 	 * >> à voir si ça ne prend pas trop de ressources ?
 	 * 
-	 * GUI: dans les cas où on a un panel affichant une liste et d'autres
-	 * panels affichant l'élément sélectionné, il faudrait que ces derniers écoutent
-	 * la liste afin de se mettre à jour automatiquement quand nécessaire.
+	 * GUI: 
+	 *  - dans les cas où on a un panel affichant une liste et d'autres
+	 *    panels affichant l'élément sélectionné, il faudrait que ces derniers écoutent
+	 *    la liste afin de se mettre à jour automatiquement quand nécessaire.
+	 *  - en fait on peut faire une version simple des souspanels, et une version
+	 *    qui écoute le panel principal et hérite de la version simple
 	 */ 
 	
 	/**
@@ -1598,5 +1601,8 @@ public class Launcher
 	 * 	- finir la gestion des opérations sur les joueurs (ajout, etc) niveau serveur et client
 	 *  - implémenter les fonctions d'écoute dans la GUI joueurs côté serveur
 	 *  - modifier la GUI sélect joueurs côté client
+	 *  - faut aussi gérer le raffrachissement des connections directes pas encore connectées
+	 *  	- rajouter un bouton pour tout raffraichir
+	 *  	- raffraichir quand on sélectionne la connection
 	 */
 }
