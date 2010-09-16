@@ -171,6 +171,7 @@ public class XmlNames
 	public static final String KIND = "kind";
 	public static final String LANGUAGE = "language";
 	public static final String LAST = "last";
+	public static final String LAST_HOST = "lastHost";
 	public static final String LAST_IP = "lastIp";
 	public static final String LAST_PORT = "lastPort";
 	public static final String LAST_STANDING = "lastStanding";
@@ -208,6 +209,7 @@ public class XmlNames
 	public static final String MODULATION = "modulation";
 	public static final String MULTIPLICATION = "multiplication";
 	public static final String NAME = "name";
+	public static final String NETWORK = "network";
 	public static final String NONE = "none";
 	public static final String NOTES = "notes";
 	public static final String NUMBER = "number";

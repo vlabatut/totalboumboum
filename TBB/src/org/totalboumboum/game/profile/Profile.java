@@ -23,6 +23,7 @@ package org.totalboumboum.game.profile;
 
 import java.io.Serializable;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.control.player.LocalPlayerControl;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -106,16 +107,22 @@ public class Profile implements Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// REMOTE			/////////////////////////////////////////////
+	// LAST HOST		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean remote;
+	private String lastHost = null;
 
-	public void setRemote(boolean remote)
-	{	this.remote = remote;
+	public void setLastHost(String lastHost)
+	{	this.lastHost = lastHost;
+	}
+	
+	public String getLastHost()
+	{	return lastHost;		
 	}
 	
 	public boolean isRemote()
-	{	return remote;		
+	{	String hostId = Configuration.getConnectionsConfiguration().getHostId();
+		boolean result = !lastHost.equals(hostId);
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -206,7 +213,7 @@ public class Profile implements Serializable
 		result.selectedSprite = selectedSprite.copy();
 		result.spriteControl = spriteControl;//TODO copy
 		
-		result.remote = remote;
+		result.lastHost = lastHost;
 		
 		return result;
 	}

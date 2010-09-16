@@ -22,6 +22,7 @@ package org.totalboumboum.stream.network.client;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -29,6 +30,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.totalboumboum.engine.loop.ClientLoop;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
 import org.totalboumboum.stream.network.message.MessageName;
@@ -154,6 +156,66 @@ public class ClientGeneralConnection
 		}
 	}
 	
+	// TODO must handle this distinction between local and remote players, one way or another...
+	public void requestPlayersAdd(Profile profile)
+	{	for(ClientIndividualConnection connection: individualConnections)
+		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
+			{	if(!profile.isRemote())
+				{	// TODO when profiles are sent, the portraits must be reloaded (images don't go through streams)
+					NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_ADD,profile);
+					connection.writeMessage(message);
+				}
+				else
+				{	//TODO error (?)
+				}
+			}
+		}
+	}
+
+	public void requestPlayersRemove(Profile profile)
+	{	for(ClientIndividualConnection connection: individualConnections)
+		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
+			{	if(!profile.isRemote())
+				{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_REMOVE,profile);
+					connection.writeMessage(message);
+				}
+				else
+				{	//TODO error (?)
+				}
+			}
+		}
+	}
+
+	public void requestPlayersChange(Profile profile)
+	{	for(ClientIndividualConnection connection: individualConnections)
+		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
+			{	if(!profile.isRemote())
+				{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_CHANGE,profile);
+					connection.writeMessage(message);
+				}
+				else
+				{	//TODO error (?)
+				}
+			}
+		}
+	}
+
+	public void requestPlayersSet(int index, Profile profile)
+	{	for(ClientIndividualConnection connection: individualConnections)
+		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
+			{	Profile oldProfile = connection.getPlayerProfiles().get(index);
+				if(!profile.isRemote() && !oldProfile.isRemote())
+				{	List<Profile> data = new ArrayList<Profile>(Arrays.asList(oldProfile,profile));		
+					NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_SET,data);
+					connection.writeMessage(message);
+				}
+				else
+				{	//TODO error (?)
+				}
+			}
+		}
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// ZOOM COEFF		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

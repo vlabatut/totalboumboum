@@ -72,6 +72,14 @@ public class ServerIndividualConnection extends AbstractConnection
 			gameInfoRequested();
 		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_LIST))
 			playersListRequested();
+		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_ADD))
+			playersAddRequested();
+		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_CHANGE))
+			playersChangeRequested();
+		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_SET))
+			playersSetRequested();
+		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_REMOVE))
+			playersRemoveRequested();
 		else if(message.getInfo().equals(MessageName.ENTERS_PLAYERS_SELECTION))
 			entersPlayersSelection(message);
 		else if(message.getInfo().equals(MessageName.EXITS_PLAYERS_SELECTION))
@@ -114,6 +122,26 @@ public class ServerIndividualConnection extends AbstractConnection
 		{	// TODO must remove all the players from this connection
 			generalConnection.playerSelectionExited(this);
 		}
+	}
+	
+	private void playersAddRequested()
+	{	
+		
+	}
+	
+	private void playersChangeRequested()
+	{	
+		
+	}
+	
+	private void playersSetRequested()
+	{	
+		
+	}
+	
+	private void playersRemoveRequested()
+	{	
+		
 	}
 
 	/////////////////////////////////////////////////////////////////

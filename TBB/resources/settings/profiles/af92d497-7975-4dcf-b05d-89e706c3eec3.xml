@@ -3,5 +3,6 @@
 	<general name="Promeneur 3" />
 	<ai name="_promeneur" pack="v200809" />
 	<character name="assistantpirate" packname="superbomberman5" color="RED" />
+ 	<network lastHost="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" />     
 </profile>
 

@@ -99,17 +99,21 @@ public class ProfileLoader
 	
 	private static void loadProfileElement(Element root, Profile result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// general properties
-    	Element general = root.getChild(XmlNames.GENERAL);
-		loadGeneralElement(general,result);
+    	Element generalElt = root.getChild(XmlNames.GENERAL);
+		loadGeneralElement(generalElt,result);
 		
 		// artificial intelligence
-		Element ai = root.getChild(XmlNames.AI);
-		if(ai!=null)
-			loadAiElement(ai,result);
+		Element aiElt = root.getChild(XmlNames.AI);
+		if(aiElt!=null)
+			loadAiElement(aiElt,result);
 		
 		// sprite info
-		Element character = root.getChild(XmlNames.CHARACTER);
-		loadSpriteElement(character,result);
+		Element characterElt = root.getChild(XmlNames.CHARACTER);
+		loadSpriteElement(characterElt,result);
+		
+		// network stuff
+		Element networkElt = root.getChild(XmlNames.NETWORK);
+		loadNetworkElement(networkElt,result); 
 	}
     
     private static void loadGeneralElement(Element root, Profile result)
@@ -155,6 +159,12 @@ public class ProfileLoader
 		loadPortraits(result,packName,folderName,spriteColor);
     }	        
 
+    private static void loadNetworkElement(Element root, Profile result)
+    {	// last host
+    	String lastHost = root.getAttribute(XmlNames.LAST_HOST).getValue();
+    	result.setLastHost(lastHost.trim());
+    }
+    
     public static void reloadPortraits(Profile profile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String spritePackname = profile.getSpritePack();
 		String spriteFoldername = profile.getSpriteFolder();

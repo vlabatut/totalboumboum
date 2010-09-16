@@ -1588,6 +1588,12 @@ public class Launcher
 	 * de cette manière, on peut toujours répondre aux tentatives de connection
 	 * >> à voir si ça ne prend pas trop de ressources ?
 	 * 
+	 * propriété remote des joueurs : comment s'assurer qu'un joueur est bien identifié ?
+	 * >> le central enregistre l'id du dernier hote sur lequel le joueur s'est connecté
+	 * 	  si un joueur essaie de se connecter à partir d'un hôte différent, erreur et on demande au joueur de s'identifier
+	 * >> mais en fait c'est le central qui controle la véracité, c'est lui qui détient le dernier hote de connection
+	 *    donc on ne peut faire de partie enregistrée qu'en passant par le central, basta. sinon c'est du hors-piste, de l'amical.
+	 * 
 	 * GUI: 
 	 *  - dans les cas où on a un panel affichant une liste et d'autres
 	 *    panels affichant l'élément sélectionné, il faudrait que ces derniers écoutent
@@ -1598,7 +1604,8 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 * 	- finir la gestion des opérations sur les joueurs (ajout, etc) niveau serveur et client
+	 * 	- finir la gestion des modifs de joueurs coté serveur
+	 *  - création de profil : initialiser l'hote dans le profil, avec l'id courrante
 	 *  - implémenter les fonctions d'écoute dans la GUI joueurs côté serveur
 	 *  - modifier la GUI sélect joueurs côté client
 	 *  - faut aussi gérer le raffrachissement des connections directes pas encore connectées
