@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.ClientLoop;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
@@ -121,7 +122,8 @@ public class ClientGeneralConnection
 	}
 	
 	public void requestGameInfos()
-	{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_GAME_INFO);
+	{	String id = Configuration.getConnectionsConfiguration().getHostId();
+		NetworkMessage message = new NetworkMessage(MessageName.REQUEST_GAME_INFO,id);
 		for(ClientIndividualConnection connection: individualConnections)
 			connection.writeMessage(message);
 	}

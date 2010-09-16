@@ -23,9 +23,11 @@ package org.totalboumboum.stream.network.server;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.stream.network.AbstractConnection;
 import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.data.game.GameInfo;
@@ -64,22 +66,35 @@ public class ServerIndividualConnection extends AbstractConnection
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// CLIENT STATE			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String hostId = null;
+	
+	public String getClientId()
+	{	return hostId;
+	}
+	
+	public void setClientId(String hostId)
+	{	this.hostId = hostId;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// PROCESS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void messageRead(NetworkMessage message)
 	{	if(message.getInfo().equals(MessageName.REQUEST_GAME_INFO))
-			gameInfoRequested();
+			gameInfoRequested(message);
 		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_LIST))
 			playersListRequested();
 		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_ADD))
-			playersAddRequested();
+			playersAddRequested(message);
 		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_CHANGE))
-			playersChangeRequested();
+			playersChangeRequested(message);
 		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_SET))
-			playersSetRequested();
+			playersSetRequested(message);
 		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_REMOVE))
-			playersRemoveRequested();
+			playersRemoveRequested(message);
 		else if(message.getInfo().equals(MessageName.ENTERS_PLAYERS_SELECTION))
 			entersPlayersSelection(message);
 		else if(message.getInfo().equals(MessageName.EXITS_PLAYERS_SELECTION))
@@ -96,10 +111,11 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION MESSAGES	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void gameInfoRequested()
-	{	GameInfo gameInfo = generalConnection.getGameInfo();
-		NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
-		writer.addMessage(message);
+	private void gameInfoRequested(NetworkMessage message)
+	{	hostId = (String)message.getData();
+		GameInfo gameInfo = generalConnection.getGameInfo();
+		NetworkMessage msg = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
+		writer.addMessage(msg);
 	}
 	
 	private void playersListRequested()
@@ -124,24 +140,34 @@ public class ServerIndividualConnection extends AbstractConnection
 		}
 	}
 	
-	private void playersAddRequested()
-	{	
-		
+	private void playersAddRequested(NetworkMessage message)
+	{	Profile profile = (Profile)message.getData();
+		if(profile.getLastHost().equals(hostId))
+			generalConnection.playersAddRequested(profile,this);
 	}
 	
-	private void playersChangeRequested()
-	{	
-		
+	private void playersChangeRequested(NetworkMessage message)
+	{	Profile profile = (Profile)message.getData();
+		if(profile.getLastHost().equals(hostId))
+			generalConnection.playersChangeRequested(profile,this);
 	}
 	
-	private void playersSetRequested()
-	{	
-		
+	@SuppressWarnings("unchecked")
+	private void playersSetRequested(NetworkMessage message)
+	{	List<Profile> list = (List<Profile>)message.getData();
+		Profile p1 = list.get(0);
+		Profile p2 = list.get(1);
+		String id = p1.getId();
+		if(p1.getLastHost().equals(hostId) && p2.getLastHost().equals(hostId))
+			generalConnection.playersSetRequested(id,p2,this);
 	}
 	
-	private void playersRemoveRequested()
-	{	
-		
+	private void playersRemoveRequested(NetworkMessage message)
+	{	Profile profile = (Profile)message.getData();
+		if(profile.getLastHost().equals(hostId))
+		{	String id = profile.getId();
+			generalConnection.playersRemoveRequested(id,this);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////

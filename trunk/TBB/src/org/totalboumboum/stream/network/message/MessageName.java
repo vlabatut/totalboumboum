@@ -41,22 +41,23 @@ public enum MessageName
 		EXITS_PLAYERS_SELECTION,
 		/** 
 		 * client requests game information
-		 * possible causes:
+		 * >must send its id in the message
+		 * >possible causes:
 		 * 		- client connects for the first time
 		 * 		- client tries to reconnect (after accidental disconnection)
 		 * 		- a manual refresh was performed
 		 * 		- central checks for progress
-		 * behavior:
+		 * >behavior:
 		 * 		- server always fulfills this request (whatever C/S state) 
 		 */ 
 		REQUEST_GAME_INFO,
 		/** 
 		 * client requests players list
-		 * possible causes:
+		 * >possible causes:
 		 * 		- client switches from game selection to player selection
 		 * 		- client just reconnected at this stage
 		 * 		- central might be interested too
-		 * behavior:
+		 * >behavior:
 		 * 		- server answers only when it's open
 		 * 		- or to the central, anytime
 		 */
