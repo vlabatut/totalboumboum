@@ -63,6 +63,12 @@ public enum MessageName
 		REQUEST_PLAYERS_LIST,
 		/** client adds a new player */
 		REQUEST_PLAYERS_ADD,
+		/** client remove one of its players */ 
+		REQUEST_PLAYERS_REMOVE,
+		/** client change one of its players appearance */ 
+		REQUEST_PLAYERS_CHANGE,
+		/** client replace one of its players by another one */ 
+		REQUEST_PLAYERS_SET,
 		/** client sends its current state */ 
 		UPDATE_CLIENT_STATE,
 		

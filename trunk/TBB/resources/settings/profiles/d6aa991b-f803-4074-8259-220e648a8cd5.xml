@@ -3,5 +3,5 @@
 
 	<general name="Joueur humain" />
 	<character name="assistantpirate" packname="superbomberman5" color="CYAN"/>
-
+ 	<network lastHost="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" />     
 </profile>

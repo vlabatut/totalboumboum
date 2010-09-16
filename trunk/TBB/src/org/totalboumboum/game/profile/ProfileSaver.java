@@ -65,6 +65,10 @@ public class ProfileSaver
 		Element characterElement = saveCharacterElement(profile);
 		result.addContent(characterElement);
 		
+		// network stuff
+		Element networkElement = saveNetworkElement(profile);
+		result.addContent(networkElement);
+
 		return result;
 	}
 	
@@ -101,4 +105,12 @@ public class ProfileSaver
 		//
 		return result;
 	}
+
+	private static Element saveNetworkElement(Profile profile)
+	{	Element result = new Element(XmlNames.NETWORK);
+		String lastHost = profile.getLastHost();
+		result.setAttribute(XmlNames.LAST_HOST,lastHost);
+		return result;
+	}
+
 }

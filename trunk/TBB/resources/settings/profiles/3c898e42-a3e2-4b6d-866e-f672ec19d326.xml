@@ -3,5 +3,6 @@
 	<general name="0910.Mançuhan+Pınarer" />
 	<ai name="mancuhanpinarer" pack="v200910" />
 	<character name="shirobon" packname="nesbomberman2" color="RED" />
+ 	<network lastHost="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" />     
 </profile>
 
