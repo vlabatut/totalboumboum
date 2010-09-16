@@ -196,7 +196,7 @@ public class Profile implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public Profile copy()
 	{	Profile result = new Profile();
@@ -217,7 +217,27 @@ public class Profile implements Serializable
 		
 		return result;
 	}
+	
+	public void synch(Profile profile)
+	{
+		//this.aiName = profile.aiName;
+		//this.aiPackname = profile.aiPackname;
+		
+		//this.controlSettingsIndex = profile.controlSettingsIndex;
+		//this.name = profile.name;
+		//this.id = profile.id;
+		//this.portraits = profile.portraits; 
+		
+		this.defaultSprite = profile.defaultSprite;
+		this.selectedSprite = profile.selectedSprite;
+		//this.spriteControl = profile.spriteControl;
+		
+		//this.lastHost = profile.lastHost;
+	}
 
+	/////////////////////////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public boolean equals(Object o)
 	{	boolean result = false;
 		if(o instanceof Profile)

@@ -1560,9 +1560,6 @@ public class Launcher
 	 * ça le met à jour. si déjà connecté, pas la peine de mettre à jour puisqu'il fait des push
 	 * mettre en place un buffer empêchant l'utilisateur de demander plusieurs mise à jour
 	 * 
-	 * faut régler le pb (normal) des exceptions à répétition
-	 * quand le C ou le S ferme son flux
-	 * 
 	 * NOTE règles générales
 	 * 	- une demande d'info auprès du serveur (voire client) ne doit pas être
 	 *    réalisée tant que la GUI n'est pas prête à traiter l'évènement de lecture associé
@@ -1606,9 +1603,10 @@ public class Launcher
 	 * en cours:
 	 * 	- finir la gestion des modifs de joueurs coté serveur
 	 *  - création de profil : initialiser l'hote dans le profil, avec l'id courrante
+	 *  - échange de profil par stream: recharger les portraits
 	 *  - implémenter les fonctions d'écoute dans la GUI joueurs côté serveur
 	 *  - modifier la GUI sélect joueurs côté client
-	 *  - faut aussi gérer le raffrachissement des connections directes pas encore connectées
+	 *  - faut aussi gérer le raffrachissement des serveurs directs pas encore connectées (le client est en avance)
 	 *  	- rajouter un bouton pour tout raffraichir
 	 *  	- raffraichir quand on sélectionne la connection
 	 */
