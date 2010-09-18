@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -333,9 +334,10 @@ public class ServerGeneralConnection implements Runnable
 	
 	public void playersAddRequested(Profile profile, ServerIndividualConnection connection)
 	{	Set<Integer> allowedPlayers;
-
+		int index;
+		
 		gameInfoLock.lock();
-		{	allowedPlayers = gameInfo.getAllowedPlayers();
+		{	allowedPlayers = new TreeSet<Integer>(gameInfo.getAllowedPlayers());
 		}
 		gameInfoLock.unlock();
 		
@@ -343,8 +345,11 @@ public class ServerGeneralConnection implements Runnable
 		{	int playerCount = playerProfiles.size();
 			if(allowedPlayers.contains(playerCount+1))
 				profileAdded(profile,connection);
+			index = playerProfiles.indexOf(profile);
 		}
 		profileLock.unlock();
+
+		fireProfileAdded(index,profile);
 	}
 	
 	public void playersChangeRequested(Profile profile, ServerIndividualConnection connection)
@@ -368,12 +373,15 @@ public class ServerGeneralConnection implements Runnable
 			}
 		}
 		profileLock.unlock();
+
+		fireProfileModified(profile);
 	}
 	
 	public void playersRemoveRequested(String id, ServerIndividualConnection connection)
-	{	profileLock.lock();
-		{	Profile profile = null;
-			boolean found = false;
+	{	Profile profile = null;
+	
+		profileLock.lock();
+		{	boolean found = false;
 			Iterator<Profile> it = playerProfiles.iterator();
 			do
 			{	Profile p = it.next();
@@ -388,10 +396,14 @@ public class ServerGeneralConnection implements Runnable
 				profileRemoved(profile);
 		}
 		profileLock.unlock();
+		
+		fireProfileRemoved(profile);
 	}
 	
 	public void playersSetRequested(String id, Profile profile, ServerIndividualConnection connection)
-	{	profileLock.lock();
+	{	int index;
+		
+		profileLock.lock();
 		{	Profile oldProfile = null;
 			boolean found = false;
 			Iterator<Profile> it = playerProfiles.iterator();
@@ -404,11 +416,13 @@ public class ServerGeneralConnection implements Runnable
 			}
 			while(it.hasNext() && !found);
 			
-			int index = playerProfiles.indexOf(oldProfile);
+			index = playerProfiles.indexOf(oldProfile);
 			if(oldProfile!=null && connection==playerConnections.get(id))
 				profileSet(index,profile,connection);
 		}
 		profileLock.unlock();
+		
+		fireProfileSet(index,profile);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -521,6 +535,21 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	private void fireProfileRemoved(Profile profile)
 	{	for(ServerGeneralConnectionListener listener: listeners)
 			listener.profileRemoved(profile);
+	}
+
+	private void fireProfileAdded(int index, Profile profile)
+	{	for(ServerGeneralConnectionListener listener: listeners)
+			listener.profileAdded(index,profile);
+	}
+
+	private void fireProfileModified(Profile profile)
+	{	for(ServerGeneralConnectionListener listener: listeners)
+			listener.profileModified(profile);
+	}
+
+	private void fireProfileSet(int index, Profile profile)
+	{	for(ServerGeneralConnectionListener listener: listeners)
+			listener.profileSet(index,profile);
 	}
 
 	/////////////////////////////////////////////////////////////////

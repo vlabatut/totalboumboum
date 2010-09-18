@@ -1601,8 +1601,6 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 * 	- finir la gestion des modifs de joueurs coté serveur
-	 *  - création de profil : initialiser l'hote dans le profil, avec l'id courrante
 	 *  - échange de profil par stream: recharger les portraits
 	 *  - implémenter les fonctions d'écoute dans la GUI joueurs côté serveur
 	 *  - modifier la GUI sélect joueurs côté client
