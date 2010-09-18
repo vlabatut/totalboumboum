@@ -1601,8 +1601,11 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - échange de profil par stream: recharger les portraits
+	 *  - vérifier qu'on ne rajoute pas un profil déjà présent dans le beans
+	 *    (à faire le plus tard possible, et ca ne devrait être fait que là, en réalité)
 	 *  - implémenter les fonctions d'écoute dans la GUI joueurs côté serveur
+	 *  - on ne peut changer les controles/couleurs, etc., que sur les joueurs locaux
+	 *    Y COMPRIS POUR LE SERVEUR, donc faire les tests nécessaires à chaque modif de joueur...
 	 *  - modifier la GUI sélect joueurs côté client
 	 *  - faut aussi gérer le raffrachissement des serveurs directs pas encore connectées (le client est en avance)
 	 *  	- rajouter un bouton pour tout raffraichir

@@ -33,12 +33,15 @@ import java.util.TreeSet;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.control.player.RemotePlayerControl;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
@@ -49,6 +52,7 @@ import org.totalboumboum.stream.network.data.host.HostInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.message.MessageName;
 import org.totalboumboum.stream.network.message.NetworkMessage;
+import org.xml.sax.SAXException;
 
 /**
  * 
@@ -344,7 +348,24 @@ public class ServerGeneralConnection implements Runnable
 		profileLock.lock();
 		{	int playerCount = playerProfiles.size();
 			if(allowedPlayers.contains(playerCount+1))
+			{	try
+				{	// images must be loaded because they did not pass the stream	
+					ProfileLoader.reloadPortraits(profile);
+				}
+				catch (ParserConfigurationException e)
+				{	e.printStackTrace();
+				}
+				catch (SAXException e)
+				{	e.printStackTrace();
+				}
+				catch (IOException e)
+				{	e.printStackTrace();
+				}
+				catch (ClassNotFoundException e)
+				{	e.printStackTrace();
+				}
 				profileAdded(profile,connection);
+			}
 			index = playerProfiles.indexOf(profile);
 		}
 		profileLock.unlock();
@@ -368,7 +389,23 @@ public class ServerGeneralConnection implements Runnable
 			while(it.hasNext() && !found);
 			
 			if(profile!=null && connection==playerConnections.get(id))
-			{	prof.synch(profile);
+			{	try
+				{	// images must be loaded because they did not pass the stream	
+					ProfileLoader.reloadPortraits(profile);
+				}
+				catch (ParserConfigurationException e)
+				{	e.printStackTrace();
+				}
+				catch (SAXException e)
+				{	e.printStackTrace();
+				}
+				catch (IOException e)
+				{	e.printStackTrace();
+				}
+				catch (ClassNotFoundException e)
+				{	e.printStackTrace();
+				}
+				prof.synch(profile);
 				profileModified(profile);
 			}
 		}
@@ -418,7 +455,24 @@ public class ServerGeneralConnection implements Runnable
 			
 			index = playerProfiles.indexOf(oldProfile);
 			if(oldProfile!=null && connection==playerConnections.get(id))
+			{	try
+				{	// images must be loaded because they did not pass the stream	
+					ProfileLoader.reloadPortraits(profile);
+				}
+				catch (ParserConfigurationException e)
+				{	e.printStackTrace();
+				}
+				catch (SAXException e)
+				{	e.printStackTrace();
+				}
+				catch (IOException e)
+				{	e.printStackTrace();
+				}
+				catch (ClassNotFoundException e)
+				{	e.printStackTrace();
+				}
 				profileSet(index,profile,connection);
+			}
 		}
 		profileLock.unlock();
 		
