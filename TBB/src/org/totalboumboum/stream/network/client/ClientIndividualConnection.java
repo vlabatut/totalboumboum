@@ -26,13 +26,17 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.stream.network.AbstractConnection;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
 import org.totalboumboum.stream.network.message.MessageName;
 import org.totalboumboum.stream.network.message.NetworkMessage;
+import org.xml.sax.SAXException;
 
 /**
  * 
@@ -164,6 +168,24 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	private void playersListReceived(List<Profile> playerProfiles)
 	{	// update profile list
 		this.playerProfiles = playerProfiles;
+		for(Profile profile: playerProfiles)
+		{	try
+			{	// images must be loaded because they did not pass the stream	
+				ProfileLoader.reloadPortraits(profile);
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
 		
 		// propagate modification
 		generalConnection.profilesChanged(this);
