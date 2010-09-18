@@ -99,6 +99,8 @@ public class ProfilesConfiguration
 		
 		// create profile
 		Profile newProfile = new Profile();
+		String hostId = Configuration.getConnectionsConfiguration().getHostId();
+		newProfile.setLastHost(hostId);
 		newProfile.setName(name);
 		SpriteInfo spriteInfo = newProfile.getDefaultSprite();
 		String spritePack = "superbomberman1";
