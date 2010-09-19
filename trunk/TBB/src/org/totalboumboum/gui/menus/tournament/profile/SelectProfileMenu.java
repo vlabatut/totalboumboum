@@ -130,13 +130,13 @@ public class SelectProfileMenu extends InnerMenuPanel
 				{	profiles.set(index,profile);
 					// NOTE this would be so much cleaner with an events system...
 					if(connection!=null)
-						connection.profileSet(index,profile);
+						connection.profileSet(index,profile,null);
 				}
 				else
 				{	profiles.add(profile);
 					// NOTE this would be so much cleaner with an events system...
 					if(connection!=null)
-						connection.localProfileAdded(profile);
+						connection.profileAdded(profile,null);
 				}
 			}
 			parent.refresh();
