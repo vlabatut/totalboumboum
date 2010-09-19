@@ -1597,15 +1597,15 @@ public class Launcher
 	 *    la liste afin de se mettre à jour automatiquement quand nécessaire.
 	 *  - en fait on peut faire une version simple des souspanels, et une version
 	 *    qui écoute le panel principal et hérite de la version simple
+	 *  - pour la configuration des parties, faut une structure générée au niveau de ConfigurationXxxx
+	 *    avec des sous classes pour le jeu en réseau (une pour client, une pour serveur)
+	 *    tout ça doit implémenter tout ce qui est déjà implémenté au niveau des panels, afin que la GUI
+	 *    ne fasse plus aucun traitement, mais se contente de transmettre les commandes de l'utilisateur au moteur
 	 */ 
 	
 	/**
 	 * en cours:
-	 *  - vérifier qu'on ne rajoute pas un profil déjà présent dans le beans
-	 *    (à faire le plus tard possible, et ca ne devrait être fait que là, en réalité)
 	 *  - implémenter les fonctions d'écoute dans la GUI joueurs côté serveur
-	 *  - on ne peut changer les controles/couleurs, etc., que sur les joueurs locaux
-	 *    Y COMPRIS POUR LE SERVEUR, donc faire les tests nécessaires à chaque modif de joueur...
 	 *  - modifier la GUI sélect joueurs côté client
 	 *  - faut aussi gérer le raffrachissement des serveurs directs pas encore connectées (le client est en avance)
 	 *  	- rajouter un bouton pour tout raffraichir

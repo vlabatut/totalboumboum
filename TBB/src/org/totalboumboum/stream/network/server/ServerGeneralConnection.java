@@ -161,44 +161,66 @@ public class ServerGeneralConnection implements Runnable
 	private Lock profileLock = new ReentrantLock();
 	
 	private void initPlayerProfiles(List<Profile> playerProfiles)
-	{	this.playerProfiles.addAll(playerProfiles);
-		for(Profile profile: playerProfiles)
-			playerConnections.put(profile.getId(),null);
+	{	profileLock.lock();
+		{	this.playerProfiles.addAll(playerProfiles);
+			for(Profile profile: playerProfiles)
+				playerConnections.put(profile.getId(),null);
+		}
+		profileLock.unlock();
+	}
+	
+	public boolean containsProfile(Profile profile)
+	{	boolean result = false;
+		String id = profile.getId();
+		
+		profileLock.lock();
+		{	Iterator<Profile> it = playerProfiles.iterator();
+			while(it.hasNext() && !result)
+			{	Profile p = it.next();
+				String pid = p.getId();
+				result = pid.equals(id);
+			}
+		}
+		profileLock.lock();
+		
+		return result;
 	}
 	
 	public void profileAdded(Profile profile, ServerIndividualConnection connection)
-	{	profileLock.lock();
-		{	int size = playerProfiles.size();
-	
-			gameInfoLock.lock();
-			{	// update player count
-				int playerCount = gameInfo.getPlayerCount();
-				playerCount ++;
-				gameInfo.setPlayerCount(playerCount);
+	{	if(!containsProfile(profile))
+		{	profileLock.lock();
+			{	int size = playerProfiles.size();
 				
-				// update average score
-				double averageScore = gameInfo.getAverageScore();
-				RankingService rankingService = GameStatistics.getRankingService();
-				PlayerRating playerRating = rankingService.getPlayerRating(profile.getId());
-				double score = playerRating.getRating();
-				averageScore = (averageScore*size+score) / (size+1);
-				gameInfo.setAverageScore(averageScore);
-		
-				// send the appropriate message 
-				NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
-				propagateMessage(message);
-			}		
-			gameInfoLock.lock();
-		
-			// update players list
-			playerProfiles.add(profile);
-			playerConnections.put(profile.getId(),connection);
+				gameInfoLock.lock();
+				{	// update player count
+					int playerCount = gameInfo.getPlayerCount();
+					playerCount ++;
+					gameInfo.setPlayerCount(playerCount);
+					
+					// update average score
+					double averageScore = gameInfo.getAverageScore();
+					RankingService rankingService = GameStatistics.getRankingService();
+					PlayerRating playerRating = rankingService.getPlayerRating(profile.getId());
+					double score = playerRating.getRating();
+					averageScore = (averageScore*size+score) / (size+1);
+					gameInfo.setAverageScore(averageScore);
 			
-			// send the appropriate message
-			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
-			propagateMessage(message);
+					// send the appropriate message 
+					NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
+					propagateMessage(message);
+				}		
+				gameInfoLock.lock();
+			
+				// update players list
+				playerProfiles.add(profile);
+				playerConnections.put(profile.getId(),connection);
+				
+				// send the appropriate message
+				NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
+				propagateMessage(message);
+			}
+			profileLock.unlock();
 		}
-		profileLock.unlock();
 	}
 	
 	/** 
@@ -218,38 +240,40 @@ public class ServerGeneralConnection implements Runnable
 	 * some profile was switched for another one
 	 */
 	public void profileSet(int index, Profile profile, ServerIndividualConnection connection)
-	{	profileLock.lock();
-		{	Profile oldProfile = playerProfiles.get(index);
-			int size = playerProfiles.size();
-	
-			gameInfoLock.lock();
-			{	// update average score
-				double averageScore = gameInfo.getAverageScore();
-				RankingService rankingService = GameStatistics.getRankingService();
-				PlayerRating oldRating = rankingService.getPlayerRating(oldProfile.getId()); 
-				double oldScore = oldRating.getRating();
-				averageScore = averageScore - oldScore/size;
-				PlayerRating newRating = rankingService.getPlayerRating(profile.getId());
-				double newScore = newRating.getRating();
-				averageScore = averageScore + newScore/size;
-				gameInfo.setAverageScore(averageScore);
-	
-				// send the appropriate message 
-				NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
-				propagateMessage(message);
-			}		
-			gameInfoLock.lock();
+	{	if(!containsProfile(profile))
+		{	profileLock.lock();
+			{	Profile oldProfile = playerProfiles.get(index);
+				int size = playerProfiles.size();
 		
-			// update profiles list
-			playerConnections.remove(oldProfile.getId());
-			playerConnections.put(profile.getId(),connection);
-			playerProfiles.set(index,profile);
+				gameInfoLock.lock();
+				{	// update average score
+					double averageScore = gameInfo.getAverageScore();
+					RankingService rankingService = GameStatistics.getRankingService();
+					PlayerRating oldRating = rankingService.getPlayerRating(oldProfile.getId()); 
+					double oldScore = oldRating.getRating();
+					averageScore = averageScore - oldScore/size;
+					PlayerRating newRating = rankingService.getPlayerRating(profile.getId());
+					double newScore = newRating.getRating();
+					averageScore = averageScore + newScore/size;
+					gameInfo.setAverageScore(averageScore);
+		
+					// send the appropriate message 
+					NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
+					propagateMessage(message);
+				}		
+				gameInfoLock.lock();
 			
-			// send the appropriate message 
-			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
-			propagateMessage(message);
+				// update profiles list
+				playerConnections.remove(oldProfile.getId());
+				playerConnections.put(profile.getId(),connection);
+				playerProfiles.set(index,profile);
+				
+				// send the appropriate message 
+				NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
+				propagateMessage(message);
+			}
+			profileLock.unlock();
 		}
-		profileLock.unlock();
 	}
 
 	/**

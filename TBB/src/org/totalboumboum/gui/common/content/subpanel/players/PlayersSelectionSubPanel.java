@@ -50,6 +50,7 @@ import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
@@ -208,9 +209,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			// type
 			{	// content
 				String profileType;
-				if(profile.isRemote())
-					profileType = GuiKeys.COMMON_PLAYERS_SELECTION_DATA_REMOTE;
-				else if(profile.hasAi())
+				if(profile.hasAi())
 					profileType = GuiKeys.COMMON_PLAYERS_SELECTION_DATA_COMPUTER;
 				else
 					profileType = GuiKeys.COMMON_PLAYERS_SELECTION_DATA_HUMAN;
@@ -283,10 +282,14 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			}
 			// controls
 			{	// content
-				int ctrlIndex = profile.getControlSettingsIndex();
-				String text = controlTexts.get(ctrlIndex);
-				String tooltip = controlTooltips.get(ctrlIndex);
-				setLabelText(line,COL_CONTROLS,text, tooltip);
+				if(profile.isRemote())
+					setLabelKey(line,COL_CONTROLS,GuiKeys.COMMON_PLAYERS_SELECTION_DATA_REMOTE,true);
+				else 
+				{	int ctrlIndex = profile.getControlSettingsIndex();
+					String text = controlTexts.get(ctrlIndex);
+					String tooltip = controlTooltips.get(ctrlIndex);
+					setLabelText(line,COL_CONTROLS,text,tooltip);
+				}
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
 				setLabelBackground(line,COL_CONTROLS,bg);
@@ -402,14 +405,17 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	public void mousePressed(MouseEvent e)
 	{	MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = getLabelPositionMultiple(label);
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 		switch(pos[2])
 		{	case COL_DELETE:
 				{	// delete all
 					if(pos[0]==0)
-					{	while(players.size()>0)
-						{	players.remove(0);
-							refresh();
-							firePlayerRemoved(0);
+					{	if(connection==null) //only if not a client
+						{	while(players.size()>0)
+							{	players.remove(0);
+								refresh();
+								firePlayerRemoved(0);
+							}
 						}
 					}
 					// delete player
@@ -421,9 +427,13 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 						}
 						// or remove a profile
 						else if(index<players.size())
-						{	players.remove(index);
-							refresh();
-							firePlayerRemoved(index);
+						{	// only if host is not a client or profile is local
+							Profile profile = players.get(index);
+							if(connection==null || !profile.isRemote())
+							{	players.remove(index);
+								refresh();
+								firePlayerRemoved(index);
+							}
 						}
 					}
 				}
@@ -431,34 +441,37 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			case COL_PROFILE:
 				{	// random selection
 					if(pos[0]==0)
-					{	try
-						{	ProfilesConfiguration.randomlyCompleteProfiles(players,LINES-1);
-							refresh();
-							firePlayersAdded();
-						}
-						catch (ParserConfigurationException e1)
-						{	e1.printStackTrace();
-						}
-						catch (SAXException e1)
-						{	e1.printStackTrace();
-						}
-						catch (IOException e1)
-						{	e1.printStackTrace();
-						}
-						catch (ClassNotFoundException e1)
-						{	e1.printStackTrace();
-						}
-						catch (IllegalArgumentException e1)
-						{	e1.printStackTrace();
-						} 
-						catch (SecurityException e1)
-						{	e1.printStackTrace();
-						}
-						catch (IllegalAccessException e1)
-						{	e1.printStackTrace();
-						}
-						catch (NoSuchFieldException e1)
-						{	e1.printStackTrace();
+					{	// only if not a client
+						if(connection==null)
+						{	try
+							{	ProfilesConfiguration.randomlyCompleteProfiles(players,LINES-1);
+								refresh();
+								firePlayersAdded();
+							}
+							catch (ParserConfigurationException e1)
+							{	e1.printStackTrace();
+							}
+							catch (SAXException e1)
+							{	e1.printStackTrace();
+							}
+							catch (IOException e1)
+							{	e1.printStackTrace();
+							}
+							catch (ClassNotFoundException e1)
+							{	e1.printStackTrace();
+							}
+							catch (IllegalArgumentException e1)
+							{	e1.printStackTrace();
+							} 
+							catch (SecurityException e1)
+							{	e1.printStackTrace();
+							}
+							catch (IllegalAccessException e1)
+							{	e1.printStackTrace();
+							}
+							catch (NoSuchFieldException e1)
+							{	e1.printStackTrace();
+							}
 						}
 					}
 					else
@@ -469,57 +482,63 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				break;
 			case COL_HERO:
 				{	int index = pos[0]-1;
-					fireHeroSet(index);
+					Profile profile = players.get(index);
+					// only if host is not a client or profile is local
+					if(connection==null || !profile.isRemote())
+						fireHeroSet(index);
 				}
 				break;
 			case COL_RANK:
-				{	int index = pos[0]-1;
-					Iterator<Profile> it = players.iterator();
-					RankingService rankingService = GameStatistics.getRankingService();
-					Profile profile = players.get(index);
-					String playerId = profile.getId();
-					PlayerRating playerRating = rankingService.getPlayerRating(playerId);
-					if(playerRating==null)
-					{	while(it.hasNext())
-						{	profile = it.next();
-							playerId = profile.getId();
-							playerRating = rankingService.getPlayerRating(playerId);
-							if(playerRating==null)
-							{	it.remove();
-								refresh();
-								firePlayerRemoved(index);
+				{	// only if host is not a client
+					if(connection==null)
+					{	int index = pos[0]-1;
+						Iterator<Profile> it = players.iterator();
+						RankingService rankingService = GameStatistics.getRankingService();
+						Profile profile = players.get(index);
+						String playerId = profile.getId();
+						PlayerRating playerRating = rankingService.getPlayerRating(playerId);
+						if(playerRating==null)
+						{	while(it.hasNext())
+							{	profile = it.next();
+								playerId = profile.getId();
+								playerRating = rankingService.getPlayerRating(playerId);
+								if(playerRating==null)
+								{	it.remove();
+									refresh();
+									firePlayerRemoved(index);
+								}
 							}
 						}
-					}
-					else
-					{	try
-						{	ProfilesConfiguration.rankCompleteProfiles(players,LINES-1,profile);
-							refresh();
-							firePlayersAdded();
-						}
-						catch (IllegalArgumentException e1)
-						{	e1.printStackTrace();
-						}
-						catch (SecurityException e1)
-						{	e1.printStackTrace();
-						}
-						catch (ParserConfigurationException e1)
-						{	e1.printStackTrace();
-						}
-						catch (SAXException e1)
-						{	e1.printStackTrace();
-						}
-						catch (IOException e1)
-						{	e1.printStackTrace();
-						}
-						catch (ClassNotFoundException e1)
-						{	e1.printStackTrace();
-						}
-						catch (IllegalAccessException e1)
-						{	e1.printStackTrace();
-						}
-						catch (NoSuchFieldException e1)
-						{	e1.printStackTrace();
+						else
+						{	try
+							{	ProfilesConfiguration.rankCompleteProfiles(players,LINES-1,profile);
+								refresh();
+								firePlayersAdded();
+							}
+							catch (IllegalArgumentException e1)
+							{	e1.printStackTrace();
+							}
+							catch (SecurityException e1)
+							{	e1.printStackTrace();
+							}
+							catch (ParserConfigurationException e1)
+							{	e1.printStackTrace();
+							}
+							catch (SAXException e1)
+							{	e1.printStackTrace();
+							}
+							catch (IOException e1)
+							{	e1.printStackTrace();
+							}
+							catch (ClassNotFoundException e1)
+							{	e1.printStackTrace();
+							}
+							catch (IllegalAccessException e1)
+							{	e1.printStackTrace();
+							}
+							catch (NoSuchFieldException e1)
+							{	e1.printStackTrace();
+							}
 						}
 					}
 				}
@@ -527,22 +546,26 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			case COL_COLOR:
 				{	int index = pos[0]-1;
 					Profile profile = players.get(index);
-					PredefinedColor color = profile.getSpriteColor();
-					color = Configuration.getProfilesConfiguration().getNextFreeColor(players,profile,color);
-					profile.getSelectedSprite().setColor(color);
-					reloadPortraits(pos[0]);
-					refreshPlayer(pos[0]);
-					fireColorSet(index);
+					if(!profile.isRemote())
+					{	PredefinedColor color = profile.getSpriteColor();
+						color = Configuration.getProfilesConfiguration().getNextFreeColor(players,profile,color);
+						profile.getSelectedSprite().setColor(color);
+						reloadPortraits(pos[0]);
+						refreshPlayer(pos[0]);
+						fireColorSet(index);
+					}
 				}
 				break;
 			case COL_CONTROLS:
 				{	int index = pos[0]-1;
 					Profile profile = players.get(index);
-					int ctrlIndex = profile.getControlSettingsIndex();
-					ctrlIndex = Configuration.getProfilesConfiguration().getNextFreeControls(players,ctrlIndex);
-					profile.setControlSettingsIndex(ctrlIndex);
-					setLabelText(pos[0],pos[2],controlTexts.get(ctrlIndex),controlTooltips.get(ctrlIndex));
-					fireControlsSet(index);
+					if(!profile.isRemote())
+					{	int ctrlIndex = profile.getControlSettingsIndex();
+						ctrlIndex = Configuration.getProfilesConfiguration().getNextFreeControls(players,ctrlIndex);
+						profile.setControlSettingsIndex(ctrlIndex);
+						setLabelText(pos[0],pos[2],controlTexts.get(ctrlIndex),controlTooltips.get(ctrlIndex));
+						fireControlsSet(index);
+					}
 				}
 				break;
 		}
