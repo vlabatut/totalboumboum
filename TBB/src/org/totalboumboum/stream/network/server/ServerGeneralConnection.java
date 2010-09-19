@@ -160,6 +160,16 @@ public class ServerGeneralConnection implements Runnable
 	private final HashMap<String,ServerIndividualConnection> playerConnections = new HashMap<String, ServerIndividualConnection>(); 
 	private Lock profileLock = new ReentrantLock();
 	
+	public List<Profile> getPlayerProfiles()
+	{	List<Profile> result;
+	
+		profileLock.lock();
+		result = new ArrayList<Profile>(playerProfiles);
+		profileLock.unlock();
+		
+		return result;
+	}
+	
 	private void initPlayerProfiles(List<Profile> playerProfiles)
 	{	profileLock.lock();
 		{	this.playerProfiles.addAll(playerProfiles);

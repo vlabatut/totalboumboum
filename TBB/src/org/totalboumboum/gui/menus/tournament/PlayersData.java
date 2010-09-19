@@ -41,7 +41,9 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.menus.tournament.hero.SelectHeroSplitPanel;
 import org.totalboumboum.gui.menus.tournament.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnectionListener;
 import org.xml.sax.SAXException;
 
 /**
@@ -49,7 +51,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener
+public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, ServerGeneralConnectionListener
 {	
 	private static final long serialVersionUID = 1L;
 	
@@ -57,6 +59,10 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	
 	public PlayersData(SplitMenuPanel container)
 	{	super(container);
+		
+		connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(connection!=null)
+			connection.addListener(this);
 		
 		// title
 		String key = GuiKeys.MENU_TOURNAMENT_PLAYERS_TITLE;
@@ -174,5 +180,42 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	@Override
 	public void playerSelectionControlsSet(int index)
 	{	// not used here
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SERVER CONNECTION LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ServerGeneralConnection connection = null;
+	
+	@Override
+	public void profileAdded(int index, Profile profile)
+	{	// NOTE ugly fix
+		List<Profile> profiles = connection.getPlayerProfiles();
+		GameInfo gameInfo = connection.getGameInfo();
+		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
+	}
+
+	@Override
+	public void profileRemoved(Profile profile)
+	{	// NOTE ugly fix
+		List<Profile> profiles = connection.getPlayerProfiles();
+		GameInfo gameInfo = connection.getGameInfo();
+		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
+	}
+
+	@Override
+	public void profileModified(Profile profile)
+	{	// NOTE ugly fix
+		List<Profile> profiles = connection.getPlayerProfiles();
+		GameInfo gameInfo = connection.getGameInfo();
+		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
+	}
+
+	@Override
+	public void profileSet(int index, Profile profile)
+	{	// NOTE ugly fix
+		List<Profile> profiles = connection.getPlayerProfiles();
+		GameInfo gameInfo = connection.getGameInfo();
+		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
 	}
 }
