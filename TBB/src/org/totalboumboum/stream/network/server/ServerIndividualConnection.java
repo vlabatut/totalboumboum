@@ -126,7 +126,12 @@ public class ServerIndividualConnection extends AbstractConnection
 	private void entersPlayersSelection(NetworkMessage message)
 	{	boolean local = (Boolean) message.getData();
 		if(local)
+		{	// update state
 			state = ClientState.SELECTING_PLAYERS;
+			// send back players list
+			NetworkMessage msg = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,generalConnection.getPlayerProfiles());
+			writeMessage(msg);
+		}
 		else
 			state = ClientState.INTERESTED_ELSEWHERE;
 	}

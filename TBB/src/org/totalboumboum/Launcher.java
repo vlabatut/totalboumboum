@@ -1606,8 +1606,15 @@ public class Launcher
 	/**
 	 * en cours:
 	 *  - modifier la GUI sélect joueurs côté client
+	 *  - tester l'état du client pour savoir si on peut passer à la sélection des joueurs
+	 *  - vérifier qu'on fait bien la màj de l'état du client, à la fois coté C et S
 	 *  - faut aussi gérer le raffraichissement des serveurs directs pas encore connectées (le client est en avance)
 	 *  	- rajouter un bouton pour tout raffraichir
 	 *  	- raffraichir quand on sélectionne la connection
+	 */
+	
+	/**
+	 * bugs réseau
+	 * 	- lancer serveur, client, déconnecter client : null exception coté serveur
 	 */
 }

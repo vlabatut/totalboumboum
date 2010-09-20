@@ -74,7 +74,7 @@ public class RunnableWriter implements Runnable
 			{	NetworkMessage message = getMessage();
 				out.writeObject(message);
 				out.flush();out.reset();
-System.out.println(message);
+System.out.println("<<"+message);
 			}
 			catch(SocketException e)
 			{	// stream broken
