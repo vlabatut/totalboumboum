@@ -21,18 +21,11 @@ package org.totalboumboum.gui.menus.network;
  * 
  */
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
-import org.totalboumboum.configuration.profiles.ProfilesSelection;
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.profile.Profile;
-import org.totalboumboum.game.profile.ProfileLoader;
-import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -40,14 +33,16 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.menus.network.hero.SelectHeroSplitPanel;
 import org.totalboumboum.gui.menus.network.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.xml.sax.SAXException;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
+import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 
 /**
  * 
  * @author Vincent Labatut
  *
  */
-public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener
+public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, ClientGeneralConnectionListener
 {	
 	private static final long serialVersionUID = 1L;
 	
@@ -55,6 +50,10 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	
 	public PlayersData(SplitMenuPanel container)
 	{	super(container);
+		
+		connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		if(connection!=null)
+			connection.addListener(this);
 		
 		// title
 		String key = GuiKeys.MENU_NETWORK_PLAYERS_TITLE;
@@ -71,55 +70,20 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
-	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
-		Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
-		playersPanel.setAllowedPlayers(allowedPlayers);
+	{	//AbstractTournament tournament = tournamentConfiguration.getTournament();
+		//Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
+		//playersPanel.setAllowedPlayers(allowedPlayers);
 		//playersPanel.refresh();
 	}
 		
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT CONFIGURATION		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private TournamentConfiguration tournamentConfiguration;
-//	private ArrayList<Profile> players;
-	
-	public void setTournamentConfiguration(TournamentConfiguration tournamentConfiguration)
-	{	this.tournamentConfiguration = tournamentConfiguration;
-		AbstractTournament tournament = tournamentConfiguration.getTournament();
-		Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
-		ProfilesSelection profilesSelection = tournamentConfiguration.getProfilesSelection();
-		List<Profile> selectedProfiles = new ArrayList<Profile>();
-		try
-		{	selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
-		}
-		catch (IllegalArgumentException e1)
-		{	e1.printStackTrace();
-		}
-		catch (SecurityException e1)
-		{	e1.printStackTrace();
-		}
-		catch (ParserConfigurationException e1)
-		{	e1.printStackTrace();
-		}
-		catch (SAXException e1)
-		{	e1.printStackTrace();
-		}
-		catch (IOException e1)
-		{	e1.printStackTrace();
-		}
-		catch (IllegalAccessException e1)
-		{	e1.printStackTrace();
-		}
-		catch (NoSuchFieldException e1)
-		{	e1.printStackTrace();
-		}
-		catch (ClassNotFoundException e1)
-		{	e1.printStackTrace();
-		}
-		playersPanel.setPlayers(selectedProfiles,allowedPlayers);
+	public void setTournamentConfiguration()
+	{	// nothing to do
 	}
-	
-	public List<Profile> getSelectedProfiles()
+
+	private List<Profile> getSelectedProfiles()
 	{	return playersPanel.getPlayers();	
 	}
 
@@ -128,40 +92,71 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void playerSelectionHeroSet(int index)
-	{	Profile profile = playersPanel.getPlayer(index);
+	{	// supposedly for a local player
+		Profile profile = playersPanel.getPlayer(index);
 		SelectHeroSplitPanel selectHeroPanel = new SelectHeroSplitPanel(container.getMenuContainer(),container,profile);
 		getMenuContainer().replaceWith(selectHeroPanel);	
 	}
 
 	@Override
 	public void playerSelectionPlayerAdded(int index)
-	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,getSelectedProfiles());
+	{	// supposedly for a local player
+		SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,getSelectedProfiles());
 		getMenuContainer().replaceWith(selectProfilePanel);
 	}
 
 	@Override
 	public void playerSelectionPlayerRemoved(int index)
-	{	fireDataPanelSelectionChange();
+	{	// supposedly for a local player
+		fireDataPanelSelectionChange();
 	}
 
 	@Override
 	public void playerSelectionProfileSet(int index)
-	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,getSelectedProfiles());
+	{	// supposedly for a local player
+		SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,getSelectedProfiles());
 		getMenuContainer().replaceWith(selectProfilePanel);
 	}
 
 	@Override
 	public void playerSelectionPlayersAdded()
-	{	// TODO Auto-generated method stub
+	{	// should not be possible
 	}
 
 	@Override
 	public void playerSelectionColorSet(int index)
-	{	// TODO Auto-generated method stub
+	{	// nothing to do here
 	}
 
 	@Override
 	public void playerSelectionControlsSet(int index)
-	{	// TODO Auto-generated method stub
+	{	// nothing to do here
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CLIENT CONNECTION LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ClientGeneralConnection connection = null;
+
+	@Override
+	public void connectionAdded(ClientIndividualConnection connection, int index)
+	{	// nothing to do here
+	}
+
+	@Override
+	public void connectionRemoved(ClientIndividualConnection connection,int index)
+	{	// nothing to do here
+	}
+
+	@Override
+	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index)
+	{	// nothing to do here
+	}
+
+	@Override
+	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
+	{	Set<Integer> allowedPlayers = connection.getGameInfo().getAllowedPlayers();
+		List<Profile> selectedProfiles = connection.getPlayerProfiles();
+		playersPanel.setPlayers(selectedProfiles,allowedPlayers);
 	}
 }
