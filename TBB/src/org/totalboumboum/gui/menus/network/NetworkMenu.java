@@ -29,6 +29,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
 import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.game.profile.Profile;
@@ -40,6 +41,8 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.data.game.GameInfo;
 
 /**
  * 
@@ -119,7 +122,15 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	}
 	
 	private void refreshButtons()
-	{	if(tournament==null) //TODO à compléter
+	{	// games
+		GameInfo gameInfo = gamesData.getSelectedGame();
+		if(gameInfo==null)
+			buttonGamesNext.setEnabled(false);
+		else
+			buttonGamesNext.setEnabled(false);
+		
+		// players
+		if(tournament==null) //TODO à compléter
 			buttonPlayersNext.setEnabled(false);
 		else
 			buttonPlayersNext.setEnabled(true);
@@ -206,7 +217,11 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_GAMES_BUTTON_NEXT))
 		{	// set payers panel
-//TODO			playersData.setTournamentConfiguration(tournamentConfiguration);
+			GameInfo gameInfo = gamesData.getSelectedGame();
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			connection.enterPlayerSelection(gameInfo);
+			playersData.setTournamentConfiguration();
+			
 			setButtonsPlayers();
 			refresh();
 			container.setDataPart(playersData);

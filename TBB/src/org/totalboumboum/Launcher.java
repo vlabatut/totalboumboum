@@ -1605,9 +1605,8 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - implémenter les fonctions d'écoute dans la GUI joueurs côté serveur
 	 *  - modifier la GUI sélect joueurs côté client
-	 *  - faut aussi gérer le raffrachissement des serveurs directs pas encore connectées (le client est en avance)
+	 *  - faut aussi gérer le raffraichissement des serveurs directs pas encore connectées (le client est en avance)
 	 *  	- rajouter un bouton pour tout raffraichir
 	 *  	- raffraichir quand on sélectionne la connection
 	 */
