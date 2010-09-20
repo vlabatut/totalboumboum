@@ -293,6 +293,7 @@ catch (UnknownHostException e)
 		if(gameInfo!=null)
 			hostInfo = gameInfo.getHostInfo();
 		hostPanel.setHostInfo(hostInfo);
+		fireDataPanelSelectionChange();
 	}
 
 	@Override
