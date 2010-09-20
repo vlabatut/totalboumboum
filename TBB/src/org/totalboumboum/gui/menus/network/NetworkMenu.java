@@ -43,6 +43,7 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.data.game.GameInfo;
+import org.totalboumboum.stream.network.data.host.HostState;
 
 /**
  * 
@@ -96,7 +97,8 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	}
 	
 	private void setButtonsGames()
-	{	removeAll();
+	{	refreshButtons();
+		removeAll();
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonGamesPrevious);
@@ -109,7 +111,8 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	}
 	
 	private void setButtonsPlayers()
-	{	removeAll();
+	{	refreshButtons();
+		removeAll();
 		add(buttonQuit);
 		add(Box.createHorizontalGlue());
 		add(buttonPlayersPrevious);
@@ -124,10 +127,10 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	private void refreshButtons()
 	{	// games
 		GameInfo gameInfo = gamesData.getSelectedGame();
-		if(gameInfo==null)
+		if(gameInfo==null || gameInfo.getHostInfo().getState()!=HostState.OPEN)
 			buttonGamesNext.setEnabled(false);
 		else
-			buttonGamesNext.setEnabled(false);
+			buttonGamesNext.setEnabled(true);
 		
 		// players
 		if(tournament==null) //TODO à compléter
@@ -186,7 +189,7 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_NEXT))
 		{	// synch game options
-			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(playersData.getSelectedProfiles());
+//			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(playersData.getSelectedProfiles());
 //TODO			tournamentConfiguration.setProfilesSelection(profilesSelection);
 			
 			// set the tournament
