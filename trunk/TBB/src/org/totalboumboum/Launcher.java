@@ -1616,6 +1616,7 @@ public class Launcher
 	 *  - faut aussi gérer le raffraichissement des serveurs directs pas encore connectées (le client est en avance)
 	 *  	- rajouter un bouton pour tout raffraichir
 	 *  	- raffraichir quand on sélectionne la connection
+	 *  - implémenter le blocage des joueurs côté serveur
 	 */
 	
 	/**
