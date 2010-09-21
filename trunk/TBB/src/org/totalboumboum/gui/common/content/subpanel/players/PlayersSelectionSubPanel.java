@@ -289,15 +289,15 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 					String text = controlTexts.get(ctrlIndex);
 					String tooltip = controlTooltips.get(ctrlIndex);
 					setLabelText(line,COL_CONTROLS,text,tooltip);
+					// mouse listener
+					MyLabel lbl = getLabel(line,COL_CONTROLS);
+					lbl.removeMouseListener(this); //just in case
+					lbl.addMouseListener(this);
+					lbl.setMouseSensitive(true);
 				}
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
 				setLabelBackground(line,COL_CONTROLS,bg);
-				// mouse listener
-				MyLabel lbl = getLabel(line,COL_CONTROLS);
-				lbl.removeMouseListener(this); //just in case
-				lbl.addMouseListener(this);
-				lbl.setMouseSensitive(true);
 			}
 		}
 		
