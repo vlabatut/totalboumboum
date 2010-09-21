@@ -1579,7 +1579,11 @@ public class Launcher
 	 * 
 	 * faut revoir la notion de profil:
 	 * 	- connecter directement les stats
-	 *  - introduire la distinction entre profil local et distant
+	 *  - introduire la distinction entre profil local et distant (fait)
+	 *  
+	 *  ca devrait pas être possible d'avoir un profil sans stats
+	 *  toutes les stats devraient être centralisées et chargées quand nécessaire
+	 *  y compris pour les rencontres locales (qui peuvent être stockées le temps d'avoir un accès réseau)
 	 *  
 	 * en fait dès le démarrage, un process gère les tentatives de connection sur le port configuré
 	 * de cette manière, on peut toujours répondre aux tentatives de connection
@@ -1608,6 +1612,7 @@ public class Launcher
 	 *  - modifier la GUI sélect joueurs côté client
 	 *  - tester l'état du client pour savoir si on peut passer à la sélection des joueurs
 	 *  - vérifier qu'on fait bien la màj de l'état du client, à la fois coté C et S
+	 *  - un joueur inconnu doit être rajouté dans la BD locale
 	 *  - faut aussi gérer le raffraichissement des serveurs directs pas encore connectées (le client est en avance)
 	 *  	- rajouter un bouton pour tout raffraichir
 	 *  	- raffraichir quand on sélectionne la connection
