@@ -211,7 +211,9 @@ public class ServerGeneralConnection implements Runnable
 					double averageScore = gameInfo.getAverageScore();
 					RankingService rankingService = GameStatistics.getRankingService();
 					PlayerRating playerRating = rankingService.getPlayerRating(profile.getId());
-					double score = playerRating.getRating();
+					double score = 0;
+					if(playerRating!=null)
+						score = playerRating.getRating();
 					averageScore = (averageScore*size+score) / (size+1);
 					gameInfo.setAverageScore(averageScore);
 			
@@ -260,10 +262,14 @@ public class ServerGeneralConnection implements Runnable
 					double averageScore = gameInfo.getAverageScore();
 					RankingService rankingService = GameStatistics.getRankingService();
 					PlayerRating oldRating = rankingService.getPlayerRating(oldProfile.getId()); 
-					double oldScore = oldRating.getRating();
+					double oldScore = 0;
+					if(oldRating!=null)
+						oldScore = oldRating.getRating();
 					averageScore = averageScore - oldScore/size;
 					PlayerRating newRating = rankingService.getPlayerRating(profile.getId());
-					double newScore = newRating.getRating();
+					double newScore = 0;
+					if(newRating!=null)
+						newScore = newRating.getRating();
 					averageScore = averageScore + newScore/size;
 					gameInfo.setAverageScore(averageScore);
 		
