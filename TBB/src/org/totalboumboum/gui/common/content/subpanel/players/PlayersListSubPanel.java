@@ -141,9 +141,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 				// profile type
 				{	String aiName = profile.getAiName();
 					String key;
-					if(profile.isRemote())
-						key = GuiKeys.COMMON_PLAYERS_LIST_DATA_REMOTE;
-					else if(aiName==null)
+					if(aiName==null)
 						key = GuiKeys.COMMON_PLAYERS_LIST_DATA_HUMAN;
 					else
 						key = GuiKeys.COMMON_PLAYERS_LIST_DATA_COMPUTER;
@@ -152,11 +150,15 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 				}
 				// controls
 				if(showControls)
-				{	int index = profile.getControlSettingsIndex();
-					setLabelText(line,col,controlTexts.get(index),controlTooltips.get(index));
-					MyLabel label = getLabel(line,col);
-					label.addMouseListener(this);
-					label.setMouseSensitive(true);
+				{	if(profile.isRemote())
+						setLabelKey(line,col,GuiKeys.COMMON_PLAYERS_LIST_DATA_REMOTE,true);
+					else 
+					{	int index = profile.getControlSettingsIndex();
+						setLabelText(line,col,controlTexts.get(index),controlTooltips.get(index));
+						MyLabel label = getLabel(line,col);
+						label.addMouseListener(this);
+						label.setMouseSensitive(true);
+					}
 					col++;
 				}
 				// name
