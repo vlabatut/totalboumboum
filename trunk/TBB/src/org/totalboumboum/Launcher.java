@@ -1609,6 +1609,9 @@ public class Launcher
 	
 	/**
 	 * en cours:
+	 *  - tester encore l'ajout/suppression de joueur coté client
+	 *  	rque1: ds la liste de joueurs, chaque action doit être passée au serveur et pas exécutée localement, même sur les joueurs locaux
+	 *  	rque2: le serveur ne raffraichit pas sa propre GUI quand le client ajoute un joueur
 	 *  - modifier la GUI sélect joueurs côté client
 	 *  - tester l'état du client pour savoir si on peut passer à la sélection des joueurs
 	 *  - vérifier qu'on fait bien la màj de l'état du client, à la fois coté C et S

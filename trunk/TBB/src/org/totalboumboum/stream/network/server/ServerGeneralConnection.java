@@ -29,7 +29,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -377,17 +376,18 @@ public class ServerGeneralConnection implements Runnable
 	}
 	
 	public void playersAddRequested(Profile profile, ServerIndividualConnection connection)
-	{	Set<Integer> allowedPlayers;
+	{	
+//		Set<Integer> allowedPlayers;
 		int index;
 		
-		gameInfoLock.lock();
-		{	allowedPlayers = new TreeSet<Integer>(gameInfo.getAllowedPlayers());
-		}
-		gameInfoLock.unlock();
+//		gameInfoLock.lock();
+//		{	allowedPlayers = new TreeSet<Integer>(gameInfo.getAllowedPlayers());
+//		}
+//		gameInfoLock.unlock();
 		
 		profileLock.lock();
-		{	int playerCount = playerProfiles.size();
-			if(allowedPlayers.contains(playerCount+1))
+//		{	int playerCount = playerProfiles.size();
+//			if(allowedPlayers.contains(playerCount+1))
 			{	try
 				{	// images must be loaded because they did not pass the stream	
 					ProfileLoader.reloadPortraits(profile);
@@ -407,7 +407,7 @@ public class ServerGeneralConnection implements Runnable
 				profileAdded(profile,connection);
 			}
 			index = playerProfiles.indexOf(profile);
-		}
+//		}
 		profileLock.unlock();
 
 		fireProfileAdded(index,profile);

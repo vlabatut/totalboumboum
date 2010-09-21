@@ -263,4 +263,15 @@ public class Profile implements Serializable
 		
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	String result = "";
+		result = result + name;
+		result = result + ":" + id;
+		return result;
+	}
 }
