@@ -109,33 +109,34 @@ public class SelectProfileMenu extends InnerMenuPanel
 				while(!profilesConfiguration.isFreeColor(profiles,selectedColor))
 					selectedColor = profilesConfiguration.getNextFreeColor(profiles,profile,selectedColor);
 				profile.getSelectedSprite().setColor(selectedColor);
-				try
-				{	ProfileLoader.reloadPortraits(profile);
-				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				}
-				// add to profiles list
+				// NOTE this would be so much cleaner with an events system...
 				ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-				if(index<profiles.size())
-				{	profiles.set(index,profile);
-					// NOTE this would be so much cleaner with an events system...
-					if(connection!=null)
-						connection.requestPlayersSet(index,profile);
+				if(connection==null)
+				{	try
+					{	ProfileLoader.reloadPortraits(profile);
+					}
+					catch (ParserConfigurationException e1)
+					{	e1.printStackTrace();
+					}
+					catch (SAXException e1)
+					{	e1.printStackTrace();
+					}
+					catch (IOException e1)
+					{	e1.printStackTrace();
+					}
+					catch (ClassNotFoundException e1)
+					{	e1.printStackTrace();
+					}
+					// add to profiles list
+					if(index<profiles.size())
+						profiles.set(index,profile);
+					else
+						profiles.add(profile);
 				}
 				else
-				{	profiles.add(profile);
-					// NOTE this would be so much cleaner with an events system...
-					if(connection!=null)
+				{	if(index<profiles.size())
+						connection.requestPlayersSet(index,profile);
+					else
 						connection.requestPlayersAdd(profile);
 				}
 			}

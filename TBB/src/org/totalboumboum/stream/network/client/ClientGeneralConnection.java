@@ -188,11 +188,25 @@ public class ClientGeneralConnection
 		}
 	}
 
-	public void requestPlayersChange(Profile profile)
+	public void requestPlayersChangeColor(Profile profile)
 	{	for(ClientIndividualConnection connection: individualConnections)
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	if(!profile.isRemote())
-				{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_CHANGE,profile);
+				{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_CHANGE_COLOR,profile);
+					connection.writeMessage(message);
+				}
+				else
+				{	//TODO error (?)
+				}
+			}
+		}
+	}
+
+	public void requestPlayersChangeHero(Profile profile)
+	{	for(ClientIndividualConnection connection: individualConnections)
+		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
+			{	if(!profile.isRemote())
+				{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_CHANGE_HERO,profile);
 					connection.writeMessage(message);
 				}
 				else

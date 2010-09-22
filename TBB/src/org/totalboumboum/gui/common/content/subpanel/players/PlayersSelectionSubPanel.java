@@ -427,12 +427,16 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 						}
 						// or remove a profile
 						else if(index<players.size())
-						{	// only if host is not a client or profile is local
+						{	// only if host is not a client
 							Profile profile = players.get(index);
-							if(connection==null || !profile.isRemote())
+							if(connection==null)
 							{	players.remove(index);
 								refresh();
 								firePlayerRemoved(index);
+							}
+							//  or profile is local
+							else if(!profile.isRemote())
+							{	firePlayerRemoved(index);
 							}
 						}
 					}
@@ -546,13 +550,16 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			case COL_COLOR:
 				{	int index = pos[0]-1;
 					Profile profile = players.get(index);
-					if(!profile.isRemote())
+					if(connection==null)
 					{	PredefinedColor color = profile.getSpriteColor();
 						color = Configuration.getProfilesConfiguration().getNextFreeColor(players,profile,color);
 						profile.getSelectedSprite().setColor(color);
 						reloadPortraits(pos[0]);
 						refreshPlayer(pos[0]);
 						fireColorSet(index);
+					}
+					else if(!profile.isRemote())
+					{	fireColorSet(index);
 					}
 				}
 				break;

@@ -66,8 +66,10 @@ public enum MessageName
 		REQUEST_PLAYERS_ADD,
 		/** client remove one of its players */ 
 		REQUEST_PLAYERS_REMOVE,
-		/** client change one of its players appearance */ 
-		REQUEST_PLAYERS_CHANGE,
+		/** client change one of its players color*/ 
+		REQUEST_PLAYERS_CHANGE_COLOR,
+		/** client change one of its players sprite*/ 
+		REQUEST_PLAYERS_CHANGE_HERO,
 		/** client replace one of its players by another one */ 
 		REQUEST_PLAYERS_SET,
 		/** client sends its current state */ 
