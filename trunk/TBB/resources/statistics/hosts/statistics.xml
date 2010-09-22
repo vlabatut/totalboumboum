@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hosts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\hosts.xsd">
-	<host id="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" name="LANserver" use="0" lastIp="192.168.1.3" lastPort="10000" direct="true"/>
+	<host id="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" name="DesktopLan" use="0" lastIp="192.168.1.3" lastPort="10000" direct="true"/>
 <!-- 
-	<host id="7826e4b6-111c-491b-bc9f-fcefc44a1f1d" name="LANserver" use="0" lastIp="127.0.0.1" lastPort="10000" direct="true"/>
-	<host id="130e3e38-ef2a-4449-b7fa-ff677ec35586" name="LANserver" use="0" lastIp="127.0.0.2" lastPort="10000" direct="true"/>
-	<host id="5c2d28d1-74bc-4bf9-aab5-706351303e17" name="LANserver" use="0" lastIp="127.0.0.3" lastPort="10000" direct="true"/>
-	<host id="31cecb4c-33a3-4a5d-bc58-e203897bf653" name="LANserver" use="0" lastIp="127.0.0.4" lastPort="10000" direct="true"/>
+	<host id="7826e4b6-111c-491b-bc9f-fcefc44a1f1d" name="DesktopLan" use="0" lastIp="127.0.0.1" lastPort="10000" direct="true"/>
+	<host id="130e3e38-ef2a-4449-b7fa-ff677ec35586" name="DesktopLan" use="0" lastIp="127.0.0.2" lastPort="10000" direct="true"/>
+	<host id="5c2d28d1-74bc-4bf9-aab5-706351303e17" name="DesktopLan" use="0" lastIp="127.0.0.3" lastPort="10000" direct="true"/>
+	<host id="31cecb4c-33a3-4a5d-bc58-e203897bf653" name="DesktopLan" use="0" lastIp="127.0.0.4" lastPort="10000" direct="true"/>
  -->	
 </hosts>
 

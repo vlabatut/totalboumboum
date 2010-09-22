@@ -60,10 +60,6 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	public PlayersData(SplitMenuPanel container)
 	{	super(container);
 		
-		connection = Configuration.getConnectionsConfiguration().getServerConnection();
-		if(connection!=null)
-			connection.addListener(this);
-		
 		// title
 		String key = GuiKeys.MENU_TOURNAMENT_PLAYERS_TITLE;
 		setTitleKey(key);
@@ -186,6 +182,12 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	// SERVER CONNECTION LISTENER	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private ServerGeneralConnection connection = null;
+	
+	public void setConnection()
+	{	connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(connection!=null)
+			connection.addListener(this);
+	}
 	
 	@Override
 	public void profileAdded(int index, Profile profile)
