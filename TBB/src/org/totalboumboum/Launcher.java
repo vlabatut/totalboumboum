@@ -1609,10 +1609,7 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - tester encore l'ajout/suppression de joueur coté client
-	 *  	rque1: ds la liste de joueurs, chaque action doit être passée au serveur et pas exécutée localement, même sur les joueurs locaux
-	 *  	rque2: le serveur ne raffraichit pas sa propre GUI quand le client ajoute un joueur
-	 *  - modifier la GUI sélect joueurs côté client
+	 *  - pb lors de la suppression d'un joueur distant depuis le serveur
 	 *  - tester l'état du client pour savoir si on peut passer à la sélection des joueurs
 	 *  - vérifier qu'on fait bien la màj de l'état du client, à la fois coté C et S
 	 *  - un joueur inconnu doit être rajouté dans la BD locale
@@ -1620,6 +1617,8 @@ public class Launcher
 	 *  	- rajouter un bouton pour tout raffraichir
 	 *  	- raffraichir quand on sélectionne la connection
 	 *  - implémenter le blocage des joueurs côté serveur
+	 *  - déconnection client pdt sélection joueurs : joueurs supprimés par le serveur
+	 *  - déconnection serveur pdt sélection joueurs : retour à l'écran de sélection des parties + mise à jour de gameinfo dans la liste
 	 */
 	
 	/**
