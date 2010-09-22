@@ -101,36 +101,48 @@ public class SelectHeroMenu extends InnerMenuPanel
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_CONFIRM))
 		{	SpritePreview heroPreview = heroData.getSelectedHeroPreview();
 			if(heroPreview!=null)
-			{	// update profile
-				SpriteInfo spriteInfo = profile.getSelectedSprite();
-				String spriteName = heroPreview.getName();
-				spriteInfo.setName(spriteName);
-				String spriteFolder = heroPreview.getFolder();
-				spriteInfo.setFolder(spriteFolder);
-				String spritePack = heroPreview.getPack();
-				spriteInfo.setPack(spritePack);
-				// reload portraits
-				try
-				{	ProfileLoader.reloadPortraits(profile);
+			{	// NOTE this would be so much cleaner with an events system...
+				ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+				if(connection==null)
+				{	// update profile
+					SpriteInfo spriteInfo = profile.getSelectedSprite();
+					String spriteName = heroPreview.getName();
+					spriteInfo.setName(spriteName);
+					String spriteFolder = heroPreview.getFolder();
+					spriteInfo.setFolder(spriteFolder);
+					String spritePack = heroPreview.getPack();
+					spriteInfo.setPack(spritePack);
+					// reload portraits
+					try
+					{	ProfileLoader.reloadPortraits(profile);
+					}
+					catch (ParserConfigurationException e1)
+					{	e1.printStackTrace();
+					}
+					catch (SAXException e1)
+					{	e1.printStackTrace();
+					}
+					catch (IOException e1)
+					{	e1.printStackTrace();
+					}
+					catch (ClassNotFoundException e1)
+					{	e1.printStackTrace();
+					}
 				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
+				else
+				{	// update profile
+					Profile copy = profile.copy();
+					SpriteInfo spriteInfo = copy.getSelectedSprite();
+					String spriteName = heroPreview.getName();
+					spriteInfo.setName(spriteName);
+					String spriteFolder = heroPreview.getFolder();
+					spriteInfo.setFolder(spriteFolder);
+					String spritePack = heroPreview.getPack();
+					spriteInfo.setPack(spritePack);
+					connection.requestPlayersChangeHero(copy);
 				}
 			}
 			parent.refresh();
-			// NOTE this would be so much cleaner with an events system...
-			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			if(connection!=null)
-				connection.requestPlayersChange(profile);
 			replaceWith(parent);
 	    }
 	} 

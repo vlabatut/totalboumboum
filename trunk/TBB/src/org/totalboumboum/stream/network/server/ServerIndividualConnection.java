@@ -89,8 +89,10 @@ public class ServerIndividualConnection extends AbstractConnection
 			playersListRequested();
 		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_ADD))
 			playersAddRequested(message);
-		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_CHANGE))
-			playersChangeRequested(message);
+		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_CHANGE_COLOR))
+			playersChangeRequestedColor(message);
+		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_CHANGE_HERO))
+			playersChangeRequestedHero(message);
 		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_SET))
 			playersSetRequested(message);
 		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_REMOVE))
@@ -151,10 +153,16 @@ public class ServerIndividualConnection extends AbstractConnection
 			generalConnection.playersAddRequested(profile,this);
 	}
 	
-	private void playersChangeRequested(NetworkMessage message)
+	private void playersChangeRequestedColor(NetworkMessage message)
 	{	Profile profile = (Profile)message.getData();
 		if(profile.getLastHost().equals(hostId))
-			generalConnection.playersChangeRequested(profile,this);
+			generalConnection.playersChangeRequestedColor(profile,this);
+	}
+	
+	private void playersChangeRequestedHero(NetworkMessage message)
+	{	Profile profile = (Profile)message.getData();
+		if(profile.getLastHost().equals(hostId))
+			generalConnection.playersChangeRequestedHero(profile,this);
 	}
 	
 	@SuppressWarnings("unchecked")

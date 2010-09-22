@@ -108,7 +108,11 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	@Override
 	public void playerSelectionPlayerRemoved(int index)
 	{	// supposedly for a local player
-		fireDataPanelSelectionChange();
+		Profile profile = playersPanel.getPlayer(index);
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		if(connection!=null)
+			connection.requestPlayersRemove(profile);
+		//fireDataPanelSelectionChange();
 	}
 
 	@Override
@@ -125,7 +129,10 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void playerSelectionColorSet(int index)
-	{	// nothing to do here
+	{	Profile profile = playersPanel.getPlayer(index);
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		if(connection!=null)
+			connection.requestPlayersChangeColor(profile);
 	}
 
 	@Override

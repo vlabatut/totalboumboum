@@ -51,6 +51,7 @@ import org.totalboumboum.stream.network.data.host.HostInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.message.MessageName;
 import org.totalboumboum.stream.network.message.NetworkMessage;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**
@@ -413,22 +414,60 @@ public class ServerGeneralConnection implements Runnable
 		fireProfileAdded(index,profile);
 	}
 	
-	public void playersChangeRequested(Profile profile, ServerIndividualConnection connection)
+	public void playersChangeRequestedColor(Profile profile, ServerIndividualConnection connection)
 	{	profileLock.lock();
 		{	String id = profile.getId();
 			Profile prof = null;
-			boolean found = false;
 			Iterator<Profile> it = playerProfiles.iterator();
 			do
 			{	Profile p = it.next();
 				if(p.getId().equals(id))
-				{	prof = p;
-					found = true;
-				}
+					prof = p;
 			}
-			while(it.hasNext() && !found);
+			while(it.hasNext() && prof!=null);
 			
-			if(profile!=null && connection==playerConnections.get(id))
+			if(prof!=null && connection==playerConnections.get(id))
+			{	PredefinedColor color = profile.getSpriteColor();
+				color = Configuration.getProfilesConfiguration().getNextFreeColor(playerProfiles,prof,color);
+				profile.getSelectedSprite().setColor(color);
+				try
+				{	// images must be loaded anyway because they did not pass the stream	
+					ProfileLoader.reloadPortraits(prof);
+				}
+				catch (ParserConfigurationException e)
+				{	e.printStackTrace();
+				}
+				catch (SAXException e)
+				{	e.printStackTrace();
+				}
+				catch (IOException e)
+				{	e.printStackTrace();
+				}
+				catch (ClassNotFoundException e)
+				{	e.printStackTrace();
+				}
+				//prof.synch(profile);
+				profileModified(profile);
+			}
+		}
+		profileLock.unlock();
+
+		fireProfileModified(profile);
+	}
+	
+	public void playersChangeRequestedHero(Profile profile, ServerIndividualConnection connection)
+	{	profileLock.lock();
+		{	String id = profile.getId();
+			Profile prof = null;
+			Iterator<Profile> it = playerProfiles.iterator();
+			do
+			{	Profile p = it.next();
+				if(p.getId().equals(id))
+					prof = p;
+			}
+			while(it.hasNext() && prof!=null);
+			
+			if(prof!=null && connection==playerConnections.get(id))
 			{	try
 				{	// images must be loaded because they did not pass the stream	
 					ProfileLoader.reloadPortraits(profile);
