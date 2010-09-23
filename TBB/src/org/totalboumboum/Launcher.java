@@ -1609,17 +1609,19 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - tester l'état du client pour savoir si on peut passer à la sélection des joueurs
-	 *  - dans le serveur, il faut tester pr chaque requête sur un joueur (provenant d'un client) que le joueur est bien tjrs présent dans la liste courante du serveur
-	 *  - vérifier qu'on fait bien la màj de l'état du client, à la fois coté C et S
-	 *  - un joueur inconnu doit être rajouté dans la BD locale
+	 *  - tester : 
+	 *  	- si quand le client se déconnecte ses joueurs disparaissent
+	 *  	- si un nouveau joueur est bien rajouté dans la bd locale
 	 *  - faut aussi gérer le raffraichissement des serveurs directs pas encore connectées (le client est en avance)
 	 *  	- rajouter un bouton pour tout raffraichir
 	 *  	- raffraichir quand on sélectionne la connection
-	 *  - implémenter le blocage des joueurs côté serveur
 	 *  - déconnection client pdt sélection joueurs : joueurs supprimés par le serveur
 	 *  - déconnection serveur pdt sélection joueurs : retour à l'écran de sélection des parties + mise à jour de gameinfo dans la liste
 	 *  - dans les configs de tournois enregistrées et rechargées par défaut, il ne faut garder que les joueurs locaux
+	 *  - ne plus permettre qu'un joueur n'appartienne pas au classement glicko2
+	 *  - icones: 
+	 *  	- pair = rond vide, central = rond plein
+	 *  	- revoir les logos pour blocker/débloquer les joueurs. en plus ça a l'air inversé dans le jeu...
 	 *  
 	 */
 	

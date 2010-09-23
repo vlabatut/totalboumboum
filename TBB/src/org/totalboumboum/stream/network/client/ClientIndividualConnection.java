@@ -28,6 +28,7 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.profile.ProfileLoader;
@@ -169,9 +170,9 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	{	// update profile list
 		this.playerProfiles = playerProfiles;
 		for(Profile profile: playerProfiles)
-		{	try
-			{	// images must be loaded because they did not pass the stream	
-				ProfileLoader.reloadPortraits(profile);
+		{	// images must be loaded because they did not pass the stream	
+			try
+			{	ProfileLoader.reloadPortraits(profile);
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();
@@ -185,7 +186,38 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
 			}
+			// if profile new, must be inserted in the local DB	
+			try
+			{	Configuration.getProfilesConfiguration().insertProfile(profile);
+			}
+			catch (IllegalArgumentException e)
+			{	e.printStackTrace();
+			}
+			catch (SecurityException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IllegalAccessException e)
+			{	e.printStackTrace();
+			}
+			catch (NoSuchFieldException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
 		}
+		
+		if(state==ClientState.SELECTING_GAME)
+			state = ClientState.SELECTING_PLAYERS;
 		
 		// propagate modification
 		generalConnection.profilesChanged(this);

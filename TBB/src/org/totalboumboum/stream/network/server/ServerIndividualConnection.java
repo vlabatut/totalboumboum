@@ -31,6 +31,7 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.stream.network.AbstractConnection;
 import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.data.game.GameInfo;
+import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.message.MessageName;
 import org.totalboumboum.stream.network.message.NetworkMessage;
 
@@ -83,27 +84,39 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void messageRead(NetworkMessage message)
-	{	if(message.getInfo().equals(MessageName.REQUEST_GAME_INFO))
+	{	HostState state = generalConnection.getGameInfo().getHostInfo().getState();
+		
+		if(message.getInfo().equals(MessageName.REQUEST_GAME_INFO))
 			gameInfoRequested(message);
 		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_LIST))
 			playersListRequested();
-		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_ADD))
-			playersAddRequested(message);
-		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_CHANGE_COLOR))
-			playersChangeRequestedColor(message);
-		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_CHANGE_HERO))
-			playersChangeRequestedHero(message);
-		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_SET))
-			playersSetRequested(message);
-		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_REMOVE))
-			playersRemoveRequested(message);
-		else if(message.getInfo().equals(MessageName.ENTERS_PLAYERS_SELECTION))
-			entersPlayersSelection(message);
-		else if(message.getInfo().equals(MessageName.EXITS_PLAYERS_SELECTION))
-			exitsPlayersSelection(message);
 		
-		else if(message.getInfo().equals(MessageName.INFO_PLAYER_CONTROL))
+		else if(state==HostState.OPEN)
+		{	if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_ADD))
+				playersAddRequested(message);
+			else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_CHANGE_COLOR))
+				playersChangeRequestedColor(message);
+			else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_CHANGE_HERO))
+				playersChangeRequestedHero(message);
+			else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_SET))
+				playersSetRequested(message);
+			else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_REMOVE))
+				playersRemoveRequested(message);
+			else if(message.getInfo().equals(MessageName.ENTERS_PLAYERS_SELECTION))
+				entersPlayersSelection(message);
+			else if(message.getInfo().equals(MessageName.EXITS_PLAYERS_SELECTION))
+				exitsPlayersSelection(message);
+		}
+		
+		else if(state==HostState.CLOSED)
+		{	if(message.getInfo().equals(MessageName.EXITS_PLAYERS_SELECTION))
+				exitsPlayersSelection(message);
+		}
+		
+		else if(state==HostState.PLAYING)
+		{	if(message.getInfo().equals(MessageName.INFO_PLAYER_CONTROL))
 				controlReceived(message);
+		}
 	}
 	
 	public void writeMessage(NetworkMessage message)
@@ -215,11 +228,9 @@ public class ServerIndividualConnection extends AbstractConnection
 		//TODO à completer
 		if(state==ClientState.SELECTING_GAME)
 		{	generalConnection.removeConnection(this);
-			
 		}
 		else if(state==ClientState.SELECTING_GAME)
 		{	generalConnection.removeConnection(this);
-			
 		}
 	}
 	

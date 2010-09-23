@@ -160,6 +160,19 @@ public class ServerGeneralConnection implements Runnable
 	private final HashMap<String,ServerIndividualConnection> playerConnections = new HashMap<String, ServerIndividualConnection>(); 
 	private Lock profileLock = new ReentrantLock();
 	
+	public void switchPlayersSelection()
+	{	gameInfoLock.lock();
+		{	HostInfo hostInfo = gameInfo.getHostInfo();
+			HostState state = hostInfo.getState();
+			if(state==HostState.OPEN)
+				state = HostState.CLOSED;
+			else
+				state = HostState.OPEN;
+			hostInfo.setState(state);
+		}
+		gameInfoLock.unlock();
+	}
+	
 	public List<Profile> getPlayerProfiles()
 	{	List<Profile> result;
 	
@@ -389,9 +402,9 @@ public class ServerGeneralConnection implements Runnable
 		profileLock.lock();
 //		{	int playerCount = playerProfiles.size();
 //			if(allowedPlayers.contains(playerCount+1))
-			{	try
-				{	// images must be loaded because they did not pass the stream	
-					ProfileLoader.reloadPortraits(profile);
+			{	// images must be loaded because they did not pass the stream	
+				try
+				{	ProfileLoader.reloadPortraits(profile);
 				}
 				catch (ParserConfigurationException e)
 				{	e.printStackTrace();
@@ -400,6 +413,34 @@ public class ServerGeneralConnection implements Runnable
 				{	e.printStackTrace();
 				}
 				catch (IOException e)
+				{	e.printStackTrace();
+				}
+				catch (ClassNotFoundException e)
+				{	e.printStackTrace();
+				}
+				// if profile new, must be inserted in the local DB	
+				try
+				{	Configuration.getProfilesConfiguration().insertProfile(profile);
+				}
+				catch (IllegalArgumentException e)
+				{	e.printStackTrace();
+				}
+				catch (SecurityException e)
+				{	e.printStackTrace();
+				}
+				catch (IOException e)
+				{	e.printStackTrace();
+				}
+				catch (ParserConfigurationException e)
+				{	e.printStackTrace();
+				}
+				catch (SAXException e)
+				{	e.printStackTrace();
+				}
+				catch (IllegalAccessException e)
+				{	e.printStackTrace();
+				}
+				catch (NoSuchFieldException e)
 				{	e.printStackTrace();
 				}
 				catch (ClassNotFoundException e)
@@ -528,9 +569,9 @@ public class ServerGeneralConnection implements Runnable
 			
 			index = playerProfiles.indexOf(oldProfile);
 			if(oldProfile!=null && connection==playerConnections.get(id))
-			{	try
-				{	// images must be loaded because they did not pass the stream	
-					ProfileLoader.reloadPortraits(profile);
+			{	// images must be loaded because they did not pass the stream	
+				try
+				{	ProfileLoader.reloadPortraits(profile);
 				}
 				catch (ParserConfigurationException e)
 				{	e.printStackTrace();
@@ -539,6 +580,34 @@ public class ServerGeneralConnection implements Runnable
 				{	e.printStackTrace();
 				}
 				catch (IOException e)
+				{	e.printStackTrace();
+				}
+				catch (ClassNotFoundException e)
+				{	e.printStackTrace();
+				}
+				// if profile new, must be inserted in the local DB	
+				try
+				{	Configuration.getProfilesConfiguration().insertProfile(profile);
+				}
+				catch (IllegalArgumentException e)
+				{	e.printStackTrace();
+				}
+				catch (SecurityException e)
+				{	e.printStackTrace();
+				}
+				catch (IOException e)
+				{	e.printStackTrace();
+				}
+				catch (ParserConfigurationException e)
+				{	e.printStackTrace();
+				}
+				catch (SAXException e)
+				{	e.printStackTrace();
+				}
+				catch (IllegalAccessException e)
+				{	e.printStackTrace();
+				}
+				catch (NoSuchFieldException e)
 				{	e.printStackTrace();
 				}
 				catch (ClassNotFoundException e)

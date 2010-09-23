@@ -298,8 +298,12 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 			Configuration.getConnectionsConfiguration().setServerConnection(connection);
 			playersData.setConnection();
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS))
-		{	// TODO
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_BLOCK_PLAYERS))
+		{	// close/open players selection to client
+			ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+			if(connection!=null)
+			{	connection.switchPlayersSelection();
+			}
 	    }
 	} 
 	
