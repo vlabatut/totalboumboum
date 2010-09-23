@@ -226,7 +226,7 @@ public class Profile implements Serializable
 		//this.controlSettingsIndex = profile.controlSettingsIndex;
 		//this.name = profile.name;
 		//this.id = profile.id;
-		//this.portraits = profile.portraits; 
+		this.portraits = profile.portraits; 
 		
 		this.defaultSprite = profile.defaultSprite;
 		this.selectedSprite = profile.selectedSprite;

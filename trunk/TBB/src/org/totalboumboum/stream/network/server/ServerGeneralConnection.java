@@ -191,7 +191,7 @@ public class ServerGeneralConnection implements Runnable
 				result = pid.equals(id);
 			}
 		}
-		profileLock.lock();
+		profileLock.unlock();
 		
 		return result;
 	}
@@ -221,7 +221,7 @@ public class ServerGeneralConnection implements Runnable
 					NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
 					propagateMessage(message);
 				}		
-				gameInfoLock.lock();
+				gameInfoLock.unlock();
 			
 				// update players list
 				playerProfiles.add(profile);
@@ -277,7 +277,7 @@ public class ServerGeneralConnection implements Runnable
 					NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
 					propagateMessage(message);
 				}		
-				gameInfoLock.lock();
+				gameInfoLock.unlock();
 			
 				// update profiles list
 				playerConnections.remove(oldProfile.getId());
@@ -339,7 +339,7 @@ public class ServerGeneralConnection implements Runnable
 				NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
 				propagateMessage(message);
 			}		
-			gameInfoLock.lock();
+			gameInfoLock.unlock();
 		
 			// update players list
 			playerProfiles.remove(profile);
@@ -424,12 +424,12 @@ public class ServerGeneralConnection implements Runnable
 				if(p.getId().equals(id))
 					prof = p;
 			}
-			while(it.hasNext() && prof!=null);
+			while(it.hasNext() && prof==null);
 			
 			if(prof!=null && connection==playerConnections.get(id))
 			{	PredefinedColor color = profile.getSpriteColor();
 				color = Configuration.getProfilesConfiguration().getNextFreeColor(playerProfiles,prof,color);
-				profile.getSelectedSprite().setColor(color);
+				prof.getSelectedSprite().setColor(color);
 				try
 				{	// images must be loaded anyway because they did not pass the stream	
 					ProfileLoader.reloadPortraits(prof);
@@ -465,7 +465,7 @@ public class ServerGeneralConnection implements Runnable
 				if(p.getId().equals(id))
 					prof = p;
 			}
-			while(it.hasNext() && prof!=null);
+			while(it.hasNext() && prof==null);
 			
 			if(prof!=null && connection==playerConnections.get(id))
 			{	try
@@ -497,16 +497,13 @@ public class ServerGeneralConnection implements Runnable
 	{	Profile profile = null;
 	
 		profileLock.lock();
-		{	boolean found = false;
-			Iterator<Profile> it = playerProfiles.iterator();
+		{	Iterator<Profile> it = playerProfiles.iterator();
 			do
 			{	Profile p = it.next();
 				if(p.getId().equals(id))
-				{	profile = p;
-					found = true;
-				}
+					profile = p;
 			}
-			while(it.hasNext() && !found);
+			while(it.hasNext() && profile==null);
 			
 			if(profile!=null && connection==playerConnections.get(id))
 				profileRemoved(profile);
@@ -521,16 +518,13 @@ public class ServerGeneralConnection implements Runnable
 		
 		profileLock.lock();
 		{	Profile oldProfile = null;
-			boolean found = false;
 			Iterator<Profile> it = playerProfiles.iterator();
 			do
 			{	Profile p = it.next();
 				if(p.getId().equals(id))
-				{	oldProfile = p;
-					found = true;
-				}
+					oldProfile = p;
 			}
-			while(it.hasNext() && !found);
+			while(it.hasNext() && oldProfile==null);
 			
 			index = playerProfiles.indexOf(oldProfile);
 			if(oldProfile!=null && connection==playerConnections.get(id))
