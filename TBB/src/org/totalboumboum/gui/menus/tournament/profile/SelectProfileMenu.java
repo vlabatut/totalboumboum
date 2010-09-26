@@ -103,7 +103,7 @@ public class SelectProfileMenu extends InnerMenuPanel
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_CONFIRM))
 		{	ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
 			Profile profile = profileData.getSelectedProfile();
-			if(profile!=null && !profiles.contains(profile))
+			if(profile!=null && !profiles.contains(profile) && !profile.isRemote())
 			{	// check if color is free
 				PredefinedColor selectedColor = profile.getSpriteColor();
 				while(!profilesConfiguration.isFreeColor(profiles,selectedColor))
