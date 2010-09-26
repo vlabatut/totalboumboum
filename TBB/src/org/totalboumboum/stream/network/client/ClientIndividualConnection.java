@@ -22,9 +22,13 @@ package org.totalboumboum.stream.network.client;
  */
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -71,14 +75,54 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	/////////////////////////////////////////////////////////////////
 	// RUNNABLE		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private boolean retry = true;
+	private Lock socketLock = new ReentrantLock();
+	private Condition socketCondition = socketLock.newCondition();
+	
+	/**
+	 * for the GUI to ask for a manual retry regarding the connection to this server
+	 */
+	public void retryConnection()
+	{	socketLock.lock();
+		{	retry = true;
+			socketCondition.signal();
+		}
+		socketLock.unlock();
+	}
+	
 	@Override
 	public void run()
-	{	HostInfo hostInfo = gameInfo.getHostInfo();
-		String address = hostInfo.getLastIp();
-		int port = hostInfo.getLastPort();
+	{	Socket socket = null;
+		while(socket==null)
+		{	socketLock.lock();
+			{	if(retry)
+				{	retry = false;
+					HostInfo hostInfo = gameInfo.getHostInfo();
+					String address = hostInfo.getLastIp();
+					int port = hostInfo.getLastPort();
+					try
+					{	socket = new Socket(address,port);
+					}
+					catch(ConnectException e)
+					{	System.err.println("ConnectException: address "+address+" doesn't respond");
+					}
+					catch(IOException e)
+					{	e.printStackTrace();
+					}
+				}
+			}
+			
+			try
+			{	socketCondition.await();
+			}
+			catch (InterruptedException e)
+			{	e.printStackTrace();
+			}
+			socketLock.unlock();
+		}
+		
 		try
-		{	Socket socket = new Socket(address,port);
-			initConnection(socket,false);
+		{	initConnection(socket,false);
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
