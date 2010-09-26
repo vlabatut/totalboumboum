@@ -22,9 +22,12 @@ package org.totalboumboum.gui.common.content.subpanel.host;
  */
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -37,7 +40,7 @@ import org.totalboumboum.stream.network.data.host.HostInfo;
  * @author Vincent Labatut
  *
  */
-public class HostInfoSubPanel extends TableSubPanel
+public class HostInfoSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 8;
 	private static final int COL_SUBS = 2;
@@ -156,6 +159,11 @@ public class HostInfoSubPanel extends TableSubPanel
 				{	setLabelKey(line,colSub,keys.get(line),true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
+					if(keys.get(line).equals(GuiKeys.COMMON_HOST_INFO_IP))
+					{	MyLabel lbl = getLabel(line,colSub);
+						lbl.addMouseListener(this);
+						lbl.setMouseSensitive(true);
+					}
 					colSub++;
 				}
 				// data
@@ -170,6 +178,11 @@ public class HostInfoSubPanel extends TableSubPanel
 					else
 						bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
+					if(keys.get(line).equals(GuiKeys.COMMON_HOST_INFO_IP))
+					{	MyLabel lbl = getLabel(line,colSub);
+						lbl.addMouseListener(this);
+						lbl.setMouseSensitive(true);
+					}
 					colSub++;
 				}
 			}
@@ -181,6 +194,11 @@ public class HostInfoSubPanel extends TableSubPanel
 				{	setLabelKey(line,colSub,keys.get(line),true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
+					if(keys.get(line).equals(GuiKeys.COMMON_HOST_INFO_IP))
+					{	MyLabel lbl = getLabel(line,colSub);
+						lbl.removeMouseListener(this);
+						lbl.setMouseSensitive(false);
+					}
 					colSub++;
 				}
 				// data
@@ -193,6 +211,11 @@ public class HostInfoSubPanel extends TableSubPanel
 					else
 						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					setLabelBackground(line,colSub,bg);
+					if(keys.get(line).equals(GuiKeys.COMMON_HOST_INFO_IP))
+					{	MyLabel lbl = getLabel(line,colSub);
+						lbl.removeMouseListener(this);
+						lbl.setMouseSensitive(false);
+					}
 					colSub++;
 				}
 			}
@@ -236,5 +259,52 @@ public class HostInfoSubPanel extends TableSubPanel
 
 	public void setShowType(boolean showType)
 	{	this.showType = showType;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MOUSE LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{	
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{	
+	}
+	
+	@Override
+	public void mouseExited(MouseEvent e)
+	{	
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	fireIpClicked();
+	}
+	
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private List<HostInfoSubPanelListener> listeners = new ArrayList<HostInfoSubPanelListener>();
+	
+	public void addListener(HostInfoSubPanelListener listener)
+	{	if(!listeners.contains(listener))
+			listeners.add(listener);		
+	}
+
+	public void removeListener(HostInfoSubPanelListener listener)
+	{	listeners.remove(listener);		
+	}
+	
+	private void fireIpClicked()
+	{	for(HostInfoSubPanelListener listener: listeners)
+			listener.ipClicked();
 	}
 }

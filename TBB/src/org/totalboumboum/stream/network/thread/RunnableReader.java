@@ -158,7 +158,8 @@ System.out.println(">>"+message);
 	{	finishLock.lock();
 		{	finished = true;
 			try
-			{	in.close();
+			{	if(in!=null)
+					in.close();
 			}
 			catch (IOException e)
 			{	//e.printStackTrace();
