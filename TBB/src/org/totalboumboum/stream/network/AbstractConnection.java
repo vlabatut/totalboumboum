@@ -27,6 +27,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.totalboumboum.stream.network.message.NetworkMessage;
 import org.totalboumboum.stream.network.thread.OwnerInterface;
@@ -110,18 +112,27 @@ public abstract class AbstractConnection implements OwnerInterface
 	// FINISH				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected boolean finished = false;
+	protected Lock ioLock = new ReentrantLock();
+	protected boolean ioFinished = false;
 
 	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			
-			// reader
-			reader.finish();
-			reader = null;
-			
-			// writer
-			writer.finish();
-			writer = null;
+	{	ioLock.lock();
+		{	if(!finished)
+			{	finished = true;
+		
+				if(!ioFinished)
+				{	ioFinished = true;
+				
+					reader.finish();
+					writer.finish();
+		
+					//TODO à completer
+		
+					reader = null;
+					writer = null;
+				}
+			}
+			ioLock.unlock();		
 		}
 	}
 }

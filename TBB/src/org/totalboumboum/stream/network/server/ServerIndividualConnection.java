@@ -24,8 +24,6 @@ package org.totalboumboum.stream.network.server;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
@@ -220,9 +218,6 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// OWNER INTERFACE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Lock ioLock = new ReentrantLock();
-	private boolean ioFinished = false;
-	
 	public void connectionLost()
 	{	ioLock.lock();
 		{	if(!ioFinished)

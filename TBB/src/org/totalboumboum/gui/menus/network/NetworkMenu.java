@@ -177,7 +177,8 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_BUTTON_QUIT))
-		{	// TODO
+		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			connection.exitGame();
 			getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_GAMES_BUTTON_PREVIOUS))				

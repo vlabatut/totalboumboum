@@ -23,6 +23,7 @@ package org.totalboumboum.stream.network.client;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -67,6 +68,15 @@ public class ClientGeneralConnection
 	public void removeConnection(ClientIndividualConnection connection)
 	{	connection.finish();
 		individualConnections.remove(connection);
+	}
+	
+	public void removeAllConnections()
+	{	Iterator<ClientIndividualConnection> it = individualConnections.iterator();
+		while(it.hasNext())
+		{	ClientIndividualConnection connection = it.next();
+			connection.finish();
+			it.remove();
+		}
 	}
 	
 	public List<GameInfo> getGameList()
@@ -126,6 +136,11 @@ public class ClientGeneralConnection
 		NetworkMessage message = new NetworkMessage(MessageName.REQUEST_GAME_INFO,id);
 		for(ClientIndividualConnection connection: individualConnections)
 			connection.writeMessage(message);
+	}
+	
+	public void exitGame()
+	{	removeAllConnections();
+		Configuration.getConnectionsConfiguration().setClientConnection(null);
 	}
 	
 	public void enterPlayerSelection(GameInfo gameInfo)
