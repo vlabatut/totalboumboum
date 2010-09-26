@@ -21,6 +21,7 @@ package org.totalboumboum.stream.network.thread;
  * 
  */
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.SocketException;
@@ -90,6 +91,11 @@ System.out.println(">>"+message);
 			catch(SocketException e)
 			{	// stream broken
 				System.err.println("SocketException: connection lost");
+				owner.connectionLost();
+			}
+			catch(EOFException e)
+			{	// stream broken
+				System.err.println("EOFException: connection lost");
 				owner.connectionLost();
 			}
 			catch (ClassNotFoundException e)

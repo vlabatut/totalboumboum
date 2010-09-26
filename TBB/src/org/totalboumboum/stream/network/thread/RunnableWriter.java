@@ -93,6 +93,11 @@ System.out.println("<<"+message);
 		{	out.close();
 			out = null;
 		}
+		catch(SocketException e)
+		{	// stream broken
+			System.err.println("SocketException: socket already closed");
+			owner.connectionLost();
+		}
 		catch (IOException e)
 		{	e.printStackTrace();
 		}
