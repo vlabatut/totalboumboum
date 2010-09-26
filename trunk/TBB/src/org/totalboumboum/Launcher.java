@@ -1609,13 +1609,14 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - tester : 
-	 *  	- si un nouveau joueur est bien rajouté dans la bd locale
-	 *  - on doit pouvoir changer l'IP d'un serveur direct existant
-	 *  - faut aussi gérer le raffraichissement des serveurs directs pas encore connectées (le client est en avance)
+	 * 	- gérer le fait qu'un serveur ne soit pas dispo (pas d'exception)
+	 *  - gérer le raffraichissement des serveurs directs pas encore connectées (le client est en avance)
 	 *  	- rajouter un bouton pour tout raffraichir
 	 *  	- raffraichir quand on sélectionne la connection
-	 *  - déconnection serveur pdt sélection joueurs : retour à l'écran de sélection des parties + mise à jour de gameinfo dans la liste
+	 *  - possibilité de changer l'IP d'un serveur direct existant
+	 *  - déconnection du serveur pdt sélection joueurs : 
+	 *  		- retour à l'écran de sélection des parties
+	 *			- mise à jour de gameinfo dans la liste
 	 *  - dans les configs de tournois enregistrées et rechargées par défaut, il ne faut garder que les joueurs locaux
 	 *  - ne plus permettre qu'un joueur n'appartienne pas au classement glicko2
 	 *  - icones: 
