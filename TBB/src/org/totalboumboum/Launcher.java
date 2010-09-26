@@ -1610,6 +1610,7 @@ public class Launcher
 	/**
 	 * en cours:
 	 *  - possibilité de changer l'IP d'un serveur direct existant
+	 *    >> à terminer, faut gérer l'apparition du popup
 	 *  - déconnection du serveur pdt sélection joueurs : 
 	 *  		- retour à l'écran de sélection des parties
 	 *			- mise à jour de gameinfo dans la liste
