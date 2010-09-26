@@ -26,6 +26,7 @@ import java.io.ObjectOutputStream;
 import java.net.SocketException;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -60,33 +61,39 @@ public class RunnableWriter implements Runnable
 	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public synchronized void run()
-	{	while(!isFinished() || !isEmpty())
-		{	// wait for some objects to write
-			while(isEmpty())
-			{	try
-				{	wait();
+	public void run()
+	{	dataLock.lock();
+		{	while(!isFinished() || !data.isEmpty())
+			{	// wait for some objects to write
+				while(data.isEmpty())
+				{	try
+					{	dataCondition.await();
+					}
+					catch (InterruptedException e)
+					{	//e.printStackTrace();
+					}
 				}
-				catch (InterruptedException e)
-				{	//e.printStackTrace();
-				}
-			}
-			// write the first object
-			try
-			{	NetworkMessage message = getMessage();
-				out.writeObject(message);
-				out.flush();out.reset();
+				dataLock.unlock();
+	
+				// write the first object
+				try
+				{	NetworkMessage message = data.poll();
+					out.writeObject(message);
+					out.flush();out.reset();
 System.out.println("<<"+message);
-			}
-			catch(SocketException e)
-			{	// stream broken
-				System.err.println("SocketException: connection lost");
-				owner.connectionLost();
-			}
-			catch(IOException e)
-			{	e.printStackTrace();
+				}
+				catch(SocketException e)
+				{	// stream broken
+					System.err.println("SocketException: connection lost");
+					owner.connectionLost();
+				}
+				catch(IOException e)
+				{	e.printStackTrace();
+				}
 			}
 		}
+		dataLock.unlock();
+		
 //TODO should be in a finally(?)
 		// close stream
 		try
@@ -107,20 +114,25 @@ System.out.println("<<"+message);
 	// DATA					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Queue<NetworkMessage> data = new LinkedList<NetworkMessage>();
+	private Lock dataLock = new ReentrantLock();
+	private Condition dataCondition = dataLock.newCondition();
 	
-	private synchronized boolean isEmpty()
-	{	boolean result = data.isEmpty();
-		return result;
-	}
+//	private boolean isEmpty()
+//	{	boolean result = data.isEmpty();
+//		return result;
+//	}
 	
-	private synchronized NetworkMessage getMessage()
-	{	NetworkMessage result = data.poll();
-		return result;
-	}
+//	private NetworkMessage getMessage()
+//	{	NetworkMessage result = data.poll();
+//		return result;
+//	}
 	
-	public synchronized void addMessage(NetworkMessage message)
-	{	data.offer(message);
-		notify();
+	public void addMessage(NetworkMessage message)
+	{	dataLock.lock();
+		{	data.offer(message);
+			dataCondition.signal();
+		}
+		dataLock.unlock();
 	}
 
 	/////////////////////////////////////////////////////////////////

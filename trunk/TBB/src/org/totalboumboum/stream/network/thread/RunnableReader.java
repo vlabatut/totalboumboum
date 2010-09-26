@@ -25,6 +25,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.SocketException;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -69,18 +70,21 @@ public class RunnableReader implements Runnable
 	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public synchronized void run()
+	public void run()
 	{	while(!isFinished())
-		{	if(isPaused())
-			{	try
-				{	wait();	
-				}
-				catch (InterruptedException e)
-				{	// stream broken
-					System.err.println("SocketException: connection lost");
-					owner.connectionLost();
+		{	pausedLock.lock();
+			{	if(paused)
+				{	try
+					{	pausedCondition.await();
+					}
+					catch (InterruptedException e)
+					{	// stream broken
+						System.err.println("SocketException: connection lost");
+						owner.connectionLost();
+					}
 				}
 			}
+			pausedLock.unlock();
 		
 			try
 			{	Object object = in.readObject();
@@ -121,19 +125,20 @@ System.out.println(">>"+message);
 	// PAUSE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean paused = false;
+	private Lock pausedLock = new ReentrantLock();
+	private Condition pausedCondition = pausedLock.newCondition();
 	
-	public synchronized void pause(boolean pause)
-	{	if(pause!=paused)
-		{	paused = pause;
-			if(!pause)
-				notify();
+	public void pause(boolean pause)
+	{	pausedLock.lock();
+		{	if(pause!=paused)
+			{	paused = pause;
+				if(!pause)
+					pausedCondition.signal();
+			}
 		}
+		pausedLock.unlock();
 	}
 	
-	private synchronized boolean isPaused()
-	{	return paused;	
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
