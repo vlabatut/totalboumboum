@@ -32,6 +32,7 @@ public interface GameListSubPanelListener
 {
 	public void gameSelectionChanged(String gameId);
 	public void gameLineModified(GameInfo gameInfo);
+	public void refreshGameRequested(GameInfo gameInfo);
 	public void gameBeforeClicked();
 	public void gameAfterClicked();
 	public void gameAddClicked();

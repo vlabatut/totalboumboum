@@ -1609,10 +1609,6 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 * 	- gérer le fait qu'un serveur ne soit pas dispo (pas d'exception)
-	 *  - gérer le raffraichissement des serveurs directs pas encore connectées (le client est en avance)
-	 *  	- rajouter un bouton pour tout raffraichir
-	 *  	- raffraichir quand on sélectionne la connection
 	 *  - possibilité de changer l'IP d'un serveur direct existant
 	 *  - déconnection du serveur pdt sélection joueurs : 
 	 *  		- retour à l'écran de sélection des parties

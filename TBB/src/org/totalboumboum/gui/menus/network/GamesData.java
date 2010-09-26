@@ -291,7 +291,10 @@ catch (UnknownHostException e)
 		gamePanel.setGameInfo(gameInfo);
 		HostInfo hostInfo = null;
 		if(gameInfo!=null)
-			hostInfo = gameInfo.getHostInfo();
+		{	hostInfo = gameInfo.getHostInfo();
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			connection.refreshConnection(gameInfo);
+		}
 		hostPanel.setHostInfo(hostInfo);
 		fireDataPanelSelectionChange();
 	}
@@ -306,6 +309,13 @@ catch (UnknownHostException e)
 			//validate();
 			//repaint();
 		}
+	}
+
+
+	@Override
+	public void refreshGameRequested(GameInfo gameInfo)
+	{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		connection.refreshConnection(gameInfo);
 	}
 
 	@Override
