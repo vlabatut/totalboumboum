@@ -38,6 +38,7 @@ import org.totalboumboum.gui.common.content.subpanel.game.GameInfoSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.host.HostInfoSubPanel;
+import org.totalboumboum.gui.common.content.subpanel.host.HostInfoSubPanelListener;
 import org.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
 import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -59,7 +60,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class GamesData extends EntitledDataPanel implements GameListSubPanelListener,ModalDialogPanelListener,ClientGeneralConnectionListener
+public class GamesData extends EntitledDataPanel implements GameListSubPanelListener,ModalDialogPanelListener,ClientGeneralConnectionListener,HostInfoSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
@@ -238,7 +239,7 @@ catch (UnknownHostException e)
 				
 				// host panel
 				{	hostPanel = new HostInfoSubPanel(rightWidth,upHeight);
-					//hostPanel.addListener(this);
+					hostPanel.addListener(this);
 					rightPanel.add(hostPanel);
 				}
 
@@ -395,5 +396,13 @@ catch (UnknownHostException e)
 	@Override
 	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
 	{	// useless at this stage
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// HOST INFO SUBPANEL LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void ipClicked()
+	{	System.out.println("dskjqsduhdsqhu");
 	}
 }

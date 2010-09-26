@@ -73,7 +73,6 @@ public class RunnableWriter implements Runnable
 					{	//e.printStackTrace();
 					}
 				}
-				dataLock.unlock();
 	
 				// write the first object
 				try
@@ -154,7 +153,8 @@ System.out.println("<<"+message);
 	{	finishLock.lock();
 		{	finished = true;
 			try
-			{	out.close();
+			{	if(out!=null)
+					out.close();
 			}
 			catch (IOException e)
 			{	//e.printStackTrace();
