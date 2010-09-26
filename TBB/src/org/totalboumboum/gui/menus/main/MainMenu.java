@@ -183,7 +183,7 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 			replaceWith(quickMatchContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_NETWORK))
-		{	if(networkContainer==null)
+		{	//if(networkContainer==null)
 				networkContainer = new NetworkContainer(getMenuContainer(),this);
 			networkContainer.initTournament();
 			replaceWith(networkContainer);

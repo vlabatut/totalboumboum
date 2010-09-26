@@ -129,7 +129,7 @@ System.out.println("<<"+message);
 		finishLock.lock();
 		{	result = finished;
 		}
-		finishLock.lock();
+		finishLock.unlock();
 		return result;
 	}
 	
@@ -143,5 +143,6 @@ System.out.println("<<"+message);
 			{	//e.printStackTrace();
 			}
 		}
+		finishLock.unlock();		
 	}
 }
