@@ -242,13 +242,20 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	// OWNER INTERFACE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void connectionLost()
-	{	reader.finish();
-		reader = null;
-		
-		writer.finish();
-		writer = null;
-		
-		//TODO à completer
+	{	ioLock.lock();
+		{	if(!ioFinished)
+			{	ioFinished = true;
+			
+				reader.finish();
+				writer.finish();
+
+				//TODO à completer
+
+				reader = null;
+				writer = null;
+			}
+		}
+		ioLock.unlock();		
 	}
 	
 	/////////////////////////////////////////////////////////////////
