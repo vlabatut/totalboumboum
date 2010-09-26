@@ -563,6 +563,12 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 			{	String gameId = gamesIds.get((currentPage*lines)+p[0]-1);
 				selectGame(gameId);
 			}
+			// refresh
+			else if(rc.equals(GameColumn.TOURNAMENT_STATE))
+			{	String gameId = gamesIds.get((currentPage*lines)+p[0]-1);
+				GameInfo gameInfo = gamesMap.get(gameId);
+				fireRefreshGameRequested(gameInfo);
+			}
 		}
 	}
 	
@@ -654,6 +660,11 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 	private void fireGameLineModified(GameInfo gameInfo)
 	{	for(GameListSubPanelListener listener: listeners)
 			listener.gameLineModified(gameInfo);
+	}
+
+	private void fireRefreshGameRequested(GameInfo gameInfo)
+	{	for(GameListSubPanelListener listener: listeners)
+			listener.refreshGameRequested(gameInfo);
 	}
 
 	@SuppressWarnings("unused")

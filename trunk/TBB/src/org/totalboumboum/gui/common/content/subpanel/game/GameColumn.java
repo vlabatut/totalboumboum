@@ -229,6 +229,7 @@ public enum GameColumn
 				panel.setLabelText(line,col,text,tooltip);
 				// listener
 //				MyLabel label = panel.getLabel(line,col);
+//				label.removeMouseListener(container);
 //				label.addMouseListener(container);
 //				label.setMouseSensitive(true);
 				// column width
@@ -312,7 +313,12 @@ public enum GameColumn
 			}
 		}
 		else if(this==TOURNAMENT_STATE)
-		{	if(gameInfo!=null)
+		{	// listener
+			MyLabel label = panel.getLabel(line,col);
+			label.removeMouseListener(container);
+			label.setMouseSensitive(false);
+			// content
+			if(gameInfo!=null)
 			{	HostState state = gameInfo.getHostInfo().getState();
 				String key = null;
 				if(state.equals(HostState.CLOSED))
@@ -324,7 +330,10 @@ public enum GameColumn
 				else if(state.equals(HostState.PLAYING))
 					key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_PLAYING;
 				else if(state.equals(HostState.UNKOWN))
-					key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKNOWN;
+				{	key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKNOWN;
+					label.addMouseListener(container);
+					label.setMouseSensitive(true);
+				}
 				if(key!=null)
 					panel.setLabelKey(line,col,key,true);
 			}

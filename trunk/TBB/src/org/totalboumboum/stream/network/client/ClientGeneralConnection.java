@@ -35,6 +35,7 @@ import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
+import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.message.MessageName;
 import org.totalboumboum.stream.network.message.NetworkMessage;
 
@@ -84,6 +85,22 @@ public class ClientGeneralConnection
 		for(ClientIndividualConnection connection: individualConnections)
 			result.add(connection.getGameInfo());
 		return result;
+	}
+	
+	public void refreshConnection(GameInfo gameInfo)
+	{	ClientIndividualConnection cx = null;
+		Iterator<ClientIndividualConnection> it = individualConnections.iterator();
+		while(cx==null && it.hasNext())
+		{	ClientIndividualConnection connection = it.next();
+			GameInfo gi = connection.getGameInfo();
+			if(gi==gameInfo)
+				cx = connection;
+		}
+		if(cx!=null)
+		{	HostState state = cx.getGameInfo().getHostInfo().getState();
+			if(state==HostState.UNKOWN)
+				cx.retryConnection();
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
