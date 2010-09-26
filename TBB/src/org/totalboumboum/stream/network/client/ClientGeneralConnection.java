@@ -147,12 +147,12 @@ public class ClientGeneralConnection
 	{	for(ClientIndividualConnection connection: individualConnections)
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	connection.setState(ClientState.SELECTING_GAME);
-				NetworkMessage message = new NetworkMessage(MessageName.ENTERS_PLAYERS_SELECTION,true);
+				NetworkMessage message = new NetworkMessage(MessageName.EXITS_PLAYERS_SELECTION,true);
 				connection.writeMessage(message);
 			}
 			else
 			{	connection.setState(ClientState.SELECTING_GAME);
-				NetworkMessage message = new NetworkMessage(MessageName.ENTERS_PLAYERS_SELECTION,false);
+				NetworkMessage message = new NetworkMessage(MessageName.EXITS_PLAYERS_SELECTION,false);
 				connection.writeMessage(message);
 			}
 		}

@@ -184,7 +184,10 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_PREVIOUS))				
-		{	setButtonsGames();
+		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			connection.exitPlayerSelection();
+
+			setButtonsGames();
 			container.setDataPart(gamesData);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_NEXT))
