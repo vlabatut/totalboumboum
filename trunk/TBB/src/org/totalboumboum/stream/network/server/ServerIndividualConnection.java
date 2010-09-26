@@ -24,6 +24,8 @@ package org.totalboumboum.stream.network.server;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
@@ -218,20 +220,31 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// OWNER INTERFACE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void connectionLost()
-	{	reader.finish();
-		reader = null;
+	private Lock ioLock = new ReentrantLock();
+	private boolean ioFinished = false;
 	
-		writer.finish();
-		writer = null;
-		
-		//TODO à completer
-		if(state==ClientState.SELECTING_GAME)
-		{	generalConnection.removeConnection(this);
+	public void connectionLost()
+	{	ioLock.lock();
+		{	if(!ioFinished)
+			{	ioFinished = true;
+				
+				reader.finish();
+				writer.finish();
+				
+				//TODO à completer
+				if(state==ClientState.SELECTING_GAME)
+				{	generalConnection.removeConnection(this);
+				}
+				else if(state==ClientState.SELECTING_PLAYERS)
+				{	generalConnection.playerSelectionExited(this);
+					generalConnection.removeConnection(this);
+				}
+				
+				reader = null;
+				writer = null;
+			}
 		}
-		else if(state==ClientState.SELECTING_GAME)
-		{	generalConnection.removeConnection(this);
-		}
+		ioLock.unlock();
 	}
 	
 	/////////////////////////////////////////////////////////////////

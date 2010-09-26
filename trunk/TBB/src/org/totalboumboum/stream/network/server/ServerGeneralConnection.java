@@ -378,7 +378,8 @@ public class ServerGeneralConnection implements Runnable
 	
 	public void playerSelectionExited(ServerIndividualConnection connection)
 	{	profileLock.lock();
-		{	for(Profile profile: playerProfiles)
+		{	List<Profile> temp = new ArrayList<Profile>(playerProfiles);
+			for(Profile profile: temp)
 			{	ServerIndividualConnection ct = playerConnections.get(profile.getId());
 				if(ct==connection)
 				{	profileRemoved(profile);
