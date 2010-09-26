@@ -26,6 +26,8 @@ import java.io.ObjectOutputStream;
 import java.net.SocketException;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.totalboumboum.stream.network.message.NetworkMessage;
 
@@ -120,12 +122,26 @@ System.out.println("<<"+message);
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
-		
-	public synchronized boolean isFinished()
-	{	return finished;
+	private Lock finishLock = new ReentrantLock();
+	
+	public boolean isFinished()
+	{	boolean result;
+		finishLock.lock();
+		{	result = finished;
+		}
+		finishLock.lock();
+		return result;
 	}
 	
-	public synchronized void finish()
-	{	finished = true;
+	public void finish()
+	{	finishLock.lock();
+		{	finished = true;
+			try
+			{	out.close();
+			}
+			catch (IOException e)
+			{	//e.printStackTrace();
+			}
+		}
 	}
 }

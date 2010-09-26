@@ -24,6 +24,8 @@ package org.totalboumboum.stream.network.thread;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.SocketException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.totalboumboum.stream.network.AbstractConnection;
 import org.totalboumboum.stream.network.message.NetworkMessage;
@@ -66,7 +68,7 @@ public class RunnableReader implements Runnable
 	// RUNNABLE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void run()
+	public synchronized void run()
 	{	while(!isFinished())
 		{	if(isPaused())
 			{	try
@@ -130,12 +132,26 @@ System.out.println(">>"+message);
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
+	private Lock finishLock = new ReentrantLock();
 		
-	public synchronized boolean isFinished()
-	{	return finished;
+	public boolean isFinished()
+	{	boolean result;
+		finishLock.lock();
+		{	result = finished;
+		}
+		finishLock.lock();
+		return result;
 	}
 	
-	public synchronized void finish()
-	{	finished = true;
+	public void finish()
+	{	finishLock.lock();
+		{	finished = true;
+			try
+			{	in.close();
+			}
+			catch (IOException e)
+			{	//e.printStackTrace();
+			}
+		}
 	}
 }
