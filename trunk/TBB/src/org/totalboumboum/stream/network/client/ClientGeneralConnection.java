@@ -64,11 +64,17 @@ public class ClientGeneralConnection
 	public void createConnection(HostInfo hostInfo)
 	{	ClientIndividualConnection individualConnection = new ClientIndividualConnection(this,hostInfo);
 		individualConnections.add(individualConnection);
+		if(hostInfo.getId()!=null)
+		{	int index = individualConnections.indexOf(individualConnection);
+			fireConnectionAdded(individualConnection,index);
+		}
 	}
 	
 	public void removeConnection(ClientIndividualConnection connection)
-	{	connection.finish();
+	{	int index = individualConnections.indexOf(connection);
+		connection.finish();
 		individualConnections.remove(connection);
+		fireConnectionRemoved(connection,index);
 	}
 	
 	public void removeAllConnections()
@@ -117,11 +123,14 @@ public class ClientGeneralConnection
 	/////////////////////////////////////////////////////////////////
 	private Lock updateLock = new ReentrantLock();
 
-	public void gameInfoChanged(ClientIndividualConnection connection)
+	public void gameInfoChanged(ClientIndividualConnection connection, boolean isNew)
 	{	updateLock.lock();
 		
 		int index = individualConnections.indexOf(connection);
-		fireConnectionGameInfoChanged(connection,index);
+		if(isNew)
+			fireConnectionAdded(connection,index);
+		else
+			fireConnectionGameInfoChanged(connection,index);
 		
 		updateLock.unlock();
 	}
@@ -288,15 +297,15 @@ public class ClientGeneralConnection
 	{	listeners.remove(listener);
 	}
 	
-//	private void fireConnectionAdded(ClientIndividualConnection connection, int index)
-//	{	for(ClientGeneralConnectionListener listener: listeners)
-//			listener.connectionAdded(connection,index);
-//	}
+	private void fireConnectionAdded(ClientIndividualConnection connection, int index)
+	{	for(ClientGeneralConnectionListener listener: listeners)
+			listener.connectionAdded(connection,index);
+	}
 
-//	private void fireConnectionRemoved(ClientIndividualConnection connection, int index)
-//	{	for(ClientGeneralConnectionListener listener: listeners)
-//			listener.connectionRemoved(connection,index);
-//	}
+	private void fireConnectionRemoved(ClientIndividualConnection connection, int index)
+	{	for(ClientGeneralConnectionListener listener: listeners)
+			listener.connectionRemoved(connection,index);
+	}
 
 	private void fireConnectionGameInfoChanged(ClientIndividualConnection connection, int index)
 	{	for(ClientGeneralConnectionListener listener: listeners)

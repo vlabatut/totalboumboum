@@ -350,7 +350,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		return result;
 	}
 
-	private void selectGame(String gameId)
+	public void selectGame(String gameId)
 	{	// init
 		int index;
 		boolean fire = gameId!=selectedId;

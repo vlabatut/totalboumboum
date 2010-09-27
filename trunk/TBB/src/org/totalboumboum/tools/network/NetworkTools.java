@@ -51,4 +51,24 @@ public class NetworkTools
 	    
 	    return result;
 	}
+
+	@SuppressWarnings("unused")
+	public static boolean validateIPAddressPort(String ip)
+	{	boolean result = true;
+	
+		String[] chunks = ip.split(":");
+	    if(chunks.length!=2)
+	    	result = false;
+	    else
+	    {	result = validateIPAddress(chunks[0]);
+	    	try
+	    	{	int port = Integer.parseInt(chunks[1]);
+	    	}
+	    	catch(NumberFormatException e)
+	    	{	result = false;
+	    	}
+	    }
+	    
+	    return result;
+	}
 }

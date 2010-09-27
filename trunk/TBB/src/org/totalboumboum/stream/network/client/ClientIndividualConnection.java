@@ -198,10 +198,22 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		this.gameInfo.setPlayerCount(gameInfo.getPlayerCount());
 		this.gameInfo.setTournamentName(gameInfo.getTournamentName());
 		this.gameInfo.setTournamentType(gameInfo.getTournamentType());
-		this.gameInfo.getHostInfo().setState(gameInfo.getHostInfo().getState());
 		
-		// propagate modifications
-		generalConnection.gameInfoChanged(this);
+		// update host info
+		HostInfo hostInfo = this.gameInfo.getHostInfo();
+		hostInfo.setState(gameInfo.getHostInfo().getState());
+		if(hostInfo.getId()==null)
+		{	hostInfo.setId(gameInfo.getHostInfo().getId());
+			hostInfo.setLastIp(gameInfo.getHostInfo().getLastIp());
+			hostInfo.setLastPort(gameInfo.getHostInfo().getLastPort());
+			Configuration.getConnectionsConfiguration().synchronizeHost(hostInfo);
+			// propagate new connection
+			generalConnection.gameInfoChanged(this,true);
+		}
+		else
+		{	// propagate modifications
+			generalConnection.gameInfoChanged(this,false);
+		}
 	}
 
 	/**
