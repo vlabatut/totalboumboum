@@ -80,12 +80,24 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	private HashMap<String,HostInfo> hosts = null;
 	
-	public HostInfo createHost(String ip)
-	{	HostInfo result = null;
-	
-		// TODO to be defined
+	public void synchronizeHost(HostInfo hostInfo)
+	{	// synch host
+		HostInfo hi = hosts.get(hostInfo.getId());
+		if(hi==null)
+		{	hosts.put(hostInfo.getId(),hostInfo);
+		}
+		else
+		{	hi.setLastIp(hostInfo.getLastIp());
+			hi.setLastPort(hostInfo.getLastPort());
+		}
 		
-		return result;
+		// save changes
+/*		try
+		{	saveHosts();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}*/
 	}
 	
 	public void saveHosts() throws IOException

@@ -281,7 +281,7 @@ catch (UnknownHostException e)
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
-	{	// TODO useless here (?)
+	{	// useless here (?)
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -332,7 +332,7 @@ catch (UnknownHostException e)
 
 	@Override
 	public void gameAddClicked()
-	{	String defaultText = "xxx.xxx.xxx.xxx";
+	{	String defaultText = "xxx.xxx.xxx.xxx:xxxx";
 		String key = GuiKeys.MENU_NETWORK_GAMES_ADD_HOST_TITLE;
 		List<String> text = new ArrayList<String>();
 		text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_NETWORK_GAMES_ADD_HOST_TEXT));
@@ -358,13 +358,22 @@ catch (UnknownHostException e)
 				inputModalNew = null;
 			}
 			else if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
-			{	if(NetworkTools.validateIPAddress(input))
+			{	if(NetworkTools.validateIPAddressPort(input))
 				{	getFrame().unsetModalDialog();
 					inputModalNew.removeListener(this);
 					inputModalNew = null;
-					// TODO create new host
+					// create new host
+					ConnectionsConfiguration config = Configuration.getConnectionsConfiguration();
+					HostInfo hostInfo = new HostInfo();
+					String[] info = input.split(":");
+					hostInfo.setLastIp(info[0]);
+					hostInfo.setLastPort(Integer.parseInt(info[1]));
+					ClientGeneralConnection connection = config.getClientConnection();
+					connection.createConnection(hostInfo);
 					
-					//TODO refresh the GUI
+					// refresh the GUI
+					//listPanel.refresh();
+					//listPanel.selectGame(gameId);
 					//getDataPart().refresh();
 					//refreshButtons();
 				}
@@ -379,7 +388,7 @@ catch (UnknownHostException e)
 				inputModalSet = null;
 			}
 			else if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
-			{	if(NetworkTools.validateIPAddress(input))
+			{	if(NetworkTools.validateIPAddressPort(input))
 				{	getFrame().unsetModalDialog();
 					inputModalSet.removeListener(this);
 					inputModalSet = null;
@@ -410,12 +419,18 @@ catch (UnknownHostException e)
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void connectionAdded(ClientIndividualConnection connection, int index)
-	{	// TODO Auto-generated method stub
+	{	GameInfo gameInfo = connection.getGameInfo();
+		String gameId = gameInfo.getHostInfo().getId();
+		gamesMap.put(gameId,gameInfo);
+		listPanel.setGameInfos(gamesMap,GAME_LIST_LINES);
+		listPanel.selectGame(gameId);
 	}
 
 	@Override
 	public void connectionRemoved(ClientIndividualConnection connection,int index)
-	{	// TODO Auto-generated method stub
+	{	GameInfo gameInfo = connection.getGameInfo();
+		gamesMap.remove(gameInfo);
+		listPanel.setGameInfos(gamesMap,GAME_LIST_LINES);
 	}
 
 	@Override
@@ -446,7 +461,7 @@ catch (UnknownHostException e)
 	{	GameInfo gameInfo = gamePanel.getGameInfo();
 		if(gameInfo!=null)
 		{	HostInfo hostInfo = gameInfo.getHostInfo();
-			String defaultText = hostInfo.getLastIp();
+			String defaultText = hostInfo.getLastIp()+":"+hostInfo.getLastPort();
 			String key = GuiKeys.MENU_NETWORK_GAMES_ADD_HOST_TITLE;
 			List<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_NETWORK_GAMES_SET_HOST_TEXT));
