@@ -392,12 +392,14 @@ catch (UnknownHostException e)
 						{	hostInfo.setLastIp(input);
 							ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 							connection.refreshConnection(gameInfo);
+
+							// refresh the GUI
+							hostPanel.setHostInfo(hostInfo);
+							//getDataPart().refresh();
+							//refreshButtons();
 						}
 						
 					}
-					//TODO refresh the GUI
-					//getDataPart().refresh();
-					//refreshButtons();
 				}
 			}
 		}

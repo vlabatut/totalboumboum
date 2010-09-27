@@ -137,7 +137,8 @@ public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends Co
 	}
 	
 	protected void fireModalDialogButtonClicked(String buttonCode)
-	{	for(ModalDialogPanelListener listener: listeners)
+	{	List<ModalDialogPanelListener> temp = new ArrayList<ModalDialogPanelListener>(listeners);
+		for(ModalDialogPanelListener listener: temp)
 			listener.modalDialogButtonClicked(buttonCode);
 	}
 
