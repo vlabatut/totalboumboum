@@ -1625,7 +1625,9 @@ public class Launcher
 	 *  - icones: 
 	 *  	- pair = rond vide, central = rond plein
 	 *  	- revoir les logos pour blocker/débloquer les joueurs. en plus ça a l'air inversé dans le jeu...
-	 *  
+	 *  - à un moment, il faut l'utilisateur donne un nom à son hote. 
+	 *  	- le mieux reste encore le réglage dans les options, mais ça serait mieux que le client puisse le renommer comme il veut
+	 *  	- ou alors on utilise le nom du système (comme sous windows, mais existe-ce sous lx ou autre?)
 	 */
 	
 	/**
