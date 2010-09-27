@@ -1609,8 +1609,11 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - la création d'un host n'est pas implémentée dans la GUI en fait (pas fini)
-	 *  - re-tester un cp la connection différée, on dirait que ça marche pas du 1er cp
+	 *  - vérifier que :
+	 *  	- la création d'host marche (effective seulement si on peut se connecter)
+	 *  	- l'hote est bien mis à jour à chaque modif de son ip
+	 *  	- la synchro et l'enregistrement est bien effectué coté client
+	 *  	- lorsque le serveur bloque/débloque les joueurs, son état doit être mis à jour côté client ? ou pas ? (le client peut tjrs y aller, mais pas enregistrer de joueurs) 
 	 *  - pr l'état inconnu d'un serveur :
 	 *  	- mettre une icone "disconnected"
 	 *  	- en cas de demande de raffraichissement, faire apparaître rapidement l'icone actuelle (engrenage)
