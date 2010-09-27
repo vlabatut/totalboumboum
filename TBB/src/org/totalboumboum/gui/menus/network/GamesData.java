@@ -398,7 +398,9 @@ catch (UnknownHostException e)
 					{	HostInfo hostInfo = gameInfo.getHostInfo();
 						// only if not already connected
 						if(hostInfo.getState()==HostState.UNKOWN)
-						{	hostInfo.setLastIp(input);
+						{	String[] info = input.split(":");
+							hostInfo.setLastIp(info[0]);
+							hostInfo.setLastPort(Integer.parseInt(info[1]));
 							ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 							connection.refreshConnection(gameInfo);
 

@@ -106,6 +106,9 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 					catch(ConnectException e)
 					{	System.err.println("ConnectException: address "+address+" doesn't respond");
 					}
+//					catch(UnknownHostException e)
+//					{	System.err.println("UnknownHostException: address "+address+" doesn't respond");
+//					}
 					catch(IOException e)
 					{	e.printStackTrace();
 					}
