@@ -52,6 +52,7 @@ import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
 import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
+import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.tools.network.NetworkTools;
 import org.xml.sax.SAXException;
 
@@ -344,23 +345,60 @@ catch (UnknownHostException e)
 	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private InputModalDialogPanel inputModalNew = null;
+	private InputModalDialogPanel inputModalSet = null;
 	
 	@Override
 	public void modalDialogButtonClicked(String buttonCode)
-	{	String input = inputModalNew.getInput();
-		if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CANCEL))
-		{	getFrame().unsetModalDialog();
-			inputModalNew = null;
-		}
-		else if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
-		{	if(NetworkTools.validateIPAddress(input))
+	{	// new host
+		if(inputModalNew!=null)
+		{	String input = inputModalNew.getInput();
+			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CANCEL))
 			{	getFrame().unsetModalDialog();
+				inputModalNew.removeListener(this);
 				inputModalNew = null;
-				// TODO create new host
-				
-				//TODO refresh the GUI
-				//getDataPart().refresh();
-				//refreshButtons();
+			}
+			else if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+			{	if(NetworkTools.validateIPAddress(input))
+				{	getFrame().unsetModalDialog();
+					inputModalNew.removeListener(this);
+					inputModalNew = null;
+					// TODO create new host
+					
+					//TODO refresh the GUI
+					//getDataPart().refresh();
+					//refreshButtons();
+				}
+			}
+		}
+		// simple address change
+		else if(inputModalSet!=null)
+		{	String input = inputModalSet.getInput();
+			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CANCEL))
+			{	getFrame().unsetModalDialog();
+				inputModalSet.removeListener(this);
+				inputModalSet = null;
+			}
+			else if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+			{	if(NetworkTools.validateIPAddress(input))
+				{	getFrame().unsetModalDialog();
+					inputModalSet.removeListener(this);
+					inputModalSet = null;
+					
+					GameInfo gameInfo = gamePanel.getGameInfo();
+					if(gameInfo!=null)
+					{	HostInfo hostInfo = gameInfo.getHostInfo();
+						// only if not already connected
+						if(hostInfo.getState()==HostState.UNKOWN)
+						{	hostInfo.setLastIp(input);
+							ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+							connection.refreshConnection(gameInfo);
+						}
+						
+					}
+					//TODO refresh the GUI
+					//getDataPart().refresh();
+					//refreshButtons();
+				}
 			}
 		}
 	}
@@ -403,6 +441,16 @@ catch (UnknownHostException e)
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void ipClicked()
-	{	System.out.println("dskjqsduhdsqhu");
+	{	GameInfo gameInfo = gamePanel.getGameInfo();
+		if(gameInfo!=null)
+		{	HostInfo hostInfo = gameInfo.getHostInfo();
+			String defaultText = hostInfo.getLastIp();
+			String key = GuiKeys.MENU_NETWORK_GAMES_ADD_HOST_TITLE;
+			List<String> text = new ArrayList<String>();
+			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_NETWORK_GAMES_SET_HOST_TEXT));
+			inputModalSet = new InputModalDialogPanel(container.getMenuParent(),key,text,defaultText);
+			inputModalSet.addListener(this);
+			getFrame().setModalDialog(inputModalSet);
+		}
 	}
 }

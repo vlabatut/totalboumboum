@@ -592,6 +592,10 @@
 					<text name="Text" value="Entrez l'adresse IP du nouvel hôte :" tooltip="Entrez l'adresse IP du nouvel hôte en utilisant la notation décimale de type xxx.xxx.xxx.xxx" />
 					<text name="Title" value="Nouvel hôte" tooltip="Nouvel hôte" />
 				</group>
+				<group name="SetHost">
+					<text name="Text" value="Entrez la nouvelle adresse IP de l'hôte :" tooltip="Entrez la nouvelle adresse IP de l'hôte en utilisant la notation décimale de type xxx.xxx.xxx.xxx" />
+					<text name="Title" value="Changement d'adresse" tooltip="Changement d'adresse de l'hôte" />
+				</group>
 				<group name="Button">
 					<text name="Next" value="Suivant" tooltip="Sélectionner les joueurs" />
 					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />
