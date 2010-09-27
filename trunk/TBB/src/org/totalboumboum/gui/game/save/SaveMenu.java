@@ -189,6 +189,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 	{	getFrame().unsetModalDialog();
 		if(inputModalNew!=null)
 		{	String input = inputModalNew.getInput();
+			inputModalNew.removeListener(this);
 			inputModalNew = null;
 			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
 			{	// create & save
@@ -210,7 +211,8 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 			}
 		}
 		else if(questionModalDelete!=null)
-		{	questionModalDelete = null;				
+		{	questionModalDelete.removeListener(this);
+			questionModalDelete = null;				
 			GameArchive selectedArchive = levelData.getSelectedGameArchive();
 			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
 			{	if(selectedArchive!=null)
@@ -223,7 +225,8 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 			}
 		}
 		else if(questionModalConfirm!=null)
-		{	questionModalConfirm = null;				
+		{	questionModalConfirm.removeListener(this);
+			questionModalConfirm = null;				
 			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
 			{	try
 				{	String folder = levelData.getSelectedGameArchive().getFolder();

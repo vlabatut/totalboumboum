@@ -175,6 +175,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 	{	getFrame().unsetModalDialog();
 		if(inputPanel!=null)
 		{	String input = inputPanel.getInput();
+			inputPanel.removeListener(this);
 			inputPanel = null;
 			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
 			{	// create & save
@@ -213,7 +214,8 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 			}
 		}
 		else if(questionPanel!=null)
-		{	questionPanel = null;				
+		{	questionPanel.removeListener(this);
+			questionPanel = null;				
 			Profile profile = profileData.getSelectedProfile();
 			String id = profileData.getReplacementProfileId();
 			if(profile!=null)

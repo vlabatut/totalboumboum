@@ -1611,7 +1611,12 @@ public class Launcher
 	 * en cours:
 	 *  - re-tester un cp la connection différée, on dirait que ça marche pas du 1er cp
 	 *  - possibilité de changer l'IP d'un serveur direct existant
-	 *    >> à terminer, faut gérer l'apparition du popup
+	 *    	>> à terminer, faut gérer l'apparition du popup
+	 *  - la création d'un host n'est pas implémentée dans la GUI en fait (pas fini)
+	 *  - pr l'état inconnu d'un serveur :
+	 *  	- mettre une icone "disconnected"
+	 *  	- en cas de demande de raffraichissement, faire apparaître rapidement l'icone actuelle (engrenage)
+	 *  	- p-ê déplacer l'implémentation du refresh dans le subpanel plutot que dans le menu, ce qui permettrait d'accéder facilement aux icones...
 	 *  - déconnection du serveur pdt sélection joueurs : 
 	 *  		- retour à l'écran de sélection des parties
 	 *			- mise à jour de gameinfo dans la liste
