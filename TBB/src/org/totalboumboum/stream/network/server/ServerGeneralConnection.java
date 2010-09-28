@@ -169,6 +169,9 @@ public class ServerGeneralConnection implements Runnable
 			else
 				state = HostState.OPEN;
 			hostInfo.setState(state);
+			
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
+			propagateMessage(message);
 		}
 		gameInfoLock.unlock();
 	}
