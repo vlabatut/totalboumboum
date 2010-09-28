@@ -83,6 +83,7 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour cette représentation ainsi que tous ses constituants.
+	 * usage interne, méthode non-destinée à la création des IA.
 	 */
 	public void update(long elapsedTime)
 	{	updateTimes(elapsedTime);

@@ -159,6 +159,7 @@ public class AiItem extends AiSprite<Item>
 		}
 	}	
 
+	@Override
 	public boolean isCrossableBy(AiSprite<?> sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
