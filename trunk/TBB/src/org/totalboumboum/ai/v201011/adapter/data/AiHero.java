@@ -242,6 +242,7 @@ public class AiHero extends AiSprite<Hero>
 		throughFires = ability.isActive();
 	}
 	
+	@Override
 	public boolean isCrossableBy(AiSprite<?> sprite)
 	{	boolean result = false;
 		if(sprite instanceof AiFire)

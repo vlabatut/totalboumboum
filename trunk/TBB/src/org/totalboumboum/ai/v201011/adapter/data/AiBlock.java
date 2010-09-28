@@ -162,6 +162,7 @@ public class AiBlock extends AiSprite<Block>
 	{	return destructible;		
 	}
 
+	@Override
 	public boolean isCrossableBy(AiSprite<?> sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
