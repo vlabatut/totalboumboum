@@ -405,11 +405,11 @@ catch (UnknownHostException e)
 							connection.refreshConnection(gameInfo);
 
 							// refresh the GUI
+							listPanel.updateGame(gameInfo);
 							hostPanel.setHostInfo(hostInfo);
 							//getDataPart().refresh();
 							//refreshButtons();
 						}
-						
 					}
 				}
 			}

@@ -1609,11 +1609,14 @@ public class Launcher
 	
 	/**
 	 * en cours:
+	 *  - finir de revoir les icones (que part.4 de faite pr l'instant)
 	 *  - vérifier que :
 	 *  	- la création d'host marche (effective seulement si on peut se connecter)
 	 *  	- l'hote est bien mis à jour à chaque modif de son ip
 	 *  	- la synchro et l'enregistrement est bien effectué coté client
-	 *  	- lorsque le serveur bloque/débloque les joueurs, son état doit être mis à jour côté client ? ou pas ? (le client peut tjrs y aller, mais pas enregistrer de joueurs) 
+	 *  	- lorsque le serveur bloque les joueurs, l'état est mis à jour coté client dans la gui
+	 *  - question :
+	 *  	- lorsque le serveur bloque/débloque les joueurs, le bouton next du client doit il se bloquer (pr le de sélection de partie) ? 
 	 *  - pr l'état inconnu d'un serveur :
 	 *  	- mettre une icone "disconnected"
 	 *  	- en cas de demande de raffraichissement, faire apparaître rapidement l'icone actuelle (engrenage)
