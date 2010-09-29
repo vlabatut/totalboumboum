@@ -12,8 +12,8 @@
 	</xsd:simpleType>
 
 	<xsd:complexType name="tAbstractImage">
-		<xsd:attribute name="xShift" type="xsd:integer" use="optional" />
-		<xsd:attribute name="yShift" type="xsd:integer" use="optional" />
+		<xsd:attribute name="xShift" type="xsd:double" use="optional" />
+		<xsd:attribute name="yShift" type="xsd:double" use="optional" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tImageFile">
@@ -46,11 +46,11 @@
 		<xsd:attribute name="file" type="xsd:string" use="optional" />
 		<xsd:attribute name="name" type="xsd:string" use="optional" />
 		<xsd:attribute name="duration" type="xsd:integer" use="optional" default="0" />
-		<xsd:attribute name="xShift" type="xsd:integer" use="optional" />
-		<xsd:attribute name="yShift" type="xsd:integer" use="optional" />
+		<xsd:attribute name="xShift" type="xsd:double" use="optional" />
+		<xsd:attribute name="yShift" type="xsd:double" use="optional" />
 		<xsd:attribute name="shadow" type="xsd:string" use="optional" />
-		<xsd:attribute name="shadowXShift" type="xsd:integer" use="optional" />
-		<xsd:attribute name="shadowYShift" type="xsd:integer" use="optional" />
+		<xsd:attribute name="shadowXShift" type="xsd:double" use="optional" />
+		<xsd:attribute name="shadowYShift" type="xsd:double" use="optional" />
 		<xsd:attribute name="boundYShift" type="tBasePosition" use="optional" />
 	</xsd:complexType>
 
@@ -60,11 +60,11 @@
 		</xsd:sequence>
 		<xsd:attribute name="name" type="tDirection" use="required" />
 		<xsd:attribute name="folder" type="xsd:string" use="optional" />
-		<xsd:attribute name="xShift" type="xsd:integer" use="optional" />
-		<xsd:attribute name="yShift" type="xsd:integer" use="optional" />
+		<xsd:attribute name="xShift" type="xsd:double" use="optional" />
+		<xsd:attribute name="yShift" type="xsd:double" use="optional" />
 		<xsd:attribute name="shadow" type="xsd:string" use="optional" />
-		<xsd:attribute name="shadowXShift" type="xsd:integer" use="optional" />
-		<xsd:attribute name="shadowYShift" type="xsd:integer" use="optional" />
+		<xsd:attribute name="shadowXShift" type="xsd:double" use="optional" />
+		<xsd:attribute name="shadowYShift" type="xsd:double" use="optional" />
 		<xsd:attribute name="boundYShift" type="tBasePosition" use="optional" />
 	</xsd:complexType>
 
@@ -76,11 +76,11 @@
 			<xsd:attribute name="folder" type="xsd:string" use="optional" />
 			<xsd:attribute name="repeat" type="xsd:boolean" use="optional" default="false" />
 			<xsd:attribute name="proportional" type="xsd:boolean" use="optional" default="false" />			
-			<xsd:attribute name="xShift" type="xsd:integer" use="optional" />
-			<xsd:attribute name="yShift" type="xsd:integer" use="optional" />
+			<xsd:attribute name="xShift" type="xsd:double" use="optional" />
+			<xsd:attribute name="yShift" type="xsd:double" use="optional" />
 			<xsd:attribute name="shadow" type="xsd:string" use="optional" />
-			<xsd:attribute name="shadowXShift" type="xsd:integer" use="optional" />
-			<xsd:attribute name="shadowYShift" type="xsd:integer" use="optional" />
+			<xsd:attribute name="shadowXShift" type="xsd:double" use="optional" />
+			<xsd:attribute name="shadowYShift" type="xsd:double" use="optional" />
 			<xsd:attribute name="boundYShift" type="tBasePosition" use="optional" />
 	</xsd:complexType>
 
