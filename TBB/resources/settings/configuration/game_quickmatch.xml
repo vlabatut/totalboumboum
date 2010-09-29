@@ -14,11 +14,11 @@
 		</points>
 	</settings>
 	<players>
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="totalboumboum" spriteFolder="prognathe" />
 		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="sbm1Custom" folder="debug" allowedPlayers="1 2" />
+		<level pack="totalboumboum" folder="debug" allowedPlayers="1 2" />
 	</levels>
 </gameQuickmatch>
 
