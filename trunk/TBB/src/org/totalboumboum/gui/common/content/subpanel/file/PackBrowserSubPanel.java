@@ -179,26 +179,31 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 				}
 			});
 			for(File f:fileFolders)
-			{	File[] folders = f.listFiles();
-				int i = 0;
-				boolean foundAll = false;
-				while(i<folders.length && !foundAll)
-				{	if(folders[i].isDirectory())
-					{	List<File> files = Arrays.asList(folders[i].listFiles());
-						boolean found = true;
-						Iterator<String> it = targetFiles.iterator();
-						while(it.hasNext() && found)
-						{	String targetFile = it.next();
-							File testFile = new File(folders[i].getPath()+File.separator+targetFile);
-							found = files.contains(testFile);
+			{	File folder = f;
+				if(additionalFolder!=null)
+					folder = new File(f.getPath()+File.separator+additionalFolder);
+				if(folder.exists())
+				{	File[] folders = folder.listFiles();
+					int i = 0;
+					boolean foundAll = false;
+					while(i<folders.length && !foundAll)
+					{	if(folders[i].isDirectory())
+						{	List<File> files = Arrays.asList(folders[i].listFiles());
+							boolean found = true;
+							Iterator<String> it = targetFiles.iterator();
+							while(it.hasNext() && found)
+							{	String targetFile = it.next();
+								File testFile = new File(folders[i].getPath()+File.separator+targetFile);
+								found = files.contains(testFile);
+							}
+							if(found)
+								foundAll = true;
 						}
-						if(found)
-							foundAll = true;
+						i++;
 					}
-					i++;
+					if(foundAll)
+						names.add(f.getName());
 				}
-				if(foundAll)
-					names.add(f.getName());
 			}
 		}
 	}
@@ -237,9 +242,9 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 			int selectedIndex = (row-controlUpCount)+currentPage*(LINES-controlTotalCount);
 			selectedName = names.get(selectedIndex);
 			String bFolder = baseFolder;
+			bFolder = bFolder + File.separator + selectedName;
 			if(additionalFolder!=null)
 				bFolder = bFolder + File.separator + additionalFolder;
-			bFolder = bFolder + File.separator + selectedName;
 			filePanel.setFolder(bFolder,targetFiles);
 			filePanel.addListener(this);
 		}
