@@ -855,7 +855,8 @@
 					<text name="Finished" value="Finished" tooltip="This Tournament has ended" />
 					<text name="Open" value="Open" tooltip="Tournament open for registration" />
 					<text name="Playing" value="Playing" tooltip="This tournament has already started" />
-					<text name="Unknown" value="Unknown" tooltip="Currently retrieving the tournament state" />
+					<text name="Retrieving" value="Retrieving" tooltip="Currently retrieving the tournament state..." />
+					<text name="Unknown" value="Unknown" tooltip="State currently unknown" />
 				</group>
 				<group name="Type" >
 					<text name="Cup" value="Cup" tooltip="Knock-out tournament" />
