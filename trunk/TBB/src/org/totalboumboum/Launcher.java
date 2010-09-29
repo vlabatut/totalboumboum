@@ -1609,7 +1609,10 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - finir de revoir les icones (que part.4 de faite pr l'instant)
+	 *  - finir de revoir les icones :
+	 *  	- blanc vs black(que part.4 de faite pr l'instant)
+	 *  	- màj dans le jeu lui même (certains icones ont changé de nom)
+	 *  	- réduire la taille du thème+perso TBB
 	 *  - vérifier que :
 	 *  	- la création d'host marche (effective seulement si on peut se connecter)
 	 *  	- l'hote est bien mis à jour à chaque modif de son ip
