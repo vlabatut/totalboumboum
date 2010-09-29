@@ -915,7 +915,7 @@ public class GuiTools
 		// command
 		{	String folder = baseFolder+GuiFileTools.FILE_COMMAND;
 			String[] uses =
-			{	GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKNOWN
+			{	GuiKeys.COMMON_GAME_LIST_DATA_STATE_RETRIEVING
 			};
 			loadTableImages(folder,uses);
 		}
@@ -961,6 +961,13 @@ public class GuiTools
 		{	String folder = baseFolder+GuiFileTools.FILE_DIRECT;
 			String[] uses =
 			{	GuiKeys.COMMON_GAME_LIST_BUTTON_DIRECT
+			};
+			loadTableImages(folder,uses);
+		}
+		// disconnection
+		{	String folder = baseFolder+GuiFileTools.FILE_DISCONNECTION;
+			String[] uses =
+			{	GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKNOWN
 			};
 			loadTableImages(folder,uses);
 		}

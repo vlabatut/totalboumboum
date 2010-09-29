@@ -156,7 +156,7 @@ public class Round implements StatisticHolder, Serializable
 			if(Configuration.getEngineConfiguration().isRecordRounds() && fileIn==null)
 			{	fileOut = new FileOutputServerStream(this);
 				RoundVariables.fileOut = fileOut;
-				fileOut.initStreams();
+				fileOut.initStream();
 				fileOut.initRound();
 			}
 		
@@ -242,8 +242,11 @@ public class Round implements StatisticHolder, Serializable
 		}
 		// read stats from server if network game
 		else if(clientConnection!=null)
-		{	try
-			{	netClientIn.finishRound(); //TODO whatever that could consist in, must do it in the connection
+		{	
+/* NOTE NET			
+			try
+			{	
+				netClientIn.finishRound(); //TODO whatever that could consist in, must do it in the connection
 				StatisticRound stats = fileIn.getRoundStats();
 				setStats(stats);
 				netClientOut.finishRound(); //TODO same thing (check old version of the network classes)
@@ -254,6 +257,7 @@ public class Round implements StatisticHolder, Serializable
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
 			}
+*/			
 			roundOver = true;
 		}
 		// else : init stats date
@@ -287,9 +291,11 @@ public class Round implements StatisticHolder, Serializable
 		}
 
 		// possibly end network game
+/* NOTE NET
 		if(serverConnection!=null)
 		{	try
-			{	netServerOut.finishRound(stats); //TODO like for client connection...
+			{	
+				netServerOut.finishRound(stats); //TODO like for client connection...
 				netServerIn.finishRound();
 			}
 			catch (IOException e)
@@ -302,6 +308,7 @@ public class Round implements StatisticHolder, Serializable
 			{	e.printStackTrace();
 			}
 		}
+*/
 
 		match.roundOver();
 		if(panel!=null)

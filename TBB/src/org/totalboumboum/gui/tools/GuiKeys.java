@@ -241,6 +241,7 @@ public class GuiKeys
 	public static final String RESET = "Reset";
 	public static final String RESOURCES = "Resources";
 	public static final String RESULTS = "Results";
+	public static final String RETRIEVING = "Retrieving";
 	public static final String RIGHT = "Right";
 	public static final String ROUND = "Round";
 	public static final String ROUNDS = "Rounds";
@@ -1099,6 +1100,7 @@ public class GuiKeys
 		public static final String COMMON_GAME_LIST_DATA_STATE_OPEN = COMMON_GAME_LIST_DATA+STATE+OPEN;
 		public static final String COMMON_GAME_LIST_DATA_STATE_PLAYING = COMMON_GAME_LIST_DATA+STATE+PLAYING;
 		public static final String COMMON_GAME_LIST_DATA_STATE_UNKNOWN = COMMON_GAME_LIST_DATA+STATE+UNKNOWN;
+		public static final String COMMON_GAME_LIST_DATA_STATE_RETRIEVING = COMMON_GAME_LIST_DATA+STATE+RETRIEVING;
 		public static final String COMMON_GAME_LIST_DATA_TYPE_CUP = COMMON_GAME_LIST_DATA+TYPE+CUP;
 		public static final String COMMON_GAME_LIST_DATA_TYPE_LEAGUE = COMMON_GAME_LIST_DATA+TYPE+LEAGUE;
 		public static final String COMMON_GAME_LIST_DATA_TYPE_SEQUENCE = COMMON_GAME_LIST_DATA+TYPE+SEQUENCE;
