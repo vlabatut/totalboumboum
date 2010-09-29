@@ -1609,10 +1609,7 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - finir de revoir les icones :
-	 *  	- blanc vs black(que part.4 de faite pr l'instant)
-	 *  	- màj dans le jeu lui même (certains icones ont changé de nom)
-	 *  	- réduire la taille du thème+perso TBB
+	 *  - tout ce qui est shadow shift devrait être sans échelle, ainsi que boundweight
 	 *  - vérifier que :
 	 *  	- la création d'host marche (effective seulement si on peut se connecter)
 	 *  	- l'hote est bien mis à jour à chaque modif de son ip
@@ -1635,6 +1632,7 @@ public class Launcher
 	 *  - à un moment, il faut l'utilisateur donne un nom à son hote. 
 	 *  	- le mieux reste encore le réglage dans les options, mais ça serait mieux que le client puisse le renommer comme il veut
 	 *  	- ou alors on utilise le nom du système (comme sous windows, mais existe-ce sous lx ou autre?)
+	 *  - NOTE NET
 	 */
 	
 	/**

@@ -83,49 +83,50 @@ public class RoundVariables
 	// OUTPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static FileOutputServerStream fileOut = null;
-	public static NetOutputClientStream netClientOut = null;
-	public static NetOutputServerStream netServerOut = null;
+//NOTE NET	public static NetOutputClientStream netClientOut = null;
+//NOTE NET	public static NetOutputServerStream netServerOut = null;
 	
 	public static void writeEvent(ReplayEvent event)
 	{	if(fileOut!=null && event.getSendEvent())
 			fileOut.writeEvent(event);
-		if(netServerOut!=null && event.getSendEvent())
-			netServerOut.writeEvent(event);
+//NOTE NET		if(netServerOut!=null && event.getSendEvent())
+//NOTE NET			netServerOut.writeEvent(event);
 	}
 
 	public static void writeEvent(RemotePlayerControlEvent event)
-	{	if(netClientOut!=null)
-			netClientOut.writeEvent(event);
+	{	
+//NOTE NET		if(netClientOut!=null)
+//NOTE NET			netClientOut.writeEvent(event);
 	}
 	
 	public static void writeZoomCoef(double zoomCoef) throws IOException
 	{	if(fileOut!=null)
 			fileOut.writeZoomCoef(zoomCoef);
-		if(netServerOut!=null)
-			netServerOut.writeZoomCoef(zoomCoef);
+//NOTE NET		if(netServerOut!=null)
+//NOTE NET			netServerOut.writeZoomCoef(zoomCoef);
 	}
 
 	public static void setFilterEvents(boolean flag)
 	{	if(fileOut!=null)
 			fileOut.setFilterEvents(flag);
-		if(netServerOut!=null)
-			netServerOut.setFilterEvents(flag);
+//NOTE NET		if(netServerOut!=null)
+//NOTE NET			netServerOut.setFilterEvents(flag);
 	}
 
 	public static boolean getFilterEvents()
 	{	boolean result = false;
 		if(fileOut!=null)
 			result = fileOut.getFilterEvents();
-		if(netServerOut!=null)
-			result = netServerOut.getFilterEvents();
+//NOTE NET		if(netServerOut!=null)
+//NOTE NET			result = netServerOut.getFilterEvents();
 		return result;
 	}
 	
 	public static void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
 	{	if(fileOut!=null)
 			finishWriting(stats);
-		if(netServerOut!=null)
-			finishWriting(stats);
+//NOTE NET		if(netServerOut!=null)
+//NOTE NET			finishWriting(stats);
 	}
 
 }
