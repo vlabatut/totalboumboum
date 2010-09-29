@@ -44,7 +44,7 @@ public class StatTools
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	//initAllStats();
 		//reinitOverallStatsForPlayer(0);
-		exportAllStats();
+		//exportAllStats();
 		//importAllStats();
 	}
 	
