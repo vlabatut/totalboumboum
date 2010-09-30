@@ -61,8 +61,10 @@ public class HollowAnimesLoader
 			String schemaFolder = FilePaths.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ANIMES+FileNames.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+			
 			// loading existing animes
 			loadAnimesElement(root,folderPath,pack);
+			
 			// completing missing animes with replacement animes
 			completeAnimes(pack);
 		}
@@ -86,7 +88,7 @@ public class HollowAnimesLoader
 		double boundHeight = 0;
 		attribute = root.getAttribute(XmlNames.BOUND_HEIGHT);
 		if(attribute!=null)
-			boundHeight = Double.parseDouble(attribute.getValue());
+			boundHeight = Double.parseDouble(attribute.getValue())*scale;
 		pack.setBoundHeight(boundHeight);
 		
 		// colors ?
@@ -227,13 +229,13 @@ public class HollowAnimesLoader
 		double xShift = 0;
 		attribute = root.getAttribute(XmlNames.XSHIFT);
 		if(attribute!=null)
-			xShift = Double.parseDouble(attribute.getValue());
+			xShift = Double.parseDouble(attribute.getValue())*pack.getScale();
 
 		// vertical shift
 		double yShift = 0;
 		attribute = root.getAttribute(XmlNames.YSHIFT);
 		if(attribute!=null)
-			yShift = Double.parseDouble(attribute.getValue());
+			yShift = Double.parseDouble(attribute.getValue())*pack.getScale();
 		
 		// shadow
 		String shadowName = null;
@@ -249,13 +251,13 @@ public class HollowAnimesLoader
 		double shadowXShift = 0;
 		attribute = root.getAttribute(XmlNames.SHADOW_XSHIFT);
 		if(attribute!=null)
-			shadowXShift = Double.parseDouble(attribute.getValue());
+			shadowXShift = Double.parseDouble(attribute.getValue())*pack.getScale();
 		
 		// shadow vertical shift
 		double shadowYShift = 0;
 		attribute = root.getAttribute(XmlNames.SHADOW_YSHIFT);
 		if(attribute!=null)
-			shadowYShift = Double.parseDouble(attribute.getValue());
+			shadowYShift = Double.parseDouble(attribute.getValue())*pack.getScale();
 		
 		// bound shift
 		ImageShift boundYShift = ImageShift.DOWN;
@@ -305,12 +307,12 @@ public class HollowAnimesLoader
     	// horizontal shift
 		attribute = root.getAttribute(XmlNames.XSHIFT);
 		if(attribute!=null)
-			xShift = Double.parseDouble(attribute.getValue());
+			xShift = Double.parseDouble(attribute.getValue())*pack.getScale();
 		
 		// vertical shift
 		attribute = root.getAttribute(XmlNames.YSHIFT);
 		if(attribute!=null)
-			yShift = Double.parseDouble(attribute.getValue());
+			yShift = Double.parseDouble(attribute.getValue())*pack.getScale();
 		
 		// shadow
 		attribute = root.getAttribute(XmlNames.SHADOW);
@@ -324,12 +326,12 @@ public class HollowAnimesLoader
 		// shadow horizontal shift
 		attribute = root.getAttribute(XmlNames.SHADOW_XSHIFT);
 		if(attribute!=null)
-			shadowXShift = Double.parseDouble(attribute.getValue());
+			shadowXShift = Double.parseDouble(attribute.getValue())*pack.getScale();
 		
 		// shadow vertical shift
 		attribute = root.getAttribute(XmlNames.SHADOW_YSHIFT);
 		if(attribute!=null)
-			shadowYShift = Double.parseDouble(attribute.getValue());
+			shadowYShift = Double.parseDouble(attribute.getValue())*pack.getScale();
 		
 		// bound shift
 		attribute = root.getAttribute(XmlNames.BOUND_YSHIFT);
@@ -367,14 +369,14 @@ public class HollowAnimesLoader
 		attribute = root.getAttribute(XmlNames.XSHIFT);
 		if(attribute!=null)
 		{	String xShiftStr = attribute.getValue();
-			xShift = Double.parseDouble(xShiftStr);
+			xShift = Double.parseDouble(xShiftStr)*pack.getScale();
 		}
 		
 		// vertical shift
 		attribute = root.getAttribute(XmlNames.YSHIFT);
 		if(attribute!=null)
 		{	String yShiftStr = attribute.getValue();
-			yShift = Double.parseDouble(yShiftStr);
+			yShift = Double.parseDouble(yShiftStr)*pack.getScale();
 		}
 		
 		// shadow
@@ -389,14 +391,14 @@ public class HollowAnimesLoader
 			attribute = root.getAttribute(XmlNames.SHADOW_XSHIFT);
 			if(attribute!=null)
 			{	String shadowXShiftStr = attribute.getValue();
-				shadowXShift = Double.parseDouble(shadowXShiftStr);
+				shadowXShift = Double.parseDouble(shadowXShiftStr)*pack.getScale();
 			}
 			
 			// shadow vertical shift
 			attribute = root.getAttribute(XmlNames.SHADOW_YSHIFT);
 			if(attribute!=null)
 			{	String shadowYShiftStr = attribute.getValue();
-				shadowYShift = Double.parseDouble(shadowYShiftStr);
+				shadowYShift = Double.parseDouble(shadowYShiftStr)*pack.getScale();
 			}
 			
 		}
@@ -449,14 +451,14 @@ public class HollowAnimesLoader
     	Attribute attribute = root.getAttribute(XmlNames.XSHIFT);
 		if(attribute!=null)
 		{	String xShiftStr = attribute.getValue();
-			xShift = Double.parseDouble(xShiftStr);
+			xShift = Double.parseDouble(xShiftStr)*pack.getScale();
 		}
 		
 		// vertical shift
 		attribute = root.getAttribute(XmlNames.YSHIFT);
 		if(attribute!=null)
 		{	String yShiftStr = attribute.getValue();
-			yShift = Double.parseDouble(yShiftStr);
+			yShift = Double.parseDouble(yShiftStr)*pack.getScale();
 		}
 		
 		// image
