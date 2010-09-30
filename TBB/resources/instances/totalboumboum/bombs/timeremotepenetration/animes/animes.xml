@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
-		scale="8" >
+		scale="4" >
 		
 	<colors >
 		<colorsprite name="NONE" folder="none" />
@@ -25,7 +25,7 @@
 	</colors>
 	
 	<gestures >
-		<gesture name="BOUNCING" folder="standing" repeat="true" shadowYShift="-24">
+		<gesture name="BOUNCING" folder="standing" repeat="true" shadowYShift="-3">
 			<direction name="NONE">
 				<step duration="240" file="01.png" shadow="large" />
 				<step duration="240" file="02.png" shadow="medium" />

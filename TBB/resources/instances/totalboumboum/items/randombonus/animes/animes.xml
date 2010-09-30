@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
-		scale="8" preview="preview.png" >
+		scale="4" preview="preview.png" >
 
 	<gestures>
 
@@ -32,22 +32,22 @@
 				<step duration="85" >
 					<imageref name="permanent1" />
 					<image file="icon.png" />
-					<imageref name="smoke1" yShift="33" />
+					<imageref name="smoke1" yShift="4" />
 				</step>
 				<step duration="105" >
 					<imageref name="permanent1" />
 					<image file="icon.png" />
-					<imageref name="smoke2" yShift="33" />
+					<imageref name="smoke2" yShift="4" />
 				</step>
 				<step duration="80" >
 					<imageref name="permanent1" />
 					<image file="icon.png" />
-					<imageref name="smoke3" yShift="33" />
+					<imageref name="smoke3" yShift="4" />
 				</step>
 				<step duration="60" >
 					<imageref name="permanent1" />
 					<image file="icon.png" />
-					<imageref name="smoke4" yShift="33" />
+					<imageref name="smoke4" yShift="4" />
 				</step>				
 			</direction>
 		</gesture>

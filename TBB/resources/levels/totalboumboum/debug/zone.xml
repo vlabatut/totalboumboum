@@ -43,6 +43,7 @@
 				<item name="extraflame" />
 			</tile>
 			<tile pos="3" >
+				<item name="punch" />
 			</tile>
 			<tile pos="4" >
 				<item name="control" />

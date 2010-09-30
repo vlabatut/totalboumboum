@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/animes.xsd" 
-		scale="8" >
+		scale="4" >
 
 	<images >
 		<image name="burning4" file="4.png" folder="burning"/>
