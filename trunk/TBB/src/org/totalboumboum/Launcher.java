@@ -1624,14 +1624,12 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - tout ce qui est shadow shift devrait être sans échelle, ainsi que boundweight
 	 *  - vérifier que :
 	 *  	- la création d'host marche (effective seulement si on peut se connecter)
 	 *  	- l'hote est bien mis à jour à chaque modif de son ip
 	 *  	- la synchro et l'enregistrement est bien effectué coté client
 	 *  	- lorsque le serveur bloque les joueurs, l'état est mis à jour coté client dans la gui
-	 *  - question :
-	 *  	- lorsque le serveur bloque/débloque les joueurs, le bouton next du client doit il se bloquer (pr le de sélection de partie) ? 
+	 *  	- lorsque le serveur bloque/débloque les joueurs, le bouton next du client doit se bloquer 
 	 *  - pr l'état inconnu d'un serveur :
 	 *  	- mettre une icone "disconnected"
 	 *  	- en cas de demande de raffraichissement, faire apparaître rapidement l'icone actuelle (engrenage)
@@ -1641,9 +1639,6 @@ public class Launcher
 	 *			- mise à jour de gameinfo dans la liste
 	 *  - dans les configs de tournois enregistrées et rechargées par défaut, il ne faut garder que les joueurs locaux
 	 *  - ne plus permettre qu'un joueur n'appartienne pas au classement glicko2
-	 *  - icones: 
-	 *  	- pair = rond vide, central = rond plein
-	 *  	- revoir les logos pour blocker/débloquer les joueurs. en plus ça a l'air inversé dans le jeu...
 	 *  - à un moment, il faut l'utilisateur donne un nom à son hote. 
 	 *  	- le mieux reste encore le réglage dans les options, mais ça serait mieux que le client puisse le renommer comme il veut
 	 *  	- ou alors on utilise le nom du système (comme sous windows, mais existe-ce sous lx ou autre?)
