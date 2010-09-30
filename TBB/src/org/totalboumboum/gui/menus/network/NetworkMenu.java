@@ -152,9 +152,10 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	}
 
 	private void setTournamentPlayers()
-	{	List<Profile> selectedProfiles = playersData.getSelectedProfiles();
-//TODO		AbstractTournament tournament = tournamentConfiguration.getTournament();
-		tournament.setProfiles(selectedProfiles);
+	{	
+//NOTE NET		List<Profile> selectedProfiles = playersData.getSelectedProfiles();
+//NOTE NET		AbstractTournament tournament = tournamentConfiguration.getTournament();
+//NOTE NET		tournament.setProfiles(selectedProfiles);
 	}
 	
 	private void setTournamentSettings()
