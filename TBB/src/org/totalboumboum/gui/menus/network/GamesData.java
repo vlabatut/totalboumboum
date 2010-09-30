@@ -310,6 +310,7 @@ catch (UnknownHostException e)
 			hostPanel.setHostInfo(hostInfo);
 			//validate();
 			//repaint();
+			fireDataPanelSelectionChange();
 		}
 	}
 
