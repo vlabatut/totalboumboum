@@ -425,6 +425,8 @@ if(bomb==null)
     	result.levelInfo = levelInfo;
     	result.zone = zone;
     	result.players = players;
+if(instance==null)
+	instance = new Instance(levelInfo.getInstanceName());
     	result.instance = new Instance(instance.getName());
     	result.itemCounts = itemCounts;
     	return result;
