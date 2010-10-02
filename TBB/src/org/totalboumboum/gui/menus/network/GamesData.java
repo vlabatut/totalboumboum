@@ -452,6 +452,11 @@ catch (UnknownHostException e)
 	}
 
 	@Override
+	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index)
+	{	// useless at this stage
+	}
+
+	@Override
 	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
 	{	// useless at this stage
 	}

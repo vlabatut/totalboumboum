@@ -39,6 +39,7 @@ import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.stream.network.AbstractConnection;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
+import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.message.MessageName;
 import org.totalboumboum.stream.network.message.NetworkMessage;
 import org.xml.sax.SAXException;
@@ -314,7 +315,10 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 				writer = null;
 			}
 		}
-		ioLock.unlock();		
+		ioLock.unlock();
+		
+		gameInfo.getHostInfo().setState(HostState.UNKOWN);
+		generalConnection.connectionLost(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////

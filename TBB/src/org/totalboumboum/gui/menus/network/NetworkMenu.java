@@ -23,16 +23,12 @@ package org.totalboumboum.gui.menus.network;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
-import org.totalboumboum.configuration.profiles.ProfilesSelection;
-import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -249,5 +245,14 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	@Override
 	public void dataPanelSelectionChanged()
 	{	refreshButtons();
+		
+		// active connection lost
+		if(getDataPart()==playersData)
+		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			connection.exitPlayerSelection();
+
+			setButtonsGames();
+			container.setDataPart(gamesData);
+		}
 	}
 }
