@@ -161,6 +161,11 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	}
 
 	@Override
+	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index)
+	{	fireDataPanelSelectionChange();
+	}
+
+	@Override
 	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
 	{	Set<Integer> allowedPlayers = connection.getGameInfo().getAllowedPlayers();
 		List<Profile> selectedProfiles = connection.getPlayerProfiles();

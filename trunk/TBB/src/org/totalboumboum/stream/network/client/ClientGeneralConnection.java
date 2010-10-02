@@ -60,53 +60,96 @@ public class ClientGeneralConnection
 	/////////////////////////////////////////////////////////////////
 	private final List<ClientIndividualConnection> individualConnections = new ArrayList<ClientIndividualConnection>();
 	private ClientIndividualConnection activeConnection;
+	private Lock connectionsLock = new ReentrantLock();
+	
+	public ClientIndividualConnection getActiveConnection()
+	{	return activeConnection;
+	}
 	
 	public void createConnection(HostInfo hostInfo)
-	{	ClientIndividualConnection individualConnection = new ClientIndividualConnection(this,hostInfo);
-		individualConnections.add(individualConnection);
+	{	ClientIndividualConnection individualConnection;
+		int index;
+	
+		connectionsLock.lock();
+		{	individualConnection = new ClientIndividualConnection(this,hostInfo);
+			individualConnections.add(individualConnection);
+			index = individualConnections.indexOf(individualConnection);
+		}
+		connectionsLock.unlock();
+
 		if(hostInfo.getId()!=null)
-		{	int index = individualConnections.indexOf(individualConnection);
-			fireConnectionAdded(individualConnection,index);
+		{	fireConnectionAdded(individualConnection,index);
 		}
 	}
 	
 	public void removeConnection(ClientIndividualConnection connection)
-	{	int index = individualConnections.indexOf(connection);
-		connection.finish();
-		individualConnections.remove(connection);
+	{	int index;
+	
+		connectionsLock.lock();
+		{	index = individualConnections.indexOf(connection);
+			connection.finish();
+			individualConnections.remove(connection);
+		}
+		connectionsLock.unlock();
+		
 		fireConnectionRemoved(connection,index);
 	}
 	
 	public void removeAllConnections()
-	{	Iterator<ClientIndividualConnection> it = individualConnections.iterator();
-		while(it.hasNext())
-		{	ClientIndividualConnection connection = it.next();
-			connection.finish();
-			it.remove();
+	{	connectionsLock.lock();
+		{	Iterator<ClientIndividualConnection> it = individualConnections.iterator();
+			while(it.hasNext())
+			{	ClientIndividualConnection connection = it.next();
+				connection.finish();
+				it.remove();
+			}
 		}
+		connectionsLock.unlock();
 	}
 	
 	public List<GameInfo> getGameList()
 	{	List<GameInfo> result = new ArrayList<GameInfo>();
-		for(ClientIndividualConnection connection: individualConnections)
-			result.add(connection.getGameInfo());
+
+		connectionsLock.lock();
+		{	for(ClientIndividualConnection connection: individualConnections)
+				result.add(connection.getGameInfo());
+		}
+		connectionsLock.unlock();
+		
 		return result;
 	}
 	
 	public void refreshConnection(GameInfo gameInfo)
 	{	ClientIndividualConnection cx = null;
-		Iterator<ClientIndividualConnection> it = individualConnections.iterator();
-		while(cx==null && it.hasNext())
-		{	ClientIndividualConnection connection = it.next();
-			GameInfo gi = connection.getGameInfo();
-			if(gi==gameInfo)
-				cx = connection;
+		
+		connectionsLock.lock();
+		{	Iterator<ClientIndividualConnection> it = individualConnections.iterator();
+			while(cx==null && it.hasNext())
+			{	ClientIndividualConnection connection = it.next();
+				GameInfo gi = connection.getGameInfo();
+				if(gi==gameInfo)
+					cx = connection;
+			}
 		}
+		connectionsLock.unlock();
+		
 		if(cx!=null)
 		{	HostState state = cx.getGameInfo().getHostInfo().getState();
 			if(state==HostState.UNKOWN)
 				cx.retryConnection();
 		}
+	}
+	
+	protected void connectionLost(ClientIndividualConnection connection)
+	{	int index;
+		connectionsLock.lock();
+		{	index = individualConnections.indexOf(connection);
+		}
+		connectionsLock.unlock();
+		
+		fireConnectionGameInfoChanged(connection,index);
+		if(activeConnection==connection)
+			fireConnectionActiveConnectionLost(connection,index);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -121,26 +164,37 @@ public class ClientGeneralConnection
 	/////////////////////////////////////////////////////////////////
 	// RECEIVED MESSAGES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	// NOTE don't remember what this lock is for...
 	private Lock updateLock = new ReentrantLock();
 
 	public void gameInfoChanged(ClientIndividualConnection connection, boolean isNew)
-	{	updateLock.lock();
+	{	int index;
 		
-		int index = individualConnections.indexOf(connection);
-		if(isNew)
-			fireConnectionAdded(connection,index);
-		else
-			fireConnectionGameInfoChanged(connection,index);
-		
+		connectionsLock.lock();
+		{	index = individualConnections.indexOf(connection);
+		}
+		connectionsLock.unlock();
+
+		updateLock.lock();
+		{	if(isNew)
+				fireConnectionAdded(connection,index);
+			else
+				fireConnectionGameInfoChanged(connection,index);
+		}		
 		updateLock.unlock();
 	}
 
 	public void profilesChanged(ClientIndividualConnection connection)
-	{	updateLock.lock();
-	
-		int index = individualConnections.indexOf(connection);
-		fireConnectionProfilesChanged(connection,index);
+	{	int index;
 		
+		connectionsLock.lock();
+		{	index = individualConnections.indexOf(connection);
+		}
+		connectionsLock.unlock();
+		
+		updateLock.lock();
+		{	fireConnectionProfilesChanged(connection,index);
+		}
 		updateLock.unlock();
 	}
 	
@@ -160,7 +214,14 @@ public class ClientGeneralConnection
 	public void requestGameInfos()
 	{	String id = Configuration.getConnectionsConfiguration().getHostId();
 		NetworkMessage message = new NetworkMessage(MessageName.REQUEST_GAME_INFO,id);
-		for(ClientIndividualConnection connection: individualConnections)
+		List<ClientIndividualConnection> list;
+		
+		connectionsLock.lock();
+		{	list  = new ArrayList<ClientIndividualConnection>(individualConnections);
+		}
+		connectionsLock.unlock();
+		
+		for(ClientIndividualConnection connection: list)
 			connection.writeMessage(message);
 	}
 	
@@ -170,9 +231,18 @@ public class ClientGeneralConnection
 	}
 	
 	public void enterPlayerSelection(GameInfo gameInfo)
-	{	for(ClientIndividualConnection connection: individualConnections)
+	{	List<ClientIndividualConnection> list;
+	
+		connectionsLock.lock();
+		{	list  = new ArrayList<ClientIndividualConnection>(individualConnections);
+		}
+		connectionsLock.unlock();
+		
+		for(ClientIndividualConnection connection: list)
 		{	if(connection.getGameInfo()==gameInfo)
-			{	connection.setState(ClientState.SELECTING_PLAYERS);
+			{	activeConnection = connection;
+//TODO en fait ça devrait être une requête, à valider par le serveur...			
+				connection.setState(ClientState.SELECTING_PLAYERS);
 				NetworkMessage message = new NetworkMessage(MessageName.ENTERS_PLAYERS_SELECTION,true);
 				connection.writeMessage(message);
 			}
@@ -185,9 +255,17 @@ public class ClientGeneralConnection
 	}
 	
 	public void exitPlayerSelection()
-	{	for(ClientIndividualConnection connection: individualConnections)
+	{	List<ClientIndividualConnection> list;
+	
+		connectionsLock.lock();
+		{	list  = new ArrayList<ClientIndividualConnection>(individualConnections);
+		}
+		connectionsLock.unlock();
+		
+		for(ClientIndividualConnection connection: list)
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
-			{	connection.setState(ClientState.SELECTING_GAME);
+			{	activeConnection = null;
+				connection.setState(ClientState.SELECTING_GAME);
 				NetworkMessage message = new NetworkMessage(MessageName.EXITS_PLAYERS_SELECTION,true);
 				connection.writeMessage(message);
 			}
@@ -201,7 +279,14 @@ public class ClientGeneralConnection
 	
 	// TODO must handle this distinction between local and remote players, one way or another...
 	public void requestPlayersAdd(Profile profile)
-	{	for(ClientIndividualConnection connection: individualConnections)
+	{	List<ClientIndividualConnection> list;
+	
+		connectionsLock.lock();
+		{	list  = new ArrayList<ClientIndividualConnection>(individualConnections);
+		}
+		connectionsLock.unlock();
+		
+		for(ClientIndividualConnection connection: list)
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	if(!profile.isRemote())
 				{	// TODO when profiles are sent, the portraits must be reloaded (images don't go through streams)
@@ -216,7 +301,14 @@ public class ClientGeneralConnection
 	}
 
 	public void requestPlayersRemove(Profile profile)
-	{	for(ClientIndividualConnection connection: individualConnections)
+	{	List<ClientIndividualConnection> list;
+	
+		connectionsLock.lock();
+		{	list  = new ArrayList<ClientIndividualConnection>(individualConnections);
+		}
+		connectionsLock.unlock();
+		
+		for(ClientIndividualConnection connection: list)
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	if(!profile.isRemote())
 				{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_REMOVE,profile);
@@ -230,7 +322,14 @@ public class ClientGeneralConnection
 	}
 
 	public void requestPlayersChangeColor(Profile profile)
-	{	for(ClientIndividualConnection connection: individualConnections)
+	{	List<ClientIndividualConnection> list;
+	
+		connectionsLock.lock();
+		{	list  = new ArrayList<ClientIndividualConnection>(individualConnections);
+		}
+		connectionsLock.unlock();
+		
+		for(ClientIndividualConnection connection: list)
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	if(!profile.isRemote())
 				{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_CHANGE_COLOR,profile);
@@ -244,7 +343,14 @@ public class ClientGeneralConnection
 	}
 
 	public void requestPlayersChangeHero(Profile profile)
-	{	for(ClientIndividualConnection connection: individualConnections)
+	{	List<ClientIndividualConnection> list;
+	
+		connectionsLock.lock();
+		{	list  = new ArrayList<ClientIndividualConnection>(individualConnections);
+		}
+		connectionsLock.unlock();
+		
+		for(ClientIndividualConnection connection: list)
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	if(!profile.isRemote())
 				{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_CHANGE_HERO,profile);
@@ -258,7 +364,14 @@ public class ClientGeneralConnection
 	}
 
 	public void requestPlayersSet(int index, Profile profile)
-	{	for(ClientIndividualConnection connection: individualConnections)
+	{	List<ClientIndividualConnection> list;
+	
+		connectionsLock.lock();
+		{	list  = new ArrayList<ClientIndividualConnection>(individualConnections);
+		}
+		connectionsLock.unlock();
+		
+		for(ClientIndividualConnection connection: list)
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	Profile oldProfile = connection.getPlayerProfiles().get(index);
 				if(!profile.isRemote() && !oldProfile.isRemote())
@@ -310,6 +423,11 @@ public class ClientGeneralConnection
 	private void fireConnectionGameInfoChanged(ClientIndividualConnection connection, int index)
 	{	for(ClientGeneralConnectionListener listener: listeners)
 			listener.connectionGameInfoChanged(connection,index);
+	}
+
+	private void fireConnectionActiveConnectionLost(ClientIndividualConnection connection, int index)
+	{	for(ClientGeneralConnectionListener listener: listeners)
+			listener.connectionActiveConnectionLost(connection,index);
 	}
 
 	private void fireConnectionProfilesChanged(ClientIndividualConnection connection, int index)

@@ -31,5 +31,6 @@ public interface ClientGeneralConnectionListener
 	public void connectionAdded(ClientIndividualConnection connection, int index);
 	public void connectionRemoved(ClientIndividualConnection connection, int index);
 	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index);
+	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index);
 	public void connectionProfilesChanged(ClientIndividualConnection connection, int index);
 }

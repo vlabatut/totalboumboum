@@ -222,7 +222,7 @@ public class Round implements StatisticHolder, Serializable
 	
 	public void loopOver()
 	{	ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
-		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+//		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
 		
 		// read stats from replay if replayed
 		if(fileIn!=null)
