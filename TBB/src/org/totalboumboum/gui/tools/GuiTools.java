@@ -189,13 +189,6 @@ public class GuiTools
 			ICON_PRESSED};
 		String baseFolder = GuiFileTools.getButtonsPath()+File.separator;
 		// images
-		{	String folder = baseFolder+GuiFileTools.FOLDER_BLOCKING+File.separator;
-			String[] uses = 
-			{	GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS,
-				GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_BLOCK_PLAYERS
-			};
-			loadButtonImages(buttonStates,folder,uses);
-		}
 		{	String folder = baseFolder+GuiFileTools.FOLDER_CAMERA+File.separator;
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_RECORD_GAMES,
@@ -264,6 +257,19 @@ public class GuiTools
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_PLAYERS_BLOCKING+File.separator;
+			String[] uses = 
+			{	GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS,
+				GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_BLOCK_PLAYERS
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_PLAYERS_SELECTING+File.separator;
+			String[] uses = 
+			{	GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_VALIDATE
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
 		{	String folder = baseFolder+GuiFileTools.FOLDER_RESULTS+File.separator;
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_RESULTS,
@@ -279,8 +285,7 @@ public class GuiTools
 				GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT,
 				GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_NEXT,
 				GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT,
-				GuiKeys.MENU_NETWORK_GAMES_BUTTON_NEXT,
-				GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_NEXT
+				GuiKeys.MENU_NETWORK_GAMES_BUTTON_NEXT
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}

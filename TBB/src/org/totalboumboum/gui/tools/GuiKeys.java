@@ -291,6 +291,7 @@ public class GuiKeys
 	public static final String UP = "Up";
 	public static final String UPS = "Ups";
 	public static final String USE = "Use";
+	public static final String VALIDATE = "Validate";
 	public static final String VALUE = "Value";
 	public static final String VALUES = "Values";
 	public static final String VAR = "Var";
@@ -873,7 +874,7 @@ public class GuiKeys
 				public static final String MENU_NETWORK_PLAYERS_BUTTON = MENU_NETWORK_PLAYERS+BUTTON;
 				public static final String MENU_NETWORK_PLAYERS_BUTTON_CANCEL = MENU_NETWORK_PLAYERS_BUTTON+CANCEL;
 				public static final String MENU_NETWORK_PLAYERS_BUTTON_CONFIRM = MENU_NETWORK_PLAYERS_BUTTON+CONFIRM;
-				public static final String MENU_NETWORK_PLAYERS_BUTTON_NEXT = MENU_NETWORK_PLAYERS_BUTTON+NEXT;
+				public static final String MENU_NETWORK_PLAYERS_BUTTON_VALIDATE = MENU_NETWORK_PLAYERS_BUTTON+VALIDATE;
 				public static final String MENU_NETWORK_PLAYERS_BUTTON_PREVIOUS = MENU_NETWORK_PLAYERS_BUTTON+PREVIOUS;
 		
 	/* GAME */
