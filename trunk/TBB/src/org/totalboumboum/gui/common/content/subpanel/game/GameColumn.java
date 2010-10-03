@@ -329,6 +329,8 @@ public enum GameColumn
 					key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_OPEN;
 				else if(state.equals(HostState.PLAYING))
 					key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_PLAYING;
+				else if(state.equals(HostState.RETRIEVING))
+					key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_RETRIEVING;
 				else if(state.equals(HostState.UNKOWN))
 				{	key = GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKNOWN;
 					label.addMouseListener(container);
