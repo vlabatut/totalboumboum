@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JToggleButton;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.tournament.AbstractTournament;
@@ -76,7 +77,7 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	private JButton buttonGamesPrevious;
 	private JButton buttonGamesNext;
 	private JButton buttonPlayersPrevious;
-	private JButton buttonPlayersNext;
+	private JToggleButton buttonPlayersValidate;
 	private int buttonWidth;
 	private int buttonHeight;
 
@@ -88,7 +89,7 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		buttonGamesPrevious = GuiTools.createButton(GuiKeys.MENU_NETWORK_GAMES_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
 		buttonGamesNext = GuiTools.createButton(GuiKeys.MENU_NETWORK_GAMES_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		buttonPlayersPrevious = GuiTools.createButton(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonPlayersNext = GuiTools.createButton(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonPlayersValidate = GuiTools.createToggleButton(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_VALIDATE,buttonWidth,buttonHeight,1,this);
 		removeAll();
 	}
 	
@@ -117,7 +118,7 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-		add(buttonPlayersNext);
+		add(buttonPlayersValidate);
 	}
 	
 	private void refreshButtons()
@@ -130,9 +131,9 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		
 		// players
 		if(tournament==null) //TODO à compléter
-			buttonPlayersNext.setEnabled(false);
+			buttonPlayersValidate.setEnabled(false);
 		else
-			buttonPlayersNext.setEnabled(true);
+			buttonPlayersValidate.setEnabled(true);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -188,7 +189,7 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 			setButtonsGames();
 			container.setDataPart(gamesData);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_NEXT))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_VALIDATE))
 		{	// synch game options
 //			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(playersData.getSelectedProfiles());
 //TODO			tournamentConfiguration.setProfilesSelection(profilesSelection);

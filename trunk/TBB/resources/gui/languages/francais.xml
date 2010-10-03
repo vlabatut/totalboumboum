@@ -606,7 +606,7 @@
 				<group name="Button">
 					<text name="Cancel" value="Annuler" tooltip="Annuler la sélection et revenir à l'écran des joueurs" />
 					<text name="Confirm" value="Confirmer" tooltip="Confirmer la sélection" />
-					<text name="Next" value="Suivant" tooltip="Valider la sélection" />
+					<text name="Validate" value="Valider" tooltip="Valider la sélection" />
 					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection de la partie" />
 				</group>
 			</group>

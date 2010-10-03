@@ -91,6 +91,8 @@ public class GuiFileTools
 	public final static String FILE_PARTIAL = "partial.png";
 	public final static String FILE_PAGE_DOWN = "pgdown.png";
 	public final static String FILE_PAGE_UP = "pgup.png";
+	public final static String FILE_PLAYER_SELECTED = "player_selected.png";
+	public final static String FILE_PLAYER_UNSELECTED = "player_unselected.png";
 	public final static String FILE_PLAYERS = "players.png";
 	public final static String FILE_PLAYING = "playing.png";
 	public final static String FILE_PLUS = "plus.png";
@@ -125,7 +127,6 @@ public class GuiFileTools
 
 	// folders
 	public static final String FOLDER_BACKGROUNDS = "backgrounds";
-	public final static String FOLDER_BLOCKING = "blocking";
 	public static final String FOLDER_BUTTONS = "buttons";
 	public final static String FOLDER_CAMERA = "camera";
 	public final static String FOLDER_DATA = "data";
@@ -141,6 +142,8 @@ public class GuiFileTools
 	public final static String FOLDER_LEFT_RED = "left_red";
 	public final static String FOLDER_NETWORK = "network";
 	public final static String FOLDER_PLAY = "play";
+	public final static String FOLDER_PLAYERS_BLOCKING = "players_blocking";
+	public final static String FOLDER_PLAYERS_SELECTING = "players_selecting";
 	public final static String FOLDER_RESULTS = "results";
 	public final static String FOLDER_RIGHT_BLUE = "right_blue";
 	public final static String FOLDER_RIGHT_RED = "right_red";

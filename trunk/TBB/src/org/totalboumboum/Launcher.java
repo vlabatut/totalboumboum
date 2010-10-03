@@ -1596,6 +1596,8 @@ public class Launcher
 	 * 	- connecter directement les stats
 	 *  - introduire la distinction entre profil local et distant (fait)
 	 *  
+	 *  - ne plus permettre qu'un joueur n'appartienne pas au classement glicko2
+	 *  
 	 *  ca devrait pas être possible d'avoir un profil sans stats
 	 *  toutes les stats devraient être centralisées et chargées quand nécessaire
 	 *  y compris pour les rencontres locales (qui peuvent être stockées le temps d'avoir un accès réseau)
@@ -1620,14 +1622,27 @@ public class Launcher
 	
 	/**
 	 * en cours:
+	 * 
+	 * - sélection des joueurs
+	 * 		- rajouter une colonne dans la table de sélection des joueurs
+	 * 		  qui correspondrait à l'état du joueur distant : validé ou pas
+	 * 		- il suffirait de n'afficher cette colonne que si le jeu est réseau
+	 * 		- quand le client a fini de gérer ses joueurs, il valide avec le bouton du menu
+	 * 		- coté serveur, tous les joueurs concernés sont validés
+	 * 		- en fait le client peut continuer à modifier ses joueurs, mais c'est à ses risques
+	 * 		- quand le serveur estime qu'il a assez de joueurs, il commence le match
+	 * 		- alors tous les clients reçoivent un evt de début de tournoi, et zou !
+	 * 		- du cp le bouton coté client de 'commencer le tournoi' serait plutot une espèce de "v" de type toogle
+	 * 
+	 * 
+	 * 
+	 * 
 	 *  - tout changement d'état du client devrait être :
 	 *  	- une requête envoyée au serveur
 	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client
 	 *  	>> cf le passage de game selection à players selection
 	 *  	>> pas tout changement en fait, par exemple l'exit est décidé unilatéralement
 	 *  - 
-	 *  - dans les configs de tournois enregistrées et rechargées par défaut, il ne faut garder que les joueurs locaux
-	 *  - ne plus permettre qu'un joueur n'appartienne pas au classement glicko2
 	 *  - NOTE NET
 	 */
 }
