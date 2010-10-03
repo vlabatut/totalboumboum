@@ -86,7 +86,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	public void retryConnection()
 	{	socketLock.lock();
 		{	retry = true;
-			socketCondition.signal();
+			socketCondition.signalAll();
 		}
 		socketLock.unlock();
 	}
@@ -106,6 +106,8 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 					}
 					catch(ConnectException e)
 					{	System.err.println("ConnectException: address "+address+" doesn't respond");
+						// TODO here we can fire some event to tell the gui to display this fail
+						// or we can add a new host state (retrieving) and set the sate back to unknwon here
 					}
 //					catch(UnknownHostException e)
 //					{	System.err.println("UnknownHostException: address "+address+" doesn't respond");
