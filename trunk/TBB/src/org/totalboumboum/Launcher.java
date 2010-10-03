@@ -1623,6 +1623,9 @@ public class Launcher
 	/**
 	 * en cours:
 	 * 
+	 * - pb quand ajout d'un host coté client, surement un evt qui arrive trop tot à la gui
+	 * - vérif le bouton rouge coté client
+	 * 
 	 * - sélection des joueurs
 	 * 		- rajouter une colonne dans la table de sélection des joueurs
 	 * 		  qui correspondrait à l'état du joueur distant : validé ou pas
@@ -1633,8 +1636,6 @@ public class Launcher
 	 * 		- quand le serveur estime qu'il a assez de joueurs, il commence le match
 	 * 		- alors tous les clients reçoivent un evt de début de tournoi, et zou !
 	 * 		- du cp le bouton coté client de 'commencer le tournoi' serait plutot une espèce de "v" de type toogle
-	 * 
-	 * 
 	 * 
 	 * 
 	 *  - tout changement d'état du client devrait être :
