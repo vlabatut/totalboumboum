@@ -682,12 +682,17 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		connectionsLock.unlock();
 	}
 	
-	public void createConnection(Socket socket) throws IOException
+	public void createConnection(Socket socket)
 	{	connectionsLock.lock();
-	
-		ServerIndividualConnection individualConnection = new ServerIndividualConnection(this,socket);
-		individualConnections.add(individualConnection);
-		
+		{	try
+			{	ServerIndividualConnection individualConnection = new ServerIndividualConnection(this,socket);
+				individualConnections.add(individualConnection);
+			}
+			catch (IOException e)
+			{	System.err.println("java.net.SocketException: Connection reset while creating streams");
+				//e.printStackTrace();
+			}
+		}
 		connectionsLock.unlock();
 	}
 	
