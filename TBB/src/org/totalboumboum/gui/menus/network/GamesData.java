@@ -439,7 +439,8 @@ catch (UnknownHostException e)
 	@Override
 	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index)
 	{	GameInfo gameInfo = connection.getGameInfo();
-		listPanel.updateGame(gameInfo);
+		if(listPanel!=null)
+			listPanel.updateGame(gameInfo);
 // unnecessary since the table is going to fire an event anyway		
 //		GameInfo gi = gamePanel.getGameInfo();
 //		if(gameInfo==gi)
