@@ -1629,29 +1629,19 @@ public class Launcher
 	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client
 	 *  	>> cf le passage de game selection à players selection
 	 *  	>> pas tout changement en fait, par exemple l'exit est décidé unilatéralement
-	 *  - vérifier que :
-	 *  	- la création d'host marche (effective seulement si on peut se connecter)
-	 *  	- l'hote est bien mis à jour à chaque modif de son ip
-	 *  	- la synchro et l'enregistrement est bien effectué coté client
-	 *  	- lorsque le serveur bloque les joueurs, l'état est mis à jour coté client dans la gui
-	 *  	- lorsque le serveur bloque/débloque les joueurs, le bouton next du client doit se bloquer 
-	 *  	- déconnection du serveur pdt sélection joueurs : 
-	 *  		- retour à l'écran de sélection des parties
-	 *			- mise à jour de gameinfo dans la liste
+	 *  - problèmes :
+	 *		- quand on veut supprimer une connection directe... ça marche pas (elle reste en place)
+	 *		- quand on change l'@ d'une connection qui était ok (i.e. avec un état significatif et tout) pour une connection qui ne marche pas, ça bugue
+	 *			>> interdire cette action (qui est a priori inutile)
+	 *		- pb de mise à jour des hotes coté clients :
+	 *			- quand on change l'IP de l'hote (pas auto, faut cliquer sur l'hote)
+	 *			- quand on clique sur l'hote : faut cliquer deux fois
 	 *  - pr l'état inconnu d'un serveur :
 	 *  	- mettre une icone "disconnected"
 	 *  	- en cas de demande de raffraichissement, faire apparaître rapidement l'icone actuelle (engrenage)
 	 *  	- p-ê déplacer l'implémentation du refresh dans le subpanel plutot que dans le menu, ce qui permettrait d'accéder facilement aux icones...
 	 *  - dans les configs de tournois enregistrées et rechargées par défaut, il ne faut garder que les joueurs locaux
 	 *  - ne plus permettre qu'un joueur n'appartienne pas au classement glicko2
-	 *  - à un moment, il faut l'utilisateur donne un nom à son hote. 
-	 *  	- le mieux reste encore le réglage dans les options, mais ça serait mieux que le client puisse le renommer comme il veut
-	 *  	- ou alors on utilise le nom du système (comme sous windows, mais existe-ce sous lx ou autre?)
 	 *  - NOTE NET
-	 */
-	
-	/**
-	 * bugs réseau
-	 * 	- lancer serveur, client, déconnecter client : null exception coté serveur
 	 */
 }
