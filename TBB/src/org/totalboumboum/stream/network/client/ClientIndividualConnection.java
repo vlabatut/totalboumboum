@@ -99,6 +99,8 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 			{	if(retry)
 				{	retry = false;
 					HostInfo hostInfo = gameInfo.getHostInfo();
+					hostInfo.setState(HostState.RETRIEVING);
+					generalConnection.gameInfoChanged(this,false);
 					String address = hostInfo.getLastIp();
 					int port = hostInfo.getLastPort();
 					try
@@ -106,14 +108,16 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 					}
 					catch(ConnectException e)
 					{	System.err.println("ConnectException: address "+address+" doesn't respond");
-						// TODO here we can fire some event to tell the gui to display this fail
-						// or we can add a new host state (retrieving) and set the sate back to unknwon here
+						hostInfo.setState(HostState.UNKOWN);
+						generalConnection.gameInfoChanged(this,false);
 					}
 //					catch(UnknownHostException e)
 //					{	System.err.println("UnknownHostException: address "+address+" doesn't respond");
 //					}
 					catch(IOException e)
 					{	e.printStackTrace();
+						hostInfo.setState(HostState.UNKOWN);
+						generalConnection.gameInfoChanged(this,false);
 					}
 				}
 			}
