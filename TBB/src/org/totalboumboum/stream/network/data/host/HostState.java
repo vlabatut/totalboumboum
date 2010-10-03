@@ -37,5 +37,7 @@ public enum HostState
 	/** the game is finished and no new one has been set up yet */
 	FINISHED,
 	/** currently retrieving the host state */
+	RETRIEVING,
+	/** host state currently unknown (disconnected) */
 	UNKOWN;
 }

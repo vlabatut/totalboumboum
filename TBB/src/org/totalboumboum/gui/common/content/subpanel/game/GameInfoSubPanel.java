@@ -160,6 +160,8 @@ public class GameInfoSubPanel extends TableSubPanel
 						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_OPEN;
 					else if(state.equals(HostState.PLAYING))
 						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_PLAYING;
+					else if(state.equals(HostState.RETRIEVING))
+						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_RETRIEVING;
 					else if(state.equals(HostState.UNKOWN))
 						key = GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_UNKNOWN;
 					text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);

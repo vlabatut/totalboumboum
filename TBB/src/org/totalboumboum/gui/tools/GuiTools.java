@@ -915,7 +915,8 @@ public class GuiTools
 		// command
 		{	String folder = baseFolder+GuiFileTools.FILE_COMMAND;
 			String[] uses =
-			{	GuiKeys.COMMON_GAME_LIST_DATA_STATE_RETRIEVING
+			{	GuiKeys.COMMON_GAME_LIST_DATA_STATE_RETRIEVING,
+				GuiKeys.COMMON_GAME_INFO_TOURNAMENT_STATE_DATA_RETRIEVING
 			};
 			loadTableImages(folder,uses);
 		}
