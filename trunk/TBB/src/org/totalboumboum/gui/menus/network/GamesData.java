@@ -314,7 +314,6 @@ catch (UnknownHostException e)
 		}
 	}
 
-
 	@Override
 	public void refreshGameRequested(GameInfo gameInfo)
 	{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
@@ -470,13 +469,15 @@ catch (UnknownHostException e)
 	{	GameInfo gameInfo = gamePanel.getGameInfo();
 		if(gameInfo!=null)
 		{	HostInfo hostInfo = gameInfo.getHostInfo();
-			String defaultText = hostInfo.getLastIp()+":"+hostInfo.getLastPort();
-			String key = GuiKeys.MENU_NETWORK_GAMES_ADD_HOST_TITLE;
-			List<String> text = new ArrayList<String>();
-			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_NETWORK_GAMES_SET_HOST_TEXT));
-			inputModalSet = new InputModalDialogPanel(container.getMenuParent(),key,text,defaultText);
-			inputModalSet.addListener(this);
-			getFrame().setModalDialog(inputModalSet);
+			if(hostInfo.getState()==HostState.UNKOWN)
+			{	String defaultText = hostInfo.getLastIp()+":"+hostInfo.getLastPort();
+				String key = GuiKeys.MENU_NETWORK_GAMES_ADD_HOST_TITLE;
+				List<String> text = new ArrayList<String>();
+				text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_NETWORK_GAMES_SET_HOST_TEXT));
+				inputModalSet = new InputModalDialogPanel(container.getMenuParent(),key,text,defaultText);
+				inputModalSet.addListener(this);
+				getFrame().setModalDialog(inputModalSet);
+			}
 		}
 	}
 }

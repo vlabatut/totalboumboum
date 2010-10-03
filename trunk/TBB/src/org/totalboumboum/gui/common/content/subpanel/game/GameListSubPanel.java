@@ -352,15 +352,15 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 
 	public void selectGame(String gameId)
 	{	// init
-		int index;
+		int indexOld = gamesIds.indexOf(selectedId);
+		int indexNew = gamesIds.indexOf(gameId);
 		boolean fire = gameId!=selectedId;
 	
 		// unselect
-		if(selectedId!=null)
+		if(selectedId!=null && indexOld>=0)
 		{	// get line
-			index = gamesIds.indexOf(selectedId);
-			int page = index/lines;
-			int line = index%lines + 1;
+			int page = indexOld/lines;
+			int line = indexOld%lines + 1;
 			// change color
 			TableSubPanel panel = listPanels.get(page);
 			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
@@ -370,19 +370,18 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		}
 			
 		//select
-		if(gameId!=null)
+		if(gameId!=null && indexNew>=0)
 		{	// update selected id
 			selectedId = gameId;
 			// get page
-			index = gamesIds.indexOf(selectedId);
-			int page = index/lines;
+			int page = indexNew/lines;
 			// refresh page
 			if(page!=currentPage)
 			{	currentPage = page;
 				refreshList();
 			}
 			// get line
-			int line = index%lines + 1;
+			int line = indexNew%lines + 1;
 			// change color
 			TableSubPanel panel = listPanels.get(page);
 			Color bg = GuiTools.COLOR_TABLE_SELECTED_PALE_BACKGROUND;
@@ -557,6 +556,7 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 				hostInfo.setDirect(!direct);
 				// update gui
 				updateGame(gameInfo);
+				refresh();
 			}
 			// select line
 			else if(rc.equals(GameColumn.HOST_NAME))

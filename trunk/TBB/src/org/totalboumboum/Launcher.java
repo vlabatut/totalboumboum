@@ -1600,10 +1600,6 @@ public class Launcher
 	 *  toutes les stats devraient être centralisées et chargées quand nécessaire
 	 *  y compris pour les rencontres locales (qui peuvent être stockées le temps d'avoir un accès réseau)
 	 *  
-	 * en fait dès le démarrage, un process gère les tentatives de connection sur le port configuré
-	 * de cette manière, on peut toujours répondre aux tentatives de connection
-	 * >> à voir si ça ne prend pas trop de ressources ?
-	 * 
 	 * propriété remote des joueurs : comment s'assurer qu'un joueur est bien identifié ?
 	 * >> le central enregistre l'id du dernier hote sur lequel le joueur s'est connecté
 	 * 	  si un joueur essaie de se connecter à partir d'un hôte différent, erreur et on demande au joueur de s'identifier
@@ -1629,11 +1625,7 @@ public class Launcher
 	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client
 	 *  	>> cf le passage de game selection à players selection
 	 *  	>> pas tout changement en fait, par exemple l'exit est décidé unilatéralement
-	 *
-	 *  - problèmes :
-	 *		- quand on veut supprimer une connection directe... ça marche pas (elle reste en place)
-	 *		- quand on change l'@ d'une connection qui était ok (i.e. avec un état significatif et tout) pour une connection qui ne marche pas, ça bugue
-	 *			>> interdire cette action (qui est a priori inutile)
+	 *  - 
 	 *  - dans les configs de tournois enregistrées et rechargées par défaut, il ne faut garder que les joueurs locaux
 	 *  - ne plus permettre qu'un joueur n'appartienne pas au classement glicko2
 	 *  - NOTE NET
