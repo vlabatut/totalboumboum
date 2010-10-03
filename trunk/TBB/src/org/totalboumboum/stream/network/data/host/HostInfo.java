@@ -62,7 +62,7 @@ public class HostInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	private Integer uses = null;
 
-	public int getUses()
+	public Integer getUses()
 	{	return uses;
 	}
 

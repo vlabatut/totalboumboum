@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -70,6 +71,14 @@ public class ClientGeneralConnection
 	{	ClientIndividualConnection individualConnection;
 		int index;
 	
+		if(hostInfo.getId()==null)
+		{	UUID id = UUID.randomUUID();
+			hostInfo.setId("temp"+id.toString());
+			hostInfo.setDirect(true);
+			hostInfo.setPreferred(false);
+			hostInfo.setUses(0);
+		}
+			
 		connectionsLock.lock();
 		{	individualConnection = new ClientIndividualConnection(this,hostInfo);
 			individualConnections.add(individualConnection);
@@ -77,9 +86,7 @@ public class ClientGeneralConnection
 		}
 		connectionsLock.unlock();
 
-		if(hostInfo.getId()!=null)
-		{	fireConnectionAdded(individualConnection,index);
-		}
+		fireConnectionAdded(individualConnection,index);
 	}
 	
 	public void removeConnection(ClientIndividualConnection connection)
@@ -172,6 +179,23 @@ public class ClientGeneralConnection
 		
 		connectionsLock.lock();
 		{	index = individualConnections.indexOf(connection);
+			if(isNew)
+			{	// check if the same id isnt't already present
+				Iterator<ClientIndividualConnection> it = individualConnections.iterator();
+				HostInfo hi1 = connection.getGameInfo().getHostInfo();
+				String id1 = hi1.getId();
+				while(isNew && it.hasNext())
+				{	ClientIndividualConnection cx = it.next();
+					HostInfo hi2 = cx.getGameInfo().getHostInfo();
+					String id2 = hi2.getId();
+					if(id1.equals(id2) && cx!=connection)
+					{	isNew = false;
+						hi1.setPreferred(hi2.isPreferred());
+						hi1.setUses(hi2.getUses());
+						removeConnection(cx);
+					}
+				}	
+			}
 		}
 		connectionsLock.unlock();
 

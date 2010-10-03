@@ -25,8 +25,8 @@ public class ConvertIds
 	}
 	
 	private static void displayNewId()
-	{	UUID idOne = UUID.randomUUID();
-		System.out.println(idOne);
+	{	UUID id = UUID.randomUUID();
+		System.out.println(id);
 	}
 	
 	@SuppressWarnings("unused")

@@ -131,6 +131,11 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		catch (IOException e)
 		{	e.printStackTrace();
 		}
+		
+		// ask for the game info
+		String id = Configuration.getConnectionsConfiguration().getHostId();
+		NetworkMessage message = new NetworkMessage(MessageName.REQUEST_GAME_INFO,id);
+		writeMessage(message);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -189,7 +194,8 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	}
 	
 	public void writeMessage(NetworkMessage message)
-	{	writer.addMessage(message);
+	{	if(writer!=null)
+			writer.addMessage(message);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -205,11 +211,15 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		
 		// update host info
 		HostInfo hostInfo = this.gameInfo.getHostInfo();
-		hostInfo.setState(gameInfo.getHostInfo().getState());
-		if(hostInfo.getId()==null)
-		{	hostInfo.setId(gameInfo.getHostInfo().getId());
-			hostInfo.setLastIp(gameInfo.getHostInfo().getLastIp());
-			hostInfo.setLastPort(gameInfo.getHostInfo().getLastPort());
+		HostInfo hi = gameInfo.getHostInfo();
+		hostInfo.setState(hi.getState());
+		if(hostInfo.getId().startsWith("temp"))
+		{	hostInfo.setId(hi.getId());
+			hostInfo.setName(hi.getName());
+			//hostInfo.setLastIp(hi.getLastIp());
+			//hostInfo.setLastPort(hi.getLastPort());
+			hostInfo.setCentral(hi.isCentral());
+			hostInfo.setDirect(hi.isDirect());
 			Configuration.getConnectionsConfiguration().synchronizeHost(hostInfo);
 			// propagate new connection
 			generalConnection.gameInfoChanged(this,true);
