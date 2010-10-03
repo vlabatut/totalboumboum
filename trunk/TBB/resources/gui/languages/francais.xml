@@ -809,7 +809,8 @@
 				<text name="Finished" value="Terminé" tooltip="Tournoi terminé" />
 				<text name="Open" value="Ouvert" tooltip="Tournoi ouvert aux inscriptions" />
 				<text name="Playing" value="En cours" tooltip="Tournoi déjà commencé" />
-				<text name="Unknown" value="Inconnu" tooltip="En train de récupérer l'état du tournoi..." />
+				<text name="Retrieving" value="En téléchargement" tooltip="En train de récupérer l'état du tournoi..." />
+				<text name="Unknown" value="Inconnu" tooltip="État du tournoi inconnu" />
 			</group>
 			<text name="TournamentType" value="Type" tooltip="Type du tournoi" />
 			<group name="TournamentTypeData" >

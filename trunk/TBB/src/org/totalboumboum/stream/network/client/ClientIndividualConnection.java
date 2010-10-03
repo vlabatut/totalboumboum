@@ -56,8 +56,6 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		
 		this.gameInfo = new GameInfo();
 		gameInfo.setHostInfo(hostInfo);
-		
-		initSocket();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -147,8 +145,8 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	/////////////////////////////////////////////////////////////////
 	// SOCKET				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	private void initSocket()
-	{	// TODO : manage time-out
+	protected void initSocket()
+	{	// TODO : manage time-out (?)
 		Thread thread = new Thread(this);
 		thread.start();
 	}

@@ -82,6 +82,7 @@ public class ClientGeneralConnection
 		connectionsLock.lock();
 		{	individualConnection = new ClientIndividualConnection(this,hostInfo);
 			individualConnections.add(individualConnection);
+			individualConnection.initSocket();
 			index = individualConnections.indexOf(individualConnection);
 		}
 		connectionsLock.unlock();
