@@ -156,7 +156,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	}
 
 	@Override
-	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index)
+	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId)
 	{	// nothing to do here
 	}
 

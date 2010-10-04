@@ -98,7 +98,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 				{	retry = false;
 					HostInfo hostInfo = gameInfo.getHostInfo();
 					hostInfo.setState(HostState.RETRIEVING);
-					generalConnection.gameInfoChanged(this,false);
+					generalConnection.gameInfoChanged(this,null);
 					String address = hostInfo.getLastIp();
 					int port = hostInfo.getLastPort();
 					try
@@ -107,7 +107,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 					catch(ConnectException e)
 					{	System.err.println("ConnectException: address "+address+" doesn't respond");
 						hostInfo.setState(HostState.UNKOWN);
-						generalConnection.gameInfoChanged(this,false);
+						generalConnection.gameInfoChanged(this,null);
 					}
 //					catch(UnknownHostException e)
 //					{	System.err.println("UnknownHostException: address "+address+" doesn't respond");
@@ -115,7 +115,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 					catch(IOException e)
 					{	e.printStackTrace();
 						hostInfo.setState(HostState.UNKOWN);
-						generalConnection.gameInfoChanged(this,false);
+						generalConnection.gameInfoChanged(this,null);
 					}
 				}
 			}
@@ -218,7 +218,8 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		HostInfo hi = gameInfo.getHostInfo();
 		hostInfo.setState(hi.getState());
 		if(hostInfo.getId().startsWith("temp"))
-		{	hostInfo.setId(hi.getId());
+		{	String oldId = hostInfo.getId();
+			hostInfo.setId(hi.getId());
 			hostInfo.setName(hi.getName());
 			//hostInfo.setLastIp(hi.getLastIp());
 			//hostInfo.setLastPort(hi.getLastPort());
@@ -226,11 +227,11 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 			hostInfo.setDirect(hi.isDirect());
 			Configuration.getConnectionsConfiguration().synchronizeHost(hostInfo);
 			// propagate new connection
-			generalConnection.gameInfoChanged(this,true);
+			generalConnection.gameInfoChanged(this,oldId);
 		}
 		else
 		{	// propagate modifications
-			generalConnection.gameInfoChanged(this,false);
+			generalConnection.gameInfoChanged(this,null);
 		}
 	}
 

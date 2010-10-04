@@ -82,12 +82,12 @@ public class ClientGeneralConnection
 		connectionsLock.lock();
 		{	individualConnection = new ClientIndividualConnection(this,hostInfo);
 			individualConnections.add(individualConnection);
-			individualConnection.initSocket();
 			index = individualConnections.indexOf(individualConnection);
 		}
 		connectionsLock.unlock();
 
 		fireConnectionAdded(individualConnection,index);
+		individualConnection.initSocket();
 	}
 	
 	public void removeConnection(ClientIndividualConnection connection)
@@ -155,7 +155,7 @@ public class ClientGeneralConnection
 		}
 		connectionsLock.unlock();
 		
-		fireConnectionGameInfoChanged(connection,index);
+		fireConnectionGameInfoChanged(connection,index,null);
 		if(activeConnection==connection)
 			fireConnectionActiveConnectionLost(connection,index);
 	}
@@ -175,36 +175,35 @@ public class ClientGeneralConnection
 	// NOTE don't remember what this lock is for...
 	private Lock updateLock = new ReentrantLock();
 
-	public void gameInfoChanged(ClientIndividualConnection connection, boolean isNew)
+	public void gameInfoChanged(ClientIndividualConnection connection, String oldId)
 	{	int index;
 		
 		connectionsLock.lock();
 		{	index = individualConnections.indexOf(connection);
-			if(isNew)
-			{	// check if the same id isnt't already present
-				Iterator<ClientIndividualConnection> it = individualConnections.iterator();
+			if(oldId!=null)
+			{	// look for an existing connection with the same new id
+				List<ClientIndividualConnection> list = new ArrayList<ClientIndividualConnection>(individualConnections);
+				Iterator<ClientIndividualConnection> it = list.iterator();
 				HostInfo hi1 = connection.getGameInfo().getHostInfo();
 				String id1 = hi1.getId();
-				while(isNew && it.hasNext())
+				boolean found = false;
+				while(!found && it.hasNext())
 				{	ClientIndividualConnection cx = it.next();
 					HostInfo hi2 = cx.getGameInfo().getHostInfo();
 					String id2 = hi2.getId();
 					if(id1.equals(id2) && cx!=connection)
-					{	isNew = false;
+					{	found = true;
 						hi1.setPreferred(hi2.isPreferred());
 						hi1.setUses(hi2.getUses());
 						removeConnection(cx);
 					}
-				}	
+				}
 			}
 		}
 		connectionsLock.unlock();
 
 		updateLock.lock();
-		{	if(isNew)
-				fireConnectionAdded(connection,index);
-			else
-				fireConnectionGameInfoChanged(connection,index);
+		{	fireConnectionGameInfoChanged(connection,index,oldId);
 		}		
 		updateLock.unlock();
 	}
@@ -445,9 +444,9 @@ public class ClientGeneralConnection
 			listener.connectionRemoved(connection,index);
 	}
 
-	private void fireConnectionGameInfoChanged(ClientIndividualConnection connection, int index)
+	private void fireConnectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId)
 	{	for(ClientGeneralConnectionListener listener: listeners)
-			listener.connectionGameInfoChanged(connection,index);
+			listener.connectionGameInfoChanged(connection,index,oldId);
 	}
 
 	private void fireConnectionActiveConnectionLost(ClientIndividualConnection connection, int index)
