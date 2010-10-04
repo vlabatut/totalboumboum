@@ -431,15 +431,27 @@ catch (UnknownHostException e)
 	@Override
 	public void connectionRemoved(ClientIndividualConnection connection,int index)
 	{	GameInfo gameInfo = connection.getGameInfo();
-		gamesMap.remove(gameInfo);
+		String gameId = gameInfo.getHostInfo().getId();
+		gamesMap.remove(gameId);
 		listPanel.setGameInfos(gamesMap,GAME_LIST_LINES);
 	}
 
 	@Override
-	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index)
-	{	GameInfo gameInfo = connection.getGameInfo();
-		if(listPanel!=null)
-			listPanel.updateGame(gameInfo);
+	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId)
+	{	if(listPanel!=null)
+		{	GameInfo gameInfo = connection.getGameInfo();
+			if(oldId!=null)
+			{	gamesMap.remove(oldId);
+				String gameId = gameInfo.getHostInfo().getId();
+				gamesMap.put(gameId,gameInfo);
+				String selectedId = listPanel.getSelectedGame().getHostInfo().getId();
+				listPanel.setGameInfos(gamesMap,GAME_LIST_LINES);
+				if(selectedId.equals(oldId))
+					listPanel.selectGame(gameId);
+			}
+			else
+				listPanel.updateGame(gameInfo);
+		}
 // unnecessary since the table is going to fire an event anyway		
 //		GameInfo gi = gamePanel.getGameInfo();
 //		if(gameInfo==gi)

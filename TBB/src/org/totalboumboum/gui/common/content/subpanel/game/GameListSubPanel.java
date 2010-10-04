@@ -213,15 +213,20 @@ public class GameListSubPanel extends EmptySubPanel implements MouseListener
 		Collections.sort(gamesIds,new Comparator<String>()
 		{	@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
-			public int compare(String playerId1, String playerId2)
+			public int compare(String id1, String id2)
 			{	int result = 0;
-				List<Comparable> list1 = valuesMap.get(playerId1);
-				List<Comparable> list2 = valuesMap.get(playerId2);
+				List<Comparable> list1 = valuesMap.get(id1);
+				List<Comparable> list2 = valuesMap.get(id2);
 				int index = 0;
 				while(result==0 && index<list1.size())
 				{	Comparable o1 = list1.get(index);
 					Comparable o2 = list2.get(index);
-					result = o1.compareTo(o2);
+					if(o1==null)
+						result = -1;
+					else if(o2==null)
+						result = 1;
+					else
+						result = o1.compareTo(o2);
 					index++;
 				}
 				return result;
