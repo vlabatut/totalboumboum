@@ -1623,8 +1623,7 @@ public class Launcher
 	/**
 	 * en cours:
 	 * 
-	 * - pb quand ajout d'un host coté client, surement un evt qui arrive trop tot à la gui
-	 * - vérif le bouton rouge coté client
+	 * - pb: quand on ajoute un joueur coté client, on se fait éjecter et ça revient à la sélection de la partie
 	 * 
 	 * - sélection des joueurs
 	 * 		- rajouter une colonne dans la table de sélection des joueurs

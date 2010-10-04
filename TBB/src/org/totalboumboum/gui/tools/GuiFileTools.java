@@ -101,6 +101,7 @@ public class GuiFileTools
 	public final static String FILE_PROFILE = "profile.png";
 	public final static String FILE_RANK = "rank.png";
 	public final static String FILE_REGULAR = "regular.png";
+	public final static String FILE_REMOTE = "remote.png";
 	public final static String FILE_RIGHT = "right.png";
 	public final static String FILE_SAVE = "save.png";
 	public final static String FILE_SCORE = "score.png";

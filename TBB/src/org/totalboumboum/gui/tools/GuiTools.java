@@ -900,13 +900,7 @@ public class GuiTools
 		// central
 		{	String folder = baseFolder+GuiFileTools.FILE_CENTRAL;
 			String[] uses =
-			{	GuiKeys.COMMON_GAME_LIST_BUTTON_CENTRAL,
-				GuiKeys.COMMON_PLAYERS_LIST_DATA_REMOTE,
-				GuiKeys.COMMON_PLAYERS_SELECTION_DATA_REMOTE,
-				GuiKeys.COMMON_RESULTS_MATCH_DATA_REMOTE,
-				GuiKeys.COMMON_RESULTS_TOURNAMENT_DATA_REMOTE,
-				GuiKeys.COMMON_RESULTS_ROUND_DATA_REMOTE,
-				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_REMOTE
+			{	GuiKeys.COMMON_GAME_LIST_BUTTON_CENTRAL
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1248,6 +1242,18 @@ public class GuiTools
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_REGULAR,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_REGULAR,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_REGULAR
+			};
+			loadTableImages(folder,uses);
+		}
+		// remote
+		{	String folder = baseFolder+GuiFileTools.FILE_REMOTE;
+			String[] uses =
+			{	GuiKeys.COMMON_PLAYERS_LIST_DATA_REMOTE,
+				GuiKeys.COMMON_RESULTS_MATCH_DATA_REMOTE,
+				GuiKeys.COMMON_RESULTS_TOURNAMENT_DATA_REMOTE,
+				GuiKeys.COMMON_RESULTS_ROUND_DATA_REMOTE,
+				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_REMOTE,
+				GuiKeys.COMMON_PLAYERS_SELECTION_DATA_REMOTE
 			};
 			loadTableImages(folder,uses);
 		}
