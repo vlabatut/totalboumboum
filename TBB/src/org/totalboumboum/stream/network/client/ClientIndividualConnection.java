@@ -120,11 +120,13 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 				}
 			}
 			
-			try
-			{	socketCondition.await();
-			}
-			catch (InterruptedException e)
-			{	e.printStackTrace();
+			if(socket==null)
+			{	try
+				{	socketCondition.await();
+				}
+				catch (InterruptedException e)
+				{	e.printStackTrace();
+				}
 			}
 			socketLock.unlock();
 		}
