@@ -237,7 +237,7 @@ public class ClientGeneralConnection
 	
 	public void requestGameInfos()
 	{	String id = Configuration.getConnectionsConfiguration().getHostId();
-		NetworkMessage message = new NetworkMessage(MessageName.REQUEST_GAME_INFO,id);
+		NetworkMessage message = new NetworkMessage(MessageName.REQUESTING_GAME_INFO,id);
 		List<ClientIndividualConnection> list;
 		
 		connectionsLock.lock();
@@ -254,7 +254,7 @@ public class ClientGeneralConnection
 		Configuration.getConnectionsConfiguration().setClientConnection(null);
 	}
 	
-	public void enterPlayerSelection(GameInfo gameInfo)
+	public void entersPlayerSelection(GameInfo gameInfo)
 	{	List<ClientIndividualConnection> list;
 	
 		connectionsLock.lock();
@@ -267,18 +267,18 @@ public class ClientGeneralConnection
 			{	activeConnection = connection;
 //TODO en fait ça devrait être une requête, à valider par le serveur...			
 				connection.setState(ClientState.SELECTING_PLAYERS);
-				NetworkMessage message = new NetworkMessage(MessageName.ENTERS_PLAYERS_SELECTION,true);
+				NetworkMessage message = new NetworkMessage(MessageName.ENTERING_PLAYERS_SELECTION,true);
 				connection.writeMessage(message);
 			}
 			else
 			{	connection.setState(ClientState.INTERESTED_ELSEWHERE);
-				NetworkMessage message = new NetworkMessage(MessageName.ENTERS_PLAYERS_SELECTION,false);
+				NetworkMessage message = new NetworkMessage(MessageName.ENTERING_PLAYERS_SELECTION,false);
 				connection.writeMessage(message);
 			}
 		}
 	}
 	
-	public void exitPlayerSelection()
+	public void exitPlayersSelection()
 	{	List<ClientIndividualConnection> list;
 	
 		connectionsLock.lock();
@@ -290,12 +290,12 @@ public class ClientGeneralConnection
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	activeConnection = null;
 				connection.setState(ClientState.SELECTING_GAME);
-				NetworkMessage message = new NetworkMessage(MessageName.EXITS_PLAYERS_SELECTION,true);
+				NetworkMessage message = new NetworkMessage(MessageName.EXITING_PLAYERS_SELECTION,true);
 				connection.writeMessage(message);
 			}
 			else
 			{	connection.setState(ClientState.SELECTING_GAME);
-				NetworkMessage message = new NetworkMessage(MessageName.EXITS_PLAYERS_SELECTION,false);
+				NetworkMessage message = new NetworkMessage(MessageName.EXITING_PLAYERS_SELECTION,false);
 				connection.writeMessage(message);
 			}
 		}
@@ -303,7 +303,8 @@ public class ClientGeneralConnection
 	
 	// TODO must handle this distinction between local and remote players, one way or another...
 	public void requestPlayersAdd(Profile profile)
-	{	List<ClientIndividualConnection> list;
+	{	profile.setReady(false);
+		List<ClientIndividualConnection> list;
 	
 		connectionsLock.lock();
 		{	list  = new ArrayList<ClientIndividualConnection>(individualConnections);
@@ -314,7 +315,7 @@ public class ClientGeneralConnection
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	if(!profile.isRemote())
 				{	// TODO when profiles are sent, the portraits must be reloaded (images don't go through streams)
-					NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_ADD,profile);
+					NetworkMessage message = new NetworkMessage(MessageName.REQUESTING_PLAYERS_ADD,profile);
 					connection.writeMessage(message);
 				}
 				else
@@ -335,7 +336,7 @@ public class ClientGeneralConnection
 		for(ClientIndividualConnection connection: list)
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	if(!profile.isRemote())
-				{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_REMOVE,profile);
+				{	NetworkMessage message = new NetworkMessage(MessageName.REQUESTING_PLAYERS_REMOVE,profile);
 					connection.writeMessage(message);
 				}
 				else
@@ -356,7 +357,7 @@ public class ClientGeneralConnection
 		for(ClientIndividualConnection connection: list)
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	if(!profile.isRemote())
-				{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_CHANGE_COLOR,profile);
+				{	NetworkMessage message = new NetworkMessage(MessageName.REQUESTING_PLAYERS_CHANGE_COLOR,profile);
 					connection.writeMessage(message);
 				}
 				else
@@ -377,7 +378,7 @@ public class ClientGeneralConnection
 		for(ClientIndividualConnection connection: list)
 		{	if(connection.getState()==ClientState.SELECTING_PLAYERS)
 			{	if(!profile.isRemote())
-				{	NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_CHANGE_HERO,profile);
+				{	NetworkMessage message = new NetworkMessage(MessageName.REQUESTING_PLAYERS_CHANGE_HERO,profile);
 					connection.writeMessage(message);
 				}
 				else
@@ -388,7 +389,8 @@ public class ClientGeneralConnection
 	}
 
 	public void requestPlayersSet(int index, Profile profile)
-	{	List<ClientIndividualConnection> list;
+	{	profile.setReady(false);
+		List<ClientIndividualConnection> list;
 	
 		connectionsLock.lock();
 		{	list  = new ArrayList<ClientIndividualConnection>(individualConnections);
@@ -400,7 +402,7 @@ public class ClientGeneralConnection
 			{	Profile oldProfile = connection.getPlayerProfiles().get(index);
 				if(!profile.isRemote() && !oldProfile.isRemote())
 				{	List<Profile> data = new ArrayList<Profile>(Arrays.asList(oldProfile,profile));		
-					NetworkMessage message = new NetworkMessage(MessageName.REQUEST_PLAYERS_SET,data);
+					NetworkMessage message = new NetworkMessage(MessageName.REQUESTING_PLAYERS_SET,data);
 					connection.writeMessage(message);
 				}
 				else
@@ -408,6 +410,24 @@ public class ClientGeneralConnection
 				}
 			}
 		}
+	}
+
+	public void confirmPlayersSelection()
+	{	connectionsLock.lock();
+		{	activeConnection.setState(ClientState.WAITING_TOURNAMENT);
+			NetworkMessage message = new NetworkMessage(MessageName.CONFIRMING_PLAYERS_SELECTION,true);
+			activeConnection.writeMessage(message);
+		}
+		connectionsLock.unlock();
+	}
+
+	public void unconfirmPlayersSelection()
+	{	connectionsLock.lock();
+		{	activeConnection.setState(ClientState.SELECTING_PLAYERS);
+			NetworkMessage message = new NetworkMessage(MessageName.UNCONFIRMING_PLAYERS_SELECTION,true);
+			activeConnection.writeMessage(message);
+		}
+		connectionsLock.unlock();
 	}
 
 	/////////////////////////////////////////////////////////////////

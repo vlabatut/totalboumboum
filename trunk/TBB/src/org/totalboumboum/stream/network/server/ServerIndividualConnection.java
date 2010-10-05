@@ -86,31 +86,39 @@ public class ServerIndividualConnection extends AbstractConnection
 	public void messageRead(NetworkMessage message)
 	{	HostState state = generalConnection.getGameInfo().getHostInfo().getState();
 		
-		if(message.getInfo().equals(MessageName.REQUEST_GAME_INFO))
+		if(message.getInfo().equals(MessageName.REQUESTING_GAME_INFO))
 			gameInfoRequested(message);
-		else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_LIST))
+		else if(message.getInfo().equals(MessageName.REQUESTING_PLAYERS_LIST))
 			playersListRequested();
 		
 		else if(state==HostState.OPEN)
-		{	if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_ADD))
+		{	if(message.getInfo().equals(MessageName.REQUESTING_PLAYERS_ADD))
 				playersAddRequested(message);
-			else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_CHANGE_COLOR))
+			else if(message.getInfo().equals(MessageName.REQUESTING_PLAYERS_CHANGE_COLOR))
 				playersChangeRequestedColor(message);
-			else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_CHANGE_HERO))
+			else if(message.getInfo().equals(MessageName.REQUESTING_PLAYERS_CHANGE_HERO))
 				playersChangeRequestedHero(message);
-			else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_SET))
+			else if(message.getInfo().equals(MessageName.REQUESTING_PLAYERS_SET))
 				playersSetRequested(message);
-			else if(message.getInfo().equals(MessageName.REQUEST_PLAYERS_REMOVE))
+			else if(message.getInfo().equals(MessageName.REQUESTING_PLAYERS_REMOVE))
 				playersRemoveRequested(message);
-			else if(message.getInfo().equals(MessageName.ENTERS_PLAYERS_SELECTION))
+			else if(message.getInfo().equals(MessageName.ENTERING_PLAYERS_SELECTION))
 				entersPlayersSelection(message);
-			else if(message.getInfo().equals(MessageName.EXITS_PLAYERS_SELECTION))
+			else if(message.getInfo().equals(MessageName.EXITING_PLAYERS_SELECTION))
 				exitsPlayersSelection(message);
+			else if(message.getInfo().equals(MessageName.CONFIRMING_PLAYERS_SELECTION))
+				confirmsPlayersSelection(message);
+			else if(message.getInfo().equals(MessageName.UNCONFIRMING_PLAYERS_SELECTION))
+				unconfirmsPlayersSelection(message);
 		}
 		
 		else if(state==HostState.CLOSED)
-		{	if(message.getInfo().equals(MessageName.EXITS_PLAYERS_SELECTION))
+		{	if(message.getInfo().equals(MessageName.EXITING_PLAYERS_SELECTION))
 				exitsPlayersSelection(message);
+			else if(message.getInfo().equals(MessageName.CONFIRMING_PLAYERS_SELECTION))
+				confirmsPlayersSelection(message);
+			else if(message.getInfo().equals(MessageName.UNCONFIRMING_PLAYERS_SELECTION))
+				unconfirmsPlayersSelection(message);
 		}
 		
 		else if(state==HostState.PLAYING)
@@ -129,7 +137,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	private void gameInfoRequested(NetworkMessage message)
 	{	hostId = (String)message.getData();
 		GameInfo gameInfo = generalConnection.getGameInfo();
-		NetworkMessage msg = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
+		NetworkMessage msg = new NetworkMessage(MessageName.UPDATING_GAME_INFO,gameInfo);
 		writer.addMessage(msg);
 	}
 	
@@ -144,7 +152,7 @@ public class ServerIndividualConnection extends AbstractConnection
 		{	// update state
 			state = ClientState.SELECTING_PLAYERS;
 			// send back players list
-			NetworkMessage msg = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,generalConnection.getPlayerProfiles());
+			NetworkMessage msg = new NetworkMessage(MessageName.UPDATING_PLAYERS_LIST,generalConnection.getPlayerProfiles());
 			writeMessage(msg);
 		}
 		else
@@ -158,6 +166,16 @@ public class ServerIndividualConnection extends AbstractConnection
 		{	// TODO must remove all the players from this connection
 			generalConnection.playerSelectionExited(this);
 		}
+	}
+	
+	private void confirmsPlayersSelection(NetworkMessage message)
+	{	state = ClientState.WAITING_TOURNAMENT;
+		generalConnection.playerSelectionConfirmed(this,true);
+	}
+	
+	private void unconfirmsPlayersSelection(NetworkMessage message)
+	{	state = ClientState.SELECTING_PLAYERS;
+		generalConnection.playerSelectionConfirmed(this,false);
 	}
 	
 	private void playersAddRequested(NetworkMessage message)

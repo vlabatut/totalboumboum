@@ -32,13 +32,20 @@ public enum MessageName
 	/* 
 	 * config level
 	 */
+		/**
+		 * client indcates it validates its player selection and starts
+		 * waiting for the tournament to start.
+		 */
+		CONFIRMING_PLAYERS_SELECTION,
+		/** the opposite */
+		UNCONFIRMING_PLAYERS_SELECTION,
 		/** 
 		 * if true, the client selects a game and enters the players selection screen
 		 * else, it means it enters another game (but might come back to game selection) 
 		 * */
-		ENTERS_PLAYERS_SELECTION,
+		ENTERING_PLAYERS_SELECTION,
 		/** client abort players selection to go back to the game selection screen */
-		EXITS_PLAYERS_SELECTION,
+		EXITING_PLAYERS_SELECTION,
 		/** 
 		 * client requests game information
 		 * >must send its id in the message
@@ -50,7 +57,7 @@ public enum MessageName
 		 * >behavior:
 		 * 		- server always fulfills this request (whatever C/S state) 
 		 */ 
-		REQUEST_GAME_INFO,
+		REQUESTING_GAME_INFO,
 		/** 
 		 * client requests players list
 		 * >possible causes:
@@ -61,50 +68,50 @@ public enum MessageName
 		 * 		- server answers only when it's open
 		 * 		- or to the central, anytime
 		 */
-		REQUEST_PLAYERS_LIST,
+		REQUESTING_PLAYERS_LIST,
 		/** client adds a new player */
-		REQUEST_PLAYERS_ADD,
+		REQUESTING_PLAYERS_ADD,
 		/** client remove one of its players */ 
-		REQUEST_PLAYERS_REMOVE,
+		REQUESTING_PLAYERS_REMOVE,
 		/** client change one of its players color*/ 
-		REQUEST_PLAYERS_CHANGE_COLOR,
+		REQUESTING_PLAYERS_CHANGE_COLOR,
 		/** client change one of its players sprite*/ 
-		REQUEST_PLAYERS_CHANGE_HERO,
+		REQUESTING_PLAYERS_CHANGE_HERO,
 		/** client replace one of its players by another one */ 
-		REQUEST_PLAYERS_SET,
+		REQUESTING_PLAYERS_SET,
 		/** client sends its current state */ 
-		UPDATE_CLIENT_STATE,
+		UPDATING_CLIENT_STATE,
 		
 		/** server requests client current state */ 
-//		REQUEST_CLIENT_STATE, //pas nécessaire, à éviter même
+//		REQUESTING_CLIENT_STATE, //pas nécessaire, à éviter même
 		/** server sends game information */ 
-		UPDATE_GAME_INFO,
+		UPDATING_GAME_INFO,
 		/** server sends players list */
-		UPDATE_PLAYERS_LIST,
+		UPDATING_PLAYERS_LIST,
 	
 	/* 
 	 * tournament level
 	 */
 		/** client requests current tournament stats */
-		REQUEST_TOURNAMENT_STATS,
+		REQUESTING_TOURNAMENT_STATS,
 		/** server sends current tournament stats */
-		UPDATE_TOURNAMENT_STATS,
+		UPDATING_TOURNAMENT_STATS,
 
 	/* 
 	 * match level
 	 */
 		/** client requests current match stats */
-		REQUEST_MATCH_STATS,
+		REQUESTING_MATCH_STATS,
 		/** server sends current match stats */
-		UPDATE_MATCH_STATS,
+		UPDATING_MATCH_STATS,
 	
 	/* 
 	 * round level
 	 */
 		/** client requests current round stats */
-		REQUEST_ROUND_STATS,
+		REQUESTING_ROUND_STATS,
 		/** server sends current round stats */
-		UPDATE_ROUND_STATS,
+		UPDATING_ROUND_STATS,
 	
 	/* 
 	 * in-game level
@@ -120,11 +127,11 @@ public enum MessageName
 	 * common
 	 */
 		/** server accept/reject reconnection */
-		ANSWER_RECONNECTION,
+		ANSWERING_RECONNECTION,
 		/** client asks for reconnection */
-		REQUEST_RECONNECTION,
+		REQUESTING_RECONNECTION,
 		/** client or server asks for disconnection*/
-		REQUEST_DISCONNECTION,
+		REQUESTING_DISCONNECTION,
 		/** client sends its new state */
 		UPDATING_STATE
 }
