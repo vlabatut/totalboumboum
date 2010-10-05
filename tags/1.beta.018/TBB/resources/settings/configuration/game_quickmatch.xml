@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_quickmatch.xsd">
+	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
+	<settings>
+		<levels randomOrder="false" />
+		<players randomLocation="false" />
+		<limits points="0" rounds="6" time="0" />
+		<points share="true" draw="NONE">
+			<value rank="1" points="8" />
+			<value rank="2" points="4" />
+			<value rank="3" points="2" />
+			<value rank="4" points="1" />
+			<value rank="5" points="0" />
+		</points>
+	</settings>
+	<players>
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="totalboumboum" spriteFolder="prognathe" />
+		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+	</players>
+	<levels>
+		<level pack="totalboumboum" folder="debug" allowedPlayers="1 2" />
+	</levels>
+</gameQuickmatch>
+

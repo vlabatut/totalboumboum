@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:complexType name="tUps">
+		<xsd:attribute name="value" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tAutoAdvance">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+		<xsd:attribute name="delay" type="xsd:long" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tHideAllAis">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tDisplayExceptions">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tLogExceptions">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tAis">
+		<xsd:sequence>
+			<xsd:element name="ups" type="tUps" />
+			<xsd:element name="autoAdvance" type="tAutoAdvance" />
+			<xsd:element name="hideAllAis" type="tHideAllAis" />
+			<xsd:element name="displayExceptions" type="tDisplayExceptions" />
+			<xsd:element name="logExceptions" type="tLogExceptions" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="ais" type="tAis" />
+
+</xsd:schema>

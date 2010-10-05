@@ -1,0 +1,6 @@
+Total Boum Boum icons
+Authors: 
+	Icons: Vincent Labatut (http://www.totalboumboum.org)
+	Background: Crystal Project icons by Everaldo Coelho (http://www.everaldo.com/crystal)
+License	: GPLv2 (GNU General Public License)
+	

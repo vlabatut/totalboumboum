@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:complexType name="tFireset">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tExplosion">
+		<xsd:sequence>
+			<xsd:element name="fireset" type="tFireset" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="explosion" type="tExplosion" />
+
+</xsd:schema>

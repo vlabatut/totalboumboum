@@ -1,0 +1,60 @@
+package org.totalboumboum.ai.v200809.adapter;
+
+/*
+ * Total Boum Boum
+ * Copyright 2008-2010 Vincent Labatut 
+ * 
+ * This file is part of Total Boum Boum.
+ * 
+ * Total Boum Boum is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Total Boum Boum is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
+/**
+ * 
+ * types d'items reconnus par l'IA.
+ * 
+ * @author Vincent Labatut
+ *
+ */
+public enum AiItemType
+{
+	/** le joueur peut poser une bombe de plus */
+	EXTRA_BOMB,
+	/** les bombes du joueur explosent plus loin */
+	EXTRA_FLAME,
+	/** le joueur peut frapper dans une bombe et ainsi l'envoyer plus loin */
+	PUNCH,
+	/** autre type d'item */
+	OTHER;	
+	
+	/**
+	 * calcule l'AiItemType correspondant au nom d'item passé en paramètre
+	 * 
+	 * @param name	nom de l'item à traiter
+	 * @return	symbole représentant ce type d'item
+	 */
+	public static AiItemType makeItemType(String name)
+	{	AiItemType result;
+		if(name.equalsIgnoreCase("extrabomb"))
+			result = EXTRA_BOMB;
+		else if(name.equalsIgnoreCase("extraflame"))
+			result = EXTRA_FLAME;
+		else if(name.equalsIgnoreCase("punch"))
+			result = PUNCH;
+		else
+			result = OTHER;
+		return result;
+	}
+}

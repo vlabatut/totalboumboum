@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../schemas/animes.xsd" 
+		scale="1" >
+	<gestures>
+		<gesture name="BURNING" >
+			<direction name="DOWN" folder="down">
+				<step duration="50" file="1.gif" />
+				<step duration="60" file="2.gif" />
+				<step duration="80" file="3.gif" />
+				<step duration="80" file="4.gif" />
+				<step duration="100" file="5.gif" />
+				<step duration="80" file="4.gif" />
+				<step duration="80" file="3.gif" />
+				<step duration="60" file="2.gif" />
+				<step duration="50" file="1.gif" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="50" file="1.gif" />
+				<step duration="60" file="2.gif" />
+				<step duration="80" file="3.gif" />
+				<step duration="80" file="4.gif" />
+				<step duration="100" file="5.gif" />
+				<step duration="80" file="4.gif" />
+				<step duration="80" file="3.gif" />
+				<step duration="60" file="2.gif" />
+				<step duration="50" file="1.gif" />
+			</direction>
+			<direction name="NONE" folder="none">
+				<step duration="50" file="1.gif" />
+				<step duration="60" file="2.gif" />
+				<step duration="80" file="3.gif" />
+				<step duration="80" file="4.gif" />
+				<step duration="100" file="5.gif" />
+				<step duration="80" file="4.gif" />
+				<step duration="80" file="3.gif" />
+				<step duration="60" file="2.gif" />
+				<step duration="50" file="1.gif" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="1.gif" />
+				<step duration="60" file="2.gif" />
+				<step duration="80" file="3.gif" />
+				<step duration="80" file="4.gif" />
+				<step duration="100" file="5.gif" />
+				<step duration="80" file="4.gif" />
+				<step duration="80" file="3.gif" />
+				<step duration="60" file="2.gif" />
+				<step duration="50" file="1.gif" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="1.gif" />
+				<step duration="60" file="2.gif" />
+				<step duration="80" file="3.gif" />
+				<step duration="80" file="4.gif" />
+				<step duration="100" file="5.gif" />
+				<step duration="80" file="4.gif" />
+				<step duration="80" file="3.gif" />
+				<step duration="60" file="2.gif" />
+				<step duration="50" file="1.gif" />
+			</direction>
+		</gesture>
+	</gestures>		
+</animes>

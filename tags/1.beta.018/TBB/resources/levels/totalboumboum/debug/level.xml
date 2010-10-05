@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd" >
+
+	<title value="Total Boum Boum Debug" />
+	<author value="Vincent Labatut" />
+	<source value="Original" />
+	<preview file="preview.jpg" />
+
+	<instance name="totalboumboum" />
+	<theme name="standard"/>
+
+	<globalDimension height="7" width="9" />
+	<visibleDimension height="7" width="9" />
+	<visiblePosition upLine="0" leftCol="0" />
+	<display forceAll="false" maximize="true" />
+		
+</level>

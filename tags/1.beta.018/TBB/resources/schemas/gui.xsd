@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:complexType name="tLanguage">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tFont">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tBackground">
+		<xsd:attribute name="file" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tConfiguration">
+		<xsd:sequence>
+			<xsd:element name="language" type="tLanguage" />
+			<xsd:element name="font" type="tFont" />
+			<xsd:element name="background" type="tBackground" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="configuration" type="tConfiguration" />
+
+</xsd:schema>

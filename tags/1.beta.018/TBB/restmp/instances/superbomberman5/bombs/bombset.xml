@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bombset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../xml/schemas/bombsets.xsd">
+
+<!--	<bomb name="mine" folder="mine" /> -->
+	<bomb name="normal" folder="normal" />
+<!--	<bomb name="penetration" folder="penetration" /> -->
+<!--	<bomb name="remote" folder="remote" /> -->
+<!--	<bomb name="search" folder="search" /> -->
+</bombset>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gesture-modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../../schemas/gesture_modulations.xsd" >
+
+	<selfModulations>
+	</selfModulations>
+	
+	<otherModulations>
+	</otherModulations>
+	
+	<actorModulations>
+	</actorModulations>
+	
+	<targetModulations>
+	</targetModulations>
+	
+	<thirdModulations>
+<!--  	APPEAR --> 
+		<modulation frame="false" strength="0" >
+			<action name="APPEAR" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actorRestrictions>
+				<ability><name value="SPRITE_TRAVERSE_WALL" /></ability>
+			</actorRestrictions>
+			<targetRestrictions />
+			<actorCircumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
+			<targetCircumstances  />
+		</modulation>
+		<modulation frame="true" strength="0" >
+			<action name="APPEAR" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actorRestrictions />
+			<targetRestrictions />
+			<actorCircumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
+			<targetCircumstances  />
+		</modulation>
+<!--  	LAND --> 
+		<modulation frame="false" strength="0" >
+			<action name="LAND" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actorRestrictions>
+				<ability><name value="SPRITE_TRAVERSE_WALL" /></ability>
+			</actorRestrictions>
+			<targetRestrictions />
+			<actorCircumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
+			<targetCircumstances  />
+		</modulation>
+		<modulation frame="true" strength="0" >
+			<action name="LAND" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actorRestrictions />
+			<targetRestrictions />
+			<actorCircumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
+			<targetCircumstances  />
+		</modulation>
+<!--  	MOVELOW --> 
+		<!-- ability to go through bombs -> not an obstacle -->
+		<modulation frame="false" strength="0" >
+			<action name="MOVELOW" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actorRestrictions>
+				<ability><name value="SPRITE_TRAVERSE_WALL" /></ability>
+			</actorRestrictions>
+			<targetRestrictions />
+			<actorCircumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
+			<targetCircumstances  />
+		</modulation>
+		<!-- intersection, same tile -> not an obstacle -->
+		<modulation frame="false" strength="0" >
+			<action name="MOVELOW" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actorRestrictions />
+			<targetRestrictions />
+			<actorCircumstances contact="INTERSECTION" tilePosition="SAME" orientation="ANY" />
+			<targetCircumstances  />
+		</modulation>
+		<!-- intersection, different tile, same orientation -> obstacle -->
+		<modulation frame="true" strength="0" >
+			<action name="MOVELOW" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actorRestrictions />
+			<targetRestrictions />
+			<actorCircumstances contact="INTERSECTION" tilePosition="NEIGHBOR" orientation="FACE" />
+			<targetCircumstances  />
+		</modulation>
+		<!-- intersection, different tile, different orientation -> not an obstacle -->
+		<modulation frame="false" strength="0" >
+			<action name="MOVELOW" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actorRestrictions />
+			<targetRestrictions />
+			<actorCircumstances contact="INTERSECTION" tilePosition="NEIGHBOR" orientation="BACK NEUTRAL OTHER" />
+			<targetCircumstances  />
+		</modulation>
+		<!-- other -> obstacle -->
+		<modulation frame="true" strength="0" >
+			<action name="MOVELOW" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actorRestrictions />
+			<targetRestrictions />
+			<actorCircumstances contact="COLLISION INTERSECTION" tilePosition="NEIGHBOR SAME" orientation="ANY" />
+			<targetCircumstances  />
+		</modulation>
+	</thirdModulations>
+
+</gesture-modulations>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/modulations.xsd" >
+	
+	<gesture name="APPEARING" file="appearing.xml" />
+	<gesture name="BOUNCING" file="bouncing.xml" />
+	<gesture name="BURNING" file="burning.xml" />
+	<gesture name="LANDING" file="landing.xml" />
+	<gesture name="OSCILLATING" file="oscillating.xml" />
+	<gesture name="PUNCHED" file="punched.xml" />
+	<gesture name="SLIDING" file="sliding.xml" />
+	<gesture name="STANDING" file="standing.xml" />
+
+</modulations>

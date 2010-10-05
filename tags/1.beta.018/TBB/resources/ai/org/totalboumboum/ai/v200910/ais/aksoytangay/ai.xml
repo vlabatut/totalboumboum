@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ai xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../schemas/ai.xsd">
+	
+	<notes>
+  		<line value="Classes développées pour le projet d'IA de 4ème année de 2009/2010."/>
+  		<line value="Département de génie informatique, Faculté d'ingénieurie et de technologie, Université Galatasaray, Istanbul, Turquie."/>
+  		<line value="Remarque : cette IA a été développée pour être utilisée uniquement sur les niveaux contenus dans le paquet tournament200910."/>
+	</notes>
+
+	<authors>
+		<author name="Cihan Aksoy"/>
+		<author name="Necmi Murat Tangay"/>
+	</authors>
+	
+</ai>
+

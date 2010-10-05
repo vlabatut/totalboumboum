@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/profile.xsd">
+	<general name="0809.Akkaya+Danacioğlu" />
+	<ai name="akkayadanacioglu" pack="v200809" />
+	<character name="shirobon" packname="superbomberman5"  color="GREY"/>
+ 	<network lastHost="3d169eaa-303e-4abe-8220-0261dbc79db9" />     
+</profile>
+

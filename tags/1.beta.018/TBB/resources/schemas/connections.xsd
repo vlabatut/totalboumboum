@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_ipaddress.xsd"/>
+
+	<xsd:complexType name="tCentral">
+		<xsd:attribute name="ip" type="tIpAddress" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="tHosting">
+		<xsd:attribute name="port" type="xsd:integer" use="required"/>
+		<xsd:attribute name="id" type="xsd:string" use="required"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="mac" type="xsd:string" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="tConnections">
+		<xsd:sequence>
+			<xsd:element name="central" type="tCentral" />
+			<xsd:element name="hosting" type="tHosting" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="connections" type="tConnections" />
+
+</xsd:schema>

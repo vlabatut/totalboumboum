@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sprite
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../schemas/sprite.xsd">
+
+	<general name="Antidote Item" base="common_bonus" />
+
+</sprite>

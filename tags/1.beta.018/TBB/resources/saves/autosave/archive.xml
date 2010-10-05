@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+	<tournament name="Super-coupe de Galatasaray I" type="SINGLE" />
+	<played matches="0" rounds="1" />
+	<dates start="2010-06-05T18:59:59" save="2010-06-05T19:02:11" />
+	<players>
+		<player name="0708.Demirkol+Doğan" />
+		<player name="0809.Tırtıl+Tomruk" />
+		<player name="0809.Akkaya+Danacioğlu" />
+		<player name="0809.Kökciyan+Mazmanoğlu" />
+	</players>
+</archive>
+

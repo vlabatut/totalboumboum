@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_colors.xsd"/>
+
+	<xsd:complexType name="tCharacter">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="packname" type="xsd:string" use="required" />
+		<xsd:attribute name="color" type="tColor" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tGeneral">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tArtificialIntelligence">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="pack" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tNetwork">
+		<xsd:attribute name="lastHost" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tProfile">
+		<xsd:sequence>
+			<xsd:element name="general" type="tGeneral" />
+			<xsd:element name="ai" type="tArtificialIntelligence"  minOccurs="0"/>
+			<xsd:element name="character" type="tCharacter" />
+			<xsd:element name="network" type="tNetwork" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="profile" type="tProfile" />
+
+</xsd:schema>
