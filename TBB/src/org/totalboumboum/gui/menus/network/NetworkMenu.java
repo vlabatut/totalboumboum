@@ -194,7 +194,7 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_VALIDATE))
 		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			connection.confirmPlayersSelection();
+			connection.confirmPlayersSelection(buttonPlayersValidate.isSelected());
 			
 			
 			

@@ -412,19 +412,20 @@ public class ClientGeneralConnection
 		}
 	}
 
-	public void confirmPlayersSelection()
-	{	connectionsLock.lock();
-		{	activeConnection.setState(ClientState.WAITING_TOURNAMENT);
-			NetworkMessage message = new NetworkMessage(MessageName.CONFIRMING_PLAYERS_SELECTION,true);
-			activeConnection.writeMessage(message);
+	public void confirmPlayersSelection(boolean confirmation)
+	{	ClientState state;
+		NetworkMessage message;
+		if(confirmation)
+		{	state = ClientState.WAITING_TOURNAMENT;
+			message = new NetworkMessage(MessageName.CONFIRMING_PLAYERS_SELECTION);
 		}
-		connectionsLock.unlock();
-	}
-
-	public void unconfirmPlayersSelection()
-	{	connectionsLock.lock();
-		{	activeConnection.setState(ClientState.SELECTING_PLAYERS);
-			NetworkMessage message = new NetworkMessage(MessageName.UNCONFIRMING_PLAYERS_SELECTION,true);
+		else
+		{	state = ClientState.SELECTING_PLAYERS;
+			message = new NetworkMessage(MessageName.UNCONFIRMING_PLAYERS_SELECTION);
+		}
+		
+		connectionsLock.lock();
+		{	activeConnection.setState(state);
 			activeConnection.writeMessage(message);
 		}
 		connectionsLock.unlock();
