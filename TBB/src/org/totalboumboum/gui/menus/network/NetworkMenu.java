@@ -247,13 +247,15 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	public void dataPanelSelectionChanged()
 	{	refreshButtons();
 		
-		// active connection lost
 		if(getDataPart()==playersData)
-		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			connection.exitPlayerSelection();
+		{	// active connection lost
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection.getActiveConnection()==null)
+			{	connection.exitPlayerSelection();
 
-			setButtonsGames();
-			container.setDataPart(gamesData);
+				setButtonsGames();
+				container.setDataPart(gamesData);
+			}
 		}
 	}
 }
