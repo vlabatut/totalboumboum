@@ -39,6 +39,7 @@ import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
 
@@ -130,7 +131,9 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 			buttonGamesNext.setEnabled(true);
 		
 		// players
-		if(tournament==null) //TODO à compléter
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		ClientIndividualConnection activeConnection = connection.getActiveConnection();
+		if(activeConnection==null)
 			buttonPlayersValidate.setEnabled(false);
 		else
 			buttonPlayersValidate.setEnabled(true);
@@ -184,19 +187,32 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_PREVIOUS))				
 		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			connection.exitPlayerSelection();
+			connection.exitPlayersSelection();
 
 			setButtonsGames();
 			container.setDataPart(gamesData);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_VALIDATE))
-		{	// synch game options
+		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			connection.confirmPlayersSelection();
+			
+			
+			
+			
+			
+			// synch game options
 //			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(playersData.getSelectedProfiles());
 //TODO			tournamentConfiguration.setProfilesSelection(profilesSelection);
 			
+			
+			
+			
 			// set the tournament
-			setTournamentPlayers();
-			setTournamentSettings();
+//			setTournamentPlayers();
+//			setTournamentSettings();
+			
+			
+			
 			
 			// save tournament options
 /*			try
@@ -217,14 +233,18 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 			
 			// tournament panel
 //TODO			AbstractTournament tournament = tournamentConfiguration.getTournament();
-			tournamentPanel.setTournament(tournament);
-			replaceWith(tournamentPanel);
+			
+			
+			
+			
+//			tournamentPanel.setTournament(tournament);
+//			replaceWith(tournamentPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_GAMES_BUTTON_NEXT))
 		{	// set payers panel
 			GameInfo gameInfo = gamesData.getSelectedGame();
 			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			connection.enterPlayerSelection(gameInfo);
+			connection.entersPlayerSelection(gameInfo);
 			playersData.setTournamentConfiguration();
 			
 			setButtonsPlayers();
@@ -251,7 +271,7 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		{	// active connection lost
 			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 			if(connection.getActiveConnection()==null)
-			{	connection.exitPlayerSelection();
+			{	connection.exitPlayersSelection();
 
 				setButtonsGames();
 				container.setDataPart(gamesData);

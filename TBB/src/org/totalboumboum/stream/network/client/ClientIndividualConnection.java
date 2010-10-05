@@ -140,7 +140,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		
 		// ask for the game info
 		String id = Configuration.getConnectionsConfiguration().getHostId();
-		NetworkMessage message = new NetworkMessage(MessageName.REQUEST_GAME_INFO,id);
+		NetworkMessage message = new NetworkMessage(MessageName.REQUESTING_GAME_INFO,id);
 		writeMessage(message);
 	}
 	
@@ -191,9 +191,9 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	@SuppressWarnings("unchecked")
 	@Override
 	public void messageRead(NetworkMessage message)
-	{	if(message.getInfo().equals(MessageName.UPDATE_GAME_INFO))
+	{	if(message.getInfo().equals(MessageName.UPDATING_GAME_INFO))
 			gameInfoReceived((GameInfo)message.getData());
-		else if(message.getInfo().equals(MessageName.UPDATE_PLAYERS_LIST))
+		else if(message.getInfo().equals(MessageName.UPDATING_PLAYERS_LIST))
 			playersListReceived((List<Profile>)message.getData());
 		else if(message.getInfo().equals(MessageName.INFO_REPLAY))
 			replayReceived((ReplayEvent)message.getData());

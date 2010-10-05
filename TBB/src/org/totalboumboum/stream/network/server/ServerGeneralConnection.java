@@ -146,7 +146,7 @@ public class ServerGeneralConnection implements Runnable
 		
 		gameInfo.getHostInfo().setState(hostState);
 		GameInfo copy = gameInfo.copy();
-		message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,copy);
+		message = new NetworkMessage(MessageName.UPDATING_GAME_INFO,copy);
 		
 		gameInfoLock.unlock();
 		
@@ -170,7 +170,7 @@ public class ServerGeneralConnection implements Runnable
 				state = HostState.OPEN;
 			hostInfo.setState(state);
 			
-			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATING_GAME_INFO,gameInfo);
 			propagateMessage(message);
 		}
 		gameInfoLock.unlock();
@@ -234,17 +234,18 @@ public class ServerGeneralConnection implements Runnable
 					gameInfo.setAverageScore(averageScore);
 			
 					// send the appropriate message 
-					NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
+					NetworkMessage message = new NetworkMessage(MessageName.UPDATING_GAME_INFO,gameInfo);
 					propagateMessage(message);
 				}		
 				gameInfoLock.unlock();
 			
 				// update players list
+				profile.setReady(true);
 				playerProfiles.add(profile);
 				playerConnections.put(profile.getId(),connection);
 				
 				// send the appropriate message
-				NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
+				NetworkMessage message = new NetworkMessage(MessageName.UPDATING_PLAYERS_LIST,playerProfiles);
 				propagateMessage(message);
 			}
 			profileLock.unlock();
@@ -290,7 +291,7 @@ public class ServerGeneralConnection implements Runnable
 					gameInfo.setAverageScore(averageScore);
 		
 					// send the appropriate message 
-					NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
+					NetworkMessage message = new NetworkMessage(MessageName.UPDATING_GAME_INFO,gameInfo);
 					propagateMessage(message);
 				}		
 				gameInfoLock.unlock();
@@ -301,7 +302,7 @@ public class ServerGeneralConnection implements Runnable
 				playerProfiles.set(index,profile);
 				
 				// send the appropriate message 
-				NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
+				NetworkMessage message = new NetworkMessage(MessageName.UPDATING_PLAYERS_LIST,playerProfiles);
 				propagateMessage(message);
 			}
 			profileLock.unlock();
@@ -310,11 +311,12 @@ public class ServerGeneralConnection implements Runnable
 
 	/**
 	 * just a change of color or sprite in a profile
+	 * or of readyness
 	 */
 	public void profileModified(Profile profile)
 	{	profileLock.lock();
 		{	// send the appropriate message
-			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATING_PLAYERS_LIST,playerProfiles);
 			propagateMessage(message);
 		}		
 		profileLock.unlock();
@@ -352,7 +354,7 @@ public class ServerGeneralConnection implements Runnable
 				gameInfo.setAverageScore(averageScore);
 		
 				// send the appropriate message 
-				NetworkMessage message = new NetworkMessage(MessageName.UPDATE_GAME_INFO,gameInfo);
+				NetworkMessage message = new NetworkMessage(MessageName.UPDATING_GAME_INFO,gameInfo);
 				propagateMessage(message);
 			}		
 			gameInfoLock.unlock();
@@ -362,7 +364,7 @@ public class ServerGeneralConnection implements Runnable
 			playerConnections.remove(profile.getId());
 			
 			// send the appropriate message
-			NetworkMessage message = new NetworkMessage(MessageName.UPDATE_PLAYERS_LIST,playerProfiles);
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATING_PLAYERS_LIST,playerProfiles);
 			propagateMessage(message);
 		}
 		profileLock.unlock();
@@ -387,6 +389,21 @@ public class ServerGeneralConnection implements Runnable
 				if(ct==connection)
 				{	profileRemoved(profile);
 					fireProfileRemoved(profile);
+				}
+			}
+		}
+		profileLock.unlock();
+	}
+	
+	public void playerSelectionConfirmed(ServerIndividualConnection connection, boolean confirmation)
+	{	profileLock.lock();
+		{	List<Profile> temp = new ArrayList<Profile>(playerProfiles);
+			for(Profile profile: temp)
+			{	ServerIndividualConnection ct = playerConnections.get(profile.getId());
+				if(ct==connection)
+				{	profile.setReady(confirmation);
+					fireProfileModified(profile);
+					profileModified(profile);
 				}
 			}
 		}
@@ -669,10 +686,10 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		for(ServerIndividualConnection connection: individualConnections)
 		{	boolean send = false;
 			
-			if(info==MessageName.UPDATE_GAME_INFO)
+			if(info==MessageName.UPDATING_GAME_INFO)
 				send = connection.getState()==ClientState.SELECTING_GAME
 						|| connection.getState()==ClientState.SELECTING_PLAYERS;
-			else if(info==MessageName.UPDATE_PLAYERS_LIST)
+			else if(info==MessageName.UPDATING_PLAYERS_LIST)
 				send = connection.getState()==ClientState.SELECTING_PLAYERS;
 			
 			if(send)	

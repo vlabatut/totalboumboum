@@ -1623,18 +1623,16 @@ public class Launcher
 	/**
 	 * en cours:
 	 * 
-	 * - pb: quand on ajoute un joueur coté client, on se fait éjecter et ça revient à la sélection de la partie
-	 * 
 	 * - sélection des joueurs
 	 * 		- rajouter une colonne dans la table de sélection des joueurs
 	 * 		  qui correspondrait à l'état du joueur distant : validé ou pas
 	 * 		- il suffirait de n'afficher cette colonne que si le jeu est réseau
-	 * 		- quand le client a fini de gérer ses joueurs, il valide avec le bouton du menu
-	 * 		- coté serveur, tous les joueurs concernés sont validés
+	 * 		x quand le client a fini de gérer ses joueurs, il valide avec le bouton du menu
+	 * 		x coté serveur, tous les joueurs concernés sont validés
 	 * 		- en fait le client peut continuer à modifier ses joueurs, mais c'est à ses risques
 	 * 		- quand le serveur estime qu'il a assez de joueurs, il commence le match
 	 * 		- alors tous les clients reçoivent un evt de début de tournoi, et zou !
-	 * 		- du cp le bouton coté client de 'commencer le tournoi' serait plutot une espèce de "v" de type toogle
+	 * 		x du cp le bouton coté client de 'commencer le tournoi' serait plutot une espèce de "v" de type toggle
 	 * 
 	 * 
 	 *  - tout changement d'état du client devrait être :
