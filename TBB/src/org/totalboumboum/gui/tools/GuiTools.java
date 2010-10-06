@@ -688,6 +688,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// player unselected
+		{	String folder = baseFolder+GuiFileTools.FILE_PLAYER_UNSELECTED;
+			String[] uses =
+			{	GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_READY
+			};
+			loadTableImages(folder,uses);
+		}
 		// players
 		{	String folder = baseFolder+GuiFileTools.FILE_PLAYERS;
 			String[] uses =
@@ -1186,6 +1193,20 @@ public class GuiTools
 			{	GuiKeys.COMMON_POINTS_TOURNAMENT_DATA_PARTIAL,
 				GuiKeys.COMMON_POINTS_MATCH_DATA_PARTIAL,
 				GuiKeys.COMMON_POINTS_ROUND_DATA_PARTIAL
+			};
+			loadTableImages(folder,uses);
+		}
+		// player selected
+		{	String folder = baseFolder+GuiFileTools.FILE_PLAYER_SELECTED;
+			String[] uses =
+			{	GuiKeys.COMMON_PLAYERS_SELECTION_DATA_CONFIRMED
+			};
+			loadTableImages(folder,uses);
+		}
+		// player unselected
+		{	String folder = baseFolder+GuiFileTools.FILE_PLAYER_UNSELECTED;
+			String[] uses =
+			{	GuiKeys.COMMON_PLAYERS_SELECTION_DATA_UNCONFIRMED
 			};
 			loadTableImages(folder,uses);
 		}

@@ -1622,6 +1622,8 @@ public class Launcher
 	
 	/**
 	 * en cours:
+	 * 	- initialiser les joueurs coté serveur avec une ready=true
+	 * 	- tester si ça marche (màj) lors d'interaction c/s
 	 * 
 	 * - sélection des joueurs
 	 * 		- rajouter une colonne dans la table de sélection des joueurs

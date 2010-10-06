@@ -1011,14 +1011,17 @@
 					<text name="Hero" value="Personnage" tooltip="Personnage sélectionné" />
 					<text name="Profile" value="Profil" tooltip="Profil sélectionné" />
 					<text name="Rank" value="n°"  tooltip="Classement du joueur dans les statistiques du jeu" />
+					<text name="Ready" value="Prêt"  tooltip="Statut du joueur (prêt ou pas)" />
 					<text name="Type" value="Type" tooltip="Type de profil (joueur humain ou IA)" />
 				</group>
 				<group name="Data" >
 					<text name="Add" value="Ajoute" tooltip="Sélectionner un autre profil" />
 					<text name="Computer" value="Ordinateur" tooltip="Intelligence artificielle" />
+					<text name="Confirmed" value="Prêt" tooltip="Joueur prêt" />
 					<text name="Delete" value="Désélectionne" tooltip="Désélectionne le profil" />
 					<text name="Human" value="Humain" tooltip="Joueur humain" />
 					<text name="Remote" value="Distant"  tooltip="Le joueur est contrôlé à distance" />
+					<text name="Unconfirmed" value="Pas prêt" tooltip="Joueur pas encore prêt" />
 				</group>
 			</group>
 		</group>

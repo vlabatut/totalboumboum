@@ -51,6 +51,7 @@ import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
@@ -77,6 +78,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	private List<Profile> players;
 	private int rankWidth;
 	private Set<Integer> allowedPlayers;
+	private int cols = COLS;
 	
 	public List<Profile> getPlayers()
 	{	return players;	
@@ -84,6 +86,10 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	
 	public Profile getPlayer(int index)
 	{	return players.get(index);	
+	}
+	
+	public Set<Integer> getAllowedPlayers()
+	{	return allowedPlayers;
 	}
 	
 	public void setPlayers(List<Profile> players, Set<Integer> allowedPlayers)
@@ -99,9 +105,17 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		colorTexts = new ArrayList<String>();
 		colorTooltips = new ArrayList<String>();
 		colorBackgrounds = new ArrayList<Color>();
+		
+		// ready
+		ClientGeneralConnection clientConfig = Configuration.getConnectionsConfiguration().getClientConnection();
+		ServerGeneralConnection serverConfig = Configuration.getConnectionsConfiguration().getServerConnection();
+		showReady = clientConfig!=null || serverConfig!=null;
 
 		// sizes
-		reinit(LINES,COLS);
+		cols = COLS;
+		if(showReady)
+			cols ++;
+		reinit(LINES,cols);
 		int headerHeight = getHeaderHeight();
 		//int lineHeight = getLineHeight();
 		int deleteWidth = headerHeight;
@@ -109,40 +123,47 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		int colorWidth = GuiStringTools.initColorTexts(getLineFontSize(),colorTexts,colorTooltips,colorBackgrounds);
 		int typeWidth = headerHeight;
 		int heroWidth = headerHeight;
+		int readyWidth = 0;
+		if(showReady)
+			readyWidth = headerHeight;
 		rankWidth = headerHeight;
-		int fixedSum = GuiTools.subPanelMargin*(COLS-1) + deleteWidth + heroWidth + rankWidth + controlWidth + colorWidth + typeWidth;
+		int fixedSum = GuiTools.subPanelMargin*(cols-1) + deleteWidth + heroWidth + rankWidth + controlWidth + colorWidth + typeWidth + readyWidth;
 		int nameWidth = getDataWidth() - fixedSum;
 		
 		// headers
-		{	String keys[] = 
-			{	GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_DELETE,
+		{	List<String> keys = new ArrayList<String>(Arrays.asList(
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_DELETE,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_PROFILE,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_TYPE,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_HERO,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_RANK,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_COLOR,
-				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_CONTROLS				
-			};
-			int sizes[] = 
-			{	deleteWidth,
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_CONTROLS
+			));
+			List<Integer> sizes = new ArrayList<Integer>(Arrays.asList(
+				deleteWidth,
 				nameWidth,
 				typeWidth,
 				heroWidth,
 				rankWidth,
 				colorWidth,
 				controlWidth
-			};
-			for(int col=0;col<keys.length;col++)
-			{	setColSubMinWidth(col,sizes[col]);
-				setColSubPrefWidth(col,sizes[col]);
-				setColSubMaxWidth(col,sizes[col]);
-				if(keys[col]!=null)
-				{	setLabelKey(0,col,keys[col],true);
+			));
+			if(showReady)
+			{	keys.add(GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_READY);
+				sizes.add(readyWidth);
+			}
+			for(int col=0;col<keys.size();col++)
+			{	setColSubMinWidth(col,sizes.get(col));
+				setColSubPrefWidth(col,sizes.get(col));
+				setColSubMaxWidth(col,sizes.get(col));
+				if(keys.get(col)!=null)
+				{	setLabelKey(0,col,keys.get(col),true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(0,col,bg);
 				}
 			}
-			// delete all button
+			// delete all listeners (buttons)
 			MyLabel lbl = getLabel(0,COL_DELETE);
 			lbl.addMouseListener(this);
 			lbl.setMouseSensitive(true);
@@ -154,7 +175,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		
 		// data
 		for(int line=1;line<LINES;line++)
-		{	for(int col=0;col<COLS;col++)
+		{	for(int col=0;col<cols;col++)
 			{	Color bg;
 				if(!allowedPlayers.contains(line) && col==COL_PROFILE)
 					bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
@@ -299,11 +320,24 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
 				setLabelBackground(line,COL_CONTROLS,bg);
 			}
+			// ready
+			if(showReady)
+			{	// content
+				String profileType;
+				if(profile.isReady())
+					profileType = GuiKeys.COMMON_PLAYERS_SELECTION_DATA_CONFIRMED;
+				else
+					profileType = GuiKeys.COMMON_PLAYERS_SELECTION_DATA_UNCONFIRMED;
+				setLabelKey(line,COL_READY,profileType,true);
+				// color
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
+				setLabelBackground(line,COL_READY,bg);
+			}
 		}
 		
 		// if there's no player on this line
 		else if(line<LINES)
-		{	for(int col=0;col<COLS;col++)
+		{	for(int col=0;col<cols;col++)
 			{	MyLabel lbl = getLabel(line,col);
 				lbl.setText(null);
 				lbl.setToolTipText(null);
@@ -367,6 +401,8 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	// ready
+	private boolean showReady = false;
 	// controls
 	private List<String> controlTexts;
 	private List<String> controlTooltips;
@@ -382,6 +418,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	private static final int COL_RANK = 4;
 	private static final int COL_COLOR = 5;
 	private static final int COL_CONTROLS = 6;
+	private static final int COL_READY = 7;
 		
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////

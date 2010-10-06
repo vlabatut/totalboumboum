@@ -84,6 +84,7 @@ public class GuiKeys
 	public static final String COMPLETE = "Complete";
 	public static final String COMPUTER = "Computer";
 	public static final String CONFIRM = "Confirm";
+	public static final String CONFIRMED = "Confirmed";
 	public static final String CONFRONTATION = "Confrontation";
 	public static final String CONFRONTATIONS = "Confrontations";
 	public static final String CONSTANT = "Constant";
@@ -285,6 +286,7 @@ public class GuiKeys
 	public static final String TYPE = "Type";
 	public static final String TYPES = "Types";
 	public static final String ULTRAMARINE = "Ultramarine";
+	public static final String UNCONFIRMED = "Unconfirmed";
 	public static final String UNDECIDED = "Undecided";
 	public static final String UNKNOWN = "Unknown";
 	public static final String UNREGISTER = "Unregister";
@@ -1247,14 +1249,17 @@ public class GuiKeys
 			public static final String COMMON_PLAYERS_SELECTION_HEADER_HERO = COMMON_PLAYERS_SELECTION_HEADER+HERO;
 			public static final String COMMON_PLAYERS_SELECTION_HEADER_PROFILE = COMMON_PLAYERS_SELECTION_HEADER+PROFILE;
 			public static final String COMMON_PLAYERS_SELECTION_HEADER_RANK = COMMON_PLAYERS_SELECTION_HEADER+RANK;
+			public static final String COMMON_PLAYERS_SELECTION_HEADER_READY = COMMON_PLAYERS_SELECTION_HEADER+READY;
 			public static final String COMMON_PLAYERS_SELECTION_HEADER_TYPE = COMMON_PLAYERS_SELECTION_HEADER+TYPE;
 			/* DATA */
 			public static final String COMMON_PLAYERS_SELECTION_DATA = COMMON_PLAYERS_SELECTION+DATA;
 			public static final String COMMON_PLAYERS_SELECTION_DATA_ADD = COMMON_PLAYERS_SELECTION_DATA+ADD;
 			public static final String COMMON_PLAYERS_SELECTION_DATA_COMPUTER = COMMON_PLAYERS_SELECTION_DATA+COMPUTER;
+			public static final String COMMON_PLAYERS_SELECTION_DATA_CONFIRMED = COMMON_PLAYERS_SELECTION_DATA+CONFIRMED;
 			public static final String COMMON_PLAYERS_SELECTION_DATA_DELETE = COMMON_PLAYERS_SELECTION_DATA+DELETE;
 			public static final String COMMON_PLAYERS_SELECTION_DATA_HUMAN = COMMON_PLAYERS_SELECTION_DATA+HUMAN;
 			public static final String COMMON_PLAYERS_SELECTION_DATA_REMOTE = COMMON_PLAYERS_SELECTION_DATA+REMOTE;
+			public static final String COMMON_PLAYERS_SELECTION_DATA_UNCONFIRMED = COMMON_PLAYERS_SELECTION_DATA+UNCONFIRMED;
 
 	/* POINTS */
 	public static final String COMMON_POINTS = COMMON+POINTS;
