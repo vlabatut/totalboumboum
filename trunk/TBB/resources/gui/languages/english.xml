@@ -1013,14 +1013,17 @@
 					<text name="Hero" value="Hero" tooltip="Selected character" />
 					<text name="Profile" value="Profile" tooltip="Selected profile" />
 					<text name="Rank" value="#"  tooltip="Rank of the player in the general game statistics" />
+					<text name="Ready" value="Ready"  tooltip="Current status (ready or not)" />
 					<text name="Type" value="Type" tooltip="Profile type" />
 				</group>
 				<group name="Data" >
 					<text name="Add" value="Add" tooltip="Add a player" />
 					<text name="Computer" value="Computer" tooltip="Computer-controlled player" />
+					<text name="Confirmed" value="Ready" tooltip="This player is ready" />
 					<text name="Delete" value="Unselect" tooltip="Unselect this profile" />
 					<text name="Human" value="Human" tooltip="Human-controlled player" />
 					<text name="Remote" value="Remote"  tooltip="This player is remotely controlled" />
+					<text name="Unconfirmed" value="Ready" tooltip="This player is not ready yet" />
 				</group>
 			</group>
 		</group>

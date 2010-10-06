@@ -186,7 +186,11 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	public void setConnection()
 	{	connection = Configuration.getConnectionsConfiguration().getServerConnection();
 		if(connection!=null)
-			connection.addListener(this);
+		{	connection.addListener(this);
+			List<Profile> players = playersPanel.getPlayers();
+			Set<Integer> allowedPlayers = playersPanel.getAllowedPlayers();
+			playersPanel.setPlayers(players, allowedPlayers);
+		}
 	}
 	
 	@Override
