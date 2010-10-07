@@ -34,6 +34,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
+import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.content.subpanel.game.GameInfoSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanelListener;
@@ -473,6 +474,11 @@ catch (UnknownHostException e)
 	{	// useless at this stage
 	}
 
+	@Override
+	public void connectionTournamentStarted(AbstractTournament tournament)
+	{	// useless at this stage
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// HOST INFO SUBPANEL LISTENER	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////

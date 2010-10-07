@@ -41,6 +41,7 @@ import org.totalboumboum.engine.control.player.RemotePlayerControl;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.profile.ProfileLoader;
+import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
@@ -643,6 +644,21 @@ public class ServerGeneralConnection implements Runnable
 		fireProfileSet(index,profile);
 	}
 	
+	public boolean areAllPlayersReady()
+	{	boolean result = true;
+
+		profileLock.lock();
+		{	Iterator<Profile> it = playerProfiles.iterator();
+			while(result && it.hasNext())
+			{	Profile profile = it.next();
+				result = profile.isReady();
+			}
+		}
+		profileLock.unlock();
+		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// RUNNABLE		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -672,6 +688,14 @@ System.out.println(serverSocket.getLocalSocketAddress());
 			{	e.printStackTrace();
 			}
 		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// GAME					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void startTournament(AbstractTournament tournament)
+	{	NetworkMessage message = new NetworkMessage(MessageName.STARTING_TOURNAMENT,tournament);
+		propagateMessage(message);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -733,7 +757,7 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		
 		return result;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

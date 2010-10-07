@@ -34,6 +34,7 @@ import org.totalboumboum.engine.loop.ClientLoop;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
@@ -432,6 +433,13 @@ public class ClientGeneralConnection
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void tournamentStarted(AbstractTournament tournament)
+	{	fireConnectionTournamentStarted(tournament);
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// ZOOM COEFF		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Double zoomCoeff = null;
@@ -478,5 +486,10 @@ public class ClientGeneralConnection
 	private void fireConnectionProfilesChanged(ClientIndividualConnection connection, int index)
 	{	for(ClientGeneralConnectionListener listener: listeners)
 			listener.connectionProfilesChanged(connection,index);
+	}
+
+	private void fireConnectionTournamentStarted(AbstractTournament tournament)
+	{	for(ClientGeneralConnectionListener listener: listeners)
+			listener.connectionTournamentStarted(tournament);
 	}
 }

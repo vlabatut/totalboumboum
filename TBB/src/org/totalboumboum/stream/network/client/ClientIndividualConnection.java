@@ -36,6 +36,7 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.profile.ProfileLoader;
+import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.stream.network.AbstractConnection;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
@@ -197,6 +198,8 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 			playersListReceived((List<Profile>)message.getData());
 		else if(message.getInfo().equals(MessageName.INFO_REPLAY))
 			replayReceived((ReplayEvent)message.getData());
+		else if(message.getInfo().equals(MessageName.STARTING_TOURNAMENT))
+			tournamentStarted((AbstractTournament)message.getData());
 	}
 	
 	public void writeMessage(NetworkMessage message)
@@ -303,6 +306,9 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT 				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private void tournamentStarted(AbstractTournament tournament)
+	{	generalConnection.tournamentStarted(tournament);
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// MATCH 					/////////////////////////////////////

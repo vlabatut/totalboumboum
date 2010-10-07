@@ -26,6 +26,7 @@ import java.util.Set;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -171,4 +172,10 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		List<Profile> selectedProfiles = connection.getPlayerProfiles();
 		playersPanel.setPlayers(selectedProfiles,allowedPlayers);
 	}
+
+	@Override
+	public void connectionTournamentStarted(AbstractTournament tournament)
+	{	//TODO to be completed
+	}
+	
 }

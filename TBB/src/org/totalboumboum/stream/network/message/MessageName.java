@@ -94,6 +94,8 @@ public enum MessageName
 	 */
 		/** client requests current tournament stats */
 		REQUESTING_TOURNAMENT_STATS,
+		/** server starts tournament */
+		STARTING_TOURNAMENT,
 		/** server sends current tournament stats */
 		UPDATING_TOURNAMENT_STATS,
 
@@ -135,16 +137,3 @@ public enum MessageName
 		/** client sends its new state */
 		UPDATING_STATE
 }
-
-/**
- * reconnection process:
- * 	- client connects and sends a REQUEST_RECONNECTION message, with its id
- * 	- server checks if the id's
- * 	- sends back an ANSWER_RECONNECTION message with a boolean showing acceptation or reject
- *  - if accepted, the server then sends the necessary updates to the client
- */
-
-/**
- * deconnection process:
- *  - none. can be seen as accidental, so no need to exchange any specific message 
- */
