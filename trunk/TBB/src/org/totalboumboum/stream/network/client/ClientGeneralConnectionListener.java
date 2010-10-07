@@ -21,6 +21,8 @@ package org.totalboumboum.stream.network.client;
  * 
  */
 
+import org.totalboumboum.game.tournament.AbstractTournament;
+
 /**
  * 
  * @author Vincent Labatut
@@ -33,4 +35,5 @@ public interface ClientGeneralConnectionListener
 	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId);
 	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index);
 	public void connectionProfilesChanged(ClientIndividualConnection connection, int index);
+	public void connectionTournamentStarted(AbstractTournament tournament);
 }

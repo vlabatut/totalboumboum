@@ -1621,6 +1621,14 @@ public class Launcher
 	 */ 
 	
 	/**
+	 * reconnection process:
+	 * 	- client connects and sends a REQUEST_RECONNECTION message, with its id
+	 * 	- server checks if the id's
+	 * 	- sends back an ANSWER_RECONNECTION message with a boolean showing acceptation or reject
+	 *  - if accepted, the server then sends the necessary updates to the client
+	 */
+	
+	/**
 	 * en cours:
 	 * 	- initialiser les joueurs coté serveur avec une ready=true
 	 * 	- tester si ça marche (màj) lors d'interaction c/s

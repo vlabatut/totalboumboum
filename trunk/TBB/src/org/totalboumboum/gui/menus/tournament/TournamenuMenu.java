@@ -143,7 +143,10 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 		if(tournament==null || !tournament.getAllowedPlayerNumbers().contains(playersData.getSelectedProfiles().size()))
 			buttonPlayersNext.setEnabled(false);
 		else
-			buttonPlayersNext.setEnabled(true);
+		{	ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+			if(connection==null || connection.areAllPlayersReady())
+				buttonPlayersNext.setEnabled(true);
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -244,9 +247,16 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 			
 			// synch game options
 			Configuration.getGameConfiguration().setTournamentConfiguration(tournamentConfiguration);
+
+			// get tournament
+			AbstractTournament tournament = tournamentConfiguration.getTournament();
+			
+			// send to possible clients
+			ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+			if(connection!=null)
+				connection.startTournament(tournament);
 			
 			// tournament panel
-			AbstractTournament tournament = tournamentConfiguration.getTournament();
 			tournamentPanel.setTournament(tournament);
 			replaceWith(tournamentPanel);
 	    }
