@@ -190,7 +190,9 @@ public class ServerGeneralConnection implements Runnable
 	{	profileLock.lock();
 		{	this.playerProfiles.addAll(playerProfiles);
 			for(Profile profile: playerProfiles)
-				playerConnections.put(profile.getId(),null);
+			{	playerConnections.put(profile.getId(),null);
+				profile.setReady(!profile.isRemote());
+			}
 		}
 		profileLock.unlock();
 	}
@@ -240,7 +242,6 @@ public class ServerGeneralConnection implements Runnable
 				gameInfoLock.unlock();
 			
 				// update players list
-				profile.setReady(true);
 				playerProfiles.add(profile);
 				playerConnections.put(profile.getId(),connection);
 				
