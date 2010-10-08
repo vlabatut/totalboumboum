@@ -718,6 +718,8 @@ System.out.println(serverSocket.getLocalSocketAddress());
 			else if(info==MessageName.UPDATING_PLAYERS_LIST)
 				send = connection.getState()==ClientState.SELECTING_PLAYERS
 						|| connection.getState()==ClientState.WAITING_TOURNAMENT;
+			else if(info==MessageName.STARTING_TOURNAMENT)
+				send = connection.getState()==ClientState.WAITING_TOURNAMENT;
 			
 			if(send)	
 				connection.writeMessage(message);

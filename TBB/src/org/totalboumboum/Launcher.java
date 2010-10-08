@@ -1630,7 +1630,7 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - pb quand on éteind le server lors de la sélection des joueurs coté client : il ne revient pas au choix de partie 
+	 *  - le client ne démarre pas le tournoi (reçoit-il le signal ?) 
 	 * 
 	 * - sélection des joueurs
 	 * 		x rajouter une colonne dans la table de sélection des joueurs
