@@ -190,6 +190,6 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 		}
 		miscPanel.setGameArchive(selectedArchive);
 		playersPanel.setGameArchive(selectedArchive);
-		fireDataPanelSelectionChange();
+		fireDataPanelSelectionChange(null);
 	}
 }

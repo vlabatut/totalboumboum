@@ -178,7 +178,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 	// DATA PANEL LISTENER			/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void dataPanelSelectionChanged()
+	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
 	}
 }

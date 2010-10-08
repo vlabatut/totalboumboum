@@ -310,7 +310,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 			selectedPanel.setFileNames(fileNames);
 			String fileName = Integer.toString(index+1);
 			selectedPanel.setSelectedFileName(fileName);
-			fireDataPanelSelectionChange();
+			fireDataPanelSelectionChange(null);
 		}
 	}
 
@@ -329,7 +329,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 			{	String fileName = Integer.toString(index+1);
 				selectedPanel.setSelectedFileName(fileName);
 			}
-			fireDataPanelSelectionChange();
+			fireDataPanelSelectionChange(null);
 		}
 	}
 	

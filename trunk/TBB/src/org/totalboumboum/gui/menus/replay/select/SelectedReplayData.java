@@ -190,6 +190,6 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 		}
 		miscPanel.setReplay(selectedReplay);
 		playersPanel.setReplay(selectedReplay);
-		fireDataPanelSelectionChange();
+		fireDataPanelSelectionChange(null);
 	}
 }

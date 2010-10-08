@@ -153,7 +153,7 @@ public class SelectHeroMenu extends InnerMenuPanel implements DataPanelListener
 	// DATA PANEL LISTENER			/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void dataPanelSelectionChanged()
+	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
 	}
 }

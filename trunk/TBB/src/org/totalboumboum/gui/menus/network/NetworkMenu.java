@@ -23,13 +23,21 @@ package org.totalboumboum.gui.menus.network;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
+import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSaver;
+import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
+import org.totalboumboum.configuration.profiles.ProfilesSelection;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -40,8 +48,10 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.client.ClientIndividualConnection;
+import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
+import org.xml.sax.SAXException;
 
 /**
  * 
@@ -151,17 +161,6 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		setButtonsGames();
 	}
 
-	private void setTournamentPlayers()
-	{	
-//NOTE NET		List<Profile> selectedProfiles = playersData.getSelectedProfiles();
-//NOTE NET		AbstractTournament tournament = tournamentConfiguration.getTournament();
-//NOTE NET		tournament.setProfiles(selectedProfiles);
-	}
-	
-	private void setTournamentSettings()
-	{				
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// PANELS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -195,50 +194,6 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_VALIDATE))
 		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 			connection.confirmPlayersSelection(buttonPlayersValidate.isSelected());
-			
-			
-			
-			
-			
-			// synch game options
-//			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(playersData.getSelectedProfiles());
-//TODO			tournamentConfiguration.setProfilesSelection(profilesSelection);
-			
-			
-			
-			
-			// set the tournament
-//			setTournamentPlayers();
-//			setTournamentSettings();
-			
-			
-			
-			
-			// save tournament options
-/*			try
-			{	TournamentConfigurationSaver.saveTournamentConfiguration(tournamentConfiguration);
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-*/			
-			// synch game options
-//TODO			Configuration.getGameConfiguration().setTournamentConfiguration(tournamentConfiguration);
-			
-			// tournament panel
-//TODO			AbstractTournament tournament = tournamentConfiguration.getTournament();
-			
-			
-			
-			
-//			tournamentPanel.setTournament(tournament);
-//			replaceWith(tournamentPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_GAMES_BUTTON_NEXT))
 		{	// set payers panel
@@ -264,17 +219,50 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	// DATA PANEL LISTENER	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void dataPanelSelectionChanged()
+	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
 		
 		if(getDataPart()==playersData)
 		{	// active connection lost
 			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-			if(connection.getActiveConnection()==null)
+			ClientIndividualConnection activeConnection = connection.getActiveConnection();
+			if(activeConnection==null)
 			{	connection.exitPlayersSelection();
 
 				setButtonsGames();
 				container.setDataPart(gamesData);
+			}
+			// tournament has just started
+			else if(activeConnection.getState().equals(ClientState.WAITING_TOURNAMENT))
+			{	tournament = activeConnection.getTournament();
+				
+				// synch game options
+				List<Profile> profiles = tournament.getProfiles();
+				ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(profiles);
+				TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
+				tournamentConfiguration.setProfilesSelection(profilesSelection);
+				tournamentConfiguration.setTournament(tournament);
+				
+				// save tournament options
+				try
+				{	TournamentConfigurationSaver.saveTournamentConfiguration(tournamentConfiguration);
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+			
+				// synch game options
+				Configuration.getGameConfiguration().setTournamentConfiguration(tournamentConfiguration);
+				
+				// tournament panel
+				tournamentPanel.setTournament(tournament);
+				replaceWith(tournamentPanel);
 			}
 		}
 	}
