@@ -713,9 +713,11 @@ System.out.println(serverSocket.getLocalSocketAddress());
 			
 			if(info==MessageName.UPDATING_GAME_INFO)
 				send = connection.getState()==ClientState.SELECTING_GAME
-						|| connection.getState()==ClientState.SELECTING_PLAYERS;
+						|| connection.getState()==ClientState.SELECTING_PLAYERS
+						|| connection.getState()==ClientState.WAITING_TOURNAMENT;
 			else if(info==MessageName.UPDATING_PLAYERS_LIST)
-				send = connection.getState()==ClientState.SELECTING_PLAYERS;
+				send = connection.getState()==ClientState.SELECTING_PLAYERS
+						|| connection.getState()==ClientState.WAITING_TOURNAMENT;
 			
 			if(send)	
 				connection.writeMessage(message);

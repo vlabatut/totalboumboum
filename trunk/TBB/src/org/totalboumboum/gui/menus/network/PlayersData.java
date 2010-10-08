@@ -175,6 +175,6 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void connectionTournamentStarted(AbstractTournament tournament)
-	{	fireDataPanelSelectionChange(null);
+	{	fireDataPanelSelectionChange(tournament);
 	}
 }

@@ -1630,7 +1630,7 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 * 	- tester si ça marche (màj) lors d'interaction c/s
+	 *  - pb quand on éteind le server lors de la sélection des joueurs coté client : il ne revient pas au choix de partie 
 	 * 
 	 * - sélection des joueurs
 	 * 		x rajouter une colonne dans la table de sélection des joueurs

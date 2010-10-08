@@ -146,6 +146,8 @@ public class TournamenuMenu extends InnerMenuPanel implements DataPanelListener
 		{	ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
 			if(connection==null || connection.areAllPlayersReady())
 				buttonPlayersNext.setEnabled(true);
+			else
+				buttonPlayersNext.setEnabled(false);
 		}
 	}
 	

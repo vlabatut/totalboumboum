@@ -226,14 +226,14 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		{	// active connection lost
 			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 			ClientIndividualConnection activeConnection = connection.getActiveConnection();
-			if(activeConnection==null)
+			if(object==null)
 			{	connection.exitPlayersSelection();
 
 				setButtonsGames();
 				container.setDataPart(gamesData);
 			}
 			// tournament has just started
-			else if(activeConnection.getState().equals(ClientState.WAITING_TOURNAMENT))
+			else if(object instanceof AbstractTournament)
 			{	tournament = activeConnection.getTournament();
 				
 				// synch game options
