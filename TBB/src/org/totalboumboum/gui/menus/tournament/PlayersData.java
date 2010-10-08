@@ -199,6 +199,8 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		List<Profile> profiles = connection.getPlayerProfiles();
 		GameInfo gameInfo = connection.getGameInfo();
 		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
+		// menu might have to update button
+		fireDataPanelSelectionChange(profile);
 	}
 
 	@Override
@@ -207,6 +209,8 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		List<Profile> profiles = connection.getPlayerProfiles();
 		GameInfo gameInfo = connection.getGameInfo();
 		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
+		// menu might have to update button
+		fireDataPanelSelectionChange(profile);
 	}
 
 	@Override
@@ -215,6 +219,8 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		List<Profile> profiles = connection.getPlayerProfiles();
 		GameInfo gameInfo = connection.getGameInfo();
 		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
+		// menu might have to update button
+		fireDataPanelSelectionChange(profile);
 	}
 
 	@Override
@@ -223,5 +229,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		List<Profile> profiles = connection.getPlayerProfiles();
 		GameInfo gameInfo = connection.getGameInfo();
 		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
+		// menu might have to update button
+		fireDataPanelSelectionChange(profile);
 	}
 }

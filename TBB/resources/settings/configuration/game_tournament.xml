@@ -6,7 +6,6 @@
 		<player file="c6bea657-b93e-4e7c-8aa8-11eddca19f41" color="WHITE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="128fbe6a-0de2-4cb9-9625-bb461c4962e6" color="PURPLE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="062b8f25-1ca4-4c6f-9944-ce9753b09777" color="CYAN" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="0ec23e1a-67b3-46a7-89ff-90aa4d6c581d" color="YELLOW" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="0d3dfd83-6632-423f-b63e-d7e5743ad998" color="GREY" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
