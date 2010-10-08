@@ -160,7 +160,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 	// DATA PANEL LISTENER	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void dataPanelSelectionChanged()
+	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
 	}
 

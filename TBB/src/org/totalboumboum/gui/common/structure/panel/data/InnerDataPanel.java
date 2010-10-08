@@ -72,8 +72,8 @@ public abstract class InnerDataPanel extends ContentPanel
 	{	listeners.remove(listener);		
 	}
 	
-	protected void fireDataPanelSelectionChange()
+	protected void fireDataPanelSelectionChange(Object object)
 	{	for(DataPanelListener listener: listeners)
-			listener.dataPanelSelectionChanged();
+			listener.dataPanelSelectionChanged(object);
 	}
 }

@@ -129,7 +129,7 @@ public class SelectTournamentMenu extends InnerMenuPanel implements DataPanelLis
 	// DATA PANEL LISTENER	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void dataPanelSelectionChanged()
+	public void dataPanelSelectionChanged(Object object)
 	{	refreshButtons();
 	}
 }

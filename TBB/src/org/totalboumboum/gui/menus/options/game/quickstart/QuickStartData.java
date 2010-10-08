@@ -211,7 +211,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 				bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
 			roundPanel.setLabelBackground(0,1,bg);
 		}
-		fireDataPanelSelectionChange();
+		fireDataPanelSelectionChange(null);
 	}
 
 	private TableSubPanel makeRoundPanel(int width, int height)

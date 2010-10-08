@@ -135,7 +135,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void playerSelectionPlayerRemoved(int index)
-	{	fireDataPanelSelectionChange();
+	{	fireDataPanelSelectionChange(index);
 	}
 
 	@Override

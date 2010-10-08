@@ -111,7 +111,7 @@ public class SettingsData extends EntitledDataPanel implements MatchQuickConfigS
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void matchQuickConfigModified()
-	{	fireDataPanelSelectionChange();
+	{	fireDataPanelSelectionChange(null);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -119,6 +119,6 @@ public class SettingsData extends EntitledDataPanel implements MatchQuickConfigS
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void roundQuickConfigModified()
-	{	fireDataPanelSelectionChange();
+	{	fireDataPanelSelectionChange(null);
 	}
 }

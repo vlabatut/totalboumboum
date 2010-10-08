@@ -1630,7 +1630,6 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 * 	- initialiser les joueurs coté serveur avec une ready=true
 	 * 	- tester si ça marche (màj) lors d'interaction c/s
 	 * 
 	 * - sélection des joueurs
@@ -1652,5 +1651,8 @@ public class Launcher
 	 *  	>> pas tout changement en fait, par exemple l'exit est décidé unilatéralement
 	 *  - 
 	 *  - NOTE NET
+	 *  
+	 *  - pas mal d'actions devraient être réalisées dans un thread swing afin de couper
+	 *    l'arbre d'appel, et de permettre ainsi de libérer des ressources progressivement
 	 */
 }
