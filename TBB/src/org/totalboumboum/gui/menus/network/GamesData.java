@@ -299,7 +299,7 @@ catch (UnknownHostException e)
 			connection.refreshConnection(gameInfo);
 		}
 		hostPanel.setHostInfo(hostInfo);
-		fireDataPanelSelectionChange(null);
+		fireDataPanelSelectionChange(gameInfo);
 	}
 
 	@Override
@@ -311,7 +311,7 @@ catch (UnknownHostException e)
 			hostPanel.setHostInfo(hostInfo);
 			//validate();
 			//repaint();
-			fireDataPanelSelectionChange(null);
+			fireDataPanelSelectionChange(gameInfo);
 		}
 	}
 

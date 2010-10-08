@@ -163,7 +163,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index)
-	{	fireDataPanelSelectionChange(null);
+	{	fireDataPanelSelectionChange(connection);
 	}
 
 	@Override
