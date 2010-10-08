@@ -48,7 +48,6 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.client.ClientIndividualConnection;
-import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
 import org.xml.sax.SAXException;
@@ -226,7 +225,7 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 		{	// active connection lost
 			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 			ClientIndividualConnection activeConnection = connection.getActiveConnection();
-			if(object==null)
+			if(object instanceof ClientIndividualConnection)
 			{	connection.exitPlayersSelection();
 
 				setButtonsGames();
