@@ -64,6 +64,13 @@ public class ClientGeneralConnection
 	private ClientIndividualConnection activeConnection;
 	private Lock connectionsLock = new ReentrantLock();
 	
+	public void terminateConnection()
+	{	connectionsLock.lock();
+		for(ClientIndividualConnection connection: individualConnections)
+			connection.finish();
+		connectionsLock.unlock();
+	}
+	
 	public ClientIndividualConnection getActiveConnection()
 	{	return activeConnection;
 	}

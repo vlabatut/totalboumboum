@@ -291,8 +291,9 @@ buttonStatistics.setEnabled(false);
 		// record game
 		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
 		ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
-		boolean saveState = serverConnection==null && clientConnection==null;
-		buttonSave.setEnabled(saveState);
+		boolean connectionState = serverConnection==null && clientConnection==null;
+		buttonSave.setEnabled(connectionState);
+		buttonMenu.setEnabled(connectionState);
 		
 		// record replay
 		boolean recordGames = Configuration.getEngineConfiguration().isRecordRounds();
@@ -348,7 +349,13 @@ buttonStatistics.setEnabled(false);
 		
 		// process the event
 		if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT))
-		{	tournament.cancel();
+		{	// end tournament
+			tournament.cancel();
+			
+			// end possible connection
+			Configuration.getConnectionsConfiguration().terminateConnection();
+			
+			// set main menu frame
 			getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE))

@@ -1629,18 +1629,20 @@ public class Launcher
 	 */
 	
 	/**
-	 * en cours:
+	 * à tester :
 	 *  - on ne doit pas pouvoir sauver une partie réseau
+	 *  - empêcher de sortir du tournoi sans le quitter (c et s)
+	 *  - virer les connection quand on quitte un tournoi en cours
+	 *  
+	 * à faire :
+	 *  - quand le client quitte le tournoi, virer tout ses joueurs (avt/après début ?)
+	 *  - quand le serveur quitte le tournoi, virer tous les clients (avt/après début ?)
 	 *  - reproduire ce qui a été fait pour tournoi serveur au niveau de la partie rapide
 	 *  - tout changement d'état du client devrait être :
 	 *  	- une requête envoyée au serveur
 	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client
 	 *  	>> cf le passage de game selection à players selection
 	 *  	>> pas tout changement en fait, par exemple l'exit est décidé unilatéralement
-	 *  - fin du tournoi : 
-	 *  	- empêcher de sortir du tournoi sans le quitter (c et s)
-	 *  	- quand le client quitte, virer tout ses joueurs
-	 *  	- quand le serveur quitte, virer tous les clients 
 	 *  - NOTE NET
 	 *  
 	 *  - pas mal d'actions devraient être réalisées dans un thread swing afin de couper
