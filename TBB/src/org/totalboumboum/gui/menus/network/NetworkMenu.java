@@ -38,6 +38,7 @@ import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSa
 import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
 import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -237,6 +238,23 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 				
 				// synch game options
 				List<Profile> profiles = tournament.getProfiles();
+				for(Profile profile: profiles)
+				{	try
+					{	ProfileLoader.reloadPortraits(profile);
+					}
+					catch(ParserConfigurationException e)
+					{	e.printStackTrace();
+					}
+					catch(SAXException e)
+					{	e.printStackTrace();
+					}
+					catch(IOException e)
+					{	e.printStackTrace();
+					}
+					catch(ClassNotFoundException e)
+					{	e.printStackTrace();
+					}
+				}
 				ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(profiles);
 				TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
 				tournamentConfiguration.setProfilesSelection(profilesSelection);
