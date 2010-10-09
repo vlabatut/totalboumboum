@@ -704,6 +704,13 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	private final List<ServerIndividualConnection> individualConnections = new ArrayList<ServerIndividualConnection>();
 	private Lock connectionsLock = new ReentrantLock();
 	
+	public void terminateConnection()
+	{	connectionsLock.lock();
+		for(ServerIndividualConnection connection: individualConnections)
+			connection.finish();
+		connectionsLock.unlock();
+	}
+	
 	public void propagateMessage(NetworkMessage message)
 	{	MessageName info = message.getInfo();
 		connectionsLock.lock();
