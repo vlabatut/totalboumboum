@@ -52,7 +52,7 @@ public class ProfilesSelection
 			while(i<ids.size() && result)
 			{	result = colors.get(i)==profilesSelection.getColor(i);
 				result = result && controls.get(i).equals(profilesSelection.getControlsIndex(i));
-				result = result && ids.get(i).equals(profilesSelection.getIds(i));
+				result = result && ids.get(i).equals(profilesSelection.getId(i));
 				result = result && heroes.get(i)[0].equals(profilesSelection.getHero(i)[0]);
 				result = result && heroes.get(i)[1].equals(profilesSelection.getHero(i)[1]);
 				i++;
@@ -115,7 +115,7 @@ public class ProfilesSelection
 	/////////////////////////////////////////////////////////////////
 	private final List<String> ids = new ArrayList<String>();
 	
-	public String getIds(int index)
+	public String getId(int index)
 	{	return ids.get(index);	
 	}	
 

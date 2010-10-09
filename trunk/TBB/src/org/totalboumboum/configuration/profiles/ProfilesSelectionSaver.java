@@ -43,7 +43,7 @@ public class ProfilesSelectionSaver
 	{	Element result = new Element(XmlNames.PLAYER);
 		
 		// file name
-		String id = profilesSelection.getIds(index);
+		String id = profilesSelection.getId(index);
 		//String idStr = Integer.toString(id);
 		result.setAttribute(XmlNames.FILE,id);
 		

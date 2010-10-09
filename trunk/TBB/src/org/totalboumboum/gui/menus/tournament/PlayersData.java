@@ -23,6 +23,7 @@ package org.totalboumboum.gui.menus.tournament;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -120,6 +121,15 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		catch (ClassNotFoundException e1)
 		{	e1.printStackTrace();
 		}
+		
+		// remove distant profiles
+		Iterator<Profile> it = selectedProfiles.iterator();
+		while(it.hasNext())
+		{	Profile profile = it.next();
+			if(profile.isRemote())
+				it.remove();
+		}
+		
 		playersPanel.setPlayers(selectedProfiles,allowedPlayers);
 	}
 	

@@ -1630,7 +1630,8 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - les joueurs distants ne devraient pas être enregistrés dans les config de tournoi
+	 *  - on ne doit pas pouvoir sauver une partie réseau
+	 *  - reproduire ce qui a été fait pour tournoi serveur au niveau de la partie rapide
 	 *  - tout changement d'état du client devrait être :
 	 *  	- une requête envoyée au serveur
 	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client

@@ -54,7 +54,7 @@ public class ProfileLoader
 		int size = profilesSelection.getProfileCount();
 		for(int i=0;i<size;i++)
 		{	// profile
-			String id = profilesSelection.getIds(i);
+			String id = profilesSelection.getId(i);
 			Profile profile = loadProfile(id);
 			SpriteInfo selectedSprite = profile.getSelectedSprite();
 			// sprite
