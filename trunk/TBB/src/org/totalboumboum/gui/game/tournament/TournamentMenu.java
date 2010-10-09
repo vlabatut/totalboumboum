@@ -64,6 +64,8 @@ import org.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -238,7 +240,6 @@ buttonStatistics.setEnabled(false);
 	/////////////////////////////////////////////////////////////////
 	@SuppressWarnings("unused")
 	private JButton buttonQuit;
-	@SuppressWarnings("unused")
 	private JButton buttonSave;
 	private JToggleButton buttonRecord;
 	private JButton buttonMenu;
@@ -287,7 +288,13 @@ buttonStatistics.setEnabled(false);
 		{	buttonMatch.setEnabled(false);
 		}
 	
-		// record games
+		// record game
+		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+		ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+		boolean saveState = serverConnection==null && clientConnection==null;
+		buttonSave.setEnabled(saveState);
+		
+		// record replay
 		boolean recordGames = Configuration.getEngineConfiguration().isRecordRounds();
 		buttonRecord.setSelected(recordGames);
 	}
