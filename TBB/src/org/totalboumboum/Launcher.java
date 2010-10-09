@@ -1630,26 +1630,16 @@ public class Launcher
 	
 	/**
 	 * en cours:
-	 *  - le client ne démarre pas le tournoi (reçoit-il le signal ?) 
-	 * 
-	 * - sélection des joueurs
-	 * 		x rajouter une colonne dans la table de sélection des joueurs
-	 * 		  qui correspondrait à l'état du joueur distant : validé ou pas
-	 * 		x il suffirait de n'afficher cette colonne que si le jeu est réseau
-	 * 		x quand le client a fini de gérer ses joueurs, il valide avec le bouton du menu
-	 * 		x coté serveur, tous les joueurs concernés sont validés
-	 * 		x en fait le client peut continuer à modifier ses joueurs, mais c'est à ses risques
-	 * 		- quand le serveur estime qu'il a assez de joueurs, il commence le match
-	 * 		- alors tous les clients reçoivent un evt de début de tournoi, et zou !
-	 * 		x du cp le bouton coté client de 'commencer le tournoi' serait plutot une espèce de "v" de type toggle
-	 * 
-	 * 
+	 *  - les joueurs distants ne devraient pas être enregistrés dans les config de tournoi
 	 *  - tout changement d'état du client devrait être :
 	 *  	- une requête envoyée au serveur
 	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client
 	 *  	>> cf le passage de game selection à players selection
 	 *  	>> pas tout changement en fait, par exemple l'exit est décidé unilatéralement
-	 *  - 
+	 *  - fin du tournoi : 
+	 *  	- empêcher de sortir du tournoi sans le quitter (c et s)
+	 *  	- quand le client quitte, virer tout ses joueurs
+	 *  	- quand le serveur quitte, virer tous les clients 
 	 *  - NOTE NET
 	 *  
 	 *  - pas mal d'actions devraient être réalisées dans un thread swing afin de couper
