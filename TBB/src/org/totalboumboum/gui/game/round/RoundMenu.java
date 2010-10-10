@@ -42,6 +42,7 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundRenderPanel;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -279,6 +280,16 @@ buttonStatistics.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH))
 		{	parent.refresh();
+
+			// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+			{	if(round.getMatch().getTournament() instanceof SingleTournament)
+					connection.getActiveConnection().setState(ClientState.BROWSING_TOURNAMENT);
+				else
+					connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
+			}
+			
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_FINISH))
@@ -288,6 +299,16 @@ buttonStatistics.setEnabled(false);
 				((MatchSplitPanel)parent).autoAdvance();
 			else
 				((TournamentSplitPanel)parent).autoAdvance();
+
+			// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+			{	if(round.getMatch().getTournament() instanceof SingleTournament)
+					connection.getActiveConnection().setState(ClientState.BROWSING_TOURNAMENT);
+				else
+					connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
+			}
+			
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION))

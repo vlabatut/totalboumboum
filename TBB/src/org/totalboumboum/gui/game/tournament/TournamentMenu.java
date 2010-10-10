@@ -404,6 +404,12 @@ buttonStatistics.setEnabled(false);
 			}
 			else
 				((MatchSplitPanel)matchPanel).refreshButtons();
+
+			// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
+			
 			replaceWith(matchPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_CURRENT_ROUND))
@@ -416,6 +422,12 @@ buttonStatistics.setEnabled(false);
 			}
 			else
 				((RoundSplitPanel)matchPanel).refreshButtons();
+
+			// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_ROUND);
+			
 			replaceWith(matchPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH))
@@ -425,6 +437,12 @@ buttonStatistics.setEnabled(false);
 			Match match = tournament.getCurrentMatch();		
 			mPanel.setMatch(match);
 			mPanel.autoAdvance();
+
+			// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
+			
 			replaceWith(matchPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
@@ -461,6 +479,12 @@ buttonStatistics.setEnabled(false);
 			Round round = match.getCurrentRound();
 			rPanel.setRound(round);
 			rPanel.autoAdvance();
+
+			// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_ROUND);
+			
 			replaceWith(matchPanel);
 	    }
 	}
