@@ -347,8 +347,8 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		}
 		ioLock.unlock();
 		
-		gameInfo.getHostInfo().setState(HostState.UNKOWN);
 		generalConnection.connectionLost(this);
+		//gameInfo.getHostInfo().setState(HostState.UNKOWN);
 	}
 	
 	/////////////////////////////////////////////////////////////////

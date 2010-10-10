@@ -111,10 +111,6 @@ buttonStatistics.setEnabled(false);
 		container.setDataPart(roundDescription);
 		roundResults = new RoundResults(container);
 		roundStatistics = new RoundStatistics(container);
-		
-		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-		if(connection!=null)
-			connection.addListener(this);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -216,12 +212,19 @@ buttonStatistics.setEnabled(false);
 			round.setPanel(null);
 		this.round = round;
 		round.setPanel(this);
+		
 		// panels
 		roundDescription.setRound(round);
 		roundResults.setRound(round);
 		roundStatistics.setRound(round);	
+		
 		// buttons
 		refreshButtons();
+		
+		// connection
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		if(connection!=null)
+			connection.addListener(this);
 	}
 	
 	public Round getRound()

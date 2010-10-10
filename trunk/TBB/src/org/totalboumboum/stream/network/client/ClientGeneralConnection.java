@@ -444,12 +444,11 @@ public class ClientGeneralConnection
 	/////////////////////////////////////////////////////////////////
 	public void tournamentStarted(ClientIndividualConnection connection, AbstractTournament tournament)
 	{	if(connection==activeConnection)
-		{	if(connection.getState()==ClientState.WAITING_TOURNAMENT)
+		{	fireConnectionTournamentStarted(tournament);
+			if(connection.getState()==ClientState.WAITING_TOURNAMENT)
 				connection.setState(ClientState.BROWSING_TOURNAMENT);
 			else
 				connection.setState(ClientState.SELECTING_GAME);
-			fireConnectionTournamentStarted(tournament);
-		
 		}
 	}
 
@@ -467,43 +466,80 @@ public class ClientGeneralConnection
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private List<ClientGeneralConnectionListener> listeners = new ArrayList<ClientGeneralConnectionListener>();
+	private Lock listenersLock = new ReentrantLock();
 	
 	public void addListener(ClientGeneralConnectionListener listener)
-	{	if(!listeners.contains(listener))
-			listeners.add(listener);
+	{	listenersLock.lock();
+		{	if(!listeners.contains(listener))
+				listeners.add(listener);
+		}
+		listenersLock.unlock();
 	}
 	
 	public void removeListener(ClientGeneralConnectionListener listener)
-	{	listeners.remove(listener);
+	{	listenersLock.lock();
+		{	listeners.remove(listener);
+		}
+		listenersLock.unlock();
 	}
 	
 	private void fireConnectionAdded(ClientIndividualConnection connection, int index)
-	{	for(ClientGeneralConnectionListener listener: listeners)
+	{	List<ClientGeneralConnectionListener> list;
+		listenersLock.lock();
+		{	list = new ArrayList<ClientGeneralConnectionListener>(listeners);
+		}
+		listenersLock.unlock();
+		for(ClientGeneralConnectionListener listener: list)
 			listener.connectionAdded(connection,index);
 	}
 
 	private void fireConnectionRemoved(ClientIndividualConnection connection, int index)
-	{	for(ClientGeneralConnectionListener listener: listeners)
+	{	List<ClientGeneralConnectionListener> list;
+		listenersLock.lock();
+		{	list = new ArrayList<ClientGeneralConnectionListener>(listeners);
+		}
+		listenersLock.unlock();
+		for(ClientGeneralConnectionListener listener: list)
 			listener.connectionRemoved(connection,index);
 	}
 
 	private void fireConnectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId)
-	{	for(ClientGeneralConnectionListener listener: listeners)
+	{	List<ClientGeneralConnectionListener> list;
+		listenersLock.lock();
+		{	list = new ArrayList<ClientGeneralConnectionListener>(listeners);
+		}
+		listenersLock.unlock();
+		for(ClientGeneralConnectionListener listener: list)
 			listener.connectionGameInfoChanged(connection,index,oldId);
 	}
 
 	private void fireConnectionActiveConnectionLost(ClientIndividualConnection connection, int index)
-	{	for(ClientGeneralConnectionListener listener: listeners)
+	{	List<ClientGeneralConnectionListener> list;
+		listenersLock.lock();
+		{	list = new ArrayList<ClientGeneralConnectionListener>(listeners);
+		}
+		listenersLock.unlock();
+		for(ClientGeneralConnectionListener listener: list)
 			listener.connectionActiveConnectionLost(connection,index);
 	}
 
 	private void fireConnectionProfilesChanged(ClientIndividualConnection connection, int index)
-	{	for(ClientGeneralConnectionListener listener: listeners)
+	{	List<ClientGeneralConnectionListener> list;
+		listenersLock.lock();
+		{	list = new ArrayList<ClientGeneralConnectionListener>(listeners);
+		}
+		listenersLock.unlock();
+		for(ClientGeneralConnectionListener listener: list)
 			listener.connectionProfilesChanged(connection,index);
 	}
 
 	private void fireConnectionTournamentStarted(AbstractTournament tournament)
-	{	for(ClientGeneralConnectionListener listener: listeners)
+	{	List<ClientGeneralConnectionListener> list;
+		listenersLock.lock();
+		{	list = new ArrayList<ClientGeneralConnectionListener>(listeners);
+		}
+		listenersLock.unlock();
+		for(ClientGeneralConnectionListener listener: list)
 			listener.connectionTournamentStarted(tournament);
 	}
 }
