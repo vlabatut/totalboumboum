@@ -1,4 +1,3 @@
-
 package org.totalboumboum;
 
 /*
@@ -1634,9 +1633,10 @@ public class Launcher
 	
 	/**
 	 * à tester :
-	 *  
+	 *  - si le tournoi commence avant que le client n'ait choisi de joueurs/validé,
+	 *    alors celui ci revient à la sélection de la partie
+	 *    
 	 * à faire :
-	 *  - quand le serveur quitte le tournoi, virer tous les clients (avt/après début ?)
 	 *  - reproduire ce qui a été fait pour tournoi serveur au niveau de la partie rapide
 	 *  - tout changement d'état du client devrait être :
 	 *  	- une requête envoyée au serveur
@@ -1644,8 +1644,23 @@ public class Launcher
 	 *  	>> cf le passage de game selection à players selection
 	 *  	>> pas tout changement en fait, par exemple l'exit est décidé unilatéralement
 	 *  - NOTE NET
+	 *  - le serveur doit envoyer un gameinfo update à chaque changement d'état
+	 *  - tout evt transmis à la connection générale par l'indiv doit identifier l'indiv
+	 *    car pr client, il y a une différence, qui doit être traitée, entre recevoir un evt donné
+	 *    d'une connection active ou d'une autre connection.
+	 *    plus généralement, le traitement dépend de l'état du client pour le serveur correspondant
+	 *  - perte de connection pendant le match >> comportement client ? (ie hors menu)
 	 *  
 	 *  - pas mal d'actions devraient être réalisées dans un thread swing afin de couper
 	 *    l'arbre d'appel, et de permettre ainsi de libérer des ressources progressivement
+	 *  - l'intégralité du traitement devrait être effectué côté moteur
+	 *    la gui ne devrait fonctionner que par requête/réponses synchrones (pour le local)
+	 *    ou asynchrones (pour le réseau). 
+	 *    voire asynchrones pour les deux, avec un système d'évènements...
+	 *  - faire un système par délégation permettant d'associer un gestionnaire de listeners/evts
+	 *    à tout objet du moteur. chaque composant graphique doit simplement implémenter une interface,
+	 *    ce qui simplifie le beans. bien sur, chaque objet émetteur doit du cp s'identifier pr chaque evt (source)
+	 *    et les fonctions d'écoute seront un peu plus longue coté gui dans le cas de classes écoutant
+	 *    plusieurs éléments du moteur.
 	 */
 }

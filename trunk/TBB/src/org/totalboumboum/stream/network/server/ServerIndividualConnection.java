@@ -131,6 +131,36 @@ public class ServerIndividualConnection extends AbstractConnection
 	{	writer.addMessage(message);
 	}
 
+	public void propagateMessage(NetworkMessage message)
+	{	MessageName info = message.getInfo();
+	
+		boolean send = false;
+			
+		if(info==MessageName.UPDATING_GAME_INFO)
+		{	send = state==ClientState.SELECTING_GAME
+					|| state==ClientState.SELECTING_PLAYERS
+					|| state==ClientState.WAITING_TOURNAMENT;
+		}
+		else if(info==MessageName.UPDATING_PLAYERS_LIST)
+		{	send = state==ClientState.SELECTING_PLAYERS
+					|| state==ClientState.WAITING_TOURNAMENT;
+		}
+		else if(info==MessageName.STARTING_TOURNAMENT)
+		{	if(state==ClientState.SELECTING_PLAYERS)
+			{	state = ClientState.SELECTING_GAME;
+				send = true;
+			}
+			else if(state==ClientState.WAITING_TOURNAMENT)
+			{	state = ClientState.BROWING_TOURNAMENT;
+				send = true;
+			}
+			else
+				send = false;
+		}
+		if(send)	
+			writeMessage(message);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION MESSAGES	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

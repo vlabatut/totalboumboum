@@ -694,8 +694,18 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	// GAME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void startTournament(AbstractTournament tournament)
-	{	NetworkMessage message = new NetworkMessage(MessageName.STARTING_TOURNAMENT,tournament);
-		propagateMessage(message);
+	{	// announce the tournament is starting to concerned clients
+		{	NetworkMessage message = new NetworkMessage(MessageName.STARTING_TOURNAMENT,tournament);
+			propagateMessage(message);
+		}
+		
+		// announce the change in GameInfo to all clients
+		gameInfoLock.lock();
+		{	gameInfo.getHostInfo().setState(HostState.PLAYING);
+			NetworkMessage message = new NetworkMessage(MessageName.UPDATING_GAME_INFO,gameInfo);
+			propagateMessage(message);
+		}		
+		gameInfoLock.unlock();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -712,26 +722,10 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	}
 	
 	public void propagateMessage(NetworkMessage message)
-	{	MessageName info = message.getInfo();
-		connectionsLock.lock();
-	
-		for(ServerIndividualConnection connection: individualConnections)
-		{	boolean send = false;
-			
-			if(info==MessageName.UPDATING_GAME_INFO)
-				send = connection.getState()==ClientState.SELECTING_GAME
-						|| connection.getState()==ClientState.SELECTING_PLAYERS
-						|| connection.getState()==ClientState.WAITING_TOURNAMENT;
-			else if(info==MessageName.UPDATING_PLAYERS_LIST)
-				send = connection.getState()==ClientState.SELECTING_PLAYERS
-						|| connection.getState()==ClientState.WAITING_TOURNAMENT;
-			else if(info==MessageName.STARTING_TOURNAMENT)
-				send = connection.getState()==ClientState.WAITING_TOURNAMENT;
-			
-			if(send)	
-				connection.writeMessage(message);
+	{	connectionsLock.lock();
+		{	for(ServerIndividualConnection connection: individualConnections)
+				connection.propagateMessage(message);
 		}
-		
 		connectionsLock.unlock();
 	}
 	
