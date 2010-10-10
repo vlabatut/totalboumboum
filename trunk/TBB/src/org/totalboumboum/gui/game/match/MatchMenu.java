@@ -332,12 +332,24 @@ buttonStatistics.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT))				
 		{	parent.refresh();
+
+			// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_TOURNAMENT);
+			
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_FINISH))
 		{	match.finish();
 			parent.refresh();
 			((TournamentSplitPanel)parent).autoAdvance();
+
+			// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_TOURNAMENT);
+			
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_DESCRIPTION))
@@ -357,6 +369,12 @@ buttonStatistics.setEnabled(false);
 			}
 			else
 				((RoundSplitPanel)roundPanel).refreshButtons();
+
+			// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_ROUND);
+			
 			replaceWith(roundPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
@@ -391,6 +409,12 @@ buttonStatistics.setEnabled(false);
 			Round round = match.getCurrentRound();		
 			roundPanel.setRound(round);
 			roundPanel.autoAdvance();
+
+			// possibly updating client state
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_ROUND);
+			
 			replaceWith(roundPanel);
 	    }
 	} 
