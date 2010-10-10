@@ -773,33 +773,60 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private List<ServerGeneralConnectionListener> listeners = new ArrayList<ServerGeneralConnectionListener>();
+	private Lock listenersLock = new ReentrantLock();
 	
 	public void addListener(ServerGeneralConnectionListener listener)
-	{	if(!listeners.contains(listener))
-			listeners.add(listener);
+	{	listenersLock.lock();
+		{	if(!listeners.contains(listener))
+				listeners.add(listener);
+		}
+		listenersLock.unlock();
 	}
 	
 	public void removeListener(ServerGeneralConnectionListener listener)
-	{	listeners.remove(listener);
+	{	listenersLock.lock();
+		{	listeners.remove(listener);
+		}
+		listenersLock.unlock();
 	}
 	
 	private void fireProfileRemoved(Profile profile)
-	{	for(ServerGeneralConnectionListener listener: listeners)
+	{	List<ServerGeneralConnectionListener> list;
+		listenersLock.lock();
+		{	list = new ArrayList<ServerGeneralConnectionListener>(listeners);
+		}
+		listenersLock.unlock();
+		for(ServerGeneralConnectionListener listener: list)
 			listener.profileRemoved(profile);
 	}
 
 	private void fireProfileAdded(int index, Profile profile)
-	{	for(ServerGeneralConnectionListener listener: listeners)
+	{	List<ServerGeneralConnectionListener> list;
+		listenersLock.lock();
+		{	list = new ArrayList<ServerGeneralConnectionListener>(listeners);
+		}
+		listenersLock.unlock();
+		for(ServerGeneralConnectionListener listener: list)
 			listener.profileAdded(index,profile);
 	}
 
 	private void fireProfileModified(Profile profile)
-	{	for(ServerGeneralConnectionListener listener: listeners)
+	{	List<ServerGeneralConnectionListener> list;
+		listenersLock.lock();
+		{	list = new ArrayList<ServerGeneralConnectionListener>(listeners);
+		}
+		listenersLock.unlock();
+		for(ServerGeneralConnectionListener listener: list)
 			listener.profileModified(profile);
 	}
 
 	private void fireProfileSet(int index, Profile profile)
-	{	for(ServerGeneralConnectionListener listener: listeners)
+	{	List<ServerGeneralConnectionListener> list;
+		listenersLock.lock();
+		{	list = new ArrayList<ServerGeneralConnectionListener>(listeners);
+		}
+		listenersLock.unlock();
+		for(ServerGeneralConnectionListener listener: list)
 			listener.profileSet(index,profile);
 	}
 

@@ -112,10 +112,6 @@ buttonStatistics.setEnabled(false);
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		buttonMatch = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH,buttonWidth,buttonHeight,1,this);
-		
-		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-		if(connection!=null)
-			connection.addListener(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -199,6 +195,11 @@ buttonStatistics.setEnabled(false);
 		}
 		// buttons
 		refreshButtons();
+		
+		// connection
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		if(connection!=null)
+			connection.addListener(this);
 	}
 	
 	public AbstractTournament getTournament()

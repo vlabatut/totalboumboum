@@ -107,10 +107,6 @@ buttonStatistics.setEnabled(false);
 			matchResults = new MatchResults(container);
 			matchStatistics = new MatchStatistics(container);		
 		}
-		
-		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-		if(connection!=null)
-			connection.addListener(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -134,12 +130,19 @@ buttonStatistics.setEnabled(false);
 		}
 		this.match = match;
 		match.setPanel(this);
+		
 		// panels
 		matchDescription.setMatch(match);
 		matchResults.setMatch(match);
 		matchStatistics.setMatch(match);	
+		
 		// buttons
 		refreshButtons();
+		
+		// connection
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		if(connection!=null)
+			connection.addListener(this);
 	}
 	
 	public Match getMatch()
