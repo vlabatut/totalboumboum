@@ -151,7 +151,7 @@ public class ServerIndividualConnection extends AbstractConnection
 				send = true;
 			}
 			else if(state==ClientState.WAITING_TOURNAMENT)
-			{	state = ClientState.BROWING_TOURNAMENT;
+			{	state = ClientState.BROWSING_TOURNAMENT;
 				send = true;
 			}
 			else

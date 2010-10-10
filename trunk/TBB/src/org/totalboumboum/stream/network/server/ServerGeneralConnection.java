@@ -46,7 +46,6 @@ import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
