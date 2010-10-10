@@ -1635,6 +1635,7 @@ public class Launcher
 	 * à tester :
 	 *  - si le tournoi commence avant que le client n'ait choisi de joueurs/validé,
 	 *    alors celui ci revient à la sélection de la partie
+	 *  - perte de connection pendant le match >> comportement client ? (ie hors menu)
 	 *    
 	 * à faire :
 	 *  - reproduire ce qui a été fait pour tournoi serveur au niveau de la partie rapide
@@ -1649,7 +1650,6 @@ public class Launcher
 	 *    car pr client, il y a une différence, qui doit être traitée, entre recevoir un evt donné
 	 *    d'une connection active ou d'une autre connection.
 	 *    plus généralement, le traitement dépend de l'état du client pour le serveur correspondant
-	 *  - perte de connection pendant le match >> comportement client ? (ie hors menu)
 	 *  
 	 *  - pas mal d'actions devraient être réalisées dans un thread swing afin de couper
 	 *    l'arbre d'appel, et de permettre ainsi de libérer des ressources progressivement
