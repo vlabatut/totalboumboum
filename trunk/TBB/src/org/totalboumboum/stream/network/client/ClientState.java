@@ -35,13 +35,17 @@ public enum ClientState
 	/** client has chosen another game, currently selecting his players (might go back, though) */
 	INTERESTED_ELSEWHERE,
 	/** client has chosen his players, currently waiting for the tournament to begin */
-	WAITING_TOURNAMENT
+	WAITING_TOURNAMENT,
 	
 	// tournament level
+	BROWSING_TOURNAMENT,
 	
 	// match level
+	BROWSING_MATCH,
 	
 	// round level
+	BROWSING_ROUND,
+	WAITING_LOOP
 	
 	// in-game level
 }
