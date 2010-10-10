@@ -1633,11 +1633,9 @@ public class Launcher
 	
 	/**
 	 * à tester :
-	 *  - si le tournoi commence avant que le client n'ait choisi de joueurs/validé,
-	 *    alors celui ci revient à la sélection de la partie
-	 *  - perte de connection pendant le match >> comportement client ? (ie hors menu)
 	 *    
 	 * à faire :
+	 *  - normalement, l'hote qu'on vient de créé doit être automatiquement sélectionné. pb lié au changement d'id pe ?
 	 *  - reproduire ce qui a été fait pour tournoi serveur au niveau de la partie rapide
 	 *  - tout changement d'état du client devrait être :
 	 *  	- une requête envoyée au serveur
