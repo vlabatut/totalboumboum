@@ -49,6 +49,7 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.client.ClientIndividualConnection;
+import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
 import org.xml.sax.SAXException;
@@ -223,63 +224,75 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	{	refreshButtons();
 		
 		if(getDataPart()==playersData)
-		{	// active connection lost
-			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 			ClientIndividualConnection activeConnection = connection.getActiveConnection();
-			if(object instanceof ClientIndividualConnection)
+			// active connection lost >> exit player selection screen
+			if(object instanceof ClientIndividualConnection && 
+					(activeConnection.getState()==ClientState.SELECTING_PLAYERS || activeConnection.getState()==ClientState.WAITING_TOURNAMENT))
 			{	connection.exitPlayersSelection();
 
 				setButtonsGames();
 				container.setDataPart(gamesData);
 			}
-			// tournament has just started
-			else if(object instanceof AbstractTournament)
-			{	tournament = activeConnection.getTournament();
-				
-				// synch game options
-				List<Profile> profiles = tournament.getProfiles();
-				for(Profile profile: profiles)
-				{	try
-					{	ProfileLoader.reloadPortraits(profile);
-					}
-					catch(ParserConfigurationException e)
-					{	e.printStackTrace();
-					}
-					catch(SAXException e)
-					{	e.printStackTrace();
-					}
-					catch(IOException e)
-					{	e.printStackTrace();
-					}
-					catch(ClassNotFoundException e)
-					{	e.printStackTrace();
-					}
-				}
-				ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(profiles);
-				TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
-				tournamentConfiguration.setProfilesSelection(profilesSelection);
-				tournamentConfiguration.setTournament(tournament);
-				
-				// save tournament options
-				try
-				{	TournamentConfigurationSaver.saveTournamentConfiguration(tournamentConfiguration);
-				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
 			
-				// synch game options
-				Configuration.getGameConfiguration().setTournamentConfiguration(tournamentConfiguration);
+			// tournament has just started >> enter tournament screen or get back to game selection
+			else if(object instanceof AbstractTournament)
+			{	// enter the tournament
+				if(activeConnection.getState()==ClientState.WAITING_TOURNAMENT)
+				{	tournament = activeConnection.getTournament();
+					
+					// synch game options
+					List<Profile> profiles = tournament.getProfiles();
+					for(Profile profile: profiles)
+					{	try
+						{	ProfileLoader.reloadPortraits(profile);
+						}
+						catch(ParserConfigurationException e)
+						{	e.printStackTrace();
+						}
+						catch(SAXException e)
+						{	e.printStackTrace();
+						}
+						catch(IOException e)
+						{	e.printStackTrace();
+						}
+						catch(ClassNotFoundException e)
+						{	e.printStackTrace();
+						}
+					}
+					ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(profiles);
+					TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
+					tournamentConfiguration.setProfilesSelection(profilesSelection);
+					tournamentConfiguration.setTournament(tournament);
+					
+					// save tournament options
+					try
+					{	TournamentConfigurationSaver.saveTournamentConfiguration(tournamentConfiguration);
+					}
+					catch (ParserConfigurationException e1)
+					{	e1.printStackTrace();
+					}
+					catch (SAXException e1)
+					{	e1.printStackTrace();
+					}
+					catch (IOException e1)
+					{	e1.printStackTrace();
+					}
 				
-				// tournament panel
-				tournamentPanel.setTournament(tournament);
-				replaceWith(tournamentPanel);
+					// synch game options
+					Configuration.getGameConfiguration().setTournamentConfiguration(tournamentConfiguration);
+					
+					// tournament panel
+					tournamentPanel.setTournament(tournament);
+					replaceWith(tournamentPanel);
+				}
+				// leave the tournament
+				else
+				{	connection.exitPlayersSelection();
+	
+					setButtonsGames();
+					container.setDataPart(gamesData);
+				}
 			}
 		}
 	}

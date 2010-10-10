@@ -442,8 +442,15 @@ public class ClientGeneralConnection
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void tournamentStarted(AbstractTournament tournament)
-	{	fireConnectionTournamentStarted(tournament);
+	public void tournamentStarted(ClientIndividualConnection connection, AbstractTournament tournament)
+	{	if(connection==activeConnection)
+		{	if(connection.getState()==ClientState.WAITING_TOURNAMENT)
+				connection.setState(ClientState.BROWSING_TOURNAMENT);
+			else
+				connection.setState(ClientState.SELECTING_GAME);
+			fireConnectionTournamentStarted(tournament);
+		
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////

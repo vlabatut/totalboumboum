@@ -67,6 +67,7 @@ import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
 import org.totalboumboum.stream.network.client.ClientIndividualConnection;
+import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -111,6 +112,10 @@ buttonStatistics.setEnabled(false);
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		buttonMatch = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH,buttonWidth,buttonHeight,1,this);
+		
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		if(connection!=null)
+			connection.addListener(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -529,7 +534,8 @@ buttonStatistics.setEnabled(false);
 	@Override
 	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index)
 	{	// TODO maybe a reconnection can be worked out...
-		quitTournament();
+		if(connection.getState()==ClientState.BROWSING_TOURNAMENT)
+			quitTournament();
 	}
 
 	@Override

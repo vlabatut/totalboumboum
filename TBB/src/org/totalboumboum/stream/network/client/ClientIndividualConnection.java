@@ -310,7 +310,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 
 	private void tournamentStarted(AbstractTournament tournament)
 	{	this.tournament = tournament;
-		generalConnection.tournamentStarted(tournament);
+		generalConnection.tournamentStarted(this,tournament);
 	}
 
 	public AbstractTournament getTournament()
