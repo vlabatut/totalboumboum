@@ -248,7 +248,8 @@ public class ServerIndividualConnection extends AbstractConnection
 				if(state==ClientState.SELECTING_GAME)
 				{	generalConnection.removeConnection(this);
 				}
-				else if(state==ClientState.SELECTING_PLAYERS)
+				else if(state==ClientState.SELECTING_PLAYERS
+					|| state==ClientState.WAITING_TOURNAMENT)
 				{	generalConnection.playerSelectionExited(this);
 					generalConnection.removeConnection(this);
 				}

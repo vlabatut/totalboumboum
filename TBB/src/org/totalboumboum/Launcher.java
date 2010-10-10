@@ -1626,16 +1626,16 @@ public class Launcher
 	 * 	- server checks if the id's
 	 * 	- sends back an ANSWER_RECONNECTION message with a boolean showing acceptation or reject
 	 *  - if accepted, the server then sends the necessary updates to the client
+	 *  - ça serait bien d'avoir un icone spécial (variante de remote) pr indiquer dans les menus qu'un joueur est déconnecté
+	 *  - lié à la reconnection : possibilité de définir des open slots (pr server)
+	 *    et par la suite, des joueurs désirant prendre la partie en cours peuvent le faire
+	 *    (similaire à un joueur déconnecté qui aurait son slot réservé et pourrait s'y reconnecter)
 	 */
 	
 	/**
 	 * à tester :
-	 *  - on ne doit pas pouvoir sauver une partie réseau
-	 *  - empêcher de sortir du tournoi sans le quitter (c et s)
-	 *  - virer les connection quand on quitte un tournoi en cours
 	 *  
 	 * à faire :
-	 *  - quand le client quitte le tournoi, virer tout ses joueurs (avt/après début ?)
 	 *  - quand le serveur quitte le tournoi, virer tous les clients (avt/après début ?)
 	 *  - reproduire ce qui a été fait pour tournoi serveur au niveau de la partie rapide
 	 *  - tout changement d'état du client devrait être :

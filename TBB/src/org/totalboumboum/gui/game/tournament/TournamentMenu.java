@@ -65,6 +65,8 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
+import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -75,7 +77,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel
+public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel,ClientGeneralConnectionListener
 {	private static final long serialVersionUID = 1L;
 		
 	public TournamentMenu(SplitMenuPanel container, MenuPanel parent)
@@ -235,6 +237,17 @@ buttonStatistics.setEnabled(false);
 		}
 	}
 
+	private void quitTournament()
+	{	// end tournament
+		tournament.cancel();
+		
+		// end possible connection
+		Configuration.getConnectionsConfiguration().terminateConnection();
+		
+		// set main menu frame
+		getFrame().setMainMenuPanel();
+    }
+
 	/////////////////////////////////////////////////////////////////
 	// BUTTONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -349,14 +362,7 @@ buttonStatistics.setEnabled(false);
 		
 		// process the event
 		if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT))
-		{	// end tournament
-			tournament.cancel();
-			
-			// end possible connection
-			Configuration.getConnectionsConfiguration().terminateConnection();
-			
-			// set main menu frame
-			getFrame().setMainMenuPanel();
+		{	quitTournament();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE))
 		{	SaveSplitPanel savePanel = new SaveSplitPanel(container.getMenuContainer(),container);
@@ -500,5 +506,39 @@ buttonStatistics.setEnabled(false);
 				buttonResults.doClick();
 			}
 		});	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CLIENT GENERAL CONNECTION	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	@Override
+	public void connectionAdded(ClientIndividualConnection connection, int index)
+	{	// useless here
+	}
+
+	@Override
+	public void connectionRemoved(ClientIndividualConnection connection, int index)
+	{	
+	}
+
+	@Override
+	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId)
+	{	// useless here
+	}
+
+	@Override
+	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index)
+	{	// TODO maybe a reconnection can be worked out...
+		quitTournament();
+	}
+
+	@Override
+	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
+	{	// useless here
+	}
+
+	@Override
+	public void connectionTournamentStarted(AbstractTournament tournament)
+	{	// useless here
 	}
 }

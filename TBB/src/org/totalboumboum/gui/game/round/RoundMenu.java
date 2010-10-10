@@ -41,6 +41,7 @@ import org.totalboumboum.engine.loop.RegularLoop;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundRenderPanel;
+import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -55,6 +56,8 @@ import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
+import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.xml.sax.SAXException;
 
@@ -64,7 +67,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
+public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel,ClientGeneralConnectionListener
 {	private static final long serialVersionUID = 1L;
 	
 	public RoundMenu(SplitMenuPanel container, MenuPanel parent)
@@ -220,6 +223,20 @@ buttonStatistics.setEnabled(false);
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void quitTournament()
+	{	// end round
+		round.cancel();
+		
+		// end possible connection
+		Configuration.getConnectionsConfiguration().terminateConnection();
+		
+		// set main menu frame
+		getFrame().setMainMenuPanel();
+    }
+
+	/////////////////////////////////////////////////////////////////
 	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private LoopPanel loopPanel;
@@ -244,14 +261,7 @@ buttonStatistics.setEnabled(false);
 		
 		// process the event
 		if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_QUIT))
-		{	// end round
-			round.cancel();
-			
-			// end possible connection
-			Configuration.getConnectionsConfiguration().terminateConnection();
-			
-			// set main menu frame
-			getFrame().setMainMenuPanel();
+		{	quitTournament();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_SAVE))
 		{	SaveSplitPanel savePanel = new SaveSplitPanel(container.getMenuContainer(),container);
@@ -443,5 +453,39 @@ buttonStatistics.setEnabled(false);
 	{	int val = progressBar.getValue();
 		val++;
 		progressBar.setValue(val);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CLIENT GENERAL CONNECTION	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	@Override
+	public void connectionAdded(ClientIndividualConnection connection, int index)
+	{	// useless here
+	}
+
+	@Override
+	public void connectionRemoved(ClientIndividualConnection connection, int index)
+	{	
+	}
+
+	@Override
+	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId)
+	{	// useless here
+	}
+
+	@Override
+	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index)
+	{	// TODO maybe a reconnection can be worked out...
+		quitTournament();
+	}
+
+	@Override
+	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
+	{	// useless here
+	}
+
+	@Override
+	public void connectionTournamentStarted(AbstractTournament tournament)
+	{	// useless here
 	}
 }
