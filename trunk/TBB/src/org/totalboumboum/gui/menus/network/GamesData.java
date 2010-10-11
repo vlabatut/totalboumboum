@@ -447,7 +447,7 @@ catch (UnknownHostException e)
 				gamesMap.put(gameId,gameInfo);
 				String selectedId = listPanel.getSelectedGame().getHostInfo().getId();
 				listPanel.setGameInfos(gamesMap,GAME_LIST_LINES);
-				if(selectedId.equals(oldId))
+				if(selectedId==null || selectedId.equals(gameId))
 					listPanel.selectGame(gameId);
 			}
 			else
