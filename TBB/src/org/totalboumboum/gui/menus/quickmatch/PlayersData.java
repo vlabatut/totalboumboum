@@ -29,6 +29,7 @@ import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.game.profile.Profile;
@@ -40,6 +41,9 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.menus.quickmatch.hero.SelectHeroSplitPanel;
 import org.totalboumboum.gui.menus.quickmatch.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.stream.network.data.game.GameInfo;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnectionListener;
 import org.xml.sax.SAXException;
 
 /**
@@ -47,7 +51,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener
+public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, ServerGeneralConnectionListener
 {	
 	private static final long serialVersionUID = 1L;
 	
@@ -145,7 +149,10 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void playerSelectionPlayerRemoved(int index)
-	{	fireDataPanelSelectionChange(index);
+	{	ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(connection!=null)
+			connection.profileRemoved(index);
+		fireDataPanelSelectionChange(null);
 	}
 
 	@Override
@@ -156,16 +163,77 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void playerSelectionPlayersAdded()
-	{	// TODO Auto-generated method stub
+	{	// NOTE this would be so much cleaner with an events system...
+		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(connection!=null)
+			connection.profilesAdded(playersPanel.getPlayers());
 	}
 
 	@Override
 	public void playerSelectionColorSet(int index)
-	{	// TODO Auto-generated method stub
+	{	Profile profile = playersPanel.getPlayer(index);
+		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(connection!=null)
+			connection.profileModified(profile);
 	}
 
 	@Override
 	public void playerSelectionControlsSet(int index)
-	{	// TODO Auto-generated method stub
+	{	// not used here
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SERVER CONNECTION LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ServerGeneralConnection connection = null;
+	
+	public void setConnection()
+	{	connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(connection!=null)
+		{	connection.addListener(this);
+			List<Profile> players = playersPanel.getPlayers();
+			Set<Integer> allowedPlayers = playersPanel.getAllowedPlayers();
+			playersPanel.setPlayers(players, allowedPlayers);
+		}
+	}
+	
+	@Override
+	public void profileAdded(int index, Profile profile)
+	{	// NOTE ugly fix
+		List<Profile> profiles = connection.getPlayerProfiles();
+		GameInfo gameInfo = connection.getGameInfo();
+		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
+		// menu might have to update button
+		fireDataPanelSelectionChange(profile);
+	}
+
+	@Override
+	public void profileRemoved(Profile profile)
+	{	// NOTE ugly fix
+		List<Profile> profiles = connection.getPlayerProfiles();
+		GameInfo gameInfo = connection.getGameInfo();
+		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
+		// menu might have to update button
+		fireDataPanelSelectionChange(profile);
+	}
+
+	@Override
+	public void profileModified(Profile profile)
+	{	// NOTE ugly fix
+		List<Profile> profiles = connection.getPlayerProfiles();
+		GameInfo gameInfo = connection.getGameInfo();
+		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
+		// menu might have to update button
+		fireDataPanelSelectionChange(profile);
+	}
+
+	@Override
+	public void profileSet(int index, Profile profile)
+	{	// NOTE ugly fix
+		List<Profile> profiles = connection.getPlayerProfiles();
+		GameInfo gameInfo = connection.getGameInfo();
+		playersPanel.setPlayers(profiles,gameInfo.getAllowedPlayers());
+		// menu might have to update button
+		fireDataPanelSelectionChange(profile);
 	}
 }

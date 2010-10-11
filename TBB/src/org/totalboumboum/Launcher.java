@@ -1633,10 +1633,9 @@ public class Launcher
 	
 	/**
 	 * à tester :
-	 *    
+	 *    - changement effectif d'état entre les différents types de browsing pour le client
+	 *    - tester le mode partie rapide
 	 * à faire :
-	 *  - normalement, l'hote qu'on vient de créé doit être automatiquement sélectionné. pb lié au changement d'id pe ?
-	 *  - reproduire ce qui a été fait pour tournoi serveur au niveau de la partie rapide
 	 *  - tout changement d'état du client devrait être :
 	 *  	- une requête envoyée au serveur
 	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client
