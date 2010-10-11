@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -58,6 +59,7 @@ import org.totalboumboum.game.points.PointsScores;
 import org.totalboumboum.game.points.PointsTotal;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
+import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -69,7 +71,11 @@ import org.totalboumboum.gui.menus.quickmatch.PlayersData;
 import org.totalboumboum.gui.menus.quickmatch.SettingsData;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
+import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
+import org.totalboumboum.statistics.glicko2.jrs.RankingService;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**
@@ -193,9 +199,14 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		
 		// players
 		if(tournament==null || !levelsSelection.getAllowedPlayerNumbers().contains(playersData.getSelectedProfiles().size()))
-				buttonPlayersNext.setEnabled(false);
-			else
+			buttonPlayersNext.setEnabled(false);
+		else
+		{	ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+			if(connection==null || connection.areAllPlayersReady())
 				buttonPlayersNext.setEnabled(true);
+			else
+				buttonPlayersNext.setEnabled(false);
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -394,6 +405,11 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			// synch game options
 			Configuration.getGameConfiguration().setQuickMatchConfiguration(quickMatchConfiguration);
 			
+			// send to possible clients
+			ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+			if(connection!=null)
+				connection.startTournament(tournament);
+
 			// match panel
 			tournamentPanel.setTournament(tournament);
 			replaceWith(tournamentPanel);
@@ -425,10 +441,34 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			revalidate();
 			
 			// set up the connection
-			//TODO
+			//AbstractTournament tournament = quickMatchConfiguration.getTournament();
+			Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
+			String tournamentName = tournament.getName();
+			TournamentType tournamentType = TournamentType.getType(tournament);
+			List<Profile> playerProfiles = playersData.getSelectedProfiles();
+			List<Double> playersScores = new ArrayList<Double>();
+			RankingService glicko2 = GameStatistics.getRankingService();
+			for(Profile p: playerProfiles)
+			{	Double score = null;
+				String id = p.getId();
+				if(glicko2.getPlayers().contains(id))
+				{	PlayerRating playerRating = glicko2.getPlayerRating(id);
+					score = playerRating.getRating();
+				}
+				playersScores.add(score);
+			}
+			boolean direct = true; 		// TODO should be decided by a button or something
+			boolean central = false;	// TODO same thing as above
+			ServerGeneralConnection connection = new ServerGeneralConnection(allowedPlayers,tournamentName,tournamentType,playersScores,playerProfiles,direct,central);
+			Configuration.getConnectionsConfiguration().setServerConnection(connection);
+			playersData.setConnection();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_BLOCK_PLAYERS))
-		{	// TODO
+		{	// close/open players selection to client
+			ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+			if(connection!=null)
+			{	connection.switchPlayersSelection();
+			}
 	    }
 	} 
 	

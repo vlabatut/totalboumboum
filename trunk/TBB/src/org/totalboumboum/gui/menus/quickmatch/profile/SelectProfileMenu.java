@@ -41,6 +41,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.profiles.select.SelectedProfileData;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
@@ -99,7 +100,7 @@ public class SelectProfileMenu extends InnerMenuPanel
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_CONFIRM))
 		{	ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
 			Profile profile = profileData.getSelectedProfile();
-			if(profile!=null && !profiles.contains(profile))
+			if(profile!=null && !profiles.contains(profile) && !profile.isRemote())
 			{	// check if color is free
 				PredefinedColor selectedColor = profile.getSpriteColor();
 				while(!profilesConfiguration.isFreeColor(profiles,selectedColor))
@@ -121,16 +122,30 @@ public class SelectProfileMenu extends InnerMenuPanel
 				{	e1.printStackTrace();
 				}
 				// add to profiles list
+				ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
 				if(index<profiles.size())
-					profiles.set(index,profile);
+				{	profiles.set(index,profile);
+					// NOTE this would be so much cleaner with an events system...
+					if(connection!=null)
+						connection.profileSet(index,profile,null);
+				}
 				else
-					profiles.add(profile);
+				{	profiles.add(profile);
+					// NOTE this would be so much cleaner with an events system...
+					if(connection!=null)
+					{	profile.setReady(true);
+						connection.profileAdded(profile,null);
+					}
+				}
 			}
 			parent.refresh();
 			replaceWith(parent);
 	    }
 	} 
 	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void refresh()
 	{	//
 	}
