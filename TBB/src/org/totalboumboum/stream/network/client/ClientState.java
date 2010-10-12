@@ -45,7 +45,9 @@ public enum ClientState
 	
 	// round level
 	BROWSING_ROUND,
-	WAITING_LOOP
+	PLAYING,
+	WAITING_LOOP,
+	WAITING_STAT
 	
 	// in-game level
 }

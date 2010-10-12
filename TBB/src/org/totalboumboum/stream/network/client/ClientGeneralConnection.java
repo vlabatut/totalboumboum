@@ -35,6 +35,7 @@ import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
@@ -440,7 +441,7 @@ public class ClientGeneralConnection
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT		/////////////////////////////////////////////
+	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void tournamentStarted(ClientIndividualConnection connection, AbstractTournament tournament)
 	{	if(connection==activeConnection)
@@ -452,6 +453,11 @@ public class ClientGeneralConnection
 		}
 	}
 
+	public StatisticRound getRoundStats()
+	{	StatisticRound result = activeConnection.getRoundStats();
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ZOOM COEFF		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

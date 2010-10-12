@@ -157,6 +157,13 @@ public class ServerIndividualConnection extends AbstractConnection
 			else
 				send = false;
 		}
+		else if(info==MessageName.UPDATING_ROUND_STATS)
+		{	send = state==ClientState.WAITING_STAT;
+		}
+		else if(info==MessageName.INFO_REPLAY)
+		{	send = state==ClientState.PLAYING;
+		}
+		
 		if(send)	
 			writeMessage(message);
 	}

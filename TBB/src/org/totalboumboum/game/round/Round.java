@@ -173,7 +173,7 @@ public class Round implements StatisticHolder, Serializable
 	// OUTPUT GAME STREAM	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	// TODO maybe should better be handled at a configuration level, like for the network connections
-	// TODO maybe all the round ingame stuff should be there too
+	// TODO maybe all the round ingame stuff should be over there too
 	private FileOutputServerStream fileOut = null;
 	private FileInputClientStream fileIn = null;
 /*	
@@ -222,7 +222,7 @@ public class Round implements StatisticHolder, Serializable
 	
 	public void loopOver()
 	{	ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
-//		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
 		
 		// read stats from replay if replayed
 		if(fileIn!=null)
@@ -242,22 +242,9 @@ public class Round implements StatisticHolder, Serializable
 		}
 		// read stats from server if network game
 		else if(clientConnection!=null)
-		{	
-/* NOTE NET			
-			try
-			{	
-				netClientIn.finishRound(); //TODO whatever that could consist in, must do it in the connection
-				StatisticRound stats = fileIn.getRoundStats();
-				setStats(stats);
-				netClientOut.finishRound(); //TODO same thing (check old version of the network classes)
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			}
-			catch (ClassNotFoundException e)
-			{	e.printStackTrace();
-			}
-*/			
+		{	// NOTE uggly blocking here
+			StatisticRound stats = clientConnection.getRoundStats();
+			setStats(stats);
 			roundOver = true;
 		}
 		// else : init stats date
@@ -291,24 +278,9 @@ public class Round implements StatisticHolder, Serializable
 		}
 
 		// possibly end network game
-/* NOTE NET
 		if(serverConnection!=null)
-		{	try
-			{	
-				netServerOut.finishRound(stats); //TODO like for client connection...
-				netServerIn.finishRound();
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			}
-			catch (ParserConfigurationException e)
-			{	e.printStackTrace();
-			}
-			catch (SAXException e)
-			{	e.printStackTrace();
-			}
+		{	serverConnection.finishRound(stats);
 		}
-*/
 
 		match.roundOver();
 		if(panel!=null)
