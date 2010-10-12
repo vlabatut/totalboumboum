@@ -38,12 +38,15 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.control.player.RemotePlayerControl;
+import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
+import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.statistics.GameStatistics;
+import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.stream.network.data.game.GameInfo;
@@ -705,6 +708,18 @@ System.out.println(serverSocket.getLocalSocketAddress());
 			propagateMessage(message);
 		}		
 		gameInfoLock.unlock();
+	}
+	
+	public void finishRound(StatisticRound stats)
+	{	// announce the tournament is starting to concerned clients
+		{	NetworkMessage message = new NetworkMessage(MessageName.UPDATING_ROUND_STATS,stats);
+			propagateMessage(message);
+		}
+	}
+	
+	public void sendReplay(ReplayEvent event)
+	{	NetworkMessage message = new NetworkMessage(MessageName.INFO_REPLAY,event);
+		propagateMessage(message);
 	}
 	
 	/////////////////////////////////////////////////////////////////

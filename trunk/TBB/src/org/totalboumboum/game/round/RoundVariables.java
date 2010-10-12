@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.loop.VisibleLoop;
@@ -33,6 +34,10 @@ import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.stream.file.replay.FileInputClientStream;
 import org.totalboumboum.stream.file.replay.FileOutputServerStream;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.message.MessageName;
+import org.totalboumboum.stream.network.message.NetworkMessage;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
 
@@ -83,20 +88,21 @@ public class RoundVariables
 	// OUTPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static FileOutputServerStream fileOut = null;
-//NOTE NET	public static NetOutputClientStream netClientOut = null;
-//NOTE NET	public static NetOutputServerStream netServerOut = null;
 	
 	public static void writeEvent(ReplayEvent event)
 	{	if(fileOut!=null && event.getSendEvent())
 			fileOut.writeEvent(event);
-//NOTE NET		if(netServerOut!=null && event.getSendEvent())
-//NOTE NET			netServerOut.writeEvent(event);
+	
+		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(connection!=null && event.getSendEvent())
+		{	connection.sendReplay(event);
+		}
 	}
 
 	public static void writeEvent(RemotePlayerControlEvent event)
-	{	
-//NOTE NET		if(netClientOut!=null)
-//NOTE NET			netClientOut.writeEvent(event);
+	{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		if(connection!=null)
+			connection.sendControl(event);
 	}
 	
 	public static void writeZoomCoef(double zoomCoef) throws IOException
@@ -125,8 +131,8 @@ public class RoundVariables
 	public static void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
 	{	if(fileOut!=null)
 			finishWriting(stats);
-//NOTE NET		if(netServerOut!=null)
-//NOTE NET			finishWriting(stats);
+//		if(netServerOut!=null)
+//			finishWriting(stats);
 	}
 
 }

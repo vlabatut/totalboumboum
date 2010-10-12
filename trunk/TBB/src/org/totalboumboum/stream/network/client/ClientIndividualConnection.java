@@ -37,6 +37,7 @@ import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.stream.network.AbstractConnection;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
@@ -149,8 +150,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	// SOCKET				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	protected void initSocket()
-	{	// TODO : manage time-out (?)
-		Thread thread = new Thread(this);
+	{	Thread thread = new Thread(this);
 		thread.start();
 	}
 	
@@ -200,6 +200,8 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 			replayReceived((ReplayEvent)message.getData());
 		else if(message.getInfo().equals(MessageName.STARTING_TOURNAMENT))
 			tournamentStarted((AbstractTournament)message.getData());
+		else if(message.getInfo().equals(MessageName.UPDATING_ROUND_STATS))
+			roundStatsUpdated((StatisticRound)message.getData());
 	}
 	
 	public void writeMessage(NetworkMessage message)
@@ -240,12 +242,6 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		}
 	}
 
-	/**
-	 * TODO
-	 * when a time out occurs, the host state is set to unknown
-	 * and the modification is propagated (?)
-	 */
-	
 	private void playersListReceived(List<Profile> playerProfiles)
 	{	// update profile list
 		this.playerProfiles = playerProfiles;
@@ -324,8 +320,42 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	/////////////////////////////////////////////////////////////////
 	// ROUND 					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private StatisticRound stats = null;
+	private Lock statsLock = new ReentrantLock();
+	private Condition statsCondition = statsLock.newCondition();
+	
+	
 	private void replayReceived(ReplayEvent event)
 	{	generalConnection.replayReceived(event);
+	}
+	
+	private void roundStatsUpdated(StatisticRound stats)
+	{	if(state==ClientState.WAITING_STAT)
+		{	statsLock.lock();
+			{	this.stats = stats;
+				statsCondition.signal();
+			}
+			statsLock.unlock();
+		}
+	}
+	
+	public StatisticRound getRoundStats()
+	{	StatisticRound result = null;
+		
+		statsLock.lock();
+		{	try
+			{	while(stats==null)
+					statsCondition.await();
+			}
+			catch (InterruptedException e)
+			{	e.printStackTrace();
+			}
+			result = stats;
+			stats = null;
+		}
+		statsLock.unlock();
+		
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////

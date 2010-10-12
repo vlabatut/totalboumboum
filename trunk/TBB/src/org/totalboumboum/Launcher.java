@@ -1641,12 +1641,16 @@ public class Launcher
 	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client
 	 *  	>> cf le passage de game selection à players selection
 	 *  	>> pas tout changement en fait, par exemple l'exit est décidé unilatéralement
-	 *  - NOTE NET
+	 *  - déterminer les ressources à synchroniser et... le faire rigoureusement
+	 *  - penser à tester systématiquement si l'état du c/s qui reçoit un evt est compatible avec le traitement de cet evt 
 	 *  - le serveur doit envoyer un gameinfo update à chaque changement d'état
 	 *  - tout evt transmis à la connection générale par l'indiv doit identifier l'indiv
 	 *    car pr client, il y a une différence, qui doit être traitée, entre recevoir un evt donné
 	 *    d'une connection active ou d'une autre connection.
 	 *    plus généralement, le traitement dépend de l'état du client pour le serveur correspondant
+	 *  - quand la partie commence, faudrait :
+	 *  	- fermer toutes les connections inutiles coté client (i.e. autres serveurs)
+	 *  	- p-ê mettre les connections concernées par la partie dans une liste spéciale, côté serveur (pr optimiser les temps de transmission)
 	 *  
 	 *  - pas mal d'actions devraient être réalisées dans un thread swing afin de couper
 	 *    l'arbre d'appel, et de permettre ainsi de libérer des ressources progressivement
