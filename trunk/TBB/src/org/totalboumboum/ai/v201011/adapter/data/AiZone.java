@@ -39,6 +39,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.player.AbstractPlayer;
+import org.totalboumboum.game.limit.LimitTime;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
@@ -137,10 +138,20 @@ public class AiZone
 	 * @param elapsedTime
 	 */
 	private void updateTimes(long elapsedTime)
-	{	VisibleLoop loop = level.getLoop();
+	{	// init
+		VisibleLoop loop = level.getLoop();
+	
+		// total time
 		this.totalTime = loop.getTotalGameTime();
+		
+		// elapsed time
 		this.elapsedTime = elapsedTime;
-		this.limitTime = loop.getRound().getLimits().getTimeLimit().getThreshold();
+		
+		// time limit
+		this.limitTime = Long.MAX_VALUE;
+		LimitTime lt = loop.getRound().getLimits().getTimeLimit();
+		if(lt!=null)
+			this.limitTime = lt.getThreshold();
 	}
 
 	/////////////////////////////////////////////////////////////////
