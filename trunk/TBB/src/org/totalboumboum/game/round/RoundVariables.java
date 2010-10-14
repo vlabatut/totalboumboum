@@ -108,8 +108,11 @@ public class RoundVariables
 	public static void writeZoomCoef(double zoomCoef) throws IOException
 	{	if(fileOut!=null)
 			fileOut.writeZoomCoef(zoomCoef);
-//NOTE NET		if(netServerOut!=null)
-//NOTE NET			netServerOut.writeZoomCoef(zoomCoef);
+	
+		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(connection!=null)
+		{	connection.updateZoomCoef(zoomCoef);
+		}
 	}
 
 	public static void setFilterEvents(boolean flag)

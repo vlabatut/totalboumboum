@@ -38,7 +38,6 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
 import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.control.player.RemotePlayerControl;
-import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
@@ -719,6 +718,11 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	
 	public void sendReplay(ReplayEvent event)
 	{	NetworkMessage message = new NetworkMessage(MessageName.INFO_REPLAY,event);
+		propagateMessage(message);
+	}
+	
+	public void updateZoomCoef(double zoomCoef)
+	{	NetworkMessage message = new NetworkMessage(MessageName.UPDATING_ZOOM_COEFF,zoomCoef);
 		propagateMessage(message);
 	}
 	

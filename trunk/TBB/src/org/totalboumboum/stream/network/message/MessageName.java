@@ -114,6 +114,8 @@ public enum MessageName
 		REQUESTING_ROUND_STATS,
 		/** server sends current round stats */
 		UPDATING_ROUND_STATS,
+		/** server sending zoom coefficient to the clients */
+		UPDATING_ZOOM_COEFF,
 	
 	/* 
 	 * in-game level

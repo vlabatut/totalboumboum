@@ -202,6 +202,8 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 			tournamentStarted((AbstractTournament)message.getData());
 		else if(message.getInfo().equals(MessageName.UPDATING_ROUND_STATS))
 			roundStatsUpdated((StatisticRound)message.getData());
+		else if(message.getInfo().equals(MessageName.UPDATING_ZOOM_COEFF))
+			zoomCoeffUpdated((Double)message.getData());
 	}
 	
 	public void writeMessage(NetworkMessage message)
@@ -320,14 +322,16 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	/////////////////////////////////////////////////////////////////
 	// ROUND 					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private StatisticRound stats = null;
-	private Lock statsLock = new ReentrantLock();
-	private Condition statsCondition = statsLock.newCondition();
-	
-	
 	private void replayReceived(ReplayEvent event)
 	{	generalConnection.replayReceived(event);
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// STATS 					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private StatisticRound stats = null;
+	private Lock statsLock = new ReentrantLock();
+	private Condition statsCondition = statsLock.newCondition();
 	
 	private void roundStatsUpdated(StatisticRound stats)
 	{	if(state==ClientState.WAITING_STAT)
@@ -357,6 +361,43 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		
 		return result;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ZOOM COEFF				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Double zoomCoeff = null;
+	private Lock zoomCoeffLock = new ReentrantLock();
+	private Condition zoomCoeffCondition = zoomCoeffLock.newCondition();
+	
+	private void zoomCoeffUpdated(double zoomCoeff)
+	{	if(state==ClientState.WAITING_STAT) //TODO màj état
+		{	zoomCoeffLock.lock();
+			{	this.zoomCoeff = zoomCoeff;
+				zoomCoeffCondition.signal();
+			}
+			zoomCoeffLock.unlock();
+		}
+	}
+	
+	public double getZoomCoef()
+	{	Double result = null;
+		
+		zoomCoeffLock.lock();
+		{	try
+			{	while(result==null)
+					zoomCoeffCondition.await();
+			}
+			catch (InterruptedException e)
+			{	e.printStackTrace();
+			}
+			result = zoomCoeff;
+			zoomCoeff = null;
+		}
+		zoomCoeffLock.unlock();
+		
+		return result;
+	}
+	
 	
 	/////////////////////////////////////////////////////////////////
 	// OWNER INTERFACE		/////////////////////////////////////////
