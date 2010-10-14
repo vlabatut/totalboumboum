@@ -35,8 +35,6 @@ import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.stream.file.replay.FileInputClientStream;
 import org.totalboumboum.stream.file.replay.FileOutputServerStream;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
-import org.totalboumboum.stream.network.message.MessageName;
-import org.totalboumboum.stream.network.message.NetworkMessage;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 import org.xml.sax.SAXException;
