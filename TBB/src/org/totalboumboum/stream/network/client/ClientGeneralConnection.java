@@ -458,14 +458,8 @@ public class ClientGeneralConnection
 		return result;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// ZOOM COEFF		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Double zoomCoeff = null;
-	
-	// TODO not supposed to be synch since it should be defined long before being needed (right?)
-	public Double getZoomCoeff()
-	{	return zoomCoeff;
+	public Double getZoomCoef()
+	{	return activeConnection.getZoomCoef();
 	}
 	
 	/////////////////////////////////////////////////////////////////

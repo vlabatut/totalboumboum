@@ -163,6 +163,9 @@ public class ServerIndividualConnection extends AbstractConnection
 		else if(info==MessageName.INFO_REPLAY)
 		{	send = state==ClientState.PLAYING;
 		}
+		else if(info==MessageName.UPDATING_ZOOM_COEFF)
+		{	send = state==ClientState.PLAYING; //TODO à màj
+		}
 		
 		if(send)	
 			writeMessage(message);
@@ -200,8 +203,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	{	boolean local = (Boolean) message.getData();
 		state = ClientState.SELECTING_GAME;
 		if(local)
-		{	// TODO must remove all the players from this connection
-			generalConnection.playerSelectionExited(this);
+		{	generalConnection.playerSelectionExited(this);
 		}
 	}
 	

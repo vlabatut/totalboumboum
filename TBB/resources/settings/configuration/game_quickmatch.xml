@@ -14,11 +14,11 @@
 		</points>
 	</settings>
 	<players>
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="totalboumboum" spriteFolder="prognathe" />
-		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="YELLOW" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="totalboumboum" folder="debug" allowedPlayers="1 2" />
+		<level pack="sbm1Custom" folder="debug" allowedPlayers="1 2" />
 	</levels>
 </gameQuickmatch>
 
