@@ -55,10 +55,10 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class FileOutputServerStream
+public class FileServerStream
 {	private final boolean verbose = false;
 
-	public FileOutputServerStream(Round round)
+	public FileServerStream(Round round)
 	{	this.round = round;
 	
 		initSaveDate();
