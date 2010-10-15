@@ -173,6 +173,13 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 		initEvent();
 	}
 
+	@Override
+	protected void finishLoopInit()
+	{	super.finishLoopInit();
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		connection.loadingComplete();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// CANCELATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

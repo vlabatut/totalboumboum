@@ -124,6 +124,8 @@ public class ServerIndividualConnection extends AbstractConnection
 		else if(state==HostState.PLAYING)
 		{	if(message.getInfo().equals(MessageName.INFO_PLAYER_CONTROL))
 				controlReceived(message);
+			else if(message.getInfo().equals(MessageName.LOADING_COMPLETE))
+				loadingComplete(message);
 		}
 	}
 	
@@ -135,7 +137,8 @@ public class ServerIndividualConnection extends AbstractConnection
 	{	MessageName info = message.getInfo();
 	
 		boolean send = false;
-			
+		
+		// configuration
 		if(info==MessageName.UPDATING_GAME_INFO)
 		{	send = state==ClientState.SELECTING_GAME
 					|| state==ClientState.SELECTING_PLAYERS
@@ -157,16 +160,27 @@ public class ServerIndividualConnection extends AbstractConnection
 			else
 				send = false;
 		}
-		else if(info==MessageName.INFO_REPLAY)
-		{	send = state==ClientState.PLAYING;
-		}
+		
+		// actual game
 		else if(info==MessageName.UPDATING_ZOOM_COEFF)
-		{	send = state==ClientState.BROWSING_TOURNAMENT
+		{	if(state==ClientState.BROWSING_TOURNAMENT
 					|| state==ClientState.BROWSING_MATCH
-					|| state==ClientState.BROWSING_ROUND;
+					|| state==ClientState.BROWSING_ROUND)
+			{	send = true;
+				state = ClientState.LOADING_ROUND;
+			}
+		}
+		else if(info==MessageName.STARTING_ROUND)
+		{	if(state==ClientState.WAITING_ROUND)
+			{	send = true;
+				state = ClientState.PLAYING_ROUND;
+			}
+		}
+		else if(info==MessageName.INFO_REPLAY)
+		{	send = state==ClientState.PLAYING_ROUND;
 		}
 		else if(info==MessageName.UPDATING_ROUND_STATS)
-		{	send = state==ClientState.PLAYING;
+		{	send = state==ClientState.PLAYING_ROUND;
 		}
 		
 		if(send)	
@@ -272,6 +286,11 @@ public class ServerIndividualConnection extends AbstractConnection
 		{	RemotePlayerControlEvent evt = (RemotePlayerControlEvent) event;
 			generalConnection.controlReceived(evt);
 		}
+	}
+	
+	private void loadingComplete(NetworkMessage message)
+	{	state = ClientState.WAITING_ROUND;
+		generalConnection.loadingComplete(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////

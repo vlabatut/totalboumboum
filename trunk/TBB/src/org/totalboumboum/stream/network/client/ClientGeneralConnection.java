@@ -459,7 +459,11 @@ public class ClientGeneralConnection
 	}
 	
 	public Double getZoomCoef()
-	{	return activeConnection.retrieveZoomCoef();
+	{	return activeConnection.getZoomCoef();
+	}
+	
+	public void loadingComplete()
+	{	activeConnection.loadingComplete();
 	}
 	
 	/////////////////////////////////////////////////////////////////

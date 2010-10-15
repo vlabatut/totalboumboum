@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -694,6 +695,9 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	/////////////////////////////////////////////////////////////////
 	// GAME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private Lock roundLock = new ReentrantLock();
+	private Condition roundCondition = roundLock.newCondition();
+	
 	public void startTournament(AbstractTournament tournament)
 	{	// announce the tournament is starting to concerned clients
 		{	NetworkMessage message = new NetworkMessage(MessageName.STARTING_TOURNAMENT,tournament);
@@ -724,12 +728,63 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	public void updateZoomCoef(double zoomCoef)
 	{	NetworkMessage message = new NetworkMessage(MessageName.UPDATING_ZOOM_COEFF,zoomCoef);
 		propagateMessage(message);
+		
+		connectionsLock.lock();
+		{	for(int i=0;i<individualConnections.size();i++)
+				individualConnectionsReady.set(i,false);
+		}
+		connectionsLock.unlock();
+	}
+	
+	public void waitForStart()
+	{	roundLock.lock();
+		{	// wait for all clients to be ready
+			try
+			{	roundCondition.await();
+			}
+			catch (InterruptedException e)
+			{	e.printStackTrace();
+			}
+		}
+		roundLock.lock();
+	}
+	
+	protected void loadingComplete(ServerIndividualConnection connection)
+	{	roundLock.lock();
+		{	connectionsLock.lock();
+			{	// update this connection readyness
+				int index = individualConnections.indexOf(connection);
+				individualConnectionsReady.set(index,true);
+
+				// check if all clients are ready
+				boolean ready = true;
+				Iterator<Boolean> it = individualConnectionsReady.iterator();
+				while(it.hasNext() && ready)
+				{	boolean value = it.next();
+					ready = ready && value;
+				}
+
+				// if it is the case :
+				if(ready)
+				{	// start all remote clients
+					NetworkMessage message = new NetworkMessage(MessageName.STARTING_ROUND);
+					propagateMessage(message);
+					
+					// wake up the game thread
+					roundCondition.notify();
+				}
+				
+			}
+			connectionsLock.unlock();
+		}
+		roundLock.lock();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// CONNECTIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final List<ServerIndividualConnection> individualConnections = new ArrayList<ServerIndividualConnection>();
+	private final List<Boolean> individualConnectionsReady = new ArrayList<Boolean>();
 	private Lock connectionsLock = new ReentrantLock();
 	
 	public void terminateConnection()

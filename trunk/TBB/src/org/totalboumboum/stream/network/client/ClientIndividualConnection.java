@@ -326,6 +326,13 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	{	generalConnection.replayReceived(event);
 	}
 	
+	public void loadingComplete()
+	{	NetworkMessage message = new NetworkMessage(MessageName.LOADING_COMPLETE);
+		writeMessage(message);
+		
+		state = ClientState.WAITING_ROUND;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// STATS 					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -334,7 +341,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	private Condition statsCondition = statsLock.newCondition();
 	
 	private void roundStatsUpdated(StatisticRound stats)
-	{	if(state==ClientState.PLAYING)
+	{	if(state==ClientState.PLAYING_ROUND)
 		{	statsLock.lock();
 			{	this.stats = stats;
 				statsCondition.signal();
@@ -389,7 +396,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		}
 	}
 	
-	public double retrieveZoomCoef()
+	public double getZoomCoef()
 	{	Double result = null;
 		
 		zoomCoeffLock.lock();
@@ -402,6 +409,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 			}
 			result = zoomCoeff;
 			zoomCoeff = null;
+			state = ClientState.LOADING_ROUND;
 		}
 		zoomCoeffLock.unlock();
 		
