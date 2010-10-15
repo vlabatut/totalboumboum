@@ -108,8 +108,12 @@ public enum MessageName
 	/* 
 	 * round level
 	 */
+		/** client indicating it has finished loading the sprites */
+		LOADING_COMPLETE,
 		/** client requests current round stats */
 		REQUESTING_ROUND_STATS,
+		/** server starts round */
+		STARTING_ROUND,
 		/** server sends current round stats */
 		UPDATING_ROUND_STATS,
 		/** server sending zoom coefficient to the clients */
