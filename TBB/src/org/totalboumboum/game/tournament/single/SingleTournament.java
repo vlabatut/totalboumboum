@@ -48,7 +48,7 @@ import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
-import org.totalboumboum.stream.file.replay.FileInputClientStream;
+import org.totalboumboum.stream.file.replay.FileClientStream;
 import org.xml.sax.SAXException;
 
 /**
@@ -63,7 +63,7 @@ public class SingleTournament extends AbstractTournament
 	{	
 	}
 
-	public SingleTournament(FileInputClientStream replay) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
+	public SingleTournament(FileClientStream replay) throws IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{	replay.initStreams();
 		replay.initRound();
 		setName("Replay");

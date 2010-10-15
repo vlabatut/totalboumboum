@@ -42,7 +42,7 @@ import org.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import org.totalboumboum.gui.menus.replay.round.RoundSplitPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.stream.file.replay.FileInputClientStream;
+import org.totalboumboum.stream.file.replay.FileClientStream;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
@@ -102,7 +102,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 	private JButton buttonDelete;
 
 	private void refreshButtons()
-	{	FileInputClientStream replay = levelData.getSelectedReplay();
+	{	FileClientStream replay = levelData.getSelectedReplay();
 		if(replay==null)
 		{	buttonDelete.setEnabled(false);
 			buttonConfirm.setEnabled(false);
@@ -121,7 +121,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 		{	replaceWith(parent);
 	    }
 		if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_DELETE))
-		{	FileInputClientStream selectedReplay = levelData.getSelectedReplay();
+		{	FileClientStream selectedReplay = levelData.getSelectedReplay();
 			if(selectedReplay!=null)
 			{	String folder = selectedReplay.getFolder();
 				String path = baseFolder + File.separator + folder;
@@ -133,7 +133,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 		else if(e.getActionCommand().equals(GuiKeys.MENU_REPLAY_LOAD_BUTTON_CONFIRM))
 		{	RoundSplitPanel roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 			try
-			{	FileInputClientStream selectedReplay = levelData.getSelectedReplay();
+			{	FileClientStream selectedReplay = levelData.getSelectedReplay();
 				SingleTournament tournament = new SingleTournament(selectedReplay);
 				Match match = tournament.getCurrentMatch();
 				Round round = match.getCurrentRound();

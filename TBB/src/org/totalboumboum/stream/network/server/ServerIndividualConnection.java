@@ -157,14 +157,16 @@ public class ServerIndividualConnection extends AbstractConnection
 			else
 				send = false;
 		}
-		else if(info==MessageName.UPDATING_ROUND_STATS)
-		{	send = state==ClientState.WAITING_STAT;
-		}
 		else if(info==MessageName.INFO_REPLAY)
 		{	send = state==ClientState.PLAYING;
 		}
 		else if(info==MessageName.UPDATING_ZOOM_COEFF)
-		{	send = state==ClientState.PLAYING; //TODO à màj
+		{	send = state==ClientState.BROWSING_TOURNAMENT
+					|| state==ClientState.BROWSING_MATCH
+					|| state==ClientState.BROWSING_ROUND;
+		}
+		else if(info==MessageName.UPDATING_ROUND_STATS)
+		{	send = state==ClientState.PLAYING;
 		}
 		
 		if(send)	

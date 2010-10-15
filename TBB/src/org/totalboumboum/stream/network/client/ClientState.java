@@ -38,16 +38,18 @@ public enum ClientState
 	WAITING_TOURNAMENT,
 	
 	// tournament level
+	/** client is looking at the tournament properties or results */
 	BROWSING_TOURNAMENT,
 	
 	// match level
+	/** client is looking at the match properties or results */
 	BROWSING_MATCH,
 	
 	// round level
+	/** client is looking at the round properties or results */
 	BROWSING_ROUND,
-	PLAYING,
-	WAITING_LOOP,
-	WAITING_STAT
+	/** client is playing the round */
+	PLAYING
 	
 	// in-game level
 }

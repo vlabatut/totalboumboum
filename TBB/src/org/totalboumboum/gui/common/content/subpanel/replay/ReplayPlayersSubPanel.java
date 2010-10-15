@@ -28,7 +28,7 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.stream.file.replay.FileInputClientStream;
+import org.totalboumboum.stream.file.replay.FileClientStream;
 import org.totalboumboum.tools.GameData;
 
 /**
@@ -50,13 +50,13 @@ public class ReplayPlayersSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// ARCHIVE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private FileInputClientStream replay;
+	private FileClientStream replay;
 
-	public FileInputClientStream getReplay()
+	public FileClientStream getReplay()
 	{	return replay;	
 	}
 	
-	public void setReplay(FileInputClientStream replay)
+	public void setReplay(FileClientStream replay)
 	{	this.replay = replay;
 		
 		// sizes

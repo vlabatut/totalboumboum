@@ -52,8 +52,8 @@ import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 import org.totalboumboum.statistics.detailed.StatisticRound;
-import org.totalboumboum.stream.file.replay.FileInputClientStream;
-import org.totalboumboum.stream.file.replay.FileOutputServerStream;
+import org.totalboumboum.stream.file.replay.FileClientStream;
+import org.totalboumboum.stream.file.replay.FileServerStream;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
@@ -154,7 +154,7 @@ public class Round implements StatisticHolder, Serializable
 		
 			// recording
 			if(Configuration.getEngineConfiguration().isRecordRounds() && fileIn==null)
-			{	fileOut = new FileOutputServerStream(this);
+			{	fileOut = new FileServerStream(this);
 				RoundVariables.fileOut = fileOut;
 				fileOut.initStream();
 				fileOut.initRound();
@@ -174,14 +174,14 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// TODO maybe should better be handled at a configuration level, like for the network connections
 	// TODO maybe all the round ingame stuff should be over there too
-	private FileOutputServerStream fileOut = null;
-	private FileInputClientStream fileIn = null;
+	private FileServerStream fileOut = null;
+	private FileClientStream fileIn = null;
 /*	
 	public void setNetOutputGameStream(NetOutputServerStream netOut)
 	{	this.netOut = netOut;
 	}
 */	
-	public void setInputStream(FileInputClientStream in)
+	public void setInputStream(FileClientStream in)
 	{	fileIn = in;
 	}
 
