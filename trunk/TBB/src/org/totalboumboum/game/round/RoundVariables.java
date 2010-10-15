@@ -23,21 +23,17 @@ package org.totalboumboum.game.round;
 
 import java.io.IOException;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
-import org.totalboumboum.statistics.detailed.StatisticRound;
-import org.totalboumboum.stream.file.replay.FileInputClientStream;
-import org.totalboumboum.stream.file.replay.FileOutputServerStream;
+import org.totalboumboum.stream.file.replay.FileClientStream;
+import org.totalboumboum.stream.file.replay.FileServerStream;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
-import org.xml.sax.SAXException;
 
 /**
  * 
@@ -73,7 +69,7 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static FileInputClientStream fileIn = null;
+	public static FileClientStream fileIn = null;
 
 	public static ReplayEvent readEvent()
 	{	ReplayEvent result = null;
@@ -85,7 +81,7 @@ public class RoundVariables
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static FileOutputServerStream fileOut = null;
+	public static FileServerStream fileOut = null;
 	
 	public static void writeEvent(ReplayEvent event)
 	{	if(fileOut!=null && event.getSendEvent())
@@ -128,12 +124,4 @@ public class RoundVariables
 //NOTE NET			result = netServerOut.getFilterEvents();
 		return result;
 	}
-	
-	public static void finishWriting(StatisticRound stats) throws IOException, ParserConfigurationException, SAXException
-	{	if(fileOut!=null)
-			finishWriting(stats);
-//		if(netServerOut!=null)
-//			finishWriting(stats);
-	}
-
 }

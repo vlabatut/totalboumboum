@@ -79,8 +79,6 @@ public enum MessageName
 		REQUESTING_PLAYERS_CHANGE_HERO,
 		/** client replace one of its players by another one */ 
 		REQUESTING_PLAYERS_SET,
-		/** client sends its current state */ 
-		UPDATING_CLIENT_STATE,
 		
 		/** server requests client current state */ 
 //		REQUESTING_CLIENT_STATE, //pas nécessaire, à éviter même
@@ -116,6 +114,8 @@ public enum MessageName
 		UPDATING_ROUND_STATS,
 		/** server sending zoom coefficient to the clients */
 		UPDATING_ZOOM_COEFF,
+		/** client sends its current state */ 
+		UPDATING_STATE,
 	
 	/* 
 	 * in-game level
@@ -135,7 +135,5 @@ public enum MessageName
 		/** client asks for reconnection */
 		REQUESTING_RECONNECTION,
 		/** client or server asks for disconnection*/
-		REQUESTING_DISCONNECTION,
-		/** client sends its new state */
-		UPDATING_STATE
+		REQUESTING_DISCONNECTION
 }

@@ -1667,5 +1667,27 @@ public class Launcher
 	 *    ce qui simplifie le beans. bien sur, chaque objet émetteur doit du cp s'identifier pr chaque evt (source)
 	 *    et les fonctions d'écoute seront un peu plus longue coté gui dans le cas de classes écoutant
 	 *    plusieurs éléments du moteur.
+	 *    
+	 *  - gestion de la dé/re-connection :
+	 *  	- la connection individuelle est conservée côté serveur,
+	 *  	  avec un état DISCONNECTED ou autre
+	 *  	- même les threads sont gardés, mais du cp le code doit être modifié
+	 *  	  pour ne pas tenter d'écrire/lire si la connection est morte
+	 *  	- quand le client tente de se reconnecter, si son id correspond à 
+	 *  	  celle d'une connection DISCONNECTED, alors on se contete de réinitialiser les 
+	 *  	  streams dans le writer et le reader, et ça roule.
+	 *  
+	 *  
+	 *  
+	 *  C is BROWSING_T/M/R and starts loading, but waits for zoomcoeff
+	 *  S sends zoomcoeff >> suppose C is now LOADING
+	 *  C receives zoomcoeff and switch to LOADING
+	 *  C finishes LOADING and becomes WAITING, sends message to S
+	 *  S waits for all client to be WAITING, then asks all C to start and switch them to PLAYING
+	 *  C each C receives the message and starts the game, switching to PLAYING
+	 *  when the game is over, C finishes it and needs the stats : it is blocked but the state is still PLAYING
+	 *  S sends the stats to all C and switch them to BROWSING_R
+	 *  C receives the stats and goes on with its process, switching to BROWSING_R
+	 *  
 	 */
 }

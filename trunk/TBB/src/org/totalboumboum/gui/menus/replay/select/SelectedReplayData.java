@@ -39,7 +39,7 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
-import org.totalboumboum.stream.file.replay.FileInputClientStream;
+import org.totalboumboum.stream.file.replay.FileClientStream;
 import org.totalboumboum.stream.file.replay.ReplayLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.xml.sax.SAXException;
@@ -140,9 +140,9 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 	/////////////////////////////////////////////////////////////////
 	// SELECTED ARCHIVE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private FileInputClientStream selectedReplay = null;	
+	private FileClientStream selectedReplay = null;	
 
-	public FileInputClientStream getSelectedReplay()
+	public FileClientStream getSelectedReplay()
 	{	return selectedReplay;
 	}
 	
