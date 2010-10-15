@@ -47,14 +47,14 @@ import org.totalboumboum.tools.files.FilePaths;
  * @author Vincent Labatut
  *
  */
-public class FileInputClientStream
+public class FileClientStream
 {	private final boolean verbose = false;
 	
-	public FileInputClientStream()
+	public FileClientStream()
 	{	
 	}
 	
-	public FileInputClientStream(String folder)
+	public FileClientStream(String folder)
 	{	super();
 		this.folder = folder;
 	}
