@@ -29,7 +29,6 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
-
 /**
  * classe dont chaque IA doit hériter. La méthode processAction est la méthode 
  * appelée par le gestionnaire d'IA pour l'interroger que la prochaine action 
@@ -61,7 +60,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * Elle modifie la valeur de l'indcateur stopRequest, ce qui permettra
 	 * de lever une StopRequestException au prochain appel de la méthode checkInterruption.
 	 */
-	public synchronized void stopRequest()
+	public synchronized final void stopRequest()
 	{	stopRequest = true;		
 	}
 	
@@ -71,7 +70,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas être
 	 * interceptée localement par un try/catch. 
 	 */
-	public synchronized void checkInterruption() throws StopRequestException
+	public synchronized final void checkInterruption() throws StopRequestException
 	{	Thread.yield();
 		if(stopRequest)
 			throw new StopRequestException();
@@ -111,7 +110,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * renvoie les percepts auxquels l'IA a accès
 	 * @return	une AiZone représentant tous les percepts utilisables par l'IA
 	 */
-	public AiZone getPercepts()
+	public final AiZone getPercepts()
 	{	return percepts;
 	}
 	/**
@@ -119,7 +118,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 
 	 * @param percepts	l'objet représentant les percepts auxquels l'IA aura accès
 	 */
-	public void setPercepts(AiZone percepts)
+	public final void setPercepts(AiZone percepts)
 	{	this.percepts = percepts;
 		output = new AiOutput(percepts);
 	}
@@ -127,7 +126,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/**
 	 * termine proprement l'IA afin de libérer les ressources qu'elle occupait.
 	 */
-	void finish()
+	final void finish()
 	{	percepts = null;
 	}
 
@@ -145,7 +144,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 
 	 * @return	la sortie de l'IA
 	 */
-	public AiOutput getOutput()
+	public final AiOutput getOutput()
 	{	return output;
 	}
 
@@ -153,7 +152,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * réinitialise la sortie graphique de l'IA.
 	 * Méthode appelée automatiquement avant chaque itération de l'IA.
 	 */
-	private void reinitOutput()
+	private final void reinitOutput()
 	{	output.reinit();
 	}
 }

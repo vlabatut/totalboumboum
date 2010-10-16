@@ -730,8 +730,9 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		propagateMessage(message);
 		
 		connectionsLock.lock();
-		{	for(int i=0;i<individualConnections.size();i++)
-				individualConnectionsReady.set(i,false);
+		{	individualConnectionsReady.clear();
+			for(int i=0;i<individualConnections.size();i++)
+				individualConnectionsReady.add(false);
 		}
 		connectionsLock.unlock();
 	}
