@@ -9,5 +9,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="resources/lib/javaparser-1.0.7.jar" sourcepath="resources/lib/javaparser-1.0.7-src.zip"/>
+	<classpathentry kind="src" path="/TBBtemp"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
