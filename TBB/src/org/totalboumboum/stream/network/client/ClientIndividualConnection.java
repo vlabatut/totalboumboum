@@ -192,18 +192,20 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	@SuppressWarnings("unchecked")
 	@Override
 	public void messageRead(NetworkMessage message)
-	{	if(message.getInfo().equals(MessageName.UPDATING_GAME_INFO))
-			gameInfoReceived((GameInfo)message.getData());
-		else if(message.getInfo().equals(MessageName.UPDATING_PLAYERS_LIST))
+	{	if(message.getInfo().equals(MessageName.UPDATING_PLAYERS_LIST))
 			playersListReceived((List<Profile>)message.getData());
-		else if(message.getInfo().equals(MessageName.INFO_REPLAY))
-			replayReceived((ReplayEvent)message.getData());
+		else if(message.getInfo().equals(MessageName.UPDATING_GAME_INFO))
+			gameInfoReceived((GameInfo)message.getData());
 		else if(message.getInfo().equals(MessageName.STARTING_TOURNAMENT))
 			tournamentStarted((AbstractTournament)message.getData());
-		else if(message.getInfo().equals(MessageName.UPDATING_ROUND_STATS))
-			roundStatsUpdated((StatisticRound)message.getData());
 		else if(message.getInfo().equals(MessageName.UPDATING_ZOOM_COEFF))
 			zoomCoeffUpdated((Double)message.getData());
+		else if(message.getInfo().equals(MessageName.STARTING_ROUND))
+			roundStarted();
+		else if(message.getInfo().equals(MessageName.INFO_REPLAY))
+			replayReceived((ReplayEvent)message.getData());
+		else if(message.getInfo().equals(MessageName.UPDATING_ROUND_STATS))
+			roundStatsUpdated((StatisticRound)message.getData());
 	}
 	
 	public void writeMessage(NetworkMessage message)
@@ -322,6 +324,10 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	/////////////////////////////////////////////////////////////////
 	// ROUND 					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private boolean canStart;
+	private Lock loadingLock = new ReentrantLock();
+	private Condition loadingCondition = loadingLock.newCondition();
+	
 	private void replayReceived(ReplayEvent event)
 	{	generalConnection.replayReceived(event);
 	}
@@ -330,7 +336,30 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	{	NetworkMessage message = new NetworkMessage(MessageName.LOADING_COMPLETE);
 		writeMessage(message);
 		
-		state = ClientState.WAITING_ROUND;
+		loadingLock.lock();
+		{	while(!canStart)
+			{	try
+				{	loadingCondition.await();
+				}
+				catch (InterruptedException e)
+				{	e.printStackTrace();
+				}
+			}
+		
+			// reset variable for next time
+			canStart = false;
+		}
+		loadingLock.unlock();
+		
+		state = ClientState.PLAYING_ROUND;
+	}
+	
+	public void roundStarted()
+	{	loadingLock.lock();
+		{	canStart = true;
+			loadingCondition.notify();
+		}
+		loadingLock.unlock();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -365,10 +394,11 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 			
 			// update stats
 			result = stats;
+			// reset variable for next time
 			stats = null;
 			
 			// update state
-//			state = ClientState.BROWSING_ROUND;
+			state = ClientState.BROWSING_ROUND;
 //			NetworkMessage message = new NetworkMessage(MessageName.UPDATING_STATE,state);
 //			writeMessage(message);
 		}
@@ -397,18 +427,22 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	}
 	
 	public double getZoomCoef()
-	{	Double result = null;
+	{	double result;
 		
 		zoomCoeffLock.lock();
 		{	try
-			{	while(result==null)
+			{	while(zoomCoeff==null)
 					zoomCoeffCondition.await();
 			}
 			catch (InterruptedException e)
 			{	e.printStackTrace();
 			}
+			
+			// set result
 			result = zoomCoeff;
+			// reset variable for next time
 			zoomCoeff = null;
+			// update state
 			state = ClientState.LOADING_ROUND;
 		}
 		zoomCoeffLock.unlock();

@@ -36,6 +36,7 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.itemset.Itemset;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
@@ -61,6 +62,7 @@ import org.totalboumboum.engine.player.RemotePlayer;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -180,6 +182,13 @@ public class ServerLoop extends LocalLoop
 		// separation event
 		StopReplayEvent event = new StopReplayEvent();
 		RoundVariables.writeEvent(event);
+	}
+	
+	@Override
+	protected void finishLoopInit()
+	{	super.finishLoopInit();
+		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		connection.waitForClients();
 	}
 	
 	/////////////////////////////////////////////////////////////////

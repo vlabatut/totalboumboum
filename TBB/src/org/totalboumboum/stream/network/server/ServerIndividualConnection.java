@@ -171,7 +171,7 @@ public class ServerIndividualConnection extends AbstractConnection
 			}
 		}
 		else if(info==MessageName.STARTING_ROUND)
-		{	if(state==ClientState.WAITING_ROUND)
+		{	if(state==ClientState.LOADING_ROUND)
 			{	send = true;
 				state = ClientState.PLAYING_ROUND;
 			}
@@ -180,7 +180,10 @@ public class ServerIndividualConnection extends AbstractConnection
 		{	send = state==ClientState.PLAYING_ROUND;
 		}
 		else if(info==MessageName.UPDATING_ROUND_STATS)
-		{	send = state==ClientState.PLAYING_ROUND;
+		{	if(state==ClientState.PLAYING_ROUND)
+			{	send = true;
+				state = ClientState.BROWSING_ROUND;
+			}
 		}
 		
 		if(send)	
@@ -289,7 +292,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	}
 	
 	private void loadingComplete(NetworkMessage message)
-	{	state = ClientState.WAITING_ROUND;
+	{	//state = ClientState.WAITING_ROUND;
 		generalConnection.loadingComplete(this);
 	}
 	
