@@ -51,9 +51,7 @@ public enum ClientState
 	/** client is loading the round sprites */
 	LOADING_ROUND,
 	/** client is playing the round */
-	PLAYING_ROUND,
-	/** client is waiting for the round to start */
-	WAITING_ROUND
+	PLAYING_ROUND
 	
 	// in-game level
 }

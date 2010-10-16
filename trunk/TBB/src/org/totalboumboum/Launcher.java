@@ -1684,10 +1684,10 @@ public class Launcher
 	 * x  C receives zoomcoeff and switch to LOADING
 	 * x  C finishes LOADING and becomes WAITING, sends message to S
 	 * x  S waits for all client to be WAITING, then asks all C to start and switch them to PLAYING
-	 *    C each C receives the message and starts the game, switching to PLAYING
-	 *    when the game is over, C finishes it and needs the stats : it is blocked but the state is still PLAYING
-	 *    S sends the stats to all C and switch them to BROWSING_R
-	 *    C receives the stats and goes on with its process, switching to BROWSING_R
+	 * x  each C receives the message and starts the game, switching to PLAYING
+	 * x  when the game is over, C finishes it and needs the stats : it is blocked but the state is still PLAYING
+	 * x  S sends the stats to all C and switch them to BROWSING_R
+	 * x  C receives the stats and goes on with its process, switching to BROWSING_R
 	 *  
 	 */
 }

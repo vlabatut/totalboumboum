@@ -736,7 +736,7 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		connectionsLock.unlock();
 	}
 	
-	public void waitForStart()
+	public void waitForClients()
 	{	roundLock.lock();
 		{	// wait for all clients to be ready
 			try
