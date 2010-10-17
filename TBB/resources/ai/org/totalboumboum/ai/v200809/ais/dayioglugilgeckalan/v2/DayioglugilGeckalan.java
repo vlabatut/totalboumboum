@@ -54,7 +54,7 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 		
 		 zone = getPercepts();
 		width = zone.getWidth();
-		heigh = zone.getHeigh();
+		heigh = zone.getHeight();
 		 ownHero = zone.getOwnHero();
 		 x=getPercepts().getOwnHero().getCol();
 		 y=getPercepts().getOwnHero().getLine();

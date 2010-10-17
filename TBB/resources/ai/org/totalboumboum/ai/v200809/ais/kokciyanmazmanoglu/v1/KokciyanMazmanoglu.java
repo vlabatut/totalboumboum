@@ -53,7 +53,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 		AiHero ownHero = zone.getOwnHero();
 		this.currentTile = zone.getTile(ownHero.getLine(), ownHero.getCol());
-		FieldMatrix = new double[zone.getWidth()][zone.getHeigh()];
+		FieldMatrix = new double[zone.getWidth()][zone.getHeight()];
 
 		AiAction result = new AiAction(AiActionName.NONE);
 		getMatrixValues(FieldMatrix);
@@ -178,7 +178,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 		for(int i = 0; i<zone.getWidth(); i++){
 			checkInterruption();	
-			for(int j = 0; i<zone.getHeigh(); i++){
+			for(int j = 0; i<zone.getHeight(); i++){
 				checkInterruption();
 
 				AiTile tActual = zone.getTile(i, j);
@@ -321,7 +321,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		result = tile.getLine()>0 && !isObstacle(tile.getLine()-1,tile.getCol());
 		break;
 	case DOWN:
-		result = tile.getLine()<(zone.getHeigh()-1) && !isObstacle(tile.getLine()+1,tile.getCol());
+		result = tile.getLine()<(zone.getHeight()-1) && !isObstacle(tile.getLine()+1,tile.getCol());
 		break;
 	case LEFT:
 		result = tile.getCol()>0 && !isObstacle(tile.getLine(),tile.getCol()-1);
@@ -445,7 +445,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				result = true;
 			} else {
 				while (i < power) {
-					if (bombTile.getLine() + i < zone.getHeigh()) {
+					if (bombTile.getLine() + i < zone.getHeight()) {
 						if (possibleMoveD(ai.getLine(), ai.getCol(), i, -2)) {
 							if (!isMovePossible(ai.getLine(), ai.getCol() + i,
 									Direction.LEFT)
@@ -583,7 +583,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	case -2: // y down
 		result=true;
 		while(d>0){
-			if(y+d<zone.getHeigh()){
+			if(y+d<zone.getHeight()){
 				if(!isObstacle(x,y+d))
 					result=true;
 				else
@@ -1003,7 +1003,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		}
 		for(int i = 0;i<bomb.getRange();i++){
 			checkInterruption();
-			if (zone.getOwnHero().getLine() + i < zone.getHeigh() - 3) {
+			if (zone.getOwnHero().getLine() + i < zone.getHeight() - 3) {
 				AiTile t = zone.getTile(bomb.getLine() + i, bomb.getCol());
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
 				while (bombIt.hasNext()) {
@@ -1039,7 +1039,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 		for (int i = 0; i < zone.getWidth(); i++){
 			checkInterruption();
-			for (int j = 0; j < zone.getHeigh(); j++){
+			for (int j = 0; j < zone.getHeight(); j++){
 				checkInterruption();
 				if(FieldMatrix[i][j]<min){
 					min=FieldMatrix[i][j];
@@ -1090,7 +1090,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			}
 			for(int k=1;k<temp.getRange();k++){
 				checkInterruption();
-				if(bx+k<zone.getHeigh()-3)
+				if(bx+k<zone.getHeight()-3)
 					FieldMatrix[bx+k][by] = time;
 			}
 			for(int k=1;k<temp.getRange();k++){
@@ -1191,7 +1191,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			}
 			for(int k=1;k<temp.getRange();k++){
 				checkInterruption();
-				if(bx+k<zone.getHeigh()-3)
+				if(bx+k<zone.getHeight()-3)
 					FieldMatrix[bx+k][by] += time;
 			}
 			for(int k=1;k<temp.getRange();k++){
@@ -1239,7 +1239,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		}
 		for(int i = 0;i<=4;i++){
 			checkInterruption();
-			if (zone.getOwnHero().getLine() + i < zone.getHeigh() - 3) {
+			if (zone.getOwnHero().getLine() + i < zone.getHeight() - 3) {
 				AiTile t = zone.getTile(bomb.getLine() + i, bomb.getCol());
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
 				if(bombIt.hasNext()) result = true;

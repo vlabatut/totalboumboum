@@ -294,9 +294,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 			c = col;
 		//
 		if(p[1]==Direction.UP)
-			l = (line+zone.getHeigh()-1)%zone.getHeigh();
+			l = (line+zone.getHeight()-1)%zone.getHeight();
 		else if(p[1]==Direction.DOWN)
-			l = (line+1)%zone.getHeigh();
+			l = (line+1)%zone.getHeight();
 		else
 			l = line;
 		//

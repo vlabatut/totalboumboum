@@ -79,8 +79,8 @@ public class DemirciDuzokErgok extends ArtificialIntelligence
   star = new Astar(this,OurBomberMan, costCalc, heuristicCalc);
   
   System.out.println("Width : "+zone_IA.getWidth());
-  System.out.println("Heigth : "+zone_IA.getHeigh()); 
-  for(int i=0; i< zone_IA.getHeigh(); i++)
+  System.out.println("Heigth : "+zone_IA.getHeight()); 
+  for(int i=0; i< zone_IA.getHeight(); i++)
   {
 	  for(int j=0; j< zone_IA.getWidth(); j++)
 		  System.out.println(i+" "+j+" "+zone.returnMatrix()[i][j]);
@@ -168,10 +168,10 @@ public AiTile sidanger() throws StopRequestException {
   checkInterruption(); // APPEL OBLIGATOIRE
   
   Collection<AiTile> secure = new ArrayList<AiTile>();
-  AiTile jeu[][] = new AiTile[zone_IA.getHeigh()][zone_IA.getWidth()];
+  AiTile jeu[][] = new AiTile[zone_IA.getHeight()][zone_IA.getWidth()];
   
   //une matrice vide
-  for (int line = 0; line < zone_IA.getHeigh(); line++) {
+  for (int line = 0; line < zone_IA.getHeight(); line++) {
    checkInterruption(); // APPEL OBLIGATOIRE
    for (int col = 0; col < zone_IA.getWidth(); col++) {
     checkInterruption(); // APPEL OBLIGATOIRE
@@ -181,7 +181,7 @@ public AiTile sidanger() throws StopRequestException {
  
   AiTile jeu_case;
   
-  for (int line = 0; line < zone_IA.getHeigh(); line++) {
+  for (int line = 0; line < zone_IA.getHeight(); line++) {
    checkInterruption(); // APPEL OBLIGATOIRE
    for (int col = 0; col < zone_IA.getWidth(); col++) {
     checkInterruption(); // APPEL OBLIGATOIRE
@@ -218,7 +218,7 @@ public AiTile sidanger() throws StopRequestException {
   AiTile tile;
   Iterator<AiBomb> bombs;
   
-  for (int line = 0; line < zone_IA.getHeigh(); line++) {
+  for (int line = 0; line < zone_IA.getHeight(); line++) {
    checkInterruption(); // APPEL OBLIGATOIRE
    for (int col = 0; col < zone_IA.getWidth(); col++) {
     checkInterruption(); // APPEL OBLIGATOIRE

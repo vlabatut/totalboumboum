@@ -106,7 +106,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		hero = zone.getOwnHero();
 		action = new AiAction(AiActionName.NONE);
 		width = zone.getWidth();
-		height = zone.getHeigh();
+		height = zone.getHeight();
 		currentTile = hero.getTile();
 		
 	}

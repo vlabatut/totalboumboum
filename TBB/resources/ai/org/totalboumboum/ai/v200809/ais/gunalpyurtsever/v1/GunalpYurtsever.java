@@ -254,12 +254,12 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		int line = targetHero.getCol();
 		boolean up=true;
 		boolean right=false;
-		if(getPercepts().getHeigh()/2<col)
+		if(getPercepts().getHeight()/2<col)
 			up = false;
 		if(getPercepts().getWidth()/2<line)	
 		 right = true;
 		int verDif = getPercepts().getWidth()-col-3;
-		int horDif = getPercepts().getHeigh()-line;
+		int horDif = getPercepts().getHeight()-line;
 		if(up && right)
 			if(line<verDif)
 				if(this.isClear(targetHero.getTile().getNeighbor(Direction.DOWN)))

@@ -337,7 +337,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 				
 				if (i != caractere.getCol() || j != caractere.getLine()) {
 					if (0 < i && i < zone.getWidth() && 0 < j
-							&& j < zone.getHeigh()) {
+							&& j < zone.getHeight()) {
 						if (zoneAdapted.getZoneArray()[i][j] != ZoneEnum.FEUPOSSIBLE
 								&& zoneAdapted.getZoneArray()[i][j] != ZoneEnum.BOMBE
 								&& zoneAdapted.getZoneArray()[i][j] != ZoneEnum.FEU
@@ -690,7 +690,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 			checkInterruption(); // Appel Obligatoire
 			for(int j = caractere.getLine() - 3; j <= caractere.getLine() + 3; j++) {
 				checkInterruption(); // Appel Obligatoire
-				if (i > 0 && i < zone.getWidth() && j > 0	&& j < zone.getHeigh())
+				if (i > 0 && i < zone.getWidth() && j > 0	&& j < zone.getHeight())
 				{
 					
 					AiTile temp = this.zone.getTile(j, i);
@@ -708,7 +708,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 							{
 								for(int l = j - 3; l <= j + 3; l++)
 								{checkInterruption(); // Appel Obligatoire
-									if(k > 0 && k < zone.getWidth() && l > 0	&& l < zone.getHeigh()){
+									if(k > 0 && k < zone.getWidth() && l > 0	&& l < zone.getHeight()){
 										PathFinder pathFindEscape = new PathFinder(this.zone,zoneArraySimulated,this.zone.getTile(j,i),this.zone.getTile(l,k),this,SearchModeEnum.BOMB_SIMULATION);							
 										LinkedList<AiTile> foundPathEscape = pathFindEscape.getPath();
 										if (!foundPathEscape.isEmpty() && foundPathEscape != null) 
@@ -743,7 +743,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		
 		for (int i = 0; i < zone.getWidth(); i++) {
 			checkInterruption(); // Appel Obligatoire
-			for (int j = 0; j < zone.getHeigh(); j++) {
+			for (int j = 0; j < zone.getHeight(); j++) {
 				checkInterruption(); // Appel Obligatoire
 				if (zone.getTile(j, i).getBlock() != null && zone.getTile(j, i).getBlock().isDestructible())
 					blocksDestructibles.add(zone.getTile(j, i));
@@ -869,7 +869,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		{checkInterruption(); // Appel Obligatoire
 			for(int j = tile.getLine() - 2; j < tile.getLine() + 2; j++)
 			{checkInterruption(); // Appel Obligatoire
-				if(tile.getCol() != i && tile.getLine() != j && i > 1 && j > 1 && i < zone.getWidth() && j < zone.getHeigh())
+				if(tile.getCol() != i && tile.getLine() != j && i > 1 && j > 1 && i < zone.getWidth() && j < zone.getHeight())
 				{
 					PathFinder pathFind = new PathFinder(zone,zoneDangerTemp,tile,zone.getTile(j,i),this,SearchModeEnum.BOMB_SIMULATION);
 					if(pathFind.getPath().size() < minDist && !pathFind.getPath().isEmpty())
@@ -895,7 +895,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 			{
 				checkInterruption(); // Appel Obligatoire
 				//Pour une carre qui entoure le rival
-				if(j > 1 && i > 1 && j < zone.getHeigh()-1 && i < zone.getWidth()-1 && !zone.getTile(j,i).equals(hero.getTile()) && zoneAdapted.getZoneArray()[i][j]==ZoneEnum.LIBRE
+				if(j > 1 && i > 1 && j < zone.getHeight()-1 && i < zone.getWidth()-1 && !zone.getTile(j,i).equals(hero.getTile()) && zoneAdapted.getZoneArray()[i][j]==ZoneEnum.LIBRE
 						&& Math.abs(hero.getTile().getCol()-i)>1 && Math.abs(hero.getTile().getLine()-j)>1)
 				{
 					PathFinder pathFinder = new PathFinder(this.zone,zone.getTile(j,i),this,SearchModeEnum.BLOC_DEST_INDEST);
@@ -911,7 +911,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 							for(int l = j - 2; l < j + 2 && !pathCaractereFound;l++)
 							{
 								checkInterruption(); // Appel Obligatoire
-								if(l > 1 && k > 1 && l < zone.getHeigh() && k < zone.getWidth())
+								if(l > 1 && k > 1 && l < zone.getHeight() && k < zone.getWidth())
 								{
 									PathFinder pathCaractereFinder = new PathFinder(this.zone,zoneDanger,zone.getTile(j,i),zone.getTile(l, k),this,SearchModeEnum.BOMB_SIMULATION);
 									if(pathCaractereFinder.getPath().size() <= 6 && !pathCaractereFinder.getPath().isEmpty())
@@ -928,7 +928,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 								{	
 									checkInterruption(); // Appel Obligatoire
 									
-									if(n > 1 && m > 1 && n < zone.getHeigh() -1  && m < zone.getWidth() - 1)
+									if(n > 1 && m > 1 && n < zone.getHeight() -1  && m < zone.getWidth() - 1)
 									{
 				
 										PathFinder pathRivalFinder = new PathFinder(this.zone,zoneDanger,hero.getTile(),zone.getTile(n,m),this,SearchModeEnum.BOMB_SIMULATION);
@@ -987,7 +987,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 			for(int j = caractere.getLine() - 6; j < caractere.getCol() + 6; j++)
 			{
 				checkInterruption(); // Appel Obligatoire
-				if(i > 0 && j > 0 && i < zone.getWidth() -1 && j < zone.getHeigh() - 1 && zoneAdapted.getZoneArray()[i][j]!=ZoneEnum.BLOCDEST && zoneAdapted.getZoneArray()[i][j]!=ZoneEnum.BLOCINDEST)
+				if(i > 0 && j > 0 && i < zone.getWidth() -1 && j < zone.getHeight() - 1 && zoneAdapted.getZoneArray()[i][j]!=ZoneEnum.BLOCDEST && zoneAdapted.getZoneArray()[i][j]!=ZoneEnum.BLOCINDEST)
 				{
 					ZoneEnum simulZone[][] = zoneAdapted.simulateBomb(zone.getTile(j,i));
 					PathFinder escapePath = new PathFinder(this.zone,simulZone,caractere.getTile(),zone.getTile(j,i),this,SearchModeEnum.BOMB_SIMULATION);
@@ -1001,7 +1001,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 							for(int l = hero.getLine()-2;l<hero.getLine()+2;l++)
 							{
 								checkInterruption(); // Appel Obligatoire
-								if(l > 0 && k > 0 && k < zone.getWidth() -1 && l < zone.getHeigh() - 1 )
+								if(l > 0 && k > 0 && k < zone.getWidth() -1 && l < zone.getHeight() - 1 )
 								{
 									if(simulZone[k][l]==ZoneEnum.EXPLOSION_SIMULE)
 										count++;
@@ -1051,7 +1051,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 			
 				checkInterruption(); // Appel Obligatoire
 				//Pour un carre de 3x3 qui entoure le caractere
-				if(i > 1 && j > 1 && i < zone.getWidth() - 1 && j < zone.getHeigh() - 1 && zoneAdapted.getZoneArray()[i][j] != ZoneEnum.BLOCDEST && zoneAdapted.getZoneArray()[i][j] != ZoneEnum.BLOCINDEST){
+				if(i > 1 && j > 1 && i < zone.getWidth() - 1 && j < zone.getHeight() - 1 && zoneAdapted.getZoneArray()[i][j] != ZoneEnum.BLOCDEST && zoneAdapted.getZoneArray()[i][j] != ZoneEnum.BLOCINDEST){
 				
 				//Est-ce qu'on peut se sauver?
 				boolean escapeFound = false;
@@ -1061,7 +1061,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 					for(int l = j - 3; l <= j + 3;l++)
 					{
 						
-						if(k > 1 && l > 1 && k < zone.getWidth() - 1 && l < zone.getHeigh() - 1){
+						if(k > 1 && l > 1 && k < zone.getWidth() - 1 && l < zone.getHeight() - 1){
 						PathFinder pathFind = new PathFinder(zone,zoneDanger,zone.getTile(j,i),zone.getTile(l,k),this,SearchModeEnum.BOMB_SIMULATION);
 						if(pathFind.getPath().size() < 6 && !pathFind.getPath().isEmpty())
 						{
@@ -1082,7 +1082,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 						for(int n = hero.getTile().getLine() - 3; n <= hero.getTile().getLine() + 3; n++)
 						{
 						
-							if(m > 1 && n > 1 && m < zone.getWidth() - 1 && n < zone.getHeigh() -1){
+							if(m > 1 && n > 1 && m < zone.getWidth() - 1 && n < zone.getHeight() -1){
 							PathFinder pathFindRival = new PathFinder(zone,zoneDanger,hero.getTile(),zone.getTile(n,m),this,SearchModeEnum.BOMB_SIMULATION);
 							if(pathFindRival.getPath().size() < minPath || pathFindRival.getPath().isEmpty())
 							{

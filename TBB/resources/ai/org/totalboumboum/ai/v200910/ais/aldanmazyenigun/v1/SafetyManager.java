@@ -67,7 +67,7 @@ public class SafetyManager
 	
 		this.ai = ai;
 		zone = ai.getZone();
-		matrix = new double[zone.getHeigh()][zone.getWidth()];
+		matrix = new double[zone.getHeight()][zone.getWidth()];
 		processedBombs = new ArrayList<AiBomb>();
 	}
 	
@@ -110,7 +110,7 @@ public class SafetyManager
 		processedBombs.clear();
 		
 		// on initialise la matrice : toutes les cases sont sûres
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -121,7 +121,7 @@ public class SafetyManager
 		AiHero ownHero = ai.getOwnHero();
 		// si le personnage est sensible au feu, on tient compte des explosions en cours et à venir
 		if(!ownHero.hasThroughFires())
-		{	for(int line=0;line<zone.getHeigh();line++)
+		{	for(int line=0;line<zone.getHeight();line++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 				for(int col=0;col<zone.getWidth();col++)
 				{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -157,7 +157,7 @@ public class SafetyManager
 		
 		if(verbose)
 		{	System.out.println(">>>>>>>>>> SAFETY MATRIX <<<<<<<<<<");
-			for(int line=0;line<zone.getHeigh();line++)
+			for(int line=0;line<zone.getHeight();line++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 				for(int col=0;col<zone.getWidth();col++)
 				{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -280,7 +280,7 @@ public class SafetyManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		List<AiTile> result = new ArrayList<AiTile>();
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -319,7 +319,7 @@ public class SafetyManager
 		AiOutput output = ai.getOutput();
 	
 		// couleurs des cases
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -339,7 +339,7 @@ public class SafetyManager
 		// texte des cases
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(0);
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE

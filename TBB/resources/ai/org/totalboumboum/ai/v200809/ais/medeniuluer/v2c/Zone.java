@@ -45,7 +45,7 @@ public class Zone {
 		this.objects = zone.getItems();
 		this.fires = zone.getFires();
 		this.xMax = zone.getWidth();
-		this.yMax = zone.getHeigh();
+		this.yMax = zone.getHeight();
 		init();
 	}
 
@@ -181,9 +181,9 @@ public class Zone {
 
 	public ZoneEnum[][] simulateBomb(AiTile bomb) throws StopRequestException {
 		mu.checkInterruption(); // Appel Obligatoire
-		ZoneEnum[][] result = new ZoneEnum[zone.getWidth()][zone.getHeigh()];
+		ZoneEnum[][] result = new ZoneEnum[zone.getWidth()][zone.getHeight()];
 		//Reproduisons le tableau:
-		for(int k = 0; k <this.zone.getHeigh(); k++)
+		for(int k = 0; k <this.zone.getHeight(); k++)
 		{	mu.checkInterruption(); // Appel Obligatoire
 			for(int l = 0; l<this.zone.getWidth();l++)
 			{	mu.checkInterruption(); // Appel Obligatoire

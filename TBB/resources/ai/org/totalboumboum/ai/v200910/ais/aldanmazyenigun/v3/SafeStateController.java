@@ -35,7 +35,7 @@ public class SafeStateController {
 			
 			
 			// init A*
-			double costMatrix[][] = new double[zone.getWidth()][zone.getHeigh()];
+			double costMatrix[][] = new double[zone.getWidth()][zone.getHeight()];
 			costCalculator = new MatrixCostCalculator(costMatrix);
 			heuristicCalculator = new BasicHeuristicCalculator();
 			astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
@@ -154,7 +154,7 @@ public class SafeStateController {
 			double dangerMatrix[][] = ai.getZoneFormee().returnMatrix();
 			for(int line=0;line<zone.getWidth();line++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-				for(int col=0;col<zone.getHeigh();col++)
+				for(int col=0;col<zone.getHeight();col++)
 				{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 					double cost = dangerMatrix[line][col];
 					costCalculator.setCost(line,col,cost);

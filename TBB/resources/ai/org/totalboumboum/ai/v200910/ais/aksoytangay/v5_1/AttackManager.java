@@ -699,7 +699,7 @@ public class AttackManager {
 			if(((Math.abs(heroToAttack.getTile().getCol()-myAI.getOwnHeroTile().getCol()) < myAI.getOwnHero().getBombRange()) ||
 					(Math.abs(heroToAttack.getTile().getLine()-myAI.getOwnHeroTile().getLine()) < myAI.getOwnHero().getBombRange())) &&
 					((Math.abs(heroToAttack.getTile().getCol()-myAI.getOwnHeroTile().getCol()) <= percepts.getWidth()/3) ||
-							(Math.abs(heroToAttack.getTile().getLine()-myAI.getOwnHeroTile().getLine()) <= percepts.getHeigh()/3)) &&
+							(Math.abs(heroToAttack.getTile().getLine()-myAI.getOwnHeroTile().getLine()) <= percepts.getHeight()/3)) &&
 							isAtCorner(heroToAttack.getTile()))
 				if(!isDangerToAttack())
 					attackType = AttackType.TWOORTHREEBOMBL;
@@ -886,7 +886,7 @@ public class AttackManager {
 				AiTile tmpTile = heroToAttack.getTile();
 				while(zone.getMatrix()[tmpTile.getLine()][tmpTile.getCol()] != State.INDESTRUCTIBLE)
 				{
-					if(heroToAttack.getLine()<percepts.getHeigh()/2)
+					if(heroToAttack.getLine()<percepts.getHeight()/2)
 						tmpTile = percepts.getTile(tmpTile.getLine()-1, tmpTile.getCol());
 					else
 						tmpTile = percepts.getTile(tmpTile.getLine()+1, tmpTile.getCol());
@@ -1092,7 +1092,7 @@ public class AttackManager {
 		{
 			for(int j = 1;j<4;j++)
 			{
-				if(tile.getLine()<percepts.getHeigh()/2)
+				if(tile.getLine()<percepts.getHeight()/2)
 				{
 					if(zone.getMatrix()[tile.getLine()][tile.getCol()-j] == State.INDESTRUCTIBLE)
 					{

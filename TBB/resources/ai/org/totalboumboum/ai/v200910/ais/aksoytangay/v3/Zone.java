@@ -69,7 +69,7 @@ public class Zone {
 		items = zone.getItems();
 		
 		width = zone.getWidth();
-		height = zone.getHeigh();
+		height = zone.getHeight();
 		
 		//on rempli la matrice d'état par rapport aux ces infos
 		fillMatrix();

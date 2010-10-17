@@ -44,7 +44,7 @@ public class BombMatrice {
 		this.blocks=map.getBlocks();
 		//this.rivals=map.getHeroes();
 		this.x=map.getWidth();
-		this.y=map.getHeigh();
+		this.y=map.getHeight();
 		this.dangerZone=dangerZone;
 		init();
 	}
@@ -205,7 +205,7 @@ public class BombMatrice {
 		for(int i = 0; i<map.getWidth() ; i++)
 		{
 			source.checkInterruption();
-			for(int j = 0; j < map.getHeigh(); j++)
+			for(int j = 0; j < map.getHeight(); j++)
 			{
 				source.checkInterruption();
 				System.out.print("("+j+","+i+"): "+ bombMatrice[i][j]);

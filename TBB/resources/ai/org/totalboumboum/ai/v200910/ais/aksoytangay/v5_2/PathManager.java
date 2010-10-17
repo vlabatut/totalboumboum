@@ -132,7 +132,7 @@ public class PathManager {
 				
 		zone = new Zone(percepts, myAI);
 			
-		for(int i=0;i<percepts.getHeigh();i++)
+		for(int i=0;i<percepts.getHeight();i++)
 		{
 			myAI.checkInterruption();
 			for(int j=0;j<percepts.getWidth();j++)
@@ -188,7 +188,7 @@ public class PathManager {
 				
 		zone = new Zone(percepts, myAI);
 		
-		for(int i=0;i<percepts.getHeigh();i++)
+		for(int i=0;i<percepts.getHeight();i++)
 		{
 			myAI.checkInterruption();
 			for(int j=0;j<percepts.getWidth();j++)
@@ -215,7 +215,7 @@ public class PathManager {
 				
 		zone = new Zone(percepts, myAI);
 		
-		for(int i=0;i<percepts.getHeigh();i++)
+		for(int i=0;i<percepts.getHeight();i++)
 		{
 			myAI.checkInterruption();
 			for(int j=0;j<percepts.getWidth();j++)

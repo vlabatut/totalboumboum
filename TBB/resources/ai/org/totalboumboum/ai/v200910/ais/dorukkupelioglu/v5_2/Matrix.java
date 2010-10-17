@@ -37,7 +37,7 @@ public class Matrix
 	{
 		dk.checkInterruption();
 		width=zone.getWidth(); //largeur de la zone
-		height=zone.getHeigh();//hauteur de la zone
+		height=zone.getHeight();//hauteur de la zone
 		ownHero = zone.getOwnHero(); //dk:DorukKupelioglu
 		
 		areaMatrix = new double[height][width];
@@ -95,7 +95,7 @@ public class Matrix
 
 	private void putFREE()throws StopRequestException//önce her yeri free yaptık
 	{
-		for (line = 0; line < zone.getHeigh(); line++) 
+		for (line = 0; line < zone.getHeight(); line++) 
 		{
 			dk.checkInterruption();
 			for (col = 0; col < zone.getWidth(); col++) 
@@ -297,7 +297,7 @@ public class Matrix
 	private void findSafes()throws StopRequestException
 	{
 		dk.checkInterruption();
-		for(line=0;line<zone.getHeigh();line++)
+		for(line=0;line<zone.getHeight();line++)
 		{
 			dk.checkInterruption();
 			for(col=0;col<zone.getWidth();col++)
@@ -493,7 +493,7 @@ public class Matrix
 	public void printAreaMatrix()throws StopRequestException
 	{
 		dk.checkInterruption();
-		for(line=0;line<zone.getHeigh();line++)
+		for(line=0;line<zone.getHeight();line++)
 		{
 			dk.checkInterruption();
 			for(col=0;col<zone.getWidth();col++)
@@ -509,7 +509,7 @@ public class Matrix
 	public void printTimeLeft()throws StopRequestException
 	{
 		dk.checkInterruption();
-		for(line=0;line<zone.getHeigh();line++)
+		for(line=0;line<zone.getHeight();line++)
 		{
 			dk.checkInterruption();
 			for(col=0;col<zone.getWidth();col++)

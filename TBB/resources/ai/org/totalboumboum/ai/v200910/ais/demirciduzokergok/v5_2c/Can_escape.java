@@ -75,7 +75,7 @@ public class Can_escape {
 		this.our_hero=zone.getOwnHero();
 		
 		this.width=zone.getWidth();
-		this.height=zone.getHeigh();
+		this.height=zone.getHeight();
 		/*Avec la fonction Fill_The_Matrix,on remplir la matrice */
 		Fill_The_Matrix();
 	}

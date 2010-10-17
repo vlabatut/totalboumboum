@@ -78,7 +78,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 		checkInterruption();
 		
 		AiZone zone = getPercepts();
-		line = zone.getHeigh();
+		line = zone.getHeight();
 		col = zone.getWidth();
 		AiHero ownHero= zone.getOwnHero();
 		currentTile = ownHero.getTile();

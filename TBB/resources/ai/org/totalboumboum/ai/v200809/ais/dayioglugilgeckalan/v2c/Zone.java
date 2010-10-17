@@ -44,7 +44,7 @@ public class Zone{
 		this.objets = zone.getItems();
 		this.feus = zone.getFires();
 		this.xMax = zone.getWidth(); 
-		this.yMax = zone.getHeigh();
+		this.yMax = zone.getHeight();
 		init();
 	}
 	

@@ -45,7 +45,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		// d'interruption
 
 		checkInterruption();
-		matris = new int[getPercepts().getHeigh()][getPercepts().getWidth()];
+		matris = new int[getPercepts().getHeight()][getPercepts().getWidth()];
 		AiZone zone = getPercepts();
 
 		AiHero ownHero = zone.getOwnHero();
@@ -96,7 +96,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		//LinkedList<AiTile> danger = dangerZone();
 		AiZone zone = getPercepts();
 
-		for (int i = 0; i < zone.getHeigh(); i++) {
+		for (int i = 0; i < zone.getHeight(); i++) {
 			checkInterruption();
 			for (int j = 0; j < zone.getWidth(); j++) {
 				checkInterruption();
@@ -180,7 +180,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 		}
 		for (int i = 0 ; i < getPercepts().getWidth() ; i++) {
 			checkInterruption(); // APPEL OBLIGATOIRE
-			for (int j = 0 ; j < getPercepts().getHeigh() ; j++) {
+			for (int j = 0 ; j < getPercepts().getHeight() ; j++) {
 				checkInterruption(); // APPEL OBLIGATOIRE
 				AiTile tile = getPercepts().getTile(j,i);
 				if ( !dangerZone.contains(tile) && !blok.contains(tile))

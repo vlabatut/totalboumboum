@@ -23,7 +23,7 @@ public class SafetyManager
 		
 		this.ai = ai;
 		zone = ai.getZone();
-		matrix = new double[zone.getHeigh()][zone.getWidth()];
+		matrix = new double[zone.getHeight()][zone.getWidth()];
 		processedBombs = new ArrayList<AiBomb>();	
 	}
 	
@@ -48,7 +48,7 @@ public class SafetyManager
 		processedBombs.clear();
 		
 		// initialisation de la matrice du jeu
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption();
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption();
@@ -59,7 +59,7 @@ public class SafetyManager
 		AiHero ownHero = ai.getOwnHero();
 
 		if(!ownHero.hasThroughFires())
-		{	for(int line=0;line<zone.getHeigh();line++)
+		{	for(int line=0;line<zone.getHeight();line++)
 			{	ai.checkInterruption();
 				for(int col=0;col<zone.getWidth();col++)
 				{	ai.checkInterruption();
@@ -174,7 +174,7 @@ public class SafetyManager
 	{	ai.checkInterruption();
 	
 		List<AiTile> result = new ArrayList<AiTile>();
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption();
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption();

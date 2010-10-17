@@ -135,7 +135,7 @@ private  AiHero bomberman;
 		Astar fuite;
 		Collection<AiTile> destination = new ArrayList<AiTile>();
 	
-		for (int line = 0; line < zone.getHeigh(); line++) {
+		for (int line = 0; line < zone.getHeight(); line++) {
 			checkInterruption(); // APPEL OBLIGATOIRE
 			for (int col = 0; col < zone.getWidth(); col++) {
 				checkInterruption(); // APPEL OBLIGATOIRE

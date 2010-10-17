@@ -46,7 +46,7 @@ public class Zone_IA {
 		this.items = zone_IA.getItems();
 		this.feu = zone_IA.getFires();
 		this.width = zone_IA.getWidth();
-		this.height = zone_IA.getHeigh();	
+		this.height = zone_IA.getHeight();	
 		
 		former_Matrice();
 	}

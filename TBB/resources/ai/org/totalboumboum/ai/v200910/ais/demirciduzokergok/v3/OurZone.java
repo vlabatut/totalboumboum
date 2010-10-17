@@ -34,7 +34,7 @@ public class OurZone {
 		this.fires = zone.getFires();
 		this.our_bomberman = zone.getOwnHero();
 		this.width = zone.getWidth();
-		this.height = zone.getHeigh();
+		this.height = zone.getHeight();
 		// Notre fonction pour remplir la matrice:
 		FillTheMatrix();
 

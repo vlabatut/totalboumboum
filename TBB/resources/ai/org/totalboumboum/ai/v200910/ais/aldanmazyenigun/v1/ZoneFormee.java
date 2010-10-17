@@ -83,7 +83,7 @@ public class ZoneFormee {
 		this.bonus = zone.getItems();
 		this.fires = zone.getFires();
 		this.width = zone.getWidth();
-		this.heigh = zone.getHeigh();
+		this.heigh = zone.getHeight();
 		fillZone();
 	}
 	

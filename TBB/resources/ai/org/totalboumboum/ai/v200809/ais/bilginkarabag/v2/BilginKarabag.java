@@ -432,7 +432,7 @@ public class BilginKarabag extends ArtificialIntelligence {
 		int column = tile.getCol();
 		int line = tile.getLine();
 		int width = zone.getWidth();
-		int height = zone.getHeigh();
+		int height = zone.getHeight();
 		while (bombsIterator.hasNext()) {
 			AiBomb bomb = bombsIterator.next();
 			int range = ownHero.getBombRange();

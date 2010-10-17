@@ -63,8 +63,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		AiHero ownHero = zone.getOwnHero();
 		this.currentTile =ownHero.getTile();
 
-		FieldMatrix = new double[zone.getHeigh()][zone.getWidth()];
-		ActionMatrix = new double[zone.getHeigh()][zone.getWidth()];
+		FieldMatrix = new double[zone.getHeight()][zone.getWidth()];
+		ActionMatrix = new double[zone.getHeight()][zone.getWidth()];
 		AiAction result = new AiAction(AiActionName.NONE);
 
 
@@ -291,7 +291,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		checkInterruption();
 
 
-		for(int i = 0; i<zone.getHeigh(); i++){
+		for(int i = 0; i<zone.getHeight(); i++){
 			checkInterruption();	
 			for(int j = 0; j<zone.getWidth(); j++){
 				checkInterruption();
@@ -323,7 +323,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		list.offer(currentTile);
 		LinkedList<AiTile> checked = new LinkedList<AiTile>();
 
-		for(int i = 0; i<zone.getHeigh(); i++){
+		for(int i = 0; i<zone.getHeight(); i++){
 			checkInterruption();
 			for(int j = 0; j<zone.getWidth(); j++){
 				checkInterruption();
@@ -359,7 +359,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		list.offer(currentTile);
 		LinkedList<AiTile> checked = new LinkedList<AiTile>();
 
-		for(int i = 0; i<zone.getHeigh(); i++){
+		for(int i = 0; i<zone.getHeight(); i++){
 			checkInterruption();
 			for(int j = 0; j<zone.getWidth(); j++){
 				checkInterruption();
@@ -514,7 +514,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		result = tile.getLine()>0 && !isObstacle(tile.getLine()-1,tile.getCol());
 		break;
 	case DOWN:
-		result = tile.getLine()<(zone.getHeigh()-1) && !isObstacle(tile.getLine()+1,tile.getCol());
+		result = tile.getLine()<(zone.getHeight()-1) && !isObstacle(tile.getLine()+1,tile.getCol());
 		break;
 	case LEFT:
 		result = tile.getCol()>0 && !isObstacle(tile.getLine(),tile.getCol()-1);
@@ -638,7 +638,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				result = true;
 			} else {
 				while (i < power) {
-					if (bombTile.getLine() + i < zone.getHeigh()) {
+					if (bombTile.getLine() + i < zone.getHeight()) {
 						if (possibleMoveD(ai.getLine(), ai.getCol(), i, -2)) {
 							if (!isMovePossible(ai.getLine(), ai.getCol() + i,
 									Direction.LEFT)
@@ -776,7 +776,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	case -2: // y down
 		result=true;
 		while(d>0){
-			if(y+d<zone.getHeigh()){
+			if(y+d<zone.getHeight()){
 				if(!isObstacle(x,y+d))
 					result=true;
 				else
@@ -1223,7 +1223,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		}
 		for(int i = 0;i<bomb.getRange();i++){
 			checkInterruption();
-			if (zone.getOwnHero().getLine() + i < zone.getHeigh()) {
+			if (zone.getOwnHero().getLine() + i < zone.getHeight()) {
 				AiTile t = zone.getTile(bomb.getLine() + i, bomb.getCol());
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
 				while (bombIt.hasNext()) {
@@ -1257,7 +1257,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		AiTile cible=null;
 		double min=100000;
 
-		for (int i = 0; i < zone.getHeigh(); i++){
+		for (int i = 0; i < zone.getHeight(); i++){
 			checkInterruption();
 			for (int j = 0; j < zone.getWidth(); j++){
 				checkInterruption();
@@ -1310,7 +1310,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			}
 			for(int k=1;k<temp.getRange();k++){
 				checkInterruption();
-				if(bx+k<zone.getHeigh())
+				if(bx+k<zone.getHeight())
 					FieldMatrix[bx+k][by] = time;
 			}
 			for(int k=1;k<temp.getRange();k++){
@@ -1413,7 +1413,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			}
 			for(int k=1;k<temp.getRange();k++){
 				checkInterruption();
-				if(bx+k<zone.getHeigh()-3)
+				if(bx+k<zone.getHeight()-3)
 					FieldMatrix[bx+k][by] += time;
 			}
 			for(int k=1;k<temp.getRange();k++){
@@ -1479,7 +1479,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		}
 		for(int i = 0;i<=4;i++){
 			checkInterruption();
-			if (hero.getLine() + i < zone.getHeigh()) {
+			if (hero.getLine() + i < zone.getHeight()) {
 				AiTile t = zone.getTile(hero.getLine() + i, hero.getCol());
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
 				if(bombIt.hasNext()){ 
@@ -1526,7 +1526,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		if(res>0)
 		{
 			List<AiTile> list = new ArrayList<AiTile>();
-			for (int i = 0; i < zone.getHeigh(); i++){
+			for (int i = 0; i < zone.getHeight(); i++){
 				checkInterruption();
 				for (int j = 0; j < zone.getWidth(); j++){
 					checkInterruption();
@@ -1650,7 +1650,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 						}
 					}
 				}
-				if (tile.getLine() + i < zone.getHeigh() && d) {
+				if (tile.getLine() + i < zone.getHeight() && d) {
 					AiTile t = zone.getTile(tile.getLine() + i, tile.getCol());
 					if(isObstacle(t)){
 						if(isSoft(t)){
@@ -1698,7 +1698,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		checkInterruption();
 		double res=0;
 
-		for (int i = 0; i < zone.getHeigh(); i++){
+		for (int i = 0; i < zone.getHeight(); i++){
 			checkInterruption();
 			for (int j = 0; j < zone.getWidth(); j++){
 				checkInterruption();
@@ -1717,7 +1717,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		checkInterruption();
 		double res=Double.MAX_VALUE;
 
-		for (int i = 0; i < zone.getHeigh(); i++){
+		for (int i = 0; i < zone.getHeight(); i++){
 			checkInterruption();
 			for (int j = 0; j < zone.getWidth(); j++){
 				checkInterruption();
@@ -1735,7 +1735,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		checkInterruption();
 		double res=Double.MAX_VALUE;
 
-		for (int i = 0; i < zone.getHeigh(); i++){
+		for (int i = 0; i < zone.getHeight(); i++){
 			checkInterruption();
 			for (int j = 0; j < zone.getWidth(); j++){
 				checkInterruption();
@@ -1773,7 +1773,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			}
 			for(int k=0;k<=temp.getRange();k++){
 				checkInterruption();
-				if(bx+k<zone.getHeigh())
+				if(bx+k<zone.getHeight())
 					ActionMatrix[bx+k][by] = time;
 			}
 			for(int k=0;k<=temp.getRange();k++){
@@ -1875,9 +1875,9 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			possible.add(zone.getTile(me.getLine()-2,me.getCol()-1));// sol ust capraz
 		if(0<me.getLine()-2 && me.getCol()+1<zone.getWidth())
 			possible.add(zone.getTile(me.getLine()-2,me.getCol()+1));// sag ust capraz
-		if(me.getLine()+2<zone.getHeigh() && 0<me.getCol()-1)
+		if(me.getLine()+2<zone.getHeight() && 0<me.getCol()-1)
 			possible.add(zone.getTile(me.getLine()+2,me.getCol()-1));// sol alt capraz
-		if(me.getLine()+2<zone.getHeigh() && me.getCol()+1<zone.getWidth())
+		if(me.getLine()+2<zone.getHeight() && me.getCol()+1<zone.getWidth())
 			possible.add(zone.getTile(me.getLine()+2,me.getCol()+1));// sag alt capraz
 
 		List<AiTile> result= new ArrayList<AiTile>();
@@ -1916,8 +1916,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	public AiTile findSafeTile() throws StopRequestException{
 		checkInterruption();
 		AiTile res = null;
-		double matrix[][] =  new double[zone.getHeigh()][zone.getWidth()];
-		for(int i = 0; i<zone.getHeigh(); i++){
+		double matrix[][] =  new double[zone.getHeight()][zone.getWidth()];
+		for(int i = 0; i<zone.getHeight(); i++){
 			checkInterruption();
 			for(int j = 0; j<zone.getWidth(); j++){
 				checkInterruption();
@@ -1929,7 +1929,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		double count = MinPosValor(matrix);
 
 		List<AiTile> list = new ArrayList<AiTile>();
-		for (int i = 0; i < zone.getHeigh(); i++){
+		for (int i = 0; i < zone.getHeight(); i++){
 			checkInterruption();
 			for (int j = 0; j < zone.getWidth(); j++){
 				checkInterruption();
@@ -1955,7 +1955,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		double count = MinPosValor(matrix);
 		if(count != Double.MAX_VALUE){
 			List<AiTile> list = new ArrayList<AiTile>();
-			for (int i = 0; i < zone.getHeigh(); i++){
+			for (int i = 0; i < zone.getHeight(); i++){
 				checkInterruption();
 				for (int j = 0; j < zone.getWidth(); j++){
 					checkInterruption();
@@ -1978,8 +1978,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		boolean result = false;
 		int range = zone.getOwnHero().getBombRange();
 
-		double matrix[][] =  new double[zone.getHeigh()][zone.getWidth()];
-		for(int i = 0; i<zone.getHeigh(); i++){
+		double matrix[][] =  new double[zone.getHeight()][zone.getWidth()];
+		for(int i = 0; i<zone.getHeight(); i++){
 			checkInterruption();
 			for(int j = 0; j<zone.getWidth(); j++){
 				checkInterruption();
@@ -2009,8 +2009,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		checkInterruption();
 		boolean result = false;
 		int range = zone.getOwnHero().getBombRange();
-		double matrix[][] = new double[zone.getHeigh()][zone.getWidth()];
-		for(int i = 0; i<zone.getHeigh(); i++){
+		double matrix[][] = new double[zone.getHeight()][zone.getWidth()];
+		for(int i = 0; i<zone.getHeight(); i++){
 			checkInterruption();
 			for(int j = 0; j<zone.getWidth(); j++){
 				checkInterruption();
@@ -2031,7 +2031,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 	public void updateAMWithTraps() throws StopRequestException{
 		checkInterruption();
-		for(int i = 0; i<zone.getHeigh(); i++){
+		for(int i = 0; i<zone.getHeight(); i++){
 			checkInterruption();
 			for(int j = 0; j<zone.getWidth(); j++){
 				checkInterruption();
@@ -2045,7 +2045,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 	public void printmatrix(double matrix[][]) throws StopRequestException{
 		checkInterruption();
-		for(int i = 0; i<zone.getHeigh(); i++){
+		for(int i = 0; i<zone.getHeight(); i++){
 			checkInterruption();
 			String s = "";
 			for(int j = 0; j<zone.getWidth(); j++){
@@ -2076,7 +2076,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 public int countPos() throws StopRequestException{
 	checkInterruption();
 	int count=0;
-	for(int i = 0; i<zone.getHeigh(); i++){
+	for(int i = 0; i<zone.getHeight(); i++){
 		checkInterruption();
 		for(int j = 0; j<zone.getWidth(); j++){
 			checkInterruption();

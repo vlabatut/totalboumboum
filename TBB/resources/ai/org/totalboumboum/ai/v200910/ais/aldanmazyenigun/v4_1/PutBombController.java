@@ -35,7 +35,7 @@ public class PutBombController {
 			
 			
 			// init A*
-			double costMatrix[][] = new double[zone.getHeigh()][zone.getWidth()];
+			double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
 			costCalculator = new MatrixCostCalculator(costMatrix);
 			heuristicCalculator = new BasicHeuristicCalculator();
 			astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
@@ -152,7 +152,7 @@ public class PutBombController {
 			// calcul de la matrice de coût : on prend l'opposé du niveau de sûreté
 			// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
 		//	double dangerMatrix[][] = ai.getZoneFormee().getMatrix();
-			for(int line=0;line<zone.getHeigh();line++)
+			for(int line=0;line<zone.getHeight();line++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 				for(int col=0;col<zone.getWidth();col++)
 				{	ai.checkInterruption(); //APPEL OBLIGATOIRE

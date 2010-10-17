@@ -55,7 +55,7 @@ public class Danger_Manager {
 		
 //		this.ai = ai;
 		zone = ai.getPercepts();
-		security_matrix = new double[zone.getHeigh()][zone.getWidth()];
+		security_matrix = new double[zone.getHeight()][zone.getWidth()];
 		this.blocks=zone.getBlocks();
 		this.bonus=zone.getItems();
 		this.fires=zone.getFires();
@@ -66,7 +66,7 @@ public class Danger_Manager {
 		this.our_hero=zone.getOwnHero();
 		
 		this.width=zone.getWidth();
-		this.height=zone.getHeigh();
+		this.height=zone.getHeight();
 		/**Avec la fonction Fill_The_Matrix,on remplir la matrice */
 		Fill_The_Matrix();
 	

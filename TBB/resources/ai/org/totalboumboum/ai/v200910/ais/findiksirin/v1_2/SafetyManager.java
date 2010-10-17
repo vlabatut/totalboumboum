@@ -26,7 +26,7 @@ public class SafetyManager
 		// initialisation du champ permettant d'appeler checkInterruption 
 		this.monIa = monIa;	
 		zone= monIa.getZone();
-		matrix = new double[zone.getWidth()][zone.getHeigh()];
+		matrix = new double[zone.getWidth()][zone.getHeight()];
 	}
 	
 	///la matrice d'info
@@ -58,7 +58,7 @@ public class SafetyManager
 			}
 		}
 		
-		for (int line=0;line<zone.getHeigh();line++){
+		for (int line=0;line<zone.getHeight();line++){
 			monIa.checkInterruption();
 			for (int column=0; column<zone.getWidth();column++){
 				monIa.checkInterruption();
@@ -89,7 +89,7 @@ public class SafetyManager
 		
 		//l'affichage du matrice
 		System.out.println(">>>>>>>>>> SAFETY MATRIX <<<<<<<<<<");
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	monIa.checkInterruption();
 			
 			for(int col=0;col<zone.getWidth();col++)

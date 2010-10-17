@@ -74,7 +74,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	 */
 	private void initialiseMatriceDefense(int[][] matriceDefense, AiZone gameZone) throws StopRequestException{
 		checkInterruption();
-		int height=gameZone.getHeigh();
+		int height=gameZone.getHeight();
 		int width=gameZone.getWidth();
 		for(int i=0; i<height; i++){
 			checkInterruption();
@@ -164,7 +164,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		//la longueur de la matrice
 		int width = gameZone.getWidth();
 		//la largeur de la matrice
-		int height = gameZone.getHeigh();
+		int height = gameZone.getHeight();
 		//la liste ou les points finaux sont tenus
 		List<AiTile> endPoints = new ArrayList<AiTile>();
 		for (int i = 0; i < height; i++) {
@@ -188,7 +188,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	private void defenseAlgorithm(AiZone gameZone)throws StopRequestException {
 		checkInterruption();
 		int width = gameZone.getWidth();
-		int height = gameZone.getHeigh();
+		int height = gameZone.getHeight();
 		int[][] matriceDefense = new int[height][width];
 		
 		//initialisation de matrice de defense

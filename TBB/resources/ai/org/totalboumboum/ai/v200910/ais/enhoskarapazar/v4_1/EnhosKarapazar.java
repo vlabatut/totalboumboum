@@ -599,7 +599,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		AiTile temp = null;
 		int tempLength = 100;
 		pathManager = null;
-		for (int i = 0; i < zone.getHeigh(); i++) {
+		for (int i = 0; i < zone.getHeight(); i++) {
 			checkInterruption();
 			for (int j = 0; j < zone.getWidth(); j++) {
 				checkInterruption();
@@ -634,7 +634,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		AiTile temp = null;
 		int tempLength = 100;
 		pathManager = null;
-		for (int i = 0; i < zone.getHeigh(); i++) {
+		for (int i = 0; i < zone.getHeight(); i++) {
 			checkInterruption();
 			for (int j = 0; j < zone.getWidth(); j++) {
 				checkInterruption();
@@ -668,7 +668,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		AiTile temp = null;
 		int tempLength = 100;
 		pathManager = null;
-		for (int i = 0; i < zone.getHeigh(); i++) {
+		for (int i = 0; i < zone.getHeight(); i++) {
 			checkInterruption();
 			for (int j = 0; j < zone.getWidth(); j++) {
 				checkInterruption();
@@ -701,14 +701,14 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 		int destructibleVoisin = 0;
 
 		int imin = 0;
-		int imax = zone.getHeigh() - 1;
+		int imax = zone.getHeight() - 1;
 
 		int jmin = 0;
 		int jmax = zone.getWidth() - 1;
 
 		if (ownHero.getLine() - 4 > 0)
 			imin = ownHero.getLine() - 4;
-		if (ownHero.getLine() + 4 < zone.getHeigh())
+		if (ownHero.getLine() + 4 < zone.getHeight())
 			imax = ownHero.getLine() + 4;
 
 		if (ownHero.getCol() - 4 > 0)

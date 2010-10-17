@@ -229,7 +229,7 @@ public class FindikSirin extends ArtificialIntelligence
 		Astar astar;
 		HeuristicCalculator heuristicCalculator;
 		MatrixCostCalculator costCalculator;
-		double costMatrix[][] = new double[zone.getHeigh()][zone.getWidth()];
+		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
 		costCalculator = new MatrixCostCalculator(costMatrix);
 		heuristicCalculator = new BasicHeuristicCalculator();
 		astar = new Astar(this,ownHero,costCalculator,heuristicCalculator);
@@ -241,7 +241,7 @@ public class FindikSirin extends ArtificialIntelligence
 	public void setOurBombs() throws StopRequestException{
 		checkInterruption();
 		AiTile tile=null;
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	checkInterruption();
 			for(int col=0;col<zone.getWidth();col++)
 			{	checkInterruption();

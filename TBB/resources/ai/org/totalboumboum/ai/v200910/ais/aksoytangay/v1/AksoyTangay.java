@@ -37,7 +37,7 @@ public class AksoyTangay extends ArtificialIntelligence
 		checkInterruption();
 		
 		AiZone percepts = getPercepts();
-		col = percepts.getHeigh();
+		col = percepts.getHeight();
 		line = percepts.getWidth();
 		
 		// a faire...
