@@ -313,7 +313,7 @@ public class AiZone
 	 *  
 	 *  @return	hauteur de la zone
 	 */
-	public int getHeigh()
+	public int getHeight()
 	{	return height;	
 	}
 	
@@ -396,7 +396,7 @@ public class AiZone
 		if(distDirX>distIndirX)
 			tempX = tempX.getOpposite();
 		int distDirY = Math.abs(dy);
-		int distIndirY = getHeigh()-distDirY;
+		int distIndirY = getHeight()-distDirY;
 		if(distDirY>distIndirY)
 			tempY = tempY.getOpposite();
 		
@@ -414,13 +414,30 @@ public class AiZone
 	private final List<AiBlock> blockList = new ArrayList<AiBlock>();
 	
 	/** 
-	 * renvoie la liste des blocks contenues dans cette zone
+	 * renvoie la liste des blocks contenus dans cette zone
 	 * (la liste peut être vide). 
 	 * 
 	 * @return	liste de tous les blocs contenus dans cette zone
 	 */
 	public List<AiBlock> getBlocks()
 	{	return blockList;	
+	}
+	
+	/** 
+	 * renvoie la liste des blocks destructibles contenus dans cette zone
+	 * (la liste peut être vide). 
+	 * 
+	 * @return	liste de tous les blocs destructibles contenus dans cette zone
+	 */
+	public List<AiBlock> getDestructibleBlocks()
+	{	List<AiBlock> result = new ArrayList<AiBlock>();
+
+		for(AiBlock block: blockList)
+		{	if(block.isDestructible())
+				result.add(block);
+		}
+		
+		return result;
 	}
 	
 	/**

@@ -202,7 +202,7 @@ public class AiZone
 	 *  
 	 *  @return	hauteur de la zone
 	 */
-	public int getHeigh()
+	public int getHeight()
 	{	return height;	
 	}
 	
@@ -328,7 +328,7 @@ public class AiZone
 		if(distDirX>distIndirX)
 			tempX = tempX.getOpposite();
 		int distDirY = Math.abs(dy);
-		int distIndirY = getHeigh()-distDirY;
+		int distIndirY = getHeight()-distDirY;
 		if(distDirY>distIndirY)
 			tempY = tempY.getOpposite();
 		// result
