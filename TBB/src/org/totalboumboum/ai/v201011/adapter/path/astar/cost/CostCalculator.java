@@ -26,7 +26,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
- * permet de définir une fonction de cout utilisée lors de la recherche
+ * permet de définir une fonction de coût utilisée lors de la recherche
  * avec l'algorithme A*
  * 
  * @author Vincent Labatut
@@ -35,9 +35,9 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 public abstract class CostCalculator
 {
 	/** 
-	 * calcule le cout de l'action consistant à aller de la case
+	 * calcule le coût de l'action consistant à aller de la case
 	 * start à la case end, sachant que ces deux cases sont voisines.
-	 * Il est possible de définir des couts évolués, en tenant compte par exemple des
+	 * Il est possible de définir des coûts évolués, en tenant compte par exemple des
 	 * influences négatives dans ces cases (pour le joueur) comme la présence de bombes 
 	 * à proximité, etc., et des influences positives telles que la présence de bonus.
 	 * Si les deux cases ne sont pas voisines, le résultat est indéterminé.
@@ -49,7 +49,7 @@ public abstract class CostCalculator
 	public abstract double processCost(AiTile start, AiTile end) throws StopRequestException;
 	
 	/**
-	 * calcule le cout d'un chemin, i.e. la somme des couts des actions
+	 * calcule le coût d'un chemin, i.e. la somme des coûts des actions
 	 * consistant à passer d'une case du chemin à la suivante.
 	 * @param path
 	 * @return

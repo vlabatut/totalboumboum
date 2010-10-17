@@ -34,7 +34,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * implémentation la plus simple d'une fonction successeur : 
  * on prend les 4 cases voisines, en ne gardant que celles qui sont traversables
  * par le personnage considéré.
- * Une version plus complexe et plus efficace consisterait à utiliser la prodondeur
+ * Une version plus complexe et plus efficace consisterait à utiliser la profondeur
  * du noeud de recherche pour calculer le temps nécessaire pour arriver jusqu'à la case
  * courante, et à vérifier qu'aucune bombe ne sera en train d'exploser dans les cases voisines
  * quand le joueur y sera. En d'autres termes, on peut calculer si le joueur a le temps
