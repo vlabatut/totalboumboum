@@ -374,7 +374,7 @@ public class AiTile
 	 * cela dépend à la fois du type des sprites considérés (Hero,
 	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer à travers
 	 * les murs, passer à travers les bombes, etc). Le feu peut constituer
-	 * un obstacle, notamment pour les sprite de tyep Hero.</br>
+	 * un obstacle, notamment pour les sprite de type Hero.</br>
 	 * cf. les méthodes de même nom dans les classes filles de AiSprite
 	 * 
 	 *  @param sprite	le sprite qui veut traverser cette case

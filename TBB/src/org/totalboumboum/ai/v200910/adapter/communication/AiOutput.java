@@ -40,8 +40,8 @@ public class AiOutput
 {
 	public AiOutput(AiZone zone)
 	{	this.zone = zone;
-		tileColors = new Color[zone.getHeigh()][zone.getWidth()];
-		tileTexts = new String[zone.getHeigh()][zone.getWidth()];
+		tileColors = new Color[zone.getHeight()][zone.getWidth()];
+		tileTexts = new String[zone.getHeight()][zone.getWidth()];
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -120,7 +120,7 @@ public class AiOutput
 	 * (null = aucune couleur initialement)
 	 */
 	private void reinitTileColors()
-	{	for(int line=0;line<zone.getHeigh();line++)
+	{	for(int line=0;line<zone.getHeight();line++)
 			for(int col=0;col<zone.getWidth();col++)
 				tileColors[line][col] = null;
 	}
@@ -171,7 +171,7 @@ public class AiOutput
 	 * réinitialise les textes associés aux cases
 	 */
 	private void reinitTileTexts()
-	{	for(int line=0;line<zone.getHeigh();line++)
+	{	for(int line=0;line<zone.getHeight();line++)
 			for(int col=0;col<zone.getWidth();col++)
 				tileTexts[line][col] = null;
 	}
