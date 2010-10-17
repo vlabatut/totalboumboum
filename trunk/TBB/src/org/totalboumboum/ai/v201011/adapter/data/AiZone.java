@@ -642,10 +642,23 @@ public class AiZone
 	 * sauf ceux qui ont été éliminés ou qui ne sont pas actuellement
 	 * en jeu.
 	 * 
-	 * @return	liste de tous les joueurs contenus dans cette zone
+	 * @return	liste de tous les joueurs encore contenus dans cette zone
 	 */
 	public List<AiHero> getRemainingHeroes()
 	{	return remainingHeroList;	
+	}
+	
+	/** 
+	 * renvoie la liste des personnages contenus dans cette zone, 
+	 * sauf ceux qui ont été éliminés ou qui ne sont pas actuellement
+	 * en jeu, et sauf le personnage contrôlé par l'IA.
+	 * 
+	 * @return	liste de tous les joueurs encore contenus dans cette zone, sauf celui de l'IA
+	 */
+	public List<AiHero> getRemainingOpponents()
+	{	List<AiHero> result = new ArrayList<AiHero>(remainingHeroList);
+		result.remove(ownHero);
+		return result;	
 	}
 	
 	/**
