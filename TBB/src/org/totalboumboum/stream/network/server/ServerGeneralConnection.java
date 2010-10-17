@@ -77,12 +77,14 @@ public class ServerGeneralConnection implements Runnable
 	/////////////////////////////////////////////////////////////////
 	// CONTROL SETTINGS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<ControlSettings> controlSettings; //TODO to be initialized
+	private List<ControlSettings> controlSettings;
 	
-	public ControlSettings getControlSettings(int index)
-	{	ControlSettings result = controlSettings.get(index);
-		return result;
-	}
+//	public ControlSettings getControlSettings(int index)
+//	{	ControlSettings result = controlSettings.get(index);
+//		return result;
+//	}
+	
+	protected void controlSettings
 	
 	/////////////////////////////////////////////////////////////////
 	// REMOTE PLAYER CONTROL	/////////////////////////////////////
