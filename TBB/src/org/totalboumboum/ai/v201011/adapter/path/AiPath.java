@@ -136,6 +136,19 @@ public class AiPath
 		return result;
 	}
 	
+	/**
+	 * renvoie la première case du chemin,
+	 * ou null s'il n'y a pas de case dans ce chemin
+	 * 
+	 * @return	la première case du chemin ou null en cas d'erreur
+	 */
+	public AiTile getFirstTile()
+	{	AiTile result = null;
+		if(!tiles.isEmpty())
+			result = tiles.get(0);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// DISTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
