@@ -41,7 +41,7 @@ public class DangerZone {
 		this.objets = zone.getItems();
 		this.feus = zone.getFires();
 		this.xMax = zone.getWidth();
-		this.yMax = zone.getHeigh();
+		this.yMax = zone.getHeight();
 		init();
 	}
 
@@ -212,7 +212,7 @@ public class DangerZone {
 		source.checkInterruption(); // Appel Obligatoire
 		for (int i = 0; i < zone.getWidth(); i++) {
 			source.checkInterruption();
-			for (int j = 0; j < zone.getHeigh(); j++) {
+			for (int j = 0; j < zone.getHeight(); j++) {
 				source.checkInterruption();
 				System.out.print(j + ":" + i + ":" + zoneArray[j][i]);
 			}

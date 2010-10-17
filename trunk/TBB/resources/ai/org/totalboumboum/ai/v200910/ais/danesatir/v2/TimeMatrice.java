@@ -27,7 +27,7 @@ public class TimeMatrice {
 	public TimeMatrice(DaneSatir ai) throws StopRequestException {
 		this.ai=ai;
 		this.zone=ai.getPercepts();
-		matrice = new double[this.zone.getHeigh()][this.zone.getWidth()];
+		matrice = new double[this.zone.getHeight()][this.zone.getWidth()];
 		this.bombs = this.zone.getBombs();
 		sortBombes();
 		createMatrice(this.bombs);
@@ -49,7 +49,7 @@ public class TimeMatrice {
 			expandBomb(i);
 		}
 		if(GeneralFuncs.checkVerboseLevel(3))
-			GeneralFuncs.printMatrice(this.zone.getWidth(), this.zone.getHeigh(), this.matrice);
+			GeneralFuncs.printMatrice(this.zone.getWidth(), this.zone.getHeight(), this.matrice);
 	}
 
 	private void expandBomb(AiBomb bomb) throws StopRequestException {

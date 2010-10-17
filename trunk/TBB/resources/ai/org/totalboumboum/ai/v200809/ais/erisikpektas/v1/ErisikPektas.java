@@ -594,9 +594,9 @@ public class ErisikPektas extends ArtificialIntelligence {
 		Collection<AiTile> sure = new ArrayList<AiTile>();
 		// height et width sont inverses pour etre compatible avec la fonc
 		// getTile(line,col)
-		AiTile jeu[][] = new AiTile[tous.getHeigh()][tous.getWidth()];
+		AiTile jeu[][] = new AiTile[tous.getHeight()][tous.getWidth()];
 
-		for (int line = 0; line < tous.getHeigh(); line++) {
+		for (int line = 0; line < tous.getHeight(); line++) {
 			checkInterruption(); // APPEL OBLIGATOIRE
 			for (int col = 0; col < tous.getWidth(); col++) {
 				checkInterruption(); // APPEL OBLIGATOIRE
@@ -605,7 +605,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 			}
 		}
 
-		for (int line = 0; line < tous.getHeigh(); line++) {
+		for (int line = 0; line < tous.getHeight(); line++) {
 			checkInterruption(); // APPEL OBLIGATOIRE
 			for (int col = 0; col < tous.getWidth(); col++) {
 				checkInterruption(); // APPEL OBLIGATOIRE

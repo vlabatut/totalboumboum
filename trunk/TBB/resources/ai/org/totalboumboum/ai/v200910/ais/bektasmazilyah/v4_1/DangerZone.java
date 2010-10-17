@@ -50,7 +50,7 @@ public class DangerZone {
 		this.feus=zone.getFires();
 		this.objets=zone.getItems();
 		this.x=zone.getWidth();
-		this.y=zone.getHeigh();
+		this.y=zone.getHeight();
 		
 		init();
 
@@ -420,7 +420,7 @@ public class DangerZone {
 		for(int i = 0; i<map.getWidth() ; i++)
 		{
 			source.checkInterruption();
-			for(int j = 0; j < map.getHeigh(); j++)
+			for(int j = 0; j < map.getHeight(); j++)
 			{
 				source.checkInterruption();
 				System.out.print(i+":"+j+":"+ ourZone[i][j]);

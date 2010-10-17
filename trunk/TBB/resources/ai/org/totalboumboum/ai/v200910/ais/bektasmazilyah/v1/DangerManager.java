@@ -37,7 +37,7 @@ public class DangerManager {
 		
 		this.hero=hero;
 		zone=hero.getZone();
-		matrix = new double[zone.getHeigh()][zone.getWidth()];
+		matrix = new double[zone.getHeight()][zone.getWidth()];
 		processedBombs = new ArrayList<AiBomb>();
 		
 	}
@@ -56,7 +56,7 @@ public class DangerManager {
 		processedBombs.clear();
 		
 		// on initialise la matrice : toutes les cases sont sûres
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	hero.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
 			{	hero.checkInterruption(); //APPEL OBLIGATOIRE
@@ -67,7 +67,7 @@ public class DangerManager {
 		AiHero ownHero = zone.getOwnHero();
 		// si le personnage est sensible au feu, on tient compte des explosions en cours et à venir
 		if(!ownHero.hasThroughFires())
-		{	for(int line=0;line<zone.getHeigh();line++)
+		{	for(int line=0;line<zone.getHeight();line++)
 			{	hero.checkInterruption(); //APPEL OBLIGATOIRE
 				for(int col=0;col<zone.getWidth();col++)
 				{	hero.checkInterruption(); //APPEL OBLIGATOIRE
@@ -173,7 +173,7 @@ public class DangerManager {
 	{	hero.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		List<AiTile> result = new ArrayList<AiTile>();
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	hero.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
 			{	hero.checkInterruption(); //APPEL OBLIGATOIRE

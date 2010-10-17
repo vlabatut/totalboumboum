@@ -50,8 +50,8 @@ public class SafetyZone {
 		ai.checkInterruption();
 		this.ai = ai;
 		zone = ai.getPercepts();
-		matrix = new double[zone.getHeigh()][zone.getWidth()];
-		attackMatrix = new double[zone.getHeigh()][zone.getWidth()];
+		matrix = new double[zone.getHeight()][zone.getWidth()];
+		attackMatrix = new double[zone.getHeight()][zone.getWidth()];
 		fillSafetyMatrix();
 		fillAttackMatrix();
 	}
@@ -60,7 +60,7 @@ public class SafetyZone {
 		ai.checkInterruption();
 
 		// init matrix
-		for (int line = 0; line < zone.getHeigh(); line++) {
+		for (int line = 0; line < zone.getHeight(); line++) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 			for (int col = 0; col < zone.getWidth(); col++) {
@@ -69,7 +69,7 @@ public class SafetyZone {
 			}
 		}
 
-		for (int line = 0; line < zone.getHeigh(); line++) {
+		for (int line = 0; line < zone.getHeight(); line++) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 			for (int col = 0; col < zone.getWidth(); col++) {
@@ -193,7 +193,7 @@ public class SafetyZone {
 							}
 						
 
-						if (line + i < zone.getHeigh()) {
+						if (line + i < zone.getHeight()) {
 							if (neighBlocksDown.isEmpty()) {
 								if (!bomb.isWorking() && time <= 500 && (matrix[line + i][col] == 0|| matrix[line + i][col] == 10000))
 									matrix[line + i][col] = 1;
@@ -230,7 +230,7 @@ public class SafetyZone {
 		ai.checkInterruption();
 
 		// init matrix
-		for (int line = 0; line < zone.getHeigh(); line++) {
+		for (int line = 0; line < zone.getHeight(); line++) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 			for (int col = 0; col < zone.getWidth(); col++) {
@@ -239,7 +239,7 @@ public class SafetyZone {
 			}
 		}
 
-		for (int line = 0; line < zone.getHeigh(); line++) {
+		for (int line = 0; line < zone.getHeight(); line++) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 			for (int col = 0; col < zone.getWidth(); col++) {
@@ -307,7 +307,7 @@ public class SafetyZone {
 									attackMatrix[line][col - i] = FIRE;
 							}
 						}
-						if (line + i < zone.getHeigh()) {
+						if (line + i < zone.getHeight()) {
 							if (neighBlocksDown.isEmpty()) {
 									attackMatrix[line+i][col] = FIRE;
 							}
@@ -356,7 +356,7 @@ public class SafetyZone {
 										attackMatrix[line][col - i] = FIRE;
 								}
 							}
-							if (line + i < zone.getHeigh()) {
+							if (line + i < zone.getHeight()) {
 								if (neighBlocksDown.isEmpty()) {
 										attackMatrix[line+i][col] = FIRE;
 								}

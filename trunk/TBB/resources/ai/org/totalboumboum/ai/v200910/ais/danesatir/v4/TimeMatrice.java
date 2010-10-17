@@ -33,7 +33,7 @@ public class TimeMatrice {
 		this.ai=ai;
 		this.zone=ai.getPercepts();
 		//this.zone.update(this.zone.getLimitTime());
-		matrice = new double[this.zone.getHeigh()][this.zone.getWidth()];
+		matrice = new double[this.zone.getHeight()][this.zone.getWidth()];
 		this.bombs = this.zone.getBombs();
 		sortBombes();
 		createMatrice(this.bombs);

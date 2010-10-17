@@ -175,7 +175,7 @@ public class TirtilTomruk extends ArtificialIntelligence
 			for(j = caractere.getLine() - 2; j <= caractere.getLine() + 2; j++)
 			{	checkInterruption(); //Appel Obligatoire
 				if(i != caractere.getCol() || j != caractere.getLine()){
-					if(0 < i && i < zone.getWidth() && 0 < j && j < zone.getHeigh())
+					if(0 < i && i < zone.getWidth() && 0 < j && j < zone.getHeight())
 					{
 						if(zoneAdapted.getZoneArray()[i][j] != ZoneEnum.FEUPOSSIBLE && zoneAdapted.getZoneArray()[i][j] != ZoneEnum.BOMBE && zoneAdapted.getZoneArray()[i][j] != ZoneEnum.FEU && zoneAdapted.getZoneArray()[i][j] != ZoneEnum.BLOCDEST && zoneAdapted.getZoneArray()[i][j] != ZoneEnum.BLOCINDEST)
 							escapeTiles.add(zone.getTile(j, i));

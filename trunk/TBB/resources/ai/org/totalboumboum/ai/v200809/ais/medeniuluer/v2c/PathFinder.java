@@ -316,24 +316,24 @@ public class PathFinder {
 		case DOWN:
 			switch (mode) {
 			case BLOC_DEST_INDEST:
-				return (noeud.getY() + 1 <= zone.getHeigh())
+				return (noeud.getY() + 1 <= zone.getHeight())
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.BLOCDESTRUCTIBLE)
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.BLOCINDESTRUCTIBLE);
 			case BLOC_DEST_INDEST_FEU_BOMBE:
-				return (noeud.getY() + 1 <= zone.getHeigh())
+				return (noeud.getY() + 1 <= zone.getHeight())
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.FEU)
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.BOMBE)
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.BLOCDESTRUCTIBLE)
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.BLOCINDESTRUCTIBLE);
 			case BLOC_DEST_INDEST_FEU_BOMBE_FEU_POSSIBLE:
-				return (noeud.getY() + 1 <= zone.getHeigh())
+				return (noeud.getY() + 1 <= zone.getHeight())
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.FEU)
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.BOMBE)
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.BLOCDESTRUCTIBLE)
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.BLOCINDESTRUCTIBLE)
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.FEUPOSSIBLE);
 			case BOMB_SIMULATION:
-				return (noeud.getY() + 1 <= zone.getHeigh())
+				return (noeud.getY() + 1 <= zone.getHeight())
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.BLOC_EXPLOSE_SIMULE)
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.BLOCDESTRUCTIBLE)
 						&& (tab[noeud.getX()][noeud.getY() + 1] != ZoneEnum.BLOCINDESTRUCTIBLE)

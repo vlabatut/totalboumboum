@@ -93,7 +93,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		// la longueur de la zone
 		int width = gameZone.getWidth();
 		// la largeur de la zone
-		int height = gameZone.getHeigh();
+		int height = gameZone.getHeight();
 
 		// la matrice de la zone
 		int[][] matrice = new int[height][width];
@@ -259,7 +259,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	private void initialiseMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		checkInterruption();
-		int height = gameZone.getHeigh();
+		int height = gameZone.getHeight();
 		int width = gameZone.getWidth();
 		for (int i = 0; i < height; i++) {
 			checkInterruption();
@@ -410,7 +410,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 			throws StopRequestException {
 		checkInterruption();
 		List<AiTile> endPoints = new ArrayList<AiTile>();
-		for (int i = 0; i < gameZone.getHeigh(); i++) {
+		for (int i = 0; i < gameZone.getHeight(); i++) {
 			checkInterruption();
 			for (int j = 0; j < gameZone.getWidth(); j++) {
 				checkInterruption();
@@ -441,7 +441,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 			throws StopRequestException {
 		checkInterruption();
 		boolean result = true;
-		for (int i = 0; i < gameZone.getHeigh(); i++) {
+		for (int i = 0; i < gameZone.getHeight(); i++) {
 			checkInterruption();
 			for (int j = 0; j < gameZone.getWidth(); j++) {
 				checkInterruption();
@@ -629,8 +629,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 				.getTile());
 		if (distance < 5) {
 			if (ourHero.getCol() <= gameZone.getWidth() / 2
-					&& ourHero.getLine() <= gameZone.getHeigh() / 2) {
-				for (int i = 0; i < gameZone.getHeigh() / 2; i++) {
+					&& ourHero.getLine() <= gameZone.getHeight() / 2) {
+				for (int i = 0; i < gameZone.getHeight() / 2; i++) {
 					checkInterruption();
 					for (int j = 0; j < gameZone.getWidth() / 2; j++) {
 						checkInterruption();
@@ -641,8 +641,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 					}
 				}
 			} else if (ourHero.getCol() <= gameZone.getWidth() / 2
-					&& ourHero.getLine() >= gameZone.getHeigh() / 2) {
-				for (int i = gameZone.getHeigh() / 2; i < gameZone.getHeigh(); i++) {
+					&& ourHero.getLine() >= gameZone.getHeight() / 2) {
+				for (int i = gameZone.getHeight() / 2; i < gameZone.getHeight(); i++) {
 					checkInterruption();
 					for (int j = 0; j < gameZone.getWidth() / 2; j++) {
 						checkInterruption();
@@ -653,8 +653,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 					}
 				}
 			} else if (ourHero.getCol() >= gameZone.getWidth() / 2
-					&& ourHero.getLine() <= gameZone.getHeigh() / 2) {
-				for (int i = 0; i < gameZone.getHeigh() / 2; i++) {
+					&& ourHero.getLine() <= gameZone.getHeight() / 2) {
+				for (int i = 0; i < gameZone.getHeight() / 2; i++) {
 					checkInterruption();
 					for (int j = gameZone.getWidth() / 2; j < gameZone
 							.getWidth(); j++) {
@@ -666,8 +666,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 					}
 				}
 			} else if (ourHero.getCol() >= gameZone.getWidth() / 2
-					&& ourHero.getLine() >= gameZone.getHeigh() / 2) {
-				for (int i = gameZone.getHeigh() / 2; i < gameZone.getHeigh(); i++) {
+					&& ourHero.getLine() >= gameZone.getHeight() / 2) {
+				for (int i = gameZone.getHeight() / 2; i < gameZone.getHeight(); i++) {
 					checkInterruption();
 					for (int j = gameZone.getWidth() / 2; j < gameZone
 							.getWidth(); j++) {

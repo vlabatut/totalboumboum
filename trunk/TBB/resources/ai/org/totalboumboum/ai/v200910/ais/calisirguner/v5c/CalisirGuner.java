@@ -136,12 +136,12 @@ public class CalisirGuner extends ArtificialIntelligence {
 				|| (bomberman.getCol() + 1 < zone.getWidth() && map
 						.returnMatrix()[x + 1][y] == Etat.ADVERSAIRE)
 				|| (y - 1 > 0 && map.returnMatrix()[x][y - 1] == Etat.ADVERSAIRE)
-				|| (y + 1 < zone.getHeigh() && map.returnMatrix()[x][y + 1] == Etat.ADVERSAIRE)
+				|| (y + 1 < zone.getHeight() && map.returnMatrix()[x][y + 1] == Etat.ADVERSAIRE)
 				|| (x - 1 > 0 && map.returnMatrix()[x - 1][y] == Etat.ADVERSAIRE)
 				|| (bomberman.getCol() + 2 < zone.getWidth() && map
 						.returnMatrix()[x + 2][y] == Etat.ADVERSAIRE)
 				|| (y - 2 > 0 && map.returnMatrix()[x][y - 2] == Etat.ADVERSAIRE)
-				|| (y + 2 < zone.getHeigh() && map.returnMatrix()[x][y + 2] == Etat.ADVERSAIRE)
+				|| (y + 2 < zone.getHeight() && map.returnMatrix()[x][y + 2] == Etat.ADVERSAIRE)
 				|| (x - 2 > 0 && map.returnMatrix()[x - 2][y] == Etat.ADVERSAIRE)
 
 		)
@@ -521,7 +521,7 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		checkInterruption(); // APPEL OBLIGATOIRE
 		Collection<AiTile> destination = new ArrayList<AiTile>();
 
-		for (int line = 0; line < zone.getHeigh(); line++) {
+		for (int line = 0; line < zone.getHeight(); line++) {
 			checkInterruption(); // APPEL OBLIGATOIRE
 			for (int col = 0; col < zone.getWidth(); col++) {
 				checkInterruption(); // APPEL OBLIGATOIRE
@@ -558,7 +558,7 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 						.return_accessibilite()[bomberman.getCol() + 1][bomberman
 						.getLine()] == Etat.INACCESSIBLE))
 			res++;
-		if (bomberman.getLine() + 1 < zone.getHeigh()
+		if (bomberman.getLine() + 1 < zone.getHeight()
 				&& (tile.getNeighbor(Direction.DOWN).getBlocks().size() > 0
 						|| map.returnMatrix()[bomberman.getCol()][bomberman
 								.getLine() + 1] == Etat.FLAMMES

@@ -35,7 +35,7 @@ public class Enemie_Manager {
 		//safe_map=new Safety_Map(zone);
 		//safe_map=new Safety_Map(zone);
 		// init A*
-		double costMatrix[][] = new double[zone.getHeigh()][zone.getWidth()];
+		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
 		costCalculator_b = new MatrixCostCalculator(costMatrix);
 		hcalcul_b = new BasicHeuristicCalculator();
 		star_b = new Astar(ai,ai.getPercepts().getOwnHero(),costCalculator_b,hcalcul_b);
@@ -173,7 +173,7 @@ public class Enemie_Manager {
 		
 		safe_map=new Safety_Map(zone);
 		double safetyMatrix_b[][] = safe_map.returnMatrix();
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
 			for(int col=0;col<zone.getWidth();col++)
@@ -223,7 +223,7 @@ public class Enemie_Manager {
 		AiTile tile_dest_b;
 		List<AiTile> result_b = new ArrayList<AiTile>();
 		
-		for(int pos_y=0;pos_y<zone.getHeigh();pos_y++)
+		for(int pos_y=0;pos_y<zone.getHeight();pos_y++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
 			for(int pos_x=0;pos_x<zone.getWidth();pos_x++)

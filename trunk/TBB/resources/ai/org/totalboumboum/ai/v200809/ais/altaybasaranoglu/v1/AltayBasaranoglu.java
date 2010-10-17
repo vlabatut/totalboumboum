@@ -64,7 +64,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 	{	checkInterruption();		
 		AiZone zone = getPercepts();
 		col=zone.getWidth();
-		line=zone.getHeigh();
+		line=zone.getHeight();
 		///////////MATRICE SERVANT A DEFENCE STRATEGIE///////////////////
 		int matriceDefence[][][] = new int[line][col][2];
 		//on init la matrice avec tous zero

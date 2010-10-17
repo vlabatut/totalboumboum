@@ -74,7 +74,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 		// la longueur de la zone
 		int width = gameZone.getWidth();
 		// la largeur de la zone
-		int height = gameZone.getHeigh();
+		int height = gameZone.getHeight();
 		
 		// la matrice de la zone
 		int[][] matrice = new int[height][width];
@@ -173,7 +173,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	private void initialiseMatrice(int[][] matrice, AiZone gameZone)
 			throws StopRequestException {
 		checkInterruption();
-		int height = gameZone.getHeigh();
+		int height = gameZone.getHeight();
 		int width = gameZone.getWidth();
 		for (int i = 0; i < height; i++) {
 			checkInterruption();
@@ -332,8 +332,8 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 			rightBound = gameZone.getWidth();
 		if (upperBound < 0)
 			upperBound = 0;
-		if (lowerBound > gameZone.getHeigh())
-			lowerBound = gameZone.getHeigh();
+		if (lowerBound > gameZone.getHeight())
+			lowerBound = gameZone.getHeight();
 		
 		for (int i = upperBound; i < lowerBound; i++) {
 			checkInterruption();
@@ -357,7 +357,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 			throws StopRequestException {
 		checkInterruption();
 		boolean result = true;
-		for (int i = 0; i < gameZone.getHeigh(); i++) {
+		for (int i = 0; i < gameZone.getHeight(); i++) {
 			checkInterruption();
 			for (int j = 0; j < gameZone.getWidth(); j++) {
 				checkInterruption();

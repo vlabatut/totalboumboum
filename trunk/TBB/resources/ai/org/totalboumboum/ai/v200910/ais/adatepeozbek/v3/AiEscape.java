@@ -58,10 +58,10 @@ public class AiEscape
 		ownAi = ai;
 		zone = ownAi.getZone();
 		
-		safeArray = new double[zone.getHeigh()][zone.getWidth()];
+		safeArray = new double[zone.getHeight()][zone.getWidth()];
 		destBlocks = new ArrayList<AiBlock>();
 		indestBlocks = new ArrayList<AiBlock>();
-		costArray = new double[zone.getHeigh()][zone.getWidth()];
+		costArray = new double[zone.getHeight()][zone.getWidth()];
 		initArrays();
 		
 		bombs = zone.getBombs();
@@ -147,7 +147,7 @@ public class AiEscape
 		}
 		
 		
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
 			
 			for(int col=0;col<zone.getWidth();col++)
@@ -341,7 +341,7 @@ public class AiEscape
 	public void initArrays() throws StopRequestException
 	{
 		ownAi.checkInterruption();
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
 			
 			for(int col=0;col<zone.getWidth();col++)
@@ -354,7 +354,7 @@ public class AiEscape
 	public void updateCostArray() throws StopRequestException
 	{
 		ownAi.checkInterruption();
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
 			
 			for(int col=0;col<zone.getWidth();col++)
@@ -427,7 +427,7 @@ public class AiEscape
 	{
 		ownAi.checkInterruption();
 		List<AiTile> safeTiles = new ArrayList<AiTile>();
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
 			
 			for(int col=0;col<zone.getWidth();col++)
@@ -446,7 +446,7 @@ public class AiEscape
 	{
 		Debug.writeln("LISTING MATRICE");
 		ownAi.checkInterruption();
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
 			Debug.writeln("");
 			for(int col=0;col<zone.getWidth();col++)
@@ -513,7 +513,7 @@ public class AiEscape
 		
 		if(OWN_HERO.getBombCount() > 1)
 			return false;
-		double tempArray[][] = new double[zone.getHeigh()][zone.getWidth()];
+		double tempArray[][] = new double[zone.getHeight()][zone.getWidth()];
 		
 		tempArray = safeArray.clone();
 		

@@ -56,7 +56,7 @@ public class Map {
 		this.objets = zone.getItems();
 		this.feu = zone.getFires();
 		this.width = zone.getWidth();
-		this.height = zone.getHeigh();
+		this.height = zone.getHeight();
 		this.source = source;
 
 		remplir(zone);

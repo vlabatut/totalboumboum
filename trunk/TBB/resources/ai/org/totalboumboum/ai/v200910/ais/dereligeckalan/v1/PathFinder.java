@@ -118,7 +118,7 @@ public class PathFinder {
 				
 				}
 			//la case qui est en bas de lui.
-				if((temp.getY()+1<=zone.getHeigh()-1)&& (tab[temp.getX()][temp.getY()+1]!=ZoneEnum.FEU) && (tab[temp.getX()][temp.getY()+1]!=ZoneEnum.BOMBE)&&(tab[temp.getX()][temp.getY()+1]!=ZoneEnum.BLOCDEST)&&(tab[temp.getX()][temp.getY()+1]!=ZoneEnum.BLOCINDEST)) {
+				if((temp.getY()+1<=zone.getHeight()-1)&& (tab[temp.getX()][temp.getY()+1]!=ZoneEnum.FEU) && (tab[temp.getX()][temp.getY()+1]!=ZoneEnum.BOMBE)&&(tab[temp.getX()][temp.getY()+1]!=ZoneEnum.BLOCDEST)&&(tab[temp.getX()][temp.getY()+1]!=ZoneEnum.BLOCINDEST)) {
 					down=new Noeud(temp.getX(),temp.getY()+1,tab[temp.getX()][temp.getY()+1],temp.getCout()+1,source);
 					if(!open.contains(down)  && !closed.contains(down)){
 						open.add(down);

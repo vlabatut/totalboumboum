@@ -70,7 +70,7 @@ public class Safety_Map {
 		this.our_hero=zone.getOwnHero();
 		
 		this.width=zone.getWidth();
-		this.height=zone.getHeigh();
+		this.height=zone.getHeight();
 		//Method for Filling the matrix:
 		Fill_The_Matrix();
 	}

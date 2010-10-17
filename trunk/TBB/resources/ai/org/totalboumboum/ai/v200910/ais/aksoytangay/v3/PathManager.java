@@ -85,7 +85,7 @@ public class PathManager {
 		List<AiTile> tempTiles = new ArrayList<AiTile>();
 		
 		
-		for(int i=0;i<zone.getHeigh();i++)
+		for(int i=0;i<zone.getHeight();i++)
 		{
 			myAI.checkInterruption();
 			for(int j=0;j<zone.getWidth();j++)

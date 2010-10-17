@@ -111,7 +111,7 @@ public class Bomb {
 			}
 			if(up)//yukarı giderken
 			{
-				cl=line-x>=0?line-x:zone.getHeigh()+line-x;
+				cl=line-x>=0?line-x:zone.getHeight()+line-x;
 				if(matrix.getAreaMatrix()[cl][col]==State.INDESTRUCTIBLE)
 					up=false;
 				else if(matrix.getAreaMatrix()[cl][col]<State.BONUSDANGER)
@@ -123,7 +123,7 @@ public class Bomb {
 			}
 			if(down) //aşağı giderken
 			{
-				cl=(line+x)%zone.getHeigh();
+				cl=(line+x)%zone.getHeight();
 				if(matrix.getAreaMatrix()[cl][col]==State.INDESTRUCTIBLE)
 					down=false;
 				else if(matrix.getAreaMatrix()[cl][col]<State.BONUSDANGER)

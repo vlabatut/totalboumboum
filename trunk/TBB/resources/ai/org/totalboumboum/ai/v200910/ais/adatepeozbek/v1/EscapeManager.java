@@ -34,7 +34,7 @@ public class EscapeManager
 		this.ai = ai;
 		zone = ai.getZone();
 		
-		double costMatrix[][] = new double[zone.getHeigh()][zone.getWidth()];
+		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
 		costCalculator = new MatrixCostCalculator(costMatrix);
 		heuristicCalculator = new BasicHeuristicCalculator();
 		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
@@ -91,7 +91,7 @@ public class EscapeManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		 
 		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE

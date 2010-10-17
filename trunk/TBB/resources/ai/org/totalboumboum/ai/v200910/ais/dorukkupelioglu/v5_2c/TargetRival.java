@@ -194,7 +194,7 @@ public class TargetRival {
 	public List<AiTile> findAvailable()throws StopRequestException
 	{
 		dk.checkInterruption();
-		rivalavailable=new int[dk.getPercepts().getHeigh()][dk.getPercepts().getWidth()];
+		rivalavailable=new int[dk.getPercepts().getHeight()][dk.getPercepts().getWidth()];
 		List<AiTile> result=new ArrayList<AiTile>();
 		for(int index=0;index<rivals.size();index++)//rivalların yanı kendisi değil
 		{
@@ -236,7 +236,7 @@ public class TargetRival {
 				}
 				if(up)
 				{
-					cl=line-pow>=0?line-pow:dk.getPercepts().getHeigh()+line-pow;
+					cl=line-pow>=0?line-pow:dk.getPercepts().getHeight()+line-pow;
 					if(dk.getMatrix().getAreaMatrix()[cl][col]!=State.FREE
 							&&dk.getMatrix().getAreaMatrix()[cl][col]!=State.DANGER
 							&&dk.getMatrix().getAreaMatrix()[cl][col]!=State.RIVAL
@@ -250,7 +250,7 @@ public class TargetRival {
 				}	
 				if(down)
 				{
-					cl=(line+pow)%dk.getPercepts().getHeigh();
+					cl=(line+pow)%dk.getPercepts().getHeight();
 					if(dk.getMatrix().getAreaMatrix()[cl][col]!=State.FREE
 							&&dk.getMatrix().getAreaMatrix()[cl][col]!=State.DANGER
 							&&dk.getMatrix().getAreaMatrix()[cl][col]!=State.RIVAL

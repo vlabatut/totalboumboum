@@ -61,7 +61,7 @@ public class DangerZone {
 		this.feus=zone.getFires();
 		this.objets=zone.getItems();
 		this.x=zone.getWidth();
-		this.y=zone.getHeigh();
+		this.y=zone.getHeight();
 		//initialiser
 		init();
 

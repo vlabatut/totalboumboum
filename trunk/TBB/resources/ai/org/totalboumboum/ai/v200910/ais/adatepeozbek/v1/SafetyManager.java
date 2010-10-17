@@ -33,7 +33,7 @@ public class SafetyManager
 	
 		this.ai = ai;
 		zone = ai.getZone();
-		matrix = new double[zone.getHeigh()][zone.getWidth()];
+		matrix = new double[zone.getHeight()][zone.getWidth()];
 	}
 	
 	// La variable d'IA de notre caractère
@@ -62,7 +62,7 @@ public class SafetyManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	
 			ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -155,7 +155,7 @@ public class SafetyManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		List<AiTile> result = new ArrayList<AiTile>();
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE

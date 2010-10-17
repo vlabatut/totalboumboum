@@ -105,7 +105,7 @@ public class Adatepe extends ArtificialIntelligence
 		checkInterruption(); 
 		AiZone zone = getPercepts();
 		int xMax = zone.getWidth();
-		int yMax = zone.getHeigh();
+		int yMax = zone.getHeight();
 		int i,j;
 		for(i = 0; i < xMax; i++)
 		{

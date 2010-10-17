@@ -28,7 +28,7 @@ public class Escape_Manager {
 		AiHero our_bomberman = ai.getPercepts().getOwnHero();
 		//safe_map=new Safety_Map(zone);
 		// init A*
-		double costMatrix[][] = new double[zone.getHeigh()][zone.getWidth()];
+		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
 		costCalculator = new MatrixCostCalculator(costMatrix);
 		heuristicCalculator = new BasicHeuristicCalculator();
 		star = new Astar(ai,our_bomberman,costCalculator,heuristicCalculator);
@@ -119,7 +119,7 @@ public class Escape_Manager {
 			//iteration on the down side of our position:
 			k=1;
 			stop=0;
-			while(stop==0&&my_position.getLine()+k<zone.getHeigh()){
+			while(stop==0&&my_position.getLine()+k<zone.getHeight()){
 				if(safe_map.returnMatrix()[my_position.getLine()+k][my_position.getCol()]==safe_map.BOMB ||safe_map.returnMatrix()[my_position.getLine()+k][my_position.getCol()]==safe_map.DEST_WALL || safe_map.returnMatrix()[my_position.getLine()+k][my_position.getCol()]==safe_map.INDEST_WALL|| safe_map.returnMatrix()[my_position.getLine()+k][my_position.getCol()]==safe_map.FIRE)
 					stop=1;
 				else
@@ -241,7 +241,7 @@ public class Escape_Manager {
 		
 		safe_map=new Safety_Map(zone);		
 		double safetyMatrix1[][] = safe_map.returnMatrix();
-		for(int line=0;line<zone.getHeigh();line++)
+		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
 			for(int col=0;col<zone.getWidth();col++)
@@ -275,7 +275,7 @@ public class Escape_Manager {
 		
 		AiTile tile_dest;
 		List<AiTile> result = new ArrayList<AiTile>();
-		for(int pos_y=0;pos_y<zone.getHeigh();pos_y++)
+		for(int pos_y=0;pos_y<zone.getHeight();pos_y++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
 			for(int pos_x=0;pos_x<zone.getWidth();pos_x++)

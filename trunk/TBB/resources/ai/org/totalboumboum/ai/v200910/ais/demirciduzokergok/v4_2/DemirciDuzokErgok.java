@@ -110,7 +110,7 @@ AiPath path_b;
 		  test=false;
 
 			int k=0;
-			 for(int i=0;i<IA_ZONE.getHeigh();i++){
+			 for(int i=0;i<IA_ZONE.getHeight();i++){
 				  for(int j=0;j<IA_ZONE.getWidth();j++)
 				  {
 					  if(safe_map.returnMatrix()[i][j]==safe_map.DEST_WALL)
@@ -150,7 +150,7 @@ AiPath path_b;
 			  
 				
 				  boolean r=false;
-			  for(int i=0;i<IA_ZONE.getHeigh();i++){
+			  for(int i=0;i<IA_ZONE.getHeight();i++){
 				  for(int j=0;j<IA_ZONE.getWidth();j++)
 				  {
 					  if(safe_map.returnMatrix()[i][j]==safe_map.BONUS)
