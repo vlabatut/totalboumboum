@@ -30,6 +30,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.controls.ControlSettings;
+import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
@@ -57,16 +58,26 @@ public class RemotePlayerControl
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<Integer,Hero> sprites = new HashMap<Integer, Hero>();
+	private HashMap<Integer,Hero> sprites = new HashMap<Integer,Hero>();
+	private HashMap<Hero,Integer> indices = new HashMap<Hero,Integer>();
 	
 	public void addSprite(Hero sprite)
-	{	// add sprite
-		sprites.put(sprite.getId(),sprite);
+	{	sprites.put(sprite.getId(),sprite);
 		int index = sprites.size() - 1;
+		indices.put(sprite,index);
 		
-		// set controls settings
-		ControlSettings controlSettings = connection.getControlSettings(index);
-		sprite.setControlSettings(controlSettings);
+//		ControlSettings controlSettings = connection.getControlSettings(index);
+//		sprite.setControlSettings(controlSettings);
+	}
+	
+	public void setControlSettings(List<ControlSettings> controlSettings)
+	{	for(Hero sprite: indices.keySet())
+		{	int index = indices.get(sprite);
+			ControlSettings cs = controlSettings.get(index);
+			sprite.setControlSettings(cs);
+//TODO pb sur la numérotation des sprites dans controlsettings
+//voir comment c'est fait dans le cas local...
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
