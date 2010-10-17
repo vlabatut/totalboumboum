@@ -229,7 +229,8 @@ public class AiBomb extends AiSprite<Bomb>
 	
 	/**
 	 * calcule une liste de cases correspondant au souffle de cette bombe,
-	 * i.e. toutes les cases qui seront atteinte quand elle va exploser.
+	 * i.e. toutes les cases qui seront atteinte quand elle va exploser
+	 * (y compris la case contenant la bombe elle-même). 
 	 * Cette méthode tient compte de murs, items, etc., c'est à dire qu'elle
 	 * ne donne que les cases qui seront touchées si la bombe devait exploser
 	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
@@ -317,7 +318,7 @@ public class AiBomb extends AiSprite<Bomb>
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** temps écoulé depuis que la bombe a été posée, exprimé en ms */
-	private double time = 0;
+	private long time = 0;
 	
 	/**
 	 * renvoie le temps écoulé depuis que la bombe a été posée,
@@ -325,7 +326,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 * 
 	 * @return	temps exprimé en ms
 	 */
-	public double getTime()
+	public long getTime()
 	{	return time;	
 	}
 	
@@ -339,7 +340,7 @@ public class AiBomb extends AiSprite<Bomb>
 		if(gesture==GestureName.STANDING || gesture==GestureName.STANDING_FAILING
 			|| gesture==GestureName.OSCILLATING || gesture==GestureName.OSCILLATING_FAILING
 			|| gesture==GestureName.SLIDING || gesture==GestureName.SLIDING)
-		{	double elapsedTime = getTile().getZone().getElapsedTime();
+		{	long elapsedTime = getTile().getZone().getElapsedTime();
 			time = time + elapsedTime;
 		}
 		else if(gesture==GestureName.APPEARING

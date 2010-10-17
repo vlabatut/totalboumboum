@@ -177,6 +177,13 @@ public class SafetyManager
 	 * passée en paramètre. Le terme "indirect" signifie que la fonction est récursive : 
 	 * si une case à portée de souffle contient une bombe, le souffle de cette bombe est rajouté
 	 * dans la liste blast, et la bombe est rajoutée dans la liste bombs.
+	 * 
+	 * <b>Avertissement :</b> la fonction est simpliste, et pas complètement fiable.
+	 * Ainsi, elle considère que si une bombe peut en faire exploser une autre,
+	 * alors le contraire est vrai (la seconde peut faire exploser la première),
+	 * mais ceci n'est pas toujours vrai (cela dépend de la portée des bombes).
+	 * De plus, elle ne prend pas en compte le fait que certaines bombes ne sont pas
+	 * sensibles au feu (elles n'explosent pas quand elles sont touchées par une explosion).
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
