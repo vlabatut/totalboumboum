@@ -120,6 +120,8 @@ public enum MessageName
 		UPDATING_ZOOM_COEFF,
 		/** client sends its current state */ 
 		UPDATING_STATE,
+		/** client sends its controls settings */ 
+		UPDATING_CONTROLS_SETTINGS,
 	
 	/* 
 	 * in-game level

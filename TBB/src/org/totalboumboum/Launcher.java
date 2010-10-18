@@ -1681,7 +1681,6 @@ public class Launcher
 	 *  
 	 */
 	
-	//TODO pb sur la numérotation des sprites dans controlsettings
-	//voir comment c'est fait dans le cas local...
+	//TODO controlsettings: régler le pb de synchro pvant se produire si les clients chargent plus vite que le serveur
 
 }

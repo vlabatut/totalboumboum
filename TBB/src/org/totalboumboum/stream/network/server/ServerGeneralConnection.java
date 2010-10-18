@@ -73,28 +73,50 @@ public class ServerGeneralConnection implements Runnable
 		Thread thread = new Thread(this);
 		thread.start();
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CONTROL SETTINGS		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<ControlSettings> controlSettings;
-	
-//	public ControlSettings getControlSettings(int index)
-//	{	ControlSettings result = controlSettings.get(index);
-//		return result;
-//	}
-	
-	protected void controlSettings
-	
+		
 	/////////////////////////////////////////////////////////////////
 	// REMOTE PLAYER CONTROL	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private RemotePlayerControl remotePlayerControl = null;
+	private Lock controlsLock = new ReentrantLock();
 	
 	public void setRemotePlayerControl(RemotePlayerControl remotePlayerControl)
 	{	this.remotePlayerControl = remotePlayerControl;
 	}
 	
+	protected void controlSettingsReceived(List<ControlSettings> controlSettings, ServerIndividualConnection connection)
+	{	// get the ids of the profiles corresponding to the specified connection
+		List<String> ids = new ArrayList<String>();
+		connectionsLock.lock();
+		{	for(String id: playerConnections.keySet())
+			{	ServerIndividualConnection cx = playerConnections.get(id);
+				if(cx==connection)
+					ids.add(id);
+			}
+		}
+		connectionsLock.unlock();
+		
+		// update the controlSettings for the corresponding profiles
+		controlsLock.lock();
+		{	for(int j=0;j<ids.size();j++)
+			{	String id = ids.get(j);
+				ControlSettings cs = controlSettings.get(j);
+				Profile p = null;
+				int index = 0;
+				int i = 0;
+				while(p==null && i<playerProfiles.size())
+				{	Profile temp = playerProfiles.get(i);
+					if(temp.getId().equals(id))
+						p = temp;
+					else if(temp.isRemote())
+						index++;
+				}
+				remotePlayerControl.setControlSettings(index,cs);
+			}
+		}
+		controlsLock.unlock();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// GAME INFO	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

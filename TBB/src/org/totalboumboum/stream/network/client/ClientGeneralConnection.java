@@ -30,6 +30,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.loop.ClientLoop;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
@@ -464,6 +465,10 @@ public class ClientGeneralConnection
 	
 	public void loadingComplete()
 	{	activeConnection.loadingComplete();
+	}
+	
+	public void sendControlSettings(List<ControlSettings> controlSettings)
+	{	activeConnection.sendControlSettings(controlSettings);
 	}
 	
 	/////////////////////////////////////////////////////////////////

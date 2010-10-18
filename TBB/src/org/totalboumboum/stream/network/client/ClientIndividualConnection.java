@@ -33,6 +33,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.profile.ProfileLoader;
@@ -327,6 +328,11 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	private boolean canStart;
 	private Lock loadingLock = new ReentrantLock();
 	private Condition loadingCondition = loadingLock.newCondition();
+	
+	public void sendControlSettings(List<ControlSettings> controlSettings)
+	{	NetworkMessage message = new NetworkMessage(MessageName.UPDATING_CONTROLS_SETTINGS,controlSettings);
+		writeMessage(message);
+	}
 	
 	private void replayReceived(ReplayEvent event)
 	{	generalConnection.replayReceived(event);
