@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.locks.Condition;
@@ -42,6 +43,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
+import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -164,6 +166,19 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 			
 			// next player...
 			loadStepOver();
+		}
+		
+		// send controlSettings
+		List<ControlSettings> controlSettings = new ArrayList<ControlSettings>();
+		HashMap<Integer,ControlSettings> map = Configuration.getControlsConfiguration().getControlSettings();
+		for(Profile p: profiles)
+		{	if(!p.isRemote())
+			{	int index = p.getControlSettingsIndex();
+				if(index==0)
+					controlSettings.add(null);
+				else
+					controlSettings.add(map.get(index));
+			}
 		}
 	}
 	

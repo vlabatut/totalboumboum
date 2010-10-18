@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
 
+import org.totalboumboum.configuration.controls.ControlSettings;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.profile.Profile;
@@ -122,10 +123,12 @@ public class ServerIndividualConnection extends AbstractConnection
 		}
 		
 		else if(state==HostState.PLAYING)
-		{	if(message.getInfo().equals(MessageName.INFO_PLAYER_CONTROL))
-				controlReceived(message);
+		{	if(message.getInfo().equals(MessageName.UPDATING_CONTROLS_SETTINGS))
+				controlSettingsReceived(message);
 			else if(message.getInfo().equals(MessageName.LOADING_COMPLETE))
 				loadingComplete(message);
+			else if(message.getInfo().equals(MessageName.INFO_PLAYER_CONTROL))
+				controlReceived(message);
 		}
 	}
 	
@@ -283,17 +286,23 @@ public class ServerIndividualConnection extends AbstractConnection
 	/////////////////////////////////////////////////////////////////
 	// ROUND MESSAGES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unchecked")
+	private void controlSettingsReceived(NetworkMessage message)
+	{	List<ControlSettings> controlSettings = (List<ControlSettings>)message.getData();
+		generalConnection.controlSettingsReceived(controlSettings,this);
+	}
+	
+	private void loadingComplete(NetworkMessage message)
+	{	//state = ClientState.WAITING_ROUND;
+		generalConnection.loadingComplete(this);
+	}
+	
 	private void controlReceived(NetworkMessage message)
 	{	StreamedEvent event = (StreamedEvent) message.getData();
 		if(event instanceof RemotePlayerControlEvent)
 		{	RemotePlayerControlEvent evt = (RemotePlayerControlEvent) event;
 			generalConnection.controlReceived(evt);
 		}
-	}
-	
-	private void loadingComplete(NetworkMessage message)
-	{	//state = ClientState.WAITING_ROUND;
-		generalConnection.loadingComplete(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////
