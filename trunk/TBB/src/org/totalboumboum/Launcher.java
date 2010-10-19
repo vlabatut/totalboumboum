@@ -1636,9 +1636,7 @@ public class Launcher
 	 *    - changement effectif d'état entre les différents types de browsing pour le client
 	 *    - tester le mode partie rapide
 	 * à faire :
-	 *  - dans serverindivconn : todo sur l'état du client quand on lui envoie le zoom coeff
-	 *  - coté client, même truc dans zoomCoeffUpdate
-	 *  - gérer le changement d'état lors du démarrage du chargement
+	 *  - la deconnectioin en cours de partie (et dc de jeu) doit être traitée pour éviter le blocage prolongé du serveur
 	 *  
 	 *  - tout changement d'état du client devrait être :
 	 *  	- une requête envoyée au serveur
@@ -1680,7 +1678,4 @@ public class Launcher
 	 *  
 	 *  
 	 */
-	
-	//TODO controlsettings: régler le pb de synchro pvant se produire si les clients chargent plus vite que le serveur
-
 }
