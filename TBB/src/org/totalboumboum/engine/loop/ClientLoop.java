@@ -89,7 +89,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class ClientLoop extends VisibleLoop implements InteractiveLoop
+public class ClientLoop extends VisibleLoop implements InteractiveLoop, ReplayedLoop
 {	private static final long serialVersionUID = 1L;
 	
 	public ClientLoop(Round round)
@@ -125,7 +125,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 		instance.loadItemset();
 		loadStepOver();
 		hollowLevel.loadTheme();
-		hollowLevel.synchronizeZone();
+		hollowLevel.synchronizeZone(this);
 		loadStepOver();
 		
 		// load players base
@@ -316,8 +316,8 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop
 	/**
 	 * always returns an event.
 	 * if the list is empty, the thread is blocked until an event arrives
-	 * @return
 	 */
+	@Override
 	public ReplayEvent retrieveEvent()
 	{	ReplayEvent result = null;
 	

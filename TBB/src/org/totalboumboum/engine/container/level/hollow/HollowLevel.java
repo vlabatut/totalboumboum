@@ -49,6 +49,7 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.item.Item;
+import org.totalboumboum.engine.loop.ReplayedLoop;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
@@ -210,7 +211,7 @@ if(bomb==null)
 		RoundVariables.writeEvent(event);
 	}
 
-	public void synchronizeZone()
+	public void synchronizeZone(ReplayedLoop loop)
 	{	// init zone
 		Tile[][] matrix = level.getMatrix();
 		double globalLeftX = level.getGlobalLeftX();
@@ -228,7 +229,7 @@ if(bomb==null)
 		}
 		
 		// init sprites
-		ReplayEvent tempEvent = RoundVariables.readEvent();
+		ReplayEvent tempEvent = loop.retrieveEvent();
 		do
 		{	// creation
 			if(tempEvent instanceof SpriteCreationEvent)
@@ -245,7 +246,7 @@ if(bomb==null)
 					sprite.processChangeAnimeEvent(event);
 			}
 			// next event
-			tempEvent = RoundVariables.readEvent();
+			tempEvent = loop.retrieveEvent();
 		}
 		while(!(tempEvent instanceof StopReplayEvent));
 		

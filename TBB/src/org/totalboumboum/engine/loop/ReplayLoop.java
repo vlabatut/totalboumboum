@@ -70,7 +70,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class ReplayLoop extends VisibleLoop
+public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 {	private static final long serialVersionUID = 1L;
 	
 	public ReplayLoop(Round round)
@@ -105,7 +105,7 @@ public class ReplayLoop extends VisibleLoop
 		instance.loadItemset();
 		loadStepOver();
 		hollowLevel.loadTheme();
-		hollowLevel.synchronizeZone();
+		hollowLevel.synchronizeZone(this);
 		loadStepOver();
 		
 		// load players base
@@ -204,6 +204,16 @@ public class ReplayLoop extends VisibleLoop
 	/////////////////////////////////////////////////////////////////
 	private ReplayEvent currentEvent = null;
 	
+	/**
+	 * always returns an event.
+	 * if the list is empty, the thread is blocked until an event arrives
+	 */
+	@Override
+	public ReplayEvent retrieveEvent()
+	{	ReplayEvent result = RoundVariables.fileIn.readEvent();
+		return result;
+	}
+
 	private void initEvent()
 	{	// get all the remaining useless SpriteEvents
 		ReplayEvent tempEvent;
