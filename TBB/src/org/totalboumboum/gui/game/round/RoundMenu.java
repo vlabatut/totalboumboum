@@ -37,7 +37,7 @@ import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.engine.loop.RegularLoop;
+import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundRenderPanel;
@@ -62,7 +62,6 @@ import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.xml.sax.SAXException;
-
 
 /**
  * 
@@ -463,7 +462,7 @@ buttonStatistics.setEnabled(false);
 				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_COMPLETE);
 					progressBar.setString(text);
 					progressBar.repaint();
-					loopPanel = new LoopPanel(container.getMenuContainer(),container,(RegularLoop)round.getLoop());
+					loopPanel = new LoopPanel(container.getMenuContainer(),container,(VisibleLoop)round.getLoop());
 					replaceWith(loopPanel);
 					loopPanel.start();
 				}

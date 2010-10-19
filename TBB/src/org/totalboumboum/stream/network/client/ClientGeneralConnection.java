@@ -26,12 +26,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.controls.ControlSettings;
-import org.totalboumboum.engine.loop.ClientLoop;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.game.profile.Profile;
@@ -171,15 +171,6 @@ public class ClientGeneralConnection
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// CLIENT LOOP			/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ClientLoop loop = null;
-	
-	public void setLoop(ClientLoop loop)
-	{	this.loop = loop;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// RECEIVED MESSAGES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	// NOTE don't remember what this lock is for...
@@ -232,9 +223,58 @@ public class ClientGeneralConnection
 		updateLock.unlock();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// REPLAYS 					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final List<ReplayEvent> eventList = new ArrayList<ReplayEvent>();
+	private Lock replayLock = new ReentrantLock();
+	private Condition replayCondition = replayLock.newCondition();
+	
 	public void replayReceived(ReplayEvent event)
-	{	// the method invoked is already synchronized
-		loop.addEvent(event);
+	{	replayLock.lock();
+		
+		eventList.add(event);
+		replayCondition.signal();
+		
+		replayLock.unlock();
+	}
+	
+	public ReplayEvent retrieveEvent()
+	{	ReplayEvent result = null;
+	
+		replayLock.lock();
+		try
+		{	while(eventList.isEmpty())
+				replayCondition.await();
+			result = eventList.get(0);
+			eventList.remove(0);
+		}
+		catch(InterruptedException e)
+		{	e.printStackTrace();
+		}
+		finally
+		{	replayLock.unlock();
+		}
+		
+		return result;
+	}
+
+	public List<ReplayEvent> retrieveEventList(long referenceTime)
+	{	List<ReplayEvent> result = new ArrayList<ReplayEvent>();
+		
+		replayLock.lock();
+		{	Iterator<ReplayEvent> it = eventList.iterator();
+			while(it.hasNext())
+			{	ReplayEvent event = it.next();
+				if(event.getTime()<referenceTime)
+				{	result.add(event);
+					it.remove();
+				}
+			}
+		}
+		replayLock.unlock();
+		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

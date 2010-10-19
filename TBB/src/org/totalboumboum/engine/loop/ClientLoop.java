@@ -35,9 +35,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -113,7 +110,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 
 		// load level & instance
 		hollowLevel.initLevel(this);
-		ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+		clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
 		zoomCoefficient = RoundVariables.zoomFactor / clientConnection.getZoomCoef();
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
@@ -300,18 +297,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 	/////////////////////////////////////////////////////////////////
 	// REPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final List<ReplayEvent> eventList = new ArrayList<ReplayEvent>();
-	private Lock eventLock = new ReentrantLock();
-	private Condition cond = eventLock.newCondition();
-	
-	public void addEvent(ReplayEvent event)
-	{	eventLock.lock();
-		
-		eventList.add(event);
-		cond.signal();
-		
-		eventLock.unlock();
-	}
+	private ClientGeneralConnection clientConnection;
 	
 	/**
 	 * always returns an event.
@@ -319,22 +305,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 	 */
 	@Override
 	public ReplayEvent retrieveEvent()
-	{	ReplayEvent result = null;
-	
-		eventLock.lock();
-		try
-		{	while(eventList.isEmpty())
-				cond.await();
-			result = eventList.get(0);
-			eventList.remove(0);
-		}
-		catch(InterruptedException e)
-		{	e.printStackTrace();
-		}
-		finally
-		{	eventLock.unlock();
-		}
-		
+	{	ReplayEvent result = clientConnection.retrieveEvent();
 		return result;
 	}
 	
@@ -353,24 +324,14 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 	{	if(!isOver())
 		{	if(VERBOSE)
 				System.out.println("/////////////////////////////////////////");		
-				
-			List<ReplayEvent> events = new ArrayList<ReplayEvent>();
-			eventLock.lock();
-			Iterator<ReplayEvent> it = eventList.iterator();
-			while(it.hasNext())
-			{	ReplayEvent event = it.next();
-				if(event.getTime()<getTotalEngineTime())
-				{	events.add(event);
-					it.remove();
-					if(VERBOSE)
-						System.out.print("["+event.getTime()+"<"+getTotalEngineTime()+"]");		
-				}
-			}
-			eventLock.unlock();
+			List<ReplayEvent> events = clientConnection.retrieveEventList(getTotalEngineTime());
 	
 			// process events
 			for(ReplayEvent event: events)
-			{	// sprite creation
+			{	if(VERBOSE)
+					System.out.print("["+event.getTime()+"<"+getTotalEngineTime()+"]");		
+				
+				// sprite creation
 				if(event instanceof SpriteCreationEvent)
 				{	SpriteCreationEvent scEvent = (SpriteCreationEvent) event;
 					HollowLevel hollowLevel = round.getHollowLevel();
