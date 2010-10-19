@@ -77,6 +77,7 @@ public class ServerGeneralConnection implements Runnable
 	/////////////////////////////////////////////////////////////////
 	// REMOTE PLAYER CONTROL	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private List<ControlSettings> controlSettings;
 	private RemotePlayerControl remotePlayerControl = null;
 	private Lock controlsLock = new ReentrantLock();
 	
@@ -111,7 +112,7 @@ public class ServerGeneralConnection implements Runnable
 					else if(temp.isRemote())
 						index++;
 				}
-				remotePlayerControl.setControlSettings(index,cs);
+				this.controlSettings.set(index,cs);
 			}
 		}
 		controlsLock.unlock();
@@ -750,25 +751,48 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	}
 	
 	public void updateZoomCoef(double zoomCoef)
-	{	NetworkMessage message = new NetworkMessage(MessageName.UPDATING_ZOOM_COEFF,zoomCoef);
-		propagateMessage(message);
-		
+	{	// init connection readyness
 		connectionsLock.lock();
 		{	individualConnectionsReady.clear();
 			for(int i=0;i<individualConnections.size();i++)
 				individualConnectionsReady.add(false);
 		}
 		connectionsLock.unlock();
+
+		// init controlSettings list
+		connectionsLock.lock();
+		{	controlSettings = new ArrayList<ControlSettings>();
+			for(int i=0;i<playerProfiles.size();i++)
+				controlSettings.add(null);
+		}
+		connectionsLock.unlock();
+		
+		// propagate message to client
+		NetworkMessage message = new NetworkMessage(MessageName.UPDATING_ZOOM_COEFF,zoomCoef);
+		propagateMessage(message);
 	}
 	
 	public void waitForClients()
 	{	roundLock.lock();
-		{	// wait for all clients to be ready
+		{	// check if all clients are ready
+			boolean ready = true;
+			Iterator<Boolean> it = individualConnectionsReady.iterator();
+			while(it.hasNext() && ready)
+			{	boolean value = it.next();
+				ready = ready && value;
+			}
+			
+			// otherwise, wait for all clients to be ready
 			try
 			{	roundCondition.await();
 			}
 			catch (InterruptedException e)
 			{	e.printStackTrace();
+			}
+			
+			// set the controlSettings
+			connectionsLock.lock();
+			{	remotePlayerControl.setControlSettings(controlSettings);
 			}
 		}
 		roundLock.lock();
@@ -776,31 +800,30 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	
 	protected void loadingComplete(ServerIndividualConnection connection)
 	{	roundLock.lock();
-		{	connectionsLock.lock();
+		{	boolean ready = true;
+			connectionsLock.lock();
 			{	// update this connection readyness
 				int index = individualConnections.indexOf(connection);
 				individualConnectionsReady.set(index,true);
 
 				// check if all clients are ready
-				boolean ready = true;
 				Iterator<Boolean> it = individualConnectionsReady.iterator();
 				while(it.hasNext() && ready)
 				{	boolean value = it.next();
 					ready = ready && value;
 				}
-
-				// if it is the case :
-				if(ready)
-				{	// start all remote clients
-					NetworkMessage message = new NetworkMessage(MessageName.STARTING_ROUND);
-					propagateMessage(message);
-					
-					// wake up the game thread
-					roundCondition.notify();
-				}
-				
 			}
 			connectionsLock.unlock();
+			
+			// if it is the case :
+			if(ready)
+			{	// start all remote clients
+				NetworkMessage message = new NetworkMessage(MessageName.STARTING_ROUND);
+				propagateMessage(message);
+				
+				// wake up the game thread
+				roundCondition.notify();
+			}
 		}
 		roundLock.lock();
 	}
