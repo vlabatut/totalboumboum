@@ -334,10 +334,6 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 		writeMessage(message);
 	}
 	
-	private void replayReceived(ReplayEvent event)
-	{	generalConnection.replayReceived(event);
-	}
-	
 	public void loadingComplete()
 	{	NetworkMessage message = new NetworkMessage(MessageName.LOADING_COMPLETE);
 		writeMessage(message);
@@ -366,6 +362,10 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 			loadingCondition.notify();
 		}
 		loadingLock.unlock();
+	}
+	
+	private void replayReceived(ReplayEvent event)
+	{	generalConnection.replayReceived(event);
 	}
 	
 	/////////////////////////////////////////////////////////////////

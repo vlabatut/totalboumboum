@@ -180,7 +180,11 @@ public class ServerIndividualConnection extends AbstractConnection
 			}
 		}
 		else if(info==MessageName.INFO_REPLAY)
-		{	send = state==ClientState.PLAYING_ROUND;
+		{	send = state==ClientState.PLAYING_ROUND
+				|| state==ClientState.BROWSING_TOURNAMENT
+				|| state==ClientState.BROWSING_MATCH
+				|| state==ClientState.BROWSING_ROUND
+				|| state==ClientState.LOADING_ROUND;
 		}
 		else if(info==MessageName.UPDATING_ROUND_STATS)
 		{	if(state==ClientState.PLAYING_ROUND)
