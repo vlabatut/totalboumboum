@@ -794,8 +794,9 @@ System.out.println(serverSocket.getLocalSocketAddress());
 			connectionsLock.lock();
 			{	remotePlayerControl.setControlSettings(controlSettings);
 			}
+			connectionsLock.unlock();
 		}
-		roundLock.lock();
+		roundLock.unlock();
 	}
 	
 	protected void loadingComplete(ServerIndividualConnection connection)
@@ -825,7 +826,7 @@ System.out.println(serverSocket.getLocalSocketAddress());
 				roundCondition.notify();
 			}
 		}
-		roundLock.lock();
+		roundLock.unlock();
 	}
 	
 	/////////////////////////////////////////////////////////////////
