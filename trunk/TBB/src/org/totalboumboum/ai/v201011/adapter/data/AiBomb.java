@@ -353,6 +353,7 @@ public class AiBomb extends AiSprite<Bomb>
 				|| gesture==GestureName.PREPARED)
 		{	time = 0;		
 		}
+		//System.out.println(sprite.getId()+":"+time+"/"+normalDuration);
 	}
 
 	/////////////////////////////////////////////////////////////////
