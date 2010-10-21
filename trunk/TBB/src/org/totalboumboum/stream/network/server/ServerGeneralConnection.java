@@ -823,7 +823,7 @@ System.out.println(serverSocket.getLocalSocketAddress());
 				propagateMessage(message);
 				
 				// wake up the game thread
-				roundCondition.notify();
+				roundCondition.signal();
 			}
 		}
 		roundLock.unlock();
