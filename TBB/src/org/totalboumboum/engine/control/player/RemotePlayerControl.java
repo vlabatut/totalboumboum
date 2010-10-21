@@ -69,9 +69,9 @@ public class RemotePlayerControl
 	}
 	
 	public void setControlSettings(List<ControlSettings> controlSettings)
-	{	for(int index=0;index<controlSettings.size();index++)
-		{	ControlSettings cs = controlSettings.get(index);
-			if(controlSettings!=null)
+	{	int index = 0;
+		for(ControlSettings cs: controlSettings)
+		{	if(controlSettings!=null)
 			{	Hero sprite = orderedSprites.get(index);
 				sprite.setControlSettings(cs);
 			}
