@@ -359,7 +359,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	public void roundStarted()
 	{	loadingLock.lock();
 		{	canStart = true;
-			loadingCondition.notify();
+			loadingCondition.signal();
 		}
 		loadingLock.unlock();
 	}
