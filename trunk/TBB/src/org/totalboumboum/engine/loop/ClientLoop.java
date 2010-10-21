@@ -156,6 +156,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 			AbstractPlayer player = initPlayer(profile,base,tile);
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
+			pauseAis.add(false);
 			
 			// level
 			Hero hero = (Hero)player.getSprite();
