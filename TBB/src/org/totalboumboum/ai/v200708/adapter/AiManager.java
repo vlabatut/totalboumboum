@@ -40,7 +40,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.loop.RegularLoop;
+import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
@@ -96,7 +96,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	public void updatePercepts()
 	{	// compute all the percepts
     	AbstractPlayer player = getPlayer(); 
-    	RegularLoop loop = (RegularLoop)RoundVariables.loop;
+    	VisibleLoop loop = RoundVariables.loop;
     	Tile[][] matrix = RoundVariables.level.getMatrix();
     	Sprite sprite = player.getSprite();
     	
