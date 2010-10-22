@@ -1675,7 +1675,9 @@ public class Launcher
 	 *  	  celle d'une connection DISCONNECTED, alors on se contete de réinitialiser les 
 	 *  	  streams dans le writer et le reader, et ça roule.
 	 *  
-	 *  
+	 *  - IA:
+	 *  	- définir A* version pixel
+	 *  	- définir la fonction successeur version temporelle
 	 *  
 	 */
 }
