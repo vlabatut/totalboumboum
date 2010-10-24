@@ -36,7 +36,7 @@ import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDir
 import org.totalboumboum.engine.content.feature.gesture.anime.step.AnimeStep;
 import org.totalboumboum.engine.content.feature.gesture.anime.stepimage.StepImage;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.loop.RegularLoop;
+import org.totalboumboum.engine.loop.LocalLoop;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.images.ImageTools;
 
@@ -183,8 +183,8 @@ public class AnimeManager
 		// check if the animations is over
 		if(currentTime>totalDuration)
 		{	isTerminated = true;
-			// send even only for a server loop
-			if(RoundVariables.loop instanceof RegularLoop)
+			// process the anime end only if the loop is regular/server
+			if(RoundVariables.loop instanceof LocalLoop)
 				sprite.processEvent(new EngineEvent(EngineEvent.ANIME_OVER));
 //if(sprite instanceof Floor)
 //	System.out.println("F<<totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
