@@ -317,7 +317,6 @@ public abstract class Sprite
 		itemManager.update();
 		animeManager.update();
 		trajectoryManager.update();
-//TODO implémenter une version bidon de tous les mgrs		
 		/*
 		 * NOTE : il est important que le trajectoryManager soit updaté en dernier
 		 * comme ça, un changement de case arrive après avoir traité tous les évènements
