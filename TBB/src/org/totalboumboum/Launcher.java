@@ -1635,8 +1635,13 @@ public class Launcher
 	 * à tester :
 	 *    - changement effectif d'état entre les différents types de browsing pour le client
 	 *    - tester le mode partie rapide
+	 * problèmes :
+	 *    - quand un client sélectionne des commandes : c'est pas conservé quand le serveur valide la partie
+	 *    - à la fin d'un round, le client ne sort pas de Loop
+	 *    - jeu saccadé côté client même en LAN >> faire de l'évènementiel et pas du cosmétique
+	 *    
 	 * à faire :
-	 *  - la deconnectioin en cours de partie (et dc de jeu) doit être traitée pour éviter le blocage prolongé du serveur
+	 *  - la deconnection en cours de partie (et dc de jeu) doit être traitée pour éviter le blocage prolongé du serveur, à toutes les phases de la gui/du jeu
 	 *  
 	 *  - tout changement d'état du client devrait être :
 	 *  	- une requête envoyée au serveur
