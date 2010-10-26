@@ -1289,7 +1289,7 @@ public class Launcher
 	 * remplacer le menu actuel par des icones dont la taille représente l'importance
 	 * à gauche de l'icone, mettre le texte actuellement présent dans les boutons
 	 * il est aligné à droite et sa taille est proportionnelle à celle des boutons
-	 * 	- optiosn       : engrenages
+	 * 	- options       : engrenages
 	 * 	- profils       : une des icones de profil/joueur/etc
 	 * 	- stats         : icone stat utilisée en cours de jeu
 	 *  - ressources    : icone package
@@ -1309,129 +1309,6 @@ public class Launcher
 	// pb pr les IA remote : y a besoin de l'état réel du niveau, pas seulement des graphismes
 	// solution : mise à jour locale (pas comme replay) et tant pis pr la puissance perdue et la possible dé-synchro
 	
-	/* TODO
-	 * - côté serveur :
-	 * 		- modification de la boucle pour initialiser et fermer les connexions nécessaires
-	 *        (elles peuvent aussi être gérées en amont, à voir)
-	 *        mais de toute façon faut aussi envoyer les données via la connexion (comme pr replay en fait)
-	 *      x nouvelle classe héritant de Player, controlé à distance 
-	 *      x nouveau controle associé à cette classe, lisant les controle dans le flux associé au joueur
-	 *      xle container des remotePlayerControl doit être initialisé dans la boucle et lancé aussi (run)
-	 * - côté client :
-	 * 		x version de la boucle héritant de replay mais rajoutant la gestion des controles locaux
-	 *  	x version spéciale de Control pour que les codes soient envoyés dans le flux (NetworkControl)
-	 *  	x version d'un joueur : comme avant, mais généraliser pour prendre LocalControl ou NetworkControl
-	 *  	  le controle utilisé peut être décidé lors de l'init de la loop, en fonction du type de la loop justement
-	 *  	  intérêt: on garde le joueur humain et l'IA
-	 *  	x à la place du RemotePlayersControl, c'est l'équivalent du Replay qui va gérer ça et transférer le beans aux sprites
-	 *  	x même dans l'autre sens, faudrait p-ê un objet central, histoire de faciliter la synchro lors de l'accès au flux...
-	 * - Replay :
-	 * 		x séparer in/out
-	 * 		x généraliser pour gérer à la fois les fichiers et les réseaux
-	 * x développer une LocalLoop séparée, car certaines fonctionnalités de debug ne doivent pas être accessibles dans le cadre d'un serveur
-	 */
-	
-	/*
-	 * TODO scénario de configuration d'un tournoi net
-	 * ------------------------------------------------
-	 * 
-	 * coté serveur : 
-	 * 1) définition du tournoi : type, niveaux, etc. (dc inversé par rapport à la version actuelle)
-	 * 2) ensuite seulement, sélection des joueurs : 
-	 * 		possibilité d'ouvrir des slots "remote".
-	 * 		possibilité de verrouiller certains slots (inutilisables)
-	 * 3) puis on rend la partie accessible aux joueurs distants (publish)
-	 *    après ça, on ne peut plus modifier la partie, sauf en l'annulant et en recommençant
-	 * 4) puis le serveur attend que les clients se connectent et s'enregistrent pour participer à la partie
-	 * 
-	 * coté client : 
-	 * 5) écran de connexion à une partie existante (style : entrer directement l'ip, ou bien choisir dans une liste venant du site).
-	 * 6) après connexion, on affiche les propriétés du tournoi
-	 *    (sans pouvoir les modifier bien sur)
-	 *    un "next" amène à l'écran de sélection des joueurs.
-	 * 7) on clique sur les slots libres de manière à rajouter des joueurs locaux
-	 *    (comme pour une partie locale)
-	 * 
-	 * cote serveur :
-	 * 8) les nouveaux joueurs sont affichés dans la GUI
-	 *    toute modif (ds la liste des joueurs) est répercutée à tous les clients connectés
-	 * 9) quand on estime qu'il y a assez de joueurs, on clique next pour commencer la partie
-	 * 
-	 * cote client :
-	 * 10) quand le serveur démarre la partie, on se retrouve automatiquement dans l'écran de présentation du tournoi
-	 * 
-	 * 
-	 * 
-	 * 
-	 * remarques :
-	 * 	- la gui de création de tournoi/partie rapide est la même que d'hab, avec une option supplémentaire "publish online"
-	 * 	  (vaut mieux un écran de config spécifique qu'un simple bouton. ça permettra de gérer certaines options comme "partie privée" ou autre)
-	 *  - GUI server pour la sélection de joueur :
-	 *  	- en rouge les joueurs minimaux
-	 *  	- en gris (comme maintenant) ceux qu'on peut éventuellement virer sans que ça empêche d'utiliser le tournoi/partie
-	 *  - coté client, jouer une partie rapide ou un tournoi c pareil puisqu'une partie rapide est un tournoi !
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * en termes de connexion :
-	 * 3) partie publiée : 
-	 * 		- création d'un thread à l'écoute d'un socket
-	 *		- quand un client se connecte, il crée un objet ClientConnection qui va s'occuper de le gérer
-	 *		  (avec reader/writer dans leur propre thread)
-	 *		- la gui enregistre un listener auprès de cet objet pour écouter les évènements de configuration
-	 *		- on écrit le tournoi (ou sa description) dans le flux afin que le client y accède
-	 * 5) connection à une partie :
-	 * 		- création d'un objet ServerConnection gérant tout ça avec ses propres threads
-	 * 		- la GUI enregistre un listener comme ci-dessus pour les évènements de configuration
-	 * 6) affichage de la description du tournoi :
-	 * 		- on attend de recevoir un évènement indiquant que la description du tournoi a été lue
-	 * 		- puis on l'affiche dans la GUI
-	 * 7) clic sur un slot libre :
-	 * 		- le client écrit dans le flux le profil du joueur
-	 * 		- pour chaque modif possible du profil, un objet adéquat est ensuite écrit dans le flux
-	 * 		- dans les deux cas, la mise à jour de la GUI se fait via la réponse du serveur, et non pas localement
-	 * 		- NOTE: ceci pose d'ailleurs un problème de synchro et de réactivité de l'interface
-	 * 			    on pourrait définir une méthode permettant de lire un objet de façon bloquée avec un délai max
-	 * 				la méthode retourne automatiquement un objet si elle peut le lire, ou bien null ou bout du temps limite
-	 * 				ici, ça permettrait de bloquer la GUI le temps que le serveur envoie une confirmation que le beans a été traité
-	 * 				alternativement, on pourrait aussi bloquer en utilisant l'attente d'un évènement  
-	 * 8) nouveau joueur enregistré 
-	 * 		- le serveur lit dans le flux le profil et le rajoute dans la liste des joueurs si c'est possible
-	 * 		- chaque modif lue dans le flux entraine un évènement que le serveur traite localement (il applique la modif)
-	 * 		- puis le serveur envoie à tous les clients une mise à jour de l'écran des joueurs
-	 * 9) démarrage de la partie coté serveur
-	 * 		- le serveur écrit dans le flux un objet représentant le début de la partie
-	 * 		  (normalement, les clients ont déjà toutes les infos nécessaires : tournoi, joueurs...
-	 * 10) démarrage de la partie coté client
-	 * 		- l'objet approprié est reçu
-	 * 		- validation de l'objet tournoi
-	 * 		- affichage du tournoi
-	 */
-	
-	/*
-	 * TODO scénario de jeu en ligne, une fois que le tournoi/partie a été configuré(e)
-	 * ------------------------------------------------------------------------------
-	 * 
-	 * 1) il est nécessaire que toute action aléatoire soit synchro avec le serveur.
-	 * 	  en conséquence, les clients ne peuvent avancer dans le tournoi que quand ils ont reçu l'objet approprié du serveur
-	 *    coté client, le bouton "suivant" reste grisé tant que l'objet n'a pas été reçu
-	 * 2) pour le round c'est différent car tout a été chargé avant d'entrer à l'écran de description du round
-	 *    quand un client clique sur "commencer", les sprites sont chargés et un signal du serveur est attendu
-	 *    le serveur envoie le signal quand tous les clients et lui même sont prêts
-	 *    le jeu commence alors
-	 * 3) même topo pour les stats : faut que le serveur ait fait 'retour' pr que les stats soient calculées
-	 *    donc tant qu'il ne l'a pas fait, on a du grisé sur le bouton des clients
-	 *    ou plutot : les stats ne sont pas mises à jour, tout simplement. mais ils peuvent les visualiser (?)
-	 *    
-	 * en termes de connexion :
-	 * 1) quand on commence un match, le serveur l'écrit dans les connexions
-	 *    pareil quand on commence un round
-	 * 2) le round lui-même, c'est déjà fait
-	 * 3) pour les stats, suffit également de les écrire coté client
-  	 */
-	
 	// TODO dans la gui, faudrait gérer le texte comme les images :
 	// le même texte peut servir sur plusieurs éléments.
 	// ça économiserait du traitement et de la place dans les fichiers de traduction,
@@ -1442,36 +1319,9 @@ public class Launcher
 	
 	//TODO tester les confs de tournois/partie rapide sans l'option "utiliser les réglages précédents"
 	//TODO voir pouquoi c'est si lent dans l'interface quand on règle le tournoi
-	//TODO rajouter un bouton permettant de bloquer l'inscription/désinscription d'un joueur
-	//	   à un tournoi online, afin d'en finaliser le casting
-	//	   (on peut utiliser le même bouton que "publier" en lui donnant 3 états)
-	// TODO utiliser des string comme message plutot qu'un booleen dans les connection
-	//		intérêt : on peut transmettre des infos plus variées tq "start" "players refused" etc.
-	
-	/*
-	 * - penser à virer les connextions créées lors de la configuration du tournoi
-	 * 	 et pr lesquelles aucun joueur ne s'est enregistré
-	 * - en cas d'annulation d'un tournoi publié, penser à supprimer toutes les connexions en cours
-	 */
-	
-
-	//TODO set up the client side now, starting with the connection interface (a modal menu ?)
-	
-	//TODO profile id is a string and not an int anymore
-	//also string in "profile selection" (game config)
 	
 	//TODO profiles options : reset passwords (automatically performed
 	//when the MAC address changes, anyway
-	
-	//TODO gestion des connections :
-	// - un seul objet
-	// - faire de la délagation vers des composants pour chaque étape
-	// >> intéret : ne pas avoir besoin de metre en pause les threads, ni d'en créer 50 différents
-	// - pb: identifier le listener auquel envoyer l'event quand on reçoit un nouvel objet
-	// >> suffit de passer par des classes messages : une pr round, une pr match, etc.
-	//    et à chaque fois, on envoie uniquement aux listener concernés en ignorant les autres.
-	//    (ça peut même se déléguer pareil)
-	
 	
 	/* TODO la communication [moteur >> gui] devrait se faire par evts, y compris durant le jeu
 	 * >> ca permettrait de ne pas raffraichir pour rien lors de l'affichage de toutes les structures du jeu
@@ -1485,66 +1335,6 @@ public class Launcher
 	 *      >> ça va poser des pb de gestion de la mémoire (?)
 	 * >>> à faire plus tard...
 	 */
-	
-	/**
-	 * TODO
-	 * - ralentissement: p-ê inetadress?
-	 * - rajouter l'interaction avec l'hote rajouté par l'utilisateur :
-	 * 		x donner l'ip dans un popup
-	 * 		- retrouver les détails sur le net
-	 * 		>> pas besoin de plus d'interaction style modifier l'ip (suffit de supprimer/recréer)
-	 * - le serveur doit pouvoir choisir le port
-	 */
-	
-	/**
-	 * TODO
-	 * - la structure gérant la connexion (des deux côtés) est au même niveau que la classe du tournoi,
-	 *   i.e. stockée qqpart dans la config
-	 * - la connexion est gérée globalement par une structure utilisant la délégation pour implémenter le traitement des i/o
-	 * - chaque délégué correspond à une étape : config/tournoi/match/round
-	 * - l'étape correspondant à une info lue est identifiée par un évènement de classe dédiée,
-	 * 	 ce qui permet de l'acheminer vers le délégué approprié
-	 * - coté serveur :
-	 * 		- la classe est exécutée par un thread indépendant, prêt à répondre à toute sollicitation
-	 * 		- à chaque demande, un nouveau thread est forked pour gérer ce client en particulier
-	 * 		- si c'est une simple demande de gameinfo, le thread s'arrête desuite
-	 * 		- sinon il doit rester en vie pour la suite du jeu (cas où le client s'enregistre dans la partie)
-	 * 		- en cours de jeu, on a donc 1 thread par joueur, plus des threads occasionnels générés pour les autres clients demandant des infos
-	 * 		  (à noter qu'en passant par le central, seul celui-ci est susceptible de demander des infos en cours de jeu, ce qu'il ne fait pas
-	 *         puisque tout marche par push. où alors, après un time out sur la partie, pour vérifier si elle n'a pas crashé.)
-	 *      - mais en fait pour chaque joueur, on a 1 thread en input et un en output, donc ça fait deux par joueur
-	 *        (pour une simple demande d'info, un seul thread fait les deux, le fait d'attendre est bcp moins grave)
-	 *      - en termes de structure, on peut considérer :
-	 *      	- une classe générale principale centralisant tout ça
-	 *      	  chargée de créer le premier thread gérant la connexion 
-	 *      	- pr chaque étape, un container secondaire contenu dans cette classe
-	 *      	  une espèce de multiplexeur/démultiplexeur
-	 *      	- pr chaque client, un gestionnaire contenu dans chaque container 
-	 *            dans le cas de l'inscription au tournoi, il s'occuperait de créer le deuxième thread
-	 *      - en fait le coup du multiplexeur/démultiplexeur n'est valable que quand la partie a commencé : 
-	 *        alors le serveur envoie la meme chose à chaque client.
-	 *        mais ce n'est pas le cas pour tout ce qui est config, donc à gérer différemment.
-	 * - côté client :
-	 * 		-  un 
-	 */
-	
-	/**
-	 * TODO algo de connection
-	 * 	- on n'a besoin de rien lire : la connection commence forcément par la demande de gameinfo
-	 *  - donc le socket peut être directement utilisé pour créer une connection de type config
-	 *    avec reader/writer
-	 *  - plus besoin d'un thread spécial pour gérer les nouvelles connections, puisqu'on en crée
-	 *    systématiquement deux autres pour les i/o
-	 *    
-	 *    
-	 *  - en fait c'est pas la peine de distinguer config/tournoi : suffit
-	 *    d'utiliser les instances individuelles pr l'écriture particulière
-	 *    et l'instance générale pour l'écriture collective.
-	 *    la lecture, elle, est toujours individuelle de toute façon.
-	 */
-	
-	// TODO pour récup l'@ du serveur côté client, utiliser Socket.getInetAddress()
-	// bah non, en fait on n'a jamais besoin de faire ça !
 	
 	/**
 	 * utilisation de lock : mettre unlock dans un block finally
@@ -1563,34 +1353,17 @@ public class Launcher
 	 */
 	
 	/**
-	 * TODO
-	 * 
-	 * faut vraiment implémenter les time-outs :
-	 * 	- si un client demande les gameinfo à un serveur, mais que celui-ci n'est pas encore prêt ?
-	 *    >> faut alors recommencer au bout d'un temps donné (délai = param config)
-	 *    >> cb de fois on recommence (ce nbre = param config)
-	 *    
-	 * quand on clique sur un serveur pas encore connecté dans la liste directe
-	 * ça le met à jour. si déjà connecté, pas la peine de mettre à jour puisqu'il fait des push
-	 * mettre en place un buffer empêchant l'utilisateur de demander plusieurs mise à jour
-	 * 
 	 * NOTE règles générales
 	 * 	- une demande d'info auprès du serveur (voire client) ne doit pas être
 	 *    réalisée tant que la GUI n'est pas prête à traiter l'évènement de lecture associé
 	 *  - les méthodes des connexions générales susceptibles d'être appelées par les connexions
 	 *    individuelles doivent être synchro, afin d'éviter par ex que plusieurs clients
-	 *    ne demande la même tâche en même temps, risquant une interférence
+	 *    ne demandent la même tâche en même temps, risquant une interférence
 	 *    
-	 * pr l'histoire d'utiliser des evts sur les éléments du jeu affichés par la GUI :
-	 * ça ne concerne pas la communication entre éléments du jeu (sauf exception), qui devrait
-	 * être réalisée de manière directe.
 	 * 
-	 * certains pb de gestion de la GUI viennent du fait que des données temporaires sont stockées dans les classes de la GUI
-	 * alors qu'elles seraient mieux controlées et intégrées si elles étaient du côté du jeu
-	 * exemple: sélection temporaire de joueurs lors de la configuration d'un joueur. le fait que ces données soient dans la GUI
-	 * pose des pb de mise à jour du jeu en réseau, car on est alors obligé de duppliquer les listes.
-	 * >> réforme à organiser conjointement à la mise en place des évènements
 	 * 
+	 * 
+	 * PROFIL
 	 * faut revoir la notion de profil:
 	 * 	- connecter directement les stats
 	 *  - introduire la distinction entre profil local et distant (fait)
@@ -1600,42 +1373,24 @@ public class Launcher
 	 *  ca devrait pas être possible d'avoir un profil sans stats
 	 *  toutes les stats devraient être centralisées et chargées quand nécessaire
 	 *  y compris pour les rencontres locales (qui peuvent être stockées le temps d'avoir un accès réseau)
-	 *  
+	 * 
+	 * 
+	 * 
+	 * REMOTE 
 	 * propriété remote des joueurs : comment s'assurer qu'un joueur est bien identifié ?
 	 * >> le central enregistre l'id du dernier hote sur lequel le joueur s'est connecté
 	 * 	  si un joueur essaie de se connecter à partir d'un hôte différent, erreur et on demande au joueur de s'identifier
 	 * >> mais en fait c'est le central qui controle la véracité, c'est lui qui détient le dernier hote de connection
 	 *    donc on ne peut faire de partie enregistrée qu'en passant par le central, basta. sinon c'est du hors-piste, de l'amical.
 	 * 
-	 * GUI: 
-	 *  - dans les cas où on a un panel affichant une liste et d'autres
-	 *    panels affichant l'élément sélectionné, il faudrait que ces derniers écoutent
-	 *    la liste afin de se mettre à jour automatiquement quand nécessaire.
-	 *  - en fait on peut faire une version simple des souspanels, et une version
-	 *    qui écoute le panel principal et hérite de la version simple
-	 *  - pour la configuration des parties, faut une structure générée au niveau de ConfigurationXxxx
-	 *    avec des sous classes pour le jeu en réseau (une pour client, une pour serveur)
-	 *    tout ça doit implémenter tout ce qui est déjà implémenté au niveau des panels, afin que la GUI
-	 *    ne fasse plus aucun traitement, mais se contente de transmettre les commandes de l'utilisateur au moteur
 	 */ 
-	
-	/**
-	 * reconnection process:
-	 * 	- client connects and sends a REQUEST_RECONNECTION message, with its id
-	 * 	- server checks if the id's
-	 * 	- sends back an ANSWER_RECONNECTION message with a boolean showing acceptation or reject
-	 *  - if accepted, the server then sends the necessary updates to the client
-	 *  - ça serait bien d'avoir un icone spécial (variante de remote) pr indiquer dans les menus qu'un joueur est déconnecté
-	 *  - lié à la reconnection : possibilité de définir des open slots (pr server)
-	 *    et par la suite, des joueurs désirant prendre la partie en cours peuvent le faire
-	 *    (similaire à un joueur déconnecté qui aurait son slot réservé et pourrait s'y reconnecter)
-	 */
 	
 	/**
 	 * à tester :
 	 *    - changement effectif d'état entre les différents types de browsing pour le client
 	 *    		>> besoin de voir ça sur un tournoi complet
 	 *    - tester le mode partie rapide
+	 *  - le serveur doit envoyer un gameinfo update à chaque changement d'état
 	 * problèmes :
 	 *    - quand un client sélectionne des commandes : c'est pas conservé quand le serveur valide la partie
 	 *    - à la fin d'un round, le client ne sort pas de Loop
@@ -1653,7 +1408,6 @@ public class Launcher
 	 *  	>> pas tout changement en fait, par exemple l'exit de ce même état est décidé unilatéralement
 	 *  - déterminer les ressources à synchroniser et... le faire rigoureusement
 	 *  - penser à tester systématiquement si l'état du c/s qui reçoit un evt est compatible avec le traitement de cet evt 
-	 *  - le serveur doit envoyer un gameinfo update à chaque changement d'état
 	 *  - tout evt transmis à la connection générale par l'indiv doit identifier l'indiv
 	 *    car pr client, il y a une différence, qui doit être traitée, entre recevoir un evt donné
 	 *    d'une connection active ou d'une autre connection.
@@ -1661,28 +1415,58 @@ public class Launcher
 	 *  - quand la partie commence, faudrait :
 	 *  	- fermer toutes les connections inutiles coté client (i.e. autres serveurs)
 	 *  	- p-ê mettre les connections concernées par la partie dans une liste spéciale, côté serveur (pr optimiser les temps de transmission)
-	 *  
-	 *  - pas mal d'actions devraient être réalisées dans un thread swing afin de couper
-	 *    l'arbre d'appel, et de permettre ainsi de libérer des ressources progressivement
-	 *  - l'intégralité du traitement devrait être effectué côté moteur
-	 *    la gui ne devrait fonctionner que par requête/réponses synchrones (pour le local)
-	 *    ou asynchrones (pour le réseau). 
-	 *    voire asynchrones pour les deux, avec un système d'évènements...
-	 *  - faire un système par délégation permettant d'associer un gestionnaire de listeners/evts
-	 *    à tout objet du moteur. chaque composant graphique doit simplement implémenter une interface,
-	 *    ce qui simplifie le beans. bien sur, chaque objet émetteur doit du cp s'identifier pr chaque evt (source)
-	 *    et les fonctions d'écoute seront un peu plus longue coté gui dans le cas de classes écoutant
-	 *    plusieurs éléments du moteur.
+	 * 
+	 * 
+	 * 
+	 * réforme GUI
+	 * 	- certains pb de gestion de la GUI viennent du fait que des données temporaires sont stockées dans les classes de la GUI
+	 * 	  alors qu'elles seraient mieux controlées et intégrées si elles étaient du côté du jeu
+	 * 	  exemple: sélection temporaire de joueurs lors de la configuration d'un joueur. le fait que ces données soient dans la GUI
+	 * 	  pose des pb de mise à jour du jeu en réseau, car on est alors obligé de duppliquer les listes.
+	 * 	  >> réforme à organiser conjointement à la mise en place des évènements
+	 * 	- GUI: 
+	 *  	- dans les cas où on a un panel affichant une liste et d'autres
+	 *    	  panels affichant l'élément sélectionné, il faudrait que ces derniers écoutent
+	 *    	  la liste afin de se mettre à jour automatiquement quand nécessaire.
+	 *  	- en fait on peut faire une version simple des souspanels, et une version
+	 *    	  qui écoute le panel principal et hérite de la version simple
+	 *  	- pour la configuration des parties, faut une structure générée au niveau de ConfigurationXxxx
+	 *    	  avec des sous classes pour le jeu en réseau (une pour client, une pour serveur)
+	 *    	  tout ça doit implémenter tout ce qui est déjà implémenté au niveau des panels, afin que la GUI
+	 *    	  ne fasse plus aucun traitement, mais se contente de transmettre les commandes de l'utilisateur au moteur
+	 *  - remarques : 
+	 *  	- l'intégralité du traitement devrait être effectué côté moteur
+	 *    	  la gui ne devrait fonctionner que par requête/réponses synchrones (pour le local)
+	 *    	  ou asynchrones (pour le réseau). 
+	 *    	  voire asynchrones pour les deux, avec un système d'évènements...
+	 *  	- faire un système par délégation permettant d'associer un gestionnaire de listeners/evts
+	 *    	  à tout objet du moteur. chaque composant graphique doit simplement implémenter une interface,
+	 *    	  ce qui simplifie le beans. bien sur, chaque objet émetteur doit du cp s'identifier pr chaque evt (source)
+	 *    	  et les fonctions d'écoute seront un peu plus longue coté gui dans le cas de classes écoutant
+	 *    	  plusieurs éléments du moteur.
 	 *    
+	 *    
+	 *    
+	 *  - reconnection process:
+	 * 		- client connects and sends a REQUEST_RECONNECTION message, with its id
+	 * 		- server checks if the id's
+	 * 		- sends back an ANSWER_RECONNECTION message with a boolean showing acceptation or reject
+	 *  	- if accepted, the server then sends the necessary updates to the client
+	 *  - ça serait bien d'avoir un icone spécial (variante de remote) pr indiquer dans les menus qu'un joueur est déconnecté
+	 *  - lié à la reconnection : possibilité de définir des open slots (pr server)
+	 *    et par la suite, des joueurs désirant prendre la partie en cours peuvent le faire
+	 *    (similaire à un joueur déconnecté qui aurait son slot réservé et pourrait s'y reconnecter)
 	 *  - gestion de la dé/re-connection :
-	 *  	- la connection individuelle est conservée côté serveur,
-	 *  	  avec un état DISCONNECTED ou autre
-	 *  	- même les threads sont gardés, mais du cp le code doit être modifié
-	 *  	  pour ne pas tenter d'écrire/lire si la connection est morte
-	 *  	- quand le client tente de se reconnecter, si son id correspond à 
-	 *  	  celle d'une connection DISCONNECTED, alors on se contete de réinitialiser les 
-	 *  	  streams dans le writer et le reader, et ça roule.
-	 *  
+	 * 		- la connection individuelle est conservée côté serveur,
+	 * 	  	  avec un état DISCONNECTED ou autre
+	 * 		- même les threads sont gardés, mais du cp le code doit être modifié
+	 * 	  	  pour ne pas tenter d'écrire/lire si la connection est morte
+	 * 		- quand le client tente de se reconnecter, si son id correspond à 
+	 * 	   	  celle d'une connection DISCONNECTED, alors on se contete de réinitialiser les 
+	 * 	  	  streams dans le writer et le reader, et ça roule.
+	 *    
+	 *    
+	 *    
 	 *  - IA:
 	 *  	- définir A* version pixel
 	 *  	- définir la fonction successeur version temporelle
