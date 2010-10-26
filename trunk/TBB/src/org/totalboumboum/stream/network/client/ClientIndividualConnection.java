@@ -72,6 +72,7 @@ public class ClientIndividualConnection extends AbstractConnection implements Ru
 	
 	public void setState(ClientState state)
 	{	this.state = state;
+System.out.println(state);	
 	}
 
 	/////////////////////////////////////////////////////////////////
