@@ -304,14 +304,16 @@ catch (UnknownHostException e)
 
 	@Override
 	public void gameLineModified(GameInfo gameInfo)
-	{	GameInfo gi = gamePanel.getGameInfo();
-		if(gameInfo==gi)
-		{	gamePanel.setGameInfo(gameInfo);
-			HostInfo hostInfo = gameInfo.getHostInfo();
-			hostPanel.setHostInfo(hostInfo);
-			//validate();
-			//repaint();
-			fireDataPanelSelectionChange(gameInfo);
+	{	if(gamePanel!=null) //TODO this method should be synch'd
+		{	GameInfo gi = gamePanel.getGameInfo();
+			if(gameInfo==gi)
+			{	gamePanel.setGameInfo(gameInfo);
+				HostInfo hostInfo = gameInfo.getHostInfo();
+				hostPanel.setHostInfo(hostInfo);
+				//validate();
+				//repaint();
+				fireDataPanelSelectionChange(gameInfo);
+			}
 		}
 	}
 
