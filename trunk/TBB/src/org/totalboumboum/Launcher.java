@@ -1634,11 +1634,14 @@ public class Launcher
 	/**
 	 * à tester :
 	 *    - changement effectif d'état entre les différents types de browsing pour le client
+	 *    		>> besoin de voir ça sur un tournoi complet
 	 *    - tester le mode partie rapide
 	 * problèmes :
 	 *    - quand un client sélectionne des commandes : c'est pas conservé quand le serveur valide la partie
 	 *    - à la fin d'un round, le client ne sort pas de Loop
 	 *    - jeu saccadé côté client même en LAN >> faire de l'évènementiel et pas du cosmétique
+	 *    - impossible de bouger le perso côté client
+	 *    - parfois une exception se produit liée à GregorianCalendar
 	 *    
 	 * à faire :
 	 *  - la deconnection en cours de partie (et dc de jeu) doit être traitée pour éviter le blocage prolongé du serveur, à toutes les phases de la gui/du jeu
@@ -1647,7 +1650,7 @@ public class Launcher
 	 *  	- une requête envoyée au serveur
 	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client
 	 *  	>> cf le passage de game selection à players selection
-	 *  	>> pas tout changement en fait, par exemple l'exit est décidé unilatéralement
+	 *  	>> pas tout changement en fait, par exemple l'exit de ce même état est décidé unilatéralement
 	 *  - déterminer les ressources à synchroniser et... le faire rigoureusement
 	 *  - penser à tester systématiquement si l'état du c/s qui reçoit un evt est compatible avec le traitement de cet evt 
 	 *  - le serveur doit envoyer un gameinfo update à chaque changement d'état
