@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -249,11 +250,26 @@ System.out.println(state);
 	}
 
 	private void playersListReceived(List<Profile> playerProfiles)
-	{	// update profile list
+	{	// update controls
+		for(Profile p2: playerProfiles)
+		{	String id2 = p2.getId();
+			int cs = 0;
+			Iterator<Profile> it = this.playerProfiles.iterator();
+			while(cs!=0 && it.hasNext())
+			{	Profile p1 = it.next();
+				String id1 = p1.getId();
+				if(id1.equals(id2))
+					cs = p1.getControlSettingsIndex();
+			}
+			p2.setControlSettingsIndex(cs);
+		}
+		
+		// update profile list
 		this.playerProfiles = playerProfiles;
+		
+		// images must be loaded because they did not pass the stream	
 		for(Profile profile: playerProfiles)
-		{	// images must be loaded because they did not pass the stream	
-			try
+		{	try
 			{	ProfileLoader.reloadPortraits(profile);
 			}
 			catch (ParserConfigurationException e)

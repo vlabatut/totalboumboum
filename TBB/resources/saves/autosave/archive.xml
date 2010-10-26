@@ -2,12 +2,12 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Super-coupe de Galatasaray I" type="SINGLE" />
 	<played matches="0" rounds="1" />
-	<dates start="2010-10-25T22:56:32" save="2010-10-25T22:58:42" />
+	<dates start="2010-10-26T22:23:17" save="2010-10-26T22:24:59" />
 	<players>
 		<player name="0708.Demirkol+Doğan" />
 		<player name="0708.Hanci+Toprak" />
 		<player name="0708.Çamaş+Demirbaş" />
-		<player name="Joueur Humain 2" />
+		<player name="0809.Akkaya+Danacioğlu" />
 	</players>
 </archive>
 

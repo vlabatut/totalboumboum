@@ -245,18 +245,21 @@ public class ServerIndividualConnection extends AbstractConnection
 	
 	private void playersAddRequested(NetworkMessage message)
 	{	Profile profile = (Profile)message.getData();
+		profile.setControlSettingsIndex(0);
 		if(profile.getLastHost().equals(hostId))
 			generalConnection.playersAddRequested(profile,this);
 	}
 	
 	private void playersChangeRequestedColor(NetworkMessage message)
 	{	Profile profile = (Profile)message.getData();
+		profile.setControlSettingsIndex(0);
 		if(profile.getLastHost().equals(hostId))
 			generalConnection.playersChangeRequestedColor(profile,this);
 	}
 	
 	private void playersChangeRequestedHero(NetworkMessage message)
 	{	Profile profile = (Profile)message.getData();
+		profile.setControlSettingsIndex(0);
 		if(profile.getLastHost().equals(hostId))
 			generalConnection.playersChangeRequestedHero(profile,this);
 	}
@@ -266,6 +269,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	{	List<Profile> list = (List<Profile>)message.getData();
 		Profile p1 = list.get(0);
 		Profile p2 = list.get(1);
+		p2.setControlSettingsIndex(0);
 		String id = p1.getId();
 		if(p1.getLastHost().equals(hostId) && p2.getLastHost().equals(hostId))
 			generalConnection.playersSetRequested(id,p2,this);
@@ -273,6 +277,7 @@ public class ServerIndividualConnection extends AbstractConnection
 	
 	private void playersRemoveRequested(NetworkMessage message)
 	{	Profile profile = (Profile)message.getData();
+		profile.setControlSettingsIndex(0);
 		if(profile.getLastHost().equals(hostId))
 		{	String id = profile.getId();
 			generalConnection.playersRemoveRequested(id,this);
