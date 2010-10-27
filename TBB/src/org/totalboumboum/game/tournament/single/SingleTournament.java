@@ -30,6 +30,7 @@ import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.instance.Instance;
@@ -49,6 +50,8 @@ import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.stream.file.replay.FileClientStream;
+import org.totalboumboum.stream.network.data.host.HostState;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**
@@ -175,6 +178,10 @@ public class SingleTournament extends AbstractTournament
 			stats.initEndDate();		
 		}
 //NOTE ou bien : panel.matchOver();		
+		// server connection
+		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+		if(serverConnection!=null)
+			serverConnection.updateHostState(HostState.FINISHED);
 	}
 
 	public void roundOver()

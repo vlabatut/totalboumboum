@@ -31,6 +31,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.TournamentLimit;
 import org.totalboumboum.game.match.Match;
@@ -39,6 +40,8 @@ import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
+import org.totalboumboum.stream.network.data.host.HostState;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 
 /**
@@ -150,6 +153,11 @@ public class SequenceTournament extends AbstractTournament
 			setOver(true);
 			panel.tournamentOver();
 			stats.initEndDate();
+			
+			// server connection
+			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+			if(serverConnection!=null)
+				serverConnection.updateHostState(HostState.FINISHED);
 		}
 		else
 		{	panel.matchOver();		

@@ -1387,15 +1387,15 @@ public class Launcher
 	
 	/**
 	 * à tester :
+	 *    - à la fin d'un round, le client ne sort pas de Loop
 	 *    - changement effectif d'état entre les différents types de browsing pour le client
 	 *    		>> besoin de voir ça sur un tournoi complet
 	 *    - tester le mode partie rapide
-	 *  - le serveur doit envoyer un gameinfo update à chaque changement d'état
+	 *    - le serveur change bien d'état à chaque modification de la partie
 	 * problèmes :
 	 *    - quand un client sélectionne des commandes : c'est pas conservé quand le serveur valide la partie
-	 *    - à la fin d'un round, le client ne sort pas de Loop
-	 *    - jeu saccadé côté client même en LAN >> faire de l'évènementiel et pas du cosmétique
 	 *    - impossible de bouger le perso côté client
+	 *    - jeu saccadé côté client même en LAN >> faire de l'évènementiel et pas du cosmétique
 	 *    - parfois une exception se produit liée à GregorianCalendar
 	 *    
 	 * à faire :

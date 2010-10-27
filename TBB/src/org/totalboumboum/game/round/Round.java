@@ -41,6 +41,7 @@ import org.totalboumboum.engine.loop.RegularLoop;
 import org.totalboumboum.engine.loop.Loop;
 import org.totalboumboum.engine.loop.ServerLoop;
 import org.totalboumboum.engine.loop.SimulationLoop;
+import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.game.limit.LimitTime;
 import org.totalboumboum.game.limit.Limits;
@@ -279,7 +280,11 @@ public class Round implements StatisticHolder, Serializable
 
 		// possibly end network game
 		if(serverConnection!=null)
-		{	serverConnection.finishRound(stats);
+		{	// send a stop event
+			StopReplayEvent event = new StopReplayEvent();
+			serverConnection.sendReplay(event);
+			// and send the stats
+			serverConnection.finishRound(stats);
 		}
 
 		match.roundOver();
