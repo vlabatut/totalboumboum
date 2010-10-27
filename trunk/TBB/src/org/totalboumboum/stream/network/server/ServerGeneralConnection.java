@@ -126,34 +126,33 @@ public class ServerGeneralConnection implements Runnable
 	
 	private void initGameInfo(Set<Integer> allowedPlayers, String tournamentName, TournamentType tournamentType, List<Double> playerScores, List<Profile> playerProfiles, boolean direct, boolean central)
 	{	gameInfoLock.lock();
+		{	gameInfo = new GameInfo();
 		
-		gameInfo = new GameInfo();
+			// players
+			gameInfo.setAllowedPlayers(allowedPlayers);
+			gameInfo.setTournamentName(tournamentName);
+			int playerCount = playerProfiles.size();
+			gameInfo.setPlayerCount(playerCount);
+			
+			// average score
+			double averageScore = 0;
+			for(Double d: playerScores)
+				averageScore = averageScore + d;
+			averageScore = averageScore / playerScores.size();
+			gameInfo.setAverageScore(averageScore);		
+			// tournament type
+			gameInfo.setTournamentType(tournamentType);
 	
-		// players
-		gameInfo.setAllowedPlayers(allowedPlayers);
-		gameInfo.setTournamentName(tournamentName);
-		int playerCount = playerProfiles.size();
-		gameInfo.setPlayerCount(playerCount);
-		
-		// average score
-		double averageScore = 0;
-		for(Double d: playerScores)
-			averageScore = averageScore + d;
-		averageScore = averageScore / playerScores.size();
-		gameInfo.setAverageScore(averageScore);		
-		// tournament type
-		gameInfo.setTournamentType(tournamentType);
-
-		// host info
-		HostInfo hostInfo = Configuration.getConnectionsConfiguration().getLocalHostInfo();
-//		result.setLastIp(lastIp);	// TODO info locale au client
-//		result.setPreferred(preferred); // TODO info locale au client
-//		result.setUses(uses); 		// TODO info locale au client
-		hostInfo.setState(HostState.OPEN);
-		hostInfo.setCentral(central);
-		hostInfo.setDirect(direct);
-		gameInfo.setHostInfo(hostInfo);
-		
+			// host info
+			HostInfo hostInfo = Configuration.getConnectionsConfiguration().getLocalHostInfo();
+//			result.setLastIp(lastIp);	// TODO info locale au client
+//			result.setPreferred(preferred); // TODO info locale au client
+//			result.setUses(uses); 		// TODO info locale au client
+			hostInfo.setState(HostState.OPEN);
+			hostInfo.setCentral(central);
+			hostInfo.setDirect(direct);
+			gameInfo.setHostInfo(hostInfo);
+		}
 		gameInfoLock.unlock();
 	}
 	
@@ -161,7 +160,8 @@ public class ServerGeneralConnection implements Runnable
 	{	GameInfo result = null;
 		
 		gameInfoLock.lock();
-		result = gameInfo.copy();
+		{	result = gameInfo.copy();
+		}
 		gameInfoLock.unlock();
 		
 		return result;
@@ -171,11 +171,10 @@ public class ServerGeneralConnection implements Runnable
 	{	NetworkMessage message;
 		
 		gameInfoLock.lock();
-		
-		gameInfo.getHostInfo().setState(hostState);
-		GameInfo copy = gameInfo.copy();
-		message = new NetworkMessage(MessageName.UPDATING_GAME_INFO,copy);
-		
+		{	gameInfo.getHostInfo().setState(hostState);
+			GameInfo copy = gameInfo.copy();
+			message = new NetworkMessage(MessageName.UPDATING_GAME_INFO,copy);
+		}
 		gameInfoLock.unlock();
 		
 		propagateMessage(message);

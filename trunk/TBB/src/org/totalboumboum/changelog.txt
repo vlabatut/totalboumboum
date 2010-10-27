@@ -426,3 +426,5 @@
 	- Divers :
 			- outils de conception de niveaux (mais pas d'interface pour l'instant)
 			- instance Total Boum Boum
++ beta.018
+	- essentiellement une version intermédiaire sortie pour le projet d'IA

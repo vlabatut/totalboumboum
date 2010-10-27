@@ -33,6 +33,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
@@ -41,6 +42,8 @@ import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
+import org.totalboumboum.stream.network.data.host.HostState;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.calculus.CalculusTools;
 
@@ -802,6 +805,11 @@ for(ArrayList<Integer> list: permutations)
 		{	setOver(true);
 			panel.tournamentOver();
 			stats.initEndDate();
+
+			// server connection
+			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+			if(serverConnection!=null)
+				serverConnection.updateHostState(HostState.FINISHED);
 		}
 		else
 		{	panel.matchOver();		
