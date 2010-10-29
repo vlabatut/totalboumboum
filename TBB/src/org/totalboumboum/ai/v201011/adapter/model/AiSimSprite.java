@@ -46,12 +46,24 @@ public abstract class AiSimSprite
 	/**
 	 * construit une simulation du sprite passé en paramètre
 	 * 
-	 * @param tile	simulation de la case contenant le sprite
 	 * @param sprite	sprite à simuler
+	 * @param tile	simulation de la case contenant le sprite
 	 */
-	public AiSimSprite(AiSimTile tile, AiSprite<?> sprite)
+	AiSimSprite(AiSprite<?> sprite, AiSimTile tile)
 	{	this.tile = tile;
 		state = new AiSimState(sprite);
+	}
+
+	/**
+	 * construit une simulation du sprite passé en paramètre,
+	 * (donc une simple copie) et la place dans la case indiquée.
+	 * 
+	 * @param sprite	simulation à copier
+	 * @param tile	simulation de la case devant contenir la copie
+	 */
+	public AiSimSprite(AiSimSprite sprite, AiSimTile tile)
+	{	this.tile = tile;
+		this.state = sprite.getState().copy();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -145,24 +157,6 @@ public abstract class AiSimSprite
 	 *  @return	vrai si ce sprite le laisser passer par sa case 
 	 */
 	public abstract boolean isCrossableBy(AiSimSprite sprite);
-	
-	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	/**
-	 * Complète la copie de sprite passée en paramètre 
-	 * avec les informations locales
-	 * 
-	 *  @param clone	la copie de sprite en cours de construction, à compléter
-	 *  @param tile		la case occupée par la copie de sprite
-	 */
-	public void initCopy(AiSimSprite clone, AiSimTile tile)
-	{	// tile
-		clone.tile = tile;
-		
-		// state
-		clone.state = state.copy();
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
