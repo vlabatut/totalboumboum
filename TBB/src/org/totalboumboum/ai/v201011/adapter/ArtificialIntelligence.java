@@ -34,7 +34,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * appelée par le gestionnaire d'IA pour l'interroger que la prochaine action 
  * à effectuer.
  * <p>
- * ATTENTION : remarque très importante.
+ * <b>ATTENTION :</b> remarque très importante.
  * A la fin de la partie, le jeu demande à l'IA de s'arrêter. Dans certaines
  * conditions, l'IA ne voudra pas s'arrêter (par exemple si elle est dans une
  * boucle infinie, ou bloquée dans un traitement récursif). Pour éviter ce 
