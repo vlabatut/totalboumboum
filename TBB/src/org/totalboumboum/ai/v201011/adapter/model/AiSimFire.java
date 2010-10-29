@@ -41,8 +41,9 @@ public class AiSimFire extends AiSimSprite
 	 * @param throughBombs	indique si le feu peut traverser les bombes
 	 * @param throughItems	indique si le feu peut traverser les items
 	 */
-	public AiSimFire(AiSimTile tile, boolean throughBlocks, boolean throughBombs, boolean throughItems)
-	{	super(tile);
+	public AiSimFire(AiSimTile tile, double posX, double posY, double posZ,
+			boolean throughBlocks, boolean throughBombs, boolean throughItems)
+	{	super(tile,posX,posY,posZ);
 		
 		this.throughBlocks = throughBlocks;
 		this.throughBombs = throughBombs;

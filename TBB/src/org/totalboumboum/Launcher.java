@@ -374,12 +374,6 @@ public class Launcher
 	 */
 	
 	/*
-	 * TODO inclure dans l'API IA des fonctions d'action prédéfinies.
-	 * par exemple des fonctions pour le déplacement, on indique où on veut aller et ça détermine à chaque itération
-	 * quelle est l'action à effectuer. étendre à d'autres actions ?
-	 */
-	
-	/*
 	 * TODO include dans l'API une fonction d'initialisation de l'IA, appelée lors de sa création
 	 * faudrait passer en paramètre le niveau et des infos style l'instance, etc.
 	 * ça permettrait par exemple, pour une IA qui apprend, de télécharger son fichier de sauvegarde
@@ -387,7 +381,20 @@ public class Launcher
 	 */
 	
 	/*
-	 * evaluation du projet : pour la qualification, utiliser ke temps nécessaire pour éliminer un/des adversaire(s) de référence
+	 * TODO evaluation du projet : pour la qualification, utiliser le temps nécessaire pour éliminer un/des adversaire(s) de référence
+	 */
+	
+	/*
+	 * TODO
+	 * plutot que de développer toute une API pour l'IA, il faudrait réutiliser les classes du jeu:
+	 * 	- faire une copie des données à chaque itération, pour des raisons de synchro
+	 *  - on suppose qu'une copie n'est pas modiée, donc on peut ne la calculer qu'une seule fois pour chaque IA
+	 *  - il faut définir des classes d'interface, des wrappers même, permettant aux IA d'accéder seulement aux méthodes autorisées
+	 *  - pour les pb de synchro quand on veut savoir les propriétés du feu qu'une bombe génèrerait, il suffit d'en construire un (feu) 
+	 *    et de le garder en cache le temps de la partie (en le màj si besoin de temps en temps)
+	 *  >> intérêt : pouvoir utiliser exactement les mêmes fonctions que dans le jeu
+	 *  (en fait, ça consiste à faire plus ou moins ce qui est déjà fait, sauf qu'au lieu de recopier les données dans des
+	 *  classes différentes, on les copies telles-quelles et on définit des classes wrappers
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
