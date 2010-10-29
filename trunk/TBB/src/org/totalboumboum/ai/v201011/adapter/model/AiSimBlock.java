@@ -46,8 +46,8 @@ public class AiSimBlock extends AiSimSprite
 	{	super(tile);
 		
 		this.destructible = destructible;
-		this.stopsHeroes = stopHeroes;
-		this.stopsFires = stopFires;
+		this.stopHeroes = stopHeroes;
+		this.stopFires = stopFires;
 	}	
 
 	/**
@@ -61,12 +61,12 @@ public class AiSimBlock extends AiSimSprite
 	{	super(sprite,tile);
 		
 		this.destructible = sprite.isDestructible();
-		this.stopsHeroes = sprite.isStopsHeroes();
-		this.stopsFires = sprite.isStopsFires();
+		this.stopHeroes = sprite.hasStopHeroes();
+		this.stopFires = sprite.hasStopFires();
 	}	
 	
 	/**
-	 * construit une simulation du sprite passé en paramètre,
+	 * construit une simulation du bloc passé en paramètre,
 	 * (donc une simple copie) et la place dans la case indiquée.
 	 * 
 	 * @param sprite	simulation à copier
@@ -76,8 +76,8 @@ public class AiSimBlock extends AiSimSprite
 	{	super(sprite,tile);
 		
 		destructible = sprite.destructible;
-		stopsHeroes = sprite.stopsHeroes;
-		stopsFires = sprite.stopsFires;
+		stopHeroes = sprite.stopHeroes;
+		stopFires = sprite.stopFires;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -108,47 +108,9 @@ public class AiSimBlock extends AiSimSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** indique si ce bloc laisse passer les joueurs */
-	private AiStopType stopsHeroes;
+	private AiStopType stopHeroes;
 	/** indique si ce bloc laisse passer le feu */
-	private AiStopType stopsFires;
-	
-	/**
-	 * indique si ce bloc arrête les personnages.
-	 * <b>ATTENTION :</b> il est recommandé d'utiliser plutot la méthode isCrossableBy.
-	 * 
-	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
-	 */
-	public AiStopType isStopsHeroes()
-	{	return stopsHeroes;
-	}
-	
-	/**
-	 * modifie le fait que ce mur empêche ou non le déplacement des personnages
-	 * 
-	 * @param stopsHeroes	valeur indiquant si ce mur arrête les personnages
-	 */
-	public void setStopsHeroes(AiStopType stopsHeroes)
-	{	this.stopsHeroes = stopsHeroes;
-	}
-	
-	/**
-	 * indique si ce bloc arrête les explosions.
-	 * <b>ATTENTION :</b> il est recommandé d'utiliser plutot la méthode isCrossableBy.
-	 * 
-	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
-	 */
-	public AiStopType isStopsFires()
-	{	return stopsFires;
-	}
-	
-	/**
-	 * modifie le fait que ce mur empêche ou non le feu de passer
-	 * 
-	 * @param stopsHeroes	valeur indiquant si ce mur arrête le feu
-	 */
-	public void setStopsFires(AiStopType stopsFires)
-	{	this.stopsFires = stopsFires;
-	}
+	private AiStopType stopFires;
 	
 	@Override
 	public boolean isCrossableBy(AiSimSprite sprite)
@@ -159,21 +121,21 @@ public class AiSimBlock extends AiSimSprite
 		{	AiSimHero hero = (AiSimHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
 				result = true;
-			else if(stopsHeroes==AiStopType.NO_STOP)
+			else if(stopHeroes==AiStopType.NO_STOP)
 				result = true;
-			else if(stopsHeroes==AiStopType.WEAK_STOP)
+			else if(stopHeroes==AiStopType.WEAK_STOP)
 				result = hero.hasThroughBlocks();
-			else if(stopsHeroes==AiStopType.STRONG_STOP)
+			else if(stopHeroes==AiStopType.STRONG_STOP)
 				result = false;
 		}
 		// si le sprite considéré est un feu
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire) sprite;
-			if(stopsFires==AiStopType.NO_STOP)
+			if(stopFires==AiStopType.NO_STOP)
 				result = true;
-			else if(stopsFires==AiStopType.WEAK_STOP)
+			else if(stopFires==AiStopType.WEAK_STOP)
 				result = fire.hasThroughBlocks();
-			else if(stopsFires==AiStopType.STRONG_STOP)
+			else if(stopFires==AiStopType.STRONG_STOP)
 				result = false;
 		}
 		return result;
