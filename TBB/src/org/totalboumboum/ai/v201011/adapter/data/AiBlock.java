@@ -87,6 +87,15 @@ public class AiBlock extends AiSprite<Block>
 		destructible = !sprite.isTargetPreventing(specificAction);
 	}
 
+	/**
+	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
+	 * 
+	 * @return	l'indicateur de destructibilité du mur
+	 */
+	public boolean isDestructible()
+	{	return destructible;		
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -152,15 +161,6 @@ public class AiBlock extends AiSprite<Block>
 				stopFires = AiStopType.NO_STOP;
 		}
 	}	
-
-	/**
-	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
-	 * 
-	 * @return	l'indicateur de destructibilité du mur
-	 */
-	public boolean isDestructible()
-	{	return destructible;		
-	}
 
 	@Override
 	public boolean isCrossableBy(AiSprite<?> sprite)
