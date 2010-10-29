@@ -104,11 +104,25 @@ public class AiBlock extends AiSprite<Block>
 	/** indique si ce bloc laisse passer le feu */
 	private AiStopType stopsFires;
 	
-	AiStopType isStopsHeroes()
+	/**
+	 * indique si ce bloc arrête les personnages.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
+	 */
+	public AiStopType isStopsHeroes()
 	{	return stopsHeroes;
 	}
 	
-	AiStopType isStopsFires()
+	/**
+	 * indique si ce bloc arrête les explosions.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
+	 */
+	public AiStopType isStopsFires()
 	{	return stopsFires;
 	}
 	

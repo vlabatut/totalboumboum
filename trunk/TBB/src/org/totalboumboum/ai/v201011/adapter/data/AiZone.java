@@ -364,12 +364,12 @@ public class AiZone
 	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
 	 * il faut se déplacer pour aller de la case source à la case target.</br>
 	 * 
-	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
+	 * <b>ATTENTION 1 :</b> si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
 	 * il est possible que cette méthode renvoie une direction composite,
 	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Référez-vous à 
 	 * la classe Direction pour plus d'informations sur ces valeurs.</br>
 	 *  
-	 * ATTENTION 2 : comme les niveaux sont circulaires, il y a toujours deux directions possibles.
+	 * <b>ATTENTION 2 :</b> comme les niveaux sont circulaires, il y a toujours deux directions possibles.
 	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
 	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
 	 * RIGHT, car LEFT permet également d'atteindre la case, mais en parcourant un chemin plus long.
@@ -937,8 +937,8 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie la distance de Manhattan entre les cases de coordonnées
-	 * (line1,col1) et (line2,col2), exprimée en cases. Attention, le 
-	 * niveau est considéré comme cyclique, 
+	 * (line1,col1) et (line2,col2), exprimée en cases. 
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
 	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
@@ -958,7 +958,7 @@ public class AiZone
 	/**
 	 * renvoie la distance de Manhattan entre les cases de coordonnées
 	 * (line1,col1) et (line2,col2), exprimée en cases. 
-	 * Attention, le niveau est considéré comme cyclique, 
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -975,7 +975,8 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
-	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * exprimée en cases. 
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -990,7 +991,8 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
-	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * exprimée en cases. 
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance dans la direction
 	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
@@ -1011,7 +1013,8 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * exprimée en cases. 
+   	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -1026,7 +1029,8 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * exprimée en cases. 
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance dans la direction
 	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
@@ -1048,7 +1052,8 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie la distance de Manhattan entre les points de coordonnées
-	 * (x1,y1) et (x2,y2), exprimée en pixels. Attention, le niveau est considéré comme cyclique, 
+	 * (x1,y1) et (x2,y2), exprimée en pixels. 
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -1067,7 +1072,8 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les points de coordonnées
-	 * (x1,y1) et (x2,y2), exprimée en pixels. Attention, le niveau est considéré comme cyclique, 
+	 * (x1,y1) et (x2,y2), exprimée en pixels. 
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
 	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
@@ -1088,7 +1094,8 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en pixels. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * exprimée en pixels. 
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -1103,7 +1110,7 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres, exprimée en pixels. 
-	 * Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
 	 * Cette méthode considère la distance dans la direction indiquée par le 
 	 * paramètre direction, qui peut correspondre à un chemin passant par 
