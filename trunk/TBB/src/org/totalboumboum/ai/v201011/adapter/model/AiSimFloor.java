@@ -38,8 +38,8 @@ public class AiSimFloor extends AiSimSprite
 	 * 
 	 * @param tile	case contenant le sprite
 	 */
-	public AiSimFloor(AiSimTile tile)
-	{	super(tile);
+	public AiSimFloor(AiSimTile tile, double posX, double posY, double posZ)
+	{	super(tile,posX,posY,posZ);
 	}	
 
 	/**

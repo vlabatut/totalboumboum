@@ -47,10 +47,11 @@ public class AiSimHero extends AiSimSprite
 	 * @param color	couleur du personnage
 	 * @param walkingSpeed	vitesse du personnage
 	 */
-	public AiSimHero(AiSimTile tile, int bombRange, int bombNumber, int bombCount,
+	public AiSimHero(AiSimTile tile, double posX, double posY, double posZ,
+			int bombRange, int bombNumber, int bombCount,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
 			PredefinedColor color, double walkingSpeed)
-	{	super(tile);
+	{	super(tile,posX,posY,posZ);
 		
 		// bombs
 		this.bombRange = bombRange;
@@ -243,46 +244,6 @@ public class AiSimHero extends AiSimSprite
 		return result;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// RANKS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * Renvoie le classement de ce joueur, pour la manche en cours.
-	 * Ce classement est susceptible d'évoluer d'ici la fin de la manche actuellement jouée, 
-	 * par exemple si ce joueur est éliminé.
-	 * 
-	 * @return	le classement de ce joueur dans la manche en cours
-	 */
-	public int getRoundRank()
-	{	AiSimZone zone = getTile().getZone();
-		int result = zone.getRoundRank(this);
-		return result;
-	}
-	
-	/**
-	 * Renvoie le classement de ce joueur, pour la rencontre en cours.
-	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
-	 * 
-	 * @return	le classement de ce joueur dans la rencontre en cours
-	 */
-	public int getMatchRank()
-	{	AiSimZone zone = getTile().getZone();
-		int result = zone.getMatchRank(this);
-		return result;
-	}
-	
-	/**
-	 * Renvoie le classement de ce joueur, dans le classement général du jeu (Glicko-2)
-	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
-	 * 
-	 * @return	le classement général (Glicko-2) de ce joueur
-	 */
-	public int getStatsRank()
-	{	AiSimZone zone = getTile().getZone();
-		int result = zone.getStatsRank(this);
-		return result;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

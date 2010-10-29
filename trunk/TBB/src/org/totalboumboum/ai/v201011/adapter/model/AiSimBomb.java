@@ -59,12 +59,13 @@ public class AiSimBomb extends AiSimSprite
 	 * @param working
 	 * @param time
 	 */
-	public AiSimBomb(AiSimTile tile, boolean countdownTrigger, boolean remoteControlTrigger, boolean explosionTrigger,
+	public AiSimBomb(AiSimTile tile, double posX, double posY, double posZ,
+			boolean countdownTrigger, boolean remoteControlTrigger, boolean explosionTrigger,
 			long normalDuration, long explosionDuration, long latencyDuration, float failureProbability,
 			AiStopType stopHeroes, AiStopType stopFires, boolean throughItems,
 			int range, boolean penetrating,
 			PredefinedColor color, boolean working, long time)
-	{	super(tile);
+	{	super(tile,posX,posY,posZ);
 		
 		// fuse
 		this.countdownTrigger = countdownTrigger;
@@ -285,7 +286,7 @@ public class AiSimBomb extends AiSimSprite
 	public List<AiSimTile> getBlast()
 	{	// init
 		List<AiSimTile> result = new ArrayList<AiSimTile>();
-		AiSimFire fire = new AiSimFire(tile,penetrating,penetrating,penetrating);
+		AiSimFire fire = new AiSimFire(tile,tile.getPosX(),tile.getPosY(),0,penetrating,penetrating,penetrating);
 		
 		// center
 		if(tile.isCrossableBy(fire))

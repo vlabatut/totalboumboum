@@ -51,6 +51,11 @@ public class EmptyExplosionManager extends ExplosionManager
 	{	List<Tile> result = new ArrayList<Tile>();
 		return result;
 	}	
+	
+	@Override
+	public boolean isPenetrating()
+	{	return false;
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
