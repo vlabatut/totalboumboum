@@ -447,10 +447,11 @@ public class AiTile
 	
 	/**
 	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
-	 * passée en paramètre. Attention, seulement les directions primaires sont
+	 * passée en paramètre. 
+	 * <b>ATTENTION :</b> seulement les directions primaires sont
 	 * utilisées (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
 	 * Dans le cas contraire, la fonction renvoie null.</br>
-	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
+	 * <b>ATTENTION :</b> les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
@@ -467,7 +468,7 @@ public class AiTile
 	 * renvoie la liste des voisins de cette case.
 	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.</br>
 	 * 
-	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
+	 * <b>ATTENTION :</b>les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
