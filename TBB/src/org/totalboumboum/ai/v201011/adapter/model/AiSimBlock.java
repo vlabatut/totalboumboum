@@ -21,8 +21,8 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
-import org.totalboumboum.ai.v201011.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
+import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataBlock;
 
 /**
  * Simule un bloc du jeu, c'est à dire généralement un mur
@@ -58,7 +58,7 @@ public class AiSimBlock extends AiSimSprite
 	 * @param sprite	sprite à simuler
 	 * @param tile	case contenant le sprite
 	 */
-	AiSimBlock(AiBlock sprite, AiSimTile tile)
+	AiSimBlock(AiDataBlock sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		this.destructible = sprite.isDestructible();

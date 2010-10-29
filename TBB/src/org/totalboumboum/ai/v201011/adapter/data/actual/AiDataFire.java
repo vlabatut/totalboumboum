@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.model;
+package org.totalboumboum.ai.v201011.adapter.data.actual;
 
 /*
  * Total Boum Boum
@@ -21,65 +21,43 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataFire;
+import org.totalboumboum.ai.v201011.adapter.data.AiFire;
+import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
+import org.totalboumboum.engine.content.feature.ability.StateAbility;
+import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
+import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
- * simule un feu du jeu, ie une projection mortelle résultant (généralement) 
+ * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
  *
  */
-public class AiSimFire extends AiSimSprite
+final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 {
 	/**
-	 * crée une simulation du feu passé en paramètre,
-	 * avec les propriétés passées en paramètres.
-	 * 
-	 * @param tile	case contenant le sprite
-	 * @param throughBlocks	indique si le feu peut traverser les blocs
-	 * @param throughBombs	indique si le feu peut traverser les bombes
-	 * @param throughItems	indique si le feu peut traverser les items
-	 */
-	public AiSimFire(AiSimTile tile, double posX, double posY, double posZ,
-			boolean throughBlocks, boolean throughBombs, boolean throughItems)
-	{	super(tile,posX,posY,posZ);
-		
-		this.throughBlocks = throughBlocks;
-		this.throughBombs = throughBombs;
-		this.throughItems = throughItems;
-	}	
-
-	/**
-	 * crée une simulation du feu passé en paramètre, et contenue dans 
+	 * crée une représentation du feu passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à simuler
+	 * @param sprite	sprite à représenter
 	 */
-	AiSimFire(AiDataFire sprite, AiSimTile tile)
-	{	super(sprite,tile);
-		
-		this.throughBlocks = sprite.hasThroughBlocks();
-		this.throughBombs = sprite.hasThroughBombs();
-		this.throughItems = sprite.hasThroughItems();
+	protected AiDataFire(AiDataTile tile, Fire sprite)
+	{	super(tile,sprite);
+		updateCollisions();
 	}
 
-	/**
-	 * construit une simulation du feu passé en paramètre,
-	 * (donc une simple copie) et la place dans la case indiquée.
-	 * 
-	 * @param sprite	simulation à copier
-	 * @param tile	simulation de la case devant contenir la copie
-	 */
-	public AiSimFire(AiSimFire sprite, AiSimTile tile)
-	{	super(sprite,tile);
-		
-		throughBlocks = sprite.throughBlocks;
-		throughBombs = sprite.throughBombs;
-		throughItems = sprite.throughItems;
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	protected void update(AiDataTile tile)
+	{	super.update(tile);
+		updateCollisions();
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -98,7 +76,7 @@ public class AiSimFire extends AiSimSprite
 	 * 
 	 * @return	vrai si le feu traverse les murs
 	 */
-	public boolean hasThroughBlocks()
+	protected boolean hasThroughBlocks()
 	{	return throughBlocks;	
 	}
 
@@ -110,7 +88,7 @@ public class AiSimFire extends AiSimSprite
 	 * 
 	 * @return	vrai si le feu traverse les bombes
 	 */
-	public boolean hasThroughBombs()
+	protected boolean hasThroughBombs()
 	{	return throughBombs;	
 	}
 
@@ -122,24 +100,42 @@ public class AiSimFire extends AiSimSprite
 	 * 
 	 * @return	vrai si le feu traverse les items
 	 */
-	public boolean hasThroughItems()
+	protected boolean hasThroughItems()
 	{	return throughItems;
 	}
 
+	/**
+	 * met à jour les diverse propriétés de ce feu
+	 * liée à la gestion des collisions
+	 */
+	private void updateCollisions()
+	{	Sprite sprite = getSprite();
+		StateAbility ability;
+		// traverser les murs
+		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
+		throughBlocks = ability.isActive();
+		// traverser les bombes
+		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_BOMB);
+		throughBombs = ability.isActive();
+		// traverser les items
+		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_ITEM);
+		throughItems = ability.isActive();
+	}
+
 	@Override
-	public boolean isCrossableBy(AiSimSprite sprite)
+	public boolean isCrossableBy(AiSprite sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
 		
 		// si le sprite considéré est un personnage : peut traverser le feu seulement s'il a une protection
-		if(sprite instanceof AiSimHero)
-		{	AiSimHero hero = (AiSimHero) sprite;
+		if(sprite instanceof AiDataHero)
+		{	AiDataHero hero = (AiDataHero) sprite;
 			result = hero.hasThroughFires();
 		}
 		
 		// si c'est une bombe : peut traverser le feu seulement si elle n'explose pas à son contact
-		else if(sprite instanceof AiSimHero)
-		{	AiSimBomb bomb = (AiSimBomb) sprite;
+		else if(sprite instanceof AiDataHero)
+		{	AiDataBomb bomb = (AiDataBomb) sprite;
 			result = !bomb.hasExplosionTrigger();
 		}
 		
@@ -162,7 +158,7 @@ public class AiSimFire extends AiSimSprite
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	void finish()
+	protected void finish()
 	{	super.finish();
 	}
 }

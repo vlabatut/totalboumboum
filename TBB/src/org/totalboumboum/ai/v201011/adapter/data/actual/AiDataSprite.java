@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.model;
+package org.totalboumboum.ai.v201011.adapter.data.actual;
 
 /*
  * Total Boum Boum
@@ -21,74 +21,101 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
+import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataSprite;
+import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
- * cette classe permet de simuler les sprites du jeu,
- * et un nombre restreint de leurs propriétés.
+ * cette classe permet de représenter les sprites manipulés par le jeu,
+ * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
+ * Le paramètre T détermine le type de sprite représenté : bloc, bombe,
+ * feu, sol, personnage ou item. 
  * 
  * @author Vincent Labatut
  *
+ * @param <T>	type de sprite représenté
  */
-public abstract class AiSimSprite
+abstract class AiDataSprite<T extends Sprite> implements AiSprite
 {	
 	/**
-	 * crée une nouvelle simulation d'un sprite
+	 * construit une représentation du sprite passé en paramètre
 	 * 
-	 * @param tile	simulation de la case contenant le sprite
+	 * @param tile	représentation de la case contenant le sprite
+	 * @param sprite	sprite à représenter
 	 */
-	public AiSimSprite(AiSimTile tile, double posX, double posY, double posZ)
-	{	// general
-		this.tile = tile;
-		state = new AiSimState();
-		
-		// location
-		this.posX = posX;
-		this.posY = posY;
-		this.posZ = posZ;
+	protected AiDataSprite(AiDataTile tile, T sprite)
+	{	this.tile = tile;
+		this.sprite = sprite;
+		state = new AiDataState(sprite);
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * met à jour cette représentation du sprite
+	 * 
+	 * @param tile	la nouvelle case contenant cette représentation
+	 */
+	protected void update(AiDataTile tile)
+	{	this.tile = tile;
+		updateLocation();
+		updateState();
+		checked = true;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** sprite représenté par cette classe */ 
+	private T sprite;
 
 	/**
-	 * construit une simulation du sprite passé en paramètre
+	 * teste si cette représentation correspond au sprite passé en paramètre
 	 * 
-	 * @param sprite	sprite à simuler
-	 * @param tile	simulation de la case contenant le sprite
+	 * @param sprite	le sprite dont on veut la représentation
+	 * @return	vrai si cette représentation correspond à ce sprite
 	 */
-	AiSimSprite(AiDataSprite<?> sprite, AiSimTile tile)
-	{	// general
-		this.tile = tile;
-		state = new AiSimState(sprite);
-		
-		// location
-		this.posX = sprite.getPosX();
-		this.posY = sprite.getPosY();
-		this.posZ = sprite.getPosZ();
+	protected boolean isSprite(T sprite)
+	{	return this.sprite == sprite;
 	}
+	
+	/**
+	 * renvoie le sprite correspondant à cette représentation
+	 * 
+	 * @return	le sprite correspondant à cette représentation
+	 */
+	protected T getSprite()
+	{	return sprite;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CHECK			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** marquage du sprite (permet de détecter quels sprites ont disparu lors de la mise à jour */
+	private boolean checked;
 
 	/**
-	 * construit une simulation du sprite passé en paramètre,
-	 * (donc une simple copie) et la place dans la case indiquée.
+	 * teste si sprite est marqué ou pas
 	 * 
-	 * @param sprite	simulation à copier
-	 * @param tile	simulation de la case devant contenir la copie
+	 * @return	vrai si ce sprite est marqué
 	 */
-	public AiSimSprite(AiSimSprite sprite, AiSimTile tile)
-	{	// general
-		this.tile = tile;
-		this.state = sprite.getState().copy();
-		
-		// location
-		this.posX = sprite.posX;
-		this.posY = sprite.posY;
-		this.posZ = sprite.posZ;
+	protected boolean isChecked()
+	{	return checked;	
 	}
-
+	
+	/**
+	 * démarque ce sprite (action réalisée avant la mise à jour de la zone)
+	 */
+	protected void uncheck()
+	{	checked = false; 
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** état dans lequel se trouve ce sprite */
-	protected AiSimState state;
+	private AiDataState state;
 
 	/** 
 	 * renvoie l'état dans lequel se trouve ce sprite
@@ -96,14 +123,30 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	l'état du sprite
 	 */
-	public AiSimState getState()
+	@Override
+	public AiDataState getState()
 	{	return state;
+	}
+	
+	/** 
+	 * initialise l'état dans lequel se trouve ce sprite
+	 */
+	private void updateState()
+	{	state.update();
+	}
+	
+	/**
+	 * indique que le sprite a été éliminé du jeu
+	 */
+	protected void setEnded()
+	{	state.setEnded();		
 	}
 	
 	/**
 	 * renvoie vrai si ce sprite a été éliminé du jeu
 	 * @return	vrai si le sprite n'est plus en jeu
 	 */
+	@Override
 	public boolean hasEnded()
 	{	return state.getName()==AiStateName.ENDED;	
 	}
@@ -111,13 +154,14 @@ public abstract class AiSimSprite
 	/////////////////////////////////////////////////////////////////
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** simulation de la case contenant ce sprite */
-	protected AiSimTile tile;
+	/** représentation de la case contenant ce sprite */
+	private AiDataTile tile;
 	
 	/** 
-	 * renvoie la simulation de la case contenant ce sprite 
+	 * renvoie la représentation de la case contenant ce sprite 
 	 */
-	public AiSimTile getTile()
+	@Override
+	public AiDataTile getTile()
 	{	return tile;
 	}
 	
@@ -126,6 +170,7 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	le numéro de la ligne du sprite
 	 */
+	@Override
 	public int getLine()
 	{	return tile.getLine();	
 	}
@@ -134,6 +179,7 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	le numéro de la colonne du sprite
 	 */
+	@Override
 	public int getCol()
 	{	return tile.getCol();	
 	}
@@ -153,6 +199,7 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	l'abscisse du sprite
 	 */
+	@Override
 	public double getPosX()
 	{	return posX;
 	}
@@ -162,6 +209,7 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	l'ordonnée du sprite
 	 */
+	@Override
 	public double getPosY()
 	{	return posY;
 	}
@@ -171,8 +219,21 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	l'altitude du sprite
 	 */
+	@Override
 	public double getPosZ()
 	{	return posZ;
+	}
+	
+	/** 
+	 * initialise les positions (en pixels) de ce sprite 
+	 */
+	private void updateLocation()
+	{	posX = sprite.getCurrentPosX();
+		posY = sprite.getCurrentPosY();
+		posZ = sprite.getCurrentPosZ();
+		
+//if(Double.isNaN(posX))
+//	System.out.println("error");
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -181,7 +242,7 @@ public abstract class AiSimSprite
 	@Override
 	public boolean equals(Object o)
 	{	boolean result = false;
-		if(o instanceof AiSimSprite)
+		if(o instanceof AiDataSprite<?>)
 		{	
 //			AiSprite<?> s = (AiSprite<?>)o;	
 //			result = sprite==s.sprite;
@@ -197,6 +258,7 @@ public abstract class AiSimSprite
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
 		result.append(" ("+getTile().getLine()+";"+getTile().getCol()+")");
+		result.append(" ("+posX+";"+posY+";"+posZ+")");
 		result.append(" - state: "+state.toString());
 		return result.toString();
 	}
@@ -211,7 +273,8 @@ public abstract class AiSimSprite
 	 *  @param sprite	le sprite à tester
 	 *  @return	vrai si ce sprite le laisser passer par sa case 
 	 */
-	public abstract boolean isCrossableBy(AiSimSprite sprite);
+	@Override
+	public abstract boolean isCrossableBy(AiSprite sprite);
 	
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
@@ -219,13 +282,13 @@ public abstract class AiSimSprite
 	/**
 	 * termine proprement ce sprite et libère les ressources qu'il occupait
 	 */
-	void finish()
+	protected void finish()
 	{	// state
 		state.finish();
 		state = null;
-		
 		// misc
 		tile = null;
+		sprite = null;
 		
 	}
 }

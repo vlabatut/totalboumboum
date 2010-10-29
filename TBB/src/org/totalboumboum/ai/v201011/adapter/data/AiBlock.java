@@ -1,5 +1,6 @@
 package org.totalboumboum.ai.v201011.adapter.data;
 
+
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -21,25 +22,6 @@ package org.totalboumboum.ai.v201011.adapter.data;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.totalboumboum.engine.content.feature.Contact;
-import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.Orientation;
-import org.totalboumboum.engine.content.feature.Role;
-import org.totalboumboum.engine.content.feature.TilePosition;
-import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.feature.ability.StateAbility;
-import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
-import org.totalboumboum.engine.content.feature.action.Circumstance;
-import org.totalboumboum.engine.content.feature.action.GeneralAction;
-import org.totalboumboum.engine.content.feature.action.SpecificAction;
-import org.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
-import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
-import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
-import org.totalboumboum.engine.content.sprite.block.Block;
-
 /**
  * Représente un bloc du jeu, c'est à dire généralement un mur
  * (pouvant être détruit ou pas). 
@@ -47,192 +29,15 @@ import org.totalboumboum.engine.content.sprite.block.Block;
  * @author Vincent Labatut
  *
  */
-public class AiBlock extends AiSprite<Block>
+public interface AiBlock extends AiSprite
 {
-	/**
-	 * crée une représentation du bloc passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
-	 * 
-	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
-	 */
-	AiBlock(AiTile tile, Block sprite)
-	{	super(tile,sprite);
-		updateDestructible();
-		updateCollisions();
-	}	
-	
-	/////////////////////////////////////////////////////////////////
-	// PROCESS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	void update(AiTile tile)
-	{	super.update(tile);
-		updateDestructible();
-		updateCollisions();
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc peut être détruit par une bombe */
-	private boolean destructible;
-
-	/** 
-	 * met jour l'indicateur de destructibilité 
-	 */
-	private void updateDestructible()
-	{	Block sprite = getSprite();
-		SpecificAction specificAction = new SpecificConsume(sprite);
-		destructible = !sprite.isTargetPreventing(specificAction);
-	}
-
 	/**
 	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
 	 * 
 	 * @return	l'indicateur de destructibilité du mur
 	 */
-	public boolean isDestructible()
-	{	return destructible;		
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COLLISIONS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc laisse passer les joueurs */
-	private AiStopType stopHeroes;
-	/** indique si ce bloc laisse passer le feu */
-	private AiStopType stopFires;
-	
-	/**
-	 * indique si ce bloc arrête les personnages.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
-	 * 
-	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
-	 */
-	public AiStopType hasStopHeroes()
-	{	return stopHeroes;
-	}
-	
-	/**
-	 * indique si ce bloc arrête les explosions.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
-	 * 
-	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
-	 */
-	public AiStopType hasStopFires()
-	{	return stopFires;
-	}
-	
-	/** 
-	 * met jour les différentes caractéristiques de ce bloc
-	 * concernant la gestion des collisions avec les autres sprites
-	 */
-	private void updateCollisions()
-	{	Block sprite = getSprite();
-		
-		// bloque les personnages
-		{	GeneralAction generalAction = new GeneralMoveLow();
-			generalAction.addActor(Role.HERO);
-			generalAction.addDirection(Direction.RIGHT);
-			Circumstance actorCircumstance = new Circumstance();
-			actorCircumstance.addContact(Contact.COLLISION);
-			actorCircumstance.addOrientation(Orientation.FACE);
-			actorCircumstance.addTilePosition(TilePosition.NEIGHBOR);
-			Circumstance targetCircumstance = new Circumstance();
-			List<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
-			List<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
-			boolean temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
-			if(temp)
-			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
-				actorProperties.add(ability);
-				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
-				if(temp)
-					stopHeroes = AiStopType.STRONG_STOP;
-				else
-					stopHeroes = AiStopType.WEAK_STOP;
-			}
-			else
-				stopHeroes = AiStopType.NO_STOP;
-		}
-
-		// bloque le feu
-		{	GeneralAction generalAction = new GeneralAppear();
-			generalAction.addActor(Role.FIRE);
-			generalAction.addDirection(Direction.NONE);
-			Circumstance actorCircumstance = new Circumstance();
-			actorCircumstance.addContact(Contact.INTERSECTION);
-			actorCircumstance.addOrientation(Orientation.NEUTRAL);
-			actorCircumstance.addTilePosition(TilePosition.SAME);
-			Circumstance targetCircumstance = new Circumstance();
-			List<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
-			List<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
-			boolean temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
-			if(temp)
-			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
-				actorProperties.add(ability);
-				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
-				if(temp)
-					stopFires = AiStopType.STRONG_STOP;
-				else
-					stopFires = AiStopType.WEAK_STOP;
-			}
-			else
-				stopFires = AiStopType.NO_STOP;
-		}
-	}	
-
-	@Override
-	public boolean isCrossableBy(AiSprite<?> sprite)
-	{	// par défaut, on bloque
-		boolean result = false;
-		// si le sprite considéré est un personnage
-		if(sprite instanceof AiHero)
-		{	AiHero hero = (AiHero) sprite;
-			if(hero.getTile()==getTile()) //simplification
-				result = true;
-			else if(stopHeroes==AiStopType.NO_STOP)
-				result = true;
-			else if(stopHeroes==AiStopType.WEAK_STOP)
-				result = hero.hasThroughBlocks();
-			else if(stopHeroes==AiStopType.STRONG_STOP)
-				result = false;
-		}
-		// si le sprite considéré est un feu
-		else if(sprite instanceof AiFire)
-		{	AiFire fire = (AiFire) sprite;
-			if(stopFires==AiStopType.NO_STOP)
-				result = true;
-			else if(stopFires==AiStopType.WEAK_STOP)
-				result = fire.hasThroughBlocks();
-			else if(stopFires==AiStopType.STRONG_STOP)
-				result = false;
-		}
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// TEXT				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("Block: [");
-		result.append(super.toString());
-		result.append(" - destr.: "+destructible);
-		result.append(" ]");
-		return result.toString();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISH			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	void finish()
-	{	super.finish();
-	}
+	public boolean isDestructible();
 }

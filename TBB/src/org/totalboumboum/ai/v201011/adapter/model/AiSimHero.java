@@ -21,7 +21,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
-import org.totalboumboum.ai.v201011.adapter.data.AiHero;
+import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataHero;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -75,7 +75,7 @@ public class AiSimHero extends AiSimSprite
 	 * @param tile	case contenant le sprite
 	 * @param sprite	sprite à simuler
 	 */
-	AiSimHero(AiHero sprite, AiSimTile tile)
+	AiSimHero(AiDataHero sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		// bombs

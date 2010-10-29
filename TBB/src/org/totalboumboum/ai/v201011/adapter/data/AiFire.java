@@ -1,5 +1,6 @@
 package org.totalboumboum.ai.v201011.adapter.data;
 
+
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -21,11 +22,6 @@ package org.totalboumboum.ai.v201011.adapter.data;
  * 
  */
 
-import org.totalboumboum.engine.content.feature.ability.StateAbility;
-import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
-import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.content.sprite.fire.Fire;
-
 /**
  * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
  * de l'explosion d'une bombe. 
@@ -33,130 +29,7 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
  * @author Vincent Labatut
  *
  */
-public class AiFire extends AiSprite<Fire>
+public interface AiFire extends AiSprite
 {
-	/**
-	 * crée une représentation du feu passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
-	 * 
-	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
-	 */
-	AiFire(AiTile tile, Fire sprite)
-	{	super(tile,sprite);
-		updateCollisions();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PROCESS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	void update(AiTile tile)
-	{	super.update(tile);
-		updateCollisions();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COLLISIONS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** indique si le feu peut traverser les murs */
-	private boolean throughBlocks;
-	/** indique si le feu peut traverser les bombes */
-	private boolean throughBombs;
-	/** indique si le feu peut traverser les items */
-	private boolean throughItems;
 	
-	/**
-	 * teste si ce feu est capable de passer à travers les (certains) murs
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
-	 * 
-	 * @return	vrai si le feu traverse les murs
-	 */
-	public boolean hasThroughBlocks()
-	{	return throughBlocks;	
-	}
-
-	/**
-	 * teste si ce feu est capable de passer à travers les bombes
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
-	 * 
-	 * @return	vrai si le feu traverse les bombes
-	 */
-	public boolean hasThroughBombs()
-	{	return throughBombs;	
-	}
-
-	/**
-	 * teste si ce feu est capable de passer à travers les items
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutot isCrossableBy().
-	 * 
-	 * @return	vrai si le feu traverse les items
-	 */
-	public boolean hasThroughItems()
-	{	return throughItems;
-	}
-
-	/**
-	 * met à jour les diverse propriétés de ce feu
-	 * liée à la gestion des collisions
-	 */
-	private void updateCollisions()
-	{	Sprite sprite = getSprite();
-		StateAbility ability;
-		// traverser les murs
-		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
-		throughBlocks = ability.isActive();
-		// traverser les bombes
-		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_BOMB);
-		throughBombs = ability.isActive();
-		// traverser les items
-		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_ITEM);
-		throughItems = ability.isActive();
-	}
-
-	@Override
-	public boolean isCrossableBy(AiSprite<?> sprite)
-	{	// par défaut, on bloque
-		boolean result = false;
-		
-		// si le sprite considéré est un personnage : peut traverser le feu seulement s'il a une protection
-		if(sprite instanceof AiHero)
-		{	AiHero hero = (AiHero) sprite;
-			result = hero.hasThroughFires();
-		}
-		
-		// si c'est une bombe : peut traverser le feu seulement si elle n'explose pas à son contact
-		else if(sprite instanceof AiHero)
-		{	AiBomb bomb = (AiBomb) sprite;
-			result = !bomb.hasExplosionTrigger();
-		}
-		
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// TEXT				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("Fire: [");
-		result.append(super.toString());
-		result.append(" ]");
-		return result.toString();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISH			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	void finish()
-	{	super.finish();
-	}
 }

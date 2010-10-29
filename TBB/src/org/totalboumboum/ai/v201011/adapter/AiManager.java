@@ -30,7 +30,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
-import org.totalboumboum.ai.v201011.adapter.data.AiZone;
+import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -78,7 +78,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** l'ensemble des percepts destinés à l'IA */
-	private AiZone percepts;
+	private AiDataZone percepts;
 	/** le moteur du jeu */
 	private VisibleLoop loop;
 	/** le niveau dans lequel la partie se déroule */
@@ -91,7 +91,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	{	super.init(instance,player);
 		loop = RoundVariables.loop;
 		level = RoundVariables.level;
-		percepts = new AiZone(level,player);
+		percepts = new AiDataZone(level,player);
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.setPercepts(percepts);
 		output = ai.getOutput();

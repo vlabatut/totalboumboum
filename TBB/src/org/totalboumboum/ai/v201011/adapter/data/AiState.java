@@ -21,9 +21,8 @@ package org.totalboumboum.ai.v201011.adapter.data;
  * 
  */
 
+import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
  * Décrit un état dans lequel un sprite peut se trouver, c'est
@@ -35,106 +34,26 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * @author Vincent Labatut
  *
  */
-public class AiState 
+public interface AiState
 {
-	/** sprite dont l'état est représenté */
-	private Sprite sprite;
-	
-	/**
-	 * construit un objet représentant l'état du sprite passé en paramètre
-	 * 
-	 * @param sprite	sprite dont on veut représenter l'état
-	 */
-	AiState(Sprite sprite)
-	{	this.sprite = sprite;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// PROCESS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * met à jour cet état en fonction de l'évolution du sprite de référence
-	 */
-	void update()
-	{	// direction
-		this.direction = sprite.getActualDirection();
-		// name
-		GestureName gesture = sprite.getCurrentGesture().getName();
-		name = AiStateName.makeNameFromGesture(gesture);		
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associée à l'état */
-	private AiStateName name;
-	
 	/**
 	 * renvoie le nom associé à l'état
 	 * 
 	 * @return	nom associé à l'état
 	 */
-	public AiStateName getName()
-	{	return name;
-	}
-	
-	void setEnded()
-	{	name = AiStateName.ENDED;		
-	}
+	public AiStateName getName();
 	
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associée à l'état (peut être NONE, c'est à dire : l'état n'est pas orienté) */
-	private Direction direction;
-	
 	/**
 	 * renvoie la direction associée à l'état,
 	 * qui peut être NONE, c'est à dire : l'état n'est pas orienté
 	 * 
 	 * @return	direction associée à l'état
 	 */
-	public Direction getDirection()
-	{	return direction;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COMPARISON		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public boolean equals(Object o)
-	{	boolean result = false;
-		if(o instanceof AiState)
-		{	
-//			AiState s = (AiState)o;	
-//			result = name==s.name && direction==s.direction;
-			result = this==o;
-		}
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// TEXT				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("(");
-		result.append("name.: "+name);
-		result.append("dir.: "+direction);
-		result.append(")");
-		return result.toString();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISH			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * termine cet objet et libère les ressources occupées
-	 */
-	void finish()
-	{	sprite = null;
-		direction = null;
-		name = null;		
-	}
+	public Direction getDirection();
 }

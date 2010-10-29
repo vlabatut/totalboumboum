@@ -27,7 +27,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201011.adapter.data.AiZone;
+import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataZone;
 
 /**
  * classe dont chaque IA doit hériter. La méthode processAction est la méthode 
@@ -95,7 +95,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** les percepts auxquels l'IA a accès */
-	private AiZone percepts;
+	private AiDataZone percepts;
 	
 	/**
 	 * méthode implémentant le traitement effectué par l'IA sur les percepts,
@@ -110,7 +110,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * renvoie les percepts auxquels l'IA a accès
 	 * @return	une AiZone représentant tous les percepts utilisables par l'IA
 	 */
-	public final AiZone getPercepts()
+	public final AiDataZone getPercepts()
 	{	return percepts;
 	}
 	/**
@@ -118,7 +118,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * 
 	 * @param percepts	l'objet représentant les percepts auxquels l'IA aura accès
 	 */
-	public final void setPercepts(AiZone percepts)
+	public final void setPercepts(AiDataZone percepts)
 	{	this.percepts = percepts;
 		output = new AiOutput(percepts);
 	}
