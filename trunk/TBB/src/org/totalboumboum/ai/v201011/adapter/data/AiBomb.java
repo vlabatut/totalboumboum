@@ -60,6 +60,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 */
 	AiBomb(AiTile tile, Bomb sprite)
 	{	super(tile,sprite);
+		
 		initFuseParameters();
 		initRange();
 		initColor();
@@ -165,7 +166,6 @@ public class AiBomb extends AiSprite<Bomb>
 			failureProbability = ability.getStrength();
 		}
 	}
-
 
 	/**
 	 * renvoie le délai normal avant l'explosion de la bombe.
@@ -367,8 +367,31 @@ public class AiBomb extends AiSprite<Bomb>
 	private boolean throughItems;
 
 	/**
-	 * teste si cette bombe est capable de passer
-	 * à travers les items
+	 * indique si ce bloc arrête les personnages.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
+	 */
+	public AiStopType hasStopHeroes()
+	{	return stopHeroes;
+	}
+	
+	/**
+	 * indique si ce bloc arrête les explosions.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
+	 */
+	public AiStopType hasStopFires()
+	{	return stopFires;
+	}
+	
+	/**
+	 * teste si cette bombe est capable de passer à travers les items
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * 
 	 * @return	vrai si la bombe traverse les items
 	 */
@@ -377,7 +400,7 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 
 	/** 
-	 * met jour les différentes caractéristiques de cette bombe
+	 * met à jour les différentes caractéristiques de cette bombe
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()
