@@ -156,7 +156,7 @@ public abstract class AiSimSprite
 	 *  @param clone	la copie de sprite en cours de construction, à compléter
 	 *  @param tile		la case occupée par la copie de sprite
 	 */
-	public void initClone(AiSimSprite clone, AiSimTile tile)
+	public void initCopy(AiSimSprite clone, AiSimTile tile)
 	{	// tile
 		clone.tile = tile;
 		
