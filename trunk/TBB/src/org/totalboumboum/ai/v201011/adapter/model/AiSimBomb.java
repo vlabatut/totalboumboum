@@ -26,30 +26,7 @@ import java.util.List;
 
 import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
-import org.totalboumboum.ai.v201011.adapter.data.AiTile;
-import org.totalboumboum.engine.container.tile.Tile;
-import org.totalboumboum.engine.content.feature.Contact;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.Orientation;
-import org.totalboumboum.engine.content.feature.Role;
-import org.totalboumboum.engine.content.feature.TilePosition;
-import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import org.totalboumboum.engine.content.feature.ability.StateAbility;
-import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
-import org.totalboumboum.engine.content.feature.action.Circumstance;
-import org.totalboumboum.engine.content.feature.action.GeneralAction;
-import org.totalboumboum.engine.content.feature.action.SpecificAction;
-import org.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
-import org.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
-import org.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
-import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
-import org.totalboumboum.engine.content.feature.event.ActionEvent;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.manager.explosion.ExplosionManager;
-import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.content.sprite.bomb.Bomb;
-import org.totalboumboum.engine.content.sprite.fire.Fire;
-import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -85,7 +62,8 @@ public class AiSimBomb extends AiSimSprite
 	public AiSimBomb(AiSimTile tile, boolean countdownTrigger, boolean remoteControlTrigger, boolean explosionTrigger,
 			long normalDuration, long explosionDuration, long latencyDuration, float failureProbability,
 			AiStopType stopHeroes, AiStopType stopFires, boolean throughItems,
-			int range, PredefinedColor color, boolean working, long time)
+			int range, boolean penetrating,
+			PredefinedColor color, boolean working, long time)
 	{	super(tile);
 		
 		// fuse
@@ -102,8 +80,11 @@ public class AiSimBomb extends AiSimSprite
 		this.stopFires = stopFires;
 		this.throughItems = throughItems;
 		
-		// misc
+		// range
 		this.range = range;
+		this.penetrating = penetrating;
+
+		// misc
 		this.color = color;
 		this.working = working;
 		this.time = time;
@@ -133,8 +114,11 @@ public class AiSimBomb extends AiSimSprite
 		stopFires = sprite.hasStopFires();
 		throughItems = sprite.hasThroughItems();
 		
-		// misc
+		// range
 		range = sprite.getRange();
+		penetrating = sprite.isPenetrating();
+		
+		// misc
 		color = sprite.getColor();
 		working = sprite.isWorking();
 		time = sprite.getTime();
@@ -164,8 +148,11 @@ public class AiSimBomb extends AiSimSprite
 		stopFires = sprite.stopFires;
 		throughItems = sprite.throughItems;
 		
-		// misc
+		// range
 		range = sprite.range;
+		penetrating = sprite.penetrating;
+		
+		// misc
 		color = sprite.color;
 		working = sprite.working;
 		time = sprite.time;
@@ -261,6 +248,8 @@ public class AiSimBomb extends AiSimSprite
 	/////////////////////////////////////////////////////////////////
 	/** portée de la bombe, ie. : nombre de cases occupées par sa flamme */
 	private int range;
+	/** indique si la flamme produite par cette bombe est capable de traverser les murs */
+	private boolean penetrating;
 	
 	/**
 	 * renvoie la portée de la bombe
@@ -269,6 +258,18 @@ public class AiSimBomb extends AiSimSprite
 	 */
 	public int getRange()
 	{	return range;	
+	}
+	
+	/**
+	 * indique si le feu émis par la bombe peut traverser les murs
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutôt getBlast().
+	 * 
+	 * @return	vrai si le feu peut traverser les murs
+	 */
+	public boolean isPenetrating()
+	{	return penetrating;	
 	}
 	
 	/**
@@ -284,7 +285,7 @@ public class AiSimBomb extends AiSimSprite
 	public List<AiSimTile> getBlast()
 	{	// init
 		List<AiSimTile> result = new ArrayList<AiSimTile>();
-		AiSimFire fire = produceFire();
+		AiSimFire fire = new AiSimFire(tile,penetrating,penetrating,penetrating);
 		
 		// center
 		if(tile.isCrossableBy(fire))
@@ -381,8 +382,10 @@ public class AiSimBomb extends AiSimSprite
 	private boolean throughItems;
 
 	/**
-	 * teste si cette bombe est capable de passer
-	 * à travers les items
+	 * teste si cette bombe est capable de passer à travers les items
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	vrai si la bombe traverse les items
 	 */

@@ -67,8 +67,10 @@ public class AiFire extends AiSprite<Fire>
 	private boolean throughItems;
 	
 	/**
-	 * teste si ce feu est capable de passer
-	 * à travers les (certains) murs
+	 * teste si ce feu est capable de passer à travers les (certains) murs
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	vrai si le feu traverse les murs
 	 */
@@ -77,8 +79,10 @@ public class AiFire extends AiSprite<Fire>
 	}
 
 	/**
-	 * teste si ce feu est capable de passer
-	 * à travers les bombes
+	 * teste si ce feu est capable de passer à travers les bombes
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	vrai si le feu traverse les bombes
 	 */
@@ -87,8 +91,10 @@ public class AiFire extends AiSprite<Fire>
 	}
 
 	/**
-	 * teste si ce feu est capable de passer
-	 * à travers les items
+	 * teste si ce feu est capable de passer à travers les items
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	vrai si le feu traverse les items
 	 */

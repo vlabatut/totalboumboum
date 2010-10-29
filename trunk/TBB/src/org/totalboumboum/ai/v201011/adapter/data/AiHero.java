@@ -199,8 +199,10 @@ public class AiHero extends AiSprite<Hero>
 	private boolean throughFires;
 	
 	/**
-	 * teste si ce personnage est capable de passer
-	 * à travers les (certains) murs
+	 * teste si ce personnage est capable de passer à travers les (certains) murs
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	vrai si le personnage traverse les murs
 	 */
@@ -209,8 +211,10 @@ public class AiHero extends AiSprite<Hero>
 	}
 
 	/**
-	 * teste si ce personnage est capable de passer
-	 * à travers les bombes
+	 * teste si ce personnage est capable de passer à travers les bombes
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	vrai si le personnage traverse les bombes
 	 */
@@ -219,8 +223,10 @@ public class AiHero extends AiSprite<Hero>
 	}
 
 	/**
-	 * teste si ce personnage est capable de passer
-	 * à travers le feu sans brûler
+	 * teste si ce personnage est capable de passer à travers le feu sans brûler
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	vrai si le personnage résiste au feu
 	 */
