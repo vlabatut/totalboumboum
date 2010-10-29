@@ -70,7 +70,7 @@ public abstract class AiSimSprite
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** état dans lequel se trouve ce sprite */
-	private AiSimState state;
+	protected AiSimState state;
 
 	/** 
 	 * renvoie l'état dans lequel se trouve ce sprite
@@ -94,7 +94,7 @@ public abstract class AiSimSprite
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** simulation de la case contenant ce sprite */
-	private AiSimTile tile;
+	protected AiSimTile tile;
 	
 	/** 
 	 * renvoie la simulation de la case contenant ce sprite 
