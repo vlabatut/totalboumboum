@@ -101,6 +101,30 @@ public class AiItem extends AiSprite<Item>
 	/** indique si ce bloc laisse passer le feu */
 	private AiStopType stopFires;
 
+	/**
+	 * indique si cet item arrête les explosions.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si cet item arrête le feu
+	 */
+	public AiStopType hasStopFires()
+	{	return stopFires;
+	}
+
+	/**
+	 * indique si cet item arrête les bombes.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si cet item arrête les bombes
+	 */
+	public AiStopType hasStopBombs()
+	{	return stopBombs;
+	}
+
 	/** 
 	 * met jour les différentes caractéristiques de ce bloc
 	 * concernant la gestion des collisions avec les autres sprites
