@@ -209,6 +209,8 @@ public class AiBomb extends AiSprite<Bomb>
 	private int range;
 	/** liste des cases qui vont subir l'explosion de la bombe */
 	private final List<AiTile> blast = new ArrayList<AiTile>();
+	/** type du feu généré : normal ou pénétrant */
+	private boolean penetrating;
 	
 	/**
 	 * renvoie la portée de la bombe
@@ -225,6 +227,18 @@ public class AiBomb extends AiSprite<Bomb>
 	private void initRange()
 	{	Bomb bomb = getSprite();
 		range = bomb.getFlameRange();
+	}
+	
+	/**
+	 * indique si le feu émis par la bombe peut traverser les murs
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutôt getBlast().
+	 * 
+	 * @return	vrai si le feu peut traverser les murs
+	 */
+	public boolean isPenetrating()
+	{	return penetrating;	
 	}
 	
 	/**
@@ -249,7 +263,8 @@ public class AiBomb extends AiSprite<Bomb>
 	 * l'explosion de cette bombe
 	 */
 	private void updateBlast()
-	{	Bomb bomb = getSprite();
+	{	// blast
+		Bomb bomb = getSprite();
 		List<Tile> tiles = bomb.getExplosionManager().makeExplosion(true); 
 		blast.clear();
 		for(Tile tile: tiles)
@@ -258,6 +273,9 @@ public class AiBomb extends AiSprite<Bomb>
 			AiTile t = getTile().getZone().getTile(line,col);
 			blast.add(t);
 		}
+		
+		// penetrating
+		penetrating = bomb.getExplosionManager().isPenetrating();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -370,6 +388,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 * indique si ce bloc arrête les personnages.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
 	 */
@@ -381,6 +400,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 * indique si ce bloc arrête les explosions.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
 	 */
@@ -392,6 +412,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 * teste si cette bombe est capable de passer à travers les items
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	vrai si la bombe traverse les items
 	 */

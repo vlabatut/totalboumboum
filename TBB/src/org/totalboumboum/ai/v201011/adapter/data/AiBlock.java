@@ -108,6 +108,7 @@ public class AiBlock extends AiSprite<Block>
 	 * indique si ce bloc arrête les personnages.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
 	 */
@@ -119,6 +120,7 @@ public class AiBlock extends AiSprite<Block>
 	 * indique si ce bloc arrête les explosions.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
 	 */
