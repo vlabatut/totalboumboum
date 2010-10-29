@@ -38,7 +38,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class AiSimState 
 {
 	/**
-	 * construit un objet représentant l'état d'un sprite qui vient d'être créé,
+	 * construit un objet simulant l'état d'un sprite qui vient d'être créé,
 	 * i.e. qui ne fait rien (STANDING) dans une direction neutre (NONE).
 	 */
 	AiSimState()
@@ -47,9 +47,9 @@ public class AiSimState
 	}
 
 	/**
-	 * construit un objet représentant l'état du sprite passé en paramètre
+	 * construit un objet simulant l'état du sprite passé en paramètre
 	 * 
-	 * @param sprite	sprite dont on veut représenter l'état
+	 * @param sprite	sprite dont on veut simuler l'état
 	 */
 	AiSimState(AiSprite<?> sprite)
 	{	name = sprite.getState().getName();
