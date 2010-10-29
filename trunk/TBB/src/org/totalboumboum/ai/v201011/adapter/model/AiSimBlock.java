@@ -94,6 +94,15 @@ public class AiSimBlock extends AiSimSprite
 	public boolean isDestructible()
 	{	return destructible;		
 	}
+	
+	/**
+	 * modifie la destructibilité de ce mur
+	 * 
+	 * @param destructible	nouvelle valeur de l'indicateur de destructibilité du mur
+	 */
+	public void setDestructible(boolean destructible)
+	{	this.destructible = destructible;
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
@@ -102,6 +111,44 @@ public class AiSimBlock extends AiSimSprite
 	private AiStopType stopsHeroes;
 	/** indique si ce bloc laisse passer le feu */
 	private AiStopType stopsFires;
+	
+	/**
+	 * indique si ce bloc arrête les personnages.
+	 * <b>ATTENTION :</b> il est recommandé d'utiliser plutot la méthode isCrossableBy.
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
+	 */
+	public AiStopType isStopsHeroes()
+	{	return stopsHeroes;
+	}
+	
+	/**
+	 * modifie le fait que ce mur empêche ou non le déplacement des personnages
+	 * 
+	 * @param stopsHeroes	valeur indiquant si ce mur arrête les personnages
+	 */
+	public void setStopsHeroes(AiStopType stopsHeroes)
+	{	this.stopsHeroes = stopsHeroes;
+	}
+	
+	/**
+	 * indique si ce bloc arrête les explosions.
+	 * <b>ATTENTION :</b> il est recommandé d'utiliser plutot la méthode isCrossableBy.
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
+	 */
+	public AiStopType isStopsFires()
+	{	return stopsFires;
+	}
+	
+	/**
+	 * modifie le fait que ce mur empêche ou non le feu de passer
+	 * 
+	 * @param stopsHeroes	valeur indiquant si ce mur arrête le feu
+	 */
+	public void setStopsFires(AiStopType stopsFires)
+	{	this.stopsFires = stopsFires;
+	}
 	
 	@Override
 	public boolean isCrossableBy(AiSimSprite sprite)
