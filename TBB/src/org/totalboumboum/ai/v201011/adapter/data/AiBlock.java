@@ -100,9 +100,9 @@ public class AiBlock extends AiSprite<Block>
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** indique si ce bloc laisse passer les joueurs */
-	private AiStopType stopsHeroes;
+	private AiStopType stopHeroes;
 	/** indique si ce bloc laisse passer le feu */
-	private AiStopType stopsFires;
+	private AiStopType stopFires;
 	
 	/**
 	 * indique si ce bloc arrête les personnages.
@@ -111,8 +111,8 @@ public class AiBlock extends AiSprite<Block>
 	 * 
 	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
 	 */
-	public AiStopType isStopsHeroes()
-	{	return stopsHeroes;
+	public AiStopType hasStopHeroes()
+	{	return stopHeroes;
 	}
 	
 	/**
@@ -122,8 +122,8 @@ public class AiBlock extends AiSprite<Block>
 	 * 
 	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
 	 */
-	public AiStopType isStopsFires()
-	{	return stopsFires;
+	public AiStopType hasStopFires()
+	{	return stopFires;
 	}
 	
 	/** 
@@ -150,12 +150,12 @@ public class AiBlock extends AiSprite<Block>
 				actorProperties.add(ability);
 				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 				if(temp)
-					stopsHeroes = AiStopType.STRONG_STOP;
+					stopHeroes = AiStopType.STRONG_STOP;
 				else
-					stopsHeroes = AiStopType.WEAK_STOP;
+					stopHeroes = AiStopType.WEAK_STOP;
 			}
 			else
-				stopsHeroes = AiStopType.NO_STOP;
+				stopHeroes = AiStopType.NO_STOP;
 		}
 
 		// bloque le feu
@@ -175,12 +175,12 @@ public class AiBlock extends AiSprite<Block>
 				actorProperties.add(ability);
 				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 				if(temp)
-					stopsFires = AiStopType.STRONG_STOP;
+					stopFires = AiStopType.STRONG_STOP;
 				else
-					stopsFires = AiStopType.WEAK_STOP;
+					stopFires = AiStopType.WEAK_STOP;
 			}
 			else
-				stopsFires = AiStopType.NO_STOP;
+				stopFires = AiStopType.NO_STOP;
 		}
 	}	
 
@@ -193,21 +193,21 @@ public class AiBlock extends AiSprite<Block>
 		{	AiHero hero = (AiHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
 				result = true;
-			else if(stopsHeroes==AiStopType.NO_STOP)
+			else if(stopHeroes==AiStopType.NO_STOP)
 				result = true;
-			else if(stopsHeroes==AiStopType.WEAK_STOP)
+			else if(stopHeroes==AiStopType.WEAK_STOP)
 				result = hero.hasThroughBlocks();
-			else if(stopsHeroes==AiStopType.STRONG_STOP)
+			else if(stopHeroes==AiStopType.STRONG_STOP)
 				result = false;
 		}
 		// si le sprite considéré est un feu
 		else if(sprite instanceof AiFire)
 		{	AiFire fire = (AiFire) sprite;
-			if(stopsFires==AiStopType.NO_STOP)
+			if(stopFires==AiStopType.NO_STOP)
 				result = true;
-			else if(stopsFires==AiStopType.WEAK_STOP)
+			else if(stopFires==AiStopType.WEAK_STOP)
 				result = fire.hasThroughBlocks();
-			else if(stopsFires==AiStopType.STRONG_STOP)
+			else if(stopFires==AiStopType.STRONG_STOP)
 				result = false;
 		}
 		return result;
