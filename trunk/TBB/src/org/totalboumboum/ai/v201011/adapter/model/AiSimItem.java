@@ -21,9 +21,9 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
-import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
+import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataItem;
 
 /**
  * simule un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
@@ -60,7 +60,7 @@ public class AiSimItem extends AiSimSprite
 	 * @param sprite	sprite à simuler
 	 * @param tile	case contenant le sprite
 	 */
-	AiSimItem(AiItem sprite, AiSimTile tile)
+	AiSimItem(AiDataItem sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		type = sprite.getType();		

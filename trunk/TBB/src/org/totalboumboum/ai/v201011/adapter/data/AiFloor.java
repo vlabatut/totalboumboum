@@ -1,5 +1,6 @@
 package org.totalboumboum.ai.v201011.adapter.data;
 
+
 /*
  * Total Boum Boum
  * Copyright 2008-2010 Vincent Labatut 
@@ -21,8 +22,6 @@ package org.totalboumboum.ai.v201011.adapter.data;
  * 
  */
 
-import org.totalboumboum.engine.content.sprite.floor.Floor;
-
 /**
  * représente un sol du jeu, ie le graphisme affiché en tant que première couche de toute
  * case de la zone (et éventuellement recouvert par les autres types de sprites).
@@ -30,52 +29,7 @@ import org.totalboumboum.engine.content.sprite.floor.Floor;
  * @author Vincent Labatut
  *
  */
-public class AiFloor extends AiSprite<Floor>
+public interface AiFloor extends AiSprite
 {
-	/**
-	 * crée une représentation du sol passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
-	 * 
-	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
-	 */
-	AiFloor(AiTile tile, Floor sprite)
-	{	super(tile,sprite);		
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PROCESS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	void update(AiTile tile)
-	{	super.update(tile);
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// COLLISIONS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public boolean isCrossableBy(AiSprite<?> sprite)
-	{	return true;
-	}
 	
-	/////////////////////////////////////////////////////////////////
-	// TEXT				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("Floor: [");
-		result.append(super.toString());
-		result.append(" ]");
-		return result.toString();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FINISH			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	void finish()
-	{	super.finish();
-	}
 }

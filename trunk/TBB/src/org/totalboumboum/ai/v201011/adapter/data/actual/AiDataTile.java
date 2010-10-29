@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.model;
+package org.totalboumboum.ai.v201011.adapter.data.actual;
 
 /*
  * Total Boum Boum
@@ -22,144 +22,80 @@ package org.totalboumboum.ai.v201011.adapter.model;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataBlock;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataBomb;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataFire;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataFloor;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataHero;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataItem;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataTile;
+import org.totalboumboum.ai.v201011.adapter.data.AiBlock;
+import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201011.adapter.data.AiFire;
+import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
+import org.totalboumboum.ai.v201011.adapter.data.AiHero;
+import org.totalboumboum.ai.v201011.adapter.data.AiItem;
+import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201011.adapter.data.AiTile;
+import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.sprite.block.Block;
+import org.totalboumboum.engine.content.sprite.bomb.Bomb;
+import org.totalboumboum.engine.content.sprite.fire.Fire;
+import org.totalboumboum.engine.content.sprite.floor.Floor;
+import org.totalboumboum.engine.content.sprite.hero.Hero;
+import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
- * simule une case du jeu, avec tous les sprites qu'elle contient.
+ * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
  *
  */
-public class AiSimTile
+final class AiDataTile implements AiTile
 {	
 	/**
-	 * construit une simulation de case à partir des coordonnées passées en paramètres
-	 * 
-	 * @param zone	zone contenant la simulation
-	 * @param line	ligne de la case
-	 * @param col	colonne de la case
-	 * @param posX	abscisse de la case
-	 * @param posY	ordonnée de la case
+	 * construit une représentation de la case passée en paramètre
+	 * @param tile	case représentée
+	 * @param zone	zone contenant la représentation
 	 */
-	public AiSimTile(AiSimZone zone, int line, int col, double posX, double posY)
+	protected AiDataTile(Tile tile, AiDataZone zone)
 	{	this.zone = zone;
-
+		this.tile = tile;
 		size = RoundVariables.scaledTileDimension;
-
-		// location
-		this.line = line;
-		this.col = col;
-		this.posX = posX;
-		this.posY = posY;
-	}
-
-	/**
-	 * construit une simulation de la case passée en paramètre
-	 * 
-	 * @param tile	case simulée
-	 * @param zone	zone contenant la simulation
-	 */
-	AiSimTile(AiDataTile tile, AiSimZone zone)
-	{	this.zone = zone;
-
-		size = RoundVariables.scaledTileDimension;
-
-		// location
-		line = tile.getLine();
-		col = tile.getCol();
-		posX = tile.getPosX();
-		posY = tile.getPosY();
-		
-		// sprites
-		for(AiDataBlock s1: tile.getBlocks())
-		{	AiSimBlock s2 = new AiSimBlock(s1,this);
-			blocks.add(s2);
-		}
-		for(AiDataBomb s1: tile.getBombs())
-		{	AiSimBomb s2 = new AiSimBomb(s1,this);
-			bombs.add(s2);
-		}
-		for(AiDataFire s1: tile.getFires())
-		{	AiSimFire s2 = new AiSimFire(s1,this);
-			fires.add(s2);
-		}
-		for(AiDataFloor s1: tile.getFloors())
-		{	AiSimFloor s2 = new AiSimFloor(s1,this);
-			floors.add(s2);
-		}
-		for(AiDataHero s1: tile.getHeroes())
-		{	AiSimHero s2 = new AiSimHero(s1,this);
-			heroes.add(s2);
-		}
-		for(AiDataItem s1: tile.getItems())
-		{	AiSimItem s2 = new AiSimItem(s1,this);
-			items.add(s2);
-		}
+		initTileLocation();
+		initPixelLocation();
+		updateSprites();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
-	 * construit une simulation de case passée en paramètre
-	 * 
-	 * @param tile	case à copier
-	 * @param zone	zone contenant la simulation
+	 * met à jour cette case et son contenu
 	 */
-	public AiSimTile(AiSimTile tile, AiSimZone zone)
-	{	this.zone = zone;
-
-		size = RoundVariables.scaledTileDimension;
-
-		// location
-		line = tile.line;
-		col = tile.col;
-		posX = tile.posX;
-		posY = tile.posY;
-		
-		// sprites
-		for(AiSimBlock s1: tile.getBlocks())
-		{	AiSimBlock s2 = new AiSimBlock(s1,this);
-			blocks.add(s2);
-		}
-		for(AiSimBomb s1: tile.getBombs())
-		{	AiSimBomb s2 = new AiSimBomb(s1,this);
-			bombs.add(s2);
-		}
-		for(AiSimFire s1: tile.getFires())
-		{	AiSimFire s2 = new AiSimFire(s1,this);
-			fires.add(s2);
-		}
-		for(AiSimFloor s1: tile.getFloors())
-		{	AiSimFloor s2 = new AiSimFloor(s1,this);
-			floors.add(s2);
-		}
-		for(AiSimHero s1: tile.getHeroes())
-		{	AiSimHero s2 = new AiSimHero(s1,this);
-			heroes.add(s2);
-		}
-		for(AiSimItem s1: tile.getItems())
-		{	AiSimItem s2 = new AiSimItem(s1,this);
-			items.add(s2);
-		}
+	protected void update()
+	{	updateSprites();		
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** simulation de la zone à laquelle cette case appartient */
-	private AiSimZone zone;
+	/** représentation de la zone à laquelle cette case appartient */
+	private AiDataZone zone;
 	
-	public AiSimZone getZone()
+	@Override
+	public AiDataZone getZone()
 	{	return zone;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ENGINE TILE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** case du jeu que cette classe représente */
+	private Tile tile;
+	
+	protected Tile getTile()
+	{	return tile;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -175,16 +111,27 @@ public class AiSimTile
 	 * 
 	 * @return	la ligne de cette case
 	 */
+	@Override
 	public int getLine()
 	{	return line;	
 	}
+	
 	/** 
 	 * renvoie le numéro de la colonne contenant cette case
 	 *  
 	 * @return	la colonne de cette case
 	 */
+	@Override
 	public int getCol()
 	{	return col;	
+	}
+	
+	/** 
+	 * initialise les numéros de ligne et colonne de cette case 
+	 */
+	private void initTileLocation()
+	{	line = tile.getLine();
+		col = tile.getCol();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -200,6 +147,7 @@ public class AiSimTile
 	 * 
 	 * @return	l'abscisse de cette case
 	 */
+	@Override
 	public double getPosX()
 	{	return posX;	
 	}
@@ -209,10 +157,19 @@ public class AiSimTile
 	 * 
 	 * @return	l'ordonnée de cette case
 	 */
+	@Override
 	public double getPosY()
 	{	return posY;	
 	}
 	
+	/** 
+	 * initialise la position de cette case en pixels 
+	 */
+	private void initPixelLocation()
+	{	posX = tile.getPosX();
+		posY = tile.getPosY();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// TILE SIZE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -224,6 +181,7 @@ public class AiSimTile
 	 * 
 	 * @return	longueur d'un côté de la case en pixels
 	 */
+	@Override
 	public double getSize()
 	{	return size;	
 	}
@@ -232,17 +190,17 @@ public class AiSimTile
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste des blocks éventuellement contenus dans cette case */
-	private final List<AiSimBlock> blocks = new ArrayList<AiSimBlock>();
+	private final List<AiBlock> blocks = new ArrayList<AiBlock>();
 	/** liste des bombes éventuellement contenues dans cette case */
-	private final List<AiSimBomb> bombs = new ArrayList<AiSimBomb>();
+	private final List<AiBomb> bombs = new ArrayList<AiBomb>();
 	/** liste des feux éventuellement contenus dans cette case */
-	private final List<AiSimFire> fires = new ArrayList<AiSimFire>();
+	private final List<AiFire> fires = new ArrayList<AiFire>();
 	/** liste des sols éventuellement contenus dans cette case */
-	private final List<AiSimFloor> floors = new ArrayList<AiSimFloor>();
+	private final List<AiFloor> floors = new ArrayList<AiFloor>();
 	/** liste des personnages éventuellement contenus dans cette case */
-	private final List<AiSimHero> heroes = new ArrayList<AiSimHero>();
+	private final List<AiHero> heroes = new ArrayList<AiHero>();
 	/** liste des items éventuellement contenus dans cette case */
-	private final List<AiSimItem> items = new ArrayList<AiSimItem>();
+	private final List<AiItem> items = new ArrayList<AiItem>();
 
 	/** 
 	 * renvoie la liste des blocks contenus dans cette case 
@@ -250,53 +208,186 @@ public class AiSimTile
 	 * 
 	 * @return	les blocks éventuellement contenus dans cette case
 	 */
-	public List<AiSimBlock> getBlocks()
+	@Override
+	public List<AiBlock> getBlocks()
 	{	return blocks;	
 	}
+	
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
 	 * (la liste peut être vide)
 	 * 
 	 * @return	les bombes éventuellement contenues dans cette case
 	 */
-	public List<AiSimBomb> getBombs()
+	@Override
+	public List<AiBomb> getBombs()
 	{	return bombs;	
 	}
+	
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
 	 * @return	les feux éventuellement contenus dans cette case
 	 */
-	public List<AiSimFire> getFires()
+	@Override
+	public List<AiFire> getFires()
 	{	return fires;	
 	}
+	
 	/** 
 	 * renvoie les sols de cette case 
 	 * (il y a forcément au moins un sol)
 	 * 
 	 * @return	les sols contenus dans cette case
 	 */
-	public List<AiSimFloor> getFloors()
+	@Override
+	public List<AiFloor> getFloors()
 	{	return floors;	
 	}
+	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
 	 * @return	les personnages éventuellement contenus dans cette case
 	 */
-	public List<AiSimHero> getHeroes()
+	@Override
+	public List<AiHero> getHeroes()
 	{	return heroes;	
 	}
+	
 	/** 
 	 * renvoie la liste des items contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
 	 * @return	les items éventuellement contenus dans cette case
 	 */
-	public List<AiSimItem> getItems()
+	@Override
+	public List<AiItem> getItems()
 	{	return items;	
+	}
+	
+	/** 
+	 * met à jour les représentations des sprites contenus dans cette case
+	 */
+	private void updateSprites()
+	{	// block
+		{	blocks.clear();
+			Iterator<Block> it = tile.getBlocks().iterator();
+			while(it.hasNext())
+			{	Block b = it.next();
+				GestureName gesture = b.getCurrentGesture().getName();
+				if(!(gesture==GestureName.NONE
+					|| gesture==GestureName.HIDING
+					|| gesture==GestureName.ENDED))
+				{	AiDataBlock block = zone.getBlock(b);
+					if(block==null)
+					{	block = new AiDataBlock(this,b);
+						zone.addBlock(block);
+					}
+					block.update(this);
+					blocks.add(block);
+				}
+			}
+		}
+		// bombs
+		{	bombs.clear();
+			Iterator<Bomb> it = tile.getBombs().iterator();
+			while(it.hasNext())
+			{	Bomb b = it.next();
+				GestureName gesture = b.getCurrentGesture().getName();
+				if(!(gesture==GestureName.NONE
+					|| gesture==GestureName.HIDING
+					|| gesture==GestureName.ENDED))
+				{	AiDataBomb bomb = zone.getBomb(b);
+					if(bomb==null)
+					{	bomb = new AiDataBomb(this,b);
+						zone.addBomb(bomb);
+					}
+					bomb.update(this);
+					bombs.add(bomb);
+				}
+			}
+		}
+		// fires
+		{	fires.clear();
+			Iterator<Fire> it = tile.getFires().iterator();
+			while(it.hasNext())
+			{	Fire f = it.next();
+				GestureName gesture = f.getCurrentGesture().getName();
+				if(!(gesture==GestureName.NONE
+					|| gesture==GestureName.HIDING
+					|| gesture==GestureName.ENDED))
+				{	AiDataFire fire = zone.getFire(f);
+					if(fire==null)
+					{	fire = new AiDataFire(this,f);
+						zone.addFire(fire);
+					}
+					fire.update(this);
+					fires.add(fire);
+				}
+			}
+		}
+		// floor
+		{	floors.clear();
+			Iterator<Floor> it = tile.getFloors().iterator();
+			while(it.hasNext())
+			{	Floor f = it.next();
+				GestureName gesture = f.getCurrentGesture().getName();
+				if(!(gesture==GestureName.HIDING 
+					|| gesture==GestureName.ENDED))
+				{	AiDataFloor floor = zone.getFloor(f);
+					if(floor==null)
+					{	floor = new AiDataFloor(this,f);
+						zone.addFloor(floor);
+					}
+					floor.update(this);
+					floors.add(floor);
+				}
+			}
+		}
+		// heroes
+		{	heroes.clear();
+			Iterator<Hero> it = tile.getHeroes().iterator();
+			while(it.hasNext())
+			{	Hero h = it.next();
+				GestureName gesture = h.getCurrentGesture().getName();
+				if(!(gesture==GestureName.HIDING 
+					|| gesture==GestureName.ENDED))
+				{	AiDataHero hero = zone.getHero(h);
+					if(hero==null)
+					{	hero = new AiDataHero(this,h);
+						zone.addHero(hero);
+					}
+					hero.update(this);
+					heroes.add(hero);
+				}
+			}
+		}
+		// item
+		{	items.clear();
+			Iterator<Item> it = tile.getItems().iterator();
+			while(it.hasNext())
+			{	Item i = it.next();
+				GestureName gesture = i.getCurrentGesture().getName();
+				if(gesture==GestureName.NONE)
+				{	int hiddenItemsCount = zone.getHiddenItemsCount();
+					hiddenItemsCount++;
+					zone.setHiddenItemsCount(hiddenItemsCount);
+				}
+				else if(!(gesture==GestureName.HIDING
+					|| gesture==GestureName.ENDED))
+				{	AiDataItem item = zone.getItem(i);
+					if(item==null)
+					{	item = new AiDataItem(this,i);
+						zone.addItem(item);
+					}
+					item.update(this);
+					items.add(item);
+				}
+			}
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -316,7 +407,8 @@ public class AiSimTile
 	 *  @param sprite	le sprite qui veut traverser cette case
 	 *  @return	vrai ssi ce sprite , à cet instant, peut traverser cette case
 	 */
-	public boolean isCrossableBy(AiSimSprite sprite)
+	@Override
+	public boolean isCrossableBy(AiSprite sprite)
 	{	boolean result = true;
 		// murs
 		if(result)
@@ -347,7 +439,7 @@ public class AiSimTile
 	 * @param list	les sprites de cette case à tester
 	 * @return	vrai si le sprite peut traverser tous les sprites de la liste
 	 */
-	private <T extends AiSimSprite> boolean isCrossableBy(AiSimSprite sprite, List<T> list)
+	private <T extends AiSprite> boolean isCrossableBy(AiSprite sprite, List<T> list)
 	{	boolean result = true;
 		if(!list.isEmpty())
 		{	Iterator<T> it = list.iterator();
@@ -362,13 +454,32 @@ public class AiSimTile
 	/////////////////////////////////////////////////////////////////
 	// NEIGHBORS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** voisins de cette case dans les quatre directions principales */
+	private final HashMap<Direction,AiDataTile> neighbors = new HashMap<Direction, AiDataTile>();
+	
+	/**
+	 * initialise une fois pour toutes les voisins de la case,
+	 * pour ne pas avoir à les recalculer à chaque appel de la méthode
+	 * getNeighbors.
+	 */
+	protected void initNeighbors()
+	{	List<Direction> directions = Direction.getPrimaryValues();
+		for(Direction direction: directions)
+		{	Tile neighbor = tile.getNeighbor(direction);
+			int line = neighbor.getLine();
+			int col = neighbor.getCol();
+			AiDataTile aiNeighbor = getZone().getTile(line,col);
+			neighbors.put(direction,aiNeighbor);
+		}
+	}
 	
 	/**
 	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
-	 * passée en paramètre. Attention, seulement les directions primaires sont
+	 * passée en paramètre. 
+	 * <b>ATTENTION :</b> seulement les directions primaires sont
 	 * utilisées (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
 	 * Dans le cas contraire, la fonction renvoie null.</br>
-	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
+	 * <b>ATTENTION :</b> les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
@@ -377,16 +488,16 @@ public class AiSimTile
 	 * @param direction	direction dans laquelle le voisin se trouve
 	 * @return	le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
 	 */
-	public AiSimTile getNeighbor(Direction direction)
-	{	AiSimTile result = zone.getNeighborTile(line,col,direction);
-		return result;		
+	@Override
+	public AiDataTile getNeighbor(Direction direction)
+	{	return neighbors.get(direction);		
 	}
 	
 	/**
 	 * renvoie la liste des voisins de cette case.
 	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.</br>
 	 * 
-	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
+	 * <b>ATTENTION :</b>les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
@@ -394,10 +505,11 @@ public class AiSimTile
 	 * 
 	 * @return	la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
 	 */
-	public List<AiSimTile> getNeighbors()
-	{	List<AiSimTile> result = new ArrayList<AiSimTile>();
+	@Override
+	public List<AiTile> getNeighbors()
+	{	List<AiTile> result = new ArrayList<AiTile>();
 		for(Direction direction: Direction.getPrimaryValues())
-			result.add(getNeighbor(direction));
+			result.add(neighbors.get(direction));
 		return result;
 	}
 
@@ -407,7 +519,7 @@ public class AiSimTile
 	@Override
 	public boolean equals(Object o)
 	{	boolean result = false;
-		if(o instanceof AiSimTile)
+		if(o instanceof AiDataTile)
 		{	
 //			AiTile t = (AiTile)o;	
 //			result = tile==t.tile && zone==t.zone;
@@ -429,33 +541,35 @@ public class AiSimTile
 	/**
 	 * termine proprement cette case
 	 */
-	void finish()
+	protected void finish()
 	{	// block
-		finishSprites(blocks);
+		for(AiBlock block: blocks)
+			((AiDataBlock)block).finish();
+		blocks.clear();
+		
 		// bombs
-		finishSprites(bombs);
+		for(AiBomb bomb: bombs)
+			((AiDataBomb)bomb).finish();
+		bombs.clear();
+		
 		// fires
-		finishSprites(fires);
-		// floor
-		finishSprites(floors);
+		for(AiFire fire: fires)
+			((AiDataFire)fire).finish();
+		fires.clear();
+		
+		// floors
+		for(AiFloor floor: floors)
+			((AiDataFloor)floor).finish();
+		floors.clear();
+		
 		// heroes
-		finishSprites(heroes);
-		// item
-		finishSprites(items);
-	}
-
-	/**
-	 * termine les simulations de sprites passées en paramètres
-	 * 
-	 * @param <T>	type de simulation
-	 * @param list	liste de simulations
-	 */
-	private <T extends AiSimSprite> void finishSprites(List<T> list)
-	{	Iterator<T> it = list.iterator();
-		while(it.hasNext())
-		{	T temp = it.next();
-			temp.finish();
-		}
-		list.clear();
+		for(AiHero hero: heroes)
+			((AiDataHero)hero).finish();
+		heroes.clear();
+		
+		// items
+		for(AiItem item: items)
+			((AiDataItem)item).finish();
+		items.clear();
 	}
 }

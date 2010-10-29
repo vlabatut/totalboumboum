@@ -21,32 +21,9 @@ package org.totalboumboum.ai.v201011.adapter.data;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 
-import org.totalboumboum.engine.container.level.Level;
-import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.engine.content.sprite.block.Block;
-import org.totalboumboum.engine.content.sprite.bomb.Bomb;
-import org.totalboumboum.engine.content.sprite.fire.Fire;
-import org.totalboumboum.engine.content.sprite.floor.Floor;
-import org.totalboumboum.engine.content.sprite.hero.Hero;
-import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.engine.loop.VisibleLoop;
-import org.totalboumboum.engine.player.AbstractPlayer;
-import org.totalboumboum.game.limit.LimitTime;
-import org.totalboumboum.game.match.Match;
-import org.totalboumboum.game.round.Round;
-import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.statistics.GameStatistics;
-import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.tools.calculus.CalculusTools;
-import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
@@ -62,55 +39,17 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-public class AiZone
+public interface AiZone
 {	
-	/**
-	 * construit une représentation du niveau passé en paramètre,
-	 * du point de vue du joueur passé en paramètre.
-	 * 
-	 * @param level	niveau à représenter
-	 * @param player	joueur dont le point de vue est à adopter
-	 */
-	public AiZone(Level level, AbstractPlayer player)
-	{	this.level = level;
-		this.player = player;
-		initMatrix();
-//		updateMatrix();
-		initOwnHero();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// PROCESS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * met à jour cette représentation ainsi que tous ses constituants.
-	 * usage interne, méthode non-destinée à la création des IA.
-	 */
-	public void update(long elapsedTime)
-	{	updateTimes(elapsedTime);
-		updateMatrix();
-		updateSpriteLists();
-		updateMeta();
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis le début du jeu */
-	private long totalTime = 0;
-	/** temps écoulé depuis la mise à jour précédente de l'IA considérée */
-	private long elapsedTime = 0;
-	/** durée maximale de la partie */
-	private long limitTime = 0;
-	
 	/**
 	 * renvoie le temps total écoulé depuis le début du jeu
 	 * 
 	 * @return	le temps total écoulé exprimé en millisecondes
 	 */
-	public long getTotalTime()
-	{	return totalTime;		
-	}
+	public long getTotalTime();
 	
 	/**
 	 * renvoie le temps écoulé depuis la mise à jour précédente
@@ -118,9 +57,7 @@ public class AiZone
 	 * 
 	 * @return	le temps écoulé exprimé en millisecondes
 	 */
-	public long getElapsedTime()
-	{	return elapsedTime;		
-	}
+	public long getElapsedTime();
 	
 	/**
 	 * renvoie la durée maximale de la partie
@@ -128,198 +65,25 @@ public class AiZone
 	 * 
 	 * @return	la durée maximale de la partie
 	 */
-	public long getLimitTime()
-	{	return limitTime;		
-	}
-	
-	/**
-	 * met à jour les données temporelles
-	 * 
-	 * @param elapsedTime
-	 */
-	private void updateTimes(long elapsedTime)
-	{	// init
-		VisibleLoop loop = level.getLoop();
-	
-		// total time
-		this.totalTime = loop.getTotalGameTime();
-		
-		// elapsed time
-		this.elapsedTime = elapsedTime;
-		
-		// time limit
-		this.limitTime = Long.MAX_VALUE;
-		LimitTime lt = loop.getRound().getLimits().getTimeLimit();
-		if(lt!=null)
-			this.limitTime = lt.getThreshold();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// META DATA		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** rangs des joueurs pour la manche en cours (ces rangs peuvent évoluer) */
-	private final HashMap<AiHero,Integer> roundRanks = new HashMap<AiHero, Integer>();
-	/** rangs des joueurs pour la rencontre en cours (ces rangs n'évoluent pas pendant la manche) */
-	private final HashMap<AiHero,Integer> matchRanks = new HashMap<AiHero, Integer>();
-	/** rangs des joueurs au classement global du jeu (ces rangs n'évoluent pas pendant la manche) */
-	private final HashMap<AiHero,Integer> statsRanks = new HashMap<AiHero, Integer>();
-
-	/** 
-	 * met à jour des données qui ne sont pas directement reliées
-	 * à l'action en cours, telles que l'évolution du classement des joueurs
-	 */
-	private void updateMeta()
-	{	List<AbstractPlayer> players = level.getLoop().getPlayers();
-		// stats
-		statsRanks.clear();
-		RankingService rankingService = GameStatistics.getRankingService();
-		for(int i=0;i<players.size();i++)
-		{	AbstractPlayer player = players.get(i);
-			Hero hero = (Hero)player.getSprite();
-			AiHero aiHero = heroMap.get(hero);
-			String playerId = player.getId();
-			int rank = rankingService.getPlayerRank(playerId);
-			statsRanks.put(aiHero,rank);
-		}
-		// round
-		roundRanks.clear();
-		Round round = level.getLoop().getRound();
-		float points[] = round.getCurrentPoints();
-		int ranks[] = CalculusTools.getRanks(points);
-		for(int i=0;i<players.size();i++)
-		{	Hero hero = (Hero)players.get(i).getSprite();
-			AiHero aiHero = heroMap.get(hero);
-			int rank = ranks[i];
-			roundRanks.put(aiHero,rank);
-		}
-		// match
-		matchRanks.clear();
-		Match match = round.getMatch();
-		points = match.getStats().getTotal();
-		ranks = CalculusTools.getRanks(points);
-		for(int i=0;i<players.size();i++)
-		{	Hero hero = (Hero)players.get(i).getSprite();
-			AiHero aiHero = heroMap.get(hero);
-			int rank = ranks[i];
-			matchRanks.put(aiHero,rank);
-		}
-	}
-	
-	/**
-	 * Renvoie le classement du personnage passé en paramètre, pour la manche en cours.
-	 * Ce classement est susceptible d'évoluer d'ici la fin de la manche actuellement jouée, 
-	 * par exemple si ce joueur est éliminé.
-	 * 
-	 * @param hero	le personnage considéré
-	 * @return	son classement dans la manche en cours
-	 */
-	int getRoundRank(AiHero hero)
-	{	return roundRanks.get(hero);
-	}
-	
-	/**
-	 * Renvoie le classement du personnage passé en paramètre, pour la rencontre en cours.
-	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
-	 * 
-	 * @param hero	le personnage considéré
-	 * @return	son classement dans la rencontre en cours
-	 */
-	int getMatchRank(AiHero hero)
-	{	return matchRanks.get(hero);
-	}
-	
-	/**
-	 * Renvoie le classement du personnage passé en paramètre, dans le classement général du jeu (Glicko-2)
-	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
-	 * 
-	 * @param hero	le personnage considéré
-	 * @return	son classement général (Glicko-2)
-	 */
-	int getStatsRank(AiHero hero)
-	{	return statsRanks.get(hero);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// LEVEL			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** niveau représenté par cette classe */
-	private Level level;
-	
-	/////////////////////////////////////////////////////////////////
-	// PLAYER			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** joueur contrôlé par l'IA */
-	private AbstractPlayer player;
+	public long getLimitTime();
 	
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice représentant la zone et tous les sprites qu'elle contient */
-	private AiTile[][] matrix;
-	/** hauteur totale de la zone de jeu exprimée en cases (ie: nombre de lignes) */
-	private int height;
-	/** largeur totale de la zone de jeu exprimée en cases (ie: nombre de colonnes) */
-	private int width;
-	
-	public AiTile[][] getMatrix()
-	{	return matrix;
-	}
-	
-	/** 
-	 * initialise cette représentation de la zone en fonction du niveau passé en paramètre
-	 */
-	private void initMatrix()
-	{	Tile[][] m = level.getMatrix();
-		height = level.getGlobalHeight();
-		width = level.getGlobalWidth();
-		matrix = new AiTile[height][width];
-		for(int lineIndex=0;lineIndex<height;lineIndex++)
-		{	for(int colIndex=0;colIndex<width;colIndex++)
-			{	Tile tile = m[lineIndex][colIndex];
-				AiTile aiTile = new AiTile(tile,this);
-				matrix[lineIndex][colIndex] = aiTile;
-			}
-		}
-		
-		for(int lineIndex=0;lineIndex<height;lineIndex++)
-			for(int colIndex=0;colIndex<width;colIndex++)
-				matrix[lineIndex][colIndex].initNeighbors();
-	}	
-	
 	/**
-	 * met à jour la matrice en fonction de l'évolution du jeu
+	 * renvoie la matrice de cases représentant la zone de jeu
+	 * 
+	 * @return	la matrice correspondant à la zone de jeu
 	 */
-	private void updateMatrix()
-	{	hiddenItemsCount = 0;
-		// démarque tous les sprites
-		uncheckAll(blockMap);
-		uncheckAll(bombMap);
-		uncheckAll(fireMap);
-		uncheckAll(floorMap);
-		uncheckAll(heroMap);
-		uncheckAll(itemMap);
-		// met à jour chaque case et sprite 
-		for(int line=0;line<height;line++)
-			for(int col=0;col<width;col++)
-				matrix[line][col].update();
-		// supprime les sprites non-marqués
-		removeUnchecked(blockMap);
-		removeUnchecked(bombMap);
-		removeUnchecked(fireMap);
-		removeUnchecked(floorMap);
-		removeUnchecked(heroMap);
-		removeUnchecked(itemMap);
-	}
-	
+	public AiTile[][] getMatrix();
+
 	/** 
 	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'écran)
 	 * de la zone de jeu exprimée en cases (ie: nombre de lignes)
 	 *  
 	 *  @return	hauteur de la zone
 	 */
-	public int getHeight()
-	{	return height;	
-	}
+	public int getHeight();
 	
 	/** 
 	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'écran)
@@ -327,9 +91,7 @@ public class AiZone
 	 *  
 	 *  @return	largeur de la zone
 	 */
-	public int getWidth()
-	{	return width;	
-	}
+	public int getWidth();
 	
 	/////////////////////////////////////////////////////////////////
 	// TILES			/////////////////////////////////////////////
@@ -341,9 +103,7 @@ public class AiZone
 	 *  @param	col	numéro de la colonne contenant la case à renvoyer
 	 *  @return	case située aux coordonnées spécifiées en paramètres
 	 */
-	public AiTile getTile(int line, int col)
-	{	return matrix[line][col];
-	}
+	public AiTile getTile(int line, int col);
 	
 	/**
 	 * renvoie la case qui contient le pixel passé en paramètre
@@ -352,13 +112,7 @@ public class AiZone
 	 *  @param	y	ordonnée du pixel concerné
 	 *  @return	case contenant le pixel situé aux coordonnées spécifiées en paramètres
 	 */
-	public AiTile getTile(double x, double y)
-	{	Tile tile = level.getTile(x, y);
-		int line = tile.getLine();
-		int col = tile.getCol();
-		AiTile result = matrix[line][col];
-		return result;
-	}
+	public AiTile getTile(double x, double y);
 		
 	/**
 	 * renvoie la direction de la case target relativement à la case source.
@@ -384,48 +138,18 @@ public class AiZone
 	 * @param target	case dont on veut connaitre la direction
 	 * @return	la direction de target par rapport à source
 	 */
-	public Direction getDirection(AiTile source, AiTile target)
-	{	// differences
-		int dx = target.getCol()-source.getCol();
-		int dy = target.getLine()-source.getLine();
-		
-		// direction
-		Direction temp = Direction.getCompositeFromDouble(dx,dy);
-		Direction tempX = temp.getHorizontalPrimary();
-		Direction tempY = temp.getVerticalPrimary();
-		
-		// distances
-		int distDirX = Math.abs(dx);
-		int distIndirX = getWidth()-distDirX;
-		if(distDirX>distIndirX)
-			tempX = tempX.getOpposite();
-		int distDirY = Math.abs(dy);
-		int distIndirY = getHeight()-distDirY;
-		if(distDirY>distIndirY)
-			tempY = tempY.getOpposite();
-		
-		// result
-		Direction result = Direction.getComposite(tempX,tempY);
-		return result;
-	}
+	public Direction getDirection(AiTile source, AiTile target);
 	
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des blocks contenus dans cette zone */
-	private final HashMap<Block,AiBlock> blockMap = new HashMap<Block,AiBlock>();
-	/** liste externe des blocks contenus dans cette zone */
-	private final List<AiBlock> blockList = new ArrayList<AiBlock>();
-	
 	/** 
 	 * renvoie la liste des blocks contenus dans cette zone
 	 * (la liste peut être vide). 
 	 * 
 	 * @return	liste de tous les blocs contenus dans cette zone
 	 */
-	public List<AiBlock> getBlocks()
-	{	return blockList;	
-	}
+	public List<AiBlock> getBlocks();
 	
 	/** 
 	 * renvoie la liste des blocks destructibles contenus dans cette zone
@@ -433,213 +157,50 @@ public class AiZone
 	 * 
 	 * @return	liste de tous les blocs destructibles contenus dans cette zone
 	 */
-	public List<AiBlock> getDestructibleBlocks()
-	{	List<AiBlock> result = new ArrayList<AiBlock>();
-
-		for(AiBlock block: blockList)
-		{	if(block.isDestructible())
-				result.add(block);
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * met à jour la liste externe des blocs
-	 */
-	private void updateBlockList()
-	{	blockList.clear();
-		for(Entry<Block,AiBlock> entry: blockMap.entrySet())
-		{	AiBlock block = entry.getValue();
-			blockList.add(block);
-		}
-	}
-	
-	/**
-	 * renvoie la représentation du bloc passé en paramètre.
-	 * 
-	 * @param block	le bloc dont on veut la représentation
-	 * @return	le AiBlock correspondant
-	 */
-	AiBlock getBlock(Block block)
-	{	return blockMap.get(block);
-	}
-	
-	/**
-	 * ajoute un bloc dans la liste de blocs de cette zone
-	 * (méthode appelée depuis une AiTile)
-	 * 
-	 * @param block	le bloc à rajouter à la liste
-	 */
-	void addBlock(AiBlock block)
-	{	blockMap.put(block.getSprite(),block);	
-	}
+	public List<AiBlock> getDestructibleBlocks();
 	
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des bombes contenues dans cette zone */
-	private final HashMap<Bomb,AiBomb> bombMap = new HashMap<Bomb,AiBomb>();
-	/** liste externe des bombes contenues dans cette zone */
-	private final List<AiBomb> bombList = new ArrayList<AiBomb>();
-	
 	/** 
 	 * renvoie la liste des bombes contenues dans cette zone 
 	 * (la liste peut être vide)
 	 * 
 	 * @return	liste de toutes les bombes contenues dans cette zone
 	 */
-	public List<AiBomb> getBombs()
-	{	return bombList;	
-	}
-	
-	/**
-	 * met à jour la liste externe des bombes
-	 */
-	private void updateBombList()
-	{	bombList.clear();
-		for(Entry<Bomb,AiBomb> entry: bombMap.entrySet())
-		{	AiBomb bomb = entry.getValue();
-			bombList.add(bomb);
-		}
-	}
-	
-	/**
-	 * renvoie la représentation de la bombe passée en paramètre.
-	 * 
-	 * @param bomb	la bombe dont on veut la représentation
-	 * @return	le AiBomb correspondant
-	 */
-	AiBomb getBomb(Bomb bomb)
-	{	return bombMap.get(bomb);
-	}
-	
-	/**
-	 * ajoute une bombe dans la liste de bombes de cette zone
-	 * (méthode appelée depuis une AiTile)
-	 * 
-	 * @param bomb	la bombe à rajouter à la liste
-	 */
-	void addBomb(AiBomb bomb)
-	{	bombMap.put(bomb.getSprite(),bomb);	
-	}
+	public List<AiBomb> getBombs();
 	
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des feux contenus dans cette zone */
-	private final HashMap<Fire,AiFire> fireMap = new HashMap<Fire,AiFire>();
-	/** liste externe des feux contenus dans cette zone */
-	private final List<AiFire> fireList = new ArrayList<AiFire>();
-	
 	/** 
 	 * renvoie la liste des feux contenus dans cette zone 
 	 * (la liste peut être vide)
 	 * 
 	 * @return	liste de tous les feux contenus dans cette zone
 	 */
-	public List<AiFire> getFires()
-	{	return fireList;	
-	}
-	
-	/**
-	 * met à jour la liste externe des feux
-	 */
-	private void updateFireList()
-	{	fireList.clear();
-		for(Entry<Fire,AiFire> entry: fireMap.entrySet())
-		{	AiFire fire = entry.getValue();
-			fireList.add(fire);
-		}
-	}
-	
-	/**
-	 * renvoie la représentation du feu passé en paramètre.
-	 * 
-	 * @param fire	le feu dont on veut la représentation
-	 * @return	le AiFire correspondant
-	 */
-	AiFire getFire(Fire fire)
-	{	return fireMap.get(fire);
-	}
-	
-	/**
-	 * ajoute un feu dans la liste de feux de cette zone
-	 * (méthode appelée depuis une AiTile)
-	 * 
-	 * @param fire	le feu à rajouter à la liste
-	 */
-	void addFire(AiFire fire)
-	{	fireMap.put(fire.getSprite(),fire);	
-	}
-	
+	public List<AiFire> getFires();
+
 	/////////////////////////////////////////////////////////////////
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des sols contenus dans cette zone */
-	private final HashMap<Floor,AiFloor> floorMap = new HashMap<Floor,AiFloor>();
-	/** liste externe des sols contenus dans cette zone */
-	private final List<AiFloor> floorList = new ArrayList<AiFloor>();
-
 	/** 
 	 * renvoie la liste des sols contenus dans cette zone 
 	 * 
 	 * @return	liste de tous les sols contenus dans cette zone
 	 */
-	public List<AiFloor> getFloors()
-	{	return floorList;	
-	}
-	
-	/**
-	 * met à jour la liste externe des sols
-	 */
-	private void updateFloorList()
-	{	floorList.clear();
-		for(Entry<Floor,AiFloor> entry: floorMap.entrySet())
-		{	AiFloor floor = entry.getValue();
-			floorList.add(floor);
-		}
-	}
-	
-	/**
-	 * renvoie la représentation du sol passé en paramètre.
-	 * 
-	 * @param floor	le sol dont on veut la représentation
-	 * @return	le AiFloor correspondant
-	 */
-	AiFloor getFloor(Floor floor)
-	{	return floorMap.get(floor);
-	}
-	
-	/**
-	 * ajoute un sol dans la liste de sols de cette zone
-	 * (méthode appelée depuis une AiTile)
-	 * 
-	 * @param floor	le sol à rajouter à la liste
-	 */
-	void addFloor(AiFloor floor)
-	{	floorMap.put(floor.getSprite(),floor);	
-	}
+	public List<AiFloor> getFloors();
 	
 	/////////////////////////////////////////////////////////////////
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des personnages contenus dans cette zone */
-	private final HashMap<Hero,AiHero> heroMap = new HashMap<Hero,AiHero>();
-	/** liste externe de tous les personnages contenus dans cette zone */
-	private final List<AiHero> heroList = new ArrayList<AiHero>();
-	/** liste externe des personnages restant encore dans cette zone */
-	private final List<AiHero> remainingHeroList = new ArrayList<AiHero>();
-	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone,
 	 * y compris ceux qui ont été éliminés. 
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
 	 */
-	public List<AiHero> getHeroes()
-	{	return heroList;	
-	}
+	public List<AiHero> getHeroes();
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone, 
@@ -648,9 +209,7 @@ public class AiZone
 	 * 
 	 * @return	liste de tous les joueurs encore contenus dans cette zone
 	 */
-	public List<AiHero> getRemainingHeroes()
-	{	return remainingHeroList;	
-	}
+	public List<AiHero> getRemainingHeroes();
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone, 
@@ -659,105 +218,18 @@ public class AiZone
 	 * 
 	 * @return	liste de tous les joueurs encore contenus dans cette zone, sauf celui de l'IA
 	 */
-	public List<AiHero> getRemainingOpponents()
-	{	List<AiHero> result = new ArrayList<AiHero>(remainingHeroList);
-		result.remove(ownHero);
-		return result;	
-	}
-	
-	/**
-	 * met à jour les listes externes des personnages
-	 */
-	private void updateHeroLists()
-	{	heroList.clear();
-		remainingHeroList.clear();
-		for(Entry<Hero,AiHero> entry: heroMap.entrySet())
-		{	AiHero hero = entry.getValue();
-			heroList.add(hero);
-			if(!hero.hasEnded())
-				remainingHeroList.add(hero);
-		}
-	}
-	
-	/**
-	 * renvoie la représentation du personnage passé en paramètre.
-	 * 
-	 * @param hero	le personnage dont on veut la représentation
-	 * @return	le AiHero correspondant
-	 */
-	AiHero getHero(Hero hero)
-	{	return heroMap.get(hero);
-	}
-	
-	/**
-	 * ajoute un personnage dans la liste de personnages de cette zone
-	 * (méthode appelée depuis une AiTile)
-	 * 
-	 * @param hero	le personnage à rajouter à la liste
-	 */
-	void addHero(AiHero hero)
-	{	heroMap.put(hero.getSprite(),hero);	
-	}
-	
+	public List<AiHero> getRemainingOpponents();
+
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste interne des items contenus dans cette zone */
-	private final HashMap<Item,AiItem> itemMap = new HashMap<Item,AiItem>();
-	/** liste externe des items contenus dans cette zone */
-	private final List<AiItem> itemList = new ArrayList<AiItem>();
-	/** nombre d'items cachés, i.e. pas encore ramassés */
-	private int hiddenItemsCount;
-	
 	/** 
 	 * renvoie la liste des items apparents contenus dans cette zone 
 	 * (la liste peut être vide)
 	 * 
 	 * @return	liste de tous les items contenus dans cette zone
 	 */
-	public List<AiItem> getItems()
-	{	return itemList;	
-	}
-	
-	/**
-	 * met à jour la liste externe des items
-	 */
-	private void updateItemList()
-	{	itemList.clear();
-		for(Entry<Item,AiItem> entry: itemMap.entrySet())
-		{	AiItem item = entry.getValue();
-			itemList.add(item);
-		}
-	}
-	
-	/**
-	 * renvoie la représentation de l'item passé en paramètre.
-	 * 
-	 * @param item	l'item dont on veut la représentation
-	 * @return	le AiItem correspondant
-	 */
-	AiItem getItem(Item item)
-	{	return itemMap.get(item);
-	}
-	
-	/**
-	 * ajoute un item dans la liste d'items de cette zone
-	 * (méthode appelée depuis une AiTile)
-	 * 
-	 * @param item	l'item à rajouter à la liste
-	 */
-	void addItem(AiItem item)
-	{	itemMap.put(item.getSprite(),item);	
-	}
-	
-	/**
-	 * permet de modifier le nombre d'items encore cachés dans ce niveau
-	 * 
-	 * @param hiddenItemsCount	le nouveau nombre d'items cachés dans le niveau
-	 */
-	void setHiddenItemsCount(int hiddenItemsCount)
-	{	this.hiddenItemsCount = hiddenItemsCount;	
-	}
+	public List<AiItem> getItems();
 	
 	/**
 	 * renvoie le nombre d'items cachés restant dans le niveau.
@@ -768,94 +240,16 @@ public class AiZone
 	 * 
 	 * @return	le nombre d'items restant à découvrir
 	 */
-	public int getHiddenItemsCount()
-	{	return hiddenItemsCount;		
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// ALL SPRITES		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * démarque toutes les représentations de sprites d'une liste determinée en fonction du type
-	 * T paramétrant cette méthode. Méthode appelée au début de la mise à jour :
-	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
-	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
-	 * supprimées de cette représentation.
-	 * 
-	 * @param <T>	type de la liste à traiter
-	 * @param list	liste à traiter
-	 */
-	private <U extends Sprite, T extends AiSprite<?>> void uncheckAll(HashMap<U,T> list)
-	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
-		while(it.hasNext())
-		{	T temp = it.next().getValue();
-			temp.uncheck();
-		}
-	}
-	/**
-	 * méthode complémentaire de uncheckAll, et chargée de supprimer
-	 * les représentations de sprites non-marquées à la fin de la mise à jour.
-	 * 
-	 * @param <T>	type de la liste à traiter
-	 * @param list	liste à traiter
-	 */
-	private <U extends Sprite, T extends AiSprite<?>> void removeUnchecked(HashMap<U,T> list)
-	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
-		while(it.hasNext())
-		{	Entry<U,T> entry = it.next();
-			T temp = entry.getValue();
-			//U sprite = entry.getKey();
-			if(!temp.isChecked())
-			{	temp.setEnded();
-				//Sprite sprite = temp.getSprite();
-				//if(sprite.isEnded())
-				if(!(temp instanceof AiHero)) //we always keep the hero, cause they may come back...
-					it.remove();
-			}
-		}
-	}
-
-	/**
-	 * met à jour toutes les listes externes de sprites
-	 */
-	private void updateSpriteLists()
-	{	updateBlockList();
-		updateBombList();
-		updateFireList();
-		updateFloorList();
-		updateHeroLists();
-		updateItemList();
-	}
+	public int getHiddenItemsCount();
 	
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage contrôlé par l'IA */
-	private AiHero ownHero;
-
 	/** 
 	 * renvoie le personnage qui est contrôlé par l'IA
 	 */
-	public AiHero getOwnHero()
-	{	return ownHero;	
-	}
+	public AiHero getOwnHero();
 	
-	/**
-	 * initialise le personnage qui est contrôlé par l'IA
-	 */
-	private void initOwnHero()
-	{	PredefinedColor color = player.getColor(); 
-		Iterator<Entry<Hero,AiHero>> i = heroMap.entrySet().iterator();
-		boolean found = false;
-		while(i.hasNext() && !found)
-		{	AiHero temp = i.next().getValue();
-			if(temp.getColor()==color)
-			{	ownHero = temp;
-				found = true;
-			}
-		}
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// DIRECTIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -871,19 +265,7 @@ public class AiZone
 	 * @param target	sprite de destination
 	 * @return	la direction pour aller de source vers target
 	 */
-	public Direction getDirection(AiSprite<?> source, AiSprite<?> target)
-	{	Direction result;
-		if(source==null || target==null)
-			result = Direction.NONE;
-		else
-		{	double x1 = source.getPosX();
-			double y1 = source.getPosY();
-			double x2 = target.getPosX();
-			double y2 = target.getPosY();
-			result = getDirection(x1,y1,x2,y2);
-		}
-		return result;		
-	}
+	public Direction getDirection(AiSprite source, AiSprite target);
 	
 	/**
 	 * Calcule la direction pour aller du sprite à la case passés en paramètres.
@@ -897,19 +279,7 @@ public class AiZone
 	 * @param tile	case de destination
 	 * @return	la direction pour aller du sprite vers la case
 	 */
-	public Direction getDirection(AiSprite<?> sprite, AiTile tile)
-	{	Direction result;
-		if(sprite==null || tile==null)
-			result = Direction.NONE;
-		else
-		{	double x1 = sprite.getPosX();
-			double y1 = sprite.getPosY();
-			double x2 = tile.getPosX();
-			double y2 = tile.getPosY();
-			result = getDirection(x1,y1,x2,y2);
-		}
-		return result;
-	}
+	public Direction getDirection(AiSprite sprite, AiTile tile);
 	
 	/**
 	 * Calcule la direction pour aller de la position (x1,y1) à la position (x2,y2)
@@ -925,16 +295,7 @@ public class AiZone
 	 * @param y2	seconde position verticale en pixels
 	 * @return	la direction correspondant au chemin le plus court
 	 */
-	public Direction getDirection(double x1, double y1, double x2, double y2)
-	{	double dx = RoundVariables.level.getDeltaX(x1,x2);
-		if(CalculusTools.isRelativelyEqualTo(dx,0))
-			dx = 0;
-		double dy = RoundVariables.level.getDeltaY(y1,y2);
-		if(CalculusTools.isRelativelyEqualTo(dy,0))
-			dy = 0;
-		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
-		return result;
-	}
+	public Direction getDirection(double x1, double y1, double x2, double y2);
 
 	/////////////////////////////////////////////////////////////////
 	// TILE DISTANCES			/////////////////////////////////////
@@ -954,10 +315,7 @@ public class AiZone
 	 * @param col2	colonne de la seconde case
 	 * @param direction	direction à considérer
 	 */
-	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
-	{	int result = level.getTileDistance(line1,col1,line2,col2,direction);
-		return result;
-	}
+	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction);
 
 	/**
 	 * renvoie la distance de Manhattan entre les cases de coordonnées
@@ -972,10 +330,7 @@ public class AiZone
 	 * @param line2	ligne de la seconde case
 	 * @param col2	colonne de la seconde case
 	 */
-	public int getTileDistance(int line1, int col1, int line2, int col2)
-	{	int result = level.getTileDistance(line1, col1, line2, col2, Direction.NONE);
-		return result;
-	}
+	public int getTileDistance(int line1, int col1, int line2, int col2);
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
@@ -988,10 +343,7 @@ public class AiZone
 	 * @param sprite1	première case
 	 * @param sprite2	seconde case
 	 */
-	public int getTileDistance(AiTile tile1, AiTile tile2)
-	{	int result = getTileDistance(tile1,tile2,Direction.NONE);
-		return result;
-	}
+	public int getTileDistance(AiTile tile1, AiTile tile2);
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
@@ -1006,14 +358,7 @@ public class AiZone
 	 * @param sprite2	seconde case
 	 * @param direction	direction à considérer
 	 */
-	public int getTileDistance(AiTile tile1, AiTile tile2, Direction direction)
-	{	int line1 = tile1.getLine();
-		int col1 = tile1.getCol();
-		int line2 = tile2.getLine();
-		int col2 = tile2.getCol();
-		int result = level.getTileDistance(line1,col1,line2,col2);
-		return result;
-	}
+	public int getTileDistance(AiTile tile1, AiTile tile2, Direction direction);
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
@@ -1026,10 +371,7 @@ public class AiZone
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
 	 */
-	public int getTileDistance(AiSprite<?> sprite1, AiSprite<?> sprite2)
-	{	int result = getTileDistance(sprite1,sprite2,Direction.NONE);
-		return result;
-	}
+	public int getTileDistance(AiSprite sprite1, AiSprite sprite2);
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
@@ -1044,12 +386,7 @@ public class AiZone
 	 * @param sprite2	second sprite
 	 * @param direction	direction à considérer
 	 */
-	public int getTileDistance(AiSprite<?> sprite1, AiSprite<?> sprite2, Direction direction)
-	{	AiTile tile1 = sprite1.getTile();
-		AiTile tile2 = sprite2.getTile();
-		int result = getTileDistance(tile1,tile2);
-		return result;
-	}
+	public int getTileDistance(AiSprite sprite1, AiSprite sprite2, Direction direction);
 	
 	/////////////////////////////////////////////////////////////////
 	// PIXEL DISTANCES			/////////////////////////////////////
@@ -1067,12 +404,7 @@ public class AiZone
 	 * @param x2	abscisse du second point
 	 * @param y2	ordonnée du second point
 	 */
-	public double getPixelDistance(double x1, double y1, double x2, double y2)
-	{	double result = level.getPixelDistance(x1,y1,x2,y2);
-		if(CalculusTools.isRelativelyEqualTo(result,0))
-			result = 0;
-		return result;
-	}
+	public double getPixelDistance(double x1, double y1, double x2, double y2);
 	
 	/**
 	 * renvoie la distance de Manhattan entre les points de coordonnées
@@ -1089,12 +421,7 @@ public class AiZone
 	 * @param y2	ordonnée du second point
 	 * @param direction	direction à considérer
 	 */
-	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
-	{	double result = level.getPixelDistance(x1,y1,x2,y2,direction);
-		if(CalculusTools.isRelativelyEqualTo(result,0))
-			result = 0;
-		return result;
-	}
+	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction);
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
@@ -1107,10 +434,7 @@ public class AiZone
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
 	 */
-	public double getPixelDistance(AiSprite<?> sprite1, AiSprite<?> sprite2)
-	{	double result = getPixelDistance(sprite1, sprite2,Direction.NONE);
-		return result;
-	}
+	public double getPixelDistance(AiSprite sprite1, AiSprite sprite2);
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres, exprimée en pixels. 
@@ -1124,16 +448,7 @@ public class AiZone
 	 * @param sprite2	second sprite
 	 * @param direction	direction à considérer
 	 */
-	public double getPixelDistance(AiSprite<?> sprite1, AiSprite<?> sprite2, Direction direction)
-	{	double x1 = sprite1.getPosX();
-		double y1 = sprite1.getPosY();
-		double x2 = sprite2.getPosX();
-		double y2 = sprite2.getPosY();
-		double result = level.getPixelDistance(x1,y1,x2,y2,direction);
-		if(CalculusTools.isRelativelyEqualTo(result,0))
-			result = 0;
-		return result;
-	}
+	public double getPixelDistance(AiSprite sprite1, AiSprite sprite2, Direction direction);
 
 	/////////////////////////////////////////////////////////////////
 	// TILE DELTAS				/////////////////////////////////////
@@ -1157,9 +472,7 @@ public class AiZone
 	 * @param y	ordonnée
 	 * @return	un tableau contenant les versions normalisées de x et y
 	 */
-	public double[] normalizePosition(double x, double y)
-	{	return level.normalizePosition(x, y);
-	}
+	public double[] normalizePosition(double x, double y);
 
 	/**
 	 * prend n'importe quelle abscisse exprimée en pixels et la normalise
@@ -1172,9 +485,7 @@ public class AiZone
 	 * @param x	abscisse
 	 * @return	la version normalisée de x
 	 */
-	public double normalizePositionX(double x)
-	{	return level.normalizePositionX(x);
-	}
+	public double normalizePositionX(double x);
 	
 	/**
 	 * prend n'importe quelle ordonnée exprimée en pixels et la normalise
@@ -1187,9 +498,7 @@ public class AiZone
 	 * @param y	ordonnée
 	 * @return	la version normalisée de y
 	 */
-	public double normalizePositionY(double y)
-	{	return level.normalizePositionY(y);
-	}
+	public double normalizePositionY(double y);
 	
 	/**
 	 * prend n'importe quelles coordonnées exprimées en cases et les normalise
@@ -1202,9 +511,7 @@ public class AiZone
 	 * @param col	colonne de la case
 	 * @return	un tableau contenant les versions normalisées de line et col
 	 */
-	public int[] normalizePosition(int line, int col)
-	{	return level.normalizePosition(line, col);
-	}
+	public int[] normalizePosition(int line, int col);
 
 	/**
 	 * prend n'importe quelle abscisse exprimée en cases et la normalise
@@ -1217,9 +524,7 @@ public class AiZone
 	 * @param col	colonne de la case
 	 * @return	la version normalisée de col
 	 */
-	public int normalizePositionCol(int col)
-	{	return level.normalizePositionCol(col);
-	}
+	public int normalizePositionCol(int col);
 
 	/**
 	 * prend n'importe quelle ordonnée exprimée en cases et la normalise
@@ -1232,9 +537,7 @@ public class AiZone
 	 * @param line	ligne de la case
 	 * @return	la version normalisée de line
 	 */
-	public int normalizePositionLine(int line)
-	{	return level.normalizePositionLine(line);
-	}
+	public int normalizePositionLine(int line);
 	
 	/////////////////////////////////////////////////////////////////
 	// SAME PIXEL POSITION		/////////////////////////////////////
@@ -1247,15 +550,7 @@ public class AiZone
 	 * @param sprite2	le second sprite
 	 * @return	vrai ssi les deux sprites sont au même endroit
 	 */
-	public boolean hasSamePixelPosition(AiSprite<?> sprite1, AiSprite<?> sprite2)
-	{	boolean result;
-		double x1 = sprite1.getPosX();
-		double y1 = sprite1.getPosY();
-		double x2 = sprite2.getPosX();
-		double y2 = sprite2.getPosY();
-		result = hasSamePixelPosition(x1,y1,x2,y2);
-		return result;
-	}
+	public boolean hasSamePixelPosition(AiSprite sprite1, AiSprite sprite2);
 	
 	/**
 	 * teste si le sprite passé en paramètre occupent le
@@ -1265,15 +560,7 @@ public class AiZone
 	 * @param tile	la case
 	 * @return	vrai ssi le sprite est au centre de la case
 	 */
-	public boolean hasSamePixelPosition(AiSprite<?> sprite, AiTile tile)
-	{	boolean result;	
-		double x1 = sprite.getPosX();
-		double y1 = sprite.getPosY();
-		double x2 = tile.getPosX();
-		double y2 = tile.getPosY();
-		result = hasSamePixelPosition(x1,y1,x2,y2);
-		return result;
-	}
+	public boolean hasSamePixelPosition(AiSprite sprite, AiTile tile);
 
 	/**
 	 * teste si les deux points passés en paramètres occupent la
@@ -1285,51 +572,5 @@ public class AiZone
 	 * @param y21	l'ordonnée de la seconde position
 	 * @return	vrai ssi les deux positions sont équivalentes au pixel près
 	 */
-	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2)
-	{	boolean result = true;	
-		result = result && CalculusTools.isRelativelyEqualTo(x1,x2);
-		result = result && CalculusTools.isRelativelyEqualTo(y1,y2);
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public boolean equals(Object o)
-	{	boolean result = false;
-		if(o instanceof AiZone)
-		{	
-//			AiZone zone = (AiZone)o;	
-//			result = level==zone.level && player==zone.player;
-			result = this==o;
-		}
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISH			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
-	 */
-	public void finish()
-	{	// matrix
-		for(int line=0;line<height;line++)
-			for(int col=0;col<width;col++)
-				matrix[line][col].finish();
-		
-		// sprites
-		blockMap.clear();
-		bombMap.clear();
-		fireMap.clear();
-		floorMap.clear();
-		heroMap.clear();
-		itemMap.clear();
-		ownHero = null;
-		
-		// misc
-		level = null;
-		player = null;
-	}
+	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2);
 }

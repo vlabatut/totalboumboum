@@ -24,8 +24,8 @@ package org.totalboumboum.ai.v201011.adapter.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
+import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataBomb;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -98,7 +98,7 @@ public class AiSimBomb extends AiSimSprite
 	 * @param sprite	sprite à simuler
 	 * @param tile	case devant contenir le sprite
 	 */
-	AiSimBomb(AiBomb sprite, AiSimTile tile)
+	AiSimBomb(AiDataBomb sprite, AiSimTile tile)
 	{	super(sprite,tile);
 	
 		// fuse

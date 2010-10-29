@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.model;
+package org.totalboumboum.ai.v201011.adapter.data.actual;
 
 /*
  * Total Boum Boum
@@ -21,12 +21,14 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
+import org.totalboumboum.ai.v201011.adapter.data.AiState;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataSprite;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
- * Décrit un état simulé dans lequel un sprite peut se trouver, c'est
+ * Décrit un état dans lequel un sprite peut se trouver, c'est
  * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
  * Cet état est décrit par le nom de cette action, et éventuellement la
  * direction dans laquelle elle est effectuée (pour les actions orientées
@@ -35,25 +37,32 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  *
  */
-public class AiSimState 
+final class AiDataState implements AiState
 {
+	/** sprite dont l'état est représenté */
+	private Sprite sprite;
+	
 	/**
-	 * construit un objet simulant l'état d'un sprite qui vient d'être créé,
-	 * i.e. qui ne fait rien (STANDING) dans une direction neutre (NONE).
-	 */
-	AiSimState()
-	{	name = AiStateName.STANDING;
-		direction = Direction.NONE;
-	}
-
-	/**
-	 * construit un objet simulant l'état du sprite passé en paramètre
+	 * construit un objet représentant l'état du sprite passé en paramètre
 	 * 
-	 * @param sprite	sprite dont on veut simuler l'état
+	 * @param sprite	sprite dont on veut représenter l'état
 	 */
-	AiSimState(AiDataSprite<?> sprite)
-	{	name = sprite.getState().getName();
-		direction = sprite.getState().getDirection();
+	protected AiDataState(Sprite sprite)
+	{	this.sprite = sprite;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * met à jour cet état en fonction de l'évolution du sprite de référence
+	 */
+	protected void update()
+	{	// direction
+		this.direction = sprite.getActualDirection();
+		// name
+		GestureName gesture = sprite.getCurrentGesture().getName();
+		name = AiStateName.makeNameFromGesture(gesture);		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -67,11 +76,12 @@ public class AiSimState
 	 * 
 	 * @return	nom associé à l'état
 	 */
+	@Override
 	public AiStateName getName()
 	{	return name;
 	}
 	
-	void setEnded()
+	protected void setEnded()
 	{	name = AiStateName.ENDED;		
 	}
 	
@@ -87,6 +97,7 @@ public class AiSimState
 	 * 
 	 * @return	direction associée à l'état
 	 */
+	@Override
 	public Direction getDirection()
 	{	return direction;
 	}
@@ -97,7 +108,7 @@ public class AiSimState
 	@Override
 	public boolean equals(Object o)
 	{	boolean result = false;
-		if(o instanceof AiSimState)
+		if(o instanceof AiDataState)
 		{	
 //			AiState s = (AiState)o;	
 //			result = name==s.name && direction==s.direction;
@@ -120,23 +131,14 @@ public class AiSimState
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public AiSimState copy()
-	{	AiSimState result = new AiSimState();
-		result.direction = direction;
-		result.name = name;
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * termine cet objet et libère les ressources occupées
 	 */
-	void finish()
-	{	direction = null;
+	protected void finish()
+	{	sprite = null;
+		direction = null;
 		name = null;		
 	}
 }
