@@ -69,7 +69,6 @@ public class AiState
 	/** nom associée à l'état */
 	private AiStateName name;
 	
-	
 	/**
 	 * renvoie le nom associé à l'état
 	 * 
