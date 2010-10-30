@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.model;
+package org.totalboumboum.ai.v201011.adapter.data.actual;
 
 /*
  * Total Boum Boum
@@ -21,9 +21,10 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
+import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
+import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataItem;
 
 /**
  * simule un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
@@ -33,7 +34,7 @@ import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataItem;
  * @author Vincent Labatut
  *
  */
-public class AiSimItem extends AiSimSprite
+public class AiSimItem extends AiSimSprite implements AiItem
 {	
 	/**
 	 * crée une simulation de l'item passé en paramètre,
@@ -44,7 +45,7 @@ public class AiSimItem extends AiSimSprite
 	 * @param stopBombs	indique si l'item constitue un obstacle aux bombes
 	 * @param stopFire	indique si l'item constitue un obstacle au feu
 	 */
-	public AiSimItem(AiSimTile tile,  double posX, double posY, double posZ,
+	protected AiSimItem(AiSimTile tile,  double posX, double posY, double posZ,
 			AiItemType type, AiStopType stopBombs, AiStopType stopFires)
 	{	super(tile,posX,posY,posZ);
 		
@@ -60,27 +61,12 @@ public class AiSimItem extends AiSimSprite
 	 * @param sprite	sprite à simuler
 	 * @param tile	case contenant le sprite
 	 */
-	AiSimItem(AiDataItem sprite, AiSimTile tile)
+	protected AiSimItem(AiItem sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		type = sprite.getType();		
 		stopBombs = sprite.hasStopBombs();
 		stopFires = sprite.hasStopFires();
-	}
-
-	/**
-	 * construit une simulation de l'item passé en paramètre,
-	 * (donc une simple copie) et la place dans la case indiquée.
-	 * 
-	 * @param sprite	simulation à copier
-	 * @param tile	simulation de la case devant contenir la copie
-	 */
-	public AiSimItem(AiSimItem sprite, AiSimTile tile)
-	{	super(sprite,tile);
-		
-		type = sprite.type;		
-		stopBombs = sprite.stopBombs;
-		stopFires = sprite.stopFires;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -94,6 +80,7 @@ public class AiSimItem extends AiSimSprite
 	 * 
 	 * @return	le type de l'item
 	 */
+	@Override
 	public AiItemType getType()
 	{	return type;	
 	}
@@ -106,8 +93,34 @@ public class AiSimItem extends AiSimSprite
 	/** indique si ce bloc laisse passer le feu */
 	private AiStopType stopFires;
 
+	/**
+	 * indique si cet item arrête les explosions.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si cet item arrête le feu
+	 */
 	@Override
-	public boolean isCrossableBy(AiSimSprite sprite)
+	public AiStopType hasStopFires()
+	{	return stopFires;
+	}
+
+	/**
+	 * indique si cet item arrête les bombes.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si cet item arrête les bombes
+	 */
+	@Override
+	public AiStopType hasStopBombs()
+	{	return stopBombs;
+	}
+
+	@Override
+	public boolean isCrossableBy(AiSprite sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
 		// si le sprite considéré est un personnage
@@ -154,7 +167,7 @@ public class AiSimItem extends AiSimSprite
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	void finish()
+	protected void finish()
 	{	super.finish();
 	}
 }

@@ -213,7 +213,8 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	 * 
 	 * @return	vrai si le personnage traverse les murs
 	 */
-	protected boolean hasThroughBlocks()
+	@Override
+	public boolean hasThroughBlocks()
 	{	return throughBlocks;	
 	}
 
@@ -225,7 +226,8 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	 * 
 	 * @return	vrai si le personnage traverse les bombes
 	 */
-	protected boolean hasThroughBombs()
+	@Override
+	public boolean hasThroughBombs()
 	{	return throughBombs;	
 	}
 
@@ -237,7 +239,8 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	 * 
 	 * @return	vrai si le personnage résiste au feu
 	 */
-	protected boolean hasThroughFires()
+	@Override
+	public boolean hasThroughFires()
 	{	return throughFires;	
 	}
 

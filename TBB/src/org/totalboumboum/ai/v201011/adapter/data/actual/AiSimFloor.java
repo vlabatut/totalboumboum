@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.model;
+package org.totalboumboum.ai.v201011.adapter.data.actual;
 
 /*
  * Total Boum Boum
@@ -21,7 +21,8 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataFloor;
+import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
+import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 
 /**
  * simule un sol du jeu, ie le graphisme affiché en tant que première couche de toute
@@ -30,7 +31,7 @@ import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataFloor;
  * @author Vincent Labatut
  *
  */
-public class AiSimFloor extends AiSimSprite
+public class AiSimFloor extends AiSimSprite implements AiFloor
 {
 	/**
 	 * crée une simulation du sol passé en paramètre,
@@ -38,7 +39,7 @@ public class AiSimFloor extends AiSimSprite
 	 * 
 	 * @param tile	case contenant le sprite
 	 */
-	public AiSimFloor(AiSimTile tile, double posX, double posY, double posZ)
+	protected AiSimFloor(AiSimTile tile, double posX, double posY, double posZ)
 	{	super(tile,posX,posY,posZ);
 	}	
 
@@ -49,26 +50,15 @@ public class AiSimFloor extends AiSimSprite
 	 * @param sprite	sprite à simuler
 	 * @param tile	case contenant le sprite
 	 */
-	AiSimFloor(AiDataFloor sprite, AiSimTile tile)
+	protected AiSimFloor(AiFloor sprite, AiSimTile tile)
 	{	super(sprite,tile);		
-	}
-
-	/**
-	 * construit une simulation du sol passé en paramètre,
-	 * (donc une simple copie) et la place dans la case indiquée.
-	 * 
-	 * @param sprite	simulation à copier
-	 * @param tile	simulation de la case devant contenir la copie
-	 */
-	public AiSimFloor(AiSimFloor sprite, AiSimTile tile)
-	{	super(sprite,tile);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public boolean isCrossableBy(AiSimSprite sprite)
+	public boolean isCrossableBy(AiSprite sprite)
 	{	return true;
 	}
 	
@@ -88,7 +78,7 @@ public class AiSimFloor extends AiSimSprite
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	void finish()
+	protected void finish()
 	{	super.finish();
 	}
 }

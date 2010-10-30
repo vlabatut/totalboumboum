@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.model;
+package org.totalboumboum.ai.v201011.adapter.data.actual;
 
 /*
  * Total Boum Boum
@@ -24,8 +24,10 @@ package org.totalboumboum.ai.v201011.adapter.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataBomb;
+import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -36,7 +38,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-public class AiSimBomb extends AiSimSprite
+public class AiSimBomb extends AiSimSprite implements AiBomb
 {	
 	/**
 	 * 
@@ -59,7 +61,7 @@ public class AiSimBomb extends AiSimSprite
 	 * @param working
 	 * @param time
 	 */
-	public AiSimBomb(AiSimTile tile, double posX, double posY, double posZ,
+	protected AiSimBomb(AiSimTile tile, double posX, double posY, double posZ,
 			boolean countdownTrigger, boolean remoteControlTrigger, boolean explosionTrigger,
 			long normalDuration, long explosionDuration, long latencyDuration, float failureProbability,
 			AiStopType stopHeroes, AiStopType stopFires, boolean throughItems,
@@ -98,7 +100,7 @@ public class AiSimBomb extends AiSimSprite
 	 * @param sprite	sprite à simuler
 	 * @param tile	case devant contenir le sprite
 	 */
-	AiSimBomb(AiDataBomb sprite, AiSimTile tile)
+	protected AiSimBomb(AiBomb sprite, AiSimTile tile)
 	{	super(sprite,tile);
 	
 		// fuse
@@ -125,40 +127,6 @@ public class AiSimBomb extends AiSimSprite
 		time = sprite.getTime();
 	}
 
-	/**
-	 * construit une simulation de la bombe passée en paramètre,
-	 * (donc une simple copie) et la place dans la case indiquée.
-	 * 
-	 * @param sprite	simulation à copier
-	 * @param tile	simulation de la case devant contenir la copie
-	 */
-	public AiSimBomb(AiSimBomb sprite, AiSimTile tile)
-	{	super(sprite,tile);
-		
-		// fuse
-		countdownTrigger = sprite.countdownTrigger;
-		remoteControlTrigger = sprite.remoteControlTrigger;
-		explosionTrigger = sprite.explosionTrigger;
-		normalDuration = sprite.normalDuration;
-		explosionDuration = sprite.explosionDuration;
-		latencyDuration = sprite.latencyDuration;
-		failureProbability = sprite.failureProbability;
-	
-		// collisions
-		stopHeroes = sprite.stopHeroes;
-		stopFires = sprite.stopFires;
-		throughItems = sprite.throughItems;
-		
-		// range
-		range = sprite.range;
-		penetrating = sprite.penetrating;
-		
-		// misc
-		color = sprite.color;
-		working = sprite.working;
-		time = sprite.time;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -181,6 +149,7 @@ public class AiSimBomb extends AiSimSprite
 	 * renvoie la probabilité que la bombe tombe en panne quand elle devrait exploser
 	 * @return	une mesure de probabilité
 	 */
+	@Override
 	public float getFailureProbability()
 	{	return failureProbability;	
 	}
@@ -189,6 +158,7 @@ public class AiSimBomb extends AiSimSprite
 	 * indique si l'explosion de la bombe dépend d'un compte à rebours
 	 * @return	vrai si la bombe dépend d'un compte à rebours
 	 */
+	@Override
 	public boolean hasCountdownTrigger()
 	{	return countdownTrigger;
 	}
@@ -197,6 +167,7 @@ public class AiSimBomb extends AiSimSprite
 	 * indique si l'explosion de la bombe dépend d'une télécommande
 	 * @return	vrai si la bombe dépend d'une télécommande
 	 */
+	@Override
 	public boolean hasRemoteControlTrigger()
 	{	return remoteControlTrigger;
 	}
@@ -205,6 +176,7 @@ public class AiSimBomb extends AiSimSprite
 	 * indique si l'explosion de la bombe dépend d'un contact avec du feu
 	 * @return	vrai si la bombe explose au contact du feu
 	 */
+	@Override
 	public boolean hasExplosionTrigger()
 	{	return explosionTrigger;
 	}
@@ -216,6 +188,7 @@ public class AiSimBomb extends AiSimSprite
 	 * 
 	 * @return	le délai normal avant explosion exprimé en millisecondes
 	 */
+	@Override
 	public long getNormalDuration()
 	{	return normalDuration;
 	}
@@ -228,6 +201,7 @@ public class AiSimBomb extends AiSimSprite
 	 * 
 	 * @return	la durée de l'explosion
 	 */
+	@Override
 	public long getExplosionDuration()
 	{	return explosionDuration;
 	}
@@ -240,6 +214,7 @@ public class AiSimBomb extends AiSimSprite
 	 * 
 	 * @return	la latence de la bombe pour une détonation déclenchée par une autre explosion
 	 */
+	@Override
 	public long getLatencyDuration()
 	{	return latencyDuration;
 	}
@@ -257,6 +232,7 @@ public class AiSimBomb extends AiSimSprite
 	 * (ie. le nombre de cases occupées par sa flamme)
 	 * @return	portée de la bombe
 	 */
+	@Override
 	public int getRange()
 	{	return range;	
 	}
@@ -269,6 +245,7 @@ public class AiSimBomb extends AiSimSprite
 	 * 
 	 * @return	vrai si le feu peut traverser les murs
 	 */
+	@Override
 	public boolean isPenetrating()
 	{	return penetrating;	
 	}
@@ -283,9 +260,10 @@ public class AiSimBomb extends AiSimSprite
 	 * 
 	 * @return	une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
 	 */
-	public List<AiSimTile> getBlast()
+	@Override
+	public List<AiTile> getBlast()
 	{	// init
-		List<AiSimTile> result = new ArrayList<AiSimTile>();
+		List<AiTile> result = new ArrayList<AiTile>();
 		AiSimFire fire = new AiSimFire(tile,tile.getPosX(),tile.getPosY(),0,penetrating,penetrating,penetrating);
 		
 		// center
@@ -335,6 +313,7 @@ public class AiSimBomb extends AiSimSprite
 	 * 
 	 * @return	vrai si cette bombe marche, faux si elle est en panne
 	 */
+	@Override
 	public boolean isWorking()
 	{	return working;	
 	}
@@ -352,6 +331,7 @@ public class AiSimBomb extends AiSimSprite
 	 * 
 	 * @return un symbole de type PredefinedColor représentant une couleur
 	 */
+	@Override
 	public PredefinedColor getColor()
 	{	return color;	
 	}
@@ -368,6 +348,7 @@ public class AiSimBomb extends AiSimSprite
 	 * 
 	 * @return	temps exprimé en ms
 	 */
+	@Override
 	public long getTime()
 	{	return time;	
 	}
@@ -383,6 +364,32 @@ public class AiSimBomb extends AiSimSprite
 	private boolean throughItems;
 
 	/**
+	 * indique si ce bloc arrête les personnages.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
+	 */
+	@Override
+	public AiStopType hasStopHeroes()
+	{	return stopHeroes;
+	}
+	
+	/**
+	 * indique si ce bloc arrête les explosions.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
+	 */
+	@Override
+	public AiStopType hasStopFires()
+	{	return stopFires;
+	}
+	
+	/**
 	 * teste si cette bombe est capable de passer à travers les items
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
@@ -390,12 +397,13 @@ public class AiSimBomb extends AiSimSprite
 	 * 
 	 * @return	vrai si la bombe traverse les items
 	 */
+	@Override
 	public boolean hasThroughItems()
 	{	return throughItems;	
 	}
 
 	@Override
-	public boolean isCrossableBy(AiSimSprite sprite)
+	public boolean isCrossableBy(AiSprite sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
 		// si le sprite considéré est un personnage
@@ -443,7 +451,7 @@ public class AiSimBomb extends AiSimSprite
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	void finish()
+	protected void finish()
 	{	super.finish();
 	}
 }

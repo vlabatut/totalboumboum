@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.model;
+package org.totalboumboum.ai.v201011.adapter.data.actual;
 
 /*
  * Total Boum Boum
@@ -21,8 +21,8 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
+import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataSprite;
 
 /**
  * cette classe permet de simuler les sprites du jeu,
@@ -31,14 +31,14 @@ import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataSprite;
  * @author Vincent Labatut
  *
  */
-public abstract class AiSimSprite
+public abstract class AiSimSprite implements AiSprite
 {	
 	/**
 	 * crée une nouvelle simulation d'un sprite
 	 * 
 	 * @param tile	simulation de la case contenant le sprite
 	 */
-	public AiSimSprite(AiSimTile tile, double posX, double posY, double posZ)
+	protected AiSimSprite(AiSimTile tile, double posX, double posY, double posZ)
 	{	// general
 		this.tile = tile;
 		state = new AiSimState();
@@ -55,7 +55,7 @@ public abstract class AiSimSprite
 	 * @param sprite	sprite à simuler
 	 * @param tile	simulation de la case contenant le sprite
 	 */
-	AiSimSprite(AiDataSprite<?> sprite, AiSimTile tile)
+	protected AiSimSprite(AiSprite sprite, AiSimTile tile)
 	{	// general
 		this.tile = tile;
 		state = new AiSimState(sprite);
@@ -64,24 +64,6 @@ public abstract class AiSimSprite
 		this.posX = sprite.getPosX();
 		this.posY = sprite.getPosY();
 		this.posZ = sprite.getPosZ();
-	}
-
-	/**
-	 * construit une simulation du sprite passé en paramètre,
-	 * (donc une simple copie) et la place dans la case indiquée.
-	 * 
-	 * @param sprite	simulation à copier
-	 * @param tile	simulation de la case devant contenir la copie
-	 */
-	public AiSimSprite(AiSimSprite sprite, AiSimTile tile)
-	{	// general
-		this.tile = tile;
-		this.state = sprite.getState().copy();
-		
-		// location
-		this.posX = sprite.posX;
-		this.posY = sprite.posY;
-		this.posZ = sprite.posZ;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -96,6 +78,7 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	l'état du sprite
 	 */
+	@Override
 	public AiSimState getState()
 	{	return state;
 	}
@@ -104,6 +87,7 @@ public abstract class AiSimSprite
 	 * renvoie vrai si ce sprite a été éliminé du jeu
 	 * @return	vrai si le sprite n'est plus en jeu
 	 */
+	@Override
 	public boolean hasEnded()
 	{	return state.getName()==AiStateName.ENDED;	
 	}
@@ -117,6 +101,7 @@ public abstract class AiSimSprite
 	/** 
 	 * renvoie la simulation de la case contenant ce sprite 
 	 */
+	@Override
 	public AiSimTile getTile()
 	{	return tile;
 	}
@@ -126,6 +111,7 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	le numéro de la ligne du sprite
 	 */
+	@Override
 	public int getLine()
 	{	return tile.getLine();	
 	}
@@ -134,6 +120,7 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	le numéro de la colonne du sprite
 	 */
+	@Override
 	public int getCol()
 	{	return tile.getCol();	
 	}
@@ -153,6 +140,7 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	l'abscisse du sprite
 	 */
+	@Override
 	public double getPosX()
 	{	return posX;
 	}
@@ -162,6 +150,7 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	l'ordonnée du sprite
 	 */
+	@Override
 	public double getPosY()
 	{	return posY;
 	}
@@ -171,6 +160,7 @@ public abstract class AiSimSprite
 	 * 
 	 * @return	l'altitude du sprite
 	 */
+	@Override
 	public double getPosZ()
 	{	return posZ;
 	}
@@ -202,30 +192,17 @@ public abstract class AiSimSprite
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// ABILITIES		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	/**
-	 * Teste si le sprite passé en paramètre est capable de traverser
-	 * la case de ce sprite
-	 * 
-	 *  @param sprite	le sprite à tester
-	 *  @return	vrai si ce sprite le laisser passer par sa case 
-	 */
-	public abstract boolean isCrossableBy(AiSimSprite sprite);
-	
-	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * termine proprement ce sprite et libère les ressources qu'il occupait
 	 */
-	void finish()
+	protected void finish()
 	{	// state
 		state.finish();
 		state = null;
 		
 		// misc
 		tile = null;
-		
 	}
 }

@@ -237,6 +237,16 @@ public class AiSimTile implements AiTile
 	}
 	
 	/** 
+	 * renvoie la liste des blocks contenus dans cette case 
+	 * (la liste peut être vide)
+	 * 
+	 * @return	les blocks éventuellement contenus dans cette case
+	 */
+	protected List<AiSimBlock> getInternalBlocks()
+	{	return internalBlocks;	
+	}
+	
+	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
 	 * (la liste peut être vide)
 	 * 
@@ -245,6 +255,16 @@ public class AiSimTile implements AiTile
 	@Override
 	public List<AiBomb> getBombs()
 	{	return externalBombs;	
+	}
+	
+	/** 
+	 * renvoie la liste des bombes contenues dans cette case 
+	 * (la liste peut être vide)
+	 * 
+	 * @return	les bombes éventuellement contenues dans cette case
+	 */
+	protected List<AiSimBomb> getInternalBombs()
+	{	return internalBombs;	
 	}
 	
 	/** 
@@ -259,6 +279,16 @@ public class AiSimTile implements AiTile
 	}
 	
 	/** 
+	 * renvoie la liste des feux contenus dans cette case 
+	 * (la liste peut être vide)
+	 * 
+	 * @return	les feux éventuellement contenus dans cette case
+	 */
+	protected List<AiSimFire> getInternalFires()
+	{	return internalFires;	
+	}
+	
+	/** 
 	 * renvoie les sols de cette case 
 	 * (il y a forcément au moins un sol)
 	 * 
@@ -267,6 +297,16 @@ public class AiSimTile implements AiTile
 	@Override
 	public List<AiFloor> getFloors()
 	{	return externalFloors;	
+	}
+	
+	/** 
+	 * renvoie les sols de cette case 
+	 * (il y a forcément au moins un sol)
+	 * 
+	 * @return	les sols contenus dans cette case
+	 */
+	protected List<AiSimFloor> getInternalFloors()
+	{	return internalFloors;	
 	}
 	
 	/** 
@@ -281,6 +321,16 @@ public class AiSimTile implements AiTile
 	}
 	
 	/** 
+	 * renvoie la liste des personnages contenus dans cette case 
+	 * (la liste peut être vide)
+	 * 
+	 * @return	les personnages éventuellement contenus dans cette case
+	 */
+	protected List<AiSimHero> getInternalHeroes()
+	{	return internalHeroes;	
+	}
+	
+	/** 
 	 * renvoie la liste des items contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
@@ -289,6 +339,16 @@ public class AiSimTile implements AiTile
 	@Override
 	public List<AiItem> getItems()
 	{	return externalItems;	
+	}
+
+	/** 
+	 * renvoie la liste des items contenus dans cette case 
+	 * (la liste peut être vide)
+	 * 
+	 * @return	les items éventuellement contenus dans cette case
+	 */
+	protected List<AiSimItem> getInternalItems()
+	{	return internalItems;	
 	}
 
 	/////////////////////////////////////////////////////////////////

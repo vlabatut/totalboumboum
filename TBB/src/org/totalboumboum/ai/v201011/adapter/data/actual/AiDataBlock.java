@@ -116,7 +116,8 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	 * 
 	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
 	 */
-	protected AiStopType hasStopHeroes()
+	@Override
+	public AiStopType hasStopHeroes()
 	{	return stopHeroes;
 	}
 	
@@ -128,7 +129,8 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	 * 
 	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
 	 */
-	protected AiStopType hasStopFires()
+	@Override
+	public AiStopType hasStopFires()
 	{	return stopFires;
 	}
 	

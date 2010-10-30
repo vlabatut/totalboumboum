@@ -76,7 +76,8 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	 * 
 	 * @return	vrai si le feu traverse les murs
 	 */
-	protected boolean hasThroughBlocks()
+	@Override
+	public boolean hasThroughBlocks()
 	{	return throughBlocks;	
 	}
 
@@ -88,7 +89,8 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	 * 
 	 * @return	vrai si le feu traverse les bombes
 	 */
-	protected boolean hasThroughBombs()
+	@Override
+	public boolean hasThroughBombs()
 	{	return throughBombs;	
 	}
 
@@ -100,7 +102,8 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	 * 
 	 * @return	vrai si le feu traverse les items
 	 */
-	protected boolean hasThroughItems()
+	@Override
+	public boolean hasThroughItems()
 	{	return throughItems;
 	}
 

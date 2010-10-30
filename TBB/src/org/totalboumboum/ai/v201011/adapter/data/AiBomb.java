@@ -101,6 +101,16 @@ public interface AiBomb extends AiSprite
 	public int getRange();
 	
 	/**
+	 * indique si le feu émis par la bombe peut traverser les murs
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutôt getBlast().
+	 * 
+	 * @return	vrai si le feu peut traverser les murs
+	 */
+	public boolean isPenetrating();
+
+	/**
 	 * calcule une liste de cases correspondant au souffle de cette bombe,
 	 * i.e. toutes les cases qui seront atteinte quand elle va exploser
 	 * (y compris la case contenant la bombe elle-même). 
@@ -147,4 +157,37 @@ public interface AiBomb extends AiSprite
 	 * @return	temps exprimé en ms
 	 */
 	public long getTime();
+
+	/////////////////////////////////////////////////////////////////
+	// COLLISIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * indique si ce bloc arrête les personnages.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
+	 */
+	public AiStopType hasStopHeroes();
+	
+	/**
+	 * indique si ce bloc arrête les explosions.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
+	 */
+	public AiStopType hasStopFires();
+	
+	/**
+	 * teste si cette bombe est capable de passer à travers les items
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	vrai si la bombe traverse les items
+	 */
+	public boolean hasThroughItems();
 }

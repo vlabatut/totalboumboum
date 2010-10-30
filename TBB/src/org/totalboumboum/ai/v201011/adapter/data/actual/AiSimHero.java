@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.model;
+package org.totalboumboum.ai.v201011.adapter.data.actual;
 
 /*
  * Total Boum Boum
@@ -21,7 +21,8 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataHero;
+import org.totalboumboum.ai.v201011.adapter.data.AiHero;
+import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -31,7 +32,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-public class AiSimHero extends AiSimSprite
+public class AiSimHero extends AiSimSprite implements AiHero
 {
 	/**
 	 * crée une simulation du joueur passé en paramètre,
@@ -47,7 +48,7 @@ public class AiSimHero extends AiSimSprite
 	 * @param color	couleur du personnage
 	 * @param walkingSpeed	vitesse du personnage
 	 */
-	public AiSimHero(AiSimTile tile, double posX, double posY, double posZ,
+	protected AiSimHero(AiSimTile tile, double posX, double posY, double posZ,
 			int bombRange, int bombNumber, int bombCount,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
 			PredefinedColor color, double walkingSpeed)
@@ -75,7 +76,7 @@ public class AiSimHero extends AiSimSprite
 	 * @param tile	case contenant le sprite
 	 * @param sprite	sprite à simuler
 	 */
-	AiSimHero(AiDataHero sprite, AiSimTile tile)
+	protected AiSimHero(AiHero sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		// bombs
@@ -93,31 +94,6 @@ public class AiSimHero extends AiSimSprite
 		walkingSpeed = sprite.getWalkingSpeed();
 	}
 	
-	/**
-	 * construit une simulation du personnage passé en paramètre,
-	 * (donc une simple copie) et la place dans la case indiquée.
-	 * 
-	 * @param sprite	simulation à copier
-	 * @param tile	simulation de la case devant contenir la copie
-	 */
-	public AiSimHero(AiSimHero sprite, AiSimTile tile)
-	{	super(sprite,tile);
-		
-		// bombs
-		bombRange = sprite.bombRange;
-		bombNumber = sprite.bombNumber;
-		bombCount = sprite.bombCount;
-		
-		// collisions
-		throughBlocks = sprite.throughBlocks;
-		throughBombs = sprite.throughBombs;
-		throughFires = sprite.throughFires;
-		
-		// misc
-		color = sprite.color;
-		walkingSpeed = sprite.walkingSpeed;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAMETERS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -133,6 +109,7 @@ public class AiSimHero extends AiSimSprite
 	 * 
 	 * @return	la portée des bombes
 	 */
+	@Override
 	public int getBombRange()
 	{	return bombRange;
 	}
@@ -145,6 +122,7 @@ public class AiSimHero extends AiSimSprite
 	 * 
 	 * @return	le nombre de bombes simultanément posables (en général)
 	 */
+	@Override
 	public int getBombNumber()
 	{	return bombNumber;
 	}
@@ -155,6 +133,7 @@ public class AiSimHero extends AiSimSprite
 	 * 
 	 * @return	nombre de bombes posées
 	 */
+	@Override
 	public int getBombCount()
 	{	return bombCount;
 	}
@@ -170,6 +149,7 @@ public class AiSimHero extends AiSimSprite
 	 * 
 	 * @return un symbole de type PredefinedColor représentant une couleur
 	 */
+	@Override
 	public PredefinedColor getColor()
 	{	return color;	
 	}
@@ -188,6 +168,7 @@ public class AiSimHero extends AiSimSprite
 	 * 
 	 * @return	la vitesse de déplacement de ce personnage
 	 */
+	@Override
 	public double getWalkingSpeed()
 	{	return walkingSpeed;	
 	}
@@ -203,37 +184,46 @@ public class AiSimHero extends AiSimSprite
 	private boolean throughFires;
 	
 	/**
-	 * teste si ce personnage est capable de passer
-	 * à travers les (certains) murs
+	 * teste si ce personnage est capable de passer à travers les (certains) murs
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	vrai si le personnage traverse les murs
 	 */
+	@Override
 	public boolean hasThroughBlocks()
 	{	return throughBlocks;	
 	}
 
 	/**
-	 * teste si ce personnage est capable de passer
-	 * à travers les bombes
+	 * teste si ce personnage est capable de passer à travers les bombes
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	vrai si le personnage traverse les bombes
 	 */
+	@Override
 	public boolean hasThroughBombs()
 	{	return throughBombs;	
 	}
 
 	/**
-	 * teste si ce personnage est capable de passer
-	 * à travers le feu sans brûler
+	 * teste si ce personnage est capable de passer à travers le feu sans brûler
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	vrai si le personnage résiste au feu
 	 */
+	@Override
 	public boolean hasThroughFires()
 	{	return throughFires;	
 	}
 
 	@Override
-	public boolean isCrossableBy(AiSimSprite sprite)
+	public boolean isCrossableBy(AiSprite sprite)
 	{	boolean result = false;
 		if(sprite instanceof AiSimFire)
 			result = true;
@@ -244,6 +234,49 @@ public class AiSimHero extends AiSimSprite
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// RANKS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Renvoie le classement de ce joueur, pour la manche en cours.
+	 * Ce classement est susceptible d'évoluer d'ici la fin de la manche actuellement jouée, 
+	 * par exemple si ce joueur est éliminé.
+	 * 
+	 * @return	le classement de ce joueur dans la manche en cours
+	 */
+	@Override
+	public int getRoundRank()
+	{	AiSimZone zone = getTile().getZone();
+		int result = zone.getRoundRank(this);
+		return result;
+	}
+	
+	/**
+	 * Renvoie le classement de ce joueur, pour la rencontre en cours.
+	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
+	 * 
+	 * @return	le classement de ce joueur dans la rencontre en cours
+	 */
+	@Override
+	public int getMatchRank()
+	{	AiSimZone zone = getTile().getZone();
+		int result = zone.getMatchRank(this);
+		return result;
+	}
+	
+	/**
+	 * Renvoie le classement de ce joueur, dans le classement général du jeu (Glicko-2)
+	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
+	 * 
+	 * @return	le classement général (Glicko-2) de ce joueur
+	 */
+	@Override
+	public int getStatsRank()
+	{	AiSimZone zone = getTile().getZone();
+		int result = zone.getStatsRank(this);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -264,7 +297,7 @@ public class AiSimHero extends AiSimSprite
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	void finish()
+	protected void finish()
 	{	super.finish();
 	}
 }
