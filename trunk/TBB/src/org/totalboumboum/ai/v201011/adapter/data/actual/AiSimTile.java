@@ -22,7 +22,6 @@ package org.totalboumboum.ai.v201011.adapter.data.actual;
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,68 +33,97 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
-import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.engine.content.feature.gesture.GestureName;
-import org.totalboumboum.engine.content.sprite.block.Block;
-import org.totalboumboum.engine.content.sprite.bomb.Bomb;
-import org.totalboumboum.engine.content.sprite.fire.Fire;
-import org.totalboumboum.engine.content.sprite.floor.Floor;
-import org.totalboumboum.engine.content.sprite.hero.Hero;
-import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
- * représente une case du jeu, avec tous les sprites qu'elle contient.
+ * simule une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
  *
  */
-final class AiDataTile implements AiTile
+public class AiSimTile implements AiTile
 {	
 	/**
-	 * construit une représentation de la case passée en paramètre
-	 * @param tile	case représentée
-	 * @param zone	zone contenant la représentation
+	 * construit une simulation de case à partir des coordonnées passées en paramètres
+	 * 
+	 * @param zone	zone contenant la simulation
+	 * @param line	ligne de la case
+	 * @param col	colonne de la case
+	 * @param posX	abscisse de la case
+	 * @param posY	ordonnée de la case
 	 */
-	protected AiDataTile(Tile tile, AiDataZone zone)
+	protected AiSimTile(AiSimZone zone, int line, int col, double posX, double posY)
 	{	this.zone = zone;
-		this.tile = tile;
+
 		size = RoundVariables.scaledTileDimension;
-		initTileLocation();
-		initPixelLocation();
-		updateSprites();
+
+		// location
+		this.line = line;
+		this.col = col;
+		this.posX = posX;
+		this.posY = posY;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// PROCESS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+
 	/**
-	 * met à jour cette case et son contenu
+	 * construit une simulation de la case passée en paramètre
+	 * 
+	 * @param tile	case simulée
+	 * @param zone	zone contenant la simulation
 	 */
-	protected void update()
-	{	updateSprites();		
+	protected AiSimTile(AiTile tile, AiSimZone zone)
+	{	this.zone = zone;
+
+		size = RoundVariables.scaledTileDimension;
+
+		// location
+		line = tile.getLine();
+		col = tile.getCol();
+		posX = tile.getPosX();
+		posY = tile.getPosY();
+		
+		// sprites
+		for(AiBlock s1: tile.getBlocks())
+		{	AiSimBlock s2 = new AiSimBlock(s1,this);
+			internalBlocks.add(s2);
+			externalBlocks.add(s2);
+		}
+		for(AiBomb s1: tile.getBombs())
+		{	AiSimBomb s2 = new AiSimBomb(s1,this);
+			internalBombs.add(s2);
+			externalBombs.add(s2);
+		}
+		for(AiFire s1: tile.getFires())
+		{	AiSimFire s2 = new AiSimFire(s1,this);
+			internalFires.add(s2);
+			externalFires.add(s2);
+		}
+		for(AiFloor s1: tile.getFloors())
+		{	AiSimFloor s2 = new AiSimFloor(s1,this);
+			internalFloors.add(s2);
+			externalFloors.add(s2);
+		}
+		for(AiHero s1: tile.getHeroes())
+		{	AiSimHero s2 = new AiSimHero(s1,this);
+			internalHeroes.add(s2);
+			externalHeroes.add(s2);
+		}
+		for(AiItem s1: tile.getItems())
+		{	AiSimItem s2 = new AiSimItem(s1,this);
+			internalItems.add(s2);
+			externalItems.add(s2);
+		}
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** représentation de la zone à laquelle cette case appartient */
-	private AiDataZone zone;
+	/** simulation de la zone à laquelle cette case appartient */
+	private AiSimZone zone;
 	
 	@Override
-	public AiDataZone getZone()
+	public AiSimZone getZone()
 	{	return zone;	
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// ENGINE TILE		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** case du jeu que cette classe représente */
-	private Tile tile;
-	
-	protected Tile getTile()
-	{	return tile;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -115,7 +143,6 @@ final class AiDataTile implements AiTile
 	public int getLine()
 	{	return line;	
 	}
-	
 	/** 
 	 * renvoie le numéro de la colonne contenant cette case
 	 *  
@@ -124,14 +151,6 @@ final class AiDataTile implements AiTile
 	@Override
 	public int getCol()
 	{	return col;	
-	}
-	
-	/** 
-	 * initialise les numéros de ligne et colonne de cette case 
-	 */
-	private void initTileLocation()
-	{	line = tile.getLine();
-		col = tile.getCol();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -162,14 +181,6 @@ final class AiDataTile implements AiTile
 	{	return posY;	
 	}
 	
-	/** 
-	 * initialise la position de cette case en pixels 
-	 */
-	private void initPixelLocation()
-	{	posX = tile.getPosX();
-		posY = tile.getPosY();
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// TILE SIZE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -190,27 +201,27 @@ final class AiDataTile implements AiTile
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste à usage interne des blocks éventuellement contenus dans cette case */
-	private final List<AiDataBlock> internalBlocks = new ArrayList<AiDataBlock>();
+	private final List<AiSimBlock> internalBlocks = new ArrayList<AiSimBlock>();
 	/** liste à usage externe des blocks éventuellement contenus dans cette case */
 	private final List<AiBlock> externalBlocks = new ArrayList<AiBlock>();
 	/** liste à usage interne des bombes éventuellement contenues dans cette case */
-	private final List<AiDataBomb> internalBombs = new ArrayList<AiDataBomb>();
+	private final List<AiSimBomb> internalBombs = new ArrayList<AiSimBomb>();
 	/** liste à usage externe des bombes éventuellement contenues dans cette case */
 	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
 	/** liste à usage interne des feux éventuellement contenus dans cette case */
-	private final List<AiDataFire> internalFires = new ArrayList<AiDataFire>();
+	private final List<AiSimFire> internalFires = new ArrayList<AiSimFire>();
 	/** liste à usage externe des feux éventuellement contenus dans cette case */
 	private final List<AiFire> externalFires = new ArrayList<AiFire>();
 	/** liste à usage interne des sols éventuellement contenus dans cette case */
-	private final List<AiDataFloor> internalFloors = new ArrayList<AiDataFloor>();
+	private final List<AiSimFloor> internalFloors = new ArrayList<AiSimFloor>();
 	/** liste à usage externe des sols éventuellement contenus dans cette case */
 	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
 	/** liste à usage interne des personnages éventuellement contenus dans cette case */
-	private final List<AiDataHero> internalHeroes = new ArrayList<AiDataHero>();
+	private final List<AiSimHero> internalHeroes = new ArrayList<AiSimHero>();
 	/** liste à usage externe des personnages éventuellement contenus dans cette case */
 	private final List<AiHero> externalHeroes = new ArrayList<AiHero>();
 	/** liste à usage interne des items éventuellement contenus dans cette case */
-	private final List<AiDataItem> internalItems = new ArrayList<AiDataItem>();
+	private final List<AiSimItem> internalItems = new ArrayList<AiSimItem>();
 	/** liste à usage externe des items éventuellement contenus dans cette case */
 	private final List<AiItem> externalItems = new ArrayList<AiItem>();
 
@@ -279,138 +290,6 @@ final class AiDataTile implements AiTile
 	public List<AiItem> getItems()
 	{	return externalItems;	
 	}
-	
-	/** 
-	 * met à jour les représentations des sprites contenus dans cette case
-	 */
-	private void updateSprites()
-	{	// block
-		{	internalBlocks.clear();
-			externalBlocks.clear();
-			Iterator<Block> it = tile.getBlocks().iterator();
-			while(it.hasNext())
-			{	Block b = it.next();
-				GestureName gesture = b.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE
-					|| gesture==GestureName.HIDING
-					|| gesture==GestureName.ENDED))
-				{	AiDataBlock block = zone.getBlock(b);
-					if(block==null)
-					{	block = new AiDataBlock(this,b);
-						zone.addBlock(block);
-					}
-					block.update(this);
-					internalBlocks.add(block);
-				}
-			}
-		}
-		// bombs
-		{	internalBombs.clear();
-			externalBombs.clear();
-			Iterator<Bomb> it = tile.getBombs().iterator();
-			while(it.hasNext())
-			{	Bomb b = it.next();
-				GestureName gesture = b.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE
-					|| gesture==GestureName.HIDING
-					|| gesture==GestureName.ENDED))
-				{	AiDataBomb bomb = zone.getBomb(b);
-					if(bomb==null)
-					{	bomb = new AiDataBomb(this,b);
-						zone.addBomb(bomb);
-					}
-					bomb.update(this);
-					internalBombs.add(bomb);
-				}
-			}
-		}
-		// fires
-		{	internalFires.clear();
-			externalFires.clear();
-			Iterator<Fire> it = tile.getFires().iterator();
-			while(it.hasNext())
-			{	Fire f = it.next();
-				GestureName gesture = f.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE
-					|| gesture==GestureName.HIDING
-					|| gesture==GestureName.ENDED))
-				{	AiDataFire fire = zone.getFire(f);
-					if(fire==null)
-					{	fire = new AiDataFire(this,f);
-						zone.addFire(fire);
-					}
-					fire.update(this);
-					internalFires.add(fire);
-					externalFires.add(fire);
-				}
-			}
-		}
-		// floor
-		{	internalFloors.clear();
-			externalFloors.clear();
-			Iterator<Floor> it = tile.getFloors().iterator();
-			while(it.hasNext())
-			{	Floor f = it.next();
-				GestureName gesture = f.getCurrentGesture().getName();
-				if(!(gesture==GestureName.HIDING 
-					|| gesture==GestureName.ENDED))
-				{	AiDataFloor floor = zone.getFloor(f);
-					if(floor==null)
-					{	floor = new AiDataFloor(this,f);
-						zone.addFloor(floor);
-					}
-					floor.update(this);
-					internalFloors.add(floor);
-					externalFloors.add(floor);
-				}
-			}
-		}
-		// heroes
-		{	internalHeroes.clear();
-			externalHeroes.clear();
-			Iterator<Hero> it = tile.getHeroes().iterator();
-			while(it.hasNext())
-			{	Hero h = it.next();
-				GestureName gesture = h.getCurrentGesture().getName();
-				if(!(gesture==GestureName.HIDING 
-					|| gesture==GestureName.ENDED))
-				{	AiDataHero hero = zone.getHero(h);
-					if(hero==null)
-					{	hero = new AiDataHero(this,h);
-						zone.addHero(hero);
-					}
-					hero.update(this);
-					internalHeroes.add(hero);
-					externalHeroes.add(hero);
-				}
-			}
-		}
-		// item
-		{	internalItems.clear();
-			externalItems.clear();
-			Iterator<Item> it = tile.getItems().iterator();
-			while(it.hasNext())
-			{	Item i = it.next();
-				GestureName gesture = i.getCurrentGesture().getName();
-				if(gesture==GestureName.NONE)
-				{	int hiddenItemsCount = zone.getHiddenItemsCount();
-					hiddenItemsCount++;
-					zone.setHiddenItemsCount(hiddenItemsCount);
-				}
-				else if(!(gesture==GestureName.HIDING
-					|| gesture==GestureName.ENDED))
-				{	AiDataItem item = zone.getItem(i);
-					if(item==null)
-					{	item = new AiDataItem(this,i);
-						zone.addItem(item);
-					}
-					item.update(this);
-					internalItems.add(item);
-					externalItems.add(item);
-				}
-			}
-		}
-	}
 
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES		/////////////////////////////////////////////
@@ -476,32 +355,13 @@ final class AiDataTile implements AiTile
 	/////////////////////////////////////////////////////////////////
 	// NEIGHBORS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** voisins de cette case dans les quatre directions principales */
-	private final HashMap<Direction,AiDataTile> neighbors = new HashMap<Direction, AiDataTile>();
-	
-	/**
-	 * initialise une fois pour toutes les voisins de la case,
-	 * pour ne pas avoir à les recalculer à chaque appel de la méthode
-	 * getNeighbors.
-	 */
-	protected void initNeighbors()
-	{	List<Direction> directions = Direction.getPrimaryValues();
-		for(Direction direction: directions)
-		{	Tile neighbor = tile.getNeighbor(direction);
-			int line = neighbor.getLine();
-			int col = neighbor.getCol();
-			AiDataTile aiNeighbor = getZone().getTile(line,col);
-			neighbors.put(direction,aiNeighbor);
-		}
-	}
 	
 	/**
 	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
-	 * passée en paramètre. 
-	 * <b>ATTENTION :</b> seulement les directions primaires sont
+	 * passée en paramètre. Attention, seulement les directions primaires sont
 	 * utilisées (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
 	 * Dans le cas contraire, la fonction renvoie null.</br>
-	 * <b>ATTENTION :</b> les niveaux sont circulaires, ce qui signifie que le voisin
+	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
@@ -511,15 +371,16 @@ final class AiDataTile implements AiTile
 	 * @return	le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
 	 */
 	@Override
-	public AiDataTile getNeighbor(Direction direction)
-	{	return neighbors.get(direction);		
+	public AiSimTile getNeighbor(Direction direction)
+	{	AiSimTile result = zone.getNeighborTile(line,col,direction);
+		return result;		
 	}
 	
 	/**
 	 * renvoie la liste des voisins de cette case.
 	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.</br>
 	 * 
-	 * <b>ATTENTION :</b>les niveaux sont circulaires, ce qui signifie que le voisin
+	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
@@ -531,7 +392,7 @@ final class AiDataTile implements AiTile
 	public List<AiTile> getNeighbors()
 	{	List<AiTile> result = new ArrayList<AiTile>();
 		for(Direction direction: Direction.getPrimaryValues())
-			result.add(neighbors.get(direction));
+			result.add(getNeighbor(direction));
 		return result;
 	}
 
@@ -541,7 +402,7 @@ final class AiDataTile implements AiTile
 	@Override
 	public boolean equals(Object o)
 	{	boolean result = false;
-		if(o instanceof AiDataTile)
+		if(o instanceof AiSimTile)
 		{	
 //			AiTile t = (AiTile)o;	
 //			result = tile==t.tile && zone==t.zone;
@@ -563,7 +424,7 @@ final class AiDataTile implements AiTile
 	/**
 	 * termine proprement cette case
 	 */
-	void finish()
+	protected void finish()
 	{	// block
 		finishSprites(internalBlocks,externalBlocks);
 		// bombs
@@ -584,7 +445,7 @@ final class AiDataTile implements AiTile
 	 * @param <T>	type de simulation
 	 * @param internalList	liste de simulations
 	 */
-	private <T extends AiDataSprite<?>, U extends AiSprite> void finishSprites(List<T> internalList, List<U> externalList)
+	private <T extends AiSimSprite, U extends AiSprite> void finishSprites(List<T> internalList, List<U> externalList)
 	{	Iterator<T> it = internalList.iterator();
 		while(it.hasNext())
 		{	T temp = it.next();
