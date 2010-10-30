@@ -41,4 +41,27 @@ public interface AiItem extends AiSprite
 	 * @return	le type de l'item
 	 */
 	public AiItemType getType();
+
+	/////////////////////////////////////////////////////////////////
+	// COLLISIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * indique si cet item arrête les explosions.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si cet item arrête le feu
+	 */
+	public AiStopType hasStopFires();
+
+	/**
+	 * indique si cet item arrête les bombes.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si cet item arrête les bombes
+	 */
+	public AiStopType hasStopBombs();
 }

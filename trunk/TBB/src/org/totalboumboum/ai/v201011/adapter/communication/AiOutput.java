@@ -26,8 +26,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataTile;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataZone;
+import org.totalboumboum.ai.v201011.adapter.data.AiTile;
+import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
@@ -37,7 +37,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  */
 public class AiOutput
 {
-	public AiOutput(AiDataZone zone)
+	public AiOutput(AiZone zone)
 	{	this.zone = zone;
 		tileColors = new Color[zone.getHeight()][zone.getWidth()];
 		tileTexts = new String[zone.getHeight()][zone.getWidth()];
@@ -55,7 +55,7 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private AiDataZone zone;
+	private AiZone zone;
 		
 	/////////////////////////////////////////////////////////////////
 	// PATHS			/////////////////////////////////////////////
@@ -132,7 +132,7 @@ public class AiOutput
 	 * @param tile	case à colorier
 	 * @param color	couleur du coloriage
 	 */
-	public void setTileColor(AiDataTile tile, Color color)
+	public void setTileColor(AiTile tile, Color color)
 	{	int line = tile.getLine();
 		int col = tile.getCol();
 		setTileColor(line,col,color);		
@@ -183,7 +183,7 @@ public class AiOutput
 	 * @param tile	case associée au texte
 	 * @param text	texte à afficher sur cette case
 	 */
-	public void setTileText(AiDataTile tile, String text)
+	public void setTileText(AiTile tile, String text)
 	{	int line = tile.getLine();
 		int col = tile.getCol();
 		setTileText(line,col,text);

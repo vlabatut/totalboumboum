@@ -114,7 +114,8 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	 * 
 	 * @return	une valeur AiStopType indiquant si cet item arrête le feu
 	 */
-	protected AiStopType hasStopFires()
+	@Override
+	public AiStopType hasStopFires()
 	{	return stopFires;
 	}
 
@@ -126,7 +127,8 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	 * 
 	 * @return	une valeur AiStopType indiquant si cet item arrête les bombes
 	 */
-	protected AiStopType hasStopBombs()
+	@Override
+	public AiStopType hasStopBombs()
 	{	return stopBombs;
 	}
 

@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.model;
+package org.totalboumboum.ai.v201011.adapter.data.actual;
 
 /*
  * Total Boum Boum
@@ -21,8 +21,9 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
+import org.totalboumboum.ai.v201011.adapter.data.AiBlock;
+import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
-import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataBlock;
 
 /**
  * Simule un bloc du jeu, c'est à dire généralement un mur
@@ -31,7 +32,7 @@ import org.totalboumboum.ai.v201011.adapter.data.actual.AiDataBlock;
  * @author Vincent Labatut
  *
  */
-public class AiSimBlock extends AiSimSprite
+public class AiSimBlock extends AiSimSprite implements AiBlock
 {
 	/**
 	 * crée une simulation du bloc passé en paramètre,
@@ -42,7 +43,7 @@ public class AiSimBlock extends AiSimSprite
 	 * @param stopHeroes	indique si le bloc constitue un obstacle aux personnages
 	 * @param stopFire	indique si le bloc constitue un obstacle au feu
 	 */
-	public AiSimBlock(AiSimTile tile, double posX, double posY, double posZ,
+	protected AiSimBlock(AiSimTile tile, double posX, double posY, double posZ,
 			boolean destructible, AiStopType stopHeroes, AiStopType stopFires)
 	{	super(tile,posX,posY,posZ);
 		
@@ -58,28 +59,13 @@ public class AiSimBlock extends AiSimSprite
 	 * @param sprite	sprite à simuler
 	 * @param tile	case contenant le sprite
 	 */
-	AiSimBlock(AiDataBlock sprite, AiSimTile tile)
+	protected AiSimBlock(AiBlock sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		this.destructible = sprite.isDestructible();
 		this.stopHeroes = sprite.hasStopHeroes();
 		this.stopFires = sprite.hasStopFires();
 	}	
-	
-	/**
-	 * construit une simulation du bloc passé en paramètre,
-	 * (donc une simple copie) et la place dans la case indiquée.
-	 * 
-	 * @param sprite	simulation à copier
-	 * @param tile	simulation de la case devant contenir la copie
-	 */
-	public AiSimBlock(AiSimBlock sprite, AiSimTile tile)
-	{	super(sprite,tile);
-		
-		destructible = sprite.destructible;
-		stopHeroes = sprite.stopHeroes;
-		stopFires = sprite.stopFires;
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
@@ -92,6 +78,7 @@ public class AiSimBlock extends AiSimSprite
 	 * 
 	 * @return	l'indicateur de destructibilité du mur
 	 */
+	@Override
 	public boolean isDestructible()
 	{	return destructible;		
 	}
@@ -113,8 +100,34 @@ public class AiSimBlock extends AiSimSprite
 	/** indique si ce bloc laisse passer le feu */
 	private AiStopType stopFires;
 	
+	/**
+	 * indique si ce bloc arrête les personnages.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
+	 */
 	@Override
-	public boolean isCrossableBy(AiSimSprite sprite)
+	public AiStopType hasStopHeroes()
+	{	return stopHeroes;
+	}
+	
+	/**
+	 * indique si ce bloc arrête les explosions.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * utilisez plutot isCrossableBy().
+	 * 
+	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
+	 */
+	@Override
+	public AiStopType hasStopFires()
+	{	return stopFires;
+	}
+
+	@Override
+	public boolean isCrossableBy(AiSprite sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
 		// si le sprite considéré est un personnage
@@ -159,7 +172,7 @@ public class AiSimBlock extends AiSimSprite
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	void finish()
+	protected void finish()
 	{	super.finish();
 	}
 }

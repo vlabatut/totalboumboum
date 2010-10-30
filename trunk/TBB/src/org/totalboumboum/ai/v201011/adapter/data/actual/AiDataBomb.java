@@ -249,7 +249,8 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	 * 
 	 * @return	vrai si le feu peut traverser les murs
 	 */
-	protected boolean isPenetrating()
+	@Override
+	public boolean isPenetrating()
 	{	return penetrating;	
 	}
 	
@@ -408,7 +409,8 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	 * 
 	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
 	 */
-	protected AiStopType hasStopHeroes()
+	@Override
+	public AiStopType hasStopHeroes()
 	{	return stopHeroes;
 	}
 	
@@ -420,7 +422,8 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	 * 
 	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
 	 */
-	protected AiStopType hasStopFires()
+	@Override
+	public AiStopType hasStopFires()
 	{	return stopFires;
 	}
 	
@@ -432,7 +435,8 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	 * 
 	 * @return	vrai si la bombe traverse les items
 	 */
-	protected boolean hasThroughItems()
+	@Override
+	public boolean hasThroughItems()
 	{	return throughItems;	
 	}
 
