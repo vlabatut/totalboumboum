@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.data.representation;
+package org.totalboumboum.ai.v201011.adapter.data.internal;
 
 /*
  * Total Boum Boum
