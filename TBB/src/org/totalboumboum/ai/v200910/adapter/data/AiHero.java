@@ -178,7 +178,7 @@ public class AiHero extends AiSprite<Hero>
 	 */
 	private void updateWalkingSpeed()
 	{	Sprite sprite = getSprite();
-		double speedCoeff = sprite.getSpeedCoeff();
+		double speedCoeff = sprite.getCurrentSpeedCoeff();
 		Gesture walking = getSprite().getGesturePack().getGesture(GestureName.WALKING);
 		double basicSpeed = walking.getTrajectoryDirection(Direction.RIGHT).getXInteraction();
 		walkingSpeed = speedCoeff*basicSpeed;

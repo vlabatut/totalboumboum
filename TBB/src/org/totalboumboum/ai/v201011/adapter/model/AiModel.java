@@ -31,6 +31,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiState;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
+import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.game.round.RoundVariables;
@@ -43,6 +44,21 @@ import org.totalboumboum.tools.calculus.CalculusTools;
  */
 public class AiModel
 {	
+	public AiModel()
+	{	considerBombDisappearance = false;
+		
+	}
+	
+	public AiModel(boolean considerBombDisappearance)
+	{	this.considerBombDisappearance = considerBombDisappearance;
+		
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SETTINGS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean considerBombDisappearance;
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -58,15 +74,17 @@ public class AiModel
 		sprites.addAll(current.getRemainingHeroes());
 		sprites.addAll(current.getItems());
 		
-		// list their incoming state : new (specified) or same than before
+		// list their incoming state : new (specified) or same than before,
+		// also process the minimal time needed for a sprite state change
 		HashMap<AiSprite,AiState> statesMap = new HashMap<AiSprite, AiState>();
 		for(AiSprite sprite: sprites)
 		{	AiState state = specifiedStates.get(sprite);
 			if(state==null)
-				state = sprite.getState();
+				state = processNewState(current,sprite);
 			if(state.getName()!=AiStateName.ENDED && state.getName()!=AiStateName.STANDING)
 			{	statesMap.put(sprite,state);
 				long changeTime = processChangeTime(current,sprite,state);
+				
 			}
 		}
 		
@@ -85,30 +103,95 @@ public class AiModel
 		return result;
 	}
 	
-	private long processChangeTime(AiZone current, AiSprite sprite, AiState state)
-	{	long result = Long.MAX_VALUE;
-		
-		AiStateName name = state.getName();
-		if(name==AiStateName.BURNING)
-		{	if(sprite instanceof AiBomb)
-				
+	private AiState processNewState(AiZone current, AiSprite sprite)
+	{	AiStateName name;
+		Direction direction;
+		long time;
+	
+		// sprite might have to disappear (block, bomb, fire, hero, item) after finishing burning
+		if()
+		{
 			
 		}
-		// equivalent gesture: BURNING
-		/** le sprite est en train de brûler */
-		BURNING,
-		// equivalent gesture: ENDED
-		/** le sprite n'est plus en jeu */
-		ENDED,
-		// equivalent gesture: BOUNCING, JUMPING, LANDING, PUNCHED
-		/** le sprite est en l'air (en train de sauter ou de rebondir sur les murs) */
-		FLYING,
-		// equivalent gesture: APPEARING, CRYING, ENTERING, EXULTING, OSCILLATING, OSCILLATING_FAILING, PREPARED, PUNCHING, STANDING, STANDING_FAILING, WAITING
-		/** le sprite ne fait rien ou bien réalise une action qui ne nécessite pas de déplacement */ 
-		STANDING,
-		// equivalent gesture: PUSHING, SLIDING, SLIDING_FAILING, WALKING
-		/** le sprite se déplace sur le sol */
-		MOVING;
+		// a bomb might have to explode
+		else if(sprite instanceof AiBomb)
+		{	
+			
+		}
+		// otherwise, we just keep on going with the same state
+		else
+		{	AiState temp = sprite.getState();
+			name = temp.getName();
+			direction = temp.getDirection();
+			time = temp.getTime();
+		}
+		
+		AiState result = new AiSimState(name,direction,time);
+		return result;
+	}
+	
+	/**
+	 * calcule combien de temps il va falloir au sprite spécifié pour sortir
+	 * de l'état qui lui a été assigné. si le sprite brule, il s'agit de savoir pendant
+	 * combien de temps encore. s'il se déplace, il s'agit de savoir combien de
+	 * temps il va lui falloir pour changer de case. s'il ne fait rien, il n'y a
+	 * pas de limite particulière à son activité.
+	 * 
+	 * @param current	la zone courante
+	 * @param sprite	le sprite à traiter
+	 * @param state	le nouvel état de ce sprite
+	 * @return	la durée pendant laquelle le sprite va rester à cet état
+	 */
+	private long processChangeTime(AiZone current, AiSprite sprite, AiState state)
+	{	long result = Long.MAX_VALUE;
+		AiStateName name = state.getName();
+		AiState state0 = sprite.getState();
+		AiStateName name0 = state0.getName();
+		
+		// sprite burns: how long before it finishes burning?
+		if(name==AiStateName.BURNING)
+		{	long burningDuration = sprite.getBurningDuration();
+			// the sprite was already burning before
+			if(name0==name)
+			{	long elapsedTime = state0.getTime();
+				result = burningDuration - elapsedTime;
+			}
+			// the sprite starts burning now
+			else
+				result = burningDuration;
+		}
+		
+		// sprite ended : should not be considered anymore
+		else if(name==AiStateName.ENDED)
+		{	result = Long.MAX_VALUE;
+		}
+
+		// sprite moves (on the ground or in the air): how long before it reaches the next tile
+		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
+		{	Direction direction = state.getDirection();
+			if(direction==Direction.NONE)
+				result = Long.MAX_VALUE;
+			else
+			{	AiTile tile = sprite.getTile();
+				double pos = 0;
+				double goal = 0;
+				if(direction.isHorizontal())
+				{	pos = sprite.getPosX();
+					goal = tile.getPosX();
+				}
+				else if(direction.isVertical())
+				{	pos = sprite.getPosY();
+					goal = tile.getPosY();
+				}
+				double dist = Math.abs(pos-goal);
+				result = (long)(dist/sprite.getCurrentSpeed());
+			}
+		}
+		
+		// sprites justs stands doing nothing special
+		else if(name==AiStateName.STANDING)
+		{	result = Long.MAX_VALUE;
+		}
 	
 		return result;
 	}

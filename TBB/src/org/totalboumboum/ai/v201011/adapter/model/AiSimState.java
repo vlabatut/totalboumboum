@@ -49,6 +49,20 @@ public final class AiSimState  implements AiState
 	}
 
 	/**
+	 * construit un objet simulant l'état d'un sprite qui vient d'être créé,
+	 * en utilisant les valeurs passées en paramètres
+	 * 
+	 * @param name	nom de l'état
+	 * @param direction	direction de l'action
+	 * @param time	durée courante de l'état
+	 */
+	protected AiSimState(AiStateName name, Direction direction, long time)
+	{	this.name = name;
+		this.direction = direction;
+		this.time = time;
+	}
+
+	/**
 	 * construit un objet simulant l'état du sprite passé en paramètre
 	 * 
 	 * @param sprite	sprite dont on veut simuler l'état

@@ -52,7 +52,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	{	super(tile,sprite);
 		initColor();
 		updateBombParam();
-		updateWalkingSpeed();
+		updateSpeed();
 		updateCollisions();
 	}
 	
@@ -63,7 +63,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	protected void update(AiDataTile tile, long elapsedTime)
 	{	super.update(tile,elapsedTime);
 		updateBombParam();
-		updateWalkingSpeed();
+		updateSpeed();
 		updateCollisions();
 	}
 
@@ -157,9 +157,13 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/**
 	 * met à jour la vitesses de déplacement de ce personnage 
 	 */
-	private void updateWalkingSpeed()
-	{	Sprite sprite = getSprite();
-		double speedCoeff = sprite.getSpeedCoeff();
+	protected void updateSpeed()
+	{	// current speed
+		super.updateSpeed();
+	
+		// walking speed (in general)
+		Sprite sprite = getSprite();
+		double speedCoeff = sprite.getGroundSpeedCoeff()[0];
 		Gesture walking = getSprite().getGesturePack().getGesture(GestureName.WALKING);
 		double basicSpeed = walking.getTrajectoryDirection(Direction.RIGHT).getXInteraction();
 		walkingSpeed = speedCoeff*basicSpeed;
