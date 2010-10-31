@@ -78,12 +78,15 @@ public class AiModel
 		// also process the minimal time needed for a sprite state change
 		HashMap<AiSprite,AiState> statesMap = new HashMap<AiSprite, AiState>();
 		for(AiSprite sprite: sprites)
-		{	AiState state = specifiedStates.get(sprite);
+		{	// get a specified new state for this sprite
+			AiState state = specifiedStates.get(sprite);
+			// or get an automatically processed one if no specified state is available
 			if(state==null)
-				state = processNewState(current,sprite);
+				state = processNewState(sprite);
+			// then process the time remaining before the next state change
 			if(state.getName()!=AiStateName.ENDED && state.getName()!=AiStateName.STANDING)
 			{	statesMap.put(sprite,state);
-				long changeTime = processChangeTime(current,sprite,state);
+				long changeTime = processChangeTime(sprite,state);
 				
 			}
 		}
@@ -103,27 +106,45 @@ public class AiModel
 		return result;
 	}
 	
-	private AiState processNewState(AiZone current, AiSprite sprite)
-	{	AiStateName name;
-		Direction direction;
-		long time;
-	
+	/**
+	 * calcule le nouvel état du sprite passé en paramètre,
+	 * quand aucun état n'a été explicitement spécifié pour lui.
+	 * 
+	 * @param sprite	le sprite à traiter
+	 * @return	son nouvel état
+	 */
+	private AiState processNewState(AiSprite sprite)
+	{	// previous state
+		AiState state0 = sprite.getState();
+		long time0 = state0.getTime();
+		AiStateName name0 = state0.getName();
+		Direction direction0 = state0.getDirection();
+		// result
+		AiStateName name = name0;
+		Direction direction = direction0;
+		long time = time0;
+		
 		// sprite might have to disappear (block, bomb, fire, hero, item) after finishing burning
-		if()
-		{
-			
+		if(name0==AiStateName.BURNING)
+		{	long burningDuration = sprite.getBurningDuration();
+			if(time0>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
+			{	name = AiStateName.ENDED;
+				direction = Direction.NONE;
+				time = 0;
+			}
 		}
+		
 		// a bomb might have to explode
 		else if(sprite instanceof AiBomb)
-		{	
-			
-		}
-		// otherwise, we just keep on going with the same state
-		else
-		{	AiState temp = sprite.getState();
-			name = temp.getName();
-			direction = temp.getDirection();
-			time = temp.getTime();
+		{	AiBomb bomb = (AiBomb) sprite;
+			long normalDuration = bomb.getNormalDuration();
+			if(normalDuration>0) //only for time bombs
+			{	if(time0>=normalDuration)
+				{	name = AiStateName.BURNING;
+					direction = Direction.NONE;
+					time = 0;
+				}
+			}
 		}
 		
 		AiState result = new AiSimState(name,direction,time);
@@ -137,12 +158,11 @@ public class AiModel
 	 * temps il va lui falloir pour changer de case. s'il ne fait rien, il n'y a
 	 * pas de limite particulière à son activité.
 	 * 
-	 * @param current	la zone courante
 	 * @param sprite	le sprite à traiter
 	 * @param state	le nouvel état de ce sprite
 	 * @return	la durée pendant laquelle le sprite va rester à cet état
 	 */
-	private long processChangeTime(AiZone current, AiSprite sprite, AiState state)
+	private long processChangeTime(AiSprite sprite, AiState state)
 	{	long result = Long.MAX_VALUE;
 		AiStateName name = state.getName();
 		AiState state0 = sprite.getState();
@@ -152,7 +172,7 @@ public class AiModel
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = sprite.getBurningDuration();
 			// the sprite was already burning before
-			if(name0==name)
+			if(name0==AiStateName.BURNING)
 			{	long elapsedTime = state0.getTime();
 				result = burningDuration - elapsedTime;
 			}
@@ -167,6 +187,7 @@ public class AiModel
 		}
 
 		// sprite moves (on the ground or in the air): how long before it reaches the next tile
+//TODO necessary to consider obstacles		
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
 		{	Direction direction = state.getDirection();
 			if(direction==Direction.NONE)
