@@ -235,7 +235,7 @@ public class AnimeManager
 //if(sprite instanceof Hero && currentAnime.getName().startsWith(GestureName.EXULTING.toString()))
 //		System.out.println();
 		double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
-		double delta = milliPeriod*sprite.getSpeedCoeff();	
+		double delta = milliPeriod*sprite.getCurrentSpeedCoeff();	
 		currentTime = currentTime + delta;
 		
 		// anime time

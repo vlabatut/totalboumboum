@@ -385,7 +385,7 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 		
 		// process the interactive (control) shift
 		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
-		double speedCoeff = sprite.getSpeedCoeff();
+		double speedCoeff = sprite.getCurrentSpeedCoeff();
 		shiftX = xMove*currentTrajectory.getXInteraction()*milliPeriod*speedCoeff/1000;
 //if(sprite instanceof Hero)
 //{	System.out.println("xMove: "+xMove);
@@ -617,7 +617,7 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 
 	private void updateTime()
 	{	double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
-		double delta = milliPeriod*sprite.getSpeedCoeff();	
+		double delta = milliPeriod*sprite.getCurrentSpeedCoeff();	
 		currentTime = currentTime + delta;
 		trajectoryTime = trajectoryTime + delta*forcedDurationCoeff;
 		if(trajectoryTime > trajectoryDuration)
@@ -646,6 +646,25 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 		}	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SPEED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public double getCurrentSpeed()
+	{	// get basic speed
+		double basicSpeed = 0;
+		if(currentDirection.isHorizontal())
+			basicSpeed = basicSpeed + currentTrajectory.getXInteraction();
+		if(currentDirection.isVertical())
+			basicSpeed = basicSpeed + currentTrajectory.getYInteraction();
+			else
+				basicSpeed = currentTrajectory.getXInteraction()+currentTrajectory.getYInteraction();
+		
+		// apply speed coefficient
+		double result = sprite.getCurrentSpeedCoeff()*basicSpeed;
+		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

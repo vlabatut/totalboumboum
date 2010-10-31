@@ -1477,6 +1477,8 @@ public class Launcher
 	 *  - IA:
 	 *  	- définir A* version pixel
 	 *  	- définir la fonction successeur version temporelle
+	 *  - à tester :
+	 *  	- vitesse renvoyée par l'API (pour déplacement joueurs)
 	 *  
 	 */
 }

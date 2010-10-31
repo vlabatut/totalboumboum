@@ -398,55 +398,74 @@ public abstract class Sprite
 	/////////////////////////////////////////////////////////////////
 	// SPEED COEFF		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected double speedCoeff = 1;
 	protected double speedAbility = 1;
 	protected double speedAbilityCoef = 1;
 	
 	/**
 	 * S'il y  a un boundToSprite, son speedCoeff est renvoyé.
 	 * Sinon, c'est le produit entre le speedCoeff du sprite
-	 * et celle du jeu.
+	 * et celui du jeu.
 	 * @return
 	 */
-	public double getSpeedCoeff()
+	public double getCurrentSpeedCoeff()
 	{	double result;
 		if(boundToSprite==null)
-		{	result = speedCoeff*Configuration.getEngineConfiguration().getSpeedCoeff();
+		{	result = Configuration.getEngineConfiguration().getSpeedCoeff();
+			
 			// NOTE limitation to WALKING, or not?
 			if(currentGesture.getName()==GestureName.WALKING
 				|| currentGesture.getName()==GestureName.CARRYING
 				|| currentGesture.getName()==GestureName.STANDING
 				|| currentGesture.getName()==GestureName.HOLDING
 				|| currentGesture.getName()==GestureName.PUSHING)
-			{	StateAbility ability = modulateStateAbility(StateAbilityName.HERO_WALK_SPEED_MODULATION);
-				int speed = (int)ability.getStrength();
-				if(speed!=speedAbility)
-				{	speedAbility = speed;
-					speedAbilityCoef = 1;
-					int delta = -(int)Math.signum(speed);
-					String name;
-					do
-					{	name = StateAbilityName.getHeroWalkSpeed(speed);
-						if(name!=null) // i.e. if speed is not zero
-						{	ability = modulateStateAbility(name);
-							if(ability.isActive())
-								speedAbilityCoef = ability.getStrength();
-							else
-								speed = speed + delta;
-						}
-					}
-					while(name!=null && !ability.isActive());
-					result = result*speedAbilityCoef;
-				}
+			{	double[] temp = getGroundSpeedCoeff();
+				speedAbilityCoef = temp[0];
+				speedAbility = temp[1];
+				result = result*speedAbilityCoef;
 			}
 		}
 		else
-			result = boundToSprite.getSpeedCoeff();
+			result = boundToSprite.getCurrentSpeedCoeff();
 		return result;
 	}
 	
-	public void setSpeedCoeff(double speedCoeff)
-	{	this.speedCoeff = speedCoeff;
+	public double[] getGroundSpeedCoeff()
+	{	double[] result = new double[2];
+	
+		StateAbility ability = modulateStateAbility(StateAbilityName.HERO_WALK_SPEED_MODULATION);
+		int speed = (int)ability.getStrength();
+		if(speed==speedAbility)
+		{	result[0] = speedAbilityCoef;
+			result[1] = speedAbility;
+		}
+		else
+		{	double speedAbility = speed;
+			double speedAbilityCoef = 1;
+			int delta = -(int)Math.signum(speed);
+			String name;
+			do
+			{	name = StateAbilityName.getHeroWalkSpeed(speed);
+				if(name!=null) // i.e. if speed is not zero
+				{	ability = modulateStateAbility(name);
+					if(ability.isActive())
+						speedAbilityCoef = ability.getStrength();
+					else
+						speed = speed + delta;
+				}
+			}
+			while(name!=null && !ability.isActive());
+			result[0] = speedAbilityCoef;
+			result[1] = speedAbility;
+		}
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SPEED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public double getCurrentSpeed()
+	{	return trajectoryManager.getCurrentSpeed();
 	}
 
 	/////////////////////////////////////////////////////////////////

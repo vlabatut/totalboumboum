@@ -147,7 +147,7 @@ if(modulationAbilities.size()>0)
 	private void updateAbilities(List<AbstractAbility> abilities)
 	{	// init time values
 		double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
-		double timeDelta = milliPeriod*sprite.getSpeedCoeff();
+		double timeDelta = milliPeriod*sprite.getCurrentSpeedCoeff();
 		// 
 		Iterator<AbstractAbility> i = abilities.iterator();
 		while(i.hasNext())

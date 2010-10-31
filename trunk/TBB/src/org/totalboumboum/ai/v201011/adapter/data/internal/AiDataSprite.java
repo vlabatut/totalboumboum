@@ -180,11 +180,29 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// BURN				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** temps nécessaire au sprite pour brûler (à condition qu'il puisse brûler) */
 	private long burningDuration = 0;
 	
 	@Override
 	public long getBurningDuration()
 	{	return burningDuration;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SPEED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** vitesse de déplacement courante en pixels/s (est nulle si le sprite ne bouge pas */
+	private double currentSpeed = 0;
+	
+	@Override
+	public double getCurrentSpeed()
+	{	return currentSpeed;
+	}
+
+	protected void updateSpeed()
+	{	Sprite sprite = getSprite();
+		currentSpeed = sprite.getCurrentSpeed();
+		//System.out.println(getSprite().getColor()+": walkingSpeed="+walkingSpeed);
 	}
 	
 	/////////////////////////////////////////////////////////////////
