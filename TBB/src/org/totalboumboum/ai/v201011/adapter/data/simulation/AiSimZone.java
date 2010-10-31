@@ -50,10 +50,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public final class AiSimZone extends AiZone
 {	
 	/**
-	 * construit une simulation du niveau passé en paramètre,
-	 * du point de vue du joueur passé en paramètre.
+	 * construit une simulation de la zone passée en paramètre.
 	 * 
-	 * @param zone	zone d'origine de la simulation
+	 * @param zone	zone originale de la simulation
 	 */
 	public AiSimZone(AiZone zone)
 	{	// init matrix, tiles and lists
