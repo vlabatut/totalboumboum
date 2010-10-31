@@ -27,7 +27,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201011.adapter.data.representation.AiDataZone;
+import org.totalboumboum.ai.v201011.adapter.data.internal.AiDataZone;
 
 /**
  * classe dont chaque IA doit hériter. La méthode processAction est la méthode 
