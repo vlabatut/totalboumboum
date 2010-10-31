@@ -60,8 +60,8 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void update(AiDataTile tile)
-	{	super.update(tile);
+	protected void update(AiDataTile tile, long elapsedTime)
+	{	super.update(tile,elapsedTime);
 		updateBombParam();
 		updateWalkingSpeed();
 		updateCollisions();

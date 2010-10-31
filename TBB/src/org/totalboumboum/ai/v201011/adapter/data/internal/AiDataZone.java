@@ -94,7 +94,7 @@ public final class AiDataZone extends AiZone
 	 */
 	public void update(long elapsedTime)
 	{	updateTimes(elapsedTime);
-		updateMatrix();
+		updateMatrix(elapsedTime);
 		updateSpriteLists();
 		updateMeta();
 	}
@@ -223,7 +223,7 @@ public final class AiDataZone extends AiZone
 	/**
 	 * met à jour la matrice en fonction de l'évolution du jeu
 	 */
-	private void updateMatrix()
+	private void updateMatrix(long elapsedTime)
 	{	hiddenItemsCount = 0;
 		// démarque tous les sprites
 		uncheckAll(blockMap);
@@ -235,7 +235,7 @@ public final class AiDataZone extends AiZone
 		// met à jour chaque case et sprite 
 		for(int line=0;line<height;line++)
 			for(int col=0;col<width;col++)
-				matrix[line][col].update();
+				matrix[line][col].update(elapsedTime);
 		// supprime les sprites non-marqués
 		removeUnchecked(blockMap);
 		removeUnchecked(bombMap);

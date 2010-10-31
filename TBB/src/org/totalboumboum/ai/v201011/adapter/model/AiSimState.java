@@ -45,6 +45,7 @@ public final class AiSimState  implements AiState
 	protected AiSimState()
 	{	name = AiStateName.STANDING;
 		direction = Direction.NONE;
+		time = 0;
 	}
 
 	/**
@@ -53,8 +54,10 @@ public final class AiSimState  implements AiState
 	 * @param sprite	sprite dont on veut simuler l'état
 	 */
 	protected AiSimState(AiSprite sprite)
-	{	name = sprite.getState().getName();
-		direction = sprite.getState().getDirection();
+	{	AiState state = sprite.getState();
+		name = state.getName();
+		direction = state.getDirection();
+		time = state.getTime();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -83,6 +86,17 @@ public final class AiSimState  implements AiState
 	{	return direction;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** compte combien de temps le sprite a passé dans l'état courant */
+	private long time = 0;
+	
+	@Override
+	public long getTime()
+	{	return time;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

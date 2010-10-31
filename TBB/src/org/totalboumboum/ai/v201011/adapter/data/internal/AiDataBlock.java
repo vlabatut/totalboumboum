@@ -69,8 +69,8 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void update(AiDataTile tile)
-	{	super.update(tile);
+	protected void update(AiDataTile tile, long elapsedTime)
+	{	super.update(tile,elapsedTime);
 		updateDestructible();
 		updateCollisions();
 	}

@@ -53,8 +53,8 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void update(AiDataTile tile)
-	{	super.update(tile);
+	protected void update(AiDataTile tile, long elapsedTime)
+	{	super.update(tile,elapsedTime);
 		updateCollisions();
 	}
 

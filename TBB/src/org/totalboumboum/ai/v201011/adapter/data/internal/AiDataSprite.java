@@ -23,6 +23,10 @@ package org.totalboumboum.ai.v201011.adapter.data.internal;
 
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
+import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.engine.content.feature.gesture.Gesture;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
@@ -44,9 +48,20 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	 * @param sprite	sprite à représenter
 	 */
 	protected AiDataSprite(AiDataTile tile, T sprite)
-	{	this.tile = tile;
+	{	// general
+		this.tile = tile;
 		this.sprite = sprite;
 		state = new AiDataState(sprite);
+		
+		// burning duration
+//TODO à tester
+		burningDuration = -1;
+		Gesture gesture = sprite.getGesturePack().getGesture(GestureName.BURNING);
+		if(gesture!=null)
+		{	AnimeDirection anime = gesture.getAnimeDirection(Direction.NONE);
+			if(anime!=null)
+				burningDuration = anime.getTotalDuration();
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -57,10 +72,10 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	 * 
 	 * @param tile	la nouvelle case contenant cette représentation
 	 */
-	protected void update(AiDataTile tile)
+	protected void update(AiDataTile tile, long elapsedTime)
 	{	this.tile = tile;
 		updateLocation();
-		updateState();
+		updateState(elapsedTime);
 		checked = true;
 	}
 
@@ -125,8 +140,8 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/** 
 	 * initialise l'état dans lequel se trouve ce sprite
 	 */
-	private void updateState()
-	{	state.update();
+	private void updateState(long elapsedTime)
+	{	state.update(elapsedTime);
 	}
 	
 	/**
@@ -160,6 +175,16 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	@Override
 	public int getCol()
 	{	return tile.getCol();	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// BURN				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private long burningDuration = 0;
+	
+	@Override
+	public long getBurningDuration()
+	{	return burningDuration;
 	}
 	
 	/////////////////////////////////////////////////////////////////
