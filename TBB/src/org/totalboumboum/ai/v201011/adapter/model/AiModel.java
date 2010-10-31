@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
-import org.totalboumboum.ai.v201011.adapter.data.simulation.AiSimZone;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CalculusTools;
@@ -38,14 +37,32 @@ import org.totalboumboum.tools.calculus.CalculusTools;
 public class AiModel
 {	
 	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public AiZone predictZone(AiZone current, List<AiEvent> events)
-	{	AiSimZone result = new AiSimZone();
+	{	AiSimZone result = new AiSimZone(current);
 		
+		// apply specified events
+		for(AiEvent event: events)
+			applyEvent(event,current,result);
+		
+		// apply unspecified events
+		for(int line=0;line<result.getHeight();line++)
+			for(int col=0;col<result.getWidth();col++)
+				predictTile(line,col,current,result,events);
+		
+		return result;
 	}
 	
+	private void applyEvent(AiEvent event, AiZone current, AiSimZone result)
+	{
+		// TODO
+	}
 	
+	private void predictTile(int line, int col, AiZone current,AiSimZone result, List<AiEvent> events)
+	{
+		// TODO
+	}
 	
-	/////////////////////////////////////////////////////////////////
-	// TIME				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 }
