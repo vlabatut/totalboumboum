@@ -44,8 +44,9 @@ public final class AiSimBlock extends AiSimSprite implements AiBlock
 	 * @param stopFire	indique si le bloc constitue un obstacle au feu
 	 */
 	protected AiSimBlock(AiSimTile tile, double posX, double posY, double posZ,
+			long burningDuration,
 			boolean destructible, AiStopType stopHeroes, AiStopType stopFires)
-	{	super(tile,posX,posY,posZ);
+	{	super(tile,posX,posY,posZ,burningDuration);
 		
 		this.destructible = destructible;
 		this.stopHeroes = stopHeroes;

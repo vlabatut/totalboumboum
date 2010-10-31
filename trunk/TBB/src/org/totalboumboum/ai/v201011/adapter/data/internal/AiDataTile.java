@@ -65,7 +65,7 @@ final class AiDataTile implements AiTile
 		size = RoundVariables.scaledTileDimension;
 		initTileLocation();
 		initPixelLocation();
-		updateSprites();
+		updateSprites(0);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -74,8 +74,8 @@ final class AiDataTile implements AiTile
 	/**
 	 * met à jour cette case et son contenu
 	 */
-	protected void update()
-	{	updateSprites();		
+	protected void update(long elapsedTime)
+	{	updateSprites(elapsedTime);		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -227,7 +227,7 @@ final class AiDataTile implements AiTile
 	/** 
 	 * met à jour les représentations des sprites contenus dans cette case
 	 */
-	private void updateSprites()
+	private void updateSprites(long elapsedTime)
 	{	// block
 		{	internalBlocks.clear();
 			externalBlocks.clear();
@@ -243,7 +243,7 @@ final class AiDataTile implements AiTile
 					{	block = new AiDataBlock(this,b);
 						zone.addBlock(block);
 					}
-					block.update(this);
+					block.update(this,elapsedTime);
 					internalBlocks.add(block);
 				}
 			}
@@ -263,7 +263,7 @@ final class AiDataTile implements AiTile
 					{	bomb = new AiDataBomb(this,b);
 						zone.addBomb(bomb);
 					}
-					bomb.update(this);
+					bomb.update(this,elapsedTime);
 					internalBombs.add(bomb);
 				}
 			}
@@ -283,7 +283,7 @@ final class AiDataTile implements AiTile
 					{	fire = new AiDataFire(this,f);
 						zone.addFire(fire);
 					}
-					fire.update(this);
+					fire.update(this,elapsedTime);
 					internalFires.add(fire);
 					externalFires.add(fire);
 				}
@@ -303,7 +303,7 @@ final class AiDataTile implements AiTile
 					{	floor = new AiDataFloor(this,f);
 						zone.addFloor(floor);
 					}
-					floor.update(this);
+					floor.update(this,elapsedTime);
 					internalFloors.add(floor);
 					externalFloors.add(floor);
 				}
@@ -323,7 +323,7 @@ final class AiDataTile implements AiTile
 					{	hero = new AiDataHero(this,h);
 						zone.addHero(hero);
 					}
-					hero.update(this);
+					hero.update(this,elapsedTime);
 					internalHeroes.add(hero);
 					externalHeroes.add(hero);
 				}
@@ -348,7 +348,7 @@ final class AiDataTile implements AiTile
 					{	item = new AiDataItem(this,i);
 						zone.addItem(item);
 					}
-					item.update(this);
+					item.update(this,elapsedTime);
 					internalItems.add(item);
 					externalItems.add(item);
 				}

@@ -46,8 +46,9 @@ public final class AiSimItem extends AiSimSprite implements AiItem
 	 * @param stopFire	indique si l'item constitue un obstacle au feu
 	 */
 	protected AiSimItem(AiSimTile tile,  double posX, double posY, double posZ,
+			long burningDuration,
 			AiItemType type, AiStopType stopBombs, AiStopType stopFires)
-	{	super(tile,posX,posY,posZ);
+	{	super(tile,posX,posY,posZ,burningDuration);
 		
 		this.type = type;		
 		this.stopBombs = stopBombs;

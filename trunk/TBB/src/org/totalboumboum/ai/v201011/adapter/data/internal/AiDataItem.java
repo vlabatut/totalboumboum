@@ -69,8 +69,8 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void update(AiDataTile tile)
-	{	super.update(tile);
+	protected void update(AiDataTile tile, long elapsedTime)
+	{	super.update(tile,elapsedTime);
 		updateCollisions();
 	}
 

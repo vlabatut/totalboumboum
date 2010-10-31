@@ -56,4 +56,14 @@ public interface AiState
 	 * @return	direction associée à l'état
 	 */
 	public Direction getDirection();
+
+	/////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * renvoie la durée que le sprite a passé dans l'état courant
+	 * 
+	 * @return	une durée exprimée en ms
+	 */
+	public long getTime();
 }

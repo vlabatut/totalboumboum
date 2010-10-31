@@ -57,12 +57,20 @@ final class AiDataState implements AiState
 	/**
 	 * met à jour cet état en fonction de l'évolution du sprite de référence
 	 */
-	protected void update()
+	protected void update(long elapsedTime)
 	{	// direction
 		this.direction = sprite.getActualDirection();
+		
 		// name
 		GestureName gesture = sprite.getCurrentGesture().getName();
-		name = AiStateName.makeNameFromGesture(gesture);		
+		AiStateName oldName = name;
+		name = AiStateName.makeNameFromGesture(gesture);	
+		
+		// time
+		if(oldName!=name)
+			time = elapsedTime;
+		else
+			time = time + elapsedTime;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -94,6 +102,17 @@ final class AiDataState implements AiState
 	{	return direction;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** compte combien de temps le sprite a passé dans l'état courant */
+	private long time = 0;
+	
+	@Override
+	public long getTime()
+	{	return time;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

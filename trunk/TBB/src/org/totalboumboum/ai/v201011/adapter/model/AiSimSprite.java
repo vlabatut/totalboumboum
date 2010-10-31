@@ -38,15 +38,18 @@ public abstract class AiSimSprite implements AiSprite
 	 * 
 	 * @param tile	simulation de la case contenant le sprite
 	 */
-	protected AiSimSprite(AiSimTile tile, double posX, double posY, double posZ)
+	protected AiSimSprite(AiSimTile tile, double posX, double posY, double posZ, 
+			long burningDuration)
 	{	// general
 		this.tile = tile;
 		state = new AiSimState();
+		this.burningDuration = burningDuration;
 		
 		// location
 		this.posX = posX;
 		this.posY = posY;
 		this.posZ = posZ;
+		
 	}
 
 	/**
@@ -59,6 +62,7 @@ public abstract class AiSimSprite implements AiSprite
 	{	// general
 		this.tile = tile;
 		state = new AiSimState(sprite);
+		burningDuration = sprite.getBurningDuration();
 		
 		// location
 		this.posX = sprite.getPosX();
@@ -128,6 +132,16 @@ public abstract class AiSimSprite implements AiSprite
 	{	return posZ;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// BURN				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private long burningDuration = 0;
+	
+	@Override
+	public long getBurningDuration()
+	{	return burningDuration;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

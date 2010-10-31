@@ -104,4 +104,16 @@ public interface AiSprite
 	 *  @return	vrai si ce sprite le laisser passer par sa case 
 	 */
 	public boolean isCrossableBy(AiSprite sprite);
+
+	/////////////////////////////////////////////////////////////////
+	// BURN				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Renvoie le temps que va mettre ce sprite à brûler s'il est touché
+	 * par du feu, exprimé en ms. Si ce sprite ne peut pas brûler, ce
+	 * temps est égal à -1.
+	 * 
+	 * @return	le temps que ce sprite va mettre à brûler, en ms
+	 */
+	public long getBurningDuration();
 }
