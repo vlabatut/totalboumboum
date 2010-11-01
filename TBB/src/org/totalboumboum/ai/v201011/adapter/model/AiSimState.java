@@ -73,7 +73,18 @@ public final class AiSimState  implements AiState
 		direction = state.getDirection();
 		time = state.getTime();
 	}
-	
+
+	/**
+	 * construit un objet simulant l'état passé en paramètre
+	 * 
+	 * @param state	état à reproduire
+	 */
+	protected AiSimState(AiState state)
+	{	name = state.getName();
+		direction = state.getDirection();
+		time = state.getTime();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
