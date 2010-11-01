@@ -23,10 +23,9 @@ package org.totalboumboum.ai.v201011.adapter.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 
-import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiState;
@@ -34,8 +33,6 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.calculus.CalculusTools;
 
 /**
  * 
@@ -76,32 +73,31 @@ public class AiModel
 		
 		// list their incoming state : new (specified) or same than before,
 		// also process the minimal time needed for a sprite state change
-		HashMap<AiSprite,AiState> statesMap = new HashMap<AiSprite, AiState>();
+		HashMap<AiSprite,AiSimState> statesMap = new HashMap<AiSprite, AiSimState>();
+		long minTime = Long.MAX_VALUE;
 		for(AiSprite sprite: sprites)
-		{	// get a specified new state for this sprite
-			AiState state = specifiedStates.get(sprite);
+		{	// get the specified new state for this sprite
+			AiState temp = specifiedStates.get(sprite);
+			AiSimState state = new AiSimState(temp);
 			// or get an automatically processed one if no specified state is available
 			if(state==null)
 				state = processNewState(sprite);
+			// add to map
+			statesMap.put(sprite,state);
 			// then process the time remaining before the next state change
 			if(state.getName()!=AiStateName.ENDED && state.getName()!=AiStateName.STANDING)
-			{	statesMap.put(sprite,state);
-				long changeTime = processChangeTime(sprite,state);
-				
+			{	long changeTime = processChangeTime(current,sprite,state);
+				if(changeTime>0 && changeTime<minTime) //zero means there's nothing to do, eg: moving towards an obstacle
+					minTime = changeTime;
 			}
 		}
 		
-		// specified ones
-		// and unspecified ones
-		
-		// apply specified events
-		for(AiEvent event: specifiedStates)
-			applyEvent(event,current,result);
-		
-		// apply unspecified events
-		for(int line=0;line<result.getHeight();line++)
-			for(int col=0;col<result.getWidth();col++)
-				predictTile(line,col,current,result,specifiedStates);
+		// apply events for the resulting minimal time
+		for(Entry<AiSprite,AiSimState> entry: statesMap.entrySet())
+		{	AiSprite sprite0 = entry.getKey();
+			AiState state = entry.getValue();
+			applyState(sprite0,state,result);
+		}
 		
 		return result;
 	}
@@ -113,7 +109,7 @@ public class AiModel
 	 * @param sprite	le sprite à traiter
 	 * @return	son nouvel état
 	 */
-	private AiState processNewState(AiSprite sprite)
+	private AiSimState processNewState(AiSprite sprite)
 	{	// previous state
 		AiState state0 = sprite.getState();
 		long time0 = state0.getTime();
@@ -147,7 +143,7 @@ public class AiModel
 			}
 		}
 		
-		AiState result = new AiSimState(name,direction,time);
+		AiSimState result = new AiSimState(name,direction,time);
 		return result;
 	}
 	
@@ -158,27 +154,20 @@ public class AiModel
 	 * temps il va lui falloir pour changer de case. s'il ne fait rien, il n'y a
 	 * pas de limite particulière à son activité.
 	 * 
+	 * @param current	la zone courante
 	 * @param sprite	le sprite à traiter
 	 * @param state	le nouvel état de ce sprite
 	 * @return	la durée pendant laquelle le sprite va rester à cet état
 	 */
-	private long processChangeTime(AiSprite sprite, AiState state)
+	private long processChangeTime(AiZone current, AiSprite sprite, AiState state)
 	{	long result = Long.MAX_VALUE;
 		AiStateName name = state.getName();
-		AiState state0 = sprite.getState();
-		AiStateName name0 = state0.getName();
 		
 		// sprite burns: how long before it finishes burning?
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = sprite.getBurningDuration();
-			// the sprite was already burning before
-			if(name0==AiStateName.BURNING)
-			{	long elapsedTime = state0.getTime();
-				result = burningDuration - elapsedTime;
-			}
-			// the sprite starts burning now
-			else
-				result = burningDuration;
+			long elapsedTime = state.getTime();
+			result = burningDuration - elapsedTime;
 		}
 		
 		// sprite ended : should not be considered anymore
@@ -187,29 +176,32 @@ public class AiModel
 		}
 
 		// sprite moves (on the ground or in the air): how long before it reaches the next tile
-//TODO necessary to consider obstacles		
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
 		{	Direction direction = state.getDirection();
 			if(direction==Direction.NONE)
 				result = Long.MAX_VALUE;
 			else
-			{	AiTile tile = sprite.getTile();
-				double pos = 0;
-				double goal = 0;
-				if(direction.isHorizontal())
-				{	pos = sprite.getPosX();
-					goal = tile.getPosX();
-				}
-				else if(direction.isVertical())
-				{	pos = sprite.getPosY();
-					goal = tile.getPosY();
-				}
-				double dist = Math.abs(pos-goal);
-				result = (long)(dist/sprite.getCurrentSpeed());
+			{	//NOTE simplification here: we suppose the levels are all grids, 
+				// meaning at least one coordinate is at the center of a tile
+				int dir[] = direction.getIntFromDirection();
+				AiTile tile = sprite.getTile();
+				double tileSize = tile.getSize();
+				double posX = sprite.getPosX();
+				double posY = sprite.getPosY();
+				double tileX = tile.getPosX();
+				double tileY = tile.getPosY();
+				AiTile neighborTile = tile.getNeighbor(direction);
+				double offset = 0;
+				if(neighborTile.isCrossableBy(sprite)) //deal with obstacles
+					offset = tileSize/2;
+				double goalX = current.normalizePositionX(tileX+dir[0]*offset);
+				double goalY = current.normalizePositionY(tileY+dir[1]*offset);
+				double manDist = Math.abs(posX-goalX)+Math.abs(posY-goalY);
+				result = (long)(manDist/sprite.getCurrentSpeed());
 			}
 		}
 		
-		// sprites justs stands doing nothing special
+		// sprites just stands doing nothing special
 		else if(name==AiStateName.STANDING)
 		{	result = Long.MAX_VALUE;
 		}
@@ -217,14 +209,8 @@ public class AiModel
 		return result;
 	}
 	
-	private void applyEvent(AiEvent event, AiZone current, AiSimZone result)
+	private void applyState(AiSprite sprite0, AiState state, AiSimZone result)
 	{
 		// TODO
 	}
-	
-	private void predictTile(int line, int col, AiZone current,AiSimZone result, List<AiEvent> events)
-	{
-		// TODO
-	}
-	
 }
