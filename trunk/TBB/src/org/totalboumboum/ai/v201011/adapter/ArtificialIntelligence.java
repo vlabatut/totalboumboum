@@ -27,6 +27,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.data.internal.AiDataZone;
 
 /**
@@ -110,7 +111,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * renvoie les percepts auxquels l'IA a accès
 	 * @return	une AiZone représentant tous les percepts utilisables par l'IA
 	 */
-	public final AiDataZone getPercepts()
+	public final AiZone getPercepts()
 	{	return percepts;
 	}
 	/**
