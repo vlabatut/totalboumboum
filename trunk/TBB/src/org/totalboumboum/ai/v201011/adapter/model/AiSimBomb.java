@@ -62,13 +62,13 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param time
 	 */
 	protected AiSimBomb(AiSimTile tile, double posX, double posY, double posZ,
-			long burningDuration,
+			AiSimState state, long burningDuration, double currentSpeed,
 			boolean countdownTrigger, boolean remoteControlTrigger, boolean explosionTrigger,
 			long normalDuration, long explosionDuration, long latencyDuration, float failureProbability,
 			AiStopType stopHeroes, AiStopType stopFires, boolean throughItems,
 			int range, boolean penetrating,
 			PredefinedColor color, boolean working, long time)
-	{	super(tile,posX,posY,posZ,burningDuration);
+	{	super(tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		
 		// fuse
 		this.countdownTrigger = countdownTrigger;
@@ -101,7 +101,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param sprite	sprite à simuler
 	 * @param tile	case devant contenir le sprite
 	 */
-	protected AiSimBomb(AiBomb sprite, AiSimTile tile)
+/*	protected AiSimBomb(AiBomb sprite, AiSimTile tile)
 	{	super(sprite,tile);
 	
 		// fuse
@@ -127,7 +127,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 		working = sprite.isWorking();
 		time = sprite.getTime();
 	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -203,7 +203,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	public List<AiTile> getBlast()
 	{	// init
 		List<AiTile> result = new ArrayList<AiTile>();
-		AiSimFire fire = new AiSimFire(tile,tile.getPosX(),tile.getPosY(),0,explosionDuration,penetrating,penetrating,penetrating);
+		AiSimFire fire = new AiSimFire(tile,tile.getPosX(),tile.getPosY(),0,new AiSimState(),explosionDuration,0,penetrating,penetrating,penetrating);
 		
 		// center
 		if(tile.isCrossableBy(fire))

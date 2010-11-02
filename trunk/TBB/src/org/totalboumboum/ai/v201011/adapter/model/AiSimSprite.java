@@ -39,17 +39,17 @@ public abstract class AiSimSprite implements AiSprite
 	 * @param tile	simulation de la case contenant le sprite
 	 */
 	protected AiSimSprite(AiSimTile tile, double posX, double posY, double posZ, 
-			long burningDuration)
+			AiSimState state, long burningDuration, double currentSpeed)
 	{	// general
-		this.tile = tile;
 		state = new AiSimState();
 		this.burningDuration = burningDuration;
+		this.currentSpeed = currentSpeed;
 		
 		// location
+		this.tile = tile;
 		this.posX = posX;
 		this.posY = posY;
 		this.posZ = posZ;
-		
 	}
 
 	/**
@@ -58,7 +58,7 @@ public abstract class AiSimSprite implements AiSprite
 	 * @param sprite	sprite à simuler
 	 * @param tile	simulation de la case contenant le sprite
 	 */
-	protected AiSimSprite(AiSprite sprite, AiSimTile tile)
+/*	protected AiSimSprite(AiSprite sprite, AiSimTile tile)
 	{	// general
 		this.tile = tile;
 		state = new AiSimState(sprite);
@@ -69,7 +69,7 @@ public abstract class AiSimSprite implements AiSprite
 		this.posY = sprite.getPosY();
 		this.posZ = sprite.getPosZ();
 	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -111,11 +111,11 @@ public abstract class AiSimSprite implements AiSprite
 	// LOCATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** abscisse de ce sprite en pixels */
-	private double posX;
+	protected double posX;
 	/** ordonnée de ce sprite en pixels */
-	private double posY;
+	protected double posY;
 	/** altitude de ce sprite en pixels */
-	private double posZ;
+	protected double posZ;
 
 	@Override
 	public double getPosX()
@@ -136,7 +136,7 @@ public abstract class AiSimSprite implements AiSprite
 	// BURN				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** temps nécessaire au sprite pour brûler (à condition qu'il puisse brûler) */
-	private long burningDuration = 0;
+	protected long burningDuration = 0;
 	
 	@Override
 	public long getBurningDuration()
@@ -147,7 +147,7 @@ public abstract class AiSimSprite implements AiSprite
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** vitesse de déplacement courante en pixels/s (est nulle si le sprite ne bouge pas */
-	private double currentSpeed = 0;
+	protected double currentSpeed = 0;
 	
 	@Override
 	public double getCurrentSpeed()
