@@ -54,9 +54,11 @@ public interface AiHero extends AiSprite
 	
 	/**
 	 * renvoie le nombre de bombes posées par le personnage à ce moment-là.
-	 * Ce nombre est limité par la valeur renvoyée par getBombCount()
+	 * Ce nombre est limité par la valeur renvoyée par getBombNumber(),
+	 * i.e. il ne peut pas être plus grand puisque getBombNumber renvoie
+	 * le nombre de bombes maximal que le joueur peut poser en même temps. 
 	 * 
-	 * @return	nombre de bombes posées
+	 * @return	nombre de bombes posées en ce moment
 	 */
 	public int getBombCount();
 	

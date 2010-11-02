@@ -138,6 +138,21 @@ public final class AiSimZone extends AiZone
 		}
 	}
 
+	//NOTE temp constructor
+	protected AiSimZone(int height, int width)
+	{	this.height = height;
+		this.width = width;
+		matrix = new AiSimTile[height][width];
+		for(int line=0;line<height;line++)
+		{	for(int col=0;col<width;col++)
+			{	double posX = 100*col+50;
+				double posY = 100*line+50;
+				AiSimTile aiTile = new AiSimTile(this,line,col,posX,posY);
+				matrix[line][col] = aiTile;
+			}
+		}
+	}
+
 	protected void update(AiZone zone, long duration)
 	{	// set own hero
 		AiHero oh = zone.getOwnHero();
