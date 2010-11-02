@@ -111,6 +111,7 @@ public class AiModel
 		}
 		
 		// update the resulting zone
+		result.update(current,minTime);
 		
 		return result;
 	}
@@ -260,6 +261,9 @@ public class AiModel
 			state = new AiSimState(name,direction,time);
 			sprite = applyStateSprite(sprite0,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
 			result.addSprite(sprite);
+			currentSpeed = 0;
+			// TODO if it's a bomb : should set the explosion
+			// or is it better to set it before, in the main function ?
 		}
 		
 		else if(name==AiStateName.ENDED)
@@ -267,8 +271,46 @@ public class AiModel
 		}
 		
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
-		{	
-			
+		{	//NOTE same simplification than begfore: we suppose the levels are all grids, 
+			// meaning at least one coordinate is at the center of a tile
+			double allowed = sprite0.getCurrentSpeed()*duration;
+			if(sprite0 instanceof AiHero)
+			{	AiHero hero = (AiHero) sprite0;
+				allowed = hero.getWalkingSpeed()*duration;
+			}
+			int dir[] = direction.getIntFromDirection();
+			double tileSize = tile0.getSize();
+			double tileX0 = tile0.getPosX();
+			double tileY0 = tile0.getPosY();
+			AiTile neighborTile = tile.getNeighbor(direction);
+			double offset = 0;
+			if(neighborTile.isCrossableBy(sprite0)) //deal with obstacles
+				offset = tileSize/2;
+			double goalX = result.normalizePositionX(tileX0+dir[0]*offset);
+			double goalY = result.normalizePositionY(tileY0+dir[1]*offset);
+			double dx = Math.abs(posX-goalX);
+			double dy = Math.abs(posY-goalY);
+			double manDist = dx+dy;
+			if(manDist<=allowed)
+			{	posX = goalX;
+				posY = goalY;
+				if(offset==0)
+					currentSpeed = 0;
+			}
+			else
+			{	if(dx>dy && dy>0)
+				{	double temp = Math.min(allowed,dy);
+					posY = posY+dir[1]*temp;
+					allowed = allowed - temp;
+					posX = posX+dir[0]*allowed;
+				}
+				else
+				{	double temp = Math.min(allowed,dx);
+					posX = posX+dir[0]*temp;
+					allowed = allowed - temp;
+					posY = posY+dir[1]*allowed;
+				}
+			}
 		}
 		
 		else if(name==AiStateName.STANDING)
@@ -276,6 +318,7 @@ public class AiModel
 			state = new AiSimState(name,direction,time);
 			sprite = applyStateSprite(sprite0,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
 			result.addSprite(sprite);
+			currentSpeed = 0;
 		}
 	}
 	
