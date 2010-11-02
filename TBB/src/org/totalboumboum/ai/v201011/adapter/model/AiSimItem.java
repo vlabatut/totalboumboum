@@ -46,9 +46,9 @@ public final class AiSimItem extends AiSimSprite implements AiItem
 	 * @param stopFire	indique si l'item constitue un obstacle au feu
 	 */
 	protected AiSimItem(AiSimTile tile,  double posX, double posY, double posZ,
-			long burningDuration,
+			AiSimState state, long burningDuration, double currentSpeed,
 			AiItemType type, AiStopType stopBombs, AiStopType stopFires)
-	{	super(tile,posX,posY,posZ,burningDuration);
+	{	super(tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		
 		this.type = type;		
 		this.stopBombs = stopBombs;
@@ -62,14 +62,14 @@ public final class AiSimItem extends AiSimSprite implements AiItem
 	 * @param sprite	sprite à simuler
 	 * @param tile	case contenant le sprite
 	 */
-	protected AiSimItem(AiItem sprite, AiSimTile tile)
+/*	protected AiSimItem(AiItem sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		type = sprite.getType();		
 		stopBombs = sprite.hasStopBombs();
 		stopFires = sprite.hasStopFires();
 	}
-	
+*/
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

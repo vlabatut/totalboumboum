@@ -40,8 +40,8 @@ public final class AiSimFloor extends AiSimSprite implements AiFloor
 	 * @param tile	case contenant le sprite
 	 */
 	protected AiSimFloor(AiSimTile tile, double posX, double posY, double posZ,
-			long burningDuration)
-	{	super(tile,posX,posY,posZ,burningDuration);
+			AiSimState state, long burningDuration, double currentSpeed)
+	{	super(tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 	}	
 
 	/**
@@ -51,10 +51,10 @@ public final class AiSimFloor extends AiSimSprite implements AiFloor
 	 * @param sprite	sprite à simuler
 	 * @param tile	case contenant le sprite
 	 */
-	protected AiSimFloor(AiFloor sprite, AiSimTile tile)
+/*	protected AiSimFloor(AiFloor sprite, AiSimTile tile)
 	{	super(sprite,tile);		
 	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

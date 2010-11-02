@@ -71,7 +71,7 @@ public final class AiSimTile implements AiTile
 	 * @param tile	case simulée
 	 * @param zone	zone contenant la simulation
 	 */
-	protected AiSimTile(AiTile tile, AiSimZone zone)
+/*	protected AiSimTile(AiTile tile, AiSimZone zone)
 	{	this.zone = zone;
 
 		size = RoundVariables.scaledTileDimension;
@@ -114,7 +114,7 @@ public final class AiSimTile implements AiTile
 			externalItems.add(s2);
 		}
 	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -176,31 +176,52 @@ public final class AiSimTile implements AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public void addSprite(AiSimSprite sprite)
+	{	// tile
+		AiSimTile tile = sprite.getTile();
+		tile.addSprite(sprite);
+		
+		// sprites
+		if(sprite instanceof AiSimBlock)
+		{	AiSimBlock block = (AiSimBlock)sprite;
+			internalBlocks.add(block);
+			externalBlocks.add(block);
+		}
+		else if(sprite instanceof AiSimBomb)
+		{	AiSimBomb bomb = (AiSimBomb)sprite;
+			internalBombs.add(bomb);
+			externalBombs.add(bomb);
+		}
+		else if(sprite instanceof AiSimFire)
+		{	AiSimFire fire = (AiSimFire)sprite;
+			internalFires.add(fire);
+			externalFires.add(fire);
+		}
+		else if(sprite instanceof AiSimFloor)
+		{	AiSimFloor floor = (AiSimFloor)sprite;
+			internalFloors.add(floor);
+			externalFloors.add(floor);
+		}
+		else if(sprite instanceof AiSimHero)
+		{	AiSimHero hero = (AiSimHero)sprite;
+			internalHeroes.add(hero);
+			externalHeroes.add(hero);
+		}
+		else if(sprite instanceof AiSimItem)
+		{	AiSimItem item = (AiSimItem)sprite;
+			internalItems.add(item);
+			externalItems.add(item);
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// BLOCKS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/** liste à usage interne des blocks éventuellement contenus dans cette case */
 	private final List<AiSimBlock> internalBlocks = new ArrayList<AiSimBlock>();
 	/** liste à usage externe des blocks éventuellement contenus dans cette case */
 	private final List<AiBlock> externalBlocks = new ArrayList<AiBlock>();
-	/** liste à usage interne des bombes éventuellement contenues dans cette case */
-	private final List<AiSimBomb> internalBombs = new ArrayList<AiSimBomb>();
-	/** liste à usage externe des bombes éventuellement contenues dans cette case */
-	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
-	/** liste à usage interne des feux éventuellement contenus dans cette case */
-	private final List<AiSimFire> internalFires = new ArrayList<AiSimFire>();
-	/** liste à usage externe des feux éventuellement contenus dans cette case */
-	private final List<AiFire> externalFires = new ArrayList<AiFire>();
-	/** liste à usage interne des sols éventuellement contenus dans cette case */
-	private final List<AiSimFloor> internalFloors = new ArrayList<AiSimFloor>();
-	/** liste à usage externe des sols éventuellement contenus dans cette case */
-	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
-	/** liste à usage interne des personnages éventuellement contenus dans cette case */
-	private final List<AiSimHero> internalHeroes = new ArrayList<AiSimHero>();
-	/** liste à usage externe des personnages éventuellement contenus dans cette case */
-	private final List<AiHero> externalHeroes = new ArrayList<AiHero>();
-	/** liste à usage interne des items éventuellement contenus dans cette case */
-	private final List<AiSimItem> internalItems = new ArrayList<AiSimItem>();
-	/** liste à usage externe des items éventuellement contenus dans cette case */
-	private final List<AiItem> externalItems = new ArrayList<AiItem>();
-
+	
 	@Override
 	public List<AiBlock> getBlocks()
 	{	return externalBlocks;	
@@ -215,6 +236,14 @@ public final class AiSimTile implements AiTile
 	protected List<AiSimBlock> getInternalBlocks()
 	{	return internalBlocks;	
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// BOMBS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** liste à usage interne des bombes éventuellement contenues dans cette case */
+	private final List<AiSimBomb> internalBombs = new ArrayList<AiSimBomb>();
+	/** liste à usage externe des bombes éventuellement contenues dans cette case */
+	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
 	
 	@Override
 	public List<AiBomb> getBombs()
@@ -231,6 +260,14 @@ public final class AiSimTile implements AiTile
 	{	return internalBombs;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// FIRES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** liste à usage interne des feux éventuellement contenus dans cette case */
+	private final List<AiSimFire> internalFires = new ArrayList<AiSimFire>();
+	/** liste à usage externe des feux éventuellement contenus dans cette case */
+	private final List<AiFire> externalFires = new ArrayList<AiFire>();
+	
 	@Override
 	public List<AiFire> getFires()
 	{	return externalFires;	
@@ -245,6 +282,14 @@ public final class AiSimTile implements AiTile
 	protected List<AiSimFire> getInternalFires()
 	{	return internalFires;	
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FLOORS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** liste à usage interne des sols éventuellement contenus dans cette case */
+	private final List<AiSimFloor> internalFloors = new ArrayList<AiSimFloor>();
+	/** liste à usage externe des sols éventuellement contenus dans cette case */
+	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
 	
 	@Override
 	public List<AiFloor> getFloors()
@@ -261,6 +306,14 @@ public final class AiSimTile implements AiTile
 	{	return internalFloors;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// HEROES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** liste à usage interne des personnages éventuellement contenus dans cette case */
+	private final List<AiSimHero> internalHeroes = new ArrayList<AiSimHero>();
+	/** liste à usage externe des personnages éventuellement contenus dans cette case */
+	private final List<AiHero> externalHeroes = new ArrayList<AiHero>();
+	
 	@Override
 	public List<AiHero> getHeroes()
 	{	return externalHeroes;	
@@ -276,6 +329,14 @@ public final class AiSimTile implements AiTile
 	{	return internalHeroes;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ITEMS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** liste à usage interne des items éventuellement contenus dans cette case */
+	private final List<AiSimItem> internalItems = new ArrayList<AiSimItem>();
+	/** liste à usage externe des items éventuellement contenus dans cette case */
+	private final List<AiItem> externalItems = new ArrayList<AiItem>();
+
 	@Override
 	public List<AiItem> getItems()
 	{	return externalItems;	

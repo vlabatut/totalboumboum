@@ -49,11 +49,11 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 * @param walkingSpeed	vitesse du personnage
 	 */
 	protected AiSimHero(AiSimTile tile, double posX, double posY, double posZ,
-			long burningDuration,
+			AiSimState state, long burningDuration, double currentSpeed,
 			int bombRange, int bombNumber, int bombCount,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
 			PredefinedColor color, double walkingSpeed)
-	{	super(tile,posX,posY,posZ,burningDuration);
+	{	super(tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		
 		// bombs
 		this.bombRange = bombRange;
@@ -77,7 +77,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 * @param tile	case contenant le sprite
 	 * @param sprite	sprite à simuler
 	 */
-	protected AiSimHero(AiHero sprite, AiSimTile tile)
+/*	protected AiSimHero(AiHero sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		// bombs
@@ -94,7 +94,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		color = sprite.getColor();
 		walkingSpeed = sprite.getWalkingSpeed();
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAMETERS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

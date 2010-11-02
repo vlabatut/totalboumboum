@@ -26,13 +26,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.totalboumboum.ai.v201011.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201011.adapter.data.AiFire;
+import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
+import org.totalboumboum.ai.v201011.adapter.data.AiHero;
+import org.totalboumboum.ai.v201011.adapter.data.AiItem;
+import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiState;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
+import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 
@@ -60,7 +68,8 @@ public class AiModel
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public AiZone predictZone(AiZone current, HashMap<AiSprite,AiState> specifiedStates)
-	{	AiSimZone result = new AiSimZone(current);
+	{	// create a new, empty zone
+		AiSimZone result = new AiSimZone(current);
 		
 		// list all sprites
 		List<AiSprite> sprites = new ArrayList<AiSprite>();
@@ -76,11 +85,13 @@ public class AiModel
 		HashMap<AiSprite,AiSimState> statesMap = new HashMap<AiSprite, AiSimState>();
 		long minTime = Long.MAX_VALUE;
 		for(AiSprite sprite: sprites)
-		{	// get the specified new state for this sprite
+		{	AiSimState state;
+			// get the specified new state for this sprite
 			AiState temp = specifiedStates.get(sprite);
-			AiSimState state = new AiSimState(temp);
+			if(temp!=null)
+				state = new AiSimState(temp);
 			// or get an automatically processed one if no specified state is available
-			if(state==null)
+			else
 				state = processNewState(sprite);
 			// add to map
 			statesMap.put(sprite,state);
@@ -95,9 +106,11 @@ public class AiModel
 		// apply events for the resulting minimal time
 		for(Entry<AiSprite,AiSimState> entry: statesMap.entrySet())
 		{	AiSprite sprite0 = entry.getKey();
-			AiState state = entry.getValue();
-			applyState(sprite0,state,result);
+			AiSimState state = entry.getValue();
+			applyState(sprite0,state,result,minTime);
 		}
+		
+		// update the resulting zone
 		
 		return result;
 	}
@@ -209,8 +222,276 @@ public class AiModel
 		return result;
 	}
 	
-	private void applyState(AiSprite sprite0, AiState state, AiSimZone result)
-	{
-		// TODO
+	/**
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
+	 * à partir de l'état courant.
+	 * 
+	 * @param sprite0	le sprite concerné (sa représentation initiale)
+	 * @param state	le nouvel état de ce sprite (à appliquer jusqu'à la fin du temps imparti)
+	 * @param result	la zone à mettre à jour
+	 * @param time	la durée à prendre en compte
+	 */
+	private void applyState(AiSprite sprite0, AiSimState state, AiSimZone result, long duration)
+	{	// previous state
+		AiState state0 = sprite0.getState();
+		AiTile tile0 = sprite0.getTile();
+		int line0 = tile0.getLine();
+		int col0 = tile0.getCol();
+		long burningDuration = sprite0.getBurningDuration();
+		double currentSpeed = sprite0.getCurrentSpeed();
+		double posX0 = sprite0.getPosX();
+		double posY0 = sprite0.getPosY();
+		double posZ0 = sprite0.getPosZ();
+		
+		// next state
+		AiStateName name = state.getName();
+		long time = state.getTime();
+		Direction direction = state.getDirection();
+		int line = line0;
+		int col = col0;
+		double posX = posX0;
+		double posY = posY0;
+		double posZ = posZ0;
+		AiSimTile tile = result.getTile(line,col);
+		AiSimSprite sprite;
+		
+		if(name==AiStateName.BURNING)
+		{	time = time + duration;
+			state = new AiSimState(name,direction,time);
+			sprite = applyStateSprite(sprite0,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
+			result.addSprite(sprite);
+		}
+		
+		else if(name==AiStateName.ENDED)
+		{	// nothing to do
+		}
+		
+		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
+		{	
+			
+		}
+		
+		else if(name==AiStateName.STANDING)
+		{	time = time + duration;
+			state = new AiSimState(name,direction,time);
+			sprite = applyStateSprite(sprite0,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
+			result.addSprite(sprite);
+		}
+	}
+	
+	/**
+	 * crée une nouvelle version du sprite en appliquant le nouvel état au sprite existant
+	 * 
+	 * @param sprite	sprite existant
+	 * @param tile	case du sprite existant
+	 * @param duration	durée du nouvel état
+	 * @param posX	nouvelle abscisse
+	 * @param posY nouvelle ordonnée
+	 * @param posZ nouvelle altitude
+	 * @param state	nouvel état
+	 * @param burningDuration	nouvelle durée de combustion
+	 * @param currentSpeed	nouvelle vitesse courante
+	 * @return	le sprite correspondant aux nouvelles descriptions passées en paramètres
+	 */
+	private AiSimSprite applyStateSprite(AiSprite sprite, AiSimTile tile, long duration, 
+			double posX, double posY, double posZ, 
+			AiSimState state, long burningDuration, double currentSpeed)
+	{	AiSimSprite result = null;
+		
+		if(sprite instanceof AiBlock)
+		{	AiBlock block = (AiBlock)sprite;
+			result = applyStateBlock(block,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
+		}
+		else if(sprite instanceof AiBomb)
+		{	AiBomb bomb = (AiBomb)sprite;
+			result = applyStateBomb(bomb,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
+		}
+		else if(sprite instanceof AiFire)
+		{	AiFire fire = (AiFire)sprite;
+			result = applyStateFire(fire,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
+		}
+		else if(sprite instanceof AiFloor)
+		{	AiFloor floor = (AiFloor)sprite;
+			result = applyStateFloor(floor,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
+		}
+		else if(sprite instanceof AiHero)
+		{	AiHero hero = (AiHero)sprite;
+			result = applyStateHero(hero,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
+		}
+		else if(sprite instanceof AiItem)
+		{	AiItem item = (AiItem)sprite;
+			result = applyStateItem(item,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
+		}
+	
+		return result;
+	}
+	
+	/**
+	 * crée une nouvelle version du block en appliquant le nouvel état au sprite existant
+	 * 
+	 * @param sprite	block existant
+	 * @param tile	case du sprite existant
+	 * @param duration	durée du nouvel état
+	 * @param posX	nouvelle abscisse
+	 * @param posY nouvelle ordonnée
+	 * @param posZ nouvelle altitude
+	 * @param state	nouvel état
+	 * @param burningDuration	nouvelle durée de combustion
+	 * @param currentSpeed	nouvelle vitesse courante
+	 * @return	le block correspondant aux nouvelles descriptions passées en paramètres
+	 */
+	private AiSimBlock applyStateBlock(AiBlock block, AiSimTile tile, long duration,
+			double posX, double posY, double posZ, 
+			AiSimState state, long burningDuration, double currentSpeed)
+	{	boolean destructible = block.isDestructible();
+		AiStopType stopHeroes = block.hasStopHeroes();
+		AiStopType stopFires = block.hasStopFires();
+		AiSimBlock result = new AiSimBlock(tile,posX,posY,posZ,state,burningDuration,currentSpeed,
+				destructible,stopHeroes,stopFires);
+		return result;
+	}
+
+	/**
+	 * crée une nouvelle version de la bombe en appliquant le nouvel état au sprite existant
+	 * 
+	 * @param bombe	bombe existant
+	 * @param tile	case du sprite existant
+	 * @param duration	durée du nouvel état
+	 * @param posX	nouvelle abscisse
+	 * @param posY nouvelle ordonnée
+	 * @param posZ nouvelle altitude
+	 * @param state	nouvel état
+	 * @param burningDuration	nouvelle durée de combustion
+	 * @param currentSpeed	nouvelle vitesse courante
+	 * @return	la bombe correspondant aux nouvelles descriptions passées en paramètres
+	 */
+	private AiSimBomb applyStateBomb(AiBomb bomb, AiSimTile tile, long duration,
+			double posX, double posY, double posZ, 
+			AiSimState state, long burningDuration, double currentSpeed)
+	{	boolean countdownTrigger = bomb.hasCountdownTrigger();
+		boolean remoteControlTrigger = bomb.hasRemoteControlTrigger();
+		boolean explosionTrigger = bomb.hasExplosionTrigger();
+		long normalDuration = bomb.getNormalDuration();
+		long explosionDuration = bomb.getExplosionDuration();
+		long latencyDuration = bomb.getLatencyDuration();
+		float failureProbability = bomb.getFailureProbability();
+		AiStopType stopHeroes = bomb.hasStopHeroes();
+		AiStopType stopFires = bomb.hasStopFires();
+		boolean throughItems = bomb.hasThroughItems();
+		int range = bomb.getRange();
+		boolean penetrating = bomb.isPenetrating();
+		PredefinedColor color = bomb.getColor();
+		boolean working = bomb.isWorking();
+		long time = bomb.getTime() + duration;
+		
+		AiSimBomb result = new AiSimBomb(tile,posX,posY,posZ,state,burningDuration,currentSpeed,
+				countdownTrigger,remoteControlTrigger,explosionTrigger,
+				normalDuration,explosionDuration,latencyDuration,failureProbability,
+				stopHeroes,stopFires,throughItems,range,penetrating,color,working,time);
+		return result;
+	}
+
+	/**
+	 * crée une nouvelle version du feu en appliquant le nouvel état au sprite existant
+	 * 
+	 * @param feu	feu existant
+	 * @param tile	case du sprite existant
+	 * @param duration	durée du nouvel état
+	 * @param posX	nouvelle abscisse
+	 * @param posY nouvelle ordonnée
+	 * @param posZ nouvelle altitude
+	 * @param state	nouvel état
+	 * @param burningDuration	nouvelle durée de combustion
+	 * @param currentSpeed	nouvelle vitesse courante
+	 * @return	le feu correspondant aux nouvelles descriptions passées en paramètres
+	 */
+	private AiSimFire applyStateFire(AiFire fire, AiSimTile tile, long duration,
+			double posX, double posY, double posZ, 
+			AiSimState state, long burningDuration, double currentSpeed)
+	{	boolean throughBlocks = fire.hasThroughBlocks();
+		boolean throughBombs = fire.hasThroughBombs();
+		boolean throughItems = fire.hasThroughItems();
+		AiSimFire result = new AiSimFire(tile,posX,posY,posZ,state,burningDuration,currentSpeed,
+			throughBlocks,throughBombs,throughItems);
+		return result;
+	}
+
+	/**
+	 * crée une nouvelle version du sol en appliquant le nouvel état au sprite existant
+	 * 
+	 * @param sol	sol existant
+	 * @param tile	case du sprite existant
+	 * @param duration	durée du nouvel état
+	 * @param posX	nouvelle abscisse
+	 * @param posY nouvelle ordonnée
+	 * @param posZ nouvelle altitude
+	 * @param state	nouvel état
+	 * @param burningDuration	nouvelle durée de combustion
+	 * @param currentSpeed	nouvelle vitesse courante
+	 * @return	le sol correspondant aux nouvelles descriptions passées en paramètres
+	 */
+	private AiSimFloor applyStateFloor(AiFloor floor, AiSimTile tile, long duration,
+			double posX, double posY, double posZ, 
+			AiSimState state, long burningDuration, double currentSpeed)
+	{	AiSimFloor result = new AiSimFloor(tile,posX,posY,posZ,state,burningDuration,currentSpeed);
+		return result;
+	}
+
+	/**
+	 * crée une nouvelle version du personnage en appliquant le nouvel état au sprite existant
+	 * 
+	 * @param personnage	personnage existant
+	 * @param tile	case du sprite existant
+	 * @param duration	durée du nouvel état
+	 * @param posX	nouvelle abscisse
+	 * @param posY nouvelle ordonnée
+	 * @param posZ nouvelle altitude
+	 * @param state	nouvel état
+	 * @param burningDuration	nouvelle durée de combustion
+	 * @param currentSpeed	nouvelle vitesse courante
+	 * @return	le personnage correspondant aux nouvelles descriptions passées en paramètres
+	 */
+	private AiSimHero applyStateHero(AiHero hero, AiSimTile tile, long duration,
+			double posX, double posY, double posZ, 
+			AiSimState state, long burningDuration, double currentSpeed)
+	{	int bombRange = hero.getBombRange();
+		int bombNumber = hero.getBombNumber();
+		int bombCount = hero.getBombCount();
+		boolean throughBlocks = hero.hasThroughBlocks();
+		boolean throughBombs = hero.hasThroughBombs();
+		boolean throughFires = hero.hasThroughFires();
+		PredefinedColor color = hero.getColor();
+		double walkingSpeed = hero.getWalkingSpeed();
+		
+		AiSimHero result = new AiSimHero(tile,posX,posY,posZ,state,burningDuration,currentSpeed,
+			bombRange,bombNumber,bombCount,
+			throughBlocks,throughBombs,throughFires,
+			color,walkingSpeed);
+		return result;
+	}
+
+	/**
+	 * crée une nouvelle version de l'item en appliquant le nouvel état au sprite existant
+	 * 
+	 * @param item	item existant
+	 * @param tile	case du sprite existant
+	 * @param duration	durée du nouvel état
+	 * @param posX	nouvelle abscisse
+	 * @param posY nouvelle ordonnée
+	 * @param posZ nouvelle altitude
+	 * @param state	nouvel état
+	 * @param burningDuration	nouvelle durée de combustion
+	 * @param currentSpeed	nouvelle vitesse courante
+	 * @return	le item correspondant aux nouvelles descriptions passées en paramètres
+	 */
+	private AiSimItem applyStateItem(AiItem item, AiSimTile tile, long duration,
+			double posX, double posY, double posZ, 
+			AiSimState state, long burningDuration, double currentSpeed)
+	{	AiItemType type = item.getType();
+		AiStopType stopBombs = item.hasStopBombs();
+		AiStopType stopFires = item.hasStopFires();
+		AiSimItem result = new AiSimItem(tile,posX,posY,posZ,state,burningDuration,currentSpeed,
+			type,stopBombs,stopFires);
+		return result;
 	}
 }
