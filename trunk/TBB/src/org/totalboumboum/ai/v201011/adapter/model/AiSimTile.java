@@ -178,8 +178,8 @@ public final class AiSimTile implements AiTile
 	/////////////////////////////////////////////////////////////////
 	public void addSprite(AiSimSprite sprite)
 	{	// tile
-		AiSimTile tile = sprite.getTile();
-		tile.addSprite(sprite);
+		//AiSimTile tile = sprite.getTile();
+		//tile.addSprite(sprite);
 		
 		// sprites
 		if(sprite instanceof AiSimBlock)
