@@ -53,7 +53,9 @@ public final class AiModelTest
 	
 	public static void main(String args[])
 	{
-		AiSimZone zone = new AiSimZone(7,7);
+
+		
+		AiSimZone zone;
 		AiSimTile tile;
 		AiSimState state;
 		AiSimBlock block;
@@ -64,7 +66,23 @@ public final class AiModelTest
 		boolean destructible,throughBlocks=false,throughBombs=false,throughFires=false;
 		AiStopType stopHeroes, stopFires;
 		PredefinedColor color;
-		
+
+		// zone
+		currentSpeed = 0;
+		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		color = PredefinedColor.WHITE;
+		hero = new AiSimHero(null,0,0,0,state,burningDuration,currentSpeed,bombRange,bombNumber,bombCount,throughBlocks,throughBombs,throughFires,color,walkingSpeed);
+		zone = new AiSimZone(7,7,hero);
+
+		// hero
+		tile = zone.getTile(1,1);
+		posX = tile.getPosX();
+		posY = tile.getPosY();
+		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		color = PredefinedColor.WHITE;
+		hero = new AiSimHero(tile,posX,posY,posZ,state,burningDuration,currentSpeed,bombRange,bombNumber,bombCount,throughBlocks,throughBombs,throughFires,color,walkingSpeed);
+		zone.addSprite(hero);
+
 		// hardwalls
 		currentSpeed = 0;
 		destructible = false;
@@ -81,16 +99,14 @@ public final class AiModelTest
 			zone.addSprite(block);
 		}
 		
-		// hero
-		tile = zone.getTile(1,1);
-		posX = tile.getPosX();
-		posY = tile.getPosY();
-		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
-		color = PredefinedColor.WHITE;
-		hero = new AiSimHero(tile,posX,posY,posZ,state,burningDuration,currentSpeed,bombRange,bombNumber,bombCount,throughBlocks,throughBombs,throughFires,color,walkingSpeed);
-		zone.addSprite(hero);
-		
 		System.out.println(zone);
+		AiModel model = new AiModel(zone);
+		
+		HashMap<AiSprite, AiState> specifiedStates = new HashMap<AiSprite, AiState>();
+		state = new AiSimState(AiStateName.MOVING,Direction.LEFT,0);
+		specifiedStates.put(hero,state);
+		model.predictZone(specifiedStates);
+		System.out.println(model.getCurrentZone());
 	}
 	
 }

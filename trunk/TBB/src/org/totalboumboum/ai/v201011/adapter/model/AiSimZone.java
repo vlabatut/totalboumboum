@@ -31,6 +31,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItem;
+import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -123,7 +124,8 @@ public final class AiSimZone extends AiZone
 	 * @return	une nouvelle zone vide de mêmes dimensions
 	 */
 	protected AiSimZone(AiZone zone)
-	{	AiTile[][] m = zone.getMatrix();
+	{	// matrix and tiles
+		AiTile[][] m = zone.getMatrix();
 		height = zone.getHeight();
 		width = zone.getWidth();
 		matrix = new AiSimTile[height][width];
@@ -136,33 +138,35 @@ public final class AiSimZone extends AiZone
 				matrix[line][col] = aiTile;
 			}
 		}
-	}
-
-	//NOTE temp constructor
-	protected AiSimZone(int height, int width)
-	{	this.height = height;
-		this.width = width;
-		matrix = new AiSimTile[height][width];
-		for(int line=0;line<height;line++)
-		{	for(int col=0;col<width;col++)
-			{	double posX = 100*col+50;
-				double posY = 100*line+50;
-				AiSimTile aiTile = new AiSimTile(this,line,col,posX,posY);
-				matrix[line][col] = aiTile;
-			}
+		
+		// process heroes
+		for(AiHero hero: zone.getHeroes())
+		{	AiSimTile tile = null;
+			AiSimState state = new AiSimState(AiStateName.ENDED,Direction.NONE,0);
+			double posX = hero.getPosX();
+			double posY = hero.getPosY();
+			double posZ = hero.getPosZ();
+			long burningDuration = hero.getBurningDuration();
+			double currentSpeed = hero.getCurrentSpeed();
+			int bombRange = hero.getBombRange();
+			int bombNumber = hero.getBombNumber();
+			int bombCount = hero.getBombCount();
+			boolean throughBlocks = hero.hasThroughBlocks();
+			boolean throughBombs = hero.hasThroughBombs();
+			boolean throughFires = hero.hasThroughFires();
+			PredefinedColor color = hero.getColor();
+			double walkingSpeed = hero.getWalkingSpeed();
+			AiSimHero h = new AiSimHero(tile,posX, posY, posZ, state,burningDuration,currentSpeed,
+					bombRange,bombNumber,bombCount,
+					throughBlocks,throughBombs,throughFires,color,walkingSpeed);
+			internalHeroes.add(h);
+			externalHeroes.add(h);
 		}
-	}
-
-	protected void update(AiZone zone, long duration)
-	{	// set own hero
+		
+		// set own hero
 		AiHero oh = zone.getOwnHero();
 		PredefinedColor color = oh.getColor();
 		ownHero = getHeroByColor(color);
-		
-		// set time
-		totalTime = zone.getTotalTime() + duration;
-		elapsedTime = duration;
-		limitTime = zone.getLimitTime();
 		
 		// set meta-data
 		for(AiHero hero: zone.getHeroes())
@@ -175,6 +179,42 @@ public final class AiSimZone extends AiZone
 			int statsRank = zone.getStatsRank(hero);
 			statsRanks.put(aiHero,statsRank);
 		}
+		
+		// misc
+		hiddenItemsCount = zone.getHiddenItemsCount();
+		limitTime = zone.getLimitTime();
+	}
+
+	//NOTE temp constructor
+	protected AiSimZone(int height, int width, AiSimHero hero)
+	{	this.height = height;
+		this.width = width;
+		matrix = new AiSimTile[height][width];
+		for(int line=0;line<height;line++)
+		{	for(int col=0;col<width;col++)
+			{	double posX = 100*col+50;
+				double posY = 100*line+50;
+				AiSimTile aiTile = new AiSimTile(this,line,col,posX,posY);
+				matrix[line][col] = aiTile;
+			}
+		}
+		
+		internalHeroes.add(hero);
+		externalHeroes.add(hero);
+		ownHero = hero;
+		roundRanks.put(hero,1);
+		matchRanks.put(hero,1);
+		statsRanks.put(hero,1);
+		
+		totalTime = 0;
+		elapsedTime = 0;
+		limitTime = 0;
+
+	}
+
+	protected void update(AiZone zone, long duration)
+	{	totalTime = zone.getTotalTime() + duration;
+		elapsedTime = duration;
 	}
 		
 	/////////////////////////////////////////////////////////////////
@@ -240,10 +280,8 @@ public final class AiSimZone extends AiZone
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void addSprite(AiSimSprite sprite)
-	{	// tile
-		AiSimTile tile = sprite.getTile();
-		tile.addSprite(sprite);
-		
+	{	AiSimTile tile = sprite.getTile();
+
 		// sprites
 		if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
@@ -267,14 +305,33 @@ public final class AiSimZone extends AiZone
 		}
 		else if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero)sprite;
+			PredefinedColor color = hero.getColor();
+			AiSimHero hero0 = getHeroByColor(color);
+			internalHeroes.remove(hero0);
 			internalHeroes.add(hero);
+			externalHeroes.remove(hero0);
 			externalHeroes.add(hero);
+			remainingHeroList.add(hero);
+			if(ownHero==hero0)
+				ownHero = hero;
+			int roundRank = roundRanks.get(hero0);
+			roundRanks.remove(hero0);
+			roundRanks.put(hero,roundRank);
+			int matchRank = matchRanks.get(hero0);
+			matchRanks.remove(hero0);
+			matchRanks.put(hero,matchRank);
+			int statsRank = statsRanks.get(hero0);
+			statsRanks.remove(hero0);
+			statsRanks.put(hero,statsRank);
+			sprite = hero;
 		}
 		else if(sprite instanceof AiSimItem)
 		{	AiSimItem item = (AiSimItem)sprite;
 			internalItems.add(item);
 			externalItems.add(item);
 		}
+		
+		tile.addSprite(sprite);
 	}
 	
 	/////////////////////////////////////////////////////////////////

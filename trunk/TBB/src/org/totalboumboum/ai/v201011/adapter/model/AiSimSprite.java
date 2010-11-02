@@ -41,7 +41,7 @@ public abstract class AiSimSprite implements AiSprite
 	protected AiSimSprite(AiSimTile tile, double posX, double posY, double posZ, 
 			AiSimState state, long burningDuration, double currentSpeed)
 	{	// general
-		state = new AiSimState();
+		this.state = state;
 		this.burningDuration = burningDuration;
 		this.currentSpeed = currentSpeed;
 		
