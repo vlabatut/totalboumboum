@@ -200,6 +200,8 @@ public final class AiModel
 		for(AiSprite sprite: sprites)
 		{	AiSimState state;
 			// get the specified new state for this sprite
+if(sprite instanceof AiHero)
+	System.out.println();
 			AiState temp = specifiedStates.get(sprite);
 			if(temp!=null)
 				state = new AiSimState(temp);
@@ -487,7 +489,9 @@ public final class AiModel
 		}
 		
 		else if(name==AiStateName.ENDED)
-		{	// nothing to do
+		{	if(sprite0 instanceof AiBlock)
+			{	// NOTE we can make an item appear here...
+			}
 		}
 		
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
