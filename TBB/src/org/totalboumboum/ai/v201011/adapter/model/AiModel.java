@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -114,6 +115,48 @@ public final class AiModel
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * effectue des simulations, en gardant pour chaque sprite l'action courante,
+	 * et ce jusqu'à ce que le personnage spécifié ait changé d'état.
+	 * Cette méthode est particulièrement utile quand on veut savoir quel sera
+	 * l'état estimé de la zone quand le personnage que l'on controle passera
+	 * dans la case suivante.
+	 * <b>Attention:</b> le changement d'état peut aussi être du au fait que le 
+	 * personnage a commencé à brûler
+	 * 
+	 * @param hero0	le personnage sur lequel porte la condition
+	 * @return	vrai si le changement d'état est dû à un déplacement (et pas à un accident)
+	 */
+	public boolean predictZoneUntilCondition(AiHero hero0)
+	{	// init
+		PredefinedColor color0 = hero0.getColor();
+		HashMap<AiSprite,AiState> specifiedStates = new HashMap<AiSprite, AiState>();
+		
+		AiHero hero = null;
+		do
+		{	// simulate
+			predictZone(specifiedStates);
+			// check if the hero was among the limit sprites
+			Iterator<AiSprite> it = limitSprites.iterator();
+			while(hero==null && it.hasNext())
+			{	AiSprite sprite = it.next();
+				if(sprite instanceof AiHero)
+				{	AiHero h = (AiHero)sprite;
+					PredefinedColor color = h.getColor();
+					if(color0==color)
+						hero = h;
+				}
+			}
+		}
+		while(hero==null);
+		
+		// check if the hero is still safe
+		AiState state = hero.getState();
+		AiStateName name = state.getName();
+		boolean result = name==AiStateName.FLYING || name==AiStateName.MOVING || name==AiStateName.STANDING;
+		return result;
+	}
+	
 	/**
 	 * calcule l'état suivant de la zone si les états spécifiés en paramètres
 	 * sont appliqués à la zone courante. La méthode renvoie l'état obtenu
@@ -292,6 +335,7 @@ public final class AiModel
 	 */
 	private AiSimState processNewState(AiSprite sprite)
 	{	// previous state
+		AiTile tile0 = sprite.getTile();
 		AiState state0 = sprite.getState();
 		long time0 = state0.getTime();
 		AiStateName name0 = state0.getName();
@@ -324,8 +368,15 @@ public final class AiModel
 			}
 		}
 
-		// TODO à compléter
-				
+		// an item might have to disappear if it's been picked
+		else if(sprite instanceof AiItem)
+		{	if(tile0.getHeroes().size()>0)
+			{	name = AiStateName.ENDED;
+				direction = Direction.NONE;
+				time = 0;
+			}
+		}
+
 		AiSimState result = new AiSimState(name,direction,time);
 		return result;
 	}
