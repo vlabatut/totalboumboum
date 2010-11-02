@@ -47,29 +47,92 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-public class AiModel
+public final class AiModel
 {	
-	public AiModel()
-	{	considerBombDisappearance = false;
-		
-	}
+	public AiModel(AiZone currentZone)
+	{	this.current = currentZone;
+		previous = null;
+	}	
 	
-	public AiModel(boolean considerBombDisappearance)
-	{	this.considerBombDisappearance = considerBombDisappearance;
-		
+	/////////////////////////////////////////////////////////////////
+	// ZONES				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** zone issue de la simulation précédente */
+	private AiZone previous;
+	/** zone issue de la dernière simulation */
+	private AiZone current;
+	
+	/**
+	 * renvoie la zone issue de la simulation précédente
+	 * 
+	 * @return	l'objet AiZone issu de la simulation précédente 
+	 */
+	public AiZone getPreviousZone()
+	{	return previous;
+	}
+
+	/**
+	 * renvoie la zone issue de la dernière simulation
+	 * 
+	 * @return	l'objet AiZone issu de la dernière simulation
+	 */
+	public AiZone getCurrentZone()
+	{	return current;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// SETTINGS			/////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean considerBombDisappearance;
+	/** liste des sprites dont le changement d'état marque la fin de la dernière simulation */
+	private List<AiSprite> limitSprites;
+	
+	/**
+	 * renvoie la liste des sprites dont le changement d'état
+	 * marque la fin de la dernière simulation
+	 * 
+	 * @return	une liste de sprites
+	 */
+	public List<AiSprite> getLimitSprites()
+	{	return limitSprites;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DURATION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** durée écoulée entre les zones previous et current */ 
+	private long duration;
+	
+	/**
+	 * renvoie la durée écoulée entre les zones previous et current
+	 * 
+	 * @return	un entier long représentant une durée
+	 */
+	public long getDuration()
+	{	return duration;
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public AiZone predictZone(AiZone current, HashMap<AiSprite,AiState> specifiedStates)
+	/**
+	 * calcule l'état suivant de la zone si les états spécifiés en paramètres
+	 * sont appliqués à la zone courante. La méthode renvoie l'état obtenu
+	 * à la fin de l'action la plus courte. Les actions considérées sont :
+	 * 		- la disparition/apparition d'un sprite
+	 * 		- un changement d'état
+	 * 		- un changement de case
+	 * Les modifications sont appliquées aux zones internes. l'utilisateur peut récupérer
+	 * la nouvelle zone mise à jour avec getCurrentZone. Il peut également récupérer la liste
+	 * de sprites qui ont provoqué la fin de la mise à jour à la suite d'une action, avec getLimitSprites.
+	 * Il peut aussi récupérer la durée qui s'est écoulée (en temps simulé) depuis la dernière simulation, 
+	 * avec getDuration.
+	 * 
+	 * @param specifiedStates	map associant un état à un sprite, permettant de forcer un sprite à prendre un certain état 
+	 */
+	public void predictZone(HashMap<AiSprite,AiState> specifiedStates)
 	{	// create a new, empty zone
 		AiSimZone result = new AiSimZone(current);
+		HashMap<AiSprite,AiSimState> statesMap = new HashMap<AiSprite, AiSimState>();
 		
 		// list all sprites
 		List<AiSprite> sprites = new ArrayList<AiSprite>();
@@ -80,10 +143,17 @@ public class AiModel
 		sprites.addAll(current.getRemainingHeroes());
 		sprites.addAll(current.getItems());
 		
-		// list their incoming state : new (specified) or same than before,
-		// also process the minimal time needed for a sprite state change
-		HashMap<AiSprite,AiSimState> statesMap = new HashMap<AiSprite, AiSimState>();
-		long minTime = Long.MAX_VALUE;
+		// first review all the bombs to detect those on the point of exploding
+		// and refresh the next state of the concerned tiles (ie those on the explosion path)
+		List<AiTile> burntTiles = new ArrayList<AiTile>();
+		List<AiBomb> explodedBombs = new ArrayList<AiBomb>();
+		for(AiBomb bomb: current.getBombs())
+			checkExplosion(bomb,specifiedStates,explodedBombs,burntTiles);
+		
+		// list the sprites incoming state: specified or automatically processed from the current state,
+		// also process the minimal time needed for a sprite state change (when using the new state)
+		duration = Long.MAX_VALUE;
+		limitSprites = new ArrayList<AiSprite>();
 		for(AiSprite sprite: sprites)
 		{	AiSimState state;
 			// get the specified new state for this sprite
@@ -98,8 +168,17 @@ public class AiModel
 			// then process the time remaining before the next state change
 			if(state.getName()!=AiStateName.ENDED && state.getName()!=AiStateName.STANDING)
 			{	long changeTime = processChangeTime(current,sprite,state);
-				if(changeTime>0 && changeTime<minTime) //zero means there's nothing to do, eg: moving towards an obstacle
-					minTime = changeTime;
+				if(changeTime>0) //zero means there's nothing to do, eg: moving towards an obstacle
+				{	// new min time
+					if(changeTime<duration)
+					{	duration = changeTime;
+						limitSprites.clear();
+						limitSprites.add(sprite);
+					}
+					// equals existing min time
+					else if(changeTime==duration)
+						limitSprites.add(sprite);
+				}
 			}
 		}
 		
@@ -107,13 +186,101 @@ public class AiModel
 		for(Entry<AiSprite,AiSimState> entry: statesMap.entrySet())
 		{	AiSprite sprite0 = entry.getKey();
 			AiSimState state = entry.getValue();
-			applyState(sprite0,state,result,minTime);
+			applyState(sprite0,state,result,duration);
 		}
 		
 		// update the resulting zone
-		result.update(current,minTime);
+		result.update(current,duration);
 		
-		return result;
+		// update internal zones
+		previous = current;
+		current = result;
+	}
+	
+	/**
+	 * détermine si une bombe va exploser ou pas, et les conséquences de cette explosion
+	 * 
+	 * @param bomb
+	 * @param specifiedStates
+	 * @param explodedBombs
+	 * @param burntTiles
+	 */
+	private void checkExplosion(AiBomb bomb, HashMap<AiSprite,AiState> specifiedStates, List<AiBomb> explodedBombs, List<AiTile> burntTiles)
+	{	if(!explodedBombs.contains(bomb))
+		{	// get the next state for this bomb
+			AiState state = specifiedStates.get(bomb);
+			if(state==null)
+			{	state = processNewState(bomb);
+				specifiedStates.put(bomb,state);
+			}
+			
+			// if the bomb starts burning, its explosion must be created
+			if(state.getName()==AiStateName.BURNING && state.getTime()==0)
+			{	explodedBombs.add(bomb);
+				List<AiTile> blast = bomb.getBlast();
+				for(AiTile tile: blast)
+				{	if(!burntTiles.contains(tile))
+					{	burntTiles.add(tile);
+						List<AiSprite> sprites = new ArrayList<AiSprite>();
+						sprites.addAll(tile.getBlocks());
+						sprites.addAll(tile.getBombs());
+						sprites.addAll(tile.getFires());
+						sprites.addAll(tile.getFloors());
+						sprites.addAll(tile.getHeroes());
+						sprites.addAll(tile.getItems());
+						for(AiSprite s: sprites)
+							checkBurning(s,specifiedStates,explodedBombs,burntTiles);
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * détermine le nouvel état pour des sprites touchés par une explosion
+	 * 
+	 * @param sprite
+	 * @param specifiedStates
+	 * @param explodedBombs
+	 * @param burntTiles
+	 */
+	private void checkBurning(AiSprite sprite, HashMap<AiSprite,AiState> specifiedStates, List<AiBomb> explodedBombs, List<AiTile> burntTiles)
+	{	if(sprite instanceof AiBomb)
+		{	AiBomb bomb = (AiBomb)sprite;
+			if(bomb.hasExplosionTrigger()) //NOTE simplification: there actually is a latency before the bomb explodes
+			{	AiState state = new AiSimState(AiStateName.BURNING,Direction.NONE,0);
+				specifiedStates.put(bomb,state);
+			}
+			checkExplosion(bomb,specifiedStates,explodedBombs,burntTiles);
+		}
+		else if(sprite instanceof AiBlock)
+		{	AiBlock block = (AiBlock)sprite;	
+			if(block.isDestructible())
+			{	AiState state = new AiSimState(AiStateName.BURNING,Direction.NONE,0);
+				specifiedStates.put(block,state);
+			}
+		}
+		else if(sprite instanceof AiFire)
+		{	//AiFire Fire = (AiFire)sprite;	
+			// useless here
+		}
+		else if(sprite instanceof AiFloor)
+		{	//AiFloor floor = (AiFloor)sprite;	
+			//nothing to do
+		}
+		else if(sprite instanceof AiHero)
+		{	AiHero hero = (AiHero)sprite;	
+			if(!hero.hasThroughFires())
+			{	AiState state = new AiSimState(AiStateName.BURNING,Direction.NONE,0);
+				specifiedStates.put(hero,state);
+			}
+		}
+		else if(sprite instanceof AiItem)
+		{	AiItem item = (AiItem)sprite;	
+			// NOTE simplification, because some items are not actually destructed but just moved away
+			AiState state = new AiSimState(AiStateName.BURNING,Direction.NONE,0);
+			specifiedStates.put(item,state);
+		}
 	}
 	
 	/**
@@ -156,7 +323,9 @@ public class AiModel
 				}
 			}
 		}
-		
+
+		// TODO à compléter
+				
 		AiSimState result = new AiSimState(name,direction,time);
 		return result;
 	}
@@ -234,7 +403,7 @@ public class AiModel
 	 */
 	private void applyState(AiSprite sprite0, AiSimState state, AiSimZone result, long duration)
 	{	// previous state
-		AiState state0 = sprite0.getState();
+		//AiState state0 = sprite0.getState();
 		AiTile tile0 = sprite0.getTile();
 		int line0 = tile0.getLine();
 		int col0 = tile0.getCol();
@@ -535,6 +704,23 @@ public class AiModel
 		AiStopType stopFires = item.hasStopFires();
 		AiSimItem result = new AiSimItem(tile,posX,posY,posZ,state,burningDuration,currentSpeed,
 			type,stopBombs,stopFires);
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TOOLS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * fonction permettant de définir le nouvel état d'un sprite, afin
+	 * de l'utiliser dans le modèle pour générer l'état suivant de la zone
+	 * 
+	 * @param name	nom de l'état
+	 * @param direction	direction de l'action
+	 * @return	l'état correspondant aux paramètres reçus
+	 */
+	public static AiState generateState(AiStateName name, Direction direction)
+	{	long time = 0;
+		AiState result = new AiSimState(name,direction,time);
 		return result;
 	}
 }
