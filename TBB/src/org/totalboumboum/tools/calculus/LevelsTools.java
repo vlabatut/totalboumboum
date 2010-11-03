@@ -21,12 +21,6 @@ package org.totalboumboum.tools.calculus;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.manager.trajectory.MoveZone;
@@ -62,39 +56,39 @@ public class LevelsTools
 	/**
 	 * process the Manhattan distance
 	 */
-	public static double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction, double pixelHeight, double pixelWidth)
-	{	x1 = normalizePositionX(x1);
-		y1 = normalizePositionY(y1);
-		x2 = normalizePositionX(x2);
-		y2 = normalizePositionY(y2);
+	public static double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction, double pixelLeftX, double pixelTopY, double pixelHeight, double pixelWidth)
+	{	x1 = normalizePositionX(x1,pixelLeftX,pixelWidth);
+		y1 = normalizePositionY(y1,pixelTopY,pixelHeight);
+		x2 = normalizePositionX(x2,pixelLeftX,pixelWidth);
+		y2 = normalizePositionY(y2,pixelTopY,pixelHeight);
 		double result = processPixelDistance(x1,y1,x2,y2,direction,pixelHeight,pixelWidth);
 		return result;
 	}
 	
-	public static double getPixelDistance(double x1, double y1, double x2, double y2, double pixelHeight, double pixelWidth)
-	{	return getPixelDistance(x1,y1,x2,y2,Direction.NONE,pixelHeight,pixelWidth);
+	public static double getPixelDistance(double x1, double y1, double x2, double y2, double pixelLeftX, double pixelTopY, double pixelHeight, double pixelWidth)
+	{	return getPixelDistance(x1,y1,x2,y2,Direction.NONE,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 
-	public static double getHorizontalPixelDistance(double x1, double x2, Direction direction, double pixelWidth)
-	{	x1 = normalizePositionX(x1);
-		x2 = normalizePositionX(x2);
+	public static double getHorizontalPixelDistance(double x1, double x2, Direction direction, double pixelLeftX, double pixelWidth)
+	{	x1 = normalizePositionX(x1,pixelLeftX,pixelWidth);
+		x2 = normalizePositionX(x2,pixelLeftX,pixelWidth);
 		double result = processHorizontalPixelDistance(x1,x2,direction,pixelWidth);
 		return result;
 	}
 	
-	public static double getHorizontalPixelDistance(double x1, double x2, double pixelWidth)
-	{	return getHorizontalPixelDistance(x1,x2,Direction.NONE,pixelWidth);
+	public static double getHorizontalPixelDistance(double x1, double x2, double pixelLeftX, double pixelWidth)
+	{	return getHorizontalPixelDistance(x1,x2,Direction.NONE,pixelLeftX,pixelWidth);
 	}
 	
-	public static double getVerticalPixelDistance(double y1, double y2, Direction direction, double pixelHeight)
-	{	y1 = normalizePositionY(y1);
-		y2 = normalizePositionY(y2);
+	public static double getVerticalPixelDistance(double y1, double y2, Direction direction, double pixelTopY, double pixelHeight)
+	{	y1 = normalizePositionY(y1,pixelTopY,pixelHeight);
+		y2 = normalizePositionY(y2,pixelTopY,pixelHeight);
 		double result = processVerticalPixelDistance(y1,y2,direction,pixelHeight);
 		return result;
 	}
 	
-	public static double getVerticalPixelDistance(double y1, double y2, double pixelHeight)
-	{	return getVerticalPixelDistance(y1,y2,Direction.NONE,pixelHeight);
+	public static double getVerticalPixelDistance(double y1, double y2, double pixelTopY, double pixelHeight)
+	{	return getVerticalPixelDistance(y1,y2,Direction.NONE,pixelTopY,pixelHeight);
 	}
 	
 	/**
@@ -168,10 +162,10 @@ public class LevelsTools
 	}
 
 	public static int getTileDistance(int line1, int col1, int line2, int col2, Direction direction, int globalHeight, int globalWidth)
-	{	line1 = normalizePositionLine(line1);
-		col1 = normalizePositionCol(col1);
-		line2 = normalizePositionLine(line2);
-		col2 = normalizePositionCol(col2);
+	{	line1 = normalizePositionLine(line1,globalHeight);
+		col1 = normalizePositionCol(col1,globalWidth);
+		line2 = normalizePositionLine(line2,globalHeight);
+		col2 = normalizePositionCol(col2,globalWidth);
 		int result = processTileDistance(line1,col1,line2,col2,direction,globalHeight,globalWidth);
 		return result;
 	}
@@ -180,8 +174,8 @@ public class LevelsTools
 	}
 
 	public static int getHorizontalTileDistance(int col1, int col2, Direction direction, int globalWidth)
-	{	col1 = normalizePositionCol(col1);
-		col2 = normalizePositionCol(col2);
+	{	col1 = normalizePositionCol(col1,globalWidth);
+		col2 = normalizePositionCol(col2,globalWidth);
 		int result = processHorizontalTileDistance(col1,col2,direction,globalWidth);
 		return result;
 	}
@@ -190,8 +184,8 @@ public class LevelsTools
 	}
 	
 	public static double getVerticalTileDistance(int line1, int line2, Direction direction, int globalHeight)
-	{	line1 = normalizePositionLine(line1);
-		line2 = normalizePositionLine(line2);
+	{	line1 = normalizePositionLine(line1,globalHeight);
+		line2 = normalizePositionLine(line2,globalHeight);
 		double result = processVerticalTileDistance(line1,line2,direction,globalHeight);
 		return result;
 	}
@@ -262,11 +256,11 @@ public class LevelsTools
 	 * processes the direction from the location (x1,y1) to the location (x2,y2),
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
-	public static Direction getDirection(double x1, double y1, double x2, double y2, double pixelHeight, double pixelWidth)
-	{	x1 = normalizePositionX(x1);
-		y1 = normalizePositionY(y1);
-		x2 = normalizePositionX(x2);
-		y2 = normalizePositionY(y2);
+	public static Direction getDirection(double x1, double y1, double x2, double y2, double pixelLeftX, double pixelTopY, double pixelHeight, double pixelWidth)
+	{	x1 = normalizePositionX(x1,pixelLeftX,pixelWidth);
+		y1 = normalizePositionY(y1,pixelTopY,pixelHeight);
+		x2 = normalizePositionX(x2,pixelLeftX,pixelWidth);
+		y2 = normalizePositionY(y2,pixelTopY,pixelHeight);
 		Direction result = processDirection(x1,y1,x2,y2,pixelHeight,pixelWidth);
 		return result;
 	}
@@ -275,9 +269,9 @@ public class LevelsTools
 	 * processes the direction from the location x1 to the location x2,
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
-	public static Direction getHorizontalDirection(double x1, double x2, double pixelWidth)
-	{	x1 = normalizePositionX(x1);
-		x2 = normalizePositionX(x2);
+	public static Direction getHorizontalDirection(double x1, double x2, double pixelLeftX, double pixelWidth)
+	{	x1 = normalizePositionX(x1,pixelLeftX,pixelWidth);
+		x2 = normalizePositionX(x2,pixelLeftX,pixelWidth);
 		Direction result = processHorizontalDirection(x1,x2,pixelWidth);
 		return result;
 	}
@@ -286,10 +280,10 @@ public class LevelsTools
 	 * processes the direction from the location y1 to the location y2,
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
-	public static Direction getVerticalDirection(double x1, double x2, double pixelHeight)
-	{	x1 = normalizePositionX(x1);
-		x2 = normalizePositionX(x2);
-		Direction result = processHorizontalDirection(x1,x2,pixelHeight);
+	public static Direction getVerticalDirection(double y1, double y2, double pixelTopY, double pixelHeight)
+	{	y1 = normalizePositionY(y1,pixelTopY,pixelHeight);
+		y2 = normalizePositionY(y2,pixelTopY,pixelHeight);
+		Direction result = processVerticalDirection(y1,y2,pixelHeight);
 		return result;
 	}
 
@@ -408,9 +402,9 @@ public class LevelsTools
 	 * returns the difference between x1 and x2, considering the level
 	 * is cyclic and using the specified direction.
 	 */
-	public static double getDeltaX(double x1, double x2, Direction direction, double pixelWidth)
-	{	x1 = normalizePositionX(x1);
-		x2 = normalizePositionX(x2);
+	public static double getDeltaX(double x1, double x2, Direction direction, double pixelLeftX, double pixelWidth)
+	{	x1 = normalizePositionX(x1,pixelLeftX,pixelWidth);
+		x2 = normalizePositionX(x2,pixelLeftX,pixelWidth);
 		double result = processDeltaX(x1,x2,direction,pixelWidth);
 		return result;
 	}
@@ -420,8 +414,8 @@ public class LevelsTools
 	 * is cyclic. In other words, the delta with the smallest absolute
 	 * value is returned.
 	 */
-	public static double getDeltaX(double x1, double x2, double pixelWidth)
-	{	double result = getDeltaX(x1,x2,Direction.NONE,pixelWidth);
+	public static double getDeltaX(double x1, double x2, double pixelLeftX, double pixelWidth)
+	{	double result = getDeltaX(x1,x2,Direction.NONE,pixelLeftX,pixelWidth);
 		return result;
 	}
 
@@ -429,9 +423,9 @@ public class LevelsTools
 	 * returns the difference between y1 and y2, considering the level
 	 * is cyclic and using the specified direction.
 	 */
-	public static double getDeltaY(double y1, double y2, Direction direction, double pixelHeight)
-	{	y1 = normalizePositionY(y1);
-		y2 = normalizePositionY(y2);
+	public static double getDeltaY(double y1, double y2, Direction direction, double pixelTopY, double pixelHeight)
+	{	y1 = normalizePositionY(y1,pixelTopY,pixelHeight);
+		y2 = normalizePositionY(y2,pixelTopY,pixelHeight);
 		double result = processDeltaY(y1,y2,direction,pixelHeight);
 		return result;
 	}
@@ -441,8 +435,8 @@ public class LevelsTools
 	 * is cyclic. In other words, the delta with the smallest absolute
 	 * value is returned.
 	 */
-	public static double getDeltaY(double y1, double y2, double pixelHeight)
-	{	double result = getDeltaY(y1,y2,Direction.NONE,pixelHeight);
+	public static double getDeltaY(double y1, double y2, double pixelTopY, double pixelHeight)
+	{	double result = getDeltaY(y1,y2,Direction.NONE,pixelTopY,pixelHeight);
 		return result;
 	}
 
@@ -507,6 +501,44 @@ public class LevelsTools
 	/////////////////////////////////////////////////////////////////
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public static int[] getTile(double x, double y, double pixelLeftX, double pixelTopY, int globalHeight, int globalWidth)
+	{	x = CombinatoricsTools.round(x);
+		y = CombinatoricsTools.round(y);
+		double difX = x-pixelLeftX;
+		double difY = y-pixelTopY;
+		double rX = difX/RoundVariables.scaledTileDimension;
+		double rY = difY/RoundVariables.scaledTileDimension;
+		int rdX = (int)rX;//(int)Math.round(rX);
+		int rdY = (int)rY;//(int)Math.round(rY);
+		int c = rdX%globalWidth;
+		int l = rdY%globalHeight;
+		
+		int result[] = {l,c};
+		return result;
+	}	
+	
+	public static int[] getNeighborTile(int line, int col, Direction direction, int globalHeight, int globalWidth)
+	{	int c,l;
+		Direction p[] = direction.getPrimaries(); 
+
+		if(p[0]==Direction.LEFT)
+			c = (col+globalWidth-1)%globalWidth;
+		else if(p[0]==Direction.RIGHT)
+			c = (col+1)%globalWidth;
+		else
+			c = col;
+		//
+		if(p[1]==Direction.UP)
+			l = (line+globalHeight-1)%globalHeight;
+		else if(p[1]==Direction.DOWN)
+			l = (line+1)%globalHeight;
+		else
+			l = line;
+
+		int result[] = {l,c};
+		return result;
+	}
+
 	public static int[] normalizePosition(int line, int col, int globalHeight, int globalWidth)
 	{	int result[] = new int[2];
 		result[0] = normalizePositionLine(line,globalHeight);

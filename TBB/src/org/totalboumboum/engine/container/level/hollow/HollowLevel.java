@@ -150,8 +150,8 @@ public class HollowLevel implements Serializable
 		Tile[][] matrix = level.getMatrix();
 		Itemset itemset = instance.getItemset();
 		Bombset bombset = instance.getBombsetMap().getBombset(null);
-		double globalLeftX = level.getGlobalLeftX();
-		double globalUpY = level.getGlobalUpY();
+		double globalLeftX = level.getPixelLeftX();
+		double globalUpY = level.getPixelTopY();
 		int globalHeight = levelInfo.getGlobalHeight();
 		int globalWidth = levelInfo.getGlobalWidth();
 		List<String[][]> matrices = zone.getMatrices();
@@ -214,8 +214,8 @@ if(bomb==null)
 	public void synchronizeZone(ReplayedLoop loop)
 	{	// init zone
 		Tile[][] matrix = level.getMatrix();
-		double globalLeftX = level.getGlobalLeftX();
-		double globalUpY = level.getGlobalUpY();
+		double globalLeftX = level.getPixelLeftX();
+		double globalUpY = level.getPixelTopY();
 		int globalHeight = levelInfo.getGlobalHeight();
 		int globalWidth = levelInfo.getGlobalWidth();
 		

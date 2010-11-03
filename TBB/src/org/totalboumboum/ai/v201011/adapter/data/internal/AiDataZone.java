@@ -51,6 +51,7 @@ import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.calculus.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -206,6 +207,10 @@ public final class AiDataZone extends AiZone
 	{	Tile[][] m = level.getMatrix();
 		height = level.getGlobalHeight();
 		width = level.getGlobalWidth();
+		pixelLeftX = level.getPixelLeftX();
+		pixelTopY = level.getPixelTopY();
+		pixelWidth = level.getPixelWidth();
+		pixelHeight = level.getPixelHeight();
 		matrix = new AiDataTile[height][width];
 		for(int lineIndex=0;lineIndex<height;lineIndex++)
 		{	for(int colIndex=0;colIndex<width;colIndex++)
@@ -255,10 +260,8 @@ public final class AiDataZone extends AiZone
 	
 	@Override
 	public AiDataTile getTile(double x, double y)
-	{	Tile tile = level.getTile(x, y);
-		int line = tile.getLine();
-		int col = tile.getCol();
-		AiDataTile result = matrix[line][col];
+	{	int[] coord = LevelsTools.getTile(x,y,pixelLeftX,pixelTopY,height,width);
+		AiDataTile result = matrix[coord[0]][coord[1]];
 		return result;
 	}
 	

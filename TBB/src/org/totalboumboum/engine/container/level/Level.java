@@ -36,7 +36,6 @@ import org.totalboumboum.engine.content.manager.trajectory.MoveZone;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.calculus.CombinatoricsTools;
 import org.totalboumboum.tools.calculus.LevelsTools;
 
 /**
@@ -92,12 +91,21 @@ public class Level
 		this.pixelWidth = globalWidth*RoundVariables.scaledTileDimension;
 		this.pixelHeight = globalHeight*RoundVariables.scaledTileDimension;
 	}
-	public double getGlobalLeftX()
+	
+	public double getPixelLeftX()
 	{	return pixelLeftX;
 	}
-	public double getGlobalUpY()
+	public double getPixelTopY()
 	{	return pixelTopY;
 	}
+	
+	public double getPixelWidth()
+	{	return pixelWidth;
+	}
+	public double getPixelHeight()
+	{	return pixelHeight;
+	}
+	
 	public int getGlobalWidth()
 	{	return globalWidth;
 	}
@@ -145,24 +153,24 @@ public class Level
 	}
 	
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
-	{	return LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelHeight,pixelWidth);
+	{	return LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
-	{	return LevelsTools.getPixelDistance(x1,y1,x2,y2,pixelHeight,pixelWidth);
+	{	return LevelsTools.getPixelDistance(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 
 	public double getHorizontalPixelDistance(double x1, double x2, Direction direction)
-	{	return LevelsTools.getHorizontalPixelDistance(x1,x2,direction,pixelWidth);
+	{	return LevelsTools.getHorizontalPixelDistance(x1,x2,direction,pixelLeftX,pixelWidth);
 	}
 	public double getHorizontalPixelDistance(double x1, double x2)
-	{	return LevelsTools.getHorizontalPixelDistance(x1,x2,pixelWidth);
+	{	return LevelsTools.getHorizontalPixelDistance(x1,x2,pixelLeftX,pixelWidth);
 	}
 	
 	public double getVerticalPixelDistance(double y1, double y2, Direction direction)
-	{	return LevelsTools.getVerticalPixelDistance(y1,y2,direction,pixelHeight);
+	{	return LevelsTools.getVerticalPixelDistance(y1,y2,direction,pixelTopY,pixelHeight);
 	}
 	public double getVerticalPixelDistance(double y1, double y2)
-	{	return LevelsTools.getVerticalPixelDistance(y1,y2,pixelHeight);
+	{	return LevelsTools.getVerticalPixelDistance(y1,y2,pixelTopY,pixelHeight);
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -172,34 +180,34 @@ public class Level
 	{	return LevelsTools.getTileDistance(s1,s2,direction,globalHeight,globalWidth);
 	}
 	public int getTileDistance(Sprite s1, Sprite s2)
-	{	return LevelsTools.getTileDistance(s1,s2,Direction.NONE,globalHeight,globalWidth);
+	{	return LevelsTools.getTileDistance(s1,s2,globalHeight,globalWidth);
 	}
 	public int getTileDistance(Tile tile1, Tile tile2, Direction direction)
 	{	return LevelsTools.getTileDistance(tile1,tile2,direction,globalHeight,globalWidth);
 	}
 	public int getTileDistance(Tile tile1, Tile tile2)
-	{	return LevelsTools.getTileDistance(tile1,tile2,Direction.NONE,globalHeight,globalWidth);
+	{	return LevelsTools.getTileDistance(tile1,tile2,globalHeight,globalWidth);
 	}
 
 	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
 	{	return LevelsTools.getTileDistance(line1,col1,line2,col2,direction,globalHeight,globalWidth);
 	}
 	public int getTileDistance(int line1, int col1, int line2, int col2)
-	{	return LevelsTools.getTileDistance(line1,col1,line2,col2,Direction.NONE,globalHeight,globalWidth);
+	{	return LevelsTools.getTileDistance(line1,col1,line2,col2,globalHeight,globalWidth);
 	}
 
 	public int getHorizontalTileDistance(int col1, int col2, Direction direction)
 	{	return LevelsTools.getHorizontalTileDistance(col1,col2,direction,globalWidth);
 	}
 	public int getHorizontalTileDistance(int col1, int col2)
-	{	return LevelsTools.getHorizontalTileDistance(col1,col2,Direction.NONE,globalWidth);
+	{	return LevelsTools.getHorizontalTileDistance(col1,col2,globalWidth);
 	}
 	
 	public double getVerticalTileDistance(int line1, int line2, Direction direction)
 	{	return LevelsTools.getVerticalTileDistance(line1,line2,direction,globalHeight);
 	}
 	public double getVerticalTileDistance(int line1, int line2)
-	{	return LevelsTools.getVerticalTileDistance(line1,line2,Direction.NONE,globalHeight);
+	{	return LevelsTools.getVerticalTileDistance(line1,line2,globalHeight);
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -297,7 +305,7 @@ public class Level
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
-	{	return LevelsTools.getDirection(x1,y1,x2,y2,pixelHeight,pixelWidth);
+	{	return LevelsTools.getDirection(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 
 	/**
@@ -305,15 +313,15 @@ public class Level
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
 	public Direction getHorizontalDirection(double x1, double x2)
-	{	return LevelsTools.getHorizontalDirection(x1,x2,pixelWidth);
+	{	return LevelsTools.getHorizontalDirection(x1,x2,pixelLeftX,pixelWidth);
 	}
 
 	/**
 	 * processes the direction from the location y1 to the location y2,
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
-	public Direction getVerticalDirection(double x1, double x2)
-	{	return LevelsTools.getVerticalDirection(x1,x2,pixelHeight);
+	public Direction getVerticalDirection(double y1, double y2)
+	{	return LevelsTools.getVerticalDirection(y1,y2,pixelTopY,pixelHeight);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -348,7 +356,7 @@ public class Level
 	 * is cyclic and using the specified direction.
 	 */
 	public double getDeltaX(double x1, double x2, Direction direction)
-	{	return LevelsTools.getDeltaX(x1,x2,direction,pixelWidth);
+	{	return LevelsTools.getDeltaX(x1,x2,direction,pixelLeftX,pixelWidth);
 	}
 	
 	/**
@@ -357,7 +365,7 @@ public class Level
 	 * value is returned.
 	 */
 	public double getDeltaX(double x1, double x2)
-	{	return LevelsTools.getDeltaX(x1,x2,Direction.NONE,pixelWidth);
+	{	return LevelsTools.getDeltaX(x1,x2,pixelLeftX,pixelWidth);
 	}
 
 	/**
@@ -365,7 +373,7 @@ public class Level
 	 * is cyclic and using the specified direction.
 	 */
 	public double getDeltaY(double y1, double y2, Direction direction)
-	{	return LevelsTools.getDeltaY(y1,y2,direction,pixelHeight);
+	{	return LevelsTools.getDeltaY(y1,y2,direction,pixelTopY,pixelHeight);
 	}
 	
 	/**
@@ -374,49 +382,24 @@ public class Level
 	 * value is returned.
 	 */
 	public double getDeltaY(double y1, double y2)
-	{	return LevelsTools.getDeltaY(y1,y2,Direction.NONE,pixelHeight);
+	{	return LevelsTools.getDeltaY(y1,y2,pixelTopY,pixelHeight);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public Tile getTile(double x, double y)
-	{	Tile result = null;
-		x = CombinatoricsTools.round(x);
-		y = CombinatoricsTools.round(y);
-		double difX = x-pixelLeftX;
-		double difY = y-pixelTopY;
-		double rX = difX/RoundVariables.scaledTileDimension;
-		double rY = difY/RoundVariables.scaledTileDimension;
-		int rdX = (int)rX;//(int)Math.round(rX);
-		int rdY = (int)rY;//(int)Math.round(rY);
-		int c = rdX%globalWidth;
-		int l = rdY%globalHeight;
-		result = matrix[l][c];
-		return result;
-	}	
-	public Tile getNeighborTile(int line, int col, Direction direction)
-	{	Tile result;
-		int c,l;
-		Direction p[] = direction.getPrimaries(); 
-		//
-		if(p[0]==Direction.LEFT)
-			c = (col+globalWidth-1)%globalWidth;
-		else if(p[0]==Direction.RIGHT)
-			c = (col+1)%globalWidth;
-		else
-			c = col;
-		//
-		if(p[1]==Direction.UP)
-			l = (line+globalHeight-1)%globalHeight;
-		else if(p[1]==Direction.DOWN)
-			l = (line+1)%globalHeight;
-		else
-			l = line;
-		//
-		result = matrix[l][c];
+	{	int[] coord = LevelsTools.getTile(x,y,pixelLeftX,pixelTopY,globalHeight,globalWidth);
+		Tile result = matrix[coord[0]][coord[1]];
 		return result;
 	}
+	
+	public Tile getNeighborTile(int line, int col, Direction direction)
+	{	int[] coord = LevelsTools.getNeighborTile(line,col,direction,globalHeight,globalWidth);
+		Tile result = matrix[coord[0]][coord[1]];
+		return result;
+	}
+	
 	public List<Tile> getNeighborTiles(int line, int col)
 	{	List<Tile> resultat = new ArrayList<Tile>();
 		resultat.add(getNeighborTile(line, col, Direction.LEFT));
