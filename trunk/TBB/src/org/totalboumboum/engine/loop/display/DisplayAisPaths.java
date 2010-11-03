@@ -40,7 +40,7 @@ import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
  * 
@@ -138,7 +138,7 @@ public class DisplayAisPaths implements Display
 								double x2b = x1 + intDir12[0]*tileSize;
 								double y2b = y1 + intDir12[1]*tileSize;
 								// compare actual and theoretical positions
-								if(!CalculusTools.isRelativelyEqualTo(x1,x1b) || !CalculusTools.isRelativelyEqualTo(y1,y1b))
+								if(!CombinatoricsTools.isRelativelyEqualTo(x1,x1b) || !CombinatoricsTools.isRelativelyEqualTo(y1,y1b))
 								{	shape.lineTo(x2b,y2b);
 									g2.draw(shape);
 									shape = new Path2D.Double();

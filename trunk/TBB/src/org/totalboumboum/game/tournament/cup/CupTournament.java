@@ -45,7 +45,7 @@ import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
  * 
@@ -353,7 +353,7 @@ public class CupTournament extends AbstractTournament
 	{	int matches = legs.get(0).getParts().size();
 
 		// get the distributions
-		List<List<Integer>> distributions = CalculusTools.processDistributions(playerCount,matches);
+		List<List<Integer>> distributions = CombinatoricsTools.processDistributions(playerCount,matches);
 		
 		// permute them
 		TreeSet<List<Integer>> permutations = new TreeSet<List<Integer>>(new Comparator<List<Integer>>()
@@ -383,7 +383,7 @@ for(ArrayList<Integer> list: distributions)
 }
 */		
 		for(List<Integer> distrib: distributions)
-		{	List<List<Integer>> perms = CalculusTools.processPermutations(distrib);
+		{	List<List<Integer>> perms = CombinatoricsTools.processPermutations(distrib);
 /*		
 System.out.println();
 System.out.println("PERMUTATIONS");

@@ -36,7 +36,8 @@ import org.totalboumboum.engine.content.manager.trajectory.MoveZone;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.calculus.LevelsTools;
 
 /**
  * 
@@ -136,102 +137,34 @@ public class Level
     /////////////////////////////////////////////////////////////////
 	// PIXEL DISTANCES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * process the Manhattan distance
-	 */
 	public double getPixelDistance(Sprite s1, Sprite s2, Direction direction)
-	{	double x1 = s1.getCurrentPosX();
-		double y1 = s1.getCurrentPosY();
-		double x2 = s2.getCurrentPosX();
-		double y2 = s2.getCurrentPosY();
-		double result = processPixelDistance(x1,y1,x2,y2,direction);
-		return result;
+	{	return LevelsTools.getPixelDistance(s1,s2,direction,pixelHeight,pixelWidth);
 	}
 	public double getPixelDistance(Sprite s1, Sprite s2)
-	{	return getPixelDistance(s1,s2,Direction.NONE);
+	{	return LevelsTools.getPixelDistance(s1,s2,pixelHeight,pixelWidth);
 	}
 	
-	/**
-	 * process the Manhattan distance
-	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
-	{	x1 = normalizePositionX(x1);
-		y1 = normalizePositionY(y1);
-		x2 = normalizePositionX(x2);
-		y2 = normalizePositionY(y2);
-		double result = processPixelDistance(x1,y1,x2,y2,direction);
-		return result;
+	{	return LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelHeight,pixelWidth);
 	}
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
-	{	return getPixelDistance(x1,y1,x2,y2,Direction.NONE);
+	{	return LevelsTools.getPixelDistance(x1,y1,x2,y2,pixelHeight,pixelWidth);
 	}
 
 	public double getHorizontalPixelDistance(double x1, double x2, Direction direction)
-	{	x1 = normalizePositionX(x1);
-		x2 = normalizePositionX(x2);
-		double result = processHorizontalPixelDistance(x1,x2,direction);
-		return result;
+	{	return LevelsTools.getHorizontalPixelDistance(x1,x2,direction,pixelWidth);
 	}
 	public double getHorizontalPixelDistance(double x1, double x2)
-	{	return getHorizontalPixelDistance(x1,x2,Direction.NONE);
+	{	return LevelsTools.getHorizontalPixelDistance(x1,x2,pixelWidth);
 	}
 	
 	public double getVerticalPixelDistance(double y1, double y2, Direction direction)
-	{	y1 = normalizePositionY(y1);
-		y2 = normalizePositionY(y2);
-		double result = processVerticalPixelDistance(y1,y2,direction);
-		return result;
+	{	return LevelsTools.getVerticalPixelDistance(y1,y2,direction,pixelHeight);
 	}
 	public double getVerticalPixelDistance(double y1, double y2)
-	{	return getVerticalPixelDistance(y1,y2,Direction.NONE);
+	{	return LevelsTools.getVerticalPixelDistance(y1,y2,pixelHeight);
 	}
 	
-	/**
-	 * process the manhattan distance
-	 */
-	private double processPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
-	{	double result = 0;
-		result = result + processHorizontalPixelDistance(x1,x2,direction);
-		result = result + processVerticalPixelDistance(y1,y2,direction);
-		return result;
-	}
-	
-	private double processHorizontalPixelDistance(double x1, double x2, Direction direction)
-	{	double result;
-		double dx = x2 - x1;
-		double direct = Math.abs(dx);
-		double indirect = pixelWidth - direct;
-		Direction dir = direction.getHorizontalPrimary();
-		if(dir==Direction.NONE)
-			result = Math.min(direct,indirect);
-		else
-		{	Direction d = Direction.getHorizontalFromDouble(dx);
-			if(dir==d)
-				result = direct;
-			else
-				result = indirect;
-		}		
-		return result;
-	}
-	
-	private double processVerticalPixelDistance(double y1, double y2, Direction direction)
-	{	double result;
-		double dy = y2 - y1;
-		double direct = Math.abs(dy);
-		double indirect = pixelHeight - direct;
-		Direction dir = direction.getVerticalPrimary();
-		if(dir==Direction.NONE)
-			result = Math.min(direct,indirect);
-		else
-		{	Direction d = Direction.getVerticalFromDouble(dy);
-			if(dir==d)
-				result = direct;
-			else
-				result = indirect;
-		}		
-		return result;
-	}
-
     /////////////////////////////////////////////////////////////////
 	// TILE DISTANCES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -677,8 +610,8 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	public Tile getTile(double x, double y)
 	{	Tile result = null;
-		x = CalculusTools.round(x);
-		y = CalculusTools.round(y);
+		x = CombinatoricsTools.round(x);
+		y = CombinatoricsTools.round(y);
 		double difX = x-pixelLeftX;
 		double difY = y-pixelTopY;
 		double rX = difX/RoundVariables.scaledTileDimension;

@@ -45,7 +45,7 @@ import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -185,7 +185,7 @@ public class AiZone
 		roundRanks.clear();
 		Round round = level.getLoop().getRound();
 		float points[] = round.getCurrentPoints();
-		int ranks[] = CalculusTools.getRanks(points);
+		int ranks[] = CombinatoricsTools.getRanks(points);
 		for(int i=0;i<players.size();i++)
 		{	Hero hero = (Hero)players.get(i).getSprite();
 			AiHero aiHero = heroMap.get(hero);
@@ -196,7 +196,7 @@ public class AiZone
 		matchRanks.clear();
 		Match match = round.getMatch();
 		points = match.getStats().getTotal();
-		ranks = CalculusTools.getRanks(points);
+		ranks = CombinatoricsTools.getRanks(points);
 		for(int i=0;i<players.size();i++)
 		{	Hero hero = (Hero)players.get(i).getSprite();
 			AiHero aiHero = heroMap.get(hero);
@@ -893,10 +893,10 @@ public class AiZone
 	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
 	{	double dx = RoundVariables.level.getDeltaX(x1,x2);
-		if(CalculusTools.isRelativelyEqualTo(dx,0))
+		if(CombinatoricsTools.isRelativelyEqualTo(dx,0))
 			dx = 0;
 		double dy = RoundVariables.level.getDeltaY(y1,y2);
-		if(CalculusTools.isRelativelyEqualTo(dy,0))
+		if(CombinatoricsTools.isRelativelyEqualTo(dy,0))
 			dy = 0;
 		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
 		return result;
@@ -1030,7 +1030,7 @@ public class AiZone
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
 	{	double result = level.getPixelDistance(x1,y1,x2,y2);
-		if(CalculusTools.isRelativelyEqualTo(result,0))
+		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -1051,7 +1051,7 @@ public class AiZone
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
 	{	double result = level.getPixelDistance(x1,y1,x2,y2,direction);
-		if(CalculusTools.isRelativelyEqualTo(result,0))
+		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -1089,7 +1089,7 @@ public class AiZone
 		double x2 = sprite2.getPosX();
 		double y2 = sprite2.getPosY();
 		double result = level.getPixelDistance(x1,y1,x2,y2,direction);
-		if(CalculusTools.isRelativelyEqualTo(result,0))
+		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -1246,8 +1246,8 @@ public class AiZone
 	 */
 	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2)
 	{	boolean result = true;	
-		result = result && CalculusTools.isRelativelyEqualTo(x1,x2);
-		result = result && CalculusTools.isRelativelyEqualTo(y1,y2);
+		result = result && CombinatoricsTools.isRelativelyEqualTo(x1,x2);
+		result = result && CombinatoricsTools.isRelativelyEqualTo(y1,y2);
 		return result;
 	}
 	

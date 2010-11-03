@@ -34,7 +34,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * @author Vincent Labatut
  *
  */
-public class CalculusTools
+public class CombinatoricsTools
 {	
 	/////////////////////////////////////////////////////////////////
 	// APPROXIMATIONS	/////////////////////////////////////////////
@@ -518,7 +518,7 @@ for(List<Set<Integer>> list: matches)
 
 	public static List<Integer> getWinners(float[] points)
 	{	List<Integer> result = new ArrayList<Integer>();
-		int[] ranks = CalculusTools.getRanks(points);
+		int[] ranks = CombinatoricsTools.getRanks(points);
 		for(int i=0;i<ranks.length;i++)
 			if(ranks[i]==1 && points[i]>0)
 				result.add(i);
