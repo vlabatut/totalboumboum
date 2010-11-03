@@ -58,7 +58,7 @@ import org.totalboumboum.stream.file.replay.FileServerStream;
 import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
@@ -427,11 +427,11 @@ public class Round implements StatisticHolder, Serializable
 		int ranks[];
 		int ranks2[];
 		if(isOver())
-		{	ranks = CalculusTools.getRanks(points);
-			ranks2 = CalculusTools.getRanks(total);
+		{	ranks = CombinatoricsTools.getRanks(points);
+			ranks2 = CombinatoricsTools.getRanks(total);
 		}
 		else
-		{	ranks = CalculusTools.getRanks(currentPoints);
+		{	ranks = CombinatoricsTools.getRanks(currentPoints);
 			ranks2 = new int[ranks.length];
 			Arrays.fill(ranks2,0);
 		}
@@ -470,7 +470,7 @@ public class Round implements StatisticHolder, Serializable
 	
 	public List<Integer> getWinners()
 	{	float[] points = stats.getPoints();
-		List<Integer> result = CalculusTools.getWinners(points);
+		List<Integer> result = CombinatoricsTools.getWinners(points);
 		return result;
 	}
 

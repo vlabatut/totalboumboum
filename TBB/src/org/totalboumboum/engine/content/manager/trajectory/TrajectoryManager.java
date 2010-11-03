@@ -27,7 +27,7 @@ import java.util.List;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.sprite.Sprite;
-import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
  * 
@@ -162,7 +162,7 @@ public abstract class TrajectoryManager
 	}
 	
 	public boolean isOnGround()
-	{	return CalculusTools.isRelativelyEqualTo(currentPosZ,0);
+	{	return CombinatoricsTools.isRelativelyEqualTo(currentPosZ,0);
 	}
 
 	/////////////////////////////////////////////////////////////////

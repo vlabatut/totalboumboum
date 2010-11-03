@@ -46,7 +46,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 import org.xml.sax.SAXException;
 
 /**
@@ -221,11 +221,11 @@ public class Match implements StatisticHolder, Serializable
 		int ranks[];
 		int ranks2[];
 		if(isOver())
-		{	ranks = CalculusTools.getRanks(points);
-			ranks2 = CalculusTools.getRanks(total);
+		{	ranks = CombinatoricsTools.getRanks(points);
+			ranks2 = CombinatoricsTools.getRanks(total);
 		}
 		else
-		{	ranks = CalculusTools.getRanks(total);
+		{	ranks = CombinatoricsTools.getRanks(total);
 			ranks2 = new int[ranks.length];
 			Arrays.fill(ranks2,0);
 		}

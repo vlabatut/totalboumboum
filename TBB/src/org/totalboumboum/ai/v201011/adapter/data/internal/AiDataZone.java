@@ -50,7 +50,7 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -156,7 +156,7 @@ public final class AiDataZone extends AiZone
 		roundRanks.clear();
 		Round round = level.getLoop().getRound();
 		float points[] = round.getCurrentPoints();
-		int ranks[] = CalculusTools.getRanks(points);
+		int ranks[] = CombinatoricsTools.getRanks(points);
 		for(int i=0;i<players.size();i++)
 		{	Hero hero = (Hero)players.get(i).getSprite();
 			AiDataHero aiHero = heroMap.get(hero);
@@ -167,7 +167,7 @@ public final class AiDataZone extends AiZone
 		matchRanks.clear();
 		Match match = round.getMatch();
 		points = match.getStats().getTotal();
-		ranks = CalculusTools.getRanks(points);
+		ranks = CombinatoricsTools.getRanks(points);
 		for(int i=0;i<players.size();i++)
 		{	Hero hero = (Hero)players.get(i).getSprite();
 			AiDataHero aiHero = heroMap.get(hero);

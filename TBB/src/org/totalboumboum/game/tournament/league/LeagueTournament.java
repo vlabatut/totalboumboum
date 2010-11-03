@@ -42,7 +42,7 @@ import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 
 /**
  * 
@@ -241,7 +241,7 @@ public class LeagueTournament extends AbstractTournament
 		// try to minimize the number of matches
 		if(minimizeConfrontations)
 		{	for(Integer k: ks)
-			{	List<Set<Integer>> conf = new ArrayList<Set<Integer>>(CalculusTools.processCombinationsRec/*processMinimalCombinations*/(n,k));
+			{	List<Set<Integer>> conf = new ArrayList<Set<Integer>>(CombinatoricsTools.processCombinationsRec/*processMinimalCombinations*/(n,k));
 				if(confrontations==null || conf.size()<confrontations.size())
 					confrontations = conf;
 			}			
@@ -249,7 +249,7 @@ public class LeagueTournament extends AbstractTournament
 		// or choose all possible combinations (might be quite long)
 		else
 		{	for(Integer k: ks)
-			{	List<Set<Integer>> conf = new ArrayList<Set<Integer>>(CalculusTools.processCombinationsRec(n,k));
+			{	List<Set<Integer>> conf = new ArrayList<Set<Integer>>(CombinatoricsTools.processCombinationsRec(n,k));
 				if(confrontations==null || conf.size()<confrontations.size())
 					confrontations = conf;
 			}

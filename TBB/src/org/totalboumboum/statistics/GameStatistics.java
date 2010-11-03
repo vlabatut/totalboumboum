@@ -40,7 +40,7 @@ import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.OverallStatsLoader;
 import org.totalboumboum.statistics.overall.OverallStatsSaver;
 import org.totalboumboum.statistics.overall.PlayerStats;
-import org.totalboumboum.tools.calculus.CalculusTools;
+import org.totalboumboum.tools.calculus.CombinatoricsTools;
 import org.xml.sax.SAXException;
 
 /**
@@ -164,7 +164,7 @@ public class GameStatistics
 	
 	public static void updatePlayersStats(StatisticRound stats)
 	{	float[] points = stats.getPoints();
-		List<Integer> winners = CalculusTools.getWinners(points);
+		List<Integer> winners = CombinatoricsTools.getWinners(points);
 		
 		for(int index=0;index<stats.getPlayersIds().size();index++)
 		{	// init
