@@ -34,9 +34,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
-import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.tools.calculus.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -128,6 +127,10 @@ public final class AiSimZone extends AiZone
 		AiTile[][] m = zone.getMatrix();
 		height = zone.getHeight();
 		width = zone.getWidth();
+		pixelLeftX = zone.getPixelLeftX();
+		pixelTopY = zone.getPixelTopY();
+		pixelWidth = zone.getPixelWidth();
+		pixelHeight = zone.getPixelHeight();
 		matrix = new AiSimTile[height][width];
 		for(int line=0;line<height;line++)
 		{	for(int col=0;col<width;col++)
@@ -189,6 +192,10 @@ public final class AiSimZone extends AiZone
 	protected AiSimZone(int height, int width, AiSimHero hero)
 	{	this.height = height;
 		this.width = width;
+		pixelLeftX = 0;
+		pixelTopY = 0;
+		pixelWidth = 100*width;
+		pixelHeight = 100*height;
 		matrix = new AiSimTile[height][width];
 		for(int line=0;line<height;line++)
 		{	for(int col=0;col<width;col++)
@@ -264,15 +271,15 @@ public final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public AiSimTile getTile(int line, int col)
 	{	return matrix[line][col];
 	}
 	
+	@Override
 	public AiSimTile getTile(double x, double y)
-	{	Tile tile = RoundVariables.level.getTile(x,y);
-		int line = tile.getLine();
-		int col = tile.getCol();
-		AiSimTile result = matrix[line][col];
+	{	int[] coord = LevelsTools.getTile(x,y,pixelLeftX,pixelTopY,height,width);
+		AiSimTile result = matrix[coord[0]][coord[1]];
 		return result;
 	}
 		
@@ -342,10 +349,12 @@ public final class AiSimZone extends AiZone
 	/** liste externe des blocks contenus dans cette zone */
 	private final List<AiBlock> externalBlocks = new ArrayList<AiBlock>();
 	
+	@Override
 	public List<AiBlock> getBlocks()
 	{	return externalBlocks;	
 	}
 	
+	@Override
 	public List<AiBlock> getDestructibleBlocks()
 	{	List<AiBlock> result = new ArrayList<AiBlock>();
 
@@ -365,6 +374,7 @@ public final class AiSimZone extends AiZone
 	/** liste externe des bombes contenues dans cette zone */
 	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
 	
+	@Override
 	public List<AiBomb> getBombs()
 	{	return externalBombs;	
 	}
@@ -377,6 +387,7 @@ public final class AiSimZone extends AiZone
 	/** liste externe des feux contenus dans cette zone */
 	private final List<AiFire> externalFires = new ArrayList<AiFire>();
 	
+	@Override
 	public List<AiFire> getFires()
 	{	return externalFires;	
 	}
@@ -389,6 +400,7 @@ public final class AiSimZone extends AiZone
 	/** liste externe des sols contenus dans cette zone */
 	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
 
+	@Override
 	public List<AiFloor> getFloors()
 	{	return externalFloors;	
 	}
@@ -403,14 +415,17 @@ public final class AiSimZone extends AiZone
 	/** liste externe des personnages restant encore dans cette zone */
 	private final List<AiHero> remainingHeroList = new ArrayList<AiHero>();
 	
+	@Override
 	public List<AiHero> getHeroes()
 	{	return externalHeroes;	
 	}
 	
+	@Override
 	public List<AiHero> getRemainingHeroes()
 	{	return remainingHeroList;	
 	}
 	
+	@Override
 	public List<AiHero> getRemainingOpponents()
 	{	List<AiHero> result = new ArrayList<AiHero>(remainingHeroList);
 		result.remove(ownHero);
@@ -444,10 +459,12 @@ public final class AiSimZone extends AiZone
 	/** nombre d'items cachés, i.e. pas encore ramassés */
 	private int hiddenItemsCount;
 	
+	@Override
 	public List<AiItem> getItems()
 	{	return externalItems;	
 	}
 	
+	@Override
 	public int getHiddenItemsCount()
 	{	return hiddenItemsCount;
 		//TODO must be updated manually
@@ -459,6 +476,7 @@ public final class AiSimZone extends AiZone
 	/** le personnage contrôlé par l'IA */
 	private AiSimHero ownHero;
 
+	@Override
 	public AiSimHero getOwnHero()
 	{	return ownHero;	
 	}

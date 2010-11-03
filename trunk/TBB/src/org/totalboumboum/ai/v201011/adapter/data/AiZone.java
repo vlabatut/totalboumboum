@@ -25,8 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.calculus.CombinatoricsTools;
+import org.totalboumboum.tools.calculus.LevelsTools;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
@@ -412,10 +412,10 @@ public abstract class AiZone
 	 * @return	la direction correspondant au chemin le plus court
 	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
-	{	double dx = RoundVariables.level.getDeltaX(x1,x2);
+	{	double dx = LevelsTools.getDeltaX(x1,x2,pixelLeftX,pixelWidth);
 		if(CombinatoricsTools.isRelativelyEqualTo(dx,0))
 			dx = 0;
-		double dy = RoundVariables.level.getDeltaY(y1,y2);
+		double dy = LevelsTools.getDeltaY(y1,y2,pixelTopY,pixelHeight);
 		if(CombinatoricsTools.isRelativelyEqualTo(dy,0))
 			dy = 0;
 		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
@@ -441,7 +441,7 @@ public abstract class AiZone
 	 * @param direction	direction à considérer
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
-	{	int result = RoundVariables.level.getTileDistance(line1,col1,line2,col2,direction);
+	{	int result = LevelsTools.getTileDistance(line1,col1,line2,col2,direction,height,width);
 		return result;
 	}
 
@@ -459,7 +459,7 @@ public abstract class AiZone
 	 * @param col2	colonne de la seconde case
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2)
-	{	int result = RoundVariables.level.getTileDistance(line1, col1, line2, col2, Direction.NONE);
+	{	int result = LevelsTools.getTileDistance(line1,col1,line2,col2,Direction.NONE,height,width);
 		return result;
 	}
 	
@@ -497,7 +497,7 @@ public abstract class AiZone
 		int col1 = tile1.getCol();
 		int line2 = tile2.getLine();
 		int col2 = tile2.getCol();
-		int result = RoundVariables.level.getTileDistance(line1,col1,line2,col2);
+		int result = LevelsTools.getTileDistance(line1,col1,line2,col2,height,width);
 		return result;
 	}
 	
@@ -538,6 +538,62 @@ public abstract class AiZone
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// PIXEL DIMENSIONS			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** coordonnée du pixel le plus a gauche */
+	protected double pixelLeftX;
+	/** coordonnée du pixel le plus haut */
+	protected double pixelTopY;
+	/** largeur du niveau en pixels */
+	protected double pixelWidth;
+	/** hauteur du niveau en pixels */
+	protected double pixelHeight;
+	
+	/**
+	 * Renvoie la coordonnée du pixel le plus à gauche du niveau.<br/>
+	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
+	 * 
+	 * @return	
+	 * 		l'abscisse du pixel le plus à gauche du niveau
+	 */
+	public double getPixelLeftX()
+	{	return pixelLeftX;
+	}
+
+	/**
+	 * Renvoie la coordonnée du pixel le plus haut du niveau.<br/>
+	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
+	 * 
+	 * @return	
+	 * 		l'ordonnée du pixel le plus haut du niveau
+	 */
+	public double getPixelTopY()
+	{	return pixelTopY;
+	}
+
+	/**
+	 * Renvoie largeur du niveau en pixels.<br/>
+	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
+	 * 
+	 * @return	
+	 * 		la largeur du niveau en pixels
+	 */
+	public double getPixelWidth()
+	{	return pixelWidth;
+	}
+
+	/**
+	 * Renvoie hauteur du niveau en pixels.<br/>
+	 * <b>Note :</b> cette méthode n'est pas utile pour la programmation d'une IA.
+	 * 
+	 * @return	
+	 * 		la hauteur du niveau en pixels
+	 */
+	public double getPixelHeight()
+	{	return pixelHeight;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// PIXEL DISTANCES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
@@ -554,7 +610,7 @@ public abstract class AiZone
 	 * @param y2	ordonnée du second point
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
-	{	double result = RoundVariables.level.getPixelDistance(x1,y1,x2,y2);
+	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
@@ -576,7 +632,7 @@ public abstract class AiZone
 	 * @param direction	direction à considérer
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
-	{	double result = RoundVariables.level.getPixelDistance(x1,y1,x2,y2,direction);
+	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
@@ -615,7 +671,7 @@ public abstract class AiZone
 		double y1 = sprite1.getPosY();
 		double x2 = sprite2.getPosX();
 		double y2 = sprite2.getPosY();
-		double result = RoundVariables.level.getPixelDistance(x1,y1,x2,y2,direction);
+		double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
@@ -644,7 +700,7 @@ public abstract class AiZone
 	 * @return	un tableau contenant les versions normalisées de x et y
 	 */
 	public double[] normalizePosition(double x, double y)
-	{	return RoundVariables.level.normalizePosition(x, y);
+	{	return LevelsTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 
 	/**
@@ -659,7 +715,7 @@ public abstract class AiZone
 	 * @return	la version normalisée de x
 	 */
 	public double normalizePositionX(double x)
-	{	return RoundVariables.level.normalizePositionX(x);
+	{	return LevelsTools.normalizePositionX(x,pixelLeftX,pixelWidth);
 	}
 	
 	/**
@@ -674,7 +730,7 @@ public abstract class AiZone
 	 * @return	la version normalisée de y
 	 */
 	public double normalizePositionY(double y)
-	{	return RoundVariables.level.normalizePositionY(y);
+	{	return LevelsTools.normalizePositionY(y,pixelTopY,pixelHeight);
 	}
 	
 	/**
@@ -689,7 +745,7 @@ public abstract class AiZone
 	 * @return	un tableau contenant les versions normalisées de line et col
 	 */
 	public int[] normalizePosition(int line, int col)
-	{	return RoundVariables.level.normalizePosition(line, col);
+	{	return LevelsTools.normalizePosition(line,col,height,width);
 	}
 
 	/**
@@ -704,7 +760,7 @@ public abstract class AiZone
 	 * @return	la version normalisée de col
 	 */
 	public int normalizePositionCol(int col)
-	{	return RoundVariables.level.normalizePositionCol(col);
+	{	return LevelsTools.normalizePositionCol(col,width);
 	}
 
 	/**
@@ -719,7 +775,7 @@ public abstract class AiZone
 	 * @return	la version normalisée de line
 	 */
 	public int normalizePositionLine(int line)
-	{	return RoundVariables.level.normalizePositionLine(line);
+	{	return LevelsTools.normalizePositionLine(line,height);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -782,10 +838,15 @@ public abstract class AiZone
 	// MISC						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * pour avoir un affichage correct avec la console Eclipse, il faut
+	 * cette fonction permet d'afficher la zone sous forme d'ASCII art,
+	 * ce qui est beaucoup plus lisible que du texte classique.
+	 * <b>Attention :</b> pour avoir un affichage correct avec la console Eclipse, il faut
 	 * aller dans la configuration de démarrage du programme, aller
 	 * dans l'onglet "Commnon" puis dans la partie "Console Encoding" et
 	 * sélectionner UTF8 ou unicode.
+	 * 
+	 * @return
+	 * 		une représentation de la zone de type ASCII art
 	 */
 	@Override
 	public String toString()
