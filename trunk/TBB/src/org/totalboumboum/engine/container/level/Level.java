@@ -169,101 +169,39 @@ public class Level
 	// TILE DISTANCES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public int getTileDistance(Sprite s1, Sprite s2, Direction direction)
-	{	Tile tile1 = s1.getTile();
-		Tile tile2 = s2.getTile();
-		int result = getTileDistance(tile1,tile2,direction);
-		return result;
+	{	return LevelsTools.getTileDistance(s1,s2,direction,globalHeight,globalWidth);
 	}
 	public int getTileDistance(Sprite s1, Sprite s2)
-	{	return getTileDistance(s1,s2,Direction.NONE);
+	{	return LevelsTools.getTileDistance(s1,s2,Direction.NONE,globalHeight,globalWidth);
 	}
 	public int getTileDistance(Tile tile1, Tile tile2, Direction direction)
-	{	int line1 = tile1.getLine();
-		int col1 = tile1.getCol();
-		int line2 = tile2.getLine();
-		int col2 = tile2.getCol();
-		int result = processTileDistance(line1,col1,line2,col2,direction);
-		return result;
+	{	return LevelsTools.getTileDistance(tile1,tile2,direction,globalHeight,globalWidth);
 	}
 	public int getTileDistance(Tile tile1, Tile tile2)
-	{	return getTileDistance(tile1,tile2,Direction.NONE);
+	{	return LevelsTools.getTileDistance(tile1,tile2,Direction.NONE,globalHeight,globalWidth);
 	}
 
 	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
-	{	line1 = normalizePositionLine(line1);
-		col1 = normalizePositionCol(col1);
-		line2 = normalizePositionLine(line2);
-		col2 = normalizePositionCol(col2);
-		int result = processTileDistance(line1,col1,line2,col2,direction);
-		return result;
+	{	return LevelsTools.getTileDistance(line1,col1,line2,col2,direction,globalHeight,globalWidth);
 	}
 	public int getTileDistance(int line1, int col1, int line2, int col2)
-	{	return getTileDistance(line1,col1,line2,col2,Direction.NONE);
+	{	return LevelsTools.getTileDistance(line1,col1,line2,col2,Direction.NONE,globalHeight,globalWidth);
 	}
 
 	public int getHorizontalTileDistance(int col1, int col2, Direction direction)
-	{	col1 = normalizePositionCol(col1);
-		col2 = normalizePositionCol(col2);
-		int result = processHorizontalTileDistance(col1,col2,direction);
-		return result;
+	{	return LevelsTools.getHorizontalTileDistance(col1,col2,direction,globalWidth);
 	}
 	public int getHorizontalTileDistance(int col1, int col2)
-	{	return getHorizontalTileDistance(col1,col2,Direction.NONE);
+	{	return LevelsTools.getHorizontalTileDistance(col1,col2,Direction.NONE,globalWidth);
 	}
 	
 	public double getVerticalTileDistance(int line1, int line2, Direction direction)
-	{	line1 = normalizePositionLine(line1);
-		line2 = normalizePositionLine(line2);
-		double result = processVerticalTileDistance(line1,line2,direction);
-		return result;
+	{	return LevelsTools.getVerticalTileDistance(line1,line2,direction,globalHeight);
 	}
 	public double getVerticalTileDistance(int line1, int line2)
-	{	return getVerticalTileDistance(line1,line2,Direction.NONE);
+	{	return LevelsTools.getVerticalTileDistance(line1,line2,Direction.NONE,globalHeight);
 	}
 	
-	private int processTileDistance(int line1, int col1, int line2, int col2, Direction direction)
-	{	int result = 0;
-		result = result + processHorizontalTileDistance(col1,col2,direction);
-		result = result + processVerticalTileDistance(line1,line2,direction);
-		return result;
-	}
-	
-	private int processHorizontalTileDistance(int col1, int col2, Direction direction)
-	{	int result;
-		int dCol = col2 - col1;
-		int direct = Math.abs(dCol);
-		int indirect = globalWidth - direct;
-		Direction dir = direction.getHorizontalPrimary();
-		if(dir==Direction.NONE)
-			result = Math.min(direct,indirect);
-		else
-		{	Direction d = Direction.getHorizontalFromDouble(dCol);
-			if(dir==d)
-				result = direct;
-			else
-				result = indirect;
-		}		
-		return result;
-	}
-	
-	private int processVerticalTileDistance(int line1, int line2, Direction direction)
-	{	int result;
-		int dLine = line2 - line1;
-		int direct = Math.abs(dLine);
-		int indirect = globalHeight - direct;
-		Direction dir = direction.getVerticalPrimary();
-		if(dir==Direction.NONE)
-			result = Math.min(direct,indirect);
-		else
-		{	Direction d = Direction.getVerticalFromDouble(dLine);
-			if(dir==d)
-				result = direct;
-			else
-				result = indirect;
-		}		
-		return result;
-	}
-
     /////////////////////////////////////////////////////////////////
 	// BOMBSET				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -351,12 +289,7 @@ public class Level
 	 * level is cyclic (i.e. using the shortest path).
 	 */
 	public Direction getDirection(Sprite s1, Sprite s2)
-	{	double x1 = s1.getCurrentPosX();
-		double y1 = s1.getCurrentPosY();
-		double x2 = s2.getCurrentPosX();
-		double y2 = s2.getCurrentPosY();
-		Direction result = processDirection(x1,y1,x2,y2);
-		return result;
+	{	return LevelsTools.getDirection(s1,s2,pixelHeight,pixelWidth);
 	}
 	
 	/**
@@ -364,12 +297,7 @@ public class Level
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
-	{	x1 = normalizePositionX(x1);
-		y1 = normalizePositionY(y1);
-		x2 = normalizePositionX(x2);
-		y2 = normalizePositionY(y2);
-		Direction result = processDirection(x1,y1,x2,y2);
-		return result;
+	{	return LevelsTools.getDirection(x1,y1,x2,y2,pixelHeight,pixelWidth);
 	}
 
 	/**
@@ -377,10 +305,7 @@ public class Level
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
 	public Direction getHorizontalDirection(double x1, double x2)
-	{	x1 = normalizePositionX(x1);
-		x2 = normalizePositionX(x2);
-		Direction result = processHorizontalDirection(x1,x2);
-		return result;
+	{	return LevelsTools.getHorizontalDirection(x1,x2,pixelWidth);
 	}
 
 	/**
@@ -388,60 +313,7 @@ public class Level
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
 	public Direction getVerticalDirection(double x1, double x2)
-	{	x1 = normalizePositionX(x1);
-		x2 = normalizePositionX(x2);
-		Direction result = processHorizontalDirection(x1,x2);
-		return result;
-	}
-
-	/**
-	 * processes the overall direction from locations (x1,y1) to (x2,y2),
-	 * considering the level is cyclic. In other words, several
-	 * directions are considered, and the one corresponding to the 
-	 * shortest distance is returned.
-	 */
-	private Direction processDirection(double x1, double y1, double x2, double y2)
-	{	Direction temp;
-		Direction result = Direction.NONE;	
-		temp = processHorizontalDirection(x1,x2);
-		result = result.put(temp);
-		temp = processVerticalDirection(y1,y2);
-		result = result.put(temp);
-		return result;
-	}
-	
-	/**
-	 * processes the horizontal direction from locations x1 to x2,
-	 * considering the level is cyclic. In other words, two opposite
-	 * directions are considered, and the one corresponding to the 
-	 * shortest distance is returned.
-	 * The locations are supposed to have been normalized (i.e. they're in the level)
-	 */
-	private Direction processHorizontalDirection(double x1, double x2)
-	{	Direction result;
-		double dx = x2 - x1;
-		result = Direction.getHorizontalFromDouble(dx);
-		double hemi = ((double)pixelWidth)/2;
-		if(Math.abs(dx)>hemi)
-			result = result.getOpposite();
-		return result;
-	}
-	
-	/**
-	 * processes the vertical direction from locations y1 to y2,
-	 * considering the level is cyclic. In other words, two opposite
-	 * directions are considered, and the one corresponding to the 
-	 * shortest distance is returned.
-	 * The locations are supposed to have been normalized (i.e. they're in the level)
-	 */
-	private Direction processVerticalDirection(double y1, double y2)
-	{	Direction result;
-		double dy = y2 - y1;
-		result = Direction.getVerticalFromDouble(dy);
-		double hemi = ((double)pixelHeight)/2;
-		if(Math.abs(dy)>hemi)
-			result = result.getOpposite();
-		return result;
+	{	return LevelsTools.getVerticalDirection(x1,x2,pixelHeight);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -455,17 +327,7 @@ public class Level
 	 * directions corresponding to the shortest distances. 
 	 */
 	public Direction getCompositeFromSprites(Sprite s1, Sprite s2)
-	{	Direction result;
-		if(s1==null || s2==null)
-			result = Direction.NONE;
-		else
-		{	double x1 = s1.getCurrentPosX();
-			double y1 = s1.getCurrentPosY();
-			double x2 = s2.getCurrentPosX();
-			double y2 = s2.getCurrentPosY();
-			result = getCompositeFromLocations(x1,y1,x2,y2);
-		}
-		return result;
+	{	return LevelsTools.getCompositeFromSprites(s1,s2);
 	}
 
 	/**
@@ -475,33 +337,9 @@ public class Level
 	 * i.e. it will choose the directions corresponding to the shortest distances 
 	 */
 	public Direction getCompositeFromSprites(MoveZone mz, Sprite obstacle)
-	{	Direction result;
-		if(obstacle==null)
-			result = Direction.NONE;
-		else
-		{	double x1 = mz.getCurrentX();
-			double y1 = mz.getCurrentY();
-			double x2 = obstacle.getCurrentPosX();
-			double y2 = obstacle.getCurrentPosY();
-			result = getCompositeFromLocations(x1,y1,x2,y2);
-		}
-		return result;
+	{	return LevelsTools.getCompositeFromSprites(mz,obstacle);
 	}
 	
-	/**
-	 * returns the direction from the (x1,y1) location to the (x2,y2) location.
-	 * Warning: consider approximate distance, i.e. will be NONE
-	 * if the locations are relatively close.
-	 * Also: considers the level circularity, i.e. will choose the
-	 * directions corresponding to the shortest distances 
-	 */
-	private Direction getCompositeFromLocations(double x1, double y1, double x2, double y2)
-	{	double dx = RoundVariables.level.getDeltaX(x1,x2);
-		double dy = RoundVariables.level.getDeltaY(y1,y2);
-		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
-		return result;
-	}
-		
 	/////////////////////////////////////////////////////////////////
 	// DELTAS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -510,10 +348,7 @@ public class Level
 	 * is cyclic and using the specified direction.
 	 */
 	public double getDeltaX(double x1, double x2, Direction direction)
-	{	x1 = normalizePositionX(x1);
-		x2 = normalizePositionX(x2);
-		double result = processDeltaX(x1,x2,direction);
-		return result;
+	{	return LevelsTools.getDeltaX(x1,x2,direction,pixelWidth);
 	}
 	
 	/**
@@ -522,8 +357,7 @@ public class Level
 	 * value is returned.
 	 */
 	public double getDeltaX(double x1, double x2)
-	{	double result = getDeltaX(x1,x2,Direction.NONE);
-		return result;
+	{	return LevelsTools.getDeltaX(x1,x2,Direction.NONE,pixelWidth);
 	}
 
 	/**
@@ -531,10 +365,7 @@ public class Level
 	 * is cyclic and using the specified direction.
 	 */
 	public double getDeltaY(double y1, double y2, Direction direction)
-	{	y1 = normalizePositionY(y1);
-		y2 = normalizePositionY(y2);
-		double result = processDeltaY(y1,y2,direction);
-		return result;
+	{	return LevelsTools.getDeltaY(y1,y2,direction,pixelHeight);
 	}
 	
 	/**
@@ -543,66 +374,7 @@ public class Level
 	 * value is returned.
 	 */
 	public double getDeltaY(double y1, double y2)
-	{	double result = getDeltaY(y1,y2,Direction.NONE);
-		return result;
-	}
-
-	/**
-	 * returns the difference between x1 and x2, using the specified
-	 * direction. Consequently, it may not be the delta with the smallest
-	 * absolute value (i.e. not necessarily the shortest path).
-	 * The locations are supposed to have been normalized (i.e. they're inside the level)
-	 */
-	private double processDeltaX(double x1, double x2, Direction direction)
-	{	double result;
-		double direct = x2 - x1;
-		double absDirect = Math.abs(direct);
-		double indirect = -1*Math.signum(direct)*(pixelWidth - absDirect);
-		double absIndirect = Math.abs(indirect);
-		Direction dir = direction.getHorizontalPrimary();
-		if(dir==Direction.NONE)
-		{	if(absDirect<=absIndirect)
-				result = direct;
-			else 
-				result = indirect;		
-		}
-		else
-		{	Direction d = Direction.getHorizontalFromDouble(direct);
-			if(dir==d)
-				result = direct;
-			else
-				result = indirect;
-		}		
-		return result;
-	}
-
-	/**
-	 * returns the difference between y1 and y2, using the specified
-	 * direction. Consequently, it may not be the delta with the smallest
-	 * absolute value (i.e. not necessarily the shortest path)
-	 * The locations are supposed to have been normalized (i.e. they're inside the level)
-	 */
-	private double processDeltaY(double y1, double y2, Direction direction)
-	{	double result;
-		double direct = y2 - y1;
-		double absDirect = Math.abs(direct);
-		double indirect = -1*Math.signum(direct)*(pixelHeight - absDirect);
-		double absIndirect = Math.abs(indirect);
-		Direction dir = direction.getVerticalPrimary();
-		if(dir==Direction.NONE)
-		{	if(absDirect<=absIndirect)
-				result = direct;
-			else 
-				result = indirect;		
-		}
-		else
-		{	Direction d = Direction.getVerticalFromDouble(direct);
-			if(dir==d)
-				result = direct;
-			else
-				result = indirect;
-		}		
-		return result;
+	{	return LevelsTools.getDeltaY(y1,y2,Direction.NONE,pixelHeight);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -659,65 +431,35 @@ public class Level
 	}	
 
 	public int[] normalizePosition(int line, int col)
-	{	int result[] = new int[2];
-		result[0] = normalizePositionLine(line);
-		result[1] = normalizePositionCol(col);
-		//
-		return result;
+	{	return LevelsTools.normalizePosition(line,col,globalHeight,globalWidth);
 	}
 	public int normalizePositionLine(int line)
-	{	int result = line;
-		while(result<globalHeight)
-			result = result + globalHeight;
-		while(result>globalHeight)
-			result = result - globalHeight;
-		return result;
+	{	return LevelsTools.normalizePositionLine(line,globalHeight);
 	}
 	public int normalizePositionCol(int col)
-	{	int result = col;
-		while(result<globalWidth)
-			result = result + globalWidth;
-		while(result>globalWidth)
-			result = result - globalWidth;
-		return result;
+	{	return LevelsTools.normalizePositionLine(col,globalHeight);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// PIXEL LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public double[] normalizePosition(double x, double y)
-	{	double result[] = new double[2];
-		result[0] = normalizePositionX(x);
-		result[1] = normalizePositionY(y);
-		//
-		return result;
+	{	return LevelsTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 	public double normalizePositionX(double x)
-	{	double result = x;
-		while(result<pixelLeftX)
-			result = result + pixelWidth;
-		while(result>pixelLeftX+pixelWidth)
-			result = result - pixelWidth;
-		return result;
+	{	return LevelsTools.normalizePositionX(x,pixelLeftX,pixelWidth);
 	}
 	public double normalizePositionY(double y)
-	{	double result = y;
-		while(result<pixelTopY)
-			result = result + pixelHeight;
-		while(result>pixelTopY+pixelHeight)
-			result = result - pixelHeight;
-		return result;
+	{	return LevelsTools.normalizePositionY(y,pixelTopY,pixelHeight);
 	}
 	public boolean isInsidePosition(double x, double y)
-	{	return isInsidePositionX(x) && isInsidePositionY(y);		
+	{	return LevelsTools.isInsidePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 	public boolean isInsidePositionX(double x)
-	{	//NOTE comparaison relative?
-		return x>=pixelLeftX && x<=pixelLeftX+pixelWidth;
+	{	return LevelsTools.isInsidePositionX(x,pixelLeftX,pixelWidth);
 	}
 	public boolean isInsidePositionY(double y)
-	{	//NOTE comparaison relative?
-		return y>=pixelTopY && y<=pixelTopY+pixelHeight;
+	{	return LevelsTools.isInsidePositionY(y,pixelTopY,pixelHeight);
 	}
 	
 	/////////////////////////////////////////////////////////////////
