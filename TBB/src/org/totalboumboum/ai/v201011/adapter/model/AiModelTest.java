@@ -41,6 +41,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -52,9 +53,7 @@ public final class AiModelTest
 {
 	
 	public static void main(String args[])
-	{
-
-		
+	{	RoundVariables.scaledTileDimension = 100;
 		AiSimZone zone;
 		AiSimTile tile;
 		AiSimState state;
@@ -99,14 +98,15 @@ public final class AiModelTest
 			zone.addSprite(block);
 		}
 		
-		System.out.println(zone);
+		System.out.println("initial zone:\n"+zone);
 		AiModel model = new AiModel(zone);
 		
 		HashMap<AiSprite, AiState> specifiedStates = new HashMap<AiSprite, AiState>();
-		state = new AiSimState(AiStateName.MOVING,Direction.LEFT,0);
+		state = new AiSimState(AiStateName.MOVING,Direction.RIGHT,0);
 		specifiedStates.put(hero,state);
 		model.predictZone(specifiedStates);
-		System.out.println(model.getCurrentZone());
+		System.out.println("zone after simulation:\n"+model.getCurrentZone());
+		System.out.println("duration:"+model.getDuration());
 	}
 	
 }
