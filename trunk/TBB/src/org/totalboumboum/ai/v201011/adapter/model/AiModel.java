@@ -213,7 +213,7 @@ if(sprite instanceof AiHero)
 			// then process the time remaining before the next state change
 			if(state.getName()!=AiStateName.ENDED && state.getName()!=AiStateName.STANDING)
 			{	long changeTime = processChangeTime(current,sprite,state);
-				if(changeTime>0) //zero means there's nothing to do, eg: moving towards an obstacle
+				if(changeTime>0) //zero means there's nothing to do, e.g.: moving towards an obstacle
 				{	// new min time
 					if(changeTime<duration)
 					{	duration = changeTime;
@@ -227,9 +227,14 @@ if(sprite instanceof AiHero)
 			}
 		}
 		
+		if(duration==Long.MAX_VALUE)
+			duration = 0;
+		
 		// apply events for the resulting minimal time
 		for(Entry<AiSprite,AiSimState> entry: statesMap.entrySet())
 		{	AiSprite sprite0 = entry.getKey();
+if(sprite0 instanceof AiHero)
+	System.out.println();
 			AiSimState state = entry.getValue();
 			applyState(sprite0,state,result,duration);
 		}
@@ -419,6 +424,11 @@ if(sprite instanceof AiHero)
 			else
 			{	//NOTE simplification here: we suppose the levels are all grids, 
 				// meaning at least one coordinate is at the center of a tile
+				double speed = sprite.getCurrentSpeed();
+				if(sprite instanceof AiHero)
+				{	AiHero hero = (AiHero) sprite;
+					speed = hero.getWalkingSpeed();
+				}
 				int dir[] = direction.getIntFromDirection();
 				AiTile tile = sprite.getTile();
 				double tileSize = tile.getSize();
@@ -433,7 +443,11 @@ if(sprite instanceof AiHero)
 				double goalX = current.normalizePositionX(tileX+dir[0]*offset);
 				double goalY = current.normalizePositionY(tileY+dir[1]*offset);
 				double manDist = Math.abs(posX-goalX)+Math.abs(posY-goalY);
-				result = (long)(manDist/sprite.getCurrentSpeed());
+				double temp = 1000*manDist/speed;
+				if(temp<1)
+					result = 1;
+				else
+					result = (long)temp;
 			}
 		}
 		
@@ -481,9 +495,9 @@ if(sprite instanceof AiHero)
 		if(name==AiStateName.BURNING)
 		{	time = time + duration;
 			state = new AiSimState(name,direction,time);
+			currentSpeed = 0;
 			sprite = applyStateSprite(sprite0,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
 			result.addSprite(sprite);
-			currentSpeed = 0;
 			// TODO if it's a bomb : should set the explosion
 			// or is it better to set it before, in the main function ?
 		}
@@ -497,10 +511,10 @@ if(sprite instanceof AiHero)
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
 		{	//NOTE same simplification than begfore: we suppose the levels are all grids, 
 			// meaning at least one coordinate is at the center of a tile
-			double allowed = sprite0.getCurrentSpeed()*duration;
+			double allowed = sprite0.getCurrentSpeed()*duration/1000;
 			if(sprite0 instanceof AiHero)
 			{	AiHero hero = (AiHero) sprite0;
-				allowed = hero.getWalkingSpeed()*duration;
+				allowed = hero.getWalkingSpeed()*duration/1000;
 			}
 			int dir[] = direction.getIntFromDirection();
 			double tileSize = tile0.getSize();
@@ -535,14 +549,17 @@ if(sprite instanceof AiHero)
 					posY = posY+dir[1]*allowed;
 				}
 			}
+			tile = result.getTile(posX,posY);
+			sprite = applyStateSprite(sprite0,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
+			result.addSprite(sprite);
 		}
 		
 		else if(name==AiStateName.STANDING)
 		{	time = time + duration;
 			state = new AiSimState(name,direction,time);
+			currentSpeed = 0;
 			sprite = applyStateSprite(sprite0,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
 			result.addSprite(sprite);
-			currentSpeed = 0;
 		}
 	}
 	

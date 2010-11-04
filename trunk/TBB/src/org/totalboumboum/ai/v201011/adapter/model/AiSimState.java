@@ -144,8 +144,8 @@ public final class AiSimState  implements AiState
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
 		result.append("(");
-		result.append("name.: "+name);
-		result.append("dir.: "+direction);
+		result.append("name:"+name);
+		result.append(" dir:"+direction);
 		result.append(")");
 		return result.toString();
 	}

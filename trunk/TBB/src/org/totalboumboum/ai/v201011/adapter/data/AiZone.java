@@ -843,7 +843,7 @@ public abstract class AiZone
 	 * <b>Attention :</b> pour avoir un affichage correct avec la console Eclipse, il faut
 	 * aller dans la configuration de démarrage du programme, aller
 	 * dans l'onglet "Commnon" puis dans la partie "Console Encoding" et
-	 * sélectionner UTF8 ou unicode.
+	 * sélectionner UTF8 ou unicode.<br/>
 	 * 
 	 * @return
 	 * 		une représentation de la zone de type ASCII art
