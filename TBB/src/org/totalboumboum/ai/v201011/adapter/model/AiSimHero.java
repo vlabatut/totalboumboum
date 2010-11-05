@@ -48,12 +48,12 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 * @param color	couleur du personnage
 	 * @param walkingSpeed	vitesse du personnage
 	 */
-	protected AiSimHero(AiSimTile tile, double posX, double posY, double posZ,
+	protected AiSimHero(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
 			int bombRange, int bombNumber, int bombCount,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
 			PredefinedColor color, double walkingSpeed)
-	{	super(tile,posX,posY,posZ,state,burningDuration,currentSpeed);
+	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		
 		// bombs
 		this.bombRange = bombRange;

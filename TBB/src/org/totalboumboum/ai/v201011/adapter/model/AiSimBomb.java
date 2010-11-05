@@ -61,14 +61,14 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param working
 	 * @param time
 	 */
-	protected AiSimBomb(AiSimTile tile, double posX, double posY, double posZ,
+	protected AiSimBomb(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
 			boolean countdownTrigger, boolean remoteControlTrigger, boolean explosionTrigger,
 			long normalDuration, long explosionDuration, long latencyDuration, float failureProbability,
 			AiStopType stopHeroes, AiStopType stopFires, boolean throughItems,
 			int range, boolean penetrating,
 			PredefinedColor color, boolean working, long time)
-	{	super(tile,posX,posY,posZ,state,burningDuration,currentSpeed);
+	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		
 		// fuse
 		this.countdownTrigger = countdownTrigger;
@@ -191,7 +191,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param tile	la case qui devra contenir le feu
 	 */
 	protected AiSimFire createFire(AiSimTile tile)
-	{	AiSimFire result = new AiSimFire(tile,tile.getPosX(),tile.getPosY(),0,new AiSimState(),explosionDuration,0,penetrating,penetrating,penetrating);
+	{	AiSimFire result = new AiSimFire(createNewId(),tile,tile.getPosX(),tile.getPosY(),0,new AiSimState(),explosionDuration,0,penetrating,penetrating,penetrating);
 		return result;
 	}
 

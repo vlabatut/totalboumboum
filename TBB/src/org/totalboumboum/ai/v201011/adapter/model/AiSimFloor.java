@@ -39,9 +39,9 @@ public final class AiSimFloor extends AiSimSprite implements AiFloor
 	 * 
 	 * @param tile	case contenant le sprite
 	 */
-	protected AiSimFloor(AiSimTile tile, double posX, double posY, double posZ,
+	protected AiSimFloor(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed)
-	{	super(tile,posX,posY,posZ,state,burningDuration,currentSpeed);
+	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 	}	
 
 	/**
