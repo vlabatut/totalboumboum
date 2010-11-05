@@ -159,7 +159,8 @@ public final class AiSimZone extends AiZone
 			boolean throughFires = hero.hasThroughFires();
 			PredefinedColor color = hero.getColor();
 			double walkingSpeed = hero.getWalkingSpeed();
-			AiSimHero h = new AiSimHero(tile,posX, posY, posZ, state,burningDuration,currentSpeed,
+			int id = hero.getId();
+			AiSimHero h = new AiSimHero(id,tile,posX, posY, posZ, state,burningDuration,currentSpeed,
 					bombRange,bombNumber,bombCount,
 					throughBlocks,throughBombs,throughFires,color,walkingSpeed);
 			internalHeroes.add(h);
@@ -349,6 +350,15 @@ public final class AiSimZone extends AiZone
 	/** liste externe des blocks contenus dans cette zone */
 	private final List<AiBlock> externalBlocks = new ArrayList<AiBlock>();
 	
+	/**
+	 * renvoie la liste interne de blocs
+	 * 
+	 * @return	liste interne de blocs
+	 */
+	protected List<AiSimBlock> getInternalBlocks()
+	{	return internalBlocks;	
+	}
+		
 	@Override
 	public List<AiBlock> getBlocks()
 	{	return externalBlocks;	
@@ -373,12 +383,21 @@ public final class AiSimZone extends AiZone
 	private final List<AiSimBomb> internalBombs = new ArrayList<AiSimBomb>();
 	/** liste externe des bombes contenues dans cette zone */
 	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
-	
+
+	/**
+	 * renvoie la liste interne de bombes
+	 * 
+	 * @return	liste interne de bombes
+	 */
+	protected List<AiSimBomb> getInternalBombs()
+	{	return internalBombs;	
+	}
+		
 	@Override
 	public List<AiBomb> getBombs()
 	{	return externalBombs;	
 	}
-		
+	
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -387,6 +406,15 @@ public final class AiSimZone extends AiZone
 	/** liste externe des feux contenus dans cette zone */
 	private final List<AiFire> externalFires = new ArrayList<AiFire>();
 	
+	/**
+	 * renvoie la liste interne de feux
+	 * 
+	 * @return	liste interne de feux
+	 */
+	protected List<AiSimFire> getInternalFires()
+	{	return internalFires;	
+	}
+		
 	@Override
 	public List<AiFire> getFires()
 	{	return externalFires;	
@@ -400,6 +428,15 @@ public final class AiSimZone extends AiZone
 	/** liste externe des sols contenus dans cette zone */
 	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
 
+	/**
+	 * renvoie la liste interne de sols
+	 * 
+	 * @return	liste interne de sols
+	 */
+	protected List<AiSimFloor> getInternalFloors()
+	{	return internalFloors;	
+	}
+		
 	@Override
 	public List<AiFloor> getFloors()
 	{	return externalFloors;	
@@ -415,6 +452,15 @@ public final class AiSimZone extends AiZone
 	/** liste externe des personnages restant encore dans cette zone */
 	private final List<AiHero> remainingHeroList = new ArrayList<AiHero>();
 	
+	/**
+	 * renvoie la liste interne de personnages
+	 * 
+	 * @return	liste interne de personnages
+	 */
+	protected List<AiSimHero> getInternalHeroes()
+	{	return internalHeroes;	
+	}
+		
 	@Override
 	public List<AiHero> getHeroes()
 	{	return externalHeroes;	
@@ -459,6 +505,15 @@ public final class AiSimZone extends AiZone
 	/** nombre d'items cachés, i.e. pas encore ramassés */
 	private int hiddenItemsCount;
 	
+	/**
+	 * renvoie la liste interne d'items
+	 * 
+	 * @return	liste interne d'items
+	 */
+	protected List<AiSimItem> getInternalItems()
+	{	return internalItems;	
+	}
+		
 	@Override
 	public List<AiItem> getItems()
 	{	return externalItems;	

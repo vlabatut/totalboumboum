@@ -38,12 +38,13 @@ public abstract class AiSimSprite implements AiSprite
 	 * 
 	 * @param tile	simulation de la case contenant le sprite
 	 */
-	protected AiSimSprite(AiSimTile tile, double posX, double posY, double posZ, 
+	protected AiSimSprite(int id, AiSimTile tile, double posX, double posY, double posZ, 
 			AiSimState state, long burningDuration, double currentSpeed)
 	{	// general
 		this.state = state;
 		this.burningDuration = burningDuration;
 		this.currentSpeed = currentSpeed;
+		this.id = id;
 		
 		// location
 		this.tile = tile;
@@ -70,6 +71,29 @@ public abstract class AiSimSprite implements AiSprite
 		this.posZ = sprite.getPosZ();
 	}
 */
+	/////////////////////////////////////////////////////////////////
+	// ID				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** id du sprite dans le jeu */
+	private int id;
+	/** compteur d'id */
+	private static int spriteId = Integer.MAX_VALUE; 
+	
+	@Override
+	public int getId()
+	{	return id;
+	}
+	
+	/**
+	 * permet de générer des id pour les sprites créés lors des simulation
+	 * @return
+	 */
+	protected int createNewId()
+	{	int result = spriteId;
+		spriteId--;
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
