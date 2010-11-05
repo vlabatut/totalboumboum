@@ -97,7 +97,11 @@ public class DisplayAisTexts implements Display
 				// tile texts
 				if(getShow(i))
 				{	g.setColor(Color.MAGENTA);
-					Font font = new Font("Dialog", Font.PLAIN, 15);
+					int type = Font.PLAIN;
+					boolean bold = aiMgr.isBold();
+					if(bold)
+						type = Font.BOLD;
+					Font font = new Font("Dialog",type, 15);
 					g.setFont(font);
 					FontMetrics metrics = g.getFontMetrics(font);
 					String[][] texts = aiMgr.getTileTexts();
@@ -109,7 +113,7 @@ public class DisplayAisTexts implements Display
 								Rectangle2D box = metrics.getStringBounds(text, g);
 								int x = (int)Math.round(tile.getPosX()-box.getWidth()/2);
 								int y = (int)Math.round(tile.getPosY()+box.getHeight()/2);
-								g.drawString(text, x, y);
+								g.drawString(text,x,y);
 							}
 						}
 					}

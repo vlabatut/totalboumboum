@@ -289,6 +289,8 @@ public abstract class AbstractAiManager<V>
 	private Color[][] tileColors;
 	/** texte à afficher sur les cases (ou null pour aucun texte) */
 	private String[][] tileTexts;
+	/** mode d'affichage du texte : gras ou pas */
+	private boolean bold = false;
 	/** chemins à afficher */
 	private final List<List<Tile>> paths = new ArrayList<List<Tile>>();
 	/** couleurs des chemins à afficher */
@@ -318,6 +320,15 @@ public abstract class AbstractAiManager<V>
 	{	return tileTexts;
 	}
 
+	/**
+	 * renvoie le mode d'affichage du texte (gras ou pas)
+	 * 
+	 * @return	vrai si le mode d'affichage est gras
+	 */
+	public boolean isBold()
+	{	return bold;
+	}
+	
 	/**
 	 * renvoie la liste de chemins à afficher
 	 * 
