@@ -59,12 +59,14 @@ public final class AiModelTest
 		AiSimState state;
 		AiSimBlock block;
 		AiSimHero hero;
+		AiSimBomb bomb;
 		int bombRange=3,bombNumber=1,bombCount=0;
 		double posX, posY, posZ=0,currentSpeed,walkingSpeed=100;
-		long burningDuration=100;
-		boolean destructible,throughBlocks=false,throughBombs=false,throughFires=false;
+		float failureProbability=0;
+		long burningDuration=100,normalDuration=1000,explosionDuration=100,latencyDuration=10;
+		boolean destructible,throughBlocks=false,throughBombs=false,throughFires=false,throughItems=false,countdownTrigger=true,remoteControlTrigger=false,explosionTrigger=true,penetrating=false,working=true;
 		AiStopType stopHeroes, stopFires;
-		PredefinedColor color;
+		PredefinedColor color; 
 
 		// zone
 		currentSpeed = 0;
@@ -79,8 +81,23 @@ public final class AiModelTest
 		posY = tile.getPosY();
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		color = PredefinedColor.WHITE;
-		hero = new AiSimHero(tile,posX,posY,posZ,state,burningDuration,currentSpeed,bombRange,bombNumber,bombCount,throughBlocks,throughBombs,throughFires,color,walkingSpeed);
+		hero = new AiSimHero(tile,posX,posY,posZ,state,burningDuration,currentSpeed,
+				bombRange,bombNumber,bombCount,
+				throughBlocks,throughBombs,throughFires,color,walkingSpeed);
 		zone.addSprite(hero);
+
+		// bomb
+		stopHeroes = AiStopType.WEAK_STOP;
+		stopFires = AiStopType.WEAK_STOP;
+		tile = zone.getTile(5,5);
+		posX = tile.getPosX();
+		posY = tile.getPosY();
+		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		color = PredefinedColor.WHITE;
+		bomb = new AiSimBomb(tile,posX,posY,posZ,state,burningDuration,currentSpeed, 
+				countdownTrigger,remoteControlTrigger,explosionTrigger,normalDuration,explosionDuration,latencyDuration,failureProbability,
+				stopHeroes,stopFires,throughItems,bombRange,penetrating,color,working,0);
+		zone.addSprite(bomb);
 
 		// hardwalls
 		currentSpeed = 0;
@@ -104,9 +121,19 @@ public final class AiModelTest
 		HashMap<AiSprite, AiState> specifiedStates = new HashMap<AiSprite, AiState>();
 		state = new AiSimState(AiStateName.MOVING,Direction.RIGHT,0);
 		specifiedStates.put(hero,state);
-		model.predictZone(specifiedStates);
-		System.out.println("zone after simulation:\n"+model.getCurrentZone());
-		System.out.println("duration:"+model.getDuration());
+		
+		long duration = 0;
+		int iteration = 0;
+		do
+		{	model.predictZone(specifiedStates);
+			duration = model.getDuration();
+			
+			System.out.println("iteration "+iteration);
+			System.out.println("duration:"+duration);
+			System.out.println(model.getCurrentZone());
+			
+			iteration++;
+		}
+		while(duration!=0);
 	}
-	
 }
