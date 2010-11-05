@@ -182,6 +182,20 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// FIRE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * cette méthode est destinée à la simulation, et permet de créer un feu
+	 * (généralement pour simuler une explosion)
+	 * 
+	 * @param tile	la case qui devra contenir le feu
+	 */
+	protected AiSimFire createFire(AiSimTile tile)
+	{	AiSimFire result = new AiSimFire(tile,tile.getPosX(),tile.getPosY(),0,new AiSimState(),explosionDuration,0,penetrating,penetrating,penetrating);
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** portée de la bombe, ie. : nombre de cases occupées par sa flamme */
@@ -203,39 +217,37 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	public List<AiTile> getBlast()
 	{	// init
 		List<AiTile> result = new ArrayList<AiTile>();
-		AiSimFire fire = new AiSimFire(tile,tile.getPosX(),tile.getPosY(),0,new AiSimState(),explosionDuration,0,penetrating,penetrating,penetrating);
+		AiSimFire fire = createFire(tile);
 		
 		// center
-		if(tile.isCrossableBy(fire))
-		{	result.add(tile);
+		result.add(tile);
 		
-			// branches
-			boolean blocked[] = {false,false,false,false};
-			AiSimTile tiles[] = {tile,tile,tile,tile};
-			Direction directions[] = {Direction.DOWN, Direction.LEFT, Direction.RIGHT, Direction.UP};
-			List<AiSimTile> processed = new ArrayList<AiSimTile>();
-			processed.add(tile);
-			boolean goOn = true;
-			int length = 1;
-			while(goOn && length<=range)
-			{	goOn = false;
-				// increase the explosion
-				for(int i=0;i<directions.length;i++)
-				{	if(!blocked[i])
-					{	// get the tile
-						Direction direction = directions[i];
-						AiSimTile tempTile = tiles[i].getNeighbor(direction);
-						tiles[i] = tempTile;
-						if(!processed.contains(tempTile))
-						{	processed.add(tempTile);
-							blocked[i] = !tempTile.isCrossableBy(fire);
-							goOn = goOn || !blocked[i];
-							result.add(tempTile);
-						}
+		// branches
+		boolean blocked[] = {false,false,false,false};
+		AiSimTile tiles[] = {tile,tile,tile,tile};
+		Direction directions[] = {Direction.DOWN, Direction.LEFT, Direction.RIGHT, Direction.UP};
+		List<AiSimTile> processed = new ArrayList<AiSimTile>();
+		processed.add(tile);
+		boolean goOn = true;
+		int length = 1;
+		while(goOn && length<=range)
+		{	goOn = false;
+			// increase the explosion
+			for(int i=0;i<directions.length;i++)
+			{	if(!blocked[i])
+				{	// get the tile
+					Direction direction = directions[i];
+					AiSimTile tempTile = tiles[i].getNeighbor(direction);
+					tiles[i] = tempTile;
+					if(!processed.contains(tempTile))
+					{	processed.add(tempTile);
+						blocked[i] = !tempTile.isCrossableBy(fire);
+						goOn = goOn || !blocked[i];
+						result.add(tempTile);
 					}
 				}
-				length++;
 			}
+			length++;
 		}
 	
 		return result;

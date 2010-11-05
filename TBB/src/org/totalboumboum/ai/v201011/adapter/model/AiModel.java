@@ -56,7 +56,7 @@ public final class AiModel
 	}	
 	
 	/////////////////////////////////////////////////////////////////
-	// ZONES				/////////////////////////////////////////////
+	// ZONES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** zone issue de la simulation précédente */
 	private AiZone previous;
@@ -176,6 +176,7 @@ public final class AiModel
 	{	// create a new, empty zone
 		AiSimZone result = new AiSimZone(current);
 		HashMap<AiSprite,AiSimState> statesMap = new HashMap<AiSprite, AiSimState>();
+		HashMap<AiSprite,AiState> localSpecifiedStates = new HashMap<AiSprite, AiState>(specifiedStates);
 		
 		// list all sprites
 		List<AiSprite> sprites = new ArrayList<AiSprite>();
@@ -191,7 +192,7 @@ public final class AiModel
 		List<AiTile> burntTiles = new ArrayList<AiTile>();
 		List<AiBomb> explodedBombs = new ArrayList<AiBomb>();
 		for(AiBomb bomb: current.getBombs())
-			checkExplosion(bomb,specifiedStates,explodedBombs,burntTiles);
+			checkExplosion(bomb,localSpecifiedStates,explodedBombs,burntTiles);
 		
 		// list the sprites incoming state: specified or automatically processed from the current state,
 		// also process the minimal time needed for a sprite state change (when using the new state)
@@ -201,8 +202,10 @@ public final class AiModel
 		{	AiSimState state;
 			// get the specified new state for this sprite
 if(sprite instanceof AiHero)
-	System.out.println();
-			AiState temp = specifiedStates.get(sprite);
+	System.out.print("");
+if(sprite instanceof AiBomb)
+	System.out.print("");
+			AiState temp = localSpecifiedStates.get(sprite);
 			if(temp!=null)
 				state = new AiSimState(temp);
 			// or get an automatically processed one if no specified state is available
@@ -211,7 +214,7 @@ if(sprite instanceof AiHero)
 			// add to map
 			statesMap.put(sprite,state);
 			// then process the time remaining before the next state change
-			if(state.getName()!=AiStateName.ENDED && state.getName()!=AiStateName.STANDING)
+			if(state.getName()!=AiStateName.ENDED)
 			{	long changeTime = processChangeTime(current,sprite,state);
 				if(changeTime>0) //zero means there's nothing to do, e.g.: moving towards an obstacle
 				{	// new min time
@@ -234,7 +237,9 @@ if(sprite instanceof AiHero)
 		for(Entry<AiSprite,AiSimState> entry: statesMap.entrySet())
 		{	AiSprite sprite0 = entry.getKey();
 if(sprite0 instanceof AiHero)
-	System.out.println();
+	System.out.print("");
+if(sprite0 instanceof AiBomb)
+	System.out.print("");
 			AiSimState state = entry.getValue();
 			applyState(sprite0,state,result,duration);
 		}
@@ -270,7 +275,8 @@ if(sprite0 instanceof AiHero)
 				List<AiTile> blast = bomb.getBlast();
 				for(AiTile tile: blast)
 				{	if(!burntTiles.contains(tile))
-					{	burntTiles.add(tile);
+					{	AiSimFire fire = bomb.createFire(tile);
+						burntTiles.add(tile);
 						List<AiSprite> sprites = new ArrayList<AiSprite>();
 						sprites.addAll(tile.getBlocks());
 						sprites.addAll(tile.getBombs());
@@ -364,23 +370,27 @@ if(sprite0 instanceof AiHero)
 		
 		// a bomb might have to explode
 		else if(sprite instanceof AiBomb)
-		{	AiBomb bomb = (AiBomb) sprite;
-			long normalDuration = bomb.getNormalDuration();
-			if(normalDuration>0) //only for time bombs
-			{	if(time0>=normalDuration)
-				{	name = AiStateName.BURNING;
-					direction = Direction.NONE;
-					time = 0;
+		{	if(name0==AiStateName.STANDING || name0==AiStateName.MOVING)
+			{	AiBomb bomb = (AiBomb) sprite;
+				long normalDuration = bomb.getNormalDuration();
+				if(bomb.hasCountdownTrigger()) //only for time bombs
+				{	if(time0>=normalDuration)
+					{	name = AiStateName.BURNING;
+						direction = Direction.NONE;
+						time = 0;
+					}
 				}
 			}
 		}
 
 		// an item might have to disappear if it's been picked
 		else if(sprite instanceof AiItem)
-		{	if(tile0.getHeroes().size()>0)
-			{	name = AiStateName.ENDED;
-				direction = Direction.NONE;
-				time = 0;
+		{	if(name0==AiStateName.STANDING)
+			{	if(tile0.getHeroes().size()>0)
+				{	name = AiStateName.ENDED;
+					direction = Direction.NONE;
+					time = 0;
+				}
 			}
 		}
 
@@ -403,6 +413,7 @@ if(sprite0 instanceof AiHero)
 	private long processChangeTime(AiZone current, AiSprite sprite, AiState state)
 	{	long result = Long.MAX_VALUE;
 		AiStateName name = state.getName();
+		Direction direction = state.getDirection();
 		
 		// sprite burns: how long before it finishes burning?
 		if(name==AiStateName.BURNING)
@@ -418,8 +429,7 @@ if(sprite0 instanceof AiHero)
 
 		// sprite moves (on the ground or in the air): how long before it reaches the next tile
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
-		{	Direction direction = state.getDirection();
-			if(direction==Direction.NONE)
+		{	if(direction==Direction.NONE)
 				result = Long.MAX_VALUE;
 			else
 			{	//NOTE simplification here: we suppose the levels are all grids, 
@@ -449,11 +459,32 @@ if(sprite0 instanceof AiHero)
 				else
 					result = (long)temp;
 			}
+			// it can also be a bomb waiting to explode
+			if(sprite instanceof AiBomb)
+			{	AiBomb bomb = (AiBomb) sprite;
+				if(bomb.hasCountdownTrigger())
+				{	long normalDuration = bomb.getNormalDuration();
+					result = normalDuration - state.getTime();
+					if(result<0)
+						result = 0;
+				}
+			}
 		}
 		
 		// sprites just stands doing nothing special
 		else if(name==AiStateName.STANDING)
-		{	result = Long.MAX_VALUE;
+		{	// it can also be a bomb waiting to explode
+			if(sprite instanceof AiBomb)
+			{	AiBomb bomb = (AiBomb) sprite;
+				if(bomb.hasCountdownTrigger())
+				{	long normalDuration = bomb.getNormalDuration();
+					result = normalDuration - state.getTime();
+					if(result<0)
+						result = 0;
+				}
+			}
+			else
+				result = Long.MAX_VALUE;
 		}
 	
 		return result;
@@ -482,7 +513,7 @@ if(sprite0 instanceof AiHero)
 		
 		// next state
 		AiStateName name = state.getName();
-		long time = state.getTime();
+		long time = state.getTime() + duration;
 		Direction direction = state.getDirection();
 		int line = line0;
 		int col = col0;
@@ -493,8 +524,7 @@ if(sprite0 instanceof AiHero)
 		AiSimSprite sprite;
 		
 		if(name==AiStateName.BURNING)
-		{	time = time + duration;
-			state = new AiSimState(name,direction,time);
+		{	state = new AiSimState(name,direction,time);
 			currentSpeed = 0;
 			sprite = applyStateSprite(sprite0,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
 			result.addSprite(sprite);
@@ -555,8 +585,7 @@ if(sprite0 instanceof AiHero)
 		}
 		
 		else if(name==AiStateName.STANDING)
-		{	time = time + duration;
-			state = new AiSimState(name,direction,time);
+		{	state = new AiSimState(name,direction,time);
 			currentSpeed = 0;
 			sprite = applyStateSprite(sprite0,tile,duration,posX,posY,posZ,state,burningDuration,currentSpeed);
 			result.addSprite(sprite);
