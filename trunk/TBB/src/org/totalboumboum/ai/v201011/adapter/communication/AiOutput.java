@@ -163,8 +163,23 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// TEXTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** détermine si le texte sera affiché en normalement ou en gras */
+	private boolean bold = false;
 	/** texte à afficher sur les cases de la zone de jeu */
 	private String tileTexts[][];
+
+	/**
+	 * change le mode d'affichage du texte : gras ou pas
+	 * 
+	 * @param bold	la valeur vrai indique que l'affichage sera effectué en gras
+	 */
+	public void setBold(boolean bold)
+	{	this.bold = bold;
+	}
+	
+	public boolean isBold()
+	{	return bold;
+	}
 	
 	/**
 	 * réinitialise les textes associés aux cases
