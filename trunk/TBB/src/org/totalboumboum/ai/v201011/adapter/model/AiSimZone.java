@@ -31,6 +31,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItem;
+import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
@@ -47,82 +48,18 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-public final class AiSimZone extends AiZone
+final class AiSimZone extends AiZone
 {	
 	/**
-	 * construit une simulation de la zone passée en paramètre.
-	 * 
-	 * @param zone	zone originale de la simulation
-	 */
-/*	public AiSimZone(AiZone zone)
-	{	// init matrix, tiles and lists
-		AiTile[][] m = zone.getMatrix();
-		height = zone.getHeight();
-		width = zone.getWidth();
-		matrix = new AiSimTile[height][width];
-		for(int lineIndex=0;lineIndex<height;lineIndex++)
-		{	for(int colIndex=0;colIndex<width;colIndex++)
-			{	// tile
-				AiTile tile = m[lineIndex][colIndex];
-				AiSimTile aiTile = new AiSimTile(tile,this);
-				matrix[lineIndex][colIndex] = aiTile;
-				// blocks
-				List<AiSimBlock> blocks = aiTile.getInternalBlocks();
-				internalBlocks.addAll(blocks);
-				externalBlocks.addAll(blocks);
-				// bombs
-				List<AiSimBomb> bombs = aiTile.getInternalBombs();
-				internalBombs.addAll(bombs);
-				externalBombs.addAll(bombs);
-				// fires
-				List<AiSimFire> fires = aiTile.getInternalFires();
-				internalFires.addAll(fires);
-				externalFires.addAll(fires);
-				// floors
-				List<AiSimFloor> floors = aiTile.getInternalFloors();
-				internalFloors.addAll(floors);
-				externalFloors.addAll(floors);
-				// heroes
-				List<AiSimHero> heroes = aiTile.getInternalHeroes();
-				internalHeroes.addAll(heroes);
-				externalHeroes.addAll(heroes);
-				// items
-				List<AiSimItem> items = aiTile.getInternalItems();
-				internalItems.addAll(items);
-				externalItems.addAll(items);
-			}
-		}
-		
-		// set own hero
-		AiHero oh = zone.getOwnHero();
-		PredefinedColor color = oh.getColor();
-		ownHero = getHeroByColor(color);
-		
-		// set time
-		totalTime = zone.getTotalTime();	//TODO should be updated (?)
-		elapsedTime = zone.getElapsedTime();
-		limitTime = zone.getLimitTime();
-		
-		// set meta-data
-		for(AiHero hero: zone.getHeroes())
-		{	color = hero.getColor();
-			AiSimHero aiHero = getHeroByColor(color);
-			int roundRank = zone.getRoundRank(hero);
-			roundRanks.put(aiHero,roundRank);
-			int matchRank = zone.getMatchRank(hero);
-			matchRanks.put(aiHero,matchRank);
-			int statsRank = zone.getStatsRank(hero);
-			statsRanks.put(aiHero,statsRank);
-		}
-	}
-*/
-	/**
-	 * contruit une zone vide de mêmes dimensions que celle passée en paramètre
+	 * contruit une zone qui est une copie de celle passée en paramètre.
+	 * si la paramètre fullCopy est faux, les sprites ne sont pas copiés,
+	 * sinon tout est copié.
 	 * 
 	 * @param zone	la zone de référence
+	 * @param fullCopy	indique si les sprites doivent aussi être copiés ou pas
 	 * @return	une nouvelle zone vide de mêmes dimensions
 	 */
-	protected AiSimZone(AiZone zone)
+	protected AiSimZone(AiZone zone, boolean fullCopy)
 	{	// matrix and tiles
 		AiTile[][] m = zone.getMatrix();
 		height = zone.getHeight();
@@ -142,29 +79,75 @@ public final class AiSimZone extends AiZone
 			}
 		}
 		
-		// process heroes
-		for(AiHero hero: zone.getHeroes())
-		{	AiSimTile tile = null;
-			AiSimState state = new AiSimState(AiStateName.ENDED,Direction.NONE,0);
-			double posX = hero.getPosX();
-			double posY = hero.getPosY();
-			double posZ = hero.getPosZ();
-			long burningDuration = hero.getBurningDuration();
-			double currentSpeed = hero.getCurrentSpeed();
-			int bombRange = hero.getBombRange();
-			int bombNumber = hero.getBombNumber();
-			int bombCount = hero.getBombCount();
-			boolean throughBlocks = hero.hasThroughBlocks();
-			boolean throughBombs = hero.hasThroughBombs();
-			boolean throughFires = hero.hasThroughFires();
-			PredefinedColor color = hero.getColor();
-			double walkingSpeed = hero.getWalkingSpeed();
-			int id = hero.getId();
-			AiSimHero h = new AiSimHero(id,tile,posX, posY, posZ, state,burningDuration,currentSpeed,
-					bombRange,bombNumber,bombCount,
-					throughBlocks,throughBombs,throughFires,color,walkingSpeed);
-			internalHeroes.add(h);
-			externalHeroes.add(h);
+		if(fullCopy)
+		{	for(int line=0;line<height;line++)
+			{	for(int col=0;col<width;col++)
+				{	AiTile tile = zone.getTile(line,col);
+					AiSimTile simTile = matrix[line][col];
+					// blocks
+					List<AiBlock> blocks = tile.getBlocks();
+					for(AiBlock block: blocks)
+					{	AiSimBlock simBlock = new AiSimBlock(block,simTile);
+						addSprite(simBlock);
+					}
+					// bombs
+					List<AiBomb> bombs = tile.getBombs();
+					for(AiBomb bomb: bombs)
+					{	AiSimBomb simBomb = new AiSimBomb(bomb,simTile);
+						addSprite(simBomb);
+					}
+					// fires
+					List<AiFire> fires = tile.getFires();
+					for(AiFire fire: fires)
+					{	AiSimFire simFire = new AiSimFire(fire,simTile);
+						addSprite(simFire);
+					}
+					// floors
+					List<AiFloor> floors = tile.getFloors();
+					for(AiFloor floor: floors)
+					{	AiSimFloor simFloor = new AiSimFloor(floor,simTile);
+						addSprite(simFloor);
+					}
+					// heroes
+					List<AiHero> heroes = tile.getHeroes();
+					for(AiHero hero: heroes)
+					{	AiSimHero simHero = new AiSimHero(hero,simTile);
+						addSprite(simHero);
+					}
+					// items
+					List<AiItem> items = tile.getItems();
+					for(AiItem item: items)
+					{	AiSimItem simItem = new AiSimItem(item,simTile);
+						addSprite(simItem);
+					}
+				}
+			}
+		}
+		else
+		{	// process heroes
+			for(AiHero hero: zone.getHeroes())
+			{	AiSimTile tile = null;
+				AiSimState state = new AiSimState(AiStateName.ENDED,Direction.NONE,0);
+				double posX = hero.getPosX();
+				double posY = hero.getPosY();
+				double posZ = hero.getPosZ();
+				long burningDuration = hero.getBurningDuration();
+				double currentSpeed = hero.getCurrentSpeed();
+				int bombRange = hero.getBombRange();
+				int bombNumber = hero.getBombNumber();
+				int bombCount = hero.getBombCount();
+				boolean throughBlocks = hero.hasThroughBlocks();
+				boolean throughBombs = hero.hasThroughBombs();
+				boolean throughFires = hero.hasThroughFires();
+				PredefinedColor color = hero.getColor();
+				double walkingSpeed = hero.getWalkingSpeed();
+				int id = hero.getId();
+				AiSimHero h = new AiSimHero(id,tile,posX, posY, posZ, state,burningDuration,currentSpeed,
+						bombRange,bombNumber,bombCount,
+						throughBlocks,throughBombs,throughFires,color,walkingSpeed);
+				internalHeroes.add(h);
+				externalHeroes.add(h);
+			}
 		}
 		
 		// set own hero
@@ -186,7 +169,9 @@ public final class AiSimZone extends AiZone
 		
 		// misc
 		hiddenItemsCount = zone.getHiddenItemsCount();
+		totalTime = zone.getTotalTime();
 		limitTime = zone.getLimitTime();
+		elapsedTime = zone.getElapsedTime();
 	}
 
 	//NOTE temp constructor
@@ -219,7 +204,7 @@ public final class AiSimZone extends AiZone
 		limitTime = 0;
 
 	}
-
+	
 	protected void update(AiZone zone, long duration)
 	{	totalTime = zone.getTotalTime() + duration;
 		elapsedTime = duration;
@@ -342,6 +327,45 @@ public final class AiSimZone extends AiZone
 		tile.addSprite(sprite);
 	}
 	
+	/**
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
+	 * 
+	 * @param sprite	le sprite ciblé
+	 * @return	sa représentation dans cette zone
+	 */
+	protected AiSimSprite getSpriteById(AiSprite sprite)
+	{	AiSimSprite result = null;
+		if(sprite instanceof AiBlock)
+		{	AiBlock temp = (AiBlock)sprite;
+			result = getSpriteById(temp);
+		}
+		else if(sprite instanceof AiBomb)
+		{	AiBomb temp = (AiBomb)sprite;
+			result = getSpriteById(temp);
+		}
+		else if(sprite instanceof AiFire)
+		{	AiFire temp = (AiFire)sprite;
+			result = getSpriteById(temp);
+		}
+		else if(sprite instanceof AiFloor)
+		{	AiFloor temp = (AiFloor)sprite;
+			result = getSpriteById(temp);
+		}
+		else if(sprite instanceof AiHero)
+		{	AiHero temp = (AiHero)sprite;
+			result = getSpriteById(temp);
+		}
+		else if(sprite instanceof AiItem)
+		{	AiItem temp = (AiItem)sprite;
+			result = getSpriteById(temp);
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -376,6 +400,28 @@ public final class AiSimZone extends AiZone
 		return result;
 	}
 	
+	/**
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
+	 * 
+	 * @param sprite	le sprite ciblé
+	 * @return	sa représentation dans cette zone
+	 */
+	protected AiSimBlock getSpriteById(AiBlock sprite)
+	{	AiSimBlock result = null;
+		int id = sprite.getId();
+		Iterator<AiSimBlock> it = internalBlocks.iterator();
+		while(result==null)
+		{	AiSimBlock temp = it.next();
+			if(temp.getId()==id)
+				result = temp;
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -396,6 +442,28 @@ public final class AiSimZone extends AiZone
 	@Override
 	public List<AiBomb> getBombs()
 	{	return externalBombs;	
+	}
+	
+	/**
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
+	 * 
+	 * @param sprite	le sprite ciblé
+	 * @return	sa représentation dans cette zone
+	 */
+	protected AiSimBomb getSpriteById(AiBomb sprite)
+	{	AiSimBomb result = null;
+		int id = sprite.getId();
+		Iterator<AiSimBomb> it = internalBombs.iterator();
+		while(result==null)
+		{	AiSimBomb temp = it.next();
+			if(temp.getId()==id)
+				result = temp;
+		}
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -420,6 +488,28 @@ public final class AiSimZone extends AiZone
 	{	return externalFires;	
 	}
 		
+	/**
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
+	 * 
+	 * @param sprite	le sprite ciblé
+	 * @return	sa représentation dans cette zone
+	 */
+	protected AiSimFire getSpriteById(AiFire sprite)
+	{	AiSimFire result = null;
+		int id = sprite.getId();
+		Iterator<AiSimFire> it = internalFires.iterator();
+		while(result==null)
+		{	AiSimFire temp = it.next();
+			if(temp.getId()==id)
+				result = temp;
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -440,6 +530,28 @@ public final class AiSimZone extends AiZone
 	@Override
 	public List<AiFloor> getFloors()
 	{	return externalFloors;	
+	}
+	
+	/**
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
+	 * 
+	 * @param sprite	le sprite ciblé
+	 * @return	sa représentation dans cette zone
+	 */
+	protected AiSimFloor getSpriteById(AiFloor sprite)
+	{	AiSimFloor result = null;
+		int id = sprite.getId();
+		Iterator<AiSimFloor> it = internalFloors.iterator();
+		while(result==null)
+		{	AiSimFloor temp = it.next();
+			if(temp.getId()==id)
+				result = temp;
+		}
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -495,6 +607,28 @@ public final class AiSimZone extends AiZone
 		return result;
 	}
 	
+	/**
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
+	 * 
+	 * @param sprite	le sprite ciblé
+	 * @return	sa représentation dans cette zone
+	 */
+	protected AiSimHero getSpriteById(AiHero sprite)
+	{	AiSimHero result = null;
+		int id = sprite.getId();
+		Iterator<AiSimHero> it = internalHeroes.iterator();
+		while(result==null)
+		{	AiSimHero temp = it.next();
+			if(temp.getId()==id)
+				result = temp;
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -523,6 +657,28 @@ public final class AiSimZone extends AiZone
 	public int getHiddenItemsCount()
 	{	return hiddenItemsCount;
 		//TODO must be updated manually
+	}
+	
+	/**
+	 * renvoie la simulation de sprite de même numéro (id)
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représenté
+	 * par des objets différents.
+	 * 
+	 * @param sprite	le sprite ciblé
+	 * @return	sa représentation dans cette zone
+	 */
+	protected AiSimItem getSpriteById(AiItem sprite)
+	{	AiSimItem result = null;
+		int id = sprite.getId();
+		Iterator<AiSimItem> it = internalItems.iterator();
+		while(result==null)
+		{	AiSimItem temp = it.next();
+			if(temp.getId()==id)
+				result = temp;
+		}
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////

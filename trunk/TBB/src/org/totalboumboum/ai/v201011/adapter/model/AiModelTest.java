@@ -49,9 +49,10 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("unused")
 public final class AiModelTest
 {
-	
+/*	
 	public static void main(String args[])
 	{	RoundVariables.scaledTileDimension = 100;
 		AiSimZone zone;
@@ -136,4 +137,5 @@ public final class AiModelTest
 		}
 		while(duration!=0);
 	}
+*/	
 }

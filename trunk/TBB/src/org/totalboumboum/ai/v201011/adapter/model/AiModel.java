@@ -29,6 +29,7 @@ import java.util.Map.Entry;
 
 import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201011.adapter.data.AiState;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
@@ -41,10 +42,12 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-public final class AiModel
+class AiModel
 {	
 	public AiModel(AiZone currentZone)
-	{	this.current = currentZone;
+	{	// init the model with a copy of the current zone
+		this.current = new AiSimZone(currentZone,true);
+		// no previous zone for now
 		previous = null;
 	}	
 	
@@ -124,7 +127,7 @@ public final class AiModel
 	public boolean predictZoneUntilCondition(AiSimHero hero0)
 	{	// init
 		PredefinedColor color0 = hero0.getColor();
-		HashMap<AiSimSprite,AiSimState> specifiedStates = new HashMap<AiSimSprite, AiSimState>();
+		HashMap<AiSprite,AiState> specifiedStates = new HashMap<AiSprite, AiState>();
 		
 		AiSimHero hero = null;
 		do
@@ -166,11 +169,20 @@ public final class AiModel
 	 * 
 	 * @param specifiedStates	map associant un état à un sprite, permettant de forcer un sprite à prendre un certain état 
 	 */
-	public void predictZone(HashMap<AiSimSprite,AiSimState> specifiedStates)
+	public void predictZone(HashMap<AiSprite,AiState> specifiedStates)
 	{	// create a new, empty zone
-		AiSimZone result = new AiSimZone(current);
+		AiSimZone result = new AiSimZone(current,false);
 		HashMap<AiSimSprite,AiSimState> statesMap = new HashMap<AiSimSprite, AiSimState>();
-		HashMap<AiSimSprite,AiSimState> localSpecifiedStates = new HashMap<AiSimSprite, AiSimState>(specifiedStates);
+		
+		// init specified states
+		HashMap<AiSimSprite,AiSimState> localSpecifiedStates = new HashMap<AiSimSprite, AiSimState>();
+		for(Entry<AiSprite,AiState> entry: specifiedStates.entrySet())
+		{	AiSprite sprite = entry.getKey();
+			AiSimSprite simSprite = current.getSpriteById(sprite);
+			AiState state = entry.getValue();
+			AiSimState simState = new AiSimState(state);
+			localSpecifiedStates.put(simSprite,simState);
+		}
 		
 		// list all sprites
 		List<AiSimSprite> sprites = new ArrayList<AiSimSprite>();
@@ -270,10 +282,8 @@ if(sprite0 instanceof AiSimBomb)
 				for(AiTile tile: blast)
 				{	AiSimTile simTile = (AiSimTile)tile;
 					if(!burntTiles.contains(simTile))
-					{	AiSimFire fire = bomb.createFire(simTile);
-//TODO compléter ici : état, ajouter à la case/niveau, à la liste de sprites, etc.
-//TODO adapter l'init pour recopier la zone
-//TODO utiliser les ids pour reconnaitre les sprites passés par l'utilisateur
+					{	//AiSimFire fire = bomb.createFire(simTile);
+//TODO compléter ici : état d feu, ajouter à la case/niveau, à la liste de sprites, etc.
 						burntTiles.add(simTile);
 						List<AiSimSprite> sprites = new ArrayList<AiSimSprite>();
 						sprites.addAll(simTile.getInternalBlocks());

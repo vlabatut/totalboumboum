@@ -42,7 +42,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * @author Vincent Labatut
  *
  */
-public final class AiSimTile implements AiTile
+final class AiSimTile implements AiTile
 {	
 	/**
 	 * construit une simulation de case à partir des coordonnées passées en paramètres

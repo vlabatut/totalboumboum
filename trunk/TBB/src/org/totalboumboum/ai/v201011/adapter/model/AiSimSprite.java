@@ -31,7 +31,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
  * @author Vincent Labatut
  *
  */
-public abstract class AiSimSprite implements AiSprite
+abstract class AiSimSprite implements AiSprite
 {	
 	/**
 	 * crée une nouvelle simulation d'un sprite
@@ -59,18 +59,19 @@ public abstract class AiSimSprite implements AiSprite
 	 * @param sprite	sprite à simuler
 	 * @param tile	simulation de la case contenant le sprite
 	 */
-/*	protected AiSimSprite(AiSprite sprite, AiSimTile tile)
+	protected AiSimSprite(AiSprite sprite, AiSimTile tile)
 	{	// general
 		this.tile = tile;
 		state = new AiSimState(sprite);
 		burningDuration = sprite.getBurningDuration();
+		this.id = sprite.getId();
 		
 		// location
 		this.posX = sprite.getPosX();
 		this.posY = sprite.getPosY();
 		this.posZ = sprite.getPosZ();
 	}
-*/
+
 	/////////////////////////////////////////////////////////////////
 	// ID				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
