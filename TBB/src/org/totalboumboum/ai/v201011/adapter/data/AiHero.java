@@ -38,7 +38,8 @@ public interface AiHero extends AiSprite
 	/**
 	 * renvoie la portée actuelle des bombes du personnage
 	 * 
-	 * @return	la portée des bombes
+	 * @return	
+	 * 		la portée des bombes
 	 */
 	public int getBombRange();
 	
@@ -48,7 +49,8 @@ public interface AiHero extends AiSprite
 	 * Ce nombre correspond à la somme du nombre de bombes actuellement déjà 
 	 * posées (getBombCount) plus le nombre de bombes que le joueur peut encore poser. 
 	 * 
-	 * @return	le nombre de bombes simultanément posables (en général)
+	 * @return	
+	 * 		le nombre de bombes simultanément posables (en général)
 	 */
 	public int getBombNumber();
 	
@@ -58,7 +60,8 @@ public interface AiHero extends AiSprite
 	 * i.e. il ne peut pas être plus grand puisque getBombNumber renvoie
 	 * le nombre de bombes maximal que le joueur peut poser en même temps. 
 	 * 
-	 * @return	nombre de bombes posées en ce moment
+	 * @return	
+	 * 		nombre de bombes posées en ce moment
 	 */
 	public int getBombCount();
 	
@@ -68,7 +71,8 @@ public interface AiHero extends AiSprite
 	/**
 	 * renvoie la couleur de ce personnage (et de ses bombes)
 	 * 
-	 * @return un symbole de type PredefinedColor représentant une couleur
+	 * @return 
+	 * 		un symbole de type PredefinedColor représentant une couleur
 	 */
 	public PredefinedColor getColor();
 	
@@ -81,7 +85,8 @@ public interface AiHero extends AiSprite
 	 * de déplacement courante, il s'agit de la vitesse du personnage
 	 * quand il marche. Cette vitesse peut être modifiée par certains items.
 	 * 
-	 * @return	la vitesse de déplacement de ce personnage
+	 * @return	
+	 * 		la vitesse de déplacement de ce personnage
 	 */
 	public double getWalkingSpeed();
 	
@@ -93,7 +98,8 @@ public interface AiHero extends AiSprite
 	 * Ce classement est susceptible d'évoluer d'ici la fin de la manche actuellement jouée, 
 	 * par exemple si ce joueur est éliminé.
 	 * 
-	 * @return	le classement de ce joueur dans la manche en cours
+	 * @return	
+	 * 		le classement de ce joueur dans la manche en cours
 	 */
 	public int getRoundRank();
 	
@@ -101,7 +107,8 @@ public interface AiHero extends AiSprite
 	 * Renvoie le classement de ce joueur, pour la rencontre en cours.
 	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
-	 * @return	le classement de ce joueur dans la rencontre en cours
+	 * @return	
+	 * 		le classement de ce joueur dans la rencontre en cours
 	 */
 	public int getMatchRank();
 	
@@ -109,7 +116,8 @@ public interface AiHero extends AiSprite
 	 * Renvoie le classement de ce joueur, dans le classement général du jeu (Glicko-2)
 	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
-	 * @return	le classement général (Glicko-2) de ce joueur
+	 * @return	
+	 * 		le classement général (Glicko-2) de ce joueur
 	 */
 	public int getStatsRank();
 
@@ -122,7 +130,8 @@ public interface AiHero extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	vrai si le personnage traverse les murs
+	 * @return	
+	 * 		vrai si le personnage traverse les murs
 	 */
 	public boolean hasThroughBlocks();
 
@@ -132,7 +141,8 @@ public interface AiHero extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	vrai si le personnage traverse les bombes
+	 * @return	
+	 * 		vrai si le personnage traverse les bombes
 	 */
 	public boolean hasThroughBombs();
 
@@ -142,7 +152,8 @@ public interface AiHero extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	vrai si le personnage résiste au feu
+	 * @return	
+	 * 		vrai si le personnage résiste au feu
 	 */
 	public boolean hasThroughFires();
 }

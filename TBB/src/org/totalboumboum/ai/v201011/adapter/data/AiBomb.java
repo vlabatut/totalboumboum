@@ -39,25 +39,33 @@ public interface AiBomb extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie la probabilité que la bombe tombe en panne quand elle devrait exploser
-	 * @return	une mesure de probabilité
+	 * 
+	 * @return	
+	 * 		une mesure de probabilité
 	 */
 	public float getFailureProbability();
 	
 	/**
 	 * indique si l'explosion de la bombe dépend d'un compte à rebours
-	 * @return	vrai si la bombe dépend d'un compte à rebours
+	 * 
+	 * @return	
+	 * 		vrai si la bombe dépend d'un compte à rebours
 	 */
 	public boolean hasCountdownTrigger();
 	
 	/**
 	 * indique si l'explosion de la bombe dépend d'une télécommande
-	 * @return	vrai si la bombe dépend d'une télécommande
+	 * 
+	 * @return	
+	 * 		vrai si la bombe dépend d'une télécommande
 	 */
 	public boolean hasRemoteControlTrigger();
 	
 	/**
 	 * indique si l'explosion de la bombe dépend d'un contact avec du feu
-	 * @return	vrai si la bombe explose au contact du feu
+	 * 
+	 * @return	
+	 * 		vrai si la bombe explose au contact du feu
 	 */
 	public boolean hasExplosionTrigger();
 	
@@ -66,7 +74,8 @@ public interface AiBomb extends AiSprite
 	 * Ce délai ne tient pas compte des pannes éventuelles.
 	 * Ce délai n'est pas défini pour tous les types de bombes
 	 * 
-	 * @return	le délai normal avant explosion exprimé en millisecondes
+	 * @return	
+	 * 		le délai normal avant explosion exprimé en millisecondes
 	 */
 	public long getNormalDuration();
 
@@ -76,7 +85,8 @@ public interface AiBomb extends AiSprite
 	 * la durée de vie des flammes, et leur disparition.
 	 * Cette valeur n'est pas forcément constante, et peut varier d'une bombe à l'autre.
 	 * 
-	 * @return	la durée de l'explosion
+	 * @return	
+	 * 		la durée de l'explosion
 	 */
 	public long getExplosionDuration();
 
@@ -86,7 +96,8 @@ public interface AiBomb extends AiSprite
 	 * la bombe est touchée par l'explosion, et le moment où elle commence effectivement
 	 * à exploser.
 	 * 
-	 * @return	la latence de la bombe pour une détonation déclenchée par une autre explosion
+	 * @return	
+	 * 		la latence de la bombe pour une détonation déclenchée par une autre explosion
 	 */
 	public long getLatencyDuration();
 	
@@ -96,7 +107,9 @@ public interface AiBomb extends AiSprite
 	/**
 	 * renvoie la portée de la bombe
 	 * (ie. le nombre de cases occupées par sa flamme)
-	 * @return	portée de la bombe
+	 * 
+	 * @return	
+	 * 		portée de la bombe
 	 */
 	public int getRange();
 	
@@ -106,7 +119,8 @@ public interface AiBomb extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutôt getBlast().
 	 * 
-	 * @return	vrai si le feu peut traverser les murs
+	 * @return	
+	 * 		vrai si le feu peut traverser les murs
 	 */
 	public boolean isPenetrating();
 
@@ -121,7 +135,8 @@ public interface AiBomb extends AiSprite
 	 * alors le souffle peut changer, il faut ré-exécuter cette méthode pour avoir le
 	 * nouveau souffle de la bombe dans ce nouvel environnement.
 	 * 
-	 * @return	une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
+	 * @return	
+	 * 		une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
 	 */
 	public List<AiTile> getBlast();
 
@@ -131,7 +146,8 @@ public interface AiBomb extends AiSprite
 	/**
 	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne)
 	 * 
-	 * @return	vrai si cette bombe marche, faux si elle est en panne
+	 * @return	
+	 * 		vrai si cette bombe marche, faux si elle est en panne
 	 */
 	public boolean isWorking();
 
@@ -143,7 +159,8 @@ public interface AiBomb extends AiSprite
 	 * Cette couleur est null si aucun joueur n'a posé la bombe 
 	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
 	 * 
-	 * @return un symbole de type PredefinedColor représentant une couleur
+	 * @return 
+	 * 		un symbole de type PredefinedColor représentant une couleur
 	 */
 	public PredefinedColor getColor();
 
@@ -154,7 +171,8 @@ public interface AiBomb extends AiSprite
 	 * renvoie le temps écoulé depuis que la bombe a été posée,
 	 * exprimé en millisecondes
 	 * 
-	 * @return	temps exprimé en ms
+	 * @return	
+	 * 		temps exprimé en ms
 	 */
 	public long getTime();
 
@@ -167,7 +185,8 @@ public interface AiBomb extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
+	 * @return	
+	 * 		une valeur AiStopType indiquant si ce bloc arrête les personnages
 	 */
 	public AiStopType hasStopHeroes();
 	
@@ -177,7 +196,8 @@ public interface AiBomb extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
+	 * @return	
+	 * 		une valeur AiStopType indiquant si ce bloc arrête le feu
 	 */
 	public AiStopType hasStopFires();
 	
@@ -187,7 +207,8 @@ public interface AiBomb extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	vrai si la bombe traverse les items
+	 * @return	
+	 * 		vrai si la bombe traverse les items
 	 */
 	public boolean hasThroughItems();
 }

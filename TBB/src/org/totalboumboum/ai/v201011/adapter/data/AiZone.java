@@ -57,7 +57,8 @@ public abstract class AiZone
 	/**
 	 * renvoie le temps total écoulé depuis le début du jeu
 	 * 
-	 * @return	le temps total écoulé exprimé en millisecondes
+	 * @return	
+	 * 		le temps total écoulé exprimé en millisecondes
 	 */
 	public long getTotalTime()
 	{	return totalTime;		
@@ -67,7 +68,8 @@ public abstract class AiZone
 	 * renvoie le temps écoulé depuis la mise à jour précédente
 	 * de l'IA considérée.
 	 * 
-	 * @return	le temps écoulé exprimé en millisecondes
+	 * @return	
+	 * 		le temps écoulé exprimé en millisecondes
 	 */
 	public long getElapsedTime()
 	{	return elapsedTime;		
@@ -77,7 +79,8 @@ public abstract class AiZone
 	 * renvoie la durée maximale de la partie
 	 * (elle peut éventuellement durer moins longtemps)
 	 * 
-	 * @return	la durée maximale de la partie
+	 * @return	
+	 * 		la durée maximale de la partie
 	 */
 	public long getLimitTime()
 	{	return limitTime;		
@@ -98,8 +101,10 @@ public abstract class AiZone
 	 * Ce classement est susceptible d'évoluer d'ici la fin de la manche actuellement jouée, 
 	 * par exemple si ce joueur est éliminé.
 	 * 
-	 * @param hero	le personnage considéré
-	 * @return	son classement dans la manche en cours
+	 * @param 
+	 * 		hero	le personnage considéré
+	 * @return	
+	 * 		son classement dans la manche en cours
 	 */
 	public int getRoundRank(AiHero hero)
 	{	return roundRanks.get(hero);
@@ -109,8 +114,10 @@ public abstract class AiZone
 	 * Renvoie le classement du personnage passé en paramètre, pour la rencontre en cours.
 	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
-	 * @param hero	le personnage considéré
-	 * @return	son classement dans la rencontre en cours
+	 * @param 
+	 * 		hero	le personnage considéré
+	 * @return	
+	 * 		son classement dans la rencontre en cours
 	 */
 	public int getMatchRank(AiHero hero)
 	{	return matchRanks.get(hero);
@@ -120,8 +127,10 @@ public abstract class AiZone
 	 * Renvoie le classement du personnage passé en paramètre, dans le classement général du jeu (Glicko-2)
 	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
 	 * 
-	 * @param hero	le personnage considéré
-	 * @return	son classement général (Glicko-2)
+	 * @param 
+	 * 		hero	le personnage considéré
+	 * @return	
+	 * 		son classement général (Glicko-2)
 	 */
 	public int getStatsRank(AiHero hero)
 	{	return statsRanks.get(hero);
@@ -138,7 +147,8 @@ public abstract class AiZone
 	/**
 	 * renvoie la matrice de cases représentant la zone de jeu
 	 * 
-	 * @return	la matrice correspondant à la zone de jeu
+	 * @return	
+	 * 		la matrice correspondant à la zone de jeu
 	 */
 	public abstract AiTile[][] getMatrix();
 
@@ -146,7 +156,8 @@ public abstract class AiZone
 	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'écran)
 	 * de la zone de jeu exprimée en cases (ie: nombre de lignes)
 	 *  
-	 *  @return	hauteur de la zone
+	 *  @return	
+	 *  	hauteur de la zone
 	 */
 	public int getHeight()
 	{	return height;	
@@ -156,7 +167,8 @@ public abstract class AiZone
 	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'écran)
 	 * de la zone de jeu exprimée en cases (ie: nombre de colonnes)
 	 *  
-	 *  @return	largeur de la zone
+	 *  @return	
+	 *  	largeur de la zone
 	 */
 	public int getWidth()
 	{	return width;	
@@ -168,18 +180,24 @@ public abstract class AiZone
 	/**
 	 * renvoie la case située dans la zone à la position passée en paramètre.
 	 *   
-	 *  @param	line	numéro de la ligne contenant la case à renvoyer
-	 *  @param	col	numéro de la colonne contenant la case à renvoyer
-	 *  @return	case située aux coordonnées spécifiées en paramètres
+	 *  @param	
+	 *  	line	numéro de la ligne contenant la case à renvoyer
+	 *  @param	
+	 *  	col	numéro de la colonne contenant la case à renvoyer
+	 *  @return	
+	 *  	case située aux coordonnées spécifiées en paramètres
 	 */
 	public abstract AiTile getTile(int line, int col);
 	
 	/**
 	 * renvoie la case qui contient le pixel passé en paramètre
 	 *   
-	 *  @param	x	abscisse du pixel concerné
-	 *  @param	y	ordonnée du pixel concerné
-	 *  @return	case contenant le pixel situé aux coordonnées spécifiées en paramètres
+	 *  @param	
+	 *  	x	abscisse du pixel concerné
+	 *  @param	
+	 *  	y	ordonnée du pixel concerné
+	 *  @return	
+	 *  	case contenant le pixel situé aux coordonnées spécifiées en paramètres
 	 */
 	public abstract AiTile getTile(double x, double y);
 		
@@ -203,9 +221,12 @@ public abstract class AiZone
 	 * <br><t> S>>>>>>>>>>T  distance=11
 	 * <br><t>>S..........T> distance=1
 	 * 
-	 * @param source	case de référence
-	 * @param target	case dont on veut connaitre la direction
-	 * @return	la direction de target par rapport à source
+	 * @param 
+	 * 		source	case de référence
+	 * @param 
+	 * 		target	case dont on veut connaitre la direction
+	 * @return	
+	 * 		la direction de target par rapport à source
 	 */
 	public Direction getDirection(AiTile source, AiTile target)
 	{	// differences
@@ -239,7 +260,8 @@ public abstract class AiZone
 	 * renvoie la liste des blocks contenus dans cette zone
 	 * (la liste peut être vide). 
 	 * 
-	 * @return	liste de tous les blocs contenus dans cette zone
+	 * @return	
+	 * 		liste de tous les blocs contenus dans cette zone
 	 */
 	public abstract List<AiBlock> getBlocks();
 	
@@ -247,7 +269,8 @@ public abstract class AiZone
 	 * renvoie la liste des blocks destructibles contenus dans cette zone
 	 * (la liste peut être vide). 
 	 * 
-	 * @return	liste de tous les blocs destructibles contenus dans cette zone
+	 * @return	
+	 * 		liste de tous les blocs destructibles contenus dans cette zone
 	 */
 	public abstract List<AiBlock> getDestructibleBlocks();
 	
@@ -258,7 +281,8 @@ public abstract class AiZone
 	 * renvoie la liste des bombes contenues dans cette zone 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	liste de toutes les bombes contenues dans cette zone
+	 * @return	
+	 * 		liste de toutes les bombes contenues dans cette zone
 	 */
 	public abstract List<AiBomb> getBombs();
 	
@@ -269,7 +293,8 @@ public abstract class AiZone
 	 * renvoie la liste des feux contenus dans cette zone 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	liste de tous les feux contenus dans cette zone
+	 * @return	
+	 * 		liste de tous les feux contenus dans cette zone
 	 */
 	public abstract List<AiFire> getFires();
 
@@ -279,7 +304,8 @@ public abstract class AiZone
 	/** 
 	 * renvoie la liste des sols contenus dans cette zone 
 	 * 
-	 * @return	liste de tous les sols contenus dans cette zone
+	 * @return	
+	 * 		liste de tous les sols contenus dans cette zone
 	 */
 	public abstract List<AiFloor> getFloors();
 	
@@ -290,7 +316,8 @@ public abstract class AiZone
 	 * renvoie la liste des personnages contenus dans cette zone,
 	 * y compris ceux qui ont été éliminés. 
 	 * 
-	 * @return	liste de tous les joueurs contenus dans cette zone
+	 * @return	
+	 * 		liste de tous les joueurs contenus dans cette zone
 	 */
 	public abstract List<AiHero> getHeroes();
 	
@@ -299,7 +326,8 @@ public abstract class AiZone
 	 * sauf ceux qui ont été éliminés ou qui ne sont pas actuellement
 	 * en jeu.
 	 * 
-	 * @return	liste de tous les joueurs encore contenus dans cette zone
+	 * @return	
+	 * 		liste de tous les joueurs encore contenus dans cette zone
 	 */
 	public abstract List<AiHero> getRemainingHeroes();
 	
@@ -308,7 +336,8 @@ public abstract class AiZone
 	 * sauf ceux qui ont été éliminés ou qui ne sont pas actuellement
 	 * en jeu, et sauf le personnage contrôlé par l'IA.
 	 * 
-	 * @return	liste de tous les joueurs encore contenus dans cette zone, sauf celui de l'IA
+	 * @return	
+	 * 		liste de tous les joueurs encore contenus dans cette zone, sauf celui de l'IA
 	 */
 	public abstract List<AiHero> getRemainingOpponents();
 
@@ -319,7 +348,8 @@ public abstract class AiZone
 	 * renvoie la liste des items apparents contenus dans cette zone 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	liste de tous les items contenus dans cette zone
+	 * @return	
+	 * 		liste de tous les items contenus dans cette zone
 	 */
 	public abstract List<AiItem> getItems();
 	
@@ -330,7 +360,8 @@ public abstract class AiZone
 	 * savoir s'il est encore nécessaire de faire exploser des blocs 
 	 * pour trouver des items, ou pas.
 	 * 
-	 * @return	le nombre d'items restant à découvrir
+	 * @return	
+	 * 		le nombre d'items restant à découvrir
 	 */
 	public abstract int getHiddenItemsCount();
 	
@@ -339,6 +370,9 @@ public abstract class AiZone
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * renvoie le personnage qui est contrôlé par l'IA
+	 * 
+	 * @return
+	 * 		le personnage contrôlé par l'IA
 	 */
 	public abstract AiHero getOwnHero();
 	
@@ -353,9 +387,12 @@ public abstract class AiZone
 	 * courte (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * La direction peut être NONE si jamais les deux sprites sont au même endroit
 	 * 
-	 * @param source	sprite de départ
-	 * @param target	sprite de destination
-	 * @return	la direction pour aller de source vers target
+	 * @param 
+	 * 		source	sprite de départ
+	 * @param 
+	 * 		target	sprite de destination
+	 * @return	
+	 * 		la direction pour aller de source vers target
 	 */
 	public Direction getDirection(AiSprite source, AiSprite target)
 	{	Direction result;
@@ -379,9 +416,12 @@ public abstract class AiZone
 	 * courte (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * La direction peut être NONE si jamais les deux sprites sont au même endroit
 	 * 
-	 * @param sprite	sprite en déplacement
-	 * @param tile	case de destination
-	 * @return	la direction pour aller du sprite vers la case
+	 * @param 
+	 * 		sprite	sprite en déplacement
+	 * @param 
+	 * 		tile	case de destination
+	 * @return	
+	 * 		la direction pour aller du sprite vers la case
 	 */
 	public Direction getDirection(AiSprite sprite, AiTile tile)
 	{	Direction result;
@@ -405,11 +445,16 @@ public abstract class AiZone
 	 * courte (qui peut correspondre à un chemin passant par les bords du niveau).
 	 * La direction peut être NONE si jamais les deux positions sont équivalentes.
 	 * 
-	 * @param x1	première position horizontale en pixels
-	 * @param y1	première position verticale en pixels
-	 * @param x2	seconde position horizontale en pixels
-	 * @param y2	seconde position verticale en pixels
-	 * @return	la direction correspondant au chemin le plus court
+	 * @param 
+	 * 		x1	première position horizontale en pixels
+	 * @param 
+	 * 		y1	première position verticale en pixels
+	 * @param 
+	 * 		x2	seconde position horizontale en pixels
+	 * @param 
+	 * 		y2	seconde position verticale en pixels
+	 * @return	
+	 * 		la direction correspondant au chemin le plus court
 	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
 	{	double dx = LevelsTools.getDeltaX(x1,x2,pixelLeftX,pixelWidth);
@@ -434,11 +479,16 @@ public abstract class AiZone
 	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
 	 * passant par les bords du niveau.
 	 * 
-	 * @param line1	ligne de la première case
-	 * @param col1	colonne de la première case
-	 * @param line2	ligne de la seconde case
-	 * @param col2	colonne de la seconde case
-	 * @param direction	direction à considérer
+	 * @param 
+	 * 		line1	ligne de la première case
+	 * @param 
+	 * 		col1	colonne de la première case
+	 * @param 
+	 * 		line2	ligne de la seconde case
+	 * @param 
+	 * 		col2	colonne de la seconde case
+	 * @param 
+	 * 		direction	direction à considérer
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
 	{	int result = LevelsTools.getTileDistance(line1,col1,line2,col2,direction,height,width);
@@ -453,10 +503,14 @@ public abstract class AiZone
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
-	 * @param line1	ligne de la première case
-	 * @param col1	colonne de la première case
-	 * @param line2	ligne de la seconde case
-	 * @param col2	colonne de la seconde case
+	 * @param 
+	 * 		line1	ligne de la première case
+	 * @param 
+	 * 		col1	colonne de la première case
+	 * @param 
+	 * 		line2	ligne de la seconde case
+	 * @param 
+	 * 		col2	colonne de la seconde case
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2)
 	{	int result = LevelsTools.getTileDistance(line1,col1,line2,col2,Direction.NONE,height,width);
@@ -471,8 +525,10 @@ public abstract class AiZone
 	 * Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
-	 * @param sprite1	première case
-	 * @param sprite2	seconde case
+	 * @param 
+	 * 		sprite1	première case
+	 * @param 
+	 * 		sprite2	seconde case
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2)
 	{	int result = getTileDistance(tile1,tile2,Direction.NONE);
@@ -488,9 +544,12 @@ public abstract class AiZone
 	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
 	 * passant par les bords du niveau.
 	 * 
-	 * @param sprite1	première case
-	 * @param sprite2	seconde case
-	 * @param direction	direction à considérer
+	 * @param 
+	 * 		sprite1	première case
+	 * @param 
+	 * 		sprite2	seconde case
+	 * @param 
+	 * 		direction	direction à considérer
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2, Direction direction)
 	{	int line1 = tile1.getLine();
@@ -509,8 +568,10 @@ public abstract class AiZone
 	 * Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
-	 * @param sprite1	premier sprite
-	 * @param sprite2	second sprite
+	 * @param 
+	 * 		sprite1	premier sprite
+	 * @param 
+	 * 		sprite2	second sprite
 	 */
 	public int getTileDistance(AiSprite sprite1, AiSprite sprite2)
 	{	int result = getTileDistance(sprite1,sprite2,Direction.NONE);
@@ -526,9 +587,12 @@ public abstract class AiZone
 	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
 	 * passant par les bords du niveau.
 	 * 
-	 * @param sprite1	premier sprite
-	 * @param sprite2	second sprite
-	 * @param direction	direction à considérer
+	 * @param 
+	 * 		sprite1	premier sprite
+	 * @param 
+	 * 		sprite2	second sprite
+	 * @param 
+	 * 		direction	direction à considérer
 	 */
 	public int getTileDistance(AiSprite sprite1, AiSprite sprite2, Direction direction)
 	{	AiTile tile1 = sprite1.getTile();
@@ -604,10 +668,14 @@ public abstract class AiZone
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
-	 * @param x1	abscisse du premier point
-	 * @param y1	ordonnée du premier point
-	 * @param x2	abscisse du second point
-	 * @param y2	ordonnée du second point
+	 * @param 
+	 * 		x1	abscisse du premier point
+	 * @param 
+	 * 		y1	ordonnée du premier point
+	 * @param
+	 * 		x2	abscisse du second point
+	 * @param 
+	 * 		y2	ordonnée du second point
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
 	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
@@ -625,11 +693,16 @@ public abstract class AiZone
 	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
 	 * passant par les bords du niveau.
 	 * 
-	 * @param x1	abscisse du premier point
-	 * @param y1	ordonnée du premier point
-	 * @param x2	abscisse du second point
-	 * @param y2	ordonnée du second point
-	 * @param direction	direction à considérer
+	 * @param 
+	 * 		x1	abscisse du premier point
+	 * @param 
+	 * 		y1	ordonnée du premier point
+	 * @param 
+	 * 		x2	abscisse du second point
+	 * @param 
+	 * 		y2	ordonnée du second point
+	 * @param 
+	 * 		direction	direction à considérer
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
 	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
@@ -646,8 +719,10 @@ public abstract class AiZone
 	 * Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
-	 * @param sprite1	premier sprite
-	 * @param sprite2	second sprite
+	 * @param 
+	 * 		sprite1	premier sprite
+	 * @param 
+	 * 		sprite2	second sprite
 	 */
 	public double getPixelDistance(AiSprite sprite1, AiSprite sprite2)
 	{	double result = getPixelDistance(sprite1, sprite2,Direction.NONE);
@@ -662,9 +737,12 @@ public abstract class AiZone
 	 * paramètre direction, qui peut correspondre à un chemin passant par 
 	 * les bords du niveau.
 	 * 
-	 * @param sprite1	premier sprite
-	 * @param sprite2	second sprite
-	 * @param direction	direction à considérer
+	 * @param 
+	 * 		sprite1	premier sprite
+	 * @param 
+	 * 		sprite2	second sprite
+	 * @param 
+	 * 		direction	direction à considérer
 	 */
 	public double getPixelDistance(AiSprite sprite1, AiSprite sprite2, Direction direction)
 	{	double x1 = sprite1.getPosX();
@@ -695,9 +773,12 @@ public abstract class AiZone
 	 * utilise la propriété cyclique du niveau pour déterminer une position
 	 * équivalente située dans le niveau.
 	 * 
-	 * @param x	abscisse
-	 * @param y	ordonnée
-	 * @return	un tableau contenant les versions normalisées de x et y
+	 * @param 
+	 * 		x	abscisse
+	 * @param 
+	 * 		y	ordonnée
+	 * @return	
+	 * 		un tableau contenant les versions normalisées de x et y
 	 */
 	public double[] normalizePosition(double x, double y)
 	{	return LevelsTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
@@ -711,8 +792,10 @@ public abstract class AiZone
 	 * côté droit sont reliés) pour déterminer une position
 	 * équivalente située dans le niveau.
 	 * 
-	 * @param x	abscisse
-	 * @return	la version normalisée de x
+	 * @param 
+	 * 		x	abscisse
+	 * @return	
+	 * 		la version normalisée de x
 	 */
 	public double normalizePositionX(double x)
 	{	return LevelsTools.normalizePositionX(x,pixelLeftX,pixelWidth);
@@ -726,8 +809,10 @@ public abstract class AiZone
 	 * côté bas sont reliés) pour déterminer une position
 	 * équivalente située dans le niveau.
 	 * 
-	 * @param y	ordonnée
-	 * @return	la version normalisée de y
+	 * @param 
+	 * 		y	ordonnée
+	 * @return	
+	 * 		la version normalisée de y
 	 */
 	public double normalizePositionY(double y)
 	{	return LevelsTools.normalizePositionY(y,pixelTopY,pixelHeight);
@@ -740,9 +825,12 @@ public abstract class AiZone
 	 * utilise la propriété cyclique du niveau pour déterminer une position
 	 * équivalente située dans le niveau.
 	 * 
-	 * @param line	ligne de la case
-	 * @param col	colonne de la case
-	 * @return	un tableau contenant les versions normalisées de line et col
+	 * @param 
+	 * 		line	ligne de la case
+	 * @param 
+	 * 		col	colonne de la case
+	 * @return	
+	 * 		un tableau contenant les versions normalisées de line et col
 	 */
 	public int[] normalizePosition(int line, int col)
 	{	return LevelsTools.normalizePosition(line,col,height,width);
@@ -756,8 +844,10 @@ public abstract class AiZone
 	 * côté droit sont reliés) pour déterminer une position
 	 * équivalente située dans le niveau.
 	 * 
-	 * @param col	colonne de la case
-	 * @return	la version normalisée de col
+	 * @param 
+	 * 		col	colonne de la case
+	 * @return	
+	 * 		la version normalisée de col
 	 */
 	public int normalizePositionCol(int col)
 	{	return LevelsTools.normalizePositionCol(col,width);
@@ -771,8 +861,10 @@ public abstract class AiZone
 	 * côté bas sont reliés) pour déterminer une position
 	 * équivalente située dans le niveau.
 	 * 
-	 * @param line	ligne de la case
-	 * @return	la version normalisée de line
+	 * @param 
+	 * 		line	ligne de la case
+	 * @return	
+	 * 		la version normalisée de line
 	 */
 	public int normalizePositionLine(int line)
 	{	return LevelsTools.normalizePositionLine(line,height);
@@ -785,9 +877,12 @@ public abstract class AiZone
 	 * teste si les deux sprites passés en paramètres occupent la
 	 * même position au pixel près
 	 * 
-	 * @param sprite1	le premier sprite
-	 * @param sprite2	le second sprite
-	 * @return	vrai ssi les deux sprites sont au même endroit
+	 * @param 
+	 * 		sprite1	le premier sprite
+	 * @param 
+	 * 		sprite2	le second sprite
+	 * @return	
+	 * 		vrai ssi les deux sprites sont au même endroit
 	 */
 	public boolean hasSamePixelPosition(AiSprite sprite1, AiSprite sprite2)
 	{	boolean result;
@@ -803,9 +898,12 @@ public abstract class AiZone
 	 * teste si le sprite passé en paramètre occupent le
 	 * centre de la case passée en paramètre, au pixel près
 	 * 
-	 * @param sprite	le sprite
-	 * @param tile	la case
-	 * @return	vrai ssi le sprite est au centre de la case
+	 * @param 
+	 * 		sprite	le sprite
+	 * @param 
+	 * 		tile	la case
+	 * @return	
+	 * 		vrai ssi le sprite est au centre de la case
 	 */
 	public boolean hasSamePixelPosition(AiSprite sprite, AiTile tile)
 	{	boolean result;	
@@ -821,11 +919,16 @@ public abstract class AiZone
 	 * teste si les deux points passés en paramètres occupent la
 	 * même position au pixel près
 	 * 
-	 * @param x1	l'abscisse de la première position
-	 * @param y1	l'ordonnée de la première position
-	 * @param x2	l'abscisse de la seconde position
-	 * @param y21	l'ordonnée de la seconde position
-	 * @return	vrai ssi les deux positions sont équivalentes au pixel près
+	 * @param 
+	 * 		x1	l'abscisse de la première position
+	 * @param 
+	 * 		y1	l'ordonnée de la première position
+	 * @param 
+	 * 		x2	l'abscisse de la seconde position
+	 * @param 
+	 * 		y2	l'ordonnée de la seconde position
+	 * @return	
+	 * 		vrai ssi les deux positions sont équivalentes au pixel près
 	 */
 	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2)
 	{	boolean result = true;	

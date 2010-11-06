@@ -38,7 +38,8 @@ public interface AiItem extends AiSprite
 	/**
 	 * renvoie le type de l'item représenté
 	 * 
-	 * @return	le type de l'item
+	 * @return	
+	 * 		le type de l'item
 	 */
 	public AiItemType getType();
 
@@ -51,7 +52,8 @@ public interface AiItem extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	une valeur AiStopType indiquant si cet item arrête le feu
+	 * @return	
+	 * 		une valeur AiStopType indiquant si cet item arrête le feu
 	 */
 	public AiStopType hasStopFires();
 
@@ -61,7 +63,8 @@ public interface AiItem extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	une valeur AiStopType indiquant si cet item arrête les bombes
+	 * @return	
+	 * 		une valeur AiStopType indiquant si cet item arrête les bombes
 	 */
 	public AiStopType hasStopBombs();
 }

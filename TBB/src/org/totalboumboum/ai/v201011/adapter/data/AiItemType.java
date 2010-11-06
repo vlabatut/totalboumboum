@@ -31,20 +31,26 @@ public enum AiItemType
 {
 	/** le joueur peut poser une bombe de plus */
 	EXTRA_BOMB,
+	
 	/** les bombes du joueur explosent plus loin */
 	EXTRA_FLAME,
+	
 	/** effet négatif sur le joueur (ralentissement, constipation, etc.) */
 	MALUS,
+	
 	/** le joueur peut frapper dans une bombe et ainsi l'envoyer plus loin */
 	PUNCH,
+	
 	/** autre type d'item */
 	OTHER;	
 	
 	/**
 	 * calcule l'AiItemType correspondant au nom d'item passé en paramètre
 	 * 
-	 * @param name	nom de l'item à traiter
-	 * @return	symbole représentant ce type d'item
+	 * @param name	
+	 * 		nom de l'item à traiter
+	 * @return	
+	 * 		symbole représentant ce type d'item
 	 */
 	public static AiItemType makeItemType(String name)
 	{	AiItemType result;

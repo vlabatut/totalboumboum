@@ -38,8 +38,10 @@ final class AiDataFloor extends AiDataSprite<Floor> implements AiFloor
 	 * crée une représentation du sol passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param 
+	 * 		tile	case contenant le sprite
+	 * @param 
+	 * 		sprite	sprite à représenter
 	 */
 	protected AiDataFloor(AiDataTile tile, Floor sprite)
 	{	super(tile,sprite);		

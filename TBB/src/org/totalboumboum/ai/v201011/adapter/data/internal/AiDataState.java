@@ -45,7 +45,8 @@ final class AiDataState implements AiState
 	/**
 	 * construit un objet représentant l'état du sprite passé en paramètre
 	 * 
-	 * @param sprite	sprite dont on veut représenter l'état
+	 * @param 
+	 * 		sprite	sprite dont on veut représenter l'état
 	 */
 	protected AiDataState(Sprite sprite)
 	{	this.sprite = sprite;
