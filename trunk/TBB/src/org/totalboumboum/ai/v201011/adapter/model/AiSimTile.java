@@ -356,7 +356,7 @@ final class AiSimTile implements AiTile
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@Override
-	public boolean isCrossableBy(AiSprite sprite)
+	public boolean isCrossableBy(AiSprite sprite, boolean considerFire)
 	{	boolean result = true;
 		// murs
 		if(result)
@@ -365,7 +365,7 @@ final class AiSimTile implements AiTile
 		if(result)
 			result = isCrossableBy(sprite,internalBombs);
 		// feu
-		if(result)
+		if(result && considerFire)
 			result = isCrossableBy(sprite,internalFires);
 		// heroes
 		if(result)

@@ -241,7 +241,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 					tiles[i] = tempTile;
 					if(!processed.contains(tempTile))
 					{	processed.add(tempTile);
-						blocked[i] = !tempTile.isCrossableBy(fire);
+						blocked[i] = !tempTile.isCrossableBy(fire,true);
 						goOn = goOn || !blocked[i];
 						result.add(tempTile);
 					}
