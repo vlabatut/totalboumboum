@@ -38,7 +38,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-public final class AiSimBomb extends AiSimSprite implements AiBomb
+final class AiSimBomb extends AiSimSprite implements AiBomb
 {	
 	/**
 	 * 
@@ -101,7 +101,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param sprite	sprite à simuler
 	 * @param tile	case devant contenir le sprite
 	 */
-/*	protected AiSimBomb(AiBomb sprite, AiSimTile tile)
+	protected AiSimBomb(AiBomb sprite, AiSimTile tile)
 	{	super(sprite,tile);
 	
 		// fuse
@@ -127,7 +127,7 @@ public final class AiSimBomb extends AiSimSprite implements AiBomb
 		working = sprite.isWorking();
 		time = sprite.getTime();
 	}
-*/
+
 	/////////////////////////////////////////////////////////////////
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

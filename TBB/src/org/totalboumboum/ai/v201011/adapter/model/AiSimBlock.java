@@ -32,7 +32,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
  * @author Vincent Labatut
  *
  */
-public final class AiSimBlock extends AiSimSprite implements AiBlock
+final class AiSimBlock extends AiSimSprite implements AiBlock
 {
 	/**
 	 * crée une simulation du bloc passé en paramètre,
@@ -60,14 +60,14 @@ public final class AiSimBlock extends AiSimSprite implements AiBlock
 	 * @param sprite	sprite à simuler
 	 * @param tile	case contenant le sprite
 	 */
-/*	protected AiSimBlock(AiBlock sprite, AiSimTile tile)
+	protected AiSimBlock(AiBlock sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		this.destructible = sprite.isDestructible();
 		this.stopHeroes = sprite.hasStopHeroes();
 		this.stopFires = sprite.hasStopFires();
 	}	
-*/	
+	
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

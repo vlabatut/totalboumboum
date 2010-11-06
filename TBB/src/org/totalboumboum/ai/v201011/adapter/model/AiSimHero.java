@@ -32,7 +32,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-public final class AiSimHero extends AiSimSprite implements AiHero
+final class AiSimHero extends AiSimSprite implements AiHero
 {
 	/**
 	 * crée une simulation du joueur passé en paramètre,
@@ -77,7 +77,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 * @param tile	case contenant le sprite
 	 * @param sprite	sprite à simuler
 	 */
-/*	protected AiSimHero(AiHero sprite, AiSimTile tile)
+	protected AiSimHero(AiHero sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		// bombs
@@ -94,7 +94,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		color = sprite.getColor();
 		walkingSpeed = sprite.getWalkingSpeed();
 	}
-*/	
+	
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAMETERS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

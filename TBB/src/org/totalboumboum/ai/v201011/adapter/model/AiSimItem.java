@@ -34,7 +34,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
  * @author Vincent Labatut
  *
  */
-public final class AiSimItem extends AiSimSprite implements AiItem
+final class AiSimItem extends AiSimSprite implements AiItem
 {	
 	/**
 	 * crée une simulation de l'item passé en paramètre,
@@ -62,14 +62,14 @@ public final class AiSimItem extends AiSimSprite implements AiItem
 	 * @param sprite	sprite à simuler
 	 * @param tile	case contenant le sprite
 	 */
-/*	protected AiSimItem(AiItem sprite, AiSimTile tile)
+	protected AiSimItem(AiItem sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		type = sprite.getType();		
 		stopBombs = sprite.hasStopBombs();
 		stopFires = sprite.hasStopFires();
 	}
-*/
+
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

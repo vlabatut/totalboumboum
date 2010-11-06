@@ -31,7 +31,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
  * @author Vincent Labatut
  *
  */
-public final class AiSimFloor extends AiSimSprite implements AiFloor
+final class AiSimFloor extends AiSimSprite implements AiFloor
 {
 	/**
 	 * crée une simulation du sol passé en paramètre,
@@ -51,10 +51,10 @@ public final class AiSimFloor extends AiSimSprite implements AiFloor
 	 * @param sprite	sprite à simuler
 	 * @param tile	case contenant le sprite
 	 */
-/*	protected AiSimFloor(AiFloor sprite, AiSimTile tile)
+	protected AiSimFloor(AiFloor sprite, AiSimTile tile)
 	{	super(sprite,tile);		
 	}
-*/
+
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -31,7 +31,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
  * @author Vincent Labatut
  *
  */
-public final class AiSimFire extends AiSimSprite implements AiFire
+final class AiSimFire extends AiSimSprite implements AiFire
 {
 	/**
 	 * crée une simulation du feu passé en paramètre,
@@ -59,14 +59,14 @@ public final class AiSimFire extends AiSimSprite implements AiFire
 	 * @param tile	case contenant le sprite
 	 * @param sprite	sprite à simuler
 	 */
-/*	protected AiSimFire(AiFire sprite, AiSimTile tile)
+	protected AiSimFire(AiFire sprite, AiSimTile tile)
 	{	super(sprite,tile);
 		
 		this.throughBlocks = sprite.hasThroughBlocks();
 		this.throughBombs = sprite.hasThroughBombs();
 		this.throughItems = sprite.hasThroughItems();
 	}
-*/	
+	
 	/////////////////////////////////////////////////////////////////
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
