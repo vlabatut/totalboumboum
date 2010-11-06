@@ -40,7 +40,8 @@ public interface AiFire extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	vrai si le feu traverse les murs
+	 * @return	
+	 * 		vrai si le feu traverse les murs
 	 */
 	public boolean hasThroughBlocks();
 
@@ -50,7 +51,8 @@ public interface AiFire extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	vrai si le feu traverse les bombes
+	 * @return	
+	 * 		vrai si le feu traverse les bombes
 	 */
 	public boolean hasThroughBombs();
 
@@ -60,7 +62,8 @@ public interface AiFire extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	vrai si le feu traverse les items
+	 * @return	
+	 * 		vrai si le feu traverse les items
 	 */
 	public boolean hasThroughItems();
 }

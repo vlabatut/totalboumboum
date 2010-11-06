@@ -40,7 +40,8 @@ public interface AiBlock extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	une valeur AiStopType indiquant si ce bloc arrête les personnages
+	 * @return	
+	 * 		une valeur AiStopType indiquant si ce bloc arrête les personnages
 	 */
 	public AiStopType hasStopHeroes();
 	
@@ -50,7 +51,8 @@ public interface AiBlock extends AiSprite
 	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
-	 * @return	une valeur AiStopType indiquant si ce bloc arrête le feu
+	 * @return	
+	 * 		une valeur AiStopType indiquant si ce bloc arrête le feu
 	 */
 	public AiStopType hasStopFires();
 
@@ -60,7 +62,8 @@ public interface AiBlock extends AiSprite
 	/**
 	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
 	 * 
-	 * @return	l'indicateur de destructibilité du mur
+	 * @return	
+	 * 		l'indicateur de destructibilité du mur
 	 */
 	public boolean isDestructible();
 }

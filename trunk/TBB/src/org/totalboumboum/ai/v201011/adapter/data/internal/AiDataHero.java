@@ -45,8 +45,10 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	 * crée une représentation du joueur passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param 
+	 * 		tile	case contenant le sprite
+	 * @param 
+	 * 		sprite	sprite à représenter
 	 */
 	protected AiDataHero(AiDataTile tile, Hero sprite)
 	{	super(tile,sprite);

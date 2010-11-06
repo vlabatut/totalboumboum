@@ -41,15 +41,19 @@ public enum AiStateName
 	// equivalent gesture: BURNING
 	/** le sprite est en train de brûler */
 	BURNING,
+	
 	// equivalent gesture: ENDED
 	/** le sprite n'est plus en jeu */
 	ENDED,
+	
 	// equivalent gesture: BOUNCING, JUMPING, LANDING, PUNCHED
 	/** le sprite est en l'air (en train de sauter ou de rebondir sur les murs) */
 	FLYING,
+	
 	// equivalent gesture: APPEARING, CRYING, ENTERING, EXULTING, OSCILLATING, OSCILLATING_FAILING, PREPARED, PUNCHING, STANDING, STANDING_FAILING, WAITING
 	/** le sprite ne fait rien ou bien réalise une action qui ne nécessite pas de déplacement */ 
 	STANDING,
+	
 	// equivalent gesture: PUSHING, SLIDING, SLIDING_FAILING, WALKING
 	/** le sprite se déplace sur le sol */
 	MOVING;
@@ -60,8 +64,10 @@ public enum AiStateName
 	 * convertit une chaine de caractères correspondant à un geste du jeu
 	 * en un objet correspondant à une action telle qu'elle est perçue par l'IA.
 	 * 
-	 * @param gesture	geste à convertir
-	 * @return	le symbole de l'action correspondante 
+	 * @param 
+	 * 		gesture	geste à convertir
+	 * @return	
+	 * 		le symbole de l'action correspondante 
 	 */
 	public static AiStateName makeNameFromGesture(GestureName gesture)
 	{	AiStateName result = null;

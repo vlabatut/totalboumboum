@@ -37,7 +37,8 @@ public interface AiSprite
 	 * renvoie le numéro unique du sprite dans le jeu.<br/>
 	 * <b>Attention :</b> cette méthode n'est pas destinée à la programmation des IA 
 	 * 
-	 * @return	l'id du sprite
+	 * @return	
+	 * 		l'id du sprite
 	 */
 	public int getId();
 	
@@ -48,13 +49,16 @@ public interface AiSprite
 	 * renvoie l'état dans lequel se trouve ce sprite
 	 * (ie: quelle action il est en train d'effectuer ou de subir)
 	 * 
-	 * @return	l'état du sprite
+	 * @return	
+	 * 		l'état du sprite
 	 */
 	public AiState getState();
 	
 	/**
 	 * renvoie vrai si ce sprite a été éliminé du jeu
-	 * @return	vrai si le sprite n'est plus en jeu
+	 * 
+	 * @return	
+	 * 		vrai si le sprite n'est plus en jeu
 	 */
 	public boolean hasEnded();
 	
@@ -62,21 +66,26 @@ public interface AiSprite
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie la représentation de la case contenant ce sprite 
+	 * renvoie la représentation de la case contenant ce sprite
+	 * 
+	 *  @return
+	 *  	la case contenant ce sprite
 	 */
 	public AiTile getTile();
 	
 	/** 
 	 * renvoie le numéro de la ligne contenant ce sprite 
 	 * 
-	 * @return	le numéro de la ligne du sprite
+	 * @return	
+	 * 		le numéro de la ligne du sprite
 	 */
 	public int getLine();
 
 	/** 
 	 * renvoie le numéro de la colonne contenant ce sprite
 	 * 
-	 * @return	le numéro de la colonne du sprite
+	 * @return	
+	 * 		le numéro de la colonne du sprite
 	 */
 	public int getCol();
 	
@@ -86,21 +95,24 @@ public interface AiSprite
 	/** 
 	 * renvoie l'abscisse de ce sprite en pixels 
 	 * 
-	 * @return	l'abscisse du sprite
+	 * @return	
+	 * 		l'abscisse du sprite
 	 */
 	public double getPosX();
 	
 	/** 
 	 * renvoie l'ordonnée de ce sprite en pixels 
 	 * 
-	 * @return	l'ordonnée du sprite
+	 * @return	
+	 * 		l'ordonnée du sprite
 	 */
 	public double getPosY();
 	
 	/** 
 	 * renvoie l'altitude de ce sprite en pixels 
 	 * 
-	 * @return	l'altitude du sprite
+	 * @return	
+	 * 		l'altitude du sprite
 	 */
 	public double getPosZ();
 	
@@ -111,7 +123,8 @@ public interface AiSprite
 	 * renvoie la vitesse de déplacement courante du sprite.
 	 * si le sprite ne bouge pas, elle est de zéro.
 	 * 
-	 * @return	vitesse de déplacement du sprite en pixels/seconde
+	 * @return	
+	 * 		vitesse de déplacement du sprite en pixels/seconde
 	 */
 	public double getCurrentSpeed();
 	
@@ -122,8 +135,10 @@ public interface AiSprite
 	 * Teste si le sprite passé en paramètre est capable de traverser
 	 * la case de ce sprite
 	 * 
-	 *  @param sprite	le sprite à tester
-	 *  @return	vrai si ce sprite le laisser passer par sa case 
+	 *  @param 
+	 *  	sprite	le sprite à tester
+	 *  @return	
+	 *  	vrai si ce sprite le laisser passer par sa case 
 	 */
 	public boolean isCrossableBy(AiSprite sprite);
 
@@ -135,7 +150,8 @@ public interface AiSprite
 	 * par du feu, exprimé en ms. Si ce sprite ne peut pas brûler, ce
 	 * temps est égal à -1.
 	 * 
-	 * @return	le temps que ce sprite va mettre à brûler, en ms
+	 * @return	
+	 * 		le temps que ce sprite va mettre à brûler, en ms
 	 */
 	public long getBurningDuration();
 }

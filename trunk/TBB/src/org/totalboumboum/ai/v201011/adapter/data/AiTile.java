@@ -44,14 +44,16 @@ public interface AiTile
 	/** 
 	 * renvoie le numéro de la ligne contenant cette case
 	 * 
-	 * @return	la ligne de cette case
+	 * @return	
+	 * 		la ligne de cette case
 	 */
 	public int getLine();
 
 	/** 
 	 * renvoie le numéro de la colonne contenant cette case
 	 *  
-	 * @return	la colonne de cette case
+	 * @return	
+	 * 		la colonne de cette case
 	 */
 	public int getCol();
 
@@ -61,14 +63,16 @@ public interface AiTile
 	/** 
 	 * renvoie l'abscisse de la case en pixels
 	 * 
-	 * @return	l'abscisse de cette case
+	 * @return	
+	 * 		l'abscisse de cette case
 	 */
 	public double getPosX();
 	
 	/** 
 	 * renvoie l'ordonnée de la case en pixels
 	 * 
-	 * @return	l'ordonnée de cette case
+	 * @return	
+	 * 		l'ordonnée de cette case
 	 */
 	public double getPosY();
 	
@@ -78,7 +82,8 @@ public interface AiTile
 	/** 
 	 * renvoie la taille de la case en pixels
 	 * 
-	 * @return	longueur d'un côté de la case en pixels
+	 * @return	
+	 * 		longueur d'un côté de la case en pixels
 	 */
 	public double getSize();
 	
@@ -89,7 +94,8 @@ public interface AiTile
 	 * renvoie la liste des blocks contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	les blocks éventuellement contenus dans cette case
+	 * @return	
+	 * 		les blocks éventuellement contenus dans cette case
 	 */
 	public List<AiBlock> getBlocks();
 
@@ -97,7 +103,8 @@ public interface AiTile
 	 * renvoie la liste des bombes contenues dans cette case 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	les bombes éventuellement contenues dans cette case
+	 * @return	
+	 * 		les bombes éventuellement contenues dans cette case
 	 */
 	public List<AiBomb> getBombs();
 
@@ -105,7 +112,8 @@ public interface AiTile
 	 * renvoie la liste des feux contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	les feux éventuellement contenus dans cette case
+	 * @return	
+	 * 		les feux éventuellement contenus dans cette case
 	 */
 	public List<AiFire> getFires();
 
@@ -113,7 +121,8 @@ public interface AiTile
 	 * renvoie les sols de cette case 
 	 * (il y a forcément au moins un sol)
 	 * 
-	 * @return	les sols contenus dans cette case
+	 * @return	
+	 * 		les sols contenus dans cette case
 	 */
 	public List<AiFloor> getFloors();
 
@@ -121,7 +130,8 @@ public interface AiTile
 	 * renvoie la liste des personnages contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	les personnages éventuellement contenus dans cette case
+	 * @return	
+	 * 		les personnages éventuellement contenus dans cette case
 	 */
 	public List<AiHero> getHeroes();
 
@@ -129,7 +139,8 @@ public interface AiTile
 	 * renvoie la liste des items contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	les items éventuellement contenus dans cette case
+	 * @return	
+	 * 		les items éventuellement contenus dans cette case
 	 */
 	public List<AiItem> getItems();
 	
@@ -147,10 +158,15 @@ public interface AiTile
 	 * un obstacle, notamment pour les sprite de type Hero.</br>
 	 * cf. les méthodes de même nom dans les classes filles de AiSprite
 	 * 
-	 *  @param sprite	le sprite qui veut traverser cette case
-	 *  @return	vrai ssi ce sprite , à cet instant, peut traverser cette case
+	 *  @param 
+	 *  	sprite	le sprite qui veut traverser cette case
+	 *  @param 
+	 *  	considerFire	si vrai, la fonction considère le feu comme un obstacle
+	 *  	(à condition que le sprite considéré ne puisse pas le traverser)
+	 *  @return	
+	 *  	vrai ssi ce sprite , à cet instant, peut traverser cette case
 	 */
-	public boolean isCrossableBy(AiSprite sprite);
+	public boolean isCrossableBy(AiSprite sprite, boolean considerFire);
 	
 	/////////////////////////////////////////////////////////////////
 	// NEIGHBORS		/////////////////////////////////////////////
@@ -167,8 +183,10 @@ public interface AiTile
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
 	 * (ligne,width-1). Même chose pour les bordures haut et bas.
 	 * 
-	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
+	 * @param 
+	 * 		direction	direction dans laquelle le voisin se trouve
+	 * @return	
+	 * 		le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
 	 */
 	public AiTile getNeighbor(Direction direction);
 	
@@ -182,7 +200,8 @@ public interface AiTile
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
 	 * (ligne,width-1). Même chose pour les bordures haut et bas.
 	 * 
-	 * @return	la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
+	 * @return	
+	 * 		la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
 	 */
 	public List<AiTile> getNeighbors();
 }

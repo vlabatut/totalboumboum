@@ -56,8 +56,10 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	 * crée une représentation du bloc passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param 
+	 * 		tile	case contenant le sprite
+	 * @param 
+	 * 		sprite	sprite à représenter
 	 */
 	protected AiDataBlock(AiDataTile tile, Block sprite)
 	{	super(tile,sprite);

@@ -42,7 +42,8 @@ public interface AiState
 	/**
 	 * renvoie le nom associé à l'état
 	 * 
-	 * @return	nom associé à l'état
+	 * @return	
+	 * 		nom associé à l'état
 	 */
 	public AiStateName getName();
 	
@@ -53,7 +54,8 @@ public interface AiState
 	 * renvoie la direction associée à l'état,
 	 * qui peut être NONE, c'est à dire : l'état n'est pas orienté
 	 * 
-	 * @return	direction associée à l'état
+	 * @return	
+	 * 		direction associée à l'état
 	 */
 	public Direction getDirection();
 
@@ -63,7 +65,8 @@ public interface AiState
 	/**
 	 * renvoie la durée que le sprite a passé dans l'état courant
 	 * 
-	 * @return	une durée exprimée en ms
+	 * @return	
+	 * 		une durée exprimée en ms
 	 */
 	public long getTime();
 }

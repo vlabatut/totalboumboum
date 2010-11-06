@@ -30,6 +30,6 @@ package org.totalboumboum.ai.v201011.adapter.data;
  *
  */
 public interface AiFloor extends AiSprite
-{
+{	
 	
 }

@@ -44,8 +44,10 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/**
 	 * construit une représentation du sprite passé en paramètre
 	 * 
-	 * @param tile	représentation de la case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param 
+	 * 		tile	représentation de la case contenant le sprite
+	 * @param 
+	 * 		sprite	sprite à représenter
 	 */
 	protected AiDataSprite(AiDataTile tile, T sprite)
 	{	// general
@@ -71,7 +73,8 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/**
 	 * met à jour cette représentation du sprite
 	 * 
-	 * @param tile	la nouvelle case contenant cette représentation
+	 * @param 
+	 * 		tile	la nouvelle case contenant cette représentation
 	 */
 	protected void update(AiDataTile tile, long elapsedTime)
 	{	this.tile = tile;
@@ -100,8 +103,10 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/**
 	 * teste si cette représentation correspond au sprite passé en paramètre
 	 * 
-	 * @param sprite	le sprite dont on veut la représentation
-	 * @return	vrai si cette représentation correspond à ce sprite
+	 * @param 
+	 * 		sprite	le sprite dont on veut la représentation
+	 * @return	
+	 * 		vrai si cette représentation correspond à ce sprite
 	 */
 	protected boolean isSprite(T sprite)
 	{	return this.sprite == sprite;
@@ -125,7 +130,8 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/**
 	 * teste si sprite est marqué ou pas
 	 * 
-	 * @return	vrai si ce sprite est marqué
+	 * @return	
+	 * 		vrai si ce sprite est marqué
 	 */
 	protected boolean isChecked()
 	{	return checked;	

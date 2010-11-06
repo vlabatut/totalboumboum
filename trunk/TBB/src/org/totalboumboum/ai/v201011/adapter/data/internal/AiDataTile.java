@@ -56,8 +56,10 @@ final class AiDataTile implements AiTile
 	/**
 	 * construit une représentation de la case passée en paramètre
 	 * 
-	 * @param tile	case représentée
-	 * @param zone	zone contenant la représentation
+	 * @param 
+	 * 		tile	case représentée
+	 * @param 
+	 * 		zone	zone contenant la représentation
 	 */
 	protected AiDataTile(Tile tile, AiDataZone zone)
 	{	this.zone = zone;
@@ -96,8 +98,10 @@ final class AiDataTile implements AiTile
 	private Tile tile;
 	
 	/**
-	 * renvoie la case réelle représente par cet objet
+	 * renvoie la case réelle représentée par cet objet
+	 * 
 	 * @return
+	 * 		la case réelle représentée par cet objet
 	 */
 	protected Tile getTile()
 	{	return tile;
@@ -360,7 +364,7 @@ final class AiDataTile implements AiTile
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@Override
-	public boolean isCrossableBy(AiSprite sprite)
+	public boolean isCrossableBy(AiSprite sprite, boolean considerFire)
 	{	boolean result = true;
 		// murs
 		if(result)
@@ -369,7 +373,7 @@ final class AiDataTile implements AiTile
 		if(result)
 			result = isCrossableBy(sprite,internalBombs);
 		// feu
-		if(result)
+		if(result && considerFire)
 			result = isCrossableBy(sprite,internalFires);
 		// heroes
 		if(result)
@@ -387,9 +391,12 @@ final class AiDataTile implements AiTile
 	 * (cette fonction réalise le traitement relativement à 
 	 * la liste de sprite passée en paramètre)
 	 * 
-	 * @param sprite	le sprite qui veut traverser cette case
-	 * @param list	les sprites de cette case à tester
-	 * @return	vrai si le sprite peut traverser tous les sprites de la liste
+	 * @param 
+	 * 		sprite	le sprite qui veut traverser cette case
+	 * @param 
+	 * 		list	les sprites de cette case à tester
+	 * @return	
+	 * 		vrai si le sprite peut traverser tous les sprites de la liste
 	 */
 	private <T extends AiSprite> boolean isCrossableBy(AiSprite sprite, List<T> list)
 	{	boolean result = true;
@@ -484,8 +491,10 @@ final class AiDataTile implements AiTile
 	/**
 	 * termine les simulations de sprites passées en paramètres
 	 * 
-	 * @param <T>	type de simulation
-	 * @param internalList	liste de simulations
+	 * @param 
+	 * 		<T>	type de simulation
+	 * @param 
+	 * 		internalList	liste de simulations
 	 */
 	private <T extends AiDataSprite<?>, U extends AiSprite> void finishSprites(List<T> internalList, List<U> externalList)
 	{	Iterator<T> it = internalList.iterator();
