@@ -456,7 +456,7 @@ if(sprite0 instanceof AiSimBomb)
 				double tileY = tile.getPosY();
 				AiSimTile neighborTile = tile.getNeighbor(direction);
 				double offset = 0;
-				if(neighborTile.isCrossableBy(sprite)) //deal with obstacles
+				if(neighborTile.isCrossableBy(sprite,true)) //deal with obstacles
 					offset = tileSize/2;
 				double goalX = current.normalizePositionX(tileX+dir[0]*offset);
 				double goalY = current.normalizePositionY(tileY+dir[1]*offset);
@@ -560,7 +560,7 @@ if(sprite0 instanceof AiSimBomb)
 			double tileY0 = tile0.getPosY();
 			AiSimTile neighborTile = tile.getNeighbor(direction);
 			double offset = 0;
-			if(neighborTile.isCrossableBy(sprite0)) //deal with obstacles
+			if(neighborTile.isCrossableBy(sprite0,true)) //deal with obstacles
 				offset = tileSize/2;
 			double goalX = result.normalizePositionX(tileX0+dir[0]*offset);
 			double goalY = result.normalizePositionY(tileY0+dir[1]*offset);
