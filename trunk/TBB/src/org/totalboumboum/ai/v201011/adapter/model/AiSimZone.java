@@ -135,6 +135,7 @@ final class AiSimZone extends AiZone
 				double currentSpeed = hero.getCurrentSpeed();
 				int bombRange = hero.getBombRange();
 				long bombDuration = hero.getBombDuration();
+				long explosionDuration = hero.getExplosionDuration();
 				int bombNumber = hero.getBombNumber();
 				int bombCount = hero.getBombCount();
 				boolean throughBlocks = hero.hasThroughBlocks();
@@ -144,7 +145,7 @@ final class AiSimZone extends AiZone
 				double walkingSpeed = hero.getWalkingSpeed();
 				int id = hero.getId();
 				AiSimHero h = new AiSimHero(id,tile,posX, posY, posZ, state,burningDuration,currentSpeed,
-						bombRange,bombDuration, bombNumber,bombCount,
+						bombRange,bombDuration,explosionDuration,bombNumber,bombCount,
 						throughBlocks,throughBombs,throughFires,color,walkingSpeed);
 				internalHeroes.add(h);
 				externalHeroes.add(h);

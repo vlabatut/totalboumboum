@@ -76,6 +76,8 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	private int bombRange;
 	/** durée des bombes que le personnage peut poser (valide seulement pour les bombes à retardement) */
 	private long bombDuration;
+	/** durée des explosions des bombes que le personnage peut poser */
+	private long explosionDuration;
 	/** nombre de bombes que le personnage peut poser simultanément (en général) */
 	private int bombNumber;
 	/** nombre de bombes que le personnage a actuellement posées */
@@ -89,6 +91,11 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	@Override
 	public long getBombDuration()
 	{	return bombDuration;
+	}
+	
+	@Override
+	public long getExplosionDuration()
+	{	return explosionDuration;
 	}
 	
 	@Override
@@ -117,8 +124,11 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 				bombRange = limit;
 		}
 		
-    	// bomb duration
-		bombDuration = sprite.getBombsetManager().getBombset().getCurrentDuration(sprite);
+		// bomb duration
+		bombDuration = sprite.getBombsetManager().getBombset();
+		
+    	// explosion duration
+		explosionDuration = sprite.getBombsetManager().getBombset().getCurrentExplosionDuration(sprite);
 
 		// max number of simultaneous bombs
     	ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);

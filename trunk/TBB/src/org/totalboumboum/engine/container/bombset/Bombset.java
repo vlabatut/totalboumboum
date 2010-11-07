@@ -168,13 +168,20 @@ public class Bombset extends AbstractBombset
 	}
 
 	//NOTE not tested yet
-	public long getCurrentDuration(Sprite sprite)
+	// NOTE we don't really have to make fire, we can directly check in the factory's abilities
+	public long getCurrentExplosionDuration(Sprite sprite)
 	{	BombFactory bf = getCurrentBombFactory(sprite);
 		Tile tile = sprite.getTile();
 		Fire fire = bf.getExplosion().makeFire(null,tile);
 		Gesture gesture = fire.getGesturePack().getGesture(GestureName.BURNING);
 		AnimeDirection anime = gesture.getAnimeDirection(Direction.LEFT);
 		long result = anime.getTotalDuration();
+		return result;
+	}
+	
+	public long getCurrentBombDuration(Sprite sprite)
+	{	BombFactory bf = getCurrentBombFactory(sprite);
+		long result = bf.getBombDuration();
 		return result;
 	}
 	

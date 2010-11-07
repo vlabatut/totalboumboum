@@ -50,7 +50,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	 */
 	protected AiSimHero(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
-			int bombRange, long bombDuration, int bombNumber, int bombCount,
+			int bombRange, long bombDuration, long explosionDuration, int bombNumber, int bombCount,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
 			PredefinedColor color, double walkingSpeed)
 	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
@@ -58,6 +58,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 		// bombs
 		this.bombRange = bombRange;
 		this.bombDuration = bombDuration;
+		this.explosionDuration = bombDuration;
 		this.bombNumber = bombNumber;
 		this.bombCount = bombCount;
 		
@@ -83,6 +84,8 @@ final class AiSimHero extends AiSimSprite implements AiHero
 		
 		// bombs
 		bombRange = sprite.getBombRange();
+		bombDuration = sprite.getBombDuration();
+		explosionDuration = sprite.getBombDuration();
 		bombNumber = sprite.getBombNumber();
 		bombCount = sprite.getBombCount();
 		
@@ -103,6 +106,8 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	private int bombRange;
 	/** durée des bombes que le personnage peut poser (valide seulement pour les bombes à retardement) */
 	private long bombDuration;
+	/** durée des explosions des bombes que le personnage peut poser */
+	private long explosionDuration;
 	/** nombre de bombes que le personnage peut poser simultanément (en général) */
 	private int bombNumber;
 	/** nombre de bombes que le personnage a actuellement posées */
@@ -118,6 +123,11 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	{	return bombDuration;
 	}
 
+	@Override
+	public long getExplosionDuration()
+	{	return explosionDuration;
+	}
+	
 	@Override
 	public int getBombNumber()
 	{	return bombNumber;

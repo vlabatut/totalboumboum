@@ -53,6 +53,14 @@ public interface AiHero extends AiSprite
 	public long getBombDuration();
 	
 	/**
+	 * renvoie la durée actuelle des explosions des bombes du personnage
+	 * 
+	 * @return	
+	 * 		la durée de l'explosion des bombes
+	 */
+	public long getExplosionDuration();
+	
+	/**
 	 * renvoie le nombre de bombes que le personnage peut poser simultanément,
 	 * à ce moment du jeu.
 	 * Ce nombre correspond à la somme du nombre de bombes actuellement déjà 

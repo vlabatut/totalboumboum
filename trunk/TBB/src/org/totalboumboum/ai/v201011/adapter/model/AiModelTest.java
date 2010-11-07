@@ -73,7 +73,9 @@ public final class AiModelTest
 		currentSpeed = 0;
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		color = PredefinedColor.WHITE;
-		hero = new AiSimHero(null,0,0,0,state,burningDuration,currentSpeed,bombRange,bombNumber,bombCount,throughBlocks,throughBombs,throughFires,color,walkingSpeed);
+		hero = new AiSimHero(null,0,0,0,state,burningDuration,currentSpeed,
+				bombRange,normalDuration,explosionDuration,bombNumber,bombCount,
+				throughBlocks,throughBombs,throughFires,color,walkingSpeed);
 		zone = new AiSimZone(7,7,hero);
 
 		// hero
@@ -83,7 +85,7 @@ public final class AiModelTest
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		color = PredefinedColor.WHITE;
 		hero = new AiSimHero(tile,posX,posY,posZ,state,burningDuration,currentSpeed,
-				bombRange,normalDuration,bombNumber,bombCount,
+				bombRange,normalDuration,explosionDuration,bombNumber,bombCount,
 				throughBlocks,throughBombs,throughFires,color,walkingSpeed);
 		zone.addSprite(hero);
 
