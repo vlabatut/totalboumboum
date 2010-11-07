@@ -30,11 +30,16 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
+import org.totalboumboum.engine.content.feature.gesture.Gesture;
+import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDirection;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.bomb.BombFactory;
+import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
@@ -84,6 +89,38 @@ public class Bombset extends AbstractBombset
 	public Bomb makeBomb(Sprite sprite)
 	{	Bomb result = null;
 		Tile tile = sprite.getTile();
+		
+		// make sprite
+		BombFactory bf = getCurrentBombFactory(sprite);
+		result = bf.makeSprite(tile);
+		// set owner
+		result.setOwner(sprite);
+		// set time
+		StateAbility ab = result.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
+		if(ab.isActive())
+		{	float time = ab.getStrength();
+			ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_TIMER_COEFFICIENT);
+			float coef = ab.getStrength();
+			float delta = time*coef - time;
+			StateAbility ab2 = new StateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
+			ab2.setStrength(delta);
+			result.addDirectAbility(ab2);
+//System.out.println("coef:"+coef);
+//System.out.println("time:"+time);
+				
+			// record/transmit event
+			String name = bf.getBombName();
+			name = name + "/" + bf.getColor();
+			SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+			RoundVariables.writeEvent(event);
+		}
+
+		return result;
+	}
+	
+	private BombFactory getCurrentBombFactory(Sprite sprite)
+	{	BombFactory result = null;
+		
 		Iterator<List<StateAbility>> i = requiredAbilities.iterator();
 		int ind = 0;
 		while(result==null && i.hasNext())
@@ -97,37 +134,15 @@ public class Bombset extends AbstractBombset
 					goOn = false;
 			}
 			if(goOn)
-			{	// make sprite
-				BombFactory bf = bombFactories.get(ind);
-				result = bf.makeSprite(tile);
-				// set owner
-				result.setOwner(sprite);
-				// set time
-				StateAbility ab = result.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
-				if(ab.isActive())
-				{	float time = ab.getStrength();
-					ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_TIMER_COEFFICIENT);
-					float coef = ab.getStrength();
-					float delta = time*coef - time;
-					StateAbility ab2 = new StateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
-					ab2.setStrength(delta);
-					result.addDirectAbility(ab2);
-//System.out.println("coef:"+coef);
-//System.out.println("time:"+time);
-					
-					// record/transmit event
-					String name = bf.getBombName();
-					name = name + "/" + bf.getColor();
-					SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-					RoundVariables.writeEvent(event);
-				}
-			}
+				result = bombFactories.get(ind);
 			else
 				ind++;
 		}
+		
 		return result;
 	}
-
+	
+	
 	/**
 	 * only for level-generated bombs
 	 * @param tile
@@ -152,6 +167,17 @@ public class Bombset extends AbstractBombset
 		return result;
 	}
 
+	//NOTE not tested yet
+	public long getCurrentDuration(Sprite sprite)
+	{	BombFactory bf = getCurrentBombFactory(sprite);
+		Tile tile = sprite.getTile();
+		Fire fire = bf.getExplosion().makeFire(null,tile);
+		Gesture gesture = fire.getGesturePack().getGesture(GestureName.BURNING);
+		AnimeDirection anime = gesture.getAnimeDirection(Direction.LEFT);
+		long result = anime.getTotalDuration();
+		return result;
+	}
+	
 	public BombFactory getBombFactory(String name)
 	{	BombFactory result = null;
 		Iterator<BombFactory> i = bombFactories.iterator();

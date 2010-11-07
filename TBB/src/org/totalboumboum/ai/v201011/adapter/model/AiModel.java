@@ -776,6 +776,7 @@ if(sprite0 instanceof AiSimBomb)
 			double posX, double posY, double posZ, 
 			AiSimState state, long burningDuration, double currentSpeed)
 	{	int bombRange = hero.getBombRange();
+		long bombDuration = hero.getBombDuration();
 		int bombNumber = hero.getBombNumber();
 		int bombCount = hero.getBombCount();
 		boolean throughBlocks = hero.hasThroughBlocks();
@@ -785,7 +786,7 @@ if(sprite0 instanceof AiSimBomb)
 		double walkingSpeed = hero.getWalkingSpeed();
 		
 		AiSimHero result = new AiSimHero(hero.getId(),tile,posX,posY,posZ,state,burningDuration,currentSpeed,
-			bombRange,bombNumber,bombCount,
+			bombRange,bombDuration,bombNumber,bombCount,
 			throughBlocks,throughBombs,throughFires,
 			color,walkingSpeed);
 		return result;
