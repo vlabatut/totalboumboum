@@ -259,6 +259,7 @@ public enum Direction implements Serializable
 	
 	/**
 	 * returns the list of all primary directions
+	 * (i.e.: DOWN, LEFT, RIGHT and UP)
 	 * @return
 	 */
 	public static List<Direction> getPrimaryValues()
