@@ -52,7 +52,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 @SuppressWarnings("unused")
 public final class AiModelTest
 {
-/*	
+/*
 	public static void main(String args[])
 	{	RoundVariables.scaledTileDimension = 100;
 		AiSimZone zone;
@@ -83,7 +83,7 @@ public final class AiModelTest
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		color = PredefinedColor.WHITE;
 		hero = new AiSimHero(tile,posX,posY,posZ,state,burningDuration,currentSpeed,
-				bombRange,bombNumber,bombCount,
+				bombRange,normalDuration,bombNumber,bombCount,
 				throughBlocks,throughBombs,throughFires,color,walkingSpeed);
 		zone.addSprite(hero);
 
