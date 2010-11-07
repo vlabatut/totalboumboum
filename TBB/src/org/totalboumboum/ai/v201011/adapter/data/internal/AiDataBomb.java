@@ -133,7 +133,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	
 		// délai normal avant l'explosion 
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
-			normalDuration = (long)ability.getStrength();		
+			normalDuration = (long)ability.getStrength();
 		}	
 		// compte à rebours
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);

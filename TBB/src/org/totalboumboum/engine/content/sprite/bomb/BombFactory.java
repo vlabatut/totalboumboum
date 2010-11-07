@@ -21,7 +21,12 @@ package org.totalboumboum.engine.content.sprite.bomb;
  * 
  */
 
+import java.util.Iterator;
+
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import org.totalboumboum.engine.content.feature.ability.StateAbility;
+import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.manager.bombset.BombsetManager;
 import org.totalboumboum.engine.content.manager.bombset.EmptyBombsetManager;
 import org.totalboumboum.engine.content.manager.bombset.FullBombsetManager;
@@ -56,6 +61,24 @@ public class BombFactory extends SpriteFactory<Bomb>
 
 	public String getBombName()
 	{	return bombName;	
+	}
+	
+	// NOTE not tested yet
+	public long getBombDuration()
+	{	long result = 0;
+		AbstractAbility ability = null;
+		Iterator<AbstractAbility> it = abilities.iterator();
+		while(ability==null && it.hasNext())
+		{	AbstractAbility temp = it.next();
+			if(temp instanceof StateAbility)
+			{	StateAbility sa = (StateAbility)temp;
+				if(sa.getName()==StateAbilityName.BOMB_TRIGGER_TIMER)
+					ability = sa;
+			}
+		}
+		if(ability!=null)
+			result = (long)ability.getStrength();
+		return result;
 	}
 	
 	public Bomb makeSprite(Tile tile)
