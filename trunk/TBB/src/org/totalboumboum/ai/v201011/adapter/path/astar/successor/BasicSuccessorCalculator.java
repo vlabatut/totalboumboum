@@ -62,13 +62,14 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 		List<AiTile> result = new ArrayList<AiTile>();
 		AiTile tile = node.getTile();
 		AiHero hero = node.getHero();
+		
 		// pour chaque case voisine : on la rajoute si elle est traversable
 		for(Direction direction: Direction.getPrimaryValues())
 		{	AiTile neighbor = tile.getNeighbor(direction);
 			if(neighbor.isCrossableBy(hero,true))
 				result.add(neighbor);			
 		}
-		//
+
 		return result;
 	}
 }
