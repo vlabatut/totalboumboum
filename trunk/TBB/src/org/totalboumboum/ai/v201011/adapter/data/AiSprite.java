@@ -120,7 +120,7 @@ public interface AiSprite
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la vitesse de déplacement courante du sprite.
+	 * renvoie la vitesse de déplacement courante du sprite exprimée en pixel/seconde.
 	 * si le sprite ne bouge pas, elle est de zéro.
 	 * 
 	 * @return	
