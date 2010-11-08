@@ -101,7 +101,7 @@ public class DisplayAisTexts implements Display
 					boolean bold = aiMgr.isBold();
 					if(bold)
 						type = Font.BOLD;
-					Font font = new Font("Dialog",type, 15);
+					Font font = new Font("Dialog",type,9);//TODO was 15
 					g.setFont(font);
 					FontMetrics metrics = g.getFontMetrics(font);
 					String[][] texts = aiMgr.getTileTexts();

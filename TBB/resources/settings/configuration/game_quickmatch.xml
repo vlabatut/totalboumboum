@@ -14,8 +14,8 @@
 		</points>
 	</settings>
 	<players>
-		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="YELLOW" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="YELLOW" controls="2" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="sbm1Custom" folder="debug" allowedPlayers="1 2" />

@@ -125,7 +125,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 		}
 		
 		// bomb duration
-		bombDuration = sprite.getBombsetManager().getBombset();
+		bombDuration = sprite.getBombsetManager().getBombset().getCurrentBombDuration(sprite);
 		
     	// explosion duration
 		explosionDuration = sprite.getBombsetManager().getBombset().getCurrentExplosionDuration(sprite);
@@ -189,6 +189,8 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 		Gesture walking = getSprite().getGesturePack().getGesture(GestureName.WALKING);
 		double basicSpeed = walking.getTrajectoryDirection(Direction.RIGHT).getXInteraction();
 		walkingSpeed = speedCoeff*basicSpeed;
+if(walkingSpeed==0)
+	System.out.print("");
 		//System.out.println(getSprite().getColor()+": walkingSpeed="+walkingSpeed);
 	}
 
