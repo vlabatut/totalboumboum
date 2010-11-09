@@ -31,23 +31,30 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  *
  */
-public interface AiTile
+public abstract class AiTile
 {	
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public AiZone getZone();
+	public abstract AiZone getZone();
 	
 	/////////////////////////////////////////////////////////////////
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** ligne de la zone contenant cette case */
+	protected int line;
+	/** colonne de la zone contenant cette case */
+	protected int col;
+		
 	/** 
 	 * renvoie le numéro de la ligne contenant cette case
 	 * 
 	 * @return	
 	 * 		la ligne de cette case
 	 */
-	public int getLine();
+	public int getLine()
+	{	return line;	
+	}
 
 	/** 
 	 * renvoie le numéro de la colonne contenant cette case
@@ -55,18 +62,27 @@ public interface AiTile
 	 * @return	
 	 * 		la colonne de cette case
 	 */
-	public int getCol();
+	public int getCol()
+	{	return col;	
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// PIXEL LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** position de la case en pixels */
+	protected double posX;
+	/** position de la case en pixels */
+	protected double posY;
+	
 	/** 
 	 * renvoie l'abscisse de la case en pixels
 	 * 
 	 * @return	
 	 * 		l'abscisse de cette case
 	 */
-	public double getPosX();
+	public double getPosX()
+	{	return posX;	
+	}
 	
 	/** 
 	 * renvoie l'ordonnée de la case en pixels
@@ -74,18 +90,25 @@ public interface AiTile
 	 * @return	
 	 * 		l'ordonnée de cette case
 	 */
-	public double getPosY();
+	public double getPosY()
+	{	return posY;	
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// TILE SIZE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** longueur d'un côté de la case en pixels */
+	protected double size;
+		
 	/** 
 	 * renvoie la taille de la case en pixels
 	 * 
 	 * @return	
 	 * 		longueur d'un côté de la case en pixels
 	 */
-	public double getSize();
+	public double getSize()
+	{	return size;	
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
@@ -97,7 +120,7 @@ public interface AiTile
 	 * @return	
 	 * 		les blocks éventuellement contenus dans cette case
 	 */
-	public List<AiBlock> getBlocks();
+	public abstract List<AiBlock> getBlocks();
 
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
@@ -106,7 +129,7 @@ public interface AiTile
 	 * @return	
 	 * 		les bombes éventuellement contenues dans cette case
 	 */
-	public List<AiBomb> getBombs();
+	public abstract List<AiBomb> getBombs();
 
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
@@ -115,7 +138,7 @@ public interface AiTile
 	 * @return	
 	 * 		les feux éventuellement contenus dans cette case
 	 */
-	public List<AiFire> getFires();
+	public abstract List<AiFire> getFires();
 
 	/** 
 	 * renvoie les sols de cette case 
@@ -124,7 +147,7 @@ public interface AiTile
 	 * @return	
 	 * 		les sols contenus dans cette case
 	 */
-	public List<AiFloor> getFloors();
+	public abstract List<AiFloor> getFloors();
 
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
@@ -133,7 +156,7 @@ public interface AiTile
 	 * @return	
 	 * 		les personnages éventuellement contenus dans cette case
 	 */
-	public List<AiHero> getHeroes();
+	public abstract List<AiHero> getHeroes();
 
 	/** 
 	 * renvoie la liste des items contenus dans cette case 
@@ -142,7 +165,7 @@ public interface AiTile
 	 * @return	
 	 * 		les items éventuellement contenus dans cette case
 	 */
-	public List<AiItem> getItems();
+	public abstract List<AiItem> getItems();
 	
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES		/////////////////////////////////////////////
@@ -166,7 +189,7 @@ public interface AiTile
 	 *  @return	
 	 *  	vrai ssi ce sprite , à cet instant, peut traverser cette case
 	 */
-	public boolean isCrossableBy(AiSprite sprite, boolean considerFire);
+	public abstract boolean isCrossableBy(AiSprite sprite, boolean considerFire);
 	
 	/////////////////////////////////////////////////////////////////
 	// NEIGHBORS		/////////////////////////////////////////////
@@ -188,7 +211,7 @@ public interface AiTile
 	 * @return	
 	 * 		le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
 	 */
-	public AiTile getNeighbor(Direction direction);
+	public abstract AiTile getNeighbor(Direction direction);
 	
 	/**
 	 * renvoie la liste des voisins de cette case.
@@ -203,5 +226,28 @@ public interface AiTile
 	 * @return	
 	 * 		la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
 	 */
-	public List<AiTile> getNeighbors();
+	public abstract List<AiTile> getNeighbors();
+
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o instanceof AiTile)
+		{	
+			AiTile t = (AiTile)o;	
+			int line = t.getLine();
+			int col = t.getCol();
+			result = line==this.line && col==this.col;
+		}
+		return result;
+	}
+	
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("("+line+";"+col+")");
+		return result.toString();
+	}
 }

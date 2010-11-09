@@ -293,7 +293,7 @@ public class AiPath
 			while(result && it1.hasNext() && it2.hasNext())
 			{	AiTile t1 = it1.next();
 				AiTile t2 = it2.next();
-				result = t1==t2;
+				result = t1.equals(t2);
 			}
 			if(it1.hasNext() || it2.hasNext())
 				result = false;

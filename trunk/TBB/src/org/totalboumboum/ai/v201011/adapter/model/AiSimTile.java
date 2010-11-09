@@ -42,7 +42,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * @author Vincent Labatut
  *
  */
-final class AiSimTile implements AiTile
+final class AiSimTile extends AiTile
 {	
 	/**
 	 * construit une simulation de case à partir des coordonnées passées en paramètres
@@ -124,53 +124,6 @@ final class AiSimTile implements AiTile
 	@Override
 	public AiSimZone getZone()
 	{	return zone;	
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// TILE LOCATION	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** ligne de la zone contenant cette case */
-	private int line;
-	/** colonne de la zone contenant cette case */
-	private int col;
-		
-	@Override
-	public int getLine()
-	{	return line;	
-	}
-
-	@Override
-	public int getCol()
-	{	return col;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PIXEL LOCATION	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** position de la case en pixels */
-	private double posX;
-	/** position de la case en pixels */
-	private double posY;
-		
-	@Override
-	public double getPosX()
-	{	return posX;	
-	}
-	
-	@Override
-	public double getPosY()
-	{	return posY;	
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// TILE SIZE		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** longueur d'un côté de la case en pixels */
-	private double size;
-		
-	@Override
-	public double getSize()
-	{	return size;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -416,28 +369,6 @@ final class AiSimTile implements AiTile
 		return result;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public boolean equals(Object o)
-	{	boolean result = false;
-		if(o instanceof AiSimTile)
-		{	
-//			AiTile t = (AiTile)o;	
-//			result = tile==t.tile && zone==t.zone;
-			result = this==o;
-		}
-		return result;
-	}
-	
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("("+line+";"+col+")");
-		return result.toString();
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
