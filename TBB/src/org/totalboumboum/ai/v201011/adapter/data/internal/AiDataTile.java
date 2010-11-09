@@ -51,7 +51,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * @author Vincent Labatut
  *
  */
-final class AiDataTile implements AiTile
+final class AiDataTile extends AiTile
 {	
 	/**
 	 * construit une représentation de la case passée en paramètre
@@ -110,21 +110,6 @@ final class AiDataTile implements AiTile
 	/////////////////////////////////////////////////////////////////
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** ligne de la zone contenant cette case */
-	private int line;
-	/** colonne de la zone contenant cette case */
-	private int col;
-		
-	@Override
-	public int getLine()
-	{	return line;	
-	}
-	
-	@Override
-	public int getCol()
-	{	return col;	
-	}
-	
 	/** 
 	 * initialise les numéros de ligne et colonne de cette case 
 	 */
@@ -136,21 +121,6 @@ final class AiDataTile implements AiTile
 	/////////////////////////////////////////////////////////////////
 	// PIXEL LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** position de la case en pixels */
-	private double posX;
-	/** position de la case en pixels */
-	private double posY;
-		
-	@Override
-	public double getPosX()
-	{	return posX;	
-	}
-	
-	@Override
-	public double getPosY()
-	{	return posY;	
-	}
-	
 	/** 
 	 * initialise la position de cette case en pixels 
 	 */
@@ -159,17 +129,6 @@ final class AiDataTile implements AiTile
 		posY = tile.getPosY();
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// TILE SIZE		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** longueur d'un côté de la case en pixels */
-	private double size;
-		
-	@Override
-	public double getSize()
-	{	return size;	
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -445,28 +404,6 @@ final class AiDataTile implements AiTile
 		return result;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public boolean equals(Object o)
-	{	boolean result = false;
-		if(o instanceof AiDataTile)
-		{	
-//			AiTile t = (AiTile)o;	
-//			result = tile==t.tile && zone==t.zone;
-			result = this==o;
-		}
-		return result;
-	}
-	
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("("+line+";"+col+")");
-		return result.toString();
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// FINISH				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
