@@ -185,11 +185,9 @@ abstract class AiSimSprite implements AiSprite
 	@Override
 	public boolean equals(Object o)
 	{	boolean result = false;
-		if(o instanceof AiSimSprite)
-		{	
-//			AiSprite<?> s = (AiSprite<?>)o;	
-//			result = sprite==s.sprite;
-			result = this==o;
+		if(o instanceof AiSprite)
+		{	AiSprite s = (AiSprite)o;	
+			result = id==s.getId();
 		}
 		return result;
 	}
