@@ -104,16 +104,32 @@ public class DisplayAisTexts implements Display
 					Font font = new Font("Dialog",type,9);//TODO was 15
 					g.setFont(font);
 					FontMetrics metrics = g.getFontMetrics(font);
-					String[][] texts = aiMgr.getTileTexts();
+					List<String>[][] texts = aiMgr.getTileTexts();
 					for(int line=0;line<level.getGlobalHeight();line++)
 					{	for(int col=0;col<level.getGlobalWidth();col++)
-						{	String text = texts[line][col];
-							if(text!=null)
-							{	Tile tile = level.getTile(line,col);
-								Rectangle2D box = metrics.getStringBounds(text, g);
-								int x = (int)Math.round(tile.getPosX()-box.getWidth()/2);
-								int y = (int)Math.round(tile.getPosY()+box.getHeight()/2);
-								g.drawString(text,x,y);
+						{	Tile tile = level.getTile(line,col);
+							List<String> textList = texts[line][col];
+							if(textList!=null && !textList.isEmpty())
+							{	List<Integer> xList = new ArrayList<Integer>();
+								List<Integer> boxHeights = new ArrayList<Integer>();
+								double total = 0;
+								for(int s=0;s<textList.size();s++)
+								{	String text = textList.get(s);
+									Rectangle2D box = metrics.getStringBounds(text,g);
+									int boxHeight = (int)Math.round(box.getHeight());
+									boxHeights.add(boxHeight);
+									int x = (int)Math.round(tile.getPosX()-box.getWidth()/2);
+									xList.add(x);
+									total = total + box.getHeight();
+								}
+								int y = (int)Math.round(tile.getPosY()+total/2);
+								for(int s=textList.size()-1;s>=0;s--)
+								{	int x = xList.get(s);
+									String text = textList.get(s);
+									g.drawString(text,x,y);
+									int boxHeight = boxHeights.get(s);
+									y = y - boxHeight;
+								}
 							}
 						}
 					}

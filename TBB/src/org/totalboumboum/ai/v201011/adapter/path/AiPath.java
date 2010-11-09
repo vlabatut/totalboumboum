@@ -44,7 +44,8 @@ public class AiPath
 	/**
 	 * renvoie la liste de cases constituant ce chemin
 	 * 
-	 * @return	la liste de cases du chemin
+	 * @return	
+	 * 		la liste de cases du chemin
 	 */
 	public List<AiTile> getTiles()
 	{	return tiles;	
@@ -53,8 +54,10 @@ public class AiPath
 	/**
 	 * renvoie la case dont la position est passée en paramètre
 	 *
-	 * @param index	la position de la case demandée
-	 * @return	la case occupant la position indiquée dans ce chemin
+	 * @param 
+	 * 		index	la position de la case demandée
+	 * @return	
+	 * 		la case occupant la position indiquée dans ce chemin
 	 */
 	public AiTile getTile(int index)
 	{	return tiles.get(index);	
@@ -64,7 +67,8 @@ public class AiPath
 	 * ajoute dans ce chemin la case passée en paramètre, 
 	 * en l'insérant à la fin de la séquence de cases
 	 * 
-	 * @param tile	la case à insérer
+	 * @param 
+	 * 		tile	la case à insérer
 	 */
 	public void addTile(AiTile tile)
 	{	tiles.add(tile);		
@@ -74,8 +78,10 @@ public class AiPath
 	 * ajoute dans ce chemin la case passée en paramètre, 
 	 * en l'insérant à la position passée en paramètre.
 	 * 
-	 * @param index	position de la case à insérer
-	 * @param tile	la case à insérer
+	 * @param 
+	 * 		index	position de la case à insérer
+	 * @param 
+	 * 		tile	la case à insérer
 	 */
 	public void addTile(int index, AiTile tile)
 	{	tiles.add(index,tile);	
@@ -85,8 +91,10 @@ public class AiPath
 	 * remplace la case dont la position est passée en paramètre par
 	 * la case passée en paramètre, dans ce chemin.
 	 * 
-	 * @param index	position de la case à remplacer
-	 * @param tile	la nouvelle case
+	 * @param 
+	 * 		index	position de la case à remplacer
+	 * @param 
+	 * 		tile	la nouvelle case
 	 */
 	public void setTile(int index, AiTile tile)
 	{	tiles.set(index,tile);	
@@ -95,12 +103,19 @@ public class AiPath
 	/**
 	 * supprime de ce chemin la case dont la position est passée en paramètre
 	 * 
-	 * @param index	position de la case à supprimer
+	 * @param 
+	 * 		index	position de la case à supprimer
 	 */
 	public void removeTile(int index)
 	{	tiles.remove(index);	
 	}
 	
+	/**
+	 * supprime de ce chemin la case passée en paramètre
+	 * 
+	 * @param 
+	 * 		tile	la case à supprimer
+	 */
 	public void removeTile(AiTile tile)
 	{	tiles.remove(tile);		
 	}
@@ -108,7 +123,8 @@ public class AiPath
 	/**
 	 * renvoie la longueur (en cases) de ce chemin
 	 * 
-	 * @return	la longueur de ce chemin
+	 * @return	
+	 * 		la longueur de ce chemin
 	 */
 	public int getLength()
 	{	return tiles.size();	
@@ -117,7 +133,8 @@ public class AiPath
 	/**
 	 * teste si ce chemin a une longueur non-nulle
 	 * 
-	 * @return	vrai ssi le chemin ne contient aucune case
+	 * @return	
+	 * 		vrai ssi le chemin ne contient aucune case
 	 */
 	public boolean isEmpty()
 	{	return tiles.size()==0;
@@ -127,7 +144,8 @@ public class AiPath
 	 * renvoie la dernière case du chemin,
 	 * ou null s'il n'y a pas de case dans ce chemin
 	 * 
-	 * @return	la dernière case du chemin ou null en cas d'erreur
+	 * @return	
+	 * 		la dernière case du chemin ou null en cas d'erreur
 	 */
 	public AiTile getLastTile()
 	{	AiTile result = null;
@@ -140,7 +158,8 @@ public class AiPath
 	 * renvoie la première case du chemin,
 	 * ou null s'il n'y a pas de case dans ce chemin
 	 * 
-	 * @return	la première case du chemin ou null en cas d'erreur
+	 * @return	
+	 * 		la première case du chemin ou null en cas d'erreur
 	 */
 	public AiTile getFirstTile()
 	{	AiTile result = null;
@@ -155,7 +174,8 @@ public class AiPath
 	/**
 	 * renvoie la distance de Manhattan, exprimée en cases, correspondant à ce chemin
 	 * 
-	 * @return	un entier correspondant à la distance totale du chemin en cases
+	 * @return	
+	 * 		un entier correspondant à la distance totale du chemin en cases
 	 */
 	public int getTileDistance()
 	{	int result = 0;
@@ -167,7 +187,8 @@ public class AiPath
 	/**
 	 * renvoie la distance de Manhattan, exprimée en pixels, correspondant à ce chemin
 	 * 
-	 * @return	un réel correspondant à la distance totale du chemin en pixels
+	 * @return	
+	 * 		un réel correspondant à la distance totale du chemin en pixels
 	 */
 	public double getPixelDistance()
 	{	double result = 0;
@@ -200,8 +221,10 @@ public class AiPath
 	 * qui sera réellement nécessaire au joueur, puisque différents facteurs peuvent
 	 * venir invalider ces hypothèses.
 	 *   
-	 * @param hero	le personnage qui parcourt le chemin
-	 * @return	le temps nécessaire au personnage pour parcourir ce chemin
+	 * @param 
+	 * 		hero	le personnage qui parcourt le chemin
+	 * @return	
+	 * 		le temps nécessaire au personnage pour parcourir ce chemin
 	 */
 	public long getDuration(AiHero hero)
 	{	long result = 0;
@@ -222,8 +245,10 @@ public class AiPath
 	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus long que ce dernier.
 	 * 
-	 * @param object	le chemin à comparer
-	 * @return	vrai ssi ce chemin est plus long que celui passé en paramètre
+	 * @param 
+	 * 		object	le chemin à comparer
+	 * @return	
+	 * 		vrai ssi ce chemin est plus long que celui passé en paramètre
 	 */
 	public boolean isLongerThan(AiPath path)
 	{	int l1 = tiles.size();
@@ -236,8 +261,10 @@ public class AiPath
 	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus court que ce dernier.
 	 * 
-	 * @param object	le chemin à comparer
-	 * @return	vrai ssi ce chemin est plus court que celui passé en paramètre
+	 * @param 
+	 * 		object	le chemin à comparer
+	 * @return	
+	 * 		vrai ssi ce chemin est plus court que celui passé en paramètre
 	 */
 	public boolean isShorterThan(AiPath path)
 	{	int l1 = tiles.size();
@@ -250,8 +277,10 @@ public class AiPath
 	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'ils sont parfaitement identiques.
 	 * 
-	 * @param object	le chemin à comparer
-	 * @return	vrai ssi les 2 ce chemin est identique à celui passé en paramètre
+	 * @param 
+	 * 		object	le chemin à comparer
+	 * @return	
+	 * 		vrai ssi les 2 ce chemin est identique à celui passé en paramètre
 	 */
 	@Override
 	public boolean equals(Object object)

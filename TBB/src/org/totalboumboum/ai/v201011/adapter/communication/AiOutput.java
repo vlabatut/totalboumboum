@@ -37,10 +37,11 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  */
 public class AiOutput
 {
+	@SuppressWarnings("unchecked")
 	public AiOutput(AiZone zone)
 	{	this.zone = zone;
 		tileColors = new Color[zone.getHeight()][zone.getWidth()];
-		tileTexts = new String[zone.getHeight()][zone.getWidth()];
+		tileTexts = new List[zone.getHeight()][zone.getWidth()];
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -166,7 +167,7 @@ public class AiOutput
 	/** détermine si le texte sera affiché en normalement ou en gras */
 	private boolean bold = false;
 	/** texte à afficher sur les cases de la zone de jeu */
-	private String tileTexts[][];
+	private List<String> tileTexts[][];
 
 	/**
 	 * change le mode d'affichage du texte : gras ou pas
@@ -187,7 +188,7 @@ public class AiOutput
 	private void reinitTileTexts()
 	{	for(int line=0;line<zone.getHeight();line++)
 			for(int col=0;col<zone.getWidth();col++)
-				tileTexts[line][col] = null;
+				tileTexts[line][col] = new ArrayList<String>();
 	}
 	
 	/**
@@ -206,7 +207,7 @@ public class AiOutput
 	
 	/**
 	 * modifie le texte associé à une case. Permet
-	 * par exemple d'afficher des heuristiques, des couts
+	 * par exemple d'afficher des heuristiques, des coûts
 	 * en temps réel.
 	 * 
 	 * @param line	ligne de la case associée au texte
@@ -214,7 +215,21 @@ public class AiOutput
 	 * @param text	texte à afficher sur cette case
 	 */
 	public void setTileText(int line, int col, String text)
-	{	tileTexts[line][col] = text;	
+	{	tileTexts[line][col].add(text);	
+	}
+
+	/**
+	 * modifie le texte associé à une case. Permet
+	 * par exemple d'afficher des heuristiques, des coûts
+	 * en temps réel.
+	 * 
+	 * @param line	ligne de la case associée au texte
+	 * @param col	colonne de la case associée au texte
+	 * @param text	tableau de textes à afficher sur cette case
+	 */
+	public void setTileTexts(int line, int col, String texts[])
+	{	for(String text: texts)
+			tileTexts[line][col].add(text);		
 	}
 
 	/**
@@ -222,8 +237,7 @@ public class AiOutput
 	 * 
 	 * @return	une matrice de textes
 	 */
-	public String[][] getTileTexts()
+	public List<String>[][] getTileTexts()
 	{	return tileTexts;
 	}
-
 }
