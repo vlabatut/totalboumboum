@@ -211,5 +211,4 @@ public class AiOutput
 	public String[][] getTileTexts()
 	{	return tileTexts;
 	}
-
 }

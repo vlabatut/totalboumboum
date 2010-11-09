@@ -237,7 +237,8 @@ public abstract class AbstractAiManager<V>
      * @param instance	instance utilisée dans ce round
      * @param player	joueur contrôlé par l'IA
      */
-    public void init(String instance, AbstractPlayer player)
+    @SuppressWarnings("unchecked")
+	public void init(String instance, AbstractPlayer player)
 	{	// input
     	this.player = player;
 		
@@ -246,7 +247,7 @@ public abstract class AbstractAiManager<V>
 		int height = level.getGlobalHeight();
 		int width = level.getGlobalWidth();
 		tileColors = new Color[height][width];
-		tileTexts = new String[height][width];
+		tileTexts = new List[height][width];
 	}
 		
 	/**
@@ -287,8 +288,8 @@ public abstract class AbstractAiManager<V>
 	/////////////////////////////////////////////////////////////////
 	/** couleurs associées aux cases (ou null pour aucune couleur */
 	private Color[][] tileColors;
-	/** texte à afficher sur les cases (ou null pour aucun texte) */
-	private String[][] tileTexts;
+	/** textes à afficher sur les cases (liste vide pour aucun texte) */
+	private List<String>[][] tileTexts;
 	/** mode d'affichage du texte : gras ou pas */
 	private boolean bold = false;
 	/** chemins à afficher */
@@ -316,7 +317,7 @@ public abstract class AbstractAiManager<V>
 	 * 
 	 * @return	matrice de textes
 	 */
-	public String[][] getTileTexts()
+	public List<String>[][] getTileTexts()
 	{	return tileTexts;
 	}
 

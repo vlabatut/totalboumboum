@@ -233,8 +233,8 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 		}
 		
 		// tile texts
-		{	String[][] aiMatrix = output.getTileTexts();
-			String[][] engineMatrix = getTileTexts();
+		{	List<String>[][] aiMatrix = output.getTileTexts();
+			List<String>[][] engineMatrix = getTileTexts();
 			for(int line=0;line<aiMatrix.length;line++)
 				for(int col=0;col<aiMatrix[0].length;col++)
 					engineMatrix[line][col] = aiMatrix[line][col];
