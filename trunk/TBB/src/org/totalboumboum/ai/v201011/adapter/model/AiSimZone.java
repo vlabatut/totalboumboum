@@ -33,6 +33,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
+import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -55,9 +56,12 @@ final class AiSimZone extends AiZone
 	 * si la paramètre fullCopy est faux, les sprites ne sont pas copiés,
 	 * sinon tout est copié.
 	 * 
-	 * @param zone	la zone de référence
-	 * @param fullCopy	indique si les sprites doivent aussi être copiés ou pas
-	 * @return	une nouvelle zone vide de mêmes dimensions
+	 * @param 
+	 * 		zone	la zone de référence
+	 * @param 
+	 * 		fullCopy	indique si les sprites doivent aussi être copiés ou pas
+	 * @return	
+	 * 		une nouvelle zone vide de mêmes dimensions
 	 */
 	protected AiSimZone(AiZone zone, boolean fullCopy)
 	{	// matrix and tiles
@@ -228,10 +232,14 @@ final class AiSimZone extends AiZone
 	 * dans la direction spécifiée (en considérant le fait que le niveau
 	 * est fermé.
 	 *  
-	 *  @param line	ligne de la case à traite
-	 *  @param col	colonne de la case à traiter
-	 *  @param direction	direction de la case voisine relativement à la case de référence
-	 *  @return	la case voisine dans la direction précisée
+	 *  @param 
+	 *  	line	ligne de la case à traite
+	 *  @param 
+	 *  	col	colonne de la case à traiter
+	 *  @param 
+	 *  	direction	direction de la case voisine relativement à la case de référence
+	 *  @return	
+	 *  	la case voisine dans la direction précisée
 	 */
 	protected AiSimTile getNeighborTile(int line, int col, Direction direction)
 	{	AiSimTile result;
@@ -274,6 +282,7 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	//TODO let ? comment ?
 	public void addSprite(AiSimSprite sprite)
 	{	AiSimTile tile = sprite.getTile();
 
@@ -336,8 +345,10 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param sprite	le sprite ciblé
-	 * @return	sa représentation dans cette zone
+	 * @param 
+	 * 		sprite	le sprite ciblé
+	 * @return	
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimSprite getSpriteById(AiSprite sprite)
 	{	AiSimSprite result = null;
@@ -379,7 +390,8 @@ final class AiSimZone extends AiZone
 	/**
 	 * renvoie la liste interne de blocs
 	 * 
-	 * @return	liste interne de blocs
+	 * @return	
+	 * 		liste interne de blocs
 	 */
 	protected List<AiSimBlock> getInternalBlocks()
 	{	return internalBlocks;	
@@ -409,8 +421,10 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param sprite	le sprite ciblé
-	 * @return	sa représentation dans cette zone
+	 * @param 
+	 * 		sprite	le sprite ciblé
+	 * @return	
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimBlock getSpriteById(AiBlock sprite)
 	{	AiSimBlock result = null;
@@ -435,7 +449,8 @@ final class AiSimZone extends AiZone
 	/**
 	 * renvoie la liste interne de bombes
 	 * 
-	 * @return	liste interne de bombes
+	 * @return	
+	 * 		liste interne de bombes
 	 */
 	protected List<AiSimBomb> getInternalBombs()
 	{	return internalBombs;	
@@ -453,8 +468,10 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param sprite	le sprite ciblé
-	 * @return	sa représentation dans cette zone
+	 * @param 
+	 * 		sprite	le sprite ciblé
+	 * @return	
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimBomb getSpriteById(AiBomb sprite)
 	{	AiSimBomb result = null;
@@ -465,6 +482,58 @@ final class AiSimZone extends AiZone
 			if(temp.getId()==id)
 				result = temp;
 		}
+		return result;
+	}
+	
+	/**
+	 * Crée une nouvelle bombe appartenant au personnage passé en paramètre.
+	 * La bombe est placée au centre de la case passée en paramètre.
+	 * Si jamais la case contient déjà un objet empêchant de poser la bombe,
+	 * celle-ci n'est pas créée et la fonction renvoie la valeur null.
+	 * Sinon (si la création est possible) alors la fonction renvoie la bombe créée. 
+	 * @param 
+	 * 		tile	case qui contiendra la bombe nouvellement créée
+	 * @param 
+	 * 		hero	personnage à qui la bombe appartiendra (ce qui détermine ses propriétés)
+	 * @return
+	 * 		la bombe si elle a pu être créée, ou null si un objet existant dans la case l'a empêché 
+	 */
+	public AiBomb dropBomb(AiTile tile, AiHero hero)
+	{	AiBomb result;
+		//TODO AiHero doit posséder une copie de la bombe du perso, afin d'accéder à ses caractéristiques
+		//TODO l'accès aux items du hero doit se faire via une fonction plus générale utilisant ItemType (map)
+		int id;
+		AiSimTile tile;
+		double posX;
+		double posY;
+		double posZ;
+		AiSimState state;
+		long burningDuration;
+		double currentSpeed;
+		boolean countdownTrigger;
+		boolean remoteControlTrigger;
+		boolean explosionTrigger;
+		long normalDuration;
+		long explosionDuration;
+		long latencyDuration;
+		float failureProbability;
+		AiStopType stopHeroes = true;
+		AiStopType stopFires = false;
+		boolean throughItems = false;
+		int range = hero.getBombRange();
+		boolean penetrating = hero.hasPenetration();
+		PredefinedColor color = hero.getColor();
+		boolean working = true;
+		long time = 0;
+	
+		result = new AiSimBomb(id,tile,posX,posY,posZ,
+			state,burningDuration,currentSpeed,
+			countdownTrigger,remoteControlTrigger,explosionTrigger,
+			normalDuration,explosionDuration,latencyDuration,failureProbability,
+			stopHeroes,stopFires,throughItems,
+			range,penetrating,
+			color,working,time);
+		
 		return result;
 	}
 	
@@ -479,7 +548,8 @@ final class AiSimZone extends AiZone
 	/**
 	 * renvoie la liste interne de feux
 	 * 
-	 * @return	liste interne de feux
+	 * @return	
+	 * 		liste interne de feux
 	 */
 	protected List<AiSimFire> getInternalFires()
 	{	return internalFires;	
@@ -497,8 +567,10 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param sprite	le sprite ciblé
-	 * @return	sa représentation dans cette zone
+	 * @param 
+	 * 		sprite	le sprite ciblé
+	 * @return	
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimFire getSpriteById(AiFire sprite)
 	{	AiSimFire result = null;
@@ -523,7 +595,8 @@ final class AiSimZone extends AiZone
 	/**
 	 * renvoie la liste interne de sols
 	 * 
-	 * @return	liste interne de sols
+	 * @return	
+	 * 		liste interne de sols
 	 */
 	protected List<AiSimFloor> getInternalFloors()
 	{	return internalFloors;	
@@ -541,8 +614,10 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param sprite	le sprite ciblé
-	 * @return	sa représentation dans cette zone
+	 * @param 
+	 * 		sprite	le sprite ciblé
+	 * @return	
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimFloor getSpriteById(AiFloor sprite)
 	{	AiSimFloor result = null;
@@ -569,7 +644,8 @@ final class AiSimZone extends AiZone
 	/**
 	 * renvoie la liste interne de personnages
 	 * 
-	 * @return	liste interne de personnages
+	 * @return	
+	 * 		liste interne de personnages
 	 */
 	protected List<AiSimHero> getInternalHeroes()
 	{	return internalHeroes;	
@@ -595,8 +671,10 @@ final class AiSimZone extends AiZone
 	/**
 	 * retrouve l'objet simulant un personnage grâce à sa couleur
 	 * 
-	 * @param color	couleur du personnage à retrouver
-	 * @return	le personnage correspondant à la couleur spécifiée
+	 * @param 
+	 * 		color	couleur du personnage à retrouver
+	 * @return	
+	 * 		le personnage correspondant à la couleur spécifiée
 	 */
 	private AiSimHero getHeroByColor(PredefinedColor color)
 	{	AiSimHero result = null;
@@ -616,8 +694,10 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param sprite	le sprite ciblé
-	 * @return	sa représentation dans cette zone
+	 * @param 
+	 * 		sprite	le sprite ciblé
+	 * @return	
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimHero getSpriteById(AiHero sprite)
 	{	AiSimHero result = null;
@@ -644,7 +724,8 @@ final class AiSimZone extends AiZone
 	/**
 	 * renvoie la liste interne d'items
 	 * 
-	 * @return	liste interne d'items
+	 * @return	
+	 * 		liste interne d'items
 	 */
 	protected List<AiSimItem> getInternalItems()
 	{	return internalItems;	
@@ -668,8 +749,10 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param sprite	le sprite ciblé
-	 * @return	sa représentation dans cette zone
+	 * @param 
+	 * 		sprite	le sprite ciblé
+	 * @return	
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimItem getSpriteById(AiItem sprite)
 	{	AiSimItem result = null;

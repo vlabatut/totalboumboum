@@ -1479,7 +1479,7 @@ public class Launcher
 	 *  	- définir la fonction successeur version temporelle
 	 *  	- modifier le modèle pour permettre la modification
 	 *  		>> un sprite est ajouté forcément à travers la zone
-	 *  		>> la zone propose des fonction de création de sprites
+	 *  		>> la zone propose des fonctions de création de sprites
 	 *  		   avec au moins tile, et éventuellement sprite créateur (bomb>>hero, fire>>bomb)
 	 *  - à tester :
 	 *  	- vitesse renvoyée par l'API (pour déplacement joueurs)

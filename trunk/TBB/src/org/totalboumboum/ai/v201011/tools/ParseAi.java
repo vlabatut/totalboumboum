@@ -35,7 +35,13 @@ import org.totalboumboum.tools.files.FileNames;
 
 /**
  * cette méthode parse les codes sources définissant une IA et vérifie
- * que les appels à checkInterruption sont effectués correctement
+ * que les appels à checkInterruption sont effectués correctement.
+ * 
+ * La liste IGNORED_PACKAGES permet, comme son nom l'indique, de spécifier
+ * des packages que le parser devra ignorer dans le dossier principal de l'IA.
+ * 
+ * Dans la fonction main, la chaine de caractères aiPack représente le chemin 
+ * du dossier contenant l'ia (ou les ia).
  * 
  * @author Vincent Labatut
  */
