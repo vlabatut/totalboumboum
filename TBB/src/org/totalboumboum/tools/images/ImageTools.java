@@ -95,6 +95,8 @@ public class ImageTools
     //TODO I guess this should be disabled in favor of getCompatibleImage
     public static BufferedImage copyBufferedImage(BufferedImage image)
 	{	int type = image.getType();
+		if(type==BufferedImage.TYPE_CUSTOM)
+			type = BufferedImage.TYPE_INT_ARGB;
 		BufferedImage copy = new BufferedImage(image.getWidth(),image.getHeight(), type/*BufferedImage.TYPE_INT_ARGB*/);
 	  	
 		// create a graphics context
@@ -291,7 +293,7 @@ if(xDim<0 || yDim<0)
      * @return
      */
     public static BufferedImage getFilledImage(BufferedImage image, Integer rgb)
-   	{	BufferedImage result = copyBufferedImage(image);
+   	{	BufferedImage result = getCompatibleImage(image);//copyBufferedImage(image);
     	int width = result.getWidth();
    		int height = result.getHeight();
     	for(int x=0;x<width;x++)
