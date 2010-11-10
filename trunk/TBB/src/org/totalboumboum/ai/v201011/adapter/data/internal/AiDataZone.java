@@ -151,35 +151,49 @@ public final class AiDataZone extends AiZone
 		// stats
 		statsRanks.clear();
 		RankingService rankingService = GameStatistics.getRankingService();
-		for(int i=0;i<players.size();i++)
-		{	AbstractPlayer player = players.get(i);
-			Hero hero = (Hero)player.getSprite();
-			AiDataHero aiHero = heroMap.get(hero);
-			String playerId = player.getId();
-			int rank = rankingService.getPlayerRank(playerId);
-			statsRanks.put(aiHero,rank);
+		// les stats n'ont pas été chargées
+		if(rankingService==null)
+		{	for(int i=0;i<players.size();i++)
+			{	AbstractPlayer player = players.get(i);
+				Hero hero = (Hero)player.getSprite();
+				AiDataHero aiHero = heroMap.get(hero);
+				statsRanks.put(aiHero,0);
+				roundRanks.put(aiHero,0);
+				matchRanks.put(aiHero,0);
+			}
 		}
-		// round
-		roundRanks.clear();
-		Round round = level.getLoop().getRound();
-		float points[] = round.getCurrentPoints();
-		int ranks[] = CombinatoricsTools.getRanks(points);
-		for(int i=0;i<players.size();i++)
-		{	Hero hero = (Hero)players.get(i).getSprite();
-			AiDataHero aiHero = heroMap.get(hero);
-			int rank = ranks[i];
-			roundRanks.put(aiHero,rank);
-		}
-		// match
-		matchRanks.clear();
-		Match match = round.getMatch();
-		points = match.getStats().getTotal();
-		ranks = CombinatoricsTools.getRanks(points);
-		for(int i=0;i<players.size();i++)
-		{	Hero hero = (Hero)players.get(i).getSprite();
-			AiDataHero aiHero = heroMap.get(hero);
-			int rank = ranks[i];
-			matchRanks.put(aiHero,rank);
+		// les stats ont été chargées
+		else
+		{	for(int i=0;i<players.size();i++)
+			{	AbstractPlayer player = players.get(i);
+				Hero hero = (Hero)player.getSprite();
+				AiDataHero aiHero = heroMap.get(hero);
+				String playerId = player.getId();
+				int rank = rankingService.getPlayerRank(playerId);
+				statsRanks.put(aiHero,rank);
+			}
+			// round
+			roundRanks.clear();
+			Round round = level.getLoop().getRound();
+			float points[] = round.getCurrentPoints();
+			int ranks[] = CombinatoricsTools.getRanks(points);
+			for(int i=0;i<players.size();i++)
+			{	Hero hero = (Hero)players.get(i).getSprite();
+				AiDataHero aiHero = heroMap.get(hero);
+				int rank = ranks[i];
+				roundRanks.put(aiHero,rank);
+			}
+			// match
+			matchRanks.clear();
+			Match match = round.getMatch();
+			points = match.getStats().getTotal();
+			ranks = CombinatoricsTools.getRanks(points);
+			for(int i=0;i<players.size();i++)
+			{	Hero hero = (Hero)players.get(i).getSprite();
+				AiDataHero aiHero = heroMap.get(hero);
+				int rank = ranks[i];
+				matchRanks.put(aiHero,rank);
+			}
 		}
 	}
 
