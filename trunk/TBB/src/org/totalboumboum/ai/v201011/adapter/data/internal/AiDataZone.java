@@ -156,7 +156,7 @@ public final class AiDataZone extends AiZone
 		{	for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
 				Hero hero = (Hero)player.getSprite();
-				AiDataHero aiHero = heroMap.get(hero);
+				AiHero aiHero = heroMap.get(hero);
 				statsRanks.put(aiHero,0);
 				roundRanks.put(aiHero,0);
 				matchRanks.put(aiHero,0);
