@@ -282,7 +282,7 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	//TODO let ? comment ?
+	//TODO commenter
 	public void addSprite(AiSimSprite sprite)
 	{	AiSimTile tile = sprite.getTile();
 
@@ -378,6 +378,27 @@ final class AiSimZone extends AiZone
 		}
 		return result;
 	}
+	
+	/*
+	 * TODO définir des actions sur les sprites : à chaque fois en édition >> c'est le modèle qui fait la simulation
+	 * 	- hero
+	 * 		- déplacement en pixels
+	 * 		- déplacement d'une case
+	 * 		- téléportation vers une case (?)
+	 * 		>> faire disparaitre un item, changer les caracs
+	 * 		>> mourir dans une explosion
+	 * 		>> ne pas pouvoir passer à cause d'un obstacle
+	 *  - bomb
+	 * 		- créer une bombe
+	 * 		- faire exploser une bombe
+	 * 		>> détruire un mur/item
+	 * 		>> tuer un perso
+	 * 		>> faire apparaître un item
+	 * en fait ce sont les actions dont on a besoin pour la simulation
+	 * 
+	 * dans AiZone, ça serait bien d'avoir la liste des temps d'explosion des cases
+	 * >> voire le truc détaillé avec le début/fin de chaque explosion ?
+	 */
 	
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
@@ -499,40 +520,8 @@ final class AiSimZone extends AiZone
 	 * 		la bombe si elle a pu être créée, ou null si un objet existant dans la case l'a empêché 
 	 */
 	public AiBomb dropBomb(AiTile tile, AiHero hero)
-	{	AiBomb result;
-		//TODO AiHero doit posséder une copie de la bombe du perso, afin d'accéder à ses caractéristiques
-		//TODO l'accès aux items du hero doit se faire via une fonction plus générale utilisant ItemType (map)
-		int id;
-		AiSimTile tile;
-		double posX;
-		double posY;
-		double posZ;
-		AiSimState state;
-		long burningDuration;
-		double currentSpeed;
-		boolean countdownTrigger;
-		boolean remoteControlTrigger;
-		boolean explosionTrigger;
-		long normalDuration;
-		long explosionDuration;
-		long latencyDuration;
-		float failureProbability;
-		AiStopType stopHeroes = true;
-		AiStopType stopFires = false;
-		boolean throughItems = false;
-		int range = hero.getBombRange();
-		boolean penetrating = hero.hasPenetration();
-		PredefinedColor color = hero.getColor();
-		boolean working = true;
-		long time = 0;
-	
-		result = new AiSimBomb(id,tile,posX,posY,posZ,
-			state,burningDuration,currentSpeed,
-			countdownTrigger,remoteControlTrigger,explosionTrigger,
-			normalDuration,explosionDuration,latencyDuration,failureProbability,
-			stopHeroes,stopFires,throughItems,
-			range,penetrating,
-			color,working,time);
+	{	AiBomb bomb = hero.getBombPrototype();
+		AiBomb result = new AiSimBomb(bomb,tile);
 		
 		return result;
 	}
