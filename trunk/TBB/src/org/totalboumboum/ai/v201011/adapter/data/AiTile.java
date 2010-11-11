@@ -191,6 +191,16 @@ public abstract class AiTile
 	 */
 	public abstract boolean isCrossableBy(AiSprite sprite, boolean considerFire);
 	
+	/**
+	 * Comme isCrossableBy, mais considère toujours le feu
+	 * 
+	 *  @param 
+	 *  	sprite	le sprite qui veut traverser cette case
+	 *  @return	
+	 *  	vrai ssi ce sprite , à cet instant, peut traverser cette case
+	 */
+	public abstract boolean isCrossableBy(AiSprite sprite);
+	
 	/////////////////////////////////////////////////////////////////
 	// NEIGHBORS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

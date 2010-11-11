@@ -330,6 +330,11 @@ final class AiSimTile extends AiTile
 		return result;
 	}
 	
+	@Override
+	public boolean isCrossableBy(AiSprite sprite)
+	{	return isCrossableBy(sprite,true);
+	}
+
 	/**
 	 * fonction auxiliaire utilisée pour déterminer si cette
 	 * case est traversable par le sprite passé en paramètre.
