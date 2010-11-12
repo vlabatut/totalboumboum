@@ -211,7 +211,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	private boolean hasBeenExplored(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 		
-		boolean result = this.tile==tile;
+		boolean result = this.tile.equals(tile);
 		if(parent!=null && !result)
 			result = parent.hasBeenExplored(tile);
 		return result;
