@@ -390,27 +390,6 @@ final class AiSimZone extends AiZone
 		return result;
 	}
 	
-	/*
-	 * TODO définir des actions sur les sprites : à chaque fois en édition >> c'est le modèle qui fait la simulation
-	 * 	- hero
-	 * 		- déplacement en pixels
-	 * 		- déplacement d'une case
-	 * 		- téléportation vers une case (?)
-	 * 		>> faire disparaitre un item, changer les caracs
-	 * 		>> mourir dans une explosion
-	 * 		>> ne pas pouvoir passer à cause d'un obstacle
-	 *  - bomb
-	 * 		- créer une bombe
-	 * 		- faire exploser une bombe
-	 * 		>> détruire un mur/item
-	 * 		>> tuer un perso
-	 * 		>> faire apparaître un item
-	 * en fait ce sont les actions dont on a besoin pour la simulation
-	 * 
-	 * dans AiZone, ça serait bien d'avoir la liste des temps d'explosion des cases
-	 * >> voire le truc détaillé avec le début/fin de chaque explosion ?
-	 */
-	
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -514,34 +493,6 @@ final class AiSimZone extends AiZone
 			if(temp.getId()==id)
 				result = temp;
 		}
-		return result;
-	}
-	
-	/**
-	 * Crée une nouvelle bombe appartenant au personnage passé en paramètre.
-	 * La bombe est placée au centre de la case passée en paramètre.
-	 * Si jamais la case contient déjà un objet empêchant de poser la bombe,
-	 * celle-ci n'est pas créée et la fonction renvoie la valeur null.
-	 * Sinon (si la création est possible) alors la fonction renvoie la bombe créée. 
-	 * @param 
-	 * 		tile	case qui contiendra la bombe nouvellement créée
-	 * @param 
-	 * 		hero	personnage à qui la bombe appartiendra (ce qui détermine ses propriétés)
-	 * @return
-	 * 		la bombe si elle a pu être créée, ou null si un objet existant dans la case l'a empêché 
-	 */
-	protected AiBomb dropBomb(AiTile tile, AiHero hero)
-	{	AiBomb bomb = hero.getBombPrototype();
-		AiSimBomb result = null;
-		int line = tile.getLine();
-		int col = tile.getCol();
-		AiSimTile simTile = matrix[line][col];
-				
-		if(simTile.isCrossableBy(bomb,false,false,true,false,true,false))
-		{	result = new AiSimBomb(bomb,simTile);
-			addSprite(result);
-		}
-		
 		return result;
 	}
 	
