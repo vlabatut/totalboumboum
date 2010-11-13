@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiState;
@@ -456,7 +457,7 @@ if(sprite0 instanceof AiSimBomb)
 				double tileY = tile.getPosY();
 				AiSimTile neighborTile = tile.getNeighbor(direction);
 				double offset = 0;
-				if(neighborTile.isCrossableBy(sprite,true)) //deal with obstacles
+				if(neighborTile.isCrossableBy(sprite)) //deal with obstacles
 					offset = tileSize/2;
 				double goalX = current.normalizePositionX(tileX+dir[0]*offset);
 				double goalY = current.normalizePositionY(tileY+dir[1]*offset);
@@ -560,7 +561,7 @@ if(sprite0 instanceof AiSimBomb)
 			double tileY0 = tile0.getPosY();
 			AiSimTile neighborTile = tile.getNeighbor(direction);
 			double offset = 0;
-			if(neighborTile.isCrossableBy(sprite0,true)) //deal with obstacles
+			if(neighborTile.isCrossableBy(sprite0)) //deal with obstacles
 				offset = tileSize/2;
 			double goalX = result.normalizePositionX(tileX0+dir[0]*offset);
 			double goalY = result.normalizePositionY(tileY0+dir[1]*offset);
@@ -775,9 +776,7 @@ if(sprite0 instanceof AiSimBomb)
 	private AiSimHero applyStateHero(AiSimHero hero, AiSimTile tile, long duration,
 			double posX, double posY, double posZ, 
 			AiSimState state, long burningDuration, double currentSpeed)
-	{	int bombRange = hero.getBombRange();
-		long bombDuration = hero.getBombDuration();
-		long explosionDuration = hero.getExplosionDuration();
+	{	AiBomb bombPrototype = hero.getBombPrototype();
 		int bombNumber = hero.getBombNumber();
 		int bombCount = hero.getBombCount();
 		boolean throughBlocks = hero.hasThroughBlocks();
@@ -787,7 +786,7 @@ if(sprite0 instanceof AiSimBomb)
 		double walkingSpeed = hero.getWalkingSpeed();
 		
 		AiSimHero result = new AiSimHero(hero.getId(),tile,posX,posY,posZ,state,burningDuration,currentSpeed,
-			bombRange,bombDuration,explosionDuration,bombNumber,bombCount,
+			bombPrototype,bombNumber,bombCount,
 			throughBlocks,throughBombs,throughFires,
 			color,walkingSpeed);
 		return result;

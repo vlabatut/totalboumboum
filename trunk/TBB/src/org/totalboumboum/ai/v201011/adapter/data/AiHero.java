@@ -36,6 +36,14 @@ public interface AiHero extends AiSprite
 	// BOMB PARAMETERS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
+	 * renvoie un exemple de bombe que ce personnage peut poser
+	 * 
+	 * @return	
+	 * 		une représentation de la bombe
+	 */
+	public AiBomb getBombPrototype();
+
+	/**
 	 * renvoie la portée actuelle des bombes du personnage
 	 * 
 	 * @return	

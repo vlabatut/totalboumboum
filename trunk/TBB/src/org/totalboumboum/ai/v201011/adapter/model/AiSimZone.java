@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,9 +32,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItem;
+import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
-import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -137,9 +138,7 @@ final class AiSimZone extends AiZone
 				double posZ = hero.getPosZ();
 				long burningDuration = hero.getBurningDuration();
 				double currentSpeed = hero.getCurrentSpeed();
-				int bombRange = hero.getBombRange();
-				long bombDuration = hero.getBombDuration();
-				long explosionDuration = hero.getExplosionDuration();
+				AiBomb bombPrototype = hero.getBombPrototype();
 				int bombNumber = hero.getBombNumber();
 				int bombCount = hero.getBombCount();
 				boolean throughBlocks = hero.hasThroughBlocks();
@@ -149,7 +148,7 @@ final class AiSimZone extends AiZone
 				double walkingSpeed = hero.getWalkingSpeed();
 				int id = hero.getId();
 				AiSimHero h = new AiSimHero(id,tile,posX, posY, posZ, state,burningDuration,currentSpeed,
-						bombRange,bombDuration,explosionDuration,bombNumber,bombCount,
+						bombPrototype,bombNumber,bombCount,
 						throughBlocks,throughBombs,throughFires,color,walkingSpeed);
 				internalHeroes.add(h);
 				externalHeroes.add(h);
@@ -175,6 +174,10 @@ final class AiSimZone extends AiZone
 		
 		// misc
 		hiddenItemsCount = zone.getHiddenItemsCount();
+		for(AiItemType type: AiItemType.values())
+		{	int value = zone.getHiddenItemsCount(type);
+			hiddenItemsCounts.put(type,value);
+		}
 		totalTime = zone.getTotalTime();
 		limitTime = zone.getLimitTime();
 		elapsedTime = zone.getElapsedTime();
@@ -282,8 +285,16 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	//TODO commenter
-	public void addSprite(AiSimSprite sprite)
+	/**
+	 * permet de rajouter un sprite dans cette zone
+	 * remarque : le sprite a obligatoirement déjà été affecté à une case 
+	 * lors de sa construction, donc il s'agit ici simplement de mettre
+	 * à jour les listes de sprites de la zone
+	 * 
+	 *  @param
+	 *  	sprite	le sprite à rajouter à cette zone
+	 */
+	protected void addSprite(AiSimSprite sprite)
 	{	AiSimTile tile = sprite.getTile();
 
 		// sprites
@@ -519,9 +530,17 @@ final class AiSimZone extends AiZone
 	 * @return
 	 * 		la bombe si elle a pu être créée, ou null si un objet existant dans la case l'a empêché 
 	 */
-	public AiBomb dropBomb(AiTile tile, AiHero hero)
+	protected AiBomb dropBomb(AiTile tile, AiHero hero)
 	{	AiBomb bomb = hero.getBombPrototype();
-		AiBomb result = new AiSimBomb(bomb,tile);
+		AiSimBomb result = null;
+		int line = tile.getLine();
+		int col = tile.getCol();
+		AiSimTile simTile = matrix[line][col];
+				
+		if(simTile.isCrossableBy(bomb,false,false,true,false,true,false))
+		{	result = new AiSimBomb(bomb,simTile);
+			addSprite(result);
+		}
 		
 		return result;
 	}
@@ -709,6 +728,8 @@ final class AiSimZone extends AiZone
 	private final List<AiItem> externalItems = new ArrayList<AiItem>();
 	/** nombre d'items cachés, i.e. pas encore ramassés */
 	private int hiddenItemsCount;
+	/** nombre d'items cachés, par type*/
+	private final HashMap<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
 	
 	/**
 	 * renvoie la liste interne d'items
@@ -731,6 +752,15 @@ final class AiSimZone extends AiZone
 		//TODO must be updated manually
 	}
 	
+	@Override
+	public int getHiddenItemsCount(AiItemType type)
+	{	Integer result = hiddenItemsCounts.get(type);
+		if(result==null)
+			result = 0;
+		//TODO must be updated manually
+		return result;
+	}
+
 	/**
 	 * renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet

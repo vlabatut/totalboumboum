@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201011.adapter.data.internal;
  * 
  */
 
+import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -29,6 +30,7 @@ import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -72,30 +74,31 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAMETERS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** portée des bombes du personnage */
-	private int bombRange;
-	/** durée des bombes que le personnage peut poser (valide seulement pour les bombes à retardement) */
-	private long bombDuration;
-	/** durée des explosions des bombes que le personnage peut poser */
-	private long explosionDuration;
+	/** exemple de bombe que le personnage peut poser */
+	private AiDataBomb bombPrototype;
 	/** nombre de bombes que le personnage peut poser simultanément (en général) */
 	private int bombNumber;
 	/** nombre de bombes que le personnage a actuellement posées */
 	private int bombCount;
 	
 	@Override
+	public AiBomb getBombPrototype()
+	{	return bombPrototype;
+	}
+	
+	@Override
 	public int getBombRange()
-	{	return bombRange;
+	{	return bombPrototype.getRange();
 	}
 	
 	@Override
 	public long getBombDuration()
-	{	return bombDuration;
+	{	return bombPrototype.getNormalDuration();
 	}
 	
 	@Override
 	public long getExplosionDuration()
-	{	return explosionDuration;
+	{	return bombPrototype.getExplosionDuration();
 	}
 	
 	@Override
@@ -114,24 +117,12 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	private void updateBombParam()
 	{	Hero sprite = getSprite();
 		
-		// bomb range
-		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
-        bombRange = (int)ab.getStrength();
-        ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
-		if(ab.isActive())
-		{	int limit = (int)ab.getStrength();
-			if(bombRange>limit)
-				bombRange = limit;
-		}
-		
-		// bomb duration
-		bombDuration = sprite.getBombsetManager().getBombset().getCurrentBombDuration(sprite);
-		
-    	// explosion duration
-		explosionDuration = sprite.getBombsetManager().getBombset().getCurrentExplosionDuration(sprite);
-
+		// prototype bomb
+		Bomb bomb = sprite.makeBomb();
+		bombPrototype = new AiDataBomb(null,bomb);
+	
 		// max number of simultaneous bombs
-    	ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
+		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
     	bombNumber = (int)ab.getStrength();
         ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER_MAX);
 		if(ab.isActive())
@@ -282,7 +273,7 @@ if(walkingSpeed==0)
 		result.append(super.toString());
 		result.append(" - bmbCnt.: "+bombCount);
 		result.append(" - bmbNbr.: "+bombNumber);
-		result.append(" - bmbRge.: "+bombRange);
+		result.append(" - bmbRge.: "+getBombRange());
 		result.append(" - color: "+color);
 		result.append(" ]");
 		return result.toString();

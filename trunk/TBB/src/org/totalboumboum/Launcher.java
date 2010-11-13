@@ -1482,8 +1482,11 @@ public class Launcher
 	 *  		>> un sprite est ajouté forcément à travers la zone
 	 *  		>> la zone propose des fonction de création de sprites
 	 *  		   avec au moins tile, et éventuellement sprite créateur (bomb>>hero, fire>>bomb)
+	 *  	- dans les items cachés restant, donner les décomptes par types d'items
 	 *  - à tester :
 	 *  	- vitesse renvoyée par l'API (pour déplacement joueurs)
+	 *  	- décompte des items
+	 *  	>> en fait : toutes les modifs depuis la version précédente
 	 *  
 	 */
 }
