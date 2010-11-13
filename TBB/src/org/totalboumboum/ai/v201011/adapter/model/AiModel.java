@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiState;
@@ -51,6 +52,25 @@ class AiModel
 		// no previous zone for now
 		previous = null;
 	}	
+	
+	/////////////////////////////////////////////////////////////////
+	// PARAMETERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** fait apparaître aléatoirement des items lors de la destruction des murs */
+	private boolean simulateItemsAppearing = false;
+
+	/**
+	 * détermine si l'apparition d'items sera simulée lors de la destruction de murs.
+	 * à noter que la probabilité d'apparition dépends du nombre de murs restants
+	 * et d'items cachés restant à l'instant de l'explosion.
+	 * de même, le type d'item dépend de la distribution des items restants
+	 * 
+	 * @param 
+	 * 		simulateItemsAppearing	si vrai, les items apparaitront lors de la simulation
+	 */
+	public void setSimulateItemsAppearing(boolean simulateItemsAppearing)
+	{	this.simulateItemsAppearing = simulateItemsAppearing;
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ZONES			/////////////////////////////////////////////
@@ -833,4 +853,99 @@ if(sprite0 instanceof AiSimBomb)
 		AiSimState result = new AiSimState(name,direction,time);
 		return result;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ACTIONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Crée une nouvelle bombe appartenant au personnage passé en paramètre.
+	 * La bombe est placée au centre de la case passée en paramètre.
+	 * Le compteur de bombe du personnage est incrémenté.
+	 * Si jamais la case contient déjà un objet empêchant de poser la bombe,
+	 * celle-ci n'est pas créée et la fonction renvoie la valeur null.
+	 * Sinon (si la création est possible) alors la fonction renvoie la bombe créée.
+	 * Si jamais le personnage ne peut pas poser de bombes pour l'instant,
+	 * la bombe n'est pas créée et la valeur null est renvoyée. 
+	 * @param 
+	 * 		tile	case qui contiendra la bombe nouvellement créée
+	 * @param 
+	 * 		hero	personnage à qui la bombe appartiendra (ce qui détermine ses propriétés)
+	 * @return
+	 * 		la bombe si elle a pu être créée, ou null si ce n'est pas possible 
+	 */
+	protected AiBomb dropBomb(AiTile tile, AiHero hero)
+	{	AiSimBomb result = null;
+	
+		// check if the hero can drop a bomb
+		int dropped = hero.getBombCount();
+		int max = hero.getBombNumber();
+		if(dropped<max)
+		{	// then check if the tile can host the bomb
+			AiBomb bomb = hero.getBombPrototype();
+			int line = tile.getLine();
+			int col = tile.getCol();
+			AiSimTile simTile = current.getTile(line,col);
+					
+			if(simTile.isCrossableBy(bomb,false,false,true,false,true,false))
+			{	result = new AiSimBomb(bomb,simTile);
+				current.addSprite(result);
+			}
+		}
+		
+		return result;
+	}
+
+	/**
+	 * comme l'autre méthode dropBomb, mais celle ci dépose la bombe
+	 * dans la case du personnage passé en paramètre
+	 * 
+	 * @param 
+	 * 		hero	le personnage devant déposer la bombe
+	 * 
+	 * @return
+	 * 		la bombe déposée, ou null si il était impossible de la poser
+	 */
+	protected AiBomb dropBomb(AiHero hero)
+	{	AiTile tile = hero.getTile();
+		return dropBomb(tile,hero);
+	}
+	
+	protected void detonateBomb(AiBomb bomb)
+	{	
+		List<AiTile> blast = bomb.getBlast();
+		// reproduire le traitement fait dans le jeu
+		// faire détonner les autres bombes
+		// détruire les murs mous >> faire apparaître items
+		// détruire les items
+		// tuer les personnages
+		
+		// besoin d'un prototype de feu pour les bombes ?
+	}
+	
+	/*
+	 * TODO définir des actions sur les sprites : à chaque fois en édition >> c'est le modèle qui fait la simulation
+	 * 	- hero
+	 * 		- déplacement en pixels
+	 * 		- déplacement d'une case
+	 * 		- téléportation vers une case (?)
+	 * 		>> faire disparaitre un item, changer les caracs
+	 * 		>> mourir dans une explosion
+	 * 		>> ne pas pouvoir passer à cause d'un obstacle
+	 *  - bomb
+	 * 		x créer une bombe
+	 * 		- faire exploser une bombe
+	 * 		>> détruire un mur/item
+	 * 		>> tuer un perso
+	 * 		>> faire apparaître un item
+	 * en fait ce sont les actions dont on a besoin pour la simulation
+	 * 
+	 * dans AiZone, ça serait bien d'avoir la liste des temps d'explosion des cases
+	 * >> voire le truc détaillé avec le début/fin de chaque explosion ?
+	 * 
+	 * pour les méthodes destinées aux étudiants (public), remplacer
+	 * un sprite/tile par le même sprite dans la zone courante, si besoin
+	 * pour les méthodes appelées en interne, on peut supposer que c'est inutile
+	 */
+	
+
 }
