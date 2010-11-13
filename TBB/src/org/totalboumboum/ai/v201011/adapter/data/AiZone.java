@@ -365,6 +365,20 @@ public abstract class AiZone
 	 */
 	public abstract int getHiddenItemsCount();
 	
+	/**
+	 * renvoie le nombre d'items cachés restant dans le niveau, pour un type donné.
+	 * Il s'agit des items qui sont encore cachés dans des blocs, 
+	 * et qui n'ont pas été ramassés. Cette information permet de
+	 * savoir s'il est encore nécessaire de faire exploser des blocs 
+	 * pour trouver des items, ou pas.
+	 * 
+	 * @param
+	 * 		type	le type d'items à considérer
+	 * @return	
+	 * 		le nombre d'items de ce type restant à découvrir
+	 */
+	public abstract int getHiddenItemsCount(AiItemType type);
+	
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

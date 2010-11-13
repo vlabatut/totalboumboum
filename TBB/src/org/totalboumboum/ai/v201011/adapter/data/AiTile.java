@@ -184,12 +184,22 @@ public abstract class AiTile
 	 *  @param 
 	 *  	sprite	le sprite qui veut traverser cette case
 	 *  @param 
-	 *  	considerFire	si vrai, la fonction considère le feu comme un obstacle
-	 *  	(à condition que le sprite considéré ne puisse pas le traverser)
+	 *  	ignoreBlocks	si vrai, la fonction ne considère pas les blocks comme des obstacles
+	 *  @param 
+	 *  	ignoreBomb	si vrai, la fonction ne considère pas les bombes comme des obstacles
+	 *  @param 
+	 *  	ignoreFire	si vrai, la fonction ne considère pas le feu comme un obstacle
+	 *  @param 
+	 *  	ignoreFloors	si vrai, la fonction ne considère pas les sols comme des obstacles (ce qu'ils sont rarement, de toute façon)
+	 *  @param 
+	 *  	ignoreHeroes	si vrai, la fonction ne considère pas les personnages comme des obstacles
+	 *  @param 
+	 *  	ignoreItems	si vrai, la fonction ne considère pas les items comme des obstacles
 	 *  @return	
 	 *  	vrai ssi ce sprite , à cet instant, peut traverser cette case
 	 */
-	public abstract boolean isCrossableBy(AiSprite sprite, boolean considerFire);
+	public abstract boolean isCrossableBy(AiSprite sprite, 
+			boolean ignoreBlocks, boolean ignoreBombs, boolean ignoreFires, boolean ignoreFloors, boolean ignoreHeroes, boolean ignoreItems);
 	
 	/**
 	 * Comme isCrossableBy, mais considère toujours le feu

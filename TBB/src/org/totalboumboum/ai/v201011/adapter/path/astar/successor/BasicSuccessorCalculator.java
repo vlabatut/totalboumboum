@@ -66,7 +66,7 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 		// pour chaque case voisine : on la rajoute si elle est traversable
 		for(Direction direction: Direction.getPrimaryValues())
 		{	AiTile neighbor = tile.getNeighbor(direction);
-			if(neighbor.isCrossableBy(hero,true))
+			if(neighbor.isCrossableBy(hero))
 				result.add(neighbor);			
 		}
 

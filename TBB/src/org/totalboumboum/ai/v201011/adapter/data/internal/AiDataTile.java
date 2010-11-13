@@ -32,6 +32,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItem;
+import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -300,9 +301,8 @@ final class AiDataTile extends AiTile
 			{	Item i = it.next();
 				GestureName gesture = i.getCurrentGesture().getName();
 				if(gesture==GestureName.NONE)
-				{	int hiddenItemsCount = zone.getHiddenItemsCount();
-					hiddenItemsCount++;
-					zone.setHiddenItemsCount(hiddenItemsCount);
+				{	AiItemType type = AiItemType.makeItemType(i.getItemName());	
+					zone.signalHiddenItem(type);
 				}
 				else if(!(gesture==GestureName.HIDING
 					|| gesture==GestureName.ENDED))
@@ -323,22 +323,26 @@ final class AiDataTile extends AiTile
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@Override
-	public boolean isCrossableBy(AiSprite sprite, boolean considerFire)
+	public boolean isCrossableBy(AiSprite sprite, 
+			boolean ignoreBlocks, boolean ignoreBombs, boolean ignoreFires, boolean ignoreFloors, boolean ignoreHeroes, boolean ignoreItems)
 	{	boolean result = true;
 		// murs
-		if(result)
+		if(result && !ignoreBlocks)
 			result = isCrossableBy(sprite,internalBlocks);
 		// bombes
-		if(result)
+		if(result && !ignoreBombs)
 			result = isCrossableBy(sprite,internalBombs);
 		// feu
-		if(result && considerFire)
+		if(result && !ignoreFires)
 			result = isCrossableBy(sprite,internalFires);
+		// sol
+//		if(result && !ignoreFloors)
+//			result = isCrossableBy(sprite,internalFloors);
 		// heroes
-		if(result)
+		if(result && !ignoreHeroes)
 			result = isCrossableBy(sprite,internalHeroes);
 		// item
-		if(result)
+		if(result && !ignoreItems)
 			result = isCrossableBy(sprite,internalItems);
 		//
 		return result;
@@ -346,7 +350,7 @@ final class AiDataTile extends AiTile
 	
 	@Override
 	public boolean isCrossableBy(AiSprite sprite)
-	{	return isCrossableBy(sprite,true);
+	{	return isCrossableBy(sprite,false,false,false,false,false,false);
 	}
 
 	/**

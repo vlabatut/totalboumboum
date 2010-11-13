@@ -33,6 +33,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItem;
+import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
@@ -253,6 +254,7 @@ public final class AiDataZone extends AiZone
 	 */
 	private void updateMatrix(long elapsedTime)
 	{	hiddenItemsCount = 0;
+		hiddenItemsCounts.clear();
 		// démarque tous les sprites
 		uncheckAll(blockMap);
 		uncheckAll(bombMap);
@@ -561,6 +563,8 @@ public final class AiDataZone extends AiZone
 	private final List<AiItem> itemList = new ArrayList<AiItem>();
 	/** nombre d'items cachés, i.e. pas encore ramassés */
 	private int hiddenItemsCount;
+	/** nombre d'items cachés, par type*/
+	private final HashMap<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
 	
 	@Override
 	public List<AiItem> getItems()
@@ -607,13 +611,30 @@ public final class AiDataZone extends AiZone
 	 * @param 
 	 * 		hiddenItemsCount	le nouveau nombre d'items cachés dans le niveau
 	 */
-	protected void setHiddenItemsCount(int hiddenItemsCount)
-	{	this.hiddenItemsCount = hiddenItemsCount;	
+	protected void signalHiddenItem(AiItemType type)
+	{	// general count
+		hiddenItemsCount++;
+		
+		// type-related count
+		Integer temp = hiddenItemsCounts.get(type);
+		if(temp==null)
+			temp = 1;
+		else
+			temp ++;
+		hiddenItemsCounts.put(type,temp);
 	}
 	
 	@Override
 	public int getHiddenItemsCount()
 	{	return hiddenItemsCount;		
+	}
+	
+	@Override
+	public int getHiddenItemsCount(AiItemType type)
+	{	Integer result = hiddenItemsCounts.get(type);
+		if(result==null)
+			result = 0;
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////

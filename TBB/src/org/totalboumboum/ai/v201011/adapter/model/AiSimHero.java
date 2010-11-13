@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
+import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.tools.images.PredefinedColor;
@@ -50,15 +51,13 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	 */
 	protected AiSimHero(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
-			int bombRange, long bombDuration, long explosionDuration, int bombNumber, int bombCount,
+			AiBomb bombPrototype, int bombNumber, int bombCount,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
 			PredefinedColor color, double walkingSpeed)
 	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		
 		// bombs
-		this.bombRange = bombRange;
-		this.bombDuration = bombDuration;
-		this.explosionDuration = bombDuration;
+		this.bombPrototype = bombPrototype;
 		this.bombNumber = bombNumber;
 		this.bombCount = bombCount;
 		
@@ -83,9 +82,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	{	super(sprite,tile);
 		
 		// bombs
-		bombRange = sprite.getBombRange();
-		bombDuration = sprite.getBombDuration();
-		explosionDuration = sprite.getBombDuration();
+		bombPrototype = sprite.getBombPrototype();
 		bombNumber = sprite.getBombNumber();
 		bombCount = sprite.getBombCount();
 		
@@ -102,30 +99,31 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAMETERS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** portée des bombes du personnage */
-	private int bombRange;
-	/** durée des bombes que le personnage peut poser (valide seulement pour les bombes à retardement) */
-	private long bombDuration;
-	/** durée des explosions des bombes que le personnage peut poser */
-	private long explosionDuration;
+	/** exemple de bombe que le personnage peut poser */
+	private AiBomb bombPrototype;
 	/** nombre de bombes que le personnage peut poser simultanément (en général) */
 	private int bombNumber;
 	/** nombre de bombes que le personnage a actuellement posées */
 	private int bombCount;
 	
 	@Override
+	public AiBomb getBombPrototype()
+	{	return bombPrototype;
+	}
+	
+	@Override
 	public int getBombRange()
-	{	return bombRange;
+	{	return bombPrototype.getRange();
 	}
 	
 	@Override
 	public long getBombDuration()
-	{	return bombDuration;
+	{	return bombPrototype.getNormalDuration();
 	}
 
 	@Override
 	public long getExplosionDuration()
-	{	return explosionDuration;
+	{	return bombPrototype.getExplosionDuration();
 	}
 	
 	@Override
@@ -231,7 +229,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 		result.append(super.toString());
 		result.append(" - bmbCnt.: "+bombCount);
 		result.append(" - bmbNbr.: "+bombNumber);
-		result.append(" - bmbRge.: "+bombRange);
+		result.append(" - bmbRge.: "+getBombRange());
 		result.append(" - color: "+color);
 		result.append(" ]");
 		return result.toString();
