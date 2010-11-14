@@ -45,8 +45,11 @@ import org.totalboumboum.engine.content.feature.action.Circumstance;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 import org.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
 import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
+import org.totalboumboum.engine.content.feature.gesture.Gesture;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
+import org.totalboumboum.engine.content.feature.gesture.trajectory.direction.TrajectoryDirection;
 import org.totalboumboum.engine.content.manager.explosion.ExplosionManager;
+import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.tools.images.PredefinedColor;
@@ -306,6 +309,36 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SPEED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** vitesse de déplacement au sol de la bombe, exprimée en pixel/seconde */
+	private double slidingSpeed;
+	
+	@Override
+	public double getSlidingSpeed()
+	{	return slidingSpeed;
+	}
+
+	@Override
+	protected void updateSpeed()
+	{	// current speed
+		super.updateSpeed();
+	
+		// sliding speed (in general)
+		Sprite sprite = getSprite();
+		double speedCoeff = sprite.getGroundSpeedCoeff()[0];
+		Gesture sliding = getSprite().getGesturePack().getGesture(GestureName.SLIDING);
+		TrajectoryDirection slidingRight = sliding.getTrajectoryDirection(Direction.RIGHT);
+		double totalShift = slidingRight.getTotalXShift();
+		double totalDuration = slidingRight.getTotalDuration();
+		double basicSpeed = totalShift/totalDuration * 1000;
+		slidingSpeed = speedCoeff*basicSpeed;
+if(slidingSpeed==0)
+	System.out.print("");
+		//System.out.println(getSprite().getColor()+": walkingSpeed="+walkingSpeed);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

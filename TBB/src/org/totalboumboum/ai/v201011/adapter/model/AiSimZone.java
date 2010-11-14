@@ -22,7 +22,6 @@ package org.totalboumboum.ai.v201011.adapter.model;
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -214,11 +213,11 @@ final class AiSimZone extends AiZone
 		limitTime = 0;
 
 	}
-	
-	protected void update(AiZone zone, long duration)
-	{	totalTime = zone.getTotalTime() + duration;
-		elapsedTime = duration;
-	}
+//TODO put some set functions	
+//	protected void update(AiZone zone, long duration)
+//	{	totalTime = zone.getTotalTime() + duration;
+//		elapsedTime = duration;
+//	}
 		
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
@@ -298,7 +297,6 @@ final class AiSimZone extends AiZone
 	protected void addSprite(AiSimSprite sprite)
 	{	AiSimTile tile = sprite.getTile();
 
-		// sprites
 		if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
 			internalBlocks.add(block);
@@ -348,6 +346,43 @@ final class AiSimZone extends AiZone
 		}
 		
 		tile.addSprite(sprite);
+	}
+	
+	protected void removeSprite(AiSimSprite sprite)
+	{	// sprite lists
+		if(sprite instanceof AiSimBlock)
+		{	AiSimBlock block = (AiSimBlock)sprite;
+			internalBlocks.remove(block);
+			externalBlocks.remove(block);
+		}
+		else if(sprite instanceof AiSimBomb)
+		{	AiSimBomb bomb = (AiSimBomb)sprite;
+			internalBombs.remove(bomb);
+			externalBombs.remove(bomb);
+		}
+		else if(sprite instanceof AiSimFire)
+		{	AiSimFire fire = (AiSimFire)sprite;
+			internalFires.remove(fire);
+			externalFires.remove(fire);
+		}
+		else if(sprite instanceof AiSimFloor)
+		{	AiSimFloor floor = (AiSimFloor)sprite;
+			internalFloors.remove(floor);
+			externalFloors.remove(floor);
+		}
+		else if(sprite instanceof AiSimHero)
+		{	AiSimHero hero = (AiSimHero)sprite;
+			remainingHeroList.remove(hero); //only remove from this list, cause the other ones must stay complete
+		}
+		else if(sprite instanceof AiSimItem)
+		{	AiSimItem item = (AiSimItem)sprite;
+			internalItems.remove(item);
+			externalItems.remove(item);
+		}
+		
+		// tile
+		AiSimTile tile = sprite.getTile();
+		tile.removeSprite(sprite);
 	}
 	
 	/**
@@ -702,10 +737,6 @@ final class AiSimZone extends AiZone
 	private final List<AiSimItem> internalItems = new ArrayList<AiSimItem>();
 	/** liste externe des items contenus dans cette zone */
 	private final List<AiItem> externalItems = new ArrayList<AiItem>();
-	/** nombre d'items cachés, i.e. pas encore ramassés */
-	private int hiddenItemsCount;
-	/** nombre d'items cachés, par type*/
-	private final HashMap<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
 	
 	/**
 	 * renvoie la liste interne d'items
@@ -722,21 +753,21 @@ final class AiSimZone extends AiZone
 	{	return externalItems;	
 	}
 	
-	@Override
-	public int getHiddenItemsCount()
-	{	return hiddenItemsCount;
+	/**
+	 * permet de diminuer le nombre d'items cachés,
+	 * lors de la simulation
+	 * 
+	 * @param 
+	 * 		type	le type d'item qui a été découvert
+	 */
+	protected void updateHiddenItemsCount(AiItemType type)
+	{	Integer value = hiddenItemsCounts.get(type);
+		value --;
+		hiddenItemsCounts.put(type,value);
+		hiddenItemsCount--;
 		//TODO must be updated manually
 	}
 	
-	@Override
-	public int getHiddenItemsCount(AiItemType type)
-	{	Integer result = hiddenItemsCounts.get(type);
-		if(result==null)
-			result = 0;
-		//TODO must be updated manually
-		return result;
-	}
-
 	/**
 	 * renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet

@@ -167,13 +167,11 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	{	return walkingSpeed;	
 	}
 	
-	/**
-	 * met à jour la vitesses de déplacement de ce personnage 
-	 */
+	@Override
 	protected void updateSpeed()
 	{	// current speed
 		super.updateSpeed();
-	
+		
 		// walking speed (in general)
 		Sprite sprite = getSprite();
 		double speedCoeff = sprite.getGroundSpeedCoeff()[0];

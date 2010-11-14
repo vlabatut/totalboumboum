@@ -366,6 +366,11 @@ public abstract class AiZone
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** nombre d'items cachés, i.e. pas encore ramassés */
+	protected int hiddenItemsCount;
+	/** nombre d'items cachés, par type*/
+	protected final HashMap<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
+
 	/** 
 	 * renvoie la liste des items apparents contenus dans cette zone 
 	 * (la liste peut être vide)
@@ -385,7 +390,9 @@ public abstract class AiZone
 	 * @return	
 	 * 		le nombre d'items restant à découvrir
 	 */
-	public abstract int getHiddenItemsCount();
+	public int getHiddenItemsCount()
+	{	return hiddenItemsCount;		
+	}
 	
 	/**
 	 * renvoie le nombre d'items cachés restant dans le niveau, pour un type donné.
@@ -399,8 +406,34 @@ public abstract class AiZone
 	 * @return	
 	 * 		le nombre d'items de ce type restant à découvrir
 	 */
-	public abstract int getHiddenItemsCount(AiItemType type);
+	public int getHiddenItemsCount(AiItemType type)
+	{	Integer result = hiddenItemsCounts.get(type);
+		if(result==null)
+			result = 0;
+		return result;
+	}
 	
+	/**
+	 * renvoie une HashMap contenant la proportion d'items restant
+	 * cachés dans le niveau, par type d'item. Cette proportion peut
+	 * être assimilée à une probabilité : celle de découvrir un item
+	 * de ce type quand le mur qu'on fait exploser contient un item.
+	 * 
+	 * @return
+	 * 		une HashMap contenant les probabilités associées à chaque type d'item
+	 */
+	public HashMap<AiItemType,Double> getHiddenItemsProbas()
+	{	HashMap<AiItemType,Double> result = new HashMap<AiItemType, Double>();
+		double total = hiddenItemsCount;
+		if(total==0)
+			total = 1; // avoid division by zero
+		for(AiItemType key: AiItemType.values())
+		{	Double value = hiddenItemsCounts.get(key)/total;
+			result.put(key,value);
+		}
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

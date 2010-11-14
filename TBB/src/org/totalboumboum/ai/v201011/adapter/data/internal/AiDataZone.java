@@ -586,10 +586,6 @@ public final class AiDataZone extends AiZone
 	private final HashMap<Item,AiDataItem> itemMap = new HashMap<Item,AiDataItem>();
 	/** liste externe des items contenus dans cette zone */
 	private final List<AiItem> itemList = new ArrayList<AiItem>();
-	/** nombre d'items cachés, i.e. pas encore ramassés */
-	private int hiddenItemsCount;
-	/** nombre d'items cachés, par type*/
-	private final HashMap<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
 	
 	@Override
 	public List<AiItem> getItems()
@@ -648,20 +644,7 @@ public final class AiDataZone extends AiZone
 			temp ++;
 		hiddenItemsCounts.put(type,temp);
 	}
-	
-	@Override
-	public int getHiddenItemsCount()
-	{	return hiddenItemsCount;		
-	}
-	
-	@Override
-	public int getHiddenItemsCount(AiItemType type)
-	{	Integer result = hiddenItemsCounts.get(type);
-		if(result==null)
-			result = 0;
-		return result;
-	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// ALL SPRITES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

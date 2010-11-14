@@ -116,6 +116,18 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	{	return bombPrototype.getRange();
 	}
 	
+	/**
+	 * met à jour la portée des bombes posées par ce joueur
+	 * 
+	 * @param 
+	 * 		delta	la modification à apporter à la portée des bombes
+	 */
+	protected void updateBombRange(int delta)
+	{	AiSimBomb proto = new AiSimBomb(bombPrototype,null);
+		proto.updateRange(delta);
+		bombPrototype = proto;
+	}
+
 	@Override
 	public long getBombDuration()
 	{	return bombPrototype.getNormalDuration();
@@ -131,13 +143,30 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	{	return bombNumber;
 	}
 	
-	protected void updateBombNumber(int delta)
-	{	bombNumber = bombNumber + delta;
+	/**
+	 * met à jour le nombre de bombes actuellement en jeu et appartenant
+	 * à ce joueur
+	 * 
+	 * @param 
+	 * 		delta	la modification à apporter au nombre de bombes
+	 */
+	protected void updateBombCount(int delta)
+	{	bombCount = bombCount + delta;
 	}
 	
 	@Override
 	public int getBombCount()
 	{	return bombCount;
+	}
+	
+	/**
+	 * met à jour le nombre de bombes posables simultanément par ce joueur
+	 * 
+	 * @param 
+	 * 		delta	la modification à apporter au nombre de bombes
+	 */
+	protected void updateBombNumber(int delta)
+	{	bombNumber = bombNumber + delta;
 	}
 	
 	/////////////////////////////////////////////////////////////////
