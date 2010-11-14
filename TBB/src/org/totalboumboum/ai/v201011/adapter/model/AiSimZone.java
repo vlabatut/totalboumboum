@@ -180,7 +180,7 @@ final class AiSimZone extends AiZone
 		}
 		totalTime = zone.getTotalTime();
 		limitTime = zone.getLimitTime();
-		elapsedTime = zone.getElapsedTime();
+		elapsedTime = 0;
 	}
 
 	//NOTE temp constructor
@@ -213,12 +213,7 @@ final class AiSimZone extends AiZone
 		limitTime = 0;
 
 	}
-//TODO put some set functions	
-//	protected void update(AiZone zone, long duration)
-//	{	totalTime = zone.getTotalTime() + duration;
-//		elapsedTime = duration;
-//	}
-		
+
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -267,6 +262,16 @@ final class AiSimZone extends AiZone
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected void updateTime(long duration)
+	{	totalTime = totalTime + duration;
+		elapsedTime = duration;
+	}
+		
+
+	
 	/////////////////////////////////////////////////////////////////
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -765,7 +770,6 @@ final class AiSimZone extends AiZone
 		value --;
 		hiddenItemsCounts.put(type,value);
 		hiddenItemsCount--;
-		//TODO must be updated manually
 	}
 	
 	/**
