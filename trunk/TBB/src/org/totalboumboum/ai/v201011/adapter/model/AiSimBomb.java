@@ -63,7 +63,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param time
 	 */
 	protected AiSimBomb(int id, AiSimTile tile, double posX, double posY, double posZ,
-			AiSimState state, long burningDuration, double currentSpeed,
+			AiSimState state, long burningDuration, double currentSpeed, double slidingSpeed,
 			boolean countdownTrigger, boolean remoteControlTrigger, boolean explosionTrigger,
 			long normalDuration, long latencyDuration, float failureProbability, AiFire firePrototype,
 			AiStopType stopHeroes, AiStopType stopFires, boolean throughItems,
@@ -93,6 +93,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 		this.color = color;
 		this.working = working;
 		this.time = time;
+		this.slidingSpeed = slidingSpeed;
 	}	
 
 	/**
@@ -127,6 +128,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 		color = sprite.getColor();
 		working = sprite.isWorking();
 		time = sprite.getTime();
+		slidingSpeed = sprite.getSlidingSpeed();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -202,6 +204,17 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	@Override
 	public int getRange()
 	{	return range;	
+	}
+	
+	/**
+	 * met à jour la portée de cette bombe
+	 * (méthode utilisée seulement lors de la simulation)
+	 * 
+	 * @param 
+	 * 		delta	la modification à apporter à la portée de cette bombe
+	 */
+	protected void updateRange(int delta)
+	{	range = range + delta;
 	}
 	
 	@Override
@@ -281,6 +294,17 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SPEED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** vitesse de déplacement au sol de la bombe, exprimée en pixel/seconde */
+	private double slidingSpeed;
+	
+	@Override
+	public double getSlidingSpeed()
+	{	return slidingSpeed;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -129,13 +129,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void addSprite(AiSimSprite sprite)
-	{	// tile
-		//AiSimTile tile = sprite.getTile();
-		//tile.addSprite(sprite);
-		
-		// sprites
-		if(sprite instanceof AiSimBlock)
+	// TODO comment
+	protected void addSprite(AiSimSprite sprite)
+	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
 			internalBlocks.add(block);
 			externalBlocks.add(block);
@@ -164,6 +160,39 @@ final class AiSimTile extends AiTile
 		{	AiSimItem item = (AiSimItem)sprite;
 			internalItems.add(item);
 			externalItems.add(item);
+		}
+	}
+	
+	protected void removeSprite(AiSimSprite sprite)
+	{	if(sprite instanceof AiSimBlock)
+		{	AiSimBlock block = (AiSimBlock)sprite;
+			internalBlocks.remove(block);
+			externalBlocks.remove(block);
+		}
+		else if(sprite instanceof AiSimBomb)
+		{	AiSimBomb bomb = (AiSimBomb)sprite;
+			internalBombs.remove(bomb);
+			externalBombs.remove(bomb);
+		}
+		else if(sprite instanceof AiSimFire)
+		{	AiSimFire fire = (AiSimFire)sprite;
+			internalFires.remove(fire);
+			externalFires.remove(fire);
+		}
+		else if(sprite instanceof AiSimFloor)
+		{	AiSimFloor floor = (AiSimFloor)sprite;
+			internalFloors.remove(floor);
+			externalFloors.remove(floor);
+		}
+		else if(sprite instanceof AiSimHero)
+		{	AiSimHero hero = (AiSimHero)sprite;
+			internalHeroes.remove(hero);
+			externalHeroes.remove(hero);
+		}
+		else if(sprite instanceof AiSimItem)
+		{	AiSimItem item = (AiSimItem)sprite;
+			internalItems.remove(item);
+			externalItems.remove(item);
 		}
 	}
 	

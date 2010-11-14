@@ -122,6 +122,17 @@ final class AiSimState  implements AiState
 	{	return time;
 	}
 	
+	/**
+	 * permet de modifier le temps passé dans cet état.
+	 * méthode utilisée exclusivement lors des simulations
+	 * 
+	 * @param
+	 * 		time	le nouveau temps passé dans cet état
+	 */
+	protected void setTime(long time)
+	{	this.time = time;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

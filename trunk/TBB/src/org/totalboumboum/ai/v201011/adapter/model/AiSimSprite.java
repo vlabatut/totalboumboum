@@ -76,13 +76,20 @@ abstract class AiSimSprite implements AiSprite
 	// ID				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** id du sprite dans le jeu */
-	private int id;
+	protected int id;
 	
 	@Override
 	public int getId()
 	{	return id;
 	}
 	
+	/**
+	 * permet de modifier l'id de ce sprite.
+	 * méthode utilisée uniquement lors des simulations.
+	 * 
+	 * @param
+	 * 		id	nouvel id de ce sprite
+	 */
 	protected void setId(int id)
 	{	this.id = id;
 	}
@@ -134,6 +141,17 @@ abstract class AiSimSprite implements AiSprite
 	{	return tile.getCol();	
 	}
 	
+	/**
+	 * permet de modifier la case occupée par ce sprite.
+	 * méthode utilisée uniquement lors des simulations.
+	 * 
+	 * @param
+	 * 		tile	nouvelle case occupée par ce sprite
+	 */
+	protected void setTile(AiSimTile tile)
+	{	this.tile = tile;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LOCATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -158,6 +176,21 @@ abstract class AiSimSprite implements AiSprite
 	public double getPosZ()
 	{	return posZ;
 	}
+	
+	/**
+	 * permet de modifier les coordonnées de ce sprite (exprimées en pixels).
+	 * méthode utilisée uniquement lors des simulations.
+	 * 
+	 * @param
+	 * 		x	nouvelle abscisse
+	 * 		y	nouvelle ordonnée
+	 * 		z	nouvelle hauteur
+	 */
+	protected void setPos(double x, double y, double z)
+	{	posX = x;
+		posY = y;
+		posZ = z;
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// BURN				/////////////////////////////////////////////
@@ -179,6 +212,17 @@ abstract class AiSimSprite implements AiSprite
 	@Override
 	public double getCurrentSpeed()
 	{	return currentSpeed;
+	}
+
+	/**
+	 * permet de modifier la vitesse de déplacement courante de ce sprite.
+	 * méthode utilisée uniquement lors des simulations.
+	 * 
+	 * @param
+	 * 		currentSpeed	nouvelle vitesse de déplacement
+	 */
+	protected void setCurrentSpeed(double currentSpeed)
+	{	this.currentSpeed = currentSpeed;
 	}
 
 	/////////////////////////////////////////////////////////////////
