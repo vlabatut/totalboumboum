@@ -27,6 +27,7 @@ import java.util.List;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.calculus.CombinatoricsTools;
 import org.totalboumboum.tools.calculus.LevelsTools;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
@@ -286,6 +287,16 @@ public abstract class AiZone
 	 */
 	public abstract List<AiBomb> getBombs();
 	
+	/** 
+	 * renvoie la liste de bombes de la couleur passée en paramètre.
+	 * la liste est vide si aucune bombe de cette couleur n'existe ou si 
+	 * cette couleur est null.
+	 * 
+	 * @return	
+	 * 		une liste de bombe de la couleur passée en paramètre
+	 */
+	public abstract List<AiBomb> getBombsByColor(PredefinedColor color);
+
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -340,6 +351,17 @@ public abstract class AiZone
 	 * 		liste de tous les joueurs encore contenus dans cette zone, sauf celui de l'IA
 	 */
 	public abstract List<AiHero> getRemainingOpponents();
+
+	/** 
+	 * renvoie le personnage de la couleur passée en paramètre,
+	 * ou null si aucun personnage de cette couleur existe ou si 
+	 * cette couleur est null.
+	 * <b>Attention :</b> Les personnages déjà éliminés sont aussi considérés. 
+	 * 
+	 * @return	
+	 * 		le personnage dont la couleur est celle passée en paramètre
+	 */
+	public abstract AiHero getHeroByColor(PredefinedColor color);
 
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////

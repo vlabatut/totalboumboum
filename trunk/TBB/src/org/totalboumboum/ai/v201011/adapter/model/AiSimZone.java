@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.totalboumboum.ai.v201011.adapter.data.AiBlock;
@@ -158,12 +159,12 @@ final class AiSimZone extends AiZone
 		// set own hero
 		AiHero oh = zone.getOwnHero();
 		PredefinedColor color = oh.getColor();
-		ownHero = getHeroByColor(color);
+		ownHero = getInternalHeroByColor(color);
 		
 		// set meta-data
 		for(AiHero hero: zone.getHeroes())
 		{	color = hero.getColor();
-			AiSimHero aiHero = getHeroByColor(color);
+			AiSimHero aiHero = getInternalHeroByColor(color);
 			int roundRank = zone.getRoundRank(hero);
 			roundRanks.put(aiHero,roundRank);
 			int matchRank = zone.getMatchRank(hero);
@@ -321,7 +322,7 @@ final class AiSimZone extends AiZone
 		else if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero)sprite;
 			PredefinedColor color = hero.getColor();
-			AiSimHero hero0 = getHeroByColor(color);
+			AiSimHero hero0 = getInternalHeroByColor(color);
 			internalHeroes.remove(hero0);
 			internalHeroes.add(hero);
 			externalHeroes.remove(hero0);
@@ -496,6 +497,18 @@ final class AiSimZone extends AiZone
 		return result;
 	}
 	
+	@Override
+	public List<AiBomb> getBombsByColor(PredefinedColor color)
+	{	List<AiBomb> result = new LinkedList<AiBomb>();
+		
+		for(AiBomb bomb: externalBombs)
+		{	if(bomb.getColor()==color)
+				result.add(bomb);
+		}
+		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -635,7 +648,7 @@ final class AiSimZone extends AiZone
 	 * @return	
 	 * 		le personnage correspondant à la couleur spécifiée
 	 */
-	private AiSimHero getHeroByColor(PredefinedColor color)
+	private AiSimHero getInternalHeroByColor(PredefinedColor color)
 	{	AiSimHero result = null;
 		Iterator<AiSimHero> it = internalHeroes.iterator();
 		while(result==null && it.hasNext())
@@ -646,6 +659,18 @@ final class AiSimZone extends AiZone
 		return result;
 	}
 	
+	@Override
+	public AiSimHero getHeroByColor(PredefinedColor color)
+	{	AiSimHero result = null;
+		Iterator<AiSimHero> it = internalHeroes.iterator();
+		while(result==null && it.hasNext())
+		{	AiSimHero hero = it.next();
+			if(hero.getColor()==color)
+				result = hero;
+		}
+		return result;
+	}
+
 	/**
 	 * renvoie la simulation de sprite de même numéro (id)
 	 * que celui passé en paramètre. Cette méthode permet

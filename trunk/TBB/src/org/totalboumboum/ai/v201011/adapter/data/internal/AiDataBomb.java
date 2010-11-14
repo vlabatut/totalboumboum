@@ -25,9 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201011.adapter.data.AiFire;
+import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
+import org.totalboumboum.ai.v201011.adapter.data.AiZone;
+import org.totalboumboum.engine.container.explosionset.Explosion;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Contact;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -44,6 +48,7 @@ import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
+import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -67,9 +72,11 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	protected AiDataBomb(AiDataTile tile, Bomb sprite)
 	{	super(tile,sprite);
 		
+		initFirePrototype();
 		initFuseParameters();
 		initRange();
 		initColor();
+		
 		updateWorking();
 		updateBlast();
 		updateCollisions();
@@ -88,6 +95,33 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// FIRE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** exemple de feu que la bombe peut générer */
+	private AiFire firePrototype;
+	
+	/**
+	 * initialise l'exemple de feu que cette bombe peut générer
+	 */
+	private void initFirePrototype()
+	{	Bomb bomb = getSprite();
+		ExplosionManager explosionManager = bomb.getExplosionManager();
+		Explosion explosion = explosionManager.getExplosion();
+		Fire fire = explosion.makeFire(null,bomb.getTile());
+		firePrototype = new AiDataFire(null,fire);
+	}
+	
+	@Override
+	public AiFire getFirePrototype()
+	{	return firePrototype;
+	}
+
+	@Override
+	public long getExplosionDuration()
+	{	return firePrototype.getBurningDuration();
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** déclenchement par compte à rebours */
@@ -98,8 +132,6 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	private boolean explosionTrigger;
 	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
-	/** durée de l'explosion (entre l'apparition et la disparition des flammes) */
-	private long explosionDuration;
 	/** latence de la bombe quand son explosion est déclenchée par une autre bombe */
 	private long latencyDuration;
 	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
@@ -130,7 +162,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	 */
 	private void initFuseParameters()
 	{	Bomb bomb = getSprite();
-	
+		
 		// délai normal avant l'explosion 
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 			normalDuration = (long)ability.getStrength();
@@ -151,10 +183,6 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
 			latencyDuration = (long)ability.getStrength();
 		}
-		// durée de l'explosion
-		{	ExplosionManager explosionManager = bomb.getExplosionManager();
-			explosionDuration = explosionManager.getExplosionDuration();
-		}
 		// probabilité de panne
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_FAILURE_PROBABILITY);
 			failureProbability = ability.getStrength();
@@ -164,11 +192,6 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	@Override
 	public long getNormalDuration()
 	{	return normalDuration;
-	}
-
-	@Override
-	public long getExplosionDuration()
-	{	return explosionDuration;
 	}
 
 	@Override
@@ -273,6 +296,16 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 		color = sprite.getColor();	
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// OWNER			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public AiHero getOwner()
+	{	AiZone zone = tile.getZone();
+		AiHero result = zone.getHeroByColor(color);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

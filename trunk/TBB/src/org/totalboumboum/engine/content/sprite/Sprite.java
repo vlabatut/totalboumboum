@@ -885,10 +885,15 @@ public abstract class Sprite
 	}
 	
 	public void center()
-	{	double posX = tile.getPosX();
-		double posY = tile.getPosY();
-		setCurrentPosX(posX);
-		setCurrentPosY(posY);
+	{	double posX = 0;
+		double posY = 0;
+		
+		if(tile!=null)
+		{	posX = tile.getPosX();
+			setCurrentPosX(posX);
+			posY = tile.getPosY();
+			setCurrentPosY(posY);
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////

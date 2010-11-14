@@ -77,22 +77,14 @@ abstract class AiSimSprite implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	/** id du sprite dans le jeu */
 	private int id;
-	/** compteur d'id */
-	private static int spriteId = Integer.MAX_VALUE; 
 	
 	@Override
 	public int getId()
 	{	return id;
 	}
 	
-	/**
-	 * permet de générer des id pour les sprites créés lors des simulation
-	 * @return
-	 */
-	protected int createNewId()
-	{	int result = spriteId;
-		spriteId--;
-		return result;
+	protected void setId(int id)
+	{	this.id = id;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -104,6 +96,16 @@ abstract class AiSimSprite implements AiSprite
 	@Override
 	public AiSimState getState()
 	{	return state;
+	}
+	
+	/**
+	 * modidifie l'état de ce sprites
+	 * 
+	 * @param 
+	 * 		state	le nouvel état à affecter à ce sprite
+	 */
+	public void setState(AiSimState state)
+	{	this.state = state;
 	}
 	
 	@Override
