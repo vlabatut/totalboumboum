@@ -264,18 +264,10 @@ if(sprite instanceof AiSimBomb)
 			duration = 0;
 		
 		// apply events for the resulting minimal time
-		for(Entry<AiSimSprite,AiSimState> entry: statesMap.entrySet())
-		{	AiSimSprite sprite0 = entry.getKey();
-if(sprite0 instanceof AiSimHero)
-	System.out.print("");
-if(sprite0 instanceof AiSimBomb)
-	System.out.print("");
-			AiSimState state = entry.getValue();
-			applyState(sprite0,state,result,duration);
-		}
+		updateSprites(statesMap,duration);
 		
 		// update the resulting zone
-		result.update(current,duration);
+		result.updateTime(duration);
 		
 		// update internal zones
 		previous = current;
@@ -538,6 +530,64 @@ if(sprite0 instanceof AiSimBomb)
 		return result;
 	}
 
+	/**
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
+	 * à partir de l'état courant.
+	 * 
+	 * @param sprite0	le sprite concerné (sa représentation initiale)
+	 * @param state	le nouvel état de ce sprite (à appliquer jusqu'à la fin du temps imparti)
+	 * @param time	la durée à prendre en compte
+	 */
+	private void updateSprites(HashMap<AiSimSprite,AiSimState> statesMap, long duration)
+	{	
+		for(Entry<AiSimSprite,AiSimState> entry: statesMap.entrySet())
+		{	// init
+			AiSimSprite sprite = entry.getKey();
+			AiSimState state = entry.getValue();
+		
+if(sprite instanceof AiSimHero)
+	System.out.print("");
+if(sprite instanceof AiSimBomb)
+	System.out.print("");
+			
+			// block
+			if(sprite instanceof AiSimBlock)
+			{	AiSimBlock block = (AiSimBlock)sprite;
+				updateBlock(block,state,duration);
+			}
+			
+			// bomb
+			else if(sprite instanceof AiSimBlock)
+			{	AiSimBomb bomb = (AiSimBomb)sprite;
+				updateBomb(bomb,state,duration);
+			}
+			
+			// fire
+			else if(sprite instanceof AiSimFire)
+			{	AiSimFire fire = (AiSimFire)sprite;
+				updateFire(fire,state,duration);
+			}
+			
+			// floor
+			else if(sprite instanceof AiSimFloor)
+			{	AiSimFloor floor = (AiSimFloor)sprite;
+				updateFloor(floor,state,duration);
+			}
+			
+			// hero
+			else if(sprite instanceof AiSimHero)
+			{	AiSimHero hero = (AiSimHero)sprite;
+				updateHero(hero,state,duration);
+			}
+			
+			// item
+			else if(sprite instanceof AiSimItem)
+			{	AiSimItem item = (AiSimItem)sprite;
+				updateItem(item,state,duration);
+			}
+		}
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -549,7 +599,7 @@ if(sprite0 instanceof AiSimBomb)
 	 * @param state	le nouvel état de ce sprite (à appliquer jusqu'à la fin du temps imparti)
 	 * @param time	la durée à prendre en compte
 	 */
-	private void simulateSprite(AiSimBlock block, AiSimState newState, long duration)
+	private void updateBlock(AiSimBlock block, AiSimState newState, long duration)
 	{	// init
 		AiStateName name = newState.getName();
 		
@@ -629,7 +679,7 @@ if(sprite0 instanceof AiSimBomb)
 	 * @param state	le nouvel état de ce sprite (à appliquer jusqu'à la fin du temps imparti)
 	 * @param time	la durée à prendre en compte
 	 */
-	private void simulateSprite(AiSimBomb bomb, AiSimState newState, long duration)
+	private void updateBomb(AiSimBomb bomb, AiSimState newState, long duration)
 	{	// init
 		AiStateName name = newState.getName();
 		
@@ -757,7 +807,7 @@ if(sprite0 instanceof AiSimBomb)
 	 * @param state	le nouvel état de ce sprite (à appliquer jusqu'à la fin du temps imparti)
 	 * @param time	la durée à prendre en compte
 	 */
-	private void simulateSprite(AiSimFire fire, AiSimState newState, long duration)
+	private void updateFire(AiSimFire fire, AiSimState newState, long duration)
 	{	// init
 		AiStateName name = newState.getName();
 		
@@ -853,7 +903,7 @@ if(sprite0 instanceof AiSimBomb)
 	 * @param state	le nouvel état de ce sprite (à appliquer jusqu'à la fin du temps imparti)
 	 * @param time	la durée à prendre en compte
 	 */
-	private void simulateSprite(AiSimFloor floor, AiSimState newState, long duration)
+	private void updateFloor(AiSimFloor floor, AiSimState newState, long duration)
 	{	// init
 		AiStateName name = newState.getName();
 		
@@ -898,7 +948,7 @@ if(sprite0 instanceof AiSimBomb)
 	 * @param state	le nouvel état de ce sprite (à appliquer jusqu'à la fin du temps imparti)
 	 * @param time	la durée à prendre en compte
 	 */
-	private void simulateSprite(AiSimHero hero, AiSimState newState, long duration)
+	private void updateHero(AiSimHero hero, AiSimState newState, long duration)
 	{	// init
 		AiStateName name = newState.getName();
 		
@@ -1114,7 +1164,7 @@ if(sprite0 instanceof AiSimBomb)
 	 * @param state	le nouvel état de ce sprite (à appliquer jusqu'à la fin du temps imparti)
 	 * @param time	la durée à prendre en compte
 	 */
-	private void simulateSprite(AiSimItem item, AiSimState newState, long duration)
+	private void updateItem(AiSimItem item, AiSimState newState, long duration)
 	{	// init
 		AiStateName name = newState.getName();
 		AiStateName name0 = item.getState().getName();
