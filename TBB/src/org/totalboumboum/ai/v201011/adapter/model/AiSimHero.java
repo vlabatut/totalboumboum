@@ -131,6 +131,10 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	{	return bombNumber;
 	}
 	
+	protected void updateBombNumber(int delta)
+	{	bombNumber = bombNumber + delta;
+	}
+	
 	@Override
 	public int getBombCount()
 	{	return bombCount;
@@ -186,12 +190,19 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	@Override
 	public boolean isCrossableBy(AiSprite sprite)
 	{	boolean result = false;
+		
+		// feu : jamais arrêté par un personnage
 		if(sprite instanceof AiSimFire)
 			result = true;
+		
+		// personnages : pareil
 		else if(sprite instanceof AiSimHero)
 			result = true;
+		
+		// pour tout le reste, on renverse la relation 
 		else
-			result = sprite.isCrossableBy(this);		
+			result = sprite.isCrossableBy(this);
+		
 		return result;
 	}
 

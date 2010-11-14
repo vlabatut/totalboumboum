@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201011.adapter.data.internal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -396,6 +397,18 @@ public final class AiDataZone extends AiZone
 	{	bombMap.put(bomb.getSprite(),bomb);	
 	}
 	
+	@Override
+	public List<AiBomb> getBombsByColor(PredefinedColor color)
+	{	List<AiBomb> result = new LinkedList<AiBomb>();
+		
+		for(AiBomb bomb: bombList)
+		{	if(bomb.getColor()==color)
+				result.add(bomb);
+		}
+		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -554,6 +567,18 @@ public final class AiDataZone extends AiZone
 	{	heroMap.put(hero.getSprite(),hero);	
 	}
 	
+	@Override
+	public AiHero getHeroByColor(PredefinedColor color)
+	{	AiHero result = null;
+		Iterator<AiHero> it = heroList.iterator();
+		while(result==null && it.hasNext())
+		{	AiHero hero = it.next();
+			if(hero.getColor()==color)
+				result = hero;
+		}
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

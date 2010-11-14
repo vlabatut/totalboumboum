@@ -27,9 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.totalboumboum.ai.v201011.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
-import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
@@ -46,9 +44,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-class AiModel
+class AiModel0
 {	
-	public AiModel(AiZone currentZone)
+	public AiModel0(AiZone currentZone)
 	{	// init the model with a copy of the current zone
 		this.current = new AiSimZone(currentZone,true);
 		// no previous zone for now
@@ -857,36 +855,8 @@ if(sprite0 instanceof AiSimBomb)
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// SPRITES			/////////////////////////////////////////////
+	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** compteur d'id */
-	private int spriteId = Integer.MAX_VALUE; 
-
-	/**
-	 * permet de générer des id pour les sprites créés lors des simulation
-	 * @return
-	 */
-	private int createNewId()
-	{	int result = spriteId;
-		spriteId--;
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// HEROES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public AiBomb dropBomb(AiTile tile, AiHero hero)
-	{	// get the tile
-		int line = tile.getLine();
-		int col = tile.getCol();
-		AiSimTile simTile = current.getTile(line,col);
-		// get the hero
-		AiSimHero simHero = current.getSpriteById(hero);
-		// drop the bomb
-		AiBomb bomb = dropBomb(simTile,simHero);
-		return bomb;
-	}
-
 	/**
 	 * Crée une nouvelle bombe appartenant au personnage passé en paramètre.
 	 * La bombe est placée au centre de la case passée en paramètre.
@@ -903,30 +873,22 @@ if(sprite0 instanceof AiSimBomb)
 	 * @return
 	 * 		la bombe si elle a pu être créée, ou null si ce n'est pas possible 
 	 */
-	protected AiSimBomb dropBomb(AiSimTile tile, AiSimHero hero)
+	protected AiBomb dropBomb(AiTile tile, AiHero hero)
 	{	AiSimBomb result = null;
-		
+	
 		// check if the hero can drop a bomb
 		int dropped = hero.getBombCount();
 		int max = hero.getBombNumber();
 		if(dropped<max)
 		{	// then check if the tile can host the bomb
 			AiBomb bomb = hero.getBombPrototype();
-			if(tile.isCrossableBy(bomb,false,false,true,false,true,false))
-			{	// create the new bomb
-				result = new AiSimBomb(bomb,tile);
+			int line = tile.getLine();
+			int col = tile.getCol();
+			AiSimTile simTile = current.getTile(line,col);
+					
+			if(simTile.isCrossableBy(bomb,false,false,true,false,true,false))
+			{	result = new AiSimBomb(bomb,simTile);
 				current.addSprite(result);
-				// set its properties
-				result.setId(createNewId());
-				AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
-				result.setState(state);
-				
-				// update the hero
-				hero.updateBombNumber(+1);
-				
-				// check for fire
-				if(tile.getFires().size()>0 && bomb.hasExplosionTrigger())
-					detonateBomb(bomb);
 			}
 		}
 		
@@ -948,62 +910,16 @@ if(sprite0 instanceof AiSimBomb)
 		return dropBomb(tile,hero);
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// BOMBS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void detonateBomb(AiBomb bomb)
-	{	// get the bomb
-		AiSimBomb simBomb = current.getSpriteById(bomb);
-		// detonate the bomb
-		detonateBomb(simBomb);
-	}
-	
-	protected void detonateBomb(AiSimBomb bomb)
-	{	// process each tile in the blast
+	protected void detonateBomb(AiBomb bomb)
+	{	
 		List<AiTile> blast = bomb.getBlast();
-		for(AiTile tile: blast)
-		{	AiSimTile simTile = (AiSimTile) tile;
-			burnTile(simTile,bomb);
-		}
-		
-		// update the bomb owner
-		AiSimHero hero = bomb.getOwner();
-		hero.updateBombNumber(1);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FIRES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected void burnTile(AiSimTile tile, AiSimBomb bomb)
-	{	AiFire firePrototype = bomb.getFirePrototype();
-		
-		// if the fire can appear, we affect it to the tile
-		if(tile.isCrossableBy(firePrototype))
-		{	// create sprite
-			AiSimFire fire = new AiSimFire(firePrototype,tile);
-			current.addSprite(fire);
-			// set properties
-			fire.setId(createNewId());
-			AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
-			fire.setState(state);
-		}
-		
-		// in any case, the tile content should be burned
-		for(AiBlock block: tile.getBlocks())
-		{	AiSimBlock simBlock = (AiSimBlock)block;
-			if(simBlock.isDestructible())
-			{
-				
-			}
-		}
-		
+		// reproduire le traitement fait dans le jeu
 		// faire détonner les autres bombes
 		// détruire les murs mous >> faire apparaître items
 		// détruire les items
 		// tuer les personnages
 		
 		// besoin d'un prototype de feu pour les bombes ?
-
 	}
 	
 	/*

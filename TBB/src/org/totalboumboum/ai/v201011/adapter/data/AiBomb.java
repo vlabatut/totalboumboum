@@ -35,6 +35,28 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public interface AiBomb extends AiSprite
 {	
 	/////////////////////////////////////////////////////////////////
+	// FIRE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * renvoie un exemple de feu que cette bombe peut générer
+	 * 
+	 * @return	
+	 * 		une représentation du feu généré par cette bombe
+	 */
+	public AiFire getFirePrototype();
+
+	/**
+	 * renvoie la durée de l'explosion de cette bombe.
+	 * Cette durée comprend l'apparition des flammes,
+	 * la durée de vie des flammes, et leur disparition.
+	 * Cette valeur n'est pas forcément constante, et peut varier d'une bombe à l'autre.
+	 * 
+	 * @return	
+	 * 		la durée de l'explosion
+	 */
+	public long getExplosionDuration();
+
+	/////////////////////////////////////////////////////////////////
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
@@ -78,17 +100,6 @@ public interface AiBomb extends AiSprite
 	 * 		le délai normal avant explosion exprimé en millisecondes
 	 */
 	public long getNormalDuration();
-
-	/**
-	 * renvoie la durée de l'explosion de cette bombe.
-	 * Cette durée comprend l'apparition des flammes,
-	 * la durée de vie des flammes, et leur disparition.
-	 * Cette valeur n'est pas forcément constante, et peut varier d'une bombe à l'autre.
-	 * 
-	 * @return	
-	 * 		la durée de l'explosion
-	 */
-	public long getExplosionDuration();
 
 	/**
 	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclenchée par
@@ -163,6 +174,19 @@ public interface AiBomb extends AiSprite
 	 * 		un symbole de type PredefinedColor représentant une couleur
 	 */
 	public PredefinedColor getColor();
+
+	/////////////////////////////////////////////////////////////////
+	// OWNER			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * renvoie le joueur qui a posé la bombe,
+	 * ou bien null si aucun joueur n'a posé cette bombe 
+	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
+	 * 
+	 * @return 
+	 * 		le joueur ayant posé la bombe, ou null si aucun joueur ne l'a posée
+	 */
+	public AiHero getOwner();
 
 	/////////////////////////////////////////////////////////////////
 	// LIFE TIME 		/////////////////////////////////////////////

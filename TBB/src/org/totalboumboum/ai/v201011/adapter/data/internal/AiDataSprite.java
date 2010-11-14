@@ -87,7 +87,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// ID				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** id du sprite dans le jeu */
-	private int id;
+	protected int id;
 	
 	@Override
 	public int getId()
@@ -98,7 +98,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** sprite représenté par cette classe */ 
-	private T sprite;
+	protected T sprite;
 
 	/**
 	 * teste si cette représentation correspond au sprite passé en paramètre
@@ -125,7 +125,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// CHECK			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** marquage du sprite (permet de détecter quels sprites ont disparu lors de la mise à jour */
-	private boolean checked;
+	protected boolean checked;
 
 	/**
 	 * teste si sprite est marqué ou pas
@@ -148,7 +148,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** état dans lequel se trouve ce sprite */
-	private AiDataState state;
+	protected AiDataState state;
 
 	@Override
 	public AiDataState getState()
@@ -178,7 +178,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** représentation de la case contenant ce sprite */
-	private AiDataTile tile;
+	protected AiDataTile tile;
 	
 	@Override
 	public AiDataTile getTile()
@@ -199,7 +199,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// BURN				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** temps nécessaire au sprite pour brûler (à condition qu'il puisse brûler) */
-	private long burningDuration = 0;
+	protected long burningDuration = 0;
 	
 	@Override
 	public long getBurningDuration()
@@ -210,7 +210,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** vitesse de déplacement courante en pixels/s (est nulle si le sprite ne bouge pas */
-	private double currentSpeed = 0;
+	protected double currentSpeed = 0;
 	
 	@Override
 	public double getCurrentSpeed()
@@ -227,11 +227,11 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// LOCATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** abscisse de ce sprite en pixels */
-	private double posX;
+	protected double posX;
 	/** ordonnée de ce sprite en pixels */
-	private double posY;
+	protected double posY;
 	/** altitude de ce sprite en pixels */
-	private double posZ;
+	protected double posZ;
 
 	@Override
 	public double getPosX()

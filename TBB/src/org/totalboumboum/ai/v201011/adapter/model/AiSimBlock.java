@@ -110,6 +110,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	public boolean isCrossableBy(AiSprite sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
+		
 		// si le sprite considéré est un personnage
 		if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero) sprite;
@@ -122,6 +123,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 			else if(stopHeroes==AiStopType.STRONG_STOP)
 				result = false;
 		}
+		
 		// si le sprite considéré est un feu
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire) sprite;
@@ -132,6 +134,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 			else if(stopFires==AiStopType.STRONG_STOP)
 				result = false;
 		}
+		
 		return result;
 	}
 

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
@@ -64,21 +65,21 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	protected AiSimBomb(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
 			boolean countdownTrigger, boolean remoteControlTrigger, boolean explosionTrigger,
-			long normalDuration, long explosionDuration, long latencyDuration, float failureProbability,
+			long normalDuration, long latencyDuration, float failureProbability, AiFire firePrototype,
 			AiStopType stopHeroes, AiStopType stopFires, boolean throughItems,
 			int range, boolean penetrating,
 			PredefinedColor color, boolean working, long time)
 	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		
 		// fuse
+		this.firePrototype = firePrototype;
 		this.countdownTrigger = countdownTrigger;
 		this.remoteControlTrigger = remoteControlTrigger;
 		this.explosionTrigger = explosionTrigger;
 		this.normalDuration = normalDuration;
-		this.explosionDuration = explosionDuration;
 		this.latencyDuration = latencyDuration;
 		this.failureProbability = failureProbability;
-	
+		
 		// collisions
 		this.stopHeroes = stopHeroes;
 		this.stopFires = stopFires;
@@ -109,9 +110,9 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 		remoteControlTrigger = sprite.hasRemoteControlTrigger();
 		explosionTrigger = sprite.hasExplosionTrigger();
 		normalDuration = sprite.getNormalDuration();
-		explosionDuration = sprite.getExplosionDuration();
 		latencyDuration = sprite.getLatencyDuration();
 		failureProbability = sprite.getFailureProbability();
+		firePrototype = sprite.getFirePrototype();
 
 		// collisions
 		stopHeroes = sprite.hasStopHeroes();
@@ -139,8 +140,6 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	private boolean explosionTrigger;
 	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
-	/** durée de l'explosion (entre l'apparition et la disparition des flammes) */
-	private long explosionDuration;
 	/** latence de la bombe quand son explosion est déclenchée par une autre bombe */
 	private long latencyDuration;
 	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
@@ -172,11 +171,6 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	}
 
 	@Override
-	public long getExplosionDuration()
-	{	return explosionDuration;
-	}
-
-	@Override
 	public long getLatencyDuration()
 	{	return latencyDuration;
 	}
@@ -184,15 +178,17 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// FIRE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * cette méthode est destinée à la simulation, et permet de créer un feu
-	 * (généralement pour simuler une explosion)
-	 * 
-	 * @param tile	la case qui devra contenir le feu
-	 */
-	protected AiSimFire createFire(AiSimTile tile)
-	{	AiSimFire result = new AiSimFire(createNewId(),tile,tile.getPosX(),tile.getPosY(),0,new AiSimState(),explosionDuration,0,penetrating,penetrating,penetrating);
-		return result;
+	/** exemple de feu que la bombe peut générer */
+	private AiFire firePrototype;
+	
+	@Override
+	public AiFire getFirePrototype()
+	{	return firePrototype;
+	}
+	
+	@Override
+	public long getExplosionDuration()
+	{	return firePrototype.getBurningDuration();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -217,7 +213,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	public List<AiTile> getBlast()
 	{	// init
 		List<AiTile> result = new ArrayList<AiTile>();
-		AiSimFire fire = createFire(tile);
+		AiSimFire fire = new AiSimFire(firePrototype,null);
 		
 		// center
 		result.add(tile);
@@ -276,6 +272,16 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// OWNER			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public AiSimHero getOwner()
+	{	AiSimZone zone = tile.getZone();
+		AiSimHero result = zone.getHeroByColor(color);
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** temps écoulé depuis que la bombe a été posée, exprimé en ms */
@@ -315,6 +321,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	public boolean isCrossableBy(AiSprite sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
+		
 		// si le sprite considéré est un personnage
 		if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero) sprite;
@@ -327,6 +334,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 			else if(stopHeroes==AiStopType.STRONG_STOP)
 				result = false;
 		}
+		
 		// si le sprite considéré est un feu
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire) sprite;
@@ -337,6 +345,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 			else if(stopFires==AiStopType.STRONG_STOP)
 				result = false;
 		}
+		
 		return result;
 	}
 	
