@@ -61,12 +61,13 @@ abstract class AiSimSprite implements AiSprite
 	 */
 	protected AiSimSprite(AiSprite sprite, AiSimTile tile)
 	{	// general
-		this.tile = tile;
 		state = new AiSimState(sprite);
 		burningDuration = sprite.getBurningDuration();
+		this.currentSpeed = sprite.getCurrentSpeed();
 		this.id = sprite.getId();
 		
 		// location
+		this.tile = tile;
 		this.posX = sprite.getPosX();
 		this.posY = sprite.getPosY();
 		this.posZ = sprite.getPosZ();

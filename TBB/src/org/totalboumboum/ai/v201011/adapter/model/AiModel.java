@@ -27,11 +27,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.totalboumboum.ai.v201011.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiHero;
-import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiState;
@@ -40,7 +38,6 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * 
@@ -51,7 +48,8 @@ class AiModel
 {	
 	public AiModel(AiZone currentZone)
 	{	// init the model with a copy of the current zone
-		this.current = new AiSimZone(currentZone,true);
+		this.current = new AiSimZone(currentZone);
+		
 		// no previous zone for now
 		previous = null;
 	}	
@@ -142,37 +140,30 @@ class AiModel
 	 * Cette méthode est particulièrement utile quand on veut savoir quel sera
 	 * l'état estimé de la zone quand le personnage que l'on controle passera
 	 * dans la case suivante.
-	 * <b>Attention:</b> le changement d'état peut aussi être du au fait que le 
-	 * personnage a commencé à brûler
+	 * <b>Attention:</b> le changement d'état peut aussi être dû au fait que le 
+	 * personnage a commencé à brûler.
 	 * 
-	 * @param hero0	le personnage sur lequel porte la condition
-	 * @return	vrai si le changement d'état est dû à un déplacement (et pas à un accident)
+	 * @param 
+	 * 		hero	le personnage sur lequel porte la condition
+	 * @return	
+	 * 		vrai si le changement d'état est dû à un déplacement (et pas à un accident)
 	 */
-	public boolean predictZoneUntilCondition(AiSimHero hero0)
+	public boolean predictZoneUntilCondition(AiHero hero)
 	{	// init
-		PredefinedColor color0 = hero0.getColor();
 		HashMap<AiSprite,AiState> specifiedStates = new HashMap<AiSprite, AiState>();
 		
-		AiSimHero hero = null;
+		boolean found = false;
 		do
 		{	// simulate
 			predictZone(specifiedStates);
 			// check if the hero was among the limit sprites
-			Iterator<AiSimSprite> it = limitSprites.iterator();
-			while(hero==null && it.hasNext())
-			{	AiSimSprite sprite = it.next();
-				if(sprite instanceof AiSimHero)
-				{	AiSimHero h = (AiSimHero)sprite;
-					PredefinedColor color = h.getColor();
-					if(color0==color)
-						hero = h;
-				}
-			}
+			found = limitSprites.contains(hero);
 		}
-		while(hero==null);
+		while(!found);
 		
 		// check if the hero is still safe
-		AiSimState state = hero.getState();
+		hero = current.getSpriteById(hero); //get the latest representation of the sprite
+		AiState state = hero.getState();
 		AiStateName name = state.getName();
 		boolean result = name==AiStateName.FLYING || name==AiStateName.MOVING || name==AiStateName.STANDING;
 		return result;
@@ -194,8 +185,9 @@ class AiModel
 	 * @param specifiedStates	map associant un état à un sprite, permettant de forcer un sprite à prendre un certain état 
 	 */
 	public void predictZone(HashMap<AiSprite,AiState> specifiedStates)
-	{	// create a new, empty zone
-		AiSimZone result = new AiSimZone(current,false);
+	{	// create a copy of the current zone
+		previous = current;
+		current = new AiSimZone(previous);
 		HashMap<AiSimSprite,AiSimState> statesMap = new HashMap<AiSimSprite, AiSimState>();
 		
 		// init specified states
@@ -208,6 +200,28 @@ class AiModel
 			localSpecifiedStates.put(simSprite,simState);
 		}
 		
+		// update detonating bombs (can mess up the whole zone)
+		for(AiSimBomb bomb: current.getInternalBombs())
+		{	AiSimState state0 = bomb.getState();
+			AiStateName name0 = state0.getName();
+			AiSimState state = localSpecifiedStates.get(bomb);
+			boolean detonate = false;
+			if(name0==AiStateName.STANDING || name0==AiStateName.MOVING)
+			{	if(state!=null)
+					detonate = state.getName()==AiStateName.BURNING;
+				else
+				{	long normalDuration = bomb.getNormalDuration();
+					long time0 = state0.getTime();
+					detonate = bomb.hasCountdownTrigger() && time0>=normalDuration;
+				}
+			}
+			if(detonate)
+				detonateBomb(bomb);
+		}
+		
+		
+		
+		
 		// list all sprites
 		List<AiSimSprite> sprites = new ArrayList<AiSimSprite>();
 		sprites.addAll(current.getInternalBlocks());
@@ -218,7 +232,7 @@ class AiModel
 		sprites.addAll(current.getInternalItems());
 		
 		// first review all the bombs to detect those on the point of exploding
-		// and refresh the next state of the concerned tiles (ie those on the explosion path)
+		// and refresh the next state of the concerned tiles (i.e. those on the explosion path)
 		List<AiSimTile> burntTiles = new ArrayList<AiSimTile>();
 		List<AiSimBomb> explodedBombs = new ArrayList<AiSimBomb>();
 		for(AiSimBomb bomb: current.getInternalBombs())
@@ -267,11 +281,7 @@ if(sprite instanceof AiSimBomb)
 		updateSprites(statesMap,duration);
 		
 		// update the resulting zone
-		result.updateTime(duration);
-		
-		// update internal zones
-		previous = current;
-		current = result;
+		current.updateTime(duration);
 	}
 	
 	/**
@@ -840,8 +850,8 @@ if(sprite instanceof AiSimBomb)
 		}
 	}
 
-	protected void burnTile(AiSimTile tile, AiSimBomb bomb)
-	{	AiFire firePrototype = bomb.getFirePrototype();
+	protected void burnTile(AiSimTile tile, AiSimBomb detonatingBomb)
+	{	AiFire firePrototype = detonatingBomb.getFirePrototype();
 		
 		// if the fire can appear, we affect it to the tile
 		if(tile.isCrossableBy(firePrototype))
@@ -857,37 +867,38 @@ if(sprite instanceof AiSimBomb)
 		// in any case, the tile content should be burned
 		
 		// blocks
-		for(AiBlock block: tile.getBlocks())
-		{	AiSimBlock simBlock = (AiSimBlock)block;
-			if(simBlock.isDestructible())
+		for(AiSimBlock block: tile.getInternalBlocks())
+		{	AiStateName name = block.getState().getName();
+			if(block.isDestructible() && name==AiStateName.STANDING)
 			{	AiSimState state = new AiSimState(AiStateName.BURNING,Direction.NONE,0);
-				simBlock.setState(state);
+				block.setState(state);
 			}
 		}
 		
 		// bombs
-		for(AiBomb tempBomb: tile.getBombs())
-		{	AiSimBomb simBomb = (AiSimBomb)tempBomb;
-			if(simBomb.hasExplosionTrigger())
-				detonateBomb(simBomb);
+		for(AiSimBomb bomb: tile.getInternalBombs())
+		{	AiStateName name = bomb.getState().getName();
+			if(bomb.hasExplosionTrigger() && (name==AiStateName.STANDING || name==AiStateName.MOVING))
+				detonateBomb(bomb);
 		}
 
 		// heroes
-		for(AiHero hero: tile.getHeroes())
-		{	AiSimHero simHero = (AiSimHero)hero;
-			if(!simHero.hasThroughFires())
+		for(AiSimHero hero: tile.getInternalHeroes())
+		{	AiStateName name = hero.getState().getName();
+			if(!hero.hasThroughFires() && (name==AiStateName.STANDING || name==AiStateName.MOVING))
 			{	Direction direction = hero.getState().getDirection();
 				AiSimState state = new AiSimState(AiStateName.BURNING,direction,0);
-				simHero.setState(state);
+				hero.setState(state);
 			}
 		}
 		
 		// items
-		for(AiItem item: tile.getItems())
-		{	AiSimItem simItem = (AiSimItem)item;
+		for(AiSimItem item: tile.getInternalItems())
+		{	AiStateName name = item.getState().getName();
 			//if(simItem.isDestructible())
+			if(name==AiStateName.STANDING)
 			{	AiSimState state = new AiSimState(AiStateName.BURNING,Direction.NONE,0);
-				simItem.setState(state);
+				item.setState(state);
 			}
 		}
 	}
