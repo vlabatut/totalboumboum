@@ -34,7 +34,6 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiItem;
 import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
-import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -64,7 +63,7 @@ final class AiSimZone extends AiZone
 	 * @return	
 	 * 		une nouvelle zone vide de mêmes dimensions
 	 */
-	protected AiSimZone(AiZone zone, boolean fullCopy)
+	protected AiSimZone(AiZone zone)
 	{	// matrix and tiles
 		AiTile[][] m = zone.getMatrix();
 		height = zone.getHeight();
@@ -84,74 +83,47 @@ final class AiSimZone extends AiZone
 			}
 		}
 		
-		if(fullCopy)
-		{	for(int line=0;line<height;line++)
-			{	for(int col=0;col<width;col++)
-				{	AiTile tile = zone.getTile(line,col);
-					AiSimTile simTile = matrix[line][col];
-					// blocks
-					List<AiBlock> blocks = tile.getBlocks();
-					for(AiBlock block: blocks)
-					{	AiSimBlock simBlock = new AiSimBlock(block,simTile);
-						addSprite(simBlock);
-					}
-					// bombs
-					List<AiBomb> bombs = tile.getBombs();
-					for(AiBomb bomb: bombs)
-					{	AiSimBomb simBomb = new AiSimBomb(bomb,simTile);
-						addSprite(simBomb);
-					}
-					// fires
-					List<AiFire> fires = tile.getFires();
-					for(AiFire fire: fires)
-					{	AiSimFire simFire = new AiSimFire(fire,simTile);
-						addSprite(simFire);
-					}
-					// floors
-					List<AiFloor> floors = tile.getFloors();
-					for(AiFloor floor: floors)
-					{	AiSimFloor simFloor = new AiSimFloor(floor,simTile);
-						addSprite(simFloor);
-					}
-					// heroes
-					List<AiHero> heroes = tile.getHeroes();
-					for(AiHero hero: heroes)
-					{	AiSimHero simHero = new AiSimHero(hero,simTile);
-						addSprite(simHero);
-					}
-					// items
-					List<AiItem> items = tile.getItems();
-					for(AiItem item: items)
-					{	AiSimItem simItem = new AiSimItem(item,simTile);
-						addSprite(simItem);
-					}
+		// sprites
+		for(int line=0;line<height;line++)
+		{	for(int col=0;col<width;col++)
+			{	AiTile tile = zone.getTile(line,col);
+				AiSimTile simTile = matrix[line][col];
+				// blocks
+				List<AiBlock> blocks = tile.getBlocks();
+				for(AiBlock block: blocks)
+				{	AiSimBlock simBlock = new AiSimBlock(block,simTile);
+					addSprite(simBlock);
 				}
-			}
-		}
-		else
-		{	// process heroes
-			for(AiHero hero: zone.getHeroes())
-			{	AiSimTile tile = null;
-				AiSimState state = new AiSimState(AiStateName.ENDED,Direction.NONE,0);
-				double posX = hero.getPosX();
-				double posY = hero.getPosY();
-				double posZ = hero.getPosZ();
-				long burningDuration = hero.getBurningDuration();
-				double currentSpeed = hero.getCurrentSpeed();
-				AiBomb bombPrototype = hero.getBombPrototype();
-				int bombNumber = hero.getBombNumber();
-				int bombCount = hero.getBombCount();
-				boolean throughBlocks = hero.hasThroughBlocks();
-				boolean throughBombs = hero.hasThroughBombs();
-				boolean throughFires = hero.hasThroughFires();
-				PredefinedColor color = hero.getColor();
-				double walkingSpeed = hero.getWalkingSpeed();
-				int id = hero.getId();
-				AiSimHero h = new AiSimHero(id,tile,posX, posY, posZ, state,burningDuration,currentSpeed,
-						bombPrototype,bombNumber,bombCount,
-						throughBlocks,throughBombs,throughFires,color,walkingSpeed);
-				internalHeroes.add(h);
-				externalHeroes.add(h);
+				// bombs
+				List<AiBomb> bombs = tile.getBombs();
+				for(AiBomb bomb: bombs)
+				{	AiSimBomb simBomb = new AiSimBomb(bomb,simTile);
+					addSprite(simBomb);
+				}
+				// fires
+				List<AiFire> fires = tile.getFires();
+				for(AiFire fire: fires)
+				{	AiSimFire simFire = new AiSimFire(fire,simTile);
+					addSprite(simFire);
+				}
+				// floors
+				List<AiFloor> floors = tile.getFloors();
+				for(AiFloor floor: floors)
+				{	AiSimFloor simFloor = new AiSimFloor(floor,simTile);
+					addSprite(simFloor);
+				}
+				// heroes
+				List<AiHero> heroes = tile.getHeroes();
+				for(AiHero hero: heroes)
+				{	AiSimHero simHero = new AiSimHero(hero,simTile);
+					addSprite(simHero);
+				}
+				// items
+				List<AiItem> items = tile.getItems();
+				for(AiItem item: items)
+				{	AiSimItem simItem = new AiSimItem(item,simTile);
+					addSprite(simItem);
+				}
 			}
 		}
 		
@@ -172,19 +144,21 @@ final class AiSimZone extends AiZone
 			statsRanks.put(aiHero,statsRank);
 		}
 		
-		// misc
+		// items
 		hiddenItemsCount = zone.getHiddenItemsCount();
 		for(AiItemType type: AiItemType.values())
 		{	int value = zone.getHiddenItemsCount(type);
 			hiddenItemsCounts.put(type,value);
 		}
+		
+		// time
 		totalTime = zone.getTotalTime();
 		limitTime = zone.getLimitTime();
 		elapsedTime = 0;
 	}
 
-	//NOTE temp constructor
-	protected AiSimZone(int height, int width, AiSimHero hero)
+	//TODO commentaires
+	protected AiSimZone(int height, int width)
 	{	this.height = height;
 		this.width = width;
 		pixelLeftX = 0;
@@ -201,17 +175,13 @@ final class AiSimZone extends AiZone
 			}
 		}
 		
-		internalHeroes.add(hero);
-		externalHeroes.add(hero);
-		ownHero = hero;
-		roundRanks.put(hero,1);
-		matchRanks.put(hero,1);
-		statsRanks.put(hero,1);
+		// items
+		hiddenItemsCount = 0;
 		
+		// time
 		totalTime = 0;
 		elapsedTime = 0;
 		limitTime = 0;
-
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -269,8 +239,6 @@ final class AiSimZone extends AiZone
 	{	totalTime = totalTime + duration;
 		elapsedTime = duration;
 	}
-		
-
 	
 	/////////////////////////////////////////////////////////////////
 	// TILES			/////////////////////////////////////////////
@@ -291,8 +259,8 @@ final class AiSimZone extends AiZone
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * permet de rajouter un sprite dans cette zone
-	 * remarque : le sprite a obligatoirement déjà été affecté à une case 
+	 * permet de rajouter un sprite dans cette zone<br/>
+	 * <b>Attention :</b> le sprite a obligatoirement déjà été affecté à une case 
 	 * lors de sa construction, donc il s'agit ici simplement de mettre
 	 * à jour les listes de sprites de la zone
 	 * 
@@ -324,25 +292,9 @@ final class AiSimZone extends AiZone
 		}
 		else if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero)sprite;
-			PredefinedColor color = hero.getColor();
-			AiSimHero hero0 = getInternalHeroByColor(color);
-			internalHeroes.remove(hero0);
 			internalHeroes.add(hero);
-			externalHeroes.remove(hero0);
 			externalHeroes.add(hero);
 			remainingHeroList.add(hero);
-			if(ownHero==hero0)
-				ownHero = hero;
-			int roundRank = roundRanks.get(hero0);
-			roundRanks.remove(hero0);
-			roundRanks.put(hero,roundRank);
-			int matchRank = matchRanks.get(hero0);
-			matchRanks.remove(hero0);
-			matchRanks.put(hero,matchRank);
-			int statsRank = statsRanks.get(hero0);
-			statsRanks.remove(hero0);
-			statsRanks.put(hero,statsRank);
-			sprite = hero;
 		}
 		else if(sprite instanceof AiSimItem)
 		{	AiSimItem item = (AiSimItem)sprite;
@@ -377,7 +329,8 @@ final class AiSimZone extends AiZone
 		}
 		else if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero)sprite;
-			remainingHeroList.remove(hero); //only remove from this list, cause the other ones must stay complete
+			// only remove from this list, cause the other ones must stay complete
+			remainingHeroList.remove(hero);
 		}
 		else if(sprite instanceof AiSimItem)
 		{	AiSimItem item = (AiSimItem)sprite;
@@ -735,6 +688,27 @@ final class AiSimZone extends AiZone
 		return result;
 	}
 	
+	/**
+	 * insère un nouveau personnage dans la zone
+	 * (méthode utilisée lors de la simulation)
+	 * 
+	 * @param 
+	 * 		hero	le personnage à insérer
+	 * @param 
+	 * 		isOwnHero	indique si le personnage à insérer est celui contrôlé par l'IA
+	 */
+	protected void setOwnHero(AiSimHero hero, boolean isOwnHero)
+	{	// sprites
+		addSprite(hero);
+		if(isOwnHero)
+			ownHero = hero;
+		
+		// ranks
+		roundRanks.put(hero,0);
+		matchRanks.put(hero,0);
+		statsRanks.put(hero,0);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -806,7 +780,7 @@ final class AiSimZone extends AiZone
 	public AiSimHero getOwnHero()
 	{	return ownHero;	
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

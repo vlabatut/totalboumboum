@@ -65,56 +65,6 @@ final class AiSimTile extends AiTile
 		this.posY = posY;
 	}
 
-	/**
-	 * construit une simulation de la case passée en paramètre
-	 * 
-	 * @param tile	case simulée
-	 * @param zone	zone contenant la simulation
-	 */
-/*	protected AiSimTile(AiTile tile, AiSimZone zone)
-	{	this.zone = zone;
-
-		size = RoundVariables.scaledTileDimension;
-
-		// location
-		line = tile.getLine();
-		col = tile.getCol();
-		posX = tile.getPosX();
-		posY = tile.getPosY();
-		
-		// sprites
-		for(AiBlock s1: tile.getBlocks())
-		{	AiSimBlock s2 = new AiSimBlock(s1,this);
-			internalBlocks.add(s2);
-			externalBlocks.add(s2);
-		}
-		for(AiBomb s1: tile.getBombs())
-		{	AiSimBomb s2 = new AiSimBomb(s1,this);
-			internalBombs.add(s2);
-			externalBombs.add(s2);
-		}
-		for(AiFire s1: tile.getFires())
-		{	AiSimFire s2 = new AiSimFire(s1,this);
-			internalFires.add(s2);
-			externalFires.add(s2);
-		}
-		for(AiFloor s1: tile.getFloors())
-		{	AiSimFloor s2 = new AiSimFloor(s1,this);
-			internalFloors.add(s2);
-			externalFloors.add(s2);
-		}
-		for(AiHero s1: tile.getHeroes())
-		{	AiSimHero s2 = new AiSimHero(s1,this);
-			internalHeroes.add(s2);
-			externalHeroes.add(s2);
-		}
-		for(AiItem s1: tile.getItems())
-		{	AiSimItem s2 = new AiSimItem(s1,this);
-			internalItems.add(s2);
-			externalItems.add(s2);
-		}
-	}
-*/
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
