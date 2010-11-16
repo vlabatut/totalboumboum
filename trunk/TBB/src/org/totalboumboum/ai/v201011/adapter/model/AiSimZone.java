@@ -699,7 +699,7 @@ final class AiSimZone extends AiZone
 	 * @param 
 	 * 		isOwnHero	indique si le personnage à insérer est celui contrôlé par l'IA
 	 */
-	protected void setOwnHero(AiSimHero hero, boolean isOwnHero)
+	protected void addHero(AiSimHero hero, boolean isOwnHero)
 	{	// sprites
 		addSprite(hero);
 		if(isOwnHero)
