@@ -28,7 +28,7 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
  * effectuée par le sprite concerné, ou bien l'action qu'il subit.
  * Ces actions sont différentes des 'gestes' utilisés dans le jeu,
  * car elles sont plus simples : une de ces actions peut correspondre à 
- * plusieurs gestes différents. Par exemple, ce STANDING-ci
+ * plusieurs gestes différents. Par exemple, MOVING
  * peut correspondre à un joueur qui marche (WALKING), ou bien à une bombe 
  * en train de glisser (SLIDING), ou bien à un joueur en train de pousser 
  * une bombe (PUSHING), etc.
