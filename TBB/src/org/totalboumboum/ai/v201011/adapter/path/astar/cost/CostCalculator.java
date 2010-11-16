@@ -42,17 +42,23 @@ public abstract class CostCalculator
 	 * à proximité, etc., et des influences positives telles que la présence de bonus.
 	 * Si les deux cases ne sont pas voisines, le résultat est indéterminé.
 	 * 
-	 * @param start	la case de départ 
-	 * @param end	la case d'arrivée (qui doit être voisine)
-	 * @return	le coût du déplacement
+	 * @param start	
+	 * 		la case de départ 
+	 * @param end	
+	 * 		la case d'arrivée (qui doit être voisine)
+	 * @return	
+	 * 		le coût du déplacement
 	 */
 	public abstract double processCost(AiTile start, AiTile end) throws StopRequestException;
 	
 	/**
 	 * calcule le coût d'un chemin, i.e. la somme des coûts des actions
 	 * consistant à passer d'une case du chemin à la suivante.
+	 * 
 	 * @param path
+	 * 		chemin à traiter
 	 * @return
+	 * 		le coût de ce chemin
 	 */
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = 0;

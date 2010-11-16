@@ -38,9 +38,12 @@ public class BasicCostCalculator extends CostCalculator
 	 * Les deux cases sont supposées être voisines, 
 	 * on se contente de renvoyer leur distance.
 	 * 
-	 * @param start	la case de départ
-	 * @param end	la case d'arrivée
-	 * @return la distance entre ces cases (ici : 1, puisqu'elles sont voisines)
+	 * @param start	
+	 * 		la case de départ
+	 * @param end	
+	 * 		la case d'arrivée
+	 * @return 
+	 * 		la distance entre ces cases (ici : 1, puisqu'elles sont voisines)
 	 */ 
 	@Override
 	public double processCost(AiTile start, AiTile end) throws StopRequestException
