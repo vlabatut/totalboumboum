@@ -92,7 +92,7 @@ public final class AiModelTest
 		zone.addHero(hero,true);
 
 		// bomb
-		stopHeroes = AiStopType.WEAK_STOP;
+/*		stopHeroes = AiStopType.WEAK_STOP;
 		stopFires = AiStopType.WEAK_STOP;
 		tile = zone.getTile(5,5);
 		posX = tile.getPosX();
@@ -106,7 +106,7 @@ public final class AiModelTest
 				stopHeroes,stopFires,throughItems,bombRange,penetrating,
 				color,working,0);
 		zone.addSprite(bomb);
-
+*/
 		// hardwalls
 		currentSpeed = 0;
 		destructible = false;
