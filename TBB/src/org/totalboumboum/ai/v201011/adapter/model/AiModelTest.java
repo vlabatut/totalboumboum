@@ -21,25 +21,12 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
 
-import org.totalboumboum.ai.v201011.adapter.data.AiBlock;
-import org.totalboumboum.ai.v201011.adapter.data.AiBomb;
-import org.totalboumboum.ai.v201011.adapter.data.AiFire;
-import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
-import org.totalboumboum.ai.v201011.adapter.data.AiHero;
-import org.totalboumboum.ai.v201011.adapter.data.AiItem;
-import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiState;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
-import org.totalboumboum.ai.v201011.adapter.data.AiTile;
-import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.images.PredefinedColor;
@@ -63,7 +50,7 @@ public final class AiModelTest
 		int bombRange=3,bombNumber=1,bombCount=0,id=0;
 		double posX, posY, posZ=0,currentSpeed,walkingSpeed=100;
 		float failureProbability=0;
-		long burningDuration=100,normalDuration=1000,explosionDuration=100,latencyDuration=10;
+		long burningDuration=100,normalDuration=1000,latencyDuration=10;
 		boolean destructible,throughBlocks=false,throughBombs=false,throughFires=false,throughItems=false,countdownTrigger=true,remoteControlTrigger=false,explosionTrigger=true,penetrating=false,working=true;
 		AiStopType stopHeroes, stopFires;
 		PredefinedColor color; 
@@ -75,7 +62,9 @@ public final class AiModelTest
 		zone = new AiSimZone(7,7);
 		
 		// fire prototype
-		firePrototype = new AiSimFire(id, tile, posX, posY, posZ, state, burningDuration, currentSpeed, throughBlocks, throughBombs, throughItems)
+		firePrototype = new AiSimFire(id++,null,0,0,0,
+				state,burningDuration,0,
+				throughBlocks,throughBombs,throughItems);
 		
 		// bomb prototype
 		stopHeroes = AiStopType.WEAK_STOP;
@@ -83,12 +72,11 @@ public final class AiModelTest
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		color = PredefinedColor.WHITE;
 		bombPrototype = new AiSimBomb(id++,null,0,0,0,
-				state,burningDuration,currentSpeed,walkingSpeed,
+				state,burningDuration,0,walkingSpeed,
 				countdownTrigger,remoteControlTrigger,explosionTrigger,
 				normalDuration,latencyDuration,failureProbability,firePrototype, 
 				stopHeroes,stopFires,throughItems,bombRange,penetrating,
 				color,working,0);
-		zone.addSprite(bomb);
 
 		// hero
 		tile = zone.getTile(1,1);
@@ -101,7 +89,7 @@ public final class AiModelTest
 				bombPrototype,bombNumber,bombCount, 
 				throughBlocks,throughBombs,throughFires, 
 				color,walkingSpeed);
-		zone.addSprite(hero);
+		zone.addHero(hero,true);
 
 		// bomb
 		stopHeroes = AiStopType.WEAK_STOP;
@@ -111,9 +99,12 @@ public final class AiModelTest
 		posY = tile.getPosY();
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		color = PredefinedColor.WHITE;
-		bomb = new AiSimBomb(tile,posX,posY,posZ,state,burningDuration,currentSpeed, 
-				countdownTrigger,remoteControlTrigger,explosionTrigger,normalDuration,explosionDuration,latencyDuration,failureProbability,
-				stopHeroes,stopFires,throughItems,bombRange,penetrating,color,working,0);
+		bomb = new AiSimBomb(id++,tile,posX,posY,posZ,state,
+				burningDuration,currentSpeed,walkingSpeed,
+				countdownTrigger,remoteControlTrigger,explosionTrigger,
+				normalDuration,latencyDuration,failureProbability,firePrototype,
+				stopHeroes,stopFires,throughItems,bombRange,penetrating,
+				color,working,0);
 		zone.addSprite(bomb);
 
 		// hardwalls
@@ -128,7 +119,8 @@ public final class AiModelTest
 			posX = tile.getPosX();
 			posY = tile.getPosY();
 			state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
-			block = new AiSimBlock(tile,posX,posY,posZ,state,burningDuration,currentSpeed,destructible,stopHeroes,stopFires);
+			block = new AiSimBlock(id++,tile,posX,posY,posZ,state,
+					burningDuration,currentSpeed,destructible,stopHeroes,stopFires);
 			zone.addSprite(block);
 		}
 		
@@ -142,7 +134,7 @@ public final class AiModelTest
 		long duration = 0;
 		int iteration = 0;
 		do
-		{	model.predictZone(specifiedStates);
+		{	model.simulate(specifiedStates);
 			duration = model.getDuration();
 			
 			System.out.println("iteration "+iteration);
@@ -153,5 +145,4 @@ public final class AiModelTest
 		}
 		while(duration!=0);
 	}
-
 }
