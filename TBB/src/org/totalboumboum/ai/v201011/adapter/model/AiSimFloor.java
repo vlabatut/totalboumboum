@@ -37,7 +37,22 @@ final class AiSimFloor extends AiSimSprite implements AiFloor
 	 * crée une simulation du sol passé en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
-	 * @param tile	case contenant le sprite
+	 * @param id
+	 * 		numéro d'identification du sol
+	 * @param tile
+	 * 		case contenant le sol
+	 * @param posX
+	 * 		abscisse du sol
+	 * @param posY
+	 * 		ordonnée du sol
+	 * @param posZ
+	 * 		hauteur du sol (forcément 0)
+	 * @param state
+	 * 		état du sol
+	 * @param burningDuration
+	 * 		durée de combustion du sol
+	 * @param currentSpeed
+	 * 		vitesse courante de déplacement du sol (inutile ici)
 	 */
 	protected AiSimFloor(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed)
@@ -48,8 +63,10 @@ final class AiSimFloor extends AiSimSprite implements AiFloor
 	 * crée une simulation du sol passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param sprite	sprite à simuler
-	 * @param tile	case contenant le sprite
+	 * @param sprite
+	 * 		sprite à simuler
+	 * @param tile
+	 * 		case contenant le sprite
 	 */
 	protected AiSimFloor(AiFloor sprite, AiSimTile tile)
 	{	super(sprite,tile);		

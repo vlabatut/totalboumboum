@@ -56,10 +56,10 @@ final class AiSimZone extends AiZone
 	 * si la paramètre fullCopy est faux, les sprites ne sont pas copiés,
 	 * sinon tout est copié.
 	 * 
-	 * @param 
-	 * 		zone	la zone de référence
-	 * @param 
-	 * 		fullCopy	indique si les sprites doivent aussi être copiés ou pas
+	 * @param zone
+	 * 		la zone de référence
+	 * @param fullCopy
+	 * 		indique si les sprites doivent aussi être copiés ou pas
 	 * @return	
 	 * 		une nouvelle zone vide de mêmes dimensions
 	 */
@@ -200,12 +200,12 @@ final class AiSimZone extends AiZone
 	 * dans la direction spécifiée (en considérant le fait que le niveau
 	 * est fermé.
 	 *  
-	 *  @param 
-	 *  	line	ligne de la case à traite
-	 *  @param 
-	 *  	col	colonne de la case à traiter
-	 *  @param 
-	 *  	direction	direction de la case voisine relativement à la case de référence
+	 *  @param line
+	 *  	ligne de la case à traite
+	 *  @param col
+	 *  	colonne de la case à traiter
+	 *  @param direction
+	 *  	direction de la case voisine relativement à la case de référence
 	 *  @return	
 	 *  	la case voisine dans la direction précisée
 	 */
@@ -235,6 +235,7 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	// TODO comment
 	protected void updateTime(long duration)
 	{	totalTime = totalTime + duration;
 		elapsedTime = duration;
@@ -264,8 +265,8 @@ final class AiSimZone extends AiZone
 	 * lors de sa construction, donc il s'agit ici simplement de mettre
 	 * à jour les listes de sprites de la zone
 	 * 
-	 *  @param
-	 *  	sprite	le sprite à rajouter à cette zone
+	 *  @param sprite
+	 *  	le sprite à rajouter à cette zone
 	 */
 	protected void addSprite(AiSimSprite sprite)
 	{	AiSimTile tile = sprite.getTile();
@@ -305,6 +306,7 @@ final class AiSimZone extends AiZone
 		tile.addSprite(sprite);
 	}
 	
+	// TODO comment
 	protected void removeSprite(AiSimSprite sprite)
 	{	// sprite lists
 		if(sprite instanceof AiSimBlock)
@@ -350,8 +352,8 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param 
-	 * 		sprite	le sprite ciblé
+	 * @param sprite
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -426,8 +428,8 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param 
-	 * 		sprite	le sprite ciblé
+	 * @param sprite
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -473,8 +475,8 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param 
-	 * 		sprite	le sprite ciblé
+	 * @param sprite
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -532,8 +534,8 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param 
-	 * 		sprite	le sprite ciblé
+	 * @param sprite
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -579,8 +581,8 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param 
-	 * 		sprite	le sprite ciblé
+	 * @param sprite
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -636,8 +638,8 @@ final class AiSimZone extends AiZone
 	/**
 	 * retrouve l'objet simulant un personnage grâce à sa couleur
 	 * 
-	 * @param 
-	 * 		color	couleur du personnage à retrouver
+	 * @param color
+	 * 		couleur du personnage à retrouver
 	 * @return	
 	 * 		le personnage correspondant à la couleur spécifiée
 	 */
@@ -671,8 +673,8 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param 
-	 * 		sprite	le sprite ciblé
+	 * @param sprite
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -692,8 +694,8 @@ final class AiSimZone extends AiZone
 	 * insère un nouveau personnage dans la zone
 	 * (méthode utilisée lors de la simulation)
 	 * 
-	 * @param 
-	 * 		hero	le personnage à insérer
+	 * @param hero
+	 * 		le personnage à insérer
 	 * @param 
 	 * 		isOwnHero	indique si le personnage à insérer est celui contrôlé par l'IA
 	 */
@@ -736,8 +738,8 @@ final class AiSimZone extends AiZone
 	 * permet de diminuer le nombre d'items cachés,
 	 * lors de la simulation
 	 * 
-	 * @param 
-	 * 		type	le type d'item qui a été découvert
+	 * @param type
+	 * 		le type d'item qui a été découvert
 	 */
 	protected void updateHiddenItemsCount(AiItemType type)
 	{	Integer value = hiddenItemsCounts.get(type);
@@ -753,8 +755,8 @@ final class AiSimZone extends AiZone
 	 * de la simulation, dans lesquels il est représenté
 	 * par des objets différents.
 	 * 
-	 * @param 
-	 * 		sprite	le sprite ciblé
+	 * @param sprite
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */

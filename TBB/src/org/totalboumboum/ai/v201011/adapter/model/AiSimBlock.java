@@ -38,10 +38,28 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	 * crée une simulation du bloc passé en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
-	 * @param tile	case contenant le sprite
-	 * @param destructible	indique si le bloc est destructible par le feu
-	 * @param stopHeroes	indique si le bloc constitue un obstacle aux personnages
-	 * @param stopFire	indique si le bloc constitue un obstacle au feu
+	 * @param id
+	 * 		numéro d'identification du bloc
+	 * @param tile
+	 * 		case contenant le bloc
+	 * @param posX
+	 * 		abscisse du bloc
+	 * @param posY
+	 * 		ordonnée du bloc
+	 * @param posZ
+	 * 		hauteur du bloc
+	 * @param state
+	 * 		état du bloc
+	 * @param burningDuration
+	 * 		durée de combustion du bloc
+	 * @param currentSpeed
+	 * 		vitesse courante de déplacement du bloc (a priori il est immobile)
+	 * @param destructible
+	 * 		sensibilité au feu
+	 * @param stopHeroes
+	 * 		capacité à bloquer les personnages
+	 * @param stopFires
+	 * 		capacité à bloquer le feu
 	 */
 	protected AiSimBlock(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
@@ -57,8 +75,10 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	 * crée une simulation du bloc passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param sprite	sprite à simuler
-	 * @param tile	case contenant le sprite
+	 * @param sprite
+	 * 		sprite à simuler
+	 * @param tile
+	 * 		case contenant le sprite
 	 */
 	protected AiSimBlock(AiBlock sprite, AiSimTile tile)
 	{	super(sprite,tile);
@@ -82,7 +102,8 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	/**
 	 * modifie la destructibilité de ce mur
 	 * 
-	 * @param destructible	nouvelle valeur de l'indicateur de destructibilité du mur
+	 * @param destructible
+	 * 		nouvelle valeur de l'indicateur de destructibilité du mur
 	 */
 	public void setDestructible(boolean destructible)
 	{	this.destructible = destructible;
