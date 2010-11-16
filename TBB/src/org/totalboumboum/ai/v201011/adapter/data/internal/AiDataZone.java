@@ -76,10 +76,10 @@ public final class AiDataZone extends AiZone
 	 * construit une représentation du niveau passé en paramètre,
 	 * du point de vue du joueur passé en paramètre.
 	 * 
-	 * @param 
-	 * 		level	niveau à représenter
-	 * @param 
-	 * 		player	joueur dont le point de vue est à adopter
+	 * @param level
+	 * 		niveau à représenter
+	 * @param player
+	 * 		joueur dont le point de vue est à adopter
 	 */
 	public AiDataZone(Level level, AbstractPlayer player)
 	{	this.level = level;
@@ -97,8 +97,8 @@ public final class AiDataZone extends AiZone
 	 * met à jour cette représentation ainsi que tous ses constituants.
 	 * usage interne, méthode non-destinée à la création des IA.
 	 * 
-	 * @param
-	 * 		elapsedTime	le temps écoulé
+	 * @param elapsedTime
+	 * 		le temps écoulé
 	 */
 	public void update(long elapsedTime)
 	{	updateTimes(elapsedTime);
@@ -127,8 +127,8 @@ public final class AiDataZone extends AiZone
 	/**
 	 * met à jour les données temporelles
 	 * 
-	 * @param 
-	 * 		elapsedTime	le temps écoulé
+	 * @param elapsedTime
+	 * 		le temps écoulé
 	 */
 	private void updateTimes(long elapsedTime)
 	{	// init
@@ -250,8 +250,8 @@ public final class AiDataZone extends AiZone
 	/**
 	 * met à jour la matrice en fonction de l'évolution du jeu
 	 * 
-	 * @param
-	 * 		elapsedTime	le temps écoulé
+	 * @param elapsedTime
+	 * 		le temps écoulé
 	 */
 	private void updateMatrix(long elapsedTime)
 	{	hiddenItemsCount = 0;
@@ -330,8 +330,8 @@ public final class AiDataZone extends AiZone
 	/**
 	 * renvoie la représentation du bloc passé en paramètre.
 	 * 
-	 * @param 
-	 * 		block	le bloc dont on veut la représentation
+	 * @param block
+	 * 		le bloc dont on veut la représentation
 	 * @return	
 	 * 		le AiBlock correspondant
 	 */
@@ -343,8 +343,8 @@ public final class AiDataZone extends AiZone
 	 * ajoute un bloc dans la liste de blocs de cette zone
 	 * (méthode appelée depuis une AiTile)
 	 * 
-	 * @param 
-	 * 		block	le bloc à rajouter à la liste
+	 * @param block
+	 * 		le bloc à rajouter à la liste
 	 */
 	protected void addBlock(AiDataBlock block)
 	{	blockMap.put(block.getSprite(),block);	
@@ -377,8 +377,8 @@ public final class AiDataZone extends AiZone
 	/**
 	 * renvoie la représentation de la bombe passée en paramètre.
 	 * 
-	 * @param 
-	 * 		bomb	la bombe dont on veut la représentation
+	 * @param bomb
+	 * 		la bombe dont on veut la représentation
 	 * @return	
 	 * 		le AiBomb correspondant
 	 */
@@ -390,8 +390,8 @@ public final class AiDataZone extends AiZone
 	 * ajoute une bombe dans la liste de bombes de cette zone
 	 * (méthode appelée depuis une AiTile)
 	 * 
-	 * @param 
-	 * 		bomb	la bombe à rajouter à la liste
+	 * @param bomb
+	 * 		la bombe à rajouter à la liste
 	 */
 	protected void addBomb(AiDataBomb bomb)
 	{	bombMap.put(bomb.getSprite(),bomb);	
@@ -436,8 +436,8 @@ public final class AiDataZone extends AiZone
 	/**
 	 * renvoie la représentation du feu passé en paramètre.
 	 * 
-	 * @param 
-	 * 		fire	le feu dont on veut la représentation
+	 * @param fire
+	 * 		le feu dont on veut la représentation
 	 * @return	
 	 * 		le AiFire correspondant
 	 */
@@ -449,8 +449,8 @@ public final class AiDataZone extends AiZone
 	 * ajoute un feu dans la liste de feux de cette zone
 	 * (méthode appelée depuis une AiTile)
 	 * 
-	 * @param 
-	 * 		fire	le feu à rajouter à la liste
+	 * @param fire
+	 * 		le feu à rajouter à la liste
 	 */
 	protected void addFire(AiDataFire fire)
 	{	fireMap.put(fire.getSprite(),fire);	
@@ -483,8 +483,8 @@ public final class AiDataZone extends AiZone
 	/**
 	 * renvoie la représentation du sol passé en paramètre.
 	 * 
-	 * @param 
-	 * 		floor	le sol dont on veut la représentation
+	 * @param floor
+	 * 		le sol dont on veut la représentation
 	 * @return	
 	 * 		le AiFloor correspondant
 	 */
@@ -496,8 +496,8 @@ public final class AiDataZone extends AiZone
 	 * ajoute un sol dans la liste de sols de cette zone
 	 * (méthode appelée depuis une AiTile)
 	 * 
-	 * @param 
-	 * 		floor	le sol à rajouter à la liste
+	 * @param floor
+	 * 		le sol à rajouter à la liste
 	 */
 	protected void addFloor(AiDataFloor floor)
 	{	floorMap.put(floor.getSprite(),floor);	
@@ -547,8 +547,8 @@ public final class AiDataZone extends AiZone
 	/**
 	 * renvoie la représentation du personnage passé en paramètre.
 	 * 
-	 * @param 
-	 * 		hero	le personnage dont on veut la représentation
+	 * @param hero
+	 * 		le personnage dont on veut la représentation
 	 * @return	
 	 * 		le AiHero correspondant
 	 */
@@ -560,8 +560,8 @@ public final class AiDataZone extends AiZone
 	 * ajoute un personnage dans la liste de personnages de cette zone
 	 * (méthode appelée depuis une AiTile)
 	 * 
-	 * @param 
-	 * 		hero	le personnage à rajouter à la liste
+	 * @param hero
+	 * 		le personnage à rajouter à la liste
 	 */
 	protected void addHero(AiDataHero hero)
 	{	heroMap.put(hero.getSprite(),hero);	
@@ -606,8 +606,8 @@ public final class AiDataZone extends AiZone
 	/**
 	 * renvoie la représentation de l'item passé en paramètre.
 	 * 
-	 * @param 
-	 * 		item	l'item dont on veut la représentation
+	 * @param item
+	 * 		l'item dont on veut la représentation
 	 * @return	
 	 * 		le AiItem correspondant
 	 */
@@ -619,8 +619,8 @@ public final class AiDataZone extends AiZone
 	 * ajoute un item dans la liste d'items de cette zone
 	 * (méthode appelée depuis une AiTile)
 	 * 
-	 * @param 
-	 * 		item	l'item à rajouter à la liste
+	 * @param item
+	 * 		l'item à rajouter à la liste
 	 */
 	protected void addItem(AiDataItem item)
 	{	itemMap.put(item.getSprite(),item);	
@@ -629,8 +629,8 @@ public final class AiDataZone extends AiZone
 	/**
 	 * permet de modifier le nombre d'items encore cachés dans ce niveau
 	 * 
-	 * @param 
-	 * 		hiddenItemsCount	le nouveau nombre d'items cachés dans le niveau
+	 * @param hiddenItemsCount
+	 * 		le nouveau nombre d'items cachés dans le niveau
 	 */
 	protected void signalHiddenItem(AiItemType type)
 	{	// general count
@@ -655,10 +655,10 @@ public final class AiDataZone extends AiZone
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
 	 * supprimées de cette représentation.
 	 * 
-	 * @param 
-	 * 		<T>	type de la liste à traiter
-	 * @param 
-	 * 		list	liste à traiter
+	 * @param <T>	
+	 * 		type de la liste à traiter
+	 * @param list
+	 * 		liste à traiter
 	 */
 	private <U extends Sprite, T extends AiDataSprite<?>> void uncheckAll(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
@@ -671,10 +671,10 @@ public final class AiDataZone extends AiZone
 	 * méthode complémentaire de uncheckAll, et chargée de supprimer
 	 * les représentations de sprites non-marquées à la fin de la mise à jour.
 	 * 
-	 * @param 
-	 * 		<T>	type de la liste à traiter
-	 * @param 
-	 * 		list	liste à traiter
+	 * @param <T>
+	 * 		type de la liste à traiter
+	 * @param list
+	 * 		liste à traiter
 	 */
 	private <U extends Sprite, T extends AiDataSprite<?>> void removeUnchecked(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();

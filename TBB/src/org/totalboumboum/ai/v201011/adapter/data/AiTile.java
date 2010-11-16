@@ -181,20 +181,20 @@ public abstract class AiTile
 	 * un obstacle, notamment pour les sprite de type Hero.</br>
 	 * cf. les méthodes de même nom dans les classes filles de AiSprite
 	 * 
-	 *  @param 
-	 *  	sprite	le sprite qui veut traverser cette case
-	 *  @param 
-	 *  	ignoreBlocks	si vrai, la fonction ne considère pas les blocks comme des obstacles
-	 *  @param 
-	 *  	ignoreBomb	si vrai, la fonction ne considère pas les bombes comme des obstacles
-	 *  @param 
-	 *  	ignoreFire	si vrai, la fonction ne considère pas le feu comme un obstacle
-	 *  @param 
-	 *  	ignoreFloors	si vrai, la fonction ne considère pas les sols comme des obstacles (ce qu'ils sont rarement, de toute façon)
-	 *  @param 
-	 *  	ignoreHeroes	si vrai, la fonction ne considère pas les personnages comme des obstacles
-	 *  @param 
-	 *  	ignoreItems	si vrai, la fonction ne considère pas les items comme des obstacles
+	 *  @param sprite
+	 *  	le sprite qui veut traverser cette case
+	 *  @param ignoreBlocks
+	 *  	si vrai, la fonction ne considère pas les blocks comme des obstacles
+	 *  @param ignoreBomb
+	 *  	si vrai, la fonction ne considère pas les bombes comme des obstacles
+	 *  @param ignoreFire
+	 *  	si vrai, la fonction ne considère pas le feu comme un obstacle
+	 *  @param ignoreFloors
+	 *  	si vrai, la fonction ne considère pas les sols comme des obstacles (ce qu'ils sont rarement, de toute façon)
+	 *  @param ignoreHeroes
+	 *  	si vrai, la fonction ne considère pas les personnages comme des obstacles
+	 *  @param ignoreItems
+	 *  	si vrai, la fonction ne considère pas les items comme des obstacles
 	 *  @return	
 	 *  	vrai ssi ce sprite , à cet instant, peut traverser cette case
 	 */
@@ -204,8 +204,8 @@ public abstract class AiTile
 	/**
 	 * Comme isCrossableBy, mais considère toujours le feu
 	 * 
-	 *  @param 
-	 *  	sprite	le sprite qui veut traverser cette case
+	 *  @param sprite
+	 *  	le sprite qui veut traverser cette case
 	 *  @return	
 	 *  	vrai ssi ce sprite , à cet instant, peut traverser cette case
 	 */
@@ -226,8 +226,8 @@ public abstract class AiTile
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
 	 * (ligne,width-1). Même chose pour les bordures haut et bas.
 	 * 
-	 * @param 
-	 * 		direction	direction dans laquelle le voisin se trouve
+	 * @param direction
+	 * 		direction dans laquelle le voisin se trouve
 	 * @return	
 	 * 		le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
 	 */

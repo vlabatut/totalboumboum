@@ -37,17 +37,18 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * 
  * @author Vincent Labatut
  *
- * @param <T>	type de sprite représenté
+ * @param <T>
+ * 		type de sprite représenté
  */
 abstract class AiDataSprite<T extends Sprite> implements AiSprite
 {	
 	/**
 	 * construit une représentation du sprite passé en paramètre
 	 * 
-	 * @param 
-	 * 		tile	représentation de la case contenant le sprite
-	 * @param 
-	 * 		sprite	sprite à représenter
+	 * @param tile
+	 * 		représentation de la case contenant le sprite
+	 * @param sprite
+	 * 		sprite à représenter
 	 */
 	protected AiDataSprite(AiDataTile tile, T sprite)
 	{	// general
@@ -73,8 +74,8 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/**
 	 * met à jour cette représentation du sprite
 	 * 
-	 * @param 
-	 * 		tile	la nouvelle case contenant cette représentation
+	 * @param tile
+	 * 		la nouvelle case contenant cette représentation
 	 */
 	protected void update(AiDataTile tile, long elapsedTime)
 	{	this.tile = tile;
@@ -103,8 +104,8 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/**
 	 * teste si cette représentation correspond au sprite passé en paramètre
 	 * 
-	 * @param 
-	 * 		sprite	le sprite dont on veut la représentation
+	 * @param sprite
+	 * 		le sprite dont on veut la représentation
 	 * @return	
 	 * 		vrai si cette représentation correspond à ce sprite
 	 */
@@ -217,6 +218,9 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	{	return currentSpeed;
 	}
 
+	/**
+	 * met à jour la vitesse de ce sprite
+	 */
 	protected void updateSpeed()
 	{	Sprite sprite = getSprite();
 		currentSpeed = sprite.getCurrentSpeed();
@@ -249,7 +253,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 	
 	/** 
-	 * initialise les positions (en pixels) de ce sprite 
+	 * initialise les coordonnées (en pixels) de ce sprite 
 	 */
 	private void updateLocation()
 	{	posX = sprite.getCurrentPosX();

@@ -57,10 +57,10 @@ final class AiDataTile extends AiTile
 	/**
 	 * construit une représentation de la case passée en paramètre
 	 * 
-	 * @param 
-	 * 		tile	case représentée
-	 * @param 
-	 * 		zone	zone contenant la représentation
+	 * @param tile
+	 * 		case représentée
+	 * @param zone
+	 * 		zone contenant la représentation
 	 */
 	protected AiDataTile(Tile tile, AiDataZone zone)
 	{	this.zone = zone;
@@ -190,6 +190,9 @@ final class AiDataTile extends AiTile
 	
 	/** 
 	 * met à jour les représentations des sprites contenus dans cette case
+	 * 
+	 * @param elapsedTime
+	 * 		temps écoulé depuis la dernière mise à jour
 	 */
 	private void updateSprites(long elapsedTime)
 	{	// block
@@ -359,10 +362,10 @@ final class AiDataTile extends AiTile
 	 * (cette fonction réalise le traitement relativement à 
 	 * la liste de sprite passée en paramètre)
 	 * 
-	 * @param 
-	 * 		sprite	le sprite qui veut traverser cette case
-	 * @param 
-	 * 		list	les sprites de cette case à tester
+	 * @param sprite
+	 * 		le sprite qui veut traverser cette case
+	 * @param list
+	 * 		les sprites de cette case à tester
 	 * @return	
 	 * 		vrai si le sprite peut traverser tous les sprites de la liste
 	 */
@@ -437,10 +440,10 @@ final class AiDataTile extends AiTile
 	/**
 	 * termine les simulations de sprites passées en paramètres
 	 * 
-	 * @param 
-	 * 		<T>	type de simulation
-	 * @param 
-	 * 		internalList	liste de simulations
+	 * @param <T>
+	 * 		type de simulation
+	 * @param internalList
+	 * 		liste de simulations
 	 */
 	private <T extends AiDataSprite<?>, U extends AiSprite> void finishSprites(List<T> internalList, List<U> externalList)
 	{	Iterator<T> it = internalList.iterator();

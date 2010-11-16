@@ -135,8 +135,8 @@ public interface AiSprite
 	 * Teste si le sprite passé en paramètre est capable de traverser
 	 * la case de ce sprite
 	 * 
-	 *  @param 
-	 *  	sprite	le sprite à tester
+	 *  @param sprite
+	 *  	le sprite à tester
 	 *  @return	
 	 *  	vrai si ce sprite le laisser passer par sa case 
 	 */

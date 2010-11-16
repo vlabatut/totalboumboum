@@ -45,8 +45,8 @@ final class AiDataState implements AiState
 	/**
 	 * construit un objet représentant l'état du sprite passé en paramètre
 	 * 
-	 * @param 
-	 * 		sprite	sprite dont on veut représenter l'état
+	 * @param sprite
+	 * 		sprite dont on veut représenter l'état
 	 */
 	protected AiDataState(Sprite sprite)
 	{	this.sprite = sprite;
@@ -57,6 +57,9 @@ final class AiDataState implements AiState
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour cet état en fonction de l'évolution du sprite de référence
+	 * 
+	 * @param elapsedTime
+	 * 		temps écoulé depuis la dernière mise à jour
 	 */
 	protected void update(long elapsedTime)
 	{	// direction
