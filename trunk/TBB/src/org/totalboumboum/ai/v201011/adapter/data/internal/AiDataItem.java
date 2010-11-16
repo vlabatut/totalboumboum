@@ -56,10 +56,10 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	 * crée une représentation de l'item passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param 
-	 * 		tile	case contenant le sprite
-	 * @param 
-	 * 		sprite	sprite à représenter
+	 * @param tile
+	 * 		case contenant le sprite
+	 * @param sprite
+	 * 		sprite à représenter
 	 */
 	protected AiDataItem(AiDataTile tile, Item sprite)
 	{	super(tile,sprite);

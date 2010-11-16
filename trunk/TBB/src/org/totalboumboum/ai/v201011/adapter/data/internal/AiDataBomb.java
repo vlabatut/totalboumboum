@@ -67,10 +67,10 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	 * crée une représentation de la bombe passée en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param 
-	 * 		tile	case contenant le sprite
-	 * @param 
-	 * 		sprite	sprite à représenter
+	 * @param tile
+	 * 		case contenant le sprite
+	 * @param sprite
+	 * 		sprite à représenter
 	 */
 	protected AiDataBomb(AiDataTile tile, Bomb sprite)
 	{	super(tile,sprite);

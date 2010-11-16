@@ -64,8 +64,8 @@ public enum AiStateName
 	 * convertit une chaine de caractères correspondant à un geste du jeu
 	 * en un objet correspondant à une action telle qu'elle est perçue par l'IA.
 	 * 
-	 * @param 
-	 * 		gesture	geste à convertir
+	 * @param gesture
+	 * 		geste à convertir
 	 * @return	
 	 * 		le symbole de l'action correspondante 
 	 */
