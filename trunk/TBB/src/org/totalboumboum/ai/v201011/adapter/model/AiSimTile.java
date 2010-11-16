@@ -47,11 +47,16 @@ final class AiSimTile extends AiTile
 	/**
 	 * construit une simulation de case à partir des coordonnées passées en paramètres
 	 * 
-	 * @param zone	zone contenant la simulation
-	 * @param line	ligne de la case
-	 * @param col	colonne de la case
-	 * @param posX	abscisse de la case
-	 * @param posY	ordonnée de la case
+	 * @param zone
+	 * 		zone contenant la simulation
+	 * @param line
+	 * 		ligne de la case
+	 * @param col
+	 * 		colonne de la case
+	 * @param posX
+	 * 		abscisse de la case
+	 * @param posY
+	 * 		ordonnée de la case
 	 */
 	protected AiSimTile(AiSimZone zone, int line, int col, double posX, double posY)
 	{	this.zone = zone;
@@ -113,6 +118,7 @@ final class AiSimTile extends AiTile
 		}
 	}
 	
+	// TODO comment
 	protected void removeSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
@@ -163,7 +169,8 @@ final class AiSimTile extends AiTile
 	 * renvoie la liste des blocks contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	les blocks éventuellement contenus dans cette case
+	 * @return	
+	 * 		les blocks éventuellement contenus dans cette case
 	 */
 	protected List<AiSimBlock> getInternalBlocks()
 	{	return internalBlocks;	
@@ -186,7 +193,8 @@ final class AiSimTile extends AiTile
 	 * renvoie la liste des bombes contenues dans cette case 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	les bombes éventuellement contenues dans cette case
+	 * @return	
+	 * 		les bombes éventuellement contenues dans cette case
 	 */
 	protected List<AiSimBomb> getInternalBombs()
 	{	return internalBombs;	
@@ -209,7 +217,8 @@ final class AiSimTile extends AiTile
 	 * renvoie la liste des feux contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	les feux éventuellement contenus dans cette case
+	 * @return	
+	 * 		les feux éventuellement contenus dans cette case
 	 */
 	protected List<AiSimFire> getInternalFires()
 	{	return internalFires;	
@@ -232,7 +241,8 @@ final class AiSimTile extends AiTile
 	 * renvoie les sols de cette case 
 	 * (il y a forcément au moins un sol)
 	 * 
-	 * @return	les sols contenus dans cette case
+	 * @return	
+	 * 		les sols contenus dans cette case
 	 */
 	protected List<AiSimFloor> getInternalFloors()
 	{	return internalFloors;	
@@ -255,7 +265,8 @@ final class AiSimTile extends AiTile
 	 * renvoie la liste des personnages contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	les personnages éventuellement contenus dans cette case
+	 * @return	
+	 * 		les personnages éventuellement contenus dans cette case
 	 */
 	protected List<AiSimHero> getInternalHeroes()
 	{	return internalHeroes;	
@@ -278,7 +289,8 @@ final class AiSimTile extends AiTile
 	 * renvoie la liste des items contenus dans cette case 
 	 * (la liste peut être vide)
 	 * 
-	 * @return	les items éventuellement contenus dans cette case
+	 * @return	
+	 * 		les items éventuellement contenus dans cette case
 	 */
 	protected List<AiSimItem> getInternalItems()
 	{	return internalItems;	
@@ -324,9 +336,12 @@ final class AiSimTile extends AiTile
 	 * (cette fonction réalise le traitement relativement à 
 	 * la liste de sprite passée en paramètre)
 	 * 
-	 * @param sprite	le sprite qui veut traverser cette case
-	 * @param list	les sprites de cette case à tester
-	 * @return	vrai si le sprite peut traverser tous les sprites de la liste
+	 * @param sprite
+	 * 		le sprite qui veut traverser cette case
+	 * @param list
+	 * 		les sprites de cette case à tester
+	 * @return	
+	 * 		vrai si le sprite peut traverser tous les sprites de la liste
 	 */
 	private <T extends AiSprite> boolean isCrossableBy(AiSprite sprite, List<T> list)
 	{	boolean result = true;
@@ -381,8 +396,10 @@ final class AiSimTile extends AiTile
 	/**
 	 * termine les simulations de sprites passées en paramètres
 	 * 
-	 * @param <T>	type de simulation
-	 * @param internalList	liste de simulations
+	 * @param <T>
+	 * 		type de simulation
+	 * @param internalList
+	 * 		liste de simulations
 	 */
 	private <T extends AiSimSprite, U extends AiSprite> void finishSprites(List<T> internalList, List<U> externalList)
 	{	Iterator<T> it = internalList.iterator();

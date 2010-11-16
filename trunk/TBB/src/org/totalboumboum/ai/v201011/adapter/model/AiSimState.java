@@ -52,9 +52,12 @@ final class AiSimState  implements AiState
 	 * construit un objet simulant l'état d'un sprite qui vient d'être créé,
 	 * en utilisant les valeurs passées en paramètres
 	 * 
-	 * @param name	nom de l'état
-	 * @param direction	direction de l'action
-	 * @param time	durée courante de l'état
+	 * @param name
+	 * 		nom de l'état
+	 * @param direction	
+	 * 		direction de l'action
+	 * @param time	
+	 * 		durée courante de l'état
 	 */
 	protected AiSimState(AiStateName name, Direction direction, long time)
 	{	this.name = name;
@@ -65,7 +68,8 @@ final class AiSimState  implements AiState
 	/**
 	 * construit un objet simulant l'état du sprite passé en paramètre
 	 * 
-	 * @param sprite	sprite dont on veut simuler l'état
+	 * @param sprite	
+	 * 		sprite dont on veut simuler l'état
 	 */
 	protected AiSimState(AiSprite sprite)
 	{	AiState state = sprite.getState();
@@ -77,7 +81,8 @@ final class AiSimState  implements AiState
 	/**
 	 * construit un objet simulant l'état passé en paramètre
 	 * 
-	 * @param state	état à reproduire
+	 * @param state
+	 * 		état à reproduire
 	 */
 	protected AiSimState(AiState state)
 	{	name = state.getName();
@@ -126,8 +131,8 @@ final class AiSimState  implements AiState
 	 * permet de modifier le temps passé dans cet état.
 	 * méthode utilisée exclusivement lors des simulations
 	 * 
-	 * @param
-	 * 		time	le nouveau temps passé dans cet état
+	 * @param time	
+	 * 		le nouveau temps passé dans cet état
 	 */
 	protected void setTime(long time)
 	{	this.time = time;

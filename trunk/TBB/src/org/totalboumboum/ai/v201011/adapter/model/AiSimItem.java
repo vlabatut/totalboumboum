@@ -35,15 +35,33 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
  *
  */
 final class AiSimItem extends AiSimSprite implements AiItem
-{	
+{
 	/**
 	 * crée une simulation de l'item passé en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
-	 * @param tile	case contenant le sprite
-	 * @param type	type d'item
-	 * @param stopBombs	indique si l'item constitue un obstacle aux bombes
-	 * @param stopFire	indique si l'item constitue un obstacle au feu
+	 * @param id
+	 * 		numéro d'identification de l'item
+	 * @param tile
+	 * 		case contenant l'item
+	 * @param posX
+	 * 		abscisse de l'item
+	 * @param posY
+	 * 		ordonnée de l'item
+	 * @param posZ
+	 * 		hauteur de l'item
+	 * @param state
+	 * 		état de l'item
+	 * @param burningDuration
+	 * 		durée de combustion de l'item
+	 * @param currentSpeed
+	 * 		vitesse courante de déplacement de l'item
+	 * @param type
+	 * 		type d'item (extrabomb, extraflame, etc.)
+	 * @param stopBombs
+	 * 		capacité à bloquer les bombes
+	 * @param stopFires
+	 * 		capacité à bloquer le feu
 	 */
 	protected AiSimItem(int id, AiSimTile tile,  double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
@@ -59,8 +77,10 @@ final class AiSimItem extends AiSimSprite implements AiItem
 	 * crée une simulation de l'item passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param sprite	sprite à simuler
-	 * @param tile	case contenant le sprite
+	 * @param sprite
+	 * 		sprite à simuler
+	 * @param tile
+	 * 		case contenant le sprite
 	 */
 	protected AiSimItem(AiItem sprite, AiSimTile tile)
 	{	super(sprite,tile);

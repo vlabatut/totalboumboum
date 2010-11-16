@@ -49,19 +49,18 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-@SuppressWarnings("unused")
 public final class AiModelTest
 {
-/*
 	public static void main(String args[])
 	{	RoundVariables.scaledTileDimension = 100;
 		AiSimZone zone;
 		AiSimTile tile;
 		AiSimState state;
 		AiSimBlock block;
+		AiSimFire firePrototype;
 		AiSimHero hero;
-		AiSimBomb bomb;
-		int bombRange=3,bombNumber=1,bombCount=0;
+		AiSimBomb bomb,bombPrototype;
+		int bombRange=3,bombNumber=1,bombCount=0,id=0;
 		double posX, posY, posZ=0,currentSpeed,walkingSpeed=100;
 		float failureProbability=0;
 		long burningDuration=100,normalDuration=1000,explosionDuration=100,latencyDuration=10;
@@ -73,10 +72,23 @@ public final class AiModelTest
 		currentSpeed = 0;
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		color = PredefinedColor.WHITE;
-		hero = new AiSimHero(null,0,0,0,state,burningDuration,currentSpeed,
-				bombRange,normalDuration,explosionDuration,bombNumber,bombCount,
-				throughBlocks,throughBombs,throughFires,color,walkingSpeed);
-		zone = new AiSimZone(7,7,hero);
+		zone = new AiSimZone(7,7);
+		
+		// fire prototype
+		firePrototype = new AiSimFire(id, tile, posX, posY, posZ, state, burningDuration, currentSpeed, throughBlocks, throughBombs, throughItems)
+		
+		// bomb prototype
+		stopHeroes = AiStopType.WEAK_STOP;
+		stopFires = AiStopType.WEAK_STOP;
+		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		color = PredefinedColor.WHITE;
+		bombPrototype = new AiSimBomb(id++,null,0,0,0,
+				state,burningDuration,currentSpeed,walkingSpeed,
+				countdownTrigger,remoteControlTrigger,explosionTrigger,
+				normalDuration,latencyDuration,failureProbability,firePrototype, 
+				stopHeroes,stopFires,throughItems,bombRange,penetrating,
+				color,working,0);
+		zone.addSprite(bomb);
 
 		// hero
 		tile = zone.getTile(1,1);
@@ -84,9 +96,11 @@ public final class AiModelTest
 		posY = tile.getPosY();
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		color = PredefinedColor.WHITE;
-		hero = new AiSimHero(tile,posX,posY,posZ,state,burningDuration,currentSpeed,
-				bombRange,normalDuration,explosionDuration,bombNumber,bombCount,
-				throughBlocks,throughBombs,throughFires,color,walkingSpeed);
+		hero = new AiSimHero(id++,tile,posX,posY,posZ, 
+				state,burningDuration,currentSpeed,
+				bombPrototype,bombNumber,bombCount, 
+				throughBlocks,throughBombs,throughFires, 
+				color,walkingSpeed);
 		zone.addSprite(hero);
 
 		// bomb
@@ -139,5 +153,5 @@ public final class AiModelTest
 		}
 		while(duration!=0);
 	}
-*/	
+
 }

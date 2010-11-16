@@ -37,10 +37,28 @@ final class AiSimFire extends AiSimSprite implements AiFire
 	 * crée une simulation du feu passé en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
-	 * @param tile	case contenant le sprite
-	 * @param throughBlocks	indique si le feu peut traverser les blocs
-	 * @param throughBombs	indique si le feu peut traverser les bombes
-	 * @param throughItems	indique si le feu peut traverser les items
+	 * @param id
+	 * 		numéro d'identification du feu
+	 * @param tile
+	 * 		case contenant le feu
+	 * @param posX
+	 * 		abscisse du feu
+	 * @param posY
+	 * 		ordonnée du feu
+	 * @param posZ
+	 * 		hauteur du feu
+	 * @param state
+	 * 		état du feu
+	 * @param burningDuration
+	 * 		durée de combustion du feu
+	 * @param currentSpeed
+	 * 		vitesse courante de déplacement du feu (inutile)
+	 * @param throughBlocks
+	 * 		capacité à traverser les murs
+	 * @param throughBombs
+	 * 		capacité à traverser les bombes
+	 * @param throughItems
+	 * 		capacité à traverser les items
 	 */
 	protected AiSimFire(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
@@ -56,8 +74,10 @@ final class AiSimFire extends AiSimSprite implements AiFire
 	 * crée une simulation du feu passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à simuler
+	 * @param tile	
+	 * 		case contenant le sprite
+	 * @param sprite	
+	 * 		sprite à simuler
 	 */
 	protected AiSimFire(AiFire sprite, AiSimTile tile)
 	{	super(sprite,tile);

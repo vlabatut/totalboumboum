@@ -36,7 +36,22 @@ abstract class AiSimSprite implements AiSprite
 	/**
 	 * crée une nouvelle simulation d'un sprite
 	 * 
-	 * @param tile	simulation de la case contenant le sprite
+	 * @param id
+	 * 		numéro d'identification du sprite
+	 * @param tile
+	 * 		case contenant le sprite
+	 * @param posX
+	 * 		abscisse du sprite
+	 * @param posY
+	 * 		ordonnée du sprite
+	 * @param posZ
+	 * 		hauteur du sprite
+	 * @param state
+	 * 		état du sprite
+	 * @param burningDuration
+	 * 		durée de combustion du sprite
+	 * @param currentSpeed
+	 * 		vitesse courante de déplacement du sprite
 	 */
 	protected AiSimSprite(int id, AiSimTile tile, double posX, double posY, double posZ, 
 			AiSimState state, long burningDuration, double currentSpeed)
@@ -56,8 +71,10 @@ abstract class AiSimSprite implements AiSprite
 	/**
 	 * construit une simulation du sprite passé en paramètre
 	 * 
-	 * @param sprite	sprite à simuler
-	 * @param tile	simulation de la case contenant le sprite
+	 * @param sprite	
+	 * 		sprite à simuler
+	 * @param tile	
+	 * 		simulation de la case contenant le sprite
 	 */
 	protected AiSimSprite(AiSprite sprite, AiSimTile tile)
 	{	// general
@@ -88,8 +105,8 @@ abstract class AiSimSprite implements AiSprite
 	 * permet de modifier l'id de ce sprite.
 	 * méthode utilisée uniquement lors des simulations.
 	 * 
-	 * @param
-	 * 		id	nouvel id de ce sprite
+	 * @param id
+	 * 		nouvel id de ce sprite
 	 */
 	protected void setId(int id)
 	{	this.id = id;
@@ -109,8 +126,8 @@ abstract class AiSimSprite implements AiSprite
 	/**
 	 * modidifie l'état de ce sprites
 	 * 
-	 * @param 
-	 * 		state	le nouvel état à affecter à ce sprite
+	 * @param state
+	 * 		le nouvel état à affecter à ce sprite
 	 */
 	public void setState(AiSimState state)
 	{	this.state = state;
@@ -146,8 +163,8 @@ abstract class AiSimSprite implements AiSprite
 	 * permet de modifier la case occupée par ce sprite.
 	 * méthode utilisée uniquement lors des simulations.
 	 * 
-	 * @param
-	 * 		tile	nouvelle case occupée par ce sprite
+	 * @param tile
+	 * 		nouvelle case occupée par ce sprite
 	 */
 	protected void setTile(AiSimTile tile)
 	{	this.tile = tile;
@@ -182,10 +199,12 @@ abstract class AiSimSprite implements AiSprite
 	 * permet de modifier les coordonnées de ce sprite (exprimées en pixels).
 	 * méthode utilisée uniquement lors des simulations.
 	 * 
-	 * @param
-	 * 		x	nouvelle abscisse
-	 * 		y	nouvelle ordonnée
-	 * 		z	nouvelle hauteur
+	 * @param x
+	 * 		nouvelle abscisse
+	 * @param y
+	 * 		nouvelle ordonnée
+	 * @param z
+	 * 		nouvelle hauteur
 	 */
 	protected void setPos(double x, double y, double z)
 	{	posX = x;
@@ -219,8 +238,8 @@ abstract class AiSimSprite implements AiSprite
 	 * permet de modifier la vitesse de déplacement courante de ce sprite.
 	 * méthode utilisée uniquement lors des simulations.
 	 * 
-	 * @param
-	 * 		currentSpeed	nouvelle vitesse de déplacement
+	 * @param currentSpeed
+	 * 		nouvelle vitesse de déplacement
 	 */
 	protected void setCurrentSpeed(double currentSpeed)
 	{	this.currentSpeed = currentSpeed;

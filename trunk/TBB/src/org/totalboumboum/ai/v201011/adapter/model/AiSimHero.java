@@ -36,18 +36,41 @@ import org.totalboumboum.tools.images.PredefinedColor;
 final class AiSimHero extends AiSimSprite implements AiHero
 {
 	/**
-	 * crée une simulation du joueur passé en paramètre,
+	 * crée une simulation du personnage passé en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
-	 * @param tile	case contenant le sprite
-	 * @param bombRange	portées des bombes du personnage
-	 * @param bombNumber	nombre de bombes que le personnage peut poser
-	 * @param bombCount	nombre de bombes que le personnage a déjà posées
-	 * @param throughBlocks	indique si le personnage peut traverser les murs
-	 * @param throughBombs	indique si le personnage peut traverser les bombes
-	 * @param throughFires	indique si le personnage peut traverser le feu
-	 * @param color	couleur du personnage
-	 * @param walkingSpeed	vitesse du personnage
+	 * @param id
+	 * 		numéro d'identification du personnage
+	 * @param tile
+	 * 		case contenant le personnage
+	 * @param posX
+	 * 		abscisse du personnage
+	 * @param posY
+	 * 		ordonnée du personnage
+	 * @param posZ
+	 * 		hauteur du personnage
+	 * @param state
+	 * 		état du personnage
+	 * @param burningDuration
+	 * 		durée de combustion du personnage
+	 * @param currentSpeed
+	 * 		vitesse courante de déplacement du personnage
+	 * @param bombPrototype
+	 * 		exemple de bombe que le personnage peut poser
+	 * @param bombNumber
+	 * 		nombre de bombes que le personnage peut poser
+	 * @param bombCount
+	 * 		nombre de bombes actuellement posées
+	 * @param throughBlocks
+	 * 		capacité du personnage à traverser les blocs
+	 * @param throughBombs
+	 * 		capacité du personnage à traverser les bombes
+	 * @param throughFires
+	 * 		capacité du personnage à traverser le feu (sans mourir !)
+	 * @param color
+	 * 		couleur du personnage
+	 * @param walkingSpeed
+	 * 		vitesse de déplacement au sol du personnage
 	 */
 	protected AiSimHero(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
@@ -75,8 +98,10 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	 * crée une simulation du joueur passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à simuler
+	 * @param tile	
+	 * 		case contenant le sprite
+	 * @param sprite	
+	 * 		sprite à simuler
 	 */
 	protected AiSimHero(AiHero sprite, AiSimTile tile)
 	{	super(sprite,tile);
@@ -119,8 +144,8 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	/**
 	 * met à jour la portée des bombes posées par ce joueur
 	 * 
-	 * @param 
-	 * 		delta	la modification à apporter à la portée des bombes
+	 * @param delta
+	 * 		la modification à apporter à la portée des bombes
 	 */
 	protected void updateBombRange(int delta)
 	{	AiSimBomb proto = new AiSimBomb(bombPrototype,null);
@@ -147,8 +172,8 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	 * met à jour le nombre de bombes actuellement en jeu et appartenant
 	 * à ce joueur
 	 * 
-	 * @param 
-	 * 		delta	la modification à apporter au nombre de bombes
+	 * @param delta
+	 * 		la modification à apporter au nombre de bombes
 	 */
 	protected void updateBombCount(int delta)
 	{	bombCount = bombCount + delta;
@@ -162,8 +187,8 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	/**
 	 * met à jour le nombre de bombes posables simultanément par ce joueur
 	 * 
-	 * @param 
-	 * 		delta	la modification à apporter au nombre de bombes
+	 * @param delta
+	 * 		la modification à apporter au nombre de bombes
 	 */
 	protected void updateBombNumber(int delta)
 	{	bombNumber = bombNumber + delta;

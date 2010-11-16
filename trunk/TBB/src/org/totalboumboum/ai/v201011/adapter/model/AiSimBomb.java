@@ -42,25 +42,57 @@ import org.totalboumboum.tools.images.PredefinedColor;
 final class AiSimBomb extends AiSimSprite implements AiBomb
 {	
 	/**
-	 * 
 	 * crée une simulation de la bombe passée en paramètre,
 	 * avec les propriétés passées en paramètres.
 	 * 
-	 * @param tile	case contenant le sprite
+	 * @param id
+	 * 		numéro d'identification de la bombe
+	 * @param tile
+	 * 		case contenant la bombe
+	 * @param posX
+	 * 		abscisse de la bombe
+	 * @param posY
+	 * 		ordonnée de la bombe
+	 * @param posZ
+	 * 		hauteur de la bombe
+	 * @param state
+	 * 		état de la bombe
+	 * @param burningDuration
+	 * 		durée de combustion de la bombe
+	 * @param currentSpeed
+	 * 		vitesse courante de déplacement de la bombe
+	 * @param slidingSpeed
+	 * 		vitesse de déplacement au sol de la bombe
 	 * @param countdownTrigger
+	 * 		capacité à exploser en fonction du temps
 	 * @param remoteControlTrigger
+	 * 		capacité à exploser sur commande à distance
 	 * @param explosionTrigger
+	 * 		capacité à exploser au contact du feu
 	 * @param normalDuration
-	 * @param explosionDuration
+	 * 		durée totale avant explosion (bombe à retardement seulement)
 	 * @param latencyDuration
+	 * 		latence entre le contact avec le feu et l'explosion
 	 * @param failureProbability
+	 * 		probabilité de tomber en panne
+	 * @param firePrototype
+	 * 		exemple de feu généré par la bombe quand elle explose
 	 * @param stopHeroes
+	 * 		capacité à bloquer les personnages
 	 * @param stopFires
+	 * 		capacité à bloquer le feu
 	 * @param throughItems
+	 * 		capacité à traverser les items
 	 * @param range
+	 * 		portée de l'explosion
+	 * @param penetrating
+	 * 		nature pénétrante du feu
 	 * @param color
+	 * 		couleur de la bombe
 	 * @param working
+	 * 		état de fonctionnement de la bombe
 	 * @param time
+	 * 		temps écoulé depuis le dépôt de la bombe
 	 */
 	protected AiSimBomb(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed, double slidingSpeed,
@@ -100,8 +132,10 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * crée une simulation de la bombe passée en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param sprite	sprite à simuler
-	 * @param tile	case devant contenir le sprite
+	 * @param sprite	
+	 * 		sprite à simuler
+	 * @param tile	
+	 * 		case devant contenir le sprite
 	 */
 	protected AiSimBomb(AiBomb sprite, AiSimTile tile)
 	{	super(sprite,tile);
@@ -210,8 +244,8 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * met à jour la portée de cette bombe
 	 * (méthode utilisée seulement lors de la simulation)
 	 * 
-	 * @param 
-	 * 		delta	la modification à apporter à la portée de cette bombe
+	 * @param delta	
+	 * 		la modification à apporter à la portée de cette bombe
 	 */
 	protected void updateRange(int delta)
 	{	range = range + delta;
