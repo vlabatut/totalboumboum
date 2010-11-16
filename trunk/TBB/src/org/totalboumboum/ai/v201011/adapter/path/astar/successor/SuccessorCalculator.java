@@ -50,8 +50,10 @@ public abstract class SuccessorCalculator
 	 * menancée par du feu, et le temps est une information cruciale pour déterminer
 	 * si le personnage peut ou pas traverser une case avant qu'elle ne brûle.
 	 * 
-	 * @param node	le noeud de recherche courant 
-	 * @return	la liste de cases accessibles
+	 * @param node	
+	 * 		le noeud de recherche courant 
+	 * @return	
+	 * 		la liste de cases accessibles
 	 */
 	public abstract List<AiTile> processSuccessors(AstarNode node) throws StopRequestException;
 }

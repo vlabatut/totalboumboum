@@ -47,7 +47,8 @@ public class MatrixCostCalculator extends CostCalculator
 	 * fournir la matrice de cout correspondante.
 	 * <b>ATTENTION :</b> cette matrice doit avoir la même taille que la zone de jeu.
 	 * 
-	 * @param costMatrix	la matrice de coût
+	 * @param costMatrix	
+	 * 		la matrice de coût
 	 */
 	public MatrixCostCalculator(double costMatrix[][]) throws StopRequestException
 	{	setCostMatrix(costMatrix);			
@@ -63,7 +64,8 @@ public class MatrixCostCalculator extends CostCalculator
 	 * initialise la matrice de coût. 
 	 * <b>ATTENTION :</b>cette matrice doit avoir la même taille que la zone de jeu.
 	 * 
-	 * @param costMatrix	la matrice de coût
+	 * @param costMatrix	
+	 * 		la matrice de coût
 	 */
 	public void setCostMatrix(double costMatrix[][])
 	{	this.costMatrix = costMatrix;		
@@ -72,9 +74,12 @@ public class MatrixCostCalculator extends CostCalculator
 	/**
 	 * met à jour un coût dans la matrice
 	 * 
-	 * @param line	ligne de la case à mettre à jour
-	 * @param col	colonne de la case à mettre à jour
-	 * @param cost	nouveau coût à affecter
+	 * @param line	
+	 * 		ligne de la case à mettre à jour
+	 * @param col	
+	 * 		colonne de la case à mettre à jour
+	 * @param cost	
+	 * 		nouveau coût à affecter
 	 */
 	public void setCost(int line, int col, double cost) throws StopRequestException
 	{	costMatrix[line][col] = cost;
@@ -90,9 +95,12 @@ public class MatrixCostCalculator extends CostCalculator
 	 * possible est renvoyée (Double.POSITIVE_INFINITY), et un message 
 	 * d'avertissement est affiché dans la sortie standard d'erreur.
 	 * 
-	 * @param start	la case de départ
-	 * @param end	la case d'arrivée
-	 * @return le coût correspondant à la case d'arrivée dans la matrice de coût
+	 * @param start	
+	 * 		la case de départ
+	 * @param end	
+	 * 		la case d'arrivée
+	 * @return 
+	 * 		le coût correspondant à la case d'arrivée dans la matrice de coût
 	 */ 
 	@Override
 	public double processCost(AiTile start, AiTile end) throws StopRequestException

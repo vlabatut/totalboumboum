@@ -53,8 +53,10 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 	 * fonction successeur la plus simple: on considère les 4 cases voisines de la case courante,
 	 * en ne conservant que les cases que le personnage de référence peut traverser 
 	 * 
-	 * @param node	le noeud de recherche courant
-	 * @return	une liste des cases successeurs
+	 * @param node	
+	 * 		le noeud de recherche courant
+	 * @return	
+	 * 		une liste des cases successeurs
 	 */
 	@Override
 	public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException

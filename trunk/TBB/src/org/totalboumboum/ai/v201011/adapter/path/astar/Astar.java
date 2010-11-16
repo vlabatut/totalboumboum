@@ -65,10 +65,37 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalcul
 public final class Astar
 {	private static boolean verbose = false;
 
+	/**
+	 * construit un objet permettant d'appliquer l'algorithme A*
+	 * en utilisant la fonction successeur définie par défaut.
+	 * 
+	 * @param ai
+	 * 		l'AI invoquant A*
+	 * @param hero
+	 * 		le personnage à considérer pour les déplacements
+	 * @param costCalculator
+	 * 		la fonction de coût
+	 * @param heuristicCalculator
+	 * 		la fonction heuristique
+	 */
 	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
 	{	this(ai,hero,costCalculator,heuristicCalculator,new BasicSuccessorCalculator());
 	}
 	
+	/**
+	 * construit un objet permettant d'appliquer l'algorithme A*.
+	 * 
+	 * @param ai
+	 * 		l'AI invoquant A*
+	 * @param hero
+	 * 		le personnage à considérer pour les déplacements
+	 * @param costCalculator
+	 * 		la fonction de coût
+	 * @param heuristicCalculator
+	 * 		la fonction heuristique
+	 * @param successorCalculator
+	 * 		la fonction successeur
+	 */
 	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
 	{	this.ai = ai;
 		this.hero = hero;
@@ -127,7 +154,8 @@ public final class Astar
 	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
 	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
-	 * @param maxCost	le cout maximal que le noeud courant peut atteindre
+	 * @param maxCost	
+	 * 		le cout maximal que le noeud courant peut atteindre
 	 */
 	public void setMaxCost(int maxCost)
 	{	this.maxCost = maxCost;
@@ -145,9 +173,12 @@ public final class Astar
 	 * dans le façon dont A* est employé (mauvaise fonction de cout, par
 	 * exemple). 
 	 * 
-	 * @param startTile	la case de départ
-	 * @param endTile	la case d'arrivée
-	 * @return un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur null
+	 * @param startTile	
+	 * 		la case de départ
+	 * @param endTile	
+	 * 		la case d'arrivée
+	 * @return 
+	 * 		un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur null
 	 * @throws StopRequestException 
 	 * @throws LimitReachedException 
 	 */
@@ -168,9 +199,12 @@ public final class Astar
 	 * dont A* est employé (mauvaise fonction de cout, par exemple).
 	 * La fonction renvoie également null si la liste endTiles est vide.
 	 * 
-	 * @param startTile	la case de départ
-	 * @param endTile	la liste des cases d'arrivée possibles
-	 * @return un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null
+	 * @param startTile	
+	 * 		la case de départ
+	 * @param endTile	
+	 * 		la liste des cases d'arrivée possibles
+	 * @return 
+	 * 		un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null
 	 * @throws StopRequestException 
 	 * @throws LimitReachedException 
 	 */
@@ -283,6 +317,9 @@ public final class Astar
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * termine proprement cet objet quand il n'est plus utilisé
+	 */
 	private void finish()
 	{	if(root!=null)
 		{	root.finish();
