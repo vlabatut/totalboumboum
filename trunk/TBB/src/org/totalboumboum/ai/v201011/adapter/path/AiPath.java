@@ -54,8 +54,8 @@ public class AiPath
 	/**
 	 * renvoie la case dont la position est passée en paramètre
 	 *
-	 * @param 
-	 * 		index	la position de la case demandée
+	 * @param index
+	 * 		la position de la case demandée
 	 * @return	
 	 * 		la case occupant la position indiquée dans ce chemin
 	 */
@@ -67,8 +67,8 @@ public class AiPath
 	 * ajoute dans ce chemin la case passée en paramètre, 
 	 * en l'insérant à la fin de la séquence de cases
 	 * 
-	 * @param 
-	 * 		tile	la case à insérer
+	 * @param tile
+	 * 		la case à insérer
 	 */
 	public void addTile(AiTile tile)
 	{	tiles.add(tile);		
@@ -78,10 +78,10 @@ public class AiPath
 	 * ajoute dans ce chemin la case passée en paramètre, 
 	 * en l'insérant à la position passée en paramètre.
 	 * 
-	 * @param 
-	 * 		index	position de la case à insérer
-	 * @param 
-	 * 		tile	la case à insérer
+	 * @param index
+	 * 		position de la case à insérer
+	 * @param tile
+	 * 		la case à insérer
 	 */
 	public void addTile(int index, AiTile tile)
 	{	tiles.add(index,tile);	
@@ -91,10 +91,10 @@ public class AiPath
 	 * remplace la case dont la position est passée en paramètre par
 	 * la case passée en paramètre, dans ce chemin.
 	 * 
-	 * @param 
-	 * 		index	position de la case à remplacer
-	 * @param 
-	 * 		tile	la nouvelle case
+	 * @param index
+	 * 		position de la case à remplacer
+	 * @param tile
+	 * 		la nouvelle case
 	 */
 	public void setTile(int index, AiTile tile)
 	{	tiles.set(index,tile);	
@@ -103,8 +103,8 @@ public class AiPath
 	/**
 	 * supprime de ce chemin la case dont la position est passée en paramètre
 	 * 
-	 * @param 
-	 * 		index	position de la case à supprimer
+	 * @param index
+	 * 		position de la case à supprimer
 	 */
 	public void removeTile(int index)
 	{	tiles.remove(index);	
@@ -113,8 +113,8 @@ public class AiPath
 	/**
 	 * supprime de ce chemin la case passée en paramètre
 	 * 
-	 * @param 
-	 * 		tile	la case à supprimer
+	 * @param tile
+	 * 		la case à supprimer
 	 */
 	public void removeTile(AiTile tile)
 	{	tiles.remove(tile);		
@@ -221,8 +221,8 @@ public class AiPath
 	 * qui sera réellement nécessaire au joueur, puisque différents facteurs peuvent
 	 * venir invalider ces hypothèses.
 	 *   
-	 * @param 
-	 * 		hero	le personnage qui parcourt le chemin
+	 * @param hero
+	 * 		le personnage qui parcourt le chemin
 	 * @return	
 	 * 		le temps nécessaire au personnage pour parcourir ce chemin
 	 */
@@ -245,8 +245,8 @@ public class AiPath
 	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus long que ce dernier.
 	 * 
-	 * @param 
-	 * 		object	le chemin à comparer
+	 * @param path
+	 * 		le chemin à comparer
 	 * @return	
 	 * 		vrai ssi ce chemin est plus long que celui passé en paramètre
 	 */
@@ -261,8 +261,8 @@ public class AiPath
 	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus court que ce dernier.
 	 * 
-	 * @param 
-	 * 		object	le chemin à comparer
+	 * @param path
+	 * 		le chemin à comparer
 	 * @return	
 	 * 		vrai ssi ce chemin est plus court que celui passé en paramètre
 	 */
@@ -275,10 +275,11 @@ public class AiPath
 
 	/**
 	 * Compare ce chemin à celui passé en paramètre, 
-	 * et renvoie vrai s'ils sont parfaitement identiques.
+	 * et renvoie vrai s'ils sont parfaitement identiques,
+	 * i.e. sont constitués de la même séquence de cases.
 	 * 
-	 * @param 
-	 * 		object	le chemin à comparer
+	 * @param object
+	 * 		le chemin à comparer
 	 * @return	
 	 * 		vrai ssi les 2 ce chemin est identique à celui passé en paramètre
 	 */
@@ -304,6 +305,7 @@ public class AiPath
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String toString()
 	{	String result = "[";
 		for(AiTile tile: tiles)
