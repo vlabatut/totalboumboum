@@ -172,28 +172,41 @@ class AiModel
 	/**
 	 * calcule l'état suivant de la zone si les états spécifiés en paramètres
 	 * sont appliqués à la zone courante. La méthode renvoie l'état obtenu
-	 * à la fin de l'action la plus courte. Les actions considérées sont :
-	 * 		- la disparition/apparition d'un sprite
-	 * 		- un changement d'état
-	 * 		- un changement de case
+	 * à la fin du prochain évènement (i.e. celui qui se termine le plus vite). 
+	 * Les évènement considérés sont :
+	 * 		- la disparition d'un sprite (ex : une bombe qui a explosé)
+	 * 		- l'apparition d'un sprite (ex : un item qui apparait à la suite de l'explosion d'un mur)
+	 * 		- un changement d'état (ex : un mur qui commence à brûler)
+	 * 		- un changement de case (ex : un joueur passant d'une case à une autre)
+	 * 		- la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)
 	 * Les modifications sont appliquées aux zones internes. l'utilisateur peut récupérer
 	 * la nouvelle zone mise à jour avec getCurrentZone. Il peut également récupérer la liste
 	 * de sprites qui ont provoqué la fin de la mise à jour à la suite d'une action, avec getLimitSprites.
 	 * Il peut aussi récupérer la durée qui s'est écoulée (en temps simulé) depuis la dernière simulation, 
 	 * avec getDuration.
 	 * 
-	 * @param specifiedStates	map associant un état à un sprite, permettant de forcer un sprite à prendre un certain état 
+	 * @param specifiedStates	
+	 * 		map associant un état à un sprite, permettant de forcer un sprite à prendre un certain état 
 	 */
 	public void simulate(HashMap<AiSprite,AiState> specifiedStates)
 	{	// create a copy of the current zone
 		previous = current;
 		current = new AiSimZone(previous);
 		
+		// converting the specified states
+		HashMap<AiSimSprite,AiState> localSpecifiedStates = new HashMap<AiSimSprite, AiState>();
+		for(Entry<AiSprite,AiState> entry: specifiedStates.entrySet())
+		{	AiSprite sprite = entry.getKey();
+			AiState state = entry.getValue();
+			AiSimSprite simSprite = current.getSpriteById(sprite);
+			localSpecifiedStates.put(simSprite,state);
+		}
+		
 		// update detonating bombs (done first cause it can mess up the whole zone)
 		for(AiSimBomb bomb: current.getInternalBombs())
 		{	AiSimState state0 = bomb.getState();
 			AiStateName name0 = state0.getName();
-			AiState state = specifiedStates.get(bomb);
+			AiState state = localSpecifiedStates.get(bomb);
 			boolean detonate = false;
 			if(name0==AiStateName.STANDING || name0==AiStateName.MOVING)
 			{	if(state!=null)
@@ -217,11 +230,58 @@ class AiModel
 		sprites.addAll(current.getInternalHeroes());
 		sprites.addAll(current.getInternalItems());
 		
-		// list the sprites incoming state: specified or automatically processed from the current state,
-		// also process the minimal time needed for a sprite state change (when using the new state)
+		// process iteration duration
 		HashMap<AiSimSprite,AiSimState> statesMap = new HashMap<AiSimSprite, AiSimState>();
+		processDuration(sprites,localSpecifiedStates,statesMap);
+		
+		// apply events for the resulting minimal time
+		updateSprites(statesMap,duration);
+		
+		// update the resulting zone
+		current.updateTime(duration);
+	}
+	/**
+	 * TODO chemins à généraliser
+	 * 	- associer un temps avec chaque case (attente) ?
+	 *  - structure abstraite, on peut accéder aux cases ou aux pixels
+	 *  - le chemin est entier, on passe le perso en paramètre et on nous dit la case suivante (null si pas sur le chemin)
+	 *    voire la direction à prendre pour suivre le chemin
+	 *  - à voir comment ça peut être représenté derrière...
+	 */
+	
+	/*
+	 * NOTE
+	 * dans AiZone, ça serait bien d'avoir la liste des temps d'explosion des cases
+	 * >> voire le truc détaillé avec le début/fin de chaque explosion ?
+	 * 
+	 * pour les méthodes destinées aux étudiants (public), remplacer
+	 * un sprite/tile par le même sprite dans la zone courante, si besoin
+	 * pour les méthodes appelées en interne, on peut supposer que c'est inutile
+	 */
+	
+	/**
+	 * TODO
+	 * - modifier simulateUntilCondition pour ne pas avoir de pb pr retrouver le hero dans la liste
+	 * - définir deux versions différentes de simulate (une externe, une interne)
+	 * - revoir si tous les évènements spécifiés dans la doc sont bien implémentés
+	 * 		p-ê : pouvoir préciser sur quels évènements on veut s'arrêter ?
+	 */
+	
+	/**
+	 * détermine comment chaque sprite va évoluer en termes de changement d'états,
+	 * et calcule le temps minimal avant le prochain changement d'état.
+	 * ce laps de temps sera ensuite appliqué uniformément à chaque sprite.
+	 * 
+	 * @param sprites
+	 * 		liste des sprites à traiter
+	 * @param specifiedStates
+	 * 		liste des états déjà spécifiés
+	 */
+	private void processDuration(List<AiSimSprite> sprites, HashMap<AiSimSprite,AiState> specifiedStates, HashMap<AiSimSprite,AiSimState> statesMap)
+	{	// init
 		duration = Long.MAX_VALUE;
 		limitSprites = new ArrayList<AiSimSprite>();
+		
 		for(AiSimSprite sprite: sprites)
 		{	AiSimState state;
 			// get the specified new state for this sprite
@@ -254,36 +314,10 @@ if(sprite instanceof AiSimBomb)
 			}
 		}
 		
+		// no state change means no change at all
 		if(duration==Long.MAX_VALUE)
 			duration = 0;
-		
-		// apply events for the resulting minimal time
-		updateSprites(statesMap,duration);
-		
-		// update the resulting zone
-		current.updateTime(duration);
 	}
-	
-	/**
-	 * TODO chemins à généraliser
-	 * 	- associer un temps avec chaque case (attente) ?
-	 *  - structure abstraite, on peut accéder aux cases ou aux pixels
-	 *  - le chemin est entier, on passe le perso en paramètre et on nous dit la case suivante (null si pas sur le chemin)
-	 *    voire la direction à prendre pour suivre le chemin
-	 *  - à voir comment ça peut être représenté derrière...
-	 */
-	
-	/*
-	 * NOTE
-	 * dans AiZone, ça serait bien d'avoir la liste des temps d'explosion des cases
-	 * >> voire le truc détaillé avec le début/fin de chaque explosion ?
-	 * 
-	 * pour les méthodes destinées aux étudiants (public), remplacer
-	 * un sprite/tile par le même sprite dans la zone courante, si besoin
-	 * pour les méthodes appelées en interne, on peut supposer que c'est inutile
-	 */
-	
-	
 	
 	/**
 	 * calcule le nouvel état du sprite passé en paramètre,
@@ -409,7 +443,7 @@ if(sprite instanceof AiSimBomb)
 				double manDist = Math.abs(posX-goalX)+Math.abs(posY-goalY);
 				double temp = 1000*manDist/speed;
 				if(temp<1)
-					result = 1;
+					result = 0;
 				else
 					result = (long)temp;
 			}
@@ -479,11 +513,6 @@ if(sprite instanceof AiSimBomb)
 		{	// init
 			AiSimSprite sprite = entry.getKey();
 			AiSimState state = entry.getValue();
-		
-if(sprite instanceof AiSimHero)
-	System.out.print("");
-if(sprite instanceof AiSimBomb)
-	System.out.print("");
 			
 			// block
 			if(sprite instanceof AiSimBlock)
@@ -973,8 +1002,8 @@ if(sprite instanceof AiSimBomb)
 			AiSimTile newTile = current.getTile(posX,posY);
 			if(!newTile.equals(tile))
 			{	tile.removeSprite(hero);
-				tile.addSprite(hero);
-				hero.setTile(tile);
+				newTile.addSprite(hero);
+				hero.setTile(newTile);
 			}
 			
 			// might pick an item in the new tile
