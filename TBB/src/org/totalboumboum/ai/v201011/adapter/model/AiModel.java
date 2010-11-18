@@ -150,30 +150,46 @@ class AiModel
 	 */
 	public boolean simulateUntilCondition(AiHero hero)
 	{	// init
-		HashMap<AiSprite,AiState> specifiedStates = new HashMap<AiSprite, AiState>();
+		HashMap<AiSimSprite,AiState> specifiedStates = new HashMap<AiSimSprite, AiState>();
+		AiSimHero simHero;
 		
 		boolean found = false;
 		do
 		{	// simulate
 			simulate(specifiedStates);
 			// check if the hero was among the limit sprites
-			found = limitSprites.contains(hero);
+			simHero = current.getSpriteById(hero);
+			found = limitSprites.contains(simHero);
 		}
 		while(!found);
 		
 		// check if the hero is still safe
-		hero = current.getSpriteById(hero); //get the latest representation of the sprite
-		AiState state = hero.getState();
+		AiState state = simHero.getState();
 		AiStateName name = state.getName();
 		boolean result = name==AiStateName.FLYING || name==AiStateName.MOVING || name==AiStateName.STANDING;
 		return result;
 	}
 	
+	public void simulateOnce(HashMap<AiSprite,AiState> specifiedStates)
+	{	// converting the specified states
+		HashMap<AiSimSprite,AiState> localSpecifiedStates = new HashMap<AiSimSprite, AiState>();
+		for(Entry<AiSprite,AiState> entry: specifiedStates.entrySet())
+		{	AiSprite sprite = entry.getKey();
+			AiState state = entry.getValue();
+			AiSimSprite simSprite = current.getSpriteById(sprite);
+			localSpecifiedStates.put(simSprite,state);
+		}
+		
+		simulate(localSpecifiedStates);
+	}
+	
 	/**
 	 * calcule l'état suivant de la zone si les états spécifiés en paramètres
-	 * sont appliqués à la zone courante. La méthode renvoie l'état obtenu
-	 * à la fin du prochain évènement (i.e. celui qui se termine le plus vite). 
-	 * Les évènement considérés sont :
+	 * sont appliqués à la zone courante. en l'absence d'état spécifié, le sprite
+	 * continue à faire ce qu'il faisait déjà (brûler, se déplacer, etc.).
+	 * par conséquent, la map contenant les états spécifiés peut être vide. 
+	 * La méthode renvoie l'état obtenu à la fin du prochain évènement 
+	 * (i.e. celui qui se termine le plus vite). Les évènement considérés sont :
 	 * 		- la disparition d'un sprite (ex : une bombe qui a explosé)
 	 * 		- l'apparition d'un sprite (ex : un item qui apparait à la suite de l'explosion d'un mur)
 	 * 		- un changement d'état (ex : un mur qui commence à brûler)
@@ -188,25 +204,16 @@ class AiModel
 	 * @param specifiedStates	
 	 * 		map associant un état à un sprite, permettant de forcer un sprite à prendre un certain état 
 	 */
-	public void simulate(HashMap<AiSprite,AiState> specifiedStates)
+	protected void simulate(HashMap<AiSimSprite,AiState> specifiedStates)
 	{	// create a copy of the current zone
 		previous = current;
 		current = new AiSimZone(previous);
-		
-		// converting the specified states
-		HashMap<AiSimSprite,AiState> localSpecifiedStates = new HashMap<AiSimSprite, AiState>();
-		for(Entry<AiSprite,AiState> entry: specifiedStates.entrySet())
-		{	AiSprite sprite = entry.getKey();
-			AiState state = entry.getValue();
-			AiSimSprite simSprite = current.getSpriteById(sprite);
-			localSpecifiedStates.put(simSprite,state);
-		}
 		
 		// update detonating bombs (done first cause it can mess up the whole zone)
 		for(AiSimBomb bomb: current.getInternalBombs())
 		{	AiSimState state0 = bomb.getState();
 			AiStateName name0 = state0.getName();
-			AiState state = localSpecifiedStates.get(bomb);
+			AiState state = specifiedStates.get(bomb);
 			boolean detonate = false;
 			if(name0==AiStateName.STANDING || name0==AiStateName.MOVING)
 			{	if(state!=null)
@@ -232,7 +239,7 @@ class AiModel
 		
 		// process iteration duration
 		HashMap<AiSimSprite,AiSimState> statesMap = new HashMap<AiSimSprite, AiSimState>();
-		processDuration(sprites,localSpecifiedStates,statesMap);
+		processDuration(sprites,specifiedStates,statesMap);
 		
 		// apply events for the resulting minimal time
 		updateSprites(statesMap,duration);
@@ -257,14 +264,29 @@ class AiModel
 	 * pour les méthodes destinées aux étudiants (public), remplacer
 	 * un sprite/tile par le même sprite dans la zone courante, si besoin
 	 * pour les méthodes appelées en interne, on peut supposer que c'est inutile
+	 * 
 	 */
 	
-	/**
+	/*
 	 * TODO
-	 * - modifier simulateUntilCondition pour ne pas avoir de pb pr retrouver le hero dans la liste
-	 * - définir deux versions différentes de simulate (une externe, une interne)
-	 * - revoir si tous les évènements spécifiés dans la doc sont bien implémentés
-	 * 		p-ê : pouvoir préciser sur quels évènements on veut s'arrêter ?
+	 * possibilité de construire la zone en virant les joueurs,
+	 * comme ça on peut ne simuler que sur les explosions ?
+	 * 
+	 */
+	
+	
+	/*
+	 * TODO
+	 * pb: on calcule l'état avant ou après la limite?
+	 * >> on a déjà l'état avant, faudrait l'état juste après
+	 * comme ça : 
+	 * 		- previous = état précédent
+	 * 		- current = previous + duration
+	 * quand on réalise une action manuelle, ça change direct l'état,
+	 * on peut utiliser des fonctions du type apply:
+	 * 		- créer et faire apparaître un sprite
+	 * 		- déplacer un sprite où on veut
+	 * 		- faire exploser une bombe
 	 */
 	
 	/**
@@ -521,7 +543,7 @@ if(sprite instanceof AiSimBomb)
 			}
 			
 			// bomb
-			else if(sprite instanceof AiSimBlock)
+			else if(sprite instanceof AiSimBomb)
 			{	AiSimBomb bomb = (AiSimBomb)sprite;
 				updateBomb(bomb,state,duration);
 			}
@@ -817,13 +839,13 @@ if(sprite instanceof AiSimBomb)
 	{	AiFire firePrototype = detonatingBomb.getFirePrototype();
 		
 		// if the fire can appear, we affect it to the tile
-		if(tile.isCrossableBy(firePrototype))
+		if(tile.isCrossableBy(firePrototype) || tile.equals(detonatingBomb.getTile()))
 		{	// create sprite
 			AiSimFire fire = new AiSimFire(firePrototype,tile);
 			current.addSprite(fire);
 			// set properties
 			fire.setId(createNewId());
-			AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+			AiSimState state = new AiSimState(AiStateName.BURNING,Direction.NONE,0);
 			fire.setState(state);
 		}
 		
@@ -840,9 +862,11 @@ if(sprite instanceof AiSimBomb)
 		
 		// bombs
 		for(AiSimBomb bomb: tile.getInternalBombs())
-		{	AiStateName name = bomb.getState().getName();
-			if(bomb.hasExplosionTrigger() && (name==AiStateName.STANDING || name==AiStateName.MOVING))
-				detonateBomb(bomb);
+		{	if(!bomb.equals(detonatingBomb))
+			{	AiStateName name = bomb.getState().getName();
+				if(bomb.hasExplosionTrigger() && (name==AiStateName.STANDING || name==AiStateName.MOVING))
+					detonateBomb(bomb);
+			}
 		}
 
 		// heroes
