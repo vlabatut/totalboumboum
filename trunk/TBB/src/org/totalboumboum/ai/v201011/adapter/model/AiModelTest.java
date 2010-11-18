@@ -64,7 +64,7 @@ public final class AiModelTest
 		// fire prototype
 		firePrototype = new AiSimFire(id++,null,0,0,0,
 				state,burningDuration,0,
-				throughBlocks,throughBombs,throughItems);
+				false,true,false);
 		
 		// bomb prototype
 		stopHeroes = AiStopType.WEAK_STOP;
@@ -92,7 +92,7 @@ public final class AiModelTest
 		zone.addHero(hero,true);
 
 		// bomb
-/*		stopHeroes = AiStopType.WEAK_STOP;
+		stopHeroes = AiStopType.WEAK_STOP;
 		stopFires = AiStopType.WEAK_STOP;
 		tile = zone.getTile(5,5);
 		posX = tile.getPosX();
@@ -106,7 +106,7 @@ public final class AiModelTest
 				stopHeroes,stopFires,throughItems,bombRange,penetrating,
 				color,working,0);
 		zone.addSprite(bomb);
-*/
+
 		// hardwalls
 		currentSpeed = 0;
 		destructible = false;
@@ -134,7 +134,7 @@ public final class AiModelTest
 		long duration = 0;
 		int iteration = 0;
 		do
-		{	model.simulate(specifiedStates);
+		{	model.simulateOnce(specifiedStates);
 			duration = model.getDuration();
 			
 			System.out.println("iteration "+iteration);
