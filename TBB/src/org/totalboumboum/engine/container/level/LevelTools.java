@@ -51,6 +51,15 @@ public class LevelTools
 	/**
 	 * allows to programmatically initialize a zone,
 	 * in order to help designing new levels
+	 * 
+	 * @param args
+	 * @throws IllegalArgumentException
+	 * @throws SecurityException
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws IllegalAccessException
+	 * @throws NoSuchFieldException
 	 */
 	public static void main(String[] args) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	HollowLevel level = initLevel(15,15,"temp","level","superbomberman1","tournament3");
@@ -67,6 +76,20 @@ public class LevelTools
 		saveLevel(level);
 	}
 		
+	/**
+	 * save the specified level in order to get a set of files
+	 * the game will be able to load and use.
+	 *  
+	 * @param hollowLevel
+	 * 		the level to be saved
+	 * @throws IOException
+	 * @throws IllegalArgumentException
+	 * @throws SecurityException
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IllegalAccessException
+	 * @throws NoSuchFieldException
+	 */
 	private static void saveLevel(HollowLevel hollowLevel) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{	LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		
@@ -90,6 +113,21 @@ public class LevelTools
 	
 	/**
 	 * creates and save an empty level
+	 * 
+	 * @param height
+	 * 		zone height (in tiles)
+	 * @param width
+	 * 		zone width (in tiles)
+	 * @param pack
+	 * 		name of the pack containing the level
+	 * @param name
+	 * 		name of the level
+	 * @param instance
+	 * 		name of the instance the level uses
+	 * @param theme
+	 * 		name of the theme used for the blocks
+	 * @return
+	 * 		an empty level with the specified properties
 	 */
 	private static HollowLevel initLevel(int height, int width, String pack, String name, String instance, String theme)
 	{	HollowLevel result = new HollowLevel();
@@ -138,6 +176,20 @@ public class LevelTools
 		return result;
 	}
 	
+	/**
+	 * set the location of 4 players in the level
+	 * 
+	 * @param players
+	 * 		object representing the players locations in the level object
+	 * @param left
+	 * 		column of the left players
+	 * @param up
+	 * 		line of the top players
+	 * @param right
+	 * 		column of the right players
+	 * @param down
+	 * 		column of the bottom players
+	 */
 	private static void initPlayersLocations(Players players, int left, int up, int right, int down)
 	{	for(int i=1;i<=4;i++)
 		{	PlayerLocation[] loc = new PlayerLocation[i];
@@ -169,11 +221,21 @@ public class LevelTools
 			}
 			players.addLocation(loc);
 		}
-
 	}
-	
+
 	/**
 	 * put a border on a supposedly empty level
+	 * 
+	 * @param hollowLevel
+	 * 		the level get borders
+	 * @param xThickness
+	 * 		thickness of the vertical borders (in tiles)
+	 * @param yThickness
+	 * 		thickness of the horizontal borders (in tiles)
+	 * @param xMargin
+	 * 		empty space between the left/right sides of the zone and their vertical border (in tiles)
+	 * @param yMargin
+	 * 		empty space between the top/bottom sides of the zone and their horizontal border (in tiles)
 	 */
 	private static void addBorder(HollowLevel hollowLevel, int xThickness, int yThickness, int xMargin, int yMargin)
 	{	// init
@@ -226,9 +288,15 @@ public class LevelTools
 		Players players = hollowLevel.getPlayers();
 		initPlayersLocations(players,left,up,right,down);
 	}
-	
+
 	/**
-	 * set a background on the floor, without changing anything else in the level structure
+	 * set a background on the floor, 
+	 * without changing anything else in the level structure.
+	 * the method automatically uses the floors located
+	 * in the theme set for the specified level
+	 * 
+	 * @param hollowLevel
+	 * 		the level to get a nice background
 	 */
 	private static void setBackground(HollowLevel hollowLevel)
 	{	// init
@@ -286,10 +354,13 @@ public class LevelTools
 			}
 		}
 	}
-	
+
 	/**
 	 * add the traditional grid structure to an empty level
-	 * i.e. hardwall on 1 column/line out of 2
+	 * i.e. hardwall on 1 column/line out of 2.
+	 * 
+	 * @param hollowLevel
+	 * 		the level to be completed
 	 */
 	private static void addGrid(HollowLevel hollowLevel)
 	{	// init
@@ -312,7 +383,17 @@ public class LevelTools
 			}
 		}		
 	}
-
+	
+	/**
+	 * add softwalls wherever it is necessary in the specified level,
+	 * so that a classic zone is obtained.
+	 * Note the initial locations of the players are considered,
+	 * so that no block is put on a tile possibly occupied by a player
+	 * when the round starts.
+	 * 
+	 * @param hollowLevel
+	 * 		the level to be completed
+	 */
 	private static void addSoftwalls(HollowLevel hollowLevel)
 	{	// init
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
@@ -337,6 +418,26 @@ public class LevelTools
 		}		
 	}
 	
+	/**
+	 * insert a new line in order to make the zone wider.
+	 * the user can choose to slide only certain types
+	 * of sprites, or none of them.
+	 * 
+	 * @param hollowLevel
+	 * 		the level to be modified
+	 * @param line
+	 * 		the location of the new line
+	 * @param moveFloors
+	 * 		whether the floor sprites should be moved to make room for the new line 
+	 * @param moveBlocks
+	 * 		whether the block sprites should be moved to make room for the new line 
+	 * @param moveItems
+	 * 		whether the item sprites should be moved to make room for the new line 
+	 * @param moveBombs
+	 * 		whether the bomb sprites should be moved to make room for the new line 
+	 * @param moveVariables
+	 * 		whether the variable sprites should be moved to make room for the new line 
+	 */
 	private static void insertLine(HollowLevel hollowLevel, int line, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
 	{	// update dimensions
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
@@ -395,6 +496,26 @@ public class LevelTools
 		}
 	}
 
+	/**
+	 * insert a new column in order to make the zone higher.
+	 * the user can choose to slide only certain types
+	 * of sprites, or none of them.
+	 * 
+	 * @param hollowLevel
+	 * 		the level to be modified
+	 * @param col
+	 * 		the location of the new column
+	 * @param moveFloors
+	 * 		whether the floor sprites should be moved to make room for the new column 
+	 * @param moveBlocks
+	 * 		whether the block sprites should be moved to make room for the new column 
+	 * @param moveItems
+	 * 		whether the item sprites should be moved to make room for the new column 
+	 * @param moveBombs
+	 * 		whether the bomb sprites should be moved to make room for the new column 
+	 * @param moveVariables
+	 * 		whether the variable sprites should be moved to make room for the new column 
+	 */
 	private static void insertCol(HollowLevel hollowLevel, int col, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
 	{	// update dimensions
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();

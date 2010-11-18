@@ -100,8 +100,10 @@ public class XmlTools
 	}
 	
 	public static Element getRootFromFile(File dataFile, File schemaFile) throws SAXException, IOException
-	{	FileInputStream in = new FileInputStream(dataFile);
+	{	// init
+		FileInputStream in = new FileInputStream(dataFile);
 		BufferedInputStream inBuff = new BufferedInputStream(in);
+		
 		// JAXP
 		DocumentBuilder bldr = XmlNames.documentBuilders.get(schemaFile.getName());
 		org.w3c.dom.Document doc;
@@ -116,10 +118,12 @@ public class XmlTools
 		{	System.out.println(dataFile+" : "+schemaFile);
 			throw e;
 		}
+		
 		// JDOM
 		DOMBuilder builder = new DOMBuilder();
         Document document = builder.build(doc);
-		// root
+		
+        // root
 		Element result = document.getRootElement();
 		inBuff.close();
 		return result;
