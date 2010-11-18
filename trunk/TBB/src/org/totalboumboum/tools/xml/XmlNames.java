@@ -351,5 +351,6 @@ public class XmlNames
 	public static final String VAL_ANY = "ANY";
 	public static final String VAL_MAX = "MAXIMUM";
 	public static final String VAL_SOME = "SOME";
+	
 	public static final HashMap<String,DocumentBuilder> documentBuilders = new HashMap<String,DocumentBuilder>();	
 }
