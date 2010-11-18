@@ -44,9 +44,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  *
  */
-class AiModel
+class AiModel0
 {	
-	public AiModel(AiZone currentZone)
+	public AiModel0(AiZone currentZone)
 	{	// init the model with a copy of the current zone
 		this.current = new AiSimZone(currentZone);
 		
@@ -150,12 +150,13 @@ class AiModel
 	 */
 	public boolean simulateUntilCondition(AiHero hero)
 	{	// init
+		HashMap<AiSimSprite,AiState> specifiedStates = new HashMap<AiSimSprite, AiState>();
 		AiSimHero simHero;
 		
 		boolean found = false;
 		do
 		{	// simulate
-			simulateOnce();
+			simulate(specifiedStates);
 			// check if the hero was among the limit sprites
 			simHero = current.getSpriteById(hero);
 			found = limitSprites.contains(simHero);
@@ -167,6 +168,19 @@ class AiModel
 		AiStateName name = state.getName();
 		boolean result = name==AiStateName.FLYING || name==AiStateName.MOVING || name==AiStateName.STANDING;
 		return result;
+	}
+	
+	public void simulateOnce(HashMap<AiSprite,AiState> specifiedStates)
+	{	// converting the specified states
+		HashMap<AiSimSprite,AiState> localSpecifiedStates = new HashMap<AiSimSprite, AiState>();
+		for(Entry<AiSprite,AiState> entry: specifiedStates.entrySet())
+		{	AiSprite sprite = entry.getKey();
+			AiState state = entry.getValue();
+			AiSimSprite simSprite = current.getSpriteById(sprite);
+			localSpecifiedStates.put(simSprite,state);
+		}
+		
+		simulate(localSpecifiedStates);
 	}
 	
 	/**
@@ -190,10 +204,29 @@ class AiModel
 	 * @param specifiedStates	
 	 * 		map associant un état à un sprite, permettant de forcer un sprite à prendre un certain état 
 	 */
-	public void simulateOnce()
+	protected void simulate(HashMap<AiSimSprite,AiState> specifiedStates)
 	{	// create a copy of the current zone
 		previous = current;
 		current = new AiSimZone(previous);
+		
+		// update detonating bombs (done first cause it can mess up the whole zone)
+		for(AiSimBomb bomb: current.getInternalBombs())
+		{	AiSimState state0 = bomb.getState();
+			AiStateName name0 = state0.getName();
+			AiState state = specifiedStates.get(bomb);
+			boolean detonate = false;
+			if(name0==AiStateName.STANDING || name0==AiStateName.MOVING)
+			{	if(state!=null)
+					detonate = state.getName()==AiStateName.BURNING;
+				else
+				{	long normalDuration = bomb.getNormalDuration();
+					long time0 = state0.getTime();
+					detonate = bomb.hasCountdownTrigger() && time0>=normalDuration;
+				}
+			}
+			if(detonate)
+				detonateBomb(bomb);
+		}
 		
 		// retrieve all sprites remaining in the zone
 		List<AiSimSprite> sprites = new ArrayList<AiSimSprite>();
@@ -205,15 +238,11 @@ class AiModel
 		sprites.addAll(current.getInternalItems());
 		
 		// process iteration duration
-		processDuration(sprites);
+		HashMap<AiSimSprite,AiSimState> statesMap = new HashMap<AiSimSprite, AiSimState>();
+		processDuration(sprites,specifiedStates,statesMap);
 		
 		// apply events for the resulting minimal time
-		toBeDetonated.clear();
-		updateSprites(sprites,duration);
-		
-		// update detonating bombs
-		for(AiSimBomb bomb: toBeDetonated)
-			detonateBomb(bomb);
+		updateSprites(statesMap,duration);
 		
 		// update the resulting zone
 		current.updateTime(duration);
@@ -276,23 +305,30 @@ class AiModel
 	 * @param specifiedStates
 	 * 		liste des états déjà spécifiés
 	 */
-	private void processDuration(List<AiSimSprite> sprites)
+	private void processDuration(List<AiSimSprite> sprites, HashMap<AiSimSprite,AiState> specifiedStates, HashMap<AiSimSprite,AiSimState> statesMap)
 	{	// init
 		duration = Long.MAX_VALUE;
 		limitSprites = new ArrayList<AiSimSprite>();
 		
 		for(AiSimSprite sprite: sprites)
-		{	
+		{	AiSimState state;
+			// get the specified new state for this sprite
 if(sprite instanceof AiSimHero)
 	System.out.print("");
 if(sprite instanceof AiSimBomb)
 	System.out.print("");
-			// process the sprite next state
-			AiSimState state = sprite.getState();
-			// process the time remaining before the next change (be it of state, tile, etc.)
+			AiState temp = specifiedStates.get(sprite);
+			if(temp!=null)
+				state = new AiSimState(temp);
+			// or get an automatically processed one if no specified state is available
+			else
+				state = processNewState(sprite);
+			// add to map
+			statesMap.put(sprite,state);
+			// then process the time remaining before the next state change
 			if(state.getName()!=AiStateName.ENDED)
-			{	long changeTime = processChangeTime(current,sprite);
-				if(changeTime>0) //zero means there's nothing to do (e.g.: moving towards an obstacle) and should therefore be ignored
+			{	long changeTime = processChangeTime(current,sprite,state);
+				if(changeTime>0) //zero means there's nothing to do, e.g.: moving towards an obstacle
 				{	// new min time
 					if(changeTime<duration)
 					{	duration = changeTime;
@@ -306,9 +342,68 @@ if(sprite instanceof AiSimBomb)
 			}
 		}
 		
-		// if no change at all: return a zero duration
+		// no state change means no change at all
 		if(duration==Long.MAX_VALUE)
 			duration = 0;
+	}
+	
+	/**
+	 * calcule le nouvel état du sprite passé en paramètre,
+	 * quand aucun état n'a été explicitement spécifié pour lui.
+	 * 
+	 * @param sprite	le sprite à traiter
+	 * @return	son nouvel état
+	 */
+	private AiSimState processNewState(AiSimSprite sprite)
+	{	// previous state
+		AiSimTile tile0 = sprite.getTile();
+		AiSimState state0 = sprite.getState();
+		long time0 = state0.getTime();
+		AiStateName name0 = state0.getName();
+		Direction direction0 = state0.getDirection();
+		// result
+		AiStateName name = name0;
+		Direction direction = direction0;
+		long time = time0;
+		
+		// sprite might have to disappear (block, bomb, fire, hero, item) after finishing burning
+		if(name0==AiStateName.BURNING)
+		{	long burningDuration = sprite.getBurningDuration();
+			if(time0>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
+			{	name = AiStateName.ENDED;
+				direction = Direction.NONE;
+				time = 0;
+			}
+		}
+		
+		// a bomb might have to explode
+		else if(sprite instanceof AiSimBomb)
+		{	if(name0==AiStateName.STANDING || name0==AiStateName.MOVING)
+			{	AiSimBomb bomb = (AiSimBomb) sprite;
+				long normalDuration = bomb.getNormalDuration();
+				if(bomb.hasCountdownTrigger()) //only for time bombs
+				{	if(time0>=normalDuration)
+					{	name = AiStateName.BURNING;
+						direction = Direction.NONE;
+						time = 0;
+					}
+				}
+			}
+		}
+
+		// an item might have to disappear if it's been picked
+		else if(sprite instanceof AiSimItem)
+		{	if(name0==AiStateName.STANDING)
+			{	if(tile0.getHeroes().size()>0)
+				{	name = AiStateName.ENDED;
+					direction = Direction.NONE;
+					time = 0;
+				}
+			}
+		}
+
+		AiSimState result = new AiSimState(name,direction,time);
+		return result;
 	}
 	
 	/**
@@ -327,9 +422,8 @@ if(sprite instanceof AiSimBomb)
 	 * @return	
 	 * 		la durée pendant laquelle le sprite va rester à cet état
 	 */
-	private long processChangeTime(AiSimZone current, AiSimSprite sprite)
+	private long processChangeTime(AiSimZone current, AiSimSprite sprite, AiSimState state)
 	{	long result = Long.MAX_VALUE;
-		AiSimState state = sprite.getState();
 		AiStateName name = state.getName();
 		Direction direction = state.getDirection();
 		
@@ -381,7 +475,6 @@ if(sprite instanceof AiSimBomb)
 				else
 					result = (long)temp;
 			}
-			
 			// it can also be a bomb waiting to explode
 			if(sprite instanceof AiSimBomb)
 			{	AiSimBomb bomb = (AiSimBomb) sprite;
@@ -442,145 +535,51 @@ if(sprite instanceof AiSimBomb)
 	 * @param time	
 	 * 		la durée à prendre en compte
 	 */
-	private void updateSprites(List<AiSimSprite> sprites, long duration)
+	private void updateSprites(HashMap<AiSimSprite,AiSimState> statesMap, long duration)
 	{	
-		for(AiSimSprite sprite: sprites)
+		for(Entry<AiSimSprite,AiSimState> entry: statesMap.entrySet())
 		{	// init
-			AiSimState state = sprite.getState();
-			AiStateName name = state.getName();
-			
-			// this shouldn't happen
-			if(name==AiStateName.ENDED)
-			{	// remove from zone
-				current.removeSprite(sprite);
-			}
+			AiSimSprite sprite = entry.getKey();
+			AiSimState state = entry.getValue();
 			
 			// block
 			if(sprite instanceof AiSimBlock)
 			{	AiSimBlock block = (AiSimBlock)sprite;
-				updateBlock(block,duration);
+				updateBlock(block,state,duration);
 			}
 			
 			// bomb
 			else if(sprite instanceof AiSimBomb)
 			{	AiSimBomb bomb = (AiSimBomb)sprite;
-				updateBomb(bomb,duration);
+				updateBomb(bomb,state,duration);
 			}
 			
 			// fire
 			else if(sprite instanceof AiSimFire)
 			{	AiSimFire fire = (AiSimFire)sprite;
-				updateFire(fire,duration);
+				updateFire(fire,state,duration);
 			}
 			
 			// floor
 			else if(sprite instanceof AiSimFloor)
 			{	AiSimFloor floor = (AiSimFloor)sprite;
-				updateFloor(floor,duration);
+				updateFloor(floor,state,duration);
 			}
 			
 			// hero
 			else if(sprite instanceof AiSimHero)
 			{	AiSimHero hero = (AiSimHero)sprite;
-				updateHero(hero,duration);
+				updateHero(hero,state,duration);
 			}
 			
 			// item
 			else if(sprite instanceof AiSimItem)
 			{	AiSimItem item = (AiSimItem)sprite;
-				updateItem(item,duration);
+				updateItem(item,state,duration);
 			}
 		}
 	}
-	
-	private void moveSprite(AiSimSprite sprite, long duration)
-	{	//NOTE same simplification than before: we suppose the levels are all grids, 
-		// meaning at least one coordinate is at the center of a tile
-		// plus the sprite moves in a primary direction (DOWN, LEFT, RIGHT, UP: no composite)
-		
-		// init misc
-		AiSimState state = sprite.getState();
-		Direction direction = state.getDirection();
-		
-		// init location
-		AiSimTile tile = sprite.getTile();
-		double posX = sprite.getPosX();
-		double posY = sprite.getPosY();
-		double posZ = sprite.getPosZ();
-		
-		// init speed
-		double currentSpeed = sprite.getCurrentSpeed();
-		if(sprite instanceof AiSimBomb)
-		{	AiSimBomb bomb = (AiSimBomb)sprite;
-			currentSpeed = bomb.getSlidingSpeed();
-		}
-		else if(sprite instanceof AiSimHero)
-		{	AiSimHero hero = (AiSimHero)sprite;
-			currentSpeed = hero.getWalkingSpeed();
-		}
-		
-		// compute move
-		double allowed = currentSpeed*duration/1000;
-		int dir[] = direction.getIntFromDirection();
-		double tileSize = tile.getSize();
-		double tileX0 = tile.getPosX();
-		double tileY0 = tile.getPosY();
-		AiSimTile neighborTile = tile.getNeighbor(direction);
-		double offset = 0;
-		if(neighborTile.isCrossableBy(sprite)) //deal with obstacles
-			offset = tileSize/2;
-		double goalX = current.normalizePositionX(tileX0+dir[0]*offset);
-		double goalY = current.normalizePositionY(tileY0+dir[1]*offset);
-		double dx = Math.abs(posX-goalX);
-		double dy = Math.abs(posY-goalY);
-		double manDist = dx+dy;
-		if(manDist<=allowed)
-		{	posX = goalX;
-			posY = goalY;
-			if(offset==0)
-				currentSpeed = 0;
-		}
-		else
-		{	if(dx>dy && dy>0)
-			{	double temp = Math.min(allowed,dy);
-				posY = posY+dir[1]*temp;
-				allowed = allowed - temp;
-				posX = posX+dir[0]*allowed;
-			}
-			else
-			{	double temp = Math.min(allowed,dx);
-				posX = posX+dir[0]*temp;
-				allowed = allowed - temp;
-				posY = posY+dir[1]*allowed;
-			}
-		}
-		
-		// update tile
-		AiSimTile newTile = current.getTile(posX,posY);
-		if(!newTile.equals(tile))
-		{	tile.removeSprite(sprite);
-			tile.addSprite(sprite);
-			sprite.setTile(tile);
-		}
-		
-		// a hero might pick an item in the new tile
-		if(sprite instanceof AiSimHero && !newTile.equals(tile))
-		{	AiSimHero hero = (AiSimHero)sprite;
-			List<AiSimItem> items = newTile.getInternalItems(); 
-			for(AiSimItem item: items)
-			{	AiStateName itemStateName = item.getState().getName();
-				if(itemStateName==AiStateName.STANDING)
-					pickItem(hero,item);
-			}
-		}
 
-		// update location
-		sprite.setPos(posX,posY,posZ);
-		
-		// update speed
-		sprite.setCurrentSpeed(currentSpeed);
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -595,86 +594,78 @@ if(sprite instanceof AiSimBomb)
 	 * @param duration	
 	 * 		la durée à prendre en compte
 	 */
-	private void updateBlock(AiSimBlock block, long duration)
+	private void updateBlock(AiSimBlock block, AiSimState newState, long duration)
 	{	// init
-		AiSimState state = block.getState(),newState;
-		AiStateName name = state.getName();
-		Direction direction = state.getDirection();
-		long time = state.getTime() + duration;
+		AiStateName name = newState.getName();
+		
+		// always increment the time spent in this state
+		long time = newState.getTime() + duration;
+		newState.setTime(time);
 
 		// block is burning
 		if(name==AiStateName.BURNING)
-		{	long burningDuration = block.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
-			{	// update state
-				name = AiStateName.ENDED;
-				direction = Direction.NONE;
-				time = 0;
-				// possibly release items
-				releaseItem(block);
-				// remove from zone
-				current.removeSprite(block);
-			}	
+		{	// update
+			block.setCurrentSpeed(0);
+			block.setState(newState);
+		}
+		
+		// block has finished burning: might release an item
+		else if(name==AiStateName.ENDED)
+		{	// update
+			block.setCurrentSpeed(0);
+			block.setState(newState);
+			// remove from zone
+			current.removeSprite(block);
+			// possibly release an item
+			if(simulateItemsAppearing && current.getHiddenItemsCount()>0)
+			{	// select item type
+				HashMap<AiItemType, Double> probas = current.getHiddenItemsProbas();
+				double p = Math.random();
+				double total = 0;
+				Iterator<Entry<AiItemType,Double>> it = probas.entrySet().iterator();
+				AiItemType itemType = null;
+				do
+				{	Entry<AiItemType,Double> entry = it.next();
+					AiItemType type = entry.getKey();
+					double value = entry.getValue();
+					total = total + value;
+					if(p<=total)
+						itemType = type;
+				}
+				while(itemType==null && it.hasNext());
+				// create item
+				int id = createNewId();
+				AiSimTile tile = block.getTile();
+				double posX = tile.getPosX();
+				double posY = tile.getPosY();
+				double posZ = 0;
+				AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+				long burningDuration = 0; //can't retrieve it
+				double currentSpeed = 0;
+				AiStopType stopBombs = AiStopType.WEAK_STOP;
+				AiStopType stopFires = AiStopType.WEAK_STOP;
+				AiSimItem item = new AiSimItem(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed,itemType,stopBombs,stopFires);
+				// update zone
+				current.addSprite(item);
+				current.updateHiddenItemsCount(itemType);
+			}
 		}
 		
 		// blocks can't move (at least for now)
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
-		{	// NOTE useless for the moment
-			//moveSprite(block);
+		{	// useless here
 		}
 		
 		// block just stands
 		else if(name==AiStateName.STANDING)
-		{	// nothing special to do
-		}
-		
-		// always update the state
-		newState = new AiSimState(name,direction,time);
-		block.setState(newState);
-	}
-	
-	private void releaseItem(AiSimBlock block)
-	{	if(simulateItemsAppearing && current.getHiddenItemsCount()>0)
-		{	// select item type
-			HashMap<AiItemType, Double> probas = current.getHiddenItemsProbas();
-			double p = Math.random();
-			double total = 0;
-			Iterator<Entry<AiItemType,Double>> it = probas.entrySet().iterator();
-			AiItemType itemType = null;
-			do
-			{	Entry<AiItemType,Double> entry = it.next();
-				AiItemType type = entry.getKey();
-				double value = entry.getValue();
-				total = total + value;
-				if(p<=total)
-					itemType = type;
-			}
-			while(itemType==null && it.hasNext());
-			
-			// create item
-			int id = createNewId();
-			AiSimTile tile = block.getTile();
-			double posX = tile.getPosX();
-			double posY = tile.getPosY();
-			double posZ = 0;
-			AiSimState state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
-			long burningDuration = 0; //can't retrieve it
-			double currentSpeed = 0;
-			AiStopType stopBombs = AiStopType.WEAK_STOP;
-			AiStopType stopFires = AiStopType.WEAK_STOP;
-			AiSimItem item = new AiSimItem(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed,itemType,stopBombs,stopFires);
-			
-			// update zone
-			current.addSprite(item);
-			current.updateHiddenItemsCount(itemType);
+		{	// update
+			block.setState(newState);
 		}
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<AiSimBomb> toBeDetonated = new ArrayList<AiSimBomb>();
-	
 	/**
 	 * calcule l'état du sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
@@ -686,103 +677,121 @@ if(sprite instanceof AiSimBomb)
 	 * @param duration
 	 * 		la durée à prendre en compte
 	 */
-	private void updateBomb(AiSimBomb bomb, long duration)
+	private void updateBomb(AiSimBomb bomb, AiSimState newState, long duration)
 	{	// init
-		AiSimState state = bomb.getState(),newState;
-		AiStateName name = state.getName();
-		Direction direction = state.getDirection();
-		long time = state.getTime() + duration;
+		AiStateName name = newState.getName();
 		
+		// always increment the time spent in this state
+		long time = newState.getTime() + duration;
+		newState.setTime(time);
+
 		// bomb is burning
 		if(name==AiStateName.BURNING)
-		{	long burningDuration = bomb.getBurningDuration();
-			if(time>=burningDuration)
-			{	// update state
-				name = AiStateName.ENDED;
-				direction = Direction.NONE;
-				time = 0;
-				// possibly update owner
-				AiSimHero owner = bomb.getOwner();
-				if(owner!=null)
-					owner.updateBombNumber(-1);
-				// remove from zone
-				current.removeSprite(bomb);
-			}	
+		{	// update
+			bomb.setCurrentSpeed(0);
+			bomb.setState(newState);
+		}
+		
+		// bomb has finished burning : should disappear
+		else if(name==AiStateName.ENDED)
+		{	// update
+			bomb.setCurrentSpeed(0);
+			bomb.setState(newState);
+			AiSimHero owner = bomb.getOwner();
+			// update owner
+			if(owner!=null)
+				owner.updateBombNumber(-1);
+			// remove from zone
+			current.removeSprite(bomb);
 		}
 		
 		// bomb is moving : process changes in location/tile
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
-		{	// update location
-			moveSprite(bomb,duration);
-			// check for detonation
-			if(name==AiStateName.MOVING)
-			{	long normalDuration = bomb.getNormalDuration();
-				if(bomb.hasCountdownTrigger() && time>=normalDuration)
-				{	// update state
-//					name = AiStateName.BURNING;
-//					direction = Direction.NONE;
-//					time = 0;
-					// update speed
-//					bomb.setCurrentSpeed(0);
-					// add to detonate list
-					//detonateBomb(bomb);
-					toBeDetonated.add(bomb);
+		{	//NOTE same simplification than before: we suppose the levels are all grids, 
+			// meaning at least one coordinate is at the center of a tile
+			// plus players move in a primary direction (DOWN, LEFT, RIGHT, UP: no composite) 
+			AiSimTile tile = bomb.getTile();
+			Direction direction = newState.getDirection();
+			double posX = bomb.getPosX();
+			double posY = bomb.getPosY();
+			double posZ = bomb.getPosZ();
+			double currentSpeed = bomb.getSlidingSpeed();
+			double allowed = currentSpeed*duration/1000;
+			int dir[] = direction.getIntFromDirection();
+			double tileSize = tile.getSize();
+			double tileX0 = tile.getPosX();
+			double tileY0 = tile.getPosY();
+			AiSimTile neighborTile = tile.getNeighbor(direction);
+			double offset = 0;
+			if(neighborTile.isCrossableBy(bomb)) //deal with obstacles
+				offset = tileSize/2;
+			double goalX = current.normalizePositionX(tileX0+dir[0]*offset);
+			double goalY = current.normalizePositionY(tileY0+dir[1]*offset);
+			double dx = Math.abs(posX-goalX);
+			double dy = Math.abs(posY-goalY);
+			double manDist = dx+dy;
+			if(manDist<=allowed)
+			{	posX = goalX;
+				posY = goalY;
+				if(offset==0)
+					currentSpeed = 0;
+			}
+			else
+			{	if(dx>dy && dy>0)
+				{	double temp = Math.min(allowed,dy);
+					posY = posY+dir[1]*temp;
+					allowed = allowed - temp;
+					posX = posX+dir[0]*allowed;
+				}
+				else
+				{	double temp = Math.min(allowed,dx);
+					posX = posX+dir[0]*temp;
+					allowed = allowed - temp;
+					posY = posY+dir[1]*allowed;
 				}
 			}
+			// update tile
+			AiSimTile newTile = current.getTile(posX,posY);
+			if(!newTile.equals(tile))
+			{	tile.removeSprite(bomb);
+				tile.addSprite(bomb);
+				bomb.setTile(tile);
+			}
+			
+			// update location
+			bomb.setPos(posX,posY,posZ);
+			
+			// update state
+			bomb.setCurrentSpeed(currentSpeed);
+			bomb.setState(newState);
 		}
 		
 		// bomb just stands
-		if(name==AiStateName.STANDING)
-		{	// check for detonation
-			long normalDuration = bomb.getNormalDuration();
-			if(bomb.hasCountdownTrigger() && time>=normalDuration)
-			{	// update state
-//				name = AiStateName.BURNING;
-//				direction = Direction.NONE;
-//				time = 0;
-				// add to detonate list
-				//detonateBomb(bomb);
-				toBeDetonated.add(bomb);
-			}
+		else if(name==AiStateName.STANDING)
+		{	// update
+			bomb.setCurrentSpeed(0);
+			bomb.setState(newState);
 		}
-
-		// always update the state
-		newState = new AiSimState(name,direction,time);
-		bomb.setState(newState);
 	}
 
 	public void detonateBomb(AiBomb bomb)
 	{	// get the bomb
 		AiSimBomb simBomb = current.getSpriteById(bomb);
-		
 		// detonate the bomb
 		detonateBomb(simBomb);
 	}
 	
 	protected void detonateBomb(AiSimBomb bomb)
-	{	// init
-		AiSimState state = bomb.getState();
-		AiStateName name = state.getName();
-		
-		// check if the bomb can actually detonate
-		if(name==AiStateName.STANDING || name==AiStateName.MOVING)
-		{	// update state
-			name = AiStateName.BURNING;
-			Direction direction = Direction.NONE;
-			long time = 0;
-			AiSimState newState = new AiSimState(name,direction,time);
-			bomb.setState(newState);
-
-			// update speed (possibly)
-			bomb.setCurrentSpeed(0);
-			
-			// process each tile in the blast
-			List<AiTile> blast = bomb.getBlast();
-			for(AiTile tile: blast)
-			{	AiSimTile simTile = (AiSimTile) tile;
-				burnTile(simTile,bomb);
-			}
+	{	// process each tile in the blast
+		List<AiTile> blast = bomb.getBlast();
+		for(AiTile tile: blast)
+		{	AiSimTile simTile = (AiSimTile) tile;
+			burnTile(simTile,bomb);
 		}
+		
+		// update the bomb owner
+//		AiSimHero hero = bomb.getOwner();
+//		hero.updateBombNumber(1);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -799,24 +808,26 @@ if(sprite instanceof AiSimBomb)
 	 * @param duration
 	 * 		la durée à prendre en compte
 	 */
-	private void updateFire(AiSimFire fire, long duration)
+	private void updateFire(AiSimFire fire, AiSimState newState, long duration)
 	{	// init
-		AiSimState state = fire.getState(),newState;
-		AiStateName name = state.getName();
-		Direction direction = state.getDirection();
-		long time = state.getTime() + duration;
+		AiStateName name = newState.getName();
+		
+		// always increment the time spent in this state
+		long time = newState.getTime() + duration;
+		newState.setTime(time);
 
-		// fire is burning (only natural, I guess)
+		// fire is burning
 		if(name==AiStateName.BURNING)
-		{	long burningDuration = fire.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
-			{	// update state
-				name = AiStateName.ENDED;
-				direction = Direction.NONE;
-				time = 0;
-				// remove from zone
-				current.removeSprite(fire);
-			}	
+		{	// update
+			fire.setState(newState);
+		}
+		
+		// fire has finished burning : should disappear
+		else if(name==AiStateName.ENDED)
+		{	// update
+			fire.setState(newState);
+			// remove from zone
+			current.removeSprite(fire);
 		}
 
 		// fire can't move
@@ -828,10 +839,6 @@ if(sprite instanceof AiSimBomb)
 		else if(name==AiStateName.STANDING)
 		{	// useless here
 		}
-		
-		// always update the state
-		newState = new AiSimState(name,direction,time);
-		fire.setState(newState);
 	}
 
 	protected void burnTile(AiSimTile tile, AiSimBomb detonatingBomb)
@@ -903,24 +910,26 @@ if(sprite instanceof AiSimBomb)
 	 * @param duration
 	 * 		la durée à prendre en compte
 	 */
-	private void updateFloor(AiSimFloor floor, long duration)
+	private void updateFloor(AiSimFloor floor, AiSimState newState, long duration)
 	{	// init
-		AiSimState state = floor.getState(),newState;
-		AiStateName name = state.getName();
-		Direction direction = state.getDirection();
-		long time = state.getTime() + duration;
+		AiStateName name = newState.getName();
+		
+		// always increment the time spent in this state
+		long time = newState.getTime() + duration;
+		newState.setTime(time);
 
-		// floor is burning
+		// hero is burning
 		if(name==AiStateName.BURNING)
-		{	long burningDuration = floor.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
-			{	// update state
-				name = AiStateName.ENDED;
-				direction = Direction.NONE;
-				time = 0;
-				// remove from zone
-				current.removeSprite(floor);
-			}	
+		{	// update
+			floor.setState(newState);
+		}
+		
+		// floor is disappearing (how?)
+		else if(name==AiStateName.ENDED)
+		{	// update
+			floor.setState(newState);
+			// remove from zone
+			current.removeSprite(floor);
 		}
 		
 		// floors can't move (at least for now)
@@ -930,12 +939,9 @@ if(sprite instanceof AiSimBomb)
 		
 		// floor just stands
 		else if(name==AiStateName.STANDING)
-		{	// nothing to do
+		{	// update
+			floor.setState(newState);
 		}
-		
-		// always update the state
-		newState = new AiSimState(name,direction,time);
-		floor.setState(newState);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -952,42 +958,108 @@ if(sprite instanceof AiSimBomb)
 	 * @param duration
 	 * 		la durée à prendre en compte
 	 */
-	private void updateHero(AiSimHero hero, long duration)
+	private void updateHero(AiSimHero hero, AiSimState newState, long duration)
 	{	// init
-		AiSimState state = hero.getState(),newState;
-		AiStateName name = state.getName();
-		Direction direction = state.getDirection();
-		long time = state.getTime() + duration;
+		AiStateName name = newState.getName();
+		
+		// always increment the time spent in this state
+		long time = newState.getTime() + duration;
+		newState.setTime(time);
 
 		// hero is burning
 		if(name==AiStateName.BURNING)
-		{	long burningDuration = hero.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
-			{	// update state
-				name = AiStateName.ENDED;
-				direction = Direction.NONE;
-				time = 0;
-				// possibly release items
-				releaseItems(hero);
-				// remove from zone
-				current.removeSprite(hero);
-			}	
+		{	// update
+			hero.setCurrentSpeed(0);
+			hero.setState(newState);
+		}
+		
+		// hero has finished burning (or did somehow die)
+		else if(name==AiStateName.ENDED)
+		{	// update
+			hero.setCurrentSpeed(0);
+			hero.setState(newState);
+			// remove from zone
+			current.removeSprite(hero);
+			// NOTE items could be released here... (to be completed)
 		}
 		
 		// hero is moving : process changes in location/tile
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
-		{	// update location
-			moveSprite(hero,duration);
+		{	//NOTE same simplification than before: we suppose the levels are all grids, 
+			// meaning at least one coordinate is at the center of a tile
+			// plus players move in a primary direction (DOWN, LEFT, RIGHT, UP: no composite) 
+			AiSimTile tile = hero.getTile();
+			Direction direction = newState.getDirection();
+			double posX = hero.getPosX();
+			double posY = hero.getPosY();
+			double posZ = hero.getPosZ();
+			double currentSpeed = hero.getWalkingSpeed();
+			double allowed = currentSpeed*duration/1000;
+			int dir[] = direction.getIntFromDirection();
+			double tileSize = tile.getSize();
+			double tileX0 = tile.getPosX();
+			double tileY0 = tile.getPosY();
+			AiSimTile neighborTile = tile.getNeighbor(direction);
+			double offset = 0;
+			if(neighborTile.isCrossableBy(hero)) //deal with obstacles
+				offset = tileSize/2;
+			double goalX = current.normalizePositionX(tileX0+dir[0]*offset);
+			double goalY = current.normalizePositionY(tileY0+dir[1]*offset);
+			double dx = Math.abs(posX-goalX);
+			double dy = Math.abs(posY-goalY);
+			double manDist = dx+dy;
+			if(manDist<=allowed)
+			{	posX = goalX;
+				posY = goalY;
+				if(offset==0)
+					currentSpeed = 0;
+			}
+			else
+			{	if(dx>dy && dy>0)
+				{	double temp = Math.min(allowed,dy);
+					posY = posY+dir[1]*temp;
+					allowed = allowed - temp;
+					posX = posX+dir[0]*allowed;
+				}
+				else
+				{	double temp = Math.min(allowed,dx);
+					posX = posX+dir[0]*temp;
+					allowed = allowed - temp;
+					posY = posY+dir[1]*allowed;
+				}
+			}
+			// update tile
+			AiSimTile newTile = current.getTile(posX,posY);
+			if(!newTile.equals(tile))
+			{	tile.removeSprite(hero);
+				newTile.addSprite(hero);
+				hero.setTile(newTile);
+			}
+			
+			// might pick an item in the new tile
+			if(!newTile.equals(tile))
+			{	List<AiSimItem> items = newTile.getInternalItems(); 
+				for(AiSimItem item: items)
+				{	AiStateName itemStateName = item.getState().getName();
+					if(itemStateName==AiStateName.STANDING)
+						pickItem(hero,item);
+				}
+			}
+			
+			// update location
+			hero.setPos(posX,posY,posZ);
+			
+			// update state
+			hero.setCurrentSpeed(currentSpeed);
+			hero.setState(newState);
 		}
 		
 		// hero just stands
 		else if(name==AiStateName.STANDING)
-		{	// nothing to do
+		{	// update
+			hero.setCurrentSpeed(0);
+			hero.setState(newState);
 		}
-		
-		// always update the state
-		newState = new AiSimState(name,direction,time);
-		hero.setState(newState);
 	}
 
 	public AiBomb dropBomb(AiTile tile, AiHero hero)
@@ -1091,11 +1163,6 @@ if(sprite instanceof AiSimBomb)
 		current.removeSprite(item);
 	}
 	
-	private void releaseItems(AiSimHero hero)
-	{
-		// NOTE items could be released here... (to be completed)
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -1110,38 +1177,42 @@ if(sprite instanceof AiSimBomb)
 	 * @param duration
 	 * 		la durée à prendre en compte
 	 */
-	private void updateItem(AiSimItem item, long duration)
+	private void updateItem(AiSimItem item, AiSimState newState, long duration)
 	{	// init
-		AiSimState state = item.getState(),newState;
-		AiStateName name = state.getName();
-		Direction direction = state.getDirection();
-		long time = state.getTime() + duration;
-
-		// item is burning (too bad!)
-		if(name==AiStateName.BURNING)
-		{	long burningDuration = item.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for re-spawning sprites (but it's only an approximation, after all...)
-			{	// update state
-				name = AiStateName.ENDED;
-				direction = Direction.NONE;
-				time = 0;
+		AiStateName name = newState.getName();
+		AiStateName name0 = item.getState().getName();
+		
+		// might have already been ended while being picked up by a player
+		if(name0!=AiStateName.ENDED)
+		{	// always increment the time spent in this state
+			long time = newState.getTime() + duration;
+			newState.setTime(time);
+	
+			// item is burning (too bad!)
+			if(name==AiStateName.BURNING)
+			{	// update
+				item.setCurrentSpeed(0);
+				item.setState(newState);
+			}
+			
+			// item has finished burning
+			else if(name==AiStateName.ENDED)
+			{	// update
+				item.setState(newState);
 				// remove from zone
 				current.removeSprite(item);
-			}	
+			}
+			
+			// items can't move (at least for now)
+			else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
+			{	// useless here
+			}
+			
+			// item just stands
+			else if(name==AiStateName.STANDING)
+			{	// update
+				item.setState(newState);
+			}
 		}
-		
-		// items can't move (at least for now)
-		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
-		{	// useless here
-		}
-		
-		// item just stands
-		else if(name==AiStateName.STANDING)
-		{	// nothing to do
-		}
-		
-		// always update the state
-		newState = new AiSimState(name,direction,time);
-		item.setState(newState);
 	}
 }

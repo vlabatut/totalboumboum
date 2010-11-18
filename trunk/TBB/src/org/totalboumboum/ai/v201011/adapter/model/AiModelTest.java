@@ -21,10 +21,6 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
-import java.util.HashMap;
-
-import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
-import org.totalboumboum.ai.v201011.adapter.data.AiState;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -32,6 +28,14 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
+ * classe utilisée pour tester les fonctionnalités de ce package,
+ * en particulier que AiModel réalise des simulations correctes.
+ * on crée une zone fictive en faisant varier les sprites et leurs
+ * actions, et on affiche le résultat des simulation pas-à-pas.<br/>
+ * 
+ * <b>Note :</b> la classe modèle n'est pas définie pour représenter une zone
+ * fictive comme ici, mais pour représenter la zone de jeu réelle.
+ * ceci explique les limites imposées sur son constructeur.
  * 
  * @author Vincent Labatut
  *
@@ -82,7 +86,7 @@ public final class AiModelTest
 		tile = zone.getTile(1,1);
 		posX = tile.getPosX();
 		posY = tile.getPosY();
-		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		state = new AiSimState(AiStateName.MOVING,Direction.RIGHT,0);
 		color = PredefinedColor.WHITE;
 		hero = new AiSimHero(id++,tile,posX,posY,posZ, 
 				state,burningDuration,currentSpeed,
@@ -127,14 +131,10 @@ public final class AiModelTest
 		System.out.println("initial zone:\n"+zone);
 		AiModel model = new AiModel(zone);
 		
-		HashMap<AiSprite, AiState> specifiedStates = new HashMap<AiSprite, AiState>();
-		state = new AiSimState(AiStateName.MOVING,Direction.RIGHT,0);
-		specifiedStates.put(hero,state);
-		
 		long duration = 0;
 		int iteration = 0;
 		do
-		{	model.simulateOnce(specifiedStates);
+		{	model.simulateOnce();
 			duration = model.getDuration();
 			
 			System.out.println("iteration "+iteration);
