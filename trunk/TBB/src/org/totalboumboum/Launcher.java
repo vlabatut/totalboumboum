@@ -1476,13 +1476,7 @@ public class Launcher
 	 *    
 	 *    
 	 *  - IA:
-	 *  	- définir A* version pixel
 	 *  	- définir la fonction successeur version temporelle
-	 *  	- modifier le modèle pour permettre la modification
-	 *  		>> un sprite est ajouté forcément à travers la zone
-	 *  		>> la zone propose des fonction de création de sprites
-	 *  		   avec au moins tile, et éventuellement sprite créateur (bomb>>hero, fire>>bomb)
-	 *  	- dans les items cachés restant, donner les décomptes par types d'items
 	 *  - à tester :
 	 *  	- vitesse renvoyée par l'API (pour déplacement joueurs)
 	 *  	- décompte des items
@@ -1497,44 +1491,5 @@ public class Launcher
 	 *  - le chemin est entier, on passe le perso en paramètre et on nous dit la case suivante (null si pas sur le chemin)
 	 *    voire la direction à prendre pour suivre le chemin
 	 *  - à voir comment ça peut être représenté derrière...
-	 */
-	
-	/*
-	 * NOTE
-	 * dans AiZone, ça serait bien d'avoir la liste des temps d'explosion des cases
-	 * >> voire le truc détaillé avec le début/fin de chaque explosion ?
-	 * 
-	 * pour les méthodes destinées aux étudiants (public), remplacer
-	 * un sprite/tile par le même sprite dans la zone courante, si besoin
-	 * pour les méthodes appelées en interne, on peut supposer que c'est inutile
-	 * 
-	 */
-	
-	/*
-	 * TODO
-	 * possibilité de construire la zone en virant les joueurs,
-	 * comme ça on peut ne simuler que sur les explosions ?
-	 * 
-	 */
-	
-	
-	/*
-	 * TODO
-	 * pb: on calcule l'état avant ou après la limite?
-	 * >> on a déjà l'état avant, faudrait l'état juste après
-	 * comme ça : 
-	 * 		- previous = état précédent
-	 * 		- current = previous + duration
-	 * quand on réalise une action manuelle, ça change direct l'état,
-	 * on peut utiliser des fonctions du type apply:
-	 * 		- créer et faire apparaître un sprite
-	 * 		- déplacer un sprite où on veut
-	 * 		- faire exploser une bombe
-	 * 
-	 * on ne peut pas programmer d'action, on peut seulement les appliquer:
-	 * 		- poser une bombe (instantané)
-	 * 		- détoner une bombe
-	 * 		- changer la direction
-	 * et ensuite on relance la simulation...
 	 */
 }

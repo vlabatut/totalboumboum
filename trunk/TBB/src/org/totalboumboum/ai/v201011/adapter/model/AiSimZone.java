@@ -128,6 +128,18 @@ final class AiSimZone extends AiZone
 			}
 		}
 		
+		// also copy the eliminated heroes
+		for(AiHero hero: zone.getHeroes())
+		{	if(!externalHeroes.contains(hero))
+			{	AiTile tile = hero.getTile();
+				int line = tile.getLine();
+				int col = tile.getCol();
+				AiSimHero simHero = new AiSimHero(hero,matrix[line][col]);
+				internalHeroes.add(simHero);
+				externalHeroes.add(simHero);
+			}
+		}
+		
 		// set own hero
 		AiHero oh = zone.getOwnHero();
 		PredefinedColor color = oh.getColor();
@@ -356,7 +368,7 @@ final class AiSimZone extends AiZone
 		}
 		else if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero)sprite;
-			// only remove from this list, cause the other ones must stay complete
+			// only remove from this list, because the others must stay complete
 			remainingHeroList.remove(hero);
 		}
 		else if(sprite instanceof AiSimItem)
@@ -707,7 +719,7 @@ final class AiSimZone extends AiZone
 	{	AiSimHero result = null;
 		int id = sprite.getId();
 		Iterator<AiSimHero> it = internalHeroes.iterator();
-		while(result==null)
+		while(result==null && it.hasNext())
 		{	AiSimHero temp = it.next();
 			if(temp.getId()==id)
 				result = temp;

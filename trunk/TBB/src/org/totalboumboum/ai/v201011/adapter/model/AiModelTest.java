@@ -57,7 +57,7 @@ public final class AiModelTest
 		int bombRange=3,bombNumber=1,bombCount=0,id=0;
 		double posX, posY, posZ=0,currentSpeed,walkingSpeed=100;
 		float failureProbability=0;
-		long burningDuration=100,normalDuration=2000,latencyDuration=10;
+		long burningDuration,normalDuration=3000,latencyDuration=10;
 		boolean destructible,throughBlocks=false,throughBombs=false,throughFires=false,throughItems=false,countdownTrigger=true,remoteControlTrigger=false,explosionTrigger=true,penetrating=false,working=true;
 		AiStopType stopHeroes,stopFires,stopBombs;
 		PredefinedColor color; 
@@ -71,11 +71,13 @@ public final class AiModelTest
 		zone.hiddenItemsCounts.put(AiItemType.EXTRA_BOMB,1);
 		
 		// fire prototype
+		burningDuration = 200;
 		firePrototype = new AiSimFire(id++,null,0,0,0,
 				state,burningDuration,0,
 				false,true,false);
 		
 		// bomb prototype
+		burningDuration = 100;
 		stopHeroes = AiStopType.WEAK_STOP;
 		stopFires = AiStopType.WEAK_STOP;
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
@@ -88,6 +90,7 @@ public final class AiModelTest
 				color,working,0);
 
 		// hero
+		burningDuration = 100;
 		tile = zone.getTile(1,1);
 		posX = tile.getPosX();
 		posY = tile.getPosY();
@@ -101,6 +104,7 @@ public final class AiModelTest
 		zone.addHero(hero,true);
 
 		// bomb
+		burningDuration = 100;
 		stopHeroes = AiStopType.WEAK_STOP;
 		stopFires = AiStopType.WEAK_STOP;
 		tile = zone.getTile(5,5);
@@ -117,6 +121,7 @@ public final class AiModelTest
 		zone.addSprite(bomb);
 
 		// item 1
+		burningDuration = 100;
 		stopBombs = AiStopType.WEAK_STOP;
 		stopFires = AiStopType.WEAK_STOP;
 		tile = zone.getTile(1,3);
@@ -129,6 +134,7 @@ public final class AiModelTest
 		zone.addSprite(item);
 		
 /*		// item 2
+		burningDuration = 100;
 		stopBombs = AiStopType.WEAK_STOP;
 		stopFires = AiStopType.WEAK_STOP;
 		tile = zone.getTile(3,5);
@@ -141,6 +147,7 @@ public final class AiModelTest
 		zone.addSprite(item);
 */
 		// softwall
+		burningDuration = 100;
 		currentSpeed = 0;
 		destructible = true;
 		stopHeroes = AiStopType.WEAK_STOP;
@@ -154,6 +161,7 @@ public final class AiModelTest
 		zone.addSprite(block);
 		
 		// hardwalls
+		burningDuration = 100;
 		currentSpeed = 0;
 		destructible = false;
 		stopHeroes = AiStopType.STRONG_STOP;
@@ -179,13 +187,14 @@ public final class AiModelTest
 		long duration = 0;
 		int iteration = 0;
 		do
-		{	model.simulateOnce();
+		{	// process simulation
+			model.simulateOnce();
 			duration = model.getDuration();
-			
+			// display result
 			System.out.println("iteration "+iteration);
 			System.out.println("duration:"+duration);
 			System.out.println(model.getCurrentZone());
-			
+			// update iteration
 			iteration++;
 		}
 		while(duration!=0);
@@ -210,11 +219,26 @@ public final class AiModelTest
 		System.out.println("change hero direction: DOWN>LEFT");
 		model.applyChangeHeroDirection(hero,Direction.LEFT);
 		
-		// simulate until the hero undergoes some change
-		model.simulateUntilCondition(hero);
+		// simulate
+		model.simulateOnce();
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
-		model.simulateUntilCondition(hero);
+		model.simulateOnce();
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		
+		// change hero direction
+		System.out.println("change hero direction: LEFT>UP");
+		model.applyChangeHeroDirection(hero,Direction.UP);
+		
+		// simulate
+		model.simulateOnce();
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		model.simulateOnce();
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		model.simulateOnce();
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
 	}
