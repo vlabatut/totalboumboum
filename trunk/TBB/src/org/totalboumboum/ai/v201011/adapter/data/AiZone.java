@@ -595,9 +595,9 @@ public abstract class AiZone
 	 * Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
-	 * @param sprite1
+	 * @param tile1
 	 * 		première case
-	 * @param sprite2
+	 * @param tile2
 	 * 		seconde case
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2)
@@ -614,9 +614,9 @@ public abstract class AiZone
 	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
 	 * passant par les bords du niveau.
 	 * 
-	 * @param sprite1
+	 * @param tile1
 	 * 		première case
-	 * @param sprite2
+	 * @param tile2
 	 * 		seconde case
 	 * @param direction
 	 * 		direction à considérer

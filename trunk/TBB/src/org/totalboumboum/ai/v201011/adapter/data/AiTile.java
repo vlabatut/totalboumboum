@@ -185,9 +185,9 @@ public abstract class AiTile
 	 *  	le sprite qui veut traverser cette case
 	 *  @param ignoreBlocks
 	 *  	si vrai, la fonction ne considère pas les blocks comme des obstacles
-	 *  @param ignoreBomb
+	 *  @param ignoreBombs
 	 *  	si vrai, la fonction ne considère pas les bombes comme des obstacles
-	 *  @param ignoreFire
+	 *  @param ignoreFires
 	 *  	si vrai, la fonction ne considère pas le feu comme un obstacle
 	 *  @param ignoreFloors
 	 *  	si vrai, la fonction ne considère pas les sols comme des obstacles (ce qu'ils sont rarement, de toute façon)
