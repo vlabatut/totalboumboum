@@ -75,17 +75,17 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	 * crée une simulation du bloc passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param sprite
+	 * @param block
 	 * 		sprite à simuler
 	 * @param tile
 	 * 		case contenant le sprite
 	 */
-	protected AiSimBlock(AiBlock sprite, AiSimTile tile)
-	{	super(sprite,tile);
+	protected AiSimBlock(AiBlock block, AiSimTile tile)
+	{	super(block,tile);
 		
-		this.destructible = sprite.isDestructible();
-		this.stopHeroes = sprite.hasStopHeroes();
-		this.stopFires = sprite.hasStopFires();
+		this.destructible = block.isDestructible();
+		this.stopHeroes = block.hasStopHeroes();
+		this.stopFires = block.hasStopFires();
 	}	
 	
 	/////////////////////////////////////////////////////////////////

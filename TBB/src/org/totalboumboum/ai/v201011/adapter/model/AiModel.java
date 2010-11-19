@@ -151,11 +151,16 @@ class AiModel
 	public boolean simulateUntilCondition(AiHero hero)
 	{	// init
 		AiSimHero simHero;
+		long totalDuration = 0;
 		
 		boolean found = false;
 		do
 		{	// simulate
 			simulateOnce();
+			
+			// update total duration
+			totalDuration = totalDuration + duration;
+			
 			// check if the hero was among the limit sprites
 			simHero = current.getSpriteById(hero);
 			found = limitSprites.contains(simHero);
@@ -166,6 +171,10 @@ class AiModel
 		AiState state = simHero.getState();
 		AiStateName name = state.getName();
 		boolean result = name==AiStateName.FLYING || name==AiStateName.MOVING || name==AiStateName.STANDING;
+		
+		// update duration to reflect the whole process
+		duration = totalDuration;
+		
 		return result;
 	}
 	
@@ -559,14 +568,14 @@ if(sprite instanceof AiSimBomb)
 		AiSimTile newTile = current.getTile(posX,posY);
 		if(!newTile.equals(tile))
 		{	tile.removeSprite(sprite);
-			tile.addSprite(sprite);
-			sprite.setTile(tile);
+			newTile.addSprite(sprite);
+			sprite.setTile(newTile);
 		}
 		
 		// a hero might pick an item in the new tile
 		if(sprite instanceof AiSimHero && !newTile.equals(tile))
 		{	AiSimHero hero = (AiSimHero)sprite;
-			List<AiSimItem> items = newTile.getInternalItems(); 
+			List<AiSimItem> items = new ArrayList<AiSimItem>(newTile.getInternalItems()); 
 			for(AiSimItem item: items)
 			{	AiStateName itemStateName = item.getState().getName();
 				if(itemStateName==AiStateName.STANDING)
@@ -704,7 +713,7 @@ if(sprite instanceof AiSimBomb)
 				// possibly update owner
 				AiSimHero owner = bomb.getOwner();
 				if(owner!=null)
-					owner.updateBombNumber(-1);
+					owner.updateBombNumberCurrent(-1);
 				// remove from zone
 				current.removeSprite(bomb);
 			}	
@@ -751,22 +760,26 @@ if(sprite instanceof AiSimBomb)
 		bomb.setState(newState);
 	}
 
-	public void detonateBomb(AiBomb bomb)
+	public boolean applyDetonateBomb(AiBomb bomb)
 	{	// get the bomb
 		AiSimBomb simBomb = current.getSpriteById(bomb);
 		
 		// detonate the bomb
-		detonateBomb(simBomb);
+		boolean result = detonateBomb(simBomb);
+		
+		return result;
 	}
 	
-	protected void detonateBomb(AiSimBomb bomb)
+	private boolean detonateBomb(AiSimBomb bomb)
 	{	// init
 		AiSimState state = bomb.getState();
 		AiStateName name = state.getName();
+		boolean result = false;
 		
 		// check if the bomb can actually detonate
 		if(name==AiStateName.STANDING || name==AiStateName.MOVING)
-		{	// update state
+		{	result = true;
+			// update state
 			name = AiStateName.BURNING;
 			Direction direction = Direction.NONE;
 			long time = 0;
@@ -783,6 +796,8 @@ if(sprite instanceof AiSimBomb)
 				burnTile(simTile,bomb);
 			}
 		}
+		
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -834,7 +849,7 @@ if(sprite instanceof AiSimBomb)
 		fire.setState(newState);
 	}
 
-	protected void burnTile(AiSimTile tile, AiSimBomb detonatingBomb)
+	private void burnTile(AiSimTile tile, AiSimBomb detonatingBomb)
 	{	AiFire firePrototype = detonatingBomb.getFirePrototype();
 		
 		// if the fire can appear, we affect it to the tile
@@ -990,7 +1005,7 @@ if(sprite instanceof AiSimBomb)
 		hero.setState(newState);
 	}
 
-	public AiBomb dropBomb(AiTile tile, AiHero hero)
+	public AiBomb applyDropBomb(AiHero hero, AiTile tile)
 	{	// get the tile
 		int line = tile.getLine();
 		int col = tile.getCol();
@@ -1022,12 +1037,12 @@ if(sprite instanceof AiSimBomb)
 	 * @return
 	 * 		la bombe si elle a pu être créée, ou null si ce n'est pas possible 
 	 */
-	protected AiSimBomb dropBomb(AiSimTile tile, AiSimHero hero)
+	private AiSimBomb dropBomb(AiSimTile tile, AiSimHero hero)
 	{	AiSimBomb result = null;
 		
 		// check if the hero can drop a bomb
-		int dropped = hero.getBombCount();
-		int max = hero.getBombNumber();
+		int dropped = hero.getBombNumberCurrent();
+		int max = hero.getBombNumberMax();
 		if(dropped<max)
 		{	// then check if the tile can host the bomb
 			AiBomb bomb = hero.getBombPrototype();
@@ -1041,11 +1056,11 @@ if(sprite instanceof AiSimBomb)
 				result.setState(state);
 				
 				// update the hero
-				hero.updateBombNumber(+1);
+				hero.updateBombNumberCurrent(+1);
 				
 				// check for fire
-				if(tile.getFires().size()>0 && bomb.hasExplosionTrigger())
-					detonateBomb(bomb);
+				if(tile.getFires().size()>0 && result.hasExplosionTrigger())
+					detonateBomb(result);
 			}
 		}
 		
@@ -1061,15 +1076,35 @@ if(sprite instanceof AiSimBomb)
 	 * @return
 	 * 		la bombe déposée, ou null si il était impossible de la poser
 	 */
-	protected AiBomb dropBomb(AiHero hero)
-	{	AiTile tile = hero.getTile();
-		return dropBomb(tile,hero);
+	public AiBomb applyDropBomb(AiHero hero)
+	{	AiSimHero simHero = current.getSpriteById(hero);
+		AiTile tile = simHero.getTile();
+		return applyDropBomb(hero,tile);
 	}
 	
-	protected void pickItem(AiSimHero hero, AiSimItem item)
+	public boolean applyChangeHeroDirection(AiHero hero, Direction direction)
+	{	boolean result = false;
+		AiSimHero simHero = current.getSpriteById(hero);
+		AiSimState state = simHero.getState();
+		long time = state.getTime();
+		AiStateName name = state.getName();
+		if(direction.isPrimary() && 
+			(name==AiStateName.MOVING || name==AiStateName.STANDING))
+		{	result = true;
+			if(direction==Direction.NONE)
+				name = AiStateName.STANDING;
+			else
+				name = AiStateName.MOVING;
+			AiSimState newState = new AiSimState(name, direction, time);
+			simHero.setState(newState);
+		}
+		return result;
+	}
+	
+	private void pickItem(AiSimHero hero, AiSimItem item)
 	{	AiItemType type = item.getType();
 		if(type==AiItemType.EXTRA_BOMB)
-		{	hero.updateBombNumber(1);
+		{	hero.updateBombNumberMax(+1);
 		}
 		else if(type==AiItemType.EXTRA_FLAME)
 		{	hero.updateBombRange(1);

@@ -77,9 +77,9 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/** exemple de bombe que le personnage peut poser */
 	private AiDataBomb bombPrototype;
 	/** nombre de bombes que le personnage peut poser simultanément (en général) */
-	private int bombNumber;
+	private int bombNumberMax;
 	/** nombre de bombes que le personnage a actuellement posées */
-	private int bombCount;
+	private int bombNumberCurrent;
 	
 	@Override
 	public AiBomb getBombPrototype()
@@ -102,13 +102,13 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	}
 	
 	@Override
-	public int getBombNumber()
-	{	return bombNumber;
+	public int getBombNumberMax()
+	{	return bombNumberMax;
 	}
 	
 	@Override
-	public int getBombCount()
-	{	return bombCount;
+	public int getBombNumberCurrent()
+	{	return bombNumberCurrent;
 	}
 	
 	/**
@@ -123,16 +123,16 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	
 		// max number of simultaneous bombs
 		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
-    	bombNumber = (int)ab.getStrength();
+    	bombNumberMax = (int)ab.getStrength();
         ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER_MAX);
 		if(ab.isActive())
 		{	int limit = (int)ab.getStrength();
-			if(bombNumber>limit)
-				bombNumber = limit;
+			if(bombNumberMax>limit)
+				bombNumberMax = limit;
 		}
 
 		// number of bombs currently dropped
-    	bombCount = sprite.getDroppedBombs().size();
+    	bombNumberCurrent = sprite.getDroppedBombs().size();
     	
     	//System.out.println(getSprite().getColor()+": bombRange="+bombRange+" bombNumber="+bombNumber+" bombCount="+bombCount);    	
 	}
@@ -269,8 +269,8 @@ if(walkingSpeed==0)
 	{	StringBuffer result = new StringBuffer();
 		result.append("Hero: [");
 		result.append(super.toString());
-		result.append(" - bmbCnt.: "+bombCount);
-		result.append(" - bmbNbr.: "+bombNumber);
+		result.append(" - bmbCnt.: "+bombNumberCurrent);
+		result.append(" - bmbNbr.: "+bombNumberMax);
 		result.append(" - bmbRge.: "+getBombRange());
 		result.append(" - color: "+color);
 		result.append(" ]");
