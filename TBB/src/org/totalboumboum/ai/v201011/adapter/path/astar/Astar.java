@@ -311,6 +311,12 @@ public final class Astar
 			throw new LimitReachedException(startTile,endTiles,maxh,maxc,maxn,maxCost,maxHeight,maxNodes);
 		else if(endTiles.isEmpty())
 			throw new IllegalArgumentException("endTiles list must not be empty");
+		
+		// finish path
+		double startX = startTile.getPosX();
+		double startY = startTile.getPosY();
+		result.setStart(startX,startY);
+		
 		return result;
 	}
 	

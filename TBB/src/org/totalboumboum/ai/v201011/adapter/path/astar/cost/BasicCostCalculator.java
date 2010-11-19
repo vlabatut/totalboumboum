@@ -23,6 +23,7 @@ package org.totalboumboum.ai.v201011.adapter.path.astar.cost;
 
 import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
+import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
  * Classe étendant la classe abstraite CostCalculator de la manière la plus simple possible.
@@ -34,9 +35,13 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  */
 public class BasicCostCalculator extends CostCalculator
 {
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/** 
 	 * Les deux cases sont supposées être voisines, 
-	 * on se contente de renvoyer leur distance.
+	 * on se contente de renvoyer leur distance
+	 * (exprimée en cases, donc forcément 1).
 	 * 
 	 * @param start	
 	 * 		la case de départ
@@ -48,5 +53,19 @@ public class BasicCostCalculator extends CostCalculator
 	@Override
 	public double processCost(AiTile start, AiTile end) throws StopRequestException
 	{	return 1;		
+	}
+
+	/**
+	 * le coût d'un chemin correspond ici à sa distance exprimée
+	 * en cases.
+	 * 
+	 * @param path
+	 * 		chemin à traiter
+	 * @return
+	 * 		le coût de ce chemin
+	 */
+	public double processCost(AiPath path) throws StopRequestException
+	{	double result = path.getTileDistance();
+		return result;
 	}
 }

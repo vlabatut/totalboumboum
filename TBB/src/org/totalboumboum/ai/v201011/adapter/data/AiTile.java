@@ -265,6 +265,14 @@ public abstract class AiTile
 	}
 	
 	@Override
+    public int hashCode()
+    {	AiZone zone = getZone();
+		int height = zone.getHeight();
+		int result = col + height*line;
+    	return result;
+    }
+	
+	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
 		result.append("("+line+";"+col+")");

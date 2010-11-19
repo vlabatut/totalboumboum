@@ -190,34 +190,38 @@ class AiModel
 	 */
 	public boolean simulateUntilCondition(AiHero hero)
 	{	// init
+		boolean result = false;
 		AiSimHero simHero;
 		long totalDuration = 0;
 		AiSimZone previousZone = current;
-		
-		boolean found = false;
-		do
-		{	// simulate
-			simulateOnce();
+		simHero = current.getSpriteById(hero);
+
+		if(simHero.getState().getName()!=AiStateName.ENDED)
+		{	boolean found = false;
+			do
+			{	// simulate
+				simulateOnce();
+				
+				// update total duration
+				totalDuration = totalDuration + duration;
+				
+				// check if the hero was among the limit sprites
+				simHero = current.getSpriteById(hero);
+				found = limitSprites.contains(simHero);
+			}
+			while(!found);
 			
-			// update total duration
-			totalDuration = totalDuration + duration;
+			// check if the hero is still safe
+			AiState state = simHero.getState();
+			AiStateName name = state.getName();
+			result = name==AiStateName.FLYING || name==AiStateName.MOVING || name==AiStateName.STANDING;
 			
-			// check if the hero was among the limit sprites
-			simHero = current.getSpriteById(hero);
-			found = limitSprites.contains(simHero);
+			// update duration to reflect the whole process
+			duration = totalDuration;
+			// same thing with the previous zone
+			previous = previousZone;
 		}
-		while(!found);
-		
-		// check if the hero is still safe
-		AiState state = simHero.getState();
-		AiStateName name = state.getName();
-		boolean result = name==AiStateName.FLYING || name==AiStateName.MOVING || name==AiStateName.STANDING;
-		
-		// update duration to reflect the whole process
-		duration = totalDuration;
-		// same thing with the previous zone
-		previous = previousZone;
-		
+			
 		return result;
 	}
 	
@@ -371,7 +375,11 @@ if(sprite instanceof AiSimBomb)
 				AiSimTile neighborTile = tile.getNeighbor(direction);
 				double offset = 0;
 				if(neighborTile.isCrossableBy(sprite)) //deal with obstacles
-					offset = tileSize/2;
+				{	offset = tileSize/2;
+					//because tile centers are not actually tile centers
+					if(direction==Direction.LEFT || direction==Direction.UP)
+						offset++; 
+				}
 				double goalX = current.normalizePositionX(tileX+dir[0]*offset);
 				double goalY = current.normalizePositionY(tileY+dir[1]*offset);
 				double manDist = Math.abs(posX-goalX)+Math.abs(posY-goalY);
@@ -537,7 +545,13 @@ if(sprite instanceof AiSimBomb)
 		AiSimTile neighborTile = tile.getNeighbor(direction);
 		double offset = 0;
 		if(neighborTile.isCrossableBy(sprite)) //deal with obstacles
-			offset = tileSize/2;
+		{	offset = tileSize/2;
+			//because tile centers are not actually tile centers
+			if(direction==Direction.LEFT || direction==Direction.UP)
+			{	offset++; 
+				allowed++;
+			}
+		}
 		double goalX = current.normalizePositionX(tileX0+dir[0]*offset);
 		double goalY = current.normalizePositionY(tileY0+dir[1]*offset);
 		double dx = Math.abs(posX-goalX);
@@ -775,11 +789,14 @@ if(sprite instanceof AiSimBomb)
 	 * 		vrai si le modèle a pu faire exploser la bombe
 	 */
 	public boolean applyDetonateBomb(AiBomb bomb)
-	{	// get the bomb
-		AiSimBomb simBomb = current.getSpriteById(bomb);
+	{	boolean result = false;
 		
-		// detonate the bomb
-		boolean result = detonateBomb(simBomb);
+		// get bomb
+		AiSimBomb simBomb = current.getSpriteById(bomb);
+		if(simBomb!=null)
+		{	// detonate the bomb
+			result = detonateBomb(simBomb);
+		}
 		
 		return result;
 	}
@@ -1047,18 +1064,21 @@ if(sprite instanceof AiSimBomb)
 	 * 		la bombe qui a été posée, ou null si c'était impossible.
 	 */
 	public AiBomb applyDropBomb(AiHero hero, AiTile tile)
-	{	// get the tile
+	{	AiBomb result = null;
+	
+		// get the tile
 		int line = tile.getLine();
 		int col = tile.getCol();
 		AiSimTile simTile = current.getTile(line,col);
 		
 		// get the hero
 		AiSimHero simHero = current.getSpriteById(hero);
+		if(simHero!=null)
+		{	// drop the bomb
+			result = dropBomb(simTile,simHero);
+		}
 		
-		// drop the bomb
-		AiBomb bomb = dropBomb(simTile,simHero);
-		
-		return bomb;
+		return result;
 	}
 
 	/**
@@ -1120,9 +1140,15 @@ if(sprite instanceof AiSimBomb)
 	 * 		la bombe qui a été posée, ou null si c'était impossible.
 	 */
 	public AiBomb applyDropBomb(AiHero hero)
-	{	AiSimHero simHero = current.getSpriteById(hero);
-		AiTile tile = simHero.getTile();
-		return applyDropBomb(hero,tile);
+	{	AiBomb result = null;
+		// get hero
+		AiSimHero simHero = current.getSpriteById(hero);
+		if(simHero!=null)
+		{	// drop bomb
+			AiTile tile = simHero.getTile();
+			result = applyDropBomb(hero,tile);
+		}
+		return result;
 	}
 	
 	/**
@@ -1140,19 +1166,24 @@ if(sprite instanceof AiSimBomb)
 	 */
 	public boolean applyChangeHeroDirection(AiHero hero, Direction direction)
 	{	boolean result = false;
+	
+		// get hero
 		AiSimHero simHero = current.getSpriteById(hero);
-		AiSimState state = simHero.getState();
-		long time = state.getTime();
-		AiStateName name = state.getName();
-		if(direction.isPrimary() && 
-			(name==AiStateName.MOVING || name==AiStateName.STANDING))
-		{	result = true;
-			if(direction==Direction.NONE)
-				name = AiStateName.STANDING;
-			else
-				name = AiStateName.MOVING;
-			AiSimState newState = new AiSimState(name, direction, time);
-			simHero.setState(newState);
+		if(simHero!=null)
+		{	// check state
+			AiSimState state = simHero.getState();
+			long time = state.getTime();
+			AiStateName name = state.getName();
+			if(direction.isPrimary() && 
+				(name==AiStateName.MOVING || name==AiStateName.STANDING))
+			{	result = true;
+				if(direction==Direction.NONE)
+					name = AiStateName.STANDING;
+				else
+					name = AiStateName.MOVING;
+				AiSimState newState = new AiSimState(name, direction, time);
+				simHero.setState(newState);
+			}
 		}
 		return result;
 	}
@@ -1202,6 +1233,18 @@ if(sprite instanceof AiSimBomb)
 	private void releaseItems(AiSimHero hero)
 	{
 		// NOTE items could be released here... (to be completed)
+	}
+	
+	/**
+	 * supprime tous les personnage de la zone.
+	 * ceci permet de la simplifier, et ainsi d'utiliser la zone
+	 * seulement pour prévoir comment les explosions vont évoluer,
+	 * sans se soucier des déplacements des personnages.
+	 */
+	public void applyRemoveHeroes()
+	{	List<AiSimHero> heroes = current.getInternalHeroes();
+		for(AiSimHero hero: heroes)
+			current.removeSprite(hero);
 	}
 	
 	/////////////////////////////////////////////////////////////////

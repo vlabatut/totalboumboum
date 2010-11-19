@@ -34,6 +34,9 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
  */
 public abstract class CostCalculator
 {
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/** 
 	 * calcule le coût de l'action consistant à aller de la case
 	 * start à la case end, sachant que ces deux cases sont voisines.

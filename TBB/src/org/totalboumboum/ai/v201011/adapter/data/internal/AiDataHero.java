@@ -119,7 +119,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 		
 		// prototype bomb
 		Bomb bomb = sprite.makeBomb();
-		bombPrototype = new AiDataBomb(null,bomb);
+		bombPrototype = new AiDataBomb(tile,bomb);
 	
 		// max number of simultaneous bombs
 		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
