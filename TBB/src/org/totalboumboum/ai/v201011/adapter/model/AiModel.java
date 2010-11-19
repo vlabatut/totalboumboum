@@ -188,7 +188,7 @@ class AiModel
 	 * @return	
 	 * 		vrai si le changement d'état est dû à un déplacement (et pas à un accident)
 	 */
-	public boolean simulateUntilCondition(AiHero hero)
+	public boolean simulate(AiHero hero)
 	{	// init
 		boolean result = false;
 		AiSimHero simHero;
@@ -200,7 +200,7 @@ class AiModel
 		{	boolean found = false;
 			do
 			{	// simulate
-				simulateOnce();
+				simulate();
 				
 				// update total duration
 				totalDuration = totalDuration + duration;
@@ -246,7 +246,7 @@ class AiModel
 	 * @param specifiedStates	
 	 * 		map associant un état à un sprite, permettant de forcer un sprite à prendre un certain état 
 	 */
-	public void simulateOnce()
+	public void simulate()
 	{	// create a copy of the current zone
 		previous = current;
 		current = new AiSimZone(previous);
@@ -262,6 +262,42 @@ class AiModel
 		
 		// process iteration duration
 		processDuration(sprites);
+		
+		// apply events for the resulting minimal time
+		toBeDetonated.clear();
+		updateSprites(sprites,duration);
+		
+		// update detonating bombs
+		for(AiSimBomb bomb: toBeDetonated)
+			detonateBomb(bomb);
+		
+		// update the resulting zone
+		current.updateTime(duration);
+	}
+	
+	/**
+	 * perform a simulation for the specified duration.
+	 * the resulting zone is available through getCUrrentZone.
+	 * 
+	 * @param duration
+	 * 		the duration of the simulation
+	 */
+	public void simulate(long duration)
+	{	// create a copy of the current zone
+		previous = current;
+		current = new AiSimZone(previous);
+		
+		// retrieve all sprites remaining in the zone
+		List<AiSimSprite> sprites = new ArrayList<AiSimSprite>();
+		sprites.addAll(current.getInternalBlocks());
+		sprites.addAll(current.getInternalBombs());
+		sprites.addAll(current.getInternalFires());
+		sprites.addAll(current.getInternalFloors());
+		sprites.addAll(current.getInternalHeroes());
+		sprites.addAll(current.getInternalItems());
+		
+		// set iteration duration
+		this.duration = duration;
 		
 		// apply events for the resulting minimal time
 		toBeDetonated.clear();

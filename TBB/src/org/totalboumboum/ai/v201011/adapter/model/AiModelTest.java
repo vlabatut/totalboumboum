@@ -188,7 +188,7 @@ public final class AiModelTest
 		int iteration = 0;
 		do
 		{	// process simulation
-			model.simulateOnce();
+			model.simulate();
 			duration = model.getDuration();
 			// display result
 			System.out.println("iteration "+iteration);
@@ -204,10 +204,10 @@ public final class AiModelTest
 		model.applyChangeHeroDirection(hero,Direction.DOWN);
 		
 		// simulate until the hero undergoes some change
-		model.simulateUntilCondition(hero);
+		model.simulate(hero);
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
-		model.simulateUntilCondition(hero);
+		model.simulate(hero);
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
 		
@@ -220,10 +220,10 @@ public final class AiModelTest
 		model.applyChangeHeroDirection(hero,Direction.LEFT);
 		
 		// simulate
-		model.simulateOnce();
+		model.simulate();
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
-		model.simulateOnce();
+		model.simulate();
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
 		
@@ -232,13 +232,13 @@ public final class AiModelTest
 		model.applyChangeHeroDirection(hero,Direction.UP);
 		
 		// simulate
-		model.simulateOnce();
+		model.simulate();
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
-		model.simulateOnce();
+		model.simulate();
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
-		model.simulateOnce();
+		model.simulate();
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
 	}

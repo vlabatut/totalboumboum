@@ -382,7 +382,8 @@ public class Launcher
 	 */
 	
 	/*
-	 * TODO evaluation du projet : pour la qualification, utiliser le temps nécessaire pour éliminer un/des adversaire(s) de référence
+	 * TODO evaluation du projet : pour la qualification, utiliser 
+	 * le temps nécessaire pour éliminer un/des adversaire(s) de référence
 	 */
 	
 	/*
@@ -552,6 +553,16 @@ public class Launcher
 	 * 		- appuyer sur la touche du joueur ciblé
 	 * 		- appuyer sur la touche de message
 	 * 		- appuyer sur la touche du joueur mentionné dans le message
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ITEMS		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
+	 * TODO
+	 * possibilité de faire varier le calcul des points
+	 * en fonction de la position de départ des joueurs : 
+	 * certaines positions sont plus difficiles que d'autres 
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
