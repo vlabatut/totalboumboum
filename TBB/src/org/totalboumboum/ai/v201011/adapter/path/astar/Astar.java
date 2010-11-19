@@ -201,7 +201,7 @@ public final class Astar
 	 * 
 	 * @param startTile	
 	 * 		la case de départ
-	 * @param endTile	
+	 * @param endTiles	
 	 * 		la liste des cases d'arrivée possibles
 	 * @return 
 	 * 		un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null

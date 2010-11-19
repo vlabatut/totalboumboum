@@ -44,7 +44,8 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * simule la zone de jeu et tous ces constituants : cases et sprites.
  * Il s'agit de la classe principale pour la simulation de l'évolution du jeu.</br>
  * 
- * L'ensemble des objets représente un état du jeu et ne peut (volontairement) pas être modifié.
+ * L'ensemble des objets représente un état du jeu et ne peut 
+ * être modifié que via la classe AiModel.
  * 
  * @author Vincent Labatut
  *
@@ -157,7 +158,15 @@ final class AiSimZone extends AiZone
 		elapsedTime = 0;
 	}
 
-	//TODO commentaires
+	/**
+	 * crée une zone vide des dimensions spécifiées.
+	 * <b>Note :</b> constructeur utilisé seulement pour tester AiModel.
+	 * 
+	 * @param height
+	 * 		hauteur de la zone à créer, en cases
+	 * @param width
+	 * 		largeur de la zone à créer, en cases
+	 */
 	protected AiSimZone(int height, int width)
 	{	this.height = height;
 		this.width = width;
@@ -235,7 +244,13 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// TODO comment
+	/**
+	 * met à jour les variables temporelles de cette zone.
+	 * (méthode utilisée seulement lors de la simulation)
+	 * 
+	 * @param duration
+	 * 		délai depuis la dernière simulation
+	 */
 	protected void updateTime(long duration)
 	{	totalTime = totalTime + duration;
 		elapsedTime = duration;
@@ -306,7 +321,17 @@ final class AiSimZone extends AiZone
 		tile.addSprite(sprite);
 	}
 	
-	// TODO comment
+	/**
+	 * supprime un sprite de la zone et de la case correspondante.
+	 * s'il s'agit d'un joueur, il est supprimé seulement de la case
+	 * et de la liste des joueurs encore en jeu (mais la zone continue
+	 * à le référencer dans la liste générale des joueurs, car le sprite
+	 * peut encore etre utile, par exemple pour obtenir le classement
+	 * de ce joueur)
+	 * 
+	 * @param sprite
+	 * 		le sprit à supprimer de la zone
+	 */
 	protected void removeSprite(AiSimSprite sprite)
 	{	// sprite lists
 		if(sprite instanceof AiSimBlock)
