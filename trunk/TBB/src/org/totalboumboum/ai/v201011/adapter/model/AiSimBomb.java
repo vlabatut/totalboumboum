@@ -132,37 +132,37 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * crée une simulation de la bombe passée en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
-	 * @param sprite	
+	 * @param bomb	
 	 * 		sprite à simuler
 	 * @param tile	
 	 * 		case devant contenir le sprite
 	 */
-	protected AiSimBomb(AiBomb sprite, AiSimTile tile)
-	{	super(sprite,tile);
+	protected AiSimBomb(AiBomb bomb, AiSimTile tile)
+	{	super(bomb,tile);
 	
 		// fuse
-		countdownTrigger = sprite.hasCountdownTrigger();
-		remoteControlTrigger = sprite.hasRemoteControlTrigger();
-		explosionTrigger = sprite.hasExplosionTrigger();
-		normalDuration = sprite.getNormalDuration();
-		latencyDuration = sprite.getLatencyDuration();
-		failureProbability = sprite.getFailureProbability();
-		firePrototype = sprite.getFirePrototype();
+		countdownTrigger = bomb.hasCountdownTrigger();
+		remoteControlTrigger = bomb.hasRemoteControlTrigger();
+		explosionTrigger = bomb.hasExplosionTrigger();
+		normalDuration = bomb.getNormalDuration();
+		latencyDuration = bomb.getLatencyDuration();
+		failureProbability = bomb.getFailureProbability();
+		firePrototype = bomb.getFirePrototype();
 
 		// collisions
-		stopHeroes = sprite.hasStopHeroes();
-		stopFires = sprite.hasStopFires();
-		throughItems = sprite.hasThroughItems();
+		stopHeroes = bomb.hasStopHeroes();
+		stopFires = bomb.hasStopFires();
+		throughItems = bomb.hasThroughItems();
 		
 		// range
-		range = sprite.getRange();
-		penetrating = sprite.isPenetrating();
+		range = bomb.getRange();
+		penetrating = bomb.isPenetrating();
 		
 		// misc
-		color = sprite.getColor();
-		working = sprite.isWorking();
-		time = sprite.getTime();
-		slidingSpeed = sprite.getSlidingSpeed();
+		color = bomb.getColor();
+		working = bomb.isWorking();
+		time = bomb.getTime();
+		slidingSpeed = bomb.getSlidingSpeed();
 	}
 
 	/////////////////////////////////////////////////////////////////

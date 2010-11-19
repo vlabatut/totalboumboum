@@ -81,8 +81,8 @@ final class AiSimHero extends AiSimSprite implements AiHero
 		
 		// bombs
 		this.bombPrototype = bombPrototype;
-		this.bombNumber = bombNumber;
-		this.bombCount = bombCount;
+		this.bombNumberMax = bombNumber;
+		this.bombNumberCurrent = bombCount;
 		
 		// collisions
 		this.throughBlocks = throughBlocks;
@@ -100,25 +100,25 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	 * 
 	 * @param tile	
 	 * 		case contenant le sprite
-	 * @param sprite	
+	 * @param hero	
 	 * 		sprite à simuler
 	 */
-	protected AiSimHero(AiHero sprite, AiSimTile tile)
-	{	super(sprite,tile);
+	protected AiSimHero(AiHero hero, AiSimTile tile)
+	{	super(hero,tile);
 		
 		// bombs
-		bombPrototype = sprite.getBombPrototype();
-		bombNumber = sprite.getBombNumber();
-		bombCount = sprite.getBombCount();
+		bombPrototype = hero.getBombPrototype();
+		bombNumberMax = hero.getBombNumberMax();
+		bombNumberCurrent = hero.getBombNumberCurrent();
 		
 		// collisions
-		throughBlocks = sprite.hasThroughBlocks();
-		throughBombs = sprite.hasThroughBombs();
-		throughFires = sprite.hasThroughFires();
+		throughBlocks = hero.hasThroughBlocks();
+		throughBombs = hero.hasThroughBombs();
+		throughFires = hero.hasThroughFires();
 		
 		// misc
-		color = sprite.getColor();
-		walkingSpeed = sprite.getWalkingSpeed();
+		color = hero.getColor();
+		walkingSpeed = hero.getWalkingSpeed();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -127,9 +127,9 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	/** exemple de bombe que le personnage peut poser */
 	private AiBomb bombPrototype;
 	/** nombre de bombes que le personnage peut poser simultanément (en général) */
-	private int bombNumber;
+	private int bombNumberMax;
 	/** nombre de bombes que le personnage a actuellement posées */
-	private int bombCount;
+	private int bombNumberCurrent;
 	
 	@Override
 	public AiBomb getBombPrototype()
@@ -163,9 +163,19 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	{	return bombPrototype.getExplosionDuration();
 	}
 	
+	/**
+	 * met à jour le nombre de bombes posables simultanément par ce joueur
+	 * 
+	 * @param delta
+	 * 		la modification à apporter au nombre de bombes
+	 */
+	protected void updateBombNumberMax(int delta)
+	{	bombNumberMax = bombNumberMax + delta;
+	}
+	
 	@Override
-	public int getBombNumber()
-	{	return bombNumber;
+	public int getBombNumberMax()
+	{	return bombNumberMax;
 	}
 	
 	/**
@@ -175,23 +185,13 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	 * @param delta
 	 * 		la modification à apporter au nombre de bombes
 	 */
-	protected void updateBombCount(int delta)
-	{	bombCount = bombCount + delta;
+	protected void updateBombNumberCurrent(int delta)
+	{	bombNumberCurrent = bombNumberCurrent + delta;
 	}
 	
 	@Override
-	public int getBombCount()
-	{	return bombCount;
-	}
-	
-	/**
-	 * met à jour le nombre de bombes posables simultanément par ce joueur
-	 * 
-	 * @param delta
-	 * 		la modification à apporter au nombre de bombes
-	 */
-	protected void updateBombNumber(int delta)
-	{	bombNumber = bombNumber + delta;
+	public int getBombNumberCurrent()
+	{	return bombNumberCurrent;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -292,8 +292,8 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	{	StringBuffer result = new StringBuffer();
 		result.append("Hero: [");
 		result.append(super.toString());
-		result.append(" - bmbCnt.: "+bombCount);
-		result.append(" - bmbNbr.: "+bombNumber);
+		result.append(" - bmbCnt.: "+bombNumberCurrent);
+		result.append(" - bmbNbr.: "+bombNumberMax);
 		result.append(" - bmbRge.: "+getBombRange());
 		result.append(" - color: "+color);
 		result.append(" ]");

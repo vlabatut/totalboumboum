@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201011.adapter.model;
  * 
  */
 
+import org.totalboumboum.ai.v201011.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -51,12 +52,14 @@ public final class AiModelTest
 		AiSimFire firePrototype;
 		AiSimHero hero;
 		AiSimBomb bomb,bombPrototype;
+		AiSimItem item;
+		AiItemType itemType;
 		int bombRange=3,bombNumber=1,bombCount=0,id=0;
 		double posX, posY, posZ=0,currentSpeed,walkingSpeed=100;
 		float failureProbability=0;
-		long burningDuration=100,normalDuration=1000,latencyDuration=10;
+		long burningDuration=100,normalDuration=2000,latencyDuration=10;
 		boolean destructible,throughBlocks=false,throughBombs=false,throughFires=false,throughItems=false,countdownTrigger=true,remoteControlTrigger=false,explosionTrigger=true,penetrating=false,working=true;
-		AiStopType stopHeroes, stopFires;
+		AiStopType stopHeroes,stopFires,stopBombs;
 		PredefinedColor color; 
 
 		// zone
@@ -64,6 +67,8 @@ public final class AiModelTest
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
 		color = PredefinedColor.WHITE;
 		zone = new AiSimZone(7,7);
+		zone.hiddenItemsCount = 1;
+		zone.hiddenItemsCounts.put(AiItemType.EXTRA_BOMB,1);
 		
 		// fire prototype
 		firePrototype = new AiSimFire(id++,null,0,0,0,
@@ -102,7 +107,7 @@ public final class AiModelTest
 		posX = tile.getPosX();
 		posY = tile.getPosY();
 		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
-		color = PredefinedColor.WHITE;
+		color = null;
 		bomb = new AiSimBomb(id++,tile,posX,posY,posZ,state,
 				burningDuration,currentSpeed,walkingSpeed,
 				countdownTrigger,remoteControlTrigger,explosionTrigger,
@@ -111,6 +116,43 @@ public final class AiModelTest
 				color,working,0);
 		zone.addSprite(bomb);
 
+		// item 1
+		stopBombs = AiStopType.WEAK_STOP;
+		stopFires = AiStopType.WEAK_STOP;
+		tile = zone.getTile(1,3);
+		posX = tile.getPosX();
+		posY = tile.getPosY();
+		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		itemType = AiItemType.EXTRA_BOMB;
+		item = new AiSimItem(id++,tile,posX,posY,posZ,state,
+				burningDuration,0,itemType,stopBombs,stopFires);
+		zone.addSprite(item);
+		
+/*		// item 2
+		stopBombs = AiStopType.WEAK_STOP;
+		stopFires = AiStopType.WEAK_STOP;
+		tile = zone.getTile(3,5);
+		posX = tile.getPosX();
+		posY = tile.getPosY();
+		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		itemType = AiItemType.EXTRA_BOMB;
+		item = new AiSimItem(id++,tile,posX,posY,posZ,state,
+				burningDuration,0,itemType,stopBombs,stopFires);
+		zone.addSprite(item);
+*/
+		// softwall
+		currentSpeed = 0;
+		destructible = true;
+		stopHeroes = AiStopType.WEAK_STOP;
+		stopFires = AiStopType.WEAK_STOP;
+		tile = zone.getTile(3,5);
+		posX = tile.getPosX();
+		posY = tile.getPosY();
+		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+		block = new AiSimBlock(id++,tile,posX,posY,posZ,state,
+				burningDuration,currentSpeed,destructible,stopHeroes,stopFires);
+		zone.addSprite(block);
+		
 		// hardwalls
 		currentSpeed = 0;
 		destructible = false;
@@ -128,9 +170,12 @@ public final class AiModelTest
 			zone.addSprite(block);
 		}
 		
+		// display initial zone
 		System.out.println("initial zone:\n"+zone);
 		AiModel model = new AiModel(zone);
+		model.setSimulateItemsAppearing(true);
 		
+		// first simulation
 		long duration = 0;
 		int iteration = 0;
 		do
@@ -144,5 +189,33 @@ public final class AiModelTest
 			iteration++;
 		}
 		while(duration!=0);
+		
+		// change hero direction
+		System.out.println("change hero direction: LEFT>DOWN");
+		model.applyChangeHeroDirection(hero,Direction.DOWN);
+		
+		// simulate until the hero undergoes some change
+		model.simulateUntilCondition(hero);
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		model.simulateUntilCondition(hero);
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		
+		// drop a bomb
+		System.out.println("hero drops a bomb");
+		model.applyDropBomb(hero);
+		
+		// change hero direction
+		System.out.println("change hero direction: DOWN>LEFT");
+		model.applyChangeHeroDirection(hero,Direction.LEFT);
+		
+		// simulate until the hero undergoes some change
+		model.simulateUntilCondition(hero);
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
+		model.simulateUntilCondition(hero);
+		System.out.println(model.getDuration());
+		System.out.println(model.getCurrentZone());
 	}
 }

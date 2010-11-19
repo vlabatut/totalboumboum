@@ -367,10 +367,11 @@ public abstract class AiZone
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** nombre d'items cachés, i.e. pas encore ramassés */
-	protected int hiddenItemsCount;
+	public int hiddenItemsCount;
 	/** nombre d'items cachés, par type*/
-	protected final HashMap<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
-
+	public final HashMap<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
+//TODO to be made private
+	
 	/** 
 	 * renvoie la liste des items apparents contenus dans cette zone 
 	 * (la liste peut être vide)

@@ -700,7 +700,7 @@ if(sprite instanceof AiSimBomb)
 			AiSimHero owner = bomb.getOwner();
 			// update owner
 			if(owner!=null)
-				owner.updateBombNumber(-1);
+				owner.updateBombNumberMax(-1);
 			// remove from zone
 			current.removeSprite(bomb);
 		}
@@ -1098,8 +1098,8 @@ if(sprite instanceof AiSimBomb)
 	{	AiSimBomb result = null;
 		
 		// check if the hero can drop a bomb
-		int dropped = hero.getBombCount();
-		int max = hero.getBombNumber();
+		int dropped = hero.getBombNumberCurrent();
+		int max = hero.getBombNumberMax();
 		if(dropped<max)
 		{	// then check if the tile can host the bomb
 			AiBomb bomb = hero.getBombPrototype();
@@ -1113,7 +1113,7 @@ if(sprite instanceof AiSimBomb)
 				result.setState(state);
 				
 				// update the hero
-				hero.updateBombNumber(+1);
+				hero.updateBombNumberMax(+1);
 				
 				// check for fire
 				if(tile.getFires().size()>0 && bomb.hasExplosionTrigger())
@@ -1141,7 +1141,7 @@ if(sprite instanceof AiSimBomb)
 	protected void pickItem(AiSimHero hero, AiSimItem item)
 	{	AiItemType type = item.getType();
 		if(type==AiItemType.EXTRA_BOMB)
-		{	hero.updateBombNumber(1);
+		{	hero.updateBombNumberMax(1);
 		}
 		else if(type==AiItemType.EXTRA_FLAME)
 		{	hero.updateBombRange(1);
