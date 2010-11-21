@@ -2,7 +2,7 @@
 <theme 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../schemas/theme.xsd" >
 	
-	<general name="Bomb" version="1.1" />
+	<general name="Tournament" version="1" />
 	<author value="Vincent Labatut" />
 	<source value="Super Bomberman 1"/>
 	
