@@ -28,6 +28,7 @@ import java.text.NumberFormat;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
+import org.totalboumboum.engine.container.level.hollow.HollowLevelLoader;
 import org.totalboumboum.engine.container.level.hollow.HollowLevelSaver;
 import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.players.Players;
@@ -39,6 +40,7 @@ import org.totalboumboum.gui.tools.GuiFileTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
@@ -52,17 +54,10 @@ public class LevelTools
 	 * allows to programmatically initialize a zone,
 	 * in order to help designing new levels
 	 * 
-	 * @param args
-	 * @throws IllegalArgumentException
-	 * @throws SecurityException
-	 * @throws ParserConfigurationException
-	 * @throws SAXException
-	 * @throws IOException
-	 * @throws IllegalAccessException
-	 * @throws NoSuchFieldException
 	 */
-	public static void main(String[] args) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	HollowLevel level = initLevel(15,15,"temp","level","superbomberman1","tournament3");
+	public static void main(String[] args) throws Exception
+	{	// create a level from scratch
+/*		HollowLevel level = initLevel(15,15,"temp","level","superbomberman1","tournament3");
 		setBackground(level);
 		addGrid(level);
 		addBorder(level,2,1,1,1);
@@ -73,6 +68,15 @@ public class LevelTools
 		insertLine(level,level.getLevelInfo().getGlobalHeight()/2,true,true,true,true,true);
 		insertCol(level,level.getLevelInfo().getGlobalWidth()-1,true,true,true,true,true);
 		insertLine(level,level.getLevelInfo().getGlobalHeight()-1,true,true,true,true,true);
+		saveLevel(level);
+*/		
+		// open an existing level and replace the background
+		String pack = "tournament201011";
+		String folder = "readysetgo";
+		XmlTools.init();
+		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
+		removeBackground(level);
+		setBackground(level);
 		saveLevel(level);
 	}
 		
@@ -90,7 +94,7 @@ public class LevelTools
 	 * @throws IllegalAccessException
 	 * @throws NoSuchFieldException
 	 */
-	private static void saveLevel(HollowLevel hollowLevel) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
+	protected static void saveLevel(HollowLevel hollowLevel) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{	LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		
 		// create level folder
@@ -129,7 +133,7 @@ public class LevelTools
 	 * @return
 	 * 		an empty level with the specified properties
 	 */
-	private static HollowLevel initLevel(int height, int width, String pack, String name, String instance, String theme)
+	protected static HollowLevel initLevel(int height, int width, String pack, String name, String instance, String theme)
 	{	HollowLevel result = new HollowLevel();
 		
 		// init level info
@@ -190,7 +194,7 @@ public class LevelTools
 	 * @param down
 	 * 		column of the bottom players
 	 */
-	private static void initPlayersLocations(Players players, int left, int up, int right, int down)
+	protected static void initPlayersLocations(Players players, int left, int up, int right, int down)
 	{	for(int i=1;i<=4;i++)
 		{	PlayerLocation[] loc = new PlayerLocation[i];
 			for(int j=0;j<i;j++)
@@ -237,7 +241,7 @@ public class LevelTools
 	 * @param yMargin
 	 * 		empty space between the top/bottom sides of the zone and their horizontal border (in tiles)
 	 */
-	private static void addBorder(HollowLevel hollowLevel, int xThickness, int yThickness, int xMargin, int yMargin)
+	protected static void addBorder(HollowLevel hollowLevel, int xThickness, int yThickness, int xMargin, int yMargin)
 	{	// init
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		int width = levelInfo.getGlobalWidth();
@@ -298,7 +302,7 @@ public class LevelTools
 	 * @param hollowLevel
 	 * 		the level to get a nice background
 	 */
-	private static void setBackground(HollowLevel hollowLevel)
+	protected static void setBackground(HollowLevel hollowLevel)
 	{	// init
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		String instance = levelInfo.getInstanceName();
@@ -355,6 +359,19 @@ public class LevelTools
 		}
 	}
 
+	protected static void removeBackground(HollowLevel level)
+	{	Zone zone = level.getZone();
+		int height = zone.getGlobalHeight();
+		int width = zone.getGlobalWidth();
+		
+		for(int line=0;line<height;line++)
+		{	for(int col=0;col<width;col++)
+			{	ZoneTile tile = zone.getTile(line,col);
+				tile.setFloor("regular");
+			}
+		}
+	}
+	
 	/**
 	 * add the traditional grid structure to an empty level
 	 * i.e. hardwall on 1 column/line out of 2.
@@ -362,7 +379,7 @@ public class LevelTools
 	 * @param hollowLevel
 	 * 		the level to be completed
 	 */
-	private static void addGrid(HollowLevel hollowLevel)
+	protected static void addGrid(HollowLevel hollowLevel)
 	{	// init
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		int height = levelInfo.getVisibleHeight();
@@ -394,7 +411,7 @@ public class LevelTools
 	 * @param hollowLevel
 	 * 		the level to be completed
 	 */
-	private static void addSoftwalls(HollowLevel hollowLevel)
+	protected static void addSoftwalls(HollowLevel hollowLevel)
 	{	// init
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		int height = levelInfo.getGlobalHeight();
@@ -438,7 +455,7 @@ public class LevelTools
 	 * @param moveVariables
 	 * 		whether the variable sprites should be moved to make room for the new line 
 	 */
-	private static void insertLine(HollowLevel hollowLevel, int line, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
+	protected static void insertLine(HollowLevel hollowLevel, int line, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
 	{	// update dimensions
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		int height = levelInfo.getGlobalHeight() + 1;
@@ -516,7 +533,7 @@ public class LevelTools
 	 * @param moveVariables
 	 * 		whether the variable sprites should be moved to make room for the new column 
 	 */
-	private static void insertCol(HollowLevel hollowLevel, int col, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
+	protected static void insertCol(HollowLevel hollowLevel, int col, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
 	{	// update dimensions
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		int height = levelInfo.getGlobalHeight();

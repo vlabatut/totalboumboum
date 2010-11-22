@@ -1,55 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
-<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd" >
-	
+<?xml version="1.0" encoding="UTF-8"?>
+<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\zone.xsd">
 	<variableTiles>
 		<variableTile name="softwall">
-			<value proba="0.65" >
-				<block name="softwall" />
+			<value proba="0.6499999761581421">
+				<block group="default" name="softwall" />
 			</value>
-			<value proba="0.35" >
-				<block name="softwall" />
+			<value proba="0.3499999940395355">
+				<block group="default" name="softwall" />
 				<item name="extrabomb" />
 			</value>
 		</variableTile>
-
-		<variableTile name="down">
-			<value proba="0.12" >
-				<block name="softwall" />
-			</value>
-			<value proba="0.88" >
-				<block group="hardwalls" name="regular" />
-			</value>
-		</variableTile>
-
 		<variableTile name="left">
-			<value proba="0.15" >
-				<block name="softwall" />
+			<value proba="0.15000000596046448">
+				<block group="default" name="softwall" />
 			</value>
-			<value proba="0.85" >
+			<value proba="0.8500000238418579">
 				<block group="hardwalls" name="regular" />
 			</value>
 		</variableTile>
-
+		<variableTile name="down">
+			<value proba="0.11999999731779099">
+				<block group="default" name="softwall" />
+			</value>
+			<value proba="0.8799999952316284">
+				<block group="hardwalls" name="regular" />
+			</value>
+		</variableTile>
 		<variableTile name="right">
-			<value proba="0.15" >
-				<block name="softwall" />
+			<value proba="0.15000000596046448">
+				<block group="default" name="softwall" />
 			</value>
-			<value proba="0.85" >
+			<value proba="0.8500000238418579">
 				<block group="hardwalls" name="regular" />
 			</value>
 		</variableTile>
-
 		<variableTile name="up">
-			<value proba="0.12" >
-				<block name="softwall" />
+			<value proba="0.11999999731779099">
+				<block group="default" name="softwall" />
 			</value>
-			<value proba="0.88" >
+			<value proba="0.8799999952316284">
 				<block group="hardwalls" name="regular" />
 			</value>
 		</variableTile>
 	</variableTiles>
-	
 	<matrix>
 		<line pos="0">
 			<tile pos="0">
@@ -112,8 +105,7 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="angleupright" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="1">
 			<tile pos="0">
 				<floor name="regular" />
@@ -162,8 +154,7 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="2">
 			<tile pos="0">
 				<floor name="regular" />
@@ -173,11 +164,11 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="00_01" />
+				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="3">
-				<floor name="00_02" />
+				<floor name="regular" />
 				<reference name="up" />
 			</tile>
 			<tile pos="4">
@@ -223,15 +214,14 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="3">
 			<tile pos="0">
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="1">
-				<floor name="regular" />
+				<floor name="01_00" />
 			</tile>
 			<tile pos="2">
 				<floor name="01_01" />
@@ -265,7 +255,7 @@
 				<floor name="01_10" />
 			</tile>
 			<tile pos="12">
-				<floor name="01_11" />
+				<floor name="regular" />
 				<reference name="right" />
 			</tile>
 			<tile pos="13">
@@ -275,15 +265,14 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="4">
 			<tile pos="0">
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="1">
-				<floor name="regular" />
+				<floor name="02_00" />
 			</tile>
 			<tile pos="2">
 				<floor name="02_01" />
@@ -324,18 +313,17 @@
 				<floor name="02_10" />
 			</tile>
 			<tile pos="12">
-				<floor name="02_11" />
+				<floor name="regular" />
 				<reference name="right" />
 			</tile>
 			<tile pos="13">
-				<floor name="02_12" />
+				<floor name="regular" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="5">
 			<tile pos="0">
 				<floor name="regular" />
@@ -393,8 +381,7 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="6">
 			<tile pos="0">
 				<floor name="regular" />
@@ -452,15 +439,14 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="7">
 			<tile pos="0">
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="1">
-				<floor name="05_00" />
+				<floor name="regular" />
 			</tile>
 			<tile pos="2">
 				<floor name="05_01" />
@@ -511,8 +497,7 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="8">
 			<tile pos="0">
 				<floor name="regular" />
@@ -522,11 +507,11 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
+				<floor name="06_01" />
 				<reference name="left" />
 			</tile>
 			<tile pos="3">
-				<floor name="regular" />
+				<floor name="06_02" />
 			</tile>
 			<tile pos="4">
 				<floor name="06_03" />
@@ -557,21 +542,20 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
-				<floor name="regular" />
+				<floor name="06_10" />
 			</tile>
 			<tile pos="12">
-				<floor name="regular" />
+				<floor name="06_11" />
 				<reference name="right" />
 			</tile>
 			<tile pos="13">
-				<floor name="regular" />
+				<floor name="06_12" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="9">
 			<tile pos="0">
 				<floor name="regular" />
@@ -581,11 +565,11 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="2">
-				<floor name="regular" />
+				<floor name="07_01" />
 				<reference name="left" />
 			</tile>
 			<tile pos="3">
-				<floor name="regular" />
+				<floor name="07_02" />
 			</tile>
 			<tile pos="4">
 				<floor name="07_03" />
@@ -609,21 +593,20 @@
 				<floor name="07_09" />
 			</tile>
 			<tile pos="11">
-				<floor name="regular" />
+				<floor name="07_10" />
 			</tile>
 			<tile pos="12">
-				<floor name="regular" />
+				<floor name="07_11" />
 				<reference name="right" />
 			</tile>
 			<tile pos="13">
-				<floor name="regular" />
+				<floor name="07_12" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="10">
 			<tile pos="0">
 				<floor name="regular" />
@@ -641,7 +624,7 @@
 				<reference name="up" />
 			</tile>
 			<tile pos="4">
-				<floor name="08_03" />
+				<floor name="regular" />
 				<reference name="up" />
 			</tile>
 			<tile pos="5">
@@ -683,8 +666,7 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="11">
 			<tile pos="0">
 				<floor name="regular" />
@@ -733,8 +715,7 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="vertical" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="12">
 			<tile pos="0">
 				<floor name="regular" />
@@ -796,8 +777,7 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="angledownright" />
 			</tile>
-		</line>	
-
+		</line>
 	</matrix>
-		
 </zone>
+

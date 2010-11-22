@@ -286,7 +286,7 @@ public final class AiDataZone extends AiZone
 	
 	@Override
 	public AiDataTile getTile(double x, double y)
-	{	int[] coord = LevelsTools.getTile(x,y,pixelLeftX,pixelTopY,height,width);
+	{	int[] coord = LevelsTools.getTile(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth,height,width);
 		AiDataTile result = matrix[coord[0]][coord[1]];
 		return result;
 	}

@@ -51,9 +51,11 @@ public class HollowLevelSaver
 		
 		// level info
 		LevelInfoSaver.saveLevelInfo(individualFolder,levelInfo);
+		
 		// players
 		Players players = hollowLevel.getPlayers();
 		PlayersSaver.savePlayers(individualFolder,players);
+		
 		// zone
 		Zone zone = hollowLevel.getZone();
 		ZoneSaver.saveZone(individualFolder, zone);

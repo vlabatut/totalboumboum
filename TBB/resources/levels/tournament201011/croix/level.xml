@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\level.xsd">
-	
 	<title value="Croix" />
 	<author value="Vincent Labatut" />
 	<source value="original" />
 	<preview file="preview.jpg" />
-	
 	<instance name="superbomberman1" />
 	<theme name="tournament4" />
-	
 	<globalDimension height="15" width="15" />
 	<visibleDimension height="13" width="13" />
 	<visiblePosition upLine="1" leftCol="1" />

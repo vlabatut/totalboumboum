@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd" >
-	
+<?xml version="1.0" encoding="UTF-8"?>
+<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\zone.xsd">
 	<matrix>
 		<line pos="0">
 			<tile pos="0">
@@ -88,8 +86,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="1">
 			<tile pos="0">
 				<floor name="regular" />
@@ -162,8 +159,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="2">
 			<tile pos="0">
 				<floor name="regular" />
@@ -242,8 +238,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="3">
 			<tile pos="0">
 				<floor name="regular" />
@@ -265,10 +260,10 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="6">
-				<floor name="00_01" />
+				<floor name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="00_02" />
+				<floor name="regular" />
 			</tile>
 			<tile pos="8">
 				<floor name="00_03" />
@@ -316,8 +311,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="4">
 			<tile pos="0">
 				<floor name="regular" />
@@ -336,7 +330,7 @@
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="01_00" />
 			</tile>
 			<tile pos="6">
 				<floor name="01_01" />
@@ -374,7 +368,7 @@
 				<floor name="01_10" />
 			</tile>
 			<tile pos="16">
-				<floor name="01_11" />
+				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="17">
@@ -396,8 +390,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="5">
 			<tile pos="0">
 				<floor name="regular" />
@@ -416,7 +409,7 @@
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="5">
-				<floor name="regular" />
+				<floor name="02_00" />
 			</tile>
 			<tile pos="6">
 				<floor name="02_01" />
@@ -449,10 +442,10 @@
 				<floor name="02_10" />
 			</tile>
 			<tile pos="16">
-				<floor name="02_11" />
+				<floor name="regular" />
 			</tile>
 			<tile pos="17">
-				<floor name="02_12" />
+				<floor name="regular" />
 			</tile>
 			<tile pos="18">
 				<floor name="regular" />
@@ -470,8 +463,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="6">
 			<tile pos="0">
 				<floor name="regular" />
@@ -550,8 +542,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="7">
 			<tile pos="0">
 				<floor name="regular" />
@@ -624,8 +615,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="8">
 			<tile pos="0">
 				<floor name="regular" />
@@ -644,7 +634,7 @@
 				<block group="hardwalls" name="vertical" />
 			</tile>
 			<tile pos="5">
-				<floor name="05_00" />
+				<floor name="regular" />
 			</tile>
 			<tile pos="6">
 				<floor name="05_01" />
@@ -704,8 +694,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="9">
 			<tile pos="0">
 				<floor name="regular" />
@@ -727,10 +716,10 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="06_01" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="06_02" />
 			</tile>
 			<tile pos="8">
 				<floor name="06_03" />
@@ -754,13 +743,13 @@
 				<floor name="06_09" />
 			</tile>
 			<tile pos="15">
-				<floor name="regular" />
+				<floor name="06_10" />
 			</tile>
 			<tile pos="16">
-				<floor name="regular" />
+				<floor name="06_11" />
 			</tile>
 			<tile pos="17">
-				<floor name="regular" />
+				<floor name="06_12" />
 			</tile>
 			<tile pos="18">
 				<floor name="regular" />
@@ -778,8 +767,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="10">
 			<tile pos="0">
 				<floor name="regular" />
@@ -801,11 +789,11 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="6">
-				<floor name="regular" />
+				<floor name="07_01" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="7">
-				<floor name="regular" />
+				<floor name="07_02" />
 			</tile>
 			<tile pos="8">
 				<floor name="07_03" />
@@ -833,14 +821,14 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="15">
-				<floor name="regular" />
+				<floor name="07_10" />
 			</tile>
 			<tile pos="16">
-				<floor name="regular" />
+				<floor name="07_11" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="17">
-				<floor name="regular" />
+				<floor name="07_12" />
 			</tile>
 			<tile pos="18">
 				<floor name="regular" />
@@ -858,8 +846,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="11">
 			<tile pos="0">
 				<floor name="regular" />
@@ -887,7 +874,7 @@
 				<floor name="regular" />
 			</tile>
 			<tile pos="8">
-				<floor name="08_03" />
+				<floor name="regular" />
 			</tile>
 			<tile pos="9">
 				<floor name="08_04" />
@@ -932,8 +919,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="12">
 			<tile pos="0">
 				<floor name="regular" />
@@ -1012,8 +998,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="13">
 			<tile pos="0">
 				<floor name="regular" />
@@ -1086,8 +1071,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
-
+		</line>
 		<line pos="14">
 			<tile pos="0">
 				<floor name="regular" />
@@ -1173,7 +1157,7 @@
 			<tile pos="22">
 				<floor name="regular" />
 			</tile>
-		</line>	
+		</line>
 	</matrix>
-		
 </zone>
+

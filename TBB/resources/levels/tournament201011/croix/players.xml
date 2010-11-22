@@ -22,8 +22,8 @@
 	</locations>
 	<items>
 		<item name="extrabomb" number="3" />
-		<item name="extraflame" number="3" />
 		<item name="speed" number="1" />
+		<item name="extraflame" number="3" />
 	</items>
 </players>
 
