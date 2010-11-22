@@ -66,7 +66,8 @@ public class VariableTilesSaver
     	String block = valueTile.getBlock();
     	String item = valueTile.getItem();
     	String bomb = valueTile.getBomb();
-    	Element result = ZoneSaver.saveBasicTileElement(floor, block, item, bomb);
+    	Element result = new Element(XmlNames.VALUE);
+    	ZoneSaver.saveTileContent(result,floor,block,item,bomb);
     	
     	// probability
 		double proba = valueTile.getProba();

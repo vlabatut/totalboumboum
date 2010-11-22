@@ -275,7 +275,7 @@ public abstract class Sprite
 				setToBeRemovedFromSprite(this.boundToSprite);
 			// s'il n'y a pas de nouveau boundToSprite : on connecte ce sprite à une Tile
 			if(boundToSprite==null)
-				changeTile(RoundVariables.level.getTile(getCurrentPosX(), getCurrentPosY()));
+				changeTile(RoundVariables.level.getTile(getCurrentPosX(),getCurrentPosY()));
 			// s'il y a un nouveau boundToSprite : on connecte ce sprite à ce boundToSprite
 			else
 				boundToSprite.addBoundSprite(this);

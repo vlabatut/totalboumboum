@@ -278,7 +278,7 @@ final class AiSimZone extends AiZone
 	
 	@Override
 	public AiSimTile getTile(double x, double y)
-	{	int[] coord = LevelsTools.getTile(x,y,pixelLeftX,pixelTopY,height,width);
+	{	int[] coord = LevelsTools.getTile(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth,height,width);
 		AiSimTile result = matrix[coord[0]][coord[1]];
 		return result;
 	}

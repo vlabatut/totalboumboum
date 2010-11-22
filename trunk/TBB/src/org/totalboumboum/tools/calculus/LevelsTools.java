@@ -501,9 +501,10 @@ public class LevelsTools
 	/////////////////////////////////////////////////////////////////
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static int[] getTile(double x, double y, double pixelLeftX, double pixelTopY, int globalHeight, int globalWidth)
-	{	x = CombinatoricsTools.round(x);
-		y = CombinatoricsTools.round(y);
+	public static int[] getTile(double x, double y, double pixelLeftX, double pixelTopY, double pixelHeight, double pixelWidth, int globalHeight, int globalWidth)
+	{	double temp[] = normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+		x = CombinatoricsTools.round(temp[0]);
+		y = CombinatoricsTools.round(temp[1]);
 		double difX = x-pixelLeftX;
 		double difY = y-pixelTopY;
 		double rX = difX/RoundVariables.scaledTileDimension;

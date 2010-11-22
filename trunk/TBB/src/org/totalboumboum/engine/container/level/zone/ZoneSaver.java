@@ -47,6 +47,7 @@ public class ZoneSaver
 	public static void saveZone(String folder, Zone zone) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// build document
 		Element root = saveZoneElement(zone);	
+		
 		// save file
 		String individualFolder = folder;
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_ZONE+FileNames.EXTENSION_XML);
@@ -92,7 +93,7 @@ public class ZoneSaver
         	String block = zoneTile.getBlock();
        		String item = zoneTile.getItem();
        		String bomb = zoneTile.getBomb();
-       		Element tileElement = saveBasicTileElement(floor, block, item, bomb);
+       		Element tileElement = saveTileElement(floor,block,item,bomb);
 			tileElement.setAttribute(XmlNames.POSITION, Integer.toString(col));
     		// process variable term
     		String variable = zoneTile.getVariable();
@@ -108,11 +109,14 @@ public class ZoneSaver
     	return result;
     }
     
-    public static Element saveBasicTileElement(String floor, String block, String item, String bomb)
-    {	// init
-		Element result = new Element(XmlNames.TILE);
-		
-		// floor
+    private static Element saveTileElement(String floor, String block, String item, String bomb)
+    {	Element result = new Element(XmlNames.TILE);
+    	saveTileContent(result,floor,block,item,bomb);
+		return result;
+    }
+    
+    public static void saveTileContent(Element result, String floor, String block, String item, String bomb)
+    {	// floor
 		if(floor!=null)
 		{	Element floorElement = new Element(XmlNames.FLOOR);
 		result.addContent(floorElement);
@@ -149,7 +153,5 @@ public class ZoneSaver
 			String bombRange = temp[1];
 			bombElement.setAttribute(XmlNames.RANGE,bombRange);
 		}
-
-		return result;
     }
 }
