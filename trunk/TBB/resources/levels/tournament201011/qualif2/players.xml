@@ -13,6 +13,12 @@
 			<location player="01" line="04" col="11" />
 			<location player="02" line="06" col="11" />
 		</case>
+		<case players="4">
+			<location player="00" line="05" col="01" />
+			<location player="01" line="04" col="11" />
+			<location player="02" line="05" col="11" />
+			<location player="03" line="06" col="11" />
+		</case>
 	</locations>
 	<items>
 		<item name="extrabomb" number="3" />

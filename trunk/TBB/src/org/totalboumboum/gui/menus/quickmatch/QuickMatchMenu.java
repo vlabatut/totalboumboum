@@ -198,7 +198,8 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			buttonSettingsNext.setEnabled(true);
 		
 		// players
-		if(tournament==null || !levelsSelection.getAllowedPlayerNumbers().contains(playersData.getSelectedProfiles().size()))
+		int playerNumber = playersData.getSelectedProfiles().size();
+		if(tournament==null || !levelsSelection.getAllowedPlayerNumbers().contains(playerNumber))
 			buttonPlayersNext.setEnabled(false);
 		else
 		{	ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
