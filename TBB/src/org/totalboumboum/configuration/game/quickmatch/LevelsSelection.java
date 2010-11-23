@@ -22,6 +22,7 @@ package org.totalboumboum.configuration.game.quickmatch;
  */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -39,6 +40,10 @@ public class LevelsSelection
 		result.packNames.addAll(packNames);
 		result.folderNames.addAll(folderNames);
 		result.allowedPlayers.addAll(allowedPlayers);
+		for(Set<Integer> ap: allowedPlayersList)
+		{	Set<Integer> tmp = new TreeSet<Integer>(ap);
+			result.allowedPlayersList.add(tmp);
+		}
 		
 		return result;
 	}
@@ -55,30 +60,50 @@ public class LevelsSelection
 	}
 	
 	public void addLevel(int index, String packName, String folderName, Set<Integer> allowedPlayers)
-	{	folderNames.add(index,folderName);
+	{	// file stuff
+		folderNames.add(index,folderName);
 		packNames.add(index,packName);
-		updateAllowedPlayers(allowedPlayers);
+		
+		// allowed players
+		allowedPlayersList.add(index,allowedPlayers);
+		if(this.allowedPlayers.isEmpty())
+			this.allowedPlayers.addAll(allowedPlayers);
+		else
+			this.allowedPlayers.retainAll(allowedPlayers);
 	}
 	
 	public void removeLevel(int index)
 	{	folderNames.remove(index);
-		packNames.remove(index);		
+		packNames.remove(index);
+		allowedPlayersList.remove(index);
+		updateAllowedPlayers();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// ALLOWED PLAYERS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Set<Integer> allowedPlayers = new TreeSet<Integer>();
+	private List<Set<Integer>> allowedPlayersList = new ArrayList<Set<Integer>>();
 	
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	return allowedPlayers;	
 	}
 	
-	private void updateAllowedPlayers(Set<Integer> allowedPlayers)
-	{	if(this.allowedPlayers.isEmpty())
-			this.allowedPlayers.addAll(allowedPlayers);
-		else
-			this.allowedPlayers.retainAll(allowedPlayers);
+	public Set<Integer> getAllowedPlayerNumbers(int index)
+	{	return allowedPlayersList.get(index);	
+	}
+	
+	private void updateAllowedPlayers()
+	{	allowedPlayers.clear();
+		Iterator<Set<Integer>> it = allowedPlayersList.iterator();
+		if(it.hasNext())
+		{	Set<Integer> ap = it.next();
+			allowedPlayers.addAll(ap);
+			while(it.hasNext())
+			{	ap = it.next();
+				allowedPlayers.retainAll(ap);
+			}
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////

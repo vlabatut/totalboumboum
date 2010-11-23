@@ -53,6 +53,29 @@
 			<location player="06" line="05" col="01" />
 			<location player="07" line="05" col="01" />
 		</case>
+		<case players="9">
+			<location player="00" line="05" col="01" />
+			<location player="01" line="05" col="01" />
+			<location player="02" line="05" col="01" />
+			<location player="03" line="05" col="01" />
+			<location player="04" line="05" col="01" />
+			<location player="05" line="05" col="01" />
+			<location player="06" line="05" col="01" />
+			<location player="07" line="05" col="01" />
+			<location player="08" line="05" col="01" />
+		</case>
+		<case players="10">
+			<location player="00" line="05" col="01" />
+			<location player="01" line="05" col="01" />
+			<location player="02" line="05" col="01" />
+			<location player="03" line="05" col="01" />
+			<location player="04" line="05" col="01" />
+			<location player="05" line="05" col="01" />
+			<location player="06" line="05" col="01" />
+			<location player="07" line="05" col="01" />
+			<location player="08" line="05" col="01" />
+			<location player="09" line="05" col="01" />
+		</case>
 	</locations>
 	<items>
 		<item name="extrabomb" number="1" />

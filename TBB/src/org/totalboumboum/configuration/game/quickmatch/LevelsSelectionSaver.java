@@ -53,7 +53,7 @@ public class LevelsSelectionSaver
 		result.setAttribute(XmlNames.FOLDER,folderName);
 
 		// allowed players
-		Set<Integer> allowedPlayers = levelsSelection.getAllowedPlayerNumbers();
+		Set<Integer> allowedPlayers = levelsSelection.getAllowedPlayerNumbers(index);
 		String allowedPlayersStr = "";
 		for(Integer i: allowedPlayers)
 		{	String str = i.toString();

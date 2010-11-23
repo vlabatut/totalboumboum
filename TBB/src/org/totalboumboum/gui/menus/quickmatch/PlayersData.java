@@ -128,7 +128,8 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	}
 	
 	public List<Profile> getSelectedProfiles()
-	{	return playersPanel.getPlayers();	
+	{	List<Profile> result = playersPanel.getPlayers();
+		return result;	
 	}
 
 	/////////////////////////////////////////////////////////////////
