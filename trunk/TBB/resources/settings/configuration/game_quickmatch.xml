@@ -13,18 +13,12 @@
 			<value rank="5" points="0" />
 		</points>
 	</settings>
-	<players />
+	<players>
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="YELLOW" controls="1" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
+	</players>
 	<levels>
-		<level pack="tournament201011" folder="croix" allowedPlayers="0 1 2 3 4" />
-		<level pack="tournament201011" folder="entrance" allowedPlayers="0 1 2 3 4" />
-		<level pack="tournament201011" folder="horizontal" allowedPlayers="0 1 2 3 4 5 6 7 8" />
-		<level pack="tournament201011" folder="items" allowedPlayers="0 1 2 3 4 5" />
-		<level pack="tournament201011" folder="limitsiz" allowedPlayers="0 1 2 3 4" />
-		<level pack="tournament201011" folder="line" allowedPlayers="0 1 2 3 4 5" />
-		<level pack="tournament201011" folder="pasaj" allowedPlayers="0 1 2 3 4" />
-		<level pack="tournament201011" folder="power" allowedPlayers="0 1 2 3 4" />
-		<level pack="tournament201011" folder="qualif1" allowedPlayers="0 1 2 3 4 5" />
-		<level pack="tournament201011" folder="qualif2" allowedPlayers="0 1 2 3" />
+		<level pack="tournament201011" folder="qualif3" allowedPlayers="1 2 3 4 5" />
 	</levels>
 </gameQuickmatch>
 
