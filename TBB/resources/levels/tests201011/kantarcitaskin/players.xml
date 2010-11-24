@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<players 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../schemas/players.xsd" >
+	
+	<locations>
+		<case players="1">
+			<location player="0" line="6" col="7" />
+		</case>
+		<case players="2">
+			<location player="0" line="4" col="2" />
+			<location player="1" line="2" col="5" />
+		</case>
+	</locations>
+	
+	<items>
+		<item name="extrabomb" number="2" />
+		<item name="extraflame" number="4" />
+	</items>
+	
+</players>
