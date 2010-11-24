@@ -2,8 +2,8 @@
 <level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd" >
 
-	<title value="Besiktas" />
-	<author value="SercanOzen" />
+	<title value="ÖzdökerÖzenTest1" />
+	<author value="Sercan Özen" />
 	<source value="Original" />
 	<preview file="preview.jpg" />
 
