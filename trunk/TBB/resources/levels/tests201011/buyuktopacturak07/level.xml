@@ -2,8 +2,8 @@
 <level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd" >
 
-	<title value="Test level" />
-	<author value="Yigit Turak" />
+	<title value="BüyüktopaçTurakTest7" />
+	<author value="Onur Büyüktopaç / Yiğit Turak"/>
 	<source value="Individual" />
 	<preview file="preview.jpg" />
 

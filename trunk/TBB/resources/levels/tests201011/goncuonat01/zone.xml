@@ -109,7 +109,7 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="3">
-				<floor name="00_01" />
+				<floor name="regular" />
 				<reference name="tile1" />
 			</tile>
 			<tile pos="4">
@@ -134,23 +134,13 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="3">
-				<floor name="01_01" />
+				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="4">
-				<floor name="01_02" />
+				<floor name="regular" />
 				<reference name="tile1" />
 			</tile>
-			
-			
-			
 		</line>	
-
-		
-			
-		
-
-
 	</matrix>
-		
 </zone>

@@ -2,14 +2,13 @@
 <level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd" >
 
-	<title value="level" />
-	<author value="GoncuOnat" />
+	<title value="GöncüOnatTest" />
+	<author value="Elif Göncü / Yağız Onat" />
 	<source value="Original" />
 	<preview file="preview.jpg" />
 
 	<instance name="superbomberman1" />
 	<theme name="tournament3"/>
-	
 
 	<globalDimension height="5" width="5" />
 	<visibleDimension height="15" width="17" />
