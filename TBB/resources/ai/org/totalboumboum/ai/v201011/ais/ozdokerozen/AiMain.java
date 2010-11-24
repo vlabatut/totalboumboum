@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201011.ais.ozdokerozen;
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
-import org.totalboumboum.ai.v201011.ais.ozdokerozen.v1.OzdokerOzen;
+import org.totalboumboum.ai.v201011.ais.ozdokerozen.v2.OzdokerOzen;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
