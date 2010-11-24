@@ -18,8 +18,7 @@
 		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tests201011" folder="goncuonat01" allowedPlayers="0 1 2" />
-		<level pack="tests201011" folder="ozdokerozen1" allowedPlayers="1 2 3" />
+		<level pack="tournament201011" folder="qualif4" allowedPlayers="1 2 3 4 5" />
 	</levels>
 </gameQuickmatch>
 
