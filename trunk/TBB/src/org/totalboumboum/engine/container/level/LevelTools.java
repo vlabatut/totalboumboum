@@ -56,8 +56,9 @@ public class LevelTools
 	 * 
 	 */
 	public static void main(String[] args) throws Exception
-	{	// create a level from scratch
-/*		HollowLevel level = initLevel(15,15,"temp","level","superbomberman1","tournament3");
+	{	
+/*		// create a level from scratch
+		HollowLevel level = initLevel(15,15,"temp","level","superbomberman1","tournament3");
 		setBackground(level);
 		addGrid(level);
 		addBorder(level,2,1,1,1);
@@ -70,7 +71,8 @@ public class LevelTools
 		insertLine(level,level.getLevelInfo().getGlobalHeight()-1,true,true,true,true,true);
 		saveLevel(level);
 */		
-		// open an existing level and replace the background
+		
+/*		// open an existing level and replace the background
 		String pack = "tournament201011";
 		String folder = "readysetgo";
 		XmlTools.init();
@@ -78,6 +80,19 @@ public class LevelTools
 		removeBackground(level);
 		setBackground(level);
 		saveLevel(level);
+*/
+		
+		
+		String pack = "tournament201011";
+		String folder = "qualif4";
+		XmlTools.init();
+		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
+		insertCol(level,0,true,true,true,true,true);
+		insertCol(level,0,true,true,true,true,true);
+		insertCol(level,22,true,true,true,true,true);
+		insertCol(level,23,true,true,true,true,true);
+		saveLevel(level);
+//TODO programmer remove line/col		
 	}
 		
 	/**
@@ -560,14 +575,24 @@ public class LevelTools
 				ZoneTile tile2 = zone.getTile(l,c-1);
 				if(moveFloors)
 					tile1.setFloor(tile2.getFloor());
+				else
+					tile1.setFloor(null);
 				if(moveBlocks)
 					tile1.setBlock(tile2.getBlock());
+				else
+					tile1.setBlock(null);
 				if(moveBombs)
 					tile1.setBomb(tile2.getBomb());
+				else
+					tile1.setBomb(null);
 				if(moveItems)
 					tile1.setItem(tile2.getItem());
+				else
+					tile1.setItem(null);
 				if(moveVariables)
 					tile1.setVariable(tile2.getVariable());
+				else
+					tile1.setVariable(null);
 			}
 		}
 		// reinit column "col"
