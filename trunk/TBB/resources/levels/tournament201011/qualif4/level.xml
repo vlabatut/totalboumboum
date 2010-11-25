@@ -6,8 +6,8 @@
 	<preview file="preview.jpg" />
 	<instance name="superbomberman1" />
 	<theme name="tournament4" />
-	<globalDimension height="15" width="20" />
-	<visibleDimension height="7" width="20" />
+	<globalDimension height="15" width="21" />
+	<visibleDimension height="7" width="21" />
 	<visiblePosition upLine="4" leftCol="0" />
 	<display forceAll="true" maximize="true" />
 </level>
