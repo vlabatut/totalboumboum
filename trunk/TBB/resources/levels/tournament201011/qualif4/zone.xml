@@ -4,7 +4,7 @@
 		<line pos="0">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -83,6 +83,10 @@
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -90,7 +94,7 @@
 		<line pos="1">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -169,6 +173,10 @@
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -176,7 +184,7 @@
 		<line pos="2">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -255,6 +263,10 @@
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -344,12 +356,15 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
+			<tile pos="21">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
 		</line>
 		<line pos="4">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<item name="extraflame" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -439,12 +454,17 @@
 			<tile pos="18">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -452,12 +472,12 @@
 		<line pos="5">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<item name="extraflame" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -466,15 +486,15 @@
 			<tile pos="3">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
-				<item name="extraflame" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
@@ -506,8 +526,7 @@
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<item name="extraflame" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
@@ -532,12 +551,17 @@
 			<tile pos="18">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -545,12 +569,12 @@
 		<line pos="6">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<item name="extraflame" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -558,10 +582,10 @@
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
+				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
@@ -593,11 +617,11 @@
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
-				<block group="hardwalls" name="logo" />
+				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="logo" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
@@ -617,13 +641,17 @@
 			</tile>
 			<tile pos="18">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -631,8 +659,7 @@
 		<line pos="7">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<item name="extraflame" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -641,6 +668,8 @@
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
+				<block group="default" name="softwall" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
@@ -650,7 +679,6 @@
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
@@ -682,7 +710,7 @@
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<item name="extrabomb" />
+				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
@@ -694,20 +722,24 @@
 			</tile>
 			<tile pos="16">
 				<floor name="regular" />
+				<item name="extrabomb" />
 			</tile>
 			<tile pos="17">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="18">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -715,12 +747,12 @@
 		<line pos="8">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<item name="extraflame" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -728,10 +760,10 @@
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
+				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
@@ -763,11 +795,11 @@
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
-				<block group="hardwalls" name="logo" />
+				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="logo" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
@@ -787,13 +819,17 @@
 			</tile>
 			<tile pos="18">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -801,12 +837,12 @@
 		<line pos="9">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<item name="extraflame" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -815,15 +851,15 @@
 			<tile pos="3">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
-				<item name="extraflame" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
@@ -855,8 +891,7 @@
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<item name="extraflame" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="14">
 				<floor name="regular" />
@@ -881,12 +916,17 @@
 			<tile pos="18">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -894,8 +934,7 @@
 		<line pos="10">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
-				<item name="extraflame" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -985,12 +1024,17 @@
 			<tile pos="18">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -1080,11 +1124,15 @@
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
+			<tile pos="21">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
 		</line>
 		<line pos="12">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -1163,6 +1211,10 @@
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -1170,7 +1222,7 @@
 		<line pos="13">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -1249,6 +1301,10 @@
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
@@ -1256,7 +1312,7 @@
 		<line pos="14">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="default" name="softwall" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -1335,6 +1391,10 @@
 				<block group="default" name="softwall" />
 			</tile>
 			<tile pos="20">
+				<floor name="regular" />
+				<block group="default" name="softwall" />
+			</tile>
+			<tile pos="21">
 				<floor name="regular" />
 				<block group="hardwalls" name="regular" />
 			</tile>
