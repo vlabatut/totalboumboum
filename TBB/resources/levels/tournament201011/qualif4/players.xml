@@ -2,29 +2,29 @@
 <players xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\players.xsd">
 	<locations>
 		<case players="1">
-			<location player="00" line="07" col="17" />
+			<location player="00" line="04" col="17" />
 		</case>
 		<case players="2">
-			<location player="00" line="07" col="17" />
-			<location player="01" line="07" col="04" />
+			<location player="00" line="04" col="17" />
+			<location player="01" line="04" col="04" />
 		</case>
 		<case players="3">
-			<location player="00" line="07" col="17" />
-			<location player="01" line="06" col="04" />
-			<location player="02" line="08" col="04" />
+			<location player="00" line="04" col="17" />
+			<location player="01" line="03" col="04" />
+			<location player="02" line="05" col="04" />
 		</case>
 		<case players="4">
-			<location player="00" line="07" col="17" />
-			<location player="01" line="06" col="04" />
-			<location player="02" line="08" col="04" />
-			<location player="03" line="07" col="03" />
+			<location player="00" line="04" col="17" />
+			<location player="01" line="03" col="04" />
+			<location player="02" line="05" col="04" />
+			<location player="03" line="04" col="03" />
 		</case>
 		<case players="5">
-			<location player="00" line="07" col="17" />
-			<location player="01" line="06" col="04" />
-			<location player="02" line="08" col="04" />
-			<location player="03" line="07" col="03" />
-			<location player="04" line="07" col="05" />
+			<location player="00" line="04" col="17" />
+			<location player="01" line="03" col="04" />
+			<location player="02" line="05" col="04" />
+			<location player="03" line="04" col="03" />
+			<location player="04" line="04" col="05" />
 		</case>
 	</locations>
 	<items>
