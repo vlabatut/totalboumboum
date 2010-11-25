@@ -18,9 +18,8 @@
 		<player file="cadc893f-eebe-448f-8351-15365d1f4e71" color="RED" controls="1" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tournament201011" folder="qualif1" allowedPlayers="1 2 3 4 5" />
-		<level pack="tournament201011" folder="qualif2" allowedPlayers="1 2 3 4" />
-		<level pack="tournament201011" folder="qualif3" allowedPlayers="1 2 3 4 5" />
+		<level pack="tests201011" folder="kantarcitaskin" allowedPlayers="1 2" />
+		<level pack="tests201011" folder="ozdokerozen1" allowedPlayers="1 2 3" />
 	</levels>
 </gameQuickmatch>
 
