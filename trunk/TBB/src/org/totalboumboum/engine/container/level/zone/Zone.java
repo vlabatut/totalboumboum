@@ -79,6 +79,10 @@ public class Zone implements Serializable
 	{	tiles.add(tile);
 	}
 	
+	public void removeTile(ZoneTile tile)
+	{	tiles.remove(tile);
+	}
+	
 	public List<ZoneTile> getTiles()
 	{	return tiles;
 	}
