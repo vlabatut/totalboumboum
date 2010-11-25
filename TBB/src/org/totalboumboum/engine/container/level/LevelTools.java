@@ -87,12 +87,11 @@ public class LevelTools
 		String folder = "qualif4";
 		XmlTools.init();
 		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
-		insertCol(level,0,true,true,true,true,true);
-		insertCol(level,0,true,true,true,true,true);
-		insertCol(level,22,true,true,true,true,true);
-		insertCol(level,23,true,true,true,true,true);
+		removeCol(level,0,true,true,true,true,true);
+		removeCol(level,0,true,true,true,true,true);
+//		insertCol(level,22,true,true,true,true,true);
+//		insertCol(level,23,true,true,true,true,true);
 		saveLevel(level);
-//TODO programmer remove line/col		
 	}
 		
 	/**
@@ -451,7 +450,7 @@ public class LevelTools
 	}
 	
 	/**
-	 * insert a new line in order to make the zone wider.
+	 * insert a new line in order to make the zone taller.
 	 * the user can choose to slide only certain types
 	 * of sprites, or none of them.
 	 * 
@@ -479,7 +478,7 @@ public class LevelTools
 		int vHeight = levelInfo.getVisibleHeight();
 		int vUpLine = levelInfo.getVisiblePositionUpLine();
 		if(line>=vUpLine && line<=vUpLine+vHeight)
-			levelInfo.setVisibleHeight(vHeight + 1);
+			levelInfo.setVisibleHeight(vHeight+1);
 		else if(line<vUpLine)
 			levelInfo.setVisiblePositionUpLine(vUpLine+1);
 		
@@ -497,14 +496,24 @@ public class LevelTools
 				ZoneTile tile2 = zone.getTile(l-1,c);
 				if(moveFloors)
 					tile1.setFloor(tile2.getFloor());
+				else
+					tile1.setFloor(null);
 				if(moveBlocks)
 					tile1.setBlock(tile2.getBlock());
+				else
+					tile1.setBlock(null);
 				if(moveBombs)
 					tile1.setBomb(tile2.getBomb());
+				else
+					tile1.setBomb(null);
 				if(moveItems)
 					tile1.setItem(tile2.getItem());
+				else
+					tile1.setItem(null);
 				if(moveVariables)
 					tile1.setVariable(tile2.getVariable());
+				else
+					tile1.setVariable(null);
 			}
 		}
 		// reinit line "line"
@@ -529,7 +538,86 @@ public class LevelTools
 	}
 
 	/**
-	 * insert a new column in order to make the zone higher.
+	 * remove the specified line in order to make the zone narrower.
+	 * the user can choose to slide only certain types
+	 * of sprites, or none of them.
+	 * 
+	 * @param hollowLevel
+	 * 		the level to be modified
+	 * @param line
+	 * 		the location of the line to be removed
+	 * @param moveFloors
+	 * 		whether the floor sprites should be moved to make room for the new line 
+	 * @param moveBlocks
+	 * 		whether the block sprites should be moved to make room for the new line 
+	 * @param moveItems
+	 * 		whether the item sprites should be moved to make room for the new line 
+	 * @param moveBombs
+	 * 		whether the bomb sprites should be moved to make room for the new line 
+	 * @param moveVariables
+	 * 		whether the variable sprites should be moved to make room for the new line 
+	 */
+	protected static void removeLine(HollowLevel hollowLevel, int line, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
+	{	// update dimensions
+		LevelInfo levelInfo = hollowLevel.getLevelInfo();
+		int height = levelInfo.getGlobalHeight() - 1;
+		levelInfo.setGlobalHeight(height);
+		int width = levelInfo.getGlobalWidth();
+		int vHeight = levelInfo.getVisibleHeight();
+		int vUpLine = levelInfo.getVisiblePositionUpLine();
+		if(line>=vUpLine && line<=vUpLine+vHeight)
+			levelInfo.setVisibleHeight(vHeight-1);
+		else if(line<vUpLine)
+			levelInfo.setVisiblePositionUpLine(vUpLine-1);
+		
+		// update zone
+		Zone zone = hollowLevel.getZone();
+		// move existing lines
+		for(int l=line;l<=height;l++)
+		{	for(int c=0;c<width;c++)
+			{	ZoneTile tile1 = zone.getTile(l,c);
+				ZoneTile tile2 = zone.getTile(l+1,c);
+				if(moveFloors)
+					tile1.setFloor(tile2.getFloor());
+				else
+					tile1.setFloor(null);
+				if(moveBlocks)
+					tile1.setBlock(tile2.getBlock());
+				else
+					tile1.setBlock(null);
+				if(moveBombs)
+					tile1.setBomb(tile2.getBomb());
+				else
+					tile1.setBomb(null);
+				if(moveItems)
+					tile1.setItem(tile2.getItem());
+				else
+					tile1.setItem(null);
+				if(moveVariables)
+					tile1.setVariable(tile2.getVariable());
+				else
+					tile1.setVariable(null);
+			}
+		}
+		// remove line
+		for(int c=0;c<width;c++)
+		{	ZoneTile tile = new ZoneTile(height+1,c);			
+			zone.removeTile(tile);
+		}
+		
+		// update players
+		Players players = hollowLevel.getPlayers();
+		for(PlayerLocation[] pls: players.getLocations().values())
+		{	for(PlayerLocation pl: pls)
+			{	int temp = pl.getLine();
+				if(line<=temp)
+					pl.setLine(temp-1);
+			}
+		}
+	}
+
+	/**
+	 * insert a new column in order to make the zone wider.
 	 * the user can choose to slide only certain types
 	 * of sprites, or none of them.
 	 * 
@@ -557,7 +645,7 @@ public class LevelTools
 		int vWidth = levelInfo.getVisibleWidth();
 		int vLeftCol = levelInfo.getVisiblePositionLeftCol();
 		if(col>=vLeftCol && col<=vLeftCol+vWidth)
-			levelInfo.setVisibleWidth(vWidth + 1);
+			levelInfo.setVisibleWidth(vWidth+1);
 		else if(col<vLeftCol)
 			levelInfo.setVisiblePositionLeftCol(vLeftCol+1);
 		
@@ -612,6 +700,85 @@ public class LevelTools
 			{	int temp = pl.getCol();
 				if(col<=temp)
 					pl.setCol(temp+1);
+			}
+		}
+	}
+	
+	/**
+	 * remove the specified column in order to make the zone smaller.
+	 * the user can choose to slide only certain types
+	 * of sprites, or none of them.
+	 * 
+	 * @param hollowLevel
+	 * 		the level to be modified
+	 * @param col
+	 * 		the location of the column to be removed
+	 * @param moveFloors
+	 * 		whether the floor sprites should be moved to make room for the new column 
+	 * @param moveBlocks
+	 * 		whether the block sprites should be moved to make room for the new column 
+	 * @param moveItems
+	 * 		whether the item sprites should be moved to make room for the new column 
+	 * @param moveBombs
+	 * 		whether the bomb sprites should be moved to make room for the new column 
+	 * @param moveVariables
+	 * 		whether the variable sprites should be moved to make room for the new column 
+	 */
+	protected static void removeCol(HollowLevel hollowLevel, int col, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
+	{	// update dimensions
+		LevelInfo levelInfo = hollowLevel.getLevelInfo();
+		int height = levelInfo.getGlobalHeight();
+		int width = levelInfo.getGlobalWidth() - 1;
+		levelInfo.setGlobalWidth(width);
+		int vWidth = levelInfo.getVisibleWidth();
+		int vLeftCol = levelInfo.getVisiblePositionLeftCol();
+		if(col>=vLeftCol && col<=vLeftCol+vWidth)
+			levelInfo.setVisibleWidth(vWidth-1);
+		else if(col<vLeftCol)
+			levelInfo.setVisiblePositionLeftCol(vLeftCol-1);
+		
+		// update zone
+		Zone zone = hollowLevel.getZone();
+		// move existing columns
+		for(int c=col;c<=width;c++)
+		{	for(int l=0;l<height;l++)
+			{	ZoneTile tile1 = zone.getTile(l,c);
+				ZoneTile tile2 = zone.getTile(l,c+1);
+				if(moveFloors)
+					tile1.setFloor(tile2.getFloor());
+				else
+					tile1.setFloor(null);
+				if(moveBlocks)
+					tile1.setBlock(tile2.getBlock());
+				else
+					tile1.setBlock(null);
+				if(moveBombs)
+					tile1.setBomb(tile2.getBomb());
+				else
+					tile1.setBomb(null);
+				if(moveItems)
+					tile1.setItem(tile2.getItem());
+				else
+					tile1.setItem(null);
+				if(moveVariables)
+					tile1.setVariable(tile2.getVariable());
+				else
+					tile1.setVariable(null);
+			}
+		}
+		// remove col
+		for(int l=0;l<height;l++)
+		{	ZoneTile tile = new ZoneTile(l,width+1);			
+			zone.removeTile(tile);
+		}
+		
+		// update players
+		Players players = hollowLevel.getPlayers();
+		for(PlayerLocation[] pls: players.getLocations().values())
+		{	for(PlayerLocation pl: pls)
+			{	int temp = pl.getCol();
+				if(col<=temp)
+					pl.setCol(temp-1);
 			}
 		}
 	}
