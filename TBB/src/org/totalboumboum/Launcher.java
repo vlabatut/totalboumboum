@@ -1516,4 +1516,6 @@ public class Launcher
 	 *    voire la direction à prendre pour suivre le chemin
 	 *  - à voir comment ça peut être représenté derrière...
 	 */
+	
+	// clignotements : mettre de la transparence
 }

@@ -184,7 +184,7 @@
 				<block name="hardwall" />
 			</tile>
 			<tile pos="8" >
-				<bomb name="normal" range="6" />
+				<bomb name="normal" range="6" duration="5000" />
 			</tile>
 		</line>
 		

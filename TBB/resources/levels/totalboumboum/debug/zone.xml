@@ -177,13 +177,13 @@
 			</tile>
 			<tile pos="6" >
 				<block group="softwalls" name="regular" />
-				<bomb name="time" range="2" />
+				<bomb name="time" range="2"/>
 			</tile>
 			<tile pos="7" >
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="8" >
-				<bomb name="time" range="6" />
+				<bomb name="time" range="6" duration="5000"/>
 			</tile>
 		</line>
 		

@@ -242,7 +242,7 @@
 			</tile>
 			<tile pos="8" >
 				<floor name="marked" />
-				<bomb name="normal" range="6" />
+				<bomb name="normal" range="6" duration="5000"/>
 			</tile>
 		</line>
 		
