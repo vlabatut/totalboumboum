@@ -54,10 +54,18 @@ public class Zone implements Serializable
 	{	return globalWidth;
 	}
 
+	public void setGlobalWidth(int width)
+	{	globalWidth = width;
+	}
+	
 	public int getGlobalHeight()
 	{	return globalHeight;
 	}
 
+	public void setGlobalHeight(int height)
+	{	globalHeight = height;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// VARIABLES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

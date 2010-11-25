@@ -76,34 +76,30 @@ public class ZoneSaver
     {	Element result = new Element(XmlNames.MATRIX);
     	
     	// create and init all elements
-    	int prevLine = -1;
-    	Element lineElement = null;
-    	for(ZoneTile zoneTile: zone.getTiles())
-    	{	// init lines and cols
-    		int line = zoneTile.getLine();
-    		int col = zoneTile.getCol();
-    		if(line!=prevLine)
-    		{	prevLine = line;
-    			lineElement = new Element(XmlNames.LINE);
-    			lineElement.setAttribute(XmlNames.POSITION, Integer.toString(line));
-        		result.addContent(lineElement);
-    		}
-    		// process contant terms
-    		String floor = zoneTile.getFloor();
-        	String block = zoneTile.getBlock();
-       		String item = zoneTile.getItem();
-       		String bomb = zoneTile.getBomb();
-       		Element tileElement = saveTileElement(floor,block,item,bomb);
-			tileElement.setAttribute(XmlNames.POSITION, Integer.toString(col));
-    		// process variable term
-    		String variable = zoneTile.getVariable();
-    		if(variable!=null)
-    		{	Element variableElement = new Element(XmlNames.REFERENCE);
-    			variableElement.setAttribute(XmlNames.NAME,variable);
-    			tileElement.addContent(variableElement);
-    		}
-    		
-    		lineElement.addContent(tileElement);
+    	int width = zone.getGlobalWidth();
+    	int height = zone.getGlobalHeight();
+    	for(int line=0;line<height;line++)
+    	{	Element lineElement = new Element(XmlNames.LINE);
+			lineElement.setAttribute(XmlNames.POSITION,Integer.toString(line));
+			result.addContent(lineElement);
+    		for(int col=0;col<width;col++)
+	    	{	ZoneTile tile = zone.getTile(line,col);
+    			// process contant terms
+        		String floor = tile.getFloor();
+            	String block = tile.getBlock();
+           		String item = tile.getItem();
+           		String bomb = tile.getBomb();
+           		Element tileElement = saveTileElement(floor,block,item,bomb);
+    			tileElement.setAttribute(XmlNames.POSITION,Integer.toString(col));
+        		// process variable term
+        		String variable = tile.getVariable();
+        		if(variable!=null)
+        		{	Element variableElement = new Element(XmlNames.REFERENCE);
+        			variableElement.setAttribute(XmlNames.NAME,variable);
+        			tileElement.addContent(variableElement);
+        		}
+        		// set line element
+        		lineElement.addContent(tileElement);	    	}
     	}
  
     	return result;
@@ -119,7 +115,7 @@ public class ZoneSaver
     {	// floor
 		if(floor!=null)
 		{	Element floorElement = new Element(XmlNames.FLOOR);
-		result.addContent(floorElement);
+			result.addContent(floorElement);
 			String floorName = floor;
 			floorElement.setAttribute(XmlNames.NAME,floorName);
 		}

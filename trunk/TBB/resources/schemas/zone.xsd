@@ -16,7 +16,8 @@
 
 	<xsd:complexType name="tBomb">
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
-		<xsd:attribute name="range" type="xsd:integer" use="optional" default="0" />
+		<xsd:attribute name="range" type="xsd:integer" use="optional" default="3" />
+		<xsd:attribute name="duration" type="xsd:integer" use="optional" default="-1" />
 	</xsd:complexType>
 
 	<xsd:group name="gBasicTile">

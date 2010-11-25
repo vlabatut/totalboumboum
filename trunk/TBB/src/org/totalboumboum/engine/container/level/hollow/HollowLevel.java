@@ -193,11 +193,12 @@ public class HollowLevel implements Serializable
 				// bombs
 				if(mBombs[line][col]!=null)
 				{	String temp[] = mBombs[line][col].split(Theme.PROPERTY_SEPARATOR);
-					int range = Integer.parseInt(temp[temp.length-1]);
+					int range = Integer.parseInt(temp[temp.length-2]);
+					int duration = Integer.parseInt(temp[temp.length-1]);
 					String name = "";
-					for(int i=0;i<temp.length-1;i++)
-						name = name+temp[i];
-					Bomb bomb = bombset.makeBomb(name,matrix[line][col],range);
+					for(int i=0;i<temp.length-2;i++)
+						name = name + temp[i];
+					Bomb bomb = bombset.makeBomb(name,matrix[line][col],range,duration);
 if(bomb==null)
 	System.err.println("makeBomb error: sprite "+name+" not found.");
 					level.insertSpriteTile(bomb);				
@@ -291,7 +292,7 @@ if(bomb==null)
 			if(!names[1].equalsIgnoreCase(null))
 				color = PredefinedColor.valueOf(names[1]);
 			Bombset bombset = instance.getBombsetMap().getBombset(color);
-			sprite = bombset.makeBomb(names[0],matrix[line][col],0);
+			sprite = bombset.makeBomb(names[0],matrix[line][col],0,-1);
 			sprite.setId(id);
 		}
 		// fires

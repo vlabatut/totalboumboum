@@ -87,9 +87,13 @@ public class LevelTools
 		String folder = "qualif4";
 		XmlTools.init();
 		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
-		removeCol(level,0,true,true,true,true,true);
-		removeCol(level,0,true,true,true,true,true);
-//		insertCol(level,22,true,true,true,true,true);
+		removeLine(level,12,true,true,true,true,true);
+		removeLine(level,12,true,true,true,true,true);
+		removeLine(level,12,true,true,true,true,true);
+		removeLine(level,0,true,true,true,true,true);
+		removeLine(level,0,true,true,true,true,true);
+		removeLine(level,0,true,true,true,true,true);
+//		insertCol(level,0,true,true,true,true,true);
 //		insertCol(level,23,true,true,true,true,true);
 		saveLevel(level);
 	}
@@ -484,6 +488,7 @@ public class LevelTools
 		
 		// update zone
 		Zone zone = hollowLevel.getZone();
+		zone.setGlobalHeight(height);
 		// add new line
 		for(int c=0;c<width;c++)
 		{	ZoneTile tile = new ZoneTile(height-1,c);			
@@ -572,8 +577,9 @@ public class LevelTools
 		
 		// update zone
 		Zone zone = hollowLevel.getZone();
+		zone.setGlobalHeight(height);
 		// move existing lines
-		for(int l=line;l<=height;l++)
+		for(int l=line;l<height;l++)
 		{	for(int c=0;c<width;c++)
 			{	ZoneTile tile1 = zone.getTile(l,c);
 				ZoneTile tile2 = zone.getTile(l+1,c);
@@ -601,7 +607,7 @@ public class LevelTools
 		}
 		// remove line
 		for(int c=0;c<width;c++)
-		{	ZoneTile tile = new ZoneTile(height+1,c);			
+		{	ZoneTile tile = zone.getTile(height,c);			
 			zone.removeTile(tile);
 		}
 		
@@ -651,6 +657,7 @@ public class LevelTools
 		
 		// update zone
 		Zone zone = hollowLevel.getZone();
+		zone.setGlobalWidth(width);
 		// add new col
 		for(int l=0;l<height;l++)
 		{	ZoneTile tile = new ZoneTile(l,width-1);			
@@ -739,8 +746,9 @@ public class LevelTools
 		
 		// update zone
 		Zone zone = hollowLevel.getZone();
+		zone.setGlobalWidth(width);
 		// move existing columns
-		for(int c=col;c<=width;c++)
+		for(int c=col;c<width;c++)
 		{	for(int l=0;l<height;l++)
 			{	ZoneTile tile1 = zone.getTile(l,c);
 				ZoneTile tile2 = zone.getTile(l,c+1);
@@ -768,7 +776,7 @@ public class LevelTools
 		}
 		// remove col
 		for(int l=0;l<height;l++)
-		{	ZoneTile tile = new ZoneTile(l,width+1);			
+		{	ZoneTile tile = zone.getTile(l,width);			
 			zone.removeTile(tile);
 		}
 		

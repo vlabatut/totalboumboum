@@ -150,7 +150,7 @@ public class Bombset extends AbstractBombset
 	 * @return
 	 * @throws IOException 
 	 */
-	public Bomb makeBomb(String name, Tile tile, int flameRange)
+	public Bomb makeBomb(String name, Tile tile, int flameRange, int duration)
 	{	Bomb result = null;
 		Iterator<BombFactory> it = bombFactories.iterator();
 		while(it.hasNext() && result==null)
@@ -158,7 +158,12 @@ public class Bombset extends AbstractBombset
 			if(bombFactory.getBombName().equalsIgnoreCase(name))
 			{	result = bombFactory.makeSprite(tile);
 				result.setFlameRange(flameRange); //NOTE this is performed in BombsetManager.dropBomb() for the Heroes. Maybe should it be normalized ? use an ability ? (cf note in BombsetMgr)
-
+				if(duration>=0)
+				{	StateAbility ability = new StateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
+					ability.setStrength(duration);
+					ability.setFrame(true);
+					result.addDirectAbility(ability);
+				}
 				// record/transmit event
 				SpriteCreationEvent event = new SpriteCreationEvent(result,name);
 				RoundVariables.writeEvent(event);

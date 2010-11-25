@@ -148,9 +148,11 @@ public class ZoneLoader
 		// bomb
 		elementsT = root.getChildren(XmlNames.BOMB);
 		if(elementsT.size()>0)
-		{	String name = elementsT.get(0).getAttribute(XmlNames.NAME).getValue();
-			String range = elementsT.get(0).getAttribute(XmlNames.RANGE).getValue();
-			result[3] = name+Theme.PROPERTY_SEPARATOR+range;
+		{	Element element = elementsT.get(0);
+			String name = element.getAttribute(XmlNames.NAME).getValue();
+			String range = element.getAttribute(XmlNames.RANGE).getValue();
+			String duration = element.getAttribute(XmlNames.DURATION).getValue();
+			result[3] = name+Theme.PROPERTY_SEPARATOR+range+Theme.PROPERTY_SEPARATOR+duration;
 		}
 
 		return result;
