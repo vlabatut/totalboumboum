@@ -52,15 +52,18 @@ import org.totalboumboum.game.round.RoundVariables;
  * 
  * @author Vincent Labatut
  *
- * @param <V>	le type de donnée renvoyée par l'IA (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
+ * @param <V>	
+ * 		le type de donnée renvoyée par l'IA (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
  */
 
 public abstract class AbstractAiManager<V>
 {	/**
      * contruit un nouveau manager pour l'IA passé en paramètre.
      * Ce constructeur est destiné à être appelé par le constructeur situé dans 
-     * la classe héritant de celle-ci et située dans le dossier de l'IA   
-     * @param ai
+     * la classe héritant de celle-ci et située dans le dossier de l'IA
+     *    
+     * @param 
+     * 		ai
      */
 	public AbstractAiManager(Callable<V> ai)
     {	this.ai = ai;
@@ -88,10 +91,26 @@ public abstract class AbstractAiManager<V>
     /**
      * renvoie l'IA gérée par cette classe.
      * 
-     * @return	l'IA gérée par cette classe sous la forme d'un Callable
+     * @return	
+     * 		l'IA gérée par cette classe sous la forme d'un Callable
      */
-    public Callable<V> getAi()
+    public final Callable<V> getAi()
     {	return ai;    	
+    }
+    
+    public void initAgent()
+    {	// on initialise le thread
+    	ThreadFactory fact = new ThreadFactory()
+    	{	public Thread newThread(Runnable r)
+    		{	Thread result = new Thread(r);
+    			result.setPriority(Thread.MIN_PRIORITY);
+    			return result;
+    		}   		
+    	};
+    	executorAi = Executors.newSingleThreadExecutor(fact);
+    	
+    	// on lance le calcul pour le premier coup
+    	makeCall();
     }
     
     /**
@@ -99,21 +118,8 @@ public abstract class AbstractAiManager<V>
      * qui permettront au moteur du jeu de déplacer le personnage.
      */
     public final void update(boolean aisPause)
-    {	// s'il s'agit du premier appel
-    	if(executorAi == null)
-    	{	ThreadFactory fact = new ThreadFactory()
-    		{	public Thread newThread(Runnable r)
-    			{	Thread result = new Thread(r);
-    				result.setPriority(Thread.MIN_PRIORITY);
-    				return result;
-    			}   		
-    		};
-    		executorAi = Executors.newSingleThreadExecutor(fact);
-    		// on lance le calcul pour le prochain coup
-    		makeCall();
-    	}
-    	// si l'IA était en pause
-    	else if(paused)
+    {	// si l'IA était en pause
+    	if(paused)
     	{	// sortie de pause ?
     		if(!aisPause)
 	    	{	// basculement de la pause
@@ -190,6 +196,9 @@ public abstract class AbstractAiManager<V>
     /**
      * Réalise l'appel à la classe qui implémente l'IA,
      * afin que celle ci calcule la prochaine action à effectuer.
+     * 
+     * @param firstTime
+     * 		la valeur vrai indique qu'il s'agit du premier appel
      */
     private final void makeCall()
     {	
@@ -234,8 +243,10 @@ public abstract class AbstractAiManager<V>
     /**
      * initialise le gestionnaire d'IA
      * 
-     * @param instance	instance utilisée dans ce round
-     * @param player	joueur contrôlé par l'IA
+     * @param instance	
+     * 		instance utilisée dans ce round
+     * @param player	
+     * 		joueur contrôlé par l'IA
      */
     @SuppressWarnings("unchecked")
 	public void init(String instance, AbstractPlayer player)
@@ -253,7 +264,8 @@ public abstract class AbstractAiManager<V>
 	/**
 	 * renvoie le joueur contrôlé par l'IA gérée
 	 * 
-	 * @return	un objet représentant le joueur contrôlé par l'IA
+	 * @return	
+	 * 		un objet représentant le joueur contrôlé par l'IA
 	 */
     public AbstractPlayer getPlayer()
 	{	return player;		
@@ -271,8 +283,10 @@ public abstract class AbstractAiManager<V>
 	 * méthode utilisée pour convertir la valeur renvoyée par l'ia 
 	 * en un évènement standard traitable par le moteur du jeu.
 	 * 
-	 * @param value	la valeur renvoyée par l'ia, qui est à convertir
-	 * @return	le résultat de la conversion sous la forme d'un évènement à envoyer au sprite contrôlé par l'IA
+	 * @param value	
+	 * 		la valeur renvoyée par l'ia, qui est à convertir
+	 * @return	
+	 * 		le résultat de la conversion sous la forme d'un évènement à envoyer au sprite contrôlé par l'IA
 	 */
 	public abstract List<ControlEvent> convertReaction(V value);
    
@@ -306,7 +320,8 @@ public abstract class AbstractAiManager<V>
 	/**
 	 * renvoie les couleurs des cases
 	 * 
-	 * @return	matrice de couleurs
+	 * @return	
+	 * 		matrice de couleurs
 	 */
 	public Color[][] getTileColors()
 	{	return tileColors;
@@ -315,7 +330,8 @@ public abstract class AbstractAiManager<V>
 	/**
 	 * renvoie les textes à afficher sur les cases
 	 * 
-	 * @return	matrice de textes
+	 * @return	
+	 * 		matrice de textes
 	 */
 	public List<String>[][] getTileTexts()
 	{	return tileTexts;
@@ -324,7 +340,8 @@ public abstract class AbstractAiManager<V>
 	/**
 	 * renvoie le mode d'affichage du texte (gras ou pas)
 	 * 
-	 * @return	vrai si le mode d'affichage est gras
+	 * @return	
+	 * 		vrai si le mode d'affichage est gras
 	 */
 	public boolean isBold()
 	{	return bold;
@@ -333,7 +350,8 @@ public abstract class AbstractAiManager<V>
 	/**
 	 * renvoie la liste de chemins à afficher
 	 * 
-	 * @return	liste de vecteurs de cases contigües représentant des chemins
+	 * @return	
+	 * 		liste de vecteurs de cases contigües représentant des chemins
 	 */
 	public List<List<Tile>> getPaths()
 	{	return paths;
@@ -342,7 +360,8 @@ public abstract class AbstractAiManager<V>
 	/**
 	 * renvoie les couleurs des chemins à afficher
 	 * 
-	 * @return	liste de couleurs
+	 * @return	
+	 * 		liste de couleurs
 	 */
 	public List<Color> getPathColors()
 	{	return pathColors;

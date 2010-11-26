@@ -46,7 +46,7 @@ public class AiPlayer extends ControlledPlayer
 
 		// artificial intelligence
 //		if(this.profile.getAiName() != null)
-    	{	ai = AiLoader.loadAi(profile.getAiName(), profile.getAiPackname());
+    	{	ai = AiLoader.loadAi(profile.getAiName(),profile.getAiPackname());
     		ai.init(RoundVariables.instance.getName(),this);
     	}
 	}
@@ -61,10 +61,14 @@ public class AiPlayer extends ControlledPlayer
 	{	ai.update(aisPause);
 	}
 	
+	public void initAi()
+	{	ai.initAgent();
+	}
+	
 	public AbstractAiManager<?> getArtificialIntelligence()
 	{	return ai;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

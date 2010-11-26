@@ -222,6 +222,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 	/////////////////////////////////////////////////////////////////
 	private final List<Boolean> pauseAis = new ArrayList<Boolean>();
 
+	@Override
 	public void switchAiPause(int index)
 	{	debugLock.lock();
 		if(index<pauseAis.size())
@@ -235,6 +236,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 		debugLock.unlock();
 	}
 		
+	@Override
 	public boolean getAiPause(int index)
 	{	boolean result;
 		debugLock.lock();
@@ -420,6 +422,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 	/////////////////////////////////////////////////////////////////
 	private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
 
+	@Override
 	protected void initLogs()
 	{	super.initLogs();
 		if(aisConfiguration.getLogExceptions())
@@ -450,6 +453,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 		}
 	}
 
+	@Override
 	protected void updateLogs()
 	{	super.updateLogs();
 		if(aisConfiguration.getLogExceptions())
@@ -459,6 +463,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 		}
 	}
 
+	@Override
 	protected void closeLogs()
 	{	super.closeLogs();
 		if(aisConfiguration.getLogExceptions())

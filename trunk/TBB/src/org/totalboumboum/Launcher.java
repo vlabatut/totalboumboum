@@ -1518,4 +1518,5 @@ public class Launcher
 	 */
 	
 	// clignotements : mettre de la transparence
+	//TODO rajouter une fonction d'init de l'IA
 }

@@ -195,9 +195,16 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		RoundVariables.writeEvent(event);
 	}
 	
+	@Override
+	protected void startLoopInit()
+	{	super.startLoopInit();
+		initAis();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// CANCELATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	protected void updateCancel()
 	{	if(isCanceled())
 		{	round.cancelGame();
@@ -269,6 +276,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	/////////////////////////////////////////////////////////////////
 	protected final List<Boolean> pauseAis = new ArrayList<Boolean>();
 
+	@Override
 	public void switchAiPause(int index)
 	{	debugLock.lock();
 		if(index<pauseAis.size())
@@ -282,6 +290,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		debugLock.unlock();
 	}
 		
+	@Override
 	public boolean getAiPause(int index)
 	{	boolean result;
 		debugLock.lock();
@@ -304,7 +313,15 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 			}
 		}
 	}
-
+	
+	protected void initAis()
+	{	for(int i=0;i<players.size();i++)
+		{	AbstractPlayer player = players.get(i);
+			if(player instanceof AiPlayer)
+				((AiPlayer)player).initAi();
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -172,6 +172,7 @@ public abstract class VisibleLoop extends Loop
 	/** game period expressed un milliseconds */
 	protected long milliPeriod;
 
+	@Override
 	public void run()
 	{	loadLock.lock();
 		try
@@ -688,6 +689,7 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	protected boolean finished = false;
 	
+	@Override
 	public void finish()
 	{	if(!finished)
 		{	super.finish();
