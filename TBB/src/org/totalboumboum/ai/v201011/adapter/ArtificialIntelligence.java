@@ -83,7 +83,12 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		// on réinitialise la sortie de l'IA
 		reinitOutput();
 		try
-		{	// on calcule la prochaine action à effectuer
+		{	// on initialise l'IA si besoin
+			if(!initialized)
+			{	initialized = true;
+				init();
+			}
+			// on calcule la prochaine action à effectuer
 			result = processAction();		
 		}
 		catch (StopRequestException e)
@@ -102,14 +107,17 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * méthode implémentant le traitement effectué par l'IA sur les percepts,
 	 * et renvoyant une action en réaction.
 	 * 
-	 * @return	action que l'IA a décider d'effectuer
-	 * @throws StopRequestException	au cas où le moteur demande la terminaison de l'IA
+	 * @return	
+	 * 		action que l'IA a décider d'effectuer
+	 * @throws StopRequestException	
+	 * 		au cas où le moteur demande la terminaison de l'IA
 	 */
 	public abstract AiAction processAction() throws StopRequestException;
 
 	/**
 	 * renvoie les percepts auxquels l'IA a accès
-	 * @return	une AiZone représentant tous les percepts utilisables par l'IA
+	 * @return	
+	 * 		une AiZone représentant tous les percepts utilisables par l'IA
 	 */
 	public final AiZone getPercepts()
 	{	return percepts;
@@ -117,7 +125,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/**
 	 * méthode utilisée par le moteur du jeu pour initialiser les percepts de l'IA. 
 	 * 
-	 * @param percepts	l'objet représentant les percepts auxquels l'IA aura accès
+	 * @param percepts	
+	 * 		l'objet représentant les percepts auxquels l'IA aura accès
 	 */
 	public final void setPercepts(AiDataZone percepts)
 	{	this.percepts = percepts;
@@ -143,7 +152,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * (utile lors du débogage). Le programme peut modifier cet objet
 	 * pour colorer des cases et afficher des chemins ou du texte
 	 * 
-	 * @return	la sortie de l'IA
+	 * @return	
+	 * 		la sortie de l'IA
 	 */
 	public final AiOutput getOutput()
 	{	return output;
@@ -155,5 +165,19 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 */
 	private final void reinitOutput()
 	{	output.reinit();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// INITIALIZATION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean initialized = false;
+	/**
+	 * méthode à surcharger s'il est nécessaire que l'agent soit
+	 * initialisé. Toute opération définie dans cette fonction
+	 * sera réalisée une fois, juste avant le début de la partie.
+	 * A noter que les percepts ont néanmoins déjà été mis à jour.
+	 */
+	public void init() throws StopRequestException
+	{	
 	}
 }

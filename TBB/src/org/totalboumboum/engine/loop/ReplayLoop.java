@@ -320,14 +320,17 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 	/////////////////////////////////////////////////////////////////
 	// LOGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	protected void initLogs()
 	{	//useless here
 	}
 
+	@Override
 	protected void updateLogs()
 	{	//useless here
 	}
 
+	@Override
 	protected void closeLogs()
 	{	//useless here
 	}

@@ -88,7 +88,6 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.setPercepts(percepts);
 	}
-
 	@Override
 	public void updatePercepts()
 	{	long elapsedTime = loop.getTotalGameTime() - lastUpdateTime;

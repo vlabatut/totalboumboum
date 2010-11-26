@@ -14,11 +14,13 @@
 		</points>
 	</settings>
 	<players>
-		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="cadc893f-eebe-448f-8351-15365d1f4e71" color="RED" controls="1" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="dd226be2-5b7a-4017-a415-963b546bb716" color="BLUE" controls="4" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="BROWN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="27a298f3-ea71-4e96-8e5f-2b50862d4798" color="GREY" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="YELLOW" controls="1" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="nbm2Custom" folder="debug" allowedPlayers="0 1 2 3 4" />
+		<level pack="tournament200708" folder="battle" allowedPlayers="1 2 3 4" />
 	</levels>
 </gameQuickmatch>
 

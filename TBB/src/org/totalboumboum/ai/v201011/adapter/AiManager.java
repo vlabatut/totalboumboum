@@ -56,7 +56,8 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	 * Cette méthode doit être appelée par une classe héritant de celle-ci,
 	 * et placée dans le package contenant l'IA. 
 	 * 
-	 * @param ai	l'ia que cette classe doit gérer
+	 * @param ai	
+	 * 		l'ia que cette classe doit gérer
 	 */
 	protected AiManager(ArtificialIntelligence ai)
     {	super(ai);
@@ -69,6 +70,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	 * termine proprement le gestionnaire de manière à libérer les ressources 
 	 * qu'il occupait.
 	 */
+    @Override
 	public void finishAi()
 	{	ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.stopRequest();
@@ -159,7 +161,8 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	 * active les évènements nécessaires à l'arrêt du personnage.
 	 * Utilisé quand l'IA renvoie l'action "ne rien faire"
 	 * 
-	 * @param result	liste des évènements adaptée à l'action renvoyée par l'IA
+	 * @param result	
+	 * 		liste des évènements adaptée à l'action renvoyée par l'IA
 	 */
 	private void reactionStop(List<ControlEvent> result)
 	{	if(lastMove!=Direction.NONE)
@@ -178,8 +181,10 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	/**
 	 * active les évènements nécessaires à un changement de direction,
 	 * en simulant un joueur humain qui appuierait sur des touches
-	 * @param result
-	 * @param direction
+	 * @param 
+	 * 		result
+	 * @param 
+	 * 		direction
 	 */
 	private void updateMove(List<ControlEvent> result, Direction direction)
 	{	// init
@@ -264,5 +269,4 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 			}
 		}
 	}
-
 }
