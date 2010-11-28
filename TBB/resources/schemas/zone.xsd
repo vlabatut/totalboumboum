@@ -17,6 +17,7 @@
 	<xsd:complexType name="tBomb">
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="range" type="xsd:integer" use="optional" default="3" />
+		<!-- only for time bombs. value -1 means: use default level settings -->
 		<xsd:attribute name="duration" type="xsd:integer" use="optional" default="-1" />
 	</xsd:complexType>
 

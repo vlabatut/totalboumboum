@@ -58,7 +58,7 @@ public class LevelTools
 	public static void main(String[] args) throws Exception
 	{	
 /*		// create a level from scratch
-		HollowLevel level = initLevel(15,15,"temp","level","superbomberman1","tournament3");
+		HollowLevel level = initLevel(15,15,"temp","level","superbomberman1","tournament4");
 		setBackground(level);
 		addGrid(level);
 		addBorder(level,2,1,1,1);
@@ -70,21 +70,19 @@ public class LevelTools
 		insertCol(level,level.getLevelInfo().getGlobalWidth()-1,true,true,true,true,true);
 		insertLine(level,level.getLevelInfo().getGlobalHeight()-1,true,true,true,true,true);
 		saveLevel(level);
-*/		
-		
+*/				
 /*		// open an existing level and replace the background
-		String pack = "tournament201011";
-		String folder = "readysetgo";
+		String pack = "level";
+		String folder = "level";
 		XmlTools.init();
 		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
 		removeBackground(level);
 		setBackground(level);
 		saveLevel(level);
-*/
-		
-		
+*/		
+/*		// open an existing level and add/remove columns/lines
 		String pack = "tournament201011";
-		String folder = "qualif4";
+		String folder = "level";
 		XmlTools.init();
 		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
 		removeLine(level,12,true,true,true,true,true);
@@ -93,8 +91,15 @@ public class LevelTools
 		removeLine(level,0,true,true,true,true,true);
 		removeLine(level,0,true,true,true,true,true);
 		removeLine(level,0,true,true,true,true,true);
-//		insertCol(level,0,true,true,true,true,true);
-//		insertCol(level,23,true,true,true,true,true);
+		insertCol(level,0,true,true,true,true,true);
+		insertCol(level,23,true,true,true,true,true);
+		saveLevel(level);
+*/
+		// create a new levek
+		HollowLevel level = initLevel(15,15,"tournament201011","bombfest","superbomberman1","tournament4");
+		setBackground(level);
+		addBorder(level,1,1,0,0);
+		addGrid(level);
 		saveLevel(level);
 	}
 		
@@ -408,9 +413,9 @@ public class LevelTools
 		
 		// put hardwalls
 		for(int line=0;line<height;line++)
-		{	if(line%2==yCenter%2)
+		{	if(line%2!=yCenter%2)
 			{	for(int col=0;col<width;col++)
-				{	if(col%2==xCenter%2)
+				{	if(col%2!=xCenter%2)
 					{	ZoneTile tile = zone.getTile(line,col);
 						tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");				
 					}
