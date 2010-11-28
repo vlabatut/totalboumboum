@@ -915,21 +915,12 @@ public class Launcher
 // CHANGE LOG	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* TODO
-	 * + beta.018
+	 * + beta.020
 	 * - Moteur :
-	 * 		- refonte de l'affichage : tout est maintenant délégué à un ensemble de classes Display
-	 * 		- distinction entre différents types de joueurs (humain, ia, distant) via des classes spécifiques
-	 * 		- nouvelle classe de Loop pour le replay, meilleure structuration des Loop
-	 * 		- nouveaux managers vides, entre autres destinés aux sprites du mode replay
-	 * 		- nouvelle classe Replay, rendant le replay fonctionnel
 	 * - GUI :
-	 * 		- nouvelle option de replay dans le menu principal
-	 * 		- (dés)activation de l'enregistrement du replay dans les options
-	 * 		- même chose dans le menu des tournois/parties rapides (en tant que raccourci)
 	 * - IA :
 	 * - stats :
 	 * - Divers :
-	 * 		- nettoyage du code par rapport à l'utilisation de ArrayList (remplacé par List partout où c'était possible)
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1162,13 +1153,13 @@ public class Launcher
 	 * 			- bloquer le bouton "réseau" dans le menu principal
 	 * 			- bloquer le bouton "réseau" dans le menu de config tournoi/partie rapide
 	 * 		- replay :
-	 * 			- bloquer le chargement dans le menu principal
+	 * 			- bloquer le bouton "replay" dans le menu principal
 	 * 			- bloquer le bouton "caméra" dans les menu tournoi/match/round
 	 * 			- bloquer l'action dans les options avancées
 	 * 		- options :
 	 * 			- afficher les exceptions
 	 * 		- ressources :
-	 * 			- redonner les host id corrects pour les deux étudiants modifiés pour tester le réseau (5 et 12)
+	 * 			- redonner les host id corrects pour les deux étudiants modifiés pour tester le réseau (5, 13 et 20)
 	 *		 	- virer le thème/perso TBB après avoir viré les joueurs utilisant les perso et pré-enregistrés
 	 * 
 	 */
