@@ -277,11 +277,12 @@ class AiModel
 	
 	/**
 	 * perform a simulation for the specified duration.
-	 * the resulting zone is available through getCUrrentZone.
+	 * the resulting zone is available through getCurrentZone.
 	 * 
 	 * @param duration
 	 * 		the duration of the simulation
 	 */
+//TODO must be changed : while not reaching the specified duration, perform simulations	
 	public void simulate(long duration)
 	{	// create a copy of the current zone
 		previous = current;
