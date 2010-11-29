@@ -254,8 +254,10 @@ public final class AiDataZone extends AiZone
 	 * 		le temps écoulé
 	 */
 	private void updateMatrix(long elapsedTime)
-	{	hiddenItemsCount = 0;
+	{	// réinitialise les compteurs d'items
+		hiddenItemsCount = 0;
 		hiddenItemsCounts.clear();
+		
 		// démarque tous les sprites
 		uncheckAll(blockMap);
 		uncheckAll(bombMap);
@@ -263,10 +265,12 @@ public final class AiDataZone extends AiZone
 		uncheckAll(floorMap);
 		uncheckAll(heroMap);
 		uncheckAll(itemMap);
+		
 		// met à jour chaque case et sprite 
 		for(int line=0;line<height;line++)
 			for(int col=0;col<width;col++)
 				matrix[line][col].update(elapsedTime);
+		
 		// supprime les sprites non-marqués
 		removeUnchecked(blockMap);
 		removeUnchecked(bombMap);
@@ -298,6 +302,8 @@ public final class AiDataZone extends AiZone
 	private final HashMap<Block,AiDataBlock> blockMap = new HashMap<Block,AiDataBlock>();
 	/** liste externe des blocks contenus dans cette zone */
 	private final List<AiBlock> blockList = new ArrayList<AiBlock>();
+	/** liste externe des blocks destructibles contenus dans cette zone */
+	private final List<AiBlock> softBlockList = new ArrayList<AiBlock>();
 	
 	@Override
 	public List<AiBlock> getBlocks()
@@ -306,24 +312,23 @@ public final class AiDataZone extends AiZone
 	
 	@Override
 	public List<AiBlock> getDestructibleBlocks()
-	{	List<AiBlock> result = new ArrayList<AiBlock>();
-
-		for(AiBlock block: blockList)
-		{	if(block.isDestructible())
-				result.add(block);
-		}
-		
-		return result;
+	{	return softBlockList;
 	}
 	
 	/**
 	 * met à jour la liste externe des blocs
 	 */
-	private void updateBlockList()
-	{	blockList.clear();
+	private void updateBlockLists()
+	{	// reinit lists
+		blockList.clear();
+		softBlockList.clear();
+		
+		// fill them
 		for(Entry<Block,AiDataBlock> entry: blockMap.entrySet())
 		{	AiDataBlock block = entry.getValue();
 			blockList.add(block);
+			if(block.isDestructible())
+				softBlockList.add(block);
 		}
 	}
 	
@@ -534,8 +539,11 @@ public final class AiDataZone extends AiZone
 	 * met à jour les listes externes des personnages
 	 */
 	private void updateHeroLists()
-	{	heroList.clear();
+	{	// reset lists
+		heroList.clear();
 		remainingHeroList.clear();
+		
+		// update them
 		for(Entry<Hero,AiDataHero> entry: heroMap.entrySet())
 		{	AiDataHero hero = entry.getValue();
 			heroList.add(hero);
@@ -696,7 +704,7 @@ public final class AiDataZone extends AiZone
 	 * met à jour toutes les listes externes de sprites
 	 */
 	private void updateSpriteLists()
-	{	updateBlockList();
+	{	updateBlockLists();
 		updateBombList();
 		updateFireList();
 		updateFloorList();
