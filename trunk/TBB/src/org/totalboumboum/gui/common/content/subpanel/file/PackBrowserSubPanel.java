@@ -43,6 +43,9 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
+ * like the FolderBrowser, but for specific folders called packs,
+ * with a slightly different structure (eg AI agents packages)
+ * top level folder, so there's no ".." button like in FolderBrowser
  * 
  * @author Vincent Labatut
  *
@@ -342,12 +345,17 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 	// FILE BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void packBrowserSelectionChanged()
+	public void folderBrowserSelectionChanged()
 	{	firePackBrowserSelectionChanged();
 	}
 
 	@Override
-	public void packBrowserParentReached()
+	public void folderBrowserParentReached()
 	{	selectPack(-1);
+	}
+
+	@Override
+	public void folderBrowserPageChanged()
+	{	refreshList();
 	}
 }

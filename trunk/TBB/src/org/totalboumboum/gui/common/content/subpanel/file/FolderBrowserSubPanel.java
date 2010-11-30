@@ -43,6 +43,9 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
+ * allows to browse a folder with its content
+ * one level of hierarchy : the folder itself and its content
+ * an optional ".." button allows going to the parent.
  * 
  * @author Vincent Labatut
  *
@@ -116,7 +119,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 			listPanel.setColSubMinWidth(0,textMaxWidth);
 			listPanel.setColSubPrefWidth(0,textMaxWidth);
 			listPanel.setColSubMaxWidth(0,textMaxWidth);
-		
+			
 			// data
 			int line = controlUpCount;
 			int nameIndex = panelIndex*(LINES-controlTotalCount);
@@ -127,6 +130,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 				listPanel.setLabelText(line,0,name,name);
 				MyLabel label = listPanel.getLabel(line,0);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 				nameIndex++;
 				line++;
 			}			
@@ -137,6 +141,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 				listPanel.setLabelKey(linePrevious,0,key,true);
 				MyLabel label = listPanel.getLabel(linePrevious,0);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 			}
 			// parent
 			if(showParent)
@@ -146,6 +151,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 				listPanel.setLabelKey(lineParent,0,key,false);
 				MyLabel label = listPanel.getLabel(lineParent,0);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 			}
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
@@ -154,6 +160,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 				listPanel.setLabelKey(lineNext,0,key,true);
 				MyLabel label = listPanel.getLabel(lineNext,0);
 				label.addMouseListener(this);
+				label.setMouseSensitive(true);
 			}
 			listPanels.add(listPanel);
 		}
@@ -286,6 +293,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 			{	selectName(-1);
 				currentPage--;
 				refreshList();
+				fireFolderBrowserPageChanged();
 			}
 		}
 		// parent
@@ -300,6 +308,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 			{	selectName(-1);
 				currentPage++;
 				refreshList();
+				fireFolderBrowserPageChanged();
 			}
 		}
 		// select a name
@@ -329,11 +338,16 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 	
 	private void fireFolderBrowserSelectionChanged()
 	{	for(FolderBrowserSubPanelListener listener: listeners)
-			listener.packBrowserSelectionChanged();
+			listener.folderBrowserSelectionChanged();
 	}
 
 	private void fireFolderBrowserParentClicked()
 	{	for(FolderBrowserSubPanelListener listener: listeners)
-			listener.packBrowserParentReached();
+			listener.folderBrowserParentReached();
+	}
+	
+	private void fireFolderBrowserPageChanged()
+	{	for(FolderBrowserSubPanelListener listener: listeners)
+			listener.folderBrowserPageChanged();
 	}
 }

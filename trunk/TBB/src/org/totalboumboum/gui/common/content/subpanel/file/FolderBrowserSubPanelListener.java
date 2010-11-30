@@ -28,6 +28,7 @@ package org.totalboumboum.gui.common.content.subpanel.file;
  */
 public interface FolderBrowserSubPanelListener
 {
-	public void packBrowserSelectionChanged();
-	public void packBrowserParentReached();
+	public void folderBrowserSelectionChanged();
+	public void folderBrowserParentReached();
+	public void folderBrowserPageChanged();
 }
