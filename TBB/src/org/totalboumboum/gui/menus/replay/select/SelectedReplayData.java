@@ -150,12 +150,12 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 	// PACK BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void packBrowserParentReached()
+	public void folderBrowserParentReached()
 	{	// no use here
 	}
 	
 	@Override
-	public void packBrowserSelectionChanged()
+	public void folderBrowserSelectionChanged()
 	{	String folder = folderPanel.getSelectedName();
 		if(folder==null)
 			selectedReplay = null;
@@ -191,5 +191,10 @@ public class SelectedReplayData extends EntitledDataPanel implements FolderBrows
 		miscPanel.setReplay(selectedReplay);
 		playersPanel.setReplay(selectedReplay);
 		fireDataPanelSelectionChange(null);
+	}
+
+	@Override
+	public void folderBrowserPageChanged()
+	{	// useless here
 	}
 }

@@ -181,12 +181,12 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 	// PACK BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void packBrowserParentReached()
+	public void folderBrowserParentReached()
 	{	// no use here
 	}
 	
 	@Override
-	public void packBrowserSelectionChanged()
+	public void folderBrowserSelectionChanged()
 	{	String folder = folderPanel.getSelectedName();
 		if(folder==null)
 			selectedTournament = null;
@@ -217,5 +217,10 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 		miscPanel.setTournament(selectedTournament);
 		refreshLimits();
 		fireDataPanelSelectionChange(null);
+	}
+
+	@Override
+	public void folderBrowserPageChanged()
+	{	// useless here
 	}
 }

@@ -150,12 +150,12 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 	// PACK BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void packBrowserParentReached()
+	public void folderBrowserParentReached()
 	{	// no use here
 	}
 	
 	@Override
-	public void packBrowserSelectionChanged()
+	public void folderBrowserSelectionChanged()
 	{	String folder = folderPanel.getSelectedName();
 		if(folder==null)
 			selectedArchive = null;
@@ -191,5 +191,10 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 		miscPanel.setGameArchive(selectedArchive);
 		playersPanel.setGameArchive(selectedArchive);
 		fireDataPanelSelectionChange(null);
+	}
+
+	@Override
+	public void folderBrowserPageChanged()
+	{	// useless here
 	}
 }

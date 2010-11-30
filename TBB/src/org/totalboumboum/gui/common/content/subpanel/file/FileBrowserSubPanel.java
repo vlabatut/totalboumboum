@@ -41,6 +41,8 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiTools;
 
 /**
+ * allows to browse files, with a paginated view
+ * flat structure only (no folder-like hierarchy)
  * 
  * @author Vincent Labatut
  *

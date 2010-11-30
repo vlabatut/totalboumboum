@@ -198,12 +198,12 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 	// PACK BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void packBrowserParentReached()
+	public void folderBrowserParentReached()
 	{	// no use here
 	}
 	
 	@Override
-	public void packBrowserSelectionChanged()
+	public void folderBrowserSelectionChanged()
 	{	String folder = folderPanel.getSelectedName();
 		if(folder==null)
 			selectedMatch = null;
@@ -233,5 +233,10 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 		}
 		miscPanel.setMatch(selectedMatch);
 		refreshLimits();
+	}
+
+	@Override
+	public void folderBrowserPageChanged()
+	{	// useless here
 	}
 }
