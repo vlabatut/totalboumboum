@@ -94,11 +94,17 @@ public class AiPath implements Comparable<AiPath>
 	public void checkStartingPoint()
 	{	if(!tiles.isEmpty())
 		{	AiTile firstTile = tiles.get(0);
-			AiZone zone = firstTile.getZone();
-			AiTile currentTile = zone.getTile(startX,startY);
-			if(!currentTile.equals(firstTile))
+			if(tiles.size()==1)
 			{	startX = firstTile.getPosX();
 				startY = firstTile.getPosX();
+			}
+			else
+			{	AiZone zone = firstTile.getZone();
+				AiTile currentTile = zone.getTile(startX,startY);
+				if(!currentTile.equals(firstTile))
+				{	startX = firstTile.getPosX();
+					startY = firstTile.getPosX();
+				}
 			}
 		}
 	}

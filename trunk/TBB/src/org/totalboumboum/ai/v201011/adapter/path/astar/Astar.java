@@ -313,9 +313,11 @@ public final class Astar
 			throw new IllegalArgumentException("endTiles list must not be empty");
 		
 		// finish path
-		double startX = startTile.getPosX();
-		double startY = startTile.getPosY();
-		result.setStart(startX,startY);
+		if(startTile.equals(hero.getTile()))
+		{	double startX = hero.getPosX();
+			double startY = hero.getPosY();
+			result.setStart(startX,startY);
+		}
 		
 		return result;
 	}
