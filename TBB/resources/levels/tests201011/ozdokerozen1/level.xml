@@ -8,7 +8,7 @@
 	<preview file="preview.jpg" />
 
 	<instance name="superbomberman1" />
-	<theme name="tournament3"/>
+	<theme name="tournament4"/>
 
 	<globalDimension height="15" width="17" />
 	<visibleDimension height="11" width="15" />
