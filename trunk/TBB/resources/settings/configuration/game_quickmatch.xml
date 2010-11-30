@@ -15,7 +15,7 @@
 	</settings>
 	<players>
 		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="YELLOW" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="tests201011" folder="kesimalvarol_bombawareness" allowedPlayers="1 2 3 4" />
