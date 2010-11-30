@@ -288,7 +288,13 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
-		result.append(" ("+getTile().getLine()+";"+getTile().getCol()+")");
+		String line = "x";
+		String col = "x";
+		if(tile!=null)
+		{	line = Integer.toString(tile.getLine());
+			col = Integer.toString(tile.getCol());
+		}
+		result.append(" ("+line+";"+col+")");
 		result.append(" ("+posX+";"+posY+";"+posZ+")");
 		result.append(" - state: "+state.toString());
 		return result.toString();
