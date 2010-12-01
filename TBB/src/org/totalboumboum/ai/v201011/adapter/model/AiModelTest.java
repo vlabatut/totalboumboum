@@ -41,10 +41,12 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
+@SuppressWarnings("unused")
 public final class AiModelTest
 {
-	public static void main(String args[])
-	{	RoundVariables.scaledTileDimension = 100;
+/*	public static void main(String args[])
+	{	
+		RoundVariables.scaledTileDimension = 100;
 		AiSimZone zone;
 		AiSimTile tile;
 		AiSimState state;
@@ -133,19 +135,19 @@ public final class AiModelTest
 				burningDuration,0,itemType,stopBombs,stopFires);
 		zone.addSprite(item);
 		
-/*		// item 2
-		burningDuration = 100;
-		stopBombs = AiStopType.WEAK_STOP;
-		stopFires = AiStopType.WEAK_STOP;
-		tile = zone.getTile(3,5);
-		posX = tile.getPosX();
-		posY = tile.getPosY();
-		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
-		itemType = AiItemType.EXTRA_BOMB;
-		item = new AiSimItem(id++,tile,posX,posY,posZ,state,
-				burningDuration,0,itemType,stopBombs,stopFires);
-		zone.addSprite(item);
-*/
+		// item 2
+//		burningDuration = 100;
+//		stopBombs = AiStopType.WEAK_STOP;
+//		stopFires = AiStopType.WEAK_STOP;
+//		tile = zone.getTile(3,5);
+//		posX = tile.getPosX();
+//		posY = tile.getPosY();
+//		state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);
+//		itemType = AiItemType.EXTRA_BOMB;
+//		item = new AiSimItem(id++,tile,posX,posY,posZ,state,
+//				burningDuration,0,itemType,stopBombs,stopFires);
+//		zone.addSprite(item);
+
 		// softwall
 		burningDuration = 100;
 		currentSpeed = 0;
@@ -242,4 +244,5 @@ public final class AiModelTest
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
 	}
+*/	
 }

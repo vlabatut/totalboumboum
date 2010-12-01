@@ -74,7 +74,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  *
  */
-class AiModel
+public class AiModel
 {	
 	/**
 	 * initialise le modèle avec la zone passée en paramètre.
