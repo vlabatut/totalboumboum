@@ -46,6 +46,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
 	/** indicateur de demande de terminaison de l'IA (activé par le jeu à la fin de la partie) */
 	private boolean stopRequest = false;
 
@@ -71,13 +73,19 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	@Override
 	public final AiAction call()
-	{	AiAction result;
-		try
-		{	result = processAction();		
+	{	AiAction result = new AiAction(AiActionName.NONE);
+		
+		if(firstTime)
+			firstTime = false;
+		else
+		{	try
+			{	result = processAction();		
+			}
+			catch (StopRequestException e)
+			{	result = new AiAction(AiActionName.NONE);
+			}
 		}
-		catch (StopRequestException e)
-		{	result = new AiAction(AiActionName.NONE);
-		}
+		
 		return result;
 	}
 	
