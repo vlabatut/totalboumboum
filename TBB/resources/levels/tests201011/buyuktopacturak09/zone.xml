@@ -53,9 +53,6 @@
 			<tile pos="0">
 				<block group="hardwalls" name="regular" />
 			</tile>
-			<tile pos="1">
-				<item name="extrabomb" />
-			</tile>
 			<tile pos="6">
 				<block name="softwall" />
 			</tile>
