@@ -28,7 +28,6 @@ import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v200910.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
-import org.totalboumboum.ai.v200910.ais.adatepeozbek.v5c.AdatepeOzbek;
 import org.totalboumboum.configuration.Configuration;
 
 /**
@@ -54,6 +53,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
 	/** indicateur de demande de terminaison de l'IA (activé par le jeu à la fin de la partie) */
 	private boolean stopRequest = false;
 	/** compteur temporel pour éviter que le thread rende la main trop souvent */
@@ -88,8 +89,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 			long limit = Configuration.getAisConfiguration().getAiYieldPeriod();
 			if(diff>limit)
 			{	lastYield = newTime;
-if(this instanceof AdatepeOzbek)		
-	System.out.println(this.getClass()+">"+diff+"("+callCount+")");
+//if(this instanceof AdatepeOzbek)		
+//	System.out.println(this.getClass()+">"+diff+"("+callCount+")");
 				callCount = 0;
 				Thread.yield();
 			}			
@@ -102,16 +103,22 @@ if(this instanceof AdatepeOzbek)
 	
 	@Override
 	public final AiAction call()
-	{	AiAction result;
-		// on réinitialise la sortie de l'IA
-		reinitOutput();
-		try
-		{	// on calcule la prochaine action à effectuer
-			result = processAction();		
+	{	AiAction result = new AiAction(AiActionName.NONE);
+	
+		if(firstTime)
+			firstTime = false;
+		else
+		{	// on réinitialise la sortie de l'IA
+			reinitOutput();
+			try
+			{	// on calcule la prochaine action à effectuer
+				result = processAction();		
+			}
+			catch (StopRequestException e)
+			{	result = new AiAction(AiActionName.NONE);
+			}
 		}
-		catch (StopRequestException e)
-		{	result = new AiAction(AiActionName.NONE);
-		}
+		
 		return result;
 	}
 	
