@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201011.ais.kantarcitaskin;
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
-import org.totalboumboum.ai.v201011.ais.kantarcitaskin.v1.KantarciTaskin;
+import org.totalboumboum.ai.v201011.ais.kantarcitaskin.v2.KantarciTaskin;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
