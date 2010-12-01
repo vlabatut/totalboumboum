@@ -46,10 +46,17 @@ public class BaydarCamci extends ArtificialIntelligence
 		super("BaydarCamc");	
 	}
 	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
+
 	public Integer call() throws Exception
 	{	
 		
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];
 		int dangerPos[] = getClosestBlockPosition(x,y,AI_BLOCK_FIRE);
@@ -63,6 +70,7 @@ public class BaydarCamci extends ArtificialIntelligence
 		if(dangerPos[0] == -1)
 		{
 			result= moveNow(x,y);
+		}
 		}
 		
 	return result;	

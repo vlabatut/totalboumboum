@@ -47,10 +47,17 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		super("BasmnSndll");
 	}
 	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
+
 	public Integer call() throws Exception
 	{ 
-		
 		Integer result=ArtificialIntelligence.AI_ACTION_DO_NOTHING ;
+
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 		
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];	
@@ -777,9 +784,9 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		}
 		lastPosition[0]=x;//enregistrement de la dernière position 
 		lastPosition[1]=y;//enregistrement de la dernière position
+		}
 		
 		return result;
-		
 	}
 	/**
 	 * Indique si le personnage a la possibilité de s'enfuir ou pas

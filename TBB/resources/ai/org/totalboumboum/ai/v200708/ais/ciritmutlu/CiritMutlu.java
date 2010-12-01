@@ -43,11 +43,20 @@ public class CiritMutlu extends ArtificialIntelligence {
 	}
 	
 	private static final long serialVersionUID = 1L;
+	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
 
 	/**
 	 *  La methode qui fait deplacer le joueur IA
 	 */
 	public Integer call() throws Exception {
+		
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
+
 		// position du joueur IA
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];
@@ -57,6 +66,8 @@ public class CiritMutlu extends ArtificialIntelligence {
 			problem.addInitialState(states.lastElement());
 		tree = new SearchTree(problem);
 		return makeTree(problem, x, y);
+		}
+		return AI_ACTION_DO_NOTHING;
 	}
 
 	/**

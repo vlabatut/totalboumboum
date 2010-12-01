@@ -73,6 +73,10 @@ public class CaglayanElmas extends ArtificialIntelligence
 		destructionCount = 0;
 	}
 	
+	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
+
 	/**
 	 * Détermine la prochaine action que l'IA va effectuer
 	 * (Bouger, ne rien faire, poser une bombe)
@@ -81,6 +85,10 @@ public class CaglayanElmas extends ArtificialIntelligence
 	 */
 	public Integer call() throws Exception
 	{
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 		// Notre position
 		int px = getOwnPosition()[0];
 		int py = getOwnPosition()[1];
@@ -216,6 +224,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 					return lastAction;
 				}
 			}
+		}
 		}
 		return AI_ACTION_DO_NOTHING;
 	}

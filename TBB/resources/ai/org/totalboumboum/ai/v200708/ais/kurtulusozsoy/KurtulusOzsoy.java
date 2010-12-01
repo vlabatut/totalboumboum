@@ -37,8 +37,15 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 			
 		}
 		
+		/** indicateur de première invocation (pour la compatibilité */
+		private boolean firstTime = true;
+
 		public Integer call() throws Exception
 		{	Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 			int x = getOwnPosition()[0];
 			int y = getOwnPosition()[1];
 			posit=getClosestPlayerPosition(x, y);
@@ -103,7 +110,8 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 			
 		
 			}	
-			 return result;
+		}
+		return result;
 		}
 		
 		/**

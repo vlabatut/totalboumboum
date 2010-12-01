@@ -38,10 +38,18 @@ public class ErenGokce extends ArtificialIntelligence {
 			super("GokceEren");
 		//  Auto-generated constructor stub
 	}
+	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
 
 	@Override
 	public Integer call() throws Exception {
 		Integer result=AI_ACTION_DO_NOTHING;
+		
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 		//controle shrink
 		if(getTimeBeforeShrink()<=0)
 		{
@@ -154,6 +162,7 @@ public class ErenGokce extends ArtificialIntelligence {
 		shrinkx=getNextShrinkPosition()[0];
 		shrinky=getNextShrinkPosition()[1];
 		lastmove=result;
+		}
 		return result;
 	}
 /*

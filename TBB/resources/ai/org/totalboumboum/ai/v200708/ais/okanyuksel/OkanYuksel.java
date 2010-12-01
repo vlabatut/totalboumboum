@@ -50,10 +50,17 @@ public class OkanYuksel extends ArtificialIntelligence
 		kacisR = new LinkedList<Integer>();
 		artis = 1;
 	}
+	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
 
 	@Override
 	public Integer call() throws Exception
 	{
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 		try
 		{
 			//Les informations de la position de DECCAL.
@@ -94,6 +101,8 @@ public class OkanYuksel extends ArtificialIntelligence
 			artis = 1;
 			return AI_ACTION_DO_NOTHING;
 		}
+		}
+		return AI_ACTION_DO_NOTHING;
 	}
 
 	/* L'information d'un point */

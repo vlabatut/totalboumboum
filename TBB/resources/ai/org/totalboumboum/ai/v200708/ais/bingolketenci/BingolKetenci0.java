@@ -20,7 +20,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * @author Utku Gorkem Kentenci
  *
  */
-public class BingolKetenci extends ArtificialIntelligence {
+public class BingolKetenci0 extends ArtificialIntelligence {
 	private static final long serialVersionUID = 1L;
 	/** position de la derniere bombe qui est mis par AI. */
 	private int lastBombPos[];
@@ -81,7 +81,7 @@ public class BingolKetenci extends ArtificialIntelligence {
 	/***************************************************************************
 	 * /** Constructeur.
 	 */
-	public BingolKetenci() {
+	public BingolKetenci0() {
 		super("BinglKtnci");
 		lastMove = AI_ACTION_DO_NOTHING;
 
