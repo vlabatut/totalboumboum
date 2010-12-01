@@ -20,9 +20,17 @@ public class GoksayKose extends ArtificialIntelligence{
 		super("GoksayKose");
 		Flag=false;
 			}
+	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
+
 	public Integer call() throws Exception {
 		
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 		// position du personnage
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];
@@ -54,7 +62,7 @@ public class GoksayKose extends ArtificialIntelligence{
 				result= coinDessousDroit(x,y);
 			
 			}	
-	
+		}
 		return result;
 	}
 	

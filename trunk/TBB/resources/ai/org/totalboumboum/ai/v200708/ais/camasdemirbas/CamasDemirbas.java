@@ -48,9 +48,17 @@ public class CamasDemirbas extends ArtificialIntelligence
 		nextMove = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		pathMoves = new Vector<Integer>();
 	}
+	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
 
 	public Integer call() throws Exception
-	{Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+	{
+		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 	x = getOwnPosition()[0];
 	y = getOwnPosition()[1];
 	int x2=newPosition[0];
@@ -144,6 +152,7 @@ public class CamasDemirbas extends ArtificialIntelligence
 		}							
 	previousMove = result;
 	newPosition = positionAfterMove(x, y, result);
+		}
 	return result;
 }
 

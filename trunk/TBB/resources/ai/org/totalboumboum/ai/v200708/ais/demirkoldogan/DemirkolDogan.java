@@ -48,12 +48,20 @@ public class DemirkolDogan extends ArtificialIntelligence{
 
 
 	private static final long serialVersionUID = 1L;
+	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
 
 	public Integer call() throws Exception {
 		
 		//Les variables locaux
 		//----------------------------------------
 		Integer result = AI_ACTION_DO_NOTHING;
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
+		
 		int[][] matrix = this.updateMatrix(); //matrice amelioré
 		int[] ownPosition = getOwnPosition(); //le position de l'IA
 		int[] bonusPosition; //si il y a une bonus, ceci contiendra sa position
@@ -231,6 +239,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 		this.oldAction = result;
 		this.oldPosition = ownPosition;
 		this.lastActionMode = this.actionMode;
+		}
 		return result;
 		
 	}							

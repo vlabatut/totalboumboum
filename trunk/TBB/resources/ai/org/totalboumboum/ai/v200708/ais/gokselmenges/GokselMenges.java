@@ -72,14 +72,17 @@ public class GokselMenges  extends ArtificialIntelligence
 		super("GokslMengs");
 
 	}
+	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
 
-
-	
-	
-	
 	public Integer call() throws Exception {
 
 		int result= AI_ACTION_DO_NOTHING;
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 
 		x = getOwnPosition()[0];
 		y = getOwnPosition()[1];
@@ -317,8 +320,8 @@ public class GokselMenges  extends ArtificialIntelligence
 		
 		i1 = 0;			
 		j1 = 0;			
-		
-		return 0;
+		}
+		return AI_ACTION_DO_NOTHING;
 	}
 
 	

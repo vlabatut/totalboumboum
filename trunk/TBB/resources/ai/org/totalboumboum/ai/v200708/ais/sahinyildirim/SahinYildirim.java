@@ -48,10 +48,17 @@ public class SahinYildirim extends ArtificialIntelligence {
 		super("SahnYildrm");
 		lastMove = ArtificialIntelligence.AI_ACTION_GO_UP;
 	}
+	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
 
 	public Integer call() throws Exception {
-		Point pointMe;
 		int result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
+		Point pointMe;
 
 		// get own position
 		int x = getOwnPosition()[0];
@@ -161,12 +168,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 			result = ArtificialIntelligence.AI_ACTION_PUT_BOMB;
 			
 		}
-		
+		}
 		
 		return result;
-
-	
-
 	}
 	
 	/**si il y a des bonus a cote mon position -+1 le prend

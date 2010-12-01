@@ -135,9 +135,18 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 		snake[4][0] = 5;
 		snake[4][1] = 1;
 	}
+	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
 
 	public Integer call() throws Exception {
 
+		int action = AI_ACTION_DO_NOTHING;
+
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 		int tab[][] = getZoneMatrix();
 
 		if(carte==null)
@@ -181,8 +190,6 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 			lastMo = AI_ACTION_DO_NOTHING;
 			first = false;
 		}
-
-		int action = AI_ACTION_DO_NOTHING;
 
 		// quand le shrink commence
 		if (getTimeBeforeShrink() < 0
@@ -239,7 +246,7 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 			}
 
 		}
-
+		}
 		return action;
 	}
 

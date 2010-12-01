@@ -47,16 +47,23 @@ public class HanciToprak extends ArtificialIntelligence {
 	private int hasno_bomb = 0;
 	private int danger=0;
 	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
+
 	/**
 	 * la methode contrôle le mouvement du personnage pour chaque itération 
 	*/
 
 	public Integer call() throws Exception {
+		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 		index = 0;
 
 		// on détermine la position actuelle
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];
 		
@@ -247,7 +254,8 @@ public class HanciToprak extends ArtificialIntelligence {
 			
 			result = hareket(result, x, y);
 		}
-
+		}
+		
 		return result;
 	}
 

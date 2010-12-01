@@ -48,8 +48,18 @@ public class KecerYaman extends ArtificialIntelligence {
 	private int action;
 	
 	/********************************************************************************/
+	
+	/** indicateur de première invocation (pour la compatibilité */
+	private boolean firstTime = true;
+
 	@Override
 	public Integer call() throws Exception {
+		action = AI_ACTION_DO_NOTHING;
+		
+		if(firstTime)
+			firstTime = false;
+		else
+		{	
 		// initialization of our map that is used during 
 		// calculations
 		Map.init( getZoneMatrix() );
@@ -89,6 +99,7 @@ public class KecerYaman extends ArtificialIntelligence {
 			updatePath(new Node(currentNode.getX(),currentNode.getY(),null,0,0));
 		}
 		action = calculateAction(currentNode, nextNode);
+		}
 		
 		return action;
 	}
