@@ -231,6 +231,8 @@ public abstract class AiZone
 	 */
 	public Direction getDirection(AiTile source, AiTile target)
 	{	// differences
+if(target==null || source==null)
+	System.out.print("");
 		int dx = target.getCol()-source.getCol();
 		int dy = target.getLine()-source.getLine();
 		
@@ -367,10 +369,9 @@ public abstract class AiZone
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** nombre d'items cachés, i.e. pas encore ramassés */
-	public int hiddenItemsCount;
+	protected int hiddenItemsCount;
 	/** nombre d'items cachés, par type*/
-	public final HashMap<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
-//TODO to be made private
+	protected final HashMap<AiItemType,Integer> hiddenItemsCounts = new HashMap<AiItemType, Integer>();
 	
 	/** 
 	 * renvoie la liste des items apparents contenus dans cette zone 
