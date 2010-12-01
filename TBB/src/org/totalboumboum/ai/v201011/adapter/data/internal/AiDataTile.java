@@ -212,6 +212,7 @@ final class AiDataTile extends AiTile
 					}
 					block.update(this,elapsedTime);
 					internalBlocks.add(block);
+					externalBlocks.add(block);
 				}
 			}
 		}
@@ -232,6 +233,7 @@ final class AiDataTile extends AiTile
 					}
 					bomb.update(this,elapsedTime);
 					internalBombs.add(bomb);
+					externalBombs.add(bomb);
 				}
 			}
 		}
