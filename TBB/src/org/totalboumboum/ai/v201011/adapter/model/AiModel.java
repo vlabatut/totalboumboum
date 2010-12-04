@@ -226,6 +226,49 @@ public class AiModel
 	}
 	
 	/**
+	 * effectue une simulation pour la durée spécifiée.
+	 * la zone obtenue est accessible par getCurrentZone.
+	 * 
+	 * @param requestedDuration
+	 * 		la durée de la simulation à effectuer
+	 */
+	public void simulate(long requestedDuration)
+	{	// init
+		long totalDuration = 0;
+		previous = current;
+		
+		while(totalDuration<requestedDuration)
+		{	// create a copy of the current zone
+			current = new AiSimZone(current);
+			
+			// retrieve all sprites remaining in the zone
+			List<AiSimSprite> sprites = new ArrayList<AiSimSprite>();
+			sprites.addAll(current.getInternalBlocks());
+			sprites.addAll(current.getInternalBombs());
+			sprites.addAll(current.getInternalFires());
+			sprites.addAll(current.getInternalFloors());
+			sprites.addAll(current.getInternalHeroes());
+			sprites.addAll(current.getInternalItems());
+		
+			// set iteration duration
+			processDuration(sprites);
+			duration = Math.min(duration,requestedDuration-totalDuration);
+			
+			// apply events for the resulting minimal time
+			toBeDetonated.clear();
+			updateSprites(sprites,duration);
+		
+			// update detonating bombs
+			for(AiSimBomb bomb: toBeDetonated)
+				detonateBomb(bomb);
+		
+			// update the resulting zone
+			current.updateTime(duration);
+			totalDuration = totalDuration + duration;
+		}
+	}
+	
+	/**
 	 * calcule l'état suivant de la zone si les états spécifiés en paramètres
 	 * sont appliqués à la zone courante. en l'absence d'état spécifié, le sprite
 	 * continue à faire ce qu'il faisait déjà (brûler, se déplacer, etc.).
@@ -262,43 +305,6 @@ public class AiModel
 		
 		// process iteration duration
 		processDuration(sprites);
-		
-		// apply events for the resulting minimal time
-		toBeDetonated.clear();
-		updateSprites(sprites,duration);
-		
-		// update detonating bombs
-		for(AiSimBomb bomb: toBeDetonated)
-			detonateBomb(bomb);
-		
-		// update the resulting zone
-		current.updateTime(duration);
-	}
-	
-	/**
-	 * perform a simulation for the specified duration.
-	 * the resulting zone is available through getCurrentZone.
-	 * 
-	 * @param duration
-	 * 		the duration of the simulation
-	 */
-//TODO must be changed : while not reaching the specified duration, perform simulations	
-	public void simulate(long duration)
-	{	// create a copy of the current zone
-		previous = current;
-		current = new AiSimZone(previous);
-		
-		// retrieve all sprites remaining in the zone
-		List<AiSimSprite> sprites = new ArrayList<AiSimSprite>();
-		sprites.addAll(current.getInternalBlocks());
-		sprites.addAll(current.getInternalBombs());
-		sprites.addAll(current.getInternalFires());
-		sprites.addAll(current.getInternalFloors());
-		sprites.addAll(current.getInternalHeroes());
-		sprites.addAll(current.getInternalItems());
-		
-		// set iteration duration
-		this.duration = duration;
 		
 		// apply events for the resulting minimal time
 		toBeDetonated.clear();
