@@ -51,7 +51,7 @@ public class FullBombsetManager extends BombsetManager
 	public FullBombsetManager(Sprite sprite)
 	{	super(sprite);
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// DROP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -72,29 +72,8 @@ public class FullBombsetManager extends BombsetManager
 		ActionAbility ablt = bomb.modulateAction(action);
 //System.out.println(sprite.getCurrentPosX()+": "+ablt.isActive());		
 		if(ablt.isActive())
-		{	// bomb range
-			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
-			int flameRange = (int)ability.getStrength();
-			ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
-			if(ability.isActive())
-			{	int limit = (int)ability.getStrength();
-				if(flameRange>limit)
-					flameRange = limit;
-			}
-//System.out.println("flameRange: "+flameRange);	
-		
-			// bomb number
-			ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
-			int droppedBombLimit = (int)ability.getStrength();
-			ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
-			if(ability.isActive())
-			{	int limit = (int)ability.getStrength();
-				if(droppedBombLimit>limit)
-					droppedBombLimit = limit;
-			}
-//System.out.println("droppedBombLimit: "+droppedBombLimit);	
-//System.out.println("droppedBombs.size(): "+droppedBombs.size());	
-			
+		{	int flameRange = processBombRange();	
+			int droppedBombLimit = processBombNumberMax();
 			if(droppedBombs.size()<droppedBombLimit)
 			{	if(bomb!=null)
 				{	bomb.setFlameRange(flameRange); //NOTE maybe it should be more consistent to use a specific StateAbility, initialized automatically from the owner when the bomb is made (by the bombfactory)?
