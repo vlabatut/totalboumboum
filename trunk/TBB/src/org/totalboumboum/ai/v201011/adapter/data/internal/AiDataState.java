@@ -50,6 +50,8 @@ final class AiDataState implements AiState
 	 */
 	protected AiDataState(Sprite sprite)
 	{	this.sprite = sprite;
+//		direction = Direction.NONE; //necessary ?
+//		name = AiStateName.STANDING;
 	}
 	
 	/////////////////////////////////////////////////////////////////
