@@ -14,11 +14,11 @@
 		</points>
 	</settings>
 	<players>
-		<player file="c59d31dc-e0f3-4e65-b864-d84388dae592" color="PURPLE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="YELLOW" controls="2" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tournament201011" folder="classic" allowedPlayers="2 3 4 5" />
+		<level pack="tournament200910" folder="horizontal" allowedPlayers="1 2 3 4 5 6 7 8" />
 	</levels>
 </gameQuickmatch>
 
