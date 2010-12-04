@@ -93,6 +93,9 @@ public class Bombset extends AbstractBombset
 		// make sprite
 		BombFactory bf = getCurrentBombFactory(sprite);
 		result = bf.makeSprite(tile);
+		// set range
+		int flameRange = sprite.getBombsetManager().processBombRange();
+		result.setFlameRange(flameRange);
 		// set owner
 		result.setOwner(sprite);
 		// set time
