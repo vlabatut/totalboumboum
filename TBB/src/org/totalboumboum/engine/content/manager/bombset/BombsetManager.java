@@ -24,6 +24,8 @@ package org.totalboumboum.engine.content.manager.bombset;
 import java.util.LinkedList;
 
 import org.totalboumboum.engine.container.bombset.Bombset;
+import org.totalboumboum.engine.content.feature.ability.StateAbility;
+import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -61,6 +63,33 @@ public abstract class BombsetManager
 	
 	public Sprite getSprite()
 	{	return sprite;
+	}
+	
+	public int processBombRange()
+	{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
+		int result = (int)ability.getStrength();
+		ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
+		if(ability.isActive())
+		{	int limit = (int)ability.getStrength();
+			if(result>limit)
+				result = limit;
+		}
+//System.out.println("flameRange: "+flameRange);
+		return result;
+	}
+	
+	public int processBombNumberMax()
+	{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
+		int result = (int)ability.getStrength();
+		ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
+		if(ability.isActive())
+		{	int limit = (int)ability.getStrength();
+			if(result>limit)
+				result = limit;
+		}
+//System.out.println("droppedBombLimit: "+droppedBombLimit);	
+//System.out.println("droppedBombs.size(): "+droppedBombs.size());	
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
