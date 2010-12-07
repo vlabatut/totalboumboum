@@ -206,8 +206,12 @@ public interface AiBomb extends AiSprite
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le temps écoulé depuis que la bombe a été posée,
-	 * exprimé en millisecondes
+	 * renvoie le temps écoulé depuis que le compte à rebours de la 
+	 * bombe a commencé, exprimé en millisecondes. Bien sûr ceci
+	 * n'est valide que pour les bombes à retardement (qui ont un 
+	 * compte à rebours).
+	 * <b>Attention :</b> certaines actions spéciales comme le fait de lancer
+	 * la bombe sont susceptibles de réinitialiser le compte à rebours.
 	 * 
 	 * @return	
 	 * 		temps exprimé en ms

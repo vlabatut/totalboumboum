@@ -776,10 +776,13 @@ if(sprite instanceof AiSimBomb)
 					owner.updateBombNumberCurrent(-1);
 				// remove from zone
 				current.removeSprite(bomb);
-			}	
+			}
+			// update time
+			long elapsedTime = bomb.getTime() + duration;
+			bomb.setTime(elapsedTime);
 		}
 		
-		// bomb is moving : process changes in location/tile
+		// bomb is moving: process changes in location/tile
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
 		{	// update location
 			moveSprite(bomb,duration);
@@ -797,6 +800,13 @@ if(sprite instanceof AiSimBomb)
 					//detonateBomb(bomb);
 					toBeDetonated.add(bomb);
 				}
+				// update time
+				long elapsedTime = bomb.getTime() + duration;
+				bomb.setTime(elapsedTime);
+			}
+			else
+			{	// update time
+				bomb.setTime(0);
 			}
 		}
 		
@@ -813,6 +823,9 @@ if(sprite instanceof AiSimBomb)
 				//detonateBomb(bomb);
 				toBeDetonated.add(bomb);
 			}
+			// update time
+			long elapsedTime = bomb.getTime() + duration;
+			bomb.setTime(elapsedTime);
 		}
 
 		// always update the state
@@ -930,6 +943,9 @@ if(sprite instanceof AiSimBomb)
 		// always update the state
 		newState = new AiSimState(name,direction,time);
 		fire.setState(newState);
+		// and elapsed time
+		long elapsedTime = fire.getTime() + duration;
+		fire.setTime(elapsedTime);
 	}
 
 	/**
