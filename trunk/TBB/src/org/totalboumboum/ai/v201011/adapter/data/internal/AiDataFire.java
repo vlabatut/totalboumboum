@@ -141,7 +141,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	private void updateTime()
 	{	long elapsedTime = getTile().getZone().getElapsedTime();
 		time = time + elapsedTime;
-		System.out.println(sprite.getId()+":"+time+"/"+burningDuration);
+		//System.out.println(sprite.getId()+":"+time+"/"+burningDuration);
 	}
 	
 	/////////////////////////////////////////////////////////////////
