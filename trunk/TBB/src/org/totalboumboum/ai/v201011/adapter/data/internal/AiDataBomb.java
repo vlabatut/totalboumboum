@@ -359,13 +359,14 @@ if(slidingSpeed==0)
 		
 		if(gesture==GestureName.STANDING || gesture==GestureName.STANDING_FAILING
 			|| gesture==GestureName.OSCILLATING || gesture==GestureName.OSCILLATING_FAILING
-			|| gesture==GestureName.SLIDING || gesture==GestureName.SLIDING)
+			|| gesture==GestureName.SLIDING || gesture==GestureName.SLIDING
+			|| gesture==GestureName.BURNING)
 		{	long elapsedTime = getTile().getZone().getElapsedTime();
 			time = time + elapsedTime;
 		}
 		else if(gesture==GestureName.APPEARING
 				|| gesture==GestureName.BOUNCING
-				|| gesture==GestureName.DISAPPEARING
+//				|| gesture==GestureName.DISAPPEARING
 				|| gesture==GestureName.ENTERING
 				|| gesture==GestureName.HIDING
 				|| gesture==GestureName.LANDING
@@ -373,7 +374,7 @@ if(slidingSpeed==0)
 				|| gesture==GestureName.PREPARED)
 		{	time = 0;		
 		}
-		//System.out.println(sprite.getId()+":"+time+"/"+normalDuration);
+//		System.out.println(sprite.getId()+":"+time+"/"+normalDuration+" ("+gesture+")");
 	}
 
 	/////////////////////////////////////////////////////////////////
