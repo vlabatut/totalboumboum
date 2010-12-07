@@ -342,7 +342,7 @@ if(slidingSpeed==0)
 	/////////////////////////////////////////////////////////////////
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis que la bombe a été posée, exprimé en ms */
+	/** temps écoulé depuis que le compte à rebours a (re)commencé, exprimé en ms */
 	private long time = 0;
 	
 	@Override
@@ -351,7 +351,7 @@ if(slidingSpeed==0)
 	}
 	
 	/**
-	 * met à jour le temps écoulé depuis que la bombe a été posée
+	 * met à jour le temps écoulé depuis que le compte à rebours a (re)commencé
 	 */
 	private void updateTime()
 	{	Bomb sprite = getSprite();

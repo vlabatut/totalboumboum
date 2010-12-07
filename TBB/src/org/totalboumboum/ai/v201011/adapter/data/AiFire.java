@@ -66,4 +66,10 @@ public interface AiFire extends AiSprite
 	 * 		vrai si le feu traverse les items
 	 */
 	public boolean hasThroughItems();
+
+	/////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// TODO à renommer en getElapsedTime, même chose pour les bombes (plus changer le getTime actuel en getCountdownTime) 
+	public long getTime();	
 }

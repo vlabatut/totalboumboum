@@ -340,7 +340,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LIFE TIME 		/////////////////////////////////////////////
+	// TIME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** temps écoulé depuis que la bombe a été posée, exprimé en ms */
 	private long time = 0;
@@ -348,6 +348,16 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	@Override
 	public long getTime()
 	{	return time;	
+	}
+	
+	/**
+	 * modifie le temps écoulé
+	 * 
+	 * @param time
+	 * 		temps écoulé
+	 */
+	protected void setTime(long time)
+	{	this.time = time;
 	}
 	
 	/////////////////////////////////////////////////////////////////

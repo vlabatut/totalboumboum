@@ -57,6 +57,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	@Override
 	protected void update(AiDataTile tile, long elapsedTime)
 	{	super.update(tile,elapsedTime);
+		updateTime();
 		updateCollisions();
 	}
 
@@ -121,6 +122,26 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 		}
 		
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** temps écoulé depuis que le feu existe, exprimé en ms */
+	private long time = 0;
+	
+	@Override
+	public long getTime()
+	{	return time;
+	}
+
+	/**
+	 * met à jour le temps écoulé depuis que le feu existe
+	 */
+	private void updateTime()
+	{	long elapsedTime = getTile().getZone().getElapsedTime();
+		time = time + elapsedTime;
+		System.out.println(sprite.getId()+":"+time+"/"+burningDuration);
 	}
 	
 	/////////////////////////////////////////////////////////////////
