@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201011.ais.isbirkoyas;
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
-import org.totalboumboum.ai.v201011.ais.isbirkoyas.v3.IsbirKoyas;
+import org.totalboumboum.ai.v201011.ais.isbirkoyas.v4.IsbirKoyas;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
