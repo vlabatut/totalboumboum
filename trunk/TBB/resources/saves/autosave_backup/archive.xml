@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Super-coupe de Galatasaray I" type="SINGLE" />
-	<played matches="0" rounds="1" />
-	<dates start="2010-10-25T22:56:32" save="2010-10-25T22:58:42" />
+	<tournament name="Tournoi de Galatasaray II" type="CUP" />
+	<played matches="12" rounds="4" />
+	<dates start="2010-12-16T16:09:14" save="2010-12-16T16:59:07" />
 	<players>
-		<player name="0708.Demirkol+Doğan" />
-		<player name="0708.Hanci+Toprak" />
-		<player name="0708.Çamaş+Demirbaş" />
-		<player name="Joueur Humain 2" />
+		<player name="1011.Hacıbektaşoğlu+İlgar" />
+		<player name="1011.Arık+Yaman" />
+		<player name="1011.Göçmenoğlu+Hekimoğlu" />
+		<player name="1011.İsbir+Koyaş" />
+		<player name="1011.Kayuka+Yıldırım" />
+		<player name="1011.Kantarcı+Taşkın" />
+		<player name="1011.Göncü+Onat" />
+		<player name="1011.Büyüktopaç+Turak" />
+		<player name="1011.Kesimal+Varol" />
+		<player name="1011.Akbulut+Küpelioğlu" />
+		<player name="1011.Avcı+Güngör" />
+		<player name="1011.Özdöker+Özen" />
+		<player name="1011.Kaya+Yerinde" />
 	</players>
 </archive>
 
