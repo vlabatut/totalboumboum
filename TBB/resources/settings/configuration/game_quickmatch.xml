@@ -16,6 +16,8 @@
 	<players>
 		<player file="b55b4e19-cc7c-4f79-8444-dfb774317119" color="INDIGO" controls="1" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="ORANGE" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="cadc893f-eebe-448f-8351-15365d1f4e71" color="RED" controls="3" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="4" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="tournament201011" folder="qualif1" allowedPlayers="1 2 3 4 5" />
