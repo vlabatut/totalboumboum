@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Tournoi de Galatasaray II" type="CUP" />
-	<played matches="13" rounds="5" />
-	<dates start="2010-12-16T16:09:14" save="2010-12-16T17:00:17" />
+	<tournament name="Coupe de test" type="CUP" />
+	<played matches="12" rounds="5" />
+	<dates start="2010-12-17T16:40:25" save="2010-12-17T17:42:22" />
 	<players>
-		<player name="1011.Hacıbektaşoğlu+İlgar" />
-		<player name="1011.Arık+Yaman" />
-		<player name="1011.Göçmenoğlu+Hekimoğlu" />
-		<player name="1011.İsbir+Koyaş" />
-		<player name="1011.Kayuka+Yıldırım" />
-		<player name="1011.Kantarcı+Taşkın" />
-		<player name="1011.Göncü+Onat" />
-		<player name="1011.Büyüktopaç+Turak" />
+		<player name="0809.Erişik+Pektaş" />
 		<player name="1011.Kesimal+Varol" />
-		<player name="1011.Akbulut+Küpelioğlu" />
-		<player name="1011.Avcı+Güngör" />
 		<player name="1011.Özdöker+Özen" />
-		<player name="1011.Kaya+Yerinde" />
+		<player name="0708.Okan+Yüksel" />
+		<player name="0708.Bingöl+Ketenci" />
+		<player name="1011.İsbir+Koyaş" />
+		<player name="0708.Çamaş+Demirbaş" />
+		<player name="1011.Kantarcı+Taşkın" />
+		<player name="1011.Hacıbektaşoğlu+İlgar" />
+		<player name="0708.Başman+Sandallı" />
+		<player name="0809.Kökciyan+Mazmanoğlu" />
+		<player name="1011.Göncü+Onat" />
+		<player name="0809.Çöremen+Küçükkarakürt" />
+		<player name="0708.Göksay+Köse" />
+		<player name="1011.Arık+Yaman" />
+		<player name="1011.Kayuka+Yıldırım" />
 	</players>
 </archive>
 

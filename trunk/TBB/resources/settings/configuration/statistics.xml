@@ -3,7 +3,7 @@
 	<includeQuickStarts value="false" />
 	<includeSimulations value="false" />
 	<glicko2 defaultRating="1500" defaultRatingDeviation="350" defaultRatingVolatility="0.06" gamesPerPeriod="5" />
-	<regularLaunch count="161" time="1289449416" />
+	<regularLaunch count="172" time="1289460499" />
 	<quickLaunch count="2" time="95" />
 </statistics>
 
