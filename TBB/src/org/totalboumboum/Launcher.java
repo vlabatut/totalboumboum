@@ -59,7 +59,11 @@ import org.xml.sax.SAXException;
 public class Launcher
 {	
 	public static void main(String args[]) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	List<String> argList = Arrays.asList(args); 
+	{	// set thread name
+		Thread thread = Thread.currentThread();
+		thread.setName("TBB.init");
+		
+		List<String> argList = Arrays.asList(args); 
 
 		if(argList.contains(GuiTools.OPTIONS[GuiTools.OPTION_HELP]))
 			displayHelp();
@@ -1508,6 +1512,8 @@ public class Launcher
 	 *  - à voir comment ça peut être représenté derrière...
 	 */
 	
-	// clignotements : mettre de la transparence
-	//TODO rajouter une fonction d'init de l'IA
+	// TODO clignotements de sprites : mettre de la transparence dans les version coloriées
+	// TODO utiliser le calcul d'occupation CPU pour limiter les IA trop gourmandes
+	// TODO calculer un temps d'occupation "normal" (avant le jeu) et s'en servir de réf pour le temps en cours de jeu
+	// TODO arrêter les threads dont les ia ont été éliminées du jeu
 }
