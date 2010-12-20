@@ -4,7 +4,7 @@
 	<settings>
 		<levels randomOrder="false" />
 		<players randomLocation="false" />
-		<limits points="0" rounds="15" time="60000" />
+		<limits points="0" rounds="15" time="0" />
 		<points share="true" draw="NONE">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -14,7 +14,7 @@
 		</points>
 	</settings>
 	<players>
-		<player file="cadc893f-eebe-448f-8351-15365d1f4e71" color="RED" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="b55b4e19-cc7c-4f79-8444-dfb774317119" color="PINK" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="edd5a2e2-9ce4-4523-b76a-192733dd588f" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 		<player file="ba47c16d-8657-419b-99a4-ade71c8c77ea" color="WHITE" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />

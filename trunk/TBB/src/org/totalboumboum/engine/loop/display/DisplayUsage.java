@@ -309,8 +309,15 @@ public class DisplayUsage implements Display
 						// process size and location
 						box = metrics.getStringBounds(text,g);
 						boxHeight = (int)box.getHeight();
+						int boxWidth = (int)box.getWidth();
+						// draw background
+						int rectMargin = 0;
+						int rectHeight = boxHeight + 2*rectMargin;
+						int rectWidth = boxWidth + 2*rectMargin;
+						g.setColor(new Color(255,255,255,50));
+						g.fillRect(x-5,y-rectHeight/2,rectWidth,rectHeight);
+						// draw text
 						yText = (int)Math.round(y+boxHeight/2-metrics.getDescent());
-						// draw
 						g.setColor(new Color(0,0,0,150));
 						g.drawString(text,x+1,yText+1);
 						g.setColor(colors.get(i));
