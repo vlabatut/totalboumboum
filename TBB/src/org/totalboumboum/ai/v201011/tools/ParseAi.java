@@ -50,13 +50,14 @@ public class ParseAi
 	private final static List<String> IGNORED_PACKAGES = Arrays.asList(new String[]
  	{	"v1","v1_1","v1_2","v1_3",
  		"v2","v2_1","v2_2","v2_3",
- 		"v3","v3_1","v3_2","v3_3",
- 		"v4","v4_1","v4_2","v4_3",
- 		"v5_1"
+ 		"v3","v3_1","v3_2","v3_3"
+// 		"v4","v4_1","v4_2","v4_3",
+// 		"v5_1"
  	});
 	
 	public static void main(String[] args) throws IOException, ParseException
-	{	String aiPack = "resources/ai/org/totalboumboum/ai/v200910/ais";
+	{	//String aiPack = "resources/ai/org/totalboumboum/ai/v200910/ais";
+		String aiPack = "../TBBtemp/src/org/totalboumboum/ai/v201011/ais";
 		parseAiPack(aiPack);
 	}
 	
@@ -126,6 +127,7 @@ public class ParseAi
 	
 	public static void parseAiPack(String aiPack) throws ParseException, IOException
 	{	File folder = new File(aiPack);
+	String temp = folder.getAbsolutePath();
 		File[] files = folder.listFiles();
 		for(File file: files)
 		{	if(file.isDirectory())
