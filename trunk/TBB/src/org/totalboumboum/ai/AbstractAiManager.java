@@ -40,6 +40,8 @@ import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
+import org.totalboumboum.engine.player.AiPlayer;
+import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.RoundVariables;
 
 
@@ -100,13 +102,9 @@ public abstract class AbstractAiManager<V>
     
     public void initAgent()
     {	// on initialise le thread
-    	ThreadFactory fact = new ThreadFactory()
-    	{	public Thread newThread(Runnable r)
-    		{	Thread result = new Thread(r);
-    			result.setPriority(Thread.MIN_PRIORITY);
-    			return result;
-    		}   		
-    	};
+    	Profile profile = player.getProfile();
+    	String name = player.getColor()+":"+profile.getAiPackname()+"/"+profile.getAiName()+":"+player.getName();
+    	ThreadFactory fact = new AiThreadFactory(name);
     	executorAi = Executors.newSingleThreadExecutor(fact);
     	
     	// on lance le calcul pour le premier coup
@@ -238,7 +236,7 @@ public abstract class AbstractAiManager<V>
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
     /** le joueur contrôlé par l'IA */
-    private AbstractPlayer player;
+    private AiPlayer player;
    
     /**
      * initialise le gestionnaire d'IA
@@ -249,7 +247,7 @@ public abstract class AbstractAiManager<V>
      * 		joueur contrôlé par l'IA
      */
     @SuppressWarnings("unchecked")
-	public void init(String instance, AbstractPlayer player)
+	public void init(String instance, AiPlayer player)
 	{	// input
     	this.player = player;
 		
