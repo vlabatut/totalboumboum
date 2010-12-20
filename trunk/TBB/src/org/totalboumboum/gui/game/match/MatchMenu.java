@@ -258,7 +258,7 @@ buttonStatistics.setEnabled(false);
 	{	if(Configuration.getAisConfiguration().getAutoAdvance())
 		{	// go to round
 			if(buttonRound.isEnabled())
-			{	thread = new Thread()
+			{	thread = new Thread("TBB.autoadvance")
 				{	public void run()
 					{	try
 						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
@@ -277,7 +277,7 @@ buttonStatistics.setEnabled(false);
 			}
 			// go back to tournament
 			else if(buttonTournament.isEnabled())
-			{	thread = new Thread()
+			{	thread = new Thread("TBB.autoadvance")
 				{	public void run()
 					{	try
 						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
