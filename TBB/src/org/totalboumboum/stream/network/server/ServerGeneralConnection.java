@@ -71,6 +71,7 @@ public class ServerGeneralConnection implements Runnable
 		
 		// launch thread
 		Thread thread = new Thread(this);
+		thread.setName("TBB.serverconnection");
 		thread.start();
 	}
 		

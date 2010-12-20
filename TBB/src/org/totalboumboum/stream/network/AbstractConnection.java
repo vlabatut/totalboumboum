@@ -71,12 +71,14 @@ public abstract class AbstractConnection implements OwnerInterface
 		// init writer
 		writer.setStream(out);
 		Thread writeThread = new Thread(writer);
+		writeThread.setName("TBB.netwriter");
 		writeThread.start();
 	
 		// init reader
 		reader.setStream(in);
 		reader.setConnection(this);
 		Thread readThread = new Thread(reader);
+		readThread.setName("TBB.netreader");
 		readThread.start();
 	}
 	
