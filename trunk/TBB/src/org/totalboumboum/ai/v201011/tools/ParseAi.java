@@ -127,7 +127,6 @@ public class ParseAi
 	
 	public static void parseAiPack(String aiPack) throws ParseException, IOException
 	{	File folder = new File(aiPack);
-	String temp = folder.getAbsolutePath();
 		File[] files = folder.listFiles();
 		for(File file: files)
 		{	if(file.isDirectory())
