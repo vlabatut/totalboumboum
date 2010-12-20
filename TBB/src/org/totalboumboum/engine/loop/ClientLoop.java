@@ -63,6 +63,7 @@ import org.totalboumboum.engine.loop.display.DisplaySpeed;
 import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
+import org.totalboumboum.engine.loop.display.DisplayUsage;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
@@ -398,6 +399,9 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 		displayManager.addDisplay(display);
 		// AIs pauses
 		display = new DisplayAisPause(this);
+		displayManager.addDisplay(display);
+		// AIs CPU usage
+		display = new DisplayUsage(this);
 		displayManager.addDisplay(display);
 		
 		// players names

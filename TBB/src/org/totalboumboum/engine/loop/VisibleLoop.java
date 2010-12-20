@@ -27,12 +27,17 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadInfo;
+import java.lang.management.ThreadMXBean;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.locks.Condition;
@@ -59,6 +64,7 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**
@@ -352,8 +358,8 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// ENGINE STATS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** number of FPS values stored to get an average */
-	protected static int NUM_FPS = 10;   
+    /** number of values stored to get an average */
+	protected static int NUM_VALUES = 10;   
 	protected static long MAX_STATS_INTERVAL = 1000L;
 	protected long prevStatsTime;   
 	protected long gameStartTime;
@@ -362,8 +368,15 @@ public abstract class VisibleLoop extends Loop
 	protected long statsCount = 0;
 	protected double averageFPS = 0.0;
 	protected double averageUPS = 0.0;
-	protected double fpsStore[] = new double[NUM_FPS];
-	protected double upsStore[] = new double[NUM_FPS];
+	protected double fpsStore[];
+	protected double upsStore[];
+	protected double cpuStore[][];
+	protected double averageCpu[];
+	protected long cpuPrev[];
+	protected ThreadMXBean tmxb = null;
+	protected HashMap<Long,PredefinedColor> threadIds = null;
+	protected List<PredefinedColor> colors = null;
+	
 
 	public double getAverageFPS()
 	{	return averageFPS;	
@@ -372,66 +385,194 @@ public abstract class VisibleLoop extends Loop
 	public double getAverageUPS()
 	{	return averageUPS;	
 	}
+	
+	public double[] getAverageCpu()
+	{	return averageCpu;
+	}
 
 	protected void initStats()
-	{	for(int k=0;k<NUM_FPS;k++)
-		{	fpsStore[k] = 0;
-	        upsStore[k] = 0;
-		}		
+	{	initFps();
+		initCpu();
 	}
 	
+	private void initFps()
+	{	// frames per second
+		fpsStore = new double[NUM_VALUES];
+		Arrays.fill(fpsStore,0);
+		
+		// updates per second
+		upsStore = new double[NUM_VALUES];
+		Arrays.fill(upsStore,0);
+	}
+	
+	private void initCpu()
+	{	// init stats
+		int pc = players.size() + 2;
+		cpuPrev = new long[pc];
+		Arrays.fill(cpuPrev,0);
+		averageCpu = new double[pc];
+		Arrays.fill(averageCpu,1/pc);
+
+		cpuStore = new double[NUM_VALUES][pc];
+		for(int k=0;k<NUM_VALUES;k++)
+		{	for(int i=0;i<pc;i++)
+			{	cpuStore[k][i] = 1/pc;
+			}
+		}
+
+		// init color list
+		colors = new ArrayList<PredefinedColor>();
+		for(AbstractPlayer player: players)
+			colors.add(player.getColor());
+		
+		// init thread map
+		tmxb = ManagementFactory.getThreadMXBean();
+		threadIds = new HashMap<Long,PredefinedColor>();
+		long ids[] = tmxb.getAllThreadIds();
+		ThreadInfo[] infos = tmxb.getThreadInfo(ids);
+		for(ThreadInfo info: infos)
+		{	String name = info.getThreadName();
+			long id = info.getThreadId();
+			String[] temp = name.split(":");
+			if(temp.length>1)
+			{	PredefinedColor color = PredefinedColor.valueOf(temp[0]);
+				threadIds.put(id,color);
+			}
+			else if(name.startsWith("TBB"))
+			{	threadIds.put(id,null);
+			}
+		}
+	}
+
 	protected void updateStats( )
     {	frameCount++;
     	long timeNow = System.currentTimeMillis();
-//System.out.println("stat time: "+(timeNow-prevStatsTime));    	
+    	//System.out.println("stat time: "+(timeNow-prevStatsTime));    	
   		long elapsedTime = timeNow - prevStatsTime;
 
-      	if (elapsedTime>=MAX_STATS_INTERVAL)
+      	if(elapsedTime>=MAX_STATS_INTERVAL)
       	{	// calculate the latest FPS and UPS
-      		double actualFPS = 0;     
-      		double actualUPS = 0;
-      		actualFPS = ((frameCount / (double)elapsedTime) * 1000L);
-      		actualUPS = (((frameCount+framesSkipped) / (double)elapsedTime) * 1000L);
+      		updateFps(elapsedTime);
+      		updateCpu(elapsedTime);
 
-      		// store the latest FPS and UPS
-      		fpsStore[(int)statsCount%NUM_FPS] = actualFPS;
-      		upsStore[(int)statsCount%NUM_FPS] = actualUPS;
-      		statsCount ++;
-
-      		// total the stored FPSs and UPSs
-      		double totalFPS = 0.0;     
-      		double totalUPS = 0.0;
-      		for(int i=0;i<NUM_FPS;i++)
-      		{	totalFPS = totalFPS + fpsStore[i];
-      			totalUPS = totalUPS + upsStore[i];
-      		}
-
-      		if(statsCount<NUM_FPS)
-      		{	// obtain the average FPS and UPS 
-      			averageFPS = totalFPS/statsCount;
-      			averageUPS = totalUPS/statsCount;
-      		}
-      		else
-      		{	averageFPS = totalFPS/NUM_FPS;
-      			averageUPS = totalUPS/NUM_FPS;
-      		}
-
-      		frameCount = 0;
-      		framesSkipped = 0;
+      		statsCount++;
       		prevStatsTime = timeNow;
-      		
-      		// adapt the FPS according to the PC power
-			int fps = Configuration.getEngineConfiguration().getFps();
-			boolean adjust = Configuration.getEngineConfiguration().getAutoFps();
-			if(averageFPS>0 && adjust)
-			{	if(averageFPS<30 && fps>30)
-				Configuration.getEngineConfiguration().setFps(fps-10);
-				else if(averageFPS>(fps-1) && fps<50)
-					Configuration.getEngineConfiguration().setFps(fps+10);
-			}
       	}
     }
-	
+
+	protected void updateFps(long elapsedTime)
+    {	// calculate the latest FPS and UPS
+      	double currentFPS = 0;     
+      	double currentUPS = 0;
+      	currentFPS = ((frameCount / (double)elapsedTime) * 1000L);
+      	currentUPS = (((frameCount+framesSkipped) / (double)elapsedTime) * 1000L);
+
+  		// store the latest FPS and UPS
+  		fpsStore[(int)statsCount%NUM_VALUES] = currentFPS;
+  		upsStore[(int)statsCount%NUM_VALUES] = currentUPS;
+
+  		// total the stored FPSs and UPSs
+  		double totalFPS = 0.0;     
+  		double totalUPS = 0.0;
+  		for(int i=0;i<NUM_VALUES;i++)
+  		{	totalFPS = totalFPS + fpsStore[i];
+  			totalUPS = totalUPS + upsStore[i];
+  		}
+
+  		int norm = (int)Math.min(statsCount+1,NUM_VALUES);
+  		{	// obtain the average FPS and UPS 
+  			averageFPS = totalFPS/norm;
+  			averageUPS = totalUPS/norm;
+  		}
+      		
+  		// adapt the FPS according to the PC power
+		int fps = Configuration.getEngineConfiguration().getFps();
+		boolean adjust = Configuration.getEngineConfiguration().getAutoFps();
+		if(averageFPS>0 && adjust)
+		{	if(averageFPS<30 && fps>30)
+			Configuration.getEngineConfiguration().setFps(fps-10);
+			else if(averageFPS>(fps-1) && fps<50)
+				Configuration.getEngineConfiguration().setFps(fps+10);
+		}
+		
+  		frameCount = 0;
+  		framesSkipped = 0;
+    }
+
+	protected void updateCpu(long elapsedTime)
+    {	// retrieve current cpu times
+		//System.out.println("------------------------------------------");
+		long[] tids = tmxb.getAllThreadIds();
+        ThreadInfo[] tinfos = tmxb.getThreadInfo(tids);
+        HashMap<PredefinedColor,Long> values = new HashMap<PredefinedColor,Long>();
+        long engineValue = 0;
+        long swingValue = 0;
+        for(int i=0;i<tids.length;i++)
+        {	long id = tids[i];
+        	ThreadInfo info = tinfos[i];
+        	long cpuTime = tmxb.getThreadCpuTime(id)/1000000;
+        	//System.out.println(info.getThreadName()+": "+cpuTime);        	
+            // focus only on running threads
+            if(cpuTime!=-1 && info!=null)
+            {	// separate ai-related, engine-related and swing-related threads
+            	PredefinedColor color = threadIds.get(id);
+            	if(color==null)
+            	{	// engine related (color is null)
+            		if(threadIds.containsKey(id))
+            			engineValue = cpuTime;
+            		// swing related (no color at all)
+            		else
+            			swingValue = swingValue + cpuTime;
+            	}
+            	// ai-related (non-null color)
+            	else
+            	{	values.put(color,cpuTime);
+            		//System.out.print(cpuTime+" ");		
+            	}
+            }
+        }
+        //System.out.println("-------------totalTime: "+totalTime);
+        
+        // process difference with previous values
+        long currentCpu[] = new long[colors.size()+2];
+        currentCpu[0] = swingValue - cpuPrev[0];
+        currentCpu[1] = engineValue - cpuPrev[1];
+		double timeTotal = currentCpu[0] + currentCpu[1];
+		for(int i=0;i<colors.size();i++)
+		{	PredefinedColor color = colors.get(i);
+			Long cpuTime = values.get(color);
+			if(cpuTime==null)
+			{	currentCpu[i+2] = 0l;
+				cpuPrev[i+2] = 0l;
+			}
+			else
+			{	currentCpu[i+2] = cpuTime - cpuPrev[i+2];
+	      		cpuPrev[i+2] = cpuTime;
+			}
+			timeTotal = timeTotal + currentCpu[i+2];
+			//System.out.print(currentCpu[i+2]+" ");		
+		}
+     	
+		// normalize to get proportions and store the latest CPU usage (proportions)
+		for(int i=0;i<currentCpu.length;i++)
+		{	double temp = currentCpu[i] / timeTotal;
+			cpuStore[(int)statsCount%NUM_VALUES][i] = temp;
+		}
+      	
+  		// total the stored usage values
+  		double totalUsage[] = new double[colors.size()+2];
+  		Arrays.fill(totalUsage,0);
+  		for(int i=0;i<NUM_VALUES;i++)
+  		{	for(int j=0;j<totalUsage.length;j++)
+ 			{	totalUsage[j] = totalUsage[j] + cpuStore[i][j];
+ 			}
+  		}
+  		
+  		int norm = (int)Math.min(statsCount+1,NUM_VALUES);
+  		for(int j=0;j<averageCpu.length;j++)
+  			averageCpu[j] = totalUsage[j]/norm;
+    }
+
 	/////////////////////////////////////////////////////////////////
 	// CONTROL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

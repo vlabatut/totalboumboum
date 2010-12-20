@@ -72,6 +72,7 @@ import org.totalboumboum.engine.loop.display.DisplaySpeed;
 import org.totalboumboum.engine.loop.display.DisplaySpritesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTilesPositions;
 import org.totalboumboum.engine.loop.display.DisplayTime;
+import org.totalboumboum.engine.loop.display.DisplayUsage;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
@@ -308,7 +309,9 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 				{	AbstractPlayer player = players.get(i);
 					boolean aiPause = getAiPause(i);
 					if(!player.isOut() && player instanceof AiPlayer)
-						((AiPlayer)player).updateAi(aiPause);
+					{	((AiPlayer)player).updateAi(aiPause);
+//System.out.println(player.getName());					
+					}
 				}
 			}
 		}
@@ -367,6 +370,9 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		displayManager.addDisplay(display);
 		// AIs pauses
 		display = new DisplayAisPause(this);
+		displayManager.addDisplay(display);
+		// AIs CPU usage
+		display = new DisplayUsage(this);
 		displayManager.addDisplay(display);
 		
 		// players names
