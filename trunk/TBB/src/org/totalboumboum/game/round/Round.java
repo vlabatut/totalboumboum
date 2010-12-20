@@ -165,6 +165,7 @@ public class Round implements StatisticHolder, Serializable
 			RoundVariables.fileOut = fileOut;
 			
 			Thread animator = new Thread(loop);
+			animator.setName("TBB.main");
 			animator.start();
 //			loop.init();
 		}
@@ -577,6 +578,7 @@ public class Round implements StatisticHolder, Serializable
 	{	if(!isOver())
 		{	loop = new SimulationLoop(this);
 			Thread animator = new Thread(loop);
+			animator.setName("TBB.simulation");
 			animator.start();
 		}
 	}
