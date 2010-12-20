@@ -71,18 +71,22 @@ public class DisplayAisPause implements Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	g.setColor(Color.MAGENTA);
-		Font font = new Font("Dialog", Font.BOLD, 12);
+	{	Font font = new Font("Dialog", Font.BOLD, 12);
 		g.setFont(font);
 		FontMetrics metrics = g.getFontMetrics(font);
 		String text = "AI Paused";
 		Rectangle2D box = metrics.getStringBounds(text, g);
 		for(int i=0;i<players.size();i++)
-		{	if(loop.getAiPause(i))
-			{	Sprite s = players.get(i).getSprite();
+		{	AbstractPlayer player = players.get(i);
+			Color color = player.getColor().getColor();
+			if(loop.getAiPause(i) && !player.isOut())
+			{	Sprite s = player.getSprite();
 				int x = (int)Math.round(s.getCurrentPosX()-box.getWidth()/2);
 				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
-				g.drawString(text, x, y);
+				g.setColor(Color.BLACK);
+				g.drawString(text,x+1,y+1);
+				g.setColor(color);
+				g.drawString(text,x,y);
 			}
 		}
 

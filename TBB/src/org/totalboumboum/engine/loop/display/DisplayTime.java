@@ -77,8 +77,7 @@ public class DisplayTime implements Display
 	{	int s = getShow();
 		// loop time
 		if(s==1)
-		{	g.setColor(Color.CYAN);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
+		{	Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			long time = loop.getTotalGameTime();
@@ -86,12 +85,14 @@ public class DisplayTime implements Display
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);
-			g.drawString(text, x, y);
+			g.setColor(Color.BLACK);
+			g.drawString(text,x+1,y+1);
+			g.setColor(Color.CYAN);
+			g.drawString(text,x,y);
 		}
 		// engine time
 		else if(s==2)
-		{	g.setColor(Color.CYAN);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
+		{	Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			long time = loop.getTotalEngineTime();
@@ -99,12 +100,14 @@ public class DisplayTime implements Display
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);
-			g.drawString(text, x, y);
+			g.setColor(Color.BLACK);
+			g.drawString(text,x+1,y+1);
+			g.setColor(Color.CYAN);
+			g.drawString(text,x,y);
 		}
 		// real time
 		else if(s==3)
-		{	g.setColor(Color.CYAN);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
+		{	Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			long time = loop.getTotalRealTime();
@@ -112,7 +115,10 @@ public class DisplayTime implements Display
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);
-			g.drawString(text, x, y);
+			g.setColor(Color.BLACK);
+			g.drawString(text,x+1,y+1);
+			g.setColor(Color.CYAN);
+			g.drawString(text,x,y);
 		}
 	}
 }

@@ -26,6 +26,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
+import java.text.NumberFormat;
 import java.util.List;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
@@ -41,12 +42,14 @@ import org.totalboumboum.engine.player.AbstractPlayer;
 public class DisplayPlayersNames implements Display
 {
 	public DisplayPlayersNames(VisibleLoop loop)
-	{	this.players = loop.getPlayers();
+	{	this.loop = loop;
+		this.players = loop.getPlayers();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private VisibleLoop loop;
 	private List<AbstractPlayer> players;	
 	
 	/////////////////////////////////////////////////////////////////
@@ -83,28 +86,54 @@ public class DisplayPlayersNames implements Display
 			for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
 				if(!player.isOut())
-				{	String text = "["+(i+1)+"] "+player.getName();
-					Sprite s = player.getSprite();
-					Rectangle2D box = metrics.getStringBounds(text,g);
-					double boxWidth = box.getWidth();
-					double boxHeight = box.getHeight();
-					int x = (int)Math.round(s.getCurrentPosX()-boxWidth/2);
-					int y = (int)Math.round(s.getCurrentPosY()+boxHeight/2-metrics.getDescent());
-					Color rectangleColor = new Color(255,255,255,100);
-					g.setColor(rectangleColor);
-					int arcDim = (int)Math.round(boxWidth/10);
-					double xMargin = boxWidth/15;
-					double yMargin = boxHeight/5;
-					int rectangleWidth = (int)Math.round(boxWidth+2*xMargin);
-					int rectangleHeight = (int)Math.round(boxHeight+2*yMargin);
-					int rx = (int)Math.round(s.getCurrentPosX()-rectangleWidth/2);
-					int ry = (int)Math.round(s.getCurrentPosY()-rectangleHeight/2);
-					g.fillRoundRect(rx,ry,rectangleWidth,rectangleHeight,arcDim,arcDim);
-					g.setColor(Color.BLACK);
-					g.drawString(text,x+1,y+1);
+				{	Sprite s = player.getSprite();
+					double posX = s.getCurrentPosX();
+					double posY = s.getCurrentPosY();
 					Color color = player.getColor().getColor();
-					g.setColor(color);
-					g.drawString(text,x,y);
+					
+					// process name size
+					String nameText = "["+(i+1)+"] "+player.getName();
+					Rectangle2D nameBox = metrics.getStringBounds(nameText,g);
+					double nameBoxWidth = nameBox.getWidth();
+					double nameBoxHeight = nameBox.getHeight();
+					double xMargin = nameBoxWidth/15;
+					double yMargin = nameBoxHeight/5;
+					
+					// process usage size
+					NumberFormat nf = NumberFormat.getPercentInstance();
+					nf.setMinimumIntegerDigits(2);
+					nf.setMaximumFractionDigits(2);
+					String usageText = nf.format(loop.getAverageCpu()[i+2]);
+					//System.out.println(loop.getAverageCpu()[i+1]);					
+					Rectangle2D usageBox = metrics.getStringBounds(usageText,g);
+					double usageBoxWidth = usageBox.getWidth();
+					double usageBoxHeight = usageBox.getHeight();
+					
+					// display name
+					{	int x = (int)Math.round(posX-nameBoxWidth/2);
+						int y = (int)Math.round(posY-2*yMargin-metrics.getDescent());
+						Color rectangleColor = new Color(255,255,255,100);
+						g.setColor(rectangleColor);
+						int arcDim = (int)Math.round(nameBoxWidth/10);
+						int rectangleWidth = (int)Math.round(nameBoxWidth+2*xMargin);
+						int rectangleHeight = (int)Math.round(nameBoxHeight);
+						int rx = (int)Math.round(posX-rectangleWidth/2);
+						int ry = (int)Math.round(posY-2*yMargin-rectangleHeight);
+						g.fillRoundRect(rx,ry,rectangleWidth,rectangleHeight,arcDim,arcDim);
+						g.setColor(Color.BLACK);
+						g.drawString(nameText,x+1,y+1);
+						g.setColor(color);
+						g.drawString(nameText,x,y);
+					}
+					
+					// draw CPU occupation
+					{	int x = (int)Math.round(s.getCurrentPosX()-usageBoxWidth/2);
+						int y = (int)Math.round(s.getCurrentPosY()+usageBoxHeight-metrics.getDescent());
+						g.setColor(Color.BLACK);
+						g.drawString(usageText,x+1,y+1);
+						g.setColor(color);
+						g.drawString(usageText,x,y);
+					}
 				}
 			}
 		}

@@ -94,10 +94,10 @@ public class DisplayAisTexts implements Display
 		{	AbstractPlayer player = players.get(i);
 			if(player instanceof AiPlayer)
 			{	AbstractAiManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
+				Color color = player.getColor().getColor();
 				// tile texts
 				if(getShow(i))
-				{	g.setColor(Color.MAGENTA);
-					int type = Font.PLAIN;
+				{	int type = Font.PLAIN;
 					boolean bold = aiMgr.isBold();
 					if(bold)
 						type = Font.BOLD;
@@ -126,6 +126,9 @@ public class DisplayAisTexts implements Display
 								for(int s=textList.size()-1;s>=0;s--)
 								{	int x = xList.get(s);
 									String text = textList.get(s);
+									g.setColor(Color.BLACK);
+									g.drawString(text,x+1,y+1);
+									g.setColor(color);
 									g.drawString(text,x,y);
 									int boxHeight = boxHeights.get(s);
 									y = y - boxHeight;
