@@ -37,7 +37,7 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.loop.VisibleLoop;
-import org.totalboumboum.engine.player.AbstractPlayer;
+import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
@@ -89,7 +89,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public void init(String instance, AbstractPlayer player)
+	public void init(String instance, AiPlayer player)
 	{	super.init(instance,player);
 		loop = RoundVariables.loop;
 		level = RoundVariables.level;
