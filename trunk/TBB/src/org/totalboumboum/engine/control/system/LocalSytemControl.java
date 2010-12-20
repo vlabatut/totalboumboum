@@ -145,6 +145,16 @@ public class LocalSytemControl extends SystemControl
 				SystemControlEvent controlEvent = new SystemControlEvent(name,index);
 				loop.processEvent(controlEvent);
 			}
+			
+			// debug: CPU usage
+			else if(keyCode == KeyEvent.VK_F8)
+			{	SystemControlEvent controlEvent;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_USAGE,SystemControlEvent.MODE);
+				else
+					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_USAGE,SystemControlEvent.REGULAR);
+				loop.processEvent(controlEvent);
+			}
 		}
 	}
 	
