@@ -415,6 +415,7 @@ private Label mStatusLabel;
     ac.setRateListener(this);
     // Kick off the animation.
     Thread t = new Thread(ac);
+    t.setName("TextBouncer");
     t.start();
   }
 
