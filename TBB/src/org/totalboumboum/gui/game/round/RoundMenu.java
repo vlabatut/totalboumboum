@@ -161,7 +161,7 @@ buttonStatistics.setEnabled(false);
 	{	if(Configuration.getAisConfiguration().getAutoAdvance())
 		{	// play round
 			if(buttonPlay.isEnabled())
-			{	thread = new Thread()
+			{	thread = new Thread("TBB.autoadvance")
 				{	public void run()
 					{	try
 						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
@@ -180,7 +180,7 @@ buttonStatistics.setEnabled(false);
 			}
 			// go back to match
 			else if(buttonMatch.isEnabled())
-			{	thread = new Thread()
+			{	thread = new Thread("TBB.autoadvance")
 				{	public void run()
 					{	try
 						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());

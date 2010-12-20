@@ -323,7 +323,7 @@ buttonStatistics.setEnabled(false);
 	{	if(Configuration.getAisConfiguration().getAutoAdvance())
 		{	// go to match
 			if(buttonMatch.isEnabled())
-			{	thread = new Thread()
+			{	thread = new Thread("TBB.autoadvance")
 				{	public void run()
 					{	try
 						{	sleep(Configuration.getAisConfiguration().getAutoAdvanceDelay());
