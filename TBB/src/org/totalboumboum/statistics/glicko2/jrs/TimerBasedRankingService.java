@@ -65,7 +65,7 @@ public class TimerBasedRankingService extends RankingService {
         this.updatePeriod = updatePeriod;
 
         // Start a timer thread to do periodic updates of player ratings
-        updateTimer = new Thread() {
+        updateTimer = new Thread("Glicko2.Timer") {
             public void run() {
                 updating = true;
                 while (updating) {
