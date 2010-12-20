@@ -46,6 +46,7 @@ public class SystemControlEvent
 	public final static String SWITCH_DISPLAY_SPRITES_POSITIONS = "SWITCH_DISPLAY_SPRITES_POSITIONS";
 	public final static String SWITCH_DISPLAY_TILES_POSITIONS = "SWITCH_DISPLAY_TILES_POSITIONS";
 	public final static String SWITCH_DISPLAY_TIME = "SWITCH_DISPLAY_TIME";
+	public final static String SWITCH_DISPLAY_USAGE = "SWITCH_DISPLAY_USAGE";
 	public final static String SWITCH_ENGINE_PAUSE = "SWITCH_ENGINE_PAUSE";
 	public final static String SWITCH_FAST_FORWARD = "SWITCH_FAST_FORWARD";
 	
