@@ -119,6 +119,12 @@ public class ServerSytemControl extends SystemControl
 				SystemControlEvent controlEvent = new SystemControlEvent(name,index);
 				loop.processEvent(controlEvent);
 			}
+			
+			// debug: CPU usage
+			else if(keyCode == KeyEvent.VK_F8)
+			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_USAGE);
+				loop.processEvent(controlEvent);
+			}
 		}
 	}
 	
