@@ -154,6 +154,7 @@ System.out.println(state);
 	/////////////////////////////////////////////////////////////////	
 	protected void initSocket()
 	{	Thread thread = new Thread(this);
+		thread.setName("TBB.clientconnection");
 		thread.start();
 	}
 	
