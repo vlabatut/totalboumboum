@@ -92,8 +92,7 @@ public class DisplayTilesPositions implements Display
 		if(s)
 		{	// positions expressed in tiles
 			if(m)
-			{	g.setColor(Color.CYAN);
-				Font font = new Font("Dialog", Font.PLAIN, 12);
+			{	Font font = new Font("Dialog", Font.PLAIN, 12);
 				g.setFont(font);
 				FontMetrics metrics = g.getFontMetrics(font);
 				for(int line=0;line<globalHeight;line++)
@@ -103,14 +102,16 @@ public class DisplayTilesPositions implements Display
 						Rectangle2D box = metrics.getStringBounds(text, g);
 						int x = (int)Math.round(temp.getPosX()-box.getWidth()/2);
 						int y = (int)Math.round(temp.getPosY()+box.getHeight()/2);
-						g.drawString(text, x, y);
+						g.setColor(Color.BLACK);
+						g.drawString(text,x+1,y+1);
+						g.setColor(Color.CYAN);
+						g.drawString(text,x,y);
 					}
 				}
 			}
 			// positions expressed in pixels
 			else
 			{	// coordonnées
-				g.setColor(Color.CYAN);
 				Font font = new Font("Dialog", Font.PLAIN, 12);
 				g.setFont(font);
 				FontMetrics metrics = g.getFontMetrics(font);
@@ -123,10 +124,16 @@ public class DisplayTilesPositions implements Display
 						Rectangle2D boxY = metrics.getStringBounds(textY, g);
 						int x = (int)Math.round(temp.getPosX()-boxX.getWidth()/2);
 						int y = (int)Math.round(temp.getPosY());
-						g.drawString(textX, x, y);
+						g.setColor(Color.BLACK);
+						g.drawString(textX,x+1,y+1);
+						g.setColor(Color.CYAN);
+						g.drawString(textX,x,y);
 						x = (int)Math.round(temp.getPosX()-boxY.getWidth()/2);
 						y = (int)Math.round(temp.getPosY()+boxY.getHeight());
-						g.drawString(textY, x, y);
+						g.setColor(Color.BLACK);
+						g.drawString(textY,x+1,y+1);
+						g.setColor(Color.CYAN);
+						g.drawString(textY,x,y);
 					}
 				}
 			}

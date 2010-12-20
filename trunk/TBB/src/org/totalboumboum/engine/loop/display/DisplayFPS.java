@@ -75,8 +75,7 @@ public class DisplayFPS implements Display
 	@Override
 	public void draw(Graphics g)
 	{	if(getShow())
-		{	g.setColor(Color.CYAN);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
+		{	Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			NumberFormat nf = NumberFormat.getInstance();
@@ -91,7 +90,10 @@ public class DisplayFPS implements Display
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(50+box.getHeight()/2);
-			g.drawString(text, x, y);
+			g.setColor(Color.BLACK);
+			g.drawString(text,x+1,y+1);
+			g.setColor(Color.CYAN);
+			g.drawString(text,x,y);
 		}
 	}
 }

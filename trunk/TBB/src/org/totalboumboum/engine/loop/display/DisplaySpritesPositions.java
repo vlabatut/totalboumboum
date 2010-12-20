@@ -98,26 +98,27 @@ public class DisplaySpritesPositions implements Display
 		if(s>0)
 		{	for(Sprite sprite: sprites)
 			{	boolean go = false;
+				Color color = null;
 				if(sprite instanceof Floor)
 					go = false;
 				if(sprite instanceof Hero)
-				{	g.setColor(Color.WHITE);
+				{	color = Color.WHITE;
 					go = show==1 || show==6;
 				}
 				else if(sprite instanceof Block)
-				{	g.setColor(Color.GRAY);
+				{	color = Color.GRAY;
 					go = show==2 || show==6;
 				}
 				else if(sprite instanceof Bomb)
-				{	g.setColor(Color.WHITE);
+				{	color = Color.WHITE;
 					go = show==3 || show==6;
 				}
 				else if(sprite instanceof Item)
-				{	g.setColor(Color.WHITE);
+				{	color = Color.WHITE;
 					go = show==4 || show==6;
 				}
 				else if(sprite instanceof Fire)
-				{	g.setColor(Color.BLACK);
+				{	color = Color.BLACK;
 					go = show==5 || show==6;
 				}
 				if(go)
@@ -133,7 +134,10 @@ public class DisplaySpritesPositions implements Display
 						Rectangle2D box = metrics.getStringBounds(text, g);
 						int x = (int)Math.round(sprite.getCurrentPosX()-box.getWidth()/2);
 						int y = (int)Math.round(sprite.getCurrentPosY()+box.getHeight()/2);
-						g.drawString(text, x, y);
+						g.setColor(Color.BLACK);
+						g.drawString(text,x+1,y+1);
+						g.setColor(color);
+						g.drawString(text,x,y);
 					}
 					else
 					{	// coordonnées
@@ -149,13 +153,22 @@ public class DisplaySpritesPositions implements Display
 						Rectangle2D boxZ = metrics.getStringBounds(textZ, g);
 						int x = (int)Math.round(sprite.getCurrentPosX()-boxX.getWidth()/2);
 						int y = (int)Math.round(sprite.getCurrentPosY()-boxY.getHeight()/2);
-						g.drawString(textX, x, y);
+						g.setColor(Color.BLACK);
+						g.drawString(textX,x+1,y+1);
+						g.setColor(color);
+						g.drawString(textX,x,y);
 						x = (int)Math.round(sprite.getCurrentPosX()-boxY.getWidth()/2);
 						y = (int)Math.round(sprite.getCurrentPosY()+boxY.getHeight()/2);
-						g.drawString(textY, x, y);
+						g.setColor(Color.BLACK);
+						g.drawString(textY,x+1,y+1);
+						g.setColor(color);
+						g.drawString(textY,x,y);
 						x = (int)Math.round(sprite.getCurrentPosX()-boxZ.getWidth()/2);
 						y = (int)Math.round(sprite.getCurrentPosY()+boxY.getHeight()/2+boxZ.getHeight());
-						g.drawString(textZ, x, y);
+						g.setColor(Color.BLACK);
+						g.drawString(textZ,x+1,y+1);
+						g.setColor(color);
+						g.drawString(textZ,x,y);
 					}
 				}
 			}

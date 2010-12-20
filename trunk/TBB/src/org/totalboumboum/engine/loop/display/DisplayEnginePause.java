@@ -67,15 +67,17 @@ public class DisplayEnginePause implements Display
 	@Override
 	public void draw(Graphics g)
 	{	if(loop.getEnginePause())
-		{	g.setColor(Color.MAGENTA);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
+		{	Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			String text = "Engine paused";
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(70+box.getHeight()/2);
-			g.drawString(text, x, y);
+			g.setColor(Color.BLACK);
+			g.drawString(text,x+1,y+1);
+			g.setColor(Color.MAGENTA);
+			g.drawString(text,x,y);
 		}
 	}
 }
