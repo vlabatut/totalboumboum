@@ -80,99 +80,20 @@ public class DisplayUsage implements Display
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// MONITOR			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-/*	private ThreadMXBean tmxb = null;
-	private HashMap<Long,PredefinedColor> threadIds = null;
-	private List<PredefinedColor> colors = null;
-	
-	private void initMonitor()
-	{	// init color list
-		colors = new ArrayList<PredefinedColor>();
-		List<AbstractPlayer> players = loop.getPlayers();
-		for(AbstractPlayer player: players)
-			colors.add(player.getColor());
-		
-		// init thread map
-		tmxb = ManagementFactory.getThreadMXBean();
-		threadIds = new HashMap<Long,PredefinedColor>();
-		long ids[] = tmxb.getAllThreadIds();
-		ThreadInfo[] infos = tmxb.getThreadInfo(ids);
-		for(ThreadInfo info: infos)
-		{	String name = info.getThreadName();
-			long id = info.getThreadId();
-			String[] temp = name.split(":");
-			if(temp.length>1)
-			{	PredefinedColor color = PredefinedColor.valueOf(temp[0]);
-				threadIds.put(id,color);
-			}
-		}
-	}
-*/	
-	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
 	{	int s = getShow();
-	
-/*		if(s)
-		{	// possibly init the monitor
-			if(tmxb==null)
-				initMonitor();
-			
-			// retrieve cpu times
-			long[] tids = tmxb.getAllThreadIds();
-	        ThreadInfo[] tinfos = tmxb.getThreadInfo(tids);
-	        HashMap<PredefinedColor,Long> values = new HashMap<PredefinedColor,Long>();
-	        float totalTime = 0;
-	        for(int i=0;i<tids.length;i++)
-	        {	long id = tids[i];
-	        	ThreadInfo info = tinfos[i];
-	        	long cpuTime = tmxb.getThreadCpuTime(id);
-	            // focus only on running thread
-	            if(cpuTime!=-1 && info!=null)
-	            {	// separate ai-related threads from other ones
-	            	PredefinedColor color = threadIds.get(id);
-	            	if(color!=null)
-	            		values.put(color,cpuTime);
-	            	totalTime = totalTime + cpuTime;
-	            }
-	        }
-			
-	        // process the diagram dims
-			int height = 25;
-			int width = 200;
-			int widths[] = new int[colors.size()+1];
-			int totalWidth = 0;
-			for(int i=0;i<colors.size();i++)
-			{	PredefinedColor color = colors.get(i);
-				Long cpuTime = values.get(color);
-				if(cpuTime==null)
-					cpuTime = 0l;
-				widths[i+1] = (int)(width*cpuTime/totalTime);
-				totalWidth = totalWidth + widths[i+1];
-			}
-	        widths[0] = width - (int)totalWidth;
-	        
-	        // draw the diagram
-	        int y = 50;
-	        int x = 10;
-			int offset = widths[0];
-			for(int i=0;i<colors.size();i++)
-			{	int w = widths[i+1];
-				PredefinedColor color = colors.get(i);
-				g.setColor(color.getColor());
-				g.fillRect(x+offset,y,w,height);
-				offset = offset + w;
-			}
-			g.setColor(Color.BLACK);
-			g.drawRect(x,y,width,height);
-		}
-*/		
+		
 		if(s>0)
-		{	// retrieve CPU usage
-			double[] values0 = loop.getAverageCpu();
+		{	boolean mode = getMode();
+			// retrieve CPU usage
+			double[] values0;
+			if(mode)
+				values0 = loop.getAverageCpuProportions();
+			else
+				values0 = loop.getAverageCpu();
 			
 			// init text
 			String text = null;
@@ -197,7 +118,16 @@ public class DisplayUsage implements Display
 			double[] values = new double[values0.length];
 			switch(s)
 			{	case 1: 
-					values = values0;
+					{	if(mode)
+							values = values0;
+						else
+						{	double total = 0;
+							for(int i=0;i<values0.length;i++)
+								total = total + values0[i];
+							for(int i=0;i<values0.length;i++)
+								values[i] = values0[i]/total;
+						}
+					}
 					break;
 				case 2:
 					{	double total = values0[0] + values0[1];
@@ -208,11 +138,13 @@ public class DisplayUsage implements Display
 					}
 					break;
 				case 3:
-					{	double total = 1 - values0[0] - values0[1];
-						for(int i=1;i<values0.length;i++)
-							values[i] = values0[i]/total;
+					{	double total = 0;
+						for(int i=2;i<values0.length;i++)
+							total = total + values0[i];
 						values[0] = 0;
 						values[1] = 0;
+						for(int i=2;i<values0.length;i++)
+							values[i] = values0[i]/total;
 					}
 					break;
 			}
@@ -281,11 +213,22 @@ public class DisplayUsage implements Display
 			g.drawString(text,xText,yText);
 			
 			// put the details
-			if(getMode())
-			{	NumberFormat nf = NumberFormat.getPercentInstance();
-				nf.setMinimumIntegerDigits(2);
-				nf.setMinimumFractionDigits(4);
-				nf.setMaximumFractionDigits(4);
+			//if(getMode())
+			{	NumberFormat nf;
+				String unit;
+				if(mode)
+				{	nf = NumberFormat.getPercentInstance();
+					nf.setMinimumIntegerDigits(2);
+					nf.setMinimumFractionDigits(4);
+					nf.setMaximumFractionDigits(4);
+					unit = "";
+				}
+				else
+				{	nf = NumberFormat.getIntegerInstance();
+					nf.setMinimumIntegerDigits(6);
+					values = values0;
+					unit = " ms ";
+				}
 				List<AbstractPlayer> plrs = loop.getPlayers();
 				
 				offset = 0;
@@ -305,7 +248,7 @@ public class DisplayUsage implements Display
 								text = plrs.get(i-2).getName();
 						
 						}
-						text = nf.format(values[i])+" ["+text+"]";
+						text = nf.format(values[i])+unit+" ["+text+"]";
 						// process size and location
 						box = metrics.getStringBounds(text,g);
 						boxHeight = (int)box.getHeight();

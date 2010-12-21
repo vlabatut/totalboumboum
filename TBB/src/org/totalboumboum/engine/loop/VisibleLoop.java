@@ -370,9 +370,10 @@ public abstract class VisibleLoop extends Loop
 	protected double averageUPS = 0.0;
 	protected double fpsStore[];
 	protected double upsStore[];
-	protected double cpuStore[][];
-	protected double averageCpu[];
+	protected long cpuStore[][];
 	protected long cpuPrev[];
+	protected double averageCpu[];
+	protected double averageCpuProportions[];
 	protected ThreadMXBean tmxb = null;
 	protected HashMap<Long,PredefinedColor> threadIds = null;
 	protected List<PredefinedColor> colors = null;
@@ -388,6 +389,10 @@ public abstract class VisibleLoop extends Loop
 	
 	public double[] getAverageCpu()
 	{	return averageCpu;
+	}
+
+	public double[] getAverageCpuProportions()
+	{	return averageCpuProportions;
 	}
 
 	protected void initStats()
@@ -411,12 +416,14 @@ public abstract class VisibleLoop extends Loop
 		cpuPrev = new long[pc];
 		Arrays.fill(cpuPrev,0);
 		averageCpu = new double[pc];
-		Arrays.fill(averageCpu,1/pc);
+		Arrays.fill(averageCpu,0);
+		averageCpuProportions = new double[pc];
+		Arrays.fill(averageCpuProportions,1/pc);
 
-		cpuStore = new double[NUM_VALUES][pc];
+		cpuStore = new long[NUM_VALUES][pc];
 		for(int k=0;k<NUM_VALUES;k++)
 		{	for(int i=0;i<pc;i++)
-			{	cpuStore[k][i] = 1/pc;
+			{	cpuStore[k][i] = 0;
 			}
 		}
 
@@ -511,7 +518,7 @@ public abstract class VisibleLoop extends Loop
         {	long id = tids[i];
         	ThreadInfo info = tinfos[i];
         	long cpuTime = tmxb.getThreadCpuTime(id)/1000000;
-        	//System.out.println(info.getThreadName()+": "+cpuTime);        	
+        	System.out.println(info.getThreadName()+": "+cpuTime);        	
             // focus only on running threads
             if(cpuTime!=-1 && info!=null)
             {	// separate ai-related, engine-related and swing-related threads
@@ -531,13 +538,17 @@ public abstract class VisibleLoop extends Loop
             	}
             }
         }
-        //System.out.println("-------------totalTime: "+totalTime);
+        System.out.println("xxxxxxxxxxxxxxx");
         
         // process difference with previous values
         long currentCpu[] = new long[colors.size()+2];
         currentCpu[0] = swingValue - cpuPrev[0];
+        cpuPrev[0] = swingValue;
+        System.out.println("swing: "+currentCpu[0]);
         currentCpu[1] = engineValue - cpuPrev[1];
-		double timeTotal = currentCpu[0] + currentCpu[1];
+        cpuPrev[1] = engineValue;
+        System.out.println("engine: "+currentCpu[1]);
+		//double timeTotal = currentCpu[0] + currentCpu[1];
 		for(int i=0;i<colors.size();i++)
 		{	PredefinedColor color = colors.get(i);
 			Long cpuTime = values.get(color);
@@ -549,14 +560,14 @@ public abstract class VisibleLoop extends Loop
 			{	currentCpu[i+2] = cpuTime - cpuPrev[i+2];
 	      		cpuPrev[i+2] = cpuTime;
 			}
-			timeTotal = timeTotal + currentCpu[i+2];
-			//System.out.print(currentCpu[i+2]+" ");		
+	        System.out.println(color+": "+currentCpu[i+2]);
 		}
+        System.out.println("---------------");
      	
 		// normalize to get proportions and store the latest CPU usage (proportions)
 		for(int i=0;i<currentCpu.length;i++)
-		{	double temp = currentCpu[i] / timeTotal;
-			cpuStore[(int)statsCount%NUM_VALUES][i] = temp;
+		{	//double temp = currentCpu[i] / timeTotal;
+			cpuStore[(int)statsCount%NUM_VALUES][i] = currentCpu[i];
 		}
       	
   		// total the stored usage values
@@ -569,8 +580,13 @@ public abstract class VisibleLoop extends Loop
   		}
   		
   		int norm = (int)Math.min(statsCount+1,NUM_VALUES);
+  		double totalTime = 0;
   		for(int j=0;j<averageCpu.length;j++)
-  			averageCpu[j] = totalUsage[j]/norm;
+  		{	averageCpu[j] = totalUsage[j]/norm;
+			totalTime = totalTime + averageCpu[j];
+  		}
+  		for(int j=0;j<averageCpu.length;j++)
+  			averageCpuProportions[j] = averageCpu[j]/totalTime;
     }
 
 	/////////////////////////////////////////////////////////////////

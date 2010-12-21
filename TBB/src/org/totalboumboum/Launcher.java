@@ -1516,4 +1516,5 @@ public class Launcher
 	// TODO utiliser le calcul d'occupation CPU pour limiter les IA trop gourmandes
 	// TODO calculer un temps d'occupation "normal" (avant le jeu) et s'en servir de réf pour le temps en cours de jeu
 	// TODO arrêter les threads dont les ia ont été éliminées du jeu
+	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
 }

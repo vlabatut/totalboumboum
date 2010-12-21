@@ -103,7 +103,7 @@ public class DisplayPlayersNames implements Display
 					NumberFormat nf = NumberFormat.getPercentInstance();
 					nf.setMinimumIntegerDigits(2);
 					nf.setMaximumFractionDigits(2);
-					String usageText = nf.format(loop.getAverageCpu()[i+2]);
+					String usageText = nf.format(loop.getAverageCpuProportions()[i+2]);
 					//System.out.println(loop.getAverageCpu()[i+1]);					
 					Rectangle2D usageBox = metrics.getStringBounds(usageText,g);
 					double usageBoxWidth = usageBox.getWidth();
