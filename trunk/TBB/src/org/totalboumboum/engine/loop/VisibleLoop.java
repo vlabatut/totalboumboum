@@ -518,7 +518,7 @@ public abstract class VisibleLoop extends Loop
         {	long id = tids[i];
         	ThreadInfo info = tinfos[i];
         	long cpuTime = tmxb.getThreadCpuTime(id)/1000000;
-        	System.out.println(info.getThreadName()+": "+cpuTime);        	
+        	//System.out.println(info.getThreadName()+": "+cpuTime);        	
             // focus only on running threads
             if(cpuTime!=-1 && info!=null)
             {	// separate ai-related, engine-related and swing-related threads
@@ -538,16 +538,16 @@ public abstract class VisibleLoop extends Loop
             	}
             }
         }
-        System.out.println("xxxxxxxxxxxxxxx");
+        //System.out.println("xxxxxxxxxxxxxxx");
         
         // process difference with previous values
         long currentCpu[] = new long[colors.size()+2];
         currentCpu[0] = swingValue - cpuPrev[0];
         cpuPrev[0] = swingValue;
-        System.out.println("swing: "+currentCpu[0]);
+        //System.out.println("swing: "+currentCpu[0]);
         currentCpu[1] = engineValue - cpuPrev[1];
         cpuPrev[1] = engineValue;
-        System.out.println("engine: "+currentCpu[1]);
+        //System.out.println("engine: "+currentCpu[1]);
 		//double timeTotal = currentCpu[0] + currentCpu[1];
 		for(int i=0;i<colors.size();i++)
 		{	PredefinedColor color = colors.get(i);
@@ -560,9 +560,9 @@ public abstract class VisibleLoop extends Loop
 			{	currentCpu[i+2] = cpuTime - cpuPrev[i+2];
 	      		cpuPrev[i+2] = cpuTime;
 			}
-	        System.out.println(color+": "+currentCpu[i+2]);
+	        //System.out.println(color+": "+currentCpu[i+2]);
 		}
-        System.out.println("---------------");
+        //System.out.println("---------------");
      	
 		// normalize to get proportions and store the latest CPU usage (proportions)
 		for(int i=0;i<currentCpu.length;i++)
