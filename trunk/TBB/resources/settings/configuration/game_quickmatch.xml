@@ -16,9 +16,11 @@
 	<players>
 		<player file="b55b4e19-cc7c-4f79-8444-dfb774317119" color="PINK" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="7c2b4e66-3a14-4253-a0db-5dd6742e579b" color="PURPLE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="3c898e42-a3e2-4b6d-866e-f672ec19d326" color="RED" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tournament201011" folder="qualif4" allowedPlayers="1 2 3 4 5" />
+		<level pack="tournament201011" folder="bombfest" allowedPlayers="1 2 3 4" />
 	</levels>
 </gameQuickmatch>
 
