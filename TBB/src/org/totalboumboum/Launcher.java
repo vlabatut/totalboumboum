@@ -930,7 +930,7 @@ public class Launcher
 	 * - Divers :
 	 * 		- ébauche de mode réseau
 	 * 		- nouveau thème pour le tournoi 4
-	 * 		- nouveaux niveaux pour la qualif et le tournoi
+	 * 		- nouveaux niveaux pour la qualif et le tournoi: bombfest, qualif4, hurry
 	 * TODO : synthétiser les news du forum kik pr toutes les v.19
 	 */
 
@@ -1524,4 +1524,8 @@ public class Launcher
 	// TODO calculer un temps d'occupation "normal" (avant le jeu) et s'en servir de réf pour le temps en cours de jeu
 	// TODO arrêter les threads dont les ia ont été éliminées du jeu
 	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
+	// TODO voir pourquoi les bombes n'apparaissent pas à l'init du niveau
+	// p-ê l'absence d'ability pour l'apparition initiale ?
+	// TODO màj l'image de carrefour et hurry
+	// TODO définir les qualif/tournoi/supercup
 }

@@ -59,7 +59,7 @@ public class LevelTools
 	public static void main(String[] args) throws Exception
 	{	
 		// create a level from scratch
-		HollowLevel level = initLevel(15,15,"temp","level","superbomberman1","tournament4");
+		HollowLevel level = initLevel(9,9,"levelpack","levelname","superbomberman1","tournament4");
 		setBackground(level);
 		addGrid(level);
 		addBorder(level,2,1,1,1);
@@ -73,8 +73,8 @@ public class LevelTools
 		saveLevel(level);
 				
 /*		// open an existing level and replace the background
-		String pack = "level";
-		String folder = "level";
+		String pack = "tournament201011";
+		String folder = "carrefour";
 		XmlTools.init();
 		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
 		removeBackground(level);
@@ -165,7 +165,7 @@ public class LevelTools
 		levelInfo.setGlobalWidth(width);
 		levelInfo.setMaximize(true);
 		levelInfo.setSource("original");
-		levelInfo.setTitle("[Level title]");
+		levelInfo.setTitle(name);
 		levelInfo.setInstanceName(instance);
 		levelInfo.setPreview("preview.jpg");
 		levelInfo.setThemeName(theme);
@@ -327,6 +327,8 @@ public class LevelTools
 		String theme = levelInfo.getThemeName();
 		String path = FilePaths.getInstancesPath()+File.separator+instance+File.separator+FileNames.FILE_THEMES+File.separator+theme+File.separator+"floors";
 		File folder = new File(path);
+		int lvHeight = levelInfo.getGlobalHeight();
+		int lvWidth = levelInfo.getGlobalWidth();
 		
 		// process bg dimensions
 		int bgWidth = -1;
@@ -368,11 +370,15 @@ public class LevelTools
 		nf.setMinimumIntegerDigits(2);
 		for(int line=0;line<bgHeight;line++)
 		{	for(int col=0;col<=bgWidth;col++)
-			{	ZoneTile tile = zone.getTile(bgUp+line,bgLeft+col);
-				String floorName = nf.format(line)+"_"+nf.format(col);
-				File tempFile = new File(path+File.separator+floorName);
-				if(tempFile.exists())
-					tile.setFloor(floorName);
+			{	int l = bgUp+line;
+				int c = bgLeft+col;
+				if(l>=0 && l<lvHeight && c>=0 && c<lvWidth)
+				{	ZoneTile tile = zone.getTile(bgUp+line,bgLeft+col);
+					String floorName = nf.format(line)+"_"+nf.format(col);
+					File tempFile = new File(path+File.separator+floorName);
+					if(tempFile.exists())
+						tile.setFloor(floorName);
+				}
 			}
 		}
 	}

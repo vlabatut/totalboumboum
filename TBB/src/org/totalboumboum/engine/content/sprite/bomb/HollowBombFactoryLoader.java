@@ -54,7 +54,7 @@ public class HollowBombFactoryLoader extends HollowSpriteFactoryLoader
 	 * because the bombset is always loaded in a neutral way, without graphics.
 	 * it is then completed depending on the needed colors (but the rest of the features stay the same) 
 	 */
-	public static HollowBombFactory loadBombFactory(String folderPath, String bombName, HashMap<String,HollowBombFactory> abstractBombs) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static HollowBombFactory loadBombFactory(String folderPath, String bombName, HashMap<String,HollowBombFactory> abstractBombs, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HollowBombFactory result = new HollowBombFactory();
 		Element root = HollowSpriteFactoryLoader.openFile(folderPath);
@@ -114,6 +114,8 @@ public class HollowBombFactoryLoader extends HollowSpriteFactoryLoader
 		HollowTrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// result
+		if(!isAbstract)
+			initDefaultGestures(gesturePack,Role.BOMB);
 		return result;
 	}	
 }
