@@ -175,7 +175,7 @@ public class Bombset extends AbstractBombset
 		return result;
 	}
 
-	//NOTE not tested yet
+	// NOTE not tested yet
 	// NOTE we don't really have to make fire, we can directly check in the factory's abilities
 	public long getCurrentExplosionDuration(Sprite sprite)
 	{	BombFactory bf = getCurrentBombFactory(sprite);
