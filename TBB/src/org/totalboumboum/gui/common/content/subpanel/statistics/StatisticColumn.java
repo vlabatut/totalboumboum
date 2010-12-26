@@ -481,7 +481,13 @@ public enum StatisticColumn
 				list.add(playerId);
 			}
 			else if(this==GENERAL_TYPE)
-			{	Boolean type = profile.getAiName()!=null;
+			{	Integer type;
+				if(profile.isRemote())
+					type = 0;
+				else if(profile.hasAi())
+					type = 1;
+				else
+					type = 2;
 				list.add(type);
 				list.add(playerId);
 			}
