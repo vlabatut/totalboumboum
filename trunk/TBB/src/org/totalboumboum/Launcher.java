@@ -922,9 +922,16 @@ public class Launcher
 	 * + beta.020
 	 * - Moteur :
 	 * - GUI :
+	 * 		- indicateur d'occupation de CPU
 	 * - IA :
+	 * 		- modèle de simulation
 	 * - stats :
+	 * 		- correction d'un bug concernant le classement des joueurs en fonctions du type
 	 * - Divers :
+	 * 		- ébauche de mode réseau
+	 * 		- nouveau thème pour le tournoi 4
+	 * 		- nouveaux niveaux pour la qualif et le tournoi
+	 * TODO : synthétiser les news du forum kik pr toutes les v.19
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1517,5 +1524,4 @@ public class Launcher
 	// TODO calculer un temps d'occupation "normal" (avant le jeu) et s'en servir de réf pour le temps en cours de jeu
 	// TODO arrêter les threads dont les ia ont été éliminées du jeu
 	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
-	// TODO pb quand on ordonne les joueurs dans l'écran des stats et qu'y a des joueurs distants : ordre pas bon
 }
