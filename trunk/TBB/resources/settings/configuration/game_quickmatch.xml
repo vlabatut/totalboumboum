@@ -20,6 +20,7 @@
 		<player file="3c898e42-a3e2-4b6d-866e-f672ec19d326" color="RED" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
+		<level pack="tournament201011" folder="bombfest" allowedPlayers="1 2 3 4" />
 		<level pack="tournament201011" folder="hurry" allowedPlayers="1 2 3 4" />
 	</levels>
 </gameQuickmatch>

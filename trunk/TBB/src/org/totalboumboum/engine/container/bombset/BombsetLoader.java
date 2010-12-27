@@ -172,11 +172,11 @@ public class BombsetLoader
 			}
 		
 			// result
-			HollowBombFactory bombFactory = HollowBombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs,true);
+			HollowBombFactory bombFactory = HollowBombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs,false);
 			bombset.addBombFactory(bombFactory,abilities);
 		}
 		else
-		{	HollowBombFactory bombFactory = HollowBombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs,false);
+		{	HollowBombFactory bombFactory = HollowBombFactoryLoader.loadBombFactory(individualFolder,name,abstractBombs,true);
 			abstractBombs.put(name,bombFactory);
 		}
     }
