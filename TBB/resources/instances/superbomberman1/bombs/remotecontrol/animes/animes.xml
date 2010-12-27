@@ -27,7 +27,14 @@
 	</shadows>
 	
 	<gestures folder="pictures">
-		<gesture name="BOUNCING" repeat="true" shadow="shadow" shadowYShift="-3">
+		<gesture name="APPEARING" folder="appearing" repeat="false" shadow="shadow" >
+			<direction name="NONE">
+				<step duration="75" file="1.gif" />
+				<step duration="75" file="2.gif" />
+				<step duration="75" file="3.gif" />
+			</direction>
+		</gesture>
+		<gesture name="BOUNCING" folder="standing" repeat="true" shadow="shadow" shadowYShift="-3">
 			<direction name="NONE">
 				<step duration="300" file="1.gif" />
 				<step duration="300" file="2.gif" />
@@ -40,28 +47,28 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="LANDING" repeat="true" shadow="shadow" >
+		<gesture name="LANDING" folder="standing" repeat="true" shadow="shadow" >
 			<direction name="NONE">
 				<step duration="300" file="1.gif" />
 				<step duration="300" file="2.gif" />
 			</direction>
 		</gesture>
 		
-		<gesture name="PUNCHED" repeat="true" shadow="shadow">
+		<gesture name="PUNCHED" folder="standing" repeat="true" shadow="shadow">
 			<direction name="NONE">
 				<step duration="300" file="1.gif" />
 				<step duration="300" file="2.gif" />
 			</direction>
 		</gesture>
 		
-		<gesture name="SLIDING" repeat="true" shadow="shadow">
+		<gesture name="SLIDING" folder="standing" repeat="true" shadow="shadow">
 			<direction name="NONE">
 				<step duration="300" file="1.gif" />
 				<step duration="300" file="2.gif" />
 			</direction>
 		</gesture>
 		
-		<gesture name="STANDING" repeat="true" shadow="shadow" >
+		<gesture name="STANDING" folder="standing" repeat="true" shadow="shadow" >
 			<direction name="NONE">
 				<step duration="300" file="1.gif" />
 				<step duration="300" file="2.gif" />
