@@ -12,6 +12,11 @@
 			<name value="BOMB_TRIGGER_COMBUSTION" />
 		</ability>
 			
+<!--  	SPRITE_ENTRY_DURATION --> 
+		<ability strength="500" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_ENTRY_DURATION" />
+		</ability>
+			
 		<!-- ACTION -->
 <!--  	APPEAR -->
 		<ability frame="false" strength="1" time="-1" uses="-1" >
