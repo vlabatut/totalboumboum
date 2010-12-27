@@ -930,6 +930,7 @@ public class Launcher
 	 * 		- correction d'un bug concernant le classement des joueurs en fonctions du type
 	 * - Divers :
 	 * 		- ébauche de mode réseau
+	 * 		- animation d'apparition des bombes
 	 * 		- nouveau thème pour le tournoi 4
 	 * 		- nouveaux niveaux pour la qualif et le tournoi: bombfest, qualif4, hurry
 	 * TODO : synthétiser les news du forum kik pr toutes les v.19
@@ -1527,5 +1528,4 @@ public class Launcher
 	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
 	// TODO màj l'image de carrefour et hurry
 	// TODO définir les qualif/tournoi/supercup
-	// TODO définir l'anime d'apparition des bombes (petite devient grande)
 }
