@@ -1527,4 +1527,5 @@ public class Launcher
 	// TODO arrêter les threads dont les ia ont été éliminées du jeu
 	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
 	// TODO définir les qualif/tournoi/supercup
+	// TODO finir IA
 }
