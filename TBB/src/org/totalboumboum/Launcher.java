@@ -1526,6 +1526,5 @@ public class Launcher
 	// TODO calculer un temps d'occupation "normal" (avant le jeu) et s'en servir de réf pour le temps en cours de jeu
 	// TODO arrêter les threads dont les ia ont été éliminées du jeu
 	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
-	// TODO màj l'image de carrefour et hurry
 	// TODO définir les qualif/tournoi/supercup
 }
