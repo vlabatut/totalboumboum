@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<points
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../schemas/point.xsd">
+	
+	<notes>
+		<line value="Just the total of the points scored at each round" />
+	</notes>
+
+	<total />
+		
+</points>
