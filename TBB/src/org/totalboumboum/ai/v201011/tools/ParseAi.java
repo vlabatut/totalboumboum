@@ -48,11 +48,12 @@ import org.totalboumboum.tools.files.FileNames;
 public class ParseAi
 {	private static boolean verbose = false;
 	private final static List<String> IGNORED_PACKAGES = Arrays.asList(new String[]
- 	{	"v1","v1_1","v1_2","v1_3",
+ 	{	
+		"v1","v1_1","v1_2","v1_3",
  		"v2","v2_1","v2_2","v2_3",
- 		"v3","v3_1","v3_2","v3_3"
-// 		"v4","v4_1","v4_2","v4_3",
-// 		"v5_1"
+ 		"v3","v3_1","v3_2","v3_3",
+ 		"v4","v4_1","v4_2","v4_3"
+// 		"v5","v5_1"
  	});
 	
 	public static void main(String[] args) throws IOException, ParseException

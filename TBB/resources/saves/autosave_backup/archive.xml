@@ -2,10 +2,10 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Qualification du tournoi 2010/11" type="SINGLE" />
 	<played matches="0" rounds="11" />
-	<dates start="2010-12-28T21:35:44" save="2010-12-28T21:46:01" />
+	<dates start="2010-12-29T18:19:23" save="2010-12-29T18:30:16" />
 	<players>
-		<player name="1011.Hacıbektaşoğlu+İlgar" />
-		<player name="Joueur humain" />
+		<player name="1011.Göçmenoğlu+Hekimoğlu" />
+		<player name="Suiveur" />
 	</players>
 </archive>
 
