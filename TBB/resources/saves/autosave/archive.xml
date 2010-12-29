@@ -2,9 +2,9 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Qualification du tournoi 2010/11" type="SINGLE" />
 	<played matches="1" rounds="12" />
-	<dates start="2010-12-29T18:19:23" save="2010-12-29T18:31:36" />
+	<dates start="2010-12-29T22:24:11" save="2010-12-29T22:34:04" />
 	<players>
-		<player name="1011.Göçmenoğlu+Hekimoğlu" />
+		<player name="1011.Akbulut+Küpelioğlu" />
 		<player name="Suiveur" />
 	</players>
 </archive>

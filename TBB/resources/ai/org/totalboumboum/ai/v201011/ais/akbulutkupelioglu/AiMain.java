@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201011.ais.akbulutkupelioglu;
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
-import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v4.AkbulutKupelioglu;
+import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v5.AkbulutKupelioglu;
 
 /**
  * classe utilisee par le moteur du jeu pour retrouver les IA
