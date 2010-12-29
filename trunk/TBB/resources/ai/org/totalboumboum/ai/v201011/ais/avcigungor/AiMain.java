@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201011.ais.avcigungor;
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
-import org.totalboumboum.ai.v201011.ais.avcigungor.v2.AvciGungor;
+import org.totalboumboum.ai.v201011.ais.avcigungor.v5.AvciGungor;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA

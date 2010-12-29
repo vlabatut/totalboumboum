@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201011.ais.goncuonat;
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
-import org.totalboumboum.ai.v201011.ais.goncuonat.v4.GoncuOnat;
+import org.totalboumboum.ai.v201011.ais.goncuonat.v5.GoncuOnat;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
