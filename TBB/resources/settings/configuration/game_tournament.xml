@@ -3,8 +3,8 @@
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
 	<tournament name="Trnmt201011_qualif" />
 	<players>
-		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="2" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="7e28f68c-d361-4a95-b053-f6362bff7b71" color="BLUE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 
