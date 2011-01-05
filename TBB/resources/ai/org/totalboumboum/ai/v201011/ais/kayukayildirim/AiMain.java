@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201011.ais.kayukayildirim;
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
-import org.totalboumboum.ai.v201011.ais.kayukayildirim.v1.KayukaYildirim;
+import org.totalboumboum.ai.v201011.ais.kayukayildirim.v6.KayukaYildirim;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA

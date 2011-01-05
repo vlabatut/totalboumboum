@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201011.ais.buyuktopacturak;
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
-import org.totalboumboum.ai.v201011.ais.buyuktopacturak.v5.BuyuktopacTurak;
+import org.totalboumboum.ai.v201011.ais.buyuktopacturak.v6.BuyuktopacTurak;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
