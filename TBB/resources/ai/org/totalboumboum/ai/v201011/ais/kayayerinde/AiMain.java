@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v201011.ais.kayayerinde;
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
-import org.totalboumboum.ai.v201011.ais.kayayerinde.v3.KayaYerinde;
+import org.totalboumboum.ai.v201011.ais.kayayerinde.v6.KayaYerinde;
 
 /**
  * classe utilisée par le moteur du jeu pour retrouver les IA
