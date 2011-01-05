@@ -1528,4 +1528,5 @@ public class Launcher
 	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
 	// TODO définir les qualif/tournoi/supercup
 	// TODO finir IA
+	//	optimisation : poser bombe juste en sortant de la case (pixels) histoire d'éviter de se faire bloquer par le gus qui est devant
 }
