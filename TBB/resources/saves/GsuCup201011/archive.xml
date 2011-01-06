@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Tournoi de Galatasaray IV" type="CUP" />
-	<played matches="3" rounds="6" />
-	<dates start="2011-01-06T13:48:36" save="2011-01-06T14:31:21" />
+	<played matches="4" rounds="7" />
+	<dates start="2011-01-06T10:23:32" save="2011-01-06T10:48:36" />
 	<players>
 		<player name="1011.Göçmenoğlu+Hekimoğlu" />
 		<player name="1011.Akbulut+Küpelioğlu" />
