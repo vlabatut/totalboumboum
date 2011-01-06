@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.tests._monia;
+package org.totalboumboum.ai.tests.ais._monia;
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
 

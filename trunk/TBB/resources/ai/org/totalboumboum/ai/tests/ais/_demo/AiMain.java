@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.tests._demo;
+package org.totalboumboum.ai.tests.ais._demo;
 
 import org.totalboumboum.ai.v201011.adapter.AiManager;
 

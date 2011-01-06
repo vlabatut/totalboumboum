@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+	<tournament name="Super-coupe de Galatasaray III" type="SINGLE" />
+	<played matches="1" rounds="5" />
+	<dates start="2011-01-06T13:18:36" save="2011-01-06T13:26:37" />
+	<players>
+		<player name="0708.Bingöl+Ketenci" />
+		<player name="0809.Erişik+Pektaş" />
+		<player name="0910.Doruk+Küpelioğlu" />
+		<player name="1011.Kesimal+Varol" />
+		<player name="1011.Göçmenoğlu+Hekimoğlu" />
+	</players>
+</archive>
+
