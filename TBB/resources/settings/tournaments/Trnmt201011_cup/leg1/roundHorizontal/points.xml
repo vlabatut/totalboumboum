@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<points
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../../schemas/point.xsd">
+	
+	<notes>
+		<line value="Les points sont donnés directement en fonction du rang des joueurs." />
+		<line value="Ce rang dépend du nombre de joueurs explosés." />
+	</notes>
+
+	<rankpoints exaequoShare="true">
+		<rankings>
+			<scores type="TIME" />
+			<scores type="BOMBINGS"/>
+		</rankings>
+		<values>
+			<value value="8"/>
+			<value value="4"/>
+			<value value="2"/>
+			<value value="1"/>
+		</values>
+	</rankpoints>	
+		
+</points>

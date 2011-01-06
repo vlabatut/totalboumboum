@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Qualification du tournoi 2010/11" type="SINGLE" />
-	<played matches="1" rounds="12" />
-	<dates start="2011-01-06T00:36:40" save="2011-01-06T00:48:02" />
+	<tournament name="Tournoi de Galatasaray IV" type="CUP" />
+	<played matches="2" rounds="1" />
+	<dates start="2011-01-06T09:32:39" save="2011-01-06T09:33:40" />
 	<players>
-		<player name="1011.Arık+Yaman" />
-		<player name="Suiveur" />
+		<player name="1011.Göçmenoğlu+Hekimoğlu" />
+		<player name="1011.Akbulut+Küpelioğlu" />
+		<player name="1011.Hacıbektaşoğlu+İlgar" />
+		<player name="1011.Özdöker+Özen" />
+		<player name="1011.İsbir+Koyaş" />
+		<player name="1011.Çalışkan+Seven" />
+		<player name="1011.Kesimal+Varol" />
+		<player name="1011.Büyüktopaç+Turak" />
 	</players>
 </archive>
 
