@@ -374,8 +374,12 @@ public class Match implements StatisticHolder, Serializable
 			result.addRound(copy);
 		}
 		// misc
+		result.setAuthor(author);
+		result.setName(name);
+//		result.currentIndex = currentIndex);
 		result.setNotes(notes);
 		result.setLimits(limits);
+		result.setRandomOrder(randomOrder);
 		return result;
 	}
 }
