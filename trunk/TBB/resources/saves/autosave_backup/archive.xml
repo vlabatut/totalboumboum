@@ -2,9 +2,9 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Qualification du tournoi 2010/11" type="SINGLE" />
 	<played matches="0" rounds="11" />
-	<dates start="2011-01-03T17:53:28" save="2011-01-03T18:04:22" />
+	<dates start="2011-01-06T00:36:40" save="2011-01-06T00:47:03" />
 	<players>
-		<player name="1011.Kesimal+Varol" />
+		<player name="1011.Arık+Yaman" />
 		<player name="Suiveur" />
 	</players>
 </archive>
