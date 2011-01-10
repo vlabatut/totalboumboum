@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 
-public class OutilesCollecte {
+public class OutilsCollecte {
 
 	TileControleur tileControleur;
 	List<AiItem> lesBonus;
@@ -20,7 +20,7 @@ public class OutilesCollecte {
 	List<AiTile> tilesPossible=new ArrayList<AiTile>();
 	AiHero notreHero;
 	
-	public OutilesCollecte(OzdokerOzen ai,AiZone gameZone,int[][] matrice) throws StopRequestException {
+	public OutilsCollecte(OzdokerOzen ai,AiZone gameZone,int[][] matrice) throws StopRequestException {
 		ai.checkInterruption();
 		tileControleur=new TileControleur(ai, matrice);
 		abc=ai;

@@ -9,7 +9,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiHero;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
-public class OutilesMur {
+public class OutilsMur {
 
 	TileControleur tileControleur;
 	ArtificialIntelligence abc;
@@ -24,7 +24,7 @@ public class OutilesMur {
 	int BONUS=10;
 	int SCOPE=-3;
 	
-	public OutilesMur(OzdokerOzen ai,int matrice[][]) throws StopRequestException {
+	public OutilsMur(OzdokerOzen ai,int matrice[][]) throws StopRequestException {
 		ai.checkInterruption();
 		// initiliasation
 		tileControleur=new TileControleur(ai, matrice);
