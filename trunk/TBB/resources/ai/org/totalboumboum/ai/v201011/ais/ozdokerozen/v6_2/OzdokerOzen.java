@@ -102,13 +102,13 @@ public class OzdokerOzen extends ArtificialIntelligence
 	ChoisirMode choisirMode;
 
 	/** un object de class OutilesCollecte*/
-	OutilesCollecte outilesCollecte;
+	OutilsCollecte outilesCollecte;
 	
 	/**un object de class OutilesAttaque1 */
-	OutilesAttaque1 outilesAttaque;
+	OutilsAttaque1 outilesAttaque;
 	
 	/**un object de class OutilesMur */
-	OutilesMur outilesMur;
+	OutilsMur outilesMur;
 	
 	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException
@@ -155,9 +155,9 @@ public class OzdokerOzen extends ArtificialIntelligence
 		//Pour initialisation pour les class
 		choisirMode=new ChoisirMode(this);
 		tileControleur=new TileControleur(OzdokerOzen.this, matrice);
-		outilesAttaque=new OutilesAttaque1(this, gameZone, matrice);
-		outilesCollecte=new OutilesCollecte(this, gameZone, matrice);
-		outilesMur=new OutilesMur(this, matrice);
+		outilesAttaque=new OutilsAttaque1(this, gameZone, matrice);
+		outilesCollecte=new OutilsCollecte(this, gameZone, matrice);
+		outilesMur=new OutilsMur(this, matrice);
 		
 		//on cree les lists des tiles pour utiliser apres
 		List<AiTile> scopes=new ArrayList<AiTile>();
@@ -316,7 +316,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 							attackAdversaire=false;
 						}else
 							attackAdversaire=true;
-						OutilesAttaque1 outilesAttaque=new OutilesAttaque1(this, gameZone, matrice);
+						OutilsAttaque1 outilesAttaque=new OutilsAttaque1(this, gameZone, matrice);
 						permissionPoseBombe=true;
 						//detruitre mur
 						AiHero enemy1=outilesAttaque.adversaireCible();

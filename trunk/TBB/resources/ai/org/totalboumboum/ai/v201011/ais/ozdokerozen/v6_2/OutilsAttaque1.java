@@ -16,7 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * @author Sercan Özen & G.Lara Özdöker 
  *
  */
-public class OutilesAttaque1 {
+public class OutilsAttaque1 {
 
 	/**
 	 * Cette classe fait calculs pour attaque 
@@ -27,7 +27,7 @@ public class OutilesAttaque1 {
 	int[][] matrice;
 	TileControleur tileControleur;
 	List<AiTile> tilesPossible=new ArrayList<AiTile>();
-	public OutilesAttaque1(OzdokerOzen a,AiZone b,int[][] c) throws StopRequestException {
+	public OutilsAttaque1(OzdokerOzen a,AiZone b,int[][] c) throws StopRequestException {
 		a.checkInterruption();
 		AI=a;
 		gameZone=b;
