@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Coupe de test" type="CUP" />
-	<played matches="12" rounds="5" />
-	<dates start="2011-01-06T17:53:24" save="2011-01-06T19:07:50" />
+	<tournament name="Tournoi de Galatasaray IV" type="CUP" />
+	<played matches="4" rounds="7" />
+	<dates start="2011-01-11T17:10:10" save="2011-01-11T17:38:06" />
 	<players>
-		<player name="0809.Altay+Basaranoğlu" />
 		<player name="1011.Göçmenoğlu+Hekimoğlu" />
-		<player name="0910.Fındık+Şırın" />
-		<player name="1011.Göncü+Onat" />
-		<player name="0910.Doruk+Küpelioğlu" />
-		<player name="0910.Aldanmaz+Yenigün" />
-		<player name="0708.Başman+Sandallı" />
-		<player name="1011.Avcı+Güngör" />
-		<player name="0809.Günalp+Yürtsever" />
+		<player name="1011.Hacıbektaşoğlu+İlgar" />
+		<player name="1011.Çalışkan+Seven" />
+		<player name="1011.Büyüktopaç+Turak" />
 		<player name="1011.Kesimal+Varol" />
-		<player name="1011.Kantarcı+Taşkın" />
-		<player name="0708.Baydar+Camcı" />
-		<player name="0708.Bingöl+Ketenci" />
 		<player name="1011.İsbir+Koyaş" />
-		<player name="1011.Kayuka+Yıldırım" />
-		<player name="0809.Çalışkan+Cap+Doğaner" />
+		<player name="1011.Akbulut+Küpelioğlu" />
+		<player name="Joueur humain" />
 	</players>
 </archive>
 

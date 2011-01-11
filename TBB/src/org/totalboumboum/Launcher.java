@@ -1529,4 +1529,6 @@ public class Launcher
 	// TODO définir les qualif/tournoi/supercup
 	// TODO finir IA
 	//	optimisation : poser bombe juste en sortant de la case (pixels) histoire d'éviter de se faire bloquer par le gus qui est devant
+	// TODO bug à la fin de la simulation : ça ne revient pas au jeu
+	// TODO les flammes sont elles censées traverser les bombes comme elles le font ?
 }
