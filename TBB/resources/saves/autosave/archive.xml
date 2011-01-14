@@ -2,14 +2,14 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Tournoi de Galatasaray IV" type="CUP" />
 	<played matches="4" rounds="7" />
-	<dates start="2011-01-11T17:10:10" save="2011-01-11T17:38:06" />
+	<dates start="2011-01-14T13:13:46" save="2011-01-14T13:35:09" />
 	<players>
+		<player name="1011.Kesimal+Varol" />
+		<player name="1011.Çalışkan+Seven" />
+		<player name="1011.İsbir+Koyaş" />
+		<player name="1011.Büyüktopaç+Turak" />
 		<player name="1011.Göçmenoğlu+Hekimoğlu" />
 		<player name="1011.Hacıbektaşoğlu+İlgar" />
-		<player name="1011.Çalışkan+Seven" />
-		<player name="1011.Büyüktopaç+Turak" />
-		<player name="1011.Kesimal+Varol" />
-		<player name="1011.İsbir+Koyaş" />
 		<player name="1011.Akbulut+Küpelioğlu" />
 		<player name="Joueur humain" />
 	</players>
