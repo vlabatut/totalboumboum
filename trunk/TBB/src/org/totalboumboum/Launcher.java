@@ -1530,5 +1530,7 @@ public class Launcher
 	// TODO finir IA
 	//	optimisation : poser bombe juste en sortant de la case (pixels) histoire d'éviter de se faire bloquer par le gus qui est devant
 	// TODO bug à la fin de la simulation : ça ne revient pas au jeu
-	// TODO les flammes sont elles censées traverser les bombes comme elles le font ?
+	// TODO les flammes sont-elles censées traverser les bombes comme elles le font ?
+	// TODO apparemment les blocs qui tombent lors du shrink sont différents, au moins dans SBM2 >> à ripper et vérifier
+
 }
