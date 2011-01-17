@@ -1533,5 +1533,5 @@ public class Launcher
 	// TODO les flammes sont-elles censées traverser les bombes comme elles le font ?
 	// TODO apparemment les blocs qui tombent lors du shrink sont différents, au moins dans SBM2 >> à ripper et vérifier
 	// TODO shrink localisé, pour éliminer les joueurs qui restent sans bouger pendant trop de temps (seulement s'ils peuvent bouger ? ou optionnel ?) 
-
+	// TODO corriger le bug dans la GUI qui empêche de voir le sprite perso par défaut (sans couleur)
 }
