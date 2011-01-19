@@ -175,9 +175,9 @@
 		<gesture name="EXULTING" folder="exulting" repeat="true">
 			<direction name="NONE">
 				<step duration="500" file="1.gif" shadow="shadow1.png" />
-				<step duration="170" file="2.gif" shadow="shadow1.png" />
+				<step duration="200" file="2.gif" shadow="shadow1.png" />
 				<step duration="70" file="1.gif" shadow="shadow1.png" />
-				<step duration="130" file="3.gif" shadow="shadow2.png" />
+				<step duration="300" file="3.gif" shadow="shadow2.png" />
 			</direction>
 		</gesture>
 		

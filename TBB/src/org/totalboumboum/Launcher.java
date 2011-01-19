@@ -1535,4 +1535,7 @@ public class Launcher
 	// TODO shrink localisé, pour éliminer les joueurs qui restent sans bouger pendant trop de temps
 	//		(seulement s'ils peuvent bouger ? ou optionnel ? ou juste faire apparaître une bombe?) 
 	// TODO corriger le bug dans la GUI qui empêche de voir le sprite perso par défaut (sans couleur)
+	// TODO gérer le tie-break du dernier tournoi
+	// TODO faire disparaitre progressivement les sprites à la fin du burning (niveau d'alpha ? cf items thème TBB)
+	
 }
