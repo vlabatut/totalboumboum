@@ -65,6 +65,10 @@ public class AisConfigurationSaver
 		// hide all-ais
 		Element hideAllAisElement = saveHideAllAisElement(aisConfiguration);
 		result.addContent(hideAllAisElement);
+		
+		// bomb useless players
+		Element bombUselessAisElement = saveBombUselessAisElement(aisConfiguration);
+		result.addContent(bombUselessAisElement);
 
 		// display exceptions onscreen during game
 		Element displayExceptionsElement = saveDisplayExceptionsElement(aisConfiguration);
@@ -102,6 +106,13 @@ public class AisConfigurationSaver
 	{	Element result = new Element(XmlNames.HIDE_ALLAIS);
 		String hideAllAis = Boolean.toString(aisConfiguration.getHideAllAis());
 		result.setAttribute(XmlNames.VALUE,hideAllAis);
+		return result;
+	}
+
+	private static Element saveBombUselessAisElement(AisConfiguration aisConfiguration)
+	{	Element result = new Element(XmlNames.BOMB_USELESS_AIS);
+		String bombUselessAis = Long.toString(aisConfiguration.getBombUselessAis());
+		result.setAttribute(XmlNames.VALUE,bombUselessAis);
 		return result;
 	}
 

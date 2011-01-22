@@ -165,7 +165,7 @@ public class SpritePreviewLoader
 				stepFile = previewAtt.getValue().trim();
 			}
 			// else: look for the first image from the STANDING gesture
-			// (must be defined as an actual image, not a reference, and not multilayers)
+			// (must be defined as an actual image, not a reference, and not multilayered)
 			else
 			{	// init
 		    	GestureName defaultGesture = GestureName.STANDING;
@@ -221,7 +221,11 @@ public class SpritePreviewLoader
 	    		if(elt!=null)
 				{	List<Element> clrs = elt.getChildren();
 					Iterator<Element> iter = clrs.iterator();
-			    	while(iter.hasNext())
+					PredefinedColor mapped = null;
+			    	String defname = elt.getAttribute(XmlNames.DEFAULT).getValue().trim();
+		    		defname = defname.toUpperCase(Locale.ENGLISH);
+			    	PredefinedColor defaultColor = PredefinedColor.valueOf(defname);
+		    		while(iter.hasNext())
 			    	{	BufferedImage img;
 			    		Element temp = iter.next();
 			    		String name = temp.getAttribute(XmlNames.NAME).getValue().trim();
@@ -231,7 +235,12 @@ public class SpritePreviewLoader
 						if(colorRule instanceof ColorMap)
 						{	ColorMap colormap = (ColorMap)colorRule;
 							String imagePath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
-							img = ImageTools.loadImage(imagePath, colormap);
+							img = ImageTools.loadImage(imagePath,colormap);
+							if(mapped==null)
+							{	BufferedImage img2 = ImageTools.loadImage(imagePath,null);
+								result.setImage(null,img2);
+								mapped = color;
+							}
 						}
 						else
 						{	ColorFolder colorFolder = (ColorFolder)colorRule;
@@ -239,9 +248,12 @@ public class SpritePreviewLoader
 								colorFold = colorFolder;
 							String imagePath = colorFolder.getFolder()+gestureFolder+directionFolder+File.separator+stepFile;
 							img = ImageTools.loadImage(imagePath,null);
+							if(mapped==null && color==defaultColor)
+							{	result.setImage(null,img);
+							}
 						}
 			    		result.setImage(color,img);
-			    	}				
+			    	}
 				}
 	    		// get the colorless picture
 	    		else

@@ -47,6 +47,7 @@ import org.totalboumboum.engine.container.itemset.Itemset;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.level.players.Players;
+import org.totalboumboum.engine.container.theme.Theme;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
@@ -55,6 +56,7 @@ import org.totalboumboum.engine.content.feature.action.gather.SpecificGather;
 import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactory;
 import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
@@ -161,6 +163,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
 			pauseAis.add(false);
+			lastActionAis.add(0l);
 			
 			// record/transmit event
 			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
@@ -276,7 +279,8 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	// AIS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected final List<Boolean> pauseAis = new ArrayList<Boolean>();
-
+	protected final List<Long> lastActionAis = new ArrayList<Long>();
+	
 	@Override
 	public void switchAiPause(int index)
 	{	debugLock.lock();
@@ -309,8 +313,30 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 				{	AbstractPlayer player = players.get(i);
 					boolean aiPause = getAiPause(i);
 					if(!player.isOut() && player instanceof AiPlayer)
-					{	((AiPlayer)player).updateAi(aiPause);
-//System.out.println(player.getName());					
+					{	// simple update
+						((AiPlayer)player).updateAi(aiPause);
+//System.out.println(player.getName());
+						
+						// bomb useless ais
+						long lastAction = lastActionAis.get(i);
+						if(lastAction>=0)
+						{	lastAction = lastAction + milliPeriod;
+							if(lastAction>=Configuration.getAisConfiguration().getBombUselessAis())
+							{	int range = Integer.parseInt(temp[temp.length-2]);
+								int duration = Integer.parseInt(temp[temp.length-1]);
+								String name = "";
+								Bomb bomb = bombset.makeBomb(name,matrix[line][col],range,duration);
+			if(bomb==null)
+				System.err.println("makeBomb error: sprite "+name+" not found.");
+								level.insertSpriteTile(bomb);				
+							}
+
+								
+								
+								lastAction = -1;
+							}
+							lastActionAis.set(i,lastAction);
+						}
 					}
 				}
 			}

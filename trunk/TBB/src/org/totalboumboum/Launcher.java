@@ -1523,19 +1523,19 @@ public class Launcher
 	
 	// TODO clignotements de sprites : mettre de la transparence dans les version coloriées
 	// TODO utiliser le calcul d'occupation CPU pour limiter les IA trop gourmandes
+	// 		utiliser la limite sur yield déjà définie (cf classe config d'ia)
 	// TODO calculer un temps d'occupation "normal" (avant le jeu) et s'en servir de réf pour le temps en cours de jeu
 	// TODO arrêter les threads dont les ia ont été éliminées du jeu
 	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
-	// TODO définir les qualif/tournoi/supercup
 	// TODO finir IA
 	//	optimisation : poser bombe juste en sortant de la case (pixels) histoire d'éviter de se faire bloquer par le gus qui est devant
-	// TODO bug à la fin de la simulation : ça ne revient pas au jeu
 	// TODO les flammes sont-elles censées traverser les bombes comme elles le font ?
 	// TODO apparemment les blocs qui tombent lors du shrink sont différents, au moins dans SBM2 >> à ripper et vérifier
 	// TODO shrink localisé, pour éliminer les joueurs qui restent sans bouger pendant trop de temps
 	//		(seulement s'ils peuvent bouger ? ou optionnel ? ou juste faire apparaître une bombe?) 
-	// TODO corriger le bug dans la GUI qui empêche de voir le sprite perso par défaut (sans couleur)
 	// TODO gérer le tie-break du dernier tournoi
 	// TODO faire disparaitre progressivement les sprites à la fin du burning (niveau d'alpha ? cf items thème TBB)
-	
+	//		>> en fait y a pas de gestion dynamique de l'alpha...
+	// TODO utiliser des chemins relatifs à la racine du sprite éviterait toutes les complications liées au nommage d'images/ombres
+	// TODO y a surement un bug pr rezo+simulation (cote client)
 }

@@ -3,7 +3,7 @@
 		xsi:noNamespaceSchemaLocation="../../../../schemas/animes.xsd" 
 		scale="4" boundHeight="12.5">
 	
-	<colors>
+	<colors default="RED" >
 		<colorsprite name="BLACK" folder="black"/>
 		<colorsprite name="BLUE" folder="blue" />
 		<colorsprite name="BROWN" folder="brown" />
