@@ -65,7 +65,11 @@ public class AisConfigurationLoader
 		// hide all-ais rounds
 		element = root.getChild(XmlNames.HIDE_ALLAIS);
 		loadHideAllAisElement(element,result);
-
+		
+		// hide all-ais rounds
+		element = root.getChild(XmlNames.BOMB_USELESS_AIS);
+		loadBombUselessAisElement(element,result);
+		
 		// display exceptions onscreen during game
 		element = root.getChild(XmlNames.DISPLAY_EXCEPTIONS);
 		loadDisplayExceptionsElement(element,result);
@@ -98,6 +102,12 @@ public class AisConfigurationLoader
 	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
 		boolean hideAllAis = Boolean.valueOf(value);
 		result.setHideAllAis(hideAllAis);
+	}
+
+	private static void loadBombUselessAisElement(Element root, AisConfiguration result)
+	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+		long bombUselessAis = Long.valueOf(value);
+		result.setBombUselessAis(bombUselessAis);
 	}
 
 	private static void loadDisplayExceptionsElement(Element root, AisConfiguration result)

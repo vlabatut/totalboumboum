@@ -61,6 +61,7 @@
 			<xsd:element name="colorsprite" type="tColorsprite" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 		<xsd:attribute name="folder" type="xsd:string" use="optional" />
+		<xsd:attribute name="default" type="tColor" use="optional" default="WHITE"/>
 	</xsd:complexType>
 
 </xsd:schema>

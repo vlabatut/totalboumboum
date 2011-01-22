@@ -48,6 +48,7 @@ public class AisConfiguration
 		result.setAutoAdvanceDelay(autoAdvanceDelay);
 		
 		result.setHideAllAis(hideAllAis);
+		result.setBombUselessAis(bombUselessAis);
 		
 		result.setDisplayExceptions(displayExceptions);
 
@@ -113,6 +114,8 @@ public class AisConfiguration
 	/////////////////////////////////////////////////////////////////
 	/** during a tournament/match, only show rounds with at least a human player */
 	private boolean hideAllAis = false;
+	/** drop a level bomb on players standing still (not doing anything) */
+	private long bombUselessAis = -1;
 	
 	public boolean getHideAllAis()
 	{	return hideAllAis;
@@ -120,6 +123,14 @@ public class AisConfiguration
 
 	public void setHideAllAis(boolean hideAllAis)
 	{	this.hideAllAis = hideAllAis;
+	}
+
+	public long getBombUselessAis()
+	{	return bombUselessAis;
+	}
+
+	public void setBombUselessAis(long bombUselessPlayers)
+	{	this.bombUselessAis = bombUselessPlayers;
 	}
 
 	/////////////////////////////////////////////////////////////////

@@ -69,6 +69,7 @@ public class XmlNames
 	public static final String BLUE = "blue";
 	public static final String BOMBSET = "bombset";
 	public static final String BOMB = "bomb";
+	public static final String BOMB_USELESS_AIS = "bombUselessAis";
 	public static final String BOMBS = "bombs";
 	public static final String BORDER = "border";
 	public static final String BOUND_HEIGHT = "boundHeight";
