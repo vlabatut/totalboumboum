@@ -202,8 +202,6 @@ public class HollowLevel implements Serializable
 					if(bomb==null)
 						System.err.println("makeBomb error: sprite "+name+" not found.");
 					
-					//TODO voir comment on fait quand un bloc explose et délivre une bombe
-					
 					level.insertSpriteTile(bomb);				
 				}
 			}

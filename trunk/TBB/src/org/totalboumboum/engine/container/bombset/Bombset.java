@@ -149,29 +149,44 @@ public class Bombset extends AbstractBombset
 	/**
 	 * only for level-generated bombs
 	 * @param tile
+	 * 		tile where the bomb should be dropped
 	 * @param name
+	 * 		bomb name (if null: take the first bomb)
+	 * @param flameRange
+	 * 		bomb range
+	 * @param duration
+	 * 		time bomb duration (can be negative if not a time bomb)
 	 * @return
 	 * @throws IOException 
 	 */
 	public Bomb makeBomb(String name, Tile tile, int flameRange, int duration)
 	{	Bomb result = null;
-		Iterator<BombFactory> it = bombFactories.iterator();
-		while(it.hasNext() && result==null)
-		{	BombFactory bombFactory = it.next();
-			if(bombFactory.getBombName().equalsIgnoreCase(name))
-			{	result = bombFactory.makeSprite(tile);
-				result.setFlameRange(flameRange); //NOTE this is performed in BombsetManager.dropBomb() for the Heroes. Maybe should it be normalized ? use an ability ? (cf note in BombsetMgr)
-				if(duration>=0)
-				{	StateAbility ability = new StateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
-					ability.setStrength(duration);
-					ability.setFrame(true);
-					result.addDirectAbility(ability);
-				}
-				// record/transmit event
-				SpriteCreationEvent event = new SpriteCreationEvent(result,name);
-				RoundVariables.writeEvent(event);
+		BombFactory bombFactory = null;
+		if(name==null)
+			bombFactory = bombFactories.get(0);
+		else
+		{	Iterator<BombFactory> it = bombFactories.iterator();
+			while(it.hasNext() && bombFactory==null)
+			{	BombFactory bf = it.next();
+				if(bf.getBombName().equalsIgnoreCase(name))
+					bombFactory = bf;
 			}
 		}
+		
+		if(bombFactory!=null)
+		{	result = bombFactory.makeSprite(tile);
+			result.setFlameRange(flameRange); //NOTE this is performed in BombsetManager.dropBomb() for the Heroes. Maybe should it be normalized ? use an ability ? (cf note in BombsetMgr)
+			if(duration>=0)
+			{	StateAbility ability = new StateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
+				ability.setStrength(duration);
+				ability.setFrame(true);
+				result.addDirectAbility(ability);
+			}
+			// record/transmit event
+			SpriteCreationEvent event = new SpriteCreationEvent(result,name);
+			RoundVariables.writeEvent(event);
+		}
+		
 		return result;
 	}
 
