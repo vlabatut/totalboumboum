@@ -43,6 +43,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
+import org.totalboumboum.engine.container.bombset.Bombset;
+import org.totalboumboum.engine.container.bombset.BombsetMap;
 import org.totalboumboum.engine.container.itemset.Itemset;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
@@ -52,6 +54,7 @@ import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
+import org.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import org.totalboumboum.engine.content.feature.action.gather.SpecificGather;
 import org.totalboumboum.engine.content.feature.event.ActionEvent;
 import org.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -307,36 +310,48 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	protected void updateAis()
 	{	if(gameStarted) // only after the round has started
 		{	aiTime = aiTime + milliPeriod;
+			
+			// simple update
 			if(aiTime >= Configuration.getAisConfiguration().getAiPeriod())
 			{	aiTime = 0;
-				for(int i=0;i<players.size();i++)
+				for(int i=0;i<players.size();i++) //TODO would be good to actually have a list of ai players, processing it again each time is useless
 				{	AbstractPlayer player = players.get(i);
-					boolean aiPause = getAiPause(i);
 					if(!player.isOut() && player instanceof AiPlayer)
-					{	// simple update
+					{	boolean aiPause = getAiPause(i);
 						((AiPlayer)player).updateAi(aiPause);
 //System.out.println(player.getName());
-						
-						// bomb useless ais
-						long lastAction = lastActionAis.get(i);
-						if(lastAction>=0)
-						{	lastAction = lastAction + milliPeriod;
-							if(lastAction>=Configuration.getAisConfiguration().getBombUselessAis())
-							{	int range = Integer.parseInt(temp[temp.length-2]);
-								int duration = Integer.parseInt(temp[temp.length-1]);
-								String name = "";
-								Bomb bomb = bombset.makeBomb(name,matrix[line][col],range,duration);
-			if(bomb==null)
-				System.err.println("makeBomb error: sprite "+name+" not found.");
-								level.insertSpriteTile(bomb);				
-							}
-
-								
-								
-								lastAction = -1;
-							}
-							lastActionAis.set(i,lastAction);
+					}
+				}
+			}
+			
+			// bomb useless ais
+			for(int i=0;i<players.size();i++)
+			{	AbstractPlayer player = players.get(i);
+				if(!player.isOut() && player instanceof AiPlayer)
+				{	long lastAction = lastActionAis.get(i);
+System.out.println(i+": "+lastAction);
+					if(lastAction>=0)
+					{	lastAction = lastAction + milliPeriod;
+						if(lastAction>=Configuration.getAisConfiguration().getBombUselessAis())
+						{	int range = 0;
+							int duration = 3000;
+							Tile tile = player.getSprite().getTile();
+							HollowLevel hollowLevel = round.getHollowLevel();
+							BombsetMap bombsetMap = hollowLevel.getInstance().getBombsetMap();
+							Bombset bombset = bombsetMap.getBombset(null);
+							Bomb bomb = bombset.makeBomb(null,tile,range,duration);
+							level.insertSpriteTile(bomb);				
+							SpecificDrop action = new SpecificDrop(null,bomb);
+							ActionEvent evt = new ActionEvent(action);
+							bomb.processEvent(evt);
+							lastAction = -1;
 						}
+						lastActionAis.set(i,lastAction);
+
+//TODO pb: ne s'active pas... apparemment faut la dropAction
+//TODO pb: il faut réinitialiser l'action quand l'agent en fait une ! (retour de booléen?)
+//TODO faut surement virer le -1, du cp faut tester si la bombe a le droit d'apparaitre ou pas
+//TODO épargner ceux qui sont en pause
 					}
 				}
 			}

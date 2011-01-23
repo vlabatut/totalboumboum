@@ -144,6 +144,7 @@ public class RegularLoop extends LocalLoop
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
 			pauseAis.add(false);
+			lastActionAis.add(0l);
 			
 			// record/transmit event
 			SpriteCreationEvent spriteEvent = new SpriteCreationEvent(player.getSprite(),Integer.toString(j));
