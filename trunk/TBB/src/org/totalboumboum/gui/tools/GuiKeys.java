@@ -66,6 +66,7 @@ public class GuiKeys
 	public static final String BLUE = "Blue";
 	public static final String BOMBEDS = "Bombeds";
 	public static final String BOMBINGS = "Bombings";
+	public static final String BOMB = "Bomb";
 	public static final String BOMBS = "Bombs";
 	public static final String BOMBSET = "Bombset";
 	public static final String BOTH = "Both";
@@ -293,6 +294,7 @@ public class GuiKeys
 	public static final String UP = "Up";
 	public static final String UPS = "Ups";
 	public static final String USE = "Use";
+	public static final String USELESS = "Useless";
 	public static final String VALIDATE = "Validate";
 	public static final String VALUE = "Value";
 	public static final String VALUES = "Values";
@@ -475,16 +477,22 @@ public class GuiKeys
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY_TITLE = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY+TITLE;
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY_MINUS = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY+MINUS;
 				public static final String MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY_PLUS = MENU_OPTIONS_AIS_LINE_AUTO_ADVANCE_DELAY+PLUS;
-				/* FPS */
+				/* UPS */
 				public static final String MENU_OPTIONS_AIS_LINE_UPS = MENU_OPTIONS_AIS_LINE+UPS;
 				public static final String MENU_OPTIONS_AIS_LINE_UPS_TITLE = MENU_OPTIONS_AIS_LINE_UPS+TITLE;
 				public static final String MENU_OPTIONS_AIS_LINE_UPS_MINUS = MENU_OPTIONS_AIS_LINE_UPS+MINUS;
 				public static final String MENU_OPTIONS_AIS_LINE_UPS_PLUS = MENU_OPTIONS_AIS_LINE_UPS+PLUS;
 				/* HIDE ALL AIS */
-				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS = MENU_OPTIONS_AIS_LINE+HIDE+ALL+AIS;
-				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_TITLE = MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS+TITLE;
-				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_DISABLED = MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS+DISABLED;
-				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_ENABLED = MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS+ENABLED;
+				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS = MENU_OPTIONS_AIS_LINE+HIDE+ALL+AIS;
+				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS_TITLE = MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS+TITLE;
+				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS_DISABLED = MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS+DISABLED;
+				public static final String MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS_ENABLED = MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS+ENABLED;
+				/* BOMB USELESS AIS */
+				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS = MENU_OPTIONS_AIS_LINE+BOMB+USELESS+AIS;
+				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_TITLE = MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+TITLE;
+				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_MINUS = MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+MINUS;
+				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_PLUS = MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+PLUS;
+				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_DISABLED = MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+DISABLED;
 				/* DISPLAY EXCEPTIONS */
 				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS = MENU_OPTIONS_AIS_LINE+DISPLAY+EXCEPTIONS;
 				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS_TITLE = MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS+TITLE;

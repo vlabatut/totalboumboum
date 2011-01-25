@@ -163,7 +163,7 @@ public class Bombset extends AbstractBombset
 	{	Bomb result = null;
 		BombFactory bombFactory = null;
 		if(name==null)
-			bombFactory = bombFactories.get(0);
+			bombFactory = bombFactories.get(bombFactories.size()-1);
 		else
 		{	Iterator<BombFactory> it = bombFactories.iterator();
 			while(it.hasNext() && bombFactory==null)

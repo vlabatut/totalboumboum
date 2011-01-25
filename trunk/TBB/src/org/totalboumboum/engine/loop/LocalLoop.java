@@ -29,6 +29,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -49,11 +50,12 @@ import org.totalboumboum.engine.container.itemset.Itemset;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.instance.Instance;
 import org.totalboumboum.engine.container.level.players.Players;
-import org.totalboumboum.engine.container.theme.Theme;
 import org.totalboumboum.engine.container.tile.Tile;
+import org.totalboumboum.engine.content.feature.ability.ActionAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
+import org.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import org.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import org.totalboumboum.engine.content.feature.action.gather.SpecificGather;
 import org.totalboumboum.engine.content.feature.event.ActionEvent;
@@ -310,7 +312,9 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	protected void updateAis()
 	{	if(gameStarted) // only after the round has started
 		{	aiTime = aiTime + milliPeriod;
-			
+			boolean active[] = new boolean[players.size()];
+			Arrays.fill(active,false);
+		
 			// simple update
 			if(aiTime >= Configuration.getAisConfiguration().getAiPeriod())
 			{	aiTime = 0;
@@ -318,8 +322,8 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 				{	AbstractPlayer player = players.get(i);
 					if(!player.isOut() && player instanceof AiPlayer)
 					{	boolean aiPause = getAiPause(i);
-						((AiPlayer)player).updateAi(aiPause);
-//System.out.println(player.getName());
+						active[i] = ((AiPlayer)player).updateAi(aiPause);
+//System.out.println(player.getName()+":"+active[i]);
 					}
 				}
 			}
@@ -328,10 +332,14 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 			for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
 				if(!player.isOut() && player instanceof AiPlayer)
-				{	long lastAction = lastActionAis.get(i);
-System.out.println(i+": "+lastAction);
-					if(lastAction>=0)
-					{	lastAction = lastAction + milliPeriod;
+				{	boolean aiPause = getAiPause(i);
+					if(!aiPause)
+					{	long lastAction = lastActionAis.get(i);
+//System.out.println(i+": "+lastAction);
+						if(active[i])
+							lastAction = 0;
+						else
+							lastAction = lastAction + milliPeriod;
 						if(lastAction>=Configuration.getAisConfiguration().getBombUselessAis())
 						{	int range = 0;
 							int duration = 3000;
@@ -340,18 +348,17 @@ System.out.println(i+": "+lastAction);
 							BombsetMap bombsetMap = hollowLevel.getInstance().getBombsetMap();
 							Bombset bombset = bombsetMap.getBombset(null);
 							Bomb bomb = bombset.makeBomb(null,tile,range,duration);
-							level.insertSpriteTile(bomb);				
-							SpecificDrop action = new SpecificDrop(null,bomb);
-							ActionEvent evt = new ActionEvent(action);
-							bomb.processEvent(evt);
-							lastAction = -1;
+							SpecificAction appearAction = new SpecificAppear(bomb);
+							ActionAbility actionAbility = bomb.modulateAction(appearAction);
+							if(actionAbility.isActive())
+							{	level.insertSpriteTile(bomb);
+								SpecificDrop dropAction = new SpecificDrop(tile,bomb);
+								ActionEvent evt = new ActionEvent(dropAction);
+								bomb.processEvent(evt);
+								lastAction = 0;
+							}
 						}
 						lastActionAis.set(i,lastAction);
-
-//TODO pb: ne s'active pas... apparemment faut la dropAction
-//TODO pb: il faut réinitialiser l'action quand l'agent en fait une ! (retour de booléen?)
-//TODO faut surement virer le -1, du cp faut tester si la bombe a le droit d'apparaitre ou pas
-//TODO épargner ceux qui sont en pause
 					}
 				}
 			}

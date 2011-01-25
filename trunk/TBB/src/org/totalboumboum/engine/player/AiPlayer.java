@@ -57,8 +57,9 @@ public class AiPlayer extends ControlledPlayer
 	/** artificial intelligence */
 	private AbstractAiManager<?> ai = null;
 	
-	public void updateAi(boolean aisPause)
-	{	ai.update(aisPause);
+	public boolean updateAi(boolean aisPause)
+	{	boolean result = ai.update(aisPause);
+		return result;
 	}
 	
 	public void initAi()
