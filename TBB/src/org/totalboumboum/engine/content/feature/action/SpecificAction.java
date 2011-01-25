@@ -45,6 +45,16 @@ public abstract class SpecificAction
 		initGeneralAction();
 	}
 
+	protected SpecificAction(ActionName name, Tile tile, Sprite target)
+	{	this.name = name;
+		this.actor = null;
+		this.target = target;
+		this.direction = Direction.NONE;
+		circumstance.initCircumstance();
+		this.tile = tile;
+		initGeneralAction();
+	}
+
 	protected SpecificAction(ActionName name, Sprite actor, Sprite target)
 	{	this.name = name;
 		this.actor = actor;
@@ -285,7 +295,8 @@ public abstract class SpecificAction
 		
 	private void initGeneralAction()
 	{	generalAction = getName().createGeneralAction();
-		generalAction.addActor(getActor().getRole());
+		if(getActor()!=null)
+			generalAction.addActor(getActor().getRole());
 		generalAction.addDirection(getDirection());
 		generalAction.addContact(getContact());
 		generalAction.addOrientation(getOrientation());

@@ -151,6 +151,12 @@
 						<text name="Disabled" value="Disabled" tooltip="Simule all-AIs is disabled" />
 						<text name="Enabled" value="Enabled" tooltip="Simule all-AIs is enabled" />
 					</group>
+					<group name="BombUselessAis">
+						<text name="Title" value="Bomb inactive agents" tooltip="Duration before a bomb is automatically dropped on an inactive agent" />
+						<text name="Plus" value="Plus" tooltip="Increase the duration" />
+						<text name="Minus" value="Minus" tooltip="Decrease the duration" />
+						<text name="Disabled" value="Disabled" tooltip="Limitless" />
+					</group>
 					<group name="DisplayExceptions">
 						<text name="Title" value="Display exceptions" tooltip="Display on the console ingame exceptions caused by AIs" />
 						<text name="Disabled" value="Disabled" tooltip="AIs-caused exceptions display is disabled" />

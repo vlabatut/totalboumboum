@@ -151,6 +151,12 @@
 						<text name="Disabled" value="Désactivée" tooltip="Simulation désactivée" />
 						<text name="Enabled" value="Activée" tooltip="Simulation activée" />
 					</group>
+					<group name="BombUselessAis">
+						<text name="Title" value="Menacer les agents inactifs" tooltip="Durée avant qu'une bombe soit posée sur un agent inactif" />
+						<text name="Plus" value="Plus" tooltip="Augmente la durée" />
+						<text name="Minus" value="Moins" tooltip="Diminue la durée" />
+						<text name="Disabled" value="Désactivé" tooltip="Sans limite" />
+					</group>
 					<group name="DisplayExceptions">
 						<text name="Title" value="Afficher les exceptions" tooltip="Affiche dans la console les exceptions provoquées par les IA au cours de la partie" />
 						<text name="Disabled" value="Désactivé" tooltip="Affichage des exceptions désactivé" />

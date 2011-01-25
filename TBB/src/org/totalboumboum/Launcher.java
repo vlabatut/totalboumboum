@@ -926,6 +926,7 @@ public class Launcher
 	 * 		- indicateur d'occupation de CPU
 	 * - IA :
 	 * 		- modèle de simulation
+	 * 		- bombage automatique des IA inactives, avec inclusion dans les options de la GUI
 	 * - stats :
 	 * 		- correction d'un bug concernant le classement des joueurs en fonctions du type
 	 * - Divers :
@@ -1531,11 +1532,12 @@ public class Launcher
 	//	optimisation : poser bombe juste en sortant de la case (pixels) histoire d'éviter de se faire bloquer par le gus qui est devant
 	// TODO les flammes sont-elles censées traverser les bombes comme elles le font ?
 	// TODO apparemment les blocs qui tombent lors du shrink sont différents, au moins dans SBM2 >> à ripper et vérifier
-	// TODO shrink localisé, pour éliminer les joueurs qui restent sans bouger pendant trop de temps
-	//		(seulement s'ils peuvent bouger ? ou optionnel ? ou juste faire apparaître une bombe?) 
 	// TODO gérer le tie-break du dernier tournoi
 	// TODO faire disparaitre progressivement les sprites à la fin du burning (niveau d'alpha ? cf items thème TBB)
 	//		>> en fait y a pas de gestion dynamique de l'alpha...
 	// TODO utiliser des chemins relatifs à la racine du sprite éviterait toutes les complications liées au nommage d'images/ombres
 	// TODO y a surement un bug pr rezo+simulation (cote client)
+	// TODO quand on tente de poser une bombe, le sprite est créé et on tente de voir s'il peut apparaître
+	// 	    question : est-il d'entrée inséré dans le Level ? si oui, y en a surement un paillat au bout d'un moment;
+	//		vu qu'en cas d'apparition impossible la bombe n'est pas retirée du Level (supposition)
 }

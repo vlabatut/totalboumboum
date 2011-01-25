@@ -21,6 +21,7 @@ package org.totalboumboum.engine.content.feature.action.drop;
  * 
  */
 
+import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.SpecificAction;
 import org.totalboumboum.engine.content.sprite.Sprite;
@@ -41,6 +42,10 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  */
 public class SpecificDrop extends SpecificAction
 {
+	public SpecificDrop(Tile tile, Sprite target)
+	{	super(ActionName.DROP,tile,target);
+	}
+	
 	public SpecificDrop(Sprite actor, Sprite target)
 	{	super(ActionName.DROP,actor,target);
 	}

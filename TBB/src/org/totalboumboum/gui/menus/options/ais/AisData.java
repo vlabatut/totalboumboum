@@ -50,9 +50,10 @@ public class AisData extends EntitledDataPanel implements MouseListener
 	private static final int LINE_UPS = 0;
 	private static final int LINE_AUTO_ADVANCE = 1;
 	private static final int LINE_AUTO_ADVANCE_DELAY = 2;
-	private static final int LINE_HIDE_ALLAIS = 3;
-	private static final int LINE_DISPLAY_EXCPTIONS = 4;
-	private static final int LINE_LOG_EXCPTIONS = 5;
+	private static final int LINE_HIDE_ALL_AIS = 3;
+	private static final int LINE_BOMB_USELESS_AIS = 4;
+	private static final int LINE_DISPLAY_EXCPTIONS = 5;
+	private static final int LINE_LOG_EXCEPTIONS = 6;
 
 	private LinesSubPanel optionsPanel;
 	private AisConfiguration aisConfiguration;
@@ -181,14 +182,14 @@ public class AisData extends EntitledDataPanel implements MouseListener
 				}
 
 				// #3 HIDE ALL-AIS
-				{	Line ln = optionsPanel.getLine(LINE_HIDE_ALLAIS);
+				{	Line ln = optionsPanel.getLine(LINE_HIDE_ALL_AIS);
 					ln.addLabel(0);
 					int col = 0;
 					// name
 					{	ln.setLabelMinWidth(col,titleWidth);
 						ln.setLabelPrefWidth(col,titleWidth);
 						ln.setLabelMaxWidth(col,titleWidth);
-						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_TITLE,false);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS_TITLE,false);
 						col++;
 					}
 					// value
@@ -204,7 +205,48 @@ public class AisData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 				
-				// #4 DISPLAY EXCEPTIONS
+				// #4 BOMB USELESS AIS
+				{	Line ln = optionsPanel.getLine(LINE_BOMB_USELESS_AIS);
+					ln.addLabel(0);
+					ln.addLabel(0);
+					ln.addLabel(0);
+					int col = 0;
+					// name
+					{	ln.setLabelMinWidth(col,titleWidth);
+						ln.setLabelPrefWidth(col,titleWidth);
+						ln.setLabelMaxWidth(col,titleWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_TITLE,false);
+						col++;
+					}
+					// minus button
+					{	ln.setLabelMinWidth(col,iconWidth);
+						ln.setLabelPrefWidth(col,iconWidth);
+						ln.setLabelMaxWidth(col,iconWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_MINUS,true);
+						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					// value
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
+						ln.setLabelMinWidth(col,valueWidth);
+						ln.setLabelPrefWidth(col,valueWidth);
+						ln.setLabelMaxWidth(col,valueWidth);
+						setBombUselessAis();
+						col++;
+					}
+					// plus button
+					{	ln.setLabelMinWidth(col,iconWidth);
+						ln.setLabelPrefWidth(col,iconWidth);
+						ln.setLabelMaxWidth(col,iconWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_PLUS,true);
+						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
+				}
+				
+				// #5 DISPLAY EXCEPTIONS
 				{	Line ln = optionsPanel.getLine(LINE_DISPLAY_EXCPTIONS);
 					ln.addLabel(0);
 					int col = 0;
@@ -228,8 +270,8 @@ public class AisData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 				
-				// #5 LOG EXCEPTIONS
-				{	Line ln = optionsPanel.getLine(LINE_LOG_EXCPTIONS);
+				// #6 LOG EXCEPTIONS
+				{	Line ln = optionsPanel.getLine(LINE_LOG_EXCEPTIONS);
 					ln.addLabel(0);
 					int col = 0;
 					// name
@@ -253,7 +295,7 @@ public class AisData extends EntitledDataPanel implements MouseListener
 				}
 				
 				// EMPTY
-				{	for(int line=LINE_LOG_EXCPTIONS+1;line<LINE_COUNT;line++)
+				{	for(int line=LINE_LOG_EXCEPTIONS+1;line<LINE_COUNT;line++)
 					{	Line ln = optionsPanel.getLine(line);
 						int col = 0;
 						int maxWidth = ln.getWidth();
@@ -297,10 +339,24 @@ public class AisData extends EntitledDataPanel implements MouseListener
 	{	boolean hideAllais = aisConfiguration.getHideAllAis();
 		String key;
 		if(hideAllais)
-			key = GuiKeys.MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_ENABLED;
+			key = GuiKeys.MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS_ENABLED;
 		else
-			key = GuiKeys.MENU_OPTIONS_AIS_LINE_HIDE_ALLAIS_DISABLED;
-		optionsPanel.getLine(LINE_HIDE_ALLAIS).setLabelKey(1,key,true);
+			key = GuiKeys.MENU_OPTIONS_AIS_LINE_HIDE_ALL_AIS_DISABLED;
+		optionsPanel.getLine(LINE_HIDE_ALL_AIS).setLabelKey(1,key,true);
+	}
+	
+	private void setBombUselessAis()
+	{	long buais = aisConfiguration.getBombUselessAis();
+		String text,tooltip;
+		if(buais<=0)
+		{	text = new Character('\u221E').toString();
+			tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_DISABLED+GuiKeys.TOOLTIP);			
+		}
+		else
+		{	text = Long.toString(buais);
+			tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+GuiKeys.TOOLTIP);
+		}
+		optionsPanel.getLine(LINE_BOMB_USELESS_AIS).setLabelText(2,text,tooltip);
 	}
 	
 	private void setDisplayExceptions()
@@ -320,7 +376,7 @@ public class AisData extends EntitledDataPanel implements MouseListener
 			key = GuiKeys.MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS_ENABLED;
 		else
 			key = GuiKeys.MENU_OPTIONS_AIS_LINE_LOG_EXCEPTIONS_DISABLED;
-		optionsPanel.getLine(LINE_LOG_EXCPTIONS).setLabelKey(1,key,true);
+		optionsPanel.getLine(LINE_LOG_EXCEPTIONS).setLabelKey(1,key,true);
 	}
 	
 	@Override
@@ -399,10 +455,27 @@ public class AisData extends EntitledDataPanel implements MouseListener
 				setAutoAdvanceDelay();
 				break;
 			// hide all-ais
-			case LINE_HIDE_ALLAIS:
+			case LINE_HIDE_ALL_AIS:
 				boolean hideAllais = !aisConfiguration.getHideAllAis();
 				aisConfiguration.setHideAllAis(hideAllais);
 				setHideAllais();
+				break;
+			// BOMB USELESS AIS
+			case LINE_BOMB_USELESS_AIS:
+				long buais = aisConfiguration.getBombUselessAis();
+				// minus
+				if(pos[1]==1)
+				{	if(buais>=1000)
+						buais = buais - 1000;
+				}
+				// plus
+				else //if(pos[1]==3)
+				{	buais = buais + 1000;
+				}
+				// common
+				buais = 1000*(buais/1000);
+				aisConfiguration.setBombUselessAis(buais);
+				setBombUselessAis();
 				break;
 			// display exceptions
 			case LINE_DISPLAY_EXCPTIONS:
@@ -411,7 +484,7 @@ public class AisData extends EntitledDataPanel implements MouseListener
 				setDisplayExceptions();
 				break;
 			// log exceptions
-			case LINE_LOG_EXCPTIONS:
+			case LINE_LOG_EXCEPTIONS:
 				boolean logExceptions = !aisConfiguration.getLogExceptions();
 				aisConfiguration.setLogExceptions(logExceptions);
 				setLogExceptions();

@@ -114,9 +114,16 @@ public abstract class AbstractAiManager<V>
     /**
      * Utilise la classe d'IA associée à ce personnage pour mettre à jour les variables
      * qui permettront au moteur du jeu de déplacer le personnage.
+     * 
+     * @param aisPause
+     * 		indique si l'agent doit passer en pause
+     * @return
+     * 		vrai si l'agent a effectué une action
      */
-    public final void update(boolean aisPause)
-    {	// si l'IA était en pause
+    public final boolean update(boolean aisPause)
+    {	boolean result = false;
+    	
+    	// si l'IA était en pause
     	if(paused)
     	{	// sortie de pause ?
     		if(!aisPause)
@@ -160,6 +167,7 @@ public abstract class AbstractAiManager<V>
     				{	ControlEvent event = it.next();
     					player.getSprite().putControlEvent(event);
     				}
+    				result = !events.isEmpty();
     				// on met à jour les sorties de l'IA
     				updateOutput();
 				}
@@ -189,6 +197,8 @@ public abstract class AbstractAiManager<V>
     		{	//
     		}
     	}
+    	
+    	return result;
     }
     
     /**
