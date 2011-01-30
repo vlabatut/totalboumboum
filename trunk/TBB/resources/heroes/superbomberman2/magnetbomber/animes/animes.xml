@@ -63,15 +63,14 @@
 		
 		<gesture name="BURNING" folder="burning">
 			<direction name="NONE">
-				<step duration="50" file="0.gif" shadow="shadow1.png" />
+				<step duration="100" file="0.gif" shadow="shadow1.png" />
+				<step duration="250" file="1.gif" shadow="shadow2.png" />
+				<step duration="250" file="3.gif" shadow="shadow2.png" />
 				<step duration="150" file="1.gif" shadow="shadow2.png" />
 				<step duration="50" file="3.gif" shadow="shadow2.png" />
-				<step duration="100" file="1.gif" shadow="shadow2.png" />
-				<step duration="50" file="3.gif" shadow="shadow2.png" />
-				<step duration="150" file="1.gif" shadow="shadow2.png" />
-				<step duration="50" file="3.gif" shadow="shadow2.png" />
-				<step duration="250" file="4.gif" shadow="shadow2.png" />
-				<step duration="250" file="5.gif" shadow="shadow2.png" />
+				<step duration="200" file="1.gif" shadow="shadow2.png" />
+				<step duration="100" file="3.gif" shadow="shadow2.png" />
+				<step duration="300" file="4.gif" shadow="shadow2.png" />
 			</direction>
 		</gesture>
 		
@@ -127,7 +126,7 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="EXULTING" folder="exulting" repeat="true" shadow="shadow1.png" >
+		<gesture name="EXULTING" folder="exulting" repeat="true" shadow="shadow.png" >
 			<direction name="NONE">
 				<step duration="150" file="1.gif" />
 				<step duration="150" file="2.gif" />
@@ -200,31 +199,31 @@
 		</gesture>
 		
 		<gesture name="JUMPING" folder="bouncing" shadow="shadow.png" >
-			<direction name="DOWN">
+			<direction name="DOWN" folder="down" >
 				<step file="1.gif" />
 			</direction>
-			<direction name="LEFT">
+			<direction name="LEFT" folder="left" >
 				<step file="1.gif" />
 			</direction>
-			<direction name="RIGHT">
+			<direction name="RIGHT" folder="right" >
 				<step file="1.gif" />
 			</direction>
-			<direction name="UP">
+			<direction name="UP" folder="up" >
 				<step file="1.gif" />
 			</direction>
 		</gesture>
 		
 		<gesture name="LANDING" folder="bouncing" shadow="shadow.png" >
-			<direction name="DOWN">
+			<direction name="DOWN" folder="down" >
 				<step file="1.gif" />
 			</direction>
-			<direction name="LEFT">
+			<direction name="LEFT" folder="left" >
 				<step file="1.gif" />
 			</direction>
-			<direction name="RIGHT">
+			<direction name="RIGHT" folder="right" >
 				<step file="1.gif" />
 			</direction>
-			<direction name="UP">
+			<direction name="UP" folder="up" >
 				<step file="1.gif" />
 			</direction>
 		</gesture>
@@ -333,6 +332,33 @@
 		
 		<gesture name="WAITING" folder="waiting" repeat="true">
 			<direction name="NONE" shadow="shadow.png" >
+				<step duration="100" file="1.gif" />
+				<step duration="100" file="2.gif" />
+				<step duration="100" file="3.gif" />
+				<step duration="100" file="1.gif" />
+				<step duration="100" file="2.gif" />
+				<step duration="100" file="3.gif" />
+				<step duration="100" file="1.gif" />
+				<step duration="100" file="2.gif" />
+				<step duration="100" file="3.gif" />
+				<step duration="100" file="1.gif" />
+				<step duration="100" file="2.gif" />
+				<step duration="100" file="3.gif" />
+				<step duration="100" file="1.gif" />
+				<step duration="100" file="2.gif" />
+				<step duration="100" file="3.gif" />
+				<step duration="100" file="1.gif" />
+				<step duration="100" file="2.gif" />
+				<step duration="100" file="3.gif" />
+				<step duration="100" file="1.gif" />
+				<step duration="100" file="2.gif" />
+				<step duration="100" file="3.gif" />
+				<step duration="100" file="1.gif" />
+				<step duration="100" file="2.gif" />
+				<step duration="100" file="3.gif" />
+				<step duration="100" file="1.gif" />
+				<step duration="100" file="2.gif" />
+				<step duration="100" file="3.gif" />
 				<step duration="100" file="1.gif" />
 				<step duration="100" file="2.gif" />
 				<step duration="100" file="3.gif" />
