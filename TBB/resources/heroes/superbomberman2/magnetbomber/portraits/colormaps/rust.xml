@@ -17,21 +17,5 @@
 	<color index="08" red="193" green="105" blue="034" /> <!-- boucle ceinture -->
 	<color index="00" red="000" green="000" blue="000" /> <!-- noirs (contours) -->
 	<color index="14" red="255" green="253" blue="216" /> <!-- blanc (reflets) -->
-<!--
-	<color index="00" red="000" green="000" blue="000" /> <!-- noirs (contours) -->
-	<color index="01" red="176" green="176" blue="176" /> <!-- primaire tres sombre -->
-	<color index="02" red="232" green="232" blue="232" /> <!-- secondaire tres fonce -->
-	<color index="03" red="184" green="000" blue="136" /> <!-- secondaire fonce -->
-	<color index="04" red="208" green="056" blue="000" /> <!-- primaire sombre -->
-	<color index="05" red="096" green="096" blue="096" /> <!-- primaire normal -->
-	<color index="06" red="248" green="056" blue="192" /> <!-- secondaire normal-->
-	<color index="07" red="255" green="216" blue="152" /> <!-- primaire clair -->
-	<color index="08" red="160" green="136" blue="080" /> <!-- boucle ceinture -->
-	<color index="09" red="242" green="242" blue="242" /> <!-- secondaire clair -->
-	<color index="10" red="242" green="242" blue="242" /> <!-- tertiaire normal -->
-	<color index="11" red="255" green="216" blue="152" /> <!-- primaire tres clair -->
-	<color index="12" red="176" green="176" blue="176" /> <!-- secondaire tres clair -->
-	<color index="13" red="255" green="224" blue="184" /> <!-- tertiaire clair -->
-	<color index="14" red="255" green="253" blue="216" /> <!-- blanc (reflets) -->
--->
+
 </colormap>
