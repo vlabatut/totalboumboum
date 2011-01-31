@@ -1540,4 +1540,6 @@ public class Launcher
 	// TODO quand on tente de poser une bombe, le sprite est créé et on tente de voir s'il peut apparaître
 	// 	    question : est-il d'entrée inséré dans le Level ? si oui, y en a surement un paillat au bout d'un moment;
 	//		vu qu'en cas d'apparition impossible la bombe n'est pas retirée du Level (supposition)
+	// TODO il est possib que les ombres de Shirobon SBM2 soient à décaller un peu vers le bas, à voir comment ça rend dans le jeu
+	// TODO faire le Dr. Mook de SBM1 (commande le boss du monde 3+transition3>4+boss 5+transition5>6+bosses6&7+fin)
 }
