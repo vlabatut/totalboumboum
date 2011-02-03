@@ -3,8 +3,8 @@
 	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
 	<settings>
 		<levels randomOrder="false" />
-		<players randomLocation="false" />
-		<limits points="0" rounds="10" time="0" />
+		<players randomLocation="true" />
+		<limits points="0" rounds="5" time="60000" />
 		<points share="true" draw="TIME">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -14,11 +14,18 @@
 		</points>
 	</settings>
 	<players>
-		<player file="cc207601-8afe-4c67-94d9-17cdc9bea77d" color="INDIGO" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="c6bea657-b93e-4e7c-8aa8-11eddca19f41" color="WHITE" controls="2" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="BLUE" controls="1" spritePack="superbomberman2" spriteFolder="magnetbomber" />
+		<player file="bc8b7b98-7456-486a-a5b0-9cc9715d6e45" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="CYAN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
+		<player file="7b4170c4-4362-47e5-abcd-8e78a70f9b30" color="BLACK" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="sbm1Custom" folder="debug" allowedPlayers="1 2" />
+		<level pack="tournament201011" folder="horizontal" allowedPlayers="2 3 4 5 6 7 8 9 10" />
+		<level pack="tournament201011" folder="power" allowedPlayers="2 3 4 5" />
+		<level pack="tournament201011" folder="readysetgo" allowedPlayers="2 3 4 5" />
+		<level pack="tournament201011" folder="items" allowedPlayers="2 3 4 5 6" />
+		<level pack="tournament201011" folder="line" allowedPlayers="2 3 4 5" />
 	</levels>
 </gameQuickmatch>
 
