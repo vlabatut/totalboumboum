@@ -1542,6 +1542,5 @@ public class Launcher
 	//		vu qu'en cas d'apparition impossible la bombe n'est pas retirée du Level (supposition)
 	// TODO il est possib que les ombres de Shirobon SBM2 soient à décaller un peu vers le bas, à voir comment ça rend dans le jeu
 	// TODO faire le Dr. Mook de SBM1 (commande le boss du monde 3+transition3>4+boss 5+transition5>6+bosses6&7+fin)
-	// TODO màj news sur bombopédie (y a une catégorie spéciale)
 	// TODO pb avec les instances de SBM1 et NES: les flammes ne doivent pas traverser les bombes
 }
