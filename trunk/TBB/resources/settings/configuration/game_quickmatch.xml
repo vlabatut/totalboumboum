@@ -14,18 +14,11 @@
 		</points>
 	</settings>
 	<players>
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="BLUE" controls="1" spritePack="superbomberman2" spriteFolder="magnetbomber" />
-		<player file="bc8b7b98-7456-486a-a5b0-9cc9715d6e45" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="CYAN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="7b4170c4-4362-47e5-abcd-8e78a70f9b30" color="BLACK" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="BLUE" controls="1" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="edd5a2e2-9ce4-4523-b76a-192733dd588f" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
-		<level pack="tournament201011" folder="horizontal" allowedPlayers="2 3 4 5 6 7 8 9 10" />
-		<level pack="tournament201011" folder="power" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201011" folder="readysetgo" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201011" folder="items" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201011" folder="line" allowedPlayers="2 3 4 5" />
+		<level pack="sbm1Official" folder="story_3_08" allowedPlayers="1 2 3 4" />
 	</levels>
 </gameQuickmatch>
 
