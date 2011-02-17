@@ -446,3 +446,20 @@
 		- interface complète
 		- mécanismes de connexion presque complets (manque la récupération de déconnexion, etc.)
 		- mécanismes de jeu terminés mais le système évènementiel est à refaire entièrement pour économiser la BP
+
++ beta.020
+	- Moteur :
+		- correction d'un bug dans le chargement des bombes (complétion des gestures)
+	- GUI :
+		- indicateur d'occupation de CPU
+	- IA :
+		- modèle de simulation
+		- bombage automatique des IA inactives, avec inclusion dans les options de la GUI
+	- stats :
+		- correction d'un bug concernant le classement des joueurs en fonctions du type
+	- Divers :
+		- ébauche de mode réseau
+		- animation d'apparition des bombes
+		- nouveau thème pour le tournoi 4
+		- nouveaux niveaux pour la qualif et le tournoi: bombfest, qualif4, hurry
+		- mise à jour de l'année du copyright de 2008-2010 en 2008-2011
