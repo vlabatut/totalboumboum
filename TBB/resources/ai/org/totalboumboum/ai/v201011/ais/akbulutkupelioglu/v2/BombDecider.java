@@ -108,7 +108,7 @@ public class BombDecider
 
 	public static List<AiTile> getBombRange(boolean walls, AiHero ownHero) throws StopRequestException
 	{
-		//TODO:gözden geçir ki, bonus falan geldiğinde düzgün işlesin
+		//gözden geçir ki, bonus falan geldiğinde düzgün işlesin
 		monIA.checkInterruption();
 		int range = ownHero.getBombRange();
 		AiTile ownTile = ownHero.getTile();

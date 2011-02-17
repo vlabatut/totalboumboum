@@ -484,7 +484,7 @@ public class DeplacementCollecte {
 			destinationCollect(endPoints, endPoints2, matrice);
 			endPoints = endPoints2;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		if (ai.print)

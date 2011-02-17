@@ -90,7 +90,7 @@ public class WallController {
 				try {
 					path = astar.processShortestPath(ourHero.getTile(),possibleDest);
 				} catch (LimitReachedException e) {
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				}
 			

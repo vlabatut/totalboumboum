@@ -54,7 +54,7 @@ public class GocmenogluHekimoglu extends ArtificialIntelligence
 			}
 			
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		

@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class CollectMode extends Mode
 {
-	//TODO:gözden geçir, ben atladım bunu
+	//gözden geçir, ben atladım bunu
 
 	private static CollectMode instance = null;
 	private static AiZone zone;

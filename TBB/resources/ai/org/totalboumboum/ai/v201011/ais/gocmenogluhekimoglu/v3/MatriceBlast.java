@@ -25,7 +25,7 @@ public class MatriceBlast extends MatriceCalc {
 	@Override
 	public void calculate() throws StopRequestException {
 		monIa.checkInterruption();
-		// TODO Auto-generated method stub
+		// 
 		List<AiBomb> bombs = monIa.getPercepts().getBombs();
 		for(Iterator<AiBomb> b = bombs.iterator();b.hasNext();){
 			monIa.checkInterruption();

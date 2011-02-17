@@ -67,7 +67,7 @@ public class OutilesCollecte {
 	}
 	
 	private List<AiTile> add(AiTile aiTile) {
-		// TODO Auto-generated method stub
+		// 
 		return null;
 	}
 

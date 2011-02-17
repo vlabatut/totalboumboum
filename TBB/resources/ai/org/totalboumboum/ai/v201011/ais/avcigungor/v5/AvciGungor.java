@@ -93,7 +93,7 @@ public class AvciGungor extends ArtificialIntelligence {
 		try {
 			this.updatePath();
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			//e.printStackTrace();
 		}*/
 	

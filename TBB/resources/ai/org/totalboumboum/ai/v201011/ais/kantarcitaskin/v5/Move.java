@@ -125,7 +125,7 @@ public class Move
 			{
 				path = astar.processShortestPath(zone.getOwnHero().getTile(), target);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				// 
 			}
 		}
 		else

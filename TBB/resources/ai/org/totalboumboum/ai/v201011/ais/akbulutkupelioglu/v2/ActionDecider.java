@@ -82,7 +82,7 @@ public class ActionDecider
 						path = astar.processShortestPath(ownTile, safeTiles.get(i));
 					}catch(LimitReachedException e)
 					{
-						// TODO Auto-generated catch block
+						//  Auto-generated catch block
 						e.printStackTrace();
 					}
 					i++;					
@@ -121,7 +121,7 @@ public class ActionDecider
 							changeStrategy = true;
 					}
 						//komsu caselerde bonus var mi
-						//TODO: implement
+						// implement
 						//arkamizdan gelen var mi
 						//mal durumda dusman var mi
 						//karar al gerek var mi?
@@ -219,7 +219,7 @@ public class ActionDecider
 			if(wait) //nothing to do, except wait.
 				return new AiAction(AiActionName.NONE);
 			//nereye gidelim?
-			List<Coordinate> interestingPlaces = interest.getMax(20); //TODO: bunu bi sekilde breadth-first search ile birlestir = win!
+			List<Coordinate> interestingPlaces = interest.getMax(20); // bunu bi sekilde breadth-first search ile birlestir = win!
 			//bundan asagisi hic de mantikli degil. bi yerde feci bir design flaw var. strategy olayini yeniden dusunmek gerekebilir.
 			List<AiTile> possiblePlaces = new ArrayList<AiTile>();
 			for(Coordinate coordinate : interestingPlaces)
@@ -367,7 +367,7 @@ public class ActionDecider
 	private List<AiTile> getSafeTilesWithSimulatedBomb(AiHero ownHero) throws StopRequestException
 	{
 		monIA.checkInterruption();
-		Matrix customMatrix = mode.getCustom(ownHero, 3000, 1000); //TODO: MOFO duzgun
+		Matrix customMatrix = mode.getCustom(ownHero, 3000, 1000); // MOFO duzgun
 		List<AiTile> result = getSafeTilesCustom(ownHero.getTile(), ownHero, null, customMatrix);
 		if(result!=null)
 		{

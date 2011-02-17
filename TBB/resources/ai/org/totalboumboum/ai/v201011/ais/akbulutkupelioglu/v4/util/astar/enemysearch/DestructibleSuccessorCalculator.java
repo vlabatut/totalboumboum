@@ -30,7 +30,7 @@ public class DestructibleSuccessorCalculator extends SuccessorCalculator
 	{
 		ia.checkInterruption();
 		monIa = ia;
-		// TODO Auto-generated constructor stub
+		// 
 	}
 	
 	public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException

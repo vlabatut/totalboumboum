@@ -40,7 +40,7 @@ public class HacibektasogluIlgar extends ArtificialIntelligence
 		try {
 			result=map.choisirLeMode(map.matriceCollecte);
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		

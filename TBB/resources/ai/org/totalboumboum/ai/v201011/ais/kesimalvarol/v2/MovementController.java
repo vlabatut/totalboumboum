@@ -222,7 +222,7 @@ public class MovementController {
 			if(a==4) {
 				//!!System.out.println("Will look for last chance");
 				
-				//TODO
+				//
 				/*
 				if(m.representation[monIA.getSelfHero().getTile().getLine()][monIA.getSelfHero().getTile().getCol()]<-200)
 				{
@@ -342,7 +342,7 @@ public class MovementController {
 								else {
 									//!!System.out.println("Path remains unchanged");
 									AiAction movement=new AiAction(AiActionName.MOVE,dir);
-									//TODO:memoriser au lieu de iterer a chaque fois
+									//memoriser au lieu de iterer a chaque fois
 									/*
 									for(int tcount=0;tcount<lastPath.getLength()-1;tcount++)
 									{

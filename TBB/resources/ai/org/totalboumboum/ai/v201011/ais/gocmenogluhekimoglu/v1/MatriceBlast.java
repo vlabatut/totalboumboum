@@ -11,13 +11,13 @@ public class MatriceBlast extends MatriceCalc {
 
 	public MatriceBlast(GocmenogluHekimoglu monIa) throws StopRequestException {
 		super(monIa);
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	@Override
 	public void calculate() throws StopRequestException {
 		monIa.checkInterruption();
-		// TODO Auto-generated method stub
+		// 
 		List<AiBomb> bombs = monIa.getPercepts().getBombs();
 		for(Iterator<AiBomb> b = bombs.iterator();b.hasNext();){
 			monIa.checkInterruption();

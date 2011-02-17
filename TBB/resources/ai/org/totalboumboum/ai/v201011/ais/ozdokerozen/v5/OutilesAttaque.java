@@ -33,8 +33,8 @@ public class OutilesAttaque {
 		tileControleur=new TileControleur(a,matrice);
 		List<AiTile> scopes=new ArrayList<AiTile>();
 		tileControleur.tilePossibleArriveAvecRisk(notreHero.getTile(),tilesPossible,scopes,matrice);
-		// TODO Auto-generated constructor stub
-	}
+		// 
+		}
 	public AiTile bombBomMur(AiTile enemyTile){
 		AiTile mur;
 		List<AiBlock> murs=gameZone.getBlocks();

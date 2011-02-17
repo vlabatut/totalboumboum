@@ -160,7 +160,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 							}
 						}
 					} catch (LimitReachedException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}
 				}else{
@@ -186,7 +186,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 							
 						}
 					} catch (LimitReachedException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}
 					
@@ -199,7 +199,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 					result=newAction2(notrepath, notreHero,matrice);
 					System.out.println("Dayýýýý! biz kaçtýk dayý!");
 				} catch (LimitReachedException e) {
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				}
 			}
@@ -229,7 +229,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 				result=newAction2(notrepath,notreHero,matrice);
 				}
 			} catch (LimitReachedException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 			
@@ -239,7 +239,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			try {
 				notrepath=guvenliAlanaKac(matrice, notreHero, gameZone);
 			} catch (LimitReachedException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 			result=newAction(notrepath, notreHero);
@@ -288,7 +288,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			yol=calculateShortestPath(notreHero, notreHero.getTile(),guvenliYer);
 			
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		return yol;
@@ -365,7 +365,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 							break;
 						}
 					} catch (LimitReachedException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}
 				}
@@ -874,7 +874,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			try {
 				lesPathBonus.add(astar.processShortestPath(notreHero.getTile(), lesBonus.get(i).getTile()));
 			} catch (LimitReachedException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 		}

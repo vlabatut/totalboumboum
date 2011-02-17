@@ -76,10 +76,10 @@ public class Move
 		{
 			path = astar.processShortestPath(zone.getOwnHero().getTile(), target);
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		if(path.getTiles().size()==0 )

@@ -7,7 +7,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
 public class DestructibleCostCalculator extends CostCalculator
 {
 
-	//TODO: calculate that s**t
+	//calculate that s**t
 	public final int COST = 2;
 	@Override
 	public double processCost(AiTile start, AiTile end)

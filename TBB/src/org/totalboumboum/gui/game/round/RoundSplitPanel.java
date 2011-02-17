@@ -2,7 +2,7 @@ package org.totalboumboum.gui.game.round;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2010 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 

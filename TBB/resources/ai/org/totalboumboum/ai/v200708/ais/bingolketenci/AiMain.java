@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200708.ais.bingolketenci;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2010 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 

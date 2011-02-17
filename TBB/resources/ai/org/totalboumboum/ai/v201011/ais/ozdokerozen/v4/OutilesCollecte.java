@@ -49,7 +49,7 @@ public class OutilesCollecte {
 		try {
 			abc.checkInterruption();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		boolean trouverMur=false;
@@ -125,7 +125,7 @@ public class OutilesCollecte {
 				if(bonus.getCol()+plusX+1<=matrice.length) plusX++;
 				if(bonus.getLine()+plusY+1<=matrice.length) plusY++;
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 			

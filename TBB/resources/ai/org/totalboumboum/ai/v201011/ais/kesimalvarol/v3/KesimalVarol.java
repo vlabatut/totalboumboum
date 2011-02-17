@@ -16,7 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
  * L'IA de groupe gris.
- * TODO: Implementation des 
+ * Implementation des 
  * Ali Baran Kesimal
  * Işıl Varol
  * 
@@ -68,7 +68,7 @@ public class KesimalVarol extends ArtificialIntelligence
 		bombReleaseState=true;
 	}
 	
-	//TODO:w/ aipath ?
+	//w/ aipath ?
 	/** La cible precedente */
 	private AiTile lastTarget;
 	/** L'action precedente */

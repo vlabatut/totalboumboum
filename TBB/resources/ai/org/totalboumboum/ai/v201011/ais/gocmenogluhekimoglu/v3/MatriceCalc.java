@@ -101,7 +101,7 @@ public class MatriceCalc {
 				return true;
 			}
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			return false;
 		}
 		

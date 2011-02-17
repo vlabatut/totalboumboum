@@ -44,7 +44,7 @@ public class Coordinate
 	@Override
 	public String toString()
 	{
-		// TODO Auto-generated method stub
+		// 
 		return "("+this.x+","+this.y+"("+this.value+"))";
 	}
 }

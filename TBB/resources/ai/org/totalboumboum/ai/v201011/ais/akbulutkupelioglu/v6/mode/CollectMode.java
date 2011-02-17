@@ -194,7 +194,7 @@ public class CollectMode extends Mode
 					path.checkStartingPoint();
 				}catch(LimitReachedException e)
 				{
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				}
 			}

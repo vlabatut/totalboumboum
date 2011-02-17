@@ -665,7 +665,7 @@ private void fillCollecte(double[][] matriceCollecte,AiZone gameMap)throws StopR
 			try {
 				this.path = this.astar.processShortestPath(tile1, tile2);
 			} catch (LimitReachedException e1) {
-				// TODO Auto-generated catch block
+				// 
 				e1.printStackTrace();
 			}
 		
@@ -686,7 +686,7 @@ private void fillCollecte(double[][] matriceCollecte,AiZone gameMap)throws StopR
 						try {
 							tempPath1 = this.astar.processShortestPath(tile1, tile);
 						} catch (LimitReachedException e) {
-							// TODO Auto-generated catch block
+							// 
 							e.printStackTrace();
 						}
 					
@@ -722,7 +722,7 @@ private void fillCollecte(double[][] matriceCollecte,AiZone gameMap)throws StopR
 					try {
 						this.path = this.astar.processShortestPath(ourOwnHero.getTile(), gameMap.getTile(line, col));
 					} catch (LimitReachedException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}
 				

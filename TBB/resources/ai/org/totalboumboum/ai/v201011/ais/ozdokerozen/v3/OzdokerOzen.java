@@ -166,7 +166,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 							}
 						}
 					} catch (LimitReachedException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}
 				}else{
@@ -194,7 +194,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 							
 						}
 					} catch (LimitReachedException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}
 					
@@ -253,7 +253,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 						result=newAction2(notrepath,notreHero,matrice);
 				
 					} catch (LimitReachedException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}
 				}
@@ -275,7 +275,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 							
 						}
 					} catch (LimitReachedException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}
 					
@@ -322,10 +322,10 @@ public class OzdokerOzen extends ArtificialIntelligence
 		try {
 			shortestPath = astar.processShortestPath(startPoint, endPoint);
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		//-------------
@@ -453,7 +453,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 							break;
 						}
 					} catch (LimitReachedException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}
 				}
@@ -956,7 +956,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			try {
 				lesPathBonus.add(astar.processShortestPath(notreHero.getTile(), lesBonus.get(i).getTile()));
 			} catch (LimitReachedException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 		}

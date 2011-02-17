@@ -59,10 +59,10 @@ public class DropBomb
 						}
 					}
 				} catch (StopRequestException e) {
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				} catch (LimitReachedException e) {
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				}	
 			}
@@ -88,10 +88,10 @@ public class DropBomb
 							}
 						}
 					} catch (StopRequestException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					} catch (LimitReachedException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}	
 				}

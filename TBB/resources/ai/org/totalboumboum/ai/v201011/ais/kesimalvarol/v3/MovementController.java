@@ -382,7 +382,7 @@ public class MovementController {
 			if(a==4) {
 				//!!
 				
-				//TODO
+				//
 				/*
 				if(m.representation[monIA.getSelfHero().getTile().getLine()][monIA.getSelfHero().getTile().getCol()]<-200)
 				{
@@ -536,7 +536,7 @@ public class MovementController {
 								else {
 									//!!
 									AiAction movement=new AiAction(AiActionName.MOVE,dir);
-									//TODO:memoriser au lieu de iterer a chaque fois
+									//memoriser au lieu de iterer a chaque fois
 									/-*
 									for(int tcount=0;tcount<lastPath.getLength()-1;tcount++)
 									{

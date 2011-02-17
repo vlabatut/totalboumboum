@@ -54,7 +54,7 @@ public class ModeCollecte extends Mode {
 			int x = aiItem.getLine();
 			int y = aiItem.getCol();
 			int bonusPenalty = 0;
-			//TODO: Review distances
+			// Review distances
 			for (AiHero hero : zone.getRemainingHeroes()) {
 				double distance = zone.getPixelDistance(hero, aiItem);
 				if(hero==zone.getOwnHero())
