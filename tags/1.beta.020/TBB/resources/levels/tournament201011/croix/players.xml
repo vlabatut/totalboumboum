@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<players xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\players.xsd">
+	<locations>
+<!-- 
+		<case players="0" />
+		<case players="1">
+			<location player="00" line="07" col="01" />
+		</case>
+-->		
+		<case players="2">
+			<location player="00" line="07" col="02" />
+			<location player="01" line="07" col="12" />
+		</case>
+		<case players="3">
+			<location player="00" line="07" col="02" />
+			<location player="01" line="07" col="12" />
+			<location player="02" line="02" col="07" />
+		</case>
+		<case players="4">
+			<location player="00" line="07" col="02" />
+			<location player="01" line="07" col="12" />
+			<location player="02" line="02" col="07" />
+			<location player="03" line="12" col="07" />
+		</case>
+		<case players="5">
+			<location player="00" line="07" col="02" />
+			<location player="01" line="07" col="12" />
+			<location player="02" line="02" col="07" />
+			<location player="03" line="12" col="07" />
+			<location player="04" line="06" col="07" />
+		</case>
+		<case players="6">
+			<location player="00" line="07" col="02" />
+			<location player="01" line="07" col="12" />
+			<location player="02" line="02" col="07" />
+			<location player="03" line="12" col="07" />
+			<location player="04" line="06" col="06" />
+			<location player="05" line="08" col="08" />
+		</case>
+		<case players="7">
+			<location player="00" line="06" col="02" />
+			<location player="01" line="08" col="02" />
+			<location player="02" line="06" col="12" />
+			<location player="03" line="08" col="12" />
+			<location player="04" line="02" col="07" />
+			<location player="05" line="12" col="07" />
+			<location player="06" line="06" col="07" />
+		</case>
+		<case players="8">
+			<location player="00" line="06" col="02" />
+			<location player="01" line="08" col="02" />
+			<location player="02" line="06" col="12" />
+			<location player="03" line="08" col="12" />
+			<location player="04" line="02" col="06" />
+			<location player="05" line="02" col="08" />
+			<location player="06" line="12" col="06" />
+			<location player="07" line="12" col="08" />
+		</case>
+		<case players="9">
+			<location player="00" line="06" col="02" />
+			<location player="01" line="08" col="02" />
+			<location player="02" line="06" col="12" />
+			<location player="03" line="08" col="12" />
+			<location player="04" line="02" col="06" />
+			<location player="05" line="02" col="08" />
+			<location player="06" line="12" col="06" />
+			<location player="07" line="12" col="08" />
+			<location player="08" line="06" col="07" />
+		</case>
+		<case players="10">
+			<location player="00" line="06" col="02" />
+			<location player="01" line="08" col="02" />
+			<location player="02" line="06" col="12" />
+			<location player="03" line="08" col="12" />
+			<location player="04" line="02" col="06" />
+			<location player="05" line="02" col="08" />
+			<location player="06" line="12" col="06" />
+			<location player="07" line="12" col="08" />
+			<location player="08" line="06" col="06" />
+			<location player="09" line="08" col="08" />
+		</case>
+	</locations>
+	<items>
+		<item name="extrabomb" number="3" />
+		<item name="speed" number="1" />
+		<item name="extraflame" number="3" />
+	</items>
+</players>
+

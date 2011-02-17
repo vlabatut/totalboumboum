@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<match
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../schemas/match.xsd">
+	
+ 	<notes>
+ 		<line value="Rencontre décisive, permettant de départagers les joueurs en cas d'égalité à la fin de la rencontre régulière." />
+ 		<line value="Date: 06-01-2009" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<limits>
+		<confrontation>
+			<points local="true" name="points" />
+			<threshold value="1" />
+		</confrontation>
+	</limits>
+ 	
+ 	<rounds randomOrder="true" >
+  		<round local="true" name="round" />
+  	</rounds>
+	
+</match>

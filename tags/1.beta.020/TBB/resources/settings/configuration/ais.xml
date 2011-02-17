@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ais xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\ais.xsd">
+	<ups value="50" />
+	<autoAdvance value="true" delay="3000" />
+	<hideAllAis value="false" />
+	<bombUselessAis value="5000" />
+	<displayExceptions value="false" />
+	<logExceptions value="true" />
+</ais>
+

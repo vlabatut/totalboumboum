@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<round
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/round.xsd">
+	
+ 	<notes>
+ 		<line value="Here goes a short description of the round." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 27-09-2008" />
+ 	</notes>
+
+	<author value="Vincent Labatut" />
+
+	<limits>
+		<lastStanding>
+			<points local="false" name="RoundSurvival" />
+			<threshold value="1" comparator="LESSEQ"/>
+		</lastStanding>
+		<time>
+			<points local="false" name="RoundSurvival" />
+ 			<threshold value="60000" />
+		</time>
+	</limits>
+	
+	<level packname="nbm2Official" name="world2" />
+
+</round>

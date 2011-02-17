@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tournament
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
+	
+	<general name="Tournoi simple de test"/>
+
+ 	<notes>
+ 		<line value="Tournoi de type championnat de test." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 10-11-2009" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<league randomizePlayers="false" minimizeConfrontations="false" confrontationsOrder="UNIFORM" >
+<!-- 		<points local="false" name="TournamentBasic" />  -->
+		<matches randomOrder="true">
+			<match local="true" name="matchA" />
+			<match local="true" name="matchB" />
+		</matches>
+	</league>		
+		
+</tournament>

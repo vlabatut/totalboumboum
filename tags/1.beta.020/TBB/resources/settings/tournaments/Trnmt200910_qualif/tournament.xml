@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tournament
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
+	
+	<general name="Qualification du tournoi 2009/10"/>
+
+ 	<notes>
+ 		<line value="Tournoi pour la qualification des IA de l'année 2009/10." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 24-12-2009" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<single>
+		<match local="true" name="match" />
+	</single>		
+		
+</tournament>

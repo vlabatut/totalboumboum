@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\level.xsd">
+	<title value="Items Zone" />
+	<author value="Vincent Labatut" />
+	<source value="Super Bomberman 1" />
+	<preview file="preview.jpg" />
+	<instance name="superbomberman1" />
+	<theme name="tournament4" />
+	<globalDimension height="15" width="23" />
+	<visibleDimension height="13" width="15" />
+	<visiblePosition upLine="2" leftCol="4" />
+	<display forceAll="false" maximize="true" />
+</level>
+

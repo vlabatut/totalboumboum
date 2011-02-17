@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../../schemas/modulations.xsd" >
+	
+	<gesture name="APPEARING" file="appearing.xml" />
+	<gesture name="BURNING" file="burning.xml" />
+	<gesture name="STANDING" file="standing.xml" />
+
+</modulations>

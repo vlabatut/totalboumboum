@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:simpleType name="tContact">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="COLLISION" />
+			<xsd:enumeration value="INTERSECTION" />
+			
+			<xsd:enumeration value="SOME" /> <!-- represents any value but NONE -->
+			<xsd:enumeration value="ANY" /> <!-- represents any value including NONE -->
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="tContactList"> 
+    	<xsd:list itemType="tContact"/> 
+	</xsd:simpleType> 
+
+</xsd:schema>
+		

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
+	
+	<color index="01" red="194" green="002" blue="002" /> <!-- primaire tres sombre -->
+	<color index="04" red="255" green="044" blue="044" /> <!-- primaire sombre -->
+	<color index="05" red="255" green="082" blue="082" /> <!-- primaire normal -->
+	<color index="07" red="255" green="141" blue="141" /> <!-- primaire clair -->
+	<color index="11" red="254" green="190" blue="190" /> <!-- primaire tres clair -->
+	<color index="02" red="072" green="008" blue="000" /> <!-- secondaire tres fonce -->
+	<color index="03" red="136" green="008" blue="000" /> <!-- secondaire fonce -->
+	<color index="06" red="184" green="048" blue="032" /> <!-- secondaire normal-->
+	<color index="09" red="216" green="112" blue="096" /> <!-- secondaire clair -->
+	<color index="12" red="248" green="224" blue="184" /> <!-- secondaire tres clair -->
+	<color index="10" red="248" green="120" blue="016" /> <!-- tertiaire normal -->
+	<color index="13" red="248" green="248" blue="112" /> <!-- tertiaire clair -->
+	<color index="08" red="104" green="168" blue="048" /> <!-- boucle ceinture -->
+	<color index="00" red="000" green="000" blue="000" /> <!-- noirs (contours) -->
+	<color index="14" red="248" green="248" blue="248" /> <!-- blanc (reflets) -->
+
+</colormap>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd" >
+	
+	<variableTiles>
+		<variableTile name="tile1">
+			<value proba="0.3" >
+				<block name="softwall" />
+			</value>
+			<value proba="0.1" >
+				<block name="softwall" />
+				<item name="extrabomb" />
+			</value>
+			<value proba="0.1" >
+				<block name="softwall" />
+				<item name="extraflame" />
+			</value>
+			<value proba="0.01" >
+				<block name="softwall" />
+				<item name="remotecontrol" />
+			</value>
+			<value proba="0.04" >
+				<block name="softwall" />
+				<item name="throughbombs" />
+			</value>
+			<value proba="0.05" >
+				<block name="softwall" />
+				<item name="throughwalls" />
+			</value>
+			<value proba="0.4" >
+			</value>
+		</variableTile>
+	</variableTiles>
+	
+	<matrix>
+		<line pos="0">
+			<tile pos="0" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="1" >
+				<floor name="marked" />
+				<item name="extrabomb" />
+			</tile>
+			<tile pos="2" >
+				<floor name="marked" />
+				<item name="extraflame" />
+			</tile>
+			<tile pos="3" >
+				<floor name="marked" />
+				<item name="fireproof" />
+			</tile>
+			<tile pos="4" >
+				<floor name="marked" />
+				<item name="life" />
+			</tile>
+			<tile pos="5" >
+				<floor name="marked" />
+				<item name="malus" />
+			</tile>
+			<tile pos="6" >
+				<floor name="marked" />
+				<item name="points" />
+			</tile>
+			<tile pos="7" >
+				<floor name="regular" />
+				<item name="random" />
+			</tile>
+			<tile pos="8" >
+				<floor name="regular" />
+			</tile>
+		</line>
+		
+		<line pos="1">
+			<tile pos="0" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="1" >
+				<floor name="marked" />
+				<item name="remotecontrol" />
+			</tile>
+			<tile pos="2" >
+				<floor name="marked" />
+				<item name="speed" />
+			</tile>
+			<tile pos="3" >
+				<floor name="marked" />
+				<item name="throughbombs" />
+			</tile>
+			<tile pos="4" >
+				<floor name="marked" />
+				<item name="throughwalls" />
+			</tile>
+			<tile pos="5" >
+				<floor name="marked" />
+				<item name="vest" />
+			</tile>
+			<tile pos="6" >
+				<floor name="marked" />
+				<item name="malus" />
+			</tile>
+			<tile pos="7" >
+				<floor name="regular" />
+			</tile>
+			<tile pos="8" >
+				<floor name="regular" />
+			</tile>
+		</line>
+		
+		<line pos="2">
+			<tile pos="0" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="1" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="2" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="3" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="4" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="5" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="6" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="7" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="8" >
+				<floor name="marked" />
+			</tile>
+		</line>
+		
+		<line pos="3">
+			<tile pos="0" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="1" >
+				<floor name="marked" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="3" >
+				<floor name="marked" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="5" >
+				<floor name="marked" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="7" >
+				<floor name="marked" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8" >
+				<floor name="marked" />
+			</tile>
+		</line>
+		
+		<line pos="4">
+			<tile pos="0" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="1" >
+				<floor name="marked" />
+				<reference name="tile1" />
+			</tile>
+			<tile pos="2" >
+				<floor name="marked" />
+				<reference name="tile1" />
+			</tile>
+			<tile pos="3" >
+				<floor name="marked" />
+				<reference name="tile1" />
+			</tile>
+			<tile pos="4" >
+				<floor name="marked" />
+				<reference name="tile1" />
+			</tile>
+			<tile pos="5" >
+				<floor name="marked" />
+				<reference name="tile1" />
+			</tile>
+			<tile pos="6" >
+				<floor name="marked" />
+				<reference name="tile1" />
+			</tile>
+			<tile pos="7" >
+				<floor name="marked" />
+				<reference name="tile1" />
+			</tile>
+			<tile pos="8" >
+				<floor name="marked" />
+			</tile>
+		</line>
+		
+		<line pos="5">
+			<tile pos="0" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="1" >
+				<floor name="marked" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2" >
+				<floor name="marked" />
+				<reference name="tile1" />
+			</tile>
+			<tile pos="3" >
+				<floor name="marked" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4" >
+				<floor name="marked" />
+				<reference name="tile1" />
+			</tile>
+			<tile pos="5" >
+				<floor name="marked" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6" >
+				<floor name="marked" />
+				<block name="softwall" />
+				<bomb name="normal" range="2" />
+			</tile>
+			<tile pos="7" >
+				<floor name="marked" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8" >
+				<floor name="marked" />
+				<bomb name="normal" range="6" duration="5000"/>
+			</tile>
+		</line>
+		
+		<line pos="6">
+			<tile pos="0" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="1" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="2" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="3" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="4" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="5" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="6" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="7" >
+				<floor name="marked" />
+			</tile>
+			<tile pos="8" >
+				<floor name="marked" />
+			</tile>
+		</line>
+	</matrix>
+
+</zone>

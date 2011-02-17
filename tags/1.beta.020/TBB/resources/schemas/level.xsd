@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:complexType name="tTitle">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tAuthor">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSource">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tPreview">
+		<xsd:attribute name="file" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tDisplay">
+		<xsd:attribute name="forceAll" type="xsd:boolean" use="required" />
+		<xsd:attribute name="maximize" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tGlobalDimension">
+		<xsd:attribute name="height" type="xsd:integer" use="required" />
+		<xsd:attribute name="width" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tVisibleDimension">
+		<xsd:attribute name="height" type="xsd:integer" use="required" />
+		<xsd:attribute name="width" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tVisiblePosition">
+		<xsd:attribute name="leftCol" type="xsd:integer" use="required" />
+		<xsd:attribute name="upLine" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tTheme">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tInstance">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tLevel">
+		<xsd:sequence>
+			<xsd:element name="title" type="tTitle" />
+			<xsd:element name="author" type="tAuthor" />
+			<xsd:element name="source" type="tSource" />
+			<xsd:element name="preview" type="tPreview" />
+			
+			<xsd:element name="instance" type="tInstance" />
+			<xsd:element name="theme" type="tTheme" />
+			<xsd:element name="globalDimension" type="tGlobalDimension" />
+			<xsd:element name="visibleDimension" type="tVisibleDimension" />
+			<xsd:element name="visiblePosition" type="tVisiblePosition" />
+			<xsd:element name="display" type="tDisplay" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="level" type="tLevel" />
+
+</xsd:schema>

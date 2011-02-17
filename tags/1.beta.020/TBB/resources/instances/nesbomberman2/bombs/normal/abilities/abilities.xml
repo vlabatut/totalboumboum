@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
+
+		<!-- STATE -->
+<!--  	BOMB_TRIGGER_TIMER --> 
+		<ability strength="2000" frame="false" time="-1" uses="-1">
+			<name value="BOMB_TRIGGER_TIMER" />
+		</ability>
+			
+		<!-- ACTION -->
+
+</abilities>

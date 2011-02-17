@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<points
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../schemas/point.xsd">
+	
+	<notes>
+		<line value="Les points sont donnés directement en fonction du rang des joueurs." />
+		<line value="Ce rang dépend de la somme des points marqués à chaque manche."/>
+		<line value="Les scores sont considérés comme critères secondaires."/>
+		<line value="Remarque: pour une rencontre décisive, il n'y a, a priori, qu'une seule manche."/>
+	</notes>
+
+	<rankpoints exaequoShare="true">
+		<rankings>
+			<total />
+			<scores type="BOMBINGS"/>
+			<scores type="ITEMS"/>
+			<scores type="BOMBS"/>
+		</rankings>
+		<values>
+			<value value="8"/>
+			<value value="4"/>
+			<value value="2"/>
+			<value value="1"/>
+		</values>
+	</rankpoints>	
+ 		
+</points>

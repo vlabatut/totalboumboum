@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../schemas/abilities.xsd" >
+
+		<!-- STATE -->
+<!--	SPRITE_TRAVERSE_BOMB --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_TRAVERSE_BOMB" />
+		</ability>
+<!--	SPRITE_TRAVERSE_ITEM --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_TRAVERSE_ITEM" />
+		</ability>
+<!--	SPRITE_TRAVERSE_WALL --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_TRAVERSE_WALL" />
+		</ability>
+			
+		<!-- ACTION -->
+
+</abilities>
