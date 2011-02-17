@@ -9,7 +9,7 @@ public class MatriceDist extends MatriceCalc  {
 	public MatriceDist(GocmenogluHekimoglu monIa) throws StopRequestException {
 		super(monIa);
 		
-		// TODO Auto-generated constructor stub
+		// 
 	}
 	
 	public void calculate() throws StopRequestException {

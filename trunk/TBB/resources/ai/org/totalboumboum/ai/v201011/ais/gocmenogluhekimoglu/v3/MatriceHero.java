@@ -12,7 +12,7 @@ public class MatriceHero extends MatriceCalc {
 
 	public MatriceHero(GocmenogluHekimoglu monIa) throws StopRequestException {
 		super(monIa);
-		// TODO Auto-generated constructor stub
+		// 
 	}
 	
 	@SuppressWarnings("unused")
@@ -54,7 +54,7 @@ public class MatriceHero extends MatriceCalc {
 	@Override
 	public void calculate() throws StopRequestException {
 		monIa.checkInterruption();
-		// TODO Auto-generated method stub
+		// 
 		
 		@SuppressWarnings("unused")
 		int tilesizepx = (int) monIa.getPercepts().getTile(0,0).getSize();

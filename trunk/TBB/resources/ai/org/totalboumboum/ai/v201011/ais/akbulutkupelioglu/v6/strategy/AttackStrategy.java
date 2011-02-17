@@ -20,7 +20,7 @@ public class AttackStrategy extends Strategy
 	{
 		super(ia);
 		ia.checkInterruption();
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 

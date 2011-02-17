@@ -2,7 +2,7 @@ package org.totalboumboum.gui.menus.explore.rounds.select;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2010Vincent Labatut 
+ * Copyright 2008-2011Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 

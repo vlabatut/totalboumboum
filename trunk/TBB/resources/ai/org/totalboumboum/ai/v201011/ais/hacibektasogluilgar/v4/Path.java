@@ -284,7 +284,7 @@ public class Path {
 			@Override
 			public double processCost(AiTile start, AiTile end)
 					throws StopRequestException {
-				// TODO Auto-generated method stub
+				// 
 				double resultat=0;
 				if(matriceFinal[end.getLine()][end.getCol()]==-50)
 				{

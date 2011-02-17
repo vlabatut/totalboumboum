@@ -190,7 +190,7 @@ public class Move
 				try {
 					path = astar.processShortestPath(zone.getOwnHero().getTile(), target);
 				} catch (LimitReachedException e) {
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				}
 			
@@ -205,7 +205,7 @@ public class Move
 				else
 					path = astar.processShortestPath(zone.getOwnHero().getTile(), target2);
 			} catch (LimitReachedException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}	
 			

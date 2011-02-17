@@ -11,7 +11,7 @@ public class MatriceWall extends MatriceCalc {
 
 	public MatriceWall(GocmenogluHekimoglu monIa) throws StopRequestException {
 		super(monIa);
-		// TODO Auto-generated constructor stub
+		// 
 	}
 	public void calculate() throws StopRequestException {
 		monIa.checkInterruption();

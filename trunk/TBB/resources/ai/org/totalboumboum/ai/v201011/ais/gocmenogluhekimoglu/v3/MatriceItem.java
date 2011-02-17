@@ -16,7 +16,7 @@ public class MatriceItem extends MatriceCalc {
 		super(monIa);
 		
 		this.malus = malus;
-		// TODO Auto-generated constructor stub
+		// 
 	}
 	
 	/**
@@ -25,7 +25,7 @@ public class MatriceItem extends MatriceCalc {
 	@Override
 	public void calculate() throws StopRequestException {
 		monIa.checkInterruption();
-		// TODO Auto-generated method stub
+		// 
 		
 		List<AiItem> items = monIa.getPercepts().getItems();
 		for(Iterator<AiItem> i = items.iterator();i.hasNext();){

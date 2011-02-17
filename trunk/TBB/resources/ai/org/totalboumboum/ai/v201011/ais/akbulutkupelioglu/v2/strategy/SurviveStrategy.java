@@ -10,7 +10,7 @@ public class SurviveStrategy extends Strategy
 	{
 		super(ia);
 		monIa.checkInterruption();
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	

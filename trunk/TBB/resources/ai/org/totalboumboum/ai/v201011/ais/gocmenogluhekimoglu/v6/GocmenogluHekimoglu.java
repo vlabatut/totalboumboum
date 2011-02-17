@@ -78,7 +78,7 @@ public class GocmenogluHekimoglu extends ArtificialIntelligence {
 			force_collect = actionMan.force_collect_i;
 			return result;
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 

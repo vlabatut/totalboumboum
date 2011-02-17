@@ -96,7 +96,7 @@ public class ActionDecider
 					path.checkStartingPoint();
 				}catch(LimitReachedException e)
 				{
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				}
 				if(path.getLength()>1)
@@ -140,7 +140,7 @@ public class ActionDecider
 					List<AiTile> safeTiles = getSafeTiles(ownHero);
 					if(safeTiles.isEmpty())
 					{
-						//TODO:dead? not necessarily. we'll pick a random direction and just run like hell.
+						//dead? not necessarily. we'll pick a random direction and just run like hell.
 						//in the next version, of course.
 					}else
 					{
@@ -152,7 +152,7 @@ public class ActionDecider
 							path.checkStartingPoint();
 						}catch(LimitReachedException e)
 						{
-							// TODO Auto-generated catch block
+							// 
 							e.printStackTrace();
 						}
 
@@ -234,7 +234,7 @@ public class ActionDecider
 		if(bombIntention)
 		{
 			//let's find a safe tile before we drop a bomb
-			List<AiTile> safeTiles = getSafeTilesWithSimulatedBomb(ownHero); //TODO:check this, does it actually work?
+			List<AiTile> safeTiles = getSafeTilesWithSimulatedBomb(ownHero); //check this, does it actually work?
 			if(safeTiles.isEmpty())
 			{
 				dropBomb = false;
@@ -246,7 +246,7 @@ public class ActionDecider
 					path.checkStartingPoint();
 				}catch(LimitReachedException e)
 				{
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				}
 				if(path.getLength()<=1)
@@ -291,7 +291,7 @@ public class ActionDecider
 			path.checkStartingPoint();
 		}catch(LimitReachedException e)
 		{
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		if(path.getLength()<=1)
@@ -345,7 +345,7 @@ public class ActionDecider
 	private List<AiTile> getSafeTilesWithSimulatedBomb(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();
-		Matrix customMatrix = mode.getCustom(ownHero); //TODO: MOFO duzgun. v2: oldu gibi?
+		Matrix customMatrix = mode.getCustom(ownHero); //MOFO duzgun. v2: oldu gibi?
 		List<AiTile> result = getSafeTilesCustom(ownHero.getTile(), ownHero, null, customMatrix);
 		if(result!=null)
 		{

@@ -37,7 +37,7 @@ public class CaliskanSeven extends ArtificialIntelligence
 				mtx_final = mtx_attaque;
 			}else mtx_final = mtx_collecte;
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 			mtx_final = mtx_collecte;
 		}
@@ -84,7 +84,7 @@ public class CaliskanSeven extends ArtificialIntelligence
 				return result;
 			}
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		

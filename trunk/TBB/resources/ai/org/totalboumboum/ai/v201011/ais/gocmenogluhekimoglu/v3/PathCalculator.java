@@ -127,8 +127,7 @@ public class PathCalculator {
 					mtxcpy[maxi][maxj] = -1000;
 				}
 			} catch (LimitReachedException e) {
-				// TODO Auto-generated castar.atch block
-				e.printStackTrace();
+				// 				e.printStackTrace();
 			}
 		}
 		

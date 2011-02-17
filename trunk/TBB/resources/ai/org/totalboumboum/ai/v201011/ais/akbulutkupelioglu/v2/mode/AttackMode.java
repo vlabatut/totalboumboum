@@ -181,7 +181,7 @@ public class AttackMode extends Mode
 						}
 						double value = (Math.abs(firstNeighborValue) + Math
 								.abs(secondNeighborValue))
-								* timeFactor; // TODO: may need a recalculation
+								* timeFactor; // may need a recalculation
 						if(enemyTile.getNeighbor(direction).isCrossableBy(
 								ownHero))
 							getInterest().setElement(

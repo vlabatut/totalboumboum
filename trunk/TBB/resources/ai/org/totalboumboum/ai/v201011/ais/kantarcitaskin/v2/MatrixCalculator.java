@@ -56,10 +56,10 @@ public class MatrixCalculator
 			heroEffect(matrix);
 			bombEffect(matrix);
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		return matrix;

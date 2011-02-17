@@ -264,7 +264,7 @@ public class TileControleur {
 				shortestPath = astar.processShortestPath(startPoint, endPoint);
 				return shortestPath;
 			} catch (LimitReachedException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 				return null;
 			}
@@ -496,7 +496,7 @@ public class TileControleur {
 				result=false;
 			}
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		return result;

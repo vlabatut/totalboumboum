@@ -77,7 +77,7 @@ public class ActionDecider
 					path.checkStartingPoint();
 				}catch(LimitReachedException e)
 				{
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				}
 				if(path.getLength()>1)
@@ -101,7 +101,7 @@ public class ActionDecider
 						path.checkStartingPoint();
 					}catch(LimitReachedException e)
 					{
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}
 					
@@ -187,7 +187,7 @@ public class ActionDecider
 					path.checkStartingPoint();
 				}catch(LimitReachedException e)
 				{
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				}
 				if(path.getLength()<=1)
@@ -228,7 +228,7 @@ public class ActionDecider
 			path.checkStartingPoint();
 		}catch(LimitReachedException e)
 		{
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		if(path.getLength()<=1)
@@ -282,7 +282,7 @@ public class ActionDecider
 	private List<AiTile> getSafeTilesWithSimulatedBomb(AiHero ownHero) throws StopRequestException
 	{
 		monIa.checkInterruption();
-		Matrix customMatrix = mode.getCustom(ownHero); //TODO: MOFO duzgun. v2: oldu gibi?
+		Matrix customMatrix = mode.getCustom(ownHero); //MOFO duzgun. v2: oldu gibi?
 		List<AiTile> result = getSafeTilesCustom(ownHero.getTile(), ownHero, null, customMatrix);
 		if(result!=null)
 		{

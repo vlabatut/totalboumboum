@@ -37,7 +37,7 @@ public class ModeSelector
 	{
 		ia.checkInterruption();
 		Mode result = null;
-		// TODO:implement =)
+		// implement =)
 		
 		result = CollectMode.getInstance(ia);
 		if(myZone.getHiddenItemsCount()<BONUS_THRESHOLD)

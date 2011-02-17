@@ -40,10 +40,10 @@ public class Move
 		{
 			path = astar.processShortestPath(zone.getOwnHero().getTile(), target);
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		AiPath pathtempo1 = path;
@@ -61,10 +61,10 @@ public class Move
 				try {
 					pathtempo1 = astar.processShortestPath(zone.getOwnHero().getTile(), tile);
 				} catch (StopRequestException e) {
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				} catch (LimitReachedException e) {
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				}
 				if(pathtempo1.isShorterThan(pathtempo2) && !pathtempo1.isEmpty())

@@ -15,7 +15,7 @@ public class AdvancedSuccessorCalculator extends SuccessorCalculator
 	private Matrix interest = null;
 	private AkbulutKupelioglu monIA = null;
 	private final int TILE_TRAVERSAL_TIME = -1200;
-	private final int TILE_TRAVERSAL_TIME_MIN = -700; //TODO:calculate this
+	private final int TILE_TRAVERSAL_TIME_MIN = -700; //calculate this
 	public AdvancedSuccessorCalculator(Matrix interest, AkbulutKupelioglu monIA) throws StopRequestException
 	{
 		monIA.checkInterruption();

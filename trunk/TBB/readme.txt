@@ -7,6 +7,7 @@ There are two ways to launch the game, depending on your operating system:
 	- Unix/Linux/MacOs users: use 'launch'
 
 You will find another script you can use to recompile the game: 'compile.bat' (for Windows) or 'compile' (for the other OSs). Of course, you will need the JDK6 (Java Development Kit) to compile (see http://java.sun.com/javase/downloads).
+(you also need the version of the game which includes all source codes)
 
 For development purpose, another script called 'quicklaunch.bat' (for Windows) or 'quicklaunch' (others) allows to execute the game with a minimal GUI, and to play directely one round.
 
@@ -24,6 +25,7 @@ Pour lancer le jeu, tout dépend de ton système d'exploitation :
 	- Unix/Linux/MacOs : utilise 'launch'
 
 Tu trouveras également un autre script permettant de recompiler le jeu : 'compile.bat' (pour Windows) ou 'compile' (pour les autres systèmes). Bien sûr, il te faut le JDK6 pour pouvoir compiler, et il  est disponible ici : http://java.sun.com/javase/downloads
+(Il faut aussi disposer de la version du jeu incluant les code sources, bien entendu !)
 
 Pour faciliter le développement, un autre script appelé 'quicklaunch.bat' (Windows) ou 'quicklaunch' (autres) permet d'exécuter le jeu avec une interface graphique minimale, et de jouer directement une manche.
 

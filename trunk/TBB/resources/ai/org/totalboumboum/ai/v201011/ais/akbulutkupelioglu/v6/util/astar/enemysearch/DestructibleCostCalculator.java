@@ -14,7 +14,7 @@ public class DestructibleCostCalculator extends CostCalculator
 {
 
 	AkbulutKupelioglu monIa;
-	//TODO: calculate that
+	//calculate that
 	/**
 	 * The cost of travel over a destructible block. 
 	 */
@@ -29,7 +29,7 @@ public class DestructibleCostCalculator extends CostCalculator
 	{
 		ia.checkInterruption();
 		monIa = ia;
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	@Override

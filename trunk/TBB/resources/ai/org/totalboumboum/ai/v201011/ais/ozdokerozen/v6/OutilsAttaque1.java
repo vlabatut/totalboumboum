@@ -37,7 +37,7 @@ public class OutilsAttaque1 {
 		List<AiTile> scopes=new ArrayList<AiTile>();
 		tileControleur.tilePossibleArriveAvecRisk(notreHero.getTile(),tilesPossible,scopes,matrice);
 		tileControleur.tierLesTilesParDistanceEtAccebilite(tilesPossible);
-		// TODO Auto-generated constructor stub
+		// 
 	}
 	public AiTile bombBomMur(AiTile enemyTile) throws StopRequestException{
 		AI.checkInterruption();

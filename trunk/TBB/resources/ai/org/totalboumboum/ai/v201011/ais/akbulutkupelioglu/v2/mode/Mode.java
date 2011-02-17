@@ -113,7 +113,7 @@ public abstract class Mode
 	}
 	public void processBombs(AiHero ownHero) throws StopRequestException
 	{
-		//TODO: burdan basla
+		//burdan basla
 		monIa.checkInterruption();
 		List<AiBomb> bombs = zone.getBombs();
 		Collections.sort(bombs, new BombComparator()); //we sort the bombs by remaining time, ascending 

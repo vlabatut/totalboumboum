@@ -157,7 +157,7 @@ public class TileControleur {
 				}
 				
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 			
@@ -267,7 +267,7 @@ public class TileControleur {
 			shortestPath = astar.processShortestPath(startPoint, endPoint);
 			return shortestPath;
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 			return null;
 		}
@@ -471,10 +471,10 @@ public class TileControleur {
 				result=false;
 			}
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		} catch (LimitReachedException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		return result;

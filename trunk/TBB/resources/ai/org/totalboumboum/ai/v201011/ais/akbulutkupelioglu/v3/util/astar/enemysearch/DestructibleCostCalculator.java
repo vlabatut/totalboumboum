@@ -14,9 +14,9 @@ public class DestructibleCostCalculator extends CostCalculator
 	{
 		ia.checkInterruption();
 		monIa = ia;
-		// TODO Auto-generated constructor stub
+		// 
 	}
-	//TODO: calculate that s**t
+	//calculate that s**t
 	public final int COST = 2;
 	@Override
 	public double processCost(AiTile start, AiTile end)

@@ -16,7 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
  * L'IA de groupe gris.
- * TODO: Implementation des 
+ * Implementation des 
  * Ali Baran Kesimal
  * Işıl Varol
  * 

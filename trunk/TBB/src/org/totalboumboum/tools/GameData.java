@@ -2,7 +2,7 @@ package org.totalboumboum.tools;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2010 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -31,7 +31,7 @@ public class GameData
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static final String VERSION = "1.beta.020";
+	public static final String VERSION = "1.beta.021";
 	public static final double TOLERANCE = 0.01;
 	public static boolean quickMode;
 	

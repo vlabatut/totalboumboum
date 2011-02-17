@@ -73,7 +73,7 @@ public class DeplacementCommune {
 		try {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 			shortestPath = astar.processShortestPath(startPoint, endPoints);
-		} catch (LimitReachedException e) { // TODO Auto-generated catch block
+		} catch (LimitReachedException e) { // 
 		}
 		return shortestPath;
 	}

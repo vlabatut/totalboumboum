@@ -748,7 +748,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 			System.out.println("on a calcule le Shortestpath ");
 		}
 		catch (LimitReachedException e)
-		{	// TODO Auto-generated catch block
+		{	// 
 			e.printStackTrace();
 		}
 		return shortestPath;

@@ -12,7 +12,7 @@ public class CoordinateComparator implements Comparator<Coordinate>{
 	
 	public CoordinateComparator()
 	{
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	public CoordinateComparator(HashMap<Coordinate, Integer> dm)

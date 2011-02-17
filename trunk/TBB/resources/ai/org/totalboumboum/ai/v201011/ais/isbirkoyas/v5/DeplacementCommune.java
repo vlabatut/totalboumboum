@@ -73,7 +73,7 @@ public class DeplacementCommune {
 
 			if (ai.print)
 				System.out.println("on a calcule le Shortestpath ");
-		} catch (LimitReachedException e) { // TODO Auto-generated catch block
+		} catch (LimitReachedException e) { // 
 			e.printStackTrace();
 		}
 		return shortestPath;

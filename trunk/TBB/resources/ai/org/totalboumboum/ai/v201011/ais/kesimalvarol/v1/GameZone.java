@@ -163,7 +163,7 @@ public class GameZone
 			modifier=-40;
 		else {
 			modifier=-5;
-			//TODO : neighbModifier=25; pour mode attaque
+			//neighbModifier=25; pour mode attaque
 		}
 		for(AiHero hero : currtile.getHeroes())
 		{

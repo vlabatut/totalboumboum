@@ -21,7 +21,7 @@ public class KayaYerinde extends ArtificialIntelligence {
 
 	@Override
 	public AiAction processAction() throws StopRequestException {
-		// TODO Auto-generated method stub
+		// 
 		// avant tout: test d'interruption
 		checkInterruption();
 		//La perception instantanement de l'environnement
