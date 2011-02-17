@@ -2,7 +2,7 @@ package org.totalboumboum;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2010 Vincent Labatut 
+ * Copyright 2008-2011 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -919,22 +919,12 @@ public class Launcher
 // CHANGE LOG	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* TODO
-	 * + beta.020
+	 * + beta.021
 	 * - Moteur :
-	 * 		- correction d'un bug dans le chargement des bombes (complétion des gestures)
 	 * - GUI :
-	 * 		- indicateur d'occupation de CPU
 	 * - IA :
-	 * 		- modèle de simulation
-	 * 		- bombage automatique des IA inactives, avec inclusion dans les options de la GUI
 	 * - stats :
-	 * 		- correction d'un bug concernant le classement des joueurs en fonctions du type
 	 * - Divers :
-	 * 		- ébauche de mode réseau
-	 * 		- animation d'apparition des bombes
-	 * 		- nouveau thème pour le tournoi 4
-	 * 		- nouveaux niveaux pour la qualif et le tournoi: bombfest, qualif4, hurry
-	 * TODO : synthétiser les news du forum kik pr toutes les v.19
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
