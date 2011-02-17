@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../schemas/animes.xsd" 
+		scale="4" boundHeight="12.5">
+	
+	<colors default="RED" >
+		<colorsprite name="BLACK" folder="black"/>
+		<colorsprite name="BLUE" folder="blue" />
+		<colorsprite name="BROWN" folder="brown" />
+		<colorsprite name="CYAN" folder="cyan" />
+		<colorsprite name="GRASS" folder="grass" />
+		<colorsprite name="GREEN" folder="green" />
+		<colorsprite name="GREY" folder="grey" />
+		<colorsprite name="INDIGO" folder="indigo" />
+		<colorsprite name="ORANGE" folder="orange" />
+		<colorsprite name="PINK" folder="pink" />
+		<colorsprite name="PURPLE" folder="purple" />
+		<colorsprite name="RED" folder="red" />
+		<colorsprite name="RUST" folder="rust" />
+		<colorsprite name="ULTRAMARINE" folder="ultramarine" />
+		<colorsprite name="WHITE" folder="white" />
+		<colorsprite name="YELLOW" folder="yellow" />
+	</colors>
+	
+	<shadows folder="shadows">
+		<shadow name="00" file="00.png" />
+		<shadow name="dark" file="dark.png" />
+	</shadows>
+	
+	<gestures>
+		<gesture name="APPEARING" folder="appearing" shadow="dark" proportional="true">
+			<direction name="NONE" >
+				<step duration="100" />
+				<step duration="100" file="01.png" />
+				<step duration="100" file="02.png" />
+				<step duration="100" file="03.png" />
+				<step duration="100" file="04.png" />
+				<step duration="100" file="05.png" />
+				<step duration="100" file="06.png" />
+				<step duration="100" file="07.png" />
+				<step duration="100" file="08.png" />
+				<step duration="100" file="09.png" />
+				<step duration="100" file="10.png" />
+				<step duration="100" file="11.png" />
+				<step duration="100" file="12.png" />
+				<step duration="100" file="13.png" />
+			</direction>
+		</gesture>
+
+		<gesture name="BOUNCING" folder="bouncing" shadow="00" shadowYShift="-5" proportional="true" repeat="true">
+			<direction name="DOWN" folder="down">
+				<step duration="100" file="02.png" />
+				<step duration="100" file="03.png" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="100" file="02.png" />
+				<step duration="100" file="03.png" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="100" file="02.png" />
+				<step duration="100" file="03.png" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="100" file="02.png" />
+				<step duration="100" file="03.png" />
+			</direction>
+		</gesture>
+		
+		<gesture name="BURNING" folder="burning" shadow="00">
+			<direction name="NONE" >
+				<step duration="100" file="01.png" />
+				<step duration="100" file="02.png" />
+				<step duration="100" file="03.png" />
+				<step duration="800" file="04.png" />
+				<step duration="300" file="05.png" />
+				<step duration="125" file="06.png" />
+				<step duration="100" file="07.png" />
+				<step duration="75" file="08.png" />
+				<step duration="50" file="09.png" />
+				<step duration="300" file="10.png" />
+				<step duration="50" file="11.png" />
+				<step duration="50" file="11.png" />
+				<step duration="50" file="12.png" />
+				<step duration="50" file="13.png" />
+				<step duration="50" file="14.png" />
+				<step duration="50" file="15.png" />
+				<step duration="500" file="16.png" />
+			</direction>
+		</gesture>
+
+		<gesture name="CARRYING" folder="carrying" shadow="00" repeat="true">
+			<direction name="DOWN" folder="down">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="DOWNLEFT" folder="downleft">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="DOWNRIGHT" folder="downright">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UPLEFT" folder="upleft">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UPRIGHT" folder="upright">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+		</gesture>
+
+		<gesture name="CRYING" folder="crying" shadow="00">
+			<direction name="NONE" >
+				<step duration="300" file="01.png" />
+				<step duration="300" file="02.png" />
+				<step duration="300" file="03.png" />
+					<step duration="200" file="04.png" />
+					<step duration="200" file="05.png" />
+					<step duration="200" file="04.png" />
+					<step duration="200" file="05.png" />
+					<step duration="150" file="04.png" />
+					<step duration="150" file="05.png" />
+					<step duration="100" file="04.png" />
+					<step duration="100" file="05.png" />
+					<step duration="100" file="04.png" />
+					<step duration="100" file="05.png" />
+				<step duration="100" file="06.png" />
+				<step duration="100" file="07.png" />
+					<step duration="100" file="08.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+					<step duration="100" file="09.png" />
+					<step duration="100" file="10.png" />
+					<step duration="100" file="11.png" />
+			</direction>
+		</gesture>
+
+		<gesture name="DISAPPEARING" folder="disappearing" shadow="dark" proportional="true">
+			<direction name="NONE" >
+				<step duration="100" file="01.png" />
+				<step duration="100" file="02.png" />
+				<step duration="100" file="03.png" />
+				<step duration="100" file="04.png" />
+				<step duration="100" file="05.png" />
+				<step duration="100" file="06.png" />
+				<step duration="100" file="07.png" />
+				<step duration="100" file="08.png" />
+				<step duration="100" file="09.png" />
+				<step duration="100" file="10.png" />
+				<step duration="100" file="11.png" />
+				<step duration="100" file="12.png" />
+				<step duration="100" file="13.png" />
+				<step duration="100" />
+			</direction>
+		</gesture>
+
+		<gesture name="EXULTING" folder="exulting" shadow="00">
+			<direction name="NONE">
+				<step duration="100" file="00.png"/>
+				<step duration="50" file="01.png"/>
+				<step duration="50" file="02.png"/>
+				<step duration="50" file="03.png"/>
+				<step duration="50" file="04.png"/>
+					<step duration="25" file="05.png" />
+					<step duration="25" file="06.png" />
+					<step duration="25" file="05.png" />
+					<step duration="25" file="06.png" />
+					<step duration="25" file="05.png" />
+					<step duration="25" file="07.png" />
+					<step duration="25" file="06.png" />
+					<step duration="25" file="07.png" />
+					<step duration="25" file="05.png" />
+					<step duration="25" file="07.png" />
+					<step duration="25" file="06.png" />
+				<step duration="300" file="07.png" />
+				<step duration="200" file="08.png"/>
+				<step duration="100" file="09.png"/>
+				<step duration="100" file="10.png"/>
+				<step duration="200" file="11.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+					<step duration="75" file="12.png"/>
+					<step duration="75" file="13.png"/>
+					<step duration="75" file="14.png"/>
+					<step duration="75" file="15.png"/>
+					<step duration="75" file="16.png"/>
+					<step duration="75" file="17.png"/>
+			</direction>
+		</gesture>
+
+		<gesture name="HOLDING" folder="holding" shadow="00">
+			<direction name="DOWN">
+				<step file="down.png" />
+			</direction>
+			<direction name="LEFT">
+				<step file="left.png" />
+			</direction>
+			<direction name="RIGHT">
+				<step file="right.png" />
+			</direction>
+			<direction name="UP">
+				<step file="up.png" />
+			</direction>
+		</gesture>
+		
+		<gesture name="JUMPING" folder="bouncing" shadow="00" >
+			<direction name="DOWN" folder="down">
+				<step file="01.png" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step file="01.png" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step file="01.png" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step file="01.png" />
+			</direction>
+		</gesture>		
+		
+		<gesture name="LANDING" folder="bouncing" shadow="00" >
+			<direction name="DOWN" folder="down">
+				<step file="01.png" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step file="01.png" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step file="01.png" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step file="01.png" />
+			</direction>
+		</gesture>		
+
+		<gesture name="PICKING" shadow="00" folder="picking">
+			<direction name="DOWN" folder="down">
+				<step duration="150" file="01.png" />
+				<step duration="50" file="02.png" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="150" file="01.png" />
+				<step duration="50" file="02.png" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="150" file="01.png" />
+				<step duration="50" file="02.png" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="150" file="01.png" />
+				<step duration="50" file="02.png" />
+			</direction>
+		</gesture>
+		
+		<gesture name="PUNCHING" folder="punching" shadow="00" repeat="false">
+			<direction name="DOWN" folder="down">
+				<step duration="50" file="1.png" />
+				<step duration="200" file="2.png" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="50" file="1.png" />
+				<step duration="200" file="2.png" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="1.png" />
+				<step duration="200" file="2.png" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="1.png" />
+				<step duration="200" file="2.png" />
+			</direction>
+		</gesture>
+		
+		<gesture name="PUSHING" folder="pushing" shadow="00" repeat="true">
+			<direction name="DOWN" folder="down">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="DOWNLEFT" folder="downleft">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="DOWNRIGHT" folder="downright">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UPLEFT" folder="upleft">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UPRIGHT" folder="upright">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+		</gesture>
+		
+		<gesture name="STAGGERING" folder="staggering" repeat="true" shadow="00">
+			<direction name="NONE">
+				<step duration="100" file="01.png" />
+				<step duration="100" file="02.png" />
+				<step duration="100" file="03.png" />
+				<step duration="100" file="04.png" />
+				<step duration="100" file="05.png" />
+				<step duration="100" file="06.png" />
+				<step duration="100" file="07.png" />
+				<step duration="100" file="08.png" />
+				<step duration="100" file="09.png" />
+				<step duration="100" file="10.png" />
+				<step duration="100" file="11.png" />
+				<step duration="100" file="12.png" />
+			</direction>
+		</gesture>
+		
+		<gesture name="STANDING" folder="standing" shadow="00">
+			<direction name="DOWN">
+				<step file="down.png" />
+			</direction>
+			<direction name="LEFT">
+				<step file="left.png" />
+			</direction>
+			<direction name="RIGHT">
+				<step file="right.png" />
+			</direction>
+			<direction name="UP">
+				<step file="up.png" />
+			</direction>
+		</gesture>
+
+		<gesture name="THROWING" shadow="00" folder="throwing">
+			<direction name="DOWN"  folder="down">
+				<step duration="50" file="01.png"  />
+				<step duration="60" file="02.png"  />
+				<step duration="150" file="03.png"  />
+				<step duration="70" file="04.png"  />
+			</direction>
+			<direction name="LEFT" folder="left" >
+				<step duration="50" file="01.png"  />
+				<step duration="60" file="02.png"  />
+				<step duration="150" file="03.png"  />
+				<step duration="70" file="04.png"  />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="01.png"  />
+				<step duration="60" file="02.png"  />
+				<step duration="150" file="03.png"  />
+				<step duration="70" file="04.png"  />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="01.png"  />
+				<step duration="60" file="02.png"  />
+				<step duration="150" file="03.png"  />
+				<step duration="70" file="04.png"  />
+			</direction>
+		</gesture>
+		
+		<gesture name="WAITING" folder="waiting" shadow="00" repeat="false">
+			<direction name="NONE" >
+				<step duration="25" file="2.png" />
+				<step duration="25" file="3.png" />
+				<step duration="25" file="2.png" />
+				<step duration="25" file="3.png" />
+				<step duration="25" file="2.png" />
+				<step duration="25" file="1.png" />
+				<step duration="25" file="3.png" />
+				<step duration="25" file="1.png" />
+				<step duration="25" file="2.png" />
+				<step duration="25" file="1.png" />
+				<step duration="25" file="3.png" />
+				<step duration="300" file="1.png" />
+				<step duration="500" file="4.png" />
+				<step duration="75" file="5.png" />
+				<step duration="75" file="6.png" />
+				<step duration="75" file="7.png" />
+				<step duration="75" file="8.png" />
+				<step duration="75" file="5.png" />
+				<step duration="75" file="6.png" />
+				<step duration="75" file="7.png" />
+				<step duration="75" file="8.png" />
+				<step duration="75" file="5.png" />
+				<step duration="75" file="6.png" />
+				<step duration="75" file="7.png" />
+				<step duration="75" file="8.png" />
+				<step duration="75" file="5.png" />
+				<step duration="75" file="6.png" />
+				<step duration="75" file="7.png" />
+				<step duration="75" file="8.png" />
+				<step duration="75" file="5.png" />
+				<step duration="75" file="6.png" />
+				<step duration="75" file="7.png" />
+				<step duration="75" file="8.png" />
+				<step duration="75" file="5.png" />
+				<step duration="75" file="6.png" />
+				<step duration="75" file="7.png" />
+				<step duration="75" file="8.png" />
+				<step duration="75" file="5.png" />
+				<step duration="75" file="6.png" />
+				<step duration="75" file="7.png" />
+				<step duration="75" file="8.png" />
+				<step duration="75" file="5.png" />
+				<step duration="75" file="6.png" />
+				<step duration="75" file="7.png" />
+				<step duration="75" file="8.png" />
+				<step duration="100" file="4.png" />
+				<step duration="100" file="9.png" />
+			</direction>
+		</gesture>
+		
+		<gesture name="WALKING" folder="walking" shadow="00" repeat="true">
+			<direction name="DOWN" folder="down">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="DOWNLEFT" folder="downleft">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="DOWNRIGHT" folder="downright">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UPLEFT" folder="upleft">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+			<direction name="UPRIGHT" folder="upright">
+				<step duration="50" file="lf1.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="75" file="lf3.png" />
+				<step duration="75" file="lf2.png" />
+				<step duration="50" file="lf1.png" />
+				<step duration="50" file="rf1.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="75" file="rf3.png" />
+				<step duration="75" file="rf2.png" />
+				<step duration="50" file="rf1.png" />
+			</direction>
+		</gesture>
+				
+	</gestures>
+</animes>

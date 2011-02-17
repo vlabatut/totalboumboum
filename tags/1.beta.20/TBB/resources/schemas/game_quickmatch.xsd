@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_game.xsd"/>
+
+	<xsd:simpleType name="tAllowedPlayers">
+	   <xsd:list itemType="xsd:integer"/>
+	</xsd:simpleType>
+ 
+	<xsd:complexType name="tLevel">
+		<xsd:attribute name="pack" type="xsd:string" use="required" />
+		<xsd:attribute name="folder" type="xsd:string" use="required" />
+		<xsd:attribute name="allowedPlayers" type="tAllowedPlayers" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tLevels">
+		<xsd:sequence>
+			<xsd:element name="level" type="tLevel" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tOptions">
+		<xsd:attribute name="useLastPlayers" type="xsd:boolean" use="required" />
+		<xsd:attribute name="useLastLevels" type="xsd:boolean" use="required" />
+		<xsd:attribute name="useLastSettings" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSettingsLevels">
+		<xsd:attribute name="randomOrder" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSettingsPlayers">
+		<xsd:attribute name="randomLocation" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSettingsLimits">
+		<xsd:attribute name="time" type="xsd:integer" use="required" />
+		<xsd:attribute name="rounds" type="xsd:integer" use="required" />
+		<xsd:attribute name="points" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSettingsValue">
+		<xsd:attribute name="rank" type="xsd:integer" use="required" />
+		<xsd:attribute name="points" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="tSettingsDraw">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="BOTH" />
+			<xsd:enumeration value="TIME" />
+			<xsd:enumeration value="AUTOKILL" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="tSettingsPoints">
+		<xsd:sequence>
+			<xsd:element name="value" type="tSettingsValue"  maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="share" type="xsd:boolean" use="required" />
+		<xsd:attribute name="draw" type="tSettingsDraw" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSettings">
+		<xsd:sequence>
+			<xsd:element name="levels" type="tSettingsLevels" />
+			<xsd:element name="players" type="tSettingsPlayers" />
+			<xsd:element name="limits" type="tSettingsLimits" />
+			<xsd:element name="points" type="tSettingsPoints" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tQuickmatch">
+		<xsd:sequence>
+			<xsd:element name="options" type="tOptions" />
+			<xsd:element name="settings" type="tSettings" />
+			<xsd:element name="players" type="tPlayers" />
+			<xsd:element name="levels" type="tLevels" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="gameQuickmatch" type="tQuickmatch" />
+
+</xsd:schema>

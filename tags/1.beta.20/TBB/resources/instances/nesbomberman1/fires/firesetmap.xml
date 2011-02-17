@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<firesetmap
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/firesetmap.xsd">
+
+	<firesets>
+		<fireset name="normal" folder="normal" />
+	</firesets>
+
+</firesetmap>

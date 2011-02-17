@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<players xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\players.xsd">
+	<locations>
+<!-- 
+		<case players="0" />
+		<case players="1">
+			<location player="00" line="01" col="02" />
+		</case>
+-->		
+		<case players="2">
+			<location player="00" line="01" col="02" />
+			<location player="01" line="13" col="14" />
+		</case>
+		<case players="3">
+			<location player="00" line="01" col="02" />
+			<location player="01" line="01" col="14" />
+			<location player="02" line="13" col="02" />
+		</case>
+		<case players="4">
+			<location player="00" line="01" col="02" />
+			<location player="01" line="01" col="14" />
+			<location player="02" line="13" col="02" />
+			<location player="03" line="13" col="14" />
+		</case>
+		<case players="5">
+			<location player="00" line="01" col="02" />
+			<location player="01" line="01" col="14" />
+			<location player="02" line="13" col="02" />
+			<location player="03" line="13" col="14" />
+			<location player="04" line="07" col="08" />
+		</case>
+	</locations>
+	<items>
+		<item name="extrabomb" number="2" />
+		<item name="extraflame" number="2" />
+	</items>
+</players>
+

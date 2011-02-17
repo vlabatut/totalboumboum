@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../schemas/animes.xsd" 
+		scale="1" boundHeight="16">
+	
+	<colors folder="colormaps" >
+		<colormap name="BLACK" file="black" />
+		<colormap name="BLUE" file="blue" />
+		<colormap name="BROWN" file="brown" />
+		<colormap name="CYAN" file="cyan" />
+		<colormap name="GRASS" file="grass" />
+		<colormap name="GREEN" file="green" />
+		<colormap name="GREY" file="grey" />
+		<colormap name="INDIGO" file="indigo" />
+		<colormap name="ORANGE" file="orange" />
+		<colormap name="PINK" file="pink" />
+		<colormap name="PURPLE" file="purple" />
+		<colormap name="RED" file="red" />
+		<colormap name="RUST" file="rust" />
+		<colormap name="ULTRAMARINE" file="ultramarine" />
+		<colormap name="WHITE" file="white" />
+		<colormap name="YELLOW" file="yellow" />
+	</colors>
+	
+	<shadows folder="pictures">
+		<shadow name="normal" file="shadow.png" />
+	</shadows>
+
+	<gestures folder="pictures" >
+	
+		<gesture name="APPEARING" folder="appearing" shadow="normal" >
+			<direction name="NONE">
+				<step duration="70" file="01.gif" />
+				<step duration="70" file="02.gif" />
+				<step duration="70" file="03.gif" />
+				<step duration="70" file="04.gif" />
+				<step duration="70" file="05.gif" />
+				<step duration="70" file="06.gif" />
+				<step duration="70" file="07.gif" />
+				<step duration="70" file="08.gif" />
+				<step duration="70" file="09.gif" />
+				<step duration="70" file="10.gif" />
+				<step duration="70" file="11.gif" />
+				<step duration="70" file="12.gif" />
+				<step duration="70" file="13.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="BOUNCING" folder="jumping" shadow="normal" shadowYShift="-5">
+			<direction name="DOWN">
+				<step file="down.gif" />
+			</direction>
+			<direction name="LEFT">
+				<step file="left.gif" />
+			</direction>
+			<direction name="RIGHT">
+				<step file="right.gif" />
+			</direction>
+			<direction name="UP">
+				<step file="up.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="BURNING" folder="burning">
+			<direction name="NONE">
+				<step duration="60" file="1.gif" />
+				<step duration="60" file="2.gif" />
+				<step duration="60" file="3.gif" />
+				<step duration="80" file="4.gif" />
+				<step duration="140" file="5.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="CARRYING" folder="carrying" shadow="normal" repeat="true">
+			<direction name="DOWN" folder="down">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="CRYING" folder="crying" shadow="normal" repeat="true">
+			<direction name="NONE">
+				<step duration="200" file="1.gif" />
+				<step duration="200" file="2.gif"  />
+			</direction>
+		</gesture>
+		
+		<gesture name="DISAPPEARING" shadow="normal" folder="disappearing">
+			<direction name="NONE">
+				<step duration="70" file="01.gif" />
+				<step duration="70" file="02.gif" />
+				<step duration="70" file="03.gif" />
+				<step duration="70" file="04.gif" />
+				<step duration="70" file="05.gif" />
+				<step duration="70" file="06.gif" />
+				<step duration="70" file="07.gif" />
+				<step duration="70" file="08.gif" />
+				<step duration="70" file="09.gif" />
+				<step duration="70" file="10.gif" />
+				<step duration="70" file="11.gif" />
+				<step duration="70" file="12.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="EXULTING" folder="exulting" repeat="true">
+			<direction name="NONE">
+				<step duration="250" file="1.gif" shadow="shadow1.png" />
+				<step duration="125" file="2.gif" shadow="shadow1.png" />
+				<step duration="125" file="3.gif" shadow="shadow2.png" />
+				<step duration="125" file="2.gif" shadow="shadow1.png" />
+			</direction>
+		</gesture>
+		
+		<gesture name="HOLDING" shadow="normal" folder="holding">
+			<direction name="DOWN">
+				<step file="down.gif"  />
+			</direction>
+			<direction name="LEFT">
+				<step file="left.gif"  />
+			</direction>
+			<direction name="RIGHT">
+				<step file="right.gif" />
+			</direction>
+			<direction name="UP">
+				<step file="up.gif"  />
+			</direction>
+		</gesture>
+		
+		<gesture name="JUMPING" folder="jumping" shadow="normal" >
+			<direction name="DOWN">
+				<step file="down.gif" />
+			</direction>
+			<direction name="LEFT">
+				<step file="left.gif" />
+			</direction>
+			<direction name="RIGHT">
+				<step file="right.gif" />
+			</direction>
+			<direction name="UP">
+				<step file="up.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="LANDING" folder="jumping" shadow="normal" >
+			<direction name="DOWN">
+				<step file="down.gif" />
+			</direction>
+			<direction name="LEFT">
+				<step file="left.gif" />
+			</direction>
+			<direction name="RIGHT">
+				<step file="right.gif" />
+			</direction>
+			<direction name="UP">
+				<step file="up.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="PICKING" shadow="normal" folder="picking">
+			<direction name="DOWN" folder="down">
+				<step duration="50" file="1.gif" />
+				<step duration="50" file="2.gif" />
+				<step duration="50" file="3.gif" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="50" file="1.gif" />
+				<step duration="50" file="2.gif" />
+				<step duration="50" file="3.gif" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="1.gif" />
+				<step duration="50" file="2.gif" />
+				<step duration="50" file="3.gif" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="1.gif" />
+				<step duration="50" file="2.gif" />
+				<step duration="50" file="3.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="PUNCHING" shadow="normal" folder="punching">
+			<direction name="DOWN" folder="down">
+				<step duration="50" file="1.gif" />
+				<step duration="100" file="2.gif" />
+			</direction>
+			<direction name="LEFT" folder="left" >
+				<step duration="50" file="1.gif" shadow="shadow1.png"/>
+				<step duration="100" file="2.gif" shadow="shadow2.png"/>
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="1.gif" shadow="shadow1.png" />
+				<step duration="100" file="2.gif"  shadow="shadow2.png"/>
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="1.gif" />
+				<step duration="100" file="2.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="PUSHING" shadow="normal" folder="pushing" repeat="true">
+			<direction name="DOWN" folder="down">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="STAGGERING" folder="staggering" repeat="true" shadow="normal">
+			<direction name="NONE">
+				<step duration="200" file="center.gif" />
+				<step duration="200" file="left.gif" />
+				<step duration="200" file="center.gif" />
+				<step duration="200" file="right.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="STANDING" shadow="normal" folder="standing">
+			<direction name="DOWN">
+				<step file="down.gif" />
+			</direction>
+			<direction name="LEFT">
+				<step file="left.gif" />
+			</direction>
+			<direction name="RIGHT">
+				<step file="right.gif" />
+			</direction>
+			<direction name="UP">
+				<step file="up.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="THROWING" shadow="normal" folder="throwing">
+			<direction name="DOWN"  folder="down">
+				<step duration="60" file="1.gif"  />
+				<step duration="150" file="2.gif"  />
+				<step duration="70" file="3.gif"  />
+			</direction>
+			<direction name="LEFT" folder="left" >
+				<step duration="60" file="1.gif" />
+				<step duration="150" file="2.gif" />
+				<step duration="70" file="3.gif" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="60" file="1.gif" />
+				<step duration="150" file="2.gif" />
+				<step duration="70" file="3.gif" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="60" file="1.gif" />
+				<step duration="150" file="2.gif" />
+				<step duration="70" file="3.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="WAITING" shadow="normal" folder="waiting" repeat="true">
+			<direction name="NONE">
+				<step duration="170" file="1.gif" />
+				
+				<step duration="170" file="2.gif" />
+				<step duration="170" file="1.gif" />
+				<step duration="170" file="3.gif" />
+				<step duration="170" file="1.gif" />
+				<step duration="170" file="2.gif" />
+				<step duration="170" file="1.gif" />
+				<step duration="170" file="3.gif" />
+				<step duration="170" file="1.gif" />
+				<step duration="170" file="2.gif" />
+				<step duration="170" file="1.gif" />
+				<step duration="170" file="3.gif" />
+				<step duration="170" file="1.gif" />
+				<step duration="170" file="2.gif" />
+				<step duration="170" file="1.gif" />
+				<step duration="170" file="3.gif" />
+				<step duration="170" file="1.gif" />
+				<step duration="170" file="2.gif" />
+				<step duration="170" file="1.gif" />
+				<step duration="170" file="3.gif" />
+				<step duration="170" file="1.gif" />
+				<step duration="170" file="2.gif" />
+				<step duration="170" file="1.gif" />
+				<step duration="170" file="3.gif" />
+				<step duration="170" file="1.gif" />
+				
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="4.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="5.gif" />
+				<step duration="150" file="1.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="WALKING" shadow="normal" folder="walking" repeat="true">
+			<direction name="DOWN" folder="down">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+			<direction name="LEFT" folder="left">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+			<direction name="RIGHT" folder="right">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+			<direction name="UP" folder="up">
+				<step duration="50" file="lf1.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="75" file="lf3.gif" />
+				<step duration="75" file="lf2.gif" />
+				<step duration="50" file="lf1.gif" />
+				<step duration="50" file="rf1.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="75" file="rf3.gif" />
+				<step duration="75" file="rf2.gif" />
+				<step duration="50" file="rf1.gif" />
+			</direction>
+		</gesture>
+		
+	</gestures>		
+</animes>

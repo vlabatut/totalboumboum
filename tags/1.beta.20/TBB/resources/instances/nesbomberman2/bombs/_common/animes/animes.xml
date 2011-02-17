@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
+		scale="1" >
+		
+	<colors folder="colormaps" >
+		<colormap name="BLACK" file="black" />
+		<colormap name="BLUE" file="blue" />
+		<colormap name="BROWN" file="brown" />
+		<colormap name="CYAN" file="cyan" />
+		<colormap name="GRASS" file="grass" />
+		<colormap name="GREEN" file="green" />
+		<colormap name="GREY" file="grey" />
+		<colormap name="INDIGO" file="indigo" />
+		<colormap name="ORANGE" file="orange" />
+		<colormap name="PINK" file="pink" />
+		<colormap name="PURPLE" file="purple" />
+		<colormap name="RED" file="red" />
+		<colormap name="RUST" file="rust" />
+		<colormap name="ULTRAMARINE" file="ultramarine" />
+		<colormap name="WHITE" file="white" />
+		<colormap name="YELLOW" file="yellow" />
+	</colors>
+	
+	<gestures folder="pictures">
+	
+		<gesture name="BURNING" repeat="false">
+			<direction name="NONE">
+				<step duration="100" />
+			</direction>
+		</gesture>
+
+		<gesture name="STANDING" repeat="true"  >
+			<direction name="NONE">
+				<step duration="250" file="3.gif" />
+				<step duration="250" file="2.gif" />
+				<step duration="250" file="1.gif" />
+				<step duration="250" file="2.gif" />
+			</direction>
+		</gesture>
+		
+	</gestures>		
+</animes>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
+	
+	<color index="00" red="000" green="000" blue="000" /> <!-- sombre (noir) -->
+	<color index="01" red="088" green="048" blue="024" /> <!-- corps foncé -->
+	<color index="02" red="136" green="072" blue="032" /> <!-- corps normal -->
+	<color index="03" red="072" green="040" blue="032" /> <!-- casque très foncé -->
+	<color index="04" red="224" green="072" blue="104" /> <!-- chaussures foncé -->
+	<color index="05" red="249" green="120" blue="134" /> <!-- chaussures clair -->
+	<color index="06" red="104" green="048" blue="024" /> <!-- casque foncé -->
+	<color index="07" red="248" green="192" blue="136" /> <!-- visage -->
+	<color index="08" red="176" green="112" blue="072" /> <!-- bras clair -->
+	<color index="09" red="136" green="072" blue="032" /> <!-- casque normal -->
+	<color index="10" red="248" green="248" blue="248" /> <!-- reflet (blanc) -->
+	
+</colormap>

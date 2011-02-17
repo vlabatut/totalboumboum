@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
+		scale="4" preview="preview.png" >
+
+	<gestures>
+
+		<gesture name="APPEARING" proportional="true" >
+			<direction name="NONE">
+				<step duration="30" name="appearing1" />
+				<step duration="30" name="appearing2" />
+				<step duration="30" name="appearing3" />
+				<step duration="30" name="appearing4" />
+				<step duration="30">
+					<imageref name="temporary1" /> 
+					<image file="icon.png" />
+				</step>
+			</direction>
+		</gesture>
+
+		<gesture name="DISAPPEARING" repeat="false" >
+			<direction name="NONE">
+				<step duration="30" name="appearing4" />
+				<step duration="30" name="appearing3" />
+				<step duration="30" name="appearing2" />
+				<step duration="30" name="appearing1" />
+			</direction>
+		</gesture>
+
+		<gesture name="RELEASED" repeat="false" >
+			<direction name="NONE">
+				<step duration="85" >
+					<imageref name="temporary1" />
+					<image file="icon.png" />
+					<imageref name="smoke1" yShift="4" />
+				</step>
+				<step duration="105" >
+					<imageref name="temporary2" />
+					<image file="icon.png" />
+					<imageref name="smoke2" yShift="4" />
+				</step>
+				<step duration="80" >
+					<imageref name="temporary3" />
+					<image file="icon.png" />
+					<imageref name="smoke3" yShift="4" />
+				</step>
+				<step duration="60" >
+					<imageref name="temporary4" />
+					<image file="icon.png" />
+					<imageref name="smoke4" yShift="4" />
+				</step>				
+			</direction>
+		</gesture>
+
+		<gesture name="STANDING" repeat="true" >
+			<direction name="NONE">
+				<step duration="50">
+					<imageref name="temporary1" /> 
+					<image file="icon.png" />
+				</step>
+				<step duration="50">
+					<imageref name="temporary2" /> 
+					<image file="icon.png" />
+				</step>
+				<step duration="50">
+					<imageref name="temporary3" /> 
+					<image file="icon.png" />
+				</step>
+				<step duration="50">
+					<imageref name="temporary4" /> 
+					<image file="icon.png" />
+				</step>
+			</direction>
+		</gesture>
+
+
+		
+	</gestures>		
+</animes>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<match
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../schemas/match.xsd">
+	
+ 	<notes>
+ 		<line value="Short match the first at 50 points wins." />
+ 		<line value="Randomly picks the rounds in the many available predefined SBM1 and NBM2 rounds." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 05-10-2009" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<limits>
+ 		<points>
+			<points local="true" name="total" />
+			<threshold value="50" />
+			<source local="true" name="total"/>
+ 		</points>
+	</limits>
+
+ 	<rounds randomOrder="true" >
+  		<round local="false" name="round01" />
+  		<round local="false" name="round02" />
+  		<round local="false" name="round03" />
+  		<round local="false" name="round04" />
+  		<round local="false" name="round05" />
+  		<round local="false" name="round06" />
+  		<round local="false" name="round07" />
+  		<round local="false" name="round08" />
+  		<round local="false" name="round11" />
+  		<round local="false" name="round12" />
+  		<round local="false" name="round13" />
+  		<round local="false" name="round14" />
+  		<round local="false" name="round21" />
+  		<round local="false" name="round22" />
+  		<round local="false" name="round23" />
+  		<round local="false" name="round24" />
+  		<round local="false" name="round25" />
+  		<round local="false" name="round26" />
+  		<round local="false" name="round27" />
+  		<round local="false" name="round31" />
+  		<round local="false" name="round32" />
+  		<round local="false" name="round33" />
+  		<round local="false" name="round34" />
+  		<round local="false" name="round35" />
+  		<round local="false" name="round36" />
+  	</rounds>
+	
+</match>

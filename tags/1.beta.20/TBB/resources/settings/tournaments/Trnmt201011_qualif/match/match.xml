@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<match
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../schemas/match.xsd">
+	
+ 	<notes>
+ 		<line value="Rencontre utilisée pour la qualification des IA l'édition 2010/11." />
+ 		<line value="L'IA à qualifier rencontre une IA de référence sur 4 zones différentes, à l'occasion de 3 manches (soit un total de 12 manches)." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 28-12-2010" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<limits>
+		<confrontation>
+			<points local="true" name="total" />
+			<threshold value="12" />
+		</confrontation>
+<!-- 
+ 		<points>
+			<points local="true" name="total" />
+			<threshold value="2" />
+			<source local="true" name="total"/>
+ 		</points>
+ -->
+	</limits>
+
+ 	<rounds randomOrder="false" >
+  		<round local="true" name="round1" />
+  		<round local="true" name="round1" />
+  		<round local="true" name="round1" />
+  		<round local="true" name="round2" />
+  		<round local="true" name="round2" />
+  		<round local="true" name="round2" />
+  		<round local="true" name="round3" />
+  		<round local="true" name="round3" />
+  		<round local="true" name="round3" />
+  		<round local="true" name="round4" />
+  		<round local="true" name="round4" />
+  		<round local="true" name="round4" />
+  	</rounds>
+	
+</match>

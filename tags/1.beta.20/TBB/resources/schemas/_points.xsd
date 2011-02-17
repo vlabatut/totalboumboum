@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_score.xsd"/>
+<xsd:include schemaLocation="_notes.xsd"/>
+
+	<xsd:complexType name="tPointsTotal" />
+	
+	<xsd:complexType name="tPointsScores">
+		<xsd:attribute name="type" type="tScore" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointsConstant">
+		<xsd:attribute name="value" type="xsd:float" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointsMinimum">
+		<xsd:sequence>
+			<xsd:group ref="gPoints" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointsMaximum">
+		<xsd:sequence>
+			<xsd:group ref="gPoints" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointsSummation">
+		<xsd:sequence>
+			<xsd:group ref="gPoints" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointsRankings">
+		<xsd:sequence>
+			<xsd:group ref="gPoints" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="invert" type="xsd:boolean" use="optional" default="false" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPtsThreshold">
+		<xsd:attribute name="value" type="xsd:float" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPtsThresholds">
+		<xsd:sequence>
+			<xsd:element name="threshold" type="tPtsThreshold" maxOccurs="unbounded" />			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPtsValue">
+		<xsd:attribute name="value" type="xsd:float" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPtsValues">
+		<xsd:sequence>
+			<xsd:element name="value" type="tPtsValue" maxOccurs="unbounded" />			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointsDiscretize">
+		<xsd:sequence>
+			<xsd:group ref="gPoints" />
+			<xsd:element name="thresholds" type="tPtsThresholds" />
+			<xsd:element name="values" type="tPtsValues" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPtsRankings">
+		<xsd:sequence>
+			<xsd:group ref="gPoints" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointsRankpoints">
+		<xsd:sequence>
+			<xsd:element name="rankings" type="tPtsRankings" />
+			<xsd:element name="values" type="tPtsValues" />
+		</xsd:sequence>
+		<xsd:attribute name="invert" type="xsd:boolean" use="optional" default="false" />
+		<xsd:attribute name="exaequoShare" type="xsd:boolean"  use="optional" default="false"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointsAddition">
+		<xsd:sequence>
+			<xsd:group ref="gPoints" />
+			<xsd:group ref="gPoints" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointsSubtraction">
+		<xsd:sequence>
+			<xsd:group ref="gPoints" />
+			<xsd:group ref="gPoints" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointsMultiplication">
+		<xsd:sequence>
+			<xsd:group ref="gPoints" />
+			<xsd:group ref="gPoints" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tPointsDivision">
+		<xsd:sequence>
+			<xsd:group ref="gPoints" />
+			<xsd:group ref="gPoints" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:group name="gPoints">
+		<xsd:choice>
+			<xsd:element name="total" type="tPointsTotal" />
+		
+			<xsd:element name="scores" type="tPointsScores" />
+			<xsd:element name="constant" type="tPointsConstant" />
+
+			<xsd:element name="maximum" type="tPointsMaximum" />
+			<xsd:element name="minimum" type="tPointsMinimum" />
+			<xsd:element name="summation" type="tPointsSummation" />
+			<xsd:element name="rankings" type="tPointsRankings" />
+			<xsd:element name="discretize" type="tPointsDiscretize" />
+			<xsd:element name="rankpoints" type="tPointsRankpoints" />
+
+			<xsd:element name="addition" type="tPointsAddition" />
+			<xsd:element name="subtraction" type="tPointsSubtraction" />
+			<xsd:element name="multiplication" type="tPointsMultiplication" />
+			<xsd:element name="division" type="tPointsDivision" />
+		</xsd:choice>
+	</xsd:group>
+	
+</xsd:schema>
+	

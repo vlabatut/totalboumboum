@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_quickmatch.xsd">
+	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
+	<settings>
+		<levels randomOrder="false" />
+		<players randomLocation="true" />
+		<limits points="0" rounds="5" time="60000" />
+		<points share="true" draw="TIME">
+			<value rank="1" points="8" />
+			<value rank="2" points="4" />
+			<value rank="3" points="2" />
+			<value rank="4" points="1" />
+			<value rank="5" points="0" />
+		</points>
+	</settings>
+	<players>
+		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="BLUE" controls="1" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="edd5a2e2-9ce4-4523-b76a-192733dd588f" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+	</players>
+	<levels>
+		<level pack="sbm1Official" folder="story_3_08" allowedPlayers="1 2 3 4" />
+	</levels>
+</gameQuickmatch>
+

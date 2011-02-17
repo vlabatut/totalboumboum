@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_direction.xsd"/>
+<xsd:include schemaLocation="_gesture_name.xsd"/>
+
+	<xsd:simpleType name="tBaseZPosition">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="down" />
+			<xsd:enumeration value="boundHeight" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!--  shifts defining one step -->
+	<xsd:complexType name="tStep">
+		<!--  horizontal shift -->
+		<xsd:attribute name="xShift" type="xsd:float" use="optional"  default="0" />
+		<!--  vertical shift -->
+		<xsd:attribute name="yShift" type="xsd:float" use="optional"  default="0" />
+		<!--  elevation shift -->
+		<xsd:attribute name="zShift" type="xsd:float" use="optional"  default="0" />
+		<!--  time allowed to perform the step -->		
+		<xsd:attribute name="duration" type="xsd:integer" />
+		<xsd:attribute name="boundZShift" type="tBaseZPosition" use="optional" />
+	</xsd:complexType>
+
+	<!--  steps sequence defining one move -->
+	<xsd:complexType name="tSteps">
+		<xsd:sequence>
+			<!--  steps sequence -->
+			<xsd:element name="step" type="tStep" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!--  force the position relatively to the center of the current tile -->
+	<xsd:complexType name="tForcePosition">
+		<xsd:attribute name="time" type="xsd:integer" />
+		<xsd:attribute name="xPosition" type="xsd:float" use="optional" />
+		<xsd:attribute name="yPosition" type="xsd:float" use="optional" />
+		<xsd:attribute name="zPosition" type="xsd:float" use="optional" />
+	</xsd:complexType>
+
+	<!--  forced position and steps sequence defining a move in one direction -->
+	<xsd:complexType name="tDirectionGesture">
+		<xsd:sequence>
+			<!--  steps sequence -->
+			<xsd:element name="forcePosition" type="tForcePosition" minOccurs="0" />
+			<!--  steps sequence -->
+			<xsd:element name="steps" type="tSteps" minOccurs="0" />
+		</xsd:sequence>
+		<!--  direction name -->
+		<xsd:attribute name="name" type="tDirection" />
+		<xsd:attribute name="xInteraction" type="xsd:float" use="optional" />
+		<xsd:attribute name="yInteraction" type="xsd:float" use="optional" />
+	</xsd:complexType>
+
+	<!--  gesture -->
+	<xsd:complexType name="tGesture">
+		<!--  several moves in various directions -->		
+		<xsd:sequence>
+			<xsd:element name="direction" type="tDirectionGesture" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<!--  gesture name -->
+		<xsd:attribute name="name" type="tGestureName" />
+		<!--  if true, the gesture will be repeated (no limit) -->
+		<xsd:attribute name="repeat" type="xsd:boolean" use="optional" default="false" />
+		<!--  some events may change the horizontal trajectory : vitesse en pixels/seconde-->
+		<xsd:attribute name="xInteraction" type="xsd:float" use="optional" default="0" />
+		<!--  some events may change the vertical trajectory -->
+		<xsd:attribute name="yInteraction" type="xsd:float" use="optional" default="0" />
+		<xsd:attribute name="proportional" type="xsd:boolean" use="optional" default="false" />			
+	</xsd:complexType>
+
+	<!--  set of gestures -->
+	<xsd:complexType name="tTrajectories">
+		<xsd:sequence>
+			<xsd:element name="gesture" type="tGesture" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  document root -->	
+	<xsd:element name="trajectories" type="tTrajectories" />
+
+</xsd:schema>

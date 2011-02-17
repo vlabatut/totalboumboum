@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gesture-modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../xml/schemas/gesture_modulations.xsd" >
+
+	<selfModulations>
+<!--  	sprite-flat --> 
+<!--  	sprite-above --> 
+<!--	sprite-traverse-bomb --> 
+<!--	sprite-traverse-item --> 
+<!--	sprite-traverse-wall --> 
+<!--  	block-spawn --> 
+<!--  	bomb-explosion-latency --> 
+<!--  	bomb-failure-maxduration --> 
+<!--  	bomb-failure-minduration --> 
+<!--  	bomb-failure-probability --> 
+<!--  	bomb-push-latency --> 
+<!--  	bomb-trigger-collision --> 
+<!--  	bomb-trigger-combustion --> 
+<!--  	bomb-trigger-control --> 
+<!--  	bomb-trigger-timer --> 
+<!--  	bomb-number --> 
+<!--  	bomb-range --> 
+<!--  	hero-punch-duration --> 
+<!--  	hero-wait-duration --> 
+	</selfModulations>
+	
+	<actorModulations>
+<!--  	appear --> 
+<!--  	consume --> 
+<!--  	detonate --> 
+<!--  	drop --> 
+<!--  	gather --> 
+<!--  	jump --> 
+<!--  	land --> 
+<!--  	movehigh --> 
+<!--  	movelow --> 
+<!--  	punch --> 
+<!--  	push --> 
+<!--  	trigger --> 
+	</actorModulations>
+	
+	<targetModulations>
+<!--  	appear --> 
+<!--  	consume --> 
+<!--  	drop --> 
+<!--  	gather --> 
+<!--  	punch --> 
+<!--  	push --> 
+<!--  	trigger --> 
+	</targetModulations>
+	
+	<thirdModulations>
+<!--  	appear --> 
+<!--  	consume --> 
+<!--  	detonate --> 
+<!--  	drop --> 
+<!--  	gather --> 
+<!--  	jump --> 
+		<modulation frame="true" strength="1" >
+			<action name="jump" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" />
+			<actorRestrictions />
+			<targetRestrictions />
+		</modulation>
+<!--  	land --> 
+<!--  	movehigh --> 
+		<modulation frame="true" strength="1" >
+			<action name="movehigh" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" />
+			<actorRestrictions />
+			<targetRestrictions />
+		</modulation>
+<!--  	movelow --> 
+<!--  	punch --> 
+		<modulation frame="true" strength="1" >
+			<action name="punch" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" target="all" />
+			<actorRestrictions />
+			<targetRestrictions />
+		</modulation>
+<!--  	push --> 
+		<modulation frame="true" strength="1" >
+			<action name="push" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" target="all" />
+			<actorRestrictions />
+			<targetRestrictions />
+		</modulation>
+<!--  	trigger --> 
+		<modulation frame="true" strength="1" >
+			<action name="trigger" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" target="all" />
+			<actorRestrictions />
+			<targetRestrictions />
+		</modulation>
+	</thirdModulations>
+
+</gesture-modulations>
