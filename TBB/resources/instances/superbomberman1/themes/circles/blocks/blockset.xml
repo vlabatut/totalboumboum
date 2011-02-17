@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blockset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/blockset.xsd" >
+	
+	<abstractBlocks >
+		<block name="common" folder="_common" />
+		
+		<group name="softwalls" folder="hardwalls">
+			<block name="common_soft" folder="_common"/>
+		</group>
+
+		<group name="hardwalls" folder="hardwalls">
+			<block name="common_hard" folder="_common"/>
+		</group>
+	</abstractBlocks>
+	
+	<concreteBlocks>
+		<group name="softwalls" folder="softwalls">
+			<block name="regular" folder="regular"/>
+			
+			<block name="retractable" folder="regular"/>
+		</group>
+		
+		<group name="hardwalls" folder="hardwalls">
+			<block name="regular" folder="regular"/>
+			
+			<block name="down" folder="down"/>
+			<block name="insideleft" folder="insideleft"/>
+			<block name="insideright" folder="insideright"/>
+			<block name="outsidedownleft" folder="outsidedownleft"/>
+			<block name="outsidedownright" folder="outsidedownright"/>
+			<block name="outsideleft" folder="outsideleft"/>
+			<block name="outsideright" folder="outsideright"/>
+			<block name="outsideupleft" folder="outsideupleft"/>
+			<block name="outsideupright" folder="outsideupright"/>
+			<block name="up" folder="up"/>
+			<block name="upleft" folder="upleft"/>
+			<block name="upright" folder="upright"/>
+		</group>
+	</concreteBlocks>
+	
+</blockset>
