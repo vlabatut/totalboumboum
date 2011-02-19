@@ -916,14 +916,17 @@ public class Launcher
 	
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// CHANGE LOG	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CHANGELOG	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* TODO
 	 * + beta.021
 	 * - Moteur :
 	 * - GUI :
 	 * - IA :
-	 * - stats :
+	 * - Stats :
+	 * - Ressources :
+	 * 		- thème SBM1 circles + les deux niveaux qui vont avec
+	 * 		- thème SBM1 power + le niveau qui va avec
 	 * - Divers :
 	 */
 
@@ -1533,5 +1536,5 @@ public class Launcher
 	// TODO il est possib que les ombres de Shirobon SBM2 soient à décaller un peu vers le bas, à voir comment ça rend dans le jeu
 	// TODO faire le Dr. Mook de SBM1 (commande le boss du monde 3+transition3>4+boss 5+transition5>6+bosses6&7+fin)
 	// TODO rajouter  les blocs de shrink pr SBM1. y a un shrink pr les versions précédentes ?
-	// TODO pb au chargement du thème (à cause de l'image vide ?)
+	// TODO finir power : voir les items nécessaires
 }
