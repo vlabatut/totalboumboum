@@ -7,7 +7,7 @@
 		<gesture name="STANDING" repeat="true" >
 			<direction name="NONE">
 				<step duration="40" file="1.gif" />
-				<step duration="40" file="1.gif" />
+				<step duration="40" file="2.gif" />
 			</direction>
 		</gesture>
 	</gestures>
