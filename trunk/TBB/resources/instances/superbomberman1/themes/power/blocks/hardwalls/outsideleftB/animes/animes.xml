@@ -6,8 +6,8 @@
 	<gestures>	
 		<gesture name="STANDING" repeat="true" >
 			<direction name="NONE">
-				<step duration="40" name="standing1" />
 				<step duration="40" name="standing2" />
+				<step duration="40" name="standing1" />
 			</direction>
 		</gesture>
 	</gestures>
