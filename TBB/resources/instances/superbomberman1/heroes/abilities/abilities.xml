@@ -71,6 +71,9 @@
 		<ability strength="2.03" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P4" />
 		</ability>
+		<ability strength="3.89" frame="false" time="-1" uses="-1">
+			<name value="HERO_WALK_SPEED_P49" />
+		</ability>
 		<ability strength="4.12" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P99" />
 		</ability>
