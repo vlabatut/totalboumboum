@@ -2,13 +2,13 @@
 <level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd" >
 
-	<title value="Story Zone 2-07" />
+	<title value="Battle Zone #10" />
 	<author value="Vincent Labatut" />
 	<source value="Super Bomberman 1" />
 	<preview file="preview.jpg" />
 
 	<instance name="superbomberman1" />
-	<theme name="circles"/>
+	<theme name="power"/>
 
 	<globalDimension height="13" width="17" />
 	<visibleDimension height="13" width="15" />
