@@ -5,7 +5,7 @@
 	<abstractBlocks >
 		<block name="common" folder="_common" />
 		
-		<group name="softwalls" folder="hardwalls">
+		<group name="softwalls" folder="softwalls">
 			<block name="common_soft" folder="_common"/>
 		</group>
 
@@ -18,7 +18,7 @@
 		<group name="softwalls" folder="softwalls">
 			<block name="regular" folder="regular"/>
 			
-			<block name="retractable" folder="regular"/>
+			<block name="retractable" folder="retractable"/>
 		</group>
 		
 		<group name="hardwalls" folder="hardwalls">

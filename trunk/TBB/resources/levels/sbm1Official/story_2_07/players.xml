@@ -3,10 +3,12 @@
 		xsi:noNamespaceSchemaLocation="../../../schemas/players.xsd" >
 	
 	<locations>
+<!-- 
 		<case players="0" />
 		<case players="1">
 			<location player="0" line="01" col="02" />
 		</case>
+-->		
 		<case players="2">
 			<location player="0" line="01" col="02" />
 			<location player="1" line="11" col="14" />
