@@ -63,6 +63,7 @@
 				<xsd:enumeration value="HERO_WALK_SPEED_P7" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P8" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P9" />
+				<xsd:enumeration value="HERO_WALK_SPEED_P49" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P99" />
 				
 				<xsd:enumeration value="ITEM_CANCEL_GROUP" />

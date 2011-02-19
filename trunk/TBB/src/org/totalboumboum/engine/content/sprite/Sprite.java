@@ -78,7 +78,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  *
  */
-public abstract class Sprite
+public abstract class Sprite implements Comparable<Sprite>
 {	
 	public Sprite()
 	{	this(idCount);
@@ -111,6 +111,15 @@ public abstract class Sprite
 
 	public void setId(int id)
 	{	this.id = id;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COMPARABLE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+    public int compareTo(Sprite sprite)
+	{	int result = id - sprite.getId();
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////

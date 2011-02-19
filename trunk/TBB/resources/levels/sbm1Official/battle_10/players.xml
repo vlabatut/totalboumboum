@@ -27,14 +27,13 @@
 	</locations>
 	
 	<items>
-		<item name="extrabomb" number="3" />
-		<item name="extraflame" number="3" />
-		<item name="speed" number="1" />
+		<item name="extrabomb" number="6" />
+		<item name="extraflame" number="10" />
+		<item name="kick" number="1" />
+		<item name="punch" number="1" />
+		<item name="speed" number="3" />
 		<item name="vestart" number="1" />
 <!-- 
-		<item name="punch" number="1" />
-		<item name="goldenflame" number="10" />
-		<item name="kick" number="1" />
 		<item name="penetration" number="1" />
 		<item name="remotecontrol" number="1" />
 		<item name="throughwalls" number="5" />
