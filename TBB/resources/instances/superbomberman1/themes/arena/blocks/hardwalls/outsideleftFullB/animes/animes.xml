@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/animes.xsd" 
+		scale="1" >
+		
+	<gestures>	
+		<gesture name="STANDING" repeat="true" shadow="standShadow" shadowYShift="4">
+			<direction name="NONE">
+				<step duration="380" file="1.gif" />
+				<step duration="380" file="2.gif" />
+			</direction>
+		</gesture>
+	</gestures>
+	
+</animes>
