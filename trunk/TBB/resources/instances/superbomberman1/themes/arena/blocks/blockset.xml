@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blockset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/blockset.xsd" >
+	
+	<abstractBlocks >
+		<block name="common" folder="_common" />
+		
+		<group name="hardwalls" folder="hardwalls">
+			<block name="common_hard" folder="_common"/>
+		</group>
+	</abstractBlocks>
+	
+	<concreteBlocks>
+		<group name="hardwalls" folder="hardwalls">
+			<block name="regular" folder="regular"/>
+			
+			<block name="fill" folder="fill"/>
+			<block name="insidedownleft" folder="insidedownleft"/>
+			<block name="insidedownright" folder="insidedownright"/>
+			<block name="insideleftArena" folder="insideleftArena"/>
+			<block name="insideleftCorridor" folder="insideleftCorridor"/>
+			<block name="insiderightArena" folder="insiderightArena"/>
+			<block name="insiderightCorridor" folder="insiderightCorridor"/>
+			<block name="insideupA" folder="insideupA"/>
+			<block name="insideupB" folder="insideupB"/>
+			<block name="insideupleftEmpty" folder="insideupleftEmpty"/>
+			<block name="insideupleftFull" folder="insideupleftFull"/>
+			<block name="insideuprightEmpty" folder="insideuprightEmpty"/>
+			<block name="insideuprightFull" folder="insideuprightFull"/>
+			<block name="outsideleftEmptyA" folder="outsideleftEmptyA"/>
+			<block name="outsideleftEmptyB" folder="outsideleftEmptyB"/>
+			<block name="outsideleftFullA" folder="outsideleftFullA"/>
+			<block name="outsideleftFullB" folder="outsideleftFullB"/>
+			<block name="outsiderightEmptyA" folder="outsiderightEmptyA"/>
+			<block name="outsiderightEmptyB" folder="outsiderightEmptyB"/>
+			<block name="outsiderightFullA" folder="outsiderightFullA"/>
+			<block name="outsiderightFullB" folder="outsiderightFullB"/>
+			<block name="outsideupEmpty" folder="outsideupEmpty"/>
+			<block name="outsideupFullA" folder="outsideupFullA"/>
+			<block name="outsideupFullB" folder="outsideupFullB"/>
+		</group>
+	</concreteBlocks>
+	
+</blockset>
