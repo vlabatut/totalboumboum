@@ -4,8 +4,8 @@
 		scale="1" >
 		
 	<images>
-		<image name="standing1" file="1.png" />
-		<image name="standing2" file="2.png" />
+		<image name="standing1" file="1.gif" />
+		<image name="standing2" file="2.gif" />
 	</images>
 	
 	<gestures>	
