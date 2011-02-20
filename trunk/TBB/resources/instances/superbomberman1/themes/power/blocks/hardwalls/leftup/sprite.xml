@@ -3,6 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../../../../schemas/sprite.xsd">
 	
-	<general name="Fill" base="common_hard" />
+	<general name="Left Up" base="common_hard" />
 
 </sprite>
