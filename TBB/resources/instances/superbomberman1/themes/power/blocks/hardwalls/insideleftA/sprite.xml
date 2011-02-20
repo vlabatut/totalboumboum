@@ -3,6 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../../../../schemas/sprite.xsd">
 	
-	<general name="Inside Left" base="common_insideleft" />
+	<general name="Inside Left A" base="common_insideleft" />
 
 </sprite>

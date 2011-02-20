@@ -3,6 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../../../../schemas/sprite.xsd">
 	
-	<general name="Outside Left A" base="common_outsideleft" />
+	<general name="Outside Left B" base="common_outsideleft" />
 
 </sprite>
