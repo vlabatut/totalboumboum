@@ -21,6 +21,8 @@
 	</players>
 	<levels>
 		<level pack="sbm1Official" folder="battle_10" allowedPlayers="0 1 2 3 4" />
+		<level pack="sbm1Official" folder="story_2_06" allowedPlayers="2 3 4" />
+		<level pack="sbm1Official" folder="story_2_07" allowedPlayers="2 3 4" />
 	</levels>
 </gameQuickmatch>
 
