@@ -925,8 +925,7 @@ public class Launcher
 	 * - IA :
 	 * - Stats :
 	 * - Ressources :
-	 * 		- thème SBM1 circles + les deux niveaux qui vont avec
-	 * 		- thème SBM1 power + le niveau qui va avec
+	 * 		- thèmes SBM1 circles, power, arena, speed + les niveaux qui vont avec
 	 * - Divers :
 	 */
 
@@ -1537,4 +1536,5 @@ public class Launcher
 	// TODO faire le Dr. Mook de SBM1 (commande le boss du monde 3+transition3>4+boss 5+transition5>6+bosses6&7+fin)
 	// TODO rajouter  les blocs de shrink pr SBM1. y a un shrink pr les versions précédentes ?
 	// TODO voir les items initiaux de chaque zone + la vitesse initiale
+	// TODO gérer les images de façon unique, ce qui permettrait de définir des transformations (flips, rotations) >> définir des borders comme dans SBM sans avoir à tout générer à la main + temps de chargement plus rapide
 }
