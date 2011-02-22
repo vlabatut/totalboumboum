@@ -4,7 +4,7 @@
 		scale="1" >
 		
 	<gestures>	
-		<gesture name="STANDING" folder="standing" shadow="standShadow" shadowYShift="4">
+		<gesture name="STANDING" folder="standing" >
 			<direction name="NONE">
 				<step file="standing.gif" />
 			</direction>
