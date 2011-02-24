@@ -30,7 +30,7 @@
 			</direction>
 		</gesture>
 
-		<gesture name="STANDING" folder="standing" shadow="standShadow" shadowYShift="2">
+		<gesture name="STANDING" folder="standing" shadow="standShadow" shadowYShift="4">
 			<direction name="NONE">
 				<step file="standing.gif" />
 			</direction>
