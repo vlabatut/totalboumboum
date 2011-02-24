@@ -2,7 +2,7 @@
 <level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd" >
 
-	<title value="Story Zone 5-01" />
+	<title value="Story Zone 5-1" />
 	<author value="Vincent Labatut" />
 	<source value="Super Bomberman 1" />
 	<preview file="preview.jpg" />

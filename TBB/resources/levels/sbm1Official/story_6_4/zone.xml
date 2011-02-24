@@ -67,37 +67,37 @@
 				<block group="hardwalls" name="upB" />
 			</tile>
 			<tile pos="4">
-				<block group="hardwalls" name="upC" />
+				<block group="hardwalls" name="upA" />
 			</tile>
 			<tile pos="5">
-				<block group="hardwalls" name="upD" />
+				<block group="hardwalls" name="upB" />
 			</tile>
 			<tile pos="6">
-				<block group="hardwalls" name="upE" />
+				<block group="hardwalls" name="upA" />
 			</tile>
 			<tile pos="7">
-				<block group="hardwalls" name="upF" />
+				<block group="hardwalls" name="upB" />
 			</tile>
 			<tile pos="8">
-				<block group="hardwalls" name="upD" />
+				<block group="hardwalls" name="upA" />
 			</tile>
 			<tile pos="9">
-				<block group="hardwalls" name="upE" />
+				<block group="hardwalls" name="upB" />
 			</tile>
 			<tile pos="10">
-				<block group="hardwalls" name="upC" />
+				<block group="hardwalls" name="upA" />
 			</tile>
 			<tile pos="11">
-				<block group="hardwalls" name="upD" />
+				<block group="hardwalls" name="upB" />
 			</tile>
 			<tile pos="12">
-				<block group="hardwalls" name="upI" />
+				<block group="hardwalls" name="upA" />
 			</tile>
 			<tile pos="13">
-				<block group="hardwalls" name="upH" />
+				<block group="hardwalls" name="upB" />
 			</tile>
 			<tile pos="14">
-				<block group="hardwalls" name="upG" />
+				<block group="hardwalls" name="upA" />
 			</tile>
 			<tile pos="15">
 				<block group="hardwalls" name="insideupright" />
@@ -153,7 +153,7 @@
 				<block group="hardwalls" name="insiderightA" />
 			</tile>
 			<tile pos="16">
-				<block group="hardwalls" name="outsiderightA" />
+				<block group="hardwalls" name="outsiderightB" />
 			</tile>
 		</line>
 		
@@ -202,10 +202,10 @@
 			<tile pos="14">
 			</tile>
 			<tile pos="15">
-				<block group="hardwalls" name="insiderightB" />
+				<block group="hardwalls" name="insiderightD" />
 			</tile>
 			<tile pos="16">
-				<block group="hardwalls" name="outsiderightC" />
+				<block group="hardwalls" name="outsiderightE" />
 			</tile>
 		</line>
 		
@@ -256,10 +256,10 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="15">
-				<block group="hardwalls" name="insiderightD" />
+				<block group="hardwalls" name="insiderightA" />
 			</tile>
 			<tile pos="16">
-				<block group="hardwalls" name="outsiderightE" />
+				<block group="hardwalls" name="outsiderightB" />
 			</tile>
 		</line>
 		
@@ -310,6 +310,60 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="15">
+				<block group="hardwalls" name="insiderightB" />
+			</tile>
+			<tile pos="16">
+				<block group="hardwalls" name="outsiderightC" />
+			</tile>
+		</line>
+		
+		<line pos="5">
+			<tile pos="0">
+				<block group="hardwalls" name="outsideleftB" />
+			</tile>
+			<tile pos="1">
+				<block group="hardwalls" name="insideleftA" />
+			</tile>
+			<tile pos="2">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="3">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="4">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="5">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="6">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="7">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="8">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="9">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="10">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="11">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="12">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="13">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="14">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="15">
 				<block group="hardwalls" name="insiderightC" />
 			</tile>
 			<tile pos="16">
@@ -317,9 +371,63 @@
 			</tile>
 		</line>
 		
-		<line pos="5">
+		<line pos="6">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftE" />
+			</tile>
+			<tile pos="1">
+				<block group="hardwalls" name="insideleftD" />
+			</tile>
+			<tile pos="2">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="3">
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="5">
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="7">
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="9">
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="11">
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="13">
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="15">
+				<block group="hardwalls" name="insiderightD" />
+			</tile>
+			<tile pos="16">
+				<block group="hardwalls" name="outsiderightE" />
+			</tile>
+		</line>
+		
+		<line pos="7">
+			<tile pos="0">
+				<block group="hardwalls" name="outsideleftB" />
 			</tile>
 			<tile pos="1">
 				<block group="hardwalls" name="insideleftA" />
@@ -367,11 +475,11 @@
 				<block group="hardwalls" name="insiderightA" />
 			</tile>
 			<tile pos="16">
-				<block group="hardwalls" name="outsiderightE" />
+				<block group="hardwalls" name="outsiderightB" />
 			</tile>
 		</line>
 		
-		<line pos="6">
+		<line pos="8">
 			<tile pos="0">
 				<block group="hardwalls" name="outsideleftC" />
 			</tile>
@@ -418,181 +526,73 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="15">
-				<block group="hardwalls" name="insiderightE" />
+				<block group="hardwalls" name="insiderightB" />
+			</tile>
+			<tile pos="16">
+				<block group="hardwalls" name="outsiderightC" />
+			</tile>
+		</line>
+		
+		<line pos="9">
+			<tile pos="0">
+				<block group="hardwalls" name="outsideleftD" />
+			</tile>
+			<tile pos="1">
+				<block group="hardwalls" name="insideleftC" />
+			</tile>
+			<tile pos="2">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="3">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="4">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="5">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="6">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="7">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="8">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="9">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="10">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="11">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="12">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="13">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="14">
+				<reference name="tile1" />
+			</tile>
+			<tile pos="15">
+				<block group="hardwalls" name="insiderightC" />
 			</tile>
 			<tile pos="16">
 				<block group="hardwalls" name="outsiderightD" />
 			</tile>
 		</line>
 		
-		<line pos="7">
-			<tile pos="0">
-				<block group="hardwalls" name="outsideleftJ" />
-			</tile>
-			<tile pos="1">
-				<block group="hardwalls" name="insideleftE" />
-			</tile>
-			<tile pos="2">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="3">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="4">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="5">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="6">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="7">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="8">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="9">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="10">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="11">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="12">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="13">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="14">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="15">
-				<block group="hardwalls" name="insiderightF" />
-			</tile>
-			<tile pos="16">
-				<block group="hardwalls" name="outsiderightH" />
-			</tile>
-		</line>
-		
-		<line pos="8">
-			<tile pos="0">
-				<block group="hardwalls" name="outsideleftI" />
-			</tile>
-			<tile pos="1">
-				<block group="hardwalls" name="insideleftF" />
-			</tile>
-			<tile pos="2">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="3">
-				<block group="hardwalls" name="regular" />
-			</tile>
-			<tile pos="4">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="5">
-				<block group="hardwalls" name="regular" />
-			</tile>
-			<tile pos="6">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="7">
-				<block group="hardwalls" name="regular" />
-			</tile>
-			<tile pos="8">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="9">
-				<block group="hardwalls" name="regular" />
-			</tile>
-			<tile pos="10">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="11">
-				<block group="hardwalls" name="regular" />
-			</tile>
-			<tile pos="12">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="13">
-				<block group="hardwalls" name="regular" />
-			</tile>
-			<tile pos="14">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="15">
-				<block group="hardwalls" name="insiderightG" />
-			</tile>
-			<tile pos="16">
-				<block group="hardwalls" name="outsiderightJ" />
-			</tile>
-		</line>
-		
-		<line pos="9">
-			<tile pos="0">
-				<block group="hardwalls" name="outsideleftJ" />
-			</tile>
-			<tile pos="1">
-				<block group="hardwalls" name="insideleftE" />
-			</tile>
-			<tile pos="2">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="3">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="4">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="5">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="6">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="7">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="8">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="9">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="10">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="11">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="12">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="13">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="14">
-				<reference name="tile1" />
-			</tile>
-			<tile pos="15">
-				<block group="hardwalls" name="insiderightE" />
-			</tile>
-			<tile pos="16">
-				<block group="hardwalls" name="outsiderightI" />
-			</tile>
-		</line>
-		
 		<line pos="10">
 			<tile pos="0">
-				<block group="hardwalls" name="outsideleftI" />
+				<block group="hardwalls" name="outsideleftE" />
 			</tile>
 			<tile pos="1">
-				<block group="hardwalls" name="insideleftF" />
+				<block group="hardwalls" name="insideleftD" />
 			</tile>
 			<tile pos="2">
 			</tile>
@@ -632,19 +632,19 @@
 			<tile pos="14">
 			</tile>
 			<tile pos="15">
-				<block group="hardwalls" name="insiderightF" />
+				<block group="hardwalls" name="insiderightD" />
 			</tile>
 			<tile pos="16">
-				<block group="hardwalls" name="outsiderightH" />
+				<block group="hardwalls" name="outsiderightE" />
 			</tile>
 		</line>
 		
 		<line pos="11">
 			<tile pos="0">
-				<block group="hardwalls" name="outsideleftG" />
+				<block group="hardwalls" name="outsideleftB" />
 			</tile>
 			<tile pos="1">
-				<block group="hardwalls" name="insideleftG" />
+				<block group="hardwalls" name="insideleftA" />
 			</tile>
 			<tile pos="2">
 			</tile>
@@ -682,10 +682,10 @@
 			<tile pos="14">
 			</tile>
 			<tile pos="15">
-				<block group="hardwalls" name="insiderightH" />
+				<block group="hardwalls" name="insiderightA" />
 			</tile>
 			<tile pos="16">
-				<block group="hardwalls" name="outsiderightG" />
+				<block group="hardwalls" name="outsiderightB" />
 			</tile>
 		</line>
 		
@@ -703,37 +703,37 @@
 				<block group="hardwalls" name="downB" />
 			</tile>
 			<tile pos="4">
-				<block group="hardwalls" name="downC" />
+				<block group="hardwalls" name="downA" />
 			</tile>
 			<tile pos="5">
-				<block group="hardwalls" name="downD" />
+				<block group="hardwalls" name="downB" />
 			</tile>
 			<tile pos="6">
-				<block group="hardwalls" name="downE" />
+				<block group="hardwalls" name="downA" />
 			</tile>
 			<tile pos="7">
-				<block group="hardwalls" name="downF" />
+				<block group="hardwalls" name="downB" />
 			</tile>
 			<tile pos="8">
-				<block group="hardwalls" name="downG" />
+				<block group="hardwalls" name="downC" />
 			</tile>
 			<tile pos="9">
-				<block group="hardwalls" name="downF" />
+				<block group="hardwalls" name="downA" />
 			</tile>
 			<tile pos="10">
-				<block group="hardwalls" name="downG" />
+				<block group="hardwalls" name="downB" />
 			</tile>
 			<tile pos="11">
-				<block group="hardwalls" name="downH" />
+				<block group="hardwalls" name="downA" />
 			</tile>
 			<tile pos="12">
-				<block group="hardwalls" name="downI" />
+				<block group="hardwalls" name="downB" />
 			</tile>
 			<tile pos="13">
-				<block group="hardwalls" name="downJ" />
+				<block group="hardwalls" name="downA" />
 			</tile>
 			<tile pos="14">
-				<block group="hardwalls" name="downK" />
+				<block group="hardwalls" name="downB" />
 			</tile>
 			<tile pos="15">
 				<block group="hardwalls" name="insidedownright" />
