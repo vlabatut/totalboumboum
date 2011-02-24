@@ -11,9 +11,9 @@
 	</abstractBlocks>
 	
 	<concreteBlocks>
-		<block folder="softwall" name="softwall" />
+		<block name="softwall" folder="softwall" />
 		
-		<group name="hardwalls" folder="hardwalls">
+		<group name="hardwalls" folder="hardwalls" >
 			<block name="regular" folder="regular"/>
 			
 			<block name="downA" folder="downA"/>
@@ -44,7 +44,7 @@
 			<block name="outsiderightE" folder="outsiderightE"/>
 			<block name="outsiderightF" folder="outsiderightF"/>
 			<block name="upA" folder="upA"/>
-			<block name="upB" folder="upB/>
+			<block name="upB" folder="upB"/>
 		</group>
 	</concreteBlocks>
 	

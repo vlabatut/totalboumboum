@@ -10,8 +10,8 @@
 	<gestures>	
 		<gesture name="STANDING" folder="standing" repeat="true" shadow="standShadow" shadowYShift="4">
 			<direction name="NONE">
-				<step duration="100" file="1.gif" />
-				<step duration="100" file="2.gif" />
+				<step duration="600" file="1.gif" />
+				<step duration="300" file="2.gif" />
 			</direction>
 		</gesture>
 	</gestures>
