@@ -46,7 +46,8 @@ public class GameArchiveSaver
 {	
 	public static void saveGameArchive(GameArchive gameArchive) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
-		Element root = saveArchiveElement(gameArchive);	
+		Element root = saveArchiveElement(gameArchive);
+		
 		// save file
 		String folder = FilePaths.getSavesPath()+File.separator+gameArchive.getFolder();
 		String path = folder + File.separator+FileNames.FILE_ARCHIVE+FileNames.EXTENSION_XML;
@@ -57,7 +58,7 @@ public class GameArchiveSaver
 	}
 
 	private static Element saveArchiveElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlNames.ARCHIVE); 
+	{	Element result = new Element(XmlNames.ARCHIVE);
 		
 		// tournament
 		Element tournamentElement = saveTournamentElement(gameArchive);
