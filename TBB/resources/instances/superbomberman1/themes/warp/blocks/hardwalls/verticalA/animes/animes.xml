@@ -3,8 +3,12 @@
 		xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/animes.xsd" 
 		scale="1" >
 		
+	<shadows>
+		<shadow name="standShadow" file="shadow.png" />
+	</shadows>
+	
 	<gestures>	
-		<gesture name="STANDING" >
+		<gesture name="STANDING" shadow="standShadow" shadowYShift="-9">
 			<direction name="NONE">
 				<step file="standing.gif" />
 			</direction>

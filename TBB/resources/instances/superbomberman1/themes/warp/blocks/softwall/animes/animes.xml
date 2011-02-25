@@ -30,24 +30,9 @@
 			</direction>
 		</gesture>
 
-		<gesture name="STANDING" folder="standing" repeat="true" shadow="standShadow" shadowYShift="4">
+		<gesture name="STANDING" folder="standing" repeat="true" shadow="standShadow" shadowYShift="3">
 			<direction name="NONE">
-				<step duration="800" file="1.gif" />
-				<step duration="50" file="2.gif" />
-				<step duration="50" file="3.gif" />
-				<step duration="50" file="4.gif" />
-				<step duration="800" file="5.gif" />
-				<step duration="200" file="4.gif" />
-				<step duration="200" file="3.gif" />
-				<step duration="200" file="2.gif" />
-				<step duration="800" file="1.gif" />
-				<step duration="50" file="6.gif" />
-				<step duration="50" file="7.gif" />
-				<step duration="50" file="8.gif" />
-				<step duration="800" file="9.gif" />
-				<step duration="200" file="8.gif" />
-				<step duration="200" file="7.gif" />
-				<step duration="200" file="6.gif" />
+				<step file="standing.gif" />
 			</direction>
 		</gesture>
 	</gestures>
