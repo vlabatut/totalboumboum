@@ -2,8 +2,14 @@
 <floorset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/floorset.xsd" >
 
+	<abstractFloors>
+		<floor name="common" folder="_common" />
+	</abstractFloors>
+	
 	<concreteFloors>
 		<floor name="regular" folder="regular" />
+		
+		<floor name="teleport" folder="teleport" />
 	</concreteFloors>
 
 </floorset>
