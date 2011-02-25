@@ -4,7 +4,7 @@
 		scale="1" >
 
 	<gestures>
-		<gesture name="STANDING" >
+		<gesture name="STANDING" repeat="true">
 			<direction name="NONE">
 				<step duration="80" file="1.gif" />
 				<step duration="80" file="2.gif" />
