@@ -6,9 +6,9 @@
 	<gestures>
 		<gesture name="STANDING" repeat="true">
 			<direction name="NONE">
-				<step duration="80" file="1.gif" />
-				<step duration="80" file="2.gif" />
-				<step duration="80" file="3.gif" />
+				<step duration="150" file="1.gif" />
+				<step duration="150" file="2.gif" />
+				<step duration="150" file="3.gif" />
 			</direction>
 		</gesture>
 	</gestures>
