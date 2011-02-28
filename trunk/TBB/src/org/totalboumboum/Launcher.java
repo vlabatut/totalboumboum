@@ -925,7 +925,7 @@ public class Launcher
 	 * - IA :
 	 * - Stats :
 	 * - Ressources :
-	 * 		- thèmes SBM1 circles, power, arena, speed + les niveaux qui vont avec
+	 * 		- thèmes SBM1 arena, circles, hal, power, speed & warp + les niveaux qui vont avec
 	 * - Divers :
 	 */
 
