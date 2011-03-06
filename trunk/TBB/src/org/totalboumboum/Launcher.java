@@ -1538,4 +1538,5 @@ public class Launcher
 	// TODO voir les items initiaux de chaque zone + la vitesse initiale
 	// TODO gérer les images de façon unique, ce qui permettrait de définir des transformations (flips, rotations) >> définir des borders comme dans SBM sans avoir à tout générer à la main + temps de chargement plus rapide
 	// TODO dans belts, y a un bidule qui passe sur les rails sur les côtés...
+	// TODO pb avec les ombres des blocs dest dans belt
 }

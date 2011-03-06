@@ -6,10 +6,10 @@
 	<gestures>
 		<gesture name="STANDING" repeat="true" >
 			<direction name="NONE">
-				<step duration="200" file="01.gif" />
-				<step duration="200" file="02.gif" />
-				<step duration="200" file="03.gif" />
-				<step duration="200" file="04.gif" />
+				<step duration="200" file="1.gif" />
+				<step duration="200" file="2.gif" />
+				<step duration="200" file="3.gif" />
+				<step duration="200" file="4.gif" />
 			</direction>
 		</gesture>
 	</gestures>

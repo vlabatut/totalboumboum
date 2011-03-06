@@ -2,13 +2,14 @@
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../../schemas/animes.xsd" 
 		scale="1" >
+	
 	<gestures>
 		<gesture name="STANDING" repeat="true" >
 			<direction name="NONE">
-				<step duration="200" file="01.gif" />
-				<step duration="200" file="02.gif" />
-				<step duration="200" file="03.gif" />
-				<step duration="200" file="04.gif" />
+				<step duration="200" file="1.gif" />
+				<step duration="200" file="2.gif" />
+				<step duration="200" file="3.gif" />
+				<step duration="200" file="4.gif" />
 			</direction>
 		</gesture>
 	</gestures>
