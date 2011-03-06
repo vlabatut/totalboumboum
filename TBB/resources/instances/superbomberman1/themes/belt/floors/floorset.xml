@@ -4,7 +4,6 @@
 
 	<abstractFloors>
 		<floor name="common" folder="_common" />
-		<floor name="commonbelt" folder="_commonbelt" />
 	</abstractFloors>
 	
 	<concreteFloors>

@@ -2,7 +2,7 @@
 <sprite
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../../../schemas/sprite.xsd">
-	
-	<general name="Floor" base="common"/>
 
+	<general name="Right belt" base="common" />
+	
 </sprite>
