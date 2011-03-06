@@ -8,7 +8,7 @@
 	</shadows>
 	
 	<gestures>	
-		<gesture name="STANDING" folder="standing" shadow="standShadow" shadowYShift="3">
+		<gesture name="STANDING" shadow="standShadow" shadowYShift="3">
 			<direction name="NONE">
 				<step file="standing.gif" />
 			</direction>
