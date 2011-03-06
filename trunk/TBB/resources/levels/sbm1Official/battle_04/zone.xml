@@ -4,10 +4,13 @@
 	
 	<variableTiles>
 		<variableTile name="tile1">
+			<value proba="0.25" >
+			</value>
+			<value proba="0.15" >
+				<floor name="trempoline" />
+			</value>
 			<value proba="0.3" >
 				<block name="softwall" />
-			</value>
-			<value proba="0.4" >
 			</value>
 			<value proba="0.04" >
 				<block name="softwall" />

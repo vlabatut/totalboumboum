@@ -4,49 +4,92 @@
 	
 	<variableTiles>
 		<variableTile name="tile1">
-			<value proba="0.3" >
-				<block group="softwalls" name="regular" />
-			</value>
 			<value proba="0.4" >
 			</value>
-			<value proba="0.04" >
+			<value proba="0.15" >
+				<block group="softwalls" name="regular" />
+			</value>
+			<value proba="0.02" >
 				<block group="softwalls" name="regular" />
 				<item name="extrabomb" />
 			</value>
-			<value proba="0.04" >
+			<value proba="0.02" >
 				<block group="softwalls" name="regular" />
 				<item name="extraflame" />
 			</value>
-			<value proba="0.03" >
+			<value proba="0.015" >
 				<block group="softwalls" name="regular" />
 				<item name="disease" />
 			</value>
-			<value proba="0.03" >
+			<value proba="0.015" >
 				<block group="softwalls" name="regular" />
 				<item name="goldenflame" />
 			</value>
-			<value proba="0.04" >
+			<value proba="0.02" >
 				<block group="softwalls" name="regular" />
 				<item name="penetration" />
 			</value>
-			<value proba="0.03" >
+			<value proba="0.015" >
 				<block group="softwalls" name="regular" />
 				<item name="remotecontrol" />
 			</value>
-			<value proba="0.03" >
+			<value proba="0.02" >
 				<block group="softwalls" name="regular" />
 				<item name="speed" />
 			</value>
-			<value proba="0.02" >
+			<value proba="0.01" >
 				<block group="softwalls" name="regular" />
 				<item name="throughbombs" />
 			</value>
-			<value proba="0.02" >
+			<value proba="0.01" >
 				<block group="softwalls" name="regular" />
 				<item name="throughwalls" />
 			</value>
-			<value proba="0.02" >
+			<value proba="0.01" >
 				<block group="softwalls" name="regular" />
+				<item name="mystery" />
+			</value>
+			<value proba="0.15" >
+				<block group="softwalls" name="spawn" />
+			</value>
+			<value proba="0.02" >
+				<block group="softwalls" name="spawn" />
+				<item name="extrabomb" />
+			</value>
+			<value proba="0.02" >
+				<block group="softwalls" name="spawn" />
+				<item name="extraflame" />
+			</value>
+			<value proba="0.015" >
+				<block group="softwalls" name="spawn" />
+				<item name="disease" />
+			</value>
+			<value proba="0.015" >
+				<block group="softwalls" name="spawn" />
+				<item name="goldenflame" />
+			</value>
+			<value proba="0.02" >
+				<block group="softwalls" name="spawn" />
+				<item name="penetration" />
+			</value>
+			<value proba="0.015" >
+				<block group="softwalls" name="spawn" />
+				<item name="remotecontrol" />
+			</value>
+			<value proba="0.02" >
+				<block group="softwalls" name="spawn" />
+				<item name="speed" />
+			</value>
+			<value proba="0.01" >
+				<block group="softwalls" name="spawn" />
+				<item name="throughbombs" />
+			</value>
+			<value proba="0.01" >
+				<block group="softwalls" name="spawn" />
+				<item name="throughwalls" />
+			</value>
+			<value proba="0.01" >
+				<block group="softwalls" name="spawn" />
 				<item name="mystery" />
 			</value>
 		</variableTile>

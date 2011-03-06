@@ -4,50 +4,28 @@
 	
 	<variableTiles>
 		<variableTile name="tile1">
-			<value proba="0.3" >
-				<block group="softwalls" name="retractable" />
+			<value proba="0.7" >
 			</value>
-			<value proba="0.4" >
+			<value proba="0.06" >
+				<block group="hardwalls" name="regular" />
+			</value>
+			<value proba="0.16" >
+				<block name="softwall" />
 			</value>
 			<value proba="0.04" >
-				<block group="softwalls" name="retractable" />
+				<block name="softwall" />
 				<item name="extrabomb" />
 			</value>
 			<value proba="0.04" >
-				<block group="softwalls" name="retractable" />
+				<block name="softwall" />
 				<item name="extraflame" />
 			</value>
-			<value proba="0.03" >
-				<block group="softwalls" name="retractable" />
-				<item name="disease" />
+		</variableTile>
+		<variableTile name="tile2">
+			<value proba="0.5" >
 			</value>
-			<value proba="0.03" >
-				<block group="softwalls" name="retractable" />
-				<item name="goldenflame" />
-			</value>
-			<value proba="0.04" >
-				<block group="softwalls" name="retractable" />
-				<item name="penetration" />
-			</value>
-			<value proba="0.03" >
-				<block group="softwalls" name="retractable" />
-				<item name="remotecontrol" />
-			</value>
-			<value proba="0.03" >
-				<block group="softwalls" name="retractable" />
-				<item name="speed" />
-			</value>
-			<value proba="0.02" >
-				<block group="softwalls" name="retractable" />
-				<item name="throughbombs" />
-			</value>
-			<value proba="0.02" >
-				<block group="softwalls" name="retractable" />
-				<item name="throughwalls" />
-			</value>
-			<value proba="0.02" >
-				<block group="softwalls" name="retractable" />
-				<item name="mystery" />
+			<value proba="0.5" >
+				<block name="softwall" />
 			</value>
 		</variableTile>
 	</variableTiles>
@@ -119,7 +97,7 @@
 			<tile pos="3">
 			</tile>
 			<tile pos="4">
-				<reference name="tile1" />
+				<reference name="tile2" />
 			</tile>
 			<tile pos="5">
 				<reference name="tile1" />
@@ -143,7 +121,7 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="12">
-				<reference name="tile1" />
+				<reference name="tile2" />
 			</tile>
 			<tile pos="13">
 			</tile>
@@ -217,7 +195,7 @@
 				<block group="hardwalls" name="insideleft" />
 			</tile>
 			<tile pos="2">
-				<reference name="tile1" />
+				<reference name="tile2" />
 			</tile>
 			<tile pos="3">
 				<reference name="tile1" />
@@ -253,7 +231,7 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="14">
-				<reference name="tile1" />
+				<reference name="tile2" />
 			</tile>
 			<tile pos="15">
 				<block group="hardwalls" name="insideright" />
@@ -537,7 +515,7 @@
 				<block group="hardwalls" name="insideleft" />
 			</tile>
 			<tile pos="2">
-				<reference name="tile1" />
+				<reference name="tile2" />
 			</tile>
 			<tile pos="3">
 				<reference name="tile1" />
@@ -573,7 +551,7 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="14">
-				<reference name="tile1" />
+				<reference name="tile2" />
 			</tile>
 			<tile pos="15">
 				<block group="hardwalls" name="insideright" />
@@ -647,7 +625,7 @@
 			<tile pos="3">
 			</tile>
 			<tile pos="4">
-				<reference name="tile1" />
+				<reference name="tile2" />
 			</tile>
 			<tile pos="5">
 				<reference name="tile1" />
@@ -671,7 +649,7 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="12">
-				<reference name="tile1" />
+				<reference name="tile2" />
 			</tile>
 			<tile pos="13">
 			</tile>

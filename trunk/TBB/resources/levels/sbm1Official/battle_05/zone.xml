@@ -223,30 +223,39 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="4">
+				<floor name="beltup"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="5">
+				<floor name="beltright"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="6">
+				<floor name="beltright"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="7">
+				<floor name="beltright"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="8">
+				<floor name="beltright"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="9">
+				<floor name="beltright"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="10">
+				<floor name="beltright"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="11">
+				<floor name="beltright"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="12">
+				<floor name="beltright"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="13">
@@ -277,6 +286,7 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="4">
+				<floor name="beltup"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="5">
@@ -301,6 +311,7 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="12">
+				<floor name="beltdown"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="13">
@@ -331,6 +342,7 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="4">
+				<floor name="beltup"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="5">
@@ -355,6 +367,7 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="12">
+				<floor name="beltdown"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="13">
@@ -385,6 +398,7 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="4">
+				<floor name="beltup"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="5">
@@ -409,6 +423,7 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="12">
+				<floor name="beltdown"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="13">
@@ -439,6 +454,7 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="4">
+				<floor name="beltup"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="5">
@@ -463,6 +479,7 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="12">
+				<floor name="beltdown"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="13">
@@ -493,6 +510,7 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="4">
+				<floor name="beltup"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="5">
@@ -517,6 +535,7 @@
 				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="12">
+				<floor name="beltdown"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="13">
@@ -547,30 +566,39 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="4">
+				<floor name="beltleft"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="5">
+				<floor name="beltleft"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="6">
+				<floor name="beltleft"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="7">
+				<floor name="beltleft"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="8">
+				<floor name="beltleft"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="9">
+				<floor name="beltleft"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="10">
+				<floor name="beltleft"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="11">
+				<floor name="beltleft"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="12">
+				<floor name="beltdown"/>
 				<reference name="tile1" />
 			</tile>
 			<tile pos="13">
