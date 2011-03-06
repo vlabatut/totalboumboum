@@ -3,32 +3,35 @@
 		xsi:noNamespaceSchemaLocation="../../../schemas/players.xsd" >
 	
 	<locations>
+<!-- 
+		<case players="0" />
 		<case players="1">
 			<location player="0" line="01" col="02" />
 		</case>
+-->		
 		<case players="2">
-			<location player="0" line="01" col="02" />
-			<location player="1" line="11" col="14" />
+			<location player="0" line="05" col="06" />
+			<location player="1" line="07" col="10" />
 		</case>
 		<case players="3">
-			<location player="0" line="01" col="02" />
-			<location player="1" line="01" col="14" />
-			<location player="2" line="11" col="02" />
+			<location player="0" line="05" col="06" />
+			<location player="1" line="05" col="10" />
+			<location player="2" line="07" col="06" />
 		</case>
 		<case players="4">
-			<location player="0" line="01" col="02" />
-			<location player="1" line="01" col="14" />
-			<location player="2" line="11" col="02" />
-			<location player="3" line="11" col="14" />
+			<location player="0" line="05" col="06" />
+			<location player="1" line="05" col="10" />
+			<location player="2" line="07" col="06" />
+			<location player="3" line="07" col="10" />
 		</case>
 	</locations>
 	
 	<items>
-		<item name="extrabomb" number="3" />
-		<item name="extraflame" number="3" />
+		<item name="extrabomb" number="1" />
+		<item name="extraflame" number="1" />
+<!-- 
 		<item name="speed" number="1" />
 		<item name="vestart" number="1" />
-<!-- 
 		<item name="punch" number="1" />
 		<item name="goldenflame" number="10" />
 		<item name="kick" number="1" />
