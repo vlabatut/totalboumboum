@@ -8,6 +8,10 @@
 		<group name="hardwalls" folder="hardwalls">
 			<block name="common_hard" folder="_common"/>
 		</group>
+
+		<group name="tunnels" folder="tunnels">
+			<block name="common_tunnel" folder="_common"/>
+		</group>
 	</abstractBlocks>
 	
 	<concreteBlocks>
@@ -29,6 +33,20 @@
 			<block name="upleft" folder="upleft"/>
 			<block name="upright" folder="upright"/>
 			<block name="upT" folder="upT"/>
+		</group>
+
+		<group name="tunnels" folder="tunnels">
+			<block name="center" folder="center"/>
+			<block name="down" folder="down"/>
+			<block name="downT" folder="downT"/>
+			<block name="horizontal" folder="horizontal"/>
+			<block name="left" folder="left"/>
+			<block name="leftT" folder="leftT"/>
+			<block name="right" folder="right"/>
+			<block name="rightT" folder="rightT"/>
+			<block name="up" folder="up"/>
+			<block name="upT" folder="upT"/>
+			<block name="vertical" folder="vertical"/>
 		</group>
 	</concreteBlocks>
 	
