@@ -20,7 +20,7 @@
 		<player file="af92d497-7975-4dcf-b05d-89e706c3eec3" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
-		<level pack="sbm1Official" folder="battle_11" allowedPlayers="0 1 2 3 4" />
+		<level pack="sbm1Official" folder="battle_01" allowedPlayers="1 2 3 4" />
 	</levels>
 </gameQuickmatch>
 

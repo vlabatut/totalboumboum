@@ -1537,4 +1537,5 @@ public class Launcher
 	// TODO rajouter  les blocs de shrink pr SBM1. y a un shrink pr les versions précédentes ?
 	// TODO voir les items initiaux de chaque zone + la vitesse initiale
 	// TODO gérer les images de façon unique, ce qui permettrait de définir des transformations (flips, rotations) >> définir des borders comme dans SBM sans avoir à tout générer à la main + temps de chargement plus rapide
+	// TODO dans belts, y a un bidule qui passe sur les rails sur les côtés...
 }
