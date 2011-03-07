@@ -10,14 +10,14 @@
 				<block group="hardwalls" name="regular" />
 			</value>
 			<value proba="0.16" >
-				<block name="softwall" />
+				<block group="softwalls" name="retractable" />
 			</value>
 			<value proba="0.04" >
-				<block name="softwall" />
+				<block group="softwalls" name="retractable" />
 				<item name="extrabomb" />
 			</value>
 			<value proba="0.04" >
-				<block name="softwall" />
+				<block group="softwalls" name="retractable" />
 				<item name="extraflame" />
 			</value>
 		</variableTile>
@@ -25,7 +25,7 @@
 			<value proba="0.5" >
 			</value>
 			<value proba="0.5" >
-				<block name="softwall" />
+				<block group="softwalls" name="retractable" />
 			</value>
 		</variableTile>
 	</variableTiles>
