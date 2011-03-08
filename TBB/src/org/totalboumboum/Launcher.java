@@ -925,7 +925,8 @@ public class Launcher
 	 * - IA :
 	 * - Stats :
 	 * - Ressources :
-	 * 		- thèmes SBM1 arena, circles, hal, power, speed & warp + les niveaux qui vont avec
+	 * 		- thèmes SBM1 arena, circles, hal, power, speed & warp
+	 * 		- tous les niveaux des modes histoire et arène
 	 * - Divers :
 	 */
 
@@ -1289,20 +1290,6 @@ public class Launcher
 	 */
 	
 	/**
-	 * TODO
-	 * 	1) définir un système d'enregistrement/replay
-	 * 	2) étendre au mode réseau, la seule différence étant que dans le preimier
-	 * 		cas on lit les evts dans un fichier, alors que dans le deuxième on les
-	 * 		reçoit à travers le réseau.
-	 * 
-	 * - on suppose que chaque joueur possède tous les fichiers nécessaires
-	 * - par conséquent, tout les sprites peuvent être chargés a priori, ainsi que l'aperçu du niveau
-	 * - mais la zone est générée partiellement aléatoirement, donc il faut la transmettre (sous forme d'évènements)
-	 * 		>> l'initialisation de la zone (loadTheme) doit différer dans les loops
-	 * - composant dans la loop player qui interprètera les évènements reçus :
-	 * 		- trucs individuels >> envoyés aux sprites concernés
-	 * 		- création: faite sur place. sprites avec des managers light
-	 * 
 	 * - certaines abilities ont un effet graphique, comme twinkle ou flat
 	 *   faudra penser à un système pour transmettre les changement les concernant
 	 */
@@ -1347,10 +1334,9 @@ public class Launcher
 	// du cp, les clés du texte pourraient être plus explicites (car indépendantes)
 	
 	//TODO tester les confs de tournois/partie rapide sans l'option "utiliser les réglages précédents"
-	//TODO voir pouquoi c'est si lent dans l'interface quand on règle le tournoi
 	
 	//TODO profiles options : reset passwords (automatically performed
-	//when the MAC address changes, anyway
+	//when the MAC address changes, anyway)
 	
 	/* TODO la communication [moteur >> gui] devrait se faire par evts, y compris durant le jeu
 	 * >> ca permettrait de ne pas raffraichir pour rien lors de l'affichage de toutes les structures du jeu
@@ -1528,7 +1514,7 @@ public class Launcher
 	// TODO faire disparaitre progressivement les sprites à la fin du burning (niveau d'alpha ? cf items thème TBB)
 	//		>> en fait y a pas de gestion dynamique de l'alpha...
 	// TODO utiliser des chemins relatifs à la racine du sprite éviterait toutes les complications liées au nommage d'images/ombres
-	// TODO y a surement un bug pr rezo+simulation (cote client)
+	// TODO y a surement un bug pr rezo+simulation (côté client)
 	// TODO quand on tente de poser une bombe, le sprite est créé et on tente de voir s'il peut apparaître
 	// 	    question : est-il d'entrée inséré dans le Level ? si oui, y en a surement un paillat au bout d'un moment;
 	//		vu qu'en cas d'apparition impossible la bombe n'est pas retirée du Level (supposition)
@@ -1538,5 +1524,4 @@ public class Launcher
 	// TODO voir les items initiaux de chaque zone + la vitesse initiale
 	// TODO gérer les images de façon unique, ce qui permettrait de définir des transformations (flips, rotations) >> définir des borders comme dans SBM sans avoir à tout générer à la main + temps de chargement plus rapide
 	// TODO dans belts, y a un bidule qui passe sur les rails sur les côtés...
-	// TODO pb avec les ombres des blocs dest dans belt
 }
