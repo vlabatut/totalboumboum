@@ -57,7 +57,7 @@ This product includes softwares developed by:
     
   + Various AI students from Galatasaray University:
     Most classes in resources/ai (see classes for details)
-    Copyright 2007-2009 their respective authors
+    Copyright 2007-2011 their respective authors
     http://gsu.edu.tr - GSÜ, Istanbul, Turkey
 
 -----------------------------------------------------------------------
