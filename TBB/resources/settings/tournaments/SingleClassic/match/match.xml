@@ -19,7 +19,7 @@
 		</points>
 	</limits>
 
- 	<rounds randomOrder="true" >
+ 	<rounds randomOrder="false" >
   		<round local="true" name="round1" />
   		<round local="true" name="round2" />
   		<round local="true" name="round3" />
