@@ -185,6 +185,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 	protected void startLoopInit()
 	{	super.startLoopInit();
 		initEvent();
+		initAis();
 	}
 
 	@Override
@@ -259,7 +260,19 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 				}
 			}
 		}
+	
+		//TODO might be necessary to bomb the inactive AIs
+		//	or: extend to players in general (not just AIs)
 	}
+	
+	protected void initAis()
+	{	for(int i=0;i<players.size();i++)
+		{	AbstractPlayer player = players.get(i);
+			if(player instanceof AiPlayer)
+				((AiPlayer)player).initAi();
+		}
+	}
+	
 
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
@@ -286,6 +299,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 			updateEvents();
 			updateAis();
 			updateStats();
+System.err.println("XXXXXXXXXXXXXXXXXXXXXXX update");
 		}
 	}
 
@@ -359,6 +373,8 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 					Sprite sprite = level.getSprite(id);
 					sprite.processChangePositionEvent(scpEvent,zoomCoefficient);
 				}
+				
+				// finished
 				else if(event instanceof StopReplayEvent)
 				{	setOver(true);
 				}
