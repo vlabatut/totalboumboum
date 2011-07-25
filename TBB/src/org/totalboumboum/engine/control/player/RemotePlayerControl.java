@@ -87,7 +87,7 @@ public class RemotePlayerControl
 	public void addEvent(RemotePlayerControlEvent event)
 	{	eventLock.lock();
 		
-	eventList.add(event);
+		eventList.add(event);
 	
 		eventLock.unlock();
 	}
