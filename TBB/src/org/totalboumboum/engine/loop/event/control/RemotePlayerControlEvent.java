@@ -56,4 +56,12 @@ public class RemotePlayerControlEvent extends StreamedEvent
 	public ControlCode getControlCode()
 	{	return controlCode;	
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// TO STRING			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String toString()
+	{	String result = "RemotePlayerControlEvent("+time+":"+spriteId+"): " + controlCode + " ";
+		return result;
+	}
 }
