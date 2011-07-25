@@ -6,8 +6,8 @@ public class Test
 {
 	public static void main(String[] args)
 	{	
-		//ipAddress();
-		macAddresses();
+		ipAddress();
+		//macAddresses();
 	}
 	
 	public static void ipAddress()
