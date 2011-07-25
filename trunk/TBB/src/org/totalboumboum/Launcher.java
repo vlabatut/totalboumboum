@@ -697,8 +697,8 @@ public class Launcher
 	 * il y a blocage si l'anime n'est pas définie, et que l'anime par défaut est
 	 * répétée.
 	 * exemple : défaut=marcher, et il manque punch -> le bonhomme ne sort jamais de l'état punching
-	 * >>>>solution : ne jamais compter sur la fin de l'anime, toujours imposer une durée à respecter
-	 * (ce qui permet d'uniformiser le beans pour tous les joueurs)
+	 * 	>>solution : ne jamais compter sur la fin de l'anime, toujours imposer une durée à respecter
+	 * 	(ce qui permet d'uniformiser le beans pour tous les joueurs)
 	 */
 	
 	/*
