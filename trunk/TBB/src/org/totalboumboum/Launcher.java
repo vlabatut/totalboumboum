@@ -1477,7 +1477,7 @@ public class Launcher
 	 * 		- même les threads sont gardés, mais du cp le code doit être modifié
 	 * 	  	  pour ne pas tenter d'écrire/lire si la connection est morte
 	 * 		- quand le client tente de se reconnecter, si son id correspond à 
-	 * 	   	  celle d'une connection DISCONNECTED, alors on se contete de réinitialiser les 
+	 * 	   	  celle d'une connection DISCONNECTED, alors on se contente de réinitialiser les 
 	 * 	  	  streams dans le writer et le reader, et ça roule.
 	 *    
 	 *    
@@ -1508,8 +1508,8 @@ public class Launcher
 	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
 	// TODO finir IA
 	//	optimisation : poser bombe juste en sortant de la case (pixels) histoire d'éviter de se faire bloquer par le gus qui est devant
-	// TODO les flammes sont-elles censées traverser les bombes comme elles le font ?
-	// TODO apparemment les blocs qui tombent lors du shrink sont différents, au moins dans SBM2 >> à ripper et vérifier
+	// TODO apparemment les blocs qui tombent lors du shrink sont différents, au moins dans SBM1 & SBM2 
+	//	>> à ripper et vérifier pr les autres versions
 	// TODO gérer le tie-break du dernier tournoi
 	// TODO faire disparaitre progressivement les sprites à la fin du burning (niveau d'alpha ? cf items thème TBB)
 	//		>> en fait y a pas de gestion dynamique de l'alpha...
@@ -1520,8 +1520,10 @@ public class Launcher
 	//		vu qu'en cas d'apparition impossible la bombe n'est pas retirée du Level (supposition)
 	// TODO il est possib que les ombres de Shirobon SBM2 soient à décaller un peu vers le bas, à voir comment ça rend dans le jeu
 	// TODO faire le Dr. Mook de SBM1 (commande le boss du monde 3+transition3>4+boss 5+transition5>6+bosses6&7+fin)
-	// TODO rajouter  les blocs de shrink pr SBM1. y a un shrink pr les versions précédentes ?
 	// TODO voir les items initiaux de chaque zone + la vitesse initiale
-	// TODO gérer les images de façon unique, ce qui permettrait de définir des transformations (flips, rotations) >> définir des borders comme dans SBM sans avoir à tout générer à la main + temps de chargement plus rapide
+	// TODO dans les fichiers xml, gérer les images de façon unique, ce qui permettrait de définir des transformations (flips, rotations)
+	//	>> définir des borders comme dans SBM sans avoir à tout générer à la main (pr blocs symétriques)
+	//	>> temps de chargement plus rapide (en supposant que la transfo est plus rapide que le re-chargement)
 	// TODO dans belts, y a un bidule qui passe sur les rails sur les côtés...
+	// TODO est-il vraiment nécessaire de gérer les floors en tant que sprites à part entière, quand on peut y mettre plusieurs blocs?
 }
