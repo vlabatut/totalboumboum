@@ -220,6 +220,7 @@ public class ServerLoop extends LocalLoop
 			updateLogs();
 			updateCelebration();
 			updateEntries();
+			remoteControls.update();
 			level.update();		
 			updateAis();
 			updateStats();
