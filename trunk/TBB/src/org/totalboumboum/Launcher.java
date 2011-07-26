@@ -1528,4 +1528,6 @@ public class Launcher
 	// TODO est-il vraiment nécessaire de gérer les floors en tant que sprites à part entière, quand on peut y mettre plusieurs blocs?
 	// TODO réseau:
 	//	>> pb quand c'est un client qui clique sur le round en 1er: si sélection aléatoire, alors le niveau est différent de celui du serveur!
+	//	>> en fait, les clients ne devraient pas pouvoir avancer dans le tournoi avant le serveur
+	//	>> faut un message indiquant qu'on attend les autres joueurs (et lesquels)
 }
