@@ -162,6 +162,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 			// level
 			Hero hero = (Hero)player.getSprite();
 			level.changeSpriteId(hero,id);
+System.out.println(hero+" "+hero.getId());
 			
 			// next player...
 			loadStepOver();
@@ -212,6 +213,8 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 	@Override
 	public AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{	AbstractPlayer result;
+//		if(profile.isRemote())
+//			profile.setControlSettingsIndex(0);
 		if(profile.hasAi())
 			result = new AiPlayer(profile,base,tile);
 		else
@@ -299,7 +302,7 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 			updateEvents();
 			updateAis();
 			updateStats();
-System.err.println("XXXXXXXXXXXXXXXXXXXXXXX update");
+//System.err.println("XXXXXXXXXXXXXXXXXXXXXXX update");
 		}
 	}
 
