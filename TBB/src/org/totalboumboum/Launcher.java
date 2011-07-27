@@ -1530,4 +1530,12 @@ public class Launcher
 	//	>> pb quand c'est un client qui clique sur le round en 1er: si sélection aléatoire, alors le niveau est différent de celui du serveur!
 	//	>> en fait, les clients ne devraient pas pouvoir avancer dans le tournoi avant le serveur
 	//	>> faut un message indiquant qu'on attend les autres joueurs (et lesquels)
+	
+	/**
+	 * TODO
+	 * - plutot que de passer des codes, faut passer des ControlEvents
+	 * - ça veut dire déplacer le traitement réseau client du NetworkControl vers le control manager (au lieu d'envoyer au sprite on écrit dans le flux)
+	 * - côté serveur, le RemoteControl doit balancer ça sous form d'évents vers le ControlManager (qui supporte déjà ça)
+	 * - ça serait peut être mieux de fusionner tout ça ? (ie mettre la gestion des touches dans le ControlManager normal)
+	 */
 }

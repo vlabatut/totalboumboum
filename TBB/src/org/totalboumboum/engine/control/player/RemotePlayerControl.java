@@ -62,6 +62,7 @@ public class RemotePlayerControl
 	
 	public void addSprite(Hero sprite)
 	{	sprites.put(sprite.getId(),sprite);
+System.out.println(sprite+" "+sprite.getId());	
 		orderedSprites.add(sprite);
 		
 //		ControlSettings controlSettings = connection.getControlSettings(index);
