@@ -180,6 +180,7 @@ System.out.println(hero+" "+hero.getId());
 					controlSettings.add(map.get(index));
 			}
 		}
+		clientConnection.sendControlSettings(controlSettings);
 	}
 	
 	@Override
@@ -192,8 +193,8 @@ System.out.println(hero+" "+hero.getId());
 	@Override
 	protected void finishLoopInit()
 	{	super.finishLoopInit();
-		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
-		connection.loadingComplete();
+		//ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		clientConnection.loadingComplete();
 	}
 	
 	/////////////////////////////////////////////////////////////////
