@@ -89,7 +89,7 @@ public class RunnableReader implements Runnable
 			try
 			{	Object object = in.readObject();
 				NetworkMessage message = (NetworkMessage) object;
-System.out.println(">>"+message);
+//System.out.println(">>"+message);
 				connection.messageRead(message);
 			}
 			catch(SocketException e)
