@@ -816,7 +816,7 @@ System.out.println(serverSocket.getLocalSocketAddress());
 			}
 			connectionsLock.unlock();
 			
-			// if it is the case :
+			// if it is the case (all clients ready):
 			if(ready)
 			{	// start all remote clients
 				NetworkMessage message = new NetworkMessage(MessageName.STARTING_ROUND);
