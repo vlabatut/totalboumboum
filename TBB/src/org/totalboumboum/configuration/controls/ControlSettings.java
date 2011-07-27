@@ -21,6 +21,7 @@ package org.totalboumboum.configuration.controls;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,11 +33,12 @@ import java.util.Map.Entry;
  * @author Vincent Labatut
  *
  */
-public class ControlSettings
-{	/////////////////////////////////////////////////////////////////
+public class ControlSettings implements Serializable
+{	private static final long serialVersionUID = 1L;
+
+	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	private void addKey(int key, String event, boolean on)
 	{	// init
 		HashMap<Integer,List<String>> keys;
