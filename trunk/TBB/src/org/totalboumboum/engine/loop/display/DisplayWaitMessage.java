@@ -21,11 +21,13 @@ package org.totalboumboum.engine.loop.display;
  * 
  */
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.awt.geom.Rectangle2D;
 
+import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 
 /**
@@ -33,38 +35,49 @@ import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
  * @author Vincent Labatut
  *
  */
-public class DisplayManager
+public class DisplayWaitMessage implements Display
 {
-	/////////////////////////////////////////////////////////////////
-	// EVENT 			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void provessEvent(SystemControlEvent event)
-	{	Display d = displaysMap.get(event.getName());
-		if(d!=null)
-			d.switchShow(event);
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// DISPLAYS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private List<Display> displaysList = new ArrayList<Display>();
-	private HashMap<String,Display> displaysMap = new HashMap<String, Display>();
-	
-	public void addDisplay(Display d)
-	{	displaysList.add(d);
-		displaysMap.put(d.getEventName(),d);
+	public DisplayWaitMessage(VisibleLoop loop)
+	{	this.loop = loop;
 	}
 	
-	public void removeDisplay(Display d)
-	{	displaysList.remove(d);
-		displaysMap.remove(d);
+	/////////////////////////////////////////////////////////////////
+	// LOOP				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private VisibleLoop loop;
+	
+	/////////////////////////////////////////////////////////////////
+	// SHOW				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void switchShow(SystemControlEvent event)
+	{	// useless here
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// EVENT NAME		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String getEventName()
+	{	return SystemControlEvent.SWITCH_ENGINE_PAUSE;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void draw(Graphics g)
-	{	for(Display d: displaysList)
-			d.draw(g);		
+	{	if(loop.getEnginePause())
+		{	Font font = new Font("Dialog", Font.PLAIN, 18);
+			g.setFont(font);
+			FontMetrics metrics = g.getFontMetrics(font);
+			String text = "Waiting for other players";
+			Rectangle2D box = metrics.getStringBounds(text, g);
+			int x = 10;
+			int y = (int)Math.round(70+box.getHeight()/2);
+			g.setColor(Color.GRAY);
+			g.drawString(text,x+1,y+1);
+			g.setColor(Color.RED);
+			g.drawString(text,x,y);
+		}
 	}
 }
