@@ -1533,9 +1533,8 @@ public class Launcher
 	
 	/**
 	 * TODO
-	 * - plutot que de passer des codes, faut passer des ControlEvents
-	 * - ça veut dire déplacer le traitement réseau client du NetworkControl vers le control manager (au lieu d'envoyer au sprite on écrit dans le flux)
-	 * - côté serveur, le RemoteControl doit balancer ça sous form d'évents vers le ControlManager (qui supporte déjà ça)
-	 * - ça serait peut être mieux de fusionner tout ça ? (ie mettre la gestion des touches dans le ControlManager normal)
+	 * - corriger bug en cours (ça bloque, faire un debug)
+	 * - le message n'est pas affiché côté serveur (surement lié)
+	 * - faire le même affichage côté client
 	 */
 }
