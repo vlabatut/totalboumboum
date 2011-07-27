@@ -803,7 +803,7 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	{	roundLock.lock();
 		{	boolean ready = true;
 			connectionsLock.lock();
-			{	// update this connection readyness
+			{	// update this connection readyness 
 				int index = individualConnections.indexOf(connection);
 				individualConnectionsReady.set(index,true);
 
