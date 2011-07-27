@@ -51,6 +51,7 @@ import org.totalboumboum.engine.content.sprite.hero.HollowHeroFactoryLoader;
 import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.engine.control.player.RemotePlayerControl;
 import org.totalboumboum.engine.control.system.ServerSytemControl;
+import org.totalboumboum.engine.loop.display.DisplayWaitMessage;
 import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.loop.event.replay.StopReplayEvent;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteCreationEvent;
@@ -188,8 +189,39 @@ public class ServerLoop extends LocalLoop
 	@Override
 	protected void finishLoopInit()
 	{	super.finishLoopInit();
+		waitForClients();
+	}
+	
+	/**
+	 * some kind of simplified display loop
+	 */
+	private void waitForClients()
+	{	// add message to display manager
+		DisplayWaitMessage waitMessage = new DisplayWaitMessage(this);
+		displayManager.addDisplay(waitMessage);
+		
 		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
-		connection.waitForClients();
+		while(!connection.areAllClientsReady())
+		{	// sleep a bit
+			try
+			{	Thread.sleep(100);
+			}
+			catch (InterruptedException ex)
+			{	//ex.printStackTrace();
+			}
+
+			level.update(); // not really usefull since it's supposedly all black
+			updateWaitMessage();
+			panel.paintScreen();
+		}
+		
+		// remove message
+		displayManager.removeDisplay(waitMessage);
+	}
+	
+	private void updateWaitMessage()
+	{
+		//TODO not used for now
 	}
 	
 	/////////////////////////////////////////////////////////////////

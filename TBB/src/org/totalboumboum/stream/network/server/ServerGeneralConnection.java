@@ -29,7 +29,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -721,7 +720,15 @@ System.out.println(serverSocket.getLocalSocketAddress());
 	// GAME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Lock roundLock = new ReentrantLock();
-	private Condition roundCondition = roundLock.newCondition();
+	private boolean allClientsReady = false;
+	
+	public boolean areAllClientsReady()
+	{	boolean result;
+		roundLock.lock();
+		result = allClientsReady;
+		roundLock.unlock();
+		return result;
+	}
 	
 	public void startTournament(AbstractTournament tournament)
 	{	// announce the tournament is starting to concerned clients
@@ -772,61 +779,40 @@ System.out.println(serverSocket.getLocalSocketAddress());
 		propagateMessage(message);
 	}
 	
-	public void waitForClients()
-	{	roundLock.lock();
-		{	// check if all clients are ready
-			boolean ready = true;
+	protected void loadingComplete(ServerIndividualConnection connection)
+	{	boolean ready = true;
+		connectionsLock.lock();
+		{	// update this connection readyness
+			int index = individualConnections.indexOf(connection);
+			individualConnectionsReady.set(index,true);
+
+			// check if all clients are ready
 			Iterator<Boolean> it = individualConnectionsReady.iterator();
 			while(it.hasNext() && ready)
 			{	boolean value = it.next();
 				ready = ready && value;
 			}
-			
-			// otherwise, wait for all clients to be ready
-			try
-			{	roundCondition.await();
-			}
-			catch (InterruptedException e)
-			{	e.printStackTrace();
-			}
+		}
+		connectionsLock.unlock();
+		
+		// if it is the case (all clients ready):
+		if(ready)
+		{	// start all remote clients
+			NetworkMessage message = new NetworkMessage(MessageName.STARTING_ROUND);
+			propagateMessage(message);
 			
 			// set the controlSettings
 			connectionsLock.lock();
 			{	remotePlayerControl.setControlSettings(controlSettings);
 			}
 			connectionsLock.unlock();
-		}
-		roundLock.unlock();
-	}
-	
-	protected void loadingComplete(ServerIndividualConnection connection)
-	{	roundLock.lock();
-		{	boolean ready = true;
-			connectionsLock.lock();
-			{	// update this connection readyness 
-				int index = individualConnections.indexOf(connection);
-				individualConnectionsReady.set(index,true);
 
-				// check if all clients are ready
-				Iterator<Boolean> it = individualConnectionsReady.iterator();
-				while(it.hasNext() && ready)
-				{	boolean value = it.next();
-					ready = ready && value;
-				}
+			// release the game thread
+			roundLock.lock();
+			{	allClientsReady = true;
 			}
-			connectionsLock.unlock();
-			
-			// if it is the case (all clients ready):
-			if(ready)
-			{	// start all remote clients
-				NetworkMessage message = new NetworkMessage(MessageName.STARTING_ROUND);
-				propagateMessage(message);
-				
-				// wake up the game thread
-				roundCondition.signal();
-			}
+			roundLock.unlock();
 		}
-		roundLock.unlock();
 	}
 	
 	/////////////////////////////////////////////////////////////////
