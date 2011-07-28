@@ -104,12 +104,11 @@ public class ServerGeneralConnection implements Runnable
 				ControlSettings cs = controlSettings.get(j);
 				Profile p = null;
 				int index = 0;
-				int i = 0;
-				while(p==null && i<playerProfiles.size())
-				{	Profile temp = playerProfiles.get(i);
+				while(p==null && index<playerProfiles.size())
+				{	Profile temp = playerProfiles.get(index);
 					if(temp.getId().equals(id))
 						p = temp;
-					else if(temp.isRemote())
+					else //if(temp.isRemote())
 						index++;
 				}
 				this.controlSettings.set(index,cs);
