@@ -38,7 +38,8 @@ public class KesimalVarol extends ArtificialIntelligence
 		checkInterruption();
 		return zone;
 	}
-	/** Representation modifi√©e de la zone  */
+	
+	/** Representation modifiee de la zone  */
 	private GameZoneAnalyzer gZoneAnalyzer;
 	/** Repr. de notre agent */
 	private AiHero selfHero;
@@ -46,6 +47,7 @@ public class KesimalVarol extends ArtificialIntelligence
 		checkInterruption();
 		return selfHero;
 	}
+	
 	/** Repr. du mode de notre agent. */
 	private Mode mode;
 	public Mode getMode() throws StopRequestException {
@@ -77,7 +79,8 @@ public class KesimalVarol extends ArtificialIntelligence
 	
 	/** Determine si l'IA va poser une bombe */
 	private boolean bombReleaseState;
-	/** Utilisee pour mieux gerer les delais lors d'execution : Si on ne se trouve pas dans la case actuellement choisi pendant l'iteration precedent,
+	/** Utilisee pour mieux gerer les delais lors d'execution : Si on ne se trouve 
+	 * pas dans la case actuellement choisie pendant l'iteration precedente,
 	 * on ne laissera pas une bombe.
 	 */
 	private AiTile bombReleaseTile;
@@ -89,6 +92,7 @@ public class KesimalVarol extends ArtificialIntelligence
 		bombReleaseState=true;
 		bombReleaseTile=selfHero.getTile();
 	}
+	
 	/** Pour qu'on reste au mode attaque pour environ 2 secondes. */
 	private long remainingTimeToCompleteAttack;
 	
@@ -156,7 +160,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	}
 	public _lastPathChosenParameters lastPathChosenParameters;
 	
-	/** Les endroits d'emplacements qui seront ignorees  */
+	/** Les endroits d'emplacements qui seront ignores  */
 	private HashMap<AiTile, Long> temporarilyIgnoredEmplacementCases;
 	public HashMap<AiTile, Long> getTemporarilyIgnoredCases() throws StopRequestException {
 		checkInterruption();
@@ -168,8 +172,10 @@ public class KesimalVarol extends ArtificialIntelligence
 		this.temporarilyIgnoredEmplacementCases = temporarilyIgnoredCases;
 	}
 	
-	/** Variable permettant de determiner si nous sommes en danger et n'a pas pu trouver une chemin lors d'iteration precedente. */
+	/** Variable permettant de determiner si nous sommes en danger 
+	 * et n'a pas pu trouver une chemin lors d'iteration precedente. */
 	private boolean inDanger;
+	
 	/**
 	 * Utilisee par MovementCommitter, on indique que nous sommes en danger et on ne peut pas nous diriger vers aucune case.
 	 * @throws StopRequestException 
@@ -179,6 +185,7 @@ public class KesimalVarol extends ArtificialIntelligence
 		checkInterruption();
 		inDanger=val;
 	}
+	
 	/**
 	 * Utilisee par PathSafetyDeterminators, renvoyera si nous sommes deja en danger et on veut nous deplacer n'importe quoi.
 	 * @return Si nous etions en danger.
@@ -196,6 +203,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	@Override
 	public void init() throws StopRequestException {
 		checkInterruption();
+		
 		super.init();
 		MovementCommitter.setMonIA(this);
 		GameZoneAnalyzer.setMonIA(this);
@@ -212,7 +220,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	}
 
 	/** 
-	 * mÔøΩthode appelÔøΩe par le moteur du jeu pour obtenir une action de votre IA 
+	 * methode appelee par le moteur du jeu pour obtenir une action de votre IA 
 	 * @return Methode principal pour renvoyer une action
 	 */
 	public AiAction processAction() throws StopRequestException
@@ -316,7 +324,8 @@ public class KesimalVarol extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Mettre a jour le delai de passage au mode collecte si on est en train de tuer une adversaire.
+	 * Mettre a jour le delai de passage au mode collecte 
+	 * si on est en train de tuer une adversaire.
 	 * @throws StopRequestException
 	 */
 	private void updateAttackCompletionPermit() throws StopRequestException
@@ -492,7 +501,7 @@ public class KesimalVarol extends ArtificialIntelligence
 	}
 	
 	//---------------------
-	// Methodes a utiser lors de debogage
+	// Methodes a utiliser lors de debogage
 	//---------------------
 	/**
 	 * Utilisee lors de debogage, pour montrer les couleurs et textes
