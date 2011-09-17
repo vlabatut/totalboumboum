@@ -178,6 +178,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * initialisé. Toute opération définie dans cette fonction
 	 * sera réalisée une fois, juste avant le début de la partie.
 	 * A noter que les percepts ont néanmoins déjà été mis à jour.
+	 * Si aucune méthode init n'est définie dans l'agent, alors celle
+	 * ci sera exécutée (qui ne fait rien du tout).
 	 */
 	public void init() throws StopRequestException
 	{	
