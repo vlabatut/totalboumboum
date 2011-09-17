@@ -52,11 +52,11 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indicateur de demande de terminaison de l'IA (activé par le jeu à la fin de la partie) */
+	/** Indicateur de demande de terminaison de l'IA (activé par le jeu à la fin de la partie) */
 	private boolean stopRequest = false;
 
 	/**
-	 * méthode appelée par le jeu pour demander la fin de l'IA.
+	 * Méthode appelée par le jeu pour demander la fin de l'IA.
 	 * Elle modifie la valeur de l'indcateur stopRequest, ce qui permettra
 	 * de lever une StopRequestException au prochain appel de la méthode checkInterruption.
 	 */
@@ -65,7 +65,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 	
 	/**
-	 * méthode testant si le jeu a demandé la terminaison de l'IA.
+	 * Méthode testant si le jeu a demandé la terminaison de l'IA.
 	 * Si c'est le cas, une exception est levée, qui sera propagée jusqu'à call
 	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas être
 	 * interceptée localement par un try/catch. 
@@ -102,11 +102,11 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** les percepts auxquels l'IA a accès */
+	/** Les percepts auxquels l'IA a accès */
 	private AiZone percepts;
 	
 	/**
-	 * méthode implémentant le traitement effectué par l'IA sur les percepts,
+	 * Méthode implémentant le traitement effectué par l'IA sur les percepts,
 	 * et renvoyant une action en réaction.
 	 * 
 	 * @return	
@@ -117,7 +117,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	public abstract AiAction processAction() throws StopRequestException;
 
 	/**
-	 * renvoie les percepts auxquels l'IA a accès
+	 * Renvoie les percepts auxquels l'IA a accès
 	 * @return	
 	 * 		une AiZone représentant tous les percepts utilisables par l'IA
 	 */
@@ -125,7 +125,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	{	return percepts;
 	}
 	/**
-	 * méthode utilisée par le moteur du jeu pour initialiser les percepts de l'IA. 
+	 * Méthode utilisée par le moteur du jeu pour initialiser les percepts de l'IA. 
 	 * 
 	 * @param percepts	
 	 * 		l'objet représentant les percepts auxquels l'IA aura accès
@@ -136,7 +136,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/**
-	 * termine proprement l'IA afin de libérer les ressources qu'elle occupait.
+	 * Termine proprement l'IA afin de libérer les ressources qu'elle occupait.
 	 */
 	final void finish()
 	{	percepts = null;
@@ -145,11 +145,11 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** sortie graphique de l'IA */
+	/** Sortie graphique de l'IA */
 	private AiOutput output;
 	
 	/** 
-	 * renvoie la sortie graphique de l'IA, 
+	 * Renvoie la sortie graphique de l'IA, 
 	 * afin d'afficher des informations par dessus la zone de jeu
 	 * (utile lors du débogage). Le programme peut modifier cet objet
 	 * pour colorer des cases et afficher des chemins ou du texte
@@ -162,7 +162,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/**
-	 * réinitialise la sortie graphique de l'IA.
+	 * Réinitialise la sortie graphique de l'IA.
 	 * Méthode appelée automatiquement avant chaque itération de l'IA.
 	 */
 	private final void reinitOutput()
@@ -174,7 +174,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	private boolean initialized = false;
 	/**
-	 * méthode à surcharger s'il est nécessaire que l'agent soit
+	 * Méthode à surcharger s'il est nécessaire que l'agent soit
 	 * initialisé. Toute opération définie dans cette fonction
 	 * sera réalisée une fois, juste avant le début de la partie.
 	 * A noter que les percepts ont néanmoins déjà été mis à jour.
