@@ -44,7 +44,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * 
  * Classe servant de traducteur entre le jeu et l'IA :
  * <br>	- elle traduit les donn�es du jeu en percepts traitables par l'IA (donn�es simplifi�es).
- * <br>	- elle traduit la r�ponse de l'IA (action) en un �v�nement compatible avec le jeu.
+ * <br>	- elle traduit la r�ponse de l'IA (action) en un évènement compatible avec le jeu.
  * 
  * @author Vincent Labatut
  *
@@ -158,11 +158,11 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	}
 	
 	/**
-	 * active les �v�nements nécessaires à l'arr�t du personnage.
+	 * active les évènements nécessaires à l'arrêt du personnage.
 	 * utilisé quand l'IA renvoie l'action "ne rien faire"
 	 * 
 	 * @param result	
-	 * 		liste des �v�nements adaptée à l'action renvoy�e par l'IA
+	 * 		liste des évènements adaptée à l'action renvoy�e par l'IA
 	 */
 	private void reactionStop(List<ControlEvent> result)
 	{	if(lastMove!=Direction.NONE)
@@ -179,7 +179,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	}
 	
 	/**
-	 * active les �v�nements nécessaires à un changement de direction,
+	 * active les évènements nécessaires à un changement de direction,
 	 * en simulant un joueur humain qui appuierait sur des touches
 	 * @param 
 	 * 		result

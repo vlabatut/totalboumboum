@@ -139,7 +139,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 	
 	/**
-	 * d�marque ce sprite (action r�alis�e avant la mise à jour de la zone)
+	 * d�marque ce sprite (action réalis�e avant la mise à jour de la zone)
 	 */
 	protected void uncheck()
 	{	checked = false; 
@@ -199,7 +199,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// BURN				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps nécessaire au sprite pour br�ler (� condition qu'il puisse br�ler) */
+	/** temps nécessaire au sprite pour brûler (� condition qu'il puisse brûler) */
 	protected long burningDuration = 0;
 	
 	@Override

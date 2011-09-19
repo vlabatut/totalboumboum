@@ -62,7 +62,7 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 /*
  TODO semblait inutile, dc d�sactiv� 
- (�galement dans HollowLevel.loadTheme() et Level.finish())
+ (également dans HollowLevel.loadTheme() et Level.finish())
 	private Theme theme;
 
 	public void setTheme(Theme theme)

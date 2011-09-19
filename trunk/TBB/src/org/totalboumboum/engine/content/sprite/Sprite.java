@@ -156,7 +156,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	
 	/*
 	 * change le gesture, la direction de l'animation et la direction des touches
-	 * l'animation n'est r�initialis�e que si le gesture est modifié
+	 * l'animation n'est r�initialisée que si le gesture est modifié
 	 */
 	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	// record event
@@ -328,7 +328,7 @@ public abstract class Sprite implements Comparable<Sprite>
 		trajectoryManager.update();
 		/*
 		 * NOTE : il est important que le trajectoryManager soit updat� en dernier
-		 * comme �a, un changement de case arrive apr�s avoir traité tous les �v�nements
+		 * comme �a, un changement de case arrive apr�s avoir traité tous les évènements
 		 * (raisons de synchro)
 		 */
 //System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getLine()+";"+tile.getCol());

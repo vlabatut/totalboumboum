@@ -67,15 +67,15 @@ public class AnimeManager
 	 * Change l'animation en cours pour le sprite considéré.
 	 * paramètres :
 	 * 	- reinit : 
-	 * 		- remet currentTime (le temps �coul�) à 0 et recalcule le durationCoeff.
+	 * 		- remet currentTime (le temps écoulé) à 0 et recalcule le durationCoeff.
 	 * 		- ceci permet de passer d'une anime à une autre sans repartir à z�ro, par exemple pour un changement de direction pendant walking.
-	 * 		- on suppose alors que les deux animes ont exactement les mêmes caract�ristiques (même dur�e, proportion, etc), car elles ne sont pas r�initialis�es.
+	 * 		- on suppose alors que les deux animes ont exactement les mêmes caract�ristiques (même dur�e, proportion, etc), car elles ne sont pas r�initialisées.
 	 * 	- forcedDuration : 
 	 * 		- si >0 : force l'animation à durer le temps passé en paramètre :
 	 * 			- si l'animation est définie comme proportionnelle, la dur�e de chaque pas est modifiée (lin�airement) pour coller à forcedDuration
 	 * 			- sinon, l'animation est jou�e normalement, mais :
 	 * 				- interrompue si elle est plus longue que forcedDuration
-	 * 				- reste bloqu�e sur la dernière image si elle est plus courte que forcedDuration  
+	 * 				- reste bloquée sur la dernière image si elle est plus courte que forcedDuration  
 	 * 		- si =0 : la dur�e de l'animation n'est pas forc�e, on utilise celle définie dans le fichier xml
 	 * 		- si <0 : force  l'animation à durer le même temps que le sprite li� (s'il existe, sinon c'est comme si forcedDuration==0)
 	 * 
@@ -216,9 +216,9 @@ public class AnimeManager
 	/////////////////////////////////////////////////////////////////
 	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps total �coul� de puis le d�but de l'animation */
+	/** temps total écoulé de puis le d�but de l'animation */
 	protected double currentTime;
-	/** temps normalis� �coul� de puis le d�but de l'animation (r�initialis� par un repeat) */
+	/** temps normalis� écoulé de puis le d�but de l'animation (r�initialisé par un repeat) */
 	protected double animeTime;
 	/** dur�e totale originale de l'animation */
 	protected double animeDuration;

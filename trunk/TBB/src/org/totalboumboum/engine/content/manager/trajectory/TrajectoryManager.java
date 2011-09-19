@@ -97,7 +97,7 @@ public abstract class TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps total �coul� de puis le d�but de la trajectoire */
+	/** temps total écoulé de puis le d�but de la trajectoire */
 	protected double currentTime = 0;
 	/** dur�e totale effective de la trajectoire */
 	protected double totalDuration = 0;
@@ -128,7 +128,7 @@ public abstract class TrajectoryManager
 	protected double currentPosY = 0;
 	/** position Z absolue (en fait : soit par rapport au niveau, soit par rapport au boundToSprite) */
 	protected double currentPosZ = 0;
-	/** indique si la trajectoire a impliqu� (pour le moment) que le sprite ait d�coll� du sol */ 
+	/** indique si la trajectoire a impliqué (pour le moment) que le sprite ait d�coll� du sol */ 
 	protected boolean hasFlied;
 	
 	public double getCurrentPosX()

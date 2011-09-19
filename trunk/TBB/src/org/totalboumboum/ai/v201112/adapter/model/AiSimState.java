@@ -28,7 +28,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * décrit un état simul� dans lequel un sprite peut se trouver, c'est
- * à dire essentiellement l'action que le sprite r�alise ou qu'il subit.
+ * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
  * Cet état est décrit par le nom de cette action, et éventuellement la
  * direction dans laquelle elle est effectuée (pour les actions orient�es
  * comme le déplacement, par exemple).

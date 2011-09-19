@@ -30,9 +30,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * classe utilisée pour tester les fonctionnalit�s de ce package,
- * en particulier que AiModel r�alise des simulations correctes.
+ * en particulier que AiModel réalise des simulations correctes.
  * on crée une zone fictive en faisant varier les sprites et leurs
- * actions, et on affiche le r�sultat des simulation pas-�-pas.<br/>
+ * actions, et on affiche le résultat des simulation pas-�-pas.<br/>
  * 
  * <b>Note :</b> la classe modèle n'est pas définie pour représenter une zone
  * fictive comme ici, mais pour représenter la zone de jeu réelle.

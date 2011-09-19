@@ -606,7 +606,7 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	/////////////////////////////////////////////////////////////////
 	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps normalis� �coul� de puis le d�but de la trajectoire */
+	/** temps normalis� écoulé de puis le d�but de la trajectoire */
 	private double trajectoryTime;
 	/** dur�e totale originale de la trajectoire */
 	private double trajectoryDuration = 0;

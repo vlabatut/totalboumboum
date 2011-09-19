@@ -30,7 +30,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * implément la plus simple d'une fonction successeur : 
+ * implémentation la plus simple d'une fonction successeur : 
  * on prend les 4 cases voisines, en ne gardant que celles qui sont traversables
  * par le personnage considéré.
  * Une version plus complexe et plus efficace consisterait à utiliser la profondeur

@@ -117,7 +117,7 @@ public final class Astar
 	private AstarNode root = null;
 	/** personnage de référence */
 	private AiHero hero = null;
-	/** l'ai qui a r�alis� l'appel */
+	/** l'ai qui a réalis� l'appel */
 	private ArtificialIntelligence ai = null;
 
 	/////////////////////////////////////////////////////////////////
@@ -146,7 +146,7 @@ public final class Astar
 	}
 		
 	/**
-	 * limite l'arbre de recherche à un certain cout maxCost, i.e. d�s que le
+	 * limite l'arbre de recherche à un certain cout maxCost, i.e. Dès que le
 	 * noeud courant atteint ce cout maximal, l'algorithme se termine et ne
 	 * renvoie pas de solution (�chec)
 	 * Dans des cas extr�mes, l'arbre peut avoir une hauteur consid�rable,
@@ -170,7 +170,7 @@ public final class Astar
 	 * chemin n'est trouv�, alors un chemin vide est renvoy�. Si jamais
 	 * l'algorithme atteint une limite de cout/taille, la valeur null est
 	 * renvoy�e. Dans ce cas l�, c'est qu'il y a généralement un probl�me
-	 * dans le fa�on dont A* est employ� (mauvaise fonction de cout, par
+	 * dans le façon dont A* est employ� (mauvaise fonction de cout, par
 	 * exemple). 
 	 * 
 	 * @param startTile	
@@ -195,9 +195,9 @@ public final class Astar
 	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouv� 
 	 * alors un chemin vide est renvoy�. Si jamais l'algorithme atteint 
 	 * une limite de cout/taille, la valeur null est renvoy�e. Dans ce 
-	 * cas-l�, c'est qu'il y a généralement un probl�me dans le fa�on 
+	 * cas-l�, c'est qu'il y a généralement un probl�me dans le façon 
 	 * dont A* est employ� (mauvaise fonction de cout, par exemple).
-	 * La fonction renvoie �galement null si la liste endTiles est vide.
+	 * La fonction renvoie également null si la liste endTiles est vide.
 	 * 
 	 * @param startTile	
 	 * 		la case de départ
@@ -245,20 +245,20 @@ public final class Astar
 					finalNode = currentNode;
 					found = true;
 				}
-				// si l'arbre a atteint la hauteur maximale, on s'arr�te
+				// si l'arbre a atteint la hauteur maximale, on s'arrête
 				else if(maxHeight>0 && currentNode.getDepth()>=maxHeight)
 					limitReached = true;
-				// si le noeud courant a atteint le cout maximal, on s'arr�te
+				// si le noeud courant a atteint le cout maximal, on s'arrête
 				else if(maxCost>0 && currentNode.getCost()>=maxCost)
 					limitReached = true;
-				// si le nombre de noeuds dans la file est trop grand, on s'arr�te
+				// si le nombre de noeuds dans la file est trop grand, on s'arrête
 				else if(maxNodes>0 && queue.size()>=maxNodes)
 					limitReached = true;
 				else
 				{	// sinon on r�cup�re les noeuds suivants
 					List<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
 					// on introduit du hasard en permuttant al�atoirement les noeuds suivants
-					// pour cette raison, cette implément d'A* ne renverra pas forcément toujours le même r�sultat :
+					// pour cette raison, cette implément d'A* ne renverra pas forcément toujours le même résultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
 					Collections.shuffle(successors);
 					// puis on les rajoute dans la file de priorité

@@ -29,7 +29,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
  * décrit un état dans lequel un sprite peut se trouver, c'est
- * à dire essentiellement l'action que le sprite r�alise ou qu'il subit.
+ * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
  * Cet état est décrit par le nom de cette action, et éventuellement la
  * direction dans laquelle elle est effectuée (pour les actions orient�es
  * comme le déplacement, par exemple).
@@ -58,10 +58,10 @@ final class AiDataState implements AiState
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour cet état en fonction de l'�volution du sprite de référence
+	 * met à jour cet état en fonction de l'évolution du sprite de référence
 	 * 
 	 * @param elapsedTime
-	 * 		temps �coul� depuis la dernière mise à jour
+	 * 		temps écoulé depuis la dernière mise à jour
 	 */
 	protected void update(long elapsedTime)
 	{	// direction

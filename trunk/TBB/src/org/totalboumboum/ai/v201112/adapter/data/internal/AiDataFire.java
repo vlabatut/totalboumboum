@@ -29,7 +29,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
- * représente un feu du jeu, ie une projection mortelle r�sultant (généralement) 
+ * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
@@ -127,7 +127,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps �coul� depuis que le feu existe, exprimé en ms */
+	/** temps écoulé depuis que le feu existe, exprimé en ms */
 	private long time = 0;
 	
 	@Override
@@ -136,7 +136,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	}
 
 	/**
-	 * met à jour le temps �coul� depuis que le feu existe
+	 * met à jour le temps écoulé depuis que le feu existe
 	 */
 	private void updateTime()
 	{	long elapsedTime = getTile().getZone().getElapsedTime();
