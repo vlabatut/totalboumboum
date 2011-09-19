@@ -4,8 +4,8 @@ import org.totalboumboum.ai.v201011.adapter.AiManager;
 import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 
 /**
- * classe utilisee par le moteur du jeu pour retrouver les IA
- * (a ne pas modifier)
+ * classe utilisée par le moteur du jeu pour retrouver les IA
+ * (à ne pas modifier)
  * 
  * @author Vincent Labatut
  *
@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201011.ais.akbulutkupelioglu.v6.AkbulutKupelioglu;
 public class AiMain extends AiManager
 {
 	/**
-	 * constructeur utilise pour creer une instance de l'IA
+	 * constructeur utilisé pour créer une instance de l'IA
 	 */
 	public AiMain()
 	{	super(new AkbulutKupelioglu());		
