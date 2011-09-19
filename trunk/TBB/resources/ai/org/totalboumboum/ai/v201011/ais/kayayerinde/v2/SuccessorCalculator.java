@@ -44,7 +44,7 @@ public abstract class SuccessorCalculator
 	 * un état en paramètre, car le noeud de recherche contient des informations
 	 * susceptibles d'�liminer certains successeurs potentiels. 
 	 * Par exemple, si le cout correspond au temps de déplacement, alors le cout du noeud
-	 * de recherche courant correspond au temps nécessaire pour arriver à l'�tat
+	 * de recherche courant correspond au temps nécessaire pour arriver à l'état
 	 * correspondant. Certaines des cases accessibles depuis cet état peuvent être
 	 * menanc�e par du feu, et le temps est une information cruciale pour déterminer
 	 * si le personnage peut ou pas traverser une case avant qu'elle ne br�le.

@@ -60,7 +60,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	private AiPath path;
 	
 	/**
-	 * Cette classe d�pend essentiellement de la fonction �processAction� 
+	 * Cette classe dépend essentiellement de la fonction �processAction� 
 	 * qui est �tendu de la classe �ArtificialIntelligence� de l�API. 
 	 * Car dans cette méthode, on d�cide les actions de l�iA.
 	 */
@@ -70,7 +70,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		// premier appel : on initialise
 		
 		initBT();
-		// si le personnage control� a �t� �limin�, inutile de continuer
+		// si le personnage control� a été �limin�, inutile de continuer
 		if(!this.deepPurple.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			updateLocation();

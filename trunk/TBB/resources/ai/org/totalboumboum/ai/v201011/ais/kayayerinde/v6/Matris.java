@@ -125,7 +125,7 @@ public class Matris {
 	/////////////////////////////////////////////////////////////////
 	// BOMBS		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste des bombes trait�es au cours de cette itération (pour ne pas les traiter plusieurs fois) */
+	/** liste des bombes traitées au cours de cette itération (pour ne pas les traiter plusieurs fois) */
 	private List<AiBomb> processedBombs;
 	
 	

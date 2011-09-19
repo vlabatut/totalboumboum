@@ -206,7 +206,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 					System.out.println("ka�al�m");
 					notrepath=senfuirAZoneSecure(matrice, notreHero, gameZone);
 					result=newAction2(notrepath, notreHero,matrice);
-					System.out.println("Day����! biz ka�t�k day�!");
+					System.out.println("Day����! biz kaéték day�!");
 			}
 		}else{
 			permissionPoseBombe=true;
@@ -288,7 +288,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 				if(notrepath==null)
 					System.out.println("path bo� abicim nereye kac�yon");
 				result=newAction2(notrepath, notreHero,matrice);
-				System.out.println("Day����! biz ka�t�k day�!");
+				System.out.println("Day����! biz kaéték day�!");
 					
 			}
 		}

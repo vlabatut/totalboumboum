@@ -51,7 +51,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	ArtificialIntelligence ai=this;
 	
 	/**
-	 * Cette classe d�pend essentiellement de la fonction �processAction� 
+	 * Cette classe dépend essentiellement de la fonction �processAction� 
 	 * qui est �tendu de la classe �ArtificialIntelligence� de l�API. 
 	 * Car dans cette méthode, on d�cide les actions de l�iA.
 	 * si notre Ai existe dans le jeu,
@@ -75,7 +75,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		// premier appel : on initialise
 		AiAction result = new AiAction(AiActionName.NONE);
 		initBT();
-		// si le personnage control� a �t� �limin�, inutile de continuer
+		// si le personnage control� a été �limin�, inutile de continuer
 		if(!this.deepPurple.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			boolean actionBomb, mode=selectMode();

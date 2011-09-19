@@ -389,7 +389,7 @@ public class Move
 	
 	
 	/***
-	 * Calcules recursivement les cases qu'un hero peut passer dans une car�e d�j� determine�. 
+	 * Calcules recursivement les cases qu'un hero peut passer dans une car�e déjà determine�. 
 	 * Alors elle elemine les mur non destructible et puis les chemins que le hero associé ne
 	 * peut pas acceder. Donc elle retourne une liste des cases que le hero associé peut 
 	 * acceder. S'il n'y a pas de case alors elle retourne null.

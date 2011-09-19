@@ -197,7 +197,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 					System.out.println("ka�al�m");
 					notrepath=guvenliAlanaKac(matrice, notreHero, gameZone);
 					result=newAction2(notrepath, notreHero,matrice);
-					System.out.println("Day����! biz ka�t�k day�!");
+					System.out.println("Day����! biz kaéték day�!");
 				} catch (LimitReachedException e) {
 					// 
 					e.printStackTrace();
