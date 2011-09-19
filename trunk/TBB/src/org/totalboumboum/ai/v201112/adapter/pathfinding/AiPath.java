@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.pathfinding.path;
+package org.totalboumboum.ai.v201112.adapter.pathfinding;
 
 /*
  * Total Boum Boum
