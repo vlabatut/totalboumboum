@@ -49,13 +49,13 @@ import org.totalboumboum.game.round.RoundVariables;
  * 
  * Classe servant d'interface entre le jeu et une IA.
  * Elle doit être surclass�e de mani�re à obtenir un adaptateur pour une famille
- * d'IA donn�e. Puis, chaque IA doit elle même surclasser la classe r�sultante
+ * d'IA donn�e. Puis, chaque IA doit elle même surclasser la classe résultante
  * (tout ça dans le but de faciliter le chargement de la classe implémentant l'IA).
  * 
  * @author Vincent Labatut
  *
  * @param <V>	
- * 		le type de donn�e renvoy�e par l'IA (et devant être traduite par l'adaptateur en un �v�nement compatible avec le moteur du jeu)
+ * 		le type de donn�e renvoy�e par l'IA (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
  */
 
 public abstract class AbstractAiManager<V>
@@ -83,9 +83,9 @@ public abstract class AbstractAiManager<V>
 	/////////////////////////////////////////////////////////////////
     /** objet implementant le comportement de l'IA */
 	private Callable<V> ai;
-    /** gestionnaire de threads pour ex�cuter l'IA */
+    /** gestionnaire de threads pour exécuter l'IA */
     private ExecutorService executorAi = null;
-    /** future utilisé pour r�cup�rer le r�sultat de l'IA */
+    /** future utilisé pour récupérer le résultat de l'IA */
     private Future<V> futureAi;
     /** indique si cette IA �tait en pause */
     private boolean paused = false;
@@ -139,7 +139,7 @@ public abstract class AbstractAiManager<V>
     		if(aisPause)
     		{	// basculement de la pause
     			paused = true;
-    			// on arr�te le joueur
+    			// on arrête le joueur
     			ControlEvent[] events =
     			{	new ControlEvent(ControlEvent.UP,false),
 					new ControlEvent(ControlEvent.RIGHT,false),
@@ -202,7 +202,7 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * R�alise l'appel à la classe qui impl�mente l'IA,
+     * réalise l'appel à la classe qui impl�mente l'IA,
      * afin que celle ci calcule la prochaine action à effectuer.
      * 
      * @param firstTime
@@ -216,8 +216,8 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * terminer ce gestionnaire, et en particulier le thread ex�cutant l'IA.
-     * Ou plut�t tente de le terminer, car le r�sultat ne peut être forc�.
+     * terminer ce gestionnaire, et en particulier le thread exécutant l'IA.
+     * Ou plut�t tente de le terminer, car le résultat ne peut être forc�.
      */
     public final void finish()
     {	finishAi();
@@ -236,7 +236,7 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * termine cette IA, et en particulier le processus qui l'ex�cute.
+     * termine cette IA, et en particulier le processus qui l'exécute.
      * Pour cette raison, l'IA doit impl�menter une méthode for�ant 
      * sa terminaison.
      */
@@ -289,12 +289,12 @@ public abstract class AbstractAiManager<V>
 	
 	/**
 	 * méthode utilisée pour convertir la valeur renvoy�e par l'ia 
-	 * en un �v�nement standard traitable par le moteur du jeu.
+	 * en un évènement standard traitable par le moteur du jeu.
 	 * 
 	 * @param value	
 	 * 		la valeur renvoy�e par l'ia, qui est à convertir
 	 * @return	
-	 * 		le r�sultat de la conversion sous la forme d'un �v�nement à envoyer au sprite contr�l� par l'IA
+	 * 		le résultat de la conversion sous la forme d'un évènement à envoyer au sprite contr�l� par l'IA
 	 */
 	public abstract List<ControlEvent> convertReaction(V value);
    
