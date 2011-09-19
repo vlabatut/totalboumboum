@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201011.adapter.path.astar;
+package org.totalboumboum.ai.v201112.adapter.path.dybref;
 
 /*
  * Total Boum Boum
@@ -24,21 +24,21 @@ package org.totalboumboum.ai.v201011.adapter.path.astar;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.totalboumboum.ai.v201011.adapter.ArtificialIntelligence;
-import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201011.adapter.data.AiHero;
-import org.totalboumboum.ai.v201011.adapter.data.AiTile;
-import org.totalboumboum.ai.v201011.adapter.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201112.adapter.ArtificialIntelligence;
+import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
 
 /**
- * Représente un noeud dans l'arbre de recherche développ� par l'algorithme A* 
+ * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
  * 
  * @author Vincent Labatut
  *
  */
-public final class AstarNode implements Comparable<AstarNode>
+public final class DybrefNode implements Comparable<DybrefNode>
 {	
 	/**
 	 * Constructeur créant un noeud racine non visité. 
@@ -52,7 +52,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * @param heuristicCalculator	
 	 * 		fonction heuristique
 	 */
-	protected AstarNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
+	protected DybrefNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// ia
 		this.ai = ai;
 		// case
@@ -82,7 +82,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * @param parent	
 	 * 		noeud de recherche parent de ce noeud
 	 */
-	protected AstarNode(AiTile tile, AstarNode parent) throws StopRequestException
+	protected DybrefNode(AiTile tile, DybrefNode parent) throws StopRequestException
 	{	// ia
 		this.ai = parent.getAi();
 		
@@ -220,7 +220,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	// PARENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** parent du noeud (null pour la racine) */
-	private AstarNode parent = null;
+	private DybrefNode parent = null;
 	
 	/**
 	 * renvoie le parent de ce noeud de recherche
@@ -228,7 +228,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * @return	
 	 * 		un noeud de recherche correspondant au parent de ce noeud
 	 */
-	public AstarNode getParent()
+	public DybrefNode getParent()
 	{	return parent;	
 	}
 	
@@ -255,7 +255,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** fils du noeud */
-	private List<AstarNode> children = null;
+	private List<DybrefNode> children = null;
 	/** calculateur des successeurs */
 	private SuccessorCalculator successorCalculator;
 	
@@ -277,7 +277,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	 * 		une liste contenant les fils de ce noeud
 	 * @throws StopRequestException 
 	 */
-	public List<AstarNode> getChildren() throws StopRequestException
+	public List<DybrefNode> getChildren() throws StopRequestException
 	{	if(children==null)
 			developNode();
 		return children;
@@ -293,13 +293,13 @@ public final class AstarNode implements Comparable<AstarNode>
 	private void developNode() throws StopRequestException
 	{	ai.checkInterruption();
 	
-		children = new ArrayList<AstarNode>();
+		children = new ArrayList<DybrefNode>();
 		List<AiTile> neighbors = successorCalculator.processSuccessors(this);
 		for(AiTile neighbor: neighbors)
-		{	// on ne garde pas les états qui appartiennent déjà au chemin contenant le noeud de recherche courant
-			// i.e. les états qui apparaissent dans des noeuds ancêtres du noeud courant
+		{	// on ne garde pas les �tats qui appartiennent déjà au chemin contenant le noeud de recherche courant
+			// i.e. les �tats qui apparaissent dans des noeuds ancêtres du noeud courant
 			if(!hasBeenExplored(neighbor))
-			{	AstarNode node = new AstarNode(neighbor,this);
+			{	DybrefNode node = new DybrefNode(neighbor,this);
 				children.add(node);			
 			}
 		}
@@ -327,13 +327,13 @@ public final class AstarNode implements Comparable<AstarNode>
 	@Override
 	public boolean equals(Object object)
 	{	boolean result = false;
-		if(object instanceof AstarNode)
-			result = compareTo((AstarNode)object)==0;
+		if(object instanceof DybrefNode)
+			result = compareTo((DybrefNode)object)==0;
 		return result;
 	}
 
 	@Override
-	public int compareTo(AstarNode node)
+	public int compareTo(DybrefNode node)
     {	int result = 0;
 		double f1 = cost+heuristic;
     	double f2 = node.getCost()+node.getHeuristic();
@@ -370,7 +370,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	{	// children
 		if(children!=null)
 		{	while(!children.isEmpty())
-			{	AstarNode n = children.get(0);
+			{	DybrefNode n = children.get(0);
 				n.finish();
 				children.remove(0);
 			}

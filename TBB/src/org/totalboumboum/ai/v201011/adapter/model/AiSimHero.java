@@ -245,7 +245,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	public boolean isCrossableBy(AiSprite sprite)
 	{	boolean result = false;
 		
-		// feu : jamais arr�t� par un personnage
+		// feu : jamais arrété par un personnage
 		if(sprite instanceof AiSimFire)
 			result = true;
 		

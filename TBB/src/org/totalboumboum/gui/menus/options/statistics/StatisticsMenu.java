@@ -168,7 +168,7 @@ public class StatisticsMenu extends InnerMenuPanel implements ModalDialogPanelLi
 		{	e1.printStackTrace();
 		}
 		
-//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c d�j� affect� à un player..
+//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affect� à un player..
 		replaceWith(parent);
 	}
 

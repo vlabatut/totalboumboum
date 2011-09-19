@@ -141,7 +141,7 @@ public interface AiBomb extends AiSprite
 	 * (y compris la case contenant la bombe elle-même). 
 	 * Cette méthode tient compte de murs, items, etc., c'est à dire qu'elle
 	 * ne donne que les cases qui seront touch�es si la bombe devait exploser
-	 * à l'instant où cette méthode est invoqu�e. Si un des obstacles à l'explosion
+	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
 	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
 	 * alors le souffle peut changer, il faut r�-ex�cuter cette méthode pour avoir le
 	 * nouveau souffle de la bombe dans ce nouvel environnement.

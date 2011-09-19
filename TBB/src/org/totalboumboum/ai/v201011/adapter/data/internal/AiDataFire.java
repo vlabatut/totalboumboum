@@ -109,7 +109,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	{	// par défaut, on bloque
 		boolean result = false;
 		
-		// si le sprite consid�r� est un personnage : peut traverser le feu seulement s'il a une protection
+		// si le sprite considéré est un personnage : peut traverser le feu seulement s'il a une protection
 		if(sprite instanceof AiDataHero)
 		{	AiDataHero hero = (AiDataHero) sprite;
 			result = hero.hasThroughFires();

@@ -41,8 +41,8 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
 public final class AstarNode implements Comparable<AstarNode>
 {	
 	/**
-	 * Constructeur cr�ant un noeud racine non visit�. 
-	 * Les calculateurs passés en paramètres seront utilis�s
+	 * Constructeur créant un noeud racine non visité. 
+	 * Les calculateurs passés en paramètres seront utilisés
 	 * dans l'arbre entier (i.e. pour tous les autre noeuds)
 	 * 
 	 * @param tile	
@@ -74,7 +74,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	}
 
 	/**
-	 * Constructeur cr�ant un noeud non visit�, fils du noeud
+	 * Constructeur créant un noeud non visité, fils du noeud
 	 * passé en paramètre. 
 	 * 
 	 * @param tile	
@@ -98,7 +98,7 @@ public final class AstarNode implements Comparable<AstarNode>
 		// profondeur
 		depth = parent.getDepth() + 1;
 		
-		// co�t
+		// coût
 		costCalculator = parent.getCostCalculator();
 		double localCost = costCalculator.processCost(parent.getTile(),tile);
 		cost = parent.getCost() + localCost;
@@ -114,14 +114,14 @@ public final class AstarNode implements Comparable<AstarNode>
     /////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** IA ayant invoqu� A* */
+	/** IA ayant invoqué A* */
 	private ArtificialIntelligence ai = null;
 	
 	/**
-	 * renvoie l'IA qui a invoqu� A*
+	 * renvoie l'IA qui a invoqué A*
 	 * 
 	 * @return
-	 * 		la classe principale de l'IA ayant invoqu� A*
+	 * 		la classe principale de l'IA ayant invoqué A*
 	 */
 	public ArtificialIntelligence getAi()
 	{	return ai;	
@@ -163,16 +163,16 @@ public final class AstarNode implements Comparable<AstarNode>
 	/////////////////////////////////////////////////////////////////
 	// COST				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** co�t du noeud (calculé depuis la racine) */
+	/** coût du noeud (calculé depuis la racine) */
 	private double cost = 0;
-	/** calculateur de co�t */
+	/** calculateur de coût */
 	private CostCalculator costCalculator;
 	
 	/**
-	 * Renvoie le co�t du noeud calculé depuis la racine. 
+	 * Renvoie le coût du noeud calculé depuis la racine. 
 	 * 
 	 * @return	
-	 * 		le co�t
+	 * 		le coût
 	 */
 	public double getCost()
 	{	return cost;
@@ -233,13 +233,13 @@ public final class AstarNode implements Comparable<AstarNode>
 	}
 	
 	/**
-	 * détermine si la case passée en paramètre a d�j� �t� trait�e,
-	 * i.e. si elle apparait dans les noeuds de recherche anc�tres
+	 * détermine si la case passée en paramètre a déjà été traitée,
+	 * i.e. si elle apparait dans les noeuds de recherche ancêtres
 	 * 
 	 * @param tile	
 	 * 		case à tester
 	 * @return	
-	 * 		vrai si la case a d�j� �t� trait�e
+	 * 		vrai si la case a déjà été traitée
 	 * @throws StopRequestException
 	 */
 	private boolean hasBeenExplored(AiTile tile) throws StopRequestException
@@ -271,7 +271,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	
 	/**
 	 * renvoie les fils de ce noeud de recherche
-	 * (ils sont éventuellement calculés si ce n'est pas d�j� fait)
+	 * (ils sont éventuellement calculés si ce n'est pas déjà fait)
 	 * 
 	 * @return	
 	 * 		une liste contenant les fils de ce noeud
@@ -296,8 +296,8 @@ public final class AstarNode implements Comparable<AstarNode>
 		children = new ArrayList<AstarNode>();
 		List<AiTile> neighbors = successorCalculator.processSuccessors(this);
 		for(AiTile neighbor: neighbors)
-		{	// on ne garde pas les états qui appartiennent d�j� au chemin contenant le noeud de recherche courant
-			// i.e. les états qui apparaissent dans des noeuds anc�tres du noeud courant
+		{	// on ne garde pas les états qui appartiennent déjà au chemin contenant le noeud de recherche courant
+			// i.e. les états qui apparaissent dans des noeuds ancêtres du noeud courant
 			if(!hasBeenExplored(neighbor))
 			{	AstarNode node = new AstarNode(neighbor,this);
 				children.add(node);			
@@ -308,14 +308,14 @@ public final class AstarNode implements Comparable<AstarNode>
 	/////////////////////////////////////////////////////////////////
 	// HERO				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** personnage consid�r� */
+	/** personnage considéré */
 	private AiHero hero = null;
 	
 	/**
-	 * renvoie le personnage de r�f�rence pour cette recherche
+	 * renvoie le personnage de référence pour cette recherche
 	 * 
 	 * @return	
-	 * 		le personnage de r�f�rence
+	 * 		le personnage de référence
 	 */
 	public AiHero getHero()
 	{	return hero;	
@@ -364,7 +364,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * permet de terminer proprement ce noeud une fois
-	 * qu'il n'est plus utilis�
+	 * qu'il n'est plus utilisé
 	 */
 	protected void finish()
 	{	// children

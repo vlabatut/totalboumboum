@@ -54,7 +54,7 @@ public class AiState
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour cet état en fonction de l'�volution du sprite de r�f�rence
+	 * met à jour cet état en fonction de l'�volution du sprite de référence
 	 */
 	void update()
 	{	// direction

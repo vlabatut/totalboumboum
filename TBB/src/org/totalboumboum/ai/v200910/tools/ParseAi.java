@@ -99,7 +99,7 @@ public class ParseAi
 					else if(verbose)
 					{	for(int i=0;i<level;i++)
 							System.out.print("..");
-						System.out.println("Le fichier "+file.getPath()+" n'a pas �t� reconnu comme un source Java");
+						System.out.println("Le fichier "+file.getPath()+" n'a pas été reconnu comme un source Java");
 					}
 				}
 			}

@@ -90,7 +90,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	private Vector<Boolean> playersStates;
 	/** position du personnage de l'IA */
 	private int[] ownPosition;
-	/** temps restant avant le shrink (-1 si le shrink a d�j� commencé) */
+	/** temps restant avant le shrink (-1 si le shrink a déjà commencé) */
 	private long timeBeforeShrink;
 	/** position du prochain shrink */
 	private int nextShrinkPosition[];
@@ -182,7 +182,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * Renvoie la position du personnage dont l'index est passé
 	 * en paramètre. S'il n'y a pas de personnage ayant cet index, la valeur 
 	 * {-1,-1} est renvoy�e. Attention, le personnage dirig� par cette IA n'est 
-	 * jamais consid�r�. 
+	 * jamais considéré. 
 	 * @param index	num�ro du personnage
 	 * @return	position du personnage 
 	 */
@@ -204,7 +204,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * en paramètre. S'il n'y a pas de personnage ayant cet index, la valeur 
 	 * -1 est renvoy�e. Sinon, il s'agit d'un entier AI_DIR_NONE, AI_DIR_UP, AI_DIR_DOWN, 
 	 * AI_DIR_RIGHT ou AI_DIR_LEFT. Attention, le personnage dirig� par cette IA n'est 
-	 * jamais consid�r�.
+	 * jamais considéré.
 	 * @param index	num�ro du personnage
 	 * @return	le sens de déplacement du personnage 
 	 */
@@ -220,7 +220,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * en paramètre est vivant. Si le personnage est mort ou en train de mourir,
 	 * ou bien s'il n'y a pas de personnage ayant cet index, la valeur 
 	 * faux est renvoy�e. Attention, le personnage dirig� par cette IA n'est 
-	 * jamais consid�r�.
+	 * jamais considéré.
 	 * @param index	num�ro du personnage
 	 * @return	un bool�an représentant l'�tat du personnage 
 	 */
@@ -233,7 +233,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Renvoie le temps restant avant le d�but du shrink (la valeur
-	 * est n�gative si le shrink a d�j� commencé).
+	 * est n�gative si le shrink a déjà commencé).
 	 * @return	temps avant le shrink en millisecondes
 	 */
 	protected long getTimeBeforeShrink()
@@ -280,7 +280,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Renvoie une valeur correspondant au nombre de bombes que le joueur contr�l� par l'IA
 	 * peut encore poser. Ce nombre correspond donc au nombre de bombes posables total moins 
-	 * le nombre de bombes d�j� pos�es.
+	 * le nombre de bombes déjà pos�es.
 	 * @return	nombre de bombes restant à poser
 	 */
 	protected int getOwnBombCount()
@@ -289,7 +289,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 
 	/**
 	 * Renvoie la port�e des bombes des joueurs autre que celui contr�l� par l'IA.
-	 * @param	le num�ro du joueur consid�r�
+	 * @param	le num�ro du joueur considéré
 	 * @return	puissance des bombes (longueur de la flamme exprimée en nombre de cases)
 	 */
 	protected int getPlayerFirePower(int index)
@@ -300,8 +300,8 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * Renvoie une valeur correspondant aux nombres de bombes que les joueurs autres
 	 * que celui contr�l� par l'IA peuvent encore poser. 
 	 * Ce nombre correspond donc au nombre de bombes posables total moins 
-	 * le nombre de bombes d�j� pos�es.
-	 * @param	le num�ro du joueur consid�r�
+	 * le nombre de bombes déjà pos�es.
+	 * @param	le num�ro du joueur considéré
 	 * @return	nombre de bombes restant à poser
 	 */
 	protected int getPlayerBombCount(int index)

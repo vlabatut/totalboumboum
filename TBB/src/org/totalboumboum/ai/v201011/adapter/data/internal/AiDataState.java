@@ -58,7 +58,7 @@ final class AiDataState implements AiState
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour cet état en fonction de l'�volution du sprite de r�f�rence
+	 * met à jour cet état en fonction de l'�volution du sprite de référence
 	 * 
 	 * @param elapsedTime
 	 * 		temps �coul� depuis la dernière mise à jour

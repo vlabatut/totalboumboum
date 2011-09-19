@@ -28,7 +28,7 @@ import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 
 /**
  * Classe �tendant la classe abstraite CostCalculator de la mani�re à déterminer
- * le co�t en fonction de la distance en pixel entre les cases.
+ * le coût en fonction de la distance en pixel entre les cases.
  * Cela ne change rien pour toutes les cases sauf la première, car en fonction
  * de la position du point de départ, deux chemins peuvent correspondre à la même
  * distance si on considère les cases, mais une distance différente si on consid�re
@@ -96,13 +96,13 @@ public class PixelCostCalculator extends CostCalculator
 	}
 
 	/**
-	 * le co�t d'un chemin correspond ici à sa distance 
+	 * le coût d'un chemin correspond ici à sa distance 
 	 * exprimée en pixels.
 	 * 
 	 * @param path
 	 * 		chemin à traiter
 	 * @return
-	 * 		le co�t de ce chemin
+	 * 		le coût de ce chemin
 	 */
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = path.getPixelDistance();

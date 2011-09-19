@@ -177,7 +177,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	public boolean isCrossableBy(AiSprite sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
-		// si le sprite consid�r� est un personnage
+		// si le sprite considéré est un personnage
 		if(sprite instanceof AiDataHero)
 		{	AiDataHero hero = (AiDataHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
@@ -189,7 +189,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 			else if(stopHeroes==AiStopType.STRONG_STOP)
 				result = false;
 		}
-		// si le sprite consid�r� est un feu
+		// si le sprite considéré est un feu
 		else if(sprite instanceof AiDataFire)
 		{	AiDataFire fire = (AiDataFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)

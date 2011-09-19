@@ -342,7 +342,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// TIME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps �coul� depuis que la bombe a �t� pos�e, exprimé en ms */
+	/** temps �coul� depuis que la bombe a été pos�e, exprimé en ms */
 	private long time = 0;
 	
 	@Override
@@ -390,7 +390,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	{	// par défaut, on bloque
 		boolean result = false;
 		
-		// si le sprite consid�r� est un personnage
+		// si le sprite considéré est un personnage
 		if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
@@ -403,7 +403,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 				result = false;
 		}
 		
-		// si le sprite consid�r� est un feu
+		// si le sprite considéré est un feu
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)

@@ -117,7 +117,7 @@ final class AiSimFire extends AiSimSprite implements AiFire
 	{	// par défaut, on bloque
 		boolean result = false;
 		
-		// si le sprite consid�r� est un personnage : peut traverser le feu seulement s'il a une protection
+		// si le sprite considéré est un personnage : peut traverser le feu seulement s'il a une protection
 		if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero) sprite;
 			result = hero.hasThroughFires();

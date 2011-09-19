@@ -302,7 +302,7 @@ public class AiZone
 	 * <p>
 	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un cot� commun),
 	 * il est possible que cette méthode renvoie une direction composite,
-	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. R�f�rez-vous à 
+	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. référez-vous à 
 	 * la classe Direction pour plus d'informations sur ces valeurs. 
 	 * <p>
 	 * ATTENTION 2 : comme les niveaux sont circulaires, il y a toujours deux directions possibles.
@@ -310,7 +310,7 @@ public class AiZone
 	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le r�sultat sera
 	 * RIGHT, car LEFT permet �galement d'atteindre la case, mais en parcourant un chemin plus long. 
 	 * 
-	 * @param source	case de r�f�rence
+	 * @param source	case de référence
 	 * @param target	case dont on veut connaitre la direction
 	 * @return	la direction de target par rapport à source
 	 */
@@ -552,7 +552,7 @@ public class AiZone
 	/**
 	 * d�marque toutes les représentations de sprites d'une liste determin�e en fonction du type
 	 * T param�trant cette méthode. méthode appelée au d�but de la mise à jour :
-	 * les représentations de sprites qui n'ont pas �t� marqu�es à la fin de la mise à jour
+	 * les représentations de sprites qui n'ont pas été marqu�es à la fin de la mise à jour
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
 	 * supprim�es de cette représentation.
 	 * 

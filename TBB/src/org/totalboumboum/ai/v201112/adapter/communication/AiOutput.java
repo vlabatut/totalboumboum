@@ -230,7 +230,7 @@ public class AiOutput
 	
 	/**
 	 * modifie le texte associé à une case. Permet
-	 * par exemple d'afficher des heuristiques, des co�ts
+	 * par exemple d'afficher des heuristiques, des coûts
 	 * en temps réel.
 	 * 
 	 * @param line
@@ -246,7 +246,7 @@ public class AiOutput
 
 	/**
 	 * modifie le texte associé à une case. Permet
-	 * par exemple d'afficher des heuristiques, des co�ts
+	 * par exemple d'afficher des heuristiques, des coûts
 	 * en temps réel.
 	 * 
 	 * @param line

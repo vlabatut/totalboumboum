@@ -71,7 +71,7 @@ public interface AiHero extends AiSprite
 	/**
 	 * renvoie le nombre de bombes que le personnage peut poser simultan�ment,
 	 * à ce moment du jeu.
-	 * Ce nombre correspond à la somme du nombre de bombes actuellement d�j� 
+	 * Ce nombre correspond à la somme du nombre de bombes actuellement déjà 
 	 * pos�es (getBombNumberCurrent) plus le nombre de bombes que le joueur peut encore poser. 
 	 * 
 	 * @return	

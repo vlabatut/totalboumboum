@@ -57,13 +57,13 @@ import org.totalboumboum.engine.content.feature.Direction;
  * L'utilisateur peut �galement r�cup�rer le temps �coul� entre deux simulations.<br/>
  * Il faut souligner que les pas de simulation sont détermin�s de fa�on �v�nementielle.
  * En d'autres termes, un pas se termine quand un �v�nement se produit. Les 
- * �v�nements consid�r�s par cette classe sont :<ul>
+ * �v�nements considérés par cette classe sont :<ul>
  * 		<li> la disparition ou l'apparition d'un sprite (ex : une bombe qui a explosé, un item qui apparait)
  * 		<li> un changement d'�tat (ex : un mur qui commence à br�ler)
  * 		<li> un changement de case (ex : un joueur se d�pla�ant d'une case à une autre)
  * 		<li> la fin d'un déplacement (ex : un joueur qui se retrouve bloqu� par un mur)</ul>
  * D�s qu'un de ces �v�nements se produit, le pas de simulation se termine.
- * Le modèle donne acc�s à la liste des sprites qui ont �t� impliqu�s dans un des �v�nements
+ * Le modèle donne acc�s à la liste des sprites qui ont été impliqu�s dans un des �v�nements
  * causant la fin du pas de simulation.<br/>
  * Vous pouvez observer une illustration du fonctionnement de ce modèle en ex�cutant
  * la classe AiModelTest. Notez toute fois que cette classe de test crée la zone
@@ -271,10 +271,10 @@ public class AiModel
 	/**
 	 * calcule l'�tat suivant de la zone si les états spécifiés en paramètres
 	 * sont appliqu�s à la zone courante. en l'absence d'�tat spécifié, le sprite
-	 * continue à faire ce qu'il faisait d�j� (br�ler, se d�placer, etc.).
+	 * continue à faire ce qu'il faisait déjà (br�ler, se d�placer, etc.).
 	 * par cons�quent, la map contenant les états spécifiés peut être vide. 
 	 * La méthode renvoie l'�tat obtenu à la fin du prochain �v�nement 
-	 * (i.e. celui qui se termine le plus vite). Les �v�nement consid�r�s sont :
+	 * (i.e. celui qui se termine le plus vite). Les �v�nement considérés sont :
 	 * 		- la disparition d'un sprite (ex : une bombe qui a explosé)
 	 * 		- l'apparition d'un sprite (ex : un item qui apparait à la suite de l'explosion d'un mur)
 	 * 		- un changement d'�tat (ex : un mur qui commence à br�ler)
@@ -1120,7 +1120,7 @@ if(sprite instanceof AiSimBomb)
 	 * @param tile
 	 * 		la case qui devra contenir la bombe.
 	 * @return
-	 * 		la bombe qui a �t� pos�e, ou null si c'�tait impossible.
+	 * 		la bombe qui a été pos�e, ou null si c'�tait impossible.
 	 */
 	public AiBomb applyDropBomb(AiHero hero, AiTile tile)
 	{	AiBomb result = null;
@@ -1144,7 +1144,7 @@ if(sprite instanceof AiSimBomb)
 	 * crée une nouvelle bombe appartenant au personnage passé en paramètre.
 	 * La bombe est plac�e au centre de la case passée en paramètre.
 	 * Le compteur de bombe du personnage est incr�ment�.
-	 * Si jamais la case contient d�j� un objet emp�chant de poser la bombe,
+	 * Si jamais la case contient déjà un objet emp�chant de poser la bombe,
 	 * celle-ci n'est pas créée et la fonction renvoie la valeur null.
 	 * Sinon (si la cr�ation est possible) alors la fonction renvoie la bombe créée.
 	 * Si jamais le personnage ne peut pas poser de bombes pour l'instant,
@@ -1196,7 +1196,7 @@ if(sprite instanceof AiSimBomb)
 	 * @param hero
 	 * 		le personnage que l'on veut voir poser une bombe
 	 * @return
-	 * 		la bombe qui a �t� pos�e, ou null si c'�tait impossible.
+	 * 		la bombe qui a été pos�e, ou null si c'�tait impossible.
 	 */
 	public AiBomb applyDropBomb(AiHero hero)
 	{	AiBomb result = null;

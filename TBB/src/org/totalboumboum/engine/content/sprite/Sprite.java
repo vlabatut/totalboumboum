@@ -251,7 +251,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	
 	public Sprite getOwner()
 	{	return owner;
-		//NOTE à modifier pour recherche r�cursivement l'owner final (mais peut être est-ce d�j� fait ailleurs)
+		//NOTE à modifier pour recherche r�cursivement l'owner final (mais peut être est-ce déjà fait ailleurs)
 	}
 	
 	public void setOwner(Sprite owner)
@@ -328,7 +328,7 @@ public abstract class Sprite implements Comparable<Sprite>
 		trajectoryManager.update();
 		/*
 		 * NOTE : il est important que le trajectoryManager soit updat� en dernier
-		 * comme �a, un changement de case arrive apr�s avoir trait� tous les �v�nements
+		 * comme �a, un changement de case arrive apr�s avoir traité tous les �v�nements
 		 * (raisons de synchro)
 		 */
 //System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getLine()+";"+tile.getCol());

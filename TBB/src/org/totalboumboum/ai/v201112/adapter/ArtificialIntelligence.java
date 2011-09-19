@@ -177,7 +177,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * méthode à surcharger s'il est nécessaire que l'agent soit
 	 * initialis�. Toute op�ration définie dans cette fonction
 	 * sera r�alis�e une fois, juste avant le d�but de la partie.
-	 * A noter que les percepts ont n�anmoins d�j� �t� mis à jour.
+	 * A noter que les percepts ont n�anmoins déjà été mis à jour.
 	 */
 	public void init() throws StopRequestException
 	{	

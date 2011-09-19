@@ -64,7 +64,7 @@ public class AnimeManager
 	protected AnimeDirection currentAnime;
 	
 	/**
-	 * Change l'animation en cours pour le sprite consid�r�.
+	 * Change l'animation en cours pour le sprite considéré.
 	 * paramètres :
 	 * 	- reinit : 
 	 * 		- remet currentTime (le temps �coul�) à 0 et recalcule le durationCoeff.

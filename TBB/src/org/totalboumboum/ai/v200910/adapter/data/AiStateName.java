@@ -26,7 +26,7 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 /**
  * représente un nom associé à un état, c'est à dire : l'action
  * effectuée par le sprite concern�, ou bien l'action qu'il subit.
- * Ces actions sont différentes des 'gestes' utilis�s dans le jeu,
+ * Ces actions sont différentes des 'gestes' utilisés dans le jeu,
  * car elles sont plus simples : une de ces actions peut correspondre à 
  * plusieurs gestes différents. Par exemple, ce STANDING-ci
  * peut correspondre à un joueur qui marche (WALKING), ou bien à une bombe 

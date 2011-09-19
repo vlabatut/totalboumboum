@@ -133,7 +133,7 @@ public abstract class AbstractAiManager<V>
 				makeCall();	    		
 	    	}    		
     	}
-    	// sinon : un appel avait d�j� �t� effectué
+    	// sinon : un appel avait déjà été effectué
     	else
     	{	// passage en pause ?
     		if(aisPause)

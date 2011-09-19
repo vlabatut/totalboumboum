@@ -156,7 +156,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 
 	/**
 	 * si on a d�passé le forcedPositionDuration, il faut :  
-	 * 		- calculer la position virtuelle à ce temps l� (ce qui implique de calculer le point de départ en r�f�rence)
+	 * 		- calculer la position virtuelle à ce temps l� (ce qui implique de calculer le point de départ en référence)
 	 * 		- v�rifier si elle colle à la position forc�e
 	 * 		- si elle ne colle pas : la corriger
 	 * si on ne l'a pas encore d�passée : à peu près pareil
@@ -225,7 +225,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 	/**
 	 * 1) on calcule la position relative originale (XML) à t=forcedTime
 	 * 2) on l'utilise pour calculer la position absolue originale à t=forcedTime
-	 * 3) on relativise cette position par rapport à la r�f�rence courante : tile ou boundToSprite
+	 * 3) on relativise cette position par rapport à la référence courante : tile ou boundToSprite
 	 * 4) on calcule l'�cart avec la forcedPosition
 	 * cet �cart sera r�pandu sur le d�but de la trajectoire correspondant à forcedTime 
 	 */

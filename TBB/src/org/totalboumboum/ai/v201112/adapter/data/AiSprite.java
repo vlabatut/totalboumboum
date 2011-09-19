@@ -55,7 +55,7 @@ public interface AiSprite
 	public AiState getState();
 	
 	/**
-	 * renvoie vrai si ce sprite a �t� �limin� du jeu
+	 * renvoie vrai si ce sprite a été �limin� du jeu
 	 * 
 	 * @return	
 	 * 		vrai si le sprite n'est plus en jeu

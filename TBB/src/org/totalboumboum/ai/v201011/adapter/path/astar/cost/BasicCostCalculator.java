@@ -27,8 +27,8 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
  * Classe �tendant la classe abstraite CostCalculator de la mani�re la plus simple possible.
- * Ici, le co�t pour passer d'une case à l'autre est simplement 1, quelles que soient
- * les cases consid�r�es.
+ * Ici, le coût pour passer d'une case à l'autre est simplement 1, quelles que soient
+ * les cases considérées.
  * 
  * @author Vincent Labatut
  *
@@ -56,13 +56,13 @@ public class BasicCostCalculator extends CostCalculator
 	}
 
 	/**
-	 * le co�t d'un chemin correspond ici à sa distance exprimée
+	 * le coût d'un chemin correspond ici à sa distance exprimée
 	 * en cases.
 	 * 
 	 * @param path
 	 * 		chemin à traiter
 	 * @return
-	 * 		le co�t de ce chemin
+	 * 		le coût de ce chemin
 	 */
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = path.getTileDistance();
