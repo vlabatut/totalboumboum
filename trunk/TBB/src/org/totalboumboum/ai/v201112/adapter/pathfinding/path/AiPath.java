@@ -32,9 +32,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 /**
  * Cette classe représente un chemin qu'un agent peut emprunter
  * dans la zone de jeu. Le chemin est décrit par une séquence de cases,
- * et un point de départ exprimé en pixels.
- * Diverses opérations sont possibles : modification du chemin,
- * comparaisons, différents calculs, etc.
+ * et un point de départ exprimé en pixels. Un temps d'attente supplémentaire
+ * peut être associé à chaque case.<br/>
+ * Diverses opérations sont possibles sur un ou plusieurs chemins : modification,
+ * comparaisons, calculs variés, etc.
  * 
  * @author Vincent Labatut
  *
@@ -42,7 +43,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 public class AiPath implements Comparable<AiPath>
 {	
     /////////////////////////////////////////////////////////////////
-	// STARTING POINTS	/////////////////////////////////////////////
+	// STARTING POINT	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** abscisse du point de départ précis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien sûr) */
 	private double startX;
@@ -114,9 +115,11 @@ public class AiPath implements Comparable<AiPath>
 	/////////////////////////////////////////////////////////////////
 	/** liste des cases composant le chemin */
 	private final List<AiTile> tiles = new ArrayList<AiTile>();
+	/** liste des pauses associées à chaque case (attention : ce temps n'inclut pas la durée nécessaire à la traversée de la case) */
+	private final List<Long> pauses = new ArrayList<Long>();
 	
 	/**
-	 * renvoie la liste de cases constituant ce chemin
+	 * Renvoie la liste de cases constituant ce chemin
 	 * 
 	 * @return	
 	 * 		la liste de cases du chemin
@@ -126,7 +129,18 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * renvoie la case dont la position est passée en paramètre
+	 * Renvoie la liste de pauses assocées aux cases constituant ce chemin.
+	 * Les pauses sont exprimées en ms.
+	 * 
+	 * @return	
+	 * 		la liste de pauses du chemin
+	 */
+	public List<Long> getPauses()
+	{	return pauses;	
+	}
+	
+	/**
+	 * Renvoie la case dont la position est passée en paramètre
 	 *
 	 * @param index
 	 * 		la position de la case demandée
@@ -138,20 +152,47 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * ajoute dans ce chemin la case passée en paramètre, 
+	 * Renvoie la pause associée à la case 
+	 * dont la position est passée en paramètre.
+	 * La pause est exprimée en ms.
+	 *
+	 * @param index
+	 * 		la position de la case demandée
+	 * @return	
+	 * 		la case occupant la position indiquée dans ce chemin
+	 */
+	public Long getPause(int index)
+	{	return pauses.get(index);	
+	}
+	
+	/**
+	 * Ajoute dans ce chemin la case passée en paramètre, 
 	 * en l'insérant à la fin de la séquence de cases
 	 * 
 	 * @param tile
 	 * 		la case à insérer
 	 */
 	public void addTile(AiTile tile)
-	{	tiles.add(tile);
-		if(tiles.size()==1)
-			checkStartingPoint();
+	{	addTile(tile,0);
 	}
 	
 	/**
-	 * ajoute dans ce chemin la case passée en paramètre, 
+	 * Ajoute dans ce chemin la case passée en paramètre, 
+	 * en l'insérant à la fin de la séquence de cases et
+	 * en lui associant la pause spécifiée (en ms). 
+	 * 
+	 * @param tile
+	 * 		la case à insérer
+	 */
+	public void addTile(AiTile tile, long pause)
+	{	tiles.add(tile);
+		if(tiles.size()==1)
+			checkStartingPoint();
+		pauses.add(pause);
+	}
+	
+	/**
+	 * Ajoute dans ce chemin la case passée en paramètre, 
 	 * en l'insérant à la position passée en paramètre.
 	 * 
 	 * @param index
@@ -160,9 +201,25 @@ public class AiPath implements Comparable<AiPath>
 	 * 		la case à insérer
 	 */
 	public void addTile(int index, AiTile tile)
+	{	addTile(index,tile,0);
+	}
+	
+	/**
+	 * Ajoute dans ce chemin la case passée en paramètre, 
+	 * en l'insérant à la position passée en paramètre.
+	 * 
+	 * @param index
+	 * 		position de la case à insérer
+	 * @param tile
+	 * 		la case à insérer
+	 * @param pause
+	 * 		la pause associée à la case à insérer
+	 */
+	public void addTile(int index, AiTile tile, long pause)
 	{	tiles.add(index,tile);
 		if(index==0)
 			checkStartingPoint();
+		pauses.add(index,pause);
 	}
 	
 	/**
@@ -181,7 +238,28 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * supprime de ce chemin la case dont la position est passée en paramètre
+	 * Remplace la case dont la position est passée en paramètre par
+	 * la case passée en paramètre, dans ce chemin. La pause
+	 * est également remplacée par la pause spécifiée en paramètre
+	 * (et exprimée en ms).
+	 * 
+	 * @param index
+	 * 		position de la case à remplacer
+	 * @param tile
+	 * 		la nouvelle case
+	 * @param pause
+	 * 		la nouvelle pause associée à cette case.
+	 */
+	public void setTile(int index, AiTile tile, long pause)
+	{	tiles.set(index,tile);
+		if(index==0)
+			checkStartingPoint();
+		pauses.set(index,pause);
+	}
+	
+	/**
+	 * Supprime de ce chemin la case dont la position est passée en paramètre
+	 * (supprime également l'éventuelle pause associée).
 	 * 
 	 * @param index
 	 * 		position de la case à supprimer
@@ -190,47 +268,53 @@ public class AiPath implements Comparable<AiPath>
 	{	tiles.remove(index);
 		if(index==0)
 			checkStartingPoint();
+		pauses.remove(index);
 	}
 	
 	/**
-	 * supprime de ce chemin la case passée en paramètre
+	 * Supprime de ce chemin la case passée en paramètre,
+	 * ainsi que (éventuellement) la pause qui lui était
+	 * associée.
 	 * 
 	 * @param tile
 	 * 		la case à supprimer
 	 */
 	public void removeTile(AiTile tile)
 	{	int index = tiles.indexOf(tile);
-		tiles.remove(tile);
+		tiles.remove(index);
 		if(index==0)
 			checkStartingPoint();
+		pauses.remove(index);
 	}
 	
 	/**
-	 * renvoie la longueur (en cases) de ce chemin
+	 * Renvoie la longueur (en cases) de ce chemin.<br/>
+	 * <b>Attention :</b> si le chemin contient plusieurs
+	 * fois la même case, elle sera comptée autant de fois.
 	 * 
 	 * @return	
-	 * 		la longueur de ce chemin
+	 * 		La longueur de ce chemin, en cases.
 	 */
 	public int getLength()
 	{	return tiles.size();
 	}
 	
 	/**
-	 * teste si ce chemin a une longueur non-nulle
+	 * Teste si ce chemin a une longueur non-nulle.
 	 * 
 	 * @return	
-	 * 		vrai ssi le chemin ne contient aucune case
+	 * 		Renvoie {@code true} ssi le chemin ne contient aucune case.
 	 */
 	public boolean isEmpty()
 	{	return tiles.size()==0;
 	}
 	
 	/**
-	 * renvoie la dernière case du chemin,
+	 * Renvoie la dernière case du chemin,
 	 * ou {@code null} s'il n'y a pas de case dans ce chemin
 	 * 
 	 * @return	
-	 * 		la dernière case du chemin ou {@code null} en cas d'erreur
+	 * 		La dernière case du chemin ou {@code null} en cas d'erreur.
 	 */
 	public AiTile getLastTile()
 	{	AiTile result = null;
@@ -240,11 +324,25 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * renvoie la première case du chemin,
+	 * Renvoie la pause associée à la dernière case du chemin,
 	 * ou {@code null} s'il n'y a pas de case dans ce chemin
 	 * 
 	 * @return	
-	 * 		la première case du chemin ou {@code null} en cas d'erreur
+	 * 		La pause associée à la dernière case du chemin ou {@code null} en cas d'erreur.
+	 */
+	public Long getLastPause()
+	{	Long result = null;
+		if(!pauses.isEmpty())
+			result = pauses.get(pauses.size()-1);
+		return result;
+	}
+	
+	/**
+	 * Renvoie la première case du chemin,
+	 * ou {@code null} s'il n'y a pas de case dans ce chemin.
+	 * 
+	 * @return	
+	 * 		La première case du chemin ou {@code null} en cas d'erreur.
 	 */
 	public AiTile getFirstTile()
 	{	AiTile result = null;
@@ -253,48 +351,71 @@ public class AiPath implements Comparable<AiPath>
 		return result;
 	}
 	
+	/**
+	 * Renvoie la pause associée à la première case du chemin,
+	 * ou {@code null} s'il n'y a pas de case dans ce chemin.
+	 * 
+	 * @return	
+	 * 		La pause associée à la première case du chemin ou {@code null} en cas d'erreur.
+	 */
+	public Long getFirstPause()
+	{	Long result = null;
+		if(!pauses.isEmpty())
+			result = pauses.get(0);
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// DISTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la distance de Manhattan, exprimée en cases, correspondant à ce chemin
+	 * Renvoie la distance de Manhattan, exprimée en cases, correspondant à ce chemin.
+	 * Si la même case apparait consécutivement plusieurs fois, elle n'est comptée
+	 * qu'une seule. Le calcul ne tient pas compte des éventuels obstacles.
 	 * 
 	 * @return	
-	 * 		un entier correspondant à la distance totale du chemin en cases.
+	 * 		Un entier correspondant à la distance totale du chemin en cases.
 	 */
 	public int getTileDistance()
 	{	int result = 0;
-		if(tiles.size()>1)
-			result = tiles.size()-1;
+		AiTile previous = null;
+		for(AiTile tile: tiles)
+		{	if(previous==null || !tile.equals(previous))
+				result++;
+			previous = tile;
+		}
 		return result;	
 	}
 
 	/**
-	 * renvoie la distance de Manhattan, exprimée en pixels, correspondant à ce chemin.
-	 * on utilise le point de départ pour démarrer le calcul, donc pas nécessairement
-	 * le centre de la première case. par contre, le point d'arrivée est forcément
-	 * le centre de la première case.
+	 * Renvoie la distance de Manhattan, exprimée en pixels, correspondant à ce chemin.
+	 * On utilise le point de départ pour démarrer le calcul, donc pas nécessairement
+	 * le centre de la première case. Le point d'arrivée est forcément un point à la périphérie 
+	 * de la dernière case. Le calcul ne tient pas compte des éventuels obstacles.
 	 * 
 	 * @return	
-	 * 		un réel correspondant à la distance totale du chemin en pixels.
+	 * 		Un réel correspondant à la distance totale du chemin en pixels.
 	 */
 	public double getPixelDistance()
 	{	double result = 0;
-		Iterator<AiTile> it = tiles.iterator();
-		if(it.hasNext())
-		{	AiTile tile = it.next();
-			AiZone zone = tile.getZone();
-			double x1 = startX;
-			double y1 = startY;
-			while(it.hasNext())
-			{	tile = it.next();
-				double x2 = tile.getPosX();
-				double y2 = tile.getPosY();
+		AiTile previous = null;
+		Double previousX = null;
+		Double previousY = null;
+		for(AiTile tile: tiles)
+		{	if(previous==null)
+			{	previousX = startX;
+				previousY = startY;
+			}
+			else if(!tile.equals(previous))
+			{	AiZone zone = tile.getZone();
+				double centerX = tile.getPosX();
+				double centerY = tile.getPosY();
 				double dist = zone.getPixelDistance(x1,y1,x2,y2);
 				result = result + dist;
 				x1 = x2;
 				y1 = y2;
 			}
+			previous = tile;
 		}
 		return result;
 	}

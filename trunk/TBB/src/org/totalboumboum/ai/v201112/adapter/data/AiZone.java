@@ -24,6 +24,15 @@ package org.totalboumboum.ai.v201112.adapter.data;
 import java.util.HashMap;
 import java.util.List;
 
+import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
+import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201112.adapter.data.AiFire;
+import org.totalboumboum.ai.v201112.adapter.data.AiFloor;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
+import org.totalboumboum.ai.v201112.adapter.data.AiItem;
+import org.totalboumboum.ai.v201112.adapter.data.AiItemType;
+import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.calculus.CombinatoricsTools;
 import org.totalboumboum.tools.calculus.LevelsTools;
