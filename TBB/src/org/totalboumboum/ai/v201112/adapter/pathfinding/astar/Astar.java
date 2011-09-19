@@ -30,11 +30,11 @@ import org.totalboumboum.ai.v201112.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.pathfinding.AiPath;
 import org.totalboumboum.ai.v201112.adapter.pathfinding.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.pathfinding.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.pathfinding.astar.successor.BasicSuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.pathfinding.astar.successor.SuccessorCalculator;
-import org.totalboumboum.ai.v201112.adapter.pathfinding.path.AiPath;
 
 /**
  * Impl�mentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au

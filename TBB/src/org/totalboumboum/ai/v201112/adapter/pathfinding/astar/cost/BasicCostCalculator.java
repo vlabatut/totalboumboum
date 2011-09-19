@@ -23,7 +23,7 @@ package org.totalboumboum.ai.v201112.adapter.pathfinding.astar.cost;
 
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.pathfinding.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.pathfinding.AiPath;
 
 /**
  * Classe �tendant la classe abstraite CostCalculator de la mani�re la plus simple possible.
