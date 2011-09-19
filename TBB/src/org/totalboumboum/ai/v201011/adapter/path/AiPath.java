@@ -273,7 +273,7 @@ public class AiPath implements Comparable<AiPath>
 	 * renvoie la distance de Manhattan, exprimée en pixels, correspondant à ce chemin.
 	 * on utilise le point de départ pour démarrer le calcul, donc pas nécessairement
 	 * le centre de la première case. par contre, le point d'arrivée est forcément
-	 * le centre de la première case.
+	 * le centre de la dernière case.
 	 * 
 	 * @return	
 	 * 		un réel correspondant à la distance totale du chemin en pixels
