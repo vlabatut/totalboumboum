@@ -138,7 +138,7 @@ public class PathManagement {
 	private Astar astar;
 	/** classe implémentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de co�t */
+	/** classe implémentant la fonction de coût */
 	private CostCalculator costCalculator;
 
 	

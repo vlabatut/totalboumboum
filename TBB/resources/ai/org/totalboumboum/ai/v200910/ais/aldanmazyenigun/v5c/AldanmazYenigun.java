@@ -656,7 +656,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	}
 
 	/**
-	 * met à jour la cible, et éventuellement le chemin jusqu'� elle
+	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
 	 */
 	private void updateTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE

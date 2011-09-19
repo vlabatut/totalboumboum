@@ -30,7 +30,7 @@ public class Zone {
 	private AksoyTangay myAI;
 	//variable de la zone de jeu
 	private AiZone zone;
-	//variable de notre héro
+	//variable de notre hï¿½ro
 	private AiHero ownHero;
 	
 	//variables qu'on va utiliser pour tenir l'information de la zone
@@ -71,13 +71,13 @@ public class Zone {
 		width = zone.getWidth();
 		height = zone.getHeight();
 		
-		//on rempli la matrice d'état par rapport aux ces infos
+		//on rempli la matrice d'Ã©tat par rapport aux ces infos
 		fillMatrix();
 		
 	}
 	
 	/**
-	 * La methode qui rempli la matrice d'état avec les valeurs qui vient de la
+	 * La methode qui rempli la matrice d'Ã©tat avec les valeurs qui vient de la
 	 * zone.
 	 * 
 	 * @throws StopRequestException
@@ -97,7 +97,7 @@ public class Zone {
 			}
 		}
 		
-		//maintenant commençons a remplir la matrice avec les autres valeurs
+		//maintenant commenï¿½ons a remplir la matrice avec les autres valeurs
 		
 		// ENNEMIES 					/////////////////////////////////////
 		Iterator<AiHero> itrHero = ennemies.iterator();
@@ -177,7 +177,7 @@ public class Zone {
 	}
 	
 	/**
-	 * La methode qui renvoie la matrice d'état.
+	 * La methode qui renvoie la matrice d'Ã©tat.
 	 * 
 	 * @throws StopRequestException
 	 */

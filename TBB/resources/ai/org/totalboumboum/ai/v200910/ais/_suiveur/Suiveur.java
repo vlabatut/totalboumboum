@@ -57,7 +57,7 @@ public class Suiveur extends ArtificialIntelligence
 	
 		AiAction result = new AiAction(AiActionName.NONE);
 		
-		// si le personnage control� a �t� �limin�, inutile de continuer
+		// si le personnage control� a été �limin�, inutile de continuer
 		if(!ownHero.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			updateLocation();
@@ -255,7 +255,7 @@ public class Suiveur extends ArtificialIntelligence
 	}
 
 	/**
-	 * met à jour la cible, et éventuellement le chemin jusqu'� elle
+	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
 	 */
 	private void updateTarget() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
