@@ -23,7 +23,7 @@ public class SearchTree {
 	// ensemble des liens dans l'arbre
 	private Vector<SearchLink> links;
 
-	// dernier noeud trait� lors de la recherche
+	// dernier noeud traité lors de la recherche
 	@SuppressWarnings("unused")
 	private SearchNode lastNode;
 	private SearchNode firstNode;
@@ -192,7 +192,7 @@ public class SearchTree {
 	/**
 	 * crée un nouveau lien dans l'arbre. Le noeud origin doit être prèsent dans
 	 * le graphe. Le noeud target doit être absent de l'arbre. Si le noeud
-	 * origin n'appartient pas au graphe. Si le noeud target appartient d�j� au
+	 * origin n'appartient pas au graphe. Si le noeud target appartient déjà au
 	 * graphe.
 	 * 
 	 * @param link

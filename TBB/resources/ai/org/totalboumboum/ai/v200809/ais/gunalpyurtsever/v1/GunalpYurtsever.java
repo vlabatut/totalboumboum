@@ -30,7 +30,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	private List<AiTile> getClearNeighbors(AiTile head, boolean fire) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rÃ©fÃ©rence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(head);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();
@@ -163,7 +163,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 			currentAction = new AiAction(AiActionName.MOVE,queue.peek().getFirstDirection());
 		
 		
-		//System.out.println("gidilen yön:"+currentAction.getDirection().toString());
+		//System.out.println("gidilen yï¿½n:"+currentAction.getDirection().toString());
 		return currentAction;
 	}
 	
@@ -241,7 +241,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		
 			
 		
-		//System.out.println("gidilen yön:"+currentAction.getDirection().toString());
+		//System.out.println("gidilen yï¿½n:"+currentAction.getDirection().toString());
 		return currentAction;
 	}
 	
