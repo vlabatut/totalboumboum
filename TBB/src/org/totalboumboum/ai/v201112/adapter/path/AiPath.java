@@ -328,42 +328,6 @@ public class AiPath implements Comparable<AiPath>
 	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Compare ce chemin à celui passé en paramètre, 
-	 * et renvoie vrai s'il est strictement plus long que ce dernier.
-	 * Cette méthode ne doit plus être utilisée, il faut plutot se servir de {@link #compareTo}.
-	 * 
-	 * @param path
-	 * 		le chemin à comparer
-	 * @return	
-	 * 		vrai ssi ce chemin est plus long que celui passé en paramètre
-	 */
-	@Deprecated
-	public boolean isLongerThan(AiPath path)
-	{	int l1 = tiles.size();
-		int l2 = path.getLength();
-		boolean result = l1>l2;
-		return result;		
-	}
-
-	/**
-	 * Compare ce chemin à celui passé en paramètre, 
-	 * et renvoie vrai s'il est strictement plus court que ce dernier.
-	 * Cette méthode ne doit plus être utilisée, il faut plutôt se servir de {@link #compareTo}.
-	 * 
-	 * @param path
-	 * 		le chemin à comparer
-	 * @return	
-	 * 		vrai ssi ce chemin est plus court que celui passé en paramètre
-	 */
-	@Deprecated
-	public boolean isShorterThan(AiPath path)
-	{	int l1 = tiles.size();
-		int l2 = path.getLength();
-		boolean result = l1<l2;
-		return result;		
-	}
-
 	@Override
 	public int compareTo(AiPath path)
 	{	int result = 0;
