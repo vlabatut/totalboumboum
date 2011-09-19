@@ -76,7 +76,7 @@ public class MatriceCalc {
 	}
 	
 	/**
-	 * v�rifie si nous pouvons atteindre nos ennemis sans détruire les murs
+	 * vérifie si nous pouvons atteindre nos ennemis sans détruire les murs
 	 */
 	static boolean canReachHeros(GocmenogluHekimoglu monIa)throws StopRequestException{
 		BasicHeuristicCalculator heurcalc = new BasicHeuristicCalculator();
@@ -239,7 +239,7 @@ public class MatriceCalc {
 	}
 	
 	/**
-	 * v�rifier si nous pouvons fuir si on met une bombe.
+	 * vérifier si nous pouvons fuir si on met une bombe.
 	 * @param monIa
 	 * @param reach
 	 * @param bline

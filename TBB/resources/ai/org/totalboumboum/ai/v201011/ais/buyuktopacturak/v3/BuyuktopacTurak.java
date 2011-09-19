@@ -67,7 +67,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		// premier appel : on initialise
 		
 		initZibe();
-		// si le personnage control� a �t� �limin�, inutile de continuer
+		// si le personnage control� a été �limin�, inutile de continuer
 		if(!this.ownHero.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			updateLocation();

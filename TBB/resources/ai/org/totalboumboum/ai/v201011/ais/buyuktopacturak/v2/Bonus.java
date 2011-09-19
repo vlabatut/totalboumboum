@@ -45,8 +45,8 @@ public class Bonus {
 		this.bonusList = zone.getItems();
 	}
 	
-	//HEP PATLAYACAK MI DÝYE KONTROL ETMENÝN KOLAY YOLUNU BUL
-	//HEP PATLAYACAK MI KORKUSUYLA YAÞAMAK ÝSTEMÝYORUM!
+	//HEP PATLAYACAK MI Dï¿½YE KONTROL ETMENï¿½N KOLAY YOLUNU BUL
+	//HEP PATLAYACAK MI KORKUSUYLA YAï¿½AMAK ï¿½STEMï¿½YORUM!
 	private void calculateWillBurnBonus() throws StopRequestException{
 		bt.checkInterruption();
 		
@@ -66,8 +66,8 @@ public class Bonus {
 		bt.checkInterruption();
 		int i;
 		boolean crossable;
-		//neighbourTile bombamýn range.i boyunca ilerlerken while döngüsünde aldýðým komþu tile
-		//tempTile methoda giren tile parametresinin deðerini korumak için (for döngüsünün baþýnda)
+		//neighbourTile bombamï¿½n range.i boyunca ilerlerken while dï¿½ngï¿½sï¿½nde aldï¿½ï¿½ï¿½m komï¿½u tile
+		//tempTile methoda giren tile parametresinin deï¿½erini korumak iï¿½in (for dï¿½ngï¿½sï¿½nï¿½n baï¿½ï¿½nda)
 		AiTile neighbourTile, tempTile=bomb.getTile(), tile=bomb.getTile(); 
 		
 		AiItem bonus;
@@ -78,18 +78,18 @@ public class Bonus {
 			i = 0;
 			control=0;
 			tile=tempTile;
-			//her while döngüsüne girmeden önce i ve control sýfýrlanýp, tile'ým baþlangýç noktasýna alýnýr.
+			//her while dï¿½ngï¿½sï¿½ne girmeden ï¿½nce i ve control sï¿½fï¿½rlanï¿½p, tile'ï¿½m baï¿½langï¿½ï¿½ noktasï¿½na alï¿½nï¿½r.
 			while(i < range && crossable==true){
 				bt.checkInterruption();
 				neighbourTile = tile.getNeighbor(dir);
-				//eðer neighbourTile crossable ise i.yi 1 artýrýp o anki tile'ýmý neighbourTile yaparým.
+				//eï¿½er neighbourTile crossable ise i.yi 1 artï¿½rï¿½p o anki tile'ï¿½mï¿½ neighbourTile yaparï¿½m.
 				if(neighbourTile.isCrossableBy(bomb)){
 					i++;
 					tile = neighbourTile;
 				}
 				else{
 					crossable = false;
-					//her while döngüsüne girmeden önce duvar listesini iterator.a yeniden yüklemek gerekiyor.
+					//her while dï¿½ngï¿½sï¿½ne girmeden ï¿½nce duvar listesini iterator.a yeniden yï¿½klemek gerekiyor.
 					Iterator<AiItem> itBonus = this.foundBonusList.iterator();
 					while(itBonus.hasNext() && control==0){
 						bt.checkInterruption();
@@ -104,7 +104,7 @@ public class Bonus {
 		}
 	}	
 	
-	//LÝSTEYE AYNI ELEMANI 3 KERE ALIYOR
+	//Lï¿½STEYE AYNI ELEMANI 3 KERE ALIYOR
 	public boolean findBonus() throws StopRequestException{
 		bt.checkInterruption();
 		foundBonusList = new ArrayList<AiItem>();
@@ -137,15 +137,15 @@ public class Bonus {
 		return hasBonus;
 	}
 	
-	//ADAM RESMEN ÝNÝT GÝBÝ OLDU HER ÞEYÝ TANIMLAMAK GEREKÝYOR
-	//BAÞINDA BONUS VE BOMBALARI LÝSTEYE ATMASI LAZIM
+	//ADAM RESMEN ï¿½Nï¿½T Gï¿½Bï¿½ OLDU HER ï¿½EYï¿½ TANIMLAMAK GEREKï¿½YOR
+	//BAï¿½INDA BONUS VE BOMBALARI Lï¿½STEYE ATMASI LAZIM
 	public boolean destroyBonus()throws StopRequestException{
 		getBonus();
 		getBombs();
 		bt.checkInterruption();
 		boolean destroy = false;
-		//BURADA FIND BONUS DÜZGÜNLEÞTÝRMEM LAZIM BOOL DÖNDÜRMEMELÝ
-		//findBonus()'u çalýþtýrabilmek için gereksiz boolean yaratýyoruz.
+		//BURADA FIND BONUS Dï¿½ZGï¿½NLEÃ©tÃ©RMEM LAZIM BOOL Dï¿½NDï¿½RMEMELï¿½
+		//findBonus()'u ï¿½alï¿½Ã©tÃ©rabilmek iï¿½in gereksiz boolean yaratï¿½yoruz.
 		@SuppressWarnings("unused")
 		boolean salla = findBonus();
 		calculateWillBurnBonus();
@@ -161,7 +161,7 @@ public class Bonus {
 			while(itHeroes.hasNext() && destroy==false){
 				bt.checkInterruption();
 				hero = itHeroes.next();		
-				//Biz daha uzaksak bomba koymalý
+				//Biz daha uzaksak bomba koymalï¿½
 				if(hero!=ownHero){
 					disOwn = bt.getDistance(ownHero.getTile(), bonus.getTile());
 					disEnemy = bt.getDistance(hero.getTile(), bonus.getTile());

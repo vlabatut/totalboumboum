@@ -196,7 +196,7 @@ public class Path {
 			}
 		}
 		
-		// on supprime le tile qu'on a utilis�
+		// on supprime le tile qu'on a utilisé
 		pilePath.removeTile(0);
 		
 		if(!pilePath.isEmpty())

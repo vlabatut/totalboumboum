@@ -874,7 +874,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	private AiAction fuir() throws StopRequestException{
 		checkInterruption();
 		risk=true;
-		//System.out.println("Kacma fonksiyonu �al��t�");
+		//System.out.println("Kacma fonksiyonu �al�été");
 		permissionPoseBombe=false;
 		
 		//on cree les lists des tiles pour utiliser apres
