@@ -40,7 +40,7 @@ public class SafetyManager
 	}
 	
 	/**
-	 * mise à jour de la matrice de s�ret�
+	 * mise à jour de la matrice de sûret�
 	 */
 	private void updateMatrix() throws StopRequestException
 	{	ai.checkInterruption();
@@ -82,7 +82,7 @@ public class SafetyManager
 					{	AiBomb bomb = bombs.iterator().next();
 						processBomb(bomb);
 					}
-					//si nous avons deja pos� une bombe **************************** 
+					//si nous avons deja posé une bombe **************************** 
 					else if(!tile.getBombs().isEmpty()){
 						matrix[line][col] = NOTSAFE;
 					}

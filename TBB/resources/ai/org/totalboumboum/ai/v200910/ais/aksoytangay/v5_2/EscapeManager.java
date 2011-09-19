@@ -75,7 +75,7 @@ public class EscapeManager {
 //				boolean res1 = path.isEmpty();
 //				boolean res2 = modifiedPath();
 //				if(res1&&res2)
-//					System.out.println("bloða girdi...isEmpty&modPathIsTrue");
+//					System.out.println("bloa girdi...isEmpty&modPathIsTrue");
 //				else if(res1&&!res2)
 //					System.out.println("sadece isEmptyTrue");
 //				else

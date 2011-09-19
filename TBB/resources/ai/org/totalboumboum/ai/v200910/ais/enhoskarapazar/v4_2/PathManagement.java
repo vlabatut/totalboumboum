@@ -61,7 +61,7 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'IA concern�e par ce gestionnaire de chemin */
+	/** l'IA concernée par ce gestionnaire de chemin */
 	private EnhosKarapazar ai;
 	/** zone de jeu */
 	private AiZone zone;
@@ -69,9 +69,9 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si le personnage est arriv� à destination */
+	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination s�lectionn�e */
+	/** la case de destination sélectionn�e */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
@@ -113,7 +113,7 @@ public class PathManagement {
 	}
 
 	/**
-	 * détermine si le personnage est arriv� aux coordonnées de destination
+	 * détermine si le personnage est arrivé aux coordonnées de destination
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -135,13 +135,13 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// PREVIOUS LOCATION	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse pr�c�dente */
+	/** abscisse précédente */
 	private double xPrev;
-	/** ordonnée pr�c�dente */
+	/** ordonnée précédente */
 	private double yPrev;	
 	
 	/**
-	 * met à jour la position pr�c�dente du personnage,
+	 * met à jour la position précédente du personnage,
 	 * exprimée en pixels
 	 */
 	private void updatePrev() throws StopRequestException
@@ -162,7 +162,7 @@ public class PathManagement {
 	 * vérifie que le personnage est bien sur le chemin pr�-calculé,
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
-	 * est vide apr�s l'exécution de cette méthode.
+	 * est vide après l'exécution de cette méthode.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -178,7 +178,7 @@ public class PathManagement {
 	
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
-	 * est toujours s�r et si aucun obstacle n'est apparu
+	 * est toujours sûr et si aucun obstacle n'est apparu
 	 * depuis la dernière itération
 	 */
 	public boolean checkPathValidity() throws StopRequestException
@@ -241,7 +241,7 @@ public class PathManagement {
 			}
 		}
 		
-		// mise à jour de la position pr�c�dente
+		// mise à jour de la position précédente
 		updatePrev();
 		// mise à jour de la sortie
 		updateOutput();

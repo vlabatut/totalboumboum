@@ -35,7 +35,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 /**
- * cette classe impl�mente une IA relativement stupide, qui choisit une cible
+ * cette classe implémente une IA relativement stupide, qui choisit une cible
  * (un autre joueur), puis essaie de la rejoindre, et enfin se contente de la
  * suivre partout où elle va.
  * 
@@ -57,7 +57,7 @@ public class Suiveur extends ArtificialIntelligence
 	
 		AiAction result = new AiAction(AiActionName.NONE);
 		
-		// si le personnage control� a été �limin�, inutile de continuer
+		// si le personnage controlé a été éliminé, inutile de continuer
 		if(!ownHero.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			updateLocation();
@@ -81,14 +81,14 @@ public class Suiveur extends ArtificialIntelligence
 				moveDir = escapeManager.update();
 			}
 			
-			// sinon on se d�place vers la cible
+			// sinon on se déplace vers la cible
 			else
 			{	updateTarget();
 				if(target!=null)
 					moveDir = targetManager.update();
 			}
 			
-			// on met à jour la direction renvoy�e au moteur du jeu
+			// on met à jour la direction renvoyée au moteur du jeu
 			result = new AiAction(AiActionName.MOVE,moveDir);
 		}
 		
@@ -121,7 +121,7 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// SAFETY MANAGER				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe chargée de déterminer quelles cases sont s�res */
+	/** classe chargée de déterminer quelles cases sont sûres */
 	private SafetyManager safetyManager = null;
 
 	/**
@@ -143,7 +143,7 @@ public class Suiveur extends ArtificialIntelligence
 	}
 	
 	/**
-	 * détermine si la case passée en paramètre est s�re
+	 * détermine si la case passée en paramètre est sûre
 	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -154,7 +154,7 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// CURRENT TILE				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la case occup�e actuellement par le personnage */
+	/** la case occupée actuellement par le personnage */
 	private AiTile currentTile = null;
 
 	/**
@@ -169,9 +169,9 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// CURRENT LOCATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la position en pixels occup�e actuellement par le personnage */
+	/** la position en pixels occupée actuellement par le personnage */
 	private double currentX;
-	/** la position en pixels occup�e actuellement par le personnage */
+	/** la position en pixels occupée actuellement par le personnage */
 	private double currentY;
 
 	/**
@@ -204,11 +204,11 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage dirig� par cette IA */
+	/** le personnage dirigé par cette IA */
 	private AiHero ownHero = null;
 
 	/**
-	 * renvoie le personnage contr�l� par cette IA
+	 * renvoie le personnage contrôlé par cette IA
 	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -236,11 +236,11 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	/** la cible à suivre (ou null si aucune cible n'existe) */
 	private AiHero target;
-	/** case pr�c�dente de la cible */
+	/** case précédente de la cible */
 	private AiTile targetPreviousTile;
 	
 	/**
-	 * choisit al�atoirement un joueur comme cible à suivre
+	 * choisit aléatoirement un joueur comme cible à suivre
 	 */
 	private void chooseTarget() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE

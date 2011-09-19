@@ -53,7 +53,7 @@ public class HeroController {
 		/////////////////////////////////////////////////////////////////
 		// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 		/////////////////////////////////////////////////////////////////
-		/** l'IA concern�e par ce gestionnaire de chemin */
+		/** l'IA concernée par ce gestionnaire de chemin */
 		private AldanmazYenigun ai;
 		/** zone de jeu */
 		private AiZone zone;	
@@ -61,18 +61,18 @@ public class HeroController {
 		/////////////////////////////////////////////////////////////////
 		// DESTINATION	/////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////
-		/** indique si le personnage est arriv� à destination */
+		/** indique si le personnage est arrivé à destination */
 		private boolean arrived;
-		/** la case de destination s�lectionn�e pour la fuite */
+		/** la case de destination sélectionn�e pour la fuite */
 		private AiTile tileDest;
 		/** destinations potentielles */
 		private List<AiTile> possibleDest;
 		
 
 		/**
-		 * détermine si le personnage est arriv� dans la case de destination.
+		 * détermine si le personnage est arrivé dans la case de destination.
 		 * S'il n'y a pas de case de destination, on considère que le personnage
-		 * est arriv�.
+		 * est arrivé.
 		 */
 		public boolean hasArrived() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -105,7 +105,7 @@ public class HeroController {
 		 * vérifie que le personnage est bien sur le chemin pr�-calculé,
 		 * en supprimant si besoin les cases inutiles (car pr�cedant la case courante).
 		 * Si le personnage n'est plus sur le chemin, alors le chemin
-		 * est vide apr�s l'exécution de cette méthode.
+		 * est vide après l'exécution de cette méthode.
 		 */
 		private void checkIsOnPath() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -122,7 +122,7 @@ public class HeroController {
 		 * aucun obstacle n'est apparu depuis la dernière itération.
 		 * Contrairement au PathManager, ici pour simplifier on ne teste
 		 * que l'apparition de nouveaux obstacles (feu, bombes, murs), et non pas 
-		 * les changement concernant la s�ret� des cases. En d'autres termes,
+		 * les changement concernant la sûret� des cases. En d'autres termes,
 		 * si une bombe apparait avant que le personnage d'ait atteint une
 		 * case sure, elle ne sera pas prise en compte dans la trajectoire.
 		 * 
@@ -153,7 +153,7 @@ public class HeroController {
 		private void updateCostCalculator() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
-			// calcul de la matrice de coût : on prend l'oppos� du niveau de s�ret�
+			// calcul de la matrice de coût : on prend l'opposé du niveau de sûret�
 			// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
 		//	double dangerMatrix[][] = ai.getZoneFormee().getMatrix();
 			for(int line=0;line<zone.getHeight();line++)

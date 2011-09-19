@@ -67,7 +67,7 @@ public class StrategyManager {
 		Direction result = Direction.NONE;
 		
 		List<AiBomb> bombs = bombsMenaceMe();
-		//system.out.println("bombe size!! : "+bombs.size()+" ve onlar �unlar : "+bombs.toString());
+		//system.out.println("bombe size!! : "+bombs.size()+" ve onlar unlar : "+bombs.toString());
 		
 		List<AiTile> tmpTiles = new ArrayList<AiTile>();
 		Iterator<AiBomb> itrBomb = bombs.iterator();
@@ -92,12 +92,12 @@ public class StrategyManager {
 			{
 				tTile = iTypeEscape(bombs);
 				result = percepts.getDirection(myAI.getOwnHero(), tTile);
-				//system.out.println("index hatas� verilen yerde if blo�unday�m");
+				//system.out.println("index hatas� verilen yerde if bloundaym");
 			}
 			//sinon c'est la menace de t ou L type
 			else
 			{
-				//system.out.println("index hatas� verilen yerde else blo�unday�m");
+				//system.out.println("index hatas verilen yerde else bloundaym");
 				
 				//si les deux bombes sont loins que nous plus d'1 cas
 				if(!escapeManager.getCurrentTile().getNeighbors().contains(tmpTiles.get(0)) && 
@@ -167,14 +167,14 @@ public class StrategyManager {
 				
 //				if(tmpTile == escapeManager.getCurrentTile())
 //				{
-//					//system.out.println("bombay� ekliyoruz!!!!!!!!");
+//					//system.out.println("bombay ekliyoruz!!!!!!!!");
 //					System.out.println("current tile : "+escapeManager.getCurrentTile());
 //					result.add(tmpBomb);
 //				}
 				
 				if(tmpTile == myAI.getOwnHeroTile())
 				{
-					//system.out.println("bombay� ekliyoruz!!!!!!!!");
+					//system.out.println("bombay ekliyoruz!!!!!!!!");
 					//system.out.println("current tile : "+myAI.getOwnHeroTile().toString());
 					result.add(tmpBomb);
 				}

@@ -42,7 +42,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	// la dernière case par laquelle on est passé 
 	@SuppressWarnings("unused")
 	private AiTile previousTile;
-	// la case occup�e actuellement par le personnage
+	// la case occupée actuellement par le personnage
 	private AiTile currentTile;
 	// la case sur laquelle on veut aller 
 	private AiTile nextTile;

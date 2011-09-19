@@ -55,7 +55,7 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'IA concern�e par ce gestionnaire de chemin */
+	/** l'IA concernée par ce gestionnaire de chemin */
 	private EnhosKarapazar ai;
 	/** zone de jeu */
 	private AiZone zone;
@@ -63,7 +63,7 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la case de destination s�lectionn�e */
+	/** la case de destination sélectionn�e */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
@@ -111,7 +111,7 @@ public class PathManagement {
 	
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
-	 * est toujours s�r et si aucun obstacle n'est apparu
+	 * est toujours sûr et si aucun obstacle n'est apparu
 	 * depuis la dernière itération
 	 */
 	public boolean checkPathValidity() throws StopRequestException

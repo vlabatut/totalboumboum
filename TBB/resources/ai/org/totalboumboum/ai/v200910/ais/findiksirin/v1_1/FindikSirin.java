@@ -29,7 +29,7 @@ public class FindikSirin extends ArtificialIntelligence
 		if(ownHero == null)
 			init();
 		
-		// si le personnage control� a été �limin�, inutile de continuer
+		// si le personnage control� a été élimin�, inutile de continuer
 		if(!ownHero.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			updateLocation();
@@ -81,7 +81,7 @@ public class FindikSirin extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// SAFETY MANAGER				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe chargée de déterminer quelles cases sont s�res */
+	/** classe chargée de déterminer quelles cases sont sûres */
 	private SafetyManager safetyManager = null;
 
 	/**
@@ -103,7 +103,7 @@ public class FindikSirin extends ArtificialIntelligence
 	}
 	
 	/**
-	 * détermine si la case passée en paramètre est s�re
+	 * détermine si la case passée en paramètre est sûre
 	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -115,7 +115,7 @@ public class FindikSirin extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// CURRENT TILE				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la case occup�e actuellement par le personnage */
+	/** la case occupée actuellement par le personnage */
 	private AiTile currentTile = null;
 
 	/**
@@ -130,9 +130,9 @@ public class FindikSirin extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// CURRENT LOCATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la position en pixels occup�e actuellement par le personnage */
+	/** la position en pixels occupée actuellement par le personnage */
 	private double currentX;
-	/** la position en pixels occup�e actuellement par le personnage */
+	/** la position en pixels occupée actuellement par le personnage */
 	private double currentY;
 
 	/**

@@ -1293,9 +1293,9 @@ public class AiEscape
 	
 	/**
 	 * calcule une liste de cases correspondant au souffle indirect de la bombe
-	 * passée en paramètre. Le terme "indirect" signifie que la fonction est r�cursive : 
-	 * si une case à port�e de souffle contient une bombe, le souffle de cette bombe est rajout�
-	 * dans la liste blast, et la bombe est rajout�e dans la liste bombs.
+	 * passée en paramètre. Le terme "indirect" signifie que la fonction est récursive : 
+	 * si une case à portée de souffle contient une bombe, le souffle de cette bombe est rajouté
+	 * dans la liste blast, et la bombe est rajoutée dans la liste bombs.
 	 * Par Vincent Labatut
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
@@ -1304,7 +1304,7 @@ public class AiEscape
 		if(!bombs.contains(bomb))
 		{	bombs.add(bomb);
 		
-			// on r�cup�re le souffle
+			// on récupére le souffle
 			List<AiTile> tempBlast = bomb.getBlast();
 			blast.addAll(tempBlast);
 			

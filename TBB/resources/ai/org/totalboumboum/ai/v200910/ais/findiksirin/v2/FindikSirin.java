@@ -75,7 +75,7 @@ public class FindikSirin extends ArtificialIntelligence
 				//si on n'a pas un chemin a suivre
 				if(escapeManager==null)
 				{
-					//on a pos� un bombe, on actualise safetyManager
+					//on a posé un bombe, on actualise safetyManager
 					safetyManager.update();
 					//on obtient un nouveau chemin, pour s'enfuir de notre bombe
 					escapeManager = new EscapeManager(this);

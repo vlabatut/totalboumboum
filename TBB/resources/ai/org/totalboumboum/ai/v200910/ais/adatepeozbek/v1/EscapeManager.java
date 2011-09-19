@@ -50,7 +50,7 @@ public class EscapeManager
 	// La variable qui contient les cases secures
 	private List<AiTile> possibleDest;
 
-	// La route que va suivre notre caract�re
+	// La route que va suivre notre caractère
 	private AiPath path;
 	
 	/*
@@ -102,7 +102,7 @@ public class EscapeManager
 	}
 	
 	/*
-	 * Retourne la direction à suivre calculée par les méthodes pr�cedentes
+	 * Retourne la direction à suivre calculée par les méthodes précedentes
 	 */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -112,13 +112,13 @@ public class EscapeManager
 	
 		Direction result = Direction.NONE;
 		
-		// La route peut être vide, c'est pourquoi on recontr�le
+		// La route peut être vide, c'est pourquoi on reContrôle
 		if(path.isEmpty() || !checkPathValidity())
 			updatePath();
 		
-		/* On prend toujours le premier �lement de path array car avec notre algorithme
+		/* On prend toujours le premier élement de path array car avec notre algorithme
 		 * On recalcule toujours la route à suivre dans chaque itération, alors notre
-		 * caract�re est capable de changer sa d�cision à chaque itération.
+		 * caractère est capable de changer sa décision à chaque itération.
 		 */
 		
 		AiTile tile = path.getTile(0);

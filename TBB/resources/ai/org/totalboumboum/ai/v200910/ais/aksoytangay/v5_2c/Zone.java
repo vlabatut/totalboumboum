@@ -28,7 +28,7 @@ public class Zone {
 	private AksoyTangay myAI;
 	//variable de la zone de jeu
 	private AiZone zone;
-	//variable de notre h�ro
+	//variable de notre héro
 	private AiHero ownHero;
 	
 	//variables qu'on va utiliser pour tenir l'information de la zone
@@ -97,7 +97,7 @@ public class Zone {
 			}
 		}
 		
-		//maintenant commen�ons a remplir la matrice avec les autres valeurs
+		//maintenant commençons a remplir la matrice avec les autres valeurs
 		
 		// ENNEMIES 					/////////////////////////////////////
 		Iterator<AiHero> itrHero = ennemies.iterator();

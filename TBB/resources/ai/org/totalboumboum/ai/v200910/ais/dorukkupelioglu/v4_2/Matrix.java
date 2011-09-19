@@ -452,7 +452,7 @@ public class Matrix
 		{	
 			bombs.add(bomb);
 		
-			// on r�cup�re le souffle
+			// on récupére le souffle
 			List<AiTile> tempBlast = bomb.getBlast();
 			blast.addAll(tempBlast);
 			

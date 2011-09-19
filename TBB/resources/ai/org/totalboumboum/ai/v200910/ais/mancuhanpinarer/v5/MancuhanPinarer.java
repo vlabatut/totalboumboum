@@ -1076,7 +1076,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 
 	/**
 	 * L'ordonne le temps d'explosion des bombes dont la portee
-	 * contient notre h�ro.
+	 * contient notre héro.
 	 * 
 	 * @param gameZone
 	 * 			La zone du jeu.
