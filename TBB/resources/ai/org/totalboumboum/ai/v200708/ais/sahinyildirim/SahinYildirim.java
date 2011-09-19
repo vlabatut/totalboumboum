@@ -100,7 +100,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		  if(possibleMoves.contains(lastMove)) 
 			  result = lastMove;
 		  
-		  else { // on détermine al�atoirement l'action qui va être effectuée
+		  else { // on détermine aléatoirement l'action qui va être effectuée
 		  int index; do { index = (int)(Math.random()*(possibleMoves.size())); }
 		  while(index==possibleMoves.size());
 		 
@@ -694,7 +694,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 			yB = bombs.get(j + 1);// position y
 			bombPower[numBomb] = getBombPowerAt(xB, yB);
 			if (Math.abs(x - xB) >= Math.abs(y - yB))// si elle est proche 
-													 // a cot� y
+													 // a coté y
 			{
 				if (y == yB) {
 					if (x == xB) {
@@ -964,7 +964,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 				}
 
 			} else if (Math.abs(y - yB) > Math.abs(x - xB))// si elle est proche
-															// a cot� x
+															// a coté x
 			{
 				if (x == xB)//si les abscisses sont egales
 				{
@@ -1178,7 +1178,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	}
 
-	/**Indique si la case situ�e à la position passée en paramètre constitue un
+	/**Indique si la case située à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, wallHard, lastPosition.
 	 * @param x
 	 * @param y
@@ -1211,7 +1211,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	/**
 	 * Indique si le déplacement dont le code a été passé en paramètre est
-	 * possible pour un personnage situ� en (x,y).
+	 * possible pour un personnage situé en (x,y).
 	 * 
 	 * @param x
 	 * @param y
@@ -1244,7 +1244,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/** Renvoie la liste de tous les déplacements possibles pour un personnage
-	 * situ� à la position (x,y)
+	 * situé à la position (x,y)
 	 * 
 	 * @param x 
 	 * @param y
@@ -1260,13 +1260,13 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si la case situ�e à la position passée en paramètre constitue un
+	 * Indique si la case située à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, mur.
 	 * 
 	 * @param x
-	 *            position à �tudier
+	 *            position à étudier
 	 * @param y
-	 *            position à �tudier
+	 *            position à étudier
 	 * @return vrai si la case contient un obstacle
 	 */
 	private boolean isObstacle(int x, int y) {
@@ -1295,14 +1295,14 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	/**
 	 * Indique si le déplacement dont le code a été passé en paramètre est
-	 * possible pour un personnage situ� en (x,y).
+	 * possible pour un personnage situé en (x,y).
 	 * 
 	 * @param x
 	 *            position du personnage
 	 * @param y
 	 *            position du personnage
 	 * @param move
-	 *            le déplacement à �tudier
+	 *            le déplacement à étudier
 	 * @return vrai si ce déplacement est possible
 	 */
 	private boolean isMovePossible(int x, int y, int move) {
@@ -1330,7 +1330,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	/**
 	 * Renvoie la liste de tous les déplacements possibles pour un personnage
-	 * situ� à la position (x,y)
+	 * situé à la position (x,y)
 	 * 
 	 * @param x
 	 *            position du personnage

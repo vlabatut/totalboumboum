@@ -28,7 +28,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	private final static int DESTRUCTING_WALLS = 3;
 	private final static int ATTACKING = 4;
 	
-	// Contient la zone du tour pr�c�dente
+	// Contient la zone du tour précédente
 	private int[][] lastMatrix;
 	// Représente une destination à aller
 	private int[] target;
@@ -38,20 +38,20 @@ public class CaglayanElmas extends ArtificialIntelligence
 	private int state;
 	// Combien de fois on a mis une bombe pour détruire des murs
 	private int destructionCount;
-	// Contient la dernière action renvoy�e par call()
+	// Contient la dernière action renvoyée par call()
 	private Integer lastAction;
 	// Le vecteur contenant des liens entre les cases
 	// qui définissent le chemin le plus court entre A et B
 	private Vector<SearchLink> links;
 	// Le vecteur qui contient les cases accessibles
 	private Vector<int[]> playableCases;
-	// Si vrai, il existe une action qui reste des tours pr�c�dentes
+	// Si vrai, il existe une action qui reste des tours précédentes
 	private boolean savedMove;
 	private boolean startedToAttack;
 
 	public CaglayanElmas()
 	{
-		// Notre IA est appel� "Smart"
+		// Notre IA est appelée "Smart"
 		super("CaglynElms");
 		
 		// Initialisation nécessaires
@@ -134,11 +134,11 @@ public class CaglayanElmas extends ArtificialIntelligence
 			}
 		}
 		
-		// On effectue les actions qui restent des tours pr�c�dentes.
+		// On effectue les actions qui restent des tours précédentes.
 		if (savedMove)
 			return handleSavedMove(px, py);
 			
-		// On attend jusqu'a ce que la bombe déjà pos�e s'explose.
+		// On attend jusqu'a ce que la bombe déjà posée s'explose.
 		if (!isBombExploded())
 		{
 			state = DOING_NOTHING;
@@ -206,7 +206,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 			
 			else if (block[0] == px && block[1] == py)
 			{
-				// On est déjà l�.
+				// On est déjà là.
 				savedMove = true;
 				target = block.clone();
 				return AI_ACTION_DO_NOTHING;
@@ -231,7 +231,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	
 	/**
 	 * détermine l'action suivante pour arriver
-	 * à la destination définie dans les tours pr�c�dentes.
+	 * à la destination définie dans les tours précédentes.
 	 * Renvoie -1 si le bomberman est bloqué dans une case
 	 * par une bombe confondue et ne peut pas aller vers
 	 * la destination.
@@ -241,13 +241,13 @@ public class CaglayanElmas extends ArtificialIntelligence
 	 */
 	public Integer handleSavedMove(int px, int py)
 	{
-		// Pas encore arriv� à la destination "target".
+		// Pas encore arrivé à la destination "target".
 		if ( !(target[0] == px && target[1] == py))	
 			return lastAction;
 		
 		else
 		{		
-			// On est arriv� à une destination interm�diaire.
+			// On est arrivé à une destination intermédiaire.
 			// On change l'action qui va nous guider vers notre nouvelle
 			// destination.
 			if (links.size() != 0)
@@ -368,7 +368,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Indique si la zone est chang�e depuis la dernière copie.
+	 * Indique si la zone est changée depuis la dernière copie.
 	 * @return vrai si la zone a subit une modification
 	 */
 	public boolean isZoneMatrixChanged()
@@ -387,13 +387,13 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Indique si la dernière bombe pos�e est explosée ou non.
+	 * Indique si la dernière bombe posée est explosée ou non.
 	 * @return vrai si la bombe n'est pas encore explosée
 	 */
 	public boolean isBombExploded()
 	{
 		// Attention, quand la bombe s'explose, la case correspondante
-		// devient d'abord AI_BLOCK_FIRE et apr�s tous devient AI_BLOCK_EMPTY!
+		// devient d'abord AI_BLOCK_FIRE et après tous devient AI_BLOCK_EMPTY!
 		return !(lastBomb[0] != -1 &&
 				((getZoneMatrix()[lastBomb[0]][lastBomb[1]] == AI_BLOCK_BOMB) ||
 				(getZoneMatrix()[lastBomb[0]][lastBomb[1]] == AI_BLOCK_FIRE)));
@@ -431,7 +431,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 			// Est-ce que c[] est dangereux?
 			for (int i = 0; i < bombs.size() && canBeSolution; i++)
 			{
-				// La position et la port�e de la bombe courante.
+				// La position et la portée de la bombe courante.
 				int x = bombs.get(i)[0];
 				int y = bombs.get(i)[1];
 				int p = bombs.get(i)[2];
@@ -537,7 +537,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	public int[] getNearestBonusPosition(int px, int py)
 	{
 		// Si la distance au bonus plus proche est > 10,
-		// on ne fatigue pas aller l�-bas.
+		// on ne fatigue pas aller là-bas.
 		int dist = 11;
 		int[] result = {-1, -1};
 		
@@ -586,7 +586,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	/**
 	 * détermine la case la plus proche à mettre une bombe.
 	 * Si le bomberman a suffisamment pris le bonus qui
-	 * augmente la port�e, cette méthode retourne des cases
+	 * augmente la portée, cette méthode retourne des cases
 	 * qui vont faciliter l'accès à l'ennemi quand les murs
 	 * au voisinage sont détruits.
 	 * @param px	position de notre personnage
@@ -600,7 +600,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 		if (evaluateBlock(px, py) != 0)
 		{
 			// On peut poser la bombe directement ici, à (px,py)
-			// car il y a au moins un mur destructible à cot� de nous.
+			// car il y a au moins un mur destructible à coté de nous.
 			result[0] = px;
 			result[1] = py;
 		}
@@ -619,7 +619,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 				if (evaluateBlock(to[0], to[1]) >= 1)
 				{			
 					// Si on a suffisamment détruit les murs,
-					// on d�cide alors à attaquer directement vers l'ennemi
+					// on décide alors à attaquer directement vers l'ennemi
 					// plus proche. Pour cela, on va maintenant détruire les murs
 					// qui vont nous ouvrir la chemin.
 					if (destructionCount > Math.random()*5+3)
@@ -678,8 +678,8 @@ public class CaglayanElmas extends ArtificialIntelligence
 	/**
 	 * détermine les nouveaux positions à partir d'un case initial
 	 * (x,y) et 4 actions.
-	 * @param x		position à �tudier
-	 * @param y		position à �tudier
+	 * @param x		position à étudier
+	 * @param y		position à étudier
 	 * @return		vecteur contenant les nouveaux positions
 	 */
 	public Vector<int[]> getPossiblePositions(int x, int y)
@@ -695,10 +695,10 @@ public class CaglayanElmas extends ArtificialIntelligence
 	/**
 	 * détermine la nouvelle position qui résulte de l'application
 	 * de l'action "move" à la position (x,y).
-	 * @param x		position à �tudier
-	 * @param y		position à �tudier
+	 * @param x		position à étudier
+	 * @param y		position à étudier
 	 * @return		la nouvelle position qui est le résultat de l'action
-	 * 				appliqu�e à la position (x,y)
+	 * 				appliquée à la position (x,y)
 	 */
 	public int[] applyAction(int x, int y, int move)
 	{
@@ -752,10 +752,10 @@ public class CaglayanElmas extends ArtificialIntelligence
 	
 	/**
 	 * Indique si le déplacement dont le code a été passé en paramètre 
-	 * est possible pour un personnage situ� en (x,y).
+	 * est possible pour un personnage situé en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param move	le déplacement à �tudier
+	 * @param move	le déplacement à étudier
 	 * @return	vrai si ce déplacement est possible
 	 */
 	public boolean isMovePossible(int x, int y, int move)
@@ -783,10 +783,10 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Indique si la case situ�e à la position passée en paramètre
+	 * Indique si la case située à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
-	 * @param x	position à �tudier
-	 * @param y	position à �tudier
+	 * @param x	position à étudier
+	 * @param y	position à étudier
 	 * @return	vrai si la case contient un obstacle
 	 */
 	public boolean isObstacle(int x, int y)

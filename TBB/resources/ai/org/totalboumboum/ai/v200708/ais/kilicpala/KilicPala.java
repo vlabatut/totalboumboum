@@ -369,10 +369,10 @@ public class KilicPala extends ArtificialIntelligence
 	
 	/**
 	 * 
-	 * Indique si la case situ�e à la position passée en paramètre
+	 * Indique si la case située à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
-	 * @param x	position à �tudier
-	 * @param y	position à �tudier
+	 * @param x	position à étudier
+	 * @param y	position à étudier
 	 * @return	vrai si la case contient un obstacle
 	 * 
 	 */
@@ -397,10 +397,10 @@ public class KilicPala extends ArtificialIntelligence
 
 	/**
 	 * Indique si le déplacement dont le code a été passé en paramètre 
-	 * est possible pour un personnage situ� en (x,y).
+	 * est possible pour un personnage situé en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param move	le déplacement à �tudier
+	 * @param move	le déplacement à étudier
 	 * @return	vrai si ce déplacement est possible
 	 */
 	private boolean isMovePossible(int x, int y, int move)
@@ -428,7 +428,7 @@ public class KilicPala extends ArtificialIntelligence
 	
 	/**
 	 * Renvoie la liste de tous les déplacements possibles
-	 * pour un personnage situ� à la position (x,y)
+	 * pour un personnage situé à la position (x,y)
 	 * @param x	position du personnage
 	 * @param y position du personnage
 	 * @return	la liste des déplacements possibles

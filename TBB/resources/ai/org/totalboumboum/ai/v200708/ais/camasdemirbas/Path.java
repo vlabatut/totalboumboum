@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Un chemin r�solu par quelque algorithme de conclusion de chemin. 
- * Un feuilleton d'�tapes de l'emplacement commen�ant à l'emplacement de cible. 
- * Ceci inclut une �tape pour l'emplacement initial. 
+ * Un chemin résolu par quelque algorithme de conclusion de chemin. 
+ * Un feuilleton d'étapes de l'emplacement commençant à l'emplacement de cible. 
+ * Ceci inclut une étape pour l'emplacement initial. 
  * 
  * @author Gokhan Camas
  * @author Irem Demirbas
@@ -14,7 +14,7 @@ import java.util.List;
  */
 @SuppressWarnings("unchecked")
 public class Path {
-	/** La liste d'�tapes développant ce chemin */
+	/** La liste d'étapes développant ce chemin */
 	@SuppressWarnings("rawtypes")
 	private List steps = new ArrayList();
 	
@@ -26,38 +26,38 @@ public class Path {
 	}
 
 	/**
-	 * Obtenir la longueur du chemin, c.-�-d. le nombre d'�tapes
+	 * Obtenir la longueur du chemin, c.-à-d. le nombre d'étapes
 	 * 
-	 * @return Le nombre d'�tapes dans ce chemin
+	 * @return Le nombre d'étapes dans ce chemin
 	 */
 	public int getLength() {
 		return steps.size();
 	}
 	
 	/**
-	 * Obtenir l'�tape à un index donn� dans le chemin
+	 * Obtenir l'étape à un index donné dans le chemin
 	 * 
-	 * @param index L'index de l'�tape pour rapporter.
-	 * @return L'information d'�tape, la position sur la carte
+	 * @param index L'index de l'étape pour rapporter.
+	 * @return L'information d'étape, la position sur la carte
 	 */
 	public Step getStep(int index) {
 		return (Step) steps.get(index);
 	}
 	
 	/**
-	 * Obtenir la coordonnée de x pour l'�tape à l'index donn�
+	 * Obtenir la coordonnée de x pour l'étape à l'index donné
 	 * 
-	 * @param L'index de l'�tape dont x la coordonnée devrait être rapport�e
-	 * @return x coordonnée à l'�tape
+	 * @param L'index de l'étape dont x la coordonnée devrait être rapportée
+	 * @return x coordonnée à l'étape
 	 */
 	public int getX(int index) {
 		return getStep(index).x;
 	}
 
 	/**
-	 * Obtenir  la coordonnée de y pour l'�tape à l'index donn�
+	 * Obtenir  la coordonnée de y pour l'étape à l'index donné
 	 * 
-	 * @param l'index de l'�tape dont y la coordonnée devrait être rapport�e
+	 * @param l'index de l'étape dont y la coordonnée devrait être rapportée
 	 * @return y
 	 */
 	public int getY(int index) {
@@ -65,27 +65,27 @@ public class Path {
 	}
 	
 	/**
-	 * Ajouter une �tape au chemin.  
+	 * Ajouter une étape au chemin.  
 	 * 
-	 * @param x  la coordonnéede x de la nouvelle �tape
-	 * @param y la coordonnéede y de la nouvelle �tape
+	 * @param x  la coordonnéede x de la nouvelle étape
+	 * @param y la coordonnéede y de la nouvelle étape
 	 */
 	public void appendStep(int x, int y) {
 		steps.add(new Step(x,y));
 	}
 
 	/**
-	 * Prepend une �tape au chemin.   
+	 * Prepend une étape au chemin.   
 	 * 
-	 * @param x la coordonnéede x de la nouvelle �tape
-	 * @param y la coordonnéede y de la nouvelle �tape
+	 * @param x la coordonnéede x de la nouvelle étape
+	 * @param y la coordonnéede y de la nouvelle étape
 	 */
 	public void prependStep(int x, int y) {
 		steps.add(0, new Step(x, y));
 	}
 	
 	/**
-	 * Le contr�le si ce chemin contient l'�tape donn�e
+	 * Le Contrôle si ce chemin contient l'étape donnée
 	 * 
 	 * @param x The x coordinate of the step to check for
 	 * @param y The y coordinate of the step to check for
@@ -96,7 +96,7 @@ public class Path {
 	}
 	
 	/**
-	 * Une �tape seule dans le chemin
+	 * Une étape seule dans le chemin
 	 * 
 	 * @author Gokhan Camas -- Irem Demirbas
 	 */

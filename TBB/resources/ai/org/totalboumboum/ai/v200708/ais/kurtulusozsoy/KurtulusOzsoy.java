@@ -53,7 +53,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 			if(dist==1)
 			{   
 				int temp[] = getDirectionPreferences(x, y, posit[0],posit[1]);
-			// on s�lectionne une direction possible
+			// on sélectionne une direction possible
 			int i=0;
 			while(i<temp.length && result==ArtificialIntelligence.AI_ACTION_DO_NOTHING)
 			{	if(isMovePossible(x, y, temp[i]))
@@ -77,7 +77,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 			if(dangerPos[0]!=-1)
 			{	// on calcule l'ordre des directions
 				int temp[] = getDirectionPreferences(x, y, dangerPos[0], dangerPos[1]);
-				// on s�lectionne une direction possible
+				// on sélectionne une direction possible
 				int i=0;
 				while(i<temp.length && result==ArtificialIntelligence.AI_ACTION_DO_NOTHING)
 				{	if(isMovePossible(x, y, temp[i]))
@@ -115,10 +115,10 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 		}
 		
 		/**
-		 * Indique si la case situ�e à la position passée en paramètre
+		 * Indique si la case située à la position passée en paramètre
 		 * constitue un obstacle pour un personnage : bombe, feu, mur.
-		 * @param x	position à �tudier
-		 * @param y	position à �tudier
+		 * @param x	position à étudier
+		 * @param y	position à étudier
 		 * @return	vrai si la case contient un obstacle
 		 */
 		private boolean isObstacle(int x, int y)
@@ -146,10 +146,10 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 
 		/**
 		 * Indique si le déplacement dont le code a été passé en paramètre 
-		 * est possible pour un personnage situ� en (x,y).
+		 * est possible pour un personnage situé en (x,y).
 		 * @param x	position du personnage
 		 * @param y position du personnage
-		 * @param move	le déplacement à �tudier
+		 * @param move	le déplacement à étudier
 		 * @return	vrai si ce déplacement est possible
 		 */
 		private boolean isMovePossible(int x, int y, int move)
@@ -177,7 +177,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 		
 		/**
 		 * Renvoie la liste de tous les déplacements possibles
-		 * pour un personnage situ� à la position (x,y)
+		 * pour un personnage situé à la position (x,y)
 		 * @param x	position du personnage
 		 * @param y position du personnage
 		 * @return	la liste des déplacements possibles
@@ -384,10 +384,10 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
  {
 	 int result=AI_ACTION_DO_NOTHING;
 		Vector<Integer> possibleMoves = getPossibleMoves(x,y);
-		// on teste s'il est possible d'effectuer le même déplacement que pr�c�demment
+		// on teste s'il est possible d'effectuer le même déplacement que précédemment
 		if(possibleMoves.contains(lastMove))
 		{	result = lastMove;
-		// sinon : soit on se d�place, soit on pose une bombe
+		// sinon : soit on se déplace, soit on pose une bombe
 		}
 		else if(possibleMoves.size()>0)
 		{	// on peut poser une bombe si on est à la fois dans un cul de sac 
@@ -397,7 +397,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 				possibleMoves.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
 		
 			Random rand = new Random();
-			// on détermine al�atoirement l'action qui va être effectuée
+			// on détermine aléatoirement l'action qui va être effectuée
 			int index;
 			do
 			{	index = (int)( rand.nextInt(possibleMoves.size()));			

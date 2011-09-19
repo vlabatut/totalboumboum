@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * Classe implémentant un comportement agressif:on donne des points à chaque
  * case en considerant les murs,les autres joueurs,les bombes....On choisit un
  * cible et y arrive en choisissant le chemin le plus court (algorithme A
- * �toile). Dès qu'il arrive au cible,il le détruit.Avant de faire un mouvement,
+ * étoile). Dès qu'il arrive au cible,il le détruit.Avant de faire un mouvement,
  * il controle tout d'abord s'il y a un danger pour lui.S'il y en a,il bouge
  * seulement pour se sauver.
  * 
@@ -39,7 +39,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	private int lastMo;
 	/**
 	 * les variables utilisées pour empecher petits tremblements de l'ia en se
-	 * sauvant de la bombe,cree la possibilit� de se sauver en allant vers la
+	 * sauvant de la bombe,cree la possibilité de se sauver en allant vers la
 	 * bombe
 	 */
 	private boolean left;
@@ -47,7 +47,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	private boolean up;
 	private boolean down;
 	/**
-	 * le percept de l'ia limit� avec les cases qu'il peut arriver sans détruire
+	 * le percept de l'ia limité avec les cases qu'il peut arriver sans détruire
 	 * des murs(sous forme de matrice)
 	 */
 	public int[][] carte;
@@ -73,7 +73,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	 */
 	int snake[][];
 	/**
-	 * Variables utilisées pour une situation sp�ciale de se sauver,empeche de
+	 * Variables utilisées pour une situation spéciale de se sauver,empeche de
 	 * faire des mouvement repetitifs s'il reste entre 2 bombes.
 	 */
 	private boolean operation;
@@ -156,11 +156,11 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 
 		oCarte(pointCase(tab), x, y);
 
-		// il prend ses capacit�s de bombe
+		// il prend ses capacités de bombe
 		bombF = super.getOwnFirePower();
 //		bombC = super.getOwnBombCount();
 
-		// s'il est sur la bombe et en train de s'�chapper ,il doit repeter le
+		// s'il est sur la bombe et en train de s'échapper ,il doit repeter le
 		// meme mouvement jusqu'à sortir de la case de la bombe,
 		// variables utilisés pour ce but.
 		if (lastPosSS[0] != x || lastPosSS[1] != y) {
@@ -169,7 +169,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 			lastPosSS[1] = y;
 		}
 
-		// tout au d�but du jeu et chaque fois que la fonction "danger" est
+		// tout au début du jeu et chaque fois que la fonction "danger" est
 		// utilisée,sa position est lastPos
 		if (first) {
 			lastPos[0] = getOwnPosition()[0];
@@ -192,7 +192,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 		// avant de faire un mouvement on appelle d'abord la fonction
 		// "danger".Si la fonction "danger" ne retourne aucun mouvement
 		// alors on peut faire une action d'attaque.Sinon on est en mode de
-		// d�fense et on fait ce que la fonction "danger" retourne.
+		// défense et on fait ce que la fonction "danger" retourne.
 		if (action == AI_ACTION_DO_NOTHING) {
 			action = danger(tab, x, y);
 		}
@@ -200,7 +200,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 		if (action == AI_ACTION_DO_NOTHING) {
 			action = move(x, y);
 		}
-		// si on est arriv� au cible et la fonction danger a dit qu'il n y a pas
+		// si on est arrivé au cible et la fonction danger a dit qu'il n y a pas
 		// de danger
 		if (goal != null && goal.getX() == x && goal.getY() == y
 				&& action == AI_ACTION_DO_NOTHING) {
@@ -208,9 +208,9 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 			y = getOwnPosition()[1];
 
 			// avant de poser une bombe,il faut simuler la situation, et donc
-			// d�cider de mettre une bombe
+			// décider de mettre une bombe
 			// sauf s'il peut se sauver.
-			tab[x][y] = AI_BLOCK_BOMB;// comme s'il a pos� la bombe
+			tab[x][y] = AI_BLOCK_BOMB;// comme s'il a posé la bombe
 
 			// on utilise la carte pour la fonction "danger" et pour la fonction
 			// "move".
@@ -223,7 +223,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 						carte[i][j] = AI_BLOCK_UNKNOWN;
 				}
 			}
-			// on appelle la fonction "pointCase" pour donner des points �
+			// on appelle la fonction "pointCase" pour donner des points à
 			// chaque case
 			oCarte(pointCase(tab), x, y);
 			// on met une bombe sauf si la fonction canEscape retourne true.
@@ -243,13 +243,13 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 
 	
 	/**
-	 * Indique si la case situ�e à la position passée en paramètre constitue un
+	 * Indique si la case située à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, mur.
 	 * 
 	 * @param x
-	 *            position à �tudier
+	 *            position à étudier
 	 * @param y
-	 *            position à �tudier
+	 *            position à étudier
 	 * @param tab
 	 *            le tableau du jeu
 	 * @return action à faire quand le shrink commence
@@ -333,7 +333,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	
 	/**
 	 * Determine le mouvement à faire en cas de danger.Si une bombe est
-	 * pos�e,l'ia d�cide de faire un mouvement le plus vite possible sans faire
+	 * posée,l'ia décide de faire un mouvement le plus vite possible sans faire
 	 * des calculs.Il regarde les mouvement qu'il peut faire sur 3-4 cases.Il
 	 * essaie de trouver un mouvement pratique qui peut lui sauver.
 	 * 
@@ -408,8 +408,8 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 					d = true;
 				}
 				
-				if(lastBombPos[0]==x && lastBombPos[1]==y ){//Si l'ia a pos� la bombe , on n'a pas besoin d'utiliser getBombPosition,on utilise les ligne ci-dessous
-				//regarde les possibilit�s d'aller d'abord en haut puis à gauche et à droite
+				if(lastBombPos[0]==x && lastBombPos[1]==y ){//Si l'ia a posé la bombe , on n'a pas besoin d'utiliser getBombPosition,on utilise les ligne ci-dessous
+				//regarde les possibilités d'aller d'abord en haut puis à gauche et à droite
 				
 					if(!isObstacle(tab,x,y-1) && ((!isObstacle(tab,x-1,y-1)&&carte[x-1][y-1]>=0) || (!isObstacle(tab,x+1,y-1)&&carte[x+1][y-1]>=0)) ){//possible d'aller vers le haut,ensuite d'aller à gauche ou à droite=>vers le haut.
 						action = AI_ACTION_GO_UP;
@@ -423,7 +423,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 								}else if(!isObstacle(tab,x+1,y) && ((!isObstacle(tab,x+1,y+1) && carte[x+1][y+1]>=0)|| (!isObstacle(tab,x+1,y-1)&& carte[x+1][y-1]>=0)) ){
 										action = AI_ACTION_GO_RIGHT;
 										lastMove = action;
-									}else if(!isObstacle(tab,x,y-1)&& !isObstacle(tab,x,y-2) && ((!isObstacle(tab,x-1,y-2)&& carte[x-1][y-2]>=0)|| (!isObstacle(tab,x+1,y-2) && carte[x+1][y-2]>=0 ))){//possibilit� d'aller 2 fois vers le haut puis à gauche ou à droite.=>vers la haut
+									}else if(!isObstacle(tab,x,y-1)&& !isObstacle(tab,x,y-2) && ((!isObstacle(tab,x-1,y-2)&& carte[x-1][y-2]>=0)|| (!isObstacle(tab,x+1,y-2) && carte[x+1][y-2]>=0 ))){//possibilité d'aller 2 fois vers le haut puis à gauche ou à droite.=>vers la haut
 											action = AI_ACTION_GO_UP;
 											lastMove = action;
 										}else if(!isObstacle(tab,x-1,y) && !isObstacle(tab,x-2,y) &&((!isObstacle(tab,x-2,y+1) && carte[x-2][y+1]>=0)|| (!isObstacle(tab,x-2,y-1))&& carte[x-2][y-1]>=0)){
@@ -435,7 +435,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 												}else if(!isObstacle(tab,x+1,y) && !isObstacle(tab,x+2,y) &&((!isObstacle(tab,x+2,y+1) && carte[x+2][y+1]>=0 )|| (!isObstacle(tab,x+2,y-1) && carte[x+2][y-1]>=0 ))){
 														action = AI_ACTION_GO_RIGHT;
 														lastMove = action;
-													}else if(!isObstacle(tab,x,y-1)&& !isObstacle(tab,x,y-2) && !isObstacle(tab,x,y-3) && (u || (!isObstacle(tab,x-1,y-3)&& carte[x-1][y-3]>=0)|| (!isObstacle(tab,x+1,y-3) && carte[x+1][y-3]>=0 ))){//possibilit� d'aller vers le haut et puis possibiliter d'aller 3 fois vers le haut puis à gauche ou à droite.=>vers la haut
+													}else if(!isObstacle(tab,x,y-1)&& !isObstacle(tab,x,y-2) && !isObstacle(tab,x,y-3) && (u || (!isObstacle(tab,x-1,y-3)&& carte[x-1][y-3]>=0)|| (!isObstacle(tab,x+1,y-3) && carte[x+1][y-3]>=0 ))){//possibilité d'aller vers le haut et puis possibiliter d'aller 3 fois vers le haut puis à gauche ou à droite.=>vers la haut
 															action = AI_ACTION_GO_UP;
 															lastMove = action;
 														}else if(!isObstacle(tab,x-1,y) && !isObstacle(tab,x-2,y) && !isObstacle(tab,x-3,y) &&(l || (!isObstacle(tab,x-3,y+1) && carte[x-3][y+1]>=0)|| (!isObstacle(tab,x-3,y-1))&& carte[x-3][y-1]>=0)){
@@ -464,7 +464,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 								}else if((bPos != AI_DIR_RIGHT)&&!isObstacle(tab,x+1,y) && ((!isObstacle(tab,x+1,y+1) && carte[x+1][y+1]>=0)|| (!isObstacle(tab,x+1,y-1)&& carte[x+1][y-1]>=0)) ){
 										action = AI_ACTION_GO_RIGHT;
 										lastMove = action;
-									}else if((bPos != AI_DIR_UP)&&!isObstacle(tab,x,y-1)&& !isObstacle(tab,x,y-2) && (u || (!isObstacle(tab,x-1,y-2)&& carte[x-1][y-2]>=0)|| (!isObstacle(tab,x+1,y-2) && carte[x+1][y-2]>=0 ))){//possibilit� d'aller deux fois vers le haut puis à gauche ou à droite											
+									}else if((bPos != AI_DIR_UP)&&!isObstacle(tab,x,y-1)&& !isObstacle(tab,x,y-2) && (u || (!isObstacle(tab,x-1,y-2)&& carte[x-1][y-2]>=0)|| (!isObstacle(tab,x+1,y-2) && carte[x+1][y-2]>=0 ))){//possibilité d'aller deux fois vers le haut puis à gauche ou à droite											
 										action = AI_ACTION_GO_UP;
 											lastMove = action;
 										}else if((bPos != AI_DIR_LEFT)&&!isObstacle(tab,x-1,y) && !isObstacle(tab,x-2,y) &&(l || (!isObstacle(tab,x-2,y+1) && carte[x-2][y+1]>=0)|| (!isObstacle(tab,x-2,y-1))&& carte[x-2][y-1]>=0)){
@@ -476,7 +476,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 												}else if((bPos != AI_DIR_RIGHT)&&!isObstacle(tab,x+1,y) && !isObstacle(tab,x+2,y) &&(r || (!isObstacle(tab,x+2,y+1) && carte[x+2][y+1]>=0 )|| (!isObstacle(tab,x+2,y-1) && carte[x+2][y-1]>=0 ))){
 														action = AI_ACTION_GO_RIGHT;
 														lastMove = action;
-													}else if((bPos != AI_DIR_UP)&&!isObstacle(tab,x,y-1)&& !isObstacle(tab,x,y-2) && !isObstacle(tab,x,y-3) && (u || (!isObstacle(tab,x-1,y-3)&& carte[x-1][y-3]>=0)|| (!isObstacle(tab,x+1,y-3) && carte[x+1][y-3]>=0 ))){////possibilit� d'aller 3 fois vers le haut puis à gauche ou à droite
+													}else if((bPos != AI_DIR_UP)&&!isObstacle(tab,x,y-1)&& !isObstacle(tab,x,y-2) && !isObstacle(tab,x,y-3) && (u || (!isObstacle(tab,x-1,y-3)&& carte[x-1][y-3]>=0)|| (!isObstacle(tab,x+1,y-3) && carte[x+1][y-3]>=0 ))){////possibilité d'aller 3 fois vers le haut puis à gauche ou à droite
 															action = AI_ACTION_GO_UP;
 															lastMove = action;
 														}else if((bPos != AI_DIR_LEFT)&&!isObstacle(tab,x-1,y) && !isObstacle(tab,x-2,y) && !isObstacle(tab,x-3,y) &&(l || (!isObstacle(tab,x-3,y+1) && carte[x-3][y+1]>=0)|| (!isObstacle(tab,x-3,y-1))&& carte[x-3][y-1]>=0)){
@@ -495,12 +495,12 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 			}
 						
 		}else{//S'il y a une bombe dangereuse autour de lui.(pas sur lui)
-			//o� est la bombe
+			//où est la bombe
 			boolean bU = false;
 			boolean bD = false;
 			boolean bL = false;
 			boolean bR = false; 
-			//� quelle distance se trouve la bombe.
+			//à quelle distance se trouve la bombe.
 			int dR = 17;
 			int dL = 17;
 			int dU = 17;
@@ -518,7 +518,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 				}
 			}
 			
-			//regarder à droite pour voir s'il y a un mur ou une bombe.sinon s'�chapper de la bombe.
+			//regarder à droite pour voir s'il y a un mur ou une bombe.sinon s'échapper de la bombe.
 			i = x+1;
 			while(tab[i][y] != AI_BLOCK_WALL_HARD && tab[i][y]!= AI_BLOCK_WALL_SOFT && tab[i][y]!= AI_BLOCK_BOMB){
 				i++;
@@ -530,7 +530,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 				}
 			}
 			
-			//regarder vers le haut  pour voir s'il y a un mur ou une bombe.sinon s'�chapper de la bombe.	
+			//regarder vers le haut  pour voir s'il y a un mur ou une bombe.sinon s'échapper de la bombe.	
 			i = y-1;
 			while(tab[x][i] != AI_BLOCK_WALL_HARD && tab[x][i]!= AI_BLOCK_WALL_SOFT && tab[x][i]!= AI_BLOCK_BOMB){
 				i--;
@@ -542,7 +542,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 				}
 			}
 			
-			//regarder vers le bas  pour voir s'il y a un mur ou une bombe.sinon s'�chapper de la bombe.
+			//regarder vers le bas  pour voir s'il y a un mur ou une bombe.sinon s'échapper de la bombe.
 			i = y+1;
 			while(tab[x][i] != AI_BLOCK_WALL_HARD && tab[x][i]!= AI_BLOCK_WALL_SOFT && tab[x][i]!= AI_BLOCK_BOMB){
 				i++;
@@ -657,8 +657,8 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 						action = AI_ACTION_GO_DOWN;
 						right = false;
 					}else if(isMovePossible(x,y,AI_ACTION_GO_RIGHT) && !right){
-							if(dL==0){//aller une fois vers le droit pour s'�loigner de l'effet de la bombe.
-								if(carte[x+1][y]>=0)	//s'il semble ne pas etre affect� par la bombe.
+							if(dL==0){//aller une fois vers le droit pour s'éloigner de l'effet de la bombe.
+								if(carte[x+1][y]>=0)	//s'il semble ne pas etre affecté par la bombe.
 									action = AI_ACTION_GO_RIGHT;
 								else{	//degilse bekle
 									if(carte[x+1][y]==-400){
@@ -674,7 +674,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 						}else{
 							if(isFire(x+1,y))	//si l'obstacle est le feu attendre.
 								action = AI_ACTION_DO_NOTHING;
-							else{				//sinon retourner et s'�chapper.
+							else{				//sinon retourner et s'échapper.
 								if(isMovePossible(x,y,AI_ACTION_GO_LEFT)){
 									right = true;
 									action = AI_ACTION_GO_LEFT;
@@ -697,7 +697,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 					}
 					else if(isMovePossible(x,y,AI_ACTION_GO_LEFT ) && !left){
 							if(dR==0){//une fois à gauche et la bombe n'affecte plus.
-								if(carte[x-1][y]>=0)//s'il semble ne pas etre affect� par la bombe.
+								if(carte[x-1][y]>=0)//s'il semble ne pas etre affecté par la bombe.
 									action = AI_ACTION_GO_LEFT;
 								else{
 									if(carte[x-1][y]==-400){
@@ -714,7 +714,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 						}else{
 							 if(isFire(x-1,y)){	//Si l'obstacle est le feu,attendre.
 								 action = AI_ACTION_DO_NOTHING;
-							 }else{				//sinon retourne et s'�chappe.
+							 }else{				//sinon retourne et s'échappe.
 								 if(isMovePossible(x,y,AI_ACTION_GO_RIGHT)){
 									 left = true;
 									 action = AI_ACTION_GO_RIGHT;  
@@ -736,11 +736,11 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 						down = false;
 					}
 					else if(isMovePossible(x,y,AI_ACTION_GO_DOWN) && !down){
-							if(dU==0){//il s'�chappe avec un seul mouvement en bas.
-								if(carte[x][y+1]>=0)//s'il semble ne pas etre affect� vers le mouvement.
+							if(dU==0){//il s'échappe avec un seul mouvement en bas.
+								if(carte[x][y+1]>=0)//s'il semble ne pas etre affecté vers le mouvement.
 									action = AI_ACTION_GO_DOWN;
 								else{
-									if(carte[x][y+1]==-400){//si l'action suivant est par le shrink,s'�chapper.
+									if(carte[x][y+1]==-400){//si l'action suivant est par le shrink,s'échapper.
 										down = true;
 										action = AI_ACTION_GO_UP;
 									}else{
@@ -754,7 +754,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 						}else{
 							if(isFire(x,y+1)){	//si l'obstacle est le feu attendre.
 								 action = AI_ACTION_DO_NOTHING;
-							}else{				//sinon retourne et s'�chappe.
+							}else{				//sinon retourne et s'échappe.
 								if(isMovePossible(x,y,AI_ACTION_GO_UP)){
 									down = true;
 									action = AI_ACTION_GO_UP;
@@ -777,8 +777,8 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 						up = false;
 					}
 					else if(isMovePossible(x,y,AI_ACTION_GO_UP) && !up){
-							if(dD==0){//il s'�chappe avec un seul mouvement vers le haut.
-								if(carte[x][y-1]>=0)//s'il semble etre ne pas affect� par la bombe.
+							if(dD==0){//il s'échappe avec un seul mouvement vers le haut.
+								if(carte[x][y-1]>=0)//s'il semble etre ne pas affecté par la bombe.
 									action = AI_ACTION_GO_UP;
 								else{
 									if(carte[x][y-1]==-400){
@@ -795,7 +795,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 						}else{
 							if(isFire(x,y-1)){	//Si l'obstacle est le feu attendre.
 								 action = AI_ACTION_DO_NOTHING;
-							}else{				//sinon retourne et s'�chappe.
+							}else{				//sinon retourne et s'échappe.
 								if(isMovePossible(x,y,AI_ACTION_GO_DOWN)){
 									up = true;
 									action = AI_ACTION_GO_DOWN;
@@ -823,13 +823,13 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	
 	
 	/**
-	 * Indique si la case situ�e à la position passée en paramètre constitue un
+	 * Indique si la case située à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, mur.
 	 * 
 	 * @param x
-	 *            position à �tudier
+	 *            position à étudier
 	 * @param y
-	 *            position à �tudier
+	 *            position à étudier
 	 * @return vrai si la case contient un obstacle
 	 */
 	private boolean isObstacle(int x, int y) {
@@ -856,13 +856,13 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique si la case situ�e à la position passée en paramètre constitue un
+	 * Indique si la case située à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, mur.
 	 * 
 	 * @param x
-	 *            position à �tudier
+	 *            position à étudier
 	 * @param y
-	 *            position à �tudier
+	 *            position à étudier
 	 * @param tab
 	 *            matrice de la tableau du jeu.
 	 * @return vrai si la case contient un obstacle
@@ -888,14 +888,14 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	
 	/**
 	 * Indique si le déplacement dont le code a été passé en paramètre est
-	 * possible pour un personnage situ� en (x,y).
+	 * possible pour un personnage situé en (x,y).
 	 * 
 	 * @param x
 	 *            position du personnage
 	 * @param y
 	 *            position du personnage
 	 * @param move
-	 *            le déplacement à �tudier
+	 *            le déplacement à étudier
 	 * @return vrai si ce déplacement est possible
 	 */
 	private boolean isMovePossible(int x, int y, int move) {
@@ -927,7 +927,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	 * en considerant les bombes,le feu des bombes,les autres joueurs
 	 * vivants,les murs qu'on peut détruire. Les cases qui ont des points les
 	 * plus elevees sont plus attractives pour l'ia. Les cases avec des poins
-	 * n�gatifs presentent un danger,ce sont les case que l'ia devrait eviter
+	 * négatifs presentent un danger,ce sont les case que l'ia devrait eviter
 	 * d'y aller.Il retourne l'environnement sous forme de matrice,avec chaque
 	 * case possedant un point.
 	 * 
@@ -949,7 +949,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 				pCase[i][j] = tab[i][j];
 		
 
-		// on donne 10 points de plus à cot� des murs destructibles.
+		// on donne 10 points de plus à coté des murs destructibles.
 		for (int i = 1; i < xlim; i++) { // ur l'axe x
 			for (int j = 1; j < ylim; j++) {
 				// S'il y a un mur destructible.On donne +10 points.
@@ -1062,7 +1062,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 					pCase[i][j] = -500;
 
 
-					// on donne -500 points sur les cases affect�es par la bombe.
+					// on donne -500 points sur les cases affectées par la bombe.
 					int k = i - 1;
 					while (tab[k][j] % 10 != AI_BLOCK_WALL_HARD
 							&& tab[k][j] % 10 != AI_BLOCK_WALL_SOFT
@@ -1161,7 +1161,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	
 	/**
 	 *Il determine une partie de la matrice que l'ia peut arriver sans détruire un mur.
-	 *Fonction travaille r�cursivement.Il commence de la case dont les coordoonn�es sont passés en parametre
+	 *Fonction travaille récursivement.Il commence de la case dont les coordoonnées sont passés en parametre
 	 *et puis determine quels sont les cases que l'ia peut aller sans détruire un mur.La fonction 
 	 *met des -1 sur les cases qui ne sont pas accessibles par l'ia.Les cases accesibles par l'ia ont les memes 
 	 *valeurs que getZoneMatrix() retourne.
@@ -1247,7 +1247,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 		return action;
 	}
 	/**
-	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de A �toile.
+	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de A étoile.
 	 *(cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
 	 * @param x
 	 *           le coordonné de x de l'ia.
@@ -1257,7 +1257,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 	 * @param goal la case qu'on veut y arriver.
 	 */
 	public void findPath(int[][] tab,int x,int y,Noeud goal)
-	{	//� chaque appel de la fonction,on efface les anciens valeurs.
+	{	//à chaque appel de la fonction,on efface les anciens valeurs.
 		path=new LinkedList<Noeud>();
 		
 		Noeud courant=new Noeud(x,y,tab[x][y],0);//case où se trouve ia.
@@ -1265,7 +1265,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 		NoeudComparator comparator=new NoeudComparator(goal);//utilise pour l'algorithme Aetoile
 		PriorityQueue<Noeud> frange = new PriorityQueue<Noeud>(1,comparator);//les elements sont inseres en respectant l'ordre du cout et de l'heuristique.
 		LinkedList<Noeud> open=new LinkedList<Noeud>();//liste des elements qu'on regarde.
-		LinkedList<Noeud> closed=new LinkedList<Noeud>();//liste des elements qu'on a dej� regardé.
+		LinkedList<Noeud> closed=new LinkedList<Noeud>();//liste des elements qu'on a dejà regardé.
 		Noeud temp=new Noeud();
 	
 		Noeud solution=new Noeud();
@@ -1329,7 +1329,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 			
 		}// fin de while
 
-		if(solution!=null)//si on a trouv� la solution sans finir tous les elements de la frange.
+		if(solution!=null)//si on a trouvé la solution sans finir tous les elements de la frange.
 			path=tree.getPath(solution);
 
 		frange=null;//on vide la frange.
@@ -1339,7 +1339,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 
 	/**
 	 * Il determine la case qu'il faut aller.Pour l'ia la case qui a le meilleur
-	 * point est la case la plus attractive.En cas de l'égalit�,il choisit la
+	 * point est la case la plus attractive.En cas de l'égalité,il choisit la
 	 * case qui semble etre plus proche à lui.
 	 * 
 	 * @reurn goal la case cible.
@@ -1373,7 +1373,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 
 				else if (carte[i][j] == max) {
 
-					// en cas d'égalit�,il compare les distances de Manhattan.
+					// en cas d'égalité,il compare les distances de Manhattan.
 					int d1 = distance(x, y, maxX, maxY);
 
 					int d2 = distance(x, y, i, j);
@@ -1595,7 +1595,7 @@ public class BingolKetenci1 extends ArtificialIntelligence {
 		snake[4][1] = y;
 	}
 	/**
-	 * renvoie la position de la case(les coordnn�es sont passés en parametre)
+	 * renvoie la position de la case(les coordnnées sont passés en parametre)
 	 * sur le serpent du shrink. Le résultat peut etre de -1 à 4.
 	 * 
 	 * @param x

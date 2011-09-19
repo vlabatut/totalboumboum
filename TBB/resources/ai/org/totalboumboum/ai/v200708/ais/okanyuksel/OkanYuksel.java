@@ -3,9 +3,9 @@
  *                                          *
  * L'implément d'AI pour BombermanJA   *
  *                                          *
- * L'univesit� Galatasaray @ 2007           *
+ * L'université Galatasaray @ 2007           *
  *                                          *
- * par Bet�l Okan et Erkan Y�ksel           *
+ * par Betul Okan et Erkan Yuksel           *
  ********************************************/
 
 package org.totalboumboum.ai.v200708.ais.okanyuksel;
@@ -24,20 +24,20 @@ public class OkanYuksel extends ArtificialIntelligence
 {
 	private static final long serialVersionUID = 1L;
 
-	/* Pour calculer case suivant en utilisant l�index de direction. */
+	/* Pour calculer case suivant en utilisant l'index de direction. */
 	private static int[][] yonelim = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}, {0, 0}};
-	/*Pour r�aligner les constants de direction.*/ 
+	/*Pour réaligner les constants de direction.*/ 
 	private static int[] yon = {AI_ACTION_GO_UP, AI_ACTION_GO_RIGHT, AI_ACTION_GO_DOWN, AI_ACTION_GO_LEFT};
 	
-	/* L�index pour la direction courante. */
+	/* l'index pour la direction courante. */
 	private int yonum;
-	/* La route à s��chapper */
+	/* La route à s'échapper */
 	private LinkedList<Integer> kacisR;
-	/* La puissance de la bombe qui est d�tect� comme un danger. */
+	/* La puissance de la bombe qui est détecté comme un danger. */
 	private int tBombaG;
-	/* Les informations de la position pour la bombe qui est d�tect� comme un danger. */
+	/* Les informations de la position pour la bombe qui est détecté comme un danger. */
 	private int tBombaKx, tBombaKy;
-	/* un index qui détermine si le contr�le des direction est croissante ou d�croissante */
+	/* un index qui détermine si le Contrôle des direction est croissante ou décroissante */
 	private int artis;
 	
 	public OkanYuksel()
@@ -67,7 +67,7 @@ public class OkanYuksel extends ArtificialIntelligence
 			int xM = getOwnPosition()[0];
 			int yM = getOwnPosition()[1];
 			
-			//S�il y a une route planifi�e, d�abord celle va s�appliquer.
+			//S'il y a une route planifiée, d'abord celle va s'appliquer.
 			if (!kacisR.isEmpty())
 			{
 				yonum = kacisR.pollLast();
@@ -75,9 +75,9 @@ public class OkanYuksel extends ArtificialIntelligence
 			}
 			
 			/*
-			 * S�il y a un autre joueur dans le champ d�effet de nos bombes, 
+			 * S'il y a un autre joueur dans le champ d'effet de nos bombes, 
 			 * et si DECCAL a une bombe à poser, 
-			 * et si une route peut-�tre trouv�e pour s��chapper, 
+			 * et si une route peut-être trouvée pour s'échapper, 
 			 * DECCAL va poser une bombe pour détruire son rival.
 			 */
 			if (hedefVar(xM, yM) && getOwnBombCount()>0)
@@ -88,11 +88,11 @@ public class OkanYuksel extends ArtificialIntelligence
 					return AI_ACTION_PUT_BOMB;
 				}
 			}
-			//Enfin DECCAL va chercher une autre possibilit�.
+			//Enfin DECCAL va chercher une autre possibilité.
 			return yonSec(xM, yM);
 		}
 		catch(Exception hata)
-		{// Dans une situation pas except�e, tous les variables sont resette, et DECCAL continue comme lui commence.
+		{// Dans une situation pas exceptée, tous les variables sont resette, et DECCAL continue comme lui commence.
 			tBombaG = 1;
 			tBombaKx = -1;
 			tBombaKy = -1;
@@ -112,7 +112,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	}
 
 	/* 
-	 * Les informations sur les cases qui sont situ�es en retour d�un point.
+	 * Les informations sur les cases qui sont situées en retour d'un point.
 	 * @param xM coordonnée-x
 	 * @param yM coordonnée-y
 	 * @return Le list des informations des cases.  
@@ -131,7 +131,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	}
 
 	/*
-	 * Y�a-t-il une sortie en passant une case dans une direction
+	 * Y'a-t-il une sortie en passant une case dans une direction
 	 * @param xM coordonnée-x
 	 * @param yM coordonnée-y
 	 * @param yonu L'index de direction
@@ -155,7 +155,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	
 	/* 
 	 * Est-ce que la route est verticalement ou horizontalement ouverte?
-	 * (i.e Est-ce que la route peut-�tre verticalement ou horizontalement march�e?)
+	 * (i.e Est-ce que la route peut-être verticalement ou horizontalement marchée?)
 	 * @param n1 point 1
 	 * @param n2 point 2
 	 * @return true ou false
@@ -224,7 +224,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	
 	/*
 	 * Est-ce que la route est verticalement ou horizontalement ouverte et
-	 *  la distance est égale ou moins de à menzil �?
+	 *  la distance est égale ou moins de à menzil ?
 	 * @param n1 point 1
 	 * @param n2 point 2
 	 * @param menzil distance
@@ -243,7 +243,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	}
 	
 	/*
-	 * Pour trouver une route à s'�chapper.
+	 * Pour trouver une route à s'échapper.
 	 * @param xM coordonnée-x de la position de DECCAL
 	 * @param yM coordonnée-y de la position de DECCAL
 	 * @param gYonu Un index de direction
@@ -258,7 +258,7 @@ public class OkanYuksel extends ArtificialIntelligence
 		for (int syc=0; syc<4; syc++)
 		{
 			if (
-					gYonu != syc && //pour emp�cher de regarder à la direction qui est déjà utilisé.
+					gYonu != syc && //pour empêcher de regarder à la direction qui est déjà utilisé.
 					(cevrem[syc] == AI_BLOCK_EMPTY ||
 					cevrem[syc] == AI_BLOCK_ITEM_BOMB ||
 					cevrem[syc] == AI_BLOCK_ITEM_FIRE)
@@ -268,20 +268,20 @@ public class OkanYuksel extends ArtificialIntelligence
 						!tehlikeli(xM, yM, syc, true) && 
 						!yolAcikveMenzilde(new int[]{kX, kY}, new int[]{xM+yonelim[syc][0],yM+yonelim[syc][1]}, menzil)
 					)
-				{//une position s�re a été trouv�e
+				{//une position sûre a été trouvée
 					kacisR.push(syc);
 					return;
 				}
 				else if (onuAcik(xM, yM, syc))
-				{//c�est encore dangereux mais peut-�tre on peut trouver en passant sur cette case.
+				{//c'est encore dangereux mais peut-être on peut trouver en passant sur cette case.
 					kacisR.push(syc);
 					kacisBul(xM + yonelim[syc][0], yM + yonelim[syc][1], (syc+2)%4, kX, kY, menzil);
 				}
 			}
 		}
 		/*
-		 * Cette fois, ça ne peut pas trouv�. 
-		 * Le dernier est retir� et s�il y a un appel pas fini dans la r�cursivit�, 
+		 * Cette fois, ça ne peut pas trouvé. 
+		 * Le dernier est retiré et s'il y a un appel pas fini dans la récursivité, 
 		 * ça continuera, sinon ça finira.
 		 */
 		if (!kacisR.isEmpty())
@@ -302,9 +302,9 @@ public class OkanYuksel extends ArtificialIntelligence
 			int[] kP = getPlayerPosition(syc);
 			if (isPlayerAlive(syc) && yolAcik(kP, new int[]{xM,yM}))
 			{
-				/* ça ne regarde pas d�arri�re, 
-				 * pour emp�che de tomber dans une piège 
-				 * apr�s poser une bombe pour un rival. 
+				/* ça ne regarde pas d'arrière, 
+				 * pour empêche de tomber dans une piège 
+				 * après poser une bombe pour un rival. 
 				 * Donc il regardera à sa droite, à sa gauche et à son avant. 
 				*/
 				if (kP[0]==xM && kP[1]<yM && yonu!=2)
@@ -350,7 +350,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	 * @param xM coordonnée-x
 	 * @param yM coordonnée-y
 	 * @param yonu L'index de direction
-	 * @param arkanabak Regarder d'arri�re aussi
+	 * @param arkanabak Regarder d'arrière aussi
 	 * @return true ou false
 	 */
 	private boolean tehlikeli(int xM, int yM, int yonu, boolean arkanaBak) throws Exception
@@ -457,7 +457,7 @@ public class OkanYuksel extends ArtificialIntelligence
 		}
 		
 		if (arkanaBak)
-		{//regarder son arri�re
+		{//regarder son arrière
 			return tehlikeli(xA, yA, (yonu+2)%4, false);
 		}
 		
@@ -465,7 +465,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	}
 
 	/* 
-	 * Pour d�tecter s�il y a une shrink dans une direction.
+	 * Pour détecter s'il y a une shrink dans une direction.
 	 * @param xM coordonnée-x
 	 * @param yM coordonnée-y
 	 * @param yonu L'index de direction
@@ -588,7 +588,7 @@ public class OkanYuksel extends ArtificialIntelligence
 				}
 			}
 		}
-		//inverser la direction de contr�le.
+		//inverser la direction de Contrôle.
 		artis *= -1;
 		//attendre sans espoir
 		return AI_ACTION_DO_NOTHING;

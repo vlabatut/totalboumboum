@@ -741,7 +741,7 @@ return points;
 	
 	
 	
-	// retourne la zone accessible a partir d'un point donn�.
+	// retourne la zone accessible a partir d'un point donné.
 	//@param p point actuel de notre bonhomme
 	
 	public void getZoneAccessible(Point p)
@@ -1160,7 +1160,7 @@ return points;
 		
 	}
 	
-	// prend les donnees de getZoneMatris et renvoi une matrice amelior� en l'ajoutant les couts specifiques.
+	// prend les donnees de getZoneMatris et renvoi une matrice amelioré en l'ajoutant les couts specifiques.
 	public int[][] BetterMatrix()
 	{
 		int[][] ZoneMatrix= getZoneMatrix();

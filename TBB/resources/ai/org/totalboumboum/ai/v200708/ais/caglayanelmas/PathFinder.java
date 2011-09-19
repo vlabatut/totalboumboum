@@ -14,9 +14,9 @@ import org.totalboumboum.ai.v200708.ais.caglayanelmas.SearchNode;
 
 /**
  * Module d'IA qui va trouver le plus court chemin
- * entre un case initial et un case final en consid�rant
+ * entre un case initial et un case final en considérant
  * les obstacles. On va utiliser A* avec une heuristique
- * �tant égale à la distance de Manhattan entre les deux
+ * étant égale à la distance de Manhattan entre les deux
  * cases.
  * 
  * @author Ozan Caglayan
