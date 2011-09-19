@@ -45,7 +45,7 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>paramètre: scope=N/D
  * 	<br>paramètre: restriction=N/D
  * 
- * <p>ABILITY REFUSE (généralement pas utilis�, mais possible)
+ * <p>ABILITY REFUSE (généralement pas utilisé, mais possible)
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT

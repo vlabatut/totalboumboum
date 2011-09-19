@@ -26,7 +26,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 /**
  * 
- * Classe �tendant la classe abstraite CostCalculator gr�ce à une matrice de co�ts.
+ * Classe �tendant la classe abstraite CostCalculator gr�ce à une matrice de coûts.
  * Ici, le cout pour passer d'une case à l'autre d�pend uniquement de la case
  * de destination. Ce cout est �gal à la valeur associée à la case dans la matrice
  * de cout fournie. Cette matrice doit faire la même taille que la zone de jeu.
@@ -70,11 +70,11 @@ public class MatrixCostCalculator extends CostCalculator
 	}
 	
 	/**
-	 * met à jour un co�t dans la matrice
+	 * met à jour un coût dans la matrice
 	 * 
 	 * @param line	ligne de la case à mettre à jour
 	 * @param col	colonne de la case à mettre à jour
-	 * @param cost	nouveau co�t à affecter
+	 * @param cost	nouveau coût à affecter
 	 */
 	public void setCost(int line, int col, double cost) throws StopRequestException
 	{	costMatrix[line][col] = cost;
@@ -84,7 +84,7 @@ public class MatrixCostCalculator extends CostCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * La case de départ n'est pas consid�r�e, on renvoie seulement la valeur
+	 * La case de départ n'est pas considérée, on renvoie seulement la valeur
 	 * correspondant à la case d'arrivée dans la matrice de cout.
 	 * Attention : si la matrice de cout est trop petite, la valeur maximale
 	 * possible est renvoy�e (Double.POSITIVE_INFINITY), et un message 

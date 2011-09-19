@@ -45,7 +45,7 @@ public abstract class CostCalculator
 	 * 
 	 * @param start	la case de départ 
 	 * @param end	la case d'arrivée (qui doit être voisine)
-	 * @return	le co�t du déplacement
+	 * @return	le coût du déplacement
 	 */
 	public abstract double processCost(AiTile start, AiTile end) throws StopRequestException;
 	

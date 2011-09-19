@@ -117,7 +117,7 @@ public class AiFire extends AiSprite<Fire>
 	public boolean isCrossableBy(AiSprite<?> sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
-		// si le sprite consid�r� est un personnage
+		// si le sprite considéré est un personnage
 		if(sprite instanceof AiHero)
 		{	AiHero hero = (AiHero) sprite;
 			result = hero.hasThroughFires();

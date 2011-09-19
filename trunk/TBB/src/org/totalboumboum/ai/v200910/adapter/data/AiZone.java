@@ -98,7 +98,7 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	/** temps �coul� depuis le d�but du jeu */
 	private long totalTime = 0;
-	/** temps �coul� depuis la mise à jour pr�c�dente de l'IA consid�r�e */
+	/** temps �coul� depuis la mise à jour pr�c�dente de l'IA considérée */
 	private long elapsedTime = 0;
 	/** dur�e maximale de la partie */
 	private long limitTime = 0;
@@ -114,7 +114,7 @@ public class AiZone
 	
 	/**
 	 * renvoie le temps �coul� depuis la mise à jour pr�c�dente
-	 * de l'IA consid�r�e.
+	 * de l'IA considérée.
 	 * 
 	 * @return	le temps �coul� exprimé en millisecondes
 	 */
@@ -173,7 +173,7 @@ public class AiZone
 		// stats
 		statsRanks.clear();
 		RankingService rankingService = GameStatistics.getRankingService();
-		// les stats n'ont pas �t� chargées
+		// les stats n'ont pas été chargées
 		if(rankingService==null)
 		{	for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
@@ -184,7 +184,7 @@ public class AiZone
 				matchRanks.put(aiHero,0);
 			}
 		}
-		// les stats ont �t� chargées
+		// les stats ont été chargées
 		else
 		{	for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
@@ -224,7 +224,7 @@ public class AiZone
 	 * Ce classement est susceptible d'�voluer d'ici la fin de la manche actuellement jou�e, 
 	 * par exemple si ce joueur est �limin�.
 	 * 
-	 * @param hero	le personnage consid�r�
+	 * @param hero	le personnage considéré
 	 * @return	son classement dans la manche en cours
 	 */
 	int getRoundRank(AiHero hero)
@@ -235,7 +235,7 @@ public class AiZone
 	 * Renvoie le classement du personnage passé en paramètre, pour la rencontre en cours.
 	 * Ce classement n'�volue pas pendant la manche actuellement jou�e.
 	 * 
-	 * @param hero	le personnage consid�r�
+	 * @param hero	le personnage considéré
 	 * @return	son classement dans la rencontre en cours
 	 */
 	int getMatchRank(AiHero hero)
@@ -246,7 +246,7 @@ public class AiZone
 	 * Renvoie le classement du personnage passé en paramètre, dans le classement général du jeu (Glicko-2)
 	 * Ce classement n'�volue pas pendant la manche actuellement jou�e.
 	 * 
-	 * @param hero	le personnage consid�r�
+	 * @param hero	le personnage considéré
 	 * @return	son classement général (Glicko-2)
 	 */
 	int getStatsRank(AiHero hero)
@@ -380,7 +380,7 @@ public class AiZone
 	 * 
 	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un cot� commun),
 	 * il est possible que cette méthode renvoie une direction composite,
-	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. R�f�rez-vous à 
+	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. référez-vous à 
 	 * la classe Direction pour plus d'informations sur ces valeurs.</br>
 	 *  
 	 * ATTENTION 2 : comme les niveaux sont circulaires, il y a toujours deux directions possibles.
@@ -390,7 +390,7 @@ public class AiZone
 	 * <br><t> S>>>>>>>>>>T  distance=11
 	 * <br><t>>S..........T> distance=1
 	 * 
-	 * @param source	case de r�f�rence
+	 * @param source	case de référence
 	 * @param target	case dont on veut connaitre la direction
 	 * @return	la direction de target par rapport à source
 	 */
@@ -626,7 +626,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone,
-	 * y compris ceux qui ont �t� �limin�s. 
+	 * y compris ceux qui ont été �limin�s. 
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
 	 */
@@ -636,7 +636,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone, 
-	 * sauf ceux qui ont �t� �limin�s ou qui ne sont pas actuellement
+	 * sauf ceux qui ont été �limin�s ou qui ne sont pas actuellement
 	 * en jeu.
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
@@ -742,7 +742,7 @@ public class AiZone
 	/**
 	 * renvoie le nombre d'items cach�s restant dans le niveau.
 	 * Il s'agit des items qui sont encore cach�s dans des blocs, 
-	 * et qui n'ont pas �t� ramass�s. Cette information permet de
+	 * et qui n'ont pas été ramass�s. Cette information permet de
 	 * savoir s'il est encore nécessaire de faire exploser des blocs 
 	 * pour trouver des items, ou pas.
 	 * 
@@ -758,7 +758,7 @@ public class AiZone
 	/**
 	 * d�marque toutes les représentations de sprites d'une liste determin�e en fonction du type
 	 * T param�trant cette méthode. méthode appelée au d�but de la mise à jour :
-	 * les représentations de sprites qui n'ont pas �t� marqu�es à la fin de la mise à jour
+	 * les représentations de sprites qui n'ont pas été marqu�es à la fin de la mise à jour
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
 	 * supprim�es de cette représentation.
 	 * 
@@ -841,7 +841,7 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Calcule la direction pour aller du sprite source au sprite target.
-	 * Le niveau est consid�r� comme cyclique, i.e. le bord de droite est 
+	 * Le niveau est considéré comme cyclique, i.e. le bord de droite est 
 	 * reli� au bord de gauche, et le bord du haut est reli� au bord du bas.
 	 * Cette méthode considère la direction correspondant à la distance la plus
 	 * courte (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -867,7 +867,7 @@ public class AiZone
 	
 	/**
 	 * Calcule la direction pour aller du sprite à la case passés en paramètres.
-	 * Le niveau est consid�r� comme cyclique, i.e. le bord de droite est 
+	 * Le niveau est considéré comme cyclique, i.e. le bord de droite est 
 	 * reli� au bord de gauche, et le bord du haut est reli� au bord du bas.
 	 * Cette méthode considère la direction correspondant à la distance la plus
 	 * courte (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -893,7 +893,7 @@ public class AiZone
 	
 	/**
 	 * Calcule la direction pour aller de la position (x1,y1) à la position (x2,y2)
-	 * Le niveau est consid�r� comme cyclique, i.e. le bord de droite est 
+	 * Le niveau est considéré comme cyclique, i.e. le bord de droite est 
 	 * reli� au bord de gauche, et le bord du haut est reli� au bord du bas.
 	 * Cette méthode considère la direction correspondant à la distance la plus
 	 * courte (qui peut correspondre à un chemin passant par les bords du niveau).
@@ -922,7 +922,7 @@ public class AiZone
 	/**
 	 * renvoie la distance de Manhattan entre les cases de coordonnées
 	 * (line1,col1) et (line2,col2), exprimée en cases. Attention, le 
-	 * niveau est consid�r� comme cyclique, 
+	 * niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est reli� au bord de gauche, et le bord du haut 
 	 * est reli� au bord du bas. Cette méthode considère la distance dans la direction
 	 * indiqu�e par le paramètre direction, qui peut correspondre à un chemin 
@@ -942,7 +942,7 @@ public class AiZone
 	/**
 	 * renvoie la distance de Manhattan entre les cases de coordonnées
 	 * (line1,col1) et (line2,col2), exprimée en cases. 
-	 * Attention, le niveau est consid�r� comme cyclique, 
+	 * Attention, le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est reli� au bord de gauche, et le bord du haut 
 	 * est reli� au bord du bas. Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -959,7 +959,7 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
-	 * exprimée en cases. Attention, le niveau est consid�r� comme cyclique, i.e. le bord de droite 
+	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est reli� au bord de gauche, et le bord du haut est reli� au bord du bas. 
 	 * Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -974,7 +974,7 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
-	 * exprimée en cases. Attention, le niveau est consid�r� comme cyclique, i.e. le bord de droite 
+	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est reli� au bord de gauche, et le bord du haut est reli� au bord du bas. 
 	 * Cette méthode considère la distance dans la direction
 	 * indiqu�e par le paramètre direction, qui peut correspondre à un chemin 
@@ -995,7 +995,7 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en cases. Attention, le niveau est consid�r� comme cyclique, i.e. le bord de droite 
+	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est reli� au bord de gauche, et le bord du haut est reli� au bord du bas. 
 	 * Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -1010,7 +1010,7 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en cases. Attention, le niveau est consid�r� comme cyclique, i.e. le bord de droite 
+	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est reli� au bord de gauche, et le bord du haut est reli� au bord du bas. 
 	 * Cette méthode considère la distance dans la direction
 	 * indiqu�e par le paramètre direction, qui peut correspondre à un chemin 
@@ -1032,7 +1032,7 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie la distance de Manhattan entre les points de coordonnées
-	 * (x1,y1) et (x2,y2), exprimée en pixels. Attention, le niveau est consid�r� comme cyclique, 
+	 * (x1,y1) et (x2,y2), exprimée en pixels. Attention, le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est reli� au bord de gauche, et le bord du haut 
 	 * est reli� au bord du bas. Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -1051,7 +1051,7 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les points de coordonnées
-	 * (x1,y1) et (x2,y2), exprimée en pixels. Attention, le niveau est consid�r� comme cyclique, 
+	 * (x1,y1) et (x2,y2), exprimée en pixels. Attention, le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est reli� au bord de gauche, et le bord du haut 
 	 * est reli� au bord du bas. Cette méthode considère la distance dans la direction
 	 * indiqu�e par le paramètre direction, qui peut correspondre à un chemin 
@@ -1072,7 +1072,7 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en pixels. Attention, le niveau est consid�r� comme cyclique, i.e. le bord de droite 
+	 * exprimée en pixels. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est reli� au bord de gauche, et le bord du haut est reli� au bord du bas. 
 	 * Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
@@ -1087,7 +1087,7 @@ public class AiZone
 	
 	/**
 	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres, exprimée en pixels. 
-	 * Attention, le niveau est consid�r� comme cyclique, i.e. le bord de droite 
+	 * Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
 	 * est reli� au bord de gauche, et le bord du haut est reli� au bord du bas. 
 	 * Cette méthode considère la distance dans la direction indiqu�e par le 
 	 * paramètre direction, qui peut correspondre à un chemin passant par 
@@ -1138,8 +1138,8 @@ public class AiZone
 	 * prend n'importe quelle abscisse exprimée en pixels et la normalise
 	 * de mani�re à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * d�signe une position situ�e en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le c�t� gauche et le
-	 * c�t� droit sont reli�s) pour déterminer une position
+	 * utilise la propriété cyclique du niveau (i.e. le cété gauche et le
+	 * cété droit sont reli�s) pour déterminer une position
 	 * �quivalente situ�e dans le niveau.
 	 * 
 	 * @param x	abscisse
@@ -1153,8 +1153,8 @@ public class AiZone
 	 * prend n'importe quelle ordonnée exprimée en pixels et la normalise
 	 * de mani�re à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * d�signe une position situ�e en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le c�t� haut et le
-	 * c�t� bas sont reli�s) pour déterminer une position
+	 * utilise la propriété cyclique du niveau (i.e. le cété haut et le
+	 * cété bas sont reli�s) pour déterminer une position
 	 * �quivalente situ�e dans le niveau.
 	 * 
 	 * @param y	ordonnée
@@ -1183,8 +1183,8 @@ public class AiZone
 	 * prend n'importe quelle abscisse exprimée en cases et la normalise
 	 * de mani�re à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * d�signe une position situ�e en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le c�t� gauche et le
-	 * c�t� droit sont reli�s) pour déterminer une position
+	 * utilise la propriété cyclique du niveau (i.e. le cété gauche et le
+	 * cété droit sont reli�s) pour déterminer une position
 	 * �quivalente situ�e dans le niveau.
 	 * 
 	 * @param col	colonne de la case
@@ -1198,8 +1198,8 @@ public class AiZone
 	 * prend n'importe quelle ordonnée exprimée en cases et la normalise
 	 * de mani�re à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * d�signe une position situ�e en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le c�t� haut et le
-	 * c�t� bas sont reli�s) pour déterminer une position
+	 * utilise la propriété cyclique du niveau (i.e. le cété haut et le
+	 * cété bas sont reli�s) pour déterminer une position
 	 * �quivalente situ�e dans le niveau.
 	 * 
 	 * @param line	ligne de la case

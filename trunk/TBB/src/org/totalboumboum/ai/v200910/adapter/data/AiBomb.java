@@ -234,7 +234,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 * i.e. toutes les cases qui seront atteinte quand elle va exploser.
 	 * Cette méthode tient compte de murs, items, etc., c'est à dire qu'elle
 	 * ne donne que les cases qui seront touch�es si la bombe devait exploser
-	 * à l'instant où cette méthode est invoqu�e. Si un des obstacles à l'explosion
+	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
 	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
 	 * alors le souffle peut changer, il faut r�-ex�cuter cette méthode pour avoir le
 	 * nouveau souffle de la bombe dans ce nouvel environnement.
@@ -318,11 +318,11 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps �coul� depuis que la bombe a �t� pos�e, exprimé en ms */
+	/** temps �coul� depuis que la bombe a été pos�e, exprimé en ms */
 	private double time = 0;
 	
 	/**
-	 * renvoie le temps �coul� depuis que la bombe a �t� pos�e,
+	 * renvoie le temps �coul� depuis que la bombe a été pos�e,
 	 * exprimé en millisecondes
 	 * 
 	 * @return	temps exprimé en ms
@@ -332,7 +332,7 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 	
 	/**
-	 * met à jour le temps �coul� depuis que la bombe a �t� pos�e
+	 * met à jour le temps �coul� depuis que la bombe a été pos�e
 	 */
 	private void updateTime()
 	{	Bomb sprite = getSprite();
@@ -437,7 +437,7 @@ public class AiBomb extends AiSprite<Bomb>
 	public boolean isCrossableBy(AiSprite<?> sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
-		// si le sprite consid�r� est un personnage
+		// si le sprite considéré est un personnage
 		if(sprite instanceof AiHero)
 		{	AiHero hero = (AiHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
@@ -449,7 +449,7 @@ public class AiBomb extends AiSprite<Bomb>
 			else if(stopHeroes==AiStopType.STRONG_STOP)
 				result = false;
 		}
-		// si le sprite consid�r� est un feu
+		// si le sprite considéré est un feu
 		else if(sprite instanceof AiFire)
 		{	AiFire fire = (AiFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)

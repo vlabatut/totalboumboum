@@ -58,7 +58,7 @@ final class AiSimZone extends AiZone
 	 * sinon tout est copi�.
 	 * 
 	 * @param zone
-	 * 		la zone de r�f�rence
+	 * 		la zone de référence
 	 * @param fullCopy
 	 * 		indique si les sprites doivent aussi être copi�s ou pas
 	 * @return	
@@ -226,7 +226,7 @@ final class AiSimZone extends AiZone
 	 *  @param col
 	 *  	colonne de la case à traiter
 	 *  @param direction
-	 *  	direction de la case voisine relativement à la case de r�f�rence
+	 *  	direction de la case voisine relativement à la case de référence
 	 *  @return	
 	 *  	la case voisine dans la direction pr�cis�e
 	 */
@@ -288,7 +288,7 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * permet de rajouter un sprite dans cette zone<br/>
-	 * <b>Attention :</b> le sprite a obligatoirement d�j� �t� affect� à une case 
+	 * <b>Attention :</b> le sprite a obligatoirement déjà été affect� à une case 
 	 * lors de sa construction, donc il s'agit ici simplement de mettre
 	 * à jour les listes de sprites de la zone
 	 * 
@@ -337,7 +337,7 @@ final class AiSimZone extends AiZone
 	 * supprime un sprite de la zone et de la case correspondante.
 	 * s'il s'agit d'un joueur, il est supprim� seulement de la case
 	 * et de la liste des joueurs encore en jeu (mais la zone continue
-	 * à le r�f�rencer dans la liste générale des joueurs, car le sprite
+	 * à le référencer dans la liste générale des joueurs, car le sprite
 	 * peut encore etre utile, par exemple pour obtenir le classement
 	 * de ce joueur)
 	 * 
@@ -776,7 +776,7 @@ final class AiSimZone extends AiZone
 	 * lors de la simulation
 	 * 
 	 * @param type
-	 * 		le type d'item qui a �t� d�couvert
+	 * 		le type d'item qui a été d�couvert
 	 */
 	protected void updateHiddenItemsCount(AiItemType type)
 	{	Integer value = hiddenItemsCounts.get(type);

@@ -41,7 +41,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
  * Impl�mentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
  * cette impl�mentation correspond à peu près à un A* classique. Il y a quand même une modification,
- * puisque les noeuds d'�tat apparaissant d�j� dans des noeuds de recherche anc�tre sont
+ * puisque les noeuds d'�tat apparaissant déjà dans des noeuds de recherche anc�tre sont
  * �cart�s lorsqu'un noeud de recherche est développ�. En d'autres termes, l'algorithme �vite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'emp�che de
  * boucler à l'infini.</br>
@@ -49,7 +49,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
  * Cette impl�mentation trouved donc le chemin le plus court entre deux cases,
  * en consid�rant les obstacles. Elle a besoin de trois paramètres :
  * 		- le personnage qui doit effectuer le trajet entre les deux cases
- * 		- une fonction de co�t, qui permet de définir combien coute une action (ici : le fait de passer d'une case à l'autre)
+ * 		- une fonction de coût, qui permet de définir combien coute une action (ici : le fait de passer d'une case à l'autre)
  * 		- une fonction heuristique, qui permet d'estimer le cout du chemin restant à parcourir</br>
  * 
  * A noter qu'il s'agit d'une impl�mentation non-déterministe de l'algorithme.
@@ -87,7 +87,7 @@ public class Astar
 	private SuccessorCalculator successorCalculator = null;
 	/** racine de l'arbre de recherche */
 	private AstarNode root = null;
-	/** personnage de r�f�rence */
+	/** personnage de référence */
 	private AiHero hero = null;
 	/** l'ai qui a r�alis� l'appel */
 	private ArtificialIntelligence ai = null;
@@ -97,7 +97,7 @@ public class Astar
 	/////////////////////////////////////////////////////////////////
 	/** limite de hauteur (n�gatif = pas de limite) */
 	private int maxHeight = -1;
-	/** limite de co�t (n�gatif = pas de limite) */
+	/** limite de coût (n�gatif = pas de limite) */
 	private int maxCost = -1;
 	/** limite de nombre de noeuds (n�gatif = pas de limite), pas configurable */
 	private int maxNodes = 10000;
@@ -109,7 +109,7 @@ public class Astar
 	 * Dans des cas extr�mes, l'arbre peut avoir une hauteur consid�rable,
 	 * ce qui peut provoquer un d�passement m�moire. Ce paramètre permet d'�viter
 	 * de d�clencher ce type d'exception. A noter qu'un paramètre non-configurable
-	 * limite d�j� le nombre de noeuds dans l'arbre.
+	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxHeight
 	 */
@@ -124,7 +124,7 @@ public class Astar
 	 * Dans des cas extr�mes, l'arbre peut avoir une hauteur consid�rable,
 	 * ce qui peut provoquer un d�passement m�moire. Ce paramètre permet d'�viter
 	 * de d�clencher ce type d'exception. A noter qu'un paramètre non-configurable
-	 * limite d�j� le nombre de noeuds dans l'arbre.
+	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxCost	le cout maximal que le noeud courant peut atteindre
 	 */

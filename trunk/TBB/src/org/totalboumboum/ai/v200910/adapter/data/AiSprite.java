@@ -134,14 +134,14 @@ public abstract class AiSprite<T extends Sprite>
 	}
 	
 	/**
-	 * indique que le sprite a �t� �limin� du jeu
+	 * indique que le sprite a été �limin� du jeu
 	 */
 	void setEnded()
 	{	state.setEnded();		
 	}
 	
 	/**
-	 * renvoie vrai si ce sprite a �t� �limin� du jeu
+	 * renvoie vrai si ce sprite a été �limin� du jeu
 	 * @return	vrai si le sprite n'est plus en jeu
 	 */
 	public boolean hasEnded()

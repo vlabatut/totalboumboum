@@ -124,12 +124,12 @@ final class AiSimItem extends AiSimSprite implements AiItem
 	{	// par défaut, on bloque
 		boolean result = false;
 		
-		// si le sprite consid�r� est un personnage
+		// si le sprite considéré est un personnage
 		if(sprite instanceof AiSimHero)
 		{	result = true;
 		}
 		
-		// si le sprite consid�r� est un feu
+		// si le sprite considéré est un feu
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)
@@ -140,7 +140,7 @@ final class AiSimItem extends AiSimSprite implements AiItem
 				result = false;
 		}
 		
-		// si le sprite consid�r� est une bombe
+		// si le sprite considéré est une bombe
 		else if(sprite instanceof AiSimBomb)
 		{	AiSimBomb bomb = (AiSimBomb) sprite;
 			if(stopBombs==AiStopType.NO_STOP)

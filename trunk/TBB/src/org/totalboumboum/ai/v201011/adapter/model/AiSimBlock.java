@@ -132,7 +132,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	{	// par défaut, on bloque
 		boolean result = false;
 		
-		// si le sprite consid�r� est un personnage
+		// si le sprite considéré est un personnage
 		if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
@@ -145,7 +145,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 				result = false;
 		}
 		
-		// si le sprite consid�r� est un feu
+		// si le sprite considéré est un feu
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)

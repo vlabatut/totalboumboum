@@ -51,11 +51,11 @@ public final class LimitReachedException extends Exception
 	 * @param height
 	 * 		hauteur maximale atteinte pour l'arbre de recherche
 	 * @param cost
-	 * 		co�t maximal atteint pour les chemins contenus dans l'arbre de recherche
+	 * 		coût maximal atteint pour les chemins contenus dans l'arbre de recherche
 	 * @param size
 	 * 		taille atteinte par l'arbre de recherche (exprimée en nombre de noeuds)
 	 * @param maxCost
-	 * 		limite de co�t fix�e pour l'exploration
+	 * 		limite de coût fix�e pour l'exploration
 	 * @param maxHeight
 	 * 		limite de hauteur fix�e pour l'exploration
 	 * @param maxSize
@@ -137,28 +137,28 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// COST				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de co�t (n�gatif = pas de limite) */
+	/** limite de coût (n�gatif = pas de limite) */
 	private double maxCost;
-	/** co�t maximal atteint */
+	/** coût maximal atteint */
 	private double cost;
 
 	/**
-	 * renvoie la limite de co�t pour l'exploration de l'arbre de recherche.
+	 * renvoie la limite de coût pour l'exploration de l'arbre de recherche.
 	 * une valeur n�gative représente une absence de limite.
 	 * 
 	 * @return
-	 * 		la limite de co�t pour l'exploration de l'arbre de recherche
+	 * 		la limite de coût pour l'exploration de l'arbre de recherche
 	 */
 	public double getMaxCost()
 	{	return maxCost;
 	}
 
 	/**
-	 * renvoie le co�t du chemin le plus co�teux développ� lors de la
+	 * renvoie le coût du chemin le plus coûteux développ� lors de la
 	 * recherche de solution par A*.
 	 * 
 	 * @return
-	 * 		co�t maximal atteint lors de la recherche de solution
+	 * 		coût maximal atteint lors de la recherche de solution
 	 */
 	public double getCost()
 	{	return cost;
@@ -173,7 +173,7 @@ public final class LimitReachedException extends Exception
 	private int size;
 
 	/**
-	 * renvoie la limite qui avait �t� fix�e pour la taille
+	 * renvoie la limite qui avait été fix�e pour la taille
 	 * de l'arbre de recherche exprimée en noeuds.
 	 * 
 	 * @return

@@ -40,7 +40,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * Impl�mentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
  * cette impl�mentation correspond à peu près à un A* classique. Il y a quand même une modification,
- * puisque les noeuds d'�tat apparaissant d�j� dans des noeuds de recherche anc�tre sont
+ * puisque les noeuds d'�tat apparaissant déjà dans des noeuds de recherche anc�tre sont
  * �cart�s lorsqu'un noeud de recherche est développ�. En d'autres termes, l'algorithme �vite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'emp�che de
  * boucler à l'infini.</br>
@@ -50,8 +50,8 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * 		<li> Le personnage qui doit effectuer le trajet entre les deux cases (nécessaire afin de tester la traversabilit� des cases).</li>
  * 		<li> Une fonction successeur, qui définit les actions possibles à partir d'un état donn�. Dans le cas prèsent, il s'agit de 
  * 			 restreindre les déplacement possibles en consid�rant des facteurs supplémentaires par rapport à la simple traversabilit� courrante.</li>
- * 		<li> Une fonction de co�t, qui permet de définir combien co�te une action (ici : le fait de passer d'une case à l'autre).</li>
- * 		<li> Une fonction heuristique, qui permet d'estimer le co�t du chemin restant à parcourir.</li></ul>
+ * 		<li> Une fonction de coût, qui permet de définir combien coûte une action (ici : le fait de passer d'une case à l'autre).</li>
+ * 		<li> Une fonction heuristique, qui permet d'estimer le coût du chemin restant à parcourir.</li></ul>
  * 
  * A noter qu'il s'agit d'une impl�mentation non-déterministe de l'algorithme.
  * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
@@ -74,7 +74,7 @@ public final class Astar
 	 * @param hero
 	 * 		le personnage à consid�rer pour les déplacements
 	 * @param costCalculator
-	 * 		la fonction de co�t
+	 * 		la fonction de coût
 	 * @param heuristicCalculator
 	 * 		la fonction heuristique
 	 */
@@ -90,7 +90,7 @@ public final class Astar
 	 * @param hero
 	 * 		le personnage à consid�rer pour les déplacements
 	 * @param costCalculator
-	 * 		la fonction de co�t
+	 * 		la fonction de coût
 	 * @param heuristicCalculator
 	 * 		la fonction heuristique
 	 * @param successorCalculator
@@ -115,7 +115,7 @@ public final class Astar
 	private SuccessorCalculator successorCalculator = null;
 	/** racine de l'arbre de recherche */
 	private AstarNode root = null;
-	/** personnage de r�f�rence */
+	/** personnage de référence */
 	private AiHero hero = null;
 	/** l'ai qui a r�alis� l'appel */
 	private ArtificialIntelligence ai = null;
@@ -125,7 +125,7 @@ public final class Astar
 	/////////////////////////////////////////////////////////////////
 	/** limite de hauteur (n�gatif = pas de limite) */
 	private int maxHeight = -1;
-	/** limite de co�t (n�gatif = pas de limite) */
+	/** limite de coût (n�gatif = pas de limite) */
 	private double maxCost = -1;
 	/** limite de nombre de noeuds (n�gatif = pas de limite), pas configurable */
 	private int maxNodes = 10000;
@@ -137,7 +137,7 @@ public final class Astar
 	 * Dans des cas extr�mes, l'arbre peut avoir une hauteur consid�rable,
 	 * ce qui peut provoquer un d�passement m�moire. Ce paramètre permet d'�viter
 	 * de d�clencher ce type d'exception. A noter qu'un paramètre non-configurable
-	 * limite d�j� le nombre de noeuds dans l'arbre.
+	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxHeight
 	 */
@@ -152,7 +152,7 @@ public final class Astar
 	 * Dans des cas extr�mes, l'arbre peut avoir une hauteur consid�rable,
 	 * ce qui peut provoquer un d�passement m�moire. Ce paramètre permet d'�viter
 	 * de d�clencher ce type d'exception. A noter qu'un paramètre non-configurable
-	 * limite d�j� le nombre de noeuds dans l'arbre.
+	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxCost	
 	 * 		le cout maximal que le noeud courant peut atteindre
@@ -326,7 +326,7 @@ public final class Astar
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cet objet quand il n'est plus utilis�
+	 * termine proprement cet objet quand il n'est plus utilisé
 	 */
 	private void finish()
 	{	if(root!=null)

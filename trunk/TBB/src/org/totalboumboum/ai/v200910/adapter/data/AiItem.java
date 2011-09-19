@@ -163,11 +163,11 @@ public class AiItem extends AiSprite<Item>
 	public boolean isCrossableBy(AiSprite<?> sprite)
 	{	// par défaut, on bloque
 		boolean result = false;
-		// si le sprite consid�r� est un personnage
+		// si le sprite considéré est un personnage
 		if(sprite instanceof AiHero)
 		{	result = true;
 		}
-		// si le sprite consid�r� est un feu
+		// si le sprite considéré est un feu
 		else if(sprite instanceof AiFire)
 		{	AiFire fire = (AiFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)
@@ -177,7 +177,7 @@ public class AiItem extends AiSprite<Item>
 			else if(stopFires==AiStopType.STRONG_STOP)
 				result = false;
 		}
-		// si le sprite consid�r� est une bombe
+		// si le sprite considéré est une bombe
 		else if(sprite instanceof AiBomb)
 		{	AiBomb bomb = (AiBomb) sprite;
 			if(stopBombs==AiStopType.NO_STOP)

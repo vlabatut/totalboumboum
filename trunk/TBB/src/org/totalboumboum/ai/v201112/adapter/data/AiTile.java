@@ -97,14 +97,14 @@ public abstract class AiTile
 	/////////////////////////////////////////////////////////////////
 	// TILE SIZE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** longueur d'un c�t� de la case en pixels */
+	/** longueur d'un cété de la case en pixels */
 	protected double size;
 		
 	/** 
 	 * renvoie la taille de la case en pixels
 	 * 
 	 * @return	
-	 * 		longueur d'un c�t� de la case en pixels
+	 * 		longueur d'un cété de la case en pixels
 	 */
 	public double getSize()
 	{	return size;	
@@ -175,7 +175,7 @@ public abstract class AiTile
 	 * cette case. Sinon, cela signifie qu'elle contient au moins un
 	 * obstacle que le personnage ne peut pas traverser. 
 	 * Tous les sprites ne sont pas sensibles aux mêmes obstacles,
-	 * cela d�pend à la fois du type des sprites consid�r�s (Hero,
+	 * cela d�pend à la fois du type des sprites considérés (Hero,
 	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer à travers
 	 * les murs, passer à travers les bombes, etc). Le feu peut constituer
 	 * un obstacle, notamment pour les sprite de type Hero.</br>
