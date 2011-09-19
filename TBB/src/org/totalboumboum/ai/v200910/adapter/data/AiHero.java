@@ -192,7 +192,7 @@ public class AiHero extends AiSprite<Hero>
 	private boolean throughBlocks;
 	/** indique si le personnage peut traverser les bombes */
 	private boolean throughBombs;
-	/** indique si le personnage peut traverser le feu (sans br�ler) */
+	/** indique si le personnage peut traverser le feu (sans brûler) */
 	private boolean throughFires;
 	
 	/**
@@ -217,7 +217,7 @@ public class AiHero extends AiSprite<Hero>
 
 	/**
 	 * teste si ce personnage est capable de passer
-	 * à travers le feu sans br�ler
+	 * à travers le feu sans brûler
 	 * 
 	 * @return	vrai si le personnage r�siste au feu
 	 */

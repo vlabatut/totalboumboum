@@ -40,36 +40,36 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Cette classe est chargée de simuler l'�volution d'une zone.
- * Pour cela, une modèle doit d'abord être initialis� avec une zone de départ,
+ * Cette classe est chargée de simuler l'évolution d'une zone.
+ * Pour cela, une modèle doit d'abord être initialisé avec une zone de départ,
  * obtenue simplement à partir des percepts de l'agent.<br/>
- * Pour prèserver la coh�rence de la zone, l'utilisateur ne peut 
+ * Pour prèserver la cohérence de la zone, l'utilisateur ne peut 
  * pas la modifier directement, mais seulement à travers les 
- * méthodes propos�es dans cette classe. Il peut :<ul>
- * 		<li> r�aliser un ou plusieurs pas de simulation et obtenir la zone r�sultante.</li>
+ * méthodes proposées dans cette classe. Il peut :<ul>
+ * 		<li> réaliser un ou plusieurs pas de simulation et obtenir la zone résultante.</li>
  * 		<li> demander à un des joueurs de poser une bombe</li>
- * 		<li> modifier la direction de déplacement d'un joueur, ou arr�ter son déplacement</li>
+ * 		<li> modifier la direction de déplacement d'un joueur, ou arrêter son déplacement</li>
  * 		<li> demander à une bombe d'exploser</li></ul>
- * Au cours de la simulation, une nouvelle zone est calculée et stock�e
+ * Au cours de la simulation, une nouvelle zone est calculée et stockée
  * en interne : l'utilisateur peut alors y accéder et l'utiliser. Si
  * de nouveaux pas de simulation sont effectués, cette zone interne est 
- * remplacée par le r�sultats de ces simulations.<br/>
- * L'utilisateur peut �galement r�cup�rer le temps �coul� entre deux simulations.<br/>
- * Il faut souligner que les pas de simulation sont détermin�s de fa�on �v�nementielle.
- * En d'autres termes, un pas se termine quand un �v�nement se produit. Les 
- * �v�nements considérés par cette classe sont :<ul>
+ * remplacée par le résultats de ces simulations.<br/>
+ * L'utilisateur peut également récupérer le temps écoulé entre deux simulations.<br/>
+ * Il faut souligner que les pas de simulation sont déterminés de façon évènementielle.
+ * En d'autres termes, un pas se termine quand un évènement se produit. Les 
+ * évènements considérés par cette classe sont :<ul>
  * 		<li> la disparition ou l'apparition d'un sprite (ex : une bombe qui a explosé, un item qui apparait)
- * 		<li> un changement d'état (ex : un mur qui commence à br�ler)
- * 		<li> un changement de case (ex : un joueur se d�pla�ant d'une case à une autre)
- * 		<li> la fin d'un déplacement (ex : un joueur qui se retrouve bloqu� par un mur)</ul>
- * D�s qu'un de ces �v�nements se produit, le pas de simulation se termine.
- * Le modèle donne acc�s à la liste des sprites qui ont été impliqu�s dans un des �v�nements
+ * 		<li> un changement d'état (ex : un mur qui commence à brûler)
+ * 		<li> un changement de case (ex : un joueur se déplaçant d'une case à une autre)
+ * 		<li> la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)</ul>
+ * Dès qu'un de ces évènements se produit, le pas de simulation se termine.
+ * Le modèle donne accès à la liste des sprites qui ont été impliqués dans un des évènements
  * causant la fin du pas de simulation.<br/>
- * Vous pouvez observer une illustration du fonctionnement de ce modèle en ex�cutant
+ * Vous pouvez observer une illustration du fonctionnement de ce modèle en exécutant
  * la classe AiModelTest. Notez toute fois que cette classe de test crée la zone
  * en partant de rien, alors que les agents disposent de leurs percepts.
  * Pour cette raison, elle utilise pour initialiser la zone des méthodes 
- * auxquelles les agents n'ont pas acc�s.
+ * auxquelles les agents n'ont pas accès.
  * 
  * @author Vincent Labatut
  *
@@ -158,11 +158,11 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	// DURATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** dur�e �coul�e entre les zones previous et current */ 
+	/** dur�e écoulée entre les zones previous et current */ 
 	private long duration;
 	
 	/**
-	 * renvoie la dur�e �coul�e entre les zones previous et current
+	 * renvoie la dur�e écoulée entre les zones previous et current
 	 * 
 	 * @return	
 	 * 		un entier long représentant une dur�e
@@ -181,7 +181,7 @@ public class AiModel
 	 * l'état estim� de la zone quand le personnage que l'on controle passera
 	 * dans la case suivante.
 	 * <b>Attention:</b> le changement d'état peut aussi être d� au fait que le 
-	 * personnage a commencé à br�ler.
+	 * personnage a commencé à brûler.
 	 * 
 	 * @param hero
 	 * 		le personnage sur lequel porte la condition
@@ -271,19 +271,19 @@ public class AiModel
 	/**
 	 * calcule l'état suivant de la zone si les états spécifiés en paramètres
 	 * sont appliqu�s à la zone courante. en l'absence d'état spécifié, le sprite
-	 * continue à faire ce qu'il faisait déjà (br�ler, se d�placer, etc.).
+	 * continue à faire ce qu'il faisait déjà (brûler, se d�placer, etc.).
 	 * par cons�quent, la map contenant les états spécifiés peut être vide. 
-	 * La méthode renvoie l'état obtenu à la fin du prochain �v�nement 
-	 * (i.e. celui qui se termine le plus vite). Les �v�nement considérés sont :
+	 * La méthode renvoie l'état obtenu à la fin du prochain évènement 
+	 * (i.e. celui qui se termine le plus vite). Les évènement considérés sont :
 	 * 		- la disparition d'un sprite (ex : une bombe qui a explosé)
 	 * 		- l'apparition d'un sprite (ex : un item qui apparait à la suite de l'explosion d'un mur)
-	 * 		- un changement d'état (ex : un mur qui commence à br�ler)
+	 * 		- un changement d'état (ex : un mur qui commence à brûler)
 	 * 		- un changement de case (ex : un joueur passant d'une case à une autre)
-	 * 		- la fin d'un déplacement (ex : un joueur qui se retrouve bloqu� par un mur)
-	 * Les modifications sont appliqu�es aux zones internes. l'utilisateur peut r�cup�rer
-	 * la nouvelle zone mise à jour avec getCurrentZone. Il peut �galement r�cup�rer la liste
+	 * 		- la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)
+	 * Les modifications sont appliqu�es aux zones internes. l'utilisateur peut récupérer
+	 * la nouvelle zone mise à jour avec getCurrentZone. Il peut également récupérer la liste
 	 * de sprites qui ont provoqu� la fin de la mise à jour à la suite d'une action, avec getLimitSprites.
-	 * Il peut aussi r�cup�rer la dur�e qui s'est �coul�e (en temps simul�) depuis la dernière simulation, 
+	 * Il peut aussi récupérer la dur�e qui s'est écoulée (en temps simul�) depuis la dernière simulation, 
 	 * avec getDuration.
 	 * 
 	 * @param specifiedStates	
@@ -952,7 +952,7 @@ if(sprite instanceof AiSimBomb)
 	 * br�le une case et son contenu, à la suite d'une explosion
 	 * 
 	 * @param tile
-	 * 		la case à br�ler
+	 * 		la case à brûler
 	 * @param detonatingBomb
 	 * 		la bombe qui a propovoqu� l'explosion
 	 */

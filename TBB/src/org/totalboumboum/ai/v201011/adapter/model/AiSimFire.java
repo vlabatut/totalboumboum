@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 
 /**
- * simule un feu du jeu, ie une projection mortelle r�sultant (généralement) 
+ * simule un feu du jeu, ie une projection mortelle résultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
@@ -135,7 +135,7 @@ final class AiSimFire extends AiSimSprite implements AiFire
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps �coul� depuis que le feu existe, exprimé en ms */
+	/** temps écoulé depuis que le feu existe, exprimé en ms */
 	private long time = 0;
 	
 	@Override
@@ -144,10 +144,10 @@ final class AiSimFire extends AiSimSprite implements AiFire
 	}
 
 	/**
-	 * modifie le temps �coul�
+	 * modifie le temps écoulé
 	 * 
 	 * @param time
-	 * 		temps �coul�
+	 * 		temps écoulé
 	 */
 	protected void setTime(long time)
 	{	this.time = time;

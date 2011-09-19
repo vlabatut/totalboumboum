@@ -26,7 +26,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * Classe représentant une action qu'un joueur peut effectuer.
  * Elle est utilisée pour indiquer au jeu quelle est la prochaine
- * action que l'IA veut r�aliser.
+ * action que l'IA veut réaliser.
  * <p>
  * L'action est décrite par un nom et éventuellement une direction.
  * L'action et la direction sont toutes les deux constantes, respectivement
