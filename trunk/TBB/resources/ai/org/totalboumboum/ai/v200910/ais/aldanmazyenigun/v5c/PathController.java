@@ -15,8 +15,8 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * classe chargée d'impl�menter un déplacement, 
- * en respectant un chemin donn�
+ * classe chargée d'implémenter un déplacement, 
+ * en respectant un chemin donné
  * 
  * @version 5.c
  * 
@@ -67,7 +67,7 @@ public class PathController
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'IA concern�e par ce gestionnaire de chemin */
+	/** l'IA concernée par ce gestionnaire de chemin */
 	private AldanmazYenigun ai;
 	/** zone de jeu */
 	private AiZone zone;
@@ -75,9 +75,9 @@ public class PathController
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si le personnage est arriv� à destination */
+	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination s�lectionn�e */
+	/** la case de destination sélectionn�e */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
@@ -117,13 +117,13 @@ public class PathController
 
 	
 	/**
-	 * détermine si le personnage est arriv� aux coordonnées de destination
+	 * détermine si le personnage est arrivé aux coordonnées de destination
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 //		if(!arrived)
-		{	// on teste si le personnage est à peu près situ� à la position de destination 
+		{	// on teste si le personnage est à peu près situé à la position de destination 
 			AiHero ownHero = ai.getOwnHero();
 			double xCurrent = ownHero.getPosX();
 			double yCurrent = ownHero.getPosY();
@@ -142,13 +142,13 @@ public class PathController
 	/////////////////////////////////////////////////////////////////
 	// PREVIOUS LOCATION	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse pr�c�dente */
+	/** abscisse précédente */
 	private double xPrev;
-	/** ordonnée pr�c�dente */
+	/** ordonnée précédente */
 	private double yPrev;	
 	
 	/**
-	 * met à jour la position pr�c�dente du personnage,
+	 * met à jour la position précédente du personnage,
 	 * exprimée en pixels
 	 */
 	private void updatePrev() throws StopRequestException
@@ -169,7 +169,7 @@ public class PathController
 	 * vérifie que le personnage est bien sur le chemin pr�-calculé,
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
-	 * est vide apr�s l'exécution de cette méthode.
+	 * est vide après l'exécution de cette méthode.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -188,7 +188,7 @@ public class PathController
 	
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
-	 * est toujours s�r et si aucun obstacle n'est apparu
+	 * est toujours sûr et si aucun obstacle n'est apparu
 	 * depuis la dernière itération
 	 */
 	private boolean checkPathValidity() throws StopRequestException
@@ -248,7 +248,7 @@ public class PathController
 			}
 		}
 		
-		// mise à jour de la position pr�c�dente
+		// mise à jour de la position précédente
 		updatePrev();
 		// mise à jour de la sortie
 		//updateOutput();

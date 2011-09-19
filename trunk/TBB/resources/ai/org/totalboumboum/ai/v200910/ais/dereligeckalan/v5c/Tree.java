@@ -85,7 +85,7 @@ public class Tree {
 	}
 
 	/**
-	 * Renvoie le lien liant le noeud passé en paramètre à son p�re.
+	 * Renvoie le lien liant le noeud passé en paramètre à son père.
 	 * 
 	 * @param node
 	 *            le noeud à traiter

@@ -161,7 +161,7 @@ public class AksoyTangay extends ArtificialIntelligence
 			else if(attackManager.finishedOnePartOfPath())
 			{
 				result = new AiAction(AiActionName.DROP_BOMB);
-				//System.out.println("bombal�oz");
+				//System.out.println("bombaloz");
 				if(attackManager.finishedPath())
 					attackManager = null;
 								
@@ -206,7 +206,7 @@ public class AksoyTangay extends ArtificialIntelligence
 							keyBomb = true;
 							if(bonusManager.finishedPath())
 							{
-							//system.out.println("��!!");
+							//system.out.println("!!");
 								result = new AiAction(AiActionName.DROP_BOMB);
 								//keyBomb = false;
 							}

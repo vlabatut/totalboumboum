@@ -55,7 +55,7 @@ public class DangerManager {
 
 		processedBombs.clear();
 		
-		// on initialise la matrice : toutes les cases sont s�res
+		// on initialise la matrice : toutes les cases sont sûres
 		for(int line=0;line<zone.getHeight();line++)
 		{	hero.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
@@ -85,7 +85,7 @@ public class DangerManager {
 						if(block.getState().getName()==AiStateName.BURNING)
 							matrix[line][col] = FIRE;
 					}
-					// s'il y a une bombe : pour sa port�e, la valeur correspond au temps th�orique restant avant son explosion
+					// s'il y a une bombe : pour sa portée, la valeur correspond au temps théorique restant avant son explosion
 					// (plus ce temps est court et plus la bombe est dangereuse)
 					else if(bombs.size()>0)
 					{	AiBomb bomb = bombs.iterator().next();
@@ -102,7 +102,7 @@ public class DangerManager {
 		if(!bombs.contains(bomb))
 		{	bombs.add(bomb);
 		
-			// on r�cup�re le souffle
+			// on récupére le souffle
 			List<AiTile> tempBlast = bomb.getBlast();
 			blast.addAll(tempBlast);
 			
@@ -124,7 +124,7 @@ public class DangerManager {
 	{	hero.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		if(!processedBombs.contains(bomb))
-		{	// r�cup�ration des cases à port�e
+		{	// récupération des cases à portée
 			List<AiTile> blast = new ArrayList<AiTile>();
 			List<AiBomb> bombs = new ArrayList<AiBomb>();
 			getBlast(bomb,blast,bombs);
@@ -134,14 +134,14 @@ public class DangerManager {
 			double value = SAFE;
 			for(AiBomb b: bombs)
 			{	hero.checkInterruption(); //APPEL OBLIGATOIRE
-				// calcul du temps restant th�oriquement avant l'explosion
+				// calcul du temps restant théoriquement avant l'explosion
 				double time = b.getNormalDuration() - b.getTime();
-				// m�j de value
+				// màj de value
 				if(time<value)
 					value = time;
 			}
 			
-			// on met à jour toutes les cases situ�es à port�e
+			// on met à jour toutes les cases situées à portée
 			for(AiTile t: blast)
 			{	hero.checkInterruption(); //APPEL OBLIGATOIRE
 				int l = t.getLine();

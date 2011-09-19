@@ -48,7 +48,7 @@ public class EscapeManager
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// calcul de la matrice de coût : on prend l'oppos� du niveau de s�ret�
+		// calcul de la matrice de coût : on prend l'opposé du niveau de sûret�
 		// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
 		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
 		for(int line=0;line<zone.getHeight();line++)
@@ -125,7 +125,7 @@ public class EscapeManager
 		updateCostCalculator();
 		Direction result = Direction.NONE;
 		if(!hasArrived())
-		{	// on verifie si on est arriv�
+		{	// on verifie si on est arrivé
 			checkIsOnPath();
 			// si le chemin n'est pas vide si il est valide on reprend
 			if(path.isEmpty() || !checkPathValidity())

@@ -67,7 +67,7 @@ public class PathFinder {
 	
 	
 	/**
-	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de A �toile.
+	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de A étoile.
 	 *(cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
 	 * @param x
 	 *           le coordonné de x de l'ia.
@@ -150,7 +150,7 @@ public class PathFinder {
 			
 		}// fin de while
 
-		if(solution!=null)//si on a trouv� la solution sans finir tous les elements de la frange.
+		if(solution!=null)//si on a trouvé la solution sans finir tous les elements de la frange.
 			path=tree.getPath(solution);
 
 		frange=null;//on vide la frange.

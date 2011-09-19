@@ -71,7 +71,7 @@ public class BonusManager {
 			//system.out.println("getDirection.escman" + result.name());
 		}
 		
-		////destructible olup olmamaya bakýp ya bonusu direk al ya da bomba koyup al!!! bu direction da yapýlýrmý???
+		////destructible olup olmamaya bakp ya bonusu direk al ya da bomba koyup al!!! bu direction da yaplrm???
 		
 		return result;
 		

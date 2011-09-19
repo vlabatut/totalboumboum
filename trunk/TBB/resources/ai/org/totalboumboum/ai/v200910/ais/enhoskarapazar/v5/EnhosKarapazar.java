@@ -35,14 +35,14 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	private AiHero ownHero = null;
 	/** la zone de jeu */
 	private AiZone zone = null;
-	/** la case occup�e actuellement par le personnage */
+	/** la case occupée actuellement par le personnage */
 	private AiTile currentTile = null;
 	/**
 	 * renvoie la case courante
 	 */
-	/** la position en pixels occup�e actuellement par le personnage */
+	/** la position en pixels occupée actuellement par le personnage */
 	private int currentX;
-	/** la position en pixels occup�e actuellement par le personnage */
+	/** la position en pixels occupée actuellement par le personnage */
 	private int currentY;
 
 	public AiTile getCurrentTile() throws StopRequestException {

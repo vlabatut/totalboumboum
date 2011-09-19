@@ -471,7 +471,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		List<AiTile> l = dangerZone.findBonusTiles();
 	//	System.out.println("bonuslar:"+l);
 		List<AiTile> li = sirala(l);
-	//	System.out.println("bonuslar�n s�ral�s�:"+li);
+	//	System.out.println("bonuslar�n sûral�s�:"+li);
 		Iterator<AiTile> it =li.iterator();
 		//System.out.println("it yarat�ld�");
 		if (it.hasNext())
@@ -547,7 +547,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		List<AiTile> dst= dangerZone.findTilesForDestruct(b);
 	//	System.out.println("gidilesi olanlar:"+dst);
 		List<AiTile> dest=sirala(dst);
-	//	System.out.println("gidilesi s�rali"+dest);
+	//	System.out.println("gidilesi sûrali"+dest);
 		AiTile tile = null;
 		AiTile kare=null;
 		Iterator<AiTile> it =dest.iterator();

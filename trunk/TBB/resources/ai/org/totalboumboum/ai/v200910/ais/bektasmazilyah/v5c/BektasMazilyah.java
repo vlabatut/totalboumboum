@@ -33,7 +33,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/** le personnage dirig� par cette IA*/
 	private AiHero hero;
 	
-	/** la case occup�e actuellement par le personnage */
+	/** la case occupée actuellement par le personnage */
 	private AiTile currentTile;
 	
 	/** la case prochaine sur path*/
@@ -125,7 +125,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 							{
 								moveDir=zone.getDirection(currentTile, nextTile);
 								dropBomb=canDrop();
-								//si on est arriv� a targetTile et si on peut deposer des bombes, on depose des bombes pour detruir des murs 
+								//si on est arrivé a targetTile et si on peut deposer des bombes, on depose des bombes pour detruir des murs 
 								if(targetTile==currentTile && dropBomb){
 									dropBomb=false;
 									result = new AiAction(AiActionName.DROP_BOMB);

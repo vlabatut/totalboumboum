@@ -66,7 +66,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	private AiHero targetHero = null;
 
-	/** classe chargée de déterminer quelles cases sont s�res */
+	/** classe chargée de déterminer quelles cases sont sûres */
 	private SafetyZone safetyZone = null;
 
 	private boolean thereIsSafeTile = true;
@@ -617,7 +617,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	}
 
 	/**
-	 * choisit al�atoirement un joueur comme cible à suivre
+	 * choisit aléatoirement un joueur comme cible à suivre
 	 * 
 	 * @throws StopRequestException
 	 */

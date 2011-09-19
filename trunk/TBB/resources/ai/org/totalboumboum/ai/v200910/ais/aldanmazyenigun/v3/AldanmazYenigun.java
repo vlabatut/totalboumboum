@@ -61,7 +61,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	
     //private AiTile targetPreviousTile;
 		
-	/** classe chargée de déterminer quelles cases sont s�res */
+	/** classe chargée de déterminer quelles cases sont sûres */
 	private ZoneFormee zoneFormee = null;
 	
 	private boolean thereIsSafeTile = true;

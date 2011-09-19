@@ -111,7 +111,7 @@ public class AttackManager {
 		this.pathManager = pathManager;
 		
 		heroToAttack = getHeroToAttackFonx();
-		System.out.println("saldýrýcak adam : "+heroToAttack.toString());
+		System.out.println("saldrcak adam : "+heroToAttack.toString());
 	}
 	
 	public AttackManager(AksoyTangay myAI, AiZone percepts, Zone zone, PathManager pathManager, AttackType attackType, AiTile nat) throws StopRequestException
@@ -220,8 +220,8 @@ public class AttackManager {
 		System.out.println("direction attack : "+result.toString());
 		//si on ne peut pas atteindre a un hero sans exploser de murs
 		
-		//null olup olmadýðýna bakcaz sonra
-		///bonus mantýðý patlatmazsa biz patlatýrýz mur leri
+		//null olup olmadna bakcaz sonra
+		///bonus mant patlatmazsa biz patlatrz mur leri
 				
 		///retourne la direction
 		
@@ -683,8 +683,8 @@ public class AttackManager {
 		
 		AttackType attackType = AttackType.NORMAL;
 		normalAttackTile = getHeroToAttackFonx().getTile();
-		//eðer mur den adama gidemiosak bi hesap yapalým
-		//bi de adam ortalardaysa bi saldýrý düzenleyelim...
+		//eer mur den adama gidemiosak bi hesap yapalm
+		//bi de adam ortalardaysa bi saldr dzenleyelim...
 		
 		return attackType;
 	}
@@ -1038,8 +1038,8 @@ AttackType attackType = AttackType.NONE;
 		//si le ennemi est dans un coin du jeu
 			if(attackType == AttackType.NONE)
 			{ 
-			//allttaki if e qualif 2 den geçecek þekilde oyun alaný skim kadarsa o köþede deðildir gibi baþka koþul konabilir
-			//her iki yaný destructible olacak!! süre kat -- 7 tile geçme filan gibi cond kat , kendimiz ölmeyelim
+			//allttaki if e qualif 2 den geecek ekilde oyun alan skim kadarsa o kede deildir gibi baka koul konabilir
+			//her iki yan destructible olacak!! sÃ»re kat -- 7 tile geme filan gibi cond kat , kendimiz lmeyelim
 				if(((Math.abs(heroToAttack.getTile().getCol()-myAI.getOwnHeroTile().getCol()) < myAI.getOwnHero().getBombRange()) ||
 						(Math.abs(heroToAttack.getTile().getLine()-myAI.getOwnHeroTile().getLine()) < myAI.getOwnHero().getBombRange())) &&
 						((Math.abs(heroToAttack.getTile().getCol()-myAI.getOwnHeroTile().getCol()) <= percepts.getWidth()/3) ||

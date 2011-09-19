@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 public class CalisirGuner extends ArtificialIntelligence {
 	private AiZone zone;
-	/** la case occup�e actuellement par le personnage */
+	/** la case occupée actuellement par le personnage */
 	private AiTile caseactuelle;
 	/** la case sur laquelle on veut aller */
 	private AiTile pasprochain = null;

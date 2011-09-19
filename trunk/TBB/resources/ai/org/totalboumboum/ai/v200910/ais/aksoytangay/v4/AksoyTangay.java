@@ -150,7 +150,7 @@ public class AksoyTangay extends ArtificialIntelligence
 					keyBomb = true;
 					if(bonusManager.finishedPath())
 					{
-						//system.out.println("��!!");
+						//system.out.println("!!");
 						result = new AiAction(AiActionName.DROP_BOMB);
 						//keyBomb = false;
 					}
