@@ -49,7 +49,7 @@ import japa.parser.ast.type.Type;
 import japa.parser.ast.visitor.VoidVisitorAdapter;
 
 /**
- * cette méthode parse les codes sources d�finissant une IA et v�rifie
+ * cette méthode parse les codes sources définissant une IA et v�rifie
  * que les appels à checkInterruption sont effectués correctement, c'est à dire :
  * 	- un appel à chaque d�but de boucle (for, while, do)
  * 	- un appel à chaque d�but de méthode, sauf :
@@ -57,7 +57,7 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
  * 			- en cas d'appel à super() : checkInterruption() est appel� en deuxième (et non pas en premier)
  * 			- dans une classe implémentant l'interface ArtificialIntelligence
  * 		- dans une méthode dont on ne contr�le pas l'interface (du type toString, equals, compare, etc.)
- * 	- l'appel ne doit pas �tre plac� dans un try-catch qui annulerait son effet
+ * 	- l'appel ne doit pas être plac� dans un try-catch qui annulerait son effet
  * 
  * @author Vincent Labatut
  */
@@ -336,8 +336,8 @@ if(currentMethod.equals("PathFinder"))
 						}
 					}
 					else if(firstStatement instanceof ExplicitConstructorInvocationStmt)
-					{	// c'est un appel à super/this, donc �a doit forc�ment �tre au d�but
-						// mais la deuxième instruction doit �tre un appel à checkInterruption()
+					{	// c'est un appel à super/this, donc ça doit forcément être au d�but
+						// mais la deuxième instruction doit être un appel à checkInterruption()
 						if(statements.size()<2)
 						{	// erreur
 							for(int i=0;i<indentLevel;i++)

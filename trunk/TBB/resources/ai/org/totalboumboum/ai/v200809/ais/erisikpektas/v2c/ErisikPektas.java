@@ -25,7 +25,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 public class ErisikPektas extends ArtificialIntelligence {
 	private Map map;
-	/** la case occupée actuellement par le personnage */
+	/** la case occupï¿½e actuellement par le personnage */
 	private AiTile caseactuelle;
 	/** la case sur laquelle on veut aller */
 	private AiTile caseprochaine = null;
@@ -477,7 +477,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NOS FONCTIONS POUR ACCEDER AU BONUS ET LES COLLECTER
-	// OU POUR ACCEDER AUX ADVERSAÝRES//
+	// OU POUR ACCEDER AUX ADVERSAï¿½RES//
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -710,7 +710,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 			checkInterruption();
 			for (int j = 0; j < map.height; j++) {
 				checkInterruption();
-				// i j hata veriyo eger destination ayný bulundugu yerse
+				// i j hata veriyo eger destination aynï¿½ bulundugu yerse
 				if ((tous.getTile(j, i).getItem() != null || (map
 						.returnMatrix()[i][j] == etat.ADVERSAIRE
 						&& tous.getHeroes().size() == 2 && tous.getItems()
@@ -824,7 +824,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * cest une fonc quþi collecte les temps passe des la creation des bombes et
+	 * cest une fonc quï¿½i collecte les temps passe des la creation des bombes et
 	 * des flmmes feus
 	 */
 
@@ -1259,7 +1259,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 							// getdangereuse() qui sert a nous informer sur le
 							// temps ecoule
 							// des la mise de bombe qui influence la case donne
-							// mais en generale ça marche pas bien car les
+							// mais en generale Ã§a marche pas bien car les
 							// flammes ne
 							// sont pas encore cree a -ce emps-la donc jai mis
 							// des nombres moi-meme

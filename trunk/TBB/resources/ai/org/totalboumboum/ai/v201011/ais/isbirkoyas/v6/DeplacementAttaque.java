@@ -86,7 +86,7 @@ public class DeplacementAttaque {
 					detruire = false;
 					attaque = true;
 				}
-			// si on ne peut pas aller a cette case, �a veut dire on est bloque
+			// si on ne peut pas aller a cette case, ça veut dire on est bloque
 			// Donc il faut detruire les murs
 			// Detruire
 			if (ai.nextMove == null && ai.senfuire == false && !blockage) {

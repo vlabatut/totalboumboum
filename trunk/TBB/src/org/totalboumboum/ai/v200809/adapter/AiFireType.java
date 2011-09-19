@@ -38,10 +38,10 @@ public enum AiFireType
 	OTHER;	
 	
 	/**
-	 * calcule l'AiFireType correspondant au nom de feu pass� en param�tre
+	 * calcule l'AiFireType correspondant au nom de feu passé en paramètre
 	 * 
 	 * @param name	nom du feu à traiter
-	 * @return	symbole repr�sentant ce type de feu
+	 * @return	symbole représentant ce type de feu
 	 */
 	public static AiFireType makeFireType(String name)
 	{	AiFireType result;

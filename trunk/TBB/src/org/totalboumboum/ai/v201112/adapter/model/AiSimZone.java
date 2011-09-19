@@ -44,8 +44,8 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * simule la zone de jeu et tous ces constituants : cases et sprites.
  * Il s'agit de la classe principale pour la simulation de l'�volution du jeu.</br>
  * 
- * L'ensemble des objets repr�sente un état du jeu et ne peut 
- * �tre modifi� que via la classe AiModel.
+ * L'ensemble des objets représente un état du jeu et ne peut 
+ * être modifié que via la classe AiModel.
  * 
  * @author Vincent Labatut
  *
@@ -53,14 +53,14 @@ import org.totalboumboum.tools.images.PredefinedColor;
 final class AiSimZone extends AiZone
 {	
 	/**
-	 * contruit une zone qui est une copie de celle pass�e en param�tre.
-	 * si la param�tre fullCopy est faux, les sprites ne sont pas copi�s,
+	 * contruit une zone qui est une copie de celle passée en paramètre.
+	 * si la paramètre fullCopy est faux, les sprites ne sont pas copi�s,
 	 * sinon tout est copi�.
 	 * 
 	 * @param zone
 	 * 		la zone de r�f�rence
 	 * @param fullCopy
-	 * 		indique si les sprites doivent aussi �tre copi�s ou pas
+	 * 		indique si les sprites doivent aussi être copi�s ou pas
 	 * @return	
 	 * 		une nouvelle zone vide de mêmes dimensions
 	 */
@@ -171,7 +171,7 @@ final class AiSimZone extends AiZone
 	}
 
 	/**
-	 * crée une zone vide des dimensions sp�cifi�es.
+	 * crée une zone vide des dimensions spécifiées.
 	 * <b>Note :</b> constructeur utilisé seulement pour tester AiModel.
 	 * 
 	 * @param height
@@ -208,7 +208,7 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice repr�sentant la zone et tous les sprites qu'elle contient */
+	/** matrice représentant la zone et tous les sprites qu'elle contient */
 	private AiSimTile[][] matrix;
 	
 	@Override
@@ -217,8 +217,8 @@ final class AiSimZone extends AiZone
 	}
 	
 	/** 
-	 * renvoie la case voisine de la case pass�e en param�tre,
-	 * dans la direction sp�cifi�e (en consid�rant le fait que le niveau
+	 * renvoie la case voisine de la case passée en paramètre,
+	 * dans la direction spécifiée (en consid�rant le fait que le niveau
 	 * est ferm�.
 	 *  
 	 *  @param line
@@ -337,7 +337,7 @@ final class AiSimZone extends AiZone
 	 * supprime un sprite de la zone et de la case correspondante.
 	 * s'il s'agit d'un joueur, il est supprim� seulement de la case
 	 * et de la liste des joueurs encore en jeu (mais la zone continue
-	 * à le r�f�rencer dans la liste g�n�rale des joueurs, car le sprite
+	 * à le r�f�rencer dans la liste générale des joueurs, car le sprite
 	 * peut encore etre utile, par exemple pour obtenir le classement
 	 * de ce joueur)
 	 * 
@@ -384,15 +384,15 @@ final class AiSimZone extends AiZone
 	
 	/**
 	 * renvoie la simulation de sprite de même num�ro (id)
-	 * que celui pass� en param�tre. Cette méthode permet
-	 * de suivre le même sprite à travers diff�rents états
-	 * de la simulation, dans lesquels il est repr�sent�
-	 * par des objets diff�rents.
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représent�
+	 * par des objets différents.
 	 * 
 	 * @param sprite
 	 * 		le sprite cibl�
 	 * @return	
-	 * 		sa repr�sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimSprite getSpriteById(AiSprite sprite)
 	{	AiSimSprite result = null;
@@ -460,15 +460,15 @@ final class AiSimZone extends AiZone
 	
 	/**
 	 * renvoie la simulation de sprite de même num�ro (id)
-	 * que celui pass� en param�tre. Cette méthode permet
-	 * de suivre le même sprite à travers diff�rents états
-	 * de la simulation, dans lesquels il est repr�sent�
-	 * par des objets diff�rents.
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représent�
+	 * par des objets différents.
 	 * 
 	 * @param sprite
 	 * 		le sprite cibl�
 	 * @return	
-	 * 		sa repr�sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimBlock getSpriteById(AiBlock sprite)
 	{	AiSimBlock result = null;
@@ -507,15 +507,15 @@ final class AiSimZone extends AiZone
 	
 	/**
 	 * renvoie la simulation de sprite de même num�ro (id)
-	 * que celui pass� en param�tre. Cette méthode permet
-	 * de suivre le même sprite à travers diff�rents états
-	 * de la simulation, dans lesquels il est repr�sent�
-	 * par des objets diff�rents.
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représent�
+	 * par des objets différents.
 	 * 
 	 * @param sprite
 	 * 		le sprite cibl�
 	 * @return	
-	 * 		sa repr�sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimBomb getSpriteById(AiBomb sprite)
 	{	AiSimBomb result = null;
@@ -566,15 +566,15 @@ final class AiSimZone extends AiZone
 		
 	/**
 	 * renvoie la simulation de sprite de même num�ro (id)
-	 * que celui pass� en param�tre. Cette méthode permet
-	 * de suivre le même sprite à travers diff�rents états
-	 * de la simulation, dans lesquels il est repr�sent�
-	 * par des objets diff�rents.
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représent�
+	 * par des objets différents.
 	 * 
 	 * @param sprite
 	 * 		le sprite cibl�
 	 * @return	
-	 * 		sa repr�sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimFire getSpriteById(AiFire sprite)
 	{	AiSimFire result = null;
@@ -613,15 +613,15 @@ final class AiSimZone extends AiZone
 	
 	/**
 	 * renvoie la simulation de sprite de même num�ro (id)
-	 * que celui pass� en param�tre. Cette méthode permet
-	 * de suivre le même sprite à travers diff�rents états
-	 * de la simulation, dans lesquels il est repr�sent�
-	 * par des objets diff�rents.
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représent�
+	 * par des objets différents.
 	 * 
 	 * @param sprite
 	 * 		le sprite cibl�
 	 * @return	
-	 * 		sa repr�sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimFloor getSpriteById(AiFloor sprite)
 	{	AiSimFloor result = null;
@@ -678,7 +678,7 @@ final class AiSimZone extends AiZone
 	 * @param color
 	 * 		couleur du personnage à retrouver
 	 * @return	
-	 * 		le personnage correspondant à la couleur sp�cifi�e
+	 * 		le personnage correspondant à la couleur spécifiée
 	 */
 	private AiSimHero getInternalHeroByColor(PredefinedColor color)
 	{	AiSimHero result = null;
@@ -705,15 +705,15 @@ final class AiSimZone extends AiZone
 
 	/**
 	 * renvoie la simulation de sprite de même num�ro (id)
-	 * que celui pass� en param�tre. Cette méthode permet
-	 * de suivre le même sprite à travers diff�rents états
-	 * de la simulation, dans lesquels il est repr�sent�
-	 * par des objets diff�rents.
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représent�
+	 * par des objets différents.
 	 * 
 	 * @param sprite
 	 * 		le sprite cibl�
 	 * @return	
-	 * 		sa repr�sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimHero getSpriteById(AiHero sprite)
 	{	AiSimHero result = null;
@@ -732,9 +732,9 @@ final class AiSimZone extends AiZone
 	 * (méthode utilisée lors de la simulation)
 	 * 
 	 * @param hero
-	 * 		le personnage à ins�rer
+	 * 		le personnage à insérer
 	 * @param 
-	 * 		isOwnHero	indique si le personnage à ins�rer est celui contr�l� par l'IA
+	 * 		isOwnHero	indique si le personnage à insérer est celui contr�l� par l'IA
 	 */
 	protected void addHero(AiSimHero hero, boolean isOwnHero)
 	{	// sprites
@@ -787,15 +787,15 @@ final class AiSimZone extends AiZone
 	
 	/**
 	 * renvoie la simulation de sprite de même num�ro (id)
-	 * que celui pass� en param�tre. Cette méthode permet
-	 * de suivre le même sprite à travers diff�rents états
-	 * de la simulation, dans lesquels il est repr�sent�
-	 * par des objets diff�rents.
+	 * que celui passé en paramètre. Cette méthode permet
+	 * de suivre le même sprite à travers différents états
+	 * de la simulation, dans lesquels il est représent�
+	 * par des objets différents.
 	 * 
 	 * @param sprite
 	 * 		le sprite cibl�
 	 * @return	
-	 * 		sa repr�sentation dans cette zone
+	 * 		sa représentation dans cette zone
 	 */
 	protected AiSimItem getSpriteById(AiItem sprite)
 	{	AiSimItem result = null;

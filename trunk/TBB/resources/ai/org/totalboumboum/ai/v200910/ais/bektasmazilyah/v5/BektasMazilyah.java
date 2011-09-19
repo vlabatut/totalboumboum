@@ -75,7 +75,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		//creeation du dangerZone
 		dangerZone= new DangerZone(zone,this);
 		
-		// si ownHero est null, �a veut dire l'IA est morte : inutile de continuer
+		// si ownHero est null, ça veut dire l'IA est morte : inutile de continuer
 		if(hero != null)
 		{
 			updateLocation(hero.getTile());

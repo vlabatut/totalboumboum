@@ -37,25 +37,25 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * INTRANSITIVE
  * 
  * <p>ABILITY PERFORM
- * 	<br>param�tre: actor=self
- * 	<br>param�tre: target=N/D
- * 	<br>param�tre: direction=N/D
- * 	<br>param�tre: strength=bool
- * 	<br>param�tre: kind=N/D
- * 	<br>param�tre: scope=N/D
- * 	<br>param�tre: restriction=N/D
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  * 
  * <p>ABILITY REFUSE
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>param�tre: actor=oui (hero)
- * 	<br>param�tre: target=N/D
- * 	<br>param�tre: direction=N/D
- * 	<br>param�tre: strength=bool
- * 	<br>param�tre: kind=N/D
- * 	<br>param�tre: scope=N/D
- * 	<br>param�tre: restriction=N/D
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  */
 /** 
  * begining an aerial move on its own (not peing punched)

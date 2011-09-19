@@ -101,7 +101,7 @@ public class PerfectStrangers {
 	}	
 	
 	/**
-	 * On renvoie la liste des case qui d�finie la port�e virtuelle.
+	 * On renvoie la liste des case qui définie la port�e virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return

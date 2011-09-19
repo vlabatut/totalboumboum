@@ -34,7 +34,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
 
 /**
  * 
- * Repr�sente un noeud dans l'arbre de recherche d�velopp� par l'algorithme A*
+ * Représente un noeud dans l'arbre de recherche développ� par l'algorithme A*
  *  
  * @author Vincent Labatut
  *
@@ -43,10 +43,10 @@ public class AstarNode implements Comparable<AstarNode>
 {	
 	/**
 	 * Constructeur cr�ant un noeud racine non visit�. 
-	 * Les calculateurs pass�s en param�tres seront utilis�s
+	 * Les calculateurs passés en paramètres seront utilis�s
 	 * dans l'arbre entier (i.e. pour tous les autre noeuds)
 	 * 
-	 * @param tile	case associ�e à ce noeud de recherche
+	 * @param tile	case associée à ce noeud de recherche
 	 * @param costCalculator	fonction de cout
 	 * @param heuristicCalculator	fonction heuristique
 	 */
@@ -73,8 +73,8 @@ public class AstarNode implements Comparable<AstarNode>
 
 	/**
 	 * Constructeur cr�ant un noeud non visit�, fils du noeud
-	 * pass� en param�tre. 
-	 * @param tile	case associ�e à ce noeud de recherche
+	 * passé en paramètre. 
+	 * @param tile	case associée à ce noeud de recherche
 	 * @param parent	noeud de recherche parent de ce noeud
 	 */
 	protected AstarNode(AiTile tile, AstarNode parent) throws StopRequestException
@@ -111,11 +111,11 @@ public class AstarNode implements Comparable<AstarNode>
     /////////////////////////////////////////////////////////////////
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case associ�e au noeud */
+	/** case associée au noeud */
 	private AiTile tile = null;
 	
 	/**
-	 * Renvoie la case associ�e au noeud de recherche.
+	 * Renvoie la case associée au noeud de recherche.
 	 * @return	une case
 	 */
 	public AiTile getTile()
@@ -202,7 +202,7 @@ public class AstarNode implements Comparable<AstarNode>
 	}
 	
 	/**
-	 * d�termine si la case pass�e en param�tre a d�j� �t� trait�e,
+	 * détermine si la case passée en paramètre a d�j� �t� trait�e,
 	 * i.e. si elle apparait dans les noeuds de recherche anc�tres
 	 * 
 	 * @param tile	case à tester
@@ -237,7 +237,7 @@ public class AstarNode implements Comparable<AstarNode>
 	
 	/**
 	 * renvoie les fils de ce noeud de recherche
-	 * (ils sont �ventuellement calculés si ce n'est pas d�j� fait)
+	 * (ils sont éventuellement calculés si ce n'est pas d�j� fait)
 	 * 
 	 * @return	une liste contenant les fils de ce noeud
 	 * @throws StopRequestException 
@@ -250,7 +250,7 @@ public class AstarNode implements Comparable<AstarNode>
 	
 	/**
 	 * utilise la fonction successeur pour calculer les enfants de ce noeud de recherche,
-	 * i.e. pour d�terminer quelles sont les cases que l'on peut atteindre à partir
+	 * i.e. pour déterminer quelles sont les cases que l'on peut atteindre à partir
 	 * de la case courante.
 	 * @throws StopRequestException 
 	 */

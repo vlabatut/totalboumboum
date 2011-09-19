@@ -36,11 +36,11 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 public class BasicCostCalculator extends CostCalculator
 {
 	/** 
-	 * Les deux cases sont suppos�es �tre voisines, 
+	 * Les deux cases sont suppos�es être voisines, 
 	 * on se contente de renvoyer leur distance.
 	 * 
-	 * @param start	la case de d�part
-	 * @param end	la case d'arriv�e
+	 * @param start	la case de départ
+	 * @param end	la case d'arrivée
 	 * @return la distance entre ces cases (ici : 1, puisqu'elles sont voisines)
 	 */ 
 	@Override

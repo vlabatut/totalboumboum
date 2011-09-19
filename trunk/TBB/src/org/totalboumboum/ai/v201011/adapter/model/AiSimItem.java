@@ -28,8 +28,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 
 /**
  * simule un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caract�ris� par son type, repr�sentant le pouvoir apport� (ou enlev�)
- * par l'item. Ce type est repr�sent�e par une valeur de type AiItemType.
+ * un item est caract�ris� par son type, représentant le pouvoir apport� (ou enlev�)
+ * par l'item. Ce type est représent�e par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
  *
@@ -37,8 +37,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 final class AiSimItem extends AiSimSprite implements AiItem
 {
 	/**
-	 * crée une simulation de l'item pass� en param�tre,
-	 * avec les propri�t�s pass�es en param�tres.
+	 * crée une simulation de l'item passé en paramètre,
+	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
 	 * 		num�ro d'identification de l'item
@@ -47,7 +47,7 @@ final class AiSimItem extends AiSimSprite implements AiItem
 	 * @param posX
 	 * 		abscisse de l'item
 	 * @param posY
-	 * 		ordonn�e de l'item
+	 * 		ordonnée de l'item
 	 * @param posZ
 	 * 		hauteur de l'item
 	 * @param state
@@ -74,8 +74,8 @@ final class AiSimItem extends AiSimSprite implements AiItem
 	}	
 
 	/**
-	 * crée une simulation de l'item pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une simulation de l'item passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param item
 	 * 		sprite à simuler

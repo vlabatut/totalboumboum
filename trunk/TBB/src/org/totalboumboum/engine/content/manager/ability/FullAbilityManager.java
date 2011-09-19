@@ -60,7 +60,7 @@ public class FullAbilityManager extends AbilityManager
 		{	ActionAbility ab = (ActionAbility)copy;
 			ab.getAction().addActor(sprite.getRole());
 		}
-		directAbilities.add(copy);	//NOTE pourquoi toutes ces copies? la question est: qu'est-ce qui est modifié exactement dans l'ability. p-e qu'il n'est pas nécessaire de copier l'action
+		directAbilities.add(copy);	//NOTE pourquoi toutes ces copies? la question est: qu'est-ce qui est modifiÃ© exactement dans l'ability. p-e qu'il n'est pas nÃ©cessaire de copier l'action
 		currentAbilities.add(copy.copy());
 	}
 	

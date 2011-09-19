@@ -186,7 +186,7 @@ public class Securite {
 
 	/**
 	 * Cette méthode fait le contr�le de sécurité de la prochaine case de notre
-	 * IA. Elle prend deux arguments, la zone du jeu et un chemin (une s�quence
+	 * IA. Elle prend deux arguments, la zone du jeu et un chemin (une séquence
 	 * des cases).
 	 * 
 	 * @param ourHero

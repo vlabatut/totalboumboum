@@ -188,7 +188,7 @@ public class Path {
 	
 	/**
 	 * Methode calculant la nouvelle action a effectuer
-	 * (methode de groupe rouge de l'annee dernier mais on l'a modifi�)
+	 * (methode de groupe rouge de l'annee dernier mais on l'a modifié)
 	 * @param nextMove
 	 * 			Le chemin precis a suivre.
 	 *  

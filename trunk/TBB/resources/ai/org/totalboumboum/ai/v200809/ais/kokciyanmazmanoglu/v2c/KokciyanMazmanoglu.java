@@ -35,7 +35,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	private AiTile currentTile;
 	/** la case suivant à aller */
 	private AiTile nextTile = null;
-	/** la dernière case par laquelle on est pass� */ 
+	/** la dernière case par laquelle on est passé */ 
 	private AiTile previousTile = null;
 
 	/** la case sur laquelle on veut aller */
@@ -563,7 +563,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		result = false;
 		if (ai.getCol() - bombTile.getCol() > 0) {//si la bombe est à gauche
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers le bas c'est une pi�ge
+			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers le bas c'est une piège
 			if (!isMovePossible(ai, Direction.RIGHT)
 					&& !isMovePossible(ai, Direction.UP)
 					&& !isMovePossible(ai, Direction.DOWN)) {
@@ -599,7 +599,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		if (ai.getCol() - bombTile.getCol() < 0)//si la bombe est à droite
 		{
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la gauche, vers le haut ou vers le bas c'est une pi�ge
+			//s'il est impossible de faire un mouvement vers la gauche, vers le haut ou vers le bas c'est une piège
 			if (!isMovePossible(ai.getLine(), ai.getCol(), Direction.LEFT)
 					&& !isMovePossible(ai.getLine(), ai.getCol(), Direction.UP)
 					&& !isMovePossible(ai.getLine(), ai.getCol(),
@@ -630,7 +630,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		}
 		if (ai.getLine() - bombTile.getLine() > 0) {//si la bombe est en haut
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la droite, vers la gauche ou vers le bas c'est une pi�ge
+			//s'il est impossible de faire un mouvement vers la droite, vers la gauche ou vers le bas c'est une piège
 			if (!isMovePossible(ai.getLine(), ai.getCol(), Direction.LEFT)
 					&& !isMovePossible(ai.getLine(), ai.getCol(),
 							Direction.RIGHT)
@@ -663,7 +663,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		}
 		if (ai.getLine() - bombTile.getLine() < 0) {//si la bombe est en bas
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers la gauche c'est une pi�ge
+			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers la gauche c'est une piège
 			if (!isMovePossible(ai.getLine(), ai.getCol(), Direction.LEFT)
 					&& !isMovePossible(ai.getLine(), ai.getCol(),
 							Direction.RIGHT)
@@ -694,19 +694,19 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			}
 		}
 		int i = power + 1;
-		//si la bombe est à gauche et le personnage peut aller vers la droite pour une distance plus grande que la port�e de la bombe alors ce n'est pas une pi�ge
+		//si la bombe est à gauche et le personnage peut aller vers la droite pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
 		if (ai.getCol() - bombTile.getCol() > 0
 				&& possibleMoveD(bombTile.getLine(), ai.getCol(), i, 1))
 			result = false;
-		//si la bombe est à droite et le personnage peut aller vers la gauche pour une distance plus grande que la port�e de la bombe alors ce n'est pas une pi�ge
+		//si la bombe est à droite et le personnage peut aller vers la gauche pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
 		else if (ai.getCol() - bombTile.getCol() < 0
 				&& possibleMoveD(bombTile.getLine(), ai.getCol(), i, -1))
 			result = false;
-		//si la bombe est en bas et le personnage peut aller vers le haut pour une distance plus grande que la port�e de la bombe alors ce n'est pas une pi�ge
+		//si la bombe est en bas et le personnage peut aller vers le haut pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
 		if (ai.getLine() - bombTile.getLine() < 0
 				&& possibleMoveD(ai.getLine(), bombTile.getCol(), i, 2))
 			result = false;
-		//si la bombe est en haut et le personnage peut aller vers le bas pour une distance plus grande que la port�e de la bombe alors ce n'est pas une pi�ge
+		//si la bombe est en haut et le personnage peut aller vers le bas pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
 		else if (ai.getLine() - bombTile.getLine() > 0
 				&& possibleMoveD(ai.getLine(), bombTile.getCol(), i, -2))
 			result = false;

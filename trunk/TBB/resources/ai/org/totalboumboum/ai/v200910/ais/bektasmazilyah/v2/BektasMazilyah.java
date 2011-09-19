@@ -39,7 +39,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	private AiHero hero;
 	//la prochaine action que l'IA veut r�aliser
 	private AiAction action;
-	// la dernière case par laquelle on est pass� 
+	// la dernière case par laquelle on est passé 
 	@SuppressWarnings("unused")
 	private AiTile previousTile;
 	// la case occup�e actuellement par le personnage
@@ -402,9 +402,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 		return matrix[line][col];
 	}
 	
-	/** matrice repr�sentant la zone et tous les sprites qu'elle contient */
+	/** matrice représentant la zone et tous les sprites qu'elle contient */
 	private AiTile[][] matrix;
-	/** niveau repr�sent� par cette classe */
+	/** niveau représent� par cette classe */
 
 	private boolean isClear(AiTile tile, int[][][] matriceDefence) throws StopRequestException
 	{	

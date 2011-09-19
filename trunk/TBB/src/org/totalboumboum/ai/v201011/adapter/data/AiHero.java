@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v201011.adapter.data;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * repr�sente un personnage du jeu, ie un sprite contr�l� par un joueur
+ * représente un personnage du jeu, ie un sprite contr�l� par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut
@@ -39,7 +39,7 @@ public interface AiHero extends AiSprite
 	 * renvoie un exemple de bombe que ce personnage peut poser
 	 * 
 	 * @return	
-	 * 		une repr�sentation de la bombe
+	 * 		une représentation de la bombe
 	 */
 	public AiBomb getBombPrototype();
 
@@ -75,14 +75,14 @@ public interface AiHero extends AiSprite
 	 * pos�es (getBombNumberCurrent) plus le nombre de bombes que le joueur peut encore poser. 
 	 * 
 	 * @return	
-	 * 		le nombre de bombes simultan�ment posables (en g�n�ral)
+	 * 		le nombre de bombes simultan�ment posables (en général)
 	 */
 	public int getBombNumberMax();
 	
 	/**
 	 * renvoie le nombre de bombes pos�es par le personnage à ce moment-l�.
 	 * Ce nombre est limit� par la valeur renvoy�e par getBombNumberMax,
-	 * i.e. il ne peut pas �tre plus grand puisque getBombNumberMax renvoie
+	 * i.e. il ne peut pas être plus grand puisque getBombNumberMax renvoie
 	 * le nombre de bombes maximal que le joueur peut poser en même temps. 
 	 * 
 	 * @return	
@@ -97,7 +97,7 @@ public interface AiHero extends AiSprite
 	 * renvoie la couleur de ce personnage (et de ses bombes)
 	 * 
 	 * @return 
-	 * 		un symbole de type PredefinedColor repr�sentant une couleur
+	 * 		un symbole de type PredefinedColor représentant une couleur
 	 */
 	public PredefinedColor getColor();
 	
@@ -106,9 +106,9 @@ public interface AiHero extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie la vitesse de déplacement au sol de ce personnage,
-	 * exprim�e en pixel/seconde. il ne s'agit pas de la vitesse 
+	 * exprimée en pixel/seconde. il ne s'agit pas de la vitesse 
 	 * de déplacement courante, il s'agit de la vitesse du personnage
-	 * quand il marche. Cette vitesse peut �tre modifi�e par certains items.
+	 * quand il marche. Cette vitesse peut être modifiée par certains items.
 	 * 
 	 * @return	
 	 * 		la vitesse de déplacement de ce personnage
@@ -138,11 +138,11 @@ public interface AiHero extends AiSprite
 	public int getMatchRank();
 	
 	/**
-	 * Renvoie le classement de ce joueur, dans le classement g�n�ral du jeu (Glicko-2)
+	 * Renvoie le classement de ce joueur, dans le classement général du jeu (Glicko-2)
 	 * Ce classement n'�volue pas pendant la manche actuellement jou�e.
 	 * 
 	 * @return	
-	 * 		le classement g�n�ral (Glicko-2) de ce joueur
+	 * 		le classement général (Glicko-2) de ce joueur
 	 */
 	public int getStatsRank();
 
@@ -151,8 +151,8 @@ public interface AiHero extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * teste si ce personnage est capable de passer à travers les (certains) murs
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -162,8 +162,8 @@ public interface AiHero extends AiSprite
 
 	/**
 	 * teste si ce personnage est capable de passer à travers les bombes
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -173,8 +173,8 @@ public interface AiHero extends AiSprite
 
 	/**
 	 * teste si ce personnage est capable de passer à travers le feu sans br�ler
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	

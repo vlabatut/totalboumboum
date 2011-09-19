@@ -51,7 +51,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	private boolean firstTime = true;
 
 	/**
-	 * la methode contr�le le mouvement du personnage pour chaque it�ration 
+	 * la methode contr�le le mouvement du personnage pour chaque itération 
 	*/
 
 	public Integer call() throws Exception {
@@ -63,17 +63,17 @@ public class HanciToprak extends ArtificialIntelligence {
 		{	
 		index = 0;
 
-		// on d�termine la position actuelle
+		// on détermine la position actuelle
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];
 		
-        // on d�termine les déplacements possibles
+        // on détermine les déplacements possibles
 		Vector<Integer> possibleMoves = getPossibleMoves(x, y);
 
 //		costMatrix_ = costMatrix;
 		costMatrix = getZoneMatrix();//initialisation du costMatrix(matrix à utiliser pour prendre d�cision)
 		
-		Decision();//pour chaque it�ration on renouvele le costMatrix (les couts)
+		Decision();//pour chaque itération on renouvele le costMatrix (les couts)
 		
 
 		if (condition_1) {
@@ -460,7 +460,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique si le déplacement dont le code a �t� pass� en param�tre 
+	 * Indique si le déplacement dont le code a �t� passé en paramètre 
 	 * est possible pour un personnage situ� en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
@@ -491,7 +491,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si la case situ�e à la position pass�e en param�tre
+	 * Indique si la case situ�e à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
 	 * @param x	position à �tudier
 	 * @param y	position à �tudier

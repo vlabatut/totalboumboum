@@ -397,8 +397,8 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	/**
 	 * Une modification du methode "isObstacle" qui controle si un block
 	 * est mur ou pas
-	 * @param x: coordonn� horizontale du block
-	 * @param y: coordonn� verticale du block
+	 * @param x: coordonné horizontale du block
+	 * @param y: coordonné verticale du block
 	 * @return vrai si ce block est mur, faux sinon.
 	 */
 	private boolean isWall(int x, int y)
@@ -416,7 +416,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	
 	/**
 	 * Renvoie la position du personnage le plus proche de la
-	 * position pass�e en param�tres. 
+	 * position passée en paramètres. 
 	 * @param x	position de r�f�rence
 	 * @param y	position de r�f�rence
 	 * @return	position du joueur le plus proche

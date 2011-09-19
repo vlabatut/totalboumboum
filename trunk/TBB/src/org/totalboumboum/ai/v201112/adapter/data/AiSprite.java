@@ -22,8 +22,8 @@ package org.totalboumboum.ai.v201112.adapter.data;
  */
 
 /**
- * cette interface permet de repr�senter les sprites manipul�s par le jeu,
- * et un nombre restreint de leurs propri�t�s, rendues ainsi accessible à l'IA.
+ * cette interface permet de représenter les sprites manipul�s par le jeu,
+ * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
  * 
  * @author Vincent Labatut
  *
@@ -66,7 +66,7 @@ public interface AiSprite
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie la repr�sentation de la case contenant ce sprite
+	 * renvoie la représentation de la case contenant ce sprite
 	 * 
 	 *  @return
 	 *  	la case contenant ce sprite
@@ -101,10 +101,10 @@ public interface AiSprite
 	public double getPosX();
 	
 	/** 
-	 * renvoie l'ordonn�e de ce sprite en pixels 
+	 * renvoie l'ordonnée de ce sprite en pixels 
 	 * 
 	 * @return	
-	 * 		l'ordonn�e du sprite
+	 * 		l'ordonnée du sprite
 	 */
 	public double getPosY();
 	
@@ -120,7 +120,7 @@ public interface AiSprite
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la vitesse de déplacement courante du sprite exprim�e en pixel/seconde.
+	 * renvoie la vitesse de déplacement courante du sprite exprimée en pixel/seconde.
 	 * si le sprite ne bouge pas, elle est de z�ro.
 	 * 
 	 * @return	
@@ -132,7 +132,7 @@ public interface AiSprite
 	// COLLISION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Teste si le sprite pass� en param�tre est capable de traverser
+	 * Teste si le sprite passé en paramètre est capable de traverser
 	 * la case de ce sprite
 	 * 
 	 *  @param sprite
@@ -147,7 +147,7 @@ public interface AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Renvoie le temps que va mettre ce sprite à br�ler s'il est touch�
-	 * par du feu, exprim� en ms. Si ce sprite ne peut pas br�ler, ce
+	 * par du feu, exprimé en ms. Si ce sprite ne peut pas br�ler, ce
 	 * temps est �gal à -1.
 	 * <b>Attention :</b> si ce sprite est une bombe, ce temps correspond
 	 * à la dur�e mise par la bombe pour dispara�tre, et non pas à la dur�e

@@ -243,7 +243,7 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 
 	
 	/**
-	 * Indique si la case situ�e à la position pass�e en param�tre constitue un
+	 * Indique si la case situ�e à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, mur.
 	 * 
 	 * @param x
@@ -823,7 +823,7 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 	
 	
 	/**
-	 * Indique si la case situ�e à la position pass�e en param�tre constitue un
+	 * Indique si la case situ�e à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, mur.
 	 * 
 	 * @param x
@@ -856,7 +856,7 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique si la case situ�e à la position pass�e en param�tre constitue un
+	 * Indique si la case situ�e à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, mur.
 	 * 
 	 * @param x
@@ -887,7 +887,7 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 		
 	
 	/**
-	 * Indique si le déplacement dont le code a �t� pass� en param�tre est
+	 * Indique si le déplacement dont le code a �t� passé en paramètre est
 	 * possible pour un personnage situ� en (x,y).
 	 * 
 	 * @param x
@@ -1161,16 +1161,16 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 	
 	/**
 	 *Il determine une partie de la matrice que l'ia peut arriver sans détruire un mur.
-	 *Fonction travaille r�cursivement.Il commence de la case dont les coordoonn�es sont pass�s en parametre
+	 *Fonction travaille r�cursivement.Il commence de la case dont les coordoonn�es sont passés en parametre
 	 *et puis determine quels sont les cases que l'ia peut aller sans détruire un mur.La fonction 
 	 *met des -1 sur les cases qui ne sont pas accessibles par l'ia.Les cases accesibles par l'ia ont les memes 
 	 *valeurs que getZoneMatrix() retourne.
 	 * @param tab
 	 *            le tableau du jeu.
 	 * @param x
-	 *           le coordonn� de x.
+	 *           le coordonné de x.
 	 * @param y
-	 *            le coordonn� de y.
+	 *            le coordonné de y.
 	 */
 	public void oCarte(int[][] tab,int x,int y){
 		if(tab[x][y]%10!=AI_BLOCK_WALL_HARD && tab[x][y]%10!=AI_BLOCK_WALL_SOFT && tab[x][y]%10!=AI_BLOCK_BOMB){
@@ -1196,9 +1196,9 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 	 *chemin pour y arriver,avec la fonction findPath.
 	 *Il fait en suite un mouvement pour bouger vers les cases qui se trouvent sur le path.
 	 * @param x
-	 *           le coordonn� de x de l'ia.
+	 *           le coordonné de x de l'ia.
 	 * @param y
-	 *            le coordonn� de y de l'ia.
+	 *            le coordonné de y de l'ia.
 	 */
 	public int move(int x,int y){
 		int action = AI_ACTION_DO_NOTHING;
@@ -1250,9 +1250,9 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de A �toile.
 	 *(cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
 	 * @param x
-	 *           le coordonn� de x de l'ia.
+	 *           le coordonné de x de l'ia.
 	 * @param y
-	 *            le coordonn� de y de l'ia.
+	 *            le coordonné de y de l'ia.
 	 * @param tab le tableau du jeu.
 	 * @param goal la case qu'on veut y arriver.
 	 */
@@ -1429,10 +1429,10 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 	/** 
 
 	* Controle s'il y a du feu sur la case dont les coordonnées sont 
-	* pass�s en parametre.Retourne vrai s'il y a du feu,false sinon.
+	* passés en parametre.Retourne vrai s'il y a du feu,false sinon.
 
-	* @param x coordonn� x.
-	* @param y coordonn� y. 
+	* @param x coordonné x.
+	* @param y coordonné y. 
 
 
 	* @return vrai si la case est le feu.
@@ -1452,7 +1452,7 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 	* Ca sert à faire une simulation de la situation avant de poser la bombe.
 	* @param tab le tableau du jeu.
 	* @param x le coordonne x de l'ia.
-	* @param y le coordonn� y de l'ia.
+	* @param y le coordonné y de l'ia.
 	* @return true s'il peut se sauver de la bombe qu'il va pauser.
 	*/ 	
 	private boolean canEscape(int[][] tab,int x,int y){
@@ -1578,12 +1578,12 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * on ajoute la case pass�e en parametre au serpent de shrink.
+	 * on ajoute la case passée en parametre au serpent de shrink.
 	 * 
 	 * @param x
-	 *            la coordonn� x.
+	 *            la coordonné x.
 	 * @param y
-	 *            la coordonn� y.
+	 *            la coordonné y.
 	 */
 	public void add(int x, int y) {
 
@@ -1595,13 +1595,13 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 		snake[4][1] = y;
 	}
 	/**
-	 * renvoie la position de la case(les coordnn�es sont pass�s en parametre)
+	 * renvoie la position de la case(les coordnn�es sont passés en parametre)
 	 * sur le serpent du shrink. Le r�sultat peut etre de -1 à 4.
 	 * 
 	 * @param x
-	 *            le coordonn� x
+	 *            le coordonné x
 	 * @param y
-	 *            le coordonn� y
+	 *            le coordonné y
 	 * @return la position de la case sur le serpent, -1 si la case n'est pas
 	 *         sur le serpent.
 	 */	

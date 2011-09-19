@@ -63,7 +63,7 @@ public class VariableTilesLoader
     		String[] elts = ZoneLoader.loadBasicTileElement(temp);    	
         	float tProba = Float.valueOf(temp.getAttribute(XmlNames.PROBA).getValue().trim());
     		ValueTile vt = new ValueTile(elts[0],elts[1],elts[2],elts[3],tProba);
-    		// NOTE vérifier que les noms des blocks/items/itemvariables/floor référencés sont bien définis
+    		// NOTE vï¿½rifier que les noms des blocks/items/itemvariables/floor rï¿½fï¿½rencï¿½s sont bien dÃ©finis
         	sum = sum+tProba;
     		result.addValue(vt);
     	}

@@ -396,7 +396,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		return this.currentX;
 	}
 	/**
-	 * renvoie l'ordonn�e courante (en pixels)
+	 * renvoie l'ordonnée courante (en pixels)
 	 */
 	public double getCurrentY() throws StopRequestException
 	{	

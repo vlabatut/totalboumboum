@@ -42,8 +42,8 @@ import org.totalboumboum.tools.images.PredefinedColor;
 final class AiSimBomb extends AiSimSprite implements AiBomb
 {	
 	/**
-	 * crée une simulation de la bombe pass�e en param�tre,
-	 * avec les propri�t�s pass�es en param�tres.
+	 * crée une simulation de la bombe passée en paramètre,
+	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
 	 * 		num�ro d'identification de la bombe
@@ -52,7 +52,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param posX
 	 * 		abscisse de la bombe
 	 * @param posY
-	 * 		ordonn�e de la bombe
+	 * 		ordonnée de la bombe
 	 * @param posZ
 	 * 		hauteur de la bombe
 	 * @param state
@@ -129,8 +129,8 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	}	
 
 	/**
-	 * crée une simulation de la bombe pass�e en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une simulation de la bombe passée en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param bomb	
 	 * 		sprite à simuler
@@ -170,7 +170,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	/** d�clenchement par compte à rebours */
 	private boolean countdownTrigger;
-	/** d�clenchement par t�l�commande */
+	/** d�clenchement par télécommande */
 	private boolean remoteControlTrigger;
 	/** d�clenchement par explosion */
 	private boolean explosionTrigger;
@@ -331,7 +331,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement au sol de la bombe, exprim�e en pixel/seconde */
+	/** vitesse de déplacement au sol de la bombe, exprimée en pixel/seconde */
 	private double slidingSpeed;
 	
 	@Override
@@ -342,7 +342,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// TIME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps �coul� depuis que la bombe a �t� pos�e, exprim� en ms */
+	/** temps �coul� depuis que la bombe a �t� pos�e, exprimé en ms */
 	private long time = 0;
 	
 	@Override

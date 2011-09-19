@@ -28,7 +28,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 /**
- * heuristique utilisant la distance de Manhattan exprim�es en pixels,
+ * heuristique utilisant la distance de Manhattan exprimées en pixels,
  * pour aller avec PixelCostCalculator.
  * 
  * @author Vincent Labatut
@@ -40,11 +40,11 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	// STARTING POINT			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case de d�part du chemin en cours de recherche */
+	/** case de départ du chemin en cours de recherche */
 	private AiTile startTile;
-	/** abscisse de d�part (doit �tre contenue dans la case de d�part) */
+	/** abscisse de départ (doit être contenue dans la case de départ) */
 	private double startX;
-	/** ordonn�e de d�part (doit �tre contenue dans la case de d�part) */
+	/** ordonnée de départ (doit être contenue dans la case de départ) */
 	private double startY;
 	
 	public void updateStartPoint(AiTile startTile, double startX, double startY)
@@ -58,9 +58,9 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * l'heuristique la plus simple consiste à prendre la distance
-	 * de Manhattan entre la case courante tile et la case d'arriv�e endTile.
+	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
 	 * cf. http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels
-	 * ici, on calcule cette distance exprim�e en pixels plutot qu'en case
+	 * ici, on calcule cette distance exprimée en pixels plutot qu'en case
 	 * comme c'est le cas dans BasicHeuristicCalculator.
 	 * 
 	 * @param tile	

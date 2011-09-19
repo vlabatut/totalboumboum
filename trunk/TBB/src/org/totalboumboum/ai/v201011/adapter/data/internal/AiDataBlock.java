@@ -44,8 +44,8 @@ import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import org.totalboumboum.engine.content.sprite.block.Block;
 
 /**
- * Repr�sente un bloc du jeu, c'est à dire g�n�ralement un mur
- * (pouvant �tre détruit ou pas). 
+ * Représente un bloc du jeu, c'est à dire généralement un mur
+ * (pouvant être détruit ou pas). 
  * 
  * @author Vincent Labatut
  *
@@ -53,13 +53,13 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 {
 	/**
-	 * crée une repr�sentation du bloc pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation du bloc passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite à repr�senter
+	 * 		sprite à représenter
 	 */
 	protected AiDataBlock(AiDataTile tile, Block sprite)
 	{	super(tile,sprite);
@@ -80,7 +80,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc peut �tre détruit par une bombe */
+	/** indique si ce bloc peut être détruit par une bombe */
 	private boolean destructible;
 
 	/** 
@@ -116,7 +116,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	}
 	
 	/** 
-	 * met jour les diff�rentes caract�ristiques de ce bloc
+	 * met jour les différentes caract�ristiques de ce bloc
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()

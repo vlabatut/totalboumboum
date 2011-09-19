@@ -26,8 +26,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 
 /**
- * repr�sente un sol du jeu, ie le graphisme affich� en tant que première couche de toute
- * case de la zone (et �ventuellement recouvert par les autres types de sprites).
+ * représente un sol du jeu, ie le graphisme affich� en tant que première couche de toute
+ * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
  *
@@ -35,13 +35,13 @@ import org.totalboumboum.engine.content.sprite.floor.Floor;
 final class AiDataFloor extends AiDataSprite<Floor> implements AiFloor
 {
 	/**
-	 * crée une repr�sentation du sol pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation du sol passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite à repr�senter
+	 * 		sprite à représenter
 	 */
 	protected AiDataFloor(AiDataTile tile, Floor sprite)
 	{	super(tile,sprite);		

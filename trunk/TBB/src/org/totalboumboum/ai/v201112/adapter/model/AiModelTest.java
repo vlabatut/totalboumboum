@@ -34,8 +34,8 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * on crée une zone fictive en faisant varier les sprites et leurs
  * actions, et on affiche le r�sultat des simulation pas-�-pas.<br/>
  * 
- * <b>Note :</b> la classe mod�le n'est pas d�finie pour repr�senter une zone
- * fictive comme ici, mais pour repr�senter la zone de jeu r�elle.
+ * <b>Note :</b> la classe modèle n'est pas définie pour représenter une zone
+ * fictive comme ici, mais pour représenter la zone de jeu réelle.
  * ceci explique les limites impos�es sur son constructeur.
  * 
  * @author Vincent Labatut

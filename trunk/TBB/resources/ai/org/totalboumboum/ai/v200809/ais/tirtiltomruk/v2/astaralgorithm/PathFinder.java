@@ -184,9 +184,9 @@ public class PathFinder {
 	 * A �toile. (cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
 	 * 
 	 * @param x
-	 *            le coordonn� de x de l'ia.
+	 *            le coordonné de x de l'ia.
 	 * @param y
-	 *            le coordonn� de y de l'ia.
+	 *            le coordonné de y de l'ia.
 	 * @param tab
 	 *            le tableau du jeu.
 	 * @param goal

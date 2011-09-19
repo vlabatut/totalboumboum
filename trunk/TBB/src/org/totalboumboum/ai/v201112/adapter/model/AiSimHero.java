@@ -36,8 +36,8 @@ import org.totalboumboum.tools.images.PredefinedColor;
 final class AiSimHero extends AiSimSprite implements AiHero
 {
 	/**
-	 * crée une simulation du personnage pass� en param�tre,
-	 * avec les propri�t�s pass�es en param�tres.
+	 * crée une simulation du personnage passé en paramètre,
+	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
 	 * 		num�ro d'identification du personnage
@@ -46,7 +46,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	 * @param posX
 	 * 		abscisse du personnage
 	 * @param posY
-	 * 		ordonn�e du personnage
+	 * 		ordonnée du personnage
 	 * @param posZ
 	 * 		hauteur du personnage
 	 * @param state
@@ -95,8 +95,8 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	}	
 
 	/**
-	 * crée une simulation du joueur pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une simulation du joueur passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile	
 	 * 		case contenant le sprite
@@ -126,7 +126,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	/////////////////////////////////////////////////////////////////
 	/** exemple de bombe que le personnage peut poser */
 	private AiBomb bombPrototype;
-	/** nombre de bombes que le personnage peut poser simultan�ment (en g�n�ral) */
+	/** nombre de bombes que le personnage peut poser simultan�ment (en général) */
 	private int bombNumberMax;
 	/** nombre de bombes que le personnage a actuellement pos�es */
 	private int bombNumberCurrent;
@@ -208,7 +208,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement au sol du personnage, exprim�e en pixel/seconde */
+	/** vitesse de déplacement au sol du personnage, exprimée en pixel/seconde */
 	private double walkingSpeed;
 	
 	@Override

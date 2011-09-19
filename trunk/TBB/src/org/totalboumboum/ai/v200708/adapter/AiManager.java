@@ -67,7 +67,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** percept à envoyer à l'IA : matrice repr�sentant la zone de jeu */
+    /** percept à envoyer à l'IA : matrice représentant la zone de jeu */
     private int[][] zoneMatrix;;
     /** percept à envoyer à l'IA : liste des bombes */
     private Vector<int[]> bombs;
@@ -114,7 +114,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
  		Tile tile = sprite.getTile();
         ownPosition[0] = tile.getCol();
         ownPosition[1] = tile.getLine();
-        // propri�t�s du joueur
+        // propriétés du joueur
         {	// bomb range
         	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
 			ownFirePower = (int)ab.getStrength();
@@ -137,7 +137,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 			ownBombCount = ownBombCount - sprite.getDroppedBombs().size();
         }
 
-        // position relative de l'�ventuelle bombe
+        // position relative de l'éventuelle bombe
         bombPosition = ArtificialIntelligence.AI_DIR_NONE;
         List<Bomb> bombes = tile.getBombs();
         if(bombes.size()>0)
@@ -260,7 +260,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 		Iterator<AbstractPlayer> i = plyrs.iterator();
 		while(i.hasNext())
 		{	AbstractPlayer tempPlayer = i.next();
-			// le joueur repr�sent� par cet objet ne doit pas apparaitre dans cette liste
+			// le joueur représent� par cet objet ne doit pas apparaitre dans cette liste
 			if(tempPlayer!=player)
 			{	// position
 				Tile t = tempPlayer.getSprite().getTile();

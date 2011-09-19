@@ -4,7 +4,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 import org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2.ZoneEnum;
 
 /**
- * Repr�sente un noeud dans un arbre de recherche.
+ * Représente un noeud dans un arbre de recherche.
  *Chaque noeud est defini avec les coordonnees x et y
  *chaque noeud possede aussi une valeur entiere 
  *et un cout.
@@ -176,7 +176,7 @@ public class Noeud {
 	 * 
 	 * @param object
 	 *            objet qu'on va comparer
-	 * @return true si l'objet est �gal à l'objet pass� en parametre
+	 * @return true si l'objet est �gal à l'objet passé en parametre
 	 */
 
 	public boolean equals(Object object) {
@@ -204,7 +204,7 @@ public class Noeud {
 	}
 
 	/**
-	 * Calcule l'heuristique du noeud par rapport à un autre noeud pass� en
+	 * Calcule l'heuristique du noeud par rapport à un autre noeud passé en
 	 * parametre Il fait le calcul en utilisant la distance du Manhattan * (cf. :
 	 * http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29) entre le
 	 * point de coordonnées du noeud et celui du noeud goal.

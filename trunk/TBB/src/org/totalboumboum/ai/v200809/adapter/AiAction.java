@@ -24,11 +24,11 @@ package org.totalboumboum.ai.v200809.adapter;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Classe repr�sentant une action qu'un joueur peut effectuer.
+ * Classe représentant une action qu'un joueur peut effectuer.
  * Elle est utilisée pour indiquer au jeu quelle est la prochaine
  * action que l'IA veut r�aliser.
  * <p>
- * L'action est d�crite par un nom et �ventuellement une direction.
+ * L'action est décrite par un nom et éventuellement une direction.
  * L'action et la direction sont toutes les deux constantes, respectivement
  * de classes AiActionName et Direction.
  * 
@@ -60,11 +60,11 @@ public class AiAction
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associ� à l'action */
+	/** nom associé à l'action */
 	private AiActionName name;
 	
 	/**
-	 * renvoie le nom associ� à l'action
+	 * renvoie le nom associé à l'action
 	 * 
 	 * @return	le nom de l'action
 	 */
@@ -75,11 +75,11 @@ public class AiAction
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associ�e à l'action */
+	/** direction associée à l'action */
 	private Direction direction;
 	
 	/**
-	 * renvoie la direction associ�e à l'action
+	 * renvoie la direction associée à l'action
 	 * @return	la direction de l'action
 	 */
 	public Direction getDirection()

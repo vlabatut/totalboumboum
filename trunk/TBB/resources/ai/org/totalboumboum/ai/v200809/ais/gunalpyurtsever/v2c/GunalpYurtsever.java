@@ -32,7 +32,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	private int strategy;
 	// liste des bombes
 	private List<AiBomb> bombList;
-	// Definit pour garder la cost pour acceder a cible( modifié a chaque invocation de Astar 
+	// Definit pour garder la cost pour acceder a cible( modifiÃ© a chaque invocation de Astar 
 	private int cost;
 	
 	
@@ -47,7 +47,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		while(it.hasNext()){
 			checkInterruption(); //APPEL OBLIGATOIRE
 			AiBomb bomb=it.next();
-			//Supprime de la liste la bomb qui est null ou deja brulé
+			//Supprime de la liste la bomb qui est null ou deja brulï¿½
 			if(bomb != null){
 				if(bomb.getState().getName() == AiStateName.BURNING)
 					it.remove();
@@ -74,7 +74,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	private List<AiTile> getClearNeighbors(AiTile head, boolean fire) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rï¿½fï¿½rence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(head);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();
@@ -230,7 +230,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 						
 						Iterator<CostTile> ab = queue.iterator();
 						
-						//on cherche si mytile est deja enfilés
+						//on cherche si mytile est deja enfilï¿½s
 						while(ab.hasNext()){
 							checkInterruption(); // APPEL OBLIGATOIRE
 							
@@ -246,7 +246,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 						}
 						
 					}
-					//la selection pour developpement est terminé
+					//la selection pour developpement est terminï¿½
 					tiles.remove(0);
 				
 				}
@@ -499,7 +499,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 					
 					int i = 0;
 					Direction d = getPercepts().getDirection(b.getTile(),t);
-					//on cherche pour chaque direction du bomb jusqu'a la portée
+					//on cherche pour chaque direction du bomb jusqu'a la portï¿½e
 					while (t.getBlock()==null && i < range) {
 						checkInterruption(); // APPEL OBLIGATOIRE
 					
@@ -681,7 +681,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
         
         DangerPriorityCostTile currentTile;
         
-        //pour les tiles qu'on a juste developpé
+        //pour les tiles qu'on a juste developpï¿½
         AiTile cacheTile = null;
         
         boolean found = false;

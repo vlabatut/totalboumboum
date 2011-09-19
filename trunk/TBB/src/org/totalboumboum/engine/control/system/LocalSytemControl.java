@@ -40,7 +40,7 @@ public class LocalSytemControl extends SystemControl
 	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// n�cessaire pour �viter d'�mettre des �v�nements de fa�on répétitive pour un seul pressage de touche
+	// nécessaire pour �viter d'�mettre des �v�nements de fa�on répétitive pour un seul pressage de touche
 	@Override
 	public void keyPressed(KeyEvent e)
 	{	int keyCode = e.getKeyCode();
@@ -58,7 +58,7 @@ public class LocalSytemControl extends SystemControl
 			
 			// faire renaitre le bonhomme
 //			else if(keyCode == KeyEvent.VK_1)
-//			{	//NOTE à adapter car �a peut �tre int�ressant pour le d�bug
+//			{	//NOTE à adapter car ça peut être int�ressant pour le d�bug
 				//loop.rebirth();
 //			}
 

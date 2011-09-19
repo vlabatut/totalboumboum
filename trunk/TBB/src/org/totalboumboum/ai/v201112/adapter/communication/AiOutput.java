@@ -47,7 +47,7 @@ public class AiOutput
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * efface toutes les donn�es sp�cifi�es pr�c�demment
+	 * efface toutes les donn�es spécifiées pr�c�demment
 	 */
 	public void reinit()
 	{	reinitPaths();
@@ -58,7 +58,7 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** repr�sentation interne de la zone */
+	/** représentation interne de la zone */
 	private AiZone zone;
 		
 	/////////////////////////////////////////////////////////////////
@@ -79,13 +79,13 @@ public class AiOutput
 	
 	/**
 	 * rajoute un chemin dans la liste des chemins à afficher.
-	 * La repr�sentation graphique d'un chemin est une ligne
+	 * La représentation graphique d'un chemin est une ligne
 	 * suivant les centres des cases travers�es par le chemin 
 	 * 
 	 * @param path
 	 * 		chemin à afficher
 	 * @param color
-	 * 		couleur associ�e à ce chemin
+	 * 		couleur associée à ce chemin
 	 */
 	public void addPath(AiPath path, Color color)
 	{	if(color!=null && path!=null && !path.isEmpty())
@@ -106,7 +106,7 @@ public class AiOutput
 	}
 
 	/**
-	 * renvoie la liste des couleurs associ�es aux chemins
+	 * renvoie la liste des couleurs associées aux chemins
 	 * 
 	 * @return
 	 * 		une liste de couleurs
@@ -177,7 +177,7 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// TEXTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** d�termine si le texte sera affich� en normalement ou en gras */
+	/** détermine si le texte sera affich� en normalement ou en gras */
 	private boolean bold = false;
 	/** texte à afficher sur les cases de la zone de jeu */
 	private List<String> tileTexts[][];
@@ -204,7 +204,7 @@ public class AiOutput
 	}
 	
 	/**
-	 * r�initialise les textes associ�s aux cases
+	 * r�initialise les textes associés aux cases
 	 */
 	private void reinitTileTexts()
 	{	for(int line=0;line<zone.getHeight();line++)
@@ -213,12 +213,12 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie le texte associ� à une case. Permet
+	 * modifie le texte associé à une case. Permet
 	 * par exemple d'afficher des heuristiques, des couts
-	 * en temps r�el.
+	 * en temps réel.
 	 * 
 	 * @param tile
-	 * 		case associ�e au texte
+	 * 		case associée au texte
 	 * @param text
 	 * 		texte à afficher sur cette case
 	 */
@@ -229,14 +229,14 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie le texte associ� à une case. Permet
+	 * modifie le texte associé à une case. Permet
 	 * par exemple d'afficher des heuristiques, des co�ts
-	 * en temps r�el.
+	 * en temps réel.
 	 * 
 	 * @param line
-	 * 		ligne de la case associ�e au texte
+	 * 		ligne de la case associée au texte
 	 * @param col
-	 * 		colonne de la case associ�e au texte
+	 * 		colonne de la case associée au texte
 	 * @param text
 	 * 		texte à afficher sur cette case
 	 */
@@ -245,14 +245,14 @@ public class AiOutput
 	}
 
 	/**
-	 * modifie le texte associ� à une case. Permet
+	 * modifie le texte associé à une case. Permet
 	 * par exemple d'afficher des heuristiques, des co�ts
-	 * en temps r�el.
+	 * en temps réel.
 	 * 
 	 * @param line
-	 * 		ligne de la case associ�e au texte
+	 * 		ligne de la case associée au texte
 	 * @param col	
-	 * 		colonne de la case associ�e au texte
+	 * 		colonne de la case associée au texte
 	 * @param texts	
 	 * 		tableau de textes à afficher sur cette case
 	 */

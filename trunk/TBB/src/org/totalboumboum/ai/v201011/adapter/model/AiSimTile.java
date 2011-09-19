@@ -45,7 +45,7 @@ import org.totalboumboum.game.round.RoundVariables;
 final class AiSimTile extends AiTile
 {	
 	/**
-	 * construit une simulation de case à partir des coordonnées pass�es en param�tres
+	 * construit une simulation de case à partir des coordonnées passées en paramètres
 	 * 
 	 * @param zone
 	 * 		zone contenant la simulation
@@ -56,7 +56,7 @@ final class AiSimTile extends AiTile
 	 * @param posX
 	 * 		abscisse de la case
 	 * @param posY
-	 * 		ordonn�e de la case
+	 * 		ordonnée de la case
 	 */
 	protected AiSimTile(AiSimZone zone, int line, int col, double posX, double posY)
 	{	this.zone = zone;
@@ -155,9 +155,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des blocks �ventuellement contenus dans cette case */
+	/** liste à usage interne des blocks éventuellement contenus dans cette case */
 	private final List<AiSimBlock> internalBlocks = new ArrayList<AiSimBlock>();
-	/** liste à usage externe des blocks �ventuellement contenus dans cette case */
+	/** liste à usage externe des blocks éventuellement contenus dans cette case */
 	private final List<AiBlock> externalBlocks = new ArrayList<AiBlock>();
 	
 	@Override
@@ -167,10 +167,10 @@ final class AiSimTile extends AiTile
 	
 	/** 
 	 * renvoie la liste des blocks contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les blocks �ventuellement contenus dans cette case
+	 * 		les blocks éventuellement contenus dans cette case
 	 */
 	protected List<AiSimBlock> getInternalBlocks()
 	{	return internalBlocks;	
@@ -179,9 +179,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des bombes �ventuellement contenues dans cette case */
+	/** liste à usage interne des bombes éventuellement contenues dans cette case */
 	private final List<AiSimBomb> internalBombs = new ArrayList<AiSimBomb>();
-	/** liste à usage externe des bombes �ventuellement contenues dans cette case */
+	/** liste à usage externe des bombes éventuellement contenues dans cette case */
 	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
 	
 	@Override
@@ -191,10 +191,10 @@ final class AiSimTile extends AiTile
 	
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les bombes �ventuellement contenues dans cette case
+	 * 		les bombes éventuellement contenues dans cette case
 	 */
 	protected List<AiSimBomb> getInternalBombs()
 	{	return internalBombs;	
@@ -203,9 +203,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des feux �ventuellement contenus dans cette case */
+	/** liste à usage interne des feux éventuellement contenus dans cette case */
 	private final List<AiSimFire> internalFires = new ArrayList<AiSimFire>();
-	/** liste à usage externe des feux �ventuellement contenus dans cette case */
+	/** liste à usage externe des feux éventuellement contenus dans cette case */
 	private final List<AiFire> externalFires = new ArrayList<AiFire>();
 	
 	@Override
@@ -215,10 +215,10 @@ final class AiSimTile extends AiTile
 	
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les feux �ventuellement contenus dans cette case
+	 * 		les feux éventuellement contenus dans cette case
 	 */
 	protected List<AiSimFire> getInternalFires()
 	{	return internalFires;	
@@ -227,9 +227,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des sols �ventuellement contenus dans cette case */
+	/** liste à usage interne des sols éventuellement contenus dans cette case */
 	private final List<AiSimFloor> internalFloors = new ArrayList<AiSimFloor>();
-	/** liste à usage externe des sols �ventuellement contenus dans cette case */
+	/** liste à usage externe des sols éventuellement contenus dans cette case */
 	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
 	
 	@Override
@@ -239,7 +239,7 @@ final class AiSimTile extends AiTile
 	
 	/** 
 	 * renvoie les sols de cette case 
-	 * (il y a forc�ment au moins un sol)
+	 * (il y a forcément au moins un sol)
 	 * 
 	 * @return	
 	 * 		les sols contenus dans cette case
@@ -251,9 +251,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des personnages �ventuellement contenus dans cette case */
+	/** liste à usage interne des personnages éventuellement contenus dans cette case */
 	private final List<AiSimHero> internalHeroes = new ArrayList<AiSimHero>();
-	/** liste à usage externe des personnages �ventuellement contenus dans cette case */
+	/** liste à usage externe des personnages éventuellement contenus dans cette case */
 	private final List<AiHero> externalHeroes = new ArrayList<AiHero>();
 	
 	@Override
@@ -263,10 +263,10 @@ final class AiSimTile extends AiTile
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les personnages �ventuellement contenus dans cette case
+	 * 		les personnages éventuellement contenus dans cette case
 	 */
 	protected List<AiSimHero> getInternalHeroes()
 	{	return internalHeroes;	
@@ -275,9 +275,9 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des items �ventuellement contenus dans cette case */
+	/** liste à usage interne des items éventuellement contenus dans cette case */
 	private final List<AiSimItem> internalItems = new ArrayList<AiSimItem>();
-	/** liste à usage externe des items �ventuellement contenus dans cette case */
+	/** liste à usage externe des items éventuellement contenus dans cette case */
 	private final List<AiItem> externalItems = new ArrayList<AiItem>();
 
 	@Override
@@ -287,10 +287,10 @@ final class AiSimTile extends AiTile
 
 	/** 
 	 * renvoie la liste des items contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les items �ventuellement contenus dans cette case
+	 * 		les items éventuellement contenus dans cette case
 	 */
 	protected List<AiSimItem> getInternalItems()
 	{	return internalItems;	
@@ -331,10 +331,10 @@ final class AiSimTile extends AiTile
 	}
 
 	/**
-	 * fonction auxiliaire utilisée pour d�terminer si cette
-	 * case est traversable par le sprite pass� en param�tre.
+	 * fonction auxiliaire utilisée pour déterminer si cette
+	 * case est traversable par le sprite passé en paramètre.
 	 * (cette fonction r�alise le traitement relativement à 
-	 * la liste de sprite pass�e en param�tre)
+	 * la liste de sprite passée en paramètre)
 	 * 
 	 * @param sprite
 	 * 		le sprite qui veut traverser cette case
@@ -394,7 +394,7 @@ final class AiSimTile extends AiTile
 	}
 
 	/**
-	 * termine les simulations de sprites pass�es en param�tres
+	 * termine les simulations de sprites passées en paramètres
 	 * 
 	 * @param <T>
 	 * 		type de simulation

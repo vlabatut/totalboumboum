@@ -168,7 +168,7 @@ public class PerfectStrangers {
 	}	
 	
 	/**
-	 * On renvoie la liste des case qui d�finie la port�e virtuelle de la bombe.
+	 * On renvoie la liste des case qui définie la port�e virtuelle de la bombe.
 	 * @param tile
 	 * @param range
 	 * @return List<AiTile>

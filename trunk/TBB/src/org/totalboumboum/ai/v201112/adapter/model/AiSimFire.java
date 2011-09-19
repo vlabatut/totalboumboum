@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiFire;
 import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 
 /**
- * simule un feu du jeu, ie une projection mortelle r�sultant (g�n�ralement) 
+ * simule un feu du jeu, ie une projection mortelle r�sultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
@@ -34,8 +34,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 final class AiSimFire extends AiSimSprite implements AiFire
 {
 	/**
-	 * crée une simulation du feu pass� en param�tre,
-	 * avec les propri�t�s pass�es en param�tres.
+	 * crée une simulation du feu passé en paramètre,
+	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
 	 * 		num�ro d'identification du feu
@@ -44,7 +44,7 @@ final class AiSimFire extends AiSimSprite implements AiFire
 	 * @param posX
 	 * 		abscisse du feu
 	 * @param posY
-	 * 		ordonn�e du feu
+	 * 		ordonnée du feu
 	 * @param posZ
 	 * 		hauteur du feu
 	 * @param state
@@ -71,8 +71,8 @@ final class AiSimFire extends AiSimSprite implements AiFire
 	}	
 
 	/**
-	 * crée une simulation du feu pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une simulation du feu passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param fire	
 	 * 		sprite à simuler
@@ -135,7 +135,7 @@ final class AiSimFire extends AiSimSprite implements AiFire
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps �coul� depuis que le feu existe, exprim� en ms */
+	/** temps �coul� depuis que le feu existe, exprimé en ms */
 	private long time = 0;
 	
 	@Override

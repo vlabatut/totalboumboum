@@ -111,7 +111,7 @@ if(ff==null)
 if(bf==null)
 	System.err.println("makeBlock: sprite '"+name+"' not found");
 		Block result = bf.makeSprite(tile);
-//NOTE dans ce type de méthode, il faut tester si le nom pass� en param�tre a bien �t� trouv� !
+//NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien �t� trouv� !
 		
 		// record/transmit event
 		SpriteCreationEvent event = new SpriteCreationEvent(result,name);

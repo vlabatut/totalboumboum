@@ -158,7 +158,7 @@ public class DropBomb
 		return result;
 	}
 	
-	//La methode qui controle si la case pass�e en parametre se trouve dans la port� d'une bombe
+	//La methode qui controle si la case passée en parametre se trouve dans la port� d'une bombe
 	public boolean isSafe(AiTile tile)
 	{
 		boolean result = true;

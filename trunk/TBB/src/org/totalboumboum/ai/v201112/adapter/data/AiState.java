@@ -25,9 +25,9 @@ import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * D�crit un état dans lequel un sprite peut se trouver, c'est
+ * décrit un état dans lequel un sprite peut se trouver, c'est
  * à dire essentiellement l'action que le sprite r�alise ou qu'il subit.
- * Cet état est d�crit par le nom de cette action, et �ventuellement la
+ * Cet état est décrit par le nom de cette action, et éventuellement la
  * direction dans laquelle elle est effectuée (pour les actions orient�es
  * comme le déplacement, par exemple).
  * 
@@ -40,10 +40,10 @@ public interface AiState
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le nom associ� à l'�tat
+	 * renvoie le nom associé à l'�tat
 	 * 
 	 * @return	
-	 * 		nom associ� à l'�tat
+	 * 		nom associé à l'�tat
 	 */
 	public AiStateName getName();
 	
@@ -51,11 +51,11 @@ public interface AiState
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la direction associ�e à l'�tat,
-	 * qui peut �tre NONE, c'est à dire : l'�tat n'est pas orient�
+	 * renvoie la direction associée à l'�tat,
+	 * qui peut être NONE, c'est à dire : l'�tat n'est pas orient�
 	 * 
 	 * @return	
-	 * 		direction associ�e à l'�tat
+	 * 		direction associée à l'�tat
 	 */
 	public Direction getDirection();
 
@@ -63,10 +63,10 @@ public interface AiState
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la dur�e que le sprite a pass� dans l'�tat courant
+	 * renvoie la dur�e que le sprite a passé dans l'�tat courant
 	 * 
 	 * @return	
-	 * 		une dur�e exprim�e en ms
+	 * 		une dur�e exprimée en ms
 	 */
 	public long getTime();
 }

@@ -39,14 +39,14 @@ public class BasicCostCalculator extends CostCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Les deux cases sont suppos�es �tre voisines, 
+	 * Les deux cases sont suppos�es être voisines, 
 	 * on se contente de renvoyer leur distance
-	 * (exprim�e en cases, donc forc�ment 1).
+	 * (exprimée en cases, donc forcément 1).
 	 * 
 	 * @param start	
-	 * 		la case de d�part
+	 * 		la case de départ
 	 * @param end	
-	 * 		la case d'arriv�e
+	 * 		la case d'arrivée
 	 * @return 
 	 * 		la distance entre ces cases (ici : 1, puisqu'elles sont voisines)
 	 */ 
@@ -56,7 +56,7 @@ public class BasicCostCalculator extends CostCalculator
 	}
 
 	/**
-	 * le co�t d'un chemin correspond ici à sa distance exprim�e
+	 * le co�t d'un chemin correspond ici à sa distance exprimée
 	 * en cases.
 	 * 
 	 * @param path

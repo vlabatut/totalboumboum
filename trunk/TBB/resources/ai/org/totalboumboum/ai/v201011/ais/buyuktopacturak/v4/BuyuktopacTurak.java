@@ -177,7 +177,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	// EXECUTION COLLECTE FOR DROP THE BOMB		  ///////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * On �value des crit�res (le nombre des murs destructibles et de bonus) 
+	 * On �value des critéres (le nombre des murs destructibles et de bonus) 
 	 * ensuite on d�cide le posage de bombe pour le mode collecte. 
 	 */
 	private void executeCollect() throws StopRequestException{
@@ -231,7 +231,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * On �value des crit�res (tuer à l�adversaire) 
+	 * On �value des critéres (tuer à l�adversaire) 
 	 * ensuite on d�cide le posage de bombe pour le mode attaque.
 	 */
 	private void executeAttack() throws StopRequestException{
@@ -325,7 +325,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * On renvoie la longueur de la chemine qui est le plus court chemin 
-	 * pour aller de la case d�part à la case arr�t en utilisant l�algorithme A*.
+	 * pour aller de la case départ à la case arr�t en utilisant l�algorithme A*.
 	 * @param tile1
 	 * @param tile2
 	 * @return
@@ -455,7 +455,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		return this.currentX;
 	}
 	/**
-	 * renvoie l'ordonn�e courante (en pixels)
+	 * renvoie l'ordonnée courante (en pixels)
 	 */
 	public double getCurrentY() throws StopRequestException
 	{	
@@ -509,7 +509,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * Si on ne trouve pas de chemine en utilisant l�algorithme A*, 
-	 * alors on trouve une direction pour se diriger de la case d�part à la case arr�t.
+	 * alors on trouve une direction pour se diriger de la case départ à la case arr�t.
 	 * @param tile1
 	 * @param tile2
 	 * @return

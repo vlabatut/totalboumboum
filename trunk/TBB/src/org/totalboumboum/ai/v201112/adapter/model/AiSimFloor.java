@@ -26,7 +26,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 
 /**
  * simule un sol du jeu, ie le graphisme affich� en tant que première couche de toute
- * case de la zone (et �ventuellement recouvert par les autres types de sprites).
+ * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
  *
@@ -34,8 +34,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 final class AiSimFloor extends AiSimSprite implements AiFloor
 {
 	/**
-	 * crée une simulation du sol pass� en param�tre,
-	 * avec les propri�t�s pass�es en param�tres.
+	 * crée une simulation du sol passé en paramètre,
+	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
 	 * 		num�ro d'identification du sol
@@ -44,9 +44,9 @@ final class AiSimFloor extends AiSimSprite implements AiFloor
 	 * @param posX
 	 * 		abscisse du sol
 	 * @param posY
-	 * 		ordonn�e du sol
+	 * 		ordonnée du sol
 	 * @param posZ
-	 * 		hauteur du sol (forc�ment 0)
+	 * 		hauteur du sol (forcément 0)
 	 * @param state
 	 * 		�tat du sol
 	 * @param burningDuration
@@ -60,8 +60,8 @@ final class AiSimFloor extends AiSimSprite implements AiFloor
 	}	
 
 	/**
-	 * crée une simulation du sol pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une simulation du sol passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param floor
 	 * 		sprite à simuler

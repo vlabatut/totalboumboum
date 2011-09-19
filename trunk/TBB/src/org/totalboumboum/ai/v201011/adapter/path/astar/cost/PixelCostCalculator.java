@@ -27,13 +27,13 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
- * Classe �tendant la classe abstraite CostCalculator de la mani�re à d�terminer
+ * Classe �tendant la classe abstraite CostCalculator de la mani�re à déterminer
  * le co�t en fonction de la distance en pixel entre les cases.
  * Cela ne change rien pour toutes les cases sauf la première, car en fonction
- * de la position du point de d�part, deux chemins peuvent correspondre à la même
- * distance si on consid�re les cases, mais une distance diff�rente si on consid�re
+ * de la position du point de départ, deux chemins peuvent correspondre à la même
+ * distance si on considère les cases, mais une distance différente si on consid�re
  * les pixels.
- * <b>Attention :</b> le point de d�part doit obligatoirement �tre mis à 
+ * <b>Attention :</b> le point de départ doit obligatoirement être mis à 
  * jour avant chaque nouvel appel à A*. 
  * 
  * @author Vincent Labatut
@@ -44,11 +44,11 @@ public class PixelCostCalculator extends CostCalculator
 	/////////////////////////////////////////////////////////////////
 	// STARTING POINT			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case de d�part du chemin en cours de recherche */
+	/** case de départ du chemin en cours de recherche */
 	private AiTile startTile;
-	/** abscisse de d�part (doit �tre contenue dans la case de d�part) */
+	/** abscisse de départ (doit être contenue dans la case de départ) */
 	private double startX;
-	/** ordonn�e de d�part (doit �tre contenue dans la case de d�part) */
+	/** ordonnée de départ (doit être contenue dans la case de départ) */
 	private double startY;
 	
 	public void updateStartPoint(AiTile startTile, double startX, double startY)
@@ -61,16 +61,16 @@ public class PixelCostCalculator extends CostCalculator
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Les deux cases sont suppos�es �tre voisines, 
+	 * Les deux cases sont suppos�es être voisines, 
 	 * on se contente de renvoyer la distance en pixels entre leurs centres.
 	 * Sauf si la case start correspond à la première case
 	 * du chemin : l�, on renvoie la distance entre le point
-	 * de d�part et le centre de la case suivante.
+	 * de départ et le centre de la case suivante.
 	 * 
 	 * @param start	
-	 * 		la case de d�part
+	 * 		la case de départ
 	 * @param end	
-	 * 		la case d'arriv�e
+	 * 		la case d'arrivée
 	 * @return 
 	 * 		la distance entre ces cases
 	 */ 
@@ -97,7 +97,7 @@ public class PixelCostCalculator extends CostCalculator
 
 	/**
 	 * le co�t d'un chemin correspond ici à sa distance 
-	 * exprim�e en pixels.
+	 * exprimée en pixels.
 	 * 
 	 * @param path
 	 * 		chemin à traiter

@@ -102,8 +102,8 @@ public class Neighbors {
 	}
 
 	/**
-	 * la liste des cases voisines propres qui ne sont pas dans la portée d'une bombe
-	 * @return la liste des cases voisines propres qui ne sont pas dans la portée d'une bombe
+	 * la liste des cases voisines propres qui ne sont pas dans la portï¿½e d'une bombe
+	 * @return la liste des cases voisines propres qui ne sont pas dans la portï¿½e d'une bombe
 	 * @throws StopRequestException
 	 */
 	public List<AiTile> findNeighborsNotInBombRange()	throws StopRequestException
@@ -118,7 +118,7 @@ public class Neighbors {
 		List<AiTile> tiles = findCleanNeighbors();
 		Iterator<AiTile> iter = tiles.iterator();
 
-		//on considere que la portée d'une bombe est 20 cases
+		//on considere que la portï¿½e d'une bombe est 20 cases
 		int bombRange = 10;
 
 		while (iter.hasNext()) {
@@ -153,7 +153,7 @@ public class Neighbors {
 	}
 
 	/**
-	 * determine si une case est dans la portée d'une bombe
+	 * determine si une case est dans la portï¿½e d'une bombe
 	 * @param tile
 	 * @param bombRange
 	 * @return true si elle est, false sinon
@@ -199,7 +199,7 @@ public class Neighbors {
 			}
 		}
 
-		// s'il existe des murs entre la bombe et la case actuelle, ça n'apporte pas des risques
+		// s'il existe des murs entre la bombe et la case actuelle, Ã§a n'apporte pas des risques
 		for (int col = 4; col < 13; col++) 
 		{
 			sa.checkInterruption();
@@ -248,7 +248,7 @@ public class Neighbors {
 
 		}
 
-		// s'il existe des murs entre la bombe et la case actuel, ça n'apporte pas des risques
+		// s'il existe des murs entre la bombe et la case actuel, Ã§a n'apporte pas des risques
 		for (int line = 3; line < 12; line++) 
 		{
 			sa.checkInterruption();
@@ -283,9 +283,9 @@ public class Neighbors {
 	}
 
 	/**
-	 * le nombre des voisins de la case donnée
+	 * le nombre des voisins de la case donnï¿½e
 	 * @param tile
-	 * @return le nombre des voisins de la case donnée
+	 * @return le nombre des voisins de la case donnï¿½e
 	 * @throws StopRequestException
 	 */
 	public int getNeighborsNumber(AiTile tile) throws StopRequestException {
@@ -299,9 +299,9 @@ public class Neighbors {
 	
 	
 	/**
-	 * la distance directe entre la case donnée et la bombe la plus proche
+	 * la distance directe entre la case donnï¿½e et la bombe la plus proche
 	 * @param tile
-	 * @return la distance directe entre la case donnée et la bombe la plus proche
+	 * @return la distance directe entre la case donnï¿½e et la bombe la plus proche
 	 * @throws StopRequestException
 	 */
 	public double getHypotenuseToBomb(AiTile tile) throws StopRequestException {

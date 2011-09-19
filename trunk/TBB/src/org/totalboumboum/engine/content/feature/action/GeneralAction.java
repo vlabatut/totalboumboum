@@ -58,16 +58,16 @@ public abstract class GeneralAction implements Serializable
 	 * 
 	 * il semble qu'on a parfois besoin d'une position sous forme de case.
 	 * dans ce cas l�, on peut passer la case (ou ses coordonnées) lors de la cr�ation de l'action,
-	 * qui initialise ses champs en cons�quence.
+	 * qui initialise ses champs en conséquence.
 	 * 
 	 * il semble logique de laisser la gestion compl�te des autorisations de transition aux modulations
 	 * donc pas la peine de les coder en dur comme c'est actuellement fait dans les event managers
 	 * 
 	 * ability fait-elle partie de isPossible ? a priori, je dirais oui.
-	 * donc: 	isPossible=compatibilité avec l'action g�n�rale + ability
+	 * donc: 	isPossible=compatibilité avec l'action générale + ability
 	 * 			isAllowed=modulation
 	 * en fait non, c'est trop li� aux modulations. il vaut mieux faire:
-	 * 		isPossible=compatiblit� avec l'action g�n�rale
+	 * 		isPossible=compatiblit� avec l'action générale
 	 * 		isAllowed=ability modul�e
 	 * 
 	 */

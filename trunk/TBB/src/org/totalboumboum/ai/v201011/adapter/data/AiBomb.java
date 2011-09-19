@@ -26,7 +26,7 @@ import java.util.List;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * repr�sente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
+ * représente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
  * pour détruire les murs et �liminer les autre joueurs.
  * 
  * @author Vincent Labatut
@@ -41,7 +41,7 @@ public interface AiBomb extends AiSprite
 	 * renvoie un exemple de feu que cette bombe peut g�n�rer
 	 * 
 	 * @return	
-	 * 		une repr�sentation du feu g�n�r� par cette bombe
+	 * 		une représentation du feu g�n�r� par cette bombe
 	 */
 	public AiFire getFirePrototype();
 
@@ -49,7 +49,7 @@ public interface AiBomb extends AiSprite
 	 * renvoie la dur�e de l'explosion de cette bombe.
 	 * Cette dur�e comprend l'apparition des flammes,
 	 * la dur�e de vie des flammes, et leur disparition.
-	 * Cette valeur n'est pas forc�ment constante, et peut varier d'une bombe à l'autre.
+	 * Cette valeur n'est pas forcément constante, et peut varier d'une bombe à l'autre.
 	 * 
 	 * @return	
 	 * 		la dur�e de l'explosion
@@ -76,10 +76,10 @@ public interface AiBomb extends AiSprite
 	public boolean hasCountdownTrigger();
 	
 	/**
-	 * indique si l'explosion de la bombe d�pend d'une t�l�commande
+	 * indique si l'explosion de la bombe d�pend d'une télécommande
 	 * 
 	 * @return	
-	 * 		vrai si la bombe d�pend d'une t�l�commande
+	 * 		vrai si la bombe d�pend d'une télécommande
 	 */
 	public boolean hasRemoteControlTrigger();
 	
@@ -93,17 +93,17 @@ public interface AiBomb extends AiSprite
 	
 	/**
 	 * renvoie le d�lai normal avant l'explosion de la bombe.
-	 * Ce d�lai ne tient pas compte des pannes �ventuelles.
-	 * Ce d�lai n'est pas d�fini pour tous les types de bombes
+	 * Ce d�lai ne tient pas compte des pannes éventuelles.
+	 * Ce d�lai n'est pas défini pour tous les types de bombes
 	 * 
 	 * @return	
-	 * 		le d�lai normal avant explosion exprim� en millisecondes
+	 * 		le d�lai normal avant explosion exprimé en millisecondes
 	 */
 	public long getNormalDuration();
 
 	/**
-	 * renvoie la latence de cette bombe, dans le cas où elle peut �tre d�clench�e par
-	 * une explosion. Cette latence repr�sente le temps entre le moment o�
+	 * renvoie la latence de cette bombe, dans le cas où elle peut être d�clench�e par
+	 * une explosion. Cette latence représente le temps entre le moment o�
 	 * la bombe est touch�e par l'explosion, et le moment où elle commence effectivement
 	 * à exploser.
 	 * 
@@ -126,8 +126,8 @@ public interface AiBomb extends AiSprite
 	
 	/**
 	 * indique si le feu �mis par la bombe peut traverser les murs
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plut�t getBlast().
 	 * 
 	 * @return	
@@ -171,7 +171,7 @@ public interface AiBomb extends AiSprite
 	 * (pour certains niveaux sp�ciaux où les blocs peuvent g�n�rer des bombes)  
 	 * 
 	 * @return 
-	 * 		un symbole de type PredefinedColor repr�sentant une couleur
+	 * 		un symbole de type PredefinedColor représentant une couleur
 	 */
 	public PredefinedColor getColor();
 
@@ -193,7 +193,7 @@ public interface AiBomb extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie la vitesse de déplacement au sol de cette bombe,
-	 * exprim�e en pixel/seconde. il ne s'agit pas de la vitesse 
+	 * exprimée en pixel/seconde. il ne s'agit pas de la vitesse 
 	 * de déplacement courante, il s'agit de la vitesse de la bombe
 	 * quand elle glisse par terre. 
 	 * 
@@ -207,14 +207,14 @@ public interface AiBomb extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie le temps �coul� depuis que le compte à rebours de la 
-	 * bombe a commenc�, exprim� en millisecondes. Bien s�r ceci
+	 * bombe a commencé, exprimé en millisecondes. Bien s�r ceci
 	 * n'est valide que pour les bombes à retardement (qui ont un 
 	 * compte à rebours).
 	 * <b>Attention :</b> certaines actions sp�ciales comme le fait de lancer
 	 * la bombe sont susceptibles de r�initialiser le compte à rebours.
 	 * 
 	 * @return	
-	 * 		temps exprim� en ms
+	 * 		temps exprimé en ms
 	 */
 	public long getTime();
 
@@ -223,8 +223,8 @@ public interface AiBomb extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * indique si ce bloc arr�te les personnages.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -234,8 +234,8 @@ public interface AiBomb extends AiSprite
 	
 	/**
 	 * indique si ce bloc arr�te les explosions.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -245,8 +245,8 @@ public interface AiBomb extends AiSprite
 	
 	/**
 	 * teste si cette bombe est capable de passer à travers les items
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	

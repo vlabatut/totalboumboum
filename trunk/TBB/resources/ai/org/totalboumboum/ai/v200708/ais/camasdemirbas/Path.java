@@ -14,7 +14,7 @@ import java.util.List;
  */
 @SuppressWarnings("unchecked")
 public class Path {
-	/** La liste d'�tapes d�veloppant ce chemin */
+	/** La liste d'�tapes développant ce chemin */
 	@SuppressWarnings("rawtypes")
 	private List steps = new ArrayList();
 	
@@ -47,7 +47,7 @@ public class Path {
 	/**
 	 * Obtenir la coordonnée de x pour l'�tape à l'index donn�
 	 * 
-	 * @param L'index de l'�tape dont x la coordonnée devrait �tre rapport�e
+	 * @param L'index de l'�tape dont x la coordonnée devrait être rapport�e
 	 * @return x coordonnée à l'�tape
 	 */
 	public int getX(int index) {
@@ -57,7 +57,7 @@ public class Path {
 	/**
 	 * Obtenir  la coordonnée de y pour l'�tape à l'index donn�
 	 * 
-	 * @param l'index de l'�tape dont y la coordonnée devrait �tre rapport�e
+	 * @param l'index de l'�tape dont y la coordonnée devrait être rapport�e
 	 * @return y
 	 */
 	public int getY(int index) {

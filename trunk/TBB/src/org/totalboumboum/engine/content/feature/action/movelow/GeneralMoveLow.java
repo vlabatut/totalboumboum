@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action de se déplacer sur le sol
+ * action de se dï¿½placer sur le sol
  * INTRANSITIVE
  * 
  * <p>ABILITY PERFORM
@@ -43,13 +43,13 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>paramètre: actor=oui (hero, bomb)
- * 	<br>paramètre: target=N/D
- * 	<br>paramètre: direction=oui
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=oui
- * 	<br>paramètre: restriction=SPRITE_TRAVERSE
+ * 	<br>paramÃ¨tre: actor=oui (hero, bomb)
+ * 	<br>paramÃ¨tre: target=N/D
+ * 	<br>paramÃ¨tre: direction=oui
+ * 	<br>paramÃ¨tre: strength=bool
+ * 	<br>paramÃ¨tre: kind=N/D
+ * 	<br>paramÃ¨tre: scope=oui
+ * 	<br>paramÃ¨tre: restriction=SPRITE_TRAVERSE
  */
 /** 
  * on ground (normal) move.

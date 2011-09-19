@@ -2,8 +2,8 @@ package org.totalboumboum.ai.v200708.ais.bingolketenci;
 
 
 /**
- * Repr�sente un lien orient� dans un arbre de recherche.
- * Ce lien est d�fini par les deux noeuds reli�s : l'origine (parent)
+ * Représente un lien orient� dans un arbre de recherche.
+ * Ce lien est défini par les deux noeuds reli�s : l'origine (parent)
  * et la cible (fils) ainsi que par l'action à r�aliser pour passer 
  * d'un état à l'autre.
  * 
@@ -52,7 +52,7 @@ public class SearchLink
 
 	/**
 	 * Renvoie une valeur indiquant l'egalite de l'objet
-	 * vrai si l'objet pass� en parametre est egale à cet objet
+	 * vrai si l'objet passé en parametre est egale à cet objet
 	 * false sinon 
 	 * @return result indique l'egalite	
 	 */

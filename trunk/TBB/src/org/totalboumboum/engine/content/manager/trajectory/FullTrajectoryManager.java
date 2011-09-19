@@ -155,11 +155,11 @@ public class FullTrajectoryManager extends TrajectoryManager
 	private double forcedTotalZShift = 0;
 
 	/**
-	 * si on a d�pass� le forcedPositionDuration, il faut :  
-	 * 		- calculer la position virtuelle à ce temps l� (ce qui implique de calculer le point de d�part en r�f�rence)
+	 * si on a d�passé le forcedPositionDuration, il faut :  
+	 * 		- calculer la position virtuelle à ce temps l� (ce qui implique de calculer le point de départ en r�f�rence)
 	 * 		- v�rifier si elle colle à la position forc�e
 	 * 		- si elle ne colle pas : la corriger
-	 * si on ne l'a pas encore d�pass�e : à peu près pareil
+	 * si on ne l'a pas encore d�passée : à peu près pareil
 	 * 		- calculer la position initiale
 	 * 		- calculer la position forc�e correspondante
 	 * 		- corriger  
@@ -215,7 +215,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 		double gapY = theoreticalY - currentPosY;
 		double gapZ = theoreticalZ - currentPosZ;
 		/* NOTE on pourrait �chelonner la correction, mais on choisit l'approche brutale
-		 * quitte à affiner par la suite si n�cessaire
+		 * quitte à affiner par la suite si nécessaire
 		 */
 		currentPosX = currentPosX + gapX;
 		currentPosY = currentPosY + gapY;
@@ -295,7 +295,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * modifie la position absolue courante en fonction du boundToSprite.
-	 * Cette méthode doit imp�rativement �tre appelée juste avant un changement de gesture.
+	 * Cette méthode doit imp�rativement être appelée juste avant un changement de gesture.
 	 * @param newSprite
 	 */
 	@Override
@@ -360,7 +360,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 	double shiftZ = 0;
 
 	/**
-	 * méthode appelée à chaque it�ration
+	 * méthode appelée à chaque itération
 	 * met à jour le déplacement et la position relative.
 	 * attention : dans le cas d'une répétition, le dernier point
 	 * de la trajectoire sert de premier point à la répétition suivante.
@@ -546,11 +546,11 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	/////////////////////////////////////////////////////////////////
 	// RELATIVE FORCED POSITIONS	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** position X exprim�e relativement au centre de la case courante */
+	/** position X exprimée relativement au centre de la case courante */
 	private double relativeForcedPosX = 0;
-	/** position Y exprim�e relativement au centre de la case courante */
+	/** position Y exprimée relativement au centre de la case courante */
 	private double relativeForcedPosY = 0;
-	/** position Z exprim�e relativement au centre de la case courante */
+	/** position Z exprimée relativement au centre de la case courante */
 	private double relativeForcedPosZ = 0;
 
 	private void updateRelativeForcedPos()

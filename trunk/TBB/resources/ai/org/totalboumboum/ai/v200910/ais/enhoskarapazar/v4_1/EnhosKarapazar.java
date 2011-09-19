@@ -25,18 +25,18 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	private Direction leftBomb = Direction.NONE;
 	private AiTile endTile = null;
 	private AiTile endTileAttack = null;
-	/** le personnage dirigé par cette IA */
+	/** le personnage dirigï¿½ par cette IA */
 	private AiHero ownHero = null;
 	/** la zone de jeu */
 	private AiZone zone = null;
-	/** la case occupée actuellement par le personnage */
+	/** la case occupï¿½e actuellement par le personnage */
 	private AiTile currentTile = null;
 	/**
 	 * renvoie la case courante
 	 */
-	/** la position en pixels occupée actuellement par le personnage */
+	/** la position en pixels occupï¿½e actuellement par le personnage */
 	private int currentX;
-	/** la position en pixels occupée actuellement par le personnage */
+	/** la position en pixels occupï¿½e actuellement par le personnage */
 	private int currentY;
 
 	public AiTile getCurrentTile() throws StopRequestException {
@@ -55,7 +55,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	}
 
 	/**
-	 * renvoie l'ordonnée courante (en pixels)
+	 * renvoie l'ordonnÃ©e courante (en pixels)
 	 */
 	public int getCurrentY() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -77,7 +77,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	}
 
 	/**
-	 * renvoie le personnage contrôlé par cette IA
+	 * renvoie le personnage contrï¿½lï¿½ par cette IA
 	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -365,7 +365,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladý dýþþþþþ................................................................"
+									.println("attak range patladï¿½ dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½................................................................"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}
@@ -384,7 +384,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladý dýþþþþþ................................................................"
+									.println("attak range patladï¿½ dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½................................................................"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}
@@ -408,7 +408,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladý dýþþþþþ................................................................"
+									.println("attak range patladï¿½ dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½................................................................"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}
@@ -427,7 +427,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 					} catch (Exception e) {
 						if (debug) {
 							System.out
-									.println("attak range patladý dýþþþþþ................................................................"
+									.println("attak range patladï¿½ dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½................................................................"
 											+ i);
 							System.out.println(e.getStackTrace());
 						}

@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.data;
  */
 
 /**
- * repr�sente un feu du jeu, ie une projection mortelle r�sultant (g�n�ralement) 
+ * représente un feu du jeu, ie une projection mortelle r�sultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
@@ -35,8 +35,8 @@ public interface AiFire extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * teste si ce feu est capable de passer à travers les (certains) murs
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -46,8 +46,8 @@ public interface AiFire extends AiSprite
 
 	/**
 	 * teste si ce feu est capable de passer à travers les bombes
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -57,8 +57,8 @@ public interface AiFire extends AiSprite
 
 	/**
 	 * teste si ce feu est capable de passer à travers les items
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	

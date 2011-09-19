@@ -38,24 +38,24 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
 
 /**
  * 
- * Impl�mentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapt� au
+ * Impl�mentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
  * cette impl�mentation correspond à peu près à un A* classique. Il y a quand même une modification,
  * puisque les noeuds d'�tat apparaissant d�j� dans des noeuds de recherche anc�tre sont
- * �cart�s lorsqu'un noeud de recherche est d�velopp�. En d'autres termes, l'algorithme �vite
+ * �cart�s lorsqu'un noeud de recherche est développ�. En d'autres termes, l'algorithme �vite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'emp�che de
  * boucler à l'infini.</br>
  * 
  * Cette impl�mentation trouved donc le chemin le plus court entre deux cases,
- * en consid�rant les obstacles. Elle a besoin de trois param�tres :
+ * en consid�rant les obstacles. Elle a besoin de trois paramètres :
  * 		- le personnage qui doit effectuer le trajet entre les deux cases
- * 		- une fonction de co�t, qui permet de d�finir combien coute une action (ici : le fait de passer d'une case à l'autre)
+ * 		- une fonction de co�t, qui permet de définir combien coute une action (ici : le fait de passer d'une case à l'autre)
  * 		- une fonction heuristique, qui permet d'estimer le cout du chemin restant à parcourir</br>
  * 
- * A noter qu'il s'agit d'une impl�mentation non-d�terministe de l'algorithme.
+ * A noter qu'il s'agit d'une impl�mentation non-déterministe de l'algorithme.
  * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
- * rapport au cout d�fini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
- * renverra pas forc�ment toujours la même (il en choisira une au hasard).
+ * rapport au cout défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
+ * renverra pas forcément toujours la même (il en choisira une au hasard).
  * Le but est d'introduire une part de hasard dans les IA, de mani�re à les rendre moins pr�visibles.
  * 
  * @author Vincent Labatut
@@ -107,8 +107,8 @@ public class Astar
 	 * i.e. quand le noeud courant a une profondeur correspondant à maxHeight,
 	 * l'algorithme se termine et ne renvoie pas de solution (�chec).
 	 * Dans des cas extr�mes, l'arbre peut avoir une hauteur consid�rable,
-	 * ce qui peut provoquer un d�passement m�moire. Ce param�tre permet d'�viter
-	 * de d�clencher ce type d'exception. A noter qu'un param�tre non-configurable
+	 * ce qui peut provoquer un d�passement m�moire. Ce paramètre permet d'�viter
+	 * de d�clencher ce type d'exception. A noter qu'un paramètre non-configurable
 	 * limite d�j� le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxHeight
@@ -122,8 +122,8 @@ public class Astar
 	 * noeud courant atteint ce cout maximal, l'algorithme se termine et ne
 	 * renvoie pas de solution (�chec)
 	 * Dans des cas extr�mes, l'arbre peut avoir une hauteur consid�rable,
-	 * ce qui peut provoquer un d�passement m�moire. Ce param�tre permet d'�viter
-	 * de d�clencher ce type d'exception. A noter qu'un param�tre non-configurable
+	 * ce qui peut provoquer un d�passement m�moire. Ce paramètre permet d'�viter
+	 * de d�clencher ce type d'exception. A noter qu'un paramètre non-configurable
 	 * limite d�j� le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxCost	le cout maximal que le noeud courant peut atteindre
@@ -140,12 +140,12 @@ public class Astar
 	 * la case endTile, en utilisant l'algorithme A*. Si jamais aucun
 	 * chemin n'est trouv�, alors un chemin vide est renvoy�. Si jamais
 	 * l'algorithme atteint une limite de cout/taille, la valeur null est
-	 * renvoy�e. Dans ce cas l�, c'est qu'il y a g�n�ralement un probl�me
+	 * renvoy�e. Dans ce cas l�, c'est qu'il y a généralement un probl�me
 	 * dans le fa�on dont A* est employ� (mauvaise fonction de cout, par
 	 * exemple). 
 	 * 
-	 * @param startTile	la case de d�part
-	 * @param endTile	la case d'arriv�e
+	 * @param startTile	la case de départ
+	 * @param endTile	la case d'arrivée
 	 * @return un chemin pour aller de startTile à endTile, ou un chemin vide, ou la valeur null
 	 * @throws StopRequestException 
 	 */
@@ -162,12 +162,12 @@ public class Astar
 	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouv� 
 	 * alors un chemin vide est renvoy�. Si jamais l'algorithme atteint 
 	 * une limite de cout/taille, la valeur null est renvoy�e. Dans ce 
-	 * cas-l�, c'est qu'il y a g�n�ralement un probl�me dans le fa�on 
+	 * cas-l�, c'est qu'il y a généralement un probl�me dans le fa�on 
 	 * dont A* est employ� (mauvaise fonction de cout, par exemple).
 	 * La fonction renvoie �galement null si la liste endTiles est vide.
 	 * 
-	 * @param startTile	la case de d�part
-	 * @param endTile	la liste des cases d'arriv�e possibles
+	 * @param startTile	la case de départ
+	 * @param endTile	la liste des cases d'arrivée possibles
 	 * @return un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null
 	 * @throws StopRequestException 
 	 */
@@ -221,7 +221,7 @@ public class Astar
 				{	// sinon on r�cup�re les noeuds suivants
 					List<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
 					// on introduit du hasard en permuttant al�atoirement les noeuds suivants
-					// pour cette raison, cette impl�mentation d'A* ne renverra pas forc�ment toujours le même r�sultat :
+					// pour cette raison, cette impl�mentation d'A* ne renverra pas forcément toujours le même r�sultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
 					Collections.shuffle(successors);
 					// puis on les rajoute dans la file de priorité

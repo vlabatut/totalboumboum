@@ -87,7 +87,7 @@ public class ZoneFormee {
 		fillZone();
 	}
 	
-	/** methode qui rempit la zone de jeu avec les valeurs adapt�es */
+	/** methode qui rempit la zone de jeu avec les valeurs adaptées */
 	public void fillZone(){		
 		
 		matrixDanger = new double[width][heigh];

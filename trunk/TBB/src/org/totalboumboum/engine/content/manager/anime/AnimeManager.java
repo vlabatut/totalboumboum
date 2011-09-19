@@ -65,22 +65,22 @@ public class AnimeManager
 	
 	/**
 	 * Change l'animation en cours pour le sprite consid�r�.
-	 * Param�tres :
+	 * paramètres :
 	 * 	- reinit : 
 	 * 		- remet currentTime (le temps �coul�) à 0 et recalcule le durationCoeff.
 	 * 		- ceci permet de passer d'une anime à une autre sans repartir à z�ro, par exemple pour un changement de direction pendant walking.
 	 * 		- on suppose alors que les deux animes ont exactement les mêmes caract�ristiques (même dur�e, proportion, etc), car elles ne sont pas r�initialis�es.
 	 * 	- forcedDuration : 
-	 * 		- si >0 : force l'animation à durer le temps pass� en param�tre :
-	 * 			- si l'animation est d�finie comme proportionnelle, la dur�e de chaque pas est modifi�e (lin�airement) pour coller à forcedDuration
+	 * 		- si >0 : force l'animation à durer le temps passé en paramètre :
+	 * 			- si l'animation est définie comme proportionnelle, la dur�e de chaque pas est modifiée (lin�airement) pour coller à forcedDuration
 	 * 			- sinon, l'animation est jou�e normalement, mais :
 	 * 				- interrompue si elle est plus longue que forcedDuration
 	 * 				- reste bloqu�e sur la dernière image si elle est plus courte que forcedDuration  
-	 * 		- si =0 : la dur�e de l'animation n'est pas forc�e, on utilise celle d�finie dans le fichier xml
+	 * 		- si =0 : la dur�e de l'animation n'est pas forc�e, on utilise celle définie dans le fichier xml
 	 * 		- si <0 : force  l'animation à durer le même temps que le sprite li� (s'il existe, sinon c'est comme si forcedDuration==0)
 	 * 
 	 * Remarques : 
-	 * 	- une 'animation fixe' (une seule image ou pas d'image) sera en g�n�ral associ�e à totalDuration=0 et repeat=true.
+	 * 	- une 'animation fixe' (une seule image ou pas d'image) sera en général associée à totalDuration=0 et repeat=true.
 	 * 	- s'il n'y a pas reinit, forcedDuration n'est pas pris en compte...  
 	 */
 	public void updateGesture(Gesture gesture, Direction direction, boolean reinit, double forcedDuration)
@@ -168,7 +168,7 @@ public class AnimeManager
 	// UPDATE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * méthode appelée à chaque it�ration : 
+	 * méthode appelée à chaque itération : 
 	 * met à jour l'image à afficher
 	 */
 	public void update()
@@ -228,7 +228,7 @@ public class AnimeManager
 	protected double forcedDurationCoeff = 1;
 	
 	/**
-	 * met à jour les diff�rentes variables g�rant le temps
+	 * met à jour les différentes variables g�rant le temps
 	 */
 	private void updateTime()
 	{	// update current time

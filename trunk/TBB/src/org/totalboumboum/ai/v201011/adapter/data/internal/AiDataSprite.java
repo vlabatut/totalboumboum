@@ -30,25 +30,25 @@ import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDir
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
- * cette classe permet de repr�senter les sprites manipul�s par le jeu,
- * et un nombre restreint de leurs propri�t�s, rendues ainsi accessible à l'IA.
- * Le param�tre T d�termine le type de sprite repr�sent� : bloc, bombe,
+ * cette classe permet de représenter les sprites manipul�s par le jeu,
+ * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
+ * Le paramètre T détermine le type de sprite représent� : bloc, bombe,
  * feu, sol, personnage ou item. 
  * 
  * @author Vincent Labatut
  *
  * @param <T>
- * 		type de sprite repr�sent�
+ * 		type de sprite représent�
  */
 abstract class AiDataSprite<T extends Sprite> implements AiSprite
 {	
 	/**
-	 * construit une repr�sentation du sprite pass� en param�tre
+	 * construit une représentation du sprite passé en paramètre
 	 * 
 	 * @param tile
-	 * 		repr�sentation de la case contenant le sprite
+	 * 		représentation de la case contenant le sprite
 	 * @param sprite
-	 * 		sprite à repr�senter
+	 * 		sprite à représenter
 	 */
 	protected AiDataSprite(AiDataTile tile, T sprite)
 	{	// general
@@ -72,10 +72,10 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour cette repr�sentation du sprite
+	 * met à jour cette représentation du sprite
 	 * 
 	 * @param tile
-	 * 		la nouvelle case contenant cette repr�sentation
+	 * 		la nouvelle case contenant cette représentation
 	 */
 	protected void update(AiDataTile tile, long elapsedTime)
 	{	this.tile = tile;
@@ -98,25 +98,25 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** sprite repr�sent� par cette classe */ 
+	/** sprite représent� par cette classe */ 
 	protected T sprite;
 
 	/**
-	 * teste si cette repr�sentation correspond au sprite pass� en param�tre
+	 * teste si cette représentation correspond au sprite passé en paramètre
 	 * 
 	 * @param sprite
-	 * 		le sprite dont on veut la repr�sentation
+	 * 		le sprite dont on veut la représentation
 	 * @return	
-	 * 		vrai si cette repr�sentation correspond à ce sprite
+	 * 		vrai si cette représentation correspond à ce sprite
 	 */
 	protected boolean isSprite(T sprite)
 	{	return this.sprite == sprite;
 	}
 	
 	/**
-	 * renvoie le sprite correspondant à cette repr�sentation
+	 * renvoie le sprite correspondant à cette représentation
 	 * 
-	 * @return	le sprite correspondant à cette repr�sentation
+	 * @return	le sprite correspondant à cette représentation
 	 */
 	protected T getSprite()
 	{	return sprite;	
@@ -178,7 +178,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** repr�sentation de la case contenant ce sprite */
+	/** représentation de la case contenant ce sprite */
 	protected AiDataTile tile;
 	
 	@Override
@@ -199,7 +199,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// BURN				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps n�cessaire au sprite pour br�ler (� condition qu'il puisse br�ler) */
+	/** temps nécessaire au sprite pour br�ler (� condition qu'il puisse br�ler) */
 	protected long burningDuration = 0;
 	
 	@Override
@@ -232,7 +232,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	/** abscisse de ce sprite en pixels */
 	protected double posX;
-	/** ordonn�e de ce sprite en pixels */
+	/** ordonnée de ce sprite en pixels */
 	protected double posY;
 	/** altitude de ce sprite en pixels */
 	protected double posZ;

@@ -41,7 +41,7 @@ public class TimeMatrice {
 		this.timeMatrice[col][line]=time;
 	};
 	/*
-	 * Ça nous donne la matrice du temps
+	 * Ã§a nous donne la matrice du temps
 	 * Une case contient 0 s'il n y'a aucun danger 
 	 * Sinon il contient le temps restant d'une bombe
 	 */
@@ -55,7 +55,7 @@ public class TimeMatrice {
 		return this.getTime(tile.getCol(),tile.getLine());
 	}
 	/*
-	 * Création de la matrice du temps
+	 * Crï¿½ation de la matrice du temps
 	 */
 	public void createTimeMatrice() {
 		// ajout des murs dans la matrice pour une seule fois
@@ -284,7 +284,7 @@ public class TimeMatrice {
 					// stop
 					up = false;
 				else // Si 0 alors durationNormale
-				// dolu ise kucuk olaný
+				// dolu ise kucuk olanï¿½
 				// Si plein ,la petite 
 				if (this.timeMatrice[temp.getCol()][temp.getLine() - step] == 0)
 					this.timeMatrice[temp.getCol()][temp.getLine() - step] = this.durationNormale;

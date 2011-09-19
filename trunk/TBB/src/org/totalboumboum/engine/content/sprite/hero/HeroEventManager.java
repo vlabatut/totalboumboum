@@ -338,7 +338,7 @@ public class HeroEventManager extends EventManager
 	{	//if(gesture.equals(GestureConstants.PUSHING) || gesture.equals(GestureConstants.STANDING)
 		//	 || gesture.equals(GestureConstants.WAITING) || gesture.equals(GestureConstants.WALKING))
 		if(event.getMode())
-		{	// cette méthode se charge des controles n�cessaires
+		{	// cette méthode se charge des controles nécessaires
 			sprite.triggerBomb(); 
 		}
 	}
@@ -563,7 +563,7 @@ public class HeroEventManager extends EventManager
 			// sinon on prend celle qui est bloqu�e, car celles du controle/sprite ont pu changer
 			else
 				sprite.setGesture(gesture,blockedDirection,blockedDirection,true);
-			// on met �ventuellement à jour pour le rebond 
+			// on met éventuellement à jour pour le rebond 
 			if(gesture.equals(GestureName.BOUNCING) && blockedDirection==Direction.NONE)
 				blockedDirection = spriteDirection;											
 		}

@@ -31,7 +31,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 	private AiTile currentTile;
 	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
-	/** la dernière case par laquelle on est pass� */ 
+	/** la dernière case par laquelle on est passé */ 
 //	private AiTile previousTile = null;
 	
 	

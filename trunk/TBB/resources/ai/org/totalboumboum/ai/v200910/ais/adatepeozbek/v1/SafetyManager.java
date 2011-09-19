@@ -97,7 +97,7 @@ public class SafetyManager
 	}
 	
 	/*
-	 * Calcule d'abord les cases qui vont �tre affect�es par les bombes, puis 
+	 * Calcule d'abord les cases qui vont être affect�es par les bombes, puis 
 	 * calcule les valeurs des temps d'explosion et les mets dans la matrice.
 	 */
 	private void processBombs(List<AiBomb> bombs) throws StopRequestException
@@ -126,7 +126,7 @@ public class SafetyManager
 	}
 
 	/*
-	 * Retourne la valeur de securité de la case pass�e en param�tre
+	 * Retourne la valeur de securité de la case passée en paramètre
 	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

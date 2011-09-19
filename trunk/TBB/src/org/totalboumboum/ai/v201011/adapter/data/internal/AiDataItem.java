@@ -43,9 +43,9 @@ import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import org.totalboumboum.engine.content.sprite.item.Item;
 
 /**
- * repr�sente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caract�ris� par son type, repr�sentant le pouvoir apport� (ou enlev�)
- * par l'item. Ce type est repr�sent�e par une valeur de type AiItemType.
+ * représente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
+ * un item est caract�ris� par son type, représentant le pouvoir apport� (ou enlev�)
+ * par l'item. Ce type est représent�e par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
  *
@@ -53,13 +53,13 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 final class AiDataItem extends AiDataSprite<Item> implements AiItem
 {	
 	/**
-	 * crée une repr�sentation de l'item pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation de l'item passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite à repr�senter
+	 * 		sprite à représenter
 	 */
 	protected AiDataItem(AiDataTile tile, Item sprite)
 	{	super(tile,sprite);
@@ -79,7 +79,7 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** type d'item repr�sent� */
+	/** type d'item représent� */
 	private AiItemType type;
 	
 	@Override
@@ -88,7 +88,7 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	}
 	
 	/**
-	 * initialise le type de l'item repr�sent�
+	 * initialise le type de l'item représent�
 	 */
 	private void initType()
 	{	Item item = getSprite();
@@ -114,7 +114,7 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	}
 
 	/** 
-	 * met jour les diff�rentes caract�ristiques de ce bloc
+	 * met jour les différentes caract�ristiques de ce bloc
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()

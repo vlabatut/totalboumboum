@@ -39,11 +39,11 @@ import org.totalboumboum.configuration.Configuration;
  * A la fin de la partie, le jeu demande à l'IA de s'arr�ter. Dans certaines
  * conditions, l'IA ne voudra pas s'arr�ter (par exemple si elle est dans une
  * boucle infinie, ou bloqu�e dans un traitement r�cursif). Pour �viter ce 
- * genre de probl�me, CHAQUE méthode d�finie dans l'IA doit :
+ * genre de probl�me, CHAQUE méthode définie dans l'IA doit :
  * 	- CONTENIR A SON TOUT DEBUT un appel à la méthode checkInterruption()
  *  - faire suivre (mot-cl� throw) les interruptions StopRequestException, et ne SURTOUT PAS les traiter (pas de try/catch)
  * De plus, cette fonction doit �galement appara�tre au d�but de chaque boucle
- * d�finie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
+ * définie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
  *  
  * @author Vincent Labatut
  *
@@ -72,9 +72,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 	
 	/**
-	 * méthode testant si le jeu a demand� la terminaison de l'IA.
+	 * méthode testant si le jeu a demandé la terminaison de l'IA.
 	 * Si c'est le cas, une exception est lev�e, qui sera propag�e jusqu'� call
-	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas �tre
+	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas être
 	 * intercept�e localement par un try/catch. 
 	 */
 	public synchronized void checkInterruption() throws StopRequestException
@@ -139,7 +139,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 
 	/**
 	 * renvoie les percepts auxquels l'IA a acc�s
-	 * @return	une AiZone repr�sentant tous les percepts utilisables par l'IA
+	 * @return	une AiZone représentant tous les percepts utilisables par l'IA
 	 */
 	public AiZone getPercepts()
 	{	return percepts;
@@ -147,7 +147,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/**
 	 * méthode utilisée par le moteur du jeu pour initialiser les percepts de l'IA. 
 	 * 
-	 * @param percepts	l'objet repr�sentant les percepts auxquels l'IA aura acc�s
+	 * @param percepts	l'objet représentant les percepts auxquels l'IA aura acc�s
 	 */
 	public void setPercepts(AiZone percepts)
 	{	this.percepts = percepts;
@@ -181,7 +181,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 
 	/**
 	 * r�initialise la sortie graphique de l'IA.
-	 * méthode appelée automatiquement avant chaque it�ration de l'IA.
+	 * méthode appelée automatiquement avant chaque itération de l'IA.
 	 */
 	private void reinitOutput()
 	{	output.reinit();

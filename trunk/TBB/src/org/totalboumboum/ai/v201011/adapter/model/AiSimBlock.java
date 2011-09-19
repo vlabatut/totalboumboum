@@ -26,8 +26,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 
 /**
- * Simule un bloc du jeu, c'est à dire g�n�ralement un mur
- * (pouvant �tre détruit ou pas). 
+ * Simule un bloc du jeu, c'est à dire généralement un mur
+ * (pouvant être détruit ou pas). 
  * 
  * @author Vincent Labatut
  *
@@ -35,8 +35,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 final class AiSimBlock extends AiSimSprite implements AiBlock
 {
 	/**
-	 * crée une simulation du bloc pass� en param�tre,
-	 * avec les propri�t�s pass�es en param�tres.
+	 * crée une simulation du bloc passé en paramètre,
+	 * avec les propriétés passées en paramètres.
 	 * 
 	 * @param id
 	 * 		num�ro d'identification du bloc
@@ -45,7 +45,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	 * @param posX
 	 * 		abscisse du bloc
 	 * @param posY
-	 * 		ordonn�e du bloc
+	 * 		ordonnée du bloc
 	 * @param posZ
 	 * 		hauteur du bloc
 	 * @param state
@@ -72,8 +72,8 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	}	
 
 	/**
-	 * crée une simulation du bloc pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une simulation du bloc passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param block
 	 * 		sprite à simuler
@@ -91,7 +91,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc peut �tre détruit par une bombe */
+	/** indique si ce bloc peut être détruit par une bombe */
 	private boolean destructible;
 
 	@Override

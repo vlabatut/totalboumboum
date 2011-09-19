@@ -23,8 +23,8 @@ package org.totalboumboum.ai.v201011.adapter.data;
  */
 
 /**
- * Repr�sente un bloc du jeu, c'est à dire g�n�ralement un mur
- * (pouvant �tre détruit ou pas). 
+ * Représente un bloc du jeu, c'est à dire généralement un mur
+ * (pouvant être détruit ou pas). 
  * 
  * @author Vincent Labatut
  *
@@ -36,8 +36,8 @@ public interface AiBlock extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * indique si ce bloc arr�te les personnages.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -47,8 +47,8 @@ public interface AiBlock extends AiSprite
 	
 	/**
 	 * indique si ce bloc arr�te les explosions.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -60,7 +60,7 @@ public interface AiBlock extends AiSprite
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie vrai si ce bloc peut �tre détruit par une bombe, et faux sinon
+	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
 	 * 
 	 * @return	
 	 * 		l'indicateur de destructibilit� du mur

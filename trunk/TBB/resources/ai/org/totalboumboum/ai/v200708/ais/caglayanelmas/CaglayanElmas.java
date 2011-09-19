@@ -21,7 +21,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 {
 	private static final long serialVersionUID = 1L;
 	
-	// Constantes qui d�finissent l'�tat du bomberman
+	// Constantes qui définissent l'�tat du bomberman
 	private final static int DOING_NOTHING = 0;
 	private final static int RUNNING_FROM_BOMB = 1;
 	private final static int COLLECTING_BONUS = 2;
@@ -30,18 +30,18 @@ public class CaglayanElmas extends ArtificialIntelligence
 	
 	// Contient la zone du tour pr�c�dente
 	private int[][] lastMatrix;
-	// Repr�sente une destination à aller
+	// Représente une destination à aller
 	private int[] target;
 	// Contient la position de la dernière bombe
 	private int[] lastBomb;
-	// Repr�sente l'�tat du bomberman avec les constantes d�finies ci-dessus
+	// Représente l'�tat du bomberman avec les constantes définies ci-dessus
 	private int state;
 	// Combien de fois on a mis une bombe pour détruire des murs
 	private int destructionCount;
 	// Contient la dernière action renvoy�e par call()
 	private Integer lastAction;
 	// Le vecteur contenant des liens entre les cases
-	// qui d�finissent le chemin le plus court entre A et B
+	// qui définissent le chemin le plus court entre A et B
 	private Vector<SearchLink> links;
 	// Le vecteur qui contient les cases accessibles
 	private Vector<int[]> playableCases;
@@ -54,7 +54,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 		// Notre IA est appel� "Smart"
 		super("CaglynElms");
 		
-		// Initialisation n�cessaires
+		// Initialisation nécessaires
 		target = new int[2];
 		target[0] = target[1] = -1;
 		
@@ -78,7 +78,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	private boolean firstTime = true;
 
 	/**
-	 * D�termine la prochaine action que l'IA va effectuer
+	 * détermine la prochaine action que l'IA va effectuer
 	 * (Bouger, ne rien faire, poser une bombe)
 	 * 
 	 * @return AI_ACTION_XXXX
@@ -230,8 +230,8 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�termine l'action suivante pour arriver
-	 * à la destination d�finie dans les tours pr�c�dentes.
+	 * détermine l'action suivante pour arriver
+	 * à la destination définie dans les tours pr�c�dentes.
 	 * Renvoie -1 si le bomberman est bloqu� dans une case
 	 * par une bombe confondue et ne peut pas aller vers
 	 * la destination.
@@ -273,7 +273,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�termine l'action suivante selon
+	 * détermine l'action suivante selon
 	 * l'�tat du bomberman.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
@@ -401,7 +401,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�termine la case à la quelle on doit aller pour fuire de la bombe.
+	 * détermine la case à la quelle on doit aller pour fuire de la bombe.
 	 * Retourne (-1,-1) si c'est impossible de fuire. 
 	 * @param px 	position de notre personnage
 	 * @param py	position de notre personnage
@@ -467,7 +467,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�termine si il existe une bombe qui peut nous tuer en traversant
+	 * détermine si il existe une bombe qui peut nous tuer en traversant
 	 * l'horizontale et la verticale qui coupe notre personnage.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
@@ -529,7 +529,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�termine la position du bonus plus proche et accessible à nous.
+	 * détermine la position du bonus plus proche et accessible à nous.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
 	 * @return		position du bonus ou (-1,-1)
@@ -561,7 +561,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�termine le nombre de murs destructibles au voisinage
+	 * détermine le nombre de murs destructibles au voisinage
 	 * de la case (cx, cy).
 	 * @param cx	position de la case
 	 * @param cy	position de la case
@@ -584,7 +584,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�termine la case la plus proche à mettre une bombe.
+	 * détermine la case la plus proche à mettre une bombe.
 	 * Si le bomberman a suffisamment pris le bonus qui
 	 * augmente la port�e, cette méthode retourne des cases
 	 * qui vont faciliter l'acc�s à l'ennemi quand les murs
@@ -650,7 +650,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�termine la position de l'ennemi plus proche à nous.
+	 * détermine la position de l'ennemi plus proche à nous.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
 	 * @param 		returnWhatever Si vrai, retourne la position de l'ennemi
@@ -676,7 +676,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�termine les nouveaux positions à partir d'un case initial
+	 * détermine les nouveaux positions à partir d'un case initial
 	 * (x,y) et 4 actions.
 	 * @param x		position à �tudier
 	 * @param y		position à �tudier
@@ -693,7 +693,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�termine la nouvelle position qui r�sulte de l'application
+	 * détermine la nouvelle position qui r�sulte de l'application
 	 * de l'action "move" à la position (x,y).
 	 * @param x		position à �tudier
 	 * @param y		position à �tudier
@@ -725,7 +725,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�termine l'action qui s'oppose à la direction d.
+	 * détermine l'action qui s'oppose à la direction d.
 	 * @param d		direction (AI_DIR_XXXX)
 	 * @return		l'action qui s'oppose à la direction d
 	 */
@@ -751,7 +751,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Indique si le déplacement dont le code a �t� pass� en param�tre 
+	 * Indique si le déplacement dont le code a �t� passé en paramètre 
 	 * est possible pour un personnage situ� en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
@@ -783,7 +783,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Indique si la case situ�e à la position pass�e en param�tre
+	 * Indique si la case situ�e à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
 	 * @param x	position à �tudier
 	 * @param y	position à �tudier

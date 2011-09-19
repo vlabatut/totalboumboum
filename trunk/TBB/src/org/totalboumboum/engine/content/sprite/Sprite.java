@@ -156,7 +156,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	
 	/*
 	 * change le gesture, la direction de l'animation et la direction des touches
-	 * l'animation n'est r�initialis�e que si le gesture est modifi�
+	 * l'animation n'est r�initialis�e que si le gesture est modifié
 	 */
 	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	// record event
@@ -251,7 +251,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	
 	public Sprite getOwner()
 	{	return owner;
-		//NOTE à modifier pour recherche r�cursivement l'owner final (mais peut �tre est-ce d�j� fait ailleurs)
+		//NOTE à modifier pour recherche r�cursivement l'owner final (mais peut être est-ce d�j� fait ailleurs)
 	}
 	
 	public void setOwner(Sprite owner)
@@ -272,7 +272,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	}
 	
 	public void setBoundToSprite(Sprite boundToSprite)
-	{	// traitement seulement si le nouveau boundToSprite li� est diff�rent de l'ancien
+	{	// traitement seulement si le nouveau boundToSprite li� est différent de l'ancien
 		if(this.boundToSprite!=boundToSprite)
 		{	// on met à jour le trajectoryManager
 			trajectoryManager.setBoundToSprite(boundToSprite);

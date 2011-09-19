@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v200809.adapter;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
- * repr�sente un feu du jeu, ie une projection mortelle r�sultant (g�n�ralement) 
+ * représente un feu du jeu, ie une projection mortelle r�sultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
@@ -33,11 +33,11 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 public class AiFire extends AiSprite<Fire>
 {
 	/**
-	 * crée une repr�sentation du feu pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation du feu passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à repr�senter
+	 * @param sprite	sprite à représenter
 	 */
 	AiFire(AiTile tile, Fire sprite)
 	{	super(tile,sprite);
@@ -72,7 +72,7 @@ public class AiFire extends AiSprite<Fire>
 	
 	/**
 	 * renvoie le type du feu
-	 * @return	une valeur de type AiFireType repr�sentant le type de feu
+	 * @return	une valeur de type AiFireType représentant le type de feu
 	 */
 	public AiFireType getType()
 	{	return type;	

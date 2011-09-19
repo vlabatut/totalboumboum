@@ -29,7 +29,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
- * repr�sente un feu du jeu, ie une projection mortelle r�sultant (g�n�ralement) 
+ * représente un feu du jeu, ie une projection mortelle r�sultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
@@ -38,13 +38,13 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 {
 	/**
-	 * crée une repr�sentation du feu pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation du feu passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite à repr�senter
+	 * 		sprite à représenter
 	 */
 	protected AiDataFire(AiDataTile tile, Fire sprite)
 	{	super(tile,sprite);
@@ -87,7 +87,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	}
 
 	/**
-	 * met à jour les diverse propri�t�s de ce feu
+	 * met à jour les diverse propriétés de ce feu
 	 * li�e à la gestion des collisions
 	 */
 	private void updateCollisions()
@@ -127,7 +127,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps �coul� depuis que le feu existe, exprim� en ms */
+	/** temps �coul� depuis que le feu existe, exprimé en ms */
 	private long time = 0;
 	
 	@Override

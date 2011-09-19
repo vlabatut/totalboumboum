@@ -30,11 +30,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 /**
- * Cette classe repr�sente un chemin qu'un agent peut emprunter
- * dans la zone de jeu. Le chemin est d�crit par une s�quence de cases,
- * et un point de d�part exprim� en pixels.
- * Diverses op�rations sont possibles : modification du chemin,
- * comparaisons, diff�rents calculs, etc.
+ * Cette classe représente un chemin qu'un agent peut emprunter
+ * dans la zone de jeu. Le chemin est décrit par une séquence de cases,
+ * et un point de départ exprimé en pixels.
+ * Diverses opérations sont possibles : modification du chemin,
+ * comparaisons, différents calculs, etc.
  * 
  * @author Vincent Labatut
  *
@@ -44,41 +44,41 @@ public class AiPath implements Comparable<AiPath>
     /////////////////////////////////////////////////////////////////
 	// STARTING POINTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse du point de d�part pr�cis du chemin, exprim� en pixel (il doit �tre contenu dans la première case, bien s�r) */
+	/** abscisse du point de départ pr�cis du chemin, exprimé en pixel (il doit être contenu dans la première case, bien s�r) */
 	private double startX;
-	/** ordonn�e du point de d�part pr�cis du chemin, exprim� en pixel (il doit �tre contenu dans la première case, bien s�r) */
+	/** ordonnée du point de départ pr�cis du chemin, exprimé en pixel (il doit être contenu dans la première case, bien s�r) */
 	private double startY;
 	
 	/**
-	 * renvoie l'abscisse du point de d�part de chemin,
-	 * exprim�e en pixel.
+	 * renvoie l'abscisse du point de départ de chemin,
+	 * exprimée en pixel.
 	 * 
 	 * @return
-	 * 		l'abscisse du point de d�part
+	 * 		l'abscisse du point de départ
 	 */
 	public double getStartX()
 	{	return startX;
 	}
 
 	/**
-	 * renvoie l'ordonn�e du point de d�part de chemin,
-	 * exprim�e en pixel.
+	 * renvoie l'ordonnée du point de départ de chemin,
+	 * exprimée en pixel.
 	 * 
 	 * @return
-	 * 		l'ordonn�e du point de d�part
+	 * 		l'ordonnée du point de départ
 	 */
 	public double getStartY()
 	{	return startY;
 	}
 
 	/**
-	 * modifie la position du point de d�part de chemin,
-	 * exprim�e en pixel.
+	 * modifie la position du point de départ de chemin,
+	 * exprimée en pixel.
 	 * 
 	 * @param startY
-	 * 		la nouvelle ordonn�e du point de d�part
+	 * 		la nouvelle ordonnée du point de départ
 	 * @param startY
-	 * 		la nouvelle ordonn�e du point de d�part
+	 * 		la nouvelle ordonnée du point de départ
 	 */
 	public void setStart(double startX, double startY)
 	{	this.startX = startX;
@@ -86,9 +86,9 @@ public class AiPath implements Comparable<AiPath>
 	}
 
 	/**
-	 * permet de v�rifier que le point de d�part est
+	 * permet de v�rifier que le point de départ est
 	 * bien contenu dans la première case du chemin.
-	 * si ce n'est pas le cas, il est corrig� en utilisant
+	 * si ce n'est pas le cas, il est corrigé en utilisant
 	 * le centre de la première case du chemin. 
 	 */
 	public void checkStartingPoint()
@@ -126,10 +126,10 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * renvoie la case dont la position est pass�e en param�tre
+	 * renvoie la case dont la position est passée en paramètre
 	 *
 	 * @param index
-	 * 		la position de la case demand�e
+	 * 		la position de la case demandée
 	 * @return	
 	 * 		la case occupant la position indiqu�e dans ce chemin
 	 */
@@ -138,11 +138,11 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * ajoute dans ce chemin la case pass�e en param�tre, 
-	 * en l'ins�rant à la fin de la s�quence de cases
+	 * ajoute dans ce chemin la case passée en paramètre, 
+	 * en l'insérant à la fin de la séquence de cases
 	 * 
 	 * @param tile
-	 * 		la case à ins�rer
+	 * 		la case à insérer
 	 */
 	public void addTile(AiTile tile)
 	{	tiles.add(tile);
@@ -151,13 +151,13 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * ajoute dans ce chemin la case pass�e en param�tre, 
-	 * en l'ins�rant à la position pass�e en param�tre.
+	 * ajoute dans ce chemin la case passée en paramètre, 
+	 * en l'insérant à la position passée en paramètre.
 	 * 
 	 * @param index
-	 * 		position de la case à ins�rer
+	 * 		position de la case à insérer
 	 * @param tile
-	 * 		la case à ins�rer
+	 * 		la case à insérer
 	 */
 	public void addTile(int index, AiTile tile)
 	{	tiles.add(index,tile);
@@ -166,8 +166,8 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * remplace la case dont la position est pass�e en param�tre par
-	 * la case pass�e en param�tre, dans ce chemin.
+	 * remplace la case dont la position est passée en paramètre par
+	 * la case passée en paramètre, dans ce chemin.
 	 * 
 	 * @param index
 	 * 		position de la case à remplacer
@@ -181,7 +181,7 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * supprime de ce chemin la case dont la position est pass�e en param�tre
+	 * supprime de ce chemin la case dont la position est passée en paramètre
 	 * 
 	 * @param index
 	 * 		position de la case à supprimer
@@ -193,7 +193,7 @@ public class AiPath implements Comparable<AiPath>
 	}
 	
 	/**
-	 * supprime de ce chemin la case pass�e en param�tre
+	 * supprime de ce chemin la case passée en paramètre
 	 * 
 	 * @param tile
 	 * 		la case à supprimer
@@ -257,7 +257,7 @@ public class AiPath implements Comparable<AiPath>
 	// DISTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la distance de Manhattan, exprim�e en cases, correspondant à ce chemin
+	 * renvoie la distance de Manhattan, exprimée en cases, correspondant à ce chemin
 	 * 
 	 * @return	
 	 * 		un entier correspondant à la distance totale du chemin en cases
@@ -270,13 +270,13 @@ public class AiPath implements Comparable<AiPath>
 	}
 
 	/**
-	 * renvoie la distance de Manhattan, exprim�e en pixels, correspondant à ce chemin.
-	 * on utilise le point de d�part pour d�marrer le calcul, donc pas n�cessairement
-	 * le centre de la première case. par contre, le point d'arriv�e est forc�ment
+	 * renvoie la distance de Manhattan, exprimée en pixels, correspondant à ce chemin.
+	 * on utilise le point de départ pour démarrer le calcul, donc pas nécessairement
+	 * le centre de la première case. par contre, le point d'arrivée est forcément
 	 * le centre de la dernière case.
 	 * 
 	 * @return	
-	 * 		un r�el correspondant à la distance totale du chemin en pixels
+	 * 		un réel correspondant à la distance totale du chemin en pixels
 	 */
 	public double getPixelDistance()
 	{	double result = 0;
@@ -303,17 +303,17 @@ public class AiPath implements Comparable<AiPath>
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule le temps approximatif n�cessaire au personnage pass� en param�tre
-	 * pour parcourir ce chemin. Le temps est exprim� en millisecondes, et 
+	 * calcule le temps approximatif nécessaire au personnage passé en paramètre
+	 * pour parcourir ce chemin. Le temps est exprimé en millisecondes, et 
 	 * on suppose qu'il n'y a pas d'obstacle sur le chemin et que la vitesse
 	 * de déplacement du joueur est constante. C'est donc une estimation du temps
-	 * qui sera r�ellement n�cessaire au joueur, puisque diff�rents facteurs peuvent
-	 * venir invalider ces hypoth�ses.
+	 * qui sera réellement nécessaire au joueur, puisque différents facteurs peuvent
+	 * venir invalider ces hypothèses.
 	 *   
 	 * @param hero
 	 * 		le personnage qui parcourt le chemin
 	 * @return	
-	 * 		le temps n�cessaire au personnage pour parcourir ce chemin
+	 * 		le temps nécessaire au personnage pour parcourir ce chemin
 	 */
 	public long getDuration(AiHero hero)
 	{	long result = 0;
@@ -329,14 +329,14 @@ public class AiPath implements Comparable<AiPath>
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Compare ce chemin à celui pass� en param�tre, 
+	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus long que ce dernier.
-	 * Cette méthode ne doit plus �tre utilisée, il faut plutot se servir de {@link #compareTo}.
+	 * Cette méthode ne doit plus être utilisée, il faut plutot se servir de {@link #compareTo}.
 	 * 
 	 * @param path
 	 * 		le chemin à comparer
 	 * @return	
-	 * 		vrai ssi ce chemin est plus long que celui pass� en param�tre
+	 * 		vrai ssi ce chemin est plus long que celui passé en paramètre
 	 */
 	public boolean isLongerThan(AiPath path)
 	{	int l1 = tiles.size();
@@ -346,14 +346,14 @@ public class AiPath implements Comparable<AiPath>
 	}
 
 	/**
-	 * Compare ce chemin à celui pass� en param�tre, 
+	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus court que ce dernier.
-	 * Cette méthode ne doit plus �tre utilisée, il faut plut�t se servir de {@link #compareTo}.
+	 * Cette méthode ne doit plus être utilisée, il faut plut�t se servir de {@link #compareTo}.
 	 * 
 	 * @param path
 	 * 		le chemin à comparer
 	 * @return	
-	 * 		vrai ssi ce chemin est plus court que celui pass� en param�tre
+	 * 		vrai ssi ce chemin est plus court que celui passé en paramètre
 	 */
 	@Deprecated
 	public boolean isShorterThan(AiPath path)
@@ -376,15 +376,15 @@ public class AiPath implements Comparable<AiPath>
 	}
 
 	/**
-	 * Compare ce chemin à celui pass� en param�tre, 
+	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'ils sont parfaitement identiques,
-	 * i.e. sont constitu�s de la même s�quence de cases.
-	 * <b>Remarque :</b> on ne consid�re donc pas le point de d�part 
+	 * i.e. sont constitués de la même séquence de cases.
+	 * <b>Remarque :</b> on ne considère donc pas le point de départ 
 	 * 
 	 * @param object
 	 * 		le chemin à comparer
 	 * @return	
-	 * 		vrai ssi les 2 ce chemin est identique à celui pass� en param�tre
+	 * 		vrai ssi les 2 ce chemin est identique à celui passé en paramètre
 	 */
 	@Override
 	public boolean equals(Object object)

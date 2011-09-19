@@ -302,7 +302,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 						}
 						else
 						{
-							if(getTimeBeforeShrink()<0)//si le shrink a commenc�  
+							if(getTimeBeforeShrink()<0)//si le shrink a commencé  
 								result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 						}
 					
@@ -311,7 +311,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 				//s'il existe une bombe à un temps près au shrink le personnage ne fera rien car il est en sécurité
 				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
 					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
-				//attaque: s'il existe un joeur dans une position agr�able pour pi�ger on pose une bombe
+				//attaque: s'il existe un joeur dans une position agréable pour piéger on pose une bombe
 				if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1) && isTrap(matrix,x,y+1,x,y)))
 					
 				{
@@ -342,7 +342,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 				}
 				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
 					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
-				//attaque: s'il existe un joeur dans une position agr�able pour pi�ger on pose une bombe
+				//attaque: s'il existe un joeur dans une position agréable pour piéger on pose une bombe
 				if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1)&& isTrap(matrix,x,y+1,x,y)))
 				{	
 					if(getOwnBombCount()>0 && getTimeBeforeShrink()>0)
@@ -371,7 +371,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 					}
 				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
 					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
-				//attaque: s'il existe un joeur dans une position agr�able pour pi�ger on pose une bombe
+				//attaque: s'il existe un joeur dans une position agréable pour piéger on pose une bombe
 			    if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1)&& isTrap(matrix,x,y+1,x,y)))
 				{
 			    	if(getOwnBombCount()>0 && getTimeBeforeShrink()>0)
@@ -402,7 +402,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 					}
 				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
 					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
-				//attaque: s'il existe un joeur dans une position agr�able pour pi�ger on pose une bombe
+				//attaque: s'il existe un joeur dans une position agréable pour piéger on pose une bombe
 				if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1)&& isTrap(matrix,x,y+1,x,y)))
 				{
 					if(getOwnBombCount()>0 && getTimeBeforeShrink()>0)
@@ -414,7 +414,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 				
 			}
 			
-				//pr�diction du danger: si le mouvement choisi emportera le personnage à une case dangereuse, il attend pour que ce danger d�passe
+				//prédiction du danger: si le mouvement choisi emportera le personnage à une case dangereuse, il attend pour que ce danger d�passe
 				if(result==ArtificialIntelligence.AI_ACTION_GO_RIGHT)//si le mouvement choisi est vers la droite
 				{
 					if(!isSafe(matrix,x+1,y) || matrix[x+1][y]==ArtificialIntelligence.AI_BLOCK_FIRE)//s'il est dangereux de faire ce mouvement
@@ -466,7 +466,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			
 			if(x-bombX>0)//la bombe est à gauche du personnage
 			{
-				// pour tomber en pi�ge plus rarement, le personnage pr�f�re d'abord de s'enfuir lin�arement si la port�e de la bombe est suffisement petite
+				// pour tomber en piège plus rarement, le personnage pr�f�re d'abord de s'enfuir lin�arement si la port�e de la bombe est suffisement petite
 				if(x+power<getZoneMatrixDimX() && possibleRightX(bombX,y,power+1) && getBombPowerAt(bombX,bombY)<3 ) 
 					result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 				else//il est impossible de s'enfuir lin�arement
@@ -509,7 +509,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			
 			else if(x-bombX<0)//la bombe est à droite du personnage
 			{
-				// pour tomber en pi�ge plus rarement, le personnage pr�f�re d'abord de s'enfuir lin�arement si la port�e de la bombe est suffisement petite
+				// pour tomber en piège plus rarement, le personnage pr�f�re d'abord de s'enfuir lin�arement si la port�e de la bombe est suffisement petite
 				if(x-power>0 && possibleLeftX(bombX,y,power+1) && getBombPowerAt(bombX,bombY)<3 ) 
 					result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 				else//il est impossible de s'enfuir lin�arement
@@ -553,7 +553,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			
 			else if(y-bombY>0)//la bombe est en haut du personnage
 			{
-				// pour tomber en pi�ge plus rarement, le personnage pr�f�re d'abord de s'enfuir lin�arement si la port�e de la bombe est suffisement petite 
+				// pour tomber en piège plus rarement, le personnage pr�f�re d'abord de s'enfuir lin�arement si la port�e de la bombe est suffisement petite 
 				if(y+power<getZoneMatrixDimY() && possibleDownY(x,bombY,power+1) && getBombPowerAt(bombX,bombY)<3 )
 					result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
 				else//il est impossible de s'enfuir lin�arement
@@ -596,7 +596,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			
 			else if(y-bombY<0)//la bombe est en bas du personnage
 			{
-				// pour tomber en pi�ge plus rarement, le personnage pr�f�re d'abord de s'enfuir lin�arement si la port�e de la bombe est suffisement petite
+				// pour tomber en piège plus rarement, le personnage pr�f�re d'abord de s'enfuir lin�arement si la port�e de la bombe est suffisement petite
 				if(y-power>0 && possibleUpY(x,bombY,power+1) && getBombPowerAt(bombX,bombY)<3 ) 
 					result=ArtificialIntelligence.AI_ACTION_GO_UP;
 				else//il est impossible de s'enfuir lin�arement
@@ -638,7 +638,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			}
 			else//la bombe est sur le personnage
 			{   
-				/*th�oriquement dans les pluparts des cas le personnage peut tomber en pi�ge s'il retourne par la direction parlaqulle il est venu,
+				/*th�oriquement dans les pluparts des cas le personnage peut tomber en piège s'il retourne par la direction parlaqulle il est venu,
 				donc on essaie dernièrement de s'enfuir par cette direction gardée dans le champs "lastMove"*/
 				if(lastMove==ArtificialIntelligence.AI_ACTION_GO_LEFT)
 				{
@@ -790,7 +790,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	/**
 	 * Indique si le personnage a la possibilit� de s'enfuir ou pas
-	 * par les coordonnées (x,y) pass�s en param�tre avec une bombe situ�e en (bombX,bombY) 
+	 * par les coordonnées (x,y) passés en paramètre avec une bombe situ�e en (bombX,bombY) 
 	 * @param matrix la zone du jeu
 	 * @param x position à �tudier
 	 * @param y position à �tudier
@@ -809,7 +809,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		
 		if(x-bombX>0){//si la bombe est à gauche
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers le bas c'est une pi�ge
+			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers le bas c'est une piège
 			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
 			{
 				result=true;
@@ -847,7 +847,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		if(x-bombX<0)//si la bombe est à droite
 		{
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la gauche, vers le haut ou vers le bas c'est une pi�ge
+			//s'il est impossible de faire un mouvement vers la gauche, vers le haut ou vers le bas c'est une piège
 			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
 			{
 				result=true;
@@ -884,7 +884,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		
 		if(y-bombY>0){//si la bombe est en haut
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la droite, vers la gauche ou vers le bas c'est une pi�ge
+			//s'il est impossible de faire un mouvement vers la droite, vers la gauche ou vers le bas c'est une piège
 			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
 			{
 				result=true;
@@ -921,7 +921,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		
 		if(y-bombY<0){//si la bombe est en bas
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers la gauche c'est une pi�ge
+			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers la gauche c'est une piège
 			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP))
 			{
 				result=true;
@@ -957,16 +957,16 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		
 		
 		int i=power+1;
-		//si la bombe est à gauche et le personnage peut aller vers la droite pour une distance plus grande que la port�e de la bombe alors ce n'est pas une pi�ge
+		//si la bombe est à gauche et le personnage peut aller vers la droite pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
 		if(x-bombX>0 && possibleRightX(bombX,y,i))
 			result=false;
-		//si la bombe est à droite et le personnage peut aller vers la gauche pour une distance plus grande que la port�e de la bombe alors ce n'est pas une pi�ge
+		//si la bombe est à droite et le personnage peut aller vers la gauche pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
 		else if(x-bombX<0 && possibleLeftX(bombX,y,i))
 			 result=false;
-		//si la bombe est en bas et le personnage peut aller vers le haut pour une distance plus grande que la port�e de la bombe alors ce n'est pas une pi�ge
+		//si la bombe est en bas et le personnage peut aller vers le haut pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
 		 if(y-bombY<0 && possibleUpY(x,bombY,i))
 			 result=false;
-		//si la bombe est en haut et le personnage peut aller vers le bas pour une distance plus grande que la port�e de la bombe alors ce n'est pas une pi�ge
+		//si la bombe est en haut et le personnage peut aller vers le bas pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
 		 else if(y-bombY>0 && possibleDownY(x,bombY,i))
 			 result=false;
 		 
@@ -974,7 +974,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique si un personnage situ� en coordonnées (x,y) pass�s en param�tre est en 
+	 * Indique si un personnage situ� en coordonnées (x,y) passés en paramètre est en 
 	 * securité ou pas par rapport à toutes les bombes qui existent dans la zone du jeu
 	 * @param matrix la zone du jeu
 	 * @param x la coordonnée actuelle du personnage en x
@@ -1114,7 +1114,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique si le déplacement dont le code a �t� pass� en param�tre 
+	 * Indique si le déplacement dont le code a �t� passé en paramètre 
 	 * est possible pour un personnage situ� en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
@@ -1144,7 +1144,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		return result;
 	}
 	/**
-	 * Indique si la case situ�e à la position pass�e en param�tre
+	 * Indique si la case situ�e à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
 	 * @param x	position à �tudier
 	 * @param y	position à �tudier
@@ -1168,9 +1168,9 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique s'il est possible d'aller vers la droite par les coordonnées (x,y) pour une distance d pass�e en param�tre
-	 * @param x position de d�part en x
-	 * @param y position de d�part en y
+	 * Indique s'il est possible d'aller vers la droite par les coordonnées (x,y) pour une distance d passée en paramètre
+	 * @param x position de départ en x
+	 * @param y position de départ en y
 	 * @param d la distance à parcourir
 	 * @return vrai s'il est possible d'aller vers la droite pour la distance d
 	 */
@@ -1193,9 +1193,9 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique s'il est possible d'aller vers la gauche par les coordonnées (x,y) pour une distance d pass�e en param�tre
-	 * @param x position de d�part en x
-	 * @param y position de d�part en y
+	 * Indique s'il est possible d'aller vers la gauche par les coordonnées (x,y) pour une distance d passée en paramètre
+	 * @param x position de départ en x
+	 * @param y position de départ en y
 	 * @param d la distance à parcourir
 	 * @return vrai s'il est possible d'aller vers la gauche pour la distance d
 	 */
@@ -1218,9 +1218,9 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique s'il est possible d'aller vers le haut par les coordonnées (x,y) pour une distance d pass�e en param�tre
-	 * @param x position de d�part en x
-	 * @param y position de d�part en y
+	 * Indique s'il est possible d'aller vers le haut par les coordonnées (x,y) pour une distance d passée en paramètre
+	 * @param x position de départ en x
+	 * @param y position de départ en y
 	 * @param d la distance à parcourir
 	 * @return vrai s'il est possible d'aller vers le haut pour la distance d
 	 */
@@ -1242,9 +1242,9 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		return result;
 	}
 	/**
-	 * Indique s'il est possible d'aller vers le bas par les coordonnées (x,y) pour une distance d pass�e en param�tre
-	 * @param x position de d�part en x
-	 * @param y position de d�part en y
+	 * Indique s'il est possible d'aller vers le bas par les coordonnées (x,y) pour une distance d passée en paramètre
+	 * @param x position de départ en x
+	 * @param y position de départ en y
 	 * @param d la distance à parcourir
 	 * @return vrai s'il est possible d'aller vers le bas pour la distance d
 	 */
@@ -1267,10 +1267,10 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique s'il existe un autre joueur en coordonnées (x,y) pass�s en param�tre
+	 * Indique s'il existe un autre joueur en coordonnées (x,y) passés en paramètre
 	 * @param x coordonnée en x à tester
 	 * @param y coordonnée en y à tester
-	 * @return vrai s'il existe un autre joueur en coordonnées (x,y) pass�s en param�tre
+	 * @return vrai s'il existe un autre joueur en coordonnées (x,y) passés en paramètre
 	 */
 	private boolean anyPlayerExists(int x,int y)
 	{

@@ -71,7 +71,7 @@ public class Escape_Manager {
 		// sinon, s'il ne reste qu'une seule case, on va au centre
 		else if(path.getLength()==1)
 			tile = path.getTile(0);
-		// on d�termine la direction du prochain déplacement
+		// on détermine la direction du prochain déplacement
 		if(tile!=null)
 			result = zone.getDirection(zone.getOwnHero(),tile);
 

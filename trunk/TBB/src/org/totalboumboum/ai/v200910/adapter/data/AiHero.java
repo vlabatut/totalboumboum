@@ -31,7 +31,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * repr�sente un personnage du jeu, ie un sprite contr�l� par un joueur
+ * représente un personnage du jeu, ie un sprite contr�l� par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut
@@ -40,11 +40,11 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public class AiHero extends AiSprite<Hero>
 {
 	/**
-	 * crée une repr�sentation du joueur pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation du joueur passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à repr�senter
+	 * @param sprite	sprite à représenter
 	 */
 	AiHero(AiTile tile, Hero sprite)
 	{	super(tile,sprite);
@@ -141,7 +141,7 @@ public class AiHero extends AiSprite<Hero>
 	/**
 	 * renvoie la couleur de ce personnage (et de ses bombes)
 	 * 
-	 * @return un symbole de type PredefinedColor repr�sentant une couleur
+	 * @return un symbole de type PredefinedColor représentant une couleur
 	 */
 	public PredefinedColor getColor()
 	{	return color;	
@@ -158,14 +158,14 @@ public class AiHero extends AiSprite<Hero>
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement au sol du personnage, exprim�e en pixel/seconde */
+	/** vitesse de déplacement au sol du personnage, exprimée en pixel/seconde */
 	private double walkingSpeed;
 	
 	/**
 	 * renvoie la vitesse de déplacement au sol de ce personnage,
-	 * exprim�e en pixel/seconde. il ne s'agit pas de la vitesse 
+	 * exprimée en pixel/seconde. il ne s'agit pas de la vitesse 
 	 * de déplacement courante, il s'agit de la vitesse du personnage
-	 * quand il marche. Cette vitesse peut �tre modifi�e par certains items.
+	 * quand il marche. Cette vitesse peut être modifiée par certains items.
 	 * 
 	 * @return	la vitesse de déplacement de ce personnage
 	 */
@@ -282,10 +282,10 @@ public class AiHero extends AiSprite<Hero>
 	}
 	
 	/**
-	 * Renvoie le classement de ce joueur, dans le classement g�n�ral du jeu (Glicko-2)
+	 * Renvoie le classement de ce joueur, dans le classement général du jeu (Glicko-2)
 	 * Ce classement n'�volue pas pendant la manche actuellement jou�e.
 	 * 
-	 * @return	le classement g�n�ral (Glicko-2) de ce joueur
+	 * @return	le classement général (Glicko-2) de ce joueur
 	 */
 	public int getStatsRank()
 	{	AiZone zone = getTile().getZone();

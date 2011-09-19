@@ -67,7 +67,7 @@ public class StrategyManager {
 		Direction result = Direction.NONE;
 		
 		List<AiBomb> bombs = bombsMenaceMe();
-		//system.out.println("bombe size!! : "+bombs.size()+" ve onlar þunlar : "+bombs.toString());
+		//system.out.println("bombe size!! : "+bombs.size()+" ve onlar ï¿½unlar : "+bombs.toString());
 		
 		List<AiTile> tmpTiles = new ArrayList<AiTile>();
 		Iterator<AiBomb> itrBomb = bombs.iterator();
@@ -87,17 +87,17 @@ public class StrategyManager {
 			
 			AiTile tTile;
 			
-			//si les colonnes ou les lignes des deux bombes sont la meme, ça veut dire I ou - type, pas t ou L type.
+			//si les colonnes ou les lignes des deux bombes sont la meme, Ã§a veut dire I ou - type, pas t ou L type.
 			if((tmpTiles.get(0).getCol() == tmpTiles.get(1).getCol()) || (tmpTiles.get(0).getLine() == tmpTiles.get(1).getLine()))
 			{
 				tTile = iTypeEscape(bombs);
 				result = percepts.getDirection(myAI.getOwnHero(), tTile);
-				//system.out.println("index hatasý verilen yerde if bloðundayým");
+				//system.out.println("index hatasï¿½ verilen yerde if bloï¿½undayï¿½m");
 			}
 			//sinon c'est la menace de t ou L type
 			else
 			{
-				//system.out.println("index hatasý verilen yerde else bloðundayým");
+				//system.out.println("index hatasï¿½ verilen yerde else bloï¿½undayï¿½m");
 				
 				//si les deux bombes sont loins que nous plus d'1 cas
 				if(!escapeManager.getCurrentTile().getNeighbors().contains(tmpTiles.get(0)) && 
@@ -167,14 +167,14 @@ public class StrategyManager {
 				
 //				if(tmpTile == escapeManager.getCurrentTile())
 //				{
-//					//system.out.println("bombayý ekliyoruz!!!!!!!!");
+//					//system.out.println("bombayï¿½ ekliyoruz!!!!!!!!");
 //					System.out.println("current tile : "+escapeManager.getCurrentTile());
 //					result.add(tmpBomb);
 //				}
 				
 				if(tmpTile == myAI.getOwnHeroTile())
 				{
-					//system.out.println("bombayý ekliyoruz!!!!!!!!");
+					//system.out.println("bombayï¿½ ekliyoruz!!!!!!!!");
 					//system.out.println("current tile : "+myAI.getOwnHeroTile().toString());
 					result.add(tmpBomb);
 				}
