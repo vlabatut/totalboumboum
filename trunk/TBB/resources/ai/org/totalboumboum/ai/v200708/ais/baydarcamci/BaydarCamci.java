@@ -137,7 +137,7 @@ public class BaydarCamci extends ArtificialIntelligence
 	/**
 	 * Parmi les blocs dont le type correspond à la valeur blockType
 	 * passée en paramètre, cette méthode cherche lequel est le plus proche
-	 * du point de coordonnées (x,y) passées en paramètres. Le r�sultat
+	 * du point de coordonnées (x,y) passées en paramètres. Le résultat
 	 * prend la forme d'un tableau des deux coordon�es du bloc le plus proche.
 	 * Le tableau est contient des -1 s'il n'y a aucun bloc du bon type dans la zone de jeu.
 	 * @param x	position de référence

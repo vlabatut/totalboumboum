@@ -325,7 +325,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * On renvoie la longueur de la chemine qui est le plus court chemin 
-	 * pour aller de la case départ à la case arr�t en utilisant l�algorithme A*.
+	 * pour aller de la case départ à la case arrêt en utilisant l�algorithme A*.
 	 * @param tile1
 	 * @param tile2
 	 * @return
@@ -509,7 +509,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * Si on ne trouve pas de chemine en utilisant l�algorithme A*, 
-	 * alors on trouve une direction pour se diriger de la case départ à la case arr�t.
+	 * alors on trouve une direction pour se diriger de la case départ à la case arrêt.
 	 * @param tile1
 	 * @param tile2
 	 * @return

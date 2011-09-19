@@ -5,7 +5,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 /**
  * Représente un lien orient� dans un arbre de recherche.
  * Ce lien est défini par les deux noeuds reli�s : l'origine (parent)
- * et la cible (fils) ainsi que par l'action à r�aliser pour passer 
+ * et la cible (fils) ainsi que par l'action à réaliser pour passer 
  * d'un état à l'autre.
  * 
  * @author Ali Batuhan Dayioglugil

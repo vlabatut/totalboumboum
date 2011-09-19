@@ -38,7 +38,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	private AiHero hero;
 	//les adversaires
 	private Vector<AiHero> others;
-	//la prochaine action que l'IA veut r�aliser
+	//la prochaine action que l'IA veut réaliser
 	@SuppressWarnings("unused")
 	private AiAction action;
 	private AiTile targetDeplacement;

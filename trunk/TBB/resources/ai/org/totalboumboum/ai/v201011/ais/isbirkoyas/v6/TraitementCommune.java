@@ -65,7 +65,7 @@ public class TraitementCommune {
 
 	/**
 	 * Cette méthode compare les cases cibles entre eux et retourne la case qui
-	 * a la valeur plus �lev�e. S�il y a plus d�une valeur �lev�e �gales alors
+	 * a la valeur plus �lev�e. S�il y a plus d�une valeur �lev�e égales alors
 	 * IA regarde au distance de ceux cases. Elle prend trois arguments une
 	 * matrice de type double et deux listes des cases.
 	 * 
@@ -175,7 +175,7 @@ public class TraitementCommune {
 
 	/**
 	 * Cette méthode compare les cases cibles entre eux et retourne la case qui
-	 * a la valeur plus �lev�e. S�il y a plus d�une valeur �lev�e �gales alors
+	 * a la valeur plus �lev�e. S�il y a plus d�une valeur �lev�e égales alors
 	 * IA regarde au distance de ceux cases .Elle prend trois arguments une
 	 * matrice de type Int et deux listes des cases.
 	 * 

@@ -232,7 +232,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	/**
 	 * détermine l'action suivante pour arriver
 	 * à la destination définie dans les tours pr�c�dentes.
-	 * Renvoie -1 si le bomberman est bloqu� dans une case
+	 * Renvoie -1 si le bomberman est bloqué dans une case
 	 * par une bombe confondue et ne peut pas aller vers
 	 * la destination.
 	 * @param px	position de notre personnage
@@ -587,7 +587,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	 * détermine la case la plus proche à mettre une bombe.
 	 * Si le bomberman a suffisamment pris le bonus qui
 	 * augmente la port�e, cette méthode retourne des cases
-	 * qui vont faciliter l'acc�s à l'ennemi quand les murs
+	 * qui vont faciliter l'accès à l'ennemi quand les murs
 	 * au voisinage sont détruits.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
@@ -693,11 +693,11 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * détermine la nouvelle position qui r�sulte de l'application
+	 * détermine la nouvelle position qui résulte de l'application
 	 * de l'action "move" à la position (x,y).
 	 * @param x		position à �tudier
 	 * @param y		position à �tudier
-	 * @return		la nouvelle position qui est le r�sultat de l'action
+	 * @return		la nouvelle position qui est le résultat de l'action
 	 * 				appliqu�e à la position (x,y)
 	 */
 	public int[] applyAction(int x, int y, int move)

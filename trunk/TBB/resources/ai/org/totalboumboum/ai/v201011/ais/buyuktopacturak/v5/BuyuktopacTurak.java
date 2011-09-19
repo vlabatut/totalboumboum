@@ -374,7 +374,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * On renvoie la longueur de la chemine qui est le plus court chemin 
-	 * pour aller de la case départ à la case arr�t en utilisant l�algorithme A*.
+	 * pour aller de la case départ à la case arrêt en utilisant l�algorithme A*.
 	 * si tile1 est egale a tile2, distance est zero.
 	 * sinon on trouve un chemine a la case tile1 de la case tile2.
 	 * 	s'il y a une chemine, la distance est egale a la taille path.

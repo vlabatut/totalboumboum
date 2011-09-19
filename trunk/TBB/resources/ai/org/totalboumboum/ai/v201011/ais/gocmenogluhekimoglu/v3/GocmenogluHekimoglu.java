@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 public class GocmenogluHekimoglu extends ArtificialIntelligence
 {	
 	AiPath oldpath;
-	// millisecondes écoulées depuis le dernier calcul de chemin
+	// millisecondes Ã©coulÃ©es depuis le dernier calcul de chemin
 	long msec = 0;
 	
 	
@@ -53,7 +53,7 @@ public class GocmenogluHekimoglu extends ArtificialIntelligence
 		float bombratio = Math.min(this.getPercepts().getHiddenItemsCount(),3)/(this.getPercepts().getOwnHero().getBombNumberMax()+this.getPercepts().getOwnHero().getBombRange()-2.01f);
 		boolean attaquemode = false;
 		
-		// sélectionnez le mode
+		// sï¿½lectionnez le mode
 		if(bombratio > 1 || !MatriceCalc.canReachHeros(this)){
 			//COLLECTE
 			choix = collecte;
@@ -73,7 +73,7 @@ public class GocmenogluHekimoglu extends ArtificialIntelligence
 			choix.addWithWeight(mbon, 5);
 			choix.addWithWeight(mmal, -5);
 			
-			//nous devrions fuir l'ennemi après avoir mis une bombe pendant quelques secondes.
+			//nous devrions fuir l'ennemi aprï¿½s avoir mis une bombe pendant quelques secondes.
 			if(System.currentTimeMillis()-msec_bomb > 2000){
 				choix.addWithWeight(mhero, 10);
 			}else choix.addWithWeight(mhero, -10);
@@ -87,7 +87,7 @@ public class GocmenogluHekimoglu extends ArtificialIntelligence
 		 
 		choix.afficheText();
 		
-		// utiliser le vieux chemin si elle est plus longue, ou qu'il n'était pas plus de 25 millisecondes
+		// utiliser le vieux chemin si elle est plus longue, ou qu'il n'ï¿½tait pas plus de 25 millisecondes
 		if(oldpath == null || System.currentTimeMillis()-msec >= 25){
 			PathCalculator pcalc = new PathCalculator(this,choix);
 			if(oldpath == null || !oldpath.getLastTile().equals(pcalc.getPath().getLastTile()) || oldpath.compareTo(pcalc.getPath())<0){

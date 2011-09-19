@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  * Classe implémentant un comportement agressif:on donne des points à chaque
  * case en considerant les murs,les autres joueurs,les bombes....On choisit un
  * cible et y arrive en choisissant le chemin le plus court (algorithme A
- * �toile). D�s qu'il arrive au cible,il le détruit.Avant de faire un mouvement,
+ * �toile). Dès qu'il arrive au cible,il le détruit.Avant de faire un mouvement,
  * il controle tout d'abord s'il y a un danger pour lui.S'il y en a,il bouge
  * seulement pour se sauver.
  * 
@@ -1339,7 +1339,7 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 
 	/**
 	 * Il determine la case qu'il faut aller.Pour l'ia la case qui a le meilleur
-	 * point est la case la plus attractive.En cas de l'�galit�,il choisit la
+	 * point est la case la plus attractive.En cas de l'égalit�,il choisit la
 	 * case qui semble etre plus proche à lui.
 	 * 
 	 * @reurn goal la case cible.
@@ -1373,7 +1373,7 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 
 				else if (carte[i][j] == max) {
 
-					// en cas d'�galit�,il compare les distances de Manhattan.
+					// en cas d'égalit�,il compare les distances de Manhattan.
 					int d1 = distance(x, y, maxX, maxY);
 
 					int d2 = distance(x, y, i, j);
@@ -1596,7 +1596,7 @@ public class BingolKetenci0 extends ArtificialIntelligence {
 	}
 	/**
 	 * renvoie la position de la case(les coordnn�es sont passés en parametre)
-	 * sur le serpent du shrink. Le r�sultat peut etre de -1 à 4.
+	 * sur le serpent du shrink. Le résultat peut etre de -1 à 4.
 	 * 
 	 * @param x
 	 *            le coordonné x
