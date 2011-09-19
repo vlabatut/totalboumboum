@@ -36,7 +36,7 @@ public class Elements {
 	// INITIALISATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * On obtient notre h�ro et on crée l�objet PerfectStrangers.
+	 * On obtient notre héro et on crée l�objet PerfectStrangers.
 	 * @throws StopRequestException
 	 */
 	private void init()throws StopRequestException{
@@ -102,7 +102,7 @@ public class Elements {
 	
 	/**
 	 * On renvoie la liste des murs destructibles qui ne vont pas d�exploser 
-	 * dans notre port�e virtuelle.
+	 * dans notre portée virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -143,7 +143,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la liste des bonus qui ne vont pas d�exploser dans notre port�e virtuelle.
+	 * On renvoie la liste des bonus qui ne vont pas d�exploser dans notre portée virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -181,7 +181,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la liste des adversaires qui sont dans notre port�e virtuelle.
+	 * On renvoie la liste des adversaires qui sont dans notre portée virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -208,7 +208,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la taille de la liste des murs destructibles qui ne vont pas d�exploser dans notre port�e virtuelle.
+	 * On renvoie la taille de la liste des murs destructibles qui ne vont pas d�exploser dans notre portée virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -220,7 +220,7 @@ public class Elements {
 	}
 
 	/**
-	 * On renvoie la taille de la liste des bonus qui ne vont pas d�exploser dans notre port�e virtuelle.
+	 * On renvoie la taille de la liste des bonus qui ne vont pas d�exploser dans notre portée virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -232,7 +232,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la taille de la liste des adversaires qui sont dans notre port�e virtuelle.
+	 * On renvoie la taille de la liste des adversaires qui sont dans notre portée virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -244,7 +244,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On contient la control de la distance au bonus entre l�ennemie plus proche et notre h�ro.
+	 * On contient la control de la distance au bonus entre l�ennemie plus proche et notre héro.
 	 * @param tile
 	 * @param range
 	 * @return

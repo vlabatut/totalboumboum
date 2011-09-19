@@ -48,7 +48,7 @@ public class CollectionMatrix{
 	}
 	
 	/**
-	 * On obtient notre h�ro, la dimension de la zone et crée les objets listes.
+	 * On obtient notre héro, la dimension de la zone et crée les objets listes.
 	 * @throws StopRequestException
 	 */
 	private void init()throws StopRequestException{

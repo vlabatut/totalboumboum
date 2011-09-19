@@ -115,7 +115,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	{	
 		// avant tout : test d'interruption
 		checkInterruption();		
-		//on a re�u la zone du jeu
+		//on a reçu la zone du jeu
 		gameZone = getPercepts();
 
 		//on painte l'ecran
@@ -410,7 +410,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiBomb bomb = iteratorBombs.next();
 			matrice[bomb.getLine()][bomb.getCol()] = -1;
 			
-			//pour les API, on a donn� une color
+			//pour les API, on a donné une color
 			//ecran.setTileColor(bomb.getLine(), bomb.getCol(), Color.CYAN);
 			//ecran.setTileText(bomb.getLine(), bomb.getCol(), "BOMBA");
 			
@@ -449,7 +449,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	AiBlock block = iteratorBlocks.next();
 	if (block.isDestructible()){
 		matrice[block.getLine()][block.getCol()] = 5;
-		//pour les API, on a donn� une color
+		//pour les API, on a donné une color
 		//ecran.setTileColor(block.getLine(), block.getCol(), Color.LIGHT_GRAY);
 		}else{
 			matrice[block.getLine()][block.getCol()] = 0;
@@ -477,7 +477,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiFire fire = iteratorFires.next();
 			matrice[fire.getLine()][fire.getCol()] = -2;
 			/**
-			//pour les API, on a donn� une color
+			//pour les API, on a donné une color
 			ecran.setTileColor(fire.getLine(), fire.getCol(), Color.white);
 			ecran.setTileText(fire.getTile(), "BOMB!");
 			*/
@@ -504,7 +504,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiItem item = iteratorItems.next();
 			matrice[item.getLine()][item.getCol()] = 10;
 			/**
-			//pour les API, on a donn� une color
+			//pour les API, on a donné une color
 			ecran.setTileColor(item.getLine(), item.getCol(), Color.CYAN);
 			ecran.setTileText(item.getTile(), "BONUS!");
 			*/
@@ -578,15 +578,15 @@ public class OzdokerOzen extends ArtificialIntelligence
 			result = new AiAction(AiActionName.NONE);
 			check=false;
 			permissionPoseBombe=false;
-			//System.out.println("Path BO� BO� BO�");
+			//System.out.println("Path Boù Boù BO�");
 
 		}
-		else if(nextMove.getTiles().size()>0){ //Oui il y a de path,mais est-ce que on est arriv� à notre cible? 
+		else if(nextMove.getTiles().size()>0){ //Oui il y a de path,mais est-ce que on est arrivé à notre cible? 
 			if(nextMove.getTiles().size()==1){// oui, on l'est arrive
 				permissionPoseBombe=true;
 				arriverACible=true;
 				check=false;
-			}else{//Non, on n'est pas arriv� à notre cible
+			}else{//Non, on n'est pas arrivé à notre cible
 				cible=nextMove.getLastTile();
 				//on prend le tile avant pour controler des dangeurs
 				if(nextMove.getTiles().size()>1)
@@ -681,17 +681,17 @@ public class OzdokerOzen extends ArtificialIntelligence
 			result = new AiAction(AiActionName.NONE);
 			check=false;
 			permissionPoseBombe=false;
-			//System.out.println("Path BO� BO� BO�");
+			//System.out.println("Path Boù Boù BO�");
 
 		}
-		else{ //Oui il y a de path,mais est-ce que on est arriv� à notre cible? 
+		else{ //Oui il y a de path,mais est-ce que on est arrivé à notre cible? 
 			if(nextMove.getTiles().size()==1){// oui, on l'est arrive
 				if(!collecteBonus){
 					permissionPoseBombe=true;
 				}
 				arriverACible=true;
 				check=false;
-			}else{//Non, on n'est pas arriv� à notre cible
+			}else{//Non, on n'est pas arrivé à notre cible
 				@SuppressWarnings("unused")
 				AiTile cible=nextMove.getLastTile();
 				//on prend le tile avant pour controler des dangeurs
@@ -776,10 +776,10 @@ public class OzdokerOzen extends ArtificialIntelligence
 			result = new AiAction(AiActionName.NONE);
 			check=false;
 			permissionPoseBombe=false;
-			//System.out.println("Path BO� BO� BO�");
+			//System.out.println("Path Boù Boù BO�");
 
 		}
-		else if(nextMove.getTiles().size()>0){ //Oui il y a de path,mais est-ce que on est arriv� à notre cible? 
+		else if(nextMove.getTiles().size()>0){ //Oui il y a de path,mais est-ce que on est arrivé à notre cible? 
 				cible=nextMove.getLastTile();
 				AiTile controlTile;
 				if(nextMove.getTiles().size()>1)

@@ -23,7 +23,7 @@ public class DeplacementCollecte {
 	}
 
 	/**
-	 * Cette méthode impl�mente l'algorithme de collecte. Elle prend 3 arguments
+	 * Cette méthode implémente l'algorithme de collecte. Elle prend 3 arguments
 	 * une matrice de type Int, la zone du jeu et une action.
 	 * 
 	 * @param gameZone
@@ -445,7 +445,7 @@ public class DeplacementCollecte {
 	 * Cette méthode forme une liste des cases cibles que notre IA peut aller
 	 * dans le mode collecte. Elle prend deux arguments, une matrice de type Int
 	 * et la zone du jeu. On prend aussi en compte les cases qui sont dans la
-	 * port�e des bombes.
+	 * portée des bombes.
 	 * 
 	 * @param matrice
 	 *            La Matrice collecte

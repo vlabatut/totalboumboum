@@ -27,7 +27,7 @@ public class DeplacementCollecte {
 	}
 
 	/**
-	 * Cette méthode impl�mente l'algorithme de collecte. Elle prend 3 arguments
+	 * Cette méthode implémente l'algorithme de collecte. Elle prend 3 arguments
 	 * une matrice de type Int, la zone du jeu et une action.
 	 * 
 	 * @param gameZone

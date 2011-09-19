@@ -49,11 +49,11 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	private double[][] currentMatrix;
 	private boolean dropBomb=false;
 	private int maxLine, maxCol; //Col et Ligne de la case maximale
-	/** la case occup�e actuellement par le personnage */
+	/** la case occupée actuellement par le personnage */
 	private AiTile currentTile = null;
-	/** la position en pixels occup�e actuellement par le personnage */
+	/** la position en pixels occupée actuellement par le personnage */
 	private double currentX;
-	/** la position en pixels occup�e actuellement par le personnage */
+	/** la position en pixels occupée actuellement par le personnage */
 	private double currentY;
 	ArtificialIntelligence ai=this;
 	private Astar astar;
@@ -62,7 +62,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/**
 	 * Cette classe dépend essentiellement de la fonction �processAction� 
 	 * qui est �tendu de la classe �ArtificialIntelligence� de l�API. 
-	 * Car dans cette méthode, on d�cide les actions de l�iA.
+	 * Car dans cette méthode, on décide les actions de l�iA.
 	 */
 	public AiAction processAction() throws StopRequestException, NullPointerException
 	{	// avant tout : test d'interruption
@@ -70,7 +70,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		// premier appel : on initialise
 		
 		initBT();
-		// si le personnage control� a été �limin�, inutile de continuer
+		// si le personnage control� a été élimin�, inutile de continuer
 		if(!this.deepPurple.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			updateLocation();
@@ -126,7 +126,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * D�abord on obtient des percepts, ensuite on trouve notre h�ro, 
+	 * D�abord on obtient des percepts, ensuite on trouve notre héro, 
 	 * et puis on crée l�objet Elements et met à jour de notre case.  
 	 */
 	private void initBT() throws StopRequestException
@@ -145,7 +145,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * On trouve les nombres de notre bombe et de notre bombe actuelle, 
-	 * apr�s on choisi le mode.  
+	 * après on choisi le mode.  
 	 */
 	private boolean selectMode() throws StopRequestException{
 		checkInterruption();
@@ -178,7 +178,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * On �value des critéres (le nombre des murs destructibles et de bonus) 
-	 * ensuite on d�cide le posage de bombe pour le mode collecte. 
+	 * ensuite on décide le posage de bombe pour le mode collecte. 
 	 */
 	private void executeCollect() throws StopRequestException{
 		checkInterruption();
@@ -232,7 +232,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * On �value des critéres (tuer à l�adversaire) 
-	 * ensuite on d�cide le posage de bombe pour le mode attaque.
+	 * ensuite on décide le posage de bombe pour le mode attaque.
 	 */
 	private void executeAttack() throws StopRequestException{
 		checkInterruption();

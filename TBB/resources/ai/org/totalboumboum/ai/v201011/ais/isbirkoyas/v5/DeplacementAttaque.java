@@ -29,7 +29,7 @@ public class DeplacementAttaque {
 	}
 
 	/**
-	 * Cette méthode impl�mente l'algorithme d'attaque. Elle prend 3 arguments
+	 * Cette méthode implémente l'algorithme d'attaque. Elle prend 3 arguments
 	 * une matrice de type double, la zone du jeu et une action.
 	 * 
 	 * @param gameZone
@@ -584,7 +584,7 @@ public class DeplacementAttaque {
 	/**
 	 * Cette méthode forme une liste des cases cibles que notre IA peut aller
 	 * dans le mode attaque. Elle prend deux arguments une matrice de type
-	 * double et la zone du jeu. Notre IA peut se d�placer en traversant ces
+	 * double et la zone du jeu. Notre IA peut se déplacer en traversant ces
 	 * cases.
 	 * 
 	 * @param matrice

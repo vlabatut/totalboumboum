@@ -24,7 +24,7 @@ public class Securite {
 	}
 
 	/**
-	 * Cette méthode contr�le si la case cible est vide ou pas et elle retourne
+	 * Cette méthode Contrôle si la case cible est vide ou pas et elle retourne
 	 * un type bool�enne (danger). Elle prend 2 arguments la zone du jeu et la
 	 * case cible.
 	 * 
@@ -59,8 +59,8 @@ public class Securite {
 	}
 
 	/**
-	 * Cette méthode fait le contr�le de sécurité du posage de la bombe de notre
-	 * IA c'est-a-dire contr�le si notre IA pose sa bombe ou pas. Elle prend un
+	 * Cette méthode fait le Contrôle de sécurité du posage de la bombe de notre
+	 * IA c'est-a-dire Contrôle si notre IA pose sa bombe ou pas. Elle prend un
 	 * seul argument,la zone du jeu et elle retourne une liste.
 	 * 
 	 * @param gameZone
@@ -124,8 +124,8 @@ public class Securite {
 	}
 
 	/**
-	 * Cette méthode fait le contr�le de sécurité du posage de la bombe par
-	 * l�adversaire autour d�IA c�est-a-dire contr�le si notre IA tombe en
+	 * Cette méthode fait le Contrôle de sécurité du posage de la bombe par
+	 * l�adversaire autour d�IA c�est-a-dire Contrôle si notre IA tombe en
 	 * danger par la bombe de l�adversaire. Elle prend deux arguments la zone du
 	 * jeu et une bombe du jeu. Elle retourne une liste.
 	 * 

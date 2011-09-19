@@ -399,7 +399,7 @@ public class Move
 	 * @param area
 	 * 		une car�e qu'on estime pour un hero pour qu'il puisse acceder à ses cases dans le temps d'explosion d'une bombe
 	 * @param safe
-	 * 		liste des cases sur. Au d�but c'est null.
+	 * 		liste des cases sur. Au début c'est null.
 	 * @return result
 	 * 		une liste des cases accesible, sinon une liste null
 	 * @throws StopRequestException
@@ -443,7 +443,7 @@ public class Move
 	 * @param tile 
 	 * 		tile du hero qu'on veut trouve son chemin
 	 * @param safe
-	 * 		liste des cases sur. Au d�but c'est null.
+	 * 		liste des cases sur. Au début c'est null.
 	 * @return result
 	 * 		une liste des cases accesible, sinon une liste null
 	 * @throws StopRequestException

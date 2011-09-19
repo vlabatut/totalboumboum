@@ -85,7 +85,7 @@ public class Action {
 					// pour les murs et les adversaires 
 					if(type==1 || type==2)
 					{
-						// on calcule le point d'une telle tile comme (point/distance_entre_l'h�ro_et_la_case				
+						// on calcule le point d'une telle tile comme (point/distance_entre_l'héro_et_la_case				
 										
 						if(type==2) 
 						{
@@ -139,7 +139,7 @@ public class Action {
 					// pour les murs et adversaires
 					if(type==1 || type==2)
 					{
-						// on calcule le point d'une telle tile comme (point/distance_entre_l'h�ro_et_la_case
+						// on calcule le point d'une telle tile comme (point/distance_entre_l'héro_et_la_case
 
 
 						

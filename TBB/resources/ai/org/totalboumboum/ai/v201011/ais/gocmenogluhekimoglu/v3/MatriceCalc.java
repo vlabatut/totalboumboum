@@ -334,7 +334,7 @@ public class MatriceCalc {
 	
 	
 	/**
-	 * ajouter la matrice donn�e, multipli� par une constante, à cette matrice
+	 * ajouter la matrice donnée, multiplié par une constante, à cette matrice
 	 * @param mtx
 	 * @param weight
 	 * @throws StopRequestException

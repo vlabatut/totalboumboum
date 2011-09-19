@@ -251,7 +251,7 @@ public class Path {
 	
 	/**
 	 * on calcule tous les tiles accesibles et apres on prend celui qui a meilleur note
-	 * apres on donne la meilleur tile à Astar pourqu'il trouv� la meilleur route pour aller au cible
+	 * apres on donne la meilleur tile à Astar pourqu'il trouvé la meilleur route pour aller au cible
 	 * à la fin on y bouge
 	 * 
 	 * @param line

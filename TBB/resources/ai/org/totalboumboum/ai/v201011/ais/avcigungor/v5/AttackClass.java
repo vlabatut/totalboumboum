@@ -68,9 +68,9 @@ public class AttackClass {
 	// ///////////////////////////////////////////////////////////////
 	// DESTINATION /////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
-	/** indique si le personnage est arriv� à destination */
+	/** indique si le personnage est arrivé à destination */
 /*	private boolean arrived;
-	*//** la case de destination s�lectionn�e pour la fuite *//*
+	*//** la case de destination sélectionn�e pour la fuite *//*
 	private AiTile tileDest;
 	*//** destinations potentielles *//*
 	private List<AiTile> possibleDest;

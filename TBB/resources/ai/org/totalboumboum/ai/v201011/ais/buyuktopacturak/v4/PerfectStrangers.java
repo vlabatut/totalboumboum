@@ -101,7 +101,7 @@ public class PerfectStrangers {
 	}	
 	
 	/**
-	 * On renvoie la liste des case qui définie la port�e virtuelle.
+	 * On renvoie la liste des case qui définie la portée virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -147,7 +147,7 @@ public class PerfectStrangers {
 	}
 	
 	/**
-	 * On renvoie la liste des port�es de toutes les bombes.
+	 * On renvoie la liste des portées de toutes les bombes.
 	 * @return
 	 * @throws StopRequestException
 	 */
@@ -187,7 +187,7 @@ public class PerfectStrangers {
 	}
 	
 	/**
-	 * Si on pose une bombe, on trouve une/plusieurs case(s) s�re.
+	 * Si on pose une bombe, on trouve une/plusieurs case(s) sûre.
 	 * @param bomb
 	 * @return
 	 * @throws StopRequestException

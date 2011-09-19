@@ -166,7 +166,7 @@ public AiAction calculeMatriceAttaque(Etats matrice[][],double matriceTotal[][])
 				break;
 			}
 			
-			// on donne le couleur rouge aux tiles inaccesible par notre héro
+			// on donne le couleur rouge aux tiles inaccesible par notre hÃ©ro
 			if( matriceTotal[i][j]==-100) output.setTileColor(i, j,case_inaccesible);
 		}	
 	}

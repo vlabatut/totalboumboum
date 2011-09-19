@@ -52,8 +52,8 @@ public class DropBomb
 		ai.checkInterruption();
 		
 		boolean result=false; // Decision
-		int range = zone.getOwnHero().getBombRange();//la port�e de nos bombes
-		List<AiTile> tempBlast = calculeBlast(range);//La port�e virtuelle de notre bombe de futur 
+		int range = zone.getOwnHero().getBombRange();//la portée de nos bombes
+		List<AiTile> tempBlast = calculeBlast(range);//La portée virtuelle de notre bombe de futur 
 		
 		if(zone.getOwnHero().getBombNumberMax() - zone.getOwnHero().getBombNumberCurrent() != 0 && zone.getOwnHero().getTile().getBombs().isEmpty())
 		{
@@ -111,7 +111,7 @@ public class DropBomb
 	 * adversaire 
 	 * 
 	 * @param tempBlast
-	 * 		la liste des cases de la port� de notre bombe virtuelle
+	 * 		la liste des cases de la porté de notre bombe virtuelle
 	 * @return result
 	 * 		vrai s'il y'en a un, faux sinon
 	 * */
@@ -149,7 +149,7 @@ public class DropBomb
 	}
 	
 	/*
-	 * Regarde si l'agent est bloque et si oui dans combien de cot�.
+	 * Regarde si l'agent est bloque et si oui dans combien de coté.
 	 * 
 	 * @param ownHero
 	 * 		agent qu'on veut tester s'il est bloquer
@@ -212,10 +212,10 @@ public class DropBomb
 	
 	
 	/*
-	 * Teste s'il se trouve de mur destructible dans la port� d'une bombe virtuelle
+	 * Teste s'il se trouve de mur destructible dans la porté d'une bombe virtuelle
 	 * 
 	 * @param tempBlast
-	 *		 la liste des cases de la port� de notre bombe virtuelle
+	 *		 la liste des cases de la porté de notre bombe virtuelle
 	 *
 	 *@return result
 	 *		vrai s'il y'en a un, faux sinon
@@ -250,10 +250,10 @@ public class DropBomb
 	
 
 	/*
-	 * Teste s'il se trouve des adversaire dans la port� d'une bombe virtuelle
+	 * Teste s'il se trouve des adversaire dans la porté d'une bombe virtuelle
 	 * 
 	 * @param tempBlast
-	 *		 la liste des cases de la port� de notre bombe virtuelle
+	 *		 la liste des cases de la porté de notre bombe virtuelle
 	 *
 	 *@return result
 	 *		vrai s'il y'en a un, faux sinon
@@ -286,13 +286,13 @@ public class DropBomb
 	
 	/*
 	 * Teste s'il se trouve des cases sur à alles apres avois poser une bombe.
-	 * il prend une car� au tille de la range et enleve les cases de la port� virtuelle. puis 
+	 * il prend une car� au tille de la range et enleve les cases de la porté virtuelle. puis 
 	 * s'il se trouve des cases sur (en utilisen isSafe) il calcule les cases surs.
 	 * 
 	 * @param hero
 	 * 		hero qu'on veut teste
 	 * @param range
-	 * 		la port� de la bombe de hero
+	 * 		la porté de la bombe de hero
 	 * @param blast
 	 * 		la liste des cases de la bombe virtuelle
 	 * 
@@ -330,7 +330,7 @@ public class DropBomb
 	
 	
 	/*
-	 * Calcule la liste des cases de la port�e de bombe d'un hero
+	 * Calcule la liste des cases de la portée de bombe d'un hero
 	 * 
 	 * @param range
 	 * 		la portee de la bombe d'un hero
@@ -378,7 +378,7 @@ public class DropBomb
 	 * Calcule la car� de taille range*range
 	 * 
 	 * @param range
-	 * 		la port�e de la bombe d'un hero
+	 * 		la portée de la bombe d'un hero
 	 * @return tempo 
 	 *		la liste des cases de l'area
 	 * */

@@ -70,7 +70,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 		
 
 		
-		//on a re�u la zone du jeu
+		//on a reçu la zone du jeu
 		AiZone gameZone = getPercepts();
 		//Pour choisir mode
 		
@@ -565,7 +565,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiBomb bomb = iteratorBombs.next();
 			matrice[bomb.getLine()][bomb.getCol()] = -1;
 			/**
-			//pour les API, on a donn� une color
+			//pour les API, on a donné une color
 			ecran.setTileColor(bomb.getLine(), bomb.getCol(), Color.BLACK);
 			ecran.setTileText(bomb.getLine(), bomb.getCol(), "BOMBA");
 			*/
@@ -603,7 +603,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	AiBlock block = iteratorBlocks.next();
 	if (block.isDestructible()){
 		matrice[block.getLine()][block.getCol()] = 5;
-		//pour les API, on a donn� une color
+		//pour les API, on a donné une color
 		ecran.setTileColor(block.getLine(), block.getCol(), Color.LIGHT_GRAY);}
 	else
 		matrice[block.getLine()][block.getCol()] = 0;
@@ -631,7 +631,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiFire fire = iteratorFires.next();
 			matrice[fire.getLine()][fire.getCol()] = -2;
 			/**
-			//pour les API, on a donn� une color
+			//pour les API, on a donné une color
 			ecran.setTileColor(fire.getLine(), fire.getCol(), Color.white);
 			ecran.setTileText(fire.getTile(), "BOMB!");
 			*/
@@ -658,7 +658,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiItem item = iteratorItems.next();
 			matrice[item.getLine()][item.getCol()] = 10;
 			/**
-			//pour les API, on a donn� une color
+			//pour les API, on a donné une color
 			ecran.setTileColor(item.getLine(), item.getCol(), Color.CYAN);
 			ecran.setTileText(item.getTile(), "BONUS!");
 			*/

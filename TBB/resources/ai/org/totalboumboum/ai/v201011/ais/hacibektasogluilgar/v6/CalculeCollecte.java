@@ -191,7 +191,7 @@ public AiAction calculeMatriceCollecte(Etats matrice[][],double matriceTotal[][]
 				break;
 			}
 			
-			// on donne le couleur vert aux tiles inaccesible en mode collecte par notre héro
+			// on donne le couleur vert aux tiles inaccesible en mode collecte par notre hÃ©ro
 			if( matriceTotal[i][j]<=-100) output.setTileColor(i, j,case_inaccesible);
 
 		}	

@@ -14,7 +14,7 @@ public class Bombe
 {
 	private AiZone zone; // La zone de jeu de cette instance
 	private final int BOMB = -200; //constante pour les bombes
-	private final int BOMB_PORTE = -150;  //constantes pour leurs portés
+	private final int BOMB_PORTE = -150;  //constantes pour leurs portÃ©s
 	AiOutput outPut; //objet pour affichage
 	Color couleur = null; //objet pour affichage
 	

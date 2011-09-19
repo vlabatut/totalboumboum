@@ -26,7 +26,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	{	// avant tout : test d'interruption
 		checkInterruption();
 		
-		//on a re�u la zone du jeu
+		//on a reçu la zone du jeu
 		AiZone gameZone = getPercepts();
 		
 		ecran=getOutput();
@@ -121,7 +121,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			checkInterruption();
 			AiBomb bomb = iteratorBombs.next();
 			matrice[bomb.getLine()][bomb.getCol()] = -1;
-			//pour les API, on a donn� une color
+			//pour les API, on a donné une color
 			ecran.setTileColor(bomb.getLine(), bomb.getCol(), Color.BLACK);
 			//la zone de dange
 			List<AiTile> inScopeTiles = bomb.getBlast();
@@ -154,7 +154,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	AiBlock block = iteratorBlocks.next();
 	if (block.isDestructible()){
 		matrice[block.getLine()][block.getCol()] = 5;
-		//pour les API, on a donn� une color
+		//pour les API, on a donné une color
 		ecran.setTileColor(block.getLine(), block.getCol(), Color.LIGHT_GRAY);}
 	else
 		matrice[block.getLine()][block.getCol()] = 0;
@@ -181,7 +181,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			checkInterruption();
 			AiFire fire = iteratorFires.next();
 			matrice[fire.getLine()][fire.getCol()] = -2;
-			//pour les API, on a donn� une color
+			//pour les API, on a donné une color
 			ecran.setTileColor(fire.getLine(), fire.getCol(), Color.white);
 		}
 	}
@@ -205,7 +205,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			checkInterruption();
 			AiItem item = iteratorItems.next();
 			matrice[item.getLine()][item.getCol()] = 10;
-			//pour les API, on a donn� une color
+			//pour les API, on a donné une color
 			ecran.setTileColor(item.getLine(), item.getCol(), Color.CYAN);
 		}
 	}

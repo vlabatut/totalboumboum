@@ -138,7 +138,7 @@ public class TraitementCollect {
 
 	/**
 	 * Cette méthode trouve la case du plus proche bombe au bonus et elle
-	 * initialise cette case avec une valeur. Cette méthode contr�le les 4 cases
+	 * initialise cette case avec une valeur. Cette méthode Contrôle les 4 cases
 	 * voisines. Elle prend 3 arguments, la zone du jeu, les items du jeu et une
 	 * matrice de type Int.
 	 * 

@@ -168,7 +168,7 @@ public class PerfectStrangers {
 	}	
 	
 	/**
-	 * On renvoie la liste des case qui définie la port�e virtuelle de la bombe.
+	 * On renvoie la liste des case qui définie la portée virtuelle de la bombe.
 	 * @param tile
 	 * @param range
 	 * @return List<AiTile>
@@ -214,7 +214,7 @@ public class PerfectStrangers {
 	}
 	
 	/**
-	 * On renvoie la liste des port�es de toutes les bombes.
+	 * On renvoie la liste des portées de toutes les bombes.
 	 * @return List<AiTile>
 	 * @throws StopRequestException
 	 */
@@ -254,7 +254,7 @@ public class PerfectStrangers {
 	}
 	
 	/**
-	 * Si on pose une bombe, notre hero peut trouve une/plusieurs case(s) s�re?
+	 * Si on pose une bombe, notre hero peut trouve une/plusieurs case(s) sûre?
 	 * @param bomb
 	 * @return boolean
 	 * @throws StopRequestException
@@ -293,7 +293,7 @@ public class PerfectStrangers {
 	}
 	
 	/**
-	 * Si on pose une bombe, adversaire peut trouve une/plusieurs case(s) s�re?
+	 * Si on pose une bombe, adversaire peut trouve une/plusieurs case(s) sûre?
 	 * @param hero
 	 * @param bomb
 	 * @return boolean

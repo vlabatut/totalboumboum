@@ -53,7 +53,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/**
 	 * Cette classe dépend essentiellement de la fonction �processAction� 
 	 * qui est �tendu de la classe �ArtificialIntelligence� de l�API. 
-	 * Car dans cette méthode, on d�cide les actions de l�iA.
+	 * Car dans cette méthode, on décide les actions de l�iA.
 	 * si notre Ai existe dans le jeu,
 	 * d'abordon chois la mode et decide la posage de bombe avec la methode controlBomb
 	 * -> si on renvoie "true" on met d'une bombe.
@@ -75,7 +75,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		// premier appel : on initialise
 		AiAction result = new AiAction(AiActionName.NONE);
 		initBT();
-		// si le personnage control� a été �limin�, inutile de continuer
+		// si le personnage control� a été élimin�, inutile de continuer
 		if(!this.deepPurple.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			boolean actionBomb, mode=selectMode();
@@ -114,7 +114,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * D�abord on obtient des percepts, ensuite on trouve notre h�ro, 
+	 * D�abord on obtient des percepts, ensuite on trouve notre héro, 
 	 * et puis on crée l�objet PerfectStrangers et Elements.
 	 * En fin, on met à jour de notre case.  
 	 */
@@ -133,7 +133,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * On trouve les nombres de notre bombe et de notre bombe actuelle, 
-	 * apr�s on choisi le mode.
+	 * après on choisi le mode.
 	 * 
 	 * @return mode: boolean. notre mode
 	 * @throws StopRequestException

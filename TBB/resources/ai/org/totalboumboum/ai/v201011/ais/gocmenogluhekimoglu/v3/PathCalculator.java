@@ -66,7 +66,7 @@ public class PathCalculator {
 	 
 	
 	/**
-	 * ce fait une recherche A*, de trouver le chemin vers le cas le plus apprécié dans la matrice donnée.
+	 * ce fait une recherche A*, de trouver le chemin vers le cas le plus apprï¿½ciï¿½ dans la matrice donnÃ©e.
 	 * @throws StopRequestException
 	 */
 	void findTarget() throws StopRequestException{

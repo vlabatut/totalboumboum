@@ -13,7 +13,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class ActionManager {
 	
 	/**
-	 * Cette fonction trouve la prochaine action que nous devons faire pour suivre le chemin donn�.
+	 * Cette fonction trouve la prochaine action que nous devons faire pour suivre le chemin donné.
 	 * @return AiAction
 	 */
 	static AiAction move(GocmenogluHekimoglu monIa,AiPath fpath) throws StopRequestException{

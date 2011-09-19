@@ -36,7 +36,7 @@ public class Cost extends CostCalculator
 	 * 		la case cible
 	 * 
 	 * @return cost
-	 * 		le cost du chemin trouv�
+	 * 		le cost du chemin trouvé
 	 * 
 	 * */
 	public double processCost(AiTile start, AiTile end)throws StopRequestException {
