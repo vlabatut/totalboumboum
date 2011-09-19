@@ -12,7 +12,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Cette classe calcule la matrice de la mode collecte.
- * @author Onur Büyüktopaç & Yigit Turak
+ * @author Onur Bï¿½yï¿½ktopaï¿½ & Yigit Turak
  */
 public class CollectionMatrix{	
 	private BuyuktopacTurak bt;
@@ -20,7 +20,7 @@ public class CollectionMatrix{
 	private AiZone zone;		
 	private AiHero deepPurple;
 	
-	private List<AiTile> freeList =new ArrayList<AiTile>(); //ulaþýlabilir tile.lar	
+	private List<AiTile> freeList =new ArrayList<AiTile>(); //ulaï¿½ï¿½labilir tile.lar	
 	private List<AiItem> itemsList;
 	private List<AiTile> bonusList; 
 	private List<AiBlock> destWallsList;
@@ -35,7 +35,7 @@ public class CollectionMatrix{
 	private Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 
 	/**
-	 * C’est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
+	 * Cï¿½est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
 	 * @param zone
 	 * @throws StopRequestException
@@ -48,7 +48,7 @@ public class CollectionMatrix{
 	}
 	
 	/**
-	 * On obtient notre héro, la dimension de la zone et crée les objets listes.
+	 * On obtient notre hï¿½ro, la dimension de la zone et crÃ©e les objets listes.
 	 * @throws StopRequestException
 	 */
 	private void init()throws StopRequestException{
@@ -70,7 +70,7 @@ public class CollectionMatrix{
 	}
 	
 	/**
-	 * On crée et remplit la matrice.
+	 * On crÃ©e et remplit la matrice.
 	 * @throws StopRequestException
 	 */
 	public void createMatrix()throws StopRequestException{
@@ -87,7 +87,7 @@ public class CollectionMatrix{
 	/**
 	 * On trouve tous les murs et puis on remplit les cases des entours des murs 
 	 * avec le constant DESTRUCTIBLE ou INDESTRUCTIBLE. 
-	 * On utilise la méthode isRunnable().
+	 * On utilise la mÃ©thode isRunnable().
 	 * @throws StopRequestException
 	 */
 	private void putWalls() throws StopRequestException{

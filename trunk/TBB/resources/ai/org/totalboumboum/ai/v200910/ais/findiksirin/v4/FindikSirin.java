@@ -18,7 +18,7 @@ public class FindikSirin extends ArtificialIntelligence
 {		
 
 	
-	/** méthode appelée par le moteur du jeu pour obtenir une action de notre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de notre IA */
 	public AiAction processAction() throws StopRequestException
 	{	
 		checkInterruption();
@@ -44,13 +44,13 @@ public class FindikSirin extends ArtificialIntelligence
 			//T'as un chemin pour se fuir?
 			if(escapeManager!=null)
 			{
-				//T'es arrive à la fin du chemin de fuir?
+				//T'es arrive Ã  la fin du chemin de fuir?
 				if(escapeManager.hasArrived())
 				{
 					//initialiser  le chemin du fuir
 					escapeManager=null;
 				}
-				//T'es arrive à la fin du chemin de fuir?
+				//T'es arrive Ã  la fin du chemin de fuir?
 				else
 				{
 					//continues sur le chemin de fuir

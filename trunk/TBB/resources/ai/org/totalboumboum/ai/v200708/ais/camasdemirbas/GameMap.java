@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v200708.ais.camasdemirbas;
 
 /**
- * Ceci tient l'état et le contexte de chaque carreau sur la carte. 
+ * Ceci tient l'ï¿½tat et le contexte de chaque carreau sur la carte. 
  * 
  * @author Gokhan Camas
  * @author Irem Demirbas
@@ -14,18 +14,18 @@ public class GameMap {
 	public static final int HEIGHT = 15;	
 	/** Les cadres de terrain pour chaque carreau dans la carte */
 	private int[][] zoneMatrix = new int[WIDTH][HEIGHT];
-	/** L'indicateur si un carreau donné a été visité pendant la recherche */
+	/** L'indicateur si un carreau donnï¿½ a ï¿½tï¿½ visitï¿½ pendant la recherche */
 	private boolean[][] visited = new boolean[WIDTH][HEIGHT];
 	
 	/**
-	 * Créer une nouvelle carte avec la matrice de zone
+	 * crÃ©er une nouvelle carte avec la matrice de zone
 	 */
 	public GameMap(int[][] zoneMatrix) {
 		this.zoneMatrix = zoneMatrix;
 	}
 	
 	/**
-	 * Eclaircir le tableau marquant quels carreaux ont été visted par path 
+	 * Eclaircir le tableau marquant quels carreaux ont ï¿½tï¿½ visted par path 
 	 * finder.
 	 */
 	public void clearVisited() {
@@ -44,11 +44,11 @@ public class GameMap {
 	}
 	
 	/**
-	 * Obtenir le terrain à un emplacement donné
+	 * Obtenir le terrain Ã  un emplacement donnï¿½
 	 * 
-	 * @param x la coordonnée du carreau de terrain pour rapporter
-	 * @param y la coordonnée du carreau de terrain pour rapporter
-	 * @return Le carreau de terrain à l'emplacement donné
+	 * @param x la coordonnÃ©e du carreau de terrain pour rapporter
+	 * @param y la coordonnÃ©e du carreau de terrain pour rapporter
+	 * @return Le carreau de terrain Ã  l'emplacement donnï¿½
 	 */
 	public int getTerrain(int x, int y) {
 		return zoneMatrix[x][y];

@@ -9,8 +9,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
- * Cette classe peut être utilisée pour calculer les effets des bombes sur la matrice nous calculons
- * @author Can Göçmenoðlu
+ * Cette classe peut ï¿½tre utilisÃ©e pour calculer les effets des bombes sur la matrice nous calculons
+ * @author Can Gï¿½ï¿½menoï¿½lu
  *
  */
 public class MatriceBlast extends MatriceCalc {
@@ -20,7 +20,7 @@ public class MatriceBlast extends MatriceCalc {
 	}
 
 	/**
-	 * Cette fonction donne 1 à la flamme et des bombes qui sont sur le point d'exploser, et il donne des valeurs inférieures à 1 à des cas qui sont en danger d'explosion. 0 est sûre.
+	 * Cette fonction donne 1 Ã  la flamme et des bombes qui sont sur le point d'exploser, et il donne des valeurs infï¿½rieures Ã  1 Ã  des cas qui sont en danger d'explosion. 0 est sï¿½re.
 	 */
 	@Override
 	public void calculate() throws StopRequestException {

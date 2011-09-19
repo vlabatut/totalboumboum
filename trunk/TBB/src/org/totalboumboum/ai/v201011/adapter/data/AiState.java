@@ -25,11 +25,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Décrit un état dans lequel un sprite peut se trouver, c'est
- * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
- * Cet état est décrit par le nom de cette action, et éventuellement la
- * direction dans laquelle elle est effectuée (pour les actions orientées
- * comme le déplacement, par exemple).
+ * Dï¿½crit un Ã©tat dans lequel un sprite peut se trouver, c'est
+ * Ã  dire essentiellement l'action que le sprite rï¿½alise ou qu'il subit.
+ * Cet Ã©tat est dï¿½crit par le nom de cette action, et ï¿½ventuellement la
+ * direction dans laquelle elle est effectuÃ©e (pour les actions orientï¿½es
+ * comme le dÃ©placement, par exemple).
  * 
  * @author Vincent Labatut
  *
@@ -40,10 +40,10 @@ public interface AiState
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le nom associé à l'état
+	 * renvoie le nom associï¿½ Ã  l'ï¿½tat
 	 * 
 	 * @return	
-	 * 		nom associé à l'état
+	 * 		nom associï¿½ Ã  l'ï¿½tat
 	 */
 	public AiStateName getName();
 	
@@ -51,11 +51,11 @@ public interface AiState
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la direction associée à l'état,
-	 * qui peut être NONE, c'est à dire : l'état n'est pas orienté
+	 * renvoie la direction associï¿½e Ã  l'ï¿½tat,
+	 * qui peut ï¿½tre NONE, c'est Ã  dire : l'ï¿½tat n'est pas orientï¿½
 	 * 
 	 * @return	
-	 * 		direction associée à l'état
+	 * 		direction associï¿½e Ã  l'ï¿½tat
 	 */
 	public Direction getDirection();
 
@@ -63,10 +63,10 @@ public interface AiState
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la durée que le sprite a passé dans l'état courant
+	 * renvoie la durï¿½e que le sprite a passï¿½ dans l'ï¿½tat courant
 	 * 
 	 * @return	
-	 * 		une durée exprimée en ms
+	 * 		une durï¿½e exprimï¿½e en ms
 	 */
 	public long getTime();
 }

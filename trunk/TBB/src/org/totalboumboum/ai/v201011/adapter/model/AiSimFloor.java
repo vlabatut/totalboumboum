@@ -25,8 +25,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 
 /**
- * simule un sol du jeu, ie le graphisme affiché en tant que première couche de toute
- * case de la zone (et éventuellement recouvert par les autres types de sprites).
+ * simule un sol du jeu, ie le graphisme affichï¿½ en tant que premiÃ¨re couche de toute
+ * case de la zone (et ï¿½ventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
  *
@@ -34,25 +34,25 @@ import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 final class AiSimFloor extends AiSimSprite implements AiFloor
 {
 	/**
-	 * crée une simulation du sol passé en paramètre,
-	 * avec les propriétés passées en paramètres.
+	 * crÃ©e une simulation du sol passï¿½ en paramï¿½tre,
+	 * avec les propriï¿½tï¿½s passï¿½es en paramï¿½tres.
 	 * 
 	 * @param id
-	 * 		numéro d'identification du sol
+	 * 		numï¿½ro d'identification du sol
 	 * @param tile
 	 * 		case contenant le sol
 	 * @param posX
 	 * 		abscisse du sol
 	 * @param posY
-	 * 		ordonnée du sol
+	 * 		ordonnï¿½e du sol
 	 * @param posZ
-	 * 		hauteur du sol (forcément 0)
+	 * 		hauteur du sol (forcï¿½ment 0)
 	 * @param state
-	 * 		état du sol
+	 * 		ï¿½tat du sol
 	 * @param burningDuration
-	 * 		durée de combustion du sol
+	 * 		durï¿½e de combustion du sol
 	 * @param currentSpeed
-	 * 		vitesse courante de déplacement du sol (inutile ici)
+	 * 		vitesse courante de dÃ©placement du sol (inutile ici)
 	 */
 	protected AiSimFloor(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed)
@@ -60,11 +60,11 @@ final class AiSimFloor extends AiSimSprite implements AiFloor
 	}	
 
 	/**
-	 * crée une simulation du sol passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une simulation du sol passï¿½ en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param floor
-	 * 		sprite à simuler
+	 * 		sprite Ã  simuler
 	 * @param tile
 	 * 		case contenant le sprite
 	 */

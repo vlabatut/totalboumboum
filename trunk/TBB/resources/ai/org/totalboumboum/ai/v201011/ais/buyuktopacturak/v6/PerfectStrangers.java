@@ -13,10 +13,10 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Les méthodes qui se trouvent dans ces classes servent aux autres classes dans le cas de besoins. 
- * Comme ces méthodes sont appelé par les autre classes mais elle n’appartient pas aux eux, 
- * on l’appelle comme l’étranger alors le nom de cette classe est PerfectSrangers. 
- * @author Onur Büyüktopaç & Yigit Turak
+ * Les mÃ©thodes qui se trouvent dans ces classes servent aux autres classes dans le cas de besoins. 
+ * Comme ces mÃ©thodes sont appelï¿½ par les autre classes mais elle nï¿½appartient pas aux eux, 
+ * on lï¿½appelle comme lï¿½ï¿½tranger alors le nom de cette classe est PerfectSrangers. 
+ * @author Onur Bï¿½yï¿½ktopaï¿½ & Yigit Turak
  */
 public class PerfectStrangers {
 
@@ -27,7 +27,7 @@ public class PerfectStrangers {
 	private Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 
 	/**
-	 * C’est un constructeur qui obtient des percepts de la zone et qui crée l’objet BuyuktopacTurak.
+	 * Cï¿½est un constructeur qui obtient des percepts de la zone et qui crÃ©e lï¿½objet BuyuktopacTurak.
 	 * @param bt
 	 * @param zone
 	 * @throws StopRequestException
@@ -185,7 +185,7 @@ public class PerfectStrangers {
 	}	
 	
 	/**
-	 * On renvoie la liste des case qui définie la portée virtuelle de la bombe.
+	 * On renvoie la liste des case qui dï¿½finie la portï¿½e virtuelle de la bombe.
 	 * @param tile
 	 * @param range
 	 * @return List<AiTile>
@@ -231,7 +231,7 @@ public class PerfectStrangers {
 	}
 	
 	/**
-	 * On renvoie la liste des portées de toutes les bombes.
+	 * On renvoie la liste des portï¿½es de toutes les bombes.
 	 * @return List<AiTile>
 	 * @throws StopRequestException
 	 */
@@ -271,7 +271,7 @@ public class PerfectStrangers {
 	}
 	
 	/**
-	 * Si on pose une bombe, notre hero peut trouve une/plusieurs case(s) sûre?
+	 * Si on pose une bombe, notre hero peut trouve une/plusieurs case(s) sï¿½re?
 	 * @param bomb
 	 * @return boolean
 	 * @throws StopRequestException
@@ -310,7 +310,7 @@ public class PerfectStrangers {
 	}
 	
 	/**
-	 * Si on pose une bombe, adversaire peut trouve une/plusieurs case(s) sûre?
+	 * Si on pose une bombe, adversaire peut trouve une/plusieurs case(s) sï¿½re?
 	 * @param hero
 	 * @param bomb
 	 * @return boolean

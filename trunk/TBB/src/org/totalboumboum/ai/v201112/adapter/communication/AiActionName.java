@@ -22,8 +22,8 @@ package org.totalboumboum.ai.v201112.adapter.communication;
  */
 
 /**
- * noms donnés aux différentes actions qu'une IA peut effectuer : 
- * NONE (ne rien faire), MOVE (se déplacer, avec la direction à préciser), 
+ * noms donnï¿½s aux diffï¿½rentes actions qu'une IA peut effectuer : 
+ * NONE (ne rien faire), MOVE (se dï¿½placer, avec la direction Ã  prï¿½ciser), 
  * DROP_BOMB (poser une bombe), PUNCH (frapper une bombe)... 
  * 
  * @author Vincent Labatut

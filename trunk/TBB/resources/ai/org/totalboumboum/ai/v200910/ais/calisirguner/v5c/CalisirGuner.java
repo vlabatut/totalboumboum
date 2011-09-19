@@ -23,7 +23,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 /**
- * et on sest profité des classes de groupe bleu de l'annee precedente
+ * et on sest profitï¿½ des classes de groupe bleu de l'annee precedente
  * 
  * @version 5.c
  * 
@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 public class CalisirGuner extends ArtificialIntelligence {
 	private AiZone zone;
-	/** la case occupée actuellement par le personnage */
+	/** la case occupï¿½e actuellement par le personnage */
 	private AiTile caseactuelle;
 	/** la case sur laquelle on veut aller */
 	private AiTile pasprochain = null;
@@ -53,7 +53,7 @@ public class CalisirGuner extends ArtificialIntelligence {
 	private Map map;
 	private AiHero bomberman;
 
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption();
 		zone = getPercepts();
@@ -515,7 +515,7 @@ private void attaque() throws StopRequestException { // avant tout : testd'inter
 		return meilleur_resultat;
 
 	}
-//on trouve les cases surs donc les cases qui ne sont pas menacés par des flammes bombes feus
+//on trouve les cases surs donc les cases qui ne sont pas menacï¿½s par des flammes bombes feus
 	private Collection<AiTile> cases_sures(AiTile tile)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE

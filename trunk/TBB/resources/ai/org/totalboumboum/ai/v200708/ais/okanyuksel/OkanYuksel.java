@@ -1,11 +1,11 @@
 /********************************************
  * DECCAL                                   *
  *                                          *
- * L'implémentation d'AI pour BombermanJA   *
+ * L'implï¿½mentation d'AI pour BombermanJA   *
  *                                          *
- * L'univesité Galatasaray @ 2007           *
+ * L'univesitï¿½ Galatasaray @ 2007           *
  *                                          *
- * par Betül Okan et Erkan Yüksel           *
+ * par Betï¿½l Okan et Erkan Yï¿½ksel           *
  ********************************************/
 
 package org.totalboumboum.ai.v200708.ais.okanyuksel;
@@ -24,20 +24,20 @@ public class OkanYuksel extends ArtificialIntelligence
 {
 	private static final long serialVersionUID = 1L;
 
-	/* Pour calculer case suivant en utilisant l’index de direction. */
+	/* Pour calculer case suivant en utilisant lï¿½index de direction. */
 	private static int[][] yonelim = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}, {0, 0}};
-	/*Pour réaligner les constants de direction.*/ 
+	/*Pour rï¿½aligner les constants de direction.*/ 
 	private static int[] yon = {AI_ACTION_GO_UP, AI_ACTION_GO_RIGHT, AI_ACTION_GO_DOWN, AI_ACTION_GO_LEFT};
 	
-	/* L’index pour la direction courante. */
+	/* Lï¿½index pour la direction courante. */
 	private int yonum;
-	/* La route à s’échapper */
+	/* La route Ã  sï¿½ï¿½chapper */
 	private LinkedList<Integer> kacisR;
-	/* La puissance de la bombe qui est détecté comme un danger. */
+	/* La puissance de la bombe qui est dï¿½tectï¿½ comme un danger. */
 	private int tBombaG;
-	/* Les informations de la position pour la bombe qui est détecté comme un danger. */
+	/* Les informations de la position pour la bombe qui est dï¿½tectï¿½ comme un danger. */
 	private int tBombaKx, tBombaKy;
-	/* un index qui détermine si le contrôle des direction est croissante ou décroissante */
+	/* un index qui dï¿½termine si le contrï¿½le des direction est croissante ou dï¿½croissante */
 	private int artis;
 	
 	public OkanYuksel()
@@ -51,7 +51,7 @@ public class OkanYuksel extends ArtificialIntelligence
 		artis = 1;
 	}
 	
-	/** indicateur de première invocation (pour la compatibilité */
+	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
 	private boolean firstTime = true;
 
 	@Override
@@ -67,7 +67,7 @@ public class OkanYuksel extends ArtificialIntelligence
 			int xM = getOwnPosition()[0];
 			int yM = getOwnPosition()[1];
 			
-			//S’il y a une route planifiée, d’abord celle va s’appliquer.
+			//Sï¿½il y a une route planifiï¿½e, dï¿½abord celle va sï¿½appliquer.
 			if (!kacisR.isEmpty())
 			{
 				yonum = kacisR.pollLast();
@@ -75,10 +75,10 @@ public class OkanYuksel extends ArtificialIntelligence
 			}
 			
 			/*
-			 * S’il y a un autre joueur dans le champ d’effet de nos bombes, 
-			 * et si DECCAL a une bombe à poser, 
-			 * et si une route peut-être trouvée pour s’échapper, 
-			 * DECCAL va poser une bombe pour détruire son rival.
+			 * Sï¿½il y a un autre joueur dans le champ dï¿½effet de nos bombes, 
+			 * et si DECCAL a une bombe Ã  poser, 
+			 * et si une route peut-ï¿½tre trouvï¿½e pour sï¿½ï¿½chapper, 
+			 * DECCAL va poser une bombe pour dÃ©truire son rival.
 			 */
 			if (hedefVar(xM, yM) && getOwnBombCount()>0)
 			{
@@ -88,11 +88,11 @@ public class OkanYuksel extends ArtificialIntelligence
 					return AI_ACTION_PUT_BOMB;
 				}
 			}
-			//Enfin DECCAL va chercher une autre possibilité.
+			//Enfin DECCAL va chercher une autre possibilitï¿½.
 			return yonSec(xM, yM);
 		}
 		catch(Exception hata)
-		{// Dans une situation pas exceptée, tous les variables sont resette, et DECCAL continue comme lui commence.
+		{// Dans une situation pas exceptï¿½e, tous les variables sont resette, et DECCAL continue comme lui commence.
 			tBombaG = 1;
 			tBombaKx = -1;
 			tBombaKy = -1;
@@ -112,9 +112,9 @@ public class OkanYuksel extends ArtificialIntelligence
 	}
 
 	/* 
-	 * Les informations sur les cases qui sont situées en retour d’un point.
-	 * @param xM coordonnée-x
-	 * @param yM coordonnée-y
+	 * Les informations sur les cases qui sont situï¿½es en retour dï¿½un point.
+	 * @param xM coordonnÃ©e-x
+	 * @param yM coordonnÃ©e-y
 	 * @return Le list des informations des cases.  
 	 * */
 	private int[] cevre(int xM, int yM) throws Exception
@@ -131,9 +131,9 @@ public class OkanYuksel extends ArtificialIntelligence
 	}
 
 	/*
-	 * Y’a-t-il une sortie en passant une case dans une direction
-	 * @param xM coordonnée-x
-	 * @param yM coordonnée-y
+	 * Yï¿½a-t-il une sortie en passant une case dans une direction
+	 * @param xM coordonnÃ©e-x
+	 * @param yM coordonnÃ©e-y
 	 * @param yonu L'index de direction
 	 * @return true ou false
 	 */
@@ -155,7 +155,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	
 	/* 
 	 * Est-ce que la route est verticalement ou horizontalement ouverte?
-	 * (i.e Est-ce que la route peut-être verticalement ou horizontalement marchée?)
+	 * (i.e Est-ce que la route peut-ï¿½tre verticalement ou horizontalement marchï¿½e?)
 	 * @param n1 point 1
 	 * @param n2 point 2
 	 * @return true ou false
@@ -224,7 +224,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	
 	/*
 	 * Est-ce que la route est verticalement ou horizontalement ouverte et
-	 *  la distance est égale ou moins de « menzil »?
+	 *  la distance est ï¿½gale ou moins de Ã  menzil ï¿½?
 	 * @param n1 point 1
 	 * @param n2 point 2
 	 * @param menzil distance
@@ -243,12 +243,12 @@ public class OkanYuksel extends ArtificialIntelligence
 	}
 	
 	/*
-	 * Pour trouver une route à s'échapper.
-	 * @param xM coordonnée-x de la position de DECCAL
-	 * @param yM coordonnée-y de la position de DECCAL
+	 * Pour trouver une route Ã  s'ï¿½chapper.
+	 * @param xM coordonnÃ©e-x de la position de DECCAL
+	 * @param yM coordonnÃ©e-y de la position de DECCAL
 	 * @param gYonu Un index de direction
-	 * @param kX coordonnée-x de la position de danger
-	 * @param kY coordonnée-y de la position de danger
+	 * @param kX coordonnÃ©e-x de la position de danger
+	 * @param kY coordonnÃ©e-y de la position de danger
 	 * @param menzil Puissance de danger(bombe)
 	 */
 	private void kacisBul(int xM, int yM, int gYonu, int kX, int kY, int menzil) throws Exception
@@ -258,7 +258,7 @@ public class OkanYuksel extends ArtificialIntelligence
 		for (int syc=0; syc<4; syc++)
 		{
 			if (
-					gYonu != syc && //pour empêcher de regarder à la direction qui est déjà utilisé.
+					gYonu != syc && //pour empï¿½cher de regarder Ã  la direction qui est dï¿½jï¿½ utilisï¿½.
 					(cevrem[syc] == AI_BLOCK_EMPTY ||
 					cevrem[syc] == AI_BLOCK_ITEM_BOMB ||
 					cevrem[syc] == AI_BLOCK_ITEM_FIRE)
@@ -268,21 +268,21 @@ public class OkanYuksel extends ArtificialIntelligence
 						!tehlikeli(xM, yM, syc, true) && 
 						!yolAcikveMenzilde(new int[]{kX, kY}, new int[]{xM+yonelim[syc][0],yM+yonelim[syc][1]}, menzil)
 					)
-				{//une position sûre a été trouvée
+				{//une position sï¿½re a ï¿½tï¿½ trouvï¿½e
 					kacisR.push(syc);
 					return;
 				}
 				else if (onuAcik(xM, yM, syc))
-				{//c’est encore dangereux mais peut-être on peut trouver en passant sur cette case.
+				{//cï¿½est encore dangereux mais peut-ï¿½tre on peut trouver en passant sur cette case.
 					kacisR.push(syc);
 					kacisBul(xM + yonelim[syc][0], yM + yonelim[syc][1], (syc+2)%4, kX, kY, menzil);
 				}
 			}
 		}
 		/*
-		 * Cette fois, ça ne peut pas trouvé. 
-		 * Le dernier est retiré et s’il y a un appel pas fini dans la récursivité, 
-		 * ça continuera, sinon ça finira.
+		 * Cette fois, ï¿½a ne peut pas trouvï¿½. 
+		 * Le dernier est retirï¿½ et sï¿½il y a un appel pas fini dans la rï¿½cursivitï¿½, 
+		 * ï¿½a continuera, sinon ï¿½a finira.
 		 */
 		if (!kacisR.isEmpty())
 			kacisR.pop();
@@ -290,8 +290,8 @@ public class OkanYuksel extends ArtificialIntelligence
 	
 	/* 
 	 * Est-ce qu'il y a un rival dans la direction de DECCAL?
-	 * @param xM coordonnée-x
-	 * @param yM coordonnée-y
+	 * @param xM coordonnÃ©e-x
+	 * @param yM coordonnÃ©e-y
 	 * @param yonu L'index de direction
 	 * @return une index de direction
 	 * */
@@ -302,10 +302,10 @@ public class OkanYuksel extends ArtificialIntelligence
 			int[] kP = getPlayerPosition(syc);
 			if (isPlayerAlive(syc) && yolAcik(kP, new int[]{xM,yM}))
 			{
-				/* Ça ne regarde pas d’arrière, 
-				 * pour empêche de tomber dans une piège 
-				 * après poser une bombe pour un rival. 
-				 * Donc il regardera à sa droite, à sa gauche et à son avant. 
+				/* ï¿½a ne regarde pas dï¿½arriï¿½re, 
+				 * pour empï¿½che de tomber dans une piï¿½ge 
+				 * aprï¿½s poser une bombe pour un rival. 
+				 * Donc il regardera Ã  sa droite, Ã  sa gauche et Ã  son avant. 
 				*/
 				if (kP[0]==xM && kP[1]<yM && yonu!=2)
 					return 0;
@@ -322,8 +322,8 @@ public class OkanYuksel extends ArtificialIntelligence
 
 	/* 
 	 * Est-ce qu'il y a un rival dans la champ d'effet de nos bombes?
-	 * @param xM coordonnée-x
-	 * @param yM coordonnée-y
+	 * @param xM coordonnÃ©e-x
+	 * @param yM coordonnÃ©e-y
 	 * @return true ou false
 	 * */
 	private boolean hedefVar(int xM, int yM) throws Exception
@@ -347,15 +347,15 @@ public class OkanYuksel extends ArtificialIntelligence
 	
 	/* 
 	 * La direction est dangereuse
-	 * @param xM coordonnée-x
-	 * @param yM coordonnée-y
+	 * @param xM coordonnÃ©e-x
+	 * @param yM coordonnÃ©e-y
 	 * @param yonu L'index de direction
-	 * @param arkanabak Regarder d'arrière aussi
+	 * @param arkanabak Regarder d'arriï¿½re aussi
 	 * @return true ou false
 	 */
 	private boolean tehlikeli(int xM, int yM, int yonu, boolean arkanaBak) throws Exception
 	{
-		//les coordonnées de la cas suivant 
+		//les coordonnÃ©es de la cas suivant 
 		int xA = xM + yonelim[yonu][0];
 		int yA = yM + yonelim[yonu][1];
 		
@@ -457,7 +457,7 @@ public class OkanYuksel extends ArtificialIntelligence
 		}
 		
 		if (arkanaBak)
-		{//regarder son arrière
+		{//regarder son arriï¿½re
 			return tehlikeli(xA, yA, (yonu+2)%4, false);
 		}
 		
@@ -465,9 +465,9 @@ public class OkanYuksel extends ArtificialIntelligence
 	}
 
 	/* 
-	 * Pour détecter s’il y a une shrink dans une direction.
-	 * @param xM coordonnée-x
-	 * @param yM coordonnée-y
+	 * Pour dï¿½tecter sï¿½il y a une shrink dans une direction.
+	 * @param xM coordonnÃ©e-x
+	 * @param yM coordonnÃ©e-y
 	 * @param yonu L'index de direction
 	 * @return un index de direction
 	 * */
@@ -477,7 +477,7 @@ public class OkanYuksel extends ArtificialIntelligence
 		{
 			int[] sonraki = getNextShrinkPosition();
 
-			//DECCAL travaillera à aller au milieu. 
+			//DECCAL travaillera Ã  aller au milieu. 
 			switch (yonu)
 			{
 				case 0:
@@ -540,14 +540,14 @@ public class OkanYuksel extends ArtificialIntelligence
 	
 	/* 
 	 * Pour trouver une direction possible
-	 * @param xM coordonnée-x
-	 * @param yM coordonnée-y
+	 * @param xM coordonnÃ©e-x
+	 * @param yM coordonnÃ©e-y
 	 * */
 	private int yonSec(int xM, int yM) throws Exception
 	{
 		int[] cevrem = cevre(xM, yM);
 		
-		//Est-ce qu'il y a un rival à changer notre direction?
+		//Est-ce qu'il y a un rival Ã  changer notre direction?
 		int hdf = hedef(xM, yM, yonum);
 		if(hdf>-1)
 			yonum = hdf;
@@ -563,7 +563,7 @@ public class OkanYuksel extends ArtificialIntelligence
 					|| cevrem[syc] == AI_BLOCK_ITEM_BOMB
 					|| cevrem[syc] == AI_BLOCK_ITEM_FIRE)
 				)
-			{//Est-ce que c'est possible à marcher?
+			{//Est-ce que c'est possible Ã  marcher?
 				//Est-ce qu'il y a un danger?
 				if (!tehlikeli(xM, yM, syc, false))
 				{
@@ -588,7 +588,7 @@ public class OkanYuksel extends ArtificialIntelligence
 				}
 			}
 		}
-		//inverser la direction de contrôle.
+		//inverser la direction de contrï¿½le.
 		artis *= -1;
 		//attendre sans espoir
 		return AI_ACTION_DO_NOTHING;

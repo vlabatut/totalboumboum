@@ -3,10 +3,10 @@ package org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
- * Représente un lien orienté dans un arbre de recherche.
- * Ce lien est défini par les deux noeuds reliés : l'origine (parent)
- * et la cible (fils) ainsi que par l'action à réaliser pour passer 
- * d'un état à l'autre.
+ * Reprï¿½sente un lien orientï¿½ dans un arbre de recherche.
+ * Ce lien est dï¿½fini par les deux noeuds reliï¿½s : l'origine (parent)
+ * et la cible (fils) ainsi que par l'action Ã  rï¿½aliser pour passer 
+ * d'un Ã©tat Ã  l'autre.
  * 
  * @author Ali Batuhan Dayioglugil
  * @author Gokhan Geckalan
@@ -61,7 +61,7 @@ public class SearchLink
 
 	/**
 	 * Renvoie une valeur indiquant l'egalite de l'objet
-	 * vrai si l'objet passé en parametre est egale à cet objet
+	 * vrai si l'objet passï¿½ en parametre est egale Ã  cet objet
 	 * false sinon 
 	 * @return result indique l'egalite	
 	 */

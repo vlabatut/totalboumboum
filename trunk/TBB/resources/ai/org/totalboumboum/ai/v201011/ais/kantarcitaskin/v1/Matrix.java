@@ -42,7 +42,7 @@ public class Matrix
 		int i=0;
 		int j=0;
 				
-		//initialisation du la matrice avec le valeur 0. Comme cela les murs durs seront 0 et on les connaitras grace à cela	
+		//initialisation du la matrice avec le valeur 0. Comme cela les murs durs seront 0 et on les connaitras grace Ã  cela	
 		for (i=0; i<heigh ;i++)
 		{
 			for (j=0; j<width ;i++)

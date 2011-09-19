@@ -27,14 +27,14 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.pathfinding.path.AiPath;
 
 /**
- * Classe étendant la classe abstraite CostCalculator de la manière à déterminer
- * le coût en fonction de la distance en pixel entre les cases.
- * Cela ne change rien pour toutes les cases sauf la première, car en fonction
- * de la position du point de départ, deux chemins peuvent correspondre à la même
- * distance si on considère les cases, mais une distance différente si on considère
+ * Classe ï¿½tendant la classe abstraite CostCalculator de la maniï¿½re Ã  dï¿½terminer
+ * le coï¿½t en fonction de la distance en pixel entre les cases.
+ * Cela ne change rien pour toutes les cases sauf la premiÃ¨re, car en fonction
+ * de la position du point de dï¿½part, deux chemins peuvent correspondre Ã  la mÃªme
+ * distance si on considï¿½re les cases, mais une distance diffï¿½rente si on considï¿½re
  * les pixels.
- * <b>Attention :</b> le point de départ doit obligatoirement être mis à 
- * jour avant chaque nouvel appel à A*. 
+ * <b>Attention :</b> le point de dï¿½part doit obligatoirement ï¿½tre mis Ã  
+ * jour avant chaque nouvel appel Ã  A*. 
  * 
  * @author Vincent Labatut
  *
@@ -44,11 +44,11 @@ public class PixelCostCalculator extends CostCalculator
 	/////////////////////////////////////////////////////////////////
 	// STARTING POINT			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case de départ du chemin en cours de recherche */
+	/** case de dï¿½part du chemin en cours de recherche */
 	private AiTile startTile;
-	/** abscisse de départ (doit être contenue dans la case de départ) */
+	/** abscisse de dï¿½part (doit ï¿½tre contenue dans la case de dï¿½part) */
 	private double startX;
-	/** ordonnée de départ (doit être contenue dans la case de départ) */
+	/** ordonnï¿½e de dï¿½part (doit ï¿½tre contenue dans la case de dï¿½part) */
 	private double startY;
 	
 	public void updateStartPoint(AiTile startTile, double startX, double startY)
@@ -61,16 +61,16 @@ public class PixelCostCalculator extends CostCalculator
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Les deux cases sont supposées être voisines, 
+	 * Les deux cases sont supposï¿½es ï¿½tre voisines, 
 	 * on se contente de renvoyer la distance en pixels entre leurs centres.
-	 * Sauf si la case start correspond à la première case
-	 * du chemin : là, on renvoie la distance entre le point
-	 * de départ et le centre de la case suivante.
+	 * Sauf si la case start correspond Ã  la premiÃ¨re case
+	 * du chemin : lï¿½, on renvoie la distance entre le point
+	 * de dï¿½part et le centre de la case suivante.
 	 * 
 	 * @param start	
-	 * 		la case de départ
+	 * 		la case de dï¿½part
 	 * @param end	
-	 * 		la case d'arrivée
+	 * 		la case d'arrivï¿½e
 	 * @return 
 	 * 		la distance entre ces cases
 	 */ 
@@ -96,13 +96,13 @@ public class PixelCostCalculator extends CostCalculator
 	}
 
 	/**
-	 * le coût d'un chemin correspond ici à sa distance 
-	 * exprimée en pixels.
+	 * le coï¿½t d'un chemin correspond ici Ã  sa distance 
+	 * exprimï¿½e en pixels.
 	 * 
 	 * @param path
-	 * 		chemin à traiter
+	 * 		chemin Ã  traiter
 	 * @return
-	 * 		le coût de ce chemin
+	 * 		le coï¿½t de ce chemin
 	 */
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = path.getPixelDistance();

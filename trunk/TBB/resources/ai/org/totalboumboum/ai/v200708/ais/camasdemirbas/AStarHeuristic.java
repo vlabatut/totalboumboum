@@ -9,17 +9,17 @@ package org.totalboumboum.ai.v200708.ais.camasdemirbas;
 public interface AStarHeuristic {
 
 	/**
-	 * Obtenir le coût heuristique supplémentaire du carreau donné.
-	 * Ceci contrôle l'ordre dans lequel carreaux est cherché 
-	 * pendant que tentant de trouver un chemin à l'emplacement de cible. 
-	 * Le plus bas le coût le plus probable le carreau sera cherché. 
+	 * Obtenir le coï¿½t heuristique supplï¿½mentaire du carreau donnï¿½.
+	 * Ceci contrï¿½le l'ordre dans lequel carreaux est cherchï¿½ 
+	 * pendant que tentant de trouver un chemin Ã  l'emplacement de cible. 
+	 * Le plus bas le coï¿½t le plus probable le carreau sera cherchï¿½. 
 	 * 
 	 * @param map ZoneMatrix
-	 * @param x la coordonnée du carreau est évaluée
-	 * @param y la coordonnée du carreau est évaluée
-	 * @param tx la coordonnée de l'emplacement de cible
-	 * @param ty la coordonnée de l'emplacement de cible
-	 * @return le coût a associé avec le carreau donné
+	 * @param x la coordonnÃ©e du carreau est ï¿½valuï¿½e
+	 * @param y la coordonnÃ©e du carreau est ï¿½valuï¿½e
+	 * @param tx la coordonnÃ©e de l'emplacement de cible
+	 * @param ty la coordonnÃ©e de l'emplacement de cible
+	 * @return le coï¿½t a associï¿½ avec le carreau donnï¿½
 	 */
 	public float getCost(GameMap map, int x, int y, int tx, int ty);
 }

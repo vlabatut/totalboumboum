@@ -1,8 +1,8 @@
 package org.totalboumboum.ai.v201011.ais.hacibektasogluilgar.v3;
 
 /**
- * @author Elif Nurdan ÝLGAR 
- * @author Engin Hacýbektaþoðlu
+ * @author Elif Nurdan ï¿½LGAR 
+ * @author Engin Hacï¿½bektaï¿½oï¿½lu
  *
  */
 
@@ -62,7 +62,7 @@ public class Path {
 	}
 	
 	/**
-	 * on utilise cette method pour faire distinction de tiles qui sont deja calculé
+	 * on utilise cette method pour faire distinction de tiles qui sont deja calculÃ©
 	 * @param tile
 	 * @param path
 	 * @return
@@ -84,7 +84,7 @@ public class Path {
 	}
 	
 	/**
-	 * cette methode sert à controller les tiles voisines pourque ne pas mettre une bombe 
+	 * cette methode sert Ã  controller les tiles voisines pourque ne pas mettre une bombe 
 	 * si tous les tiles voisines sont <0
 	 * 
 	 * @param matriceTotal
@@ -113,8 +113,8 @@ public class Path {
 	}
 	
 /**
- * cette methode est utilisé pendant la decision de poser une bombe ou pas
- * il sert à voir si on mets une bombe est-ce qu'il reste aucune tile pour fuir
+ * cette methode est utilisÃ© pendant la decision de poser une bombe ou pas
+ * il sert Ã  voir si on mets une bombe est-ce qu'il reste aucune tile pour fuir
  * 
  * @param line
  * @param col
@@ -147,16 +147,16 @@ public class Path {
 	}
 	
 	/**
-	 * on a essayé d'appliquer l'algorithme de largeur d'abord
+	 * on a essayï¿½ d'appliquer l'algorithme de largeur d'abord
 	 * au debut le method prend une path qui a seulement le tile du hero et apres il regarde ses voisines
-	 * et si le vosine est inpassable ou bien si il est deja utilisé on ne l'ajoute pas au path
-	 * sinon on l'ajoute en regardent sa valeur de matriceTotale pour pouvoire decider si ça peut etre une cible ou pas.
+	 * et si le vosine est inpassable ou bien si il est deja utilisÃ© on ne l'ajoute pas au path
+	 * sinon on l'ajoute en regardent sa valeur de matriceTotale pour pouvoire decider si ï¿½a peut etre une cible ou pas.
 	 * 
-	 * @param matriceExistance le matrice qui est utilisé pour comprendre si ce tile est deja utilise ou pas
+	 * @param matriceExistance le matrice qui est utilisÃ© pour comprendre si ce tile est deja utilise ou pas
 	 * il a comme valeurs : 
 	 * 0 : n'est pas utilise
-	 * 1 : utilisé et peut etre une cible
-	 * -1 : utilisé mais ne peut pas etre une cible
+	 * 1 : utilisÃ© et peut etre une cible
+	 * -1 : utilisÃ© mais ne peut pas etre une cible
 	 *
 	 * @param matriceTotal le matrice qui est deja calcule d'apres la zone 
 	 * @param pilePath le path qu'on va l'utiliser comme une pile 
@@ -187,7 +187,7 @@ public class Path {
 			}
 		}
 		
-		// on supprime le tile qu'on a utilisé
+		// on supprime le tile qu'on a utilisï¿½
 		pilePath.removeTile(0);
 		
 		if(!pilePath.isEmpty())
@@ -198,8 +198,8 @@ public class Path {
 	
 	/**
 	 * on calcule tous les tiles accesibles et apres on prend celui qui a meilleur note
-	 * apres on donne la meilleur tile à Astar pourqu'il trouvé la meilleur route pour aller au cible
-	 * à la fin on y bouge
+	 * apres on donne la meilleur tile Ã  Astar pourqu'il trouvï¿½ la meilleur route pour aller au cible
+	 * Ã  la fin on y bouge
 	 * 
 	 * @param line
 	 * @param col
@@ -293,7 +293,7 @@ public class Path {
 	
 	/**
 	 * Methode calculant la nouvelle action a effectuer
-	 * (methode de groupe rouge de l'annee dernier mais on l'a modifié)
+	 * (methode de groupe rouge de l'annee dernier mais on l'a modifiï¿½)
 	 * @param nextMove
 	 * 			Le chemin precis a suivre.
 	 *  

@@ -27,7 +27,7 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 
 /**
  * 
- * permet de définir une fonction de cout utilisée lors de la recherche
+ * permet de dï¿½finir une fonction de cout utilisÃ©e lors de la recherche
  * avec l'algorithme A*
  * 
  * @author Vincent Labatut
@@ -36,22 +36,22 @@ import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 public abstract class CostCalculator
 {
 	/** 
-	 * calcule le cout de l'action consistant à aller de la case
-	 * start à la case end, sachant que ces deux cases sont voisines.
-	 * Il est possible de définir des couts évolués, en tenant compte par exemple des
-	 * influences négatives dans ces cases (pour le joueur) comme la présence de bombes 
-	 * à proximité, etc., et des influences positives telles que la présence de bonus.
-	 * Si les deux cases ne sont pas voisines, le résultat est indéterminé.
+	 * calcule le cout de l'action consistant Ã  aller de la case
+	 * start Ã  la case end, sachant que ces deux cases sont voisines.
+	 * Il est possible de dï¿½finir des couts ï¿½voluï¿½s, en tenant compte par exemple des
+	 * influences nï¿½gatives dans ces cases (pour le joueur) comme la prÃ¨sence de bombes 
+	 * Ã  proximitï¿½, etc., et des influences positives telles que la prÃ¨sence de bonus.
+	 * Si les deux cases ne sont pas voisines, le rï¿½sultat est indï¿½terminï¿½.
 	 * 
-	 * @param start	la case de départ 
-	 * @param end	la case d'arrivée (qui doit être voisine)
-	 * @return	le coût du déplacement
+	 * @param start	la case de dï¿½part 
+	 * @param end	la case d'arrivï¿½e (qui doit ï¿½tre voisine)
+	 * @return	le coï¿½t du dÃ©placement
 	 */
 	public abstract double processCost(AiTile start, AiTile end) throws StopRequestException;
 	
 	/**
 	 * calcule le cout d'un chemin, i.e. la somme des couts des actions
-	 * consistant à passer d'une case du chemin à la suivante.
+	 * consistant Ã  passer d'une case du chemin Ã  la suivante.
 	 * @param path
 	 * @return
 	 */

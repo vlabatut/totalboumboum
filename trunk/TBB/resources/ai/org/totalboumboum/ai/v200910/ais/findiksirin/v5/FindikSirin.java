@@ -23,7 +23,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public class FindikSirin extends ArtificialIntelligence
 {		
 	
-	/** méthode appelée par le moteur du jeu pour obtenir une action de notre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de notre IA */
 	public AiAction processAction() throws StopRequestException
 	{	
 		checkInterruption();
@@ -53,13 +53,13 @@ public class FindikSirin extends ArtificialIntelligence
 			//t'as un chemin pour fuir?
 			if(escapeManager!=null)
 			{
-				//t'es arrive à la fin de chemin de fuir?
+				//t'es arrive Ã  la fin de chemin de fuir?
 				if(escapeManager.hasArrived())
 				{
 					//initialiser le chemin de fuir
 					escapeManager=null;
 				}
-				//tu n'es pas arrive à la fin de chemin de fuir?
+				//tu n'es pas arrive Ã  la fin de chemin de fuir?
 				else
 				{
 					//continuer sur le chemin de fuir
@@ -97,7 +97,7 @@ public class FindikSirin extends ArtificialIntelligence
 						posWalkable=null;
 						
 					}
-					//tu n'es pas arrive à la fin de chemin d'attaque?
+					//tu n'es pas arrive Ã  la fin de chemin d'attaque?
 					else
 					{
 						if(attackManager.bomb2Pos==currentTile){

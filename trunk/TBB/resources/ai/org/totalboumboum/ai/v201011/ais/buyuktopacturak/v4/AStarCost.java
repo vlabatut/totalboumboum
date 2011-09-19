@@ -9,7 +9,7 @@ public class AStarCost extends CostCalculator{
 	private double[][] matrix;
 	
 	/**
-	 * C’est un constructeur qui obtient la matrice de la mode.
+	 * Cï¿½est un constructeur qui obtient la matrice de la mode.
 	 * @param matrix
 	 * @throws StopRequestException
 	 */
@@ -18,7 +18,7 @@ public class AStarCost extends CostCalculator{
 	}
 
 	/**
-	 * Calcule le cout de l’action consistant à aller de la case départ à la case arrêt.
+	 * Calcule le cout de lï¿½action consistant Ã  aller de la case dï¿½part Ã  la case arrï¿½t.
 	 */
 	public double processCost(AiTile start, AiTile end) throws StopRequestException {
 		//pour utiliser Astar, on calcule la version basic de la cost

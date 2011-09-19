@@ -28,7 +28,7 @@ public class ErenGokce extends ArtificialIntelligence {
 	//right top corner, left top corner, ..etc la position du joueur au debut
 	boolean rtc=false,ltc=false,rdc=false,ldc=false;
 	private static final long serialVersionUID = 1L; 
-	//shrink a-t-elle commencé ou pas, y-a-t-il une bombe ou pas
+	//shrink a-t-elle commencï¿½ ou pas, y-a-t-il une bombe ou pas
 	boolean mybomb=false,shrink=false;
 	//position du bombe, dernier mouvement
 	int[] bombpos=new int[2];
@@ -39,7 +39,7 @@ public class ErenGokce extends ArtificialIntelligence {
 		//  Auto-generated constructor stub
 	}
 	
-	/** indicateur de première invocation (pour la compatibilité */
+	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
 	private boolean firstTime = true;
 
 	@Override

@@ -125,7 +125,7 @@ public class Round implements StatisticHolder, Serializable
 	}
 	
 	public void cancel()
-	{	// TODO à compléter
+	{	// TODO Ã  complÃ©ter
 		match.cancel();
 	}
 	

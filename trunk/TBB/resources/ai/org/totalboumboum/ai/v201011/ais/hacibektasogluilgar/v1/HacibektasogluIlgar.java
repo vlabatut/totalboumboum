@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
  * 
  * on calcule la matrice collecte
  * 
- * @author Elif Nurdan Ýlgar && Engin Hacýbektaþoðlu
+ * @author Elif Nurdan ï¿½lgar && Engin Hacï¿½bektaï¿½oï¿½lu
  *
  */
 public class HacibektasogluIlgar extends ArtificialIntelligence
@@ -24,7 +24,7 @@ public class HacibektasogluIlgar extends ArtificialIntelligence
 	 Etats matriceCollecte[][];
 
 	
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();

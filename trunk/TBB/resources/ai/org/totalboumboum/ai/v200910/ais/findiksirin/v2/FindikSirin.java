@@ -11,7 +11,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 public class FindikSirin extends ArtificialIntelligence
 {		
-	/** méthode appelée par le moteur du jeu pour obtenir une action de notre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de notre IA */
 	public AiAction processAction() throws StopRequestException
 	{	
 		checkInterruption();
@@ -43,7 +43,7 @@ public class FindikSirin extends ArtificialIntelligence
 			// si on est en train de collecter un bonus, on continue
 			else if(bonusManager!=null)
 			{
-				//si il n'y a pas un bonus exploré, on suivit au chemin a cote du mur destructible le plus proche
+				//si il n'y a pas un bonus explorï¿½, on suivit au chemin a cote du mur destructible le plus proche
 				if(bonusManager.noBonus()){
 					//si on est arrive, on pose une bombe
 					if(bonusManager.hasArrived())
@@ -75,7 +75,7 @@ public class FindikSirin extends ArtificialIntelligence
 				//si on n'a pas un chemin a suivre
 				if(escapeManager==null)
 				{
-					//on a posé un bombe, on actualise safetyManager
+					//on a posï¿½ un bombe, on actualise safetyManager
 					safetyManager.update();
 					//on obtient un nouveau chemin, pour s'enfuir de notre bombe
 					escapeManager = new EscapeManager(this);

@@ -70,6 +70,6 @@ public class OptionsData extends InnerDataPanel
 	}
 
 	public void refresh()
-	{	// NOTE à compléter
+	{	// NOTE Ã  complÃ©ter
 	}
 }

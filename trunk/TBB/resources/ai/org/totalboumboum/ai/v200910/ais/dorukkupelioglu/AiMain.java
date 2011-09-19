@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v200910.adapter.AiManager;
 import org.totalboumboum.ai.v200910.ais.dorukkupelioglu.v5_2c.DorukKupelioglu;
 
 /**
- * classe utilis�e par le moteur du jeu pour retrouver les IA
+ * classe utilisée par le moteur du jeu pour retrouver les IA
  * 
  * @author Vincent Labatut
  *

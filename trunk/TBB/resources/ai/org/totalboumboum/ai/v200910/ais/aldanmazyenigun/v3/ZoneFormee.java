@@ -89,7 +89,7 @@ public class ZoneFormee {
 		fillZone();
 	}
 	
-	/** methode qui rempit la zone de jeu avec les valeurs adaptées */
+	/** methode qui rempit la zone de jeu avec les valeurs adaptï¿½es */
 	public void fillZone(){		
 		
 		matrixDanger = new double[width][heigh];
@@ -159,7 +159,7 @@ public class ZoneFormee {
 		Iterator<AiBlock> iterBlock = blocks.iterator();
 		AiBlock block;
 
-		//mettre les murs dans notre zone formée
+		//mettre les murs dans notre zone formï¿½e
 		while (iterBlock.hasNext()) {
 			block = iterBlock.next();
 			x = block.getCol();
@@ -171,7 +171,7 @@ public class ZoneFormee {
 		}
 	}
 	
-	/** méthode pour mettre les valeurs pour les feux dans la matrice */
+	/** mÃ©thode pour mettre les valeurs pour les feux dans la matrice */
 	public void putFires(double matrix[][]){
 		Iterator<AiFire> iterFire = fires.iterator();
 		AiFire fire;

@@ -36,25 +36,25 @@ public class OutilesCollecte {
 		List<AiTile> prochepath=notre.getNeighbors();
 			for(int i=0;i<prochepath.size();i++){
 				if(prochepath.get(i)==previous){
-					System.out.println("buraya bakmýyoruz.");
+					System.out.println("buraya bakmï¿½yoruz.");
 				}else{
 					if(matrice[prochepath.get(i).getLine()][prochepath.get(i).getCol()]==hedef){
 						System.out.println(" HEDEF bulundu ve ekleniyor: "+prochepath.get(i).getLine()+","+prochepath.get(i).getCol());
 						tile.add(prochepath.get(i));
 						System.out.println("////////////////////");
-						System.out.println("Bonusu bulduk be abicim,þimdi geri dönüyoruz");
+						System.out.println("Bonusu bulduk be abicim,ï¿½imdi geri dï¿½nï¿½yoruz");
 						System.out.println("////////////////////");
 						break;
 					}else if(matrice[prochepath.get(i).getLine()][prochepath.get(i).getCol()]==0 || matrice[prochepath.get(i).getLine()][prochepath.get(i).getCol()]==5){
 						System.out.println("Duvar var buralarda bu yol yalan oldu");
 						tile = null;
 					}else if(matrice[prochepath.get(i).getLine()][prochepath.get(i).getCol()]<0){
-						System.out.println("Bu kýsýmlarda bomba var,ateþi var yalan olur bu yolda");
+						System.out.println("Bu kï¿½sï¿½mlarda bomba var,ateï¿½i var yalan olur bu yolda");
 						tile = null;
 					}else if(matrice[prochepath.get(i).getLine()][prochepath.get(i).getCol()]==1){
-						System.out.println("Bu yol açýk devam edelim");
+						System.out.println("Bu yol aï¿½ï¿½k devam edelim");
 						previous=notre;
-						System.out.println(" Boþ yol: "+prochepath.get(i).getLine()+","+prochepath.get(i).getCol());
+						System.out.println(" Boï¿½ yol: "+prochepath.get(i).getLine()+","+prochepath.get(i).getCol());
 						tile=add(prochepath.get(i));
 						if(trouveBonusPath(10, matrice, hero, gameZone,prochepath.get(i),previous)!=null)
 							tile.addAll(trouveBonusPath(10, matrice, hero, gameZone,prochepath.get(i),previous));
@@ -90,7 +90,7 @@ public class OutilesCollecte {
 	 * @param gameZone
 	 * @param matrice
 	 * @param cible
-	 * @return true s'il y a une path pour acceser à bonus
+	 * @return true s'il y a une path pour acceser Ã  bonus
 	 * @throws StopRequestException
 	 * @throws LimitReachedException
 	 */
@@ -102,7 +102,7 @@ public class OutilesCollecte {
 	}
 
 	/**
-	 *Verilen hedef doðrultusunda hangi duvarý kýracaðýmýzý veren fonsiyon olacak
+	 *Verilen hedef doï¿½rultusunda hangi duvarï¿½ kï¿½racaï¿½ï¿½mï¿½zï¿½ veren fonsiyon olacak
 	 */
 	public AiTile murQuOnVaDetruitre(AiTile bonus,int[][] matrice,AiZone gameZone) {
 		
@@ -112,10 +112,10 @@ public class OutilesCollecte {
 		List<AiTile> tilesPossible=new ArrayList<AiTile>();
 		tileControleur.tilePossibleArrive(gameZone.getOwnHero().getTile(), tilesPossible, matrice);
 		
-		//on commence à scanner de ces valeur
+		//on commence Ã  scanner de ces valeur
 		int i,j,plusX,plusY;
 				
-		//on les initialise en faire attention matrice length pour ne pas tomber à l'exception
+		//on les initialise en faire attention matrice length pour ne pas tomber Ã  l'exception
 		if(bonus.getCol()!=0){
 			if(bonus.getLine()!=0){
 					i=bonus.getCol()-1;
@@ -177,7 +177,7 @@ public class OutilesCollecte {
 			if(bonus.getCol()+plusX+1<=matrice.length) plusX++;
 			if(bonus.getLine()+plusY+1<=matrice.length) plusY++;
 		}
-		System.out.println("Hedef için kýracagýmýz duvar: "+cible);
+		System.out.println("Hedef iï¿½in kï¿½racagï¿½mï¿½z duvar: "+cible);
 		return cible;
 	}
 	
@@ -246,7 +246,7 @@ public class OutilesCollecte {
 			return null;
 		}
 		else{
-			System.out.println("duvarlarýmýz var beya :D :D :D :");
+			System.out.println("duvarlarï¿½mï¿½z var beya :D :D :D :");
 			for(int i=0;i<mursDesturictibles.size();i++){
 				System.out.println(i+": "+mursDesturictibles.get(i).getLine()+","+mursDesturictibles.get(i).getCol());
 			}

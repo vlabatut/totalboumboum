@@ -26,8 +26,8 @@ import org.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import org.totalboumboum.engine.content.sprite.block.Block;
 
 /**
- * Représente un bloc du jeu, c'est à dire généralement un mur
- * (pouvant être détruit ou pas). 
+ * Reprï¿½sente un bloc du jeu, c'est Ã  dire gï¿½nï¿½ralement un mur
+ * (pouvant ï¿½tre dÃ©truit ou pas). 
  * 
  * @author Vincent Labatut
  *
@@ -36,11 +36,11 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 public class AiBlock extends AiSprite<Block>
 {
 	/**
-	 * crée une représentation du bloc passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une reprï¿½sentation du bloc passï¿½ en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param sprite	sprite Ã  reprï¿½senter
 	 */
 	AiBlock(AiTile tile, Block sprite)
 	{	super(tile,sprite);
@@ -71,11 +71,11 @@ public class AiBlock extends AiSprite<Block>
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce mur peut être détruit par une bombe */
+	/** indique si ce mur peut ï¿½tre dÃ©truit par une bombe */
 	private boolean destructible;
 	
 	/** 
-	 * initialise l'indicateur de destructibilité de ce bloc 
+	 * initialise l'indicateur de destructibilitï¿½ de ce bloc 
 	 */
 	private void updateDestructible()
 	{	Block sprite = getSprite();
@@ -84,9 +84,9 @@ public class AiBlock extends AiSprite<Block>
 	}	
 
 	/**
-	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
+	 * renvoie vrai si ce bloc peut ï¿½tre dÃ©truit par une bombe, et faux sinon
 	 * 
-	 * @return	l'indicateur de destructibilité du mur
+	 * @return	l'indicateur de destructibilitï¿½ du mur
 	 */
 	public boolean isDestructible()
 	{	return destructible;		

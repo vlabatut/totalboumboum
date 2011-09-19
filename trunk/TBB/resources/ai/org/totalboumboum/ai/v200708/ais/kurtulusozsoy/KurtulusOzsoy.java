@@ -17,7 +17,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 	
 	
 		private static final long serialVersionUID = 1L;
-		/** le dernier déplacement effectué */
+		/** le dernier dÃ©placement effectuÃ© */
 		private Integer lastMove;
 		
 		
@@ -37,7 +37,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 			
 		}
 		
-		/** indicateur de première invocation (pour la compatibilité */
+		/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
 		private boolean firstTime = true;
 
 		public Integer call() throws Exception
@@ -53,7 +53,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 			if(dist==1)
 			{   
 				int temp[] = getDirectionPreferences(x, y, posit[0],posit[1]);
-			// on sélectionne une direction possible
+			// on sï¿½lectionne une direction possible
 			int i=0;
 			while(i<temp.length && result==ArtificialIntelligence.AI_ACTION_DO_NOTHING)
 			{	if(isMovePossible(x, y, temp[i]))
@@ -71,13 +71,13 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 				
 			}
 			int dangerPos[] = getClosestBlockPosition(x,y,AI_BLOCK_FIRE);
-			// si aucun feu, on détermine où est la bombe la plus proche
+			// si aucun feu, on dï¿½termine oÃ¹ est la bombe la plus proche
 			if(dangerPos[0]==-1)
 				dangerPos = getClosestBlockPosition(x,y,AI_BLOCK_BOMB);
 			if(dangerPos[0]!=-1)
 			{	// on calcule l'ordre des directions
 				int temp[] = getDirectionPreferences(x, y, dangerPos[0], dangerPos[1]);
-				// on sélectionne une direction possible
+				// on sï¿½lectionne une direction possible
 				int i=0;
 				while(i<temp.length && result==ArtificialIntelligence.AI_ACTION_DO_NOTHING)
 				{	if(isMovePossible(x, y, temp[i]))
@@ -93,7 +93,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 					midY=getZoneMatrixDimY()/2;
 			return	result=goMiddle(x, y);
 			}	
-			else{	// on détermine les déplacements 
+			else{	// on dï¿½termine les dÃ©placements 
 				
 				
 				
@@ -115,10 +115,10 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 		}
 		
 		/**
-		 * Indique si la case située à la position passée en paramètre
+		 * Indique si la case situï¿½e Ã  la position passï¿½e en paramï¿½tre
 		 * constitue un obstacle pour un personnage : bombe, feu, mur.
-		 * @param x	position à étudier
-		 * @param y	position à étudier
+		 * @param x	position Ã  ï¿½tudier
+		 * @param y	position Ã  ï¿½tudier
 		 * @return	vrai si la case contient un obstacle
 		 */
 		private boolean isObstacle(int x, int y)
@@ -145,12 +145,12 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 		}
 
 		/**
-		 * Indique si le déplacement dont le code a été passé en paramètre 
-		 * est possible pour un personnage situé en (x,y).
+		 * Indique si le dÃ©placement dont le code a ï¿½tï¿½ passï¿½ en paramï¿½tre 
+		 * est possible pour un personnage situï¿½ en (x,y).
 		 * @param x	position du personnage
 		 * @param y position du personnage
-		 * @param move	le déplacement à étudier
-		 * @return	vrai si ce déplacement est possible
+		 * @param move	le dÃ©placement Ã  ï¿½tudier
+		 * @return	vrai si ce dÃ©placement est possible
 		 */
 		private boolean isMovePossible(int x, int y, int move)
 		{	boolean result;
@@ -176,11 +176,11 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 		}
 		
 		/**
-		 * Renvoie la liste de tous les déplacements possibles
-		 * pour un personnage situé à la position (x,y)
+		 * Renvoie la liste de tous les dÃ©placements possibles
+		 * pour un personnage situï¿½ Ã  la position (x,y)
 		 * @param x	position du personnage
 		 * @param y position du personnage
-		 * @return	la liste des déplacements possibles
+		 * @return	la liste des dÃ©placements possibles
 		 */
 		private Vector<Integer> getPossibleMoves(int x, int y)
 		{	Vector<Integer> result = new Vector<Integer>();
@@ -384,20 +384,20 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
  {
 	 int result=AI_ACTION_DO_NOTHING;
 		Vector<Integer> possibleMoves = getPossibleMoves(x,y);
-		// on teste s'il est possible d'effectuer le même déplacement que précédemment
+		// on teste s'il est possible d'effectuer le mÃªme dÃ©placement que prï¿½cï¿½demment
 		if(possibleMoves.contains(lastMove))
 		{	result = lastMove;
-		// sinon : soit on se déplace, soit on pose une bombe
+		// sinon : soit on se dï¿½place, soit on pose une bombe
 		}
 		else if(possibleMoves.size()>0)
-		{	// on peut poser une bombe si on est à la fois dans un cul de sac 
-			// (1 seul déplacement possible) et sur une case vide
+		{	// on peut poser une bombe si on est Ã  la fois dans un cul de sac 
+			// (1 seul dÃ©placement possible) et sur une case vide
 			result=AI_ACTION_DO_NOTHING;
 			if(possibleMoves.size()<2 && getZoneMatrix()[x][y]==ArtificialIntelligence.AI_BLOCK_EMPTY)
 				possibleMoves.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
 		
 			Random rand = new Random();
-			// on détermine aléatoirement l'action qui va être effectuée
+			// on dï¿½termine alï¿½atoirement l'action qui va ï¿½tre effectuÃ©e
 			int index;
 			do
 			{	index = (int)( rand.nextInt(possibleMoves.size()));			

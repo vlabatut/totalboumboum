@@ -34,7 +34,7 @@ public class KayukaYildirim extends ArtificialIntelligence
 	private AiHero notre_hero;
 	AiZone gameZone;
 	AiOutput output;
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();

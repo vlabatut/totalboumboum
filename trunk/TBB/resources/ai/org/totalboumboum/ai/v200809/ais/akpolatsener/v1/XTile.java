@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v200809.adapter.StopRequestException;
  */
 public class XTile {
 	
-	/** nombre de visites à cette case */
+	/** nombre de visites Ã  cette case */
 	int visits;
 	
 	/** nombre des blocs entre cette case et une case cible */

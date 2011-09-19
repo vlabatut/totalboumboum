@@ -43,8 +43,8 @@ import org.totalboumboum.game.round.RoundVariables;
 /**
  * 
  * Classe servant de traducteur entre le jeu et l'IA :
- * <br>	- elle traduit les données du jeu en percepts traitables par l'IA (données simplifiées).
- * <br>	- elle traduit la réponse de l'IA (action) en un évènement compatible avec le jeu.
+ * <br>	- elle traduit les donnï¿½es du jeu en percepts traitables par l'IA (donnï¿½es simplifiï¿½es).
+ * <br>	- elle traduit la rï¿½ponse de l'IA (action) en un ï¿½vï¿½nement compatible avec le jeu.
  * 
  * @author Vincent Labatut
  *
@@ -52,11 +52,11 @@ import org.totalboumboum.game.round.RoundVariables;
 
 public abstract class AiManager extends AbstractAiManager<AiAction>
 {	/**
-	 * Construit un gestionnaire pour l'IA passée en paramètre.
-	 * Cette méthode doit être appelée par une classe héritant de celle-ci,
-	 * et placée dans le package contenant l'IA. 
+	 * Construit un gestionnaire pour l'IA passï¿½e en paramï¿½tre.
+	 * Cette mÃ©thode doit ï¿½tre appelÃ©e par une classe hï¿½ritant de celle-ci,
+	 * et placï¿½e dans le package contenant l'IA. 
 	 * 
-	 * @param ai	l'ia que cette classe doit gérer
+	 * @param ai	l'ia que cette classe doit gï¿½rer
 	 */
 	protected AiManager(ArtificialIntelligence ai)
     {	super(ai);
@@ -66,7 +66,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement le gestionnaire de manière à libérer les ressources 
+	 * termine proprement le gestionnaire de maniï¿½re Ã  libï¿½rer les ressources 
 	 * qu'il occupait.
 	 */
 	public void finishAi()
@@ -77,13 +77,13 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'ensemble des percepts destinés à l'IA */
+	/** l'ensemble des percepts destinï¿½s Ã  l'IA */
 	private AiZone percepts;
 	/** le moteur du jeu */
 	private VisibleLoop loop;
-	/** le niveau dans lequel la partie se déroule */
+	/** le niveau dans lequel la partie se dï¿½roule */
 	private Level level;
-	/** date de la dernière mise à jour des percepts */
+	/** date de la derniÃ¨re mise Ã  jour des percepts */
 	private long lastUpdateTime = 0;
 	
 	@Override
@@ -156,10 +156,10 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	}
 	
 	/**
-	 * active les évènements nécessaires à l'arrêt du personnage.
-	 * Utilisé quand l'IA renvoie l'action "ne rien faire"
+	 * active les ï¿½vï¿½nements nï¿½cessaires Ã  l'arrï¿½t du personnage.
+	 * utilisÃ© quand l'IA renvoie l'action "ne rien faire"
 	 * 
-	 * @param result	liste des évènements adaptée à l'action renvoyée par l'IA
+	 * @param result	liste des ï¿½vï¿½nements adaptï¿½e Ã  l'action renvoyï¿½e par l'IA
 	 */
 	private void reactionStop(List<ControlEvent> result)
 	{	if(lastMove!=Direction.NONE)
@@ -176,7 +176,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	}
 	
 	/**
-	 * active les évènements nécessaires à un changement de direction,
+	 * active les ï¿½vï¿½nements nï¿½cessaires Ã  un changement de direction,
 	 * en simulant un joueur humain qui appuierait sur des touches
 	 * @param result
 	 * @param direction
@@ -218,9 +218,9 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	private AiOutput output;
 	
 	/**
-	 * tout doit être recopié pour des histoires de synchronisation
+	 * tout doit ï¿½tre recopiï¿½ pour des histoires de synchronisation
 	 * (on ne veut pas que l'IA modifie ses sorties pendant que
-	 * le moteur du jeu est en train d'y accéder)
+	 * le moteur du jeu est en train d'y accÃ©der)
 	 */
 	@Override
 	protected void updateOutput()

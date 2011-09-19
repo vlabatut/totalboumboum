@@ -72,7 +72,7 @@ import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /** 
- * Sprite possédant un status :
+ * Sprite possï¿½dant un status :
  * softwall, hero, bomb, item...
  * 
  * @author Vincent Labatut
@@ -156,7 +156,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	
 	/*
 	 * change le gesture, la direction de l'animation et la direction des touches
-	 * l'animation n'est réinitialisée que si le gesture est modifié
+	 * l'animation n'est rï¿½initialisï¿½e que si le gesture est modifiï¿½
 	 */
 	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	// record event
@@ -251,7 +251,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	
 	public Sprite getOwner()
 	{	return owner;
-		//NOTE à modifier pour recherche récursivement l'owner final (mais peut être est-ce déjà fait ailleurs)
+		//NOTE Ã  modifier pour recherche rï¿½cursivement l'owner final (mais peut ï¿½tre est-ce dï¿½jï¿½ fait ailleurs)
 	}
 	
 	public void setOwner(Sprite owner)
@@ -272,20 +272,20 @@ public abstract class Sprite implements Comparable<Sprite>
 	}
 	
 	public void setBoundToSprite(Sprite boundToSprite)
-	{	// traitement seulement si le nouveau boundToSprite lié est différent de l'ancien
+	{	// traitement seulement si le nouveau boundToSprite liï¿½ est diffï¿½rent de l'ancien
 		if(this.boundToSprite!=boundToSprite)
-		{	// on met à jour le trajectoryManager
+		{	// on met Ã  jour le trajectoryManager
 			trajectoryManager.setBoundToSprite(boundToSprite);
-			// s'il n'y a pas d'ancien boundToSprite : on déconnecte ce sprite de sa tile
+			// s'il n'y a pas d'ancien boundToSprite : on dï¿½connecte ce sprite de sa tile
 			if(this.boundToSprite==null)
 				changeTile(null);
-			// s'il y a un ancien boundToSprite : on déconnecte ce sprite de ce boundToSprite 
+			// s'il y a un ancien boundToSprite : on dï¿½connecte ce sprite de ce boundToSprite 
 			else
 				setToBeRemovedFromSprite(this.boundToSprite);
-			// s'il n'y a pas de nouveau boundToSprite : on connecte ce sprite à une Tile
+			// s'il n'y a pas de nouveau boundToSprite : on connecte ce sprite Ã  une Tile
 			if(boundToSprite==null)
 				changeTile(RoundVariables.level.getTile(getCurrentPosX(),getCurrentPosY()));
-			// s'il y a un nouveau boundToSprite : on connecte ce sprite à ce boundToSprite
+			// s'il y a un nouveau boundToSprite : on connecte ce sprite Ã  ce boundToSprite
 			else
 				boundToSprite.addBoundSprite(this);
 			this.boundToSprite = boundToSprite;
@@ -327,8 +327,8 @@ public abstract class Sprite implements Comparable<Sprite>
 		animeManager.update();
 		trajectoryManager.update();
 		/*
-		 * NOTE : il est important que le trajectoryManager soit updaté en dernier
-		 * comme ça, un changement de case arrive après avoir traité tous les évènements
+		 * NOTE : il est important que le trajectoryManager soit updatï¿½ en dernier
+		 * comme ï¿½a, un changement de case arrive aprï¿½s avoir traitï¿½ tous les ï¿½vï¿½nements
 		 * (raisons de synchro)
 		 */
 //System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getLine()+";"+tile.getCol());
@@ -411,7 +411,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	protected double speedAbilityCoef = 1;
 	
 	/**
-	 * S'il y  a un boundToSprite, son speedCoeff est renvoyé.
+	 * S'il y  a un boundToSprite, son speedCoeff est renvoyï¿½.
 	 * Sinon, c'est le produit entre le speedCoeff du sprite
 	 * et celui du jeu.
 	 * @return

@@ -21,10 +21,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui dÃ©finit son comportement.
+ * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile Ã 
+ * dÃ©bugger, modifier, relire, comprendre, etc.
  * 
  * @version 2
  * 
@@ -35,14 +35,14 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class BektasMazilyah extends ArtificialIntelligence
 {	
 	private AiZone zone;
-	// le personnage dirigé par cette IA
+	// le personnage dirigï¿½ par cette IA
 	private AiHero hero;
-	//la prochaine action que l'IA veut réaliser
+	//la prochaine action que l'IA veut rï¿½aliser
 	private AiAction action;
-	// la dernière case par laquelle on est passé 
+	// la derniÃ¨re case par laquelle on est passï¿½ 
 	@SuppressWarnings("unused")
 	private AiTile previousTile;
-	// la case occupée actuellement par le personnage
+	// la case occupï¿½e actuellement par le personnage
 	private AiTile currentTile;
 	// la case sur laquelle on veut aller 
 	private AiTile nextTile;
@@ -73,7 +73,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	//MATRICE SERVANT A DEFENCE STRATEGIE
 	int matriceDefence[][][] = new int[height][width][2];
 	
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();
@@ -344,7 +344,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rï¿½fï¿½rence
 		List<AiTile> neighbors = tile.getNeighbors();
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();
@@ -402,9 +402,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 		return matrix[line][col];
 	}
 	
-	/** matrice représentant la zone et tous les sprites qu'elle contient */
+	/** matrice reprï¿½sentant la zone et tous les sprites qu'elle contient */
 	private AiTile[][] matrix;
-	/** niveau représenté par cette classe */
+	/** niveau reprï¿½sentï¿½ par cette classe */
 
 	private boolean isClear(AiTile tile, int[][][] matriceDefence) throws StopRequestException
 	{	
@@ -455,7 +455,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	private Collection<AiTile> getClearNeighbors(AiTile tile, int[][][] matriceDefence) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rï¿½fï¿½rence
 		Collection<AiTile> neighbors = getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();

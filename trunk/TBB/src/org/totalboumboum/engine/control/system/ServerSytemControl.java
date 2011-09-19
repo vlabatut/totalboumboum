@@ -40,7 +40,7 @@ public class ServerSytemControl extends SystemControl
 	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
+	// nï¿½cessaire pour ï¿½viter d'ï¿½mettre des ï¿½vï¿½nements de faï¿½on rÃ©pÃ©titive pour un seul pressage de touche
 	@Override
 	public void keyPressed(KeyEvent e)
 	{	int keyCode = e.getKeyCode();

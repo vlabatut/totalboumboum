@@ -20,10 +20,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui dÃ©finit son comportement.
+ * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile Ã 
+ * dÃ©bugger, modifier, relire, comprendre, etc.
  * 
  * @version 5.2
  * 
@@ -74,7 +74,7 @@ public class AksoyTangay extends ArtificialIntelligence
 	
 	private AiTile ownHeroTile;
 	
-	/** méthode appelée par le moteur du jeu pour obtenir une action d'IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action d'IA */
 	@Override
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption
@@ -158,7 +158,7 @@ public class AksoyTangay extends ArtificialIntelligence
 			else if(attackManager.finishedOnePartOfPath())
 			{
 				result = new AiAction(AiActionName.DROP_BOMB);
-				//System.out.println("bombalýoz");
+				//System.out.println("bombalï¿½oz");
 				if(attackManager.finishedPath())
 					attackManager = null;
 								
@@ -203,7 +203,7 @@ public class AksoyTangay extends ArtificialIntelligence
 							keyBomb = true;
 							if(bonusManager.finishedPath())
 							{
-							//system.out.println("üç!!");
+							//system.out.println("ï¿½ï¿½!!");
 								result = new AiAction(AiActionName.DROP_BOMB);
 								//keyBomb = false;
 							}
@@ -372,7 +372,7 @@ public class AksoyTangay extends ArtificialIntelligence
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rï¿½fï¿½rence
 		Collection<AiTile> neighbors = getPercepts().getTile(tile.getLine(), tile.getCol()).getNeighbors();
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();

@@ -27,7 +27,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
- * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
+ * reprï¿½sente un feu du jeu, ie une projection mortelle rï¿½sultant (gï¿½nï¿½ralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
@@ -36,11 +36,11 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 public class AiFire extends AiSprite<Fire>
 {
 	/**
-	 * crée une représentation du feu passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une reprï¿½sentation du feu passï¿½ en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param sprite	sprite Ã  reprï¿½senter
 	 */
 	AiFire(AiTile tile, Fire sprite)
 	{	super(tile,sprite);
@@ -68,7 +68,7 @@ public class AiFire extends AiSprite<Fire>
 	
 	/**
 	 * teste si ce feu est capable de passer
-	 * à travers les (certains) murs
+	 * Ã  travers les (certains) murs
 	 * 
 	 * @return	vrai si le feu traverse les murs
 	 */
@@ -78,7 +78,7 @@ public class AiFire extends AiSprite<Fire>
 
 	/**
 	 * teste si ce feu est capable de passer
-	 * à travers les bombes
+	 * Ã  travers les bombes
 	 * 
 	 * @return	vrai si le feu traverse les bombes
 	 */
@@ -88,7 +88,7 @@ public class AiFire extends AiSprite<Fire>
 
 	/**
 	 * teste si ce feu est capable de passer
-	 * à travers les items
+	 * Ã  travers les items
 	 * 
 	 * @return	vrai si le feu traverse les items
 	 */
@@ -97,8 +97,8 @@ public class AiFire extends AiSprite<Fire>
 	}
 
 	/**
-	 * met à jour les diverse propriétés de ce feu
-	 * liée à la gestion des collisions
+	 * met Ã  jour les diverse propriï¿½tï¿½s de ce feu
+	 * liï¿½e Ã  la gestion des collisions
 	 */
 	private void updateCollisions()
 	{	Sprite sprite = getSprite();
@@ -115,9 +115,9 @@ public class AiFire extends AiSprite<Fire>
 	}
 
 	public boolean isCrossableBy(AiSprite<?> sprite)
-	{	// par défaut, on bloque
+	{	// par dÃ©faut, on bloque
 		boolean result = false;
-		// si le sprite considéré est un personnage
+		// si le sprite considï¿½rï¿½ est un personnage
 		if(sprite instanceof AiHero)
 		{	AiHero hero = (AiHero) sprite;
 			result = hero.hasThroughFires();

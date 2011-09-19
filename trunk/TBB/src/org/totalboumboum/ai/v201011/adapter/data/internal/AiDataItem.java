@@ -43,9 +43,9 @@ import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import org.totalboumboum.engine.content.sprite.item.Item;
 
 /**
- * représente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
- * par l'item. Ce type est représentée par une valeur de type AiItemType.
+ * reprï¿½sente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
+ * un item est caractï¿½risï¿½ par son type, reprï¿½sentant le pouvoir apportï¿½ (ou enlevï¿½)
+ * par l'item. Ce type est reprï¿½sentï¿½e par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
  *
@@ -53,13 +53,13 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 final class AiDataItem extends AiDataSprite<Item> implements AiItem
 {	
 	/**
-	 * crée une représentation de l'item passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une reprï¿½sentation de l'item passï¿½ en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite à représenter
+	 * 		sprite Ã  reprï¿½senter
 	 */
 	protected AiDataItem(AiDataTile tile, Item sprite)
 	{	super(tile,sprite);
@@ -79,7 +79,7 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** type d'item représenté */
+	/** type d'item reprï¿½sentï¿½ */
 	private AiItemType type;
 	
 	@Override
@@ -88,7 +88,7 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	}
 	
 	/**
-	 * initialise le type de l'item représenté
+	 * initialise le type de l'item reprï¿½sentï¿½
 	 */
 	private void initType()
 	{	Item item = getSprite();
@@ -114,7 +114,7 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 	}
 
 	/** 
-	 * met jour les différentes caractéristiques de ce bloc
+	 * met jour les diffï¿½rentes caractï¿½ristiques de ce bloc
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()
@@ -173,13 +173,13 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 
 	@Override
 	public boolean isCrossableBy(AiSprite sprite)
-	{	// par défaut, on bloque
+	{	// par dÃ©faut, on bloque
 		boolean result = false;
-		// si le sprite considéré est un personnage
+		// si le sprite considï¿½rï¿½ est un personnage
 		if(sprite instanceof AiDataHero)
 		{	result = true;
 		}
-		// si le sprite considéré est un feu
+		// si le sprite considï¿½rï¿½ est un feu
 		else if(sprite instanceof AiDataFire)
 		{	AiDataFire fire = (AiDataFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)
@@ -189,7 +189,7 @@ final class AiDataItem extends AiDataSprite<Item> implements AiItem
 			else if(stopFires==AiStopType.STRONG_STOP)
 				result = false;
 		}
-		// si le sprite considéré est une bombe
+		// si le sprite considï¿½rï¿½ est une bombe
 		else if(sprite instanceof AiDataBomb)
 		{	AiDataBomb bomb = (AiDataBomb) sprite;
 			if(stopBombs==AiStopType.NO_STOP)

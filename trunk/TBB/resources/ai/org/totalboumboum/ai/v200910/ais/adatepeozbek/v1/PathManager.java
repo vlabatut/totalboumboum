@@ -38,8 +38,8 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Classe chargée d'implémenter un déplacement,
- * en respectant un chemin donné
+ * Classe chargï¿½e d'implï¿½menter un dÃ©placement,
+ * en respectant un chemin donnï¿½
  * 
  * @version 1
  * 
@@ -53,8 +53,8 @@ public class PathManager
 	private boolean verbose = false;
 
 	/**
-	 * Crée un PathManager chargé d'amener le personnage à la position (x,y)
-	 * exprimée en pixels
+	 * crÃ©e un PathManager chargï¿½ d'amener le personnage Ã  la position (x,y)
+	 * exprimï¿½e en pixels
 	 */
 	public PathManager(AdatepeOzbek ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -64,8 +64,8 @@ public class PathManager
 	}
 	
 	/**
-	 * Crée un PathManager chargé d'amener le personnage au centre de la case
-	 * passée en paramètre
+	 * crÃ©e un PathManager chargï¿½ d'amener le personnage au centre de la case
+	 * passï¿½e en paramï¿½tre
 	 */
 	public PathManager(AdatepeOzbek ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -91,7 +91,7 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'IA concernée par ce gestionnaire de chemin */
+	/** l'IA concernï¿½e par ce gestionnaire de chemin */
 	private AdatepeOzbek ai;
 	/** zone de jeu */
 	private AiZone zone;
@@ -99,18 +99,18 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si le personnage est arrivé à destination */
+	/** indique si le personnage est arrivï¿½ Ã  destination */
 	private boolean arrived;
-	/** la case de destination sélectionnée */
+	/** la case de destination sï¿½lectionnï¿½e */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
-	/** l'ordonnée de destination */
+	/** l'ordonnï¿½e de destination */
 	private double yDest;
 	
 	/**
 	 * modifie la case de destination du personnage,
-	 * place les coordonnées de destination au centre de cette case,
+	 * place les coordonnÃ©es de destination au centre de cette case,
 	 * et recalcule le chemin.
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException
@@ -124,8 +124,8 @@ public class PathManager
 	}
 
 	/**
-	 * modifie les coordonnées de destination,
-	 * met à jour automatiquement la case correspondante,
+	 * modifie les coordonnÃ©es de destination,
+	 * met Ã  jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
 	 */
 	public void setDestination(double x, double y) throws StopRequestException
@@ -150,8 +150,8 @@ public class PathManager
 */	
 
 	/**
-	 * détermine si le personnage est arrivé au centre de la case
-	 * passée en paramètre
+	 * dï¿½termine si le personnage est arrivï¿½ au centre de la case
+	 * passï¿½e en paramï¿½tre
 	 */
 /*	private boolean hasArrived(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -162,18 +162,18 @@ public class PathManager
 	}
 */
 	/**
-	 * détermine si le personnage est arrivé aux coordonnées de destination
+	 * dï¿½termine si le personnage est arrivï¿½ aux coordonnÃ©es de destination
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 //		if(!arrived)
-		{	// on teste si le personnage est à peu près situé à la position de destination 
+		{	// on teste si le personnage est Ã  peu prÃ¨s situï¿½ Ã  la position de destination 
 			AiHero ownHero = ai.getOwnHero();
 			double xCurrent = ownHero.getPosX();
 			double yCurrent = ownHero.getPosY();
 			arrived = zone.hasSamePixelPosition(xCurrent,yCurrent,xDest,yDest);
-			// cas particulier : oscillation autour du point d'arrivée
+			// cas particulier : oscillation autour du point d'arrivï¿½e
 			if(!arrived && path.getLength()==1)
 			{	Direction prevDir = zone.getDirection(xPrev,yPrev,xDest,yDest);
 				Direction currentDir = zone.getDirection(xCurrent,yCurrent,xDest,yDest);
@@ -187,14 +187,14 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// PREVIOUS LOCATION	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse précédente */
+	/** abscisse prï¿½cï¿½dente */
 	private double xPrev;
-	/** ordonnée précédente */
+	/** ordonnï¿½e prï¿½cï¿½dente */
 	private double yPrev;	
 	
 	/**
-	 * met à jour la position précédente du personnage,
-	 * exprimée en pixels
+	 * met Ã  jour la position prï¿½cï¿½dente du personnage,
+	 * exprimï¿½e en pixels
 	 */
 	private void updatePrev() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -207,14 +207,14 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// PATH			/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le chemin à suivre */
+	/** le chemin Ã  suivre */
 	private AiPath path;
 	
 	/**
-	 * vérifie que le personnage est bien sur le chemin pré-calculé,
+	 * vï¿½rifie que le personnage est bien sur le chemin prï¿½-calculÃ©,
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
-	 * est vide après l'exécution de cette méthode.
+	 * est vide aprï¿½s l'exï¿½cution de cette mÃ©thode.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -227,7 +227,7 @@ public class PathManager
 	}
 	
 	/**
-	 * détermine si le personnage a dépassé la première case du chemin
+	 * dï¿½termine si le personnage a dï¿½passï¿½ la premiÃ¨re case du chemin
 	 * en direction de la seconde case
 	 */
 /*	private boolean hasCrossed(AiTile tile) throws StopRequestException
@@ -260,8 +260,8 @@ public class PathManager
 	
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
-	 * est toujours sûr et si aucun obstacle n'est apparu
-	 * depuis la dernière itération
+	 * est toujours sï¿½r et si aucun obstacle n'est apparu
+	 * depuis la derniÃ¨re itï¿½ration
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -281,11 +281,11 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// A STAR					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe implémentant l'algorithme A* */
+	/** classe implÃ©mentant l'algorithme A* */
 	private Astar astar;
-	/** classe implémentant la fonction heuristique */
+	/** classe implÃ©mentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de coût */
+	/** classe implÃ©mentant la fonction de coï¿½t */
 	private CostCalculator costCalculator;
 
 	/////////////////////////////////////////////////////////////////
@@ -293,14 +293,14 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////	
 	/** 
 	 * calcule la prochaine direction pour aller vers la destination 
-	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
+	 *(ou renvoie Direction.NONE si aucun dÃ©placement n'est nï¿½cessaire)
 	 * */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		Direction result = Direction.NONE;
 		if(!hasArrived())
-		{	// on vérifie que le joueur est toujours sur le chemin
+		{	// on vï¿½rifie que le joueur est toujours sur le chemin
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule
 			if(path.isEmpty() || !checkPathValidity())
@@ -321,9 +321,9 @@ public class PathManager
 			}
 		}
 		
-		// mise à jour de la position précédente
+		// mise Ã  jour de la position prï¿½cï¿½dente
 		updatePrev();
-		// mise à jour de la sortie
+		// mise Ã  jour de la sortie
 		updateOutput();
 		
 		if(verbose)
@@ -338,7 +338,7 @@ public class PathManager
 	// OUTPUT					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour la sortie graphique de l'IA en fonction du
+	 * met Ã  jour la sortie graphique de l'IA en fonction du
 	 * chemin courant
 	 */
 	private void updateOutput() throws StopRequestException

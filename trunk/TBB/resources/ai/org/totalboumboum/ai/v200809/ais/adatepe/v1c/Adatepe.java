@@ -25,11 +25,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class Adatepe extends ArtificialIntelligence 
 {
 	
-	/** la case occupée actuellement par le personnage*/
+	/** la case occupï¿½e actuellement par le personnage*/
 	private AiTile currentTile;
 	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
-//	/** la dernière case par laquelle on est passé */ 
+//	/** la derniÃ¨re case par laquelle on est passï¿½ */ 
 //	private AiTile previousTile = null;
 	/** Representation de la
 	 *  table du jeu : 0 = Empty, 1 = Wall, 
@@ -67,7 +67,7 @@ public class Adatepe extends ArtificialIntelligence
 		drawdangerzones();
 		if(nextTile == null)
 			nextTile = currentTile;
-		// arrivé à destination : on choisit une nouvelle destination
+		// arrivï¿½ Ã  destination : on choisit une nouvelle destination
 		if(currentTile==nextTile)
 		{
 			checksafety();
@@ -287,7 +287,7 @@ public class Adatepe extends ArtificialIntelligence
 	private List<AiTile> getClearNeighbor(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rï¿½fï¿½rence
 		Collection<AiTile> neighbor= getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();

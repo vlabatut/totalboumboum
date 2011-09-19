@@ -48,21 +48,21 @@ import org.totalboumboum.game.round.RoundVariables;
 /**
  * 
  * Classe servant d'interface entre le jeu et une IA.
- * Elle doit être surclassée de manière à obtenir un adaptateur pour une famille
- * d'IA donnée. Puis, chaque IA doit elle même surclasser la classe résultante
- * (tout ça dans le but de faciliter le chargement de la classe implémentant l'IA).
+ * Elle doit ï¿½tre surclassï¿½e de maniï¿½re Ã  obtenir un adaptateur pour une famille
+ * d'IA donnï¿½e. Puis, chaque IA doit elle mÃªme surclasser la classe rï¿½sultante
+ * (tout ï¿½a dans le but de faciliter le chargement de la classe implÃ©mentant l'IA).
  * 
  * @author Vincent Labatut
  *
  * @param <V>	
- * 		le type de donnée renvoyée par l'IA (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
+ * 		le type de donnï¿½e renvoyï¿½e par l'IA (et devant ï¿½tre traduite par l'adaptateur en un ï¿½vï¿½nement compatible avec le moteur du jeu)
  */
 
 public abstract class AbstractAiManager<V>
 {	/**
-     * contruit un nouveau manager pour l'IA passé en paramètre.
-     * Ce constructeur est destiné à être appelé par le constructeur situé dans 
-     * la classe héritant de celle-ci et située dans le dossier de l'IA
+     * contruit un nouveau manager pour l'IA passï¿½ en paramï¿½tre.
+     * Ce constructeur est destinï¿½ Ã  ï¿½tre appelï¿½ par le constructeur situï¿½ dans 
+     * la classe hï¿½ritant de celle-ci et situï¿½e dans le dossier de l'IA
      *    
      * @param 
      * 		ai
@@ -83,18 +83,18 @@ public abstract class AbstractAiManager<V>
 	/////////////////////////////////////////////////////////////////
     /** objet implementant le comportement de l'IA */
 	private Callable<V> ai;
-    /** gestionnaire de threads pour exécuter l'IA */
+    /** gestionnaire de threads pour exï¿½cuter l'IA */
     private ExecutorService executorAi = null;
-    /** future utilisé pour récupérer le résultat de l'IA */
+    /** future utilisÃ© pour rï¿½cupï¿½rer le rï¿½sultat de l'IA */
     private Future<V> futureAi;
-    /** indique si cette IA était en pause */
+    /** indique si cette IA ï¿½tait en pause */
     private boolean paused = false;
     
     /**
-     * renvoie l'IA gérée par cette classe.
+     * renvoie l'IA gï¿½rï¿½e par cette classe.
      * 
      * @return	
-     * 		l'IA gérée par cette classe sous la forme d'un Callable
+     * 		l'IA gï¿½rï¿½e par cette classe sous la forme d'un Callable
      */
     public final Callable<V> getAi()
     {	return ai;    	
@@ -112,18 +112,18 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * Utilise la classe d'IA associée à ce personnage pour mettre à jour les variables
-     * qui permettront au moteur du jeu de déplacer le personnage.
+     * Utilise la classe d'IA associï¿½e Ã  ce personnage pour mettre Ã  jour les variables
+     * qui permettront au moteur du jeu de dï¿½placer le personnage.
      * 
      * @param aisPause
      * 		indique si l'agent doit passer en pause
      * @return
-     * 		vrai si l'agent a effectué une action
+     * 		vrai si l'agent a effectuÃ© une action
      */
     public final boolean update(boolean aisPause)
     {	boolean result = false;
     	
-    	// si l'IA était en pause
+    	// si l'IA ï¿½tait en pause
     	if(paused)
     	{	// sortie de pause ?
     		if(!aisPause)
@@ -133,13 +133,13 @@ public abstract class AbstractAiManager<V>
 				makeCall();	    		
 	    	}    		
     	}
-    	// sinon : un appel avait déjà été effectué
+    	// sinon : un appel avait dï¿½jï¿½ ï¿½tï¿½ effectuÃ©
     	else
     	{	// passage en pause ?
     		if(aisPause)
     		{	// basculement de la pause
     			paused = true;
-    			// on arrête le joueur
+    			// on arrï¿½te le joueur
     			ControlEvent[] events =
     			{	new ControlEvent(ControlEvent.UP,false),
 					new ControlEvent(ControlEvent.RIGHT,false),
@@ -158,7 +158,7 @@ public abstract class AbstractAiManager<V>
     		// pas de passage en pause : cet appel est-il fini ?
     		else if(futureAi.isDone())
     		{	try
-    			{	// on récupère les réactions de l'IA
+    			{	// on rï¿½cupï¿½re les rï¿½actions de l'IA
     				V value = futureAi.get();
     				// on les convertit et les envoie au moteur
     				List<ControlEvent> events = convertReaction(value);
@@ -168,7 +168,7 @@ public abstract class AbstractAiManager<V>
     					player.getSprite().putControlEvent(event);
     				}
     				result = !events.isEmpty();
-    				// on met à jour les sorties de l'IA
+    				// on met Ã  jour les sorties de l'IA
     				updateOutput();
 				}
     			catch (InterruptedException e)
@@ -202,8 +202,8 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * Réalise l'appel à la classe qui implémente l'IA,
-     * afin que celle ci calcule la prochaine action à effectuer.
+     * Rï¿½alise l'appel Ã  la classe qui implï¿½mente l'IA,
+     * afin que celle ci calcule la prochaine action Ã  effectuer.
      * 
      * @param firstTime
      * 		la valeur vrai indique qu'il s'agit du premier appel
@@ -216,8 +216,8 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * terminer ce gestionnaire, et en particulier le thread exécutant l'IA.
-     * Ou plutôt tente de le terminer, car le résultat ne peut être forcé.
+     * terminer ce gestionnaire, et en particulier le thread exï¿½cutant l'IA.
+     * Ou plutï¿½t tente de le terminer, car le rï¿½sultat ne peut ï¿½tre forcï¿½.
      */
     public final void finish()
     {	finishAi();
@@ -236,8 +236,8 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * termine cette IA, et en particulier le processus qui l'exécute.
-     * Pour cette raison, l'IA doit implémenter une méthode forçant 
+     * termine cette IA, et en particulier le processus qui l'exï¿½cute.
+     * Pour cette raison, l'IA doit implï¿½menter une mÃ©thode forï¿½ant 
      * sa terminaison.
      */
     public abstract void finishAi();
@@ -245,16 +245,16 @@ public abstract class AbstractAiManager<V>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** le joueur contrôlé par l'IA */
+    /** le joueur contrï¿½lï¿½ par l'IA */
     private AiPlayer player;
    
     /**
      * initialise le gestionnaire d'IA
      * 
      * @param instance	
-     * 		instance utilisée dans ce round
+     * 		instance utilisÃ©e dans ce round
      * @param player	
-     * 		joueur contrôlé par l'IA
+     * 		joueur contrï¿½lï¿½ par l'IA
      */
     @SuppressWarnings("unchecked")
 	public void init(String instance, AiPlayer player)
@@ -270,37 +270,37 @@ public abstract class AbstractAiManager<V>
 	}
 		
 	/**
-	 * renvoie le joueur contrôlé par l'IA gérée
+	 * renvoie le joueur contrï¿½lï¿½ par l'IA gï¿½rï¿½e
 	 * 
 	 * @return	
-	 * 		un objet représentant le joueur contrôlé par l'IA
+	 * 		un objet reprï¿½sentant le joueur contrï¿½lï¿½ par l'IA
 	 */
     public AbstractPlayer getPlayer()
 	{	return player;		
 	}
 	
 	/**
-	 * méthode utilisée pour mettre à jour les percepts de l'ia avant 
-	 * que cette dernière ne calcule la prochaine action à effectuer.
-	 * Cette méthode doit être surchargée de manière à adapter la structure
-	 * des données à l'IA qui va les traiter
+	 * mÃ©thode utilisÃ©e pour mettre Ã  jour les percepts de l'ia avant 
+	 * que cette derniÃ¨re ne calcule la prochaine action Ã  effectuer.
+	 * Cette mÃ©thode doit ï¿½tre surchargï¿½e de maniï¿½re Ã  adapter la structure
+	 * des donnï¿½es Ã  l'IA qui va les traiter
 	 */
 	public abstract void updatePercepts();
 	
 	/**
-	 * méthode utilisée pour convertir la valeur renvoyée par l'ia 
-	 * en un évènement standard traitable par le moteur du jeu.
+	 * mÃ©thode utilisÃ©e pour convertir la valeur renvoyï¿½e par l'ia 
+	 * en un ï¿½vï¿½nement standard traitable par le moteur du jeu.
 	 * 
 	 * @param value	
-	 * 		la valeur renvoyée par l'ia, qui est à convertir
+	 * 		la valeur renvoyï¿½e par l'ia, qui est Ã  convertir
 	 * @return	
-	 * 		le résultat de la conversion sous la forme d'un évènement à envoyer au sprite contrôlé par l'IA
+	 * 		le rï¿½sultat de la conversion sous la forme d'un ï¿½vï¿½nement Ã  envoyer au sprite contrï¿½lï¿½ par l'IA
 	 */
 	public abstract List<ControlEvent> convertReaction(V value);
    
 	/**
-	 * termine proprement les percepts, de manière à libérer les ressources occupées.
-	 * Cette méthode est appelée lorsque la partie est terminée et que les
+	 * termine proprement les percepts, de maniï¿½re Ã  libï¿½rer les ressources occupï¿½es.
+	 * Cette mÃ©thode est appelÃ©e lorsque la partie est terminï¿½e et que les
 	 * percepts deviennent inutiles.
 	 */
 	public abstract void finishPercepts();
@@ -308,20 +308,20 @@ public abstract class AbstractAiManager<V>
     /////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleurs associées aux cases (ou null pour aucune couleur */
+	/** couleurs associï¿½es aux cases (ou null pour aucune couleur */
 	private Color[][] tileColors;
-	/** textes à afficher sur les cases (liste vide pour aucun texte) */
+	/** textes Ã  afficher sur les cases (liste vide pour aucun texte) */
 	private List<String>[][] tileTexts;
 	/** mode d'affichage du texte : gras ou pas */
 	private boolean bold = false;
-	/** chemins à afficher */
+	/** chemins Ã  afficher */
 	private final List<List<Tile>> paths = new ArrayList<List<Tile>>();
-	/** couleurs des chemins à afficher */
+	/** couleurs des chemins Ã  afficher */
 	private final List<Color> pathColors = new ArrayList<Color>();
 	
 	/**
-	 * met à jour la représentation des sorties de l'IA
-	 * qui est destinée au moteur
+	 * met Ã  jour la reprï¿½sentation des sorties de l'IA
+	 * qui est destinï¿½e au moteur
 	 */
 	protected abstract void updateOutput();
 	
@@ -336,7 +336,7 @@ public abstract class AbstractAiManager<V>
 	}
 
 	/**
-	 * renvoie les textes à afficher sur les cases
+	 * renvoie les textes Ã  afficher sur les cases
 	 * 
 	 * @return	
 	 * 		matrice de textes
@@ -356,17 +356,17 @@ public abstract class AbstractAiManager<V>
 	}
 	
 	/**
-	 * renvoie la liste de chemins à afficher
+	 * renvoie la liste de chemins Ã  afficher
 	 * 
 	 * @return	
-	 * 		liste de vecteurs de cases contigües représentant des chemins
+	 * 		liste de vecteurs de cases contigï¿½es reprï¿½sentant des chemins
 	 */
 	public List<List<Tile>> getPaths()
 	{	return paths;
 	}
 
 	/**
-	 * renvoie les couleurs des chemins à afficher
+	 * renvoie les couleurs des chemins Ã  afficher
 	 * 
 	 * @return	
 	 * 		liste de couleurs

@@ -11,9 +11,9 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 
 /**
  * Dans cette projet on calcule deux matrice pour deux differentes modes
- * et à la fin on fait du mouvement d'apres les matrices.
+ * et Ã  la fin on fait du mouvement d'apres les matrices.
  * 
- * @author Elif Nurdan Ýlgar && Engin Hacýbektaþoðlu
+ * @author Elif Nurdan ï¿½lgar && Engin Hacï¿½bektaï¿½oï¿½lu
  *
  */
 public class HacibektasogluIlgar extends ArtificialIntelligence
@@ -21,7 +21,7 @@ public class HacibektasogluIlgar extends ArtificialIntelligence
 	 AiZone zone;
 	 AiHero monAi;
 	
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA 
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA 
 	 * @throws LimitReachedException */
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption

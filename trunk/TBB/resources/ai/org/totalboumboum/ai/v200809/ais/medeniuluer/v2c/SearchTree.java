@@ -7,7 +7,7 @@ import java.util.Vector;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
- * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
+ * Reprï¿½sente un arbre de recherche. Les noeuds sont liï¿½s avec des SearchLink
  * orientes
  *
  * @author Ekin Medeni
@@ -21,7 +21,7 @@ public class SearchTree {
 	// ensemble des liens dans l'arbre
 	private Vector<SearchLink> links;
 
-	// dernier noeud traité lors de la recherche
+	// dernier noeud traitï¿½ lors de la recherche
 	@SuppressWarnings("unused")
 	private SearchNode lastNode;
 	private SearchNode firstNode;
@@ -59,7 +59,7 @@ public class SearchTree {
 	}
 
 	/**
-	 * Ajoute un noeud à l'arbre
+	 * Ajoute un noeud Ã  l'arbre
 	 * 
 	 * @param pere
 	 *            le pere du noeud qu'on va ajouter
@@ -71,17 +71,17 @@ public class SearchTree {
 													// pere et le fils
 		mu.checkInterruption(); //Appel Obligatoire
 		SearchLink link = new SearchLink(pere, fils,mu);
-		// on ajoute le lien à l'arbre,on appelle la methode addLink qui
+		// on ajoute le lien Ã  l'arbre,on appelle la methode addLink qui
 		// lui-meme ajoute le noeud
 		addLink(link);
 
 	}
 
 	/**
-	 * Détermine si l'arbre contient le noeud passé en paramètre.
+	 * Dï¿½termine si l'arbre contient le noeud passï¿½ en paramï¿½tre.
 	 * 
 	 * @param node
-	 *            le noeud à rechercher
+	 *            le noeud Ã  rechercher
 	 * @return vrai si l'arbre contient le noeud
 	 * @throws StopRequestException 
 	 */
@@ -98,10 +98,10 @@ public class SearchTree {
 	}
 
 	/**
-	 * Renvoie le lien liant le noeud passé en paramètre à son père.
+	 * Renvoie le lien liant le noeud passï¿½ en paramï¿½tre Ã  son pï¿½re.
 	 * 
 	 * @param node
-	 *            le noeud à traiter
+	 *            le noeud Ã  traiter
 	 * @return un lien contenant le noeud en position target
 	 * @throws StopRequestException 
 	 * @throws AbsentNodeException
@@ -123,11 +123,11 @@ public class SearchTree {
 	}
 
 	/**
-	 * Renvoie tous les liens partant du noeud passé en paramètre.
+	 * Renvoie tous les liens partant du noeud passï¿½ en paramï¿½tre.
 	 * 
 	 * @param node
-	 *            le noeud à traiter
-	 * @return tous les liens où ce noeud est en position origin
+	 *            le noeud Ã  traiter
+	 * @return tous les liens oÃ¹ ce noeud est en position origin
 	 * @throws StopRequestException 
 	 * @throws AbsentNodeException
 	 */
@@ -146,12 +146,12 @@ public class SearchTree {
 	}
 
 	/**
-	 * Renvoie une séquence de noeuds représentant un chemin allant de la racine
-	 * au noeud passé en paramètre.
+	 * Renvoie une sï¿½quence de noeuds reprï¿½sentant un chemin allant de la racine
+	 * au noeud passï¿½ en paramï¿½tre.
 	 * 
 	 * @param node
-	 *            le noeud à traiter
-	 * @return un vecteur de noeuds représentant le chemin depuis la racine
+	 *            le noeud Ã  traiter
+	 * @return un vecteur de noeuds reprï¿½sentant le chemin depuis la racine
 	 * @throws StopRequestException 
 	 */
 	public LinkedList<SearchNode> getPath(SearchNode node) throws StopRequestException { // la liste des noeuds qui
@@ -188,13 +188,13 @@ public class SearchTree {
 	}
 
 	/**
-	 * Crée un nouveau lien dans l'arbre. Le noeud origin doit être présent dans
-	 * le graphe. Le noeud target doit être absent de l'arbre. Si le noeud
-	 * origin n'appartient pas au graphe. Si le noeud target appartient déjà au
+	 * crÃ©e un nouveau lien dans l'arbre. Le noeud origin doit ï¿½tre prÃ¨sent dans
+	 * le graphe. Le noeud target doit ï¿½tre absent de l'arbre. Si le noeud
+	 * origin n'appartient pas au graphe. Si le noeud target appartient dï¿½jï¿½ au
 	 * graphe.
 	 * 
 	 * @param link
-	 *            le lien à rajouter dans l'arbre
+	 *            le lien Ã  rajouter dans l'arbre
 	 * @throws StopRequestException 
 	 */
 	public void addLink(SearchLink link) throws StopRequestException {
@@ -204,11 +204,11 @@ public class SearchTree {
 	}
 
 	/**
-	 * Méthode utilisée par addLink pour des opérations devant être effectuées
-	 * en mode synchronisé.
+	 * mÃ©thode utilisÃ©e par addLink pour des opï¿½rations devant ï¿½tre effectuÃ©es
+	 * en mode synchronisï¿½.
 	 * 
 	 * @param link
-	 *            le lien à ajouter
+	 *            le lien Ã  ajouter
 	 * @throws StopRequestException 
 	 */
 	private synchronized void addLinkSynch(SearchLink link) throws StopRequestException {

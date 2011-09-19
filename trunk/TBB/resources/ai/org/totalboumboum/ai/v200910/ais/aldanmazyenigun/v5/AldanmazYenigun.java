@@ -66,7 +66,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	private AiHero targetHero = null;
 
-	/** classe chargée de déterminer quelles cases sont sûres */
+	/** classe chargï¿½e de dï¿½terminer quelles cases sont sï¿½res */
 	private SafetyZone safetyZone = null;
 
 	private boolean thereIsSafeTile = true;
@@ -81,7 +81,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	private boolean hasArrivedButDanger = false;
 
-	/** les coordonnées de notre hero */
+	/** les coordonnÃ©es de notre hero */
 	@SuppressWarnings("unused")
 	private double x;
 
@@ -105,7 +105,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		boolean start = false;
 		if (!ownHero.hasEnded()) { 
 
-			updateLocation(); // on met à jour la position de l'ia dans la zone
+			updateLocation(); // on met Ã  jour la position de l'ia dans la zone
 			Direction moveDir = Direction.NONE;
 			findIsBonusAccessible(); //on trouve si il y a un bonus accessible
 			
@@ -120,7 +120,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 					moveDir = escapeManager.update();
 				result = new AiAction(AiActionName.MOVE, moveDir);
 			}
-			// sinon si on est en danger : on commence à fuir
+			// sinon si on est en danger : on commence Ã  fuir
 			else if (!isSafe(caseActuelle)) {
 				escapeManager = new AvoidController(this);
 				moveDir = escapeManager.update();
@@ -141,7 +141,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 			}
 			// sinon si on n'est pas sur le bonus et s'il y a les bonus accessibles et 
-			// si on n'est pas assez armee: on commence à collecter les bonus
+			// si on n'est pas assez armee: on commence Ã  collecter les bonus
 			else if (!isBonus(caseActuelle)
 					&& !findItemsTiles(caseActuelle).isEmpty()
 					&& bonusAccessible && !assezArmee) {
@@ -149,7 +149,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 				moveDir = safeManager.update();
 				result = new AiAction(AiActionName.MOVE, moveDir);
 			}
-			//si le rival est accessible et on est assez arméé on l'attaque
+			//si le rival est accessible et on est assez armï¿½ï¿½ on l'attaque
 			else if (heroAccessible) {
 				updateTarget();
 
@@ -630,7 +630,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	}
 
 	/**
-	 * choisit aléatoirement un joueur comme cible à suivre
+	 * choisit alï¿½atoirement un joueur comme cible Ã  suivre
 	 * 
 	 * @throws StopRequestException
 	 */
@@ -669,7 +669,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	}
 
 	/**
-	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
+	 * met Ã  jour la cible, et ï¿½ventuellement le chemin jusqu'ï¿½ elle
 	 */
 	private void updateTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE

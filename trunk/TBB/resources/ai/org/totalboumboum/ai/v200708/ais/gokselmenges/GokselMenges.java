@@ -73,7 +73,7 @@ public class GokselMenges  extends ArtificialIntelligence
 
 	}
 	
-	/** indicateur de première invocation (pour la compatibilité */
+	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
 	private boolean firstTime = true;
 
 	public Integer call() throws Exception {
@@ -741,7 +741,7 @@ return points;
 	
 	
 	
-	// retourne la zone accessible a partir d'un point donné.
+	// retourne la zone accessible a partir d'un point donnï¿½.
 	//@param p point actuel de notre bonhomme
 	
 	public void getZoneAccessible(Point p)
@@ -1160,7 +1160,7 @@ return points;
 		
 	}
 	
-	// prend les donnees de getZoneMatris et renvoi une matrice amelioré en l'ajoutant les couts specifiques.
+	// prend les donnees de getZoneMatris et renvoi une matrice ameliorï¿½ en l'ajoutant les couts specifiques.
 	public int[][] BetterMatrix()
 	{
 		int[][] ZoneMatrix= getZoneMatrix();

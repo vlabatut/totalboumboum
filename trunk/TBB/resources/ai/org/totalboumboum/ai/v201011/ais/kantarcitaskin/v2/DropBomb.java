@@ -34,8 +34,8 @@ public class DropBomb
 		ai.checkInterruption();
 		
 		boolean result=false; // Decision
-		int range = (zone.getOwnHero().getBombRange());//la portée nos bombes
-		List<AiTile> tempBlast = calculeBlast(range);//La portée virtuelle de notre bombe de futur 
+		int range = (zone.getOwnHero().getBombRange());//la portï¿½e nos bombes
+		List<AiTile> tempBlast = calculeBlast(range);//La portï¿½e virtuelle de notre bombe de futur 
 		
 		if(	zone.getOwnHero().getTile().getBombs().isEmpty() && (zone.getOwnHero().getBombNumberMax() - zone.getOwnHero().getBombNumberCurrent() != 0))
 		{
@@ -103,7 +103,7 @@ public class DropBomb
 		return result;
 	}
 	
-	//La methode qui controle s'il existe un bonus mais plus proche à l'adversaire que nous. 
+	//La methode qui controle s'il existe un bonus mais plus proche Ã  l'adversaire que nous. 
 	private boolean bonusRiskAvailbe(List<AiTile> tempBlast)
 	{
 		List<AiItem> bonus = new ArrayList<AiItem>();
@@ -137,7 +137,7 @@ public class DropBomb
 		return result;
 	}
 	
-	//La methode qui control si l'héro qu'on lui envoie par parametre est bloque entre les murs et les blasts
+	//La methode qui control si l'hï¿½ro qu'on lui envoie par parametre est bloque entre les murs et les blasts
 	private boolean bloque(AiHero ownHero) 
 	{
 		boolean result = true;
@@ -158,7 +158,7 @@ public class DropBomb
 		return result;
 	}
 	
-	//La methode qui controle si la case passée en parametre se trouve dans la porté d'une bombe
+	//La methode qui controle si la case passï¿½e en parametre se trouve dans la portï¿½ d'une bombe
 	public boolean isSafe(AiTile tile)
 	{
 		boolean result = true;
@@ -182,7 +182,7 @@ public class DropBomb
 		return result;
 	}
 	
-	//La methode controle s'il existe des murs dans les case qu'on lui a envoyé
+	//La methode controle s'il existe des murs dans les case qu'on lui a envoyï¿½
 	public boolean wallAvaible(List<AiTile> tempBlast)
 	{
 		boolean resultat = false;
@@ -212,7 +212,7 @@ public class DropBomb
 		return resultat;		
 	}
 	
-	//La methode qui control s'il existe des adversaire dans les cases qu'on lui a envoyé
+	//La methode qui control s'il existe des adversaire dans les cases qu'on lui a envoyï¿½
 	public boolean enemyAvaible(List<AiTile> tempBlast)
 	{
 		boolean result = false;

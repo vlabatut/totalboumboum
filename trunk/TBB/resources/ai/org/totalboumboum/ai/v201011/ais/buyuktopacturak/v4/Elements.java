@@ -22,7 +22,7 @@ public class Elements {
 
 	
 	/**
-	 * C’est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
+	 * Cï¿½est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
 	 * @throws StopRequestException
 	 */
@@ -36,7 +36,7 @@ public class Elements {
 	// INITIALISATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * On obtient notre héro et on crée l’objet PerfectStrangers.
+	 * On obtient notre hï¿½ro et on crÃ©e lï¿½objet PerfectStrangers.
 	 * @throws StopRequestException
 	 */
 	private void init()throws StopRequestException{
@@ -101,8 +101,8 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la liste des murs destructibles qui ne vont pas d’exploser 
-	 * dans notre portée virtuelle.
+	 * On renvoie la liste des murs destructibles qui ne vont pas dï¿½exploser 
+	 * dans notre portï¿½e virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -132,7 +132,7 @@ public class Elements {
 							willBurn = true;
 						}
 					}
-					//Patlamayacaksa biz patlatalým (bence)
+					//Patlamayacaksa biz patlatalï¿½m (bence)
 					if(willBurn == false){
 						inRangeWalls.add(r.getBlocks().get(0));
 					}
@@ -143,7 +143,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la liste des bonus qui ne vont pas d’exploser dans notre portée virtuelle.
+	 * On renvoie la liste des bonus qui ne vont pas dï¿½exploser dans notre portï¿½e virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -181,7 +181,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la liste des adversaires qui sont dans notre portée virtuelle.
+	 * On renvoie la liste des adversaires qui sont dans notre portï¿½e virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -191,7 +191,7 @@ public class Elements {
 		bt.checkInterruption();
 		
 		List<AiTile> myBombRange = new ArrayList<AiTile>();
-		List<AiHero> inRangeHeroes = new ArrayList<AiHero>();//rangeimdeki düþmanlarý alýr
+		List<AiHero> inRangeHeroes = new ArrayList<AiHero>();//rangeimdeki dï¿½ï¿½manlarï¿½ alï¿½r
 		
 		myBombRange = ps.getBombRangeList(tile, range);
 		
@@ -208,7 +208,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la taille de la liste des murs destructibles qui ne vont pas d’exploser dans notre portée virtuelle.
+	 * On renvoie la taille de la liste des murs destructibles qui ne vont pas dï¿½exploser dans notre portï¿½e virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -220,7 +220,7 @@ public class Elements {
 	}
 
 	/**
-	 * On renvoie la taille de la liste des bonus qui ne vont pas d’exploser dans notre portée virtuelle.
+	 * On renvoie la taille de la liste des bonus qui ne vont pas dï¿½exploser dans notre portï¿½e virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -232,7 +232,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On renvoie la taille de la liste des adversaires qui sont dans notre portée virtuelle.
+	 * On renvoie la taille de la liste des adversaires qui sont dans notre portï¿½e virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -244,7 +244,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On contient la control de la distance au bonus entre l’ennemie plus proche et notre héro.
+	 * On contient la control de la distance au bonus entre lï¿½ennemie plus proche et notre hï¿½ro.
 	 * @param tile
 	 * @param range
 	 * @return

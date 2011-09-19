@@ -11,7 +11,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 /**
  * Cette classe calcule la matrice de la mode attaque.
- * @author Onur Büyüktopaç & Yigit Turak
+ * @author Onur Bï¿½yï¿½ktopaï¿½ & Yigit Turak
  */
 public class AttackMatrix{
 	private BuyuktopacTurak bt;
@@ -19,7 +19,7 @@ public class AttackMatrix{
 	private AiZone zone;		
 	private AiHero deepPurple;
 	
-	private List<AiTile> freeList =new ArrayList<AiTile>(); //ulaþýlabilir tile.lar	
+	private List<AiTile> freeList =new ArrayList<AiTile>(); //ulaï¿½ï¿½labilir tile.lar	
 	private List<AiItem> itemsList;
 	private List<AiTile> bonusList; 
 	private List<AiBlock> destWallsList;
@@ -35,7 +35,7 @@ public class AttackMatrix{
 	private Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 	
 	/**
-	 * C’est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
+	 * Cï¿½est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
 	 * @param zone
 	 * @throws StopRequestException
@@ -47,7 +47,7 @@ public class AttackMatrix{
 		init();
 	}
 	/**
-	 * On obtient notre héro, la dimension de la zone et crée les objets listes.
+	 * On obtient notre hï¿½ro, la dimension de la zone et crÃ©e les objets listes.
 	 * @throws StopRequestException
 	 */
 	private void init()throws StopRequestException{
@@ -73,7 +73,7 @@ public class AttackMatrix{
 	}
 	
 	/**
-	 * On crée et remplit la matrice. 
+	 * On crÃ©e et remplit la matrice. 
 	 * @throws StopRequestException
 	 */
 	public void createMatrix()throws StopRequestException{
@@ -84,7 +84,7 @@ public class AttackMatrix{
 		freeList = ps.putFree(this.deepPurple.getTile(),freeList);
 		ps.putDistance(freeList, matrix);
 
-		//Si Ai ne peut pas trouver un chemin aucun des héros.  
+		//Si Ai ne peut pas trouver un chemin aucun des hï¿½ros.  
 		for(AiHero h:heroesList){
 			bt.checkInterruption();
 			if(freeList.contains(h.getTile()))
@@ -106,7 +106,7 @@ public class AttackMatrix{
 	/**
 	 * on trouve tous les murs et puis on remplit les cases des entours 
 	 * des murs avec le constant DESTRUCTIBLE ou INDESTRUCTIBLE. 
-	 * On utilise la méthode isRunnable().
+	 * On utilise la mÃ©thode isRunnable().
 	 * @throws StopRequestException
 	 */
 	private void putWalls() throws StopRequestException{

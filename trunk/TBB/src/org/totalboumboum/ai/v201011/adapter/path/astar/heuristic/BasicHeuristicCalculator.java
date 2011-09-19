@@ -28,9 +28,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 /**
- * implémentation la plus simple d'une heuristique : 
- * on utilise la distance de Manhattan entre la case de départ et 
- * la plus proche des cases d'arrivée.
+ * implï¿½mentation la plus simple d'une heuristique : 
+ * on utilise la distance de Manhattan entre la case de dï¿½part et 
+ * la plus proche des cases d'arrivï¿½e.
  * 
  * @author Vincent Labatut
  *
@@ -42,12 +42,12 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * l'heuristique la plus simple consiste à prendre la distance
-	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
+	 * l'heuristique la plus simple consiste Ã  prendre la distance
+	 * de Manhattan entre la case courante tile et la case d'arrivï¿½e endTile.
 	 * cf. http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels
 	 * 
 	 * @param tile	
-	 * 		la case concernée 
+	 * 		la case concernï¿½e 
 	 * @return	
 	 * 		la distance de Manhattan entre tile et la plus proche des cases contenues dans endTiles
 	 */

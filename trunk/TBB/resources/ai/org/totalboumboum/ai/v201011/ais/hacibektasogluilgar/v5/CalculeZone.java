@@ -223,7 +223,7 @@ public class CalculeZone {
 	}
 	
 	/**
-	 * on fait mis à jour de tous les matrices calculé pour avoir total matrice du zone
+	 * on fait mis Ã  jour de tous les matrices calculÃ© pour avoir total matrice du zone
 	 * 
 	 * @param matrice
 	 * @throws StopRequestException
@@ -241,7 +241,7 @@ public class CalculeZone {
 	}
 	
 	/**
-	 * methode affichante la matriceTotale en console et en zone de jeu à la fois
+	 * methode affichante la matriceTotale en console et en zone de jeu Ã  la fois
 	 * 
 	 * @param matriceTotal
 	 * @throws StopRequestException

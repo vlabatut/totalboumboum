@@ -32,20 +32,20 @@ public enum AiBombType
 {
 	/** bombe normale */
 	NORMAL,
-	/** bombe pénétrante (la flamme n'est pas arrêtée par les les objets destructibles) */
+	/** bombe pï¿½nï¿½trante (la flamme n'est pas arrï¿½tï¿½e par les les objets destructibles) */
 	PENETRATION,
-	/** bombe télécommandée par le joueur (elle explose quand le joueur le lui demande) */
+	/** bombe tï¿½lï¿½commandï¿½e par le joueur (elle explose quand le joueur le lui demande) */
 	REMOTE,
-	/** bombe à la fois pénétrante et télécommandée */
+	/** bombe Ã  la fois pï¿½nï¿½trante et tï¿½lï¿½commandï¿½e */
 	REMOTE_PENTRATION,
 	/** autre type de bombes */
 	OTHER;	
 	
 	/**
-	 * calcule l'AiBombType correspondant au nom de bombe passé en paramètre
+	 * calcule l'AiBombType correspondant au nom de bombe passï¿½ en paramï¿½tre
 	 * 
-	 * @param name	nom de la bombe à traiter
-	 * @return	symbole représentant ce type de bombe
+	 * @param name	nom de la bombe Ã  traiter
+	 * @return	symbole reprï¿½sentant ce type de bombe
 	 */
 	public static AiBombType makeBombType(String name)
 	{	AiBombType result;

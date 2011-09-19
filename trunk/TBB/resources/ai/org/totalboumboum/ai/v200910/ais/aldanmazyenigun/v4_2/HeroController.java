@@ -25,7 +25,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class HeroController {
 
 		/**
-		 * crée un EscapeManager chargé d'amener le personnage au centre d'une case sûre
+		 * crÃ©e un EscapeManager chargï¿½ d'amener le personnage au centre d'une case sï¿½re
 		 */
 		public HeroController(AldanmazYenigun ai) throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -50,7 +50,7 @@ public class HeroController {
 		/////////////////////////////////////////////////////////////////
 		// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 		/////////////////////////////////////////////////////////////////
-		/** l'IA concernée par ce gestionnaire de chemin */
+		/** l'IA concernï¿½e par ce gestionnaire de chemin */
 		private AldanmazYenigun ai;
 		/** zone de jeu */
 		private AiZone zone;	
@@ -58,17 +58,17 @@ public class HeroController {
 		/////////////////////////////////////////////////////////////////
 		// DESTINATION	/////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////
-		/** indique si le personnage est arrivé à destination */
+		/** indique si le personnage est arrivï¿½ Ã  destination */
 		private boolean arrived;
-		/** la case de destination sélectionnée pour la fuite */
+		/** la case de destination sï¿½lectionnï¿½e pour la fuite */
 		private AiTile tileDest;
 		/** destinations potentielles */
 		private List<AiTile> possibleDest;
 
 		/**
-		 * détermine si le personnage est arrivé dans la case de destination.
-		 * S'il n'y a pas de case de destination, on considère que le personnage
-		 * est arrivé.
+		 * dï¿½termine si le personnage est arrivï¿½ dans la case de destination.
+		 * S'il n'y a pas de case de destination, on considï¿½re que le personnage
+		 * est arrivï¿½.
 		 */
 		public boolean hasArrived() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -87,7 +87,7 @@ public class HeroController {
 		/////////////////////////////////////////////////////////////////
 		// PATH			/////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////
-		/** le chemin à suivre */
+		/** le chemin Ã  suivre */
 		private AiPath path;
 		
 		private void updatePath() throws StopRequestException
@@ -98,10 +98,10 @@ public class HeroController {
 		}
 		
 		/**
-		 * vérifie que le personnage est bien sur le chemin pré-calculé,
-		 * en supprimant si besoin les cases inutiles (car précedant la case courante).
+		 * vï¿½rifie que le personnage est bien sur le chemin prï¿½-calculÃ©,
+		 * en supprimant si besoin les cases inutiles (car prï¿½cedant la case courante).
 		 * Si le personnage n'est plus sur le chemin, alors le chemin
-		 * est vide après l'exécution de cette méthode.
+		 * est vide aprï¿½s l'exï¿½cution de cette mÃ©thode.
 		 */
 		private void checkIsOnPath() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -115,10 +115,10 @@ public class HeroController {
 		
 		/** 
 		 * teste si le chemin est toujours valide, i.e. si
-		 * aucun obstacle n'est apparu depuis la dernière itération.
+		 * aucun obstacle n'est apparu depuis la derniÃ¨re itï¿½ration.
 		 * Contrairement au PathManager, ici pour simplifier on ne teste
 		 * que l'apparition de nouveaux obstacles (feu, bombes, murs), et non pas 
-		 * les changement concernant la sûreté des cases. En d'autres termes,
+		 * les changement concernant la sï¿½retï¿½ des cases. En d'autres termes,
 		 * si une bombe apparait avant que le personnage d'ait atteint une
 		 * case sure, elle ne sera pas prise en compte dans la trajectoire.
 		 * 
@@ -139,18 +139,18 @@ public class HeroController {
 		/////////////////////////////////////////////////////////////////
 		// A STAR					/////////////////////////////////////
 		/////////////////////////////////////////////////////////////////
-		/** classe implémentant l'algorithme A* */
+		/** classe implÃ©mentant l'algorithme A* */
 		private Astar astar;
-		/** classe implémentant la fonction heuristique */
+		/** classe implÃ©mentant la fonction heuristique */
 		private HeuristicCalculator heuristicCalculator;
-		/** classe implémentant la fonction de coût */
+		/** classe implÃ©mentant la fonction de coï¿½t */
 		private MatrixCostCalculator costCalculator;
 
 		private void updateCostCalculator() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
-			// calcul de la matrice de coût : on prend l'opposé du niveau de sûreté
-			// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
+			// calcul de la matrice de coï¿½t : on prend l'opposï¿½ du niveau de sï¿½retï¿½
+			// i.e. : plus le temps avant l'explosion est long, plus le coï¿½t est faible 
 		//	double dangerMatrix[][] = ai.getZoneFormee().getMatrix();
 			for(int line=0;line<zone.getHeight();line++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -167,18 +167,18 @@ public class HeroController {
 		/////////////////////////////////////////////////////////////////	
 		/** 
 		 * calcule la prochaine direction pour aller vers la destination 
-		 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
+		 *(ou renvoie Direction.NONE si aucun dÃ©placement n'est nï¿½cessaire)
 		 * */
 		public Direction update() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-			// on met d'abord à jour la matrice de cout
+			// on met d'abord Ã  jour la matrice de cout
 			updateCostCalculator();
 		
 			Direction result = Direction.NONE;
 			ai.setHeroAccessible(true);
 			if(!hasArrived())
-			{	// on vérifie que le joueur est toujours sur le chemin
+			{	// on vï¿½rifie que le joueur est toujours sur le chemin
 				checkIsOnPath();
 				// si le chemin est vide ou invalide, on le recalcule.
 				if(path.isEmpty() || !checkPathValidity())
@@ -190,7 +190,7 @@ public class HeroController {
 				// sinon, s'il ne reste qu'une seule case, on va au centre
 				else if(path.getLength()>0)
 					tile = path.getTile(0);
-				// on détermine la direction du prochain déplacement
+				// on dï¿½termine la direction du prochain dÃ©placement
 				if(tile!=null)
 					result = zone.getDirection(ai.getOwnHero(),tile);			
 			}

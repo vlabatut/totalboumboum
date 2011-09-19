@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Un chemin résolu par quelque algorithme de conclusion de chemin. 
- * Un feuilleton d'étapes de l'emplacement commençant à l'emplacement de cible. 
- * Ceci inclut une étape pour l'emplacement initial. 
+ * Un chemin rï¿½solu par quelque algorithme de conclusion de chemin. 
+ * Un feuilleton d'ï¿½tapes de l'emplacement commenï¿½ant Ã  l'emplacement de cible. 
+ * Ceci inclut une ï¿½tape pour l'emplacement initial. 
  * 
  * @author Gokhan Camas
  * @author Irem Demirbas
@@ -14,50 +14,50 @@ import java.util.List;
  */
 @SuppressWarnings("unchecked")
 public class Path {
-	/** La liste d'étapes développant ce chemin */
+	/** La liste d'ï¿½tapes dï¿½veloppant ce chemin */
 	@SuppressWarnings("rawtypes")
 	private List steps = new ArrayList();
 	
 	/**
-	 * Créer un chemin vide
+	 * crÃ©er un chemin vide
 	 */
 	public Path() {
 		
 	}
 
 	/**
-	 * Obtenir la longueur du chemin, c.-à-d. le nombre d'étapes
+	 * Obtenir la longueur du chemin, c.-ï¿½-d. le nombre d'ï¿½tapes
 	 * 
-	 * @return Le nombre d'étapes dans ce chemin
+	 * @return Le nombre d'ï¿½tapes dans ce chemin
 	 */
 	public int getLength() {
 		return steps.size();
 	}
 	
 	/**
-	 * Obtenir l'étape à un index donné dans le chemin
+	 * Obtenir l'ï¿½tape Ã  un index donnï¿½ dans le chemin
 	 * 
-	 * @param index L'index de l'étape pour rapporter.
-	 * @return L'information d'étape, la position sur la carte
+	 * @param index L'index de l'ï¿½tape pour rapporter.
+	 * @return L'information d'ï¿½tape, la position sur la carte
 	 */
 	public Step getStep(int index) {
 		return (Step) steps.get(index);
 	}
 	
 	/**
-	 * Obtenir la coordonnée de x pour l'étape à l'index donné
+	 * Obtenir la coordonnÃ©e de x pour l'ï¿½tape Ã  l'index donnï¿½
 	 * 
-	 * @param L'index de l'étape dont x la coordonnée devrait être rapportée
-	 * @return x coordonnée à l'étape
+	 * @param L'index de l'ï¿½tape dont x la coordonnÃ©e devrait ï¿½tre rapportï¿½e
+	 * @return x coordonnÃ©e Ã  l'ï¿½tape
 	 */
 	public int getX(int index) {
 		return getStep(index).x;
 	}
 
 	/**
-	 * Obtenir  la coordonnée de y pour l'étape à l'index donné
+	 * Obtenir  la coordonnÃ©e de y pour l'ï¿½tape Ã  l'index donnï¿½
 	 * 
-	 * @param l'index de l'étape dont y la coordonnée devrait être rapportée
+	 * @param l'index de l'ï¿½tape dont y la coordonnÃ©e devrait ï¿½tre rapportï¿½e
 	 * @return y
 	 */
 	public int getY(int index) {
@@ -65,27 +65,27 @@ public class Path {
 	}
 	
 	/**
-	 * Ajouter une étape au chemin.  
+	 * Ajouter une ï¿½tape au chemin.  
 	 * 
-	 * @param x  la coordonnéede x de la nouvelle étape
-	 * @param y la coordonnéede y de la nouvelle étape
+	 * @param x  la coordonnÃ©ede x de la nouvelle ï¿½tape
+	 * @param y la coordonnÃ©ede y de la nouvelle ï¿½tape
 	 */
 	public void appendStep(int x, int y) {
 		steps.add(new Step(x,y));
 	}
 
 	/**
-	 * Prepend une étape au chemin.   
+	 * Prepend une ï¿½tape au chemin.   
 	 * 
-	 * @param x la coordonnéede x de la nouvelle étape
-	 * @param y la coordonnéede y de la nouvelle étape
+	 * @param x la coordonnÃ©ede x de la nouvelle ï¿½tape
+	 * @param y la coordonnÃ©ede y de la nouvelle ï¿½tape
 	 */
 	public void prependStep(int x, int y) {
 		steps.add(0, new Step(x, y));
 	}
 	
 	/**
-	 * Le contrôle si ce chemin contient l'étape donnée
+	 * Le contrï¿½le si ce chemin contient l'ï¿½tape donnï¿½e
 	 * 
 	 * @param x The x coordinate of the step to check for
 	 * @param y The y coordinate of the step to check for
@@ -96,7 +96,7 @@ public class Path {
 	}
 	
 	/**
-	 * Une étape seule dans le chemin
+	 * Une ï¿½tape seule dans le chemin
 	 * 
 	 * @author Gokhan Camas -- Irem Demirbas
 	 */

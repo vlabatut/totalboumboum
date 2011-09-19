@@ -61,8 +61,8 @@ public class Level
 	// THEME				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 /*
- TODO semblait inutile, dc désactivé 
- (également dans HollowLevel.loadTheme() et Level.finish())
+ TODO semblait inutile, dc dï¿½sactivï¿½ 
+ (ï¿½galement dans HollowLevel.loadTheme() et Level.finish())
 	private Theme theme;
 
 	public void setTheme(Theme theme)
@@ -524,7 +524,7 @@ public class Level
 				matrix[line][col].updateSprites(Role.HERO);		
 	}
 
-	//NOTE optimisation : à effectuer seulement pour les tiles visibles
+	//NOTE optimisation : Ã  effectuer seulement pour les tiles visibles
 	public void draw(Graphics g)
 	{	boolean flat = true;
 		boolean onGround = true;

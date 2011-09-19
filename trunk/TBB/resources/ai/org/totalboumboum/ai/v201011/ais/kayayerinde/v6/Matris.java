@@ -284,7 +284,7 @@ public class Matris {
 	/**
 	 * calcule une liste de cases correspondant au souffle indirect de la bombe
 	 * pass�e en param�tre. Le terme "indirect" signifie que la fonction est r�cursive : 
-	 * si une case � port�e de souffle contient une bombe, le souffle de cette bombe est rajout�
+	 * si une case à port�e de souffle contient une bombe, le souffle de cette bombe est rajout�
 	 * dans la liste blast, et la bombe est rajout�e dans la liste bombs.
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException

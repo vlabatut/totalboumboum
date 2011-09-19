@@ -8,12 +8,12 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- *	Cette classe définit les fonctions nécessaires pour les mouvements du joueur.
+ *	Cette classe dÃ©finit les fonctions nï¿½cessaires pour les mouvements du joueur.
  */
 public class ActionManager {
 	
 	/**
-	 * Cette fonction trouve la prochaine action que nous devons faire pour suivre le chemin donné.
+	 * Cette fonction trouve la prochaine action que nous devons faire pour suivre le chemin donnï¿½.
 	 * @return AiAction
 	 */
 	static AiAction move(GocmenogluHekimoglu monIa,AiPath fpath) throws StopRequestException{

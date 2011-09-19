@@ -21,9 +21,9 @@ public class TraitementCommune {
 	}
 
 	/**
-	 * Cette méthode forme une liste des cases cibles que notre IA peut aller
+	 * Cette mÃ©thode forme une liste des cases cibles que notre IA peut aller
 	 * dans le mode attaque. Elle prend deux arguments une matrice de type
-	 * double et la zone du jeu. Notre IA peut se déplacer en traversant ces
+	 * double et la zone du jeu. Notre IA peut se dï¿½placer en traversant ces
 	 * cases.
 	 * 
 	 * @param matrice
@@ -64,8 +64,8 @@ public class TraitementCommune {
 	}
 
 	/**
-	 * Cette méthode compare les cases cibles entre eux et retourne la case qui
-	 * a la valeur plus élevée. S’il y a plus d’une valeur élevée égales alors
+	 * Cette mÃ©thode compare les cases cibles entre eux et retourne la case qui
+	 * a la valeur plus ï¿½levï¿½e. Sï¿½il y a plus dï¿½une valeur ï¿½levï¿½e ï¿½gales alors
 	 * IA regarde au distance de ceux cases. Elle prend trois arguments une
 	 * matrice de type double et deux listes des cases.
 	 * 
@@ -127,10 +127,10 @@ public class TraitementCommune {
 	}
 
 	/**
-	 * Cette méthode forme une liste des cases cibles que notre IA peut aller
+	 * Cette mÃ©thode forme une liste des cases cibles que notre IA peut aller
 	 * dans le mode collecte. Elle prend deux arguments, une matrice de type Int
 	 * et la zone du jeu. On prend aussi en compte les cases qui sont dans la
-	 * portée des bombes.
+	 * portï¿½e des bombes.
 	 * 
 	 * @param matrice
 	 *            La Matrice collecte
@@ -174,8 +174,8 @@ public class TraitementCommune {
 	}
 
 	/**
-	 * Cette méthode compare les cases cibles entre eux et retourne la case qui
-	 * a la valeur plus élevée. S’il y a plus d’une valeur élevée égales alors
+	 * Cette mÃ©thode compare les cases cibles entre eux et retourne la case qui
+	 * a la valeur plus ï¿½levï¿½e. Sï¿½il y a plus dï¿½une valeur ï¿½levï¿½e ï¿½gales alors
 	 * IA regarde au distance de ceux cases .Elle prend trois arguments une
 	 * matrice de type Int et deux listes des cases.
 	 * 

@@ -61,7 +61,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	// le booleen pour determiner s'il est necessaire d'entrer dans l'algo de
 	// bonus.
 
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException {
 		// avant tout: test d'interruption
 		checkInterruption();

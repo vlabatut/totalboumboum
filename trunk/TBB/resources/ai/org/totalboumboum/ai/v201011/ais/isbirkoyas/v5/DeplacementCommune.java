@@ -35,9 +35,9 @@ public class DeplacementCommune {
 
 	/**
 	 * 
-	 * Cette méthode calcule le chemin le plus court que notre IA peut suivre et
+	 * Cette mÃ©thode calcule le chemin le plus court que notre IA peut suivre et
 	 * elle retourne le plus court chemin (shortestPath). Elle prend 3
-	 * arguments, notre IA, une liste des items du jeu et AiTile (représente une
+	 * arguments, notre IA, une liste des items du jeu et AiTile (reprï¿½sente une
 	 * case du jeu, avec tous les spirites qu'elle contient).
 	 * 
 	 * @param ownHero
@@ -80,9 +80,9 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette méthode forme une liste des murs qui peuvent se détruire c’est à
-	 * dire elle contrôle si la case est destructible ou indestructibles et il y
-	 * a possède du danger ou pas . Elle prend 2 arguments la zone du jeu et une
+	 * Cette mÃ©thode forme une liste des murs qui peuvent se dÃ©truire cï¿½est ï¿½
+	 * dire elle contrï¿½le si la case est destructible ou indestructibles et il y
+	 * a possï¿½de du danger ou pas . Elle prend 2 arguments la zone du jeu et une
 	 * action.
 	 * 
 	 * @param gameZone
@@ -262,7 +262,7 @@ public class DeplacementCommune {
 			if (voisines.size() > 1)
 				ordre(voisines, distances);
 
-			// on trouve la plus proche case "detruit" à la case "attaque".
+			// on trouve la plus proche case "detruit" Ã  la case "attaque".
 			// Cette case est accessible
 			int i = 0;
 			AiPath path = null;
@@ -285,8 +285,8 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette méthode permet à décider la nouvelle action. Elle prend un seul
-	 * argument qui est un chemin (une séquence des cases).
+	 * Cette mÃ©thode permet Ã  dï¿½cider la nouvelle action. Elle prend un seul
+	 * argument qui est un chemin (une sï¿½quence des cases).
 	 * 
 	 * @param nextMove
 	 * 
@@ -333,7 +333,7 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette méthode nous donne une nouvelle zone pour pour minimiser le nombre
+	 * Cette mÃ©thode nous donne une nouvelle zone pour pour minimiser le nombre
 	 * des calculs.
 	 * 
 	 * @param gauche
@@ -384,7 +384,7 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette méthode nous donne une liste de direction pour notre IA. Elle prend
+	 * Cette mÃ©thode nous donne une liste de direction pour notre IA. Elle prend
 	 * deux arguments.
 	 * 
 	 * @param dx2
@@ -444,7 +444,7 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette méthode nous donne la direction de notre IA. Elle prend 3
+	 * Cette mÃ©thode nous donne la direction de notre IA. Elle prend 3
 	 * arguments.
 	 * 
 	 * @param dx2
@@ -478,7 +478,7 @@ public class DeplacementCommune {
 	}
 
 	/**
-	 * Cette méthode met en ordre la liste des direction de notre IA. Elle prend
+	 * Cette mÃ©thode met en ordre la liste des direction de notre IA. Elle prend
 	 * 2 arguments.
 	 * 
 	 * @param voisines

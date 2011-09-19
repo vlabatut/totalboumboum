@@ -266,9 +266,9 @@ public class MatrixCalculator
 	 * Calcule le temps d'explosion estime d'une bombe
 	 * 
 	 * @param bomb
-	 * 		la bombe dont le temps d'explosion est calculé
+	 * 		la bombe dont le temps d'explosion est calculÃ©
 	 * @return resutl
-	 * 		le temps d'explosion estimé
+	 * 		le temps d'explosion estimï¿½
 	 * @throws StopRequestException 
 	 * */
 	public double tempExplosion (AiBomb bomb) throws StopRequestException
@@ -349,12 +349,12 @@ public class MatrixCalculator
 	}
 
 	/**
-	 * Donne la valeur envoyé à la case qu'on indique
+	 * Donne la valeur envoyï¿½ Ã  la case qu'on indique
 	 * 
 	 * @param item
 	 * 		l'item, prorietaire de valeur
 	 * @param valeur
-	 * 		valeur calculé de cette cas
+	 * 		valeur calculÃ© de cette cas
 	 * @param matrix
 	 * 		matrice representant la zone du jeu 
 	 * @throws StopRequestException 

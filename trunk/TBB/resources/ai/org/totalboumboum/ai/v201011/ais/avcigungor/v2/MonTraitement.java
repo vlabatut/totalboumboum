@@ -5,17 +5,17 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 
 
 /**
- * >> ce texte est à remplacer par votre propre description de votre classe
+ * >> ce texte est Ã  remplacer par votre propre description de votre classe
  * >> remplacez aussi le nom de l'auteur.
  * 
  * @author Vincent Labatut
  *
  */
 public class MonTraitement
-{	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
+{	/** classe principale de l'IA, permet d'accÃ©der Ã  checkInterruption() */
 	private AvciGungor monIa;
 	
-	/** une méthode bidon pour l'exemple */
+	/** une mÃ©thode bidon pour l'exemple */
 	public MonTraitement(AvciGungor monIa) throws StopRequestException
 	{	// avant tout : test d'interruption
 		monIa.checkInterruption();
@@ -24,7 +24,7 @@ public class MonTraitement
 		this.monIa = monIa;	
 	}
 	
-	/** une autre méthode bidon */
+	/** une autre mÃ©thode bidon */
 	public AiAction gagneRound() throws StopRequestException
 	{	// avant tout : test d'interruption
 		monIa.checkInterruption();

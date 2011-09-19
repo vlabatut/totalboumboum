@@ -30,10 +30,10 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/** path qu'on va suivre*/
 	Astar as;
 	
-	/** le personnage dirigé par cette IA*/
+	/** le personnage dirigï¿½ par cette IA*/
 	private AiHero hero;
 	
-	/** la case occupée actuellement par le personnage */
+	/** la case occupï¿½e actuellement par le personnage */
 	private AiTile currentTile;
 	
 	/** la case prochaine sur path*/
@@ -63,7 +63,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	/** Direction de l'action */
 	Direction moveDir = Direction.NONE;
 	
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	@Override
 	public AiAction processAction() throws StopRequestException
 	{	//Appel Obligatoire
@@ -75,7 +75,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		//creeation du dangerZone
 		dangerZone= new DangerZone(zone,this);
 		
-		// si ownHero est null, ça veut dire l'IA est morte : inutile de continuer
+		// si ownHero est null, ï¿½a veut dire l'IA est morte : inutile de continuer
 		if(hero != null)
 		{
 			updateLocation(hero.getTile());
@@ -104,7 +104,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 				}
 				
 				else{
-					// Si on n'est pas assez armé et s'ils existent des bonus ouvert, on part pour les prendre
+					// Si on n'est pas assez armï¿½ et s'ils existent des bonus ouvert, on part pour les prendre
 					mustTakeBonus();
 					if(bonusExiste() && takeBonus)
 					{
@@ -125,7 +125,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 							{
 								moveDir=zone.getDirection(currentTile, nextTile);
 								dropBomb=canDrop();
-								//si on est arrivé a targetTile et si on peut deposer des bombes, on depose des bombes pour detruir des murs 
+								//si on est arrivï¿½ a targetTile et si on peut deposer des bombes, on depose des bombes pour detruir des murs 
 								if(targetTile==currentTile && dropBomb){
 									dropBomb=false;
 									result = new AiAction(AiActionName.DROP_BOMB);
@@ -146,14 +146,14 @@ public class BektasMazilyah extends ArtificialIntelligence
 				}
 			}
 			}}
-			// on met à jour la direction renvoyée au moteur du jeu
+			// on met Ã  jour la direction renvoyï¿½e au moteur du jeu
 			result = new AiAction(AiActionName.MOVE,moveDir);
 		}	
 		return result;	
 	}
 	
 	/********************************************************************************
-	 * la méthode qui precise la tile prochaine pour atteindre a une adversaire
+	 * la mÃ©thode qui precise la tile prochaine pour atteindre a une adversaire
 	 * @throws StopRequestException
 	 */
 
@@ -188,7 +188,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 }
 
 	/*******************************************
-	 * La méthode qu'on va utiliser pour connaitre s'il ya une adversaire proche a nous
+	 * La mÃ©thode qu'on va utiliser pour connaitre s'il ya une adversaire proche a nous
 	 * @return si rival est proche a nous
 	 * @throws StopRequestException
 	 */
@@ -226,7 +226,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	
 
 	/******************************************************************************
-	 * La méthode qu'on va utiliser pour preciser la tile prochaine quand on suit
+	 * La mÃ©thode qu'on va utiliser pour preciser la tile prochaine quand on suit
 	 * @throws StopRequestException
 	 */
 	private void suivre() throws StopRequestException

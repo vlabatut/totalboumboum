@@ -27,7 +27,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
- * permet de définir une fonction heuristique utilisée par l'algorithme
+ * permet de dï¿½finir une fonction heuristique utilisÃ©e par l'algorithme
  * A* lors de la recherche d'un plus court chemin.
  * 
  * @author Vincent Labatut
@@ -43,7 +43,7 @@ public abstract class HeuristicCalculator
 
 	/**
 	 * initialise/modifie la liste de cases 
-	 * pouvant terminer le chemin recherché
+	 * pouvant terminer le chemin recherchï¿½
 	 * 
 	 * @param endTiles	
 	 * 		les cases terminant le chemin
@@ -54,7 +54,7 @@ public abstract class HeuristicCalculator
 
 	/**
 	 * renvoie la liste de cases objectifs (i.e. les cases terminant
-	 * le chemin recherché)
+	 * le chemin recherchï¿½)
 	 * 
 	 * @return	
 	 * 		la liste des cases objectifs
@@ -68,10 +68,10 @@ public abstract class HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * calcule la valeur heuristique de la case tile,
-	 * le but étant de se rendre dans une des cases objectifs
+	 * le but ï¿½tant de se rendre dans une des cases objectifs
 	 * 
 	 * @param tile	
-	 * 		la case concernée 
+	 * 		la case concernï¿½e 
 	 * @return	
 	 * 		l'heuristique de la case
 	 */

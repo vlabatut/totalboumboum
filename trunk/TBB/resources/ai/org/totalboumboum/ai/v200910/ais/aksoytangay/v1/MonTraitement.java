@@ -12,10 +12,10 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
  *
  */
 public class MonTraitement
-{	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
+{	/** classe principale de l'IA, permet d'accÃ©der Ã  checkInterruption() */
 	private AksoyTangay monIa;
 	
-	/** une méthode bidon pour l'exemple */
+	/** une mÃ©thode bidon pour l'exemple */
 	public MonTraitement(AksoyTangay monIa) throws StopRequestException
 	{	// avant tout : test d'interruption
 		monIa.checkInterruption();
@@ -24,7 +24,7 @@ public class MonTraitement
 		this.monIa = monIa;	
 	}
 	
-	/** une autre méthode bidon */
+	/** une autre mÃ©thode bidon */
 	public AiAction gagneRound() throws StopRequestException
 	{	// avant tout : test d'interruption
 		monIa.checkInterruption();

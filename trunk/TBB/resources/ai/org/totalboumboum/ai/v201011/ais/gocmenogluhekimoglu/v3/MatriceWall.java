@@ -15,7 +15,7 @@ public class MatriceWall extends MatriceCalc {
 	}
 	
 	/**
-	 * Pour la destruction des murs dans la "mode collecte". nous donnons cas près des murs destructibles 1, les autres 0.
+	 * Pour la destruction des murs dans la "mode collecte". nous donnons cas prÃ¨s des murs destructibles 1, les autres 0.
 	 */
 	public void calculate() throws StopRequestException {
 		monIa.checkInterruption();

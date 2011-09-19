@@ -94,7 +94,7 @@ public class SpritePreviewLoader
 		loadSource = true;
 		Element root = HollowSpriteFactoryLoader.openFile(folder);
 		SpritePreview result = loadSpriteElement(root,folder,abstractPreviews);
-		result.setPack(null);//TODO à compléter en extrayant le pack du chemin folder
+		result.setPack(null);//TODO Ã  complÃ©ter en extrayant le pack du chemin folder
 		result.setFolder(new File(folder).getName());
 		return result;
 	}

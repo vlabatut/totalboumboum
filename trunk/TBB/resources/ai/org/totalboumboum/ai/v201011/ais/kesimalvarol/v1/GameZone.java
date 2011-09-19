@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v201011.ais.kesimalvarol.v1.KesimalVarol;
  */
 @SuppressWarnings("unused")
 public class GameZone
-{	/** classe principale de l'IA, permet d'acc�der � checkInterruption() */
+{	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
 	private static KesimalVarol monIA;
 	public static void setMonIA(KesimalVarol monIA) {
 		GameZone.monIA = monIA;

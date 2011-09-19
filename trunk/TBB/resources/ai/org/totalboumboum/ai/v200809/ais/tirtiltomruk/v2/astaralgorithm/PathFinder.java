@@ -181,12 +181,12 @@ public class PathFinder {
 
 	/**
 	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de
-	 * A étoile. (cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
+	 * A ï¿½toile. (cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
 	 * 
 	 * @param x
-	 *            le coordonné de x de l'ia.
+	 *            le coordonnï¿½ de x de l'ia.
 	 * @param y
-	 *            le coordonné de y de l'ia.
+	 *            le coordonnï¿½ de y de l'ia.
 	 * @param tab
 	 *            le tableau du jeu.
 	 * @param goal
@@ -196,10 +196,10 @@ public class PathFinder {
 	private void findPath(ZoneEnum[][] tab, int x, int y, Noeud goal)
 			throws StopRequestException {
 		source.checkInterruption(); // Appel Obligatoire
-		// à chaque appel de la fonction,on efface les anciens valeurs.
+		// Ã  chaque appel de la fonction,on efface les anciens valeurs.
 		path = new LinkedList<Noeud>();
 
-		Noeud courant = new Noeud(x, y, tab[x][y], 0, source);// case où se
+		Noeud courant = new Noeud(x, y, tab[x][y], 0, source);// case oÃ¹ se
 		// trouve ia.
 		Tree tree = new Tree(courant, source);// on cree une arbre pour voir le
 		// path.
@@ -221,8 +221,8 @@ public class PathFinder {
 		LinkedList<Noeud> open = new LinkedList<Noeud>();// liste des elements
 		// qu'on regarde.
 		LinkedList<Noeud> closed = new LinkedList<Noeud>();// liste des elements
-		// qu'on a dejà
-		// regardé.
+		// qu'on a dejï¿½
+		// regardÃ©.
 		Noeud temp = new Noeud(source);
 
 		Noeud solution = null;
@@ -234,7 +234,7 @@ public class PathFinder {
 			source.checkInterruption(); // Appel Obligatoire
 			temp = frange.poll();// on enleve de la frange
 			open.remove(open.indexOf(temp));// on enleve de la liste open.
-			closed.add(temp);// on met au liste des elements deja regardés.
+			closed.add(temp);// on met au liste des elements deja regardÃ©s.
 
 			if (temp.equals(goal)) {
 				solution = temp;
@@ -267,7 +267,7 @@ public class PathFinder {
 					}
 
 				}
-				// la case qui est à droite de lui.
+				// la case qui est Ã  droite de lui.
 				if (getConditions(temp, mode, Direction.RIGHT)) {
 					right = new Noeud(temp.getX() + 1, temp.getY(), tab[temp
 							.getX() + 1][temp.getY()], temp.getCout() + 1,
@@ -278,7 +278,7 @@ public class PathFinder {
 						frange.offer(right);
 					}
 				}
-				// la case qui est en à gauche de lui.
+				// la case qui est en Ã  gauche de lui.
 				if (getConditions(temp, mode, Direction.LEFT)) {
 					left = new Noeud(temp.getX() - 1, temp.getY(), tab[temp
 							.getX() - 1][temp.getY()], temp.getCout() + 1,
@@ -293,7 +293,7 @@ public class PathFinder {
 
 		}// fin de while
 
-		if (solution != null)// si on a trouvé la solution sans finir tous les
+		if (solution != null)// si on a trouvï¿½ la solution sans finir tous les
 			// elements de la frange.
 			path = tree.getPath(solution);
 

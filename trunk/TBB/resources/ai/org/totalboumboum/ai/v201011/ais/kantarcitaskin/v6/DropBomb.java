@@ -322,7 +322,7 @@ public class DropBomb
 	
 	
 	/**
-	 * Teste s'il se trouve des cases sur � alles apres avois poser une bombe.
+	 * Teste s'il se trouve des cases sur à alles apres avois poser une bombe.
 	 * il prend une car�e au tille de la range et enleve les cases de la port�e virtuelle. puis 
 	 * s'il se trouve des cases sur il calcule les cases surs. Alors elle retourne une liste
 	 * des cases sur ou bien une liste null.
@@ -523,7 +523,7 @@ public class DropBomb
 	 * @param tile 
 	 * 		tile du hero qu'on veut trouve son chemin
 	 * @param 
-	 * 		une car�e qu'on estime pour un hero pour qu'il puisse acceder � ses cases dans le temps d'explosion d'une bombe
+	 * 		une car�e qu'on estime pour un hero pour qu'il puisse acceder à ses cases dans le temps d'explosion d'une bombe
 	 * @param safe
 	 * 		liste des cases sur. Au d�but c'est null.
 	 * @return result

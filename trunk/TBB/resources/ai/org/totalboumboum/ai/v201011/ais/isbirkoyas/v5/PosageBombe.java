@@ -20,8 +20,8 @@ public class PosageBombe {
 	}
 
 	/**
-	 * Cette méthode fait la décision de poser la bombe en mode collecte après
-	 * avoir choisi le mode s’il ya des murs destructibles elle retourne true.
+	 * Cette mÃ©thode fait la dï¿½cision de poser la bombe en mode collecte aprï¿½s
+	 * avoir choisi le mode sï¿½il ya des murs destructibles elle retourne true.
 	 * Elle prend un seul argument qui est la zone du jeu.
 	 * 
 	 * @param gameZone
@@ -53,8 +53,8 @@ public class PosageBombe {
 	}
 
 	/**
-	 * Cette méthode fait la décision de poser la bombe en mode attaque après
-	 * avoir choisi le mode s’il ya une case libre sans danger elle retourne
+	 * Cette mÃ©thode fait la dï¿½cision de poser la bombe en mode attaque aprï¿½s
+	 * avoir choisi le mode sï¿½il ya une case libre sans danger elle retourne
 	 * true. Elle prend un seul argument qui est la zone du jeu.
 	 * 
 	 * @param gameZone

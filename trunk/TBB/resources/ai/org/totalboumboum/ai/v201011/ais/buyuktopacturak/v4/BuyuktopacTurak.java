@@ -23,22 +23,22 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * >> ce texte est à remplacer par votre propre description de votre IA
+ * >> ce texte est Ã  remplacer par votre propre description de votre IA
  * >> remplacez aussi le nom de l'auteur.
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui dÃ©finit son comportement.
+ * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile Ã 
+ * dÃ©bugger, modifier, relire, comprendre, etc.
  * 
- * @author Onur Büyüktopaç & Yigit Turak
+ * @author Onur Bï¿½yï¿½ktopaï¿½ & Yigit Turak
  *
  */
 public class BuyuktopacTurak extends ArtificialIntelligence
 {	
 	/** la zone de jeu */
 	private AiZone zone = null;		
-	/** le personnage dirigé par cette IA */
+	/** le personnage dirigï¿½ par cette IA */
 	private AiHero deepPurple = null;
 	private AiAction result = new AiAction(AiActionName.NONE);
 	private Direction moveDir;
@@ -49,20 +49,20 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	private double[][] currentMatrix;
 	private boolean dropBomb=false;
 	private int maxLine, maxCol; //Col et Ligne de la case maximale
-	/** la case occupée actuellement par le personnage */
+	/** la case occupï¿½e actuellement par le personnage */
 	private AiTile currentTile = null;
-	/** la position en pixels occupée actuellement par le personnage */
+	/** la position en pixels occupï¿½e actuellement par le personnage */
 	private double currentX;
-	/** la position en pixels occupée actuellement par le personnage */
+	/** la position en pixels occupï¿½e actuellement par le personnage */
 	private double currentY;
 	ArtificialIntelligence ai=this;
 	private Astar astar;
 	private AiPath path;
 	
 	/**
-	 * Cette classe dépend essentiellement de la fonction «processAction» 
-	 * qui est étendu de la classe «ArtificialIntelligence» de l’API. 
-	 * Car dans cette méthode, on décide les actions de l’iA.
+	 * Cette classe dï¿½pend essentiellement de la fonction ï¿½processActionï¿½ 
+	 * qui est ï¿½tendu de la classe ï¿½ArtificialIntelligenceï¿½ de lï¿½API. 
+	 * Car dans cette mÃ©thode, on dï¿½cide les actions de lï¿½iA.
 	 */
 	public AiAction processAction() throws StopRequestException, NullPointerException
 	{	// avant tout : test d'interruption
@@ -70,9 +70,9 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		// premier appel : on initialise
 		
 		initBT();
-		// si le personnage controlé a été éliminé, inutile de continuer
+		// si le personnage controlï¿½ a ï¿½tï¿½ ï¿½liminï¿½, inutile de continuer
 		if(!this.deepPurple.hasEnded())
-		{	// on met à jour la position de l'ia dans la zone
+		{	// on met Ã  jour la position de l'ia dans la zone
 			updateLocation();
 			
 			if(selectMode())
@@ -126,8 +126,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * D’abord on obtient des percepts, ensuite on trouve notre héro, 
-	 * et puis on crée l’objet Elements et met à jour de notre case.  
+	 * Dï¿½abord on obtient des percepts, ensuite on trouve notre hï¿½ro, 
+	 * et puis on crÃ©e lï¿½objet Elements et met Ã  jour de notre case.  
 	 */
 	private void initBT() throws StopRequestException
 	{	
@@ -145,7 +145,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * On trouve les nombres de notre bombe et de notre bombe actuelle, 
-	 * après on choisi le mode.  
+	 * aprï¿½s on choisi le mode.  
 	 */
 	private boolean selectMode() throws StopRequestException{
 		checkInterruption();
@@ -177,8 +177,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	// EXECUTION COLLECTE FOR DROP THE BOMB		  ///////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * On évalue des critères (le nombre des murs destructibles et de bonus) 
-	 * ensuite on décide le posage de bombe pour le mode collecte. 
+	 * On ï¿½value des critï¿½res (le nombre des murs destructibles et de bonus) 
+	 * ensuite on dï¿½cide le posage de bombe pour le mode collecte. 
 	 */
 	private void executeCollect() throws StopRequestException{
 		checkInterruption();
@@ -231,8 +231,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * On évalue des critères (tuer à l’adversaire) 
-	 * ensuite on décide le posage de bombe pour le mode attaque.
+	 * On ï¿½value des critï¿½res (tuer Ã  lï¿½adversaire) 
+	 * ensuite on dï¿½cide le posage de bombe pour le mode attaque.
 	 */
 	private void executeAttack() throws StopRequestException{
 		checkInterruption();
@@ -276,8 +276,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * On utilise l’algorithme A*, on recherche le chemine vers les ennemies.
-	 * Si on trouve une chemine, on renvoie la direction de notre case à la case adversaire. 
+	 * On utilise lï¿½algorithme A*, on recherche le chemine vers les ennemies.
+	 * Si on trouve une chemine, on renvoie la direction de notre case Ã  la case adversaire. 
 	 */
 	private void AstarDirection(AiTile tile1, AiTile tile2) throws StopRequestException, NullPointerException{	
 		checkInterruption();
@@ -325,7 +325,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * On renvoie la longueur de la chemine qui est le plus court chemin 
-	 * pour aller de la case départ à la case arrêt en utilisant l’algorithme A*.
+	 * pour aller de la case dï¿½part Ã  la case arrï¿½t en utilisant lï¿½algorithme A*.
 	 * @param tile1
 	 * @param tile2
 	 * @return
@@ -455,7 +455,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		return this.currentX;
 	}
 	/**
-	 * renvoie l'ordonnée courante (en pixels)
+	 * renvoie l'ordonnï¿½e courante (en pixels)
 	 */
 	public double getCurrentY() throws StopRequestException
 	{	
@@ -478,7 +478,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	// OWN HERO					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le personnage contrôlé par cette IA
+	 * renvoie le personnage contrï¿½lï¿½ par cette IA
 	 */
 	public AiHero getdeepPurple() throws StopRequestException
 	{	
@@ -508,8 +508,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Si on ne trouve pas de chemine en utilisant l’algorithme A*, 
-	 * alors on trouve une direction pour se diriger de la case départ à la case arrêt.
+	 * Si on ne trouve pas de chemine en utilisant lï¿½algorithme A*, 
+	 * alors on trouve une direction pour se diriger de la case dï¿½part Ã  la case arrï¿½t.
 	 * @param tile1
 	 * @param tile2
 	 * @return

@@ -49,15 +49,15 @@ import org.totalboumboum.tools.calculus.CombinatoricsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale des percepts auxquels l'IA a accès.</br>
+ * reprï¿½sente la zone de jeu et tous ces constituants : cases et sprites.
+ * Il s'agit de la classe principale des percepts auxquels l'IA a accï¿½s.</br>
  * 
- * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
- * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
- * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
- * du jeu. De la même façon, les cases (AiTile) restent les mêmes, ainsi que les sprites et
- * les autres objets. Si l'IA a besoin d'une trace des états précédents du jeu, son
- * concepteur doit se charger de l'implémenter lui-même.
+ * A chaque fois que l'IA est sollicitï¿½e par le jeu pour connaï¿½tre l'action
+ * qu'elle veut effectuer, cette reprï¿½sentation est mise Ã  jour. L'IA ne reï¿½oit
+ * pas une nouvelle AiZone : l'AiZone existante est modifiï¿½e en fonction de l'ï¿½volution
+ * du jeu. De la mÃªme faï¿½on, les cases (AiTile) restent les mÃªmes, ainsi que les sprites et
+ * les autres objets. Si l'IA a besoin d'une trace des Ã©tats prï¿½cï¿½dents du jeu, son
+ * concepteur doit se charger de l'implï¿½menter lui-mÃªme.
  * 
  * @author Vincent Labatut
  *
@@ -66,11 +66,11 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public class AiZone
 {	
 	/**
-	 * construit une représentation du niveau passé en paramètre,
-	 * du point de vue du joueur passé en paramètre.
+	 * construit une reprï¿½sentation du niveau passï¿½ en paramï¿½tre,
+	 * du point de vue du joueur passï¿½ en paramï¿½tre.
 	 * 
-	 * @param level	niveau à représenter
-	 * @param player	joueur dont le point de vue est à adopter
+	 * @param level	niveau Ã  reprï¿½senter
+	 * @param player	joueur dont le point de vue est Ã  adopter
 	 */
 	public AiZone(Level level, AbstractPlayer player)
 	{	this.level = level;
@@ -84,7 +84,7 @@ public class AiZone
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour cette représentation ainsi que tous ses constituants.
+	 * met Ã  jour cette reprï¿½sentation ainsi que tous ses constituants.
 	 */
 	public void update(long elapsedTime)
 	{	updateTimes(elapsedTime);
@@ -96,44 +96,44 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis le début du jeu */
+	/** temps ï¿½coulï¿½ depuis le dï¿½but du jeu */
 	private long totalTime = 0;
-	/** temps écoulé depuis la mise à jour précédente de l'IA considérée */
+	/** temps ï¿½coulï¿½ depuis la mise Ã  jour prï¿½cï¿½dente de l'IA considï¿½rï¿½e */
 	private long elapsedTime = 0;
-	/** durée maximale de la partie */
+	/** durï¿½e maximale de la partie */
 	private long limitTime = 0;
 	
 	/**
-	 * renvoie le temps total écoulé depuis le début du jeu
+	 * renvoie le temps total ï¿½coulï¿½ depuis le dï¿½but du jeu
 	 * 
-	 * @return	le temps total écoulé exprimé en millisecondes
+	 * @return	le temps total ï¿½coulï¿½ exprimï¿½ en millisecondes
 	 */
 	public long getTotalTime()
 	{	return totalTime;		
 	}
 	
 	/**
-	 * renvoie le temps écoulé depuis la mise à jour précédente
-	 * de l'IA considérée.
+	 * renvoie le temps ï¿½coulï¿½ depuis la mise Ã  jour prï¿½cï¿½dente
+	 * de l'IA considï¿½rï¿½e.
 	 * 
-	 * @return	le temps écoulé exprimé en millisecondes
+	 * @return	le temps ï¿½coulï¿½ exprimï¿½ en millisecondes
 	 */
 	public long getElapsedTime()
 	{	return elapsedTime;		
 	}
 	
 	/**
-	 * renvoie la durée maximale de la partie
-	 * (elle peut éventuellement durer moins longtemps)
+	 * renvoie la durï¿½e maximale de la partie
+	 * (elle peut ï¿½ventuellement durer moins longtemps)
 	 * 
-	 * @return	la durée maximale de la partie
+	 * @return	la durï¿½e maximale de la partie
 	 */
 	public long getLimitTime()
 	{	return limitTime;		
 	}
 	
 	/**
-	 * met à jour les données temporelles
+	 * met Ã  jour les donnï¿½es temporelles
 	 * 
 	 * @param elapsedTime
 	 */
@@ -157,23 +157,23 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// META DATA		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** rangs des joueurs pour la manche en cours (ces rangs peuvent évoluer) */
+	/** rangs des joueurs pour la manche en cours (ces rangs peuvent ï¿½voluer) */
 	private final HashMap<AiHero,Integer> roundRanks = new HashMap<AiHero, Integer>();
-	/** rangs des joueurs pour la rencontre en cours (ces rangs n'évoluent pas pendant la manche) */
+	/** rangs des joueurs pour la rencontre en cours (ces rangs n'ï¿½voluent pas pendant la manche) */
 	private final HashMap<AiHero,Integer> matchRanks = new HashMap<AiHero, Integer>();
-	/** rangs des joueurs au classement global du jeu (ces rangs n'évoluent pas pendant la manche) */
+	/** rangs des joueurs au classement global du jeu (ces rangs n'ï¿½voluent pas pendant la manche) */
 	private final HashMap<AiHero,Integer> statsRanks = new HashMap<AiHero, Integer>();
 
 	/** 
-	 * met à jour des données qui ne sont pas directement reliées
-	 * à l'action en cours, telles que l'évolution du classement des joueurs
+	 * met Ã  jour des donnï¿½es qui ne sont pas directement reliï¿½es
+	 * Ã  l'action en cours, telles que l'ï¿½volution du classement des joueurs
 	 */
 	private void updateMeta()
 	{	List<AbstractPlayer> players = level.getLoop().getPlayers();
 		// stats
 		statsRanks.clear();
 		RankingService rankingService = GameStatistics.getRankingService();
-		// les stats n'ont pas été chargées
+		// les stats n'ont pas ï¿½tï¿½ chargï¿½es
 		if(rankingService==null)
 		{	for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
@@ -184,7 +184,7 @@ public class AiZone
 				matchRanks.put(aiHero,0);
 			}
 		}
-		// les stats ont été chargées
+		// les stats ont ï¿½tï¿½ chargï¿½es
 		else
 		{	for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
@@ -220,11 +220,11 @@ public class AiZone
 	}
 	
 	/**
-	 * Renvoie le classement du personnage passé en paramètre, pour la manche en cours.
-	 * Ce classement est susceptible d'évoluer d'ici la fin de la manche actuellement jouée, 
-	 * par exemple si ce joueur est éliminé.
+	 * Renvoie le classement du personnage passï¿½ en paramï¿½tre, pour la manche en cours.
+	 * Ce classement est susceptible d'ï¿½voluer d'ici la fin de la manche actuellement jouï¿½e, 
+	 * par exemple si ce joueur est ï¿½liminï¿½.
 	 * 
-	 * @param hero	le personnage considéré
+	 * @param hero	le personnage considï¿½rï¿½
 	 * @return	son classement dans la manche en cours
 	 */
 	int getRoundRank(AiHero hero)
@@ -232,10 +232,10 @@ public class AiZone
 	}
 	
 	/**
-	 * Renvoie le classement du personnage passé en paramètre, pour la rencontre en cours.
-	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
+	 * Renvoie le classement du personnage passï¿½ en paramï¿½tre, pour la rencontre en cours.
+	 * Ce classement n'ï¿½volue pas pendant la manche actuellement jouï¿½e.
 	 * 
-	 * @param hero	le personnage considéré
+	 * @param hero	le personnage considï¿½rï¿½
 	 * @return	son classement dans la rencontre en cours
 	 */
 	int getMatchRank(AiHero hero)
@@ -243,11 +243,11 @@ public class AiZone
 	}
 	
 	/**
-	 * Renvoie le classement du personnage passé en paramètre, dans le classement général du jeu (Glicko-2)
-	 * Ce classement n'évolue pas pendant la manche actuellement jouée.
+	 * Renvoie le classement du personnage passï¿½ en paramï¿½tre, dans le classement gï¿½nï¿½ral du jeu (Glicko-2)
+	 * Ce classement n'ï¿½volue pas pendant la manche actuellement jouï¿½e.
 	 * 
-	 * @param hero	le personnage considéré
-	 * @return	son classement général (Glicko-2)
+	 * @param hero	le personnage considï¿½rï¿½
+	 * @return	son classement gï¿½nï¿½ral (Glicko-2)
 	 */
 	int getStatsRank(AiHero hero)
 	{	return statsRanks.get(hero);
@@ -256,27 +256,27 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// LEVEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** niveau représenté par cette classe */
+	/** niveau reprï¿½sentï¿½ par cette classe */
 	private Level level;
 	
 	/////////////////////////////////////////////////////////////////
 	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** joueur contrôlé par l'IA */
+	/** joueur contrï¿½lï¿½ par l'IA */
 	private AbstractPlayer player;
 	
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice représentant la zone et tous les sprites qu'elle contient */
+	/** matrice reprï¿½sentant la zone et tous les sprites qu'elle contient */
 	private AiTile[][] matrix;
-	/** hauteur totale de la zone de jeu exprimée en cases (ie: nombre de lignes) */
+	/** hauteur totale de la zone de jeu exprimï¿½e en cases (ie: nombre de lignes) */
 	private int height;
-	/** largeur totale de la zone de jeu exprimée en cases (ie: nombre de colonnes) */
+	/** largeur totale de la zone de jeu exprimï¿½e en cases (ie: nombre de colonnes) */
 	private int width;
 	
 	/** 
-	 * initialise cette représentation de la zone en fonction du niveau passé en paramètre
+	 * initialise cette reprï¿½sentation de la zone en fonction du niveau passï¿½ en paramï¿½tre
 	 */
 	private void initMatrix()
 	{	Tile[][] m = level.getMatrix();
@@ -297,22 +297,22 @@ public class AiZone
 	}	
 	
 	/**
-	 * met à jour la matrice en fonction de l'évolution du jeu
+	 * met Ã  jour la matrice en fonction de l'ï¿½volution du jeu
 	 */
 	private void updateMatrix()
 	{	hiddenItemsCount = 0;
-		// démarque tous les sprites
+		// dï¿½marque tous les sprites
 		uncheckAll(blockMap);
 		uncheckAll(bombMap);
 		uncheckAll(fireMap);
 		uncheckAll(floorMap);
 		uncheckAll(heroMap);
 		uncheckAll(itemMap);
-		// met à jour chaque case et sprite 
+		// met Ã  jour chaque case et sprite 
 		for(int line=0;line<height;line++)
 			for(int col=0;col<width;col++)
 				matrix[line][col].update();
-		// supprime les sprites non-marqués
+		// supprime les sprites non-marquï¿½s
 		removeUnchecked(blockMap);
 		removeUnchecked(bombMap);
 		removeUnchecked(fireMap);
@@ -322,8 +322,8 @@ public class AiZone
 	}
 	
 	/** 
-	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'écran)
-	 * de la zone de jeu exprimée en cases (ie: nombre de lignes)
+	 * renvoie la hauteur totale (y compris les ï¿½ventuelles cases situï¿½es hors de l'ï¿½cran)
+	 * de la zone de jeu exprimï¿½e en cases (ie: nombre de lignes)
 	 *  
 	 *  @return	hauteur de la zone
 	 */
@@ -332,8 +332,8 @@ public class AiZone
 	}
 	
 	/** 
-	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'écran)
-	 * de la zone de jeu exprimée en cases (ie: nombre de colonnes)
+	 * renvoie la largeur totale (y compris les ï¿½ventuelles cases situï¿½es hors de l'ï¿½cran)
+	 * de la zone de jeu exprimï¿½e en cases (ie: nombre de colonnes)
 	 *  
 	 *  @return	largeur de la zone
 	 */
@@ -345,22 +345,22 @@ public class AiZone
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la case située dans la zone à la position passée en paramètre.
+	 * renvoie la case situï¿½e dans la zone Ã  la position passï¿½e en paramï¿½tre.
 	 *   
-	 *  @param	line	numéro de la ligne contenant la case à renvoyer
-	 *  @param	col	numéro de la colonne contenant la case à renvoyer
-	 *  @return	case située aux coordonnées spécifiées en paramètres
+	 *  @param	line	numï¿½ro de la ligne contenant la case Ã  renvoyer
+	 *  @param	col	numï¿½ro de la colonne contenant la case Ã  renvoyer
+	 *  @return	case situï¿½e aux coordonnÃ©es spï¿½cifiï¿½es en paramï¿½tres
 	 */
 	public AiTile getTile(int line, int col)
 	{	return matrix[line][col];
 	}
 	
 	/**
-	 * renvoie la case qui contient le pixel passé en paramètre
+	 * renvoie la case qui contient le pixel passï¿½ en paramï¿½tre
 	 *   
-	 *  @param	x	abscisse du pixel concerné
-	 *  @param	y	ordonnée du pixel concerné
-	 *  @return	case contenant le pixel situé aux coordonnées spécifiées en paramètres
+	 *  @param	x	abscisse du pixel concernï¿½
+	 *  @param	y	ordonnï¿½e du pixel concernï¿½
+	 *  @return	case contenant le pixel situï¿½ aux coordonnÃ©es spï¿½cifiï¿½es en paramï¿½tres
 	 */
 	public AiTile getTile(double x, double y)
 	{	Tile tile = level.getTile(x, y);
@@ -371,28 +371,28 @@ public class AiZone
 	}
 		
 	/**
-	 * renvoie la direction de la case target relativement à la case source.
-	 * Par exemple, la case target de coordonnées (5,5) est à droite de
-	 * la case source de coordonnées (5,6).</br>
+	 * renvoie la direction de la case target relativement Ã  la case source.
+	 * Par exemple, la case target de coordonnÃ©es (5,5) est Ã  droite de
+	 * la case source de coordonnÃ©es (5,6).</br>
 	 * 
-	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
-	 * il faut se déplacer pour aller de la case source à la case target.</br>
+	 * Cette fonction peut ï¿½tre utile quand on veut savoir dans quelle direction
+	 * il faut se dï¿½placer pour aller de la case source Ã  la case target.</br>
 	 * 
-	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
-	 * il est possible que cette méthode renvoie une direction composite,
-	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Référez-vous à 
+	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un cotï¿½ commun),
+	 * il est possible que cette mÃ©thode renvoie une direction composite,
+	 * c'est Ã  dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Rï¿½fï¿½rez-vous Ã  
 	 * la classe Direction pour plus d'informations sur ces valeurs.</br>
 	 *  
 	 * ATTENTION 2 : comme les niveaux sont circulaires, il y a toujours deux directions possibles.
-	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
-	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
-	 * RIGHT, car LEFT permet également d'atteindre la case, mais en parcourant un chemin plus long.
+	 * Cette mÃ©thode renvoie la direction du plus court chemin (sans considï¿½rer les ï¿½ventuels obstacles).
+	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le rï¿½sultat sera
+	 * RIGHT, car LEFT permet ï¿½galement d'atteindre la case, mais en parcourant un chemin plus long.
 	 * <br><t> S>>>>>>>>>>T  distance=11
 	 * <br><t>>S..........T> distance=1
 	 * 
-	 * @param source	case de référence
+	 * @param source	case de rï¿½fï¿½rence
 	 * @param target	case dont on veut connaitre la direction
-	 * @return	la direction de target par rapport à source
+	 * @return	la direction de target par rapport Ã  source
 	 */
 	public Direction getDirection(AiTile source, AiTile target)
 	{	// differences
@@ -429,7 +429,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des blocks contenues dans cette zone
-	 * (la liste peut être vide). 
+	 * (la liste peut ï¿½tre vide). 
 	 * 
 	 * @return	liste de tous les blocs contenus dans cette zone
 	 */
@@ -438,7 +438,7 @@ public class AiZone
 	}
 	
 	/**
-	 * met à jour la liste externe des blocs
+	 * met Ã  jour la liste externe des blocs
 	 */
 	private void updateBlockList()
 	{	blockList.clear();
@@ -449,9 +449,9 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du bloc passé en paramètre.
+	 * renvoie la reprï¿½sentation du bloc passï¿½ en paramï¿½tre.
 	 * 
-	 * @param block	le bloc dont on veut la représentation
+	 * @param block	le bloc dont on veut la reprï¿½sentation
 	 * @return	le AiBlock correspondant
 	 */
 	AiBlock getBlock(Block block)
@@ -460,9 +460,9 @@ public class AiZone
 	
 	/**
 	 * ajoute un bloc dans la liste de blocs de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param block	le bloc à rajouter à la liste
+	 * @param block	le bloc Ã  rajouter Ã  la liste
 	 */
 	void addBlock(AiBlock block)
 	{	blockMap.put(block.getSprite(),block);	
@@ -478,7 +478,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des bombes contenues dans cette zone 
-	 * (la liste peut être vide)
+	 * (la liste peut ï¿½tre vide)
 	 * 
 	 * @return	liste de toutes les bombes contenues dans cette zone
 	 */
@@ -487,7 +487,7 @@ public class AiZone
 	}
 	
 	/**
-	 * met à jour la liste externe des bombes
+	 * met Ã  jour la liste externe des bombes
 	 */
 	private void updateBombList()
 	{	bombList.clear();
@@ -498,9 +498,9 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation de la bombe passée en paramètre.
+	 * renvoie la reprï¿½sentation de la bombe passï¿½e en paramï¿½tre.
 	 * 
-	 * @param bomb	la bombz dont on veut la représentation
+	 * @param bomb	la bombz dont on veut la reprï¿½sentation
 	 * @return	le AiBomb correspondant
 	 */
 	AiBomb getBomb(Bomb bomb)
@@ -509,9 +509,9 @@ public class AiZone
 	
 	/**
 	 * ajoute une bombe dans la liste de bombes de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param bomb	la bombe à rajouter à la liste
+	 * @param bomb	la bombe Ã  rajouter Ã  la liste
 	 */
 	void addBomb(AiBomb bomb)
 	{	bombMap.put(bomb.getSprite(),bomb);	
@@ -527,7 +527,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des feux contenus dans cette zone 
-	 * (la liste peut être vide)
+	 * (la liste peut ï¿½tre vide)
 	 * 
 	 * @return	liste de tous les feux contenus dans cette zone
 	 */
@@ -536,7 +536,7 @@ public class AiZone
 	}
 	
 	/**
-	 * met à jour la liste externe des feux
+	 * met Ã  jour la liste externe des feux
 	 */
 	private void updateFireList()
 	{	fireList.clear();
@@ -547,9 +547,9 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du feu passé en paramètre.
+	 * renvoie la reprï¿½sentation du feu passï¿½ en paramï¿½tre.
 	 * 
-	 * @param fire	le feu dont on veut la représentation
+	 * @param fire	le feu dont on veut la reprï¿½sentation
 	 * @return	le AiFire correspondant
 	 */
 	AiFire getFire(Fire fire)
@@ -558,9 +558,9 @@ public class AiZone
 	
 	/**
 	 * ajoute un feu dans la liste de feux de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param fire	le feu à rajouter à la liste
+	 * @param fire	le feu Ã  rajouter Ã  la liste
 	 */
 	void addFire(AiFire fire)
 	{	fireMap.put(fire.getSprite(),fire);	
@@ -584,7 +584,7 @@ public class AiZone
 	}
 	
 	/**
-	 * met à jour la liste externe des sols
+	 * met Ã  jour la liste externe des sols
 	 */
 	private void updateFloorList()
 	{	floorList.clear();
@@ -595,9 +595,9 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du sol passé en paramètre.
+	 * renvoie la reprï¿½sentation du sol passï¿½ en paramï¿½tre.
 	 * 
-	 * @param floor	le sol dont on veut la représentation
+	 * @param floor	le sol dont on veut la reprï¿½sentation
 	 * @return	le AiFloor correspondant
 	 */
 	AiFloor getFloor(Floor floor)
@@ -606,9 +606,9 @@ public class AiZone
 	
 	/**
 	 * ajoute un sol dans la liste de sols de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param floor	le sol à rajouter à la liste
+	 * @param floor	le sol Ã  rajouter Ã  la liste
 	 */
 	void addFloor(AiFloor floor)
 	{	floorMap.put(floor.getSprite(),floor);	
@@ -626,7 +626,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone,
-	 * y compris ceux qui ont été éliminés. 
+	 * y compris ceux qui ont ï¿½tï¿½ ï¿½liminï¿½s. 
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
 	 */
@@ -636,7 +636,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone, 
-	 * sauf ceux qui ont été éliminés ou qui ne sont pas actuellement
+	 * sauf ceux qui ont ï¿½tï¿½ ï¿½liminï¿½s ou qui ne sont pas actuellement
 	 * en jeu.
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
@@ -646,7 +646,7 @@ public class AiZone
 	}
 	
 	/**
-	 * met à jour les listes externes des personnages
+	 * met Ã  jour les listes externes des personnages
 	 */
 	private void updateHeroLists()
 	{	heroList.clear();
@@ -660,9 +660,9 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du personnage passé en paramètre.
+	 * renvoie la reprï¿½sentation du personnage passï¿½ en paramï¿½tre.
 	 * 
-	 * @param hero	le personnage dont on veut la représentation
+	 * @param hero	le personnage dont on veut la reprï¿½sentation
 	 * @return	le AiHero correspondant
 	 */
 	AiHero getHero(Hero hero)
@@ -671,9 +671,9 @@ public class AiZone
 	
 	/**
 	 * ajoute un personnage dans la liste de personnages de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param hero	le personnage à rajouter à la liste
+	 * @param hero	le personnage Ã  rajouter Ã  la liste
 	 */
 	void addHero(AiHero hero)
 	{	heroMap.put(hero.getSprite(),hero);	
@@ -686,12 +686,12 @@ public class AiZone
 	private final HashMap<Item,AiItem> itemMap = new HashMap<Item,AiItem>();
 	/** liste externe des items contenus dans cette zone */
 	private final List<AiItem> itemList = new ArrayList<AiItem>();
-	/** nombre d'items cachés, i.e. pas encore ramassés */
+	/** nombre d'items cachï¿½s, i.e. pas encore ramassï¿½s */
 	private int hiddenItemsCount;
 	
 	/** 
 	 * renvoie la liste des items apparents contenus dans cette zone 
-	 * (la liste peut être vide)
+	 * (la liste peut ï¿½tre vide)
 	 * 
 	 * @return	liste de tous les items contenus dans cette zone
 	 */
@@ -700,7 +700,7 @@ public class AiZone
 	}
 	
 	/**
-	 * met à jour la liste externe des items
+	 * met Ã  jour la liste externe des items
 	 */
 	private void updateItemList()
 	{	itemList.clear();
@@ -711,9 +711,9 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation de l'item passé en paramètre.
+	 * renvoie la reprï¿½sentation de l'item passï¿½ en paramï¿½tre.
 	 * 
-	 * @param item	l'item dont on veut la représentation
+	 * @param item	l'item dont on veut la reprï¿½sentation
 	 * @return	le AiItem correspondant
 	 */
 	AiItem getItem(Item item)
@@ -722,31 +722,31 @@ public class AiZone
 	
 	/**
 	 * ajoute un item dans la liste d'items de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param item	l'item à rajouter à la liste
+	 * @param item	l'item Ã  rajouter Ã  la liste
 	 */
 	void addItem(AiItem item)
 	{	itemMap.put(item.getSprite(),item);	
 	}
 	
 	/**
-	 * permet de modifier le nombre d'items encore cachés dans ce niveau
+	 * permet de modifier le nombre d'items encore cachï¿½s dans ce niveau
 	 * 
-	 * @param hiddenItemsCount	le nouveau nombre d'items cachés dans le niveau
+	 * @param hiddenItemsCount	le nouveau nombre d'items cachï¿½s dans le niveau
 	 */
 	void setHiddenItemsCount(int hiddenItemsCount)
 	{	this.hiddenItemsCount = hiddenItemsCount;	
 	}
 	
 	/**
-	 * renvoie le nombre d'items cachés restant dans le niveau.
-	 * Il s'agit des items qui sont encore cachés dans des blocs, 
-	 * et qui n'ont pas été ramassés. Cette information permet de
-	 * savoir s'il est encore nécessaire de faire exploser des blocs 
+	 * renvoie le nombre d'items cachï¿½s restant dans le niveau.
+	 * Il s'agit des items qui sont encore cachï¿½s dans des blocs, 
+	 * et qui n'ont pas ï¿½tï¿½ ramassï¿½s. Cette information permet de
+	 * savoir s'il est encore nï¿½cessaire de faire exploser des blocs 
 	 * pour trouver des items, ou pas.
 	 * 
-	 * @return	le nombre d'items restant à découvrir
+	 * @return	le nombre d'items restant Ã  dï¿½couvrir
 	 */
 	public int getHiddenItemsCount()
 	{	return hiddenItemsCount;		
@@ -756,14 +756,14 @@ public class AiZone
 	// ALL SPRITES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * démarque toutes les représentations de sprites d'une liste determinée en fonction du type
-	 * T paramétrant cette méthode. Méthode appelée au début de la mise à jour :
-	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
-	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
-	 * supprimées de cette représentation.
+	 * dï¿½marque toutes les reprï¿½sentations de sprites d'une liste determinï¿½e en fonction du type
+	 * T paramï¿½trant cette mÃ©thode. mÃ©thode appelÃ©e au dï¿½but de la mise Ã  jour :
+	 * les reprï¿½sentations de sprites qui n'ont pas ï¿½tï¿½ marquï¿½es Ã  la fin de la mise Ã  jour
+	 * correspondent Ã  des sprites qui ne font plus partie du jeu, et doivent ï¿½tre
+	 * supprimï¿½es de cette reprï¿½sentation.
 	 * 
-	 * @param <T>	type de la liste à traiter
-	 * @param list	liste à traiter
+	 * @param <T>	type de la liste Ã  traiter
+	 * @param list	liste Ã  traiter
 	 */
 	private <U extends Sprite, T extends AiSprite<?>> void uncheckAll(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
@@ -773,11 +773,11 @@ public class AiZone
 		}
 	}
 	/**
-	 * méthode complémentaire de uncheckAll, et chargée de supprimer
-	 * les représentations de sprites non-marquées à la fin de la mise à jour.
+	 * mÃ©thode complï¿½mentaire de uncheckAll, et chargï¿½e de supprimer
+	 * les reprï¿½sentations de sprites non-marquï¿½es Ã  la fin de la mise Ã  jour.
 	 * 
-	 * @param <T>	type de la liste à traiter
-	 * @param list	liste à traiter
+	 * @param <T>	type de la liste Ã  traiter
+	 * @param list	liste Ã  traiter
 	 */
 	private <U extends Sprite, T extends AiSprite<?>> void removeUnchecked(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
@@ -796,7 +796,7 @@ public class AiZone
 	}
 
 	/**
-	 * met à jour toutes les listes externes de sprites
+	 * met Ã  jour toutes les listes externes de sprites
 	 */
 	private void updateSpriteLists()
 	{	updateBlockList();
@@ -810,18 +810,18 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage contrôlé par l'IA */
+	/** le personnage contrï¿½lï¿½ par l'IA */
 	private AiHero ownHero;
 
 	/** 
-	 * renvoie le personnage qui est contrôlé par l'IA
+	 * renvoie le personnage qui est contrï¿½lï¿½ par l'IA
 	 */
 	public AiHero getOwnHero()
 	{	return ownHero;	
 	}
 	
 	/**
-	 * initialise le personnage qui est contrôlé par l'IA
+	 * initialise le personnage qui est contrï¿½lï¿½ par l'IA
 	 */
 	private void initOwnHero()
 	{	PredefinedColor color = player.getColor(); 
@@ -841,13 +841,13 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Calcule la direction pour aller du sprite source au sprite target.
-	 * Le niveau est considéré comme cyclique, i.e. le bord de droite est 
-	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
-	 * Cette méthode considère la direction correspondant à la distance la plus
-	 * courte (qui peut correspondre à un chemin passant par les bords du niveau)
-	 * La direction peut être NONE si jamais les deux sprites sont au même endroit
+	 * Le niveau est considï¿½rï¿½ comme cyclique, i.e. le bord de droite est 
+	 * reliï¿½ au bord de gauche, et le bord du haut est reliï¿½ au bord du bas.
+	 * Cette mÃ©thode considï¿½re la direction correspondant Ã  la distance la plus
+	 * courte (qui peut correspondre Ã  un chemin passant par les bords du niveau)
+	 * La direction peut ï¿½tre NONE si jamais les deux sprites sont au mÃªme endroit
 	 * 
-	 * @param source	sprite de départ
+	 * @param source	sprite de dï¿½part
 	 * @param target	sprite de destination
 	 * @return	la direction pour aller de source vers target
 	 */
@@ -866,14 +866,14 @@ public class AiZone
 	}
 	
 	/**
-	 * Calcule la direction pour aller du sprite à la case passés en paramètres.
-	 * Le niveau est considéré comme cyclique, i.e. le bord de droite est 
-	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
-	 * Cette méthode considère la direction correspondant à la distance la plus
-	 * courte (qui peut correspondre à un chemin passant par les bords du niveau)
-	 * La direction peut être NONE si jamais les deux sprites sont au même endroit
+	 * Calcule la direction pour aller du sprite Ã  la case passï¿½s en paramï¿½tres.
+	 * Le niveau est considï¿½rï¿½ comme cyclique, i.e. le bord de droite est 
+	 * reliï¿½ au bord de gauche, et le bord du haut est reliï¿½ au bord du bas.
+	 * Cette mÃ©thode considï¿½re la direction correspondant Ã  la distance la plus
+	 * courte (qui peut correspondre Ã  un chemin passant par les bords du niveau)
+	 * La direction peut ï¿½tre NONE si jamais les deux sprites sont au mÃªme endroit
 	 * 
-	 * @param sprite	sprite en déplacement
+	 * @param sprite	sprite en dÃ©placement
 	 * @param tile	case de destination
 	 * @return	la direction pour aller du sprite vers la case
 	 */
@@ -892,15 +892,15 @@ public class AiZone
 	}
 	
 	/**
-	 * Calcule la direction pour aller de la position (x1,y1) à la position (x2,y2)
-	 * Le niveau est considéré comme cyclique, i.e. le bord de droite est 
-	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
-	 * Cette méthode considère la direction correspondant à la distance la plus
-	 * courte (qui peut correspondre à un chemin passant par les bords du niveau).
-	 * La direction peut être NONE si jamais les deux positions sont équivalentes.
+	 * Calcule la direction pour aller de la position (x1,y1) Ã  la position (x2,y2)
+	 * Le niveau est considï¿½rï¿½ comme cyclique, i.e. le bord de droite est 
+	 * reliï¿½ au bord de gauche, et le bord du haut est reliï¿½ au bord du bas.
+	 * Cette mÃ©thode considï¿½re la direction correspondant Ã  la distance la plus
+	 * courte (qui peut correspondre Ã  un chemin passant par les bords du niveau).
+	 * La direction peut ï¿½tre NONE si jamais les deux positions sont ï¿½quivalentes.
 	 * 
-	 * @param x1	première position horizontale en pixels
-	 * @param y1	première position verticale en pixels
+	 * @param x1	premiÃ¨re position horizontale en pixels
+	 * @param y1	premiÃ¨re position verticale en pixels
 	 * @param x2	seconde position horizontale en pixels
 	 * @param y2	seconde position verticale en pixels
 	 * @return	la direction correspondant au chemin le plus court
@@ -920,19 +920,19 @@ public class AiZone
 	// TILE DISTANCES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la distance de Manhattan entre les cases de coordonnées
-	 * (line1,col1) et (line2,col2), exprimée en cases. Attention, le 
-	 * niveau est considéré comme cyclique, 
-	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
-	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
-	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * renvoie la distance de Manhattan entre les cases de coordonnÃ©es
+	 * (line1,col1) et (line2,col2), exprimï¿½e en cases. Attention, le 
+	 * niveau est considï¿½rï¿½ comme cyclique, 
+	 * i.e. le bord de droite est reliï¿½ au bord de gauche, et le bord du haut 
+	 * est reliï¿½ au bord du bas. Cette mÃ©thode considï¿½re la distance dans la direction
+	 * indiquï¿½e par le paramï¿½tre direction, qui peut correspondre Ã  un chemin 
 	 * passant par les bords du niveau.
 	 * 
-	 * @param line1	ligne de la première case
-	 * @param col1	colonne de la première case
+	 * @param line1	ligne de la premiÃ¨re case
+	 * @param col1	colonne de la premiÃ¨re case
 	 * @param line2	ligne de la seconde case
 	 * @param col2	colonne de la seconde case
-	 * @param direction	direction à considérer
+	 * @param direction	direction Ã  considï¿½rer
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
 	{	int result = level.getTileDistance(line1,col1,line2,col2,direction);
@@ -940,15 +940,15 @@ public class AiZone
 	}
 
 	/**
-	 * renvoie la distance de Manhattan entre les cases de coordonnées
-	 * (line1,col1) et (line2,col2), exprimée en cases. 
-	 * Attention, le niveau est considéré comme cyclique, 
-	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
-	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
-	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * renvoie la distance de Manhattan entre les cases de coordonnÃ©es
+	 * (line1,col1) et (line2,col2), exprimï¿½e en cases. 
+	 * Attention, le niveau est considï¿½rï¿½ comme cyclique, 
+	 * i.e. le bord de droite est reliï¿½ au bord de gauche, et le bord du haut 
+	 * est reliï¿½ au bord du bas. Cette mÃ©thode considï¿½re la distance la plus courte
+	 * (qui peut correspondre Ã  un chemin passant par les bords du niveau)
 	 * 
-	 * @param line1	ligne de la première case
-	 * @param col1	colonne de la première case
+	 * @param line1	ligne de la premiÃ¨re case
+	 * @param col1	colonne de la premiÃ¨re case
 	 * @param line2	ligne de la seconde case
 	 * @param col2	colonne de la seconde case
 	 */
@@ -958,13 +958,13 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
-	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
-	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
-	 * Cette méthode considère la distance la plus courte
-	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * renvoie la distance de Manhattan entre les deux cases passï¿½es en paramï¿½tres,
+	 * exprimï¿½e en cases. Attention, le niveau est considï¿½rï¿½ comme cyclique, i.e. le bord de droite 
+	 * est reliï¿½ au bord de gauche, et le bord du haut est reliï¿½ au bord du bas. 
+	 * Cette mÃ©thode considï¿½re la distance la plus courte
+	 * (qui peut correspondre Ã  un chemin passant par les bords du niveau)
 	 * 
-	 * @param sprite1	première case
+	 * @param sprite1	premiÃ¨re case
 	 * @param sprite2	seconde case
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2)
@@ -973,16 +973,16 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
-	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
-	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
-	 * Cette méthode considère la distance dans la direction
-	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * renvoie la distance de Manhattan entre les deux cases passï¿½es en paramï¿½tres,
+	 * exprimï¿½e en cases. Attention, le niveau est considï¿½rï¿½ comme cyclique, i.e. le bord de droite 
+	 * est reliï¿½ au bord de gauche, et le bord du haut est reliï¿½ au bord du bas. 
+	 * Cette mÃ©thode considï¿½re la distance dans la direction
+	 * indiquï¿½e par le paramï¿½tre direction, qui peut correspondre Ã  un chemin 
 	 * passant par les bords du niveau.
 	 * 
-	 * @param sprite1	première case
+	 * @param sprite1	premiÃ¨re case
 	 * @param sprite2	seconde case
-	 * @param direction	direction à considérer
+	 * @param direction	direction Ã  considï¿½rer
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2, Direction direction)
 	{	int line1 = tile1.getLine();
@@ -994,11 +994,11 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
-	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
-	 * Cette méthode considère la distance la plus courte
-	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * renvoie la distance de Manhattan entre les deux sprites passï¿½s en paramï¿½tres,
+	 * exprimï¿½e en cases. Attention, le niveau est considï¿½rï¿½ comme cyclique, i.e. le bord de droite 
+	 * est reliï¿½ au bord de gauche, et le bord du haut est reliï¿½ au bord du bas. 
+	 * Cette mÃ©thode considï¿½re la distance la plus courte
+	 * (qui peut correspondre Ã  un chemin passant par les bords du niveau)
 	 * 
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
@@ -1009,16 +1009,16 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
-	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
-	 * Cette méthode considère la distance dans la direction
-	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * renvoie la distance de Manhattan entre les deux sprites passï¿½s en paramï¿½tres,
+	 * exprimï¿½e en cases. Attention, le niveau est considï¿½rï¿½ comme cyclique, i.e. le bord de droite 
+	 * est reliï¿½ au bord de gauche, et le bord du haut est reliï¿½ au bord du bas. 
+	 * Cette mÃ©thode considï¿½re la distance dans la direction
+	 * indiquï¿½e par le paramï¿½tre direction, qui peut correspondre Ã  un chemin 
 	 * passant par les bords du niveau.
 	 * 
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
-	 * @param direction	direction à considérer
+	 * @param direction	direction Ã  considï¿½rer
 	 */
 	public int getTileDistance(AiSprite<?> sprite1, AiSprite<?> sprite2, Direction direction)
 	{	AiTile tile1 = sprite1.getTile();
@@ -1031,16 +1031,16 @@ public class AiZone
 	// PIXEL DISTANCES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la distance de Manhattan entre les points de coordonnées
-	 * (x1,y1) et (x2,y2), exprimée en pixels. Attention, le niveau est considéré comme cyclique, 
-	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
-	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
-	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * renvoie la distance de Manhattan entre les points de coordonnÃ©es
+	 * (x1,y1) et (x2,y2), exprimï¿½e en pixels. Attention, le niveau est considï¿½rï¿½ comme cyclique, 
+	 * i.e. le bord de droite est reliï¿½ au bord de gauche, et le bord du haut 
+	 * est reliï¿½ au bord du bas. Cette mÃ©thode considï¿½re la distance la plus courte
+	 * (qui peut correspondre Ã  un chemin passant par les bords du niveau)
 	 * 
 	 * @param x1	abscisse du premier point
-	 * @param y1	ordonnée du premier point
+	 * @param y1	ordonnï¿½e du premier point
 	 * @param x2	abscisse du second point
-	 * @param y2	ordonnée du second point
+	 * @param y2	ordonnï¿½e du second point
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
 	{	double result = level.getPixelDistance(x1,y1,x2,y2);
@@ -1050,18 +1050,18 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les points de coordonnées
-	 * (x1,y1) et (x2,y2), exprimée en pixels. Attention, le niveau est considéré comme cyclique, 
-	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
-	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
-	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * renvoie la distance de Manhattan entre les points de coordonnÃ©es
+	 * (x1,y1) et (x2,y2), exprimï¿½e en pixels. Attention, le niveau est considï¿½rï¿½ comme cyclique, 
+	 * i.e. le bord de droite est reliï¿½ au bord de gauche, et le bord du haut 
+	 * est reliï¿½ au bord du bas. Cette mÃ©thode considï¿½re la distance dans la direction
+	 * indiquï¿½e par le paramï¿½tre direction, qui peut correspondre Ã  un chemin 
 	 * passant par les bords du niveau.
 	 * 
 	 * @param x1	abscisse du premier point
-	 * @param y1	ordonnée du premier point
+	 * @param y1	ordonnï¿½e du premier point
 	 * @param x2	abscisse du second point
-	 * @param y2	ordonnée du second point
-	 * @param direction	direction à considérer
+	 * @param y2	ordonnï¿½e du second point
+	 * @param direction	direction Ã  considï¿½rer
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
 	{	double result = level.getPixelDistance(x1,y1,x2,y2,direction);
@@ -1071,11 +1071,11 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
-	 * exprimée en pixels. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
-	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
-	 * Cette méthode considère la distance la plus courte
-	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * renvoie la distance de Manhattan entre les deux sprites passï¿½s en paramï¿½tres,
+	 * exprimï¿½e en pixels. Attention, le niveau est considï¿½rï¿½ comme cyclique, i.e. le bord de droite 
+	 * est reliï¿½ au bord de gauche, et le bord du haut est reliï¿½ au bord du bas. 
+	 * Cette mÃ©thode considï¿½re la distance la plus courte
+	 * (qui peut correspondre Ã  un chemin passant par les bords du niveau)
 	 * 
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
@@ -1086,16 +1086,16 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres, exprimée en pixels. 
-	 * Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
-	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
-	 * Cette méthode considère la distance dans la direction indiquée par le 
-	 * paramètre direction, qui peut correspondre à un chemin passant par 
+	 * renvoie la distance de Manhattan entre les deux sprites passï¿½s en paramï¿½tres, exprimï¿½e en pixels. 
+	 * Attention, le niveau est considï¿½rï¿½ comme cyclique, i.e. le bord de droite 
+	 * est reliï¿½ au bord de gauche, et le bord du haut est reliï¿½ au bord du bas. 
+	 * Cette mÃ©thode considï¿½re la distance dans la direction indiquï¿½e par le 
+	 * paramï¿½tre direction, qui peut correspondre Ã  un chemin passant par 
 	 * les bords du niveau.
 	 * 
 	 * @param sprite1	premier sprite
 	 * @param sprite2	second sprite
-	 * @param direction	direction à considérer
+	 * @param direction	direction Ã  considï¿½rer
 	 */
 	public double getPixelDistance(AiSprite<?> sprite1, AiSprite<?> sprite2, Direction direction)
 	{	double x1 = sprite1.getPosX();
@@ -1120,90 +1120,90 @@ public class AiZone
 	// COORDINATE NORMALIZING	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * prend n'importe quelles coordonnées exprimées en pixels et les normalise
-	 * de manière à ce qu'elles appartiennent à la zone de jeu. Si les coordonnées
-	 * désignent une position située en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau pour déterminer une position
-	 * équivalente située dans le niveau.
+	 * prend n'importe quelles coordonnÃ©es exprimï¿½es en pixels et les normalise
+	 * de maniï¿½re Ã  ce qu'elles appartiennent Ã  la zone de jeu. Si les coordonnÃ©es
+	 * dï¿½signent une position situï¿½e en dehors de la zone de jeu, cette mÃ©thode
+	 * utilise la propriï¿½tï¿½ cyclique du niveau pour dï¿½terminer une position
+	 * ï¿½quivalente situï¿½e dans le niveau.
 	 * 
 	 * @param x	abscisse
-	 * @param y	ordonnée
-	 * @return	un tableau contenant les versions normalisées de x et y
+	 * @param y	ordonnï¿½e
+	 * @return	un tableau contenant les versions normalisï¿½es de x et y
 	 */
 	public double[] normalizePosition(double x, double y)
 	{	return level.normalizePosition(x, y);
 	}
 
 	/**
-	 * prend n'importe quelle abscisse exprimée en pixels et la normalise
-	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
-	 * désigne une position située en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le côté gauche et le
-	 * côté droit sont reliés) pour déterminer une position
-	 * équivalente située dans le niveau.
+	 * prend n'importe quelle abscisse exprimï¿½e en pixels et la normalise
+	 * de maniï¿½re Ã  ce qu'elle appartienne Ã  la zone de jeu. Si la coordonnÃ©e
+	 * dï¿½signe une position situï¿½e en dehors de la zone de jeu, cette mÃ©thode
+	 * utilise la propriï¿½tï¿½ cyclique du niveau (i.e. le cï¿½tï¿½ gauche et le
+	 * cï¿½tï¿½ droit sont reliï¿½s) pour dï¿½terminer une position
+	 * ï¿½quivalente situï¿½e dans le niveau.
 	 * 
 	 * @param x	abscisse
-	 * @return	la version normalisée de x
+	 * @return	la version normalisï¿½e de x
 	 */
 	public double normalizePositionX(double x)
 	{	return level.normalizePositionX(x);
 	}
 	
 	/**
-	 * prend n'importe quelle ordonnée exprimée en pixels et la normalise
-	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
-	 * désigne une position située en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le côté haut et le
-	 * côté bas sont reliés) pour déterminer une position
-	 * équivalente située dans le niveau.
+	 * prend n'importe quelle ordonnï¿½e exprimï¿½e en pixels et la normalise
+	 * de maniï¿½re Ã  ce qu'elle appartienne Ã  la zone de jeu. Si la coordonnÃ©e
+	 * dï¿½signe une position situï¿½e en dehors de la zone de jeu, cette mÃ©thode
+	 * utilise la propriï¿½tï¿½ cyclique du niveau (i.e. le cï¿½tï¿½ haut et le
+	 * cï¿½tï¿½ bas sont reliï¿½s) pour dï¿½terminer une position
+	 * ï¿½quivalente situï¿½e dans le niveau.
 	 * 
-	 * @param y	ordonnée
-	 * @return	la version normalisée de y
+	 * @param y	ordonnï¿½e
+	 * @return	la version normalisï¿½e de y
 	 */
 	public double normalizePositionY(double y)
 	{	return level.normalizePositionY(y);
 	}
 	
 	/**
-	 * prend n'importe quelles coordonnées exprimées en cases et les normalise
-	 * de manière à ce qu'elles appartiennent à la zone de jeu. Si les coordonnées
-	 * désignent une position située en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau pour déterminer une position
-	 * équivalente située dans le niveau.
+	 * prend n'importe quelles coordonnÃ©es exprimï¿½es en cases et les normalise
+	 * de maniï¿½re Ã  ce qu'elles appartiennent Ã  la zone de jeu. Si les coordonnÃ©es
+	 * dï¿½signent une position situï¿½e en dehors de la zone de jeu, cette mÃ©thode
+	 * utilise la propriï¿½tï¿½ cyclique du niveau pour dï¿½terminer une position
+	 * ï¿½quivalente situï¿½e dans le niveau.
 	 * 
 	 * @param line	ligne de la case
 	 * @param col	colonne de la case
-	 * @return	un tableau contenant les versions normalisées de line et col
+	 * @return	un tableau contenant les versions normalisï¿½es de line et col
 	 */
 	public int[] normalizePosition(int line, int col)
 	{	return level.normalizePosition(line, col);
 	}
 
 	/**
-	 * prend n'importe quelle abscisse exprimée en cases et la normalise
-	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
-	 * désigne une position située en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le côté gauche et le
-	 * côté droit sont reliés) pour déterminer une position
-	 * équivalente située dans le niveau.
+	 * prend n'importe quelle abscisse exprimï¿½e en cases et la normalise
+	 * de maniï¿½re Ã  ce qu'elle appartienne Ã  la zone de jeu. Si la coordonnÃ©e
+	 * dï¿½signe une position situï¿½e en dehors de la zone de jeu, cette mÃ©thode
+	 * utilise la propriï¿½tï¿½ cyclique du niveau (i.e. le cï¿½tï¿½ gauche et le
+	 * cï¿½tï¿½ droit sont reliï¿½s) pour dï¿½terminer une position
+	 * ï¿½quivalente situï¿½e dans le niveau.
 	 * 
 	 * @param col	colonne de la case
-	 * @return	la version normalisée de col
+	 * @return	la version normalisï¿½e de col
 	 */
 	public int normalizePositionCol(int col)
 	{	return level.normalizePositionCol(col);
 	}
 
 	/**
-	 * prend n'importe quelle ordonnée exprimée en cases et la normalise
-	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
-	 * désigne une position située en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le côté haut et le
-	 * côté bas sont reliés) pour déterminer une position
-	 * équivalente située dans le niveau.
+	 * prend n'importe quelle ordonnï¿½e exprimï¿½e en cases et la normalise
+	 * de maniï¿½re Ã  ce qu'elle appartienne Ã  la zone de jeu. Si la coordonnÃ©e
+	 * dï¿½signe une position situï¿½e en dehors de la zone de jeu, cette mÃ©thode
+	 * utilise la propriï¿½tï¿½ cyclique du niveau (i.e. le cï¿½tï¿½ haut et le
+	 * cï¿½tï¿½ bas sont reliï¿½s) pour dï¿½terminer une position
+	 * ï¿½quivalente situï¿½e dans le niveau.
 	 * 
 	 * @param line	ligne de la case
-	 * @return	la version normalisée de line
+	 * @return	la version normalisï¿½e de line
 	 */
 	public int normalizePositionLine(int line)
 	{	return level.normalizePositionLine(line);
@@ -1213,12 +1213,12 @@ public class AiZone
 	// SAME PIXEL POSITION		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * teste si les deux sprites passés en paramètres occupent la
-	 * même position au pixel près
+	 * teste si les deux sprites passï¿½s en paramï¿½tres occupent la
+	 * mÃªme position au pixel prÃ¨s
 	 * 
 	 * @param sprite1	le premier sprite
 	 * @param sprite2	le second sprite
-	 * @return	vrai ssi les deux sprites sont au même endroit
+	 * @return	vrai ssi les deux sprites sont au mÃªme endroit
 	 */
 	public boolean hasSamePixelPosition(AiSprite<?> sprite1, AiSprite<?> sprite2)
 	{	boolean result;
@@ -1231,8 +1231,8 @@ public class AiZone
 	}
 	
 	/**
-	 * teste si le sprite passé en paramètre occupent le
-	 * centre de la case passée en paramètre, au pixel près
+	 * teste si le sprite passï¿½ en paramï¿½tre occupent le
+	 * centre de la case passï¿½e en paramï¿½tre, au pixel prÃ¨s
 	 * 
 	 * @param sprite	le sprite
 	 * @param tile	la case
@@ -1249,14 +1249,14 @@ public class AiZone
 	}
 
 	/**
-	 * teste si les deux points passés en paramètres occupent la
-	 * même position au pixel près
+	 * teste si les deux points passï¿½s en paramï¿½tres occupent la
+	 * mÃªme position au pixel prÃ¨s
 	 * 
-	 * @param x1	l'abscisse de la première position
-	 * @param y1	l'ordonnée de la première position
+	 * @param x1	l'abscisse de la premiÃ¨re position
+	 * @param y1	l'ordonnï¿½e de la premiÃ¨re position
 	 * @param x2	l'abscisse de la seconde position
-	 * @param y21	l'ordonnée de la seconde position
-	 * @return	vrai ssi les deux positions sont équivalentes au pixel près
+	 * @param y21	l'ordonnï¿½e de la seconde position
+	 * @return	vrai ssi les deux positions sont ï¿½quivalentes au pixel prÃ¨s
 	 */
 	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2)
 	{	boolean result = true;	
@@ -1284,7 +1284,7 @@ public class AiZone
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
+	 * termine proprement cette reprï¿½sentation (une fois que l'IA n'en a plus besoin).
 	 */
 	public void finish()
 	{	// matrix

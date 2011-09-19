@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v200910.adapter.AiManager;
 import org.totalboumboum.ai.v200910.ais.adatepeozbek.v5c.AdatepeOzbek;
 
 /**
- * Classe utilisée par le moteur du jeu pour retrouver les IA
+ * Classe utilisÃ©e par le moteur du jeu pour retrouver les IA
  * 
  * @author Vincent Labatut
  *
@@ -33,7 +33,7 @@ import org.totalboumboum.ai.v200910.ais.adatepeozbek.v5c.AdatepeOzbek;
 public class AiMain extends AiManager
 {
 	/**
-	 * Constructeur utilisé pour créer une instance de l'IA
+	 * Constructeur utilisÃ© pour crÃ©er une instance de l'IA
 	 */
 	public AiMain()
 	{	super(new AdatepeOzbek());

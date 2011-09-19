@@ -49,7 +49,7 @@ public class KecerYaman extends ArtificialIntelligence {
 	
 	/********************************************************************************/
 	
-	/** indicateur de première invocation (pour la compatibilité */
+	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
 	private boolean firstTime = true;
 
 	@Override

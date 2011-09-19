@@ -150,9 +150,9 @@ public class Action {
 	
 	/**
 	 * cette methode controle le chemin pour voir s'il y en a des tiles dangeraux, 
-	 * s'il les trouve alors il va nous dire "réfléchissez encore une fois avant y aller"
+	 * s'il les trouve alors il va nous dire "rï¿½flï¿½chissez encore une fois avant y aller"
 	 * 
-	 * @param pathCible le chemin à controller
+	 * @param pathCible le chemin Ã  controller
 	 * @return la resultat du control (true ou false)
 	 * @throws StopRequestException
 	 */
@@ -261,7 +261,7 @@ public class Action {
 	
 	
 	/**
-	 * methode affichante la matriceTotale en console et en zone de jeu à la fois
+	 * methode affichante la matriceTotale en console et en zone de jeu Ã  la fois
 	 * 
 	 * @param matriceTotal
 	 * @throws StopRequestException

@@ -17,7 +17,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 
 /**
  * Class qui determine de poser bombe
- * @author G.Lara Ozdoker && Sercan Özen
+ * @author G.Lara Ozdoker && Sercan ï¿½zen
  *
  */
 public class TileControleur {
@@ -58,7 +58,7 @@ public class TileControleur {
 	 */
 	public void placerBombe(AiTile placeABombe){
 		if(placeABombe!=null){
-			//on place le bombe où on pense.			
+			//on place le bombe oÃ¹ on pense.			
 			matriceImaginaire[placeABombe.getLine()][placeABombe.getCol()]=-1;
 	
 			//on prend le range de notre bombe
@@ -68,7 +68,7 @@ public class TileControleur {
 			int bombX=placeABombe.getCol();
 			int bombY=placeABombe.getLine();
 			//On precise le domaine de bombe avec 4 for loop
-			//on a utilisé 4 loop parceque on ne veut pas de tomber dans une exception (IndexBoundException par exemple.)
+			//on a utilisÃ© 4 loop parceque on ne veut pas de tomber dans une exception (IndexBoundException par exemple.)
 			
 			for(int i=bombY+1;i<=bombY+bombeFire;i++){
 				if(i>matriceImaginaire.length-1)
@@ -118,7 +118,7 @@ public class TileControleur {
 	public void tilePossibleArrive(AiTile debut,List<AiTile> tilesPossible,int[][] matrice) {
 
 		for(int i=0;i<debut.getNeighbors().size();i++){		
-			//Yýkýlabilen duvara karsýlýk geliyorsa Salla
+			//Yï¿½kï¿½labilen duvara karsï¿½lï¿½k geliyorsa Salla
 			if(matrice[debut.getNeighbors().get(i).getLine()][debut.getNeighbors().get(i).getCol()]==SECURE){
 				if(!(tilesPossible.contains(debut.getNeighbors().get(i)))){
 					tilesPossible.add(debut.getNeighbors().get(i));
@@ -144,14 +144,14 @@ public class TileControleur {
 		for(int i=0;i<debut.getNeighbors().size();i++){	
 			try {
 				IA.checkInterruption();
-				//eklenen kýsým
+				//eklenen kï¿½sï¿½m
 				if(matrice[debut.getNeighbors().get(i).getLine()][debut.getNeighbors().get(i).getCol()]==SCOPE){
 					if(!(scopes.contains(debut.getNeighbors().get(i)))){
 						scopes.add(debut.getNeighbors().get(i));
 						tilePossibleArriveAvecRisk(debut.getNeighbors().get(i),tilesPossible,scopes,matrice);
 					}
 				}
-				//Yýkýlabilen duvara karsýlýk geliyorsa Salla
+				//Yï¿½kï¿½labilen duvara karsï¿½lï¿½k geliyorsa Salla
 				if(matrice[debut.getNeighbors().get(i).getLine()][debut.getNeighbors().get(i).getCol()]==SECURE){
 					if(!(tilesPossible.contains(debut.getNeighbors().get(i)))){
 						tilesPossible.add(debut.getNeighbors().get(i));
@@ -183,7 +183,7 @@ public class TileControleur {
 	 */
 	public void tierLesTilesParDistanceEtAccebilite(List<AiTile> secureTiles) {
 		////////////////////////////////////
-		//NOT:burada yoldaki diðer bombalarý ateþleri felan katmadýn!
+		//NOT:burada yoldaki diï¿½er bombalarï¿½ ateï¿½leri felan katmadï¿½n!
 		//////////////////////////////////////
 		//premierement on remove les cible qu'on ne peut pas arriver
 		//Alors on les tie par distance
@@ -417,9 +417,9 @@ public class TileControleur {
 			return -1;
 		else{
 			temp=calculateShortestPath(hero,hero.getTile(),espacePourFuir);
-			//Bu deðeri alamadýgýmýz için sabit
+			//Bu deï¿½eri alamadï¿½gï¿½mï¿½z iï¿½in sabit
 			double durationBombe=2400;
-			//System.out.println("Bomba zamaný"+hero.getBombDuration());
+			//System.out.println("Bomba zamanï¿½"+hero.getBombDuration());
 			if(durationBombe>temp.getDuration(hero)){
 				return 0;	
 			}else{
@@ -430,7 +430,7 @@ public class TileControleur {
 	}
 	
 	/**
-	 * Methode qui nous dit la decision la posage bombe à un tile
+	 * Methode qui nous dit la decision la posage bombe Ã  un tile
 	 * @param placeABombe
 	 * @return la decision
 	 */
@@ -444,11 +444,11 @@ public class TileControleur {
 		try {
 			tierLesTilesParDistanceEtAccebilite(cibleSecure, placeABombe);
 			if(possibleDeFuir(cible, placeABombe)>=0){
-				//oui,secure à poser a bombe dans le tile "placeABombe"
-				//System.out.println("bomba koyup kaçabiliriz");
+				//oui,secure Ã  poser a bombe dans le tile "placeABombe"
+				//System.out.println("bomba koyup kaï¿½abiliriz");
 				result=true;
 			}else{
-				//System.out.println("bomba koymayalým cunku guvenli yer yok");
+				//System.out.println("bomba koymayalï¿½m cunku guvenli yer yok");
 				//non,on doit faire une autre chose
 				result=false;
 			}

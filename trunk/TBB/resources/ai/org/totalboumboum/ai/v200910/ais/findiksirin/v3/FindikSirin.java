@@ -11,7 +11,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 public class FindikSirin extends ArtificialIntelligence
 {		
-	/** méthode appelée par le moteur du jeu pour obtenir une action de notre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de notre IA */
 	public AiAction processAction() throws StopRequestException
 	{	
 		checkInterruption();

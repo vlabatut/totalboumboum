@@ -32,7 +32,7 @@ public class AttackMatrix{
 	public Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 	
 	/**
-	 * C’est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
+	 * Cï¿½est le constructeur qui obtient des percepts dans la classe BuyuktopacTurak.
 	 * @param bt
 	 * @throws StopRequestException
 	 */
@@ -43,7 +43,7 @@ public class AttackMatrix{
 		init();
 	}
 	/**
-	 * On obtient notre héro, la dimension de la zone et crée les objets listes.
+	 * On obtient notre hï¿½ro, la dimension de la zone et crÃ©e les objets listes.
 	 * @throws StopRequestException
 	 */
 	private void init()throws StopRequestException{
@@ -65,7 +65,7 @@ public class AttackMatrix{
 	}
 	
 	/**
-	 * On crée et remplit la matrice. 
+	 * On crÃ©e et remplit la matrice. 
 	 * @throws StopRequestException
 	 */
 	public void createMatrix()throws StopRequestException{
@@ -89,7 +89,7 @@ public class AttackMatrix{
 	/**
 	 * on trouve tous les murs et puis on remplit les cases des entours 
 	 * des murs avec le constant DESTRUCTIBLE ou INDESTRUCTIBLE. 
-	 * On utilise l’algorithme A* et la méthode isRunnable().
+	 * On utilise lï¿½algorithme A* et la mÃ©thode isRunnable().
 	 * @throws StopRequestException
 	 */
 	private void putWalls() throws StopRequestException{
@@ -136,7 +136,7 @@ public class AttackMatrix{
 	}
 	
 	/**
-	 * on trouve tous les bonus et puis on les remplit avec le constant BONUS. On utilise l’algorithme A*.
+	 * on trouve tous les bonus et puis on les remplit avec le constant BONUS. On utilise lï¿½algorithme A*.
 	 * @throws StopRequestException
 	 */
 	private void putBonus() throws StopRequestException{
@@ -158,7 +158,7 @@ public class AttackMatrix{
 	/**
 	 * on trouve toutes les adversaires et puis 
 	 * on remplit les cases des entours des ennemies avec le constant RIVALATTACK. 
-	 * On utilise l’algorithme A*.
+	 * On utilise lï¿½algorithme A*.
 	 * @throws StopRequestException
 	 */
 	private void putHero() throws StopRequestException{
@@ -267,7 +267,7 @@ public class AttackMatrix{
 	}
 
 	/**
-	 * on renvoie la plus proche distance à l’iA des adversaires.
+	 * on renvoie la plus proche distance Ã  lï¿½iA des adversaires.
 	 * @param hero
 	 * @param tile
 	 * @return

@@ -244,7 +244,7 @@ public class OptionsMenu extends InnerMenuPanel
 			}
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GAME))
-		{	// TODO certainement à compléter
+		{	// TODO certainement Ã  complÃ©ter
 			GameSplitPanel gamePanel = new GameSplitPanel(container.getMenuContainer(),container);
 			replaceWith(gamePanel);
 	    }

@@ -29,12 +29,12 @@ public class KantarciTaskin extends ArtificialIntelligence
 	 * */
 
 	/***
-	 * Variable qui determine la direction du deplacement et calculé par la méthode action.
+	 * Variable qui determine la direction du deplacement et calculÃ© par la mÃ©thode action.
 	 */
 	Direction direction = Direction.NONE;
 	
 	/**
-	 * Calcule l'action pour un instant donné
+	 * Calcule l'action pour un instant donnï¿½
 	 * @return restult
 	 * 		action de l'hero dans cette iteration
 	 * */	

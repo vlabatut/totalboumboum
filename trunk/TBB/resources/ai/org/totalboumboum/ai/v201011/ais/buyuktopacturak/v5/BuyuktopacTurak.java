@@ -23,15 +23,15 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * >> ce texte est à remplacer par votre propre description de votre IA
+ * >> ce texte est Ã  remplacer par votre propre description de votre IA
  * >> remplacez aussi le nom de l'auteur.
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui dÃ©finit son comportement.
+ * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile Ã 
+ * dÃ©bugger, modifier, relire, comprendre, etc.
  * 
- * @author Onur Büyüktopaç & Yigit Turak
+ * @author Onur Bï¿½yï¿½ktopaï¿½ & Yigit Turak
  *
  */
 public class BuyuktopacTurak extends ArtificialIntelligence
@@ -51,9 +51,9 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	ArtificialIntelligence ai=this;
 	
 	/**
-	 * Cette classe dépend essentiellement de la fonction «processAction» 
-	 * qui est étendu de la classe «ArtificialIntelligence» de l’API. 
-	 * Car dans cette méthode, on décide les actions de l’iA.
+	 * Cette classe dï¿½pend essentiellement de la fonction ï¿½processActionï¿½ 
+	 * qui est ï¿½tendu de la classe ï¿½ArtificialIntelligenceï¿½ de lï¿½API. 
+	 * Car dans cette mÃ©thode, on dï¿½cide les actions de lï¿½iA.
 	 * si notre Ai existe dans le jeu,
 	 * d'abordon chois la mode et decide la posage de bombe avec la methode controlBomb
 	 * -> si on renvoie "true" on met d'une bombe.
@@ -75,9 +75,9 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		// premier appel : on initialise
 		AiAction result = new AiAction(AiActionName.NONE);
 		initBT();
-		// si le personnage controlé a été éliminé, inutile de continuer
+		// si le personnage controlï¿½ a ï¿½tï¿½ ï¿½liminï¿½, inutile de continuer
 		if(!this.deepPurple.hasEnded())
-		{	// on met à jour la position de l'ia dans la zone
+		{	// on met Ã  jour la position de l'ia dans la zone
 			boolean actionBomb, mode=selectMode();
 			actionBomb=controlBomb(mode);
 			if(actionBomb){
@@ -114,9 +114,9 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * D’abord on obtient des percepts, ensuite on trouve notre héro, 
-	 * et puis on crée l’objet PerfectStrangers et Elements.
-	 * En fin, on met à jour de notre case.  
+	 * Dï¿½abord on obtient des percepts, ensuite on trouve notre hï¿½ro, 
+	 * et puis on crÃ©e lï¿½objet PerfectStrangers et Elements.
+	 * En fin, on met Ã  jour de notre case.  
 	 */
 	private void initBT() throws StopRequestException
 	{	
@@ -133,7 +133,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * On trouve les nombres de notre bombe et de notre bombe actuelle, 
-	 * après on choisi le mode.
+	 * aprï¿½s on choisi le mode.
 	 * 
 	 * @return mode: boolean. notre mode
 	 * @throws StopRequestException
@@ -142,7 +142,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		checkInterruption();
 		boolean mode=false;
 		//calculer d'apres les bombs actuelles.
-		//System.out.println("sayý: "+this.deepPurple.getBombNumberMax()+" range: "+this.deepPurple.getBombRange());
+		//System.out.println("sayï¿½: "+this.deepPurple.getBombNumberMax()+" range: "+this.deepPurple.getBombRange());
 		
 			if(this.deepPurple.getBombNumberMax()>2){
 				if(getCurrentBomb()>2){
@@ -333,8 +333,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		return path;
 	}
 	/**
-	 * On utilise l’algorithme A*, on trouve le chemine vers les ennemies.
-	 * Si on trouve une chemine, on renvoie la direction de notre case à la case adversaire case par case. 
+	 * On utilise lï¿½algorithme A*, on trouve le chemine vers les ennemies.
+	 * Si on trouve une chemine, on renvoie la direction de notre case Ã  la case adversaire case par case. 
 	 */
 	private Direction aStarDirection(AiTile tile1, AiTile tile2) throws StopRequestException, NullPointerException{	
 		checkInterruption();
@@ -374,7 +374,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	
 	/**
 	 * On renvoie la longueur de la chemine qui est le plus court chemin 
-	 * pour aller de la case départ à la case arrêt en utilisant l’algorithme A*.
+	 * pour aller de la case dï¿½part Ã  la case arrï¿½t en utilisant lï¿½algorithme A*.
 	 * si tile1 est egale a tile2, distance est zero.
 	 * sinon on trouve un chemine a la case tile1 de la case tile2.
 	 * 	s'il y a une chemine, la distance est egale a la taille path.

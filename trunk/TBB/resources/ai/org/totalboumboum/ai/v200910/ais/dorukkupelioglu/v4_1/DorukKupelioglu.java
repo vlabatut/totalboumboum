@@ -19,7 +19,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * hareketini tanımlayan birincil class
  * işlemleri birçok class a ayırın,
  * böylelikle programınız değiştirmek için ve
- * d�bugger, modifier, relire, comprendre, etmek için kolay olacaktır.
+ * débugger, modifier, relire, comprendre, etmek için kolay olacaktır.
  */
 public class DorukKupelioglu extends ArtificialIntelligence 
 {

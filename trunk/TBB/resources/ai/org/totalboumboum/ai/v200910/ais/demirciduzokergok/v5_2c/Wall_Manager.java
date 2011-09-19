@@ -61,7 +61,7 @@ public class Wall_Manager{
 	public Direction direcition_updt_b() throws StopRequestException {
 		ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		// on met d'abord à jour la matrice de cout
+		// on met d'abord Ã  jour la matrice de cout
 		updateCostCalculator_b();
 		safe_map=new Safety_Map(zone,ai);
 		Direction result = Direction.NONE;

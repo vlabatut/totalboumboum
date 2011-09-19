@@ -145,7 +145,7 @@ public class DeplacementAttaque {
 									if(temps2>temps)
 									{
 										if(print)
-											System.out.println("Il n'y a pas du temps � senfuire.");
+											System.out.println("Il n'y a pas du temps à senfuire.");
 										poserBombe2=false;
 									}
 						
@@ -197,7 +197,7 @@ public class DeplacementAttaque {
 						*/
 						if(print)
 						{
-							System.out.println("Attaque: 1) On n'arrive pas � la fin du chemin");
+							System.out.println("Attaque: 1) On n'arrive pas à la fin du chemin");
 							System.out.println("Attaque: 1) senfuire2:"+ai.senfuire2);
 						}
 						//si on ne s'enfuit pas:

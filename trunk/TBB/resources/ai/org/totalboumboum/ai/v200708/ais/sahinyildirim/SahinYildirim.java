@@ -49,7 +49,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		lastMove = ArtificialIntelligence.AI_ACTION_GO_UP;
 	}
 	
-	/** indicateur de première invocation (pour la compatibilité */
+	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
 	private boolean firstTime = true;
 
 	public Integer call() throws Exception {
@@ -100,7 +100,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		  if(possibleMoves.contains(lastMove)) 
 			  result = lastMove;
 		  
-		  else { // on détermine aléatoirement l'action qui va être effectuée
+		  else { // on dï¿½termine alï¿½atoirement l'action qui va ï¿½tre effectuÃ©e
 		  int index; do { index = (int)(Math.random()*(possibleMoves.size())); }
 		  while(index==possibleMoves.size());
 		 
@@ -694,7 +694,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 			yB = bombs.get(j + 1);// position y
 			bombPower[numBomb] = getBombPowerAt(xB, yB);
 			if (Math.abs(x - xB) >= Math.abs(y - yB))// si elle est proche 
-													 // a coté y
+													 // a cotï¿½ y
 			{
 				if (y == yB) {
 					if (x == xB) {
@@ -964,7 +964,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 				}
 
 			} else if (Math.abs(y - yB) > Math.abs(x - xB))// si elle est proche
-															// a coté x
+															// a cotï¿½ x
 			{
 				if (x == xB)//si les abscisses sont egales
 				{
@@ -1178,7 +1178,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	}
 
-	/**Indique si la case située à la position passée en paramètre constitue un
+	/**Indique si la case situï¿½e Ã  la position passï¿½e en paramï¿½tre constitue un
 	 * obstacle pour un personnage : bombe, feu, wallHard, lastPosition.
 	 * @param x
 	 * @param y
@@ -1210,8 +1210,8 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si le déplacement dont le code a été passé en paramètre est
-	 * possible pour un personnage situé en (x,y).
+	 * Indique si le dÃ©placement dont le code a ï¿½tï¿½ passï¿½ en paramï¿½tre est
+	 * possible pour un personnage situï¿½ en (x,y).
 	 * 
 	 * @param x
 	 * @param y
@@ -1243,8 +1243,8 @@ public class SahinYildirim extends ArtificialIntelligence {
 		return result;
 	}
 
-	/** Renvoie la liste de tous les déplacements possibles pour un personnage
-	 * situé à la position (x,y)
+	/** Renvoie la liste de tous les dÃ©placements possibles pour un personnage
+	 * situï¿½ Ã  la position (x,y)
 	 * 
 	 * @param x 
 	 * @param y
@@ -1260,13 +1260,13 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si la case située à la position passée en paramètre constitue un
+	 * Indique si la case situï¿½e Ã  la position passï¿½e en paramï¿½tre constitue un
 	 * obstacle pour un personnage : bombe, feu, mur.
 	 * 
 	 * @param x
-	 *            position à étudier
+	 *            position Ã  ï¿½tudier
 	 * @param y
-	 *            position à étudier
+	 *            position Ã  ï¿½tudier
 	 * @return vrai si la case contient un obstacle
 	 */
 	private boolean isObstacle(int x, int y) {
@@ -1294,16 +1294,16 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si le déplacement dont le code a été passé en paramètre est
-	 * possible pour un personnage situé en (x,y).
+	 * Indique si le dÃ©placement dont le code a ï¿½tï¿½ passï¿½ en paramï¿½tre est
+	 * possible pour un personnage situï¿½ en (x,y).
 	 * 
 	 * @param x
 	 *            position du personnage
 	 * @param y
 	 *            position du personnage
 	 * @param move
-	 *            le déplacement à étudier
-	 * @return vrai si ce déplacement est possible
+	 *            le dÃ©placement Ã  ï¿½tudier
+	 * @return vrai si ce dÃ©placement est possible
 	 */
 	private boolean isMovePossible(int x, int y, int move) {
 		boolean result;
@@ -1329,14 +1329,14 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Renvoie la liste de tous les déplacements possibles pour un personnage
-	 * situé à la position (x,y)
+	 * Renvoie la liste de tous les dÃ©placements possibles pour un personnage
+	 * situï¿½ Ã  la position (x,y)
 	 * 
 	 * @param x
 	 *            position du personnage
 	 * @param y
 	 *            position du personnage
-	 * @return la liste des déplacements possibles
+	 * @return la liste des dÃ©placements possibles
 	 */
 	private Vector<Integer> getPossibleMoves(int x, int y) {
 		Vector<Integer> result = new Vector<Integer>();
@@ -1377,7 +1377,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	/**
 	 * Calcule et renvoie la distance de Manhattan (cf. :
 	 * http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29) entre le
-	 * point de coordonnées (x1,y1) et celui de coordonnées (x2,y2).
+	 * point de coordonnÃ©es (x1,y1) et celui de coordonnÃ©es (x2,y2).
 	 * 
 	 * @param x1
 	 *            position du premier point
@@ -1402,8 +1402,8 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	/**
 	 * Renvoie la position du personnage si il est plus proche  
-	 * @param x	position de référence
-	 * @param y	position de référencepol
+	 * @param x	position de rï¿½fï¿½rence
+	 * @param y	position de rï¿½fï¿½rencepol
 	 * @return	position du joueur le plus proche
 	 */
 	private List<Integer> getClosestPlayerPosition(int x, int y) {

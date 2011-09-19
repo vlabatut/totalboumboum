@@ -8,8 +8,8 @@ import org.totalboumboum.ai.v200708.ais.camasdemirbas.ManhattanHeuristic;
 
 
 /**
- * Une implémentation de viseur de chemin 
- * qui utilise l'AStar l'algorithme basé heuristique déterminer un chemin. 
+ * Une implï¿½mentation de viseur de chemin 
+ * qui utilise l'AStar l'algorithme basï¿½ heuristique dï¿½terminer un chemin. 
  * 
  * @author Gokhan Camas
  * @author Irem Demirbas
@@ -21,22 +21,22 @@ public class AStarPathFinder implements PathFinder {
 	private List closed = new ArrayList();
 	private SortedList open = new SortedList();
 	
-	/** La carte est cherchée */
+	/** La carte est cherchï¿½e */
 	private GameMap map;
 	/** La profondeur maximum de recherche que nous voulons accepter avant de renoncer */
 	private int maxSearchDistance;
 	
-	/** La série complète de noeuds à travers la carte */
+	/** La sï¿½rie complï¿½te de noeuds Ã  travers la carte */
 	private Node[][] nodes;
 	protected static boolean findPathWithSoftWall;
 	private boolean allowDiagMovement;
-	/** L'heuristique nous appliquons nous déterminer quels noeuds pour chercher premièrement */
+	/** L'heuristique nous appliquons nous dï¿½terminer quels noeuds pour chercher premiÃ¨rement */
 	private AStarHeuristic heuristic;
 	
 	/**
-	 * réer un viseur de chemin avec l'implicite heuristique - le plus proche pour cibler.
+	 * rï¿½er un viseur de chemin avec l'implicite heuristique - le plus proche pour cibler.
 	 * 
-	 * @param map La carte être cherchée
+	 * @param map La carte ï¿½tre cherchï¿½e
 	 * @param maxSearchDistance La profondeur maximum que nous chercherons avant de renoncer
 	 * @param allowDiagMovement True si la recherche doit essayer le mouvement de diaganol
 	 */
@@ -45,10 +45,10 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Créer un viseur de chemin 
+	 * crÃ©er un viseur de chemin 
 	 * 
-	 * @param heuristic L'heuristique a utilisé pour déterminer l'ordre de recherche de la carte
-	 * @param map La carte être cherchée
+	 * @param heuristic L'heuristique a utilisÃ© pour dï¿½terminer l'ordre de recherche de la carte
+	 * @param map La carte ï¿½tre cherchï¿½e
 	 * @param maxSearchDistance La profondeur maximum que nous chercherons avant de renoncer
 	 * @param allowDiagMovement Vrai si la recherche doit essayer le mouvement de diaganol
 	 */
@@ -170,29 +170,29 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Obtenir le premier élément de la liste ouverte. 
-	 * Ceci est le suivant être cherché. 
+	 * Obtenir le premier ï¿½lï¿½ment de la liste ouverte. 
+	 * Ceci est le suivant ï¿½tre cherchï¿½. 
 	 * 
-	 * @return e premier élément dans la liste ouverte
+	 * @return e premier ï¿½lï¿½ment dans la liste ouverte
 	 */
 	protected Node getFirstInOpen() {
 		return (Node) open.first();
 	}
 	
 	/**
-	 * Ajouter un noeud à la liste ouverte
+	 * Ajouter un noeud Ã  la liste ouverte
 	 * 
-	 * @param node Le noeud être ajouté à la liste ouverte
+	 * @param node Le noeud ï¿½tre ajoutï¿½ Ã  la liste ouverte
 	 */
 	protected void addToOpen(Node node) {
 		open.add(node);
 	}
 	
 	/**
-	 * Le contrôle si un noeud est dans la liste ouverte
+	 * Le contrï¿½le si un noeud est dans la liste ouverte
 	 * 
 	 * @param node 
-	 * @return True si le noeud donné est dans la liste ouverte
+	 * @return True si le noeud donnï¿½ est dans la liste ouverte
 	 */
 	protected boolean inOpenList(Node node) {
 		return open.contains(node);
@@ -208,28 +208,28 @@ public class AStarPathFinder implements PathFinder {
 	}
 	
 	/**
-	 * Ajouter un noeud à la liste fermée
+	 * Ajouter un noeud Ã  la liste fermï¿½e
 	 * 
-	 * @param node Le noeud pour ajouter à la liste fermée
+	 * @param node Le noeud pour ajouter Ã  la liste fermï¿½e
 	 */
 	protected void addToClosed(Node node) {
 		closed.add(node);
 	}
 	
 	/**
-	 * Le contrôle si le noeud fourni est dans la liste fermée
+	 * Le contrï¿½le si le noeud fourni est dans la liste fermï¿½e
 	 * 
 	 * @param node 
-	 * @return True si le noeud spécifié est dans la liste fermée
+	 * @return True si le noeud spï¿½cifiï¿½ est dans la liste fermï¿½e
 	 */
 	protected boolean inClosedList(Node node) {
 		return closed.contains(node);
 	}
 	
 	/**
-	 * Enlever un noeud de la liste fermée
+	 * Enlever un noeud de la liste fermï¿½e
 	 * 
-	 * @param node Le noeud pour enlever de la liste fermée
+	 * @param node Le noeud pour enlever de la liste fermï¿½e
 	 */
 	protected void removeFromClosed(Node node) {
 		closed.remove(node);
@@ -246,7 +246,7 @@ public class AStarPathFinder implements PathFinder {
 	}
 	
 	/**
-	 * Obtenir le coût pour se déplacer par un emplacement donné
+	 * Obtenir le coï¿½t pour se dï¿½placer par un emplacement donnï¿½
 	 * 
 	 */
 	public float getMovementCost(int sx, int sy, int tx, int ty) {
@@ -254,8 +254,8 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Obtenir le coût heuristique pour l'emplacement donné. 
-	 * Ceci détermine dans lequel commande les emplacements sont traités. 
+	 * Obtenir le coï¿½t heuristique pour l'emplacement donnï¿½. 
+	 * Ceci dï¿½termine dans lequel commande les emplacements sont traitï¿½s. 
 	 * 
 	 */
 	public float getHeuristicCost(int x, int y, int tx, int ty) {
@@ -263,19 +263,19 @@ public class AStarPathFinder implements PathFinder {
 	}
 	
 	/**
-	 * Une liste triée simple
+	 * Une liste triï¿½e simple
 	 *
 	 * @author Gokhan Camas -- Irem Demirbas
 	 */
 	private class SortedList {
-		/** La liste d'éléments */
+		/** La liste d'ï¿½lï¿½ments */
 		@SuppressWarnings("rawtypes")
 		private List list = new ArrayList();
 		
 		/**
-		 * Rapporter le premier élément de la liste
+		 * Rapporter le premier ï¿½lï¿½ment de la liste
 		 *  
-		 * @return Le premier élément de la liste
+		 * @return Le premier ï¿½lï¿½ment de la liste
 		 */
 		public Object first() {
 			return list.get(0);
@@ -289,9 +289,9 @@ public class AStarPathFinder implements PathFinder {
 		}
 		
 		/**
-		 * Ajouter un élément à la liste - les causes triant
+		 * Ajouter un ï¿½lï¿½ment Ã  la liste - les causes triant
 		 * 
-		 * @param o L'élément pour ajouter
+		 * @param o L'ï¿½lï¿½ment pour ajouter
 		 */
 		public void add(Object o) {
 			list.add(o);
@@ -299,28 +299,28 @@ public class AStarPathFinder implements PathFinder {
 		}
 		
 		/**
-		 * Enlever un élément de la liste
+		 * Enlever un ï¿½lï¿½ment de la liste
 		 * 
-		 * @param o L'élément pour enlever
+		 * @param o L'ï¿½lï¿½ment pour enlever
 		 */
 		public void remove(Object o) {
 			list.remove(o);
 		}
 	
 		/**
-		 * Obtenir le nombre d'éléments dans la liste
+		 * Obtenir le nombre d'ï¿½lï¿½ments dans la liste
 		 * 
-		 * @return Le nombre d'élément dans la liste
+		 * @return Le nombre d'ï¿½lï¿½ment dans la liste
  		 */
 		public int size() {
 			return list.size();
 		}
 		
 		/**
-		 * Le contrôle si un élément est dans la liste
+		 * Le contrï¿½le si un ï¿½lï¿½ment est dans la liste
 		 * 
-		 * @param o L'élément pour chercher
-		 * @return True si l'élément est dans la liste
+		 * @param o L'ï¿½lï¿½ment pour chercher
+		 * @return True si l'ï¿½lï¿½ment est dans la liste
 		 */
 		public boolean contains(Object o) {
 			return list.contains(o);
@@ -341,7 +341,7 @@ public class AStarPathFinder implements PathFinder {
 		private int depth;
 		
 		/**
-		 * Créer un nouveau noeud
+		 * crÃ©er un nouveau noeud
 		 * 
 		 */
 		public Node(int x, int y) {

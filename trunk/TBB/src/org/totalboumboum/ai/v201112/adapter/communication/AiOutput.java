@@ -47,7 +47,7 @@ public class AiOutput
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * efface toutes les données spécifiées précédemment
+	 * efface toutes les donnï¿½es spï¿½cifiï¿½es prï¿½cï¿½demment
 	 */
 	public void reinit()
 	{	reinitPaths();
@@ -58,19 +58,19 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** représentation interne de la zone */
+	/** reprï¿½sentation interne de la zone */
 	private AiZone zone;
 		
 	/////////////////////////////////////////////////////////////////
 	// PATHS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste de chemins à afficher par dessus la zone de jeu */
+	/** liste de chemins Ã  afficher par dessus la zone de jeu */
 	private final List<AiPath> paths = new ArrayList<AiPath>();
-	/** couleur des chemins à afficher */
+	/** couleur des chemins Ã  afficher */
 	private final List<Color> pathColors = new ArrayList<Color>();
 	
 	/**
-	 * réinitialise les chemins à afficher
+	 * rï¿½initialise les chemins Ã  afficher
 	 */
 	private void reinitPaths()
 	{	paths.clear();
@@ -78,14 +78,14 @@ public class AiOutput
 	}
 	
 	/**
-	 * rajoute un chemin dans la liste des chemins à afficher.
-	 * La représentation graphique d'un chemin est une ligne
-	 * suivant les centres des cases traversées par le chemin 
+	 * rajoute un chemin dans la liste des chemins Ã  afficher.
+	 * La reprï¿½sentation graphique d'un chemin est une ligne
+	 * suivant les centres des cases traversï¿½es par le chemin 
 	 * 
 	 * @param path
-	 * 		chemin à afficher
+	 * 		chemin Ã  afficher
 	 * @param color
-	 * 		couleur associée à ce chemin
+	 * 		couleur associï¿½e Ã  ce chemin
 	 */
 	public void addPath(AiPath path, Color color)
 	{	if(color!=null && path!=null && !path.isEmpty())
@@ -95,7 +95,7 @@ public class AiOutput
 	}
 	
 	/**
-	 * renvoie la liste des chemins à afficher
+	 * renvoie la liste des chemins Ã  afficher
 	 * 
 	 * @return
 	 * 		une liste de chemins
@@ -106,7 +106,7 @@ public class AiOutput
 	}
 
 	/**
-	 * renvoie la liste des couleurs associées aux chemins
+	 * renvoie la liste des couleurs associï¿½es aux chemins
 	 * 
 	 * @return
 	 * 		une liste de couleurs
@@ -133,12 +133,12 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie la couleur d'une case, qui sera affichée
+	 * modifie la couleur d'une case, qui sera affichï¿½e
 	 * en transparence par dessus la zone de jeu.
-	 * La valeur null correspond à une absence de couleur.
+	 * La valeur null correspond Ã  une absence de couleur.
 	 * 
 	 * @param tile
-	 * 		case à colorier
+	 * 		case Ã  colorier
 	 * @param color
 	 * 		couleur du coloriage
 	 */
@@ -149,14 +149,14 @@ public class AiOutput
 	}
 
 	/**
-	 * modifie la couleur d'une case, qui sera affichée
+	 * modifie la couleur d'une case, qui sera affichï¿½e
 	 * en transparence par dessus la zone de jeu.
-	 * La valeur null correspond à une absence de couleur.
+	 * La valeur null correspond Ã  une absence de couleur.
 	 * 
 	 * @param line
-	 * 		ligne de la case à colorier
+	 * 		ligne de la case Ã  colorier
 	 * @param col
-	 * 		colonne de la case à colorier
+	 * 		colonne de la case Ã  colorier
 	 * @param color
 	 * 		couleur du coloriage
 	 */
@@ -165,7 +165,7 @@ public class AiOutput
 	}
 
 	/**
-	 * renvoie les couleurs à utiliser pour colorier les cases
+	 * renvoie les couleurs Ã  utiliser pour colorier les cases
 	 * 
 	 * @return
 	 * 		une matrice de couleurs
@@ -177,16 +177,16 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// TEXTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** détermine si le texte sera affiché en normalement ou en gras */
+	/** dï¿½termine si le texte sera affichï¿½ en normalement ou en gras */
 	private boolean bold = false;
-	/** texte à afficher sur les cases de la zone de jeu */
+	/** texte Ã  afficher sur les cases de la zone de jeu */
 	private List<String> tileTexts[][];
 
 	/**
 	 * change le mode d'affichage du texte : gras ou pas
 	 * 
 	 * @param bold
-	 * 		la valeur vrai indique que l'affichage sera effectué en gras
+	 * 		la valeur vrai indique que l'affichage sera effectuÃ© en gras
 	 */
 	public void setBold(boolean bold)
 	{	this.bold = bold;
@@ -204,7 +204,7 @@ public class AiOutput
 	}
 	
 	/**
-	 * réinitialise les textes associés aux cases
+	 * rï¿½initialise les textes associï¿½s aux cases
 	 */
 	private void reinitTileTexts()
 	{	for(int line=0;line<zone.getHeight();line++)
@@ -213,14 +213,14 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie le texte associé à une case. Permet
+	 * modifie le texte associï¿½ Ã  une case. Permet
 	 * par exemple d'afficher des heuristiques, des couts
-	 * en temps réel.
+	 * en temps rï¿½el.
 	 * 
 	 * @param tile
-	 * 		case associée au texte
+	 * 		case associï¿½e au texte
 	 * @param text
-	 * 		texte à afficher sur cette case
+	 * 		texte Ã  afficher sur cette case
 	 */
 	public void setTileText(AiTile tile, String text)
 	{	int line = tile.getLine();
@@ -229,32 +229,32 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie le texte associé à une case. Permet
-	 * par exemple d'afficher des heuristiques, des coûts
-	 * en temps réel.
+	 * modifie le texte associï¿½ Ã  une case. Permet
+	 * par exemple d'afficher des heuristiques, des coï¿½ts
+	 * en temps rï¿½el.
 	 * 
 	 * @param line
-	 * 		ligne de la case associée au texte
+	 * 		ligne de la case associï¿½e au texte
 	 * @param col
-	 * 		colonne de la case associée au texte
+	 * 		colonne de la case associï¿½e au texte
 	 * @param text
-	 * 		texte à afficher sur cette case
+	 * 		texte Ã  afficher sur cette case
 	 */
 	public void setTileText(int line, int col, String text)
 	{	tileTexts[line][col].add(text);	
 	}
 
 	/**
-	 * modifie le texte associé à une case. Permet
-	 * par exemple d'afficher des heuristiques, des coûts
-	 * en temps réel.
+	 * modifie le texte associï¿½ Ã  une case. Permet
+	 * par exemple d'afficher des heuristiques, des coï¿½ts
+	 * en temps rï¿½el.
 	 * 
 	 * @param line
-	 * 		ligne de la case associée au texte
+	 * 		ligne de la case associï¿½e au texte
 	 * @param col	
-	 * 		colonne de la case associée au texte
+	 * 		colonne de la case associï¿½e au texte
 	 * @param texts	
-	 * 		tableau de textes à afficher sur cette case
+	 * 		tableau de textes Ã  afficher sur cette case
 	 */
 	public void setTileTexts(int line, int col, String texts[])
 	{	for(String text: texts)
@@ -262,7 +262,7 @@ public class AiOutput
 	}
 
 	/**
-	 * renvoie les textes à afficher sur les cases
+	 * renvoie les textes Ã  afficher sur les cases
 	 * 
 	 * @return
 	 * 		une matrice de textes

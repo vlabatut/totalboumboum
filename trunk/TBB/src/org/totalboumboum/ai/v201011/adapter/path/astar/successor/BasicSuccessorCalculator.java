@@ -31,12 +31,12 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.AstarNode;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * implémentation la plus simple d'une fonction successeur : 
+ * implï¿½mentation la plus simple d'une fonction successeur : 
  * on prend les 4 cases voisines, en ne gardant que celles qui sont traversables
- * par le personnage considéré.
- * Une version plus complexe et plus efficace consisterait à utiliser la profondeur
- * du noeud de recherche pour calculer le temps nécessaire pour arriver jusqu'à la case
- * courante, et à vérifier qu'aucune bombe ne sera en train d'exploser dans les cases voisines
+ * par le personnage considï¿½rï¿½.
+ * Une version plus complexe et plus efficace consisterait Ã  utiliser la profondeur
+ * du noeud de recherche pour calculer le temps nï¿½cessaire pour arriver jusqu'ï¿½ la case
+ * courante, et Ã  vï¿½rifier qu'aucune bombe ne sera en train d'exploser dans les cases voisines
  * quand le joueur y sera. En d'autres termes, on peut calculer si le joueur a le temps
  * de passer sur une case avant qu'elle ne soit prise dans une explosion.
  * 
@@ -50,8 +50,8 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * fonction successeur la plus simple: on considère les 4 cases voisines de la case courante,
-	 * en ne conservant que les cases que le personnage de référence peut traverser 
+	 * fonction successeur la plus simple: on considï¿½re les 4 cases voisines de la case courante,
+	 * en ne conservant que les cases que le personnage de rï¿½fï¿½rence peut traverser 
 	 * 
 	 * @param node	
 	 * 		le noeud de recherche courant

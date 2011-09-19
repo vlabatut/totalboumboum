@@ -211,7 +211,7 @@ public class TirtilTomruk extends ArtificialIntelligence
 	private AiAction deplace() throws StopRequestException
 	{	checkInterruption(); //Appel Obligatoire
 		if(caractere!=null)
-		{	// on met à jour la position de l'ia dans la zone
+		{	// on met Ã  jour la position de l'ia dans la zone
 			currentTile = caractere.getTile();
 			
 			// premier appel : on initialise l'IA
@@ -221,16 +221,16 @@ public class TirtilTomruk extends ArtificialIntelligence
 				previousTile = currentTile;
 			}
 			
-			// arrivé à destination : on choisit une nouvelle destination
+			// arrivï¿½ Ã  destination : on choisit une nouvelle destination
 			if(currentTile==nextTile)
 				pickNextTile();
-			// au cas ou quelqu'un prendrait le contrôle manuel du personnage
+			// au cas ou quelqu'un prendrait le contrï¿½le manuel du personnage
 			else if(previousTile!=currentTile)
 			{	previousTile = currentTile;
 				pickNextTile();			
 			}
 						
-			// on calcule la direction à prendre
+			// on calcule la direction Ã  prendre
 			Direction direction = getPercepts().getDirection(currentTile,nextTile);
 			
 			AiAction result = new AiAction(AiActionName.NONE);

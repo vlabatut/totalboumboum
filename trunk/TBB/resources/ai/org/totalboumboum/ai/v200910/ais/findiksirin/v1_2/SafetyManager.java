@@ -17,7 +17,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * >> c'est la classe qui est responsable de la securite
  */
 public class SafetyManager
-{	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
+{	/** classe principale de l'IA, permet d'accÃ©der Ã  checkInterruption() */
 	private FindikSirin monIa;
 	
 	public SafetyManager(FindikSirin monIa) throws StopRequestException

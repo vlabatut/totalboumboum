@@ -15,8 +15,8 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
 /** 
  * Cette classe d'abord initialise une matrice avec les valeurs initiales MAX_VALUE et
- * commence à contrôler les feux, les bombes, les murs brulés.Puis, l'algorithme se tient
- * compte des bombes et remet les valeurs de leurs temps d'explosion à la matrice.
+ * commence Ã  contrï¿½ler les feux, les bombes, les murs brulï¿½s.Puis, l'algorithme se tient
+ * compte des bombes et remet les valeurs de leurs temps d'explosion Ã  la matrice.
  * 
  * @version 1
  * 
@@ -36,10 +36,10 @@ public class SafetyManager
 		matrix = new double[zone.getHeight()][zone.getWidth()];
 	}
 	
-	// La variable d'IA de notre caractère
+	// La variable d'IA de notre caractï¿½re
 	private AdatepeOzbek ai;
 	
-	// Le feu est caracterisé par la valeur 0 et les cases secures avec MAX_VALUE
+	// Le feu est caracterisï¿½ par la valeur 0 et les cases secures avec MAX_VALUE
 	public static double SAFE = Double.MAX_VALUE;	
 	public static double FIRE = 0;	
 	
@@ -48,7 +48,7 @@ public class SafetyManager
 	
 	private AiZone zone;
 	
-	// Retourne la variable privée 
+	// Retourne la variable privï¿½e 
 	public double[][] getMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -56,7 +56,7 @@ public class SafetyManager
 	}
 	
 	/*
-	 * Remets les feux, les murs brulés et les temps d'explosions des bombes à la matrice
+	 * Remets les feux, les murs brulï¿½s et les temps d'explosions des bombes Ã  la matrice
 	 */
 	private void updateMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -66,7 +66,7 @@ public class SafetyManager
 		{	
 			ai.checkInterruption(); //APPEL OBLIGATOIRE
 			
-				// Reinitalise toutes les cases à la valeur secure d'abord
+				// Reinitalise toutes les cases Ã  la valeur secure d'abord
 				for(int col=0;col<zone.getWidth();col++)
 				{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 					matrix[line][col] = SAFE;
@@ -80,7 +80,7 @@ public class SafetyManager
 					{	matrix[line][col] = FIRE;				
 					}
 					
-					// Mets les murs brulés
+					// Mets les murs brulï¿½s
 					else if(!blocks.isEmpty())
 					{	AiBlock block = blocks.iterator().next();
 						if(block.getState().getName()==AiStateName.BURNING)
@@ -97,7 +97,7 @@ public class SafetyManager
 	}
 	
 	/*
-	 * Calcule d'abord les cases qui vont être affectées par les bombes, puis 
+	 * Calcule d'abord les cases qui vont ï¿½tre affectï¿½es par les bombes, puis 
 	 * calcule les valeurs des temps d'explosion et les mets dans la matrice.
 	 */
 	private void processBombs(List<AiBomb> bombs) throws StopRequestException
@@ -126,7 +126,7 @@ public class SafetyManager
 	}
 
 	/*
-	 * Retourne la valeur de securité de la case passée en paramètre
+	 * Retourne la valeur de securitÃ© de la case passï¿½e en paramï¿½tre
 	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

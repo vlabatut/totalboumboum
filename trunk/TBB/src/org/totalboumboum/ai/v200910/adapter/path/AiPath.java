@@ -51,41 +51,41 @@ public class AiPath
 	}
 	
 	/**
-	 * renvoie la case dont la position est passée en paramètre
+	 * renvoie la case dont la position est passï¿½e en paramï¿½tre
 	 *
-	 * @param index	la position de la case demandée
-	 * @return	la case occupant la position indiquée dans ce chemin
+	 * @param index	la position de la case demandï¿½e
+	 * @return	la case occupant la position indiquï¿½e dans ce chemin
 	 */
 	public AiTile getTile(int index)
 	{	return tiles.get(index);	
 	}
 	
 	/**
-	 * ajoute dans ce chemin la case passée en paramètre, 
-	 * en l'insérant à la fin de la séquence de cases
+	 * ajoute dans ce chemin la case passï¿½e en paramï¿½tre, 
+	 * en l'insï¿½rant Ã  la fin de la sï¿½quence de cases
 	 * 
-	 * @param tile	la case à insérer
+	 * @param tile	la case Ã  insï¿½rer
 	 */
 	public void addTile(AiTile tile)
 	{	tiles.add(tile);		
 	}
 	
 	/**
-	 * ajoute dans ce chemin la case passée en paramètre, 
-	 * en l'insérant à la position passée en paramètre.
+	 * ajoute dans ce chemin la case passï¿½e en paramï¿½tre, 
+	 * en l'insï¿½rant Ã  la position passï¿½e en paramï¿½tre.
 	 * 
-	 * @param index	position de la case à insérer
-	 * @param tile	la case à insérer
+	 * @param index	position de la case Ã  insï¿½rer
+	 * @param tile	la case Ã  insï¿½rer
 	 */
 	public void addTile(int index, AiTile tile)
 	{	tiles.add(index,tile);	
 	}
 	
 	/**
-	 * remplace la case dont la position est passée en paramètre par
-	 * la case passée en paramètre, dans ce chemin.
+	 * remplace la case dont la position est passï¿½e en paramï¿½tre par
+	 * la case passï¿½e en paramï¿½tre, dans ce chemin.
 	 * 
-	 * @param index	position de la case à remplacer
+	 * @param index	position de la case Ã  remplacer
 	 * @param tile	la nouvelle case
 	 */
 	public void setTile(int index, AiTile tile)
@@ -93,9 +93,9 @@ public class AiPath
 	}
 	
 	/**
-	 * supprime de ce chemin la case dont la position est passée en paramètre
+	 * supprime de ce chemin la case dont la position est passï¿½e en paramï¿½tre
 	 * 
-	 * @param index	position de la case à supprimer
+	 * @param index	position de la case Ã  supprimer
 	 */
 	public void removeTile(int index)
 	{	tiles.remove(index);	
@@ -124,10 +124,10 @@ public class AiPath
 	}
 	
 	/**
-	 * renvoie la dernière case du chemin,
+	 * renvoie la derniÃ¨re case du chemin,
 	 * ou null s'il n'y a pas de case dans ce chemin
 	 * 
-	 * @return	la dernière case du chemin ou null en cas d'erreur
+	 * @return	la derniÃ¨re case du chemin ou null en cas d'erreur
 	 */
 	public AiTile getLastTile()
 	{	AiTile result = null;
@@ -140,9 +140,9 @@ public class AiPath
 	// DISTANCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la distance de Manhattan, exprimée en cases, correspondant à ce chemin
+	 * renvoie la distance de Manhattan, exprimï¿½e en cases, correspondant Ã  ce chemin
 	 * 
-	 * @return	un entier correspondant à la distance totale du chemin en cases
+	 * @return	un entier correspondant Ã  la distance totale du chemin en cases
 	 */
 	public int getTileDistance()
 	{	int result = 0;
@@ -152,9 +152,9 @@ public class AiPath
 	}
 
 	/**
-	 * renvoie la distance de Manhattan, exprimée en pixels, correspondant à ce chemin
+	 * renvoie la distance de Manhattan, exprimï¿½e en pixels, correspondant Ã  ce chemin
 	 * 
-	 * @return	un réel correspondant à la distance totale du chemin en pixels
+	 * @return	un rï¿½el correspondant Ã  la distance totale du chemin en pixels
 	 */
 	public double getPixelDistance()
 	{	double result = 0;
@@ -180,15 +180,15 @@ public class AiPath
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule le temps approximatif nécessaire au personnage passé en paramètre
-	 * pour parcourir ce chemin. Le temps est exprimé en millisecondes, et 
+	 * calcule le temps approximatif nï¿½cessaire au personnage passï¿½ en paramï¿½tre
+	 * pour parcourir ce chemin. Le temps est exprimï¿½ en millisecondes, et 
 	 * on suppose qu'il n'y a pas d'obstacle sur le chemin et que la vitesse
-	 * de déplacement du joueur est constante. C'est donc une estimation du temps
-	 * qui sera réellement nécessaire au joueur, puisque différents facteurs peuvent
-	 * venir invalider ces hypothèses.
+	 * de dÃ©placement du joueur est constante. C'est donc une estimation du temps
+	 * qui sera rï¿½ellement nï¿½cessaire au joueur, puisque diffï¿½rents facteurs peuvent
+	 * venir invalider ces hypothï¿½ses.
 	 *   
 	 * @param hero	le personnage qui parcourt le chemin
-	 * @return	le temps nécessaire au personnage pour parcourir ce chemin
+	 * @return	le temps nï¿½cessaire au personnage pour parcourir ce chemin
 	 */
 	public long getDuration(AiHero hero)
 	{	long result = 0;
@@ -206,11 +206,11 @@ public class AiPath
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Compare ce chemin à celui passé en paramètre, 
+	 * Compare ce chemin Ã  celui passï¿½ en paramï¿½tre, 
 	 * et renvoie vrai s'il est strictement plus long que ce dernier.
 	 * 
-	 * @param object	le chemin à comparer
-	 * @return	vrai ssi ce chemin est plus long que celui passé en paramètre
+	 * @param object	le chemin Ã  comparer
+	 * @return	vrai ssi ce chemin est plus long que celui passï¿½ en paramï¿½tre
 	 */
 	public boolean isLongerThan(AiPath path)
 	{	int l1 = tiles.size();
@@ -220,11 +220,11 @@ public class AiPath
 	}
 
 	/**
-	 * Compare ce chemin à celui passé en paramètre, 
+	 * Compare ce chemin Ã  celui passï¿½ en paramï¿½tre, 
 	 * et renvoie vrai s'il est strictement plus court que ce dernier.
 	 * 
-	 * @param object	le chemin à comparer
-	 * @return	vrai ssi ce chemin est plus court que celui passé en paramètre
+	 * @param object	le chemin Ã  comparer
+	 * @return	vrai ssi ce chemin est plus court que celui passï¿½ en paramï¿½tre
 	 */
 	public boolean isShorterThan(AiPath path)
 	{	int l1 = tiles.size();
@@ -234,11 +234,11 @@ public class AiPath
 	}
 
 	/**
-	 * Compare ce chemin à celui passé en paramètre, 
+	 * Compare ce chemin Ã  celui passï¿½ en paramï¿½tre, 
 	 * et renvoie vrai s'ils sont parfaitement identiques.
 	 * 
-	 * @param object	le chemin à comparer
-	 * @return	vrai ssi les 2 ce chemin est identique à celui passé en paramètre
+	 * @param object	le chemin Ã  comparer
+	 * @return	vrai ssi les 2 ce chemin est identique Ã  celui passï¿½ en paramï¿½tre
 	 */
 	@Override
 	public boolean equals(Object object)

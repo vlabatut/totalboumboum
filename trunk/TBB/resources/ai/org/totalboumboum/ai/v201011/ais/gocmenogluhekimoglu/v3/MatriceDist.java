@@ -12,8 +12,8 @@ public class MatriceDist extends MatriceCalc  {
 	
 	/**
 	 * Donne cas une valeur comprise entre 1 et 0 en fonction
-	 *  de leurs distances à notre héros. 0 est le plus
-	 *   éloigné, 1 est le plus proche
+	 *  de leurs distances Ã  notre hï¿½ros. 0 est le plus
+	 *   ï¿½loignï¿½, 1 est le plus proche
 	 */
 	public void calculate() throws StopRequestException {
 		monIa.checkInterruption();

@@ -85,7 +85,7 @@ public class FiresetMapLoader
 			{	FileInputStream in = new FileInputStream(cacheFile);
 				BufferedInputStream inBuff = new BufferedInputStream(in);
 				ObjectInputStream oIn = new ObjectInputStream(inBuff);
-				original = (HollowFiresetMap)oIn.readObject(); //TODO fonction à surcharger
+				original = (HollowFiresetMap)oIn.readObject(); //TODO fonction Ã  surcharger
 				//result.setInstance(instance); 
 				oIn.close();
 			}

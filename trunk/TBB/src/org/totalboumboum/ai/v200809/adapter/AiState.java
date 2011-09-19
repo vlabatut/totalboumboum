@@ -26,11 +26,11 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
- * Décrit un état dans lequel un sprite peut se trouver, c'est
- * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
- * Cet état est décrit par le nom de cette action, et éventuellement la
- * direction dans laquelle elle est effectuée (pour les actions orientées
- * comme le déplacement, par exemple).
+ * Dï¿½crit un Ã©tat dans lequel un sprite peut se trouver, c'est
+ * Ã  dire essentiellement l'action que le sprite rï¿½alise ou qu'il subit.
+ * Cet Ã©tat est dï¿½crit par le nom de cette action, et ï¿½ventuellement la
+ * direction dans laquelle elle est effectuÃ©e (pour les actions orientï¿½es
+ * comme le dÃ©placement, par exemple).
  * 
  * @author Vincent Labatut
  *
@@ -38,20 +38,20 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 
 public class AiState 
 {
-	/** sprite dont l'état est représenté */
+	/** sprite dont l'ï¿½tat est reprï¿½sentï¿½ */
 	private Sprite sprite;
 	
 	/**
-	 * construit un objet représentant l'état du sprite passé en paramètre
+	 * construit un objet reprï¿½sentant l'ï¿½tat du sprite passï¿½ en paramï¿½tre
 	 * 
-	 * @param sprite	sprite dont on veut représenter l'état
+	 * @param sprite	sprite dont on veut reprï¿½senter l'ï¿½tat
 	 */
 	AiState(Sprite sprite)
 	{	this.sprite = sprite;
 	}
 	
 	/**
-	 * met à jour cet état en fonction de l'évolution du sprite de référence
+	 * met Ã  jour cet Ã©tat en fonction de l'ï¿½volution du sprite de rï¿½fï¿½rence
 	 */
 	void update()
 	{	// direction
@@ -62,7 +62,7 @@ public class AiState
 	}
 	
 	/**
-	 * termine cet objet et libère les ressources occupées
+	 * termine cet objet et libï¿½re les ressources occupï¿½es
 	 */
 	void finish()
 	{	sprite = null;
@@ -95,14 +95,14 @@ public class AiState
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associée à l'état */
+	/** nom associï¿½e Ã  l'ï¿½tat */
 	private AiStateName name;
 	
 	
 	/**
-	 * renvoie le nom associé à l'état
+	 * renvoie le nom associï¿½ Ã  l'ï¿½tat
 	 * 
-	 * @return	nom associé à l'état
+	 * @return	nom associï¿½ Ã  l'ï¿½tat
 	 */
 	public AiStateName getName()
 	{	return name;
@@ -111,14 +111,14 @@ public class AiState
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associée à l'état (peut être NONE, c'est à dire : l'état n'est pas orienté) */
+	/** direction associï¿½e Ã  l'ï¿½tat (peut ï¿½tre NONE, c'est Ã  dire : l'ï¿½tat n'est pas orientï¿½) */
 	private Direction direction;
 	
 	/**
-	 * renvoie la direction associée à l'état,
-	 * qui peut être NONE, c'est à dire : l'état n'est pas orienté
+	 * renvoie la direction associï¿½e Ã  l'ï¿½tat,
+	 * qui peut ï¿½tre NONE, c'est Ã  dire : l'ï¿½tat n'est pas orientï¿½
 	 * 
-	 * @return	direction associée à l'état
+	 * @return	direction associï¿½e Ã  l'ï¿½tat
 	 */
 	public Direction getDirection()
 	{	return direction;

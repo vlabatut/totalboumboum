@@ -26,9 +26,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 
 /**
- * Classe étendant la classe abstraite CostCalculator de la manière la plus simple possible.
- * Ici, le coût pour passer d'une case à l'autre est simplement 1, quelles que soient
- * les cases considérées.
+ * Classe ï¿½tendant la classe abstraite CostCalculator de la maniï¿½re la plus simple possible.
+ * Ici, le coï¿½t pour passer d'une case Ã  l'autre est simplement 1, quelles que soient
+ * les cases considï¿½rï¿½es.
  * 
  * @author Vincent Labatut
  *
@@ -39,14 +39,14 @@ public class BasicCostCalculator extends CostCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * Les deux cases sont supposées être voisines, 
+	 * Les deux cases sont supposï¿½es ï¿½tre voisines, 
 	 * on se contente de renvoyer leur distance
-	 * (exprimée en cases, donc forcément 1).
+	 * (exprimï¿½e en cases, donc forcï¿½ment 1).
 	 * 
 	 * @param start	
-	 * 		la case de départ
+	 * 		la case de dï¿½part
 	 * @param end	
-	 * 		la case d'arrivée
+	 * 		la case d'arrivï¿½e
 	 * @return 
 	 * 		la distance entre ces cases (ici : 1, puisqu'elles sont voisines)
 	 */ 
@@ -56,13 +56,13 @@ public class BasicCostCalculator extends CostCalculator
 	}
 
 	/**
-	 * le coût d'un chemin correspond ici à sa distance exprimée
+	 * le coï¿½t d'un chemin correspond ici Ã  sa distance exprimï¿½e
 	 * en cases.
 	 * 
 	 * @param path
-	 * 		chemin à traiter
+	 * 		chemin Ã  traiter
 	 * @return
-	 * 		le coût de ce chemin
+	 * 		le coï¿½t de ce chemin
 	 */
 	public double processCost(AiPath path) throws StopRequestException
 	{	double result = path.getTileDistance();

@@ -23,7 +23,7 @@ public class GoncuOnat extends ArtificialIntelligence
 	private AiHero ourHero;
 	private AiZone zone;
 	
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();

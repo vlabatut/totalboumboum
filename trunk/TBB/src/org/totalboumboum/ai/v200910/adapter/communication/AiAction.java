@@ -24,11 +24,11 @@ package org.totalboumboum.ai.v200910.adapter.communication;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * Classe représentant une action qu'un joueur peut effectuer.
- * Elle est utilisée pour indiquer au jeu quelle est la prochaine
- * action que l'IA veut réaliser.
+ * Classe reprï¿½sentant une action qu'un joueur peut effectuer.
+ * Elle est utilisÃ©e pour indiquer au jeu quelle est la prochaine
+ * action que l'IA veut rï¿½aliser.
  * <p>
- * L'action est décrite par un nom et éventuellement une direction.
+ * L'action est dï¿½crite par un nom et ï¿½ventuellement une direction.
  * L'action et la direction sont toutes les deux constantes, respectivement
  * de classes AiActionName et Direction.
  * 
@@ -38,7 +38,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class AiAction
 {
 	/**
-	 * construit une action non-orientée (DROP_BOMB,NONE,PUNCH...)
+	 * construit une action non-orientï¿½e (DROP_BOMB,NONE,PUNCH...)
 	 * @param name	le nom de l'action
 	 */
 	public AiAction(AiActionName name)
@@ -46,7 +46,7 @@ public class AiAction
 	}
 	
 	/**
-	 * construit une action orientée (MOVE...)
+	 * construit une action orientï¿½e (MOVE...)
 	 * @param name	le nom de l'action
 	 * @param direction	la direction de l'action
 	 */
@@ -60,11 +60,11 @@ public class AiAction
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associé à l'action */
+	/** nom associï¿½ Ã  l'action */
 	private AiActionName name;
 	
 	/**
-	 * renvoie le nom associé à l'action
+	 * renvoie le nom associï¿½ Ã  l'action
 	 * 
 	 * @return	le nom de l'action
 	 */
@@ -75,11 +75,11 @@ public class AiAction
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associée à l'action */
+	/** direction associï¿½e Ã  l'action */
 	private Direction direction;
 	
 	/**
-	 * renvoie la direction associée à l'action
+	 * renvoie la direction associï¿½e Ã  l'action
 	 * @return	la direction de l'action
 	 */
 	public Direction getDirection()

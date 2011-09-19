@@ -27,13 +27,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 /**
- * >> ce texte est à remplacer par votre propre description de votre IA
+ * >> ce texte est Ã  remplacer par votre propre description de votre IA
  * >> remplacez aussi le nom de l'auteur.
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui dÃ©finit son comportement.
+ * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile Ã 
+ * dÃ©bugger, modifier, relire, comprendre, etc.
  * 
  * @author Vincent Labatut
  *
@@ -62,7 +62,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	
 	//autorisation de poser bombe
 	private boolean permissionPoseBombe=false;
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException
 	{	
 		// avant tout : test d'interruption
@@ -70,7 +70,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 		
 
 		
-		//on a reçu la zone du jeu
+		//on a reï¿½u la zone du jeu
 		AiZone gameZone = getPercepts();
 		//Pour choisir mode
 		
@@ -134,27 +134,27 @@ public class OzdokerOzen extends ArtificialIntelligence
 							bPath.addTile(tile.get(i));
 							System.out.println(tile.get(i).getLine()+","+tile.get(i).getCol()+" - ");
 						}
-					System.out.println("Açýkta bonus gördum");
+					System.out.println("Aï¿½ï¿½kta bonus gï¿½rdum");
 					result=newAction2(bPath,notreHero,matrice);
 					*/
-					System.out.println("Açýkta bonus gördum");
+					System.out.println("Aï¿½ï¿½kta bonus gï¿½rdum");
 					
 					try {
 						if(outiles.existePath(gameZone, matrice, outiles.bonusPlusProche(matrice, gameZone))){ //Et S'il y a de path pour cette bonus 
-							System.out.println("yolu açýk");
+							System.out.println("yolu aï¿½ï¿½k");
 							AiPath rotate=tileControleur.calculateShortestPath(notreHero, notreHero.getTile(),outiles.bonusPlusProche(matrice, gameZone));
 							result=newAction2(rotate,notreHero,matrice);
-							System.out.println("Açýktaki bonusu almaya gidiyorum");
+							System.out.println("Aï¿½ï¿½ktaki bonusu almaya gidiyorum");
 						}else{//S'il y n'y pas de path, on va ouvrir notre path,on va poser les bomb
 
-							System.out.println("yolu kapalý");
+							System.out.println("yolu kapalï¿½");
 							AiTile murDet=outiles.murQuOnVaDetruitre(outiles.bonusPlusProche(matrice, gameZone), matrice, gameZone);
 							if(tileControleur.estQueOnPoseBombe(murDet)){
 								AiPath rotate=tileControleur.calculateShortestPath(notreHero, notreHero.getTile(),murDet,matrice);
 								result=newAction2(rotate,notreHero,matrice);
 								System.out.println("yol buldum gidiyorum");
 							}else{
-								System.out.println("bomba koymayalým");
+								System.out.println("bomba koymayalï¿½m");
 								permissionPoseBombe=false;
 								
 							}
@@ -166,22 +166,22 @@ public class OzdokerOzen extends ArtificialIntelligence
 				}else{
 					//S'il n'y a pas de bonus,on va detruit les murs pour chercher de bonus
 
-					System.out.println("Bonus yok duvar kýrýcam");
+					System.out.println("Bonus yok duvar kï¿½rï¿½cam");
 					AiTile tile=null;
 					
 					try {
-						System.out.println("yakýn duvarý býlduk mu?");
+						System.out.println("yakï¿½n duvarï¿½ bï¿½lduk mu?");
 
 						tile=outiles.murPlusProche(matrice, gameZone);
 						System.out.println("bulduk gidiyoruz");
 						if(tileControleur.estQueOnPoseBombe(tile)){
 	
 							AiPath rotate=tileControleur.calculateShortestPath(notreHero, notreHero.getTile(),tile,matrice);
-							System.out.println("Rotamýzýda bulduk");
+							System.out.println("Rotamï¿½zï¿½da bulduk");
 	
 							result=newAction2(rotate,notreHero,matrice);
 						}else{
-							System.out.println("bomba koymayalým");
+							System.out.println("bomba koymayalï¿½m");
 							permissionPoseBombe=false;
 							
 						}
@@ -192,12 +192,12 @@ public class OzdokerOzen extends ArtificialIntelligence
 					
 				}
 			}else{
-				System.out.println("guvende deðiliz");
+				System.out.println("guvende deï¿½iliz");
 				try {
-					System.out.println("kaçalým");
+					System.out.println("kaï¿½alï¿½m");
 					notrepath=guvenliAlanaKac(matrice, notreHero, gameZone);
 					result=newAction2(notrepath, notreHero,matrice);
-					System.out.println("Dayýýýý! biz kaçtýk dayý!");
+					System.out.println("Dayï¿½ï¿½ï¿½ï¿½! biz kaï¿½tï¿½k dayï¿½!");
 				} catch (LimitReachedException e) {
 					// 
 					e.printStackTrace();
@@ -210,7 +210,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			
 			System.out.println("attaque");
 			
-			//saldýrma.
+			//saldï¿½rma.
 			List<AiHero> dusman=gameZone.getHeroes();
 			plusCourtPathAdversaire(dusman, notreHero);
 			for(int i=0;i<dusman.size();i++){
@@ -264,8 +264,8 @@ public class OzdokerOzen extends ArtificialIntelligence
 	private AiBlock poseBombe(AiHero uneHero,AiZone gameZone) throws StopRequestException{
 		//on prend les murs destructible
 		List<AiBlock> lesMur=prendBlock(gameZone);
-		//on tie le list des paths de plus court à  plus long
-		//et on prend le valeur à l'index 0
+		//on tie le list des paths de plus court Ã   plus long
+		//et on prend le valeur Ã  l'index 0
 		plusCourtPathMur(lesMur,uneHero);
 		ecran.setTileColor(lesMur.get(0).getTile(), Color.CYAN);
 		return lesMur.get(0);
@@ -395,7 +395,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	}
 	*/
 	/**
-	 *Methode tie les path de court à longue
+	 *Methode tie les path de court Ã  longue
 	 * @param lesPaths
 	 * @param uneHero
 	 * @throws StopRequestException
@@ -403,7 +403,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	private void plusCourtPathAdversaire(List<AiHero> lesPaths,AiHero uneHero)throws StopRequestException{
 		//variable temporiel
 		AiHero temp;
-		//Tri à bulles
+		//Tri Ã  bulles
 		for(int i=lesPaths.size();i>2;i--){
 			for(int j=0;j<i-1;j++){
 				if(calculerDistance(lesPaths.get(j).getTile(),uneHero)>calculerDistance(lesPaths.get(j+1).getTile(),uneHero)){
@@ -419,7 +419,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	}
 	
 	/**
-	 *Methode tie les path de court à longue
+	 *Methode tie les path de court Ã  longue
 	 * @param lesPaths
 	 * @param uneHero
 	 * @throws StopRequestException
@@ -427,7 +427,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	private void plusCourtPathMur(List<AiBlock> lesPaths,AiHero uneHero)throws StopRequestException{
 		//variable temporiel
 		AiBlock temp;
-		//Tri à bulles
+		//Tri Ã  bulles
 		for(int i=lesPaths.size();i>2;i--){
 			for(int j=0;j<i-1;j++){
 				if(calculerDistance(lesPaths.get(j).getTile(),uneHero)>calculerDistance(lesPaths.get(j+1).getTile(),uneHero)){
@@ -462,7 +462,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	
 	/**
 	/**
-	 * Methode voissant le bonus dans l'aire de jeuü
+	 * Methode voissant le bonus dans l'aire de jeuï¿½
 	 * @param gameZone
 	 * 			l'aire de jeu
 	 * @throws StopRequestException
@@ -538,7 +538,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			checkInterruption();
 				for (int j = 0; j < width; j++) {
 					checkInterruption();
-					//butun alanlarý guvenli dusunuyoruz! 
+					//butun alanlarï¿½ guvenli dusunuyoruz! 
 					matrice[i][j] = 1;
 				}
 		}
@@ -565,7 +565,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiBomb bomb = iteratorBombs.next();
 			matrice[bomb.getLine()][bomb.getCol()] = -1;
 			/**
-			//pour les API, on a donné une color
+			//pour les API, on a donnï¿½ une color
 			ecran.setTileColor(bomb.getLine(), bomb.getCol(), Color.BLACK);
 			ecran.setTileText(bomb.getLine(), bomb.getCol(), "BOMBA");
 			*/
@@ -603,7 +603,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	AiBlock block = iteratorBlocks.next();
 	if (block.isDestructible()){
 		matrice[block.getLine()][block.getCol()] = 5;
-		//pour les API, on a donné une color
+		//pour les API, on a donnï¿½ une color
 		ecran.setTileColor(block.getLine(), block.getCol(), Color.LIGHT_GRAY);}
 	else
 		matrice[block.getLine()][block.getCol()] = 0;
@@ -631,7 +631,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiFire fire = iteratorFires.next();
 			matrice[fire.getLine()][fire.getCol()] = -2;
 			/**
-			//pour les API, on a donné une color
+			//pour les API, on a donnï¿½ une color
 			ecran.setTileColor(fire.getLine(), fire.getCol(), Color.white);
 			ecran.setTileText(fire.getTile(), "BOMB!");
 			*/
@@ -658,7 +658,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 			AiItem item = iteratorItems.next();
 			matrice[item.getLine()][item.getCol()] = 10;
 			/**
-			//pour les API, on a donné une color
+			//pour les API, on a donnï¿½ une color
 			ecran.setTileColor(item.getLine(), item.getCol(), Color.CYAN);
 			ecran.setTileText(item.getTile(), "BONUS!");
 			*/
@@ -687,7 +687,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	
 	/**
 	 * Methode calculant la nouvelle action a effectuer
-	 * (methode de groupe rouge de l'annee dernier mais on l'a modifié)
+	 * (methode de groupe rouge de l'annee dernier mais on l'a modifiï¿½)
 	 * @param nextMove
 	 * 			Le chemin precis a suivre.
 	 *  
@@ -708,10 +708,10 @@ public class OzdokerOzen extends ArtificialIntelligence
 		boolean check = true;
 		//Si on a arrive notre cible
 		if(notreCible.equals(uneHero.getTile())){
-			System.out.println("//HEDEFE ULAÞTIK//");
+			System.out.println("//HEDEFE ULAï¿½TIK//");
 			check=false;
 			if(permissionPoseBombe){
-				System.out.println("!!!Bombayý koyalým mý?");
+				System.out.println("!!!Bombayï¿½ koyalï¿½m mï¿½?");
 				
 				result=new AiAction(AiActionName.DROP_BOMB);
 				permissionPoseBombe=false;
@@ -766,7 +766,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	}
 	/**
 	 * Methode calculant la nouvelle action a effectuer
-	 * (methode de groupe rouge de l'annee dernier mais on l'a modifié)
+	 * (methode de groupe rouge de l'annee dernier mais on l'a modifiï¿½)
 	 * @param nextMove
 	 * 			Le chemin precis a suivre.
 	 *  
@@ -791,17 +791,17 @@ public class OzdokerOzen extends ArtificialIntelligence
 		System.out.println("Tile de hero: "+uneHero.getLine()+","+uneHero.getCol());
 		if(notreCible.equals(uneHero.getTile())){
 			
-			System.out.println("//HEDEFE ULAÞTIK//");
+			System.out.println("//HEDEFE ULAï¿½TIK//");
 			check=false;
 			if(permissionPoseBombe){
-				System.out.println("!!!Bombayý koyalým mý?");
+				System.out.println("!!!Bombayï¿½ koyalï¿½m mï¿½?");
 				if(control.estQueOnPoseBombe(notreCible)){
 					System.out.println("koyuyoruz");
 					result=new AiAction(AiActionName.DROP_BOMB);
 					permissionPoseBombe=false;
-					System.out.println("koyduk kaçacagýz");
+					System.out.println("koyduk kaï¿½acagï¿½z");
 				}else{
-					System.out.println("!!Hayýr bomba koymuyoruz");
+					System.out.println("!!Hayï¿½r bomba koymuyoruz");
 
 				}
 			}else{

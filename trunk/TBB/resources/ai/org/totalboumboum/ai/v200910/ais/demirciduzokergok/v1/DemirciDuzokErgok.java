@@ -6,16 +6,16 @@ import org.totalboumboum.ai.v200910.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 
 /**
- * >> ce texte est à remplacer par votre propre description de votre IA
+ * >> ce texte est Ã  remplacer par votre propre description de votre IA
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui dÃ©finit son comportement.
+ * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile Ã 
+ * dÃ©bugger, modifier, relire, comprendre, etc.
  */
 public class DemirciDuzokErgok extends ArtificialIntelligence
 {	
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();
@@ -25,14 +25,14 @@ public class DemirciDuzokErgok extends ArtificialIntelligence
 		return result;
 	}
 	
-	/** une méthode bidon pour l'exemple */
+	/** une mÃ©thode bidon pour l'exemple */
 	private AiAction uneMethode() throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();
 		
-		// je crée un objet implémentant mon traitement
+		// je crÃ©e un objet implÃ©mentant mon traitement
 //		MonTraitement mt = new MonTraitement(this);
-		// j'appelle la méthode qui effectue le traitement
+		// j'appelle la mÃ©thode qui effectue le traitement
 		AiAction result = new AiAction(AiActionName.NONE)/*mt.gagneRound()*/;
 		return result;
 	}
