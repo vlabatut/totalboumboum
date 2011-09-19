@@ -9,13 +9,13 @@ package org.totalboumboum.ai.v200708.ais.camasdemirbas;
  *
  */
 public class ManhattanHeuristic implements AStarHeuristic {
-	/** Le co�t minimum de mouvement de n'importe quel un carr� à l'apr�s */
+	/** Le coût minimum de mouvement de n'importe quel un carr� à l'apr�s */
 	private int minimumCost;
 	
 	/**
 	 * créer un nouvel heuristique 
 	 * 
-	 * @param minimumCost The le co�t minimum de mouvement de n'importe quel un carr� à l'apr�s
+	 * @param minimumCost The le coût minimum de mouvement de n'importe quel un carr� à l'apr�s
 	 */
 	protected ManhattanHeuristic(int minimumCost) {
 		this.minimumCost = minimumCost;

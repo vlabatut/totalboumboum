@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v200708.ais.camasdemirbas;
 
 /**
- * Une description d'une impl�mentation 
+ * Une description d'une implément 
  * qui peut trouver un chemin d'un emplacement sur une carte de carreau 
  * à un autre a bas� l'information fournie par cette carte de carreau. 
  * 

@@ -117,7 +117,7 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 
 		goal = null;
 
-		// variables utilis�s pour shrink
+		// variables utilisés pour shrink
 		perimetre = 1;
 		snake = new int[5][2];
 		snake[0][0] = 1;
@@ -174,8 +174,8 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 //		bombC = super.getOwnBombCount();
 
 		// s'il est sur la bombe et en train de s'�chapper ,il doit repeter le
-		// meme mouvement jusqu'� sortir de la case de la bombe,
-		// variables utilis�s pour ce but.
+		// meme mouvement jusqu'à sortir de la case de la bombe,
+		// variables utilisés pour ce but.
 		if (lastPosSS[0] != x || lastPosSS[1] != y) {
 			lastMove = AI_ACTION_DO_NOTHING;
 			lastPosSS[0] = x;
@@ -898,7 +898,7 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 		
 	
 	/**
-	 * Indique si le déplacement dont le code a �t� passé en paramètre est
+	 * Indique si le déplacement dont le code a été passé en paramètre est
 	 * possible pour un personnage situ� en (x,y).
 	 * 
 	 * @param x

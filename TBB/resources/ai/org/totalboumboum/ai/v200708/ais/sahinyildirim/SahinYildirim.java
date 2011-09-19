@@ -1210,7 +1210,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si le déplacement dont le code a �t� passé en paramètre est
+	 * Indique si le déplacement dont le code a été passé en paramètre est
 	 * possible pour un personnage situ� en (x,y).
 	 * 
 	 * @param x
@@ -1294,7 +1294,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si le déplacement dont le code a �t� passé en paramètre est
+	 * Indique si le déplacement dont le code a été passé en paramètre est
 	 * possible pour un personnage situ� en (x,y).
 	 * 
 	 * @param x
@@ -1402,8 +1402,8 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	/**
 	 * Renvoie la position du personnage si il est plus proche  
-	 * @param x	position de r�f�rence
-	 * @param y	position de r�f�rencepol
+	 * @param x	position de référence
+	 * @param y	position de référencepol
 	 * @return	position du joueur le plus proche
 	 */
 	private List<Integer> getClosestPlayerPosition(int x, int y) {

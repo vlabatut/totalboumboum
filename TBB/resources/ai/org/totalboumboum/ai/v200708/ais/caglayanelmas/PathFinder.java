@@ -26,7 +26,7 @@ import org.totalboumboum.ai.v200708.ais.caglayanelmas.SearchNode;
 public class PathFinder
 {
 	// L'objet qui représente notre IA. On utilise
-	// cette r�f�rence pour pouvoir appeler
+	// cette référence pour pouvoir appeler
 	// les méthodes isObstacle, isMovePossible,
 	// applyAction.
 	private CaglayanElmas ai;

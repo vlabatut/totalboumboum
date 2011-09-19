@@ -396,7 +396,7 @@ public class KilicPala extends ArtificialIntelligence
 	}
 
 	/**
-	 * Indique si le déplacement dont le code a �t� passé en paramètre 
+	 * Indique si le déplacement dont le code a été passé en paramètre 
 	 * est possible pour un personnage situ� en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage

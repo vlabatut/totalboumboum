@@ -140,8 +140,8 @@ public class BaydarCamci extends ArtificialIntelligence
 	 * du point de coordonnées (x,y) passées en paramètres. Le r�sultat
 	 * prend la forme d'un tableau des deux coordon�es du bloc le plus proche.
 	 * Le tableau est contient des -1 s'il n'y a aucun bloc du bon type dans la zone de jeu.
-	 * @param x	position de r�f�rence
-	 * @param y	position de r�f�rence
+	 * @param x	position de référence
+	 * @param y	position de référence
 	 * @param blockType	le type du bloc recherch�
 	 * @return	les coordonnées du bloc le plus proche
 	 */
@@ -185,7 +185,7 @@ public class BaydarCamci extends ArtificialIntelligence
 
 
 	/**
-	 * Indique si le déplacement dont le code a �t� passé en paramètre 
+	 * Indique si le déplacement dont le code a été passé en paramètre 
 	 * est possible pour un personnage situ� en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage

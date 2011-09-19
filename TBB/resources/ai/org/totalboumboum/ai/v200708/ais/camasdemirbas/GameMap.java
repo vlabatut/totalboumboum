@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v200708.ais.camasdemirbas;
 
 /**
- * Ceci tient l'�tat et le contexte de chaque carreau sur la carte. 
+ * Ceci tient l'état et le contexte de chaque carreau sur la carte. 
  * 
  * @author Gokhan Camas
  * @author Irem Demirbas
@@ -14,7 +14,7 @@ public class GameMap {
 	public static final int HEIGHT = 15;	
 	/** Les cadres de terrain pour chaque carreau dans la carte */
 	private int[][] zoneMatrix = new int[WIDTH][HEIGHT];
-	/** L'indicateur si un carreau donn� a �t� visit� pendant la recherche */
+	/** L'indicateur si un carreau donn� a été visité pendant la recherche */
 	private boolean[][] visited = new boolean[WIDTH][HEIGHT];
 	
 	/**
@@ -25,7 +25,7 @@ public class GameMap {
 	}
 	
 	/**
-	 * Eclaircir le tableau marquant quels carreaux ont �t� visted par path 
+	 * Eclaircir le tableau marquant quels carreaux ont été visted par path 
 	 * finder.
 	 */
 	public void clearVisited() {
