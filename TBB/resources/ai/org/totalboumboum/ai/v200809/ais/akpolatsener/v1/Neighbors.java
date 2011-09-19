@@ -102,8 +102,8 @@ public class Neighbors {
 	}
 
 	/**
-	 * la liste des cases voisines propres qui ne sont pas dans la port�e d'une bombe
-	 * @return la liste des cases voisines propres qui ne sont pas dans la port�e d'une bombe
+	 * la liste des cases voisines propres qui ne sont pas dans la portée d'une bombe
+	 * @return la liste des cases voisines propres qui ne sont pas dans la portée d'une bombe
 	 * @throws StopRequestException
 	 */
 	public List<AiTile> findNeighborsNotInBombRange()	throws StopRequestException
@@ -118,7 +118,7 @@ public class Neighbors {
 		List<AiTile> tiles = findCleanNeighbors();
 		Iterator<AiTile> iter = tiles.iterator();
 
-		//on considere que la port�e d'une bombe est 20 cases
+		//on considere que la portée d'une bombe est 20 cases
 		int bombRange = 10;
 
 		while (iter.hasNext()) {
@@ -153,7 +153,7 @@ public class Neighbors {
 	}
 
 	/**
-	 * determine si une case est dans la port�e d'une bombe
+	 * determine si une case est dans la portée d'une bombe
 	 * @param tile
 	 * @param bombRange
 	 * @return true si elle est, false sinon
@@ -283,9 +283,9 @@ public class Neighbors {
 	}
 
 	/**
-	 * le nombre des voisins de la case donn�e
+	 * le nombre des voisins de la case donnée
 	 * @param tile
-	 * @return le nombre des voisins de la case donn�e
+	 * @return le nombre des voisins de la case donnée
 	 * @throws StopRequestException
 	 */
 	public int getNeighborsNumber(AiTile tile) throws StopRequestException {
@@ -299,9 +299,9 @@ public class Neighbors {
 	
 	
 	/**
-	 * la distance directe entre la case donn�e et la bombe la plus proche
+	 * la distance directe entre la case donnée et la bombe la plus proche
 	 * @param tile
-	 * @return la distance directe entre la case donn�e et la bombe la plus proche
+	 * @return la distance directe entre la case donnée et la bombe la plus proche
 	 * @throws StopRequestException
 	 */
 	public double getHypotenuseToBomb(AiTile tile) throws StopRequestException {

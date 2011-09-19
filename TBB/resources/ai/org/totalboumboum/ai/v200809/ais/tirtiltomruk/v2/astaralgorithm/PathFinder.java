@@ -181,7 +181,7 @@ public class PathFinder {
 
 	/**
 	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de
-	 * A �toile. (cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
+	 * A étoile. (cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
 	 * 
 	 * @param x
 	 *            le coordonné de x de l'ia.
@@ -221,7 +221,7 @@ public class PathFinder {
 		LinkedList<Noeud> open = new LinkedList<Noeud>();// liste des elements
 		// qu'on regarde.
 		LinkedList<Noeud> closed = new LinkedList<Noeud>();// liste des elements
-		// qu'on a dej�
+		// qu'on a dejà
 		// regardé.
 		Noeud temp = new Noeud(source);
 
@@ -293,7 +293,7 @@ public class PathFinder {
 
 		}// fin de while
 
-		if (solution != null)// si on a trouv� la solution sans finir tous les
+		if (solution != null)// si on a trouvé la solution sans finir tous les
 			// elements de la frange.
 			path = tree.getPath(solution);
 

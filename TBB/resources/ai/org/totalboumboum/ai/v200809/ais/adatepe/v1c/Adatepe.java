@@ -25,7 +25,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class Adatepe extends ArtificialIntelligence 
 {
 	
-	/** la case occup�e actuellement par le personnage*/
+	/** la case occupée actuellement par le personnage*/
 	private AiTile currentTile;
 	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
@@ -67,7 +67,7 @@ public class Adatepe extends ArtificialIntelligence
 		drawdangerzones();
 		if(nextTile == null)
 			nextTile = currentTile;
-		// arriv� à destination : on choisit une nouvelle destination
+		// arrivé à destination : on choisit une nouvelle destination
 		if(currentTile==nextTile)
 		{
 			checksafety();

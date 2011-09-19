@@ -24,7 +24,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  *
  */
 public class ErisikPektas extends ArtificialIntelligence {
-	/** la case occupée actuellement par le personnage */
+	/** la case occupÃ©e actuellement par le personnage */
 	private AiTile caseactuelle;
 	/** la case sur laquelle on veut aller */
 	private AiTile caseprochaine = null;
@@ -102,7 +102,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 			}
 			// sil nya pas de danger et caseprochaine nest pas nulle nous
-			// avançons en suivant lautre joueur
+			// avanÃ§ons en suivant lautre joueur
 			else if (caseprochaine == caseactuelle) {
 //				System.out.println("prozhaine");
 

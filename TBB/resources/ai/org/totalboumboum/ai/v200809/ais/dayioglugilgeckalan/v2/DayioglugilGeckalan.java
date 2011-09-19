@@ -356,7 +356,7 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 			checkInterruption();
 			for (int j = 0; j < heigh; j++) {
 				checkInterruption();
-				// i j hata veriyo eger destination ayný bulundugu yerse
+				// i j hata veriyo eger destination ayn bulundugu yerse
 				if ((getPercepts().getTile(j, i).getItem() != null )) {
 
 					PathFinder pathfinder = new PathFinder(getPercepts(),getPercepts().getTile(j, i),this);

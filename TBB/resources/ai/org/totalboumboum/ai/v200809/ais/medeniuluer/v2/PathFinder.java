@@ -151,7 +151,7 @@ public class PathFinder {
 	
 	/**
 	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de
-	 * A �toile. (cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
+	 * A étoile. (cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
 	 * 
 	 * @param x
 	 *            le coordonné de x de l'ia.

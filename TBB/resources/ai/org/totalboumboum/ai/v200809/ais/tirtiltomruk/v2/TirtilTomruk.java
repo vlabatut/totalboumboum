@@ -390,10 +390,10 @@ public class TirtilTomruk extends ArtificialIntelligence {
 				previousTile = currentTile;
 			}
 
-			// arriv� à destination : on choisit une nouvelle destination
+			// arrivé à destination : on choisit une nouvelle destination
 			if (currentTile == nextTile)
 				pickNextTile();
-			// au cas ou quelqu'un prendrait le contr�le manuel du personnage
+			// au cas ou quelqu'un prendrait le Contrôle manuel du personnage
 			else if (previousTile != currentTile) {
 				previousTile = currentTile;
 				pickNextTile();
@@ -604,7 +604,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 	
 
 	/*
-	 * Null d�nd�rebilir ha.
+	 * Null dndrebilir ha.
 	 */
 	public AiTile bombTileForBonus() throws StopRequestException {
 		checkInterruption(); // Appel Obligatoire

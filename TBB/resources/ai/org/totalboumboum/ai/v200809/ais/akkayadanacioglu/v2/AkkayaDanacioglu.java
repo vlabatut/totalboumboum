@@ -27,7 +27,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class AkkayaDanacioglu extends ArtificialIntelligence
 {
 	
-	/** la case occup�e actuellement par le personnage*/
+	/** la case occupée actuellement par le personnage*/
 	private AiTile currentTile;
 	
 	/** la case sur laquelle on veut aller */
@@ -113,7 +113,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 					// on fait rien
 					result=new AiAction(AiActionName.NONE);	
 				}
-				// si mon case n'est pas en secutit�
+				// si mon case n'est pas en secutité
 				else{
 					// random action
 					
@@ -133,9 +133,9 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Choisit comme destination une case voisine de la case actuellement occup�e par l'IA.
+	 * Choisit comme destination une case voisine de la case actuellement occupée par l'IA.
 	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
-	 * être différente de la case pr�c�demment occup�e
+	 * être différente de la case précédemment occupée
 	 * @throws StopRequestException 
 	 */
 	
@@ -199,7 +199,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	
 	// liste des cases voisines accessibles	
 	List<AiTile> tiles = getClearNeighbors(currentTile);
-	// on sort de la liste la case d'o� l'on vient (pour �viter de repasser au même endroit)
+	// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 	boolean canGoBack = false;
 	if(tiles.contains(previousTile))
 	{	tiles.remove(previousTile);
@@ -207,8 +207,8 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	}
 	// s'il reste des cases dans la liste
 	if(tiles.size()>0)
-	{	// si la liste contient la case situ�e dans la direction déplacement pr�cedente,
-		// on �vite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
+	{	// si la liste contient la case située dans la direction déplacement précedente,
+		// on évite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
 		AiTile tempTile = null;
 		Direction dir = getPercepts().getDirection(previousTile,currentTile);
 		if(dir!=Direction.NONE)
@@ -230,7 +230,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 			previousTile = currentTile;
 		}
 	}
-	// sinon (pas le choix) on tente de revenir en arri�re
+	// sinon (pas le choix) on tente de revenir en arrière
 	else
 	{	if(canGoBack)
 		{	nextTile = previousTile;
@@ -459,11 +459,11 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		}
 		
 	}
-	// arriv� à destination : on choisit une nouvelle destination
+	// arrivé à destination : on choisit une nouvelle destination
 	if(currentTile==nextTile)
 		pickNextTile();
 	
-	// au cas ou quelqu'un prendrait le contr�le manuel du personnage
+	// au cas ou quelqu'un prendrait le Contrôle manuel du personnage
 	
 	else if(previousTile!=currentTile)
 	{	previousTile = currentTile;

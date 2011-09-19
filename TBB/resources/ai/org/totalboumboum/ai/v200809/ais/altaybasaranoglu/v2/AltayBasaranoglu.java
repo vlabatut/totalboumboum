@@ -28,7 +28,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  *
  */
 public class AltayBasaranoglu extends ArtificialIntelligence {
-	/** la case occup�e actuellement par le personnage */
+	/** la case occupée actuellement par le personnage */
 	private AiTile currentTile;
 
 

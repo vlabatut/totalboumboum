@@ -8,7 +8,7 @@ import org.totalboumboum.ai.v200809.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
- * Représente un arbre de recherche. Les noeuds sont li�s avec des SearchLink
+ * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
  * orientes
  * 
  * @author Eser Devecioglu
