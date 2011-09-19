@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v201011.adapter.data;
 
 /**
  * représente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caract�ris� par son type, représentant le pouvoir apport� (ou enlev�)
+ * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlev�)
  * par l'item. Ce type est représent�e par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut

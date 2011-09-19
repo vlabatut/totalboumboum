@@ -60,13 +60,13 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	 * @param bombNumber
 	 * 		nombre de bombes que le personnage peut poser
 	 * @param bombCount
-	 * 		nombre de bombes actuellement pos�es
+	 * 		nombre de bombes actuellement posées
 	 * @param throughBlocks
-	 * 		capacit� du personnage à traverser les blocs
+	 * 		capacité du personnage à traverser les blocs
 	 * @param throughBombs
-	 * 		capacit� du personnage à traverser les bombes
+	 * 		capacité du personnage à traverser les bombes
 	 * @param throughFires
-	 * 		capacit� du personnage à traverser le feu (sans mourir !)
+	 * 		capacité du personnage à traverser le feu (sans mourir !)
 	 * @param color
 	 * 		couleur du personnage
 	 * @param walkingSpeed
@@ -128,7 +128,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	private AiBomb bombPrototype;
 	/** nombre de bombes que le personnage peut poser simultan�ment (en général) */
 	private int bombNumberMax;
-	/** nombre de bombes que le personnage a actuellement pos�es */
+	/** nombre de bombes que le personnage a actuellement posées */
 	private int bombNumberCurrent;
 	
 	@Override
@@ -142,10 +142,10 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	}
 	
 	/**
-	 * met à jour la port�e des bombes pos�es par ce joueur
+	 * met à jour la portée des bombes posées par ce joueur
 	 * 
 	 * @param delta
-	 * 		la modification à apporter à la port�e des bombes
+	 * 		la modification à apporter à la portée des bombes
 	 */
 	protected void updateBombRange(int delta)
 	{	AiSimBomb proto = new AiSimBomb(bombPrototype,null);

@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action d'atterrir (hors déplacement sur le plan, qui est li� à movehigh)
+ * action d'atterrir (hors déplacement sur le plan, qui est lié à movehigh)
  * INTRANSITIVE
  * 
  * <p>ABILITY PERFORM

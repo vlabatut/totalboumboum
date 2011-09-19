@@ -56,7 +56,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
- * pour détruire les murs et �liminer les autre joueurs.
+ * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
  *
@@ -100,11 +100,11 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// FIRE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** exemple de feu que la bombe peut g�n�rer */
+	/** exemple de feu que la bombe peut générer */
 	private AiFire firePrototype;
 	
 	/**
-	 * initialise l'exemple de feu que cette bombe peut g�n�rer
+	 * initialise l'exemple de feu que cette bombe peut générer
 	 */
 	private void initFirePrototype()
 	{	Bomb bomb = getSprite();
@@ -127,13 +127,13 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** d�clenchement par compte à rebours */
+	/** déclenchement par compte à rebours */
 	private boolean countdownTrigger;
-	/** d�clenchement par télécommande */
+	/** déclenchement par télécommande */
 	private boolean remoteControlTrigger;
-	/** d�clenchement par explosion */
+	/** déclenchement par explosion */
 	private boolean explosionTrigger;
-	/** d�lai normal (ie hors-panne) avant l'explosion de la bombe */
+	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
 	/** latence de la bombe quand son explosion est d�clench�e par une autre bombe */
 	private long latencyDuration;
@@ -161,12 +161,12 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	}
 	
 	/**
-	 * initialisation des d�lais li�s à l'explosion de la bombe
+	 * initialisation des délais liés à l'explosion de la bombe
 	 */
 	private void initFuseParameters()
 	{	Bomb bomb = getSprite();
 		
-		// d�lai normal avant l'explosion 
+		// délai normal avant l'explosion 
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 			normalDuration = (long)ability.getStrength();
 		}	
@@ -205,11 +205,11 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** port�e de la bombe, ie. : nombre de cases occup�es par sa flamme */
+	/** portée de la bombe, ie. : nombre de cases occupées par sa flamme */
 	private int range;
 	/** liste des cases qui vont subir l'explosion de la bombe */
 	private final List<AiTile> blast = new ArrayList<AiTile>();
-	/** type du feu g�n�r� : normal ou p�n�trant */
+	/** type du feu génér� : normal ou p�n�trant */
 	private boolean penetrating;
 	
 	@Override
@@ -218,7 +218,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	}
 	
 	/**
-	 * initialise la port�e de la bombe
+	 * initialise la portée de la bombe
 	 */
 	private void initRange()
 	{	Bomb bomb = getSprite();
@@ -283,7 +283,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleur de la bombe (correspondant à celle du personnage qui l'a pos�e) */
+	/** couleur de la bombe (correspondant à celle du personnage qui l'a posée) */
 	private PredefinedColor color;
 	
 	@Override
@@ -403,7 +403,7 @@ if(slidingSpeed==0)
 	}
 
 	/** 
-	 * met à jour les différentes caract�ristiques de cette bombe
+	 * met à jour les différentes caractéristiques de cette bombe
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()

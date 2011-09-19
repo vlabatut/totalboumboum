@@ -52,7 +52,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	/////////////////////////////////////////////////////////////////
 	// ACTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** action concern�e par cette permission */
+	/** action concernée par cette permission */
 	protected GeneralAction action;
 	
 	public GeneralAction getAction()

@@ -25,7 +25,7 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 
 /**
  * représente un nom associé à un état, c'est à dire : l'action
- * effectuée par le sprite concern�, ou bien l'action qu'il subit.
+ * effectuée par le sprite concerné, ou bien l'action qu'il subit.
  * Ces actions sont différentes des 'gestes' utilisés dans le jeu,
  * car elles sont plus simples : une de ces actions peut correspondre à 
  * plusieurs gestes différents. Par exemple, MOVING
@@ -55,7 +55,7 @@ public enum AiStateName
 	STANDING,
 	
 	// equivalent gesture: PUSHING, SLIDING, SLIDING_FAILING, WALKING
-	/** le sprite se d�place sur le sol */
+	/** le sprite se déplace sur le sol */
 	MOVING;
 	
 	// unused gestures: NONE, HIDING

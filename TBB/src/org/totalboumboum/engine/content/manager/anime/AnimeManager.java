@@ -54,7 +54,7 @@ public class AnimeManager
 	/////////////////////////////////////////////////////////////////
 	// SPRITE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** sprite poss�dant ce manager */
+	/** sprite possédant ce manager */
 	protected Sprite sprite;
 	
 	/////////////////////////////////////////////////////////////////
@@ -69,7 +69,7 @@ public class AnimeManager
 	 * 	- reinit : 
 	 * 		- remet currentTime (le temps écoulé) à 0 et recalcule le durationCoeff.
 	 * 		- ceci permet de passer d'une anime à une autre sans repartir à z�ro, par exemple pour un changement de direction pendant walking.
-	 * 		- on suppose alors que les deux animes ont exactement les mêmes caract�ristiques (même dur�e, proportion, etc), car elles ne sont pas r�initialisées.
+	 * 		- on suppose alors que les deux animes ont exactement les mêmes caractéristiques (même dur�e, proportion, etc), car elles ne sont pas r�initialisées.
 	 * 	- forcedDuration : 
 	 * 		- si >0 : force l'animation à durer le temps passé en paramètre :
 	 * 			- si l'animation est définie comme proportionnelle, la dur�e de chaque pas est modifiée (lin�airement) pour coller à forcedDuration
@@ -77,7 +77,7 @@ public class AnimeManager
 	 * 				- interrompue si elle est plus longue que forcedDuration
 	 * 				- reste bloquée sur la dernière image si elle est plus courte que forcedDuration  
 	 * 		- si =0 : la dur�e de l'animation n'est pas forc�e, on utilise celle définie dans le fichier xml
-	 * 		- si <0 : force  l'animation à durer le même temps que le sprite li� (s'il existe, sinon c'est comme si forcedDuration==0)
+	 * 		- si <0 : force  l'animation à durer le même temps que le sprite lié (s'il existe, sinon c'est comme si forcedDuration==0)
 	 * 
 	 * Remarques : 
 	 * 	- une 'animation fixe' (une seule image ou pas d'image) sera en général associée à totalDuration=0 et repeat=true.
@@ -105,7 +105,7 @@ public class AnimeManager
 			currentAnime.setGestureName(gesture.getName());
 			AnimeStep as = new AnimeStep();
 			currentAnime.add(as);
-			//TODO à supprimer si le chargement d'animations est finalis� de mani�re à �viter cette situation (= anime vide)
+			//TODO à supprimer si le chargement d'animations est finalis� de manière à éviter cette situation (= anime vide)
 		}
 		if(reinit)
 		{	isTerminated = false;
@@ -200,7 +200,7 @@ public class AnimeManager
 	protected AnimeStep currentStep;
 
 	/**
-	 * calcule l'�tape courante de l'animation, en fonction du temps courant
+	 * calcule l'étape courante de l'animation, en fonction du temps courant
 	 */
 	private void updateStep()
 	{	// process current displayable image
@@ -216,15 +216,15 @@ public class AnimeManager
 	/////////////////////////////////////////////////////////////////
 	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps total écoulé de puis le d�but de l'animation */
+	/** temps total écoulé de puis le début de l'animation */
 	protected double currentTime;
-	/** temps normalis� écoulé de puis le d�but de l'animation (r�initialisé par un repeat) */
+	/** temps normalis� écoulé de puis le début de l'animation (r�initialisé par un repeat) */
 	protected double animeTime;
 	/** dur�e totale originale de l'animation */
 	protected double animeDuration;
 	/** dur�e totale effective de l'animation */
 	protected double totalDuration = 0;
-	/** coefficient de mofication du temps d� au d�lai impos� */
+	/** coefficient de mofication du temps d� au délai imposé */
 	protected double forcedDurationCoeff = 1;
 	
 	/**

@@ -48,21 +48,21 @@ import org.totalboumboum.game.round.RoundVariables;
 /**
  * 
  * Classe servant d'interface entre le jeu et une IA.
- * Elle doit être surclass�e de mani�re à obtenir un adaptateur pour une famille
- * d'IA donn�e. Puis, chaque IA doit elle même surclasser la classe résultante
+ * Elle doit être surclass�e de manière à obtenir un adaptateur pour une famille
+ * d'IA donnée. Puis, chaque IA doit elle même surclasser la classe résultante
  * (tout ça dans le but de faciliter le chargement de la classe implémentant l'IA).
  * 
  * @author Vincent Labatut
  *
  * @param <V>	
- * 		le type de donn�e renvoy�e par l'IA (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
+ * 		le type de donnée renvoy�e par l'IA (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
  */
 
 public abstract class AbstractAiManager<V>
 {	/**
      * contruit un nouveau manager pour l'IA passé en paramètre.
-     * Ce constructeur est destin� à être appel� par le constructeur situ� dans 
-     * la classe h�ritant de celle-ci et situ�e dans le dossier de l'IA
+     * Ce constructeur est destin� à être appel� par le constructeur situé dans 
+     * la classe h�ritant de celle-ci et située dans le dossier de l'IA
      *    
      * @param 
      * 		ai
@@ -113,7 +113,7 @@ public abstract class AbstractAiManager<V>
     
     /**
      * Utilise la classe d'IA associée à ce personnage pour mettre à jour les variables
-     * qui permettront au moteur du jeu de d�placer le personnage.
+     * qui permettront au moteur du jeu de déplacer le personnage.
      * 
      * @param aisPause
      * 		indique si l'agent doit passer en pause
@@ -158,7 +158,7 @@ public abstract class AbstractAiManager<V>
     		// pas de passage en pause : cet appel est-il fini ?
     		else if(futureAi.isDone())
     		{	try
-    			{	// on r�cup�re les r�actions de l'IA
+    			{	// on récupére les r�actions de l'IA
     				V value = futureAi.get();
     				// on les convertit et les envoie au moteur
     				List<ControlEvent> events = convertReaction(value);
@@ -202,7 +202,7 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * réalise l'appel à la classe qui impl�mente l'IA,
+     * réalise l'appel à la classe qui implémente l'IA,
      * afin que celle ci calcule la prochaine action à effectuer.
      * 
      * @param firstTime
@@ -237,7 +237,7 @@ public abstract class AbstractAiManager<V>
     
     /**
      * termine cette IA, et en particulier le processus qui l'exécute.
-     * Pour cette raison, l'IA doit impl�menter une méthode for�ant 
+     * Pour cette raison, l'IA doit implémenter une méthode for�ant 
      * sa terminaison.
      */
     public abstract void finishAi();
@@ -282,8 +282,8 @@ public abstract class AbstractAiManager<V>
 	/**
 	 * méthode utilisée pour mettre à jour les percepts de l'ia avant 
 	 * que cette dernière ne calcule la prochaine action à effectuer.
-	 * Cette méthode doit être surchargée de mani�re à adapter la structure
-	 * des donn�es à l'IA qui va les traiter
+	 * Cette méthode doit être surchargée de manière à adapter la structure
+	 * des données à l'IA qui va les traiter
 	 */
 	public abstract void updatePercepts();
 	
@@ -299,8 +299,8 @@ public abstract class AbstractAiManager<V>
 	public abstract List<ControlEvent> convertReaction(V value);
    
 	/**
-	 * termine proprement les percepts, de mani�re à lib�rer les ressources occup�es.
-	 * Cette méthode est appelée lorsque la partie est termin�e et que les
+	 * termine proprement les percepts, de manière à lib�rer les ressources occupées.
+	 * Cette méthode est appelée lorsque la partie est terminée et que les
 	 * percepts deviennent inutiles.
 	 */
 	public abstract void finishPercepts();

@@ -202,7 +202,7 @@ public class FullControlManager extends ControlManager
 		{	ControlEvent temp = i.next();
 			i.remove();
 			sprite.processEvent(temp);
-//System.out.println("reçu:"+temp.getName()+","+temp.getMode());			
+//System.out.println("reÃ§u:"+temp.getName()+","+temp.getMode());			
 		}
 	}
 

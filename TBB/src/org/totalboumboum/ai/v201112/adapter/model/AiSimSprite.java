@@ -160,11 +160,11 @@ abstract class AiSimSprite implements AiSprite
 	}
 	
 	/**
-	 * permet de modifier la case occup�e par ce sprite.
+	 * permet de modifier la case occupée par ce sprite.
 	 * méthode utilisée uniquement lors des simulations.
 	 * 
 	 * @param tile
-	 * 		nouvelle case occup�e par ce sprite
+	 * 		nouvelle case occupée par ce sprite
 	 */
 	protected void setTile(AiSimTile tile)
 	{	this.tile = tile;

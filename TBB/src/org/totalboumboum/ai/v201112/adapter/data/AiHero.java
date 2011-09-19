@@ -44,10 +44,10 @@ public interface AiHero extends AiSprite
 	public AiBomb getBombPrototype();
 
 	/**
-	 * renvoie la port�e actuelle des bombes du personnage
+	 * renvoie la portée actuelle des bombes du personnage
 	 * 
 	 * @return	
-	 * 		la port�e des bombes
+	 * 		la portée des bombes
 	 */
 	public int getBombRange();
 	
@@ -72,7 +72,7 @@ public interface AiHero extends AiSprite
 	 * renvoie le nombre de bombes que le personnage peut poser simultan�ment,
 	 * à ce moment du jeu.
 	 * Ce nombre correspond à la somme du nombre de bombes actuellement déjà 
-	 * pos�es (getBombNumberCurrent) plus le nombre de bombes que le joueur peut encore poser. 
+	 * posées (getBombNumberCurrent) plus le nombre de bombes que le joueur peut encore poser. 
 	 * 
 	 * @return	
 	 * 		le nombre de bombes simultan�ment posables (en général)
@@ -80,13 +80,13 @@ public interface AiHero extends AiSprite
 	public int getBombNumberMax();
 	
 	/**
-	 * renvoie le nombre de bombes pos�es par le personnage à ce moment-l�.
-	 * Ce nombre est limit� par la valeur renvoy�e par getBombNumberMax,
+	 * renvoie le nombre de bombes posées par le personnage à ce moment-l�.
+	 * Ce nombre est limité par la valeur renvoy�e par getBombNumberMax,
 	 * i.e. il ne peut pas être plus grand puisque getBombNumberMax renvoie
 	 * le nombre de bombes maximal que le joueur peut poser en même temps. 
 	 * 
 	 * @return	
-	 * 		nombre de bombes pos�es en ce moment
+	 * 		nombre de bombes posées en ce moment
 	 */
 	public int getBombNumberCurrent();
 	
@@ -121,7 +121,7 @@ public interface AiHero extends AiSprite
 	/**
 	 * Renvoie le classement de ce joueur, pour la manche en cours.
 	 * Ce classement est susceptible d'�voluer d'ici la fin de la manche actuellement jou�e, 
-	 * par exemple si ce joueur est �limin�.
+	 * par exemple si ce joueur est élimin�.
 	 * 
 	 * @return	
 	 * 		le classement de ce joueur dans la manche en cours

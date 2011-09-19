@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action de se d�placer en l'air
+ * action de se déplacer en l'air
  * INTRANSITIVE
  * 
  * <p>ABILITY PERFORM

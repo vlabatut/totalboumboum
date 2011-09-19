@@ -78,7 +78,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	private AiDataBomb bombPrototype;
 	/** nombre de bombes que le personnage peut poser simultan�ment (en général) */
 	private int bombNumberMax;
-	/** nombre de bombes que le personnage a actuellement pos�es */
+	/** nombre de bombes que le personnage a actuellement posées */
 	private int bombNumberCurrent;
 	
 	@Override

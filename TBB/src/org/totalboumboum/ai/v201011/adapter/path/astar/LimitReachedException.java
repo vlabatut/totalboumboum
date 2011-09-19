@@ -108,14 +108,14 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// HEIGHT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de hauteur (n�gatif = pas de limite) */
+	/** limite de hauteur (négatif = pas de limite) */
 	private int maxHeight;
 	/** hauteur maximale atteinte */
 	private int height;
 
 	/**
 	 * renvoie la limite de hauteur pour l'exploration de l'arbre de recherche.
-	 * une valeur n�gative représente une absence de limite.
+	 * une valeur négative représente une absence de limite.
 	 * 
 	 * @return
 	 * 		la limite de hauteur pour l'exploration de l'arbre de recherche
@@ -138,14 +138,14 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// COST				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de coût (n�gatif = pas de limite) */
+	/** limite de coût (négatif = pas de limite) */
 	private double maxCost;
 	/** coût maximal atteint */
 	private double cost;
 
 	/**
 	 * renvoie la limite de coût pour l'exploration de l'arbre de recherche.
-	 * une valeur n�gative représente une absence de limite.
+	 * une valeur négative représente une absence de limite.
 	 * 
 	 * @return
 	 * 		la limite de coût pour l'exploration de l'arbre de recherche
@@ -168,7 +168,7 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// SIZE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de taille exprimée en nombre de noeuds (n�gatif = pas de limite) */
+	/** limite de taille exprimée en nombre de noeuds (négatif = pas de limite) */
 	private int maxSize;
 	/** taille atteinte lors de l'exploration */
 	private int size;

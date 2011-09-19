@@ -354,16 +354,16 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 
 	/**
-	 * renvoie le voisin de cette case passée en paramètre, situ� dans la direction
+	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
 	 * passée en paramètre.
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case situ�e au bord du niveau est une case situ�e sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case situ�e
-	 * à la position (ligne,0), le voisin de gauche est la case situ�e à la position
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
 	 * (ligne,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de cette case, situ� dans la direction indiqu�e
+	 * @return	le voisin de cette case, situé dans la direction indiqu�e
 	 */
 	public AiTile getNeighbor(Direction direction)
 	{	AiTile result;

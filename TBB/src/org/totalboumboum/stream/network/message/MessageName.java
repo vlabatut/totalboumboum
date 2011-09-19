@@ -81,7 +81,7 @@ public enum MessageName
 		REQUESTING_PLAYERS_SET,
 		
 		/** server requests client current state */ 
-//		REQUESTING_CLIENT_STATE, //pas nécessaire, à �viter même
+//		REQUESTING_CLIENT_STATE, //pas nécessaire, à éviter même
 		/** server sends game information */ 
 		UPDATING_GAME_INFO,
 		/** server sends players list */

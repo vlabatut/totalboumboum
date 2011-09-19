@@ -47,7 +47,7 @@ public class AiOutput
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * efface toutes les donn�es spécifiées pr�c�demment
+	 * efface toutes les données spécifiées précédemment
 	 */
 	public void reinit()
 	{	reinitPaths();

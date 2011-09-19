@@ -171,7 +171,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 		double initZ = currentPosZ - relativePosZ;
 		// calcul des nouvelles positions forc�es
 		processForcedShifts(initX,initY,initZ);
-		// calcul des positions th�oriques à l'instant prèsent
+		// calcul des positions théoriques à l'instant prèsent
 		Sprite boundToSprite = getBoundToSprite();
 		// process the step
 		Iterator<TrajectoryStep> i = currentTrajectory.getIterator();
@@ -227,7 +227,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 	 * 2) on l'utilise pour calculer la position absolue originale à t=forcedTime
 	 * 3) on relativise cette position par rapport à la référence courante : tile ou boundToSprite
 	 * 4) on calcule l'�cart avec la forcedPosition
-	 * cet �cart sera r�pandu sur le d�but de la trajectoire correspondant à forcedTime 
+	 * cet �cart sera r�pandu sur le début de la trajectoire correspondant à forcedTime 
 	 */
 	private void processForcedShifts(double initX, double initY, double initZ)
 	{	forcedTotalXShift = 0;
@@ -350,7 +350,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// UPDATE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique que la trajectoire est termin�e (plus de déplacement) */
+	/** indique que la trajectoire est terminée (plus de déplacement) */
 	private boolean isTerminated;
 		/** modification de position X (utilisée lors de la mise à jour de la position) */
 	double shiftX = 0;
@@ -417,7 +417,7 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 		
 		// collisions management
 		if(!isBoundToSprite())
-		{	// calcul de la direction de déplacement effective du sprite par rapport à la position pr�c�dente
+		{	// calcul de la direction de déplacement effective du sprite par rapport à la position précédente
 			double dx = currentPosX-previousPosX;
 			double dy = currentPosY-previousPosY;
 			Direction moveDir = Direction.getCompositeFromDouble(dx, dy);
@@ -606,13 +606,13 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	/////////////////////////////////////////////////////////////////
 	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps normalis� écoulé de puis le d�but de la trajectoire */
+	/** temps normalis� écoulé de puis le début de la trajectoire */
 	private double trajectoryTime;
 	/** dur�e totale originale de la trajectoire */
 	private double trajectoryDuration = 0;
-	/** coefficient de mofication du temps d� au d�lai impos� */
+	/** coefficient de mofication du temps d� au délai imposé */
 	private double forcedDurationCoeff = 1;
-	/** temps imparti pour atteindre la position forc�e (tient compte du d�lai impos� à la trajectoire) */
+	/** temps imparti pour atteindre la position forc�e (tient compte du délai imposé à la trajectoire) */
 	private double forcedPositionTime = 0;
 
 	private void updateTime()

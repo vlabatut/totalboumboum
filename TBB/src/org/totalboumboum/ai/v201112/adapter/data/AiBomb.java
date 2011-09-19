@@ -27,7 +27,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
- * pour détruire les murs et �liminer les autre joueurs.
+ * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
  *
@@ -38,10 +38,10 @@ public interface AiBomb extends AiSprite
 	// FIRE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie un exemple de feu que cette bombe peut g�n�rer
+	 * renvoie un exemple de feu que cette bombe peut générer
 	 * 
 	 * @return	
-	 * 		une représentation du feu g�n�r� par cette bombe
+	 * 		une représentation du feu génér� par cette bombe
 	 */
 	public AiFire getFirePrototype();
 
@@ -92,12 +92,12 @@ public interface AiBomb extends AiSprite
 	public boolean hasExplosionTrigger();
 	
 	/**
-	 * renvoie le d�lai normal avant l'explosion de la bombe.
-	 * Ce d�lai ne tient pas compte des pannes éventuelles.
-	 * Ce d�lai n'est pas défini pour tous les types de bombes
+	 * renvoie le délai normal avant l'explosion de la bombe.
+	 * Ce délai ne tient pas compte des pannes éventuelles.
+	 * Ce délai n'est pas défini pour tous les types de bombes
 	 * 
 	 * @return	
-	 * 		le d�lai normal avant explosion exprimé en millisecondes
+	 * 		le délai normal avant explosion exprimé en millisecondes
 	 */
 	public long getNormalDuration();
 
@@ -116,11 +116,11 @@ public interface AiBomb extends AiSprite
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la port�e de la bombe
-	 * (ie. le nombre de cases occup�es par sa flamme)
+	 * renvoie la portée de la bombe
+	 * (ie. le nombre de cases occupées par sa flamme)
 	 * 
 	 * @return	
-	 * 		port�e de la bombe
+	 * 		portée de la bombe
 	 */
 	public int getRange();
 	
@@ -167,8 +167,8 @@ public interface AiBomb extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie la couleur de cette bombe.
-	 * Cette couleur est null si aucun joueur n'a pos� la bombe 
-	 * (pour certains niveaux sp�ciaux où les blocs peuvent g�n�rer des bombes)  
+	 * Cette couleur est null si aucun joueur n'a posé la bombe 
+	 * (pour certains niveaux sp�ciaux où les blocs peuvent générer des bombes)  
 	 * 
 	 * @return 
 	 * 		un symbole de type PredefinedColor représentant une couleur
@@ -179,12 +179,12 @@ public interface AiBomb extends AiSprite
 	// OWNER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le joueur qui a pos� la bombe,
-	 * ou bien null si aucun joueur n'a pos� cette bombe 
-	 * (pour certains niveaux sp�ciaux où les blocs peuvent g�n�rer des bombes)  
+	 * renvoie le joueur qui a posé la bombe,
+	 * ou bien null si aucun joueur n'a posé cette bombe 
+	 * (pour certains niveaux sp�ciaux où les blocs peuvent générer des bombes)  
 	 * 
 	 * @return 
-	 * 		le joueur ayant pos� la bombe, ou null si aucun joueur ne l'a pos�e
+	 * 		le joueur ayant posé la bombe, ou null si aucun joueur ne l'a posée
 	 */
 	public AiHero getOwner();
 
@@ -207,10 +207,10 @@ public interface AiBomb extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie le temps écoulé depuis que le compte à rebours de la 
-	 * bombe a commencé, exprimé en millisecondes. Bien s�r ceci
+	 * bombe a commencé, exprimé en millisecondes. Bien sûr ceci
 	 * n'est valide que pour les bombes à retardement (qui ont un 
 	 * compte à rebours).
-	 * <b>Attention :</b> certaines actions sp�ciales comme le fait de lancer
+	 * <b>Attention :</b> certaines actions spéciales comme le fait de lancer
 	 * la bombe sont susceptibles de r�initialiser le compte à rebours.
 	 * 
 	 * @return	

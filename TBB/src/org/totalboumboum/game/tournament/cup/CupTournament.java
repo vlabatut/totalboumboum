@@ -73,7 +73,7 @@ public class CupTournament extends AbstractTournament
 		// sort players (as is, random or seeds)
 		sortPlayers();
 		
-		// NOTE vérifier si le nombre de joueurs s�lectionn�s correspond
+		// NOTE vérifier si le nombre de joueurs sélectionn�s correspond
 		currentIndex = 0;
 		currentLeg = legs.get(currentIndex);
 		currentLeg.init();

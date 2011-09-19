@@ -234,7 +234,7 @@ public class CombinatoricsTools
 		});
 		int mod = (totalPlayers-1)%(matchPlayers-1);
 		if(mod!=0)
-			System.out.println("incompatibilité entre le nombre total de joueurs et la capacit� du match");
+			System.out.println("incompatibilité entre le nombre total de joueurs et la capacité du match");
 		else
 		{	int rep = (totalPlayers-1)/(matchPlayers-1);
 			for(int i=0;i<totalPlayers;i++)

@@ -39,7 +39,7 @@ public abstract class CostCalculator
 	 * calcule le cout de l'action consistant à aller de la case
 	 * start à la case end, sachant que ces deux cases sont voisines.
 	 * Il est possible de définir des couts �volu�s, en tenant compte par exemple des
-	 * influences n�gatives dans ces cases (pour le joueur) comme la prèsence de bombes 
+	 * influences négatives dans ces cases (pour le joueur) comme la prèsence de bombes 
 	 * à proximit�, etc., et des influences positives telles que la prèsence de bonus.
 	 * Si les deux cases ne sont pas voisines, le résultat est indéterminé.
 	 * 

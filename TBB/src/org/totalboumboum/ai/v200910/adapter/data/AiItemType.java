@@ -34,7 +34,7 @@ public enum AiItemType
 	EXTRA_BOMB,
 	/** les bombes du joueur explosent plus loin */
 	EXTRA_FLAME,
-	/** effet n�gatif sur le joueur (ralentissement, constipation, etc.) */
+	/** effet négatif sur le joueur (ralentissement, constipation, etc.) */
 	MALUS,
 	/** le joueur peut frapper dans une bombe et ainsi l'envoyer plus loin */
 	PUNCH,

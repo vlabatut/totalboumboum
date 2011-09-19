@@ -28,7 +28,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 
 /**
  * simule un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caract�ris� par son type, représentant le pouvoir apport� (ou enlev�)
+ * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlev�)
  * par l'item. Ce type est représent�e par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
@@ -59,9 +59,9 @@ final class AiSimItem extends AiSimSprite implements AiItem
 	 * @param type
 	 * 		type d'item (extrabomb, extraflame, etc.)
 	 * @param stopBombs
-	 * 		capacit� à bloquer les bombes
+	 * 		capacité à bloquer les bombes
 	 * @param stopFires
-	 * 		capacit� à bloquer le feu
+	 * 		capacité à bloquer le feu
 	 */
 	protected AiSimItem(int id, AiSimTile tile,  double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,

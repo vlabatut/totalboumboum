@@ -38,7 +38,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 public class AiAction
 {
 	/**
-	 * construit une action non-orient�e (DROP_BOMB,NONE,PUNCH...)
+	 * construit une action non-orientée (DROP_BOMB,NONE,PUNCH...)
 	 * @param name	le nom de l'action
 	 */
 	public AiAction(AiActionName name)
@@ -46,7 +46,7 @@ public class AiAction
 	}
 	
 	/**
-	 * construit une action orient�e (MOVE...)
+	 * construit une action orientée (MOVE...)
 	 * @param name	le nom de l'action
 	 * @param direction	la direction de l'action
 	 */

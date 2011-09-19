@@ -43,7 +43,7 @@ public abstract class HeuristicCalculator
 
 	/**
 	 * initialise/modifie la liste de cases 
-	 * pouvant terminer le chemin recherch�
+	 * pouvant terminer le chemin recherché
 	 * 
 	 * @param endTiles	
 	 * 		les cases terminant le chemin
@@ -54,7 +54,7 @@ public abstract class HeuristicCalculator
 
 	/**
 	 * renvoie la liste de cases objectifs (i.e. les cases terminant
-	 * le chemin recherch�)
+	 * le chemin recherché)
 	 * 
 	 * @return	
 	 * 		la liste des cases objectifs
@@ -68,10 +68,10 @@ public abstract class HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * calcule la valeur heuristique de la case tile,
-	 * le but �tant de se rendre dans une des cases objectifs
+	 * le but étant de se rendre dans une des cases objectifs
 	 * 
 	 * @param tile	
-	 * 		la case concern�e 
+	 * 		la case concernée 
 	 * @return	
 	 * 		l'heuristique de la case
 	 */

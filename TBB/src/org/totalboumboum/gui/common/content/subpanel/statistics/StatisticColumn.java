@@ -242,7 +242,7 @@ public enum StatisticColumn
 			}
 /*
  * TODO 
- * éventuellement reg�n�rer les stats pour compléter le nouveau champ
+ * éventuellement regénérer les stats pour compléter le nouveau champ
  * 			
  */
 		}

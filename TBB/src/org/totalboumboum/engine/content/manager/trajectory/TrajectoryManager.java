@@ -78,11 +78,11 @@ public abstract class TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// UPDATE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** position X pr�c�dente (absolue) */
+	/** position X précédente (absolue) */
 	protected double previousPosX;
-	/** position Y pr�c�dente (absolue) */
+	/** position Y précédente (absolue) */
 	protected double previousPosY;
-	/** position Z pr�c�dente (absolue) */
+	/** position Z précédente (absolue) */
 	protected double previousPosZ;
 
 	/**
@@ -97,7 +97,7 @@ public abstract class TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps total écoulé de puis le d�but de la trajectoire */
+	/** temps total écoulé de puis le début de la trajectoire */
 	protected double currentTime = 0;
 	/** dur�e totale effective de la trajectoire */
 	protected double totalDuration = 0;

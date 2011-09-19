@@ -64,7 +64,7 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	 * comme c'est le cas dans BasicHeuristicCalculator.
 	 * 
 	 * @param tile	
-	 * 		la case concern�e 
+	 * 		la case concernée 
 	 * @return	
 	 * 		la distance de Manhattan entre tile et la plus proche des cases contenues dans endTiles
 	 */

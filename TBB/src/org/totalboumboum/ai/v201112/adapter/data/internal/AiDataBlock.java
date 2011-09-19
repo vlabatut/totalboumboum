@@ -116,7 +116,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	}
 	
 	/** 
-	 * met jour les différentes caract�ristiques de ce bloc
+	 * met jour les différentes caractéristiques de ce bloc
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()

@@ -29,7 +29,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * décrit un état dans lequel un sprite peut se trouver, c'est
  * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
  * Cet état est décrit par le nom de cette action, et éventuellement la
- * direction dans laquelle elle est effectuée (pour les actions orient�es
+ * direction dans laquelle elle est effectuée (pour les actions orientées
  * comme le déplacement, par exemple).
  * 
  * @author Vincent Labatut
@@ -62,7 +62,7 @@ public class AiState
 	}
 	
 	/**
-	 * termine cet objet et lib�re les ressources occup�es
+	 * termine cet objet et lib�re les ressources occupées
 	 */
 	void finish()
 	{	sprite = null;
@@ -111,12 +111,12 @@ public class AiState
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associée à l'état (peut être NONE, c'est à dire : l'état n'est pas orient�) */
+	/** direction associée à l'état (peut être NONE, c'est à dire : l'état n'est pas orienté) */
 	private Direction direction;
 	
 	/**
 	 * renvoie la direction associée à l'état,
-	 * qui peut être NONE, c'est à dire : l'état n'est pas orient�
+	 * qui peut être NONE, c'est à dire : l'état n'est pas orienté
 	 * 
 	 * @return	direction associée à l'état
 	 */

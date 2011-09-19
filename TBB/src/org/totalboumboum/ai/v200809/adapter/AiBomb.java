@@ -29,7 +29,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
- * pour détruire les murs et �liminer les autre joueurs.
+ * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
  *
@@ -103,20 +103,20 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** port�e de la bombe, ie. : nombre de cases occup�es par sa flamme */
+	/** portée de la bombe, ie. : nombre de cases occupées par sa flamme */
 	private int range;
 	
 	/**
-	 * renvoie la port�e de la bombe
-	 * (ie. le nombre de cases occup�es par sa flamme)
-	 * @return	port�e de la bombe
+	 * renvoie la portée de la bombe
+	 * (ie. le nombre de cases occupées par sa flamme)
+	 * @return	portée de la bombe
 	 */
 	public int getRange()
 	{	return range;	
 	}
 	
 	/**
-	 * initialise la port�e de la bombe
+	 * initialise la portée de la bombe
 	 */
 	private void initRange()
 	{	Bomb bomb = getSprite();
@@ -155,13 +155,13 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleur de la bombe (correspondant à celle du personnage qui l'a pos�e) */
+	/** couleur de la bombe (correspondant à celle du personnage qui l'a posée) */
 	private PredefinedColor color;
 	
 	/**
 	 * renvoie la couleur de cette bombe.
-	 * Cette couleur est null si aucun joueur n'a pos� la bombe 
-	 * (pour certains niveaux sp�ciaux où les blocs peuvent g�n�rer des bombes)  
+	 * Cette couleur est null si aucun joueur n'a posé la bombe 
+	 * (pour certains niveaux sp�ciaux où les blocs peuvent générer des bombes)  
 	 * 
 	 * @return un symbole de type PredefinedColor représentant une couleur
 	 */
@@ -180,22 +180,22 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// FUSE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** d�lai normal (ie hors-panne) avant l'explosion de la bombe */
+	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
 
 	/**
-	 * renvoie le d�lai normal avant l'explosion de la bombe.
-	 * Ce d�lai ne tient pas compte des pannes éventuelles.
-	 * Ce d�lai n'est pas défini pour tous les types de bombes
+	 * renvoie le délai normal avant l'explosion de la bombe.
+	 * Ce délai ne tient pas compte des pannes éventuelles.
+	 * Ce délai n'est pas défini pour tous les types de bombes
 	 * 
-	 * @return	le d�lai normal avant explosion exprimé en millisecondes
+	 * @return	le délai normal avant explosion exprimé en millisecondes
 	 */
 	public long getNormalDuration()
 	{	return normalDuration;
 	}
 
 	/**
-	 * initialisation des paramètres li�s à l'explosion de la bombe
+	 * initialisation des paramètres liés à l'explosion de la bombe
 	 */
 	private void initFuse()
 	{	// theoretic delay before explosion 

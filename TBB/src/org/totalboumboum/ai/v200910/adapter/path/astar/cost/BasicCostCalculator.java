@@ -26,7 +26,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 
 /**
  * 
- * Classe �tendant la classe abstraite CostCalculator de la mani�re la plus simple possible.
+ * Classe �tendant la classe abstraite CostCalculator de la manière la plus simple possible.
  * Ici, le cout pour passer d'une case à l'autre est simplement 1, quelles que soient
  * les cases considérées.
  * 
@@ -36,7 +36,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 public class BasicCostCalculator extends CostCalculator
 {
 	/** 
-	 * Les deux cases sont suppos�es être voisines, 
+	 * Les deux cases sont supposées être voisines, 
 	 * on se contente de renvoyer leur distance.
 	 * 
 	 * @param start	la case de départ

@@ -31,11 +31,11 @@ import java.util.concurrent.Callable;
  * ATTENTION : remarque tr�s importante.
  * A la fin de la partie, le jeu demande à l'IA de s'arrêter. Dans certaines
  * conditions, l'IA ne voudra pas s'arrêter (par exemple si elle est dans une
- * boucle infinie, ou bloquée dans un traitement r�cursif). Pour �viter ce 
- * genre de probl�me, CHAQUE méthode définie dans l'IA doit :
+ * boucle infinie, ou bloquée dans un traitement récursif). Pour éviter ce 
+ * genre de problème, CHAQUE méthode définie dans l'IA doit :
  * 	- CONTENIR A SON TOUT DEBUT un appel à la méthode checkInterruption()
  *  - faire suivre (mot-cl� throw) les interruptions StopRequestException, et ne SURTOUT PAS les traiter (pas de try/catch)
- * De plus, cette fonction doit également appara�tre au d�but de chaque boucle
+ * De plus, cette fonction doit également apparaître au début de chaque boucle
  * définie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
  *  
  * @author Vincent Labatut
@@ -99,7 +99,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * méthode implémentant le traitement effectué par l'IA sur les percepts,
 	 * et renvoyant une action en r�action.
 	 * 
-	 * @return	action que l'IA a d�cider d'effectuer
+	 * @return	action que l'IA a décider d'effectuer
 	 * @throws StopRequestException	au cas où le moteur demande la terminaison de l'IA
 	 */
 	public abstract AiAction processAction() throws StopRequestException;
