@@ -45,12 +45,12 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale des percepts auxquels l'IA a acc�s.
+ * Il s'agit de la classe principale des percepts auxquels l'IA a accès.
  * <p>
  * A chaque fois que l'IA est sollicit�e par le jeu pour conna�tre l'action
  * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
- * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'�volution
- * du jeu. De la même fa�on, les cases (AiTile) restent les mêmes, ainsi que les sprites et
+ * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
+ * du jeu. De la même façon, les cases (AiTile) restent les mêmes, ainsi que les sprites et
  * les autres objets. Si l'IA a besoin d'une trace des états pr�c�dents du jeu, son
  * concepteur doit se charger de l'impl�menter lui-même.
  * 
@@ -124,19 +124,19 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps �coul� depuis la mise à jour pr�c�dente */
+	/** temps écoulé depuis la mise à jour pr�c�dente */
 	private long elapsedTime = 0;
 	
 	/**
-	 * renvoie le temps �coul� depuis la mise à jour pr�c�dente
-	 * @return	le temps �coul� exprimé en millisecondes
+	 * renvoie le temps écoulé depuis la mise à jour pr�c�dente
+	 * @return	le temps écoulé exprimé en millisecondes
 	 */
 	public long getElapsedTime()
 	{	return elapsedTime;		
 	}
 	
 	/**
-	 * met à jour le temps �coul� depuis la dernière mise à jour
+	 * met à jour le temps écoulé depuis la dernière mise à jour
 	 * @param elapsedTime
 	 */
 	private void updateTime(long elapsedTime)
@@ -171,7 +171,7 @@ public class AiZone
 	}
 	
 	/**
-	 * met à jour la matrice en fonction de l'�volution du jeu
+	 * met à jour la matrice en fonction de l'évolution du jeu
 	 */
 	private void updateMatrix()
 	{	// d�marque tous les sprites
@@ -307,8 +307,8 @@ public class AiZone
 	 * <p>
 	 * ATTENTION 2 : comme les niveaux sont circulaires, il y a toujours deux directions possibles.
 	 * Cette méthode renvoie la direction du plus court chemin (sans consid�rer les éventuels obstacles).
-	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le r�sultat sera
-	 * RIGHT, car LEFT permet �galement d'atteindre la case, mais en parcourant un chemin plus long. 
+	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
+	 * RIGHT, car LEFT permet également d'atteindre la case, mais en parcourant un chemin plus long. 
 	 * 
 	 * @param source	case de référence
 	 * @param target	case dont on veut connaitre la direction

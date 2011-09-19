@@ -40,7 +40,7 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 public enum AiStateName
 {
 	// equivalent gesture: BURNING
-	/** le sprite est en train de br�ler */
+	/** le sprite est en train de brûler */
 	BURNING,
 	// equivalent gesture: ENDED
 	/** le sprite n'est plus en jeu */
@@ -49,7 +49,7 @@ public enum AiStateName
 	/** le sprite est en l'air (en train de sauter ou de rebondir sur les murs) */
 	FLYING,
 	// equivalent gesture: APPEARING, CRYING, ENTERING, EXULTING, OSCILLATING, OSCILLATING_FAILING, PREPARED, PUNCHING, STANDING, STANDING_FAILING, WAITING
-	/** le sprite ne fait rien ou bien r�alise une action qui ne n�cessite pas de déplacement */ 
+	/** le sprite ne fait rien ou bien réalise une action qui ne n�cessite pas de déplacement */ 
 	STANDING,
 	// equivalent gesture: PUSHING, SLIDING, SLIDING_FAILING, WALKING
 	/** le sprite se d�place sur le sol */

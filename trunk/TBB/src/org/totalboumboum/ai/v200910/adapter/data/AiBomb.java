@@ -236,7 +236,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 * ne donne que les cases qui seront touch�es si la bombe devait exploser
 	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
 	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
-	 * alors le souffle peut changer, il faut r�-ex�cuter cette méthode pour avoir le
+	 * alors le souffle peut changer, il faut r�-exécuter cette méthode pour avoir le
 	 * nouveau souffle de la bombe dans ce nouvel environnement.
 	 * 
 	 * @return	une liste de cases correspondant aux cases qui seront touch�es par la flamme de cette bombe 
@@ -318,11 +318,11 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps �coul� depuis que la bombe a été pos�e, exprimé en ms */
+	/** temps écoulé depuis que la bombe a été pos�e, exprimé en ms */
 	private double time = 0;
 	
 	/**
-	 * renvoie le temps �coul� depuis que la bombe a été pos�e,
+	 * renvoie le temps écoulé depuis que la bombe a été pos�e,
 	 * exprimé en millisecondes
 	 * 
 	 * @return	temps exprimé en ms
@@ -332,7 +332,7 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 	
 	/**
-	 * met à jour le temps �coul� depuis que la bombe a été pos�e
+	 * met à jour le temps écoulé depuis que la bombe a été pos�e
 	 */
 	private void updateTime()
 	{	Bomb sprite = getSprite();

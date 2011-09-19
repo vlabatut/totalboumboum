@@ -396,7 +396,7 @@ if(currentMethod.equals("PathFinder"))
 			{	// erreur
 				for(int i=0;i<indentLevel;i++)
 					System.out.print(">>");
-		       	System.out.println("Erreur ligne "+line+" : bloc manquant, appel à "+CHECK_INTERRUPTION_METHOD+"() manquant �galement");
+		       	System.out.println("Erreur ligne "+line+" : bloc manquant, appel à "+CHECK_INTERRUPTION_METHOD+"() manquant également");
 				errorCount++;
 				//TODO à compléter par la cr�ation d'un commentaire dans le code source
 			}

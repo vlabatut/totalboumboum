@@ -190,7 +190,7 @@ public abstract class AiTile
 	 *  @param ignoreFires
 	 *  	si vrai, la fonction ne considère pas le feu comme un obstacle
 	 *  @param ignoreFloors
-	 *  	si vrai, la fonction ne considère pas les sols comme des obstacles (ce qu'ils sont rarement, de toute fa�on)
+	 *  	si vrai, la fonction ne considère pas les sols comme des obstacles (ce qu'ils sont rarement, de toute façon)
 	 *  @param ignoreHeroes
 	 *  	si vrai, la fonction ne considère pas les personnages comme des obstacles
 	 *  @param ignoreItems

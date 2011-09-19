@@ -35,24 +35,24 @@ public interface AiBlock extends AiSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * indique si ce bloc arr�te les personnages.
+	 * indique si ce bloc arrête les personnages.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
+	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arr�te les personnages
+	 * 		une valeur AiStopType indiquant si ce bloc arrête les personnages
 	 */
 	public AiStopType hasStopHeroes();
 	
 	/**
-	 * indique si ce bloc arr�te les explosions.
+	 * indique si ce bloc arrête les explosions.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
+	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arr�te le feu
+	 * 		une valeur AiStopType indiquant si ce bloc arrête le feu
 	 */
 	public AiStopType hasStopFires();
 

@@ -333,7 +333,7 @@ final class AiSimTile extends AiTile
 	/**
 	 * fonction auxiliaire utilisée pour déterminer si cette
 	 * case est traversable par le sprite passé en paramètre.
-	 * (cette fonction r�alise le traitement relativement à 
+	 * (cette fonction réalise le traitement relativement à 
 	 * la liste de sprite passée en paramètre)
 	 * 
 	 * @param sprite

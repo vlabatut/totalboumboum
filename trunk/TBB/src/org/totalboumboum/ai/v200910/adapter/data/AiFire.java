@@ -27,7 +27,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
- * représente un feu du jeu, ie une projection mortelle r�sultant (généralement) 
+ * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
