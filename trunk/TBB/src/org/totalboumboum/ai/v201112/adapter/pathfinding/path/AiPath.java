@@ -22,13 +22,13 @@ package org.totalboumboum.ai.v201112.adapter.pathfinding.path;
  */
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.game.round.RoundVariables;
 
 /**
  * Cette classe représente un chemin qu'un agent peut emprunter
@@ -291,7 +291,7 @@ public class AiPath implements Comparable<AiPath>
 	/**
 	 * Renvoie la longueur (en cases) de ce chemin.<br/>
 	 * <b>Attention :</b> si le chemin contient plusieurs
-	 * fois la même case, elle sera compt�e autant de fois.
+	 * fois la même case, elle sera comptée autant de fois.
 	 * 
 	 * @return	
 	 * 		La longueur de ce chemin, en cases.
@@ -409,14 +409,23 @@ public class AiPath implements Comparable<AiPath>
 				previousY = startY;
 			} 
 			else if(!tile.equals(previous))
-			{	AiZone zone = tile.getZone();
+			{	AiZone zone = previous.getZone();
 				Direction direction = zone.getDirection(previous,tile);
+				double previousCenterX = previous.getPosX();
+				double previousCenterY = previous.getPosY();
 				double centerX = tile.getPosX();
 				double centerY = tile.getPosY();
-				double dist = zone.getPixelDistance(startX,startY,centerX,centerY);
+				double interfaceX = centerX;
+				double interfaceY = centerY;
+				int di[] = direction.getIntFromDirection();
+				if(direction.isHorizontal())
+					interfaceX = (previousCenterX + centerX)/2 + 2*di[0]*RoundVariables.toleranceCoefficient;
+				else if(direction.isVertical())
+					interfaceY = (previousCenterY + centerY)/2 + 2*di[1]*RoundVariables.toleranceCoefficient;
+				double dist = zone.getPixelDistance(previousX,previousY,interfaceX,interfaceY);
 				result = result + dist;
-				x1 = x2;
-				y1 = y2;
+				previousX = interfaceX;
+				previousY = interfaceY;
 			}
 			previous = tile;
 		}
@@ -430,21 +439,25 @@ public class AiPath implements Comparable<AiPath>
 	 * calcule le temps approximatif nécessaire au personnage passé en paramètre
 	 * pour parcourir ce chemin. Le temps est exprimé en millisecondes, et 
 	 * on suppose qu'il n'y a pas d'obstacle sur le chemin et que la vitesse
-	 * de déplacement du joueur est constante. C'est donc une estimation du temps
-	 * qui sera réellement nécessaire au joueur, puisque différents facteurs peuvent
-	 * venir invalider ces hypothèses.
+	 * de déplacement du joueur est constante. On tient compte des pauses.
+	 * Le résultat est donc une estimation du temps qui sera réellement nécessaire 
+	 * au joueur, puisque différents facteurs peuvent venir invalider ces hypothèses.
 	 *   
 	 * @param hero
-	 * 		le personnage qui parcourt le chemin
+	 * 		Le personnage qui parcourt le chemin.
 	 * @return	
-	 * 		le temps nécessaire au personnage pour parcourir ce chemin
+	 * 		Le temps nécessaire au personnage pour parcourir ce chemin.
 	 */
 	public long getDuration(AiHero hero)
 	{	long result = 0;
 		if(tiles.size()>1)
-		{	double speed = hero.getWalkingSpeed();
+		{	// on considère le temps de déplacement
+			double speed = hero.getWalkingSpeed();
 			double distance = getPixelDistance();
 			result = Math.round(distance/speed * 1000);
+			// on ajout le temps des pauses
+			for(Long pause: pauses)
+				result = result + pause;
 		}
 		return result;
 	}
@@ -466,30 +479,30 @@ public class AiPath implements Comparable<AiPath>
 
 	/**
 	 * Compare ce chemin à celui passé en paramètre, 
-	 * et renvoie vrai s'ils sont parfaitement identiques,
-	 * i.e. sont constitués de la même séquence de cases.
-	 * <b>Remarque :</b> on ne considère donc pas le point de départ 
+	 * et renvoie vrai s'ils sont constitués de la même séquence de cases
+	 *  et de pauses.<br/>
+	 * <b>Remarque :</b> on ne considère donc pas le point de départ.
 	 * 
 	 * @param object
-	 * 		le chemin à comparer
+	 * 		Le chemin à comparer.
 	 * @return	
-	 * 		vrai ssi les 2 ce chemin est identique à celui passé en paramètre
+	 * 		Renvoie {@code true} ssi ce chemin est identique à celui passé en paramètre.
 	 */
 	@Override
 	public boolean equals(Object object)
 	{	boolean result = false;
 		if(object instanceof AiPath)
 		{	AiPath path = (AiPath)object;
-			result = true;
-			Iterator<AiTile> it1 = tiles.iterator();
-			Iterator<AiTile> it2 = path.getTiles().iterator();
-			while(result && it1.hasNext() && it2.hasNext())
-			{	AiTile t1 = it1.next();
-				AiTile t2 = it2.next();
-				result = t1.equals(t2);
+			result = getLength()==path.getLength();
+			int i=0;
+			while(result && i<tiles.size())
+			{	AiTile t1 = tiles.get(i);
+				AiTile t2 = path.getTile(i);
+				long p1 = pauses.get(i);
+				long p2 = path.getPause(i);
+				result = t1.equals(t2) && p1==p2;
+				i++;
 			}
-			if(it1.hasNext() || it2.hasNext())
-				result = false;
 		}		
 		return result;		
 	}
@@ -500,8 +513,11 @@ public class AiPath implements Comparable<AiPath>
 	@Override
 	public String toString()
 	{	String result = "[";
-		for(AiTile tile: tiles)
-			result = result + " ("+tile.getLine()+","+tile.getCol()+")";
+		for(int i=0;i<tiles.size();i++)
+		{	AiTile tile = tiles.get(i);
+			long pause = pauses.get(i);
+			result = result + " ("+tile.getLine()+","+tile.getCol()+";"+pause+")";
+		}
 		result = result + " ]";
 		return result;
 	}
