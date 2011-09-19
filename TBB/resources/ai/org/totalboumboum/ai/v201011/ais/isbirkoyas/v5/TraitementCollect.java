@@ -26,7 +26,7 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette méthode initialise la matrice collecte avec les '0'. Elle prend 2
+	 * Cette mÃ©thode initialise la matrice collecte avec les '0'. Elle prend 2
 	 * arguments, la zone du jeu et une matrice de type Int.
 	 * 
 	 * @param matrice
@@ -48,7 +48,7 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette méthode remplie la matrice collecte. Elle donne des valeurs aux
+	 * Cette mÃ©thode remplie la matrice collecte. Elle donne des valeurs aux
 	 * cases des bonus en fonction du temps et en fonction de la distance. Elle
 	 * prend 2 arguments, la zone du jeu et une matrice de type Int.
 	 * 
@@ -88,7 +88,7 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette méthode permet l'affichage de la matrice collecte en utilisant
+	 * Cette mÃ©thode permet l'affichage de la matrice collecte en utilisant
 	 * l'API fournie. Elle prend 2 arguments, la zone du jeu et une matrice de
 	 * type Int.
 	 * 
@@ -114,7 +114,7 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette méthode calcule la durée nécessaire pour que notre IA arrive à la
+	 * Cette mÃ©thode calcule la durï¿½e nï¿½cessaire pour que notre IA arrive Ã  la
 	 * case du bonus cible. Elle prend deux arguments, la zone du jeu et les
 	 * items du jeu.
 	 * 
@@ -137,8 +137,8 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette méthode trouve la case du plus proche bombe au bonus et elle
-	 * initialise cette case avec une valeur. Cette méthode contrôle les 4 cases
+	 * Cette mÃ©thode trouve la case du plus proche bombe au bonus et elle
+	 * initialise cette case avec une valeur. Cette mÃ©thode contrï¿½le les 4 cases
 	 * voisines. Elle prend 3 arguments, la zone du jeu, les items du jeu et une
 	 * matrice de type Int.
 	 * 
@@ -190,7 +190,7 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette méthode calcule le temps d'aller aux bonus du plus proche
+	 * Cette mÃ©thode calcule le temps d'aller aux bonus du plus proche
 	 * adversaire et elle initialise cette case avec une valeur. Elle prend 3
 	 * arguments, la zone du jeu, les items du jeu et une matrice de type Int.
 	 * 

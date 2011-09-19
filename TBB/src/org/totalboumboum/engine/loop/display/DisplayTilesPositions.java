@@ -111,7 +111,7 @@ public class DisplayTilesPositions implements Display
 			}
 			// positions expressed in pixels
 			else
-			{	// coordonnées
+			{	// coordonnÃ©es
 				Font font = new Font("Dialog", Font.PLAIN, 12);
 				g.setFont(font);
 				FontMetrics metrics = g.getFontMetrics(font);

@@ -34,7 +34,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 	/** direction du cas actuel vers le prochain */
 	Direction direction;
 
-	/** action de resultat à renvoyer */
+	/** action de resultat Ã  renvoyer */
 	AiAction result = new AiAction(AiActionName.NONE);
 
 	/** objet pour les operations sur les cases */

@@ -17,8 +17,8 @@ public class PathManagement {
 
 	
 	/**
-	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
-	 * exprimée en pixels
+	 * crÃ©e un PathManager chargï¿½ d'amener le personnage Ã  la position (x,y)
+	 * exprimï¿½e en pixels
 	 */
 	public PathManagement(EnhosKarapazar ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -28,8 +28,8 @@ public class PathManagement {
 	}
 	
 	/**
-	 * crée un PathManager chargé d'amener le personnage au centre de la case
-	 * passée en paramètre
+	 * crÃ©e un PathManager chargï¿½ d'amener le personnage au centre de la case
+	 * passï¿½e en paramï¿½tre
 	 */
 	public PathManagement(EnhosKarapazar ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -55,7 +55,7 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** l'IA concernée par ce gestionnaire de chemin */
+	/** l'IA concernï¿½e par ce gestionnaire de chemin */
 	private EnhosKarapazar ai;
 	/** zone de jeu */
 	private AiZone zone;
@@ -63,16 +63,16 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la case de destination sélectionnée */
+	/** la case de destination sï¿½lectionnï¿½e */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
-	/** l'ordonnée de destination */
+	/** l'ordonnï¿½e de destination */
 	private double yDest;
 	
 	/**
 	 * modifie la case de destination du personnage,
-	 * place les coordonnées de destination au centre de cette case,
+	 * place les coordonnÃ©es de destination au centre de cette case,
 	 * et recalcule le chemin.
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException
@@ -86,8 +86,8 @@ public class PathManagement {
 	}
 
 	/**
-	 * modifie les coordonnées de destination,
-	 * met à jour automatiquement la case correspondante,
+	 * modifie les coordonnÃ©es de destination,
+	 * met Ã  jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
 	 */
 	public void setDestination(double x, double y) throws StopRequestException
@@ -105,14 +105,14 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// PATH			/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le chemin à suivre */
+	/** le chemin Ã  suivre */
 	private AiPath path;
 	
 	
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
-	 * est toujours sûr et si aucun obstacle n'est apparu
-	 * depuis la dernière itération
+	 * est toujours sï¿½r et si aucun obstacle n'est apparu
+	 * depuis la derniÃ¨re itï¿½ration
 	 */
 	public boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -134,11 +134,11 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	// A STAR					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe implémentant l'algorithme A* */
+	/** classe implÃ©mentant l'algorithme A* */
 	private Astar astar;
-	/** classe implémentant la fonction heuristique */
+	/** classe implÃ©mentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de coût */
+	/** classe implÃ©mentant la fonction de coï¿½t */
 	private CostCalculator costCalculator;
 
 	

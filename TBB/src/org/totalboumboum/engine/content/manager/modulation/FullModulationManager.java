@@ -173,7 +173,7 @@ public class FullModulationManager extends ModulationManager
 
 	/**
 	 * on se retreint aux cases contenant l'acteur et la cible, et on teste chaque sprite.
-	 * NOTE: en réalité, il ne faudrait pas se limiter à ces cases et tester toutes les cases concernées...
+	 * NOTE: en rï¿½alitï¿½, il ne faudrait pas se limiter Ã  ces cases et tester toutes les cases concernï¿½es...
 	 */
 	private ActionAbility combineThirdModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;
@@ -229,7 +229,7 @@ public class FullModulationManager extends ModulationManager
 	}
 
 	/**
-	 * calcule les permissions third au niveau d'une case donnée
+	 * calcule les permissions third au niveau d'une case donnï¿½e
 	 */
 /*	public void combineTileModulation(SpecificAction specificAction, ActionAbility ability, Tile tile)
 	{	GeneralAction action = specificAction.getGeneralAction();
@@ -302,7 +302,7 @@ public class FullModulationManager extends ModulationManager
 	}
 		
 	/**
-	 * on se retreint aux cases contenant le sprite concerné.
+	 * on se retreint aux cases contenant le sprite concernï¿½.
 	 */
 	private StateAbility combineOtherModulation(StateAbility ability)
 	{	StateAbility result = ability;

@@ -533,7 +533,7 @@ public enum Direction implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// LOADING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// TODO à utiliser dans tous les loaders
+	// TODO Ã  utiliser dans tous les loaders
 	/**
 	 * load a direction value.
 	 * the XML value SOME represents any direction except NONE. 

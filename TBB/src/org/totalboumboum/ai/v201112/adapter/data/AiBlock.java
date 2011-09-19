@@ -22,8 +22,8 @@ package org.totalboumboum.ai.v201112.adapter.data;
  */
 
 /**
- * Représente un bloc du jeu, c'est à dire généralement un mur
- * (pouvant être détruit ou pas). 
+ * Reprï¿½sente un bloc du jeu, c'est Ã  dire gï¿½nï¿½ralement un mur
+ * (pouvant ï¿½tre dÃ©truit ou pas). 
  * 
  * @author Vincent Labatut
  *
@@ -34,24 +34,24 @@ public interface AiBlock extends AiSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * indique si ce bloc arrête les personnages.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * indique si ce bloc arrï¿½te les personnages.
+	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas ï¿½tre utilisÃ©e directement par l'IA,
+	 * elle est destinï¿½e au calcul des modï¿½les simulant l'ï¿½volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arrête les personnages
+	 * 		une valeur AiStopType indiquant si ce bloc arrï¿½te les personnages
 	 */
 	public AiStopType hasStopHeroes();
 	
 	/**
-	 * indique si ce bloc arrête les explosions.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * indique si ce bloc arrï¿½te les explosions.
+	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas ï¿½tre utilisÃ©e directement par l'IA,
+	 * elle est destinï¿½e au calcul des modï¿½les simulant l'ï¿½volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arrête le feu
+	 * 		une valeur AiStopType indiquant si ce bloc arrï¿½te le feu
 	 */
 	public AiStopType hasStopFires();
 
@@ -59,10 +59,10 @@ public interface AiBlock extends AiSprite
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
+	 * renvoie vrai si ce bloc peut ï¿½tre dÃ©truit par une bombe, et faux sinon
 	 * 
 	 * @return	
-	 * 		l'indicateur de destructibilité du mur
+	 * 		l'indicateur de destructibilitï¿½ du mur
 	 */
 	public boolean isDestructible();
 }

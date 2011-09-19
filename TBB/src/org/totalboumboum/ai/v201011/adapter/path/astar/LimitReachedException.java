@@ -27,11 +27,11 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 
 /**
- * exception levée par l'algorithme A* quand il atteint une des limites fixées au préalable.
- * On ne peut donc pas conclure quant à l'existence d'un chemin solution.
- * En d'autres termes : cette exception indique qu'A* a exploré un arbre bien trop
+ * exception levï¿½e par l'algorithme A* quand il atteint une des limites fixï¿½es au prï¿½alable.
+ * On ne peut donc pas conclure quant Ã  l'existence d'un chemin solution.
+ * En d'autres termes : cette exception indique qu'A* a explorï¿½ un arbre bien trop
  * grand, sans pourtant trouver la solution. On ne peut donc pas savoir s'il existe
- * un état final quelque part dans la partie non-explorée de l'arbre, ou bien
+ * un Ã©tat final quelque part dans la partie non-explorï¿½e de l'arbre, ou bien
  * s'il n'existe pas de solution du tout.  
  * 
  * @author Vincent Labatut
@@ -41,8 +41,8 @@ public final class LimitReachedException extends Exception
 {	private static final long serialVersionUID = 1L;
 
 	/**
-	 * crée une exception représentant le fait que l'algorithme A*
-	 * a atteint une des limites qui lui étaient fixées sans pour autant
+	 * crÃ©e une exception reprï¿½sentant le fait que l'algorithme A*
+	 * a atteint une des limites qui lui ï¿½taient fixï¿½es sans pour autant
 	 * trouver de solution (i.e. de chemin)
 	 * 
 	 * @param startTile
@@ -52,15 +52,15 @@ public final class LimitReachedException extends Exception
 	 * @param height
 	 * 		hauteur maximale atteinte pour l'arbre de recherche
 	 * @param cost
-	 * 		coût maximal atteint pour les chemins contenus dans l'arbre de recherche
+	 * 		coï¿½t maximal atteint pour les chemins contenus dans l'arbre de recherche
 	 * @param size
-	 * 		taille atteinte par l'arbre de recherche (exprimée en nombre de noeuds)
+	 * 		taille atteinte par l'arbre de recherche (exprimï¿½e en nombre de noeuds)
 	 * @param maxCost
-	 * 		limite de coût fixée pour l'exploration
+	 * 		limite de coï¿½t fixï¿½e pour l'exploration
 	 * @param maxHeight
-	 * 		limite de hauteur fixée pour l'exploration
+	 * 		limite de hauteur fixï¿½e pour l'exploration
 	 * @param maxSize
-	 * 		limite de taille (exprimée en nombre de noeuds) fixée pour l'exploration
+	 * 		limite de taille (exprimï¿½e en nombre de noeuds) fixï¿½e pour l'exploration
 	 */
 	public LimitReachedException(AiTile startTile, List<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
 	{	this.startTile = startTile;
@@ -76,11 +76,11 @@ public final class LimitReachedException extends Exception
     /////////////////////////////////////////////////////////////////
 	// START TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** case de départ de la recherche (état initial) */
+	/** case de dï¿½part de la recherche (ï¿½tat initial) */
 	private AiTile startTile;
 	
 	/**
-	 * renvoie la case de départ de la recherche
+	 * renvoie la case de dï¿½part de la recherche
 	 * 
 	 * @return
 	 * 		une case de la zone
@@ -92,11 +92,11 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// END TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** les cases d'arrivée de la recherche (états finaux) */
+	/** les cases d'arrivï¿½e de la recherche (ï¿½tats finaux) */
     private List<AiTile> endTiles;
 	
     /**
-     * renvoie les cases d'arrivée de la recherche
+     * renvoie les cases d'arrivï¿½e de la recherche
      * 
      * @return
 	 * 		une case de la zone
@@ -108,14 +108,14 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// HEIGHT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de hauteur (négatif = pas de limite) */
+	/** limite de hauteur (nï¿½gatif = pas de limite) */
 	private int maxHeight;
 	/** hauteur maximale atteinte */
 	private int height;
 
 	/**
 	 * renvoie la limite de hauteur pour l'exploration de l'arbre de recherche.
-	 * une valeur négative représente une absence de limite.
+	 * une valeur nï¿½gative reprï¿½sente une absence de limite.
 	 * 
 	 * @return
 	 * 		la limite de hauteur pour l'exploration de l'arbre de recherche
@@ -126,7 +126,7 @@ public final class LimitReachedException extends Exception
 
 	/**
 	 * renvoie la hauteur de l'arbre, i.e. la longueur
-	 * du chemin le plus long développé lors de la recherche de solution
+	 * du chemin le plus long dï¿½veloppï¿½ lors de la recherche de solution
 	 * 
 	 * @return
 	 * 		hauteur de l'arbre
@@ -138,28 +138,28 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// COST				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de coût (négatif = pas de limite) */
+	/** limite de coï¿½t (nï¿½gatif = pas de limite) */
 	private double maxCost;
-	/** coût maximal atteint */
+	/** coï¿½t maximal atteint */
 	private double cost;
 
 	/**
-	 * renvoie la limite de coût pour l'exploration de l'arbre de recherche.
-	 * une valeur négative représente une absence de limite.
+	 * renvoie la limite de coï¿½t pour l'exploration de l'arbre de recherche.
+	 * une valeur nï¿½gative reprï¿½sente une absence de limite.
 	 * 
 	 * @return
-	 * 		la limite de coût pour l'exploration de l'arbre de recherche
+	 * 		la limite de coï¿½t pour l'exploration de l'arbre de recherche
 	 */
 	public double getMaxCost()
 	{	return maxCost;
 	}
 
 	/**
-	 * renvoie le coût du chemin le plus coûteux développé lors de la
+	 * renvoie le coï¿½t du chemin le plus coï¿½teux dï¿½veloppï¿½ lors de la
 	 * recherche de solution par A*.
 	 * 
 	 * @return
-	 * 		coût maximal atteint lors de la recherche de solution
+	 * 		coï¿½t maximal atteint lors de la recherche de solution
 	 */
 	public double getCost()
 	{	return cost;
@@ -168,28 +168,28 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// SIZE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de taille exprimée en nombre de noeuds (négatif = pas de limite) */
+	/** limite de taille exprimï¿½e en nombre de noeuds (nï¿½gatif = pas de limite) */
 	private int maxSize;
 	/** taille atteinte lors de l'exploration */
 	private int size;
 
 	/**
-	 * renvoie la limite qui avait été fixée pour la taille
-	 * de l'arbre de recherche exprimée en noeuds.
+	 * renvoie la limite qui avait ï¿½tï¿½ fixï¿½e pour la taille
+	 * de l'arbre de recherche exprimï¿½e en noeuds.
 	 * 
 	 * @return
-	 * 		la limite de taille fixée pour l'arbre
+	 * 		la limite de taille fixï¿½e pour l'arbre
 	 */
 	public int getMaxSize()
 	{	return maxSize;
 	}
 
 	/**
-	 * renvoie la taille de l'arbre développé par A* lors de son exploration,
-	 * exprimée en nombre de noeuds.
+	 * renvoie la taille de l'arbre dï¿½veloppï¿½ par A* lors de son exploration,
+	 * exprimï¿½e en nombre de noeuds.
 	 * 
 	 * @return
-	 * 		la taille de l'arbre exploré
+	 * 		la taille de l'arbre explorï¿½
 	 */
 	public int getSize()
 	{	return size;

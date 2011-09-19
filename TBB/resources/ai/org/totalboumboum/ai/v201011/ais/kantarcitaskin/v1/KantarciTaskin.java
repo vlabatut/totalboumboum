@@ -11,7 +11,7 @@ public class KantarciTaskin extends ArtificialIntelligence
 	Matrix matrix;
 	
 	//private org.totalboumboum.ai.v201011.adapter.data.AiHero us=null;
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();
@@ -21,19 +21,19 @@ public class KantarciTaskin extends ArtificialIntelligence
 	}
 	
 	
-	/** une méthode bidon pour l'exemple */
+	/** une mÃ©thode bidon pour l'exemple */
 	private void createMatrix() throws StopRequestException
 	{	
 		checkInterruption();
 	
-	//	je crée un objet implémentant mon traitement
+	//	je crÃ©e un objet implÃ©mentant mon traitement
 	//	MonTraitement mt = new MonTraitement(this);
 		System.out.print("lala");
 		matrix = new Matrix(this);	
 		matrix.fillMatrix();
 		
 		
-		// j'appelle la méthode qui effectue le traitement
+		// j'appelle la mÃ©thode qui effectue le traitement
 		//AiAction result = mt.gagneRound();
 		//return result;
 	}

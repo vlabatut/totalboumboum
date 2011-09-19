@@ -30,25 +30,25 @@ import org.totalboumboum.engine.content.feature.gesture.anime.direction.AnimeDir
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
- * cette classe permet de représenter les sprites manipulés par le jeu,
- * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
- * Le paramètre T détermine le type de sprite représenté : bloc, bombe,
+ * cette classe permet de reprï¿½senter les sprites manipulï¿½s par le jeu,
+ * et un nombre restreint de leurs propriï¿½tï¿½s, rendues ainsi accessible Ã  l'IA.
+ * Le paramï¿½tre T dï¿½termine le type de sprite reprï¿½sentï¿½ : bloc, bombe,
  * feu, sol, personnage ou item. 
  * 
  * @author Vincent Labatut
  *
  * @param <T>
- * 		type de sprite représenté
+ * 		type de sprite reprï¿½sentï¿½
  */
 abstract class AiDataSprite<T extends Sprite> implements AiSprite
 {	
 	/**
-	 * construit une représentation du sprite passé en paramètre
+	 * construit une reprï¿½sentation du sprite passï¿½ en paramï¿½tre
 	 * 
 	 * @param tile
-	 * 		représentation de la case contenant le sprite
+	 * 		reprï¿½sentation de la case contenant le sprite
 	 * @param sprite
-	 * 		sprite à représenter
+	 * 		sprite Ã  reprï¿½senter
 	 */
 	protected AiDataSprite(AiDataTile tile, T sprite)
 	{	// general
@@ -58,7 +58,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 		state = new AiDataState(sprite);
 		
 		// burning duration
-//TODO à tester
+//TODO Ã  tester
 		burningDuration = -1;
 		Gesture gesture = sprite.getGesturePack().getGesture(GestureName.BURNING);
 		if(gesture!=null)
@@ -72,10 +72,10 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour cette représentation du sprite
+	 * met Ã  jour cette reprï¿½sentation du sprite
 	 * 
 	 * @param tile
-	 * 		la nouvelle case contenant cette représentation
+	 * 		la nouvelle case contenant cette reprï¿½sentation
 	 */
 	protected void update(AiDataTile tile, long elapsedTime)
 	{	this.tile = tile;
@@ -98,25 +98,25 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** sprite représenté par cette classe */ 
+	/** sprite reprï¿½sentï¿½ par cette classe */ 
 	protected T sprite;
 
 	/**
-	 * teste si cette représentation correspond au sprite passé en paramètre
+	 * teste si cette reprï¿½sentation correspond au sprite passï¿½ en paramï¿½tre
 	 * 
 	 * @param sprite
-	 * 		le sprite dont on veut la représentation
+	 * 		le sprite dont on veut la reprï¿½sentation
 	 * @return	
-	 * 		vrai si cette représentation correspond à ce sprite
+	 * 		vrai si cette reprï¿½sentation correspond Ã  ce sprite
 	 */
 	protected boolean isSprite(T sprite)
 	{	return this.sprite == sprite;
 	}
 	
 	/**
-	 * renvoie le sprite correspondant à cette représentation
+	 * renvoie le sprite correspondant Ã  cette reprï¿½sentation
 	 * 
-	 * @return	le sprite correspondant à cette représentation
+	 * @return	le sprite correspondant Ã  cette reprï¿½sentation
 	 */
 	protected T getSprite()
 	{	return sprite;	
@@ -125,21 +125,21 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// CHECK			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** marquage du sprite (permet de détecter quels sprites ont disparu lors de la mise à jour */
+	/** marquage du sprite (permet de dï¿½tecter quels sprites ont disparu lors de la mise Ã  jour */
 	protected boolean checked;
 
 	/**
-	 * teste si sprite est marqué ou pas
+	 * teste si sprite est marquï¿½ ou pas
 	 * 
 	 * @return	
-	 * 		vrai si ce sprite est marqué
+	 * 		vrai si ce sprite est marquï¿½
 	 */
 	protected boolean isChecked()
 	{	return checked;	
 	}
 	
 	/**
-	 * démarque ce sprite (action réalisée avant la mise à jour de la zone)
+	 * dï¿½marque ce sprite (action rï¿½alisï¿½e avant la mise Ã  jour de la zone)
 	 */
 	protected void uncheck()
 	{	checked = false; 
@@ -148,7 +148,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** état dans lequel se trouve ce sprite */
+	/** Ã©tat dans lequel se trouve ce sprite */
 	protected AiDataState state;
 
 	@Override
@@ -157,14 +157,14 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 	
 	/** 
-	 * initialise l'état dans lequel se trouve ce sprite
+	 * initialise l'ï¿½tat dans lequel se trouve ce sprite
 	 */
 	private void updateState(long elapsedTime)
 	{	state.update(elapsedTime);
 	}
 	
 	/**
-	 * indique que le sprite a été éliminé du jeu
+	 * indique que le sprite a ï¿½tï¿½ ï¿½liminï¿½ du jeu
 	 */
 	protected void setEnded()
 	{	state.setEnded();		
@@ -178,7 +178,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** représentation de la case contenant ce sprite */
+	/** reprï¿½sentation de la case contenant ce sprite */
 	protected AiDataTile tile;
 	
 	@Override
@@ -199,7 +199,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// BURN				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps nécessaire au sprite pour brûler (à condition qu'il puisse brûler) */
+	/** temps nï¿½cessaire au sprite pour brï¿½ler (ï¿½ condition qu'il puisse brï¿½ler) */
 	protected long burningDuration = 0;
 	
 	@Override
@@ -210,7 +210,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement courante en pixels/s (est nulle si le sprite ne bouge pas */
+	/** vitesse de dÃ©placement courante en pixels/s (est nulle si le sprite ne bouge pas */
 	protected double currentSpeed = 0;
 	
 	@Override
@@ -219,7 +219,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 
 	/**
-	 * met à jour la vitesse de ce sprite
+	 * met Ã  jour la vitesse de ce sprite
 	 */
 	protected void updateSpeed()
 	{	Sprite sprite = getSprite();
@@ -232,7 +232,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	/** abscisse de ce sprite en pixels */
 	protected double posX;
-	/** ordonnée de ce sprite en pixels */
+	/** ordonnï¿½e de ce sprite en pixels */
 	protected double posY;
 	/** altitude de ce sprite en pixels */
 	protected double posZ;
@@ -253,7 +253,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 	
 	/** 
-	 * initialise les coordonnées (en pixels) de ce sprite 
+	 * initialise les coordonnÃ©es (en pixels) de ce sprite 
 	 */
 	private void updateLocation()
 	{	posX = sprite.getCurrentPosX();
@@ -304,7 +304,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement ce sprite et libère les ressources qu'il occupait
+	 * termine proprement ce sprite et libï¿½re les ressources qu'il occupait
 	 */
 	protected void finish()
 	{	// state

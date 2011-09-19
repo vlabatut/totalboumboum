@@ -19,7 +19,7 @@ public class GoncuOnat extends ArtificialIntelligence
 	// notre hero sur la zone
 	public AiHero ourHero;
 	// la case vide qui ne contient aucuns sprites
-	// est representée dans la matrice da la zone.
+	// est representï¿½e dans la matrice da la zone.
 	public final int CASE_EMPTY=0;
 	// chemin a suivre pour s'enfuir du danger
 	public AiPath nextMove=null;
@@ -123,7 +123,7 @@ public class GoncuOnat extends ArtificialIntelligence
 
 	}
 	
-	/** méthode appelée par le moteur du jeu pour 
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour 
 	 * obtenir une action de notre IA 
 	 * */
 	@Override
@@ -268,11 +268,11 @@ public class GoncuOnat extends ArtificialIntelligence
 							if (nextMoveBonus != null)
 							{
 								if(verbose)
-									System.out.println("null deðilse");
+									System.out.println("null deï¿½ilse");
 								if (nextMoveBonus.getLength() != 0)
 								{	
 									if(verbose)
-										System.out.println("length 0 deðilse");
+										System.out.println("length 0 deï¿½ilse");
 									result = this.action(nextMoveBonus);}
 							}
 						}

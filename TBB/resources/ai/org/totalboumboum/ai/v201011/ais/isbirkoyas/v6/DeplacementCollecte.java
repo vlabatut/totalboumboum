@@ -27,7 +27,7 @@ public class DeplacementCollecte {
 	}
 
 	/**
-	 * Cette méthode implémente l'algorithme de collecte. Elle prend 3 arguments
+	 * Cette mÃ©thode implï¿½mente l'algorithme de collecte. Elle prend 3 arguments
 	 * une matrice de type Int, la zone du jeu et une action.
 	 * 
 	 * @param gameZone
@@ -132,7 +132,7 @@ public class DeplacementCollecte {
 
 								if (ai.print)
 									System.out
-											.println("Collect: IA pense à poser bombe!");
+											.println("Collect: IA pense Ã  poser bombe!");
 								poserBombe2 = true;
 								List<AiTile> casSurs = securite
 										.posageControle(gameZone);
@@ -182,7 +182,7 @@ public class DeplacementCollecte {
 									if (temps2 > temps) {
 										if (ai.print)
 											System.out
-													.println("Il n'y a pas du temps à senfuire.");
+													.println("Il n'y a pas du temps Ã  senfuire.");
 										poserBombe2 = false;
 									}
 								}
@@ -212,7 +212,7 @@ public class DeplacementCollecte {
 					} else {
 						if (ai.print) {
 							System.out
-									.println(": 1) On n'arrive pas à la fin du chemin");
+									.println(": 1) On n'arrive pas Ã  la fin du chemin");
 							System.out.println("Collect: 1) senfuire2:"
 									+ ai.senfuire2 + "ai.senfuire:"
 									+ ai.senfuire);
@@ -355,7 +355,7 @@ public class DeplacementCollecte {
 						}
 					}
 				}
-				// si on n'arrive pas à la case suivant
+				// si on n'arrive pas Ã  la case suivant
 				else {
 
 					// si on ne s'enfuit pas:
@@ -490,7 +490,7 @@ public class DeplacementCollecte {
 
 	
 	/**
-	 * Cette méthode permet a s'enfuire apres le posage de bombe
+	 * Cette mÃ©thode permet a s'enfuire apres le posage de bombe
 	 * 
 	 * @throws StopRequestException
 	 */

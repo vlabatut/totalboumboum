@@ -24,23 +24,23 @@ package org.totalboumboum.ai.v200910.adapter.data;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
- * cette classe permet de représenter les sprites manipulés par le jeu,
- * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
- * Le paramètre T détermine le type de sprite représenté : bloc, bombe,
+ * cette classe permet de reprï¿½senter les sprites manipulï¿½s par le jeu,
+ * et un nombre restreint de leurs propriï¿½tï¿½s, rendues ainsi accessible Ã  l'IA.
+ * Le paramï¿½tre T dï¿½termine le type de sprite reprï¿½sentï¿½ : bloc, bombe,
  * feu, sol, personnage ou item. 
  * 
  * @author Vincent Labatut
  *
- * @param <T>	type de sprite représenté
+ * @param <T>	type de sprite reprï¿½sentï¿½
  */
 
 public abstract class AiSprite<T extends Sprite>
 {	
 	/**
-	 * construit une représentation du sprite passé en paramètre
+	 * construit une reprï¿½sentation du sprite passï¿½ en paramï¿½tre
 	 * 
-	 * @param tile	représentation de la case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param tile	reprï¿½sentation de la case contenant le sprite
+	 * @param sprite	sprite Ã  reprï¿½senter
 	 */
 	AiSprite(AiTile tile, T sprite)
 	{	this.tile = tile;
@@ -52,9 +52,9 @@ public abstract class AiSprite<T extends Sprite>
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour cette représentation du sprite
+	 * met Ã  jour cette reprï¿½sentation du sprite
 	 * 
-	 * @param tile	la nouvelle case contenant cette représentation
+	 * @param tile	la nouvelle case contenant cette reprï¿½sentation
 	 */
 	void update(AiTile tile)
 	{	this.tile = tile;
@@ -66,23 +66,23 @@ public abstract class AiSprite<T extends Sprite>
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** sprite représenté par cette classe */ 
+	/** sprite reprï¿½sentï¿½ par cette classe */ 
 	private T sprite;
 
 	/**
-	 * teste si cette représentation correspond au sprite passé en paramètre
+	 * teste si cette reprï¿½sentation correspond au sprite passï¿½ en paramï¿½tre
 	 * 
-	 * @param sprite	le sprite dont on veut la représentation
-	 * @return	vrai si cette représentation correspond à ce sprite
+	 * @param sprite	le sprite dont on veut la reprï¿½sentation
+	 * @return	vrai si cette reprï¿½sentation correspond Ã  ce sprite
 	 */
 	boolean isSprite(T sprite)
 	{	return this.sprite == sprite;
 	}
 	
 	/**
-	 * renvoie le sprite correspondant à cette représentation
+	 * renvoie le sprite correspondant Ã  cette reprï¿½sentation
 	 * 
-	 * @return	le sprite correspondant à cette représentation
+	 * @return	le sprite correspondant Ã  cette reprï¿½sentation
 	 */
 	T getSprite()
 	{	return sprite;	
@@ -91,20 +91,20 @@ public abstract class AiSprite<T extends Sprite>
 	/////////////////////////////////////////////////////////////////
 	// CHECK			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** marquage du sprite (permet de détecter quels sprites ont disparu lors de la mise à jour */
+	/** marquage du sprite (permet de dï¿½tecter quels sprites ont disparu lors de la mise Ã  jour */
 	private boolean checked;
 
 	/**
-	 * teste si sprite est marqué ou pas
+	 * teste si sprite est marquï¿½ ou pas
 	 * 
-	 * @return	vrai si ce sprite est marqué
+	 * @return	vrai si ce sprite est marquï¿½
 	 */
 	boolean isChecked()
 	{	return checked;	
 	}
 	
 	/**
-	 * démarque ce sprite (action réalisée avant la mise à jour de la zone)
+	 * dï¿½marque ce sprite (action rï¿½alisï¿½e avant la mise Ã  jour de la zone)
 	 */
 	void uncheck()
 	{	checked = false; 
@@ -113,35 +113,35 @@ public abstract class AiSprite<T extends Sprite>
 	/////////////////////////////////////////////////////////////////
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** état dans lequel se trouve ce sprite */
+	/** Ã©tat dans lequel se trouve ce sprite */
 	private AiState state;
 
 	/** 
-	 * renvoie l'état dans lequel se trouve ce sprite
+	 * renvoie l'ï¿½tat dans lequel se trouve ce sprite
 	 * (ie: quelle action il est en train d'effectuer ou de subir)
 	 * 
-	 * @return	l'état du sprite
+	 * @return	l'ï¿½tat du sprite
 	 */
 	public AiState getState()
 	{	return state;
 	}
 	
 	/** 
-	 * initialise l'état dans lequel se trouve ce sprite
+	 * initialise l'ï¿½tat dans lequel se trouve ce sprite
 	 */
 	private void updateState()
 	{	state.update();
 	}
 	
 	/**
-	 * indique que le sprite a été éliminé du jeu
+	 * indique que le sprite a ï¿½tï¿½ ï¿½liminï¿½ du jeu
 	 */
 	void setEnded()
 	{	state.setEnded();		
 	}
 	
 	/**
-	 * renvoie vrai si ce sprite a été éliminé du jeu
+	 * renvoie vrai si ce sprite a ï¿½tï¿½ ï¿½liminï¿½ du jeu
 	 * @return	vrai si le sprite n'est plus en jeu
 	 */
 	public boolean hasEnded()
@@ -151,28 +151,28 @@ public abstract class AiSprite<T extends Sprite>
 	/////////////////////////////////////////////////////////////////
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** représentation de la case contenant ce sprite */
+	/** reprï¿½sentation de la case contenant ce sprite */
 	private AiTile tile;
 	
 	/** 
-	 * renvoie la représentation de la case contenant ce sprite 
+	 * renvoie la reprï¿½sentation de la case contenant ce sprite 
 	 */
 	public AiTile getTile()
 	{	return tile;
 	}
 	
 	/** 
-	 * renvoie le numéro de la ligne contenant ce sprite 
+	 * renvoie le numï¿½ro de la ligne contenant ce sprite 
 	 * 
-	 * @return	le numéro de la ligne du sprite
+	 * @return	le numï¿½ro de la ligne du sprite
 	 */
 	public int getLine()
 	{	return tile.getLine();	
 	}
 	/** 
-	 * renvoie le numéro de la colonne contenant ce sprite
+	 * renvoie le numï¿½ro de la colonne contenant ce sprite
 	 * 
-	 * @return	le numéro de la colonne du sprite
+	 * @return	le numï¿½ro de la colonne du sprite
 	 */
 	public int getCol()
 	{	return tile.getCol();	
@@ -183,7 +183,7 @@ public abstract class AiSprite<T extends Sprite>
 	/////////////////////////////////////////////////////////////////
 	/** abscisse de ce sprite en pixels */
 	private double posX;
-	/** ordonnée de ce sprite en pixels */
+	/** ordonnï¿½e de ce sprite en pixels */
 	private double posY;
 	/** altitude de ce sprite en pixels */
 	private double posZ;
@@ -198,9 +198,9 @@ public abstract class AiSprite<T extends Sprite>
 	}
 	
 	/** 
-	 * renvoie l'ordonnée de ce sprite en pixels 
+	 * renvoie l'ordonnï¿½e de ce sprite en pixels 
 	 * 
-	 * @return	l'ordonnée du sprite
+	 * @return	l'ordonnï¿½e du sprite
 	 */
 	public double getPosY()
 	{	return posY;
@@ -258,10 +258,10 @@ public abstract class AiSprite<T extends Sprite>
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Teste si le sprite passé en paramètre est capable de traverser
+	 * Teste si le sprite passï¿½ en paramï¿½tre est capable de traverser
 	 * la case de ce sprite
 	 * 
-	 *  @param sprite	le sprite à tester
+	 *  @param sprite	le sprite Ã  tester
 	 *  @return	vrai si ce sprite le laisser passer par sa case 
 	 */
 	public abstract boolean isCrossableBy(AiSprite<?> sprite);
@@ -270,7 +270,7 @@ public abstract class AiSprite<T extends Sprite>
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * termine proprement ce sprite et libère les ressources qu'il occupait
+	 * termine proprement ce sprite et libï¿½re les ressources qu'il occupait
 	 */
 	void finish()
 	{	// state

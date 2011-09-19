@@ -26,8 +26,8 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 
 
 /**
- * @author Elif Nurdan ÝLGAR 
- * @author Engin Hacýbektaþoðlu
+ * @author Elif Nurdan ï¿½LGAR 
+ * @author Engin Hacï¿½bektaï¿½oï¿½lu
  *
  */
 
@@ -256,7 +256,7 @@ public class Maps
 				{
 					if(division)
 					{
-						// on calcule le point d'une telle tile comme (point/distance_entre_l'héro_et_la_case
+						// on calcule le point d'une telle tile comme (point/distance_entre_l'hï¿½ro_et_la_case
 						int distance=zone.getTileDistance(ourHero.getLine(),ourHero.getCol(), x, j);
 						if(distance==0) distance=1;
 						matriceTotal[x][j]+=note/distance;
@@ -307,7 +307,7 @@ public class Maps
 				{
 					if(division)
 					{
-						// on calcule le point d'une telle tile comme (point/distance_entre_l'héro_et_la_case
+						// on calcule le point d'une telle tile comme (point/distance_entre_l'hï¿½ro_et_la_case
 						int distance=zone.getTileDistance(ourHero.getLine(),ourHero.getCol(), i, y);
 						if(distance==0) distance=1;
 						matriceTotal[i][y]+=note/distance;
@@ -517,7 +517,7 @@ public class Maps
 					break;
 				}
 				
-				// on donne le couleur vert aux tiles inaccesible en mode collecte par notre héro
+				// on donne le couleur vert aux tiles inaccesible en mode collecte par notre hï¿½ro
 				if( matriceTotal[i][j]==-100) output.setTileColor(i, j,case_inaccesible);
 
 			}	
@@ -699,7 +699,7 @@ public class Maps
 					break;
 				}
 				
-				// on donne le couleur rouge aux tiles inaccesible par notre héro
+				// on donne le couleur rouge aux tiles inaccesible par notre hï¿½ro
 				if( matriceTotal[i][j]==-100) output.setTileColor(i, j,case_inaccesible);
 			}	
 		}
@@ -814,7 +814,7 @@ public class Maps
 	
 	
 	/**
-	 * methode affichante la matriceTotale en console et en zone de jeu à la fois
+	 * methode affichante la matriceTotale en console et en zone de jeu Ã  la fois
 	 * 
 	 * @param matriceTotal
 	 * @throws StopRequestException

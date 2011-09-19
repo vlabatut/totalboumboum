@@ -315,7 +315,7 @@ public class ClientGeneralConnection
 		for(ClientIndividualConnection connection: list)
 		{	if(connection.getGameInfo()==gameInfo)
 			{	activeConnection = connection;
-//TODO en fait ça devrait être une requête, à valider par le serveur...			
+//TODO en fait ï¿½a devrait ï¿½tre une requï¿½te, Ã  valider par le serveur...			
 				connection.setState(ClientState.SELECTING_PLAYERS);
 				NetworkMessage message = new NetworkMessage(MessageName.ENTERING_PLAYERS_SELECTION,true);
 				connection.writeMessage(message);

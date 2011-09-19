@@ -56,9 +56,9 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	
 		AiAction result = new AiAction(AiActionName.NONE);
 		
-		// si le personnage controlé a été éliminé, inutile de continuer
+		// si le personnage controlï¿½ a ï¿½tï¿½ ï¿½liminï¿½, inutile de continuer
 		if(!ownHero.hasEnded())
-		{	// on met à jour la position de l'ia dans la zone
+		{	// on met Ã  jour la position de l'ia dans la zone
 			updateLocation();
 			/*
 			if(verbose)
@@ -66,7 +66,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 			Direction moveDir = Direction.NONE;
 			
 			
-			// on met à jour le gestionnaire de sécurité
+			// on met Ã  jour le gestionnaire de sÃ©curitÃ©
 			safetyManager.update();
 			// si on est en train de fuir : on continue
 			if(escapeManager!=null)
@@ -76,13 +76,13 @@ public class AldanmazYenigun extends ArtificialIntelligence
 					moveDir = escapeManager.update();
 			}
 			
-			// sinon si on est en danger : on commence à fuir
+			// sinon si on est en danger : on commence Ã  fuir
 			else if(!safetyManager.isSafe(currentTile))
 			{	escapeManager = new EscapeManager(this);
 				moveDir = escapeManager.update();
 			}
 			
-			// sinon on se déplace vers la cible
+			// sinon on se dï¿½place vers la cible
 			else
 			{	updateTarget();
 				if(targetItem!=null)
@@ -91,7 +91,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 					moveDir = targetManager.update();
 			}
 			
-			// on met à jour la direction renvoyée au moteur du jeu
+			// on met Ã  jour la direction renvoyï¿½e au moteur du jeu
 			result = new AiAction(AiActionName.MOVE,moveDir);
 		}
 		
@@ -116,19 +116,19 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// PATH MANAGERS			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe chargée du déplacement vers la cible */
+	/** classe chargï¿½e du dÃ©placement vers la cible */
 	private PathManager targetManager = null;
-	/** classe chargée de la fuite du personnage */
+	/** classe chargï¿½e de la fuite du personnage */
 	private EscapeManager escapeManager = null;
 	
 	/////////////////////////////////////////////////////////////////
 	// SAFETY MANAGER				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe chargée de déterminer quelles cases sont sûres */
+	/** classe chargï¿½e de dï¿½terminer quelles cases sont sï¿½res */
 	private SafetyManager safetyManager = null;
 
 	/**
-	 * renvoie le gestionnaire de sécurité
+	 * renvoie le gestionnaire de sÃ©curitÃ©
 	 */
 	public SafetyManager getSafetyManager() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -137,7 +137,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	}
 	
 	/**
-	 * renvoie le niveau de sécurité de la case passée en paramètre
+	 * renvoie le niveau de sÃ©curitÃ© de la case passï¿½e en paramï¿½tre
 	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -146,7 +146,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	}
 	
 	/**
-	 * détermine si la case passée en paramètre est sûre
+	 * dï¿½termine si la case passï¿½e en paramï¿½tre est sï¿½re
 	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -157,7 +157,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// CURRENT TILE				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la case occupée actuellement par le personnage */
+	/** la case occupï¿½e actuellement par le personnage */
 	private AiTile currentTile = null;
 
 	/**
@@ -172,9 +172,9 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// CURRENT LOCATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la position en pixels occupée actuellement par le personnage */
+	/** la position en pixels occupï¿½e actuellement par le personnage */
 	private double currentX;
-	/** la position en pixels occupée actuellement par le personnage */
+	/** la position en pixels occupï¿½e actuellement par le personnage */
 	private double currentY;
 
 	/**
@@ -187,7 +187,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	}
 	
 	/**
-	 * renvoie l'ordonnée courante (en pixels)
+	 * renvoie l'ordonnï¿½e courante (en pixels)
 	 */
 	public double getCurrentY() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -207,11 +207,11 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage dirigé par cette IA */
+	/** le personnage dirigï¿½ par cette IA */
 	private AiHero ownHero = null;
 
 	/**
-	 * renvoie le personnage contrôlé par cette IA
+	 * renvoie le personnage contrï¿½lï¿½ par cette IA
 	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -237,15 +237,15 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// TARGET					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** la cible à suivre (ou null si aucune cible n'existe) */
+	/** la cible Ã  suivre (ou null si aucune cible n'existe) */
 	private AiItem targetItem;
-	/** case précédente de la cible */
+	/** case prï¿½cï¿½dente de la cible */
 	private AiTile targetPreviousTile;
 	
 	private AiBlock targetWall;
 
 	/**
-	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
+	 * met Ã  jour la cible, et ï¿½ventuellement le chemin jusqu'ï¿½ elle
 	 */
 	private void updateTarget() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE

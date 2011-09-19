@@ -22,7 +22,7 @@ package org.totalboumboum.ai.v201112.adapter.data;
  */
 
 /**
- * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
+ * reprï¿½sente un feu du jeu, ie une projection mortelle rï¿½sultant (gï¿½nï¿½ralement) 
  * de l'explosion d'une bombe. 
  * 
  * @author Vincent Labatut
@@ -34,9 +34,9 @@ public interface AiFire extends AiSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * teste si ce feu est capable de passer à travers les (certains) murs
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * teste si ce feu est capable de passer Ã  travers les (certains) murs
+	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas ï¿½tre utilisÃ©e directement par l'IA,
+	 * elle est destinï¿½e au calcul des modï¿½les simulant l'ï¿½volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -45,9 +45,9 @@ public interface AiFire extends AiSprite
 	public boolean hasThroughBlocks();
 
 	/**
-	 * teste si ce feu est capable de passer à travers les bombes
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * teste si ce feu est capable de passer Ã  travers les bombes
+	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas ï¿½tre utilisÃ©e directement par l'IA,
+	 * elle est destinï¿½e au calcul des modï¿½les simulant l'ï¿½volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -56,9 +56,9 @@ public interface AiFire extends AiSprite
 	public boolean hasThroughBombs();
 
 	/**
-	 * teste si ce feu est capable de passer à travers les items
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * teste si ce feu est capable de passer Ã  travers les items
+	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas ï¿½tre utilisÃ©e directement par l'IA,
+	 * elle est destinï¿½e au calcul des modï¿½les simulant l'ï¿½volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -69,6 +69,6 @@ public interface AiFire extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// TODO à renommer en getElapsedTime, même chose pour les bombes (plus changer le getTime actuel en getCountdownTime) 
+	// TODO Ã  renommer en getElapsedTime, mÃªme chose pour les bombes (plus changer le getTime actuel en getCountdownTime) 
 	public long getTime();	
 }

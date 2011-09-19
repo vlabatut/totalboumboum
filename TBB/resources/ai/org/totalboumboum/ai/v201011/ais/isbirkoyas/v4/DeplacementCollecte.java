@@ -73,7 +73,7 @@ public class DeplacementCollecte {
 
 			} catch (Exception e) {
 				if (print)
-					System.out.println("Collect:On est bloqué" + e);
+					System.out.println("Collect:On est bloquï¿½" + e);
 			}
 			// Detruire
 			if (ai.nextMove == null && ai.senfuire == false) {
@@ -129,7 +129,7 @@ public class DeplacementCollecte {
 							if (!securite.plein(gameZone, ai.ourHero.getTile())) {
 								if (print)
 									System.out
-											.println("Collect: IA pense à poser bombe!");
+											.println("Collect: IA pense Ã  poser bombe!");
 
 								poserBombe2 = true;
 
@@ -161,7 +161,7 @@ public class DeplacementCollecte {
 									if (temps2 > temps) {
 										if (print)
 											System.out
-													.println("Il n'y a pas du temps à senfuire.");
+													.println("Il n'y a pas du temps Ã  senfuire.");
 										poserBombe2 = false;
 									}
 								}
@@ -212,7 +212,7 @@ public class DeplacementCollecte {
 						 */
 						if (print) {
 							System.out
-									.println(": 1) On n'arrive pas à la fin du chemin");
+									.println(": 1) On n'arrive pas Ã  la fin du chemin");
 							System.out.println("Collect: 1) senfuire2:"
 									+ ai.senfuire2);
 						}
@@ -284,7 +284,7 @@ public class DeplacementCollecte {
 				} else {
 					if (print) {
 						System.out
-								.println("Collect: 2) On n'arrive pas à la fin du chemin");
+								.println("Collect: 2) On n'arrive pas Ã  la fin du chemin");
 						System.out.println("Collect: 2) senfuire2:"
 								+ ai.senfuire2);
 					}
@@ -414,8 +414,8 @@ public class DeplacementCollecte {
 	}
 
 	/**
-	 * Cette méthode compare les cases cibles entre eux et retourne la case qui
-	 * a la valeur plus élevée. S’il y a plus d’une valeur élevée égales alors
+	 * Cette mÃ©thode compare les cases cibles entre eux et retourne la case qui
+	 * a la valeur plus ï¿½levï¿½e. Sï¿½il y a plus dï¿½une valeur ï¿½levï¿½e ï¿½gales alors
 	 * IA regarde au distance de ceux cases
 	 * 
 	 * @param matrice

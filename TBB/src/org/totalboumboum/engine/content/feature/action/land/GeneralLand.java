@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action d'atterrir (hors déplacement sur le plan, qui est lié à movehigh)
+ * action d'atterrir (hors dÃ©placement sur le plan, qui est liï¿½ Ã  movehigh)
  * INTRANSITIVE
  * 
  * <p>ABILITY PERFORM
@@ -43,13 +43,13 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>paramètre: actor=oui (hero,bombe)
- * 	<br>paramètre: target=N/D
- * 	<br>paramètre: direction=N/D
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=oui
- * 	<br>paramètre: restriction=SPRITE_TRAVERSE
+ * 	<br>paramï¿½tre: actor=oui (hero,bombe)
+ * 	<br>paramï¿½tre: target=N/D
+ * 	<br>paramï¿½tre: direction=N/D
+ * 	<br>paramï¿½tre: strength=bool
+ * 	<br>paramï¿½tre: kind=N/D
+ * 	<br>paramï¿½tre: scope=oui
+ * 	<br>paramï¿½tre: restriction=SPRITE_TRAVERSE
  */
 /** 
  * finishing an aerial move and landing on the floor.

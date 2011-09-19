@@ -26,9 +26,9 @@ public class SearchNodeComp implements Comparator<SearchNode> {
 	}
 
 	/**
-	 * Retourne une valeur servant à comparer les noeuds.
+	 * Retourne une valeur servant Ã  comparer les noeuds.
 	 * On fait la somme de l'heuristique et le cout de chaque noeud.
-	 * On compare ces valeurs et on tourne une valeur négative si le premier a un plus petit valeur,
+	 * On compare ces valeurs et on tourne une valeur nï¿½gative si le premier a un plus petit valeur,
 	 * une valeur positive si le premier a une plus grande valeur
 	 * @param noeud1 
 	 *            noeud qu'on va comparer
@@ -40,7 +40,7 @@ public class SearchNodeComp implements Comparator<SearchNode> {
 	public int compare(SearchNode node1, SearchNode node2) {
 		int resultat;
 	//somme de l'heuristique et du cout pour chaque noeud
-	//on va utiliser pour l'algorithme de A_étoile
+	//on va utiliser pour l'algorithme de A_ï¿½toile
 	int n_1=node1.getHeuristic(goal)+  node1.getCout();
 	int n_2=node2.getHeuristic(goal)+  node2.getCout();
 	

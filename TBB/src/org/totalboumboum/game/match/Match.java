@@ -92,7 +92,7 @@ public class Match implements StatisticHolder, Serializable
 	{	// are rounds in random order ?
     	if(randomOrder)
     		randomizeRounds();
-		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+		// NOTE vï¿½rifier si le nombre de joueurs sï¿½lectionnï¿½s correspond
 		// profiles
     	this.profiles.addAll(profiles);
 /*    	
@@ -136,7 +136,7 @@ public class Match implements StatisticHolder, Serializable
 	}
 	
 	public void cancel()
-	{	// TODO à compléter (stats)
+	{	// TODO Ã  complÃ©ter (stats)
 		tournament.cancel();
 	}
 	

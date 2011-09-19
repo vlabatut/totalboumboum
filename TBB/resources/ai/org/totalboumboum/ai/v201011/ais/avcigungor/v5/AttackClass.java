@@ -68,16 +68,16 @@ public class AttackClass {
 	// ///////////////////////////////////////////////////////////////
 	// DESTINATION /////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
-	/** indique si le personnage est arrivé à destination */
+	/** indique si le personnage est arrivï¿½ Ã  destination */
 /*	private boolean arrived;
-	*//** la case de destination sélectionnée pour la fuite *//*
+	*//** la case de destination sï¿½lectionnï¿½e pour la fuite *//*
 	private AiTile tileDest;
 	*//** destinations potentielles *//*
 	private List<AiTile> possibleDest;
 	private Astar astar;
-	*//** classe implémentant la fonction heuristique *//*
+	*//** classe implÃ©mentant la fonction heuristique *//*
 	private HeuristicCalculator heuristicCalculator;
-	*//** classe implémentant la fonction de coût *//*
+	*//** classe implÃ©mentant la fonction de coï¿½t *//*
 	private MatrixCostCalculator costCalculator;*/
 
 	private void fillAttackMatrix() throws StopRequestException {

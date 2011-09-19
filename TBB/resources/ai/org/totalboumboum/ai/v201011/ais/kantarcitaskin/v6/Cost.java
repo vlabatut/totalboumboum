@@ -9,7 +9,7 @@ public class Cost extends CostCalculator
 {
 	ArtificialIntelligence ai;
 	/**
-	 * Classe de la fonction de cout et utilisé par A* pour determiner le chemin plus courts 
+	 * Classe de la fonction de cout et utilisÃ© par A* pour determiner le chemin plus courts 
 	 * d'un cible
 	 * 
 	 */
@@ -36,7 +36,7 @@ public class Cost extends CostCalculator
 	 * 		la case cible
 	 * 
 	 * @return cost
-	 * 		le cost du chemin trouvé
+	 * 		le cost du chemin trouvï¿½
 	 * 
 	 * */
 	public double processCost(AiTile start, AiTile end)throws StopRequestException {

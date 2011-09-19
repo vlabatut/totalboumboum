@@ -50,10 +50,10 @@ public class AkpolatSener extends ArtificialIntelligence {
 	/** direction du cas actuel vers le prochain*/
 	Direction direction;
 	
-	/** liste des cas visités avec ses champs*/
+	/** liste des cas visitï¿½s avec ses champs*/
 	List<XTile> xTiles = new ArrayList<XTile>();
 	
-	/** action de resultat à renvoyer*/
+	/** action de resultat Ã  renvoyer*/
 	AiAction result = new AiAction(AiActionName.NONE);
 	
 	/**
@@ -75,7 +75,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 		if (nextTile == null)
 			nextTile = currentTile;
 
-		// si aucune case n'est pas visitée, case actuelle est ajouté. Sinon les champs de la case de type XTile sont actualisés
+		// si aucune case n'est pas visitï¿½e, case actuelle est ajoutï¿½. Sinon les champs de la case de type XTile sont actualisï¿½s
 		if (xTiles.isEmpty()) {
 			XTile xCurrentTile = new XTile(this, currentTile);
 			xCurrentTile.visits = 1;
@@ -167,10 +167,10 @@ public class AkpolatSener extends ArtificialIntelligence {
 
 		neighbors = new Neighbors(this, zone, currentTile);
 
-		// les cases voisines propres qui ne sont pas dans la portée d'une bombe
+		// les cases voisines propres qui ne sont pas dans la portï¿½e d'une bombe
 		possibleTiles = neighbors.findNeighborsNotInBombRange();
 
-		// s'il n y a pas de voisins propres qui ne sont pas dans la portée d'une bombe 
+		// s'il n y a pas de voisins propres qui ne sont pas dans la portï¿½e d'une bombe 
 		if (possibleTiles.size() == 0)
 		{
 			if (currentTile.getBombs().isEmpty() && currentTile.getFires().isEmpty() && !neighbors.isInBombRange(currentTile, 10)) 
@@ -201,7 +201,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 	 * renvoie la bonne case parmi des cas voisins propres
 	 * 
 	 * @param tiles
-	 * @return la case ayant la plus haute priorité dans la liste
+	 * @return la case ayant la plus haute prioritÃ© dans la liste
 	 * @throws StopRequestException
 	 */	
 	public AiTile selectMostPrior(List<AiTile> tiles)	throws StopRequestException 
@@ -213,7 +213,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 		
 		boolean isInXTiles = false;
 		
-		// on ajoute les cases qui ne sont pas dans la liste des cases visités à la liste XTiles et PriorityQueue
+		// on ajoute les cases qui ne sont pas dans la liste des cases visitï¿½s Ã  la liste XTiles et PriorityQueue
 		for (int cntTiles = 0; cntTiles < tiles.size(); cntTiles++) 
 		{
 			checkInterruption();

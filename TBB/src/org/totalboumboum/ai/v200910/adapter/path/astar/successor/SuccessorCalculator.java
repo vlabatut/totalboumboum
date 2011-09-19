@@ -29,8 +29,8 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.AstarNode;
 
 /**
  * 
- * permet de définir une fonction successeur utilisée par l'algorithme
- * A* lors de la recherche d'un plus court chemin, pour développer un état
+ * permet de dï¿½finir une fonction successeur utilisÃ©e par l'algorithme
+ * A* lors de la recherche d'un plus court chemin, pour dï¿½velopper un Ã©tat
  * 
  * @author Vincent Labatut
  *
@@ -41,15 +41,15 @@ public abstract class SuccessorCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * calcule tous les états accessibles à partir du noeud de recherche
-	 * passé en paramètre. On prend un noeud de recherche et non pas
-	 * un état en paramètre, car le noeud de recherche contient des informations
-	 * susceptibles d'éliminer certains successeurs potentiels. 
-	 * Par exemple, si le cout correspond au temps de déplacement, alors le cout du noeud
-	 * de recherche courant correspond au temps nécessaire pour arriver à l'état
-	 * correspondant. Certaines des cases accessibles depuis cet état peuvent être
-	 * menancée par du feu, et le temps est une information cruciale pour déterminer
-	 * si le personnage peut ou pas traverser une case avant qu'elle ne brûle.
+	 * calcule tous les Ã©tats accessibles Ã  partir du noeud de recherche
+	 * passï¿½ en paramï¿½tre. On prend un noeud de recherche et non pas
+	 * un Ã©tat en paramï¿½tre, car le noeud de recherche contient des informations
+	 * susceptibles d'ï¿½liminer certains successeurs potentiels. 
+	 * Par exemple, si le cout correspond au temps de dÃ©placement, alors le cout du noeud
+	 * de recherche courant correspond au temps nï¿½cessaire pour arriver Ã  l'ï¿½tat
+	 * correspondant. Certaines des cases accessibles depuis cet Ã©tat peuvent ï¿½tre
+	 * menancï¿½e par du feu, et le temps est une information cruciale pour dï¿½terminer
+	 * si le personnage peut ou pas traverser une case avant qu'elle ne brï¿½le.
 	 * 
 	 * @param node	le noeud de recherche courant 
 	 * @return	la liste de cases accessibles

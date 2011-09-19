@@ -14,10 +14,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui dÃ©finit son comportement.
+ * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile Ã 
+ * dÃ©bugger, modifier, relire, comprendre, etc.
  * 
  * @version 3
  * 
@@ -29,14 +29,14 @@ public class BektasMazilyah extends ArtificialIntelligence
 {	
 	private AiZone zone;
 
-	// le personnage dirigé par cette IA
+	// le personnage dirigï¿½ par cette IA
 	private AiHero hero;
 
 
 	//les adversaires
 	@SuppressWarnings("unused")
 	private Vector<AiHero> others;
-	//la prochaine action que l'IA veut réaliser
+	//la prochaine action que l'IA veut rï¿½aliser
 	private AiAction action;
 	private AiTile targetDeplacement;
 	@SuppressWarnings("unused")
@@ -56,7 +56,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	private EscapeManager escapeManager;
 	
 
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException
 	{	
 		//Appel Obligatoire
@@ -65,7 +65,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		if(hero==null)
 			initMonAi();
 		dangerZone= new DangerZone(zone,this);
-		//System.out.println("zone yaratýldý");
+		//System.out.println("zone yaratï¿½ldï¿½");
 		
 /*		for(int i = 0; i<zone.getWidth() ; i++)
 		{	
@@ -84,9 +84,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 		if(hero != null)
 		{
 			Direction moveDir = Direction.NONE;
-			System.out.println("tehlikeye bakýlacak");
+			System.out.println("tehlikeye bakï¿½lacak");
 			checkDanger();
-			System.out.println("tehlikeye bakýldý");
+			System.out.println("tehlikeye bakï¿½ldï¿½");
 			if(isDanger)
 			{//Il y a un danger, il faut se sauver.
 				//System.out.println("danger var");
@@ -110,7 +110,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	private AiAction deplace() throws StopRequestException{
 		checkInterruption(); //Appel Obligatoire
 		if(hero!=null)
-		{	// on met à jour la position de l'ia dans la zone
+		{	// on met Ã  jour la position de l'ia dans la zone
 			currentTile = hero.getTile();
 			
 			// premier appel : on initialise l'IA
@@ -120,16 +120,16 @@ public class BektasMazilyah extends ArtificialIntelligence
 				previousTile = currentTile;
 			}
 			
-			// arrivé à destination : on choisit une nouvelle destination
+			// arrivï¿½ Ã  destination : on choisit une nouvelle destination
 			if(currentTile==nextTile)
 				pickNextTile();
-			// au cas ou quelqu'un prendrait le contrôle manuel du personnage
+			// au cas ou quelqu'un prendrait le contrï¿½le manuel du personnage
 			else if(previousTile!=currentTile)
 			{	previousTile = currentTile;
 				pickNextTile();			
 			}
 						
-			// on calcule la direction à prendre
+			// on calcule la direction Ã  prendre
 			Direction direction = getPercepts().getDirection(currentTile,nextTile);
 			
 			AiAction result = new AiAction(AiActionName.NONE);
@@ -196,7 +196,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		
 		// liste des cases voisines accessibles	
 		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
-		// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
+		// on sort de la liste la case d'oï¿½ l'on vient (pour ï¿½viter de repasser au mÃªme endroit)
 		boolean canGoBack = false;
 		if(tiles.contains(previousTile))
 		{	tiles.remove(previousTile);
@@ -204,8 +204,8 @@ public class BektasMazilyah extends ArtificialIntelligence
 		}
 		// s'il reste des cases dans la liste
 		if(tiles.size()>0)
-		{	// si la liste contient la case située dans la direction déplacement précedente,
-			// on évite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
+		{	// si la liste contient la case situï¿½e dans la direction dÃ©placement prï¿½cedente,
+			// on ï¿½vite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
 			AiTile tempTile = null;
 			Direction dir = getPercepts().getDirection(previousTile,currentTile);
 			if(dir!=Direction.NONE)
@@ -221,13 +221,13 @@ public class BektasMazilyah extends ArtificialIntelligence
 				nextTile = tiles.get(index);
 				previousTile = currentTile;
 			}
-			// sinon (pas le choix) on continue dans la même direction
+			// sinon (pas le choix) on continue dans la mÃªme direction
 			else
 			{	nextTile = tempTile;
 				previousTile = currentTile;
 			}
 		}
-		// sinon (pas le choix) on tente de revenir en arrière
+		// sinon (pas le choix) on tente de revenir en arriï¿½re
 		else
 		{	if(canGoBack)
 			{	nextTile = previousTile;
@@ -244,7 +244,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	private ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rï¿½fï¿½rence
 		Collection<AiTile> neighbors = getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();

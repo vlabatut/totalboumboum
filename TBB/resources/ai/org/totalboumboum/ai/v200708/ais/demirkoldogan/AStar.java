@@ -18,7 +18,7 @@ public class AStar {
 	private Block targetBlock;//point d'arrivee
 	private PriorityQueue<Block> openList; //liste qui contient les block a controller
 	private Vector<Block> closedList; //contient les noeuds controlles
-	private int[][] matrix; //zone matrix amélioré
+	private int[][] matrix; //zone matrix amï¿½liorï¿½
     
 	//CONSTRUCTEUR
 	public AStar(Block ownBlock, Block targetBlock, int[][] matrix) 
@@ -41,7 +41,7 @@ public class AStar {
 			newBlock = new Block(blockDeveloped.getX()+1, blockDeveloped.getY(), blockDeveloped.getCost()+1 );
 			newBlock.setHeuristic(this.targetBlock.getX(), this.targetBlock.getY());
 			newBlock.setParentBlock(blockDeveloped);
-			if (!closedListContains(newBlock)) //si on n'a pas controlé ce block
+			if (!closedListContains(newBlock)) //si on n'a pas controlï¿½ ce block
 				this.openList.offer(newBlock); //on va le controller
 		}
 		if (!isObstacle(blockDeveloped.getX()-1, blockDeveloped.getY()))
@@ -69,7 +69,7 @@ public class AStar {
 				this.openList.offer(newBlock);
 		}
 		
-		//on ajoute le block developpé au liste
+		//on ajoute le block developpï¿½ au liste
 		this.closedList.add(blockDeveloped);
 		
 		
@@ -86,7 +86,7 @@ public class AStar {
 		//une liste qui contient les blocks a developper
 		this.openList = new PriorityQueue<Block>(1, comparator);
 		this.openList.offer(this.ownBlock);
-		//une liste qui contient les blocks déja developpés.
+		//une liste qui contient les blocks dï¿½ja developpï¿½s.
 		this.closedList = new Vector<Block>();
 		//le path en inverse
 		Vector<Block> pathReverse = new Vector<Block>();
@@ -117,7 +117,7 @@ public class AStar {
 	
 	/**
 	 * Methode controllant si un block est dans "openList"
-	 * @param b block controllé
+	 * @param b block controllï¿½
 	 * @return vrai si la liste contient, faux sinon
 	 */
 	public boolean openListContains(Block b)
@@ -136,7 +136,7 @@ public class AStar {
 	
 	/**
 	 * Methode controllant si un block est dans "closedList"
-	 * @param b block controllé
+	 * @param b block controllï¿½
 	 * @return vrai si la liste contient, faux sinon
 	 */
 	public boolean closedListContains(Block b)
@@ -154,10 +154,10 @@ public class AStar {
 	}
 	
 	/**
-	 * Indique si la case située à la position passée en paramètre
+	 * Indique si la case situï¿½e Ã  la position passï¿½e en paramï¿½tre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
-	 * @param x	position à étudier
-	 * @param y	position à étudier
+	 * @param x	position Ã  ï¿½tudier
+	 * @param y	position Ã  ï¿½tudier
 	 * @return	vrai si la case contient un obstacle
 	 */
 	private boolean isObstacle(int x, int y)

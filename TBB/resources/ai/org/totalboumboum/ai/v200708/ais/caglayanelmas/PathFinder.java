@@ -14,9 +14,9 @@ import org.totalboumboum.ai.v200708.ais.caglayanelmas.SearchNode;
 
 /**
  * Module d'IA qui va trouver le plus court chemin
- * entre un case initial et un case final en considérant
+ * entre un case initial et un case final en considï¿½rant
  * les obstacles. On va utiliser A* avec une heuristique
- * étant égale à la distance de Manhattan entre les deux
+ * ï¿½tant ï¿½gale Ã  la distance de Manhattan entre les deux
  * cases.
  * 
  * @author Ozan Caglayan
@@ -25,9 +25,9 @@ import org.totalboumboum.ai.v200708.ais.caglayanelmas.SearchNode;
  */
 public class PathFinder
 {
-	// L'objet qui représente notre IA. On utilise
-	// cette référence pour pouvoir appeler
-	// les méthodes isObstacle, isMovePossible,
+	// L'objet qui reprï¿½sente notre IA. On utilise
+	// cette rï¿½fï¿½rence pour pouvoir appeler
+	// les mÃ©thodes isObstacle, isMovePossible,
 	// applyAction.
 	private CaglayanElmas ai;
 	

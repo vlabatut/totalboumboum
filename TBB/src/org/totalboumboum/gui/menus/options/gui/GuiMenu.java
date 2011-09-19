@@ -140,7 +140,7 @@ public class GuiMenu extends InnerMenuPanel implements ModalDialogPanelListener
 		}
 		if(restart)
 			getFrame().restart();
-//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
+//TODO propager ï¿½ventuellement au round (car il n'y a pas modification mais remplacement, donc si c dï¿½jï¿½ affectï¿½ Ã  un player..
 		else
 			replaceWith(parent);
 	}

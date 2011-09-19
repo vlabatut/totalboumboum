@@ -28,7 +28,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 /**
- * heuristique utilisant la distance de Manhattan exprimées en pixels,
+ * heuristique utilisant la distance de Manhattan exprimï¿½es en pixels,
  * pour aller avec PixelCostCalculator.
  * 
  * @author Vincent Labatut
@@ -40,11 +40,11 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	// STARTING POINT			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case de départ du chemin en cours de recherche */
+	/** case de dï¿½part du chemin en cours de recherche */
 	private AiTile startTile;
-	/** abscisse de départ (doit être contenue dans la case de départ) */
+	/** abscisse de dï¿½part (doit ï¿½tre contenue dans la case de dï¿½part) */
 	private double startX;
-	/** ordonnée de départ (doit être contenue dans la case de départ) */
+	/** ordonnï¿½e de dï¿½part (doit ï¿½tre contenue dans la case de dï¿½part) */
 	private double startY;
 	
 	public void updateStartPoint(AiTile startTile, double startX, double startY)
@@ -57,14 +57,14 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * l'heuristique la plus simple consiste à prendre la distance
-	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
+	 * l'heuristique la plus simple consiste Ã  prendre la distance
+	 * de Manhattan entre la case courante tile et la case d'arrivï¿½e endTile.
 	 * cf. http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels
-	 * ici, on calcule cette distance exprimée en pixels plutot qu'en case
+	 * ici, on calcule cette distance exprimï¿½e en pixels plutot qu'en case
 	 * comme c'est le cas dans BasicHeuristicCalculator.
 	 * 
 	 * @param tile	
-	 * 		la case concernée 
+	 * 		la case concernï¿½e 
 	 * @return	
 	 * 		la distance de Manhattan entre tile et la plus proche des cases contenues dans endTiles
 	 */

@@ -33,29 +33,29 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action de sauter en l'air (hors déplacement sur le plan, qui est lié à movehigh)
+ * action de sauter en l'air (hors dÃ©placement sur le plan, qui est liï¿½ Ã  movehigh)
  * INTRANSITIVE
  * 
  * <p>ABILITY PERFORM
- * 	<br>paramètre: actor=self
- * 	<br>paramètre: target=N/D
- * 	<br>paramètre: direction=N/D
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
+ * 	<br>paramï¿½tre: actor=self
+ * 	<br>paramï¿½tre: target=N/D
+ * 	<br>paramï¿½tre: direction=N/D
+ * 	<br>paramï¿½tre: strength=bool
+ * 	<br>paramï¿½tre: kind=N/D
+ * 	<br>paramï¿½tre: scope=N/D
+ * 	<br>paramï¿½tre: restriction=N/D
  * 
  * <p>ABILITY REFUSE
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>paramètre: actor=oui (hero)
- * 	<br>paramètre: target=N/D
- * 	<br>paramètre: direction=N/D
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
+ * 	<br>paramï¿½tre: actor=oui (hero)
+ * 	<br>paramï¿½tre: target=N/D
+ * 	<br>paramï¿½tre: direction=N/D
+ * 	<br>paramï¿½tre: strength=bool
+ * 	<br>paramï¿½tre: kind=N/D
+ * 	<br>paramï¿½tre: scope=N/D
+ * 	<br>paramï¿½tre: restriction=N/D
  */
 /** 
  * begining an aerial move on its own (not peing punched)

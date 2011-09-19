@@ -22,16 +22,16 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * >> ce texte est à remplacer par votre propre description de votre IA
+ * >> ce texte est Ã  remplacer par votre propre description de votre IA
  * 
- * classe principale de l'IA, qui définit son comportement. n'hésitez pas à
- * décomposer le traitement en plusieurs classes, plus votre programme est
- * modulaire et plus il sera facile à débugger, modifier, relire, comprendre,
+ * classe principale de l'IA, qui dÃ©finit son comportement. n'hÃ©sitez pas ï¿½
+ * dÃ©composer le traitement en plusieurs classes, plus votre programme est
+ * modulaire et plus il sera facile Ã  dÃ©bugger, modifier, relire, comprendre,
  * etc.
  */
 public class DereliGeckalan extends ArtificialIntelligence {
 
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 
 	private int matris[][] = null;
 	private AiTile nextTile;
@@ -112,7 +112,7 @@ public class DereliGeckalan extends ArtificialIntelligence {
 	}
 
 	/**
-	 * une méthode bidon pour l'exemple
+	 * une mÃ©thode bidon pour l'exemple
 	 * 
 	 * @throws StopRequestException
 	 */

@@ -21,7 +21,7 @@ public class MatriceHero extends MatriceCalc {
 	}
 	
 	/**
-	 * avons-nous des ennemis dans la même ligne ou une colonne dans notre gamme de bombe?
+	 * avons-nous des ennemis dans la mÃªme ligne ou une colonne dans notre gamme de bombe?
 	 */
 	static public boolean heroesOnSight(GocmenogluHekimoglu monIa) throws StopRequestException{
 		List<AiHero> heros = monIa.getPercepts().getHeroes();
@@ -49,7 +49,7 @@ public class MatriceHero extends MatriceCalc {
 	}
 
 	/**
-	 * donne 1 à des cas qui se trouvent dans un rayon de 5 cas pour nos ennemis.
+	 * donne 1 Ã  des cas qui se trouvent dans un rayon de 5 cas pour nos ennemis.
 	 */
 	@Override
 	public void calculate() throws StopRequestException {

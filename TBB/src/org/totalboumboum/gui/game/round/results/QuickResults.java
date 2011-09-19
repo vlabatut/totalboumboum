@@ -108,7 +108,7 @@ public class QuickResults extends JPanel
 		
 		// headers
 		{	String sc = null;
-/* TODO à adapter
+/* TODO Ã  adapter
 			switch(round.getPlayMode())
 			{	case CROWN:
 					sc = "Crowns";
@@ -168,7 +168,7 @@ sc = "Time";
 					nf.setMaximumFractionDigits(2);
 					nf.setMinimumFractionDigits(0);
 					String sc = "";
-/*	TODO à adapter				
+/*	TODO Ã  adapter				
 					switch(round.getPlayMode())
 					{	case CROWN:
 							sc = nf.format(stats.getScores(Score.CROWNS)[orderedPlayers[i]]);

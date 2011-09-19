@@ -10,7 +10,7 @@ public class MatriceCalc {
 	protected int zoneh,zonew;
 	protected double matrix[][];
 	
-	/** une méthode bidon pour l'exemple */
+	/** une mÃ©thode bidon pour l'exemple */
 	public MatriceCalc(GocmenogluHekimoglu monIa) throws StopRequestException
 	{	// avant tout : test d'interruption
 		monIa.checkInterruption();

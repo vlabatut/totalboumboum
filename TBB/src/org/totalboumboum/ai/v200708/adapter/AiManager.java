@@ -67,29 +67,29 @@ public abstract class AiManager extends AbstractAiManager<Integer>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** percept à envoyer à l'IA : matrice représentant la zone de jeu */
+    /** percept Ã  envoyer Ã  l'IA : matrice reprï¿½sentant la zone de jeu */
     private int[][] zoneMatrix;;
-    /** percept à envoyer à l'IA : liste des bombes */
+    /** percept Ã  envoyer Ã  l'IA : liste des bombes */
     private Vector<int[]> bombs;
-    /** percept à envoyer à l'IA : liste des personnages */
+    /** percept Ã  envoyer Ã  l'IA : liste des personnages */
     private Vector<int[]> players;
-    /** percept à envoyer à l'IA : états personnages */
+    /** percept Ã  envoyer Ã  l'IA : Ã©tats personnages */
     private Vector<Boolean> playersStates;
-    /** percept à envoyer à l'IA : temps avant le début du shrink */
+    /** percept Ã  envoyer Ã  l'IA : temps avant le dï¿½but du shrink */
     private long timeBeforeShrink;
-    /** percept à envoyer à l'IA : prochaine position du shrink */
+    /** percept Ã  envoyer Ã  l'IA : prochaine position du shrink */
     private int nextShrinkPosition[];
-    /** percept à envoyer à l'IA : position du personnage de l'IA */
+    /** percept Ã  envoyer Ã  l'IA : position du personnage de l'IA */
     private int ownPosition[];
-    /** percept à envoyer à l'IA : position relative de la bombe */
+    /** percept Ã  envoyer Ã  l'IA : position relative de la bombe */
     private int bombPosition;
-    /** percept à envoyer à l'IA : la portee de la bombe */
+    /** percept Ã  envoyer Ã  l'IA : la portee de la bombe */
     private int ownFirePower;
-    /** percept à envoyer à l'IA : le nombre total de bombes */
+    /** percept Ã  envoyer Ã  l'IA : le nombre total de bombes */
     private int ownBombCount;
-    /** percept à envoyer à l'IA : la portee de la bombe */
+    /** percept Ã  envoyer Ã  l'IA : la portee de la bombe */
     private Vector<Integer> firePowers;
-    /** percept à envoyer à l'IA : le nombre total de bombes */
+    /** percept Ã  envoyer Ã  l'IA : le nombre total de bombes */
     private Vector<Integer> bombCounts;
 
 	@Override
@@ -100,11 +100,11 @@ public abstract class AiManager extends AbstractAiManager<Integer>
     	Tile[][] matrix = RoundVariables.level.getMatrix();
     	Sprite sprite = player.getSprite();
     	
-    	// état du shrink
-//NOTE à compléter    	
+    	// Ã©tat du shrink
+//NOTE Ã  complÃ©ter    	
     	timeBeforeShrink = Long.MAX_VALUE;
-    	// position du prochain bloc shrinké
-//NOTE à compléter    	
+    	// position du prochain bloc shrinkï¿½
+//NOTE Ã  complÃ©ter    	
     	nextShrinkPosition = new int[2];
     	nextShrinkPosition[0] = 0;
     	nextShrinkPosition[1] = 0;
@@ -114,7 +114,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
  		Tile tile = sprite.getTile();
         ownPosition[0] = tile.getCol();
         ownPosition[1] = tile.getLine();
-        // propriétés du joueur
+        // propriï¿½tï¿½s du joueur
         {	// bomb range
         	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
 			ownFirePower = (int)ab.getStrength();
@@ -137,7 +137,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 			ownBombCount = ownBombCount - sprite.getDroppedBombs().size();
         }
 
-        // position relative de l'éventuelle bombe
+        // position relative de l'ï¿½ventuelle bombe
         bombPosition = ArtificialIntelligence.AI_DIR_NONE;
         List<Bomb> bombes = tile.getBombs();
         if(bombes.size()>0)
@@ -155,13 +155,13 @@ public abstract class AiManager extends AbstractAiManager<Integer>
         	}
         	// joueur pas parfaitement sur la bombe 
         	if(minX!=0 || minY!=0)
-        	{	// même ligne ?
+        	{	// mÃªme ligne ?
     	    	if(Math.abs(minX)>=Math.abs(minY))
     	    		if(minX>0)
     	    			bombPosition = ArtificialIntelligence.AI_DIR_LEFT;
     	    		else
     	    			bombPosition = ArtificialIntelligence.AI_DIR_RIGHT;
-    	    	// même colonne ?
+    	    	// mÃªme colonne ?
     	    	else
     	    		if(minY>0)
     	    			bombPosition = ArtificialIntelligence.AI_DIR_UP;
@@ -260,7 +260,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 		Iterator<AbstractPlayer> i = plyrs.iterator();
 		while(i.hasNext())
 		{	AbstractPlayer tempPlayer = i.next();
-			// le joueur représenté par cet objet ne doit pas apparaitre dans cette liste
+			// le joueur reprï¿½sentï¿½ par cet objet ne doit pas apparaitre dans cette liste
 			if(tempPlayer!=player)
 			{	// position
 				Tile t = tempPlayer.getSprite().getTile();

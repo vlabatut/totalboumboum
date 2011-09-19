@@ -21,19 +21,19 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * 
  * @author Selim Coremen
- * @author Umut Kucukkarakürt
+ * @author Umut Kucukkarakï¿½rt
  *
  */
 public class CoremenKucukkarakurt extends ArtificialIntelligence
 {
 	
-	/** la case occupée actuellement par le personnage*/
+	/** la case occupï¿½e actuellement par le personnage*/
 	private AiTile currentTile;
 	
 	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
 	
-	/** la dernière case par laquelle on est passé */ 
+	/** la derniÃ¨re case par laquelle on est passï¿½ */ 
 	private AiTile previousTile = null;
 	
 	// la methode principale
@@ -54,7 +54,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		if(ownHero!=null)
 		{	
 			
-			// on met à jour la position de l'ia dans la zone
+			// on met Ã  jour la position de l'ia dans la zone
 			currentTile = ownHero.getTile();
 			
 			// premier appel : on initialise l'IA	
@@ -64,7 +64,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 			
 			
 			/*
-			 * si mon currenttile est en securité et si ma region est en securité et si je suis à coté
+			 * si mon currenttile est en securitÃ© et si ma region est en securitÃ© et si je suis Ã  cotï¿½
 			 * d'un mur et si il y a pas une bombe proche
 			 */
 			if(isCaseSafe(currentTile) && isRegionSafe(currentTile) && canIDestroyAWall(currentTile)&& getCloseBombs().size()<1){
@@ -86,14 +86,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 			// si il y a plus de 1 bombes
 			if(getCloseBombs().size()>=1){	
-				// si mon case est en securité
+				// si mon case est en securitÃ©
 				if(isCaseSafe(currentTile)){
 					
 					// on fait rien
 					result=new AiAction(AiActionName.NONE);
 					
 				}
-				// si mon case n'est pas en secutité
+				// si mon case n'est pas en secutitï¿½
 				else{
 					
 					// on fait un mouvement par hasard
@@ -177,16 +177,16 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Choisit comme destination une case voisine de la case actuellement occupée par l'IA.
-	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
-	 * être différente de la case précédemment occupée
+	 * Choisit comme destination une case voisine de la case actuellement occupï¿½e par l'IA.
+	 * Cette case doit ï¿½tre accessible (pas de mur ou de bombe ou autre obstacle) et doit
+	 * ï¿½tre diffï¿½rente de la case prï¿½cï¿½demment occupï¿½e
 	 * @throws StopRequestException 
 	 */
 	
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rï¿½fï¿½rence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();
@@ -219,7 +219,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
 			List<AiTile> tiles = getClearNeighbors(currentTile);
-			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
+			// on sort l'ancienne destination (qui est maintenant bloquï¿½e) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);
 			// s'il reste des cases dans la liste : on en tire une au hasard
@@ -232,7 +232,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		}
 	}
 	
-	// la methode qui verifie si la case est en securité ou non
+	// la methode qui verifie si la case est en securitÃ© ou non
 	private boolean isCaseSafe (AiTile tile) throws StopRequestException{
 		checkInterruption(); //APPEL OBLIGATOIRE
 		tile=currentTile;
@@ -323,7 +323,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 		// si ownHero est null, c'est que l'IA est morte : inutile de continuer
 		
-		// on met à jour la position de l'ia dans la zone
+		// on met Ã  jour la position de l'ia dans la zone
 			
 		currentTile = ownHero.getTile();
 
@@ -345,22 +345,22 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 		
 		
-		// arrivé à destination : on choisit une nouvelle destination
+		// arrivï¿½ Ã  destination : on choisit une nouvelle destination
 		if(currentTile==nextTile)
 			pickNextTile();
 		
-		// au cas ou quelqu'un prendrait le contrôle manuel du personnage
+		// au cas ou quelqu'un prendrait le contrï¿½le manuel du personnage
 		
 		else if(previousTile!=currentTile)
 		{	previousTile = currentTile;
 			pickNextTile();			
 		}
 		
-		// sinon (on garde la même direction) on vérifie qu'un obstacle (ex: bombe) n'est pas apparu dans la case
+		// sinon (on garde la mÃªme direction) on vï¿½rifie qu'un obstacle (ex: bombe) n'est pas apparu dans la case
 		else
 			checkNextTile();
 				
-		// on calcule la direction à prendre
+		// on calcule la direction Ã  prendre
 		
 		Direction direction = getPercepts().getDirection(currentTile,nextTile);
 
@@ -392,7 +392,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	{	
 		checkInterruption(); //APPEL OBLIGATOIRE
 		
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rï¿½fï¿½rence
 		Collection<AiBomb> bombs = getPercepts().getBombs();
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();
@@ -417,7 +417,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	
 	// liste des cases voisines accessibles	
 	List<AiTile> tiles = getClearNeighbors(currentTile);
-	// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
+	// on sort de la liste la case d'oï¿½ l'on vient (pour ï¿½viter de repasser au mÃªme endroit)
 	boolean canGoBack = false;
 	if(tiles.contains(previousTile))
 	{	tiles.remove(previousTile);
@@ -425,8 +425,8 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	// s'il reste des cases dans la liste
 	if(tiles.size()>0)
-	{	// si la liste contient la case située dans la direction déplacement précedente,
-		// on évite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
+	{	// si la liste contient la case situï¿½e dans la direction dÃ©placement prï¿½cedente,
+		// on ï¿½vite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
 		AiTile tempTile = null;
 		Direction dir = getPercepts().getDirection(previousTile,currentTile);
 		if(dir!=Direction.NONE)
@@ -442,13 +442,13 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 			nextTile = tiles.get(index);
 			previousTile = currentTile;
 		}
-		// sinon (pas le choix) on continue dans la même direction
+		// sinon (pas le choix) on continue dans la mÃªme direction
 		else
 		{	nextTile = tempTile;
 			previousTile = currentTile;
 		}
 	}
-	// sinon (pas le choix) on tente de revenir en arrière
+	// sinon (pas le choix) on tente de revenir en arriï¿½re
 	else
 	{	if(canGoBack)
 		{	nextTile = previousTile;
@@ -516,7 +516,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	{	
 		checkInterruption(); //APPEL OBLIGATOIRE
 		
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rï¿½fï¿½rence
 		Collection<AiBomb> bombs = getPercepts().getBombs();
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiBomb> result = new ArrayList<AiBomb>();
@@ -536,7 +536,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	
 	
 	
-	// la methode qui renvoie si notre hero est à coté d'un mur
+	// la methode qui renvoie si notre hero est Ã  cotï¿½ d'un mur
 	private boolean canIDestroyAWall (AiTile tile) throws StopRequestException{
 		checkInterruption(); //APPEL OBLIGATOIRE
 		tile=currentTile;
@@ -729,7 +729,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 	}
 	
-	// la methode qui renvoie si il y a au moins un voisin tile qui est en securité
+	// la methode qui renvoie si il y a au moins un voisin tile qui est en securitÃ©
 	private boolean isRegionSafe(AiTile tile) throws StopRequestException{
 		
 		checkInterruption(); //APPEL OBLIGATOIRE
@@ -737,7 +737,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 		
 		
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rï¿½fï¿½rence
 		Collection<AiTile> neighborgs = getClearNeighborTiles(currentTile);
 		// on garde les cases sans bloc ni bombe ni feu
 		

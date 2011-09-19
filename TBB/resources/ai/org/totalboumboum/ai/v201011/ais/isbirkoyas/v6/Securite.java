@@ -24,8 +24,8 @@ public class Securite {
 	}
 
 	/**
-	 * Cette méthode contrôle si la case cible est vide ou pas et elle retourne
-	 * un type booléenne (danger). Elle prend 2 arguments la zone du jeu et la
+	 * Cette mÃ©thode contrï¿½le si la case cible est vide ou pas et elle retourne
+	 * un type boolï¿½enne (danger). Elle prend 2 arguments la zone du jeu et la
 	 * case cible.
 	 * 
 	 * @param AiTile
@@ -59,8 +59,8 @@ public class Securite {
 	}
 
 	/**
-	 * Cette méthode fait le contrôle de sécurité du posage de la bombe de notre
-	 * IA c'est-a-dire contrôle si notre IA pose sa bombe ou pas. Elle prend un
+	 * Cette mÃ©thode fait le contrï¿½le de sÃ©curitÃ© du posage de la bombe de notre
+	 * IA c'est-a-dire contrï¿½le si notre IA pose sa bombe ou pas. Elle prend un
 	 * seul argument,la zone du jeu et elle retourne une liste.
 	 * 
 	 * @param gameZone
@@ -124,9 +124,9 @@ public class Securite {
 	}
 
 	/**
-	 * Cette méthode fait le contrôle de sécurité du posage de la bombe par
-	 * l’adversaire autour d’IA c’est-a-dire contrôle si notre IA tombe en
-	 * danger par la bombe de l’adversaire. Elle prend deux arguments la zone du
+	 * Cette mÃ©thode fait le contrï¿½le de sÃ©curitÃ© du posage de la bombe par
+	 * lï¿½adversaire autour dï¿½IA cï¿½est-a-dire contrï¿½le si notre IA tombe en
+	 * danger par la bombe de lï¿½adversaire. Elle prend deux arguments la zone du
 	 * jeu et une bombe du jeu. Elle retourne une liste.
 	 * 
 	 * @param gameZone
@@ -203,7 +203,7 @@ public class Securite {
 	}
 
 	/**
-	 * Cette méthode nous donne une liste de direction pour notre IA. Elle prend
+	 * Cette mÃ©thode nous donne une liste de direction pour notre IA. Elle prend
 	 * deux arguments.
 	 * 
 	 * @param dx2

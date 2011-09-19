@@ -302,7 +302,7 @@ public class DropBomb
 	}
 	
 	/***
-	 * Regarde s'il existe des obstacles entre deux tile passées en parametre. Retourne vrai s'il 
+	 * Regarde s'il existe des obstacles entre deux tile passï¿½es en parametre. Retourne vrai s'il 
 	 * n'y en a pas, faux sinon 
 	 * 
 	 * @param tile1
@@ -330,8 +330,8 @@ public class DropBomb
 	
 	
 	/**
-	 * Teste s'il se trouve des cases sur à  alles apres avois poser une bombe.
-	 * il prend une carée au tille de la range et enleve les cases de la portée virtuelle. puis 
+	 * Teste s'il se trouve des cases sur Ã  alles apres avois poser une bombe.
+	 * il prend une carï¿½e au tille de la range et enleve les cases de la portï¿½e virtuelle. puis 
 	 * s'il se trouve des cases sur il calcule les cases surs. Alors elle retourne une liste
 	 * des cases sur ou bien une liste null.
 	 * 
@@ -428,7 +428,7 @@ public class DropBomb
 	
 
 	/**
-	 * Calcule la carée de taille range*range
+	 * Calcule la carï¿½e de taille range*range
 	 * 
 	 * @param range
 	 * 		la portÃ©e de la bombe d'un hero
@@ -508,17 +508,17 @@ public class DropBomb
 	
 	
 	/**
-	 * Calcules recursivement les cases qu'un hero peut passer dans une carée déjà determineé. 
-	 * Alors elle elemine les mur non destructible et puis les chemins que le hero associé ne
-	 * peut pas acceder. Donc elle retourne une liste des cases que le hero associé peut 
+	 * Calcules recursivement les cases qu'un hero peut passer dans une carï¿½e dï¿½jï¿½ determineï¿½. 
+	 * Alors elle elemine les mur non destructible et puis les chemins que le hero associï¿½ ne
+	 * peut pas acceder. Donc elle retourne une liste des cases que le hero associï¿½ peut 
 	 * acceder. S'il n'y a pas de case alors elle retourne null.
 	 * 
 	 * @param tile 
 	 * 		tile du hero qu'on veut trouve son chemin
 	 * @param 
-	 * 		une carée qu'on estime pour un hero pour qu'il puisse acceder à ses cases dans le temps d'explosion d'une bombe
+	 * 		une carï¿½e qu'on estime pour un hero pour qu'il puisse acceder Ã  ses cases dans le temps d'explosion d'une bombe
 	 * @param safe
-	 * 		liste des cases sur. Au début c'est null.
+	 * 		liste des cases sur. Au dï¿½but c'est null.
 	 * @return result
 	 * 		une liste des cases accesible, sinon une liste null
 	 * @throws

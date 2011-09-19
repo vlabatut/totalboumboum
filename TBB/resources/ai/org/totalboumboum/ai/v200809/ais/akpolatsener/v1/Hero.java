@@ -40,7 +40,7 @@ public class Hero {
 
 	/**
 	 * determine si on est suffisamment proche d'une enemie pour poser une bombe
-	 * @param distanceToEnemy condition d'etre proche où non
+	 * @param distanceToEnemy condition d'etre proche oÃ¹ non
 	 * @return true si on peut poser une bombe, false si on n'et pas
 	 * @throws StopRequestException
 	 */
@@ -105,7 +105,7 @@ public class Hero {
 	/**
 	 * renvoie la distance de la case vers l'enemie la plus proche
 	 * @param heroNear enemie la plus proche
-	 * @param tile case à calculer la distance vers l'enemie
+	 * @param tile case Ã  calculer la distance vers l'enemie
 	 * @return distance distance hypotenuse entre la case et l'enemie
 	 * @throws StopRequestException
 	 */
@@ -119,7 +119,7 @@ public class Hero {
 	}
 
 	/**
-	 * renvoie le nombre des blocs sur la route que l'on utilisera pour arriver la case où l'enemie est.
+	 * renvoie le nombre des blocs sur la route que l'on utilisera pour arriver la case oÃ¹ l'enemie est.
 	 * @param heroNear
 	 * @return blockCount nombre de blocs
 	 * @throws StopRequestException
@@ -139,7 +139,7 @@ public class Hero {
 		// nombre des blocs horizontalement  //
 		///////////////////////////////////////
 		
-		// enemie est à gauche
+		// enemie est Ã  gauche
 		if (col >= 0) {
 			for (int i = 0; i < col; i++) 
 			{
@@ -151,7 +151,7 @@ public class Hero {
 			}
 		}
 		
-		// enemie est à droite
+		// enemie est Ã  droite
 		else {
 			for (int i = 0; i < -col; i++) 
 			{

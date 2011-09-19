@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 
 /**
- * @author Sercan Özen & G.Lara Özdöker 
+ * @author Sercan ï¿½zen & G.Lara ï¿½zdï¿½ker 
  *
  */
 public class OutilsAttaque1 {
@@ -217,8 +217,8 @@ public class OutilsAttaque1 {
 		int calculerDistance=(int) tileControleur.calculerDistance(adversaire, notreHero.getTile());		
 		//Algoritm 1: Si l'adversaire est le meme tile avec notre hero!
 		if(calculerDistance<1){
-			//pour éloigner l'adversiare,on pose bombe notre tile
-			//mais on ne peut pas poser bombe à otre tile, alors on aller une autre tile possible
+			//pour ï¿½loigner l'adversiare,on pose bombe notre tile
+			//mais on ne peut pas poser bombe Ã  otre tile, alors on aller une autre tile possible
 			if(tileControleur.estQueOnPoseBombe(notreHero.getTile())){
 				//Si on pose une bombe
 				cibles.add(notreHero.getTile());
@@ -318,7 +318,7 @@ public class OutilsAttaque1 {
 	}
 	
 	/**
-	 * Methode qui retourne qu'adversaire est dans notre portée ou pas
+	 * Methode qui retourne qu'adversaire est dans notre portï¿½e ou pas
 	 * @param adversaireTile
 	 * @return boolean
 	 * @throws StopRequestException

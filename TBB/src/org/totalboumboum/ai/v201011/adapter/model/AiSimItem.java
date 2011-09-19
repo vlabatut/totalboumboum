@@ -28,8 +28,8 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 
 /**
  * simule un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
- * par l'item. Ce type est représentée par une valeur de type AiItemType.
+ * un item est caractï¿½risï¿½ par son type, reprï¿½sentant le pouvoir apportï¿½ (ou enlevï¿½)
+ * par l'item. Ce type est reprï¿½sentï¿½e par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
  *
@@ -37,31 +37,31 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStopType;
 final class AiSimItem extends AiSimSprite implements AiItem
 {
 	/**
-	 * crée une simulation de l'item passé en paramètre,
-	 * avec les propriétés passées en paramètres.
+	 * crÃ©e une simulation de l'item passï¿½ en paramï¿½tre,
+	 * avec les propriï¿½tï¿½s passï¿½es en paramï¿½tres.
 	 * 
 	 * @param id
-	 * 		numéro d'identification de l'item
+	 * 		numï¿½ro d'identification de l'item
 	 * @param tile
 	 * 		case contenant l'item
 	 * @param posX
 	 * 		abscisse de l'item
 	 * @param posY
-	 * 		ordonnée de l'item
+	 * 		ordonnï¿½e de l'item
 	 * @param posZ
 	 * 		hauteur de l'item
 	 * @param state
-	 * 		état de l'item
+	 * 		ï¿½tat de l'item
 	 * @param burningDuration
-	 * 		durée de combustion de l'item
+	 * 		durï¿½e de combustion de l'item
 	 * @param currentSpeed
-	 * 		vitesse courante de déplacement de l'item
+	 * 		vitesse courante de dÃ©placement de l'item
 	 * @param type
 	 * 		type d'item (extrabomb, extraflame, etc.)
 	 * @param stopBombs
-	 * 		capacité à bloquer les bombes
+	 * 		capacitï¿½ Ã  bloquer les bombes
 	 * @param stopFires
-	 * 		capacité à bloquer le feu
+	 * 		capacitï¿½ Ã  bloquer le feu
 	 */
 	protected AiSimItem(int id, AiSimTile tile,  double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
@@ -74,11 +74,11 @@ final class AiSimItem extends AiSimSprite implements AiItem
 	}	
 
 	/**
-	 * crée une simulation de l'item passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une simulation de l'item passï¿½ en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param item
-	 * 		sprite à simuler
+	 * 		sprite Ã  simuler
 	 * @param tile
 	 * 		case contenant le sprite
 	 */
@@ -93,7 +93,7 @@ final class AiSimItem extends AiSimSprite implements AiItem
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** type d'item simulé */
+	/** type d'item simulï¿½ */
 	private AiItemType type;
 	
 	@Override
@@ -121,15 +121,15 @@ final class AiSimItem extends AiSimSprite implements AiItem
 
 	@Override
 	public boolean isCrossableBy(AiSprite sprite)
-	{	// par défaut, on bloque
+	{	// par dÃ©faut, on bloque
 		boolean result = false;
 		
-		// si le sprite considéré est un personnage
+		// si le sprite considï¿½rï¿½ est un personnage
 		if(sprite instanceof AiSimHero)
 		{	result = true;
 		}
 		
-		// si le sprite considéré est un feu
+		// si le sprite considï¿½rï¿½ est un feu
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)
@@ -140,7 +140,7 @@ final class AiSimItem extends AiSimSprite implements AiItem
 				result = false;
 		}
 		
-		// si le sprite considéré est une bombe
+		// si le sprite considï¿½rï¿½ est une bombe
 		else if(sprite instanceof AiSimBomb)
 		{	AiSimBomb bomb = (AiSimBomb) sprite;
 			if(stopBombs==AiStopType.NO_STOP)

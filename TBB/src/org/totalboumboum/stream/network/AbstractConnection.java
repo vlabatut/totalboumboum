@@ -128,7 +128,7 @@ public abstract class AbstractConnection implements OwnerInterface
 					reader.finish();
 					writer.finish();
 		
-					//TODO à completer
+					//TODO Ã  completer
 		
 					reader = null;
 					writer = null;

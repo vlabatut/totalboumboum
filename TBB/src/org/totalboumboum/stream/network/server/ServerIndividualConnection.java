@@ -325,7 +325,7 @@ public class ServerIndividualConnection extends AbstractConnection
 				reader.finish();
 				writer.finish();
 				
-				//TODO à completer
+				//TODO Ã  completer
 				if(state==ClientState.SELECTING_GAME)
 				{	generalConnection.removeConnection(this);
 				}

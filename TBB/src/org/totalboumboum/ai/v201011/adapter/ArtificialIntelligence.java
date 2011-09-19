@@ -30,19 +30,19 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 /**
- * classe dont chaque IA doit hériter. La méthode processAction est la méthode 
- * appelée par le gestionnaire d'IA pour l'interroger que la prochaine action 
- * à effectuer.
+ * classe dont chaque IA doit hï¿½riter. La mÃ©thode processAction est la mÃ©thode 
+ * appelÃ©e par le gestionnaire d'IA pour l'interroger que la prochaine action 
+ * Ã  effectuer.
  * <p>
- * <b>ATTENTION :</b> remarque très importante.
- * A la fin de la partie, le jeu demande à l'IA de s'arrêter. Dans certaines
- * conditions, l'IA ne voudra pas s'arrêter (par exemple si elle est dans une
- * boucle infinie, ou bloquée dans un traitement récursif). Pour éviter ce 
- * genre de problème, CHAQUE méthode définie dans l'IA doit :
- * 	- CONTENIR A SON TOUT DEBUT un appel à la méthode checkInterruption()
- *  - faire suivre (mot-clé throw) les interruptions StopRequestException, et ne SURTOUT PAS les traiter (pas de try/catch)
- * De plus, cette fonction doit également apparaître au début de chaque boucle
- * définie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
+ * <b>ATTENTION :</b> remarque trï¿½s importante.
+ * A la fin de la partie, le jeu demande Ã  l'IA de s'arrï¿½ter. Dans certaines
+ * conditions, l'IA ne voudra pas s'arrï¿½ter (par exemple si elle est dans une
+ * boucle infinie, ou bloquï¿½e dans un traitement rï¿½cursif). Pour ï¿½viter ce 
+ * genre de problï¿½me, CHAQUE mÃ©thode dï¿½finie dans l'IA doit :
+ * 	- CONTENIR A SON TOUT DEBUT un appel Ã  la mÃ©thode checkInterruption()
+ *  - faire suivre (mot-clï¿½ throw) les interruptions StopRequestException, et ne SURTOUT PAS les traiter (pas de try/catch)
+ * De plus, cette fonction doit ï¿½galement apparaï¿½tre au dï¿½but de chaque boucle
+ * dï¿½finie dans l'IA, qu'il s'agisse d'un for, d'un while ou d'un do/while.
  *  
  * @author Vincent Labatut
  *
@@ -52,23 +52,23 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Indicateur de demande de terminaison de l'IA (activé par le jeu à la fin de la partie) */
+	/** Indicateur de demande de terminaison de l'IA (activï¿½ par le jeu Ã  la fin de la partie) */
 	private boolean stopRequest = false;
 
 	/**
-	 * Méthode appelée par le jeu pour demander la fin de l'IA.
+	 * mÃ©thode appelÃ©e par le jeu pour demander la fin de l'IA.
 	 * Elle modifie la valeur de l'indcateur stopRequest, ce qui permettra
-	 * de lever une StopRequestException au prochain appel de la méthode checkInterruption.
+	 * de lever une StopRequestException au prochain appel de la mÃ©thode checkInterruption.
 	 */
 	public synchronized final void stopRequest()
 	{	stopRequest = true;		
 	}
 	
 	/**
-	 * Méthode testant si le jeu a demandé la terminaison de l'IA.
-	 * Si c'est le cas, une exception est levée, qui sera propagée jusqu'à call
-	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas être
-	 * interceptée localement par un try/catch. 
+	 * mÃ©thode testant si le jeu a demandï¿½ la terminaison de l'IA.
+	 * Si c'est le cas, une exception est levï¿½e, qui sera propagï¿½e jusqu'ï¿½ call
+	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas ï¿½tre
+	 * interceptï¿½e localement par un try/catch. 
 	 */
 	public synchronized final void checkInterruption() throws StopRequestException
 	{	Thread.yield();
@@ -79,7 +79,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	@Override
 	public final AiAction call()
 	{	AiAction result;
-		// on réinitialise la sortie de l'IA
+		// on rï¿½initialise la sortie de l'IA
 		reinitOutput();
 		try
 		{	// on initialise l'IA si besoin
@@ -89,7 +89,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 				result = new AiAction(AiActionName.NONE);
 			}
 			
-			// on calcule la prochaine action à effectuer
+			// on calcule la prochaine action Ã  effectuer
 			else
 				result = processAction();		
 		}
@@ -102,33 +102,33 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Les percepts auxquels l'IA a accès */
+	/** Les percepts auxquels l'IA a accï¿½s */
 	private AiZone percepts;
 	
 	/**
-	 * Méthode implémentant le traitement effectué par l'IA sur les percepts,
-	 * et renvoyant une action en réaction.
+	 * mÃ©thode implÃ©mentant le traitement effectuÃ© par l'IA sur les percepts,
+	 * et renvoyant une action en rï¿½action.
 	 * 
 	 * @return	
-	 * 		action que l'IA a décider d'effectuer
+	 * 		action que l'IA a dï¿½cider d'effectuer
 	 * @throws StopRequestException	
-	 * 		au cas où le moteur demande la terminaison de l'IA
+	 * 		au cas oÃ¹ le moteur demande la terminaison de l'IA
 	 */
 	public abstract AiAction processAction() throws StopRequestException;
 
 	/**
-	 * Renvoie les percepts auxquels l'IA a accès
+	 * Renvoie les percepts auxquels l'IA a accï¿½s
 	 * @return	
-	 * 		une AiZone représentant tous les percepts utilisables par l'IA
+	 * 		une AiZone reprï¿½sentant tous les percepts utilisables par l'IA
 	 */
 	public final AiZone getPercepts()
 	{	return percepts;
 	}
 	/**
-	 * Méthode utilisée par le moteur du jeu pour initialiser les percepts de l'IA. 
+	 * mÃ©thode utilisÃ©e par le moteur du jeu pour initialiser les percepts de l'IA. 
 	 * 
 	 * @param percepts	
-	 * 		l'objet représentant les percepts auxquels l'IA aura accès
+	 * 		l'objet reprï¿½sentant les percepts auxquels l'IA aura accï¿½s
 	 */
 	public final void setPercepts(AiZone percepts)
 	{	this.percepts = percepts;
@@ -136,7 +136,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/**
-	 * Termine proprement l'IA afin de libérer les ressources qu'elle occupait.
+	 * Termine proprement l'IA afin de libï¿½rer les ressources qu'elle occupait.
 	 */
 	final void finish()
 	{	percepts = null;
@@ -151,7 +151,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/** 
 	 * Renvoie la sortie graphique de l'IA, 
 	 * afin d'afficher des informations par dessus la zone de jeu
-	 * (utile lors du débogage). Le programme peut modifier cet objet
+	 * (utile lors du dï¿½bogage). Le programme peut modifier cet objet
 	 * pour colorer des cases et afficher des chemins ou du texte
 	 * 
 	 * @return	
@@ -162,8 +162,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 
 	/**
-	 * Réinitialise la sortie graphique de l'IA.
-	 * Méthode appelée automatiquement avant chaque itération de l'IA.
+	 * Rï¿½initialise la sortie graphique de l'IA.
+	 * mÃ©thode appelÃ©e automatiquement avant chaque itï¿½ration de l'IA.
 	 */
 	private final void reinitOutput()
 	{	output.reinit();
@@ -174,12 +174,12 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	/////////////////////////////////////////////////////////////////
 	private boolean initialized = false;
 	/**
-	 * Méthode à surcharger s'il est nécessaire que l'agent soit
-	 * initialisé. Toute opération définie dans cette fonction
-	 * sera réalisée une fois, juste avant le début de la partie.
-	 * A noter que les percepts ont néanmoins déjà été mis à jour.
-	 * Si aucune méthode init n'est définie dans l'agent, alors celle
-	 * ci sera exécutée (qui ne fait rien du tout).
+	 * mÃ©thode Ã  surcharger s'il est nï¿½cessaire que l'agent soit
+	 * initialisï¿½. Toute opï¿½ration dï¿½finie dans cette fonction
+	 * sera rï¿½alisï¿½e une fois, juste avant le dï¿½but de la partie.
+	 * A noter que les percepts ont nï¿½anmoins dï¿½jï¿½ ï¿½tï¿½ mis Ã  jour.
+	 * Si aucune mÃ©thode init n'est dï¿½finie dans l'agent, alors celle
+	 * ci sera exï¿½cutï¿½e (qui ne fait rien du tout).
 	 */
 	public void init() throws StopRequestException
 	{	

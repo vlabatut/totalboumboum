@@ -74,7 +74,7 @@ public class EngineConfiguration
 	/** engine update persiod in nanoseconds */
 	private long nanoPeriod;
 	/** speed coefficient */
-	private double speedCoeff; //NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
+	private double speedCoeff; //NOTE speedcoeff Ã  descendre au niveau de loop, car il peut dï¿½pendre du level
 
 	public void setAutoFps(boolean autoFps)
 	{	this.autoFps = autoFps;		

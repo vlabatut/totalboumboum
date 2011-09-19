@@ -19,7 +19,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.BasicHeuristicC
 
 /**
  * Classe pour les calculs matriciels
- * @author Can Göçmenoðlu
+ * @author Can Gï¿½ï¿½menoï¿½lu
  *
  */
 public class MatriceCalc {
@@ -76,7 +76,7 @@ public class MatriceCalc {
 	}
 	
 	/**
-	 * vérifie si nous pouvons atteindre nos ennemis sans détruire les murs
+	 * vï¿½rifie si nous pouvons atteindre nos ennemis sans dÃ©truire les murs
 	 */
 	static boolean canReachHeros(GocmenogluHekimoglu monIa)throws StopRequestException{
 		BasicHeuristicCalculator heurcalc = new BasicHeuristicCalculator();
@@ -175,7 +175,7 @@ public class MatriceCalc {
 	}
 	
 	/**
-	 * même que ReachMatrix mais cette fois toutes les bombes sont comptés comme explosé.
+	 * mÃªme que ReachMatrix mais cette fois toutes les bombes sont comptï¿½s comme explosÃ©.
 	 * @param monIa
 	 * @return
 	 * @throws StopRequestException
@@ -239,7 +239,7 @@ public class MatriceCalc {
 	}
 	
 	/**
-	 * vérifier si nous pouvons fuir si on met une bombe.
+	 * vï¿½rifier si nous pouvons fuir si on met une bombe.
 	 * @param monIa
 	 * @param reach
 	 * @param bline
@@ -334,7 +334,7 @@ public class MatriceCalc {
 	
 	
 	/**
-	 * ajouter la matrice donnée, multiplié par une constante, à cette matrice
+	 * ajouter la matrice donnï¿½e, multipliï¿½ par une constante, Ã  cette matrice
 	 * @param mtx
 	 * @param weight
 	 * @throws StopRequestException

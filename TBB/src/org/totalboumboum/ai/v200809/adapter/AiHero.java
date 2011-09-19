@@ -27,7 +27,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente un personnage du jeu, ie un sprite contrôlé par un joueur
+ * reprï¿½sente un personnage du jeu, ie un sprite contrï¿½lï¿½ par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut
@@ -36,11 +36,11 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public class AiHero extends AiSprite<Hero>
 {
 	/**
-	 * crée une représentation du joueur passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une reprï¿½sentation du joueur passï¿½ en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param sprite	sprite Ã  reprï¿½senter
 	 */
 	AiHero(AiTile tile, Hero sprite)
 	{	super(tile,sprite);
@@ -75,36 +75,36 @@ public class AiHero extends AiSprite<Hero>
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** portée des bombes du personnage */
+	/** portï¿½e des bombes du personnage */
 	private int bombRange;
-	/** nombre de bombes que le personnage peut poser simultanément */
+	/** nombre de bombes que le personnage peut poser simultanï¿½ment */
 	private int bombNumber;
-	/** nombre de bombes que le personnage a actuellement posées */
+	/** nombre de bombes que le personnage a actuellement posï¿½es */
 	private int bombCount;
 	
 	/**
-	 * renvoie la portée actuelle des bombes du personnage
+	 * renvoie la portï¿½e actuelle des bombes du personnage
 	 * 
-	 * @return	la portée des bombes
+	 * @return	la portï¿½e des bombes
 	 */
 	public int getBombRange()
 	{	return bombRange;
 	}
 	
 	/**
-	 * renvoie le nombre de bombes que le personnage peut poser simultanément,
-	 * à ce moment du jeu.
+	 * renvoie le nombre de bombes que le personnage peut poser simultanï¿½ment,
+	 * Ã  ce moment du jeu.
 	 * 
-	 * @return	le nombre de bombes simultanément posables
+	 * @return	le nombre de bombes simultanï¿½ment posables
 	 */
 	public int getBombNumber()
 	{	return bombNumber;
 	}
 	
 	/**
-	 * renvoie le nombre de bombes posées par le personnage à ce moment-là
+	 * renvoie le nombre de bombes posï¿½es par le personnage Ã  ce moment-lï¿½
 	 * 
-	 * @return	nombre de bombes posées
+	 * @return	nombre de bombes posï¿½es
 	 */
 	public int getBombCount()
 	{	return bombCount;
@@ -146,7 +146,7 @@ public class AiHero extends AiSprite<Hero>
 	/**
 	 * renvoie la couleur de ce personnage (et de ses bombes)
 	 * 
-	 * @return un symbole de type PredefinedColor représentant une couleur
+	 * @return un symbole de type PredefinedColor reprï¿½sentant une couleur
 	 */
 	public PredefinedColor getColor()
 	{	return color;	

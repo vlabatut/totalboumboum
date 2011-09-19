@@ -22,8 +22,8 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.LimitReachedException;
 
 
 /**
- * @author Elif Nurdan ÝLGAR 
- * @author Engin Hacýbektaþoðlu
+ * @author Elif Nurdan ï¿½LGAR 
+ * @author Engin Hacï¿½bektaï¿½oï¿½lu
  *
  */
 
@@ -232,7 +232,7 @@ public class Maps
 	}
 	
 	/**
-	 * on fait mis à jour de tous les matrices calculé pour avoir total matrice du zone
+	 * on fait mis Ã  jour de tous les matrices calculÃ© pour avoir total matrice du zone
 	 * 
 	 * @param matrice
 	 * @throws StopRequestException
@@ -289,7 +289,7 @@ public class Maps
 
 					if(division)
 					{
-						// on calcule le point d'une telle tile comme (point/distance_entre_l'héro_et_la_case
+						// on calcule le point d'une telle tile comme (point/distance_entre_l'hï¿½ro_et_la_case
 						int distance=zone.getTileDistance(ourHero.getLine(),ourHero.getCol(), x, j);
 						if(distance==0) distance=1;
 						matriceTotal[x][j]+=note/distance;
@@ -342,7 +342,7 @@ public class Maps
 				{
 					if(division)
 					{
-						// on calcule le point d'une telle tile comme (point/distance_entre_l'héro_et_la_case
+						// on calcule le point d'une telle tile comme (point/distance_entre_l'hï¿½ro_et_la_case
 						int distance=zone.getTileDistance(ourHero.getLine(),ourHero.getCol(), i, y);
 						if(distance==0) distance=1;
 						matriceTotal[i][y]+=note/distance;
@@ -406,9 +406,9 @@ public class Maps
 	
 	/**
 	 * cette methode controle le chemin pour voir s'il y en a des tiles dangeraux, 
-	 * s'il les trouve alors il va nous dire "réfléchissez encore une fois avant y aller"
+	 * s'il les trouve alors il va nous dire "rï¿½flï¿½chissez encore une fois avant y aller"
 	 * 
-	 * @param pathCible le chemin à controller
+	 * @param pathCible le chemin Ã  controller
 	 * @return la resultat du control (true ou false)
 	 * @throws StopRequestException
 	 */
@@ -570,7 +570,7 @@ public class Maps
 					break;
 				}
 				
-				// on donne le couleur vert aux tiles inaccesible en mode collecte par notre héro
+				// on donne le couleur vert aux tiles inaccesible en mode collecte par notre hï¿½ro
 				if( matriceTotal[i][j]==-100) output.setTileColor(i, j,case_inaccesible);
 
 			}	
@@ -725,7 +725,7 @@ public class Maps
 					break;
 				}
 				
-				// on donne le couleur rouge aux tiles inaccesible par notre héro
+				// on donne le couleur rouge aux tiles inaccesible par notre hï¿½ro
 				if( matriceTotal[i][j]==-100) output.setTileColor(i, j,case_inaccesible);
 			}	
 		}
@@ -825,7 +825,7 @@ public class Maps
 	
 	
 	/**
-	 * methode affichante la matriceTotale en console et en zone de jeu à la fois
+	 * methode affichante la matriceTotale en console et en zone de jeu Ã  la fois
 	 * 
 	 * @param matriceTotal
 	 * @throws StopRequestException

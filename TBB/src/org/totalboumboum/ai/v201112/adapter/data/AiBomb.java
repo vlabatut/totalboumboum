@@ -26,8 +26,8 @@ import java.util.List;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente une bombe du jeu, ie un objet que les joueurs peuvent déposer
- * pour détruire les murs et éliminer les autre joueurs.
+ * reprï¿½sente une bombe du jeu, ie un objet que les joueurs peuvent dï¿½poser
+ * pour dÃ©truire les murs et ï¿½liminer les autre joueurs.
  * 
  * @author Vincent Labatut
  *
@@ -38,21 +38,21 @@ public interface AiBomb extends AiSprite
 	// FIRE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie un exemple de feu que cette bombe peut générer
+	 * renvoie un exemple de feu que cette bombe peut gï¿½nï¿½rer
 	 * 
 	 * @return	
-	 * 		une représentation du feu généré par cette bombe
+	 * 		une reprï¿½sentation du feu gï¿½nï¿½rï¿½ par cette bombe
 	 */
 	public AiFire getFirePrototype();
 
 	/**
-	 * renvoie la durée de l'explosion de cette bombe.
-	 * Cette durée comprend l'apparition des flammes,
-	 * la durée de vie des flammes, et leur disparition.
-	 * Cette valeur n'est pas forcément constante, et peut varier d'une bombe à l'autre.
+	 * renvoie la durï¿½e de l'explosion de cette bombe.
+	 * Cette durï¿½e comprend l'apparition des flammes,
+	 * la durï¿½e de vie des flammes, et leur disparition.
+	 * Cette valeur n'est pas forcï¿½ment constante, et peut varier d'une bombe Ã  l'autre.
 	 * 
 	 * @return	
-	 * 		la durée de l'explosion
+	 * 		la durï¿½e de l'explosion
 	 */
 	public long getExplosionDuration();
 
@@ -60,31 +60,31 @@ public interface AiBomb extends AiSprite
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la probabilité que la bombe tombe en panne quand elle devrait exploser
+	 * renvoie la probabilitï¿½ que la bombe tombe en panne quand elle devrait exploser
 	 * 
 	 * @return	
-	 * 		une mesure de probabilité
+	 * 		une mesure de probabilitï¿½
 	 */
 	public float getFailureProbability();
 	
 	/**
-	 * indique si l'explosion de la bombe dépend d'un compte à rebours
+	 * indique si l'explosion de la bombe dï¿½pend d'un compte Ã  rebours
 	 * 
 	 * @return	
-	 * 		vrai si la bombe dépend d'un compte à rebours
+	 * 		vrai si la bombe dï¿½pend d'un compte Ã  rebours
 	 */
 	public boolean hasCountdownTrigger();
 	
 	/**
-	 * indique si l'explosion de la bombe dépend d'une télécommande
+	 * indique si l'explosion de la bombe dï¿½pend d'une tï¿½lï¿½commande
 	 * 
 	 * @return	
-	 * 		vrai si la bombe dépend d'une télécommande
+	 * 		vrai si la bombe dï¿½pend d'une tï¿½lï¿½commande
 	 */
 	public boolean hasRemoteControlTrigger();
 	
 	/**
-	 * indique si l'explosion de la bombe dépend d'un contact avec du feu
+	 * indique si l'explosion de la bombe dï¿½pend d'un contact avec du feu
 	 * 
 	 * @return	
 	 * 		vrai si la bombe explose au contact du feu
@@ -92,23 +92,23 @@ public interface AiBomb extends AiSprite
 	public boolean hasExplosionTrigger();
 	
 	/**
-	 * renvoie le délai normal avant l'explosion de la bombe.
-	 * Ce délai ne tient pas compte des pannes éventuelles.
-	 * Ce délai n'est pas défini pour tous les types de bombes
+	 * renvoie le dï¿½lai normal avant l'explosion de la bombe.
+	 * Ce dï¿½lai ne tient pas compte des pannes ï¿½ventuelles.
+	 * Ce dï¿½lai n'est pas dï¿½fini pour tous les types de bombes
 	 * 
 	 * @return	
-	 * 		le délai normal avant explosion exprimé en millisecondes
+	 * 		le dï¿½lai normal avant explosion exprimï¿½ en millisecondes
 	 */
 	public long getNormalDuration();
 
 	/**
-	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclenchée par
-	 * une explosion. Cette latence représente le temps entre le moment où
-	 * la bombe est touchée par l'explosion, et le moment où elle commence effectivement
-	 * à exploser.
+	 * renvoie la latence de cette bombe, dans le cas oÃ¹ elle peut ï¿½tre dï¿½clenchï¿½e par
+	 * une explosion. Cette latence reprï¿½sente le temps entre le moment oï¿½
+	 * la bombe est touchï¿½e par l'explosion, et le moment oÃ¹ elle commence effectivement
+	 * Ã  exploser.
 	 * 
 	 * @return	
-	 * 		la latence de la bombe pour une détonation déclenchée par une autre explosion
+	 * 		la latence de la bombe pour une dï¿½tonation dï¿½clenchï¿½e par une autre explosion
 	 */
 	public long getLatencyDuration();
 	
@@ -116,19 +116,19 @@ public interface AiBomb extends AiSprite
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la portée de la bombe
-	 * (ie. le nombre de cases occupées par sa flamme)
+	 * renvoie la portï¿½e de la bombe
+	 * (ie. le nombre de cases occupï¿½es par sa flamme)
 	 * 
 	 * @return	
-	 * 		portée de la bombe
+	 * 		portï¿½e de la bombe
 	 */
 	public int getRange();
 	
 	/**
-	 * indique si le feu émis par la bombe peut traverser les murs
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
-	 * utilisez plutôt getBlast().
+	 * indique si le feu ï¿½mis par la bombe peut traverser les murs
+	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas ï¿½tre utilisÃ©e directement par l'IA,
+	 * elle est destinï¿½e au calcul des modï¿½les simulant l'ï¿½volution du jeu.
+	 * utilisez plutï¿½t getBlast().
 	 * 
 	 * @return	
 	 * 		vrai si le feu peut traverser les murs
@@ -138,16 +138,16 @@ public interface AiBomb extends AiSprite
 	/**
 	 * calcule une liste de cases correspondant au souffle de cette bombe,
 	 * i.e. toutes les cases qui seront atteinte quand elle va exploser
-	 * (y compris la case contenant la bombe elle-même). 
-	 * Cette méthode tient compte de murs, items, etc., c'est à dire qu'elle
-	 * ne donne que les cases qui seront touchées si la bombe devait exploser
-	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
+	 * (y compris la case contenant la bombe elle-mÃªme). 
+	 * Cette mÃ©thode tient compte de murs, items, etc., c'est Ã  dire qu'elle
+	 * ne donne que les cases qui seront touchï¿½es si la bombe devait exploser
+	 * Ã  l'instant oÃ¹ cette mÃ©thode est invoquï¿½e. Si un des obstacles Ã  l'explosion
 	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
-	 * alors le souffle peut changer, il faut ré-exécuter cette méthode pour avoir le
+	 * alors le souffle peut changer, il faut rï¿½-exï¿½cuter cette mÃ©thode pour avoir le
 	 * nouveau souffle de la bombe dans ce nouvel environnement.
 	 * 
 	 * @return	
-	 * 		une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
+	 * 		une liste de cases correspondant aux cases qui seront touchï¿½es par la flamme de cette bombe 
 	 */
 	public List<AiTile> getBlast();
 
@@ -155,7 +155,7 @@ public interface AiBomb extends AiSprite
 	// WORKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne)
+	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tombï¿½e en panne)
 	 * 
 	 * @return	
 	 * 		vrai si cette bombe marche, faux si elle est en panne
@@ -167,11 +167,11 @@ public interface AiBomb extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie la couleur de cette bombe.
-	 * Cette couleur est null si aucun joueur n'a posé la bombe 
-	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
+	 * Cette couleur est null si aucun joueur n'a posï¿½ la bombe 
+	 * (pour certains niveaux spï¿½ciaux oÃ¹ les blocs peuvent gï¿½nï¿½rer des bombes)  
 	 * 
 	 * @return 
-	 * 		un symbole de type PredefinedColor représentant une couleur
+	 * 		un symbole de type PredefinedColor reprï¿½sentant une couleur
 	 */
 	public PredefinedColor getColor();
 
@@ -179,12 +179,12 @@ public interface AiBomb extends AiSprite
 	// OWNER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le joueur qui a posé la bombe,
-	 * ou bien null si aucun joueur n'a posé cette bombe 
-	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
+	 * renvoie le joueur qui a posï¿½ la bombe,
+	 * ou bien null si aucun joueur n'a posï¿½ cette bombe 
+	 * (pour certains niveaux spï¿½ciaux oÃ¹ les blocs peuvent gï¿½nï¿½rer des bombes)  
 	 * 
 	 * @return 
-	 * 		le joueur ayant posé la bombe, ou null si aucun joueur ne l'a posée
+	 * 		le joueur ayant posï¿½ la bombe, ou null si aucun joueur ne l'a posï¿½e
 	 */
 	public AiHero getOwner();
 
@@ -192,13 +192,13 @@ public interface AiBomb extends AiSprite
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la vitesse de déplacement au sol de cette bombe,
-	 * exprimée en pixel/seconde. il ne s'agit pas de la vitesse 
-	 * de déplacement courante, il s'agit de la vitesse de la bombe
+	 * renvoie la vitesse de dÃ©placement au sol de cette bombe,
+	 * exprimï¿½e en pixel/seconde. il ne s'agit pas de la vitesse 
+	 * de dÃ©placement courante, il s'agit de la vitesse de la bombe
 	 * quand elle glisse par terre. 
 	 * 
 	 * @return	
-	 * 		la vitesse de déplacement de cette bombe
+	 * 		la vitesse de dÃ©placement de cette bombe
 	 */
 	public double getSlidingSpeed();
 	
@@ -206,15 +206,15 @@ public interface AiBomb extends AiSprite
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le temps écoulé depuis que le compte à rebours de la 
-	 * bombe a commencé, exprimé en millisecondes. Bien sûr ceci
-	 * n'est valide que pour les bombes à retardement (qui ont un 
-	 * compte à rebours).
-	 * <b>Attention :</b> certaines actions spéciales comme le fait de lancer
-	 * la bombe sont susceptibles de réinitialiser le compte à rebours.
+	 * renvoie le temps ï¿½coulï¿½ depuis que le compte Ã  rebours de la 
+	 * bombe a commencï¿½, exprimï¿½ en millisecondes. Bien sï¿½r ceci
+	 * n'est valide que pour les bombes Ã  retardement (qui ont un 
+	 * compte Ã  rebours).
+	 * <b>Attention :</b> certaines actions spï¿½ciales comme le fait de lancer
+	 * la bombe sont susceptibles de rï¿½initialiser le compte Ã  rebours.
 	 * 
 	 * @return	
-	 * 		temps exprimé en ms
+	 * 		temps exprimï¿½ en ms
 	 */
 	public long getTime();
 
@@ -222,31 +222,31 @@ public interface AiBomb extends AiSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * indique si ce bloc arrête les personnages.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * indique si ce bloc arrï¿½te les personnages.
+	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas ï¿½tre utilisÃ©e directement par l'IA,
+	 * elle est destinï¿½e au calcul des modï¿½les simulant l'ï¿½volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arrête les personnages
+	 * 		une valeur AiStopType indiquant si ce bloc arrï¿½te les personnages
 	 */
 	public AiStopType hasStopHeroes();
 	
 	/**
-	 * indique si ce bloc arrête les explosions.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * indique si ce bloc arrï¿½te les explosions.
+	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas ï¿½tre utilisÃ©e directement par l'IA,
+	 * elle est destinï¿½e au calcul des modï¿½les simulant l'ï¿½volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arrête le feu
+	 * 		une valeur AiStopType indiquant si ce bloc arrï¿½te le feu
 	 */
 	public AiStopType hasStopFires();
 	
 	/**
-	 * teste si cette bombe est capable de passer à travers les items
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destinée au calcul des modèles simulant l'évolution du jeu.
+	 * teste si cette bombe est capable de passer Ã  travers les items
+	 * <b>ATTENTION :</b> cette mÃ©thode ne devrait pas ï¿½tre utilisÃ©e directement par l'IA,
+	 * elle est destinï¿½e au calcul des modï¿½les simulant l'ï¿½volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	

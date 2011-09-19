@@ -22,7 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * on na pas pu atteindre nos objectifs po
  * les temps des bombes mais au moins on essaie de s'enfuir des bombes 
  * et tout va bien pour nos objectifs pour les bonus
- * et on sest profité des classes de groupe bleu de l'annee precedente
+ * et on sest profitï¿½ des classes de groupe bleu de l'annee precedente
  * 
  * @version 4
  * 
@@ -32,7 +32,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 public class CalisirGuner extends ArtificialIntelligence {
 	private AiZone zone;
-	/** la case occupée actuellement par le personnage */
+	/** la case occupï¿½e actuellement par le personnage */
 	private AiTile caseactuelle;
 	/** la case sur laquelle on veut aller */
 	private AiTile pasprochain = null;
@@ -52,7 +52,7 @@ public class CalisirGuner extends ArtificialIntelligence {
 	private Map map;
 	private AiHero bomberman;
 
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption();
 		zone = getPercepts();

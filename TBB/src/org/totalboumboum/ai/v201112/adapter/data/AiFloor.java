@@ -23,8 +23,8 @@ package org.totalboumboum.ai.v201112.adapter.data;
  */
 
 /**
- * représente un sol du jeu, ie le graphisme affiché en tant que première couche de toute
- * case de la zone (et éventuellement recouvert par les autres types de sprites).
+ * reprï¿½sente un sol du jeu, ie le graphisme affichï¿½ en tant que premiÃ¨re couche de toute
+ * case de la zone (et ï¿½ventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
  *

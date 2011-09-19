@@ -28,7 +28,7 @@ public class DeplacementAttaque {
 		this.ai = ai;
 	}
 	/**
-	 * Cette méthode implémente l'algorithme d'attaque. Elle prend 3 arguments
+	 * Cette mÃ©thode implï¿½mente l'algorithme d'attaque. Elle prend 3 arguments
 	 * une matrice de type double, la zone du jeu et une action.
 	 * 
 	 * @param gameZone	
@@ -86,7 +86,7 @@ public class DeplacementAttaque {
 					detruire = false;
 					attaque = true;
 				}
-			// si on ne peut pas aller a cette case, ça veut dire on est bloque
+			// si on ne peut pas aller a cette case, ï¿½a veut dire on est bloque
 			// Donc il faut detruire les murs
 			// Detruire
 			if (ai.nextMove == null && ai.senfuire == false && !blockage) {
@@ -246,7 +246,7 @@ public class DeplacementAttaque {
 															// OBLIGATOIRE
 									if (ai.print)
 										System.out
-												.println("Il n'y a pas du temps ï¿½ senfuire.");
+												.println("Il n'y a pas du temps Ã  senfuire.");
 									poserBombe2 = false;
 								}
 							}
@@ -304,7 +304,7 @@ public class DeplacementAttaque {
 						if (!ai.senfuire && !ai.senfuire2) {
 						
 
-							// on calcule si notre case cible est changée
+							// on calcule si notre case cible est changï¿½e
 							if (!endPoints.contains(ai.nextMove.getLastTile())
 									&& !endPoints.isEmpty()) {
 							
@@ -461,7 +461,7 @@ public class DeplacementAttaque {
 					}
 				}
 
-				// si on n'arrive pas à la case suivant
+				// si on n'arrive pas Ã  la case suivant
 				else {
 				
 					if (ai.print) {
@@ -624,7 +624,7 @@ public class DeplacementAttaque {
 	
 
 	/**
-	 * Cette méthode permet a s'enfuire apres le posage de bombe
+	 * Cette mÃ©thode permet a s'enfuire apres le posage de bombe
 	 * 
 	 * @throws StopRequestException
 	 */

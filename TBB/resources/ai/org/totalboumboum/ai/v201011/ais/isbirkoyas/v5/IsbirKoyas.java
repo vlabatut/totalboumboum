@@ -44,8 +44,8 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	double t;
 
 	/**
-	 * mCette méthode appelée par le moteur du jeu pour obtenir une action de
-	 * notre IA .Ici on fait appelle aux autres méthodes des autres classes.
+	 * mCette mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de
+	 * notre IA .Ici on fait appelle aux autres mÃ©thodes des autres classes.
 	 * 
 	 * @return resultat
 	 * */
@@ -74,7 +74,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 		if (!ourHero.getTile().getItems().isEmpty()) {
 			compteur++;
 			if (print)
-				System.out.println("Notre IA a collecté un bonus! Compteur: "
+				System.out.println("Notre IA a collectï¿½ un bonus! Compteur: "
 						+ compteur);
 		}
 		// DÃ©termination du mode
@@ -132,7 +132,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Cette méthode fait la décision du mode collecte ou attaque en fonction du
+	 * Cette mÃ©thode fait la dï¿½cision du mode collecte ou attaque en fonction du
 	 * nombre de bombes de notre IA et la zone du jeu. Elle prend un seul
 	 * argument qui est la zone du jeu.
 	 * 

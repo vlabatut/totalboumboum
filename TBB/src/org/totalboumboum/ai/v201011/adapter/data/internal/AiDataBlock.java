@@ -44,8 +44,8 @@ import org.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import org.totalboumboum.engine.content.sprite.block.Block;
 
 /**
- * Représente un bloc du jeu, c'est à dire généralement un mur
- * (pouvant être détruit ou pas). 
+ * Reprï¿½sente un bloc du jeu, c'est Ã  dire gï¿½nï¿½ralement un mur
+ * (pouvant ï¿½tre dÃ©truit ou pas). 
  * 
  * @author Vincent Labatut
  *
@@ -53,13 +53,13 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 {
 	/**
-	 * crée une représentation du bloc passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une reprï¿½sentation du bloc passï¿½ en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite à représenter
+	 * 		sprite Ã  reprï¿½senter
 	 */
 	protected AiDataBlock(AiDataTile tile, Block sprite)
 	{	super(tile,sprite);
@@ -80,11 +80,11 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc peut être détruit par une bombe */
+	/** indique si ce bloc peut ï¿½tre dÃ©truit par une bombe */
 	private boolean destructible;
 
 	/** 
-	 * met jour l'indicateur de destructibilité 
+	 * met jour l'indicateur de destructibilitï¿½ 
 	 */
 	private void updateDestructible()
 	{	Block sprite = getSprite();
@@ -116,7 +116,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	}
 	
 	/** 
-	 * met jour les différentes caractéristiques de ce bloc
+	 * met jour les diffï¿½rentes caractï¿½ristiques de ce bloc
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()
@@ -175,9 +175,9 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 
 	@Override
 	public boolean isCrossableBy(AiSprite sprite)
-	{	// par défaut, on bloque
+	{	// par dÃ©faut, on bloque
 		boolean result = false;
-		// si le sprite considéré est un personnage
+		// si le sprite considï¿½rï¿½ est un personnage
 		if(sprite instanceof AiDataHero)
 		{	AiDataHero hero = (AiDataHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
@@ -189,7 +189,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 			else if(stopHeroes==AiStopType.STRONG_STOP)
 				result = false;
 		}
-		// si le sprite considéré est un feu
+		// si le sprite considï¿½rï¿½ est un feu
 		else if(sprite instanceof AiDataFire)
 		{	AiDataFire fire = (AiDataFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)

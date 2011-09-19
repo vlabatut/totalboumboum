@@ -40,10 +40,10 @@ public enum AiItemType
 	OTHER;	
 	
 	/**
-	 * calcule l'AiItemType correspondant au nom d'item passé en paramètre
+	 * calcule l'AiItemType correspondant au nom d'item passï¿½ en paramï¿½tre
 	 * 
-	 * @param name	nom de l'item à traiter
-	 * @return	symbole représentant ce type d'item
+	 * @param name	nom de l'item Ã  traiter
+	 * @return	symbole reprï¿½sentant ce type d'item
 	 */
 	public static AiItemType makeItemType(String name)
 	{	AiItemType result;

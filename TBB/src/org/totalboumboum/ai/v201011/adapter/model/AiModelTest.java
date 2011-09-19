@@ -29,14 +29,14 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * classe utilisée pour tester les fonctionnalités de ce package,
- * en particulier que AiModel réalise des simulations correctes.
- * on crée une zone fictive en faisant varier les sprites et leurs
- * actions, et on affiche le résultat des simulation pas-à-pas.<br/>
+ * classe utilisÃ©e pour tester les fonctionnalitï¿½s de ce package,
+ * en particulier que AiModel rï¿½alise des simulations correctes.
+ * on crÃ©e une zone fictive en faisant varier les sprites et leurs
+ * actions, et on affiche le rï¿½sultat des simulation pas-ï¿½-pas.<br/>
  * 
- * <b>Note :</b> la classe modèle n'est pas définie pour représenter une zone
- * fictive comme ici, mais pour représenter la zone de jeu réelle.
- * ceci explique les limites imposées sur son constructeur.
+ * <b>Note :</b> la classe modï¿½le n'est pas dï¿½finie pour reprï¿½senter une zone
+ * fictive comme ici, mais pour reprï¿½senter la zone de jeu rï¿½elle.
+ * ceci explique les limites imposï¿½es sur son constructeur.
  * 
  * @author Vincent Labatut
  *

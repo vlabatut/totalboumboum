@@ -22,7 +22,7 @@ public class TraitementAttaque {
 	}
 
 	/**
-	 * Cette méthode initialise la matrice attaque avec les '0'. Elle prend 2
+	 * Cette mÃ©thode initialise la matrice attaque avec les '0'. Elle prend 2
 	 * arguments, la zone du jeu et une matrice de type double.
 	 * 
 	 * @param matrice
@@ -45,7 +45,7 @@ public class TraitementAttaque {
 	}
 
 	/**
-	 * Cette méthode remplie la matrice attaque. .Elle donne des valeurs aux
+	 * Cette mÃ©thode remplie la matrice attaque. .Elle donne des valeurs aux
 	 * cases des bombes, des adversaires en fonction du temps et de la vitesse.
 	 * Elle prend 2 arguments, la zone du jeu et une matrice de type double
 	 * 
@@ -133,7 +133,7 @@ public class TraitementAttaque {
 	}
 
 	/**
-	 * Cette méthode permet l'affichage de la matrice attaque en utilisant l'API
+	 * Cette mÃ©thode permet l'affichage de la matrice attaque en utilisant l'API
 	 * fournie. Elle prend 2 arguments, la zone du jeu et une matrice de type
 	 * double.
 	 * 

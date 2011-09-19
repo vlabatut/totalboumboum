@@ -16,7 +16,7 @@ public class PerfectStrangers {
 	private Direction[] dirTable = {Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT};
 
 	/**
-	 * C’est un constructeur qui obtient des percepts de la zone et qui crée l’objet BuyuktopacTurak.
+	 * Cï¿½est un constructeur qui obtient des percepts de la zone et qui crÃ©e lï¿½objet BuyuktopacTurak.
 	 * @param bt
 	 * @throws StopRequestException
 	 */
@@ -101,7 +101,7 @@ public class PerfectStrangers {
 	}	
 	
 	/**
-	 * On renvoie la liste des case qui définie la portée virtuelle.
+	 * On renvoie la liste des case qui dï¿½finie la portï¿½e virtuelle.
 	 * @param tile
 	 * @param range
 	 * @return
@@ -147,7 +147,7 @@ public class PerfectStrangers {
 	}
 	
 	/**
-	 * On renvoie la liste des portées de toutes les bombes.
+	 * On renvoie la liste des portï¿½es de toutes les bombes.
 	 * @return
 	 * @throws StopRequestException
 	 */
@@ -187,7 +187,7 @@ public class PerfectStrangers {
 	}
 	
 	/**
-	 * Si on pose une bombe, on trouve une/plusieurs case(s) sûre.
+	 * Si on pose une bombe, on trouve une/plusieurs case(s) sï¿½re.
 	 * @param bomb
 	 * @return
 	 * @throws StopRequestException

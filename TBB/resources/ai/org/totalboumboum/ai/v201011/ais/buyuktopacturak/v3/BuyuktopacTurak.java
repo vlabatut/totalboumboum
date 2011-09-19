@@ -21,22 +21,22 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * >> ce texte est à remplacer par votre propre description de votre IA
+ * >> ce texte est Ã  remplacer par votre propre description de votre IA
  * >> remplacez aussi le nom de l'auteur.
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui dÃ©finit son comportement.
+ * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile Ã 
+ * dÃ©bugger, modifier, relire, comprendre, etc.
  * 
- * @author Onur Büyüktopaç & Yigit Turak
+ * @author Onur Bï¿½yï¿½ktopaï¿½ & Yigit Turak
  *
  */
 public class BuyuktopacTurak extends ArtificialIntelligence
 {	
 	/** la zone de jeu */
 	private AiZone zone = null;		
-	/** le personnage dirigé par cette IA */
+	/** le personnage dirigï¿½ par cette IA */
 	private AiHero ownHero = null;
 	private AiAction result = new AiAction(AiActionName.NONE);
 	private Direction moveDir;
@@ -45,12 +45,12 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	private AttackMatrix attackMatrix;
 	private double[][] currentMatrix;
 	private boolean dropBomb=false;
-	private int maxLine, maxCol; //Max deðerin satýr ve sütunu
-	/** la case occupée actuellement par le personnage */
+	private int maxLine, maxCol; //Max deï¿½erin satï¿½r ve sï¿½tunu
+	/** la case occupï¿½e actuellement par le personnage */
 	private AiTile currentTile = null;
-	/** la position en pixels occupée actuellement par le personnage */
+	/** la position en pixels occupï¿½e actuellement par le personnage */
 	private double currentX;
-	/** la position en pixels occupée actuellement par le personnage */
+	/** la position en pixels occupï¿½e actuellement par le personnage */
 	private double currentY;
 	ArtificialIntelligence ai=this;
 	private Astar astar;
@@ -60,16 +60,16 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	//////////////////////
 	//////TAMAMLA////////
 	////////////////////
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException, NullPointerException
 	{	// avant tout : test d'interruption
 		checkInterruption();
 		// premier appel : on initialise
 		
 		initZibe();
-		// si le personnage controlé a été éliminé, inutile de continuer
+		// si le personnage controlï¿½ a ï¿½tï¿½ ï¿½liminï¿½, inutile de continuer
 		if(!this.ownHero.hasEnded())
-		{	// on met à jour la position de l'ia dans la zone
+		{	// on met Ã  jour la position de l'ia dans la zone
 			updateLocation();
 			
 			if(selectMode())
@@ -80,7 +80,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 				if(!this.dropBomb)
 				{
 					getColMatrix();
-					this.currentMatrix=getSelectMatrix(true); //currentMatrix.i collectMatrix e eþitliyor.
+					this.currentMatrix=getSelectMatrix(true); //currentMatrix.i collectMatrix e eï¿½itliyor.
 					//System.out.println("TileMax = " + getMaxTile());
 					AstarDirection(this.zone.getOwnHero().getTile(),getMaxTile());
 					this.result = new AiAction(AiActionName.MOVE,this.moveDir);
@@ -94,7 +94,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 				if(!this.dropBomb)
 				{
 					getAttMatrix();
-					currentMatrix=getSelectMatrix(false); //currentMatrix.i attackMatrix e eþitliyor.
+					currentMatrix=getSelectMatrix(false); //currentMatrix.i attackMatrix e eï¿½itliyor.
 					//System.out.println("TileMax = " + getMaxTile());
 					AstarDirection(this.zone.getOwnHero().getTile(),getMaxTile());
 					this.result = new AiAction(AiActionName.MOVE,this.moveDir);
@@ -123,7 +123,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	private boolean selectMode() throws StopRequestException{
 		checkInterruption();
 		boolean mode;
-		//elimde kalan bomba sayýsýna göre kontrol yapýyor.
+		//elimde kalan bomba sayï¿½sï¿½na gï¿½re kontrol yapï¿½yor.
 		if(this.ownHero.getBombNumberMax()>2){
 			if(getCurrentBomb()>2){
 				mode=false;
@@ -152,8 +152,8 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		checkInterruption();
 		int hiddenBonus;
 		int blocks;
-		int calcul=10;//Ayný anda 10 kare patlatmak imkansýz		
-		//Kýrýlabilir duvarlarý listeye atýyor.
+		int calcul=10;//Aynï¿½ anda 10 kare patlatmak imkansï¿½z		
+		//Kï¿½rï¿½labilir duvarlarï¿½ listeye atï¿½yor.
 		List<AiBlock> wallsList = this.zone.getBlocks();
 		List<AiBlock> destWalls = new ArrayList<AiBlock>();
 		Iterator<AiBlock> itWalls = wallsList.iterator();
@@ -326,7 +326,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	//MATRIX				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	//matrisleri oluþturuyor.
+	//matrisleri oluï¿½turuyor.
 	private void getColMatrix() throws StopRequestException{
 		checkInterruption();
 		this.colMatrix = new CollectionMatrix(this);
@@ -341,7 +341,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		checkInterruption();
 		return this.currentMatrix;
 	}
-	//seçilen moda göre matrisi alýyor.
+	//seï¿½ilen moda gï¿½re matrisi alï¿½yor.
 	private double[][] getSelectMatrix(boolean mode) throws StopRequestException{
 		checkInterruption();
 		if (mode){
@@ -362,7 +362,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		checkInterruption(); //APPEL OBLIGATOIRE
 		return this.currentTile;
 	}
-	//en yüksek deðerli kareyi buluyor.
+	//en yï¿½ksek deï¿½erli kareyi buluyor.
 	private AiTile getMaxTile() throws StopRequestException{
 		checkInterruption();
 		double[][] matrix=this.currentMatrix;
@@ -396,7 +396,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		return this.currentX;
 	}
 	/**
-	 * renvoie l'ordonnée courante (en pixels)
+	 * renvoie l'ordonnï¿½e courante (en pixels)
 	 */
 	public double getCurrentY() throws StopRequestException
 	{	
@@ -415,7 +415,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	// OWN HERO					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le personnage contrôlé par cette IA
+	 * renvoie le personnage contrï¿½lï¿½ par cette IA
 	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	

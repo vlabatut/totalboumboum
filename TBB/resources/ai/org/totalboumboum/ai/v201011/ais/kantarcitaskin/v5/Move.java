@@ -389,17 +389,17 @@ public class Move
 	
 	
 	/***
-	 * Calcules recursivement les cases qu'un hero peut passer dans une carée déjà determineé. 
-	 * Alors elle elemine les mur non destructible et puis les chemins que le hero associé ne
-	 * peut pas acceder. Donc elle retourne une liste des cases que le hero associé peut 
+	 * Calcules recursivement les cases qu'un hero peut passer dans une carï¿½e dï¿½jï¿½ determineï¿½. 
+	 * Alors elle elemine les mur non destructible et puis les chemins que le hero associï¿½ ne
+	 * peut pas acceder. Donc elle retourne une liste des cases que le hero associï¿½ peut 
 	 * acceder. S'il n'y a pas de case alors elle retourne null.
 	 * 
 	 * @param tile 
 	 * 		tile du hero qu'on veut trouve son chemin
 	 * @param area
-	 * 		une carée qu'on estime pour un hero pour qu'il puisse acceder à ses cases dans le temps d'explosion d'une bombe
+	 * 		une carï¿½e qu'on estime pour un hero pour qu'il puisse acceder Ã  ses cases dans le temps d'explosion d'une bombe
 	 * @param safe
-	 * 		liste des cases sur. Au début c'est null.
+	 * 		liste des cases sur. Au dï¿½but c'est null.
 	 * @return result
 	 * 		une liste des cases accesible, sinon une liste null
 	 * @throws StopRequestException
@@ -436,14 +436,14 @@ public class Move
 	
 	/***
 	 * Calcules toutes les casesrecursivement qu'un hero peut passer. 
-	 * Alors elle elemine les mur non destructible et puis les chemins que le hero associé ne
-	 * peut pas acceder. Donc elle retourne une liste des cases que le hero associé peut 
+	 * Alors elle elemine les mur non destructible et puis les chemins que le hero associï¿½ ne
+	 * peut pas acceder. Donc elle retourne une liste des cases que le hero associï¿½ peut 
 	 * acceder. S'il n'y a pas de case alors elle retourne null.
 	 * 
 	 * @param tile 
 	 * 		tile du hero qu'on veut trouve son chemin
 	 * @param safe
-	 * 		liste des cases sur. Au début c'est null.
+	 * 		liste des cases sur. Au dï¿½but c'est null.
 	 * @return result
 	 * 		une liste des cases accesible, sinon une liste null
 	 * @throws StopRequestException

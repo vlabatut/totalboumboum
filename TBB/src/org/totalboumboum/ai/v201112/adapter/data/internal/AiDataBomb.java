@@ -55,8 +55,8 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente une bombe du jeu, ie un objet que les joueurs peuvent déposer
- * pour détruire les murs et éliminer les autre joueurs.
+ * reprï¿½sente une bombe du jeu, ie un objet que les joueurs peuvent dï¿½poser
+ * pour dÃ©truire les murs et ï¿½liminer les autre joueurs.
  * 
  * @author Vincent Labatut
  *
@@ -64,13 +64,13 @@ import org.totalboumboum.tools.images.PredefinedColor;
 final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 {	
 	/**
-	 * crée une représentation de la bombe passée en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une reprï¿½sentation de la bombe passï¿½e en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite à représenter
+	 * 		sprite Ã  reprï¿½senter
 	 */
 	protected AiDataBomb(AiDataTile tile, Bomb sprite)
 	{	super(tile,sprite);
@@ -100,11 +100,11 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// FIRE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** exemple de feu que la bombe peut générer */
+	/** exemple de feu que la bombe peut gï¿½nï¿½rer */
 	private AiFire firePrototype;
 	
 	/**
-	 * initialise l'exemple de feu que cette bombe peut générer
+	 * initialise l'exemple de feu que cette bombe peut gï¿½nï¿½rer
 	 */
 	private void initFirePrototype()
 	{	Bomb bomb = getSprite();
@@ -127,17 +127,17 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** déclenchement par compte à rebours */
+	/** dï¿½clenchement par compte Ã  rebours */
 	private boolean countdownTrigger;
-	/** déclenchement par télécommande */
+	/** dï¿½clenchement par tï¿½lï¿½commande */
 	private boolean remoteControlTrigger;
-	/** déclenchement par explosion */
+	/** dï¿½clenchement par explosion */
 	private boolean explosionTrigger;
-	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
+	/** dï¿½lai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
-	/** latence de la bombe quand son explosion est déclenchée par une autre bombe */
+	/** latence de la bombe quand son explosion est dï¿½clenchï¿½e par une autre bombe */
 	private long latencyDuration;
-	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
+	/** probabilitï¿½ que la bombe tombe en panne quand elle devrait exploser */
 	private float failureProbability;
 	
 	@Override
@@ -161,20 +161,20 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	}
 	
 	/**
-	 * initialisation des délais liés à l'explosion de la bombe
+	 * initialisation des dï¿½lais liï¿½s Ã  l'explosion de la bombe
 	 */
 	private void initFuseParameters()
 	{	Bomb bomb = getSprite();
 		
-		// délai normal avant l'explosion 
+		// dï¿½lai normal avant l'explosion 
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 			normalDuration = (long)ability.getStrength();
 		}	
-		// compte à rebours
+		// compte Ã  rebours
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 			countdownTrigger = ability.isActive();
 		}
-		// télécommande
+		// tï¿½lï¿½commande
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_CONTROL);
 			remoteControlTrigger = ability.isActive();
 		}
@@ -182,11 +182,11 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_COMBUSTION);
 			explosionTrigger = ability.isActive();
 		}
-		// latence de la bombe en cas de détonation déclenchée par explosion
+		// latence de la bombe en cas de dï¿½tonation dï¿½clenchï¿½e par explosion
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
 			latencyDuration = (long)ability.getStrength();
 		}
-		// probabilité de panne
+		// probabilitï¿½ de panne
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_FAILURE_PROBABILITY);
 			failureProbability = ability.getStrength();
 		}
@@ -205,11 +205,11 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** portée de la bombe, ie. : nombre de cases occupées par sa flamme */
+	/** portï¿½e de la bombe, ie. : nombre de cases occupï¿½es par sa flamme */
 	private int range;
 	/** liste des cases qui vont subir l'explosion de la bombe */
 	private final List<AiTile> blast = new ArrayList<AiTile>();
-	/** type du feu généré : normal ou pénétrant */
+	/** type du feu gï¿½nï¿½rï¿½ : normal ou pï¿½nï¿½trant */
 	private boolean penetrating;
 	
 	@Override
@@ -218,7 +218,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	}
 	
 	/**
-	 * initialise la portée de la bombe
+	 * initialise la portï¿½e de la bombe
 	 */
 	private void initRange()
 	{	Bomb bomb = getSprite();
@@ -236,7 +236,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	}
 
 	/**
-	 * met à jour la liste des cases qui seront touchées par
+	 * met Ã  jour la liste des cases qui seront touchï¿½es par
 	 * l'explosion de cette bombe
 	 */
 	private void updateBlast()
@@ -258,7 +258,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// WORKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne) */
+	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tombï¿½e en panne) */
 	private boolean working;
 	
 	@Override
@@ -267,7 +267,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	}
 	
 	/**
-	 * met à jour l'indicateur de panne de cette bombe
+	 * met Ã  jour l'indicateur de panne de cette bombe
 	 */
 	private void updateWorking()
 	{	Bomb sprite = getSprite();
@@ -283,7 +283,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleur de la bombe (correspondant à celle du personnage qui l'a posée) */
+	/** couleur de la bombe (correspondant Ã  celle du personnage qui l'a posï¿½e) */
 	private PredefinedColor color;
 	
 	@Override
@@ -312,7 +312,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement au sol de la bombe, exprimée en pixel/seconde */
+	/** vitesse de dÃ©placement au sol de la bombe, exprimï¿½e en pixel/seconde */
 	private double slidingSpeed;
 	
 	@Override
@@ -342,7 +342,7 @@ if(slidingSpeed==0)
 	/////////////////////////////////////////////////////////////////
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis que le compte à rebours a (re)commencé, exprimé en ms */
+	/** temps ï¿½coulï¿½ depuis que le compte Ã  rebours a (re)commencï¿½, exprimï¿½ en ms */
 	private long time = 0;
 	
 	@Override
@@ -351,7 +351,7 @@ if(slidingSpeed==0)
 	}
 	
 	/**
-	 * met à jour le temps écoulé depuis que le compte à rebours a (re)commencé
+	 * met Ã  jour le temps ï¿½coulï¿½ depuis que le compte Ã  rebours a (re)commencï¿½
 	 */
 	private void updateTime()
 	{	Bomb sprite = getSprite();
@@ -403,7 +403,7 @@ if(slidingSpeed==0)
 	}
 
 	/** 
-	 * met à jour les différentes caractéristiques de cette bombe
+	 * met Ã  jour les diffï¿½rentes caractï¿½ristiques de cette bombe
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()
@@ -462,9 +462,9 @@ if(slidingSpeed==0)
 
 	@Override
 	public boolean isCrossableBy(AiSprite sprite)
-	{	// par défaut, on bloque
+	{	// par dÃ©faut, on bloque
 		boolean result = false;
-		// si le sprite considéré est un personnage
+		// si le sprite considï¿½rï¿½ est un personnage
 		if(sprite instanceof AiDataHero)
 		{	AiDataHero hero = (AiDataHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
@@ -476,7 +476,7 @@ if(slidingSpeed==0)
 			else if(stopHeroes==AiStopType.STRONG_STOP)
 				result = false;
 		}
-		// si le sprite considéré est un feu
+		// si le sprite considï¿½rï¿½ est un feu
 		else if(sprite instanceof AiDataFire)
 		{	AiDataFire fire = (AiDataFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)

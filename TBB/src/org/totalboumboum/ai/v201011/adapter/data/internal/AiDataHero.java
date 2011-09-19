@@ -35,7 +35,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * représente un personnage du jeu, ie un sprite contrôlé par un joueur
+ * reprï¿½sente un personnage du jeu, ie un sprite contrï¿½lï¿½ par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut
@@ -44,13 +44,13 @@ import org.totalboumboum.tools.images.PredefinedColor;
 final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 {
 	/**
-	 * crée une représentation du joueur passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une reprï¿½sentation du joueur passï¿½ en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite à représenter
+	 * 		sprite Ã  reprï¿½senter
 	 */
 	protected AiDataHero(AiDataTile tile, Hero sprite)
 	{	super(tile,sprite);
@@ -76,9 +76,9 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/////////////////////////////////////////////////////////////////
 	/** exemple de bombe que le personnage peut poser */
 	private AiDataBomb bombPrototype;
-	/** nombre de bombes que le personnage peut poser simultanément (en général) */
+	/** nombre de bombes que le personnage peut poser simultanï¿½ment (en gï¿½nï¿½ral) */
 	private int bombNumberMax;
-	/** nombre de bombes que le personnage a actuellement posées */
+	/** nombre de bombes que le personnage a actuellement posï¿½es */
 	private int bombNumberCurrent;
 	
 	@Override
@@ -112,7 +112,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	}
 	
 	/**
-	 * met à jour les paramètres décrivant les bombes que ce personnage peut poser
+	 * met Ã  jour les paramï¿½tres dï¿½crivant les bombes que ce personnage peut poser
 	 */
 	private void updateBombParam()
 	{	Hero sprite = getSprite();
@@ -163,7 +163,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement au sol du personnage, exprimée en pixel/seconde */
+	/** vitesse de dÃ©placement au sol du personnage, exprimï¿½e en pixel/seconde */
 	private double walkingSpeed;
 	
 	@Override
@@ -194,7 +194,7 @@ if(walkingSpeed==0)
 	private boolean throughBlocks;
 	/** indique si le personnage peut traverser les bombes */
 	private boolean throughBombs;
-	/** indique si le personnage peut traverser le feu (sans brûler) */
+	/** indique si le personnage peut traverser le feu (sans brï¿½ler) */
 	private boolean throughFires;
 	
 	@Override
@@ -213,7 +213,7 @@ if(walkingSpeed==0)
 	}
 
 	/**
-	 * met à jour les divers pouvoirs du personnage
+	 * met Ã  jour les divers pouvoirs du personnage
 	 */
 	private void updateCollisions()
 	{	Sprite sprite = getSprite();

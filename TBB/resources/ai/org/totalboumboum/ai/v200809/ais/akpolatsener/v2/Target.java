@@ -38,7 +38,7 @@ public class Target {
 	}
 
 	/**
-	 * trouve le cible la plus proche à une case donnée
+	 * trouve le cible la plus proche Ã  une case donnï¿½e
 	 * 
 	 * @param tile
 	 * @throws StopRequestException
@@ -81,7 +81,7 @@ public class Target {
 	}
 
 	/**
-	 * retourne l'enemie la plus proche à une case donnée
+	 * retourne l'enemie la plus proche Ã  une case donnï¿½e
 	 * 
 	 * @return
 	 * @throws StopRequestException
@@ -114,7 +114,7 @@ public class Target {
 	}
 
 	/**
-	 * retourne le bonus la plus proche à une case donnée
+	 * retourne le bonus la plus proche Ã  une case donnï¿½e
 	 * 
 	 * @return
 	 * @throws StopRequestException
@@ -144,7 +144,7 @@ public class Target {
 
 	/**
 	 * retourne la distance directe entre la cible la plus proche et une case
-	 * donnée
+	 * donnï¿½e
 	 * 
 	 * @param tile
 	 * @return
@@ -165,7 +165,7 @@ public class Target {
 
 	/**
 	 * retourne la distance de Manhattan entre la cible la plus proche et une
-	 * case donnée
+	 * case donnï¿½e
 	 * 
 	 * @param tile
 	 * @return

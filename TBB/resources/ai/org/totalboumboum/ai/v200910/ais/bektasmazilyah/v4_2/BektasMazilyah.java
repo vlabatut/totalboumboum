@@ -17,10 +17,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui dÃ©finit son comportement.
+ * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile Ã 
+ * dÃ©bugger, modifier, relire, comprendre, etc.
  * 
  * @version 4.2
  * 
@@ -33,7 +33,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	private AiZone zone;
 	Astar as;
 
-	// le personnage dirigé par cette IA
+	// le personnage dirigï¿½ par cette IA
 	private AiHero hero;
 //	private AiTile previousTile;
 	private AiTile currentTile;
@@ -51,7 +51,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 //	private int posy;
 //	private int count = 0;
 	
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	@Override
 	public AiAction processAction() throws StopRequestException
 	{	//Appel Obligatoire
@@ -132,7 +132,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 									System.out.println("8");
 									moveDir=zone.getDirection(currentTile, nextTile);
 									dropBomb=kacabilirmi();
-									System.out.println("8den sonra kaçar aslýnda:"+dropBomb);
+									System.out.println("8den sonra kaï¿½ar aslï¿½nda:"+dropBomb);
 									if(targetTile==currentTile && dropBomb){
 										System.out.println("9");
 										dropBomb=false;
@@ -175,7 +175,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		List<AiTile> l = dangerZone.findRivalsTiles();
 		List<AiTile> li =sirala(l);
 		Iterator<AiTile> it =li.iterator();
-	//	System.out.println("it yaratýldý");
+	//	System.out.println("it yaratï¿½ldï¿½");
 		if (it.hasNext())
 		{
 			checkInterruption();
@@ -246,10 +246,10 @@ public class BektasMazilyah extends ArtificialIntelligence
 		checkInterruption();
 		AiTile tile = null;
 		List<AiTile> l = dangerZone.findSafeTiles();
-	//	System.out.println("en yakýn safe tilelar:"+li);
+	//	System.out.println("en yakï¿½n safe tilelar:"+li);
 		List<AiTile> li =sirala(l);
 		Iterator<AiTile> it =li.iterator();
-	//	System.out.println("it yaratýldý");
+	//	System.out.println("it yaratï¿½ldï¿½");
 		if (it.hasNext())
 		{
 			checkInterruption();
@@ -279,9 +279,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 	{
 		checkInterruption();
 		List<AiTile> neighbors = takeInRange();
-//		System.out.println("iþaretlenecek yerler:" + neighbors);
+//		System.out.println("iï¿½aretlenecek yerler:" + neighbors);
 		List<AiTile> result = removeFromList(neighbors);
-//		System.out.println("listeden çýkýnca:" + result);
+//		System.out.println("listeden ï¿½ï¿½kï¿½nca:" + result);
 		Iterator<AiTile> it = result.iterator();
 		AiTile temp=null;
 		int count=0;
@@ -479,9 +479,9 @@ public class BektasMazilyah extends ArtificialIntelligence
 		List<AiTile> l = dangerZone.findBonusTiles();
 	//	System.out.println("bonuslar:"+l);
 		List<AiTile> li = sirala(l);
-	//	System.out.println("bonuslarýn sýralýsý:"+li);
+	//	System.out.println("bonuslarï¿½n sï¿½ralï¿½sï¿½:"+li);
 		Iterator<AiTile> it =li.iterator();
-		//System.out.println("it yaratýldý");
+		//System.out.println("it yaratï¿½ldï¿½");
 		if (it.hasNext())
 		{
 			checkInterruption();
@@ -518,7 +518,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		AiTile tile = null;
 		ArrayList<AiTile> li = bombMatrice.findPlusSafeTiles();
 		Iterator<AiTile> it =li.iterator();
-	//	System.out.println("it yaratýldý");
+	//	System.out.println("it yaratï¿½ldï¿½");
 		if (it.hasNext())
 		{
 			checkInterruption();
@@ -555,7 +555,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		List<AiTile> dst= dangerZone.findTilesForDestruct(b);
 	//	System.out.println("gidilesi olanlar:"+dst);
 		List<AiTile> dest=sirala(dst);
-	//	System.out.println("gidilesi sýrali"+dest);
+	//	System.out.println("gidilesi sï¿½rali"+dest);
 		AiTile tile = null;
 		AiTile kare=null;
 		Iterator<AiTile> it =dest.iterator();
@@ -598,7 +598,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 		AiTile temp=null;
 		List<AiTile> tiles = new ArrayList<AiTile>();
 		List<AiHero> heroes = zone.getHeroes();
-//		System.out.println("düþman burda:"+heroes);
+//		System.out.println("dï¿½ï¿½man burda:"+heroes);
 		if(heroes.contains(hero))
 			heroes.remove(hero);
 		Iterator<AiHero> itHero = heroes.iterator();
@@ -619,18 +619,18 @@ public class BektasMazilyah extends ArtificialIntelligence
 		while(itTile.hasNext())
 		{
 			temp=itTile.next();
-	//		System.out.println("bu tile için: bakýyo" +temp);
+	//		System.out.println("bu tile iï¿½in: bakï¿½yo" +temp);
 			if(dangerZone.getValeur(temp.getCol(), temp.getLine())== EtatEnum.BLOCDEST)
 				dest.add(temp);
 		}
 		
-//		System.out.println("dest bu çýktý:"+dest);
+//		System.out.println("dest bu ï¿½ï¿½ktï¿½:"+dest);
 		
 		dest=findClearNeighbors(dest);
-//		System.out.println("komþularý bu:"+dest);
+//		System.out.println("komï¿½ularï¿½ bu:"+dest);
 		List<AiTile> dst= dangerZone.findTilesForDestruct(dest);
 		dest=sirala(dst);
-//		System.out.println("þuralara býrakmaya çalýþýyorum:"+dest);
+//		System.out.println("ï¿½uralara bï¿½rakmaya ï¿½alï¿½ï¿½ï¿½yorum:"+dest);
 		temp=null;
 		AiTile kare=null;
 		Iterator<AiTile> it =dest.iterator();

@@ -58,7 +58,7 @@ public class Path {
 	}
 	
 	/**
-	 * on utilise cette method pour faire distinction de tiles qui sont deja calculé
+	 * on utilise cette method pour faire distinction de tiles qui sont deja calculÃ©
 	 * @param tile
 	 * @param path
 	 * @return
@@ -79,9 +79,9 @@ public class Path {
 		return resultat;
 	}
 /**
- * hayali bomba konulduðu zaman tüm etki alaný -10 olacak
- * -100 olmayan ve -10 olan yerleri tarayýp eðer pozitif bir deðer bulursak 
- * orasý bizim için ulaþýlabilir bir yer olacak
+ * hayali bomba konulduï¿½u zaman tï¿½m etki alanï¿½ -10 olacak
+ * -100 olmayan ve -10 olan yerleri tarayï¿½p eï¿½er pozitif bir deï¿½er bulursak 
+ * orasï¿½ bizim iï¿½in ulaï¿½ï¿½labilir bir yer olacak
  *   
  * @param line
  * @param col
@@ -138,10 +138,10 @@ public class Path {
 	}
 	
 	/**
-	 * önce tüm alaný longeur 10 ile tarýycak 
-	 * sonra bulduðu tile lerin en büyüðünü hedef tile seçicek 
+	 * ï¿½nce tï¿½m alanï¿½ longeur 10 ile tarï¿½ycak 
+	 * sonra bulduï¿½u tile lerin en bï¿½yï¿½ï¿½ï¿½nï¿½ hedef tile seï¿½icek 
 	 * sonra Astar algo yu uyguluycak 
-	 * en sonunda aþaðýdaki action a bulduðu pathý vericek ve bitcek 
+	 * en sonunda aï¿½aï¿½ï¿½daki action a bulduï¿½u pathï¿½ vericek ve bitcek 
 	 * 
 	 * @param line
 	 * @param col
@@ -188,7 +188,7 @@ public class Path {
 	
 	/**
 	 * Methode calculant la nouvelle action a effectuer
-	 * (methode de groupe rouge de l'annee dernier mais on l'a modifié)
+	 * (methode de groupe rouge de l'annee dernier mais on l'a modifiï¿½)
 	 * @param nextMove
 	 * 			Le chemin precis a suivre.
 	 *  

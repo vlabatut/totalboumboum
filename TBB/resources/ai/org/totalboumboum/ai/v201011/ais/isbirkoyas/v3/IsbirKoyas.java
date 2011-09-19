@@ -40,7 +40,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	private boolean mode_collect=false,mode_attaque=false, danger,senfuire=false, poserbombe , attaque=false;
 	int i=0,k=1;
 	double t;
-	/** méthode appelée par le moteur
+	/** mÃ©thode appelÃ©e par le moteur
 	 *  du jeu pour obtenir une action de notre IA 
 	 *  */
 	public AiAction processAction() throws StopRequestException {
@@ -60,7 +60,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 		//la matrice d'attaque
 		double[][] matriceattaque=new double[height][width];
 		danger=false;
-		//Détermination du mode
+		//Dï¿½termination du mode
 		mode(gameZone);
 	
 		// si le mode: collecte

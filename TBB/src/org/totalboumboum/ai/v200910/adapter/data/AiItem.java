@@ -40,9 +40,9 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 
 
 /**
- * représente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
- * par l'item. Ce type est représentée par une valeur de type AiItemType.
+ * reprï¿½sente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
+ * un item est caractï¿½risï¿½ par son type, reprï¿½sentant le pouvoir apportï¿½ (ou enlevï¿½)
+ * par l'item. Ce type est reprï¿½sentï¿½e par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
  *
@@ -50,11 +50,11 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 public class AiItem extends AiSprite<Item>
 {	
 	/**
-	 * crée une représentation de l'item passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une reprï¿½sentation de l'item passï¿½ en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param sprite	sprite Ã  reprï¿½senter
 	 */
 	AiItem(AiTile tile, Item sprite)
 	{	super(tile,sprite);
@@ -74,11 +74,11 @@ public class AiItem extends AiSprite<Item>
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** type d'item représenté */
+	/** type d'item reprï¿½sentï¿½ */
 	private AiItemType type;
 	
 	/**
-	 * renvoie le type de l'item représenté
+	 * renvoie le type de l'item reprï¿½sentï¿½
 	 * 
 	 * @return	le type de l'item
 	 */
@@ -87,7 +87,7 @@ public class AiItem extends AiSprite<Item>
 	}
 	
 	/**
-	 * initialise le type de l'item représenté
+	 * initialise le type de l'item reprï¿½sentï¿½
 	 */
 	private void initType()
 	{	Item item = getSprite();
@@ -103,7 +103,7 @@ public class AiItem extends AiSprite<Item>
 	private AiStopType stopFires;
 
 	/** 
-	 * met jour les différentes caractéristiques de ce bloc
+	 * met jour les diffï¿½rentes caractï¿½ristiques de ce bloc
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()
@@ -161,13 +161,13 @@ public class AiItem extends AiSprite<Item>
 	}	
 
 	public boolean isCrossableBy(AiSprite<?> sprite)
-	{	// par défaut, on bloque
+	{	// par dÃ©faut, on bloque
 		boolean result = false;
-		// si le sprite considéré est un personnage
+		// si le sprite considï¿½rï¿½ est un personnage
 		if(sprite instanceof AiHero)
 		{	result = true;
 		}
-		// si le sprite considéré est un feu
+		// si le sprite considï¿½rï¿½ est un feu
 		else if(sprite instanceof AiFire)
 		{	AiFire fire = (AiFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)
@@ -177,7 +177,7 @@ public class AiItem extends AiSprite<Item>
 			else if(stopFires==AiStopType.STRONG_STOP)
 				result = false;
 		}
-		// si le sprite considéré est une bombe
+		// si le sprite considï¿½rï¿½ est une bombe
 		else if(sprite instanceof AiBomb)
 		{	AiBomb bomb = (AiBomb) sprite;
 			if(stopBombs==AiStopType.NO_STOP)

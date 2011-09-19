@@ -44,8 +44,8 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 
 /**
- * représente une bombe du jeu, ie un objet que les joueurs peuvent déposer
- * pour détruire les murs et éliminer les autre joueurs.
+ * reprï¿½sente une bombe du jeu, ie un objet que les joueurs peuvent dï¿½poser
+ * pour dÃ©truire les murs et ï¿½liminer les autre joueurs.
  * 
  * @author Vincent Labatut
  *
@@ -54,11 +54,11 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public class AiBomb extends AiSprite<Bomb>
 {	
 	/**
-	 * crée une représentation de la bombe passée en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une reprï¿½sentation de la bombe passï¿½e en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param sprite	sprite Ã  reprï¿½senter
 	 */
 	AiBomb(AiTile tile, Bomb sprite)
 	{	super(tile,sprite);
@@ -85,47 +85,47 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** déclenchement par compte à rebours */
+	/** dï¿½clenchement par compte Ã  rebours */
 	private boolean countdownTrigger;
-	/** déclenchement par télécommande */
+	/** dï¿½clenchement par tï¿½lï¿½commande */
 	private boolean remoteControlTrigger;
-	/** déclenchement par explosion */
+	/** dï¿½clenchement par explosion */
 	private boolean explosionTrigger;
-	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
+	/** dï¿½lai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
-	/** durée de l'explosion (entre l'apparition et la disparition des flammes) */
+	/** durï¿½e de l'explosion (entre l'apparition et la disparition des flammes) */
 	private long explosionDuration;
-	/** latence de la bombe quand son explosion est déclenchée par une autre bombe */
+	/** latence de la bombe quand son explosion est dï¿½clenchï¿½e par une autre bombe */
 	private long latencyDuration;
-	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
+	/** probabilitï¿½ que la bombe tombe en panne quand elle devrait exploser */
 	private float failureProbability;
 	
 	/**
-	 * renvoie la probabilité que la bombe tombe en panne quand elle devrait exploser
-	 * @return	une mesure de probabilité
+	 * renvoie la probabilitï¿½ que la bombe tombe en panne quand elle devrait exploser
+	 * @return	une mesure de probabilitï¿½
 	 */
 	public float getFailureProbability()
 	{	return failureProbability;	
 	}
 	
 	/**
-	 * indique si l'explosion de la bombe dépend d'un compte à rebours
-	 * @return	vrai si la bombe dépend d'un compte à rebours
+	 * indique si l'explosion de la bombe dï¿½pend d'un compte Ã  rebours
+	 * @return	vrai si la bombe dï¿½pend d'un compte Ã  rebours
 	 */
 	public boolean hasCountdownTrigger()
 	{	return countdownTrigger;
 	}
 	
 	/**
-	 * indique si l'explosion de la bombe dépend d'une télécommande
-	 * @return	vrai si la bombe dépend d'une télécommande
+	 * indique si l'explosion de la bombe dï¿½pend d'une tï¿½lï¿½commande
+	 * @return	vrai si la bombe dï¿½pend d'une tï¿½lï¿½commande
 	 */
 	public boolean hasRemoteControlTrigger()
 	{	return remoteControlTrigger;
 	}
 	
 	/**
-	 * indique si l'explosion de la bombe dépend d'un contact avec du feu
+	 * indique si l'explosion de la bombe dï¿½pend d'un contact avec du feu
 	 * @return	vrai si la bombe explose au contact du feu
 	 */
 	public boolean hasExplosionTrigger()
@@ -133,20 +133,20 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 	
 	/**
-	 * initialisation des délais liés à l'explosion de la bombe
+	 * initialisation des dï¿½lais liï¿½s Ã  l'explosion de la bombe
 	 */
 	private void initFuseParameters()
 	{	Bomb bomb = getSprite();
 	
-		// délai normal avant l'explosion 
+		// dï¿½lai normal avant l'explosion 
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 			normalDuration = (long)ability.getStrength();		
 		}	
-		// compte à rebours
+		// compte Ã  rebours
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 			countdownTrigger = ability.isActive();
 		}
-		// télécommande
+		// tï¿½lï¿½commande
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_CONTROL);
 			remoteControlTrigger = ability.isActive();
 		}
@@ -154,15 +154,15 @@ public class AiBomb extends AiSprite<Bomb>
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_COMBUSTION);
 			explosionTrigger = ability.isActive();
 		}
-		// latence de la bombe en cas de détonation déclenchée par explosion
+		// latence de la bombe en cas de dï¿½tonation dï¿½clenchï¿½e par explosion
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
 			latencyDuration = (long)ability.getStrength();
 		}
-		// durée de l'explosion
+		// durï¿½e de l'explosion
 		{	ExplosionManager explosionManager = bomb.getExplosionManager();
 			explosionDuration = explosionManager.getExplosionDuration();
 		}
-		// probabilité de panne
+		// probabilitï¿½ de panne
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_FAILURE_PROBABILITY);
 			failureProbability = ability.getStrength();
 		}
@@ -170,35 +170,35 @@ public class AiBomb extends AiSprite<Bomb>
 
 
 	/**
-	 * renvoie le délai normal avant l'explosion de la bombe.
-	 * Ce délai ne tient pas compte des pannes éventuelles.
-	 * Ce délai n'est pas défini pour tous les types de bombes
+	 * renvoie le dï¿½lai normal avant l'explosion de la bombe.
+	 * Ce dï¿½lai ne tient pas compte des pannes ï¿½ventuelles.
+	 * Ce dï¿½lai n'est pas dï¿½fini pour tous les types de bombes
 	 * 
-	 * @return	le délai normal avant explosion exprimé en millisecondes
+	 * @return	le dï¿½lai normal avant explosion exprimï¿½ en millisecondes
 	 */
 	public long getNormalDuration()
 	{	return normalDuration;
 	}
 
 	/**
-	 * renvoie la durée de l'explosion de cette bombe.
-	 * Cette durée comprend l'apparition des flammes,
-	 * la durée de vie des flammes, et leur disparition.
-	 * Cette valeur n'est pas forcément constante, et peut varier d'une bombe à l'autre.
+	 * renvoie la durï¿½e de l'explosion de cette bombe.
+	 * Cette durï¿½e comprend l'apparition des flammes,
+	 * la durï¿½e de vie des flammes, et leur disparition.
+	 * Cette valeur n'est pas forcï¿½ment constante, et peut varier d'une bombe Ã  l'autre.
 	 * 
-	 * @return	la durée de l'explosion
+	 * @return	la durï¿½e de l'explosion
 	 */
 	public long getExplosionDuration()
 	{	return explosionDuration;
 	}
 
 	/**
-	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclenchée par
-	 * une explosion. Cette latence représente le temps entre le moment où
-	 * la bombe est touchée par l'explosion, et le moment où elle commence effectivement
-	 * à exploser.
+	 * renvoie la latence de cette bombe, dans le cas oÃ¹ elle peut ï¿½tre dï¿½clenchï¿½e par
+	 * une explosion. Cette latence reprï¿½sente le temps entre le moment oï¿½
+	 * la bombe est touchï¿½e par l'explosion, et le moment oÃ¹ elle commence effectivement
+	 * Ã  exploser.
 	 * 
-	 * @return	la latence de la bombe pour une détonation déclenchée par une autre explosion
+	 * @return	la latence de la bombe pour une dï¿½tonation dï¿½clenchï¿½e par une autre explosion
 	 */
 	public long getLatencyDuration()
 	{	return latencyDuration;
@@ -207,22 +207,22 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** portée de la bombe, ie. : nombre de cases occupées par sa flamme */
+	/** portï¿½e de la bombe, ie. : nombre de cases occupï¿½es par sa flamme */
 	private int range;
 	/** liste des cases qui vont subir l'explosion de la bombe */
 	private final List<AiTile> blast = new ArrayList<AiTile>();
 	
 	/**
-	 * renvoie la portée de la bombe
-	 * (ie. le nombre de cases occupées par sa flamme)
-	 * @return	portée de la bombe
+	 * renvoie la portï¿½e de la bombe
+	 * (ie. le nombre de cases occupï¿½es par sa flamme)
+	 * @return	portï¿½e de la bombe
 	 */
 	public int getRange()
 	{	return range;	
 	}
 	
 	/**
-	 * initialise la portée de la bombe
+	 * initialise la portï¿½e de la bombe
 	 */
 	private void initRange()
 	{	Bomb bomb = getSprite();
@@ -232,21 +232,21 @@ public class AiBomb extends AiSprite<Bomb>
 	/**
 	 * calcule une liste de cases correspondant au souffle de cette bombe,
 	 * i.e. toutes les cases qui seront atteinte quand elle va exploser.
-	 * Cette méthode tient compte de murs, items, etc., c'est à dire qu'elle
-	 * ne donne que les cases qui seront touchées si la bombe devait exploser
-	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
+	 * Cette mÃ©thode tient compte de murs, items, etc., c'est Ã  dire qu'elle
+	 * ne donne que les cases qui seront touchï¿½es si la bombe devait exploser
+	 * Ã  l'instant oÃ¹ cette mÃ©thode est invoquï¿½e. Si un des obstacles Ã  l'explosion
 	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
-	 * alors le souffle peut changer, il faut ré-exécuter cette méthode pour avoir le
+	 * alors le souffle peut changer, il faut rï¿½-exï¿½cuter cette mÃ©thode pour avoir le
 	 * nouveau souffle de la bombe dans ce nouvel environnement.
 	 * 
-	 * @return	une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
+	 * @return	une liste de cases correspondant aux cases qui seront touchï¿½es par la flamme de cette bombe 
 	 */
 	public List<AiTile> getBlast()
 	{	return blast;
 	}
 
 	/**
-	 * met à jour la liste des cases qui seront touchées par
+	 * met Ã  jour la liste des cases qui seront touchï¿½es par
 	 * l'explosion de cette bombe
 	 */
 	private void updateBlast()
@@ -264,11 +264,11 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// WORKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne) */
+	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tombï¿½e en panne) */
 	private boolean working;
 	
 	/**
-	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne)
+	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tombï¿½e en panne)
 	 * 
 	 * @return	vrai si cette bombe marche, faux si elle est en panne
 	 */
@@ -277,7 +277,7 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 	
 	/**
-	 * met à jour l'indicateur de panne de cette bombe
+	 * met Ã  jour l'indicateur de panne de cette bombe
 	 */
 	private void updateWorking()
 	{	Bomb sprite = getSprite();
@@ -293,15 +293,15 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleur de la bombe (correspondant à celle du personnage qui l'a posée) */
+	/** couleur de la bombe (correspondant Ã  celle du personnage qui l'a posï¿½e) */
 	private PredefinedColor color;
 	
 	/**
 	 * renvoie la couleur de cette bombe.
-	 * Cette couleur est null si aucun joueur n'a posé la bombe 
-	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
+	 * Cette couleur est null si aucun joueur n'a posï¿½ la bombe 
+	 * (pour certains niveaux spï¿½ciaux oÃ¹ les blocs peuvent gï¿½nï¿½rer des bombes)  
 	 * 
-	 * @return un symbole de type PredefinedColor représentant une couleur
+	 * @return un symbole de type PredefinedColor reprï¿½sentant une couleur
 	 */
 	public PredefinedColor getColor()
 	{	return color;	
@@ -318,21 +318,21 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis que la bombe a été posée, exprimé en ms */
+	/** temps ï¿½coulï¿½ depuis que la bombe a ï¿½tï¿½ posï¿½e, exprimï¿½ en ms */
 	private double time = 0;
 	
 	/**
-	 * renvoie le temps écoulé depuis que la bombe a été posée,
-	 * exprimé en millisecondes
+	 * renvoie le temps ï¿½coulï¿½ depuis que la bombe a ï¿½tï¿½ posï¿½e,
+	 * exprimï¿½ en millisecondes
 	 * 
-	 * @return	temps exprimé en ms
+	 * @return	temps exprimï¿½ en ms
 	 */
 	public double getTime()
 	{	return time;	
 	}
 	
 	/**
-	 * met à jour le temps écoulé depuis que la bombe a été posée
+	 * met Ã  jour le temps ï¿½coulï¿½ depuis que la bombe a ï¿½tï¿½ posï¿½e
 	 */
 	private void updateTime()
 	{	Bomb sprite = getSprite();
@@ -368,7 +368,7 @@ public class AiBomb extends AiSprite<Bomb>
 
 	/**
 	 * teste si cette bombe est capable de passer
-	 * à travers les items
+	 * Ã  travers les items
 	 * 
 	 * @return	vrai si la bombe traverse les items
 	 */
@@ -377,7 +377,7 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 
 	/** 
-	 * met jour les différentes caractéristiques de cette bombe
+	 * met jour les diffï¿½rentes caractï¿½ristiques de cette bombe
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()
@@ -435,9 +435,9 @@ public class AiBomb extends AiSprite<Bomb>
 	}	
 
 	public boolean isCrossableBy(AiSprite<?> sprite)
-	{	// par défaut, on bloque
+	{	// par dÃ©faut, on bloque
 		boolean result = false;
-		// si le sprite considéré est un personnage
+		// si le sprite considï¿½rï¿½ est un personnage
 		if(sprite instanceof AiHero)
 		{	AiHero hero = (AiHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
@@ -449,7 +449,7 @@ public class AiBomb extends AiSprite<Bomb>
 			else if(stopHeroes==AiStopType.STRONG_STOP)
 				result = false;
 		}
-		// si le sprite considéré est un feu
+		// si le sprite considï¿½rï¿½ est un feu
 		else if(sprite instanceof AiFire)
 		{	AiFire fire = (AiFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)

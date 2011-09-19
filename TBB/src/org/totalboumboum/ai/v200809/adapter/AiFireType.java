@@ -32,16 +32,16 @@ public enum AiFireType
 {
 	/** feu normal */
 	NORMAL,
-	/** feu pénétrant (pas arrêté par les les objets destructibles) */
+	/** feu pï¿½nï¿½trant (pas arrï¿½tï¿½ par les les objets destructibles) */
 	PENETRATION,
 	/** autre type de feu */
 	OTHER;	
 	
 	/**
-	 * calcule l'AiFireType correspondant au nom de feu passé en paramètre
+	 * calcule l'AiFireType correspondant au nom de feu passï¿½ en paramï¿½tre
 	 * 
-	 * @param name	nom du feu à traiter
-	 * @return	symbole représentant ce type de feu
+	 * @param name	nom du feu Ã  traiter
+	 * @return	symbole reprï¿½sentant ce type de feu
 	 */
 	public static AiFireType makeFireType(String name)
 	{	AiFireType result;

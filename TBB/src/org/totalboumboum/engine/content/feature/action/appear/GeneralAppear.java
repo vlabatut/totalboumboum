@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action d'apparaitre de nulle part (suite à téléport, ou drop) 
+ * action d'apparaitre de nulle part (suite Ã  tï¿½lï¿½port, ou drop) 
  * INTRANSITIVE
  * 
  * <p>ABILITY PERFORM
@@ -43,13 +43,13 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  *  <br>N/D
  *  
  * <p>ABILITY PREVENT
- * 	<br>paramètre: actor=oui
- * 	<br>paramètre: target=oui (floor)
- * 	<br>paramètre: direction=N/D
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=oui
- * 	<br>paramètre: restriction=SPRITE_TRAVERSE
+ * 	<br>paramï¿½tre: actor=oui
+ * 	<br>paramï¿½tre: target=oui (floor)
+ * 	<br>paramï¿½tre: direction=N/D
+ * 	<br>paramï¿½tre: strength=bool
+ * 	<br>paramï¿½tre: kind=N/D
+ * 	<br>paramï¿½tre: scope=oui
+ * 	<br>paramï¿½tre: restriction=SPRITE_TRAVERSE
  */	
 /** 
  * appearing in a tile, coming from nowhere

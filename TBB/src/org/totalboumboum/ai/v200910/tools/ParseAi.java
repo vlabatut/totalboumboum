@@ -34,8 +34,8 @@ import java.util.List;
 import org.totalboumboum.tools.files.FileNames;
 
 /**
- * cette méthode parse les codes sources définissant une IA et vérifie
- * que les appels à checkInterruption sont effectués correctement
+ * cette mÃ©thode parse les codes sources dï¿½finissant une IA et vï¿½rifie
+ * que les appels Ã  checkInterruption sont effectuÃ©s correctement
  * 
  * @author Vincent Labatut
  */
@@ -84,7 +84,7 @@ public class ParseAi
 	
 	private static void parseFolder(File folder, int level) throws ParseException, IOException
 	{	if(IGNORED_PACKAGES.contains(folder.getName()))
-			System.out.println("Paquetage "+folder.getPath()+" ignoré");
+			System.out.println("Paquetage "+folder.getPath()+" ignorï¿½");
 		else
 		{	System.out.println("Analyse du paquetage "+folder.getPath());
 		
@@ -99,7 +99,7 @@ public class ParseAi
 					else if(verbose)
 					{	for(int i=0;i<level;i++)
 							System.out.print("..");
-						System.out.println("Le fichier "+file.getPath()+" n'a pas été reconnu comme un source Java");
+						System.out.println("Le fichier "+file.getPath()+" n'a pas ï¿½tï¿½ reconnu comme un source Java");
 					}
 				}
 			}

@@ -12,7 +12,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  */
 public class KilicPala extends ArtificialIntelligence
 {	private static final long serialVersionUID = 1L;
-	/** le dernier déplacement effectué */
+	/** le dernier dÃ©placement effectuÃ© */
 	private Integer lastMove;
 
 	/**
@@ -24,7 +24,7 @@ public class KilicPala extends ArtificialIntelligence
 	  
 	}
 	
-	/** indicateur de première invocation (pour la compatibilité */
+	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
 	private boolean firstTime = true;
 
 	public synchronized Integer call() throws Exception
@@ -369,10 +369,10 @@ public class KilicPala extends ArtificialIntelligence
 	
 	/**
 	 * 
-	 * Indique si la case située à la position passée en paramètre
+	 * Indique si la case situï¿½e Ã  la position passï¿½e en paramï¿½tre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
-	 * @param x	position à étudier
-	 * @param y	position à étudier
+	 * @param x	position Ã  ï¿½tudier
+	 * @param y	position Ã  ï¿½tudier
 	 * @return	vrai si la case contient un obstacle
 	 * 
 	 */
@@ -396,12 +396,12 @@ public class KilicPala extends ArtificialIntelligence
 	}
 
 	/**
-	 * Indique si le déplacement dont le code a été passé en paramètre 
-	 * est possible pour un personnage situé en (x,y).
+	 * Indique si le dÃ©placement dont le code a ï¿½tï¿½ passï¿½ en paramï¿½tre 
+	 * est possible pour un personnage situï¿½ en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param move	le déplacement à étudier
-	 * @return	vrai si ce déplacement est possible
+	 * @param move	le dÃ©placement Ã  ï¿½tudier
+	 * @return	vrai si ce dÃ©placement est possible
 	 */
 	private boolean isMovePossible(int x, int y, int move)
 	{	boolean result;
@@ -427,11 +427,11 @@ public class KilicPala extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Renvoie la liste de tous les déplacements possibles
-	 * pour un personnage situé à la position (x,y)
+	 * Renvoie la liste de tous les dÃ©placements possibles
+	 * pour un personnage situï¿½ Ã  la position (x,y)
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @return	la liste des déplacements possibles
+	 * @return	la liste des dÃ©placements possibles
 	 */
 	private Vector<Integer> getPossibleMoves(int x, int y)
 	{	Vector<Integer> result = new Vector<Integer>();

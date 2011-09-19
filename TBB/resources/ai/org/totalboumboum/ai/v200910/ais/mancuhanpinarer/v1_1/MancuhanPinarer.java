@@ -47,7 +47,7 @@ public class MancuhanPinarer extends ArtificialIntelligence {
 	private AiPath nextMove;
 	private AiHero ourHero;
 
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException {
 		// avant tout: test d'interruption
 		checkInterruption();

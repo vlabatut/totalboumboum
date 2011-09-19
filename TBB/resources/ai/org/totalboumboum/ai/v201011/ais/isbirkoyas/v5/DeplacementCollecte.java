@@ -23,7 +23,7 @@ public class DeplacementCollecte {
 	}
 
 	/**
-	 * Cette méthode implémente l'algorithme de collecte. Elle prend 3 arguments
+	 * Cette mÃ©thode implï¿½mente l'algorithme de collecte. Elle prend 3 arguments
 	 * une matrice de type Int, la zone du jeu et une action.
 	 * 
 	 * @param gameZone
@@ -76,7 +76,7 @@ public class DeplacementCollecte {
 
 			} catch (Exception e) {
 				if (ai.print)
-					System.out.println("Collect:On est bloqué" + e);
+					System.out.println("Collect:On est bloquï¿½" + e);
 			}
 			// Detruire
 			if (ai.nextMove == null && ai.senfuire == false) {
@@ -138,7 +138,7 @@ public class DeplacementCollecte {
 
 								if (ai.print)
 									System.out
-											.println("Collect: IA pense à poser bombe!");
+											.println("Collect: IA pense Ã  poser bombe!");
 								poserBombe2 = true;
 								List<AiTile> casSurs = securite
 										.posageControle(gameZone);
@@ -165,7 +165,7 @@ public class DeplacementCollecte {
 									if (temps2 > temps) {
 										if (ai.print)
 											System.out
-													.println("Il n'y a pas du temps à senfuire.");
+													.println("Il n'y a pas du temps Ã  senfuire.");
 										poserBombe2 = false;
 									}
 								}
@@ -196,7 +196,7 @@ public class DeplacementCollecte {
 
 						if (ai.print) {
 							System.out
-									.println(": 1) On n'arrive pas à la fin du chemin");
+									.println(": 1) On n'arrive pas Ã  la fin du chemin");
 							System.out.println("Collect: 1) senfuire2:"
 									+ ai.senfuire2 + "ai.senfuire:"
 									+ ai.senfuire);
@@ -205,7 +205,7 @@ public class DeplacementCollecte {
 
 						if (!ai.senfuire && !ai.senfuire2) {
 
-							// on calcule si notre case cible est changée
+							// on calcule si notre case cible est changï¿½e
 							if (!endPoints.contains(ai.nextMove.getLastTile())
 									&& !endPoints.isEmpty()) {
 								AiPath path = deplacementCommune
@@ -329,12 +329,12 @@ public class DeplacementCollecte {
 						}
 					}
 				}
-				// si on n'arrive pas à la case suivant
+				// si on n'arrive pas Ã  la case suivant
 				else {
 
 					if (ai.print) {
 						System.out
-								.println("Collect: 2) On n'arrive pas à la fin du chemin");
+								.println("Collect: 2) On n'arrive pas Ã  la fin du chemin");
 						System.out.println("Collect: 2) senfuire2:"
 								+ ai.senfuire2);
 					}
@@ -442,10 +442,10 @@ public class DeplacementCollecte {
 	}
 
 	/**
-	 * Cette méthode forme une liste des cases cibles que notre IA peut aller
+	 * Cette mÃ©thode forme une liste des cases cibles que notre IA peut aller
 	 * dans le mode collecte. Elle prend deux arguments, une matrice de type Int
 	 * et la zone du jeu. On prend aussi en compte les cases qui sont dans la
-	 * portée des bombes.
+	 * portï¿½e des bombes.
 	 * 
 	 * @param matrice
 	 *            La Matrice collecte
@@ -493,8 +493,8 @@ public class DeplacementCollecte {
 	}
 
 	/**
-	 * Cette méthode compare les cases cibles entre eux et retourne la case qui
-	 * a la valeur plus élevée. S’il y a plus d’une valeur élevée égales alors
+	 * Cette mÃ©thode compare les cases cibles entre eux et retourne la case qui
+	 * a la valeur plus ï¿½levï¿½e. Sï¿½il y a plus dï¿½une valeur ï¿½levï¿½e ï¿½gales alors
 	 * IA regarde au distance de ceux cases .Elle prend trois arguments une
 	 * matrice de type Int et deux listes des cases.
 	 * 
@@ -541,7 +541,7 @@ public class DeplacementCollecte {
 		}
 	}
 	/**
-	 * Cette méthode permet a s'enfuire apres le posage de bombe
+	 * Cette mÃ©thode permet a s'enfuire apres le posage de bombe
 	 * 
 	 * @throws StopRequestException
 	 */

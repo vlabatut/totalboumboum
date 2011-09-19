@@ -29,7 +29,7 @@ public class DeplacementAttaque {
 	}
 
 	/**
-	 * Cette méthode implémente l'algorithme d'attaque. Elle prend 3 arguments
+	 * Cette mÃ©thode implï¿½mente l'algorithme d'attaque. Elle prend 3 arguments
 	 * une matrice de type double, la zone du jeu et une action.
 	 * 
 	 * @param gameZone
@@ -101,7 +101,7 @@ public class DeplacementAttaque {
 					System.out.println("On est bloque" + e);
 			}
 
-			// si on ne peut pas aller a cette case, ça veut dire on est bloque
+			// si on ne peut pas aller a cette case, ï¿½a veut dire on est bloque
 			// Donc il faut detruire les murs
 			// Detruire
 			if (ai.nextMove == null && ai.senfuire == false && !blockage) {
@@ -255,7 +255,7 @@ public class DeplacementAttaque {
 																// OBLIGATOIRE
 										if (ai.print)
 											System.out
-													.println("Il n'y a pas du temps ï¿½ senfuire.");
+													.println("Il n'y a pas du temps Ã  senfuire.");
 										poserBombe2 = false;
 									}
 
@@ -314,7 +314,7 @@ public class DeplacementAttaque {
 						if (!ai.senfuire && !ai.senfuire2) {
 							ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-							// on calcule si notre case cible est changée
+							// on calcule si notre case cible est changï¿½e
 							if (!endPoints.contains(ai.nextMove.getLastTile())
 									&& !endPoints.isEmpty()) {
 								ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -451,7 +451,7 @@ public class DeplacementAttaque {
 					}
 				}
 
-				// si on n'arrive pas à la case suivant
+				// si on n'arrive pas Ã  la case suivant
 				else {
 					ai.checkInterruption(); // APPEL OBLIGATOIRE
 					if (ai.print) {
@@ -582,9 +582,9 @@ public class DeplacementAttaque {
 	}
 
 	/**
-	 * Cette méthode forme une liste des cases cibles que notre IA peut aller
+	 * Cette mÃ©thode forme une liste des cases cibles que notre IA peut aller
 	 * dans le mode attaque. Elle prend deux arguments une matrice de type
-	 * double et la zone du jeu. Notre IA peut se déplacer en traversant ces
+	 * double et la zone du jeu. Notre IA peut se dï¿½placer en traversant ces
 	 * cases.
 	 * 
 	 * @param matrice
@@ -621,8 +621,8 @@ public class DeplacementAttaque {
 	}
 
 	/**
-	 * Cette méthode compare les cases cibles entre eux et retourne la case qui
-	 * a la valeur plus élevée. S’il y a plus d’une valeur élevée égales alors
+	 * Cette mÃ©thode compare les cases cibles entre eux et retourne la case qui
+	 * a la valeur plus ï¿½levï¿½e. Sï¿½il y a plus dï¿½une valeur ï¿½levï¿½e ï¿½gales alors
 	 * IA regarde au distance de ceux cases. Elle prend trois arguments une
 	 * matrice de type double et deux listes des cases.
 	 * 
@@ -684,7 +684,7 @@ public class DeplacementAttaque {
 	}
 
 	/**
-	 * Cette méthode permet a s'enfuire apres le posage de bombe
+	 * Cette mÃ©thode permet a s'enfuire apres le posage de bombe
 	 * 
 	 * @throws StopRequestException
 	 */

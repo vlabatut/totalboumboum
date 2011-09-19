@@ -18,10 +18,10 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui dÃ©finit son comportement.
+ * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile Ã 
+ * dÃ©bugger, modifier, relire, comprendre, etc.
  * 
  * @version 4
  * 
@@ -41,7 +41,7 @@ public class DaneSatir extends ArtificialIntelligence
 	private int waitCount;
 
 	
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	@Override
 	public AiAction processAction() throws StopRequestException {	
 		// avant tout : test d'interruption

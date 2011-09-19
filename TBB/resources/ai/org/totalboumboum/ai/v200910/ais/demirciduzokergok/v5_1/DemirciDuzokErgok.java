@@ -23,12 +23,12 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 
 /**
- * >> ce texte est à remplacer par votre propre description de votre IA
+ * >> ce texte est Ã  remplacer par votre propre description de votre IA
  * 
- * classe principale de l'IA, qui définit son comportement.
- * n'hésitez pas à décomposer le traitement en plusieurs classes,
- * plus votre programme est modulaire et plus il sera facile à
- * débugger, modifier, relire, comprendre, etc.
+ * classe principale de l'IA, qui dÃ©finit son comportement.
+ * n'hÃ©sitez pas Ã  dÃ©composer le traitement en plusieurs classes,
+ * plus votre programme est modulaire et plus il sera facile Ã 
+ * dÃ©bugger, modifier, relire, comprendre, etc.
  */
 public class DemirciDuzokErgok extends ArtificialIntelligence
 { 
@@ -71,7 +71,7 @@ AiPath path_b;
 
 
  
- /* méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+ /* mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
  public AiAction processAction() throws StopRequestException
  { 
 	  checkInterruption(); //APPEL OBLIGATOIRE

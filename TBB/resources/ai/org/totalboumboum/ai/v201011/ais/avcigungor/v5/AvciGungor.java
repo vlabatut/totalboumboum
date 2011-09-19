@@ -59,7 +59,7 @@ public class AvciGungor extends ArtificialIntelligence {
 	private MatrixCostCalculator costCalculator;
 	private boolean arrived;
 
-	/** méthode appelée par le moteur du jeu pour obtenir une action de votre IA */
+	/** mÃ©thode appelÃ©e par le moteur du jeu pour obtenir une action de votre IA */
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption();
 

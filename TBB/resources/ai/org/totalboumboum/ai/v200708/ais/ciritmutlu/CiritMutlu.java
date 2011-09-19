@@ -44,7 +44,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 	
 	private static final long serialVersionUID = 1L;
 	
-	/** indicateur de première invocation (pour la compatibilité */
+	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
 	private boolean firstTime = true;
 
 	/**

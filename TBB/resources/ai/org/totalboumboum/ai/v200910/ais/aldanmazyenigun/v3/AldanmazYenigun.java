@@ -61,12 +61,12 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	
     //private AiTile targetPreviousTile;
 		
-	/** classe chargée de déterminer quelles cases sont sûres */
+	/** classe chargï¿½e de dï¿½terminer quelles cases sont sï¿½res */
 	private ZoneFormee zoneFormee = null;
 	
 	private boolean thereIsSafeTile = true;
 	
-	/** les coordonnées de notre hero*/
+	/** les coordonnÃ©es de notre hero*/
 	@SuppressWarnings("unused")
 	private double x;
 	
@@ -112,7 +112,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 		updateMatrix();
 				
 		if(!ownHero.hasEnded())
-		{	// on met à jour la position de l'ia dans la zone
+		{	// on met Ã  jour la position de l'ia dans la zone
 			//init();
 			
 			
@@ -134,7 +134,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 				else
 					moveDir = escapeManager.update();
 			}			
-			// sinon si on est en danger : on commence à fuir
+			// sinon si on est en danger : on commence Ã  fuir
 			else if(!isSafe(caseActuelle))
 			{	escapeManager = new AvoidController(this);
 				moveDir = escapeManager.update();
@@ -156,7 +156,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 				}
 			}
 						
-			// on met à jour la direction renvoyée au moteur du jeu
+			// on met Ã  jour la direction renvoyï¿½e au moteur du jeu
 			result = new AiAction(AiActionName.MOVE,moveDir);
 		}
 		
@@ -287,7 +287,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 				if(zoneFormee.isBonus(x,y))
 					result.add(tile);
 				
-				//ce sont pour les murs mais ça ne marche pas
+				//ce sont pour les murs mais ï¿½a ne marche pas
 				/*
 				else if(result.isEmpty()){
 					if(zoneFormee.isWall(x, y))

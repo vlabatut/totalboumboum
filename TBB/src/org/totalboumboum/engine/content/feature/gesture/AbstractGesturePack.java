@@ -50,7 +50,7 @@ public abstract class AbstractGesturePack<T extends AbstractGesture<?,?>>
 	
 	public T getGesture(GestureName name)
 	{	T result = gestures.get(name);
-		//NOTE créer le gesture s'il est manquant?
+		//NOTE crÃ©er le gesture s'il est manquant?
 		return result;
 	}
 

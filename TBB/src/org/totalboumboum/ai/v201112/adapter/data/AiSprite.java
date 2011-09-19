@@ -22,8 +22,8 @@ package org.totalboumboum.ai.v201112.adapter.data;
  */
 
 /**
- * cette interface permet de représenter les sprites manipulés par le jeu,
- * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
+ * cette interface permet de reprï¿½senter les sprites manipulï¿½s par le jeu,
+ * et un nombre restreint de leurs propriï¿½tï¿½s, rendues ainsi accessible Ã  l'IA.
  * 
  * @author Vincent Labatut
  *
@@ -34,8 +34,8 @@ public interface AiSprite
 	// ID				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie le numéro unique du sprite dans le jeu.<br/>
-	 * <b>Attention :</b> cette méthode n'est pas destinée à la programmation des IA 
+	 * renvoie le numï¿½ro unique du sprite dans le jeu.<br/>
+	 * <b>Attention :</b> cette mÃ©thode n'est pas destinï¿½e Ã  la programmation des IA 
 	 * 
 	 * @return	
 	 * 		l'id du sprite
@@ -46,16 +46,16 @@ public interface AiSprite
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie l'état dans lequel se trouve ce sprite
+	 * renvoie l'ï¿½tat dans lequel se trouve ce sprite
 	 * (ie: quelle action il est en train d'effectuer ou de subir)
 	 * 
 	 * @return	
-	 * 		l'état du sprite
+	 * 		l'ï¿½tat du sprite
 	 */
 	public AiState getState();
 	
 	/**
-	 * renvoie vrai si ce sprite a été éliminé du jeu
+	 * renvoie vrai si ce sprite a ï¿½tï¿½ ï¿½liminï¿½ du jeu
 	 * 
 	 * @return	
 	 * 		vrai si le sprite n'est plus en jeu
@@ -66,7 +66,7 @@ public interface AiSprite
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie la représentation de la case contenant ce sprite
+	 * renvoie la reprï¿½sentation de la case contenant ce sprite
 	 * 
 	 *  @return
 	 *  	la case contenant ce sprite
@@ -74,18 +74,18 @@ public interface AiSprite
 	public AiTile getTile();
 	
 	/** 
-	 * renvoie le numéro de la ligne contenant ce sprite 
+	 * renvoie le numï¿½ro de la ligne contenant ce sprite 
 	 * 
 	 * @return	
-	 * 		le numéro de la ligne du sprite
+	 * 		le numï¿½ro de la ligne du sprite
 	 */
 	public int getLine();
 
 	/** 
-	 * renvoie le numéro de la colonne contenant ce sprite
+	 * renvoie le numï¿½ro de la colonne contenant ce sprite
 	 * 
 	 * @return	
-	 * 		le numéro de la colonne du sprite
+	 * 		le numï¿½ro de la colonne du sprite
 	 */
 	public int getCol();
 	
@@ -101,10 +101,10 @@ public interface AiSprite
 	public double getPosX();
 	
 	/** 
-	 * renvoie l'ordonnée de ce sprite en pixels 
+	 * renvoie l'ordonnï¿½e de ce sprite en pixels 
 	 * 
 	 * @return	
-	 * 		l'ordonnée du sprite
+	 * 		l'ordonnï¿½e du sprite
 	 */
 	public double getPosY();
 	
@@ -120,11 +120,11 @@ public interface AiSprite
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la vitesse de déplacement courante du sprite exprimée en pixel/seconde.
-	 * si le sprite ne bouge pas, elle est de zéro.
+	 * renvoie la vitesse de dÃ©placement courante du sprite exprimï¿½e en pixel/seconde.
+	 * si le sprite ne bouge pas, elle est de zï¿½ro.
 	 * 
 	 * @return	
-	 * 		vitesse de déplacement du sprite en pixels/seconde
+	 * 		vitesse de dÃ©placement du sprite en pixels/seconde
 	 */
 	public double getCurrentSpeed();
 	
@@ -132,11 +132,11 @@ public interface AiSprite
 	// COLLISION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Teste si le sprite passé en paramètre est capable de traverser
+	 * Teste si le sprite passï¿½ en paramï¿½tre est capable de traverser
 	 * la case de ce sprite
 	 * 
 	 *  @param sprite
-	 *  	le sprite à tester
+	 *  	le sprite Ã  tester
 	 *  @return	
 	 *  	vrai si ce sprite le laisser passer par sa case 
 	 */
@@ -146,18 +146,18 @@ public interface AiSprite
 	// BURN				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Renvoie le temps que va mettre ce sprite à brûler s'il est touché
-	 * par du feu, exprimé en ms. Si ce sprite ne peut pas brûler, ce
-	 * temps est égal à -1.
+	 * Renvoie le temps que va mettre ce sprite Ã  brï¿½ler s'il est touchï¿½
+	 * par du feu, exprimï¿½ en ms. Si ce sprite ne peut pas brï¿½ler, ce
+	 * temps est ï¿½gal Ã  -1.
 	 * <b>Attention :</b> si ce sprite est une bombe, ce temps correspond
-	 * à la durée mise par la bombe pour disparaître, et non pas à la durée
-	 * de l'explosion. La durée de l'explosion correspond à la valeur
-	 * renvoyée par getBurningDuration pour le sprite de feu produit
-	 * par l'explosion de la bombe, ou aussi à la durée renvoyée par 
+	 * Ã  la durï¿½e mise par la bombe pour disparaï¿½tre, et non pas Ã  la durï¿½e
+	 * de l'explosion. La durï¿½e de l'explosion correspond Ã  la valeur
+	 * renvoyï¿½e par getBurningDuration pour le sprite de feu produit
+	 * par l'explosion de la bombe, ou aussi Ã  la durï¿½e renvoyï¿½e par 
 	 * getExplosionDuration pour la bombe.
 	 * 
 	 * @return	
-	 * 		le temps que ce sprite va mettre à brûler, en ms
+	 * 		le temps que ce sprite va mettre Ã  brï¿½ler, en ms
 	 */
 	public long getBurningDuration();
 }

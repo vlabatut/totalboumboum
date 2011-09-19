@@ -26,8 +26,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
 
 /**
- * Simule un bloc du jeu, c'est à dire généralement un mur
- * (pouvant être détruit ou pas). 
+ * Simule un bloc du jeu, c'est Ã  dire gï¿½nï¿½ralement un mur
+ * (pouvant ï¿½tre dÃ©truit ou pas). 
  * 
  * @author Vincent Labatut
  *
@@ -35,31 +35,31 @@ import org.totalboumboum.ai.v201112.adapter.data.AiStopType;
 final class AiSimBlock extends AiSimSprite implements AiBlock
 {
 	/**
-	 * crée une simulation du bloc passé en paramètre,
-	 * avec les propriétés passées en paramètres.
+	 * crÃ©e une simulation du bloc passï¿½ en paramï¿½tre,
+	 * avec les propriï¿½tï¿½s passï¿½es en paramï¿½tres.
 	 * 
 	 * @param id
-	 * 		numéro d'identification du bloc
+	 * 		numï¿½ro d'identification du bloc
 	 * @param tile
 	 * 		case contenant le bloc
 	 * @param posX
 	 * 		abscisse du bloc
 	 * @param posY
-	 * 		ordonnée du bloc
+	 * 		ordonnï¿½e du bloc
 	 * @param posZ
 	 * 		hauteur du bloc
 	 * @param state
-	 * 		état du bloc
+	 * 		ï¿½tat du bloc
 	 * @param burningDuration
-	 * 		durée de combustion du bloc
+	 * 		durï¿½e de combustion du bloc
 	 * @param currentSpeed
-	 * 		vitesse courante de déplacement du bloc (a priori il est immobile)
+	 * 		vitesse courante de dÃ©placement du bloc (a priori il est immobile)
 	 * @param destructible
-	 * 		sensibilité au feu
+	 * 		sensibilitï¿½ au feu
 	 * @param stopHeroes
-	 * 		capacité à bloquer les personnages
+	 * 		capacitï¿½ Ã  bloquer les personnages
 	 * @param stopFires
-	 * 		capacité à bloquer le feu
+	 * 		capacitï¿½ Ã  bloquer le feu
 	 */
 	protected AiSimBlock(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
@@ -72,11 +72,11 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	}	
 
 	/**
-	 * crée une simulation du bloc passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * crÃ©e une simulation du bloc passï¿½ en paramï¿½tre, et contenue dans 
+	 * la case passï¿½e en paramï¿½tre.
 	 * 
 	 * @param block
-	 * 		sprite à simuler
+	 * 		sprite Ã  simuler
 	 * @param tile
 	 * 		case contenant le sprite
 	 */
@@ -91,7 +91,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc peut être détruit par une bombe */
+	/** indique si ce bloc peut ï¿½tre dÃ©truit par une bombe */
 	private boolean destructible;
 
 	@Override
@@ -100,10 +100,10 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	}
 	
 	/**
-	 * modifie la destructibilité de ce mur
+	 * modifie la destructibilitï¿½ de ce mur
 	 * 
 	 * @param destructible
-	 * 		nouvelle valeur de l'indicateur de destructibilité du mur
+	 * 		nouvelle valeur de l'indicateur de destructibilitï¿½ du mur
 	 */
 	public void setDestructible(boolean destructible)
 	{	this.destructible = destructible;
@@ -129,10 +129,10 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 
 	@Override
 	public boolean isCrossableBy(AiSprite sprite)
-	{	// par défaut, on bloque
+	{	// par dÃ©faut, on bloque
 		boolean result = false;
 		
-		// si le sprite considéré est un personnage
+		// si le sprite considï¿½rï¿½ est un personnage
 		if(sprite instanceof AiSimHero)
 		{	AiSimHero hero = (AiSimHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
@@ -145,7 +145,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 				result = false;
 		}
 		
-		// si le sprite considéré est un feu
+		// si le sprite considï¿½rï¿½ est un feu
 		else if(sprite instanceof AiSimFire)
 		{	AiSimFire fire = (AiSimFire) sprite;
 			if(stopFires==AiStopType.NO_STOP)

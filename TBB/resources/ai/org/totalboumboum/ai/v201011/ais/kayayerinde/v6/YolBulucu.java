@@ -86,7 +86,7 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si le personnage est arriv� � destination */
+	/** indique si le personnage est arriv� à destination */
 	private boolean arrived;
 	/** la case de destination s�lectionn�e */
 	private AiTile tileDest;
@@ -97,7 +97,7 @@ public class YolBulucu
 	
 	/**
 	 * modifie la case de destination du personnage,
-	 * place les coordonn�es de destination au centre de cette case,
+	 * place les coordonnées de destination au centre de cette case,
 	 * et recalcule le chemin.
 	 * @throws LimitReachedException 
 	 */
@@ -112,8 +112,8 @@ public class YolBulucu
 	}
 
 	/**
-	 * modifie les coordonn�es de destination,
-	 * met � jour automatiquement la case correspondante,
+	 * modifie les coordonnées de destination,
+	 * met à jour automatiquement la case correspondante,
 	 * et recalcule le chemin.
 	 * @throws LimitReachedException 
 	 */
@@ -151,13 +151,13 @@ public class YolBulucu
 	}
 */
 	/**
-	 * d�termine si le personnage est arriv� aux coordonn�es de destination
+	 * d�termine si le personnage est arriv� aux coordonnées de destination
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
 		
 //		if(!arrived)
-		{	// on teste si le personnage est � peu pr�s situ� � la position de destination 
+		{	// on teste si le personnage est à peu près situ� à la position de destination 
 			AiHero ownHero = zone.getOwnHero();
 			double xCurrent = ownHero.getPosX();
 			double yCurrent = ownHero.getPosY();
@@ -182,7 +182,7 @@ public class YolBulucu
 	private double yPrev;	
 	
 	/**
-	 * met � jour la position pr�c�dente du personnage,
+	 * met à jour la position pr�c�dente du personnage,
 	 * exprim�e en pixels
 	 */
 	private void updatePrev() throws StopRequestException
@@ -196,14 +196,14 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////
 	// PATH			/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le chemin � suivre */
+	/** le chemin à suivre */
 	private AiPath path;
 	
 	/**
-	 * v�rifie que le personnage est bien sur le chemin pr�-calcul�,
+	 * v�rifie que le personnage est bien sur le chemin pr�-calculé,
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
-	 * est vide apr�s l'ex�cution de cette m�thode.
+	 * est vide apr�s l'ex�cution de cette méthode.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -217,7 +217,7 @@ public class YolBulucu
 	}
 	
 	/**
-	 * d�termine si le personnage a d�pass� la premi�re case du chemin
+	 * d�termine si le personnage a d�pass� la première case du chemin
 	 * en direction de la seconde case
 	 */
 /*	private boolean hasCrossed(AiTile tile) throws StopRequestException
@@ -251,7 +251,7 @@ public class YolBulucu
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
 	 * est toujours s�r et si aucun obstacle n'est apparu
-	 * depuis la derni�re it�ration
+	 * depuis la dernière it�ration
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -272,11 +272,11 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////
 	// A STAR					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe impl�mentant l'algorithme A* */
+	/** classe implémentant l'algorithme A* */
 	private org.totalboumboum.ai.v201011.adapter.path.astar.Astar astar;
-	/** classe impl�mentant la fonction heuristique */
+	/** classe implémentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe impl�mentant la fonction de co�t */
+	/** classe implémentant la fonction de co�t */
 	private CostCalculator costCalculator;
 
 	/////////////////////////////////////////////////////////////////
@@ -284,7 +284,7 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////	
 	/** 
 	 * calcule la prochonderne direction pour aller vers la destination 
-	 *(ou renvoie Direction.NONE si aucun d�placement n'est n�cessonderre)
+	 *(ou renvoie Direction.NONE si aucun déplacement n'est n�cessonderre)
 	 * @throws LimitReachedException 
 	 * */
 	public Direction update() throws StopRequestException, LimitReachedException
@@ -313,9 +313,9 @@ public class YolBulucu
 			}
 		}
 		
-		// mise � jour de la position pr�c�dente
+		// mise à jour de la position pr�c�dente
 		updatePrev();
-		// mise � jour de la sortie
+		// mise à jour de la sortie
 		updateOutput();
 		
 		if(verbose)
@@ -330,7 +330,7 @@ public class YolBulucu
 	// OUTPUT					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met � jour la sortie graphique de l'IA en fonction du
+	 * met à jour la sortie graphique de l'IA en fonction du
 	 * chemin courant
 	 */
 	private void updateOutput() throws StopRequestException

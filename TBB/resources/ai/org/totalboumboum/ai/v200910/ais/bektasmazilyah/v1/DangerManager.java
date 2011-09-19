@@ -25,7 +25,7 @@ public class DangerManager {
 	
 	private BektasMazilyah hero;
 	private AiZone zone;
-	private double matrix[][];//matrice contenant les valeurs de securité
+	private double matrix[][];//matrice contenant les valeurs de securitÃ©
 
 	private List<AiBomb> processedBombs;
 	public static double SAFE=Double.MAX_VALUE;
@@ -47,7 +47,7 @@ public class DangerManager {
 		return matrix;
 	}
 	
-	// mise à jour de la matrice de securite
+	// mise Ã  jour de la matrice de securite
 
 	@SuppressWarnings("unused")
 	private void updateMatrix() throws StopRequestException
@@ -55,7 +55,7 @@ public class DangerManager {
 
 		processedBombs.clear();
 		
-		// on initialise la matrice : toutes les cases sont sûres
+		// on initialise la matrice : toutes les cases sont sï¿½res
 		for(int line=0;line<zone.getHeight();line++)
 		{	hero.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
@@ -65,7 +65,7 @@ public class DangerManager {
 		}
 		
 		AiHero ownHero = zone.getOwnHero();
-		// si le personnage est sensible au feu, on tient compte des explosions en cours et à venir
+		// si le personnage est sensible au feu, on tient compte des explosions en cours et Ã  venir
 		if(!ownHero.hasThroughFires())
 		{	for(int line=0;line<zone.getHeight();line++)
 			{	hero.checkInterruption(); //APPEL OBLIGATOIRE
@@ -75,17 +75,17 @@ public class DangerManager {
 					Collection<AiFire> fires = tile.getFires();
 					Collection<AiBomb> bombs = tile.getBombs();
 					Collection<AiBlock> blocks = tile.getBlocks();
-					// s'il y a du feu : valeur zéro (il ne reste pas de temps avant l'explosion)
+					// s'il y a du feu : valeur zï¿½ro (il ne reste pas de temps avant l'explosion)
 					if(!fires.isEmpty())
 					{	matrix[line][col] = FIRE;				
 					}
-					// s'il y a un mur en train de brûler : pareil
+					// s'il y a un mur en train de brï¿½ler : pareil
 					else if(!blocks.isEmpty())
 					{	AiBlock block = blocks.iterator().next();
 						if(block.getState().getName()==AiStateName.BURNING)
 							matrix[line][col] = FIRE;
 					}
-					// s'il y a une bombe : pour sa portée, la valeur correspond au temps théorique restant avant son explosion
+					// s'il y a une bombe : pour sa portï¿½e, la valeur correspond au temps thï¿½orique restant avant son explosion
 					// (plus ce temps est court et plus la bombe est dangereuse)
 					else if(bombs.size()>0)
 					{	AiBomb bomb = bombs.iterator().next();
@@ -102,7 +102,7 @@ public class DangerManager {
 		if(!bombs.contains(bomb))
 		{	bombs.add(bomb);
 		
-			// on récupère le souffle
+			// on rï¿½cupï¿½re le souffle
 			List<AiTile> tempBlast = bomb.getBlast();
 			blast.addAll(tempBlast);
 			
@@ -124,29 +124,29 @@ public class DangerManager {
 	{	hero.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		if(!processedBombs.contains(bomb))
-		{	// récupération des cases à portée
+		{	// rï¿½cupï¿½ration des cases Ã  portï¿½e
 			List<AiTile> blast = new ArrayList<AiTile>();
 			List<AiBomb> bombs = new ArrayList<AiBomb>();
 			getBlast(bomb,blast,bombs);
 			processedBombs.addAll(bombs);
 			
-			// on détermine quelle est la bombe la plus dangereuse (temps le plus court)
+			// on dï¿½termine quelle est la bombe la plus dangereuse (temps le plus court)
 			double value = SAFE;
 			for(AiBomb b: bombs)
 			{	hero.checkInterruption(); //APPEL OBLIGATOIRE
-				// calcul du temps restant théoriquement avant l'explosion
+				// calcul du temps restant thï¿½oriquement avant l'explosion
 				double time = b.getNormalDuration() - b.getTime();
-				// màj de value
+				// mï¿½j de value
 				if(time<value)
 					value = time;
 			}
 			
-			// on met à jour toutes les cases situées à portée
+			// on met Ã  jour toutes les cases situï¿½es Ã  portï¿½e
 			for(AiTile t: blast)
 			{	hero.checkInterruption(); //APPEL OBLIGATOIRE
 				int l = t.getLine();
 				int c = t.getCol();
-				// on modifie seulement si la case n'a pas déjà un niveau de sécurité inférieur
+				// on modifie seulement si la case n'a pas dï¿½jï¿½ un niveau de sÃ©curitÃ© infï¿½rieur
 				if(matrix[l][c]>value)
 					matrix[l][c] = value;						
 			}

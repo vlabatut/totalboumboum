@@ -25,16 +25,16 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 
 /**
- * Classe étendant la classe abstraite CostCalculator grâce à une matrice de coûts.
- * Ici, le coût pour passer d'une case à l'autre dépend uniquement de la case
- * de destination. Ce coût est égal à la valeur associée à la case dans la matrice
- * de cout fournie. Cette matrice doit faire la même taille que la zone de jeu.
- * En d'autres termes, le coût d'un déplacement dépend ici uniquement de la case de destination.
+ * Classe ï¿½tendant la classe abstraite CostCalculator grï¿½ce Ã  une matrice de coï¿½ts.
+ * Ici, le coï¿½t pour passer d'une case Ã  l'autre dï¿½pend uniquement de la case
+ * de destination. Ce coï¿½t est ï¿½gal Ã  la valeur associï¿½e Ã  la case dans la matrice
+ * de cout fournie. Cette matrice doit faire la mÃªme taille que la zone de jeu.
+ * En d'autres termes, le coï¿½t d'un dÃ©placement dï¿½pend ici uniquement de la case de destination.
  * </br>
- * Cette classe est utile si on veut calculer des coûts plus fins qu'avec BasicCostCalculator,
- * qui considère seulement la distance. Par exemple, on peut donner un coup plus important
- * à l'action de passer dans une case qui est à portée d'une bombe susceptible d'exploser, ou bien 
- * un coût infini (avec Double.POSITIVE_INFINITY) à l'action de passer dans une case qu'on veut interdire
+ * Cette classe est utile si on veut calculer des coï¿½ts plus fins qu'avec BasicCostCalculator,
+ * qui considï¿½re seulement la distance. Par exemple, on peut donner un coup plus important
+ * Ã  l'action de passer dans une case qui est Ã  portï¿½e d'une bombe susceptible d'exploser, ou bien 
+ * un coï¿½t infini (avec Double.POSITIVE_INFINITY) Ã  l'action de passer dans une case qu'on veut interdire
  * au personnage parce qu'elle est trop dangereuse. 
  * 
  * @author Vincent Labatut
@@ -43,12 +43,12 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 public class MatrixCostCalculator extends CostCalculator
 {
 	/**
-	 * initialise la fonction de coût. On doit obligatoirement
+	 * initialise la fonction de coï¿½t. On doit obligatoirement
 	 * fournir la matrice de cout correspondante.
-	 * <b>ATTENTION :</b> cette matrice doit avoir la même taille que la zone de jeu.
+	 * <b>ATTENTION :</b> cette matrice doit avoir la mÃªme taille que la zone de jeu.
 	 * 
 	 * @param costMatrix	
-	 * 		la matrice de coût
+	 * 		la matrice de coï¿½t
 	 */
 	public MatrixCostCalculator(double costMatrix[][]) throws StopRequestException
 	{	setCostMatrix(costMatrix);			
@@ -57,29 +57,29 @@ public class MatrixCostCalculator extends CostCalculator
 	/////////////////////////////////////////////////////////////////
 	// COST MATRIX		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice utilisée pour déterminer le coût d'une action */
+	/** matrice utilisÃ©e pour dï¿½terminer le coï¿½t d'une action */
 	private double costMatrix[][];
 	
 	/**
-	 * initialise la matrice de coût. 
-	 * <b>ATTENTION :</b>cette matrice doit avoir la même taille que la zone de jeu.
+	 * initialise la matrice de coï¿½t. 
+	 * <b>ATTENTION :</b>cette matrice doit avoir la mÃªme taille que la zone de jeu.
 	 * 
 	 * @param costMatrix	
-	 * 		la matrice de coût
+	 * 		la matrice de coï¿½t
 	 */
 	public void setCostMatrix(double costMatrix[][])
 	{	this.costMatrix = costMatrix;		
 	}
 	
 	/**
-	 * met à jour un coût dans la matrice
+	 * met Ã  jour un coï¿½t dans la matrice
 	 * 
 	 * @param line	
-	 * 		ligne de la case à mettre à jour
+	 * 		ligne de la case Ã  mettre Ã  jour
 	 * @param col	
-	 * 		colonne de la case à mettre à jour
+	 * 		colonne de la case Ã  mettre Ã  jour
 	 * @param cost	
-	 * 		nouveau coût à affecter
+	 * 		nouveau coï¿½t Ã  affecter
 	 */
 	public void setCost(int line, int col, double cost) throws StopRequestException
 	{	costMatrix[line][col] = cost;
@@ -89,18 +89,18 @@ public class MatrixCostCalculator extends CostCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * La case de départ n'est pas considérée, on renvoie seulement la valeur
-	 * correspondant à la case d'arrivée dans la matrice de coût.
-	 * <b>ATTENTION :</b> si la matrice de coût est trop petite, la valeur maximale
-	 * possible est renvoyée (Double.POSITIVE_INFINITY), et un message 
-	 * d'avertissement est affiché dans la sortie standard d'erreur.
+	 * La case de dï¿½part n'est pas considï¿½rï¿½e, on renvoie seulement la valeur
+	 * correspondant Ã  la case d'arrivï¿½e dans la matrice de coï¿½t.
+	 * <b>ATTENTION :</b> si la matrice de coï¿½t est trop petite, la valeur maximale
+	 * possible est renvoyï¿½e (Double.POSITIVE_INFINITY), et un message 
+	 * d'avertissement est affichï¿½ dans la sortie standard d'erreur.
 	 * 
 	 * @param start	
-	 * 		la case de départ
+	 * 		la case de dï¿½part
 	 * @param end	
-	 * 		la case d'arrivée
+	 * 		la case d'arrivï¿½e
 	 * @return 
-	 * 		le coût correspondant à la case d'arrivée dans la matrice de coût
+	 * 		le coï¿½t correspondant Ã  la case d'arrivï¿½e dans la matrice de coï¿½t
 	 */ 
 	@Override
 	public double processCost(AiTile start, AiTile end) throws StopRequestException

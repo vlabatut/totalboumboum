@@ -94,18 +94,18 @@ public class BonusManager
 	
 /////////////////////////////////////////////////////////////////////////////////////////
 //L'ALGORITHME ASTAR POUR CALCULER LE COUTS DES CHEMINS
-	/** classe implémentant l'algorithme A* */
+	/** classe implÃ©mentant l'algorithme A* */
 	private Astar astar;
-	/** classe implémentant la fonction heuristique */
+	/** classe implÃ©mentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de coût */
+	/** classe implÃ©mentant la fonction de coï¿½t */
 	private MatrixCostCalculator costCalculator;
 	
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// calcul de la matrice de coût : on prend l'opposé du niveau de sûreté
-		// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
+		// calcul de la matrice de coï¿½t : on prend l'opposï¿½ du niveau de sï¿½retï¿½
+		// i.e. : plus le temps avant l'explosion est long, plus le coï¿½t est faible 
 		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
 		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -151,7 +151,7 @@ public class BonusManager
 		tileDest = path.getLastTile();
 	}
 	
-	//si on est sur le chemin calculé
+	//si on est sur le chemin calculÃ©
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption();
 		
@@ -181,7 +181,7 @@ public class BonusManager
 		updateCostCalculator();
 		Direction result = Direction.NONE;
 		if(!hasArrived())
-		{	// on verifie si on est arrivé
+		{	// on verifie si on est arrivï¿½
 			checkIsOnPath();
 			// si le chemin n'est pas vide si il est valide on reprend
 			if(path.isEmpty() || !checkPathValidity())

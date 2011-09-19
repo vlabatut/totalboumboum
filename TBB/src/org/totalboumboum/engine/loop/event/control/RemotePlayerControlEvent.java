@@ -66,6 +66,6 @@ public class RemotePlayerControlEvent extends StreamedEvent
 	}
 }
 
-//TODO pb: le numéro de controle est perdu lors de la synchro, car
+//TODO pb: le numï¿½ro de controle est perdu lors de la synchro, car
 //le serveur n'a pas connaissance de la config locale...
-//faut améliorer la synchro coté client de manière à ne pas écraser les controles
+//faut amï¿½liorer la synchro cotï¿½ client de maniï¿½re Ã  ne pas ï¿½craser les controles

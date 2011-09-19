@@ -47,7 +47,7 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
- * représente une case du jeu, avec tous les sprites qu'elle contient.
+ * reprï¿½sente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
  *
@@ -55,12 +55,12 @@ import org.totalboumboum.game.round.RoundVariables;
 final class AiDataTile extends AiTile
 {	
 	/**
-	 * construit une représentation de la case passée en paramètre
+	 * construit une reprï¿½sentation de la case passï¿½e en paramï¿½tre
 	 * 
 	 * @param tile
-	 * 		case représentée
+	 * 		case reprï¿½sentï¿½e
 	 * @param zone
-	 * 		zone contenant la représentation
+	 * 		zone contenant la reprï¿½sentation
 	 */
 	protected AiDataTile(Tile tile, AiDataZone zone)
 	{	this.zone = zone;
@@ -75,7 +75,7 @@ final class AiDataTile extends AiTile
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour cette case et son contenu
+	 * met Ã  jour cette case et son contenu
 	 */
 	protected void update(long elapsedTime)
 	{	updateSprites(elapsedTime);		
@@ -84,7 +84,7 @@ final class AiDataTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** représentation de la zone à laquelle cette case appartient */
+	/** reprï¿½sentation de la zone Ã  laquelle cette case appartient */
 	private AiDataZone zone;
 	
 	@Override
@@ -95,14 +95,14 @@ final class AiDataTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// ENGINE TILE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case du jeu que cette classe représente */
+	/** case du jeu que cette classe reprï¿½sente */
 	private Tile tile;
 	
 	/**
-	 * renvoie la case réelle représentée par cet objet
+	 * renvoie la case rï¿½elle reprï¿½sentï¿½e par cet objet
 	 * 
 	 * @return
-	 * 		la case réelle représentée par cet objet
+	 * 		la case rï¿½elle reprï¿½sentï¿½e par cet objet
 	 */
 	protected Tile getTile()
 	{	return tile;
@@ -112,7 +112,7 @@ final class AiDataTile extends AiTile
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * initialise les numéros de ligne et colonne de cette case 
+	 * initialise les numï¿½ros de ligne et colonne de cette case 
 	 */
 	private void initTileLocation()
 	{	line = tile.getLine();
@@ -133,29 +133,29 @@ final class AiDataTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste à usage interne des blocks éventuellement contenus dans cette case */
+	/** liste Ã  usage interne des blocks ï¿½ventuellement contenus dans cette case */
 	private final List<AiDataBlock> internalBlocks = new ArrayList<AiDataBlock>();
-	/** liste à usage externe des blocks éventuellement contenus dans cette case */
+	/** liste Ã  usage externe des blocks ï¿½ventuellement contenus dans cette case */
 	private final List<AiBlock> externalBlocks = new ArrayList<AiBlock>();
-	/** liste à usage interne des bombes éventuellement contenues dans cette case */
+	/** liste Ã  usage interne des bombes ï¿½ventuellement contenues dans cette case */
 	private final List<AiDataBomb> internalBombs = new ArrayList<AiDataBomb>();
-	/** liste à usage externe des bombes éventuellement contenues dans cette case */
+	/** liste Ã  usage externe des bombes ï¿½ventuellement contenues dans cette case */
 	private final List<AiBomb> externalBombs = new ArrayList<AiBomb>();
-	/** liste à usage interne des feux éventuellement contenus dans cette case */
+	/** liste Ã  usage interne des feux ï¿½ventuellement contenus dans cette case */
 	private final List<AiDataFire> internalFires = new ArrayList<AiDataFire>();
-	/** liste à usage externe des feux éventuellement contenus dans cette case */
+	/** liste Ã  usage externe des feux ï¿½ventuellement contenus dans cette case */
 	private final List<AiFire> externalFires = new ArrayList<AiFire>();
-	/** liste à usage interne des sols éventuellement contenus dans cette case */
+	/** liste Ã  usage interne des sols ï¿½ventuellement contenus dans cette case */
 	private final List<AiDataFloor> internalFloors = new ArrayList<AiDataFloor>();
-	/** liste à usage externe des sols éventuellement contenus dans cette case */
+	/** liste Ã  usage externe des sols ï¿½ventuellement contenus dans cette case */
 	private final List<AiFloor> externalFloors = new ArrayList<AiFloor>();
-	/** liste à usage interne des personnages éventuellement contenus dans cette case */
+	/** liste Ã  usage interne des personnages ï¿½ventuellement contenus dans cette case */
 	private final List<AiDataHero> internalHeroes = new ArrayList<AiDataHero>();
-	/** liste à usage externe des personnages éventuellement contenus dans cette case */
+	/** liste Ã  usage externe des personnages ï¿½ventuellement contenus dans cette case */
 	private final List<AiHero> externalHeroes = new ArrayList<AiHero>();
-	/** liste à usage interne des items éventuellement contenus dans cette case */
+	/** liste Ã  usage interne des items ï¿½ventuellement contenus dans cette case */
 	private final List<AiDataItem> internalItems = new ArrayList<AiDataItem>();
-	/** liste à usage externe des items éventuellement contenus dans cette case */
+	/** liste Ã  usage externe des items ï¿½ventuellement contenus dans cette case */
 	private final List<AiItem> externalItems = new ArrayList<AiItem>();
 
 	@Override
@@ -189,10 +189,10 @@ final class AiDataTile extends AiTile
 	}
 	
 	/** 
-	 * met à jour les représentations des sprites contenus dans cette case
+	 * met Ã  jour les reprï¿½sentations des sprites contenus dans cette case
 	 * 
 	 * @param elapsedTime
-	 * 		temps écoulé depuis la dernière mise à jour
+	 * 		temps ï¿½coulï¿½ depuis la derniÃ¨re mise Ã  jour
 	 */
 	private void updateSprites(long elapsedTime)
 	{	// block
@@ -359,15 +359,15 @@ final class AiDataTile extends AiTile
 	}
 
 	/**
-	 * fonction auxiliaire utilisée pour déterminer si cette
-	 * case est traversable par le sprite passé en paramètre.
-	 * (cette fonction réalise le traitement relativement à 
-	 * la liste de sprite passée en paramètre)
+	 * fonction auxiliaire utilisÃ©e pour dï¿½terminer si cette
+	 * case est traversable par le sprite passï¿½ en paramï¿½tre.
+	 * (cette fonction rï¿½alise le traitement relativement Ã  
+	 * la liste de sprite passï¿½e en paramï¿½tre)
 	 * 
 	 * @param sprite
 	 * 		le sprite qui veut traverser cette case
 	 * @param list
-	 * 		les sprites de cette case à tester
+	 * 		les sprites de cette case Ã  tester
 	 * @return	
 	 * 		vrai si le sprite peut traverser tous les sprites de la liste
 	 */
@@ -391,7 +391,7 @@ final class AiDataTile extends AiTile
 	
 	/**
 	 * initialise une fois pour toutes les voisins de la case,
-	 * pour ne pas avoir à les recalculer à chaque appel de la méthode
+	 * pour ne pas avoir Ã  les recalculer Ã  chaque appel de la mÃ©thode
 	 * getNeighbors.
 	 */
 	protected void initNeighbors()
@@ -440,7 +440,7 @@ final class AiDataTile extends AiTile
 	}
 
 	/**
-	 * termine les simulations de sprites passées en paramètres
+	 * termine les simulations de sprites passï¿½es en paramï¿½tres
 	 * 
 	 * @param <T>
 	 * 		type de simulation

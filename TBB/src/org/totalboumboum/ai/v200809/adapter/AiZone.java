@@ -44,31 +44,31 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 
 /**
- * représente la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale des percepts auxquels l'IA a accès.
+ * reprï¿½sente la zone de jeu et tous ces constituants : cases et sprites.
+ * Il s'agit de la classe principale des percepts auxquels l'IA a accï¿½s.
  * <p>
- * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
- * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
- * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
- * du jeu. De la même façon, les cases (AiTile) restent les mêmes, ainsi que les sprites et
- * les autres objets. Si l'IA a besoin d'une trace des états précédents du jeu, son
- * concepteur doit se charger de l'implémenter lui-même.
+ * A chaque fois que l'IA est sollicitï¿½e par le jeu pour connaï¿½tre l'action
+ * qu'elle veut effectuer, cette reprï¿½sentation est mise Ã  jour. L'IA ne reï¿½oit
+ * pas une nouvelle AiZone : l'AiZone existante est modifiï¿½e en fonction de l'ï¿½volution
+ * du jeu. De la mÃªme faï¿½on, les cases (AiTile) restent les mÃªmes, ainsi que les sprites et
+ * les autres objets. Si l'IA a besoin d'une trace des Ã©tats prï¿½cï¿½dents du jeu, son
+ * concepteur doit se charger de l'implï¿½menter lui-mÃªme.
  * 
  * @author Vincent Labatut
  *
  */
 
 public class AiZone
-{	/** niveau représenté par cette classe */
+{	/** niveau reprï¿½sentï¿½ par cette classe */
 	private Level level;
-	/** joueur contrôlé par l'IA */
+	/** joueur contrï¿½lï¿½ par l'IA */
 	private AbstractPlayer player;
 	
 	/**
-	 * construit une représentation du niveau passé en paramètre,
-	 * du point de vue du joueur passé en paramètre.
-	 * @param level	niveau à représenter
-	 * @param player	joueur dont le point de vue est à adopter
+	 * construit une reprï¿½sentation du niveau passï¿½ en paramï¿½tre,
+	 * du point de vue du joueur passï¿½ en paramï¿½tre.
+	 * @param level	niveau Ã  reprï¿½senter
+	 * @param player	joueur dont le point de vue est Ã  adopter
 	 */
 	AiZone(Level level, AbstractPlayer player)
 	{	this.level = level;
@@ -79,7 +79,7 @@ public class AiZone
 	}
 	
 	/**
-	 * met à jour cette représentation ainsi que tous ses constituants.
+	 * met Ã  jour cette reprï¿½sentation ainsi que tous ses constituants.
 	 */
 	void update(long elapsedTime)
 	{	updateTime(elapsedTime);
@@ -87,7 +87,7 @@ public class AiZone
 	}
 	
 	/**
-	 * termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
+	 * termine proprement cette reprï¿½sentation (une fois que l'IA n'en a plus besoin).
 	 */
 	void finish()
 	{	// matrix
@@ -124,19 +124,19 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis la mise à jour précédente */
+	/** temps ï¿½coulï¿½ depuis la mise Ã  jour prï¿½cï¿½dente */
 	private long elapsedTime = 0;
 	
 	/**
-	 * renvoie le temps écoulé depuis la mise à jour précédente
-	 * @return	le temps écoulé exprimé en millisecondes
+	 * renvoie le temps ï¿½coulï¿½ depuis la mise Ã  jour prï¿½cï¿½dente
+	 * @return	le temps ï¿½coulï¿½ exprimï¿½ en millisecondes
 	 */
 	public long getElapsedTime()
 	{	return elapsedTime;		
 	}
 	
 	/**
-	 * met à jour le temps écoulé depuis la dernière mise à jour
+	 * met Ã  jour le temps ï¿½coulï¿½ depuis la derniÃ¨re mise Ã  jour
 	 * @param elapsedTime
 	 */
 	private void updateTime(long elapsedTime)
@@ -146,15 +146,15 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice représentant la zone et tous les sprites qu'elle contient */
+	/** matrice reprï¿½sentant la zone et tous les sprites qu'elle contient */
 	private AiTile[][] matrix;
-	/** hauteur totale de la zone de jeu exprimée en cases (ie: nombre de lignes) */
+	/** hauteur totale de la zone de jeu exprimï¿½e en cases (ie: nombre de lignes) */
 	private int height;
-	/** largeur totale de la zone de jeu exprimée en cases (ie: nombre de colonnes) */
+	/** largeur totale de la zone de jeu exprimï¿½e en cases (ie: nombre de colonnes) */
 	private int width;
 	
 	/** 
-	 * initialise cette représentation de la zone en fonction du niveau passé en paramètre
+	 * initialise cette reprï¿½sentation de la zone en fonction du niveau passï¿½ en paramï¿½tre
 	 */
 	private void initMatrix()
 	{	Tile[][] m = level.getMatrix();
@@ -171,21 +171,21 @@ public class AiZone
 	}
 	
 	/**
-	 * met à jour la matrice en fonction de l'évolution du jeu
+	 * met Ã  jour la matrice en fonction de l'ï¿½volution du jeu
 	 */
 	private void updateMatrix()
-	{	// démarque tous les sprites
+	{	// dï¿½marque tous les sprites
 		uncheckAll(blocks);
 		uncheckAll(bombs);
 		uncheckAll(fires);
 		uncheckAll(floors);
 		uncheckAll(heroes);
 		uncheckAll(items);
-		// met à jour chaque case et sprite 
+		// met Ã  jour chaque case et sprite 
 		for(int line=0;line<height;line++)
 			for(int col=0;col<width;col++)
 				matrix[line][col].update();
-		// supprime les sprites non-marqués
+		// supprime les sprites non-marquï¿½s
 		removeUnchecked(blocks);
 		removeUnchecked(bombs);
 		removeUnchecked(fires);
@@ -197,8 +197,8 @@ public class AiZone
 	}
 	
 	/** 
-	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'écran)
-	 *  de la zone de jeu exprimée en cases (ie: nombre de lignes)
+	 * renvoie la hauteur totale (y compris les ï¿½ventuelles cases situï¿½es hors de l'ï¿½cran)
+	 *  de la zone de jeu exprimï¿½e en cases (ie: nombre de lignes)
 	 *  
 	 *  @return	hauteur de la zone
 	 */
@@ -207,8 +207,8 @@ public class AiZone
 	}
 	
 	/** 
-	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'écran)
-	 *  de la zone de jeu exprimée en cases (ie: nombre de colonnes)
+	 * renvoie la largeur totale (y compris les ï¿½ventuelles cases situï¿½es hors de l'ï¿½cran)
+	 *  de la zone de jeu exprimï¿½e en cases (ie: nombre de colonnes)
 	 *  
 	 *  @return	largeur de la zone
 	 */
@@ -217,30 +217,30 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la case située dans la zone à la position passée en paramètre.
+	 * renvoie la case situï¿½e dans la zone Ã  la position passï¿½e en paramï¿½tre.
 	 *   
-	 *  @param	line	numéro de la ligne contenant la case à renvoyer
-	 *  @param	col	numéro de la colonne contenant la case à renvoyer
-	 *  @return	case située aux coordonnées spécifiées en paramètres
+	 *  @param	line	numï¿½ro de la ligne contenant la case Ã  renvoyer
+	 *  @param	col	numï¿½ro de la colonne contenant la case Ã  renvoyer
+	 *  @return	case situï¿½e aux coordonnÃ©es spï¿½cifiï¿½es en paramï¿½tres
 	 */
 	public AiTile getTile(int line, int col)
 	{	return matrix[line][col];
 	}
 	
 	/**
-	 * renvoie le voisin de la case passée en paramètre, situé dans la direction
-	 * passée en paramètre.
+	 * renvoie le voisin de la case passï¿½e en paramï¿½tre, situï¿½ dans la direction
+	 * passï¿½e en paramï¿½tre.
 	 * <p>
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case située au bord du niveau est une case située sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
-	 * à la position (ligne,0), le voisin de gauche est la case située à la position
-	 * (ligne,width-1). Même chose pour les bordures haut et bas.
+	 * d'une case situï¿½e au bord du niveau est une case situï¿½e sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case situï¿½e
+	 * Ã  la position (ligne,0), le voisin de gauche est la case situï¿½e Ã  la position
+	 * (ligne,width-1). mÃªme chose pour les bordures haut et bas.
 	 * 
 	 * @param line	ligne de la case dont on veut le voisin
 	 * @param col	colonne de la case dont on veut le voisin
 	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de la case passée en paramètre et situé dans la direction indiquée
+	 * @return	le voisin de la case passï¿½e en paramï¿½tre et situï¿½ dans la direction indiquï¿½e
 	 */
 	public AiTile getNeighborTile(AiTile tile, Direction direction)
 	{	AiTile result = null;
@@ -267,17 +267,17 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la liste des voisins de la case passée en paramètre.
-	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.
+	 * renvoie la liste des voisins de la case passï¿½e en paramï¿½tre.
+	 * Il s'agit des voisins directs situï¿½s en haut, Ã  gauche, en bas et Ã  droite.
 	 * <p>
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case située au bord du niveau est une case située sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
-	 * à la position (ligne,0), le voisin de gauche est la case située à la position
-	 * (ligne,width-1). Même chose pour les bordures haut et bas.
+	 * d'une case situï¿½e au bord du niveau est une case situï¿½e sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case situï¿½e
+	 * Ã  la position (ligne,0), le voisin de gauche est la case situï¿½e Ã  la position
+	 * (ligne,width-1). mÃªme chose pour les bordures haut et bas.
 	 * 
 	 * @param tile	la case dont on veut les voisins
-	 * @return	la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
+	 * @return	la liste des voisins situï¿½s en haut, Ã  gauche, en bas et Ã  droite de la case passï¿½e en paramï¿½tre
 	 */
 	public Collection<AiTile> getNeighborTiles(AiTile tile)
 	{	Collection<AiTile> result = new ArrayList<AiTile>();
@@ -293,26 +293,26 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la direction de la case target relativement à la case source.
-	 * Par exemple, la case target de coordonnées (5,5) est à droite de
-	 * la case source de coordonnées (5,6).
+	 * renvoie la direction de la case target relativement Ã  la case source.
+	 * Par exemple, la case target de coordonnÃ©es (5,5) est Ã  droite de
+	 * la case source de coordonnÃ©es (5,6).
 	 * <p>
-	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
-	 * il faut se déplacer pour aller de source à target.
+	 * Cette fonction peut ï¿½tre utile quand on veut savoir dans quelle direction
+	 * il faut se dï¿½placer pour aller de source Ã  target.
 	 * <p>
-	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
-	 * il est possible que cette méthode renvoie une direction composite,
-	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Référez-vous à 
+	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un cotï¿½ commun),
+	 * il est possible que cette mÃ©thode renvoie une direction composite,
+	 * c'est Ã  dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Rï¿½fï¿½rez-vous Ã  
 	 * la classe Direction pour plus d'informations sur ces valeurs. 
 	 * <p>
 	 * ATTENTION 2 : comme les niveaux sont circulaires, il y a toujours deux directions possibles.
-	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
-	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
-	 * RIGHT, car LEFT permet également d'atteindre la case, mais en parcourant un chemin plus long. 
+	 * Cette mÃ©thode renvoie la direction du plus court chemin (sans considï¿½rer les ï¿½ventuels obstacles).
+	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le rï¿½sultat sera
+	 * RIGHT, car LEFT permet ï¿½galement d'atteindre la case, mais en parcourant un chemin plus long. 
 	 * 
-	 * @param source	case de référence
+	 * @param source	case de rï¿½fï¿½rence
 	 * @param target	case dont on veut connaitre la direction
-	 * @return	la direction de target par rapport à source
+	 * @return	la direction de target par rapport Ã  source
 	 */
 	public Direction getDirection(AiTile source, AiTile target)
 	{	// differences
@@ -354,10 +354,10 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des blocks contenues dans cette zone
-	 * (la liste peut être vide). 
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
+	 * (la liste peut ï¿½tre vide). 
+	 * Cette instance de liste change Ã  chaque appel de l'IA. 
+	 * Il ne faut donc pas rï¿½utiliser la mÃªme liste, mais redemander la nouvelle
+	 * liste en utilisant cette mÃ©thode.
 	 * 
 	 * @return	liste de tous les blocs contenus dans cette zone
 	 */
@@ -367,8 +367,8 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du bloc passé en paramètre.
-	 * @param block	le bloc dont on veut la représentation
+	 * renvoie la reprï¿½sentation du bloc passï¿½ en paramï¿½tre.
+	 * @param block	le bloc dont on veut la reprï¿½sentation
 	 * @return	le AiBlock correspondant
 	 */
 	AiBlock getBlock(Block block)
@@ -377,9 +377,9 @@ public class AiZone
 	
 	/**
 	 * ajoute un bloc dans la liste de blocs de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param block	le bloc à rajouter à la liste
+	 * @param block	le bloc Ã  rajouter Ã  la liste
 	 */
 	void addBlock(AiBlock block)
 	{	blocks.put(block.getSprite(),block);	
@@ -387,10 +387,10 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des bombes contenues dans cette zone 
-	 * (la liste peut être vide)
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
+	 * (la liste peut ï¿½tre vide)
+	 * Cette instance de liste change Ã  chaque appel de l'IA. 
+	 * Il ne faut donc pas rï¿½utiliser la mÃªme liste, mais redemander la nouvelle
+	 * liste en utilisant cette mÃ©thode.
 	 * 
 	 * @return	liste de toutes les bombes contenues dans cette zone
 	 */
@@ -400,8 +400,8 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation de la bombe passée en paramètre.
-	 * @param bomb	la bombz dont on veut la représentation
+	 * renvoie la reprï¿½sentation de la bombe passï¿½e en paramï¿½tre.
+	 * @param bomb	la bombz dont on veut la reprï¿½sentation
 	 * @return	le AiBomb correspondant
 	 */
 	AiBomb getBomb(Bomb bomb)
@@ -410,9 +410,9 @@ public class AiZone
 	
 	/**
 	 * ajoute une bombe dans la liste de bombes de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param bomb	la bombe à rajouter à la liste
+	 * @param bomb	la bombe Ã  rajouter Ã  la liste
 	 */
 	void addBomb(AiBomb bomb)
 	{	bombs.put(bomb.getSprite(),bomb);	
@@ -420,10 +420,10 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des feux contenus dans cette zone 
-	 * (la liste peut être vide)
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
+	 * (la liste peut ï¿½tre vide)
+	 * Cette instance de liste change Ã  chaque appel de l'IA. 
+	 * Il ne faut donc pas rï¿½utiliser la mÃªme liste, mais redemander la nouvelle
+	 * liste en utilisant cette mÃ©thode.
 	 * 
 	 * @return	liste de tous les feux contenus dans cette zone
 	 */
@@ -433,8 +433,8 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du feu passé en paramètre.
-	 * @param fire	le feu dont on veut la représentation
+	 * renvoie la reprï¿½sentation du feu passï¿½ en paramï¿½tre.
+	 * @param fire	le feu dont on veut la reprï¿½sentation
 	 * @return	le AiFire correspondant
 	 */
 	AiFire getFire(Fire fire)
@@ -443,9 +443,9 @@ public class AiZone
 	
 	/**
 	 * ajoute un feu dans la liste de feux de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param fire	le feu à rajouter à la liste
+	 * @param fire	le feu Ã  rajouter Ã  la liste
 	 */
 	void addFire(AiFire fire)
 	{	fires.put(fire.getSprite(),fire);	
@@ -453,9 +453,9 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des sols contenus dans cette zone 
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
+	 * Cette instance de liste change Ã  chaque appel de l'IA. 
+	 * Il ne faut donc pas rï¿½utiliser la mÃªme liste, mais redemander la nouvelle
+	 * liste en utilisant cette mÃ©thode.
 	 * 
 	 * @return	liste de tous les sols contenus dans cette zone
 	 */
@@ -465,8 +465,8 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du sol passé en paramètre.
-	 * @param floor	le sol dont on veut la représentation
+	 * renvoie la reprï¿½sentation du sol passï¿½ en paramï¿½tre.
+	 * @param floor	le sol dont on veut la reprï¿½sentation
 	 * @return	le AiFloor correspondant
 	 */
 	AiFloor getFloor(Floor floor)
@@ -475,9 +475,9 @@ public class AiZone
 	
 	/**
 	 * ajoute un sol dans la liste de sols de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param floor	le sol à rajouter à la liste
+	 * @param floor	le sol Ã  rajouter Ã  la liste
 	 */
 	void addFloor(AiFloor floor)
 	{	floors.put(floor.getSprite(),floor);	
@@ -485,10 +485,10 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone 
-	 * (les joueurs éliminés n'apparaissent plus dans cette liste ni dans cette représentation de la zone)
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
+	 * (les joueurs ï¿½liminï¿½s n'apparaissent plus dans cette liste ni dans cette reprï¿½sentation de la zone)
+	 * Cette instance de liste change Ã  chaque appel de l'IA. 
+	 * Il ne faut donc pas rï¿½utiliser la mÃªme liste, mais redemander la nouvelle
+	 * liste en utilisant cette mÃ©thode.
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
 	 */
@@ -498,8 +498,8 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation du personnage passé en paramètre.
-	 * @param hero	le personnage dont on veut la représentation
+	 * renvoie la reprï¿½sentation du personnage passï¿½ en paramï¿½tre.
+	 * @param hero	le personnage dont on veut la reprï¿½sentation
 	 * @return	le AiHero correspondant
 	 */
 	AiHero getHero(Hero hero)
@@ -508,9 +508,9 @@ public class AiZone
 	
 	/**
 	 * ajoute un personnage dans la liste de personnages de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param hero	le personnage à rajouter à la liste
+	 * @param hero	le personnage Ã  rajouter Ã  la liste
 	 */
 	void addHero(AiHero hero)
 	{	heroes.put(hero.getSprite(),hero);	
@@ -518,10 +518,10 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des items apparents contenus dans cette zone 
-	 * (la liste peut être vide)
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
+	 * (la liste peut ï¿½tre vide)
+	 * Cette instance de liste change Ã  chaque appel de l'IA. 
+	 * Il ne faut donc pas rï¿½utiliser la mÃªme liste, mais redemander la nouvelle
+	 * liste en utilisant cette mÃ©thode.
 	 * 
 	 * @return	liste de tous les items contenus dans cette zone
 	 */
@@ -531,8 +531,8 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la représentation de l'item passé en paramètre.
-	 * @param item	l'item dont on veut la représentation
+	 * renvoie la reprï¿½sentation de l'item passï¿½ en paramï¿½tre.
+	 * @param item	l'item dont on veut la reprï¿½sentation
 	 * @return	le AiItem correspondant
 	 */
 	AiItem getItem(Item item)
@@ -541,23 +541,23 @@ public class AiZone
 	
 	/**
 	 * ajoute un item dans la liste d'items de cette zone
-	 * (méthode appelée depuis une AiTile)
+	 * (mÃ©thode appelÃ©e depuis une AiTile)
 	 * 
-	 * @param item	l'item à rajouter à la liste
+	 * @param item	l'item Ã  rajouter Ã  la liste
 	 */
 	void addItem(AiItem item)
 	{	items.put(item.getSprite(),item);	
 	}
 	
 	/**
-	 * démarque toutes les représentations de sprites d'une liste determinée en fonction du type
-	 * T paramétrant cette méthode. Méthode appelée au début de la mise à jour :
-	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
-	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
-	 * supprimées de cette représentation.
+	 * dï¿½marque toutes les reprï¿½sentations de sprites d'une liste determinï¿½e en fonction du type
+	 * T paramï¿½trant cette mÃ©thode. mÃ©thode appelÃ©e au dï¿½but de la mise Ã  jour :
+	 * les reprï¿½sentations de sprites qui n'ont pas ï¿½tï¿½ marquï¿½es Ã  la fin de la mise Ã  jour
+	 * correspondent Ã  des sprites qui ne font plus partie du jeu, et doivent ï¿½tre
+	 * supprimï¿½es de cette reprï¿½sentation.
 	 * 
-	 * @param <T>	type de la liste à traiter
-	 * @param list	liste à traiter
+	 * @param <T>	type de la liste Ã  traiter
+	 * @param list	liste Ã  traiter
 	 */
 	private <U extends Sprite, T extends AiSprite<?>> void uncheckAll(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
@@ -567,11 +567,11 @@ public class AiZone
 		}
 	}
 	/**
-	 * méthode complémentaire de uncheckAll, et chargée de supprimer
-	 * les représentations de sprites non-marquées à la fin de la mise à jour.
+	 * mÃ©thode complï¿½mentaire de uncheckAll, et chargï¿½e de supprimer
+	 * les reprï¿½sentations de sprites non-marquï¿½es Ã  la fin de la mise Ã  jour.
 	 * 
-	 * @param <T>	type de la liste à traiter
-	 * @param list	liste à traiter
+	 * @param <T>	type de la liste Ã  traiter
+	 * @param list	liste Ã  traiter
 	 */
 	private <U extends Sprite, T extends AiSprite<?>> void removeUnchecked(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
@@ -588,18 +588,18 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** le personnage contrôlé par l'IA */
+	/** le personnage contrï¿½lï¿½ par l'IA */
 	private AiHero ownHero;
 
 	/** 
-	 * renvoie le personnage qui est contrôlé par l'IA
+	 * renvoie le personnage qui est contrï¿½lï¿½ par l'IA
 	 */
 	public AiHero getOwnHero()
 	{	return ownHero;	
 	}
 	
 	/**
-	 * initialise le personnage qui est contrôlé par l'IA
+	 * initialise le personnage qui est contrï¿½lï¿½ par l'IA
 	 */
 	private void initOwnHero()
 	{	PredefinedColor color = player.getColor(); 

@@ -50,7 +50,7 @@ public class EscapeManager
 	// La variable qui contient les cases secures
 	private List<AiTile> possibleDest;
 
-	// La route que va suivre notre caractère
+	// La route que va suivre notre caractï¿½re
 	private AiPath path;
 	
 	/*
@@ -63,7 +63,7 @@ public class EscapeManager
 	}
 	
 	/*
-	 * Calcule si le chemin calculé est accessible
+	 * Calcule si le chemin calculÃ© est accessible
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -85,7 +85,7 @@ public class EscapeManager
 	private MatrixCostCalculator costCalculator;
 
 	/*
-	 * Prend les valeurs de la matrice et les passe à costCalculator
+	 * Prend les valeurs de la matrice et les passe Ã  costCalculator
 	 */
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -102,7 +102,7 @@ public class EscapeManager
 	}
 	
 	/*
-	 * Retourne la direction à suivre calculée par les méthodes précedentes
+	 * Retourne la direction Ã  suivre calculÃ©e par les mÃ©thodes prï¿½cedentes
 	 */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -112,13 +112,13 @@ public class EscapeManager
 	
 		Direction result = Direction.NONE;
 		
-		// La route peut être vide, c'est pourquoi on recontrôle
+		// La route peut ï¿½tre vide, c'est pourquoi on recontrï¿½le
 		if(path.isEmpty() || !checkPathValidity())
 			updatePath();
 		
-		/* On prend toujours le premier élement de path array car avec notre algorithme
-		 * On recalcule toujours la route à suivre dans chaque itération, alors notre
-		 * caractère est capable de changer sa décision à chaque itération.
+		/* On prend toujours le premier ï¿½lement de path array car avec notre algorithme
+		 * On recalcule toujours la route Ã  suivre dans chaque itï¿½ration, alors notre
+		 * caractï¿½re est capable de changer sa dï¿½cision Ã  chaque itï¿½ration.
 		 */
 		
 		AiTile tile = path.getTile(0);

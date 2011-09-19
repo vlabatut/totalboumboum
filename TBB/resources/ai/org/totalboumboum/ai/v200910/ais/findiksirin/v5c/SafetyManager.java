@@ -15,7 +15,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
 public class SafetyManager
-{	/** classe principale de l'IA, permet d'accéder à checkInterruption() */
+{	/** classe principale de l'IA, permet d'accÃ©der Ã  checkInterruption() */
 	private FindikSirin ai;
 	
 	public SafetyManager(FindikSirin ai) throws StopRequestException
@@ -41,7 +41,7 @@ public class SafetyManager
 	}
 	
 	/**
-	 * mise à jour de la matrice de sûreté
+	 * mise Ã  jour de la matrice de sï¿½retï¿½
 	 */
 	private void updateMatrix() throws StopRequestException
 	{	ai.checkInterruption();
@@ -83,7 +83,7 @@ public class SafetyManager
 					{	AiBomb bomb = bombs.iterator().next();
 						processBomb(bomb);
 					}
-					//si nous avons deja posé une bombe **************************** 
+					//si nous avons deja posï¿½ une bombe **************************** 
 					else if(!tile.getBombs().isEmpty()){
 						matrix[line][col] = NOTSAFE;
 					}

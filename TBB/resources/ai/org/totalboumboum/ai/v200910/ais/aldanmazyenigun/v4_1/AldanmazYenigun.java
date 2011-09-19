@@ -78,7 +78,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 
 
 	
-	/** classe chargée de déterminer quelles cases sont sûres */
+	/** classe chargï¿½e de dï¿½terminer quelles cases sont sï¿½res */
 	private SafetyZone safetyZone = null;
 	
 	private boolean thereIsSafeTile = true;
@@ -93,7 +93,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	
 	private boolean hasArrivedButDanger = false;
 	
-	/** les coordonnées de notre hero*/
+	/** les coordonnÃ©es de notre hero*/
 	@SuppressWarnings("unused")
 	private double x;
 	
@@ -136,7 +136,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 				
 		boolean start =false;
 		if(!ownHero.hasEnded())
-		{	// on met à jour la position de l'ia dans la zone
+		{	// on met Ã  jour la position de l'ia dans la zone
 			//init();
 			
 			
@@ -157,7 +157,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 					moveDir = escapeManager.update();
 			result = new AiAction(AiActionName.MOVE,moveDir);
 			}			
-			// sinon si on est en danger : on commence à fuir
+			// sinon si on est en danger : on commence Ã  fuir
 			else if(!isSafe(caseActuelle))
 			{	
 			escapeManager = new AvoidController(this);
@@ -315,7 +315,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 			
 			
 		}
-		// on met à jour la direction renvoyée au moteur du jeu
+		// on met Ã  jour la direction renvoyï¿½e au moteur du jeu
 		
 		return result;
 	}
@@ -717,7 +717,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	}
 	
 	/**
-	 * choisit aléatoirement un joueur comme cible à suivre
+	 * choisit alï¿½atoirement un joueur comme cible Ã  suivre
 	 */
 	private void chooseTarget() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -732,7 +732,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	}
 
 	/**
-	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
+	 * met Ã  jour la cible, et ï¿½ventuellement le chemin jusqu'ï¿½ elle
 	 */
 	private void updateTarget() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE

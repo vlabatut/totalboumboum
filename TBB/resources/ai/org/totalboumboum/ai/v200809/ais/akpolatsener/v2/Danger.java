@@ -36,7 +36,7 @@ public class Danger {
 	}
 
 	/**
-	 * trouve le danger la plus proche à une case donnée
+	 * trouve le danger la plus proche Ã  une case donnï¿½e
 	 * 
 	 * @param tile
 	 * @throws StopRequestException
@@ -76,7 +76,7 @@ public class Danger {
 	}
 
 	/**
-	 * retourne la bombe la plus proche à une case donnée
+	 * retourne la bombe la plus proche Ã  une case donnï¿½e
 	 * 
 	 * @return
 	 * @throws StopRequestException
@@ -105,7 +105,7 @@ public class Danger {
 	}
 
 	/**
-	 * retourne la feu la plus proche à une case donnée
+	 * retourne la feu la plus proche Ã  une case donnï¿½e
 	 * 
 	 * @return
 	 * @throws StopRequestException
@@ -135,7 +135,7 @@ public class Danger {
 
 	/**
 	 * retourne la distance directe entre la danger la plus proche et une case
-	 * donnée
+	 * donnï¿½e
 	 * 
 	 * @param tile
 	 * @return
@@ -159,7 +159,7 @@ public class Danger {
 
 	/**
 	 * retourne la distance de Manhattan entre la danger la plus proche et une
-	 * case donnée
+	 * case donnï¿½e
 	 * 
 	 * @param tile
 	 * @return

@@ -33,31 +33,31 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action volontaire de brûler (par exemple explosion timer pr une bombe)
- * action de créer une explosion, alors que consume = fait de brûler(?)
- * ou detonate = bruler+explosion alors que consume=etre brulé
+ * action volontaire de brï¿½ler (par exemple explosion timer pr une bombe)
+ * action de crÃ©er une explosion, alors que consume = fait de brï¿½ler(?)
+ * ou detonate = bruler+explosion alors que consume=etre brulï¿½
  * INTRANSITIVE
  *  
  * <p>ABILITY PERFORM
- * 	<br>paramètre: actor=self
- * 	<br>paramètre: target=N/D
- * 	<br>paramètre: direction=oui (permet de restreindre l'explosion d'une bombe ?)
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
+ * 	<br>paramï¿½tre: actor=self
+ * 	<br>paramï¿½tre: target=N/D
+ * 	<br>paramï¿½tre: direction=oui (permet de restreindre l'explosion d'une bombe ?)
+ * 	<br>paramï¿½tre: strength=bool
+ * 	<br>paramï¿½tre: kind=N/D
+ * 	<br>paramï¿½tre: scope=N/D
+ * 	<br>paramï¿½tre: restriction=N/D
  * 
  * <p>ABILITY REFUSE
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>paramètre: actor=oui
- * 	<br>paramètre: target=N/D
- * 	<br>paramètre: direction=N/D
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
+ * 	<br>paramï¿½tre: actor=oui
+ * 	<br>paramï¿½tre: target=N/D
+ * 	<br>paramï¿½tre: direction=N/D
+ * 	<br>paramï¿½tre: strength=bool
+ * 	<br>paramï¿½tre: kind=N/D
+ * 	<br>paramï¿½tre: scope=N/D
+ * 	<br>paramï¿½tre: restriction=N/D
  */
 /** 
  * producing an explosion, with flames and everything. 

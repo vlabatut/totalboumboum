@@ -98,7 +98,7 @@ public class ThirdModulation extends AbstractActionModulation
 	 * tests if this modulation is related to the specified action
 	 */
 	public boolean isConcerningAction(SpecificAction specificAction, Circumstance actorCircumstances, Circumstance targetCircumstances) 
-//TODO vérififier dans le mod mgr que c bien cette méthode (et pas la parente) qui est appelée
+//TODO vï¿½rififier dans le mod mgr que c bien cette mÃ©thode (et pas la parente) qui est appelÃ©e
 	{	boolean result = super.isConcerningAction(specificAction);
 		if(result)
 			result = this.actorCircumstance.subsume(actorCircumstances);

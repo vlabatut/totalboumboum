@@ -20,22 +20,22 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	private int[] bombPosition ={0,0};
 	
 	/**
-	 * La dernière position du personnage
+	 * La derniÃ¨re position du personnage
 	 */
 	private int[] lastPosition ={0,0};
 	
 	/**
-	 * Le dernier déplacement effectué
+	 * Le dernier dÃ©placement effectuÃ©
 	 */
 	private int lastMove=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 	
 	/**
-	 * Compteur gardant le nombre de répétition d'un mouvement tant que le personnage reste à la même place
+	 * Compteur gardant le nombre de rÃ©pÃ©titions d'un mouvement tant que le personnage reste Ã  la mÃªme place
 	 */
 	private int repetitionCounter=1;
 	
 	/**
-	 * Le dernier état de sécurité
+	 * Le dernier Ã©tat de sÃ©curitÃ©
 	 */
 	private boolean lastSafetyState=true;
 	
@@ -47,7 +47,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		super("BasmnSndll");
 	}
 	
-	/** indicateur de première invocation (pour la compatibilité */
+	/** indicateur de premiÃ¨re invocation (pour la compatibilitÃ© */
 	private boolean firstTime = true;
 
 	public Integer call() throws Exception
@@ -62,16 +62,16 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];	
 		int[][] matrix = getZoneMatrix();// la zone du jeu
-		int moveRight =1;//coefficient indiquant le choix d'aller vers la droite qui sera calculé à partir des valeurs de priorités  
-		int moveLeft =1;//coefficient indiquant le choix d'aller vers la gauche qui sera calculé à partir des valeurs de priorités
-		int moveUp =1;//coefficient indiquant le choix d'aller vers le haut qui sera calculé à partir des valeurs de priorités
-		int moveDown =1;//coefficient indiquant le choix d'aller vers le bas qui sera calculé à partir des valeurs de priorités
-		int cons=1;//valeur qu'on va utiliser pour privilèger les blocs vides
+		int moveRight =1;//coefficient indiquant le choix d'aller vers la droite qui sera calculÃ© Ã  partir des valeurs de prioritÃ©s  
+		int moveLeft =1;//coefficient indiquant le choix d'aller vers la gauche qui sera calculÃ© Ã  partir des valeurs de prioritÃ©s
+		int moveUp =1;//coefficient indiquant le choix d'aller vers le haut qui sera calculÃ© Ã  partir des valeurs de prioritÃ©s
+		int moveDown =1;//coefficient indiquant le choix d'aller vers le bas qui sera calculÃ© Ã  partir des valeurs de prioritÃ©s
+		int cons=1;//valeur qu'on va utiliser pour privilÃ©gier les blocs vides
 		
-		int hr[][][]=new int[getZoneMatrixDimX()][getZoneMatrixDimY()][1];//matrice qui va garder les valeurs de priorités pour chaque coordonnée (x,y)
+		int hr[][][]=new int[getZoneMatrixDimX()][getZoneMatrixDimY()][1];//matrice qui va garder les valeurs de prioritÃ©s pour chaque coordonnÃ©e (x,y)
 		
-		/*remplissage de la matrice hr gardant des valeurs de priorités pour chaque coordonnées (x,y) qui servira ensuite à 
-		choisir le mouvement à effectuer*/
+		/*remplissage de la matrice hr gardant des valeurs de prioritÃ©s pour chaque coordonnÃ©es (x,y) qui servira ensuite Ã  
+		choisir le mouvement Ã  effectuer*/
 		for(int i=0;i<getZoneMatrixDimX();i++)
 		{
 			for(int j=0;j<getZoneMatrixDimY();j++)
@@ -120,11 +120,11 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			}
 		}
 		
-		//si on est dans le shrink (ou prés du shrink) on privilège le centre de la zone du jeu
+		//si on est dans le shrink (ou prÃ¨s du shrink) on privilÃ¨ge le centre de la zone du jeu
 		if(getTimeBeforeShrink()<4000)
 			hr[9][7][0]=10000;
 		
-		// si le jeu est entre 4iéme et 45iéme secondes on privilège les directions où se trouve le personnage le plus prés
+		// si le jeu est entre 4iÃ¨me et 45iÃ¨me secondes on privilÃ¨ge les directions oÃ¹ se trouve le personnage le plus prÃ¨s
 		if( getTimeBeforeShrink()>4000 && getTimeBeforeShrink()<45000 )
 			{
 				if(getClosestPlayerPosition()[0]!=x && getClosestPlayerPosition()[1]!=y)
@@ -152,16 +152,16 @@ public class BasmanSandalli extends ArtificialIntelligence {
 				}
 			}
 		
-		//calcul du coefficient indiquant le choix d'aller vers la droite à partir des valeurs de priorités gardées	dans la matrice hr
+		//calcul du coefficient indiquant le choix d'aller vers la droite Ã  partir des valeurs de prioritÃ©s gardÃ©es	dans la matrice hr
 		if(matrix[x+1][y] !=ArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x+1][y] !=ArtificialIntelligence.AI_BLOCK_UNKNOWN )
 		{//s'il est possible d'effectuer un mouvement vers la droite	
 			int i=x+1;
 			cons=1;
 			while(i<getZoneMatrixDimX())
 			{
-				if(matrix[i][y]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
+				if(matrix[i][y]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilÃ¨ge des blocs vides consÃ©cutifs
 				{
-					cons=cons+50;//on privilège des blocs vides consécutifs
+					cons=cons+50;//on privilÃ¨ge des blocs vides consÃ©cutifs
 					moveRight = moveRight+hr[i][y][0]+cons;
 				}
 				else
@@ -179,7 +179,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			moveRight=1;
 		}
 		
-		//calcul du coefficient indiquant le choix d'aller vers la gauche à partir des valeurs de priorités gardées	dans la matrice hr
+		//calcul du coefficient indiquant le choix d'aller vers la gauche Ã  partir des valeurs de prioritÃ©s gardÃ©es	dans la matrice hr
 		if(matrix[x-1][y] !=ArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x-1][y] !=ArtificialIntelligence.AI_BLOCK_UNKNOWN  ){//s'il est possible d'effectuer un mouvement vers la gauche	
 			
 			cons=1;
@@ -187,9 +187,9 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			
 			while( i>0 )
 			{
-				if(matrix[i][y]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
+				if(matrix[i][y]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilÃ¨ge des blocs vides consÃ©cutifs
 				{
-					cons=cons+50;//on privilège des blocs vides consécutifs
+					cons=cons+50;//on privilÃ¨ge des blocs vides consÃ©cutifs
 					moveLeft = moveLeft+hr[i][y][0]+cons;
 				}
 				else
@@ -207,16 +207,16 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			moveLeft=1;
 		}
 		
-		//calcul du coefficient indiquant le choix d'aller vers le bas à partir des valeurs de priorités gardée dans la matrice hr
+		//calcul du coefficient indiquant le choix d'aller vers le bas Ã  partir des valeurs de prioritÃ©s gardÃ©e dans la matrice hr
 		if(matrix[x][y+1] !=ArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x][y+1] !=ArtificialIntelligence.AI_BLOCK_UNKNOWN ){//s'il est possible d'effectuer un mouvement vers le bas
 			
 			cons=1;
 			int i=y+1;
 			while(i<getZoneMatrixDimY())
 			{
-				if(matrix[x][i]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
+				if(matrix[x][i]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilÃ¨ge des blocs vides consÃ©cutifs
 				{
-					cons=cons+50;//on privilège des blocs vides consécutifs
+					cons=cons+50;//on privilÃ¨ge des blocs vides consÃ©cutifs
 					moveDown = moveDown+hr[x][i][0]+cons;
 				}
 				else
@@ -234,14 +234,14 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			moveDown=1;
 		}
 		
-		//calcul du coefficient indiquant le choix d'aller vers le haut à partir des valeurs de priorités gardées dans la matrice hr
+		//calcul du coefficient indiquant le choix d'aller vers le haut Ã  partir des valeurs de prioritÃ©s gardÃ©es dans la matrice hr
 		if(matrix[x][y-1] !=ArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x][y-1] !=ArtificialIntelligence.AI_BLOCK_UNKNOWN )
 		{//s'il est possible d'effectuer un mouvement vers le haut	
 			cons=1;
 			int i=y-1;
 			while(i>0)
 			{
-				if(matrix[x][i]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
+				if(matrix[x][i]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilÃ¨ge des blocs vides consÃ©cutifs
 				{
 					cons=cons+50;
 					moveUp = moveUp+hr[x][i][0]+cons;
@@ -261,12 +261,12 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		}
 		
 		
-		if(isSafe(matrix,x,y))//Si le personnage est en securité
+		if(isSafe(matrix,x,y))//Si le personnage est en securitÃ©
 		{
 			
 			lastSafetyState=true;
 			
-			//pour que le personnage ne se dirige pas vers le danger on multiplie par -1 les directions qui l'emporte au danger pour les éliminer
+			//pour que le personnage ne se dirige pas vers le danger on multiplie par -1 les directions qui l'emporte au danger pour les Ã©liminer
 			if(matrix[bombPosition[0]][bombPosition[1]] == ArtificialIntelligence.AI_BLOCK_BOMB || matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_FIRE )
 			{
 				if(x-bombPosition[0]<0)
@@ -292,26 +292,26 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			int choice =Math.max(Math.max(Math.max(moveRight, moveLeft), moveUp), moveDown);
 				
 			if(choice==moveRight){//si le choix est d'aller vers la droite
-				result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;//par défaut on admet le choix	
-				//s'il existe un mur destructible en direction de choix en va le détruire
+				result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;//par dÃ©faut on admet le choix	
+				//s'il existe un mur destructible en direction de choix en va le dÃ©truire
 				if(matrix[x+1][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 					{
-						if(matrix[bombPosition[0]][bombPosition[1]]!= ArtificialIntelligence.AI_BLOCK_BOMB)//Si la bombe par laquelle le personnage s'est enfuite a explosé
+						if(matrix[bombPosition[0]][bombPosition[1]]!= ArtificialIntelligence.AI_BLOCK_BOMB)//Si la bombe par laquelle le personnage s'est enfuite a explosÃ©
 						{	
 							result=ArtificialIntelligence.AI_ACTION_PUT_BOMB;
 						}
 						else
 						{
-							if(getTimeBeforeShrink()<0)//si le shrink a commencé  
+							if(getTimeBeforeShrink()<0)//si le shrink a commencï¿½  
 								result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 						}
 					
 						Thread.sleep(200);
 					}
-				//s'il existe une bombe à un temps prés au shrink le personnage ne fera rien car il est en sécurité
+				//s'il existe une bombe Ã  un temps prÃ¨s au shrink le personnage ne fera rien car il est en sÃ©curitÃ©
 				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
 					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
-				//attaque: s'il existe un joeur dans une position agrèable pour pièger on pose une bombe
+				//attaque: s'il existe un joeur dans une position agrï¿½able pour piï¿½ger on pose une bombe
 				if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1) && isTrap(matrix,x,y+1,x,y)))
 					
 				{
@@ -324,8 +324,8 @@ public class BasmanSandalli extends ArtificialIntelligence {
 				
 			else if(choice==moveLeft){//si le choix est d'aller vers la gauche
 				
-				result=ArtificialIntelligence.AI_ACTION_GO_LEFT;//par défaut on admet le choix	
-				//s'il existe un mur destructible en direction de choix en va le détruire
+				result=ArtificialIntelligence.AI_ACTION_GO_LEFT;//par dÃ©faut on admet le choix	
+				//s'il existe un mur destructible en direction de choix en va le dÃ©truire
 				if(matrix[x-1][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 					{
 					if(matrix[bombPosition[0]][bombPosition[1]]!= ArtificialIntelligence.AI_BLOCK_BOMB )
@@ -342,7 +342,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 				}
 				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
 					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
-				//attaque: s'il existe un joeur dans une position agrèable pour pièger on pose une bombe
+				//attaque: s'il existe un joeur dans une position agrï¿½able pour piï¿½ger on pose une bombe
 				if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1)&& isTrap(matrix,x,y+1,x,y)))
 				{	
 					if(getOwnBombCount()>0 && getTimeBeforeShrink()>0)
@@ -354,8 +354,8 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			}
 				
 			else if(choice==moveDown){//si le choix est d'aller vers le bas
-				result=ArtificialIntelligence.AI_ACTION_GO_DOWN;//par défaut on admet le choix	
-				//s'il existe un mur destructible en direction de choix en va le détruire
+				result=ArtificialIntelligence.AI_ACTION_GO_DOWN;//par dÃ©faut on admet le choix	
+				//s'il existe un mur destructible en direction de choix en va le dÃ©truire
 				if(matrix[x][y+1]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 					{
 					if(matrix[bombPosition[0]][bombPosition[1]]!= ArtificialIntelligence.AI_BLOCK_BOMB   ){	
@@ -371,7 +371,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 					}
 				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
 					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
-				//attaque: s'il existe un joeur dans une position agrèable pour pièger on pose une bombe
+				//attaque: s'il existe un joeur dans une position agrï¿½able pour piï¿½ger on pose une bombe
 			    if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1)&& isTrap(matrix,x,y+1,x,y)))
 				{
 			    	if(getOwnBombCount()>0 && getTimeBeforeShrink()>0)
@@ -384,8 +384,8 @@ public class BasmanSandalli extends ArtificialIntelligence {
 				
 			else{//le choix est d'aller vers le haut
 				
-				result=ArtificialIntelligence.AI_ACTION_GO_UP;//par défaut on admet le choix	
-				//s'il existe un mur destructible en direction de choix en va le détruire
+				result=ArtificialIntelligence.AI_ACTION_GO_UP;//par dÃ©faut on admet le choix	
+				//s'il existe un mur destructible en direction de choix en va le dÃ©truire
 				if(matrix[x][y-1]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 					{
 					if(matrix[bombPosition[0]][bombPosition[1]]!= ArtificialIntelligence.AI_BLOCK_BOMB   )
@@ -402,7 +402,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 					}
 				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
 					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
-				//attaque: s'il existe un joeur dans une position agrèable pour pièger on pose une bombe
+				//attaque: s'il existe un joeur dans une position agrï¿½able pour piï¿½ger on pose une bombe
 				if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1)&& isTrap(matrix,x,y+1,x,y)))
 				{
 					if(getOwnBombCount()>0 && getTimeBeforeShrink()>0)
@@ -414,7 +414,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 				
 			}
 			
-				//prédiction du danger: si le mouvement choisi emportera le personnage à une case dangereuse, il attend pour que ce danger dépasse
+				//prï¿½diction du danger: si le mouvement choisi emportera le personnage Ã  une case dangereuse, il attend pour que ce danger dï¿½passe
 				if(result==ArtificialIntelligence.AI_ACTION_GO_RIGHT)//si le mouvement choisi est vers la droite
 				{
 					if(!isSafe(matrix,x+1,y) || matrix[x+1][y]==ArtificialIntelligence.AI_BLOCK_FIRE)//s'il est dangereux de faire ce mouvement
@@ -460,19 +460,19 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		else // le personnage est en danger
 		{
 			lastSafetyState=false;
-			int bombX=bombPosition[0];//récupération des coordonnées de la bombe qui est dangereuse pour le personnage
-			int bombY=bombPosition[1];//récupération des coordonnées de la bombe qui est dangereuse pour le personnage
-			int power=getBombPowerAt(bombX,bombY);////récupération de la portée de la bombe qui est dangereuse pour le personnage
+			int bombX=bombPosition[0];//rï¿½cupï¿½ration des coordonnÃ©es de la bombe qui est dangereuse pour le personnage
+			int bombY=bombPosition[1];//rï¿½cupï¿½ration des coordonnÃ©es de la bombe qui est dangereuse pour le personnage
+			int power=getBombPowerAt(bombX,bombY);////rï¿½cupï¿½ration de la portï¿½e de la bombe qui est dangereuse pour le personnage
 			
-			if(x-bombX>0)//la bombe est à gauche du personnage
+			if(x-bombX>0)//la bombe est Ã  gauche du personnage
 			{
-				// pour tomber en piège plus rarement, le personnage préfére d'abord de s'enfuir linéarement si la portée de la bombe est suffisement petite
+				// pour tomber en piï¿½ge plus rarement, le personnage prï¿½fï¿½re d'abord de s'enfuir linï¿½arement si la portï¿½e de la bombe est suffisement petite
 				if(x+power<getZoneMatrixDimX() && possibleRightX(bombX,y,power+1) && getBombPowerAt(bombX,bombY)<3 ) 
 					result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
-				else//il est impossible de s'enfuir linéarement
+				else//il est impossible de s'enfuir linï¿½arement
 				{
-					/*à chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires à la direction du personnage 
-					 * par rapport à la bombe(haut et bas pour la bombe située à gauche ici) en choissisant la direction possédant la plus grande constante*/
+					/*ï¿½ chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires Ã  la direction du personnage 
+					 * par rapport Ã  la bombe(haut et bas pour la bombe situï¿½e Ã  gauche ici) en choissisant la direction possï¿½dant la plus grande constante*/
 					if(moveUp>=moveDown && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN)))
 					{
 						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) && isSafe(matrix,x,y-1) )
@@ -500,22 +500,22 @@ public class BasmanSandalli extends ArtificialIntelligence {
 							{
 								result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 							}
-					else//la bombe est à gauche donc aller vers la gauche est le dernier choix
+					else//la bombe est Ã  gauche donc aller vers la gauche est le dernier choix
 					{
 						result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 					}
 				}
 			}
 			
-			else if(x-bombX<0)//la bombe est à droite du personnage
+			else if(x-bombX<0)//la bombe est Ã  droite du personnage
 			{
-				// pour tomber en piège plus rarement, le personnage préfére d'abord de s'enfuir linéarement si la portée de la bombe est suffisement petite
+				// pour tomber en piï¿½ge plus rarement, le personnage prï¿½fï¿½re d'abord de s'enfuir linï¿½arement si la portï¿½e de la bombe est suffisement petite
 				if(x-power>0 && possibleLeftX(bombX,y,power+1) && getBombPowerAt(bombX,bombY)<3 ) 
 					result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
-				else//il est impossible de s'enfuir linéarement
+				else//il est impossible de s'enfuir linï¿½arement
 				{
-					/*à chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires à la direction du personnage 
-					 * par rapport à la bombe(haut et bas pour la bombe située à droite ici) en choissisant la direction possédant la plus grande constante*/
+					/*ï¿½ chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires Ã  la direction du personnage 
+					 * par rapport Ã  la bombe(haut et bas pour la bombe situï¿½e Ã  droite ici) en choissisant la direction possï¿½dant la plus grande constante*/
 					if(moveUp>=moveDown  && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN)))
 					{
 						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) && isSafe(matrix,x,y-1) )
@@ -543,7 +543,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 						{
 							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 						}
-					else//la bombe est à droite donc aller vers la gauche est le dernier choix
+					else//la bombe est Ã  droite donc aller vers la gauche est le dernier choix
 					{
 						result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;	
 					}
@@ -553,13 +553,13 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			
 			else if(y-bombY>0)//la bombe est en haut du personnage
 			{
-				// pour tomber en piège plus rarement, le personnage préfére d'abord de s'enfuir linéarement si la portée de la bombe est suffisement petite 
+				// pour tomber en piï¿½ge plus rarement, le personnage prï¿½fï¿½re d'abord de s'enfuir linï¿½arement si la portï¿½e de la bombe est suffisement petite 
 				if(y+power<getZoneMatrixDimY() && possibleDownY(x,bombY,power+1) && getBombPowerAt(bombX,bombY)<3 )
 					result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
-				else//il est impossible de s'enfuir linéarement
+				else//il est impossible de s'enfuir linï¿½arement
 				{
-					/*à chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires à la direction du personnage 
-					 * par rapport à la bombe(gauche et droite pour la bombe située en haut ici) en choissisant la direction possédant la plus grande constante*/
+					/*ï¿½ chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires Ã  la direction du personnage 
+					 * par rapport Ã  la bombe(gauche et droite pour la bombe situï¿½e en haut ici) en choissisant la direction possï¿½dant la plus grande constante*/
 					if(moveRight>=moveLeft  && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT)))
 					{
 						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && isSafe(matrix,x+1,y))
@@ -596,13 +596,13 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			
 			else if(y-bombY<0)//la bombe est en bas du personnage
 			{
-				// pour tomber en piège plus rarement, le personnage préfére d'abord de s'enfuir linéarement si la portée de la bombe est suffisement petite
+				// pour tomber en piï¿½ge plus rarement, le personnage prï¿½fï¿½re d'abord de s'enfuir linï¿½arement si la portï¿½e de la bombe est suffisement petite
 				if(y-power>0 && possibleUpY(x,bombY,power+1) && getBombPowerAt(bombX,bombY)<3 ) 
 					result=ArtificialIntelligence.AI_ACTION_GO_UP;
-				else//il est impossible de s'enfuir linéarement
+				else//il est impossible de s'enfuir linï¿½arement
 				{
-					/*à chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires à la direction du personnage 
-					 * par rapport à la bombe(droite et gauche pour la bombe située en bas ici) en choissisant la direction possédant la plus grande constante*/
+					/*ï¿½ chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires Ã  la direction du personnage 
+					 * par rapport Ã  la bombe(droite et gauche pour la bombe situï¿½e en bas ici) en choissisant la direction possï¿½dant la plus grande constante*/
 					if(moveRight>=moveLeft  && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT)))
 					{
 						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT)&& isSafe(matrix,x+1,y) )
@@ -638,8 +638,8 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			}
 			else//la bombe est sur le personnage
 			{   
-				/*théoriquement dans les pluparts des cas le personnage peut tomber en piège s'il retourne par la direction parlaqulle il est venu,
-				donc on essaie dernièrement de s'enfuir par cette direction gardée dans le champs "lastMove"*/
+				/*thï¿½oriquement dans les pluparts des cas le personnage peut tomber en piï¿½ge s'il retourne par la direction parlaqulle il est venu,
+				donc on essaie derniÃ¨rement de s'enfuir par cette direction gardÃ©e dans le champs "lastMove"*/
 				if(lastMove==ArtificialIntelligence.AI_ACTION_GO_LEFT)
 				{
 					
@@ -711,16 +711,16 @@ public class BasmanSandalli extends ArtificialIntelligence {
 					}
 				}
 				
-				// si le personnage ne se déplace pas malgré l'existance d'une sur lui, il peut y avoir un problème donc on augmente le compteur
+				// si le personnage ne se dï¿½place pas malgrï¿½ l'existance d'une sur lui, il peut y avoir un problï¿½me donc on augmente le compteur
 				if(lastPosition[0]==bombPosition[0] && lastPosition[1]==bombPosition[1])
 					{
 						repetitionCounter++;
 					}
-				else //si le personnage s'est déplacé pour pouvoir s'enfuir, on remet le compteur en 1
+				else //si le personnage s'est dï¿½placï¿½ pour pouvoir s'enfuir, on remet le compteur en 1
 					{
 						repetitionCounter=1;
 					}
-				//si compteur de répétition a une grande valeur donc le personnage s'est attaché vraiment à une bombe et on doit le sauver
+				//si compteur de rÃ©pÃ©tition a une grande valeur donc le personnage s'est attachï¿½ vraiment Ã  une bombe et on doit le sauver
 				if(repetitionCounter>21)
 				{
 					if(result==ArtificialIntelligence.AI_ACTION_GO_DOWN)
@@ -782,47 +782,47 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			}
 			
 		}
-		lastPosition[0]=x;//enregistrement de la dernière position 
-		lastPosition[1]=y;//enregistrement de la dernière position
+		lastPosition[0]=x;//enregistrement de la derniÃ¨re position 
+		lastPosition[1]=y;//enregistrement de la derniÃ¨re position
 		}
 		
 		return result;
 	}
 	/**
-	 * Indique si le personnage a la possibilité de s'enfuir ou pas
-	 * par les coordonnées (x,y) passés en paramètre avec une bombe située en (bombX,bombY) 
+	 * Indique si le personnage a la possibilitï¿½ de s'enfuir ou pas
+	 * par les coordonnÃ©es (x,y) passï¿½s en paramï¿½tre avec une bombe situï¿½e en (bombX,bombY) 
 	 * @param matrix la zone du jeu
-	 * @param x position à étudier
-	 * @param y position à étudier
+	 * @param x position Ã  ï¿½tudier
+	 * @param y position Ã  ï¿½tudier
 	 * @param bombX positon de la bombe
 	 * @param bombY positon de la bombe
 	 * @return vrai si le personnage n'a aucune chance de s'enfuir
 	 */
 	private boolean isTrap(int[][] matrix,int x,int y,int bombX,int bombY)
 	{	
-		int power = getBombPowerAt(bombX,bombY);//s'il existe une bombe en ces coordonnées on parle d'un désir du défense (le personnage veut s'enfuir par une bombe)
+		int power = getBombPowerAt(bombX,bombY);//s'il existe une bombe en ces coordonnÃ©es on parle d'un dï¿½sir du dï¿½fense (le personnage veut s'enfuir par une bombe)
 	
-		if(power==-1)//s'il n'existe pas une bombe en ces coordonnées alors on parle d'un désir de l'attaque(donc d'une simulation) et on va utiliser la portée de la bombe propre au personnage
+		if(power==-1)//s'il n'existe pas une bombe en ces coordonnÃ©es alors on parle d'un dï¿½sir de l'attaque(donc d'une simulation) et on va utiliser la portï¿½e de la bombe propre au personnage
 			power=getOwnFirePower();
 		
 		boolean result=false;
 		
-		if(x-bombX>0){//si la bombe est à gauche
+		if(x-bombX>0){//si la bombe est Ã  gauche
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers le bas c'est une piège
+			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers le bas c'est une piï¿½ge
 			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
 			{
 				result=true;
 			}
 			else
 			{
-				while(i<power)//on va étudier une distance i partant 1 jusqu'à la portée de la bombe
+				while(i<power)//on va ï¿½tudier une distance i partant 1 jusqu'ï¿½ la portï¿½e de la bombe
 				{
-					if(bombX+i<getZoneMatrixDimX())//si le personnage+la portée de la bombe est dans la zone du jeu
+					if(bombX+i<getZoneMatrixDimX())//si le personnage+la portï¿½e de la bombe est dans la zone du jeu
 					{
 						if(possibleRightX(x,y,i))//s'il est possible d'aller vers la droite pour la distance i
 						{
-							//s'il est impossible de trouver une place à se cacher en se déplacant pour une distance i
+							//s'il est impossible de trouver une place Ã  se cacher en se dï¿½placant pour une distance i
 							if(!isMovePossible(x+i,y,ArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x+i,y,ArtificialIntelligence.AI_ACTION_GO_DOWN) )
 							{
 								result=true;
@@ -830,7 +830,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 							else//il est possible de se cacher
 							{
 								result=false;
-								break;//pas besoin de continuer à étudier
+								break;//pas besoin de continuer Ã  ï¿½tudier
 							}
 						}
 						else//s'il est impossible d'aller vers la droite pour la distance i, il sera impossible de s'enfuir 
@@ -844,10 +844,10 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			}
 		}
 		
-		if(x-bombX<0)//si la bombe est à droite
+		if(x-bombX<0)//si la bombe est Ã  droite
 		{
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la gauche, vers le haut ou vers le bas c'est une piège
+			//s'il est impossible de faire un mouvement vers la gauche, vers le haut ou vers le bas c'est une piï¿½ge
 			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
 			{
 				result=true;
@@ -884,7 +884,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		
 		if(y-bombY>0){//si la bombe est en haut
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la droite, vers la gauche ou vers le bas c'est une piège
+			//s'il est impossible de faire un mouvement vers la droite, vers la gauche ou vers le bas c'est une piï¿½ge
 			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
 			{
 				result=true;
@@ -921,7 +921,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		
 		if(y-bombY<0){//si la bombe est en bas
 			int i = 1;
-			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers la gauche c'est une piège
+			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers la gauche c'est une piï¿½ge
 			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP))
 			{
 				result=true;
@@ -957,16 +957,16 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		
 		
 		int i=power+1;
-		//si la bombe est à gauche et le personnage peut aller vers la droite pour une distance plus grande que la portée de la bombe alors ce n'est pas une piège
+		//si la bombe est Ã  gauche et le personnage peut aller vers la droite pour une distance plus grande que la portï¿½e de la bombe alors ce n'est pas une piï¿½ge
 		if(x-bombX>0 && possibleRightX(bombX,y,i))
 			result=false;
-		//si la bombe est à droite et le personnage peut aller vers la gauche pour une distance plus grande que la portée de la bombe alors ce n'est pas une piège
+		//si la bombe est Ã  droite et le personnage peut aller vers la gauche pour une distance plus grande que la portï¿½e de la bombe alors ce n'est pas une piï¿½ge
 		else if(x-bombX<0 && possibleLeftX(bombX,y,i))
 			 result=false;
-		//si la bombe est en bas et le personnage peut aller vers le haut pour une distance plus grande que la portée de la bombe alors ce n'est pas une piège
+		//si la bombe est en bas et le personnage peut aller vers le haut pour une distance plus grande que la portï¿½e de la bombe alors ce n'est pas une piï¿½ge
 		 if(y-bombY<0 && possibleUpY(x,bombY,i))
 			 result=false;
-		//si la bombe est en haut et le personnage peut aller vers le bas pour une distance plus grande que la portée de la bombe alors ce n'est pas une piège
+		//si la bombe est en haut et le personnage peut aller vers le bas pour une distance plus grande que la portï¿½e de la bombe alors ce n'est pas une piï¿½ge
 		 else if(y-bombY>0 && possibleDownY(x,bombY,i))
 			 result=false;
 		 
@@ -974,18 +974,18 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique si un personnage situé en coordonnées (x,y) passés en paramètre est en 
-	 * securité ou pas par rapport à toutes les bombes qui existent dans la zone du jeu
+	 * Indique si un personnage situï¿½ en coordonnÃ©es (x,y) passï¿½s en paramï¿½tre est en 
+	 * securitÃ© ou pas par rapport Ã  toutes les bombes qui existent dans la zone du jeu
 	 * @param matrix la zone du jeu
-	 * @param x la coordonnée actuelle du personnage en x
-	 * @param y la coordonnée actuelle du personnage en y
-	 * @return vrai s'il n'existe aucun danger pour un personnage situé en coordonnées (x,y) 
+	 * @param x la coordonnÃ©e actuelle du personnage en x
+	 * @param y la coordonnÃ©e actuelle du personnage en y
+	 * @return vrai s'il n'existe aucun danger pour un personnage situï¿½ en coordonnÃ©es (x,y) 
 	 */
 	private boolean isSafe(int[][] matrix,int x,int y)
 	{	
 		boolean result=true;
 		
-		//récupération d'une liste des bombes existantes dans la zone du jeu
+		//rï¿½cupï¿½ration d'une liste des bombes existantes dans la zone du jeu
 		List<int[]> bombList = new ArrayList<int[]>();
 		for(int i=0;i<getZoneMatrixDimX();i++)
 		{
@@ -1007,23 +1007,23 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		
 			while(power>0){
 			
-				if(x+power<getZoneMatrixDimX()){ //Contrôle des limites en x vers la droite pour ne pas tomber en exception en récupérant si la portée de la bombe+la coordonnée en x du personnage est bien dans la zone du jeu
+				if(x+power<getZoneMatrixDimX()){ //Contrï¿½le des limites en x vers la droite pour ne pas tomber en exception en rï¿½cupï¿½rant si la portï¿½e de la bombe+la coordonnÃ©e en x du personnage est bien dans la zone du jeu
 			
 					if(x+power==bombList.get(i)[0] && y==bombList.get(i)[1] )//si le feu de la bombe attrape le personnage par la droite et a la chance(power) d'arriver au personnage
 					{
-						for(int l=1;l<power+1;l++)//On part par notre côté droite pour une distance relative à la portée de la bombe
+						for(int l=1;l<power+1;l++)//On part par notre cï¿½tï¿½ droite pour une distance relative Ã  la portï¿½e de la bombe
 						{
-							if(matrix[x+l][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD || matrix[x+l][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)// s’il existe une bloc entre la bombe et le personnage il est en sécurité
+							if(matrix[x+l][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD || matrix[x+l][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)// sï¿½il existe une bloc entre la bombe et le personnage il est en sÃ©curitÃ©
 							{
-								result =true;// personnage est en sécurité
-								break;//pas besoin de continuer à contrôler car il existe un bloc entre la bombe et le personnage
+								result =true;// personnage est en sÃ©curitÃ©
+								break;//pas besoin de continuer Ã  contrï¿½ler car il existe un bloc entre la bombe et le personnage
 							}
 							else//personnage est en danger
 								result=false;
 						}
 					}
 				}
-				if(x-power>0){//Contrôle des limites en x vers la gauche
+				if(x-power>0){//Contrï¿½le des limites en x vers la gauche
 			
 					if(x-power==bombList.get(i)[0] && y==bombList.get(i)[1] )//si le feu de la bombe attrape le personnage par la gauche et a la chance(power) d'arriver au personnage
 					{
@@ -1039,7 +1039,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 						}
 					}
 				}
-				if(y-power>0){//Contrôle des limites en y vers le haut
+				if(y-power>0){//Contrï¿½le des limites en y vers le haut
 			
 					if(x==bombList.get(i)[0] && y-power==bombList.get(i)[1] )//si le feu de la bombe attrape le personnage par le haut et a la chance(power) d'arriver au personnage
 					{
@@ -1056,7 +1056,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 						}
 					}
 				}
-				if(y+power<getZoneMatrixDimY()){//Contrôle des limites en y vers le bas
+				if(y+power<getZoneMatrixDimY()){//Contrï¿½le des limites en y vers le bas
 			
 					if(x==bombList.get(i)[0] && y+power==bombList.get(i)[1] )//si le feu de la bombe attrape le personnage par le bas et a la chance(power) d'arriver au personnage
 					{
@@ -1075,13 +1075,13 @@ public class BasmanSandalli extends ArtificialIntelligence {
 					power--;	
 			}
 				
-			if(result==false)// s'il existe au moins une bombe qui met le personnage en danger on n'a pas besoin de continuer à contrôler
+			if(result==false)// s'il existe au moins une bombe qui met le personnage en danger on n'a pas besoin de continuer Ã  contrï¿½ler
 			{
 				bombPosition[0]=bombList.get(i)[0];
 				bombPosition[1]=bombList.get(i)[1];
 				break;
 			}
-			else//s'il existe aucun danger pour cette bombe on passe à la bombe suivante
+			else//s'il existe aucun danger pour cette bombe on passe Ã  la bombe suivante
 				i++;
 		}
 		
@@ -1099,7 +1099,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	/**
 	 * Calcule et renvoie la distance de Manhattan 
 	 * (cf. : http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29)
-	 * entre le point de coordonnées (x1,y1) et celui de coordonnées (x2,y2). 
+	 * entre le point de coordonnÃ©es (x1,y1) et celui de coordonnÃ©es (x2,y2). 
 	 * @param x1	position du premier point
 	 * @param y1	position du premier point
 	 * @param x2	position du second point
@@ -1114,12 +1114,12 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique si le déplacement dont le code a été passé en paramètre 
-	 * est possible pour un personnage situé en (x,y).
+	 * Indique si le dÃ©placement dont le code a ï¿½tï¿½ passï¿½ en paramï¿½tre 
+	 * est possible pour un personnage situï¿½ en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param move	le déplacement à étudier
-	 * @return	vrai si ce déplacement est possible
+	 * @param move	le dÃ©placement Ã  ï¿½tudier
+	 * @return	vrai si ce dÃ©placement est possible
 	 */
 	private boolean isMovePossible(int x, int y, int move)
 	{	boolean result;
@@ -1144,10 +1144,10 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		return result;
 	}
 	/**
-	 * Indique si la case située à la position passée en paramètre
+	 * Indique si la case situï¿½e Ã  la position passï¿½e en paramï¿½tre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
-	 * @param x	position à étudier
-	 * @param y	position à étudier
+	 * @param x	position Ã  ï¿½tudier
+	 * @param y	position Ã  ï¿½tudier
 	 * @return	vrai si la case contient un obstacle
 	 */
 	private boolean isObstacle(int x, int y)
@@ -1168,10 +1168,10 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique s'il est possible d'aller vers la droite par les coordonnées (x,y) pour une distance d passée en paramètre
-	 * @param x position de départ en x
-	 * @param y position de départ en y
-	 * @param d la distance à parcourir
+	 * Indique s'il est possible d'aller vers la droite par les coordonnÃ©es (x,y) pour une distance d passï¿½e en paramï¿½tre
+	 * @param x position de dï¿½part en x
+	 * @param y position de dï¿½part en y
+	 * @param d la distance Ã  parcourir
 	 * @return vrai s'il est possible d'aller vers la droite pour la distance d
 	 */
 	private boolean possibleRightX(int x,int y,int d)
@@ -1193,10 +1193,10 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique s'il est possible d'aller vers la gauche par les coordonnées (x,y) pour une distance d passée en paramètre
-	 * @param x position de départ en x
-	 * @param y position de départ en y
-	 * @param d la distance à parcourir
+	 * Indique s'il est possible d'aller vers la gauche par les coordonnÃ©es (x,y) pour une distance d passï¿½e en paramï¿½tre
+	 * @param x position de dï¿½part en x
+	 * @param y position de dï¿½part en y
+	 * @param d la distance Ã  parcourir
 	 * @return vrai s'il est possible d'aller vers la gauche pour la distance d
 	 */
 	private boolean possibleLeftX(int x,int y,int d)
@@ -1218,10 +1218,10 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique s'il est possible d'aller vers le haut par les coordonnées (x,y) pour une distance d passée en paramètre
-	 * @param x position de départ en x
-	 * @param y position de départ en y
-	 * @param d la distance à parcourir
+	 * Indique s'il est possible d'aller vers le haut par les coordonnÃ©es (x,y) pour une distance d passï¿½e en paramï¿½tre
+	 * @param x position de dï¿½part en x
+	 * @param y position de dï¿½part en y
+	 * @param d la distance Ã  parcourir
 	 * @return vrai s'il est possible d'aller vers le haut pour la distance d
 	 */
 	private boolean possibleUpY(int x,int y,int d)
@@ -1242,10 +1242,10 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		return result;
 	}
 	/**
-	 * Indique s'il est possible d'aller vers le bas par les coordonnées (x,y) pour une distance d passée en paramètre
-	 * @param x position de départ en x
-	 * @param y position de départ en y
-	 * @param d la distance à parcourir
+	 * Indique s'il est possible d'aller vers le bas par les coordonnÃ©es (x,y) pour une distance d passï¿½e en paramï¿½tre
+	 * @param x position de dï¿½part en x
+	 * @param y position de dï¿½part en y
+	 * @param d la distance Ã  parcourir
 	 * @return vrai s'il est possible d'aller vers le bas pour la distance d
 	 */
 	private boolean possibleDownY(int x,int y,int d)
@@ -1267,10 +1267,10 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * Indique s'il existe un autre joueur en coordonnées (x,y) passés en paramètre
-	 * @param x coordonnée en x à tester
-	 * @param y coordonnée en y à tester
-	 * @return vrai s'il existe un autre joueur en coordonnées (x,y) passés en paramètre
+	 * Indique s'il existe un autre joueur en coordonnÃ©es (x,y) passï¿½s en paramï¿½tre
+	 * @param x coordonnÃ©e en x Ã  tester
+	 * @param y coordonnÃ©e en y Ã  tester
+	 * @return vrai s'il existe un autre joueur en coordonnÃ©es (x,y) passï¿½s en paramï¿½tre
 	 */
 	private boolean anyPlayerExists(int x,int y)
 	{
@@ -1290,8 +1290,8 @@ public class BasmanSandalli extends ArtificialIntelligence {
 	
 	
 	/**
-	 * Cherche le joueur le plus proche au personnage et renvoie ses coordonnées
-	 * @return les coordonnées du joueur le plus proche au personnage
+	 * Cherche le joueur le plus proche au personnage et renvoie ses coordonnÃ©es
+	 * @return les coordonnÃ©es du joueur le plus proche au personnage
 	 */
 	private int[] getClosestPlayerPosition()
 	{
@@ -1302,7 +1302,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 		
 		while(i<=getPlayerCount())//pour tous les joueurs
 		{
-			//si le joueur i est plus proche au personnage on récupére ses coordonnées
+			//si le joueur i est plus proche au personnage on rï¿½cupï¿½re ses coordonnÃ©es
 			if(distance(getOwnPosition()[0],getOwnPosition()[1],getPlayerPosition(i)[0] , getPlayerPosition(i)[1])<distance && isPlayerAlive(i))
 			{
 				distance=distance(getOwnPosition()[0],getOwnPosition()[1],getPlayerPosition(i)[0] , getPlayerPosition(i)[1]);

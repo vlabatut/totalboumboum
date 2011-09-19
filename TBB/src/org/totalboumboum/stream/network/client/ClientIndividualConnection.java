@@ -498,7 +498,7 @@ System.out.println(state);
 				reader.finish();
 				writer.finish();
 
-				//TODO à completer
+				//TODO Ã  completer
 
 				reader = null;
 				writer = null;

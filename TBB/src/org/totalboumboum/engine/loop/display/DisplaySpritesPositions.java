@@ -123,7 +123,7 @@ public class DisplaySpritesPositions implements Display
 				}
 				if(go)
 				{	if(m)
-					{	// coordonnées
+					{	// coordonnÃ©es
 						Tile tile = sprite.getTile();
 						int line = tile.getLine();
 						int col = tile.getCol();
@@ -140,7 +140,7 @@ public class DisplaySpritesPositions implements Display
 						g.drawString(text,x,y);
 					}
 					else
-					{	// coordonnées
+					{	// coordonnÃ©es
 						Font font = new Font("Dialog", Font.BOLD, 12);
 						g.setFont(font);
 						FontMetrics metrics = g.getFontMetrics(font);

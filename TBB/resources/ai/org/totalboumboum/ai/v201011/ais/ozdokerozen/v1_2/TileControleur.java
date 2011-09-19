@@ -16,7 +16,7 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 
 /**
  * Class qui determine de poser bombe
- * @author G.Lara Ozdoker && Sercan Özen
+ * @author G.Lara Ozdoker && Sercan ï¿½zen
  *
  */
 public class TileControleur {
@@ -41,7 +41,7 @@ public class TileControleur {
 	 * @param placeABombe
 	 */
 	public void placerBombe(AiTile placeABombe){
-		//on place le bombe où on pense.
+		//on place le bombe oÃ¹ on pense.
 		System.out.println("Matris boyutu: "+matriceImaginaire.length);
 		System.out.println("bomba line: "+placeABombe.getLine());
 		System.out.println("bomba colon: "+placeABombe.getCol());
@@ -57,7 +57,7 @@ public class TileControleur {
 		int bombY=placeABombe.getLine();
 		System.out.println("Matrisin length: "+matriceImaginaire.length+" matris clone: "+matriceImaginaire.clone());
 		//On precise le domaine de bombe avec 4 for loop
-		//on a utilisé 4 loop parceque on ne veut pas de tomber dans une exception (IndexBoundException par exemple.)
+		//on a utilisÃ© 4 loop parceque on ne veut pas de tomber dans une exception (IndexBoundException par exemple.)
 		for(int i=bombY+1;i<=bombY+bombeFire;i++){
 			if(i>matriceImaginaire.length-1)
 				break;
@@ -137,7 +137,7 @@ public class TileControleur {
 	 * @return
 	 */
 	public boolean facileExistePathBonus(AiTile start,AiTile cible,int valeurDeCas,int[][] matrice,AiTile tilePrecedent){
-		//baþlangýç deðerlerini alýyoruz!
+		//baï¿½langï¿½ï¿½ deï¿½erlerini alï¿½yoruz!
 		int hX=start.getCol();
 		int hY=start.getLine();
 		int cX=cible.getCol();
@@ -207,7 +207,7 @@ public class TileControleur {
 	 */
 	public void tierLesTilesParDistanceEtAccebilite(List<AiTile> secureTiles) throws StopRequestException, LimitReachedException{
 		////////////////////////////////////
-		//NOT:burada yoldaki diðer bombalarý ateþleri felan katmadýn!
+		//NOT:burada yoldaki diï¿½er bombalarï¿½ ateï¿½leri felan katmadï¿½n!
 		//////////////////////////////////////
 		//premierement on remove les cible qu'on ne peut pas arriver
 		for(int i=0;i<secureTiles.size();i++){
@@ -301,7 +301,7 @@ public class TileControleur {
 			//si le cible est un mur, on analyse neighboor de ce mur.
 			if(matriceImaginaire[tile.getLine()][tile.getCol()]==5){
 				
-				//BURDA PROBLEM VAR, Tam olarak doðru hesaplamýyor.ilk ulaþýlan path i alýyor ama þimdilik idare eder.
+				//BURDA PROBLEM VAR, Tam olarak doï¿½ru hesaplamï¿½yor.ilk ulaï¿½ï¿½lan path i alï¿½yor ama ï¿½imdilik idare eder.
 				path=calculateShortestPath(hero, hero.getTile(),tile, matriceImaginaire);
 			}else{
 				path = calculateShortestPath(hero,hero.getTile(),tile);
@@ -336,9 +336,9 @@ public class TileControleur {
 		int result=-1;
 		for(int i=0;i<espacePourFuir.size();i++){
 			temp=calculateShortestPath(hero,hero.getTile(),espacePourFuir.get(i));
-			//NOT:burada temp.getDuration() da kullanýlabilir.
+			//NOT:burada temp.getDuration() da kullanï¿½labilir.
 			double distance=temp.getPixelDistance();
-			//Bu deðeri alamadýgýmýz için sabit
+			//Bu deï¿½eri alamadï¿½gï¿½mï¿½z iï¿½in sabit
 			double durationBombe=640;
 			if(durationBombe>(distance/hero.getWalkingSpeed())){
 				result=i;
@@ -361,11 +361,11 @@ public class TileControleur {
 		try {
 			tierLesTilesParDistanceEtAccebilite(cibleSecure);
 			if(possibleDeFuir(cibleSecure, placeABombe)>=0){
-				//oui,secure à poser a bombe dans le tile "placeABombe"
-				System.out.println("bomba koyup kaçabiliriz");
+				//oui,secure Ã  poser a bombe dans le tile "placeABombe"
+				System.out.println("bomba koyup kaï¿½abiliriz");
 				result=true;
 			}else{
-				System.out.println("bomba koymayalým cunku guvenli yer yok");
+				System.out.println("bomba koymayalï¿½m cunku guvenli yer yok");
 				//non,on doit faire une autre chose
 				result=false;
 			}

@@ -64,10 +64,10 @@ public class OutilesCollecte {
 		List<AiTile> tilesPossible=new ArrayList<AiTile>();
 		tileControleur.tilePossibleArrive(gameZone.getOwnHero().getTile(), tilesPossible, matrice);
 		
-		//on commence à scanner de ces valeur
+		//on commence Ã  scanner de ces valeur
 		int i,j,plusX,plusY;
 				
-		//on les initialise en faire attention matrice length pour ne pas tomber à l'exception
+		//on les initialise en faire attention matrice length pour ne pas tomber Ã  l'exception
 		if(bonus.getCol()!=0){
 			if(bonus.getLine()!=0){
 					i=bonus.getCol()-1;
