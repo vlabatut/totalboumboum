@@ -233,7 +233,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	private List<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rÃ©fÃ©rence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();

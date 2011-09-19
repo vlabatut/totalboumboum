@@ -50,7 +50,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 	/** direction du cas actuel vers le prochain*/
 	Direction direction;
 	
-	/** liste des cas visit�s avec ses champs*/
+	/** liste des cas visités avec ses champs*/
 	List<XTile> xTiles = new ArrayList<XTile>();
 	
 	/** action de resultat à renvoyer*/
@@ -75,7 +75,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 		if (nextTile == null)
 			nextTile = currentTile;
 
-		// si aucune case n'est pas visit�e, case actuelle est ajout�. Sinon les champs de la case de type XTile sont actualis�s
+		// si aucune case n'est pas visitée, case actuelle est ajout�. Sinon les champs de la case de type XTile sont actualis�s
 		if (xTiles.isEmpty()) {
 			XTile xCurrentTile = new XTile(this, currentTile);
 			xCurrentTile.visits = 1;
@@ -213,7 +213,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 		
 		boolean isInXTiles = false;
 		
-		// on ajoute les cases qui ne sont pas dans la liste des cases visit�s à la liste XTiles et PriorityQueue
+		// on ajoute les cases qui ne sont pas dans la liste des cases visités à la liste XTiles et PriorityQueue
 		for (int cntTiles = 0; cntTiles < tiles.size(); cntTiles++) 
 		{
 			checkInterruption();

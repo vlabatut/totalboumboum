@@ -28,7 +28,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  *
  */
 public class AltayBasaranoglu extends ArtificialIntelligence {
-	/** la case occupée actuellement par le personnage */
+	/** la case occupï¿½e actuellement par le personnage */
 	private AiTile currentTile;
 
 
@@ -950,7 +950,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 			int[][][] matriceDefence) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
-		// liste des cases autour de la case de référence
+		// liste des cases autour de la case de rÃ©fÃ©rence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();

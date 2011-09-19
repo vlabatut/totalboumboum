@@ -569,7 +569,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 					&& !isMovePossible(ai, Direction.DOWN)) {
 				result = true;
 			} else {
-				while (i < power)//on va �tudier une distance i partant 1 jusqu'� la port�e de la bombe
+				while (i < power)//on va �tudier une distance i partant 1 jusqu'à la port�e de la bombe
 				{	checkInterruption();
 					if (bombTile.getCol() + i < zone.getWidth())//si le personnage+la port�e de la bombe est dans la zone du jeu
 					{
@@ -1178,7 +1178,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	public  List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 
-	// liste des cases autour de la case de r�f�rence
+	// liste des cases autour de la case de référence
 	Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 	// on garde les cases sans bloc ni bombe ni feu
 	List<AiTile> result = new ArrayList<AiTile>();

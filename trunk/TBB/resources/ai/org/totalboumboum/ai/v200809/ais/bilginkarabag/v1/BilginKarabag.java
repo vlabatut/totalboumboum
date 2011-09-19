@@ -57,7 +57,7 @@ public class BilginKarabag extends ArtificialIntelligence
 				previousTile = currentTile;
 				pickNextTile();			
 			}
-			// sinon (on garde la même direction) on v�rifie qu'un obstacle (ex: bombe) n'est pas apparu dans la case
+			// sinon (on garde la même direction) on vérifie qu'un obstacle (ex: bombe) n'est pas apparu dans la case
 			else
 				checkNextTile();
 			
@@ -149,7 +149,7 @@ public class BilginKarabag extends ArtificialIntelligence
 	private List<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de r�f�rence
+		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		List<AiTile> result = new ArrayList<AiTile>();
