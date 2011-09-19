@@ -47,7 +47,7 @@ abstract class AiSimSprite implements AiSprite
 	 * @param posZ
 	 * 		hauteur du sprite
 	 * @param state
-	 * 		�tat du sprite
+	 * 		état du sprite
 	 * @param burningDuration
 	 * 		dur�e de combustion du sprite
 	 * @param currentSpeed
@@ -124,7 +124,7 @@ abstract class AiSimSprite implements AiSprite
 	}
 	
 	/**
-	 * modidifie l'�tat de ce sprites
+	 * modidifie l'état de ce sprites
 	 * 
 	 * @param state
 	 * 		le nouvel état à affecter à ce sprite

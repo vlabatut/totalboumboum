@@ -28,7 +28,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 
 /**
- * impl�mentation la plus simple d'une heuristique : 
+ * implément la plus simple d'une heuristique : 
  * on utilise la distance de Manhattan entre la case de départ et 
  * la plus proche des cases d'arrivée.
  * 

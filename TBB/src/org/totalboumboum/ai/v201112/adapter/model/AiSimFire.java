@@ -48,7 +48,7 @@ final class AiSimFire extends AiSimSprite implements AiFire
 	 * @param posZ
 	 * 		hauteur du feu
 	 * @param state
-	 * 		�tat du feu
+	 * 		état du feu
 	 * @param burningDuration
 	 * 		dur�e de combustion du feu
 	 * @param currentSpeed

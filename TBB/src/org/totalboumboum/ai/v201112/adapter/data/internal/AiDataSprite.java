@@ -157,7 +157,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 	
 	/** 
-	 * initialise l'�tat dans lequel se trouve ce sprite
+	 * initialise l'état dans lequel se trouve ce sprite
 	 */
 	private void updateState(long elapsedTime)
 	{	state.update(elapsedTime);

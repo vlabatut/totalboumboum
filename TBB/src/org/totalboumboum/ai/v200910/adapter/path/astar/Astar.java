@@ -38,21 +38,21 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
 
 /**
  * 
- * Impl�mentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
+ * implément de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
- * cette impl�mentation correspond à peu près à un A* classique. Il y a quand même une modification,
- * puisque les noeuds d'�tat apparaissant déjà dans des noeuds de recherche anc�tre sont
+ * cette implément correspond à peu près à un A* classique. Il y a quand même une modification,
+ * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche anc�tre sont
  * �cart�s lorsqu'un noeud de recherche est développ�. En d'autres termes, l'algorithme �vite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'emp�che de
  * boucler à l'infini.</br>
  * 
- * Cette impl�mentation trouved donc le chemin le plus court entre deux cases,
+ * Cette implément trouved donc le chemin le plus court entre deux cases,
  * en consid�rant les obstacles. Elle a besoin de trois paramètres :
  * 		- le personnage qui doit effectuer le trajet entre les deux cases
  * 		- une fonction de coût, qui permet de définir combien coute une action (ici : le fait de passer d'une case à l'autre)
  * 		- une fonction heuristique, qui permet d'estimer le cout du chemin restant à parcourir</br>
  * 
- * A noter qu'il s'agit d'une impl�mentation non-déterministe de l'algorithme.
+ * A noter qu'il s'agit d'une implément non-déterministe de l'algorithme.
  * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
  * rapport au cout défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
  * renverra pas forcément toujours la même (il en choisira une au hasard).
@@ -221,7 +221,7 @@ public class Astar
 				{	// sinon on r�cup�re les noeuds suivants
 					List<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
 					// on introduit du hasard en permuttant al�atoirement les noeuds suivants
-					// pour cette raison, cette impl�mentation d'A* ne renverra pas forcément toujours le même r�sultat :
+					// pour cette raison, cette implément d'A* ne renverra pas forcément toujours le même r�sultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
 					Collections.shuffle(successors);
 					// puis on les rajoute dans la file de priorité

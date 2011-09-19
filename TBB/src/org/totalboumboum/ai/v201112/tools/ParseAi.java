@@ -34,7 +34,7 @@ import java.util.List;
 import org.totalboumboum.tools.files.FileNames;
 
 /**
- * cette méthode parse les codes sources définissant une IA et v�rifie
+ * cette méthode parse les codes sources définissant une IA et vérifie
  * que les appels à checkInterruption sont effectués correctement.
  * 
  * La liste IGNORED_PACKAGES permet, comme son nom l'indique, de spécifier

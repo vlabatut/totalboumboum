@@ -175,7 +175,7 @@ public abstract class AiTile
 	 * cette case. Sinon, cela signifie qu'elle contient au moins un
 	 * obstacle que le personnage ne peut pas traverser. 
 	 * Tous les sprites ne sont pas sensibles aux mêmes obstacles,
-	 * cela d�pend à la fois du type des sprites considérés (Hero,
+	 * cela dépend à la fois du type des sprites considérés (Hero,
 	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer à travers
 	 * les murs, passer à travers les bombes, etc). Le feu peut constituer
 	 * un obstacle, notamment pour les sprite de type Hero.</br>

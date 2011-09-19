@@ -26,10 +26,10 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 
 /**
  * Classe �tendant la classe abstraite CostCalculator gr�ce à une matrice de coûts.
- * Ici, le coût pour passer d'une case à l'autre d�pend uniquement de la case
+ * Ici, le coût pour passer d'une case à l'autre dépend uniquement de la case
  * de destination. Ce coût est �gal à la valeur associée à la case dans la matrice
  * de cout fournie. Cette matrice doit faire la même taille que la zone de jeu.
- * En d'autres termes, le coût d'un déplacement d�pend ici uniquement de la case de destination.
+ * En d'autres termes, le coût d'un déplacement dépend ici uniquement de la case de destination.
  * </br>
  * Cette classe est utile si on veut calculer des coûts plus fins qu'avec BasicCostCalculator,
  * qui considère seulement la distance. Par exemple, on peut donner un coup plus important

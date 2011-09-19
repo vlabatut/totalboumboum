@@ -59,7 +59,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * En d'autres termes, un pas se termine quand un �v�nement se produit. Les 
  * �v�nements considérés par cette classe sont :<ul>
  * 		<li> la disparition ou l'apparition d'un sprite (ex : une bombe qui a explosé, un item qui apparait)
- * 		<li> un changement d'�tat (ex : un mur qui commence à br�ler)
+ * 		<li> un changement d'état (ex : un mur qui commence à br�ler)
  * 		<li> un changement de case (ex : un joueur se d�pla�ant d'une case à une autre)
  * 		<li> la fin d'un déplacement (ex : un joueur qui se retrouve bloqu� par un mur)</ul>
  * D�s qu'un de ces �v�nements se produit, le pas de simulation se termine.
@@ -98,9 +98,9 @@ public class AiModel
 
 	/**
 	 * détermine si l'apparition d'items sera simul�e lors de la destruction de murs.
-	 * à noter que la probabilit� d'apparition d�pends du nombre de murs restants
+	 * à noter que la probabilit� d'apparition dépends du nombre de murs restants
 	 * et d'items cach�s restant à l'instant de l'explosion.
-	 * de même, le type d'item d�pend de la distribution des items restants
+	 * de même, le type d'item dépend de la distribution des items restants
 	 * 
 	 * @param simulateItemsAppearing
 	 * 		si vrai, les items apparaitront lors de la simulation
@@ -140,11 +140,11 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste des sprites dont le changement d'�tat marque la fin de la dernière simulation */
+	/** liste des sprites dont le changement d'état marque la fin de la dernière simulation */
 	private List<AiSimSprite> limitSprites;
 	
 	/**
-	 * renvoie la liste des sprites dont le changement d'�tat
+	 * renvoie la liste des sprites dont le changement d'état
 	 * marque la fin de la dernière simulation
 	 * 
 	 * @return	
@@ -176,17 +176,17 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * effectue des simulations, en gardant pour chaque sprite l'action courante,
-	 * et ce jusqu'� ce que le personnage spécifié ait chang� d'�tat.
+	 * et ce jusqu'à ce que le personnage spécifié ait chang� d'état.
 	 * Cette méthode est particuli�rement utile quand on veut savoir quel sera
-	 * l'�tat estim� de la zone quand le personnage que l'on controle passera
+	 * l'état estim� de la zone quand le personnage que l'on controle passera
 	 * dans la case suivante.
-	 * <b>Attention:</b> le changement d'�tat peut aussi être d� au fait que le 
+	 * <b>Attention:</b> le changement d'état peut aussi être d� au fait que le 
 	 * personnage a commencé à br�ler.
 	 * 
 	 * @param hero
 	 * 		le personnage sur lequel porte la condition
 	 * @return	
-	 * 		vrai si le changement d'�tat est d� à un déplacement (et pas à un accident)
+	 * 		vrai si le changement d'état est d� à un déplacement (et pas à un accident)
 	 */
 	public boolean simulate(AiHero hero)
 	{	// init
@@ -269,15 +269,15 @@ public class AiModel
 	}
 	
 	/**
-	 * calcule l'�tat suivant de la zone si les états spécifiés en paramètres
-	 * sont appliqu�s à la zone courante. en l'absence d'�tat spécifié, le sprite
+	 * calcule l'état suivant de la zone si les états spécifiés en paramètres
+	 * sont appliqu�s à la zone courante. en l'absence d'état spécifié, le sprite
 	 * continue à faire ce qu'il faisait déjà (br�ler, se d�placer, etc.).
 	 * par cons�quent, la map contenant les états spécifiés peut être vide. 
-	 * La méthode renvoie l'�tat obtenu à la fin du prochain �v�nement 
+	 * La méthode renvoie l'état obtenu à la fin du prochain �v�nement 
 	 * (i.e. celui qui se termine le plus vite). Les �v�nement considérés sont :
 	 * 		- la disparition d'un sprite (ex : une bombe qui a explosé)
 	 * 		- l'apparition d'un sprite (ex : un item qui apparait à la suite de l'explosion d'un mur)
-	 * 		- un changement d'�tat (ex : un mur qui commence à br�ler)
+	 * 		- un changement d'état (ex : un mur qui commence à br�ler)
 	 * 		- un changement de case (ex : un joueur passant d'une case à une autre)
 	 * 		- la fin d'un déplacement (ex : un joueur qui se retrouve bloqu� par un mur)
 	 * Les modifications sont appliqu�es aux zones internes. l'utilisateur peut r�cup�rer
@@ -319,7 +319,7 @@ public class AiModel
 	}
 	
 	/**
-	 * Calcule le temps minimal avant le prochain changement d'�tat de chaque sprite.
+	 * Calcule le temps minimal avant le prochain changement d'état de chaque sprite.
 	 * Ce laps de temps sera ensuite appliqu� uniformêment à chaque sprite.
 	 * 
 	 * @param sprites
@@ -485,8 +485,8 @@ if(sprite instanceof AiSimBomb)
 	}
 
 	/**
-	 * calcule l'�tat du sprite à la fin de la dur�e spécifiée,
-	 * à partir de l'�tat courant.
+	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param statesMap	
 	 * 		la liste des états à appliquer aux sprites (calculés automatiquement ou spécifiés par l'utilisateur)
@@ -651,8 +651,8 @@ if(sprite instanceof AiSimBomb)
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'�tat du sprite à la fin de la dur�e spécifiée,
-	 * à partir de l'�tat courant.
+	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param block
 	 * 		le sprite concern� (sa représentation initiale)
@@ -747,8 +747,8 @@ if(sprite instanceof AiSimBomb)
 	private List<AiSimBomb> toBeDetonated = new ArrayList<AiSimBomb>();
 	
 	/**
-	 * calcule l'�tat du sprite à la fin de la dur�e spécifiée,
-	 * à partir de l'�tat courant.
+	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param bomb
 	 * 		le sprite concern� (sa représentation initiale)
@@ -902,8 +902,8 @@ if(sprite instanceof AiSimBomb)
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'�tat du sprite à la fin de la dur�e spécifiée,
-	 * à partir de l'�tat courant.
+	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param fire
 	 * 		le sprite concern� (sa représentation initiale)
@@ -1015,8 +1015,8 @@ if(sprite instanceof AiSimBomb)
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'�tat du sprite à la fin de la dur�e spécifiée,
-	 * à partir de l'�tat courant.
+	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param floor
 	 * 		le sprite concern� (sa représentation initiale)
@@ -1062,8 +1062,8 @@ if(sprite instanceof AiSimBomb)
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'�tat du sprite à la fin de la dur�e spécifiée,
-	 * à partir de l'�tat courant.
+	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param hero
 	 * 		le sprite concern� (sa représentation initiale)
@@ -1212,7 +1212,7 @@ if(sprite instanceof AiSimBomb)
 	
 	/**
 	 * permet de solliciter un changement de direction de la part du personnage.
-	 * si la direction n'est pas NONE, alors l'�tat du personnage devient MOVING.
+	 * si la direction n'est pas NONE, alors l'état du personnage devient MOVING.
 	 * sinon, il devient STANDING. Bien s�r, s'il y a des obstacles, le personnage
 	 * ne pourra pas effectivement se d�placer dans la direction spécifiée.
 	 * 
@@ -1310,8 +1310,8 @@ if(sprite instanceof AiSimBomb)
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'�tat du sprite à la fin de la dur�e spécifiée,
-	 * à partir de l'�tat courant.
+	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * à partir de l'état courant.
 	 * 
 	 * @param item
 	 * 		le sprite concern� (sa représentation initiale)

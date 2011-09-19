@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar.successor;
+package org.totalboumboum.ai.v201112.adapter.path.dybref;
 
 /*
  * Total Boum Boum
@@ -27,7 +27,6 @@ import java.util.List;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.path.astar.AstarNode;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -43,34 +42,24 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  *
  */
-public class BasicSuccessorCalculator extends SuccessorCalculator
+public class DybrefSuccessorCalculator
 {
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * fonction successeur la plus simple: on considère les 4 cases voisines de la case courante,
-	 * en ne conservant que les cases que le personnage de référence peut traverser 
+	 * fonction successeur dédiée à l'algorithme Dybref : on considère les 4 cases voisines 
+	 * de la case courante, plus la case courante dans le cadre de l'action d'attente.
+	 * On ne conserve les cases que le personnage de référence peut traverser (TODO ?). 
 	 * 
 	 * @param node	
 	 * 		le noeud de recherche courant
 	 * @return	
 	 * 		une liste des cases successeurs
 	 */
-	@Override
-	public List<AiTile> processSuccessors(AstarNode node) throws StopRequestException
-	{	// init
-		List<AiTile> result = new ArrayList<AiTile>();
-		AiTile tile = node.getTile();
-		AiHero hero = node.getHero();
-		
-		// pour chaque case voisine : on la rajoute si elle est traversable
-		for(Direction direction: Direction.getPrimaryValues())
-		{	AiTile neighbor = tile.getNeighbor(direction);
-			if(neighbor.isCrossableBy(hero))
-				result.add(neighbor);			
-		}
+	public List<AiTile> processSuccessors(DybrefNode node) throws StopRequestException
+	{				
 
 		return result;
 	}

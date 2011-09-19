@@ -56,7 +56,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param posZ
 	 * 		hauteur de la bombe
 	 * @param state
-	 * 		�tat de la bombe
+	 * 		état de la bombe
 	 * @param burningDuration
 	 * 		dur�e de combustion de la bombe
 	 * @param currentSpeed
@@ -90,7 +90,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param color
 	 * 		couleur de la bombe
 	 * @param working
-	 * 		�tat de fonctionnement de la bombe
+	 * 		état de fonctionnement de la bombe
 	 * @param time
 	 * 		temps �coul� depuis le d�p�t de la bombe
 	 */

@@ -48,7 +48,7 @@ final class AiSimFloor extends AiSimSprite implements AiFloor
 	 * @param posZ
 	 * 		hauteur du sol (forcément 0)
 	 * @param state
-	 * 		�tat du sol
+	 * 		état du sol
 	 * @param burningDuration
 	 * 		dur�e de combustion du sol
 	 * @param currentSpeed

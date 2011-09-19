@@ -88,7 +88,7 @@ public class AiPath implements Comparable<AiPath>
 	}
 
 	/**
-	 * permet de v�rifier que le point de départ est
+	 * permet de vérifier que le point de départ est
 	 * bien contenu dans la première case du chemin.
 	 * si ce n'est pas le cas, il est corrigé en utilisant
 	 * le centre de la première case du chemin. 

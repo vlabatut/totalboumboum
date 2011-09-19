@@ -157,7 +157,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 	/**
 	 * si on a d�passé le forcedPositionDuration, il faut :  
 	 * 		- calculer la position virtuelle à ce temps l� (ce qui implique de calculer le point de départ en référence)
-	 * 		- v�rifier si elle colle à la position forc�e
+	 * 		- vérifier si elle colle à la position forc�e
 	 * 		- si elle ne colle pas : la corriger
 	 * si on ne l'a pas encore d�passée : à peu près pareil
 	 * 		- calculer la position initiale

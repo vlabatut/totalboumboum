@@ -75,7 +75,7 @@ public final class LimitReachedException extends Exception
     /////////////////////////////////////////////////////////////////
 	// START TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** case de départ de la recherche (�tat initial) */
+	/** case de départ de la recherche (état initial) */
 	private AiTile startTile;
 	
 	/**
@@ -91,7 +91,7 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// END TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** les cases d'arrivée de la recherche (�tats finaux) */
+	/** les cases d'arrivée de la recherche (états finaux) */
     private List<AiTile> endTiles;
 	
     /**

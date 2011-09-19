@@ -51,7 +51,7 @@ final class AiSimItem extends AiSimSprite implements AiItem
 	 * @param posZ
 	 * 		hauteur de l'item
 	 * @param state
-	 * 		�tat de l'item
+	 * 		état de l'item
 	 * @param burningDuration
 	 * 		dur�e de combustion de l'item
 	 * @param currentSpeed
