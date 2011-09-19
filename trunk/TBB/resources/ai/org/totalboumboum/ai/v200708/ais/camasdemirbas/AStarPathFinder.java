@@ -8,7 +8,7 @@ import org.totalboumboum.ai.v200708.ais.camasdemirbas.ManhattanHeuristic;
 
 
 /**
- * Une impl�mentation de viseur de chemin 
+ * Une implément de viseur de chemin 
  * qui utilise l'AStar l'algorithme bas� heuristique déterminer un chemin. 
  * 
  * @author Gokhan Camas
@@ -246,7 +246,7 @@ public class AStarPathFinder implements PathFinder {
 	}
 	
 	/**
-	 * Obtenir le co�t pour se d�placer par un emplacement donn�
+	 * Obtenir le coût pour se d�placer par un emplacement donn�
 	 * 
 	 */
 	public float getMovementCost(int sx, int sy, int tx, int ty) {
@@ -254,8 +254,8 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Obtenir le co�t heuristique pour l'emplacement donn�. 
-	 * Ceci détermine dans lequel commande les emplacements sont trait�s. 
+	 * Obtenir le coût heuristique pour l'emplacement donn�. 
+	 * Ceci détermine dans lequel commande les emplacements sont traités. 
 	 * 
 	 */
 	public float getHeuristicCost(int x, int y, int tx, int ty) {

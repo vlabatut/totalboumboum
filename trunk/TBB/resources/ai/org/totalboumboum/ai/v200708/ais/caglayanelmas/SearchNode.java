@@ -20,7 +20,7 @@ public class SearchNode
 	/**
 	 * Constructeur de la classe SearchNode.
 	 * 
-	 * @param state		l'�tat du noeud
+	 * @param state		l'état du noeud
 	 * @param depth		la profondeur du noeud
 	 * @param cost		le cout du noeud
 	 * @param heuristic	l'heuristic du noeud
@@ -38,7 +38,7 @@ public class SearchNode
 	}
 
 	/**
-	 * @return l'�tat du noeud
+	 * @return l'état du noeud
 	 */
 	public int[] getState()
 	{	
@@ -80,7 +80,7 @@ public class SearchNode
 	}
 
 	/**
-	 * @return vrai si le noeud est d�j� visit�.
+	 * @return vrai si le noeud est déjà visité.
 	 */
 	public boolean isVisited()
 	{	
@@ -88,7 +88,7 @@ public class SearchNode
 	}
 
 	/**
-	 * @return l'itération pendant laquelle le noeud est visit�.
+	 * @return l'itération pendant laquelle le noeud est visité.
 	 */
 	public int getIteration()
 	{	

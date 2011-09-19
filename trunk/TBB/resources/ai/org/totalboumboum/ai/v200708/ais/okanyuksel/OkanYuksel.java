@@ -1,7 +1,7 @@
 /********************************************
  * DECCAL                                   *
  *                                          *
- * L'impl�mentation d'AI pour BombermanJA   *
+ * L'implément d'AI pour BombermanJA   *
  *                                          *
  * L'univesit� Galatasaray @ 2007           *
  *                                          *
@@ -258,7 +258,7 @@ public class OkanYuksel extends ArtificialIntelligence
 		for (int syc=0; syc<4; syc++)
 		{
 			if (
-					gYonu != syc && //pour emp�cher de regarder à la direction qui est d�j� utilis�.
+					gYonu != syc && //pour emp�cher de regarder à la direction qui est déjà utilisé.
 					(cevrem[syc] == AI_BLOCK_EMPTY ||
 					cevrem[syc] == AI_BLOCK_ITEM_BOMB ||
 					cevrem[syc] == AI_BLOCK_ITEM_FIRE)
@@ -268,7 +268,7 @@ public class OkanYuksel extends ArtificialIntelligence
 						!tehlikeli(xM, yM, syc, true) && 
 						!yolAcikveMenzilde(new int[]{kX, kY}, new int[]{xM+yonelim[syc][0],yM+yonelim[syc][1]}, menzil)
 					)
-				{//une position s�re a �t� trouv�e
+				{//une position s�re a été trouv�e
 					kacisR.push(syc);
 					return;
 				}

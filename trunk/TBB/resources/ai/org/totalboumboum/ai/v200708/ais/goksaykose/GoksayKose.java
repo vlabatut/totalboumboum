@@ -278,14 +278,14 @@ public class GoksayKose extends ArtificialIntelligence{
 	}
 	
 			/**
-			 * détermine un ordre de pr�f�rence sur toutes les directions possibles :
+			 * détermine un ordre de préférence sur toutes les directions possibles :
 			 * plus la direction permet de s'�loigner du danger,
 			 * plus elle est pr�f�r�e.
 			 * @param x	position du personnage
 			 * @param y	position du personnage
 			 * @param dangerX	position du danger
 			 * @param dangerY	position du danger
-			 * @return	liste des directions ordonnée par pr�f�rence 
+			 * @return	liste des directions ordonnée par préférence 
 			 */
 			
 	private int[] getDirectionPreferences(int x, int y, int dangerX, int dangerY)
@@ -374,7 +374,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	}
 	
 	/**
-	 * Indique si le déplacement dont le code a �t� passé en paramètre 
+	 * Indique si le déplacement dont le code a été passé en paramètre 
 	 * est possible pour un personnage situ� en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
@@ -410,8 +410,8 @@ public class GoksayKose extends ArtificialIntelligence{
 	 * du point de coordonnées (x,y) passées en paramètres. Le r�sultat
 	 * prend la forme d'un tableau des deux coordon�es du bloc le plus proche.
 	 * Le tableau est contient des -1 s'il n'y a aucun bloc du bon type dans la zone de jeu.
-	 * @param x	position de r�f�rence
-	 * @param y	position de r�f�rence
+	 * @param x	position de référence
+	 * @param y	position de référence
 	 * @param blockType	le type du bloc recherch�
 	 * @return	les coordonnées du bloc le plus proche
 	 */

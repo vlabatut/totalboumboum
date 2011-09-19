@@ -417,8 +417,8 @@ public class DemirkolDogan extends ArtificialIntelligence{
 	/**
 	 * Renvoie la position du personnage le plus proche de la
 	 * position passée en paramètres. 
-	 * @param x	position de r�f�rence
-	 * @param y	position de r�f�rence
+	 * @param x	position de référence
+	 * @param y	position de référence
 	 * @return	position du joueur le plus proche
 	 */
 	private int[] getClosestBlockPosition(int x, int y, int blockType, int[][] zoneMatrix)

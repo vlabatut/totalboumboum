@@ -21,7 +21,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 {
 	private static final long serialVersionUID = 1L;
 	
-	// Constantes qui définissent l'�tat du bomberman
+	// Constantes qui définissent l'état du bomberman
 	private final static int DOING_NOTHING = 0;
 	private final static int RUNNING_FROM_BOMB = 1;
 	private final static int COLLECTING_BONUS = 2;
@@ -34,7 +34,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	private int[] target;
 	// Contient la position de la dernière bombe
 	private int[] lastBomb;
-	// Représente l'�tat du bomberman avec les constantes définies ci-dessus
+	// Représente l'état du bomberman avec les constantes définies ci-dessus
 	private int state;
 	// Combien de fois on a mis une bombe pour détruire des murs
 	private int destructionCount;
@@ -138,7 +138,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 		if (savedMove)
 			return handleSavedMove(px, py);
 			
-		// On attend jusqu'a ce que la bombe d�j� pos�e s'explose.
+		// On attend jusqu'a ce que la bombe déjà pos�e s'explose.
 		if (!isBombExploded())
 		{
 			state = DOING_NOTHING;
@@ -206,7 +206,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 			
 			else if (block[0] == px && block[1] == py)
 			{
-				// On est d�j� l�.
+				// On est déjà l�.
 				savedMove = true;
 				target = block.clone();
 				return AI_ACTION_DO_NOTHING;
@@ -262,7 +262,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 			}
 			else
 			{				
-				// L'action finale d�pend de notre but. Si on attaque ou
+				// L'action finale dépend de notre but. Si on attaque ou
 				// détruit des murs on retourne AI_ACTION_PUT_BOMB sinon
 				// AI_ACTION_DO_NOTHING
 				lastAction = decideNextAction(px, py);			
@@ -274,7 +274,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	
 	/**
 	 * détermine l'action suivante selon
-	 * l'�tat du bomberman.
+	 * l'état du bomberman.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
 	 * @return		L'action qu'il faut commettre
@@ -327,7 +327,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * D�t�rmine les cases accessibles à notre personnage
+	 * Détérmine les cases accessibles à notre personnage
 	 * et les gardent dans le vecteur playableCases.
 	 * @param px	position de notre personnage
 	 * @param py	position de notre personnage
@@ -751,7 +751,7 @@ public class CaglayanElmas extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Indique si le déplacement dont le code a �t� passé en paramètre 
+	 * Indique si le déplacement dont le code a été passé en paramètre 
 	 * est possible pour un personnage situ� en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
