@@ -25,7 +25,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 public class ErisikPektas extends ArtificialIntelligence {
 	private Map map;
-	/** la case occup�e actuellement par le personnage */
+	/** la case occupée actuellement par le personnage */
 	private AiTile caseactuelle;
 	/** la case sur laquelle on veut aller */
 	private AiTile caseprochaine = null;
@@ -477,7 +477,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NOS FONCTIONS POUR ACCEDER AU BONUS ET LES COLLECTER
-	// OU POUR ACCEDER AUX ADVERSA�RES//
+	// OU POUR ACCEDER AUX ADVERSAIRES//
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -710,7 +710,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 			checkInterruption();
 			for (int j = 0; j < map.height; j++) {
 				checkInterruption();
-				// i j hata veriyo eger destination ayn� bulundugu yerse
+				// i j hata veriyo eger destination ayn bulundugu yerse
 				if ((tous.getTile(j, i).getItem() != null || (map
 						.returnMatrix()[i][j] == etat.ADVERSAIRE
 						&& tous.getHeroes().size() == 2 && tous.getItems()
@@ -824,7 +824,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * cest une fonc qu�i collecte les temps passe des la creation des bombes et
+	 * cest une fonc qui collecte les temps passe des la creation des bombes et
 	 * des flmmes feus
 	 */
 

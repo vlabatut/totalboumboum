@@ -52,7 +52,7 @@ public class Map {
 		remplir();
 	}
 
-	// nous remplaçons notre map
+	// nous remplaÃ§ons notre map
 	private void remplir() {
 
 		// premieremnt on met letat libre pour partout
@@ -88,7 +88,7 @@ public class Map {
 
 		this.getfires();
 
-		// remplaçons les bonus
+		// remplaÃ§ons les bonus
 
 		Iterator<AiItem> itemit = objets.iterator();
 		AiItem item;

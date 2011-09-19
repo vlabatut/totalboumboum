@@ -55,7 +55,7 @@ public class TimeMatrice {
 		return this.getTime(tile.getCol(),tile.getLine());
 	}
 	/*
-	 * Cr�ation de la matrice du temps
+	 * Création de la matrice du temps
 	 */
 	public void createTimeMatrice() {
 		// ajout des murs dans la matrice pour une seule fois
@@ -284,7 +284,7 @@ public class TimeMatrice {
 					// stop
 					up = false;
 				else // Si 0 alors durationNormale
-				// dolu ise kucuk olan�
+				// dolu ise kucuk olan
 				// Si plein ,la petite 
 				if (this.timeMatrice[temp.getCol()][temp.getLine() - step] == 0)
 					this.timeMatrice[temp.getCol()][temp.getLine() - step] = this.durationNormale;

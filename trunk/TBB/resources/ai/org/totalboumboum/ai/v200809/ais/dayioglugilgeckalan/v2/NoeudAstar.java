@@ -30,7 +30,7 @@ public class NoeudAstar implements Comparator<Noeud> {
 	/**
 	 * Retourne une valeur servant à comparer les noeuds.
 	 * On fait la somme de l'heuristique et le cout de chaque noeud.
-	 * On compare ces valeurs et on tourne une valeur n�gative si le premier a un plus petit valeur,
+	 * On compare ces valeurs et on tourne une valeur négative si le premier a un plus petit valeur,
 	 * une valeur positive si le premier a une plus grande valeur
 	 * @param noeud1 
 	 *            noeud qu'on va comparer
@@ -42,7 +42,7 @@ public class NoeudAstar implements Comparator<Noeud> {
 	public int compare(Noeud noeud1, Noeud noeud2) {
 		int resultat;
 	//somme de l'heuristique et du cout pour chaque noeud
-	//on va utiliser pour l'algorithme de A_�toile
+	//on va utiliser pour l'algorithme de A_étoile
 	
 	int n_1,n_2;
 	try {

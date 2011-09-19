@@ -163,7 +163,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 			currentAction = new AiAction(AiActionName.MOVE,queue.peek().getFirstDirection());
 		
 		
-		//System.out.println("gidilen y�n:"+currentAction.getDirection().toString());
+		//System.out.println("gidilen yn:"+currentAction.getDirection().toString());
 		return currentAction;
 	}
 	
@@ -241,7 +241,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		
 			
 		
-		//System.out.println("gidilen y�n:"+currentAction.getDirection().toString());
+		//System.out.println("gidilen yn:"+currentAction.getDirection().toString());
 		return currentAction;
 	}
 	

@@ -28,7 +28,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  */
 public class KokciyanMazmanoglu extends ArtificialIntelligence
 {
-	/** la case occup�e actuellement par le personnage*/
+	/** la case occupée actuellement par le personnage*/
 	private AiTile currentTile;
 	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
@@ -366,7 +366,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 	if (iterBomb.hasNext()) {
 		AiBomb bombe = iterBomb.next();
-		int power = bombe.getRange();//s'il existe une bombe en ces coordonnées on parle d'un d�sir du d�fense (le personnage veut s'enfuir par une bombe)
+		int power = bombe.getRange();//s'il existe une bombe en ces coordonnées on parle d'un désir du défense (le personnage veut s'enfuir par une bombe)
 		result = false;
 		if (ai.getCol() - bombTile.getCol() > 0) {//si la bombe est à gauche
 			int i = 1;
@@ -376,13 +376,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 					&& !isMovePossible(ai, Direction.DOWN)) {
 				result = true;
 			} else {
-				while (i < power)//on va �tudier une distance i partant 1 jusqu'à la port�e de la bombe
+				while (i < power)//on va étudier une distance i partant 1 jusqu'à la portée de la bombe
 				{
-					if (bombTile.getCol() + i < zone.getWidth())//si le personnage+la port�e de la bombe est dans la zone du jeu
+					if (bombTile.getCol() + i < zone.getWidth())//si le personnage+la portée de la bombe est dans la zone du jeu
 					{
 						if (possibleMoveD(ai.getLine(), ai.getCol(), i, 1))//s'il est possible d'aller vers la droite pour la distance i
 						{
-							//s'il est impossible de trouver une place à se cacher en se d�placant pour une distance i
+							//s'il est impossible de trouver une place à se cacher en se déplacant pour une distance i
 							if (!isMovePossible(ai.getLine() + i, ai.getCol(),
 									Direction.UP)
 									&& !isMovePossible(ai.getLine() + i, ai
@@ -391,7 +391,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 							} else//il est possible de se cacher
 							{
 								result = false;
-								break;//pas besoin de continuer à �tudier
+								break;//pas besoin de continuer à étudier
 							}
 						} else//s'il est impossible d'aller vers la droite pour la distance i, il sera impossible de s'enfuir 
 						{
@@ -498,19 +498,19 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			}
 		}
 		int i = power + 1;
-		//si la bombe est à gauche et le personnage peut aller vers la droite pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
+		//si la bombe est à gauche et le personnage peut aller vers la droite pour une distance plus grande que la portée de la bombe alors ce n'est pas une piège
 		if (ai.getCol() - bombTile.getCol() > 0
 				&& possibleMoveD(bombTile.getLine(), ai.getCol(), i, 1))
 			result = false;
-		//si la bombe est à droite et le personnage peut aller vers la gauche pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
+		//si la bombe est à droite et le personnage peut aller vers la gauche pour une distance plus grande que la portée de la bombe alors ce n'est pas une piège
 		else if (ai.getCol() - bombTile.getCol() < 0
 				&& possibleMoveD(bombTile.getLine(), ai.getCol(), i, -1))
 			result = false;
-		//si la bombe est en bas et le personnage peut aller vers le haut pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
+		//si la bombe est en bas et le personnage peut aller vers le haut pour une distance plus grande que la portée de la bombe alors ce n'est pas une piège
 		if (ai.getLine() - bombTile.getLine() < 0
 				&& possibleMoveD(ai.getLine(), bombTile.getCol(), i, 2))
 			result = false;
-		//si la bombe est en haut et le personnage peut aller vers le bas pour une distance plus grande que la port�e de la bombe alors ce n'est pas une piège
+		//si la bombe est en haut et le personnage peut aller vers le bas pour une distance plus grande que la portée de la bombe alors ce n'est pas une piège
 		else if (ai.getLine() - bombTile.getLine() > 0
 				&& possibleMoveD(ai.getLine(), bombTile.getCol(), i, -2))
 			result = false;

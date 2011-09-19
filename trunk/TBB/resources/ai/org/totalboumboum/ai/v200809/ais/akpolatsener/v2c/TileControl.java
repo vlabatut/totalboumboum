@@ -68,7 +68,7 @@ public class TileControl {
 	 *            destructible
 	 * @param bonus
 	 *            true quand on veut filtrer les voisins qui a des bonuses
-	 * @return liste des voisins filtr�
+	 * @return liste des voisins filtré
 	 * @throws StopRequestException
 	 */
 	public List<AiTile> filterNeighbors(AiTile tile, boolean bombDanger,
@@ -139,10 +139,10 @@ public class TileControl {
 	}
 
 	/**
-	 * le nombre des voisins de la case donn�e
+	 * le nombre des voisins de la case donnée
 	 * 
 	 * @param tile
-	 * @return le nombre des voisins de la case donn�e
+	 * @return le nombre des voisins de la case donnée
 	 * @throws StopRequestException
 	 */
 	public int getNeighborsCount(AiTile tile) throws StopRequestException {
@@ -160,7 +160,7 @@ public class TileControl {
 	 * @param tiles
 	 * @param targetOrDanger
 	 *            true si c'est pour la cible, false sinon.
-	 * @return la liste des cases tri�s
+	 * @return la liste des cases triés
 	 * @throws StopRequestException
 	 */
 	List<AiTile> sortTiles(List<AiTile> tiles, boolean targetOrDanger)
@@ -234,7 +234,7 @@ public class TileControl {
 	}
 
 	/**
-	 * determine si une case est dans la port�e d'une bombe
+	 * determine si une case est dans la portée d'une bombe
 	 * 
 	 * @param tile
 	 * @param bombRange
@@ -258,7 +258,7 @@ public class TileControl {
 	}
 
 	/**
-	 * controle la case dans une direction donn�s
+	 * controle la case dans une direction donnés
 	 * 
 	 * @param tile
 	 * @return true s'il n'ya pas de danger dans cette direction

@@ -111,7 +111,7 @@ public class PathFinder {
 	} */
 	
 	/**
-	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de A �toile.
+	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de A étoile.
 	 *(cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
 	 * @param x
 	 *           le coordonné de x de l'ia.
@@ -123,7 +123,7 @@ public class PathFinder {
 	 */
 	private void findPath(ZoneEnum[][] tab,int x,int y,Noeud goal) throws StopRequestException
 	{	source.checkInterruption(); //Appel Obligatoire
-		//� chaque appel de la fonction,on efface les anciens valeurs.
+		//à chaque appel de la fonction,on efface les anciens valeurs.
 		path=new LinkedList<Noeud>();
 		
 		Noeud courant=new Noeud(x,y,tab[x][y],0,source);//case où se trouve ia.
@@ -131,7 +131,7 @@ public class PathFinder {
 		NoeudAstar comparator=new NoeudAstar(goal);//utilise pour l'algorithme Aetoile
 		PriorityQueue<Noeud> frange = new PriorityQueue<Noeud>(1,comparator);//les elements sont inseres en respectant l'ordre du cout et de l'heuristique.
 		LinkedList<Noeud> open=new LinkedList<Noeud>();//liste des elements qu'on regarde.
-		LinkedList<Noeud> closed=new LinkedList<Noeud>();//liste des elements qu'on a dej� regardé.
+		LinkedList<Noeud> closed=new LinkedList<Noeud>();//liste des elements qu'on a dejà regardé.
 		Noeud temp=new Noeud(source);
 	
 		Noeud solution = null;
@@ -194,7 +194,7 @@ public class PathFinder {
 			
 		}// fin de while
 
-		if(solution!=null)//si on a trouv� la solution sans finir tous les elements de la frange.
+		if(solution!=null)//si on a trouvé la solution sans finir tous les elements de la frange.
 			path=tree.getPath(solution);
 
 		frange=null;//on vide la frange.

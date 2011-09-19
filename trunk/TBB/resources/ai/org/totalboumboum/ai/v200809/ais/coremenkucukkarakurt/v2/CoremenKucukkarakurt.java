@@ -21,13 +21,13 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * 
  * @author Selim Coremen
- * @author Umut Kucukkarak�rt
+ * @author Umut Kucukkarakurt
  *
  */
 public class CoremenKucukkarakurt extends ArtificialIntelligence
 {
 	
-	/** la case occup�e actuellement par le personnage*/
+	/** la case occupée actuellement par le personnage*/
 	private AiTile currentTile;
 	
 	/** la case sur laquelle on veut aller */
@@ -64,7 +64,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 			
 			
 			/*
-			 * si mon currenttile est en securité et si ma region est en securité et si je suis à cot�
+			 * si mon currenttile est en securité et si ma region est en securité et si je suis à coté
 			 * d'un mur et si il y a pas une bombe proche
 			 */
 			if(isCaseSafe(currentTile) && isRegionSafe(currentTile) && canIDestroyAWall(currentTile)&& getCloseBombs().size()<1){
@@ -93,7 +93,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 					result=new AiAction(AiActionName.NONE);
 					
 				}
-				// si mon case n'est pas en secutit�
+				// si mon case n'est pas en secutité
 				else{
 					
 					// on fait un mouvement par hasard
@@ -177,9 +177,9 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Choisit comme destination une case voisine de la case actuellement occup�e par l'IA.
+	 * Choisit comme destination une case voisine de la case actuellement occupée par l'IA.
 	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
-	 * être différente de la case pr�c�demment occup�e
+	 * être différente de la case précédemment occupée
 	 * @throws StopRequestException 
 	 */
 	
@@ -345,11 +345,11 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 		
 		
-		// arriv� à destination : on choisit une nouvelle destination
+		// arrivé à destination : on choisit une nouvelle destination
 		if(currentTile==nextTile)
 			pickNextTile();
 		
-		// au cas ou quelqu'un prendrait le contr�le manuel du personnage
+		// au cas ou quelqu'un prendrait le Contrôle manuel du personnage
 		
 		else if(previousTile!=currentTile)
 		{	previousTile = currentTile;
@@ -417,7 +417,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	
 	// liste des cases voisines accessibles	
 	List<AiTile> tiles = getClearNeighbors(currentTile);
-	// on sort de la liste la case d'o� l'on vient (pour �viter de repasser au même endroit)
+	// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 	boolean canGoBack = false;
 	if(tiles.contains(previousTile))
 	{	tiles.remove(previousTile);
@@ -425,8 +425,8 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	// s'il reste des cases dans la liste
 	if(tiles.size()>0)
-	{	// si la liste contient la case situ�e dans la direction déplacement pr�cedente,
-		// on �vite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
+	{	// si la liste contient la case située dans la direction déplacement précedente,
+		// on évite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
 		AiTile tempTile = null;
 		Direction dir = getPercepts().getDirection(previousTile,currentTile);
 		if(dir!=Direction.NONE)
@@ -448,7 +448,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 			previousTile = currentTile;
 		}
 	}
-	// sinon (pas le choix) on tente de revenir en arri�re
+	// sinon (pas le choix) on tente de revenir en arrière
 	else
 	{	if(canGoBack)
 		{	nextTile = previousTile;
@@ -536,7 +536,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	
 	
 	
-	// la methode qui renvoie si notre hero est à cot� d'un mur
+	// la methode qui renvoie si notre hero est à coté d'un mur
 	private boolean canIDestroyAWall (AiTile tile) throws StopRequestException{
 		checkInterruption(); //APPEL OBLIGATOIRE
 		tile=currentTile;

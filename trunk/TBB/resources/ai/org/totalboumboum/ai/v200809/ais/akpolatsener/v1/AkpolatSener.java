@@ -75,7 +75,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 		if (nextTile == null)
 			nextTile = currentTile;
 
-		// si aucune case n'est pas visitée, case actuelle est ajout�. Sinon les champs de la case de type XTile sont actualis�s
+		// si aucune case n'est pas visitée, case actuelle est ajouté. Sinon les champs de la case de type XTile sont actualisés
 		if (xTiles.isEmpty()) {
 			XTile xCurrentTile = new XTile(this, currentTile);
 			xCurrentTile.visits = 1;
@@ -167,10 +167,10 @@ public class AkpolatSener extends ArtificialIntelligence {
 
 		neighbors = new Neighbors(this, zone, currentTile);
 
-		// les cases voisines propres qui ne sont pas dans la port�e d'une bombe
+		// les cases voisines propres qui ne sont pas dans la portée d'une bombe
 		possibleTiles = neighbors.findNeighborsNotInBombRange();
 
-		// s'il n y a pas de voisins propres qui ne sont pas dans la port�e d'une bombe 
+		// s'il n y a pas de voisins propres qui ne sont pas dans la portée d'une bombe 
 		if (possibleTiles.size() == 0)
 		{
 			if (currentTile.getBombs().isEmpty() && currentTile.getFires().isEmpty() && !neighbors.isInBombRange(currentTile, 10)) 

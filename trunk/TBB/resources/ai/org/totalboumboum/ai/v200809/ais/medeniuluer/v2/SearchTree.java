@@ -9,7 +9,7 @@ import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.MedeniUluer;
 import org.totalboumboum.ai.v200809.ais.medeniuluer.v2.ZoneEnum;
 
 /**
- * Représente un arbre de recherche. Les noeuds sont li�s avec des SearchLink
+ * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
  * orientes
  *
  * @author Ekin Medeni
@@ -100,7 +100,7 @@ public class SearchTree {
 	}
 
 	/**
-	 * Renvoie le lien liant le noeud passé en paramètre à son p�re.
+	 * Renvoie le lien liant le noeud passé en paramètre à son père.
 	 * 
 	 * @param node
 	 *            le noeud à traiter
@@ -207,7 +207,7 @@ public class SearchTree {
 
 	/**
 	 * méthode utilisée par addLink pour des opérations devant être effectuées
-	 * en mode synchronis�.
+	 * en mode synchronisé.
 	 * 
 	 * @param link
 	 *            le lien à ajouter

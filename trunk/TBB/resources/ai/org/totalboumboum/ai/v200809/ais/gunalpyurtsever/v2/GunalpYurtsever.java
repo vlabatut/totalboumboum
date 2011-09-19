@@ -47,7 +47,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		while(it.hasNext()){
 			checkInterruption(); //APPEL OBLIGATOIRE
 			AiBomb bomb=it.next();
-			//Supprime de la liste la bomb qui est null ou deja brul�
+			//Supprime de la liste la bomb qui est null ou deja brulé
 			if(bomb != null){
 				if(bomb.getState().getName() == AiStateName.BURNING)
 					it.remove();
@@ -230,7 +230,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 						
 						Iterator<CostTile> ab = queue.iterator();
 						
-						//on cherche si mytile est deja enfil�s
+						//on cherche si mytile est deja enfilés
 						while(ab.hasNext()){
 							checkInterruption(); // APPEL OBLIGATOIRE
 							
@@ -246,7 +246,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 						}
 						
 					}
-					//la selection pour developpement est termin�
+					//la selection pour developpement est terminé
 					tiles.remove(0);
 				
 				}
@@ -511,7 +511,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 					
 					int i = 0;
 					Direction d = getPercepts().getDirection(b.getTile(),t);
-					//on cherche pour chaque direction du bomb jusqu'a la port�e
+					//on cherche pour chaque direction du bomb jusqu'a la portée
 					while (t.getBlock()==null && i < range) {
 						checkInterruption(); // APPEL OBLIGATOIRE
 					
@@ -692,7 +692,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
         
         DangerPriorityCostTile currentTile;
         
-        //pour les tiles qu'on a juste developp�
+        //pour les tiles qu'on a juste developpé
         AiTile cacheTile = null;
         
         boolean found = false;

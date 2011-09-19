@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Vector;
 
 /**
- * Représente un arbre de recherche. Les noeuds sont li�s avec des SearchLink
+ * Représente un arbre de recherche. Les noeuds sont liés avec des SearchLink
  * orientes
  * 
  * @author Eser Devecioglu

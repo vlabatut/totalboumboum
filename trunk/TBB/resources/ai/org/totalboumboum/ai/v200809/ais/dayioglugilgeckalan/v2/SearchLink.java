@@ -3,8 +3,8 @@ package org.totalboumboum.ai.v200809.ais.dayioglugilgeckalan.v2;
 import org.totalboumboum.ai.v200809.adapter.StopRequestException;
 
 /**
- * Représente un lien orient� dans un arbre de recherche.
- * Ce lien est défini par les deux noeuds reli�s : l'origine (parent)
+ * Représente un lien orienté dans un arbre de recherche.
+ * Ce lien est défini par les deux noeuds reliés : l'origine (parent)
  * et la cible (fils) ainsi que par l'action à réaliser pour passer 
  * d'un état à l'autre.
  * 

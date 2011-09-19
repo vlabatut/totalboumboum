@@ -172,7 +172,7 @@ public class Noeud {
 	}
 
 	/**
-	 * Controle l'égalit� de l'objet à un autre objet
+	 * Controle l'égalité de l'objet à un autre objet
 	 * 
 	 * @param object
 	 *            objet qu'on va comparer
