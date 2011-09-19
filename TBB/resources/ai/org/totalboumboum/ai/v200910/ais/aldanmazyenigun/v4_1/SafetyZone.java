@@ -80,12 +80,12 @@ public class SafetyZone {
 				Collection<AiBlock> blocks = tile.getBlocks();
 				Collection<AiItem> items= tile.getItems();
 
-				// s'il y a du feu : valeur zéro (il ne reste pas de temps avant
+				// s'il y a du feu : valeur zï¿½ro (il ne reste pas de temps avant
 				// l'explosion)
 				if (!fires.isEmpty()) {
 					matrix[line][col] = FIRE;
 				}
-				// s'il y a un mur en train de brûler : pareil
+				// s'il y a un mur en train de brÃ»ler : pareil
 				/*
 				 * else if(!heros.isEmpty()) matrix[line][col]=1;
 				 */
@@ -251,7 +251,7 @@ public class SafetyZone {
 				Collection<AiHero> heros = tile.getHeroes();
 				AiHero ownHero = zone.getOwnHero();
 
-				// s'il y a du feu : valeur zéro (il ne reste pas de temps avant
+				// s'il y a du feu : valeur zï¿½ro (il ne reste pas de temps avant
 				// l'explosion)
 				if (!fires.isEmpty()) {
 					attackMatrix[line][col] = FIRE;
@@ -265,7 +265,7 @@ public class SafetyZone {
 					else
 						attackMatrix[line][col] =BLOCKINDEST;
 				}
-				// s'il y a un mur en train de brûler : pareil
+				// s'il y a un mur en train de brÃ»ler : pareil
 				/*
 				 * else if(!heros.isEmpty()) matrix[line][col]=1;
 				 */

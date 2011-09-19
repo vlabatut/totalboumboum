@@ -86,7 +86,7 @@ public class SafetyZone {
 				if (!fires.isEmpty()) {
 					matrix[line][col] = FIRE;
 				}
-				// s'il y a un mur en train de br�ler : pareil
+				// s'il y a un mur en train de brûler : pareil
 				/*
 				 * else if(!heros.isEmpty()) matrix[line][col]=1;
 				 */
@@ -266,7 +266,7 @@ public class SafetyZone {
 					else
 						attackMatrix[line][col] =BLOCKINDEST;
 				}
-				// s'il y a un mur en train de br�ler : pareil
+				// s'il y a un mur en train de brûler : pareil
 				/*
 				 * else if(!heros.isEmpty()) matrix[line][col]=1;
 				 */

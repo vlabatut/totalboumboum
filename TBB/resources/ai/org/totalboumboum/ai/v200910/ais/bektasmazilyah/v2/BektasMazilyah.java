@@ -37,7 +37,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	private AiZone zone;
 	// le personnage dirig� par cette IA
 	private AiHero hero;
-	//la prochaine action que l'IA veut r�aliser
+	//la prochaine action que l'IA veut réaliser
 	private AiAction action;
 	// la dernière case par laquelle on est passé 
 	@SuppressWarnings("unused")

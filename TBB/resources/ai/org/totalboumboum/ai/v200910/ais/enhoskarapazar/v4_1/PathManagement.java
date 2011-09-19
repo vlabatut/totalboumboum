@@ -162,7 +162,7 @@ public class PathManagement {
 	 * vérifie que le personnage est bien sur le chemin pr�-calculé,
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
-	 * est vide apr�s l'ex�cution de cette méthode.
+	 * est vide apr�s l'exécution de cette méthode.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

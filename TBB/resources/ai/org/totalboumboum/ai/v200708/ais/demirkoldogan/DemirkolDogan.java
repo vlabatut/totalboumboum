@@ -15,7 +15,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 
 	
 	//FIELDS
-	private Vector<Block> zoneAccessible; //les block qu'on a acc�s
+	private Vector<Block> zoneAccessible; //les block qu'on a accès
 	private Vector<Block> path; //la serie des block qu'on doit passer pour arriver a targetBlock
 	private int[] oldPosition; //la position de l'IA dans la derniere appel
 	private Integer oldAction; //l'action de l'IA dans la derniere appel

@@ -130,7 +130,7 @@ public class SafetyManager
 					if(!fires.isEmpty())
 					{	matrix[line][col] = FIRE;				
 					}
-					// s'il y a un mur en train de br�ler : pareil
+					// s'il y a un mur en train de brûler : pareil
 					else if(!blocks.isEmpty())
 					{	AiBlock block = blocks.iterator().next();
 						if(block.getState().getName()==AiStateName.BURNING)

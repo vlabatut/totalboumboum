@@ -164,11 +164,11 @@ public class Noeud {
 		}
 
 		/**
-		 * Controle l'�galit� de l'objet à un autre objet
+		 * Controle l'égalit� de l'objet à un autre objet
 		 * 
 		 * @param object
 		 *            objet qu'on va comparer
-		 * @return true si l'objet est �gal à l'objet passé en parametre
+		 * @return true si l'objet est égal à l'objet passé en parametre
 		 */
 
 		public boolean equals(Object object) {

@@ -76,7 +76,7 @@ public class DeplacementCollecte {
 
 			} catch (Exception e) {
 				if (ai.print)
-					System.out.println("Collect:On est bloqu�" + e);
+					System.out.println("Collect:On est bloqué" + e);
 			}
 			// Detruire
 			if (ai.nextMove == null && ai.senfuire == false) {
@@ -494,7 +494,7 @@ public class DeplacementCollecte {
 
 	/**
 	 * Cette méthode compare les cases cibles entre eux et retourne la case qui
-	 * a la valeur plus �lev�e. S�il y a plus d�une valeur �lev�e �gales alors
+	 * a la valeur plus �lev�e. S�il y a plus d�une valeur �lev�e égales alors
 	 * IA regarde au distance de ceux cases .Elle prend trois arguments une
 	 * matrice de type Int et deux listes des cases.
 	 * 

@@ -194,7 +194,7 @@ public class BilginKarabag extends ArtificialIntelligence {
 		// destination
 		if (!isClear(nextTile)) { // liste des cases voisines accessibles
 			List<AiTile> tiles = getClearNeighbors(currentTile);
-			// on sort l'ancienne destination (qui est maintenant bloqu�e) de la
+			// on sort l'ancienne destination (qui est maintenant bloquée) de la
 			// liste
 			if (tiles.contains(nextTile))
 				tiles.remove(nextTile);

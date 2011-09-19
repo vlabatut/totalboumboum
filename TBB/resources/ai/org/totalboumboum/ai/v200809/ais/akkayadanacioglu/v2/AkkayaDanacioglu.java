@@ -175,7 +175,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
 			List<AiTile> tiles = getClearNeighbors(currentTile);
-			// on sort l'ancienne destination (qui est maintenant bloqu�e) de la liste
+			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);
 			// s'il reste des cases dans la liste : on en tire une au hasard

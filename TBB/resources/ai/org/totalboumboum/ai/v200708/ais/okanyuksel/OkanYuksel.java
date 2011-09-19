@@ -224,7 +224,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	
 	/*
 	 * Est-ce que la route est verticalement ou horizontalement ouverte et
-	 *  la distance est �gale ou moins de à menzil �?
+	 *  la distance est égale ou moins de à menzil �?
 	 * @param n1 point 1
 	 * @param n2 point 2
 	 * @param menzil distance
