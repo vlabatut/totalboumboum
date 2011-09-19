@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <connections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\connections.xsd">
-	<central ip="192.168.0.1" />
+	<central ip="87.106.97.5" />
 <!-- 	
 	<central ip="87.106.97.5" />
 	<central ip="192.168.0.1" />
@@ -11,6 +11,6 @@
 	5eceeff5-4c87-4228-8b64-a012da554978
 -->
 
-	<hosting port="10000" name="DesktopLan" id="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" mac="00-16-17-42-9D-11" />
+	<hosting port="10000" name="SoustonsLan"   id="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" mac="00-1D-7D-D5-B2-C2" />
 </connections>
 
