@@ -294,7 +294,7 @@ public class DropBomb
 		return result;
 	}
 	/***
-	 * Regarde s'il existe des obstacles entre deux tile pass�es en parametre. Retourne vrai s'il 
+	 * Regarde s'il existe des obstacles entre deux tile passées en parametre. Retourne vrai s'il 
 	 * n'y en a pas, faux sinon 
 	 * 
 	 * @param tile1
@@ -516,8 +516,8 @@ public class DropBomb
 	
 	/**
 	 * Calcules recursivement les cases qu'un hero peut passer dans une car�e d�j� determine�. 
-	 * Alors elle elemine les mur non destructible et puis les chemins que le hero associ� ne
-	 * peut pas acceder. Donc elle retourne une liste des cases que le hero associ� peut 
+	 * Alors elle elemine les mur non destructible et puis les chemins que le hero associé ne
+	 * peut pas acceder. Donc elle retourne une liste des cases que le hero associé peut 
 	 * acceder. S'il n'y a pas de case alors elle retourne null.
 	 * 
 	 * @param tile 

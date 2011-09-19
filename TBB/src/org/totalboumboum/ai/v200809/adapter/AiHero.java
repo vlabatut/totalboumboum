@@ -27,7 +27,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * repr�sente un personnage du jeu, ie un sprite contr�l� par un joueur
+ * représente un personnage du jeu, ie un sprite contr�l� par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut
@@ -36,11 +36,11 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public class AiHero extends AiSprite<Hero>
 {
 	/**
-	 * crée une repr�sentation du joueur pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation du joueur passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à repr�senter
+	 * @param sprite	sprite à représenter
 	 */
 	AiHero(AiTile tile, Hero sprite)
 	{	super(tile,sprite);
@@ -146,7 +146,7 @@ public class AiHero extends AiSprite<Hero>
 	/**
 	 * renvoie la couleur de ce personnage (et de ses bombes)
 	 * 
-	 * @return un symbole de type PredefinedColor repr�sentant une couleur
+	 * @return un symbole de type PredefinedColor représentant une couleur
 	 */
 	public PredefinedColor getColor()
 	{	return color;	

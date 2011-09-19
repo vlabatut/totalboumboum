@@ -823,7 +823,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	
 	/**
 	 * Methode qui a alogrithm pour fuir
-	 * �a utilise aussi methode de fuirAction()
+	 * ça utilise aussi methode de fuirAction()
 	 * @return
 	 * @throws StopRequestException
 	 */
@@ -885,7 +885,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 	}
 	
 	/**
-	 * Methode qui retuorne un adversaire plus proche et possible de arriv�e
+	 * Methode qui retuorne un adversaire plus proche et possible de arrivée
 	 * @return
 	 * @throws StopRequestException
 	 */

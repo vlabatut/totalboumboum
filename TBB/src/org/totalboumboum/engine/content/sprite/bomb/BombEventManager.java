@@ -342,7 +342,7 @@ public class BombEventManager extends EventManager
 			{
 				//NOTE pr�voir le cas où la bombe ne peut pas p�ter, il faut le remettre au prochain instant
 				// sauf que certains états pr�voient une r�init du timer au changement d'�tat (ex : bouncing)
-				// >> en fait pas ds toutes les instances. -> mettre un param�tre (ability)
+				// >> en fait pas ds toutes les instances. -> mettre un paramètre (ability)
 			}
 		}
 		// flame-caused explosion

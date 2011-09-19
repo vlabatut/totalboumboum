@@ -66,8 +66,8 @@ public class WallController {
 		private List<AiTile> possibleDest;
 		
 		/**
-		 * d�termine si le personnage est arriv� dans la case de destination.
-		 * S'il n'y a pas de case de destination, on consid�re que le personnage
+		 * détermine si le personnage est arriv� dans la case de destination.
+		 * S'il n'y a pas de case de destination, on considère que le personnage
 		 * est arriv�.
 		 */
 		public boolean hasArrived() throws StopRequestException
@@ -115,7 +115,7 @@ public class WallController {
 		
 		/** 
 		 * teste si le chemin est toujours valide, i.e. si
-		 * aucun obstacle n'est apparu depuis la dernière it�ration.
+		 * aucun obstacle n'est apparu depuis la dernière itération.
 		 * Contrairement au PathManager, ici pour simplifier on ne teste
 		 * que l'apparition de nouveaux obstacles (feu, bombes, murs), et non pas 
 		 * les changement concernant la s�ret� des cases. En d'autres termes,
@@ -167,7 +167,7 @@ public class WallController {
 		/////////////////////////////////////////////////////////////////	
 		/** 
 		 * calcule la prochaine direction pour aller vers la destination 
-		 *(ou renvoie Direction.NONE si aucun déplacement n'est n�cessaire)
+		 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
 		 * */
 		public Direction update() throws StopRequestException
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -189,7 +189,7 @@ public class WallController {
 				// sinon, s'il ne reste qu'une seule case, on va au centre
 				else if(path.getLength()>0)
 					tile = path.getTile(0);
-				// on d�termine la direction du prochain déplacement
+				// on détermine la direction du prochain déplacement
 				if(tile!=null)
 					result = zone.getDirection(ai.getOwnHero(),tile);			
 			}

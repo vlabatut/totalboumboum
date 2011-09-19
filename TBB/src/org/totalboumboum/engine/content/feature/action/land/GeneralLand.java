@@ -43,13 +43,13 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * 	<br>N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>param�tre: actor=oui (hero,bombe)
- * 	<br>param�tre: target=N/D
- * 	<br>param�tre: direction=N/D
- * 	<br>param�tre: strength=bool
- * 	<br>param�tre: kind=N/D
- * 	<br>param�tre: scope=oui
- * 	<br>param�tre: restriction=SPRITE_TRAVERSE
+ * 	<br>paramètre: actor=oui (hero,bombe)
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=oui
+ * 	<br>paramètre: restriction=SPRITE_TRAVERSE
  */
 /** 
  * finishing an aerial move and landing on the floor.

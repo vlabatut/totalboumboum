@@ -42,8 +42,8 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 
 
 /**
- * Repr�sente un bloc du jeu, c'est à dire g�n�ralement un mur
- * (pouvant �tre détruit ou pas). 
+ * Représente un bloc du jeu, c'est à dire généralement un mur
+ * (pouvant être détruit ou pas). 
  * 
  * @author Vincent Labatut
  *
@@ -52,11 +52,11 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 public class AiBlock extends AiSprite<Block>
 {
 	/**
-	 * crée une repr�sentation du bloc pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation du bloc passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à repr�senter
+	 * @param sprite	sprite à représenter
 	 */
 	AiBlock(AiTile tile, Block sprite)
 	{	super(tile,sprite);
@@ -77,7 +77,7 @@ public class AiBlock extends AiSprite<Block>
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce bloc peut �tre détruit par une bombe */
+	/** indique si ce bloc peut être détruit par une bombe */
 	private boolean destructible;
 
 	/** 
@@ -98,7 +98,7 @@ public class AiBlock extends AiSprite<Block>
 	private AiStopType stopFires;
 	
 	/** 
-	 * met jour les diff�rentes caract�ristiques de ce bloc
+	 * met jour les différentes caract�ristiques de ce bloc
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()
@@ -156,7 +156,7 @@ public class AiBlock extends AiSprite<Block>
 	}	
 
 	/**
-	 * renvoie vrai si ce bloc peut �tre détruit par une bombe, et faux sinon
+	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
 	 * 
 	 * @return	l'indicateur de destructibilit� du mur
 	 */

@@ -39,7 +39,7 @@ import org.totalboumboum.game.round.RoundVariables;
 
 
 /**
- * repr�sente une case du jeu, avec tous les sprites qu'elle contient.
+ * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
  *
@@ -47,9 +47,9 @@ import org.totalboumboum.game.round.RoundVariables;
 
 public class AiTile
 {	/**
-	 * construit une repr�sentation de la case pass�e en param�tre
-	 * @param tile	case repr�sent�e
-	 * @param zone	zone contenant la repr�sentation
+	 * construit une représentation de la case passée en paramètre
+	 * @param tile	case représent�e
+	 * @param zone	zone contenant la représentation
 	 */
 	AiTile(Tile tile, AiZone zone)
 	{	this.zone = zone;
@@ -73,7 +73,7 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** repr�sentation de la zone à laquelle cette case appartient */
+	/** représentation de la zone à laquelle cette case appartient */
 	private AiZone zone;
 	
 	public AiZone getZone()
@@ -83,7 +83,7 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 	// ENGINE TILE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case du jeu que cette classe repr�sente */
+	/** case du jeu que cette classe représente */
 	private Tile tile;
 	
 	Tile getTile()
@@ -141,9 +141,9 @@ public class AiTile
 	}
 	
 	/** 
-	 * renvoie l'ordonn�e de la case en pixels
+	 * renvoie l'ordonnée de la case en pixels
 	 * 
-	 * @return	l'ordonn�e de cette case
+	 * @return	l'ordonnée de cette case
 	 */
 	public double getPosY()
 	{	return posY;	
@@ -175,49 +175,49 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste des blocks �ventuellement contenus dans cette case */
+	/** liste des blocks éventuellement contenus dans cette case */
 	private final List<AiBlock> blocks = new ArrayList<AiBlock>();
-	/** liste des bombes �ventuellement contenues dans cette case */
+	/** liste des bombes éventuellement contenues dans cette case */
 	private final List<AiBomb> bombs = new ArrayList<AiBomb>();
-	/** liste des feux �ventuellement contenus dans cette case */
+	/** liste des feux éventuellement contenus dans cette case */
 	private final List<AiFire> fires = new ArrayList<AiFire>();
-	/** liste des sols �ventuellement contenus dans cette case */
+	/** liste des sols éventuellement contenus dans cette case */
 	private final List<AiFloor> floors = new ArrayList<AiFloor>();
-	/** liste des personnages �ventuellement contenus dans cette case */
+	/** liste des personnages éventuellement contenus dans cette case */
 	private final List<AiHero> heroes = new ArrayList<AiHero>();
-	/** liste des items �ventuellement contenus dans cette case */
+	/** liste des items éventuellement contenus dans cette case */
 	private final List<AiItem> items = new ArrayList<AiItem>();
 
 	/** 
 	 * renvoie la liste des blocks contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les blocks �ventuellement contenus dans cette case
+	 * @return	les blocks éventuellement contenus dans cette case
 	 */
 	public List<AiBlock> getBlocks()
 	{	return blocks;	
 	}
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les bombes �ventuellement contenues dans cette case
+	 * @return	les bombes éventuellement contenues dans cette case
 	 */
 	public List<AiBomb> getBombs()
 	{	return bombs;	
 	}
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les feux �ventuellement contenus dans cette case
+	 * @return	les feux éventuellement contenus dans cette case
 	 */
 	public List<AiFire> getFires()
 	{	return fires;	
 	}
 	/** 
 	 * renvoie les sols de cette case 
-	 * (il y a forc�ment au moins un sol)
+	 * (il y a forcément au moins un sol)
 	 * 
 	 * @return	les sols contenus dans cette case
 	 */
@@ -226,25 +226,25 @@ public class AiTile
 	}
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les personnages �ventuellement contenus dans cette case
+	 * @return	les personnages éventuellement contenus dans cette case
 	 */
 	public List<AiHero> getHeroes()
 	{	return heroes;	
 	}
 	/** 
 	 * renvoie la liste des items contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les items �ventuellement contenus dans cette case
+	 * @return	les items éventuellement contenus dans cette case
 	 */
 	public List<AiItem> getItems()
 	{	return items;	
 	}
 	
 	/** 
-	 * met à jour les repr�sentations des sprites contenus dans cette case
+	 * met à jour les représentations des sprites contenus dans cette case
 	 */
 	private void updateSprites()
 	{	// block
@@ -369,7 +369,7 @@ public class AiTile
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Teste si le sprite pass� en param�tre est capable de traverser
+	 * Teste si le sprite passé en paramètre est capable de traverser
 	 * cette case. Sinon, cela signifie qu'elle contient au moins un
 	 * obstacle que le personnage ne peut pas traverser. 
 	 * Tous les sprites ne sont pas sensibles aux mêmes obstacles,
@@ -404,10 +404,10 @@ public class AiTile
 	}
 	
 	/**
-	 * fonction auxiliaire utilisée pour d�terminer si cette
-	 * case est traversable par le sprite pass� en param�tre.
+	 * fonction auxiliaire utilisée pour déterminer si cette
+	 * case est traversable par le sprite passé en paramètre.
 	 * (cette fonction r�alise le traitement relativement à 
-	 * la liste de sprite pass�e en param�tre)
+	 * la liste de sprite passée en paramètre)
 	 * 
 	 * @param sprite	le sprite qui veut traverser cette case
 	 * @param list	les sprites de cette case à tester
@@ -448,8 +448,8 @@ public class AiTile
 	}
 	
 	/**
-	 * renvoie le voisin de cette case pass�e en param�tre, situ� dans la direction
-	 * pass�e en param�tre. Attention, seulement les directions primaires sont
+	 * renvoie le voisin de cette case passée en paramètre, situ� dans la direction
+	 * passée en paramètre. Attention, seulement les directions primaires sont
 	 * utilisées (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
 	 * Dans le cas contraire, la fonction renvoie null.</br>
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
@@ -475,7 +475,7 @@ public class AiTile
 	 * à la position (ligne,0), le voisin de gauche est la case situ�e à la position
 	 * (ligne,width-1). même chose pour les bordures haut et bas.
 	 * 
-	 * @return	la liste des voisins situ�s en haut, à gauche, en bas et à droite de la case pass�e en param�tre
+	 * @return	la liste des voisins situ�s en haut, à gauche, en bas et à droite de la case passée en paramètre
 	 */
 	public List<AiTile> getNeighbors()
 	{	List<AiTile> result = new ArrayList<AiTile>();
@@ -528,10 +528,10 @@ public class AiTile
 	}
 
 	/**
-	 * termine les repr�sentations de sprites pass�es en param�tres
+	 * termine les représentations de sprites passées en paramètres
 	 * 
-	 * @param <T>	type de repr�sentation
-	 * @param list	liste de repr�sentations
+	 * @param <T>	type de représentation
+	 * @param list	liste de représentations
 	 */
 	private <T extends AiSprite<?>> void finishSprites(List<T> list)
 	{	Iterator<T> it = list.iterator();

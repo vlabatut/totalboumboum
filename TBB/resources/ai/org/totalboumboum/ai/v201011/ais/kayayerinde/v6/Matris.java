@@ -125,7 +125,7 @@ public class Matris {
 	/////////////////////////////////////////////////////////////////
 	// BOMBS		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste des bombes trait�es au cours de cette it�ration (pour ne pas les traiter plusieurs fois) */
+	/** liste des bombes trait�es au cours de cette itération (pour ne pas les traiter plusieurs fois) */
 	private List<AiBomb> processedBombs;
 	
 	
@@ -283,7 +283,7 @@ public class Matris {
 	
 	/**
 	 * calcule une liste de cases correspondant au souffle indirect de la bombe
-	 * pass�e en param�tre. Le terme "indirect" signifie que la fonction est r�cursive : 
+	 * passée en paramètre. Le terme "indirect" signifie que la fonction est r�cursive : 
 	 * si une case à port�e de souffle contient une bombe, le souffle de cette bombe est rajout�
 	 * dans la liste blast, et la bombe est rajout�e dans la liste bombs.
 	 */
@@ -312,7 +312,7 @@ public class Matris {
 	}	
 
 	/**
-	 * traite la bombe pass�e en param�tre
+	 * traite la bombe passée en paramètre
 	 */
 	private void processBomb(AiBomb bomb) throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE

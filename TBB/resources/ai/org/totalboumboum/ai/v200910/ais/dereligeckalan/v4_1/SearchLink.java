@@ -50,7 +50,7 @@ public class SearchLink {
 
 	/**
 	 * Renvoie une valeur indiquant l'egalite de l'objet
-	 * vrai si l'objet pass� en parametre est egale à cet objet
+	 * vrai si l'objet passé en parametre est egale à cet objet
 	 * false sinon 
 	 * @return result indique l'egalite	
 	 */

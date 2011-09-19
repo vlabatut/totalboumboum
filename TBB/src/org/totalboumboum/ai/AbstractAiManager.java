@@ -48,20 +48,20 @@ import org.totalboumboum.game.round.RoundVariables;
 /**
  * 
  * Classe servant d'interface entre le jeu et une IA.
- * Elle doit �tre surclass�e de mani�re à obtenir un adaptateur pour une famille
+ * Elle doit être surclass�e de mani�re à obtenir un adaptateur pour une famille
  * d'IA donn�e. Puis, chaque IA doit elle même surclasser la classe r�sultante
- * (tout �a dans le but de faciliter le chargement de la classe implémentant l'IA).
+ * (tout ça dans le but de faciliter le chargement de la classe implémentant l'IA).
  * 
  * @author Vincent Labatut
  *
  * @param <V>	
- * 		le type de donn�e renvoy�e par l'IA (et devant �tre traduite par l'adaptateur en un �v�nement compatible avec le moteur du jeu)
+ * 		le type de donn�e renvoy�e par l'IA (et devant être traduite par l'adaptateur en un �v�nement compatible avec le moteur du jeu)
  */
 
 public abstract class AbstractAiManager<V>
 {	/**
-     * contruit un nouveau manager pour l'IA pass� en param�tre.
-     * Ce constructeur est destin� à �tre appel� par le constructeur situ� dans 
+     * contruit un nouveau manager pour l'IA passé en paramètre.
+     * Ce constructeur est destin� à être appel� par le constructeur situ� dans 
      * la classe h�ritant de celle-ci et situ�e dans le dossier de l'IA
      *    
      * @param 
@@ -112,7 +112,7 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * Utilise la classe d'IA associ�e à ce personnage pour mettre à jour les variables
+     * Utilise la classe d'IA associée à ce personnage pour mettre à jour les variables
      * qui permettront au moteur du jeu de d�placer le personnage.
      * 
      * @param aisPause
@@ -217,7 +217,7 @@ public abstract class AbstractAiManager<V>
     
     /**
      * terminer ce gestionnaire, et en particulier le thread ex�cutant l'IA.
-     * Ou plut�t tente de le terminer, car le r�sultat ne peut �tre forc�.
+     * Ou plut�t tente de le terminer, car le r�sultat ne peut être forc�.
      */
     public final void finish()
     {	finishAi();
@@ -273,7 +273,7 @@ public abstract class AbstractAiManager<V>
 	 * renvoie le joueur contr�l� par l'IA g�r�e
 	 * 
 	 * @return	
-	 * 		un objet repr�sentant le joueur contr�l� par l'IA
+	 * 		un objet représentant le joueur contr�l� par l'IA
 	 */
     public AbstractPlayer getPlayer()
 	{	return player;		
@@ -282,7 +282,7 @@ public abstract class AbstractAiManager<V>
 	/**
 	 * méthode utilisée pour mettre à jour les percepts de l'ia avant 
 	 * que cette dernière ne calcule la prochaine action à effectuer.
-	 * Cette méthode doit �tre surcharg�e de mani�re à adapter la structure
+	 * Cette méthode doit être surchargée de mani�re à adapter la structure
 	 * des donn�es à l'IA qui va les traiter
 	 */
 	public abstract void updatePercepts();
@@ -308,7 +308,7 @@ public abstract class AbstractAiManager<V>
     /////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleurs associ�es aux cases (ou null pour aucune couleur */
+	/** couleurs associées aux cases (ou null pour aucune couleur */
 	private Color[][] tileColors;
 	/** textes à afficher sur les cases (liste vide pour aucun texte) */
 	private List<String>[][] tileTexts;
@@ -320,7 +320,7 @@ public abstract class AbstractAiManager<V>
 	private final List<Color> pathColors = new ArrayList<Color>();
 	
 	/**
-	 * met à jour la repr�sentation des sorties de l'IA
+	 * met à jour la représentation des sorties de l'IA
 	 * qui est destin�e au moteur
 	 */
 	protected abstract void updateOutput();
@@ -359,7 +359,7 @@ public abstract class AbstractAiManager<V>
 	 * renvoie la liste de chemins à afficher
 	 * 
 	 * @return	
-	 * 		liste de vecteurs de cases contig�es repr�sentant des chemins
+	 * 		liste de vecteurs de cases contig�es représentant des chemins
 	 */
 	public List<List<Tile>> getPaths()
 	{	return paths;

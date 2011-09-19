@@ -154,7 +154,7 @@ public class Path {
 	 * on a essay� d'appliquer l'algorithme de largeur d'abord
 	 * au debut le method prend une path qui a seulement le tile du hero et apres il regarde ses voisines
 	 * et si le vosine est inpassable ou bien si il est deja utilisé on ne l'ajoute pas au path
-	 * sinon on l'ajoute en regardent sa valeur de matriceTotale pour pouvoire decider si �a peut etre une cible ou pas.
+	 * sinon on l'ajoute en regardent sa valeur de matriceTotale pour pouvoire decider si ça peut etre une cible ou pas.
 	 * 
 	 * @param matriceMarqueur le matrice qui est utilisé pour comprendre si ce tile est deja utilise ou pas
 	 * il a comme valeurs : 
@@ -334,7 +334,7 @@ public class Path {
 	
 	/**
 	 * Methode calculant la nouvelle action a effectuer
-	 * (methode de groupe rouge de l'annee dernier mais on l'a modifi�)
+	 * (methode de groupe rouge de l'annee dernier mais on l'a modifié)
 	 * @param nextMove
 	 * 			Le chemin precis a suivre.
 	 *  

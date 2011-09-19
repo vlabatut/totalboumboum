@@ -26,7 +26,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 
 /**
  * cette classe permet de simuler les sprites du jeu,
- * et un nombre restreint de leurs propri�t�s.
+ * et un nombre restreint de leurs propriétés.
  * 
  * @author Vincent Labatut
  *
@@ -43,7 +43,7 @@ abstract class AiSimSprite implements AiSprite
 	 * @param posX
 	 * 		abscisse du sprite
 	 * @param posY
-	 * 		ordonn�e du sprite
+	 * 		ordonnée du sprite
 	 * @param posZ
 	 * 		hauteur du sprite
 	 * @param state
@@ -69,7 +69,7 @@ abstract class AiSimSprite implements AiSprite
 	}
 
 	/**
-	 * construit une simulation du sprite pass� en param�tre
+	 * construit une simulation du sprite passé en paramètre
 	 * 
 	 * @param sprite	
 	 * 		sprite à simuler
@@ -175,7 +175,7 @@ abstract class AiSimSprite implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	/** abscisse de ce sprite en pixels */
 	protected double posX;
-	/** ordonn�e de ce sprite en pixels */
+	/** ordonnée de ce sprite en pixels */
 	protected double posY;
 	/** altitude de ce sprite en pixels */
 	protected double posZ;
@@ -196,13 +196,13 @@ abstract class AiSimSprite implements AiSprite
 	}
 	
 	/**
-	 * permet de modifier les coordonnées de ce sprite (exprim�es en pixels).
+	 * permet de modifier les coordonnées de ce sprite (exprimées en pixels).
 	 * méthode utilisée uniquement lors des simulations.
 	 * 
 	 * @param x
 	 * 		nouvelle abscisse
 	 * @param y
-	 * 		nouvelle ordonn�e
+	 * 		nouvelle ordonnée
 	 * @param z
 	 * 		nouvelle hauteur
 	 */
@@ -215,7 +215,7 @@ abstract class AiSimSprite implements AiSprite
 	/////////////////////////////////////////////////////////////////
 	// BURN				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps n�cessaire au sprite pour br�ler (� condition qu'il puisse br�ler) */
+	/** temps nécessaire au sprite pour br�ler (� condition qu'il puisse br�ler) */
 	protected long burningDuration = 0;
 	
 	@Override

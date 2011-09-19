@@ -59,7 +59,7 @@ public class NetworkPlayerControl extends PlayerControl
 	/////////////////////////////////////////////////////////////////
 	// KEYS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// n�cessaire pour �viter d'�mettre des �v�nements de fa�on répétitive pour un seul pressage de touche
+	// nécessaire pour �viter d'�mettre des �v�nements de fa�on répétitive pour un seul pressage de touche
 	private final HashMap<Integer,Boolean> pressedKeys = new HashMap<Integer,Boolean>();
 	
 	@Override

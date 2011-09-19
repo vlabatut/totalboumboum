@@ -130,7 +130,7 @@ public class DangerManager {
 			getBlast(bomb,blast,bombs);
 			processedBombs.addAll(bombs);
 			
-			// on d�termine quelle est la bombe la plus dangereuse (temps le plus court)
+			// on détermine quelle est la bombe la plus dangereuse (temps le plus court)
 			double value = SAFE;
 			for(AiBomb b: bombs)
 			{	hero.checkInterruption(); //APPEL OBLIGATOIRE

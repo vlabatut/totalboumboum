@@ -27,7 +27,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 
 /**
- * permet de d�finir une fonction heuristique utilisée par l'algorithme
+ * permet de définir une fonction heuristique utilisée par l'algorithme
  * A* lors de la recherche d'un plus court chemin.
  * 
  * @author Vincent Labatut

@@ -33,35 +33,35 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action de récolter (un item)
+ * action de rï¿½colter (un item)
  * TRANSITIVE
  * 
  * <p>ABILITY PERFORM
- * 	<br>paramètre: actor=self
- * 	<br>paramètre: target=oui (item)
- * 	<br>paramètre: direction=N/D
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
+ * 	<br>paramÃ¨tre: actor=self
+ * 	<br>paramÃ¨tre: target=oui (item)
+ * 	<br>paramÃ¨tre: direction=N/D
+ * 	<br>paramÃ¨tre: strength=bool
+ * 	<br>paramÃ¨tre: kind=N/D
+ * 	<br>paramÃ¨tre: scope=N/D
+ * 	<br>paramÃ¨tre: restriction=N/D
  * 
- * <p>ABILITY REFUSE (ex: item qui ne peut pas être récolté en permanence)
- * 	<br>paramètre: actor=oui (hero)
- * 	<br>paramètre: target=self
- * 	<br>paramètre: direction=N/D
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
+ * <p>ABILITY REFUSE (ex: item qui ne peut pas Ãªtre rï¿½coltï¿½ en permanence)
+ * 	<br>paramÃ¨tre: actor=oui (hero)
+ * 	<br>paramÃ¨tre: target=self
+ * 	<br>paramÃ¨tre: direction=N/D
+ * 	<br>paramÃ¨tre: strength=bool
+ * 	<br>paramÃ¨tre: kind=N/D
+ * 	<br>paramÃ¨tre: scope=N/D
+ * 	<br>paramÃ¨tre: restriction=N/D
  * 
- * <p>ABILITY PREVENT (ex: un bloc qui empêche par intermitence les heros de récolter l'item)
- * 	<br>paramètre: actor=oui (hero)
- * 	<br>paramètre: target=oui (item)
- * 	<br>paramètre: direction=N/D
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=éventuellement
+ * <p>ABILITY PREVENT (ex: un bloc qui empï¿½che par intermitence les heros de rï¿½colter l'item)
+ * 	<br>paramÃ¨tre: actor=oui (hero)
+ * 	<br>paramÃ¨tre: target=oui (item)
+ * 	<br>paramÃ¨tre: direction=N/D
+ * 	<br>paramÃ¨tre: strength=bool
+ * 	<br>paramÃ¨tre: kind=N/D
+ * 	<br>paramÃ¨tre: scope=N/D
+ * 	<br>paramÃ¨tre: restriction=Ã©ventuellement
  */
 /** 
  * picking an object just by walking on it (unlike picking a bomb to carry it). 

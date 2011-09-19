@@ -369,7 +369,7 @@ public class KilicPala extends ArtificialIntelligence
 	
 	/**
 	 * 
-	 * Indique si la case situ�e à la position pass�e en param�tre
+	 * Indique si la case situ�e à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
 	 * @param x	position à �tudier
 	 * @param y	position à �tudier
@@ -396,7 +396,7 @@ public class KilicPala extends ArtificialIntelligence
 	}
 
 	/**
-	 * Indique si le déplacement dont le code a �t� pass� en param�tre 
+	 * Indique si le déplacement dont le code a �t� passé en paramètre 
 	 * est possible pour un personnage situ� en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage

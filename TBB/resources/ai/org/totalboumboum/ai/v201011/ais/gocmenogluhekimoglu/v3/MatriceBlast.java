@@ -9,7 +9,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFire;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
- * Cette classe peut �tre utilisée pour calculer les effets des bombes sur la matrice nous calculons
+ * Cette classe peut être utilisée pour calculer les effets des bombes sur la matrice nous calculons
  * @author Can G��meno�lu
  *
  */

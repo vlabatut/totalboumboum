@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v200708.ais.caglayanelmas;
 
 
 /**
- * La classe qui représente un noeud de recherche.
+ * La classe qui reprÃ©sente un noeud de recherche.
  * 
  * @author Ozan Caglayan
  * @author Arif Can Elmas
@@ -20,7 +20,7 @@ public class SearchNode
 	/**
 	 * Constructeur de la classe SearchNode.
 	 * 
-	 * @param state		l'état du noeud
+	 * @param state		l'ï¿½tat du noeud
 	 * @param depth		la profondeur du noeud
 	 * @param cost		le cout du noeud
 	 * @param heuristic	l'heuristic du noeud
@@ -38,7 +38,7 @@ public class SearchNode
 	}
 
 	/**
-	 * @return l'état du noeud
+	 * @return l'ï¿½tat du noeud
 	 */
 	public int[] getState()
 	{	
@@ -80,7 +80,7 @@ public class SearchNode
 	}
 
 	/**
-	 * @return vrai si le noeud est déjà visité.
+	 * @return vrai si le noeud est dï¿½jï¿½ visitï¿½.
 	 */
 	public boolean isVisited()
 	{	
@@ -88,7 +88,7 @@ public class SearchNode
 	}
 
 	/**
-	 * @return l'itération pendant laquelle le noeud est visité.
+	 * @return l'itÃ©ration pendant laquelle le noeud est visitï¿½.
 	 */
 	public int getIteration()
 	{	

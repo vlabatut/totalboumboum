@@ -92,7 +92,7 @@ public class YolBulucu
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
-	/** l'ordonn�e de destination */
+	/** l'ordonnée de destination */
 	private double yDest;
 	
 	/**
@@ -139,8 +139,8 @@ public class YolBulucu
 */	
 
 	/**
-	 * d�termine si le personnage est arriv� au centre de la case
-	 * pass�e en param�tre
+	 * détermine si le personnage est arriv� au centre de la case
+	 * passée en paramètre
 	 */
 /*	private boolean hasArrived(AiTile tile) throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -151,7 +151,7 @@ public class YolBulucu
 	}
 */
 	/**
-	 * d�termine si le personnage est arriv� aux coordonnées de destination
+	 * détermine si le personnage est arriv� aux coordonnées de destination
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -162,7 +162,7 @@ public class YolBulucu
 			double xCurrent = ownHero.getPosX();
 			double yCurrent = ownHero.getPosY();
 			arrived = zone.hasSamePixelPosition(xCurrent,yCurrent,xDest,yDest);
-			// cas particulier : oscillation autour du point d'arriv�e
+			// cas particulier : oscillation autour du point d'arrivée
 			if(!arrived && path.getLength()==1)
 			{	Direction prevDir = zone.getDirection(xPrev,yPrev,xDest,yDest);
 				Direction currentDir = zone.getDirection(xCurrent,yCurrent,xDest,yDest);
@@ -178,12 +178,12 @@ public class YolBulucu
 	/////////////////////////////////////////////////////////////////
 	/** abscisse pr�c�dente */
 	private double xPrev;
-	/** ordonn�e pr�c�dente */
+	/** ordonnée pr�c�dente */
 	private double yPrev;	
 	
 	/**
 	 * met à jour la position pr�c�dente du personnage,
-	 * exprim�e en pixels
+	 * exprimée en pixels
 	 */
 	private void updatePrev() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE
@@ -217,7 +217,7 @@ public class YolBulucu
 	}
 	
 	/**
-	 * d�termine si le personnage a d�pass� la première case du chemin
+	 * détermine si le personnage a d�passé la première case du chemin
 	 * en direction de la seconde case
 	 */
 /*	private boolean hasCrossed(AiTile tile) throws StopRequestException
@@ -251,7 +251,7 @@ public class YolBulucu
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
 	 * est toujours s�r et si aucun obstacle n'est apparu
-	 * depuis la dernière it�ration
+	 * depuis la dernière itération
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	onder.checkInterruption(); //APPEL OBLIGATOIRE

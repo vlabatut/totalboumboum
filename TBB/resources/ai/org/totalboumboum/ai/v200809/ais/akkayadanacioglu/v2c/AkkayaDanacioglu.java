@@ -33,7 +33,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
 	
-	/** la dernière case par laquelle on est pass� */ 
+	/** la dernière case par laquelle on est passé */ 
 	private AiTile previousTile = null;
 	
 	/*Methode Main de jeu
@@ -134,8 +134,8 @@ public class AkkayaDanacioglu extends ArtificialIntelligence
 	
 	/**
 	 * Choisit comme destination une case voisine de la case actuellement occup�e par l'IA.
-	 * Cette case doit �tre accessible (pas de mur ou de bombe ou autre obstacle) et doit
-	 * �tre diff�rente de la case pr�c�demment occup�e
+	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
+	 * être différente de la case pr�c�demment occup�e
 	 * @throws StopRequestException 
 	 */
 	

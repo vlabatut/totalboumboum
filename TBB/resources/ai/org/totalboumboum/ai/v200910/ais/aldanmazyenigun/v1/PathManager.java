@@ -38,7 +38,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * classe charg�e d'impl�menter un déplacement, 
+ * classe chargée d'impl�menter un déplacement, 
  * en respectant un chemin donn�
  * 
  * @version 1
@@ -52,8 +52,8 @@ public class PathManager
 
 
 	/**
-	 * crée un PathManager charg� d'amener le personnage à la position (x,y)
-	 * exprim�e en pixels
+	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
+	 * exprimée en pixels
 	 */
 	public PathManager(AldanmazYenigun ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -63,8 +63,8 @@ public class PathManager
 	}
 	
 	/**
-	 * crée un PathManager charg� d'amener le personnage au centre de la case
-	 * pass�e en param�tre
+	 * crée un PathManager chargé d'amener le personnage au centre de la case
+	 * passée en paramètre
 	 */
 	public PathManager(AldanmazYenigun ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -104,7 +104,7 @@ public class PathManager
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
-	/** l'ordonn�e de destination */
+	/** l'ordonnée de destination */
 	private double yDest;
 	
 	/**
@@ -149,8 +149,8 @@ public class PathManager
 */	
 
 	/**
-	 * d�termine si le personnage est arriv� au centre de la case
-	 * pass�e en param�tre
+	 * détermine si le personnage est arriv� au centre de la case
+	 * passée en paramètre
 	 */
 /*	private boolean hasArrived(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -161,7 +161,7 @@ public class PathManager
 	}
 */
 	/**
-	 * d�termine si le personnage est arriv� aux coordonnées de destination
+	 * détermine si le personnage est arriv� aux coordonnées de destination
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -172,7 +172,7 @@ public class PathManager
 			double xCurrent = ownHero.getPosX();
 			double yCurrent = ownHero.getPosY();
 			arrived = zone.hasSamePixelPosition(xCurrent,yCurrent,xDest,yDest);
-			// cas particulier : oscillation autour du point d'arriv�e
+			// cas particulier : oscillation autour du point d'arrivée
 			if(!arrived && path.getLength()==1)
 			{	Direction prevDir = zone.getDirection(xPrev,yPrev,xDest,yDest);
 				Direction currentDir = zone.getDirection(xCurrent,yCurrent,xDest,yDest);
@@ -188,12 +188,12 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	/** abscisse pr�c�dente */
 	private double xPrev;
-	/** ordonn�e pr�c�dente */
+	/** ordonnée pr�c�dente */
 	private double yPrev;	
 	
 	/**
 	 * met à jour la position pr�c�dente du personnage,
-	 * exprim�e en pixels
+	 * exprimée en pixels
 	 */
 	private void updatePrev() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -226,7 +226,7 @@ public class PathManager
 	}
 	
 	/**
-	 * d�termine si le personnage a d�pass� la première case du chemin
+	 * détermine si le personnage a d�passé la première case du chemin
 	 * en direction de la seconde case
 	 */
 /*	private boolean hasCrossed(AiTile tile) throws StopRequestException
@@ -260,7 +260,7 @@ public class PathManager
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
 	 * est toujours s�r et si aucun obstacle n'est apparu
-	 * depuis la dernière it�ration
+	 * depuis la dernière itération
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -292,7 +292,7 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////	
 	/** 
 	 * calcule la prochaine direction pour aller vers la destination 
-	 *(ou renvoie Direction.NONE si aucun déplacement n'est n�cessaire)
+	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
 	 * */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

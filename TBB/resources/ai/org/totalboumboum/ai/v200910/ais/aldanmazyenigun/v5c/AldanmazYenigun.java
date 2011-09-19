@@ -66,7 +66,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 	private AiHero targetHero = null;
 
-	/** classe charg�e de d�terminer quelles cases sont s�res */
+	/** classe chargée de déterminer quelles cases sont s�res */
 	private SafetyZone safetyZone = null;
 
 	private boolean thereIsSafeTile = true;
@@ -656,7 +656,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	}
 
 	/**
-	 * met à jour la cible, et �ventuellement le chemin jusqu'� elle
+	 * met à jour la cible, et éventuellement le chemin jusqu'� elle
 	 */
 	private void updateTarget() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE

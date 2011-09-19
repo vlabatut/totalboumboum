@@ -45,7 +45,7 @@ public class LienRecherche {
 	/**
 	 * Renvoie l'action de transition
 	 * 
-	 * @return l'action associ�e au lien
+	 * @return l'action associée au lien
 	 */
 
 	@Override

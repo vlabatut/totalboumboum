@@ -9,7 +9,7 @@ import org.totalboumboum.ai.v200708.ais.camasdemirbas.ManhattanHeuristic;
 
 /**
  * Une impl�mentation de viseur de chemin 
- * qui utilise l'AStar l'algorithme bas� heuristique d�terminer un chemin. 
+ * qui utilise l'AStar l'algorithme bas� heuristique déterminer un chemin. 
  * 
  * @author Gokhan Camas
  * @author Irem Demirbas
@@ -30,13 +30,13 @@ public class AStarPathFinder implements PathFinder {
 	private Node[][] nodes;
 	protected static boolean findPathWithSoftWall;
 	private boolean allowDiagMovement;
-	/** L'heuristique nous appliquons nous d�terminer quels noeuds pour chercher premièrement */
+	/** L'heuristique nous appliquons nous déterminer quels noeuds pour chercher premièrement */
 	private AStarHeuristic heuristic;
 	
 	/**
 	 * r�er un viseur de chemin avec l'implicite heuristique - le plus proche pour cibler.
 	 * 
-	 * @param map La carte �tre cherch�e
+	 * @param map La carte être cherch�e
 	 * @param maxSearchDistance La profondeur maximum que nous chercherons avant de renoncer
 	 * @param allowDiagMovement True si la recherche doit essayer le mouvement de diaganol
 	 */
@@ -47,8 +47,8 @@ public class AStarPathFinder implements PathFinder {
 	/**
 	 * créer un viseur de chemin 
 	 * 
-	 * @param heuristic L'heuristique a utilisé pour d�terminer l'ordre de recherche de la carte
-	 * @param map La carte �tre cherch�e
+	 * @param heuristic L'heuristique a utilisé pour déterminer l'ordre de recherche de la carte
+	 * @param map La carte être cherch�e
 	 * @param maxSearchDistance La profondeur maximum que nous chercherons avant de renoncer
 	 * @param allowDiagMovement Vrai si la recherche doit essayer le mouvement de diaganol
 	 */
@@ -171,7 +171,7 @@ public class AStarPathFinder implements PathFinder {
 
 	/**
 	 * Obtenir le premier �l�ment de la liste ouverte. 
-	 * Ceci est le suivant �tre cherch�. 
+	 * Ceci est le suivant être cherch�. 
 	 * 
 	 * @return e premier �l�ment dans la liste ouverte
 	 */
@@ -182,7 +182,7 @@ public class AStarPathFinder implements PathFinder {
 	/**
 	 * Ajouter un noeud à la liste ouverte
 	 * 
-	 * @param node Le noeud �tre ajout� à la liste ouverte
+	 * @param node Le noeud être ajout� à la liste ouverte
 	 */
 	protected void addToOpen(Node node) {
 		open.add(node);
@@ -220,7 +220,7 @@ public class AStarPathFinder implements PathFinder {
 	 * Le contr�le si le noeud fourni est dans la liste ferm�e
 	 * 
 	 * @param node 
-	 * @return True si le noeud sp�cifi� est dans la liste ferm�e
+	 * @return True si le noeud spécifié est dans la liste ferm�e
 	 */
 	protected boolean inClosedList(Node node) {
 		return closed.contains(node);
@@ -255,7 +255,7 @@ public class AStarPathFinder implements PathFinder {
 
 	/**
 	 * Obtenir le co�t heuristique pour l'emplacement donn�. 
-	 * Ceci d�termine dans lequel commande les emplacements sont trait�s. 
+	 * Ceci détermine dans lequel commande les emplacements sont trait�s. 
 	 * 
 	 */
 	public float getHeuristicCost(int x, int y, int tx, int ty) {

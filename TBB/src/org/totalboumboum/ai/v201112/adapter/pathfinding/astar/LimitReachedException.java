@@ -40,7 +40,7 @@ public final class LimitReachedException extends Exception
 {	private static final long serialVersionUID = 1L;
 
 	/**
-	 * crée une exception repr�sentant le fait que l'algorithme A*
+	 * crée une exception représentant le fait que l'algorithme A*
 	 * a atteint une des limites qui lui �taient fix�es sans pour autant
 	 * trouver de solution (i.e. de chemin)
 	 * 
@@ -53,13 +53,13 @@ public final class LimitReachedException extends Exception
 	 * @param cost
 	 * 		co�t maximal atteint pour les chemins contenus dans l'arbre de recherche
 	 * @param size
-	 * 		taille atteinte par l'arbre de recherche (exprim�e en nombre de noeuds)
+	 * 		taille atteinte par l'arbre de recherche (exprimée en nombre de noeuds)
 	 * @param maxCost
 	 * 		limite de co�t fix�e pour l'exploration
 	 * @param maxHeight
 	 * 		limite de hauteur fix�e pour l'exploration
 	 * @param maxSize
-	 * 		limite de taille (exprim�e en nombre de noeuds) fix�e pour l'exploration
+	 * 		limite de taille (exprimée en nombre de noeuds) fix�e pour l'exploration
 	 */
 	public LimitReachedException(AiTile startTile, List<AiTile> endTiles, int height, double cost, int size, double maxCost, int maxHeight, int maxSize)
 	{	this.startTile = startTile;
@@ -75,11 +75,11 @@ public final class LimitReachedException extends Exception
     /////////////////////////////////////////////////////////////////
 	// START TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** case de d�part de la recherche (�tat initial) */
+	/** case de départ de la recherche (�tat initial) */
 	private AiTile startTile;
 	
 	/**
-	 * renvoie la case de d�part de la recherche
+	 * renvoie la case de départ de la recherche
 	 * 
 	 * @return
 	 * 		une case de la zone
@@ -91,11 +91,11 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// END TILES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	/** les cases d'arriv�e de la recherche (�tats finaux) */
+	/** les cases d'arrivée de la recherche (�tats finaux) */
     private List<AiTile> endTiles;
 	
     /**
-     * renvoie les cases d'arriv�e de la recherche
+     * renvoie les cases d'arrivée de la recherche
      * 
      * @return
 	 * 		une case de la zone
@@ -114,7 +114,7 @@ public final class LimitReachedException extends Exception
 
 	/**
 	 * renvoie la limite de hauteur pour l'exploration de l'arbre de recherche.
-	 * une valeur n�gative repr�sente une absence de limite.
+	 * une valeur n�gative représente une absence de limite.
 	 * 
 	 * @return
 	 * 		la limite de hauteur pour l'exploration de l'arbre de recherche
@@ -125,7 +125,7 @@ public final class LimitReachedException extends Exception
 
 	/**
 	 * renvoie la hauteur de l'arbre, i.e. la longueur
-	 * du chemin le plus long d�velopp� lors de la recherche de solution
+	 * du chemin le plus long développ� lors de la recherche de solution
 	 * 
 	 * @return
 	 * 		hauteur de l'arbre
@@ -144,7 +144,7 @@ public final class LimitReachedException extends Exception
 
 	/**
 	 * renvoie la limite de co�t pour l'exploration de l'arbre de recherche.
-	 * une valeur n�gative repr�sente une absence de limite.
+	 * une valeur n�gative représente une absence de limite.
 	 * 
 	 * @return
 	 * 		la limite de co�t pour l'exploration de l'arbre de recherche
@@ -154,7 +154,7 @@ public final class LimitReachedException extends Exception
 	}
 
 	/**
-	 * renvoie le co�t du chemin le plus co�teux d�velopp� lors de la
+	 * renvoie le co�t du chemin le plus co�teux développ� lors de la
 	 * recherche de solution par A*.
 	 * 
 	 * @return
@@ -167,14 +167,14 @@ public final class LimitReachedException extends Exception
 	/////////////////////////////////////////////////////////////////
 	// SIZE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** limite de taille exprim�e en nombre de noeuds (n�gatif = pas de limite) */
+	/** limite de taille exprimée en nombre de noeuds (n�gatif = pas de limite) */
 	private int maxSize;
 	/** taille atteinte lors de l'exploration */
 	private int size;
 
 	/**
 	 * renvoie la limite qui avait �t� fix�e pour la taille
-	 * de l'arbre de recherche exprim�e en noeuds.
+	 * de l'arbre de recherche exprimée en noeuds.
 	 * 
 	 * @return
 	 * 		la limite de taille fix�e pour l'arbre
@@ -184,8 +184,8 @@ public final class LimitReachedException extends Exception
 	}
 
 	/**
-	 * renvoie la taille de l'arbre d�velopp� par A* lors de son exploration,
-	 * exprim�e en nombre de noeuds.
+	 * renvoie la taille de l'arbre développ� par A* lors de son exploration,
+	 * exprimée en nombre de noeuds.
 	 * 
 	 * @return
 	 * 		la taille de l'arbre explor�

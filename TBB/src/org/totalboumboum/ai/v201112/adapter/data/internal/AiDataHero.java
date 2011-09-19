@@ -35,7 +35,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * repr�sente un personnage du jeu, ie un sprite contr�l� par un joueur
+ * représente un personnage du jeu, ie un sprite contr�l� par un joueur
  * humain ou une IA.
  * 
  * @author Vincent Labatut
@@ -44,13 +44,13 @@ import org.totalboumboum.tools.images.PredefinedColor;
 final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 {
 	/**
-	 * crée une repr�sentation du joueur pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation du joueur passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite à repr�senter
+	 * 		sprite à représenter
 	 */
 	protected AiDataHero(AiDataTile tile, Hero sprite)
 	{	super(tile,sprite);
@@ -76,7 +76,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/////////////////////////////////////////////////////////////////
 	/** exemple de bombe que le personnage peut poser */
 	private AiDataBomb bombPrototype;
-	/** nombre de bombes que le personnage peut poser simultan�ment (en g�n�ral) */
+	/** nombre de bombes que le personnage peut poser simultan�ment (en général) */
 	private int bombNumberMax;
 	/** nombre de bombes que le personnage a actuellement pos�es */
 	private int bombNumberCurrent;
@@ -112,7 +112,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	}
 	
 	/**
-	 * met à jour les param�tres d�crivant les bombes que ce personnage peut poser
+	 * met à jour les paramètres décrivant les bombes que ce personnage peut poser
 	 */
 	private void updateBombParam()
 	{	Hero sprite = getSprite();
@@ -163,7 +163,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement au sol du personnage, exprim�e en pixel/seconde */
+	/** vitesse de déplacement au sol du personnage, exprimée en pixel/seconde */
 	private double walkingSpeed;
 	
 	@Override

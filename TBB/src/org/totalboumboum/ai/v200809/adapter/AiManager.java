@@ -44,8 +44,8 @@ import org.totalboumboum.game.round.RoundVariables;
 
 public abstract class AiManager extends AbstractAiManager<AiAction>
 {	/**
-	 * Construit un gestionnaire pour l'IA pass�e en param�tre.
-	 * Cette méthode doit �tre appelée par une classe h�ritant de celle-ci,
+	 * Construit un gestionnaire pour l'IA passée en paramètre.
+	 * Cette méthode doit être appelée par une classe h�ritant de celle-ci,
 	 * et plac�e dans le package contenant l'IA. 
 	 * 
 	 * @param ai	l'ia que cette classe doit g�rer
@@ -146,10 +146,10 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	}
 	
 	/**
-	 * active les �v�nements n�cessaires à l'arr�t du personnage.
+	 * active les �v�nements nécessaires à l'arr�t du personnage.
 	 * utilisé quand l'IA renvoie l'action "ne rien faire"
 	 * 
-	 * @param result	liste des �v�nements adapt�e à l'action renvoy�e par l'IA
+	 * @param result	liste des �v�nements adaptée à l'action renvoy�e par l'IA
 	 */
 	private void reactionStop(List<ControlEvent> result)
 	{	if(lastMove!=Direction.NONE)
@@ -166,7 +166,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	}
 	
 	/**
-	 * active les �v�nements n�cessaires à un changement de direction,
+	 * active les �v�nements nécessaires à un changement de direction,
 	 * en simulant un joueur humain qui appuierait sur des touches
 	 * @param result
 	 * @param direction

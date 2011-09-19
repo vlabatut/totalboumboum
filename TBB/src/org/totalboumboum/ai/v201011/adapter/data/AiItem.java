@@ -23,9 +23,9 @@ package org.totalboumboum.ai.v201011.adapter.data;
 
 
 /**
- * repr�sente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caract�ris� par son type, repr�sentant le pouvoir apport� (ou enlev�)
- * par l'item. Ce type est repr�sent�e par une valeur de type AiItemType.
+ * représente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
+ * un item est caract�ris� par son type, représentant le pouvoir apport� (ou enlev�)
+ * par l'item. Ce type est représent�e par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
  *
@@ -36,7 +36,7 @@ public interface AiItem extends AiSprite
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le type de l'item repr�sent�
+	 * renvoie le type de l'item représent�
 	 * 
 	 * @return	
 	 * 		le type de l'item
@@ -48,8 +48,8 @@ public interface AiItem extends AiSprite
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * indique si cet item arr�te les explosions.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -59,8 +59,8 @@ public interface AiItem extends AiSprite
 
 	/**
 	 * indique si cet item arr�te les bombes.
-	 * <b>ATTENTION :</b> cette méthode ne devrait pas �tre utilisée directement par l'IA,
-	 * elle est destin�e au calcul des mod�les simulant l'�volution du jeu.
+	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
+	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	

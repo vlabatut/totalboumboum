@@ -8,7 +8,7 @@ import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- *	Cette classe définit les fonctions n�cessaires pour les mouvements du joueur.
+ *	Cette classe définit les fonctions nécessaires pour les mouvements du joueur.
  */
 public class ActionManager {
 	

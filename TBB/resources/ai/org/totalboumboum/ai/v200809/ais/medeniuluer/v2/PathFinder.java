@@ -151,12 +151,12 @@ public class PathFinder {
 	
 	/**
 	 *Il determine le chemin le plus court au cible.Il utilise l'algorithme de
-	 * A étoile. (cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
+	 * A ï¿½toile. (cf. : http://fr.wikipedia.org/wiki/Algorithme_A*)
 	 * 
 	 * @param x
-	 *            le coordonné de x de l'ia.
+	 *            le coordonnÃ© de x de l'ia.
 	 * @param y
-	 *            le coordonné de y de l'ia.
+	 *            le coordonnÃ© de y de l'ia.
 	 * @param tab
 	 *            le tableau du jeu.
 	 * @param goal

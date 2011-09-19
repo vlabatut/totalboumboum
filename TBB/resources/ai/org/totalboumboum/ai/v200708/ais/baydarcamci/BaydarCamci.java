@@ -136,8 +136,8 @@ public class BaydarCamci extends ArtificialIntelligence
 	
 	/**
 	 * Parmi les blocs dont le type correspond à la valeur blockType
-	 * pass�e en param�tre, cette méthode cherche lequel est le plus proche
-	 * du point de coordonnées (x,y) pass�es en param�tres. Le r�sultat
+	 * passée en paramètre, cette méthode cherche lequel est le plus proche
+	 * du point de coordonnées (x,y) passées en paramètres. Le r�sultat
 	 * prend la forme d'un tableau des deux coordon�es du bloc le plus proche.
 	 * Le tableau est contient des -1 s'il n'y a aucun bloc du bon type dans la zone de jeu.
 	 * @param x	position de r�f�rence
@@ -185,7 +185,7 @@ public class BaydarCamci extends ArtificialIntelligence
 
 
 	/**
-	 * Indique si le déplacement dont le code a �t� pass� en param�tre 
+	 * Indique si le déplacement dont le code a �t� passé en paramètre 
 	 * est possible pour un personnage situ� en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
@@ -216,7 +216,7 @@ public class BaydarCamci extends ArtificialIntelligence
 	}
 
 	/**
-	 * Indique si la case situ�e à la position pass�e en param�tre
+	 * Indique si la case situ�e à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
 	 * @param x	position à �tudier
 	 * @param y	position à �tudier
@@ -462,7 +462,7 @@ public class BaydarCamci extends ArtificialIntelligence
 		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(getTimeBeforeShrink() == -1) 
 		{
-			// on d�termine les déplacements possibles
+			// on détermine les déplacements possibles
 			Vector<Integer> possibleMoves = getPossibleMoves(x,y);
 			// on teste s'il est possible d'effectuer le même déplacement que pr�c�demment
 			if(possibleMoves.contains(lastMove))
@@ -473,7 +473,7 @@ public class BaydarCamci extends ArtificialIntelligence
 				// (1 seul déplacement possible) et sur une case vide
 				if(possibleMoves.size()<2 && getZoneMatrix()[x][y]==ArtificialIntelligence.AI_BLOCK_EMPTY)
 					possibleMoves.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
-				// on d�termine al�atoirement l'action qui va �tre effectuée
+				// on détermine al�atoirement l'action qui va être effectuée
 				int index;
 				do
 				{	index = (int)(Math.random()*(possibleMoves.size()));			

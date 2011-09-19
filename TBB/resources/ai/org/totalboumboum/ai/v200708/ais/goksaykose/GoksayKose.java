@@ -35,16 +35,16 @@ public class GoksayKose extends ArtificialIntelligence{
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];
 		
-		// on d�termine où est le feu le plus proche
+		// on détermine où est le feu le plus proche
 		int dangerPos[] = getClosestBlockPosition(x,y,AI_BLOCK_FIRE);
-		// si aucun feu, on d�termine où est la bombe la plus proche
+		// si aucun feu, on détermine où est la bombe la plus proche
 		if(dangerPos[0]==-1)
 			dangerPos = getClosestBlockPosition(x,y,AI_BLOCK_BOMB);
 		if(dangerPos[0]==-1)
 			
-		// si aucune bombe, on d�termine la prochaine deplacement
+		// si aucune bombe, on détermine la prochaine deplacement
 		{
-			//on d�termine la premiere position de IA
+			//on détermine la premiere position de IA
 			//s'il est au coin gauche au dessus du zone
 			if(x==1 && y==1)
 				result= coinDessusGauche(x,y);
@@ -69,7 +69,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	/**
 	 * 
 	 * @param x l'abscisse du IA au coin gauche au dessus
-	 * @param y l'ordonn� du IA au coin gauche au dessus
+	 * @param y l'ordonné du IA au coin gauche au dessus
 	 * @return le cas du mouvement qui sera effectué
 	 */
 	public Integer coinDessusGauche(int x, int y)
@@ -81,7 +81,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	/**
 	 * 
 	 * @param x l'abscisse du IA au coin gauche au dessus
-	 * @param y l'ordonn� du IA au coin gauche au dessus
+	 * @param y l'ordonné du IA au coin gauche au dessus
 	 * @return le mouvement qui sera effectué si IA est au coin gauche au dessus
 	 */
 
@@ -114,7 +114,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	/**
 	 * 
 	 * @param x l'abscisse du IA au coin droit au dessus
-	 * @param y l'ordonn� du IA au coin droit au dessus
+	 * @param y l'ordonné du IA au coin droit au dessus
 	 * @return le cas du mouvement qui sera effectué
 	 */
 	public Integer coinDessusDroit(int x, int y)
@@ -126,7 +126,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	/**
 	 * 
 	 * @param x l'abscisse du IA au coin droit au dessus
-	 * @param y l'ordonn� du IA au coin droit au dessus
+	 * @param y l'ordonné du IA au coin droit au dessus
 	 * @return le mouvement qui sera effectué si IA est coin droit au dessus
 	 */
 	
@@ -154,7 +154,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	/**
 	 * 
 	 * @param x l'abscisse du IA au coin gauche au dessous
-	 * @param y l'ordonn� du IA au coin gauche au dessous
+	 * @param y l'ordonné du IA au coin gauche au dessous
 	 * @return le cas du mouvement qui sera effectué
 	 */
 	public Integer coinDessousGauche(int x, int y)
@@ -166,7 +166,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	/**
 	 * 
 	 * @param x l'abscisse du IA au coin gauche au dessous
-	 * @param y l'ordonn� du IA au coin gauche au dessous
+	 * @param y l'ordonné du IA au coin gauche au dessous
 	 * @return le mouvement qui sera effectué si IA est coin gauche au dessous
 	 */
 	
@@ -195,7 +195,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	/**
 	 * 
 	 * @param x l'abscisse du IA au coin droit au dessous
-	 * @param y l'ordonn� du IA au coin droit au dessous
+	 * @param y l'ordonné du IA au coin droit au dessous
 	 * @return le cas du mouvement qui sera effectué
 	 */
 	public Integer coinDessousDroit(int x, int y)
@@ -207,7 +207,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	/**
 	 * 
 	 * @param x l'abscisse du IA au coin droit au dessous
-	 * @param y l'ordonn� du IA au coin droit au dessous
+	 * @param y l'ordonné du IA au coin droit au dessous
 	 * @return le mouvement qui sera effectué si IA est au coin droit au dessous
 	 */
 	
@@ -235,7 +235,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	/**
 	 * IA mets une bombe et s'enfuit du case
 	 * @param x l'abscisse du IA
-	 * @param y l'ordonn� du IA
+	 * @param y l'ordonné du IA
 	 * @return l'action qui sera effectuer 
 	 */
 	private int metBombeFuir(int x,int y) {
@@ -253,14 +253,14 @@ public class GoksayKose extends ArtificialIntelligence{
 	/**
 	 * IA  s'enfuit d'une bombe et flamme
 	 * @param x l'abscisse du IA
-	 * @param y l'ordonn� du IA
+	 * @param y l'ordonné du IA
 	 * @return l'action qui sera effectué 
 	 */
 			private int fuir(int x,int y) {
 				int result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 				int bomb[] = getClosestBlockPosition(x, y, ArtificialIntelligence.AI_BLOCK_BOMB);
 				int portee=0;
-			    //prend en parametre l'abscisse et l'ordonn� du bombe et retourne la port�e du bombe
+			    //prend en parametre l'abscisse et l'ordonné du bombe et retourne la port�e du bombe
 				portee = getBombPowerAt(bomb[0], bomb[1]);
 				//si IA se trouve sur une case qui explosera par la bombe
 				if(x<bomb[0]+portee||x>bomb[0]-portee&&y<bomb[1]+portee&&y>bomb[1]-portee) {
@@ -278,14 +278,14 @@ public class GoksayKose extends ArtificialIntelligence{
 	}
 	
 			/**
-			 * D�termine un ordre de pr�f�rence sur toutes les directions possibles :
+			 * détermine un ordre de pr�f�rence sur toutes les directions possibles :
 			 * plus la direction permet de s'�loigner du danger,
 			 * plus elle est pr�f�r�e.
 			 * @param x	position du personnage
 			 * @param y	position du personnage
 			 * @param dangerX	position du danger
 			 * @param dangerY	position du danger
-			 * @return	liste des directions ordonn�e par pr�f�rence 
+			 * @return	liste des directions ordonnée par pr�f�rence 
 			 */
 			
 	private int[] getDirectionPreferences(int x, int y, int dangerX, int dangerY)
@@ -334,7 +334,7 @@ public class GoksayKose extends ArtificialIntelligence{
 		return result;
 	}
 	/**
-	 * Indique si la case situ�e à la position pass�e en param�tre
+	 * Indique si la case situ�e à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
 	 * @param x	position à �tudier
 	 * @param y	position à �tudier
@@ -374,7 +374,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	}
 	
 	/**
-	 * Indique si le déplacement dont le code a �t� pass� en param�tre 
+	 * Indique si le déplacement dont le code a �t� passé en paramètre 
 	 * est possible pour un personnage situ� en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
@@ -406,8 +406,8 @@ public class GoksayKose extends ArtificialIntelligence{
 
 	/**
 	 * Parmi les blocs dont le type correspond à la valeur blockType
-	 * pass�e en param�tre, cette méthode cherche lequel est le plus proche
-	 * du point de coordonnées (x,y) pass�es en param�tres. Le r�sultat
+	 * passée en paramètre, cette méthode cherche lequel est le plus proche
+	 * du point de coordonnées (x,y) passées en paramètres. Le r�sultat
 	 * prend la forme d'un tableau des deux coordon�es du bloc le plus proche.
 	 * Le tableau est contient des -1 s'il n'y a aucun bloc du bon type dans la zone de jeu.
 	 * @param x	position de r�f�rence

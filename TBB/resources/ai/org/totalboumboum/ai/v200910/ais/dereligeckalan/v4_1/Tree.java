@@ -64,7 +64,7 @@ public class Tree {
 	}
 
 	/**
-	 * D�termine si l'arbre contient le noeud pass� en param�tre.
+	 * détermine si l'arbre contient le noeud passé en paramètre.
 	 * 
 	 * @param node
 	 *            le noeud à rechercher
@@ -84,7 +84,7 @@ public class Tree {
 	}
 
 	/**
-	 * Renvoie le lien liant le noeud pass� en param�tre à son p�re.
+	 * Renvoie le lien liant le noeud passé en paramètre à son p�re.
 	 * 
 	 * @param node
 	 *            le noeud à traiter
@@ -109,7 +109,7 @@ public class Tree {
 	}
 
 	/**
-	 * Renvoie tous les liens partant du noeud pass� en param�tre.
+	 * Renvoie tous les liens partant du noeud passé en paramètre.
 	 * 
 	 * @param node
 	 *            le noeud à traiter
@@ -132,12 +132,12 @@ public class Tree {
 	}
 
 	/**
-	 * Renvoie une s�quence de noeuds repr�sentant un chemin allant de la racine
-	 * au noeud pass� en param�tre.
+	 * Renvoie une séquence de noeuds représentant un chemin allant de la racine
+	 * au noeud passé en paramètre.
 	 * 
 	 * @param node
 	 *            le noeud à traiter
-	 * @return un vecteur de noeuds repr�sentant le chemin depuis la racine
+	 * @return un vecteur de noeuds représentant le chemin depuis la racine
 	 * @throws StopRequestException 
 	 */
 	public LinkedList<Noeud> getPath(Noeud node) throws StopRequestException { // la liste des noeuds qui
@@ -174,8 +174,8 @@ public class Tree {
 	}
 
 	/**
-	 * crée un nouveau lien dans l'arbre. Le noeud origin doit �tre prèsent dans
-	 * le graphe. Le noeud target doit �tre absent de l'arbre. Si le noeud
+	 * crée un nouveau lien dans l'arbre. Le noeud origin doit être prèsent dans
+	 * le graphe. Le noeud target doit être absent de l'arbre. Si le noeud
 	 * origin n'appartient pas au graphe. Si le noeud target appartient d�j� au
 	 * graphe.
 	 * 
@@ -190,7 +190,7 @@ public class Tree {
 	}
 
 	/**
-	 * méthode utilisée par addLink pour des op�rations devant �tre effectuées
+	 * méthode utilisée par addLink pour des opérations devant être effectuées
 	 * en mode synchronis�.
 	 * 
 	 * @param link

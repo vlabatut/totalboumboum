@@ -42,7 +42,7 @@ public class DeplacementCommune {
 	 * 
 	 * Cette méthode calcule le chemin le plus court que notre IA peut suivre et
 	 * elle retourne le plus court chemin (shortestPath). Elle prend 3
-	 * arguments, notre IA, une liste des items du jeu et AiTile (repr�sente une
+	 * arguments, notre IA, une liste des items du jeu et AiTile (représente une
 	 * case du jeu, avec tous les spirites qu'elle contient).
 	 * 
 	 * @param ownHero
@@ -277,7 +277,7 @@ public class DeplacementCommune {
 
 	/**
 	 * Cette méthode permet à d�cider la nouvelle action. Elle prend un seul
-	 * argument qui est un chemin (une s�quence des cases).
+	 * argument qui est un chemin (une séquence des cases).
 	 * 
 	 * @param nextMove
 	 * 

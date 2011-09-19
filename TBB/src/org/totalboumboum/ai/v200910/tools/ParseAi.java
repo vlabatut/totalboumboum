@@ -34,7 +34,7 @@ import java.util.List;
 import org.totalboumboum.tools.files.FileNames;
 
 /**
- * cette méthode parse les codes sources d�finissant une IA et v�rifie
+ * cette méthode parse les codes sources définissant une IA et v�rifie
  * que les appels à checkInterruption sont effectués correctement
  * 
  * @author Vincent Labatut

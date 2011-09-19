@@ -37,31 +37,31 @@ import org.totalboumboum.engine.content.feature.action.GeneralAction;
  * TRANSITIVE
  * 
  * <p>ABILITY PERFORM
- * 	<br>paramètre: actor=self
- * 	<br>paramètre: target=oui (bomb)
- * 	<br>paramètre: direction=oui
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
+ * 	<br>paramÃ¨tre: actor=self
+ * 	<br>paramÃ¨tre: target=oui (bomb)
+ * 	<br>paramÃ¨tre: direction=oui
+ * 	<br>paramÃ¨tre: strength=bool
+ * 	<br>paramÃ¨tre: kind=N/D
+ * 	<br>paramÃ¨tre: scope=N/D
+ * 	<br>paramÃ¨tre: restriction=N/D
  * 
  * <p>ABILITY REFUSE
- * 	<br>paramètre: actor=oui (hero)
- * 	<br>paramètre: target=self
- * 	<br>paramètre: direction=oui
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
+ * 	<br>paramÃ¨tre: actor=oui (hero)
+ * 	<br>paramÃ¨tre: target=self
+ * 	<br>paramÃ¨tre: direction=oui
+ * 	<br>paramÃ¨tre: strength=bool
+ * 	<br>paramÃ¨tre: kind=N/D
+ * 	<br>paramÃ¨tre: scope=N/D
+ * 	<br>paramÃ¨tre: restriction=N/D
  * 
  * <p>ABILITY PREVENT
- * 	<br>paramètre: actor=oui (hero)
- * 	<br>paramètre: target=oui (bomb)
- * 	<br>paramètre: direction=oui
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
+ * 	<br>paramÃ¨tre: actor=oui (hero)
+ * 	<br>paramÃ¨tre: target=oui (bomb)
+ * 	<br>paramÃ¨tre: direction=oui
+ * 	<br>paramÃ¨tre: strength=bool
+ * 	<br>paramÃ¨tre: kind=N/D
+ * 	<br>paramÃ¨tre: scope=N/D
+ * 	<br>paramÃ¨tre: restriction=N/D
  */
 /** 
  * hitting an object to to send it in the air.

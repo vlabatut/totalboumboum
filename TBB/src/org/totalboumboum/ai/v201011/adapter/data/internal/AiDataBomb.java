@@ -55,7 +55,7 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * repr�sente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
+ * représente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
  * pour détruire les murs et �liminer les autre joueurs.
  * 
  * @author Vincent Labatut
@@ -64,13 +64,13 @@ import org.totalboumboum.tools.images.PredefinedColor;
 final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 {	
 	/**
-	 * crée une repr�sentation de la bombe pass�e en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation de la bombe passée en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile
 	 * 		case contenant le sprite
 	 * @param sprite
-	 * 		sprite à repr�senter
+	 * 		sprite à représenter
 	 */
 	protected AiDataBomb(AiDataTile tile, Bomb sprite)
 	{	super(tile,sprite);
@@ -129,7 +129,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	/** d�clenchement par compte à rebours */
 	private boolean countdownTrigger;
-	/** d�clenchement par t�l�commande */
+	/** d�clenchement par télécommande */
 	private boolean remoteControlTrigger;
 	/** d�clenchement par explosion */
 	private boolean explosionTrigger;
@@ -174,7 +174,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 			countdownTrigger = ability.isActive();
 		}
-		// t�l�commande
+		// télécommande
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_CONTROL);
 			remoteControlTrigger = ability.isActive();
 		}
@@ -312,7 +312,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** vitesse de déplacement au sol de la bombe, exprim�e en pixel/seconde */
+	/** vitesse de déplacement au sol de la bombe, exprimée en pixel/seconde */
 	private double slidingSpeed;
 	
 	@Override
@@ -342,7 +342,7 @@ if(slidingSpeed==0)
 	/////////////////////////////////////////////////////////////////
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps �coul� depuis que le compte à rebours a (re)commenc�, exprim� en ms */
+	/** temps �coul� depuis que le compte à rebours a (re)commencé, exprimé en ms */
 	private long time = 0;
 	
 	@Override
@@ -351,7 +351,7 @@ if(slidingSpeed==0)
 	}
 	
 	/**
-	 * met à jour le temps �coul� depuis que le compte à rebours a (re)commenc�
+	 * met à jour le temps �coul� depuis que le compte à rebours a (re)commencé
 	 */
 	private void updateTime()
 	{	Bomb sprite = getSprite();
@@ -403,7 +403,7 @@ if(slidingSpeed==0)
 	}
 
 	/** 
-	 * met à jour les diff�rentes caract�ristiques de cette bombe
+	 * met à jour les différentes caract�ristiques de cette bombe
 	 * concernant la gestion des collisions avec les autres sprites
 	 */
 	private void updateCollisions()

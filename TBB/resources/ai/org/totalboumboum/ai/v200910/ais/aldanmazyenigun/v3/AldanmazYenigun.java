@@ -61,7 +61,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 	
     //private AiTile targetPreviousTile;
 		
-	/** classe charg�e de d�terminer quelles cases sont s�res */
+	/** classe chargée de déterminer quelles cases sont s�res */
 	private ZoneFormee zoneFormee = null;
 	
 	private boolean thereIsSafeTile = true;
@@ -287,7 +287,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 				if(zoneFormee.isBonus(x,y))
 					result.add(tile);
 				
-				//ce sont pour les murs mais �a ne marche pas
+				//ce sont pour les murs mais ça ne marche pas
 				/*
 				else if(result.isEmpty()){
 					if(zoneFormee.isWall(x, y))

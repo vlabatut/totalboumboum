@@ -28,7 +28,7 @@ import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * repr�sente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
+ * représente une bombe du jeu, ie un objet que les joueurs peuvent d�poser
  * pour détruire les murs et �liminer les autre joueurs.
  * 
  * @author Vincent Labatut
@@ -38,11 +38,11 @@ import org.totalboumboum.tools.images.PredefinedColor;
 public class AiBomb extends AiSprite<Bomb>
 {
 	/**
-	 * crée une repr�sentation de la bombe pass�e en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation de la bombe passée en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à repr�senter
+	 * @param sprite	sprite à représenter
 	 */
 	AiBomb(AiTile tile, Bomb sprite)
 	{	super(tile,sprite);
@@ -86,7 +86,7 @@ public class AiBomb extends AiSprite<Bomb>
 	
 	/**
 	 * renvoie le type de la bombe
-	 * @return	une valeur de type AiBombType repr�sentant le type de bombe
+	 * @return	une valeur de type AiBombType représentant le type de bombe
 	 */
 	public AiBombType getType()
 	{	return type;	
@@ -163,7 +163,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 * Cette couleur est null si aucun joueur n'a pos� la bombe 
 	 * (pour certains niveaux sp�ciaux où les blocs peuvent g�n�rer des bombes)  
 	 * 
-	 * @return un symbole de type PredefinedColor repr�sentant une couleur
+	 * @return un symbole de type PredefinedColor représentant une couleur
 	 */
 	public PredefinedColor getColor()
 	{	return color;	
@@ -185,17 +185,17 @@ public class AiBomb extends AiSprite<Bomb>
 
 	/**
 	 * renvoie le d�lai normal avant l'explosion de la bombe.
-	 * Ce d�lai ne tient pas compte des pannes �ventuelles.
-	 * Ce d�lai n'est pas d�fini pour tous les types de bombes
+	 * Ce d�lai ne tient pas compte des pannes éventuelles.
+	 * Ce d�lai n'est pas défini pour tous les types de bombes
 	 * 
-	 * @return	le d�lai normal avant explosion exprim� en millisecondes
+	 * @return	le d�lai normal avant explosion exprimé en millisecondes
 	 */
 	public long getNormalDuration()
 	{	return normalDuration;
 	}
 
 	/**
-	 * initialisation des param�tres li�s à l'explosion de la bombe
+	 * initialisation des paramètres li�s à l'explosion de la bombe
 	 */
 	private void initFuse()
 	{	// theoretic delay before explosion 

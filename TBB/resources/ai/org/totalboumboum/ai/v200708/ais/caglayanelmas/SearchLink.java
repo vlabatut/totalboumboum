@@ -1,8 +1,8 @@
 package org.totalboumboum.ai.v200708.ais.caglayanelmas;
 
 /**
- * Cette classe repr�sente un lien orient� dans un arbre de recherche.
- * Ce lien est d�fini par les deux noeuds reli�s : l'origine (parent)
+ * Cette classe représente un lien orient� dans un arbre de recherche.
+ * Ce lien est défini par les deux noeuds reli�s : l'origine (parent)
  * et la cible (fils) ainsi que par l'action à r�aliser pour passer 
  * d'un état à l'autre.
  * 
@@ -53,7 +53,7 @@ public class SearchLink
 
 	/**
 	 * Renvoie l'action de transition
-	 * @return	l'action associ�e au lien
+	 * @return	l'action associée au lien
 	 */
 	public Integer getAction()
 	{	

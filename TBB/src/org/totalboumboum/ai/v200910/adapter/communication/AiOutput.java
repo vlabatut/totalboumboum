@@ -76,11 +76,11 @@ public class AiOutput
 	
 	/**
 	 * rajoute un chemin dans la liste des chemins à afficher.
-	 * La repr�sentation graphique d'un chemin est une ligne
+	 * La représentation graphique d'un chemin est une ligne
 	 * suivant les centres des cases travers�es par le chemin 
 	 * 
 	 * @param path	chemin à afficher
-	 * @param color	couleur associ�e à ce chemin
+	 * @param color	couleur associée à ce chemin
 	 */
 	public void addPath(AiPath path, Color color)
 	{	if(color!=null && path!=null && !path.isEmpty())
@@ -100,7 +100,7 @@ public class AiOutput
 	}
 
 	/**
-	 * renvoie la liste des couleurs associ�es aux chemins
+	 * renvoie la liste des couleurs associées aux chemins
 	 * 
 	 * @return	une liste de couleurs
 	 */
@@ -168,7 +168,7 @@ public class AiOutput
 	private String tileTexts[][];
 	
 	/**
-	 * r�initialise les textes associ�s aux cases
+	 * r�initialise les textes associés aux cases
 	 */
 	private void reinitTileTexts()
 	{	for(int line=0;line<zone.getHeight();line++)
@@ -177,11 +177,11 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie le texte associ� à une case. Permet
+	 * modifie le texte associé à une case. Permet
 	 * par exemple d'afficher des heuristiques, des couts
-	 * en temps r�el.
+	 * en temps réel.
 	 * 
-	 * @param tile	case associ�e au texte
+	 * @param tile	case associée au texte
 	 * @param text	texte à afficher sur cette case
 	 */
 	public void setTileText(AiTile tile, String text)
@@ -191,12 +191,12 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie le texte associ� à une case. Permet
+	 * modifie le texte associé à une case. Permet
 	 * par exemple d'afficher des heuristiques, des couts
-	 * en temps r�el.
+	 * en temps réel.
 	 * 
-	 * @param line	ligne de la case associ�e au texte
-	 * @param col	colonne de la case associ�e au texte
+	 * @param line	ligne de la case associée au texte
+	 * @param col	colonne de la case associée au texte
 	 * @param text	texte à afficher sur cette case
 	 */
 	public void setTileText(int line, int col, String text)

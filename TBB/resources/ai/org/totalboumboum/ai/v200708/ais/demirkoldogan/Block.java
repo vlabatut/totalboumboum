@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v200708.ais.demirkoldogan;
 
 /**
- * une structure qui contient les propriétés nécessaire d'un case de zone.
+ * une structure qui contient les propriÃ©tÃ©s nÃ©cessaire d'un case de zone.
  * 
  * @author Turkalp Goker Demirkol
  * @author Emre Dogan
@@ -9,8 +9,8 @@ package org.totalboumboum.ai.v200708.ais.demirkoldogan;
  */
 public class Block {
 	
-	private int x; //coordoné horizontale du block
-	private int y; //coordoné verticale du block
+	private int x; //coordonï¿½ horizontale du block
+	private int y; //coordonï¿½ verticale du block
 	private int cost; //cout de ce block
 	private int heuristic; //heuristique
 	private Block parentBlock; //le block pere de ce block

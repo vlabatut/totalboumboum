@@ -174,18 +174,18 @@ public abstract class SpecificAction
 	 */
 /*	public ActionAbility computeAbility()
 	{	// actor original ability 
-		ActionAbility result = actor.getAbility(this); //TODO �crire getAbility(action), les autres sont-ils utiles?
+		ActionAbility result = actor.getAbility(this); //TODO écrire getAbility(action), les autres sont-ils utiles?
 		result = (ActionAbility)result.copy();
 		
 		// actor modulation
 		if(result.isActive())
 		{	ActorModulation actorModulation = actor.getActorModulation(this);
-			if(actorModulation!=null) //TODO peut �tre que c'est plus simple de renvoyer systm�tiquement une modulation, mais avec une puissance de 0?
-				result = actorModulation.modulate(result); //TODO �crire cette méthode aussi, qui renvoie une nouvelle ability		
+			if(actorModulation!=null) //TODO peut être que c'est plus simple de renvoyer systm�tiquement une modulation, mais avec une puissance de 0?
+				result = actorModulation.modulate(result); //TODO écrire cette méthode aussi, qui renvoie une nouvelle ability		
 		}
 		
 		// target modulation (if there's one!)
-		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donn�, �a d�pend de son gesture courant. si pas de gesture, alors il renvoie null
+		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donn�, ça d�pend de son gesture courant. si pas de gesture, alors il renvoie null
 		{	TargetModulation targetModulation = target.getTargetModulation(this);
 			if(targetModulation!=null)
 				result = targetModulation.modulate(result); 		

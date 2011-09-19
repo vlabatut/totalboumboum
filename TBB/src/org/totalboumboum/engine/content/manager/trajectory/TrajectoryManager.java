@@ -70,7 +70,7 @@ public abstract class TrajectoryManager
 
 	/**
 	 * modifie la position absolue courante en fonction du boundToSprite.
-	 * Cette méthode doit imp�rativement �tre appelée juste avant un changement de gesture.
+	 * Cette méthode doit imp�rativement être appelée juste avant un changement de gesture.
 	 * @param newSprite
 	 */
 	public abstract void setBoundToSprite(Sprite newSprite);
@@ -86,7 +86,7 @@ public abstract class TrajectoryManager
 	protected double previousPosZ;
 
 	/**
-	 * méthode appelée à chaque it�ration
+	 * méthode appelée à chaque itération
 	 * met à jour le déplacement et la position relative.
 	 * attention : dans le cas d'une répétition, le dernier point
 	 * de la trajectoire sert de premier point à la répétition suivante.

@@ -60,7 +60,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 		//la matrice d'attaque
 		double[][] matriceattaque=new double[height][width];
 		danger=false;
-		//D�termination du mode
+		//détermination du mode
 		mode(gameZone);
 	
 		// si le mode: collecte

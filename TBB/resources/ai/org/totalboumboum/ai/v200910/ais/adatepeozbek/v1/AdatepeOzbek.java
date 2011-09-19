@@ -87,15 +87,15 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// PATH MANAGERS			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe charg�e du déplacement vers la cible */
+	/** classe chargée du déplacement vers la cible */
 //	private PathManager targetManager = null;
-	/** classe charg�e de la fuite du personnage */
+	/** classe chargée de la fuite du personnage */
 	private EscapeManager escapeManager = null;
 	
 	/////////////////////////////////////////////////////////////////
 	// SAFETY MANAGER				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe charg�e de d�terminer quelles cases sont s�res */
+	/** classe chargée de déterminer quelles cases sont s�res */
 	private SafetyManager safetyManager = null;
 
 	/**
@@ -108,7 +108,7 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	}
 	
 	/**
-	 * renvoie le niveau de sécurité de la case pass�e en param�tre
+	 * renvoie le niveau de sécurité de la case passée en paramètre
 	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -117,7 +117,7 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	}
 	
 	/**
-	 * d�termine si la case pass�e en param�tre est s�re
+	 * détermine si la case passée en paramètre est s�re
 	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -158,7 +158,7 @@ public class AdatepeOzbek extends ArtificialIntelligence
 	}
 	
 	/**
-	 * renvoie l'ordonn�e courante (en pixels)
+	 * renvoie l'ordonnée courante (en pixels)
 	 */
 	public double getCurrentY() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE

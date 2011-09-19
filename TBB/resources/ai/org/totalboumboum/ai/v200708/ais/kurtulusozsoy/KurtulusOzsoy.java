@@ -71,7 +71,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 				
 			}
 			int dangerPos[] = getClosestBlockPosition(x,y,AI_BLOCK_FIRE);
-			// si aucun feu, on d�termine où est la bombe la plus proche
+			// si aucun feu, on détermine où est la bombe la plus proche
 			if(dangerPos[0]==-1)
 				dangerPos = getClosestBlockPosition(x,y,AI_BLOCK_BOMB);
 			if(dangerPos[0]!=-1)
@@ -93,7 +93,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 					midY=getZoneMatrixDimY()/2;
 			return	result=goMiddle(x, y);
 			}	
-			else{	// on d�termine les déplacements 
+			else{	// on détermine les déplacements 
 				
 				
 				
@@ -115,7 +115,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 		}
 		
 		/**
-		 * Indique si la case situ�e à la position pass�e en param�tre
+		 * Indique si la case situ�e à la position passée en paramètre
 		 * constitue un obstacle pour un personnage : bombe, feu, mur.
 		 * @param x	position à �tudier
 		 * @param y	position à �tudier
@@ -145,7 +145,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 		}
 
 		/**
-		 * Indique si le déplacement dont le code a �t� pass� en param�tre 
+		 * Indique si le déplacement dont le code a �t� passé en paramètre 
 		 * est possible pour un personnage situ� en (x,y).
 		 * @param x	position du personnage
 		 * @param y position du personnage
@@ -397,7 +397,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 				possibleMoves.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
 		
 			Random rand = new Random();
-			// on d�termine al�atoirement l'action qui va �tre effectuée
+			// on détermine al�atoirement l'action qui va être effectuée
 			int index;
 			do
 			{	index = (int)( rand.nextInt(possibleMoves.size()));			

@@ -26,7 +26,7 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.pathfinding.path.AiPath;
 
 /**
- * permet de d�finir une fonction de co�t utilisée lors de la recherche
+ * permet de définir une fonction de co�t utilisée lors de la recherche
  * avec l'algorithme A*
  * 
  * @author Vincent Labatut
@@ -40,15 +40,15 @@ public abstract class CostCalculator
 	/** 
 	 * calcule le co�t de l'action consistant à aller de la case
 	 * start à la case end, sachant que ces deux cases sont voisines.
-	 * Il est possible de d�finir des co�ts �volu�s, en tenant compte par exemple des
+	 * Il est possible de définir des co�ts �volu�s, en tenant compte par exemple des
 	 * influences n�gatives dans ces cases (pour le joueur) comme la prèsence de bombes 
 	 * à proximit�, etc., et des influences positives telles que la prèsence de bonus.
-	 * Si les deux cases ne sont pas voisines, le r�sultat est ind�termin�.
+	 * Si les deux cases ne sont pas voisines, le r�sultat est indétermin�.
 	 * 
 	 * @param start	
-	 * 		la case de d�part 
+	 * 		la case de départ 
 	 * @param end	
-	 * 		la case d'arriv�e (qui doit �tre voisine)
+	 * 		la case d'arrivée (qui doit être voisine)
 	 * @return	
 	 * 		le co�t du déplacement
 	 */

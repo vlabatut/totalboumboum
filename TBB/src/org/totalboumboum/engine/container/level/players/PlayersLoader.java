@@ -47,7 +47,7 @@ public class PlayersLoader
 	{	
     	/* 
 		 * NOTE tester ici si le level est suffisamment grand
-		 * NOTE faut qu'il y ait au moins une config, à d�finir dans XSD
+		 * NOTE faut qu'il y ait au moins une config, à définir dans XSD
 		 * attention, le num�ro des joueurs ne doit pas d�passer maxPlayer-1
 		 * NOTE il faut tester qu'il y a bien autant de locations de que de players indiqu� dans la situation
 		 */
@@ -55,7 +55,7 @@ public class PlayersLoader
 		/*
 		 * si le level ne supporte pas explicitement le nbre n de joueurs voulu,
 		 * on prend la config pour la taille au dessus, et on utilise les n premières
-		 * positions d�finies
+		 * positions définies
 		 */
 
     	// init

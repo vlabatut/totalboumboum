@@ -27,8 +27,8 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
- * permet de d�finir une fonction successeur utilisée par l'algorithme
- * A* lors de la recherche d'un plus court chemin, pour d�velopper un état
+ * permet de définir une fonction successeur utilisée par l'algorithme
+ * A* lors de la recherche d'un plus court chemin, pour développer un état
  * 
  * @author Vincent Labatut
  *
@@ -40,13 +40,13 @@ public abstract class SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * calcule tous les états accessibles à partir du noeud de recherche
-	 * pass� en param�tre. On prend un noeud de recherche et non pas
-	 * un état en param�tre, car le noeud de recherche contient des informations
+	 * passé en paramètre. On prend un noeud de recherche et non pas
+	 * un état en paramètre, car le noeud de recherche contient des informations
 	 * susceptibles d'�liminer certains successeurs potentiels. 
 	 * Par exemple, si le cout correspond au temps de déplacement, alors le cout du noeud
-	 * de recherche courant correspond au temps n�cessaire pour arriver à l'�tat
-	 * correspondant. Certaines des cases accessibles depuis cet état peuvent �tre
-	 * menanc�e par du feu, et le temps est une information cruciale pour d�terminer
+	 * de recherche courant correspond au temps nécessaire pour arriver à l'�tat
+	 * correspondant. Certaines des cases accessibles depuis cet état peuvent être
+	 * menanc�e par du feu, et le temps est une information cruciale pour déterminer
 	 * si le personnage peut ou pas traverser une case avant qu'elle ne br�le.
 	 * 
 	 * @param node	le noeud de recherche courant 

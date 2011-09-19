@@ -39,22 +39,22 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 
 
 /**
- * repr�sente une case du jeu, avec tous les sprites qu'elle contient.
+ * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
  *
  */
 
 public class AiTile
-{	/** repr�sentation de la zone à laquelle cette case appartient */
+{	/** représentation de la zone à laquelle cette case appartient */
 	private AiZone zone;
-	/** case du jeu que cette classe repr�sente */
+	/** case du jeu que cette classe représente */
 	private Tile tile;
 	
 	/**
-	 * construit une repr�sentation de la case pass�e en param�tre
-	 * @param tile	case repr�sent�e
-	 * @param zone	zone contenant la repr�sentation
+	 * construit une représentation de la case passée en paramètre
+	 * @param tile	case représent�e
+	 * @param zone	zone contenant la représentation
 	 */
 	AiTile(Tile tile, AiZone zone)
 	{	this.zone = zone;
@@ -152,33 +152,33 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** block �ventuellement contenu dans cette case */
+	/** block éventuellement contenu dans cette case */
 	private AiBlock block = null;
-	/** liste des bombes �ventuellement contenues dans cette case */
+	/** liste des bombes éventuellement contenues dans cette case */
 	private final List<AiBomb> bombs = new ArrayList<AiBomb>();
-	/** liste des feux �ventuellement contenus dans cette case */
+	/** liste des feux éventuellement contenus dans cette case */
 	private final List<AiFire> fires = new ArrayList<AiFire>();
 	/** sol de cette case */
 	private AiFloor floor = null;
-	/** liste des personnages �ventuellement contenus dans cette case */
+	/** liste des personnages éventuellement contenus dans cette case */
 	private final List<AiHero> heroes = new ArrayList<AiHero>();
-	/** item �ventuellement contenu dans cette case */
+	/** item éventuellement contenu dans cette case */
 	private AiItem item = null;
 
 	/** 
 	 * renvoie le block contenu dans cette case 
 	 * ou null s'il n'y a pas de block dans cette case
 	 * 
-	 * @return	le bloc �ventuellement contenu dans cette case
+	 * @return	le bloc éventuellement contenu dans cette case
 	 */
 	public AiBlock getBlock()
 	{	return block;	
 	}
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les bombes �ventuellement contenues dans cette case
+	 * @return	les bombes éventuellement contenues dans cette case
 	 */
 	public Collection<AiBomb> getBombs()
 	{	Collection<AiBomb> result = Collections.unmodifiableCollection(bombs);
@@ -186,9 +186,9 @@ public class AiTile
 	}
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les feux �ventuellement contenus dans cette case
+	 * @return	les feux éventuellement contenus dans cette case
 	 */
 	public Collection<AiFire> getFires()
 	{	Collection<AiFire> result = Collections.unmodifiableCollection(fires);
@@ -196,7 +196,7 @@ public class AiTile
 	}
 	/** 
 	 * renvoie le sol de cette case 
-	 * (il y a forc�ment un sol)
+	 * (il y a forcément un sol)
 	 * 
 	 * @return	le sol contenu dans cette case
 	 */
@@ -205,9 +205,9 @@ public class AiTile
 	}
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
-	 * @return	les personnages �ventuellement contenus dans cette case
+	 * @return	les personnages éventuellement contenus dans cette case
 	 */
 	public Collection<AiHero> getHeroes()
 	{	Collection<AiHero> result = Collections.unmodifiableCollection(heroes);
@@ -217,14 +217,14 @@ public class AiTile
 	 * renvoie l'item (apparent) contenu dans cette case 
 	 * ou null s'il n'y a pas d'item apparent dans cette case
 	 * 
-	 * @return	l'item �ventuellement contenu dans cette case
+	 * @return	l'item éventuellement contenu dans cette case
 	 */
 	public AiItem getItem()
 	{	return item;	
 	}
 	
 	/** 
-	 * met à jour les repr�sentations des sprites contenus dans cette case
+	 * met à jour les représentations des sprites contenus dans cette case
 	 */
 	private void updateSprites()
 	{	// block
@@ -336,9 +336,9 @@ public class AiTile
 		}
 	}
 	/**
-	 * termine les repr�sentations de sprites pass�es en param�tre
-	 * @param <T>	type de repr�sentation
-	 * @param list	liste de repr�sentations
+	 * termine les représentations de sprites passées en paramètre
+	 * @param <T>	type de représentation
+	 * @param list	liste de représentations
 	 */
 	private <T extends AiSprite<?>> void finishSprites(List<T> list)
 	{	Iterator<T> it = list.iterator();
@@ -354,8 +354,8 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 
 	/**
-	 * renvoie le voisin de cette case pass�e en param�tre, situ� dans la direction
-	 * pass�e en param�tre.
+	 * renvoie le voisin de cette case passée en paramètre, situ� dans la direction
+	 * passée en paramètre.
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case situ�e au bord du niveau est une case situ�e sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case situ�e

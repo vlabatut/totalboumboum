@@ -32,15 +32,15 @@ import java.util.concurrent.Callable;
  */
 public abstract class ArtificialIntelligence implements Callable<Integer>
 {	// constantes de sens de déplacement
-	/** constante repr�sentant la direction : sur-place (pas de déplacement)*/ 
+	/** constante représentant la direction : sur-place (pas de déplacement)*/ 
 	public final static int AI_DIR_NONE = 0;
-	/** constante repr�sentant la direction : vers le haut*/ 
+	/** constante représentant la direction : vers le haut*/ 
 	public final static int AI_DIR_UP = 1;
-	/** constante repr�sentant la direction : vers la bas*/ 
+	/** constante représentant la direction : vers la bas*/ 
 	public final static int AI_DIR_DOWN = 2;
-	/** constante repr�sentant la direction : vers la droite*/ 
+	/** constante représentant la direction : vers la droite*/ 
 	public final static int AI_DIR_RIGHT = 3;
-	/** constante repr�sentant la direction : vers la gauche*/ 
+	/** constante représentant la direction : vers la gauche*/ 
 	public final static int AI_DIR_LEFT = 4;
 
 	// constantes de codes de blocs
@@ -61,7 +61,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/** bloc occup� par un bonus augmentant la port�e des bombes*/ 
 	public final static int AI_BLOCK_ITEM_FIRE = 6;
 	
-	// constantes repr�sentant des actions
+	// constantes représentant des actions
 	/** ne rien faire*/ 
 	public final static int AI_ACTION_DO_NOTHING = 0;
 	/** aller vers le haut*/ 
@@ -79,7 +79,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	// champs g�n�raux
 	private String name;
 	
-	// champs repr�sentant le percept
+	// champs représentant le percept
 	/** matrice correspondant au percept de l'agent */
 	private int zoneMatrix[][];
 	/** liste des bombes avec leur position et leur puissance */
@@ -90,7 +90,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	private Vector<Boolean> playersStates;
 	/** position du personnage de l'IA */
 	private int[] ownPosition;
-	/** temps restant avant le shrink (-1 si le shrink a d�j� commenc�) */
+	/** temps restant avant le shrink (-1 si le shrink a d�j� commencé) */
 	private long timeBeforeShrink;
 	/** position du prochain shrink */
 	private int nextShrinkPosition[];
@@ -118,7 +118,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Renvoie le nom attribut� à cette IA
-	 * (en g�n�ral : le nom de la classe elle-même)
+	 * (en général : le nom de la classe elle-même)
 	 * @return	le nom de l'IA
 	 */
 	public String getName()
@@ -127,9 +127,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Renvoie le percept du personnage sous la forme d'une matrice d'entiers.
-	 * Chaque entier est un code repr�sentant la case correspondante en utilisant
+	 * Chaque entier est un code représentant la case correspondante en utilisant
 	 * les constantes AI_BLOCK_XXXXX.
-	 * @return	la matrice repr�sentant la zone de jeu
+	 * @return	la matrice représentant la zone de jeu
 	 */
 	protected int[][] getZoneMatrix()
 	{	return zoneMatrix;
@@ -152,7 +152,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 
 	/**
-	 * Renvoie la port�e de la bombe situ�e à la position pass�e en param�tres.
+	 * Renvoie la port�e de la bombe situ�e à la position passée en paramètres.
 	 * S'il n'y a pas de bombe à cette position, la valeur -1 est renvoy�e.
 	 * @param	x	position de la bombe
 	 * @param	y	position de la bombe
@@ -179,8 +179,8 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * Renvoie la position du personnage dont l'index est pass�
-	 * en param�tre. S'il n'y a pas de personnage ayant cet index, la valeur 
+	 * Renvoie la position du personnage dont l'index est passé
+	 * en paramètre. S'il n'y a pas de personnage ayant cet index, la valeur 
 	 * {-1,-1} est renvoy�e. Attention, le personnage dirig� par cette IA n'est 
 	 * jamais consid�r�. 
 	 * @param index	num�ro du personnage
@@ -200,8 +200,8 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * Renvoie le sens de déplacement du personnage dont l'index est pass�
-	 * en param�tre. S'il n'y a pas de personnage ayant cet index, la valeur 
+	 * Renvoie le sens de déplacement du personnage dont l'index est passé
+	 * en paramètre. S'il n'y a pas de personnage ayant cet index, la valeur 
 	 * -1 est renvoy�e. Sinon, il s'agit d'un entier AI_DIR_NONE, AI_DIR_UP, AI_DIR_DOWN, 
 	 * AI_DIR_RIGHT ou AI_DIR_LEFT. Attention, le personnage dirig� par cette IA n'est 
 	 * jamais consid�r�.
@@ -216,13 +216,13 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 
 	/**
-	 * Renvoie vrai si la personnage dont l'index est pass�
-	 * en param�tre est vivant. Si le personnage est mort ou en train de mourir,
+	 * Renvoie vrai si la personnage dont l'index est passé
+	 * en paramètre est vivant. Si le personnage est mort ou en train de mourir,
 	 * ou bien s'il n'y a pas de personnage ayant cet index, la valeur 
 	 * faux est renvoy�e. Attention, le personnage dirig� par cette IA n'est 
 	 * jamais consid�r�.
 	 * @param index	num�ro du personnage
-	 * @return	un bool�an repr�sentant l'�tat du personnage 
+	 * @return	un bool�an représentant l'�tat du personnage 
 	 */
 	protected boolean isPlayerAlive(int index)
 	{	if(index<playersStates.size())
@@ -233,7 +233,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Renvoie le temps restant avant le d�but du shrink (la valeur
-	 * est n�gative si le shrink a d�j� commenc�).
+	 * est n�gative si le shrink a d�j� commencé).
 	 * @return	temps avant le shrink en millisecondes
 	 */
 	protected long getTimeBeforeShrink()
@@ -243,7 +243,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Renvoie la position du bloc qui sera le prochain à se faire �craser
 	 * par un bloc lors du shrink.
-	 * @return	un tableau de deux entiers repr�sentant la position du prochain bloc du shrink
+	 * @return	un tableau de deux entiers représentant la position du prochain bloc du shrink
 	 */
 	protected int[] getNextShrinkPosition()
 	{	return nextShrinkPosition;
@@ -271,7 +271,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Renvoie la port�e des bombes du joueur contr�l� par l'IA.
-	 * @return	puissance des bombes (longueur de la flamme exprim�e en nombre de cases)
+	 * @return	puissance des bombes (longueur de la flamme exprimée en nombre de cases)
 	 */
 	protected int getOwnFirePower()
 	{	return ownFirePower;
@@ -290,7 +290,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Renvoie la port�e des bombes des joueurs autre que celui contr�l� par l'IA.
 	 * @param	le num�ro du joueur consid�r�
-	 * @return	puissance des bombes (longueur de la flamme exprim�e en nombre de cases)
+	 * @return	puissance des bombes (longueur de la flamme exprimée en nombre de cases)
 	 */
 	protected int getPlayerFirePower(int index)
 	{	return firePowers.get(index);
@@ -311,13 +311,13 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Permet d'initialiser les percepts avant que l'IA ne calcule l'action à effectuer
 	 * via la méthode call. 
-	 * @param zoneMatrix	matrice repr�sentant la zone de jeu
+	 * @param zoneMatrix	matrice représentant la zone de jeu
 	 * @param bombs	liste des bombes
 	 * @param players	liste des joueurs
 	 * @param playersStates	liste des états (mort ou vif) des joueurs
 	 * @param ownPosition	position du personnage de l'IA
 	 * @param timeBeforeShrink	temps avant le d�but du shrink
-	 * @param nextShrinkPosition	prochain bloc qui va �tre shrink�
+	 * @param nextShrinkPosition	prochain bloc qui va être shrink�
 	 * @param bombPosition	position relative de la bombe
 	 */
 	public void setPercepts(int zoneMatrix[][],Vector<int[]> bombs,Vector<int[]> players,
@@ -339,7 +339,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * Affiche la matrice repr�sentant la zone de jeu pass� à l'IA
+	 * Affiche la matrice représentant la zone de jeu passé à l'IA
 	 * (pour le d�boggage). 
 	 */
 	public void printZoneMatrix()

@@ -27,12 +27,12 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 /**
  * Classe �tendant la classe abstraite CostCalculator gr�ce à une matrice de co�ts.
  * Ici, le co�t pour passer d'une case à l'autre d�pend uniquement de la case
- * de destination. Ce co�t est �gal à la valeur associ�e à la case dans la matrice
+ * de destination. Ce co�t est �gal à la valeur associée à la case dans la matrice
  * de cout fournie. Cette matrice doit faire la même taille que la zone de jeu.
  * En d'autres termes, le co�t d'un déplacement d�pend ici uniquement de la case de destination.
  * </br>
  * Cette classe est utile si on veut calculer des co�ts plus fins qu'avec BasicCostCalculator,
- * qui consid�re seulement la distance. Par exemple, on peut donner un coup plus important
+ * qui considère seulement la distance. Par exemple, on peut donner un coup plus important
  * à l'action de passer dans une case qui est à port�e d'une bombe susceptible d'exploser, ou bien 
  * un co�t infini (avec Double.POSITIVE_INFINITY) à l'action de passer dans une case qu'on veut interdire
  * au personnage parce qu'elle est trop dangereuse. 
@@ -57,7 +57,7 @@ public class MatrixCostCalculator extends CostCalculator
 	/////////////////////////////////////////////////////////////////
 	// COST MATRIX		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice utilisée pour d�terminer le co�t d'une action */
+	/** matrice utilisée pour déterminer le co�t d'une action */
 	private double costMatrix[][];
 	
 	/**
@@ -89,18 +89,18 @@ public class MatrixCostCalculator extends CostCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * La case de d�part n'est pas consid�r�e, on renvoie seulement la valeur
-	 * correspondant à la case d'arriv�e dans la matrice de co�t.
+	 * La case de départ n'est pas consid�r�e, on renvoie seulement la valeur
+	 * correspondant à la case d'arrivée dans la matrice de co�t.
 	 * <b>ATTENTION :</b> si la matrice de co�t est trop petite, la valeur maximale
 	 * possible est renvoy�e (Double.POSITIVE_INFINITY), et un message 
 	 * d'avertissement est affich� dans la sortie standard d'erreur.
 	 * 
 	 * @param start	
-	 * 		la case de d�part
+	 * 		la case de départ
 	 * @param end	
-	 * 		la case d'arriv�e
+	 * 		la case d'arrivée
 	 * @return 
-	 * 		le co�t correspondant à la case d'arriv�e dans la matrice de co�t
+	 * 		le co�t correspondant à la case d'arrivée dans la matrice de co�t
 	 */ 
 	@Override
 	public double processCost(AiTile start, AiTile end) throws StopRequestException

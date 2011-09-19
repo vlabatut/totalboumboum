@@ -24,9 +24,9 @@ package org.totalboumboum.ai.v200809.adapter;
 import org.totalboumboum.engine.content.sprite.item.Item;
 
 /**
- * repr�sente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
- * un item est caract�ris� par son type, repr�sentant le pouvoir apport� (ou enlev�)
- * par l'item. Ce type est repr�sent�e par une valeur de type AiItemType.
+ * représente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
+ * un item est caract�ris� par son type, représentant le pouvoir apport� (ou enlev�)
+ * par l'item. Ce type est représent�e par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
  *
@@ -34,11 +34,11 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 public class AiItem extends AiSprite<Item>
 {	
 	/**
-	 * crée une repr�sentation de l'item pass� en param�tre, et contenue dans 
-	 * la case pass�e en param�tre.
+	 * crée une représentation de l'item passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
 	 * 
 	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à repr�senter
+	 * @param sprite	sprite à représenter
 	 */
 	AiItem(AiTile tile, Item sprite)
 	{	super(tile,sprite);
@@ -68,11 +68,11 @@ public class AiItem extends AiSprite<Item>
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** type d'item repr�sent� */
+	/** type d'item représent� */
 	private AiItemType type;
 	
 	/**
-	 * renvoie le type de l'item repr�sent�
+	 * renvoie le type de l'item représent�
 	 * 
 	 * @return	le type de l'item
 	 */
@@ -81,7 +81,7 @@ public class AiItem extends AiSprite<Item>
 	}
 	
 	/**
-	 * initialise le type de l'item repr�sent�
+	 * initialise le type de l'item représent�
 	 */
 	private void initType()
 	{	Item item = getSprite();

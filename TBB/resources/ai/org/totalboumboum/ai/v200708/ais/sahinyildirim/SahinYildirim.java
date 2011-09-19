@@ -100,7 +100,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		  if(possibleMoves.contains(lastMove)) 
 			  result = lastMove;
 		  
-		  else { // on d�termine al�atoirement l'action qui va �tre effectuée
+		  else { // on détermine al�atoirement l'action qui va être effectuée
 		  int index; do { index = (int)(Math.random()*(possibleMoves.size())); }
 		  while(index==possibleMoves.size());
 		 
@@ -1178,7 +1178,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 	}
 
-	/**Indique si la case situ�e à la position pass�e en param�tre constitue un
+	/**Indique si la case situ�e à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, wallHard, lastPosition.
 	 * @param x
 	 * @param y
@@ -1210,7 +1210,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si le déplacement dont le code a �t� pass� en param�tre est
+	 * Indique si le déplacement dont le code a �t� passé en paramètre est
 	 * possible pour un personnage situ� en (x,y).
 	 * 
 	 * @param x
@@ -1260,7 +1260,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si la case situ�e à la position pass�e en param�tre constitue un
+	 * Indique si la case situ�e à la position passée en paramètre constitue un
 	 * obstacle pour un personnage : bombe, feu, mur.
 	 * 
 	 * @param x
@@ -1294,7 +1294,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si le déplacement dont le code a �t� pass� en param�tre est
+	 * Indique si le déplacement dont le code a �t� passé en paramètre est
 	 * possible pour un personnage situ� en (x,y).
 	 * 
 	 * @param x

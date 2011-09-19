@@ -112,13 +112,13 @@ public class EscapeManager
 	
 		Direction result = Direction.NONE;
 		
-		// La route peut �tre vide, c'est pourquoi on recontr�le
+		// La route peut être vide, c'est pourquoi on recontr�le
 		if(path.isEmpty() || !checkPathValidity())
 			updatePath();
 		
 		/* On prend toujours le premier �lement de path array car avec notre algorithme
-		 * On recalcule toujours la route à suivre dans chaque it�ration, alors notre
-		 * caract�re est capable de changer sa d�cision à chaque it�ration.
+		 * On recalcule toujours la route à suivre dans chaque itération, alors notre
+		 * caract�re est capable de changer sa d�cision à chaque itération.
 		 */
 		
 		AiTile tile = path.getTile(0);

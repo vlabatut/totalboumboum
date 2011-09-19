@@ -31,18 +31,18 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	/** Le Tile ou on vas poser une bombe pour detruire des murs */
 	private AiTile endTileDestruct = null;
 	private AiTile endTileAttack = null;
-	/** le personnage dirigé par cette IA */
+	/** le personnage dirigï¿½ par cette IA */
 	private AiHero ownHero = null;
 	/** la zone de jeu */
 	private AiZone zone = null;
-	/** la case occupée actuellement par le personnage */
+	/** la case occupï¿½e actuellement par le personnage */
 	private AiTile currentTile = null;
 	/**
 	 * renvoie la case courante
 	 */
-	/** la position en pixels occupée actuellement par le personnage */
+	/** la position en pixels occupï¿½e actuellement par le personnage */
 	private int currentX;
-	/** la position en pixels occupée actuellement par le personnage */
+	/** la position en pixels occupï¿½e actuellement par le personnage */
 	private int currentY;
 
 	public AiTile getCurrentTile() throws StopRequestException {
@@ -61,7 +61,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	}
 
 	/**
-	 * renvoie l'ordonnée courante (en pixels)
+	 * renvoie l'ordonnÃ©e courante (en pixels)
 	 */
 	public int getCurrentY() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -83,7 +83,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 	}
 
 	/**
-	 * renvoie le personnage contrôlé par cette IA
+	 * renvoie le personnage contrï¿½lï¿½ par cette IA
 	 */
 	public AiHero getOwnHero() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
@@ -158,9 +158,9 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 			if (inAttackRange(endTileAttack)) {
 				if (isRangeClean(ownHero.getBombRange() + 1, currentTile)) {
 					if (debugMode)
-						System.out.println("attack bomb______Ben burdayým :"
+						System.out.println("attack bomb______Ben burdayï¿½m :"
 								+ ownHero.getTile().toString()
-								+ "Düþman Burda : " + endTileAttack.toString());
+								+ "Dï¿½ï¿½man Burda : " + endTileAttack.toString());
 					ret.actionName = AiActionName.DROP_BOMB;
 					leftBomb = isCleanDirection(ownHero.getBombRange() + 1,
 							ownHero.getTile());
@@ -434,7 +434,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 							} catch (Exception e) {
 								if (debugMode) {
 									System.out
-											.println("attak range patladý dýþþþþþ................................................................UP"
+											.println("attak range patladï¿½ dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½................................................................UP"
 													+ i);
 									System.out.println(e.getStackTrace());
 								}
@@ -455,7 +455,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 							} catch (Exception e) {
 								if (debugMode) {
 									System.out
-											.println("attak range patladý dýþþþþþ................................................................DOWN"
+											.println("attak range patladï¿½ dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½................................................................DOWN"
 													+ i);
 									System.out.println(e.getStackTrace());
 								}
@@ -481,7 +481,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 								} catch (Exception e) {
 									if (debugMode) {
 										System.out
-												.println("attak range patladý dýþþþþþ................................................................LEFT"
+												.println("attak range patladï¿½ dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½................................................................LEFT"
 														+ i);
 										System.out.println(e.getStackTrace());
 									}
@@ -501,7 +501,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 								} catch (Exception e) {
 									if (debugMode) {
 										System.out
-												.println("attak range patladý dýþþþþþ................................................................RIGHT"
+												.println("attak range patladï¿½ dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½................................................................RIGHT"
 														+ i);
 										System.out.println(e.getStackTrace());
 									}

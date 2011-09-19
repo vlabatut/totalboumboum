@@ -154,7 +154,7 @@ public class AStar {
 	}
 	
 	/**
-	 * Indique si la case situ�e à la position pass�e en param�tre
+	 * Indique si la case situ�e à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
 	 * @param x	position à �tudier
 	 * @param y	position à �tudier

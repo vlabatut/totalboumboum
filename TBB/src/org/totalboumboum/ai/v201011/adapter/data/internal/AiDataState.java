@@ -28,9 +28,9 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
- * D�crit un état dans lequel un sprite peut se trouver, c'est
+ * décrit un état dans lequel un sprite peut se trouver, c'est
  * à dire essentiellement l'action que le sprite r�alise ou qu'il subit.
- * Cet état est d�crit par le nom de cette action, et �ventuellement la
+ * Cet état est décrit par le nom de cette action, et éventuellement la
  * direction dans laquelle elle est effectuée (pour les actions orient�es
  * comme le déplacement, par exemple).
  * 
@@ -39,14 +39,14 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  */
 final class AiDataState implements AiState
 {
-	/** sprite dont l'�tat est repr�sent� */
+	/** sprite dont l'�tat est représent� */
 	private Sprite sprite;
 	
 	/**
-	 * construit un objet repr�sentant l'�tat du sprite pass� en param�tre
+	 * construit un objet représentant l'�tat du sprite passé en paramètre
 	 * 
 	 * @param sprite
-	 * 		sprite dont on veut repr�senter l'�tat
+	 * 		sprite dont on veut représenter l'�tat
 	 */
 	protected AiDataState(Sprite sprite)
 	{	this.sprite = sprite;
@@ -82,7 +82,7 @@ final class AiDataState implements AiState
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associ�e à l'�tat */
+	/** nom associée à l'�tat */
 	private AiStateName name;
 	
 	@Override
@@ -100,7 +100,7 @@ final class AiDataState implements AiState
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associ�e à l'�tat (peut �tre NONE, c'est à dire : l'�tat n'est pas orient�) */
+	/** direction associée à l'�tat (peut être NONE, c'est à dire : l'�tat n'est pas orient�) */
 	private Direction direction;
 	
 	@Override
@@ -111,7 +111,7 @@ final class AiDataState implements AiState
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** compte combien de temps le sprite a pass� dans l'�tat courant */
+	/** compte combien de temps le sprite a passé dans l'�tat courant */
 	private long time = 0;
 	
 	@Override

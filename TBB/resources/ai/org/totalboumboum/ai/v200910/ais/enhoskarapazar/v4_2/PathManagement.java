@@ -23,8 +23,8 @@ public class PathManagement {
 	private boolean verbose = false;
 	
 	/**
-	 * crée un PathManager charg� d'amener le personnage à la position (x,y)
-	 * exprim�e en pixels
+	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
+	 * exprimée en pixels
 	 */
 	public PathManagement(EnhosKarapazar ai, double x, double y) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -34,8 +34,8 @@ public class PathManagement {
 	}
 	
 	/**
-	 * crée un PathManager charg� d'amener le personnage au centre de la case
-	 * pass�e en param�tre
+	 * crée un PathManager chargé d'amener le personnage au centre de la case
+	 * passée en paramètre
 	 */
 	public PathManagement(EnhosKarapazar ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -75,7 +75,7 @@ public class PathManagement {
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
-	/** l'ordonn�e de destination */
+	/** l'ordonnée de destination */
 	private double yDest;
 	
 	/**
@@ -113,7 +113,7 @@ public class PathManagement {
 	}
 
 	/**
-	 * d�termine si le personnage est arriv� aux coordonnées de destination
+	 * détermine si le personnage est arriv� aux coordonnées de destination
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -122,7 +122,7 @@ public class PathManagement {
 			double xCurrent = ownHero.getPosX();
 			double yCurrent = ownHero.getPosY();
 			arrived = zone.hasSamePixelPosition(xCurrent,yCurrent,xDest,yDest);
-			// cas particulier : oscillation autour du point d'arriv�e
+			// cas particulier : oscillation autour du point d'arrivée
 			if(!arrived && path.getLength()==1)
 			{	Direction prevDir = zone.getDirection(xPrev,yPrev,xDest,yDest);
 				Direction currentDir = zone.getDirection(xCurrent,yCurrent,xDest,yDest);
@@ -137,12 +137,12 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////
 	/** abscisse pr�c�dente */
 	private double xPrev;
-	/** ordonn�e pr�c�dente */
+	/** ordonnée pr�c�dente */
 	private double yPrev;	
 	
 	/**
 	 * met à jour la position pr�c�dente du personnage,
-	 * exprim�e en pixels
+	 * exprimée en pixels
 	 */
 	private void updatePrev() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -179,7 +179,7 @@ public class PathManagement {
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
 	 * est toujours s�r et si aucun obstacle n'est apparu
-	 * depuis la dernière it�ration
+	 * depuis la dernière itération
 	 */
 	public boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -213,7 +213,7 @@ public class PathManagement {
 	/////////////////////////////////////////////////////////////////	
 	/** 
 	 * calcule la prochaine direction pour aller vers la destination 
-	 *(ou renvoie Direction.NONE si aucun déplacement n'est n�cessaire)
+	 *(ou renvoie Direction.NONE si aucun déplacement n'est nécessaire)
 	 * */
 	public Direction update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

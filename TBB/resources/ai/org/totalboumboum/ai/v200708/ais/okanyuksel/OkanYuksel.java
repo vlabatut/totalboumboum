@@ -37,7 +37,7 @@ public class OkanYuksel extends ArtificialIntelligence
 	private int tBombaG;
 	/* Les informations de la position pour la bombe qui est d�tect� comme un danger. */
 	private int tBombaKx, tBombaKy;
-	/* un index qui d�termine si le contr�le des direction est croissante ou d�croissante */
+	/* un index qui détermine si le contr�le des direction est croissante ou d�croissante */
 	private int artis;
 	
 	public OkanYuksel()
@@ -280,9 +280,9 @@ public class OkanYuksel extends ArtificialIntelligence
 			}
 		}
 		/*
-		 * Cette fois, �a ne peut pas trouv�. 
+		 * Cette fois, ça ne peut pas trouv�. 
 		 * Le dernier est retir� et s�il y a un appel pas fini dans la r�cursivit�, 
-		 * �a continuera, sinon �a finira.
+		 * ça continuera, sinon ça finira.
 		 */
 		if (!kacisR.isEmpty())
 			kacisR.pop();
@@ -302,8 +302,8 @@ public class OkanYuksel extends ArtificialIntelligence
 			int[] kP = getPlayerPosition(syc);
 			if (isPlayerAlive(syc) && yolAcik(kP, new int[]{xM,yM}))
 			{
-				/* �a ne regarde pas d�arri�re, 
-				 * pour emp�che de tomber dans une pi�ge 
+				/* ça ne regarde pas d�arri�re, 
+				 * pour emp�che de tomber dans une piège 
 				 * apr�s poser une bombe pour un rival. 
 				 * Donc il regardera à sa droite, à sa gauche et à son avant. 
 				*/

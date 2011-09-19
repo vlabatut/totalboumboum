@@ -26,7 +26,7 @@ import java.util.List;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * repr�sente une case du jeu, avec tous les sprites qu'elle contient.
+ * représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
  *
@@ -85,10 +85,10 @@ public abstract class AiTile
 	}
 	
 	/** 
-	 * renvoie l'ordonn�e de la case en pixels
+	 * renvoie l'ordonnée de la case en pixels
 	 * 
 	 * @return	
-	 * 		l'ordonn�e de cette case
+	 * 		l'ordonnée de cette case
 	 */
 	public double getPosY()
 	{	return posY;	
@@ -115,34 +115,34 @@ public abstract class AiTile
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * renvoie la liste des blocks contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les blocks �ventuellement contenus dans cette case
+	 * 		les blocks éventuellement contenus dans cette case
 	 */
 	public abstract List<AiBlock> getBlocks();
 
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les bombes �ventuellement contenues dans cette case
+	 * 		les bombes éventuellement contenues dans cette case
 	 */
 	public abstract List<AiBomb> getBombs();
 
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les feux �ventuellement contenus dans cette case
+	 * 		les feux éventuellement contenus dans cette case
 	 */
 	public abstract List<AiFire> getFires();
 
 	/** 
 	 * renvoie les sols de cette case 
-	 * (il y a forc�ment au moins un sol)
+	 * (il y a forcément au moins un sol)
 	 * 
 	 * @return	
 	 * 		les sols contenus dans cette case
@@ -151,19 +151,19 @@ public abstract class AiTile
 
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les personnages �ventuellement contenus dans cette case
+	 * 		les personnages éventuellement contenus dans cette case
 	 */
 	public abstract List<AiHero> getHeroes();
 
 	/** 
 	 * renvoie la liste des items contenus dans cette case 
-	 * (la liste peut �tre vide)
+	 * (la liste peut être vide)
 	 * 
 	 * @return	
-	 * 		les items �ventuellement contenus dans cette case
+	 * 		les items éventuellement contenus dans cette case
 	 */
 	public abstract List<AiItem> getItems();
 	
@@ -171,7 +171,7 @@ public abstract class AiTile
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Teste si le sprite pass� en param�tre est capable de traverser
+	 * Teste si le sprite passé en paramètre est capable de traverser
 	 * cette case. Sinon, cela signifie qu'elle contient au moins un
 	 * obstacle que le personnage ne peut pas traverser. 
 	 * Tous les sprites ne sont pas sensibles aux mêmes obstacles,
@@ -184,17 +184,17 @@ public abstract class AiTile
 	 *  @param sprite
 	 *  	le sprite qui veut traverser cette case
 	 *  @param ignoreBlocks
-	 *  	si vrai, la fonction ne consid�re pas les blocks comme des obstacles
+	 *  	si vrai, la fonction ne considère pas les blocks comme des obstacles
 	 *  @param ignoreBombs
-	 *  	si vrai, la fonction ne consid�re pas les bombes comme des obstacles
+	 *  	si vrai, la fonction ne considère pas les bombes comme des obstacles
 	 *  @param ignoreFires
-	 *  	si vrai, la fonction ne consid�re pas le feu comme un obstacle
+	 *  	si vrai, la fonction ne considère pas le feu comme un obstacle
 	 *  @param ignoreFloors
-	 *  	si vrai, la fonction ne consid�re pas les sols comme des obstacles (ce qu'ils sont rarement, de toute fa�on)
+	 *  	si vrai, la fonction ne considère pas les sols comme des obstacles (ce qu'ils sont rarement, de toute fa�on)
 	 *  @param ignoreHeroes
-	 *  	si vrai, la fonction ne consid�re pas les personnages comme des obstacles
+	 *  	si vrai, la fonction ne considère pas les personnages comme des obstacles
 	 *  @param ignoreItems
-	 *  	si vrai, la fonction ne consid�re pas les items comme des obstacles
+	 *  	si vrai, la fonction ne considère pas les items comme des obstacles
 	 *  @return	
 	 *  	vrai ssi ce sprite , à cet instant, peut traverser cette case
 	 */
@@ -202,7 +202,7 @@ public abstract class AiTile
 			boolean ignoreBlocks, boolean ignoreBombs, boolean ignoreFires, boolean ignoreFloors, boolean ignoreHeroes, boolean ignoreItems);
 	
 	/**
-	 * Comme isCrossableBy, mais consid�re toujours le feu
+	 * Comme isCrossableBy, mais considère toujours le feu
 	 * 
 	 *  @param sprite
 	 *  	le sprite qui veut traverser cette case
@@ -215,8 +215,8 @@ public abstract class AiTile
 	// NEIGHBORS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le voisin de cette case pass�e en param�tre, situ� dans la direction
-	 * pass�e en param�tre. 
+	 * renvoie le voisin de cette case passée en paramètre, situ� dans la direction
+	 * passée en paramètre. 
 	 * <b>ATTENTION :</b> seulement les directions primaires sont
 	 * utilisées (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
 	 * Dans le cas contraire, la fonction renvoie null.</br>
@@ -244,7 +244,7 @@ public abstract class AiTile
 	 * (ligne,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @return	
-	 * 		la liste des voisins situ�s en haut, à gauche, en bas et à droite de la case pass�e en param�tre
+	 * 		la liste des voisins situ�s en haut, à gauche, en bas et à droite de la case passée en paramètre
 	 */
 	public abstract List<AiTile> getNeighbors();
 
