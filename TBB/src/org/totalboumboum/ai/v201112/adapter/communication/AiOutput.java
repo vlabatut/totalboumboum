@@ -27,7 +27,7 @@ import java.util.List;
 
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.pathfinding.path.AiPath;
 
 /**
  * 
