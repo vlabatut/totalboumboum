@@ -222,7 +222,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * faux est renvoy�e. Attention, le personnage dirig� par cette IA n'est 
 	 * jamais considéré.
 	 * @param index	num�ro du personnage
-	 * @return	un bool�an représentant l'�tat du personnage 
+	 * @return	un bool�an représentant l'état du personnage 
 	 */
 	protected boolean isPlayerAlive(int index)
 	{	if(index<playersStates.size())

@@ -38,13 +38,13 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 
 public class AiState 
 {
-	/** sprite dont l'�tat est représent� */
+	/** sprite dont l'état est représent� */
 	private Sprite sprite;
 	
 	/**
-	 * construit un objet représentant l'�tat du sprite passé en paramètre
+	 * construit un objet représentant l'état du sprite passé en paramètre
 	 * 
-	 * @param sprite	sprite dont on veut représenter l'�tat
+	 * @param sprite	sprite dont on veut représenter l'état
 	 */
 	AiState(Sprite sprite)
 	{	this.sprite = sprite;
@@ -67,14 +67,14 @@ public class AiState
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associée à l'�tat */
+	/** nom associée à l'état */
 	private AiStateName name;
 	
 	
 	/**
-	 * renvoie le nom associé à l'�tat
+	 * renvoie le nom associé à l'état
 	 * 
-	 * @return	nom associé à l'�tat
+	 * @return	nom associé à l'état
 	 */
 	public AiStateName getName()
 	{	return name;
@@ -87,14 +87,14 @@ public class AiState
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associée à l'�tat (peut être NONE, c'est à dire : l'�tat n'est pas orient�) */
+	/** direction associée à l'état (peut être NONE, c'est à dire : l'état n'est pas orient�) */
 	private Direction direction;
 	
 	/**
-	 * renvoie la direction associée à l'�tat,
-	 * qui peut être NONE, c'est à dire : l'�tat n'est pas orient�
+	 * renvoie la direction associée à l'état,
+	 * qui peut être NONE, c'est à dire : l'état n'est pas orient�
 	 * 
-	 * @return	direction associée à l'�tat
+	 * @return	direction associée à l'état
 	 */
 	public Direction getDirection()
 	{	return direction;

@@ -109,23 +109,23 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 	
 	/**
-	 * indique si l'explosion de la bombe d�pend d'un compte à rebours
-	 * @return	vrai si la bombe d�pend d'un compte à rebours
+	 * indique si l'explosion de la bombe dépend d'un compte à rebours
+	 * @return	vrai si la bombe dépend d'un compte à rebours
 	 */
 	public boolean hasCountdownTrigger()
 	{	return countdownTrigger;
 	}
 	
 	/**
-	 * indique si l'explosion de la bombe d�pend d'une télécommande
-	 * @return	vrai si la bombe d�pend d'une télécommande
+	 * indique si l'explosion de la bombe dépend d'une télécommande
+	 * @return	vrai si la bombe dépend d'une télécommande
 	 */
 	public boolean hasRemoteControlTrigger()
 	{	return remoteControlTrigger;
 	}
 	
 	/**
-	 * indique si l'explosion de la bombe d�pend d'un contact avec du feu
+	 * indique si l'explosion de la bombe dépend d'un contact avec du feu
 	 * @return	vrai si la bombe explose au contact du feu
 	 */
 	public boolean hasExplosionTrigger()

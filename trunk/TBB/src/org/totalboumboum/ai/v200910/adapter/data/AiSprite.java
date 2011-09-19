@@ -117,17 +117,17 @@ public abstract class AiSprite<T extends Sprite>
 	private AiState state;
 
 	/** 
-	 * renvoie l'�tat dans lequel se trouve ce sprite
+	 * renvoie l'état dans lequel se trouve ce sprite
 	 * (ie: quelle action il est en train d'effectuer ou de subir)
 	 * 
-	 * @return	l'�tat du sprite
+	 * @return	l'état du sprite
 	 */
 	public AiState getState()
 	{	return state;
 	}
 	
 	/** 
-	 * initialise l'�tat dans lequel se trouve ce sprite
+	 * initialise l'état dans lequel se trouve ce sprite
 	 */
 	private void updateState()
 	{	state.update();

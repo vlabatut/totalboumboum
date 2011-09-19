@@ -39,7 +39,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 final class AiSimState  implements AiState
 {
 	/**
-	 * construit un objet simulant l'�tat d'un sprite qui vient d'�tre créé,
+	 * construit un objet simulant l'état d'un sprite qui vient d'�tre créé,
 	 * i.e. qui ne fait rien (STANDING) dans une direction neutre (NONE).
 	 */
 	protected AiSimState()
@@ -49,15 +49,15 @@ final class AiSimState  implements AiState
 	}
 
 	/**
-	 * construit un objet simulant l'�tat d'un sprite qui vient d'�tre créé,
+	 * construit un objet simulant l'état d'un sprite qui vient d'�tre créé,
 	 * en utilisant les valeurs passées en paramètres
 	 * 
 	 * @param name
-	 * 		nom de l'�tat
+	 * 		nom de l'état
 	 * @param direction	
 	 * 		direction de l'action
 	 * @param time	
-	 * 		dur�e courante de l'�tat
+	 * 		dur�e courante de l'état
 	 */
 	protected AiSimState(AiStateName name, Direction direction, long time)
 	{	this.name = name;
@@ -66,10 +66,10 @@ final class AiSimState  implements AiState
 	}
 
 	/**
-	 * construit un objet simulant l'�tat du sprite passé en paramètre
+	 * construit un objet simulant l'état du sprite passé en paramètre
 	 * 
 	 * @param sprite	
-	 * 		sprite dont on veut simuler l'�tat
+	 * 		sprite dont on veut simuler l'état
 	 */
 	protected AiSimState(AiSprite sprite)
 	{	AiState state = sprite.getState();
@@ -79,10 +79,10 @@ final class AiSimState  implements AiState
 	}
 
 	/**
-	 * construit un objet simulant l'�tat passé en paramètre
+	 * construit un objet simulant l'état passé en paramètre
 	 * 
 	 * @param state
-	 * 		�tat à reproduire
+	 * 		état à reproduire
 	 */
 	protected AiSimState(AiState state)
 	{	name = state.getName();
@@ -93,7 +93,7 @@ final class AiSimState  implements AiState
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associée à l'�tat */
+	/** nom associée à l'état */
 	private AiStateName name;
 	
 	@Override
@@ -108,7 +108,7 @@ final class AiSimState  implements AiState
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associée à l'�tat (peut être NONE, c'est à dire : l'�tat n'est pas orient�) */
+	/** direction associée à l'état (peut être NONE, c'est à dire : l'état n'est pas orient�) */
 	private Direction direction;
 	
 	@Override
@@ -119,7 +119,7 @@ final class AiSimState  implements AiState
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** compte combien de temps le sprite a passé dans l'�tat courant */
+	/** compte combien de temps le sprite a passé dans l'état courant */
 	private long time = 0;
 	
 	@Override

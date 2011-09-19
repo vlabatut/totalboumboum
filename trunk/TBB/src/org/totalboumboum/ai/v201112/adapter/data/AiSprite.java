@@ -46,11 +46,11 @@ public interface AiSprite
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
-	 * renvoie l'�tat dans lequel se trouve ce sprite
+	 * renvoie l'état dans lequel se trouve ce sprite
 	 * (ie: quelle action il est en train d'effectuer ou de subir)
 	 * 
 	 * @return	
-	 * 		l'�tat du sprite
+	 * 		l'état du sprite
 	 */
 	public AiState getState();
 	

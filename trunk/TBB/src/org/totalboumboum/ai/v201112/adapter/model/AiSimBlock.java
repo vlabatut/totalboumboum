@@ -49,7 +49,7 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	 * @param posZ
 	 * 		hauteur du bloc
 	 * @param state
-	 * 		�tat du bloc
+	 * 		état du bloc
 	 * @param burningDuration
 	 * 		dur�e de combustion du bloc
 	 * @param currentSpeed

@@ -28,9 +28,11 @@ import org.totalboumboum.ai.v201112.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
+import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
@@ -52,63 +54,56 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	 * @param heuristicCalculator	
 	 * 		fonction heuristique
 	 */
-	protected DybrefNode(ArtificialIntelligence ai, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
+	protected DybrefNode(ArtificialIntelligence ai, AiZone zone, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
 	{	// ia
 		this.ai = ai;
-		// case
-		this.tile = tile;
 		// hero
 		this.hero = hero;
+		
+		// zone courante
+		this.zone = zone;
+		// case courante
+		this.tile = tile;
+		
 		// parent
 		parent = null;
 		// profondeur
 		depth = 0;
-		// cout
-		this.costCalculator = costCalculator;
-		cost = 0;
-		// heuristique
-		this.heuristicCalculator = heuristicCalculator;
-		heuristic = heuristicCalculator.processHeuristic(tile);
-		// successeurs
+		// successeur
 		this.successorCalculator = successorCalculator;
+		
+		// pause
+		// durée totale
 	}
 
 	/**
-	 * Constructeur créant un noeud non visité, fils du noeud
-	 * passé en paramètre. 
+	 * Constructeur créant un noeud fils du noeud passé en paramètre. 
 	 * 
 	 * @param tile	
 	 * 		case associée à ce noeud de recherche
 	 * @param parent	
 	 * 		noeud de recherche parent de ce noeud
 	 */
-	protected DybrefNode(AiTile tile, DybrefNode parent) throws StopRequestException
+	protected DybrefNode(AiZone zone, AiTile tile, DybrefNode parent) throws StopRequestException
 	{	// ia
 		this.ai = parent.getAi();
-		
-		// case
-		this.tile = tile;
-		
 		// hero
 		this.hero = parent.getHero();
 		
+		// zone
+		this.zone = zone;
+		// case
+		this.tile = tile;
+		
 		// parent
 		this.parent = parent;
-		
 		// profondeur
 		depth = parent.getDepth() + 1;
-		
-		// coût
-		costCalculator = parent.getCostCalculator();
-		double localCost = costCalculator.processCost(parent.getTile(),tile);
-		cost = parent.getCost() + localCost;
-		
-		// heuristique
-		heuristicCalculator = parent.getHeuristicCalculator();
-		heuristic = heuristicCalculator.processHeuristic(tile);
-		
 		// successeurs
 		successorCalculator = parent.getSuccessorCalculator();
+		
+		// pause
+		// durée totale
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -144,6 +139,22 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	}
 
     /////////////////////////////////////////////////////////////////
+	// ZONE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** zone associée au noeud */
+	private AiZone zone = null;
+	
+	/**
+	 * Renvoie la zone associée au noeud de recherche.
+	 * 
+	 * @return	
+	 * 		une zone
+	 */
+	public AiZone getZone()
+	{	return zone;
+	}
+
+    /////////////////////////////////////////////////////////////////
 	// DEPTH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** profondeur du noeud dans l'arbre de recherche */
@@ -160,62 +171,6 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	{	return depth;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// COST				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** coût du noeud (calculé depuis la racine) */
-	private double cost = 0;
-	/** calculateur de coût */
-	private CostCalculator costCalculator;
-	
-	/**
-	 * Renvoie le coût du noeud calculé depuis la racine. 
-	 * 
-	 * @return	
-	 * 		le coût
-	 */
-	public double getCost()
-	{	return cost;
-	}
-	
-	/**
-	 * renvoie la fonction de cout de ce noeud
-	 * 
-	 * @return 
-	 * 		la fonction de cout de ce noeud
-	 */
-	public CostCalculator getCostCalculator()
-	{	return costCalculator;		
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// HEURISTIC		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** heuristique du noeud */
-	private double heuristic = 0;
-	/** calculateur de l'heuristique */
-	private HeuristicCalculator heuristicCalculator;
-	
-	/**
-	 * Renvoie l'heuristique du noeud 
-	 * 
-	 * @return	
-	 * 		l'heuristique
-	 */
-	public double getHeuristic()
-	{	return heuristic;
-	}
-	
-	/**
-	 * renvoie la fonction heuristique de ce noeud
-	 * 
-	 * @return 
-	 * 		la fonction heuristique de ce noeud
-	 */
-	public HeuristicCalculator getHeuristicCalculator()
-	{	return heuristicCalculator;		
-	}
-		
     /////////////////////////////////////////////////////////////////
 	// PARENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -232,32 +187,13 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	{	return parent;	
 	}
 	
-	/**
-	 * détermine si la case passée en paramètre a déjà été traitée,
-	 * i.e. si elle apparait dans les noeuds de recherche ancêtres
-	 * 
-	 * @param tile	
-	 * 		case à tester
-	 * @return	
-	 * 		vrai si la case a déjà été traitée
-	 * @throws StopRequestException
-	 */
-	private boolean hasBeenExplored(AiTile tile) throws StopRequestException
-	{	ai.checkInterruption();
-		
-		boolean result = this.tile.equals(tile);
-		if(parent!=null && !result)
-			result = parent.hasBeenExplored(tile);
-		return result;
-	}
-	
     /////////////////////////////////////////////////////////////////
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** fils du noeud */
 	private List<DybrefNode> children = null;
 	/** calculateur des successeurs */
-	private SuccessorCalculator successorCalculator;
+	private DybrefSuccessorCalculator successorCalculator;
 	
 	/**
 	 * renvoie la fonction successeur de ce noeud
@@ -265,7 +201,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	 * @return 
 	 * 		la fonction successeur de ce noeud
 	 */
-	public SuccessorCalculator getSuccessorCalculator()
+	public DybrefSuccessorCalculator getSuccessorCalculator()
 	{	return successorCalculator;		
 	}
 	
@@ -294,10 +230,35 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	{	ai.checkInterruption();
 	
 		children = new ArrayList<DybrefNode>();
+		
+		
+		
+		
+		
+		// pour chaque case voisine : on la rajoute si elle est traversable
+		for(Direction direction: Direction.getPrimaryValues())
+		{	// on applique le modèle pour obtenir la zone résultant de l'action
+			// on teste si le joueur est encore vivant dans cette zone
+			// on teste si l'action a bien réussi (la case était-elle traversable ?)
+			// on récupère la case qu'il occupe et crée le noeud fils correspondant
+			AiTile neighbor = tile.getNeighbor(direction);
+			if(neighbor.isCrossableBy(hero))
+				result.add(neighbor);			
+		}
+		
+		// on rajoute aussi la case courante
+		if(tile.isCrossableBy(hero))
+			result.add(tile);
+		
+		
+		
+		
+		
+		
 		List<AiTile> neighbors = successorCalculator.processSuccessors(this);
 		for(AiTile neighbor: neighbors)
-		{	// on ne garde pas les �tats qui appartiennent déjà au chemin contenant le noeud de recherche courant
-			// i.e. les �tats qui apparaissent dans des noeuds ancêtres du noeud courant
+		{	// on ne garde pas les états qui appartiennent déjà au chemin contenant le noeud de recherche courant
+			// i.e. les états qui apparaissent dans des noeuds ancêtres du noeud courant
 			if(!hasBeenExplored(neighbor))
 			{	DybrefNode node = new DybrefNode(neighbor,this);
 				children.add(node);			

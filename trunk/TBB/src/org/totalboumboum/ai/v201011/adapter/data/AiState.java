@@ -40,10 +40,10 @@ public interface AiState
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le nom associé à l'�tat
+	 * renvoie le nom associé à l'état
 	 * 
 	 * @return	
-	 * 		nom associé à l'�tat
+	 * 		nom associé à l'état
 	 */
 	public AiStateName getName();
 	
@@ -51,11 +51,11 @@ public interface AiState
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la direction associée à l'�tat,
-	 * qui peut être NONE, c'est à dire : l'�tat n'est pas orient�
+	 * renvoie la direction associée à l'état,
+	 * qui peut être NONE, c'est à dire : l'état n'est pas orient�
 	 * 
 	 * @return	
-	 * 		direction associée à l'�tat
+	 * 		direction associée à l'état
 	 */
 	public Direction getDirection();
 
@@ -63,7 +63,7 @@ public interface AiState
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la dur�e que le sprite a passé dans l'�tat courant
+	 * renvoie la dur�e que le sprite a passé dans l'état courant
 	 * 
 	 * @return	
 	 * 		une dur�e exprimée en ms

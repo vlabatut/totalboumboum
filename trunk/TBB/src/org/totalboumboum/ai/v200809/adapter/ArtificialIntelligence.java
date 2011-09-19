@@ -62,7 +62,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	/**
 	 * méthode testant si le jeu a demandé la terminaison de l'IA.
-	 * Si c'est le cas, une exception est lev�e, qui sera propag�e jusqu'� call
+	 * Si c'est le cas, une exception est lev�e, qui sera propag�e jusqu'à call
 	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas être
 	 * intercept�e localement par un try/catch. 
 	 */

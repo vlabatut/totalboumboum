@@ -175,11 +175,11 @@ public abstract class AiTile
 	 * cette case. Sinon, cela signifie qu'elle contient au moins un
 	 * obstacle que le personnage ne peut pas traverser. 
 	 * Tous les sprites ne sont pas sensibles aux mêmes obstacles,
-	 * cela d�pend à la fois du type des sprites considérés (Hero,
+	 * cela dépend à la fois du type des sprites considérés (Hero,
 	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer à travers
 	 * les murs, passer à travers les bombes, etc). Le feu peut constituer
 	 * un obstacle, notamment pour les sprite de type Hero.</br>
-	 * cf. les méthodes de même nom dans les classes filles de AiSprite
+	 * cf. les méthodes de même nom dans les classes filles de {@link AiSprite}
 	 * 
 	 *  @param sprite
 	 *  	le sprite qui veut traverser cette case
@@ -196,18 +196,19 @@ public abstract class AiTile
 	 *  @param ignoreItems
 	 *  	si vrai, la fonction ne considère pas les items comme des obstacles
 	 *  @return	
-	 *  	vrai ssi ce sprite , à cet instant, peut traverser cette case
+	 *  	Renvoie {@code true} ssi ce sprite, à cet instant, peut traverser cette case
 	 */
 	public abstract boolean isCrossableBy(AiSprite sprite, 
 			boolean ignoreBlocks, boolean ignoreBombs, boolean ignoreFires, boolean ignoreFloors, boolean ignoreHeroes, boolean ignoreItems);
 	
 	/**
-	 * Comme isCrossableBy, mais considère toujours le feu
+	 * Comme {@link #isCrossableBy(AiSprite,boolean,boolean,boolean,boolean,boolean,boolean) isCrossableBy}, 
+	 * mais considère toujours le feu.
 	 * 
 	 *  @param sprite
-	 *  	le sprite qui veut traverser cette case
+	 *  	Le sprite qui veut traverser cette case.
 	 *  @return	
-	 *  	vrai ssi ce sprite , à cet instant, peut traverser cette case
+	 *  	Renvoie {@code true} ssi ce sprite , à cet instant, peut traverser cette case.
 	 */
 	public abstract boolean isCrossableBy(AiSprite sprite);
 	
