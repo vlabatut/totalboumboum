@@ -31,7 +31,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.internal.AiDataZone;
-import org.totalboumboum.ai.v201112.adapter.pathfinding.AiPath;
+import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
