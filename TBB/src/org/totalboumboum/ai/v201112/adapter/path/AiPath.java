@@ -44,14 +44,14 @@ public class AiPath implements Comparable<AiPath>
     /////////////////////////////////////////////////////////////////
 	// STARTING POINTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse du point de départ précis du chemin, exprimé en pixel (il doit être contenu dans la première case, bien sûr) */
+	/** abscisse du point de départ précis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien sûr) */
 	private double startX;
-	/** ordonnée du point de départ précis du chemin, exprimé en pixel (il doit être contenu dans la première case, bien sûr) */
+	/** ordonnée du point de départ précis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien sûr) */
 	private double startY;
 	
 	/**
 	 * renvoie l'abscisse du point de départ de chemin,
-	 * exprimée en pixel.
+	 * exprimée en pixels.
 	 * 
 	 * @return
 	 * 		l'abscisse du point de départ
@@ -62,7 +62,7 @@ public class AiPath implements Comparable<AiPath>
 
 	/**
 	 * renvoie l'ordonnée du point de départ de chemin,
-	 * exprimée en pixel.
+	 * exprimée en pixels.
 	 * 
 	 * @return
 	 * 		l'ordonnée du point de départ
@@ -73,7 +73,7 @@ public class AiPath implements Comparable<AiPath>
 
 	/**
 	 * modifie la position du point de départ de chemin,
-	 * exprimée en pixel.
+	 * exprimée en pixels.
 	 * 
 	 * @param startY
 	 * 		la nouvelle ordonnée du point de départ
@@ -227,10 +227,10 @@ public class AiPath implements Comparable<AiPath>
 	
 	/**
 	 * renvoie la dernière case du chemin,
-	 * ou null s'il n'y a pas de case dans ce chemin
+	 * ou {@code null} s'il n'y a pas de case dans ce chemin
 	 * 
 	 * @return	
-	 * 		la dernière case du chemin ou null en cas d'erreur
+	 * 		la dernière case du chemin ou {@code null} en cas d'erreur
 	 */
 	public AiTile getLastTile()
 	{	AiTile result = null;
@@ -241,10 +241,10 @@ public class AiPath implements Comparable<AiPath>
 	
 	/**
 	 * renvoie la première case du chemin,
-	 * ou null s'il n'y a pas de case dans ce chemin
+	 * ou {@code null} s'il n'y a pas de case dans ce chemin
 	 * 
 	 * @return	
-	 * 		la première case du chemin ou null en cas d'erreur
+	 * 		la première case du chemin ou {@code null} en cas d'erreur
 	 */
 	public AiTile getFirstTile()
 	{	AiTile result = null;
@@ -260,7 +260,7 @@ public class AiPath implements Comparable<AiPath>
 	 * renvoie la distance de Manhattan, exprimée en cases, correspondant à ce chemin
 	 * 
 	 * @return	
-	 * 		un entier correspondant à la distance totale du chemin en cases
+	 * 		un entier correspondant à la distance totale du chemin en cases.
 	 */
 	public int getTileDistance()
 	{	int result = 0;
@@ -276,7 +276,7 @@ public class AiPath implements Comparable<AiPath>
 	 * le centre de la première case.
 	 * 
 	 * @return	
-	 * 		un réel correspondant à la distance totale du chemin en pixels
+	 * 		un réel correspondant à la distance totale du chemin en pixels.
 	 */
 	public double getPixelDistance()
 	{	double result = 0;
@@ -331,7 +331,7 @@ public class AiPath implements Comparable<AiPath>
 	/**
 	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus long que ce dernier.
-	 * Cette méthode ne doit plus être utilisée, il faut plutot se servir de compareTo.
+	 * Cette méthode ne doit plus être utilisée, il faut plutot se servir de {@link #compareTo}.
 	 * 
 	 * @param path
 	 * 		le chemin à comparer
@@ -349,7 +349,7 @@ public class AiPath implements Comparable<AiPath>
 	/**
 	 * Compare ce chemin à celui passé en paramètre, 
 	 * et renvoie vrai s'il est strictement plus court que ce dernier.
-	 * Cette méthode ne doit plus être utilisée, il faut plutot se servir de compareTo.
+	 * Cette méthode ne doit plus être utilisée, il faut plutôt se servir de {@link #compareTo}.
 	 * 
 	 * @param path
 	 * 		le chemin à comparer
