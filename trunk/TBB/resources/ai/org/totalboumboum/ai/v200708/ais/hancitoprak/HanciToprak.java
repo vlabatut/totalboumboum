@@ -51,7 +51,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	private boolean firstTime = true;
 
 	/**
-	 * la methode contr�le le mouvement du personnage pour chaque itération 
+	 * la methode Contrôle le mouvement du personnage pour chaque itération 
 	*/
 
 	public Integer call() throws Exception {
@@ -71,7 +71,7 @@ public class HanciToprak extends ArtificialIntelligence {
 		Vector<Integer> possibleMoves = getPossibleMoves(x, y);
 
 //		costMatrix_ = costMatrix;
-		costMatrix = getZoneMatrix();//initialisation du costMatrix(matrix à utiliser pour prendre d�cision)
+		costMatrix = getZoneMatrix();//initialisation du costMatrix(matrix à utiliser pour prendre décision)
 		
 		Decision();//pour chaque itération on renouvele le costMatrix (les couts)
 		
@@ -301,7 +301,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	}
 	
 	/**
-	 * la methode à utiliser pour faire AI prendre d�cision 
+	 * la methode à utiliser pour faire AI prendre décision 
 	 * si il ya un danger du fire.
 	 * Si le resultat d'un de ses mouvements possibles est un domaine dangereux
 	 * la methode le sors de ses mouvements possibles
@@ -338,7 +338,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	 * @param x	position du personnage
 	 * @param y position du personnage
 	 * @param move le mouvement prochain du personnage
-	 * @return les coordonnees de la case du personnage apres qu'il a realis� son deplacement prochain
+	 * @return les coordonnees de la case du personnage apres qu'il a realisé son deplacement prochain
 	 */
 	private int[] resultMovePosition(int x, int y, int move) {
 		int[] result = { 5, 5 };
@@ -421,10 +421,10 @@ public class HanciToprak extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Renvoie la direction oppos� du dernier mouvement
+	 * Renvoie la direction opposé du dernier mouvement
 	 * 
 	 * @param lastmove direction du dernier mouvement 
-	 * @return	direction oppos� du dernier movement
+	 * @return	direction opposé du dernier movement
 	 */
 	private Integer opposite_dirextion(Integer lastmove) {
 
@@ -445,7 +445,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	
 	/**
 	 * Renvoie la liste de tous les déplacements possibles
-	 * pour un personnage situ� à la position (x,y)
+	 * pour un personnage situé à la position (x,y)
 	 * @param x	position du personnage
 	 * @param y position du personnage
 	 * @return	la liste des déplacements possibles
@@ -461,10 +461,10 @@ public class HanciToprak extends ArtificialIntelligence {
 	
 	/**
 	 * Indique si le déplacement dont le code a été passé en paramètre 
-	 * est possible pour un personnage situ� en (x,y).
+	 * est possible pour un personnage situé en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param move	le déplacement à �tudier
+	 * @param move	le déplacement à étudier
 	 * @return	vrai si ce déplacement est possible
 	 */
 	private boolean isMovePossible(int x, int y, int move) {
@@ -491,10 +491,10 @@ public class HanciToprak extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Indique si la case situ�e à la position passée en paramètre
+	 * Indique si la case située à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
-	 * @param x	position à �tudier
-	 * @param y	position à �tudier
+	 * @param x	position à étudier
+	 * @param y	position à étudier
 	 * @return	vrai si la case contient un obstacle
 	 */
 	private boolean isObstacle(int x, int y) {
@@ -524,7 +524,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	/**
 	 * controle les cases où se trouvent les bombes.
 	 * Initialise les  couts
-	 * gr�ce auxquels AI prends d�cision. 
+	 * grâce auxquels AI prends décision. 
 	 * 
 	 */
 	private void Decision() {//  initialisation de costMatrix pour prendre decision 

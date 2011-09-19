@@ -9,8 +9,8 @@ package org.totalboumboum.ai.v200708.ais.demirkoldogan;
  */
 public class Block {
 	
-	private int x; //coordon� horizontale du block
-	private int y; //coordon� verticale du block
+	private int x; //coordoné horizontale du block
+	private int y; //coordoné verticale du block
 	private int cost; //cout de ce block
 	private int heuristic; //heuristique
 	private Block parentBlock; //le block pere de ce block

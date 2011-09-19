@@ -12,8 +12,8 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
 
 /**
  * Classe implémentant un comportement non-violent : le robot
- * ne pose jamais de bombe, et essaie juste de s'�loigner le plus
- * possible des dangers existants, i.e. par ordre de dangerosit�
+ * ne pose jamais de bombe, et essaie juste de s'éloigner le plus
+ * possible des dangers existants, i.e. par ordre de dangerosité
  * croissante : le feu, les bombes, les autres joueurs. 
  * 
  * @author Ayca Selva Baydar
@@ -138,11 +138,11 @@ public class BaydarCamci extends ArtificialIntelligence
 	 * Parmi les blocs dont le type correspond à la valeur blockType
 	 * passée en paramètre, cette méthode cherche lequel est le plus proche
 	 * du point de coordonnées (x,y) passées en paramètres. Le résultat
-	 * prend la forme d'un tableau des deux coordon�es du bloc le plus proche.
+	 * prend la forme d'un tableau des deux coordonnées du bloc le plus proche.
 	 * Le tableau est contient des -1 s'il n'y a aucun bloc du bon type dans la zone de jeu.
 	 * @param x	position de référence
 	 * @param y	position de référence
-	 * @param blockType	le type du bloc recherch�
+	 * @param blockType	le type du bloc recherché
 	 * @return	les coordonnées du bloc le plus proche
 	 */
 	private int[] getClosestBlockPosition(int x, int y, int blockType)
@@ -186,10 +186,10 @@ public class BaydarCamci extends ArtificialIntelligence
 
 	/**
 	 * Indique si le déplacement dont le code a été passé en paramètre 
-	 * est possible pour un personnage situ� en (x,y).
+	 * est possible pour un personnage situé en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param move	le déplacement à �tudier
+	 * @param move	le déplacement à étudier
 	 * @return	vrai si ce déplacement est possible
 	 */
 	public boolean isMovePossible(int x, int y, int move)
@@ -216,10 +216,10 @@ public class BaydarCamci extends ArtificialIntelligence
 	}
 
 	/**
-	 * Indique si la case situ�e à la position passée en paramètre
+	 * Indique si la case située à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
-	 * @param x	position à �tudier
-	 * @param y	position à �tudier
+	 * @param x	position à étudier
+	 * @param y	position à étudier
 	 * @return	vrai si la case contient un obstacle
 	 */
 	private boolean isObstacle(int x, int y)
@@ -244,7 +244,7 @@ public class BaydarCamci extends ArtificialIntelligence
 
 	/**
 	 * Renvoie la liste de tous les déplacements possibles
-	 * pour un personnage situ� à la position (x,y)
+	 * pour un personnage situé à la position (x,y)
 	 * @param x	position du personnage
 	 * @param y position du personnage
 	 * @return	la liste des déplacements possibles
@@ -464,16 +464,16 @@ public class BaydarCamci extends ArtificialIntelligence
 		{
 			// on détermine les déplacements possibles
 			Vector<Integer> possibleMoves = getPossibleMoves(x,y);
-			// on teste s'il est possible d'effectuer le même déplacement que pr�c�demment
+			// on teste s'il est possible d'effectuer le même déplacement que précédemment
 			if(possibleMoves.contains(lastMove))
 				result = lastMove;
-			// sinon : soit on se d�place, soit on pose une bombe
+			// sinon : soit on se déplace, soit on pose une bombe
 			else if(possibleMoves.size()>0)
 			{	// on peut poser une bombe si on est à la fois dans un cul de sac 
 				// (1 seul déplacement possible) et sur une case vide
 				if(possibleMoves.size()<2 && getZoneMatrix()[x][y]==ArtificialIntelligence.AI_BLOCK_EMPTY)
 					possibleMoves.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
-				// on détermine al�atoirement l'action qui va être effectuée
+				// on détermine aléatoirement l'action qui va être effectuée
 				int index;
 				do
 				{	index = (int)(Math.random()*(possibleMoves.size()));			

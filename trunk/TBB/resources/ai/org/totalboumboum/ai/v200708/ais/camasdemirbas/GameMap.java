@@ -14,7 +14,7 @@ public class GameMap {
 	public static final int HEIGHT = 15;	
 	/** Les cadres de terrain pour chaque carreau dans la carte */
 	private int[][] zoneMatrix = new int[WIDTH][HEIGHT];
-	/** L'indicateur si un carreau donn� a été visité pendant la recherche */
+	/** L'indicateur si un carreau donné a été visité pendant la recherche */
 	private boolean[][] visited = new boolean[WIDTH][HEIGHT];
 	
 	/**
@@ -44,11 +44,11 @@ public class GameMap {
 	}
 	
 	/**
-	 * Obtenir le terrain à un emplacement donn�
+	 * Obtenir le terrain à un emplacement donné
 	 * 
 	 * @param x la coordonnée du carreau de terrain pour rapporter
 	 * @param y la coordonnée du carreau de terrain pour rapporter
-	 * @return Le carreau de terrain à l'emplacement donn�
+	 * @return Le carreau de terrain à l'emplacement donné
 	 */
 	public int getTerrain(int x, int y) {
 		return zoneMatrix[x][y];

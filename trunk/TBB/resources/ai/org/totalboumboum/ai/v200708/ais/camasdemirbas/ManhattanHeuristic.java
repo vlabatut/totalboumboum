@@ -1,7 +1,7 @@
 package org.totalboumboum.ai.v200708.ais.camasdemirbas;
 
 /**
- * Un heuristique que conduit la recherche a bas� la distance de Manhattan
+ * Un heuristique que conduit la recherche a basé la distance de Manhattan
  *  entre l'emplacement actuel et le cible
  * 
  * @author Gokhan Camas
@@ -9,13 +9,13 @@ package org.totalboumboum.ai.v200708.ais.camasdemirbas;
  *
  */
 public class ManhattanHeuristic implements AStarHeuristic {
-	/** Le coût minimum de mouvement de n'importe quel un carr� à l'apr�s */
+	/** Le coût minimum de mouvement de n'importe quel un carré à l'après */
 	private int minimumCost;
 	
 	/**
 	 * créer un nouvel heuristique 
 	 * 
-	 * @param minimumCost The le coût minimum de mouvement de n'importe quel un carr� à l'apr�s
+	 * @param minimumCost The le coût minimum de mouvement de n'importe quel un carré à l'après
 	 */
 	protected ManhattanHeuristic(int minimumCost) {
 		this.minimumCost = minimumCost;

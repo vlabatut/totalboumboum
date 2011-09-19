@@ -9,7 +9,7 @@ import org.totalboumboum.ai.v200708.ais.camasdemirbas.ManhattanHeuristic;
 
 /**
  * Une implément de viseur de chemin 
- * qui utilise l'AStar l'algorithme bas� heuristique déterminer un chemin. 
+ * qui utilise l'AStar l'algorithme basé heuristique déterminer un chemin. 
  * 
  * @author Gokhan Camas
  * @author Irem Demirbas
@@ -21,12 +21,12 @@ public class AStarPathFinder implements PathFinder {
 	private List closed = new ArrayList();
 	private SortedList open = new SortedList();
 	
-	/** La carte est cherch�e */
+	/** La carte est cherchée */
 	private GameMap map;
 	/** La profondeur maximum de recherche que nous voulons accepter avant de renoncer */
 	private int maxSearchDistance;
 	
-	/** La s�rie compl�te de noeuds à travers la carte */
+	/** La série complète de noeuds à travers la carte */
 	private Node[][] nodes;
 	protected static boolean findPathWithSoftWall;
 	private boolean allowDiagMovement;
@@ -34,9 +34,9 @@ public class AStarPathFinder implements PathFinder {
 	private AStarHeuristic heuristic;
 	
 	/**
-	 * r�er un viseur de chemin avec l'implicite heuristique - le plus proche pour cibler.
+	 * créer un viseur de chemin avec l'implicite heuristique - le plus proche pour cibler.
 	 * 
-	 * @param map La carte être cherch�e
+	 * @param map La carte être cherchée
 	 * @param maxSearchDistance La profondeur maximum que nous chercherons avant de renoncer
 	 * @param allowDiagMovement True si la recherche doit essayer le mouvement de diaganol
 	 */
@@ -48,7 +48,7 @@ public class AStarPathFinder implements PathFinder {
 	 * créer un viseur de chemin 
 	 * 
 	 * @param heuristic L'heuristique a utilisé pour déterminer l'ordre de recherche de la carte
-	 * @param map La carte être cherch�e
+	 * @param map La carte être cherchée
 	 * @param maxSearchDistance La profondeur maximum que nous chercherons avant de renoncer
 	 * @param allowDiagMovement Vrai si la recherche doit essayer le mouvement de diaganol
 	 */
@@ -170,10 +170,10 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Obtenir le premier �l�ment de la liste ouverte. 
-	 * Ceci est le suivant être cherch�. 
+	 * Obtenir le premier élément de la liste ouverte. 
+	 * Ceci est le suivant être cherché. 
 	 * 
-	 * @return e premier �l�ment dans la liste ouverte
+	 * @return e premier élément dans la liste ouverte
 	 */
 	protected Node getFirstInOpen() {
 		return (Node) open.first();
@@ -182,17 +182,17 @@ public class AStarPathFinder implements PathFinder {
 	/**
 	 * Ajouter un noeud à la liste ouverte
 	 * 
-	 * @param node Le noeud être ajout� à la liste ouverte
+	 * @param node Le noeud être ajouté à la liste ouverte
 	 */
 	protected void addToOpen(Node node) {
 		open.add(node);
 	}
 	
 	/**
-	 * Le contr�le si un noeud est dans la liste ouverte
+	 * Le Contrôle si un noeud est dans la liste ouverte
 	 * 
 	 * @param node 
-	 * @return True si le noeud donn� est dans la liste ouverte
+	 * @return True si le noeud donné est dans la liste ouverte
 	 */
 	protected boolean inOpenList(Node node) {
 		return open.contains(node);
@@ -208,28 +208,28 @@ public class AStarPathFinder implements PathFinder {
 	}
 	
 	/**
-	 * Ajouter un noeud à la liste ferm�e
+	 * Ajouter un noeud à la liste fermée
 	 * 
-	 * @param node Le noeud pour ajouter à la liste ferm�e
+	 * @param node Le noeud pour ajouter à la liste fermée
 	 */
 	protected void addToClosed(Node node) {
 		closed.add(node);
 	}
 	
 	/**
-	 * Le contr�le si le noeud fourni est dans la liste ferm�e
+	 * Le Contrôle si le noeud fourni est dans la liste fermée
 	 * 
 	 * @param node 
-	 * @return True si le noeud spécifié est dans la liste ferm�e
+	 * @return True si le noeud spécifié est dans la liste fermée
 	 */
 	protected boolean inClosedList(Node node) {
 		return closed.contains(node);
 	}
 	
 	/**
-	 * Enlever un noeud de la liste ferm�e
+	 * Enlever un noeud de la liste fermée
 	 * 
-	 * @param node Le noeud pour enlever de la liste ferm�e
+	 * @param node Le noeud pour enlever de la liste fermée
 	 */
 	protected void removeFromClosed(Node node) {
 		closed.remove(node);
@@ -246,7 +246,7 @@ public class AStarPathFinder implements PathFinder {
 	}
 	
 	/**
-	 * Obtenir le coût pour se d�placer par un emplacement donn�
+	 * Obtenir le coût pour se déplacer par un emplacement donné
 	 * 
 	 */
 	public float getMovementCost(int sx, int sy, int tx, int ty) {
@@ -254,7 +254,7 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Obtenir le coût heuristique pour l'emplacement donn�. 
+	 * Obtenir le coût heuristique pour l'emplacement donné. 
 	 * Ceci détermine dans lequel commande les emplacements sont traités. 
 	 * 
 	 */
@@ -263,19 +263,19 @@ public class AStarPathFinder implements PathFinder {
 	}
 	
 	/**
-	 * Une liste tri�e simple
+	 * Une liste triée simple
 	 *
 	 * @author Gokhan Camas -- Irem Demirbas
 	 */
 	private class SortedList {
-		/** La liste d'�l�ments */
+		/** La liste d'éléments */
 		@SuppressWarnings("rawtypes")
 		private List list = new ArrayList();
 		
 		/**
-		 * Rapporter le premier �l�ment de la liste
+		 * Rapporter le premier élément de la liste
 		 *  
-		 * @return Le premier �l�ment de la liste
+		 * @return Le premier élément de la liste
 		 */
 		public Object first() {
 			return list.get(0);
@@ -289,9 +289,9 @@ public class AStarPathFinder implements PathFinder {
 		}
 		
 		/**
-		 * Ajouter un �l�ment à la liste - les causes triant
+		 * Ajouter un élément à la liste - les causes triant
 		 * 
-		 * @param o L'�l�ment pour ajouter
+		 * @param o L'élément pour ajouter
 		 */
 		public void add(Object o) {
 			list.add(o);
@@ -299,28 +299,28 @@ public class AStarPathFinder implements PathFinder {
 		}
 		
 		/**
-		 * Enlever un �l�ment de la liste
+		 * Enlever un élément de la liste
 		 * 
-		 * @param o L'�l�ment pour enlever
+		 * @param o L'élément pour enlever
 		 */
 		public void remove(Object o) {
 			list.remove(o);
 		}
 	
 		/**
-		 * Obtenir le nombre d'�l�ments dans la liste
+		 * Obtenir le nombre d'éléments dans la liste
 		 * 
-		 * @return Le nombre d'�l�ment dans la liste
+		 * @return Le nombre d'élément dans la liste
  		 */
 		public int size() {
 			return list.size();
 		}
 		
 		/**
-		 * Le contr�le si un �l�ment est dans la liste
+		 * Le Contrôle si un élément est dans la liste
 		 * 
-		 * @param o L'�l�ment pour chercher
-		 * @return True si l'�l�ment est dans la liste
+		 * @param o L'élément pour chercher
+		 * @return True si l'élément est dans la liste
 		 */
 		public boolean contains(Object o) {
 			return list.contains(o);

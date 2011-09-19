@@ -11,7 +11,7 @@ import org.totalboumboum.ai.v200708.adapter.ArtificialIntelligence;
  */
 public class GoksayKose extends ArtificialIntelligence{
 	private static final long serialVersionUID = 1L;
-	/**true si la case est occup� par un bombe**/ 
+	/**true si la case est occupé par un bombe**/ 
 	private boolean Flag;
 	/**
 	 * constructeur
@@ -260,7 +260,7 @@ public class GoksayKose extends ArtificialIntelligence{
 				int result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 				int bomb[] = getClosestBlockPosition(x, y, ArtificialIntelligence.AI_BLOCK_BOMB);
 				int portee=0;
-			    //prend en parametre l'abscisse et l'ordonné du bombe et retourne la port�e du bombe
+			    //prend en parametre l'abscisse et l'ordonné du bombe et retourne la portée du bombe
 				portee = getBombPowerAt(bomb[0], bomb[1]);
 				//si IA se trouve sur une case qui explosera par la bombe
 				if(x<bomb[0]+portee||x>bomb[0]-portee&&y<bomb[1]+portee&&y>bomb[1]-portee) {
@@ -279,8 +279,8 @@ public class GoksayKose extends ArtificialIntelligence{
 	
 			/**
 			 * détermine un ordre de préférence sur toutes les directions possibles :
-			 * plus la direction permet de s'�loigner du danger,
-			 * plus elle est pr�f�r�e.
+			 * plus la direction permet de s'éloigner du danger,
+			 * plus elle est préférée.
 			 * @param x	position du personnage
 			 * @param y	position du personnage
 			 * @param dangerX	position du danger
@@ -334,10 +334,10 @@ public class GoksayKose extends ArtificialIntelligence{
 		return result;
 	}
 	/**
-	 * Indique si la case situ�e à la position passée en paramètre
+	 * Indique si la case située à la position passée en paramètre
 	 * constitue un obstacle pour un personnage : bombe, feu, mur.
-	 * @param x	position à �tudier
-	 * @param y	position à �tudier
+	 * @param x	position à étudier
+	 * @param y	position à étudier
 	 * @return	vrai si la case contient un obstacle
 	 */
 	private boolean isObstacle(int x, int y)
@@ -359,7 +359,7 @@ public class GoksayKose extends ArtificialIntelligence{
     
 	/**
 	 * Renvoie la liste de tous les déplacements possibles
-	 * pour un personnage situ� à la position (x,y)
+	 * pour un personnage situé à la position (x,y)
 	 * @param x	position du personnage
 	 * @param y position du personnage
 	 * @return	la liste des déplacements possibles
@@ -375,10 +375,10 @@ public class GoksayKose extends ArtificialIntelligence{
 	
 	/**
 	 * Indique si le déplacement dont le code a été passé en paramètre 
-	 * est possible pour un personnage situ� en (x,y).
+	 * est possible pour un personnage situé en (x,y).
 	 * @param x	position du personnage
 	 * @param y position du personnage
-	 * @param move	le déplacement à �tudier
+	 * @param move	le déplacement à étudier
 	 * @return	vrai si ce déplacement est possible
 	 */
 	private boolean isMovePossible(int x, int y, int move)
@@ -408,11 +408,11 @@ public class GoksayKose extends ArtificialIntelligence{
 	 * Parmi les blocs dont le type correspond à la valeur blockType
 	 * passée en paramètre, cette méthode cherche lequel est le plus proche
 	 * du point de coordonnées (x,y) passées en paramètres. Le résultat
-	 * prend la forme d'un tableau des deux coordon�es du bloc le plus proche.
+	 * prend la forme d'un tableau des deux coordonées du bloc le plus proche.
 	 * Le tableau est contient des -1 s'il n'y a aucun bloc du bon type dans la zone de jeu.
 	 * @param x	position de référence
 	 * @param y	position de référence
-	 * @param blockType	le type du bloc recherch�
+	 * @param blockType	le type du bloc recherché
 	 * @return	les coordonnées du bloc le plus proche
 	 */
 	private int[] getClosestBlockPosition(int x, int y, int blockType)
