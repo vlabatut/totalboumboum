@@ -13,7 +13,7 @@ public class Cost extends CostCalculator
 	}
 
 	@Override
-	//Une version basic de costConstructeur pour pouvoir utilise A*. A améliorer.
+	//Une version basic de costConstructeur pour pouvoir utilise A*. A amÃ©liorer.
 	public double processCost(AiTile start, AiTile end)throws StopRequestException {
 		int resultat;
 		if(matrix==null)

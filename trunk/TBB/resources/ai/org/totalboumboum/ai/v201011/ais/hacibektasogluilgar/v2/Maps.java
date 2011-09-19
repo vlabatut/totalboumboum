@@ -256,7 +256,7 @@ public class Maps
 				{
 					if(division)
 					{
-						// on calcule le point d'une telle tile comme (point/distance_entre_l'h�ro_et_la_case
+						// on calcule le point d'une telle tile comme (point/distance_entre_l'héro_et_la_case
 						int distance=zone.getTileDistance(ourHero.getLine(),ourHero.getCol(), x, j);
 						if(distance==0) distance=1;
 						matriceTotal[x][j]+=note/distance;
@@ -307,7 +307,7 @@ public class Maps
 				{
 					if(division)
 					{
-						// on calcule le point d'une telle tile comme (point/distance_entre_l'h�ro_et_la_case
+						// on calcule le point d'une telle tile comme (point/distance_entre_l'héro_et_la_case
 						int distance=zone.getTileDistance(ourHero.getLine(),ourHero.getCol(), i, y);
 						if(distance==0) distance=1;
 						matriceTotal[i][y]+=note/distance;
@@ -517,7 +517,7 @@ public class Maps
 					break;
 				}
 				
-				// on donne le couleur vert aux tiles inaccesible en mode collecte par notre h�ro
+				// on donne le couleur vert aux tiles inaccesible en mode collecte par notre héro
 				if( matriceTotal[i][j]==-100) output.setTileColor(i, j,case_inaccesible);
 
 			}	
@@ -699,7 +699,7 @@ public class Maps
 					break;
 				}
 				
-				// on donne le couleur rouge aux tiles inaccesible par notre h�ro
+				// on donne le couleur rouge aux tiles inaccesible par notre héro
 				if( matriceTotal[i][j]==-100) output.setTileColor(i, j,case_inaccesible);
 			}	
 		}

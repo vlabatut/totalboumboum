@@ -33,7 +33,7 @@ public class KantarciTaskin extends ArtificialIntelligence
 
 	
 	/*
-	 * Calcule l'action pour un instant donné
+	 * Calcule l'action pour un instant donnÃ©
 	 * @return restult
 	 * 		action de l'hero dans cette iteration
 	 * */

@@ -53,7 +53,7 @@ public class GocmenogluHekimoglu extends ArtificialIntelligence
 		float bombratio = Math.min(this.getPercepts().getHiddenItemsCount(),3)/(this.getPercepts().getOwnHero().getBombNumberMax()+this.getPercepts().getOwnHero().getBombRange()-2.01f);
 		boolean attaquemode = false;
 		
-		// s�lectionnez le mode
+		// sélectionnez le mode
 		if(bombratio > 1 || !MatriceCalc.canReachHeros(this)){
 			//COLLECTE
 			choix = collecte;
@@ -73,7 +73,7 @@ public class GocmenogluHekimoglu extends ArtificialIntelligence
 			choix.addWithWeight(mbon, 5);
 			choix.addWithWeight(mmal, -5);
 			
-			//nous devrions fuir l'ennemi apr�s avoir mis une bombe pendant quelques secondes.
+			//nous devrions fuir l'ennemi après avoir mis une bombe pendant quelques secondes.
 			if(System.currentTimeMillis()-msec_bomb > 2000){
 				choix.addWithWeight(mhero, 10);
 			}else choix.addWithWeight(mhero, -10);

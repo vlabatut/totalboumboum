@@ -25,27 +25,27 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 public class ModeCollecte 
 {
 
-	//notre héro
+	//notre hÃ©ro
 	
 	private GoncuOnat monia;
 	
 	// la case vide qui ne contient aucuns sprites
-	// est representée dans la matrice da la zone.
+	// est representï¿½e dans la matrice da la zone.
 	public final int CASE_EMPTY=0;
 	// la case qui contient le feu de la bombe pour le mode
-	// collecte est representée dans la matrice da la zone.
+	// collecte est representï¿½e dans la matrice da la zone.
 	public final int COLLECT_FIRE =-20 ;
 	// la case qui contient un mur destructible pour le mode
-	// collecte est representée dans la matrice da la zone.
+	// collecte est representï¿½e dans la matrice da la zone.
 	public final int COLLECT_SOFTWALL = 2;
 	// la case qui contient un bonus pour le mode
-	// collecte est representée dans la matrice da la zone.
+	// collecte est representï¿½e dans la matrice da la zone.
 	public final int COLLECT_BONUS= 10;
-	// la case qui contient un héro pour le mode
-	// collecte est representée dans la matrice da la zone.
+	// la case qui contient un hÃ©ro pour le mode
+	// collecte est representï¿½e dans la matrice da la zone.
 	private final int COLLECT_RIVAL = -10;
 	// la case qui contient une bombe pour le mode
-	// collecte est representée dans la matrice da la zone.
+	// collecte est representï¿½e dans la matrice da la zone.
 	public final int COLLECT_BOMB = -20;
 	// chemin asuivre pour s'enfuir du danger
 	// AiPath nextMove=null;
@@ -128,7 +128,7 @@ public class ModeCollecte
 	
 	/**
 	 * Methode remplissant les cases de notre matrice de zone en mode collecte par la valeur 
-	 * des cases possedant les héros  
+	 * des cases possedant les hÃ©ros  
 	 * 
 	 * @param matrice
 	 * 				La Matrice de Zone
@@ -659,7 +659,7 @@ public class ModeCollecte
 			
 			for(int i=0; i<zone.getHeight(); i++)
 			{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLï¿½GATOï¿½RE
 				for(int j=0; j<zone.getWidth(); j++)
 				{
 					monia.checkInterruption();
@@ -681,10 +681,10 @@ public class ModeCollecte
 			for(int i=0; i<zone.getHeight(); i++)
 		
 			{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLï¿½GATOï¿½RE
 				for(int j=0; j<zone.getWidth(); j++)
 				{
-					monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+					monia.checkInterruption(); // APPEL OBLï¿½GATOï¿½RE
 					
 						if(zone.getTile(i, j).getFires().isEmpty()&&zone.getTile(i, j).getBombs().isEmpty() 
 								&& zone.getTile(i,j).isCrossableBy(monia.ourHero))
@@ -710,7 +710,7 @@ public class ModeCollecte
 			c=zone.getHeight();
 		for(int i=a;i<c;i++)
 		{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLï¿½GATOï¿½RE
 				if(zone.getTile(i, y).isCrossableBy(monia.ourHero))
 					bombBlast.add(zone.getTile(i,y));
 		}
@@ -721,16 +721,16 @@ public class ModeCollecte
 			d=zone.getWidth();
 		for(int j=b;j<d;j++)
 			{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLï¿½GATOï¿½RE
 				if(zone.getTile(x, j).isCrossableBy(monia.ourHero))
 					bombBlast.add(zone.getTile(x,j));
 			}
 		for(int k=0;k<bombBlast.size();k++)
 		{
-			monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+			monia.checkInterruption(); // APPEL OBLï¿½GATOï¿½RE
 			for(int l=0;l<check.size();l++)
 			{
-				monia.checkInterruption(); // APPEL OBLÝGATOÝRE
+				monia.checkInterruption(); // APPEL OBLï¿½GATOï¿½RE
 				if(bombBlast.get(k).getLine()==check.get(l).getLine()&&bombBlast.get(k).getCol()==check.get(l).getCol())
 					check.remove(l);
 			}

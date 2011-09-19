@@ -23,7 +23,7 @@ public class TraitementCommune {
 	/**
 	 * Cette méthode forme une liste des cases cibles que notre IA peut aller
 	 * dans le mode attaque. Elle prend deux arguments une matrice de type
-	 * double et la zone du jeu. Notre IA peut se d�placer en traversant ces
+	 * double et la zone du jeu. Notre IA peut se déplacer en traversant ces
 	 * cases.
 	 * 
 	 * @param matrice
@@ -130,7 +130,7 @@ public class TraitementCommune {
 	 * Cette méthode forme une liste des cases cibles que notre IA peut aller
 	 * dans le mode collecte. Elle prend deux arguments, une matrice de type Int
 	 * et la zone du jeu. On prend aussi en compte les cases qui sont dans la
-	 * port�e des bombes.
+	 * portée des bombes.
 	 * 
 	 * @param matrice
 	 *            La Matrice collecte

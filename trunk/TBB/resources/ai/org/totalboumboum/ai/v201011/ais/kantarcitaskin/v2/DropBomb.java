@@ -34,8 +34,8 @@ public class DropBomb
 		ai.checkInterruption();
 		
 		boolean result=false; // Decision
-		int range = (zone.getOwnHero().getBombRange());//la port�e nos bombes
-		List<AiTile> tempBlast = calculeBlast(range);//La port�e virtuelle de notre bombe de futur 
+		int range = (zone.getOwnHero().getBombRange());//la portée nos bombes
+		List<AiTile> tempBlast = calculeBlast(range);//La portée virtuelle de notre bombe de futur 
 		
 		if(	zone.getOwnHero().getTile().getBombs().isEmpty() && (zone.getOwnHero().getBombNumberMax() - zone.getOwnHero().getBombNumberCurrent() != 0))
 		{
@@ -137,7 +137,7 @@ public class DropBomb
 		return result;
 	}
 	
-	//La methode qui control si l'h�ro qu'on lui envoie par parametre est bloque entre les murs et les blasts
+	//La methode qui control si l'héro qu'on lui envoie par parametre est bloque entre les murs et les blasts
 	private boolean bloque(AiHero ownHero) 
 	{
 		boolean result = true;
@@ -158,7 +158,7 @@ public class DropBomb
 		return result;
 	}
 	
-	//La methode qui controle si la case passée en parametre se trouve dans la port� d'une bombe
+	//La methode qui controle si la case passée en parametre se trouve dans la porté d'une bombe
 	public boolean isSafe(AiTile tile)
 	{
 		boolean result = true;

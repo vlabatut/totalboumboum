@@ -34,7 +34,7 @@ public class KantarciTaskin extends ArtificialIntelligence
 	AiZone zone;
 	
 	/**
-	 * Calcule l'action pour un instant donn�
+	 * Calcule l'action pour un instant donné
 	 * @return restult
 	 * 		action de l'hero dans cette iteration
 	 * */	

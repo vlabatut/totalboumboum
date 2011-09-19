@@ -38,7 +38,7 @@ public class Elements {
 	// INITIALISATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Cette method est initialisée notre H�ro, murs et bombs
+	 * Cette method est initialisée notre héro, murs et bombs
 	 * @throws StopRequestException
 	 */
 	private void init()throws StopRequestException{

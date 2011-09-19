@@ -46,11 +46,11 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 	private double[][] currentMatrix;
 	private boolean dropBomb=false;
 	private int maxLine, maxCol; //Max de�erin sat�r ve s�tunu
-	/** la case occup�e actuellement par le personnage */
+	/** la case occupée actuellement par le personnage */
 	private AiTile currentTile = null;
-	/** la position en pixels occup�e actuellement par le personnage */
+	/** la position en pixels occupée actuellement par le personnage */
 	private double currentX;
-	/** la position en pixels occup�e actuellement par le personnage */
+	/** la position en pixels occupée actuellement par le personnage */
 	private double currentY;
 	ArtificialIntelligence ai=this;
 	private Astar astar;
@@ -67,7 +67,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		// premier appel : on initialise
 		
 		initZibe();
-		// si le personnage control� a été �limin�, inutile de continuer
+		// si le personnage control� a été élimin�, inutile de continuer
 		if(!this.ownHero.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			updateLocation();

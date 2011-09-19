@@ -132,7 +132,7 @@ public class IsbirKoyas extends ArtificialIntelligence {
 	}
 
 	/**
-	 * Cette méthode fait la d�cision du mode collecte ou attaque en fonction du
+	 * Cette méthode fait la décision du mode collecte ou attaque en fonction du
 	 * nombre de bombes de notre IA et la zone du jeu. Elle prend un seul
 	 * argument qui est la zone du jeu.
 	 * 

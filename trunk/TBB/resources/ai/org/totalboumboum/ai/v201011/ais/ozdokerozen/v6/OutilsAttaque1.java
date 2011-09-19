@@ -217,7 +217,7 @@ public class OutilsAttaque1 {
 		int calculerDistance=(int) tileControleur.calculerDistance(adversaire, notreHero.getTile());		
 		//Algoritm 1: Si l'adversaire est le meme tile avec notre hero!
 		if(calculerDistance<1){
-			//pour �loigner l'adversiare,on pose bombe notre tile
+			//pour éloigner l'adversiare,on pose bombe notre tile
 			//mais on ne peut pas poser bombe à otre tile, alors on aller une autre tile possible
 			if(tileControleur.estQueOnPoseBombe(notreHero.getTile())){
 				//Si on pose une bombe
@@ -318,7 +318,7 @@ public class OutilsAttaque1 {
 	}
 	
 	/**
-	 * Methode qui retourne qu'adversaire est dans notre port�e ou pas
+	 * Methode qui retourne qu'adversaire est dans notre portée ou pas
 	 * @param adversaireTile
 	 * @return boolean
 	 * @throws StopRequestException

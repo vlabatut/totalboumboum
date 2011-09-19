@@ -52,7 +52,7 @@ public class OutilesCollecte {
 					}else if(matrice[prochepath.get(i).getLine()][prochepath.get(i).getCol()]==1){
 						System.out.println("Bu yol a��k devam edelim");
 						previous=notre;
-						System.out.println(" Bo� yol: "+prochepath.get(i).getLine()+","+prochepath.get(i).getCol());
+						System.out.println(" Boù yol: "+prochepath.get(i).getLine()+","+prochepath.get(i).getCol());
 						tile=add(prochepath.get(i));
 						if(trouveBonusPath(10, matrice, hero, gameZone,prochepath.get(i),previous)!=null)
 							tile.addAll(trouveBonusPath(10, matrice, hero, gameZone,prochepath.get(i),previous));

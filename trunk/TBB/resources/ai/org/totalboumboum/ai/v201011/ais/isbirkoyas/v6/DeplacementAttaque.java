@@ -28,7 +28,7 @@ public class DeplacementAttaque {
 		this.ai = ai;
 	}
 	/**
-	 * Cette méthode impl�mente l'algorithme d'attaque. Elle prend 3 arguments
+	 * Cette méthode implémente l'algorithme d'attaque. Elle prend 3 arguments
 	 * une matrice de type double, la zone du jeu et une action.
 	 * 
 	 * @param gameZone	

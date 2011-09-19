@@ -47,7 +47,7 @@ public class AttackMatrix{
 		init();
 	}
 	/**
-	 * On obtient notre h�ro, la dimension de la zone et crée les objets listes.
+	 * On obtient notre héro, la dimension de la zone et crée les objets listes.
 	 * @throws StopRequestException
 	 */
 	private void init()throws StopRequestException{
@@ -84,7 +84,7 @@ public class AttackMatrix{
 		freeList = ps.putFree(this.deepPurple.getTile(),freeList);
 		ps.putDistance(freeList, matrix);
 
-		//Si Ai ne peut pas trouver un chemin aucun des h�ros.  
+		//Si Ai ne peut pas trouver un chemin aucun des héros.  
 		for(AiHero h:heroesList){
 			bt.checkInterruption();
 			if(freeList.contains(h.getTile()))

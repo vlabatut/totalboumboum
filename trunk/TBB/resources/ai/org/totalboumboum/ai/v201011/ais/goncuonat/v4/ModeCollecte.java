@@ -25,27 +25,27 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.heuristic.HeuristicCalcul
 public class ModeCollecte 
 {
 
-	//notre héro
+	//notre hÃ©ro
 	
 	private GoncuOnat monia;
 	
 	// la case vide qui ne contient aucuns sprites
-	// est representée dans la matrice da la zone.
+	// est representï¿½e dans la matrice da la zone.
 	public final int CASE_EMPTY=0;
 	// la case qui contient le feu de la bombe pour le mode
-	// collecte est representée dans la matrice da la zone.
+	// collecte est representï¿½e dans la matrice da la zone.
 	public final int COLLECT_FIRE =-20 ;
 	// la case qui contient un mur destructible pour le mode
-	// collecte est representée dans la matrice da la zone.
+	// collecte est representï¿½e dans la matrice da la zone.
 	public final int COLLECT_SOFTWALL = 2;
 	// la case qui contient un bonus pour le mode
-	// collecte est representée dans la matrice da la zone.
+	// collecte est representï¿½e dans la matrice da la zone.
 	public final int COLLECT_BONUS= 10;
-	// la case qui contient un héro pour le mode
-	// collecte est representée dans la matrice da la zone.
+	// la case qui contient un hÃ©ro pour le mode
+	// collecte est representï¿½e dans la matrice da la zone.
 	private final int COLLECT_RIVAL = -10;
 	// la case qui contient une bombe pour le mode
-	// collecte est representée dans la matrice da la zone.
+	// collecte est representï¿½e dans la matrice da la zone.
 	public final int COLLECT_BOMB = -20;
 	// chemin asuivre pour s'enfuir du danger
 	// AiPath nextMove=null;
@@ -115,7 +115,7 @@ public class ModeCollecte
 	
 	/**
 	 * Methode remplissant les cases de notre matrice de zone en mode collecte par la valeur 
-	 * des cases possedant les héros  
+	 * des cases possedant les hÃ©ros  
 	 * 
 	 * @param matrice
 	 * 				La Matrice de Zone
