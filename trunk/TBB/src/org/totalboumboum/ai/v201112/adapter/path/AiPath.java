@@ -46,9 +46,9 @@ public class AiPath implements Comparable<AiPath>
     /////////////////////////////////////////////////////////////////
 	// STARTING POINT	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abscisse du point de départ pr�cis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien s�r) */
+	/** abscisse du point de départ pr�cis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien sûr) */
 	private double startX;
-	/** ordonnée du point de départ pr�cis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien s�r) */
+	/** ordonnée du point de départ pr�cis du chemin, exprimé en pixels (il doit être contenu dans la première case, bien sûr) */
 	private double startY;
 	
 	/**

@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 
 /**
- * Classe �tendant la classe abstraite CostCalculator gr�ce à une matrice de coûts.
+ * Classe �tendant la classe abstraite CostCalculator grâce à une matrice de coûts.
  * Ici, le coût pour passer d'une case à l'autre dépend uniquement de la case
  * de destination. Ce coût est égal à la valeur associée à la case dans la matrice
  * de cout fournie. Cette matrice doit faire la même taille que la zone de jeu.
@@ -33,7 +33,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
  * </br>
  * Cette classe est utile si on veut calculer des coûts plus fins qu'avec BasicCostCalculator,
  * qui considère seulement la distance. Par exemple, on peut donner un coup plus important
- * à l'action de passer dans une case qui est à port�e d'une bombe susceptible d'exploser, ou bien 
+ * à l'action de passer dans une case qui est à portée d'une bombe susceptible d'exploser, ou bien 
  * un coût infini (avec Double.POSITIVE_INFINITY) à l'action de passer dans une case qu'on veut interdire
  * au personnage parce qu'elle est trop dangereuse. 
  * 

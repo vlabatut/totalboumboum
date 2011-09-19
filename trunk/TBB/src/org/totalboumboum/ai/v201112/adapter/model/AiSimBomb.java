@@ -34,7 +34,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * simule une bombe du jeu, i.e. un objet que les joueurs peuvent d�poser
- * pour détruire les murs et �liminer les autre joueurs.
+ * pour détruire les murs et éliminer les autre joueurs.
  * 
  * @author Vincent Labatut
  *
@@ -64,11 +64,11 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param slidingSpeed
 	 * 		vitesse de déplacement au sol de la bombe
 	 * @param countdownTrigger
-	 * 		capacit� à exploser en fonction du temps
+	 * 		capacité à exploser en fonction du temps
 	 * @param remoteControlTrigger
-	 * 		capacit� à exploser sur commande à distance
+	 * 		capacité à exploser sur commande à distance
 	 * @param explosionTrigger
-	 * 		capacit� à exploser au contact du feu
+	 * 		capacité à exploser au contact du feu
 	 * @param normalDuration
 	 * 		dur�e totale avant explosion (bombe à retardement seulement)
 	 * @param latencyDuration
@@ -76,15 +76,15 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param failureProbability
 	 * 		probabilit� de tomber en panne
 	 * @param firePrototype
-	 * 		exemple de feu g�n�r� par la bombe quand elle explose
+	 * 		exemple de feu génér� par la bombe quand elle explose
 	 * @param stopHeroes
-	 * 		capacit� à bloquer les personnages
+	 * 		capacité à bloquer les personnages
 	 * @param stopFires
-	 * 		capacit� à bloquer le feu
+	 * 		capacité à bloquer le feu
 	 * @param throughItems
-	 * 		capacit� à traverser les items
+	 * 		capacité à traverser les items
 	 * @param range
-	 * 		port�e de l'explosion
+	 * 		portée de l'explosion
 	 * @param penetrating
 	 * 		nature p�n�trante du feu
 	 * @param color
@@ -168,13 +168,13 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** d�clenchement par compte à rebours */
+	/** déclenchement par compte à rebours */
 	private boolean countdownTrigger;
-	/** d�clenchement par télécommande */
+	/** déclenchement par télécommande */
 	private boolean remoteControlTrigger;
-	/** d�clenchement par explosion */
+	/** déclenchement par explosion */
 	private boolean explosionTrigger;
-	/** d�lai normal (ie hors-panne) avant l'explosion de la bombe */
+	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
 	/** latence de la bombe quand son explosion est d�clench�e par une autre bombe */
 	private long latencyDuration;
@@ -214,7 +214,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// FIRE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** exemple de feu que la bombe peut g�n�rer */
+	/** exemple de feu que la bombe peut générer */
 	private AiFire firePrototype;
 	
 	@Override
@@ -230,7 +230,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** port�e de la bombe, ie. : nombre de cases occup�es par sa flamme */
+	/** portée de la bombe, ie. : nombre de cases occupées par sa flamme */
 	private int range;
 	/** indique si la flamme produite par cette bombe est capable de traverser les murs */
 	private boolean penetrating;
@@ -241,11 +241,11 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	}
 	
 	/**
-	 * met à jour la port�e de cette bombe
+	 * met à jour la portée de cette bombe
 	 * (méthode utilisée seulement lors de la simulation)
 	 * 
 	 * @param delta	
-	 * 		la modification à apporter à la port�e de cette bombe
+	 * 		la modification à apporter à la portée de cette bombe
 	 */
 	protected void updateRange(int delta)
 	{	range = range + delta;
@@ -310,7 +310,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleur de la bombe (correspondant à celle du personnage qui l'a pos�e) */
+	/** couleur de la bombe (correspondant à celle du personnage qui l'a posée) */
 	private PredefinedColor color;
 	
 	@Override
@@ -342,7 +342,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// TIME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis que la bombe a été pos�e, exprimé en ms */
+	/** temps écoulé depuis que la bombe a été posée, exprimé en ms */
 	private long time = 0;
 	
 	@Override

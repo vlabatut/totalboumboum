@@ -66,7 +66,7 @@ public abstract class GeneralAction implements Serializable
 	 * ability fait-elle partie de isPossible ? a priori, je dirais oui.
 	 * donc: 	isPossible=compatibilité avec l'action générale + ability
 	 * 			isAllowed=modulation
-	 * en fait non, c'est trop li� aux modulations. il vaut mieux faire:
+	 * en fait non, c'est trop lié aux modulations. il vaut mieux faire:
 	 * 		isPossible=compatiblit� avec l'action générale
 	 * 		isAllowed=ability modul�e
 	 * 

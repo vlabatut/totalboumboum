@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action de se d�placer sur le sol
+ * action de se déplacer sur le sol
  * INTRANSITIVE
  * 
  * <p>ABILITY PERFORM

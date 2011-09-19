@@ -185,7 +185,7 @@ public abstract class SpecificAction
 		}
 		
 		// target modulation (if there's one!)
-		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donn�, ça dépend de son gesture courant. si pas de gesture, alors il renvoie null
+		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donné, ça dépend de son gesture courant. si pas de gesture, alors il renvoie null
 		{	TargetModulation targetModulation = target.getTargetModulation(this);
 			if(targetModulation!=null)
 				result = targetModulation.modulate(result); 		

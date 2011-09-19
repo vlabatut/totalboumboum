@@ -44,7 +44,7 @@ public abstract class SuccessorCalculator
 	 * calcule tous les états accessibles à partir du noeud de recherche
 	 * passé en paramètre. On prend un noeud de recherche et non pas
 	 * un état en paramètre, car le noeud de recherche contient des informations
-	 * susceptibles d'�liminer certains successeurs potentiels. 
+	 * susceptibles d'éliminer certains successeurs potentiels. 
 	 * Par exemple, si le cout correspond au temps de déplacement, alors le cout du noeud
 	 * de recherche courant correspond au temps nécessaire pour arriver à l'état
 	 * correspondant. Certaines des cases accessibles depuis cet état peuvent être

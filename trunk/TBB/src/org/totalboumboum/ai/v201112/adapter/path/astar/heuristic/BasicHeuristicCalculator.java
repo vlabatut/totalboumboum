@@ -47,7 +47,7 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	 * cf. http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels
 	 * 
 	 * @param tile	
-	 * 		la case concern�e 
+	 * 		la case concernée 
 	 * @return	
 	 * 		la distance de Manhattan entre tile et la plus proche des cases contenues dans endTiles
 	 */

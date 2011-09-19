@@ -32,7 +32,7 @@ public enum AiStopType
 	/** laisse passer n'importe quel sprite */
 	NO_STOP,
 	
-	/** laisse passer seulement les sprites ayant un pouvoir sp�cial */
+	/** laisse passer seulement les sprites ayant un pouvoir spécial */
 	WEAK_STOP,
 	
 	/** ne laisse passer aucun sprite */

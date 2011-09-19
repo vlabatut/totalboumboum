@@ -50,7 +50,7 @@ public class ClassTools
 	public static final String CLASS_SEPARATOR = ".";
 
 	/**
-	 * Renvoie la liste des noms des classes situées dans un package dans un Jar. 
+	 * Renvoie la liste des noms des classes situÃ©es dans un package dans un Jar. 
 	 * exemple : getClasseNamesInPackage("C:/j2sdk1.4.1_02/lib/mail.jar", "com.sun.mail.handlers");
 	 * @param jarName	chemin du Jar
 	 * @param packageName	nom complet du package
@@ -81,7 +81,7 @@ public class ClassTools
 	}
 	
 	/**
-	 * Renvoie la liste des noms des classes situées dans un package (pas dans un Jar). 
+	 * Renvoie la liste des noms des classes situÃ©es dans un package (pas dans un Jar). 
 	 * @param packageName	nom complet du package
 	 * @return	liste des classes
 	 */

@@ -54,11 +54,11 @@ final class AiSimFire extends AiSimSprite implements AiFire
 	 * @param currentSpeed
 	 * 		vitesse courante de déplacement du feu (inutile)
 	 * @param throughBlocks
-	 * 		capacit� à traverser les murs
+	 * 		capacité à traverser les murs
 	 * @param throughBombs
-	 * 		capacit� à traverser les bombes
+	 * 		capacité à traverser les bombes
 	 * @param throughItems
-	 * 		capacit� à traverser les items
+	 * 		capacité à traverser les items
 	 */
 	protected AiSimFire(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,

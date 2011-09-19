@@ -108,7 +108,7 @@ public class SequenceTournament extends AbstractTournament
 		if(randomizeMatches)
 			randomizeMatches();
 		
-		// NOTE vérifier si le nombre de joueurs s�lectionn�s correspond
+		// NOTE vérifier si le nombre de joueurs sélectionn�s correspond
 		currentIndex = 0;
 	}
 	

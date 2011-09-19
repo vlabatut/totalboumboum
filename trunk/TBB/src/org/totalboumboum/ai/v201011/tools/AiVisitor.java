@@ -51,12 +51,12 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
 /**
  * cette méthode parse les codes sources définissant une IA et vérifie
  * que les appels à checkInterruption sont effectués correctement, c'est à dire :
- * 	- un appel à chaque d�but de boucle (for, while, do)
- * 	- un appel à chaque d�but de méthode, sauf :
+ * 	- un appel à chaque début de boucle (for, while, do)
+ * 	- un appel à chaque début de méthode, sauf :
  * 		- dans un constructeur :
  * 			- en cas d'appel à super() : checkInterruption() est appel� en deuxième (et non pas en premier)
  * 			- dans une classe implémentant l'interface ArtificialIntelligence
- * 		- dans une méthode dont on ne contr�le pas l'interface (du type toString, equals, compare, etc.)
+ * 		- dans une méthode dont on ne Contrôle pas l'interface (du type toString, equals, compare, etc.)
  * 	- l'appel ne doit pas être plac� dans un try-catch qui annulerait son effet
  * 
  * @author Vincent Labatut
@@ -122,11 +122,11 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 					}
 				}
 				else
-				{	System.out.print(">>11111111111 probl�me : exception non conforme ("+t2.getClass()+")");
+				{	System.out.print(">>11111111111 problème : exception non conforme ("+t2.getClass()+")");
 				}
 			}
 	    	else
-			{	System.out.print(">>222222222 probl�me : exception non conforme ("+t.getClass()+")");
+			{	System.out.print(">>222222222 problème : exception non conforme ("+t.getClass()+")");
 	    	}
     	}
     	e.accept(this, arg);
@@ -336,7 +336,7 @@ if(currentMethod.equals("PathFinder"))
 						}
 					}
 					else if(firstStatement instanceof ExplicitConstructorInvocationStmt)
-					{	// c'est un appel à super/this, donc ça doit forcément être au d�but
+					{	// c'est un appel à super/this, donc ça doit forcément être au début
 						// mais la deuxième instruction doit être un appel à checkInterruption()
 						if(statements.size()<2)
 						{	// erreur

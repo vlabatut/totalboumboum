@@ -51,7 +51,7 @@ public class EngineEvent extends AbstractEvent
 	public static final String COLLIDING_OFF = "COLLIDING_OFF";
 
 	/** two sprites started intersecting each-other */
-	public static final String INTERSECTION_ON = "INTERSECTION_ON"; // sym�trique pour les deux sprites concern�s
+	public static final String INTERSECTION_ON = "INTERSECTION_ON"; // sym�trique pour les deux sprites concernés
 	/** two sprites stopped intersecting each-other */
 	public static final String INTERSECTION_OFF = "INTERSECTION_OFF";
 	

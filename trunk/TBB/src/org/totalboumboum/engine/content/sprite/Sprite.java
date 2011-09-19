@@ -72,7 +72,7 @@ import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /** 
- * Sprite poss�dant un status :
+ * Sprite possédant un status :
  * softwall, hero, bomb, item...
  * 
  * @author Vincent Labatut
@@ -251,7 +251,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	
 	public Sprite getOwner()
 	{	return owner;
-		//NOTE à modifier pour recherche r�cursivement l'owner final (mais peut être est-ce déjà fait ailleurs)
+		//NOTE à modifier pour recherche récursivement l'owner final (mais peut être est-ce déjà fait ailleurs)
 	}
 	
 	public void setOwner(Sprite owner)
@@ -272,7 +272,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	}
 	
 	public void setBoundToSprite(Sprite boundToSprite)
-	{	// traitement seulement si le nouveau boundToSprite li� est différent de l'ancien
+	{	// traitement seulement si le nouveau boundToSprite lié est différent de l'ancien
 		if(this.boundToSprite!=boundToSprite)
 		{	// on met à jour le trajectoryManager
 			trajectoryManager.setBoundToSprite(boundToSprite);
@@ -328,7 +328,7 @@ public abstract class Sprite implements Comparable<Sprite>
 		trajectoryManager.update();
 		/*
 		 * NOTE : il est important que le trajectoryManager soit updat� en dernier
-		 * comme �a, un changement de case arrive apr�s avoir traité tous les évènements
+		 * comme �a, un changement de case arrive après avoir traité tous les évènements
 		 * (raisons de synchro)
 		 */
 //System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getLine()+";"+tile.getCol());

@@ -75,7 +75,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
     private Vector<int[]> players;
     /** percept à envoyer à l'IA : états personnages */
     private Vector<Boolean> playersStates;
-    /** percept à envoyer à l'IA : temps avant le d�but du shrink */
+    /** percept à envoyer à l'IA : temps avant le début du shrink */
     private long timeBeforeShrink;
     /** percept à envoyer à l'IA : prochaine position du shrink */
     private int nextShrinkPosition[];

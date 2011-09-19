@@ -44,21 +44,21 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	public final static int AI_DIR_LEFT = 4;
 
 	// constantes de codes de blocs
-	/** bloc inconnu (d�bug)*/ 
+	/** bloc inconnu (débug)*/ 
 	public final static int AI_BLOCK_UNKNOWN = -1;
 	/** bloc vide*/ 
 	public final static int AI_BLOCK_EMPTY = 0;
-	/** bloc occup� par un mur destructible*/ 
+	/** bloc occupé par un mur destructible*/ 
 	public final static int AI_BLOCK_WALL_SOFT = 1;
-	/** bloc occup� par un mur indestructible*/ 
+	/** bloc occupé par un mur indestructible*/ 
 	public final static int AI_BLOCK_WALL_HARD = 2;
-	/** bloc occup� par une flamme*/ 
+	/** bloc occupé par une flamme*/ 
 	public final static int AI_BLOCK_FIRE = 3;
-	/** bloc occup� par une bombe (n'ayant pas encore explosé)*/ 
+	/** bloc occupé par une bombe (n'ayant pas encore explosé)*/ 
 	public final static int AI_BLOCK_BOMB = 4;
-	/** bloc occup� par un bonus augmentant le nombre de bombes*/ 
+	/** bloc occupé par un bonus augmentant le nombre de bombes*/ 
 	public final static int AI_BLOCK_ITEM_BOMB = 5;
-	/** bloc occup� par un bonus augmentant la port�e des bombes*/ 
+	/** bloc occupé par un bonus augmentant la portée des bombes*/ 
 	public final static int AI_BLOCK_ITEM_FIRE = 6;
 	
 	// constantes représentant des actions
@@ -76,7 +76,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	public final static int AI_ACTION_PUT_BOMB = 5;
 	
 	
-	// champs g�n�raux
+	// champs généraux
 	private String name;
 	
 	// champs représentant le percept
@@ -96,11 +96,11 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	private int nextShrinkPosition[];
 	/** position relative de la bombe  */
 	private int bombPosition;
-	/** port�e des bombes du personnage contr�l� par l'IA */
+	/** portée des bombes du personnage contr�l� par l'IA */
 	private int ownFirePower;
 	/** nombre de bombes que le personnage contr�l� par l'IA peut encore poser */
 	private int ownBombCount;
-	/** port�e des bombes des personnages autres que celui contr�l� par l'IA */
+	/** portée des bombes des personnages autres que celui contr�l� par l'IA */
 	private Vector<Integer> firePowers;
 	/** nombre de bombes que les personnages autres que celui contr�l� par l'IA peuvent encore poser */
 	private Vector<Integer> bombCounts;
@@ -152,11 +152,11 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 
 	/**
-	 * Renvoie la port�e de la bombe situ�e à la position passée en paramètres.
+	 * Renvoie la portée de la bombe située à la position passée en paramètres.
 	 * S'il n'y a pas de bombe à cette position, la valeur -1 est renvoy�e.
 	 * @param	x	position de la bombe
 	 * @param	y	position de la bombe
-	 * @return	la port�e de la bombe
+	 * @return	la portée de la bombe
 	 */
 	protected int getBombPowerAt(int x, int y)
 	{	int result = -1;
@@ -232,8 +232,8 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * Renvoie le temps restant avant le d�but du shrink (la valeur
-	 * est n�gative si le shrink a déjà commencé).
+	 * Renvoie le temps restant avant le début du shrink (la valeur
+	 * est négative si le shrink a déjà commencé).
 	 * @return	temps avant le shrink en millisecondes
 	 */
 	protected long getTimeBeforeShrink()
@@ -270,7 +270,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * Renvoie la port�e des bombes du joueur contr�l� par l'IA.
+	 * Renvoie la portée des bombes du joueur contr�l� par l'IA.
 	 * @return	puissance des bombes (longueur de la flamme exprimée en nombre de cases)
 	 */
 	protected int getOwnFirePower()
@@ -280,7 +280,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Renvoie une valeur correspondant au nombre de bombes que le joueur contr�l� par l'IA
 	 * peut encore poser. Ce nombre correspond donc au nombre de bombes posables total moins 
-	 * le nombre de bombes déjà pos�es.
+	 * le nombre de bombes déjà posées.
 	 * @return	nombre de bombes restant à poser
 	 */
 	protected int getOwnBombCount()
@@ -288,7 +288,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 
 	/**
-	 * Renvoie la port�e des bombes des joueurs autre que celui contr�l� par l'IA.
+	 * Renvoie la portée des bombes des joueurs autre que celui contr�l� par l'IA.
 	 * @param	le num�ro du joueur considéré
 	 * @return	puissance des bombes (longueur de la flamme exprimée en nombre de cases)
 	 */
@@ -300,7 +300,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * Renvoie une valeur correspondant aux nombres de bombes que les joueurs autres
 	 * que celui contr�l� par l'IA peuvent encore poser. 
 	 * Ce nombre correspond donc au nombre de bombes posables total moins 
-	 * le nombre de bombes déjà pos�es.
+	 * le nombre de bombes déjà posées.
 	 * @param	le num�ro du joueur considéré
 	 * @return	nombre de bombes restant à poser
 	 */
@@ -316,7 +316,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * @param players	liste des joueurs
 	 * @param playersStates	liste des états (mort ou vif) des joueurs
 	 * @param ownPosition	position du personnage de l'IA
-	 * @param timeBeforeShrink	temps avant le d�but du shrink
+	 * @param timeBeforeShrink	temps avant le début du shrink
 	 * @param nextShrinkPosition	prochain bloc qui va être shrink�
 	 * @param bombPosition	position relative de la bombe
 	 */
@@ -352,7 +352,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	}
 	
 	/**
-	 * lib�re les ressources occup�es par l'IA
+	 * lib�re les ressources occupées par l'IA
 	 */
 	public void finish()
 	{	bombCounts = null;

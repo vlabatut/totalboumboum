@@ -68,17 +68,17 @@ public class AiHero extends AiSprite<Hero>
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAMETERS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** port�e des bombes du personnage */
+	/** portée des bombes du personnage */
 	private int bombRange;
 	/** nombre de bombes que le personnage peut poser simultan�ment */
 	private int bombNumber;
-	/** nombre de bombes que le personnage a actuellement pos�es */
+	/** nombre de bombes que le personnage a actuellement posées */
 	private int bombCount;
 	
 	/**
-	 * renvoie la port�e actuelle des bombes du personnage
+	 * renvoie la portée actuelle des bombes du personnage
 	 * 
-	 * @return	la port�e des bombes
+	 * @return	la portée des bombes
 	 */
 	public int getBombRange()
 	{	return bombRange;
@@ -95,9 +95,9 @@ public class AiHero extends AiSprite<Hero>
 	}
 	
 	/**
-	 * renvoie le nombre de bombes pos�es par le personnage à ce moment-l�
+	 * renvoie le nombre de bombes posées par le personnage à ce moment-l�
 	 * 
-	 * @return	nombre de bombes pos�es
+	 * @return	nombre de bombes posées
 	 */
 	public int getBombCount()
 	{	return bombCount;
@@ -259,7 +259,7 @@ public class AiHero extends AiSprite<Hero>
 	/**
 	 * Renvoie le classement de ce joueur, pour la manche en cours.
 	 * Ce classement est susceptible d'�voluer d'ici la fin de la manche actuellement jou�e, 
-	 * par exemple si ce joueur est �limin�.
+	 * par exemple si ce joueur est élimin�.
 	 * 
 	 * @return	le classement de ce joueur dans la manche en cours
 	 */

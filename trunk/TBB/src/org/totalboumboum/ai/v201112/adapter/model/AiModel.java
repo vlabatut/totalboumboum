@@ -93,7 +93,7 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	// PARAMETERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** fait appara�tre al�atoirement des items lors de la destruction des murs */
+	/** fait apparaître aléatoirement des items lors de la destruction des murs */
 	private boolean simulateItemsAppearing = false;
 
 	/**
@@ -112,16 +112,16 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	// ZONES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** zone issue de la simulation pr�c�dente */
+	/** zone issue de la simulation précédente */
 	private AiSimZone previous;
 	/** zone issue de la dernière simulation */
 	private AiSimZone current;
 	
 	/**
-	 * renvoie la zone issue de la simulation pr�c�dente
+	 * renvoie la zone issue de la simulation précédente
 	 * 
 	 * @return	
-	 * 		l'objet AiZone issu de la simulation pr�c�dente 
+	 * 		l'objet AiZone issu de la simulation précédente 
 	 */
 	public AiZone getPreviousZone()
 	{	return previous;
@@ -177,7 +177,7 @@ public class AiModel
 	/**
 	 * effectue des simulations, en gardant pour chaque sprite l'action courante,
 	 * et ce jusqu'à ce que le personnage spécifié ait chang� d'état.
-	 * Cette méthode est particuli�rement utile quand on veut savoir quel sera
+	 * Cette méthode est particuliérement utile quand on veut savoir quel sera
 	 * l'état estim� de la zone quand le personnage que l'on controle passera
 	 * dans la case suivante.
 	 * <b>Attention:</b> le changement d'état peut aussi être d� au fait que le 
@@ -271,7 +271,7 @@ public class AiModel
 	/**
 	 * calcule l'état suivant de la zone si les états spécifiés en paramètres
 	 * sont appliqu�s à la zone courante. en l'absence d'état spécifié, le sprite
-	 * continue à faire ce qu'il faisait déjà (brûler, se d�placer, etc.).
+	 * continue à faire ce qu'il faisait déjà (brûler, se déplacer, etc.).
 	 * par cons�quent, la map contenant les états spécifiés peut être vide. 
 	 * La méthode renvoie l'état obtenu à la fin du prochain évènement 
 	 * (i.e. celui qui se termine le plus vite). Les évènement considérés sont :
@@ -363,9 +363,9 @@ if(sprite instanceof AiSimBomb)
 	/**
 	 * calcule combien de temps il va falloir au sprite spécifié pour sortir
 	 * de son état courant. si le sprite br�le, il s'agit de savoir pendant
-	 * combien de temps encore. s'il se d�place, il s'agit de savoir combien de
+	 * combien de temps encore. s'il se déplace, il s'agit de savoir combien de
 	 * temps il va lui falloir pour changer de case. s'il ne fait rien, il n'y a
-	 * pas de limite particuli�re à son activit� et la méthode renvoie Long.MAX_VALUE.
+	 * pas de limite particuliére à son activit� et la méthode renvoie Long.MAX_VALUE.
 	 * 
 	 * @param current	
 	 * 		la zone courante
@@ -473,7 +473,7 @@ if(sprite instanceof AiSimBomb)
 	private int spriteId = Integer.MAX_VALUE; 
 
 	/**
-	 * permet de g�n�rer des id pour les sprites créés lors des simulation
+	 * permet de générer des id pour les sprites créés lors des simulation
 	 * 
 	 * @return
 	 * 		une nouvelle id de sprite
@@ -545,11 +545,11 @@ if(sprite instanceof AiSimBomb)
 	}
 	
 	/**
-	 * d�place le sprite passée en paramètre en fonction de sa direction courante,
+	 * déplace le sprite passée en paramètre en fonction de sa direction courante,
 	 * et pour la dur�e de simulation spécifiée.
 	 * 
 	 * @param sprite
-	 * 		le sprite à d�placer
+	 * 		le sprite à déplacer
 	 * @param duration
 	 * 		la dur�e du pas de simulation
 	 */
@@ -655,7 +655,7 @@ if(sprite instanceof AiSimBomb)
 	 * à partir de l'état courant.
 	 * 
 	 * @param block
-	 * 		le sprite concern� (sa représentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration	
 	 * 		la dur�e à prendre en compte
 	 */
@@ -751,7 +751,7 @@ if(sprite instanceof AiSimBomb)
 	 * à partir de l'état courant.
 	 * 
 	 * @param bomb
-	 * 		le sprite concern� (sa représentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
 	 * 		la dur�e à prendre en compte
 	 */
@@ -906,7 +906,7 @@ if(sprite instanceof AiSimBomb)
 	 * à partir de l'état courant.
 	 * 
 	 * @param fire
-	 * 		le sprite concern� (sa représentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
 	 * 		la dur�e à prendre en compte
 	 */
@@ -1019,7 +1019,7 @@ if(sprite instanceof AiSimBomb)
 	 * à partir de l'état courant.
 	 * 
 	 * @param floor
-	 * 		le sprite concern� (sa représentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
 	 * 		la dur�e à prendre en compte
 	 */
@@ -1066,7 +1066,7 @@ if(sprite instanceof AiSimBomb)
 	 * à partir de l'état courant.
 	 * 
 	 * @param hero
-	 * 		le sprite concern� (sa représentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
 	 * 		la dur�e à prendre en compte
 	 */
@@ -1110,8 +1110,8 @@ if(sprite instanceof AiSimBomb)
 
 	/**
 	 * permet de solliciter un personnage pour qu'il pose une bombe
-	 * dans la case spécifiée. La méthode renvoie la bombe pos�e,
-	 * ou bien null en cas d'impossibilit�.
+	 * dans la case spécifiée. La méthode renvoie la bombe posée,
+	 * ou bien null en cas d'impossibilité.
 	 * <b>Note :</b> cette méthode permet de poser des bombes
 	 * à distance, ce qui peut s'av�rer pratique dans certaines situations.
 	 * 
@@ -1120,7 +1120,7 @@ if(sprite instanceof AiSimBomb)
 	 * @param tile
 	 * 		la case qui devra contenir la bombe.
 	 * @return
-	 * 		la bombe qui a été pos�e, ou null si c'�tait impossible.
+	 * 		la bombe qui a été posée, ou null si c'�tait impossible.
 	 */
 	public AiBomb applyDropBomb(AiHero hero, AiTile tile)
 	{	AiBomb result = null;
@@ -1189,14 +1189,14 @@ if(sprite instanceof AiSimBomb)
 
 	/**
 	 * permet de solliciter un personnage pour qu'il pose une bombe
-	 * dans la case spécifiée. La méthode renvoie la bombe pos�e,
-	 * ou bien null en cas d'impossibilit�. La bombe est pos�e
-	 * dans la case actuellement occup�e par le personnage.
+	 * dans la case spécifiée. La méthode renvoie la bombe posée,
+	 * ou bien null en cas d'impossibilité. La bombe est posée
+	 * dans la case actuellement occupée par le personnage.
 	 * 
 	 * @param hero
 	 * 		le personnage que l'on veut voir poser une bombe
 	 * @return
-	 * 		la bombe qui a été pos�e, ou null si c'�tait impossible.
+	 * 		la bombe qui a été posée, ou null si c'�tait impossible.
 	 */
 	public AiBomb applyDropBomb(AiHero hero)
 	{	AiBomb result = null;
@@ -1213,11 +1213,11 @@ if(sprite instanceof AiSimBomb)
 	/**
 	 * permet de solliciter un changement de direction de la part du personnage.
 	 * si la direction n'est pas NONE, alors l'état du personnage devient MOVING.
-	 * sinon, il devient STANDING. Bien s�r, s'il y a des obstacles, le personnage
-	 * ne pourra pas effectivement se d�placer dans la direction spécifiée.
+	 * sinon, il devient STANDING. Bien sûr, s'il y a des obstacles, le personnage
+	 * ne pourra pas effectivement se déplacer dans la direction spécifiée.
 	 * 
 	 * @param hero
-	 * 		le personnage à d�placer
+	 * 		le personnage à déplacer
 	 * @param direction
 	 * 		la direction du déplacement
 	 * @return
@@ -1248,7 +1248,7 @@ if(sprite instanceof AiSimBomb)
 	}
 	
 	/**
-	 * impl�mente le comportement d'un personnage ramassant
+	 * implémente le comportement d'un personnage ramassant
 	 * un item qui se trouve dans la case dans laquelle il
 	 * vient d'entrer.
 	 *  
@@ -1283,8 +1283,8 @@ if(sprite instanceof AiSimBomb)
 	}
 	
 	/**
-	 * impl�mente le comportement d'un personnage rel�chant tous 
-	 * ses items quand il est �limin�.
+	 * implémente le comportement d'un personnage rel�chant tous 
+	 * ses items quand il est élimin�.
 	 * 
 	 * @param hero
 	 * 		le personnage rel�chant tous ses items
@@ -1314,7 +1314,7 @@ if(sprite instanceof AiSimBomb)
 	 * à partir de l'état courant.
 	 * 
 	 * @param item
-	 * 		le sprite concern� (sa représentation initiale)
+	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
 	 * 		la dur�e à prendre en compte
 	 */

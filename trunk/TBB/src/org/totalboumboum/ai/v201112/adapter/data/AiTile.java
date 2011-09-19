@@ -216,36 +216,36 @@ public abstract class AiTile
 	// NEIGHBORS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le voisin de cette case passée en paramètre, situ� dans la direction
+	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
 	 * passée en paramètre. 
 	 * <b>ATTENTION :</b> seulement les directions primaires sont
 	 * utilisées (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
 	 * Dans le cas contraire, la fonction renvoie null.</br>
 	 * <b>ATTENTION :</b> les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case situ�e au bord du niveau est une case situ�e sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case situ�e
-	 * à la position (ligne,0), le voisin de gauche est la case situ�e à la position
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
 	 * (ligne,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @param direction
 	 * 		direction dans laquelle le voisin se trouve
 	 * @return	
-	 * 		le voisin de cette case, situ� dans la direction indiqu�e (ou null si la direction n'est pas primaire)
+	 * 		le voisin de cette case, situé dans la direction indiqu�e (ou null si la direction n'est pas primaire)
 	 */
 	public abstract AiTile getNeighbor(Direction direction);
 	
 	/**
 	 * renvoie la liste des voisins de cette case.
-	 * Il s'agit des voisins directs situ�s en haut, à gauche, en bas et à droite.</br>
+	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.</br>
 	 * 
 	 * <b>ATTENTION :</b>les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case situ�e au bord du niveau est une case situ�e sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case situ�e
-	 * à la position (ligne,0), le voisin de gauche est la case situ�e à la position
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
 	 * (ligne,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @return	
-	 * 		la liste des voisins situ�s en haut, à gauche, en bas et à droite de la case passée en paramètre
+	 * 		la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
 	 */
 	public abstract List<AiTile> getNeighbors();
 

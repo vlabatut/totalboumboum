@@ -57,9 +57,9 @@ final class AiSimBlock extends AiSimSprite implements AiBlock
 	 * @param destructible
 	 * 		sensibilit� au feu
 	 * @param stopHeroes
-	 * 		capacit� à bloquer les personnages
+	 * 		capacité à bloquer les personnages
 	 * @param stopFires
-	 * 		capacit� à bloquer le feu
+	 * 		capacité à bloquer le feu
 	 */
 	protected AiSimBlock(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,

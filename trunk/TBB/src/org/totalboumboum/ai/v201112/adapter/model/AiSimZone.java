@@ -219,7 +219,7 @@ final class AiSimZone extends AiZone
 	/** 
 	 * renvoie la case voisine de la case passée en paramètre,
 	 * dans la direction spécifiée (en consid�rant le fait que le niveau
-	 * est ferm�.
+	 * est fermé.
 	 *  
 	 *  @param line
 	 *  	ligne de la case à traite
@@ -261,7 +261,7 @@ final class AiSimZone extends AiZone
 	 * (méthode utilisée seulement lors de la simulation)
 	 * 
 	 * @param duration
-	 * 		d�lai depuis la dernière simulation
+	 * 		délai depuis la dernière simulation
 	 */
 	protected void updateTime(long duration)
 	{	totalTime = totalTime + duration;
@@ -288,7 +288,7 @@ final class AiSimZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * permet de rajouter un sprite dans cette zone<br/>
-	 * <b>Attention :</b> le sprite a obligatoirement déjà été affect� à une case 
+	 * <b>Attention :</b> le sprite a obligatoirement déjà été affecté à une case 
 	 * lors de sa construction, donc il s'agit ici simplement de mettre
 	 * à jour les listes de sprites de la zone
 	 * 
@@ -390,7 +390,7 @@ final class AiSimZone extends AiZone
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite cibl�
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -466,7 +466,7 @@ final class AiSimZone extends AiZone
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite cibl�
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -513,7 +513,7 @@ final class AiSimZone extends AiZone
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite cibl�
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -572,7 +572,7 @@ final class AiSimZone extends AiZone
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite cibl�
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -619,7 +619,7 @@ final class AiSimZone extends AiZone
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite cibl�
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -673,7 +673,7 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * retrouve l'objet simulant un personnage gr�ce à sa couleur
+	 * retrouve l'objet simulant un personnage grâce à sa couleur
 	 * 
 	 * @param color
 	 * 		couleur du personnage à retrouver
@@ -711,7 +711,7 @@ final class AiSimZone extends AiZone
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite cibl�
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */
@@ -728,7 +728,7 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * ins�re un nouveau personnage dans la zone
+	 * insûre un nouveau personnage dans la zone
 	 * (méthode utilisée lors de la simulation)
 	 * 
 	 * @param hero
@@ -793,7 +793,7 @@ final class AiSimZone extends AiZone
 	 * par des objets différents.
 	 * 
 	 * @param sprite
-	 * 		le sprite cibl�
+	 * 		le sprite ciblé
 	 * @return	
 	 * 		sa représentation dans cette zone
 	 */

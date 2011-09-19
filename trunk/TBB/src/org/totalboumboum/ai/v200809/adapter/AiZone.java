@@ -51,8 +51,8 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
  * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
  * du jeu. De la même façon, les cases (AiTile) restent les mêmes, ainsi que les sprites et
- * les autres objets. Si l'IA a besoin d'une trace des états pr�c�dents du jeu, son
- * concepteur doit se charger de l'impl�menter lui-même.
+ * les autres objets. Si l'IA a besoin d'une trace des états précédents du jeu, son
+ * concepteur doit se charger de l'implémenter lui-même.
  * 
  * @author Vincent Labatut
  *
@@ -124,11 +124,11 @@ public class AiZone
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps écoulé depuis la mise à jour pr�c�dente */
+	/** temps écoulé depuis la mise à jour précédente */
 	private long elapsedTime = 0;
 	
 	/**
-	 * renvoie le temps écoulé depuis la mise à jour pr�c�dente
+	 * renvoie le temps écoulé depuis la mise à jour précédente
 	 * @return	le temps écoulé exprimé en millisecondes
 	 */
 	public long getElapsedTime()
@@ -197,7 +197,7 @@ public class AiZone
 	}
 	
 	/** 
-	 * renvoie la hauteur totale (y compris les éventuelles cases situ�es hors de l'�cran)
+	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'�cran)
 	 *  de la zone de jeu exprimée en cases (ie: nombre de lignes)
 	 *  
 	 *  @return	hauteur de la zone
@@ -207,7 +207,7 @@ public class AiZone
 	}
 	
 	/** 
-	 * renvoie la largeur totale (y compris les éventuelles cases situ�es hors de l'�cran)
+	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'�cran)
 	 *  de la zone de jeu exprimée en cases (ie: nombre de colonnes)
 	 *  
 	 *  @return	largeur de la zone
@@ -217,30 +217,30 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la case situ�e dans la zone à la position passée en paramètre.
+	 * renvoie la case située dans la zone à la position passée en paramètre.
 	 *   
 	 *  @param	line	num�ro de la ligne contenant la case à renvoyer
 	 *  @param	col	num�ro de la colonne contenant la case à renvoyer
-	 *  @return	case situ�e aux coordonnées spécifiées en paramètres
+	 *  @return	case située aux coordonnées spécifiées en paramètres
 	 */
 	public AiTile getTile(int line, int col)
 	{	return matrix[line][col];
 	}
 	
 	/**
-	 * renvoie le voisin de la case passée en paramètre, situ� dans la direction
+	 * renvoie le voisin de la case passée en paramètre, situé dans la direction
 	 * passée en paramètre.
 	 * <p>
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case situ�e au bord du niveau est une case situ�e sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case situ�e
-	 * à la position (ligne,0), le voisin de gauche est la case situ�e à la position
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
 	 * (ligne,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @param line	ligne de la case dont on veut le voisin
 	 * @param col	colonne de la case dont on veut le voisin
 	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de la case passée en paramètre et situ� dans la direction indiqu�e
+	 * @return	le voisin de la case passée en paramètre et situé dans la direction indiqu�e
 	 */
 	public AiTile getNeighborTile(AiTile tile, Direction direction)
 	{	AiTile result = null;
@@ -268,16 +268,16 @@ public class AiZone
 	
 	/**
 	 * renvoie la liste des voisins de la case passée en paramètre.
-	 * Il s'agit des voisins directs situ�s en haut, à gauche, en bas et à droite.
+	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.
 	 * <p>
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case situ�e au bord du niveau est une case situ�e sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case situ�e
-	 * à la position (ligne,0), le voisin de gauche est la case situ�e à la position
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
 	 * (ligne,width-1). même chose pour les bordures haut et bas.
 	 * 
 	 * @param tile	la case dont on veut les voisins
-	 * @return	la liste des voisins situ�s en haut, à gauche, en bas et à droite de la case passée en paramètre
+	 * @return	la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
 	 */
 	public Collection<AiTile> getNeighborTiles(AiTile tile)
 	{	Collection<AiTile> result = new ArrayList<AiTile>();
@@ -298,9 +298,9 @@ public class AiZone
 	 * la case source de coordonnées (5,6).
 	 * <p>
 	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
-	 * il faut se d�placer pour aller de source à target.
+	 * il faut se déplacer pour aller de source à target.
 	 * <p>
-	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un cot� commun),
+	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
 	 * il est possible que cette méthode renvoie une direction composite,
 	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. référez-vous à 
 	 * la classe Direction pour plus d'informations sur ces valeurs. 
@@ -356,7 +356,7 @@ public class AiZone
 	 * renvoie la liste des blocks contenues dans cette zone
 	 * (la liste peut être vide). 
 	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas r�utiliser la même liste, mais redemander la nouvelle
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
 	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les blocs contenus dans cette zone
@@ -389,7 +389,7 @@ public class AiZone
 	 * renvoie la liste des bombes contenues dans cette zone 
 	 * (la liste peut être vide)
 	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas r�utiliser la même liste, mais redemander la nouvelle
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
 	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de toutes les bombes contenues dans cette zone
@@ -422,7 +422,7 @@ public class AiZone
 	 * renvoie la liste des feux contenus dans cette zone 
 	 * (la liste peut être vide)
 	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas r�utiliser la même liste, mais redemander la nouvelle
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
 	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les feux contenus dans cette zone
@@ -454,7 +454,7 @@ public class AiZone
 	/** 
 	 * renvoie la liste des sols contenus dans cette zone 
 	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas r�utiliser la même liste, mais redemander la nouvelle
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
 	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les sols contenus dans cette zone
@@ -485,9 +485,9 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone 
-	 * (les joueurs �limin�s n'apparaissent plus dans cette liste ni dans cette représentation de la zone)
+	 * (les joueurs élimin�s n'apparaissent plus dans cette liste ni dans cette représentation de la zone)
 	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas r�utiliser la même liste, mais redemander la nouvelle
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
 	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
@@ -520,7 +520,7 @@ public class AiZone
 	 * renvoie la liste des items apparents contenus dans cette zone 
 	 * (la liste peut être vide)
 	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas r�utiliser la même liste, mais redemander la nouvelle
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
 	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les items contenus dans cette zone
@@ -550,8 +550,8 @@ public class AiZone
 	}
 	
 	/**
-	 * d�marque toutes les représentations de sprites d'une liste determin�e en fonction du type
-	 * T param�trant cette méthode. méthode appelée au d�but de la mise à jour :
+	 * d�marque toutes les représentations de sprites d'une liste determinée en fonction du type
+	 * T param�trant cette méthode. méthode appelée au début de la mise à jour :
 	 * les représentations de sprites qui n'ont pas été marqu�es à la fin de la mise à jour
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
 	 * supprim�es de cette représentation.

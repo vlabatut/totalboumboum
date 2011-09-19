@@ -36,7 +36,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * 
  * <b>Note :</b> la classe modèle n'est pas définie pour représenter une zone
  * fictive comme ici, mais pour représenter la zone de jeu réelle.
- * ceci explique les limites impos�es sur son constructeur.
+ * ceci explique les limites imposées sur son constructeur.
  * 
  * @author Vincent Labatut
  *

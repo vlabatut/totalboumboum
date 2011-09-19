@@ -88,7 +88,7 @@ final class AiDataFire extends AiDataSprite<Fire> implements AiFire
 
 	/**
 	 * met à jour les diverse propriétés de ce feu
-	 * li�e à la gestion des collisions
+	 * liée à la gestion des collisions
 	 */
 	private void updateCollisions()
 	{	Sprite sprite = getSprite();
