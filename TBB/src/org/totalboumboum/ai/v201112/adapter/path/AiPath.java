@@ -241,7 +241,7 @@ public class AiPath implements Comparable<AiPath>
 	/**
 	 * Remplace la case dont la position est passée en paramètre par
 	 * la case passée en paramètre, dans ce chemin. La pause
-	 * est �galement remplacée par la pause spécifiée en paramètre
+	 * est également remplacée par la pause spécifiée en paramètre
 	 * (et exprimée en ms).
 	 * 
 	 * @param index
@@ -260,7 +260,7 @@ public class AiPath implements Comparable<AiPath>
 	
 	/**
 	 * Supprime de ce chemin la case dont la position est passée en paramètre
-	 * (supprime �galement l'éventuelle pause associée).
+	 * (supprime également l'éventuelle pause associée).
 	 * 
 	 * @param index
 	 * 		position de la case à supprimer

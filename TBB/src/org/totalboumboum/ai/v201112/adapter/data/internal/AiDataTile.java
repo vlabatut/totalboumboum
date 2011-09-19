@@ -192,7 +192,7 @@ final class AiDataTile extends AiTile
 	 * met à jour les représentations des sprites contenus dans cette case
 	 * 
 	 * @param elapsedTime
-	 * 		temps �coul� depuis la dernière mise à jour
+	 * 		temps écoulé depuis la dernière mise à jour
 	 */
 	private void updateSprites(long elapsedTime)
 	{	// block
@@ -361,7 +361,7 @@ final class AiDataTile extends AiTile
 	/**
 	 * fonction auxiliaire utilisée pour déterminer si cette
 	 * case est traversable par le sprite passé en paramètre.
-	 * (cette fonction r�alise le traitement relativement à 
+	 * (cette fonction réalise le traitement relativement à 
 	 * la liste de sprite passée en paramètre)
 	 * 
 	 * @param sprite

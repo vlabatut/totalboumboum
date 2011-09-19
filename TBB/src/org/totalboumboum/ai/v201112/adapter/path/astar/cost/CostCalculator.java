@@ -43,7 +43,7 @@ public abstract class CostCalculator
 	 * Il est possible de définir des coûts �volu�s, en tenant compte par exemple des
 	 * influences n�gatives dans ces cases (pour le joueur) comme la prèsence de bombes 
 	 * à proximit�, etc., et des influences positives telles que la prèsence de bonus.
-	 * Si les deux cases ne sont pas voisines, le r�sultat est indétermin�.
+	 * Si les deux cases ne sont pas voisines, le résultat est indéterminé.
 	 * 
 	 * @param start	
 	 * 		la case de départ 

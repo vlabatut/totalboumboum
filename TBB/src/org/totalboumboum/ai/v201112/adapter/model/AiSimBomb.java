@@ -92,7 +92,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param working
 	 * 		état de fonctionnement de la bombe
 	 * @param time
-	 * 		temps �coul� depuis le d�p�t de la bombe
+	 * 		temps écoulé depuis le d�p�t de la bombe
 	 */
 	protected AiSimBomb(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed, double slidingSpeed,
@@ -342,7 +342,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	/////////////////////////////////////////////////////////////////
 	// TIME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** temps �coul� depuis que la bombe a été pos�e, exprimé en ms */
+	/** temps écoulé depuis que la bombe a été pos�e, exprimé en ms */
 	private long time = 0;
 	
 	@Override
@@ -351,10 +351,10 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	}
 	
 	/**
-	 * modifie le temps �coul�
+	 * modifie le temps écoulé
 	 * 
 	 * @param time
-	 * 		temps �coul�
+	 * 		temps écoulé
 	 */
 	protected void setTime(long time)
 	{	this.time = time;

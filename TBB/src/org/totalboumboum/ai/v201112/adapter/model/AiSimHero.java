@@ -223,7 +223,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	private boolean throughBlocks;
 	/** indique si le personnage peut traverser les bombes */
 	private boolean throughBombs;
-	/** indique si le personnage peut traverser le feu (sans br�ler) */
+	/** indique si le personnage peut traverser le feu (sans brûler) */
 	private boolean throughFires;
 	
 	@Override

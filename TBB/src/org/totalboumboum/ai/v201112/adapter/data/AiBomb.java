@@ -127,7 +127,7 @@ public interface AiBomb extends AiSprite
 	/**
 	 * indique si le feu �mis par la bombe peut traverser les murs
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
+	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plut�t getBlast().
 	 * 
 	 * @return	
@@ -143,7 +143,7 @@ public interface AiBomb extends AiSprite
 	 * ne donne que les cases qui seront touch�es si la bombe devait exploser
 	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
 	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
-	 * alors le souffle peut changer, il faut r�-ex�cuter cette méthode pour avoir le
+	 * alors le souffle peut changer, il faut r�-exécuter cette méthode pour avoir le
 	 * nouveau souffle de la bombe dans ce nouvel environnement.
 	 * 
 	 * @return	
@@ -206,7 +206,7 @@ public interface AiBomb extends AiSprite
 	// LIFE TIME 		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie le temps �coul� depuis que le compte à rebours de la 
+	 * renvoie le temps écoulé depuis que le compte à rebours de la 
 	 * bombe a commencé, exprimé en millisecondes. Bien s�r ceci
 	 * n'est valide que pour les bombes à retardement (qui ont un 
 	 * compte à rebours).
@@ -222,31 +222,31 @@ public interface AiBomb extends AiSprite
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * indique si ce bloc arr�te les personnages.
+	 * indique si ce bloc arrête les personnages.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
+	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arr�te les personnages
+	 * 		une valeur AiStopType indiquant si ce bloc arrête les personnages
 	 */
 	public AiStopType hasStopHeroes();
 	
 	/**
-	 * indique si ce bloc arr�te les explosions.
+	 * indique si ce bloc arrête les explosions.
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
+	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
-	 * 		une valeur AiStopType indiquant si ce bloc arr�te le feu
+	 * 		une valeur AiStopType indiquant si ce bloc arrête le feu
 	 */
 	public AiStopType hasStopFires();
 	
 	/**
 	 * teste si cette bombe est capable de passer à travers les items
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
+	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	

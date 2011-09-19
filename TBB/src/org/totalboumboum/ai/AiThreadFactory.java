@@ -26,7 +26,7 @@ import java.util.concurrent.ThreadFactory;
 /**
  * 
  * Classe �tendant ThreadFactory, pour permettre la cr�ation de
- * threads d�di�s à l'ex�cution d'un agent.
+ * threads d�di�s à l'exécution d'un agent.
  * 
  * @author Vincent Labatut
  *

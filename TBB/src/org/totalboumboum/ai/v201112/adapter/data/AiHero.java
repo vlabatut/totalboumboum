@@ -152,7 +152,7 @@ public interface AiHero extends AiSprite
 	/**
 	 * teste si ce personnage est capable de passer à travers les (certains) murs
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
+	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -163,7 +163,7 @@ public interface AiHero extends AiSprite
 	/**
 	 * teste si ce personnage est capable de passer à travers les bombes
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
+	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	
@@ -172,9 +172,9 @@ public interface AiHero extends AiSprite
 	public boolean hasThroughBombs();
 
 	/**
-	 * teste si ce personnage est capable de passer à travers le feu sans br�ler
+	 * teste si ce personnage est capable de passer à travers le feu sans brûler
 	 * <b>ATTENTION :</b> cette méthode ne devrait pas être utilisée directement par l'IA,
-	 * elle est destin�e au calcul des modèles simulant l'�volution du jeu.
+	 * elle est destin�e au calcul des modèles simulant l'évolution du jeu.
 	 * utilisez plutot isCrossableBy().
 	 * 
 	 * @return	

@@ -33,7 +33,7 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action de faire br�ler un autre objet
+ * action de faire brûler un autre objet
  * TRANSITIVE
  * 
  * <p>ABILITY PERFORM

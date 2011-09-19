@@ -146,9 +146,9 @@ public interface AiSprite
 	// BURN				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Renvoie le temps que va mettre ce sprite à br�ler s'il est touch�
-	 * par du feu, exprimé en ms. Si ce sprite ne peut pas br�ler, ce
-	 * temps est �gal à -1.
+	 * Renvoie le temps que va mettre ce sprite à brûler s'il est touch�
+	 * par du feu, exprimé en ms. Si ce sprite ne peut pas brûler, ce
+	 * temps est égal à -1.
 	 * <b>Attention :</b> si ce sprite est une bombe, ce temps correspond
 	 * à la dur�e mise par la bombe pour dispara�tre, et non pas à la dur�e
 	 * de l'explosion. La dur�e de l'explosion correspond à la valeur
@@ -157,7 +157,7 @@ public interface AiSprite
 	 * getExplosionDuration pour la bombe.
 	 * 
 	 * @return	
-	 * 		le temps que ce sprite va mettre à br�ler, en ms
+	 * 		le temps que ce sprite va mettre à brûler, en ms
 	 */
 	public long getBurningDuration();
 }

@@ -316,7 +316,7 @@ public class PotentialObstacle
 			specificAction = new SpecificMoveHigh(source,usedDirection);
 		
 		// testing the action
-		//	TODO ça serait plus logique d'utiliser le r�sultat de la modulation
+		//	TODO ça serait plus logique d'utiliser le résultat de la modulation
 		//	(�a tiendrait compte d'interactions entre les différents modulateurs). 
 		//	mais ça serait aussi plus long, donc à voir...
 		result = sprite.isThirdPreventing(specificAction,actorCircumstance,targetCircumstance);
@@ -338,7 +338,7 @@ public class PotentialObstacle
 					specificAction = new SpecificMoveLow(source,usedDirection);
 				else
 					specificAction = new SpecificMoveHigh(source,usedDirection);
-				//  TODO ça serait plus logique d'utiliser le r�sultat de la modulation (�a tiendrait
+				//  TODO ça serait plus logique d'utiliser le résultat de la modulation (�a tiendrait
 				//  compte d'interactions entre les différents modulateurs). mais ça serait aussi plus long,
 				//  donc à voir... (même remarque 20 lignes dessous)
 				if(sprite.isThirdPreventing(specificAction))

@@ -33,8 +33,8 @@ import org.totalboumboum.engine.content.feature.action.ActionName;
 import org.totalboumboum.engine.content.feature.action.GeneralAction;
 
 /** 
- * action volontaire de br�ler (par exemple explosion timer pr une bombe)
- * action de créer une explosion, alors que consume = fait de br�ler(?)
+ * action volontaire de brûler (par exemple explosion timer pr une bombe)
+ * action de créer une explosion, alors que consume = fait de brûler(?)
  * ou detonate = bruler+explosion alors que consume=etre brul�
  * INTRANSITIVE
  *  
