@@ -244,7 +244,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 	private ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// liste des cases autour de la case de r�f�rence
+		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbors = getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();

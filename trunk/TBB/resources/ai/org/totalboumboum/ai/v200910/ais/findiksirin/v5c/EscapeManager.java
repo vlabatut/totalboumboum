@@ -42,14 +42,14 @@ public class EscapeManager
 	private Astar astar;
 	/** classe implémentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de co�t */
+	/** classe implémentant la fonction de coût */
 	private MatrixCostCalculator costCalculator;
 	
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// calcul de la matrice de co�t : on prend l'oppos� du niveau de s�ret�
-		// i.e. : plus le temps avant l'explosion est long, plus le co�t est faible 
+		// calcul de la matrice de coût : on prend l'oppos� du niveau de s�ret�
+		// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
 		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
 		for(int line=0;line<zone.getHeight();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE

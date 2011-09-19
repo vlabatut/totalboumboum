@@ -49,7 +49,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
  * bombe. Une valeur nulle signifie que la case est actuellement en feu.
  * Une valeur n�gative signifie que la case est menac�e par une bombe
  * télécommand�e, qui peut exploser n'importe quand (la valeur absolue
- * de la valeur correspond au temps depuis lequel la bombe a �t� pos�e)
+ * de la valeur correspond au temps depuis lequel la bombe a été pos�e)
  * 
  * @version 1
  * 
@@ -176,7 +176,7 @@ public class SafetyManager
 	/////////////////////////////////////////////////////////////////
 	// BOMBS		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste des bombes trait�es au cours de cette itération (pour ne pas les traiter plusieurs fois) */
+	/** liste des bombes traitées au cours de cette itération (pour ne pas les traiter plusieurs fois) */
 	private List<AiBomb> processedBombs;
 	
 	/**
@@ -239,7 +239,7 @@ public class SafetyManager
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 				int l = t.getLine();
 				int c = t.getCol();
-				// on modifie seulement si la case n'a pas d�j� un niveau de sécurité inf�rieur
+				// on modifie seulement si la case n'a pas déjà un niveau de sécurité inf�rieur
 				if(matrix[l][c]<value)
 					matrix[l][c] = value;						
 			}

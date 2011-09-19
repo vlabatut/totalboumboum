@@ -166,7 +166,7 @@ public class PathController
 	private AiPath path;
 	
 	/**
-	 * v�rifie que le personnage est bien sur le chemin pr�-calculé,
+	 * vérifie que le personnage est bien sur le chemin pr�-calculé,
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
 	 * est vide apr�s l'ex�cution de cette méthode.
@@ -212,7 +212,7 @@ public class PathController
 	private Astar astar;
 	/** classe implémentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de co�t */
+	/** classe implémentant la fonction de coût */
 	private CostCalculator costCalculator;
 
 	/////////////////////////////////////////////////////////////////
@@ -227,7 +227,7 @@ public class PathController
 		
 		Direction result = Direction.NONE;
 		if(!hasArrived())
-		{	// on v�rifie que le joueur est toujours sur le chemin
+		{	// on vérifie que le joueur est toujours sur le chemin
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule
 			if(path.isEmpty() || !checkPathValidity())

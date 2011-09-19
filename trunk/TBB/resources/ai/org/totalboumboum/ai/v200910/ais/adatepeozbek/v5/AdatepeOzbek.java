@@ -62,7 +62,7 @@ public class AdatepeOzbek extends ArtificialIntelligence
 		if(!ownHero.hasEnded())
 		{
 			
-			// Ajoute toutes les cases visités dans le liste
+			// Ajoute toutes les cases visitÃ©s dans le liste
 			if(allPassedTiles.size() > 0)
 			{
 				if(allPassedTiles.get(allPassedTiles.size()-1) != ownHero.getTile())
