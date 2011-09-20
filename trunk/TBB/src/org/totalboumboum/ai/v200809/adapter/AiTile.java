@@ -145,7 +145,7 @@ public class AiTile
 	 * initialise les num�ros de ligne et colonne de cette case 
 	 */
 	private void initLocation()
-	{	this.line = tile.getLine();
+	{	this.line = tile.getRow();
 		this.col = tile.getCol();
 	}
 
