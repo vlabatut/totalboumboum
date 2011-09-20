@@ -36,7 +36,7 @@ public class Elements {
 	// INITIALISATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * On obtient notre héro et on crée l�objet PerfectStrangers.
+	 * On obtient notre héro et on crée làobjet PerfectStrangers.
 	 * @throws StopRequestException
 	 */
 	private void init()throws StopRequestException{
@@ -244,7 +244,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On contient la control de la distance au bonus entre l�ennemie plus proche et notre héro.
+	 * On contient la control de la distance au bonus entre làennemie plus proche et notre héro.
 	 * @param tile
 	 * @param range
 	 * @return

@@ -83,7 +83,7 @@ public class CollectionMatrix{
 	/**
 	 * On trouve tous les murs et puis on remplit les cases des entours des murs 
 	 * avec le constant DESTRUCTIBLE ou INDESTRUCTIBLE. 
-	 * On utilise l�algorithme A* et la méthode isRunnable().
+	 * On utilise làalgorithme A* et la méthode isRunnable().
 	 * @throws StopRequestException
 	 */
 	private void putWalls() throws StopRequestException{
@@ -132,7 +132,7 @@ public class CollectionMatrix{
 
 	/**
 	 * On trouve tous les bonus et puis on les remplit avec le constant 
-	 * BONUSBOMB ou BONUSFLAME. On utilise l�algorithme A*.
+	 * BONUSBOMB ou BONUSFLAME. On utilise làalgorithme A*.
 	 * @throws StopRequestException
 	 */
 	private void putBonus() throws StopRequestException{
@@ -161,7 +161,7 @@ public class CollectionMatrix{
 
 	/**
 	 * On trouve toutes les adversaires et puis on remplit les cases des entours des ennemies avec le constant RIVAL. 
-	 * On utilise l�algorithme A*.
+	 * On utilise làalgorithme A*.
 	 * @throws StopRequestException
 	 */
 	private void putHero() throws StopRequestException{
@@ -261,7 +261,7 @@ public class CollectionMatrix{
 	}
 
 	/**
-	 * on renvoie la plus proche distance à l�iA des adversaires.
+	 * on renvoie la plus proche distance à làiA des adversaires.
 	 * @param hero
 	 * @param tile
 	 * @return

@@ -43,7 +43,7 @@ public class Bomb {
 	}
 
 	//�AliéIYOR AMA KOD �OK HANTAL 
-	//�NSAN OLUP AZICIK L�STE KULLANALIM
+	//�NSAN OLUP AZICIK làSTE KULLANALIM
 	private void calculateWillBurnWalls() throws StopRequestException{
 		bt.checkInterruption();
 		

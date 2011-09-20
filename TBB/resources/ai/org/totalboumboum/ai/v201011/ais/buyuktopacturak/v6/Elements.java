@@ -235,7 +235,7 @@ public class Elements {
 	}
 	
 	/**
-	 * On contient la control de la distance au bonus entre l�ennemie plus proche et notre héro.
+	 * On contient la control de la distance au bonus entre làennemie plus proche et notre héro.
 	 * @param tile
 	 * @param range
 	 * @return boolean
