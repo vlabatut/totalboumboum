@@ -102,13 +102,13 @@ public interface AiBomb extends AiSprite
 	public long getNormalDuration();
 
 	/**
-	 * renvoie la latence de cette bombe, dans le cas où elle peut être d�clench�e par
+	 * renvoie la latence de cette bombe, dans le cas où elle peut être déclench�e par
 	 * une explosion. Cette latence représente le temps entre le moment o�
 	 * la bombe est touch�e par l'explosion, et le moment où elle commence effectivement
 	 * à exploser.
 	 * 
 	 * @return	
-	 * 		la latence de la bombe pour une d�tonation d�clench�e par une autre explosion
+	 * 		la latence de la bombe pour une d�tonation déclench�e par une autre explosion
 	 */
 	public long getLatencyDuration();
 	

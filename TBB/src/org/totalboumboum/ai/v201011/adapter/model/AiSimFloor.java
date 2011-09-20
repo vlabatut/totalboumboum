@@ -25,7 +25,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiFloor;
 import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
 
 /**
- * simule un sol du jeu, ie le graphisme affich� en tant que première couche de toute
+ * simule un sol du jeu, ie le graphisme affiché en tant que première couche de toute
  * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut

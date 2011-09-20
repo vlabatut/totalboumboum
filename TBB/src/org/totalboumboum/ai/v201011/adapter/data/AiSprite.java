@@ -152,8 +152,8 @@ public interface AiSprite
 	 * <b>Attention :</b> si ce sprite est une bombe, ce temps correspond
 	 * à la durée mise par la bombe pour dispara�tre, et non pas à la durée
 	 * de l'explosion. La durée de l'explosion correspond à la valeur
-	 * renvoy�e par getBurningDuration pour le sprite de feu produit
-	 * par l'explosion de la bombe, ou aussi à la durée renvoy�e par 
+	 * renvoyée par getBurningDuration pour le sprite de feu produit
+	 * par l'explosion de la bombe, ou aussi à la durée renvoyée par 
 	 * getExplosionDuration pour la bombe.
 	 * 
 	 * @return	
