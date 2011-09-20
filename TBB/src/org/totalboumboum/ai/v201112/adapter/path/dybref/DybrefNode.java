@@ -72,11 +72,11 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		parent = null;
 		// profondeur
 		depth = 0;
-		// successeur
-		this.successorCalculator = successorCalculator;
 		
-		// pause
+		// durée
+		duration = 0;
 		// durée totale
+		totalDuration = 0;
 	}
 
 	/**
@@ -87,7 +87,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	 * @param parent	
 	 * 		noeud de recherche parent de ce noeud
 	 */
-	protected DybrefNode(AiZone zone, AiTile tile, DybrefNode parent) throws StopRequestException
+	protected DybrefNode(AiZone zone, AiTile tile, long duration, DybrefNode parent) throws StopRequestException
 	{	// ia
 		this.ai = parent.getAi();
 		// hero
@@ -102,11 +102,11 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		this.parent = parent;
 		// profondeur
 		depth = parent.getDepth() + 1;
-		// successeurs
-		successorCalculator = parent.getSuccessorCalculator();
 		
-		// pause
+		// durée
+		this.duration = duration; 
 		// durée totale
+		totalDuration = parent.getTotalDuration() + duration;
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -175,6 +175,36 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	}
 
     /////////////////////////////////////////////////////////////////
+	// DURATION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** durée nécessaire pour passer du parent à ce noeud */
+	private long duration = 0;
+	/** durée totale nécessaire pour atteindre ce noeud */
+	private long totalDuration = 0;
+	
+	/**
+	 * Renvoie la ddurée nécessaire pour passer du parent 
+	 * à ce noeud de recherche. 
+	 * 
+	 * @return	
+	 * 		Un entier représentant une durée exprimée en ms.
+	 */
+	public long getDuration()
+	{	return duration;
+	}
+
+	/**
+	 * Renvoie la durée totale nécessaire pour atteindre 
+	 * ce noeud de recherche. 
+	 * 
+	 * @return	
+	 * 		Un entier représentant une durée exprimée en ms.
+	 */
+	public long getTotalDuration()
+	{	return totalDuration;
+	}
+
+    /////////////////////////////////////////////////////////////////
 	// PARENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** parent du noeud (null pour la racine) */
@@ -191,22 +221,63 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	}
 	
     /////////////////////////////////////////////////////////////////
-	// CHILDREN			/////////////////////////////////////////////
+	// SAFETY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** fils du noeud */
-	private List<DybrefNode> children = null;
-	/** calculateur des successeurs */
-	private DybrefSuccessorCalculator successorCalculator;
+	/** état courant du noeud */
+	private boolean safe = false;
+	
+	public void reportSafety(DybrefNode child)
+	{	// update processed children count
+		processedChildren++;
+		
+		// update safety
+		if(child.isSafe())
+			safe = true;
+		
+		// possibly report to parent (when all children have been processed)
+		if(processedChildren==children.size())
+		{	updateMatrix();
+			reportSafety(this);
+		}
+		
+		// remove unsafe child
+		if(!child.isSafe())
+			children.remove(child);
+	}
+
+	/**
+	 * Indique si ce noeud est sûr, i.e.
+	 * si le personnage peut y aller sans danger.
+	 * 
+	 * @return
+	 * 		Renvoie {@code true} si ce noeud est sûr.
+	 */
+	public boolean isSafe()
+	{	return safe;
+	}
+	
+    /////////////////////////////////////////////////////////////////
+	// MATRIX			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** matrice contenant les temps d'accès des cases */
+	private AiZone zone = null;
 	
 	/**
-	 * renvoie la fonction successeur de ce noeud
+	 * Renvoie la zone associée au noeud de recherche.
 	 * 
-	 * @return 
-	 * 		la fonction successeur de ce noeud
+	 * @return	
+	 * 		une zone
 	 */
-	public DybrefSuccessorCalculator getSuccessorCalculator()
-	{	return successorCalculator;		
+	public AiZone getZone()
+	{	return zone;
 	}
+    /////////////////////////////////////////////////////////////////
+	// CHILDREN			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Liste des fils du noeud */
+	private List<DybrefNode> children = null;
+	/** nombre de fils ayant été traités */
+	private int processedChildren = 0;
 	
 	/**
 	 * renvoie les fils de ce noeud de recherche
@@ -233,7 +304,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	{	ai.checkInterruption();
 		
 		children = new ArrayList<DybrefNode>();
-		if(tile.isCrossableBy(hero))
+//		if(tile.isCrossableBy(hero))
 		{	List<Direction> directions = Direction.getPrimaryValues();
 			directions.add(Direction.NONE);
 			
@@ -247,7 +318,9 @@ public final class DybrefNode implements Comparable<DybrefNode>
 				model.applyChangeHeroDirection(hero,direction);
 				boolean safe;
 				if(direction==Direction.NONE)
-				{	model.simulateUntilFire();
+				{	// on attend simplement jusqu'à la prochaine explosion
+					// car c'est généralement l'évènement bloquant
+					model.simulateUntilFire();
 					AiZone futureZone = model.getCurrentZone();
 					AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
 					if(futureHero==null)
@@ -259,6 +332,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 					}
 				}
 				else
+					// on simule jusqu'au changement d'état du personnage : soit le changement de case, soit l'élimination
 					safe = model.simulate(hero);
 				long duration = model.getDuration();
 	
@@ -272,9 +346,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
 					if(futureTile.equals(targetTile))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-						DybrefNode node = new DybrefNode(futureZone,futureTile,parent);
-// TODO faut ajouter le temps. p-ê màj d'autres champs aussi (?)
-// TODO tester si la limite temps==0 est prise en cpte dans simulation héro et simulation feu
+						DybrefNode node = new DybrefNode(futureZone,futureTile,duration,parent);
 // TODO optimisation >> on ne considère l'attente que s'il reste du feu ou des bombes dans la case...
 						children.add(node);
 					}
@@ -287,7 +359,8 @@ public final class DybrefNode implements Comparable<DybrefNode>
 			
 			// s'il n'y a aucun enfant pour ce noeud (i.e. on ne peut même pas y rester)
 			// alors la case courante n'est pas sûre et on en informe le noeud parent.
-			parent.childFailed(this);
+			if(children.isEmpty())
+				parent.reportSafety(this);
 		}
 	}
 	
@@ -321,12 +394,13 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	@Override
 	public int compareTo(DybrefNode node)
     {	int result = 0;
-		double f1 = cost+heuristic;
-    	double f2 = node.getCost()+node.getHeuristic();
-    	if(f1>f2)
+		long duration2 = node.getDuration();
+    	if(duration>duration2)
     		result = +1;
-    	else if(f1<f2)
+    	else if(duration<duration2)
     		result = -1;
+    	else // if(duration==duration2)
+    		result = depth - node.getDepth();
     	return result;
     }
 
@@ -339,8 +413,8 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		result = "<";
 		result = result + "("+tile.getLine()+","+tile.getCol()+") ";
 		result = result + depth + ";";
-		result = result + cost + ";";
-		result = result + heuristic + " ";
+		result = result + duration + ";";
+		result = result + totalDuration + " ";
 		result = result + ">";
 		return result;
 	}
@@ -365,11 +439,9 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		
 		// misc
 		ai = null;
-		costCalculator = null;
-		heuristicCalculator = null;
-		successorCalculator = null;
 		parent = null;
 		hero = null;
 		tile = null;
+		zone = null;
 	}
 }
