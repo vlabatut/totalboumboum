@@ -32,9 +32,6 @@ import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.model.AiModel;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -57,14 +54,14 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	 * @param heuristicCalculator	
 	 * 		fonction heuristique
 	 */
-	protected DybrefNode(ArtificialIntelligence ai, AiZone zone, AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator) throws StopRequestException
+	protected DybrefNode(ArtificialIntelligence ai, AiTile tile, AiHero hero) throws StopRequestException
 	{	// ia
 		this.ai = ai;
 		// hero
 		this.hero = hero;
 		
 		// zone courante
-		this.zone = zone;
+		this.zone = tile.getZone();
 		// case courante
 		this.tile = tile;
 		
@@ -77,6 +74,11 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		duration = 0;
 		// durée totale
 		totalDuration = 0;
+		// matrice des temps d'accès
+		timeMatrix = new DybrefNode[zone.getHeight()][zone.getWidth()];
+		for(int i=0;i<zone.getHeight();i++)
+			for(int j=0;i<zone.getWidth();j++)
+				timeMatrix[i][j] = null;
 	}
 
 	/**
@@ -87,14 +89,14 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	 * @param parent	
 	 * 		noeud de recherche parent de ce noeud
 	 */
-	protected DybrefNode(AiZone zone, AiTile tile, long duration, DybrefNode parent) throws StopRequestException
+	protected DybrefNode(AiTile tile, long duration, DybrefNode parent) throws StopRequestException
 	{	// ia
 		this.ai = parent.getAi();
 		// hero
 		this.hero = parent.getHero();
 		
 		// zone
-		this.zone = zone;
+		this.zone = tile.getZone();
 		// case
 		this.tile = tile;
 		
@@ -107,6 +109,8 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		this.duration = duration; 
 		// durée totale
 		totalDuration = parent.getTotalDuration() + duration;
+		// matrice des temps d'accès
+		timeMatrix = parent.getTimeMatrix();
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -236,7 +240,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 		
 		// possibly report to parent (when all children have been processed)
 		if(processedChildren==children.size())
-		{	updateMatrix();
+		{	updateTimeMatrix();
 			reportSafety(this);
 		}
 		
@@ -257,20 +261,37 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	}
 	
     /////////////////////////////////////////////////////////////////
-	// MATRIX			/////////////////////////////////////////////
+	// TIME MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice contenant les temps d'accès des cases */
-	private AiZone zone = null;
+	/** matrice contenant les chemins les plus courts pour accéder à chaque cases */
+	private DybrefNode[][] timeMatrix = null;
 	
 	/**
-	 * Renvoie la zone associée au noeud de recherche.
+	 * Renvoie la matrice contenant les temps d'accès
+	 * aux cases.
 	 * 
 	 * @return	
-	 * 		une zone
+	 * 		Une matrice de {@code DybrefNode}.
 	 */
-	public AiZone getZone()
-	{	return zone;
+	public DybrefNode[][] getTimeMatrix()
+	{	return timeMatrix;
 	}
+
+	/**
+	 * Met à jour la matrice des temps d'accès
+	 * en fonction du temps associé à cette case
+	 * et des valeurs déjà contenues dans la matrice.
+	 */
+	private void updateTimeMatrix()
+	{	if(safe)
+		{	int r = tile.getLine();
+			int c = tile.getCol();
+			DybrefNode node = timeMatrix[r][c];
+			if(node==null || totalDuration<node.getTotalDuration())
+				timeMatrix[r][c] = this;
+		}
+	}
+	
     /////////////////////////////////////////////////////////////////
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -346,7 +367,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
 					if(futureTile.equals(targetTile))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-						DybrefNode node = new DybrefNode(futureZone,futureTile,duration,parent);
+						DybrefNode node = new DybrefNode(futureTile,duration,parent);
 // TODO optimisation >> on ne considère l'attente que s'il reste du feu ou des bombes dans la case...
 						children.add(node);
 					}
