@@ -41,15 +41,15 @@ import org.totalboumboum.ai.v201011.adapter.path.astar.successor.SuccessorCalcul
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
  * cette implément correspond à peu près à un A* classique. Il y a quand même une modification,
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche anc�tre sont
- * �cart�s lorsqu'un noeud de recherche est développ�. En d'autres termes, l'algorithme évite
+ * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'emp�che de
  * boucler à l'infini.</br>
  * 
  * Cette implément trouve donc le chemin le plus court entre deux cases,
- * en consid�rant les obstacles. Elle a besoin de quatre paramètres :<ul>
- * 		<li> Le personnage qui doit effectuer le trajet entre les deux cases (nécessaire afin de tester la traversabilit� des cases).</li>
+ * en considérant les obstacles. Elle a besoin de quatre paramètres :<ul>
+ * 		<li> Le personnage qui doit effectuer le trajet entre les deux cases (nécessaire afin de tester la traversabilité des cases).</li>
  * 		<li> Une fonction successeur, qui définit les actions possibles à partir d'un état donné. Dans le cas prèsent, il s'agit de 
- * 			 restreindre les déplacement possibles en consid�rant des facteurs supplémentaires par rapport à la simple traversabilit� courrante.</li>
+ * 			 restreindre les déplacement possibles en considérant des facteurs supplémentaires par rapport à la simple traversabilité courrante.</li>
  * 		<li> Une fonction de coût, qui permet de définir combien coûte une action (ici : le fait de passer d'une case à l'autre).</li>
  * 		<li> Une fonction heuristique, qui permet d'estimer le coût du chemin restant à parcourir.</li></ul>
  * 
@@ -117,7 +117,7 @@ public final class Astar
 	private AstarNode root = null;
 	/** personnage de référence */
 	private AiHero hero = null;
-	/** l'ai qui a réalis� l'appel */
+	/** l'ai qui a réalisé l'appel */
 	private ArtificialIntelligence ai = null;
 
 	/////////////////////////////////////////////////////////////////
@@ -133,9 +133,9 @@ public final class Astar
 	/**
 	 * limite l'arbre de recherche à une hauteur de maxHeight,
 	 * i.e. quand le noeud courant a une profondeur correspondant à maxHeight,
-	 * l'algorithme se termine et ne renvoie pas de solution (�chec).
-	 * Dans des cas extr�mes, l'arbre peut avoir une hauteur consid�rable,
-	 * ce qui peut provoquer un dépassement m�moire. Ce paramètre permet d'éviter
+	 * l'algorithme se termine et ne renvoie pas de solution (échec).
+	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
+	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
 	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
 	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
@@ -148,9 +148,9 @@ public final class Astar
 	/**
 	 * limite l'arbre de recherche à un certain cout maxCost, i.e. Dès que le
 	 * noeud courant atteint ce cout maximal, l'algorithme se termine et ne
-	 * renvoie pas de solution (�chec)
-	 * Dans des cas extr�mes, l'arbre peut avoir une hauteur consid�rable,
-	 * ce qui peut provoquer un dépassement m�moire. Ce paramètre permet d'éviter
+	 * renvoie pas de solution (échec)
+	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
+	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
 	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
 	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
@@ -169,8 +169,8 @@ public final class Astar
 	 * la case endTile, en utilisant l'algorithme A*. Si jamais aucun
 	 * chemin n'est trouvé, alors un chemin vide est renvoyé. Si jamais
 	 * l'algorithme atteint une limite de cout/taille, la valeur null est
-	 * renvoyée. Dans ce cas l�, c'est qu'il y a généralement un problème
-	 * dans le façon dont A* est employ� (mauvaise fonction de cout, par
+	 * renvoyée. Dans ce cas là, c'est qu'il y a généralement un problème
+	 * dans le façon dont A* est employé (mauvaise fonction de cout, par
 	 * exemple). 
 	 * 
 	 * @param startTile	
@@ -195,8 +195,8 @@ public final class Astar
 	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
 	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
 	 * une limite de cout/taille, la valeur null est renvoyée. Dans ce 
-	 * cas-l�, c'est qu'il y a généralement un problème dans le façon 
-	 * dont A* est employ� (mauvaise fonction de cout, par exemple).
+	 * cas-là, c'est qu'il y a généralement un problème dans le façon 
+	 * dont A* est employé (mauvaise fonction de cout, par exemple).
 	 * La fonction renvoie également null si la liste endTiles est vide.
 	 * 
 	 * @param startTile	

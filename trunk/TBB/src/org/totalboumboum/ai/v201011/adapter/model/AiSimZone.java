@@ -218,7 +218,7 @@ final class AiSimZone extends AiZone
 	
 	/** 
 	 * renvoie la case voisine de la case passée en paramètre,
-	 * dans la direction spécifiée (en consid�rant le fait que le niveau
+	 * dans la direction spécifiée (en considérant le fait que le niveau
 	 * est fermé.
 	 *  
 	 *  @param line
