@@ -254,7 +254,7 @@ public class AiBomb extends AiSprite<Bomb>
 		List<Tile> tiles = bomb.getExplosionManager().makeExplosion(true); 
 		blast.clear();
 		for(Tile tile: tiles)
-		{	int line = tile.getLine();
+		{	int line = tile.getRow();
 			int col = tile.getCol();
 			AiTile t = getTile().getZone().getTile(line,col);
 			blast.add(t);

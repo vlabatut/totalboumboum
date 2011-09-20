@@ -104,7 +104,7 @@ public abstract class AiSprite<T extends Sprite>
 	}
 	
 	/**
-	 * d�marque ce sprite (action réalis�e avant la mise à jour de la zone)
+	 * d�marque ce sprite (action réalisée avant la mise à jour de la zone)
 	 */
 	void uncheck()
 	{	checked = false; 
