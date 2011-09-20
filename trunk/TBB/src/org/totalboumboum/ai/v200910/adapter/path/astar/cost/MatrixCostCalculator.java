@@ -87,8 +87,8 @@ public class MatrixCostCalculator extends CostCalculator
 	 * La case de départ n'est pas considérée, on renvoie seulement la valeur
 	 * correspondant à la case d'arrivée dans la matrice de cout.
 	 * Attention : si la matrice de cout est trop petite, la valeur maximale
-	 * possible est renvoy�e (Double.POSITIVE_INFINITY), et un message 
-	 * d'avertissement est affich� dans la sortie standard d'erreur.
+	 * possible est renvoyée (Double.POSITIVE_INFINITY), et un message 
+	 * d'avertissement est affiché dans la sortie standard d'erreur.
 	 * 
 	 * @param start	la case de départ
 	 * @param end	la case d'arrivée

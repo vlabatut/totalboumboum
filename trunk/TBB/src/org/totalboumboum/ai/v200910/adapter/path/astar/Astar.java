@@ -138,9 +138,9 @@ public class Astar
 	/**
 	 * calcule le plus court chemin pour aller de la case startTile à 
 	 * la case endTile, en utilisant l'algorithme A*. Si jamais aucun
-	 * chemin n'est trouvé, alors un chemin vide est renvoy�. Si jamais
+	 * chemin n'est trouvé, alors un chemin vide est renvoyé. Si jamais
 	 * l'algorithme atteint une limite de cout/taille, la valeur null est
-	 * renvoy�e. Dans ce cas l�, c'est qu'il y a généralement un problème
+	 * renvoyée. Dans ce cas l�, c'est qu'il y a généralement un problème
 	 * dans le façon dont A* est employ� (mauvaise fonction de cout, par
 	 * exemple). 
 	 * 
@@ -160,8 +160,8 @@ public class Astar
 	 * calcule le plus court chemin pour aller de la case startTile à 
 	 * une des cases contenues dans la liste endTiles (n'importe laquelle),
 	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
-	 * alors un chemin vide est renvoy�. Si jamais l'algorithme atteint 
-	 * une limite de cout/taille, la valeur null est renvoy�e. Dans ce 
+	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
+	 * une limite de cout/taille, la valeur null est renvoyée. Dans ce 
 	 * cas-l�, c'est qu'il y a généralement un problème dans le façon 
 	 * dont A* est employ� (mauvaise fonction de cout, par exemple).
 	 * La fonction renvoie également null si la liste endTiles est vide.
