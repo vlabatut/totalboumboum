@@ -1148,7 +1148,7 @@ if(sprite instanceof AiSimBomb)
 	 * celle-ci n'est pas créée et la fonction renvoie la valeur null.
 	 * Sinon (si la cr�ation est possible) alors la fonction renvoie la bombe créée.
 	 * Si jamais le personnage ne peut pas poser de bombes pour l'instant,
-	 * la bombe n'est pas créée et la valeur null est renvoy�e. 
+	 * la bombe n'est pas créée et la valeur null est renvoyée. 
 	 * 
 	 * @param tile
 	 * 		case qui contiendra la bombe nouvellement créée
