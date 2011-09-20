@@ -516,7 +516,7 @@ public class AiPath implements Comparable<AiPath>
 		for(int i=0;i<tiles.size();i++)
 		{	AiTile tile = tiles.get(i);
 			long pause = pauses.get(i);
-			result = result + " ("+tile.getLine()+","+tile.getCol()+";"+pause+")";
+			result = result + " ("+tile.getRow()+","+tile.getCol()+";"+pause+")";
 		}
 		result = result + " ]";
 		return result;

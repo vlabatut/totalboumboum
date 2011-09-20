@@ -42,7 +42,7 @@ public abstract class AiTile
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** ligne de la zone contenant cette case */
-	protected int line;
+	protected int row;
 	/** colonne de la zone contenant cette case */
 	protected int col;
 		
@@ -52,8 +52,8 @@ public abstract class AiTile
 	 * @return	
 	 * 		la ligne de cette case
 	 */
-	public int getLine()
-	{	return line;	
+	public int getRow()
+	{	return row;	
 	}
 
 	/** 
@@ -258,9 +258,9 @@ public abstract class AiTile
 		if(o instanceof AiTile)
 		{	
 			AiTile t = (AiTile)o;	
-			int line = t.getLine();
+			int row = t.getRow();
 			int col = t.getCol();
-			result = line==this.line && col==this.col;
+			result = row==this.row && col==this.col;
 		}
 		return result;
 	}
@@ -269,14 +269,14 @@ public abstract class AiTile
     public int hashCode()
     {	AiZone zone = getZone();
 		int height = zone.getHeight();
-		int result = col + height*line;
+		int result = col + height*row;
     	return result;
     }
 	
 	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
-		result.append("("+line+";"+col+")");
+		result.append("("+row+";"+col+")");
 		return result.toString();
 	}
 }

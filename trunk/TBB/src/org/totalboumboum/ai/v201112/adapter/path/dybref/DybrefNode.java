@@ -284,7 +284,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	 */
 	private void updateTimeMatrix()
 	{	if(safe)
-		{	int r = tile.getLine();
+		{	int r = tile.getRow();
 			int c = tile.getCol();
 			DybrefNode node = timeMatrix[r][c];
 			if(node==null || totalDuration<node.getTotalDuration())
@@ -432,7 +432,7 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	public String toString()
 	{	String result;
 		result = "<";
-		result = result + "("+tile.getLine()+","+tile.getCol()+") ";
+		result = result + "("+tile.getRow()+","+tile.getCol()+") ";
 		result = result + depth + ";";
 		result = result + duration + ";";
 		result = result + totalDuration + " ";

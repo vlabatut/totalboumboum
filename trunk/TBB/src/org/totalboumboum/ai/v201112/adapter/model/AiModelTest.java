@@ -168,10 +168,10 @@ public final class AiModelTest
 		destructible = false;
 		stopHeroes = AiStopType.STRONG_STOP;
 		stopFires = AiStopType.STRONG_STOP;
-		int lines[]={0,0,0,0,0,0,0,1,1,2,2,2,2,3,3,4,4,4,4,5,5,6,6,6,6,6,6,6};
+		int rows[]={0,0,0,0,0,0,0,1,1,2,2,2,2,3,3,4,4,4,4,5,5,6,6,6,6,6,6,6};
 		int cols[]= {0,1,2,3,4,5,6,0,6,0,2,4,6,0,6,0,2,4,6,0,6,0,1,2,3,4,5,6};
-		for(int i=0;i<lines.length;i++)
-		{	tile = zone.getTile(lines[i],cols[i]);
+		for(int i=0;i<rows.length;i++)
+		{	tile = zone.getTile(rows[i],cols[i]);
 			posX = tile.getPosX();
 			posY = tile.getPosY();
 			state = new AiSimState(AiStateName.STANDING,Direction.NONE,0);

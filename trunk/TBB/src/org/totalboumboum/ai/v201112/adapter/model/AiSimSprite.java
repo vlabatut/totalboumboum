@@ -150,8 +150,8 @@ abstract class AiSimSprite implements AiSprite
 	}
 	
 	@Override
-	public int getLine()
-	{	return tile.getLine();	
+	public int getRow()
+	{	return tile.getRow();	
 	}
 
 	@Override
@@ -269,7 +269,7 @@ abstract class AiSimSprite implements AiSprite
 	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
-		result.append(" ("+getTile().getLine()+";"+getTile().getCol()+")");
+		result.append(" ("+getTile().getRow()+";"+getTile().getCol()+")");
 		result.append(" - state: "+state.toString());
 		return result.toString();
 	}

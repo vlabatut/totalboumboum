@@ -64,7 +64,7 @@ public class PixelCostCalculator extends CostCalculator
 	 * Les deux cases sont supposées être voisines, 
 	 * on se contente de renvoyer la distance en pixels entre leurs centres.
 	 * Sauf si la case start correspond à la première case
-	 * du chemin : l�, on renvoie la distance entre le point
+	 * du chemin : là, on renvoie la distance entre le point
 	 * de départ et le centre de la case suivante.
 	 * 
 	 * @param start	
