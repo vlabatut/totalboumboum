@@ -234,17 +234,17 @@ public final class AiDataZone extends AiZone
 		pixelWidth = level.getPixelWidth();
 		pixelHeight = level.getPixelHeight();
 		matrix = new AiDataTile[height][width];
-		for(int lineIndex=0;lineIndex<height;lineIndex++)
+		for(int rowIndex=0;rowIndex<height;rowIndex++)
 		{	for(int colIndex=0;colIndex<width;colIndex++)
-			{	Tile tile = m[lineIndex][colIndex];
+			{	Tile tile = m[rowIndex][colIndex];
 				AiDataTile aiTile = new AiDataTile(tile,this);
-				matrix[lineIndex][colIndex] = aiTile;
+				matrix[rowIndex][colIndex] = aiTile;
 			}
 		}
 		
-		for(int lineIndex=0;lineIndex<height;lineIndex++)
+		for(int rowIndex=0;rowIndex<height;rowIndex++)
 			for(int colIndex=0;colIndex<width;colIndex++)
-				matrix[lineIndex][colIndex].initNeighbors();
+				matrix[rowIndex][colIndex].initNeighbors();
 	}	
 	
 	/**
@@ -267,9 +267,9 @@ public final class AiDataZone extends AiZone
 		uncheckAll(itemMap);
 		
 		// met à jour chaque case et sprite 
-		for(int line=0;line<height;line++)
+		for(int row=0;row<height;row++)
 			for(int col=0;col<width;col++)
-				matrix[line][col].update(elapsedTime);
+				matrix[row][col].update(elapsedTime);
 		
 		// supprime les sprites non-marqués
 		removeUnchecked(blockMap);
@@ -284,8 +284,8 @@ public final class AiDataZone extends AiZone
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public AiDataTile getTile(int line, int col)
-	{	return matrix[line][col];
+	public AiDataTile getTile(int row, int col)
+	{	return matrix[row][col];
 	}
 	
 	@Override
@@ -762,9 +762,9 @@ public final class AiDataZone extends AiZone
 	 */
 	public void finish()
 	{	// matrix
-		for(int line=0;line<height;line++)
+		for(int row=0;row<height;row++)
 			for(int col=0;col<width;col++)
-				matrix[line][col].finish();
+				matrix[row][col].finish();
 		
 		// sprites
 		blockMap.clear();

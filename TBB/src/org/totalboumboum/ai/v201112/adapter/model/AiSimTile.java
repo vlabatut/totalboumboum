@@ -49,7 +49,7 @@ final class AiSimTile extends AiTile
 	 * 
 	 * @param zone
 	 * 		zone contenant la simulation
-	 * @param line
+	 * @param row
 	 * 		ligne de la case
 	 * @param col
 	 * 		colonne de la case
@@ -58,13 +58,13 @@ final class AiSimTile extends AiTile
 	 * @param posY
 	 * 		ordonnée de la case
 	 */
-	protected AiSimTile(AiSimZone zone, int line, int col, double posX, double posY)
+	protected AiSimTile(AiSimZone zone, int row, int col, double posX, double posY)
 	{	this.zone = zone;
 
 		size = RoundVariables.scaledTileDimension;
 
 		// location
-		this.line = line;
+		this.row = row;
 		this.col = col;
 		this.posX = posX;
 		this.posY = posY;
@@ -360,7 +360,7 @@ final class AiSimTile extends AiTile
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public AiSimTile getNeighbor(Direction direction)
-	{	AiSimTile result = zone.getNeighborTile(line,col,direction);
+	{	AiSimTile result = zone.getNeighborTile(row,col,direction);
 		return result;		
 	}
 	

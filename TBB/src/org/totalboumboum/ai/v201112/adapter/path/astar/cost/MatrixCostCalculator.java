@@ -74,15 +74,15 @@ public class MatrixCostCalculator extends CostCalculator
 	/**
 	 * met à jour un coût dans la matrice
 	 * 
-	 * @param line	
+	 * @param row	
 	 * 		ligne de la case à mettre à jour
 	 * @param col	
 	 * 		colonne de la case à mettre à jour
 	 * @param cost	
 	 * 		nouveau coût à affecter
 	 */
-	public void setCost(int line, int col, double cost) throws StopRequestException
-	{	costMatrix[line][col] = cost;
+	public void setCost(int row, int col, double cost) throws StopRequestException
+	{	costMatrix[row][col] = cost;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -105,10 +105,10 @@ public class MatrixCostCalculator extends CostCalculator
 	@Override
 	public double processCost(AiTile start, AiTile end) throws StopRequestException
 	{	int col = end.getCol();
-		int line = end.getLine();
+		int row = end.getRow();
 		double result = Double.POSITIVE_INFINITY;
-		if(line<costMatrix.length && col<costMatrix[0].length)
-			result = costMatrix[line][col];
+		if(row<costMatrix.length && col<costMatrix[0].length)
+			result = costMatrix[row][col];
 		return result;
 	}
 }

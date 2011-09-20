@@ -232,17 +232,17 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	{	// tile colors
 		{	Color[][] aiMatrix = output.getTileColors();
 			Color[][] engineMatrix = getTileColors();
-			for(int line=0;line<aiMatrix.length;line++)
+			for(int row=0;row<aiMatrix.length;row++)
 				for(int col=0;col<aiMatrix[0].length;col++)
-					engineMatrix[line][col] = aiMatrix[line][col];
+					engineMatrix[row][col] = aiMatrix[row][col];
 		}
 		
 		// tile texts
 		{	List<String>[][] aiMatrix = output.getTileTexts();
 			List<String>[][] engineMatrix = getTileTexts();
-			for(int line=0;line<aiMatrix.length;line++)
+			for(int row=0;row<aiMatrix.length;row++)
 				for(int col=0;col<aiMatrix[0].length;col++)
-					engineMatrix[line][col] = aiMatrix[line][col];
+					engineMatrix[row][col] = aiMatrix[row][col];
 		}
 		
 		// paths
@@ -261,9 +261,9 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 				List<Tile> path = new ArrayList<Tile>();
 				enginePaths.add(path);
 				for(AiTile aiTile: aiPath.getTiles())
-				{	int line = aiTile.getLine();
+				{	int row = aiTile.getRow();
 					int col = aiTile.getCol();
-					Tile tile = level.getTile(line,col);
+					Tile tile = level.getTile(row,col);
 					path.add(tile);
 				}
 			}

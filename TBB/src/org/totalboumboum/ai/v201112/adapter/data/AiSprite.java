@@ -79,7 +79,7 @@ public interface AiSprite
 	 * @return	
 	 * 		le num�ro de la ligne du sprite
 	 */
-	public int getLine();
+	public int getRow();
 
 	/** 
 	 * renvoie le num�ro de la colonne contenant ce sprite

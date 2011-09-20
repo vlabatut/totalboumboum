@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.adapter.path.astar;
+package org.totalboumboum.ai.v201112.adapter.path.dybref;
 
 /*
  * Total Boum Boum
@@ -31,14 +31,9 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
-import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
-import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.BasicSuccessorCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
 
 /**
- * Implémentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
+ * implément de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
  * cette implément correspond à peu près à un A* classique. Il y a quand même une modification,
  * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche anc�tre sont
@@ -63,7 +58,10 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalcul
  * @author Vincent Labatut
  *
  */
-public final class Astar
+
+// TODO revoir tous les coms des classes du package dybref
+
+public final class Dybref
 {	private static boolean verbose = false;
 
 	/**
@@ -79,43 +77,16 @@ public final class Astar
 	 * @param heuristicCalculator
 	 * 		la fonction heuristique
 	 */
-	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
-	{	this(ai,hero,costCalculator,heuristicCalculator,new BasicSuccessorCalculator());
-	}
-	
-	/**
-	 * construit un objet permettant d'appliquer l'algorithme A*.
-	 * 
-	 * @param ai
-	 * 		l'AI invoquant A*
-	 * @param hero
-	 * 		le personnage à consid�rer pour les déplacements
-	 * @param costCalculator
-	 * 		la fonction de coût
-	 * @param heuristicCalculator
-	 * 		la fonction heuristique
-	 * @param successorCalculator
-	 * 		la fonction successeur
-	 */
-	public Astar(ArtificialIntelligence ai, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
+	public Dybref(ArtificialIntelligence ai, AiHero hero)
 	{	this.ai = ai;
 		this.hero = hero;
-		this.costCalculator = costCalculator;
-		this.heuristicCalculator = heuristicCalculator;
-		this.successorCalculator = successorCalculator;
 	}
 
     /////////////////////////////////////////////////////////////////
 	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** fonction de cout */
-	private CostCalculator costCalculator = null;
-	/** fonction heuristique */
-	private HeuristicCalculator heuristicCalculator = null;
-	/** fonction successeur */
-	private SuccessorCalculator successorCalculator = null;
 	/** racine de l'arbre de recherche */
-	private AstarNode root = null;
+	private DybrefNode root = null;
 	/** personnage de référence */
 	private AiHero hero = null;
 	/** l'ai qui a réalisé l'appel */
@@ -126,8 +97,6 @@ public final class Astar
 	/////////////////////////////////////////////////////////////////
 	/** limite de hauteur (négatif = pas de limite) */
 	private int maxHeight = -1;
-	/** limite de coût (négatif = pas de limite) */
-	private double maxCost = -1;
 	/** limite de nombre de noeuds (négatif = pas de limite), pas configurable */
 	private int maxNodes = 10000;
 	
@@ -144,22 +113,6 @@ public final class Astar
 	 */
 	public void setMaxHeight(int maxHeight)
 	{	this.maxHeight = maxHeight;	
-	}
-		
-	/**
-	 * limite l'arbre de recherche à un certain cout maxCost, i.e. Dès que le
-	 * noeud courant atteint ce cout maximal, l'algorithme se termine et ne
-	 * renvoie pas de solution (échec)
-	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
-	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
-	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
-	 * limite déjà le nombre de noeuds dans l'arbre.
-	 * 
-	 * @param maxCost	
-	 * 		le cout maximal que le noeud courant peut atteindre
-	 */
-	public void setMaxCost(int maxCost)
-	{	this.maxCost = maxCost;
 	}
 		
     /////////////////////////////////////////////////////////////////
@@ -183,33 +136,7 @@ public final class Astar
 	 * @throws StopRequestException 
 	 * @throws LimitReachedException 
 	 */
-	public AiPath processShortestPath(AiTile startTile, AiTile endTile) throws StopRequestException, LimitReachedException
-	{	List<AiTile> endTiles = new ArrayList<AiTile>();
-		endTiles.add(endTile);
-		AiPath result = processShortestPath(startTile,endTiles);
-		return result;
-	}
-	
-	/**
-	 * calcule le plus court chemin pour aller de la case startTile à 
-	 * une des cases contenues dans la liste endTiles (n'importe laquelle),
-	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
-	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
-	 * une limite de cout/taille, la valeur null est renvoyée. Dans ce 
-	 * cas-là, c'est qu'il y a généralement un problème dans le façon 
-	 * dont A* est employé (mauvaise fonction de cout, par exemple).
-	 * La fonction renvoie également null si la liste endTiles est vide.
-	 * 
-	 * @param startTile	
-	 * 		la case de départ
-	 * @param endTiles	
-	 * 		la liste des cases d'arrivée possibles
-	 * @return 
-	 * 		un chemin pour aller de startTile à une des cases de endTiles, ou un chemin vide, ou la valeur null
-	 * @throws StopRequestException 
-	 * @throws LimitReachedException 
-	 */
-	public AiPath processShortestPath(AiTile startTile, List<AiTile> endTiles) throws StopRequestException, LimitReachedException
+	public AiPath processShortestPath(AiTile startTile) throws StopRequestException, LimitReachedException
 	{	if(verbose)
 		{	System.out.print("A*: from "+startTile+" to [");
 			for(AiTile tile: endTiles)

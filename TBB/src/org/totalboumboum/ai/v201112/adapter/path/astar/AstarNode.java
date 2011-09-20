@@ -33,7 +33,7 @@ import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalcul
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
 
 /**
- * Représente un noeud dans l'arbre de recherche développ� par l'algorithme A* 
+ * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
  * 
  * @author Vincent Labatut
  *
@@ -351,7 +351,7 @@ public final class AstarNode implements Comparable<AstarNode>
 	public String toString()
 	{	String result;
 		result = "<";
-		result = result + "("+tile.getLine()+","+tile.getCol()+") ";
+		result = result + "("+tile.getRow()+","+tile.getCol()+") ";
 		result = result + depth + ";";
 		result = result + cost + ";";
 		result = result + heuristic + " ";

@@ -190,14 +190,14 @@ public abstract class AiZone
 	/**
 	 * renvoie la case située dans la zone à la position passée en paramètre.
 	 *   
-	 *  @param line
+	 *  @param row
 	 *  	numéro de la ligne contenant la case à renvoyer
 	 *  @param col
 	 *  	numéro de la colonne contenant la case à renvoyer
 	 *  @return	
 	 *  	case située aux coordonnées spécifiées en paramètres
 	 */
-	public abstract AiTile getTile(int line, int col);
+	public abstract AiTile getTile(int row, int col);
 	
 	/**
 	 * renvoie la case qui contient le pixel passé en paramètre
@@ -243,7 +243,7 @@ public abstract class AiZone
 if(target==null || source==null)
 	System.out.print("");
 		int dx = target.getCol()-source.getCol();
-		int dy = target.getLine()-source.getLine();
+		int dy = target.getRow()-source.getRow();
 		
 		// direction
 		Direction temp = Direction.getCompositeFromDouble(dx,dy);
@@ -552,48 +552,48 @@ if(target==null || source==null)
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie la distance de Manhattan entre les cases de coordonnées
-	 * (line1,col1) et (line2,col2), exprimée en cases. 
+	 * (row1,col1) et (row2,col2), exprimée en cases. 
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
 	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
 	 * passant par les bords du niveau.
 	 * 
-	 * @param  line1
+	 * @param  row1
 	 * 		ligne de la première case
 	 * @param col1
 	 * 		colonne de la première case
-	 * @param  line2
+	 * @param  row2
 	 * 		ligne de la seconde case
 	 * @param  col2
 	 * 		colonne de la seconde case
 	 * @param  direction
 	 * 		direction à considérer
 	 */
-	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
-	{	int result = LevelsTools.getTileDistance(line1,col1,line2,col2,direction,height,width);
+	public int getTileDistance(int row1, int col1, int row2, int col2, Direction direction)
+	{	int result = LevelsTools.getTileDistance(row1,col1,row2,col2,direction,height,width);
 		return result;
 	}
 
 	/**
 	 * renvoie la distance de Manhattan entre les cases de coordonnées
-	 * (line1,col1) et (line2,col2), exprimée en cases. 
+	 * (row1,col1) et (row2,col2), exprimée en cases. 
 	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
 	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
 	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
 	 * (qui peut correspondre à un chemin passant par les bords du niveau)
 	 * 
-	 * @param line1
+	 * @param row1
 	 * 		ligne de la première case
 	 * @param  col1
 	 * 		colonne de la première case
-	 * @param  line2
+	 * @param  row2
 	 * 		ligne de la seconde case
 	 * @param col2
 	 * 		colonne de la seconde case
 	 */
-	public int getTileDistance(int line1, int col1, int line2, int col2)
-	{	int result = LevelsTools.getTileDistance(line1,col1,line2,col2,Direction.NONE,height,width);
+	public int getTileDistance(int row1, int col1, int row2, int col2)
+	{	int result = LevelsTools.getTileDistance(row1,col1,row2,col2,Direction.NONE,height,width);
 		return result;
 	}
 	
@@ -632,11 +632,11 @@ if(target==null || source==null)
 	 * 		direction à considérer
 	 */
 	public int getTileDistance(AiTile tile1, AiTile tile2, Direction direction)
-	{	int line1 = tile1.getLine();
+	{	int row1 = tile1.getRow();
 		int col1 = tile1.getCol();
-		int line2 = tile2.getLine();
+		int row2 = tile2.getRow();
 		int col2 = tile2.getCol();
-		int result = LevelsTools.getTileDistance(line1,col1,line2,col2,height,width);
+		int result = LevelsTools.getTileDistance(row1,col1,row2,col2,height,width);
 		return result;
 	}
 	
@@ -905,15 +905,15 @@ if(target==null || source==null)
 	 * utilise la propriété cyclique du niveau pour déterminer une position
 	 * équivalente située dans le niveau.
 	 * 
-	 * @param line
+	 * @param row
 	 * 		ligne de la case
 	 * @param col
 	 * 		colonne de la case
 	 * @return	
-	 * 		un tableau contenant les versions normalisées de line et col
+	 * 		un tableau contenant les versions normalisées de row et col
 	 */
-	public int[] normalizePosition(int line, int col)
-	{	return LevelsTools.normalizePosition(line,col,height,width);
+	public int[] normalizePosition(int row, int col)
+	{	return LevelsTools.normalizePosition(row,col,height,width);
 	}
 
 	/**
@@ -941,13 +941,13 @@ if(target==null || source==null)
 	 * côté bas sont reliés) pour déterminer une position
 	 * équivalente située dans le niveau.
 	 * 
-	 * @param line
+	 * @param row
 	 * 		ligne de la case
 	 * @return	
-	 * 		la version normalisée de line
+	 * 		la version normalisée de row
 	 */
-	public int normalizePositionLine(int line)
-	{	return LevelsTools.normalizePositionLine(line,height);
+	public int normalizePositionRow(int row)
+	{	return LevelsTools.normalizePositionRow(row,height);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -1033,17 +1033,17 @@ if(target==null || source==null)
 	 */
 	@Override
 	public String toString()
-	{	// top line
+	{	// top row
 		String result = "┌";
 		for(int col=0;col<width-1;col++)
 			result = result + "─┬";
 		result = result + "─┐\n";
 		
 		// content
-		for(int line=0;line<height;line++)
+		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
 			{	result = result + "│";
-				AiTile tile = getTile(line,col);
+				AiTile tile = getTile(row,col);
 				List<AiBlock> blocks = tile.getBlocks();
 				List<AiHero> heroes = tile.getHeroes();
 				List<AiItem> items = tile.getItems();
@@ -1068,7 +1068,7 @@ if(target==null || source==null)
 					result = result + " ";
 			}
 			result = result + "│\n";
-			if(line<width-1)
+			if(row<width-1)
 			{	result = result + "├";
 				for(int col=0;col<width-1;col++)
 					result = result + "─┼";
@@ -1076,7 +1076,7 @@ if(target==null || source==null)
 			}
 		}
 		
-		// bottom line
+		// bottom row
 		result = result + "└";
 		for(int col=0;col<width-1;col++)
 			result = result + "─┴";

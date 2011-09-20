@@ -245,9 +245,9 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 		List<Tile> tiles = bomb.getExplosionManager().makeExplosion(true); 
 		blast.clear();
 		for(Tile tile: tiles)
-		{	int line = tile.getLine();
+		{	int row = tile.getRow();
 			int col = tile.getCol();
-			AiDataTile t = getTile().getZone().getTile(line,col);
+			AiDataTile t = getTile().getZone().getTile(row,col);
 			blast.add(t);
 		}
 		

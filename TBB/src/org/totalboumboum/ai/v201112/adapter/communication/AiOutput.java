@@ -127,9 +127,9 @@ public class AiOutput
 	 * (null = aucune couleur initialement)
 	 */
 	private void reinitTileColors()
-	{	for(int line=0;line<zone.getHeight();line++)
+	{	for(int row=0;row<zone.getHeight();row++)
 			for(int col=0;col<zone.getWidth();col++)
-				tileColors[line][col] = null;
+				tileColors[row][col] = null;
 	}
 	
 	/**
@@ -143,9 +143,9 @@ public class AiOutput
 	 * 		couleur du coloriage
 	 */
 	public void setTileColor(AiTile tile, Color color)
-	{	int line = tile.getLine();
+	{	int row = tile.getRow();
 		int col = tile.getCol();
-		setTileColor(line,col,color);		
+		setTileColor(row,col,color);		
 	}
 
 	/**
@@ -153,15 +153,15 @@ public class AiOutput
 	 * en transparence par dessus la zone de jeu.
 	 * La valeur null correspond à une absence de couleur.
 	 * 
-	 * @param line
+	 * @param row
 	 * 		ligne de la case à colorier
 	 * @param col
 	 * 		colonne de la case à colorier
 	 * @param color
 	 * 		couleur du coloriage
 	 */
-	public void setTileColor(int line, int col, Color color)
-	{	tileColors[line][col] = color;	
+	public void setTileColor(int row, int col, Color color)
+	{	tileColors[row][col] = color;	
 	}
 
 	/**
@@ -204,12 +204,12 @@ public class AiOutput
 	}
 	
 	/**
-	 * r�initialise les textes associés aux cases
+	 * réinitialise les textes associés aux cases
 	 */
 	private void reinitTileTexts()
-	{	for(int line=0;line<zone.getHeight();line++)
+	{	for(int row=0;row<zone.getHeight();row++)
 			for(int col=0;col<zone.getWidth();col++)
-				tileTexts[line][col] = new ArrayList<String>();
+				tileTexts[row][col] = new ArrayList<String>();
 	}
 	
 	/**
@@ -223,9 +223,9 @@ public class AiOutput
 	 * 		texte à afficher sur cette case
 	 */
 	public void setTileText(AiTile tile, String text)
-	{	int line = tile.getLine();
+	{	int row = tile.getRow();
 		int col = tile.getCol();
-		setTileText(line,col,text);
+		setTileText(row,col,text);
 	}
 	
 	/**
@@ -233,15 +233,15 @@ public class AiOutput
 	 * par exemple d'afficher des heuristiques, des coûts
 	 * en temps réel.
 	 * 
-	 * @param line
+	 * @param row
 	 * 		ligne de la case associée au texte
 	 * @param col
 	 * 		colonne de la case associée au texte
 	 * @param text
 	 * 		texte à afficher sur cette case
 	 */
-	public void setTileText(int line, int col, String text)
-	{	tileTexts[line][col].add(text);	
+	public void setTileText(int row, int col, String text)
+	{	tileTexts[row][col].add(text);	
 	}
 
 	/**
@@ -249,16 +249,16 @@ public class AiOutput
 	 * par exemple d'afficher des heuristiques, des coûts
 	 * en temps réel.
 	 * 
-	 * @param line
+	 * @param row
 	 * 		ligne de la case associée au texte
 	 * @param col	
 	 * 		colonne de la case associée au texte
 	 * @param texts	
 	 * 		tableau de textes à afficher sur cette case
 	 */
-	public void setTileTexts(int line, int col, String texts[])
+	public void setTileTexts(int row, int col, String texts[])
 	{	for(String text: texts)
-			tileTexts[line][col].add(text);		
+			tileTexts[row][col].add(text);		
 	}
 
 	/**

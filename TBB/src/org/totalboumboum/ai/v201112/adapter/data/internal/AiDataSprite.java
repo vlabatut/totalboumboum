@@ -139,7 +139,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 	
 	/**
-	 * d�marque ce sprite (action réalis�e avant la mise à jour de la zone)
+	 * d�marque ce sprite (action réalisée avant la mise à jour de la zone)
 	 */
 	protected void uncheck()
 	{	checked = false; 
@@ -187,8 +187,8 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 	
 	@Override
-	public int getLine()
-	{	return tile.getLine();	
+	public int getRow()
+	{	return tile.getRow();	
 	}
 
 	@Override
@@ -288,13 +288,13 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
-		String line = "x";
+		String row = "x";
 		String col = "x";
 		if(tile!=null)
-		{	line = Integer.toString(tile.getLine());
+		{	row = Integer.toString(tile.getRow());
 			col = Integer.toString(tile.getCol());
 		}
-		result.append(" ("+line+";"+col+")");
+		result.append(" ("+row+";"+col+")");
 		result.append(" ("+posX+";"+posY+";"+posZ+")");
 		result.append(" - state: "+state.toString());
 		return result.toString();

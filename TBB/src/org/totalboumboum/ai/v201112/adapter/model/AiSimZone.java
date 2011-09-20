@@ -74,21 +74,21 @@ final class AiSimZone extends AiZone
 		pixelWidth = zone.getPixelWidth();
 		pixelHeight = zone.getPixelHeight();
 		matrix = new AiSimTile[height][width];
-		for(int line=0;line<height;line++)
+		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
-			{	AiTile tile = m[line][col];
+			{	AiTile tile = m[row][col];
 				double posX = tile.getPosX();
 				double posY = tile.getPosY();
-				AiSimTile aiTile = new AiSimTile(this,line,col,posX,posY);
-				matrix[line][col] = aiTile;
+				AiSimTile aiTile = new AiSimTile(this,row,col,posX,posY);
+				matrix[row][col] = aiTile;
 			}
 		}
 		
 		// sprites
-		for(int line=0;line<height;line++)
+		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
-			{	AiTile tile = zone.getTile(line,col);
-				AiSimTile simTile = matrix[line][col];
+			{	AiTile tile = zone.getTile(row,col);
+				AiSimTile simTile = matrix[row][col];
 				// blocks
 				List<AiBlock> blocks = tile.getBlocks();
 				for(AiBlock block: blocks)
@@ -132,9 +132,9 @@ final class AiSimZone extends AiZone
 		for(AiHero hero: zone.getHeroes())
 		{	if(!externalHeroes.contains(hero))
 			{	AiTile tile = hero.getTile();
-				int line = tile.getLine();
+				int row = tile.getRow();
 				int col = tile.getCol();
-				AiSimHero simHero = new AiSimHero(hero,matrix[line][col]);
+				AiSimHero simHero = new AiSimHero(hero,matrix[row][col]);
 				internalHeroes.add(simHero);
 				externalHeroes.add(simHero);
 			}
@@ -187,12 +187,12 @@ final class AiSimZone extends AiZone
 		pixelWidth = 100*width;
 		pixelHeight = 100*height;
 		matrix = new AiSimTile[height][width];
-		for(int line=0;line<height;line++)
+		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
 			{	double posX = 100*col+50;
-				double posY = 100*line+50;
-				AiSimTile aiTile = new AiSimTile(this,line,col,posX,posY);
-				matrix[line][col] = aiTile;
+				double posY = 100*row+50;
+				AiSimTile aiTile = new AiSimTile(this,row,col,posX,posY);
+				matrix[row][col] = aiTile;
 			}
 		}
 		
@@ -218,10 +218,10 @@ final class AiSimZone extends AiZone
 	
 	/** 
 	 * renvoie la case voisine de la case passée en paramètre,
-	 * dans la direction spécifiée (en consid�rant le fait que le niveau
+	 * dans la direction spécifiée (en considérant le fait que le niveau
 	 * est fermé.
 	 *  
-	 *  @param line
+	 *  @param row
 	 *  	ligne de la case à traite
 	 *  @param col
 	 *  	colonne de la case à traiter
@@ -230,7 +230,7 @@ final class AiSimZone extends AiZone
 	 *  @return	
 	 *  	la case voisine dans la direction pr�cis�e
 	 */
-	protected AiSimTile getNeighborTile(int line, int col, Direction direction)
+	protected AiSimTile getNeighborTile(int row, int col, Direction direction)
 	{	AiSimTile result;
 		int c,l;
 		Direction p[] = direction.getPrimaries(); 
@@ -243,11 +243,11 @@ final class AiSimZone extends AiZone
 			c = col;
 
 		if(p[1]==Direction.UP)
-			l = (line+height-1)%height;
+			l = (row+height-1)%height;
 		else if(p[1]==Direction.DOWN)
-			l = (line+1)%height;
+			l = (row+1)%height;
 		else
-			l = line;
+			l = row;
 
 		result = matrix[l][c];
 		return result;
@@ -272,8 +272,8 @@ final class AiSimZone extends AiZone
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public AiSimTile getTile(int line, int col)
-	{	return matrix[line][col];
+	public AiSimTile getTile(int row, int col)
+	{	return matrix[row][col];
 	}
 	
 	@Override
@@ -843,9 +843,9 @@ final class AiSimZone extends AiZone
 	 */
 	public void finish()
 	{	// matrix
-		for(int line=0;line<height;line++)
+		for(int row=0;row<height;row++)
 			for(int col=0;col<width;col++)
-				matrix[line][col].finish();
+				matrix[row][col].finish();
 		matrix = null;
 		
 		// blocks

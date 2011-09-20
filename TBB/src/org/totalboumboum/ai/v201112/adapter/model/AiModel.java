@@ -1178,9 +1178,9 @@ if(sprite instanceof AiSimBomb)
 	{	AiBomb result = null;
 	
 		// get the tile
-		int line = tile.getLine();
+		int row = tile.getRow();
 		int col = tile.getCol();
-		AiSimTile simTile = current.getTile(line,col);
+		AiSimTile simTile = current.getTile(row,col);
 		
 		// get the hero
 		AiSimHero simHero = current.getSpriteById(hero);
