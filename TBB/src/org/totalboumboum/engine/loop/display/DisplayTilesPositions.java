@@ -95,10 +95,10 @@ public class DisplayTilesPositions implements Display
 			{	Font font = new Font("Dialog", Font.PLAIN, 12);
 				g.setFont(font);
 				FontMetrics metrics = g.getFontMetrics(font);
-				for(int line=0;line<globalHeight;line++)
+				for(int row=0;row<globalHeight;row++)
 				{	for(int col=0;col<globalWidth;col++)
-					{	Tile temp = level.getTile(line,col);
-						String text = "("+line+","+col+")";
+					{	Tile temp = level.getTile(row,col);
+						String text = "("+row+","+col+")";
 						Rectangle2D box = metrics.getStringBounds(text, g);
 						int x = (int)Math.round(temp.getPosX()-box.getWidth()/2);
 						int y = (int)Math.round(temp.getPosY()+box.getHeight()/2);
@@ -115,9 +115,9 @@ public class DisplayTilesPositions implements Display
 				Font font = new Font("Dialog", Font.PLAIN, 12);
 				g.setFont(font);
 				FontMetrics metrics = g.getFontMetrics(font);
-				for(int line=0;line<globalHeight;line++)
+				for(int row=0;row<globalHeight;row++)
 				{	for(int col=0;col<globalWidth;col++)
-					{	Tile temp = level.getTile(line,col);
+					{	Tile temp = level.getTile(row,col);
 						String textX = Double.toString(temp.getPosX());
 						String textY = Double.toString(temp.getPosY());
 						Rectangle2D boxX = metrics.getStringBounds(textX, g);

@@ -239,7 +239,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	String result;
 		result = getClass().getSimpleName();
 		if(tile!=null)
-			result = result+"["+name+"]("+tile.getLine()+","+tile.getCol()+")";
+			result = result+"["+name+"]("+tile.getRow()+","+tile.getCol()+")";
 		result = result+"("+getCurrentPosX()+","+getCurrentPosY()+","+getCurrentPosZ()+")";
 		return result;
 	}
@@ -331,7 +331,7 @@ public abstract class Sprite implements Comparable<Sprite>
 		 * comme �a, un changement de case arrive après avoir traité tous les évènements
 		 * (raisons de synchro)
 		 */
-//System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getLine()+";"+tile.getCol());
+//System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getRow()+";"+tile.getCol());
 		Iterator<Sprite> i = boundSprites.iterator();
 		while(i.hasNext())
 		{	Sprite temp = i.next();

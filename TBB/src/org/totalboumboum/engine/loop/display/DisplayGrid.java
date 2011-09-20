@@ -82,9 +82,9 @@ public class DisplayGrid implements Display
 //			g.drawLine((int)posX, 0, (int)posX, configuration.getPanelDimensionY());
 //			g.drawLine(0,(int)posY, configuration.getPanelDimensionX(), (int)posY);
 			// grille
-			for(int line=0;line<globalHeight;line++)
+			for(int row=0;row<globalHeight;row++)
 			{	for(int col=0;col<globalWidth;col++)
-				{	Tile temp = level.getTile(line,col);
+				{	Tile temp = level.getTile(row,col);
 					g.drawLine((int)temp.getPosX(), (int)temp.getPosY(), (int)temp.getPosX(), (int)temp.getPosY());
 					g.drawRect((int)(temp.getPosX()-RoundVariables.scaledTileDimension/2), (int)(temp.getPosY()-RoundVariables.scaledTileDimension/2), (int)RoundVariables.scaledTileDimension, (int)RoundVariables.scaledTileDimension);
 				}

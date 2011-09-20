@@ -100,13 +100,13 @@ public class DisplayAisColors implements Display
 				// tile colors
 				if(getShow(i))
 				{	Color[][] colors = aiMgr.getTileColors();
-					for(int line=0;line<level.getGlobalHeight();line++)
+					for(int row=0;row<level.getGlobalHeight();row++)
 					{	for(int col=0;col<level.getGlobalWidth();col++)
-						{	Color color = colors[line][col];
+						{	Color color = colors[row][col];
 							if(color!=null)
 							{	Color paintColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),Loop.INFO_ALPHA_LEVEL);
 								g2.setPaint(paintColor);
-								Tile tile = level.getTile(line,col);
+								Tile tile = level.getTile(row,col);
 								double x = tile.getPosX()-tileSize/2;
 								double y = tile.getPosY()-tileSize/2;
 								g2.fill(new Rectangle2D.Double(x,y,tileSize,tileSize));

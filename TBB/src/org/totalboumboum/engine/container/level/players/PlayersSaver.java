@@ -107,9 +107,9 @@ public class PlayersSaver
 		int player = location.getNumber();
 		result.setAttribute(XmlNames.PLAYER,nf.format(player));
 		
-		// line
-		int line = location.getLine();
-		result.setAttribute(XmlNames.LINE,nf.format(line));
+		// row
+		int row = location.getRow();
+		result.setAttribute(XmlNames.LINE,nf.format(row));
 
 		// column
 		int col = location.getCol();

@@ -57,7 +57,7 @@ public abstract class GeneralAction implements Serializable
 	/*NOTE
 	 * 
 	 * il semble qu'on a parfois besoin d'une position sous forme de case.
-	 * dans ce cas l�, on peut passer la case (ou ses coordonnées) lors de la cr�ation de l'action,
+	 * dans ce cas là, on peut passer la case (ou ses coordonnées) lors de la cr�ation de l'action,
 	 * qui initialise ses champs en conséquence.
 	 * 
 	 * il semble logique de laisser la gestion compl�te des autorisations de transition aux modulations

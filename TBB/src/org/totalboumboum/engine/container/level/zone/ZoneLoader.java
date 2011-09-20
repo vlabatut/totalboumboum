@@ -78,9 +78,9 @@ public class ZoneLoader
     	List<Element> elements = root.getChildren(XmlNames.LINE);
     	Iterator<Element> i = elements.iterator();
     	while(i.hasNext())
-    	{	Element line = i.next();
-    		int posL = Integer.parseInt(line.getAttribute(XmlNames.POSITION).getValue().trim());
-    		List<Element> elementsL = line.getChildren(XmlNames.TILE);
+    	{	Element row = i.next();
+    		int posL = Integer.parseInt(row.getAttribute(XmlNames.POSITION).getValue().trim());
+    		List<Element> elementsL = row.getChildren(XmlNames.TILE);
         	Iterator<Element> iL = elementsL.iterator();
         	while(iL.hasNext())
         	{	String[] content = {null,null,null,null};

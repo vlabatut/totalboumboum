@@ -95,13 +95,13 @@ public class Zone implements Serializable
 	{	return tiles;
 	}
 	
-	public ZoneTile getTile(int line, int col)
+	public ZoneTile getTile(int row, int col)
 	{	ZoneTile result = null;
 		
 		Iterator<ZoneTile> it = tiles.iterator();
 		while(result==null && it.hasNext())
 		{	ZoneTile temp = it.next();
-			if(temp.getLine()==line && temp.getCol()==col)
+			if(temp.getRow()==row && temp.getCol()==col)
 				result = temp;
 		}
 		
@@ -152,7 +152,7 @@ public class Zone implements Serializable
     	{	String[] content = {null,null,null,null};
     		ZoneTile tile = it.next();
     		int col = tile.getCol();
-    		int line = tile.getLine();
+    		int row = tile.getRow();
     		// constant parts
     		content[0] = tile.getFloor();
    			content[1] = tile.getBlock();
@@ -178,13 +178,13 @@ public class Zone implements Serializable
     		}
     		// values
 			{	// floor
-				floors[line][col] = content[0];
+				floors[row][col] = content[0];
 				// block
-				blocks[line][col] = content[1];
+				blocks[row][col] = content[1];
 				// item
-				items[line][col] = content[2];
+				items[row][col] = content[2];
 				// bomb
-				bombs[line][col] = content[3];
+				bombs[row][col] = content[3];
     		}
     	}
 		

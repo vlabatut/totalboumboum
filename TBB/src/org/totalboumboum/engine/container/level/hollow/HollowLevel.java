@@ -161,44 +161,44 @@ public class HollowLevel implements Serializable
 		String[][] mBombs = matrices.get(3);
 		
 		// init tiles
-		for(int line=0;line<globalHeight;line++)
+		for(int row=0;row<globalHeight;row++)
 		{	for(int col=0;col<globalWidth;col++)
 			{	double x = globalLeftX + RoundVariables.scaledTileDimension/2 + col*RoundVariables.scaledTileDimension;
-				double y = globalUpY + RoundVariables.scaledTileDimension/2 + line*RoundVariables.scaledTileDimension;
-				matrix[line][col] = new Tile(level,line,col,x,y);
+				double y = globalUpY + RoundVariables.scaledTileDimension/2 + row*RoundVariables.scaledTileDimension;
+				matrix[row][col] = new Tile(level,row,col,x,y);
 
 				// floors
 				Floor floor;
-				if(mFloors[line][col]==null)
-				{	floor = theme.makeFloor(matrix[line][col]);
+				if(mFloors[row][col]==null)
+				{	floor = theme.makeFloor(matrix[row][col]);
 					level.insertSpriteTile(floor);
 				}
 				else
-				{	floor = theme.makeFloor(mFloors[line][col],matrix[line][col]);
+				{	floor = theme.makeFloor(mFloors[row][col],matrix[row][col]);
 					level.insertSpriteTile(floor);
 				}
 				
 				// blocks
-				if(mBlocks[line][col]!=null)
-				{	Block block = theme.makeBlock(mBlocks[line][col],matrix[line][col]);
+				if(mBlocks[row][col]!=null)
+				{	Block block = theme.makeBlock(mBlocks[row][col],matrix[row][col]);
 					level.insertSpriteTile(block);
 				}
 				
 				// items
-				if(mItems[line][col]!=null)
-				{	Item item = itemset.makeItem(mItems[line][col],matrix[line][col]);
+				if(mItems[row][col]!=null)
+				{	Item item = itemset.makeItem(mItems[row][col],matrix[row][col]);
 					level.insertSpriteTile(item);				
 				}
 				
 				// bombs
-				if(mBombs[line][col]!=null)
-				{	String temp[] = mBombs[line][col].split(Theme.PROPERTY_SEPARATOR);
+				if(mBombs[row][col]!=null)
+				{	String temp[] = mBombs[row][col].split(Theme.PROPERTY_SEPARATOR);
 					int range = Integer.parseInt(temp[temp.length-2]);
 					int duration = Integer.parseInt(temp[temp.length-1]);
 					String name = "";
 					for(int i=0;i<temp.length-2;i++)
 						name = name + temp[i];
-					Bomb bomb = bombset.makeBomb(name,matrix[line][col],range,duration);
+					Bomb bomb = bombset.makeBomb(name,matrix[row][col],range,duration);
 					if(bomb==null)
 						System.err.println("makeBomb error: sprite "+name+" not found.");
 					
@@ -222,11 +222,11 @@ public class HollowLevel implements Serializable
 		int globalWidth = levelInfo.getGlobalWidth();
 		
 		// init tiles
-		for(int line=0;line<globalHeight;line++)
+		for(int row=0;row<globalHeight;row++)
 		{	for(int col=0;col<globalWidth;col++)
 			{	double x = globalLeftX + RoundVariables.scaledTileDimension/2 + col*RoundVariables.scaledTileDimension;
-				double y = globalUpY + RoundVariables.scaledTileDimension/2 + line*RoundVariables.scaledTileDimension;
-				matrix[line][col] = new Tile(level,line,col,x,y);
+				double y = globalUpY + RoundVariables.scaledTileDimension/2 + row*RoundVariables.scaledTileDimension;
+				matrix[row][col] = new Tile(level,row,col,x,y);
 			}
 		}
 		
@@ -261,7 +261,7 @@ public class HollowLevel implements Serializable
 	public Sprite createSpriteFromEvent(SpriteCreationEvent event)
 	{	Tile[][] matrix = level.getMatrix();
 		
-		int line = event.getLine();
+		int row = event.getRow();
 		int col = event.getCol();
 		//PredefinedColor color = event.getColor();
 		Role role = event.getRole();
@@ -272,18 +272,18 @@ public class HollowLevel implements Serializable
 		
 		// floors
 		if(role==Role.FLOOR)
-		{	sprite = theme.makeFloor(name,matrix[line][col]);
+		{	sprite = theme.makeFloor(name,matrix[row][col]);
 			sprite.setId(id);
 		}
 		// blocks
 		else if(role==Role.BLOCK)
-		{	sprite = theme.makeBlock(name,matrix[line][col]);
+		{	sprite = theme.makeBlock(name,matrix[row][col]);
 			sprite.setId(id);
 		}
 		// items
 		else if(role==Role.ITEM)
 		{	Itemset itemset = instance.getItemset();
-			sprite = itemset.makeItem(name,matrix[line][col]);
+			sprite = itemset.makeItem(name,matrix[row][col]);
 			sprite.setId(id);
 		}
 		// bombs
@@ -293,7 +293,7 @@ public class HollowLevel implements Serializable
 			if(!names[1].equalsIgnoreCase(null))
 				color = PredefinedColor.valueOf(names[1]);
 			Bombset bombset = instance.getBombsetMap().getBombset(color);
-			sprite = bombset.makeBomb(names[0],matrix[line][col],0,-1);
+			sprite = bombset.makeBomb(names[0],matrix[row][col],0,-1);
 			sprite.setId(id);
 		}
 		// fires
@@ -301,7 +301,7 @@ public class HollowLevel implements Serializable
 		{	String names[] = name.split("/");
 			FiresetMap firesetMap = instance.getFiresetMap();
 			Fireset fireset = firesetMap.getFireset(names[0]);
-			sprite = fireset.makeFire(names[1],matrix[line][col]);
+			sprite = fireset.makeFire(names[1],matrix[row][col]);
 			sprite.setId(id);
 		}
 		// heroes
@@ -351,13 +351,13 @@ public class HollowLevel implements Serializable
 		// visible part
 		int visibleHeight = levelInfo.getVisibleHeight();
 		int visibleWidth = levelInfo.getVisibleWidth();
-		int visibleUpLine = levelInfo.getVisiblePositionUpLine();
+		int visibleUpRow = levelInfo.getVisiblePositionUpRow();
 		int visibleLeftCol = levelInfo.getVisiblePositionLeftCol();
 		if(levelInfo.getForceAll())
 		{	visibleWidth = globalWidth;
 			visibleHeight = globalHeight;
 			visibleLeftCol = 0;
-			visibleUpLine = 0;
+			visibleUpRow = 0;
 		}
 		
 		// zoom factor
@@ -379,7 +379,7 @@ public class HollowLevel implements Serializable
 //		double globalLeftX = posX - globalWidth*tileDimension/2;
 //		double globalUpY = posY - globalHeight*tileDimension/2;
 		double globalLeftX = posX - (visibleLeftCol+visibleWidth/2.0)*RoundVariables.scaledTileDimension;
-		double globalUpY = posY - (visibleUpLine+visibleHeight/2.0)*RoundVariables.scaledTileDimension;
+		double globalUpY = posY - (visibleUpRow+visibleHeight/2.0)*RoundVariables.scaledTileDimension;
     	level.setTilePositions(globalWidth,globalHeight,globalLeftX,globalUpY);
 		
 		// border

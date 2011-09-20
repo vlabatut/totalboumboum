@@ -50,11 +50,11 @@ import org.totalboumboum.game.round.RoundVariables;
  */
 public class Tile
 {		
-	public Tile(Level level,int line, int col, double posX, double posY)
+	public Tile(Level level,int row, int col, double posX, double posY)
 	{	this.level = level;
 		this.posX = posX;
 		this.posY = posY;
-		this.line = line;
+		this.row = row;
 		this.col = col;
 		//
 		bombs = new ArrayList<Bomb>(0);
@@ -502,11 +502,11 @@ public class Tile
     /////////////////////////////////////////////////////////////////
 	// MATRIX POSITION		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int line;
+	private int row;
 	private int col;
 	
-	public int getLine()
-	{	return line;
+	public int getRow()
+	{	return row;
 	}
 	
 	public int getCol()
@@ -515,7 +515,7 @@ public class Tile
 	
 	public Tile getNeighbor(Direction direction)
 	{	Tile result;
-		result = level.getNeighborTile(line,col,direction);
+		result = level.getNeighborTile(row,col,direction);
 		return result;
 	}
 	
@@ -565,7 +565,7 @@ result = level.getTile(x,y)==this;
 	public String toString()
 	{	String result;
 		result = getClass().getSimpleName();
-		result = result+"("+line+","+col+")";
+		result = result+"("+row+","+col+")";
 		result = result+"("+posX+","+posY+")";
 		return result;
 	}

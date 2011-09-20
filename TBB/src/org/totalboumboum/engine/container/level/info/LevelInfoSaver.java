@@ -93,7 +93,7 @@ public class LevelInfoSaver
 		result.addContent(visibledimElement);
 		// visible position
 		Element visibleposeElement = new Element(XmlNames.VISIBLE_POSITION);
-		visibleposeElement.setAttribute(XmlNames.UPLINE,Integer.toString(levelInfo.getVisiblePositionUpLine()));
+		visibleposeElement.setAttribute(XmlNames.UPLINE,Integer.toString(levelInfo.getVisiblePositionUpRow()));
 		visibleposeElement.setAttribute(XmlNames.LEFTCOL,Integer.toString(levelInfo.getVisiblePositionLeftCol()));
 		result.addContent(visibleposeElement);
 		// display

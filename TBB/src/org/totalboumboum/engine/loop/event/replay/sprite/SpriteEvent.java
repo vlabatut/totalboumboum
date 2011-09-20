@@ -37,7 +37,7 @@ public abstract class SpriteEvent extends ReplayEvent
 	{	super();
 		spriteId = sprite.getId();
 		Tile tile = sprite.getTile();
-		spriteInfo = sprite.getName()+"@("+tile.getCol()+","+tile.getLine()+")";
+		spriteInfo = sprite.getName()+"@("+tile.getCol()+","+tile.getRow()+")";
 	}
 		
 	/////////////////////////////////////////////////////////////////

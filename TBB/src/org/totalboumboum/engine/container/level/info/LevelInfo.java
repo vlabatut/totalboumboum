@@ -164,14 +164,14 @@ public class LevelInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// VISIBLE POSITION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int visiblePositionUpLine;
+	private int visiblePositionUpRow;
 	private int visiblePositionLeftCol;
 
-	public int getVisiblePositionUpLine()
-	{	return visiblePositionUpLine;
+	public int getVisiblePositionUpRow()
+	{	return visiblePositionUpRow;
 	}
-	public void setVisiblePositionUpLine(int visiblePositionUpLine)
-	{	this.visiblePositionUpLine = visiblePositionUpLine;
+	public void setVisiblePositionUpRow(int visiblePositionUpRow)
+	{	this.visiblePositionUpRow = visiblePositionUpRow;
 	}
 	
 	public int getVisiblePositionLeftCol()

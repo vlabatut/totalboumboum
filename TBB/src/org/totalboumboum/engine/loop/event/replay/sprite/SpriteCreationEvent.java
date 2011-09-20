@@ -35,12 +35,12 @@ public class SpriteCreationEvent extends SpriteEvent
 {	private static final long serialVersionUID = 1L;
 
 /*
-	public SpriteCreationEvent(int id, long time, String name, Role role, int line, int col)
+	public SpriteCreationEvent(int id, long time, String name, Role role, int row, int col)
 	{	this.id = id;
 		this.time = time;
 		this.name = name;
 		this.role = role;
-		this.line = line;
+		this.row = row;
 		this.col = col;
 	}
 */
@@ -58,7 +58,7 @@ public class SpriteCreationEvent extends SpriteEvent
 		
 		// location
 		Tile tile = sprite.getTile();
-		this.line = tile.getLine();
+		this.row = tile.getRow();
 		this.col = tile.getCol();
 		
 		// send event
@@ -95,11 +95,11 @@ public class SpriteCreationEvent extends SpriteEvent
 	/////////////////////////////////////////////////////////////////
 	// LOCATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int line;
+	private int row;
 	private int col;
 	
-	public int getLine()
-	{	return line;
+	public int getRow()
+	{	return row;
 	}
 
 	public int getCol()
@@ -112,7 +112,7 @@ public class SpriteCreationEvent extends SpriteEvent
 	public String toString()
 	{	String result = "SpriteCreationEvent("+time+":"+spriteId+"): " + getSpriteInfo() + " ";
 		result = result + name + " [" + color + "," + role + "] ";
-		result = result + "@(" + line + "," + col + ")";
+		result = result + "@(" + row + "," + col + ")";
 		return result;
 	}
 }

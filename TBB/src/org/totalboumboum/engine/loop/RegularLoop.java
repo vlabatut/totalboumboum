@@ -136,7 +136,7 @@ public class RegularLoop extends LocalLoop
 		while(i.hasNext())
 		{	// location
 			PlayerLocation pl = initialPositions[j];
-			Tile tile = level.getTile(pl.getLine(),pl.getCol());
+			Tile tile = level.getTile(pl.getRow(),pl.getCol());
 			
 			// sprite
 			Profile profile = i.next();
@@ -152,7 +152,7 @@ public class RegularLoop extends LocalLoop
 			
 			// level
 			Hero hero = (Hero)player.getSprite();
-//			level.addHero(hero,pl.getLine(),pl.getCol());
+//			level.addHero(hero,pl.getRow(),pl.getCol());
 			
 			// initial items
 			for(Entry<String,Integer> entry: items.entrySet())
