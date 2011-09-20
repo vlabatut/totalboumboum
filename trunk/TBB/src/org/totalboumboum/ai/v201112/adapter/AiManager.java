@@ -162,7 +162,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	 * utilisé quand l'IA renvoie l'action "ne rien faire"
 	 * 
 	 * @param result	
-	 * 		liste des évènements adaptée à l'action renvoy�e par l'IA
+	 * 		liste des évènements adaptée à l'action renvoyée par l'IA
 	 */
 	private void reactionStop(List<ControlEvent> result)
 	{	if(lastMove!=Direction.NONE)

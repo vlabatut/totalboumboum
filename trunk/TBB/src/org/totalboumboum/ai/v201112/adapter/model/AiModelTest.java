@@ -46,7 +46,7 @@ public final class AiModelTest
 {
 	public static void main(String args[])
 	{	
-/*		RoundVariables.scaledTileDimension = 100;
+		RoundVariables.scaledTileDimension = 100;
 		AiSimZone zone;
 		AiSimTile tile;
 		AiSimState state;
@@ -244,6 +244,6 @@ public final class AiModelTest
 		model.simulate();
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
-*/	
+	
 	}
 }
