@@ -95,8 +95,6 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	/** Fait apparaître aléatoirement des items lors de la destruction des murs */
 	private boolean simulateItemsAppearing = false;
-	/** Considère uniquement les évènements correspondant aux explosions */
-	private boolean considerExplosionsOnly = false;
 
 	/**
 	 * Détermine si l'apparition d'items sera simulée lors de la destruction de murs.
@@ -110,21 +108,6 @@ public class AiModel
 	 */
 	public void setSimulateItemsAppearing(boolean simulateItemsAppearing)
 	{	this.simulateItemsAppearing = simulateItemsAppearing;
-	}
-	
-	/**
-	 * Limite les évènements considérés pour terminer la simulation à l'explosion
-	 * de bombes. Cette option n'a de sens que si elle est utilisée avec la méthode
-	 * {@link #simulate()} et non pas une de ses variantes. En effet, pour ces dernières
-	 * la condition d'arrêt et soit non-évènementielle ({@link #simulate(long)}) soit
-	 * dépend d'un sprite en particulier ({@link #simulate(AiHero)}).
-	 * 
-	 * @param simulateItemsAppearing
-	 * 		Si vrai, uniquement les explosions seront considérées comme 
-	 * 		des évènements pertinents dans {@link #simulate()}. 
-	 */
-	public void setConsiderExplosionsOnly(boolean considerExplosionsOnly)
-	{	this.considerExplosionsOnly = considerExplosionsOnly;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -211,6 +194,7 @@ public class AiModel
 		boolean result = false;
 		AiSimHero simHero;
 		long totalDuration = 0;
+		duration = 0;
 		AiSimZone previousZone = current;
 		simHero = current.getSpriteById(hero);
 
@@ -244,6 +228,49 @@ public class AiModel
 	}
 	
 	/**
+	 * Effectue des simulations, en gardant pour chaque sprite l'action courante,
+	 * et ce jusqu'à ce que la prochaine explosion. Plus exactement, la simulation
+	 * s'arrête lorsque le feu actuellement contenu dans la zone disparait. S'il
+	 * n'y a pas encore de feu, elle s'arrête quand le prochain feu disparait.<br/>
+	 * Cette méthode est particulièrement utile quand on veut savoir quel sera
+	 * l'état estimé de la zone après l'explosion de la prochaine bombe.
+	 * <b>Attention :</b> s'il n'y a ni bombe ni feu dans la zone courante,
+	 * la simulation s'arrête tout de suite (afin de ne pas boucler à l'infini).
+	 */
+	public void simulateUntilFire()
+	{	// init
+		long totalDuration = 0;
+		duration = 0;
+		AiSimZone previousZone = current;
+
+		// only if there's at least one bomb or fire in the current zone
+		if(!current.getBombs().isEmpty() || !current.getFires().isEmpty())
+		{	boolean found;
+			do
+			{	// simulate
+				simulate();
+				
+				// update total duration
+				totalDuration = totalDuration + duration;
+				
+				// check if the limit sprites contain some fire
+				Iterator<AiSimSprite> it = limitSprites.iterator();
+				found = false;
+				while(!found && it.hasNext())
+				{	AiSimSprite sprite = it.next();
+					found = sprite instanceof AiSimFire;
+				}
+			}
+			while(!found || duration==0);
+			
+			// update duration to reflect the whole process
+			duration = totalDuration;
+			// same thing with the previous zone
+			previous = previousZone;
+		}
+	}
+	
+	/**
 	 * Effectue une simulation pour la durée spécifiée.
 	 * La zone obtenue est accessible par {@link #getCurrentZone}.
 	 * 
@@ -254,6 +281,7 @@ public class AiModel
 	{	// init
 		long totalDuration = 0;
 		previous = current;
+		duration = 0;
 		
 		while(totalDuration<requestedDuration)
 		{	// create a copy of the current zone
@@ -309,7 +337,8 @@ public class AiModel
 	 * avec {@link #getDuration}.
 	 */
 	public void simulate()
-	{	// create a copy of the current zone
+	{	duration = 0;
+		// create a copy of the current zone
 		previous = current;
 		current = new AiSimZone(previous);
 		
@@ -363,10 +392,7 @@ if(sprite instanceof AiSimBomb)
 				// a zero change time means there's nothing to do 
 				// (e.g.: moving towards an obstacle) and should therefore be ignored
 				if(changeTime>0)
-				{	// check if the focus is on fire only
-					// (the state change for fire is necessarily when it disappears)
-					if(!considerExplosionsOnly || sprite instanceof AiSimFire)
-					// new min time
+				{	// new min time
 					if(changeTime<duration)
 					{	duration = changeTime;
 						limitSprites.clear();
