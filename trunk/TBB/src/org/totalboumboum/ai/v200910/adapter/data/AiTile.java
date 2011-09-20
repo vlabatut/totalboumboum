@@ -119,7 +119,7 @@ public class AiTile
 	 * initialise les num�ros de ligne et colonne de cette case 
 	 */
 	private void initTileLocation()
-	{	line = tile.getLine();
+	{	line = tile.getRow();
 		col = tile.getCol();
 	}
 
@@ -440,7 +440,7 @@ public class AiTile
 	{	List<Direction> directions = Direction.getPrimaryValues();
 		for(Direction direction: directions)
 		{	Tile neighbor = tile.getNeighbor(direction);
-			int line = neighbor.getLine();
+			int line = neighbor.getRow();
 			int col = neighbor.getCol();
 			AiTile aiNeighbor = getZone().getTile(line,col);
 			neighbors.put(direction,aiNeighbor);

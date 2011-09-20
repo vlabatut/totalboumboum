@@ -34,7 +34,7 @@ import org.totalboumboum.ai.v200910.adapter.path.astar.successor.SuccessorCalcul
 
 /**
  * 
- * Représente un noeud dans l'arbre de recherche développ� par l'algorithme A*
+ * Représente un noeud dans l'arbre de recherche développé par l'algorithme A*
  *  
  * @author Vincent Labatut
  *

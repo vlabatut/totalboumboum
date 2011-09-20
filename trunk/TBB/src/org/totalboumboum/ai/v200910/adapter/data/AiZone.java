@@ -364,7 +364,7 @@ public class AiZone
 	 */
 	public AiTile getTile(double x, double y)
 	{	Tile tile = level.getTile(x, y);
-		int line = tile.getLine();
+		int line = tile.getRow();
 		int col = tile.getCol();
 		AiTile result = matrix[line][col];
 		return result;
@@ -1206,7 +1206,7 @@ public class AiZone
 	 * @return	la version normalis�e de line
 	 */
 	public int normalizePositionLine(int line)
-	{	return level.normalizePositionLine(line);
+	{	return level.normalizePositionRow(line);
 	}
 	
 	/////////////////////////////////////////////////////////////////

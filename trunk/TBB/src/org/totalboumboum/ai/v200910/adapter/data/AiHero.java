@@ -95,7 +95,7 @@ public class AiHero extends AiSprite<Hero>
 	}
 	
 	/**
-	 * renvoie le nombre de bombes posées par le personnage à ce moment-l�
+	 * renvoie le nombre de bombes posées par le personnage à ce moment-là
 	 * 
 	 * @return	nombre de bombes posées
 	 */
