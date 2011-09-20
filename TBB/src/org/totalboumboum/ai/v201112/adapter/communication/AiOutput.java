@@ -133,7 +133,7 @@ public class AiOutput
 	}
 	
 	/**
-	 * modifie la couleur d'une case, qui sera affich�e
+	 * modifie la couleur d'une case, qui sera affichée
 	 * en transparence par dessus la zone de jeu.
 	 * La valeur null correspond à une absence de couleur.
 	 * 
@@ -149,7 +149,7 @@ public class AiOutput
 	}
 
 	/**
-	 * modifie la couleur d'une case, qui sera affich�e
+	 * modifie la couleur d'une case, qui sera affichée
 	 * en transparence par dessus la zone de jeu.
 	 * La valeur null correspond à une absence de couleur.
 	 * 
@@ -177,7 +177,7 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// TEXTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** détermine si le texte sera affich� en normalement ou en gras */
+	/** détermine si le texte sera affiché en normalement ou en gras */
 	private boolean bold = false;
 	/** texte à afficher sur les cases de la zone de jeu */
 	private List<String> tileTexts[][];
