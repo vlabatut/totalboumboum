@@ -27,6 +27,8 @@ import java.util.List;
 import org.totalboumboum.ai.v201112.adapter.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
+import org.totalboumboum.ai.v201112.adapter.data.AiState;
+import org.totalboumboum.ai.v201112.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.ai.v201112.adapter.model.AiModel;
@@ -230,62 +232,63 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	private void developNode() throws StopRequestException
 	{	ai.checkInterruption();
 		
-		// init
 		children = new ArrayList<DybrefNode>();
-		List<Direction> directions = Direction.getPrimaryValues();
-		directions.add(Direction.NONE);
-		
-		// pour chaque déplacement possible (y compris l'attente)
-		for(Direction direction: directions)
-		{	// on récupère la case cible
-			AiTile targetTile = tile.getNeighbor(direction);
+		if(tile.isCrossableBy(hero))
+		{	List<Direction> directions = Direction.getPrimaryValues();
+			directions.add(Direction.NONE);
 			
-			// si celle-ci est traversable, on la traite
-			if(targetTile.isCrossableBy(hero))
-			{	// on applique le modèle pour obtenir la zone résultant de l'action
+			// pour chaque déplacement possible (y compris l'attente)
+			for(Direction direction: directions)
+			{	// on récupère la case cible
+				AiTile targetTile = tile.getNeighbor(direction);
+				
+				// on applique le modèle pour obtenir la zone résultant de l'action
 				AiModel model = new AiModel(zone);
 				model.applyChangeHeroDirection(hero,direction);
-				boolean safe = model.simulate(hero);
+				boolean safe;
+				if(direction==Direction.NONE)
+				{	model.simulateUntilFire();
+					AiZone futureZone = model.getCurrentZone();
+					AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
+					if(futureHero==null)
+						safe = false;
+					else
+					{	AiState futureState = futureHero.getState();
+						AiStateName futureName = futureState.getName();
+						safe = futureName==AiStateName.FLYING || futureName==AiStateName.MOVING || futureName==AiStateName.STANDING;
+					}
+				}
+				else
+					safe = model.simulate(hero);
 				long duration = model.getDuration();
-// TODO attente : faire un setTruc sur le modèle
-// NOTE p-ê répéter la simulation jusqu'à ce que la bombe soit prêt du perso qui attend ?
-
-
-				// si le joueur est encore vivant dans cette zone 
-				// (ce qui est le cas, en théorie, puisque la case était traversable)
-				if(safe)
-				{	// on récupère la nouvelle case occupée par le personnage dans la nouvelle zone
+	
+				// si le joueur est encore vivant dans cette zone et si l'action a bien eu lieu
+				if(safe && duration>0)
+				{	// on récupère la nouvelle case occupée par le personnage
 					AiZone futureZone = model.getCurrentZone();
 					AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
 					AiTile futureTile = futureHero.getTile();
 					
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
-					// (là encore, en théorie la case était traversable, donc ça devrait être ok)=
 					if(futureTile.equals(targetTile))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						DybrefNode node = new DybrefNode(futureZone,futureTile,parent);
+// TODO faut ajouter le temps. p-ê màj d'autres champs aussi (?)
+// TODO tester si la limite temps==0 est prise en cpte dans simulation héro et simulation feu
+// TODO optimisation >> on ne considère l'attente que s'il reste du feu ou des bombes dans la case...
 						children.add(node);
 					}
-					// si le joueur n'est plus vivant dans la zone obtenue : bug
-					else
-					{	// TODO debug
-						System.err.println("Erreur dans dybref : case finalement pas traversable");
-					}
+					// si la case n'est pas la bonne : 
+					// la case ciblée n'était pas traversable et l'action est à ignorer
 				}
-				// si le joueur n'est plus vivant dans la zone obtenue : bug
-				else
-				{	// TODO debug
-					System.err.println("Erreur dans dybref : personnage a finalement brûlé");
-				}
-
+				// si le joueur n'est plus vivant dans la zone obtenue : 
+				// la case ciblée n'est pas sûre et est ignorée
 			}
 			
-			// si la case n'est pas traversable, inutile de la traiter
+			// s'il n'y a aucun enfant pour ce noeud (i.e. on ne peut même pas y rester)
+			// alors la case courante n'est pas sûre et on en informe le noeud parent.
+			parent.childFailed(this);
 		}
-		
-		// s'il n'y a aucun enfant pour ce noeud (i.e. on ne peut même pas y rester)
-		// alors la case courante n'est pas sûre et on en informe le noeud parent.
-		parent.childFailed(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////
