@@ -55,7 +55,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * @author Vincent Labatut
  *
  * @param <V>	
- * 		le type de donnée renvoy�e par l'IA (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
+ * 		le type de donnée renvoyée par l'IA (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
  */
 
 public abstract class AbstractAiManager<V>
@@ -91,10 +91,10 @@ public abstract class AbstractAiManager<V>
     private boolean paused = false;
     
     /**
-     * renvoie l'IA g�r�e par cette classe.
+     * renvoie l'IA gérée par cette classe.
      * 
      * @return	
-     * 		l'IA g�r�e par cette classe sous la forme d'un Callable
+     * 		l'IA gérée par cette classe sous la forme d'un Callable
      */
     public final Callable<V> getAi()
     {	return ai;    	
@@ -270,7 +270,7 @@ public abstract class AbstractAiManager<V>
 	}
 		
 	/**
-	 * renvoie le joueur contr�l� par l'IA g�r�e
+	 * renvoie le joueur contr�l� par l'IA gérée
 	 * 
 	 * @return	
 	 * 		un objet représentant le joueur contr�l� par l'IA
@@ -288,11 +288,11 @@ public abstract class AbstractAiManager<V>
 	public abstract void updatePercepts();
 	
 	/**
-	 * méthode utilisée pour convertir la valeur renvoy�e par l'ia 
+	 * méthode utilisée pour convertir la valeur renvoyée par l'ia 
 	 * en un évènement standard traitable par le moteur du jeu.
 	 * 
 	 * @param value	
-	 * 		la valeur renvoy�e par l'ia, qui est à convertir
+	 * 		la valeur renvoyée par l'ia, qui est à convertir
 	 * @return	
 	 * 		le résultat de la conversion sous la forme d'un évènement à envoyer au sprite contr�l� par l'IA
 	 */
