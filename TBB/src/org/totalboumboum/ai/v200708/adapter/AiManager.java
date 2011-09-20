@@ -113,7 +113,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
  		ownPosition = new int[2];
  		Tile tile = sprite.getTile();
         ownPosition[0] = tile.getCol();
-        ownPosition[1] = tile.getLine();
+        ownPosition[1] = tile.getRow();
         // propriétés du joueur
         {	// bomb range
         	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
@@ -198,7 +198,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	    		else if(temp.getBombs().size()>0)
 	    		{	zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_BOMB;
 	    			Bomb bomb = temp.getBombs().get(0);
-	    			int tempBombData[] = {temp.getCol(),temp.getLine(),bomb.getFlameRange()};
+	    			int tempBombData[] = {temp.getCol(),temp.getRow(),bomb.getFlameRange()};
 	    			bombs.add(tempBombData);
 	    		}
 	    		// feu
@@ -265,7 +265,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 			{	// position
 				Tile t = tempPlayer.getSprite().getTile();
 				int tempX = t.getCol();
-				int tempY = t.getLine();
+				int tempY = t.getRow();
 				// direction
 				Direction tempDir = tempPlayer.getSprite().getActualDirection();
 				int tempDirAI;
