@@ -65,11 +65,11 @@ public class LevelTools
 		addBorder(level,2,1,1,1);
 		addSoftwalls(level);
 		insertCol(level,0,true,true,true,true,true);
-		insertLine(level,0,true,true,true,true,true);
+		insertRow(level,0,true,true,true,true,true);
 		insertCol(level,level.getLevelInfo().getGlobalWidth()/2,true,true,true,true,true);
-		insertLine(level,level.getLevelInfo().getGlobalHeight()/2,true,true,true,true,true);
+		insertRow(level,level.getLevelInfo().getGlobalHeight()/2,true,true,true,true,true);
 		insertCol(level,level.getLevelInfo().getGlobalWidth()-1,true,true,true,true,true);
-		insertLine(level,level.getLevelInfo().getGlobalHeight()-1,true,true,true,true,true);
+		insertRow(level,level.getLevelInfo().getGlobalHeight()-1,true,true,true,true,true);
 		saveLevel(level);
 				
 /*		// open an existing level and replace the background
@@ -81,17 +81,17 @@ public class LevelTools
 		setBackground(level);
 		saveLevel(level);
 */		
-/*		// open an existing level and add/remove columns/lines
+/*		// open an existing level and add/remove columns/rows
 		String pack = "tournament201011";
 		String folder = "level";
 		XmlTools.init();
 		HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,folder);
-		removeLine(level,12,true,true,true,true,true);
-		removeLine(level,12,true,true,true,true,true);
-		removeLine(level,12,true,true,true,true,true);
-		removeLine(level,0,true,true,true,true,true);
-		removeLine(level,0,true,true,true,true,true);
-		removeLine(level,0,true,true,true,true,true);
+		removeRow(level,12,true,true,true,true,true);
+		removeRow(level,12,true,true,true,true,true);
+		removeRow(level,12,true,true,true,true,true);
+		removeRow(level,0,true,true,true,true,true);
+		removeRow(level,0,true,true,true,true,true);
+		removeRow(level,0,true,true,true,true,true);
 		insertCol(level,0,true,true,true,true,true);
 		insertCol(level,23,true,true,true,true,true);
 		saveLevel(level);
@@ -172,14 +172,14 @@ public class LevelTools
 		levelInfo.setVisibleHeight(height);
 		levelInfo.setVisibleWidth(width);
 		levelInfo.setVisiblePositionLeftCol(0);
-		levelInfo.setVisiblePositionUpLine(0);
+		levelInfo.setVisiblePositionUpRow(0);
 		result.setLevelInfo(levelInfo);
 		
 		// init zone
 		Zone zone = new Zone(width,height);
-		for(int line=0;line<height;line++)
+		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
-			{	ZoneTile tile = new ZoneTile(line,col);
+			{	ZoneTile tile = new ZoneTile(row,col);
 				tile.setFloor("regular");
 				zone.addTile(tile);
 			}
@@ -206,7 +206,7 @@ public class LevelTools
 	 * @param left
 	 * 		column of the left players
 	 * @param up
-	 * 		line of the top players
+	 * 		row of the top players
 	 * @param right
 	 * 		column of the right players
 	 * @param down
@@ -217,27 +217,27 @@ public class LevelTools
 		{	PlayerLocation[] loc = new PlayerLocation[i];
 			for(int j=0;j<i;j++)
 			{	int col = 0;
-				int line = 0;
+				int row = 0;
 				switch(j)
 				{	case 0: 
 						col = left;
-						line = up;
+						row = up;
 						break;
 					case 1: 
 						col = right;
-						line = up;
+						row = up;
 						break;
 					case 2: 
 						col = left;
-						line = down;
+						row = down;
 						break;
 					case 3: 
 						col = right;
-						line = down;
+						row = down;
 						break;
 				}
 				loc[j] = new PlayerLocation();
-				loc[j].setLine(line);
+				loc[j].setRow(row);
 				loc[j].setCol(col);
 				loc[j].setNumber(j);
 			}
@@ -267,30 +267,30 @@ public class LevelTools
 		Zone zone = hollowLevel.getZone();
 		
 		// top border
-		for(int line=yMargin;line<yMargin+yThickness;line++)
+		for(int row=yMargin;row<yMargin+yThickness;row++)
 		{	for(int col=xMargin;col<width-xMargin;col++)
-			{	ZoneTile tile = zone.getTile(line,col);
+			{	ZoneTile tile = zone.getTile(row,col);
 //				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
 				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
 			}
 		}
 		// side borders
-		for(int line=yMargin+yThickness;line<height-yMargin;line++)
+		for(int row=yMargin+yThickness;row<height-yMargin;row++)
 		{	for(int col=xMargin;col<xMargin+xThickness;col++)
-			{	ZoneTile tile = zone.getTile(line,col);
+			{	ZoneTile tile = zone.getTile(row,col);
 //				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
 				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
 			}
 			for(int col=width-xMargin-xThickness;col<width-xMargin;col++)
-			{	ZoneTile tile = zone.getTile(line,col);
+			{	ZoneTile tile = zone.getTile(row,col);
 //				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
 				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
 			}
 		}
 		// bottom border
-		for(int line=height-yMargin-yThickness;line<height-yMargin;line++)
+		for(int row=height-yMargin-yThickness;row<height-yMargin;row++)
 		{	for(int col=xMargin;col<width-xMargin;col++)
-			{	ZoneTile tile = zone.getTile(line,col);
+			{	ZoneTile tile = zone.getTile(row,col);
 //				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"border");
 				tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");
 			}
@@ -298,7 +298,7 @@ public class LevelTools
 		
 		// center visible area on the upper left border corner 
 		levelInfo.setVisiblePositionLeftCol(xMargin+xThickness-1);
-		levelInfo.setVisiblePositionUpLine(yMargin+yThickness-1);
+		levelInfo.setVisiblePositionUpRow(yMargin+yThickness-1);
 		levelInfo.setVisibleWidth(width-2*xMargin-2*(xThickness-1));
 		levelInfo.setVisibleHeight(height-2*yMargin-2*(yThickness-1));
 		
@@ -339,9 +339,9 @@ public class LevelTools
 			{	String[] temp = f.getName().split("_");
 				if(temp.length==2)
 				{	try
-					{	int line = Integer.parseInt(temp[0]);
-						if(line>bgHeight)
-							bgHeight = line;
+					{	int row = Integer.parseInt(temp[0]);
+						if(row>bgHeight)
+							bgHeight = row;
 						int col = Integer.parseInt(temp[1]);
 						if(col>bgWidth)
 							bgWidth = col;
@@ -357,7 +357,7 @@ public class LevelTools
 		
 		// process bg upper-left corner
 		int height = levelInfo.getVisibleHeight();
-		int yCenter = levelInfo.getVisiblePositionUpLine()+height/2;
+		int yCenter = levelInfo.getVisiblePositionUpRow()+height/2;
 		int bgUp = yCenter - bgHeight/2;
 		int width = levelInfo.getVisibleWidth();
 		int xCenter = levelInfo.getVisiblePositionLeftCol()+width/2;
@@ -368,13 +368,13 @@ public class LevelTools
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(0);
 		nf.setMinimumIntegerDigits(2);
-		for(int line=0;line<bgHeight;line++)
+		for(int row=0;row<bgHeight;row++)
 		{	for(int col=0;col<=bgWidth;col++)
-			{	int l = bgUp+line;
+			{	int l = bgUp+row;
 				int c = bgLeft+col;
 				if(l>=0 && l<lvHeight && c>=0 && c<lvWidth)
-				{	ZoneTile tile = zone.getTile(bgUp+line,bgLeft+col);
-					String floorName = nf.format(line)+"_"+nf.format(col);
+				{	ZoneTile tile = zone.getTile(bgUp+row,bgLeft+col);
+					String floorName = nf.format(row)+"_"+nf.format(col);
 					File tempFile = new File(path+File.separator+floorName);
 					if(tempFile.exists())
 						tile.setFloor(floorName);
@@ -388,9 +388,9 @@ public class LevelTools
 		int height = zone.getGlobalHeight();
 		int width = zone.getGlobalWidth();
 		
-		for(int line=0;line<height;line++)
+		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
-			{	ZoneTile tile = zone.getTile(line,col);
+			{	ZoneTile tile = zone.getTile(row,col);
 				tile.setFloor("regular");
 			}
 		}
@@ -398,7 +398,7 @@ public class LevelTools
 	
 	/**
 	 * add the traditional grid structure to an empty level
-	 * i.e. hardwall on 1 column/line out of 2.
+	 * i.e. hardwall on 1 column/row out of 2.
 	 * 
 	 * @param hollowLevel
 	 * 		the level to be completed
@@ -407,17 +407,17 @@ public class LevelTools
 	{	// init
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		int height = levelInfo.getVisibleHeight();
-		int yCenter = levelInfo.getVisiblePositionUpLine()+height/2;
+		int yCenter = levelInfo.getVisiblePositionUpRow()+height/2;
 		int width = levelInfo.getVisibleWidth();		
 		int xCenter = levelInfo.getVisiblePositionLeftCol()+width/2;
 		Zone zone = hollowLevel.getZone();
 		
 		// put hardwalls
-		for(int line=0;line<height;line++)
-		{	if(line%2!=yCenter%2)
+		for(int row=0;row<height;row++)
+		{	if(row%2!=yCenter%2)
 			{	for(int col=0;col<width;col++)
 				{	if(col%2!=xCenter%2)
-					{	ZoneTile tile = zone.getTile(line,col);
+					{	ZoneTile tile = zone.getTile(row,col);
 						tile.setBlock("hardwalls"+Theme.GROUP_SEPARATOR+"regular");				
 					}
 				}
@@ -444,14 +444,14 @@ public class LevelTools
 		Players players = hollowLevel.getPlayers();
 		
 		// put hardwalls
-		for(int line=0;line<height;line++)
+		for(int row=0;row<height;row++)
 		{	for(int col=0;col<width;col++)
-			{	if(!players.isOccupied(line,col)
-					&& !players.isOccupied(line-1,col)
-					&& !players.isOccupied(line+1,col)
-					&& !players.isOccupied(line,col-1)
-					&& !players.isOccupied(line,col+1))
-				{	ZoneTile tile = zone.getTile(line,col);
+			{	if(!players.isOccupied(row,col)
+					&& !players.isOccupied(row-1,col)
+					&& !players.isOccupied(row+1,col)
+					&& !players.isOccupied(row,col-1)
+					&& !players.isOccupied(row,col+1))
+				{	ZoneTile tile = zone.getTile(row,col);
 					if(tile.getBlock()==null)
 						tile.setBlock(Theme.DEFAULT_GROUP+Theme.GROUP_SEPARATOR+"softwall");
 				}
@@ -460,48 +460,48 @@ public class LevelTools
 	}
 	
 	/**
-	 * insert a new line in order to make the zone taller.
+	 * insert a new row in order to make the zone taller.
 	 * the user can choose to slide only certain types
 	 * of sprites, or none of them.
 	 * 
 	 * @param hollowLevel
 	 * 		the level to be modified
-	 * @param line
-	 * 		the location of the new line
+	 * @param row
+	 * 		the location of the new row
 	 * @param moveFloors
-	 * 		whether the floor sprites should be moved to make room for the new line 
+	 * 		whether the floor sprites should be moved to make room for the new row 
 	 * @param moveBlocks
-	 * 		whether the block sprites should be moved to make room for the new line 
+	 * 		whether the block sprites should be moved to make room for the new row 
 	 * @param moveItems
-	 * 		whether the item sprites should be moved to make room for the new line 
+	 * 		whether the item sprites should be moved to make room for the new row 
 	 * @param moveBombs
-	 * 		whether the bomb sprites should be moved to make room for the new line 
+	 * 		whether the bomb sprites should be moved to make room for the new row 
 	 * @param moveVariables
-	 * 		whether the variable sprites should be moved to make room for the new line 
+	 * 		whether the variable sprites should be moved to make room for the new row 
 	 */
-	protected static void insertLine(HollowLevel hollowLevel, int line, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
+	protected static void insertRow(HollowLevel hollowLevel, int row, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
 	{	// update dimensions
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		int height = levelInfo.getGlobalHeight() + 1;
 		levelInfo.setGlobalHeight(height);
 		int width = levelInfo.getGlobalWidth();
 		int vHeight = levelInfo.getVisibleHeight();
-		int vUpLine = levelInfo.getVisiblePositionUpLine();
-		if(line>=vUpLine && line<=vUpLine+vHeight)
+		int vUpRow = levelInfo.getVisiblePositionUpRow();
+		if(row>=vUpRow && row<=vUpRow+vHeight)
 			levelInfo.setVisibleHeight(vHeight+1);
-		else if(line<vUpLine)
-			levelInfo.setVisiblePositionUpLine(vUpLine+1);
+		else if(row<vUpRow)
+			levelInfo.setVisiblePositionUpRow(vUpRow+1);
 		
 		// update zone
 		Zone zone = hollowLevel.getZone();
 		zone.setGlobalHeight(height);
-		// add new line
+		// add new row
 		for(int c=0;c<width;c++)
 		{	ZoneTile tile = new ZoneTile(height-1,c);			
 			zone.addTile(tile);
 		}
-		// move existing lines
-		for(int l=height-1;l>line;l--)
+		// move existing rows
+		for(int l=height-1;l>row;l--)
 		{	for(int c=0;c<width;c++)
 			{	ZoneTile tile1 = zone.getTile(l,c);
 				ZoneTile tile2 = zone.getTile(l-1,c);
@@ -527,9 +527,9 @@ public class LevelTools
 					tile1.setVariable(null);
 			}
 		}
-		// reinit line "line"
+		// reinit row "row"
 		for(int c=0;c<width;c++)
-		{	ZoneTile tile = zone.getTile(line,c);
+		{	ZoneTile tile = zone.getTile(row,c);
 			tile.setFloor("regular");
 			tile.setBlock(null);
 			tile.setBomb(null);
@@ -541,51 +541,51 @@ public class LevelTools
 		Players players = hollowLevel.getPlayers();
 		for(PlayerLocation[] pls: players.getLocations().values())
 		{	for(PlayerLocation pl: pls)
-			{	int temp = pl.getLine();
-				if(line<=temp)
-					pl.setLine(temp+1);
+			{	int temp = pl.getRow();
+				if(row<=temp)
+					pl.setRow(temp+1);
 			}
 		}
 	}
 
 	/**
-	 * remove the specified line in order to make the zone narrower.
+	 * remove the specified row in order to make the zone narrower.
 	 * the user can choose to slide only certain types
 	 * of sprites, or none of them.
 	 * 
 	 * @param hollowLevel
 	 * 		the level to be modified
-	 * @param line
-	 * 		the location of the line to be removed
+	 * @param row
+	 * 		the location of the row to be removed
 	 * @param moveFloors
-	 * 		whether the floor sprites should be moved to make room for the new line 
+	 * 		whether the floor sprites should be moved to make room for the new row 
 	 * @param moveBlocks
-	 * 		whether the block sprites should be moved to make room for the new line 
+	 * 		whether the block sprites should be moved to make room for the new row 
 	 * @param moveItems
-	 * 		whether the item sprites should be moved to make room for the new line 
+	 * 		whether the item sprites should be moved to make room for the new row 
 	 * @param moveBombs
-	 * 		whether the bomb sprites should be moved to make room for the new line 
+	 * 		whether the bomb sprites should be moved to make room for the new row 
 	 * @param moveVariables
-	 * 		whether the variable sprites should be moved to make room for the new line 
+	 * 		whether the variable sprites should be moved to make room for the new row 
 	 */
-	protected static void removeLine(HollowLevel hollowLevel, int line, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
+	protected static void removeRow(HollowLevel hollowLevel, int row, boolean moveFloors, boolean moveBlocks, boolean moveItems, boolean moveBombs, boolean moveVariables)
 	{	// update dimensions
 		LevelInfo levelInfo = hollowLevel.getLevelInfo();
 		int height = levelInfo.getGlobalHeight() - 1;
 		levelInfo.setGlobalHeight(height);
 		int width = levelInfo.getGlobalWidth();
 		int vHeight = levelInfo.getVisibleHeight();
-		int vUpLine = levelInfo.getVisiblePositionUpLine();
-		if(line>=vUpLine && line<=vUpLine+vHeight)
+		int vUpRow = levelInfo.getVisiblePositionUpRow();
+		if(row>=vUpRow && row<=vUpRow+vHeight)
 			levelInfo.setVisibleHeight(vHeight-1);
-		else if(line<vUpLine)
-			levelInfo.setVisiblePositionUpLine(vUpLine-1);
+		else if(row<vUpRow)
+			levelInfo.setVisiblePositionUpRow(vUpRow-1);
 		
 		// update zone
 		Zone zone = hollowLevel.getZone();
 		zone.setGlobalHeight(height);
-		// move existing lines
-		for(int l=line;l<height;l++)
+		// move existing rows
+		for(int l=row;l<height;l++)
 		{	for(int c=0;c<width;c++)
 			{	ZoneTile tile1 = zone.getTile(l,c);
 				ZoneTile tile2 = zone.getTile(l+1,c);
@@ -611,7 +611,7 @@ public class LevelTools
 					tile1.setVariable(null);
 			}
 		}
-		// remove line
+		// remove row
 		for(int c=0;c<width;c++)
 		{	ZoneTile tile = zone.getTile(height,c);			
 			zone.removeTile(tile);
@@ -621,9 +621,9 @@ public class LevelTools
 		Players players = hollowLevel.getPlayers();
 		for(PlayerLocation[] pls: players.getLocations().values())
 		{	for(PlayerLocation pl: pls)
-			{	int temp = pl.getLine();
-				if(line<=temp)
-					pl.setLine(temp-1);
+			{	int temp = pl.getRow();
+				if(row<=temp)
+					pl.setRow(temp-1);
 			}
 		}
 	}

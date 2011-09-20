@@ -50,7 +50,7 @@ public class Players implements Serializable
 	{	return locations;	
 	}
 	
-	public boolean isOccupied(int line, int col)
+	public boolean isOccupied(int row, int col)
 	{	boolean result = false;
 		Iterator<PlayerLocation[]> it = locations.values().iterator();
 		while(!result && it.hasNext())
@@ -58,7 +58,7 @@ public class Players implements Serializable
 			int i = 0;
 			while(!result && i<temp.length)
 			{	PlayerLocation pl = temp[i];
-				result = pl.getLine()==line && pl.getCol()==col;
+				result = pl.getRow()==row && pl.getCol()==col;
 				i++;
 			}
 		}

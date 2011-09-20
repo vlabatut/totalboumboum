@@ -132,10 +132,10 @@ public class PlayersLoader
 		int col = Integer.valueOf(str);
 		result.setCol(col);
 		
-		// line
+		// row
 		str = root.getAttribute(XmlNames.LINE).getValue().trim();
-		int line = Integer.valueOf(str);
-		result.setLine(line);
+		int row = Integer.valueOf(str);
+		result.setRow(row);
     }
     
     @SuppressWarnings("unchecked")

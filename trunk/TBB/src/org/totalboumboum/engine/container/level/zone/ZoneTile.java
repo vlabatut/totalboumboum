@@ -32,8 +32,8 @@ public class ZoneTile implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	public ZoneTile(int line, int col)
-	{	this.line = line;
+	public ZoneTile(int row, int col)
+	{	this.row = row;
 		this.col = col;
 	}
 	
@@ -50,19 +50,19 @@ public class ZoneTile implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LINE			/////////////////////////////////////////////
+	// ROW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int line;
+	private int row;
 	
-	public int getLine()
-	{	return line;
+	public int getRow()
+	{	return row;
 	}
-	public void setLine(int line)
-	{	this.line = line;
+	public void setRow(int row)
+	{	this.row = row;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LINE			/////////////////////////////////////////////
+	// VARIABLE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String variable = null;
 

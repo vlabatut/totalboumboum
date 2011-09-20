@@ -78,12 +78,12 @@ public class ZoneSaver
     	// create and init all elements
     	int width = zone.getGlobalWidth();
     	int height = zone.getGlobalHeight();
-    	for(int line=0;line<height;line++)
-    	{	Element lineElement = new Element(XmlNames.LINE);
-			lineElement.setAttribute(XmlNames.POSITION,Integer.toString(line));
-			result.addContent(lineElement);
+    	for(int row=0;row<height;row++)
+    	{	Element rowElement = new Element(XmlNames.LINE);
+			rowElement.setAttribute(XmlNames.POSITION,Integer.toString(row));
+			result.addContent(rowElement);
     		for(int col=0;col<width;col++)
-	    	{	ZoneTile tile = zone.getTile(line,col);
+	    	{	ZoneTile tile = zone.getTile(row,col);
     			// process contant terms
         		String floor = tile.getFloor();
             	String block = tile.getBlock();
@@ -98,8 +98,8 @@ public class ZoneSaver
         			variableElement.setAttribute(XmlNames.NAME,variable);
         			tileElement.addContent(variableElement);
         		}
-        		// set line element
-        		lineElement.addContent(tileElement);	    	}
+        		// set row element
+        		rowElement.addContent(tileElement);	    	}
     	}
  
     	return result;

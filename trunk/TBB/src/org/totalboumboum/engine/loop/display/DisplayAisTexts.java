@@ -105,10 +105,10 @@ public class DisplayAisTexts implements Display
 					g.setFont(font);
 					FontMetrics metrics = g.getFontMetrics(font);
 					List<String>[][] texts = aiMgr.getTileTexts();
-					for(int line=0;line<level.getGlobalHeight();line++)
+					for(int row=0;row<level.getGlobalHeight();row++)
 					{	for(int col=0;col<level.getGlobalWidth();col++)
-						{	Tile tile = level.getTile(line,col);
-							List<String> textList = texts[line][col];
+						{	Tile tile = level.getTile(row,col);
+							List<String> textList = texts[row][col];
 							if(textList!=null && !textList.isEmpty())
 							{	List<Integer> xList = new ArrayList<Integer>();
 								List<Integer> boxHeights = new ArrayList<Integer>();

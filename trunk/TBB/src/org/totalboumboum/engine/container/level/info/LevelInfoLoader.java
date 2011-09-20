@@ -155,10 +155,10 @@ public class LevelInfoLoader
     }
 	
 	private static void loadVisiblePositionElement(Element root, LevelInfo result)
-	{	// up line
-    	String upLineStr = root.getAttribute(XmlNames.UPLINE).getValue().trim();
-		int upLine = Integer.parseInt(upLineStr);
-		result.setVisiblePositionUpLine(upLine);
+	{	// up row
+    	String upRowStr = root.getAttribute(XmlNames.UPLINE).getValue().trim();
+		int upRow = Integer.parseInt(upRowStr);
+		result.setVisiblePositionUpRow(upRow);
 		// left column
 		String leftColStr = root.getAttribute(XmlNames.LEFTCOL).getValue().trim();
 		int leftCol = Integer.parseInt(leftColStr);

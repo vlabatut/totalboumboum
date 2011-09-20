@@ -125,12 +125,12 @@ public class DisplaySpritesPositions implements Display
 				{	if(m)
 					{	// coordonnées
 						Tile tile = sprite.getTile();
-						int line = tile.getLine();
+						int row = tile.getRow();
 						int col = tile.getCol();
 						Font font = new Font("Dialog", Font.BOLD, 12);
 						g.setFont(font);
 						FontMetrics metrics = g.getFontMetrics(font);
-						String text = "("+line+","+col+")";
+						String text = "("+row+","+col+")";
 						Rectangle2D box = metrics.getStringBounds(text, g);
 						int x = (int)Math.round(sprite.getCurrentPosX()-box.getWidth()/2);
 						int y = (int)Math.round(sprite.getCurrentPosY()+box.getHeight()/2);

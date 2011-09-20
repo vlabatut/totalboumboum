@@ -156,7 +156,7 @@ public class FullTrajectoryManager extends TrajectoryManager
 
 	/**
 	 * si on a d�passé le forcedPositionDuration, il faut :  
-	 * 		- calculer la position virtuelle à ce temps l� (ce qui implique de calculer le point de départ en référence)
+	 * 		- calculer la position virtuelle à ce temps là (ce qui implique de calculer le point de départ en référence)
 	 * 		- vérifier si elle colle à la position forc�e
 	 * 		- si elle ne colle pas : la corriger
 	 * si on ne l'a pas encore d�passée : à peu près pareil
@@ -226,8 +226,8 @@ public class FullTrajectoryManager extends TrajectoryManager
 	 * 1) on calcule la position relative originale (XML) à t=forcedTime
 	 * 2) on l'utilise pour calculer la position absolue originale à t=forcedTime
 	 * 3) on relativise cette position par rapport à la référence courante : tile ou boundToSprite
-	 * 4) on calcule l'�cart avec la forcedPosition
-	 * cet �cart sera r�pandu sur le début de la trajectoire correspondant à forcedTime 
+	 * 4) on calcule l'écart avec la forcedPosition
+	 * cet écart sera r�pandu sur le début de la trajectoire correspondant à forcedTime 
 	 */
 	private void processForcedShifts(double initX, double initY, double initZ)
 	{	forcedTotalXShift = 0;
@@ -430,7 +430,7 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 			if(moveDir!=Direction.NONE)			
 			{	
 //if(sprite instanceof Hero)
-//	System.out.println("position:"+previousPosX+","+previousPosY+" ("+sprite.getTile().getLine()+","+sprite.getTile().getCol()+") -> "+currentPosX+","+currentPosY+" ("+sprite.getLevel().getTile(currentPosX,currentPosY).getLine()+","+sprite.getLevel().getTile(currentPosX,currentPosY).getCol()+") ["+currentDirection+"]");	
+//	System.out.println("position:"+previousPosX+","+previousPosY+" ("+sprite.getTile().getRow()+","+sprite.getTile().getCol()+") -> "+currentPosX+","+currentPosY+" ("+sprite.getLevel().getTile(currentPosX,currentPosY).getRow()+","+sprite.getLevel().getTile(currentPosX,currentPosY).getCol()+") ["+currentDirection+"]");	
 
 				double dist = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
 //if(sprite instanceof Hero)

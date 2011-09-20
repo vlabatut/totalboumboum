@@ -146,11 +146,11 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 			
 			// extract info from event
 			int col = event.getCol();
-			int line = event.getLine();
+			int row = event.getRow();
 			int id = event.getSpriteId();
 			
 			// location
-			Tile tile = level.getTile(line,col);
+			Tile tile = level.getTile(row,col);
 			
 			// sprite
 			Profile profile = i.next();

@@ -58,15 +58,15 @@ public class PlayerLocation implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LINE				/////////////////////////////////////////////
+	// ROW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int line;
+	private int row;
 
-	public int getLine()
-	{	return line;
+	public int getRow()
+	{	return row;
 	}
 	
-	public void setLine(int line)
-	{	this.line = line;
+	public void setRow(int row)
+	{	this.row = row;
 	}
 }
