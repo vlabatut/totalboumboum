@@ -772,7 +772,7 @@ final class AiSimZone extends AiZone
 	}
 	
 	/**
-	 * permet de diminuer le nombre d'items cach�s,
+	 * permet de diminuer le nombre d'items cachés,
 	 * lors de la simulation
 	 * 
 	 * @param type

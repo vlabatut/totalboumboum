@@ -93,20 +93,38 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	// PARAMETERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** fait apparaître aléatoirement des items lors de la destruction des murs */
+	/** Fait apparaître aléatoirement des items lors de la destruction des murs */
 	private boolean simulateItemsAppearing = false;
+	/** Considère uniquement les évènements correspondant aux explosions */
+	private boolean considerExplosionsOnly = false;
 
 	/**
-	 * détermine si l'apparition d'items sera simul�e lors de la destruction de murs.
-	 * à noter que la probabilit� d'apparition dépends du nombre de murs restants
-	 * et d'items cach�s restant à l'instant de l'explosion.
-	 * de même, le type d'item dépend de la distribution des items restants
+	 * Détermine si l'apparition d'items sera simulée lors de la destruction de murs.
+	 * à noter que la probabilité d'apparition dépends du nombre de murs restants
+	 * et d'items cachés restant à l'instant de l'explosion.
+	 * De même, le type d'item dépend de la distribution des items restants.<br/>
+	 * Par défaut, cette option est désactivée.
 	 * 
 	 * @param simulateItemsAppearing
-	 * 		si vrai, les items apparaitront lors de la simulation
+	 * 		Si vrai, les items apparaitront lors de la simulation.
 	 */
 	public void setSimulateItemsAppearing(boolean simulateItemsAppearing)
 	{	this.simulateItemsAppearing = simulateItemsAppearing;
+	}
+	
+	/**
+	 * Limite les évènements considérés pour terminer la simulation à l'explosion
+	 * de bombes. Cette option n'a de sens que si elle est utilisée avec la méthode
+	 * {@link #simulate()} et non pas une de ses variantes. En effet, pour ces dernières
+	 * la condition d'arrêt et soit non-évènementielle ({@link #simulate(long)}) soit
+	 * dépend d'un sprite en particulier ({@link #simulate(AiHero)}).
+	 * 
+	 * @param simulateItemsAppearing
+	 * 		Si vrai, uniquement les explosions seront considérées comme 
+	 * 		des évènements pertinents dans {@link #simulate()}. 
+	 */
+	public void setConsiderExplosionsOnly(boolean considerExplosionsOnly)
+	{	this.considerExplosionsOnly = considerExplosionsOnly;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -158,14 +176,14 @@ public class AiModel
 	/////////////////////////////////////////////////////////////////
 	// DURATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** dur�e écoulée entre les zones previous et current */ 
+	/** durée écoulée entre les zones previous et current */ 
 	private long duration;
 	
 	/**
-	 * renvoie la dur�e écoulée entre les zones previous et current
+	 * renvoie la durée écoulée entre les zones previous et current
 	 * 
 	 * @return	
-	 * 		un entier long représentant une dur�e
+	 * 		un entier long représentant une durée
 	 */
 	public long getDuration()
 	{	return duration;
@@ -175,18 +193,18 @@ public class AiModel
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * effectue des simulations, en gardant pour chaque sprite l'action courante,
-	 * et ce jusqu'à ce que le personnage spécifié ait chang� d'état.
-	 * Cette méthode est particuliérement utile quand on veut savoir quel sera
-	 * l'état estim� de la zone quand le personnage que l'on controle passera
-	 * dans la case suivante.
-	 * <b>Attention:</b> le changement d'état peut aussi être d� au fait que le 
+	 * Effectue des simulations, en gardant pour chaque sprite l'action courante,
+	 * et ce jusqu'à ce que le personnage spécifié ait changé d'état.
+	 * Cette méthode est particulièrement utile quand on veut savoir quel sera
+	 * l'état estimé de la zone quand le personnage que l'on contrôle passera
+	 * dans la case suivante.<br/>
+	 * <b>Attention:</b> le changement d'état peut aussi être dû au fait que le 
 	 * personnage a commencé à brûler.
 	 * 
 	 * @param hero
-	 * 		le personnage sur lequel porte la condition
+	 * 		Le personnage sur lequel porte la condition
 	 * @return	
-	 * 		vrai si le changement d'état est d� à un déplacement (et pas à un accident)
+	 * 		Renvoie {@code true} ssi le changement d'état est dû à un déplacement (et pas à un accident).
 	 */
 	public boolean simulate(AiHero hero)
 	{	// init
@@ -226,11 +244,11 @@ public class AiModel
 	}
 	
 	/**
-	 * effectue une simulation pour la dur�e spécifiée.
-	 * la zone obtenue est accessible par getCurrentZone.
+	 * Effectue une simulation pour la durée spécifiée.
+	 * La zone obtenue est accessible par {@link #getCurrentZone}.
 	 * 
 	 * @param requestedDuration
-	 * 		la dur�e de la simulation à effectuer
+	 * 		La durée de la simulation à effectuer
 	 */
 	public void simulate(long requestedDuration)
 	{	// init
@@ -269,25 +287,26 @@ public class AiModel
 	}
 	
 	/**
-	 * calcule l'état suivant de la zone si les états spécifiés en paramètres
-	 * sont appliqu�s à la zone courante. en l'absence d'état spécifié, le sprite
-	 * continue à faire ce qu'il faisait déjà (brûler, se déplacer, etc.).
-	 * par cons�quent, la map contenant les états spécifiés peut être vide. 
+	 * Calcule l'état suivant de la zone. Les sprites
+	 * continuent à faire ce qu'il faisaient déjà (brûler, se déplacer, etc.).<br/> 
 	 * La méthode renvoie l'état obtenu à la fin du prochain évènement 
 	 * (i.e. celui qui se termine le plus vite). Les évènement considérés sont :
-	 * 		- la disparition d'un sprite (ex : une bombe qui a explosé)
-	 * 		- l'apparition d'un sprite (ex : un item qui apparait à la suite de l'explosion d'un mur)
-	 * 		- un changement d'état (ex : un mur qui commence à brûler)
-	 * 		- un changement de case (ex : un joueur passant d'une case à une autre)
-	 * 		- la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)
-	 * Les modifications sont appliqu�es aux zones internes. l'utilisateur peut récupérer
-	 * la nouvelle zone mise à jour avec getCurrentZone. Il peut également récupérer la liste
-	 * de sprites qui ont provoqu� la fin de la mise à jour à la suite d'une action, avec getLimitSprites.
-	 * Il peut aussi récupérer la dur�e qui s'est écoulée (en temps simul�) depuis la dernière simulation, 
-	 * avec getDuration.
-	 * 
-	 * @param specifiedStates	
-	 * 		map associant un état à un sprite, permettant de forcer un sprite à prendre un certain état 
+	 * <ul>
+	 * 		<li>la disparition d'un sprite (ex : une bombe qui a explosé)</li>
+	 * 		<li>l'apparition d'un sprite (ex : un item qui apparait à la suite de l'explosion d'un mur)</li>
+	 * 		<li>un changement d'état (ex : un mur qui commence à brûler)</li>
+	 * 		<li>un changement de case (ex : un joueur passant d'une case à une autre)</li>
+	 * 		<li>la fin d'un déplacement (ex : un joueur qui se retrouve bloqué par un mur)</li>
+	 * </ul>
+	 * <b>Attention :</b> si l'option {@code considerExplosionOnly} est activée,
+	 * alors seules les explosions de bombes sont considérées. Plus précisément,
+	 * on considère que seule la disparition du feu est un évènement (et non pas
+	 * son apparition).<br/>
+	 * Les modifications sont appliquées à la zone en interne. L'utilisateur peut récupérer
+	 * la nouvelle zone mise à jour avec {@link #getCurrentZone}. Il peut également récupérer la liste
+	 * de sprites qui ont provoqué la fin de la mise à jour à la suite d'une action, avec {@link #getLimitSprites}.
+	 * Il peut aussi récupérer la durée qui s'est écoulée (en temps simulé) depuis la dernière simulation, 
+	 * avec {@link #getDuration}.
 	 */
 	public void simulate()
 	{	// create a copy of the current zone
@@ -320,7 +339,7 @@ public class AiModel
 	
 	/**
 	 * Calcule le temps minimal avant le prochain changement d'état de chaque sprite.
-	 * Ce laps de temps sera ensuite appliqu� uniformêment à chaque sprite.
+	 * Ce laps de temps sera ensuite appliqué uniformêment à chaque sprite.
 	 * 
 	 * @param sprites
 	 * 		liste des sprites à traiter
@@ -341,8 +360,13 @@ if(sprite instanceof AiSimBomb)
 			// process the time remaining before the next change (be it of state, tile, etc.)
 			if(state.getName()!=AiStateName.ENDED)
 			{	long changeTime = processChangeTime(current,sprite);
-				if(changeTime>0) //zero means there's nothing to do (e.g.: moving towards an obstacle) and should therefore be ignored
-				{	// new min time
+				// a zero change time means there's nothing to do 
+				// (e.g.: moving towards an obstacle) and should therefore be ignored
+				if(changeTime>0)
+				{	// check if the focus is on fire only
+					// (the state change for fire is necessarily when it disappears)
+					if(!considerExplosionsOnly || sprite instanceof AiSimFire)
+					// new min time
 					if(changeTime<duration)
 					{	duration = changeTime;
 						limitSprites.clear();
@@ -362,17 +386,17 @@ if(sprite instanceof AiSimBomb)
 	
 	/**
 	 * calcule combien de temps il va falloir au sprite spécifié pour sortir
-	 * de son état courant. si le sprite br�le, il s'agit de savoir pendant
+	 * de son état courant. si le sprite brûle, il s'agit de savoir pendant
 	 * combien de temps encore. s'il se déplace, il s'agit de savoir combien de
 	 * temps il va lui falloir pour changer de case. s'il ne fait rien, il n'y a
-	 * pas de limite particuliére à son activit� et la méthode renvoie Long.MAX_VALUE.
+	 * pas de limite particuliére à son activité et la méthode renvoie {@code Long.MAX_VALUE}.
 	 * 
 	 * @param current	
 	 * 		la zone courante
 	 * @param sprite	
 	 * 		le sprite à traiter
 	 * @return	
-	 * 		la dur�e pendant laquelle le sprite va rester à cet état
+	 * 		la durée pendant laquelle le sprite va rester à cet état
 	 */
 	private long processChangeTime(AiSimZone current, AiSimSprite sprite)
 	{	long result = Long.MAX_VALUE;
@@ -485,13 +509,13 @@ if(sprite instanceof AiSimBomb)
 	}
 
 	/**
-	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
 	 * 
 	 * @param statesMap	
 	 * 		la liste des états à appliquer aux sprites (calculés automatiquement ou spécifiés par l'utilisateur)
 	 * @param duration	
-	 * 		dur�e du pas de simulation
+	 * 		durée du pas de simulation
 	 */
 	private void updateSprites(List<AiSimSprite> sprites, long duration)
 	{	
@@ -546,12 +570,12 @@ if(sprite instanceof AiSimBomb)
 	
 	/**
 	 * déplace le sprite passée en paramètre en fonction de sa direction courante,
-	 * et pour la dur�e de simulation spécifiée.
+	 * et pour la durée de simulation spécifiée.
 	 * 
 	 * @param sprite
 	 * 		le sprite à déplacer
 	 * @param duration
-	 * 		la dur�e du pas de simulation
+	 * 		la durée du pas de simulation
 	 */
 	private void moveSprite(AiSimSprite sprite, long duration)
 	{	//NOTE same simplification than before: we suppose the levels are all grids, 
@@ -651,13 +675,13 @@ if(sprite instanceof AiSimBomb)
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
 	 * 
 	 * @param block
 	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration	
-	 * 		la dur�e à prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateBlock(AiSimBlock block, long duration)
 	{	// init
@@ -747,13 +771,13 @@ if(sprite instanceof AiSimBomb)
 	private List<AiSimBomb> toBeDetonated = new ArrayList<AiSimBomb>();
 	
 	/**
-	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
 	 * 
 	 * @param bomb
 	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
-	 * 		la dur�e à prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateBomb(AiSimBomb bomb, long duration)
 	{	// init
@@ -902,13 +926,13 @@ if(sprite instanceof AiSimBomb)
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
 	 * 
 	 * @param fire
 	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
-	 * 		la dur�e à prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateFire(AiSimFire fire, long duration)
 	{	// init
@@ -949,7 +973,7 @@ if(sprite instanceof AiSimBomb)
 	}
 
 	/**
-	 * br�le une case et son contenu, à la suite d'une explosion
+	 * brûle une case et son contenu, à la suite d'une explosion
 	 * 
 	 * @param tile
 	 * 		la case à brûler
@@ -1015,13 +1039,13 @@ if(sprite instanceof AiSimBomb)
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
 	 * 
 	 * @param floor
 	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
-	 * 		la dur�e à prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateFloor(AiSimFloor floor, long duration)
 	{	// init
@@ -1062,13 +1086,13 @@ if(sprite instanceof AiSimBomb)
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
 	 * 
 	 * @param hero
 	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
-	 * 		la dur�e à prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateHero(AiSimHero hero, long duration)
 	{	// init
@@ -1283,11 +1307,11 @@ if(sprite instanceof AiSimBomb)
 	}
 	
 	/**
-	 * implémente le comportement d'un personnage rel�chant tous 
-	 * ses items quand il est élimin�.
+	 * implémente le comportement d'un personnage relâchant tous 
+	 * ses items quand il est éliminé.
 	 * 
 	 * @param hero
-	 * 		le personnage rel�chant tous ses items
+	 * 		le personnage relâchant tous ses items
 	 */
 	private void releaseItems(AiSimHero hero)
 	{
@@ -1297,7 +1321,7 @@ if(sprite instanceof AiSimBomb)
 	/**
 	 * supprime tous les personnage de la zone.
 	 * ceci permet de la simplifier, et ainsi d'utiliser la zone
-	 * seulement pour pr�voir comment les explosions vont �voluer,
+	 * seulement pour prévoir comment les explosions vont �voluer,
 	 * sans se soucier des déplacements des personnages.
 	 */
 	public void applyRemoveHeroes()
@@ -1310,13 +1334,13 @@ if(sprite instanceof AiSimBomb)
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * calcule l'état du sprite à la fin de la dur�e spécifiée,
+	 * calcule l'état du sprite à la fin de la durée spécifiée,
 	 * à partir de l'état courant.
 	 * 
 	 * @param item
 	 * 		le sprite concerné (sa représentation initiale)
 	 * @param duration
-	 * 		la dur�e à prendre en compte
+	 * 		la durée à prendre en compte
 	 */
 	private void updateItem(AiSimItem item, long duration)
 	{	// init

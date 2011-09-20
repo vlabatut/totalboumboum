@@ -164,7 +164,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	}
 	
 	/**
-	 * indique que le sprite a été élimin� du jeu
+	 * indique que le sprite a été éliminé du jeu
 	 */
 	protected void setEnded()
 	{	state.setEnded();		

@@ -46,13 +46,13 @@ public interface AiBomb extends AiSprite
 	public AiFire getFirePrototype();
 
 	/**
-	 * renvoie la dur�e de l'explosion de cette bombe.
-	 * Cette dur�e comprend l'apparition des flammes,
-	 * la dur�e de vie des flammes, et leur disparition.
+	 * renvoie la durée de l'explosion de cette bombe.
+	 * Cette durée comprend l'apparition des flammes,
+	 * la durée de vie des flammes, et leur disparition.
 	 * Cette valeur n'est pas forcément constante, et peut varier d'une bombe à l'autre.
 	 * 
 	 * @return	
-	 * 		la dur�e de l'explosion
+	 * 		la durée de l'explosion
 	 */
 	public long getExplosionDuration();
 
@@ -60,10 +60,10 @@ public interface AiBomb extends AiSprite
 	// FUSE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la probabilit� que la bombe tombe en panne quand elle devrait exploser
+	 * renvoie la probabilité que la bombe tombe en panne quand elle devrait exploser
 	 * 
 	 * @return	
-	 * 		une mesure de probabilit�
+	 * 		une mesure de probabilité
 	 */
 	public float getFailureProbability();
 	

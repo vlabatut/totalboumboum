@@ -137,7 +137,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 	private long normalDuration;
 	/** latence de la bombe quand son explosion est d�clench�e par une autre bombe */
 	private long latencyDuration;
-	/** probabilit� que la bombe tombe en panne quand elle devrait exploser */
+	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
 	private float failureProbability;
 	
 	@Override
@@ -186,7 +186,7 @@ final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
 			latencyDuration = (long)ability.getStrength();
 		}
-		// probabilit� de panne
+		// probabilité de panne
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_FAILURE_PROBABILITY);
 			failureProbability = ability.getStrength();
 		}

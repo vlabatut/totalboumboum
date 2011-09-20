@@ -62,7 +62,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	/////////////////////////////////////////////////////////////////
 	// ACTOR RESTRICTIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abilit�s necessaires à l'acteur pour que la modulation soit appliqu�e */
+	/** abilit�s necessaires à l'acteur pour que la modulation soit appliquée */
 	protected final List<AbstractAbility> actorRestrictions = new ArrayList<AbstractAbility>();
 	
 	public void addActorRestriction(AbstractAbility ability)
@@ -72,7 +72,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	/////////////////////////////////////////////////////////////////
 	// TARGET RESTRICTIONS		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abilit�s necessaires à la cible pour que la modulation soit appliqu�e */
+	/** abilit�s necessaires à la cible pour que la modulation soit appliquée */
 	protected final List<AbstractAbility> targetRestrictions = new ArrayList<AbstractAbility>();
 	
 	public void addTargetRestriction(AbstractAbility ability)

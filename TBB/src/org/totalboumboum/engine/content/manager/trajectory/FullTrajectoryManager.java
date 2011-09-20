@@ -608,9 +608,9 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	/////////////////////////////////////////////////////////////////
 	/** temps normalis� écoulé de puis le début de la trajectoire */
 	private double trajectoryTime;
-	/** dur�e totale originale de la trajectoire */
+	/** durée totale originale de la trajectoire */
 	private double trajectoryDuration = 0;
-	/** coefficient de mofication du temps d� au délai imposé */
+	/** coefficient de mofication du temps dû au délai imposé */
 	private double forcedDurationCoeff = 1;
 	/** temps imparti pour atteindre la position forc�e (tient compte du délai imposé à la trajectoire) */
 	private double forcedPositionTime = 0;

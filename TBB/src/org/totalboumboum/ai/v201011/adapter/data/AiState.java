@@ -63,10 +63,10 @@ public interface AiState
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * renvoie la dur�e que le sprite a passé dans l'état courant
+	 * renvoie la durée que le sprite a passé dans l'état courant
 	 * 
 	 * @return	
-	 * 		une dur�e exprimée en ms
+	 * 		une durée exprimée en ms
 	 */
 	public long getTime();
 }

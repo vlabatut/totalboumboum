@@ -53,7 +53,7 @@ final class AiSimItem extends AiSimSprite implements AiItem
 	 * @param state
 	 * 		état de l'item
 	 * @param burningDuration
-	 * 		dur�e de combustion de l'item
+	 * 		durée de combustion de l'item
 	 * @param currentSpeed
 	 * 		vitesse courante de déplacement de l'item
 	 * @param type
@@ -93,7 +93,7 @@ final class AiSimItem extends AiSimSprite implements AiItem
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** type d'item simul� */
+	/** type d'item simulé */
 	private AiItemType type;
 	
 	@Override

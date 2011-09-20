@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiHero;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201112.adapter.model.AiModel;
 import org.totalboumboum.ai.v201112.adapter.path.astar.cost.CostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.astar.successor.SuccessorCalculator;
@@ -228,42 +229,63 @@ public final class DybrefNode implements Comparable<DybrefNode>
 	 */
 	private void developNode() throws StopRequestException
 	{	ai.checkInterruption();
-	
+		
+		// init
 		children = new ArrayList<DybrefNode>();
+		List<Direction> directions = Direction.getPrimaryValues();
+		directions.add(Direction.NONE);
 		
-		
-		
-		
-		
-		// pour chaque case voisine : on la rajoute si elle est traversable
-		for(Direction direction: Direction.getPrimaryValues())
-		{	// on applique le modèle pour obtenir la zone résultant de l'action
-			// on teste si le joueur est encore vivant dans cette zone
-			// on teste si l'action a bien réussi (la case était-elle traversable ?)
-			// on récupère la case qu'il occupe et crée le noeud fils correspondant
-			AiTile neighbor = tile.getNeighbor(direction);
-			if(neighbor.isCrossableBy(hero))
-				result.add(neighbor);			
-		}
-		
-		// on rajoute aussi la case courante
-		if(tile.isCrossableBy(hero))
-			result.add(tile);
-		
-		
-		
-		
-		
-		
-		List<AiTile> neighbors = successorCalculator.processSuccessors(this);
-		for(AiTile neighbor: neighbors)
-		{	// on ne garde pas les états qui appartiennent déjà au chemin contenant le noeud de recherche courant
-			// i.e. les états qui apparaissent dans des noeuds ancêtres du noeud courant
-			if(!hasBeenExplored(neighbor))
-			{	DybrefNode node = new DybrefNode(neighbor,this);
-				children.add(node);			
+		// pour chaque déplacement possible (y compris l'attente)
+		for(Direction direction: directions)
+		{	// on récupère la case cible
+			AiTile targetTile = tile.getNeighbor(direction);
+			
+			// si celle-ci est traversable, on la traite
+			if(targetTile.isCrossableBy(hero))
+			{	// on applique le modèle pour obtenir la zone résultant de l'action
+				AiModel model = new AiModel(zone);
+				model.applyChangeHeroDirection(hero,direction);
+				boolean safe = model.simulate(hero);
+				long duration = model.getDuration();
+// TODO attente : faire un setTruc sur le modèle
+// NOTE p-ê répéter la simulation jusqu'à ce que la bombe soit prêt du perso qui attend ?
+
+
+				// si le joueur est encore vivant dans cette zone 
+				// (ce qui est le cas, en théorie, puisque la case était traversable)
+				if(safe)
+				{	// on récupère la nouvelle case occupée par le personnage dans la nouvelle zone
+					AiZone futureZone = model.getCurrentZone();
+					AiHero futureHero = futureZone.getHeroByColor(hero.getColor());
+					AiTile futureTile = futureHero.getTile();
+					
+					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
+					// (là encore, en théorie la case était traversable, donc ça devrait être ok)=
+					if(futureTile.equals(targetTile))
+					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
+						DybrefNode node = new DybrefNode(futureZone,futureTile,parent);
+						children.add(node);
+					}
+					// si le joueur n'est plus vivant dans la zone obtenue : bug
+					else
+					{	// TODO debug
+						System.err.println("Erreur dans dybref : case finalement pas traversable");
+					}
+				}
+				// si le joueur n'est plus vivant dans la zone obtenue : bug
+				else
+				{	// TODO debug
+					System.err.println("Erreur dans dybref : personnage a finalement brûlé");
+				}
+
 			}
+			
+			// si la case n'est pas traversable, inutile de la traiter
 		}
+		
+		// s'il n'y a aucun enfant pour ce noeud (i.e. on ne peut même pas y rester)
+		// alors la case courante n'est pas sûre et on en informe le noeud parent.
+		parent.childFailed(this);
 	}
 	
 	/////////////////////////////////////////////////////////////////

@@ -99,11 +99,11 @@ public abstract class TrajectoryManager
 	/////////////////////////////////////////////////////////////////
 	/** temps total écoulé de puis le début de la trajectoire */
 	protected double currentTime = 0;
-	/** dur�e totale effective de la trajectoire */
+	/** durée totale effective de la trajectoire */
 	protected double totalDuration = 0;
 	
 	/**
-	 * renvoie la dur�e totale pr�vue pour la trajectoire.
+	 * renvoie la durée totale prévue pour la trajectoire.
 	 * @return
 	 */
 	public double getTotalDuration()

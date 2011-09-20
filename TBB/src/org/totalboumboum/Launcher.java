@@ -668,7 +668,7 @@ public class Launcher
 	
 	/*
 	 * NOTE les modulations sont ordonnées par priorité dans le fichier XML.
-	 * dans le cas où plusieurs modulations peuvent être appliqu�es à une action, 
+	 * dans le cas où plusieurs modulations peuvent être appliquées à une action, 
 	 * c'est la première définie dans le fichier XML qui est utilisée.
 	 * il faut donc l'organiser du plus spécifique au plus général.
 	*/
@@ -697,14 +697,14 @@ public class Launcher
 	 * il y a blocage si l'anime n'est pas définie, et que l'anime par défaut est
 	 * répét�e.
 	 * exemple : défaut=marcher, et il manque punch -> le bonhomme ne sort jamais de l'état punching
-	 * 	>>solution : ne jamais compter sur la fin de l'anime, toujours imposer une dur�e à respecter
+	 * 	>>solution : ne jamais compter sur la fin de l'anime, toujours imposer une durée à respecter
 	 * 	(ce qui permet d'uniformiser le beans pour tous les joueurs)
 	 */
 	
 	/*
 	 * TODO il faut s�curiser les animations : s'assurer qu'une anime cens�e
 	 * ne pas être r�-init est bien gaul�e. par exemple, pushing doit être gaul�e
-	 * comme walking (dans le XML) sinon p-ê pb (si pas même dur�e ou autres diff)
+	 * comme walking (dans le XML) sinon p-ê pb (si pas même durée ou autres diff)
 	 * > à vérif
 	 */
 	
@@ -1005,7 +1005,7 @@ public class Launcher
 	 * 		- dans les fichiers xml, pour les points, plutot que local (vrai ou faux), utiliser round/match/tournament/game (permet de mieux mutualiser les fichiers)
 	 * 		- tournoi coupe : 
 	 * 			- pouvoir se qualifier depuis n'importe quel leg, pas forcement le précédent direct (n�cessit� de pr�ciser le num�ro du leg en plus du part, dans le doc XML et la class CupPlayer)
-	 * 			- y compris depuis le leg initial (pr�voir une sous-classe pour distinguer initial des autres?)
+	 * 			- y compris depuis le leg initial (prévoir une sous-classe pour distinguer initial des autres?)
 	 * 
 	 * - Items :
 	 * 		- définir des noms "human readable" pour les items, histoire de ne pas afficher ces codes internes dans la GUI, en profiter pour introduire une decription, le tout en plusieurs langues. utiliser le code ISO comme paramètre de langue, et l'introduire dans le fichier de langue
@@ -1046,7 +1046,7 @@ public class Launcher
 	 * 		- HIDING devrait être un gesture définit automatiquement, non ? pas d'image, sensible à rien, seule action autorisée=apparaitre...
 	 *  	- vérifier qu'avant d'exécuter une action, on vérifie si le sprite concerné (actor) posséde bien l'ability (avec modulate)
 	 * 		- pour chaque gesture, fixer les actions autorisées 
-	 * 		- ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut r�fl�chir à un truc plus propre
+	 * 		- ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut r�flâchir à un truc plus propre
 	 * 		- il faudrait documenter le comportement par défaut du moteur, i.e. pour chaque type de sprite:
 	 * 			- qu'est-ce qu'il peut faire comme action? quelles sont les transitions? qu'est-ce qui est interdit ?
 	 * 			- ça permettra de savoir ce qui peut être modul� et ce qui ne peut pas l'�tre
@@ -1054,7 +1054,7 @@ public class Launcher
 	 * 		- le coup de l'indestructibilit� des items (le fait de r�apparaitre ailleurs) pourrait être �tendue à tous les sprites
 	 * 		  (en particulier les joueurs, ça serait un cas spécial de r�sistance au feu un peu p�nalisante, utilisable un nombre limité de fois, par ex !)
 	 * 		- ça serait bien que les paramètres num�riques des abilit�s puissent être définies 
-	 * 		  au chargement (force, dur�e, utilisation) de façon aléatoire, en fonction de certains paramètres. 
+	 * 		  au chargement (force, durée, utilisation) de façon aléatoire, en fonction de certains paramètres. 
 	 * 		  on pourrait par ex utiliser une liste de valeur num�riques : 1=déterministe, 2=bornes pour un tirage au sort
 	 * 		  utile par exemple pour déterminer le nombre de fois qu'un bloc repousse (plutot que de le fixer dans le fichier XML), 
 	 * 		  ou la panne d'une bombe (plutot que de le faire pdt le jeu, et sans utiliser d'ablts spéciales)
@@ -1087,7 +1087,7 @@ public class Launcher
 	 * 
 	 * - faire le classement lexicographique g�rant les signes diacritiques partout où c'est nécessaire
 	 * 
-	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (d�cimales cach�es), etc.
+	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (d�cimales cachées), etc.
 	 * 
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * 
@@ -1234,7 +1234,7 @@ public class Launcher
 	 *    (ou un autre format vectoriel, SVG p-ê ?)
 	 *  
 	 *  - options pour les stats ?
-	 *  	- acc�l�rer la fin des parties où tous les humains ont été élimin�s (p-e un popup ? ou une option : oui-non-demander)
+	 *  	- acc�l�rer la fin des parties où tous les humains ont été éliminés (p-e un popup ? ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
 	 *  	- forcer la fin de la p�riode (now)
 	 *  - instance TBB
@@ -1311,7 +1311,7 @@ public class Launcher
 	 *  - ressources    : icone package
 	 *  - tournoi	    : coupe
 	 *  - partie rapide : �clair du bouton play
-	 *  - charger       : disquette avec fl�che (inverse de sauvegarde)
+	 *  - charger       : disquette avec flâche (inverse de sauvegarde)
 	 *  - revoir        : une télé ? un oeil ? une pellicule?
 	 *  - à propos      : un "?"
 	 *  - quitter       : une croix (comme pour fermer une fen�tre) ou l'icone "quitter" du tournoi (?)
@@ -1341,7 +1341,7 @@ public class Launcher
 	/* TODO la communication [moteur >> gui] devrait se faire par evts, y compris durant le jeu
 	 * >> ca permettrait de ne pas raffraichir pour rien lors de l'affichage de toutes les structures du jeu
 	 * >> faut définir un système d'évènement pour toute classe affich�e directement par un composant graphique
-	 * >> ça permetrait de ne pas avoir à recréer les �crans. par ex, dans les options : si qqch est chang�, c'est automatiquement màj en background
+	 * >> ça permetrait de ne pas avoir à recréer les �crans. par ex, dans les options : si qqch est changé, c'est automatiquement màj en background
 	 * 		- sauf qu'en fait c'est un mvais ex car dans les options ce sont des clones qui sont utilisés
 	 *        mais il suffirait de ne pas recréer à chaque fois le panel, plutot de réutiliser le précédent en faisant un set et en affectant le listener
 	 *      - faudrait du cp faire attention à la gestion de la m�moire : 
@@ -1410,7 +1410,7 @@ public class Launcher
 	 * problèmes :
 	 *    - quand un client sélectionne des commandes : c'est pas conserv� quand le serveur valide la partie
 	 *    - impossible de bouger le perso cété client
-	 *    - jeu saccad� cété client même en LAN >> faire de l'évènementiel et pas du cosm�tique
+	 *    - jeu saccadû cété client même en LAN >> faire de l'évènementiel et pas du cosm�tique
 	 *    - parfois une exception se produit liée à GregorianCalendar
 	 *    
 	 * à faire :
@@ -1418,9 +1418,9 @@ public class Launcher
 	 *  
 	 *  - tout changement d'état du client devrait être :
 	 *  	- une requ�te envoy�e au serveur
-	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliqu�es coté client
+	 *  	- si celui-ci valide, alors les modifs nécessaires sont appliquées coté client
 	 *  	>> cf le passage de game selection à players selection
-	 *  	>> pas tout changement en fait, par exemple l'exit de ce même état est d�cid� unilat�ralement
+	 *  	>> pas tout changement en fait, par exemple l'exit de ce même état est d�cidû unilat�ralement
 	 *  - déterminer les ressources à synchroniser et... le faire rigoureusement
 	 *  - penser à tester syst�matiquement si l'état du c/s qui reçoit un evt est compatible avec le traitement de cet evt 
 	 *  - tout evt transmis à la connection générale par l'indiv doit identifier l'indiv
@@ -1504,7 +1504,7 @@ public class Launcher
 	// TODO utiliser le calcul d'occupation CPU pour limiter les IA trop gourmandes
 	// 		utiliser la limite sur yield déjà définie (cf classe config d'ia)
 	// TODO calculer un temps d'occupation "normal" (avant le jeu) et s'en servir de r�f pour le temps en cours de jeu
-	// TODO arrêter les threads dont les ia ont été élimin�es du jeu
+	// TODO arrêter les threads dont les ia ont été éliminées du jeu
 	// TODO voir quels threads swing prennent toutes les ressources sur les niveaux chargés
 	// TODO finir IA
 	//	optimisation : poser bombe juste en sortant de la case (pixels) histoire d'éviter de se faire bloquer par le gus qui est devant
