@@ -406,7 +406,7 @@ public class Maps
 	
 	/**
 	 * cette methode controle le chemin pour voir s'il y en a des tiles dangeraux, 
-	 * s'il les trouve alors il va nous dire "r�fl�chissez encore une fois avant y aller"
+	 * s'il les trouve alors il va nous dire "r�flâchissez encore une fois avant y aller"
 	 * 
 	 * @param pathCible le chemin à controller
 	 * @return la resultat du control (true ou false)

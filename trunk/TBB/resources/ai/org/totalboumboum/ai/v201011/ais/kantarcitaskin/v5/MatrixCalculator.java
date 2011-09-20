@@ -275,7 +275,7 @@ public class MatrixCalculator
 	 * @param bomb
 	 * 		la bombe dont le temps d'explosion est calculé
 	 * @return resutl
-	 * 		le temps d'explosion estim�
+	 * 		le temps d'explosion estimé
 	 * @throws StopRequestException 
 	 * */
 	public double tempExplosion (AiBomb bomb) throws StopRequestException
