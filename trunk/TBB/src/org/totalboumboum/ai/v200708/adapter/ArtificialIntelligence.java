@@ -153,7 +153,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 
 	/**
 	 * Renvoie la portée de la bombe située à la position passée en paramètres.
-	 * S'il n'y a pas de bombe à cette position, la valeur -1 est renvoy�e.
+	 * S'il n'y a pas de bombe à cette position, la valeur -1 est renvoyée.
 	 * @param	x	position de la bombe
 	 * @param	y	position de la bombe
 	 * @return	la portée de la bombe
@@ -181,7 +181,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Renvoie la position du personnage dont l'index est passé
 	 * en paramètre. S'il n'y a pas de personnage ayant cet index, la valeur 
-	 * {-1,-1} est renvoy�e. Attention, le personnage dirig� par cette IA n'est 
+	 * {-1,-1} est renvoyée. Attention, le personnage dirig� par cette IA n'est 
 	 * jamais considéré. 
 	 * @param index	num�ro du personnage
 	 * @return	position du personnage 
@@ -202,7 +202,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Renvoie le sens de déplacement du personnage dont l'index est passé
 	 * en paramètre. S'il n'y a pas de personnage ayant cet index, la valeur 
-	 * -1 est renvoy�e. Sinon, il s'agit d'un entier AI_DIR_NONE, AI_DIR_UP, AI_DIR_DOWN, 
+	 * -1 est renvoyée. Sinon, il s'agit d'un entier AI_DIR_NONE, AI_DIR_UP, AI_DIR_DOWN, 
 	 * AI_DIR_RIGHT ou AI_DIR_LEFT. Attention, le personnage dirig� par cette IA n'est 
 	 * jamais considéré.
 	 * @param index	num�ro du personnage
@@ -219,7 +219,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * Renvoie vrai si la personnage dont l'index est passé
 	 * en paramètre est vivant. Si le personnage est mort ou en train de mourir,
 	 * ou bien s'il n'y a pas de personnage ayant cet index, la valeur 
-	 * faux est renvoy�e. Attention, le personnage dirig� par cette IA n'est 
+	 * faux est renvoyée. Attention, le personnage dirig� par cette IA n'est 
 	 * jamais considéré.
 	 * @param index	num�ro du personnage
 	 * @return	un bool�an représentant l'état du personnage 
@@ -260,7 +260,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Renvoie la position de la bombe relativement au personnage de l'IA,
 	 * dans le cas où une bombe occupe la même case. Une constante de 
-	 * la forme AI_DIR_XXXX est renvoy�e. La constante AI_DIR_NONE est renvoy�e
+	 * la forme AI_DIR_XXXX est renvoyée. La constante AI_DIR_NONE est renvoyée
 	 * s'il n'y a pas de bombe dans la case, ou bien si la bombe et le joueur sont plac�s
 	 * au même endroit.
 	 * @return	la position relative de la bombe
