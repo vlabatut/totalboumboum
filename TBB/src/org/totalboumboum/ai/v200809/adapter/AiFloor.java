@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v200809.adapter;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 
 /**
- * représente un sol du jeu, ie le graphisme affich� en tant que première couche de toute
+ * représente un sol du jeu, ie le graphisme affiché en tant que première couche de toute
  * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent Labatut
