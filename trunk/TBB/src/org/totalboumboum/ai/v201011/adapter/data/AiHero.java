@@ -52,19 +52,19 @@ public interface AiHero extends AiSprite
 	public int getBombRange();
 	
 	/**
-	 * renvoie la dur�e actuelle des bombes du personnage
+	 * renvoie la durée actuelle des bombes du personnage
 	 * (valide seulement pour les bombes à retardement)
 	 * 
 	 * @return	
-	 * 		la dur�e de vie des bombes (i.e. temps entre la pose et l'explosion)
+	 * 		la durée de vie des bombes (i.e. temps entre la pose et l'explosion)
 	 */
 	public long getBombDuration();
 	
 	/**
-	 * renvoie la dur�e actuelle des explosions des bombes du personnage
+	 * renvoie la durée actuelle des explosions des bombes du personnage
 	 * 
 	 * @return	
-	 * 		la dur�e de l'explosion des bombes
+	 * 		la durée de l'explosion des bombes
 	 */
 	public long getExplosionDuration();
 	
@@ -121,7 +121,7 @@ public interface AiHero extends AiSprite
 	/**
 	 * Renvoie le classement de ce joueur, pour la manche en cours.
 	 * Ce classement est susceptible d'�voluer d'ici la fin de la manche actuellement jou�e, 
-	 * par exemple si ce joueur est élimin�.
+	 * par exemple si ce joueur est éliminé.
 	 * 
 	 * @return	
 	 * 		le classement de ce joueur dans la manche en cours

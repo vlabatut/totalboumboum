@@ -49,7 +49,7 @@ abstract class AiSimSprite implements AiSprite
 	 * @param state
 	 * 		état du sprite
 	 * @param burningDuration
-	 * 		dur�e de combustion du sprite
+	 * 		durée de combustion du sprite
 	 * @param currentSpeed
 	 * 		vitesse courante de déplacement du sprite
 	 */

@@ -41,14 +41,23 @@ public enum Direction implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// VALUES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** No direction at all */
 	NONE,
+	/** Primary right direction */
 	RIGHT,
+	/** Composite direction containing both down and right */
 	DOWNRIGHT,
+	/** Primary down direction */
 	DOWN,
+	/** Composite direction containing both down and left */
 	DOWNLEFT,
+	/** Primary left direction */
 	LEFT,
+	/** Composite direction containing both up and right */
 	UPLEFT,
+	/** Primary up direction */
 	UP,
+	/** Composite direction containing both up and right */
 	UPRIGHT;
 	
 	/////////////////////////////////////////////////////////////////
@@ -56,7 +65,8 @@ public enum Direction implements Serializable
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * returns the next direction according to the following (cycling) order:
-	 * UP,UPRIGHT,RIGHT,DOWNRIGHT,DOWN,DOWNLEFT,LEFT,UPLEFT,UP
+	 * {@link #UP},{@link #UPRIGHT},{@link #RIGHT},{@link #DOWNRIGHT},{@link #DOWN},
+	 * {@link #DOWNLEFT},{@link #LEFT},{@link #UPLEFT},{@link #UP}.
 	 */
 	public Direction getNext()
 	{	Direction result;
@@ -94,7 +104,8 @@ public enum Direction implements Serializable
 
 	/**
 	 * returns the previous direction according to the following (cycling) order:
-	 * UP,UPRIGHT,RIGHT,DOWNRIGHT,DOWN,DOWNLEFT,LEFT,UPLEFT,UP
+	 * {@link #UP},{@link #UPRIGHT},{@link #RIGHT},{@link #DOWNRIGHT},{@link #DOWN},
+	 * {@link #DOWNLEFT},{@link #LEFT},{@link #UPLEFT},{@link #UP}.
 	 */
 	public Direction getPrevious()
 	{	Direction result;
@@ -133,7 +144,8 @@ public enum Direction implements Serializable
 	/**
 	 * tests if this direction is located just after or just before the specified one,
 	 * according to the following (cycling) order:
-	 * UP,UPRIGHT,RIGHT,DOWNRIGHT,DOWN,DOWNLEFT,LEFT,UPLEFT,UP 
+	 * {@link #UP},{@link #UPRIGHT},{@link #RIGHT},{@link #DOWNRIGHT},{@link #DOWN},
+	 * {@link #DOWNLEFT},{@link #LEFT},{@link #UPLEFT},{@link #UP}.
 	 */
 	public boolean isNeighbor(Direction direction)
 	{	return this==direction || getNext()==direction || getPrevious()==direction;
@@ -143,7 +155,8 @@ public enum Direction implements Serializable
 	// GENERAL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * returns the opposite direction (RIGHT for LEFT, UPRIGHT for DOWNLEFT, etc)
+	 * returns the opposite direction ({@link #RIGHT} for {@link #LEFT}, 
+	 * {@link #UPRIGHT} for {@link #DOWNLEFT}, etc)
 	 * @return
 	 */
 	public Direction getOpposite()
@@ -158,7 +171,7 @@ public enum Direction implements Serializable
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * get the horizontal component of this direction
-	 * (can be NONE, e.g. for DOWN)
+	 * (can be {@link #NONE}, e.g. for {@link #DOWN})
 	 */
 	public Direction getHorizontalPrimary()
 	{	Direction result;
@@ -179,7 +192,7 @@ public enum Direction implements Serializable
 
 	/**
 	 * get the vertical component of this direction
-	 * (can be NONE, e.g. for RIGHT)
+	 * (can be {@link #NONE}, e.g. for {@link #RIGHT})
 	 */
 	public Direction getVerticalPrimary()
 	{	Direction result;
@@ -229,7 +242,7 @@ public enum Direction implements Serializable
 
 	/**
 	 * returns the next primary direction according to the following (cycling) order:
-	 * UP,RIGHT,DOWN,LEFT,UP
+	 * {@link #UP},{@link #RIGHT},{@link #DOWN},{@link #LEFT},{@link #UP}.
 	 */
 	public Direction getNextPrimary()
 	{	Direction result;
@@ -244,7 +257,7 @@ public enum Direction implements Serializable
 	
 	/**
 	 * returns the previous primary direction according to the following (cycling) order:
-	 * UP,RIGHT,DOWN,LEFT,UP
+	 * {@link #UP},{@link #RIGHT},{@link #DOWN},{@link #LEFT},{@link #UP}.
 	 */
 	public Direction getPreviousPrimary()
 	{	Direction result;
@@ -258,8 +271,8 @@ public enum Direction implements Serializable
 	}
 	
 	/**
-	 * returns the list of all primary directions
-	 * (i.e.: DOWN, LEFT, RIGHT and UP)
+	 * Returns the list of all primary directions
+	 * (i.e.: {@link #DOWN}, {@link #LEFT}, {@link #RIGHT} and {@link #UP})
 	 * @return
 	 */
 	public static List<Direction> getPrimaryValues()
@@ -272,7 +285,7 @@ public enum Direction implements Serializable
 	}
 	
 	/**
-	 * tests if this direction is primary (and not composite)
+	 * Tests if this direction is primary (and not composite).
 	 */
 	public boolean isPrimary()
 	{	boolean result;
@@ -282,7 +295,7 @@ public enum Direction implements Serializable
 
 	/**
 	 * tests if this direction is only a vertical primary direction
-	 * (and not a composite one, or NONE)
+	 * (and not a composite one, or {@link #NONE})
 	 */
 	public boolean isVertical()
 	{	return this==DOWN || this==UP;
@@ -290,7 +303,7 @@ public enum Direction implements Serializable
 
 	/**
 	 * tests if this direction is only a horizontal primary direction
-	 * (and not a composite one, or NONE)
+	 * (and not a composite one, or {@link #NONE})
 	 */
 	public boolean isHorizontal()
 	{	return this==LEFT || this==RIGHT;
@@ -298,7 +311,7 @@ public enum Direction implements Serializable
 	
 	/**
 	 * returns the horizontal direction corresponding to the specified delta
-	 * (will be NONE iff dx=0)
+	 * (will be {@link #NONE} iff dx=0)
 	 */
 	public static Direction getHorizontalFromDouble(double dx)
 	{	Direction result = NONE;
@@ -311,7 +324,7 @@ public enum Direction implements Serializable
 
 	/**
 	 * returns the vertical direction corresponding to the specified delta
-	 * (will be NONE iff dy=0)
+	 * (will be {@link #NONE} iff dy=0)
 	 */
 	public static Direction getVerticalFromDouble(double dy)
 	{	Direction result = NONE;
@@ -325,7 +338,7 @@ public enum Direction implements Serializable
 	// COMPOSITE DIRECTIONS		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * tests if this direction is composite (and not a primary or NONE)
+	 * tests if this direction is composite (and not a primary or {@link #NONE})
 	 */
 	public boolean isComposite()
 	{	boolean result;
@@ -344,7 +357,7 @@ public enum Direction implements Serializable
 	}
 
 	/**
-	 * uses the both specified primary (or NONE) directions to
+	 * uses the both specified primary (or {@link #NONE}) directions to
 	 * build and return a composite direction.
 	 * The first specified direction must be horizontal and the second vertical
 	 */
@@ -472,7 +485,7 @@ public enum Direction implements Serializable
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * tests if the specified directions are opposite, 
-	 * eg. RIGHT and LEFT, UPRIGHT and DOWNLEFT, etc. 
+	 * eg. {@link #RIGHT} and {@link #LEFT}, {@link #UPRIGHT} and {@link #DOWNLEFT}, etc. 
 	 */
 	public static boolean areOpposite(Direction d1, Direction d2)
 	{	boolean result = false;
@@ -483,8 +496,8 @@ public enum Direction implements Serializable
 	/**
 	 * returns an array of two int values corresponding to
 	 * a numeric representation of this direction.
-	 * result[0]: +1=RIGHT, -1=LEFT
-	 * result[1]: +1=DOWN, -1=UP
+	 * result[0]: +1={@link #RIGHT}, -1={@link #LEFT}
+	 * result[1]: +1={@link #DOWN}, -1={@link #UP}
 	 */
 	public int[] getIntFromDirection()
 	{	int result[] = new int[2];
@@ -536,8 +549,8 @@ public enum Direction implements Serializable
 	// TODO à utiliser dans tous les loaders
 	/**
 	 * load a direction value.
-	 * the XML value SOME represents any direction except NONE. 
-	 * the XML value ANY represents any direction including NONE. 
+	 * the XML value {@code SOME} represents any direction except {@link #NONE}. 
+	 * the XML value {@code ANY} represents any direction including {@link #NONE}. 
 	 */
 	public static List<Direction> loadDirectionsAttribute(Element root, String attName)
 	{	List<Direction> result = new ArrayList<Direction>();

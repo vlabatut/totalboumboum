@@ -100,7 +100,7 @@ public class AiZone
 	private long totalTime = 0;
 	/** temps écoulé depuis la mise à jour précédente de l'IA considérée */
 	private long elapsedTime = 0;
-	/** dur�e maximale de la partie */
+	/** durée maximale de la partie */
 	private long limitTime = 0;
 	
 	/**
@@ -123,10 +123,10 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie la dur�e maximale de la partie
+	 * renvoie la durée maximale de la partie
 	 * (elle peut éventuellement durer moins longtemps)
 	 * 
-	 * @return	la dur�e maximale de la partie
+	 * @return	la durée maximale de la partie
 	 */
 	public long getLimitTime()
 	{	return limitTime;		
@@ -222,7 +222,7 @@ public class AiZone
 	/**
 	 * Renvoie le classement du personnage passé en paramètre, pour la manche en cours.
 	 * Ce classement est susceptible d'�voluer d'ici la fin de la manche actuellement jou�e, 
-	 * par exemple si ce joueur est élimin�.
+	 * par exemple si ce joueur est éliminé.
 	 * 
 	 * @param hero	le personnage considéré
 	 * @return	son classement dans la manche en cours
@@ -626,7 +626,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone,
-	 * y compris ceux qui ont été élimin�s. 
+	 * y compris ceux qui ont été éliminés. 
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
 	 */
@@ -636,7 +636,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone, 
-	 * sauf ceux qui ont été élimin�s ou qui ne sont pas actuellement
+	 * sauf ceux qui ont été éliminés ou qui ne sont pas actuellement
 	 * en jeu.
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
@@ -686,7 +686,7 @@ public class AiZone
 	private final HashMap<Item,AiItem> itemMap = new HashMap<Item,AiItem>();
 	/** liste externe des items contenus dans cette zone */
 	private final List<AiItem> itemList = new ArrayList<AiItem>();
-	/** nombre d'items cach�s, i.e. pas encore ramass�s */
+	/** nombre d'items cachés, i.e. pas encore ramass�s */
 	private int hiddenItemsCount;
 	
 	/** 
@@ -731,17 +731,17 @@ public class AiZone
 	}
 	
 	/**
-	 * permet de modifier le nombre d'items encore cach�s dans ce niveau
+	 * permet de modifier le nombre d'items encore cachés dans ce niveau
 	 * 
-	 * @param hiddenItemsCount	le nouveau nombre d'items cach�s dans le niveau
+	 * @param hiddenItemsCount	le nouveau nombre d'items cachés dans le niveau
 	 */
 	void setHiddenItemsCount(int hiddenItemsCount)
 	{	this.hiddenItemsCount = hiddenItemsCount;	
 	}
 	
 	/**
-	 * renvoie le nombre d'items cach�s restant dans le niveau.
-	 * Il s'agit des items qui sont encore cach�s dans des blocs, 
+	 * renvoie le nombre d'items cachés restant dans le niveau.
+	 * Il s'agit des items qui sont encore cachés dans des blocs, 
 	 * et qui n'ont pas été ramass�s. Cette information permet de
 	 * savoir s'il est encore nécessaire de faire exploser des blocs 
 	 * pour trouver des items, ou pas.

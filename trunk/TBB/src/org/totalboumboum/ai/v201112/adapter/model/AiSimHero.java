@@ -52,7 +52,7 @@ final class AiSimHero extends AiSimSprite implements AiHero
 	 * @param state
 	 * 		état du personnage
 	 * @param burningDuration
-	 * 		dur�e de combustion du personnage
+	 * 		durée de combustion du personnage
 	 * @param currentSpeed
 	 * 		vitesse courante de déplacement du personnage
 	 * @param bombPrototype

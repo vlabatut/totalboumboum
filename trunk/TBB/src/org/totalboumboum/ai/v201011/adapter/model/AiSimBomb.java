@@ -58,7 +58,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param state
 	 * 		état de la bombe
 	 * @param burningDuration
-	 * 		dur�e de combustion de la bombe
+	 * 		durée de combustion de la bombe
 	 * @param currentSpeed
 	 * 		vitesse courante de déplacement de la bombe
 	 * @param slidingSpeed
@@ -70,11 +70,11 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	 * @param explosionTrigger
 	 * 		capacité à exploser au contact du feu
 	 * @param normalDuration
-	 * 		dur�e totale avant explosion (bombe à retardement seulement)
+	 * 		durée totale avant explosion (bombe à retardement seulement)
 	 * @param latencyDuration
 	 * 		latence entre le contact avec le feu et l'explosion
 	 * @param failureProbability
-	 * 		probabilit� de tomber en panne
+	 * 		probabilité de tomber en panne
 	 * @param firePrototype
 	 * 		exemple de feu génér� par la bombe quand elle explose
 	 * @param stopHeroes
@@ -178,7 +178,7 @@ final class AiSimBomb extends AiSimSprite implements AiBomb
 	private long normalDuration;
 	/** latence de la bombe quand son explosion est d�clench�e par une autre bombe */
 	private long latencyDuration;
-	/** probabilit� que la bombe tombe en panne quand elle devrait exploser */
+	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
 	private float failureProbability;
 	
 	@Override

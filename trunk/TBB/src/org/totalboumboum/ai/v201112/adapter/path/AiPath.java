@@ -116,7 +116,7 @@ public class AiPath implements Comparable<AiPath>
 	/////////////////////////////////////////////////////////////////
 	/** liste des cases composant le chemin */
 	private final List<AiTile> tiles = new ArrayList<AiTile>();
-	/** liste des pauses associées à chaque case (attention : ce temps n'inclut pas la dur�e nécessaire à la travers�e de la case) */
+	/** liste des pauses associées à chaque case (attention : ce temps n'inclut pas la durée nécessaire à la travers�e de la case) */
 	private final List<Long> pauses = new ArrayList<Long>();
 	
 	/**

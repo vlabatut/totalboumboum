@@ -55,7 +55,7 @@ public interface AiSprite
 	public AiState getState();
 	
 	/**
-	 * renvoie vrai si ce sprite a été élimin� du jeu
+	 * renvoie vrai si ce sprite a été éliminé du jeu
 	 * 
 	 * @return	
 	 * 		vrai si le sprite n'est plus en jeu
@@ -150,10 +150,10 @@ public interface AiSprite
 	 * par du feu, exprimé en ms. Si ce sprite ne peut pas brûler, ce
 	 * temps est égal à -1.
 	 * <b>Attention :</b> si ce sprite est une bombe, ce temps correspond
-	 * à la dur�e mise par la bombe pour dispara�tre, et non pas à la dur�e
-	 * de l'explosion. La dur�e de l'explosion correspond à la valeur
+	 * à la durée mise par la bombe pour dispara�tre, et non pas à la durée
+	 * de l'explosion. La durée de l'explosion correspond à la valeur
 	 * renvoy�e par getBurningDuration pour le sprite de feu produit
-	 * par l'explosion de la bombe, ou aussi à la dur�e renvoy�e par 
+	 * par l'explosion de la bombe, ou aussi à la durée renvoy�e par 
 	 * getExplosionDuration pour la bombe.
 	 * 
 	 * @return	

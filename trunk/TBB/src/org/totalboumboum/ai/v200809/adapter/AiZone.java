@@ -485,7 +485,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone 
-	 * (les joueurs élimin�s n'apparaissent plus dans cette liste ni dans cette représentation de la zone)
+	 * (les joueurs éliminés n'apparaissent plus dans cette liste ni dans cette représentation de la zone)
 	 * Cette instance de liste change à chaque appel de l'IA. 
 	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
 	 * liste en utilisant cette méthode.

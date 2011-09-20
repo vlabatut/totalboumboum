@@ -93,16 +93,16 @@ public class AiBomb extends AiSprite<Bomb>
 	private boolean explosionTrigger;
 	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
 	private long normalDuration;
-	/** dur�e de l'explosion (entre l'apparition et la disparition des flammes) */
+	/** durée de l'explosion (entre l'apparition et la disparition des flammes) */
 	private long explosionDuration;
 	/** latence de la bombe quand son explosion est d�clench�e par une autre bombe */
 	private long latencyDuration;
-	/** probabilit� que la bombe tombe en panne quand elle devrait exploser */
+	/** probabilité que la bombe tombe en panne quand elle devrait exploser */
 	private float failureProbability;
 	
 	/**
-	 * renvoie la probabilit� que la bombe tombe en panne quand elle devrait exploser
-	 * @return	une mesure de probabilit�
+	 * renvoie la probabilité que la bombe tombe en panne quand elle devrait exploser
+	 * @return	une mesure de probabilité
 	 */
 	public float getFailureProbability()
 	{	return failureProbability;	
@@ -158,11 +158,11 @@ public class AiBomb extends AiSprite<Bomb>
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
 			latencyDuration = (long)ability.getStrength();
 		}
-		// dur�e de l'explosion
+		// durée de l'explosion
 		{	ExplosionManager explosionManager = bomb.getExplosionManager();
 			explosionDuration = explosionManager.getExplosionDuration();
 		}
-		// probabilit� de panne
+		// probabilité de panne
 		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_FAILURE_PROBABILITY);
 			failureProbability = ability.getStrength();
 		}
@@ -181,12 +181,12 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 
 	/**
-	 * renvoie la dur�e de l'explosion de cette bombe.
-	 * Cette dur�e comprend l'apparition des flammes,
-	 * la dur�e de vie des flammes, et leur disparition.
+	 * renvoie la durée de l'explosion de cette bombe.
+	 * Cette durée comprend l'apparition des flammes,
+	 * la durée de vie des flammes, et leur disparition.
 	 * Cette valeur n'est pas forcément constante, et peut varier d'une bombe à l'autre.
 	 * 
-	 * @return	la dur�e de l'explosion
+	 * @return	la durée de l'explosion
 	 */
 	public long getExplosionDuration()
 	{	return explosionDuration;

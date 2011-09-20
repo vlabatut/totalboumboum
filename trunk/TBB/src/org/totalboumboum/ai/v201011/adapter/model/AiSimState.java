@@ -27,7 +27,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
- * décrit un état simul� dans lequel un sprite peut se trouver, c'est
+ * décrit un état simulé dans lequel un sprite peut se trouver, c'est
  * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
  * Cet état est décrit par le nom de cette action, et éventuellement la
  * direction dans laquelle elle est effectuée (pour les actions orientées
@@ -57,7 +57,7 @@ final class AiSimState  implements AiState
 	 * @param direction	
 	 * 		direction de l'action
 	 * @param time	
-	 * 		dur�e courante de l'état
+	 * 		durée courante de l'état
 	 */
 	protected AiSimState(AiStateName name, Direction direction, long time)
 	{	this.name = name;

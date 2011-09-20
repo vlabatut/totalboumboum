@@ -32,7 +32,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * classe utilisée pour tester les fonctionnalit�s de ce package,
  * en particulier que AiModel réalise des simulations correctes.
  * on crée une zone fictive en faisant varier les sprites et leurs
- * actions, et on affiche le résultat des simulation pas-�-pas.<br/>
+ * actions, et on affiche le résultat des simulation pas-à-pas.<br/>
  * 
  * <b>Note :</b> la classe modèle n'est pas définie pour représenter une zone
  * fictive comme ici, mais pour représenter la zone de jeu réelle.
@@ -44,7 +44,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
 @SuppressWarnings("unused")
 public final class AiModelTest
 {
-/*	public static void main(String args[])
+	public static void main(String args[])
 	{	
 		RoundVariables.scaledTileDimension = 100;
 		AiSimZone zone;
@@ -244,5 +244,5 @@ public final class AiModelTest
 		System.out.println(model.getDuration());
 		System.out.println(model.getCurrentZone());
 	}
-*/	
+	
 }
