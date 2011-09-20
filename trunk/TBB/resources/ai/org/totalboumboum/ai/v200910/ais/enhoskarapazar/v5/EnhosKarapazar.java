@@ -434,7 +434,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 							} catch (Exception e) {
 								if (debugMode) {
 									System.out
-											.println("attak range patlad� d������................................................................UP"
+											.println("attak range patladû d������................................................................UP"
 													+ i);
 									System.out.println(e.getStackTrace());
 								}
@@ -455,7 +455,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 							} catch (Exception e) {
 								if (debugMode) {
 									System.out
-											.println("attak range patlad� d������................................................................DOWN"
+											.println("attak range patladû d������................................................................DOWN"
 													+ i);
 									System.out.println(e.getStackTrace());
 								}
@@ -481,7 +481,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 								} catch (Exception e) {
 									if (debugMode) {
 										System.out
-												.println("attak range patlad� d������................................................................LEFT"
+												.println("attak range patladû d������................................................................LEFT"
 														+ i);
 										System.out.println(e.getStackTrace());
 									}
@@ -501,7 +501,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 								} catch (Exception e) {
 									if (debugMode) {
 										System.out
-												.println("attak range patlad� d������................................................................RIGHT"
+												.println("attak range patladû d������................................................................RIGHT"
 														+ i);
 										System.out.println(e.getStackTrace());
 									}
