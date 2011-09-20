@@ -47,7 +47,7 @@ public abstract class SuccessorCalculator
 	 * de recherche courant correspond au temps nécessaire pour arriver à l'état
 	 * correspondant. Certaines des cases accessibles depuis cet état peuvent être
 	 * menanc�e par du feu, et le temps est une information cruciale pour déterminer
-	 * si le personnage peut ou pas traverser une case avant qu'elle ne br�le.
+	 * si le personnage peut ou pas traverser une case avant qu'elle ne brûle.
 	 * 
 	 * @param node	le noeud de recherche courant 
 	 * @return	la liste de cases accessibles

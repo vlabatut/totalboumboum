@@ -205,7 +205,7 @@ public class DeplacementCollecte {
 
 						if (!ai.senfuire && !ai.senfuire2) {
 
-							// on calcule si notre case cible est chang�e
+							// on calcule si notre case cible est changée
 							if (!endPoints.contains(ai.nextMove.getLastTile())
 									&& !endPoints.isEmpty()) {
 								AiPath path = deplacementCommune

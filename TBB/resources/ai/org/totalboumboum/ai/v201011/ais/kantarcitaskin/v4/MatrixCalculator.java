@@ -254,7 +254,7 @@ public class MatrixCalculator
 	 * @param bomb
 	 * 		la bombe dont le temps d'explosion est calculé
 	 * @return resutl
-	 * 		le temps d'explosion estim�
+	 * 		le temps d'explosion estimé
 	 * */
 	public double tempExplosion (AiBomb bomb)
 	{

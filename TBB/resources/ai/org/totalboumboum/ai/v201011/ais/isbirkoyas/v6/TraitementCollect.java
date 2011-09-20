@@ -114,7 +114,7 @@ public class TraitementCollect {
 	}
 
 	/**
-	 * Cette méthode calcule la dur�e nécessaire pour que notre IA arrive à la
+	 * Cette méthode calcule la durée nécessaire pour que notre IA arrive à la
 	 * case du bonus cible. Elle prend deux arguments, la zone du jeu et les
 	 * items du jeu.
 	 * 

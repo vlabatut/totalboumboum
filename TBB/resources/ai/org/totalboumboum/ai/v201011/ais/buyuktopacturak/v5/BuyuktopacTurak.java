@@ -75,7 +75,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		// premier appel : on initialise
 		AiAction result = new AiAction(AiActionName.NONE);
 		initBT();
-		// si le personnage control� a été élimin�, inutile de continuer
+		// si le personnage control� a été éliminé, inutile de continuer
 		if(!this.deepPurple.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			boolean actionBomb, mode=selectMode();
