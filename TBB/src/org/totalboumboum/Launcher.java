@@ -1053,7 +1053,7 @@ public class Launcher
 	 * 		- un sprite n'est a priori pas un obstacle, tout est géré par modulation (y compris pour le feu)
 	 * 		- le coup de l'indestructibilit� des items (le fait de r�apparaitre ailleurs) pourrait être �tendue à tous les sprites
 	 * 		  (en particulier les joueurs, ça serait un cas spécial de r�sistance au feu un peu p�nalisante, utilisable un nombre limité de fois, par ex !)
-	 * 		- ça serait bien que les paramètres num�riques des abilit�s puissent être définies 
+	 * 		- ça serait bien que les paramètres num�riques des abilités puissent être définies 
 	 * 		  au chargement (force, durée, utilisation) de façon aléatoire, en fonction de certains paramètres. 
 	 * 		  on pourrait par ex utiliser une liste de valeur num�riques : 1=déterministe, 2=bornes pour un tirage au sort
 	 * 		  utile par exemple pour déterminer le nombre de fois qu'un bloc repousse (plutot que de le fixer dans le fichier XML), 
@@ -1069,7 +1069,7 @@ public class Launcher
 
 	/* TODO
 	 * 
-	 * - rajouter un bouton dans les options avanc�es pour vider manuellement le cache m�moire
+	 * - rajouter un bouton dans les options avanc�es pour vider manuellement le cache mémoire
 	 * 
 	 * - rajouter une confirmation (popup) quand on sort définitivement d'une partie (icone maison)
 	 * 
@@ -1194,7 +1194,7 @@ public class Launcher
 	 * - percepts à rajouter
 	 * 		- bonus : indiquer pr�cis�ment les types de bonus restants
 	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
-	 * 			>> méthode prenant une position et un joueur en paramètres et calculant le blast et le temps de d�tonation d'une bombe posée l� (voire donnant un objet bombe)
+	 * 			>> méthode prenant une position et un joueur en paramètres et calculant le blast et le temps de d�tonation d'une bombe posée là (voire donnant un objet bombe)
 	 * 			>> définir une classe bombe virtuelle ? destin�e à ce seul effet ?
 	 * 		- la notion de blast peut être imprécise quand plusieurs bombes sont concernées
 	 * 			>> ça emp�che de calculer des r�action en chaine
@@ -1344,10 +1344,10 @@ public class Launcher
 	 * >> ça permetrait de ne pas avoir à recréer les �crans. par ex, dans les options : si qqch est changé, c'est automatiquement màj en background
 	 * 		- sauf qu'en fait c'est un mvais ex car dans les options ce sont des clones qui sont utilisés
 	 *        mais il suffirait de ne pas recréer à chaque fois le panel, plutot de réutiliser le précédent en faisant un set et en affectant le listener
-	 *      - faudrait du cp faire attention à la gestion de la m�moire : 
+	 *      - faudrait du cp faire attention à la gestion de la mémoire : 
 	 *      	- les objets finished devraient se d�barasser de leurs listeners
 	 *      	- en r�action, les listeners mettent leur référence à null et n'affichent rien >> bon �a
-	 *      >> ça va poser des pb de gestion de la m�moire (?)
+	 *      >> ça va poser des pb de gestion de la mémoire (?)
 	 * >>> à faire plus tard...
 	 */
 	
@@ -1370,7 +1370,7 @@ public class Launcher
 	/**
 	 * NOTE règles générales
 	 * 	- une demande d'info aupr�s du serveur (voire client) ne doit pas être
-	 *    réalis�e tant que la GUI n'est pas pr�te à traiter l'évènement de lecture associé
+	 *    réalisée tant que la GUI n'est pas pr�te à traiter l'évènement de lecture associé
 	 *  - les méthodes des connexions générales susceptibles d'�tre appelées par les connexions
 	 *    individuelles doivent être synchro, afin d'éviter par ex que plusieurs clients
 	 *    ne demandent la même t�che en même temps, risquant une interf�rence

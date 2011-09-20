@@ -150,27 +150,27 @@ public class LevelsTools
 	{	return getTileDistance(s1,s2,Direction.NONE,globalHeight,globalWidth);
 	}
 	public static int getTileDistance(Tile tile1, Tile tile2, Direction direction, int globalHeight, int globalWidth)
-	{	int line1 = tile1.getLine();
+	{	int row1 = tile1.getRow();
 		int col1 = tile1.getCol();
-		int line2 = tile2.getLine();
+		int row2 = tile2.getRow();
 		int col2 = tile2.getCol();
-		int result = processTileDistance(line1,col1,line2,col2,direction,globalHeight,globalWidth);
+		int result = processTileDistance(row1,col1,row2,col2,direction,globalHeight,globalWidth);
 		return result;
 	}
 	public static int getTileDistance(Tile tile1, Tile tile2, int globalHeight, int globalWidth)
 	{	return getTileDistance(tile1,tile2,Direction.NONE,globalHeight,globalWidth);
 	}
 
-	public static int getTileDistance(int line1, int col1, int line2, int col2, Direction direction, int globalHeight, int globalWidth)
-	{	line1 = normalizePositionLine(line1,globalHeight);
+	public static int getTileDistance(int row1, int col1, int row2, int col2, Direction direction, int globalHeight, int globalWidth)
+	{	row1 = normalizePositionRow(row1,globalHeight);
 		col1 = normalizePositionCol(col1,globalWidth);
-		line2 = normalizePositionLine(line2,globalHeight);
+		row2 = normalizePositionRow(row2,globalHeight);
 		col2 = normalizePositionCol(col2,globalWidth);
-		int result = processTileDistance(line1,col1,line2,col2,direction,globalHeight,globalWidth);
+		int result = processTileDistance(row1,col1,row2,col2,direction,globalHeight,globalWidth);
 		return result;
 	}
-	public static int getTileDistance(int line1, int col1, int line2, int col2, int globalHeight, int globalWidth)
-	{	return getTileDistance(line1,col1,line2,col2,Direction.NONE,globalHeight,globalWidth);
+	public static int getTileDistance(int row1, int col1, int row2, int col2, int globalHeight, int globalWidth)
+	{	return getTileDistance(row1,col1,row2,col2,Direction.NONE,globalHeight,globalWidth);
 	}
 
 	public static int getHorizontalTileDistance(int col1, int col2, Direction direction, int globalWidth)
@@ -183,20 +183,20 @@ public class LevelsTools
 	{	return getHorizontalTileDistance(col1,col2,Direction.NONE,globalWidth);
 	}
 	
-	public static double getVerticalTileDistance(int line1, int line2, Direction direction, int globalHeight)
-	{	line1 = normalizePositionLine(line1,globalHeight);
-		line2 = normalizePositionLine(line2,globalHeight);
-		double result = processVerticalTileDistance(line1,line2,direction,globalHeight);
+	public static double getVerticalTileDistance(int row1, int row2, Direction direction, int globalHeight)
+	{	row1 = normalizePositionRow(row1,globalHeight);
+		row2 = normalizePositionRow(row2,globalHeight);
+		double result = processVerticalTileDistance(row1,row2,direction,globalHeight);
 		return result;
 	}
-	public static double getVerticalTileDistance(int line1, int line2, int globalHeight)
-	{	return getVerticalTileDistance(line1,line2,Direction.NONE,globalHeight);
+	public static double getVerticalTileDistance(int row1, int row2, int globalHeight)
+	{	return getVerticalTileDistance(row1,row2,Direction.NONE,globalHeight);
 	}
 	
-	private static int processTileDistance(int line1, int col1, int line2, int col2, Direction direction, int globalHeight, int globalWidth)
+	private static int processTileDistance(int row1, int col1, int row2, int col2, Direction direction, int globalHeight, int globalWidth)
 	{	int result = 0;
 		result = result + processHorizontalTileDistance(col1,col2,direction,globalWidth);
-		result = result + processVerticalTileDistance(line1,line2,direction,globalHeight);
+		result = result + processVerticalTileDistance(row1,row2,direction,globalHeight);
 		return result;
 	}
 	
@@ -218,16 +218,16 @@ public class LevelsTools
 		return result;
 	}
 	
-	private static int processVerticalTileDistance(int line1, int line2, Direction direction, int globalHeight)
+	private static int processVerticalTileDistance(int row1, int row2, Direction direction, int globalHeight)
 	{	int result;
-		int dLine = line2 - line1;
-		int direct = Math.abs(dLine);
+		int dRow = row2 - row1;
+		int direct = Math.abs(dRow);
 		int indirect = globalHeight - direct;
 		Direction dir = direction.getVerticalPrimary();
 		if(dir==Direction.NONE)
 			result = Math.min(direct,indirect);
 		else
-		{	Direction d = Direction.getVerticalFromDouble(dLine);
+		{	Direction d = Direction.getVerticalFromDouble(dRow);
 			if(dir==d)
 				result = direct;
 			else
@@ -518,7 +518,7 @@ public class LevelsTools
 		return result;
 	}	
 	
-	public static int[] getNeighborTile(int line, int col, Direction direction, int globalHeight, int globalWidth)
+	public static int[] getNeighborTile(int row, int col, Direction direction, int globalHeight, int globalWidth)
 	{	int c,l;
 		Direction p[] = direction.getPrimaries(); 
 
@@ -530,25 +530,25 @@ public class LevelsTools
 			c = col;
 		//
 		if(p[1]==Direction.UP)
-			l = (line+globalHeight-1)%globalHeight;
+			l = (row+globalHeight-1)%globalHeight;
 		else if(p[1]==Direction.DOWN)
-			l = (line+1)%globalHeight;
+			l = (row+1)%globalHeight;
 		else
-			l = line;
+			l = row;
 
 		int result[] = {l,c};
 		return result;
 	}
 
-	public static int[] normalizePosition(int line, int col, int globalHeight, int globalWidth)
+	public static int[] normalizePosition(int row, int col, int globalHeight, int globalWidth)
 	{	int result[] = new int[2];
-		result[0] = normalizePositionLine(line,globalHeight);
+		result[0] = normalizePositionRow(row,globalHeight);
 		result[1] = normalizePositionCol(col,globalWidth);
 		//
 		return result;
 	}
-	public static int normalizePositionLine(int line, int globalHeight)
-	{	int result = line;
+	public static int normalizePositionRow(int row, int globalHeight)
+	{	int result = row;
 		while(result<globalHeight)
 			result = result + globalHeight;
 		while(result>globalHeight)
