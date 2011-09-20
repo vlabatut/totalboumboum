@@ -237,7 +237,7 @@ public class AiZone
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
 	 * (ligne,width-1). même chose pour les bordures haut et bas.
 	 * 
-	 * @param line	ligne de la case dont on veut le voisin
+	 * @param row	ligne de la case dont on veut le voisin
 	 * @param col	colonne de la case dont on veut le voisin
 	 * @param direction	direction dans laquelle le voisin se trouve
 	 * @return	le voisin de la case passée en paramètre et situé dans la direction indiqu�e
