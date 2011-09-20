@@ -38,7 +38,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * classe chargée d'implémenter un déplacement de fuite,
- * (personnage menac� par une ou plusieurs bombes) 
+ * (personnage menacé par une ou plusieurs bombes) 
  * 
  * @version 4.1
  * 
@@ -86,7 +86,7 @@ public class AvoidController
 	/////////////////////////////////////////////////////////////////
 	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination sélectionn�e pour la fuite */
+	/** la case de destination sélectionnée pour la fuite */
 	private AiTile tileDest;
 	/** destinations potentielles */
 	private List<AiTile> possibleDest;
@@ -124,8 +124,8 @@ public class AvoidController
 	}
 	
 	/**
-	 * vérifie que le personnage est bien sur le chemin pr�-calculé,
-	 * en supprimant si besoin les cases inutiles (car pr�cedant la case courante).
+	 * vérifie que le personnage est bien sur le chemin pré-calculé,
+	 * en supprimant si besoin les cases inutiles (car précedant la case courante).
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
 	 * est vide après l'exécution de cette méthode.
 	 */
@@ -144,7 +144,7 @@ public class AvoidController
 	 * aucun obstacle n'est apparu depuis la dernière itération.
 	 * Contrairement au PathManager, ici pour simplifier on ne teste
 	 * que l'apparition de nouveaux obstacles (feu, bombes, murs), et non pas 
-	 * les changement concernant la sûret� des cases. En d'autres termes,
+	 * les changement concernant la sûreté des cases. En d'autres termes,
 	 * si une bombe apparait avant que le personnage d'ait atteint une
 	 * case sure, elle ne sera pas prise en compte dans la trajectoire.
 	 * 

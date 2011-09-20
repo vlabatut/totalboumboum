@@ -78,7 +78,7 @@ public class PathController
 	/////////////////////////////////////////////////////////////////
 	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination sélectionn�e */
+	/** la case de destination sélectionnée */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
@@ -167,7 +167,7 @@ public class PathController
 	private AiPath path;
 	
 	/**
-	 * vérifie que le personnage est bien sur le chemin pr�-calculé,
+	 * vérifie que le personnage est bien sur le chemin pré-calculé,
 	 * en supprimant si besoin les cases inutiles.
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
 	 * est vide après l'exécution de cette méthode.
@@ -183,7 +183,7 @@ public class PathController
 	}
 	
 	/**
-	 * détermine si le personnage a d�passé la première case du chemin
+	 * détermine si le personnage a dépassé la première case du chemin
 	 * en direction de la seconde case
 
 	

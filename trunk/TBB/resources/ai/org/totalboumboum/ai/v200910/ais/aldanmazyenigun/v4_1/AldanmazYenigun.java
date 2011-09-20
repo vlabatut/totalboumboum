@@ -315,7 +315,7 @@ public class AldanmazYenigun extends ArtificialIntelligence
 			
 			
 		}
-		// on met à jour la direction renvoy�e au moteur du jeu
+		// on met à jour la direction renvoyée au moteur du jeu
 		
 		return result;
 	}

@@ -81,7 +81,7 @@ public class SafetyZone {
 				Collection<AiBlock> blocks = tile.getBlocks();
 				Collection<AiItem> items= tile.getItems();
 
-				// s'il y a du feu : valeur z�ro (il ne reste pas de temps avant
+				// s'il y a du feu : valeur zéro (il ne reste pas de temps avant
 				// l'explosion)
 				if (!fires.isEmpty()) {
 					matrix[line][col] = FIRE;

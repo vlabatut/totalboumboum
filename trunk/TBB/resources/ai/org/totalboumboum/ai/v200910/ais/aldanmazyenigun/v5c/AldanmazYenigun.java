@@ -149,7 +149,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 				moveDir = safeManager.update();
 				result = new AiAction(AiActionName.MOVE, moveDir);
 			}
-			//si le rival est accessible et on est assez arm�� on l'attaque
+			//si le rival est accessible et on est assez armé on l'attaque
 			else if (heroAccessible) {
 				updateTarget();
 

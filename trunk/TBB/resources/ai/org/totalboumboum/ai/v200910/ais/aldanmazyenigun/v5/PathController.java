@@ -77,7 +77,7 @@ public class PathController
 	/////////////////////////////////////////////////////////////////
 	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination sélectionn�e */
+	/** la case de destination sélectionnée */
 	private AiTile tileDest;
 	/** l'abscisse de destination */
 	private double xDest;
@@ -182,7 +182,7 @@ public class PathController
 	}
 	
 	/**
-	 * détermine si le personnage a d�passé la première case du chemin
+	 * détermine si le personnage a dépassé la première case du chemin
 	 * en direction de la seconde case
 
 	

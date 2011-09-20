@@ -157,7 +157,7 @@ public class ZoneFormee {
 		Iterator<AiBlock> iterBlock = blocks.iterator();
 		AiBlock block;
 
-		//mettre les murs dans notre zone form�e
+		//mettre les murs dans notre zone formée
 		while (iterBlock.hasNext()) {
 			block = iterBlock.next();
 			x = block.getCol();

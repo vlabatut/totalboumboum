@@ -75,7 +75,7 @@ public class DangerManager {
 					Collection<AiFire> fires = tile.getFires();
 					Collection<AiBomb> bombs = tile.getBombs();
 					Collection<AiBlock> blocks = tile.getBlocks();
-					// s'il y a du feu : valeur z�ro (il ne reste pas de temps avant l'explosion)
+					// s'il y a du feu : valeur zéro (il ne reste pas de temps avant l'explosion)
 					if(!fires.isEmpty())
 					{	matrix[line][col] = FIRE;				
 					}

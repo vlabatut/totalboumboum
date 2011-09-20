@@ -95,12 +95,12 @@ public class StrategyManager {
 			{
 				tTile = iTypeEscape(bombs);
 				result = percepts.getDirection(myAI.getOwnHero(), tTile);
-				//system.out.println("index hatas verilen yerde if blo�unday�m");
+				//system.out.println("index hatas verilen yerde if bloundaym");
 			}
 			//sinon c'est la menace de t ou L type
 			else
 			{
-				//system.out.println("index hatas� verilen yerde else blo�unday�m");
+				//system.out.println("index hatas verilen yerde else bloundaym");
 				
 				//si les deux bombes sont loins que nous plus d'1 cas
 				if(!escapeManager.getCurrentTile().getNeighbors().contains(tmpTiles.get(0)) && 

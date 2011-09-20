@@ -714,7 +714,7 @@ public class AttackManager {
 			
 		
 		
-		//e�er mur den adama gidemiosak bi hesap yapalm
+		//eer mur den adama gidemiosak bi hesap yapalm
 		//bi de adam ortalardaysa bi saldr denleyelim...
 		
 		return attackType;
