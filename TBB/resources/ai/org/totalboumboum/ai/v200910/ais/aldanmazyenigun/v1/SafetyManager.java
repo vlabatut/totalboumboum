@@ -41,14 +41,14 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 
 /**
  * classe chargée d'extraire de la zone les informations
- * permettant de déterminer le niveau de sûret� des cases.
+ * permettant de déterminer le niveau de sûreté des cases.
  * Une matrice de réels représente la zone de jeu, chaque case
- * étant représent�e par le temps restant avant qu'une flamme ne la
+ * étant représentée par le temps restant avant qu'une flamme ne la
  * traverse. Donc plus le temps est long, et plus la case est sûre. 
- * La valeur maximale (Double.MAX_VALUE) signifie que la case n'est pas menac�e par une
+ * La valeur maximale (Double.MAX_VALUE) signifie que la case n'est pas menacée par une
  * bombe. Une valeur nulle signifie que la case est actuellement en feu.
- * Une valeur négative signifie que la case est menac�e par une bombe
- * télécommand�e, qui peut exploser n'importe quand (la valeur absolue
+ * Une valeur négative signifie que la case est menacée par une bombe
+ * télécommandée, qui peut exploser n'importe quand (la valeur absolue
  * de la valeur correspond au temps depuis lequel la bombe a été posée)
  * 
  * @version 1
@@ -74,18 +74,18 @@ public class SafetyManager
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** IA associée à ce gestionnaire de sûret� */
+	/** IA associée à ce gestionnaire de sûreté */
 	private AldanmazYenigun ai;
 
 	/////////////////////////////////////////////////////////////////
 	// MATRIX	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** valeur pour une case compl�tement sûre (temps restant avant explosion : maximal) */
+	/** valeur pour une case complètement sûre (temps restant avant explosion : maximal) */
 	//public static double SAFE = Double.MAX_VALUE;
 	public static double SAFE = 0;
 	/** valeur pour une case pas du tout sûre (temps restant avant explosion : aucun) */
 	public static double FIRE = 1000000000;
-	/** matrice contenant les valeurs de sûret� */	
+	/** matrice contenant les valeurs de sûreté */	
 	private double matrix[][];
 	/** zone de jeu */
 	private AiZone zone;
@@ -93,7 +93,7 @@ public class SafetyManager
 	public static double BONUS = 1;
 	
 	/**
-	 * renvoie la matrice de suret�
+	 * renvoie la matrice de sureté
 	 */
 	public double[][] getMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -102,7 +102,7 @@ public class SafetyManager
 	}
 	
 	/**
-	 * mise à jour de la matrice de sûret�
+	 * mise à jour de la matrice de sûreté
 	 */
 	private void updateMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -130,7 +130,7 @@ public class SafetyManager
 					Collection<AiBomb> bombs = tile.getBombs();
 					Collection<AiBlock> blocks = tile.getBlocks();
 					Collection<AiItem> bonus = tile.getItems();
-					// s'il y a du feu : valeur z�ro (il ne reste pas de temps avant l'explosion)
+					// s'il y a du feu : valeur zéro (il ne reste pas de temps avant l'explosion)
 					if(!fires.isEmpty())
 					{	matrix[line][col] = FIRE;				
 					}
@@ -239,7 +239,7 @@ public class SafetyManager
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 				int l = t.getLine();
 				int c = t.getCol();
-				// on modifie seulement si la case n'a pas déjà un niveau de sécurité inf�rieur
+				// on modifie seulement si la case n'a pas déjà un niveau de sécurité inférieur
 				if(matrix[l][c]<value)
 					matrix[l][c] = value;						
 			}
@@ -264,7 +264,7 @@ public class SafetyManager
 
 	/**
 	 * détermine si le niveau de sécurité de la case passée en paramètre
-	 * est maximal (ce traitement n'est pas tr�s subtil : en cas d'explosion potentielle,
+	 * est maximal (ce traitement n'est pas très subtil : en cas d'explosion potentielle,
 	 * on pourrait calculer le temps nécessaire pour atteindre la case et 
 	 * déterminer si c'est possible de passer dessus avant l'explosion)
 	 */
@@ -297,7 +297,7 @@ public class SafetyManager
 	// PROCESS		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * met à jour la matrice de sûret�
+	 * met à jour la matrice de sûreté
 	 */
 	public void update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -311,7 +311,7 @@ public class SafetyManager
 	/////////////////////////////////////////////////////////////////	
 	/**
 	 * met à jour la sortie graphique de l'IA en fonction du
-	 * niveau de sûret� calculé
+	 * niveau de sûreté calculé
 	 */
 	private void updateOutput() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE

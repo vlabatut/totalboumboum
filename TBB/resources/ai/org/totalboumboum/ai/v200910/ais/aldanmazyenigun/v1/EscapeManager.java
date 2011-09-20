@@ -88,7 +88,7 @@ public class EscapeManager
 	/////////////////////////////////////////////////////////////////
 	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination sélectionn�e pour la fuite */
+	/** la case de destination sélectionnée pour la fuite */
 	private AiTile tileDest;
 	/** destinations potentielles */
 	private List<AiTile> possibleDest;
@@ -127,8 +127,8 @@ public class EscapeManager
 	}
 	
 	/**
-	 * vérifie que le personnage est bien sur le chemin pr�-calculé,
-	 * en supprimant si besoin les cases inutiles (car pr�cedant la case courante).
+	 * vérifie que le personnage est bien sur le chemin pré-calculé,
+	 * en supprimant si besoin les cases inutiles (car précedant la case courante).
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
 	 * est vide après l'exécution de cette méthode.
 	 */
@@ -178,7 +178,7 @@ public class EscapeManager
 	private void updateCostCalculator() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		// calcul de la matrice de coût : on prend l'opposé du niveau de sûret�
+		// calcul de la matrice de coût : on prend l'opposé du niveau de sûreté
 		// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
 		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
 		for(int line=0;line<zone.getHeight();line++)

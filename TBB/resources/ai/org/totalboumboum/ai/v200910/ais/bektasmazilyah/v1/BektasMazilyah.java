@@ -34,7 +34,7 @@ public class BektasMazilyah extends ArtificialIntelligence
 {	
 	private AiZone zone;
 
-	// le personnage dirig� par cette IA
+	// le personnage dirigé par cette IA
 	private AiHero hero;
 	//les adversaires
 	private Vector<AiHero> others;

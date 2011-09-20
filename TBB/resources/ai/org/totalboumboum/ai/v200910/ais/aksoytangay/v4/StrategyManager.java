@@ -92,7 +92,7 @@ public class StrategyManager {
 			{
 				tTile = iTypeEscape(bombs);
 				result = percepts.getDirection(myAI.getOwnHero(), tTile);
-				//system.out.println("index hatas� verilen yerde if bloundaym");
+				//system.out.println("index hatas verilen yerde if bloundaym");
 			}
 			//sinon c'est la menace de t ou L type
 			else

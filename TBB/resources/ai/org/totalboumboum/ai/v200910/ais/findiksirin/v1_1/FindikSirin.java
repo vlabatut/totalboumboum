@@ -52,7 +52,7 @@ public class FindikSirin extends ArtificialIntelligence
 			{	escapeManager = new EscapeManager(this);
 				moveDir = escapeManager.update();
 			}
-			// on met à jour la direction renvoy�e au moteur du jeu
+			// on met à jour la direction renvoyée au moteur du jeu
 			result = new AiAction(AiActionName.MOVE,moveDir);
 		}
 		return result;
