@@ -211,7 +211,8 @@ public class AiModel
 				simHero = current.getSpriteById(hero);
 				found = limitSprites.contains(simHero);
 			}
-			while(!found);
+			// stop if the hero is in the limit or nothing was done
+			while(!found && duration>0);
 			
 			// check if the hero is still safe
 			AiState state = simHero.getState();
@@ -261,7 +262,8 @@ public class AiModel
 					found = sprite instanceof AiSimFire;
 				}
 			}
-			while(!found || duration==0);
+			// stop if some fire is in the limit or nothing was done
+			while(!found && duration>0);
 			
 			// update duration to reflect the whole process
 			duration = totalDuration;
@@ -1262,8 +1264,8 @@ if(sprite instanceof AiSimBomb)
 	
 	/**
 	 * permet de solliciter un changement de direction de la part du personnage.
-	 * si la direction n'est pas NONE, alors l'état du personnage devient MOVING.
-	 * sinon, il devient STANDING. Bien sûr, s'il y a des obstacles, le personnage
+	 * si la direction n'est pas {@link Direction#NONE NONE}, alors l'état du personnage devient {@link AiStateName#MOVING MOVING}.
+	 * sinon, il devient {@link AiStateName#STANDING STANDING}. Bien sûr, s'il y a des obstacles, le personnage
 	 * ne pourra pas effectivement se déplacer dans la direction spécifiée.
 	 * 
 	 * @param hero
