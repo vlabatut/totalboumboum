@@ -160,13 +160,13 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 	// TILE SIZE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** longueur d'un cété de la case en pixels */
+	/** longueur d'un côté de la case en pixels */
 	private double size;
 		
 	/** 
 	 * renvoie la taille de la case en pixels
 	 * 
-	 * @return	longueur d'un cété de la case en pixels
+	 * @return	longueur d'un côté de la case en pixels
 	 */
 	public double getSize()
 	{	return size;	

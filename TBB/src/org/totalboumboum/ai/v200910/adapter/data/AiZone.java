@@ -1138,8 +1138,8 @@ public class AiZone
 	 * prend n'importe quelle abscisse exprimée en pixels et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * d�signe une position située en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le cété gauche et le
-	 * cété droit sont reliés) pour déterminer une position
+	 * utilise la propriété cyclique du niveau (i.e. le côté gauche et le
+	 * côté droit sont reliés) pour déterminer une position
 	 * �quivalente située dans le niveau.
 	 * 
 	 * @param x	abscisse
@@ -1153,8 +1153,8 @@ public class AiZone
 	 * prend n'importe quelle ordonnée exprimée en pixels et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * d�signe une position située en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le cété haut et le
-	 * cété bas sont reliés) pour déterminer une position
+	 * utilise la propriété cyclique du niveau (i.e. le côté haut et le
+	 * côté bas sont reliés) pour déterminer une position
 	 * �quivalente située dans le niveau.
 	 * 
 	 * @param y	ordonnée
@@ -1183,8 +1183,8 @@ public class AiZone
 	 * prend n'importe quelle abscisse exprimée en cases et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * d�signe une position située en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le cété gauche et le
-	 * cété droit sont reliés) pour déterminer une position
+	 * utilise la propriété cyclique du niveau (i.e. le côté gauche et le
+	 * côté droit sont reliés) pour déterminer une position
 	 * �quivalente située dans le niveau.
 	 * 
 	 * @param col	colonne de la case
@@ -1198,8 +1198,8 @@ public class AiZone
 	 * prend n'importe quelle ordonnée exprimée en cases et la normalise
 	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
 	 * d�signe une position située en dehors de la zone de jeu, cette méthode
-	 * utilise la propriété cyclique du niveau (i.e. le cété haut et le
-	 * cété bas sont reliés) pour déterminer une position
+	 * utilise la propriété cyclique du niveau (i.e. le côté haut et le
+	 * côté bas sont reliés) pour déterminer une position
 	 * �quivalente située dans le niveau.
 	 * 
 	 * @param line	ligne de la case
