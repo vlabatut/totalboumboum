@@ -1011,7 +1011,7 @@ public class BasmanSandalli extends ArtificialIntelligence {
 			
 					if(x+power==bombList.get(i)[0] && y==bombList.get(i)[1] )//si le feu de la bombe attrape le personnage par la droite et a la chance(power) d'arriver au personnage
 					{
-						for(int l=1;l<power+1;l++)//On part par notre cété droite pour une distance relative à la portée de la bombe
+						for(int l=1;l<power+1;l++)//On part par notre côté droite pour une distance relative à la portée de la bombe
 						{
 							if(matrix[x+l][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD || matrix[x+l][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)// s'il existe une bloc entre la bombe et le personnage il est en sécurité
 							{
